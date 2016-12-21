@@ -12,10 +12,10 @@
 namespace spec\Sylius\Behat\Service;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Behat\Service\SharedStorage;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -24,7 +24,7 @@ final class SharedStorageSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Behat\Service\SharedStorage');
+        $this->shouldHaveType(SharedStorage::class);
     }
 
     function it_implements_shared_storage_interface()

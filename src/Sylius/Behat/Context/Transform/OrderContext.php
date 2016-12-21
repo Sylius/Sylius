@@ -12,9 +12,8 @@
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
-use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -80,8 +79,6 @@ final class OrderContext implements Context
      */
     public function getOrderNumber($orderNumber)
     {
-        $orderNumber = str_replace('#', '', $orderNumber);
-
-        return $orderNumber;
+        return str_replace('#', '', $orderNumber);
     }
 }

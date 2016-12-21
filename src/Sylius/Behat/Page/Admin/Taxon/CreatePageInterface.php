@@ -21,9 +21,6 @@ use Sylius\Component\Core\Model\TaxonInterface;
  */
 interface CreatePageInterface extends BaseCreatePageInterface
 {
-    const MOVE_DIRECTION_UP = 'up';
-    const MOVE_DIRECTION_DOWN = 'down';
-
     /**
      * @return int
      */
@@ -46,11 +43,6 @@ interface CreatePageInterface extends BaseCreatePageInterface
      * @param string $languageCode
      */
     public function describeItAs($description, $languageCode);
-
-    /**
-     * @param TaxonInterface $taxon
-     */
-    public function chooseParent(TaxonInterface $taxon);
 
     /**
      * @param string $name
@@ -81,24 +73,6 @@ interface CreatePageInterface extends BaseCreatePageInterface
      * @param string $code
      */
     public function attachImage($path, $code = null);
-
-    /**
-     * @param TaxonInterface $taxon
-     */
-    public function moveUp(TaxonInterface $taxon);
-
-    /**
-     * @param TaxonInterface $taxon
-     */
-    public function moveDown(TaxonInterface $taxon);
-
-    /**
-     * @param int $position
-     * @param TaxonInterface|null $parentTaxon
-     *
-     * @return string
-     */
-    public function getLeafNameFromPosition($position, TaxonInterface $parentTaxon = null);
 
     /**
      * @param TaxonInterface|null $parentTaxon

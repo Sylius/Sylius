@@ -242,9 +242,9 @@ final class ManagingProductReviewsContext implements Context
     }
 
     /**
-     * @Then /^(this product review) should still be titled "([^"]+)"$/
+     * @Then /^this product review should still be titled "([^"]+)"$/
      */
-    public function thisProductReviewTitleShouldBeTitled(ReviewInterface $productReview, $productReviewTitle)
+    public function thisProductReviewTitleShouldBeTitled($productReviewTitle)
     {
         $this->iWantToBrowseProductReviews();
 

@@ -13,8 +13,8 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 
@@ -66,7 +66,6 @@ final class UserContext implements Context
      * @Given there is a user :email identified by :password
      * @Given there was account of :email with password :password
      * @Given there is a user :email
-     * @Given there is a :email user
      */
     public function thereIsUserIdentifiedBy($email, $password = 'sylius')
     {

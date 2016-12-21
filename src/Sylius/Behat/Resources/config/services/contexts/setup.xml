@@ -30,7 +30,6 @@
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="__symfony__.sylius.behat.factory.default_united_states_channel" />
             <argument type="service" id="__symfony__.sylius.behat.factory.default_channel" />
-            <argument type="service" id="__symfony__.sylius.factory.channel" />
             <argument type="service" id="__symfony__.sylius.repository.channel" />
             <argument type="service" id="__symfony__.sylius.manager.channel" />
             <argument type="service" id="__symfony__.sylius.storage.currency" />
@@ -42,8 +41,6 @@
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="__symfony__.sylius.repository.currency" />
             <argument type="service" id="__symfony__.sylius.factory.currency" />
-            <argument type="service" id="__symfony__.sylius.storage.currency" />
-            <argument type="service" id="__symfony__.sylius.manager.currency" />
             <argument type="service" id="__symfony__.sylius.manager.channel" />
             <tag name="fob.context_service" />
         </service>
@@ -68,7 +65,6 @@
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="__symfony__.sylius.factory.exchange_rate" />
             <argument type="service" id="__symfony__.sylius.repository.exchange_rate" />
-            <argument type="service" id="__symfony__.doctrine.orm.default_entity_manager" />
             <tag name="fob.context_service" />
         </service>
 
@@ -97,11 +93,9 @@
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="__symfony__.sylius.repository.order" />
             <argument type="service" id="__symfony__.sylius.factory.order" />
-            <argument type="service" id="__symfony__.sylius.order_processing.order_processor" />
             <argument type="service" id="__symfony__.sylius.factory.order_item" />
             <argument type="service" id="__symfony__.sylius.order_item_quantity_modifier" />
             <argument type="service" id="__symfony__.sylius.repository.currency" />
-            <argument type="service" id="__symfony__.sylius.storage.currency" />
             <argument type="service" id="__symfony__.sylius.factory.customer" />
             <argument type="service" id="__symfony__.sylius.repository.customer" />
             <argument type="service" id="__symfony__.doctrine.orm.entity_manager" />
@@ -223,7 +217,6 @@
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="__symfony__.sylius.factory.shipping_category" />
             <argument type="service" id="__symfony__.sylius.repository.shipping_category" />
-            <argument type="service" id="__symfony__.sylius.manager.shipping_category" />
             <tag name="fob.context_service" />
         </service>
 
@@ -233,7 +226,6 @@
             <argument type="service" id="__symfony__.sylius.factory.tax_category" />
             <argument type="service" id="__symfony__.sylius.repository.tax_rate" />
             <argument type="service" id="__symfony__.sylius.repository.tax_category" />
-            <argument type="service" id="__symfony__.sylius.repository.zone" />
             <argument type="service" id="__symfony__.doctrine.orm.entity_manager" />
             <tag name="fob.context_service" />
         </service>
@@ -253,8 +245,6 @@
         <service id="sylius.behat.context.setup.theme" class="Sylius\Behat\Context\Setup\ThemeContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="__symfony__.sylius.repository.theme" />
-            <argument type="service" id="__symfony__.sylius.factory.theme" />
-            <argument type="service" id="__symfony__.sylius.repository.channel" />
             <argument type="service" id="__symfony__.sylius.manager.channel" />
             <argument type="service" id="__symfony__.sylius.theme.test_theme_configuration_manager" />
             <tag name="fob.context_service" />

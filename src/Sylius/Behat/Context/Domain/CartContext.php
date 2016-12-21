@@ -14,7 +14,6 @@ namespace Sylius\Behat\Context\Domain;
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Order\Remover\ExpiredCartsRemoverInterface;
 use Webmozart\Assert\Assert;
 
@@ -23,11 +22,6 @@ use Webmozart\Assert\Assert;
  */
 final class CartContext implements Context
 {
-    /**
-     * @var OrderRepositoryInterface
-     */
-    private $orderRepository;
-
     /**
      * @var ObjectManager
      */
@@ -39,16 +33,13 @@ final class CartContext implements Context
     private $expiredCartsRemover;
 
     /**
-     * @param OrderRepositoryInterface $orderRepository
      * @param ObjectManager $orderManager
      * @param ExpiredCartsRemoverInterface $expiredCartsRemover
      */
     public function __construct(
-        OrderRepositoryInterface $orderRepository,
         ObjectManager $orderManager,
         ExpiredCartsRemoverInterface $expiredCartsRemover
     ) {
-        $this->orderRepository = $orderRepository;
         $this->orderManager = $orderManager;
         $this->expiredCartsRemover = $expiredCartsRemover;
     }

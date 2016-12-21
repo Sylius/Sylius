@@ -149,14 +149,6 @@ final class ManagingProductOptionsContext implements Context
     }
 
     /**
-     * @When I delete the :optionValue option value of this product option
-     */
-    public function iDeleteTheOptionValueOfThisProductOption($optionValue)
-    {
-        $this->updatePage->removeOptionValue($optionValue);
-    }
-
-    /**
      * @Then the product option :productOptionName should appear in the registry
      * @Then the product option :productOptionName should be in the registry
      */
@@ -283,19 +275,6 @@ final class ManagingProductOptionsContext implements Context
         Assert::true(
             $this->updatePage->isThereOptionValue($optionValue),
             sprintf('%s is not a value of this product option.', $optionValue)
-        );
-    }
-
-    /**
-     * @Then /^(this product option) should not have the "([^"]*)" option value$/
-     */
-    public function thisProductOptionShouldNotHaveTheOptionValue(ProductOptionInterface $productOption, $optionValue)
-    {
-        $this->iWantToModifyAProductOption($productOption);
-
-        Assert::false(
-            $this->updatePage->isThereOptionValue($optionValue),
-            sprintf('%s is a value of this product option, but it should not.', $optionValue)
         );
     }
 }

@@ -15,6 +15,7 @@ use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Element\NodeElement;
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Attribute\Factory\AttributeFactoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -23,9 +24,7 @@ use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductTranslationInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Core\Pricing\Calculators;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
-use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Product\Factory\ProductFactoryInterface;
 use Sylius\Component\Product\Generator\SlugGeneratorInterface;
@@ -34,11 +33,11 @@ use Sylius\Component\Product\Model\ProductAttributeValueInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Sylius\Component\Product\Model\ProductVariantTranslationInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
-use Sylius\Component\Resource\Model\TranslationInterface;
-use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Resource\Model\TranslationInterface;
+use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
+use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Webmozart\Assert\Assert;
 
@@ -347,7 +346,6 @@ final class ProductContext implements Context
     /**
      * @Given /^the (product "[^"]+") has(?:| a) "([^"]+)" variant priced at ("[^"]+")$/
      * @Given /^(this product) has "([^"]+)" variant priced at ("[^"]+")$/
-     * @Given /^(this product) has "([^"]+)" variant priced at ("[^"]+") in ("[^"]+" channel)$/
      */
     public function theProductHasVariantPricedAt(
         ProductInterface $product,
@@ -548,7 +546,6 @@ final class ProductContext implements Context
 
     /**
      * @Given /^there (?:is|are) (\d+) unit(?:|s) of (product "([^"]+)") available in the inventory$/
-     * @When product :product quantity is changed to :quantity
      */
     public function thereIsQuantityOfProducts($quantity, ProductInterface $product)
     {
@@ -609,7 +606,7 @@ final class ProductContext implements Context
 
         $variant->addOptionValue($optionValue);
         $variant->addChannelPricing($this->createChannelPricingForChannel($price, $this->sharedStorage->get('channel')));
-        $variant->setCode(sprintf("%s_%s", $product->getCode(), $optionValueName));
+        $variant->setCode(sprintf('%s_%s', $product->getCode(), $optionValueName));
         $variant->setName($product->getName());
 
         $product->addVariant($variant);
@@ -618,26 +615,24 @@ final class ProductContext implements Context
 
     /**
      * @Given the :product product's :optionValueName size belongs to :shippingCategory shipping category
-     * @Given /^(this product) "([^"]+)" size belongs to ("([^"]+)" shipping category)$/
      */
     public function thisProductSizeBelongsToShippingCategory(ProductInterface $product, $optionValueName, ShippingCategoryInterface $shippingCategory)
     {
-        $code = sprintf("%s_%s", $product->getCode(), $optionValueName);
+        $code = sprintf('%s_%s', $product->getCode(), $optionValueName);
         /** @var ProductVariantInterface $productVariant */
         $productVariant = $product->getVariants()->filter(function ($variant) use ($code) {
             return $code === $variant->getCode();
         })->first();
-        
+
         Assert::notNull($productVariant, sprintf('Product variant with given code %s not exists!', $code));
-        
+
         $productVariant->setShippingCategory($shippingCategory);
         $this->objectManager->flush();
     }
 
     /**
      * @Given /^(this product) has (this product option)$/
-     * @Given /^(this product) has a ("[^"]+" option)$/
-     * @Given /^(this product) has an ("[^"]+" option)$/
+     * @Given /^(this product) has (?:a|an) ("[^"]+" option)$/
      */
     public function thisProductHasThisProductOption(ProductInterface $product, ProductOptionInterface $option)
     {
@@ -701,37 +696,6 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Given /^(it) has different prices for different channels and currencies$/
-     */
-    public function itHasDifferentPricesForDifferentChannelsAndCurrencies(ProductInterface $product)
-    {
-        /** @var ProductVariantInterface $variant */
-        $variant = $this->defaultVariantResolver->getVariant($product);
-
-        $variant->setPricingCalculator(Calculators::CHANNEL_AND_CURRENCY_BASED);
-    }
-
-    /**
-     * @Given /^(it) has price ("[^"]+") for ("[^"]+" channel) and "([^"]+)" currency$/
-     */
-    public function itHasPriceForChannelAndCurrency(
-        ProductInterface $product,
-        $price,
-        ChannelInterface $channel,
-        $currency
-    ) {
-        /** @var ProductVariantInterface $variant */
-        $variant = $this->defaultVariantResolver->getVariant($product);
-
-        $pricingConfiguration = $variant->getPricingConfiguration();
-        $pricingConfiguration[$channel->getCode()][$currency] = $price;
-
-        $variant->setPricingConfiguration($pricingConfiguration);
-
-        $this->objectManager->flush();
-    }
-
-    /**
      * @Given /^(this product) belongs to ("([^"]+)" shipping category)$/
      */
     public function thisProductBelongsToShippingCategory(ProductInterface $product, ShippingCategoryInterface $shippingCategory)
@@ -788,7 +752,7 @@ final class ProductContext implements Context
      */
     private function getPriceFromString($price)
     {
-        return (int) round(($price * 100), 2);
+        return (int) round($price * 100, 2);
     }
 
     /**

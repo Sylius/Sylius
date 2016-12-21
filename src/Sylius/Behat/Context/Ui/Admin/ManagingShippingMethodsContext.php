@@ -12,15 +12,14 @@
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\ShippingMethod\CreatePageInterface;
 use Sylius\Behat\Page\Admin\ShippingMethod\UpdatePageInterface;
-use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
-use Sylius\Behat\NotificationType;
+use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
-use Sylius\Behat\Service\SharedStorageInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -29,11 +28,6 @@ use Webmozart\Assert\Assert;
  */
 final class ManagingShippingMethodsContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
-    private $sharedStorage;
-
     /**
      * @var IndexPageInterface
      */
@@ -60,7 +54,6 @@ final class ManagingShippingMethodsContext implements Context
     private $notificationChecker;
 
     /**
-     * @param SharedStorageInterface $sharedStorage
      * @param IndexPageInterface $indexPage
      * @param CreatePageInterface $createPage
      * @param UpdatePageInterface $updatePage
@@ -68,14 +61,12 @@ final class ManagingShippingMethodsContext implements Context
      * @param NotificationCheckerInterface $notificationChecker
      */
     public function __construct(
-        SharedStorageInterface $sharedStorage,
         IndexPageInterface $indexPage,
         CreatePageInterface $createPage,
         UpdatePageInterface $updatePage,
         CurrentPageResolverInterface $currentPageResolver,
         NotificationCheckerInterface $notificationChecker
     ) {
-        $this->sharedStorage = $sharedStorage;
         $this->indexPage = $indexPage;
         $this->createPage = $createPage;
         $this->updatePage = $updatePage;
@@ -102,7 +93,6 @@ final class ManagingShippingMethodsContext implements Context
 
     /**
      * @When I specify its position as :position
-     * @When I do not specify its position
      */
     public function iSpecifyItsPositionAs($position = null)
     {

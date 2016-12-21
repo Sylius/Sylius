@@ -12,7 +12,6 @@
 namespace Sylius\Behat\Page\Shop\Account;
 
 use Sylius\Behat\Page\SymfonyPageInterface;
-use Sylius\Component\User\Model\UserInterface;
 
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>

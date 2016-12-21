@@ -262,9 +262,9 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @When /^I delete the "([^"]*)" province of (this country)$/
+     * @When /^I delete the "([^"]*)" province of this country$/
      */
-    public function iDeleteTheProvinceOfCountry($provinceName, CountryInterface $country)
+    public function iDeleteTheProvinceOfCountry($provinceName)
     {
         $this->updatePage->removeProvince($provinceName);
     }

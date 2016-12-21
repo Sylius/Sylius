@@ -98,7 +98,7 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
     private function getFieldElement($element)
     {
         $element = $this->getElement(StringInflector::nameToCode($element));
-        while (null !== $element && !($element->hasClass('field'))) {
+        while (null !== $element && !$element->hasClass('field')) {
             $element = $element->getParent();
         }
 

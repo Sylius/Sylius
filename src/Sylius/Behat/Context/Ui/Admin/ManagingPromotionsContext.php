@@ -13,14 +13,13 @@ namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\NotificationType;
-use Sylius\Behat\Page\Admin\Promotion\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Promotion\CreatePageInterface;
+use Sylius\Behat\Page\Admin\Promotion\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Promotion\UpdatePageInterface;
-use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
-use Sylius\Component\Core\Model\PromotionInterface;
+use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
+use Sylius\Component\Core\Model\PromotionInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -59,18 +58,12 @@ final class ManagingPromotionsContext implements Context
     private $notificationChecker;
 
     /**
-     * @var CurrencyProviderInterface
-     */
-    private $currencyProvider;
-
-    /**
      * @param SharedStorageInterface $sharedStorage
      * @param IndexPageInterface $indexPage
      * @param CreatePageInterface $createPage
      * @param UpdatePageInterface $updatePage
      * @param CurrentPageResolverInterface $currentPageResolver
      * @param NotificationCheckerInterface $notificationChecker
-     * @param CurrencyProviderInterface $currencyProvider
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -78,8 +71,7 @@ final class ManagingPromotionsContext implements Context
         CreatePageInterface $createPage,
         UpdatePageInterface $updatePage,
         CurrentPageResolverInterface $currentPageResolver,
-        NotificationCheckerInterface $notificationChecker,
-        CurrencyProviderInterface $currencyProvider
+        NotificationCheckerInterface $notificationChecker
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->indexPage = $indexPage;
@@ -87,7 +79,6 @@ final class ManagingPromotionsContext implements Context
         $this->updatePage = $updatePage;
         $this->currentPageResolver = $currentPageResolver;
         $this->notificationChecker = $notificationChecker;
-        $this->currencyProvider = $currencyProvider;
     }
 
     /**
@@ -198,14 +189,6 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @When I add the :actionType action
-     */
-    public function iAddTheAction($actionType)
-    {
-        $this->createPage->addAction($actionType);
-    }
-
-    /**
      * @When /^it is(?:| also) configured with amount of "(?:€|£|\$)([^"]+)" for "([^"]+)" channel$/
      */
     public function itIsConfiguredWithAmountForChannel($amount, $channelName)
@@ -248,7 +231,6 @@ final class ManagingPromotionsContext implements Context
 
     /**
      * @When /^I add the "([^"]+)" action configured with a percentage value of (?:|-)([^"]+)% for ("[^"]+" channel)$/
-     * @When I add the :actionType action configured without a percentage value for :channelName channel
      */
     public function iAddTheActionConfiguredWithAPercentageValueForChannel($actionType, $percentage = null, $channelName)
     {

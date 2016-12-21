@@ -30,7 +30,6 @@ use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
-use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Webmozart\Assert\Assert;
@@ -81,11 +80,6 @@ final class CheckoutContext implements Context
     private $orderDetails;
 
     /**
-     * @var OrderRepositoryInterface
-     */
-    private $orderRepository;
-
-    /**
      * @var FactoryInterface
      */
     private $addressFactory;
@@ -109,7 +103,6 @@ final class CheckoutContext implements Context
      * @param SelectShippingPageInterface $selectShippingPage
      * @param CompletePageInterface $completePage
      * @param ShowPageInterface $orderDetails
-     * @param OrderRepositoryInterface $orderRepository
      * @param FactoryInterface $addressFactory
      * @param CurrentPageResolverInterface $currentPageResolver
      * @param AddressComparatorInterface $addressComparator
@@ -123,7 +116,6 @@ final class CheckoutContext implements Context
         SelectShippingPageInterface $selectShippingPage,
         CompletePageInterface $completePage,
         ShowPageInterface $orderDetails,
-        OrderRepositoryInterface $orderRepository,
         FactoryInterface $addressFactory,
         CurrentPageResolverInterface $currentPageResolver,
         AddressComparatorInterface $addressComparator
@@ -136,7 +128,6 @@ final class CheckoutContext implements Context
         $this->selectShippingPage = $selectShippingPage;
         $this->completePage = $completePage;
         $this->orderDetails = $orderDetails;
-        $this->orderRepository = $orderRepository;
         $this->addressFactory = $addressFactory;
         $this->currentPageResolver = $currentPageResolver;
         $this->addressComparator = $addressComparator;
@@ -149,15 +140,6 @@ final class CheckoutContext implements Context
     {
         $this->iSpecifiedTheShippingAddress($this->createDefaultAddress());
         $this->iProceedOrderWithShippingMethodAndPayment('Free', 'Offline');
-    }
-
-    /**
-     * @Given /^I proceed without selecting shipping address$/
-     */
-    public function iProceedWithoutSelectingShippingAddress()
-    {
-        $this->addressPage->open();
-        $this->addressPage->nextStep();
     }
 
     /**
@@ -276,7 +258,8 @@ final class CheckoutContext implements Context
      */
     public function iSpecifyTheBillingAddressAs(AddressInterface $address)
     {
-        $this->iChooseTheDifferentBillingAddress();
+        $this->addressPage->chooseDifferentBillingAddress();
+
         $key = sprintf(
             'billing_address_%s_%s',
             strtolower($address->getFirstName()),
@@ -299,14 +282,6 @@ final class CheckoutContext implements Context
         $this->sharedStorage->set($key, $address);
 
         $this->iCompleteTheAddressingStep();
-    }
-
-    /**
-     * @When I choose the different billing address
-     */
-    public function iChooseTheDifferentBillingAddress()
-    {
-        $this->addressPage->chooseDifferentBillingAddress();
     }
 
     /**
@@ -426,14 +401,6 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @When I want to browse thank you page
-     */
-    public function iWantToBrowseThankYouPageForThisOrder()
-    {
-        $this->thankYouPage->open();
-    }
-
-    /**
      * @When I go to the addressing step
      */
     public function iGoToTheAddressingStep()
@@ -505,7 +472,7 @@ final class CheckoutContext implements Context
     /**
      * @When /^I proceed selecting ("[^"]+" as shipping country) with "([^"]+)" method$/
      */
-    public function iProceedSelectingShippingCountryAndShippingMethod(CountryInterface $shippingCountry = null, $shippingMethodName)
+    public function iProceedSelectingShippingCountryAndShippingMethod(CountryInterface $shippingCountry = null, $shippingMethodName = null)
     {
         $this->iProceedSelectingShippingCountry($shippingCountry);
 
@@ -540,16 +507,6 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @When /^I proceed selecting "([^"]*)" as shipping country with "([^"]*)" payment method$/
-     */
-    public function iProceedSelectingShippingCountryAndPaymentMethod($shippingCountry, $paymentMethodName)
-    {
-        $this->iProceedSelectingShippingCountryAndShippingMethod($shippingCountry, null);
-
-        $this->iChoosePaymentMethod($paymentMethodName);
-    }
-
-    /**
      * @When I go back to shipping step of the checkout
      */
     public function iGoBackToShippingStepOfTheCheckout()
@@ -563,7 +520,8 @@ final class CheckoutContext implements Context
      */
     public function iProceedSelectingPaymentMethod($paymentMethodName = 'Offline')
     {
-        $this->iProceedSelectingShippingCountryAndPaymentMethod(null, $paymentMethodName);
+        $this->iProceedSelectingShippingCountryAndShippingMethod();
+        $this->iChoosePaymentMethod($paymentMethodName);
     }
 
     /**
@@ -618,7 +576,6 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Given I have confirmed my order
      * @When I confirm my order
      */
     public function iConfirmMyOrder()
@@ -672,19 +629,6 @@ final class CheckoutContext implements Context
         Assert::same(
             $this->thankYouPage->getInstructions(),
             $paymentMethod->getInstructions()
-        );
-    }
-
-    /**
-     * @Then /^I should be redirected (?:|back )to the thank you page$/
-     */
-    public function iShouldBeRedirectedBackToTheThankYouPage()
-    {
-        $this->thankYouPage->waitForResponse(5);
-
-        Assert::true(
-            $this->thankYouPage->isOpen(),
-            'I should be on thank you page, but I am not.'
         );
     }
 
@@ -808,7 +752,6 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Given I am at the checkout payment step
      * @When I go back to payment step of the checkout
      */
     public function iAmAtTheCheckoutPaymentStep()
@@ -915,18 +858,6 @@ final class CheckoutContext implements Context
         Assert::true(
             $this->completePage->hasOrderTotal($total),
             sprintf('Order total should have %s total, but it does not have.', $total)
-        );
-    }
-
-    /**
-     * @Then /^my order total in base currency should be ("(?:\£|\$)\d+")$/
-     */
-    public function myOrderTotalInBaseCurrencyShouldBe($total)
-    {
-        Assert::same(
-            $total,
-            $this->completePage->getBaseCurrencyOrderTotal(),
-            'Order total should have %s total, but it has %s.'
         );
     }
 
@@ -1162,17 +1093,6 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Then my order's currency should be :currencyCode
-     */
-    public function myOrderSCurrencyShouldBe($currencyCode)
-    {
-        Assert::true(
-            $this->completePage->hasCurrency($currencyCode),
-            'Order currency code is improper.'
-        );
-    }
-
-    /**
      * @Then /^I should not be notified that (this product) does not have sufficient stock$/
      */
     public function iShouldNotBeNotifiedThatThisProductDoesNotHaveSufficientStock(ProductInterface $product)
@@ -1255,85 +1175,13 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @When I do not select any shipping method
-     */
-    public function iDoNotSelectAnyShippingMethod()
-    {
-        // Intentionally left blank to fulfill context expectation
-    }
-
-    /**
-     * @Then I should still be on the shipping step
-     */
-    public function iShouldStillBeOnTheShippingStep()
-    {
-        Assert::true(
-            $this->selectShippingPage->isOpen(),
-            'Select shipping page should be open, but it does not.'
-        );
-    }
-
-    /**
-     * @Then I should be notified that the shipping method is required
-     */
-    public function iShouldBeNotifiedThatTheShippingMethodIsRequired()
-    {
-        Assert::same(
-            $this->selectShippingPage->getValidationMessageForShipment(),
-            'Please select shipping method.'
-        );
-    }
-
-    /**
      * @Then there should be information about no available shipping methods
-     * @Then there should be information about no shipping methods available for my shipping address
      */
     public function thereShouldBeInformationAboutNoShippingMethodsAvailableForMyShippingAddress()
     {
         Assert::true(
             $this->selectShippingPage->hasNoAvailableShippingMethodsWarning(),
             'There should be warning about no available shipping methods, but it does not.'
-        );
-    }
-
-    /**
-     * @Then I should not be able to complete the shipping step
-     */
-    public function iShouldNotBeAbleToCompleteTheShippingStep()
-    {
-        Assert::true(
-            $this->selectShippingPage->isNextStepButtonUnavailable(),
-            'The next step button should be disabled, but it does not.'
-        );
-    }
-
-    /**
-     * @When I do not select any payment method
-     */
-    public function iDoNotSelectAnyPaymentMethod()
-    {
-        // Intentionally left blank to fulfill context expectation
-    }
-
-    /**
-     * @Then I should not be able to complete the payment step
-     */
-    public function iShouldNotBeAbleToCompleteThePaymentStep()
-    {
-        Assert::true(
-            $this->selectPaymentPage->isNextStepButtonUnavailable(),
-           'The "next step" button should be disabled.'
-        );
-    }
-
-    /**
-     * @Then there should be information about no payment methods available for my order
-     */
-    public function thereShouldBeInformationAboutNoPaymentMethodsAvailableForMyOrder()
-    {
-        Assert::true(
-            $this->selectPaymentPage->hasNoAvailablePaymentMethodsWarning(),
-            'There should be warning about no available payment methods, but it does not.'
         );
     }
 

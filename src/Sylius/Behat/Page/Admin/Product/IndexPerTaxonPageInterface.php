@@ -12,7 +12,6 @@
 namespace Sylius\Behat\Page\Admin\Product;
 
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface as CrudIndexPageInterface;
-use Sylius\Component\Core\Model\ProductInterface;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>

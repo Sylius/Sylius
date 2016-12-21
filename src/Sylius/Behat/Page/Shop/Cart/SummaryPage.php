@@ -14,7 +14,6 @@ namespace Sylius\Behat\Page\Shop\Cart;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Component\Core\Model\ProductInterface;
-use Symfony\Component\Routing\RouterInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -328,6 +327,6 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
      */
     private function getPriceFromString($price)
     {
-        return (int) round((str_replace(['€', '£', '$'], '', $price) * 100), 2);
+        return (int) round(str_replace(['€', '£', '$'], '', $price) * 100, 2);
     }
 }

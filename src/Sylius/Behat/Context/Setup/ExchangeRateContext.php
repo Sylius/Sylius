@@ -12,7 +12,6 @@
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
-use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Currency\Model\ExchangeRateInterface;
@@ -40,26 +39,18 @@ final class ExchangeRateContext implements Context
     private $exchangeRateRepository;
 
     /**
-     * @var ObjectManager
-     */
-    private $entityManager;
-
-    /**
      * @param SharedStorageInterface $sharedStorage
      * @param FactoryInterface $exchangeRateFactory
      * @param ExchangeRateRepositoryInterface $exchangeRateRepository
-     * @param ObjectManager $entityManager
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         FactoryInterface $exchangeRateFactory,
-        ExchangeRateRepositoryInterface $exchangeRateRepository,
-        ObjectManager $entityManager
+        ExchangeRateRepositoryInterface $exchangeRateRepository
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->exchangeRateFactory = $exchangeRateFactory;
         $this->exchangeRateRepository = $exchangeRateRepository;
-        $this->entityManager = $entityManager;
     }
 
     /**
@@ -73,23 +64,6 @@ final class ExchangeRateContext implements Context
         $exchangeRate = $this->createExchangeRate($sourceCurrency, $targetCurrency, $ratio);
 
         $this->saveExchangeRate($exchangeRate);
-    }
-
-
-    /**
-     * @Given /^the exchange rate ratio between "([^"]+)" currency and "([^"]+)" currency has changed to ([0-9\.]+)$/
-     */
-    public function theExchangeRateRatioForSourceAndTargetHasChangedTo(
-        $sourceCurrencyCode,
-        $targetCurrencyCode,
-        $ratio
-    ) {
-        $exchangeRate = $this->exchangeRateRepository->findOneWithCurrencyPair($sourceCurrencyCode, $targetCurrencyCode);
-
-        $exchangeRate->setRatio((float) $ratio);
-
-        $this->sharedStorage->set('exchange_rate', $exchangeRate);
-        $this->entityManager->flush();
     }
 
     /**

@@ -19,11 +19,9 @@ use Sylius\Behat\Page\Admin\ProductVariant\IndexPageInterface;
 use Sylius\Behat\Page\Admin\ProductVariant\UpdatePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
-use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Product\Resolver\DefaultProductVariantResolver;
 use Webmozart\Assert\Assert;
 
@@ -194,14 +192,6 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @When /^I set its price to "(?:€|£|\$)([^"]+)" for ("[^"]+" currency) and ("[^"]+" channel)$/
-     */
-    public function iSetItsPriceToForCurrencyAndChannel($price, CurrencyInterface $currency, ChannelInterface $channel)
-    {
-        $this->createPage->specifyPriceForChannelAndCurrency($price, $channel, $currency);
-    }
-
-    /**
      * @When I set its :optionName option to :optionValue
      */
     public function iSetItsOptionAs($optionName, $optionValue)
@@ -329,7 +319,7 @@ final class ManagingProductVariantsContext implements Context
     public function iShouldBeNotifiedOfFailure()
     {
         $this->notificationChecker->checkNotification(
-            "Cannot delete, the product variant is in use.",
+            'Cannot delete, the product variant is in use.',
             NotificationType::failure()
         );
     }
@@ -344,7 +334,6 @@ final class ManagingProductVariantsContext implements Context
 
     /**
      * @When /^I want to modify the ("[^"]+" product variant)$/
-     * @When /^I want to modify (this product variant)$/
      */
     public function iWantToModifyAProduct(ProductVariantInterface $productVariant)
     {
@@ -473,14 +462,6 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @When /^I change its price to "(?:€|£|\$)([^"]+)"$/
-     */
-    public function iChangeItsPriceTo($price)
-    {
-        $this->updatePage->specifyPrice($price);
-    }
-
-    /**
      * @When I remove its name
      */
     public function iRemoveItsNameFromTranslation()
@@ -605,7 +586,6 @@ final class ManagingProductVariantsContext implements Context
 
     /**
      * @Then the :variant variant should have :amount items on hold
-     * @Then /^(this variant) should have (\d+) items on hold$/
      */
     public function thisVariantShouldHaveItemsOnHold(ProductVariantInterface $variant, $amount)
     {
@@ -620,23 +600,6 @@ final class ManagingProductVariantsContext implements Context
         $this->indexPage->open(['productId' => $product->getId()]);
 
         $this->assertOnHoldQuantityOfVariant((int) $amount, $variant);
-    }
-
-    /**
-     * @Then /^(variant with code "[^"]+") for ("[^"]+" currency) and ("[^"]+" channel) should be priced at "(?:€|£|\$)([^"]+)"$/
-     */
-    public function theProductForCurrencyAndChannelShouldBePricedAt(
-        ProductVariantInterface $productVariant,
-        CurrencyInterface $currency,
-        ChannelInterface $channel,
-        $price
-    ) {
-        $this->updatePage->open(['id' => $productVariant->getId(), 'productId' => $productVariant->getProduct()->getId()]);
-
-        Assert::same(
-            $this->updatePage->getPricingConfigurationForChannelAndCurrencyCalculator($channel, $currency),
-            $price
-        );
     }
 
     /**

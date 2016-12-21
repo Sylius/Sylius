@@ -26,10 +26,8 @@ use Sylius\Behat\Page\Admin\ProductReview\IndexPageInterface as ProductReviewInd
 use Sylius\Behat\Page\SymfonyPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
-use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Component\Currency\Model\CurrencyInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
@@ -385,7 +383,7 @@ final class ManagingProductsContext implements Context
     public function iShouldBeNotifiedOfFailure()
     {
         $this->notificationChecker->checkNotification(
-            "Cannot delete, the product is in use.",
+            'Cannot delete, the product is in use.',
             NotificationType::failure()
         );
     }
@@ -440,14 +438,6 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then /^this product price should be "(?:€|£|\$)([^"]+)"$/
-     */
-    public function thisProductPriceShouldBeEqualTo($price)
-    {
-        $this->assertElementValue('price', $price);
-    }
-
-    /**
      * @Then this product name should be :name
      */
     public function thisProductElementShouldBe($name)
@@ -461,14 +451,6 @@ final class ManagingProductsContext implements Context
     public function iShouldBeNotifiedThatIsRequired($element)
     {
         $this->assertValidationMessage($element, sprintf('Please enter product %s.', $element));
-    }
-
-    /**
-     * @Then I should be notified that price is required
-     */
-    public function iShouldBeNotifiedThatPriceIsRequired()
-    {
-        $this->assertValidationMessage('price', 'Please enter the price.');
     }
 
     /**
@@ -621,7 +603,7 @@ final class ManagingProductsContext implements Context
      * @Then /^the slug of the ("[^"]+" product) should(?:| still) be "([^"]+)"$/
      * @Then /^the slug of the ("[^"]+" product) should(?:| still) be "([^"]+)" (in the "[^"]+" locale)$/
      */
-    public function productSlugShouldBe(ProductInterface $product, $slug, $locale = "en_US")
+    public function productSlugShouldBe(ProductInterface $product, $slug, $locale = 'en_US')
     {
         $this->updateSimpleProductPage->open(['id' => $product->getId()]);
 
@@ -741,9 +723,9 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then /^(this product) should not have(?:| also) an image with a code "([^"]*)"$/
+     * @Then /^this product should not have(?:| also) an image with a code "([^"]*)"$/
      */
-    public function thisProductShouldNotHaveAnImageWithCode(ProductInterface $product, $code)
+    public function thisProductShouldNotHaveAnImageWithCode($code)
     {
         /** @var UpdateSimpleProductPageInterface|UpdateConfigurableProductPageInterface $currentPage */
         $currentPage = $this->resolveCurrentPage();
@@ -867,17 +849,6 @@ final class ManagingProductsContext implements Context
         Assert::false(
             $this->productReviewIndexPage->isSingleResourceOnPage(['reviewSubject' => $product->getName()]),
             sprintf('There should be no reviews of %s.', $product->getName())
-        );
-    }
-
-    /**
-     * @Then /^the product for ("[^"]+" currency) and ("[^"]+" channel) should be priced at "(?:€|£|\$)([^"]+)"$/
-     */
-    public function theProductForCurrencyAndChannelShouldBePricedAt(CurrencyInterface $currency, ChannelInterface $channel, $price)
-    {
-        Assert::same(
-            $this->updateSimpleProductPage->getPricingConfigurationForChannelAndCurrencyCalculator($channel, $currency),
-            $price
         );
     }
 

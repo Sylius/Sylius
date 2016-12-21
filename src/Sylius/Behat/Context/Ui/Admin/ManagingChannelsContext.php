@@ -16,8 +16,8 @@ use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Channel\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Channel\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Channel\UpdatePageInterface;
-use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
+use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Webmozart\Assert\Assert;
@@ -372,7 +372,7 @@ final class ManagingChannelsContext implements Context
     public function iShouldBeNotifiedThatItCannotBeDeleted()
     {
         $this->notificationChecker->checkNotification(
-            "The channel cannot be deleted. At least one enabled channel is required.",
+            'The channel cannot be deleted. At least one enabled channel is required.',
             NotificationType::failure()
         );
     }

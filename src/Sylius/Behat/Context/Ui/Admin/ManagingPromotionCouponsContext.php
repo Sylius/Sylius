@@ -13,12 +13,12 @@ namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\NotificationType;
-use Sylius\Behat\Page\Admin\PromotionCoupon\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
+use Sylius\Behat\Page\Admin\PromotionCoupon\CreatePageInterface;
 use Sylius\Behat\Page\Admin\PromotionCoupon\GeneratePageInterface;
 use Sylius\Behat\Page\Admin\PromotionCoupon\UpdatePageInterface;
-use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
+use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Webmozart\Assert\Assert;
@@ -84,7 +84,6 @@ final class ManagingPromotionCouponsContext implements Context
 
     /**
      * @Given /^I want to view all coupons of (this promotion)$/
-     * @Given /^I want to view all coupons of ("[^"]+" promotion)$/
      * @When /^I browse all coupons of ("[^"]+" promotion)$/
      */
     public function iWantToViewAllCouponsOfThisPromotion(PromotionInterface $promotion)
@@ -416,7 +415,7 @@ final class ManagingPromotionCouponsContext implements Context
     public function iShouldBeNotifiedOfFailure()
     {
         $this->notificationChecker->checkNotification(
-            "Error Cannot delete, the promotion coupon is in use.",
+            'Error Cannot delete, the promotion coupon is in use.',
             NotificationType::failure()
         );
     }

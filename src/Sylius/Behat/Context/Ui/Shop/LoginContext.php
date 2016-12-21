@@ -18,7 +18,6 @@ use Sylius\Behat\Page\Shop\Account\RegisterPageInterface;
 use Sylius\Behat\Page\Shop\Account\ResetPasswordPageInterface;
 use Sylius\Behat\Page\Shop\HomePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
-use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -47,11 +46,6 @@ final class LoginContext implements Context
     private $resetPasswordPage;
 
     /**
-     * @var CurrentPageResolverInterface
-     */
-    private $currentPageResolver;
-
-    /**
      * @var NotificationCheckerInterface
      */
     private $notificationChecker;
@@ -61,7 +55,6 @@ final class LoginContext implements Context
      * @param LoginPageInterface $loginPage
      * @param RegisterPageInterface $registerPage
      * @param ResetPasswordPageInterface $resetPasswordPage
-     * @param CurrentPageResolverInterface $currentPageResolver
      * @param NotificationCheckerInterface $notificationChecker
      */
     public function __construct(
@@ -69,14 +62,12 @@ final class LoginContext implements Context
         LoginPageInterface $loginPage,
         RegisterPageInterface $registerPage,
         ResetPasswordPageInterface $resetPasswordPage,
-        CurrentPageResolverInterface $currentPageResolver,
         NotificationCheckerInterface $notificationChecker
     ) {
         $this->homePage = $homePage;
         $this->loginPage = $loginPage;
         $this->registerPage = $registerPage;
         $this->resetPasswordPage = $resetPasswordPage;
-        $this->currentPageResolver = $currentPageResolver;
         $this->notificationChecker = $notificationChecker;
     }
 
@@ -98,7 +89,6 @@ final class LoginContext implements Context
 
     /**
      * @When I specify the username as :username
-     * @When I do not specify the user name
      */
     public function iSpecifyTheUsername($username = null)
     {
@@ -139,16 +129,6 @@ final class LoginContext implements Context
     public function iResetIt()
     {
         $this->resetPasswordPage->reset();
-    }
-
-    /**
-     * @When I log in to the admin panel with email :email and password :password
-     */
-    public function iLogInToTheAdminPanelWithEmailAndPassword($email, $password)
-    {
-        $this->iSpecifyTheUserName($email);
-        $this->iSpecifyThePasswordAs($password);
-        $this->iLogIn();
     }
 
     /**

@@ -12,8 +12,6 @@
 namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
-use Behat\Mink\Exception\ElementNotFoundException;
-use Behat\Mink\Exception\Exception;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\PageInterface;
 use Sylius\Behat\Page\Shop\Account\ChangePasswordPageInterface;
@@ -316,7 +314,6 @@ final class AccountContext implements Context
 
     /**
      * @When I view the summary of the order :order
-     * @When /^I am viewing the summary of (this order)$/
      */
     public function iViewTheSummaryOfTheOrder(OrderInterface $order)
     {

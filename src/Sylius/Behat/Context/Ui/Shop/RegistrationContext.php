@@ -16,15 +16,13 @@ use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Shop\Account\DashboardPageInterface;
 use Sylius\Behat\Page\Shop\Account\LoginPageInterface;
 use Sylius\Behat\Page\Shop\Account\ProfileUpdatePageInterface;
-use Sylius\Behat\Page\Shop\Account\VerificationPageInterface;
 use Sylius\Behat\Page\Shop\Account\RegisterPageInterface;
+use Sylius\Behat\Page\Shop\Account\VerificationPageInterface;
 use Sylius\Behat\Page\Shop\HomePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
-use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Behat\Service\SecurityServiceInterface;
-use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -68,16 +66,6 @@ class RegistrationContext implements Context
     private $profileUpdatePage;
 
     /**
-     * @var SecurityServiceInterface
-     */
-    private $securityService;
-
-    /**
-     * @var CurrentPageResolverInterface
-     */
-    private $currentPageResolver;
-
-    /**
      * @var NotificationCheckerInterface
      */
     private $notificationChecker;
@@ -90,8 +78,6 @@ class RegistrationContext implements Context
      * @param RegisterPageInterface $registerPage
      * @param VerificationPageInterface $verificationPage
      * @param ProfileUpdatePageInterface $profileUpdatePage
-     * @param SecurityServiceInterface $securityService
-     * @param CurrentPageResolverInterface $currentPageResolver
      * @param NotificationCheckerInterface $notificationChecker
      */
     public function __construct(
@@ -102,8 +88,6 @@ class RegistrationContext implements Context
         RegisterPageInterface $registerPage,
         VerificationPageInterface $verificationPage,
         ProfileUpdatePageInterface $profileUpdatePage,
-        SecurityServiceInterface $securityService,
-        CurrentPageResolverInterface $currentPageResolver,
         NotificationCheckerInterface $notificationChecker
     ) {
         $this->sharedStorage = $sharedStorage;
@@ -113,8 +97,6 @@ class RegistrationContext implements Context
         $this->registerPage = $registerPage;
         $this->verificationPage = $verificationPage;
         $this->profileUpdatePage = $profileUpdatePage;
-        $this->securityService = $securityService;
-        $this->currentPageResolver = $currentPageResolver;
         $this->notificationChecker = $notificationChecker;
     }
 
@@ -316,9 +298,9 @@ class RegistrationContext implements Context
     }
 
     /**
-     * @Then /^(my) account should be verified$/
+     * @Then /^my account should be verified$/
      */
-    public function myAccountShouldBeVerified(ShopUserInterface $user)
+    public function myAccountShouldBeVerified()
     {
         Assert::true(
             $this->dashboardPage->isVerified(),

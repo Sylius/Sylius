@@ -15,9 +15,9 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Channel\CreatePageInterface;
 use Sylius\Behat\Page\Shop\HomePageInterface;
 use Sylius\Behat\Service\Setter\ChannelContextSetterInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Behat\Service\SharedStorageInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
@@ -72,7 +72,6 @@ final class ChannelContext implements Context
 
     /**
      * @Given /^I changed (?:|back )my current (channel to "([^"]+)")$/
-     * @Given /^the customer changed (?:|back )current (channel to "([^"]+)")$/
      * @When /^I change (?:|back )my current (channel to "([^"]+)")$/
      */
     public function iChangeMyCurrentChannelTo(ChannelInterface $channel)

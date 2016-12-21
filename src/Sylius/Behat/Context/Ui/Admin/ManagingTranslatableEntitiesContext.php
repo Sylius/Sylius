@@ -12,7 +12,6 @@
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
-use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\Admin\Taxon\CreatePage;
 
 /**
@@ -47,19 +46,5 @@ final class ManagingTranslatableEntitiesContext implements Context
     public function iShouldBeAbleToTranslateItIn($localeCode)
     {
         $this->taxonCreatePage->describeItAs('Foo bar', $localeCode);
-    }
-
-    /**
-     * @Then I should not be able to translate it in :localeCode
-     */
-    public function iShouldNotBeAbleToTranslateItIn($localeCode)
-    {
-        try {
-            $this->taxonCreatePage->describeItAs('Foo bar', $localeCode);
-        } catch (ElementNotFoundException $exception) {
-            return;
-        }
-
-        throw new \DomainException(sprintf('I should not be able to translate it in "%s", but I am.', $localeCode));
     }
 }

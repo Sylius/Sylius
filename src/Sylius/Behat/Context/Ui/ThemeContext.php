@@ -15,9 +15,9 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Channel\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Channel\UpdatePageInterface;
 use Sylius\Behat\Page\Shop\HomePageInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Behat\Service\SharedStorageInterface;
 use Webmozart\Assert\Assert;
 
 /**

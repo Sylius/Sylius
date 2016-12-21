@@ -13,9 +13,9 @@ namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
 use Behat\Mink\Element\NodeElement;
-use Sylius\Behat\Page\Shop\ProductReview\IndexPageInterface as ProductReviewIndexPageInterface;
 use Sylius\Behat\Page\Shop\Product\IndexPageInterface;
 use Sylius\Behat\Page\Shop\Product\ShowPageInterface;
+use Sylius\Behat\Page\Shop\ProductReview\IndexPageInterface as ProductReviewIndexPageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
@@ -233,7 +233,7 @@ final class ProductContext implements Context
     {
         Assert::true(
             $this->indexPage->isProductOnList($productName),
-            sprintf("The product %s should appear on page, but it does not.", $productName)
+            sprintf('The product %s should appear on page, but it does not.', $productName)
         );
     }
 
@@ -244,7 +244,7 @@ final class ProductContext implements Context
     {
         Assert::false(
             $this->indexPage->isProductOnList($productName),
-            sprintf("The product %s should not appear on page, but it does.", $productName)
+            sprintf('The product %s should not appear on page, but it does.', $productName)
         );
     }
 
@@ -325,7 +325,7 @@ final class ProductContext implements Context
     {
         Assert::true(
             $this->indexPage->isProductWithPriceOnList($productName, $productPrice),
-            sprintf("The product %s with price %s should appear on page, but it does not.", $productName, $productPrice)
+            sprintf('The product %s with price %s should appear on page, but it does not.', $productName, $productPrice)
         );
     }
 

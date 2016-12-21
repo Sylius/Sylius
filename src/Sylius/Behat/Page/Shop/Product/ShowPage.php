@@ -12,8 +12,6 @@
 namespace Sylius\Behat\Page\Shop\Product;
 
 use Behat\Mink\Driver\Selenium2Driver;
-use Behat\Mink\Element\NodeElement;
-use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
@@ -290,7 +288,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'out_of_stock' => '#sylius-product-out-of-stock',
             'product_price' => '#product-price',
             'reviews' => '[data-tab="reviews"] .comments',
-            'selecting_variants' => "#sylius-product-selecting-variant",
+            'selecting_variants' => '#sylius-product-selecting-variant',
             'validation_errors' => '.sylius-validation-error',
             'variant_radio' => '#sylius-product-variants tbody tr:contains("%variant-name%") input',
         ]);

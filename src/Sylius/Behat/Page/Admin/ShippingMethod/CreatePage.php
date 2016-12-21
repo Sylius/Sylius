@@ -13,8 +13,6 @@ namespace Sylius\Behat\Page\Admin\ShippingMethod;
 
 use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Exception\ElementNotFoundException;
-use Sylius\Behat\Behaviour\ChoosesCalculator;
-use Sylius\Behat\Behaviour\SpecifiesItsAmount;
 use Sylius\Behat\Behaviour\SpecifiesItsCode;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 use Sylius\Component\Core\Formatter\StringInflector;
@@ -73,7 +71,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      */
     public function chooseCalculator($name)
     {
-        $this->getDocument()->selectFieldOption('Calculator', $name);
+        $this->getDocument()->selectFieldOption(\Calculator::class, $name);
     }
 
     /**
@@ -139,7 +137,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     private function getFieldElement($element, array $parameters = [])
     {
         $element = $this->getElement(StringInflector::nameToCode($element), $parameters);
-        while (null !== $element && !($element->hasClass('field'))) {
+        while (null !== $element && !$element->hasClass('field')) {
             $element = $element->getParent();
         }
 

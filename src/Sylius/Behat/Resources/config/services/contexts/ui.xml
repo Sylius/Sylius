@@ -19,7 +19,6 @@
         </service>
 
         <service id="sylius.behat.context.ui.admin.locale" class="Sylius\Behat\Context\Ui\Admin\LocaleContext">
-            <argument type="service" id="sylius.behat.page.admin.administrator.update" />
             <argument type="service" id="sylius.behat.page.admin.dashboard" />
             <argument type="service" id="__symfony__.translator" />
             <tag name="fob.context_service" />
@@ -60,12 +59,10 @@
             <argument type="service" id="sylius.behat.page.admin.currency.index" />
             <argument type="service" id="sylius.behat.page.admin.currency.create" />
             <argument type="service" id="sylius.behat.page.admin.currency.update" />
-            <argument type="service" id="sylius.behat.current_page_resolver" />
             <tag name="fob.context_service" />
         </service>
 
         <service id="sylius.behat.context.ui.admin.managing_customers" class="Sylius\Behat\Context\Ui\Admin\ManagingCustomersContext">
-            <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.page.admin.customer.create" />
             <argument type="service" id="sylius.behat.page.admin.customer.index" />
             <argument type="service" id="sylius.behat.page.admin.customer.update" />
@@ -183,7 +180,6 @@
             <argument type="service" id="sylius.behat.page.admin.promotion.update" />
             <argument type="service" id="sylius.behat.current_page_resolver" />
             <argument type="service" id="sylius.behat.notification_checker" />
-            <argument type="service" id="__symfony__.sylius.currency_provider" />
             <tag name="fob.context_service" />
         </service>
         <service id="sylius.behat.context.ui.admin.managing_promotion_coupons" class="Sylius\Behat\Context\Ui\Admin\ManagingPromotionCouponsContext">
@@ -197,7 +193,6 @@
         </service>
 
         <service id="sylius.behat.context.ui.admin.managing_shipping_methods" class="Sylius\Behat\Context\Ui\Admin\ManagingShippingMethodsContext">
-            <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.page.admin.shipping_method.index" />
             <argument type="service" id="sylius.behat.page.admin.shipping_method.create" />
             <argument type="service" id="sylius.behat.page.admin.shipping_method.update" />
@@ -282,7 +277,6 @@
             <argument type="service" id="sylius.behat.page.shop.checkout.select_shipping" />
             <argument type="service" id="sylius.behat.page.shop.checkout.complete" />
             <argument type="service" id="sylius.behat.page.shop.order.show" />
-            <argument type="service" id="__symfony__.sylius.repository.order" />
             <argument type="service" id="__symfony__.sylius.factory.address" />
             <argument type="service" id="sylius.behat.current_page_resolver" />
             <argument type="service" id="__symfony__.sylius.address_comparator" />
@@ -296,12 +290,10 @@
         </service>
 
         <service id="sylius.behat.context.ui.paypal" class="Sylius\Behat\Context\Ui\PaypalContext">
-            <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.page.external.paypal_checkout_express" />
             <argument type="service" id="sylius.behat.page.shop.order.show" />
             <argument type="service" id="sylius.behat.page.shop.checkout.complete" />
             <argument type="service" id="sylius.behat.paypal_api_mocker" />
-            <argument type="service" id="__symfony__.sylius.repository.order" />
             <tag name="fob.context_service" />
         </service>
 
@@ -358,8 +350,6 @@
 
         <service id="sylius.behat.context.ui.shop.currency" class="Sylius\Behat\Context\Ui\Shop\CurrencyContext">
             <argument type="service" id="sylius.behat.page.shop.home" />
-            <argument type="service" id="__symfony__.sylius.storage.currency" />
-            <argument type="service" id="sylius.behat.shared_storage" />
             <tag name="fob.context_service" />
         </service>
 
@@ -383,7 +373,6 @@
             <argument type="service" id="sylius.behat.page.shop.account.login" />
             <argument type="service" id="sylius.behat.page.shop.account.register" />
             <argument type="service" id="sylius.behat.page.shop.account.reset_password" />
-            <argument type="service" id="sylius.behat.current_page_resolver" />
             <argument type="service" id="sylius.behat.notification_checker" />
             <tag name="fob.context_service" />
         </service>
@@ -409,8 +398,6 @@
             <argument type="service" id="sylius.behat.page.shop.account.register" />
             <argument type="service" id="sylius.behat.page.shop.account.verify" />
             <argument type="service" id="sylius.behat.page.shop.account.profile_update" />
-            <argument type="service" id="sylius.behat.shop_security" />
-            <argument type="service" id="sylius.behat.current_page_resolver" />
             <argument type="service" id="sylius.behat.notification_checker" />
             <tag name="fob.context_service" />
         </service>

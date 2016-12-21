@@ -12,7 +12,6 @@
 namespace Sylius\Behat\Service;
 
 use Sylius\Component\Core\Model\AdminUserInterface;
-use Sylius\Component\Core\Model\ShopUserInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>

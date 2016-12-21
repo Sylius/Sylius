@@ -16,7 +16,6 @@ use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\PaymentMethod\CreatePageInterface;
 use Sylius\Behat\Page\Admin\PaymentMethod\UpdatePageInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
-use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Webmozart\Assert\Assert;
 

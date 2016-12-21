@@ -17,7 +17,6 @@ use Sylius\Behat\Page\Admin\Customer\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Customer\ShowPageInterface;
 use Sylius\Behat\Page\Admin\Customer\UpdatePageInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
-use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Webmozart\Assert\Assert;
 
@@ -26,11 +25,6 @@ use Webmozart\Assert\Assert;
  */
 final class ManagingCustomersContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
-    private $sharedStorage;
-
     /**
      * @var IndexPageInterface
      */
@@ -62,7 +56,6 @@ final class ManagingCustomersContext implements Context
     private $currentPageResolver;
 
     /**
-     * @param SharedStorageInterface $sharedStorage
      * @param CreatePageInterface $createPage
      * @param IndexPageInterface $indexPage
      * @param UpdatePageInterface $updatePage
@@ -71,7 +64,6 @@ final class ManagingCustomersContext implements Context
      * @param CurrentPageResolverInterface $currentPageResolver
      */
     public function __construct(
-        SharedStorageInterface $sharedStorage,
         CreatePageInterface $createPage,
         IndexPageInterface $indexPage,
         UpdatePageInterface $updatePage,
@@ -79,7 +71,6 @@ final class ManagingCustomersContext implements Context
         IndexPageInterface $ordersIndexPage,
         CurrentPageResolverInterface $currentPageResolver
     ) {
-        $this->sharedStorage = $sharedStorage;
         $this->createPage = $createPage;
         $this->indexPage = $indexPage;
         $this->updatePage = $updatePage;
@@ -171,20 +162,9 @@ final class ManagingCustomersContext implements Context
 
     /**
      * @Given /^I want to edit (this customer)$/
-     * @Given I want to edit the customer :customer
      */
     public function iWantToEditThisCustomer(CustomerInterface $customer)
     {
-        $this->updatePage->open(['id' => $customer->getId()]);
-    }
-
-    /**
-     * @Given I want to change my password
-     */
-    public function iWantToChangeMyPassword()
-    {
-        $customer = $this->sharedStorage->get('customer');
-
         $this->updatePage->open(['id' => $customer->getId()]);
     }
 
@@ -419,14 +399,6 @@ final class ManagingCustomersContext implements Context
     public function iSpecifyItsPasswordAs($password)
     {
         $this->createPage->specifyPassword($password);
-    }
-
-    /**
-     * @When I change my password to :password
-     */
-    public function iSpecifyMyPasswordAs($password)
-    {
-        $this->updatePage->changePassword($password);
     }
 
     /**

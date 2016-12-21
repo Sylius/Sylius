@@ -12,11 +12,8 @@
 namespace Sylius\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
-use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\Admin\Customer\ShowPageInterface;
-use Sylius\Behat\Page\Shop\Account\LoginPageInterface;
 use Sylius\Behat\Page\Shop\HomePageInterface;
-use Sylius\Behat\Page\Shop\User\RegisterPageInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Webmozart\Assert\Assert;
@@ -84,30 +81,6 @@ final class UserContext implements Context
 
         $this->customerShowPage->open(['id' => $user->getCustomer()->getId()]);
         $this->customerShowPage->deleteAccount();
-    }
-
-    /**
-     * @When I try to delete my own account
-     */
-    public function iTryDeletingMyOwnAccount()
-    {
-        $admin = $this->sharedStorage->get('administrator');
-
-        $this->customerShowPage->open(['id' => $admin->getId()]);
-    }
-
-    /**
-     * @Then I should not be able to do it
-     */
-    public function iShouldNotBeAbleToDeleteMyOwnAccount()
-    {
-        try {
-            $this->customerShowPage->deleteAccount();
-        } catch (ElementNotFoundException $exception) {
-            return;
-        }
-
-        throw new \DomainException('Delete account should throw an exception!');
     }
 
     /**

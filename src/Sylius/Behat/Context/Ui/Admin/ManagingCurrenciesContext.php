@@ -15,7 +15,6 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Currency\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Currency\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Currency\UpdatePageInterface;
-use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Webmozart\Assert\Assert;
 
@@ -40,26 +39,18 @@ final class ManagingCurrenciesContext implements Context
     private $updatePage;
 
     /**
-     * @var CurrentPageResolverInterface
-     */
-    private $currentPageResolver;
-
-    /**
      * @param IndexPageInterface $indexPage
      * @param CreatePageInterface $createPage
      * @param UpdatePageInterface $updatePage
-     * @param CurrentPageResolverInterface $currentPageResolver
      */
     public function __construct(
         IndexPageInterface $indexPage,
         CreatePageInterface $createPage,
-        UpdatePageInterface $updatePage,
-        CurrentPageResolverInterface $currentPageResolver
+        UpdatePageInterface $updatePage
     ) {
         $this->createPage = $createPage;
         $this->indexPage = $indexPage;
         $this->updatePage = $updatePage;
-        $this->currentPageResolver = $currentPageResolver;
     }
 
     /**
@@ -85,14 +76,6 @@ final class ManagingCurrenciesContext implements Context
     public function iAddIt()
     {
         $this->createPage->create();
-    }
-
-    /**
-     * @When I specify its exchange rate as :exchangeRate
-     */
-    public function iSpecifyExchangeRate($exchangeRate)
-    {
-        $this->createPage->specifyExchangeRate($exchangeRate);
     }
 
     /**
@@ -134,49 +117,12 @@ final class ManagingCurrenciesContext implements Context
     }
 
     /**
-     * @Then I should not be able to disable this currency
-     */
-    public function iCannotDisableIt()
-    {
-        Assert::true(
-            $this->updatePage->canBeDisabled(),
-            'I should not be able to disable this currency.'
-        );
-    }
-
-    /**
      * @When I save my changes
      * @When I try to save my changes
      */
     public function iSaveMyChanges()
     {
         $this->updatePage->saveChanges();
-    }
-
-    /**
-     * @Then /^(this currency) should be disabled$/
-     */
-    public function thisCurrencyShouldBeDisabled(CurrencyInterface $currency)
-    {
-        $this->indexPage->open();
-
-        Assert::true(
-            $this->indexPage->isCurrencyDisabled($currency),
-            sprintf('Currency %s should be disabled but it is not.', $currency->getCode())
-        );
-    }
-
-    /**
-     * @Then /^(this currency) should be enabled$/
-     */
-    public function thisCurrencyShouldBeEnabled(CurrencyInterface $currency)
-    {
-        $this->indexPage->open();
-
-        Assert::true(
-            $this->indexPage->isCurrencyEnabled($currency),
-            sprintf('Currency %s should be enabled but it is not.', $currency->getCode())
-        );
     }
 
     /**
@@ -209,19 +155,6 @@ final class ManagingCurrenciesContext implements Context
         Assert::true(
             $this->indexPage->isSingleResourceOnPage([$element => $codeValue]),
             sprintf('Currency with %s %s cannot be found.', $element, $codeValue)
-        );
-    }
-
-    /**
-     * @Then the currency :currencyName should not be added
-     */
-    public function theCurrencyShouldNotBeAdded($currencyName)
-    {
-        $this->indexPage->open();
-
-        Assert::false(
-            $this->indexPage->isSingleResourceOnPage(['name' => $currencyName]),
-            sprintf('Currency with name %s was created, but it should not.', $currencyName)
         );
     }
 

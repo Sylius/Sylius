@@ -13,13 +13,13 @@ namespace Sylius\Behat\Context\Domain;
 
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
-use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Updater\UnpaidOrdersStateUpdaterInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Webmozart\Assert\Assert;
 
 /**
