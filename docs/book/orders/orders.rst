@@ -195,8 +195,8 @@ Remember to process the order using order processor and then flush the order man
 
     $order->addPayment($payment);
 
-Shipping a Shipment with a state machine transition
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Completing a Payment with a state machine transition
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Just like in every state machine you can execute its transitions manually. To **pay** for a payment of an order you have to apply
 two transitions ``request_payment`` and ``pay``.
