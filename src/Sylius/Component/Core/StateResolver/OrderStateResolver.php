@@ -21,7 +21,7 @@ use Sylius\Component\Order\StateResolver\StateResolverInterface;
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class OrderStateResolver implements StateResolverInterface
+final class OrderStateResolver implements StateResolverInterface
 {
     /**
      * @var FactoryInterface

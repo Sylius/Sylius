@@ -23,7 +23,7 @@ use Sylius\Component\Core\OrderPaymentTransitions;
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-class OrderPaymentStateResolver implements StateResolverInterface
+final class OrderPaymentStateResolver implements StateResolverInterface
 {
     /**
      * @var FactoryInterface
