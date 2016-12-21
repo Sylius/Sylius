@@ -4,7 +4,7 @@
 {% set code = app.request.query.get('channel') %}
 
 {% for channel in channels %}
-    {% if channel.code is sameas(code) %}
+    {% if channel.code is same as(code) %}
         {% set selected = channel %}
     {% endif %}
 {% endfor %}
