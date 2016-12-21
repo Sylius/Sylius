@@ -152,6 +152,14 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
+     * @When I add it willing to add another one
+     */
+    public function iAddItWillingToAddAnotherOne()
+    {
+        $this->createPage->createAndReturn();
+    }
+
+    /**
      * @When I add the "Has at least one from taxons" rule configured with :firstTaxon
      * @When I add the "Has at least one from taxons" rule configured with :firstTaxon and :secondTaxon
      */
@@ -650,6 +658,17 @@ final class ManagingPromotionsContext implements Context
             $actualValue,
             $value,
             sprintf('Expected last promotion\'s %s to be "%s", but it is "%s".', $field, $value, $actualValue)
+        );
+    }
+
+    /**
+     * @Then I should be redirected back to promotion creation form
+     */
+    public function iShouldBeRedirectedBackToPromotionCreationForm()
+    {
+        Assert::true(
+            $this->createPage->isOpen(),
+            'I should be redirected to promotion creation page, but I am not.'
         );
     }
 

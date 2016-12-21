@@ -32,4 +32,9 @@ interface CreatePageInterface extends SymfonyPageInterface
      * @throws ElementNotFoundException
      */
     public function create();
+
+    /**
+     * @throws ElementNotFoundException
+     */
+    public function createAndReturn();
 }
