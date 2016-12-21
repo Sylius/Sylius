@@ -160,7 +160,6 @@ final class PromotionContext implements Context
 
     /**
      * @Given the store has promotion :promotionName with coupon :couponCode
-     * @Given the store has also promotion :promotionName with coupon :couponCode
      * @Given the store has a promotion :promotionName with a coupon :couponCode that is limited to :usageLimit usages
      */
     public function thereIsPromotionWithCoupon($promotionName, $couponCode, $usageLimit = null)
@@ -371,22 +370,6 @@ final class PromotionContext implements Context
         $amount
     ) {
         $this->createUnitFixedPromotion($promotion, $discount, $this->getPriceRangeFilterConfiguration($amount));
-    }
-
-    /**
-     * @Given /^([^"]+) gives ("(?:€|£|\$)[^"]+") in base currency or ("(?:€|£|\$)[^"]+") in "([^"]+)" off on every product with minimum price at ("(?:€|£|\$)[^"]+")$/
-     */
-    public function thisPromotionGivesInDifferentCurrenciesOffOnEveryProductWithMinimumPriceAt(
-        PromotionInterface $promotion,
-        $baseDiscount,
-        $currencyDiscount,
-        $currencyCode,
-        $minimumPrice
-    ) {
-        $configuration = $this->getPriceRangeFilterConfiguration($minimumPrice);
-        $configuration['amounts'] = [$currencyCode => $currencyDiscount];
-
-        $this->createUnitFixedPromotion($promotion, $baseDiscount, $configuration);
     }
 
     /**

@@ -91,14 +91,6 @@ final class PaypalContext implements Context
     }
 
     /**
-     * @Then I should be redirected back to PayPal Express Checkout page
-     */
-    public function iShouldBeRedirectedToPaypalExpressCheckoutPage()
-    {
-        Assert::true($this->paypalExpressCheckoutPage->isOpen());
-    }
-
-    /**
      * @When I sign in to PayPal and pay successfully
      */
     public function iSignInToPaypalAndPaySuccessfully()
@@ -118,7 +110,6 @@ final class PaypalContext implements Context
     }
 
     /**
-     * @Given /^I tried to pay(?:| again)$/
      * @When /^I try to pay(?:| again)$/
      */
     public function iTryToPayAgain()

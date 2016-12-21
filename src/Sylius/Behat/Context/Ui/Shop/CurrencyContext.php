@@ -49,7 +49,6 @@ final class CurrencyContext implements Context
 
     /**
      * @When I switch to the :currencyCode currency
-     * @When I change my currency to :currencyCode
      * @Given I changed my currency to :currencyCode
      */
     public function iSwitchTheCurrencyToTheCurrency($currencyCode)
@@ -92,15 +91,5 @@ final class CurrencyContext implements Context
                 implode('", "', $this->homePage->getAvailableCurrencies())
             ));
         }
-    }
-
-    /**
-     * @Then I should not be able to shop without base currency
-     */
-    public function iShouldNotBeAbleToShop()
-    {
-        $this->homePage->tryToOpen();
-
-        Assert::false($this->homePage->isOpen(), 'Homepage should not be opened!');
     }
 }

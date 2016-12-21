@@ -88,14 +88,6 @@ final class ManagingCurrenciesContext implements Context
     }
 
     /**
-     * @When I specify its exchange rate as :exchangeRate
-     */
-    public function iSpecifyExchangeRate($exchangeRate)
-    {
-        $this->createPage->specifyExchangeRate($exchangeRate);
-    }
-
-    /**
      * @Then the currency :currency should appear in the store
      * @Then I should see the currency :currency in the list
      */
@@ -134,49 +126,12 @@ final class ManagingCurrenciesContext implements Context
     }
 
     /**
-     * @Then I should not be able to disable this currency
-     */
-    public function iCannotDisableIt()
-    {
-        Assert::true(
-            $this->updatePage->canBeDisabled(),
-            'I should not be able to disable this currency.'
-        );
-    }
-
-    /**
      * @When I save my changes
      * @When I try to save my changes
      */
     public function iSaveMyChanges()
     {
         $this->updatePage->saveChanges();
-    }
-
-    /**
-     * @Then /^(this currency) should be disabled$/
-     */
-    public function thisCurrencyShouldBeDisabled(CurrencyInterface $currency)
-    {
-        $this->indexPage->open();
-
-        Assert::true(
-            $this->indexPage->isCurrencyDisabled($currency),
-            sprintf('Currency %s should be disabled but it is not.', $currency->getCode())
-        );
-    }
-
-    /**
-     * @Then /^(this currency) should be enabled$/
-     */
-    public function thisCurrencyShouldBeEnabled(CurrencyInterface $currency)
-    {
-        $this->indexPage->open();
-
-        Assert::true(
-            $this->indexPage->isCurrencyEnabled($currency),
-            sprintf('Currency %s should be enabled but it is not.', $currency->getCode())
-        );
     }
 
     /**
@@ -209,19 +164,6 @@ final class ManagingCurrenciesContext implements Context
         Assert::true(
             $this->indexPage->isSingleResourceOnPage([$element => $codeValue]),
             sprintf('Currency with %s %s cannot be found.', $element, $codeValue)
-        );
-    }
-
-    /**
-     * @Then the currency :currencyName should not be added
-     */
-    public function theCurrencyShouldNotBeAdded($currencyName)
-    {
-        $this->indexPage->open();
-
-        Assert::false(
-            $this->indexPage->isSingleResourceOnPage(['name' => $currencyName]),
-            sprintf('Currency with name %s was created, but it should not.', $currencyName)
         );
     }
 

@@ -171,20 +171,9 @@ final class ManagingCustomersContext implements Context
 
     /**
      * @Given /^I want to edit (this customer)$/
-     * @Given I want to edit the customer :customer
      */
     public function iWantToEditThisCustomer(CustomerInterface $customer)
     {
-        $this->updatePage->open(['id' => $customer->getId()]);
-    }
-
-    /**
-     * @Given I want to change my password
-     */
-    public function iWantToChangeMyPassword()
-    {
-        $customer = $this->sharedStorage->get('customer');
-
         $this->updatePage->open(['id' => $customer->getId()]);
     }
 
@@ -416,14 +405,6 @@ final class ManagingCustomersContext implements Context
     public function iSpecifyItsPasswordAs($password)
     {
         $this->createPage->specifyPassword($password);
-    }
-
-    /**
-     * @When I change my password to :password
-     */
-    public function iSpecifyMyPasswordAs($password)
-    {
-        $this->updatePage->changePassword($password);
     }
 
     /**

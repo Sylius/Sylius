@@ -179,30 +179,6 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
-     * @When /^I move up ("[^"]+" taxon)$/
-     */
-    public function iWantToMoveUpTaxon(TaxonInterface $taxon)
-    {
-        $this->createPage->moveUp($taxon);
-    }
-
-    /**
-     * @Given /^I move down ("[^"]+" taxon)$/
-     */
-    public function iMoveDownTaxon(TaxonInterface $taxon)
-    {
-        $this->createPage->moveDown($taxon);
-    }
-
-    /**
-     * @Given /^I choose ("[^"]+" as a parent taxon)$/
-     */
-    public function iChooseAsAParentTaxon(TaxonInterface $taxon)
-    {
-        $this->createPage->chooseParent($taxon);
-    }
-
-    /**
      * @Given /^I change its (parent taxon to "[^"]+")$/
      */
     public function iChangeItsParentTaxonTo(TaxonInterface $taxon)
@@ -557,35 +533,5 @@ final class ManagingTaxonsContext implements Context
             $this->updatePage->getValidationMessageForImageAtPlace(((int) $matches[0][0]) - 1),
             'Image code must be unique within this taxon.'
         );
-    }
-
-    /**
-     * @Then the first taxon on the list should be :taxon
-     */
-    public function theFirstTaxonOnTheListShouldBe(TaxonInterface $taxon)
-    {
-        $this->createPage->open();
-
-        Assert::same(
-            $this->createPage->getLeafNameFromPosition(0),
-            $taxon->getName(),
-            sprintf(
-                'Expected %s as a first taxon, but got %s.',
-                $taxon->getName(),
-                $this->createPage->getLeafNameFromPosition(0)
-            )
-        );
-    }
-
-    /**
-     * @Then they should have order like :firstTaxonName, :secondTaxonName, :thirdTaxonName and :fourthTaxonName
-     */
-    public function theyShouldHaveOrderLikeAnd(...$taxonsNames)
-    {
-        $leaves = $this->createPage->getLeaves();
-
-        foreach ($leaves as $key => $leaf) {
-            Assert::contains($taxonsNames[$key], $leaf->getText());
-        }
     }
 }

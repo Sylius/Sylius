@@ -316,7 +316,6 @@ final class AccountContext implements Context
 
     /**
      * @When I view the summary of the order :order
-     * @When /^I am viewing the summary of (this order)$/
      */
     public function iViewTheSummaryOfTheOrder(OrderInterface $order)
     {

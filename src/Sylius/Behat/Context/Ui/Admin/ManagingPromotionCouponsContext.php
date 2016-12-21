@@ -84,7 +84,6 @@ final class ManagingPromotionCouponsContext implements Context
 
     /**
      * @Given /^I want to view all coupons of (this promotion)$/
-     * @Given /^I want to view all coupons of ("[^"]+" promotion)$/
      * @When /^I browse all coupons of ("[^"]+" promotion)$/
      */
     public function iWantToViewAllCouponsOfThisPromotion(PromotionInterface $promotion)

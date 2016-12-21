@@ -87,30 +87,6 @@ final class UserContext implements Context
     }
 
     /**
-     * @When I try to delete my own account
-     */
-    public function iTryDeletingMyOwnAccount()
-    {
-        $admin = $this->sharedStorage->get('administrator');
-
-        $this->customerShowPage->open(['id' => $admin->getId()]);
-    }
-
-    /**
-     * @Then I should not be able to do it
-     */
-    public function iShouldNotBeAbleToDeleteMyOwnAccount()
-    {
-        try {
-            $this->customerShowPage->deleteAccount();
-        } catch (ElementNotFoundException $exception) {
-            return;
-        }
-
-        throw new \DomainException('Delete account should throw an exception!');
-    }
-
-    /**
      * @Then the user account should be deleted
      */
     public function accountShouldBeDeleted()

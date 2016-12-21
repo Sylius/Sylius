@@ -137,8 +137,6 @@ final class ZoneContext implements Context
     /**
      * @Given /^(it)(?:| also) has the ("([^"]+)" country) member$/
      * @Given /^(this zone)(?:| also) has the ("([^"]+)" country) member$/
-     * @Given /^(this shipping zone)(?:| also) has the ("([^"]+)" country) member$/
-     * @Given /^(this tax zone)(?:| also) has the ("([^"]+)" country) member$/
      */
     public function itHasTheCountryMemberAndTheCountryMember(
         ZoneInterface $zone,

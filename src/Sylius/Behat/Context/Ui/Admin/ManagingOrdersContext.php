@@ -97,7 +97,6 @@ final class ManagingOrdersContext implements Context
     /**
      * @Given /^I am viewing the summary of (this order)$/
      * @When I view the summary of the order :order
-     * @When /^I view the summary of (this order made by "[^"]+")$/
      */
     public function iSeeTheOrder(OrderInterface $order)
     {
@@ -509,7 +508,6 @@ final class ManagingOrdersContext implements Context
 
     /**
      * @Then /^(its) discount should be ([^"]+)$/
-     * @Then the :itemName should have :discount discount
      */
     public function theItemShouldHaveDiscount($itemName, $discount)
     {
@@ -770,7 +768,6 @@ final class ManagingOrdersContext implements Context
     /**
      * @Then the order :order should have order payment state :orderPaymentState
      * @Then /^(this order) should have order payment state "([^"]+)"$/
-     * @Then /^(its) payment state should be "([^"]+)"$/
      */
     public function theOrderShouldHavePaymentState(OrderInterface $order, $orderPaymentState)
     {
@@ -781,9 +778,7 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then the order :order should have order shipping state :orderShipmentState
      * @Then /^(this order) should have order shipping state "([^"]+)"$/
-     * @Then /^(its) shipping state should be "([^"]+)"$/
      */
     public function theOrderShouldHaveShipmentState(OrderInterface $order, $orderShipmentState)
     {

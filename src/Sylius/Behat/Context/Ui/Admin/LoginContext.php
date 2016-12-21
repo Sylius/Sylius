@@ -52,7 +52,6 @@ final class LoginContext implements Context
 
     /**
      * @When I specify the username as :username
-     * @When I do not specify the user name
      */
     public function iSpecifyTheUsername($username = null)
     {

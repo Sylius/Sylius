@@ -54,14 +54,6 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function chooseParent(TaxonInterface $taxon)
-    {
-        $this->getElement('parent')->selectOption($taxon->getName(), false);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function deleteTaxonOnPageByName($name)
     {
         $leaves = $this->getLeaves();
@@ -126,32 +118,6 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     }
 
     /**
-     * {@inheritDoc}
-     */
-    public function moveUp(TaxonInterface $taxon)
-    {
-        $this->moveLeaf($taxon, self::MOVE_DIRECTION_UP);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function moveDown(TaxonInterface $taxon)
-    {
-        $this->moveLeaf($taxon, self::MOVE_DIRECTION_DOWN);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getLeafNameFromPosition($position, TaxonInterface $parentTaxon = null)
-    {
-        $firstTaxonElement = $this->getLeaves($parentTaxon)[0];
-
-        return $firstTaxonElement->getText();
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function getLeaves(TaxonInterface $parentTaxon = null)
@@ -210,40 +176,9 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             'images' => '#sylius_taxon_images',
             'language_tab' => '[data-locale="%locale%"] .title',
             'name' => '#sylius_taxon_translations_%language%_name',
-            'parent' => '#sylius_taxon_parent',
             'slug' => '#sylius_taxon_translations_%language%_slug',
             'tree' => '.ui.list',
         ]);
-    }
-
-    /**
-     * @param TaxonInterface $taxon
-     * @param string $direction
-     *
-     * @throws ElementNotFoundException
-     */
-    private function moveLeaf(TaxonInterface $taxon, $direction)
-    {
-        Assert::oneOf($direction, [self::MOVE_DIRECTION_UP, self::MOVE_DIRECTION_DOWN]);
-
-        $leaves = $this->getLeaves();
-        foreach ($leaves as $leaf) {
-            if ($leaf->getText() === $taxon->getName()) {
-                $moveButton = $leaf->getParent()->find('css', sprintf('.sylius-taxon-move-%s', $direction));
-                $moveButton->click();
-
-                $moveButton->waitFor(5, function () use ($moveButton) {
-                    return $this->isOpen() && !$moveButton->hasClass('loading');
-                });
-
-                return;
-            }
-        }
-
-        throw new ElementNotFoundException(
-            $this->getDriver(),
-            sprintf('Move %s button for %s taxon', $direction, $taxon->getName())
-        );
     }
 
     /**

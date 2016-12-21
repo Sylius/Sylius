@@ -75,23 +75,6 @@ final class ExchangeRateContext implements Context
         $this->saveExchangeRate($exchangeRate);
     }
 
-
-    /**
-     * @Given /^the exchange rate ratio between "([^"]+)" currency and "([^"]+)" currency has changed to ([0-9\.]+)$/
-     */
-    public function theExchangeRateRatioForSourceAndTargetHasChangedTo(
-        $sourceCurrencyCode,
-        $targetCurrencyCode,
-        $ratio
-    ) {
-        $exchangeRate = $this->exchangeRateRepository->findOneWithCurrencyPair($sourceCurrencyCode, $targetCurrencyCode);
-
-        $exchangeRate->setRatio((float) $ratio);
-
-        $this->sharedStorage->set('exchange_rate', $exchangeRate);
-        $this->entityManager->flush();
-    }
-
     /**
      * @param CurrencyInterface $sourceCurrency
      * @param CurrencyInterface $targetCurrency

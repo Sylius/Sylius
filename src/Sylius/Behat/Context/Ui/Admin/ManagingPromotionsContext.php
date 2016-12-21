@@ -198,14 +198,6 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @When I add the :actionType action
-     */
-    public function iAddTheAction($actionType)
-    {
-        $this->createPage->addAction($actionType);
-    }
-
-    /**
      * @When /^it is(?:| also) configured with amount of "(?:€|£|\$)([^"]+)" for "([^"]+)" channel$/
      */
     public function itIsConfiguredWithAmountForChannel($amount, $channelName)
@@ -248,7 +240,6 @@ final class ManagingPromotionsContext implements Context
 
     /**
      * @When /^I add the "([^"]+)" action configured with a percentage value of (?:|-)([^"]+)% for ("[^"]+" channel)$/
-     * @When I add the :actionType action configured without a percentage value for :channelName channel
      */
     public function iAddTheActionConfiguredWithAPercentageValueForChannel($actionType, $percentage = null, $channelName)
     {

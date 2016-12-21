@@ -440,14 +440,6 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then /^this product price should be "(?:€|£|\$)([^"]+)"$/
-     */
-    public function thisProductPriceShouldBeEqualTo($price)
-    {
-        $this->assertElementValue('price', $price);
-    }
-
-    /**
      * @Then this product name should be :name
      */
     public function thisProductElementShouldBe($name)
@@ -461,14 +453,6 @@ final class ManagingProductsContext implements Context
     public function iShouldBeNotifiedThatIsRequired($element)
     {
         $this->assertValidationMessage($element, sprintf('Please enter product %s.', $element));
-    }
-
-    /**
-     * @Then I should be notified that price is required
-     */
-    public function iShouldBeNotifiedThatPriceIsRequired()
-    {
-        $this->assertValidationMessage('price', 'Please enter the price.');
     }
 
     /**
@@ -867,17 +851,6 @@ final class ManagingProductsContext implements Context
         Assert::false(
             $this->productReviewIndexPage->isSingleResourceOnPage(['reviewSubject' => $product->getName()]),
             sprintf('There should be no reviews of %s.', $product->getName())
-        );
-    }
-
-    /**
-     * @Then /^the product for ("[^"]+" currency) and ("[^"]+" channel) should be priced at "(?:€|£|\$)([^"]+)"$/
-     */
-    public function theProductForCurrencyAndChannelShouldBePricedAt(CurrencyInterface $currency, ChannelInterface $channel, $price)
-    {
-        Assert::same(
-            $this->updateSimpleProductPage->getPricingConfigurationForChannelAndCurrencyCalculator($channel, $currency),
-            $price
         );
     }
 

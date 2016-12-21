@@ -159,7 +159,6 @@ final class ManagingExchangeRatesContext implements Context
 
     /**
      * @Then I should see :count exchange rates on the list
-     * @Then there should be no exchange rates on the list
      */
     public function iShouldSeeExchangeRatesOnTheList($count = 0)
     {
@@ -219,8 +218,6 @@ final class ManagingExchangeRatesContext implements Context
 
     /**
      * @Then the exchange rate between :sourceCurrencyName and :targetCurrencyName should not be added
-     * @Then the exchange rate with source currency :sourceCurrencyName should not be added
-     * @Then the exchange rate with target currency :targetCurrencyName should not be added
      */
     public function theExchangeRateBetweenAndShouldNotBeAdded($sourceCurrencyName, $targetCurrencyName)
     {

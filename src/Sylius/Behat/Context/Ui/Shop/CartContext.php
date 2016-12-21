@@ -68,7 +68,6 @@ final class CartContext implements Context
     }
 
     /**
-     * @Given I am at the summary of my cart
      * @When I see the summary of my cart
      */
     public function iOpenCartSummaryPage()
@@ -145,7 +144,6 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then tax total value should be :taxTotal
      * @Then my cart taxes should be :taxTotal
      */
     public function myCartTaxesShouldBe($taxTotal)
@@ -160,7 +158,6 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then shipping total value should be :shippingTotal
      * @Then my cart shipping total should be :shippingTotal
      * @Then my cart shipping should be for free
      */
@@ -176,7 +173,6 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then my cart promotions should be :promotionsTotal
      * @Then my discount should be :promotionsTotal
      */
     public function myDiscountShouldBe($promotionsTotal)
@@ -243,7 +239,6 @@ final class CartContext implements Context
 
     /**
      * @Then /^(product "[^"]+") price should not be decreased$/
-     * @Then /^(its|theirs) price should not be decreased$/
      */
     public function productPriceShouldNotBeDecreased(ProductInterface $product)
     {
@@ -270,9 +265,7 @@ final class CartContext implements Context
     }
 
     /**
-     * @Given /^I added (products "([^"]+)" and "([^"]+)") to the cart$/
      * @When /^I add (products "([^"]+)" and "([^"]+)") to the cart$/
-     * @Given /^I added (products "([^"]+)", "([^"]+)" and "([^"]+)") to the cart$/
      * @When /^I add (products "([^"]+)", "([^"]+)" and "([^"]+)") to the cart$/
      */
     public function iAddMultipleProductsToTheCart(array $products)
@@ -283,9 +276,7 @@ final class CartContext implements Context
     }
 
     /**
-     * @Given I added :variantName variant of product :product to the cart
      * @When I add :variantName variant of product :product to the cart
-     * @When I have :variantName variant of product :product in the cart
      * @When /^I add "([^"]+)" variant of (this product) to the cart$/
      */
     public function iAddProductToTheCartSelectingVariant($variantName, ProductInterface $product)

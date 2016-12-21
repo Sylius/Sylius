@@ -96,14 +96,6 @@ final class CustomerContext implements Context
     }
 
     /**
-     * @Given the store has customer :email with last name :lastName
-     */
-    public function theStoreHasCustomerWithLastName($email, $lastName)
-    {
-        $this->createCustomer($email, null, $lastName);
-    }
-
-    /**
      * @Given the store has customer :email with name :fullName since :since
      */
     public function theStoreHasCustomerWithNameAndRegistrationDate($email, $fullName, $since)
@@ -140,18 +132,6 @@ final class CustomerContext implements Context
         $lastName = count($names) > 1 ? $names[1] : null;
 
         $this->createCustomerWithUserAccount($email, $password, true, $firstName, $lastName);
-    }
-
-    /**
-     * @Given there is an administrator :name identified by an email :email and a password :password
-     */
-    public function thereIsAdministratorIdentifiedByEmailAndPassword($name, $email, $password)
-    {
-        $names = explode(' ', $name);
-        $firstName = $names[0];
-        $lastName = count($names) > 1 ? $names[1] : null;
-
-        $this->createCustomerWithUserAccount($email, $password, true, $firstName, $lastName, 'ROLE_ADMINISTRATION_ACCESS');
     }
 
     /**

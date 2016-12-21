@@ -27,7 +27,7 @@ final class ManagingCustomerGroupsContext implements Context
      * @var CreatePageInterface
      */
     private $createPage;
-    
+
     /**
      * @var IndexPageInterface
      */
@@ -103,7 +103,6 @@ final class ManagingCustomerGroupsContext implements Context
 
     /**
      * @When /^I want to edit (this customer group)$/
-     * @When I want to edit the customer group :customerGroup
      */
     public function iWantToEditThisCustomerGroup(CustomerGroupInterface $customerGroup)
     {

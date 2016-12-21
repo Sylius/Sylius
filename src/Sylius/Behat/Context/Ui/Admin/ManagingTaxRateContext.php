@@ -81,7 +81,6 @@ final class ManagingTaxRateContext implements Context
 
     /**
      * @When I specify its amount as :amount%
-     * @When I change its amount to :amount%
      * @When I do not specify its amount
      * @When I remove its amount
      */

@@ -48,18 +48,4 @@ final class ManagingTranslatableEntitiesContext implements Context
     {
         $this->taxonCreatePage->describeItAs('Foo bar', $localeCode);
     }
-
-    /**
-     * @Then I should not be able to translate it in :localeCode
-     */
-    public function iShouldNotBeAbleToTranslateItIn($localeCode)
-    {
-        try {
-            $this->taxonCreatePage->describeItAs('Foo bar', $localeCode);
-        } catch (ElementNotFoundException $exception) {
-            return;
-        }
-
-        throw new \DomainException(sprintf('I should not be able to translate it in "%s", but I am.', $localeCode));
-    }
 }

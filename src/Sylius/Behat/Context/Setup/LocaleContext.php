@@ -96,7 +96,6 @@ final class LocaleContext implements Context
      * @Given the store has disabled locale :localeCode
      * @Given the locale :localeCode is disabled (as well)
      * @Given the locale :localeCode gets disabled
-     * @Given language :localeCode is disabled
      */
     public function theStoreHasDisabledLocale($localeCode)
     {

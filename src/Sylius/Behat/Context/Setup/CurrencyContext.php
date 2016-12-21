@@ -106,9 +106,6 @@ final class CurrencyContext implements Context
     }
 
     /**
-     * @Given the store has disabled currency :currencyCode
-     * @Given the currency :currencyCode is disabled (as well)
-     * @Given the currency :currencyCode gets disabled
      * @Given the currency :currencyCode has been disabled
      */
     public function theStoreHasDisabledCurrency($currencyCode)

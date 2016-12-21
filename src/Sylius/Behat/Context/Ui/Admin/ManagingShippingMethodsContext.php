@@ -102,7 +102,6 @@ final class ManagingShippingMethodsContext implements Context
 
     /**
      * @When I specify its position as :position
-     * @When I do not specify its position
      */
     public function iSpecifyItsPositionAs($position = null)
     {

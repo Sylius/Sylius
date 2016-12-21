@@ -347,7 +347,6 @@ final class ProductContext implements Context
     /**
      * @Given /^the (product "[^"]+") has(?:| a) "([^"]+)" variant priced at ("[^"]+")$/
      * @Given /^(this product) has "([^"]+)" variant priced at ("[^"]+")$/
-     * @Given /^(this product) has "([^"]+)" variant priced at ("[^"]+") in ("[^"]+" channel)$/
      */
     public function theProductHasVariantPricedAt(
         ProductInterface $product,
@@ -548,7 +547,6 @@ final class ProductContext implements Context
 
     /**
      * @Given /^there (?:is|are) (\d+) unit(?:|s) of (product "([^"]+)") available in the inventory$/
-     * @When product :product quantity is changed to :quantity
      */
     public function thereIsQuantityOfProducts($quantity, ProductInterface $product)
     {
@@ -618,7 +616,6 @@ final class ProductContext implements Context
 
     /**
      * @Given the :product product's :optionValueName size belongs to :shippingCategory shipping category
-     * @Given /^(this product) "([^"]+)" size belongs to ("([^"]+)" shipping category)$/
      */
     public function thisProductSizeBelongsToShippingCategory(ProductInterface $product, $optionValueName, ShippingCategoryInterface $shippingCategory)
     {
@@ -627,17 +624,16 @@ final class ProductContext implements Context
         $productVariant = $product->getVariants()->filter(function ($variant) use ($code) {
             return $code === $variant->getCode();
         })->first();
-        
+
         Assert::notNull($productVariant, sprintf('Product variant with given code %s not exists!', $code));
-        
+
         $productVariant->setShippingCategory($shippingCategory);
         $this->objectManager->flush();
     }
 
     /**
      * @Given /^(this product) has (this product option)$/
-     * @Given /^(this product) has a ("[^"]+" option)$/
-     * @Given /^(this product) has an ("[^"]+" option)$/
+     * @Given /^(this product) has (?:a|an) ("[^"]+" option)$/
      */
     public function thisProductHasThisProductOption(ProductInterface $product, ProductOptionInterface $option)
     {
@@ -698,37 +694,6 @@ final class ProductContext implements Context
         $product->addImage($productImage);
 
         $this->objectManager->flush($product);
-    }
-
-    /**
-     * @Given /^(it) has different prices for different channels and currencies$/
-     */
-    public function itHasDifferentPricesForDifferentChannelsAndCurrencies(ProductInterface $product)
-    {
-        /** @var ProductVariantInterface $variant */
-        $variant = $this->defaultVariantResolver->getVariant($product);
-
-        $variant->setPricingCalculator(Calculators::CHANNEL_AND_CURRENCY_BASED);
-    }
-
-    /**
-     * @Given /^(it) has price ("[^"]+") for ("[^"]+" channel) and "([^"]+)" currency$/
-     */
-    public function itHasPriceForChannelAndCurrency(
-        ProductInterface $product,
-        $price,
-        ChannelInterface $channel,
-        $currency
-    ) {
-        /** @var ProductVariantInterface $variant */
-        $variant = $this->defaultVariantResolver->getVariant($product);
-
-        $pricingConfiguration = $variant->getPricingConfiguration();
-        $pricingConfiguration[$channel->getCode()][$currency] = $price;
-
-        $variant->setPricingConfiguration($pricingConfiguration);
-
-        $this->objectManager->flush();
     }
 
     /**
