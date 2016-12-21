@@ -83,7 +83,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     private function getFieldElement($element)
     {
         $element = $this->getElement($element);
-        while (null !== $element && !($element->hasClass('field'))) {
+        while (null !== $element && !$element->hasClass('field')) {
             $element = $element->getParent();
         }
 

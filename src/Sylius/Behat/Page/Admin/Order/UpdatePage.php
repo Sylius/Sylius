@@ -39,7 +39,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     {
         $this->specifyAddress($address, UpdatePage::TYPE_SHIPPING);
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -73,7 +73,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 
         return $message === $validationMessage->getText();
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -127,7 +127,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     private function getFieldElement($element)
     {
         $element = $this->getElement($element);
-        while (null !== $element && !($element->hasClass('field'))) {
+        while (null !== $element && !$element->hasClass('field')) {
             $element = $element->getParent();
         }
 

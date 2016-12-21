@@ -18,8 +18,8 @@ use Sylius\Behat\Page\Shop\Cart\SummaryPageInterface;
 use Sylius\Behat\Page\Shop\Product\ShowPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\Product\Model\ProductOptionInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -500,6 +500,6 @@ final class CartContext implements Context
      */
     private function getPriceFromString($price)
     {
-        return (int) round((str_replace(['€', '£', '$'], '', $price) * 100), 2);
+        return (int) round(str_replace(['€', '£', '$'], '', $price) * 100, 2);
     }
 }

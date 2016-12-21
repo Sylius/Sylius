@@ -12,7 +12,6 @@
 namespace Sylius\Behat\Service;
 
 use Sylius\Component\Core\Model\AdminUserInterface;
-use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 

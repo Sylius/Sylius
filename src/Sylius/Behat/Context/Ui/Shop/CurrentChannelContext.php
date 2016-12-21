@@ -13,7 +13,6 @@ namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Service\Setter\ChannelContextSetterInterface;
-use Sylius\Component\Core\Model\ChannelInterface;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>

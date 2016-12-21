@@ -15,6 +15,7 @@ use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Element\NodeElement;
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Attribute\Factory\AttributeFactoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -23,9 +24,7 @@ use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductTranslationInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Core\Pricing\Calculators;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
-use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Product\Factory\ProductFactoryInterface;
 use Sylius\Component\Product\Generator\SlugGeneratorInterface;
@@ -34,11 +33,11 @@ use Sylius\Component\Product\Model\ProductAttributeValueInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Sylius\Component\Product\Model\ProductVariantTranslationInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
-use Sylius\Component\Resource\Model\TranslationInterface;
-use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Resource\Model\TranslationInterface;
+use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
+use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Webmozart\Assert\Assert;
 
@@ -607,7 +606,7 @@ final class ProductContext implements Context
 
         $variant->addOptionValue($optionValue);
         $variant->addChannelPricing($this->createChannelPricingForChannel($price, $this->sharedStorage->get('channel')));
-        $variant->setCode(sprintf("%s_%s", $product->getCode(), $optionValueName));
+        $variant->setCode(sprintf('%s_%s', $product->getCode(), $optionValueName));
         $variant->setName($product->getName());
 
         $product->addVariant($variant);
@@ -619,7 +618,7 @@ final class ProductContext implements Context
      */
     public function thisProductSizeBelongsToShippingCategory(ProductInterface $product, $optionValueName, ShippingCategoryInterface $shippingCategory)
     {
-        $code = sprintf("%s_%s", $product->getCode(), $optionValueName);
+        $code = sprintf('%s_%s', $product->getCode(), $optionValueName);
         /** @var ProductVariantInterface $productVariant */
         $productVariant = $product->getVariants()->filter(function ($variant) use ($code) {
             return $code === $variant->getCode();
@@ -753,7 +752,7 @@ final class ProductContext implements Context
      */
     private function getPriceFromString($price)
     {
-        return (int) round(($price * 100), 2);
+        return (int) round($price * 100, 2);
     }
 
     /**

@@ -12,8 +12,8 @@
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
-use Sylius\Behat\Page\Admin\ExchangeRate\IndexPageInterface;
 use Sylius\Behat\Page\Admin\ExchangeRate\CreatePageInterface;
+use Sylius\Behat\Page\Admin\ExchangeRate\IndexPageInterface;
 use Sylius\Behat\Page\Admin\ExchangeRate\UpdatePageInterface;
 use Sylius\Component\Currency\Model\ExchangeRateInterface;
 use Webmozart\Assert\Assert;

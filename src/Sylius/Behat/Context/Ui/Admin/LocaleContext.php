@@ -12,9 +12,7 @@
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
-use Sylius\Behat\Page\Admin\Administrator\UpdatePageInterface;
 use Sylius\Behat\Page\Admin\DashboardPageInterface;
-use Sylius\Component\Core\Model\AdminUserInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Webmozart\Assert\Assert;
 
@@ -23,11 +21,6 @@ use Webmozart\Assert\Assert;
  */
 final class LocaleContext implements Context
 {
-    /**
-     * @var UpdatePageInterface
-     */
-    private $adminUpdatePage;
-
     /**
      * @var DashboardPageInterface
      */
@@ -39,16 +32,11 @@ final class LocaleContext implements Context
     private $translator;
 
     /**
-     * @param UpdatePageInterface $adminUpdatePage
      * @param DashboardPageInterface $dashboardPage
      * @param TranslatorInterface $translator
      */
-    public function __construct(
-        UpdatePageInterface $adminUpdatePage,
-        DashboardPageInterface $dashboardPage,
-        TranslatorInterface $translator
-    ) {
-        $this->adminUpdatePage = $adminUpdatePage;
+    public function __construct(DashboardPageInterface $dashboardPage, TranslatorInterface $translator)
+    {
         $this->dashboardPage = $dashboardPage;
         $this->translator = $translator;
     }

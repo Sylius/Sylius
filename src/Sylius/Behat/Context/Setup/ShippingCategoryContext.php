@@ -12,7 +12,6 @@
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
-use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -40,26 +39,18 @@ final class ShippingCategoryContext implements Context
     private $shippingCategoryRepository;
 
     /**
-     * @var ObjectManager
-     */
-    private $shippingCategoryManager;
-
-    /**
      * @param SharedStorageInterface $sharedStorage
      * @param FactoryInterface $shippingCategoryFactory
      * @param RepositoryInterface $shippingCategoryRepository
-     * @param ObjectManager $shippingCategoryManager
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         FactoryInterface $shippingCategoryFactory,
-        RepositoryInterface $shippingCategoryRepository,
-        ObjectManager $shippingCategoryManager
+        RepositoryInterface $shippingCategoryRepository
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->shippingCategoryFactory = $shippingCategoryFactory;
         $this->shippingCategoryRepository = $shippingCategoryRepository;
-        $this->shippingCategoryManager = $shippingCategoryManager;
     }
 
     /**

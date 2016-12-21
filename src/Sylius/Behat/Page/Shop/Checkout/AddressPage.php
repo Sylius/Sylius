@@ -18,8 +18,6 @@ use Behat\Mink\Session;
 use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Component\Core\Factory\AddressFactoryInterface;
 use Sylius\Component\Core\Model\AddressInterface;
-use Sylius\Component\Locale\Context\LocaleContextInterface;
-use Symfony\Component\Intl\Intl;
 use Symfony\Component\Routing\RouterInterface;
 use Webmozart\Assert\Assert;
 
@@ -413,7 +411,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
     private function getFieldElement($element)
     {
         $element = $this->getElement($element);
-        while (null !== $element && !($element->hasClass('field'))) {
+        while (null !== $element && !$element->hasClass('field')) {
             $element = $element->getParent();
         }
 
@@ -425,7 +423,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
      */
     private function waitForLoginAction()
     {
-        $this->getDocument()->waitFor(5, function () {
+        return $this->getDocument()->waitFor(5, function () {
             return !$this->hasElement('login_password');
         });
     }

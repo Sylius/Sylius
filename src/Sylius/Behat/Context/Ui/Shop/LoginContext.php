@@ -18,7 +18,6 @@ use Sylius\Behat\Page\Shop\Account\RegisterPageInterface;
 use Sylius\Behat\Page\Shop\Account\ResetPasswordPageInterface;
 use Sylius\Behat\Page\Shop\HomePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
-use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -47,11 +46,6 @@ final class LoginContext implements Context
     private $resetPasswordPage;
 
     /**
-     * @var CurrentPageResolverInterface
-     */
-    private $currentPageResolver;
-
-    /**
      * @var NotificationCheckerInterface
      */
     private $notificationChecker;
@@ -61,7 +55,6 @@ final class LoginContext implements Context
      * @param LoginPageInterface $loginPage
      * @param RegisterPageInterface $registerPage
      * @param ResetPasswordPageInterface $resetPasswordPage
-     * @param CurrentPageResolverInterface $currentPageResolver
      * @param NotificationCheckerInterface $notificationChecker
      */
     public function __construct(
@@ -69,14 +62,12 @@ final class LoginContext implements Context
         LoginPageInterface $loginPage,
         RegisterPageInterface $registerPage,
         ResetPasswordPageInterface $resetPasswordPage,
-        CurrentPageResolverInterface $currentPageResolver,
         NotificationCheckerInterface $notificationChecker
     ) {
         $this->homePage = $homePage;
         $this->loginPage = $loginPage;
         $this->registerPage = $registerPage;
         $this->resetPasswordPage = $resetPasswordPage;
-        $this->currentPageResolver = $currentPageResolver;
         $this->notificationChecker = $notificationChecker;
     }
 

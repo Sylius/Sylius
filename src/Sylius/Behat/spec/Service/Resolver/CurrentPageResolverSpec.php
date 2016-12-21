@@ -30,7 +30,7 @@ final class CurrentPageResolverSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Behat\Service\Resolver\CurrentPageResolver');
+        $this->shouldHaveType(CurrentPageResolver::class);
     }
 
     function it_implements_current_page_resolver_interface()

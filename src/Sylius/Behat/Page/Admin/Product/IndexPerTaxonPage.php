@@ -11,11 +11,8 @@
 
 namespace Sylius\Behat\Page\Admin\Product;
 
-use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\NodeElement;
-use Behat\Mink\Exception\UnsupportedDriverActionException;
 use Sylius\Behat\Page\Admin\Crud\IndexPage as CrudIndexPage;
-use Sylius\Component\Core\Model\ProductInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -35,7 +32,7 @@ class IndexPerTaxonPage extends CrudIndexPage implements IndexPerTaxonPageInterf
                 return false;
             }
         }
-        
+
         return true;
     }
 

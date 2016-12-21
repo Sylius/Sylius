@@ -16,20 +16,12 @@ use Sylius\Behat\Page\External\PaypalExpressCheckoutPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\CompletePageInterface;
 use Sylius\Behat\Page\Shop\Order\ShowPageInterface;
 use Sylius\Behat\Service\Mocker\PaypalApiMocker;
-use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Component\Core\Repository\OrderRepositoryInterface;
-use Webmozart\Assert\Assert;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 final class PaypalContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
-    private $sharedStorage;
-
     /**
      * @var PaypalExpressCheckoutPageInterface
      */
@@ -51,32 +43,21 @@ final class PaypalContext implements Context
     private $paypalApiMocker;
 
     /**
-     * @var OrderRepositoryInterface
-     */
-    private $orderRepository;
-
-    /**
-     * @param SharedStorageInterface $sharedStorage
      * @param PaypalExpressCheckoutPageInterface $paypalExpressCheckoutPage
      * @param ShowPageInterface $orderDetails
      * @param CompletePageInterface $summaryPage
      * @param PaypalApiMocker $paypalApiMocker
-     * @param OrderRepositoryInterface $orderRepository
      */
     public function __construct(
-        SharedStorageInterface $sharedStorage,
         PaypalExpressCheckoutPageInterface $paypalExpressCheckoutPage,
         ShowPageInterface $orderDetails,
         CompletePageInterface $summaryPage,
-        PaypalApiMocker $paypalApiMocker,
-        OrderRepositoryInterface $orderRepository
+        PaypalApiMocker $paypalApiMocker
     ) {
-        $this->sharedStorage = $sharedStorage;
         $this->paypalExpressCheckoutPage = $paypalExpressCheckoutPage;
         $this->orderDetails = $orderDetails;
         $this->summaryPage = $summaryPage;
         $this->paypalApiMocker = $paypalApiMocker;
-        $this->orderRepository = $orderRepository;
     }
 
     /**

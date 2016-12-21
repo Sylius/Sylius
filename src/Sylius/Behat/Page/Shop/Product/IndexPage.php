@@ -11,7 +11,6 @@
 
 namespace Sylius\Behat\Page\Shop\Product;
 
-use Behat\Mink\Driver\Selenium2Driver;
 use Sylius\Behat\Page\SymfonyPage;
 
 /**

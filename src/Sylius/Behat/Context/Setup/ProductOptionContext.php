@@ -16,8 +16,8 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Product\Repository\ProductOptionRepositoryInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>

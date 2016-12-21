@@ -26,10 +26,10 @@ final class LexicalContext implements Context
         $this->validatePriceString($price);
 
         if ('-' === $sign) {
-            $price = $price * -1;
+            $price *= -1;
         }
 
-        return (int) round(($price * 100), 2);
+        return (int) round($price * 100, 2);
     }
 
     /**
@@ -47,7 +47,7 @@ final class LexicalContext implements Context
      */
     private function validatePriceString($price)
     {
-        if (strlen(substr(strrchr($price, "."), 1)) > 2) {
+        if (strlen(substr(strrchr($price, '.'), 1)) > 2) {
             throw new \InvalidArgumentException('Price string should not have more than 2 decimal digits.');
         }
     }

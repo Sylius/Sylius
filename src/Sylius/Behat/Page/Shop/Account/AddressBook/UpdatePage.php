@@ -11,7 +11,6 @@
 
 namespace Sylius\Behat\Page\Shop\Account\AddressBook;
 
-use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Page\SymfonyPage;
 
 /**

@@ -13,14 +13,12 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
-use Sylius\Component\Channel\Factory\ChannelFactoryInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Currency\CurrencyStorageInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Test\Services\DefaultChannelFactoryInterface;
-use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Component\Currency\Model\CurrencyInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -44,11 +42,6 @@ final class ChannelContext implements Context
     private $defaultChannelFactory;
 
     /**
-     * @var ChannelFactoryInterface
-     */
-    private $channelFactory;
-
-    /**
      * @var ChannelRepositoryInterface
      */
     private $channelRepository;
@@ -67,7 +60,6 @@ final class ChannelContext implements Context
      * @param SharedStorageInterface $sharedStorage
      * @param DefaultChannelFactoryInterface $unitedStatesChannelFactory
      * @param DefaultChannelFactoryInterface $defaultChannelFactory
-     * @param ChannelFactoryInterface $channelFactory
      * @param ChannelRepositoryInterface $channelRepository
      * @param ObjectManager $channelManager
      * @param CurrencyStorageInterface $currencyStorage
@@ -76,7 +68,6 @@ final class ChannelContext implements Context
         SharedStorageInterface $sharedStorage,
         DefaultChannelFactoryInterface $unitedStatesChannelFactory,
         DefaultChannelFactoryInterface $defaultChannelFactory,
-        ChannelFactoryInterface $channelFactory,
         ChannelRepositoryInterface $channelRepository,
         ObjectManager $channelManager,
         CurrencyStorageInterface $currencyStorage
@@ -84,7 +75,6 @@ final class ChannelContext implements Context
         $this->sharedStorage = $sharedStorage;
         $this->unitedStatesChannelFactory = $unitedStatesChannelFactory;
         $this->defaultChannelFactory = $defaultChannelFactory;
-        $this->channelFactory = $channelFactory;
         $this->channelRepository = $channelRepository;
         $this->channelManager = $channelManager;
         $this->currencyStorage = $currencyStorage;

@@ -11,14 +11,14 @@
 
 namespace Sylius\Behat\Page\Shop\Checkout;
 
-use Behat\Mink\Session;
 use Behat\Mink\Element\NodeElement;
+use Behat\Mink\Session;
 use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Sylius\Component\Core\Model\AddressInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
-use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -358,7 +358,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
      */
     private function getPriceFromString($price)
     {
-        return (int) round((str_replace(['€', '£', '$'], '', $price) * 100), 2);
+        return (int) round(str_replace(['€', '£', '$'], '', $price) * 100, 2);
     }
 
     /**

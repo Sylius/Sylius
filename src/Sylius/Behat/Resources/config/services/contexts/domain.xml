@@ -64,7 +64,6 @@
         </service>
 
         <service id="sylius.behat.context.domain.cart" class="Sylius\Behat\Context\Domain\CartContext">
-            <argument type="service" id="__symfony__.sylius.repository.order" />
             <argument type="service" id="__symfony__.sylius.manager.order" />
             <argument type="service" id="__symfony__.sylius.expired_carts_remover" />
             <tag name="fob.context_service" />

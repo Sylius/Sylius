@@ -30,7 +30,6 @@ use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
-use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Webmozart\Assert\Assert;
@@ -81,11 +80,6 @@ final class CheckoutContext implements Context
     private $orderDetails;
 
     /**
-     * @var OrderRepositoryInterface
-     */
-    private $orderRepository;
-
-    /**
      * @var FactoryInterface
      */
     private $addressFactory;
@@ -109,7 +103,6 @@ final class CheckoutContext implements Context
      * @param SelectShippingPageInterface $selectShippingPage
      * @param CompletePageInterface $completePage
      * @param ShowPageInterface $orderDetails
-     * @param OrderRepositoryInterface $orderRepository
      * @param FactoryInterface $addressFactory
      * @param CurrentPageResolverInterface $currentPageResolver
      * @param AddressComparatorInterface $addressComparator
@@ -123,7 +116,6 @@ final class CheckoutContext implements Context
         SelectShippingPageInterface $selectShippingPage,
         CompletePageInterface $completePage,
         ShowPageInterface $orderDetails,
-        OrderRepositoryInterface $orderRepository,
         FactoryInterface $addressFactory,
         CurrentPageResolverInterface $currentPageResolver,
         AddressComparatorInterface $addressComparator
@@ -136,7 +128,6 @@ final class CheckoutContext implements Context
         $this->selectShippingPage = $selectShippingPage;
         $this->completePage = $completePage;
         $this->orderDetails = $orderDetails;
-        $this->orderRepository = $orderRepository;
         $this->addressFactory = $addressFactory;
         $this->currentPageResolver = $currentPageResolver;
         $this->addressComparator = $addressComparator;

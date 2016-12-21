@@ -26,10 +26,8 @@ use Sylius\Behat\Page\Admin\ProductReview\IndexPageInterface as ProductReviewInd
 use Sylius\Behat\Page\SymfonyPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
-use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Component\Currency\Model\CurrencyInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
@@ -385,7 +383,7 @@ final class ManagingProductsContext implements Context
     public function iShouldBeNotifiedOfFailure()
     {
         $this->notificationChecker->checkNotification(
-            "Cannot delete, the product is in use.",
+            'Cannot delete, the product is in use.',
             NotificationType::failure()
         );
     }
@@ -605,7 +603,7 @@ final class ManagingProductsContext implements Context
      * @Then /^the slug of the ("[^"]+" product) should(?:| still) be "([^"]+)"$/
      * @Then /^the slug of the ("[^"]+" product) should(?:| still) be "([^"]+)" (in the "[^"]+" locale)$/
      */
-    public function productSlugShouldBe(ProductInterface $product, $slug, $locale = "en_US")
+    public function productSlugShouldBe(ProductInterface $product, $slug, $locale = 'en_US')
     {
         $this->updateSimpleProductPage->open(['id' => $product->getId()]);
 
@@ -725,9 +723,9 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then /^(this product) should not have(?:| also) an image with a code "([^"]*)"$/
+     * @Then /^this product should not have(?:| also) an image with a code "([^"]*)"$/
      */
-    public function thisProductShouldNotHaveAnImageWithCode(ProductInterface $product, $code)
+    public function thisProductShouldNotHaveAnImageWithCode($code)
     {
         /** @var UpdateSimpleProductPageInterface|UpdateConfigurableProductPageInterface $currentPage */
         $currentPage = $this->resolveCurrentPage();

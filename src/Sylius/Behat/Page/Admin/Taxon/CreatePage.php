@@ -14,7 +14,6 @@ namespace Sylius\Behat\Page\Admin\Taxon;
 use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
-use Behat\Mink\Exception\UnsupportedDriverActionException;
 use Sylius\Behat\Behaviour\SpecifiesItsCode;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 use Sylius\Component\Core\Model\TaxonInterface;
@@ -136,6 +135,8 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
                 return $leaf->findAll('css', '.item > .content > .header');
             }
         }
+
+        return [];
     }
 
     /**

@@ -14,32 +14,30 @@ namespace Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
-use Sylius\Component\Core\Currency\CurrencyStorageInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
-use Sylius\Component\Core\Model\PromotionCouponInterface;
-use Sylius\Component\Core\OrderCheckoutTransitions;
-use Sylius\Component\Currency\Model\CurrencyInterface;
-use Sylius\Component\Order\Processor\OrderProcessorInterface;
-use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
-use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
+use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
-use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Currency\Model\CurrencyInterface;
+use Sylius\Component\Customer\Model\CustomerInterface;
+use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Order\OrderTransitions;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\PaymentTransitions;
+use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Shipping\ShipmentTransitions;
-use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\User\Model\UserInterface;
-use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -62,11 +60,6 @@ final class OrderContext implements Context
     private $orderFactory;
 
     /**
-     * @var OrderProcessorInterface
-     */
-    private $orderProcessor;
-
-    /**
      * @var FactoryInterface
      */
     private $orderItemFactory;
@@ -80,11 +73,6 @@ final class OrderContext implements Context
      * @var RepositoryInterface
      */
     private $currencyRepository;
-
-    /**
-     * @var CurrencyStorageInterface
-     */
-    private $currencyStorage;
 
     /**
      * @var FactoryInterface
@@ -115,11 +103,9 @@ final class OrderContext implements Context
      * @param SharedStorageInterface $sharedStorage
      * @param OrderRepositoryInterface $orderRepository
      * @param FactoryInterface $orderFactory
-     * @param OrderProcessorInterface $orderProcessor
      * @param FactoryInterface $orderItemFactory
      * @param OrderItemQuantityModifierInterface $itemQuantityModifier
      * @param RepositoryInterface $currencyRepository
-     * @param CurrencyStorageInterface $currencyStorage
      * @param FactoryInterface $customerFactory
      * @param RepositoryInterface $customerRepository
      * @param ObjectManager $objectManager
@@ -130,11 +116,9 @@ final class OrderContext implements Context
         SharedStorageInterface $sharedStorage,
         OrderRepositoryInterface $orderRepository,
         FactoryInterface $orderFactory,
-        OrderProcessorInterface $orderProcessor,
         FactoryInterface $orderItemFactory,
         OrderItemQuantityModifierInterface $itemQuantityModifier,
         RepositoryInterface $currencyRepository,
-        CurrencyStorageInterface $currencyStorage,
         FactoryInterface $customerFactory,
         RepositoryInterface $customerRepository,
         ObjectManager $objectManager,
@@ -144,11 +128,9 @@ final class OrderContext implements Context
         $this->sharedStorage = $sharedStorage;
         $this->orderRepository = $orderRepository;
         $this->orderFactory = $orderFactory;
-        $this->orderProcessor = $orderProcessor;
         $this->orderItemFactory = $orderItemFactory;
         $this->itemQuantityModifier = $itemQuantityModifier;
         $this->currencyRepository = $currencyRepository;
-        $this->currencyStorage = $currencyStorage;
         $this->customerFactory = $customerFactory;
         $this->customerRepository = $customerRepository;
         $this->objectManager = $objectManager;
@@ -664,7 +646,7 @@ final class OrderContext implements Context
      */
     private function getPriceFromString($price)
     {
-        return (int) round((str_replace(['€', '£', '$'], '', $price) * 100), 2);
+        return (int) round(str_replace(['€', '£', '$'], '', $price) * 100, 2);
     }
 
     /**
