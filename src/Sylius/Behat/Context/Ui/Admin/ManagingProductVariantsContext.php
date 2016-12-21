@@ -675,6 +675,38 @@ final class ManagingProductVariantsContext implements Context
     {
         // Intentionally left blank to fulfill context expectation
     }
+    
+    /**
+     * @When I change its quantity of inventory to :amount
+     */
+    public function iChangeItsQuantityOfInventoryTo($amount)
+    {
+        $this->updatePage->specifyCurrentStock($amount);
+    }
+
+    /**
+     * @Then /^(this variant) should have a (\d+) item currently in stock$/
+     */
+    public function thisVariantShouldHaveAItemCurrentlyInStock(ProductVariantInterface $productVariant, $amountInStock)
+    {
+        $this->indexPage->open(['productId' => $productVariant->getProduct()->getId()]);
+
+        Assert::same(
+            $this->indexPage->getOnHandQuantityFor($productVariant),
+            (int) $amountInStock
+        );
+    }
+
+    /**
+     * @Then I should be notified that on hand quantity must be greater than the number of on hold units
+     */
+    public function iShouldBeNotifiedThatOnHandQuantityMustBeGreaterThanTheNumberOfOnHoldUnits()
+    {
+        Assert::same(
+            $this->updatePage->getValidationMessage('on_hand'),
+            'On hand must be greater than the number of on hold units'
+        );
+    }
 
     /**
      * @param string $element

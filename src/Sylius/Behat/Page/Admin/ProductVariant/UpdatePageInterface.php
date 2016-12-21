@@ -60,4 +60,9 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
      * @return string
      */
     public function getNameInLanguage($language);
+
+    /**
+     * @param int $amount
+     */
+    public function specifyCurrentStock($amount);
 }
