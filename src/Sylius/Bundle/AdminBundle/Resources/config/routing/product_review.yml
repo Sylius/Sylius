@@ -4,7 +4,6 @@ sylius_admin_product_review:
         section: admin
         templates: SyliusAdminBundle:Crud
         except: ['show', 'create']
-        redirect: update
         grid: sylius_admin_product_review
         vars:
             all:

@@ -31,8 +31,7 @@ sylius_admin_product_variant_create:
             grid: sylius_admin_product_variant
             section: admin
             redirect:
-                route: sylius_admin_product_variant_index
-                parameters: { productId: $productId }
+                route: $redirect
             permission: true
             vars:
                 route:

@@ -1,6 +1,11 @@
 <div class="ui basic segment">
     <div class="ui buttons">
-        <button class="ui labeled icon primary button" type="submit"><i class="plus icon"></i>{{- 'sylius.ui.create'|trans -}}</button>
+        <button class="ui labeled icon positive button" type="submit" formaction="{{ path(routes.create, parameters|merge({'redirect': 'referer'})) }}">
+            <i class="exchange icon"></i>{{- 'sylius.ui.create_and_add_another'|trans -}}
+        </button>
+        <button class="ui labeled icon primary button" type="submit" formaction="{{ path(routes.create, parameters|merge({'redirect': {'route': routes.update, 'parameters': parameters}})) }}">
+            <i class="plus icon"></i>{{- 'sylius.ui.create'|trans -}}
+        </button>
         <div class="or" data-text="{{ 'sylius.ui.or'|trans }}"></div>
         {% include '@SyliusUi/Form/Buttons/_cancel.html.twig' with {'path': paths.cancel|default(null)} %}
     </div>

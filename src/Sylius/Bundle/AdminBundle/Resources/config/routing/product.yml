@@ -4,7 +4,6 @@ sylius_admin_product:
         section: admin
         templates: SyliusAdminBundle:Crud
         except: ['show', 'index']
-        redirect: update
         grid: sylius_admin_product
         vars:
             all:
@@ -49,7 +48,7 @@ sylius_admin_product_create:
         _sylius:
             section: admin
             template: SyliusAdminBundle:Crud:create.html.twig
-            redirect: sylius_admin_product_update
+            redirect: $redirect
             vars:
                 subheader: sylius.ui.manage_your_product_catalog
                 templates:
@@ -67,7 +66,7 @@ sylius_admin_product_create_simple:
             factory:
                 method: createWithVariant
             template: SyliusAdminBundle:Crud:create.html.twig
-            redirect: sylius_admin_product_update
+            redirect: $redirect
             vars:
                 subheader: sylius.ui.manage_your_product_catalog
                 templates:

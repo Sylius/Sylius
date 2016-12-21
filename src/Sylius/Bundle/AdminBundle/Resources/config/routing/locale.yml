@@ -4,7 +4,9 @@ sylius_admin_locale:
         section: admin
         templates: SyliusAdminBundle:Crud
         except: ['show', 'delete']
-        redirect: index
+        redirect:
+            create: index
+            update: index
         grid: sylius_admin_locale
         permission: true
         vars:

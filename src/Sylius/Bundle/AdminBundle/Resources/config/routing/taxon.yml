@@ -4,7 +4,8 @@ sylius_admin_taxon:
         section: admin
         templates: SyliusAdminBundle:Taxon
         except: ['show', 'index']
-        redirect: update
+        redirect:
+            create: $redirect
         permission: true
         vars:
             all:

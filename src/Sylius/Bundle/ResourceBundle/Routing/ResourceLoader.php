@@ -165,8 +165,8 @@ final class ResourceLoader implements LoaderInterface
         if (isset($configuration['templates']) && in_array($actionName, ['show', 'index', 'create', 'update'], true)) {
             $defaults['_sylius']['template'] = sprintf('%s:%s.html.twig', $configuration['templates'], $actionName);
         }
-        if (isset($configuration['redirect']) && in_array($actionName, ['create', 'update'], true)) {
-            $defaults['_sylius']['redirect'] = $this->getRouteName($metadata, $configuration, $configuration['redirect']);
+        if (isset($configuration['redirect'][$actionName]) && in_array($actionName, ['create', 'update'], true)) {
+            $defaults['_sylius']['redirect'] = $this->provideRedirectRouteOrParameter($metadata, $configuration, $actionName);
         }
         if (isset($configuration['permission'])) {
             $defaults['_sylius']['permission'] = $configuration['permission'];
@@ -180,6 +180,22 @@ final class ResourceLoader implements LoaderInterface
         }
 
         return $this->routeFactory->createRoute($path, $defaults, [], [], '', [], $methods);
+    }
+
+    /**
+     * @param MetadataInterface $metadata
+     * @param array $configuration
+     * @param string $actionName
+     *
+     * @return string
+     */
+    private function provideRedirectRouteOrParameter(MetadataInterface $metadata, array $configuration, $actionName)
+    {
+        if ('$' === substr($configuration['redirect'][$actionName], 0, 1)) {
+            return $configuration['redirect'][$actionName];
+        }
+
+        return $this->getRouteName($metadata, $configuration, $configuration['redirect'][$actionName]);
     }
 
     /**

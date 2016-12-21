@@ -4,7 +4,6 @@ sylius_admin_zone:
         section: admin
         templates: SyliusAdminBundle:Crud
         except: ['show', 'create']
-        redirect: update
         grid: sylius_admin_zone
         permission: true
         vars:
@@ -28,7 +27,7 @@ sylius_admin_zone_create:
                 arguments:
                     type: $type
             template: SyliusAdminBundle:Crud:create.html.twig
-            redirect: sylius_admin_zone_update
+            redirect: $redirect
             permission: true
             vars:
                 subheader: sylius.ui.manage_geographical_zones

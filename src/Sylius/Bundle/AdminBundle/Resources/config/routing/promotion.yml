@@ -4,7 +4,8 @@ sylius_admin_promotion:
         section: admin
         templates: SyliusAdminBundle:Crud
         except: ['show']
-        redirect: update
+        redirect:
+            create: $redirect
         grid: sylius_admin_promotion
         permission: true
         vars:
@@ -18,19 +19,3 @@ sylius_admin_promotion:
                 templates:
                     form: "@SyliusAdmin/Promotion/_form.html.twig"
     type: sylius.resource
-
-sylius_admin_promotion_create:
-    path: /promotions/new
-    methods: [GET, POST]
-    defaults:
-        _controller: sylius.controller.promotion:createAction
-        _sylius:
-            section: admin
-            template: SyliusAdminBundle:Promotion:create.html.twig
-            redirect: $redirect
-            vars:
-                subheader: sylius.ui.manage_discounts_and_promotional_campaigns
-                templates:
-                    form: '@SyliusAdmin/Promotion/_form.html.twig'
-                route:
-                    name: sylius_admin_promotion_create

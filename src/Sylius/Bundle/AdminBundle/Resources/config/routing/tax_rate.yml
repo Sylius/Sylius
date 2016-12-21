@@ -4,7 +4,8 @@ sylius_admin_tax_rate:
         section: admin
         templates: SyliusAdminBundle:Crud
         except: ['show']
-        redirect: update
+        redirect:
+            create: $redirect
         grid: sylius_admin_tax_rate
         permission: true
         vars:

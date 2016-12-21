@@ -5,7 +5,9 @@ sylius_admin_admin_user:
         path: users
         templates: SyliusAdminBundle:Crud
         except: ['show']
-        redirect: index
+        redirect:
+            create: index
+            update: index
         grid: sylius_admin_admin_user
         permission: true
         vars:
