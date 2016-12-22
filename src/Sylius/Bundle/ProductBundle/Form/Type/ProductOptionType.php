@@ -15,6 +15,7 @@ use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceTranslationsType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -29,6 +30,10 @@ final class ProductOptionType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('position', IntegerType::class, [
+                'required' => false,
+                'label' => 'sylius.form.option.position',
+            ])
             ->add('translations', ResourceTranslationsType::class, [
                 'entry_type' => ProductOptionTranslationType::class,
                 'label' => 'sylius.form.option.name',

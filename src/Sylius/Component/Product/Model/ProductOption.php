@@ -38,6 +38,11 @@ class ProductOption implements ProductOptionInterface
     protected $code;
 
     /**
+     * @var int
+     */
+    protected $position;
+
+    /**
      * @var Collection|ProductOptionValueInterface[]
      */
     protected $values;
@@ -96,6 +101,22 @@ class ProductOption implements ProductOptionInterface
     public function setName($name)
     {
         $this->getTranslation()->setName($name);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
     }
 
     /**

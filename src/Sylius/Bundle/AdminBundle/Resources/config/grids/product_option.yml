@@ -9,8 +9,14 @@ sylius_grid:
                         method: createListQueryBuilder
                         arguments: ["%locale%"]
             sorting:
-                code: asc
+                position: asc
             fields:
+                position:
+                    type: twig
+                    label: sylius.ui.position
+                    sortable: ~
+                    options:
+                        template: "@SyliusUi/Grid/Field/position.html.twig"
                 code:
                     type: string
                     label: sylius.ui.code

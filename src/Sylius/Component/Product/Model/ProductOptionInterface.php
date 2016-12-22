@@ -26,6 +26,16 @@ interface ProductOptionInterface extends
     TranslatableInterface
 {
     /**
+     * @return int
+     */
+    public function getPosition();
+
+    /**
+     * @param int $position
+     */
+    public function setPosition($position);
+
+    /**
      * @return Collection|ProductOptionValueInterface[]
      */
     public function getValues();
