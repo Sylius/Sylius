@@ -209,6 +209,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     }
 
 
+
     /**
      * {@inheritdoc}
      */

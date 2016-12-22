@@ -178,6 +178,14 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @When I add it willing to add another one
+     */
+    public function iAddItWillingToAddAnotherOne()
+    {
+        $this->createConfigurableProductPage->createAndAddAnother();
+    }
+
+    /**
      * @When I disable its inventory tracking
      */
     public function iDisableItsTracking()
@@ -1046,6 +1054,17 @@ final class ManagingProductsContext implements Context
         Assert::same(
             $this->updateSimpleProductPage->getValidationMessageForImageAtPosition((int) $imageNumber - 1),
             'Image code must be unique within this product.'
+        );
+    }
+
+    /**
+     * @Then I should be redirected back to product creation form
+     */
+    public function iShouldBeRedirectedBackToProductCreationForm()
+    {
+        Assert::true(
+            $this->createConfigurableProductPage->isOpen(),
+            'I should be redirected to product creation page, but I am not.'
         );
     }
 

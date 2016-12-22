@@ -17,4 +17,6 @@ sylius_admin_admin_user:
                     form: SyliusAdminBundle:AdminUser:_form.html.twig
             index:
                 icon: lock
+            create:
+                add_another: false
     type: sylius.resource

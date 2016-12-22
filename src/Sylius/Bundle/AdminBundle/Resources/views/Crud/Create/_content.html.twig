@@ -9,10 +9,14 @@
         {{ form_widget(form) }}
     {% endif %}
 
+    {% set paths = {'cancel': path(configuration.getRouteName('index'), parameters)} %}
     {% block buttons %}
-        {% set paths = {'cancel': path(configuration.getRouteName('index'), parameters)} %}
-        {% set routes = {'create': action, 'update': configuration.getRouteName('update')} %}
-        {% include '@SyliusUi/Form/Buttons/_create.html.twig' with {'paths': paths, 'routes': routes} %}
+        {% if configuration.vars.add_another is defined and configuration.vars.add_another == false %}
+            {% include '@SyliusUi/Form/Buttons/_createSimple.html.twig' with {'paths': paths} %}
+        {% else %}
+            {% set routes = {'create': action, 'update': configuration.getRouteName('update')} %}
+            {% include '@SyliusUi/Form/Buttons/_create.html.twig' with {'paths': paths, 'routes': routes} %}
+        {% endif %}
     {% endblock %}
 
     {{ form_row(form._token) }}

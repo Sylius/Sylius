@@ -55,3 +55,13 @@ Feature: Adding a new product variant
         And I add it
         Then I should be notified that it has been successfully created
         And the "VODKA_WYBOROWA_PREMIUM" variant of the "Wyborowa Vodka" product should appear in the store
+
+    @ui @javascript
+    Scenario: Adding a new product variant and returning to creation form to add another one
+        Given I want to create a new variant of this product
+        When I specify its code as "VODKA_WYBOROWA_PREMIUM"
+        And I set its price to "$100.00" for "United States" channel
+        And I add it willing to add another one
+        Then I should be notified that it has been successfully created
+        And I should be redirected back to product variant creation form for this product
+        And the "VODKA_WYBOROWA_PREMIUM" variant of the "Wyborowa Vodka" product should appear in the store

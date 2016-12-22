@@ -145,6 +145,14 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
+     * @When I add it willing to add another one
+     */
+    public function iAddItWillingToAddAnotherOne()
+    {
+        $this->createPage->createAndAddAnother();
+    }
+
+    /**
      * @When I disable its inventory tracking
      */
     public function iDisableItsTracking()
@@ -711,6 +719,17 @@ final class ManagingProductVariantsContext implements Context
     public function iDoNotSpecifyAnyInformationAboutVariants()
     {
         // Intentionally left blank to fulfill context expectation
+    }
+
+    /**
+     * @Then /^I should be redirected back to product variant creation form for (this product)$/
+     */
+    public function iShouldBeRedirectedBackToProductVariantCreationForm(ProductInterface $product)
+    {
+        Assert::true(
+            $this->createPage->isOpen(['productId' => $product->getId()]),
+            'I should be redirected to product variant creation page, but I am not.'
+        );
     }
 
     /**
