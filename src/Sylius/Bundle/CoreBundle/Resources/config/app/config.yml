@@ -29,6 +29,12 @@ doctrine:
         entity_managers:
             default:
                 auto_mapping: true
+                mappings:
+                    gedmo_loggable:
+                        type: annotation
+                        prefix: Sylius\Bundle\ResourceBundle\Model
+                        dir: "%kernel.root_dir%/../src/Sylius/Bundle/ResourceBundle/Model"
+                        is_bundle: false
 
 doctrine_cache:
     providers:
@@ -93,7 +99,7 @@ stof_doctrine_extensions:
             tree: true
             sluggable: true
             timestampable: true
-            loggable: false
+            loggable: true
             sortable: true
 
 twig:

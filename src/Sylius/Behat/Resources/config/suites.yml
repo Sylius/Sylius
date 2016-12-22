@@ -40,6 +40,7 @@ imports:
     - suites/ui/locale/managing_locales.yml
     - suites/ui/order/managing_orders.yml
     - suites/ui/order/modifying_address.yml
+    - suites/ui/order/order_history.yml
     - suites/ui/payment/managing_payment_methods.yml
     - suites/ui/product/adding_product_review.yml
     - suites/ui/product/managing_product_association_types.yml

@@ -192,6 +192,22 @@ final class OrderContext implements Context
     }
 
     /**
+     * @Given the customer changed shipping address' street to :street
+     */
+    public function theCustomerChangedShippingAddressStreetTo($street)
+    {
+        /** @var OrderInterface $order */
+        $order = $this->sharedStorage->get('order');
+
+        $shippingAddress = $order->getShippingAddress();
+        $shippingAddress->setStreet($street);
+
+        $this->objectManager->flush();
+
+        $this->applyTransitionOnOrderCheckout($order, OrderCheckoutTransitions::TRANSITION_ADDRESS);
+    }
+
+    /**
      * @Given /^the customer set the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)")$/
      * @Given /^for the billing address (of "[^"]+" in the "[^"]+", "[^"]+" "[^"]+", "[^"]+")$/
      * @Given /^for the billing address (of "[^"]+" in the "[^"]+", "[^"]+" "([^"]+)", "[^"]+", "[^"]+")$/
@@ -215,7 +231,7 @@ final class OrderContext implements Context
     public function theCustomerAddressedItToWithIdenticalBillingAddress(AddressInterface $address)
     {
         $this->theCustomerAddressedItTo($address);
-        $this->forTheBillingAddressOf($address);
+        $this->forTheBillingAddressOf(clone $address);
     }
 
     /**

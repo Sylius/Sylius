@@ -27,6 +27,6 @@ Feature: Modifying a customer's billing address on an order with an applied prom
         And I specify their new billing address as "Los Angeles", "Seaside Fwy", "90802", "United States" for "Lucifer Morningstar"
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And this order should be shipped to "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States"
+        And the order should be billed to "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States"
         And the order's total should still be "$350.00"
         And the order's promotion total should still be "-$50.00"

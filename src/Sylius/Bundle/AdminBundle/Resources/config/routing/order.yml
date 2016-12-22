@@ -19,7 +19,14 @@ sylius_admin_order_show:
         _sylius:
             section: admin
             template: SyliusAdminBundle:Order:show.html.twig
-            permission: true
+
+sylius_admin_order_history:
+    path: /orders/{id}/history
+    defaults:
+        _controller: sylius.controller.order:showAction
+        _sylius:
+            section: admin
+            template: SyliusAdminBundle:Order:history.html.twig
 
 sylius_admin_order_update:
     path: /orders/{id}/edit
