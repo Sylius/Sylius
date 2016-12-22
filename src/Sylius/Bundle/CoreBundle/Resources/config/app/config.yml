@@ -33,7 +33,7 @@ doctrine:
                     gedmo_loggable:
                         type: annotation
                         prefix: Sylius\Bundle\ResourceBundle\Model
-                        dir: "%kernel.root_dir%/../src/Sylius/Bundle/ResourceBundle/Model"
+                        dir: "%sylius.core_bundle.root_dir%/../ResourceBundle/Model"
                         is_bundle: false
 
 doctrine_cache:
