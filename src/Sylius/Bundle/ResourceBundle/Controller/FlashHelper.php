@@ -15,6 +15,7 @@ use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Translation\TranslatorBagInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -28,7 +29,7 @@ final class FlashHelper implements FlashHelperInterface
     private $session;
 
     /**
-     * @var TranslatorBagInterface
+     * @var TranslatorInterface
      */
     private $translator;
 
@@ -39,10 +40,10 @@ final class FlashHelper implements FlashHelperInterface
 
     /**
      * @param SessionInterface $session
-     * @param TranslatorBagInterface $translator
+     * @param TranslatorInterface $translator
      * @param string $defaultLocale
      */
-    public function __construct(SessionInterface $session, TranslatorBagInterface $translator, $defaultLocale)
+    public function __construct(SessionInterface $session, TranslatorInterface $translator, $defaultLocale)
     {
         $this->session = $session;
         $this->translator = $translator;
@@ -129,8 +130,12 @@ final class FlashHelper implements FlashHelperInterface
      */
     private function isTranslationDefined($message, $locale)
     {
-        $defaultCatalogue = $this->translator->getCatalogue($locale);
+        if ($this->translator instanceof TranslatorBagInterface) {
+            $defaultCatalogue = $this->translator->getCatalogue($locale);
 
-        return $defaultCatalogue->has($message, 'flashes');
+            return $defaultCatalogue->has($message, 'flashes');
+        }
+
+        return false;
     }
 }

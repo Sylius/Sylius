@@ -23,6 +23,7 @@ use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Translation\MessageCatalogueInterface;
 use Symfony\Component\Translation\TranslatorBagInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -30,7 +31,7 @@ use Symfony\Component\Translation\TranslatorBagInterface;
  */
 final class FlashHelperSpec extends ObjectBehavior
 {
-    function let(SessionInterface $session, TranslatorBagInterface $translator)
+    function let(SessionInterface $session, TranslatorInterface $translator)
     {
         $this->beConstructedWith($session, $translator, 'en');
     }
@@ -62,6 +63,37 @@ final class FlashHelperSpec extends ObjectBehavior
 
         $translator->getCatalogue('en')->willReturn($messageCatalogue);
 
+        $session->getBag('flashes')->willReturn($flashBag);
+        $flashBag->add(
+            'success',
+            [
+                'message' => 'sylius.resource.create',
+                'parameters' => ['%resource%' => 'Product'],
+            ]
+        )->shouldBeCalled();
+
+        $this->addSuccessFlash($requestConfiguration, ResourceActions::CREATE, $resource);
+    }
+
+    function it_adds_resource_message_flash_bag_is_not_available(
+        SessionInterface $session,
+        TranslatorBagInterface $translator,
+        MessageCatalogueInterface $messageCatalogue,
+        FlashBagInterface $flashBag,
+        MetadataInterface $metadata,
+        RequestConfiguration $requestConfiguration,
+        ResourceInterface $resource
+    ) {
+        $this->beConstructedWith($session, $translator, 'en');
+
+        $metadata->getApplicationName()->willReturn('sylius');
+        $metadata->getHumanizedName()->willReturn('product');
+
+        $requestConfiguration->getMetadata()->willReturn($metadata);
+        $requestConfiguration->getFlashMessage(ResourceActions::CREATE)->willReturn('sylius.product.create');
+
+        $translator->getCatalogue('en')->willReturn($messageCatalogue);
+
         $messageCatalogue->has('sylius.product.create', 'flashes')->willReturn(false);
 
         $session->getBag('flashes')->willReturn($flashBag);
@@ -85,6 +117,8 @@ final class FlashHelperSpec extends ObjectBehavior
         RequestConfiguration $requestConfiguration,
         ResourceInterface $resource
     ) {
+        $this->beConstructedWith($session, $translator, 'en');
+
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getHumanizedName()->willReturn('product');
 
@@ -110,6 +144,8 @@ final class FlashHelperSpec extends ObjectBehavior
         RequestConfiguration $requestConfiguration,
         ResourceInterface $resource
     ) {
+        $this->beConstructedWith($session, $translator, 'en');
+
         $metadata->getApplicationName()->willReturn('app');
         $metadata->getHumanizedName()->willReturn('book');
 
