@@ -114,7 +114,7 @@ final class ProductOptionContext implements Context
         /** @var ProductOptionInterface $productOption */
         $productOption = $this->productOptionFactory->createNew();
         $productOption->setName($name);
-        $productOption->setCode($code ? $code : $this->generateCodeFromName($name));
+        $productOption->setCode($code ? $code : StringInflector::nameToCode($name));
         $productOption->setPosition($position);
 
         $this->sharedStorage->set('product_option', $productOption);
@@ -137,15 +137,5 @@ final class ProductOptionContext implements Context
         $productOptionValue->setCode($code);
 
         return $productOptionValue;
-    }
-
-    /**
-     * @param string $name
-     *
-     * @return string
-     */
-    private function generateCodeFromName($name)
-    {
-        return StringInflector::nameToCode($name);
     }
 }
