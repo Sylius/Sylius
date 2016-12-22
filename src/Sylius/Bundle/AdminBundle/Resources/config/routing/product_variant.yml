@@ -27,11 +27,35 @@ sylius_admin_product_variant_create:
                 method: createForProduct
                 arguments:
                   - expr:service('sylius.repository.product').find($productId)
-            template: "@SyliusAdmin/Crud/create.html.twig"
+            template: "@SyliusAdmin/ProductVariant/create.html.twig"
             grid: sylius_admin_product_variant
             section: admin
             redirect:
-                route: $redirect
+                route: sylius_admin_product_variant_index
+                parameters: { productId: $productId }
+            permission: true
+            vars:
+                route:
+                    parameters:
+                        productId: $productId
+                templates:
+                    form: "@SyliusAdmin/ProductVariant/_form.html.twig"
+                    breadcrumb: "@SyliusAdmin/ProductVariant/Create/_breadcrumb.html.twig"
+
+sylius_admin_product_variant_create_and_add_another:
+    path: /another-new
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.product_variant:createAction
+        _sylius:
+            factory:
+                method: createForProduct
+                arguments:
+                  - expr:service('sylius.repository.product').find($productId)
+            template: "@SyliusAdmin/ProductVariant/create.html.twig"
+            grid: sylius_admin_product_variant
+            section: admin
+            redirect: referer
             permission: true
             vars:
                 route:

@@ -114,7 +114,7 @@ EOT;
             '_controller' => 'sylius.controller.product:createAction',
             '_sylius'     => [
                 'permission' => false,
-                'redirect' => '$redirect',
+                'redirect' => 'sylius_product_update',
             ],
         ];
         $routeFactory->createRoute('/products/new', $createDefaults, [], [], '', [], ['GET', 'POST'])->willReturn($createRoute);
@@ -124,6 +124,7 @@ EOT;
             '_controller' => 'sylius.controller.product:updateAction',
             '_sylius'     => [
                 'permission' => false,
+                'redirect' => 'sylius_product_update',
             ],
         ];
         $routeFactory->createRoute('/products/{id}/edit', $updateDefaults, [], [], '', [], ['GET', 'PUT', 'PATCH'])->willReturn($updateRoute);
@@ -187,7 +188,7 @@ EOT;
             '_controller' => 'sylius.controller.product_option:createAction',
             '_sylius'     => [
                 'permission' => false,
-                'redirect' => '$redirect',
+                'redirect' => 'sylius_product_option_update',
             ],
         ];
         $routeFactory->createRoute('/product-options/new', $createDefaults, [], [], '', [], ['GET', 'POST'])->willReturn($createRoute);
@@ -197,6 +198,7 @@ EOT;
             '_controller' => 'sylius.controller.product_option:updateAction',
             '_sylius'     => [
                 'permission' => false,
+                'redirect' => 'sylius_product_option_update',
             ],
         ];
         $routeFactory->createRoute('/product-options/{id}/edit', $updateDefaults, [], [], '', [], ['GET', 'PUT', 'PATCH'])->willReturn($updateRoute);
@@ -261,7 +263,7 @@ EOT;
             '_controller' => 'sylius.controller.product:createAction',
             '_sylius'     => [
                 'permission' => false,
-                'redirect' => '$redirect',
+                'redirect' => 'sylius_product_update',
             ],
         ];
         $routeFactory->createRoute('/super-duper-products/new', $createDefaults, [], [], '', [], ['GET', 'POST'])->willReturn($createRoute);
@@ -271,6 +273,7 @@ EOT;
             '_controller' => 'sylius.controller.product:updateAction',
             '_sylius'     => [
                 'permission' => false,
+                'redirect' => 'sylius_product_update',
             ],
         ];
         $routeFactory->createRoute('/super-duper-products/{id}/edit', $updateDefaults, [], [], '', [], ['GET', 'PUT', 'PATCH'])->willReturn($updateRoute);
@@ -336,7 +339,7 @@ EOT;
             '_sylius' => [
                 'form'       => 'sylius_product_custom',
                 'permission' => false,
-                'redirect' => '$redirect',
+                'redirect' => 'sylius_product_update',
             ],
         ];
         $routeFactory->createRoute('/products/new', $createDefaults, [], [], '', [], ['GET', 'POST'])->willReturn($createRoute);
@@ -347,6 +350,7 @@ EOT;
             '_sylius' => [
                 'form'       => 'sylius_product_custom',
                 'permission' => false,
+                'redirect' => 'sylius_product_update',
             ],
         ];
         $routeFactory->createRoute('/products/{id}/edit', $updateDefaults, [], [], '', [], ['GET', 'PUT', 'PATCH'])->willReturn($updateRoute);
@@ -414,7 +418,7 @@ EOT;
             '_sylius' => [
                 'section'    => 'admin',
                 'permission' => false,
-                'redirect' => '$redirect',
+                'redirect' => 'sylius_admin_product_update',
             ],
         ];
         $routeFactory->createRoute('/products/new', $createDefaults, [], [], '', [], ['GET', 'POST'])->willReturn($createRoute);
@@ -425,6 +429,7 @@ EOT;
             '_sylius' => [
                 'section'    => 'admin',
                 'permission' => false,
+                'redirect' => 'sylius_admin_product_update',
             ],
         ];
         $routeFactory->createRoute('/products/{id}/edit', $updateDefaults, [], [], '', [], ['GET', 'PUT', 'PATCH'])->willReturn($updateRoute);
@@ -493,7 +498,7 @@ EOT;
             '_sylius' => [
                 'template'   => 'SyliusAdminBundle:Product:create.html.twig',
                 'permission' => false,
-                'redirect' => '$redirect',
+                'redirect' => 'sylius_product_update',
             ],
         ];
         $routeFactory->createRoute('/products/new', $createDefaults, [], [], '', [], ['GET', 'POST'])->willReturn($createRoute);
@@ -504,6 +509,7 @@ EOT;
             '_sylius' => [
                 'template'   => 'SyliusAdminBundle:Product:update.html.twig',
                 'permission' => false,
+                'redirect' => 'sylius_product_update',
             ],
         ];
         $routeFactory->createRoute('/products/{id}/edit', $updateDefaults, [], [], '', [], ['GET', 'PUT', 'PATCH'])->willReturn($updateRoute);
@@ -557,7 +563,7 @@ EOT;
             '_controller' => 'sylius.controller.product:createAction',
             '_sylius'     => [
                 'permission' => false,
-                'redirect' => '$redirect',
+                'redirect' => 'sylius_product_update',
             ],
         ];
         $routeFactory->createRoute('/products/new', $createDefaults, [], [], '', [], ['GET', 'POST'])->willReturn($createRoute);
@@ -567,6 +573,7 @@ EOT;
             '_controller' => 'sylius.controller.product:updateAction',
             '_sylius'     => [
                 'permission' => false,
+                'redirect' => 'sylius_product_update',
             ],
         ];
         $routeFactory->createRoute('/products/{id}/edit', $updateDefaults, [], [], '', [], ['GET', 'PUT', 'PATCH'])->willReturn($updateRoute);
@@ -610,7 +617,7 @@ EOT;
             '_controller' => 'sylius.controller.product:createAction',
             '_sylius'     => [
                 'permission' => false,
-                'redirect' => '$redirect',
+                'redirect' => 'sylius_product_update',
             ],
         ];
         $routeFactory->createRoute('/products/new', $createDefaults, [], [], '', [], ['GET', 'POST'])->willReturn($createRoute);
@@ -655,7 +662,8 @@ EOT;
         $configuration =
 <<<EOT
 alias: sylius.product
-redirect: update
+redirect:
+    create: index
 EOT;
 
         $showDefaults = [
@@ -679,7 +687,7 @@ EOT;
         $createDefaults = [
             '_controller' => 'sylius.controller.product:createAction',
             '_sylius' => [
-                'redirect'   => 'sylius_product_update',
+                'redirect'   => 'sylius_product_index',
                 'permission' => false,
             ],
         ];
@@ -757,7 +765,7 @@ EOT;
             '_sylius' => [
                 'serialization_groups' => ['Default', 'Detailed'],
                 'permission'           => false,
-                'redirect' => '$redirect',
+                'redirect' => 'sylius_product_update',
             ],
         ];
         $routeFactory->createRoute('/products/', $createDefaults, [], [], '', [], ['POST'])->willReturn($createRoute);
@@ -768,6 +776,7 @@ EOT;
             '_sylius' => [
                 'serialization_groups' => ['Default', 'Detailed'],
                 'permission'           => false,
+                'redirect' => 'sylius_product_update',
             ],
         ];
         $routeFactory->createRoute('/products/{id}', $updateDefaults, [], [], '', [], ['PUT', 'PATCH'])->willReturn($updateRoute);
@@ -823,7 +832,7 @@ EOT;
             '_controller' => 'sylius.controller.product:createAction',
             '_sylius'     => [
                 'permission' => false,
-                'redirect' => '$redirect',
+                'redirect' => 'sylius_product_update',
             ],
         ];
         $routeFactory->createRoute('/products/new', $createDefaults, [], [], '', [], ['GET', 'POST'])->willReturn($createRoute);
@@ -891,7 +900,7 @@ EOT;
             '_controller' => 'sylius.controller.product:createAction',
             '_sylius' => [
                 'permission' => false,
-                'redirect' => '$redirect',
+                'redirect' => 'sylius_product_update',
                 'vars'       => [
                     'foo' => 'bar',
                     'bar' => 'foo',
@@ -908,7 +917,8 @@ EOT;
                 'vars'       => [
                     'foo' => 'bar',
                     'abc' => 'xyz',
-                ]
+                ],
+                'redirect' => 'sylius_product_update',
             ],
         ];
         $routeFactory->createRoute('/products/{id}/edit', $updateDefaults, [], [], '', [], ['GET', 'PUT', 'PATCH'])->willReturn($updateRoute);
@@ -976,7 +986,7 @@ EOT;
             '_controller' => 'sylius.controller.product:createAction',
             '_sylius'     => [
                 'permission' => true,
-                'redirect' => '$redirect',
+                'redirect' => 'sylius_product_update',
             ],
         ];
         $routeFactory->createRoute('/products/new', $createDefaults, [], [], '', [], ['GET', 'POST'])
@@ -987,6 +997,7 @@ EOT;
             '_controller' => 'sylius.controller.product:updateAction',
             '_sylius'     => [
                 'permission' => true,
+                'redirect' => 'sylius_product_update',
             ],
         ];
         $routeFactory->createRoute('/products/{id}/edit', $updateDefaults, [], [], '', [], ['GET', 'PUT', 'PATCH'])

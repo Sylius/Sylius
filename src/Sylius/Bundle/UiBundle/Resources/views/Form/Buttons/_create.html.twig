@@ -3,7 +3,7 @@
         <button class="ui labeled icon positive button" type="submit" formaction="{{ path(routes.create, parameters|merge({'redirect': 'referer'})) }}">
             <i class="exchange icon"></i>{{- 'sylius.ui.create_and_add_another'|trans -}}
         </button>
-        <button class="ui labeled icon primary button" type="submit" formaction="{{ path(routes.create, parameters|merge({'redirect': {'route': routes.update, 'parameters': parameters}})) }}">
+        <button class="ui labeled icon primary button" type="submit" formaction="{{ path(routes.create, parameters|merge({'redirect': routes.update})) }}">
             <i class="plus icon"></i>{{- 'sylius.ui.create'|trans -}}
         </button>
         <div class="or" data-text="{{ 'sylius.ui.or'|trans }}"></div>

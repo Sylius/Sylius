@@ -27,12 +27,36 @@ sylius_admin_promotion_coupon_create:
                 method: createForPromotion
                 arguments:
                   - expr:service('sylius.repository.promotion').find($promotionId)
-            template: "@SyliusAdmin/Crud/create.html.twig"
+            template: "@SyliusAdmin/PromotionCoupon/create.html.twig"
             grid: sylius_admin_promotion_coupon
             section: admin
             redirect:
                 route: sylius_admin_promotion_coupon_index
                 parameters: { promotionId: $promotionId }
+            permission: true
+            vars:
+                route:
+                    parameters:
+                        promotionId: $promotionId
+                templates:
+                    form: "@SyliusAdmin/PromotionCoupon/_form.html.twig"
+                    breadcrumb: "@SyliusAdmin/PromotionCoupon/Create/_breadcrumb.html.twig"
+                subheader: sylius.ui.manage_discounts_and_promotional_campaigns
+
+sylius_admin_promotion_coupon_create_and_add_another:
+    path: /another-new
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.promotion_coupon:createAction
+        _sylius:
+            factory:
+                method: createForPromotion
+                arguments:
+                  - expr:service('sylius.repository.promotion').find($promotionId)
+            template: "@SyliusAdmin/PromotionCoupon/create.html.twig"
+            grid: sylius_admin_promotion_coupon
+            section: admin
+            redirect: referer
             permission: true
             vars:
                 route:
