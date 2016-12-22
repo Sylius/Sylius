@@ -47,7 +47,7 @@ Feature: Sorting listed products
         And I should see a product with name "Xtreme Pug"
         But the first product on the list should have name "Pug of Love"
 
-    @ui @todo
+    @ui
     Scenario: Sorting products by their names from a to z
         When I browse products from taxon "Fluffy Pets"
         And I sort products alphabetically from a to z
@@ -55,7 +55,7 @@ Feature: Sorting listed products
         And the first product on the list should have name "Berserk Pug"
         And the last product on the list should have name "Xtreme Pug"
 
-    @ui @todo
+    @ui
     Scenario: Sorting products by their names from z to a
         When I browse products from taxon "Fluffy Pets"
         And I sort products alphabetically from z to a
