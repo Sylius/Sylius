@@ -219,6 +219,22 @@ final class ProductContext implements Context
     }
 
     /**
+     * @When I sort products alphabetically from a to z
+     */
+    public function iSortProductsAlphabeticallyFromAToZ()
+    {
+        $this->indexPage->sort('From A to Z');
+    }
+
+    /**
+     * @When I sort products alphabetically from z to a
+     */
+    public function iSortProductsAlphabeticallyFromZToA()
+    {
+        $this->indexPage->sort('From Z to A');
+    }
+
+    /**
      * @When I clear filter
      */
     public function iClearFilter()
