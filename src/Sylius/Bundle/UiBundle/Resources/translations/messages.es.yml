@@ -85,6 +85,7 @@ sylius:
         base_currency: Moneda base
         bill_to: Facturar a
         billing_address: Dirección de facturación
+        billing_address_changes_history: Historia de cambios de dirección de facturación
         blocks: Bloques
         body: Cuerpo
         browse_products: Ver los productos
@@ -110,9 +111,11 @@ sylius:
         change_position: Cambiar posición
         change_shipping_method: Cambiar método de envío
         change_your_password: Cambiar mi contraseña
+        changes: Cambios
         channel: Canal
         channels: Canales
         charges_and_taxes: Tasas e impuestos
+        cheapest_first: Más baratos primero
         checkbox: Casilla de verificación
         checking_out_as: Pagar como
         checkout: Completar pedido
@@ -347,6 +350,7 @@ sylius:
         go_level_up: Nivel superior
         go_to_dashboard: Ir al panel
         grand_total: Total
+        greater_than: Más que
         group_membership: Pertenencia a grupo
         guest: Invitado
         guest_customer: Cliente invitado
@@ -393,6 +397,7 @@ sylius:
         lastname: Apellidos
         latest_orders: Pedidos
         latest_products: Últimos productos
+        less_than: Menos que
         links: Enlaces
         list_coupons: Listar cupones
         list_variants: Lista de variantes
@@ -400,6 +405,7 @@ sylius:
         locales: Idiomas
         lock: Bloquear
         locked: Bloqueado
+        logged_at: Sesión iniciada el
         logged_in_as: Conectado como %username%
         login: Iniciar sesión
         login_button: Iniciar sesión
@@ -425,6 +431,7 @@ sylius:
         manage_emails: Administrar mensajes de correo electrónico
         manage_exchange_rates: Administrar tasas de cambio
         manage_geographical_zones: Administrar zonas geográficas
+        manage_inventory: Administrar inventario
         manage_languages_available_in_the_store: Administrar idiomas disponibles en la tienda
         manage_metadata: Administrar metadatos
         manage_options: Administrar opciones
@@ -462,6 +469,7 @@ sylius:
         metadata_index: Metadatos
         method: Método
         modified: Fecha de modificacion
+        most_expensive_first: Más caros primero
         move_down: Bajar
         move_up: Subir
         my_account: Mi cuenta
@@ -555,8 +563,10 @@ sylius:
         order_value: Valor del pedido
         ordered: Pedido realizado
         orders: Pedidos
+        orders_statistics: Estadísticas de pedidos
         original_price: Precio original
         out_of_stock: Sin stock
+        overall_this_customer_has_placed_orders_across_all_channels.choice: '{0}|{1}Este cliente ha hecho un pedido|]1,Inf]En total, este cliente ha hecho %count% pedidos entre todos los canales'
         overview_of_your_store: Resumen de tu tienda
         page: Página
         pages: Páginas
@@ -678,6 +688,7 @@ sylius:
         select_address_from_book: Seleccionar dirección de mi libreta
         select_products: Seleccione productos
         select_taxon: Seleccionar taxonomía
+        send: Enviar
         server_has_encountered_some_errors: El servidor ha encontrado algunos errores.
         set_a_new_password_for_your_account: Crear una nueva contraseña para su cuenta
         set_as_default: Establecer como predeterminado
@@ -697,6 +708,7 @@ sylius:
         shipping_and_payment_methods: Métodos de pago y envío
         shipping_categories: Categorías de envío
         shipping_category: Categoría de envío
+        shipping_address_changes_history: Historia de cambios de dirección de facturación
         shipping_charges: Gastos de envío
         shipping_method: Métodos de envío
         shipping_method_details: Mostrar
@@ -796,6 +808,7 @@ sylius:
         there_are_no_variants_to_display: No hay variantes para mostrar
         there_are_no_zones_configured: No hay zonas configuradas
         there_is_no_main_taxon_for_this_product: No hay ningún taxón principal para este producto
+        this_customer_has_not_placed_any_orders_yet: Este cliente no ha hecho ningún pedido todavía
         this_months_statistics: Estadísticas del mes
         this_product_has_no_attributes_defined: Este producto no tiene atributos definidos
         title: Título
@@ -807,6 +820,7 @@ sylius:
         total_qty: Cant total
         total_records: Número de registros
         total_registrations: Usuarios
+        total_value_of_orders: Valor total de los pedidos
         tracking_code: Código de seguimiento de envío
         tracking_number: Número de seguimiento
         translations: Traducciones
@@ -824,6 +838,7 @@ sylius:
         updating_date: Fecha de actualización
         usage: Utilización
         usage_limit: Límite de uso
+        use_the_contact_form_below_to_send_us_a_message: Utilice el formulario de contacto de a continuación para mandarnos un mensaje.
         used: promoción utilizado
         user_details: Mostrar
         username: Nombre usuario

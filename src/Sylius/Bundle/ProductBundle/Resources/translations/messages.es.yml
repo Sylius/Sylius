@@ -18,6 +18,7 @@ sylius:
             name: Nombre
         association_type:
             name: Nombre
+            translations: Traducciones
         association:
             type: Tipos de asociación
             product: Producto asociado
@@ -25,6 +26,7 @@ sylius:
             name: Nombre
         option:
             name: Nombre
+            position: Posición
             values: Valores posibles
         option_value:
             add_value: Añadir valor

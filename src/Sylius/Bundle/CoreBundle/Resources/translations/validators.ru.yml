@@ -5,9 +5,17 @@ sylius:
     channel:
         default_locale:
             not_blank: Пожалуйста, введите язык по умолчанию для канала.
+        contact_email:
+            invalid: Не правильный e-mail адрес.
+            max: E-mail не должен быть длиннее {{ limit }} символов.
+            min: E-mail должн быть по крайней мере {{ limit }} символов.
     checkout:
         shipping_method:
             not_blank: Пожалуйста, выберите метод доставки.
+    contact:
+        email:
+            invalid: Не правильный e-mail адрес.
+            not_blank: Пожалуйста, введите ваш email.
     currency:
         enabled:
             cannot_disable_base: Базовая валюта не может быть отключена.

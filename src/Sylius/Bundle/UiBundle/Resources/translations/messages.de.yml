@@ -113,6 +113,7 @@ sylius:
         channel: Promotionskanäle
         channels: Ausgabekanäle
         charges_and_taxes: Steuern und Gebühren
+        cheapest_first: Günstigste zuerst
         checkbox: Kontrollkästchen
         checking_out_as: Bezahlen als
         checkout: Zur Kasse
@@ -193,6 +194,7 @@ sylius:
         creating_new_page: Neue Seite erstellen
         creation_date: Erstellt am
         creation_time: Erstellungszeit
+        criteria: Kriterium
         currencies: Währungen
         currency: Währung
         current_orders: Aktuelle Bestellungen
@@ -251,6 +253,7 @@ sylius:
         edit_order: Bestellung bearbeiten
         edit_payment_method: Zahlart bearbeiten
         edit_product: Produkt bearbeiten
+        edit_product_association_type: Beziehungstyp des Produktes bearbeiten
         edit_product_attribute: Produkteingenschaft bearbeiten
         edit_product_option: Produktoption bearbeiten
         edit_product_review: Rezension bearbeiten
@@ -345,6 +348,7 @@ sylius:
         go_level_up: Ebene höher
         go_to_dashboard: Zum Dashboard
         grand_total: Gesamtbetrag
+        greater_than: Größer als
         group_membership: Gruppenmitgliedschaft
         guest: Gastbestellung
         guest_customer: Gast Kunde
@@ -360,6 +364,7 @@ sylius:
         image: Foto
         images: Fotos
         imagine_blocks: Bild Blöcke
+        impersonate: Benutzerübernahme
         in: In
         included_in_price: Im Preis inbegriffen
         index_metadata: Metadaten
@@ -390,6 +395,7 @@ sylius:
         lastname: Nachname
         latest_orders: Letzte Bestellungen
         latest_products: Neueste Produkte
+        less_than: Kleiner als
         links: Links
         list_coupons: Gutscheine
         list_variants: Auflistung der Varianten
@@ -408,6 +414,7 @@ sylius:
         manage_adjustments: Verwalten von Anpassungen
         manage_admin_users: Administratoren verwalten
         manage_attributes: Attribute verwalten
+        manage_association_types_of_your_products: Beziehungstypen der Produkte verwalten
         manage_attributes_of_your_products: Verwaltung deiner Produkteigenschaften
         manage_categorization_of_your_products: Kategorieverwaltung für Ihre Produkte
         manage_channels: Kanäle verwalten
@@ -459,6 +466,7 @@ sylius:
         metadata_index: Metadaten
         method: Methode
         modified: Geändert
+        most_expensive_first: Teuerste zuerst
         move_down: Nach unten
         move_up: Nach oben
         my_account: Mein Account
@@ -483,6 +491,7 @@ sylius:
         new_payment_method: Zahlart erstellen
         new_permission: neue Berechtigung
         new_product: Neues Produkt
+        new_product_association_type: Neuer Produkt Beziehungstyp
         new_product_attribute: Neues Produkt Attribut
         new_product_option: Neue Produktoption
         new_product_variant: Neue Produktvariante
@@ -551,8 +560,10 @@ sylius:
         order_value: Bestellwert
         ordered: Bestellt
         orders: Aufträge
+        orders_statistics: Statistik der Bestellungen
         original_price: Ursprünglicher Preis
         out_of_stock: Ausverkauft
+        overall_this_customer_has_placed_orders_across_all_channels.choice: '{0}|{1}Dieser Kunde hat eine Bestellung aufgegeben|]1,Inf]Insgesamt hat dieser Kunde über alle Kanäle %count% Bestellungen aufgegeben'
         overview_of_your_store: Überblick Ihres Shops
         page: Seite
         pages: Seiten
@@ -671,8 +682,11 @@ sylius:
         search: Suche
         search_products: Artikel suchen
         security_settings: Sicherheitseinstellungen
+        select_address_from_book: Adresse aus Adressbuch auswählen
         select_products: Produkt auswählen
         select_taxon: Klassifizierung wählen
+        send: Absenden
+        server_has_encountered_some_errors: Auf dem Server sind Fehler aufgetreten.
         set_a_new_password_for_your_account: Ein neues Passwort wählen
         set_as_default: Als Standard setzen
         set_as_default_billing_address: Als Standardrechnungsadresse setzen
@@ -790,6 +804,7 @@ sylius:
         there_are_no_variants_to_display: Es gibt noch keine Varianten anzuzeigen
         there_are_no_zones_configured: Es sind keine Gebiete konfiguriert
         there_is_no_main_taxon_for_this_product: Es gibt keine Klassifizierung für dieses Produkt
+        this_customer_has_not_placed_any_orders_yet: Dieser Kunde hat keine Bestellungen aufgegeben
         this_months_statistics: Statistiken dieses Monats
         this_product_has_no_attributes_defined: Für dieses Produkt wurden keine Attribute definiert
         title: Titel
@@ -801,6 +816,7 @@ sylius:
         total_qty: Stück Ges.
         total_records: Gesamt
         total_registrations: Gesamteregistrierungen
+        total_value_of_orders: Gesamtwert der Bestellungen
         tracking_code: Sendungsverfolgung
         tracking_number: Sendungsnummer
         translations: Übersetzungen
@@ -818,6 +834,7 @@ sylius:
         updating_date: Datum aktualisieren
         usage: Belegt
         usage_limit: Nutzungslimit
+        use_the_contact_form_below_to_send_us_a_message: Verwende das unten stehende Kontaktformular um uns eine Nachricht zukommen zu lassen.
         used: Aktion wird verwendet
         user_details: Benutzer
         username: Benutzername

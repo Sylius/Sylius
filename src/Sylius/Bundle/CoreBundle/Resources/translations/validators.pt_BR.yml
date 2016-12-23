@@ -5,9 +5,17 @@ sylius:
     channel:
         default_locale:
             not_blank: Introduza a localidade padrão do canal.
+        contact_email:
+            invalid: Este email é inválido.
+            max: Sobrenome não pode ser maior que {{ limit }} caracteres.
+            min: Email deve ter ao menos {{ limit }} caracteres.
     checkout:
         shipping_method:
             not_blank: Por favor selecione um método de envio.
+    contact:
+        email:
+            invalid: Este email é inválido.
+            not_blank: Por favor, insira seu email.
     customer:
         currency_code:
             not_valid: O usuário digitado está incorreto.

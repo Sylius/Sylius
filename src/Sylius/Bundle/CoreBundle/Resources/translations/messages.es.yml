@@ -28,6 +28,7 @@ sylius:
             taxonomies: Taxonomías
             locale_default: Configuración regional predeterminada
             locales: Idiomas
+            contact_email: Email de contacto
             currency_base: Moneda base
             currencies: Monedas
             shipping_methods: Métodos de envío

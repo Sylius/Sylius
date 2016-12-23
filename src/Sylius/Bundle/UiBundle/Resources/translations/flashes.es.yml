@@ -4,6 +4,9 @@
 sylius:
     channel:
         delete_error: El canal no se puede borrar. Debe haber al menos un canal habilitado.
+    contact:
+        request_success: Tu solicitud de contacto se ha enviado correctamente.
+        request_error: Se produjo un problema al enviar la solicitud de contacto. Por favor Inténtelo de nuevo más tarde.
     customer:
         add_address: La dirección se ha añadido correctamente.
         impersonate: Cliente %name% correctamente impersonado.

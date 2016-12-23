@@ -16,6 +16,7 @@ sylius:
             name: 名称
         association_type:
             name: 名称
+            translations: 翻译
         association:
             type: 关联类型
             product: 相关的产品

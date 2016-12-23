@@ -92,6 +92,7 @@ sylius:
         browse_your_orders_from_the_past: Parcourir vos commandes passées
         build: Construire
         calculator: Calculateur
+        call_us: Appelez-nous!
         cancel: Annuler
         cancelled: Annulé
         cart: Panier
@@ -214,7 +215,9 @@ sylius:
         date: Date
         datetime: Date et heure
         default: Défaut
+        default_address: Adresse par défaut
         default_billing_address: Adresse de facturation par défaut
+        default_currency: Devise par défaut
         default_locale: Paramètres régionaux par défaut
         default_shipping_address: Adresse de livraison par défaut
         delete: Supprimer
@@ -314,6 +317,7 @@ sylius:
         filters: Filtres
         fill_in_your_billing_and_shipping_addresses: Renseignez vos adresses de facturation et de livraison
         first_name: Prénom
+        forgot_password: Mot de passe oublié ?
         from: De
         from_the_newest: De la plus récente
         from_the_oldest: Du plus ancien
@@ -332,6 +336,7 @@ sylius:
         grand_total: Total
         guest: Invité
         guest_customer: Client invité
+        have_an_account_already: Vous avez déjà un compte ?
         hello: Bonjour
         hello_name: Bonjour <b>%name%</b>
         hide_deleted: Cacher les supprimés
@@ -440,6 +445,7 @@ sylius:
         my_account: Mon compte
         n_a: N/A
         name: Nom
+        need_assistance: Besoin d'aide?
         new: Nouveau
         new_admin_user: Nouvel administrateur
         new_channel: Nouveau canal
@@ -449,6 +455,7 @@ sylius:
         new_currency: Nouvelle devise
         new_customer: Nouveau client
         new_customers: Nouveaux clients
+        new_exchange_rate: Nouveau taux de change
         new_locale: Nouveaux paramètres régionaux
         new_order: Nouvelle commande
         new_orders: Nouvelles commandes

@@ -15,6 +15,7 @@ sylius:
             name: Ime
         association_type:
             name: Ime
+            translations: Prevodi
         association:
             product: Povezani proizvodi
         variant:

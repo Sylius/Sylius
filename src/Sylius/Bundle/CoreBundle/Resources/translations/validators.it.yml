@@ -2,9 +2,18 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    channel:
+        contact_email:
+            invalid: Questa e-mail non è valida.
+            max: L'e-mail non dovrebbe contenere più di {{ limit }} caratteri.
+            min: L'e-mail dovrebbe contenere almeno {{ limit }} caratteri.
     checkout:
         shipping_method:
             not_blank: Si prega di scegliere un metodo di spedizione.
+    contact:
+        email:
+            invalid: Questa e-mail non è valida.
+            not_blank: Inserisci la tua email.
     customer:
         currency_code:
             not_valid: Il codice valuta inserito non è valido.

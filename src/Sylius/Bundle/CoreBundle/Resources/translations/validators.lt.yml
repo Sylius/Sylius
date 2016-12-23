@@ -2,9 +2,18 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    channel:
+        contact_email:
+            invalid: Šis adresas yra neteisingas.
+            max: El. paštas turi būti ilgesnis nei {{ limit }} simbolių.
+            min: El. paštas turi būti ilgesnis nei {{ limit }} simboliai.
     checkout:
         shipping_method:
             not_blank: Pasirinkite pristatymo būdą.
+    contact:
+        email:
+            invalid: Šis adresas yra neteisingas.
+            not_blank: Įveskite savo elektroninio pašto adresą.
     customer:
         currency_code:
             not_valid: Valiutos kodas yra neteisingas.

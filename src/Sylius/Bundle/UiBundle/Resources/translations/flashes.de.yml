@@ -4,6 +4,12 @@
 sylius:
     channel:
         delete_error: Der Kanal kann nicht gelöscht werden. Mindestens ein aktivierter Kanal ist erforderlich.
+    contact:
+        request_success: Ihre Kontaktanfrage wurde erfolgreich übermittelt.
+        request_error: Fehler beim Senden der Kontaktanfrage. Bitte versuchen Sie es später erneut.
     customer:
         add_address: Adresse wurde erfolgreich hinzugefügt.
+        impersonate: Rechte von %name% erfolgreich übernommen.
         set_address_as_default: Adresse wurde als Standard gesetzt.
+    product:
+        out_of_stock: Es sind nur %quantity% dieses Produktes verfügbar.

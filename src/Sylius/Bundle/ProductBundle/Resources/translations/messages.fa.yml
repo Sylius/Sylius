@@ -17,6 +17,7 @@ sylius:
             name: نام
         association_type:
             name: نام
+            translations: زبان های
         association:
             type: نوع ارتباط
             product: محصولات مرتبط

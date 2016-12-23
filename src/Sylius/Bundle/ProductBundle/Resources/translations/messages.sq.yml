@@ -17,6 +17,7 @@ sylius:
             name: Emri
         association_type:
             name: Emri
+            translations: Përkthime
         association:
             type: Tipi i lidhjes
             product: Produkti i lidhur

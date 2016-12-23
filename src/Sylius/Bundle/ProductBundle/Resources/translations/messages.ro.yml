@@ -15,6 +15,7 @@ sylius:
             name: Nume
         association_type:
             name: Nume
+            translations: Traduceri
         variant:
             name: Nume
         option:

@@ -6,7 +6,11 @@ sylius:
         base_currency:
             not_blank: Bitte geben Sie die Basiswährung für den Kanal an.
         default_locale:
-            not_blank: Bitte wählen Sie die Standardsprache für diesen Kanal.
+            not_blank: Bitte Standard-Gebietsschema für diesen Kanal angeben.
+        contact_email:
+            invalid: Diese E-Mail Adresse ist ungültig.
+            max: E-Mail darf nicht länger als {{ limit }} Zeichen sein.
+            min: E-Mail muss mindestens {{ limit }} Zeichen lang sein.
     channel_pricing:
         price:
             min: Preis muss mindestens {{ limit }} sein.
@@ -14,6 +18,12 @@ sylius:
     checkout:
         shipping_method:
             not_blank: Bitte wählen Sie eine Versandart aus.
+    contact:
+        email:
+            invalid: Diese E-Mail Adresse ist ungültig.
+            not_blank: Bitte geben Sie Ihre E-Mail-Adresse ein.
+        message:
+            not_blank: Bitte geben Sie Ihre Nachricht ein.
     currency:
         enabled:
             cannot_disable_base: Die Basiswährung kann nicht deaktiviert werden.
@@ -29,11 +39,15 @@ sylius:
         code:
             not_blank: Bitte lokalen Code eingeben.
             unique: Locale existiert bereits.
+        enabled:
+            cannot_disable_base: Das Basis-Gebietsschema kann nicht deaktiviert werden.
     product_attribute:
         invalid: Position muss eine Ganzzahl sein.
     product_image:
         code:
             not_blank: Bitte geben Sie einen Bild-Code an.
+            regex: Kürzel der Abbildung darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
+            unique: Code der Abbildung muss innerhalb dieses Produktes einzigartig sein.
         file:
             max_size: Das Bild ist zu groß - {{ size }}{{ suffix }}. Maximal zulässige Größe {{ limit }}{{ suffix }}.
             upload_ini_size: Das Bild ist zu groß. Maximal zulässige Größe {{ limit }}{{ suffix }}.
@@ -41,6 +55,7 @@ sylius:
         onHand:
             min: Menge muss größer sein als {{ limit }}.
             not_blank: Bitte verfügbare Menge eingeben.
+            reserved: Verfügbarkeit muß größer sein als die Reservierungen
         original_price:
             min: Ursprünglicher Preis darf nicht negativ sein.
         weight:
@@ -61,6 +76,7 @@ sylius:
     taxon_image:
         code:
             not_blank: Bitte geben Sie einen Bild-Code an.
+            regex: Kürzel der Abbildung darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
             unique: Bild-Code muss innerhalb dieser Produktgruppe eindeutig sein.
         file:
             max_size: Das Bild ist zu groß - {{ size }}{{ suffix }}. Maximal zulässige Größe {{ limit }}{{ suffix }}.
@@ -71,3 +87,5 @@ sylius:
         username:
             unique: Der Benutzername wird bereits verwendet.
             not_blank: Bitte geben Sie Ihren Namen ein.
+        locale_code:
+            not_blank: Bitte ein Gebietsschema auswählen.

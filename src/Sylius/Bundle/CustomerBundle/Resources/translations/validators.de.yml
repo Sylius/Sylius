@@ -18,11 +18,12 @@ sylius:
             max: E-Mail darf nicht länger als {{ limit }} Zeichen sein.
             min: E-Mail muss mindestens {{ limit }} Zeichen lang sein.
             not_blank: Bitte geben Sie Ihre E-Mail-Adresse ein.
-            invalid: Diese e-Mail ist ungültig.
+            invalid: Diese E-Mail Adresse ist ungültig.
             unique: Diese E-Mail-Adresse wird bereits verwendet.
             registered: Diese E-Mail wird bereits verwendet. Bitte melden Sie sich an oder benutzen Sie Passwort vergessen.
     customer_group:
         code:
+            regex: Kürzel der Kundengruppe darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
             unique: Code der Kundengruppe muss eindeutig sein.
         name:
             max: Name der Kundengruppe darf nicht länger als {{ limit }} Zeichen sein.

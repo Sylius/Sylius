@@ -16,6 +16,7 @@ sylius:
             name: Naam
         association_type:
             name: Naam
+            translations: Vertalingen
         association:
             type: Relatietype
             product: Gerelateerd product

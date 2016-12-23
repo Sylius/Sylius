@@ -5,9 +5,17 @@ sylius:
     channel:
         default_locale:
             not_blank: لطفا زبان پایه برای کانال را وارد کنید.
+        contact_email:
+            invalid: ایمیل وارد شده نامعتبر است.
+            max: ایمیل نباید بیش از {{ limit }} حرف باشد.
+            min: ایمیل باید حداقل {{ limit }} حرف داشته باشد.
     checkout:
         shipping_method:
             not_blank: لطفا شیوه ارسال را انتخاب کنید.
+    contact:
+        email:
+            invalid: ایمیل وارد شده نامعتبر است.
+            not_blank: لطفا ایمیل خود را وارد کنید.
     currency:
         enabled:
             cannot_disable_base: واحد پول پایه را نمی توانید غیر فعال کنید.

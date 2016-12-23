@@ -16,6 +16,7 @@ sylius:
             name: Názov
         association_type:
             name: Názov
+            translations: Preklady
         association:
             type: Typ priradenia
             product: Priradený produkt
