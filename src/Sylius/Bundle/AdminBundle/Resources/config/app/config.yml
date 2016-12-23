@@ -41,6 +41,7 @@ sylius_grid:
 
             create_product_attribute: "@SyliusAdmin/ProductAttribute/Grid/Action/create.html.twig"
             update_product_positions: "@SyliusAdmin/Product/Grid/Action/updatePositions.html.twig"
+            update_product_variant_positions: "@SyliusAdmin/ProductVariant/Grid/Action/updatePositions.html.twig"
             generate_variants: "@SyliusAdmin/Product/Grid/Action/generateVariants.html.twig"
         filter:
             string: "@SyliusUi/Grid/Filter/string.html.twig"
