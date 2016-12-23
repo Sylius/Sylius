@@ -83,7 +83,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function isItPossibleToChangePaymentMethodForOrder(OrderInterface $order)
     {

@@ -99,7 +99,7 @@ final class RegisterResourceRepositoryPassTest extends AbstractCompilerPassTestC
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected function registerCompilerPass(ContainerBuilder $container)
     {

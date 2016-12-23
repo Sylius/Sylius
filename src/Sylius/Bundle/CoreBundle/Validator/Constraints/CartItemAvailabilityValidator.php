@@ -40,7 +40,7 @@ final class CartItemAvailabilityValidator extends ConstraintValidator
     /**
      * @param AddToCartCommandInterface $addCartItemCommand
      *
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function validate($addCartItemCommand, Constraint $constraint)
     {

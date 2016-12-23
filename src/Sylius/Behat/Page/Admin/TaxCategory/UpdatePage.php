@@ -24,7 +24,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     use NamesIt;
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected function getCodeElement()
     {

@@ -23,7 +23,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 final class AddToCartType extends AbstractResourceType
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {

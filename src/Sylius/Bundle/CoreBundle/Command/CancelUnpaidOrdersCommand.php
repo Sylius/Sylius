@@ -32,7 +32,7 @@ class CancelUnpaidOrdersCommand extends ContainerAwareCommand
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {

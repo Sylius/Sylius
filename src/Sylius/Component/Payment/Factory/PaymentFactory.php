@@ -33,7 +33,7 @@ final class PaymentFactory implements PaymentFactoryInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function createNew()
     {
