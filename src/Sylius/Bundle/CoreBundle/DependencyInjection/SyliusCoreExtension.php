@@ -64,6 +64,8 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         if ('test' === $env || 'test_cached' === $env) {
             $loader->load('test_services.xml');
         }
+
+        $container->setParameter('sylius.core_bundle.root_dir', __DIR__.DIRECTORY_SEPARATOR.'..');
     }
 
     /**
