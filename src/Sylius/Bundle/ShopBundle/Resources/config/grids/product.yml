@@ -13,7 +13,7 @@ sylius_grid:
                         arguments:
                             channel: "expr:service('sylius.context.channel').getChannel()"
                             taxonId: $slug
-                            locale: '%locale%'
+                            locale: "expr:service('sylius.context.channel').getChannel().getDefaultLocale().getCode()"
             sorting:
                 position: asc
             fields:
@@ -23,6 +23,9 @@ sylius_grid:
                 position:
                     type: string 
                     sortable: productTaxon.position
+                name:
+                    type: string 
+                    sortable: translation.name
                 price:
                     type: int
                     sortable: channelPricing.price
