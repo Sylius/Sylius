@@ -12,6 +12,7 @@
 namespace Sylius\Component\Core\Cart\Context;
 
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Context\CartNotFoundException;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
@@ -77,10 +78,28 @@ final class ShopBasedCartContext implements CartContextInterface
             throw new CartNotFoundException('Sylius was not able to prepare the cart.', $exception);
         }
 
-        $cart->setCustomer($this->shopperContext->getCustomer());
+        /** @var CustomerInterface $customer */
+        $customer = $this->shopperContext->getCustomer();
+        if (null !== $customer) {
+            $this->setCustomerAndAddressOnCart($cart, $customer);
+        }
 
         $this->cart = $cart;
 
         return $cart;
+    }
+
+    /**
+     * @param OrderInterface $cart
+     * @param CustomerInterface $customer
+     */
+    private function setCustomerAndAddressOnCart(OrderInterface $cart, CustomerInterface $customer)
+    {
+        $cart->setCustomer($customer);
+
+        $defaultAddress = $customer->getDefaultAddress();
+        if (null !== $defaultAddress) {
+            $cart->setShippingAddress(clone $defaultAddress);
+        }
     }
 }
