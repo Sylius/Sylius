@@ -27,6 +27,7 @@ sylius:
             usage_limit: Nutzungslimit
         promotion_coupon_generator_instruction:
             amount: Anzahl
+            code_length: Codelänge
             expires_at: Verfällt am
             usage_limit: Nutzungslimit
         promotion_filter:
@@ -36,11 +37,15 @@ sylius:
                 count: Anzahl
                 equal: Gleich
             contains_product_configuration:
+                exclude: Ausgenommen
                 variants: Produkte
             item_total_configuration:
                 amount: Anzahl
+            nth_order_configuration:
+                nth: N-ter
             shipping_country_configuration:
                 country: Land
             taxonomy_configuration:
+                exclude: Ausgenommen
                 taxons: Produktgruppen
             type: Typ

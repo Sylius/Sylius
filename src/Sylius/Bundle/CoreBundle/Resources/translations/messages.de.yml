@@ -28,6 +28,7 @@ sylius:
             taxonomies: Klassifizierungen
             locale_default: Standard Lokalisierung
             locales: Gebietsschemata
+            contact_email: Kontakt E-Mail
             currency_base: Basis-Währung
             currencies: Währungen
             shipping_methods: Versandmethoden

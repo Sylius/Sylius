@@ -5,6 +5,7 @@ sylius:
     promotion:
         code:
             unique: Eine Aktion mit diesem Kürzel existiert bereits.
+            regex: Aktionskürzel darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
             not_blank: Bitte geben Sie ein Kürzel an.
         description:
             max_length: Die Beschreibung darf nicht länger als 1 Zeichen sein.|Die Beschreibung darf nicht länger als {{ limit }} Zeichen sein.
@@ -17,12 +18,14 @@ sylius:
             not_blank: Bitte geben Sie einen Namen an.
     promotion_action:
         percentage_discount_configuration:
+            min: Der Wert eines prozentualen Rabattes muss mindestens 0% sein.
             max: Der maximale prozentuale Rabatt beträgt 100%.
     promotion_coupon:
         code:
             max_length: Der Gutscheincode darf nicht länger als 1 Zeichen sein.|Der Gutscheincode darf nicht länger als {{ limit }} sein.
             min_length: Der Gutscheincode muss mindestens 1 Zeichen lang sein.|Der Gutscheincode muss mindestens {{ limit }} Zeichen lang sein.
             not_blank: Bitte geben Sie einen Gutscheincode an.
+            regex: Gutschein-Code darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
             unique: Dieser Gutschein ist bereits vorhanden.
         is_invalid: Der Rabattgutschein ist ungültig.
         usage_limit:

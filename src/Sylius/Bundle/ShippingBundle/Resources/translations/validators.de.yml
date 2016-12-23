@@ -9,6 +9,7 @@ sylius:
             not_blank: Bitte geben Sie den Namen der Versandkostenkategorie an.
         code:
             not_blank: Bitte geben Sie ein Kürzel für die Kategorie an.
+            regex: Kürzel der Versandkategorie darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
             unique: Eine Kategorie mit diesem Kürzel existiert bereits.
     shipping_method:
         calculator:
@@ -21,6 +22,7 @@ sylius:
             not_blank: Bitte geben Sie den Namen der Versandmethode an.
         code:
             not_blank: Bitte geben Sie ein Kürzel für die Versandart an.
+            regex: Kürzel der Versandart darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
             unique: Eine Versandart mit diesem Kürzel existiert bereits.
         zone:
             not_blank: Bitte wählen Sie eine Zone für die Versandart.

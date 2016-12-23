@@ -7,6 +7,10 @@ sylius:
             not_blank: Por favor, introduce la moneda base del canal.
         default_locale:
             not_blank: Por favor, introduzca el idioma por defecto del canal.
+        contact_email:
+            invalid: Este email no es válido.
+            max: El correo electrónico no debe tener más de {{ limit }} caracteres.
+            min: El correo electrónico debe tener al menos {{ limit }} caracteres.
     channel_pricing:
         price:
             min: El precio debe ser al menos {{ limit }}.
@@ -14,6 +18,12 @@ sylius:
     checkout:
         shipping_method:
             not_blank: Por favor seleccione el método de envío.
+    contact:
+        email:
+            invalid: Este email no es válido.
+            not_blank: Por favor, introduzca su dirección de correo electrónico.
+        message:
+            not_blank: Por favor, introduzca su mensaje.
     currency:
         enabled:
             cannot_disable_base: La moneda base no se puede desactivar.

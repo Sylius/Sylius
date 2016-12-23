@@ -5,6 +5,9 @@ sylius:
     checkout:
         shipping_method:
             not_blank: Var god välj leveranssätt.
+    contact:
+        email:
+            not_blank: Skriv din e-postadress.
     locale:
         code:
             not_blank: Var god ange språkkod.

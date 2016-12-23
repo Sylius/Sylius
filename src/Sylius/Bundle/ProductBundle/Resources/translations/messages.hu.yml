@@ -16,6 +16,7 @@ sylius:
             name: Név
         association_type:
             name: Név
+            translations: Fordítások
         association:
             type: Kapcsolódó típus
             product: Kapcsolódó termék

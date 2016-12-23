@@ -7,9 +7,17 @@ sylius:
             not_blank: Saisissez la devise de référence du canal.
         default_locale:
             not_blank: Veuillez renseigner la locale par défaut du canal.
+        contact_email:
+            invalid: Cet e-mail n'est pas valide.
+            max: L'e-mail ne doit pas contenir plus de {{ limit }} caractères.
+            min: L'e-mail doit contenir au moins {{ limit }} caractères.
     checkout:
         shipping_method:
             not_blank: Veuillez sélectionner un mode de livraison.
+    contact:
+        email:
+            invalid: Cet e-mail n'est pas valide.
+            not_blank: Veuillez saisir votre adresse email.
     currency:
         enabled:
             cannot_disable_base: La devise de base ne peut pas être désactivée.

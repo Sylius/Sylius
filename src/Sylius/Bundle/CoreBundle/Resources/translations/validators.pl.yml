@@ -7,12 +7,20 @@ sylius:
             not_blank: Proszę podać domyślną walutę kanału.
         default_locale:
             not_blank: Proszę podać domyślny język kanału dystrybucji.
+        contact_email:
+            invalid: Ten e-mail jest nieprawidłowy.
+            max: E-mail nie może być dłuższy niż {{ limit }} znaków.
+            min: E-mail musi mieć co najmniej {{ limit }} znaków.
     channel_pricing:
         price:
             not_blank: Proszę podać cenę.
     checkout:
         shipping_method:
             not_blank: Proszę wybrać metodę dostawy.
+    contact:
+        email:
+            invalid: Ten e-mail jest nieprawidłowy.
+            not_blank: Proszę podać swój e-mail.
     currency:
         enabled:
             cannot_disable_base: Podstawowa waluta nie może być wyłączona.

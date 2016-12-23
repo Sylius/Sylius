@@ -32,6 +32,7 @@ sylius:
     country:
         code:
             not_blank: Bitte geben Sie den ISO Code des Landes an.
+            regex: Ländercode darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
             unique: ISO-Ländercode muss eindeutig sein.
     province:
         code:
@@ -45,8 +46,11 @@ sylius:
             not_blank: Bitte geben Sie Ihr Bundesland an.
             unique: Bundesland-Name muss eindeutig sein.
     zone:
+        scope:
+            not_blank: Bitte den Bereich angeben.
         code:
             not_blank: Bitte geben Sie Ihre Vorwahl ein.
+            regex: Kürzel des Gebietes darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
             unique: Die Vorwahl muss eindeutig sein.
         members:
             min_count: Bitte geben Sie mindestens {{ limit }} Versandgebiete an.
@@ -57,4 +61,5 @@ sylius:
     zone_member:
         code:
             not_blank: Bitte wählen Sie ein Versandgebiet aus.
+            regex: Kürzel des Versandgebietes darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
         unique: Der gewählte Bereich ist bereits in diesem Versandgebiet.

@@ -17,6 +17,7 @@ sylius:
             name: Pavadinimas
         association_type:
             name: Pavadinimas
+            translations: Vertimai
         association:
             type: Sąryšio tipas
             product: Susijusi prekė

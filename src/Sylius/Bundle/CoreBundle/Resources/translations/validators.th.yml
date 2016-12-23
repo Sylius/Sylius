@@ -5,9 +5,17 @@ sylius:
     channel:
         default_locale:
             not_blank: กรุณาระบุภาษาเริ่มต้น
+        contact_email:
+            invalid: อีเมลนี้ไม่ถูกต้อง
+            max: อีเมลต้องมีความยาวไม่เกิน {{ limit }} ตัวอักษร
+            min: อีเมลล์จะต้องมีความยาวไม่น้อยกว่า {{ limit }} ตัวอักษร
     checkout:
         shipping_method:
             not_blank: กรุณาเลือกวิธีการจัดส่ง
+    contact:
+        email:
+            invalid: อีเมลนี้ไม่ถูกต้อง
+            not_blank: กรุณาระบุอีเมลของคุณ
     currency:
         enabled:
             cannot_disable_base: ไม่สามารถปิดใช้งานสกุลเงินฐาน

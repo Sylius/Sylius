@@ -2,6 +2,13 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    channel:
+        contact_email:
+            invalid: Bu e-posta geçerli değil.
+    contact:
+        email:
+            invalid: Bu e-posta geçerli değil.
+            not_blank: Lütfen e-posta adresinizi girin.
     locale:
         code:
             not_blank: Lütfen bölge kodunu giriniz.

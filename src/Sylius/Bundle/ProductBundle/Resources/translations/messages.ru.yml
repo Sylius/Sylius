@@ -17,6 +17,7 @@ sylius:
             name: Название
         association_type:
             name: Название
+            translations: '﻿Переводы'
         association:
             type: Тип взаимосвязи
             product: Связанные продукты

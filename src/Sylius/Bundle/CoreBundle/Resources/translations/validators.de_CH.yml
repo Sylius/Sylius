@@ -1,0 +1,7 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    contact:
+        email:
+            not_blank: Bitte geben Sie Ihre E-Mail-Adresse ein.

@@ -2,6 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    contact:
+        email:
+            not_blank: Skriv inn din e-post.
     locale:
         code:
             not_blank: Angi språkskode.

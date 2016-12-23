@@ -3,5 +3,7 @@
 
 sylius:
     form:
+        association_type:
+            translations: Käännökset
         option_value:
             add_value: Lisää arvo

@@ -5,9 +5,17 @@ sylius:
     channel:
         default_locale:
             not_blank: Zadajte predvolený jazyk pre kanál.
+        contact_email:
+            invalid: Tento e-mail je neplatný.
+            max: E-mail nesmie byť dlhší ako {{ limit }} znakov.
+            min: E-mail musí byť aspoň {{ limit }} znakov.
     checkout:
         shipping_method:
             not_blank: Prosím zadajte spôsob dopravy.
+    contact:
+        email:
+            invalid: Tento e-mail je neplatný.
+            not_blank: Zadajte Váš e-mail.
     customer:
         currency_code:
             not_valid: Zadaný kód meny nie je neplatný.

@@ -10,6 +10,9 @@ sylius:
     checkout:
         shipping_method:
             not_blank: Vă rugăm să alegeți metoda de livrare.
+    contact:
+        email:
+            not_blank: Vă rugăm să completați adresa de e-mail.
     currency:
         enabled:
             cannot_disable_base: Valuta de bază nu poate fi dezactivată.

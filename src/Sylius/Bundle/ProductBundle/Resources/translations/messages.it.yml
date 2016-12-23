@@ -16,6 +16,7 @@ sylius:
             name: Nome
         association_type:
             name: Nome
+            translations: Traduzioni
         association:
             type: Tipo di associazione
             product: Prodotto associato
