@@ -92,12 +92,6 @@ final class CheckoutResolver implements EventSubscriberInterface
             return;
         }
 
-        if (null !== $referer = $this->getReferer($request)) {
-            $event->setResponse(new RedirectResponse($referer));
-
-            return;
-        }
-
         $event->setResponse(new RedirectResponse($this->urlGenerator->generateForOrderCheckoutState($order)));
     }
 
@@ -121,7 +115,7 @@ final class CheckoutResolver implements EventSubscriberInterface
         return $request->attributes->get('_sylius')['state_machine']['graph'];
     }
 
-        /**
+    /**
      * @param Request $request
      *
      * @return string
