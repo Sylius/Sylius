@@ -61,4 +61,15 @@ final class ProductVariantSpec extends ObjectBehavior
         $this->removeOptionValue($optionValue);
         $this->hasOptionValue($optionValue)->shouldReturn(false);
     }
+
+    function it_has_no_position_by_default()
+    {
+        $this->getPosition()->shouldReturn(null);
+    }
+
+    function its_position_is_mutable()
+    {
+        $this->setPosition(10);
+        $this->getPosition()->shouldReturn(10);
+    }
 }

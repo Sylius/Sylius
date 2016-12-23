@@ -92,4 +92,14 @@ interface ProductVariantInterface extends
      * @param \DateTime|null $availableUntil
      */
     public function setAvailableUntil(\DateTime $availableUntil = null);
+
+    /**
+     * @return int
+     */
+    public function getPosition();
+
+    /**
+     * @param int $position
+     */
+    public function setPosition($position);
 }
