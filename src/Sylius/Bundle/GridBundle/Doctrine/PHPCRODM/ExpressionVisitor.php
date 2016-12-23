@@ -34,7 +34,7 @@ class ExpressionVisitor
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function walkComparison(Comparison $comparison, AbstractNode $parentNode)
     {
@@ -85,7 +85,7 @@ class ExpressionVisitor
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function walkCompositeExpression(CompositeExpression $expr, AbstractNode $parentNode)
     {

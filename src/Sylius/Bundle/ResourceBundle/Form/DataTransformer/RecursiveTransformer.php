@@ -34,7 +34,7 @@ final class RecursiveTransformer implements DataTransformerInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function transform($values)
     {
@@ -46,7 +46,7 @@ final class RecursiveTransformer implements DataTransformerInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function reverseTransform($values)
     {

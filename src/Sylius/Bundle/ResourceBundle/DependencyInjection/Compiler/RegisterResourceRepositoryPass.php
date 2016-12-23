@@ -21,7 +21,7 @@ use Symfony\Component\DependencyInjection\Reference;
 final class RegisterResourceRepositoryPass implements CompilerPassInterface
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function process(ContainerBuilder $container)
     {

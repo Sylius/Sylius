@@ -171,7 +171,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getTotalSalesForChannel(ChannelInterface $channel)
     {
@@ -191,7 +191,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function countByChannel(ChannelInterface $channel)
     {

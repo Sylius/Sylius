@@ -259,7 +259,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function selectShippingAddressFromAddressBook(AddressInterface $address)
     {
@@ -279,7 +279,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function selectBillingAddressFromAddressBook(AddressInterface $address)
     {
@@ -299,7 +299,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function getPreFilledShippingAddress()
     {
@@ -307,7 +307,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function getPreFilledBillingAddress()
     {
