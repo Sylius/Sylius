@@ -6,6 +6,7 @@ sylius_admin_customer:
         except: ['show', 'delete']
         redirect:
             create: $redirect
+            update: update
         grid: sylius_admin_customer
         permission: true
         vars:

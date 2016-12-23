@@ -6,6 +6,7 @@ sylius_admin_country:
         except: ['show', 'delete']
         redirect:
             create: $redirect
+            update: update
         grid: sylius_admin_country
         permission: true
         vars:

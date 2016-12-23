@@ -5,6 +5,8 @@ sylius_admin_zone:
         templates: SyliusAdminBundle:Crud
         except: ['show', 'create']
         grid: sylius_admin_zone
+        redirect:
+            update: update
         permission: true
         vars:
             all:

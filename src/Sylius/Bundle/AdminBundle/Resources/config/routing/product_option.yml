@@ -6,6 +6,7 @@ sylius_admin_product_option:
         except: ['show']
         redirect:
             create: $redirect
+            update: update
         grid: sylius_admin_product_option
         permission: true
         vars:

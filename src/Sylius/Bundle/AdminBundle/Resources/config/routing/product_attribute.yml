@@ -4,6 +4,8 @@ sylius_admin_product_attribute:
         section: admin
         templates: SyliusAdminBundle:Crud
         except: ['show', 'create']
+        redirect:
+            update: update
         grid: sylius_admin_product_attribute
         permission: true
         vars:

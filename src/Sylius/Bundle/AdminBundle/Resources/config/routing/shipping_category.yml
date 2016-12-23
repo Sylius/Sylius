@@ -6,6 +6,7 @@ sylius_admin_shipping_category:
         except: ['show']
         redirect:
             create: $redirect
+            update: update
         grid: sylius_admin_shipping_category
         permission: true
         vars:

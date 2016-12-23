@@ -6,6 +6,7 @@ sylius_admin_tax_rate:
         except: ['show']
         redirect:
             create: $redirect
+            update: update
         grid: sylius_admin_tax_rate
         permission: true
         vars:

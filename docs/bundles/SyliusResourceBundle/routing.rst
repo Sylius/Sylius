@@ -211,12 +211,26 @@ Using a Custom Redirect
 -----------------------
 
 By default, after successful resource creation or update, Sylius will redirect to the ``show`` route and fallback to ``index`` if it does not exist.
-If you want to change that behavior, use the following configuration:
+If you want to change that behavior, use the following configuration (you can change redirect for both ``create`` and ``update`` actions separately):
 
 .. code-block:: yaml
 
     app_book:
         resource: |
             alias: app.book
-            redirect: update
+            redirect:
+                create: update
+                update: update
+        type: sylius.resource
+
+It's also possible to set variable as redirect value, to be able to pass it later as a parameter:
+
+.. code-block:: yaml
+
+    app_book:
+        resource: |
+            alias: app.book
+            redirect:
+                create: $redirect
+                update: update
         type: sylius.resource

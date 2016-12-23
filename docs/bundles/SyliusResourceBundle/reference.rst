@@ -49,7 +49,9 @@ Routing Generator Configuration Reference
             section: admin
             templates: :Book
             form: app_book_simple
-            redirect: create
+            redirect:
+                create: show
+                update: show
             except: ['show']
             only: ['create', 'index']
         type: sylius.resource

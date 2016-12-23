@@ -6,6 +6,7 @@ sylius_admin_taxon:
         except: ['show', 'index']
         redirect:
             create: $redirect
+            update: update
         permission: true
         vars:
             all:
