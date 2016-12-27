@@ -35,5 +35,5 @@ sylius:
                 min_range: 百分比的费用不能低于 {{ limit }}。
                 not_blank: 请输入费用百分比。
         code:
-            not_blank: 请输入付款方法代码。
-            unique: 给定代码的付款方法已存在。
+            not_blank: '请输入付款方法代码。'
+            unique: '给定代码的付款方法已存在。'

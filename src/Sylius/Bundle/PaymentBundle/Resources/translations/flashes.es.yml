@@ -3,8 +3,8 @@
 
 sylius:
     payment:
-        cancelled: El pago ha sido cancelado.
-        completed: El pago se ha completado.
-        failed: El pago ha fallado.
-        processing: El pago está siendo procesado.
-        refunded: El pago ha sido reembolsado con éxito.
+        cancelled: 'El pago ha sido cancelado.'
+        completed: 'El pago se ha completado.'
+        failed: 'El pago ha fallado.'
+        processing: 'El pago está siendo procesado.'
+        refunded: 'El pago ha sido reembolsado con éxito.'

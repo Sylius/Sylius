@@ -4,769 +4,769 @@
 sylius:
     form:
         login:
-            username: Používateľské meno
-            password: Heslo
-            remember_me: Zapamätať si ma
+            username: 'Používateľské meno'
+            password: 'Heslo'
+            remember_me: 'Zapamätať si ma'
         option:
-            name: Názov
-        notes: Ďalšie poznámky
+            name: 'Názov'
+        notes: 'Ďalšie poznámky'
         variant:
-            tracked: Sledované
+            tracked: 'Sledované'
     ui:
-        abandoned: Opustený
-        about: O nás
-        access_token: Prístupový token
-        access_your_store_account_or_create_a_new_one: Prihláste sa do vašeho účtu, alebo si vytvorte nový účet
-        account_credentials: Prihlasovacie údaje
-        account_panel_outline: Užite si všetky funkcie, ktoré sú k dispozícií k zobrazeniu, sledovaniu a spravovaniu vašich dát na vašom osobnom priestore
-        action: Akcia
-        actions: Akcie
-        add: Pridať
-        add_action: Pridať podmienku
-        add_association: Pridať priradenie
-        add_attribute: Pridať vlastnosť
-        add_attributes: Pridať vlastnosť
-        add_channel: Pridať kanál
-        add_choice: Pridať možnosť
-        add_coupon: Pridať kupón
-        add_image: Pridať obrázok
-        add_member: Pridať člena
-        add_menu_element: Pridať prvok do menu
-        add_new_email: Pridať nový e-mail
-        add_new_permission: Pridať nové oprávnenie
-        add_new_role: Pridať novú rolu
-        add_province: Pridať provinciu
-        add_rule: Pridať pravidlo
-        add_to_cart: Pridať do košíka
-        add_value: Pridať hodnotu
-        adding_new_customer_groups: Pridanie novej zákazníckej skupiny
-        adding_new_email: Pridánie nového e-mailu
-        adding_new_locale: Pridávam nový jazyk
-        additional_information: Doplňujúce informácie
-        address: Adresa
-        addressing: Adresy
-        addressing_step: Doručenie
-        adjustments: Úpravy
-        administration: Administrácia
-        administration_dashboard: Administračný panel
-        administration_panel_login: Prihásenie do administračného rozhrania
-        admin_users: Administrátory
-        all: Všetky
-        all_your_addresses: Všetky vaše adresy
-        an_error_occurred: Vyskytla sa chyba
-        api: API
-        apply_coupon: Použiť kupón
-        are_your_sure_you_want_to_perform_this_action: Ste si istý, že chcete vykonať túto akciu?
-        association: Priradenia
-        association_types: Typy priradenia
-        associations: Priradenia
-        assortment: Sortiment
-        attributes: Vlastnosti
-        author: Autor
-        availability: Dostupnosť
-        available_for_channels: Dostupné pre kanály
-        available_on: Dostupný od
-        available_on_hand: Dostupné na sklade
-        available_until: Dostupný do
-        average_order_value: Priemerná hodnota objednávky
-        awaiting_payment: Čaká na zaplatenie
-        back: Späť
-        back_to_store: Späť do obchodu
-        backorder: Predobjednať
-        backordered: Predobjednané
-        balance_due: Nedoplatok
-        base_currency: Základná mena
-        bill_to: Faktúrovať na
-        billing_address: Fakturačná adresa
-        blocks: Bloky
-        body: Obsah
-        browse_products: Prezerať produkty
-        build: Verzia
-        calculator: Spôsob vypočtu
-        cancel: Zrušiť
-        cancelled: Zrušená
-        cart: Košík
-        cart_locked: Košík uzamknutý
-        cart_summary: Obsah košíka
-        categorization: Kategórie
-        category: Kategória
-        category_requirements: Požiadavky pre kategóriu
-        change_address: Zmena adresy
-        change_file: Zmeniť súbor
-        change_password: Zmena hesla
-        change_payment_method: Zmeniť spôsob platby
-        change_shipping_method: Zmeniť spôsob dopravy
-        change_your_password: Zmena hesla
-        channel: Kanál
-        channels: Kanály
-        charges_and_taxes: Poplatky a dane
-        checkbox: Checkbox
-        checking_out_as: Nakupujúci ako
-        checkout: Košík
-        choose_file: Vybrať súbor
-        city: Mesto
-        clear_cart: Vyprázdniť košík
-        clear_filters: Vymazať filter
-        code: Kód
-        color: Farba
-        comment: Komentár
-        company: Spoločnosť
-        complete: Dokončené
-        completed: Dokončená
-        configurable_product: Nastaviteľný produkt
-        configuration: Konfigurácia
-        configure_channels_available_in_your_store: Nastavte dostupné kanály vo vašom obchode
-        confirm_your_action: Potvrďte vašu akciu
-        confirmation: Potvrdenie
-        confirmation_title: Potvrdenie
-        confirmed: Potvrdený
-        contact_us: Kontaktujte nás
-        contain_variants: Obsahuje produktové varianty
-        contains: Obsahuje
-        countries: Krajiny
-        country: Štát
-        country_details: Podrobnosti o krajine
-        coupon: Kupón
-        coupon_based: Používať kupóny
-        coupons: Kupóny
-        create: Vytvoriť
-        create_a_new_address: Vytvoriť novú adresu
-        create_a_new_customer_account: Vytvoriť nový účet
-        create_an_account: Vytvoriť účet
-        create_association_type: Vytvoriť typ priradenia
-        create_country: Vytvoriť krajinu
-        create_currency: Vytvoriť menu
-        create_customer: Vytvoriť zákazníka
-        create_imagine_block: Vytvoriť obrazový blok
-        create_locale: Vytvoriť jazyk
-        create_menu: Vytvoriť menu
-        create_menu_node: Vytvoriť prvok menu
-        create_new_coupon: Vytvoriť nový kupón
-        create_new_page: Vytvoriť novú stránku
-        create_new_report: Vytvorenie nového reportu
-        create_option: Vytvoriť voľbu
-        create_order: Vytvoriť objednávku
-        create_payment: Vytvoriť platbu
-        create_payment_method: Vytvoriť spôsob platby
-        create_product: Vytvoriť produkt
-        create_product_association: Vytvoriť priradenie produktu
-        create_product_association_type: Vytvoriť typ produktového priradenia
-        create_product_attribute: Vytvoriť vlastnosť
-        create_promotion: Vytvorenie propagácie
-        create_report: Vytvoriť report
-        create_shipping_category: Vytvoriť kategóriu doručenia
-        create_shipping_method: Vytvoriť spôsob dopravy
-        create_simple_block: Vytvoriť obsahový blok
-        create_slideshow_block: Vytvoriť prezentačný (slideshow) blok
-        create_string_block: Vytvoriť textový blok
-        create_tax_category: Vytvoriť daňovú kategoriu
-        create_tax_rate: Vytvoriť sadzbu dane
-        create_taxon: Vytvoriť kategóriu
-        create_user: Vytvoriť užívateľa
-        create_variant: Vytvoriť variantu
-        create_zone: Vytvoriť zónu
-        created_at: Vytvorené
-        creating_a_new_imagine_block: Vytvoriť nový obrazový blok
-        creating_a_new_simple_block: Vytvorenie nového obsahového bloku
-        creating_a_new_slideshow_block: Vytvorenie nového prezentačného (slideshow) bloku
-        creating_a_new_string_block: Vytvorenie nového textového bloku
-        creating_menu: Vytvárenie menu
-        creating_menu_node: Vytvaranie prvku menu
-        creating_new_page: Vytvárenie novej stránky
-        creation_date: Dátum vytvorenia
-        creation_time: Čas vytvorenia
-        currencies: Meny
-        currency: Mena
-        current_orders: Aktuálne objednávky
-        current_password: Aktuálne heslo
-        current_promotions: Aktuálne propagácie
-        current_stock: Položiek na sklade
-        customer: Zákazník
-        customer_care: Starostlivosť o zákazníkov
-        customer_details: Detail zákazníka
-        customer_id: ID zákazníka
-        customer_login: Prihlásenie
-        customer_not_notified: Upozornenie nebolo poslané
-        customer_notified: Upozornenie poslané
-        customer_orders: Objednávky zákazníka
-        customer_since: Zákazník od
-        customers: Zákazníci
-        customers_list_of_all_customers_in_store: Zákazníci, <small>zoznam všetkých zakazníkov v obchode</small>
-        customize_default_metadata: Úprava predvolených metadáta
-        customize_metadata: Upraviť metadáta
-        customize_products_metadata: Upraviť produktové metadáta
-        customizing_metadata: Úprava metadáta
-        dashboard: Administračný panel
-        data: Údaje
-        date: Dátum
-        datetime: Dátum a čas
-        default_billing_address: Predvolená fakturačná adresa
-        default_locale: Predvolený jazyk
-        default_shipping_address: Predvolaná doručovacia adresa
-        delete: Odstrániť
-        delete_image: Odstrániť obrázok
-        deleted: Zmazané
-        delivery_and_shipping: Doručenie a doprava
-        description: Popis
-        details: Podrobnosti
-        disable: Vypnúť
-        disabled: Vypnuté
-        discount: Zľava
-        discounted_unit_price: Zľavnená jednotková cena
-        edit: Upraviť
-        edit_admin_user: Upraviť administrátora
-        edit_association_type: Upraviť typ priradenia
-        edit_channel: Úprava kanálu
-        edit_country: Upraviť krajinu
-        edit_coupon: Upraviť kupón
-        edit_currency: Úprava meny
-        edit_customer: Úprava zákazníka
-        edit_locale: Upraviť jazyk
-        edit_my_address: Upraviť moju adresu
-        edit_payment_method: Úprava spôsobu platby
-        edit_product: Upraviť produkt
-        edit_product_attribute: Upraviť produktovú vlastnosť
-        edit_product_option: Upraviť produktovú voľbu
-        edit_product_variant: Upraviť produktový variant
-        edit_promotion: Upraviť propagáciu
-        edit_promotion_coupon: Upraviť zľavový kupón
-        edit_report: Úprava reportu
-        edit_shipping_address: Upraviť dodaciu adresu
-        edit_shipping_method: Úpraviť spôsob doručenia
-        edit_tax_category: Úprava daňovej kategórie
-        edit_tax_rate: Upraviť sadzbu dane
-        edit_taxon: Úpraviť kategóriu
-        edit_your_items_apply_coupon_or_proceed_to_the_checkout: Úpraviť položky, uplatniť kupón alebo prejsť na objednávku
-        edit_your_personal_information: Upraviť osobné údaje
-        edit_zone: Upraviť zónu
-        editing_attribute: Úprava vlastnosti
-        editing_channel: Úprava kanálu
-        editing_country: Úprava krajiny
-        editing_coupon: Upraviť kupón
-        editing_currency: Úprava meny
-        editing_customer: Úprava zákazníka
-        editing_email: Úprava e-mailu
-        editing_imagine_block: Úprava obrazového bloku
-        editing_menu: Úprava menu
-        editing_menu_node: Úprava prvku menu
-        editing_option: Úprava volby
-        editing_order: Úprava objednávky
-        editing_page: Úpravy stránky
-        editing_payment: Úprava platby
-        editing_payment_method: Upravujem spôsob platby
-        editing_permission: Úprava oprávnenia
-        editing_product: Úprava produktu
-        editing_promotion: Upraviť propagáciu
-        editing_review: Úprava recenzie
-        editing_role: Úprava role
-        editing_shipment: Úprava zásielky
-        editing_shipping_category: Úprava kategórie doručenia
-        editing_shipping_method: Úprava spôsobu dopravy
-        editing_simple_block: Úprava obsahového bloku
-        editing_slideshow_block: Úprava prezentačného (slideshow) bloku
-        editing_string_block: Úprava textového bloku
-        editing_tax_category: Úprava daňovej kategórie
-        editing_taxon: Úprava kategórie
-        editing_user: Úprava používateľa
-        editing_variant: Upravujem variantu
-        editing_zone: Upravujem zónu
-        email: E-mail
-        email_templates: Šablóny e-mailov
-        emails: E-maily
-        empty: Prázdne
-        enable: Zapnúť
-        enabled: Zapnuté
-        end_date: Dátum ukončenia zverejnenia
-        ends_at: Koniec
-        ends_with: Končí na
-        enjoy_all_the_features_that_are_available_on_your_personal_space_to_view_track_and_manage_all_your_data: Užite si všetky funkcie, ktoré sú k dispozícií k zobrazeniu, sledovaniu a spravovaniu vašich dát na vašom osobnom priestore
-        enter_your_code: Zadajte Váš kód
-        equal: Rovná sa
-        error: Chyba
-        exchange_rate: Výmenný kurz
-        exclusive: Exkluzívne
-        existing_customer: Existujúci zákazník
-        expiration_and_usage_limits: Expirácia a limit použitia
-        extra_information: Ďalšie informácie
-        extra_notes: Ďalšie poznámky
-        failed: Neúspešná
-        faqs: Často kladené otázky
-        female: Žena
-        filters: Filtre
-        first_name: Meno
-        from: Od
-        fulfill: Vybaviť
-        fulfilled: Vybavené
-        gateway: Brána
-        general_info: Všeobecné informácie
-        general_settings: Všeobecné nastavenia
-        generate: Vygenerovať
-        generate_coupons: Vygenerovať kupóny
-        generate_variants: Generaovať produktové varianty
-        generating_coupons: Generujú sa kupóny
-        go: Pokračovať
-        go_to_dashboard: Prejsť na administračný panel
-        grand_total: Celkový súčet
-        guest: Návštevník
-        guest_customer: Návšetvník
-        hello: Ahoj
-        hello_name: Ahoj <b>%name%</b>
-        hide_deleted: Skryť odstránené
-        home: Úvod
-        hostname: Hostname
-        id: ID
-        identifier: Identifikátor
-        if_you_have_an_account_sign_in_with_your_email_address: Ak máte konto, prihláste sa pomocou e-mailovej adresy
-        image: Obrázok
-        images: Obrázky
-        imagine_blocks: Obrazové bloky
-        in: V
-        included_in_price: Zahrnutá v cene
-        index_metadata: Metadáta
-        index_of_all_configured_locales: Zoznam všetkých jazykov
-        info: Info
-        information: Informácia
-        integer: Číslo
-        inventory: Skladové zásoby
-        inventory_here_you_can_see_current_stock_levels: Skladové zásoby <small> prehľad skladových položiek</small>
-        inventory_index: Skladové zásoby
-        inventory_state: Stav skladových zásob
-        inventory_tracking: Sledovanie skladových zásob
-        invoice: Faktúra
-        is_enabled: Zapnuté
-        item: Položka
-        items: Položky
-        items_total: Položiek celkom
-        jump_to_page: Prejsť na stranu
-        last_login: Posledné prihlásenie
-        last_name: Priezvisko
-        last_update: Posledná aktualizácia
-        last_updated: Posledná aktualizácia
-        last_week_orders: Objednávky za posledný týždeň
-        last_week_revenue: Príjmy za minulý týždeň
-        lastname: Priezvisko
-        latest_orders: Posledné objednávky
-        latest_products: Najnovšie produkty
-        links: Odkazy
-        list_coupons: Zoznam kupónov
-        list_variants: Zoznam variantov
-        locale: Jazyk
-        locales: Jazyky
-        lock: Zamknúť
-        locked: Zamknuté
-        logged_in_as: Prihlásený ako %username%
-        login: Prihlásenie
-        login_button: Prihlásenie
-        login_sylius_store: Prihlásenie do <small>Sylius obchodu</small>
-        logout: Odhlásiť
-        main_taxon: Hlavná kategória
-        male: Muž
-        manage: Správa
-        manage_adjustments: Spravovať úpravy
-        manage_admin_users: Správovať administrátorov
-        manage_attributes: Správa vlastnosti
-        manage_attributes_of_your_products: Spravovať vlastnosti vašich produktov
-        manage_categorization_of_your_products: Spravovať kategorizáciu produktov
-        manage_channels: Správa kanálov
-        manage_configuration_options_of_your_products: Spravovať nastavenia volieb vašich produktov
-        manage_countries: Spravovať krajiny
-        manage_coupons: Spravovať kupóny
-        manage_currencies_available_in_the_store: Spravovať dostupné meny v obchode
-        manage_customers: Správa zákazníkov
-        manage_discounts_and_promotional_campaigns: Spravovať zlavy a propagačné kampane
-        manage_emails: Správa e-mailov
-        manage_geographical_zones: Spravovať geografické zóny
-        manage_languages_available_in_the_store: Spravovať dostupné jazyky v obchode
-        manage_metadata: Spravovať metadáta
-        manage_options: Spravovať voľby
-        manage_orders: Spravovať  objednávky
-        manage_payment_methods_available_to_your_customers: Spravovať platobné metódy k dispozícii pre vašich zákazníkov
-        manage_payments: Spravovať platby
-        manage_products: Spravovať produkty
-        manage_promotions: Spravovať propagácie
-        manage_reviews: Spravovať recenzie
-        manage_shipments: Spravovať zásielky
-        manage_shipping_categories: Spravovať kategórie doručenia
-        manage_shipping_destinations: Spravovať prepravné destinácie
-        manage_shipping_methods: Správa spôsoby dopravy
-        manage_shipping_methods_for_your_store: Spravovať dostupné spôsoby dopravy v obchode
-        manage_tax_categories: Správovať daňové kategorie
-        manage_tax_rates: Spravovať sadzby dane
-        manage_taxation_of_your_products: Spravovať zdaňovanie vašich produktov
-        manage_users: Správa užívateľov
-        manage_variants: Spravovať varianty
-        manage_your_customers: Spravovať vašich zákazníkov
-        manage_your_personal_information_and_preferences: Spravovať svoje osobné údaje a nastavenia
-        manage_your_product_catalog: Spravovať Váš produktový katalóg
-        manage_zones: Spravovať zóny
-        marketing: Marketing
-        media: Média
-        members: Členovia
-        menu_nodes: Menu elementy
-        menus: Menu
-        message: Správa
-        metadata_index: Metadáta
-        method: Spôsob
-        modified: Upravené
-        move_down: Posunúť dole
-        move_up: Posunúť hore
-        my_account: Môj účet
-        n_a: Nie je k dispozícii
-        name: Názov
-        new: Nová
-        new_admin_user: Nový administrátor
-        new_channel: Nový kanál
-        new_comment_posted_on_order: Nová poznámka k objednávke
-        new_country: Nová krajina
-        new_coupon: Nový kupón
-        new_currency: Nová mena
-        new_customer: Nový zákazník
-        new_customers: Noví zákazníci
-        new_locale: Nový jazyk
-        new_order: Nová objednávka
-        new_orders: Nové objednávky
-        new_password: Nové heslo
-        new_payment: Nová platba
-        new_payment_method: Nový spôsob platby
-        new_permission: Nové oprávnenie
-        new_product: Nový produkt
-        new_product_attribute: Nová vlastnosť
-        new_product_option: Nová produktová voľba
-        new_product_variant: Nová varianta produktu
-        new_promotion: Nové propagácia
-        new_promotion_coupon: Nový zľavový kupón
-        new_review: Nová recenzia
-        new_role: Nová rola
-        new_shipping_category: Nová kategória doručenia
-        new_shipping_method: Nový spôsob doručenia
-        new_tax_category: Nová daňová kategoria
-        new_tax_rate: Nová sadzba dane
-        new_taxon: Nová kategória
-        new_user: Nový používateľ
-        new_zone: Nová zóna
-        newest_products: Najnovšie produkty
-        next: Ďalej
-        no_label: Nie
-        no_account: Žiadny účet
-        no_association_types_to_display: Neexistujú žiadne typy priradení
-        no_comment: Žiadne komentáre
-        no_default_billing_address: Nemáte predvolenú fakturačnú adresu
-        no_default_shipping_address: Nemáte predvolenú doručovaciu adresu
-        no_description: Žiadny popis
-        no_payment_methods_available: V súčasnosti neexistujú žiadne spôsoby platby dostupné pre vašu objednávku
-        no_pricing_configuration: Neexistuje cenová konfigurácia
-        no_promotion: Nie sú uplatnené žiadne akcie
-        no_requirement: Žiadne podmienky
-        no_results: Žiadne výsledky
-        no_results_to_display: Neexistujú žiadne vysledky na zobrazenie
-        no_shipping_category: Žiadna kategória doručenia
-        no_shipping_charges: Nie sú uplatnené žiadne poplatky za dopravu
-        no_shipping_methods_available: V súčasnosti neexistujú žiadne spôsoby dopravy dostupné pre vašu dodaciu adresu
-        no_short_description: <i>Žiadny stručný popis</i>
-        no_sku: Žiadny skladový kód (SKU)
-        no_tax_category: Žiadna daňová kategória
-        no_taxes: Nie sú uplatnené žiadne dane
-        no_theme: Žiadna Téma
-        not_available_in_your_country: Nedostupné vo vašej krajine
-        not_contains: Neobsahuje
-        not_empty: Nie je prázdny
-        not_in: Nie je v
-        not_verified: Neoverené
-        not_tracked: Nesledovať
-        notes: Poznámky
-        notify_customer: Upozorniť zákazníka
-        number: Číslo
-        number_of_orders: Počet objednávok
-        oauth_provider: OAuth poskytovateľ
-        on_hold: Rezerované
-        options: Voľby
-        or: alebo
-        order: Objednávka
-        order_comment_name: Poznámka k objednávke
-        order_comments: Poznámky k objednávke
-        order_confirmation_name: Potvrdenie objednávky
-        order_details: Detaily Vašej objednávky
-        order_history: História objednávok
-        order_item_product: Položka
-        order_state: Stav objednávky
-        order_summary: Prehľad objednávky
-        order_total: Celková cena objednávky
-        order_value: Cena objednávky
-        ordered: Objednané
-        orders: Objednávky
-        original_price: Pôvodná cena
-        out_of_stock: Nie je na sklade
-        overview_of_your_store: Prehľad Vášho obchodu
-        page: Stránka
-        pages: Stránky
-        paid: Zaplatené
-        parent: Nadradená kategória
-        partially_paid: Čiastočne zaplatené
-        partially_shipped: Čiastočne dodané
-        password: Heslo
-        payment: Platba
-        payment_details: Detail platby
-        payment_method: Spôsob platby
-        payment_methods: Spôsoby platby
-        payment_mode: Spôsob platby
-        payment_ready_to_pay: Môžete uskutočniť Vašu platbu
-        payment_state: Stav platby
-        payments: Platby
-        pay: Zaplatiť
-        pay_again: Kliknite zaplaiť pre zopakovanie platby
-        pending: Čakajúca
-        per_customer_usage_limit: Obmedzenie použitia pre zákazníka
-        percent: Percento
-        permissions: Oprávnenia
-        personal_information: Osobné údaje
-        phone_number: Telefónne číslo
-        place_order: Potvrdiť objednávku
-        placed_an_order: Úspešne ste zrealizovali objednávku.
-        placed_at: Vytvorené
-        postcode: PSČ
-        powered_by: Vytvorené v systéme
-        presentation: Verejný názov
-        previous: Predchádzajúci
-        price: Cena
-        pricing: Cenník produktov
-        priority: Priorita
-        privacy_policy: Zásady ochrany osobných údajov
-        process_your_orders: Spracovať vaše objednávky
-        processing: Spracúvava sa
-        product: Produkt
-        product_association_index: Priradenia
-        product_association_type_index: Typ priradenia
-        product_association_types: Priradenie produktov
-        product_associations: Produktové priradenia
-        product_attributes: Vlastnosti
-        product_details_viewing_product_product: Detail produktu <small>pre "<strong>%product%</strong>"</small>
-        product_options: Produktové volby
-        product_review: Produktová recenzia
-        product_reviews: Produktové recenzie
-        product_variants: Produtové varianty
-        products_categorized_as_name: Produkty kategorizované ako "%name%"
-        products_categorized_under_taxon_taxon: Produkty <small>kategorizované pod "%taxon%"</small>
-        products_index_of_all_products_in_your_store: Produkty <small>zoznam všetkých produktov vo Vašom obchode</small>
-        profile: Profil
-        promotion_configuration: Nastavenie propagácii
-        promotion_coupons: Kupóny
-        promotion_details: Detail propagácie
-        promotion_discount: Zľava
-        promotion_information: Informacie o propagácii
-        promotion_total: Zľavy celkom
-        promotions: Akcie
-        province: Provincia
-        provinces: Provincie
-        purchased_from: Zakúpené od
-        qty: Množstvo
-        qty_max: Max. množstvo
-        qty_min: Min. množstvo
-        quantity: Množstvo
-        rating: Hodnotenie
-        ready: Pripravená
-        recent_customers: Najnovši zákaznici
-        recent_orders: Posledné objednávky
-        recent_users: Poslední používatelia
-        refunded: Vrátené peniaze
-        register: Registrovať
-        register_button: Registrovať
-        register_in_the_store: Zaregistrujte sa
-        registered_customers: Registrovaní používatelia
-        registration_create_an_account_in_store: Registráciá, <small>vytvoriť účet v obchode</small>
-        registration_date: Dátum registrácie
-        rejected: Zamietnuté
-        release_inventory: Uvolnenie skladových položkiek
-        remember_me: Zapamätať si ma
-        remove_attribute: Odstrániť vlastnosť
-        repeat_new_password: Zopakujte nové heslo
-        report_details: Detail reportu
-        reports: Reporty
-        reserved: Rezervované
-        reset: Obnoviť
-        reset_button: Obnoviť
-        reset_password: Obnoviť heslo
-        restore: Obnoviť
-        retail_price: Predajná cena
-        return: Vrátiť
-        returned: Vrátená
-        returns_policy: Reklamačný poriadok
-        revert: Vrátiť spať
-        review_details: Detail recenzie
-        reviews: Recenzie
-        roles: Role
-        rules: Pravidlá
-        sales: Predaj
-        sales_this_month: Predaj
-        save: Uložiť
-        save_changes: Uložiť zmeny
-        scope: Rozsah
-        search: Vyhľadať
-        security_settings: Bezpečnostné nastavenia
-        select_taxon: Vyberte kategóriu
-        set_a_new_password_for_your_account: Nastaviť nové heslo k vašemu účtu
-        set_as_default_billing_address: Nastaviť ako predvolenú fakturačnú adresu
-        set_as_default_shipping_address: Nastaviť ako predvolenú dodaciu adresu
-        ship: Dodanie
-        ship_to: Odoslať do
-        shipment: Zásielka
-        shipment_confirmation_name: Potvrdenie odoslania zásielky
-        shipment_details: Detaily zásielky
-        shipment_mode: Spôsob doručenia
-        shipment_state: Stav zásielky
-        shipments: Zásielky
-        shipped: Odoslané
-        shipping: Doručenie
-        shipping_address: Adresa doručenia
-        shipping_and_payment_methods: Dodacie a platobné metódy
-        shipping_category: Kategória doručenia
-        shipping_charges: Poplatky za dopravu
-        shipping_method: Spôsob doručenia
-        shipping_method_details: Podrobnosti spôsobu dopravy
-        shipping_methods: Spôsoby doručenia
-        shipping_state: Stav dodávky
-        shipping_total: Doprava celkom
-        shop_by: Nakupovať podľa
-        shop_by_brand: Nakupovať podľa značky
-        show: Zobraziť
-        show_all: Zobraziť všetky
-        show_deleted: Zobraziť odstránené
-        show_in_store: Zobraziť v obchode
-        show_metadata: Zobraziť metadáta
-        sign_in: Prihlásiť
-        sign_in_here: Prihláste sa
-        sign_in_to_the_store_or_create_new_account: Prihlásiť sa do obchodu <small>alebo vytvoriť nový účet</small>
-        sign_out: Odhlásiť
-        simple_blocks: Obsahové bloky
-        simple_product: Jednoduchý produkt
-        sku: Skladový kód (SKU)
-        slideshow: Prezentácia
-        slideshow_blocks: Prezentáčné (slideshow) bloky
-        start_date: Dátum začiatku zverejnenia
-        starts_at: Začiatok
-        starts_with: Začína na
-        state: Stav
-        status: Stav
-        street: Ulica
-        string_blocks: Textové bloky
-        subject: Predmet
-        subtotal: Medzisúčet
-        success: Úspech
-        summary: Zhrnutie
-        support: Podpora
-        sylius_logo: Sylius
-        tax: Daň
-        tax_categories: Daňové kategórie
-        tax_category: Daňová kategória
-        tax_rate_details: Podrobnosti sadzby dane
-        tax_rates: Sadzby dane
-        tax_total: Daň celkom
-        taxation_categories: Daňové kategórie
-        taxation_settings: Nastavenie zdaňovania
-        taxes: Dane
-        taxonomy: Kategorizácia
-        terms_and_conditions: Podmienky používania
-        text: Text
-        textarea: Textové pole
-        thank_you: Ďakujeme Vám!
-        thank_you_for_your_order: Ďakujeme za vašu objednávku
-        theme: Téma
-        there_are_no_attributes_configured: Nie sú nakonfigurované žiadne vlastnosti
-        there_are_no_blocks_to_display: Neexistujú žiadne bloky na zobrazenie
-        there_are_no_channels_configured: Nie sú nakonfigurované žiadne kanály
-        there_are_no_countries_configured: Neexistujú žiadne nakonfigurované krajiny
-        there_are_no_coupon_to_display: Neexistujú žiadne kupóny na zobrazenie
-        there_are_no_currencies_to_display: Nie sú definováne žiadne meny
-        there_are_no_customers_to_display: Nie sú žiadný zákazníci na zobrazenie
-        there_are_no_emails_configured: Nie sú nastavené žiadne e-maily
-        there_are_no_images_for_this_product: Pre produkt neexistujú žiadne obrázky
-        there_are_no_inventory_items_to_display: Neexistujú žiadne kladové položky na zobrazenie
-        there_are_no_inventory_units_to_display: Nie sú žiadne skladové položky k zobrazeniu
-        there_are_no_locales_configured: Neexistujú žiadne jazyky na zobrazenie
-        there_are_no_logged_events_to_display: Nie sú žiadne zaznamenané udalosti na zobrazenie
-        there_are_no_menu_nodes_to_display: Nie sú žiadne prvky menu na zobraznie
-        there_are_no_menus_to_display: Nie je žiadne menu na zobrazenie
-        there_are_no_options_configured: Nie sú nakonfigurované žiadne volby
-        there_are_no_options_for_this_product: Nie sú žiadne voľby
-        there_are_no_orders_for_this_customer_to_display: Tento používateľ nemá žiadne objednávky
-        there_are_no_pages_to_display: Nie sú žiadne stránky na zobrazenie
-        there_are_no_payment_methods_configured: Nie sú nakonfigurované žiadne platobné spôsoby
-        there_are_no_payments_configured: Nie sú nakonfigurované žiadne platby
-        there_are_no_permissions_defined: Nie sú definované žiadne oprávnenia
-        there_are_no_products_to_display: Neexistujú žiadne produkty na zobrazenie
-        there_are_no_promotions_configured: Nie sú nakonfigurované žiadne zľavy
-        there_are_no_reports_created: Nie sú vytvorené žiadne reporty
-        there_are_no_roles_defined: Nie sú definované žiadne role
-        there_are_no_shipments_to_display: Neexistujú žiadne zásielky na zobrazenie
-        there_are_no_shipping_categories_configured: Nie sú nakonfigurované žiadne kategórie doručenia
-        there_are_no_shipping_methods_configured: Nie sú nakonfigurované žiadne spôsoby dopravy
-        there_are_no_tax_categories_configured: Nie sú nakonfigurované žiadne daňové kategorie
-        there_are_no_tax_rates_configured: Nie sú nakonfigurované žiadne daňové sadzby
-        there_are_no_taxons_for_this_product: Pre produkt neexistujú žiadne kategórie
-        there_are_no_taxons_to_display: Nie sú žiadne kategórie na zobrazenie
-        there_are_no_users_to_display: Žiadní používatelia k zobrazeniu
-        there_are_no_variants_to_display: Žiadne variatny na zobrazenie
-        there_are_no_zones_configured: Neexistujú žiadne zóny
-        there_is_no_main_taxon_for_this_product: Pre tento produkt nie je zvolená hlavná kategória
-        this_months_statistics: Mesačná štatistika
-        this_product_has_no_attributes_defined: Produkt nemá žiadne vlastnosti
-        title: Názov
-        to: Do
-        topic: Téma
-        total: Spolu
-        total_orders: Celkový počet objednávok
-        total_qty: Celkové množstvo
-        total_records: Celkový počet záznamov
-        total_registrations: Celkový počet registrácií
-        tracking_code: Trackovací kód
-        tracking_number: Sledovací kód
-        translations: Preklady
-        type: Typ
-        unavailable: Nedostupný
-        unit_price: Jednotková cena
-        unknown: Neznáme
-        unlimited: Neobmedzené
-        unlock: Odomknúť
-        update: Upraviť
-        update_cart: Aktualizovať košík
-        update_product_association_type: Upraviť typ produktového priradenia
-        updating_tax_rate: Úprava sadzby dane
-        usage: Použitie
-        usage_limit: Limit použitia
-        used: Použité
-        user_details: Údaje o používateľovi
-        username: Používateľské meno
-        users_list_of_all_users_registered_in_store: Používatelia <small>Zoznam všetkých používateľov zaregistrovaných v obchode</small>
-        values: Hodnoty
-        variant: Variant
-        variant_selection_method: Spôsob výberu produktového variantu
-        variants: Varianty
-        verified: Overené
-        verify: Overiť
-        view: Zobraziť
-        view_and_edit_cart: Zobraziť a upraviť košík
-        view_more: Zobraziť viac
-        view_product_details: Zobraziť podrobnosti pre %product%
-        void: Neplatná
-        volume_based_pricing: Cena podľa objemu
-        warning: Varovanie
-        welcome: Vitajte
-        welcome_to_our_store: Vitajte v našom obchode
-        welcome_to_your_space: Vitajte vo vašom priestore
-        yes_label: Áno
-        you_are_customer_since: Ste zákazníkom od
-        you_have_no_addresses_defined: Nemáte uložené žiadne adresy
-        you_have_no_new_orders: Nemáte žiadne nové objednávky
-        you_may_also_like: Mohlo by sa Vám páčiť
-        your_cart_is_empty: Váš košík je prázdny
-        your_last_5_orders: Posledných 5 objednávok
-        your_order_has_been_shipped: Vaša objednávka bola odoslaná
-        your_products: Vaše produkty
-        your_profile: Váš profil
-        your_shopping_cart: Váš nákupný košík
-        your_store: Zobraziť obchod
-        zone: Zóna
-        zone_consisting_of_countries: Zóna pozostávajúca z krajín
-        zone_consisting_of_other_zones: Zóna pozostávajúca z iných oblastí
-        zone_consisting_of_provinces: Zóna pozostávajúca z provincií
-        zone_details: Detaily zóny
-        zones: Zóny
+        abandoned: 'Opustený'
+        about: 'O nás'
+        access_token: 'Prístupový token'
+        access_your_store_account_or_create_a_new_one: 'Prihláste sa do vašeho účtu, alebo si vytvorte nový účet'
+        account_credentials: 'Prihlasovacie údaje'
+        account_panel_outline: 'Užite si všetky funkcie, ktoré sú k dispozícií k zobrazeniu, sledovaniu a spravovaniu vašich dát na vašom osobnom priestore'
+        action: 'Akcia'
+        actions: 'Akcie'
+        add: 'Pridať'
+        add_action: 'Pridať podmienku'
+        add_association: 'Pridať priradenie'
+        add_attribute: 'Pridať vlastnosť'
+        add_attributes: 'Pridať vlastnosť'
+        add_channel: 'Pridať kanál'
+        add_choice: 'Pridať možnosť'
+        add_coupon: 'Pridať kupón'
+        add_image: 'Pridať obrázok'
+        add_member: 'Pridať člena'
+        add_menu_element: 'Pridať prvok do menu'
+        add_new_email: 'Pridať nový e-mail'
+        add_new_permission: 'Pridať nové oprávnenie'
+        add_new_role: 'Pridať novú rolu'
+        add_province: 'Pridať provinciu'
+        add_rule: 'Pridať pravidlo'
+        add_to_cart: 'Pridať do košíka'
+        add_value: 'Pridať hodnotu'
+        adding_new_customer_groups: 'Pridanie novej zákazníckej skupiny'
+        adding_new_email: 'Pridánie nového e-mailu'
+        adding_new_locale: 'Pridávam nový jazyk'
+        additional_information: 'Doplňujúce informácie'
+        address: 'Adresa'
+        addressing: 'Adresy'
+        addressing_step: 'Doručenie'
+        adjustments: 'Úpravy'
+        administration: 'Administrácia'
+        administration_dashboard: 'Administračný panel'
+        administration_panel_login: 'Prihásenie do administračného rozhrania'
+        admin_users: 'Administrátory'
+        all: 'Všetky'
+        all_your_addresses: 'Všetky vaše adresy'
+        an_error_occurred: 'Vyskytla sa chyba'
+        api: 'API'
+        apply_coupon: 'Použiť kupón'
+        are_your_sure_you_want_to_perform_this_action: 'Ste si istý, že chcete vykonať túto akciu?'
+        association: 'Priradenia'
+        association_types: 'Typy priradenia'
+        associations: 'Priradenia'
+        assortment: 'Sortiment'
+        attributes: 'Vlastnosti'
+        author: 'Autor'
+        availability: 'Dostupnosť'
+        available_for_channels: 'Dostupné pre kanály'
+        available_on: 'Dostupný od'
+        available_on_hand: 'Dostupné na sklade'
+        available_until: 'Dostupný do'
+        average_order_value: 'Priemerná hodnota objednávky'
+        awaiting_payment: 'Čaká na zaplatenie'
+        back: 'Späť'
+        back_to_store: 'Späť do obchodu'
+        backorder: 'Predobjednať'
+        backordered: 'Predobjednané'
+        balance_due: 'Nedoplatok'
+        base_currency: 'Základná mena'
+        bill_to: 'Faktúrovať na'
+        billing_address: 'Fakturačná adresa'
+        blocks: 'Bloky'
+        body: 'Obsah'
+        browse_products: 'Prezerať produkty'
+        build: 'Verzia'
+        calculator: 'Spôsob vypočtu'
+        cancel: 'Zrušiť'
+        cancelled: 'Zrušená'
+        cart: 'Košík'
+        cart_locked: 'Košík uzamknutý'
+        cart_summary: 'Obsah košíka'
+        categorization: 'Kategórie'
+        category: 'Kategória'
+        category_requirements: 'Požiadavky pre kategóriu'
+        change_address: 'Zmena adresy'
+        change_file: 'Zmeniť súbor'
+        change_password: 'Zmena hesla'
+        change_payment_method: 'Zmeniť spôsob platby'
+        change_shipping_method: 'Zmeniť spôsob dopravy'
+        change_your_password: 'Zmena hesla'
+        channel: 'Kanál'
+        channels: 'Kanály'
+        charges_and_taxes: 'Poplatky a dane'
+        checkbox: 'Checkbox'
+        checking_out_as: 'Nakupujúci ako'
+        checkout: 'Košík'
+        choose_file: 'Vybrať súbor'
+        city: 'Mesto'
+        clear_cart: 'Vyprázdniť košík'
+        clear_filters: 'Vymazať filter'
+        code: 'Kód'
+        color: 'Farba'
+        comment: 'Komentár'
+        company: 'Spoločnosť'
+        complete: 'Dokončené'
+        completed: 'Dokončená'
+        configurable_product: 'Nastaviteľný produkt'
+        configuration: 'Konfigurácia'
+        configure_channels_available_in_your_store: 'Nastavte dostupné kanály vo vašom obchode'
+        confirm_your_action: 'Potvrďte vašu akciu'
+        confirmation: 'Potvrdenie'
+        confirmation_title: 'Potvrdenie'
+        confirmed: 'Potvrdený'
+        contact_us: 'Kontaktujte nás'
+        contain_variants: 'Obsahuje produktové varianty'
+        contains: 'Obsahuje'
+        countries: 'Krajiny'
+        country: 'Štát'
+        country_details: 'Podrobnosti o krajine'
+        coupon: 'Kupón'
+        coupon_based: 'Používať kupóny'
+        coupons: 'Kupóny'
+        create: 'Vytvoriť'
+        create_a_new_address: 'Vytvoriť novú adresu'
+        create_a_new_customer_account: 'Vytvoriť nový účet'
+        create_an_account: 'Vytvoriť účet'
+        create_association_type: 'Vytvoriť typ priradenia'
+        create_country: 'Vytvoriť krajinu'
+        create_currency: 'Vytvoriť menu'
+        create_customer: 'Vytvoriť zákazníka'
+        create_imagine_block: 'Vytvoriť obrazový blok'
+        create_locale: 'Vytvoriť jazyk'
+        create_menu: 'Vytvoriť menu'
+        create_menu_node: 'Vytvoriť prvok menu'
+        create_new_coupon: 'Vytvoriť nový kupón'
+        create_new_page: 'Vytvoriť novú stránku'
+        create_new_report: 'Vytvorenie nového reportu'
+        create_option: 'Vytvoriť voľbu'
+        create_order: 'Vytvoriť objednávku'
+        create_payment: 'Vytvoriť platbu'
+        create_payment_method: 'Vytvoriť spôsob platby'
+        create_product: 'Vytvoriť produkt'
+        create_product_association: 'Vytvoriť priradenie produktu'
+        create_product_association_type: 'Vytvoriť typ produktového priradenia'
+        create_product_attribute: 'Vytvoriť vlastnosť'
+        create_promotion: 'Vytvorenie propagácie'
+        create_report: 'Vytvoriť report'
+        create_shipping_category: 'Vytvoriť kategóriu doručenia'
+        create_shipping_method: 'Vytvoriť spôsob dopravy'
+        create_simple_block: 'Vytvoriť obsahový blok'
+        create_slideshow_block: 'Vytvoriť prezentačný (slideshow) blok'
+        create_string_block: 'Vytvoriť textový blok'
+        create_tax_category: 'Vytvoriť daňovú kategoriu'
+        create_tax_rate: 'Vytvoriť sadzbu dane'
+        create_taxon: 'Vytvoriť kategóriu'
+        create_user: 'Vytvoriť užívateľa'
+        create_variant: 'Vytvoriť variantu'
+        create_zone: 'Vytvoriť zónu'
+        created_at: 'Vytvorené'
+        creating_a_new_imagine_block: 'Vytvoriť nový obrazový blok'
+        creating_a_new_simple_block: 'Vytvorenie nového obsahového bloku'
+        creating_a_new_slideshow_block: 'Vytvorenie nového prezentačného (slideshow) bloku'
+        creating_a_new_string_block: 'Vytvorenie nového textového bloku'
+        creating_menu: 'Vytvárenie menu'
+        creating_menu_node: 'Vytvaranie prvku menu'
+        creating_new_page: 'Vytvárenie novej stránky'
+        creation_date: 'Dátum vytvorenia'
+        creation_time: 'Čas vytvorenia'
+        currencies: 'Meny'
+        currency: 'Mena'
+        current_orders: 'Aktuálne objednávky'
+        current_password: 'Aktuálne heslo'
+        current_promotions: 'Aktuálne propagácie'
+        current_stock: 'Položiek na sklade'
+        customer: 'Zákazník'
+        customer_care: 'Starostlivosť o zákazníkov'
+        customer_details: 'Detail zákazníka'
+        customer_id: 'ID zákazníka'
+        customer_login: 'Prihlásenie'
+        customer_not_notified: 'Upozornenie nebolo poslané'
+        customer_notified: 'Upozornenie poslané'
+        customer_orders: 'Objednávky zákazníka'
+        customer_since: 'Zákazník od'
+        customers: 'Zákazníci'
+        customers_list_of_all_customers_in_store: 'Zákazníci, <small>zoznam všetkých zakazníkov v obchode</small>'
+        customize_default_metadata: 'Úprava predvolených metadáta'
+        customize_metadata: 'Upraviť metadáta'
+        customize_products_metadata: 'Upraviť produktové metadáta'
+        customizing_metadata: 'Úprava metadáta'
+        dashboard: 'Administračný panel'
+        data: 'Údaje'
+        date: 'Dátum'
+        datetime: 'Dátum a čas'
+        default_billing_address: 'Predvolená fakturačná adresa'
+        default_locale: 'Predvolený jazyk'
+        default_shipping_address: 'Predvolaná doručovacia adresa'
+        delete: 'Odstrániť'
+        delete_image: 'Odstrániť obrázok'
+        deleted: 'Zmazané'
+        delivery_and_shipping: 'Doručenie a doprava'
+        description: 'Popis'
+        details: 'Podrobnosti'
+        disable: 'Vypnúť'
+        disabled: 'Vypnuté'
+        discount: 'Zľava'
+        discounted_unit_price: 'Zľavnená jednotková cena'
+        edit: 'Upraviť'
+        edit_admin_user: 'Upraviť administrátora'
+        edit_association_type: 'Upraviť typ priradenia'
+        edit_channel: 'Úprava kanálu'
+        edit_country: 'Upraviť krajinu'
+        edit_coupon: 'Upraviť kupón'
+        edit_currency: 'Úprava meny'
+        edit_customer: 'Úprava zákazníka'
+        edit_locale: 'Upraviť jazyk'
+        edit_my_address: 'Upraviť moju adresu'
+        edit_payment_method: 'Úprava spôsobu platby'
+        edit_product: 'Upraviť produkt'
+        edit_product_attribute: 'Upraviť produktovú vlastnosť'
+        edit_product_option: 'Upraviť produktovú voľbu'
+        edit_product_variant: 'Upraviť produktový variant'
+        edit_promotion: 'Upraviť propagáciu'
+        edit_promotion_coupon: 'Upraviť zľavový kupón'
+        edit_report: 'Úprava reportu'
+        edit_shipping_address: 'Upraviť dodaciu adresu'
+        edit_shipping_method: 'Úpraviť spôsob doručenia'
+        edit_tax_category: 'Úprava daňovej kategórie'
+        edit_tax_rate: 'Upraviť sadzbu dane'
+        edit_taxon: 'Úpraviť kategóriu'
+        edit_your_items_apply_coupon_or_proceed_to_the_checkout: 'Úpraviť položky, uplatniť kupón alebo prejsť na objednávku'
+        edit_your_personal_information: 'Upraviť osobné údaje'
+        edit_zone: 'Upraviť zónu'
+        editing_attribute: 'Úprava vlastnosti'
+        editing_channel: 'Úprava kanálu'
+        editing_country: 'Úprava krajiny'
+        editing_coupon: 'Upraviť kupón'
+        editing_currency: 'Úprava meny'
+        editing_customer: 'Úprava zákazníka'
+        editing_email: 'Úprava e-mailu'
+        editing_imagine_block: 'Úprava obrazového bloku'
+        editing_menu: 'Úprava menu'
+        editing_menu_node: 'Úprava prvku menu'
+        editing_option: 'Úprava volby'
+        editing_order: 'Úprava objednávky'
+        editing_page: 'Úpravy stránky'
+        editing_payment: 'Úprava platby'
+        editing_payment_method: 'Upravujem spôsob platby'
+        editing_permission: 'Úprava oprávnenia'
+        editing_product: 'Úprava produktu'
+        editing_promotion: 'Upraviť propagáciu'
+        editing_review: 'Úprava recenzie'
+        editing_role: 'Úprava role'
+        editing_shipment: 'Úprava zásielky'
+        editing_shipping_category: 'Úprava kategórie doručenia'
+        editing_shipping_method: 'Úprava spôsobu dopravy'
+        editing_simple_block: 'Úprava obsahového bloku'
+        editing_slideshow_block: 'Úprava prezentačného (slideshow) bloku'
+        editing_string_block: 'Úprava textového bloku'
+        editing_tax_category: 'Úprava daňovej kategórie'
+        editing_taxon: 'Úprava kategórie'
+        editing_user: 'Úprava používateľa'
+        editing_variant: 'Upravujem variantu'
+        editing_zone: 'Upravujem zónu'
+        email: 'E-mail'
+        email_templates: 'Šablóny e-mailov'
+        emails: 'E-maily'
+        empty: 'Prázdne'
+        enable: 'Zapnúť'
+        enabled: 'Zapnuté'
+        end_date: 'Dátum ukončenia zverejnenia'
+        ends_at: 'Koniec'
+        ends_with: 'Končí na'
+        enjoy_all_the_features_that_are_available_on_your_personal_space_to_view_track_and_manage_all_your_data: 'Užite si všetky funkcie, ktoré sú k dispozícií k zobrazeniu, sledovaniu a spravovaniu vašich dát na vašom osobnom priestore'
+        enter_your_code: 'Zadajte Váš kód'
+        equal: 'Rovná sa'
+        error: 'Chyba'
+        exchange_rate: 'Výmenný kurz'
+        exclusive: 'Exkluzívne'
+        existing_customer: 'Existujúci zákazník'
+        expiration_and_usage_limits: 'Expirácia a limit použitia'
+        extra_information: 'Ďalšie informácie'
+        extra_notes: 'Ďalšie poznámky'
+        failed: 'Neúspešná'
+        faqs: 'Často kladené otázky'
+        female: 'Žena'
+        filters: 'Filtre'
+        first_name: 'Meno'
+        from: 'Od'
+        fulfill: 'Vybaviť'
+        fulfilled: 'Vybavené'
+        gateway: 'Brána'
+        general_info: 'Všeobecné informácie'
+        general_settings: 'Všeobecné nastavenia'
+        generate: 'Vygenerovať'
+        generate_coupons: 'Vygenerovať kupóny'
+        generate_variants: 'Generaovať produktové varianty'
+        generating_coupons: 'Generujú sa kupóny'
+        go: 'Pokračovať'
+        go_to_dashboard: 'Prejsť na administračný panel'
+        grand_total: 'Celkový súčet'
+        guest: 'Návštevník'
+        guest_customer: 'Návšetvník'
+        hello: 'Ahoj'
+        hello_name: 'Ahoj <b>%name%</b>'
+        hide_deleted: 'Skryť odstránené'
+        home: 'Úvod'
+        hostname: 'Hostname'
+        id: 'ID'
+        identifier: 'Identifikátor'
+        if_you_have_an_account_sign_in_with_your_email_address: 'Ak máte konto, prihláste sa pomocou e-mailovej adresy'
+        image: 'Obrázok'
+        images: 'Obrázky'
+        imagine_blocks: 'Obrazové bloky'
+        in: 'V'
+        included_in_price: 'Zahrnutá v cene'
+        index_metadata: 'Metadáta'
+        index_of_all_configured_locales: 'Zoznam všetkých jazykov'
+        info: 'Info'
+        information: 'Informácia'
+        integer: 'Číslo'
+        inventory: 'Skladové zásoby'
+        inventory_here_you_can_see_current_stock_levels: 'Skladové zásoby <small> prehľad skladových položiek</small>'
+        inventory_index: 'Skladové zásoby'
+        inventory_state: 'Stav skladových zásob'
+        inventory_tracking: 'Sledovanie skladových zásob'
+        invoice: 'Faktúra'
+        is_enabled: 'Zapnuté'
+        item: 'Položka'
+        items: 'Položky'
+        items_total: 'Položiek celkom'
+        jump_to_page: 'Prejsť na stranu'
+        last_login: 'Posledné prihlásenie'
+        last_name: 'Priezvisko'
+        last_update: 'Posledná aktualizácia'
+        last_updated: 'Posledná aktualizácia'
+        last_week_orders: 'Objednávky za posledný týždeň'
+        last_week_revenue: 'Príjmy za minulý týždeň'
+        lastname: 'Priezvisko'
+        latest_orders: 'Posledné objednávky'
+        latest_products: 'Najnovšie produkty'
+        links: 'Odkazy'
+        list_coupons: 'Zoznam kupónov'
+        list_variants: 'Zoznam variantov'
+        locale: 'Jazyk'
+        locales: 'Jazyky'
+        lock: 'Zamknúť'
+        locked: 'Zamknuté'
+        logged_in_as: 'Prihlásený ako %username%'
+        login: 'Prihlásenie'
+        login_button: 'Prihlásenie'
+        login_sylius_store: 'Prihlásenie do <small>Sylius obchodu</small>'
+        logout: 'Odhlásiť'
+        main_taxon: 'Hlavná kategória'
+        male: 'Muž'
+        manage: 'Správa'
+        manage_adjustments: 'Spravovať úpravy'
+        manage_admin_users: 'Správovať administrátorov'
+        manage_attributes: 'Správa vlastnosti'
+        manage_attributes_of_your_products: 'Spravovať vlastnosti vašich produktov'
+        manage_categorization_of_your_products: 'Spravovať kategorizáciu produktov'
+        manage_channels: 'Správa kanálov'
+        manage_configuration_options_of_your_products: 'Spravovať nastavenia volieb vašich produktov'
+        manage_countries: 'Spravovať krajiny'
+        manage_coupons: 'Spravovať kupóny'
+        manage_currencies_available_in_the_store: 'Spravovať dostupné meny v obchode'
+        manage_customers: 'Správa zákazníkov'
+        manage_discounts_and_promotional_campaigns: 'Spravovať zlavy a propagačné kampane'
+        manage_emails: 'Správa e-mailov'
+        manage_geographical_zones: 'Spravovať geografické zóny'
+        manage_languages_available_in_the_store: 'Spravovať dostupné jazyky v obchode'
+        manage_metadata: 'Spravovať metadáta'
+        manage_options: 'Spravovať voľby'
+        manage_orders: 'Spravovať  objednávky'
+        manage_payment_methods_available_to_your_customers: 'Spravovať platobné metódy k dispozícii pre vašich zákazníkov'
+        manage_payments: 'Spravovať platby'
+        manage_products: 'Spravovať produkty'
+        manage_promotions: 'Spravovať propagácie'
+        manage_reviews: 'Spravovať recenzie'
+        manage_shipments: 'Spravovať zásielky'
+        manage_shipping_categories: 'Spravovať kategórie doručenia'
+        manage_shipping_destinations: 'Spravovať prepravné destinácie'
+        manage_shipping_methods: 'Správa spôsoby dopravy'
+        manage_shipping_methods_for_your_store: 'Spravovať dostupné spôsoby dopravy v obchode'
+        manage_tax_categories: 'Správovať daňové kategorie'
+        manage_tax_rates: 'Spravovať sadzby dane'
+        manage_taxation_of_your_products: 'Spravovať zdaňovanie vašich produktov'
+        manage_users: 'Správa užívateľov'
+        manage_variants: 'Spravovať varianty'
+        manage_your_customers: 'Spravovať vašich zákazníkov'
+        manage_your_personal_information_and_preferences: 'Spravovať svoje osobné údaje a nastavenia'
+        manage_your_product_catalog: 'Spravovať Váš produktový katalóg'
+        manage_zones: 'Spravovať zóny'
+        marketing: 'Marketing'
+        media: 'Média'
+        members: 'Členovia'
+        menu_nodes: 'Menu elementy'
+        menus: 'Menu'
+        message: 'Správa'
+        metadata_index: 'Metadáta'
+        method: 'Spôsob'
+        modified: 'Upravené'
+        move_down: 'Posunúť dole'
+        move_up: 'Posunúť hore'
+        my_account: 'Môj účet'
+        n_a: 'Nie je k dispozícii'
+        name: 'Názov'
+        new: 'Nová'
+        new_admin_user: 'Nový administrátor'
+        new_channel: 'Nový kanál'
+        new_comment_posted_on_order: 'Nová poznámka k objednávke'
+        new_country: 'Nová krajina'
+        new_coupon: 'Nový kupón'
+        new_currency: 'Nová mena'
+        new_customer: 'Nový zákazník'
+        new_customers: 'Noví zákazníci'
+        new_locale: 'Nový jazyk'
+        new_order: 'Nová objednávka'
+        new_orders: 'Nové objednávky'
+        new_password: 'Nové heslo'
+        new_payment: 'Nová platba'
+        new_payment_method: 'Nový spôsob platby'
+        new_permission: 'Nové oprávnenie'
+        new_product: 'Nový produkt'
+        new_product_attribute: 'Nová vlastnosť'
+        new_product_option: 'Nová produktová voľba'
+        new_product_variant: 'Nová varianta produktu'
+        new_promotion: 'Nové propagácia'
+        new_promotion_coupon: 'Nový zľavový kupón'
+        new_review: 'Nová recenzia'
+        new_role: 'Nová rola'
+        new_shipping_category: 'Nová kategória doručenia'
+        new_shipping_method: 'Nový spôsob doručenia'
+        new_tax_category: 'Nová daňová kategoria'
+        new_tax_rate: 'Nová sadzba dane'
+        new_taxon: 'Nová kategória'
+        new_user: 'Nový používateľ'
+        new_zone: 'Nová zóna'
+        newest_products: 'Najnovšie produkty'
+        next: 'Ďalej'
+        no_label: 'Nie'
+        no_account: 'Žiadny účet'
+        no_association_types_to_display: 'Neexistujú žiadne typy priradení'
+        no_comment: 'Žiadne komentáre'
+        no_default_billing_address: 'Nemáte predvolenú fakturačnú adresu'
+        no_default_shipping_address: 'Nemáte predvolenú doručovaciu adresu'
+        no_description: 'Žiadny popis'
+        no_payment_methods_available: 'V súčasnosti neexistujú žiadne spôsoby platby dostupné pre vašu objednávku'
+        no_pricing_configuration: 'Neexistuje cenová konfigurácia'
+        no_promotion: 'Nie sú uplatnené žiadne akcie'
+        no_requirement: 'Žiadne podmienky'
+        no_results: 'Žiadne výsledky'
+        no_results_to_display: 'Neexistujú žiadne vysledky na zobrazenie'
+        no_shipping_category: 'Žiadna kategória doručenia'
+        no_shipping_charges: 'Nie sú uplatnené žiadne poplatky za dopravu'
+        no_shipping_methods_available: 'V súčasnosti neexistujú žiadne spôsoby dopravy dostupné pre vašu dodaciu adresu'
+        no_short_description: '<i>Žiadny stručný popis</i>'
+        no_sku: 'Žiadny skladový kód (SKU)'
+        no_tax_category: 'Žiadna daňová kategória'
+        no_taxes: 'Nie sú uplatnené žiadne dane'
+        no_theme: 'Žiadna Téma'
+        not_available_in_your_country: 'Nedostupné vo vašej krajine'
+        not_contains: 'Neobsahuje'
+        not_empty: 'Nie je prázdny'
+        not_in: 'Nie je v'
+        not_verified: 'Neoverené'
+        not_tracked: 'Nesledovať'
+        notes: 'Poznámky'
+        notify_customer: 'Upozorniť zákazníka'
+        number: 'Číslo'
+        number_of_orders: 'Počet objednávok'
+        oauth_provider: 'OAuth poskytovateľ'
+        on_hold: 'Rezerované'
+        options: 'Voľby'
+        or: 'alebo'
+        order: 'Objednávka'
+        order_comment_name: 'Poznámka k objednávke'
+        order_comments: 'Poznámky k objednávke'
+        order_confirmation_name: 'Potvrdenie objednávky'
+        order_details: 'Detaily Vašej objednávky'
+        order_history: 'História objednávok'
+        order_item_product: 'Položka'
+        order_state: 'Stav objednávky'
+        order_summary: 'Prehľad objednávky'
+        order_total: 'Celková cena objednávky'
+        order_value: 'Cena objednávky'
+        ordered: 'Objednané'
+        orders: 'Objednávky'
+        original_price: 'Pôvodná cena'
+        out_of_stock: 'Nie je na sklade'
+        overview_of_your_store: 'Prehľad Vášho obchodu'
+        page: 'Stránka'
+        pages: 'Stránky'
+        paid: 'Zaplatené'
+        parent: 'Nadradená kategória'
+        partially_paid: 'Čiastočne zaplatené'
+        partially_shipped: 'Čiastočne dodané'
+        password: 'Heslo'
+        payment: 'Platba'
+        payment_details: 'Detail platby'
+        payment_method: 'Spôsob platby'
+        payment_methods: 'Spôsoby platby'
+        payment_mode: 'Spôsob platby'
+        payment_ready_to_pay: 'Môžete uskutočniť Vašu platbu'
+        payment_state: 'Stav platby'
+        payments: 'Platby'
+        pay: 'Zaplatiť'
+        pay_again: 'Kliknite zaplaiť pre zopakovanie platby'
+        pending: 'Čakajúca'
+        per_customer_usage_limit: 'Obmedzenie použitia pre zákazníka'
+        percent: 'Percento'
+        permissions: 'Oprávnenia'
+        personal_information: 'Osobné údaje'
+        phone_number: 'Telefónne číslo'
+        place_order: 'Potvrdiť objednávku'
+        placed_an_order: 'Úspešne ste zrealizovali objednávku.'
+        placed_at: 'Vytvorené'
+        postcode: 'PSČ'
+        powered_by: 'Vytvorené v systéme'
+        presentation: 'Verejný názov'
+        previous: 'Predchádzajúci'
+        price: 'Cena'
+        pricing: 'Cenník produktov'
+        priority: 'Priorita'
+        privacy_policy: 'Zásady ochrany osobných údajov'
+        process_your_orders: 'Spracovať vaše objednávky'
+        processing: 'Spracúvava sa'
+        product: 'Produkt'
+        product_association_index: 'Priradenia'
+        product_association_type_index: 'Typ priradenia'
+        product_association_types: 'Priradenie produktov'
+        product_associations: 'Produktové priradenia'
+        product_attributes: 'Vlastnosti'
+        product_details_viewing_product_product: 'Detail produktu <small>pre "<strong>%product%</strong>"</small>'
+        product_options: 'Produktové volby'
+        product_review: 'Produktová recenzia'
+        product_reviews: 'Produktové recenzie'
+        product_variants: 'Produtové varianty'
+        products_categorized_as_name: 'Produkty kategorizované ako "%name%"'
+        products_categorized_under_taxon_taxon: 'Produkty <small>kategorizované pod "%taxon%"</small>'
+        products_index_of_all_products_in_your_store: 'Produkty <small>zoznam všetkých produktov vo Vašom obchode</small>'
+        profile: 'Profil'
+        promotion_configuration: 'Nastavenie propagácii'
+        promotion_coupons: 'Kupóny'
+        promotion_details: 'Detail propagácie'
+        promotion_discount: 'Zľava'
+        promotion_information: 'Informacie o propagácii'
+        promotion_total: 'Zľavy celkom'
+        promotions: 'Akcie'
+        province: 'Provincia'
+        provinces: 'Provincie'
+        purchased_from: 'Zakúpené od'
+        qty: 'Množstvo'
+        qty_max: 'Max. množstvo'
+        qty_min: 'Min. množstvo'
+        quantity: 'Množstvo'
+        rating: 'Hodnotenie'
+        ready: 'Pripravená'
+        recent_customers: 'Najnovši zákaznici'
+        recent_orders: 'Posledné objednávky'
+        recent_users: 'Poslední používatelia'
+        refunded: 'Vrátené peniaze'
+        register: 'Registrovať'
+        register_button: 'Registrovať'
+        register_in_the_store: 'Zaregistrujte sa'
+        registered_customers: 'Registrovaní používatelia'
+        registration_create_an_account_in_store: 'Registráciá, <small>vytvoriť účet v obchode</small>'
+        registration_date: 'Dátum registrácie'
+        rejected: 'Zamietnuté'
+        release_inventory: 'Uvolnenie skladových položkiek'
+        remember_me: 'Zapamätať si ma'
+        remove_attribute: 'Odstrániť vlastnosť'
+        repeat_new_password: 'Zopakujte nové heslo'
+        report_details: 'Detail reportu'
+        reports: 'Reporty'
+        reserved: 'Rezervované'
+        reset: 'Obnoviť'
+        reset_button: 'Obnoviť'
+        reset_password: 'Obnoviť heslo'
+        restore: 'Obnoviť'
+        retail_price: 'Predajná cena'
+        return: 'Vrátiť'
+        returned: 'Vrátená'
+        returns_policy: 'Reklamačný poriadok'
+        revert: 'Vrátiť spať'
+        review_details: 'Detail recenzie'
+        reviews: 'Recenzie'
+        roles: 'Role'
+        rules: 'Pravidlá'
+        sales: 'Predaj'
+        sales_this_month: 'Predaj'
+        save: 'Uložiť'
+        save_changes: 'Uložiť zmeny'
+        scope: 'Rozsah'
+        search: 'Vyhľadať'
+        security_settings: 'Bezpečnostné nastavenia'
+        select_taxon: 'Vyberte kategóriu'
+        set_a_new_password_for_your_account: 'Nastaviť nové heslo k vašemu účtu'
+        set_as_default_billing_address: 'Nastaviť ako predvolenú fakturačnú adresu'
+        set_as_default_shipping_address: 'Nastaviť ako predvolenú dodaciu adresu'
+        ship: 'Dodanie'
+        ship_to: 'Odoslať do'
+        shipment: 'Zásielka'
+        shipment_confirmation_name: 'Potvrdenie odoslania zásielky'
+        shipment_details: 'Detaily zásielky'
+        shipment_mode: 'Spôsob doručenia'
+        shipment_state: 'Stav zásielky'
+        shipments: 'Zásielky'
+        shipped: 'Odoslané'
+        shipping: 'Doručenie'
+        shipping_address: 'Adresa doručenia'
+        shipping_and_payment_methods: 'Dodacie a platobné metódy'
+        shipping_category: 'Kategória doručenia'
+        shipping_charges: 'Poplatky za dopravu'
+        shipping_method: 'Spôsob doručenia'
+        shipping_method_details: 'Podrobnosti spôsobu dopravy'
+        shipping_methods: 'Spôsoby doručenia'
+        shipping_state: 'Stav dodávky'
+        shipping_total: 'Doprava celkom'
+        shop_by: 'Nakupovať podľa'
+        shop_by_brand: 'Nakupovať podľa značky'
+        show: 'Zobraziť'
+        show_all: 'Zobraziť všetky'
+        show_deleted: 'Zobraziť odstránené'
+        show_in_store: 'Zobraziť v obchode'
+        show_metadata: 'Zobraziť metadáta'
+        sign_in: 'Prihlásiť'
+        sign_in_here: 'Prihláste sa'
+        sign_in_to_the_store_or_create_new_account: 'Prihlásiť sa do obchodu <small>alebo vytvoriť nový účet</small>'
+        sign_out: 'Odhlásiť'
+        simple_blocks: 'Obsahové bloky'
+        simple_product: 'Jednoduchý produkt'
+        sku: 'Skladový kód (SKU)'
+        slideshow: 'Prezentácia'
+        slideshow_blocks: 'Prezentáčné (slideshow) bloky'
+        start_date: 'Dátum začiatku zverejnenia'
+        starts_at: 'Začiatok'
+        starts_with: 'Začína na'
+        state: 'Stav'
+        status: 'Stav'
+        street: 'Ulica'
+        string_blocks: 'Textové bloky'
+        subject: 'Predmet'
+        subtotal: 'Medzisúčet'
+        success: 'Úspech'
+        summary: 'Zhrnutie'
+        support: 'Podpora'
+        sylius_logo: 'Sylius'
+        tax: 'Daň'
+        tax_categories: 'Daňové kategórie'
+        tax_category: 'Daňová kategória'
+        tax_rate_details: 'Podrobnosti sadzby dane'
+        tax_rates: 'Sadzby dane'
+        tax_total: 'Daň celkom'
+        taxation_categories: 'Daňové kategórie'
+        taxation_settings: 'Nastavenie zdaňovania'
+        taxes: 'Dane'
+        taxonomy: 'Kategorizácia'
+        terms_and_conditions: 'Podmienky používania'
+        text: 'Text'
+        textarea: 'Textové pole'
+        thank_you: 'Ďakujeme Vám!'
+        thank_you_for_your_order: 'Ďakujeme za vašu objednávku'
+        theme: 'Téma'
+        there_are_no_attributes_configured: 'Nie sú nakonfigurované žiadne vlastnosti'
+        there_are_no_blocks_to_display: 'Neexistujú žiadne bloky na zobrazenie'
+        there_are_no_channels_configured: 'Nie sú nakonfigurované žiadne kanály'
+        there_are_no_countries_configured: 'Neexistujú žiadne nakonfigurované krajiny'
+        there_are_no_coupon_to_display: 'Neexistujú žiadne kupóny na zobrazenie'
+        there_are_no_currencies_to_display: 'Nie sú definováne žiadne meny'
+        there_are_no_customers_to_display: 'Nie sú žiadný zákazníci na zobrazenie'
+        there_are_no_emails_configured: 'Nie sú nastavené žiadne e-maily'
+        there_are_no_images_for_this_product: 'Pre produkt neexistujú žiadne obrázky'
+        there_are_no_inventory_items_to_display: 'Neexistujú žiadne kladové položky na zobrazenie'
+        there_are_no_inventory_units_to_display: 'Nie sú žiadne skladové položky k zobrazeniu'
+        there_are_no_locales_configured: 'Neexistujú žiadne jazyky na zobrazenie'
+        there_are_no_logged_events_to_display: 'Nie sú žiadne zaznamenané udalosti na zobrazenie'
+        there_are_no_menu_nodes_to_display: 'Nie sú žiadne prvky menu na zobraznie'
+        there_are_no_menus_to_display: 'Nie je žiadne menu na zobrazenie'
+        there_are_no_options_configured: 'Nie sú nakonfigurované žiadne volby'
+        there_are_no_options_for_this_product: 'Nie sú žiadne voľby'
+        there_are_no_orders_for_this_customer_to_display: 'Tento používateľ nemá žiadne objednávky'
+        there_are_no_pages_to_display: 'Nie sú žiadne stránky na zobrazenie'
+        there_are_no_payment_methods_configured: 'Nie sú nakonfigurované žiadne platobné spôsoby'
+        there_are_no_payments_configured: 'Nie sú nakonfigurované žiadne platby'
+        there_are_no_permissions_defined: 'Nie sú definované žiadne oprávnenia'
+        there_are_no_products_to_display: 'Neexistujú žiadne produkty na zobrazenie'
+        there_are_no_promotions_configured: 'Nie sú nakonfigurované žiadne zľavy'
+        there_are_no_reports_created: 'Nie sú vytvorené žiadne reporty'
+        there_are_no_roles_defined: 'Nie sú definované žiadne role'
+        there_are_no_shipments_to_display: 'Neexistujú žiadne zásielky na zobrazenie'
+        there_are_no_shipping_categories_configured: 'Nie sú nakonfigurované žiadne kategórie doručenia'
+        there_are_no_shipping_methods_configured: 'Nie sú nakonfigurované žiadne spôsoby dopravy'
+        there_are_no_tax_categories_configured: 'Nie sú nakonfigurované žiadne daňové kategorie'
+        there_are_no_tax_rates_configured: 'Nie sú nakonfigurované žiadne daňové sadzby'
+        there_are_no_taxons_for_this_product: 'Pre produkt neexistujú žiadne kategórie'
+        there_are_no_taxons_to_display: 'Nie sú žiadne kategórie na zobrazenie'
+        there_are_no_users_to_display: 'Žiadní používatelia k zobrazeniu'
+        there_are_no_variants_to_display: 'Žiadne variatny na zobrazenie'
+        there_are_no_zones_configured: 'Neexistujú žiadne zóny'
+        there_is_no_main_taxon_for_this_product: 'Pre tento produkt nie je zvolená hlavná kategória'
+        this_months_statistics: 'Mesačná štatistika'
+        this_product_has_no_attributes_defined: 'Produkt nemá žiadne vlastnosti'
+        title: 'Názov'
+        to: 'Do'
+        topic: 'Téma'
+        total: 'Spolu'
+        total_orders: 'Celkový počet objednávok'
+        total_qty: 'Celkové množstvo'
+        total_records: 'Celkový počet záznamov'
+        total_registrations: 'Celkový počet registrácií'
+        tracking_code: 'Trackovací kód'
+        tracking_number: 'Sledovací kód'
+        translations: 'Preklady'
+        type: 'Typ'
+        unavailable: 'Nedostupný'
+        unit_price: 'Jednotková cena'
+        unknown: 'Neznáme'
+        unlimited: 'Neobmedzené'
+        unlock: 'Odomknúť'
+        update: 'Upraviť'
+        update_cart: 'Aktualizovať košík'
+        update_product_association_type: 'Upraviť typ produktového priradenia'
+        updating_tax_rate: 'Úprava sadzby dane'
+        usage: 'Použitie'
+        usage_limit: 'Limit použitia'
+        used: 'Použité'
+        user_details: 'Údaje o používateľovi'
+        username: 'Používateľské meno'
+        users_list_of_all_users_registered_in_store: 'Používatelia <small>Zoznam všetkých používateľov zaregistrovaných v obchode</small>'
+        values: 'Hodnoty'
+        variant: 'Variant'
+        variant_selection_method: 'Spôsob výberu produktového variantu'
+        variants: 'Varianty'
+        verified: 'Overené'
+        verify: 'Overiť'
+        view: 'Zobraziť'
+        view_and_edit_cart: 'Zobraziť a upraviť košík'
+        view_more: 'Zobraziť viac'
+        view_product_details: 'Zobraziť podrobnosti pre %product%'
+        void: 'Neplatná'
+        volume_based_pricing: 'Cena podľa objemu'
+        warning: 'Varovanie'
+        welcome: 'Vitajte'
+        welcome_to_our_store: 'Vitajte v našom obchode'
+        welcome_to_your_space: 'Vitajte vo vašom priestore'
+        yes_label: 'Áno'
+        you_are_customer_since: 'Ste zákazníkom od'
+        you_have_no_addresses_defined: 'Nemáte uložené žiadne adresy'
+        you_have_no_new_orders: 'Nemáte žiadne nové objednávky'
+        you_may_also_like: 'Mohlo by sa Vám páčiť'
+        your_cart_is_empty: 'Váš košík je prázdny'
+        your_last_5_orders: 'Posledných 5 objednávok'
+        your_order_has_been_shipped: 'Vaša objednávka bola odoslaná'
+        your_products: 'Vaše produkty'
+        your_profile: 'Váš profil'
+        your_shopping_cart: 'Váš nákupný košík'
+        your_store: 'Zobraziť obchod'
+        zone: 'Zóna'
+        zone_consisting_of_countries: 'Zóna pozostávajúca z krajín'
+        zone_consisting_of_other_zones: 'Zóna pozostávajúca z iných oblastí'
+        zone_consisting_of_provinces: 'Zóna pozostávajúca z provincií'
+        zone_details: 'Detaily zóny'
+        zones: 'Zóny'

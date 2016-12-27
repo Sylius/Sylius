@@ -3,4 +3,4 @@
 
 sylius:
     payment:
-        refunded: Uplata je uspešno refundirana.
+        refunded: 'Uplata je uspešno refundirana.'

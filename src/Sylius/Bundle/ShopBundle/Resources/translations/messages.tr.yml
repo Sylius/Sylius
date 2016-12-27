@@ -5,4 +5,4 @@ sylius:
     menu:
         shop:
             account:
-                dashboard: Kontrol Paneli
+                dashboard: 'Kontrol Paneli'

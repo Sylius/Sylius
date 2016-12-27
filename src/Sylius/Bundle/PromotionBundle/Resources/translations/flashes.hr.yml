@@ -3,4 +3,4 @@
 
 sylius:
     promotion_coupon:
-        generate: Kodovi za popust su uspješno generirani.
+        generate: 'Kodovi za popust su uspješno generirani.'

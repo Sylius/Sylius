@@ -4,752 +4,752 @@
 sylius:
     form:
         login:
-            username: Felhasználónév
-            password: Jelszó
-            remember_me: Emlékezzen rám
+            username: 'Felhasználónév'
+            password: 'Jelszó'
+            remember_me: 'Emlékezzen rám'
         option:
-            name: Név
-        notes: További megjegyzések
+            name: 'Név'
+        notes: 'További megjegyzések'
     ui:
-        abandoned: Elhagyott
-        about: Információ
-        access_token: Hozzáférési Token
-        access_your_store_account_or_create_a_new_one: Lépj be a fiókodba vagy készíts egy újat
-        account_credentials: A fiók hitelesítő adatait
-        account_panel_outline: Élvezze az összes rendelkezésre álló funkciót, nyomon követheti, kezelheti az összes adatát
-        action: Műveletek
-        actions: Műveletek
-        add: Hozzáadás
-        add_action: Művelet hozzáadása
-        add_association: Kapcsolat hozzáadása
-        add_attribute: Attribútum hozzáadása
-        add_attributes: Attribútum hozzáadása
-        add_channel: Csatorna hozzáadása
-        add_choice: Lehetőség hozzáadása
-        add_coupon: Kupon hozzáadása
-        add_image: Kép hozzáadása
-        add_member: Tag hozzáadása
-        add_menu_element: Menüpont hozzáadása
-        add_new_email: Új email hozzáadása
-        add_new_permission: Új jogosultság hozzáadása
-        add_new_role: Új szerepkör hozzáadása
-        add_province: Tartomány/megye hozzáadása
-        add_rule: Szabály hozzáadása
-        add_to_cart: Kosárba
-        add_value: Adja hozzá az értéket
-        adding_new_customer_groups: Ügyfélcsoport hozzáadása
-        adding_new_email: Új email hozzáadása
-        adding_new_locale: Új terület hozzáadása
-        additional_information: Kiegészítő információ
-        address: Lakcím
-        addressing: Címzés
-        addressing_step: Cím beállítása
-        adjustments: Kiigazítások
-        administration: Adminisztráció
-        administration_dashboard: Admin felület
-        administration_panel_login: Adminisztrációs panel bejelentkezés
-        admin_users: Adminisztrátorok
-        all: Mind
-        all_your_addresses: Minden Ön által megadott cím
-        an_error_occurred: Hiba történt
-        api: API
-        apply_coupon: Kupon használata
-        are_your_sure_you_want_to_perform_this_action: Biztos vagy benne, hogy végrehajtod ezt a műveletet?
-        association: Kapcsolatok
-        association_types: Kapcsolódó típusok
-        associations: Kapcsolatok
-        assortment: Választék
-        attributes: Tulajdonságok
-        author: Szerző
-        availability: Elérhető
-        available_for_channels: Minden csatornán elérhető
-        available_on: A rendelkezésre álló
-        available_on_hand: Rendelkezésre álló
-        available_until: Elérhető amíg
-        average_order_value: Átlagos rendelési érték
-        back: Vissza
-        back_to_store: Vissza az áruházba
-        backorder: Előrendelés
-        backordered: Előrendelve
-        balance_due: Esedékesség
-        base_currency: Alapértelmezett pénznem
-        bill_to: Számlázási cím
-        billing_address: Számlázási cím
-        blocks: Tömbök
-        body: Törzs
-        browse_products: Termékek böngészése
-        build: Létrehozás
-        calculator: Számológép
-        cancel: Mégse
-        cancelled: Megszakítva
-        cart: Kosár
-        cart_locked: Kosár lezárva
-        cart_summary: Kosár tartalma
-        categorization: Kategorizálás
-        category: Kategória
-        category_requirements: Kategória követelmények
-        change_address: Cím módosítása
-        change_password: Jelszó változtatás
-        change_payment_method: Fizetési mód változtatása
-        change_shipping_method: Szállítási mód módosítása
-        change_your_password: Jelszó módosítása
-        channel: Csatorna
-        channels: Csatornák
-        charges_and_taxes: Díjak és adók
-        checkbox: Jelölőnégyzet
-        checking_out_as: Fizetés mint
-        checkout: Fizetés
-        choose_file: Válassza ki a fájlt
-        city: Település
-        clear_cart: Kosár ürítése
-        clear_filters: Szűrők törlése
-        code: Kód
-        color: Szín
-        comment: Hozzászólás
-        company: Cég
-        complete: Befejezve
-        completed: Befejezve
-        configurable_product: Konfigurálható termék
-        configuration: Konfiguráció
-        configure_channels_available_in_your_store: Az áruházban elérhető csatornák beállítása
-        confirm_your_action: Művelet megerősítése
-        confirmation: Megerősítés
-        confirmation_title: Megerősítés
-        confirmed: Megerősítve
-        contact_us: Kapcsolat
-        contain_variants: Változatokat tartalmaz
-        contains: Tartalmaz
-        countries: Országok
-        country: Ország
-        country_details: Ország részletek
-        coupon: Kupon
-        coupon_based: Kupon alapján
-        coupons: Kuponok
-        create: Létrehozás
-        create_a_new_address: Új cím létrehozása
-        create_a_new_customer_account: Új ügyfél létrehozása
-        create_an_account: Fiók létrehozása
-        create_association_type: Kapcsolat létrehozása
-        create_country: Ország létrehozása
-        create_currency: Pénznem létrehozása
-        create_customer: Vevő létrehozása
-        create_imagine_block: Kép blokk létrehozása
-        create_locale: Terület létrehozása
-        create_menu: Menü létehozása
-        create_menu_node: Menü csomópont létrehozása
-        create_new_coupon: Új kupon létrehozása
-        create_new_page: Új oldal létrehozása
-        create_new_report: Új jelentés létrehozása
-        create_option: Opció létrehozása
-        create_order: Rendelés létrehozása
-        create_payment: Fizetés létrehozása
-        create_payment_method: Fizetési mód létrehozása
-        create_product: Termék létrehozása
-        create_product_association: Termék kapcsolat létrehozása
-        create_product_association_type: Termék kapcsolat típus létrehozása
-        create_product_attribute: Termék attribútum létrehozása
-        create_promotion: Promóció létrehozása
-        create_report: Jelentés létrehozása
-        create_shipping_category: Szállítási kategória létrehozása
-        create_shipping_method: Szállítási mód létrehozása
-        create_simple_block: Egyszerű blokk létrehozása
-        create_slideshow_block: Diavetítés blokk létrehozása
-        create_string_block: Szöveg blokk létrehozása
-        create_tax_category: Adókategória létrehozása
-        create_tax_rate: Adókulcs létrehozása
-        create_taxon: Taxon létrehozása
-        create_user: Felhasználó létrehozása
-        create_variant: Változat létrehozása
-        create_zone: Zóna létrehozása
-        created_at: Készítetve
-        creating_a_new_imagine_block: Új kép blokk létrehozása
-        creating_a_new_simple_block: Új egyszerű blokk létrehozása
-        creating_a_new_slideshow_block: Új diavetítés létrehozása
-        creating_a_new_string_block: Új szöveg blokk létrehozása
-        creating_menu: Menü létrehozása
-        creating_menu_node: Menü csomópont létrehozása
-        creating_new_page: Új oldal létrehozása
-        creation_date: Létrehozás ideje
-        creation_time: Létrehozás időpontja
-        currencies: Pénznemek
-        currency: Pénznem
-        current_orders: Aktuális rendelések
-        current_password: Aktuális jelszó
-        current_promotions: Aktuális promóciók
-        current_stock: Aktuális készlet
-        customer: Ügyfél
-        customer_care: Ügyfélszolgálat
-        customer_details: A vásárló adatai
-        customer_id: Vásárlói ID
-        customer_login: Ügyfél bejelentkezés
-        customer_not_notified: Ügyfél nem kap értesítést
-        customer_notified: Ügyfél értesítve
-        customer_orders: Vevői megrendelések
-        customer_since: Ügyfél amióta
-        customers: Ügyfelek
-        customers_list_of_all_customers_in_store: Vevők<small>A webáruház összes ügyfelének listája</small>
-        customize_default_metadata: Alapértelmezett metaadat testreszabása
-        customize_metadata: Metaadatok testreszabása
-        customize_products_metadata: Termék metaadatok testreszabása
-        customizing_metadata: Metaadatok testreszabása
-        dashboard: Vezérlőpult
-        data: Adatok
-        date: Dátum
-        datetime: Dátum/idő
-        default_billing_address: Alapértelmezett számlázási cím
-        default_locale: Alapértelmezett nyelv
-        default_shipping_address: Alapértelmezett szállítási cím
-        delete: Törlés
-        delete_image: Kép törlése
-        deleted: Törölve
-        delivery_and_shipping: Szállítmányozás & szállítás
-        description: Leírás
-        details: Részletek
-        disable: Letilt
-        disabled: Letiltva
-        discount: Kedvezmény
-        discounted_unit_price: Kedvezményes egységár
-        edit: Szerkesztés
-        edit_association_type: Kapcsolat típusának módosítása
-        edit_channel: Csatorna módosítása
-        edit_country: Ország módosítása
-        edit_coupon: Kupon módosítása
-        edit_currency: Pénznem módosítása
-        edit_customer: Vevő módosítása
-        edit_locale: Terület szerkesztése
-        edit_my_address: Címem szerkesztése
-        edit_payment_method: Fizetési mód módosítása
-        edit_product: Termék módosítása
-        edit_product_attribute: Termék attribútum módosítása
-        edit_product_option: Termék opciók módosítása
-        edit_product_variant: Termékváltozat módosítása
-        edit_promotion: Promóció módosítása
-        edit_promotion_coupon: Promóciós kupon módosítása
-        edit_report: Jelentés módosítása
-        edit_shipping_method: Szállítási módszer módosítása
-        edit_tax_category: Adó-kategória módosítása
-        edit_tax_rate: Adókulcs módosítása
-        edit_taxon: Taxon módosítása
-        edit_your_items_apply_coupon_or_proceed_to_the_checkout: Módosítsd a tételeid, használj fel kupont vagy haladj tovább a fizetéshez
-        edit_your_personal_information: A személyes adatok szerkesztése
-        edit_zone: Zóna módosítása
-        editing_attribute: Attribútum módosítása
-        editing_channel: Csatorna módosítása
-        editing_country: Ország szerkesztése
-        editing_coupon: Kupon szerkesztése
-        editing_currency: Pénznem módosítása
-        editing_customer: Vevő módosítása
-        editing_email: Email módosítása
-        editing_imagine_block: Kép blokk módosítása
-        editing_menu: Menü módosítása
-        editing_menu_node: Menü csomópont módosítása
-        editing_option: Opció módosítása
-        editing_order: Rendelés szerkesztés
-        editing_page: Oldal módosítása
-        editing_payment: Kifizetés szerkesztése
-        editing_payment_method: Fizetési mód módosítása
-        editing_permission: Jogosultság módosítása
-        editing_product: Termék szerkesztése
-        editing_promotion: Promóció szerkesztése
-        editing_review: Értékelés módosítása
-        editing_role: Szerepkör módosítása
-        editing_shipment: Szállítás szerkesztése
-        editing_shipping_category: Szállítási kategória szerkesztése
-        editing_shipping_method: Szállítási mód szerkesztése
-        editing_simple_block: Egyszerű blokk módosítása
-        editing_slideshow_block: Diavetítés módosítása
-        editing_string_block: Szöveg blokk módosítása
-        editing_tax_category: Adókategória kezelése
-        editing_taxon: Taxon szerkesztése
-        editing_user: Felhasználó szerkesztése
-        editing_variant: Változat szerkesztése
-        editing_zone: Zóna szerkesztés
-        email: E-mail
-        email_templates: E-mail sablonok
-        emails: E-mailek
-        empty: Üres
-        enable: Engedélyez
-        enabled: Engedélyezve
-        end_date: Befejezés
-        ends_at: Végződik
-        ends_with: Végződik
-        enjoy_all_the_features_that_are_available_on_your_personal_space_to_view_track_and_manage_all_your_data: Élvezze az összes rendelkezésre álló funkciót, nyomon követheti, kezelheti az összes adatát
-        enter_your_code: Add meg a kódodat
-        equal: Egyenlő
-        error: Hiba
-        exchange_rate: Árfolyam
-        exclusive: Exkluzív
-        existing_customer: Meglévő ügyfél
-        expiration_and_usage_limits: Lejárati és a használati korlát
-        extra_information: További információk
-        extra_notes: További megjegyzések
-        failed: Sikertelen
-        faqs: GYIK
-        female: Nő
-        filters: Szűrők
-        first_name: Keresztnév
+        abandoned: 'Elhagyott'
+        about: 'Információ'
+        access_token: 'Hozzáférési Token'
+        access_your_store_account_or_create_a_new_one: 'Lépj be a fiókodba vagy készíts egy újat'
+        account_credentials: 'A fiók hitelesítő adatait'
+        account_panel_outline: 'Élvezze az összes rendelkezésre álló funkciót, nyomon követheti, kezelheti az összes adatát'
+        action: 'Műveletek'
+        actions: 'Műveletek'
+        add: 'Hozzáadás'
+        add_action: 'Művelet hozzáadása'
+        add_association: 'Kapcsolat hozzáadása'
+        add_attribute: 'Attribútum hozzáadása'
+        add_attributes: 'Attribútum hozzáadása'
+        add_channel: 'Csatorna hozzáadása'
+        add_choice: 'Lehetőség hozzáadása'
+        add_coupon: 'Kupon hozzáadása'
+        add_image: 'Kép hozzáadása'
+        add_member: 'Tag hozzáadása'
+        add_menu_element: 'Menüpont hozzáadása'
+        add_new_email: 'Új email hozzáadása'
+        add_new_permission: 'Új jogosultság hozzáadása'
+        add_new_role: 'Új szerepkör hozzáadása'
+        add_province: 'Tartomány/megye hozzáadása'
+        add_rule: 'Szabály hozzáadása'
+        add_to_cart: 'Kosárba'
+        add_value: 'Adja hozzá az értéket'
+        adding_new_customer_groups: 'Ügyfélcsoport hozzáadása'
+        adding_new_email: 'Új email hozzáadása'
+        adding_new_locale: 'Új terület hozzáadása'
+        additional_information: 'Kiegészítő információ'
+        address: 'Lakcím'
+        addressing: 'Címzés'
+        addressing_step: 'Cím beállítása'
+        adjustments: 'Kiigazítások'
+        administration: 'Adminisztráció'
+        administration_dashboard: 'Admin felület'
+        administration_panel_login: 'Adminisztrációs panel bejelentkezés'
+        admin_users: 'Adminisztrátorok'
+        all: 'Mind'
+        all_your_addresses: 'Minden Ön által megadott cím'
+        an_error_occurred: 'Hiba történt'
+        api: 'API'
+        apply_coupon: 'Kupon használata'
+        are_your_sure_you_want_to_perform_this_action: 'Biztos vagy benne, hogy végrehajtod ezt a műveletet?'
+        association: 'Kapcsolatok'
+        association_types: 'Kapcsolódó típusok'
+        associations: 'Kapcsolatok'
+        assortment: 'Választék'
+        attributes: 'Tulajdonságok'
+        author: 'Szerző'
+        availability: 'Elérhető'
+        available_for_channels: 'Minden csatornán elérhető'
+        available_on: 'A rendelkezésre álló'
+        available_on_hand: 'Rendelkezésre álló'
+        available_until: 'Elérhető amíg'
+        average_order_value: 'Átlagos rendelési érték'
+        back: 'Vissza'
+        back_to_store: 'Vissza az áruházba'
+        backorder: 'Előrendelés'
+        backordered: 'Előrendelve'
+        balance_due: 'Esedékesség'
+        base_currency: 'Alapértelmezett pénznem'
+        bill_to: 'Számlázási cím'
+        billing_address: 'Számlázási cím'
+        blocks: 'Tömbök'
+        body: 'Törzs'
+        browse_products: 'Termékek böngészése'
+        build: 'Létrehozás'
+        calculator: 'Számológép'
+        cancel: 'Mégse'
+        cancelled: 'Megszakítva'
+        cart: 'Kosár'
+        cart_locked: 'Kosár lezárva'
+        cart_summary: 'Kosár tartalma'
+        categorization: 'Kategorizálás'
+        category: 'Kategória'
+        category_requirements: 'Kategória követelmények'
+        change_address: 'Cím módosítása'
+        change_password: 'Jelszó változtatás'
+        change_payment_method: 'Fizetési mód változtatása'
+        change_shipping_method: 'Szállítási mód módosítása'
+        change_your_password: 'Jelszó módosítása'
+        channel: 'Csatorna'
+        channels: 'Csatornák'
+        charges_and_taxes: 'Díjak és adók'
+        checkbox: 'Jelölőnégyzet'
+        checking_out_as: 'Fizetés mint'
+        checkout: 'Fizetés'
+        choose_file: 'Válassza ki a fájlt'
+        city: 'Település'
+        clear_cart: 'Kosár ürítése'
+        clear_filters: 'Szűrők törlése'
+        code: 'Kód'
+        color: 'Szín'
+        comment: 'Hozzászólás'
+        company: 'Cég'
+        complete: 'Befejezve'
+        completed: 'Befejezve'
+        configurable_product: 'Konfigurálható termék'
+        configuration: 'Konfiguráció'
+        configure_channels_available_in_your_store: 'Az áruházban elérhető csatornák beállítása'
+        confirm_your_action: 'Művelet megerősítése'
+        confirmation: 'Megerősítés'
+        confirmation_title: 'Megerősítés'
+        confirmed: 'Megerősítve'
+        contact_us: 'Kapcsolat'
+        contain_variants: 'Változatokat tartalmaz'
+        contains: 'Tartalmaz'
+        countries: 'Országok'
+        country: 'Ország'
+        country_details: 'Ország részletek'
+        coupon: 'Kupon'
+        coupon_based: 'Kupon alapján'
+        coupons: 'Kuponok'
+        create: 'Létrehozás'
+        create_a_new_address: 'Új cím létrehozása'
+        create_a_new_customer_account: 'Új ügyfél létrehozása'
+        create_an_account: 'Fiók létrehozása'
+        create_association_type: 'Kapcsolat létrehozása'
+        create_country: 'Ország létrehozása'
+        create_currency: 'Pénznem létrehozása'
+        create_customer: 'Vevő létrehozása'
+        create_imagine_block: 'Kép blokk létrehozása'
+        create_locale: 'Terület létrehozása'
+        create_menu: 'Menü létehozása'
+        create_menu_node: 'Menü csomópont létrehozása'
+        create_new_coupon: 'Új kupon létrehozása'
+        create_new_page: 'Új oldal létrehozása'
+        create_new_report: 'Új jelentés létrehozása'
+        create_option: 'Opció létrehozása'
+        create_order: 'Rendelés létrehozása'
+        create_payment: 'Fizetés létrehozása'
+        create_payment_method: 'Fizetési mód létrehozása'
+        create_product: 'Termék létrehozása'
+        create_product_association: 'Termék kapcsolat létrehozása'
+        create_product_association_type: 'Termék kapcsolat típus létrehozása'
+        create_product_attribute: 'Termék attribútum létrehozása'
+        create_promotion: 'Promóció létrehozása'
+        create_report: 'Jelentés létrehozása'
+        create_shipping_category: 'Szállítási kategória létrehozása'
+        create_shipping_method: 'Szállítási mód létrehozása'
+        create_simple_block: 'Egyszerű blokk létrehozása'
+        create_slideshow_block: 'Diavetítés blokk létrehozása'
+        create_string_block: 'Szöveg blokk létrehozása'
+        create_tax_category: 'Adókategória létrehozása'
+        create_tax_rate: 'Adókulcs létrehozása'
+        create_taxon: 'Taxon létrehozása'
+        create_user: 'Felhasználó létrehozása'
+        create_variant: 'Változat létrehozása'
+        create_zone: 'Zóna létrehozása'
+        created_at: 'Készítetve'
+        creating_a_new_imagine_block: 'Új kép blokk létrehozása'
+        creating_a_new_simple_block: 'Új egyszerű blokk létrehozása'
+        creating_a_new_slideshow_block: 'Új diavetítés létrehozása'
+        creating_a_new_string_block: 'Új szöveg blokk létrehozása'
+        creating_menu: 'Menü létrehozása'
+        creating_menu_node: 'Menü csomópont létrehozása'
+        creating_new_page: 'Új oldal létrehozása'
+        creation_date: 'Létrehozás ideje'
+        creation_time: 'Létrehozás időpontja'
+        currencies: 'Pénznemek'
+        currency: 'Pénznem'
+        current_orders: 'Aktuális rendelések'
+        current_password: 'Aktuális jelszó'
+        current_promotions: 'Aktuális promóciók'
+        current_stock: 'Aktuális készlet'
+        customer: 'Ügyfél'
+        customer_care: 'Ügyfélszolgálat'
+        customer_details: 'A vásárló adatai'
+        customer_id: 'Vásárlói ID'
+        customer_login: 'Ügyfél bejelentkezés'
+        customer_not_notified: 'Ügyfél nem kap értesítést'
+        customer_notified: 'Ügyfél értesítve'
+        customer_orders: 'Vevői megrendelések'
+        customer_since: 'Ügyfél amióta'
+        customers: 'Ügyfelek'
+        customers_list_of_all_customers_in_store: 'Vevők<small>A webáruház összes ügyfelének listája</small>'
+        customize_default_metadata: 'Alapértelmezett metaadat testreszabása'
+        customize_metadata: 'Metaadatok testreszabása'
+        customize_products_metadata: 'Termék metaadatok testreszabása'
+        customizing_metadata: 'Metaadatok testreszabása'
+        dashboard: 'Vezérlőpult'
+        data: 'Adatok'
+        date: 'Dátum'
+        datetime: 'Dátum/idő'
+        default_billing_address: 'Alapértelmezett számlázási cím'
+        default_locale: 'Alapértelmezett nyelv'
+        default_shipping_address: 'Alapértelmezett szállítási cím'
+        delete: 'Törlés'
+        delete_image: 'Kép törlése'
+        deleted: 'Törölve'
+        delivery_and_shipping: 'Szállítmányozás & szállítás'
+        description: 'Leírás'
+        details: 'Részletek'
+        disable: 'Letilt'
+        disabled: 'Letiltva'
+        discount: 'Kedvezmény'
+        discounted_unit_price: 'Kedvezményes egységár'
+        edit: 'Szerkesztés'
+        edit_association_type: 'Kapcsolat típusának módosítása'
+        edit_channel: 'Csatorna módosítása'
+        edit_country: 'Ország módosítása'
+        edit_coupon: 'Kupon módosítása'
+        edit_currency: 'Pénznem módosítása'
+        edit_customer: 'Vevő módosítása'
+        edit_locale: 'Terület szerkesztése'
+        edit_my_address: 'Címem szerkesztése'
+        edit_payment_method: 'Fizetési mód módosítása'
+        edit_product: 'Termék módosítása'
+        edit_product_attribute: 'Termék attribútum módosítása'
+        edit_product_option: 'Termék opciók módosítása'
+        edit_product_variant: 'Termékváltozat módosítása'
+        edit_promotion: 'Promóció módosítása'
+        edit_promotion_coupon: 'Promóciós kupon módosítása'
+        edit_report: 'Jelentés módosítása'
+        edit_shipping_method: 'Szállítási módszer módosítása'
+        edit_tax_category: 'Adó-kategória módosítása'
+        edit_tax_rate: 'Adókulcs módosítása'
+        edit_taxon: 'Taxon módosítása'
+        edit_your_items_apply_coupon_or_proceed_to_the_checkout: 'Módosítsd a tételeid, használj fel kupont vagy haladj tovább a fizetéshez'
+        edit_your_personal_information: 'A személyes adatok szerkesztése'
+        edit_zone: 'Zóna módosítása'
+        editing_attribute: 'Attribútum módosítása'
+        editing_channel: 'Csatorna módosítása'
+        editing_country: 'Ország szerkesztése'
+        editing_coupon: 'Kupon szerkesztése'
+        editing_currency: 'Pénznem módosítása'
+        editing_customer: 'Vevő módosítása'
+        editing_email: 'Email módosítása'
+        editing_imagine_block: 'Kép blokk módosítása'
+        editing_menu: 'Menü módosítása'
+        editing_menu_node: 'Menü csomópont módosítása'
+        editing_option: 'Opció módosítása'
+        editing_order: 'Rendelés szerkesztés'
+        editing_page: 'Oldal módosítása'
+        editing_payment: 'Kifizetés szerkesztése'
+        editing_payment_method: 'Fizetési mód módosítása'
+        editing_permission: 'Jogosultság módosítása'
+        editing_product: 'Termék szerkesztése'
+        editing_promotion: 'Promóció szerkesztése'
+        editing_review: 'Értékelés módosítása'
+        editing_role: 'Szerepkör módosítása'
+        editing_shipment: 'Szállítás szerkesztése'
+        editing_shipping_category: 'Szállítási kategória szerkesztése'
+        editing_shipping_method: 'Szállítási mód szerkesztése'
+        editing_simple_block: 'Egyszerű blokk módosítása'
+        editing_slideshow_block: 'Diavetítés módosítása'
+        editing_string_block: 'Szöveg blokk módosítása'
+        editing_tax_category: 'Adókategória kezelése'
+        editing_taxon: 'Taxon szerkesztése'
+        editing_user: 'Felhasználó szerkesztése'
+        editing_variant: 'Változat szerkesztése'
+        editing_zone: 'Zóna szerkesztés'
+        email: 'E-mail'
+        email_templates: 'E-mail sablonok'
+        emails: 'E-mailek'
+        empty: 'Üres'
+        enable: 'Engedélyez'
+        enabled: 'Engedélyezve'
+        end_date: 'Befejezés'
+        ends_at: 'Végződik'
+        ends_with: 'Végződik'
+        enjoy_all_the_features_that_are_available_on_your_personal_space_to_view_track_and_manage_all_your_data: 'Élvezze az összes rendelkezésre álló funkciót, nyomon követheti, kezelheti az összes adatát'
+        enter_your_code: 'Add meg a kódodat'
+        equal: 'Egyenlő'
+        error: 'Hiba'
+        exchange_rate: 'Árfolyam'
+        exclusive: 'Exkluzív'
+        existing_customer: 'Meglévő ügyfél'
+        expiration_and_usage_limits: 'Lejárati és a használati korlát'
+        extra_information: 'További információk'
+        extra_notes: 'További megjegyzések'
+        failed: 'Sikertelen'
+        faqs: 'GYIK'
+        female: 'Nő'
+        filters: 'Szűrők'
+        first_name: 'Keresztnév'
         from: '-tól'
-        fulfill: Teljesítés
-        gateway: Átjáró
-        general_info: Általános info
-        general_settings: Általános beállítások
-        generate: Generálás
-        generate_coupons: Kuponok generálása
-        generate_variants: Változatok létrehozása
-        generating_coupons: Kuponok generálása
-        go: Mehet
-        go_to_dashboard: Irány az irányítópult
-        grand_total: Végösszeg
-        guest: Vendég
-        guest_customer: Vendég ügyfél
-        hello: Üdvözlünk
-        hello_name: Üdvözöljük <b>%name%</b>
-        hide_deleted: Törölt elem elrejtése
-        home: Főoldal
-        hostname: Hoszt neve
-        id: Azonosító
-        identifier: Azonosító
-        if_you_have_an_account_sign_in_with_your_email_address: Ha van fiókod, jelentkezzen be az e-mail címeddel
-        image: Kép
-        images: Képek
-        imagine_blocks: Kép blokkok
-        in: Benne van
-        included_in_price: Az ár tartalmazza
-        index_metadata: Metaadat
-        index_of_all_configured_locales: Az összes konfigurált terület indexelése
-        info: Információ
-        information: Információk
-        integer: Egész szám
-        inventory: Leltár
-        inventory_here_you_can_see_current_stock_levels: Leltár <small>Az aktuális raktárkészlet</small>
-        inventory_index: Leltár
-        inventory_state: Leltár állapota
-        inventory_tracking: Leltár követés
-        invoice: Számla
-        is_enabled: Engedélyezve
-        item: Cikk
-        items: Elemek
-        items_total: Tételek összesen
-        jump_to_page: Ugrás az oldalra
-        last_login: Utolsó bejelentkezés
-        last_name: Vezetéknév
-        last_update: Utolsó frissítés
-        last_updated: Utolsó frissítés
-        last_week_orders: Múlt heti rendelések
-        last_week_revenue: Múlt heti bevételek
-        lastname: Vezetéknév
-        latest_orders: Utolsó rendelések
-        latest_products: Legújabb termékeink
-        links: Linkek
-        list_coupons: Kuponok listázása
-        list_variants: Változatok listája
-        locales: Területi beállítások
-        lock: Zárol
-        locked: Lezárt
-        logged_in_as: Bejelentkezve mint %username%
-        login: Belépés
-        login_button: Belépés
-        login_sylius_store: Bejelentkezés a <small>Sylius webáruházba</small>
-        logout: Kilépés
-        main_taxon: Fő taxonómia
-        male: Férfi
-        manage: Kezelés
-        manage_adjustments: Korrekciók kezelése
-        manage_attributes: Attribútumok kezelése
-        manage_attributes_of_your_products: A termékek jellemzőinek kezelése
-        manage_categorization_of_your_products: A termékek ketegóriáinak kezelése
-        manage_channels: Csatornák kezelése
-        manage_configuration_options_of_your_products: A termékek beállításainak kezelése
-        manage_countries: Országok kezelése
-        manage_coupons: Kuponok kezelése
-        manage_currencies_available_in_the_store: Az üzletben elérhető pénznemek kezelése
-        manage_customers: Vevők kezelése
-        manage_discounts_and_promotional_campaigns: Kedvezmények és promóciós kampányok kezelése
-        manage_emails: E-mailek kezelése
-        manage_geographical_zones: Földrajzi övezetek kezelése
-        manage_languages_available_in_the_store: Az áruházban elérhető nyelvek kezelése
-        manage_metadata: Metaadatok kezelése
-        manage_options: Beállítások kezelése
-        manage_orders: Megrendelések kezelése
-        manage_payment_methods_available_to_your_customers: Az ügyfelek rendelkezésére álló fizetési módok kezelése
-        manage_payments: Kifizetések kezelése
-        manage_products: Termékek kezelése
-        manage_promotions: Promóciók kezelése
-        manage_reviews: Értékelések kezelése
-        manage_shipments: Szállítások kezelése
-        manage_shipping_categories: Szállítási kategóriák kezelése
-        manage_shipping_destinations: Szállítási úticélok kezelése
-        manage_shipping_methods: Szállítás módok kezelése
-        manage_shipping_methods_for_your_store: Az áruház szállítási módjainak kezelése
-        manage_tax_categories: Adókategóriák kezelése
-        manage_tax_rates: Adókulcsok kezelése
-        manage_taxation_of_your_products: Termék taxonómia kezelése
-        manage_users: Felhasználók kezelése
-        manage_variants: Termékváltozatok kezelése
-        manage_your_customers: Vásárlók kezelése
-        manage_your_personal_information_and_preferences: Személyes adatok és a beállítások kezelése
-        manage_your_product_catalog: A termék-katalógus kezelése
-        manage_zones: Zónák kezelése
-        marketing: Marketing
-        media: Média
-        members: Tagok
-        menu_nodes: Menüpont hozzáadása
-        menus: Menük
-        message: Üzenet
-        metadata_index: Metaadat
-        method: Mód
-        modified: Módosítva
-        move_down: Mozgatás lefelé
-        move_up: Mozgatás Felfelé
-        my_account: Az Ön fiókja
-        n_a: N/A
-        name: Név
-        new: Új
-        new_channel: Új csatorna
-        new_comment_posted_on_order: Új hozzászólás a rendeléshez
-        new_country: Új ország
-        new_coupon: Új kupon
-        new_currency: Új pénznem
-        new_customer: Új Ügyfél
-        new_customers: Új vásárlók
-        new_locale: Új nyelv
-        new_order: Új rendelés
-        new_orders: Új rendelések
-        new_password: Új jelszó
-        new_payment: Új fizetés
-        new_payment_method: Új fizetési mód
-        new_permission: Új jogosultság
-        new_product: Új termék
-        new_product_attribute: Új termék attribútum
-        new_product_option: Új termék opció
-        new_product_variant: Új termék változat
-        new_promotion: Új promóció
-        new_promotion_coupon: Új promóciós kupon
-        new_review: Új értékelés
-        new_role: Új szerepkör
-        new_shipping_category: Új szállítási kategória
-        new_shipping_method: Új szállítási mód
-        new_tax_category: Új adókategória
-        new_tax_rate: Új adókulcs
-        new_taxon: Új taxon
-        new_user: Új felhasználó
-        new_zone: Új zóna
-        newest_products: Legújabb termékek
-        next: Következő
-        no_account: nincs fiók
-        no_association_types_to_display: Nincsenek kapcsolat típusok meghatározva
-        no_comment: Nincs megjegyzés
-        no_default_billing_address: Nincs alapértelmezett számlázási cím megadva
-        no_default_shipping_address: Nincs alapértelmezett szállítási cím
-        no_description: Nincs Leírás
-        no_pricing_configuration: Nincs ár konfiguráció
-        no_promotion: Promóció nem lett alkalmazva
-        no_requirement: Nincs követelmény
-        no_results: Nincs eredmény
-        no_results_to_display: Nincs megjeleníthető eredmény
-        no_shipping_category: Nincs szállítási kategória
-        no_shipping_charges: A szállítási díj nem lett alkalmazva
-        no_shipping_methods_available: Jelenleg nem tudunk az általad megadott szállítási címre szállítást vállalni
-        no_short_description: <i>Nincs rövid leírás</i>
-        no_sku: Nincs SKU
-        no_tax_category: Nincs adókategória
-        no_taxes: Az adó nem kett alkalmazva
-        no_theme: Nincs téma
-        not_available_in_your_country: Nem érhető el az Ön országában
-        not_contains: Nem tartalmaz
-        not_empty: Nem üres
-        not_in: Nincs benne
-        not_verified: Nincs megerősítve
-        notes: Jegyzetek
-        notify_customer: Ügyfél értesítése
-        number: Szám
-        number_of_orders: Rendelések száma
-        oauth_provider: OAuth Kiszolgáló
-        on_hold: Tartva
-        options: Beállítások
-        or: vagy
-        order: Rendelés
-        order_comment_name: Rendelés megjegyzés
-        order_comments: Rendelés megjegyzések
-        order_confirmation_name: Rendelés visszaigazolás
-        order_details: Az Ön rendelésének részletei
-        order_history: Rendelési előzmények
-        order_item_product: Cikk
-        order_state: Rendelés állapota
-        order_summary: Rendelés végösszege
-        order_total: Rendelés összesen
-        order_value: Rendelés értéke
-        ordered: Megrendelve
-        orders: Rendelések
-        original_price: Eredeti ár
-        out_of_stock: Nincs raktáron
-        overview_of_your_store: Az Ön raktárának áttekintése
-        page: Oldal
-        pages: Oldalak
-        parent: Szülő
-        partially_shipped: Részlegesen kiszállítva
-        password: Jelszó
-        payment: Fizetés
-        payment_details: Fizetés részletei
-        payment_method: Fizetési mód
-        payment_methods: Fizetési módok
-        payment_mode: Fizetési mód
-        payment_ready_to_pay: Most már fizethetsz
-        payment_state: Fizetés állapota
-        payments: Fizetések
-        pay: Fizetés
-        pay_again: Kattints a fietésre az újrapróbálkozáshoz
-        pending: Függőben
-        per_customer_usage_limit: Vásárlónkénti felhasználási limit
-        percent: Százalék
-        permissions: Engedélyek
-        personal_information: Személyes információk
-        phone_number: Telefonszám
-        place_order: Megrendelés
-        placed_an_order: Rendelésed sikeresen leadtad.
-        placed_at: Elhelyezve
-        postcode: Irányítószám
-        powered_by: Működteti
-        presentation: Bemutató
-        previous: Előző
-        price: Ár
-        pricing: Árazás
-        priority: Fontosság
-        privacy_policy: Adatvédelmi szabályzat
-        process_your_orders: Megrendeléseid feldolgozása
-        processing: Feldolgozás alatt
-        product: Termék
-        product_association_index: Kapcsolatok
-        product_association_type_index: Kapcsolódó típus
-        product_association_types: Termék asszocciáló típusok
-        product_associations: Termék kapcsolatok
-        product_attributes: Termék tulajdonságok
-        product_details_viewing_product_product: Termék részletei <small>Termék megtekintése - "<strong>%product%</strong>"</small>
-        product_options: Termék opciók
-        product_review: Termék értékelések
-        product_reviews: Termék értékelések
-        product_variants: Termék változatok
-        products: Termékek
+        fulfill: 'Teljesítés'
+        gateway: 'Átjáró'
+        general_info: 'Általános info'
+        general_settings: 'Általános beállítások'
+        generate: 'Generálás'
+        generate_coupons: 'Kuponok generálása'
+        generate_variants: 'Változatok létrehozása'
+        generating_coupons: 'Kuponok generálása'
+        go: 'Mehet'
+        go_to_dashboard: 'Irány az irányítópult'
+        grand_total: 'Végösszeg'
+        guest: 'Vendég'
+        guest_customer: 'Vendég ügyfél'
+        hello: 'Üdvözlünk'
+        hello_name: 'Üdvözöljük <b>%name%</b>'
+        hide_deleted: 'Törölt elem elrejtése'
+        home: 'Főoldal'
+        hostname: 'Hoszt neve'
+        id: 'Azonosító'
+        identifier: 'Azonosító'
+        if_you_have_an_account_sign_in_with_your_email_address: 'Ha van fiókod, jelentkezzen be az e-mail címeddel'
+        image: 'Kép'
+        images: 'Képek'
+        imagine_blocks: 'Kép blokkok'
+        in: 'Benne van'
+        included_in_price: 'Az ár tartalmazza'
+        index_metadata: 'Metaadat'
+        index_of_all_configured_locales: 'Az összes konfigurált terület indexelése'
+        info: 'Információ'
+        information: 'Információk'
+        integer: 'Egész szám'
+        inventory: 'Leltár'
+        inventory_here_you_can_see_current_stock_levels: 'Leltár <small>Az aktuális raktárkészlet</small>'
+        inventory_index: 'Leltár'
+        inventory_state: 'Leltár állapota'
+        inventory_tracking: 'Leltár követés'
+        invoice: 'Számla'
+        is_enabled: 'Engedélyezve'
+        item: 'Cikk'
+        items: 'Elemek'
+        items_total: 'Tételek összesen'
+        jump_to_page: 'Ugrás az oldalra'
+        last_login: 'Utolsó bejelentkezés'
+        last_name: 'Vezetéknév'
+        last_update: 'Utolsó frissítés'
+        last_updated: 'Utolsó frissítés'
+        last_week_orders: 'Múlt heti rendelések'
+        last_week_revenue: 'Múlt heti bevételek'
+        lastname: 'Vezetéknév'
+        latest_orders: 'Utolsó rendelések'
+        latest_products: 'Legújabb termékeink'
+        links: 'Linkek'
+        list_coupons: 'Kuponok listázása'
+        list_variants: 'Változatok listája'
+        locales: 'Területi beállítások'
+        lock: 'Zárol'
+        locked: 'Lezárt'
+        logged_in_as: 'Bejelentkezve mint %username%'
+        login: 'Belépés'
+        login_button: 'Belépés'
+        login_sylius_store: 'Bejelentkezés a <small>Sylius webáruházba</small>'
+        logout: 'Kilépés'
+        main_taxon: 'Fő taxonómia'
+        male: 'Férfi'
+        manage: 'Kezelés'
+        manage_adjustments: 'Korrekciók kezelése'
+        manage_attributes: 'Attribútumok kezelése'
+        manage_attributes_of_your_products: 'A termékek jellemzőinek kezelése'
+        manage_categorization_of_your_products: 'A termékek ketegóriáinak kezelése'
+        manage_channels: 'Csatornák kezelése'
+        manage_configuration_options_of_your_products: 'A termékek beállításainak kezelése'
+        manage_countries: 'Országok kezelése'
+        manage_coupons: 'Kuponok kezelése'
+        manage_currencies_available_in_the_store: 'Az üzletben elérhető pénznemek kezelése'
+        manage_customers: 'Vevők kezelése'
+        manage_discounts_and_promotional_campaigns: 'Kedvezmények és promóciós kampányok kezelése'
+        manage_emails: 'E-mailek kezelése'
+        manage_geographical_zones: 'Földrajzi övezetek kezelése'
+        manage_languages_available_in_the_store: 'Az áruházban elérhető nyelvek kezelése'
+        manage_metadata: 'Metaadatok kezelése'
+        manage_options: 'Beállítások kezelése'
+        manage_orders: 'Megrendelések kezelése'
+        manage_payment_methods_available_to_your_customers: 'Az ügyfelek rendelkezésére álló fizetési módok kezelése'
+        manage_payments: 'Kifizetések kezelése'
+        manage_products: 'Termékek kezelése'
+        manage_promotions: 'Promóciók kezelése'
+        manage_reviews: 'Értékelések kezelése'
+        manage_shipments: 'Szállítások kezelése'
+        manage_shipping_categories: 'Szállítási kategóriák kezelése'
+        manage_shipping_destinations: 'Szállítási úticélok kezelése'
+        manage_shipping_methods: 'Szállítás módok kezelése'
+        manage_shipping_methods_for_your_store: 'Az áruház szállítási módjainak kezelése'
+        manage_tax_categories: 'Adókategóriák kezelése'
+        manage_tax_rates: 'Adókulcsok kezelése'
+        manage_taxation_of_your_products: 'Termék taxonómia kezelése'
+        manage_users: 'Felhasználók kezelése'
+        manage_variants: 'Termékváltozatok kezelése'
+        manage_your_customers: 'Vásárlók kezelése'
+        manage_your_personal_information_and_preferences: 'Személyes adatok és a beállítások kezelése'
+        manage_your_product_catalog: 'A termék-katalógus kezelése'
+        manage_zones: 'Zónák kezelése'
+        marketing: 'Marketing'
+        media: 'Média'
+        members: 'Tagok'
+        menu_nodes: 'Menüpont hozzáadása'
+        menus: 'Menük'
+        message: 'Üzenet'
+        metadata_index: 'Metaadat'
+        method: 'Mód'
+        modified: 'Módosítva'
+        move_down: 'Mozgatás lefelé'
+        move_up: 'Mozgatás Felfelé'
+        my_account: 'Az Ön fiókja'
+        n_a: 'N/A'
+        name: 'Név'
+        new: 'Új'
+        new_channel: 'Új csatorna'
+        new_comment_posted_on_order: 'Új hozzászólás a rendeléshez'
+        new_country: 'Új ország'
+        new_coupon: 'Új kupon'
+        new_currency: 'Új pénznem'
+        new_customer: 'Új Ügyfél'
+        new_customers: 'Új vásárlók'
+        new_locale: 'Új nyelv'
+        new_order: 'Új rendelés'
+        new_orders: 'Új rendelések'
+        new_password: 'Új jelszó'
+        new_payment: 'Új fizetés'
+        new_payment_method: 'Új fizetési mód'
+        new_permission: 'Új jogosultság'
+        new_product: 'Új termék'
+        new_product_attribute: 'Új termék attribútum'
+        new_product_option: 'Új termék opció'
+        new_product_variant: 'Új termék változat'
+        new_promotion: 'Új promóció'
+        new_promotion_coupon: 'Új promóciós kupon'
+        new_review: 'Új értékelés'
+        new_role: 'Új szerepkör'
+        new_shipping_category: 'Új szállítási kategória'
+        new_shipping_method: 'Új szállítási mód'
+        new_tax_category: 'Új adókategória'
+        new_tax_rate: 'Új adókulcs'
+        new_taxon: 'Új taxon'
+        new_user: 'Új felhasználó'
+        new_zone: 'Új zóna'
+        newest_products: 'Legújabb termékek'
+        next: 'Következő'
+        no_account: 'nincs fiók'
+        no_association_types_to_display: 'Nincsenek kapcsolat típusok meghatározva'
+        no_comment: 'Nincs megjegyzés'
+        no_default_billing_address: 'Nincs alapértelmezett számlázási cím megadva'
+        no_default_shipping_address: 'Nincs alapértelmezett szállítási cím'
+        no_description: 'Nincs Leírás'
+        no_pricing_configuration: 'Nincs ár konfiguráció'
+        no_promotion: 'Promóció nem lett alkalmazva'
+        no_requirement: 'Nincs követelmény'
+        no_results: 'Nincs eredmény'
+        no_results_to_display: 'Nincs megjeleníthető eredmény'
+        no_shipping_category: 'Nincs szállítási kategória'
+        no_shipping_charges: 'A szállítási díj nem lett alkalmazva'
+        no_shipping_methods_available: 'Jelenleg nem tudunk az általad megadott szállítási címre szállítást vállalni'
+        no_short_description: '<i>Nincs rövid leírás</i>'
+        no_sku: 'Nincs SKU'
+        no_tax_category: 'Nincs adókategória'
+        no_taxes: 'Az adó nem kett alkalmazva'
+        no_theme: 'Nincs téma'
+        not_available_in_your_country: 'Nem érhető el az Ön országában'
+        not_contains: 'Nem tartalmaz'
+        not_empty: 'Nem üres'
+        not_in: 'Nincs benne'
+        not_verified: 'Nincs megerősítve'
+        notes: 'Jegyzetek'
+        notify_customer: 'Ügyfél értesítése'
+        number: 'Szám'
+        number_of_orders: 'Rendelések száma'
+        oauth_provider: 'OAuth Kiszolgáló'
+        on_hold: 'Tartva'
+        options: 'Beállítások'
+        or: 'vagy'
+        order: 'Rendelés'
+        order_comment_name: 'Rendelés megjegyzés'
+        order_comments: 'Rendelés megjegyzések'
+        order_confirmation_name: 'Rendelés visszaigazolás'
+        order_details: 'Az Ön rendelésének részletei'
+        order_history: 'Rendelési előzmények'
+        order_item_product: 'Cikk'
+        order_state: 'Rendelés állapota'
+        order_summary: 'Rendelés végösszege'
+        order_total: 'Rendelés összesen'
+        order_value: 'Rendelés értéke'
+        ordered: 'Megrendelve'
+        orders: 'Rendelések'
+        original_price: 'Eredeti ár'
+        out_of_stock: 'Nincs raktáron'
+        overview_of_your_store: 'Az Ön raktárának áttekintése'
+        page: 'Oldal'
+        pages: 'Oldalak'
+        parent: 'Szülő'
+        partially_shipped: 'Részlegesen kiszállítva'
+        password: 'Jelszó'
+        payment: 'Fizetés'
+        payment_details: 'Fizetés részletei'
+        payment_method: 'Fizetési mód'
+        payment_methods: 'Fizetési módok'
+        payment_mode: 'Fizetési mód'
+        payment_ready_to_pay: 'Most már fizethetsz'
+        payment_state: 'Fizetés állapota'
+        payments: 'Fizetések'
+        pay: 'Fizetés'
+        pay_again: 'Kattints a fietésre az újrapróbálkozáshoz'
+        pending: 'Függőben'
+        per_customer_usage_limit: 'Vásárlónkénti felhasználási limit'
+        percent: 'Százalék'
+        permissions: 'Engedélyek'
+        personal_information: 'Személyes információk'
+        phone_number: 'Telefonszám'
+        place_order: 'Megrendelés'
+        placed_an_order: 'Rendelésed sikeresen leadtad.'
+        placed_at: 'Elhelyezve'
+        postcode: 'Irányítószám'
+        powered_by: 'Működteti'
+        presentation: 'Bemutató'
+        previous: 'Előző'
+        price: 'Ár'
+        pricing: 'Árazás'
+        priority: 'Fontosság'
+        privacy_policy: 'Adatvédelmi szabályzat'
+        process_your_orders: 'Megrendeléseid feldolgozása'
+        processing: 'Feldolgozás alatt'
+        product: 'Termék'
+        product_association_index: 'Kapcsolatok'
+        product_association_type_index: 'Kapcsolódó típus'
+        product_association_types: 'Termék asszocciáló típusok'
+        product_associations: 'Termék kapcsolatok'
+        product_attributes: 'Termék tulajdonságok'
+        product_details_viewing_product_product: 'Termék részletei <small>Termék megtekintése - "<strong>%product%</strong>"</small>'
+        product_options: 'Termék opciók'
+        product_review: 'Termék értékelések'
+        product_reviews: 'Termék értékelések'
+        product_variants: 'Termék változatok'
+        products: 'Termékek'
         products_categorized_as_name: '"%name%" szerint kategorizált termékek'
-        products_categorized_under_taxon_taxon: Termékek <small>"%taxon%" taxon alatt kategorizálva</small>
-        products_index_of_all_products_in_your_store: Products <small>Az áruház összes termékének indexe</small>
-        profile: Profil
-        promotion_configuration: Promóció beállítása
-        promotion_coupons: Kuponok
-        promotion_details: Promóció részletei
-        promotion_information: Promóció információ
-        promotion_total: A promóciók teljes összege
-        promotions: Promóciók
-        province: Tartomány/állam
-        provinces: Tartományok
-        purchased_from: Megvásárolva innét
-        qty: Mennyiség
-        qty_max: Max mennyiség
-        qty_min: Min mennyiség
-        quantity: Mennyiség
-        rating: Értékelés
-        ready: Kész
-        recent_customers: Legfrissebb vásárlók
-        recent_orders: Legutóbbi rendelések
-        recent_users: Legutóbbi felhasználók
-        refunded: Visszatérítve
-        register: Regisztráció
-        register_button: Regisztráció
-        register_in_the_store: Regisztrálja az áruházban
-        registered_customers: Regisztrált felhasználók
-        registration_create_an_account_in_store: Regisztráció <small>Hozzon létre egy fiókot áruházunkban</small>
-        registration_date: Regisztráció dátuma
-        rejected: Elutasított
-        release_inventory: Kibocsáthatható készlet
-        remember_me: Emlékezzen rám
-        remove_attribute: Tulajdonság törlése
-        repeat_new_password: Új jelszó ismétlése
-        report_details: Részletes jelentés
-        reports: Jelentések
-        reserved: Fenntartott
-        reset: Alaphelyzetbe állítás
-        reset_button: Alaphelyzetbe állítás
-        reset_password: Jelszó visszaállítása
-        restore: Visszaállít
-        retail_price: Kiskereskedelmi ár
-        return: Vissza
-        returned: Visszaküldött
-        returns_policy: Visszatérítés irányelv
-        revert: Visszavonás
-        review_details: Értékelés részletei
-        reviews: Értékelések
-        roles: Szerepek
-        rules: Szabályok
-        sales: Értékesítés
-        sales_this_month: Értékesítés
-        save: Mentés
-        save_changes: Módosítások mentése
-        scope: Hatókör
-        search: Keresés
-        security_settings: Biztonsági beállítások
-        select_taxon: Válassza ki a taxon-t
-        set_a_new_password_for_your_account: Hozzon létre egy új jelszót a fiókodhoz
-        set_as_default_billing_address: Beállít mint alapértelmezett számlázási címet
-        set_as_default_shipping_address: Beállít mint alapértelmezett szállítási cím
-        ship: Szállítás
-        ship_to: Szállítás ide
-        shipment: Szállítás
-        shipment_confirmation_name: Szállítási mód megerősítése
-        shipment_details: Szállítás részletei
-        shipment_mode: Szállítási mód
-        shipment_state: Szállítási állapot
-        shipments: Szállítások
-        shipped: Kiszállítva
-        shipping: Szállítás
-        shipping_address: Szállítási cím
-        shipping_and_payment_methods: Szállítási és fizetési módszerek
-        shipping_category: Szállítási kategória
-        shipping_charges: Szállítási díjak
-        shipping_method: Szállítási mód
-        shipping_method_details: Szállítási mód részletei
-        shipping_methods: Szállítási módok
-        shipping_state: Szállítás állapota
-        shipping_total: Szállítási díj összesen
+        products_categorized_under_taxon_taxon: 'Termékek <small>"%taxon%" taxon alatt kategorizálva</small>'
+        products_index_of_all_products_in_your_store: 'Products <small>Az áruház összes termékének indexe</small>'
+        profile: 'Profil'
+        promotion_configuration: 'Promóció beállítása'
+        promotion_coupons: 'Kuponok'
+        promotion_details: 'Promóció részletei'
+        promotion_information: 'Promóció információ'
+        promotion_total: 'A promóciók teljes összege'
+        promotions: 'Promóciók'
+        province: 'Tartomány/állam'
+        provinces: 'Tartományok'
+        purchased_from: 'Megvásárolva innét'
+        qty: 'Mennyiség'
+        qty_max: 'Max mennyiség'
+        qty_min: 'Min mennyiség'
+        quantity: 'Mennyiség'
+        rating: 'Értékelés'
+        ready: 'Kész'
+        recent_customers: 'Legfrissebb vásárlók'
+        recent_orders: 'Legutóbbi rendelések'
+        recent_users: 'Legutóbbi felhasználók'
+        refunded: 'Visszatérítve'
+        register: 'Regisztráció'
+        register_button: 'Regisztráció'
+        register_in_the_store: 'Regisztrálja az áruházban'
+        registered_customers: 'Regisztrált felhasználók'
+        registration_create_an_account_in_store: 'Regisztráció <small>Hozzon létre egy fiókot áruházunkban</small>'
+        registration_date: 'Regisztráció dátuma'
+        rejected: 'Elutasított'
+        release_inventory: 'Kibocsáthatható készlet'
+        remember_me: 'Emlékezzen rám'
+        remove_attribute: 'Tulajdonság törlése'
+        repeat_new_password: 'Új jelszó ismétlése'
+        report_details: 'Részletes jelentés'
+        reports: 'Jelentések'
+        reserved: 'Fenntartott'
+        reset: 'Alaphelyzetbe állítás'
+        reset_button: 'Alaphelyzetbe állítás'
+        reset_password: 'Jelszó visszaállítása'
+        restore: 'Visszaállít'
+        retail_price: 'Kiskereskedelmi ár'
+        return: 'Vissza'
+        returned: 'Visszaküldött'
+        returns_policy: 'Visszatérítés irányelv'
+        revert: 'Visszavonás'
+        review_details: 'Értékelés részletei'
+        reviews: 'Értékelések'
+        roles: 'Szerepek'
+        rules: 'Szabályok'
+        sales: 'Értékesítés'
+        sales_this_month: 'Értékesítés'
+        save: 'Mentés'
+        save_changes: 'Módosítások mentése'
+        scope: 'Hatókör'
+        search: 'Keresés'
+        security_settings: 'Biztonsági beállítások'
+        select_taxon: 'Válassza ki a taxon-t'
+        set_a_new_password_for_your_account: 'Hozzon létre egy új jelszót a fiókodhoz'
+        set_as_default_billing_address: 'Beállít mint alapértelmezett számlázási címet'
+        set_as_default_shipping_address: 'Beállít mint alapértelmezett szállítási cím'
+        ship: 'Szállítás'
+        ship_to: 'Szállítás ide'
+        shipment: 'Szállítás'
+        shipment_confirmation_name: 'Szállítási mód megerősítése'
+        shipment_details: 'Szállítás részletei'
+        shipment_mode: 'Szállítási mód'
+        shipment_state: 'Szállítási állapot'
+        shipments: 'Szállítások'
+        shipped: 'Kiszállítva'
+        shipping: 'Szállítás'
+        shipping_address: 'Szállítási cím'
+        shipping_and_payment_methods: 'Szállítási és fizetési módszerek'
+        shipping_category: 'Szállítási kategória'
+        shipping_charges: 'Szállítási díjak'
+        shipping_method: 'Szállítási mód'
+        shipping_method_details: 'Szállítási mód részletei'
+        shipping_methods: 'Szállítási módok'
+        shipping_state: 'Szállítás állapota'
+        shipping_total: 'Szállítási díj összesen'
         shop_by: 'Áruház:'
-        shop_by_brand: Vásárlás márka szerint
-        show: Megjelenítés
-        show_all: Összes megjelenítése
-        show_deleted: Töröltek megjelenítése
-        show_in_store: Megtekintés az áruházban
-        show_metadata: Metaadatok megjelenítése
-        sign_in: Bejelentkezés
-        sign_in_here: Bejelentkezés itt
-        sign_in_to_the_store_or_create_new_account: Jelentkezzen be a webáruházba <small>, vagy hozzon létre új fiókot</small>
-        sign_out: Kijelentkezés
-        simple_blocks: Egyszerű blokkok
-        simple_product: Egyszerű termék
-        sku: SKU
-        slideshow: Diavetítés
-        slideshow_blocks: Diavetítés blokkok
-        start_date: Kezdő dátum
-        starts_at: Kezdődik
-        starts_with: Ezzel kezdődik
-        state: Állapot
-        status: Állapot
-        street: Utca
-        string_blocks: Szöveges blokkok
-        subject: Tárgy
-        subtotal: Részösszeg
-        success: Siker
-        summary: Összefoglaló
-        support: Támogatás
-        sylius_logo: Sylius
-        tax: Adó
-        tax_category: ÁFA-kategória
-        tax_rate_details: Adó mérték részletei
-        tax_rates: Adókulcsok
-        tax_total: Adó összesen
-        taxation_categories: Adózási kategóriák
-        taxation_settings: Adózás-beállítások
-        taxes: Adók
-        taxonomy: Taxonómia
-        terms_and_conditions: Felhasználási feltételek
-        text: Szöveg
-        textarea: Szövegmező
-        thank_you: Köszönjük!
-        thank_you_for_your_order: Köszönjük a rendelését
-        theme: Téma
-        there_are_no_attributes_configured: Nincsenek attribútumok meghatározva
-        there_are_no_blocks_to_display: Nincs megjeleníthető blokk
-        there_are_no_channels_configured: Nincsenek csatornák beállíŧva
-        there_are_no_countries_configured: Nincsenek konfigurált országok
-        there_are_no_coupon_to_display: Nincsenek megjeleníthető kuponok
-        there_are_no_currencies_to_display: Nincsenek megjeleníthető pénznemek
-        there_are_no_customers_to_display: Nincsenek megjeleníthető vevők
-        there_are_no_emails_configured: Nincsenek bekonfigurált email címek
-        there_are_no_images_for_this_product: Nincs kép a termékről
-        there_are_no_inventory_items_to_display: Nincsenek tételek raktárkészleten
-        there_are_no_inventory_units_to_display: Nincsenek készletegységek a megjelenítéséhez
-        there_are_no_locales_configured: Nincsenek konfigurált területek
-        there_are_no_logged_events_to_display: Nincsenek megjeleníthető események
-        there_are_no_menu_nodes_to_display: Nincsenek megjeleníthető menü csomópontok
-        there_are_no_menus_to_display: Nincs megjeleníthető menü
-        there_are_no_options_configured: Nincsenek konfigurált opciók
-        there_are_no_options_for_this_product: Nincs a terméknek opciói
-        there_are_no_orders_for_this_customer_to_display: Nincsenek megjeleníthető rendelések ehhez az ügyfélhez
-        there_are_no_pages_to_display: Nincsenek megjeleníthető oldalak
-        there_are_no_payment_methods_configured: Jelenleg nincs beállítva fizetési mód
-        there_are_no_payments_configured: Nincsenek beállított kifizetések
-        there_are_no_permissions_defined: Nincsenek jogosultságok meghatározva
-        there_are_no_products_to_display: Nincsenek megjeleníthető termékek
-        there_are_no_promotions_configured: Nincsenek beállított promóciók
-        there_are_no_reports_created: Nincsenek létrehozott jelentések
-        there_are_no_roles_defined: Nincsenek szerepkörök meghatározva
-        there_are_no_shipments_to_display: Nincsenek megjeleníthető kiszállítások
-        there_are_no_shipping_categories_configured: Nincsenek konfigurált szállítási kategóriák
-        there_are_no_shipping_methods_configured: Nincsenek konfigurált szállítási módok
-        there_are_no_tax_categories_configured: Nincsenek konfigurált adókategóriák
-        there_are_no_tax_rates_configured: Nincsenek konfigurált adókulcsok
-        there_are_no_taxons_for_this_product: A termékhez nem tartoznak taxonok
-        there_are_no_taxons_to_display: Nincsenek megjeleníthető taxonok
-        there_are_no_users_to_display: Nincsenek megjeleníthető felhasználók
-        there_are_no_variants_to_display: Nincsenek megjeleníthető változatok
-        there_are_no_zones_configured: Nincsenek konfigulát zónák
-        there_is_no_main_taxon_for_this_product: Nincs fő taxon ehhez a termékhez
-        this_months_statistics: Ennek a hónapnak a statisztikája
-        this_product_has_no_attributes_defined: Ennek a terméknek nincsenek attribútumai
-        title: Cím
+        shop_by_brand: 'Vásárlás márka szerint'
+        show: 'Megjelenítés'
+        show_all: 'Összes megjelenítése'
+        show_deleted: 'Töröltek megjelenítése'
+        show_in_store: 'Megtekintés az áruházban'
+        show_metadata: 'Metaadatok megjelenítése'
+        sign_in: 'Bejelentkezés'
+        sign_in_here: 'Bejelentkezés itt'
+        sign_in_to_the_store_or_create_new_account: 'Jelentkezzen be a webáruházba <small>, vagy hozzon létre új fiókot</small>'
+        sign_out: 'Kijelentkezés'
+        simple_blocks: 'Egyszerű blokkok'
+        simple_product: 'Egyszerű termék'
+        sku: 'SKU'
+        slideshow: 'Diavetítés'
+        slideshow_blocks: 'Diavetítés blokkok'
+        start_date: 'Kezdő dátum'
+        starts_at: 'Kezdődik'
+        starts_with: 'Ezzel kezdődik'
+        state: 'Állapot'
+        status: 'Állapot'
+        street: 'Utca'
+        string_blocks: 'Szöveges blokkok'
+        subject: 'Tárgy'
+        subtotal: 'Részösszeg'
+        success: 'Siker'
+        summary: 'Összefoglaló'
+        support: 'Támogatás'
+        sylius_logo: 'Sylius'
+        tax: 'Adó'
+        tax_category: 'ÁFA-kategória'
+        tax_rate_details: 'Adó mérték részletei'
+        tax_rates: 'Adókulcsok'
+        tax_total: 'Adó összesen'
+        taxation_categories: 'Adózási kategóriák'
+        taxation_settings: 'Adózás-beállítások'
+        taxes: 'Adók'
+        taxonomy: 'Taxonómia'
+        terms_and_conditions: 'Felhasználási feltételek'
+        text: 'Szöveg'
+        textarea: 'Szövegmező'
+        thank_you: 'Köszönjük!'
+        thank_you_for_your_order: 'Köszönjük a rendelését'
+        theme: 'Téma'
+        there_are_no_attributes_configured: 'Nincsenek attribútumok meghatározva'
+        there_are_no_blocks_to_display: 'Nincs megjeleníthető blokk'
+        there_are_no_channels_configured: 'Nincsenek csatornák beállíŧva'
+        there_are_no_countries_configured: 'Nincsenek konfigurált országok'
+        there_are_no_coupon_to_display: 'Nincsenek megjeleníthető kuponok'
+        there_are_no_currencies_to_display: 'Nincsenek megjeleníthető pénznemek'
+        there_are_no_customers_to_display: 'Nincsenek megjeleníthető vevők'
+        there_are_no_emails_configured: 'Nincsenek bekonfigurált email címek'
+        there_are_no_images_for_this_product: 'Nincs kép a termékről'
+        there_are_no_inventory_items_to_display: 'Nincsenek tételek raktárkészleten'
+        there_are_no_inventory_units_to_display: 'Nincsenek készletegységek a megjelenítéséhez'
+        there_are_no_locales_configured: 'Nincsenek konfigurált területek'
+        there_are_no_logged_events_to_display: 'Nincsenek megjeleníthető események'
+        there_are_no_menu_nodes_to_display: 'Nincsenek megjeleníthető menü csomópontok'
+        there_are_no_menus_to_display: 'Nincs megjeleníthető menü'
+        there_are_no_options_configured: 'Nincsenek konfigurált opciók'
+        there_are_no_options_for_this_product: 'Nincs a terméknek opciói'
+        there_are_no_orders_for_this_customer_to_display: 'Nincsenek megjeleníthető rendelések ehhez az ügyfélhez'
+        there_are_no_pages_to_display: 'Nincsenek megjeleníthető oldalak'
+        there_are_no_payment_methods_configured: 'Jelenleg nincs beállítva fizetési mód'
+        there_are_no_payments_configured: 'Nincsenek beállított kifizetések'
+        there_are_no_permissions_defined: 'Nincsenek jogosultságok meghatározva'
+        there_are_no_products_to_display: 'Nincsenek megjeleníthető termékek'
+        there_are_no_promotions_configured: 'Nincsenek beállított promóciók'
+        there_are_no_reports_created: 'Nincsenek létrehozott jelentések'
+        there_are_no_roles_defined: 'Nincsenek szerepkörök meghatározva'
+        there_are_no_shipments_to_display: 'Nincsenek megjeleníthető kiszállítások'
+        there_are_no_shipping_categories_configured: 'Nincsenek konfigurált szállítási kategóriák'
+        there_are_no_shipping_methods_configured: 'Nincsenek konfigurált szállítási módok'
+        there_are_no_tax_categories_configured: 'Nincsenek konfigurált adókategóriák'
+        there_are_no_tax_rates_configured: 'Nincsenek konfigurált adókulcsok'
+        there_are_no_taxons_for_this_product: 'A termékhez nem tartoznak taxonok'
+        there_are_no_taxons_to_display: 'Nincsenek megjeleníthető taxonok'
+        there_are_no_users_to_display: 'Nincsenek megjeleníthető felhasználók'
+        there_are_no_variants_to_display: 'Nincsenek megjeleníthető változatok'
+        there_are_no_zones_configured: 'Nincsenek konfigulát zónák'
+        there_is_no_main_taxon_for_this_product: 'Nincs fő taxon ehhez a termékhez'
+        this_months_statistics: 'Ennek a hónapnak a statisztikája'
+        this_product_has_no_attributes_defined: 'Ennek a terméknek nincsenek attribútumai'
+        title: 'Cím'
         to: '-ig'
-        topic: Téma
-        total: Összesen
-        total_orders: Rendelések összesen
-        total_qty: Össz mennyiség
-        total_records: Teljes nyilvántartás
-        total_registrations: Regisztrációk összesen
-        tracking_code: Követési kód
-        tracking_number: Kiszállítási szám
-        translations: Fordítások
-        type: Típus
-        unavailable: Nem elérhető
-        unit_price: Egységár
-        unknown: Ismeretlen
-        unlimited: Korlátlan
-        unlock: Felold
-        update: Frissít
-        update_cart: Kosár frissítése
-        update_product_association_type: Termék kapcsolat típus frissítése
-        updating_tax_rate: Adókulcs frissítése
-        usage: Használat
-        usage_limit: Felhasználhatóság korlátozása
-        used: Használt
-        user_details: Felhasználói adatok
-        username: Felhasználónév
-        users_list_of_all_users_registered_in_store: Felhasználók <small>Az áruházban regisztált felhasználók</small>
-        values: Értékek
-        variant: Változat
-        variant_selection_method: Változat kiválasztási módszer
-        variants: Változatok
-        verified: Megerősítve
-        verify: Megerősítés
-        view: Megtekintés
-        view_and_edit_cart: Kosár megtekintése és módosítása
-        view_more: Bővebben...
+        topic: 'Téma'
+        total: 'Összesen'
+        total_orders: 'Rendelések összesen'
+        total_qty: 'Össz mennyiség'
+        total_records: 'Teljes nyilvántartás'
+        total_registrations: 'Regisztrációk összesen'
+        tracking_code: 'Követési kód'
+        tracking_number: 'Kiszállítási szám'
+        translations: 'Fordítások'
+        type: 'Típus'
+        unavailable: 'Nem elérhető'
+        unit_price: 'Egységár'
+        unknown: 'Ismeretlen'
+        unlimited: 'Korlátlan'
+        unlock: 'Felold'
+        update: 'Frissít'
+        update_cart: 'Kosár frissítése'
+        update_product_association_type: 'Termék kapcsolat típus frissítése'
+        updating_tax_rate: 'Adókulcs frissítése'
+        usage: 'Használat'
+        usage_limit: 'Felhasználhatóság korlátozása'
+        used: 'Használt'
+        user_details: 'Felhasználói adatok'
+        username: 'Felhasználónév'
+        users_list_of_all_users_registered_in_store: 'Felhasználók <small>Az áruházban regisztált felhasználók</small>'
+        values: 'Értékek'
+        variant: 'Változat'
+        variant_selection_method: 'Változat kiválasztási módszer'
+        variants: 'Változatok'
+        verified: 'Megerősítve'
+        verify: 'Megerősítés'
+        view: 'Megtekintés'
+        view_and_edit_cart: 'Kosár megtekintése és módosítása'
+        view_more: 'Bővebben...'
         view_product_details: '%product% részleteinek megtekintése'
-        void: Hiányos
-        volume_based_pricing: Tömeg alapú árazás
-        warning: Figyelmeztetés
-        welcome: Üdözlünk
-        welcome_to_our_store: Üdvözöljük áruházunkban
-        welcome_to_your_space: Üdvözöljük az Ön tárhelyén
-        you_are_customer_since: Ön ügyfél
-        you_have_no_addresses_defined: Nincs címed meghatározva
-        you_have_no_new_orders: Nincsenek új megrendelések
-        you_may_also_like: Ez még talán érdekelhet
-        your_cart_is_empty: Az Ön kosara üres
-        your_last_5_orders: Az utolsó 5 megrendelésed
-        your_order_has_been_shipped: A rendelés kiszállításra került
-        your_products: Az Ön termékei
-        your_profile: Adatlapod
-        your_shopping_cart: Kosarad
-        your_store: Saját áruház
-        zone: Zóna
-        zone_consisting_of_countries: Országok szerinti övezetek
-        zone_consisting_of_other_zones: Más területek szerinti övezetek
-        zone_consisting_of_provinces: Megyék szerinti övezetek
-        zone_details: Zone részletek
-        zones: Zónák
+        void: 'Hiányos'
+        volume_based_pricing: 'Tömeg alapú árazás'
+        warning: 'Figyelmeztetés'
+        welcome: 'Üdözlünk'
+        welcome_to_our_store: 'Üdvözöljük áruházunkban'
+        welcome_to_your_space: 'Üdvözöljük az Ön tárhelyén'
+        you_are_customer_since: 'Ön ügyfél'
+        you_have_no_addresses_defined: 'Nincs címed meghatározva'
+        you_have_no_new_orders: 'Nincsenek új megrendelések'
+        you_may_also_like: 'Ez még talán érdekelhet'
+        your_cart_is_empty: 'Az Ön kosara üres'
+        your_last_5_orders: 'Az utolsó 5 megrendelésed'
+        your_order_has_been_shipped: 'A rendelés kiszállításra került'
+        your_products: 'Az Ön termékei'
+        your_profile: 'Adatlapod'
+        your_shopping_cart: 'Kosarad'
+        your_store: 'Saját áruház'
+        zone: 'Zóna'
+        zone_consisting_of_countries: 'Országok szerinti övezetek'
+        zone_consisting_of_other_zones: 'Más területek szerinti övezetek'
+        zone_consisting_of_provinces: 'Megyék szerinti övezetek'
+        zone_details: 'Zone részletek'
+        zones: 'Zónák'

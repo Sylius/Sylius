@@ -23,7 +23,7 @@ sylius:
         currency_code:
             not_valid: Wprowadzony kod waluty jest nieprawidłowy.
         method:
-            not_blank: Wybierz metodę płatności.
+            not_blank: 'Wybierz metodę płatności.'
     payment_method:
         gateway:
             not_blank: Proszę wybrać bramkę płatności.
@@ -40,5 +40,5 @@ sylius:
                 min_range: Opłata w procentach nie może być niższa niż {{ limit }}.
                 not_blank: Wprowadź wartość opłaty w procentach.
         code:
-            not_blank: Proszę podać kod metody płatności.
-            unique: Metoda płatności z danym kodem już istnieje.
+            not_blank: 'Proszę podać kod metody płatności.'
+            unique: 'Metoda płatności z danym kodem już istnieje.'

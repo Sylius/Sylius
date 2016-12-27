@@ -4,26 +4,26 @@
 sylius:
     shipping_category:
         name:
-            max_length: Categorie naam mag niet langer zijn dan {{ limit }} tekens.
-            min_length: Categorie naam moet minstens {{ limit }} tekens lang zijn.
-            not_blank: Voer een naam in voor de verzendingscategorie.
+            max_length: 'Categorie naam mag niet langer zijn dan {{ limit }} tekens.'
+            min_length: 'Categorie naam moet minstens {{ limit }} tekens lang zijn.'
+            not_blank: 'Voer een naam in voor de verzendingscategorie.'
         code:
-            not_blank: Gelieve een verzendcategoriecode in te vullen.
-            unique: De verzendcategorie met gegeven code bestaat al.
+            not_blank: 'Gelieve een verzendcategoriecode in te vullen.'
+            unique: 'De verzendcategorie met gegeven code bestaat al.'
     shipping_method:
         calculator:
             max_length: Maximale lengte
             min_length: Minimum lengte
             not_blank: Veld mag niet leeg zijn
         name:
-            max_length: Naam van verzendingsmethode mag niet langer zijn dan {{ limit }} tekens.
-            min_length: Naam van verzendingsmethode moet minstens {{ limit }} tekens lang zijn.
-            not_blank: Voer een naam in voor de verzendingsmethode.
+            max_length: 'Naam van verzendingsmethode mag niet langer zijn dan {{ limit }} tekens.'
+            min_length: 'Naam van verzendingsmethode moet minstens {{ limit }} tekens lang zijn.'
+            not_blank: 'Voer een naam in voor de verzendingsmethode.'
         code:
-            not_blank: Gelieve een verzendmethode code in te voeren.
-            unique: De verzendmethode met gegeven code bestaat al.
+            not_blank: 'Gelieve een verzendmethode code in te voeren.'
+            unique: 'De verzendmethode met gegeven code bestaat al.'
         zone:
-            not_blank: Gelieve een verzendmethode zone te selecteren.
+            not_blank: 'Gelieve een verzendmethode zone te selecteren.'
     shipment:
         shipping_method:
-            not_blank: Gelieve een verzendmethode te kiezen.
+            not_blank: 'Gelieve een verzendmethode te kiezen.'

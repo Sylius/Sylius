@@ -3,20 +3,20 @@
 
 sylius:
     ui:
-        add_value: Додај вредност
-        city: Град
-        company: Компанија
-        country: Држава
-        email: Е-пошта
-        exchange_rate: Курс на конверзија
-        members: Членови
-        message: Порака
-        phone_number: Телефонски Број
-        postcode: Поштенски Број
-        presentation: Презентација
-        province: Регион
-        provinces: Региони
-        scope: Опсег
-        street: Улица
-        topic: Тема
-        type: Вид
+        add_value: 'Додај вредност'
+        city: 'Град'
+        company: 'Компанија'
+        country: 'Држава'
+        email: 'Е-пошта'
+        exchange_rate: 'Курс на конверзија'
+        members: 'Членови'
+        message: 'Порака'
+        phone_number: 'Телефонски Број'
+        postcode: 'Поштенски Број'
+        presentation: 'Презентација'
+        province: 'Регион'
+        provinces: 'Региони'
+        scope: 'Опсег'
+        street: 'Улица'
+        topic: 'Тема'
+        type: 'Вид'

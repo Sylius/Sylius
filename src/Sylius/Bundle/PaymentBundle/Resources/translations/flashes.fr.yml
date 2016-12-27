@@ -3,4 +3,4 @@
 
 sylius:
     payment:
-        refunded: Le paiement a été remboursé avec succès.
+        refunded: 'Le paiement a été remboursé avec succès.'

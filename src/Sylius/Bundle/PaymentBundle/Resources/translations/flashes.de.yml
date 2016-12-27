@@ -3,8 +3,8 @@
 
 sylius:
     payment:
-        cancelled: Zahlung wurde abgebrochen.
-        completed: Zahlung wurde abgeschlossen.
-        failed: Zahlung ist fehlgeschlagen.
-        processing: Zahlung wird bearbeitet.
-        refunded: Zahlung wurde erfolgreich erstattet.
+        cancelled: 'Zahlung wurde abgebrochen.'
+        completed: 'Zahlung wurde abgeschlossen.'
+        failed: 'Zahlung ist fehlgeschlagen.'
+        processing: 'Zahlung wird bearbeitet.'
+        refunded: 'Zahlung wurde erfolgreich erstattet.'

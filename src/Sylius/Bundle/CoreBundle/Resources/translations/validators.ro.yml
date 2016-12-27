@@ -20,7 +20,7 @@ sylius:
         currency_code:
             not_valid: Codul de valută pe care le-aţi introdus nu este valid.
     cart_item:
-        not_available: Nu există stoc suficient pentru %itemName%.
+        not_available: 'Nu există stoc suficient pentru %itemName%.'
     order:
         currency_code:
             not_valid: Codul de valută pe care l-aţi introdus nu este valid.

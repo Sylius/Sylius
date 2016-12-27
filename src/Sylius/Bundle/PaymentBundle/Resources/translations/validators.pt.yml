@@ -23,7 +23,7 @@ sylius:
         currency_code:
             not_valid: O código de moeda introduzido é inválido.
         method:
-            not_blank: Por favor, selecione um método de pagamento.
+            not_blank: 'Por favor, selecione um método de pagamento.'
     payment_method:
         gateway:
             not_blank: Por favor selecione o gateway do método de pagamento.
@@ -40,5 +40,5 @@ sylius:
                 min_range: A taxa de percentagem não pode ser inferior a {{ limit }}.
                 not_blank: Por favor introduza a percentagem de taxa.
         code:
-            not_blank: Por favor introduza o código do método de pagamento.
-            unique: Já existe um método de pagamento com o código introduzido.
+            not_blank: 'Por favor introduza o código do método de pagamento.'
+            unique: 'Já existe um método de pagamento com o código introduzido.'

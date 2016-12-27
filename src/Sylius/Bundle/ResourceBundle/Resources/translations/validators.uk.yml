@@ -3,5 +3,5 @@
 
 sylius:
     resource:
-        not_enabled: Даний ресурс вимкнений
-        not_disabled: Даний ресурс увімкнений
+        not_enabled: "Даний ресурс вимкнений"
+        not_disabled: "Даний ресурс увімкнений"

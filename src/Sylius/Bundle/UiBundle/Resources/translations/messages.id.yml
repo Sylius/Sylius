@@ -4,62 +4,62 @@
 sylius:
     form:
         login:
-            password: Kata sandi
+            password: 'Kata sandi'
         option:
-            name: Nama
+            name: 'Nama'
     ui:
-        add_member: Tambah anggota
-        add_province: Tambah Provinsi
-        billing_address: Alamat Penagihan
-        body: Body
-        channels: Saluran
-        city: Kota
-        code: Kode
-        company: Perusahaan
-        content: Konten
-        country: Negara
-        coupon: Kupon
-        currency: Mata Uang
-        current_stock: Stok
-        email: Email
-        enabled: Diaktifkan
-        first_name: Nama Depan
-        from: Dari
-        id: ID
-        image: Gambar
-        images: Gambar
-        last_name: Nama belakang
-        lastname: Nama belakang
-        members: Anggota
-        menu_nodes: Menu node
-        message: Pesan
-        name: Nama
-        number: Nomor
-        password: Kata sandi
-        payment_methods: Metode Pembayaran
-        phone_number: Nomor telepon
-        postcode: Kode pos
-        presentation: Presentasi
-        price: Harga
-        products: Produk
-        province: Provinsi
-        provinces: Provinsi
-        roles: Peran
-        rules: Aturan
-        scope: Lingkup
-        search: Cari
-        shipping_address: Alamat pengiriman
-        shipping_categories: Kategori Pengiriman
-        shipping_category: Kategori Pengiriman
-        shipping_methods: Metode Pengiriman
-        sku: SKU
-        street: Alamat
-        tax_category: Kategori Pajak
-        title: Judul
-        to: Untuk
-        topic: Topik
-        type: Jenis
-        unit_price: Harga Satuan
-        variant: Varian
-        variant_selection_method: Metode Pilih Varian
-        zone: Zona
+        add_member: 'Tambah anggota'
+        add_province: 'Tambah Provinsi'
+        billing_address: 'Alamat Penagihan'
+        body: 'Body'
+        channels: 'Saluran'
+        city: 'Kota'
+        code: 'Kode'
+        company: 'Perusahaan'
+        content: 'Konten'
+        country: 'Negara'
+        coupon: 'Kupon'
+        currency: 'Mata Uang'
+        current_stock: 'Stok'
+        email: 'Email'
+        enabled: 'Diaktifkan'
+        first_name: 'Nama Depan'
+        from: 'Dari'
+        id: 'ID'
+        image: 'Gambar'
+        images: 'Gambar'
+        last_name: 'Nama belakang'
+        lastname: 'Nama belakang'
+        members: 'Anggota'
+        menu_nodes: 'Menu node'
+        message: 'Pesan'
+        name: 'Nama'
+        number: 'Nomor'
+        password: 'Kata sandi'
+        payment_methods: 'Metode Pembayaran'
+        phone_number: 'Nomor telepon'
+        postcode: 'Kode pos'
+        presentation: 'Presentasi'
+        price: 'Harga'
+        products: 'Produk'
+        province: 'Provinsi'
+        provinces: 'Provinsi'
+        roles: 'Peran'
+        rules: 'Aturan'
+        scope: 'Lingkup'
+        search: 'Cari'
+        shipping_address: 'Alamat pengiriman'
+        shipping_categories: 'Kategori Pengiriman'
+        shipping_category: 'Kategori Pengiriman'
+        shipping_methods: 'Metode Pengiriman'
+        sku: 'SKU'
+        street: 'Alamat'
+        tax_category: 'Kategori Pajak'
+        title: 'Judul'
+        to: 'Untuk'
+        topic: 'Topik'
+        type: 'Jenis'
+        unit_price: 'Harga Satuan'
+        variant: 'Varian'
+        variant_selection_method: 'Metode Pilih Varian'
+        zone: 'Zona'

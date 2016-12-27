@@ -3,6 +3,6 @@
 
 sylius:
     resource:
-        create: Το %resource% δημιουργήθηκε με επιτυχία.
-        update: Το %resource% ενημερώθηκε με επιτυχία.
-        delete: Το %resource% διαγράφηκε με επιτυχία.
+        create: 'Το %resource% δημιουργήθηκε με επιτυχία.'
+        update: 'Το %resource% ενημερώθηκε με επιτυχία.'
+        delete: 'Το %resource% διαγράφηκε με επιτυχία.'
