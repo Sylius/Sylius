@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CurrencyBundle\Twig;
 
-use Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelperInterface;
+use Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelper;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -19,25 +19,12 @@ use Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelperInterface;
 final class CurrencyExtension extends \Twig_Extension
 {
     /**
-     * @var CurrencyHelperInterface
-     */
-    private $helper;
-
-    /**
-     * @param CurrencyHelperInterface $helper
-     */
-    public function __construct(CurrencyHelperInterface $helper)
-    {
-        $this->helper = $helper;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function getFilters()
     {
         return [
-            new \Twig_SimpleFilter('sylius_currency_symbol', [$this->helper, 'convertCurrencyCodeToSymbol']),
+            new \Twig_SimpleFilter('sylius_currency_symbol', [CurrencyHelper::class, 'convertCurrencyCodeToSymbol']),
         ];
     }
 

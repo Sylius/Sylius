@@ -19,26 +19,13 @@ use Sylius\Bundle\InventoryBundle\Templating\Helper\InventoryHelper;
 final class InventoryExtension extends \Twig_Extension
 {
     /**
-     * @var InventoryHelper
-     */
-    private $helper;
-
-    /**
-     * @param InventoryHelper $helper
-     */
-    public function __construct(InventoryHelper $helper)
-    {
-        $this->helper = $helper;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function getFunctions()
     {
         return [
-             new \Twig_SimpleFunction('sylius_inventory_is_available', [$this->helper, 'isStockAvailable']),
-             new \Twig_SimpleFunction('sylius_inventory_is_sufficient', [$this->helper, 'isStockSufficient']),
+             new \Twig_SimpleFunction('sylius_inventory_is_available', [InventoryHelper::class, 'isStockAvailable']),
+             new \Twig_SimpleFunction('sylius_inventory_is_sufficient', [InventoryHelper::class, 'isStockSufficient']),
         ];
     }
 

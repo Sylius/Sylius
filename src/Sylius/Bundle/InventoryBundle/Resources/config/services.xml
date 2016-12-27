@@ -23,10 +23,10 @@
         <service id="sylius.templating.helper.inventory" class="Sylius\Bundle\InventoryBundle\Templating\Helper\InventoryHelper">
             <argument type="service" id="sylius.availability_checker" />
             <tag name="templating.helper" alias="sylius_inventory" />
+            <tag name="twig.runtime" />
         </service>
 
         <service id="sylius.twig.extension.inventory" class="Sylius\Bundle\InventoryBundle\Twig\InventoryExtension" public="false">
-            <argument type="service" id="sylius.templating.helper.inventory" />
             <tag name="twig.extension" />
         </service>
     </services>
