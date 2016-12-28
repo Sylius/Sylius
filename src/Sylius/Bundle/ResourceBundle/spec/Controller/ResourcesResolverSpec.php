@@ -45,8 +45,9 @@ final class ResourcesResolverSpec extends ObjectBehavior
 
         $requestConfiguration->isPaginated()->willReturn(false);
         $requestConfiguration->isLimited()->willReturn(false);
+        $requestConfiguration->getSorting()->willReturn([]);
 
-        $repository->findAll()->willReturn([$firstResource, $secondResource]);
+        $repository->findBy([], [])->willReturn([$firstResource, $secondResource]);
 
         $this->getResources($requestConfiguration, $repository)->shouldReturn([$firstResource, $secondResource]);
     }

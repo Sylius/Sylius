@@ -31,7 +31,7 @@ final class ResourcesResolver implements ResourcesResolverInterface
         }
 
         if (!$requestConfiguration->isPaginated() && !$requestConfiguration->isLimited()) {
-            return $repository->findAll();
+            return $repository->findBy([], $requestConfiguration->getSorting());
         }
 
         if (!$requestConfiguration->isPaginated()) {
