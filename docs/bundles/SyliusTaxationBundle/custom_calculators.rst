@@ -41,7 +41,7 @@ Remember we set calculator for tax rate as ``app.server_tax``.
 
 Service should be tagged with key value pair ``name: sylius.tax_calculator`` and ``calculator: app.server_tax``.
 
-.. code-block:: yml
+.. code-block:: yaml
 
     #
     app.tax_calculator.server_tax_calculator:
