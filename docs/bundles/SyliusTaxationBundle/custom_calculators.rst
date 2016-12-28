@@ -27,7 +27,7 @@ All calculators implement the **TaxCalculatorInterface**. First, you need to cre
 
 .. note::
 
-Now we need to register calculator as service.
+    Now we need to register calculator as service.
 
 Remember we set calculator for tax rate as ``app.server_tax``.
 
