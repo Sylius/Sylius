@@ -21,6 +21,7 @@ use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Controller\ResourcesCollectionProvider;
 use Sylius\Bundle\ResourceBundle\Controller\ResourcesCollectionProviderInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ResourcesResolverInterface;
+use Sylius\Bundle\ResourceBundle\Grid\View\ResourceGridView;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
@@ -115,5 +116,31 @@ final class ResourcesCollectionProviderSpec extends ObjectBehavior
         $pagerfantaRepresentationFactory->createRepresentation($paginator, Argument::type(Route::class))->willReturn($paginatedRepresentation);
 
         $this->get($requestConfiguration, $repository)->shouldReturn($paginatedRepresentation);
+    }
+
+    function it_handles_ResourceGridView(
+        ResourcesResolverInterface $resourcesResolver,
+        RequestConfiguration $requestConfiguration,
+        RepositoryInterface $repository,
+        ResourceGridView $resourceGridView,
+        Pagerfanta $paginator,
+        Request $request,
+        ParameterBag $queryParameters
+    ) {
+        $requestConfiguration->isHtmlRequest()->willReturn(true);
+        $requestConfiguration->getPaginationMaxPerPage()->willReturn(5);
+
+        $resourcesResolver->getResources($requestConfiguration, $repository)->willReturn($resourceGridView);
+        $resourceGridView->getData()->willReturn($paginator);
+
+        $requestConfiguration->getRequest()->willReturn($request);
+        $request->query = $queryParameters;
+        $queryParameters->get('page', 1)->willReturn(6);
+
+        $paginator->setMaxPerPage(5)->shouldBeCalled();
+        $paginator->setCurrentPage(6)->shouldBeCalled();
+        $paginator->getCurrentPageResults()->shouldBeCalled();
+
+        $this->get($requestConfiguration, $repository)->shouldReturn($resourceGridView);
     }
 }
