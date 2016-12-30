@@ -18,9 +18,11 @@ sylius:
                     channels: ช่องทางจำหน่าย
                     countries: ประเทศ
                     currencies: สกุลเงิน
+                    exchange_rates: อัตราแลกเปลี่ยน
                     header: การกำหนดค่า
                     locales: ภาษา
                     payment_methods: วิธีการชำระเงิน
+                    shipping_categories: ประเภทการจัดส่ง
                     shipping_methods: วิธีการจัดส่ง
                     tax_categories: ประเภทภาษี
                     tax_rates: อัตราภาษี

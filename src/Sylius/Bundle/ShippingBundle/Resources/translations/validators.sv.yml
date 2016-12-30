@@ -4,4 +4,4 @@
 sylius:
     shipment:
         shipping_method:
-            not_blank: Var god välj leveranssätt.
+            not_blank: 'Var god välj leveranssätt.'

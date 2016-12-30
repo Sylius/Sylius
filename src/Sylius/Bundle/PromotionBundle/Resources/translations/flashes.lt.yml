@@ -3,4 +3,4 @@
 
 sylius:
     promotion_coupon:
-        generate: Nuolaidų kuponai sėkmingai sugeneruoti.
+        generate: 'Nuolaidų kuponai sėkmingai sugeneruoti.'

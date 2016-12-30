@@ -3,5 +3,5 @@
 
 sylius:
     resource:
-        not_enabled: Dani vir je onemogočen
-        not_disabled: Dani vir je omogočen
+        not_enabled: "Dani vir je onemogočen"
+        not_disabled: "Dani vir je omogočen"

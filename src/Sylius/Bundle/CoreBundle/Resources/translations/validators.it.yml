@@ -3,10 +3,18 @@
 
 sylius:
     channel:
+        base_currency:
+            not_blank: Inserisci la valuta di base del canale.
+        default_locale:
+            not_blank: Inserisci le impostazioni internazionali predefinite del canale.
         contact_email:
             invalid: Questa e-mail non è valida.
             max: L'e-mail non dovrebbe contenere più di {{ limit }} caratteri.
             min: L'e-mail dovrebbe contenere almeno {{ limit }} caratteri.
+    channel_pricing:
+        price:
+            min: Il prezzo deve essere almeno {{ limit }}.
+            not_blank: Inserisci il prezzo.
     checkout:
         shipping_method:
             not_blank: Si prega di scegliere un metodo di spedizione.
@@ -14,9 +22,16 @@ sylius:
         email:
             invalid: Questa e-mail non è valida.
             not_blank: Inserisci la tua email.
+        message:
+            not_blank: Inserisci il tuo messaggio.
+    currency:
+        enabled:
+            cannot_disable_base: La valuta di base non può essere disattivata.
     customer:
         currency_code:
             not_valid: Il codice valuta inserito non è valido.
+    cart_item:
+        not_available: '%itemName% non dispone di scorte sufficienti.'
     order:
         currency_code:
             not_valid: Il codice valuta inserito non è valido.
@@ -24,15 +39,52 @@ sylius:
         code:
             not_blank: Per favore inserisci il CAP.
             unique: Questo locale esiste già.
+        enabled:
+            cannot_disable_base: Le impostazioni locali di base non possono essere disattivate.
+    product_attribute:
+        invalid: La posizione deve essere un valore intero.
+    product_image:
+        code:
+            not_blank: Inserisci un codice di immagine.
+            regex: Il codice di immagine può essere composto solo da lettere, numeri, trattini e underscore.
+            unique: Il codice di immagine deve essere univoco per questo prodotto.
+        file:
+            max_size: L'immagine è troppo grande - {{ size }}{{ suffix }}. La dimensione massima consentita è {{ limit }}{{ suffix }}.
+            upload_ini_size: L'immagine è troppo grande. La dimensione massima consentita è {{ limit }}{{ suffix }}.
     product_variant:
         onHand:
             min: La scorta di magazzino deve essere maggiore di {{ limit }}.
             not_blank: Per favore inserisci la scorta di magazzino.
         original_price:
             min: Il prezzo originale non deve essere negativo.
+        weight:
+            min: Il peso non può essere negativo.
+            invalid: Il peso deve essere un numero.
+        width:
+            min: La larghezza non può essere negativa.
+            invalid: La larghezza deve essere un numero.
+        height:
+            min: L'altezza non può essere negativa.
+            invalid: L'altezza deve essere un numero.
+        depth:
+            min: La profondità non può essere negativa.
+            invalid: La profondità deve essere un numero.
     product_translation:
         short_description:
             max: La descrizione breve non deve superare i {{ limit }} caratteri.
+    taxon_image:
+        code:
+            not_blank: Inserisci un codice di immagine.
+            regex: Il codice di immagine può essere composto solo da lettere, numeri, trattini e underscore.
+            unique: Il codice immagine deve essere univoco in questo taxon.
+        file:
+            max_size: L'immagine è troppo grande - {{ size }}{{ suffix }}. La dimensione massima consentita è {{ limit }}{{ suffix }}.
+            upload_ini_size: L'immagine è troppo grande. La dimensione massima consentita è {{ limit }}{{ suffix }}.
     user:
         email:
             unique: Questa e-mail è già in uso.
+        username:
+            unique: Questo nome utente è già utilizzato.
+            not_blank: Inserisci il tuo nome.
+        locale_code:
+            not_blank: Si prega di scegliere una lingua.

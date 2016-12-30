@@ -3,5 +3,5 @@
 
 sylius:
     resource:
-        not_enabled: Gewählte Ressource ist deaktiviert
-        not_disabled: Gewählte Ressource ist aktiviert
+        not_enabled: "Gewählte Ressource ist deaktiviert"
+        not_disabled: "Gewählte Ressource ist aktiviert"

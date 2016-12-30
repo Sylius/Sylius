@@ -10,6 +10,7 @@ sylius:
             options: Opzioni
             meta_keywords: Meta keywords
             meta_description: Meta descrizione
+            slug: Slug
         product_variant:
             available_on: Disponibile
             available_until: Disponibile fino al
@@ -24,6 +25,7 @@ sylius:
             name: Nome
         option:
             name: Nome
+            position: Posizione
             values: Valori possibili
         option_value:
             add_value: Aggiungi valore

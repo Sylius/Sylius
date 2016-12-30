@@ -3,5 +3,5 @@
 
 sylius:
     resource:
-        not_enabled: Az adott erőforrás le van tiltva
-        not_disabled: Az adott erőforrás engedélyezve van
+        not_enabled: "Az adott erőforrás le van tiltva"
+        not_disabled: "Az adott erőforrás engedélyezve van"

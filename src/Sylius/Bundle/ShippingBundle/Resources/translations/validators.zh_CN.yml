@@ -4,26 +4,26 @@
 sylius:
     shipping_category:
         name:
-            max_length: 分类名需要在 {{ limit }} 个字符以内。
-            min_length: 分类名至少要 {{ limit }} 个字符。
-            not_blank: 请输入配送类别名称。
+            max_length: '分类名需要在 {{ limit }} 个字符以内。'
+            min_length: '分类名至少要 {{ limit }} 个字符。'
+            not_blank: '请输入配送类别名称。'
         code:
-            not_blank: 请输入配送类别编码
-            unique: 给定代码配送编码已存在。
+            not_blank: '请输入配送类别编码'
+            unique: '给定代码配送编码已存在。'
     shipping_method:
         calculator:
             max_length: 最大长度
             min_length: 请输入配送方式价格计算最小值
             not_blank: 请选择配送方式的价格计算器
         name:
-            max_length: 配送方式名称需要在 {{ limit }} 个字符以内。
-            min_length: 配送方式名称至少要 {{ limit }} 个字符。
-            not_blank: 请填写配送方式名称。
+            max_length: '配送方式名称需要在 {{ limit }} 个字符以内。'
+            min_length: '配送方式名称至少要 {{ limit }} 个字符。'
+            not_blank: '请填写配送方式名称。'
         code:
-            not_blank: 请填写配送方式名称。
-            unique: 给定发货方式的代码已存在。
+            not_blank: '请填写配送方式名称。'
+            unique: '给定发货方式的代码已存在。'
         zone:
-            not_blank: 请选择配送区域。
+            not_blank: '请选择配送区域。'
     shipment:
         shipping_method:
-            not_blank: 请选择配送方式。
+            not_blank: '请选择配送方式。'

@@ -5,8 +5,8 @@ sylius:
     menu:
         shop:
             account:
-                change_password: Змінити пароль
-                dashboard: Приладова дошка
-                header: Ваша обліковка
-                order_history: Історія замовлень
-                personal_information: Особисті відомості
+                change_password: 'Змінити пароль'
+                dashboard: 'Приладова дошка'
+                header: 'Ваша обліковка'
+                order_history: 'Історія замовлень'
+                personal_information: 'Особисті відомості'

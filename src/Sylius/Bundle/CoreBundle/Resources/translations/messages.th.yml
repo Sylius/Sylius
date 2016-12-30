@@ -28,6 +28,7 @@ sylius:
             taxonomies: การจัดประเภท
             locale_default: ตำแหน่งที่ตั้งเริ่มต้น
             locales: ภาษาที่ใช้
+            contact_email: ติดต่ออีเมล์
             currency_base: ฐานสกุลเงิน
             currencies: สกุลเงิน
             shipping_methods: วิธีการจัดส่ง
@@ -119,7 +120,12 @@ sylius:
             type: ชนิดสินค้าที่เกี่ยวข้อง
         product_association_type:
             name: ชื่อ
+        promotion_filter:
+            products: ตัวกรองสินค้า
+            taxons: ตัวกรอง taxons
         promotion_rule:
+            customer_group:
+                group: กลุ่มลูกค้า
             has_taxon:
                 taxons: การจัดหมวดหมู่
             product:

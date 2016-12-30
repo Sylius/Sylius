@@ -23,7 +23,7 @@ sylius:
         currency_code:
             not_valid: Der eingegebene Währungscode ist ungültig.
         method:
-            not_blank: Bitte wählen Sie eine Zahlungsart aus.
+            not_blank: 'Bitte wählen Sie eine Zahlungsart aus.'
     payment_method:
         gateway:
             not_blank: Bitte wählen Sie eine Zahlungsmethodeschnittstelle aus.
@@ -40,6 +40,6 @@ sylius:
                 min_range: Prozentuale Gebühr darf nicht unter {{ limit }} sein.
                 not_blank: Bitte geben Sie die prozentuale Gebühr ein.
         code:
-            not_blank: Bitte geben Sie ein Kürzel für die Zahlungsmethode an.
-            regex: Kürzel der Zahlungsweise darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
-            unique: Eine Zahlungsmethode mit diesem Kürzel existiert bereits.
+            not_blank: 'Bitte geben Sie ein Kürzel für die Zahlungsmethode an.'
+            regex: 'Kürzel der Zahlungsweise darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.'
+            unique: 'Eine Zahlungsmethode mit diesem Kürzel existiert bereits.'

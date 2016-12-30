@@ -35,5 +35,5 @@ sylius:
                 min_range: Odstotek provizije ne sme biti manjši od {{ limit }}.
                 not_blank: Prosimo, vnesite odstotek provizije.
         code:
-            not_blank: Prosimo, vnesite kodo načina plačila.
-            unique: Način plačila z dano kodo že obstaja.
+            not_blank: 'Prosimo, vnesite kodo načina plačila.'
+            unique: 'Način plačila z dano kodo že obstaja.'

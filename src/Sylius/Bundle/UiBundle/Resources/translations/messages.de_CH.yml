@@ -4,45 +4,45 @@
 sylius:
     form:
         option:
-            name: Name
+            name: 'Name'
     ui:
-        add_member: Mitglied hinzufügen
-        add_province: Bundesland/Kanton hinzufügen
-        billing_address: Rechnungsadresse
-        body: Body
-        city: Stadt
-        code: Code
-        company: Firma
-        content: Inhalt
-        country: Land
-        coupon: Gutschein
-        email: E-Mail
-        enabled: Aktiviert
-        first_name: Vorname
-        from: Von
-        id: ID
-        image: Bild
-        members: Mitglieder
-        message: Nachricht
-        name: Name
-        number: Nummer
-        payment_state: Zahlungsstatus
-        phone_number: Telefonnummber
-        postcode: Postleitzahl
-        presentation: Präsentation
-        province: Kanton
-        provinces: Kantone
-        roles: Rollen
-        scope: Umfang
-        shipping_category: Versandkategorie
-        sku: Bestandseinheit
-        street: Strasse / Nr.
-        tax_category: Steuerkategorie
-        title: Titel
-        to: zu
-        topic: Betreff
-        type: Typ
-        unit_price: Stückpreis
-        variant: Variante
-        variant_selection_method: Varianten
-        zone: Zone
+        add_member: 'Mitglied hinzufügen'
+        add_province: 'Bundesland/Kanton hinzufügen'
+        billing_address: 'Rechnungsadresse'
+        body: 'Body'
+        city: 'Stadt'
+        code: 'Code'
+        company: 'Firma'
+        content: 'Inhalt'
+        country: 'Land'
+        coupon: 'Gutschein'
+        email: 'E-Mail'
+        enabled: 'Aktiviert'
+        first_name: 'Vorname'
+        from: 'Von'
+        id: 'ID'
+        image: 'Bild'
+        members: 'Mitglieder'
+        message: 'Nachricht'
+        name: 'Name'
+        number: 'Nummer'
+        payment_state: 'Zahlungsstatus'
+        phone_number: 'Telefonnummber'
+        postcode: 'Postleitzahl'
+        presentation: 'Präsentation'
+        province: 'Kanton'
+        provinces: 'Kantone'
+        roles: 'Rollen'
+        scope: 'Umfang'
+        shipping_category: 'Versandkategorie'
+        sku: 'Bestandseinheit'
+        street: 'Strasse / Nr.'
+        tax_category: 'Steuerkategorie'
+        title: 'Titel'
+        to: 'zu'
+        topic: 'Betreff'
+        type: 'Typ'
+        unit_price: 'Stückpreis'
+        variant: 'Variante'
+        variant_selection_method: 'Varianten'
+        zone: 'Zone'

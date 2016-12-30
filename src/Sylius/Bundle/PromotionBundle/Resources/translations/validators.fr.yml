@@ -5,6 +5,7 @@ sylius:
     promotion:
         code:
             unique: Ce code de promotion existe déjà.
+            regex: Le code de promotion peut uniquement être constitué de lettres, chiffres, tirets et traits de soulignement.
             not_blank: Veuillez entrer le code de promotion.
         description:
             max_length: La description de la promotion ne doit pas contenir plus d'un caractère.|La description de la promotion ne doit pas dépasser les {{ limit }} caractères.
@@ -24,6 +25,7 @@ sylius:
             max_length: Le code promo ne doit pas contenir plus d'un caractère.|Le code promo ne doit pas dépasser les {{ limit }} caractères.
             min_length: Le code promo doit contenir au moins 1 caractère.|Le code promo doit contenir au moins {{ limit }} caractères.
             not_blank: Veuillez saisir votre code promo.
+            regex: Le code de promotion peut uniquement être constitué de lettres, chiffres, tirets et traits de soulignement.
             unique: Cette promotion existe déjà.
         is_invalid: Le code coupon est invalide.
         usage_limit:

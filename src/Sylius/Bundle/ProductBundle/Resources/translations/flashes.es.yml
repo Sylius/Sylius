@@ -3,4 +3,4 @@
 
 sylius:
     product_variant:
-        generate: Las variantes de producto se han generado correctamente.
+        generate: 'Las variantes de producto se han generado correctamente.'

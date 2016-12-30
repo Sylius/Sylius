@@ -9,6 +9,7 @@ sylius:
             max_length: Il nome dell' attributo non deve essere più lungo di 1 carattere.|Il nome dell'attributo non deve essere più lungo di {{ limit }} caratteri.
         code:
             not_blank: Inserisci il codice di attributo.
+            regex: L'attributo del codice può essere composto solo da lettere, numeri, trattini e underscore.
             unique: Questo codice è già in uso.
         presentation:
             not_blank: Si prega di inserire un attributo di presentazione.

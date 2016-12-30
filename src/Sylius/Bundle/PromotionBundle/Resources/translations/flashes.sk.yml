@@ -3,4 +3,4 @@
 
 sylius:
     promotion_coupon:
-        generate: Akciové kupóny boli úspešne vygenerované.
+        generate: 'Akciové kupóny boli úspešne vygenerované.'

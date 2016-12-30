@@ -4,5 +4,6 @@
 sylius:
     locale:
         code:
-            not_blank: Scegliere un codice locale.
+            not_blank: Scegliere Il codice di localizzazione.
+            regex: Il codice di localizzazione può contenere solo lettere, numeri, trattini e underscore.
             unique: Il codice di localizzazione deve essere univoco.

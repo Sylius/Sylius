@@ -4,579 +4,579 @@
 sylius:
     form:
         login:
-            username: Korisničko ime
-            password: Lozinka
-            remember_me: Zapamti me
+            username: 'Korisničko ime'
+            password: 'Lozinka'
+            remember_me: 'Zapamti me'
         option:
-            name: Naziv grupe
+            name: 'Naziv grupe'
     ui:
-        abandoned: Napušteno
-        about: Ukratko
-        access_token: Pristupni token
-        account_panel_outline: Uživajte u svim značajkama koje su dostupne na vašem osobnom prostoru za pregled, praćenje i upravljanje vašim podacima
-        action: Akcija
-        actions: Akcije
-        add: Dodaj
-        add_action: Dodajte akciju
-        add_association: Dodajte vezane proizvode
-        add_attribute: Dodajte atribut
-        add_channel: Dodajte kanal
-        add_choice: Dodajte odabir
-        add_coupon: Dodaj kod za popust
-        add_image: Dodavanje slike
-        add_member: Dodaj
-        add_menu_element: Dodajte element izobirnika
-        add_new_email: Dodajte novi Email
-        add_new_permission: Dodajte novu dozvolu
-        add_new_role: Dodajte novu ulogu
-        add_province: Dodaj pokrajinu
-        add_rule: Dodajte pravilo
-        add_to_cart: Dodaj u košaricu
-        add_value: Dodaj vrijednost
-        adding_new_customer_groups: Dodajte novu grupu kupaca
-        adding_new_email: Dodajte novi Email
-        adding_new_locale: Dodaj novi lokale
-        additional_information: Dodatne informacije
-        addressing_step: Adresa
-        adjustments: Prilagodbe
-        administration: Administracija
-        administration_dashboard: Kontrolna ploča
-        all: Sve
-        all_your_addresses: sylius.account.address.list
-        amount: Iznos
-        association: Poveznica
-        association_types: Tipovi poveznica
-        associations: Poveznice
-        assortment: Ponuda
-        author: Autor
-        availability: Dostupnost
-        available_on: Dostupno
-        back: Povratak
-        back_to_store: Povratak u trgovinu
-        backorder: Na čekanju
-        balance_due: Dugovni saldo
-        bill_to: Račun na
-        billing_address: Adresa za dostavu
-        blocks: Blokovi
-        body: Poruka
-        browse_products: Pretraži proizvode
-        build: sylius.breadcrumb.build
-        calculator: Kalkulator
-        cancel: Prekini
-        cancelled: Otkazano
-        cart_locked: Košarica je zaključana
-        cart_summary: Pregled košarice
-        categorization: Kategorizacija
-        category: Kategorija
-        change_password: Promijenite lozinku
-        change_your_password: Promijenite lozinku
-        channel: Kanal
-        channels: Kanali
-        checkout: Blagajna
-        choose_file: Odaberite dokument
-        city: Grad
-        clear_cart: Izpraznite košaricu
-        clear_filters: Očistite filtere
-        code: ISO kod
-        color: Boja
-        company: Tvrtka
-        completed: Završeno
-        configuration: Postavke
-        confirmation: Potvrda
-        confirmation_title: Potvrda
-        confirmed: Potvrđeno
-        contact_us: Kontaktirajte nas
-        contain_variants: Postoje varijante
-        countries: Države
-        country: Država
-        country_details: Detalji države
-        coupon: Kupon
-        coupon_based: Promocija bazirana na kuponima za popust
-        coupons: Kuponi
-        create: Kreiraj
-        create_a_new_address: sylius.account.address.create
-        create_association_type: Izradite tip poveznice
-        create_country: Dodaj državu
-        create_currency: Kreirajte valutu
-        create_customer: Kreirajte kupca
-        create_imagine_block: Izradite imagine blok
-        create_locale: Dodaj lokale
-        create_menu: Izradite izbornik
-        create_menu_node: Izradite element navigacije
-        create_new_coupon: Novi kod za popust
-        create_new_page: Dodaj novu stranicu
-        create_new_report: Izradite novo izvješće
-        create_option: Izradite opciju
-        create_order: Kreirajte narudžbu
-        create_payment: Kreiraj tip plaćanja
-        create_payment_method: Kreirajte tip plaćanja
-        create_product: Kreiraj artikal
-        create_product_association: Izradite poveznicu proizvoda
-        create_product_association_type: Izradite tip poveznice proizvoda
-        create_product_attribute: Izradite atribut proizvoda
-        create_promotion: Kreirajte akciju
-        create_report: Izradite izvješće
-        create_shipping_category: Kreirajte tip dostave
-        create_shipping_method: Novi način dostave
-        create_simple_block: Kreirajte jednostavni blok
-        create_slideshow_block: Kreirajte slideshow blok
-        create_string_block: Kreirajte tekstualni blok
-        create_tax_category: Kreirajte kategoriju poreza
-        create_tax_rate: Kreirajte poreznu stopu
-        create_taxon: Kreiraj kategoriju
-        create_user: Kreirajte korisnika
-        create_variant: Kreiraj model
-        create_zone: Kreiraj regiju
-        created_at: Kreirano
-        creating_a_new_imagine_block: Izrada novog imagine bloka
-        creating_a_new_simple_block: Izrada novog jednostavnog bloka
-        creating_a_new_slideshow_block: Izrada novog slideshow bloka
-        creating_a_new_string_block: Izrada novog tekstualni bloka
-        creating_menu: Izrada izbornika
-        creating_menu_node: Izrada elementa izbornika
-        creating_new_page: Izrada nove stranice
-        creation_date: Datum kreiranja
-        creation_time: Kreirano
-        currencies: Valute
-        currency: Valuta
-        current_orders: Trenutne narudžbe
-        current_password: Trenutna lozinka
-        current_promotions: Trenutne akcije
-        current_stock: Treutno dostupno
-        customer: Kupac
-        customer_details: Detalji kupca
-        customer_id: ID kupca
-        customer_not_notified: Kupac nije obaviješten
-        customer_notified: Kupac je obaviješten
-        customer_orders: Narudžbe kupca
-        customer_since: Kupac od
-        customers: Kupci
-        customers_list_of_all_customers_in_store: Kupci <small>Lista svih kupaca u trgovini</small>
-        customize_default_metadata: Prilagodite zadane metapodatke
-        customize_metadata: Prilagodite metapodatke
-        customize_products_metadata: Prilagodite metapodatke proizvoda
-        customizing_metadata: Prilagođavanje metapodataka
-        dashboard: Kontrolna ploča
-        data: Podaci
-        date: Datum
-        default_billing_address: sylius.account.address.default.billing
-        default_shipping_address: sylius.account.address.default.shipping
-        delete: sylius.account.address.action.delete
-        delete_image: Obriši sliku
-        deleted: Izbrisano
-        description: Opis
-        details: Detalji
-        disable: Onemogućite
-        disabled: Onemogućeno
-        discounted_unit_price: Cijena s popustom
-        edit: Uredi
-        edit_association_type: Uređivanje tipa poveznice
-        edit_locale: Uredi lokalitet
-        edit_my_address: sylius.account.address.update
-        edit_report: Uređivanje izvješća
-        edit_your_personal_information: Uredite svoje osobne podatke
-        editing_attribute: Uređivanje atributa
-        editing_channel: Uređivanje kanala
-        editing_country: Uređivanje države
-        editing_coupon: Ažuriranje kupona
-        editing_currency: Uređivanje valute
-        editing_customer: Uređivanje kupca
-        editing_email: Uređivanje Emaila
-        editing_imagine_block: Uređivanje imagine bloka
-        editing_menu: Uređivanje izbornika
-        editing_menu_node: Uređivanje stavke izbornika
-        editing_option: Uređivanje opcije
-        editing_order: Ažuriranje narudžbe
-        editing_page: Uređivanje stranice
-        editing_payment: Ažuriranje tipa plaćanja
-        editing_payment_method: Ažuriranje tipa plaćanja
-        editing_permission: Uređivanje dozvole
-        editing_product: Ažuriranje artikla
-        editing_promotion: Ažuriranje akcije
-        editing_review: Uređivanje osvrta
-        editing_role: Uređivanje uloge
-        editing_shipment: Uredi pošiljku
-        editing_shipping_category: Uređivanje kategorije dostave
-        editing_shipping_method: Ažuriranje načina dostave
-        editing_simple_block: Uređivanje jednostavnog bloka
-        editing_slideshow_block: Uređivanje slideshow bloka
-        editing_string_block: Uređivanje tekstualnog bloka
-        editing_tax_category: Ažuriranje kategorije poreza
-        editing_taxon: Ažuriranje kategorije
-        editing_user: Uređivanje korisnika
-        editing_variant: Uređivanje modela
-        editing_zone: Uređivanje regije
-        email: E-mail
-        email_templates: Uređivanje predloška
-        emails: Email
-        enable: Omogućite
-        enabled: Omogući
-        ends_at: Završava
-        enjoy_all_the_features_that_are_available_on_your_personal_space_to_view_track_and_manage_all_your_data: Uživajte u svim značajkama koje su dostupne na vašem osobnom prostoru za pregled, praćenje i upravljanje vašim podacima
-        enter_your_code: Unesite kod
-        error: Greška
-        exchange_rate: Tečaj
-        existing_customer: Postojeći kupac
-        failed: Neuspješno
-        faqs: Česta pitanja
-        filters: Filteri
-        first_name: Ime
-        from: Od
-        fulfill: Ispunjeno
-        gateway: Gateway
-        general_info: sylius.promotion.general_info
-        general_settings: Osnovne postavke
-        generate: Generiraj
-        generate_coupons: Generirajte kod za popust
-        generate_variants: Generiraj varijante
-        generating_coupons: Generiranje kodova za popust
-        go_to_dashboard: Idite na nadzornu ploču
-        grand_total: Sveukupno
-        guest: Gost
-        guest_customer: Neregistrirani kupac
-        hello_name: Pozdrav <b>%name%</b>
-        hide_deleted: Sakrij izbrisano
-        home: Početna
-        id: ID
-        identifier: Identifikator
-        image: Fotografija
-        images: Slike
-        imagine_blocks: Imagine blokovi
-        included_in_price: Uključeno u cijenu
-        index_metadata: Metapodaci
-        index_of_all_configured_locales: Popis svih postavljeni lokaliteta
-        info: Info
-        information: Obavijest
-        inventory: Skladište
-        inventory_here_you_can_see_current_stock_levels: Skladište <small>Pregled stanja zaliha</small>
-        inventory_index: Skladište
-        inventory_state: Stanje zaliha
-        inventory_tracking: Stanje zaliha
-        invoice: Račun
-        is_enabled: Omogućeno
-        item: sylius.order_item.product
-        items: Stavke
-        items_total: Ukupno artikala
-        last_login: Posljednja prijava
-        last_name: Prezime
-        last_update: Ažurirano
-        last_week_orders: Narudžbe prošlog tjedna
-        last_week_revenue: Prošlotjedna zarada
-        lastname: Prezime
-        latest_orders: Pregledaj narudžbe
-        links: Linkovi
-        list_coupons: Izlist kodova za popust
-        locales: Lokaliteti
-        lock: Zaključajte
-        locked: Zaključano
-        logged_in_as: Prijavljeni kao %username%
-        login: Prijavi se
-        login_button: Prijavi se
-        login_sylius_store: Prijava <small>Sylius trgovina</small>
-        logout: Odjavi se
-        manage: Upravljanje
-        manage_adjustments: Upravljajte prilagodbama
-        manage_attributes: Upravljajte atributima
-        manage_channels: Upravljajte kanalima
-        manage_countries: Upravljaj državama
-        manage_customers: Upravljajte kupcima
-        manage_emails: Upravljajte emailovima
-        manage_metadata: Upravljanje metapodacima
-        manage_options: Uredi opcije
-        manage_orders: Upravljanje narudžbama
-        manage_payments: sylius.payment.manage
-        manage_products: Upravljajte artiklima
-        manage_promotions: Upravljajte akcijama
-        manage_reviews: Upravljajnje recenzijama
-        manage_shipments: Upravljanje pošiljkama
-        manage_shipping_categories: Upravljanje kategorija dostave
-        manage_shipping_methods: Upravljajte načinima dostave
-        manage_tax_categories: Upravljajte kategorijama poreza
-        manage_tax_rates: Upravljajte poreznim stopama
-        manage_users: Upravljajte korisnicima
-        manage_zones: Upravljanje regijama
-        marketing: Marketing
-        members: Članovi
-        menu_nodes: Čvor izbornika
-        menus: Izbornici
-        message: Poruka
-        metadata_index: Metapodaci
-        method: Vrsta
-        modified: Izmijenjeno
-        move_down: Pomaknite dolje
-        move_up: Pomaknite gore
-        my_account: Moj profil
-        n_a: Nije dostupno
-        name: Naziv grupe
-        new: Novo
-        new_channel: Novi kanal
-        new_comment_posted_on_order: Novi komentar na narudžbu
-        new_country: Nova država
-        new_coupon: Novi kupon
-        new_currency: Nova valuta
-        new_customer: Novi kupac
-        new_locale: Novi lokalitet
-        new_order: Nova narudžba
-        new_orders: Nova narudžba
-        new_password: Nova lozinka
-        new_payment: Novo plaćanje
-        new_payment_method: Novi tip plaćanja
-        new_permission: Nova dozvola
-        new_product: Dodaj novi proizvod
-        new_product_attribute: Novi atribut proizvoda
-        new_product_option: Nova opcija proizvoda
-        new_product_variant: Novi model
-        new_promotion: Nova akcija
-        new_review: Novi osvrt
-        new_role: Nova uloge
-        new_shipping_category: Novi tip dostave
-        new_shipping_method: Novi način dostave
-        new_tax_category: Nova kategorija poreza
-        new_tax_rate: Nova porezna stopa
-        new_taxon: Nova kategorija
-        new_user: Novi korisnik
-        new_zone: Nova regija
-        newest_products: Najnoviji proizvodi
-        next: Sljedeća
-        no_association_types_to_display: Nema definiranih tipova poveznica
-        no_comment: Nema komentara
-        no_default_billing_address: sylius.account.address.default.no_billing
-        no_default_shipping_address: sylius.account.address.default.no_shipping
-        no_description: Nema opisa
-        no_pricing_configuration: Ne postoji konfiguracija cijene
-        no_promotion: Proizvod nema akciju
-        no_results: Nema rezultata
-        no_shipping_category: Nema kategoriju pošiljke
-        no_shipping_charges: Nema troškova dostave
-        no_short_description: <i>Nema kratkog opisa</i>
-        no_sku: <i>Nema koda</i>
-        no_tax_category: Nema kategorije poreza
-        no_taxes: Bez PDV-a
-        not_available_in_your_country: Nije dostupno u vašoj državi.
-        notify_customer: Obavijestite kupca
-        number: Broj
-        number_of_orders: Broj narudžbi
-        oauth_provider: OAuth pružatelj
-        on_hold: Na čekanju
-        options: Opcije
-        order: Narudžba
-        order_comment_name: Komentar na narudžbu
-        order_comments: Komentari na narudžbu
-        order_confirmation_name: Potvrda narudžbe
-        order_details: Detalji vaše narudžbe
-        order_item_product: sylius.order_item.product
-        order_state: Stanje narudžbe
-        order_summary: Pregled narudžbe
-        order_value: Vrijednost narudžbi
-        ordered: Naručeno
-        orders: Narudžbe
-        out_of_stock: Nema na skladištu
-        overview_of_your_store: Pregled vaše web trgovine
-        page: Stranica
-        pages: Stranice
-        parent: Nadređena kategorija
-        password: Lozinka
-        payment: Naplata
-        payment_details: Detalji o plaćanju
-        payment_method: Način plaćanja
-        payment_methods: Načini plaćanja
-        payment_mode: Načini plaćanja
-        payment_state: Stanje plaćanja
-        payments: Plaćanja
-        pending: Na čekanju
-        permissions: Dozvole
-        phone_number: Kontakt telefon
-        place_order: Naručite
-        placed_at: Narudžba kreirana
-        postcode: Poštanski broj
-        presentation: Prezentacija
-        previous: Prethodna
-        price: Cijena
-        pricing: Određivanje cijene
-        priority: Prioritet
-        processing: U obradi
-        product: Artikal
-        product_association_index: Poveznica
-        product_association_types: Tipovi poveznica proizvoda
-        product_associations: Poveznice proizvoda
-        product_attributes: Atributi proizvoda
-        product_details_viewing_product_product: Detalji artikla
-        product_options: Opcije proizvoda
-        product_review: Osvrt na proizvod
-        product_reviews: Recenzije proizvoda
-        products_categorized_as_name: Proizvodi kategorizirani kao %name%
-        products_categorized_under_taxon_taxon: Artikli <small>u kategoriji "%taxon%"</small>
-        products_index_of_all_products_in_your_store: Svi artikli
-        profile: Profil
-        promotion_coupons: Kuponi
-        promotion_details: Detalji akcije
-        promotion_total: Ukupno akcije
-        promotions: Promocije
-        province: Pokrajina
-        provinces: Pokrajine
-        qty: Količina
-        qty_max: Maksimalna količina
-        qty_min: Minimalna količina
-        quantity: Količina
-        ready: Spremno
-        recent_customers: Posljednji kupci
-        recent_orders: Posljednje narudžbe
-        recent_users: Posljednji korisnici
-        refunded: Refundirano
-        register: Registracija
-        register_button: Registracija
-        registration_create_an_account_in_store: Registracija <small>Kreirajte račun u trgovini</small>
-        registration_date: Datum registracije
-        release_inventory: Oslobodi skladište
-        remember_me: Zapamti me
-        remove_attribute: Uklonite atribut
-        report_details: Detalji izvješća
-        reports: Izvješća
-        reset: Resetiranje
-        reset_button: Resetiranje
-        reset_password: Resetiranje lozinke
-        restore: Obnovite
-        retail_price: Prodajna cijena
-        return: Vraćeno
-        returned: Vraćeno
-        revert: Vraćanje
-        review_details: Detalji osvrta
-        reviews: Recenzije
-        roles: Role (korisnička prava)
-        rules: Pravila
-        sales: Prodaja
-        sales_this_month: Prodaja
-        save: Spremi
-        save_changes: Sačuvaj izmjene
-        scope: Djelokrug
-        search: Pretraga
-        security_settings: Sigurnosne postavke
-        set_as_default_billing_address: Postavi kao zadanu adresu za naplatu
-        set_as_default_shipping_address: Postavi kao zadanu adresu za dostavu.
-        ship: Pošalji
-        shipment_confirmation_name: Potvrda dostave
-        shipment_details: Detalji pošiljke
-        shipment_mode: Način dostave
-        shipment_state: Stanje pošiljke
-        shipments: Pošiljke
-        shipped: Poslano
-        shipping_address: Adresa za dostavu
-        shipping_category: Kategorija pošiljke
-        shipping_charges: Cijena dostave
-        shipping_method: Način dostave
-        shipping_method_details: Detalji načina dostave
-        shipping_methods: Načini slanja
-        shipping_state: Stanje pošiljke
-        shipping_total: Ukupan iznos dostave
-        shop_by: Kupujte po
-        show_all: sylius.show_all
-        show_deleted: Prikaži izbrisano
-        show_in_store: Prikaži u trgovini
-        show_metadata: Prikaz metapodataka
-        sign_in_here: Prijavite se ovdje
-        sign_in_to_the_store_or_create_new_account: Prijavite se <small>ili napravite novi račun</small>
-        simple_blocks: Jednostavni blokovi
-        sku: KOD (SKU)
-        slideshow: Automatski prikaz
-        slideshow_blocks: Slideshow blokovi
-        start_date: Datum početka
-        starts_at: Počinje
-        state: Stanje
-        street: Ulica
-        string_blocks: Tekstualni blokovi
-        success: Uspješno
-        summary: Sažetak
-        support: Podrška
-        sylius_logo: Syius
-        tax_category: Kategorija artikla
-        tax_rate_details: Detalji porezne stope
-        tax_rates: Stope poreza
-        tax_total: PDV ukupno
-        taxation_categories: Kategorije poreza
-        taxation_settings: Postavke oporezivanja
-        taxes: Porezi
-        thank_you_for_your_order: Zahvaljujemo na vašoj narudžbi
-        there_are_no_attributes_configured: Nema postavljenih atributa
-        there_are_no_blocks_to_display: Ne postoje blokovi za prikazati
-        there_are_no_channels_configured: Nema postavljenih kanala
-        there_are_no_countries_configured: Nema postavljenih država
-        there_are_no_coupon_to_display: Nema kupona za prikazati
-        there_are_no_currencies_to_display: Nema valuta za prikazati
-        there_are_no_customers_to_display: Nema kupaca za prikazati
-        there_are_no_emails_configured: Nema postavljenih email adrea
-        there_are_no_images_for_this_product: Nema slika za ovaj artikal
-        there_are_no_inventory_items_to_display: Nema stavki inventara za prikazati
-        there_are_no_inventory_units_to_display: Nema jedinica inventara za prikazati
-        there_are_no_locales_configured: Nema postavljenih lokaliteta
-        there_are_no_logged_events_to_display: Nema zabilježenih događaja za prikazati
-        there_are_no_menu_nodes_to_display: Ne postoje stavke izbornika za prikazati
-        there_are_no_menus_to_display: Ne postoje izbornici za prikazati
-        there_are_no_options_configured: Nema postavljenih opcija
-        there_are_no_options_for_this_product: Nema opcija za ovaj artikal
-        there_are_no_orders_for_this_customer_to_display: Ne postoje narudžbe ovog korisnika za prikazati
-        there_are_no_pages_to_display: Nema stranica za prikazati
-        there_are_no_payment_methods_configured: Nema postavljenih metoda plaćanja
-        there_are_no_payments_configured: Nema postavljenih plaćanja
-        there_are_no_permissions_defined: Ne postoje definirane dozvole
-        there_are_no_products_to_display: Nema proizvoda za prikazati
-        there_are_no_promotions_configured: Nema postavljenih promocija
-        there_are_no_reports_created: Izvješća ne postoje
-        there_are_no_roles_defined: Ne postoje definirane uloge
-        there_are_no_shipments_to_display: Ne postoje pošiljke za prikazati
-        there_are_no_shipping_categories_configured: Nema postavljenih kategorija dostave
-        there_are_no_shipping_methods_configured: Nema postavljenih metoda dostave
-        there_are_no_tax_categories_configured: Nema postavljenih kategorija poreza
-        there_are_no_tax_rates_configured: Nema postavljenih poreznih stopa
-        there_are_no_taxons_for_this_product: Nema podkategorija za ovaj proizvod
-        there_are_no_taxons_to_display: Ne postoje taksonomije za prikazati
-        there_are_no_users_to_display: Ne postoje korisnici za prikazati
-        there_are_no_variants_to_display: Ne postoje varijante za prikazati
-        there_are_no_zones_configured: Nema postavljenih zona
-        there_is_no_main_taxon_for_this_product: Ne postoji glavna taksonomija za ovaj proizvod
-        this_months_statistics: Statistike ovog mjeseca
-        this_product_has_no_attributes_defined: Ovaj proizvod nema definiranih atributa
-        title: Naslov
-        to: Do
-        topic: Tema
-        total: Ukupno
-        total_orders: Narudžbe u trenutnom mjesecu
-        total_qty: Ukupna kol
-        total_registrations: Registracije u trenutnom mjesecu
-        tracking_code: Kod za praćenje
-        tracking_number: Kod za praćenje
-        type: Vrsta
-        unavailable: Nedostupno
-        unit_price: Jedinična cijena
-        unknown: Nepoznato
-        unlock: Otključajte
-        update: Ažurirajte
-        update_product_association_type: Ažurirajte tip poveznice proizvoda
-        updating_tax_rate: Ažuriranje porezne stope
-        usage_limit: Ograničenje
-        used: Iskorišteno
-        user_details: Korisnički detalji
-        username: Korisničko ime
-        users_list_of_all_users_registered_in_store: Korisnici <small>Lista svih registriranih korisnika</small>
-        values: Vrijednosti
-        variant: Varijanta
-        variant_selection_method: Način odabira varijante
-        variants: Varijante
-        view: Pogledajte
-        view_more: Više
-        view_product_details: Pogledajte za proizvod %product%
-        void: Nevažeće
-        volume_based_pricing: Izračun cijene na temelju volumena
-        warning: Upozorenje
-        welcome: Dobrodošli
-        welcome_to_our_store: Dobrodošli na našu trgovinu
-        welcome_to_your_space: Dobrodošli u vaš kutak
-        you_are_customer_since: Vi ste kupac od
-        you_have_no_addresses_defined: Nemate unešenih adresa
-        you_have_no_new_orders: Nema novih narudžbi
-        your_cart_is_empty: Košarica je prazna
-        your_last_5_orders: Vaših zadnjih 5 narudžbi
-        your_order_has_been_shipped: Vaša narudbža je isporučena
-        your_products: Pregledaj proizvode
-        zone: Regija
-        zone_details: Detalji regije
-        zones: Regije
+        abandoned: 'Napušteno'
+        about: 'Ukratko'
+        access_token: 'Pristupni token'
+        account_panel_outline: 'Uživajte u svim značajkama koje su dostupne na vašem osobnom prostoru za pregled, praćenje i upravljanje vašim podacima'
+        action: 'Akcija'
+        actions: 'Akcije'
+        add: 'Dodaj'
+        add_action: 'Dodajte akciju'
+        add_association: 'Dodajte vezane proizvode'
+        add_attribute: 'Dodajte atribut'
+        add_channel: 'Dodajte kanal'
+        add_choice: 'Dodajte odabir'
+        add_coupon: 'Dodaj kod za popust'
+        add_image: 'Dodavanje slike'
+        add_member: 'Dodaj'
+        add_menu_element: 'Dodajte element izobirnika'
+        add_new_email: 'Dodajte novi Email'
+        add_new_permission: 'Dodajte novu dozvolu'
+        add_new_role: 'Dodajte novu ulogu'
+        add_province: 'Dodaj pokrajinu'
+        add_rule: 'Dodajte pravilo'
+        add_to_cart: 'Dodaj u košaricu'
+        add_value: 'Dodaj vrijednost'
+        adding_new_customer_groups: 'Dodajte novu grupu kupaca'
+        adding_new_email: 'Dodajte novi Email'
+        adding_new_locale: 'Dodaj novi lokale'
+        additional_information: 'Dodatne informacije'
+        addressing_step: 'Adresa'
+        adjustments: 'Prilagodbe'
+        administration: 'Administracija'
+        administration_dashboard: 'Kontrolna ploča'
+        all: 'Sve'
+        all_your_addresses: 'sylius.account.address.list'
+        amount: 'Iznos'
+        association: 'Poveznica'
+        association_types: 'Tipovi poveznica'
+        associations: 'Poveznice'
+        assortment: 'Ponuda'
+        author: 'Autor'
+        availability: 'Dostupnost'
+        available_on: 'Dostupno'
+        back: 'Povratak'
+        back_to_store: 'Povratak u trgovinu'
+        backorder: 'Na čekanju'
+        balance_due: 'Dugovni saldo'
+        bill_to: 'Račun na'
+        billing_address: 'Adresa za dostavu'
+        blocks: 'Blokovi'
+        body: 'Poruka'
+        browse_products: 'Pretraži proizvode'
+        build: 'sylius.breadcrumb.build'
+        calculator: 'Kalkulator'
+        cancel: 'Prekini'
+        cancelled: 'Otkazano'
+        cart_locked: 'Košarica je zaključana'
+        cart_summary: 'Pregled košarice'
+        categorization: 'Kategorizacija'
+        category: 'Kategorija'
+        change_password: 'Promijenite lozinku'
+        change_your_password: 'Promijenite lozinku'
+        channel: 'Kanal'
+        channels: 'Kanali'
+        checkout: 'Blagajna'
+        choose_file: 'Odaberite dokument'
+        city: 'Grad'
+        clear_cart: 'Izpraznite košaricu'
+        clear_filters: 'Očistite filtere'
+        code: 'ISO kod'
+        color: 'Boja'
+        company: 'Tvrtka'
+        completed: 'Završeno'
+        configuration: 'Postavke'
+        confirmation: 'Potvrda'
+        confirmation_title: 'Potvrda'
+        confirmed: 'Potvrđeno'
+        contact_us: 'Kontaktirajte nas'
+        contain_variants: 'Postoje varijante'
+        countries: 'Države'
+        country: 'Država'
+        country_details: 'Detalji države'
+        coupon: 'Kupon'
+        coupon_based: 'Promocija bazirana na kuponima za popust'
+        coupons: 'Kuponi'
+        create: 'Kreiraj'
+        create_a_new_address: 'sylius.account.address.create'
+        create_association_type: 'Izradite tip poveznice'
+        create_country: 'Dodaj državu'
+        create_currency: 'Kreirajte valutu'
+        create_customer: 'Kreirajte kupca'
+        create_imagine_block: 'Izradite imagine blok'
+        create_locale: 'Dodaj lokale'
+        create_menu: 'Izradite izbornik'
+        create_menu_node: 'Izradite element navigacije'
+        create_new_coupon: 'Novi kod za popust'
+        create_new_page: 'Dodaj novu stranicu'
+        create_new_report: 'Izradite novo izvješće'
+        create_option: 'Izradite opciju'
+        create_order: 'Kreirajte narudžbu'
+        create_payment: 'Kreiraj tip plaćanja'
+        create_payment_method: 'Kreirajte tip plaćanja'
+        create_product: 'Kreiraj artikal'
+        create_product_association: 'Izradite poveznicu proizvoda'
+        create_product_association_type: 'Izradite tip poveznice proizvoda'
+        create_product_attribute: 'Izradite atribut proizvoda'
+        create_promotion: 'Kreirajte akciju'
+        create_report: 'Izradite izvješće'
+        create_shipping_category: 'Kreirajte tip dostave'
+        create_shipping_method: 'Novi način dostave'
+        create_simple_block: 'Kreirajte jednostavni blok'
+        create_slideshow_block: 'Kreirajte slideshow blok'
+        create_string_block: 'Kreirajte tekstualni blok'
+        create_tax_category: 'Kreirajte kategoriju poreza'
+        create_tax_rate: 'Kreirajte poreznu stopu'
+        create_taxon: 'Kreiraj kategoriju'
+        create_user: 'Kreirajte korisnika'
+        create_variant: 'Kreiraj model'
+        create_zone: 'Kreiraj regiju'
+        created_at: 'Kreirano'
+        creating_a_new_imagine_block: 'Izrada novog imagine bloka'
+        creating_a_new_simple_block: 'Izrada novog jednostavnog bloka'
+        creating_a_new_slideshow_block: 'Izrada novog slideshow bloka'
+        creating_a_new_string_block: 'Izrada novog tekstualni bloka'
+        creating_menu: 'Izrada izbornika'
+        creating_menu_node: 'Izrada elementa izbornika'
+        creating_new_page: 'Izrada nove stranice'
+        creation_date: 'Datum kreiranja'
+        creation_time: 'Kreirano'
+        currencies: 'Valute'
+        currency: 'Valuta'
+        current_orders: 'Trenutne narudžbe'
+        current_password: 'Trenutna lozinka'
+        current_promotions: 'Trenutne akcije'
+        current_stock: 'Treutno dostupno'
+        customer: 'Kupac'
+        customer_details: 'Detalji kupca'
+        customer_id: 'ID kupca'
+        customer_not_notified: 'Kupac nije obaviješten'
+        customer_notified: 'Kupac je obaviješten'
+        customer_orders: 'Narudžbe kupca'
+        customer_since: 'Kupac od'
+        customers: 'Kupci'
+        customers_list_of_all_customers_in_store: 'Kupci <small>Lista svih kupaca u trgovini</small>'
+        customize_default_metadata: 'Prilagodite zadane metapodatke'
+        customize_metadata: 'Prilagodite metapodatke'
+        customize_products_metadata: 'Prilagodite metapodatke proizvoda'
+        customizing_metadata: 'Prilagođavanje metapodataka'
+        dashboard: 'Kontrolna ploča'
+        data: 'Podaci'
+        date: 'Datum'
+        default_billing_address: 'sylius.account.address.default.billing'
+        default_shipping_address: 'sylius.account.address.default.shipping'
+        delete: 'sylius.account.address.action.delete'
+        delete_image: 'Obriši sliku'
+        deleted: 'Izbrisano'
+        description: 'Opis'
+        details: 'Detalji'
+        disable: 'Onemogućite'
+        disabled: 'Onemogućeno'
+        discounted_unit_price: 'Cijena s popustom'
+        edit: 'Uredi'
+        edit_association_type: 'Uređivanje tipa poveznice'
+        edit_locale: 'Uredi lokalitet'
+        edit_my_address: 'sylius.account.address.update'
+        edit_report: 'Uređivanje izvješća'
+        edit_your_personal_information: 'Uredite svoje osobne podatke'
+        editing_attribute: 'Uređivanje atributa'
+        editing_channel: 'Uređivanje kanala'
+        editing_country: 'Uređivanje države'
+        editing_coupon: 'Ažuriranje kupona'
+        editing_currency: 'Uređivanje valute'
+        editing_customer: 'Uređivanje kupca'
+        editing_email: 'Uređivanje Emaila'
+        editing_imagine_block: 'Uređivanje imagine bloka'
+        editing_menu: 'Uređivanje izbornika'
+        editing_menu_node: 'Uređivanje stavke izbornika'
+        editing_option: 'Uređivanje opcije'
+        editing_order: 'Ažuriranje narudžbe'
+        editing_page: 'Uređivanje stranice'
+        editing_payment: 'Ažuriranje tipa plaćanja'
+        editing_payment_method: 'Ažuriranje tipa plaćanja'
+        editing_permission: 'Uređivanje dozvole'
+        editing_product: 'Ažuriranje artikla'
+        editing_promotion: 'Ažuriranje akcije'
+        editing_review: 'Uređivanje osvrta'
+        editing_role: 'Uređivanje uloge'
+        editing_shipment: 'Uredi pošiljku'
+        editing_shipping_category: 'Uređivanje kategorije dostave'
+        editing_shipping_method: 'Ažuriranje načina dostave'
+        editing_simple_block: 'Uređivanje jednostavnog bloka'
+        editing_slideshow_block: 'Uređivanje slideshow bloka'
+        editing_string_block: 'Uređivanje tekstualnog bloka'
+        editing_tax_category: 'Ažuriranje kategorije poreza'
+        editing_taxon: 'Ažuriranje kategorije'
+        editing_user: 'Uređivanje korisnika'
+        editing_variant: 'Uređivanje modela'
+        editing_zone: 'Uređivanje regije'
+        email: 'E-mail'
+        email_templates: 'Uređivanje predloška'
+        emails: 'Email'
+        enable: 'Omogućite'
+        enabled: 'Omogući'
+        ends_at: 'Završava'
+        enjoy_all_the_features_that_are_available_on_your_personal_space_to_view_track_and_manage_all_your_data: 'Uživajte u svim značajkama koje su dostupne na vašem osobnom prostoru za pregled, praćenje i upravljanje vašim podacima'
+        enter_your_code: 'Unesite kod'
+        error: 'Greška'
+        exchange_rate: 'Tečaj'
+        existing_customer: 'Postojeći kupac'
+        failed: 'Neuspješno'
+        faqs: 'Česta pitanja'
+        filters: 'Filteri'
+        first_name: 'Ime'
+        from: 'Od'
+        fulfill: 'Ispunjeno'
+        gateway: 'Gateway'
+        general_info: 'sylius.promotion.general_info'
+        general_settings: 'Osnovne postavke'
+        generate: 'Generiraj'
+        generate_coupons: 'Generirajte kod za popust'
+        generate_variants: 'Generiraj varijante'
+        generating_coupons: 'Generiranje kodova za popust'
+        go_to_dashboard: 'Idite na nadzornu ploču'
+        grand_total: 'Sveukupno'
+        guest: 'Gost'
+        guest_customer: 'Neregistrirani kupac'
+        hello_name: 'Pozdrav <b>%name%</b>'
+        hide_deleted: 'Sakrij izbrisano'
+        home: 'Početna'
+        id: 'ID'
+        identifier: 'Identifikator'
+        image: 'Fotografija'
+        images: 'Slike'
+        imagine_blocks: 'Imagine blokovi'
+        included_in_price: 'Uključeno u cijenu'
+        index_metadata: 'Metapodaci'
+        index_of_all_configured_locales: 'Popis svih postavljeni lokaliteta'
+        info: 'Info'
+        information: 'Obavijest'
+        inventory: 'Skladište'
+        inventory_here_you_can_see_current_stock_levels: 'Skladište <small>Pregled stanja zaliha</small>'
+        inventory_index: 'Skladište'
+        inventory_state: 'Stanje zaliha'
+        inventory_tracking: 'Stanje zaliha'
+        invoice: 'Račun'
+        is_enabled: 'Omogućeno'
+        item: 'sylius.order_item.product'
+        items: 'Stavke'
+        items_total: 'Ukupno artikala'
+        last_login: 'Posljednja prijava'
+        last_name: 'Prezime'
+        last_update: 'Ažurirano'
+        last_week_orders: 'Narudžbe prošlog tjedna'
+        last_week_revenue: 'Prošlotjedna zarada'
+        lastname: 'Prezime'
+        latest_orders: 'Pregledaj narudžbe'
+        links: 'Linkovi'
+        list_coupons: 'Izlist kodova za popust'
+        locales: 'Lokaliteti'
+        lock: 'Zaključajte'
+        locked: 'Zaključano'
+        logged_in_as: 'Prijavljeni kao %username%'
+        login: 'Prijavi se'
+        login_button: 'Prijavi se'
+        login_sylius_store: 'Prijava <small>Sylius trgovina</small>'
+        logout: 'Odjavi se'
+        manage: 'Upravljanje'
+        manage_adjustments: 'Upravljajte prilagodbama'
+        manage_attributes: 'Upravljajte atributima'
+        manage_channels: 'Upravljajte kanalima'
+        manage_countries: 'Upravljaj državama'
+        manage_customers: 'Upravljajte kupcima'
+        manage_emails: 'Upravljajte emailovima'
+        manage_metadata: 'Upravljanje metapodacima'
+        manage_options: 'Uredi opcije'
+        manage_orders: 'Upravljanje narudžbama'
+        manage_payments: 'sylius.payment.manage'
+        manage_products: 'Upravljajte artiklima'
+        manage_promotions: 'Upravljajte akcijama'
+        manage_reviews: 'Upravljajnje recenzijama'
+        manage_shipments: 'Upravljanje pošiljkama'
+        manage_shipping_categories: 'Upravljanje kategorija dostave'
+        manage_shipping_methods: 'Upravljajte načinima dostave'
+        manage_tax_categories: 'Upravljajte kategorijama poreza'
+        manage_tax_rates: 'Upravljajte poreznim stopama'
+        manage_users: 'Upravljajte korisnicima'
+        manage_zones: 'Upravljanje regijama'
+        marketing: 'Marketing'
+        members: 'Članovi'
+        menu_nodes: 'Čvor izbornika'
+        menus: 'Izbornici'
+        message: 'Poruka'
+        metadata_index: 'Metapodaci'
+        method: 'Vrsta'
+        modified: 'Izmijenjeno'
+        move_down: 'Pomaknite dolje'
+        move_up: 'Pomaknite gore'
+        my_account: 'Moj profil'
+        n_a: 'Nije dostupno'
+        name: 'Naziv grupe'
+        new: 'Novo'
+        new_channel: 'Novi kanal'
+        new_comment_posted_on_order: 'Novi komentar na narudžbu'
+        new_country: 'Nova država'
+        new_coupon: 'Novi kupon'
+        new_currency: 'Nova valuta'
+        new_customer: 'Novi kupac'
+        new_locale: 'Novi lokalitet'
+        new_order: 'Nova narudžba'
+        new_orders: 'Nova narudžba'
+        new_password: 'Nova lozinka'
+        new_payment: 'Novo plaćanje'
+        new_payment_method: 'Novi tip plaćanja'
+        new_permission: 'Nova dozvola'
+        new_product: 'Dodaj novi proizvod'
+        new_product_attribute: 'Novi atribut proizvoda'
+        new_product_option: 'Nova opcija proizvoda'
+        new_product_variant: 'Novi model'
+        new_promotion: 'Nova akcija'
+        new_review: 'Novi osvrt'
+        new_role: 'Nova uloge'
+        new_shipping_category: 'Novi tip dostave'
+        new_shipping_method: 'Novi način dostave'
+        new_tax_category: 'Nova kategorija poreza'
+        new_tax_rate: 'Nova porezna stopa'
+        new_taxon: 'Nova kategorija'
+        new_user: 'Novi korisnik'
+        new_zone: 'Nova regija'
+        newest_products: 'Najnoviji proizvodi'
+        next: 'Sljedeća'
+        no_association_types_to_display: 'Nema definiranih tipova poveznica'
+        no_comment: 'Nema komentara'
+        no_default_billing_address: 'sylius.account.address.default.no_billing'
+        no_default_shipping_address: 'sylius.account.address.default.no_shipping'
+        no_description: 'Nema opisa'
+        no_pricing_configuration: 'Ne postoji konfiguracija cijene'
+        no_promotion: 'Proizvod nema akciju'
+        no_results: 'Nema rezultata'
+        no_shipping_category: 'Nema kategoriju pošiljke'
+        no_shipping_charges: 'Nema troškova dostave'
+        no_short_description: '<i>Nema kratkog opisa</i>'
+        no_sku: '<i>Nema koda</i>'
+        no_tax_category: 'Nema kategorije poreza'
+        no_taxes: 'Bez PDV-a'
+        not_available_in_your_country: 'Nije dostupno u vašoj državi.'
+        notify_customer: 'Obavijestite kupca'
+        number: 'Broj'
+        number_of_orders: 'Broj narudžbi'
+        oauth_provider: 'OAuth pružatelj'
+        on_hold: 'Na čekanju'
+        options: 'Opcije'
+        order: 'Narudžba'
+        order_comment_name: 'Komentar na narudžbu'
+        order_comments: 'Komentari na narudžbu'
+        order_confirmation_name: 'Potvrda narudžbe'
+        order_details: 'Detalji vaše narudžbe'
+        order_item_product: 'sylius.order_item.product'
+        order_state: 'Stanje narudžbe'
+        order_summary: 'Pregled narudžbe'
+        order_value: 'Vrijednost narudžbi'
+        ordered: 'Naručeno'
+        orders: 'Narudžbe'
+        out_of_stock: 'Nema na skladištu'
+        overview_of_your_store: 'Pregled vaše web trgovine'
+        page: 'Stranica'
+        pages: 'Stranice'
+        parent: 'Nadređena kategorija'
+        password: 'Lozinka'
+        payment: 'Naplata'
+        payment_details: 'Detalji o plaćanju'
+        payment_method: 'Način plaćanja'
+        payment_methods: 'Načini plaćanja'
+        payment_mode: 'Načini plaćanja'
+        payment_state: 'Stanje plaćanja'
+        payments: 'Plaćanja'
+        pending: 'Na čekanju'
+        permissions: 'Dozvole'
+        phone_number: 'Kontakt telefon'
+        place_order: 'Naručite'
+        placed_at: 'Narudžba kreirana'
+        postcode: 'Poštanski broj'
+        presentation: 'Prezentacija'
+        previous: 'Prethodna'
+        price: 'Cijena'
+        pricing: 'Određivanje cijene'
+        priority: 'Prioritet'
+        processing: 'U obradi'
+        product: 'Artikal'
+        product_association_index: 'Poveznica'
+        product_association_types: 'Tipovi poveznica proizvoda'
+        product_associations: 'Poveznice proizvoda'
+        product_attributes: 'Atributi proizvoda'
+        product_details_viewing_product_product: 'Detalji artikla'
+        product_options: 'Opcije proizvoda'
+        product_review: 'Osvrt na proizvod'
+        product_reviews: 'Recenzije proizvoda'
+        products_categorized_as_name: 'Proizvodi kategorizirani kao %name%'
+        products_categorized_under_taxon_taxon: 'Artikli <small>u kategoriji "%taxon%"</small>'
+        products_index_of_all_products_in_your_store: 'Svi artikli'
+        profile: 'Profil'
+        promotion_coupons: 'Kuponi'
+        promotion_details: 'Detalji akcije'
+        promotion_total: 'Ukupno akcije'
+        promotions: 'Promocije'
+        province: 'Pokrajina'
+        provinces: 'Pokrajine'
+        qty: 'Količina'
+        qty_max: 'Maksimalna količina'
+        qty_min: 'Minimalna količina'
+        quantity: 'Količina'
+        ready: 'Spremno'
+        recent_customers: 'Posljednji kupci'
+        recent_orders: 'Posljednje narudžbe'
+        recent_users: 'Posljednji korisnici'
+        refunded: 'Refundirano'
+        register: 'Registracija'
+        register_button: 'Registracija'
+        registration_create_an_account_in_store: 'Registracija <small>Kreirajte račun u trgovini</small>'
+        registration_date: 'Datum registracije'
+        release_inventory: 'Oslobodi skladište'
+        remember_me: 'Zapamti me'
+        remove_attribute: 'Uklonite atribut'
+        report_details: 'Detalji izvješća'
+        reports: 'Izvješća'
+        reset: 'Resetiranje'
+        reset_button: 'Resetiranje'
+        reset_password: 'Resetiranje lozinke'
+        restore: 'Obnovite'
+        retail_price: 'Prodajna cijena'
+        return: 'Vraćeno'
+        returned: 'Vraćeno'
+        revert: 'Vraćanje'
+        review_details: 'Detalji osvrta'
+        reviews: 'Recenzije'
+        roles: 'Role (korisnička prava)'
+        rules: 'Pravila'
+        sales: 'Prodaja'
+        sales_this_month: 'Prodaja'
+        save: 'Spremi'
+        save_changes: 'Sačuvaj izmjene'
+        scope: 'Djelokrug'
+        search: 'Pretraga'
+        security_settings: 'Sigurnosne postavke'
+        set_as_default_billing_address: 'Postavi kao zadanu adresu za naplatu'
+        set_as_default_shipping_address: 'Postavi kao zadanu adresu za dostavu.'
+        ship: 'Pošalji'
+        shipment_confirmation_name: 'Potvrda dostave'
+        shipment_details: 'Detalji pošiljke'
+        shipment_mode: 'Način dostave'
+        shipment_state: 'Stanje pošiljke'
+        shipments: 'Pošiljke'
+        shipped: 'Poslano'
+        shipping_address: 'Adresa za dostavu'
+        shipping_category: 'Kategorija pošiljke'
+        shipping_charges: 'Cijena dostave'
+        shipping_method: 'Način dostave'
+        shipping_method_details: 'Detalji načina dostave'
+        shipping_methods: 'Načini slanja'
+        shipping_state: 'Stanje pošiljke'
+        shipping_total: 'Ukupan iznos dostave'
+        shop_by: 'Kupujte po'
+        show_all: 'sylius.show_all'
+        show_deleted: 'Prikaži izbrisano'
+        show_in_store: 'Prikaži u trgovini'
+        show_metadata: 'Prikaz metapodataka'
+        sign_in_here: 'Prijavite se ovdje'
+        sign_in_to_the_store_or_create_new_account: 'Prijavite se <small>ili napravite novi račun</small>'
+        simple_blocks: 'Jednostavni blokovi'
+        sku: 'KOD (SKU)'
+        slideshow: 'Automatski prikaz'
+        slideshow_blocks: 'Slideshow blokovi'
+        start_date: 'Datum početka'
+        starts_at: 'Počinje'
+        state: 'Stanje'
+        street: 'Ulica'
+        string_blocks: 'Tekstualni blokovi'
+        success: 'Uspješno'
+        summary: 'Sažetak'
+        support: 'Podrška'
+        sylius_logo: 'Syius'
+        tax_category: 'Kategorija artikla'
+        tax_rate_details: 'Detalji porezne stope'
+        tax_rates: 'Stope poreza'
+        tax_total: 'PDV ukupno'
+        taxation_categories: 'Kategorije poreza'
+        taxation_settings: 'Postavke oporezivanja'
+        taxes: 'Porezi'
+        thank_you_for_your_order: 'Zahvaljujemo na vašoj narudžbi'
+        there_are_no_attributes_configured: 'Nema postavljenih atributa'
+        there_are_no_blocks_to_display: 'Ne postoje blokovi za prikazati'
+        there_are_no_channels_configured: 'Nema postavljenih kanala'
+        there_are_no_countries_configured: 'Nema postavljenih država'
+        there_are_no_coupon_to_display: 'Nema kupona za prikazati'
+        there_are_no_currencies_to_display: 'Nema valuta za prikazati'
+        there_are_no_customers_to_display: 'Nema kupaca za prikazati'
+        there_are_no_emails_configured: 'Nema postavljenih email adrea'
+        there_are_no_images_for_this_product: 'Nema slika za ovaj artikal'
+        there_are_no_inventory_items_to_display: 'Nema stavki inventara za prikazati'
+        there_are_no_inventory_units_to_display: 'Nema jedinica inventara za prikazati'
+        there_are_no_locales_configured: 'Nema postavljenih lokaliteta'
+        there_are_no_logged_events_to_display: 'Nema zabilježenih događaja za prikazati'
+        there_are_no_menu_nodes_to_display: 'Ne postoje stavke izbornika za prikazati'
+        there_are_no_menus_to_display: 'Ne postoje izbornici za prikazati'
+        there_are_no_options_configured: 'Nema postavljenih opcija'
+        there_are_no_options_for_this_product: 'Nema opcija za ovaj artikal'
+        there_are_no_orders_for_this_customer_to_display: 'Ne postoje narudžbe ovog korisnika za prikazati'
+        there_are_no_pages_to_display: 'Nema stranica za prikazati'
+        there_are_no_payment_methods_configured: 'Nema postavljenih metoda plaćanja'
+        there_are_no_payments_configured: 'Nema postavljenih plaćanja'
+        there_are_no_permissions_defined: 'Ne postoje definirane dozvole'
+        there_are_no_products_to_display: 'Nema proizvoda za prikazati'
+        there_are_no_promotions_configured: 'Nema postavljenih promocija'
+        there_are_no_reports_created: 'Izvješća ne postoje'
+        there_are_no_roles_defined: 'Ne postoje definirane uloge'
+        there_are_no_shipments_to_display: 'Ne postoje pošiljke za prikazati'
+        there_are_no_shipping_categories_configured: 'Nema postavljenih kategorija dostave'
+        there_are_no_shipping_methods_configured: 'Nema postavljenih metoda dostave'
+        there_are_no_tax_categories_configured: 'Nema postavljenih kategorija poreza'
+        there_are_no_tax_rates_configured: 'Nema postavljenih poreznih stopa'
+        there_are_no_taxons_for_this_product: 'Nema podkategorija za ovaj proizvod'
+        there_are_no_taxons_to_display: 'Ne postoje taksonomije za prikazati'
+        there_are_no_users_to_display: 'Ne postoje korisnici za prikazati'
+        there_are_no_variants_to_display: 'Ne postoje varijante za prikazati'
+        there_are_no_zones_configured: 'Nema postavljenih zona'
+        there_is_no_main_taxon_for_this_product: 'Ne postoji glavna taksonomija za ovaj proizvod'
+        this_months_statistics: 'Statistike ovog mjeseca'
+        this_product_has_no_attributes_defined: 'Ovaj proizvod nema definiranih atributa'
+        title: 'Naslov'
+        to: 'Do'
+        topic: 'Tema'
+        total: 'Ukupno'
+        total_orders: 'Narudžbe u trenutnom mjesecu'
+        total_qty: 'Ukupna kol'
+        total_registrations: 'Registracije u trenutnom mjesecu'
+        tracking_code: 'Kod za praćenje'
+        tracking_number: 'Kod za praćenje'
+        type: 'Vrsta'
+        unavailable: 'Nedostupno'
+        unit_price: 'Jedinična cijena'
+        unknown: 'Nepoznato'
+        unlock: 'Otključajte'
+        update: 'Ažurirajte'
+        update_product_association_type: 'Ažurirajte tip poveznice proizvoda'
+        updating_tax_rate: 'Ažuriranje porezne stope'
+        usage_limit: 'Ograničenje'
+        used: 'Iskorišteno'
+        user_details: 'Korisnički detalji'
+        username: 'Korisničko ime'
+        users_list_of_all_users_registered_in_store: 'Korisnici <small>Lista svih registriranih korisnika</small>'
+        values: 'Vrijednosti'
+        variant: 'Varijanta'
+        variant_selection_method: 'Način odabira varijante'
+        variants: 'Varijante'
+        view: 'Pogledajte'
+        view_more: 'Više'
+        view_product_details: 'Pogledajte za proizvod %product%'
+        void: 'Nevažeće'
+        volume_based_pricing: 'Izračun cijene na temelju volumena'
+        warning: 'Upozorenje'
+        welcome: 'Dobrodošli'
+        welcome_to_our_store: 'Dobrodošli na našu trgovinu'
+        welcome_to_your_space: 'Dobrodošli u vaš kutak'
+        you_are_customer_since: 'Vi ste kupac od'
+        you_have_no_addresses_defined: 'Nemate unešenih adresa'
+        you_have_no_new_orders: 'Nema novih narudžbi'
+        your_cart_is_empty: 'Košarica je prazna'
+        your_last_5_orders: 'Vaših zadnjih 5 narudžbi'
+        your_order_has_been_shipped: 'Vaša narudbža je isporučena'
+        your_products: 'Pregledaj proizvode'
+        zone: 'Regija'
+        zone_details: 'Detalji regije'
+        zones: 'Regije'
