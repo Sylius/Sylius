@@ -119,7 +119,7 @@ Firstly let's learn how to prepare an exemplary Option and its values.
      $valuesData = [
          'OV1' => ['locale' => 'en_US', 'value' => 'Red'],
          'OV2' => ['locale' => 'en_US', 'value' => 'Blue'],
-         'OV3' => ['locale' => 'en_US' => 'value' => 'Green'],
+         'OV3' => ['locale' => 'en_US', 'value' => 'Green'],
      ];
 
      foreach ($valuesData as $code => $values) {
