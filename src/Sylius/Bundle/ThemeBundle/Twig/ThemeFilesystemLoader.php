@@ -79,7 +79,8 @@ final class ThemeFilesystemLoader implements \Twig_LoaderInterface, \Twig_Exists
 
             return new \Twig_Source(file_get_contents($path), $name, $path);
         } catch (\Exception $exception) {
-            if ($this->decoratedLoader instanceof \Twig_SourceContextLoaderInterface) {
+            // In Twig 2.0, getSourceContext is part of \Twig_LoaderInterface
+            if ($this->decoratedLoader instanceof \Twig_SourceContextLoaderInterface || method_exists('\\Twig_LoaderInterface', 'getSourceContext')) {
                 return $this->decoratedLoader->getSourceContext($name);
             }
 
