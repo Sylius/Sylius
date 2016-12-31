@@ -38,7 +38,7 @@
         "pagerfanta/pagerfanta": "^1.0",
         "phpspec/phpspec": "^3.2",
         "phpunit/phpunit": "^5.6",
-        "twig/twig": "^1.11",
+        "twig/twig": "^1.28",
         "symfony/browser-kit": "^3.2",
         "symfony/twig-bundle": "^3.2",
         "symfony/validator": "^3.2",

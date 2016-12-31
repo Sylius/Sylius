@@ -38,7 +38,7 @@
         "symfony/translation": "^3.2",
         "symfony/twig-bundle": "^3.2",
         "swiftmailer/swiftmailer": "^5.4",
-        "twig/twig": "^1.0",
+        "twig/twig": "^1.28",
         "incenteev/composer-parameter-handler": "~2.0",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0"
     },
