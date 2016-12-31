@@ -38,5 +38,5 @@ sylius:
                 min_range: Percentualný poplatok nemôže byť nižšii ako {{ limit }}.
                 not_blank: Zadajte poplatok percentom.
         code:
-            not_blank: Zadajte kód pre spôsob platby.
-            unique: Spôsob platby s daným kódom už existuje.
+            not_blank: 'Zadajte kód pre spôsob platby.'
+            unique: 'Spôsob platby s daným kódom už existuje.'

@@ -3,4 +3,4 @@
 
 sylius:
     promotion_coupon:
-        generate: Die Gutscheine wurden erfolgreich erstellt.
+        generate: 'Die Gutscheine wurden erfolgreich erstellt.'

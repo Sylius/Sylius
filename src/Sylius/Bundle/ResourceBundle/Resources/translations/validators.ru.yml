@@ -3,5 +3,5 @@
 
 sylius:
     resource:
-        not_enabled: Данный ресурс отключен
-        not_disabled: Данный ресурс включен
+        not_enabled: "Данный ресурс отключен"
+        not_disabled: "Данный ресурс включен"

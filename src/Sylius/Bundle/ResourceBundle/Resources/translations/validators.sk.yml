@@ -3,5 +3,5 @@
 
 sylius:
     resource:
-        not_enabled: Zdroj je vypnutý
-        not_disabled: Zdroj je zapnutý
+        not_enabled: "Zdroj je vypnutý"
+        not_disabled: "Zdroj je zapnutý"

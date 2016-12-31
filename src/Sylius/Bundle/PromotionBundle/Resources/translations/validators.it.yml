@@ -5,6 +5,7 @@ sylius:
     promotion:
         code:
             unique: La promozione con il codice dato esiste già.
+            regex: Il codice promozione può essere composto solo da lettere, numeri, trattini e underscore.
             not_blank: Inserisci il codice della promozione.
         description:
             max_length: La descrizione della promozione non deve essere più lunga di 1 carattere.|La descrizione della promozione non deve essere più lunga di {{ limit }} caratteri.
@@ -15,11 +16,28 @@ sylius:
             max_length: Il nome della promozione non deve essere più lungo di 1 carattere. | Il nome della promozione non deve essere più lungo di {{ limit }} caratteri.
             min_length: Il nome della promozione deve essere lungo almeno di 1 carattere. | Il nome della promozione deve essere lunga almeno {{ limit }} caratteri.
             not_blank: Inserisci il nome della promozione.
+    promotion_action:
+        percentage_discount_configuration:
+            min: Il valore di una percentuale di sconto deve essere almeno 0%.
+            max: Il valore massimo di una percentuale di sconto è 100%.
     promotion_coupon:
         code:
             max_length: Il codice del coupon non deve essere più lungo di 1 carattere. |Il codice del coupon non deve essere più lungo di {{ limit }} caratteri.
             min_length: Il codice del coupon deve essere lungo almeno 1 carattere. |Il codice del coupon deve essere lungo almeno {{ limit }} caratteri.
             not_blank: Per favore inserisci il codice coupon.
+            regex: Il codice del coupon può essere composto solo da lettere, numeri, trattini e underscore.
             unique: Questo coupon esiste già.
+        is_invalid: Il codice del coupon non è valido.
         usage_limit:
             min: Il limite di utilizzo dei coupon deve essere minimo {{ limit }}.
+    promotion_coupon_generator_instruction:
+        amount:
+            min: Il totale dei coupon da generare deve essere minimo {{ limit }}.
+            not_blank: Inserisci la quantità di coupon da generare.
+        code_length:
+            min: Il codice coupon deve contenere almeno {{ limit }} caratteri.
+            max: Il codice coupon non deve contenere più di {{ limit }} caratteri.
+            not_blank: Inserisci la lunghezza del codice coupon.
+        possible_generation_amount: Quantità di coupon o lunghezza di codice coupon non valido. Non è possibile generare %expectedAmount% coupon unici con codice lunghezza uguale a %codeLength%. La quantità che è possibile generare è %possibleAmount%.
+        usage_limit:
+            min: Il limite di utilizzo dei coupon generati deve essere almeno {{ limit }}.

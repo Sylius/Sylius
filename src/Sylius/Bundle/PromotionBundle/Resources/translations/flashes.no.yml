@@ -3,4 +3,4 @@
 
 sylius:
     promotion_coupon:
-        generate: Kampanjekuponger ble generert uten feil.
+        generate: 'Kampanjekuponger ble generert uten feil.'

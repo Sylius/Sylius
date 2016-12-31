@@ -3,8 +3,8 @@
 
 sylius:
     payment:
-        cancelled: Betaling is geannuleerd.
-        completed: Betaling is voltooid.
-        failed: Betaling is mislukt.
-        processing: Betaling wordt momenteel verwerkt.
-        refunded: Betaling is succesvol terugbetaald.
+        cancelled: 'Betaling is geannuleerd.'
+        completed: 'Betaling is voltooid.'
+        failed: 'Betaling is mislukt.'
+        processing: 'Betaling wordt momenteel verwerkt.'
+        refunded: 'Betaling is succesvol terugbetaald.'

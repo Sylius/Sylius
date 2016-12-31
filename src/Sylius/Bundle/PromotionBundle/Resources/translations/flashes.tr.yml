@@ -3,4 +3,4 @@
 
 sylius:
     promotion_coupon:
-        generate: Promosyon kuponları başarıyla oluşturuldu.
+        generate: 'Promosyon kuponları başarıyla oluşturuldu.'

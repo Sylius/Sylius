@@ -13,6 +13,9 @@ sylius:
             not_blank: Veuillez saisir le nom du produit.
             min_length: Le nom du produit doit contenir au moins 1 caractère.|Le nom du produit ne doit pas dépasser {{ limit }} caractères.
             max_length: Le nom du produit ne doit pas dépasser 1 caractère.|Le nom du produit ne doit pas dépasser {{ limit }} caractères.
+    product_variant:
+        code:
+            not_blank: Veuillez saisir le code.
     option:
         code:
             not_blank: Entrez le code de l'option.

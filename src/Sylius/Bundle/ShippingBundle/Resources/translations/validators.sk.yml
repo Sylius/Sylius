@@ -4,26 +4,26 @@
 sylius:
     shipping_category:
         name:
-            max_length: Názov kategórie nesmie byť dlhší ako {{ limit }} znakov.
-            min_length: Názov kategórie musí mať minimálne {{ limit }} znakov.
-            not_blank: Zadajte názov kategórie doručenia.
+            max_length: 'Názov kategórie nesmie byť dlhší ako {{ limit }} znakov.'
+            min_length: 'Názov kategórie musí mať minimálne {{ limit }} znakov.'
+            not_blank: 'Zadajte názov kategórie doručenia.'
         code:
-            not_blank: Zadajte kód kategórie doručenia.
-            unique: Kategória doručenia s daným kódom už existuje.
+            not_blank: 'Zadajte kód kategórie doručenia.'
+            unique: 'Kategória doručenia s daným kódom už existuje.'
     shipping_method:
         calculator:
             max_length: Hodnota nemôže byť dlhšia ako { { limit } } znakov.
             min_length: Hodnota musí byť aspoň { { limit } } znakov
             not_blank: Hodnota nemôže byť prázdna.
         name:
-            max_length: Názov spôsobu doručenia nesmie byť dlhší ako {{ limit }} znakov.
-            min_length: Názov spôsobu doručenia musí byť aspoň {{ limit }} znakov.
-            not_blank: Zadajte názov spôsobu doručenia.
+            max_length: 'Názov spôsobu doručenia nesmie byť dlhší ako {{ limit }} znakov.'
+            min_length: 'Názov spôsobu doručenia musí byť aspoň {{ limit }} znakov.'
+            not_blank: 'Zadajte názov spôsobu doručenia.'
         code:
-            not_blank: Zadajte kód spôsobu doručenia.
-            unique: Spôsobu doručenia s daným kódom už existuje.
+            not_blank: 'Zadajte kód spôsobu doručenia.'
+            unique: 'Spôsobu doručenia s daným kódom už existuje.'
         zone:
-            not_blank: Zadajte zónu pre spôsob doručenia.
+            not_blank: 'Zadajte zónu pre spôsob doručenia.'
     shipment:
         shipping_method:
-            not_blank: Prosím zadajte spôsob dopravy.
+            not_blank: 'Prosím zadajte spôsob dopravy.'

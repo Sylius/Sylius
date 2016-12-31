@@ -35,5 +35,5 @@ sylius:
                 min_range: Përqindja e pagesës nuk mund të jetë më e vogël se {{ limit }}.
                 not_blank: Fut përqindjen e pagesës.
         code:
-            not_blank: Shto kodin e mënyrës së pagesës.
-            unique: Mënyra e pagesës me këtë kod tashmë egziston.
+            not_blank: 'Shto kodin e mënyrës së pagesës.'
+            unique: 'Mënyra e pagesës me këtë kod tashmë egziston.'

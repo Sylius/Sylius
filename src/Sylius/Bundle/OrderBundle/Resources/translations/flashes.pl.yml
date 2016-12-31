@@ -3,4 +3,4 @@
 
 sylius:
     cart:
-        add_item: Element został dodany do koszyka
+        add_item: 'Element został dodany do koszyka'

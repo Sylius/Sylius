@@ -15,20 +15,34 @@ sylius:
             priority: Priorità
             rules: Regole
             starts_at: Inizia il
+            usage_limit: Limite di utilizzo
         promotion_action:
             fixed_discount_configuration:
                 amount: Importo
+            percentage_discount_configuration:
+                percentage: Percentuale
             type: Tipo
+        promotion_coupon:
+            expires_at: Scade il
+            usage_limit: Limite di utilizzo
         promotion_coupon_generator_instruction:
             amount: Importo
+            code_length: Lunghezza del codice
+            expires_at: Scade il
+            usage_limit: Limite di utilizzo
+        promotion_filter:
+            price_range: Filtro di fascia di prezzo
         promotion_rule:
             cart_quantity_configuration:
                 count: Conta
                 equal: Uguale
             contains_product_configuration:
+                exclude: Escludi
                 variants: Prodotti
             item_total_configuration:
                 amount: Importo
             shipping_country_configuration:
                 country: Nazione
+            taxonomy_configuration:
+                exclude: Escludi
             type: Tipo

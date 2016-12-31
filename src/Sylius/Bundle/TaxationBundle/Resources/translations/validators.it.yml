@@ -7,6 +7,7 @@ sylius:
             not_blank: Per favore inserisci il nome della categoria della tassa.
         code:
             not_blank: Inserisci il codice della categoria fiscale.
+            regex: Il codice della categoria fiscale può contenere solo lettere, numeri, trattini e underscore.
             unique: La categoria fiscale con il codice dato esiste già.
     tax_rate:
         category:
@@ -21,4 +22,5 @@ sylius:
             not_blank: Seleziona una zona.
         code:
             not_blank: Inserisci il codice della tassazione fiscale locale.
+            regex: Il codice dell'aliquota fiscale può contenere solo lettere, numeri, trattini e underscore.
             unique: L'aliquota d'imposta con il codice dato esiste già.

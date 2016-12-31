@@ -8,14 +8,25 @@ sylius:
             unique: Il codice SKU del prodotto deve essere univoco.
         code:
             not_blank: Inserisci il codice prodotto.
+            regex: Il codice prodotto può contenere solo lettere, numeri, trattini e underscore.
             unique: Codice prodotto deve essere univoco.
         name:
             not_blank: Inserisci il nome del prodotto.
             min_length: Il nome del prodotto deve essere lungo almeno 1 carattere. |Il nome del prodotto deve essere lungo almeno {{ limit }} caratteri.
             max_length: Il nome del prodotto non deve essere più lungo di 1 carattere. |Il nome del prodotto non deve essere più lungo di {{ limit }} caratteri.
+        slug:
+            not_blank: Inserisci lo slug del prodotto.
+    product_variant:
+        combination: La variante con questa opzione impostata esiste già.
+        code:
+            not_blank: Inserisci il codice.
+            regex: La variante del prodotto può contenere solo lettere, numeri, trattini e underscore.
+            unique: Il codice della variante del prodotto deve essere univoco.
+            within_product_unique: Questo codice deve essere univoco all'interno di questo prodotto.
     option:
         code:
             not_blank: Inserisci il codice dell'opzione.
+            regex: Il codice dell'opzione può essere composto solo da lettere, numeri, trattini e underscore.
             unique: L'opzione con il codice dato esiste già.
         name:
             not_blank: Inserisci il nome dell'opzione.
@@ -26,6 +37,7 @@ sylius:
     option_value:
         code:
             not_blank: Inserisci il codice del valore dell'opzione.
+            regex: Il valore del codice dell'opzione può essere composto solo da lettere, numeri, trattini e underscore.
             unique: Il valore dell'opzione con il codice dato esiste già.
         value:
             not_blank: Inserisci il valore dell'opzione.
@@ -36,4 +48,5 @@ sylius:
             max_length: Nome del tipo di associazione non può essere più lungo di 1 carattere.| Il nome dell'associazione non può essere lungo più di {{ limit }} caratteri.
         code:
             not_blank: Inserisci il codice del tipo di associazione.
+            regex: Il tipo di associazione può essere composto solo da lettere, numeri, trattini e underscore.
             unique: Il tipo di associazione con questo codice esiste già.

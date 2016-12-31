@@ -3,4 +3,4 @@
 
 sylius:
     promotion_coupon:
-        generate: Propagační kupóny byly úspěšně vytvořeny.
+        generate: 'Propagační kupóny byly úspěšně vytvořeny.'

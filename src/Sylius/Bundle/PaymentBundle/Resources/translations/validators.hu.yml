@@ -38,5 +38,5 @@ sylius:
                 min_range: Százalékos díj nem lehet alacsonyabb, mint {{ limit }}.
                 not_blank: Kérjük, írja be a százalék díjat.
         code:
-            not_blank: Kérjük, írja be a fizetési mód kódját.
-            unique: A fizetési mód a megadott kóddal már létezik.
+            not_blank: 'Kérjük, írja be a fizetési mód kódját.'
+            unique: 'A fizetési mód a megadott kóddal már létezik.'

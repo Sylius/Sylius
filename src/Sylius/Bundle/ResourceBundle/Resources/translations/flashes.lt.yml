@@ -12,4 +12,4 @@ sylius:
         restore_deleted: '%resource% sėkmingai atstatytas.'
         enable: '%resource% sėkmingai įgalintas.'
         disable: '%resource% sėkmingai išjungtas.'
-        delete_error: Negalite panaikinti, nes %resource% yra naudojamas.
+        delete_error: 'Negalite panaikinti, nes %resource% yra naudojamas.'

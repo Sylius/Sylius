@@ -4,26 +4,26 @@
 sylius:
     shipping_category:
         name:
-            max_length: A kategória neve nem lehet hosszabb, mint {{ limit }} karakter.
-            min_length: A kategória név legalább {{ limit }} karakter hosszú kell legyen.
-            not_blank: Kérjük, írja be a szállítási kategória nevét.
+            max_length: 'A kategória neve nem lehet hosszabb, mint {{ limit }} karakter.'
+            min_length: 'A kategória név legalább {{ limit }} karakter hosszú kell legyen.'
+            not_blank: 'Kérjük, írja be a szállítási kategória nevét.'
         code:
-            not_blank: Kérjük, írja be a szállítási kategória kódját.
-            unique: A szállítási kategória az adott kóddal már létezik.
+            not_blank: 'Kérjük, írja be a szállítási kategória kódját.'
+            unique: 'A szállítási kategória az adott kóddal már létezik.'
     shipping_method:
         calculator:
             max_length: sylius.shipping_method.calculator.max_length
             min_length: sylius.shipping_method.calculator.min_length
             not_blank: sylius.shipping_method.calculator.not_blank
         name:
-            max_length: Szállítási mód neve nem lehet hosszabb, mint {{ limit }} karakter.
-            min_length: Szállítás mód neve legalább {{ limit }} karakter hosszú kell legyen.
-            not_blank: Kérjük, adja meg a szállítás módját.
+            max_length: 'Szállítási mód neve nem lehet hosszabb, mint {{ limit }} karakter.'
+            min_length: 'Szállítás mód neve legalább {{ limit }} karakter hosszú kell legyen.'
+            not_blank: 'Kérjük, adja meg a szállítás módját.'
         code:
-            not_blank: Kérjük, adja meg a szállítási típus kódját.
-            unique: A szállítási módszer a megadott kóddal már létezik.
+            not_blank: 'Kérjük, adja meg a szállítási típus kódját.'
+            unique: 'A szállítási módszer a megadott kóddal már létezik.'
         zone:
-            not_blank: Kérjük, válassza ki a szállítási típus zónáját.
+            not_blank: 'Kérjük, válassza ki a szállítási típus zónáját.'
     shipment:
         shipping_method:
-            not_blank: Kérjük, válassza ki a szállítási formát.
+            not_blank: 'Kérjük, válassza ki a szállítási formát.'

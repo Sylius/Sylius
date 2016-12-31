@@ -1,0 +1,15 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    channel:
+        delete_error: 'Il canale non può essere eliminato. È richiesto almeno un canale abilitato.'
+    contact:
+        request_success: 'La tua richiesta di contatto è stata inoltrata correttamente.'
+        request_error: 'Si è verificato un problema durante l''invio della richiesta di contatto. Si prega di riprovare più tardi.'
+    customer:
+        add_address: 'L''indirizzo è stato aggiunto con successo.'
+        impersonate: 'Hai impersonato con successo il cliente %name%.'
+        set_address_as_default: 'Indirizzo è stato impostato come predefinito.'
+    product:
+        out_of_stock: 'In magazzino la rimanenza di questo prodotto è solo %quantity%.'

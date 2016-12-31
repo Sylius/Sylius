@@ -3,4 +3,4 @@
 
 sylius:
     review:
-        wait_for_the_acceptation: Twoja opinia czeka na akceptacje.
+        wait_for_the_acceptation: 'Twoja opinia czeka na akceptacje.'

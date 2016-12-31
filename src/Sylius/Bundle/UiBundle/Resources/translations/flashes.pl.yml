@@ -3,7 +3,7 @@
 
 sylius:
     channel:
-        delete_error: Kanał nie może być usunięty, wymagane jest aby co najmniej jeden kanał był włączony.
+        delete_error: 'Kanał nie może być usunięty, wymagane jest aby co najmniej jeden kanał był włączony.'
     customer:
-        add_address: Adres został pomyślnie dodany.
-        set_address_as_default: Adres został ustawiony jako domyślny.
+        add_address: 'Adres został pomyślnie dodany.'
+        set_address_as_default: 'Adres został ustawiony jako domyślny.'
