@@ -30,11 +30,11 @@ doctrine:
             default:
                 auto_mapping: true
                 mappings:
-                    gedmo_loggable:
+                    SyliusResourceBundle:
                         type: annotation
                         prefix: Sylius\Bundle\ResourceBundle\Model
-                        dir: "%sylius.core_bundle.root_dir%/../ResourceBundle/Model"
-                        is_bundle: false
+                        dir: Model
+                        is_bundle: true
 
 doctrine_cache:
     providers:
