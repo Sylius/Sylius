@@ -18,7 +18,7 @@ use Symfony\Component\Templating\TemplateReferenceInterface;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class ThemeFilesystemLoader implements \Twig_LoaderInterface, \Twig_ExistsLoaderInterface
+final class ThemeFilesystemLoader implements \Twig_LoaderInterface, \Twig_ExistsLoaderInterface, \Twig_SourceContextLoaderInterface
 {
     /**
      * @var \Twig_LoaderInterface
@@ -57,6 +57,8 @@ final class ThemeFilesystemLoader implements \Twig_LoaderInterface, \Twig_Exists
 
     /**
      * {@inheritdoc}
+     *
+     * @deprecated To be removed when Twig 1.x compatibility is dropped
      */
     public function getSource($name)
     {
@@ -64,6 +66,24 @@ final class ThemeFilesystemLoader implements \Twig_LoaderInterface, \Twig_Exists
             return file_get_contents($this->findTemplate($name));
         } catch (\Exception $exception) {
             return $this->decoratedLoader->getSource($name);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSourceContext($name)
+    {
+        try {
+            $path = $this->findTemplate($name);
+
+            return new \Twig_Source(file_get_contents($path), $name, $path);
+        } catch (\Exception $exception) {
+            if ($this->decoratedLoader instanceof \Twig_SourceContextLoaderInterface) {
+                return $this->decoratedLoader->getSourceContext($name);
+            }
+
+            throw new \Twig_Error_Loader($exception->getMessage(), -1, null, $exception);
         }
     }
 
