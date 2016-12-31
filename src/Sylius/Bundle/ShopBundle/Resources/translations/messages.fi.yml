@@ -5,4 +5,4 @@ sylius:
     menu:
         shop:
             account:
-                dashboard: Hallintapaneeli
+                dashboard: 'Hallintapaneeli'

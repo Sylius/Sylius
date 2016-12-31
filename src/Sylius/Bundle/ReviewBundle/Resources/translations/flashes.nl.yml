@@ -3,5 +3,5 @@
 
 sylius:
     review:
-        accept: Beoordeling werd aanvaard.
-        reject: Beoordeling werd verworpen.
+        accept: 'Beoordeling werd aanvaard.'
+        reject: 'Beoordeling werd verworpen.'

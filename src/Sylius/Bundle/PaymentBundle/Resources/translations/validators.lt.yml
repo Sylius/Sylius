@@ -23,7 +23,7 @@ sylius:
         currency_code:
             not_valid: Valiutos kodas yra neteisingas.
         method:
-            not_blank: Prašome pasirinkti mokėjimo būdą.
+            not_blank: 'Prašome pasirinkti mokėjimo būdą.'
     payment_method:
         gateway:
             not_blank: Pasirinkite mokėjimo būdą.
@@ -40,5 +40,5 @@ sylius:
                 min_range: Procentų mokestis negali būti mažesnis už {{ limit }}.
                 not_blank: Prašome įvesti mokesčio procentą.
         code:
-            not_blank: Prašome įvesti mokėjimo būdo kodą.
-            unique: Mokėjimo būdas su tokiu kodu jau yra.
+            not_blank: 'Prašome įvesti mokėjimo būdo kodą.'
+            unique: 'Mokėjimo būdas su tokiu kodu jau yra.'

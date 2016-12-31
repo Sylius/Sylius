@@ -23,7 +23,7 @@ sylius:
         currency_code:
             not_valid: Le code de devise que vous avez entré n’est pas valide.
         method:
-            not_blank: Veuillez sélectionner un mode de paiement.
+            not_blank: 'Veuillez sélectionner un mode de paiement.'
     payment_method:
         gateway:
             not_blank: Veuillez sélectionner la passerelle du moyen de paiement.
@@ -40,5 +40,5 @@ sylius:
                 min_range: Le pourcentage des frais ne peut être inférieure à {{ limit }}.
                 not_blank: Merci d'entrer le pourcentage de frais.
         code:
-            not_blank: Veuillez entrez le code du mode de paiement.
-            unique: Ce code de mode de paiement existe déjà.
+            not_blank: 'Veuillez entrez le code du mode de paiement.'
+            unique: 'Ce code de mode de paiement existe déjà.'

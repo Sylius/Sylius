@@ -4,35 +4,35 @@
 sylius:
     form:
         login:
-            password: كلمة السر
+            password: 'كلمة السر'
         option:
-            name: الاسم
+            name: 'الاسم'
     ui:
-        add: اضافة
-        add_province: اضافة جهة/مقاطعة
-        city: المدينة
-        color: اللون
-        company: الشركة
-        countries: البلدان
-        country: البلد
-        email: البريد الإلكتروني
-        exchange_rate: سعر الصرف
-        first_name: الاسم الأول
-        last_name: اسم العائلة
-        lastname: اسم العائلة
-        members: الأعضاء
-        menu_nodes: عقدة القائمة
-        message: الرسالة
-        name: الاسم
-        new: جديد
-        pages: الصفحات
-        password: كلمة السر
-        phone_number: رقم الهاتف
-        postcode: الرقم البريدي
-        presentation: تقديم
-        province: مقاطعة
-        provinces: المقاطعات
-        scope: نطاق
-        street: الشارع
-        topic: الموضوع
-        type: نوع
+        add: 'اضافة'
+        add_province: 'اضافة جهة/مقاطعة'
+        city: 'المدينة'
+        color: 'اللون'
+        company: 'الشركة'
+        countries: 'البلدان'
+        country: 'البلد'
+        email: 'البريد الإلكتروني'
+        exchange_rate: 'سعر الصرف'
+        first_name: 'الاسم الأول'
+        last_name: 'اسم العائلة'
+        lastname: 'اسم العائلة'
+        members: 'الأعضاء'
+        menu_nodes: 'عقدة القائمة'
+        message: 'الرسالة'
+        name: 'الاسم'
+        new: 'جديد'
+        pages: 'الصفحات'
+        password: 'كلمة السر'
+        phone_number: 'رقم الهاتف'
+        postcode: 'الرقم البريدي'
+        presentation: 'تقديم'
+        province: 'مقاطعة'
+        provinces: 'المقاطعات'
+        scope: 'نطاق'
+        street: 'الشارع'
+        topic: 'الموضوع'
+        type: 'نوع'

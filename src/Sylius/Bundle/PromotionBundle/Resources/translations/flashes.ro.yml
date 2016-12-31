@@ -3,4 +3,4 @@
 
 sylius:
     promotion_coupon:
-        generate: Codurile promoționale au fost generate cu succes.
+        generate: 'Codurile promoționale au fost generate cu succes.'

@@ -4,96 +4,96 @@
 sylius:
     form:
         login:
-            username: Nom d'usuari
-            password: Contrasenya
+            username: 'Nom d''usuari'
+            password: 'Contrasenya'
         option:
-            name: Nom
+            name: 'Nom'
     ui:
-        add_member: Afegeix un membre
-        add_province: Afegeix una província
-        add_to_cart: Afegir a la cistella
-        administration_dashboard: Quadre de comandament
-        all_your_addresses: Totes les teves adreces
-        back: Enrera
-        billing_address: Adreça de facturació
-        body: Cos
-        checkout: Realitza la compra
-        city: Ciutat
-        code: Codi
-        company: Empresa
-        completed: Completat
-        country: País
-        coupon: Cupó
-        create_a_new_address: Crea una nova adreça
-        currency: Moneda
-        current_stock: Stock actual
-        default_billing_address: Adreça de facturació per defecte
-        default_shipping_address: Adreça d'enviament per defecte
-        delete: Suprimir
-        description: Descripció
-        edit: Editar
-        edit_my_address: Editar la meva adreça
-        email: Correu electrònic
-        enabled: Activat
-        failed: S'ha produït un error
-        first_name: Nom
-        from: Des de
-        gateway: Pasarel·la
-        id: ID
-        image: Imatge
-        images: Imatges
-        information: Informació
-        invoice: Factura
-        last_name: Cognoms
-        last_week_orders: Comandes de la setmana passada
-        last_week_revenue: Ingressos de la setmana passada
-        lastname: Cognoms
-        members: Membres
-        message: Missatge
-        my_account: El meu compte
-        name: Nom
-        new: Nou
-        next: Següent
-        no_default_billing_address: Cap adreça de facturació per defecte
-        no_default_shipping_address: Cap adreça d'enviament per defecte
-        number: Nombre
-        number_of_orders: Número de comandes
-        order_details: Detalls de la teva comanda
-        order_value: Valor de la comanda
-        password: Contrasenya
-        payment_method: Mètode de pagament
-        payment_state: Estat de pagament
-        pending: Pendent
-        phone_number: Telèfon
-        placed_at: Situat a
-        postcode: Codi postal
-        presentation: Presentació
-        price: Preu
-        processing: Processant
-        province: Província
-        provinces: Províncies
-        roles: Rols
-        scope: Àmbit d'aplicació
-        search: Cerca
-        set_as_default_billing_address: Estableix com adreça de facturació per defecte
-        set_as_default_shipping_address: Estableix com adreça d'enviament per defecte
-        shipping_address: Adreça d'enviament
-        shipping_category: Categoria d'enviament
-        sku: SKU
-        street: Carrer
-        success: Realitzat amb èxit
-        tax_category: Categoria d'impost
-        title: Títol
-        to: A
-        tracking_number: Número de seguiment
-        type: Tipus
-        unit_price: Preu per unitat
-        unknown: Desconegut
-        username: Nom d'usuari
-        variant: Variant
-        variant_selection_method: Mètode de selecció de variant
-        void: Buit
-        warning: Avís
-        welcome_to_your_space: Benvingut al teu espai
-        you_are_customer_since: Ets client des de
-        zone: Zona
+        add_member: 'Afegeix un membre'
+        add_province: 'Afegeix una província'
+        add_to_cart: 'Afegir a la cistella'
+        administration_dashboard: 'Quadre de comandament'
+        all_your_addresses: 'Totes les teves adreces'
+        back: 'Enrera'
+        billing_address: 'Adreça de facturació'
+        body: 'Cos'
+        checkout: 'Realitza la compra'
+        city: 'Ciutat'
+        code: 'Codi'
+        company: 'Empresa'
+        completed: 'Completat'
+        country: 'País'
+        coupon: 'Cupó'
+        create_a_new_address: 'Crea una nova adreça'
+        currency: 'Moneda'
+        current_stock: 'Stock actual'
+        default_billing_address: 'Adreça de facturació per defecte'
+        default_shipping_address: 'Adreça d''enviament per defecte'
+        delete: 'Suprimir'
+        description: 'Descripció'
+        edit: 'Editar'
+        edit_my_address: 'Editar la meva adreça'
+        email: 'Correu electrònic'
+        enabled: 'Activat'
+        failed: 'S''ha produït un error'
+        first_name: 'Nom'
+        from: 'Des de'
+        gateway: 'Pasarel·la'
+        id: 'ID'
+        image: 'Imatge'
+        images: 'Imatges'
+        information: 'Informació'
+        invoice: 'Factura'
+        last_name: 'Cognoms'
+        last_week_orders: 'Comandes de la setmana passada'
+        last_week_revenue: 'Ingressos de la setmana passada'
+        lastname: 'Cognoms'
+        members: 'Membres'
+        message: 'Missatge'
+        my_account: 'El meu compte'
+        name: 'Nom'
+        new: 'Nou'
+        next: 'Següent'
+        no_default_billing_address: 'Cap adreça de facturació per defecte'
+        no_default_shipping_address: 'Cap adreça d''enviament per defecte'
+        number: 'Nombre'
+        number_of_orders: 'Número de comandes'
+        order_details: 'Detalls de la teva comanda'
+        order_value: 'Valor de la comanda'
+        password: 'Contrasenya'
+        payment_method: 'Mètode de pagament'
+        payment_state: 'Estat de pagament'
+        pending: 'Pendent'
+        phone_number: 'Telèfon'
+        placed_at: 'Situat a'
+        postcode: 'Codi postal'
+        presentation: 'Presentació'
+        price: 'Preu'
+        processing: 'Processant'
+        province: 'Província'
+        provinces: 'Províncies'
+        roles: 'Rols'
+        scope: 'Àmbit d''aplicació'
+        search: 'Cerca'
+        set_as_default_billing_address: 'Estableix com adreça de facturació per defecte'
+        set_as_default_shipping_address: 'Estableix com adreça d''enviament per defecte'
+        shipping_address: 'Adreça d''enviament'
+        shipping_category: 'Categoria d''enviament'
+        sku: 'SKU'
+        street: 'Carrer'
+        success: 'Realitzat amb èxit'
+        tax_category: 'Categoria d''impost'
+        title: 'Títol'
+        to: 'A'
+        tracking_number: 'Número de seguiment'
+        type: 'Tipus'
+        unit_price: 'Preu per unitat'
+        unknown: 'Desconegut'
+        username: 'Nom d''usuari'
+        variant: 'Variant'
+        variant_selection_method: 'Mètode de selecció de variant'
+        void: 'Buit'
+        warning: 'Avís'
+        welcome_to_your_space: 'Benvingut al teu espai'
+        you_are_customer_since: 'Ets client des de'
+        zone: 'Zona'

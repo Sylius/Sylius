@@ -38,5 +38,5 @@ sylius:
                 min_range: Taxa de porcentagem não pode ser inferior a {{ limit }}.
                 not_blank: Por favor, digite a porcentagem de taxa.
         code:
-            not_blank: Por favor, digite o nome do meio de pagamento.
-            unique: O método de pagamento com determinado código já existe.
+            not_blank: 'Por favor, digite o nome do meio de pagamento.'
+            unique: 'O método de pagamento com determinado código já existe.'

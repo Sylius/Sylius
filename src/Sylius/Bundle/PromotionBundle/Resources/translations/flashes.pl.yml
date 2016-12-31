@@ -3,4 +3,4 @@
 
 sylius:
     promotion_coupon:
-        generate: Kupony promocyjne zostały pomyślnie wygenerowane.
+        generate: 'Kupony promocyjne zostały pomyślnie wygenerowane.'

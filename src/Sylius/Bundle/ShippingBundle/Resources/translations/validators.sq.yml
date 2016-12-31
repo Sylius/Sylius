@@ -4,26 +4,26 @@
 sylius:
     shipping_category:
         name:
-            max_length: Emri i kategorisë nuk duhet të përmbajë më shumë se {{ limit }} karaktere.
-            min_length: Emri i kategorisë duhet të përmbajë të paktën {{ limit }} karaktere.
-            not_blank: Fur emrin e kategorisë së dërgesës.
+            max_length: 'Emri i kategorisë nuk duhet të përmbajë më shumë se {{ limit }} karaktere.'
+            min_length: 'Emri i kategorisë duhet të përmbajë të paktën {{ limit }} karaktere.'
+            not_blank: 'Fur emrin e kategorisë së dërgesës.'
         code:
-            not_blank: Shto kodin e kategorisë së dërgesës.
-            unique: Kategoria e dërgesës me kodin e dhënë tashmë egziston.
+            not_blank: 'Shto kodin e kategorisë së dërgesës.'
+            unique: 'Kategoria e dërgesës me kodin e dhënë tashmë egziston.'
     shipping_method:
         calculator:
             max_length: sylius.shipping_method.calculator.max_length
             min_length: sylius.shipping_method.calculator.min_length
             not_blank: sylius.shipping_method.calculator.not_blank
         name:
-            max_length: Emri i mënyrës së dërgesës nuk duhet të përmbajë më shumë se {{ limit }} karaktere.
-            min_length: Emri i mënyrës së dërgesës duhet të përmbajë të paktën {{ limit }} karaktere.
-            not_blank: Fut emrin e mënyrës së dërgesës.
+            max_length: 'Emri i mënyrës së dërgesës nuk duhet të përmbajë më shumë se {{ limit }} karaktere.'
+            min_length: 'Emri i mënyrës së dërgesës duhet të përmbajë të paktën {{ limit }} karaktere.'
+            not_blank: 'Fut emrin e mënyrës së dërgesës.'
         code:
-            not_blank: Shto kodin e mënyrës së dërgesës.
-            unique: Mënyra e dërgesës me kodin e dhënë tashmë egziston.
+            not_blank: 'Shto kodin e mënyrës së dërgesës.'
+            unique: 'Mënyra e dërgesës me kodin e dhënë tashmë egziston.'
         zone:
-            not_blank: Ju lutem zgjidhni zonen e metodes se trasportit.
+            not_blank: 'Ju lutem zgjidhni zonen e metodes se trasportit.'
     shipment:
         shipping_method:
-            not_blank: Zgjidh mënyrën e dërgesës.
+            not_blank: 'Zgjidh mënyrën e dërgesës.'

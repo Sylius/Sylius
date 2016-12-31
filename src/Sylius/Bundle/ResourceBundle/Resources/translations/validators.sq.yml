@@ -3,5 +3,5 @@
 
 sylius:
     resource:
-        not_enabled: Burimi i zgjedhur është i çaktivizuar
-        not_disabled: Burimi i zgjedhur është aktivizuar
+        not_enabled: "Burimi i zgjedhur është i çaktivizuar"
+        not_disabled: "Burimi i zgjedhur është aktivizuar"

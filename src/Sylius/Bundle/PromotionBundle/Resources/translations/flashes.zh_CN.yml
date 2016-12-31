@@ -3,4 +3,4 @@
 
 sylius:
     promotion_coupon:
-        generate: 推广优惠券已成功生成。
+        generate: '推广优惠券已成功生成。'
