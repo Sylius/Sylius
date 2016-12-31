@@ -192,6 +192,36 @@ final class PromotionContext implements Context
     }
 
     /**
+     * @Given /^(this promotion) expires tomorrow$/
+     */
+    public function thisPromotionExpiresTomorrow(PromotionInterface $promotion)
+    {
+        $promotion->setEndsAt(new \DateTime('tomorrow'));
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^(this promotion) has started yesterday$/
+     */
+    public function thisPromotionHasStartedYesterday(PromotionInterface $promotion)
+    {
+        $promotion->setStartsAt(new \DateTime('1 day ago'));
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^(this promotion) starts tomorrow$/
+     */
+    public function thisPromotionStartsTomorrow(PromotionInterface $promotion)
+    {
+        $promotion->setStartsAt(new \DateTime('tomorrow'));
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @Given /^(this coupon) has already expired$/
      */
     public function thisCouponHasExpired(PromotionCouponInterface $coupon)
