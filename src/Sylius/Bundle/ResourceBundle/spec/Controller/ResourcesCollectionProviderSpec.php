@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
 use Hateoas\Configuration\Route;
+use Hateoas\Representation\CollectionRepresentation;
 use Hateoas\Representation\Factory\PagerfantaFactory;
 use Hateoas\Representation\PaginatedRepresentation;
 use Pagerfanta\Pagerfanta;
@@ -112,7 +113,7 @@ final class ResourcesCollectionProviderSpec extends ObjectBehavior
         $paginator->setCurrentPage(6)->shouldBeCalled();
         $paginator->getCurrentPageResults()->shouldBeCalled();
 
-        $pagerfantaRepresentationFactory->createRepresentation($paginator, Argument::type(Route::class))->willReturn($paginatedRepresentation);
+        $pagerfantaRepresentationFactory->createRepresentation($paginator, Argument::type(Route::class), Argument::type(CollectionRepresentation::class))->willReturn($paginatedRepresentation);
 
         $this->get($requestConfiguration, $repository)->shouldReturn($paginatedRepresentation);
     }
