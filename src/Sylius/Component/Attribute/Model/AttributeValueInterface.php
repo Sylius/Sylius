@@ -18,12 +18,13 @@ use Sylius\Component\Resource\Model\ResourceInterface;
  */
 interface AttributeValueInterface extends ResourceInterface
 {
-    const STORAGE_TEXT = 'text';
     const STORAGE_BOOLEAN = 'boolean';
     const STORAGE_DATE = 'date';
     const STORAGE_DATETIME = 'datetime';
-    const STORAGE_INTEGER = 'integer';
     const STORAGE_FLOAT = 'float';
+    const STORAGE_INTEGER = 'integer';
+    const STORAGE_JSON = 'json';
+    const STORAGE_TEXT = 'text';
 
     /**
      * @return AttributeSubjectInterface
