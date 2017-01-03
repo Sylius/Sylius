@@ -14,6 +14,7 @@ Feature: Adding a new payment method
         When I name it "Paypal Express Checkout" in "English (United States)"
         And I specify its code as "PEC"
         And I choose "Paypal Express Checkout" gateway
+        And I configure it for username "TEST", with "TEST" password and "TEST" signature
         And I add it
         Then I should be notified that it has been successfully created
         And the payment method "Paypal Express Checkout" should appear in the registry
@@ -24,6 +25,7 @@ Feature: Adding a new payment method
         When I name it "Paypal Express Checkout" in "English (United States)"
         And I specify its code as "PEC"
         And I choose "Paypal Express Checkout" gateway
+        And I configure it for username "TEST", with "TEST" password and "TEST" signature
         And I describe it as "Payment method Paypal Express Checkout" in "English (United States)"
         And I add it
         Then I should be notified that it has been successfully created
@@ -47,6 +49,7 @@ Feature: Adding a new payment method
         When I name it "Paypal Express Checkout" in "English (United States)"
         And I specify its code as "PEC"
         And I choose "Paypal Express Checkout" gateway
+        And I configure it for username "TEST", with "TEST" password and "TEST" signature
         And make it available in channel "United States"
         And I add it
         Then I should be notified that it has been successfully created

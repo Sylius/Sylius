@@ -34,6 +34,30 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function setPaypalGatewayUsername($username)
+    {
+        $this->getDocument()->fillField('Username', $username);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPaypalGatewayPassword($password)
+    {
+        $this->getDocument()->fillField('Password', $password);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPaypalGatewaySignature($signature)
+    {
+        $this->getDocument()->fillField('Signature', $signature);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function nameIt($name, $languageCode)
     {
         $this->getDocument()->fillField(sprintf('sylius_payment_method_translations_%s_name', $languageCode), $name);

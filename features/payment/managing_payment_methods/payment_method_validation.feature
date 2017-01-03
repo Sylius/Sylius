@@ -30,6 +30,18 @@ Feature: Payment method validation
         And the payment method with code "PEC" should not be added
 
     @ui
+    Scenario: Trying to add a new payment method without specifying required configuration
+        Given I want to create a new payment method
+        When I name it "Paypal Express Checkout" in "English (United States)"
+        And I specify its code as "PEC"
+        And I choose "Paypal Express Checkout" gateway
+        And I configure it for username "TEST" with "TEST" signature
+        But I do not specify configuration password
+        And I add it
+        Then I should be notified that password is required
+        And the payment method with code "PEC" should not be added
+
+    @ui
     Scenario: Trying to remove name from an existing payment method
         Given I want to modify the "Offline" payment method
         When I remove its name from "English (United States)" translation

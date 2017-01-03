@@ -20,6 +20,7 @@ Feature: Editing payment methods
     Scenario: Modifying payment method gateway
         Given I want to modify the "Offline" payment method
         When I choose "Paypal Express Checkout" gateway
+        And I configure it for username "TEST", with "TEST" password and "TEST" signature
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this payment method gateway should be "paypal_express_checkout"

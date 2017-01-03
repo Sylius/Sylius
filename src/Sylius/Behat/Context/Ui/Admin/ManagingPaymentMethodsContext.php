@@ -395,4 +395,37 @@ final class ManagingPaymentMethodsContext implements Context
 
         Assert::true($this->indexPage->isSingleResourceOnPage([$element => $code]));
     }
+
+    /**
+     * @When I configure it for username :username, with :password password and :signature signature
+     */
+    public function iConfigureItForUsernameWithPasswordAndSignature($username, $password, $signature)
+    {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+
+        $currentPage->setPaypalGatewayUsername($username);
+        $currentPage->setPaypalGatewayPassword($password);
+        $currentPage->setPaypalGatewaySignature($signature);
+    }
+
+    /**
+     * @When I configure it for username :username with :signature signature
+     */
+    public function iConfigureItForUsernameWithSignature($username, $signature)
+    {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+
+        $currentPage->setPaypalGatewayUsername($username);
+        $currentPage->setPaypalGatewaySignature($signature);
+    }
+
+    /**
+     * @When I do not specify configuration password
+     */
+    public function iDoNotSpecifyConfigurationPassword()
+    {
+        // Intentionally left blank to fulfill context expectation
+    }
 }

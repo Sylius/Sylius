@@ -33,6 +33,21 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function chooseGateway($gateway);
 
     /**
+     * @param string $username
+     */
+    public function setPaypalGatewayUsername($username);
+
+    /**
+     * @param string $password
+     */
+    public function setPaypalGatewayPassword($password);
+
+    /**
+     * @param string $signature
+     */
+    public function setPaypalGatewaySignature($signature);
+
+    /**
      * @return bool
      */
     public function isCodeDisabled();

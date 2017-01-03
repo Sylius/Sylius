@@ -74,6 +74,30 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function setPaypalGatewayUsername($username)
+    {
+        $this->getDocument()->fillField('Username', $username);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPaypalGatewayPassword($password)
+    {
+        $this->getDocument()->fillField('Password', $password);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPaypalGatewaySignature($signature)
+    {
+        $this->getDocument()->fillField('Signature', $signature);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function isPaymentMethodEnabled()
     {
         return (bool) $this->getToggleableElement()->getValue();
