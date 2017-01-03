@@ -118,7 +118,7 @@ final class ResourcesCollectionProviderSpec extends ObjectBehavior
         $this->get($requestConfiguration, $repository)->shouldReturn($paginatedRepresentation);
     }
 
-    function it_handles_ResourceGridView(
+    function it_handles_resource_grid_view(
         ResourcesResolverInterface $resourcesResolver,
         RequestConfiguration $requestConfiguration,
         RepositoryInterface $repository,
