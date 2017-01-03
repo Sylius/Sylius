@@ -49,20 +49,20 @@ final class ResourcesCollectionProvider implements ResourcesCollectionProviderIn
     {
         $resources = $this->resourcesResolver->getResources($requestConfiguration, $repository);
 
-        $data = $resources instanceof ResourceGridView ? $resources->getData() : $resources;
+        $paginator = $resources instanceof ResourceGridView ? $resources->getData() : $resources;
 
-        if ($data instanceof Pagerfanta) {
+        if ($paginator instanceof Pagerfanta) {
             $request = $requestConfiguration->getRequest();
-            $data->setMaxPerPage($requestConfiguration->getPaginationMaxPerPage());
-            $data->setCurrentPage($request->query->get('page', 1));
+            $paginator->setMaxPerPage($requestConfiguration->getPaginationMaxPerPage());
+            $paginator->setCurrentPage($request->query->get('page', 1));
 
             // This prevents Pagerfanta from querying database from a template
-            $data->getCurrentPageResults();
+            $paginator->getCurrentPageResults();
 
             if (!$requestConfiguration->isHtmlRequest()) {
                 $route = new Route($request->attributes->get('_route'), array_merge($request->attributes->get('_route_params'), $request->query->all()));
 
-                return $this->pagerfantaRepresentationFactory->createRepresentation($data, $route);
+                return $this->pagerfantaRepresentationFactory->createRepresentation($paginator, $route);
             }
         }
 
