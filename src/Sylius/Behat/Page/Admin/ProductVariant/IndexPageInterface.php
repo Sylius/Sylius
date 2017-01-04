@@ -32,4 +32,13 @@ interface IndexPageInterface extends BaseIndexPageInterface
      * @return int
      */
     public function getOnHoldQuantityFor(ProductVariantInterface $productVariant);
+
+    /**
+     * @param string $name
+     *
+     * @param int $position
+     */
+    public function setPosition($name, $position);
+
+    public function savePositions();
 }

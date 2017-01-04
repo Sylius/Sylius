@@ -200,6 +200,30 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
+     * @When I start sorting variants by :field
+     */
+    public function iSortProductsBy($field)
+    {
+        $this->indexPage->sortBy($field);
+    }
+
+    /**
+     * @When I set the position of :name to :position
+     */
+    public function iSetThePositionOfTo($name, $position)
+    {
+        $this->indexPage->setPosition($name, (int) $position);
+    }
+
+    /**
+     * @When I save my new configuration
+     */
+    public function iSaveMyNewConfiguration()
+    {
+        $this->indexPage->savePositions();
+    }
+
+    /**
      * @Then the :productVariantCode variant of the :product product should appear in the store
      */
     public function theProductVariantShouldAppearInTheShop($productVariantCode, ProductInterface $product)
@@ -600,6 +624,35 @@ final class ManagingProductVariantsContext implements Context
         $this->indexPage->open(['productId' => $product->getId()]);
 
         $this->assertOnHoldQuantityOfVariant((int) $amount, $variant);
+    }
+
+    /**
+     * @Then the first variant in the list should have :field :value
+     */
+    public function theFirstVariantInTheListShouldHave($field, $value)
+    {
+        $actualValue = $this->indexPage->getColumnFields($field)[0];
+
+        Assert::same(
+            $actualValue,
+            $value,
+            sprintf('Expected first variant\'s %s to be "%s", but it is "%s".', $field, $value, $actualValue)
+        );
+    }
+
+    /**
+     * @Then the last variant in the list should have :field :value
+     */
+    public function theLastVariantInTheListShouldHave($field, $value)
+    {
+        $fields = $this->indexPage->getColumnFields($field);
+        $actualValue = end($fields);
+
+        Assert::same(
+            $actualValue,
+            $value,
+            sprintf('Expected last variant\'s %s to be "%s", but it is "%s".', $field, $value, $actualValue)
+        );
     }
 
     /**

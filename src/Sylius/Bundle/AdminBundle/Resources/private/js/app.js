@@ -29,6 +29,7 @@
         });
 
         $('.sylius-update-product-taxons').moveProduct($('.sylius-product-taxon-position'));
+        $('.sylius-update-product-variants').moveProductVariant($('.sylius-product-variant-position'));
         $('.sylius-taxon-move-up').taxonMoveUp();
         $('.sylius-taxon-move-down').taxonMoveDown();
 

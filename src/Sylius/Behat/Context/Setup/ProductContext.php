@@ -15,6 +15,7 @@ use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Element\NodeElement;
 use Doctrine\Common\Persistence\ObjectManager;
+use org\bovigo\vfs\vfsStreamException;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Attribute\Factory\AttributeFactoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
@@ -297,7 +298,7 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Given the store has a :productName configurable product
+     * @Given /^the store has(?:| a| an) "([^"]+)" configurable product$/
      */
     public function storeHasAConfigurableProduct($productName)
     {
@@ -359,6 +360,26 @@ final class ProductContext implements Context
             $price,
             StringInflector::nameToUppercaseCode($productVariantName),
             (null !== $channel) ? $channel : $this->sharedStorage->get('channel')
+        );
+    }
+
+    /**
+     * @Given /^the (product "[^"]+") has(?:| also)(?:| a| an) "([^"]+)" variant$/
+     * @Given /^the (product "[^"]+") has(?:| also)(?:| a| an) "([^"]+)" variant at position ([^"]+)$/
+     * @Given /^(this product) has(?:| also)(?:| a| an) "([^"]+)" variant at position ([^"]+)$/
+     */
+    public function theProductHasVariantAtPosition(
+        ProductInterface $product,
+        $productVariantName,
+        $position = null
+    ) {
+        $this->createProductVariant(
+            $product,
+            $productVariantName,
+            0,
+            StringInflector::nameToUppercaseCode($productVariantName),
+            $this->sharedStorage->get('channel'),
+            $position
         );
     }
 
@@ -835,6 +856,7 @@ final class ProductContext implements Context
      * @param int $price
      * @param string $code
      * @param ChannelInterface $channel
+     * @param int $position
      *
      * @return ProductVariantInterface
      */
@@ -843,7 +865,8 @@ final class ProductContext implements Context
         $productVariantName,
         $price,
         $code,
-        ChannelInterface $channel = null
+        ChannelInterface $channel = null,
+        $position = null
     ) {
         $product->setVariantSelectionMethod(ProductInterface::VARIANT_SELECTION_CHOICE);
 
@@ -854,6 +877,7 @@ final class ProductContext implements Context
         $variant->setCode($code);
         $variant->setProduct($product);
         $variant->addChannelPricing($this->createChannelPricingForChannel($price, $channel));
+        $variant->setPosition($position);
 
         $product->addVariant($variant);
 
