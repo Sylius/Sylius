@@ -1,0 +1,7 @@
+AppBundle\Entity\ComicBook:
+    comic-book1:
+        title:  "Old Man Logan"
+        author: "Andrea Sorrentino"
+    comic-book2:
+        title: "Civil War II"
+        author: "Brian Michael Bendis"
