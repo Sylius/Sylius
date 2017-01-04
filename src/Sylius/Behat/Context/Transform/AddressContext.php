@@ -74,6 +74,7 @@ final class AddressContext implements Context
     {
         return $this->exampleAddressFactory->create([
             'country_code' => $this->countryNameConverter->convertToCode($countryName),
+            'customer' => null,
         ]);
     }
 
@@ -89,6 +90,7 @@ final class AddressContext implements Context
             'first_name' => $firstName,
             'last_name' => $lastName,
             'company' => null,
+            'customer' => null,
             'phone_number' => null,
             'city' => $city,
             'street' => $street,
@@ -121,6 +123,7 @@ final class AddressContext implements Context
             'first_name' => $firstName,
             'last_name' => $lastName,
             'company' => null,
+            'customer' => null,
             'phone_number' => null,
             'city' => $city,
             'street' => $street,
@@ -144,6 +147,7 @@ final class AddressContext implements Context
             'first_name' => $firstName,
             'last_name' => $lastName,
             'company' => null,
+            'customer' => null,
             'phone_number' => null,
             'city' => $city,
             'street' => $street,

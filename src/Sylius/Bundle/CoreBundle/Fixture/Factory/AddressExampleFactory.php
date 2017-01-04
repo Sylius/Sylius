@@ -12,9 +12,11 @@
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Addressing\Model\Country;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Core\Model\AddressInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
@@ -110,7 +112,7 @@ class AddressExampleFactory extends AbstractExampleFactory
             ->setDefault('province_code', null)
             ->setAllowedTypes('province_code', ['null', 'string'])
             ->setDefault('customer', LazyOption::randomOne($this->customerRepository))
-            ->setAllowedTypes('customer', ['string', CustomerInterface::class])
+            ->setAllowedTypes('customer', ['string', CustomerInterface::class, 'null'])
             ->setNormalizer('customer', LazyOption::findOneBy($this->customerRepository, 'email'))
         ;
     }
@@ -137,7 +139,9 @@ class AddressExampleFactory extends AbstractExampleFactory
 
         $this->resolveCountryProvince($options, $address);
 
-        $options['customer']->addAddress($address);
+        if (isset($options['customer'])) {
+            $options['customer']->addAddress($address);
+        }
 
         return $address;
     }
