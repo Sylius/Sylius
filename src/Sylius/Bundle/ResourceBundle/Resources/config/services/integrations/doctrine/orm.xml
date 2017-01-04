@@ -26,5 +26,13 @@
             <argument type="service" id="sylius.resource_registry" />
             <tag name="doctrine.event_subscriber" priority="8192" />
         </service>
+        <service id="sylius.form_builder.default" class="Sylius\Bundle\ResourceBundle\Doctrine\ORM\Form\Builder\DefaultFormBuilder" public="false">
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+        </service>
+        <service id="sylius.form.type.default" class="Sylius\Bundle\ResourceBundle\Form\Type\DefaultResourceType">
+            <argument type="service" id="sylius.resource_registry" />
+            <argument type="service" id="sylius.form_builder.default" />
+            <tag name="form.type" />
+        </service>
     </services>
 </container>

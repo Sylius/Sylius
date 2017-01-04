@@ -12,8 +12,6 @@
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\Doctrine;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\Form\Builder\DefaultFormBuilder;
-use Sylius\Bundle\ResourceBundle\Form\Type\DefaultResourceType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -27,18 +25,6 @@ use Symfony\Component\DependencyInjection\Reference;
  */
 final class DoctrineORMDriver extends AbstractDoctrineDriver
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function load(ContainerBuilder $container, MetadataInterface $metadata)
-    {
-        parent::load($container, $metadata);
-
-        if ($metadata->hasClass('form')) {
-            $this->addDefaultForm($container, $metadata);
-        }
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -90,26 +76,5 @@ final class DoctrineORMDriver extends AbstractDoctrineDriver
     protected function getClassMetadataClassname()
     {
         return 'Doctrine\\ORM\\Mapping\\ClassMetadata';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    private function addDefaultForm(ContainerBuilder $container, MetadataInterface $metadata)
-    {
-        if ($container->hasDefinition(sprintf('%s.form.type.%s', $metadata->getApplicationName(), $metadata->getName()))) {
-            return;
-        }
-
-        $defaultFormBuilderDefinition = new Definition(DefaultFormBuilder::class);
-        $defaultFormBuilderDefinition->setArguments([new Reference($metadata->getServiceId('manager'))]);
-
-        $definition = new Definition(DefaultResourceType::class);
-        $definition
-            ->setArguments([new Reference('sylius.resource_registry'), $defaultFormBuilderDefinition])
-            ->addTag('form.type')
-        ;
-
-        $container->setDefinition(sprintf('%s.form.type.%s', $metadata->getApplicationName(), $metadata->getName()), $definition);
     }
 }
