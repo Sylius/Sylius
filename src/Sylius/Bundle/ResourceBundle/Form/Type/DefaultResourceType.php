@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\ResourceBundle\Form\Type;
 
-use Sylius\Bundle\ResourceBundle\Form\Builder\DefaultFormBuilderInterface;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Resource\Metadata\RegistryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -24,21 +24,21 @@ final class DefaultResourceType extends AbstractType
     /**
      * @var RegistryInterface
      */
-    private $registry;
+    private $metadataRegistry;
 
     /**
-     * @var DefaultFormBuilderInterface
+     * @var ServiceRegistryInterface
      */
-    private $defaultFormBuilder;
+    private $formBuilderRegistry;
 
     /**
-     * @param RegistryInterface $registry
-     * @param DefaultFormBuilderInterface $defaultFormBuilder
+     * @param RegistryInterface $metadataRegistry
+     * @param ServiceRegistryInterface $formBuilderRegistry
      */
-    public function __construct(RegistryInterface $registry, DefaultFormBuilderInterface $defaultFormBuilder)
+    public function __construct(RegistryInterface $metadataRegistry, ServiceRegistryInterface $formBuilderRegistry)
     {
-        $this->registry = $registry;
-        $this->defaultFormBuilder = $defaultFormBuilder;
+        $this->metadataRegistry = $metadataRegistry;
+        $this->formBuilderRegistry = $formBuilderRegistry;
     }
 
     /**
@@ -46,9 +46,10 @@ final class DefaultResourceType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $metadata = $this->registry->getByClass($options['data_class']);
+        $metadata = $this->metadataRegistry->getByClass($options['data_class']);
+        $formBuilder = $this->formBuilderRegistry->get($metadata->getDriver());
 
-        $this->defaultFormBuilder->build($metadata, $builder, $options);
+        $formBuilder->build($metadata, $builder, $options);
     }
 
     /**

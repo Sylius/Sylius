@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ResourceBundle;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\DoctrineTargetEntitiesResolverPass;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\RegisterFormBuilderPass;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\RegisterResourceRepositoryPass;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\RegisterResourcesPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -34,6 +35,7 @@ final class SyliusResourceBundle extends Bundle
         $container->addCompilerPass(new RegisterResourcesPass());
         $container->addCompilerPass(new DoctrineTargetEntitiesResolverPass());
         $container->addCompilerPass(new RegisterResourceRepositoryPass());
+        $container->addCompilerPass(new RegisterFormBuilderPass());
     }
 
     /**

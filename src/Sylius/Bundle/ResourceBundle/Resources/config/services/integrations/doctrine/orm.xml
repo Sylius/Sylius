@@ -28,11 +28,7 @@
         </service>
         <service id="sylius.form_builder.default" class="Sylius\Bundle\ResourceBundle\Doctrine\ORM\Form\Builder\DefaultFormBuilder" public="false">
             <argument type="service" id="doctrine.orm.default_entity_manager" />
-        </service>
-        <service id="sylius.form.type.default" class="Sylius\Bundle\ResourceBundle\Form\Type\DefaultResourceType">
-            <argument type="service" id="sylius.resource_registry" />
-            <argument type="service" id="sylius.form_builder.default" />
-            <tag name="form.type" />
+            <tag name="sylius.default_resource_form.builder" type="doctrine/orm" />
         </service>
     </services>
 </container>
