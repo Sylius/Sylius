@@ -7,9 +7,9 @@ Feature: Sorting listed product variants from a product by position
     Background:
         Given the store operates on a single channel in "United States"
         And the store has an "Opel Insignia" configurable product
-        And this product has an "Opel Insignia Hatchback" variant at position 0
+        And this product has an "Opel Insignia Sports Tourer" variant at position 2
+        And this product has also an "Opel Insignia Hatchback" variant at position 0
         And this product has also an "Opel Insignia Sedan" variant at position 1
-        And this product has also an "Opel Insignia Sports Tourer" variant at position 2
         And I am logged in as an administrator
 
     @ui
