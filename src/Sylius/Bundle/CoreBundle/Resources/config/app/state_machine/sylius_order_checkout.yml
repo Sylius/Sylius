@@ -30,7 +30,7 @@ winzou_state_machine:
         callbacks:
             after:
                 sylius_process_cart:
-                    on: ["address", "select_shipping", "select_payment"]
+                    on: ["select_shipping", "address", "select_payment"]
                     do: ["@sylius.order_processing.order_processor", "process"]
                     args: ["object"]
                 sylius_create_order:
@@ -45,3 +45,4 @@ winzou_state_machine:
                     on: ["select_shipping"]
                     do: ["@sylius.state_resolver.order_checkout", "resolve"]
                     args: ["object"]
+                    priority: 1

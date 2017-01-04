@@ -40,7 +40,7 @@ class CheckoutStateResolver implements StateResolverInterface
     public function resolve(OrderInterface $order)
     {
         $stateMachine = $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH);
-        
+
         if (0 === $order->getTotal() && $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)) {
             $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT);
         }
