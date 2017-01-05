@@ -12,6 +12,7 @@ that you need to notice.
     resource_layer
     state_machine
     emails
+    contact
     fixtures
     events
 
