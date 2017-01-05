@@ -17,7 +17,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\PaymentMethod;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
-use Sylius\Component\Payment\Model\PaymentMethod as BasePaymentMethod;
+use Sylius\Bundle\PayumBundle\Model\PaymentMethod as BasePaymentMethod;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
