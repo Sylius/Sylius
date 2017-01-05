@@ -109,7 +109,7 @@ final class BuildChannelBasedPromotionActionFormSubscriber extends AbstractConfi
             'currency' => $channel->getBaseCurrency()->getCode(),
         ];
 
-        $data = empty($data) ? $data : $data[$channel->getCode()];
+        $data = array_key_exists($channel->getCode(), $data) ? $data[$channel->getCode()] : [];
 
         return $this->factory->createNamed($channel->getCode(), $configuration, $data, $config);
     }

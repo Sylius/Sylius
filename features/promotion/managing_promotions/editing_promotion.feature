@@ -53,3 +53,9 @@ Feature: Editing promotion
         And I save my changes
         Then I should be notified that it has been successfully edited
         And the "Christmas sale" promotion should be available from "12.12.2017" to "24.12.2017"
+
+    @ui
+    Scenario: Editing promotion after adding a new channel
+        Given this promotion gives "$10.00" discount to every order
+        When the store also operates on another channel named "EU-WEB"
+        Then I should be able to modify a "Christmas sale" promotion
