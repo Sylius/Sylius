@@ -11,8 +11,8 @@
 
 namespace Sylius\Component\Core\Model;
 
+use Sylius\Bundle\PayumBundle\Model\PaymentMethodInterface as BasePaymentMethodInterface;
 use Sylius\Component\Channel\Model\ChannelsAwareInterface;
-use Sylius\Component\Payment\Model\PaymentMethodInterface as BasePaymentMethodInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
