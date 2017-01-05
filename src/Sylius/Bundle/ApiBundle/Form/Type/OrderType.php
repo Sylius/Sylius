@@ -12,18 +12,41 @@
 namespace Sylius\Bundle\ApiBundle\Form\Type;
 
 use Sylius\Bundle\ChannelBundle\Form\Type\ChannelChoiceType;
-use Sylius\Bundle\CurrencyBundle\Form\Type\CurrencyChoiceType;
 use Sylius\Bundle\CustomerBundle\Form\Type\CustomerChoiceType;
-use Sylius\Bundle\OrderBundle\Form\Type\OrderType as CoreOrderType;
-use Symfony\Component\Form\AbstractType;
+use Sylius\Bundle\LocaleBundle\Form\Type\LocaleChoiceType;
+use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ResourceToIdentifierTransformer;
+use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\ReversedTransformer;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-final class OrderType extends AbstractType
+final class OrderType extends AbstractResourceType
 {
+    /**
+     * @var RepositoryInterface
+     */
+    private $localeRepository;
+
+    /**
+     * {@inheritdoc}
+     *
+     * RepositoryInterface $localeRepository
+     */
+    public function __construct($dataClass, array $validationGroups = [], RepositoryInterface $localeRepository)
+    {
+        parent::__construct($dataClass, $validationGroups);
+
+        $this->localeRepository = $localeRepository;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -31,7 +54,7 @@ final class OrderType extends AbstractType
     {
         $builder
             ->add('customer', CustomerChoiceType::class)
-            ->add('currencyCode', CurrencyChoiceType::class, [
+            ->add('localeCode', LocaleChoiceType::class, [
                 'constraints' => [
                     new NotBlank(['groups' => ['sylius']]),
                 ],
@@ -41,15 +64,20 @@ final class OrderType extends AbstractType
                     new NotBlank(['groups' => ['sylius']]),
                 ],
             ])
-        ;
-    }
+            ->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
+                /** @var OrderInterface $order */
+                $order = $event->getData();
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getParent()
-    {
-        return CoreOrderType::class;
+                /** @var ChannelInterface $channel */
+                if (null !== $channel = $order->getChannel()) {
+                    $order->setCurrencyCode($channel->getBaseCurrency()->getCode());
+                }
+            })
+        ;
+
+        $builder->get('localeCode')->addModelTransformer(
+            new ReversedTransformer(new ResourceToIdentifierTransformer($this->localeRepository, 'code'))
+        );
     }
 
     /**
