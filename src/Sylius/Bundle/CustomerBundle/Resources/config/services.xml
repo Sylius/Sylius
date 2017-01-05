@@ -25,11 +25,6 @@
             <tag name="form.type" />
         </service>
 
-        <service id="sylius.form.type.customer_choice" class="Sylius\Bundle\CustomerBundle\Form\Type\CustomerChoiceType">
-            <argument type="service" id="sylius.repository.customer" />
-            <tag name="form.type" />
-        </service>
-
         <service id="sylius.form.type.customer_group" class="Sylius\Bundle\CustomerBundle\Form\Type\CustomerGroupType">
             <argument>%sylius.model.customer_group.class%</argument>
             <argument type="collection"><argument>sylius</argument></argument>
