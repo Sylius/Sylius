@@ -56,7 +56,7 @@ final class CustomerChoiceType extends AbstractType
             'choices' => function (Options $options) {
                 return $this->customerRepository->findAll();
             },
-            'choice_value' => 'code',
+            'choice_value' => 'email',
             'choice_label' => 'name',
             'choice_translation_domain' => false,
         ]);
