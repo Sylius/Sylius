@@ -72,7 +72,7 @@ class AttributeValue implements AttributeValueInterface
     /**
      * @var array
      */
-    private $json = [];
+    private $json;
 
     /**
      * {@inheritdoc}
