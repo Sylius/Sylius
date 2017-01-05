@@ -16,6 +16,7 @@ use Sylius\Component\Product\Model\ProductInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Validator\Constraints\Valid;
 use Webmozart\Assert\Assert;
 
 /**
@@ -47,7 +48,12 @@ final class SimpleProductSubscriber implements EventSubscriberInterface
         if ($product->isSimple()) {
             $form = $event->getForm();
 
-            $form->add('variant', ProductVariantType::class, ['property_path' => 'variants[0]']);
+            $form->add('variant', ProductVariantType::class, [
+                'property_path' => 'variants[0]',
+                'constraints' => [
+                    new Valid(),
+                ],
+            ]);
             $form->remove('options');
         }
     }

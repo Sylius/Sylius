@@ -347,6 +347,7 @@ final class ProductContext implements Context
     /**
      * @Given /^the (product "[^"]+") has(?:| a) "([^"]+)" variant priced at ("[^"]+")$/
      * @Given /^(this product) has "([^"]+)" variant priced at ("[^"]+")$/
+     * @Given /^(this product) has "([^"]+)" variant priced at ("[^"]+") in ("([^"]+)" channel)$/
      */
     public function theProductHasVariantPricedAt(
         ProductInterface $product,
@@ -381,6 +382,19 @@ final class ProductContext implements Context
             $this->sharedStorage->get('channel'),
             $position
         );
+    }
+
+    /**
+     * @Given /^(this variant) is also priced at ("[^"]+") in ("([^"]+)" channel)$/
+     */
+    public function thisVariantIsAlsoPricedAtInChannel(ProductVariantInterface $productVariant, $price, ChannelInterface $channel)
+    {
+        $productVariant->addChannelPricing($this->createChannelPricingForChannel(
+            $this->getPriceFromString(str_replace(['$', '€', '£'], '', $price)),
+            $channel
+        ));
+
+        $this->objectManager->flush();
     }
 
     /**

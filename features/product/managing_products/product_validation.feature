@@ -116,3 +116,14 @@ Feature: Products validation
         And I try to save my changes
         Then I should not be notified that simple product code has to be unique
         And this product should still be named "Dice Brewing"
+
+    @ui
+    Scenario: Trying to assign new channel to an existing configurable product without specifying its all variant prices for this channel
+        Given the store has a "7 Wonders" configurable product
+        And this product has "7 Wonders: Cities" variant priced at "$30"
+        And this product has "7 Wonders: Leaders" variant priced at "$20"
+        And the store operates on another channel named "Mobile Channel"
+        When I want to modify the "7 Wonders" product
+        And I assign it to channel "Mobile Channel"
+        And I save my changes
+        Then I should be notified that I have to define product variants' prices for newly assigned channels first

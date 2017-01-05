@@ -61,7 +61,7 @@
             <option name="groups">sylius</option>
         </constraint>
         <property name="channelPricings">
-            <constraint name="Valid"></constraint>
+            <constraint name="Valid" />
         </property>
     </class>
 </constraint-mapping>

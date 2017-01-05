@@ -16,19 +16,19 @@ use Symfony\Component\Validator\Constraint;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class HasAllPricesDefined extends Constraint
+final class HasAllVariantPricesDefined extends Constraint
 {
     /**
      * @var string
      */
-    public $message = 'sylius.product_variant.channel_pricing.all_defined';
+    public $message = 'sylius.product.variants.all_prices_defined';
 
     /**
      * {@inheritdoc}
      */
     public function validatedBy()
     {
-        return 'sylius_has_all_prices_defined';
+        return 'sylius_has_all_variant_prices_defined';
     }
 
     /**

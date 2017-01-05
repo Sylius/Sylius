@@ -38,6 +38,9 @@ sylius:
             unique: This locale already exists.
         enabled:
             cannot_disable_base: The base locale cannot be disabled.
+    product:
+        variants:
+            all_prices_defined: You have to define product variants' prices for newly assigned channels first.
     product_attribute:
         invalid: Position must be an integer.
     product_image:
@@ -67,6 +70,8 @@ sylius:
         depth:
             min: Depth cannot be negative.
             invalid: Depth must be a number.
+        channel_pricing:
+            all_defined: 'You must define price for every channel.'
     product_translation:
         short_description:
             max: Short description must not be longer then {{ limit }} characters.

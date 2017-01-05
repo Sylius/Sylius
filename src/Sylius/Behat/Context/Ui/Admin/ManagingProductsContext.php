@@ -208,6 +208,15 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @When I assign it to channel :channel
+     */
+    public function iAssignItToChannel($channel)
+    {
+        // Temporary solution until we will make current page resolver work with product pages
+        $this->updateConfigurableProductPage->checkChannel($channel);
+    }
+
+    /**
      * @When I choose :calculatorName calculator
      */
     public function iChooseCalculator($calculatorName)
@@ -1017,6 +1026,17 @@ final class ManagingProductsContext implements Context
         Assert::same(
             $this->updateSimpleProductPage->getValidationMessageForImageAtPosition((int) $imageNumber - 1),
             'Image code must be unique within this product.'
+        );
+    }
+
+    /**
+     * @Then I should be notified that I have to define product variants' prices for newly assigned channels first
+     */
+    public function iShouldBeNotifiedThatIHaveToDefineProductVariantsPricesForNewlyAssignedChannelsFirst()
+    {
+        Assert::same(
+            $this->updateConfigurableProductPage->getValidationMessage('channels'),
+            'You have to define product variants\' prices for newly assigned channels first.'
         );
     }
 
