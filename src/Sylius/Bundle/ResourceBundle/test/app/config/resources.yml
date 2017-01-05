@@ -12,3 +12,7 @@ sylius_resource:
                 classes:
                     model: AppBundle\Entity\BookTranslation
                     form: AppBundle\Form\Type\BookTranslationType
+
+        app.comic_book:
+            classes:
+                model: AppBundle\Entity\ComicBook

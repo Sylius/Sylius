@@ -13,11 +13,8 @@ namespace Sylius\Bundle\ResourceBundle\Tests\DependencyInjection;
 
 use AppBundle\Entity\Book;
 use AppBundle\Entity\BookTranslation;
-use AppBundle\Form\Type\BookTranslationType;
-use AppBundle\Form\Type\BookType;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\SyliusResourceExtension;
-use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>

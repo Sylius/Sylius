@@ -3,3 +3,7 @@ app_book:
         alias: app.book
     type: sylius.resource_api
 
+app_comic_book:
+    resource: |
+        alias: app.comic_book
+    type: sylius.resource_api

@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Bundle\ResourceBundle\Form\Type\DefaultResourceType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
@@ -71,7 +72,7 @@ final class Configuration implements ConfigurationInterface
                                     ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                     ->scalarNode('repository')->cannotBeEmpty()->end()
                                     ->scalarNode('factory')->defaultValue(Factory::class)->end()
-                                    ->scalarNode('form')->cannotBeEmpty()->end()
+                                    ->scalarNode('form')->defaultValue(DefaultResourceType::class)->cannotBeEmpty()->end()
                                 ->end()
                             ->end()
                             ->arrayNode('translation')
@@ -86,7 +87,7 @@ final class Configuration implements ConfigurationInterface
                                             ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                             ->scalarNode('repository')->cannotBeEmpty()->end()
                                             ->scalarNode('factory')->defaultValue(Factory::class)->end()
-                                            ->scalarNode('form')->cannotBeEmpty()->end()
+                                            ->scalarNode('form')->defaultValue(DefaultResourceType::class)->cannotBeEmpty()->end()
                                         ->end()
                                     ->end()
                                     ->arrayNode('fields')
