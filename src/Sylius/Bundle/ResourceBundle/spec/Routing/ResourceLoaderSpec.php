@@ -647,7 +647,8 @@ EOT;
         $configuration =
 <<<EOT
 alias: sylius.product
-redirect: update
+redirect:
+    create: index
 EOT;
 
         $showDefaults = [
@@ -671,7 +672,7 @@ EOT;
         $createDefaults = [
             '_controller' => 'sylius.controller.product:createAction',
             '_sylius' => [
-                'redirect'   => 'sylius_product_update',
+                'redirect'   => 'sylius_product_index',
                 'permission' => false,
             ],
         ];
@@ -681,7 +682,6 @@ EOT;
         $updateDefaults = [
             '_controller' => 'sylius.controller.product:updateAction',
             '_sylius' => [
-                'redirect'   => 'sylius_product_update',
                 'permission' => false,
             ],
         ];
@@ -884,7 +884,7 @@ EOT;
                 'vars'       => [
                     'foo' => 'bar',
                     'bar' => 'foo',
-                ]
+                ],
             ],
         ];
         $routeFactory->createRoute('/products/new', $createDefaults, [], [], '', [], ['GET', 'POST'])->willReturn($createRoute);
@@ -897,7 +897,7 @@ EOT;
                 'vars'       => [
                     'foo' => 'bar',
                     'abc' => 'xyz',
-                ]
+                ],
             ],
         ];
         $routeFactory->createRoute('/products/{id}/edit', $updateDefaults, [], [], '', [], ['GET', 'PUT', 'PATCH'])->willReturn($updateRoute);

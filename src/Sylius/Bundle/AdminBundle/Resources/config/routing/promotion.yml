@@ -4,7 +4,9 @@ sylius_admin_promotion:
         section: admin
         templates: SyliusAdminBundle:Crud
         except: ['show']
-        redirect: update
+        redirect:
+            create: $redirect
+            update: update
         grid: sylius_admin_promotion
         permission: true
         vars:

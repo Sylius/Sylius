@@ -5,7 +5,9 @@ sylius_admin_admin_user:
         path: users
         templates: SyliusAdminBundle:Crud
         except: ['show']
-        redirect: index
+        redirect:
+            create: index
+            update: index
         grid: sylius_admin_admin_user
         permission: true
         vars:
@@ -15,4 +17,6 @@ sylius_admin_admin_user:
                     form: SyliusAdminBundle:AdminUser:_form.html.twig
             index:
                 icon: lock
+            create:
+                add_another: false
     type: sylius.resource

@@ -65,3 +65,13 @@ Feature: Adding a new promotion
         And I make it available from "21.04.2017" to "21.05.2017"
         And I add it
         Then I should be notified that it has been successfully created
+
+    @ui @javascript
+    Scenario: Adding a new promotion and returning to creation form to add another one
+        Given I want to create a new promotion
+        When I specify its code as "FULL_METAL_PROMOTION"
+        And I name it "Full metal promotion"
+        And I add it willing to add another one
+        Then I should be notified that it has been successfully created
+        And I should be redirected back to promotion creation form
+        And the "Full metal promotion" promotion should appear in the registry

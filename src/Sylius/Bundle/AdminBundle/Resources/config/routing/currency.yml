@@ -4,7 +4,9 @@ sylius_admin_currency:
         section: admin
         templates: SyliusAdminBundle:Crud
         except: ['show', 'delete']
-        redirect: update
+        redirect:
+            create: $redirect
+            update: update
         grid: sylius_admin_currency
         permission: true
         vars:

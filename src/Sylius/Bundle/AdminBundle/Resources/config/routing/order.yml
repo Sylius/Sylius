@@ -4,6 +4,8 @@ sylius_admin_order:
         section: admin
         templates: SyliusAdminBundle:Crud
         only: ['index']
+        redirect:
+            create: $redirect
         grid: sylius_admin_order
         vars:
           all:

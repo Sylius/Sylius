@@ -1,12 +1,23 @@
 <div class="ui segment">
-    {{ form_start(form, {'action': path(configuration.vars.route.name|default(configuration.getRouteName('create')), configuration.vars.route.parameters|default({})), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
+    {% set action = configuration.vars.route.name|default(configuration.getRouteName('create')) %}
+    {% set parameters = configuration.vars.route.parameters|default({}) %}
+
+    {{ form_start(form, {'action': path(action, parameters), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
     {% if configuration.vars.templates.form is defined %}
         {% include configuration.vars.templates.form %}
     {% else %}
         {{ form_widget(form) }}
     {% endif %}
 
-    {% include '@SyliusUi/Form/Buttons/_create.html.twig' with {'paths': {'cancel': path(configuration.getRouteName('index'), configuration.vars.route.parameters|default({}))}} %}
+    {% set paths = {'cancel': path(configuration.getRouteName('index'), parameters)} %}
+    {% block buttons %}
+        {% if configuration.vars.add_another is defined and configuration.vars.add_another == false %}
+            {% include '@SyliusUi/Form/Buttons/_createSimple.html.twig' with {'paths': paths} %}
+        {% else %}
+            {% set routes = {'create': action, 'update': configuration.getRouteName('update')} %}
+            {% include '@SyliusUi/Form/Buttons/_create.html.twig' with {'paths': paths, 'routes': routes} %}
+        {% endif %}
+    {% endblock %}
 
     {{ form_row(form._token) }}
     {{ form_end(form, {'render_rest': false}) }}

@@ -19,7 +19,7 @@ Feature: Editing taxon's slug in multiple locales
         Then this taxon should have slug "medieval-weapons" in "English (United States)"
         And this taxon should have slug "bronie-sredniowieczne" in "Polish (Poland)"
 
-    @ui
+    @ui @javascript
     Scenario: Creating a root taxon with a custom slug
         Given I want to create a new taxon
         When I specify its code as "MEDIEVAL_WEAPONS"

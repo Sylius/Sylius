@@ -50,6 +50,14 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function createAndAddAnother()
+    {
+        $this->getDocument()->pressButton('Create and add another');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getValidationMessage($element)
     {
         $foundElement = $this->getFieldElement($element);

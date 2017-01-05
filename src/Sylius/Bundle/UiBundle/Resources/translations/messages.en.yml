@@ -151,6 +151,7 @@ sylius:
         create_a_new_address: 'Create a new address'
         create_a_new_customer_account: 'Create a new customer account'
         create_an_account: 'Create an account'
+        create_and_add_another: 'Create and add another'
         create_association_type: 'Create Association type'
         create_country: 'Create country'
         create_currency: 'Create currency'

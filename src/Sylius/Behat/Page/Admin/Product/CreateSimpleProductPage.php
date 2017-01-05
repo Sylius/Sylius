@@ -207,7 +207,6 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         $this->getElement('shipping_category')->selectOption($shippingCategoryName);
     }
 
-
     /**
      * {@inheritdoc}
      */

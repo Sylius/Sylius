@@ -6,6 +6,19 @@
 
 ### AdminBundle
 
+* New button **Create and add another** was added to default create buttons template. It's also possible to disable this feature, passing proper parameter to `vars` in routing generation.
+
+```yml
+app_custom_resource:
+    resource: |
+        alias: app.custom_resource
+        ...
+        vars:
+            create:
+                add_another: false
+        ...
+```
+
 ### ApiBundle
 
 ### Attribute / AttributeBundle
@@ -90,6 +103,43 @@ After:
 ### Registry / RegistryBundle
 
 ### Resource / ResourceBundle
+
+* In routing generation, `redirect` parameter was changed from string to array with `create` and `update` keys, which specifies redirect routes for (separately) `create` and `update` action. Look at [this PR](https://github.com/Sylius/Sylius/pull/7152) if you have any problems with upgrade.
+
+Before:
+```yml
+app_custom_resource:
+    resource: |
+        alias: app.custom_resource
+        ...
+        redirect: index
+        ...
+```
+
+After:
+```yml
+app_custom_resource:
+    resource: |
+        alias: app.custom_resource
+        ...
+        redirect:
+            create: index
+            update: index
+        ...
+```
+
+* In routing generation, it's possible to define variable in `redirect` configuration, to be able to pass it as parameter: `{{ path('sylius_custom_resource_create', {'redirect': 'sylius_custom_resource_update'}) }}`. Look at [this PR](https://github.com/Sylius/Sylius/pull/7152) if you have any problems with upgrade.
+
+```yml
+app_custom_resource:
+    resource: |
+        alias: app.custom_resource
+        ...
+        redirect:
+            create: $redirect
+            update: index
+        ...
+```
 
 ### Review / ReviewBundle
 
