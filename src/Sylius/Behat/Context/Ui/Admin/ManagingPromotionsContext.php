@@ -426,6 +426,7 @@ final class ManagingPromotionsContext implements Context
     /**
      * @Given I want to modify a :promotion promotion
      * @Given /^I want to modify (this promotion)$/
+     * @Then I should be able to modify a :promotion promotion
      */
     public function iWantToModifyAPromotion(PromotionInterface $promotion)
     {
