@@ -15,7 +15,6 @@ Symfony Bundles
     SyliusProductBundle/index
     SyliusPromotionBundle/index
     SyliusResourceBundle/index
-    SyliusSettingsBundle/index
     SyliusShippingBundle/index
     SyliusTaxationBundle/index
     SyliusTaxonomyBundle/index
