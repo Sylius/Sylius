@@ -271,7 +271,7 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @When /^I specified the shipping (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
+     * @When /^I specified the shipping (address as "[^"]+", "[^"]+", "[^"]+", "[^"]+" for "[^"]+")$/
      */
     public function iSpecifiedTheShippingAddress(AddressInterface $address)
     {
