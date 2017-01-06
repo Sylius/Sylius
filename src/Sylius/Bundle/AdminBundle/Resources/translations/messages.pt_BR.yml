@@ -11,14 +11,18 @@ sylius:
                     header: Catálogo
                     inventory: Estoque
                     options: Opções
+                    products: Produtos
+                    taxons: Taxas
                 configuration:
                     admin_users: Administradores
                     channels: Canais
                     countries: Países
                     currencies: Moedas
+                    exchange_rates: Taxa de câmbio
                     header: Configuração
                     locales: Localidades
                     payment_methods: Meios de pagamentos
+                    shipping_categories: Categorias de envio
                     shipping_methods: Métodos de envio
                     tax_categories: Categorias de impostos
                     tax_rates: Impostos

@@ -1,0 +1,14 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    channel:
+        delete_error: 'O canal não pode ser excluído. É obrigatório pelo menos um canal ativo.'
+    contact:
+        request_success: 'Seu pedido de contato foi enviado com sucesso.'
+        request_error: 'Ocorreu um problema ao enviar a solicitação de contato. Por favor, tente novamente mais tarde.'
+    customer:
+        add_address: 'Endereço foi adicionado com sucesso.'
+        set_address_as_default: 'Endereço foi definido como padrão.'
+    product:
+        out_of_stock: 'Há apenas a %quantity% deste produto no estoque.'

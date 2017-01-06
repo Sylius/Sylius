@@ -1,0 +1,10 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    payment:
+        cancelled: 'Pagamento foi cancelado.'
+        completed: 'Pagamento foi concluído.'
+        failed: 'Pagamento falhou.'
+        processing: 'O pagamento está sendo processado.'
+        refunded: 'Pagamento foi reembolsado com êxito.'
