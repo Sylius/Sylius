@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Fixture;
 
 use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
+use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
 use Sylius\Component\Attribute\AttributeType\TextAttributeType;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -102,8 +103,17 @@ class MugProductFixture extends AbstractFixture
             ]
         ]]]);
 
+        $mugMaterials = ['Invisible porcelain', 'Banana skin', 'Porcelain', 'Centipede'];
         $this->productAttributeFixture->load(['custom' => [
-            ['name' => 'Mug material', 'code' => 'mug_material', 'type' => TextAttributeType::TYPE],
+            [
+                'name' => 'Mug material',
+                'code' => 'mug_material',
+                'type' => SelectAttributeType::TYPE,
+                'configuration' => [
+                    'multiple' => false,
+                    'options' => $mugMaterials,
+                ]
+            ],
         ]]);
 
         $this->productOptionFixture->load(['custom' => [
@@ -127,7 +137,7 @@ class MugProductFixture extends AbstractFixture
                 'main_taxon' => 'mugs',
                 'taxons' => ['mugs'],
                 'product_attributes' => [
-                    'mug_material' => $this->faker->randomElement(['Invisible porcelain', 'Banana skin', 'Porcelain', 'Centipede']),
+                    'mug_material' => [$this->faker->randomKey($mugMaterials)],
                 ],
                 'product_options' => ['mug_type'],
                 'images' => [

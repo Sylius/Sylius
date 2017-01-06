@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Fixture;
 
 use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
 use Sylius\Component\Attribute\AttributeType\IntegerAttributeType;
+use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
 use Sylius\Component\Attribute\AttributeType\TextAttributeType;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -95,10 +96,20 @@ class BookProductFixture extends AbstractFixture
             ]
         ]]]);
 
+        $bookGenres = ['Fiction', 'Romance', 'Thriller', 'Sports'];
         $this->productAttributeFixture->load(['custom' => [
             ['name' => 'Book author', 'code' => 'book_author', 'type' => TextAttributeType::TYPE],
             ['name' => 'Book ISBN', 'code' => 'book_isbn', 'type' => TextAttributeType::TYPE],
             ['name' => 'Book pages', 'code' => 'book_pages', 'type' => IntegerAttributeType::TYPE],
+            [
+                'name' => 'Book genre',
+                'code' => 'book_genre',
+                'type' => SelectAttributeType::TYPE,
+                'configuration' => [
+                    'multiple' => true,
+                    'options' => $bookGenres,
+                ]
+            ],
         ]]);
 
         $products = [];
@@ -115,6 +126,7 @@ class BookProductFixture extends AbstractFixture
                     'book_author' => $authorName,
                     'book_isbn' => $this->faker->isbn13,
                     'book_pages' => $this->faker->numberBetween(42, 1024),
+                    'book_genre' => array_keys($this->faker->randomElements($bookGenres, $this->faker->randomKey($bookGenres) + 1)),
                 ],
                 'images' => [
                     'main' => sprintf('%s/../Resources/fixtures/%s', __DIR__, 'books.jpg'),

@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
+use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
@@ -406,7 +407,12 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
             case ProductAttributeValueInterface::STORAGE_BOOLEAN:
                 return $this->faker->boolean;
             case ProductAttributeValueInterface::STORAGE_INTEGER:
-                return $this->faker->numberBetween(0, 10000);
+                switch ($productAttribute->getType()) {
+                    case SelectAttributeType::TYPE:
+                        return $this->faker->randomKey($productAttribute->getConfiguration()['options']);
+                    default:
+                        return $this->faker->numberBetween(0, 10000);
+                }
             case ProductAttributeValueInterface::STORAGE_FLOAT:
                 return $this->faker->randomFloat(4, 0, 10000);
             case ProductAttributeValueInterface::STORAGE_TEXT:
@@ -414,6 +420,16 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
             case ProductAttributeValueInterface::STORAGE_DATE:
             case ProductAttributeValueInterface::STORAGE_DATETIME:
                 return $this->faker->dateTimeThisCentury;
+            case ProductAttributeValueInterface::STORAGE_JSON:
+                switch ($productAttribute->getType()) {
+                    case SelectAttributeType::TYPE:
+                        return array_keys($this->faker->randomElements(
+                            $productAttribute->getConfiguration()['options'],
+                            $this->faker->randomKey($productAttribute->getConfiguration()['options']) + 1
+                        ));
+                    default:
+                        throw new \BadMethodCallException();
+                }
             default:
                 throw new \BadMethodCallException();
         }
