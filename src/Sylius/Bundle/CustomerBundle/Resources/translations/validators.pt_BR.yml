@@ -21,3 +21,11 @@ sylius:
             invalid: Este email é inválido.
             unique: Este e-mail já está sendo usado.
             registered: Este email já está registrado, por favor realize o Login ou esqueceu sua senha.
+    customer_group:
+        code:
+            regex: Código de grupo de cliente só pode ser composto por letras, números, hifens e sublinhados.
+            unique: Código de grupo de cliente deve ser exclusivo.
+        name:
+            max: Nome de grupo do cliente não deve ter mais de {{ limit }} caracteres.
+            min: Nome de grupo do cliente deve ser pelo menos {{ limit }} caracteres.
+            not_blank: Por favor insira um nome de grupo de cliente.

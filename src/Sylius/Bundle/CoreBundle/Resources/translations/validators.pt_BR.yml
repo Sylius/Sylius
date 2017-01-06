@@ -3,12 +3,18 @@
 
 sylius:
     channel:
+        base_currency:
+            not_blank: Por favor insira a moeda base do canal.
         default_locale:
             not_blank: Introduza a localidade padrão do canal.
         contact_email:
             invalid: Este email é inválido.
             max: Sobrenome não pode ser maior que {{ limit }} caracteres.
             min: Email deve ter ao menos {{ limit }} caracteres.
+    channel_pricing:
+        price:
+            min: Preço deve ser pelo menos {{ limit }}.
+            not_blank: Por favor, digite o preço.
     checkout:
         shipping_method:
             not_blank: Por favor selecione um método de envio.
@@ -16,9 +22,16 @@ sylius:
         email:
             invalid: Este email é inválido.
             not_blank: Por favor, insira seu email.
+        message:
+            not_blank: Por favor, digite a sua mensagem.
+    currency:
+        enabled:
+            cannot_disable_base: Moeda-base não pode ser desativada.
     customer:
         currency_code:
             not_valid: O usuário digitado está incorreto.
+    cart_item:
+        not_available: '%itemName% não tem estoque suficiente.'
     order:
         currency_code:
             not_valid: O código de moeda que você inseriu é inválido.
@@ -26,18 +39,57 @@ sylius:
         code:
             not_blank: Por favor, digite o código do locale.
             unique: Este locale já existe.
+        enabled:
+            cannot_disable_base: A localidade base não pode ser desativada.
+    product:
+        variants:
+            all_prices_defined: Primeiro, você precisa definir os preços das variantes do produto para canais recém atribuídos.
+    product_attribute:
+        invalid: Posição deve ser um número inteiro.
+    product_image:
+        code:
+            not_blank: Por favor, insira um código de imagem.
+            regex: Código da imagem somente pode ser composto por letras, números, hifens e traços.
+            unique: Código de imagem deve ser exclusivo dentro deste produto.
+        file:
+            max_size: A imagem é muito grande - {{ size }}{{ suffix }}. Máximo permitido tamanho é {{ limit }}{{ suffix }}.
+            upload_ini_size: A imagem é muito grande. Máximo permitido tamanho é {{ limit }}{{ suffix }}.
     product_variant:
         onHand:
             min: O campo em mãos deve ser maior que {{limit}}.
             not_blank: Por favor digite o campo em mãos.
         original_price:
             min: Preço original não deve ser negativo.
+        weight:
+            min: Peso não pode ser negativo.
+            invalid: Peso deve ser um número.
+        width:
+            min: A largura não pode ser negativa.
+            invalid: A largura deve ser um número.
+        height:
+            min: Altura não pode ser negativa.
+            invalid: Altura deve ser um número.
+        depth:
+            min: Profundidade não pode ser negativa.
+            invalid: Profundidade deve ser um número.
+        channel_pricing:
+            all_defined: 'Você deve definir o preço para cada canal.'
     product_translation:
         short_description:
             max: Breve descrição não pode ser maior que {{ limit }} caracteres.
+    taxon_image:
+        code:
+            not_blank: Por favor, insira um código de imagem.
+            regex: Código da imagem somente pode ser composto por letras, números, hifens e traços.
+            unique: Código de imagem deve ser exclusivo dentro desta categoria.
+        file:
+            max_size: A imagem é muito grande - {{ size }}{{ suffix }}. Máximo permitido tamanho é {{ limit }}{{ suffix }}.
+            upload_ini_size: A imagem é muito grande. Máximo permitido tamanho é {{ limit }}{{ suffix }}.
     user:
         email:
             unique: Este e-mail já está sendo usado.
         username:
             unique: Este nome de utilizador já foi utilizado.
             not_blank: Por favor, digite seu nome.
+        locale_code:
+            not_blank: Por favor, escolha uma localidade.

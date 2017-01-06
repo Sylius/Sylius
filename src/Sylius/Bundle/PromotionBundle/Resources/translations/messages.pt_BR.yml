@@ -26,6 +26,8 @@ sylius:
             cart_quantity_configuration:
                 count: Contagem
                 equal: Igual
+            contains_product_configuration:
+                variants: Produtos
             shipping_country_configuration:
                 country: País
             type: Tipo

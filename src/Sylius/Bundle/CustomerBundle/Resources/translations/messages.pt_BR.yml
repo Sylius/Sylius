@@ -5,6 +5,7 @@ sylius:
     form:
         customer:
             first_name: Nome
+            group: Grupo
             last_name: Sobrenome
             email: Email
             phone_number: Número de Telefone
