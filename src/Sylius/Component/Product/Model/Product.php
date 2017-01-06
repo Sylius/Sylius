@@ -247,6 +247,10 @@ class Product implements ProductInterface
      */
     public function addAttribute(AttributeValueInterface $attribute)
     {
+        if (false === $attribute instanceof ProductAttributeValueInterface) {
+            throw new \InvalidArgumentException('Attribute objects added to a Product object have to implement ProductAttributeValueInterface');
+        }
+
         if (!$this->hasAttribute($attribute)) {
             $attribute->setProduct($this);
             $this->attributes->add($attribute);
@@ -258,6 +262,10 @@ class Product implements ProductInterface
      */
     public function removeAttribute(AttributeValueInterface $attribute)
     {
+        if (false === $attribute instanceof ProductAttributeValueInterface) {
+            throw new \InvalidArgumentException('Attribute objects removed from a Product object have to implement ProductAttributeValueInterface');
+        }
+
         if ($this->hasAttribute($attribute)) {
             $this->attributes->removeElement($attribute);
             $attribute->setProduct(null);

@@ -13,6 +13,7 @@ namespace spec\Sylius\Component\Product\Model;
 
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Product\Model\Product;
 use Sylius\Component\Product\Model\ProductAssociationInterface;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
@@ -139,6 +140,17 @@ final class ProductSpec extends ObjectBehavior
 
         $this->removeAttribute($attribute);
         $this->hasAttribute($attribute)->shouldReturn(false);
+    }
+
+    function it_refuses_to_add_non_product_attribute(AttributeValueInterface $attribute)
+    {
+        $this->shouldThrow('\InvalidArgumentException')->duringAddAttribute($attribute);
+        $this->hasAttribute($attribute)->shouldReturn(false);
+    }
+
+    function it_refuses_to_remove_non_product_attribute(AttributeValueInterface $attribute)
+    {
+        $this->shouldThrow('\InvalidArgumentException')->duringRemoveAttribute($attribute);
     }
 
     function it_has_no_variants_by_default()
