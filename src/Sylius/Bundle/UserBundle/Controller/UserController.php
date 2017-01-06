@@ -239,7 +239,9 @@ class UserController extends ResourceController
         $formType = $this->getSyliusAttribute($request, 'form', UserRequestPasswordResetType::class);
         $form = $this->createResourceForm($configuration, $formType, $passwordReset);
         $template = $this->getSyliusAttribute($request, 'template', null);
-        Assert::notNull($template, 'Template is not configured.');
+        if (!$configuration->isHtmlRequest()) {
+            Assert::notNull($template, 'Template is not configured.');
+        }
 
         if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH'], true) && $form->handleRequest($request)->isValid()) {
             $user = $this->repository->findOneByEmail($passwordReset->getEmail());
