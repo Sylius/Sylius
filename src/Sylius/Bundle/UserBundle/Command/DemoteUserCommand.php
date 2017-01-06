@@ -13,6 +13,7 @@ namespace Sylius\Bundle\UserBundle\Command;
 
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -33,6 +34,7 @@ class DemoteUserCommand extends AbstractRoleCommand
                 new InputArgument('email', InputArgument::REQUIRED, 'Email'),
                 new InputArgument('roles', InputArgument::IS_ARRAY, 'Security roles'),
                 new InputOption('super-admin', null, InputOption::VALUE_NONE, 'Unset the user as super admin'),
+                new InputOption('user-type', null, InputOption::VALUE_REQUIRED, 'Use shop or admin user type'),
             ))
             ->setHelp(<<<EOT
 The <info>sylius:user:demote</info> command demotes a user by removing security roles
@@ -45,7 +47,7 @@ EOT
     /**
      * {@inheritdoc}
      */
-    protected function executeRoleCommand(OutputInterface $output, UserInterface $user, array $securityRoles)
+    protected function executeRoleCommand(InputInterface $input, OutputInterface $output, UserInterface $user, array $securityRoles)
     {
         $error = false;
 
@@ -61,7 +63,7 @@ EOT
         }
 
         if (!$error) {
-            $this->getEntityManager()->flush();
+            $this->getEntityManager($input->getOption('user-type'))->flush();
         }
     }
 }
