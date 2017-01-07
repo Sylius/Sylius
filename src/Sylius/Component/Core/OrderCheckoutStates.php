@@ -20,6 +20,7 @@ final class OrderCheckoutStates
     const STATE_CART = 'cart';
     const STATE_COMPLETED = 'completed';
     const STATE_PAYMENT_SELECTED = 'payment_selected';
+    const STATE_PAYMENT_SKIPPED = 'payment_skipped';
     const STATE_SHIPPING_SELECTED = 'shipping_selected';
 
     private function __construct()
