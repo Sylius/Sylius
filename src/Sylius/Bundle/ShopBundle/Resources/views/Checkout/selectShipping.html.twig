@@ -4,7 +4,7 @@
 
 {% block content %}
     {% include '@SyliusShop/Checkout/_header.html.twig' %}
-    {% include '@SyliusShop/Checkout/_steps.html.twig' with {'active': 'select_shipping'} %}
+    {% include '@SyliusShop/Checkout/_steps.html.twig' with {'active': 'select_shipping', 'orderTotal': order.total} %}
 
     <div class="ui stackable grid">
         <div class="eleven wide column">

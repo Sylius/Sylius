@@ -15,21 +15,21 @@ Feature: Receiving discount based on nth order
 
     @ui
     Scenario: Receiving a discount on an order if it's nth order placed
-        Given I have already placed 4 orders choosing "Free" shipping method to "United States" with "Cash on Delivery" payment
+        Given I have already placed 4 orders choosing "PHP T-Shirt" product, "Free" shipping method to "United States" with "Cash on Delivery" payment
         When I add product "PHP T-Shirt" to the cart
         Then my cart total should be "$80.00"
         And my discount should be "-$20.00"
 
     @ui
     Scenario: Receiving no discount on an order if it's not nth order placed
-        Given I have already placed 3 orders choosing "Free" shipping method to "United States" with "Cash on Delivery" payment
+        Given I have already placed 3 orders choosing "PHP T-Shirt" product, "Free" shipping method to "United States" with "Cash on Delivery" payment
         When I add product "PHP T-Shirt" to the cart
         Then my cart total should be "$100.00"
         And there should be no discount
 
     @ui
     Scenario: Receiving a discount on 6th order when 5th one was cancelled
-        Given I have already placed 5 orders choosing "Free" shipping method to "United States" with "Cash on Delivery" payment
+        Given I have already placed 5 orders choosing "PHP T-Shirt" product, "Free" shipping method to "United States" with "Cash on Delivery" payment
         But I cancelled my last order
         When I add product "PHP T-Shirt" to the cart
         Then my cart total should be "$80.00"

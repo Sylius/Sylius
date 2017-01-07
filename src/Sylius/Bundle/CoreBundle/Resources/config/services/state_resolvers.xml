@@ -16,6 +16,9 @@
         <service id="sylius.state_resolver.order" class="Sylius\Component\Core\StateResolver\OrderStateResolver">
             <argument type="service" id="sm.factory" />
         </service>
+        <service id="sylius.state_resolver.order_checkout" class="Sylius\Component\Core\StateResolver\CheckoutStateResolver">
+            <argument type="service" id="sm.factory" />
+        </service>
         <service id="sylius.state_resolver.order_payment" class="Sylius\Component\Core\StateResolver\OrderPaymentStateResolver">
             <argument type="service" id="sm.factory" />
         </service>

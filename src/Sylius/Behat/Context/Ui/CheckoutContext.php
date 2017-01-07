@@ -576,6 +576,14 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @When I want to pay for order 
+     */
+    public function iWantToPayForOrder()
+    {
+        $this->selectPaymentPage->tryToOpen();
+    }
+
+    /**
      * @When I confirm my order
      */
     public function iConfirmMyOrder()
@@ -641,6 +649,14 @@ final class CheckoutContext implements Context
             $this->selectShippingPage->isOpen(),
             'Checkout shipping page should be opened, but it is not.'
         );
+    }
+
+    /**
+     * @Then I should be on the checkout complete step
+     */
+    public function iShouldBeOnTheCheckoutCompleteStep()
+    {
+        Assert::true($this->completePage->isOpen());
     }
 
     /**
@@ -818,6 +834,15 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @When I proceed with :shippingMethod shipping method
+     */
+    public function iProceedOrderWithShippingMethod($shippingMethod)
+    {
+        $this->iSelectShippingMethod($shippingMethod);
+        $this->iCompleteTheShippingStep();
+    }
+
+    /**
      * @Given I should have :quantity :productName products in the cart
      */
     public function iShouldHaveProductsInTheCart($quantity, $productName)
@@ -911,7 +936,7 @@ final class CheckoutContext implements Context
     public function myOrderSPaymentMethodShouldBe(PaymentMethodInterface $paymentMethod)
     {
         Assert::true(
-            $this->completePage->hasPaymentMethod($paymentMethod),
+            $this->completePage->hasPaymentMethodWithName($paymentMethod),
             sprintf('I should see %s payment method, but I do not.', $paymentMethod->getName())
         );
     }
@@ -939,7 +964,7 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Given I should be able to go to the shipping step again
+     * @Then I should be able to go to the shipping step again
      */
     public function iShouldBeAbleToGoToTheShippingStepAgain()
     {
@@ -949,6 +974,16 @@ final class CheckoutContext implements Context
             $this->selectShippingPage->isOpen(),
             'Checkout shipping step should be opened, but it is not.'
         );
+    }
+
+    /**
+     * @Then I should be able to go to the complete step again
+     */
+    public function iShouldBeAbleToGoToTheCompleteStepAgain()
+    {
+        $this->selectShippingPage->nextStep();
+
+        Assert::true($this->completePage->isOpen());
     }
 
     /**
@@ -1253,6 +1288,39 @@ final class CheckoutContext implements Context
         Assert::same(
             'Checking out as '.$email.'.',
             $this->selectShippingPage->getPurchaserEmail()
+        );
+    }
+
+    /**
+     * @Then I should not see any information about payment method
+     */
+    public function iShouldNotSeeAnyInformationAboutPaymentMethod()
+    {
+        Assert::false(
+            $this->completePage->hasPaymentMethod(),
+            'There should be no information about payment method, but it is.'
+        );
+    }
+
+    /**
+     * @Then I should not see any instructions about payment method
+     */
+    public function iShouldNotSeeAnyInstructionsAboutPaymentMethod()
+    {
+        Assert::false(
+            $this->thankYouPage->hasInstructions(),
+            'There should be no instructions about payment method, but it is.'
+        );
+    }
+
+    /**
+     * @Then I should not be able to change payment method
+     */
+    public function iShouldNotBeAbleToChangeMyPaymentMethod()
+    {
+        Assert::false(
+            $this->thankYouPage->hasChangePaymentMethodButton(),
+            'There should be no button to change payment method, but it is.'
         );
     }
 

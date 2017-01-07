@@ -4,7 +4,7 @@
 
 {% block content %}
     {% include '@SyliusShop/Checkout/_header.html.twig' %}
-    {% include '@SyliusShop/Checkout/_steps.html.twig' with {'active': 'complete'} %}
+    {% include '@SyliusShop/Checkout/_steps.html.twig' with {'active': 'complete', 'orderTotal': order.total} %}
 
     <div class="ui padded segment">
         {% include '@SyliusShop/Checkout/Complete/_header.html.twig' %}

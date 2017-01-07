@@ -46,7 +46,23 @@ class ThankYouPage extends SymfonyPage implements ThankYouPageInterface
             return $this->isOpen($parameters);
         });
     }
-    
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasInstructions() 
+    {
+        return null !== $this->getDocument()->find('css', '#sylius-payment-method-instructions');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasChangePaymentMethodButton()
+    {
+        return null !== $this->getDocument()->find('css', '#sylius-show-order');
+    }
+
     /**
      * @return string
      */

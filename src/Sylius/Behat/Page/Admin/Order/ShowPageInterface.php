@@ -268,4 +268,9 @@ interface ShowPageInterface extends SymfonyPageInterface
      * @return string
      */
     public function getOrderCurrency();
+
+    /**
+     * @return bool
+     */
+    public function hasRefundButton();
 }

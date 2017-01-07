@@ -35,4 +35,14 @@ interface ThankYouPageInterface extends SymfonyPageInterface
      * @throws \InvalidArgumentException
      */
     public function waitForResponse($timeout, array $parameters = []);
+
+    /**
+     * @return bool
+     */
+    public function hasInstructions();
+
+    /**
+     * @return bool
+     */
+    public function hasChangePaymentMethodButton();
 }

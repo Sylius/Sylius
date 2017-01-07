@@ -8,25 +8,29 @@ winzou_state_machine:
             cart: ~
             addressed: ~
             shipping_selected: ~
+            payment_skipped: ~
             payment_selected: ~
             completed: ~
         transitions:
             address:
-                from: [cart, addressed, shipping_selected, payment_selected]
+                from: [cart, addressed, shipping_selected, payment_selected, payment_skipped]
                 to: addressed
             select_shipping:
-                from: [addressed, shipping_selected, payment_selected]
+                from: [addressed, shipping_selected, payment_selected, payment_skipped]
                 to: shipping_selected
+            skip_payment:
+                    from: [shipping_selected]
+                    to: payment_skipped
             select_payment:
                 from: [payment_selected, shipping_selected]
                 to: payment_selected
             complete:
-                from: [payment_selected]
+                from: [payment_selected, payment_skipped]
                 to: completed
         callbacks:
             after:
                 sylius_process_cart:
-                    on: ["address", "select_shipping", "select_payment"]
+                    on: ["select_shipping", "address", "select_payment"]
                     do: ["@sylius.order_processing.order_processor", "process"]
                     args: ["object"]
                 sylius_create_order:
@@ -37,3 +41,8 @@ winzou_state_machine:
                     on: ["complete"]
                     do: ["object", "completeCheckout"]
                     args: ["object"]
+                sylius_skip_payment:
+                    on: ["select_shipping"]
+                    do: ["@sylius.state_resolver.order_checkout", "resolve"]
+                    args: ["object"]
+                    priority: 1

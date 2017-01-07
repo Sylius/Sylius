@@ -22,6 +22,7 @@ final class OrderCheckoutTransitions
     const TRANSITION_COMPLETE = 'complete';
     const TRANSITION_SELECT_PAYMENT = 'select_payment';
     const TRANSITION_SELECT_SHIPPING = 'select_shipping';
+    const TRANSITION_SKIP_PAYMENT = 'skip_payment';
 
     private function __construct()
     {

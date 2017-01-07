@@ -24,6 +24,8 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
+use Symfony\Bundle\FrameworkBundle\Routing\Router;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -59,24 +61,32 @@ final class PayumController
     private $viewHandler;
 
     /**
+     * @var Router
+     */
+    private $router;
+
+    /**
      * @param Payum $payum
      * @param OrderRepositoryInterface $orderRepository
      * @param MetadataInterface $orderMetadata
      * @param RequestConfigurationFactoryInterface $requestConfigurationFactory
      * @param ViewHandlerInterface $viewHandler
+     * @param Router $router
      */
     public function __construct(
         Payum $payum,
         OrderRepositoryInterface $orderRepository,
         MetadataInterface $orderMetadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
-        ViewHandlerInterface $viewHandler
+        ViewHandlerInterface $viewHandler,
+        Router $router
     ) {
         $this->payum = $payum;
         $this->orderRepository = $orderRepository;
         $this->orderMetadata = $orderMetadata;
         $this->requestConfigurationFactory = $requestConfigurationFactory;
         $this->viewHandler = $viewHandler;
+        $this->router = $router;
     }
 
     /**
@@ -102,7 +112,8 @@ final class PayumController
         $payment = $order->getLastPayment(PaymentInterface::STATE_NEW);
 
         if (null === $payment) {
-            throw new NotFoundHttpException(sprintf('Order with token "%s" has no pending payments.', $tokenValue));
+            $url = $this->router->generate('sylius_shop_order_thank_you');
+            return new RedirectResponse($url);
         }
 
         $captureToken = $this->getTokenFactory()->createCaptureToken(

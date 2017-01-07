@@ -49,6 +49,16 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
         ;
     }
 
+    function it_does_not_create_or_update_order_payment_if_order_total_is_zero(OrderInterface $order)
+    {
+        $order->getState()->willReturn(OrderInterface::STATE_CART);
+        $order->getTotal()->willReturn(0);
+
+        $order->getLastPayment(Argument::any())->shouldNotBeCalled();
+
+        $this->process($order);
+    }
+
     function it_does_nothing_if_the_order_is_cancelled(OrderInterface $order)
     {
         $order->getState()->willReturn(OrderInterface::STATE_CANCELLED);
@@ -78,6 +88,7 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
         OrderPaymentProviderInterface $orderPaymentProvider,
         PaymentInterface $payment
     ) {
+        $order->getTotal()->willReturn(10);
         $order->getState()->willReturn(OrderInterface::STATE_CART);
         $order->getLastPayment(PaymentInterface::STATE_CART)->willReturn(null);
 
@@ -91,6 +102,7 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
         OrderInterface $order,
         OrderPaymentProviderInterface $orderPaymentProvider
     ) {
+        $order->getTotal()->willReturn(10);
         $order->getState()->willReturn(OrderInterface::STATE_CART);
         $order->getLastPayment(PaymentInterface::STATE_CART)->willReturn(null);
 

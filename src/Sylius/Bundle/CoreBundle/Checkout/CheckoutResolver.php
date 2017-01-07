@@ -13,7 +13,6 @@ namespace Sylius\Bundle\CoreBundle\Checkout;
 
 use SM\Factory\FactoryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -93,12 +92,6 @@ final class CheckoutResolver implements EventSubscriberInterface
             return;
         }
 
-        if (null !== $referer = $this->getReferer($request)) {
-            $event->setResponse(new RedirectResponse($referer));
-
-            return;
-        }
-
         $event->setResponse(new RedirectResponse($this->urlGenerator->generateForOrderCheckoutState($order)));
     }
 
@@ -122,7 +115,7 @@ final class CheckoutResolver implements EventSubscriberInterface
         return $request->attributes->get('_sylius')['state_machine']['graph'];
     }
 
-        /**
+    /**
      * @param Request $request
      *
      * @return string

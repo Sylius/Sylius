@@ -13,13 +13,15 @@
                 </div>
             </h1>
 
-            {% if lastPayment.method.instructions is not null %}
-                <div id="sylius-payment-method-instructions" class="ui segment">
-                    {{ lastPayment.method.instructions }}
-                </div>
+            {% if lastPayment != false %}
+                {%  if lastPayment.method.instructions is not null %}
+                    <div id="sylius-payment-method-instructions" class="ui segment">
+                        {{ lastPayment.method.instructions }}
+                    </div>
+                {% endif %}
+                <div class="ui hidden divider"></div>
+                <a href="{{ path('sylius_shop_order_show', {'tokenValue': order.tokenValue}) }}" id="#sylius-show-order" class="ui large blue button">{{ 'sylius.ui.view_your_order_or_change_payment_method'|trans }}</a>
             {% endif %}
-            <div class="ui hidden divider"></div>
-            <a href="{{ path('sylius_shop_order_show', {'tokenValue': order.tokenValue}) }}" class="ui large blue button">{{ 'sylius.ui.view_your_order_or_change_payment_method'|trans }}</a>
         </div>
     </div>
 {% endblock %}

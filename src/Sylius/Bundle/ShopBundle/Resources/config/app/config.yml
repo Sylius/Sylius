@@ -25,6 +25,8 @@ sylius_shop:
                 route: sylius_shop_checkout_select_payment
             payment_selected:
                 route: sylius_shop_checkout_complete
+            payment_skipped:
+                route: sylius_shop_checkout_complete
 
 liip_imagine:
     filter_sets:
