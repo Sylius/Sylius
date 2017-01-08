@@ -7,6 +7,7 @@
 * :doc:`/cookbook/stripe`
 * :doc:`/cookbook/api`
 * :doc:`/cookbook/images`
+* :doc:`/cookbook/images-gridfs`
 * :doc:`/cookbook/checkout`
 * :doc:`/cookbook/embedding-products`
 * :doc:`/cookbook/taxons-menu`

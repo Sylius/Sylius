@@ -13,6 +13,7 @@ Cookbook
     stripe
     api
     images
+    images-gridfs
     checkout
     embedding-products
     taxons-menu
