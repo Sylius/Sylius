@@ -250,7 +250,7 @@ class Product implements ProductInterface
     {
         Assert::isInstanceOf(
             $attribute,
-            'Sylius\Component\Product\Model\ProductAttributeValueInterface',
+            ProductAttributeValueInterface::class,
             'Attribute objects added to a Product object have to implement ProductAttributeValueInterface'
         );
 
@@ -267,7 +267,7 @@ class Product implements ProductInterface
     {
         Assert::isInstanceOf(
             $attribute,
-            'Sylius\Component\Product\Model\ProductAttributeValueInterface',
+            ProductAttributeValueInterface::class,
             'Attribute objects removed from a Product object have to implement ProductAttributeValueInterface'
         );
 
