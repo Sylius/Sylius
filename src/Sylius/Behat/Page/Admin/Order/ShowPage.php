@@ -233,6 +233,14 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
+    public function hasShippingPromotion($promotionName)
+    {
+        return $this->getElement('promotion_shipping_discounts')->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function hasTax($tax)
     {
         $taxesText = $this->getElement('taxes')->getText();
@@ -415,6 +423,14 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
+    public function getShippingPromotionData()
+    {
+        return $this->getElement('promotion_shipping_discounts')->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getRouteName()
     {
         return 'sylius_admin_order_show';
@@ -436,6 +452,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'order_state' => '#sylius-order-state',
             'payments' => '#sylius-payments',
             'promotion_discounts' => '#promotion-discounts',
+            'promotion_shipping_discounts' => '#promotion-shipping-discounts',
             'promotion_total' => '#promotion-total',
             'shipments' => '#sylius-shipments',
             'shipping_address' => '#shipping-address',

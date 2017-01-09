@@ -31,6 +31,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
+use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Webmozart\Assert\Assert;
 
@@ -909,6 +910,14 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Then :promotionName should be applied to my order shipping
+     */
+    public function shouldBeAppliedToMyOrderShipping($promotionName)
+    {
+        Assert::true($this->completePage->hasShippingPromotion($promotionName));    
+    }
+
+    /**
      * @Given my tax total should be :taxTotal
      */
     public function myTaxTotalShouldBe($taxTotal)
@@ -1321,6 +1330,17 @@ final class CheckoutContext implements Context
         Assert::false(
             $this->thankYouPage->hasChangePaymentMethodButton(),
             'There should be no button to change payment method, but it is.'
+        );
+    }
+
+    /**
+     * @Then /^(this promotion) should give "([^"]+)" discount$/
+     */
+    public function thisPromotionShouldGiveDiscount(PromotionInterface $promotion, $discount)
+    {
+        Assert::same(
+            $discount,
+            $this->completePage->getShippingPromotionDiscount($promotion->getName())
         );
     }
 
