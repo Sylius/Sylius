@@ -37,7 +37,9 @@ class SelectAttributeType extends AbstractType
         $resolver
             ->setRequired('configuration')
             ->setNormalizer('choices', function(Options $options, $value){
-                return array_flip($options['configuration']['options']);
+                $choices = array_flip($options['configuration']['options']);
+                ksort($choices);
+                return $choices;
             })
             ->setNormalizer('multiple', function(Options $options, $value){
                 return $options['configuration']['multiple'];
