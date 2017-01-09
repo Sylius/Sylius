@@ -4,11 +4,19 @@
 
 <div class="ui segment">
     {{ form_errors(form) }}
-    <div class="three fields">
+    <div class="two fields">
         {{ form_row(form.code) }}
-        {{ form_row(form.gateway) }}
         {{ form_row(form.position) }}
     </div>
+    <div class="two fields">
+        {{ form_row(form.gatewayConfig.gatewayName) }}
+        {{ form_row(form.gatewayConfig.factoryName) }}
+    </div>
+    {% if form.gatewayConfig.config is defined %}
+        <div class="fields">
+            {{ form_row(form.gatewayConfig.config) }}
+        </div>
+    {% endif %}
     {{ form_row(form.enabled) }}
     <h4 class="ui dividing header">{{ 'sylius.ui.availability'|trans }}</h4>
     {{ form_row(form.channels) }}

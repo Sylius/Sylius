@@ -17,6 +17,7 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceTranslationsType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -35,6 +36,9 @@ final class PaymentMethodType extends AbstractResourceType
             ])
             ->add('gateway', PaymentGatewayChoiceType::class, [
                 'label' => 'sylius.form.payment_method.gateway',
+                'constraints' => [
+                    new NotBlank(),
+                ],
             ])
             ->add('position', IntegerType::class, [
                 'required' => false,

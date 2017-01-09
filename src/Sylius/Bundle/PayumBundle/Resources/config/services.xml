@@ -20,11 +20,17 @@
         <import resource="services/action.xml" />
         <import resource="services/controller.xml" />
         <import resource="services/extension.xml" />
+        <import resource="services/form.xml" />
     </imports>
 
     <services>
         <service id="sylius.payum.http_client" class="Payum\Core\HttpClientInterface">
             <factory class="Payum\Core\Bridge\Guzzle\HttpClientFactory" method="create" />
+        </service>
+
+        <service id="sylius.registry.payum_gateway_config_type" class="Sylius\Component\Registry\ServiceRegistry">
+            <argument>Sylius\Bundle\PayumBundle\Form\Type\GatewayConfigurationTypeInterface</argument>
+            <argument>Payum gateway config</argument>
         </service>
     </services>
 </container>

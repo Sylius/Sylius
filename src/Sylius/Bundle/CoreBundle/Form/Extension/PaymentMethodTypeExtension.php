@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
 use Sylius\Bundle\ChannelBundle\Form\Type\ChannelChoiceType;
 use Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodType;
+use Sylius\Bundle\PayumBundle\Form\Type\GatewayConfigType;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -27,10 +28,14 @@ final class PaymentMethodTypeExtension extends AbstractTypeExtension
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->remove('gateway')
             ->add('channels', ChannelChoiceType::class, [
                 'multiple' => true,
                 'expanded' => true,
                 'label' => 'sylius.form.payment_method.channels',
+            ])
+            ->add('gatewayConfig', GatewayConfigType::class, [
+                'label' => false,
             ])
         ;
     }

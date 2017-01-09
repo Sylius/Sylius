@@ -14,6 +14,7 @@
 
     <mapped-superclass name="Sylius\Bundle\PayumBundle\Model\PaymentMethod" table="sylius_payment_method">
         <many-to-one field="gatewayConfig" target-entity="Sylius\Bundle\PayumBundle\Model\GatewayConfig">
+            <cascade><cascade-all/></cascade>
             <join-column name="gateway_config_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
         </many-to-one>
     </mapped-superclass>

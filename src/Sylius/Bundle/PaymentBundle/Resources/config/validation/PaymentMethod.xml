@@ -32,12 +32,5 @@
         <property name="translations">
             <constraint name="Valid" />
         </property>
-
-        <property name="gateway">
-            <constraint name="NotBlank">
-                <option name="message">sylius.payment_method.gateway.not_blank</option>
-                <option name="groups">sylius</option>
-            </constraint>
-        </property>
     </class>
 </constraint-mapping>
