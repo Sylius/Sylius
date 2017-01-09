@@ -28,6 +28,9 @@ sylius:
             select:
                 multiple: Multiple
                 values: Values
+                choose: Choose an option
+                min: Min entries
+                max: Max entries
             text:
                 min: Min length
                 max: Max length

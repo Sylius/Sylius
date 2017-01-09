@@ -49,6 +49,7 @@ class SelectAttributeType extends AbstractType
     {
         $resolver
             ->setRequired('configuration')
+            ->setDefault('placeholder', 'sylius.form.attribute_type_configuration.select.choose')
             ->setNormalizer('choices', function(Options $options){
                 $choices = array_flip($options['configuration']['options']);
                 ksort($choices);

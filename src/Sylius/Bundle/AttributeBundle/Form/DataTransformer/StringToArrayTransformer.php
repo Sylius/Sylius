@@ -23,7 +23,11 @@ class StringToArrayTransformer implements DataTransformerInterface
      */
     public function transform($array)
     {
-        return $array[0];
+        if (count($array) > 0) {
+            return $array[0];
+        }
+
+        return null;
     }
 
     /**
@@ -31,6 +35,10 @@ class StringToArrayTransformer implements DataTransformerInterface
      */
     public function reverseTransform($string)
     {
-        return [$string];
+        if (!is_null($string)) {
+            return [$string];
+        }
+
+        return [];
     }
 }

@@ -14,6 +14,7 @@ namespace Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Configuration;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -36,6 +37,12 @@ class SelectAttributeConfigurationType extends AbstractType
             ])
             ->add('multiple', CheckboxType::class, [
                 'label' => 'sylius.form.attribute_type_configuration.select.multiple',
+            ])
+            ->add('min', NumberType::class, [
+                'label' => 'sylius.form.attribute_type_configuration.select.min'
+            ])
+            ->add('max', NumberType::class, [
+                'label' => 'sylius.form.attribute_type_configuration.select.max'
             ])
         ;
     }

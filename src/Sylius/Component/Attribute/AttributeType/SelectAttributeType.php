@@ -12,6 +12,7 @@
 namespace Sylius\Component\Attribute\AttributeType;
 
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
+use Symfony\Component\Validator\Constraints\Count;
 use Symfony\Component\Validator\Constraints\Type;
 use Symfony\Component\Validator\Constraints\All;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
@@ -71,22 +72,19 @@ class SelectAttributeType implements AttributeTypeInterface
     {
         $validator = $context->getValidator();
 
-        if ($validationConfiguration['multiple']) {
-            return $validator->validate(
-                $value,
+        return $validator->validate(
+            $value,
+            [
                 new All([
                     new Type([
                         'type' => 'int',
                     ])
+                ]),
+                new Count([
+                    'min' => isset($validationConfiguration['min']) ? $validationConfiguration['min'] : '',
+                    'max' => isset($validationConfiguration['max']) ? $validationConfiguration['max'] : '',
                 ])
-            );
-        }
-
-        return $validator->validate(
-            $value,
-            new Type([
-                'type' => 'int',
-            ])
+            ]
         );
     }
 }
