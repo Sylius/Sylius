@@ -109,13 +109,9 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasPaymentMethodWithName(PaymentMethodInterface $paymentMethod)
+    public function getPaymentMethodName()
     {
-        if (!$this->hasElement('payment_method')) {
-            return false;
-        }
-
-        return false !== strpos($this->getElement('payment_method')->getText(), $paymentMethod->getName());
+        return $this->getElement('payment_method')->getText();
     }
 
     /**

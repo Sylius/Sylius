@@ -6,7 +6,6 @@
     <div class="content">
         <div class="header" id="sylius-payment-method">
             {{ payment.method }}
-            ({{ payment.state }})
         </div>
         <p>{{ money.format(payment.amount, payment.currencyCode) }}</p>
     </div>

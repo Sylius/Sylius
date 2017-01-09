@@ -45,11 +45,9 @@ interface CompletePageInterface extends SymfonyPageInterface
     public function hasBillingAddress(AddressInterface $address);
 
     /**
-     * @param PaymentMethodInterface $paymentMethod
-     *
      * @return bool
      */
-    public function hasPaymentMethodWithName(PaymentMethodInterface $paymentMethod);
+    public function getPaymentMethodName();
 
     /**
      * @return bool

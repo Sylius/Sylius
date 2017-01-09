@@ -19,7 +19,7 @@ use Sylius\Component\Order\StateResolver\StateResolverInterface;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class CheckoutStateResolver implements StateResolverInterface
+final class CheckoutStateResolver implements StateResolverInterface
 {
     /**
      * @var FactoryInterface
