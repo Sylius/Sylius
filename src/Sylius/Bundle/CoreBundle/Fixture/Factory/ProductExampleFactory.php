@@ -407,12 +407,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
             case ProductAttributeValueInterface::STORAGE_BOOLEAN:
                 return $this->faker->boolean;
             case ProductAttributeValueInterface::STORAGE_INTEGER:
-                switch ($productAttribute->getType()) {
-                    case SelectAttributeType::TYPE:
-                        return $this->faker->randomKey($productAttribute->getConfiguration()['options']);
-                    default:
-                        return $this->faker->numberBetween(0, 10000);
-                }
+                return $this->faker->numberBetween(0, 10000);
             case ProductAttributeValueInterface::STORAGE_FLOAT:
                 return $this->faker->randomFloat(4, 0, 10000);
             case ProductAttributeValueInterface::STORAGE_TEXT:
@@ -423,10 +418,13 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
             case ProductAttributeValueInterface::STORAGE_JSON:
                 switch ($productAttribute->getType()) {
                     case SelectAttributeType::TYPE:
-                        return array_keys($this->faker->randomElements(
-                            $productAttribute->getConfiguration()['options'],
-                            $this->faker->randomKey($productAttribute->getConfiguration()['options']) + 1
-                        ));
+                        if ($productAttribute->getConfiguration()['multiple']) {
+                            return array_keys($this->faker->randomElements(
+                                $productAttribute->getConfiguration()['options'],
+                                $this->faker->randomKey($productAttribute->getConfiguration()['options']) + 1
+                            ));
+                        }
+                        return [$this->faker->randomKey($productAttribute->getConfiguration()['options'])];
                     default:
                         throw new \BadMethodCallException();
                 }

@@ -11,8 +11,10 @@
 
 namespace Sylius\Bundle\AttributeBundle\Form\Type\AttributeType;
 
+use Sylius\Bundle\AttributeBundle\Form\DataTransformer\StringToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -32,16 +34,27 @@ class SelectAttributeType extends AbstractType
     /**
      * {@inheritdoc}
      */
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        if (!$options['configuration']['multiple']) {
+            $transformer = new StringToArrayTransformer();
+            $builder->addModelTransformer($transformer);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
             ->setRequired('configuration')
-            ->setNormalizer('choices', function(Options $options, $value){
+            ->setNormalizer('choices', function(Options $options){
                 $choices = array_flip($options['configuration']['options']);
                 ksort($choices);
                 return $choices;
             })
-            ->setNormalizer('multiple', function(Options $options, $value){
+            ->setNormalizer('multiple', function(Options $options){
                 return $options['configuration']['multiple'];
             })
         ;
