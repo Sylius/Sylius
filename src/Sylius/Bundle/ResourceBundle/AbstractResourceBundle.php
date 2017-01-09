@@ -54,7 +54,7 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
                         case ResourceBundleInterface::MAPPING_YAML:
                             $container->addCompilerPass($compilerPassClassName::$compilerPassMethod(
                                 [$this->getConfigFilesPath() => $this->getModelNamespace()],
-                                [sprintf('%s.object_manager', $this->getBundlePrefix())],
+                                [$this->getObjectManagerParameter()],
                                 sprintf('%s.driver.%s', $this->getBundlePrefix(), $driver)
                             ));
                             break;
@@ -146,5 +146,13 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
             $this->getPath(),
             strtolower($this->getDoctrineMappingDirectory())
         );
+    }
+
+    /**
+     * @return string
+     */
+    protected function getObjectManagerParameter()
+    {
+        return sprintf('%s.object_manager', $this->getBundlePrefix());
     }
 }
