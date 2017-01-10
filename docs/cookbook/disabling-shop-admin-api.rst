@@ -155,9 +155,69 @@ The part that has to be removed from this file is shown below:
 How to disable Sylius API?
 --------------------------
 
+**1. Remove SyliusApiBundle from AppKernel.**
 
+.. code-block:: php
+
+    // # app/AppKernel.php
+
+    public function registerBundles()
+    {
+        $bundles = [
+            new \Sylius\Bundle\AdminBundle\SyliusAdminBundle(),
+            new \Sylius\Bundle\ShopBundle\SyliusShopBundle(),
+
+            new \FOS\OAuthServerBundle\FOSOAuthServerBundle(),
+            // new \Sylius\Bundle\ApiBundle\SyliusApiBundle(), // - remove or leave this line commented
+
+            new \AppBundle\AppBundle(),
+        ];
+
+        return array_merge(parent::registerBundles(), $bundles);
+    }
+
+**2. Remove SyliusApiBundle's config import from ``app/config/config.yml``**
+
+Here you've got the line that should disappear from imports:
+
+.. code-block:: yaml
+
+    imports:
+    #    - { resource: "@SyliusApiBundle/Resources/config/app/config.yml" } # remove or leave this line commented
+
+**3. Remove SyliusApiBundle routing configuration from ``app/config/routing.yml``**
+
+.. code-block:: yaml
+
+    # sylius_shop:
+    #    resource: "@SyliusApiBundle/Resources/config/routing.yml" # remove or leave these lines commented
+
+**4. Remove security configuration from ``app/config/security.yml``**
+
+The part that has to be removed from this file is shown below:
+
+.. code-block:: yaml
+
+    security:
+        firewalls:
+        api:
+    #        pattern:    ^/api
+    #        fos_oauth:  true
+    #        stateless:  true
+    #        anonymous:  true
+
+**5. Remove fos_rest config from ``app/config/config.yml``**
+
+.. code-block:: yaml
+
+    fos_rest:
+        format_listener:
+            rules:
+            #    - { path: '^/api', priorities: ['json', 'xml'], fallback_format: json, prefer_extension: true } # remove or leave this line commented
+
+**Done!** There is no API in Sylius now, just admin and shop.
 
 Learn more
 ----------
 
-* ...
+* :ref:`Architecture: Division into Core, Shop, Admin and API <division-into-core-shop-admin-api>`
