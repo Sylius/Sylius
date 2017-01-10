@@ -57,7 +57,7 @@ final class GatewayConfigType extends AbstractResourceType
                 'label' => 'sylius.form.gateway_config.gateway_name',
             ])
             ->add('factoryName', TextType::class, [
-                'label' => 'sylius.form.gateway_config.gateway_name',
+                'label' => 'sylius.form.gateway_config.factory_name',
                 'disabled' => true,
                 'data' => $factory,
             ])

@@ -44,7 +44,7 @@ final class RegisterGatewayConfigTypePass implements CompilerPassInterface
             $registry->addMethodCall('register', [$attributes[0]['type'], new Reference($id)]);
         }
 
-        $gatewayFactories = array_merge($gatewayFactories, ['offline' => 'sylius.ui.gateway_factory.offline']);
+        $gatewayFactories = array_merge($gatewayFactories, ['offline' => 'sylius.payum_gateway_factory.offline']);
         ksort($gatewayFactories);
 
         $container->setParameter('sylius.gateway_factories', $gatewayFactories);

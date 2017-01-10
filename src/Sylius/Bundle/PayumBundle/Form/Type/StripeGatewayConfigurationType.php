@@ -27,16 +27,16 @@ final class StripeGatewayConfigurationType extends AbstractType implements Gatew
     {
         $builder
             ->add('secret_key', TextType::class, [
-                'label' => 'sylius.form.payment_method.gateway_configuration.stripe.secret_key',
+                'label' => 'sylius.form.gateway_configuration.stripe.secret_key',
             ])
             ->add('publishable_key', TextType::class, [
-                'label' => 'sylius.form.payment_method.gateway_configuration.stripe.publishable_key',
+                'label' => 'sylius.form.gateway_configuration.stripe.publishable_key',
             ])
             ->add('layout_template', TextType::class, [
-                'label' => 'sylius.form.payment_method.gateway_configuration.stripe.layout_template',
+                'label' => 'sylius.form.gateway_configuration.stripe.layout_template',
             ])
             ->add('obtain_token_template', TextType::class, [
-                'label' => 'sylius.form.payment_method.gateway_configuration.stripe.obtain_token_template',
+                'label' => 'sylius.form.gateway_configuration.stripe.obtain_token_template',
             ])
         ;
     }

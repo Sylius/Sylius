@@ -28,13 +28,13 @@ final class PaypalGatewayConfigurationType extends AbstractType implements Gatew
     {
         $builder
             ->add('username', TextType::class, [
-                'label' => 'sylius.form.payment_method.gateway_configuration.paypal.username',
+                'label' => 'sylius.form.gateway_configuration.paypal.username',
             ])
             ->add('password', PasswordType::class, [
-                'label' => 'sylius.form.payment_method.gateway_configuration.paypal.password',
+                'label' => 'sylius.form.gateway_configuration.paypal.password',
             ])
             ->add('signature', TextType::class, [
-                'label' => 'sylius.form.payment_method.gateway_configuration.paypal.signature',
+                'label' => 'sylius.form.gateway_configuration.paypal.signature',
             ])
         ;
     }
