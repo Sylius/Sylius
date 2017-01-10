@@ -23,7 +23,7 @@ use Sylius\Component\Order\StateResolver\StateResolverInterface;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class CheckoutStateResolverSpec extends ObjectBehavior
+final class CheckoutStateResolverSpec extends ObjectBehavior
 {
     function let(FactoryInterface $stateMachineFactory)
     {

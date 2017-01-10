@@ -24,11 +24,11 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
-use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\RouterInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -61,7 +61,7 @@ final class PayumController
     private $viewHandler;
 
     /**
-     * @var Router
+     * @var RouterInterface
      */
     private $router;
 
@@ -71,7 +71,7 @@ final class PayumController
      * @param MetadataInterface $orderMetadata
      * @param RequestConfigurationFactoryInterface $requestConfigurationFactory
      * @param ViewHandlerInterface $viewHandler
-     * @param Router $router
+     * @param RouterInterface $router
      */
     public function __construct(
         Payum $payum,
@@ -79,7 +79,7 @@ final class PayumController
         MetadataInterface $orderMetadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         ViewHandlerInterface $viewHandler,
-        Router $router
+        RouterInterface $router
     ) {
         $this->payum = $payum;
         $this->orderRepository = $orderRepository;

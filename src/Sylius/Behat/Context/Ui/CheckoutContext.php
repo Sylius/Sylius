@@ -935,9 +935,9 @@ final class CheckoutContext implements Context
      */
     public function myOrderSPaymentMethodShouldBe(PaymentMethodInterface $paymentMethod)
     {
-        Assert::true(
-            $this->completePage->hasPaymentMethodWithName($paymentMethod),
-            sprintf('I should see %s payment method, but I do not.', $paymentMethod->getName())
+        Assert::same(
+            $this->completePage->getPaymentMethodName(),
+            $paymentMethod->getName()
         );
     }
 
