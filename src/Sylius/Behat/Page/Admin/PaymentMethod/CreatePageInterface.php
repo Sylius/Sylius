@@ -33,9 +33,9 @@ interface CreatePageInterface extends BaseCreatePageInterface
     public function specifyCode($code);
 
     /**
-     * @param string $gateway
+     * @param string $gatewayName
      */
-    public function chooseGateway($gateway);
+    public function nameGateway($gatewayName);
 
     /**
      * @param string $channelName

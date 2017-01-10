@@ -38,9 +38,9 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function chooseGateway($gateway)
+    public function nameGateway($gatewayName)
     {
-        $this->getElement('gateway')->selectOption($gateway);
+        $this->getDocument()->fillField('Gateway name', $gatewayName);
     }
 
     /**

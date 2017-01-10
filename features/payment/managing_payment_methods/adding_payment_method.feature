@@ -10,10 +10,10 @@ Feature: Adding a new payment method
 
     @ui
     Scenario: Adding a new payment method
-        Given I want to create a new payment method
+        Given I want to create a new payment method with "Paypal Express Checkout" gateway factory
         When I name it "Paypal Express Checkout" in "English (United States)"
         And I specify its code as "PEC"
-        And I choose "Paypal Express Checkout" gateway
+        And I name the gateway "Paypal"
         And I configure it for username "TEST", with "TEST" password and "TEST" signature
         And I add it
         Then I should be notified that it has been successfully created
@@ -21,10 +21,10 @@ Feature: Adding a new payment method
 
     @ui
     Scenario: Adding a new payment method with description
-        Given I want to create a new payment method
+        Given I want to create a new payment method with "Paypal Express Checkout" gateway factory
         When I name it "Paypal Express Checkout" in "English (United States)"
         And I specify its code as "PEC"
-        And I choose "Paypal Express Checkout" gateway
+        And I name the gateway "Paypal"
         And I configure it for username "TEST", with "TEST" password and "TEST" signature
         And I describe it as "Payment method Paypal Express Checkout" in "English (United States)"
         And I add it
@@ -36,7 +36,7 @@ Feature: Adding a new payment method
         Given I want to create a new payment method
         When I name it "Offline" in "English (United States)"
         And I specify its code as "PEC"
-        And I choose "Offline" gateway
+        And I name the gateway "Offline"
         And I set its instruction as "Bank account: 0000 1111 2222 3333" in "English (United States)"
         And I add it
         Then I should be notified that it has been successfully created
@@ -45,10 +45,10 @@ Feature: Adding a new payment method
 
     @ui
     Scenario: Adding a new payment method for channel
-        Given I want to create a new payment method
+        Given I want to create a new payment method with "Paypal Express Checkout" gateway factory
         When I name it "Paypal Express Checkout" in "English (United States)"
         And I specify its code as "PEC"
-        And I choose "Paypal Express Checkout" gateway
+        And I name the gateway "Paypal"
         And I configure it for username "TEST", with "TEST" password and "TEST" signature
         And make it available in channel "United States"
         And I add it

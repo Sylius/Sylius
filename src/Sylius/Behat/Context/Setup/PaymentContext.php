@@ -15,6 +15,7 @@ use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Test\Services\PaymentMethodNameToGatewayConverterInterface;
+use Sylius\Component\Core\Factory\PaymentMethodFactoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Model\PaymentMethodTranslationInterface;
@@ -39,7 +40,7 @@ final class PaymentContext implements Context
     private $paymentMethodRepository;
 
     /**
-     * @var FactoryInterface
+     * @var PaymentMethodFactoryInterface
      */
     private $paymentMethodFactory;
 
@@ -49,37 +50,39 @@ final class PaymentContext implements Context
     private $paymentMethodTranslationFactory;
 
     /**
-     * @var PaymentMethodNameToGatewayConverterInterface
-     */
-    private $paymentMethodNameToGatewayConverter;
-
-    /**
      * @var ObjectManager
      */
     private $objectManager;
 
     /**
+     * @var array
+     */
+    private $gatewayFactories;
+
+    /**
      * @param SharedStorageInterface $sharedStorage
      * @param PaymentMethodRepositoryInterface $paymentMethodRepository
-     * @param FactoryInterface $paymentMethodFactory
+     * @param PaymentMethodFactoryInterface $paymentMethodFactory
      * @param FactoryInterface $paymentMethodTranslationFactory
-     * @param PaymentMethodNameToGatewayConverterInterface $paymentMethodNameToGatewayConverter
      * @param ObjectManager $objectManager
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         PaymentMethodRepositoryInterface $paymentMethodRepository,
-        FactoryInterface $paymentMethodFactory,
+        PaymentMethodFactoryInterface $paymentMethodFactory,
         FactoryInterface $paymentMethodTranslationFactory,
-        PaymentMethodNameToGatewayConverterInterface $paymentMethodNameToGatewayConverter,
         ObjectManager $objectManager
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->paymentMethodRepository = $paymentMethodRepository;
         $this->paymentMethodFactory = $paymentMethodFactory;
         $this->paymentMethodTranslationFactory = $paymentMethodTranslationFactory;
-        $this->paymentMethodNameToGatewayConverter = $paymentMethodNameToGatewayConverter;
         $this->objectManager = $objectManager;
+        $this->gatewayFactories = [
+            'offline' => 'Offline',
+            'paypal_express_checkout' => 'Paypal Express Checkout',
+            'stripe_checkout' => 'Stripe Checkout',
+        ];
     }
 
     /**
@@ -88,7 +91,7 @@ final class PaymentContext implements Context
      */
     public function storeAllowsPaying($paymentMethodName, $position = null)
     {
-        $this->createPaymentMethod($paymentMethodName, 'PM_'.$paymentMethodName, 'Payment method', true, $position);
+        $this->createPaymentMethod($paymentMethodName, 'PM_'.$paymentMethodName, 'Offline', 'Payment method', true, $position);
     }
 
     /**
@@ -96,7 +99,7 @@ final class PaymentContext implements Context
      */
     public function storeAllowsPayingForAllChannels($paymentMethodName, array $channels)
     {
-        $paymentMethod = $this->createPaymentMethod($paymentMethodName, StringInflector::nameToUppercaseCode($paymentMethodName), 'Payment method', false);
+        $paymentMethod = $this->createPaymentMethod($paymentMethodName, StringInflector::nameToUppercaseCode($paymentMethodName), 'Offline', 'Payment method', false);
 
         foreach ($channels as $channel) {
             $paymentMethod->addChannel($channel);
@@ -105,10 +108,11 @@ final class PaymentContext implements Context
 
     /**
      * @Given the store has a payment method :paymentMethodName with a code :paymentMethodCode
+     * @Given the store has a payment method :paymentMethodName with a code :paymentMethodCode and gateway factory :gatewayFactory
      */
-    public function theStoreHasAPaymentMethodWithACode($paymentMethodName, $paymentMethodCode)
+    public function theStoreHasAPaymentMethodWithACode($paymentMethodName, $paymentMethodCode, $gatewayFactory = 'Offline')
     {
-        $this->createPaymentMethod($paymentMethodName, $paymentMethodCode);
+        $this->createPaymentMethod($paymentMethodName, $paymentMethodCode, $gatewayFactory);
     }
 
     /**
@@ -152,25 +156,33 @@ final class PaymentContext implements Context
      */
     public function theStoreHasPaymentMethodNotAssignedToAnyChannel($paymentMethodName)
     {
-        $this->createPaymentMethod($paymentMethodName, 'PM_'.$paymentMethodName, 'Payment method', false);
+        $this->createPaymentMethod($paymentMethodName, 'PM_'.$paymentMethodName, 'Payment method', 'Offline', false);
     }
 
     /**
      * @param string $name
      * @param string $code
-     * @param bool $addForCurrentChannel
+     * @param string $gatewayFactory
      * @param string $description
+     * @param bool $addForCurrentChannel
+     * @param int|null $position
      *
      * @return PaymentMethodInterface
      */
-    private function createPaymentMethod($name, $code, $description = '', $addForCurrentChannel = true, $position = null)
-    {
+    private function createPaymentMethod(
+        $name,
+        $code,
+        $gatewayFactory = 'Offline',
+        $description = '',
+        $addForCurrentChannel = true,
+        $position = null
+    ) {
         /** @var PaymentMethodInterface $paymentMethod */
-        $paymentMethod = $this->paymentMethodFactory->createNew();
+        $paymentMethod = $this->paymentMethodFactory->createWithGateway(array_search($gatewayFactory, $this->gatewayFactories));
+        $paymentMethod->getGatewayConfig()->setGatewayName($gatewayFactory);
         $paymentMethod->setName(ucfirst($name));
         $paymentMethod->setCode($code);
         $paymentMethod->setPosition($position);
-        $paymentMethod->setGateway($this->paymentMethodNameToGatewayConverter->convert($name));
         $paymentMethod->setDescription($description);
 
         if ($addForCurrentChannel && $this->sharedStorage->has('channel')) {

@@ -53,10 +53,16 @@ final class ManagingPaymentMethodsContext implements Context
     private $notificationChecker;
 
     /**
+     * @var array
+     */
+    private $gatewayFactories;
+
+    /**
      * @param CreatePageInterface $createPage
      * @param IndexPageInterface $indexPage
      * @param UpdatePageInterface $updatePage
      * @param CurrentPageResolverInterface $currentPageResolver
+     * @param NotificationCheckerInterface $notificationChecker
      */
     public function __construct(
         CreatePageInterface $createPage,
@@ -70,6 +76,11 @@ final class ManagingPaymentMethodsContext implements Context
         $this->updatePage = $updatePage;
         $this->currentPageResolver = $currentPageResolver;
         $this->notificationChecker = $notificationChecker;
+        $this->gatewayFactories = [
+            'offline' => 'Offline',
+            'paypal_express_checkout' => 'Paypal Express Checkout',
+            'stripe_checkout' => 'Stripe Checkout',
+        ];
     }
 
     /**
@@ -163,10 +174,11 @@ final class ManagingPaymentMethodsContext implements Context
 
     /**
      * @Given I want to create a new payment method
+     * @Given I want to create a new payment method with :factory gateway factory
      */
-    public function iWantToCreateANewPaymentMethod()
+    public function iWantToCreateANewPaymentMethod($factory = 'Offline')
     {
-        $this->createPage->open();
+        $this->createPage->open(['factory' => array_search($factory, $this->gatewayFactories)]);
     }
 
     /**
@@ -394,6 +406,17 @@ final class ManagingPaymentMethodsContext implements Context
         $this->iBrowsePaymentMethods();
 
         Assert::true($this->indexPage->isSingleResourceOnPage([$element => $code]));
+    }
+
+    /**
+     * @When I name the gateway :gatewayName
+     */
+    public function iNameTheGateway($gatewayName)
+    {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+
+        $currentPage->nameGateway($gatewayName);
     }
 
     /**

@@ -7,7 +7,7 @@ Feature: Sorting listed payment methods
     Background:
         Given the store operates on a single channel in "United States"
         And that channel allows to shop using "English (United States)" and "Polish (Poland)" locales
-        And the store has a payment method "Paypal Express Checkout" with a code "express_checkout"
+        And the store has a payment method "Paypal Express Checkout" with a code "express_checkout" and gateway factory "Paypal Express Checkout"
         And this payment method is named "Ekspresowy Paypal" in the "Polish (Poland)" locale
         And the store has a payment method "Offline" with a code "offline"
         And this payment method is named "Płatność Offline" in the "Polish (Poland)" locale

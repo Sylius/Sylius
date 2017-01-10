@@ -28,9 +28,9 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function nameIt($name, $languageCode);
 
     /**
-     * @param string $gateway
+     * @param string $gatewayName
      */
-    public function chooseGateway($gateway);
+    public function nameGateway($gatewayName);
 
     /**
      * @param string $username
@@ -51,6 +51,11 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
      * @return bool
      */
     public function isCodeDisabled();
+
+    /**
+     * @return bool
+     */
+    public function isFactoryNameFieldDisabled();
 
     /**
      * @return bool

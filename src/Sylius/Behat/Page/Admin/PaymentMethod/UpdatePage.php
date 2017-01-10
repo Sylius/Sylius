@@ -26,9 +26,9 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function chooseGateway($gateway)
+    public function nameGateway($gatewayName)
     {
-        $this->getElement('gateway')->selectOption($gateway);
+        $this->getDocument()->fillField('Gateway name', $gatewayName);
     }
 
     /**
@@ -74,6 +74,14 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function isFactoryNameFieldDisabled()
+    {
+        return 'disabled' === $this->getElement('factory_name')->getAttribute('disabled');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function isAvailableInChannel($channelName)
     {
         return $this->getElement('channel', ['%channel%' => $channelName])->hasAttribute('checked');
@@ -112,6 +120,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'channel' => '.checkbox:contains("%channel%") input',
             'code' => '#sylius_payment_method_code',
             'enabled' => '#sylius_payment_method_enabled',
+            'factory_name' => '#sylius_payment_method_gatewayConfig_factoryName',
             'gateway' => '#sylius_payment_method_gateway',
             'instructions' => '#sylius_payment_method_translations_%language%_instructions',
             'name' => '#sylius_payment_method_translations_en_US_name',
