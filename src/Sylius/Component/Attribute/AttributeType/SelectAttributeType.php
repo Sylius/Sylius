@@ -72,19 +72,26 @@ class SelectAttributeType implements AttributeTypeInterface
     {
         $validator = $context->getValidator();
 
-        return $validator->validate(
-            $value,
-            [
-                new All([
-                    new Type([
-                        'type' => 'int',
-                    ])
-                ]),
-                new Count([
-                    'min' => isset($validationConfiguration['min']) ? $validationConfiguration['min'] : '',
-                    'max' => isset($validationConfiguration['max']) ? $validationConfiguration['max'] : '',
+        $constraints = [
+            new All([
+                new Type([
+                    'type' => 'int',
                 ])
-            ]
-        );
+            ]),
+        ];
+
+        if (isset($validationConfiguration['min']) && !empty($validationConfiguration['min'])) {
+            $constraints[] = new Count([
+                'min' => $validationConfiguration['min'],
+            ]);
+        }
+
+        if (isset($validationConfiguration['max']) && !empty($validationConfiguration['max'])) {
+            $constraints[] = new Count([
+                'max' => $validationConfiguration['max'],
+            ]);
+        }
+
+        return $validator->validate($value, $constraints);
     }
 }
