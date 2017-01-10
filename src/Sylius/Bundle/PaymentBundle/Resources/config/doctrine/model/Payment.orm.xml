@@ -20,7 +20,7 @@
         </id>
 
         <many-to-one field="method" target-entity="Sylius\Component\Payment\Model\PaymentMethodInterface">
-            <join-column name="method_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
+            <join-column name="method_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
 
         <field name="currencyCode" column="currency_code" length="3" type="string" />
