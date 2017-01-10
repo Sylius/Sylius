@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
+use Sylius\Component\Core\Factory\PaymentMethodFactoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
@@ -27,7 +28,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class PaymentMethodExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     /**
-     * @var FactoryInterface
+     * @var PaymentMethodFactoryInterface
      */
     private $paymentMethodFactory;
 
@@ -52,12 +53,12 @@ class PaymentMethodExampleFactory extends AbstractExampleFactory implements Exam
     private $optionsResolver;
 
     /**
-     * @param FactoryInterface $paymentMethodFactory
+     * @param PaymentMethodFactoryInterface $paymentMethodFactory
      * @param RepositoryInterface $localeRepository
      * @param ChannelRepositoryInterface $channelRepository
      */
     public function __construct(
-        FactoryInterface $paymentMethodFactory,
+        PaymentMethodFactoryInterface $paymentMethodFactory,
         RepositoryInterface $localeRepository,
         ChannelRepositoryInterface $channelRepository
     ) {
@@ -78,10 +79,11 @@ class PaymentMethodExampleFactory extends AbstractExampleFactory implements Exam
         $options = $this->optionsResolver->resolve($options);
 
         /** @var PaymentMethodInterface $paymentMethod */
-        $paymentMethod = $this->paymentMethodFactory->createNew();
+        $paymentMethod = $this->paymentMethodFactory->createWithGateway($options['gatewayFactory']);
+        $paymentMethod->getGatewayConfig()->setGatewayName($options['gatewayName']);
+        $paymentMethod->getGatewayConfig()->setConfig($options['gatewayConfig']);
 
         $paymentMethod->setCode($options['code']);
-        $paymentMethod->setGateway($options['gateway']);
         $paymentMethod->setEnabled($options['enabled']);
 
         foreach ($this->getLocales() as $localeCode) {
@@ -114,7 +116,9 @@ class PaymentMethodExampleFactory extends AbstractExampleFactory implements Exam
             ->setDefault('description', function (Options $options) {
                 return $this->faker->sentence();
             })
-            ->setDefault('gateway', 'offline')
+            ->setDefault('gatewayName', 'Offline')
+            ->setDefault('gatewayFactory', 'offline')
+            ->setDefault('gatewayConfig', [])
             ->setDefault('enabled', function (Options $options) {
                 return $this->faker->boolean(90);
             })
