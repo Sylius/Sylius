@@ -84,13 +84,76 @@ The part that has to be removed from this file is shown below:
 
 **Done!** There is no shop in Sylius now, just admin and API.
 
+How to disable Sylius Admin?
+----------------------------
+
+**1. Remove SyliusAdminBundle from AppKernel.**
+
+.. code-block:: php
+
+    // # app/AppKernel.php
+
+    public function registerBundles()
+    {
+        $bundles = [
+            // new \Sylius\Bundle\AdminBundle\SyliusAdminBundle(), // - remove or leave this line commented
+            new \Sylius\Bundle\ShopBundle\SyliusShopBundle(),
+
+            new \FOS\OAuthServerBundle\FOSOAuthServerBundle(),
+            new \Sylius\Bundle\ApiBundle\SyliusApiBundle(),
+
+            new \AppBundle\AppBundle(),
+        ];
+
+        return array_merge(parent::registerBundles(), $bundles);
+    }
+
+**2. Remove SyliusAdminBundle's config import from ``app/config/config.yml``**
+
+Here you've got the line that should disappear from imports:
+
+.. code-block:: yaml
+
+    imports:
+    #    - { resource: "@SyliusAdminBundle/Resources/config/app/config.yml" } # remove or leave this line commented
+
+**3. Remove SyliusAdminBundle routing configuration from ``app/config/routing.yml``**
+
+.. code-block:: yaml
+
+    #    sylius_shop:
+    #        resource: "@SyliusAdminBundle/Resources/config/routing.yml"
+
+**4. Remove security configuration from ``app/config/security.yml``**
+
+The part that has to be removed from this file is shown below:
+
+.. code-block:: yaml
+
+    security:
+        firewalls:
+    # Delete or leave this part commented
+    #       admin:
+    #            switch_user: true
+    #            context: admin
+    #            pattern: /admin(?:/.*)?$
+    #            form_login:
+    #                provider: sylius_admin_user_provider
+    #                login_path: sylius_admin_login
+    #                check_path: sylius_admin_login_check
+    #                failure_path: sylius_admin_login
+    #                default_target_path: sylius_admin_dashboard
+    #                use_forward: false
+    #                use_referer: true
+    #            logout:
+    #                path: sylius_admin_logout
+    #                target: sylius_admin_login
+    #            anonymous: true
+
+**Done!** There is no admin in Sylius now, just api and shop.
+
 How to disable Sylius API?
 --------------------------
-
-
-
-How to disable Sylius admin?
-----------------------------
 
 
 
