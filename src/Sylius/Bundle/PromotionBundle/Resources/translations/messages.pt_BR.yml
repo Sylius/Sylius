@@ -19,8 +19,10 @@ sylius:
         promotion_action:
             type: Tipo
         promotion_coupon:
+            expires_at: Expira em
             usage_limit: Limite de utilização
         promotion_coupon_generator_instruction:
+            expires_at: Expira em
             usage_limit: Limite de utilização
         promotion_rule:
             cart_quantity_configuration:

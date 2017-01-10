@@ -41,6 +41,9 @@ sylius:
             unique: Este idioma ya existe.
         enabled:
             cannot_disable_base: El código de idioma base no se puede desactivar.
+    product:
+        variants:
+            all_prices_defined: Debes definir antes el precio de cada variante de producto para los canales recién asignados.
     product_attribute:
         invalid: La posición debe ser un número entero.
     product_image:
@@ -70,6 +73,8 @@ sylius:
         depth:
             min: El fondo no puede ser negativo.
             invalid: El fondo debe ser un número.
+        channel_pricing:
+            all_defined: 'Debes definir el precio para cada canal.'
     product_translation:
         short_description:
             max: Breve descripción. No debe superar {{ limit }} caractéres.

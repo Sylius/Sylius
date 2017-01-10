@@ -11,6 +11,9 @@ sylius:
             invalid: Cet e-mail n'est pas valide.
             max: L'e-mail ne doit pas contenir plus de {{ limit }} caractères.
             min: L'e-mail doit contenir au moins {{ limit }} caractères.
+    channel_pricing:
+        price:
+            not_blank: Veuillez saisir un prix.
     checkout:
         shipping_method:
             not_blank: Veuillez sélectionner un mode de livraison.
@@ -18,6 +21,8 @@ sylius:
         email:
             invalid: Cet e-mail n'est pas valide.
             not_blank: Veuillez saisir votre adresse email.
+        message:
+            not_blank: Veuillez saisir votre message.
     currency:
         enabled:
             cannot_disable_base: La devise de base ne peut pas être désactivée.

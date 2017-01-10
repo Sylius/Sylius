@@ -15,9 +15,12 @@ sylius:
             priority: 优先级
             rules: 規則
             starts_at: 开始于
+            usage_limit: 使用次数
         promotion_action:
             fixed_discount_configuration:
                 amount: 折扣金额
+            percentage_discount_configuration:
+                percentage: 折扣比例
             type: 类型
         promotion_coupon:
             expires_at: 到期时间
@@ -33,10 +36,15 @@ sylius:
             cart_quantity_configuration:
                 count: 计数
                 equal: 等于
+            contains_product_configuration:
+                exclude: 不包括：
             item_total_configuration:
                 amount: 金额
             nth_order_configuration:
                 nth: 订单数
             shipping_country_configuration:
                 country: 国家
+            taxonomy_configuration:
+                exclude: 不包括：
+                taxons: 分类
             type: 类型
