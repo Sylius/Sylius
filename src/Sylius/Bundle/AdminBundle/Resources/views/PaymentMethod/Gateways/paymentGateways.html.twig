@@ -1,0 +1,7 @@
+{% for name, gateway in gatewayFactories %}
+    {% set createRouteName = metadata.applicationName~'_admin_'~metadata.name~'_create' %}
+    <a href="{{ path(createRouteName, { 'factory': name }) }}" id="{{ name }}" class="item">
+        {% set label = 'sylius.form.payum_gateway.' ~ name %}
+        {{ label|trans }}
+    </a>
+{% endfor %}

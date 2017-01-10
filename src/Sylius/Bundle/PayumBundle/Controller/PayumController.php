@@ -23,6 +23,7 @@ use Sylius\Bundle\ResourceBundle\Controller\ViewHandlerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -44,6 +45,11 @@ final class PayumController
      * @var OrderRepositoryInterface
      */
     private $orderRepository;
+
+    /**
+     * @var ServiceRegistryInterface
+     */
+    private $gatewayConfigurationTypeRegistry;
 
     /**
      * @var MetadataInterface
@@ -68,6 +74,7 @@ final class PayumController
     /**
      * @param Payum $payum
      * @param OrderRepositoryInterface $orderRepository
+     * @param ServiceRegistryInterface $gatewayConfigurationTypeRegistry
      * @param MetadataInterface $orderMetadata
      * @param RequestConfigurationFactoryInterface $requestConfigurationFactory
      * @param ViewHandlerInterface $viewHandler
@@ -76,6 +83,7 @@ final class PayumController
     public function __construct(
         Payum $payum,
         OrderRepositoryInterface $orderRepository,
+        ServiceRegistryInterface $gatewayConfigurationTypeRegistry,
         MetadataInterface $orderMetadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         ViewHandlerInterface $viewHandler,
@@ -83,6 +91,7 @@ final class PayumController
     ) {
         $this->payum = $payum;
         $this->orderRepository = $orderRepository;
+        $this->gatewayConfigurationTypeRegistry = $gatewayConfigurationTypeRegistry;
         $this->orderMetadata = $orderMetadata;
         $this->requestConfigurationFactory = $requestConfigurationFactory;
         $this->viewHandler = $viewHandler;

@@ -20,9 +20,9 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 interface PaymentMethodFactoryInterface extends FactoryInterface
 {
     /**
-     * @param string $gateway
+     * @param string $gatewayFactory
      *
      * @return PaymentMethodInterface
      */
-    public function createWithGateway($gateway);
+    public function createWithGateway($gatewayFactory);
 }

@@ -30,19 +30,23 @@ final class RegisterGatewayConfigTypePass implements CompilerPassInterface
         }
 
         $registry = $container->getDefinition('sylius.registry.payum_gateway_config_type');
-        $actions = [];
+        $gatewayFactories = [];
 
         $gatewayConfigurationTypes = $container->findTaggedServiceIds('sylius.gateway_configuration_type');
-        ksort($gatewayConfigurationTypes);
 
         foreach ($gatewayConfigurationTypes as $id => $attributes) {
             if (!isset($attributes[0]['type']) || !isset($attributes[0]['label'])) {
                 throw new \InvalidArgumentException('Tagged gateway configuration type needs to have `type` and `label` attributes.');
             }
 
-            $actions[$attributes[0]['type']] = $attributes[0]['label'];
+            $gatewayFactories[$attributes[0]['type']] = $attributes[0]['label'];
 
             $registry->addMethodCall('register', [$attributes[0]['type'], new Reference($id)]);
         }
+
+        $gatewayFactories = array_merge($gatewayFactories, ['offline' => 'sylius.ui.gateway_factory.offline']);
+        ksort($gatewayFactories);
+
+        $container->setParameter('sylius.gateway_factories', $gatewayFactories);
     }
 }
