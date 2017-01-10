@@ -81,10 +81,12 @@ final class SyliusUserExtension extends AbstractResourceExtension
     private function createServices(array $resources, ContainerBuilder $container)
     {
         foreach ($resources as $userType => $config) {
+            $userClass = $config['user']['classes']['model'];
+
             $this->createTokenGenerators($userType, $config['user'], $container);
             $this->createReloaders($userType, $container);
-            $this->createLastLoginListeners($userType, $container);
-            $this->createProviders($userType, $config['user']['classes']['model'], $container);
+            $this->createLastLoginListeners($userType, $userClass, $container);
+            $this->createProviders($userType, $userClass, $container);
             $this->createUserDeleteListeners($userType, $container);
         }
     }
@@ -203,15 +205,16 @@ final class SyliusUserExtension extends AbstractResourceExtension
 
     /**
      * @param string $userType
+     * @param string $userClass
      * @param ContainerBuilder $container
      */
-    private function createLastLoginListeners($userType, ContainerBuilder $container)
+    private function createLastLoginListeners($userType, $userClass, ContainerBuilder $container)
     {
         $managerServiceId = sprintf('sylius.manager.%s_user', $userType);
         $lastLoginListenerServiceId = sprintf('sylius.listener.%s_user_last_login', $userType);
 
         $lastLoginListenerDefinition = new Definition(UserLastLoginSubscriber::class);
-        $lastLoginListenerDefinition->addArgument(new Reference($managerServiceId));
+        $lastLoginListenerDefinition->setArguments([new Reference($managerServiceId), $userClass]);
         $lastLoginListenerDefinition->addTag('kernel.event_subscriber');
         $container->setDefinition($lastLoginListenerServiceId, $lastLoginListenerDefinition);
     }

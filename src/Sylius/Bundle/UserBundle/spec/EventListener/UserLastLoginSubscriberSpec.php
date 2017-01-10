@@ -17,17 +17,17 @@ use Prophecy\Argument;
 use Sylius\Bundle\UserBundle\Event\UserEvent;
 use Sylius\Bundle\UserBundle\EventListener\UserLastLoginSubscriber;
 use Sylius\Bundle\UserBundle\UserEvents;
-use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\Security\Http\SecurityEvents;
+use Sylius\Component\User\Model\UserInterface;
 
 final class UserLastLoginSubscriberSpec extends ObjectBehavior
 {
     function let(ObjectManager $userManager)
     {
-        $this->beConstructedWith($userManager);
+        $this->beConstructedWith($userManager, 'Sylius\Component\User\Model\UserInterface');
     }
 
     function it_is_initializable()
