@@ -12,6 +12,7 @@ Cookbook
     paypal
     stripe
     api
+    disabling-shop-admin-api
     images
     checkout
     embedding-products

@@ -81,6 +81,8 @@ Before you start using Sylius you will need to decide whether you will need a fu
 to build something very custom, maybe smaller, with different features.
 But of course the platform itself is highly flexible and can be easily customized to meet all business requirements you may have.
 
+.. _division-into-core-shop-admin-api:
+
 Division into Core, Admin, Shop, Api
 ------------------------------------
 
