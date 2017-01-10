@@ -15,10 +15,12 @@ sylius:
             payment_method: 付款方式
             shipping_method: 配送方式
         promotion:
-            channels: 频道
+            channels: 门店
         promotion_action:
             add_product_configuration:
                 product: 产品
+        promotion_coupon:
+            per_customer_usage_limit: 每个客户使用次数
         group:
             name: 名称
             roles: 角色
@@ -30,6 +32,7 @@ sylius:
             currencies: 货币
             shipping_methods: 发货方式
             payment_methods: 支付方式
+            tax_calculation_strategy: 税收策略
             tax_zone_default: 默认税区
             theme: 主题
             hostname: 主机名
@@ -116,13 +119,24 @@ sylius:
             type: 关联类型
         product_association_type:
             name: 名称
+        promotion_filter:
+            products: 商品
+            taxons: 分类
         promotion_rule:
+            has_taxon:
+                taxons: 分类
+            product:
+                products: 商品
             total_of_items_from_taxon:
                 taxon: 分类
+                amount: 金额
         payment_method:
             channels: 频道
+        product_attribute:
+            position: 优先级
         zone:
             scopes:
+                shipping: 运费
                 tax: 税收
     installer:
         extensions:
@@ -178,3 +192,6 @@ sylius:
                 header: 过时的时区
                 help: '时区%timezone%已被否决。修复您的 php.ini 文件 （不推荐使用的时区 http://php.net/manual/en/timezones.others.php 的列表）。'
             version: PHP 版本
+    payum_gateway:
+        cash_on_delivery: 货到付款
+        offline: 现金支付

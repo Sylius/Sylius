@@ -31,3 +31,4 @@ sylius:
             enabled: 已启用
             gateway: 网关
             name: 名称
+            position: 优先级

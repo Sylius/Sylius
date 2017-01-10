@@ -3,4 +3,8 @@
 
 sylius:
     payment:
+        cancelled: 'Le paiement a été annulé.'
+        completed: 'Le paiement a été effectué.'
+        failed: 'Le paiement a échoué.'
+        processing: 'Le paiement est en cours de traitement.'
         refunded: 'Le paiement a été remboursé avec succès.'

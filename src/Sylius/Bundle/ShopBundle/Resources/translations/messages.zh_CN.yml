@@ -5,5 +5,9 @@ sylius:
     menu:
         shop:
             account:
+                address_book: '地址管理'
                 change_password: '更改密码'
-                dashboard: '仪表板'
+                dashboard: '统计'
+                header: '个人中心'
+                order_history: '我的订单'
+                personal_information: '个人信息'

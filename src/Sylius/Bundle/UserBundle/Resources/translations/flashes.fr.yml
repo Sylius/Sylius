@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    user:
+        expire_password_reset_token: 'Le jeton de réinitialisation de mot de passe a expiré.'
+        change_password: 'Votre mot de passe a été modifié avec succès!'
+        reset_password: 'Votre mot de passe a été réinitialisé avec succès!'
