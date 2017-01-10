@@ -116,6 +116,25 @@ final class PaymentContext implements Context
     }
 
     /**
+     * @Given /^gateway of (this payment method) is configured with username "([^"]+)", password "([^"]+)" and "([^"]+)" signature$/
+     */
+    public function gatewayOfThisPaymentMethodIsConfiguredWithUsernamePasswordAndSignature(
+        PaymentMethodInterface $paymentMethod,
+        $username,
+        $password,
+        $signature
+    ) {
+        $paymentMethod->getGatewayConfig()->setConfig([
+            'username' => $username,
+            'password' => $password,
+            'signature' => $signature,
+            'sandbox' => true,
+        ]);
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @Given /^(this payment method) is named "([^"]+)" in the "([^"]+)" locale$/
      */
     public function thisPaymentMethodIsNamedIn(PaymentMethodInterface $paymentMethod, $name, $locale)
@@ -179,7 +198,7 @@ final class PaymentContext implements Context
     ) {
         /** @var PaymentMethodInterface $paymentMethod */
         $paymentMethod = $this->paymentMethodFactory->createWithGateway(array_search($gatewayFactory, $this->gatewayFactories));
-        $paymentMethod->getGatewayConfig()->setGatewayName($gatewayFactory);
+        $paymentMethod->getGatewayConfig()->setGatewayName(array_search($gatewayFactory, $this->gatewayFactories));
         $paymentMethod->setName(ucfirst($name));
         $paymentMethod->setCode($code);
         $paymentMethod->setPosition($position);

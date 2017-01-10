@@ -126,7 +126,7 @@ final class PayumController
         }
 
         $captureToken = $this->getTokenFactory()->createCaptureToken(
-            $payment->getMethod()->getGateway(),
+            $payment->getMethod()->getGatewayConfig()->getGatewayName(),
             $payment,
             isset($options['route']) ? $options['route'] : null,
             isset($options['parameters']) ? $options['parameters'] : []

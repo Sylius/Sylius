@@ -7,9 +7,10 @@ Feature: Paying with paypal during checkout
     Background:
         Given the store operates on a single channel in "United States"
         And there is a user "john@example.com" identified by "password123"
+        And the store has a payment method "PayPal Express Checkout" with a code "PAYPAL" and gateway factory "Paypal Express Checkout"
+        And gateway of this payment method is configured with username "TEST", password "TEST" and "TEST" signature
         And the store has a product "PHP T-Shirt" priced at "$19.99"
         And the store ships everywhere for free
-        And the store allows paying "PayPal Express Checkout"
         And I am logged in as "john@example.com"
 
     @ui
