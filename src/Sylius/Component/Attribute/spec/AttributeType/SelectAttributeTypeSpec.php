@@ -18,7 +18,7 @@ use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
 /**
  * @author Laurent Paganin-Gioanni <l.paganin@algo-factory.com>
  */
-class SelectAttributeTypeSpec extends ObjectBehavior
+final class SelectAttributeTypeSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
