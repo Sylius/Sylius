@@ -11,7 +11,6 @@
 
 namespace Sylius\Component\Core\Factory;
 
-use Payum\Core\Model\GatewayConfigInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
@@ -53,7 +52,6 @@ final class PaymentMethodFactory implements PaymentMethodFactoryInterface
      */
     public function createWithGateway($gatewayFactory)
     {
-        /** @var GatewayConfigInterface $gatewayConfig */
         $gatewayConfig = $this->gatewayConfigFactory->createNew();
         $gatewayConfig->setFactoryName($gatewayFactory);
 

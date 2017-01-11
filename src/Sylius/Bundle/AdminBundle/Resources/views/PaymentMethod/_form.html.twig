@@ -12,10 +12,13 @@
         {{ form_row(form.gatewayConfig.gatewayName) }}
         {{ form_row(form.gatewayConfig.factoryName) }}
     </div>
+    <h4 class="ui dividing header">{{ 'sylius.ui.gateway_configuration'|trans }}</h4>
     {% if form.gatewayConfig.config is defined %}
-        <div class="fields">
-            {{ form_row(form.gatewayConfig.config) }}
-        </div>
+        {% for field in form.gatewayConfig.config %}
+            {% if loop.index is odd %}<div class="two fields">{% endif %}
+                {{ form_row(field) }}
+            {% if loop.index is even %}</div>{% endif %}
+        {% endfor %}
     {% endif %}
     {{ form_row(form.enabled) }}
     <h4 class="ui dividing header">{{ 'sylius.ui.availability'|trans }}</h4>
