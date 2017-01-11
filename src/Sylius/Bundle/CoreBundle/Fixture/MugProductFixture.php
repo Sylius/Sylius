@@ -111,7 +111,7 @@ class MugProductFixture extends AbstractFixture
                 'type' => SelectAttributeType::TYPE,
                 'configuration' => [
                     'multiple' => false,
-                    'options' => $mugMaterials,
+                    'choices' => $mugMaterials,
                 ]
             ],
         ]]);

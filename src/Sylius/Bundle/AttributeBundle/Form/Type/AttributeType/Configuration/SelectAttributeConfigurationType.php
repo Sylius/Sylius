@@ -29,7 +29,7 @@ class SelectAttributeConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('options', CollectionType::class, [
+            ->add('choices', CollectionType::class, [
                 'entry_type' => TextType::class,
                 'label' => 'sylius.form.attribute_type_configuration.select.values',
                 'allow_add' => true,

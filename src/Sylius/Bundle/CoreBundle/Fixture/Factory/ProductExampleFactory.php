@@ -416,17 +416,15 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
             case ProductAttributeValueInterface::STORAGE_DATETIME:
                 return $this->faker->dateTimeThisCentury;
             case ProductAttributeValueInterface::STORAGE_JSON:
-                switch ($productAttribute->getType()) {
-                    case SelectAttributeType::TYPE:
-                        if ($productAttribute->getConfiguration()['multiple']) {
-                            return array_keys($this->faker->randomElements(
-                                $productAttribute->getConfiguration()['options'],
-                                $this->faker->randomKey($productAttribute->getConfiguration()['options']) + 1
-                            ));
-                        }
-                        return [$this->faker->randomKey($productAttribute->getConfiguration()['options'])];
-                    default:
-                        throw new \BadMethodCallException();
+                if ($productAttribute->getType() == SelectAttributeType::TYPE) {
+                    if ($productAttribute->getConfiguration()['multiple']) {
+                        return array_keys($this->faker->randomElements(
+                            $productAttribute->getConfiguration()['choices'],
+                            $this->faker->randomKey($productAttribute->getConfiguration()['choices']) + 1
+                        ));
+                    }
+
+                    return [$this->faker->randomKey($productAttribute->getConfiguration()['choices'])];
                 }
             default:
                 throw new \BadMethodCallException();

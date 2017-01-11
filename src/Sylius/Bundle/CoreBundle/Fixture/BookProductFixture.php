@@ -107,7 +107,7 @@ class BookProductFixture extends AbstractFixture
                 'type' => SelectAttributeType::TYPE,
                 'configuration' => [
                     'multiple' => true,
-                    'options' => $bookGenres,
+                    'choices' => $bookGenres,
                 ]
             ],
         ]]);

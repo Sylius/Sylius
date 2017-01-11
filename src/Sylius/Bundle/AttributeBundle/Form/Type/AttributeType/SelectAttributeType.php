@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\AttributeBundle\Form\Type\AttributeType;
 
-use Sylius\Bundle\AttributeBundle\Form\DataTransformer\StringToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\Options;
@@ -21,7 +21,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Laurent Paganin-Gioanni <l.paganin@algo-factory.com>
  */
-class SelectAttributeType extends AbstractType
+final class SelectAttributeType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -36,9 +36,25 @@ class SelectAttributeType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        if (!$options['configuration']['multiple']) {
-            $transformer = new StringToArrayTransformer();
-            $builder->addModelTransformer($transformer);
+        if (is_array($options['configuration'])
+            && isset($options['configuration']['multiple'])
+            && !$options['configuration']['multiple']) {
+            $builder->addModelTransformer(new CallbackTransformer(
+                function($array) {
+                    if (count($array) > 0) {
+                        return $array[0];
+                    }
+
+                    return null;
+                },
+                function($string) {
+                    if (!is_null($string)) {
+                        return [$string];
+                    }
+
+                    return [];
+                }
+            ));
         }
     }
 
@@ -51,12 +67,23 @@ class SelectAttributeType extends AbstractType
             ->setRequired('configuration')
             ->setDefault('placeholder', 'sylius.form.attribute_type_configuration.select.choose')
             ->setNormalizer('choices', function(Options $options){
-                $choices = array_flip($options['configuration']['options']);
-                ksort($choices);
-                return $choices;
+                if (is_array($options['configuration'])
+                    && isset($options['configuration']['choices'])
+                    && is_array($options['configuration']['choices'])) {
+                    $choices = array_flip($options['configuration']['choices']);
+                    ksort($choices);
+
+                    return $choices;
+                }
+
+                return [];
             })
             ->setNormalizer('multiple', function(Options $options){
-                return $options['configuration']['multiple'];
+                if (is_array($options['configuration']) && isset($options['configuration']['multiple'])) {
+                    return $options['configuration']['multiple'];
+                }
+
+                return false;
             })
         ;
     }
