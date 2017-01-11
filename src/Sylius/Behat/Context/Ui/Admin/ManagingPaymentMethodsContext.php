@@ -473,4 +473,19 @@ final class ManagingPaymentMethodsContext implements Context
     {
         // Intentionally left blank to fulfill context expectation
     }
+
+    /**
+     * @Given I configure it with :secretKey secret key, :publishableKey publishable key, :layoutTemplate layout template and :obtainTokenTemplate obtain token template
+     */
+    public function iConfigureItWithSecretKeyPublishableKeyLayoutTemplateAndObtainTokenTemplate(
+        $secretKey,
+        $publishableKey,
+        $layoutTemplate,
+        $obtainTokenTemplate
+    ) {
+        $this->createPage->setStripeSecretKey($secretKey);
+        $this->createPage->setStripePublishableKey($publishableKey);
+        $this->createPage->setStripeLayoutTemplate($layoutTemplate);
+        $this->createPage->setStripeObtainTokenTemplate($obtainTokenTemplate);
+    }
 }

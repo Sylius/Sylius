@@ -70,6 +70,26 @@ interface CreatePageInterface extends BaseCreatePageInterface
     public function setPaypalGatewaySignature($signature);
 
     /**
+     * @param string $secretKey
+     */
+    public function setStripeSecretKey($secretKey);
+
+    /**
+     * @param string $publishableKey
+     */
+    public function setStripePublishableKey($publishableKey);
+
+    /**
+     * @param string $layoutTemplate
+     */
+    public function setStripeLayoutTemplate($layoutTemplate);
+
+    /**
+     * @param string $obtainTokenTemplate
+     */
+    public function setStripeObtainTokenTemplate($obtainTokenTemplate);
+
+    /**
      * @return bool
      */
     public function isCodeDisabled();

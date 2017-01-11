@@ -98,6 +98,38 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function setStripeSecretKey($secretKey)
+    {
+        $this->getDocument()->fillField('Secret key', $secretKey);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setStripePublishableKey($publishableKey)
+    {
+        $this->getDocument()->fillField('Publishable key', $publishableKey);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setStripeLayoutTemplate($layoutTemplate)
+    {
+        $this->getDocument()->fillField('Layout template', $layoutTemplate);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setStripeObtainTokenTemplate($obtainTokenTemplate)
+    {
+        $this->getDocument()->fillField('Obtain token template', $obtainTokenTemplate);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function isPaymentMethodEnabled()
     {
         return (bool) $this->getToggleableElement()->getValue();
