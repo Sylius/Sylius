@@ -35,10 +35,6 @@ Having these parameters defined you can configure the gateway inside the ``app/c
                 signature: "%paypal.express_checkout.signature%"
                 sandbox: "%paypal.express_checkout.sandbox%"
 
-    sylius_payment:
-        gateways:
-            paypal_express_checkout: Paypal Express Checkout
-
 .. code-block:: yaml
 
     # app/config/config.yml
@@ -48,7 +44,7 @@ Having these parameters defined you can configure the gateway inside the ``app/c
 Add a payment method with the Paypal Expresss gateway in the Admin Panel
 ------------------------------------------------------------------------
 
-* Create a new payment method and choose the ``Paypal Express Checkout`` gateway for it.
+* Create a new payment method, choose the ``Paypal Express Checkout`` gateway for it and enable it in chosen channels.
 
 Go to the ``http://localhost:8000/admin/payment-methods/new`` url.
 
@@ -57,19 +53,10 @@ Go to the ``http://localhost:8000/admin/payment-methods/new`` url.
 
 Save the new method.
 
-* Add the new method to a channel.
-
-Go to the ``http://localhost:8000/admin/channels`` url.
-
-Choose one of your channels and edit it.
-
-.. image:: ../_images/paypal_express_channel.png
-    :align: center
-
 Choosing Paypal Express method in Checkout
 ------------------------------------------
 
-From now on Paypal Express will be available in Checkout in the channel you have added it to.
+From now on Paypal Express will be available in Checkout in the channel you have created it for.
 
 .. image:: ../_images/paypal_express_checkout.png
     :align: center
