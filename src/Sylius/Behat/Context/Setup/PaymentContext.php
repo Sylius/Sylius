@@ -124,12 +124,18 @@ final class PaymentContext implements Context
         $password,
         $signature
     ) {
-        $paymentMethod->getGatewayConfig()->setConfig([
+        $config = [
             'username' => $username,
             'password' => $password,
             'signature' => $signature,
             'sandbox' => true,
-        ]);
+        ];
+
+        if ('paypal_express_checkout' === $paymentMethod->getGatewayConfig()->getFactoryName()) {
+            $config = array_merge($config, ['payum.http_client' => '@sylius.payum.http_client']);
+        }
+
+        $paymentMethod->getGatewayConfig()->setConfig($config);
 
         $this->objectManager->flush();
     }
@@ -196,9 +202,11 @@ final class PaymentContext implements Context
         $addForCurrentChannel = true,
         $position = null
     ) {
+        $gatewayFactory = array_search($gatewayFactory, $this->gatewayFactories);
+
         /** @var PaymentMethodInterface $paymentMethod */
-        $paymentMethod = $this->paymentMethodFactory->createWithGateway(array_search($gatewayFactory, $this->gatewayFactories));
-        $paymentMethod->getGatewayConfig()->setGatewayName(array_search($gatewayFactory, $this->gatewayFactories));
+        $paymentMethod = $this->paymentMethodFactory->createWithGateway($gatewayFactory);
+        $paymentMethod->getGatewayConfig()->setGatewayName($gatewayFactory);
         $paymentMethod->setName(ucfirst($name));
         $paymentMethod->setCode($code);
         $paymentMethod->setPosition($position);

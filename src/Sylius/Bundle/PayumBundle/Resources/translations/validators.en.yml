@@ -1,0 +1,12 @@
+sylius:
+    gateway_config:
+        gateway_name:
+            not_blank: Please enter gateway name.
+            regex: Gateway name should contain only letters and underscores.
+        paypal:
+            password:
+                not_blank: Please enter paypal password.
+            signature:
+                not_blank: Please enter paypal signature.
+            username:
+                not_blank: Please enter paypal username.

@@ -128,7 +128,9 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             'code' => '#sylius_payment_method_code',
             'enabled' => '#sylius_payment_method_enabled',
             'gateway' => '#sylius_payment_method_gateway',
+            'gateway_name' => '#sylius_payment_method_gatewayConfig_gatewayName',
             'name' => '#sylius_payment_method_translations_en_US_name',
+            'paypal_password' => '#sylius_payment_method_gatewayConfig_config_password',
         ]);
     }
 }

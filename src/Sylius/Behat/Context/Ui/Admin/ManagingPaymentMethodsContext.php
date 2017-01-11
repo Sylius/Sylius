@@ -296,6 +296,28 @@ final class ManagingPaymentMethodsContext implements Context
     }
 
     /**
+     * @Then I should be notified that I must specify paypal :element
+     */
+    public function iShouldBeNotifiedThatIMustSpecifyPaypal($element)
+    {
+        Assert::same(
+            $this->createPage->getValidationMessage('paypal_'.$element),
+            sprintf('Please enter paypal %s.', $element)
+        );
+    }
+
+    /**
+     * @Then I should be notified that gateway name should contain only letters and underscores
+     */
+    public function iShouldBeNotifiedThatGatewayNameShouldContainOnlyLettersAndUnderscores()
+    {
+        Assert::same(
+            $this->createPage->getValidationMessage('gateway_name'),
+            'Gateway name should contain only letters and underscores.'
+        );
+    }
+
+    /**
      * @Then the payment method with :element :value should not be added
      */
     public function thePaymentMethodWithElementValueShouldNotBeAdded($element, $value)
