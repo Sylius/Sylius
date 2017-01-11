@@ -14,6 +14,7 @@ namespace Sylius\Bundle\PayumBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -28,15 +29,39 @@ final class StripeGatewayConfigurationType extends AbstractType implements Gatew
         $builder
             ->add('secret_key', TextType::class, [
                 'label' => 'sylius.form.gateway_configuration.stripe.secret_key',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'sylius.gateway_config.stripe.secret_key.not_blank',
+                        'groups' => 'sylius',
+                    ])
+                ],
             ])
             ->add('publishable_key', TextType::class, [
                 'label' => 'sylius.form.gateway_configuration.stripe.publishable_key',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'sylius.gateway_config.stripe.publishable_key.not_blank',
+                        'groups' => 'sylius',
+                    ])
+                ],
             ])
             ->add('layout_template', TextType::class, [
                 'label' => 'sylius.form.gateway_configuration.stripe.layout_template',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'sylius.gateway_config.stripe.layout_template.not_blank',
+                        'groups' => 'sylius',
+                    ])
+                ],
             ])
             ->add('obtain_token_template', TextType::class, [
                 'label' => 'sylius.form.gateway_configuration.stripe.obtain_token_template',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'sylius.gateway_config.stripe.obtain_token_template.not_blank',
+                        'groups' => 'sylius',
+                    ])
+                ],
             ])
         ;
     }

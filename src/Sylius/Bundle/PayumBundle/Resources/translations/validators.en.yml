@@ -10,3 +10,12 @@ sylius:
                 not_blank: Please enter paypal signature.
             username:
                 not_blank: Please enter paypal username.
+        stripe:
+            secret_key:
+                not_blank: Please enter stripe secret key.
+            publishable_key:
+                not_blank: Please enter stripe publishable key.
+            layout_template:
+                not_blank: Please enter stripe layout template.
+            obtain_token_template:
+                not_blank: Please enter stripe obtain token template.
