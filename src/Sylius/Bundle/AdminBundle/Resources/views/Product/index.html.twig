@@ -5,7 +5,7 @@
 {% set definition = resources.definition %}
 {% set data = resources.data %}
 
-{% set header = configuration.vars.header|default(metadata.applicationName~'.ui.'~metadata.pluralName) %}
+{% set header = configuration.vars.header|default('sylius.ui.products') %}
 
 {% block title %}{{ parent() }} {{ header|trans }}{% endblock %}
 

@@ -521,11 +521,7 @@ final class ManagingProductsContext implements Context
     {
         $this->updateSimpleProductPage->open(['id' => $product->getId()]);
 
-        Assert::same(
-            $value,
-            $this->updateSimpleProductPage->getAttributeValue($attribute),
-            sprintf('ProductAttribute "%s" should have value "%s" but it does not.', $attribute, $value)
-        );
+        Assert::same($value, $this->updateSimpleProductPage->getAttributeValue($attribute));
     }
 
     /**
@@ -535,10 +531,7 @@ final class ManagingProductsContext implements Context
     {
         $this->updateSimpleProductPage->open(['id' => $product->getId()]);
 
-        Assert::false(
-            $this->updateSimpleProductPage->hasAttribute($attribute),
-            sprintf('Product "%s" should not have attribute "%s" but it does.', $product->getName(), $attribute)
-        );
+        Assert::false($this->updateSimpleProductPage->hasAttribute($attribute));
     }
 
     /**
