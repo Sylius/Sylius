@@ -13,6 +13,7 @@ namespace spec\Sylius\Component\Attribute\AttributeType;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
+use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
 
 /**
  * @author Laurent Paganin-Gioanni <l.paganin@algo-factory.com>
@@ -21,7 +22,7 @@ class SelectAttributeTypeSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Attribute\AttributeType\SelectAttributeType');
+        $this->shouldHaveType(SelectAttributeType::class);
     }
 
     function it_implements_attribute_type_interface()
