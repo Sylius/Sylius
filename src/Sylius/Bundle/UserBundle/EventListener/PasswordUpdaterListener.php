@@ -21,12 +21,12 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class PasswordUpdaterListener
+final class PasswordUpdaterListener
 {
     /**
      * @var PasswordUpdaterInterface
      */
-    protected $passwordUpdater;
+    private $passwordUpdater;
 
     /**
      * @param PasswordUpdaterInterface $passwordUpdater
@@ -34,16 +34,6 @@ class PasswordUpdaterListener
     public function __construct(PasswordUpdaterInterface $passwordUpdater)
     {
         $this->passwordUpdater = $passwordUpdater;
-    }
-
-    /**
-     * @param UserInterface $user
-     */
-    public function updateUserPassword(UserInterface $user)
-    {
-        if (null !== $user->getPlainPassword()) {
-            $this->passwordUpdater->updatePassword($user);
-        }
     }
 
     /**
@@ -82,7 +72,7 @@ class PasswordUpdaterListener
     /**
      * @param LifecycleEventArgs $event
      */
-    protected function updatePassword(LifecycleEventArgs $event)
+    private function updatePassword(LifecycleEventArgs $event)
     {
         $item = $event->getEntity();
 
@@ -91,5 +81,15 @@ class PasswordUpdaterListener
         }
 
         $this->updateUserPassword($item);
+    }
+
+    /**
+     * @param UserInterface $user
+     */
+    private function updateUserPassword(UserInterface $user)
+    {
+        if (null !== $user->getPlainPassword()) {
+            $this->passwordUpdater->updatePassword($user);
+        }
     }
 }

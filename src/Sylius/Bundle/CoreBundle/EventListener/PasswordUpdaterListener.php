@@ -11,17 +11,31 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Sylius\Bundle\UserBundle\EventListener\PasswordUpdaterListener as BasePasswordUpdaterListener;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
+use Sylius\Component\User\Model\UserInterface;
+use Sylius\Component\User\Security\PasswordUpdaterInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-final class PasswordUpdaterListener extends BasePasswordUpdaterListener
+final class PasswordUpdaterListener
 {
+    /**
+     * @var PasswordUpdaterInterface
+     */
+    private $passwordUpdater;
+
+    /**
+     * @param PasswordUpdaterInterface $passwordUpdater
+     */
+    public function __construct(PasswordUpdaterInterface $passwordUpdater)
+    {
+        $this->passwordUpdater = $passwordUpdater;
+    }
+
     /**
      * @param GenericEvent $event
      */
@@ -38,6 +52,16 @@ final class PasswordUpdaterListener extends BasePasswordUpdaterListener
 
         if (null !== $user = $customer->getUser()) {
             $this->updateUserPassword($user);
+        }
+    }
+
+    /**
+     * @param UserInterface $user
+     */
+    private function updateUserPassword(UserInterface $user)
+    {
+        if (null !== $user->getPlainPassword()) {
+            $this->passwordUpdater->updatePassword($user);
         }
     }
 }

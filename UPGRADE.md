@@ -141,6 +141,8 @@ After:
 
 ### User / UserBundle
 
+* All classes under `Sylius\Bundle\UserBundle\EventListener` have been made final. Provide your custom implementation if you need to change theirs logic.
+
 ## Application:
 
 ### Configuration

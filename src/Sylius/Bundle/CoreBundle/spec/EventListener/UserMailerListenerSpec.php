@@ -41,11 +41,6 @@ final class UserMailerListenerSpec extends ObjectBehavior
         $this->shouldHaveType(UserMailerListener::class);
     }
 
-    function it_is_a_user_mailer_listener()
-    {
-        $this->shouldHaveType(MailerListener::class);
-    }
-
     function it_throws_an_exception_if_event_subject_is_not_a_customer_instance_sending_confirmation(
         GenericEvent $event,
         \stdClass $customer

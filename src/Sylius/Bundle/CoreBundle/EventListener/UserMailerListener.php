@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Bundle\CoreBundle\Mailer\Emails;
-use Sylius\Bundle\UserBundle\EventListener\MailerListener;
+use Sylius\Bundle\UserBundle\Mailer\Emails as UserEmails;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
@@ -26,8 +26,13 @@ use Webmozart\Assert\Assert;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-final class UserMailerListener extends MailerListener
+final class UserMailerListener
 {
+    /**
+     * @var SenderInterface
+     */
+    private $emailSender;
+
     /**
      * @var ChannelContextInterface
      */
@@ -39,9 +44,8 @@ final class UserMailerListener extends MailerListener
      */
     public function __construct(SenderInterface $emailSender, ChannelContextInterface $channelContext)
     {
-        parent::__construct($emailSender);
-
         $this->channelContext = $channelContext;
+        $this->emailSender = $emailSender;
     }
 
     /**
@@ -78,12 +82,34 @@ final class UserMailerListener extends MailerListener
     }
 
     /**
+     * @param GenericEvent $event
+     */
+    public function sendResetPasswordTokenEmail(GenericEvent $event)
+    {
+        $this->sendEmail($event->getSubject(), UserEmails::RESET_PASSWORD_TOKEN);
+    }
+
+    /**
+     * @param GenericEvent $event
+     */
+    public function sendResetPasswordPinEmail(GenericEvent $event)
+    {
+        $this->sendEmail($event->getSubject(), UserEmails::RESET_PASSWORD_PIN);
+    }
+
+    /**
+     * @param GenericEvent $event
+     */
+    public function sendVerificationTokenEmail(GenericEvent $event)
+    {
+        $this->sendEmail($event->getSubject(), UserEmails::EMAIL_VERIFICATION_TOKEN);
+    }
+
+    /**
      * {@inheritdoc}
      */
-    protected function sendEmail($user, $emailCode)
+    private function sendEmail(UserInterface $user, $emailCode)
     {
-        Assert::isInstanceOf($user, UserInterface::class);
-
         $this->emailSender->send(
             $emailCode,
             [
