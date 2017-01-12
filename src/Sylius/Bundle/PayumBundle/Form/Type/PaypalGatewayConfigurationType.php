@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\PayumBundle\Form\Type;
 
-use Sylius\Bundle\PayumBundle\Form\DataTransformer\PaypalGatewayConfigurationTransformer;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -62,7 +62,24 @@ final class PaypalGatewayConfigurationType extends AbstractType implements Gatew
                 // Hardcoded, as its the only payum client used now in sylius, could be extended to support many clients
                 'data' => '@sylius.payum.http_client',
             ])
-            ->addModelTransformer(new PaypalGatewayConfigurationTransformer())
+            ->addModelTransformer(new CallbackTransformer(
+                function ($modelData) {
+                    if (empty($modelData)) {
+                        return $modelData;
+                    }
+
+                    $modelData['payum_http_client'] = $modelData['payum.http_client'];
+                    unset($modelData['payum.http_client']);
+
+                    return $modelData;
+                },
+                function ($formData) {
+                    $formData['payum.http_client'] = $formData['payum_http_client'];
+                    unset($formData['payum_http_client']);
+
+                    return $formData;
+                }
+            ))
         ;
     }
 }

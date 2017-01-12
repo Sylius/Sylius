@@ -61,6 +61,4 @@ final class PaymentMethodFactory implements PaymentMethodFactoryInterface
 
         return $paymentMethod;
     }
-
-
 }

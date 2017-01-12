@@ -50,8 +50,6 @@ final class GatewayConfigType extends AbstractResourceType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $factory = $options['factory'];
-
         $builder
             ->add('gatewayName', TextType::class, [
                 'label' => 'sylius.form.gateway_config.gateway_name',
@@ -59,22 +57,22 @@ final class GatewayConfigType extends AbstractResourceType
             ->add('factoryName', TextType::class, [
                 'label' => 'sylius.form.gateway_config.factory_name',
                 'disabled' => true,
-                'data' => $factory,
+                'data' => $options['factory'],
             ])
         ;
 
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($factory) {
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($options) {
             $gatewayConfig = $event->getData();
 
             if (!$gatewayConfig instanceof GatewayConfigInterface) {
                 return;
             }
 
-            if (!$this->gatewayConfigurationTypeRegistry->has($factory, 'configuration')) {
+            if (!$this->gatewayConfigurationTypeRegistry->has($options['factory'], 'configuration')) {
                 return;
             }
 
-            $event->getForm()->add('config', get_class($this->gatewayConfigurationTypeRegistry->get($factory)), [
+            $event->getForm()->add('config', get_class($this->gatewayConfigurationTypeRegistry->get($options['factory'])), [
                 'label' => false,
                 'auto_initialize' => false,
             ]);

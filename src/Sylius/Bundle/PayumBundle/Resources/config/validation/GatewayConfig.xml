@@ -20,7 +20,7 @@
             </constraint>
             <constraint name="Regex">
                 <option name="message">sylius.gateway_config.gateway_name.regex</option>
-                <option name="pattern">/^[a-zA-Z_]*$/</option>
+                <option name="pattern">/^\w+$/</option>
                 <option name="groups">sylius</option>
             </constraint>
         </property>
