@@ -37,7 +37,7 @@ final class OauthTokenApiTest extends JsonApiTestCase
         }
 EOT;
 
-        $this->client->request('POST', '/api/v1/oauth/v2/token', [], [], ['CONTENT_TYPE' => 'application/json'], $data);
+        $this->client->request('POST', '/api/oauth/v2/token', [], [], ['CONTENT_TYPE' => 'application/json'], $data);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'authentication/new_access_token', Response::HTTP_OK);
@@ -60,7 +60,7 @@ EOT;
         }
 EOT;
 
-        $this->client->request('POST', '/api/v1/oauth/v2/token', [], [], ['CONTENT_TYPE' => 'application/json'], $data);
+        $this->client->request('POST', '/api/oauth/v2/token', [], [], ['CONTENT_TYPE' => 'application/json'], $data);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'authentication/new_access_token', Response::HTTP_OK);

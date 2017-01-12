@@ -34,7 +34,7 @@ To obtain authorization token for the default user run:
 
 .. code-block:: bash
 
-    $ curl http://localhost:8000/api/v1/oauth/v2/token -d "client_id"=XYZ -d "client_secret"=ABC -d "grant_type"=password -d "username"=api@example.com -d "password"=sylius-api
+    $ curl http://localhost:8000/api/oauth/v2/token -d "client_id"=XYZ -d "client_secret"=ABC -d "grant_type"=password -d "username"=api@example.com -d "password"=sylius-api
 
 This will give you such a response:
 

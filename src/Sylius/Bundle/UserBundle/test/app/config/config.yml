@@ -71,7 +71,7 @@ security:
             anonymous: true
 
         oauth_token:
-            pattern:  ^/api/v1/oauth/v2/token
+            pattern:  ^/api/oauth/v2/token
             security: false
 
         dev:
