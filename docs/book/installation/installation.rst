@@ -17,6 +17,10 @@ for your custom e-commerce application.
     If you downloaded the Composer phar archive, you should use
     ``php composer.phar`` where this guide uses ``composer``.
 
+.. tip::
+
+    If you prefer to work with **Vagrant** head to :doc:`this guide </book/installation/vagrant_installation>`.
+
 Initiating A New Sylius Project
 -------------------------------
 
