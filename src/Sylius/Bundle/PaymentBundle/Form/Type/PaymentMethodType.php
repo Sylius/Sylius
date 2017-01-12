@@ -34,12 +34,6 @@ final class PaymentMethodType extends AbstractResourceType
                 'entry_type' => PaymentMethodTranslationType::class,
                 'label' => 'sylius.form.payment_method.name',
             ])
-            ->add('gateway', PaymentGatewayChoiceType::class, [
-                'label' => 'sylius.form.payment_method.gateway',
-                'constraints' => [
-                    new NotBlank(),
-                ],
-            ])
             ->add('position', IntegerType::class, [
                 'required' => false,
                 'label' => 'sylius.form.shipping_method.position',

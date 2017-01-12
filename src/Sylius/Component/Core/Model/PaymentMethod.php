@@ -108,14 +108,6 @@ class PaymentMethod extends BasePaymentMethod implements PaymentMethodInterface
     /**
      * {@inheritdoc}
      */
-    public function setGateway($gateway)
-    {
-        throw new UnsupportedMethodException('setGateway');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public static function getTranslationClass()
     {
         return PaymentMethodTranslation::class;

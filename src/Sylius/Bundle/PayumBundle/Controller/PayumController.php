@@ -20,6 +20,7 @@ use Sylius\Bundle\PayumBundle\Request\ResolveNextRoute;
 use Sylius\Bundle\ResourceBundle\Controller\FlashHelperInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ViewHandlerInterface;
+use Sylius\Bundle\ResourceBundle\Form\Registry\FormTypeRegistryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
@@ -47,7 +48,7 @@ final class PayumController
     private $orderRepository;
 
     /**
-     * @var ServiceRegistryInterface
+     * @var FormTypeRegistryInterface
      */
     private $gatewayConfigurationTypeRegistry;
 
@@ -74,7 +75,7 @@ final class PayumController
     /**
      * @param Payum $payum
      * @param OrderRepositoryInterface $orderRepository
-     * @param ServiceRegistryInterface $gatewayConfigurationTypeRegistry
+     * @param FormTypeRegistryInterface $gatewayConfigurationTypeRegistry
      * @param MetadataInterface $orderMetadata
      * @param RequestConfigurationFactoryInterface $requestConfigurationFactory
      * @param ViewHandlerInterface $viewHandler
@@ -83,7 +84,7 @@ final class PayumController
     public function __construct(
         Payum $payum,
         OrderRepositoryInterface $orderRepository,
-        ServiceRegistryInterface $gatewayConfigurationTypeRegistry,
+        FormTypeRegistryInterface $gatewayConfigurationTypeRegistry,
         MetadataInterface $orderMetadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         ViewHandlerInterface $viewHandler,

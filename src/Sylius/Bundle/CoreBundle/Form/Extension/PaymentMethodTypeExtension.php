@@ -30,7 +30,6 @@ final class PaymentMethodTypeExtension extends AbstractTypeExtension
         $gatewayFactory = $options['data']->getGatewayConfig()->getFactoryName();
 
         $builder
-            ->remove('gateway')
             ->add('channels', ChannelChoiceType::class, [
                 'multiple' => true,
                 'expanded' => true,

@@ -59,16 +59,6 @@ interface PaymentMethodInterface extends
     /**
      * @return string
      */
-    public function getGateway();
-
-    /**
-     * @param string $gateway
-     */
-    public function setGateway($gateway);
-
-    /**
-     * @return string
-     */
     public function getEnvironment();
 
     /**

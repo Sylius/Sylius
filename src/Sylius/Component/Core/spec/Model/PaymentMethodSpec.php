@@ -58,15 +58,10 @@ final class PaymentMethodSpec extends ObjectBehavior
         $this->hasChannel($channel)->shouldReturn(false);
     }
 
-    function its_gateway_is_gateway_config_object(GatewayConfigInterface $gatewayConfig)
+    function its_gateway_config_is_mutable(GatewayConfigInterface $gatewayConfig)
     {
         $this->setGatewayConfig($gatewayConfig);
         $this->getGatewayConfig()->shouldReturn($gatewayConfig);
-    }
-
-    function it_does_not_support_set_gateway_method()
-    {
-        $this->shouldThrow(UnsupportedMethodException::class)->during('setGateway', ['gateway']);
     }
 
     function it_returns_name_from_gateway_config_while_getting_a_gateway(GatewayConfigInterface $gatewayConfig)

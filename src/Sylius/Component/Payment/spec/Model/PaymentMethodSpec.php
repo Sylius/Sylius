@@ -81,17 +81,6 @@ final class PaymentMethodSpec extends ObjectBehavior
         $this->getInstructions()->shouldReturn('Pay on account: 1100012312');
     }
 
-    function it_has_no_gateway_by_default()
-    {
-        $this->getGateway()->shouldReturn(null);
-    }
-
-    function its_gateway_is_mutable()
-    {
-        $this->setGateway('paypal');
-        $this->getGateway()->shouldReturn('paypal');
-    }
-
     function it_has_no_app_environment_by_default()
     {
         $this->getEnvironment()->shouldReturn(null);
