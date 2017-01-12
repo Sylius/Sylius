@@ -182,6 +182,15 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     /**
      * {@inheritdoc}
      */
+    public function hasShippingPromotion($promotionName)
+    {
+        return false !== stripos($this->getElement('promotion_shipping_discounts')->getText(), $promotionName);
+    }
+
+
+    /**
+     * {@inheritdoc}
+     */
     public function hasTaxTotal($taxTotal)
     {
         return false !== strpos($this->getElement('tax_total')->getText(), $taxTotal);
@@ -274,6 +283,14 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     /**
      * {@inheritdoc}
      */
+    public function getShippingPromotionDiscount($promotionName)
+    {
+        return $this->getElement('promotion_shipping_discounts')->find('css', '.description')->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
@@ -289,6 +306,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
             'payment_step_label' => '.steps a:contains("Payment")',
             'product_row' => 'tbody tr:contains("%name%")',
             'promotion_discounts' => '#promotion-discounts',
+            'promotion_shipping_discounts' => '#promotion-shipping-discounts',
             'promotion_total' => '#promotion-total',
             'shipping_address' => '#sylius-shipping-address',
             'shipping_method' => '#sylius-shipping-method',

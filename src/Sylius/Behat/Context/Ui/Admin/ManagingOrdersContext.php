@@ -433,6 +433,14 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @Then the order's shipping promotion should be :promotion
+     */
+    public function theOrdersShippingPromotionDiscountShouldBe($promotionData)
+    {
+        Assert::same($this->showPage->getShippingPromotionData(), $promotionData);
+    }
+
+    /**
      * @Then /^the order's promotion total should(?:| still) be "([^"]+)"$/
      */
     public function theOrdersPromotionTotalShouldBe($promotionTotal)

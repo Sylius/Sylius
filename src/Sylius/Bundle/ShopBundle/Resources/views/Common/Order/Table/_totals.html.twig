@@ -6,9 +6,7 @@
     </th>
 </tr>
 <tr>
-    <td colspan="4" class="right aligned" id="shipping-total">
-        {{ 'sylius.ui.shipping_total'|trans }}: {{ money.format(order.shippingTotal, order.currencyCode) }}
-    </td>
+    {% include '@SyliusShop/Common/Order/Table/_shipping.html.twig' with {'order': order} %}
 </tr>
 <tr>
     <td colspan="4" class="right aligned" id="tax-total">

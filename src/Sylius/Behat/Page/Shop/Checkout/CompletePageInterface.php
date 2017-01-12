@@ -96,6 +96,13 @@ interface CompletePageInterface extends SymfonyPageInterface
     public function hasPromotion($promotionName);
 
     /**
+     * @param string $promotionName
+     *
+     * @return bool
+     */
+    public function hasShippingPromotion($promotionName);
+
+    /**
      * @param string $taxTotal
      *
      * @return bool
@@ -164,4 +171,11 @@ interface CompletePageInterface extends SymfonyPageInterface
      * @return string
      */
     public function getBaseCurrencyOrderTotal();
+
+    /**
+     * @param string $promotionName
+     * 
+     * @return string
+     */
+    public function getShippingPromotionDiscount($promotionName);
 }
