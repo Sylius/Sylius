@@ -28,13 +28,32 @@ final class ComicBookApiTest extends JsonApiTestCase
 <<<EOT
         {
             "title": "Deadpool #1-69",
-            "author": "Joe Kelly"
+            "authorFirstName": "Joe",
+            "authorLastName": "Kelly"
         }
 EOT;
 
-        $this->client->request('POST', '/comic-books/', [], [], ['CONTENT_TYPE' => 'application/json'], $data);
+        $this->client->request('POST', '/v1/comic-books/', [], [], ['CONTENT_TYPE' => 'application/json'], $data);
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'comic-books/create_response', Response::HTTP_CREATED);
+    }
+    /**
+     * @test
+     */
+    public function it_allows_versioned_creating_a_comic_book()
+    {
+        $data =
+<<<EOT
+        {
+            "title": "Deadpool #1-69",
+            "authorFirstName": "Joe",
+            "authorLastName": "Kelly"
+        }
+EOT;
+
+        $this->client->request('POST', '/v1.2/comic-books/', [], [], ['CONTENT_TYPE' => 'application/json'], $data);
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'comic-books/versioned_create_response', Response::HTTP_CREATED);
     }
 
     /**
@@ -48,11 +67,12 @@ EOT;
 <<<EOT
         {
             "title": "Deadpool #1-69",
-            "author": "Joe Kelly"
+            "authorFirstName": "Joe",
+            "authorLastName": "Kelly"
         }
 EOT;
 
-        $this->client->request('PUT', '/comic-books/'. $objects["comic-book1"]->getId(), [], [], ['CONTENT_TYPE' => 'application/json'], $data);
+        $this->client->request('PUT', '/v1/comic-books/'. $objects["comic-book1"]->getId(), [], [], ['CONTENT_TYPE' => 'application/json'], $data);
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
     }
@@ -67,11 +87,12 @@ EOT;
         $data =
  <<<EOT
         {
-            "author": "Joe Kelly"
+            "authorFirstName": "Joe",
+            "authorLastName": "Kelly"
         }
 EOT;
 
-        $this->client->request('PATCH', '/comic-books/'. $objects["comic-book1"]->getId(), [], [], ['CONTENT_TYPE' => 'application/json'], $data);
+        $this->client->request('PATCH', '/v1/comic-books/'. $objects["comic-book1"]->getId(), [], [], ['CONTENT_TYPE' => 'application/json'], $data);
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
     }
@@ -83,7 +104,7 @@ EOT;
     {
         $objects = $this->loadFixturesFromFile('comic_books.yml');
 
-        $this->client->request('DELETE', '/comic-books/'. $objects["comic-book1"]->getId());
+        $this->client->request('DELETE', '/v1/comic-books/'. $objects["comic-book1"]->getId());
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
     }
@@ -95,7 +116,7 @@ EOT;
     {
         $objects = $this->loadFixturesFromFile('comic_books.yml');
 
-        $this->client->request('GET', '/comic-books/'. $objects["comic-book1"]->getId());
+        $this->client->request('GET', '/v1/comic-books/'. $objects["comic-book1"]->getId());
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'comic-books/show_response');
     }
@@ -103,13 +124,37 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_indexing_comic_books()
+    public function it_allows_versioning_of_a_showing_comic_book_serialization()
+    {
+        $objects = $this->loadFixturesFromFile('comic_books.yml');
+
+        $this->client->request('GET', '/v1.2/comic-books/'. $objects["comic-book1"]->getId());
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'comic-books/versioned_show_response');
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_indexing_of_comic_books()
     {
         $this->loadFixturesFromFile('comic_books.yml');
 
-        $this->client->request('GET', '/comic-books/');
+        $this->client->request('GET', '/v1/comic-books/');
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'comic-books/index_response');
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_versioned_indexing_of_comic_books()
+    {
+        $this->loadFixturesFromFile('comic_books.yml');
+
+        $this->client->request('GET', '/v1.2/comic-books/');
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'comic-books/versioned_index_response');
     }
 
     /**
@@ -119,7 +164,7 @@ EOT;
     {
         $this->loadFixturesFromFile('comic_books.yml');
 
-        $this->client->request('GET', '/comic-books/3');
+        $this->client->request('GET', '/v1/comic-books/3');
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NOT_FOUND);
     }

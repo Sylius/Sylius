@@ -25,6 +25,7 @@ Sylius\Component\Shipping\Model\Shipment:
                 route: sylius_api_shipment_show
                 parameters:
                     id: expr(object.getId())
+                    version: 1
         - rel: method
           exclusion:
                 exclude_if: expr(!object.getMethod())
@@ -32,3 +33,4 @@ Sylius\Component\Shipping\Model\Shipment:
                 route: sylius_api_shipping_method_show
                 parameters:
                     code: expr(object.getMethod().getCode())
+                    version: 1

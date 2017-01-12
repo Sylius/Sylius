@@ -10,3 +10,4 @@ Sylius\Component\Core\Model\TaxRate:
                 route: sylius_api_zone_show
                 parameters:
                     code: expr(object.getZone().getCode())
+                    version: 1

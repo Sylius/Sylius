@@ -7,6 +7,7 @@ sylius_api_shipping_category_index:
     defaults:
         _controller: sylius.controller.shipping_category:indexAction
         _sylius:
+            serialization_version: $version
             serialization_groups: [Default]
             paginate: $limit
             sortable: true
@@ -18,12 +19,16 @@ sylius_api_shipping_category_create:
     methods: [POST]
     defaults:
         _controller: sylius.controller.shipping_category:createAction
+        _sylius:
+            serialization_version: $version
 
 sylius_api_shipping_category_update:
     path: /{id}
     methods: [PUT, PATCH]
     defaults:
         _controller: sylius.controller.shipping_category:updateAction
+        _sylius:
+            serialization_version: $version
 
 sylius_api_shipping_category_delete:
     path: /{id}
@@ -31,6 +36,7 @@ sylius_api_shipping_category_delete:
     defaults:
         _controller: sylius.controller.shipping_category:deleteAction
         _sylius:
+            serialization_version: $version
             csrf_protection: false
 
 sylius_api_shipping_category_show:
@@ -39,4 +45,5 @@ sylius_api_shipping_category_show:
     defaults:
         _controller: sylius.controller.shipping_category:showAction
         _sylius:
+            serialization_version: $version
             serialization_groups: [Detailed]

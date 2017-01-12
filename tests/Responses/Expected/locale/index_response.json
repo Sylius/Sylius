@@ -5,13 +5,13 @@
     "total": 4,
     "_links": {
         "self": {
-            "href": "\/api\/locales\/?page=1&limit=10"
+            "href": "\/api\/v1\/locales\/?page=1&limit=10"
         },
         "first": {
-            "href": "\/api\/locales\/?page=1&limit=10"
+            "href": "\/api\/v1\/locales\/?page=1&limit=10"
         },
         "last": {
-            "href": "\/api\/locales\/?page=1&limit=10"
+            "href": "\/api\/v1\/locales\/?page=1&limit=10"
         }
     },
     "_embedded": {

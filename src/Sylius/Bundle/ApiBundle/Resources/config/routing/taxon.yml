@@ -6,6 +6,7 @@ sylius_api_taxon_index:
     defaults:
         _controller: sylius.controller.taxon:indexAction
         _sylius:
+            serialization_version: $version
             paginate: $limit
             sortable: true
             filterable: true
@@ -16,6 +17,7 @@ sylius_api_taxon_show:
     defaults:
         _controller: sylius.controller.taxon:showAction
         _sylius:
+            serialization_version: $version
             criteria:
                 code: $code
 
@@ -24,6 +26,8 @@ sylius_api_taxon_create:
     methods: [POST]
     defaults:
         _controller: sylius.controller.taxon:createAction
+        _sylius:
+            serialization_version: $version
 
 sylius_api_taxon_update:
     path: /{code}
@@ -31,6 +35,7 @@ sylius_api_taxon_update:
     defaults:
         _controller: sylius.controller.taxon:updateAction
         _sylius:
+            serialization_version: $version
             criteria:
                 code: $code
 
@@ -40,6 +45,7 @@ sylius_api_taxon_delete:
     defaults:
         _controller: sylius.controller.taxon:deleteAction
         _sylius:
+            serialization_version: $version
             criteria:
                 code: $code
             csrf_protection: false

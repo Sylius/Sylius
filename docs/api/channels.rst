@@ -1,7 +1,7 @@
 Channels API
 ============
 
-Sylius channels API endpoint is ``/api/channels``.
+Sylius channels API endpoint is ``/api/v1/channels``.
 
 Index of all channels
 ---------------------
@@ -10,7 +10,7 @@ To browse all channels available in the Sylius e-commerce platform you can call 
 
 .. code-block:: text
 
-    GET /api/channels/
+    GET /api/v1/channels/
 
 Parameters
 ~~~~~~~~~~
@@ -81,7 +81,7 @@ You can view a single channel by executing the following request:
 
 .. code-block:: text
 
-    GET /api/channels/91
+    GET /api/v1/channels/91
 
 Response
 ~~~~~~~~
@@ -118,7 +118,7 @@ To create a new channel, you can execute the following request:
 
 .. code-block:: text
 
-    POST /api/channels/
+    POST /api/v1/channels/
 
 Parameters
 ~~~~~~~~~~
@@ -173,11 +173,11 @@ You can update an existing channel using PUT or PATCH method:
 
 .. code-block:: text
 
-    PUT /api/channels/92
+    PUT /api/v1/channels/92
 
 .. code-block:: text
 
-    PATCH /api/channels/92
+    PATCH /api/v1/channels/92
 
 Parameters
 ~~~~~~~~~~
@@ -211,7 +211,7 @@ You can delete (soft) a channel from the system by making the following DELETE c
 
 .. code-block:: text
 
-    DELETE /api/channels/92
+    DELETE /api/v1/channels/92
 
 Response
 ~~~~~~~~

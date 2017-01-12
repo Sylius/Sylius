@@ -32,7 +32,7 @@ final class ChannelApiTest extends JsonApiTestCase
      */
     public function it_denies_getting_channels_for_non_authenticated_user()
     {
-        $this->client->request('GET', '/api/channels/');
+        $this->client->request('GET', '/api/v1/channels/');
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
@@ -46,7 +46,7 @@ final class ChannelApiTest extends JsonApiTestCase
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $channelData = $this->loadFixturesFromFile('resources/channels.yml');
 
-        $this->client->request('GET', '/api/channels/'.$channelData['channel-web']->getId(), [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('GET', '/api/v1/channels/'.$channelData['channel-web']->getId(), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'channel/show_response', Response::HTTP_OK);

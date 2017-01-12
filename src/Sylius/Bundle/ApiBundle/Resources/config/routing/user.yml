@@ -7,6 +7,7 @@ sylius_api_user_index:
     defaults:
         _controller: sylius.controller.shop_user:indexAction
         _sylius:
+            serialization_version: $version
             paginate: $limit
             filterable: true
             sortable: true
@@ -18,12 +19,16 @@ sylius_api_user_create:
     methods: [POST]
     defaults:
         _controller: sylius.controller.shop_user:createAction
+        _sylius:
+            serialization_version: $version
 
 sylius_api_user_update:
     path: /{id}
     methods: [PUT, PATCH]
     defaults:
         _controller: sylius.controller.shop_user:updateAction
+        _sylius:
+            serialization_version: $version
 
 sylius_api_user_delete:
     path: /{id}
@@ -31,6 +36,7 @@ sylius_api_user_delete:
     defaults:
         _controller: sylius.controller.shop_user:deleteAction
         _sylius:
+            serialization_version: $version
             csrf_protection: false
 
 sylius_api_user_show:
@@ -38,3 +44,5 @@ sylius_api_user_show:
     methods: [GET]
     defaults:
         _controller: sylius.controller.shop_user:showAction
+        _sylius:
+            serialization_version: $version

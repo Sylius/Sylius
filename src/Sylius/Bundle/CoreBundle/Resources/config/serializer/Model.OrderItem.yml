@@ -12,6 +12,7 @@ Sylius\Component\Core\Model\OrderItem:
                 route: sylius_api_product_show
                 parameters:
                     id: expr(object.getVariant().getProduct().getId())
+                    version: 1
         - rel: variant
           exclusion:
                 exclude_if: expr(!object.getVariant())
@@ -20,3 +21,4 @@ Sylius\Component\Core\Model\OrderItem:
                 parameters:
                     id: expr(object.getVariant().getId())
                     productId: expr(object.getVariant().getProduct().getId())
+                    version: 1

@@ -159,6 +159,9 @@ final class ResourceLoader implements LoaderInterface
         if (isset($configuration['form']) && in_array($actionName, ['create', 'update'], true)) {
             $defaults['_sylius']['form'] = $configuration['form'];
         }
+        if (isset($configuration['serialization_version'])) {
+            $defaults['_sylius']['serialization_version'] = $configuration['serialization_version'];
+        }
         if (isset($configuration['section'])) {
             $defaults['_sylius']['section'] = $configuration['section'];
         }

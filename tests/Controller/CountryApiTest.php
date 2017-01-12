@@ -40,7 +40,7 @@ class CountryApiTest extends JsonApiTestCase
      */
     public function it_denies_creating_country_for_non_authenticated_user()
     {
-        $this->client->request('POST', '/api/countries/');
+        $this->client->request('POST', '/api/v1/countries/');
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
@@ -53,7 +53,7 @@ class CountryApiTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
-        $this->client->request('POST', '/api/countries/', [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('POST', '/api/v1/countries/', [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'country/create_validation_fail_response', Response::HTTP_BAD_REQUEST);
@@ -73,7 +73,7 @@ class CountryApiTest extends JsonApiTestCase
         }
 EOT;
 
-        $this->client->request('POST', '/api/countries/', [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('POST', '/api/v1/countries/', [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'country/create_response', Response::HTTP_CREATED);
@@ -86,7 +86,7 @@ EOT;
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
-        $this->client->request('GET', '/api/countries/-1', [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', '/api/v1/countries/-1', [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
@@ -100,7 +100,7 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/countries.yml');
 
-        $this->client->request('GET', '/api/countries/', [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', '/api/v1/countries/', [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'country/index_response', Response::HTTP_OK);
@@ -114,7 +114,7 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $countries = $this->loadFixturesFromFile('resources/countries.yml');
 
-        $this->client->request('GET', '/api/countries/'.$countries['country_NL']->getCode(), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', '/api/v1/countries/'.$countries['country_NL']->getCode(), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'country/show_response', Response::HTTP_OK);
@@ -126,7 +126,7 @@ EOT;
     public function it_denies_getting_country_for_non_authenticated_user()
     {
         $this->loadFixturesFromFile('resources/countries.yml');
-        $this->client->request('GET', '/api/countries/1');
+        $this->client->request('GET', '/api/v1/countries/1');
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
@@ -139,7 +139,7 @@ EOT;
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
-        $this->client->request('DELETE', '/api/countries/-1', [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('DELETE', '/api/v1/countries/-1', [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
@@ -153,12 +153,12 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $countries = $this->loadFixturesFromFile('resources/countries.yml');
 
-        $this->client->request('DELETE', '/api/countries/' . $countries['country_NL']->getCode(), [], [], static::$authorizedHeaderWithContentType, []);
+        $this->client->request('DELETE', '/api/v1/countries/' . $countries['country_NL']->getCode(), [], [], static::$authorizedHeaderWithContentType, []);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
 
-        $this->client->request('GET', '/api/countries/' . $countries['country_NL']->getCode(), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', '/api/v1/countries/' . $countries['country_NL']->getCode(), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);

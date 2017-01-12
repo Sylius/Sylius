@@ -7,6 +7,7 @@ sylius_api_currency_index:
     defaults:
         _controller: sylius.controller.currency:indexAction
         _sylius:
+            serialization_version: $version
             serialization_groups: [Default]
             paginate: $limit
             sortable: true
@@ -18,6 +19,8 @@ sylius_api_currency_create:
     methods: [POST]
     defaults:
         _controller: sylius.controller.currency:createAction
+        _sylius:
+            serialization_version: $version
 
 sylius_api_currency_update:
     path: /{code}
@@ -25,6 +28,7 @@ sylius_api_currency_update:
     defaults:
         _controller: sylius.controller.currency:updateAction
         _sylius:
+            serialization_version: $version
             criteria:
                 code: $code
 
@@ -34,6 +38,7 @@ sylius_api_currency_delete:
     defaults:
         _controller: sylius.controller.currency:deleteAction
         _sylius:
+            serialization_version: $version
             criteria:
                 code: $code
             csrf_protection: false
@@ -44,6 +49,7 @@ sylius_api_currency_show:
     defaults:
         _controller: sylius.controller.currency:showAction
         _sylius:
+            serialization_version: $version
             serialization_groups: [Detailed]
             criteria:
                 code: $code

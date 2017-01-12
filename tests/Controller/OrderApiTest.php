@@ -32,7 +32,7 @@ final class OrderApiTest extends JsonApiTestCase
      */
     public function it_denies_getting_an_order_for_non_authenticated_user()
     {
-        $this->client->request('GET', '/api/orders/');
+        $this->client->request('GET', '/api/v1/orders/');
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
@@ -45,7 +45,7 @@ final class OrderApiTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
-        $this->client->request('GET', '/api/orders/-1', [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('GET', '/api/v1/orders/-1', [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
@@ -59,7 +59,7 @@ final class OrderApiTest extends JsonApiTestCase
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $orderData = $this->loadFixturesFromFile('resources/orders.yml');
 
-        $this->client->request('GET', '/api/orders/'.$orderData['order-001']->getId(), [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('GET', '/api/v1/orders/'.$orderData['order-001']->getId(), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'order/show_response', Response::HTTP_OK);
@@ -70,7 +70,7 @@ final class OrderApiTest extends JsonApiTestCase
      */
     public function it_denies_creating_order_for_non_authenticated_user()
     {
-        $this->client->request('POST', '/api/orders/');
+        $this->client->request('POST', '/api/v1/orders/');
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
@@ -83,7 +83,7 @@ final class OrderApiTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
-        $this->client->request('POST', '/api/orders/', [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('POST', '/api/v1/orders/', [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'order/create_validation_fail_response', Response::HTTP_BAD_REQUEST);
@@ -106,7 +106,7 @@ final class OrderApiTest extends JsonApiTestCase
         }
 EOT;
 
-        $this->client->request('POST', '/api/orders/', [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('POST', '/api/v1/orders/', [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
 
@@ -118,7 +118,7 @@ EOT;
      */
     public function it_denies_getting_orders_for_non_authenticated_user()
     {
-        $this->client->request('GET', '/api/orders/');
+        $this->client->request('GET', '/api/v1/orders/');
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
@@ -132,7 +132,7 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/orders.yml');
 
-        $this->client->request('GET', '/api/orders/', [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('GET', '/api/v1/orders/', [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'order/index_response', Response::HTTP_OK);
@@ -145,7 +145,7 @@ EOT;
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
-        $this->client->request('DELETE', '/api/orders/-1', [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('DELETE', '/api/v1/orders/-1', [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
@@ -159,12 +159,12 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $orders = $this->loadFixturesFromFile('resources/orders.yml');
 
-        $this->client->request('DELETE', '/api/orders/'.$orders['order-001']->getId(), [], [], static::$authorizedHeaderWithContentType, []);
+        $this->client->request('DELETE', '/api/v1/orders/'.$orders['order-001']->getId(), [], [], static::$authorizedHeaderWithContentType, []);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
 
-        $this->client->request('GET', '/api/orders/'.$orders['order-001']->getId(), [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('GET', '/api/v1/orders/'.$orders['order-001']->getId(), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);

@@ -33,3 +33,4 @@ Sylius\Component\Taxation\Model\TaxCategory:
                 route: sylius_api_tax_category_show
                 parameters:
                     id: expr(object.getId())
+                    version: 1

@@ -23,7 +23,7 @@ final class CheckoutPaymentApiTest extends CheckoutApiTestCase
      */
     public function it_denies_order_payment_selection_for_non_authenticated_user()
     {
-        $this->client->request('PUT', '/api/checkouts/select-payment/1');
+        $this->client->request('PUT', '/api/v1/checkouts/select-payment/1');
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
@@ -36,7 +36,7 @@ final class CheckoutPaymentApiTest extends CheckoutApiTestCase
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
-        $this->client->request('PUT', '/api/checkouts/select-payment/1', [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('PUT', '/api/v1/checkouts/select-payment/1', [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NOT_FOUND);
@@ -53,7 +53,7 @@ final class CheckoutPaymentApiTest extends CheckoutApiTestCase
         $orderId = $orders['order1']->getId();
         $this->addressOrder($orderId);
 
-        $url = sprintf('/api/checkouts/select-payment/%d', $orderId);
+        $url = sprintf('/api/v1/checkouts/select-payment/%d', $orderId);
         $this->client->request('PATCH', $url, [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
@@ -83,7 +83,7 @@ final class CheckoutPaymentApiTest extends CheckoutApiTestCase
         }
 EOT;
 
-        $url = sprintf('/api/checkouts/select-payment/%d', $orderId);
+        $url = sprintf('/api/v1/checkouts/select-payment/%d', $orderId);
         $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
@@ -114,14 +114,14 @@ EOT;
         }
 EOT;
 
-        $url = sprintf('/api/checkouts/select-payment/%d', $orderId);
+        $url = sprintf('/api/v1/checkouts/select-payment/%d', $orderId);
         $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
 
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
 
-        $this->client->request('GET', sprintf('/api/checkouts/%d', $checkoutData['order1']->getId()), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', sprintf('/api/v1/checkouts/%d', $checkoutData['order1']->getId()), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'checkout/payment_selected_order_response');
@@ -151,7 +151,7 @@ EOT;
         }
 EOT;
 
-        $url = sprintf('/api/checkouts/select-payment/%d', $orderId);
+        $url = sprintf('/api/v1/checkouts/select-payment/%d', $orderId);
         $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();

@@ -5,13 +5,13 @@
     "total": 2,
     "_links": {
         "self": {
-            "href": "\/api\/tax-categories\/?criteria%5Bsearch%5D=clothing&page=1&limit=10"
+            "href": "\/api\/v1\/tax-categories\/?criteria%5Bsearch%5D=clothing&page=1&limit=10"
         },
         "first": {
-            "href": "\/api\/tax-categories\/?criteria%5Bsearch%5D=clothing&page=1&limit=10"
+            "href": "\/api\/v1\/tax-categories\/?criteria%5Bsearch%5D=clothing&page=1&limit=10"
         },
         "last": {
-            "href": "\/api\/tax-categories\/?criteria%5Bsearch%5D=clothing&page=1&limit=10"
+            "href": "\/api\/v1\/tax-categories\/?criteria%5Bsearch%5D=clothing&page=1&limit=10"
         }
     },
     "_embedded": {

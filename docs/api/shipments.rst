@@ -1,7 +1,7 @@
 Shipments API
 =============
 
-Sylius shipments API endpoint is `/api/shipments`.
+Sylius shipments API endpoint is `/api/v1/shipments`.
 
 Index of all shipments
 ----------------------
@@ -10,7 +10,7 @@ You can retrieve the full list shipment by making the following request:
 
 .. code-block:: text
 
-    GET /api/shipments/
+    GET /api/v1/shipments/
 
 Parameters
 ~~~~~~~~~~
@@ -65,13 +65,13 @@ Response
                 {
                     "_links": {
                         "method": {
-                            "href": "/api/shipping-methods/120"
+                            "href": "/api/v1/shipping-methods/120"
                         },
                         "order": {
-                            "href": "/api/orders/302"
+                            "href": "/api/v1/orders/302"
                         },
                         "self": {
-                            "href": "/api/shipments/251"
+                            "href": "/api/v1/shipments/251"
                         }
                     },
                     "created_at": "2014-11-26T23:00:34+0000",
@@ -79,10 +79,10 @@ Response
                     "method": {
                         "_links": {
                             "self": {
-                                "href": "/api/shipping-methods/120"
+                                "href": "/api/v1/shipping-methods/120"
                             },
                             "zone": {
-                                "href": "/api/zones/120"
+                                "href": "/api/v1/zones/120"
                             }
                         },
                         "calculator": "flexible_rate",
@@ -111,7 +111,7 @@ You can view a single shipment by executing the following request:
 
 .. code-block:: text
 
-    GET /api/shipments/251
+    GET /api/v1/shipments/251
 
 Response
 ~~~~~~~~
@@ -125,13 +125,13 @@ Response
     {
         "_links": {
             "method": {
-                "href": "/api/shipping-methods/120"
+                "href": "/api/v1/shipping-methods/120"
             },
             "order": {
-                "href": "/api/orders/302"
+                "href": "/api/v1/orders/302"
             },
             "self": {
-                "href": "/api/shipments/251"
+                "href": "/api/v1/shipments/251"
             }
         },
         "created_at": "2014-11-26T23:00:34+0000",
@@ -139,10 +139,10 @@ Response
         "method": {
             "_links": {
                 "self": {
-                    "href": "/api/shipping-methods/120"
+                    "href": "/api/v1/shipping-methods/120"
                 },
                 "zone": {
-                    "href": "/api/zones/120"
+                    "href": "/api/v1/zones/120"
                 }
             },
             "calculator": "flexible_rate",
@@ -168,7 +168,7 @@ You can delete a shipment from the system by making the following DELETE call:
 
 .. code-block:: text
 
-    DELETE /api/shipments/24
+    DELETE /api/v1/shipments/24
 
 Response
 ~~~~~~~~

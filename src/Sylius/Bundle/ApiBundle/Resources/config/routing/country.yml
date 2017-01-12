@@ -7,6 +7,7 @@ sylius_api_country_index:
     defaults:
         _controller: sylius.controller.country:indexAction
         _sylius:
+            serialization_version: $version
             paginate: $limit
             sortable: true
 
@@ -15,6 +16,8 @@ sylius_api_country_create:
     methods: [POST]
     defaults:
         _controller: sylius.controller.country:createAction
+        _sylius:
+            serialization_version: $version
 
 sylius_api_country_update:
     path: /{code}
@@ -22,6 +25,7 @@ sylius_api_country_update:
     defaults:
         _controller: sylius.controller.country:updateAction
         _sylius:
+            serialization_version: $version
             criteria:
                 code: $code
 
@@ -31,6 +35,7 @@ sylius_api_country_delete:
     defaults:
         _controller: sylius.controller.country:deleteAction
         _sylius:
+            serialization_version: $version
             criteria:
                 code: $code
             csrf_protection: false
@@ -41,5 +46,6 @@ sylius_api_country_show:
     defaults:
         _controller: sylius.controller.country:showAction
         _sylius:
+            serialization_version: $version
             criteria:
                 code: $code

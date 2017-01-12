@@ -1,7 +1,7 @@
 Orders API
 ==========
 
-Sylius orders API endpoint is `/api/orders`.
+Sylius orders API endpoint is `/api/v1/orders`.
 
 Index of all orders
 -------------------
@@ -10,7 +10,7 @@ You can retrieve the full list order by making the following request:
 
 .. code-block:: text
 
-    GET /api/orders/
+    GET /api/v1/orders/
 
 Parameters
 ~~~~~~~~~~
@@ -158,7 +158,7 @@ You can view a single order by executing the following request:
 
 .. code-block:: text
 
-    GET /api/orders/24/
+    GET /api/v1/orders/24/
 
 Response
 ~~~~~~~~
@@ -345,7 +345,7 @@ To create a new order (cart), you need to execute the following request:
 
 .. code-block:: text
 
-    POST /api/orders/
+    POST /api/v1/orders/
 
 Parameters
 ~~~~~~~~~~
@@ -426,7 +426,7 @@ You can delete (soft) an order from the system by making the following DELETE ca
 
 .. code-block:: text
 
-    DELETE /api/orders/24
+    DELETE /api/v1/orders/24
 
 Response
 ~~~~~~~~
@@ -442,7 +442,7 @@ To add an item to order, you simply need to do a POST request:
 
 .. code-block:: text
 
-    POST /api/orders/305/items/
+    POST /api/v1/orders/305/items/
 
 Parameters
 ~~~~~~~~~~
@@ -468,10 +468,10 @@ Response will contain a representation of the newly created item.
     {
         "_links": {
             "product": {
-                "href": "/app_dev.php/api/products/101"
+                "href": "/app_dev.php/api/v1/products/101"
             },
             "variant": {
-                "href": "/app_dev.php/api/products/101/variants/779"
+                "href": "/app_dev.php/api/v1/products/101/variants/779"
             }
         },
         "adjustments": [],
@@ -482,7 +482,7 @@ Response will contain a representation of the newly created item.
             {
                 "_links": {
                     "order": {
-                        "href": "/app_dev.php/api/orders/52"
+                        "href": "/app_dev.php/api/v1/orders/52"
                     }
                 },
                 "created_at": "2014-12-15T13:18:48+0000",
@@ -493,7 +493,7 @@ Response will contain a representation of the newly created item.
             {
                 "_links": {
                     "order": {
-                        "href": "/app_dev.php/api/orders/52"
+                        "href": "/app_dev.php/api/v1/orders/52"
                     }
                 },
                 "created_at": "2014-12-15T13:18:48+0000",
@@ -504,7 +504,7 @@ Response will contain a representation of the newly created item.
             {
                 "_links": {
                     "order": {
-                        "href": "/app_dev.php/api/orders/52"
+                        "href": "/app_dev.php/api/v1/orders/52"
                     }
                 },
                 "created_at": "2014-12-15T13:18:48+0000",
@@ -562,7 +562,7 @@ To remove an item from order, you can simply call a DELETE on its url.
 
 .. code-block:: text
 
-    DELETE /api/orders/49/items/245
+    DELETE /api/v1/orders/49/items/245
 
 Response
 ~~~~~~~~

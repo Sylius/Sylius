@@ -17,7 +17,7 @@ finalize
 purchase
     You provide Sylius with payment information and order is paid
 
-Sylius API endpoint is ``/api/checkouts``.
+Sylius API endpoint is ``/api/v1/checkouts``.
 
 Addressing step
 ---------------
@@ -28,7 +28,7 @@ You need to pass order id in the following url and make a PUT call:
 
 .. code-block:: text
 
-    PUT /api/checkouts/44
+    PUT /api/v1/checkouts/44
 
 Parameters
 ~~~~~~~~~~
@@ -82,7 +82,7 @@ The response will contain the updated order information.
         "shipping_address": {
             "_links": {
                 "country": {
-                    "href": "/app_dev.php/api/countries/9"
+                    "href": "/app_dev.php/api/v1/countries/9"
                 }
             },
             "city": "New York",
@@ -97,7 +97,7 @@ The response will contain the updated order information.
         "billing_address": {
             "_links": {
                 "country": {
-                    "href": "/app_dev.php/api/countries/9"
+                    "href": "/app_dev.php/api/v1/countries/9"
                 }
             },
             "city": "New York",
@@ -112,7 +112,7 @@ The response will contain the updated order information.
         "channel": {
             "_links": {
                 "self": {
-                    "href": "/app_dev.php/api/channels/3"
+                    "href": "/app_dev.php/api/v1/channels/3"
                 }
             },
             "code": "WEB-US",
@@ -162,7 +162,7 @@ You can get these informations by first calling a GET request on the checkout un
 
 .. code-block:: text
 
-    GET /api/checkouts/44
+    GET /api/v1/checkouts/44
 
 .. code-block:: text
 
@@ -176,10 +176,10 @@ You can get these informations by first calling a GET request on the checkout un
                 {
                     "_links": {
                         "self": {
-                            "href": "/app_dev.php/api/shipping-methods/4"
+                            "href": "/app_dev.php/api/v1/shipping-methods/4"
                         },
                         "zone": {
-                            "href": "/app_dev.php/api/zones/4"
+                            "href": "/app_dev.php/api/v1/zones/4"
                         }
                     },
                     "calculator": "flexible_rate",
@@ -199,7 +199,7 @@ You can get these informations by first calling a GET request on the checkout un
             "shipment": {
                 "_links": {
                     "order": {
-                        "href": "/app_dev.php/api/orders/52"
+                        "href": "/app_dev.php/api/v1/orders/52"
                     }
                 },
                 "created_at": "2014-12-15T14:11:32+0000",
@@ -217,7 +217,7 @@ You need to pass an id of shipping method for every id, you should obtain them i
 
 .. code-block:: text
 
-    PUT /api/checkouts/44
+    PUT /api/v1/checkouts/44
 
 Parameters
 ~~~~~~~~~~
@@ -260,13 +260,13 @@ Response will contain an updated order information.
             {
                 "_links": {
                     "method": {
-                        "href": "/app_dev.php/api/shipping-methods/4"
+                        "href": "/app_dev.php/api/v1/shipping-methods/4"
                     },
                     "order": {
-                        "href": "/app_dev.php/api/orders/52"
+                        "href": "/app_dev.php/api/v1/orders/52"
                     },
                     "self": {
-                        "href": "/app_dev.php/api/shipments/51"
+                        "href": "/app_dev.php/api/v1/shipments/51"
                     }
                 },
                 "created_at": "2014-12-15T14:30:40+0000",
@@ -274,10 +274,10 @@ Response will contain an updated order information.
                 "method": {
                     "_links": {
                         "self": {
-                            "href": "/app_dev.php/api/shipping-methods/4"
+                            "href": "/app_dev.php/api/v1/shipping-methods/4"
                         },
                         "zone": {
-                            "href": "/app_dev.php/api/zones/4"
+                            "href": "/app_dev.php/api/v1/zones/4"
                         }
                     },
                     "calculator": "flexible_rate",
@@ -316,7 +316,7 @@ To obtain a list of available payment methods for this order, simply call a GET 
 
 .. code-block:: text
 
-    GET /api/checkouts/44
+    GET /api/v1/checkouts/44
 
 .. code-block:: text
 
@@ -329,7 +329,7 @@ To obtain a list of available payment methods for this order, simply call a GET 
             "1": {
                 "_links": {
                     "self": {
-                        "href": "/app_dev.php/api/payment-methods/1"
+                        "href": "/app_dev.php/api/v1/payment-methods/1"
                     }
                 },
                 "id": 1,
@@ -340,7 +340,7 @@ To obtain a list of available payment methods for this order, simply call a GET 
             "2": {
                 "_links": {
                     "self": {
-                        "href": "/app_dev.php/api/payment-methods/2"
+                        "href": "/app_dev.php/api/v1/payment-methods/2"
                     }
                 },
                 "id": 2,
@@ -351,7 +351,7 @@ To obtain a list of available payment methods for this order, simply call a GET 
             "3": {
                 "_links": {
                     "self": {
-                        "href": "/app_dev.php/api/payment-methods/3"
+                        "href": "/app_dev.php/api/v1/payment-methods/3"
                     }
                 },
                 "id": 3,
@@ -362,7 +362,7 @@ To obtain a list of available payment methods for this order, simply call a GET 
             "4": {
                 "_links": {
                     "self": {
-                        "href": "/app_dev.php/api/payment-methods/4"
+                        "href": "/app_dev.php/api/v1/payment-methods/4"
                     }
                 },
                 "id": 4,
@@ -373,7 +373,7 @@ To obtain a list of available payment methods for this order, simply call a GET 
             "5": {
                 "_links": {
                     "self": {
-                        "href": "/app_dev.php/api/payment-methods/5"
+                        "href": "/app_dev.php/api/v1/payment-methods/5"
                     }
                 },
                 "id": 5,
@@ -385,10 +385,10 @@ To obtain a list of available payment methods for this order, simply call a GET 
         "payment": {
             "_links": {
                 "self": {
-                  "href": "/app_dev.php/api/payments/2"
+                  "href": "/app_dev.php/api/v1/payments/2"
                 },
                 "order": {
-                    "href": "/app_dev.php/api/orders/52"
+                    "href": "/app_dev.php/api/v1/orders/52"
                 }
             },
             "id": 2,
@@ -404,7 +404,7 @@ With that information, another PUT request with the id of payment method is enou
 
 .. code-block:: text
 
-    PUT /api/checkouts/44
+    PUT /api/v1/checkouts/44
 
 Parameters
 ~~~~~~~~~~
@@ -446,13 +446,13 @@ Response will contain the updated order information.
             {
                 "_links": {
                     "order": {
-                        "href": "/app_dev.php/api/orders/52"
+                        "href": "/app_dev.php/api/v1/orders/52"
                     },
                     "payment-method": {
-                        "href": "/app_dev.php/api/payment-methods/1"
+                        "href": "/app_dev.php/api/v1/payment-methods/1"
                     },
                     "self": {
-                        "href": "/app_dev.php/api/payments/51"
+                        "href": "/app_dev.php/api/v1/payments/51"
                     }
                 },
                 "amount": 1504750,
@@ -461,7 +461,7 @@ Response will contain the updated order information.
                 "method": {
                     "_links": {
                         "self": {
-                            "href": "/app_dev.php/api/payment-methods/1"
+                            "href": "/app_dev.php/api/v1/payment-methods/1"
                         }
                     },
                     "created_at": "2014-12-03T09:54:28+0000",
@@ -491,7 +491,7 @@ Now your order is fully constructed, you can get its latest snapshot by calling 
 
 .. code-block:: text
 
-    GET /api/checkouts/44
+    GET /api/v1/checkouts/44
 
 .. code-block:: text
 
@@ -536,7 +536,7 @@ Now your order is fully constructed, you can get its latest snapshot by calling 
         "billing_address": {
             "_links": {
                 "country": {
-                    "href": "/app_dev.php/api/countries/9"
+                    "href": "/app_dev.php/api/v1/countries/9"
                 }
             },
             "city": "New York",
@@ -551,7 +551,7 @@ Now your order is fully constructed, you can get its latest snapshot by calling 
         "channel": {
             "_links": {
                 "self": {
-                    "href": "/app_dev.php/api/channels/3"
+                    "href": "/app_dev.php/api/v1/channels/3"
                 }
             },
             "code": "WEB-US",
@@ -573,10 +573,10 @@ Now your order is fully constructed, you can get its latest snapshot by calling 
             {
                 "_links": {
                     "product": {
-                        "href": "/app_dev.php/api/products/101"
+                        "href": "/app_dev.php/api/v1/products/101"
                     },
                     "variant": {
-                        "href": "/app_dev.php/api/products/101/variants/779"
+                        "href": "/app_dev.php/api/v1/products/101/variants/779"
                     }
                 },
                 "adjustments": [],
@@ -587,7 +587,7 @@ Now your order is fully constructed, you can get its latest snapshot by calling 
                     {
                         "_links": {
                             "order": {
-                                "href": "/app_dev.php/api/orders/52"
+                                "href": "/app_dev.php/api/v1/orders/52"
                             }
                         },
                         "created_at": "2014-12-15T13:18:48+0000",
@@ -598,7 +598,7 @@ Now your order is fully constructed, you can get its latest snapshot by calling 
                     {
                         "_links": {
                             "order": {
-                                "href": "/app_dev.php/api/orders/52"
+                                "href": "/app_dev.php/api/v1/orders/52"
                             }
                         },
                         "created_at": "2014-12-15T13:18:48+0000",
@@ -609,7 +609,7 @@ Now your order is fully constructed, you can get its latest snapshot by calling 
                     {
                         "_links": {
                             "order": {
-                                "href": "/app_dev.php/api/orders/52"
+                                "href": "/app_dev.php/api/v1/orders/52"
                             }
                         },
                         "created_at": "2014-12-15T13:18:48+0000",
@@ -666,13 +666,13 @@ Now your order is fully constructed, you can get its latest snapshot by calling 
             {
                 "_links": {
                     "order": {
-                        "href": "/app_dev.php/api/orders/52"
+                        "href": "/app_dev.php/api/v1/orders/52"
                     },
                     "payment-method": {
-                        "href": "/app_dev.php/api/payment-methods/1"
+                        "href": "/app_dev.php/api/v1/payment-methods/1"
                     },
                     "self": {
-                        "href": "/app_dev.php/api/payments/51"
+                        "href": "/app_dev.php/api/v1/payments/51"
                     }
                 },
                 "amount": 1504750,
@@ -681,7 +681,7 @@ Now your order is fully constructed, you can get its latest snapshot by calling 
                 "method": {
                     "_links": {
                         "self": {
-                            "href": "/app_dev.php/api/payment-methods/1"
+                            "href": "/app_dev.php/api/v1/payment-methods/1"
                         }
                     },
                     "created_at": "2014-12-03T09:54:28+0000",
@@ -697,13 +697,13 @@ Now your order is fully constructed, you can get its latest snapshot by calling 
             {
                 "_links": {
                     "method": {
-                        "href": "/app_dev.php/api/shipping-methods/4"
+                        "href": "/app_dev.php/api/v1/shipping-methods/4"
                     },
                     "order": {
-                        "href": "/app_dev.php/api/orders/52"
+                        "href": "/app_dev.php/api/v1/orders/52"
                     },
                     "self": {
-                        "href": "/app_dev.php/api/shipments/51"
+                        "href": "/app_dev.php/api/v1/shipments/51"
                     }
                 },
                 "created_at": "2014-12-15T14:30:40+0000",
@@ -711,10 +711,10 @@ Now your order is fully constructed, you can get its latest snapshot by calling 
                 "method": {
                     "_links": {
                         "self": {
-                            "href": "/app_dev.php/api/shipping-methods/4"
+                            "href": "/app_dev.php/api/v1/shipping-methods/4"
                         },
                         "zone": {
-                            "href": "/app_dev.php/api/zones/4"
+                            "href": "/app_dev.php/api/v1/zones/4"
                         }
                     },
                     "calculator": "flexible_rate",
@@ -737,7 +737,7 @@ Now your order is fully constructed, you can get its latest snapshot by calling 
         "shipping_address": {
             "_links": {
                 "country": {
-                    "href": "/app_dev.php/api/countries/9"
+                    "href": "/app_dev.php/api/v1/countries/9"
                 }
             },
             "city": "New York",
@@ -757,7 +757,7 @@ This is how your final order looks, if you are happy with that response, simply 
 
 .. code-block:: text
 
-    PUT /api/checkouts/44
+    PUT /api/v1/checkouts/44
 
 Response
 ~~~~~~~~
@@ -807,7 +807,7 @@ Final response contains the full order information, now you can call the purchas
         "billing_address": {
             "_links": {
                 "country": {
-                    "href": "/app_dev.php/api/countries/9"
+                    "href": "/app_dev.php/api/v1/countries/9"
                 }
             },
             "city": "New York",
@@ -822,7 +822,7 @@ Final response contains the full order information, now you can call the purchas
         "channel": {
             "_links": {
                 "self": {
-                    "href": "/app_dev.php/api/channels/3"
+                    "href": "/app_dev.php/api/v1/channels/3"
                 }
             },
             "code": "WEB-US",
@@ -843,10 +843,10 @@ Final response contains the full order information, now you can call the purchas
             {
                 "_links": {
                     "product": {
-                        "href": "/app_dev.php/api/products/101"
+                        "href": "/app_dev.php/api/v1/products/101"
                     },
                     "variant": {
-                        "href": "/app_dev.php/api/products/101/variants/779"
+                        "href": "/app_dev.php/api/v1/products/101/variants/779"
                     }
                 },
                 "adjustments": [],
@@ -857,7 +857,7 @@ Final response contains the full order information, now you can call the purchas
                     {
                         "_links": {
                             "order": {
-                                "href": "/app_dev.php/api/orders/52"
+                                "href": "/app_dev.php/api/v1/orders/52"
                             }
                         },
                         "created_at": "2014-12-15T13:18:48+0000",
@@ -868,7 +868,7 @@ Final response contains the full order information, now you can call the purchas
                     {
                         "_links": {
                             "order": {
-                                "href": "/app_dev.php/api/orders/52"
+                                "href": "/app_dev.php/api/v1/orders/52"
                             }
                         },
                         "created_at": "2014-12-15T13:18:48+0000",
@@ -879,7 +879,7 @@ Final response contains the full order information, now you can call the purchas
                     {
                         "_links": {
                             "order": {
-                                "href": "/app_dev.php/api/orders/52"
+                                "href": "/app_dev.php/api/v1/orders/52"
                             }
                         },
                         "created_at": "2014-12-15T13:18:48+0000",
@@ -936,13 +936,13 @@ Final response contains the full order information, now you can call the purchas
             {
                 "_links": {
                     "order": {
-                        "href": "/app_dev.php/api/orders/52"
+                        "href": "/app_dev.php/api/v1/orders/52"
                     },
                     "payment-method": {
-                        "href": "/app_dev.php/api/payment-methods/1"
+                        "href": "/app_dev.php/api/v1/payment-methods/1"
                     },
                     "self": {
-                        "href": "/app_dev.php/api/payments/51"
+                        "href": "/app_dev.php/api/v1/payments/51"
                     }
                 },
                 "amount": 1504750,
@@ -951,7 +951,7 @@ Final response contains the full order information, now you can call the purchas
                 "method": {
                     "_links": {
                         "self": {
-                            "href": "/app_dev.php/api/payment-methods/1"
+                            "href": "/app_dev.php/api/v1/payment-methods/1"
                         }
                     },
                     "created_at": "2014-12-03T09:54:28+0000",
@@ -967,13 +967,13 @@ Final response contains the full order information, now you can call the purchas
             {
                 "_links": {
                     "method": {
-                        "href": "/app_dev.php/api/shipping-methods/4"
+                        "href": "/app_dev.php/api/v1/shipping-methods/4"
                     },
                     "order": {
-                        "href": "/app_dev.php/api/orders/52"
+                        "href": "/app_dev.php/api/v1/orders/52"
                     },
                     "self": {
-                        "href": "/app_dev.php/api/shipments/51"
+                        "href": "/app_dev.php/api/v1/shipments/51"
                     }
                 },
                 "created_at": "2014-12-15T14:30:40+0000",
@@ -981,10 +981,10 @@ Final response contains the full order information, now you can call the purchas
                 "method": {
                     "_links": {
                         "self": {
-                            "href": "/app_dev.php/api/shipping-methods/4"
+                            "href": "/app_dev.php/api/v1/shipping-methods/4"
                         },
                         "zone": {
-                            "href": "/app_dev.php/api/zones/4"
+                            "href": "/app_dev.php/api/v1/zones/4"
                         }
                     },
                     "calculator": "flexible_rate",
@@ -1007,7 +1007,7 @@ Final response contains the full order information, now you can call the purchas
         "shipping_address": {
             "_links": {
                 "country": {
-                    "href": "/app_dev.php/api/countries/9"
+                    "href": "/app_dev.php/api/v1/countries/9"
                 }
             },
             "city": "New York",
@@ -1033,7 +1033,7 @@ TODO.
 
 .. code-block:: text
 
-    PUT /api/checkouts/44
+    PUT /api/v1/checkouts/44
 
 Parameters
 ~~~~~~~~~~

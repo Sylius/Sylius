@@ -7,6 +7,7 @@ sylius_api_order_item_index:
     defaults:
         _controller: sylius.controller.order_item:indexAction
         _sylius:
+            serialization_version: $version
             filterable: true
             criteria:
                 order: $orderId
@@ -17,6 +18,8 @@ sylius_api_order_item_create:
     methods: [POST]
     defaults:
         _controller: sylius.controller.order_item:createAction
+        _sylius:
+            serialization_version: $version
 
 sylius_api_order_item_update:
     path: /{id}
@@ -24,6 +27,7 @@ sylius_api_order_item_update:
     defaults:
         _controller: sylius.controller.order_item:updateAction
         _sylius:
+            serialization_version: $version
             criteria:
                 order: $orderId
 
@@ -33,6 +37,7 @@ sylius_api_order_item_delete:
     defaults:
         _controller: sylius.controller.order_item:deleteAction
         _sylius:
+            serialization_version: $version
             criteria:
                 order: $orderId
             csrf_protection: false

@@ -21,3 +21,4 @@ Sylius\Component\Addressing\Model\Country:
                 route: sylius_api_country_show
                 parameters:
                     code: expr(object.getCode())
+                    version: 1

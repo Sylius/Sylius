@@ -1,7 +1,7 @@
 Payments API
 ============
 
-Sylius payment API endpoint is `/api/payments`.
+Sylius payment API endpoint is `/api/v1/payments`.
 
 Index of all payments
 ---------------------
@@ -10,7 +10,7 @@ You can retrieve the full list payment by making the following request:
 
 .. code-block:: text
 
-    GET /api/payments/
+    GET /api/v1/payments/
 
 Parameters
 ~~~~~~~~~~
@@ -72,7 +72,7 @@ You can view a single payment by executing the following request:
 
 .. code-block:: text
 
-    GET /api/payments/251
+    GET /api/v1/payments/251
 
 Response
 ~~~~~~~~
@@ -92,7 +92,7 @@ You can delete a payment from the system by making the following DELETE call:
 
 .. code-block:: text
 
-    DELETE /api/payments/99
+    DELETE /api/v1/payments/99
 
 Response
 ~~~~~~~~

@@ -8,6 +8,8 @@
 
 ### ApiBundle
 
+* All api routes are prefixed with version number. For example route: `/api/customers` has changed to `/api/v1/customers`. 
+
 ### Attribute / AttributeBundle
 
 ### Channel / ChannelBundle
