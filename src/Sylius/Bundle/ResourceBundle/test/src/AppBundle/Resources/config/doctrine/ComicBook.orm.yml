@@ -8,7 +8,10 @@ AppBundle\Entity\ComicBook:
             generator:
                 strategy: AUTO
     fields:
-        author:
+        authorFirstName:
+            type: string
+            length: 255
+        authorLastName:
             type: string
             length: 255
         title:
