@@ -50,9 +50,7 @@ Having these parameters defined you can configure the gateway inside the ``app/c
 Add a payment method with the Stripe Credit card gateway in the Admin Panel
 ---------------------------------------------------------------------------
 
-* Create a new payment method and choose the ``Stripe Credit Card`` gateway for it.
-
-* Add the new method to a channel.
+* Create a new payment method, choose the ``Stripe Credit Card`` gateway for it and enable it in chosen channels.
 
 .. tip::
 
