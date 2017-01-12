@@ -16,7 +16,7 @@
         <service id="sylius.form.type.gateway_config" class="Sylius\Bundle\PayumBundle\Form\Type\GatewayConfigType">
             <argument>%sylius.model.gateway_config.class%</argument>
             <argument type="collection"><argument>sylius</argument></argument>
-            <argument type="service" id="sylius.registry.payum_gateway_config_type" />
+            <argument type="service" id="sylius.form_registry.payum_gateway_config" />
             <tag name="form.type" />
         </service>
 

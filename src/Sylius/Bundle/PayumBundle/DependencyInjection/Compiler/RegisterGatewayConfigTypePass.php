@@ -25,11 +25,11 @@ final class RegisterGatewayConfigTypePass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->has('sylius.registry.payum_gateway_config_type')) {
+        if (!$container->has('sylius.form_registry.payum_gateway_config')) {
             return;
         }
 
-        $registry = $container->findDefinition('sylius.registry.payum_gateway_config_type');
+        $formRegistry = $container->findDefinition('sylius.form_registry.payum_gateway_config');
         $gatewayFactories = [];
 
         $gatewayConfigurationTypes = $container->findTaggedServiceIds('sylius.gateway_configuration_type');
@@ -41,7 +41,10 @@ final class RegisterGatewayConfigTypePass implements CompilerPassInterface
 
             $gatewayFactories[$attributes[0]['type']] = $attributes[0]['label'];
 
-            $registry->addMethodCall('register', [$attributes[0]['type'], new Reference($id)]);
+            $formRegistry->addMethodCall(
+                'add',
+                ['gateway_config', $attributes[0]['type'], $container->getDefinition($id)->getClass()]
+            );
         }
 
         $gatewayFactories = array_merge($gatewayFactories, ['offline' => 'sylius.payum_gateway_factory.offline']);

@@ -22,7 +22,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class PaypalGatewayConfigurationType extends AbstractType implements GatewayConfigurationTypeInterface
+final class PaypalGatewayConfigurationType extends AbstractType
 {
     /**
      * {@inheritdoc}

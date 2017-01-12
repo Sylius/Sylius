@@ -28,9 +28,6 @@
             <factory class="Payum\Core\Bridge\Guzzle\HttpClientFactory" method="create" />
         </service>
 
-        <service id="sylius.registry.payum_gateway_config_type" class="Sylius\Component\Registry\ServiceRegistry">
-            <argument>Sylius\Bundle\PayumBundle\Form\Type\GatewayConfigurationTypeInterface</argument>
-            <argument>Payum gateway config</argument>
-        </service>
+        <service id="sylius.form_registry.payum_gateway_config" class="Sylius\Bundle\ResourceBundle\Form\Registry\FormTypeRegistry" />
     </services>
 </container>

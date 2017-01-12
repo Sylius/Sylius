@@ -12,8 +12,8 @@
 namespace Sylius\Bundle\PayumBundle\Form\Type;
 
 use Payum\Core\Model\GatewayConfigInterface;
+use Sylius\Bundle\ResourceBundle\Form\Registry\FormTypeRegistryInterface;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -26,19 +26,19 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 final class GatewayConfigType extends AbstractResourceType
 {
     /**
-     * @var ServiceRegistryInterface
+     * @var FormTypeRegistryInterface
      */
     private $gatewayConfigurationTypeRegistry;
 
     /**
      * {@inheritdoc}
      *
-     * @param ServiceRegistryInterface $gatewayConfigurationTypeRegistry
+     * @param FormTypeRegistryInterface $gatewayConfigurationTypeRegistry
      */
     public function __construct(
         $dataClass,
         $validationGroups = [],
-        ServiceRegistryInterface $gatewayConfigurationTypeRegistry
+        FormTypeRegistryInterface $gatewayConfigurationTypeRegistry
     ) {
         parent::__construct($dataClass, $validationGroups);
 
@@ -68,11 +68,12 @@ final class GatewayConfigType extends AbstractResourceType
                 return;
             }
 
-            if (!$this->gatewayConfigurationTypeRegistry->has($options['factory'], 'configuration')) {
+            if (!$this->gatewayConfigurationTypeRegistry->has('gateway_config', $options['factory'])) {
                 return;
             }
 
-            $event->getForm()->add('config', get_class($this->gatewayConfigurationTypeRegistry->get($options['factory'])), [
+            $configType = $this->gatewayConfigurationTypeRegistry->get('gateway_config', $options['factory']);
+            $event->getForm()->add('config', $configType, [
                 'label' => false,
                 'auto_initialize' => false,
             ]);

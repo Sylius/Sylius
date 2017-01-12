@@ -19,7 +19,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class StripeGatewayConfigurationType extends AbstractType implements GatewayConfigurationTypeInterface
+final class StripeGatewayConfigurationType extends AbstractType
 {
     /**
      * {@inheritdoc}
