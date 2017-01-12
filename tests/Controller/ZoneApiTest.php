@@ -303,7 +303,7 @@ EOT;
     /**
      * @test
      */
-    function it_allows_to_delete_zone()
+    public function it_allows_to_delete_zone()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $zones = $this->loadFixturesFromFile('resources/zones.yml');

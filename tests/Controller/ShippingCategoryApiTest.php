@@ -19,7 +19,10 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class ShippingCategoryApiTest extends JsonApiTestCase
 {
-    public function testCreateShippingCategoryAccessDeniedResponse()
+    /**
+     * @test
+     */
+    public function test_create_shipping_category_access_denied_response()
     {
         $this->client->request('POST', '/api/shipping-categories/');
 
@@ -27,7 +30,10 @@ class ShippingCategoryApiTest extends JsonApiTestCase
         $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
     }
 
-    public function testCreateShippingCategoryValidationFailResponse()
+    /**
+     * @test
+     */
+    public function test_create_shipping_category_validation_fail_response()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -40,7 +46,10 @@ class ShippingCategoryApiTest extends JsonApiTestCase
         $this->assertResponse($response, 'shipping_category/create_validation_fail_response', Response::HTTP_BAD_REQUEST);
     }
 
-    public function testCreateShippingCategoryResponse()
+    /**
+     * @test
+     */
+    public function test_create_shipping_category_response()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -62,7 +71,10 @@ EOT;
         $this->assertResponse($response, 'shipping_category/create_response', Response::HTTP_CREATED);
     }
 
-    public function testGetShippingCategoriesListAccessDeniedResponse()
+    /**
+     * @test
+     */
+    public function test_get_shipping_categories_list_access_denied_response()
     {
         $this->client->request('GET', '/api/shipping-categories/');
 
@@ -70,7 +82,10 @@ EOT;
         $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
     }
 
-    public function testGetShippingCategoriesListResponse()
+    /**
+     * @test
+     */
+    public function test_get_shipping_categories_list_response()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/shipping_categories.yml');
@@ -83,7 +98,10 @@ EOT;
         $this->assertResponse($response, 'shipping_category/index_response', Response::HTTP_OK);
     }
 
-    public function testGetShippingCategoryAccessDeniedResponse()
+    /**
+     * @test
+     */
+    public function test_get_shipping_category_access_denied_response()
     {
         $this->client->request('GET', '/api/shipping-categories/1');
 
@@ -91,7 +109,10 @@ EOT;
         $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
     }
 
-    public function testGetShippingCategoryWhichDoesNotExistResponse()
+    /**
+     * @test
+     */
+    public function test_get_shipping_category_which_does_not_exist_response()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -104,7 +125,10 @@ EOT;
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
     }
 
-    public function testGetShippingCategoryResponse()
+    /**
+     * @test
+     */
+    public function test_get_shipping_category_response()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $shippingCategories = $this->loadFixturesFromFile('resources/shipping_categories.yml');
@@ -118,7 +142,10 @@ EOT;
         $this->assertResponse($response, 'shipping_category/show_response', Response::HTTP_OK);
     }
 
-    public function testFullUpdateShippingCategoryAccessDeniedResponse()
+    /**
+     * @test
+     */
+    public function test_full_update_shipping_category_access_denied_response()
     {
         $this->client->request('PUT', '/api/shipping-categories/1');
 
@@ -126,7 +153,10 @@ EOT;
         $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
     }
 
-    public function testFullUpdateShippingCategoryWhichDoesNotExistResponse()
+    /**
+     * @test
+     */
+    public function test_full_update_shipping_category_which_does_not_exist_response()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -139,7 +169,10 @@ EOT;
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
     }
 
-    public function testFullUpdateShippingCategoryValidationFailResponse()
+    /**
+     * @test
+     */
+    public function test_full_update_shipping_category_validation_fail_response()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $shippingCategories = $this->loadFixturesFromFile('resources/shipping_categories.yml');
@@ -153,7 +186,10 @@ EOT;
         $this->assertResponse($response, 'shipping_category/update_validation_fail_response', Response::HTTP_BAD_REQUEST);
     }
 
-    public function testFullUpdateShippingCategoryResponse()
+    /**
+     * @test
+     */
+    public function test_full_update_shipping_category_response()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $shippingCategories = $this->loadFixturesFromFile('resources/shipping_categories.yml');
@@ -183,7 +219,10 @@ EOT;
         $this->assertResponse($response, 'shipping_category/update_response', Response::HTTP_OK);
     }
 
-    public function testPartialUpdateShippingCategoryWhichDoesNotExistResponse()
+    /**
+     * @test
+     */
+    public function test_partial_update_shipping_category_which_does_not_exist_response()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -196,7 +235,10 @@ EOT;
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
     }
 
-    public function testPartialUpdateShippingCategoryResponse()
+    /**
+     * @test
+     */
+    public function test_partial_update_shipping_category_response()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $shippingCategories = $this->loadFixturesFromFile('resources/shipping_categories.yml');
@@ -226,7 +268,10 @@ EOT;
         $this->assertResponse($response, 'shipping_category/update_response', Response::HTTP_OK);
     }
 
-    public function testDeleteShippingCategoryWhichDoesNotExistResponse()
+    /**
+     * @test
+     */
+    public function test_delete_shipping_category_which_does_not_exist_response()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -239,7 +284,10 @@ EOT;
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
     }
 
-    public function testDeleteShippingCategoryResponse()
+    /**
+     * @test
+     */
+    public function test_delete_shipping_category_response()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $shippingCategories = $this->loadFixturesFromFile('resources/shipping_categories.yml');

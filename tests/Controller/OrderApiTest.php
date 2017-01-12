@@ -27,7 +27,10 @@ final class OrderApiTest extends JsonApiTestCase
         'CONTENT_TYPE' => 'application/json',
     ];
 
-    public function testGetOrderWhichDoesNotExistResponse()
+    /**
+     * @test
+     */
+    public function test_get_order_which_does_not_exist_response()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -37,7 +40,10 @@ final class OrderApiTest extends JsonApiTestCase
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
     }
 
-    public function testGetOrderAccessDeniedResponse()
+    /**
+     * @test
+     */
+    public function test_get_order_access_denied_response()
     {
         $this->client->request('GET', '/api/orders/');
 
@@ -45,7 +51,10 @@ final class OrderApiTest extends JsonApiTestCase
         $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
     }
 
-    public function testGetOrderResponse()
+    /**
+     * @test
+     */
+    public function test_get_order_response()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $orderData = $this->loadFixturesFromFile('resources/orders.yml');
@@ -56,7 +65,10 @@ final class OrderApiTest extends JsonApiTestCase
         $this->assertResponse($response, 'order/show_response', Response::HTTP_OK);
     }
 
-    public function testCreateOrderAccessDeniedResponse()
+    /**
+     * @test
+     */
+    public function test_create_order_access_denied_response()
     {
         $this->client->request('POST', '/api/orders/');
 
@@ -64,7 +76,10 @@ final class OrderApiTest extends JsonApiTestCase
         $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
     }
 
-    public function testCreateOrderValidationFailResponse()
+    /**
+     * @test
+     */
+    public function test_create_order_validation_fail_response()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -74,7 +89,10 @@ final class OrderApiTest extends JsonApiTestCase
         $this->assertResponse($response, 'order/create_validation_fail_response', Response::HTTP_BAD_REQUEST);
     }
 
-    public function testCreateOrderResponse()
+    /**
+     * @test
+     */
+    public function test_create_order_response()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/orders.yml');
@@ -95,7 +113,10 @@ EOT;
         $this->assertResponse($response, 'order/show_response', Response::HTTP_CREATED);
     }
 
-    public function testGetOrdersListAccessDeniedResponse()
+    /**
+     * @test
+     */
+    public function test_get_orders_list_access_denied_response()
     {
         $this->client->request('GET', '/api/orders/');
 
@@ -103,7 +124,10 @@ EOT;
         $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
     }
 
-    public function testGetOrdersListResponse()
+    /**
+     * @test
+     */
+    public function test_get_orders_list_response()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/orders.yml');
@@ -114,7 +138,10 @@ EOT;
         $this->assertResponse($response, 'order/index_response', Response::HTTP_OK);
     }
 
-    public function testDeleteOrderWhichDoesNotExistResponse()
+    /**
+     * @test
+     */
+    public function test_delete_order_which_does_not_exist_response()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -124,7 +151,10 @@ EOT;
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
     }
 
-    public function testDeleteOrderResponse()
+    /**
+     * @test
+     */
+    public function test_delete_order_response()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $orders = $this->loadFixturesFromFile('resources/orders.yml');

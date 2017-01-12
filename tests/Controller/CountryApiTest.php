@@ -35,7 +35,10 @@ class CountryApiTest extends JsonApiTestCase
         'ACCEPT' => 'application/json',
     ];
 
-    public function testCreateCountryAccessDeniedResponse()
+    /**
+     * @test
+     */
+    public function test_create_country_access_denied_response()
     {
         $this->client->request('POST', '/api/countries/');
 
@@ -43,7 +46,10 @@ class CountryApiTest extends JsonApiTestCase
         $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
     }
 
-    public function testCreateCountryValidationFailResponse()
+    /**
+     * @test
+     */
+    public function test_create_country_validation_fail_response()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -53,7 +59,10 @@ class CountryApiTest extends JsonApiTestCase
         $this->assertResponse($response, 'country/create_validation_fail_response', Response::HTTP_BAD_REQUEST);
     }
 
-    public function testCreateCountryResponse()
+    /**
+     * @test
+     */
+    public function test_create_country_response()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -70,7 +79,10 @@ EOT;
         $this->assertResponse($response, 'country/create_response', Response::HTTP_CREATED);
     }
 
-    public function testGetSCountryWhichDoesNotExistResponse()
+    /**
+     * @test
+     */
+    public function test_get_s_country_which_does_not_exist_response()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -80,7 +92,10 @@ EOT;
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
     }
 
-    public function testGetCountriesListResponse()
+    /**
+     * @test
+     */
+    public function test_get_countries_list_response()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/countries.yml');
@@ -91,7 +106,10 @@ EOT;
         $this->assertResponse($response, 'country/index_response', Response::HTTP_OK);
     }
 
-    public function testGetCountryResponse()
+    /**
+     * @test
+     */
+    public function test_get_country_response()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $countries = $this->loadFixturesFromFile('resources/countries.yml');
@@ -102,7 +120,10 @@ EOT;
         $this->assertResponse($response, 'country/show_response', Response::HTTP_OK);
     }
 
-    public function testGetCountryAccessDeniedResponse()
+    /**
+     * @test
+     */
+    public function test_get_country_access_denied_response()
     {
         $this->loadFixturesFromFile('resources/countries.yml');
         $this->client->request('GET', '/api/countries/1');
@@ -112,7 +133,10 @@ EOT;
     }
 
 
-    public function testDeleteCountryWhichDoesNotExistResponse()
+    /**
+     * @test
+     */
+    public function test_delete_country_which_does_not_exist_response()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -122,7 +146,10 @@ EOT;
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
     }
 
-    public function testDeleteCountryResponse()
+    /**
+     * @test
+     */
+    public function test_delete_country_response()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $countries = $this->loadFixturesFromFile('resources/countries.yml');

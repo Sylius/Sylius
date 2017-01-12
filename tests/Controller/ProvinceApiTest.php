@@ -27,7 +27,10 @@ class ProvinceApiTest extends JsonApiTestCase
         'CONTENT_TYPE' => 'application/json',
     ];
 
-    public function testGetProvinceAccessDeniedResponse()
+    /**
+     * @test
+     */
+    public function test_get_province_access_denied_response()
     {
         $this->client->request('GET', '/api/countries/FR/provinces/centre');
 
@@ -35,7 +38,10 @@ class ProvinceApiTest extends JsonApiTestCase
         $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
     }
 
-    public function testGetProvinceResponse()
+    /**
+     * @test
+     */
+    public function test_get_province_response()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $countryData = $this->loadFixturesFromFile('resources/countries.yml');
@@ -46,7 +52,10 @@ class ProvinceApiTest extends JsonApiTestCase
         $this->assertResponse($response, 'province/show_response', Response::HTTP_OK);
     }
 
-    public function testDeleteProvinceResponse()
+    /**
+     * @test
+     */
+    public function test_delete_province_response()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $countryData = $this->loadFixturesFromFile('resources/countries.yml');

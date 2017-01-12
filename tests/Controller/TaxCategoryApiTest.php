@@ -20,7 +20,10 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class TaxCategoryApiTest extends JsonApiTestCase
 {
-    public function testCreateTaxCategoryAccessDeniedResponse()
+    /**
+     * @test
+     */
+    public function test_create_tax_category_access_denied_response()
     {
         $this->client->request('POST', '/api/tax-categories/');
 
@@ -28,7 +31,10 @@ class TaxCategoryApiTest extends JsonApiTestCase
         $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
     }
 
-    public function testCreateTaxCategoryValidationFailResponse()
+    /**
+     * @test
+     */
+    public function test_create_tax_category_validation_fail_response()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -41,7 +47,10 @@ class TaxCategoryApiTest extends JsonApiTestCase
         $this->assertResponse($response, 'tax_category/create_validation_fail_response', Response::HTTP_BAD_REQUEST);
     }
 
-    public function testCreateTaxCategoryResponse()
+    /**
+     * @test
+     */
+    public function test_create_tax_category_response()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -63,7 +72,10 @@ EOT;
         $this->assertResponse($response, 'tax_category/create_response', Response::HTTP_CREATED);
     }
 
-    public function testGetTaxCategoriesListAccessDeniedResponse()
+    /**
+     * @test
+     */
+    public function test_get_tax_categories_list_access_denied_response()
     {
         $this->client->request('GET', '/api/tax-categories/');
 
@@ -71,7 +83,10 @@ EOT;
         $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
     }
 
-    public function testGetTaxCategoriesListResponse()
+    /**
+     * @test
+     */
+    public function test_get_tax_categories_list_response()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/tax_categories.yml');
@@ -84,7 +99,10 @@ EOT;
         $this->assertResponse($response, 'tax_category/index_response', Response::HTTP_OK);
     }
 
-    public function testGetTaxCategoriesSortedListResponse()
+    /**
+     * @test
+     */
+    public function test_get_tax_categories_sorted_list_response()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/tax_categories.yml');
@@ -97,7 +115,10 @@ EOT;
         $this->assertResponse($response, 'tax_category/sorted_index_response', Response::HTTP_OK);
     }
 
-    public function testGetTaxCategoriesFilteredListByNameResponse()
+    /**
+     * @test
+     */
+    public function test_get_tax_categories_filtered_list_by_name_response()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/tax_categories_for_filtering.yml');
@@ -110,7 +131,10 @@ EOT;
         $this->assertResponse($response, 'tax_category/filtered_by_name_index_response', Response::HTTP_OK);
     }
 
-    public function testGetTaxCategoriesFilteredListByCodeResponse()
+    /**
+     * @test
+     */
+    public function test_get_tax_categories_filtered_list_by_code_response()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/tax_categories_for_filtering.yml');
@@ -123,7 +147,10 @@ EOT;
         $this->assertResponse($response, 'tax_category/filtered_by_code_index_response', Response::HTTP_OK);
     }
 
-    public function testGetTaxCategoryAccessDeniedResponse()
+    /**
+     * @test
+     */
+    public function test_get_tax_category_access_denied_response()
     {
         $this->client->request('GET', '/api/tax-categories/1');
 
@@ -131,7 +158,10 @@ EOT;
         $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
     }
 
-    public function testGetTaxCategoryWhichDoesNotExistResponse()
+    /**
+     * @test
+     */
+    public function test_get_tax_category_which_does_not_exist_response()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -144,7 +174,10 @@ EOT;
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
     }
 
-    public function testGetTaxCategoryResponse()
+    /**
+     * @test
+     */
+    public function test_get_tax_category_response()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $taxCategories = $this->loadFixturesFromFile('resources/tax_categories.yml');
@@ -158,7 +191,10 @@ EOT;
         $this->assertResponse($response, 'tax_category/show_response', Response::HTTP_OK);
     }
 
-    public function testFullUpdateTaxCategoryAccessDeniedResponse()
+    /**
+     * @test
+     */
+    public function test_full_update_tax_category_access_denied_response()
     {
         $this->client->request('PUT', '/api/tax-categories/1');
 
@@ -166,7 +202,10 @@ EOT;
         $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
     }
 
-    public function testFullUpdateTaxCategoryWhichDoesNotExistResponse()
+    /**
+     * @test
+     */
+    public function test_full_update_tax_category_which_does_not_exist_response()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -179,7 +218,10 @@ EOT;
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
     }
 
-    public function testFullUpdateTaxCategoryValidationFailResponse()
+    /**
+     * @test
+     */
+    public function test_full_update_tax_category_validation_fail_response()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $taxCategories = $this->loadFixturesFromFile('resources/tax_categories.yml');
@@ -193,7 +235,10 @@ EOT;
         $this->assertResponse($response, 'tax_category/update_validation_fail_response', Response::HTTP_BAD_REQUEST);
     }
 
-    public function testFullUpdateTaxCategoryResponse()
+    /**
+     * @test
+     */
+    public function test_full_update_tax_category_response()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $taxCategories = $this->loadFixturesFromFile('resources/tax_categories.yml');
@@ -223,7 +268,10 @@ EOT;
         $this->assertResponse($response, 'tax_category/update_response', Response::HTTP_OK);
     }
 
-    public function testPartialUpdateTaxCategoryWhichDoesNotExistResponse()
+    /**
+     * @test
+     */
+    public function test_partial_update_tax_category_which_does_not_exist_response()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -236,7 +284,10 @@ EOT;
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
     }
 
-    public function testPartialUpdateTaxCategoryResponse()
+    /**
+     * @test
+     */
+    public function test_partial_update_tax_category_response()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $taxCategories = $this->loadFixturesFromFile('resources/tax_categories.yml');
@@ -265,7 +316,10 @@ EOT;
         $this->assertResponse($response, 'tax_category/partial_update_response', Response::HTTP_OK);
     }
 
-    public function testDeleteTaxCategoryWhichDoesNotExistResponse()
+    /**
+     * @test
+     */
+    public function test_delete_tax_category_which_does_not_exist_response()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -278,7 +332,10 @@ EOT;
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
     }
 
-    public function testDeleteTaxCategoryResponse()
+    /**
+     * @test
+     */
+    public function test_delete_tax_category_response()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $taxCategories = $this->loadFixturesFromFile('resources/tax_categories.yml');
