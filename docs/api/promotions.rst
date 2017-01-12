@@ -1,7 +1,7 @@
 Promotions API
 ==============
 
-Sylius promotion API endpoint is `/api/promotions`.
+Sylius promotion API endpoint is `/api/v1/promotions`.
 
 Index of all promotions
 -----------------------
@@ -10,7 +10,7 @@ You can retrieve the full list of promotions by making the following request:
 
 .. code-block:: text
 
-    GET /api/promotions
+    GET /api/v1/promotions
 
 Parameters
 ~~~~~~~~~~
@@ -53,10 +53,10 @@ Response
                 {
                     "_links": {
                         "coupons": {
-                            "href": "/app_dev.php/api/promotions/1/coupons/"
+                            "href": "/app_dev.php/api/v1/promotions/1/coupons/"
                         },
                         "self": {
-                            "href": "/app_dev.php/api/promotions/1"
+                            "href": "/app_dev.php/api/v1/promotions/1"
                         }
                     },
                     "actions": [
@@ -97,7 +97,7 @@ You can view a single promotion by executing the following request:
 
 .. code-block:: text
 
-    GET /api/promotions/1
+    GET /api/v1/promotions/1
 
 Response
 ~~~~~~~~
@@ -111,10 +111,10 @@ Response
     {
         "_links": {
             "coupons": {
-                "href": "/app_dev.php/api/promotions/1/coupons/"
+                "href": "/app_dev.php/api/v1/promotions/1/coupons/"
             },
             "self": {
-                "href": "/app_dev.php/api/promotions/1"
+                "href": "/app_dev.php/api/v1/promotions/1"
             }
         },
         "actions": [
@@ -152,7 +152,7 @@ You can delete a promotion from the system by making the following DELETE call:
 
 .. code-block:: text
 
-    DELETE /api/promotions/1
+    DELETE /api/v1/promotions/1
 
 Response
 ~~~~~~~~
@@ -168,7 +168,7 @@ You can get the coupons associated with given promotion by performing the follow
 
 .. code-block:: text
 
-    GET /api/promotions/1/coupons
+    GET /api/v1/promotions/1/coupons
 
 Parameters
 ~~~~~~~~~~
@@ -194,10 +194,10 @@ Response
                 {
                     "_links": {
                         "promotion": {
-                            "href": "/api/promotions/1"
+                            "href": "/api/v1/promotions/1"
                         },
                         "self": {
-                            "href": "/api/promotions/1/coupons/1"
+                            "href": "/api/v1/promotions/1/coupons/1"
                         }
                     },
                     "code": "XAETWESF",
@@ -209,13 +209,13 @@ Response
         },
         "_links": {
             "first": {
-                "href": "/api/promotions/1/coupons/?page=1&limit=10"
+                "href": "/api/v1/promotions/1/coupons/?page=1&limit=10"
             },
             "last": {
-                "href": "/api/promotions/1/coupons/?page=1&limit=10"
+                "href": "/api/v1/promotions/1/coupons/?page=1&limit=10"
             },
             "self": {
-                "href": "/api/promotions/1/coupons/?page=1&limit=10"
+                "href": "/api/v1/promotions/1/coupons/?page=1&limit=10"
             }
         },
         "limit": 10,
@@ -231,7 +231,7 @@ To create a new coupon for given promotion, you can execute the following reques
 
 .. code-block:: text
 
-    POST /api/promotion/1/coupons/
+    POST /api/v1/promotion/1/coupons/
 
 Parameters
 ~~~~~~~~~~
@@ -253,10 +253,10 @@ Response
     {
         "_links": {
             "promotion": {
-                "href": "/api/promotions/1"
+                "href": "/api/v1/promotions/1"
             },
             "self": {
-                "href": "/api/promotions/1/coupons/2"
+                "href": "/api/v1/promotions/1/coupons/2"
             }
         },
         "code": "SUPER-AWESOME-SALE",

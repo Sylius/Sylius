@@ -1,7 +1,7 @@
 Shipping Categories
 ===================
 
-These endpoints will allow you to easily manage shipping categories. Base URI is `/api/shipping-categories`.
+These endpoints will allow you to easily manage shipping categories. Base URI is `/api/v1/shipping-categories`.
 
 When you get a collection of resources, "Default" serialization group will be used and following fields will be exposed:
 
@@ -45,7 +45,7 @@ Definition
 
 .. code-block:: text
 
-    GET /api/shipping-categories/
+    GET /api/v1/shipping-categories/
 
 +---------------+----------------+-------------------------------------------------------------------+
 | Parameter     | Parameter type | Description                                                       |
@@ -63,7 +63,7 @@ Example
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/shipping-categories/
+    curl http://sylius.dev/api/v1/shipping-categories/
         -H "Authorization: Bearer MWExMWM0NzE1NmUyZDgyZDJiMjEzMmFlMjQ4MzgwMmE4ZTkxYzM0YjdlN2U2YzliNDIyMTk1ZDhlNDYxYWE4Ng"
         -H “Accept: application/json”
 
@@ -128,7 +128,7 @@ Definition
 
 .. code-block:: text
 
-    GET /api/shipping-categories/{id}
+    GET /api/v1/shipping-categories/{id}
 
 +---------------+----------------+-------------------------------------------------------------------+
 | Parameter     | Parameter type | Description                                                       |
@@ -147,7 +147,7 @@ Example
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/shipping-categories/1
+    curl http://sylius.dev/api/v1/shipping-categories/1
         -H "Authorization: Bearer MWExMWM0NzE1NmUyZDgyZDJiMjEzMmFlMjQ4MzgwMmE4ZTkxYzM0YjdlN2U2YzliNDIyMTk1ZDhlNDYxYWE4Ng"
         -H “Accept: application/json”
 
@@ -180,7 +180,7 @@ Definition
 
 .. code-block:: text
 
-    POST /api/shipping-categories/
+    POST /api/v1/shipping-categories/
 
 +---------------+----------------+--------------------------------------------------------+
 | Parameter     | Parameter type | Description                                            |
@@ -199,7 +199,7 @@ Example
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/shipping-categories/
+    curl http://sylius.dev/api/v1/shipping-categories/
         -H "Authorization: Bearer MWExMWM0NzE1NmUyZDgyZDJiMjEzMmFlMjQ4MzgwMmE4ZTkxYzM0YjdlN2U2YzliNDIyMTk1ZDhlNDYxYWE4Ng"
         -H "Content-Type: application/json"
         -X POST
@@ -239,7 +239,7 @@ Example
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/shipping-categories/-1
+    curl http://sylius.dev/api/v1/shipping-categories/-1
         -H "Authorization: Bearer MWExMWM0NzE1NmUyZDgyZDJiMjEzMmFlMjQ4MzgwMmE4ZTkxYzM0YjdlN2U2YzliNDIyMTk1ZDhlNDYxYWE4Ng"
         -H “Accept: application/json”
         -X POST
@@ -283,7 +283,7 @@ Definition
 
 .. code-block:: text
 
-    PUT /api/shipping-categories/{id}
+    PUT /api/v1/shipping-categories/{id}
 
 +---------------+----------------+-------------------------------------------+
 | Parameter     | Parameter type | Description                               |
@@ -302,7 +302,7 @@ Example
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/shipping-categories/3
+    curl http://sylius.dev/api/v1/shipping-categories/3
         -H "Authorization: Bearer MWExMWM0NzE1NmUyZDgyZDJiMjEzMmFlMjQ4MzgwMmE4ZTkxYzM0YjdlN2U2YzliNDIyMTk1ZDhlNDYxYWE4Ng"
         -H "Content-Type: application/json"
         -X PUT
@@ -327,7 +327,7 @@ Example
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/shipping-categories/-1
+    curl http://sylius.dev/api/v1/shipping-categories/-1
         -H "Authorization: Bearer MWExMWM0NzE1NmUyZDgyZDJiMjEzMmFlMjQ4MzgwMmE4ZTkxYzM0YjdlN2U2YzliNDIyMTk1ZDhlNDYxYWE4Ng"
         -H “Accept: application/json”
         -X PUT
@@ -363,7 +363,7 @@ Definition
 
 .. code-block:: text
 
-    PATCH /api/shipping-categories/{id}
+    PATCH /api/v1/shipping-categories/{id}
 
 +---------------+----------------+--------------------------------------------------------+
 | Parameter     | Parameter type | Description                                            |
@@ -382,7 +382,7 @@ Example
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/shipping-categories/3
+    curl http://sylius.dev/api/v1/shipping-categories/3
         -H "Authorization: Bearer MWExMWM0NzE1NmUyZDgyZDJiMjEzMmFlMjQ4MzgwMmE4ZTkxYzM0YjdlN2U2YzliNDIyMTk1ZDhlNDYxYWE4Ng"
         -H "Content-Type: application/json"
         -X PATCH
@@ -403,7 +403,7 @@ Definition
 
 .. code-block:: text
 
-    DELETE /api/shipping-categories/{id}
+    DELETE /api/v1/shipping-categories/{id}
 
 +---------------+----------------+-------------------------------------------+
 | Parameter     | Parameter type | Description                               |
@@ -418,7 +418,7 @@ Example
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/shipping-categories/3
+    curl http://sylius.dev/api/v1/shipping-categories/3
         -H "Authorization: Bearer MWExMWM0NzE1NmUyZDgyZDJiMjEzMmFlMjQ4MzgwMmE4ZTkxYzM0YjdlN2U2YzliNDIyMTk1ZDhlNDYxYWE4Ng"
         -H “Accept: application/json”
         -X DELETE

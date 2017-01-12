@@ -1,7 +1,7 @@
 Products API
 ============
 
-Sylius products catalogue API endpoint is ``/api/products`` and it allows for browsing, creating & editing product information.
+Sylius products catalogue API endpoint is ``/api/v1/products`` and it allows for browsing, creating & editing product information.
 
 Index of all products
 ---------------------
@@ -10,7 +10,7 @@ To browse all products available in the store you should call the following GET 
 
 .. code-block:: text
 
-    GET /api/products/
+    GET /api/v1/products/
 
 Parameters
 ~~~~~~~~~~
@@ -76,7 +76,7 @@ You can view a single product by executing the following request:
 
 .. code-block:: text
 
-    GET /api/products/2173
+    GET /api/v1/products/2173
 
 Response
 ~~~~~~~~
@@ -104,7 +104,7 @@ To create a new product, you can execute the following request:
 
 .. code-block:: text
 
-    POST /api/products/
+    POST /api/v1/products/
 
 Parameters
 ~~~~~~~~~~
@@ -143,11 +143,11 @@ You can update an existing product using PUT or PATCH method:
 
 .. code-block:: text
 
-    PUT /api/products/2181
+    PUT /api/v1/products/2181
 
 .. code-block:: text
 
-    PATCH /api/products/2181
+    PATCH /api/v1/products/2181
 
 Parameters
 ~~~~~~~~~~
@@ -175,7 +175,7 @@ You can delete (soft) a product from the catalog by making the following DELETE 
 
 .. code-block:: text
 
-    DELETE /api/products/24
+    DELETE /api/v1/products/24
 
 Response
 ~~~~~~~~

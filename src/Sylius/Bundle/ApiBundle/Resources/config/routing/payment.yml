@@ -16,7 +16,7 @@ sylius_api_payment_create:
    path: /
    methods: [POST]
    defaults:
-       _controller: sylius.controller.payment:createAction
+        _controller: sylius.controller.payment:createAction
         _sylius:
             serialization_version: $version
 
@@ -24,7 +24,7 @@ sylius_api_payment_update:
    path: /{id}
    methods: [PUT, PATCH]
    defaults:
-       _controller: sylius.controller.payment:updateAction
+        _controller: sylius.controller.payment:updateAction
         _sylius:
             serialization_version: $version
 
