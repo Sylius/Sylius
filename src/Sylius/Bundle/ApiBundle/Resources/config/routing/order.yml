@@ -7,6 +7,7 @@ sylius_api_order_index:
     defaults:
         _controller: sylius.controller.order:indexAction
         _sylius:
+            serialization_version: $version
             paginate: $limit
             sortable: true
             sorting:
@@ -18,6 +19,7 @@ sylius_api_order_create:
     defaults:
         _controller: sylius.controller.order:createAction
         _sylius:
+            serialization_version: $version
             form: Sylius\Bundle\ApiBundle\Form\Type\OrderType
 
 sylius_api_order_delete:
@@ -27,6 +29,7 @@ sylius_api_order_delete:
         _controller: sylius.controller.order:deleteAction
         _format: json
         _sylius:
+            serialization_version: $version
             csrf_protection: false
 
 sylius_api_order_show:
@@ -34,3 +37,5 @@ sylius_api_order_show:
     methods: [GET]
     defaults:
         _controller: sylius.controller.order:showAction
+        _sylius:
+            serialization_version: $version

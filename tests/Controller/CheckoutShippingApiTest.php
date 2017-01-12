@@ -23,7 +23,7 @@ final class CheckoutShippingApiTest extends CheckoutApiTestCase
      */
     public function it_denies_order_shipping_selection_for_non_authenticated_user()
     {
-        $this->client->request('PUT', '/api/checkouts/select-shipping/1');
+        $this->client->request('PUT', '/api/v1/checkouts/select-shipping/1');
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
@@ -36,7 +36,7 @@ final class CheckoutShippingApiTest extends CheckoutApiTestCase
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
-        $this->client->request('PUT', '/api/checkouts/select-shipping/1', [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('PUT', '/api/v1/checkouts/select-shipping/1', [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NOT_FOUND);
@@ -50,7 +50,7 @@ final class CheckoutShippingApiTest extends CheckoutApiTestCase
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $checkoutData = $this->loadFixturesFromFile('resources/checkout.yml');
 
-        $url = sprintf('/api/checkouts/select-shipping/%d', $checkoutData['order1']->getId());
+        $url = sprintf('/api/v1/checkouts/select-shipping/%d', $checkoutData['order1']->getId());
         $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
@@ -88,7 +88,7 @@ final class CheckoutShippingApiTest extends CheckoutApiTestCase
         }
 EOT;
 
-        $url = sprintf('/api/checkouts/select-shipping/%d', $orderId);
+        $url = sprintf('/api/v1/checkouts/select-shipping/%d', $orderId);
         $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
@@ -118,13 +118,13 @@ EOT;
         }
 EOT;
 
-        $url = sprintf('/api/checkouts/select-shipping/%d', $orderId);
+        $url = sprintf('/api/v1/checkouts/select-shipping/%d', $orderId);
         $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
 
-        $this->client->request('GET', sprintf('/api/checkouts/%d', $checkoutData['order1']->getId()), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', sprintf('/api/v1/checkouts/%d', $checkoutData['order1']->getId()), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'checkout/shipping_selected_order_response');
@@ -153,7 +153,7 @@ EOT;
         }
 EOT;
 
-        $url = sprintf('/api/checkouts/select-shipping/%d', $orderId);
+        $url = sprintf('/api/v1/checkouts/select-shipping/%d', $orderId);
         $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
@@ -184,7 +184,7 @@ EOT;
         }
 EOT;
 
-        $url = sprintf('/api/checkouts/select-shipping/%d', $orderId);
+        $url = sprintf('/api/v1/checkouts/select-shipping/%d', $orderId);
         $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();

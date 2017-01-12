@@ -4,6 +4,7 @@ sylius_api_adjustment_index:
     defaults:
         _controller: sylius.controller.adjustment:indexAction
         _sylius:
+            serialization_version: $version
             repository:
                 method: findByOrder
                 arguments: [$orderId]
@@ -14,12 +15,16 @@ sylius_api_adjustment_create:
     methods: [POST]
     defaults:
         _controller: sylius.controller.adjustment:createAction
+        _sylius:
+            serialization_version: $version
 
 sylius_api_adjustment_update:
     path: /{id}
     methods: [PUT, PATCH]
     defaults:
         _controller: sylius.controller.adjustment:updateAction
+        _sylius:
+            serialization_version: $version
 
 sylius_api_adjustment_delete:
     path: /{id}
@@ -27,6 +32,7 @@ sylius_api_adjustment_delete:
     defaults:
         _controller: sylius.controller.adjustment:deleteAction
         _sylius:
+            serialization_version: $version
             filterable: true
             criteria:
                 order: $orderId

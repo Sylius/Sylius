@@ -7,6 +7,7 @@ sylius_api_province_delete:
     defaults:
         _controller: sylius.controller.province:deleteAction
         _sylius:
+            serialization_version: $version
             criteria:
                 code: $code
             csrf_protection: false
@@ -17,5 +18,6 @@ sylius_api_province_show:
     defaults:
         _controller: sylius.controller.province:showAction
         _sylius:
+            serialization_version: $version
             criteria:
                 code: $code

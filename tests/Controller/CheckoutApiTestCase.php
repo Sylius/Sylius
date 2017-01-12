@@ -67,7 +67,7 @@ class CheckoutApiTestCase extends JsonApiTestCase
         }
 EOT;
 
-        $url = sprintf('/api/checkouts/addressing/%d', $orderId);
+        $url = sprintf('/api/v1/checkouts/addressing/%d', $orderId);
         $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
     }
 
@@ -88,7 +88,7 @@ EOT;
         }
 EOT;
 
-        $url = sprintf('/api/checkouts/select-shipping/%d', $orderId);
+        $url = sprintf('/api/v1/checkouts/select-shipping/%d', $orderId);
         $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
     }
 
@@ -109,7 +109,7 @@ EOT;
         }
 EOT;
 
-        $url = sprintf('/api/checkouts/select-payment/%d', $orderId);
+        $url = sprintf('/api/v1/checkouts/select-payment/%d', $orderId);
         $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
     }
 }

@@ -7,6 +7,7 @@ sylius_api_promotion_index:
     defaults:
         _controller: sylius.controller.promotion:indexAction
         _sylius:
+            serialization_version: $version
             paginate: $limit
             sortable: true
 
@@ -15,12 +16,16 @@ sylius_api_promotion_create:
     methods: [POST]
     defaults:
         _controller: sylius.controller.promotion:createAction
+        _sylius:
+            serialization_version: $version
 
 sylius_api_promotion_update:
     path: /{id}
     methods: [PUT, PATCH]
     defaults:
         _controller: sylius.controller.promotion:updateAction
+        _sylius:
+            serialization_version: $version
 
 sylius_api_promotion_delete:
     path: /{id}
@@ -28,6 +33,7 @@ sylius_api_promotion_delete:
     defaults:
         _controller: sylius.controller.promotion:deleteAction
         _sylius:
+            serialization_version: $version
             csrf_protection: false
 
 sylius_api_promotion_show:
@@ -35,3 +41,5 @@ sylius_api_promotion_show:
     methods: [GET]
     defaults:
         _controller: sylius.controller.promotion:showAction
+        _sylius:
+            serialization_version: $version

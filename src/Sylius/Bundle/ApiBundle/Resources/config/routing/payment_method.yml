@@ -7,6 +7,7 @@ sylius_api_payment_method_index:
     defaults:
         _controller: sylius.controller.payment_method:indexAction
         _sylius:
+            serialization_version: $version
             paginate: $limit
             sortable: true
             sorting:
@@ -17,12 +18,16 @@ sylius_api_payment_method_create:
     methods: [POST]
     defaults:
         _controller: sylius.controller.payment_method:createAction
+        _sylius:
+            serialization_version: $version
 
 sylius_api_payment_method_update:
     path: /{id}
     methods: [PUT, PATCH]
     defaults:
         _controller: sylius.controller.payment_method:updateAction
+        _sylius:
+            serialization_version: $version
 
 sylius_api_payment_method_delete:
     path: /{id}
@@ -30,6 +35,7 @@ sylius_api_payment_method_delete:
     defaults:
         _controller: sylius.controller.payment_method:deleteAction
         _sylius:
+            serialization_version: $version
             csrf_protection: false
 
 sylius_api_payment_method_show:
@@ -37,3 +43,5 @@ sylius_api_payment_method_show:
     methods: [GET]
     defaults:
         _controller: sylius.controller.payment_method:showAction
+        _sylius:
+            serialization_version: $version

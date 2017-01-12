@@ -7,6 +7,7 @@ sylius_api_shipping_method_index:
     defaults:
         _controller: sylius.controller.shipping_method:indexAction
         _sylius:
+            serialization_version: $version
             paginate: $limit
             sortable: true
             sorting:
@@ -17,6 +18,8 @@ sylius_api_shipping_method_create:
     methods: [POST]
     defaults:
         _controller: sylius.controller.shipping_method:createAction
+        _sylius:
+            serialization_version: $version
 
 sylius_api_shipping_method_update:
     path: /{code}
@@ -24,6 +27,7 @@ sylius_api_shipping_method_update:
     defaults:
         _controller: sylius.controller.shipping_method:updateAction
         _sylius:
+            serialization_version: $version
             criteria:
                 code: $code
 
@@ -33,6 +37,7 @@ sylius_api_shipping_method_delete:
     defaults:
         _controller: sylius.controller.shipping_method:deleteAction
         _sylius:
+            serialization_version: $version
             criteria:
                 code: $code
             csrf_protection: false
@@ -43,5 +48,6 @@ sylius_api_shipping_method_show:
     defaults:
         _controller: sylius.controller.shipping_method:showAction
         _sylius:
+            serialization_version: $version
             criteria:
                 code: $code
