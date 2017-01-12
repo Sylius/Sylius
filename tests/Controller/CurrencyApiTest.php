@@ -42,7 +42,10 @@ class CurrencyApiTest extends JsonApiTestCase
         'ACCEPT' => 'application/json',
     ];
 
-    public function testCreateCurrencyAccessDeniedResponse()
+    /**
+     * @test
+     */
+    public function it_denies_creating_currency_for_non_authenticated_user()
     {
         $this->client->request('POST', '/api/currencies/');
 
@@ -50,7 +53,10 @@ class CurrencyApiTest extends JsonApiTestCase
         $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
     }
 
-    public function testCreateCurrencyValidationFailResponse()
+    /**
+     * @test
+     */
+    public function it_does_not_allow_to_create_currency_without_specifying_required_data()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -60,7 +66,10 @@ class CurrencyApiTest extends JsonApiTestCase
         $this->assertResponse($response, 'currency/create_validation_fail_response', Response::HTTP_BAD_REQUEST);
     }
 
-    public function testCreateCurrencyResponse()
+    /**
+     * @test
+     */
+    public function it_allows_to_create_currency_with_given_code()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -78,7 +87,10 @@ EOT;
         $this->assertResponse($response, 'currency/create_response', Response::HTTP_CREATED);
     }
 
-    public function testGetCurrenciesListAccessDeniedResponse()
+    /**
+     * @test
+     */
+    public function it_denies_getting_currencies_for_non_authenticated_user()
     {
         $this->client->request('GET', '/api/currencies/');
 
@@ -86,7 +98,10 @@ EOT;
         $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
     }
 
-    public function testGetCurrenciesListResponse()
+    /**
+     * @test
+     */
+    public function it_allows_to_get_currencies_list()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/currencies.yml');
@@ -97,7 +112,10 @@ EOT;
         $this->assertResponse($response, 'currency/index_response', Response::HTTP_OK);
     }
 
-    public function testGetCurrencyAccessDeniedResponse()
+    /**
+     * @test
+     */
+    public function it_denies_getting_currency_for_non_authenticated_user()
     {
         $this->client->request('GET', '/api/currencies/1');
 
@@ -105,7 +123,10 @@ EOT;
         $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
     }
 
-    public function testGetCurrencyWhichDoesNotExistResponse()
+    /**
+     * @test
+     */
+    public function it_returns_not_found_response_when_requesting_details_of_a_currency_which_does_not_exist()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -115,7 +136,10 @@ EOT;
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
     }
 
-    public function testGetCurrencyResponse()
+    /**
+     * @test
+     */
+    public function it_allows_to_get_currency()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $currencies = $this->loadFixturesFromFile('resources/currencies.yml');
@@ -126,7 +150,10 @@ EOT;
         $this->assertResponse($response, 'currency/show_response', Response::HTTP_OK);
     }
 
-    public function testDeleteCurrencyWhichDoesNotExistResponse()
+    /**
+     * @test
+     */
+    public function it_returns_not_found_response_when_trying_to_delete_currency_which_does_not_exist()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -136,7 +163,10 @@ EOT;
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
     }
 
-    public function testDeleteCurrencyResponse()
+    /**
+     * @test
+     */
+    public function it_allows_to_delete_currency()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $currencies = $this->loadFixturesFromFile('resources/currencies.yml');

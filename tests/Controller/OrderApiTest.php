@@ -27,7 +27,21 @@ final class OrderApiTest extends JsonApiTestCase
         'CONTENT_TYPE' => 'application/json',
     ];
 
-    public function testGetOrderWhichDoesNotExistResponse()
+    /**
+     * @test
+     */
+    public function it_denies_getting_an_order_for_non_authenticated_user()
+    {
+        $this->client->request('GET', '/api/orders/');
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
+    }
+
+    /**
+     * @test
+     */
+    public function it_returns_not_found_response_when_requesting_details_of_an_order_which_does_not_exist()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -37,15 +51,10 @@ final class OrderApiTest extends JsonApiTestCase
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
     }
 
-    public function testGetOrderAccessDeniedResponse()
-    {
-        $this->client->request('GET', '/api/orders/');
-
-        $response = $this->client->getResponse();
-        $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
-    }
-
-    public function testGetOrderResponse()
+    /**
+     * @test
+     */
+    public function it_allows_to_get_order()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $orderData = $this->loadFixturesFromFile('resources/orders.yml');
@@ -56,7 +65,10 @@ final class OrderApiTest extends JsonApiTestCase
         $this->assertResponse($response, 'order/show_response', Response::HTTP_OK);
     }
 
-    public function testCreateOrderAccessDeniedResponse()
+    /**
+     * @test
+     */
+    public function it_denies_creating_order_for_non_authenticated_user()
     {
         $this->client->request('POST', '/api/orders/');
 
@@ -64,7 +76,10 @@ final class OrderApiTest extends JsonApiTestCase
         $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
     }
 
-    public function testCreateOrderValidationFailResponse()
+    /**
+     * @test
+     */
+    public function it_does_not_allow_to_create_order_without_specifying_required_data()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -74,7 +89,10 @@ final class OrderApiTest extends JsonApiTestCase
         $this->assertResponse($response, 'order/create_validation_fail_response', Response::HTTP_BAD_REQUEST);
     }
 
-    public function testCreateOrderResponse()
+    /**
+     * @test
+     */
+    public function it_allows_to_create_order()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/orders.yml');
@@ -95,7 +113,10 @@ EOT;
         $this->assertResponse($response, 'order/show_response', Response::HTTP_CREATED);
     }
 
-    public function testGetOrdersListAccessDeniedResponse()
+    /**
+     * @test
+     */
+    public function it_denies_getting_orders_for_non_authenticated_user()
     {
         $this->client->request('GET', '/api/orders/');
 
@@ -103,7 +124,10 @@ EOT;
         $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
     }
 
-    public function testGetOrdersListResponse()
+    /**
+     * @test
+     */
+    public function it_allows_to_get_orders_list()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/orders.yml');
@@ -114,7 +138,10 @@ EOT;
         $this->assertResponse($response, 'order/index_response', Response::HTTP_OK);
     }
 
-    public function testDeleteOrderWhichDoesNotExistResponse()
+    /**
+     * @test
+     */
+    public function it_returns_not_found_response_when_trying_to_delete_order_which_does_not_exist()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -124,7 +151,10 @@ EOT;
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
     }
 
-    public function testDeleteOrderResponse()
+    /**
+     * @test
+     */
+    public function it_allows_to_delete_order()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $orders = $this->loadFixturesFromFile('resources/orders.yml');
