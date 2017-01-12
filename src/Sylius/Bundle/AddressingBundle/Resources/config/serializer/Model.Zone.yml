@@ -27,3 +27,4 @@ Sylius\Component\Addressing\Model\Zone:
                 route: sylius_api_zone_show
                 parameters:
                     code: expr(object.getCode())
+                    version: 1

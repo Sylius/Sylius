@@ -28,8 +28,10 @@ Sylius\Component\Addressing\Model\Province:
                 parameters:
                     countryCode: expr(object.getCountry().getCode())
                     code: expr(object.getCode())
+                    version: 1
         - rel: country
           href:
                 route: sylius_api_country_show
                 parameters:
                     code: expr(object.getCountry().getCode())
+                    version: 1

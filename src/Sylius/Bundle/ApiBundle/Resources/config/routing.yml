@@ -4,6 +4,3 @@
 sylius_api:
     resource: "@SyliusApiBundle/Resources/config/routing/main.yml"
     prefix: /v{version}
-
-fos_oauth_server_token:
-  resource: "@FOSOAuthServerBundle/Resources/config/routing/token.xml"

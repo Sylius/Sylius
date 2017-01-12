@@ -5,13 +5,13 @@
     "total": 5,
     "_links": {
         "self": {
-            "href": "\/api\/customers\/?page=1&limit=10"
+            "href": "\/api\/v1\/customers\/?page=1&limit=10"
         },
         "first": {
-            "href": "\/api\/customers\/?page=1&limit=10"
+            "href": "\/api\/v1\/customers\/?page=1&limit=10"
         },
         "last": {
-            "href": "\/api\/customers\/?page=1&limit=10"
+            "href": "\/api\/v1\/customers\/?page=1&limit=10"
         }
     },
     "_embedded": {

@@ -7,3 +7,4 @@ Sylius\Component\Core\Model\OrderItemUnit:
                 route: sylius_api_order_show
                 parameters:
                     id: expr(object.getOrderItem().getOrder().getId())
+                    version: 1
