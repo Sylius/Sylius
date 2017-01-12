@@ -86,6 +86,7 @@ After:
 
 * `ProductVariant::$name` property (and corresponding getter and setter) was removed to make it translatable. Therefore, `ProductVariantTranslation` was introduced with one `$name` property. All product variants names are migrated to new concept with migration `Version2016121415313`. Look at [this PR](https://github.com/Sylius/Sylius/pull/7091) if you have any problems with upgrade.
 * `ProductAssociationType::$name` property (and corresponding getter and setter) was removed to make it translatable. Therefore, `ProductAssociationTypeTranslation` was introduced with one `$name` property. All product association types names are migrated to new concept with migration `Version20161219160441`. Look at [this PR](https://github.com/Sylius/Sylius/pull/7134) if you have any problems with upgrade.
+* `Product::addAttribute()`, `Product::removeAttribute()`, `Product::hasAttribute()` now require `Sylius\Component\Product\Model\ProductAttributeValueInterface` instead of `Sylius\Component\Attribute\Model\AttributeValueInterface`. Nothing changed on the ORM point of view as its config was already using the right interface. Look at [this PR](https://github.com/Sylius/Sylius/pull/7196) for details.
 
 ### Promotion / PromotionBundle
 

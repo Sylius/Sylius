@@ -13,7 +13,6 @@ namespace Sylius\Component\Product\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Resource\Model\ToggleableTrait;
 use Sylius\Component\Resource\Model\TranslatableTrait;
@@ -51,7 +50,7 @@ class Product implements ProductInterface
     protected $availableUntil;
 
     /**
-     * @var Collection|AttributeValueInterface[]
+     * @var Collection|ProductAttributeValueInterface[]
      */
     protected $attributes;
 
@@ -245,7 +244,7 @@ class Product implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function addAttribute(AttributeValueInterface $attribute)
+    public function addAttribute(ProductAttributeValueInterface $attribute)
     {
         if (!$this->hasAttribute($attribute)) {
             $attribute->setProduct($this);
@@ -256,7 +255,7 @@ class Product implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function removeAttribute(AttributeValueInterface $attribute)
+    public function removeAttribute(ProductAttributeValueInterface $attribute)
     {
         if ($this->hasAttribute($attribute)) {
             $this->attributes->removeElement($attribute);
@@ -267,7 +266,7 @@ class Product implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function hasAttribute(AttributeValueInterface $attribute)
+    public function hasAttribute(ProductAttributeValueInterface $attribute)
     {
         return $this->attributes->contains($attribute);
     }
