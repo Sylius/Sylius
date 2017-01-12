@@ -22,7 +22,7 @@ class ShippingCategoryApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function test_create_shipping_category_access_denied_response()
+    public function it_denies_creating_shipping_category_for_non_authenticated_user()
     {
         $this->client->request('POST', '/api/shipping-categories/');
 
@@ -33,7 +33,7 @@ class ShippingCategoryApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function test_create_shipping_category_validation_fail_response()
+    public function it_does_not_allow_to_create_shipping_category_without_specifying_required_data()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -49,7 +49,7 @@ class ShippingCategoryApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function test_create_shipping_category_response()
+    public function it_allows_to_create_shipping_category()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -74,7 +74,7 @@ EOT;
     /**
      * @test
      */
-    public function test_get_shipping_categories_list_access_denied_response()
+    public function it_denies_getting_shipping_categories_for_non_authenticated_user()
     {
         $this->client->request('GET', '/api/shipping-categories/');
 
@@ -85,7 +85,7 @@ EOT;
     /**
      * @test
      */
-    public function test_get_shipping_categories_list_response()
+    public function it_allows_to_get_shipping_categories_list()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/shipping_categories.yml');
@@ -101,7 +101,7 @@ EOT;
     /**
      * @test
      */
-    public function test_get_shipping_category_access_denied_response()
+    public function it_denies_getting_shipping_category_for_non_authenticated_user()
     {
         $this->client->request('GET', '/api/shipping-categories/1');
 
@@ -112,7 +112,7 @@ EOT;
     /**
      * @test
      */
-    public function test_get_shipping_category_which_does_not_exist_response()
+    public function it_returns_not_found_response_when_requesting_details_of_a_shipping_category_which_does_not_exist()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -128,7 +128,7 @@ EOT;
     /**
      * @test
      */
-    public function test_get_shipping_category_response()
+    public function it_allows_to_get_shipping_category()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $shippingCategories = $this->loadFixturesFromFile('resources/shipping_categories.yml');
@@ -145,7 +145,7 @@ EOT;
     /**
      * @test
      */
-    public function test_full_update_shipping_category_access_denied_response()
+    public function it_denies_updating_shipping_category_for_non_authenticated_user()
     {
         $this->client->request('PUT', '/api/shipping-categories/1');
 
@@ -156,7 +156,7 @@ EOT;
     /**
      * @test
      */
-    public function test_full_update_shipping_category_which_does_not_exist_response()
+    public function it_returns_not_found_response_when_updating_shipping_category_which_does_not_exist()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -172,7 +172,7 @@ EOT;
     /**
      * @test
      */
-    public function test_full_update_shipping_category_validation_fail_response()
+    public function it_does_not_allow_to_update_shipping_category_without_specifying_required_data()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $shippingCategories = $this->loadFixturesFromFile('resources/shipping_categories.yml');
@@ -189,7 +189,7 @@ EOT;
     /**
      * @test
      */
-    public function test_full_update_shipping_category_response()
+    public function it_allows_to_update_shipping_category()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $shippingCategories = $this->loadFixturesFromFile('resources/shipping_categories.yml');
@@ -222,7 +222,7 @@ EOT;
     /**
      * @test
      */
-    public function test_partial_update_shipping_category_which_does_not_exist_response()
+    public function it_returns_not_found_response_when_partially_updating_shipping_category_which_does_not_exist()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -238,7 +238,7 @@ EOT;
     /**
      * @test
      */
-    public function test_partial_update_shipping_category_response()
+    public function it_allows_to_partially_update_shipping_category()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $shippingCategories = $this->loadFixturesFromFile('resources/shipping_categories.yml');
@@ -271,7 +271,7 @@ EOT;
     /**
      * @test
      */
-    public function test_delete_shipping_category_which_does_not_exist_response()
+    public function it_returns_not_found_response_when_trying_to_delete_shipping_category_which_does_not_exist()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -287,7 +287,7 @@ EOT;
     /**
      * @test
      */
-    public function test_delete_shipping_category_response()
+    public function it_allows_to_delete_shipping_category()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $shippingCategories = $this->loadFixturesFromFile('resources/shipping_categories.yml');

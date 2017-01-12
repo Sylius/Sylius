@@ -45,7 +45,7 @@ class CurrencyApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function test_create_currency_access_denied_response()
+    public function it_denies_creating_currency_for_non_authenticated_user()
     {
         $this->client->request('POST', '/api/currencies/');
 
@@ -56,7 +56,7 @@ class CurrencyApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function test_create_currency_validation_fail_response()
+    public function it_does_not_allow_to_create_currency_without_specifying_required_data()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -69,7 +69,7 @@ class CurrencyApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function test_create_currency_response()
+    public function it_allows_to_create_currency_with_given_code()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -90,7 +90,7 @@ EOT;
     /**
      * @test
      */
-    public function test_get_currencies_list_access_denied_response()
+    public function it_denies_getting_currencies_for_non_authenticated_user()
     {
         $this->client->request('GET', '/api/currencies/');
 
@@ -101,7 +101,7 @@ EOT;
     /**
      * @test
      */
-    public function test_get_currencies_list_response()
+    public function it_allows_to_get_currencies_list()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/currencies.yml');
@@ -115,7 +115,7 @@ EOT;
     /**
      * @test
      */
-    public function test_get_currency_access_denied_response()
+    public function it_denies_getting_currency_for_non_authenticated_user()
     {
         $this->client->request('GET', '/api/currencies/1');
 
@@ -126,7 +126,7 @@ EOT;
     /**
      * @test
      */
-    public function test_get_currency_which_does_not_exist_response()
+    public function it_returns_not_found_response_when_requesting_details_of_a_currency_which_does_not_exist()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -139,7 +139,7 @@ EOT;
     /**
      * @test
      */
-    public function test_get_currency_response()
+    public function it_allows_to_get_currency()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $currencies = $this->loadFixturesFromFile('resources/currencies.yml');
@@ -153,7 +153,7 @@ EOT;
     /**
      * @test
      */
-    public function test_delete_currency_which_does_not_exist_response()
+    public function it_returns_not_found_response_when_trying_to_delete_currency_which_does_not_exist()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -166,7 +166,7 @@ EOT;
     /**
      * @test
      */
-    public function test_delete_currency_response()
+    public function it_allows_to_delete_currency()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $currencies = $this->loadFixturesFromFile('resources/currencies.yml');

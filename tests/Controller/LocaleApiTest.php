@@ -39,7 +39,7 @@ class LocaleApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function test_locale_access_denied_response()
+    public function it_denies_getting_locales_for_non_authenticated_user()
     {
         $this->client->request('POST', '/api/locales/');
 
@@ -50,7 +50,7 @@ class LocaleApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function test_get_locales_list_response()
+    public function it_allows_to_get_locales_list()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/locales.yml');
@@ -66,7 +66,7 @@ class LocaleApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function test_get_locale_response()
+    public function it_allows_to_get_locale()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $locales = $this->loadFixturesFromFile('resources/locales.yml');
@@ -80,7 +80,7 @@ class LocaleApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function test_create_locale_validation_fail_response()
+    public function it_does_not_allow_to_create_locale_without_specifying_required_data()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -93,7 +93,7 @@ class LocaleApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function test_create_locale_response()
+    public function it_allows_to_create_locale_with_given_code()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -115,7 +115,7 @@ EOT;
     /**
      * @test
      */
-    public function test_get_locale_access_denied_response()
+    public function it_denies_getting_locale_for_non_authenticated_user()
     {
         $this->client->request('GET', '/api/locales/en');
 
@@ -126,7 +126,7 @@ EOT;
     /**
      * @test
      */
-    public function test_get_locale_which_does_not_exist_response()
+    public function it_returns_not_found_response_when_requesting_details_of_a_locale_which_does_not_exist()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -139,7 +139,7 @@ EOT;
     /**
      * @test
      */
-    public function test_delete_locale_which_does_not_exist_response()
+    public function it_returns_not_found_response_when_trying_to_delete_locale_which_does_not_exist()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -152,7 +152,7 @@ EOT;
     /**
      * @test
      */
-    public function test_delete_locale_response()
+    public function it_allows_to_delete_locale()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $locales = $this->loadFixturesFromFile('resources/locales.yml');

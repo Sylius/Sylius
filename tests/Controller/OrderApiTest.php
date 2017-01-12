@@ -30,7 +30,18 @@ final class OrderApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function test_get_order_which_does_not_exist_response()
+    public function it_denies_getting_an_order_for_non_authenticated_user()
+    {
+        $this->client->request('GET', '/api/orders/');
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
+    }
+
+    /**
+     * @test
+     */
+    public function it_returns_not_found_response_when_requesting_details_of_an_order_which_does_not_exist()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -43,18 +54,7 @@ final class OrderApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function test_get_order_access_denied_response()
-    {
-        $this->client->request('GET', '/api/orders/');
-
-        $response = $this->client->getResponse();
-        $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
-    }
-
-    /**
-     * @test
-     */
-    public function test_get_order_response()
+    public function it_allows_to_get_order()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $orderData = $this->loadFixturesFromFile('resources/orders.yml');
@@ -68,7 +68,7 @@ final class OrderApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function test_create_order_access_denied_response()
+    public function it_denies_creating_order_for_non_authenticated_user()
     {
         $this->client->request('POST', '/api/orders/');
 
@@ -79,7 +79,7 @@ final class OrderApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function test_create_order_validation_fail_response()
+    public function it_does_not_allow_to_create_order_without_specifying_required_data()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -92,7 +92,7 @@ final class OrderApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function test_create_order_response()
+    public function it_allows_to_create_order()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/orders.yml');
@@ -116,7 +116,7 @@ EOT;
     /**
      * @test
      */
-    public function test_get_orders_list_access_denied_response()
+    public function it_denies_getting_orders_for_non_authenticated_user()
     {
         $this->client->request('GET', '/api/orders/');
 
@@ -127,7 +127,7 @@ EOT;
     /**
      * @test
      */
-    public function test_get_orders_list_response()
+    public function it_allows_to_get_orders_list()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/orders.yml');
@@ -141,7 +141,7 @@ EOT;
     /**
      * @test
      */
-    public function test_delete_order_which_does_not_exist_response()
+    public function it_returns_not_found_response_when_trying_to_delete_order_which_does_not_exist()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -154,7 +154,7 @@ EOT;
     /**
      * @test
      */
-    public function test_delete_order_response()
+    public function it_allows_to_delete_order()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $orders = $this->loadFixturesFromFile('resources/orders.yml');
