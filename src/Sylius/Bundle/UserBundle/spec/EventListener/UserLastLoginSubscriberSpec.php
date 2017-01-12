@@ -79,4 +79,20 @@ final class UserLastLoginSubscriberSpec extends ObjectBehavior
 
         $this->onImplicitLogin($event);
     }
+
+    function it_updates_only_user_specified_in_constructor(
+        ObjectManager $userManager,
+        UserEvent $event,
+        UserInterface $user
+    ) {
+        $this->beConstructedWith($userManager, 'FakeBundle\User\Model\User');
+
+        $event->getUser()->willReturn($user);
+
+        $user->setLastLogin(Argument::any())->shouldNotBeCalled();
+        $userManager->persist(Argument::any())->shouldNotBeCalled();
+        $userManager->flush()->shouldNotBeCalled();
+
+        $this->onImplicitLogin($event);
+    }
 }
