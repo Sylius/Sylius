@@ -114,6 +114,7 @@
             <argument type="service" id="sylius.behat.page.admin.payment_method.index" />
             <argument type="service" id="sylius.behat.page.admin.payment_method.update" />
             <argument type="service" id="sylius.behat.current_page_resolver" />
+            <argument type="service" id="sylius.behat.notification_checker" />
             <tag name="fob.context_service" />
         </service>
 

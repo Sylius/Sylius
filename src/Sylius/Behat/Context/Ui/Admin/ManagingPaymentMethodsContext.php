@@ -12,9 +12,11 @@
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\PaymentMethod\CreatePageInterface;
 use Sylius\Behat\Page\Admin\PaymentMethod\UpdatePageInterface;
+use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Webmozart\Assert\Assert;
@@ -46,6 +48,11 @@ final class ManagingPaymentMethodsContext implements Context
     private $currentPageResolver;
 
     /**
+     * @var NotificationCheckerInterface
+     */
+    private $notificationChecker;
+
+    /**
      * @param CreatePageInterface $createPage
      * @param IndexPageInterface $indexPage
      * @param UpdatePageInterface $updatePage
@@ -55,12 +62,14 @@ final class ManagingPaymentMethodsContext implements Context
         CreatePageInterface $createPage,
         IndexPageInterface $indexPage,
         UpdatePageInterface $updatePage,
-        CurrentPageResolverInterface $currentPageResolver
+        CurrentPageResolverInterface $currentPageResolver,
+        NotificationCheckerInterface $notificationChecker
     ) {
         $this->createPage = $createPage;
         $this->indexPage = $indexPage;
         $this->updatePage = $updatePage;
         $this->currentPageResolver = $currentPageResolver;
+        $this->notificationChecker = $notificationChecker;
     }
 
     /**
@@ -118,11 +127,20 @@ final class ManagingPaymentMethodsContext implements Context
 
     /**
      * @When I delete the :paymentMethod payment method
+     * @When I try to delete the :paymentMethod payment method
      */
     public function iDeletePaymentMethod(PaymentMethodInterface $paymentMethod)
     {
         $this->indexPage->open();
         $this->indexPage->deleteResourceOnPage(['code' => $paymentMethod->getCode(), 'name' => $paymentMethod->getName()]);
+    }
+
+    /**
+     * @Then I should be notified that it is in use
+     */
+    public function iShouldBeNotifiedThatItIsInUse()
+    {
+        $this->notificationChecker->checkNotification('Cannot delete, the payment method is in use.', NotificationType::failure());
     }
 
     /**
@@ -208,6 +226,14 @@ final class ManagingPaymentMethodsContext implements Context
             $this->indexPage->isSingleResourceOnPage(['name' => $paymentMethodName]),
             sprintf('Payment method with name %s has not been found.', $paymentMethodName)
         );
+    }
+
+    /**
+     * @Given /^(this payment method) should still be in the registry$/
+     */
+    public function thisPaymentMethodShouldStillBeInTheRegistry(PaymentMethodInterface $paymentMethod)
+    {
+        $this->thePaymentMethodShouldAppearInTheRegistry($paymentMethod->getName());
     }
 
     /**
