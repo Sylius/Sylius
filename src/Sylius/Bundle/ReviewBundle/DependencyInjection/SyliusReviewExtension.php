@@ -37,6 +37,8 @@ final class SyliusReviewExtension extends AbstractResourceExtension
         $this->registerResources('sylius', $config['driver'], $this->resolveResources($config['resources'], $container), $container);
 
         $loader->load('services.xml');
+
+        $loader->load(sprintf('integrations/%s.xml', $config['driver']));
     }
 
     /**
