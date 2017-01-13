@@ -105,6 +105,7 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
         $shippingMethod->setZone($options['zone']);
         $shippingMethod->setCalculator($options['calculator']['type']);
         $shippingMethod->setConfiguration($options['calculator']['configuration']);
+        $shippingMethod->setArchivedAt($options['archived_at']);
 
         if (array_key_exists('shipping_category', $options)) {
             $shippingMethod->setCategory($options['shipping_category']);
@@ -165,6 +166,8 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
             ->setDefault('channels', LazyOption::all($this->channelRepository))
             ->setAllowedTypes('channels', 'array')
             ->setNormalizer('channels', LazyOption::findBy($this->channelRepository, 'code'))
+            ->setDefault('archived_at', null)
+            ->setAllowedTypes('archived_at', ['null', \DateTime::class])
         ;
     }
 

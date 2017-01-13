@@ -43,6 +43,12 @@ sylius_grid:
                 enabled:
                     type: boolean
                     label: sylius.ui.enabled
+                archival:
+                    type: exists
+                    label: sylius.ui.archival
+                    options:
+                        field: archivedAt
+                    default_value: false
             actions:
                 main:
                     create:
@@ -52,3 +58,5 @@ sylius_grid:
                         type: update
                     delete:
                         type: delete
+                    archive:
+                        type: archive
