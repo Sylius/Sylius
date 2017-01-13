@@ -95,6 +95,9 @@ After:
 
 ### Review / ReviewBundle
 
+Service `sylius.average_rating_updater` name has been changed to `sylius.product_review.average_rating_updater` and service `sylius.listener.review_change` name has been changed to `sylius.listener.product_review_change`
+These services will be generated automatically based on subject name. 
+
 ### Shipping / ShippingBundle
 
 ### ShopBundle

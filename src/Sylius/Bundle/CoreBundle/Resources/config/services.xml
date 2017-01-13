@@ -126,7 +126,7 @@
         <service id="sylius.reviewer_reviews_remover" class="Sylius\Bundle\CoreBundle\Remover\ReviewerReviewsRemover">
             <argument type="service" id="sylius.repository.product_review" />
             <argument type="service" id="sylius.manager.product_review" />
-            <argument type="service" id="sylius.average_rating_updater" />
+            <argument type="service" id="sylius.product_review.average_rating_updater" />
         </service>
 
         <service id="sylius.unpaid_orders_state_updater" class="Sylius\Component\Core\Updater\UnpaidOrdersStateUpdater">
