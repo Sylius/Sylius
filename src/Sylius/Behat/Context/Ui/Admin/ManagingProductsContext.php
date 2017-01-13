@@ -924,6 +924,14 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @Then I should be notified that slug has to be unique
+     */
+    public function iShouldBeNotifiedThatSlugHasToBeUnique()
+    {
+        $this->assertValidationMessage('slug', 'Product slug must be unique.');
+    }
+
+    /**
      * @Then I should be notified that code has to be unique
      */
     public function iShouldBeNotifiedThatCodeHasToBeUnique()
