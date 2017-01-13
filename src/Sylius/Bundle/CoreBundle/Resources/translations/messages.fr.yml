@@ -28,6 +28,7 @@ sylius:
             taxonomies: Taxonomies
             locale_default: Paramètres régionaux par défaut
             locales: Locales
+            contact_email: Email de contact
             currency_base: Devise de référence
             currencies: Devises
             shipping_methods: Modes de livraison
@@ -122,6 +123,8 @@ sylius:
         promotion_filter:
             products: Filtre de produits
         promotion_rule:
+            customer_group:
+                group: Groupe de clients
             has_taxon:
                 taxons: Taxons
             product:

@@ -9,5 +9,5 @@ sylius:
             sender_name: Nom de l'éxpéditeur
             sender_address: Adresse de l'expéditeur
             content: Contenu
-            template: Gabarit
-            no_template: Utiliser le gabarit personnalisé
+            template: Modèle
+            no_template: Utiliser un modèle personnalisé
