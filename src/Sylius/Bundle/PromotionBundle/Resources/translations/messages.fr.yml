@@ -30,6 +30,8 @@ sylius:
             code_length: Longueur du code
             expires_at: Expire le
             usage_limit: Limite d'utilisation
+        promotion_filter:
+            price_range: Filtre de gamme de prix
         promotion_rule:
             cart_quantity_configuration:
                 count: Nombre

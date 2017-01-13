@@ -12,15 +12,17 @@ sylius:
                     inventory: Zapasy
                     options: Warianty
                     products: Produkty
-                    taxons: Podatki
+                    taxons: Taksonomie
                 configuration:
                     admin_users: Administratorzy
                     channels: Kanały
                     countries: Kraje
                     currencies: Waluty
+                    exchange_rates: Kursy wymiany walut
                     header: Konfiguracja
                     locales: Ustawienia regionalne
                     payment_methods: Metody płatności
+                    shipping_categories: Kategorie wysyłki
                     shipping_methods: Sposób wysyłki
                     tax_categories: Kategorie podatkowe
                     tax_rates: Stawki podatkowe

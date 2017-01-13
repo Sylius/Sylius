@@ -8,3 +8,6 @@ sylius:
             code: Nazwa
             enabled: Aktywne
             exchange_rate: Kurs wymiany
+        exchange_rate:
+            source_currency: Waluta źródłowa
+            target_currency: Waluta docelowa

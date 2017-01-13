@@ -13,6 +13,7 @@ sylius:
             min: L'e-mail doit contenir au moins {{ limit }} caractères.
     channel_pricing:
         price:
+            min: Le prix doit être au moins de {{ limit }}.
             not_blank: Veuillez saisir un prix.
     checkout:
         shipping_method:
@@ -68,6 +69,8 @@ sylius:
         depth:
             min: La profondeur ne peut pas être négative.
             invalid: La profondeur doit être un nombre.
+        channel_pricing:
+            all_defined: 'Vous devez définir un prix pour tous les canaux.'
     product_translation:
         short_description:
             max: La description courte ne doit pas dépasser {{ limit }} caractères.
