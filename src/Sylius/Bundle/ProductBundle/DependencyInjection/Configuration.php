@@ -210,6 +210,7 @@ final class Configuration implements ConfigurationInterface
                                 ->arrayNode('translation')
                                     ->addDefaultsIfNotSet()
                                     ->children()
+                                        ->variableNode('options')->end()
                                         ->variableNode('option_value')->end()
                                         ->arrayNode('classes')
                                             ->isRequired()

@@ -106,6 +106,7 @@ final class Configuration implements ConfigurationInterface
                         ->arrayNode('order_item_unit')
                             ->addDefaultsIfNotSet()
                             ->children()
+                                ->variableNode('options')->end()
                                 ->arrayNode('classes')
                                     ->addDefaultsIfNotSet()
                                     ->children()
