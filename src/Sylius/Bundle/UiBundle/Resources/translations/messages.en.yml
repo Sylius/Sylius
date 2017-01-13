@@ -59,6 +59,8 @@ sylius:
         an_error_occurred: 'An error occurred'
         api: 'Api'
         apply_coupon: 'Apply coupon'
+        archival: 'Archival'
+        archive: 'Archive'
         are_your_sure_you_want_to_perform_this_action: 'Are you sure you want to perform this action?'
         association: 'Association'
         association_types: 'Association types'

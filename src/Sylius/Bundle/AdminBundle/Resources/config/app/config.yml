@@ -38,6 +38,7 @@ sylius_grid:
             update: "@SyliusUi/Grid/Action/update.html.twig"
             apply_transition: "@SyliusUi/Grid/Action/applyTransition.html.twig"
             links: "@SyliusUi/Grid/Action/links.html.twig"
+            archive: "@SyliusUi/Grid/Action/archive.html.twig"
 
             create_product_attribute: "@SyliusAdmin/ProductAttribute/Grid/Action/create.html.twig"
             update_product_positions: "@SyliusAdmin/Product/Grid/Action/updatePositions.html.twig"
