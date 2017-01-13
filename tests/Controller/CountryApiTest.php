@@ -67,7 +67,7 @@ class CountryApiTest extends JsonApiTestCase
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
         $data =
-            <<<EOT
+<<<EOT
         {
             "code": "BE"
         }
