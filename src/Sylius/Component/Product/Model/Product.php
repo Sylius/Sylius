@@ -13,6 +13,7 @@ namespace Sylius\Component\Product\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Webmozart\Assert\Assert;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Resource\Model\ToggleableTrait;
@@ -247,6 +248,12 @@ class Product implements ProductInterface
      */
     public function addAttribute(AttributeValueInterface $attribute)
     {
+        Assert::isInstanceOf(
+            $attribute,
+            ProductAttributeValueInterface::class,
+            'Attribute objects added to a Product object have to implement ProductAttributeValueInterface'
+        );
+
         if (!$this->hasAttribute($attribute)) {
             $attribute->setProduct($this);
             $this->attributes->add($attribute);
@@ -258,6 +265,12 @@ class Product implements ProductInterface
      */
     public function removeAttribute(AttributeValueInterface $attribute)
     {
+        Assert::isInstanceOf(
+            $attribute,
+            ProductAttributeValueInterface::class,
+            'Attribute objects removed from a Product object have to implement ProductAttributeValueInterface'
+        );
+
         if ($this->hasAttribute($attribute)) {
             $this->attributes->removeElement($attribute);
             $attribute->setProduct(null);
