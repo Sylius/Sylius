@@ -320,6 +320,27 @@ final class ShippingContext implements Context
     }
 
     /**
+     * @Given /^the store has an archival "([^"]+)" shipping method with ("[^"]+") fee$/
+     */
+    public function theStoreHasArchivalShippingMethodWithFee($shippingMethodName, $fee)
+    {
+        $channel = $this->sharedStorage->get('channel');
+        $configuration = $this->getConfigurationByChannels([$channel], $fee);
+
+        $this->saveShippingMethod($this->shippingMethodExampleFactory->create([
+            'name' => $shippingMethodName,
+            'enabled' => true,
+            'zone' => $this->getShippingZone(),
+            'calculator' => [
+                'type' => DefaultCalculators::FLAT_RATE,
+                'configuration' => $configuration,
+            ],
+            'channels' => [$this->sharedStorage->get('channel')],
+            'archived_at' => new \DateTime(),
+        ]));
+    }
+
+    /**
      * @Given /^the store has "([^"]+)" shipping method with ("[^"]+") fee per unit$/
      */
     public function theStoreHasShippingMethodWithFeePerUnit($shippingMethodName, $fee)
@@ -420,6 +441,15 @@ final class ShippingContext implements Context
     ) {
         $shippingMethod->setCategory($shippingCategory);
         $shippingMethod->setCategoryRequirement(ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_NONE);
+        $this->shippingMethodManager->flush();
+    }
+
+    /**
+     * @Given /^the (shipping method "[^"]+") is archival$/
+     */
+    public function theShippingMethodIsArchival(ShippingMethodInterface $shippingMethod)
+    {
+        $shippingMethod->setArchivedAt(new \DateTime());
         $this->shippingMethodManager->flush();
     }
 

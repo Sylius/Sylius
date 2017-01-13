@@ -15,3 +15,17 @@ sylius_admin_shipping_method:
           index:
               icon: shipping
     type: sylius.resource
+
+sylius_admin_shipping_method_archive:
+    path: /shipping-methods/{id}/archive
+    methods: [PATCH]
+    defaults:
+        _controller: sylius.controller.shipping_method:updateAction
+        _sylius:
+            section: admin
+            template: '@SyliusUi/Grid/Action/archive.html.twig'
+            form:
+                type: Sylius\Bundle\ResourceBundle\Form\Type\ArchivableType
+            redirect:
+                route: sylius_admin_shipping_method_index
+                parameters: {}

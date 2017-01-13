@@ -68,5 +68,11 @@
             <argument type="service" id="__symfony__.sylius.expired_carts_remover" />
             <tag name="fob.context_service" />
         </service>
+
+        <service id="sylius.behat.context.domain.managing_shipping_methods" class="Sylius\Behat\Context\Domain\ManagingShippingMethodsContext">
+            <argument type="service" id="__symfony__.sylius.repository.shipping_method" />
+            <argument type="service" id="__symfony__.sylius.manager.shipping_method" />
+            <tag name="fob.context_service" />
+        </service>
     </services>
 </container>

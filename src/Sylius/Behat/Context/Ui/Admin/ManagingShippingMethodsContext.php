@@ -13,7 +13,7 @@ namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\NotificationType;
-use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
+use Sylius\Behat\Page\Admin\ShippingMethod\IndexPageInterface;
 use Sylius\Behat\Page\Admin\ShippingMethod\CreatePageInterface;
 use Sylius\Behat\Page\Admin\ShippingMethod\UpdatePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
@@ -284,6 +284,60 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
+     * @When I archive the :name shipping method
+     */
+    public function iArchiveTheShippingMethod($name)
+    {
+        $actions = $this->indexPage->getActionsForResource(['name' => $name]);
+        $actions->pressButton('Archive');
+    }
+
+    /**
+     * @When I restore the :name shipping method
+     */
+    public function iRestoreTheShippingMethod($name)
+    {
+        $actions = $this->indexPage->getActionsForResource(['name' => $name]);
+        $actions->pressButton('Restore');
+    }
+
+    /**
+     * @Then I should be viewing non archival shipping methods
+     */
+    public function iShouldBeViewingNonArchivalShippingMethods()
+    {
+        Assert::false($this->indexPage->isArchivalFilterEnabled());
+    }
+
+    /**
+     * @Then I should see :count shipping methods on the list
+     */
+    public function thereShouldBeNoShippingMethodsOnTheList($count)
+    {
+        Assert::same(
+            $this->indexPage->countItems(),
+            (int) $count,
+            'There should be %2$d shipping methods on the list, found %d instead.'
+        );
+    }
+
+    /**
+     * @Then the only shipping method on the list should be :name
+     */
+    public function theOnlyShippingMethodOnTheListShouldBe($name)
+    {
+        Assert::same(
+            (int) $this->indexPage->countItems(),
+            1,
+            'There should be only one shipping method on the list, found %d instead.'
+        );
+        Assert::true(
+            $this->indexPage->isSingleResourceOnPage(['name' => $name]),
+            sprintf('Shipping method "%s" was not found on the list.', $name)
+        );
+    }
+
+    /**
      * @Then shipping method with :element :name should not be added
      */
     public function shippingMethodWithElementValueShouldNotBeAdded($element, $name)
@@ -343,6 +397,25 @@ final class ManagingShippingMethodsContext implements Context
     public function iWantToBrowseShippingMethods()
     {
         $this->indexPage->open();
+    }
+
+    /**
+     * @Given I am browsing archival shipping methods
+     */
+    public function iAmBrowsingArchivalShippingMethods()
+    {
+        $this->indexPage->open();
+        $this->indexPage->chooseArchival('Yes');
+        $this->indexPage->filter();
+    }
+
+    /**
+     * @Given I filter archival shipping methods
+     */
+    public function iFilterArchivalShippingMethods()
+    {
+        $this->indexPage->chooseArchival('Yes');
+        $this->indexPage->filter();
     }
 
     /**
