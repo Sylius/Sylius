@@ -299,15 +299,16 @@ final class ProductContext implements Context
 
     /**
      * @Given /^the store has(?:| a| an) "([^"]+)" configurable product$/
+     * @Given /^the store has(?:| a| an) "([^"]+)" configurable product with "([^"]+)" slug$/
      */
-    public function storeHasAConfigurableProduct($productName)
+    public function storeHasAConfigurableProduct($productName, $slug = null)
     {
         /** @var ProductInterface $product */
         $product = $this->productFactory->createNew();
 
         $product->setName($productName);
         $product->setCode(StringInflector::nameToUppercaseCode($productName));
-        $product->setSlug($this->slugGenerator->generate($productName));
+        $product->setSlug($slug?:$this->slugGenerator->generate($productName));
 
         $product->setDescription('Awesome '.$productName);
 

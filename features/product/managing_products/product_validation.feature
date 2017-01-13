@@ -127,3 +127,14 @@ Feature: Products validation
         And I assign it to channel "Mobile Channel"
         And I save my changes
         Then I should be notified that I have to define product variants' prices for newly assigned channels first
+
+    @ui
+    Scenario: Adding a new simple product with price
+        Given the store has a "7 Wonders" configurable product with "7-wonders" slug
+        And I want to create a new configurable product
+        When I specify its code as "7-WONDERS-BABEL"
+        And I name it "7 Wonders Babel" in "English (United States)"
+        And I set its slug to "7-wonders" in "English (United States)"
+        And I add it
+        Then I should be notified that slug has to be unique
+        And product with code "7-WONDERS-BABEL" should not be added

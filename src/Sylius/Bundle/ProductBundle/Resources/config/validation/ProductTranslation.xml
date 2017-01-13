@@ -26,6 +26,11 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+            <option name="fields">slug</option>
+            <option name="message">sylius.product.slug.unique</option>
+            <option name="groups">sylius</option>
+        </constraint>
         <property name="slug">
             <constraint name="NotBlank">
                 <option name="message">sylius.product.slug.not_blank</option>

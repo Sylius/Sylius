@@ -3,6 +3,9 @@ sylius:
         sku:
             not_blank: Please enter product SKU.
             unique: Product SKU must be unique.
+        slug:
+            not_blank: Please enter product slug.
+            unique: Product slug must be unique.
         code:
             not_blank: Please enter product code.
             regex: Product code can only be comprised of letters, numbers, dashes and underscores.
