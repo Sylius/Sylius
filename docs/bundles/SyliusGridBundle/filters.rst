@@ -107,3 +107,19 @@ This filter checks if an amount is in range and in specific currency
 .. warning::
 
     Providing different ``scale`` between **form_options** and **options** may cause unwanted, and plausibly volatile results.
+
+Exists
+------
+
+This filter checks if the specified field contains any value
+
+.. code-block:: yaml
+
+    sylius_grid:
+        grids:
+            app_order:
+                filters:
+                    date:
+                        type: exists
+                        options:
+                            field: completedAt

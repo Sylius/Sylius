@@ -36,6 +36,7 @@ Here you will find all configuration options of ``sylius_grid``.
                         options:
                             fields: { }
                         form_options: { }
+                        default_value: ~
                     enabled:
                         type: boolean # Type of filter
                         label: app.ui.enabled
@@ -45,6 +46,7 @@ Here you will find all configuration options of ``sylius_grid``.
                         options:
                             field: enabled
                         form_options: { }
+                        default_value: ~
                     date:
                         type: date # Type of filter
                         label: app.ui.created_at
@@ -54,6 +56,7 @@ Here you will find all configuration options of ``sylius_grid``.
                         options:
                             field: createdAt
                         form_options: { }
+                        default_value: ~
                     channel:
                         type: entity # Type of filter
                         label: app.ui.channel
@@ -64,6 +67,7 @@ Here you will find all configuration options of ``sylius_grid``.
                             fields: [channel]
                         form_options:
                             class: "%app.model.channel%"
+                        default_value: ~
                 actions:
                     main:
                         create:
@@ -95,3 +99,11 @@ Here you will find all configuration options of ``sylius_grid``.
                             icon: ~
                             position: 100
                             options: { }
+                        archive:
+                            type: archive
+                            label: sylius.ui.archive
+                            enabled: true
+                            icon: ~
+                            position: 100
+                            options:
+                                restore_label: sylius.ui.restore
