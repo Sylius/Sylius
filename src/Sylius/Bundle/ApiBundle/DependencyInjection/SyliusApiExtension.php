@@ -11,12 +11,15 @@
 
 namespace Sylius\Bundle\ApiBundle\DependencyInjection;
 
+use Sylius\Bundle\ApiBundle\Controller\TokenController;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -34,6 +37,11 @@ class SyliusApiExtension extends AbstractResourceExtension implements PrependExt
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
         $loader->load('services.xml');
+
+        $container->setDefinition('fos_oauth_server.controller.token', new Definition(TokenController::class, [
+            new Reference('fos_oauth_server.server'),
+            new Reference('fos_rest.decoder_provider'),
+        ]));
     }
 
     /**
