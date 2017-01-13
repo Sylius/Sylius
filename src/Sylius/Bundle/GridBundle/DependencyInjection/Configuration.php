@@ -134,6 +134,7 @@ final class Configuration implements ConfigurationInterface
                                         ->arrayNode('form_options')
                                             ->prototype('variable')->end()
                                         ->end()
+                                        ->variableNode('default_value')->end()
                                     ->end()
                                 ->end()
                             ->end()

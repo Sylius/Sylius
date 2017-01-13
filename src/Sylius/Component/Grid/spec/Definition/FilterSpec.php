@@ -79,4 +79,18 @@ final class FilterSpec extends ObjectBehavior
         $this->setPosition(1);
         $this->getPosition()->shouldReturn(1);
     }
+
+    function it_has_no_criteria_by_default()
+    {
+        $this->getCriteria()->shouldReturn(null);
+    }
+
+    function its_criteria_is_mutable()
+    {
+        $this->setCriteria('false');
+        $this->getCriteria()->shouldReturn('false');
+
+        $this->setCriteria(['type' => 'contains']);
+        $this->getCriteria()->shouldReturn(['type' => 'contains']);
+    }
 }

@@ -59,6 +59,7 @@ final class ArrayToDefinitionConverterSpec extends ObjectBehavior
 
         $filter = Filter::fromNameAndType('enabled', 'boolean');
         $filter->setOptions(['fields' => ['firstName', 'lastName']]);
+        $filter->setCriteria('true');
         $grid->addFilter($filter);
 
         $definitionArray = [
@@ -85,7 +86,8 @@ final class ArrayToDefinitionConverterSpec extends ObjectBehavior
                     'type' => 'boolean',
                     'options' => [
                         'fields' => ['firstName', 'lastName']
-                    ]
+                    ],
+                    'default_value' => 'true',
                 ]
             ],
             'actions' => [
