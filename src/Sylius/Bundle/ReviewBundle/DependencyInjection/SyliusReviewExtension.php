@@ -33,8 +33,6 @@ final class SyliusReviewExtension extends AbstractResourceExtension
         $this->registerResources('sylius', $config['driver'], $this->resolveResources($config['resources'], $container), $container);
 
         $loader->load('services.xml');
-
-        $this->addProperTagToReviewDeleteListener($container);
     }
 
     /**
@@ -54,18 +52,5 @@ final class SyliusReviewExtension extends AbstractResourceExtension
         }
 
         return $resolvedResources;
-    }
-
-    /**
-     * @param ContainerBuilder $container
-     */
-    private function addProperTagToReviewDeleteListener(ContainerBuilder $container)
-    {
-        if (!$container->hasDefinition('sylius.listener.review_delete')) {
-            return;
-        }
-
-        $listenerDefinition = $container->getDefinition('sylius.listener.review_delete');
-        $listenerDefinition->addTag('doctrine.event_listener', ['event' => 'postRemove', 'method' => 'recalculateSubjectRating']);
     }
 }
