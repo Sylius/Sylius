@@ -27,7 +27,7 @@
         <service id="sylius.average_rating_calculator" class="Sylius\Component\Review\Calculator\AverageRatingCalculator" />
         <service id="sylius.average_rating_updater" class="Sylius\Bundle\ReviewBundle\Updater\AverageRatingUpdater">
             <argument type="service" id="sylius.average_rating_calculator" />
-            <argument type="service" id="doctrine.orm.default_entity_manager" />
+            <argument type="service" id="sylius.manager.product_review" />
         </service>
     </services>
 </container>
