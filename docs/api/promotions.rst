@@ -238,7 +238,7 @@ Parameters
 
 code
     Coupon code
-usageLimit
+usage_limit
     The number of times that coupon can be used
 
 Response

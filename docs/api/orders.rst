@@ -449,7 +449,7 @@ Parameters
 
 variant
     The id of product variant
-unitPrice
+unit_price
     Unit price of the item
 quantity
     Desired quantity

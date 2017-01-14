@@ -133,9 +133,9 @@ locales *(optional)*
     Array of Locale id
 currencies *(optional)*
     Array of Currency id
-paymentMethods *(optional)*
+payment_methods *(optional)*
     Array of PaymentMethod id
-shippingMethods *(optional)*
+shipping_methods *(optional)*
     Array of ShippingMethod id
 
 Response
@@ -192,9 +192,9 @@ locales *(optional)*
     Array of Locale id
 currencies *(optional)*
     Array of Currency id
-paymentMethods *(optional)*
+payment_methods *(optional)*
     Array of PaymentMethod id
-shippingMethods *(optional)*
+shipping_methods *(optional)*
     Array of ShippingMethod id
 
 Response

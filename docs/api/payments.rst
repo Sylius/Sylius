@@ -23,7 +23,7 @@ criteria[channel] *(optional)*
     The channel id
 criteria[number] *(optional)*
     The order number
-criteria[billingAddress] *(optional)*
+criteria[billing_address] *(optional)*
     First or last name of the customer bill to address
 criteria[createdAtFrom] *(optional)*
     Starting date
