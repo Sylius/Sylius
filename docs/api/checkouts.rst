@@ -33,36 +33,36 @@ You need to pass order id in the following url and make a PUT call:
 Parameters
 ~~~~~~~~~~
 
-shippingAddress[firstName]
+shipping_address[first_name]
     Firstname for shipping address
-shippingAddress[lastName]
+shipping_address[last_name]
     Lastname for shipping address
-shippingAddress[city]
+shipping_address[city]
     City name
-shippingAddress[postcode]
+shipping_address[postcode]
     Postcode
-shippingAddress[street]
+shipping_address[street]
     Address line 1
-shippingAddress[country]
+shipping_address[country]
     Id of the country
-shippingAddress[province] *(optional)*
+shipping_address[province] *(optional)*
     Id of the province
 
 If you do not specify the billing address block, shipping address will be used for that purpose.
 
-billingAddress[firstName]
+billing_address[first_name]
     Firstname for billing address
-billingAddress[lastName]
+billing_address[last_name]
     Lastname for billing address
-billingAddress[city]
+billing_address[city]
     City name
-billingAddress[postcode]
+billing_address[postcode]
     Postcode
-billingAddress[street]
+billing_address[street]
     Address line 1
-billingAddress[country]
+billing_address[country]
     Id of the country
-billingAddress[province] *(optional)*
+billing_address[province] *(optional)*
     Id of the province
 
 Response

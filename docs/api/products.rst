@@ -98,7 +98,7 @@ Response
     }
 
 Creating a product
--------------------
+------------------
 
 To create a new product, you can execute the following request:
 
@@ -115,7 +115,7 @@ description
     Description of the product
 price
     Price of the product
-shortDescription *(optional)*
+short_description *(optional)*
     Short description of the product (for lists)
 
 Response
@@ -158,7 +158,7 @@ description
     Description of the product
 price
     Price of the product
-shortDescription *(optional)*
+short_description *(optional)*
     Short description of the product (for lists)
 
 Response

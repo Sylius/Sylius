@@ -25,7 +25,7 @@ criteria[stockLocation] *(optional)*
     The id of stock location
 criteria[number] *(optional)*
     The order number
-criteria[shippingAddress] *(optional)*
+criteria[shipping_address] *(optional)*
     First or last name of the customer ship to address
 criteria[createdAtFrom] *(optional)*
     Starting date

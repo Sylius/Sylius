@@ -119,9 +119,9 @@ To create a new user, you can execute the following request:
 Parameters
 ~~~~~~~~~~
 
-firstName
+first_name
     Firstname of the customer
-lastName
+last_name
     Lastname of the customer
 email
     User e-mail
@@ -171,9 +171,9 @@ You can update an existing user using PUT or PATCH method:
 Parameters
 ~~~~~~~~~~
 
-firstName
+first_name
     Firstname of the customer
-lastName
+last_name
     Lastname of the customer
 email
     User e-mail

@@ -322,8 +322,8 @@ Example
         -X POST
         --data '
             {
-                "firstName": "John",
-                "lastName": "Diggle",
+                "first_name": "John",
+                "last_name": "Diggle",
                 "email": "john.diggle@yahoo.com",
                 "gender": "m",
                 "user": {
@@ -387,12 +387,12 @@ Example Response
         "message":"Validation Failed",
         "errors":{
             "children":{
-                "firstName":{
+                "first_name":{
                     "errors":[
                         "Please enter your first name."
                     ]
                 },
-                "lastName":{
+                "last_name":{
                     "errors":[
                         "Please enter your last name."
                     ]
@@ -466,8 +466,8 @@ Example
         -X PUT
         --data '
             {
-                "firstName": "John",
-                "lastName": "Diggle",
+                "first_name": "John",
+                "last_name": "Diggle",
                 "email": "john.diggle@example.com",
                 "gender": "m"
             }
@@ -506,12 +506,12 @@ Example Response
         "message":"Validation Failed",
         "errors":{
             "children":{
-                "firstName":{
+                "first_name":{
                     "errors":[
                         "Please enter your first name."
                     ]
                 },
-                "lastName":{
+                "last_name":{
                     "errors":[
                         "Please enter your last name."
                     ]
