@@ -67,27 +67,28 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     /**
      * {@inheritdoc}
      */
-    public function addAttribute($attribute, $value)
+    public function addAttribute($attributeName, $value, $localeCode)
     {
         $this->clickTabIfItsNotActive('attributes');
+        $this->clickLocaleTabIfItsNotActive($localeCode);
 
-        $attributeOption = $this->getElement('attributes_choice')->find('css', sprintf('option:contains("%s")', $attribute));
+        $attributeOption = $this->getElement('attributes_choice')->find('css', sprintf('option:contains("%s")', $attributeName));
         $this->selectElementFromAttributesDropdown($attributeOption->getAttribute('value'));
 
         $this->getDocument()->pressButton('Add attributes');
         $this->waitForFormElement();
 
-        $this->getElement('attribute_value', ['%attribute%' => $attribute])->setValue($value);
+        $this->getElement('attribute_value', ['%attributeName%' => $attributeName, '%localeCode%' => $localeCode])->setValue($value);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function removeAttribute($attribute)
+    public function removeAttribute($attributeName, $localeCode)
     {
         $this->clickTabIfItsNotActive('attributes');
 
-        $this->getElement('attribute_delete_button', ['%attribute%' => $attribute])->press();
+        $this->getElement('attribute_delete_button', ['%attributeName%' => $attributeName, '%localeCode%' => $localeCode])->press();
     }
 
     /**
@@ -229,8 +230,8 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
             'association_dropdown' => '.field > label:contains("%association%") ~ .product-select',
             'association_dropdown_item' => '.field > label:contains("%association%") ~ .product-select > div.menu > div.item:contains("%item%")',
             'association_dropdown_item_selected' => '.field > label:contains("%association%") ~ .product-select > a.label:contains("%item%")',
-            'attribute_delete_button' => '.attribute .label:contains("%attribute%") ~ button',
-            'attribute_value' => '.attribute .label:contains("%attribute%") ~ input',
+            'attribute_delete_button' => '.tab[data-tab="%localeCode%"] .attribute .label:contains("%attributeName%") ~ button',
+            'attribute_value' => '.tab[data-tab="%localeCode%"] .attribute .label:contains("%attributeName%") ~ input',
             'attributes_choice' => '#sylius_product_attribute_choice',
             'calculator' => '#sylius_calculator_container',
             'channel_checkbox' => '.checkbox:contains("%channel%") input',
@@ -239,6 +240,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
             'form' => 'form[name="sylius_product"]',
             'images' => '#sylius_product_images',
             'language_tab' => '[data-locale="%locale%"] .title',
+            'locale_tab' => '#attributesContainer .menu [data-tab="%localeCode%"]',
             'name' => '#sylius_product_translations_%locale%_name',
             'price' => '#sylius_product_variant_channelPricings [data-form-collection="item"]:contains("%channel%") input',
             'price_calculator' => '#sylius_product_variant_pricingCalculator',
@@ -291,6 +293,17 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     {
         $attributesTab = $this->getElement('tab', ['%name%' => $tabName]);
         $attributesTab->click();
+    }
+
+    /**
+     * @param string $localeCode
+     */
+    private function clickLocaleTabIfItsNotActive($localeCode)
+    {
+        $localeTab = $this->getElement('locale_tab', ['%localeCode%' => $localeCode]);
+        if (!$localeTab->hasClass('active')) {
+            $localeTab->click();
+        }
     }
 
     /**
