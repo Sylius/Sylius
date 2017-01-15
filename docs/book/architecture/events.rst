@@ -64,7 +64,7 @@ The events already used in Sylius are described in the Book alongside the concep
 
     .. code-block:: bash
 
-        $ php app/console debug:event-dispatcher | grep sylius
+        $ php bin/console debug:event-dispatcher | grep sylius
 
 Learn more
 ----------
