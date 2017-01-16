@@ -18,8 +18,6 @@ Sylius\Component\Product\Model\Product:
         updatedAt:
             expose: true
             type: DateTime
-    virtual_properties:
-        getName:
-            serialized_name: name
-        getVariants:
-            serialized_name: variants
+        translations:
+            expose: true
+            type: array

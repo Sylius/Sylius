@@ -1,0 +1,22 @@
+{
+  "id": @integer@,
+  "attributes": [],
+  "created_at": "@string@.isDateTime()",
+  "updated_at": "@string@.isDateTime()",
+  "translations": {
+      "en": {
+        "locale": "en",
+        "id": @integer@,
+        "name": "Star wars mug",
+        "slug": "mug-star-wars",
+        "description": "@string@"
+      },
+      "en_US": {
+        "locale": "en_US",
+        "id": @integer@,
+        "name": "Star Wars mug",
+        "slug": "star-wars-mug",
+        "description": "@string@"
+      }
+    }
+}

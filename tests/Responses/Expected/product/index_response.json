@@ -1,0 +1,174 @@
+{
+    "page": 1,
+    "limit": 10,
+    "pages": 3,
+    "total": 22,
+    "_links": {
+        "self": {
+            "href": "\/api\/v1\/products\/?page=1&limit=10"
+        },
+        "first": {
+            "href": "\/api\/v1\/products\/?page=1&limit=10"
+        },
+        "last": {
+            "href": "\/api\/v1\/products\/?page=3&limit=10"
+        },
+        "next": {
+            "href": "\/api\/v1\/products\/?page=2&limit=10"
+        }
+    },
+    "_embedded": {
+        "items": [
+            {
+                "id": @integer@,
+                "attributes": [],
+                "created_at": "@string@.isDateTime()",
+                "updated_at": "@string@.isDateTime()",
+                "translations": {
+                    "en": {
+                        "locale": "en",
+                        "id": @integer@,
+                        "name": "Star wars mug",
+                        "slug": "mug-star-wars",
+                        "description": "@string@"
+                    },
+                    "en_US": {
+                        "locale": "en_US",
+                        "id": @integer@,
+                        "name": "Star Wars mug",
+                        "slug": "star-wars-mug",
+                        "description": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "attributes": [],
+                "created_at": "@string@.isDateTime()",
+                "updated_at": "@string@.isDateTime()",
+                "translations": {
+                    "en_US": {
+                        "locale": "en_US",
+                        "id": @integer@,
+                        "name": "Lotr mug",
+                        "slug": "mug-lotr",
+                        "description": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "attributes": [],
+                "created_at": "@string@.isDateTime()",
+                "updated_at": "@string@.isDateTime()",
+                "translations": {
+                    "en_US": {
+                        "locale": "en_US",
+                        "id": @integer@,
+                        "name": "Breaking bad mug",
+                        "slug": "mug-breaking-bad",
+                        "description": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "attributes": [],
+                "created_at": "@string@.isDateTime()",
+                "updated_at": "@string@.isDateTime()",
+                "translations": {
+                    "en_US": {
+                        "locale": "en_US",
+                        "id": @integer@,
+                        "name": "Product 4",
+                        "slug": "product-4"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "attributes": [],
+                "created_at": "@string@.isDateTime()",
+                "updated_at": "@string@.isDateTime()",
+                "translations": {
+                    "en_US": {
+                        "locale": "en_US",
+                        "id": @integer@,
+                        "name": "Product 5",
+                        "slug": "product-5"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "attributes": [],
+                "created_at": "@string@.isDateTime()",
+                "updated_at": "@string@.isDateTime()",
+                "translations": {
+                    "en_US": {
+                        "locale": "en_US",
+                        "id": @integer@,
+                        "name": "Product 6",
+                        "slug": "product-6"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "attributes": [],
+                "created_at": "@string@.isDateTime()",
+                "updated_at": "@string@.isDateTime()",
+                "translations": {
+                    "en_US": {
+                        "locale": "en_US",
+                        "id": @integer@,
+                        "name": "Product 7",
+                        "slug": "product-7"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "attributes": [],
+                "created_at": "@string@.isDateTime()",
+                "updated_at": "@string@.isDateTime()",
+                "translations": {
+                    "en_US": {
+                        "locale": "en_US",
+                        "id": @integer@,
+                        "name": "Product 8",
+                        "slug": "product-8"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "attributes": [],
+                "created_at": "@string@.isDateTime()",
+                "updated_at": "@string@.isDateTime()",
+                "translations": {
+                    "en_US": {
+                        "locale": "en_US",
+                        "id": @integer@,
+                        "name": "Product 9",
+                        "slug": "product-9"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "attributes": [],
+                "created_at": "@string@.isDateTime()",
+                "updated_at": "@string@.isDateTime()",
+                "translations": {
+                    "en_US": {
+                        "locale": "en_US",
+                        "id": @integer@,
+                        "name": "Product 10",
+                        "slug": "product-10"
+                    }
+                }
+            }
+        ]
+    }
+}

@@ -1,0 +1,7 @@
+Sylius\Component\Core\Model\Product:
+    product{4..22}:
+         fallbackLocale: en_US
+         currentLocale: en_US
+         code: PRODUCT_<current()>
+         slug: product-<current()>
+         name: Product <current()>

@@ -1,0 +1,20 @@
+{
+    "id": @integer@,
+    "attributes": [],
+    "created_at": "@string@.isDateTime()",
+    "updated_at": "@string@.isDateTime()",
+    "translations": {
+        "en": {
+            "id": @integer@,
+            "locale": "en",
+            "name": "Theme Mug",
+            "slug": "theme-mug"
+        },
+        "nl": {
+            "id": @integer@,
+            "locale": "nl",
+            "name": "Theme Mug",
+            "slug": "theme-mug2"
+        }
+    }
+}
