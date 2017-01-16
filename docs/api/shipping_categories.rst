@@ -1,5 +1,5 @@
-Shipping Categories
-===================
+Shipping Categories API
+=======================
 
 These endpoints will allow you to easily manage shipping categories. Base URI is `/api/v1/shipping-categories`.
 
