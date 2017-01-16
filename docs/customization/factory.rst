@@ -3,8 +3,8 @@ Customizing Factories
 
 .. warning::
 
-    In **Sylius** we are already decorating factories from components in Core.
-    Often you will be needing to add your very own methods to them. You need to check before which factory is your resource using.
+    Some factories may already be decorated in the **Sylius** Core.
+    You need to check before decorating which factory (Component or Core) is your resource using.
 
 Why would you customize a Factory?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -16,7 +16,7 @@ You may need for instance to:
     * create a disabled Product(for further modifications)
     * create a ProductReview with predefined description
 
-and many, many more usecases.
+and many, many more.
 
 How to customize a Factory?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -24,15 +24,17 @@ How to customize a Factory?
 Let's assume that you would want to have a possibility to create disabled products.
 
 1. Create your own factory class in the ``AppBundle\Factory`` namespace.
-Remember that it has to extend a proper base class. How can you check that?
+Remember that it has to implement a proper interaface. How can you check that?
 
 For the ``ProductFactory`` run:
 
 .. code-block:: bash
 
-    $ php bin/console debug:container sylius.factory.product
+    $ php bin/console sylius:debug:resource sylius.product
 
-As a result you will get the ``Sylius\Component\Product\Factory\ProductFactory`` - this is the class that you need to be extending.
+As a result you will get a table od Product related classes. Check the ``classes.factory`` row
+where you will find the ``Sylius\Component\Product\Factory\ProductFactory`` - this is the class that you need to decorate.
+Take its interface (``Sylius\Component\Product\Factory\ProductFactoryInterface``) and implement it.
 
 .. code-block:: php
 
@@ -40,34 +42,38 @@ As a result you will get the ``Sylius\Component\Product\Factory\ProductFactory``
 
     namespace AppBundle\Factory;
 
-    use Sylius\Component\Core\Model\AddressInterface;
     use Sylius\Component\Core\Model\ProductInterface;
-    use Sylius\Component\Product\Factory\ProductFactory as BaseProductFactory;
-    use Sylius\Component\Core\Model\CustomerInterface;
-    use Sylius\Component\Resource\Factory\FactoryInterface;
+    use Sylius\Component\Product\Factory\ProductFactoryInterface;
 
-    class ProductFactory extends BaseProductFactory
+    class ProductFactory implements ProductFactoryInterface
     {
         /**
          * @var FactoryInterface
          */
-        private $factory;
+        private $decoratedFactory;
 
         /**
-         * @var FactoryInterface
+         * @param ProductFactoryInterface $factory
          */
-        private $variantFactory;
-
-        /**
-         * @param FactoryInterface $factory
-         * @param FactoryInterface $variantFactory
-         */
-        public function __construct(FactoryInterface $factory, FactoryInterface $variantFactory)
+        public function __construct(ProductFactoryInterface $factory)
         {
-            parent::__construct($factory, $variantFactory);
+            $this->decoratedFactory = $factory;
+        }
 
-            $this->factory = $factory;
-            $this->variantFactory = $variantFactory;
+        /**
+         * {@inheritdoc}
+         */
+        public function createNew()
+        {
+            return $this->decoratedFactory->createNew();
+        }
+
+        /**
+         * {@inheritdoc}
+         */
+        public function createWithVariant()
+        {
+            return $this->decoratedFactory->createWithVariant();
         }
 
         /**
@@ -76,7 +82,7 @@ As a result you will get the ``Sylius\Component\Product\Factory\ProductFactory``
         public function createDisabled()
         {
             /** @var ProductInterface $product */
-            $product = $this->factory->createNew();
+            $product = $this->decoratedFactory->createNew();
 
             $product->setEnabled(false);
 
@@ -85,7 +91,7 @@ As a result you will get the ``Sylius\Component\Product\Factory\ProductFactory``
     }
 
 2. In order to decorate the base ProductFactory with your implementation you need to configure it
-as a decorating service in the ``AppBundle\Resources\config\services.yml``.
+as a decorating service in the ``app\Resources\config\services.yml``.
 
 .. code-block:: yaml
 
@@ -96,9 +102,9 @@ as a decorating service in the ``AppBundle\Resources\config\services.yml``.
             arguments: ['@app.factory.product.inner']
             public: false
 
-3. After the ``sylius.factory.product`` has been decorated it has been extended by the new ``createDisabled()`` method.
+3.You can use the new method of factory in routing.
 
-You can use the new method of factory in routing.
+After the ``sylius.factory.product`` has been decorated it has got the new ``createDisabled()`` method.
 
 .. code-block:: yaml
 
@@ -110,7 +116,7 @@ You can use the new method of factory in routing.
             _sylius:
                 section: admin
                 factory:
-                    method: createDisable # like here for example
+                    method: createDisabled # like here for example
                 template: SyliusAdminBundle:Crud:create.html.twig
                 redirect: sylius_admin_product_update
                 vars:
