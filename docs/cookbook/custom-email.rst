@@ -26,11 +26,11 @@ To achieve that you will need to:
 1. Create a new e-mail that will be sent:
 -----------------------------------------
 
-* prepare a template for your email in the ``AppBundle/Resources/views/Email``.
+* prepare a template for your email in the ``app/Resources/views/Email``.
 
 .. code-block:: twig
 
-    {# AppBundle/Resources/views/Email/out_of_stock.html.twig #}
+    {# app/Resources/views/Email/out_of_stock.html.twig #}
     {% block subject %}
         One of your products has become out of stock.
     {% endblock %}
@@ -138,7 +138,7 @@ To achieve that you will need to:
 
 .. code-block:: yaml
 
-    # AppBundle/Resources/config/services.yml
+    # app/config/services.yml
     services:
         app.email_manager.out_of_stock:
         class: AppBundle\EmailManager\OutOfStockEmailManager

@@ -128,7 +128,7 @@ This will generate the following paths:
 
     .. code-block:: yaml
 
-        # AppBundle/Resources/translations/messages.en.yml
+        # app/Resources/translations/messages.en.yml
         app:
             ui:
                 supplier: Supplier
