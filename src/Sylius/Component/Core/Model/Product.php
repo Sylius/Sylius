@@ -29,7 +29,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * @var string
      */
-    protected $variantSelectionMethod;
+    protected $variantSelectionMethod = self::VARIANT_SELECTION_CHOICE;
 
     /**
      * @var Collection|ProductTaxonInterface[]
@@ -69,8 +69,6 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
         $this->channels = new ArrayCollection();
         $this->reviews = new ArrayCollection();
         $this->images = new ArrayCollection();
-
-        $this->variantSelectionMethod = self::VARIANT_SELECTION_CHOICE;
     }
 
     /**

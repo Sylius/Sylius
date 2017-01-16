@@ -36,5 +36,9 @@
             <argument type="collection"><argument>sylius</argument></argument>
             <tag name="form.type" />
         </service>
+
+        <service id="sylius.form.extension.type.api_product" class="Sylius\Bundle\ApiBundle\Form\Extension\ApiProductTypeExtension">
+            <tag name="form.type_extension" extended-type="Sylius\Bundle\ProductBundle\Form\Type\ProductType" />
+        </service>
     </services>
 </container>
