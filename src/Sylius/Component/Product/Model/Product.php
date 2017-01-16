@@ -18,7 +18,6 @@ use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Resource\Model\ToggleableTrait;
 use Sylius\Component\Resource\Model\TranslatableTrait;
-use Sylius\Component\Resource\Model\TranslationInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -241,6 +240,25 @@ class Product implements ProductInterface
     public function getAttributes()
     {
         return $this->attributes;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAttributesByLocale($localeCode, $fallbackLocaleCode)
+    {
+        $attributes = $this->attributes->filter(
+            function (ProductAttributeValueInterface $attribute) use ($fallbackLocaleCode) {
+                return $attribute->getLocaleCode() === $fallbackLocaleCode;
+            }
+        );
+
+        $attributesWithFallback = [];
+        foreach ($attributes as $attribute) {
+            $attributesWithFallback[] = $this->getAttributeInDifferentLocale($attribute, $localeCode);
+        }
+
+        return $attributesWithFallback;
     }
 
     /**
@@ -475,5 +493,23 @@ class Product implements ProductInterface
     protected function createTranslation()
     {
         return new ProductTranslation();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    private function getAttributeInDifferentLocale(ProductAttributeValueInterface $attributeValue, $localeCode)
+    {
+        if (!$this->hasAttributeByCodeAndLocale($attributeValue->getCode(), $localeCode)) {
+            return $attributeValue;
+        }
+
+        $attributeValueInDifferentLocale = $this->getAttributeByCodeAndLocale($attributeValue->getCode(), $localeCode);
+        if ('' === $attributeValueInDifferentLocale->getValue()
+            || null === $attributeValueInDifferentLocale->getValue()) {
+            return $attributeValue;
+        }
+
+        return $attributeValueInDifferentLocale;
     }
 }

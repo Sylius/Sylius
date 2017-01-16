@@ -24,6 +24,14 @@ interface AttributeSubjectInterface
     public function getAttributes();
 
     /**
+     * @param string $localeCode
+     * @param string $fallbackLocaleCode
+     *
+     * @return Collection|AttributeValueInterface[]
+     */
+    public function getAttributesByLocale($localeCode, $fallbackLocaleCode);
+
+    /**
      * @param AttributeValueInterface $attribute
      */
     public function addAttribute(AttributeValueInterface $attribute);
