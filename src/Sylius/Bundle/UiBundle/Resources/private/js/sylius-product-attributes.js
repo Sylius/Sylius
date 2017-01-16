@@ -43,7 +43,7 @@
     }
 
     function modifyAttributesListOnSelectorElementDelete(removedValue) {
-        $('#attributesContainer > .attribute[data-id="'+removedValue+'"]').remove();
+        $('#attributesContainer .attribute[data-id="'+removedValue+'"]').remove();
     }
 
     function modifySelectorOnAttributesListElementDelete() {

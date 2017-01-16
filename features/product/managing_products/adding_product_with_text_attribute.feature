@@ -36,7 +36,7 @@ Feature: Adding a new product with text attribute
         And attribute "Gun caliber" of product "44 Magnum" should be "11 mm"
         And attribute "Overall length" of product "44 Magnum" should be "30.5 cm"
 
-    @ui @javascript @todo
+    @ui @javascript
     Scenario: Adding and removing text attributes on product create page
         Given I want to create a new simple product
         When I specify its code as "44_MAGNUM"
