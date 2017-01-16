@@ -14,8 +14,7 @@ namespace Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Bundle\CoreBundle\Test\Services\PaymentMethodNameToGatewayConverterInterface;
-use Sylius\Component\Core\Factory\PaymentMethodFactoryInterface;
+use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Model\PaymentMethodTranslationInterface;
@@ -40,9 +39,9 @@ final class PaymentContext implements Context
     private $paymentMethodRepository;
 
     /**
-     * @var PaymentMethodFactoryInterface
+     * @var ExampleFactoryInterface
      */
-    private $paymentMethodFactory;
+    private $paymentMethodExampleFactory;
 
     /**
      * @var FactoryInterface
@@ -52,7 +51,7 @@ final class PaymentContext implements Context
     /**
      * @var ObjectManager
      */
-    private $objectManager;
+    private $paymentMethodManager;
 
     /**
      * @var array
@@ -62,27 +61,25 @@ final class PaymentContext implements Context
     /**
      * @param SharedStorageInterface $sharedStorage
      * @param PaymentMethodRepositoryInterface $paymentMethodRepository
-     * @param PaymentMethodFactoryInterface $paymentMethodFactory
+     * @param ExampleFactoryInterface $paymentMethodExampleFactory
      * @param FactoryInterface $paymentMethodTranslationFactory
-     * @param ObjectManager $objectManager
+     * @param ObjectManager $paymentMethodManager
+     * @param array $gatewayFactories
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         PaymentMethodRepositoryInterface $paymentMethodRepository,
-        PaymentMethodFactoryInterface $paymentMethodFactory,
+        ExampleFactoryInterface $paymentMethodExampleFactory,
         FactoryInterface $paymentMethodTranslationFactory,
-        ObjectManager $objectManager
+        ObjectManager $paymentMethodManager,
+        array $gatewayFactories
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->paymentMethodRepository = $paymentMethodRepository;
-        $this->paymentMethodFactory = $paymentMethodFactory;
+        $this->paymentMethodExampleFactory = $paymentMethodExampleFactory;
         $this->paymentMethodTranslationFactory = $paymentMethodTranslationFactory;
-        $this->objectManager = $objectManager;
-        $this->gatewayFactories = [
-            'offline' => 'Offline',
-            'paypal_express_checkout' => 'Paypal Express Checkout',
-            'stripe_checkout' => 'Stripe Checkout',
-        ];
+        $this->paymentMethodManager = $paymentMethodManager;
+        $this->gatewayFactories = $gatewayFactories;
     }
 
     /**
@@ -108,36 +105,29 @@ final class PaymentContext implements Context
 
     /**
      * @Given the store has a payment method :paymentMethodName with a code :paymentMethodCode
-     * @Given the store has a payment method :paymentMethodName with a code :paymentMethodCode and gateway factory :gatewayFactory
      */
-    public function theStoreHasAPaymentMethodWithACode($paymentMethodName, $paymentMethodCode, $gatewayFactory = 'Offline')
+    public function theStoreHasAPaymentMethodWithACode($paymentMethodName, $paymentMethodCode)
     {
-        $this->createPaymentMethod($paymentMethodName, $paymentMethodCode, $gatewayFactory);
+        $this->createPaymentMethod($paymentMethodName, $paymentMethodCode, 'Offline');
     }
 
     /**
-     * @Given /^gateway of (this payment method) is configured with username "([^"]+)", password "([^"]+)" and "([^"]+)" signature$/
+     * @Given the store has a payment method :paymentMethodName with a code :paymentMethodCode and Paypal Express Checkout gateway
      */
-    public function gatewayOfThisPaymentMethodIsConfiguredWithUsernamePasswordAndSignature(
-        PaymentMethodInterface $paymentMethod,
-        $username,
-        $password,
-        $signature
+    public function theStoreHasPaymentMethodWithCodeAndPaypalExpressCheckoutGateway(
+        $paymentMethodName,
+        $paymentMethodCode
     ) {
-        $config = [
-            'username' => $username,
-            'password' => $password,
-            'signature' => $signature,
+        $paymentMethod = $this->createPaymentMethod($paymentMethodName, $paymentMethodCode, 'Paypal Express Checkout');
+        $paymentMethod->getGatewayConfig()->setConfig([
+            'username' => 'TEST',
+            'password' => 'TEST',
+            'signature' => 'TEST',
+            'payum.http_client' => '@sylius.payum.http_client',
             'sandbox' => true,
-        ];
+        ]);
 
-        if ('paypal_express_checkout' === $paymentMethod->getGatewayConfig()->getFactoryName()) {
-            $config = array_merge($config, ['payum.http_client' => '@sylius.payum.http_client']);
-        }
-
-        $paymentMethod->getGatewayConfig()->setConfig($config);
-
-        $this->objectManager->flush();
+        $this->paymentMethodManager->flush();
     }
 
     /**
@@ -152,7 +142,7 @@ final class PaymentContext implements Context
 
         $paymentMethod->addTranslation($translation);
 
-        $this->objectManager->flush();
+        $this->paymentMethodManager->flush();
     }
 
     /**
@@ -163,7 +153,7 @@ final class PaymentContext implements Context
     {
         $paymentMethod->disable();
 
-        $this->objectManager->flush();
+        $this->paymentMethodManager->flush();
     }
 
     /**
@@ -173,7 +163,7 @@ final class PaymentContext implements Context
     {
         $paymentMethod->setInstructions($instructions);
 
-        $this->objectManager->flush();
+        $this->paymentMethodManager->flush();
     }
 
     /**
@@ -205,15 +195,18 @@ final class PaymentContext implements Context
         $gatewayFactory = array_search($gatewayFactory, $this->gatewayFactories);
 
         /** @var PaymentMethodInterface $paymentMethod */
-        $paymentMethod = $this->paymentMethodFactory->createWithGateway($gatewayFactory);
-        $paymentMethod->getGatewayConfig()->setGatewayName($gatewayFactory);
-        $paymentMethod->setName(ucfirst($name));
-        $paymentMethod->setCode($code);
-        $paymentMethod->setPosition($position);
-        $paymentMethod->setDescription($description);
+        $paymentMethod = $this->paymentMethodExampleFactory->create([
+            'name' => ucfirst($name),
+            'code' => $code,
+            'description' => $description,
+            'gatewayName' => $gatewayFactory,
+            'gatewayFactory' => $gatewayFactory,
+            'enabled' => true,
+            'channels' => ($addForCurrentChannel && $this->sharedStorage->has('channel')) ? [$this->sharedStorage->get('channel')] : [],
+        ]);
 
-        if ($addForCurrentChannel && $this->sharedStorage->has('channel')) {
-            $paymentMethod->addChannel($this->sharedStorage->get('channel'));
+        if (null !== $position) {
+            $paymentMethod->setPosition($position);
         }
 
         $this->sharedStorage->set('payment_method', $paymentMethod);

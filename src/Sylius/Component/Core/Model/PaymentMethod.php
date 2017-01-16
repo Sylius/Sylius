@@ -96,18 +96,6 @@ class PaymentMethod extends BasePaymentMethod implements PaymentMethodInterface
     /**
      * {@inheritdoc}
      */
-    public function getGateway()
-    {
-        if (null !== $this->gatewayConfig) {
-            return $this->gatewayConfig->getGatewayName();
-        }
-
-        return null;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public static function getTranslationClass()
     {
         return PaymentMethodTranslation::class;

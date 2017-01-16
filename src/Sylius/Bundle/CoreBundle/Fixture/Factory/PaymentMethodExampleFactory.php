@@ -27,6 +27,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class PaymentMethodExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
+    const DEFAULT_LOCALE = 'en_US';
+
     /**
      * @var PaymentMethodFactoryInterface
      */
@@ -136,6 +138,10 @@ class PaymentMethodExampleFactory extends AbstractExampleFactory implements Exam
     {
         /** @var LocaleInterface[] $locales */
         $locales = $this->localeRepository->findAll();
+        if (empty($locales)) {
+            yield self::DEFAULT_LOCALE;
+        }
+
         foreach ($locales as $locale) {
             yield $locale->getCode();
         }

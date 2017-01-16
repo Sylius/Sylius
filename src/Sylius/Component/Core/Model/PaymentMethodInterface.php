@@ -29,9 +29,4 @@ interface PaymentMethodInterface extends BasePaymentMethodInterface, ChannelsAwa
      * @return GatewayConfigInterface
      */
     public function getGatewayConfig();
-
-    /**
-     * @return string
-     */
-    public function getGateway();
 }

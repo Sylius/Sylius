@@ -27,7 +27,7 @@ final class PaymentMethodTypeExtension extends AbstractTypeExtension
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $gatewayFactory = $options['data']->getGatewayConfig()->getFactoryName();
+        $gatewayFactory = $options['data']->getGatewayConfig();
 
         $builder
             ->add('channels', ChannelChoiceType::class, [
@@ -37,7 +37,7 @@ final class PaymentMethodTypeExtension extends AbstractTypeExtension
             ])
             ->add('gatewayConfig', GatewayConfigType::class, [
                 'label' => false,
-                'factory' => $gatewayFactory,
+                'data' => $gatewayFactory,
             ])
         ;
     }

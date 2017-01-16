@@ -63,24 +63,22 @@ final class ManagingPaymentMethodsContext implements Context
      * @param UpdatePageInterface $updatePage
      * @param CurrentPageResolverInterface $currentPageResolver
      * @param NotificationCheckerInterface $notificationChecker
+     * @param array $gatewayFactories
      */
     public function __construct(
         CreatePageInterface $createPage,
         IndexPageInterface $indexPage,
         UpdatePageInterface $updatePage,
         CurrentPageResolverInterface $currentPageResolver,
-        NotificationCheckerInterface $notificationChecker
+        NotificationCheckerInterface $notificationChecker,
+        array $gatewayFactories
     ) {
         $this->createPage = $createPage;
         $this->indexPage = $indexPage;
         $this->updatePage = $updatePage;
         $this->currentPageResolver = $currentPageResolver;
         $this->notificationChecker = $notificationChecker;
-        $this->gatewayFactories = [
-            'offline' => 'Offline',
-            'paypal_express_checkout' => 'Paypal Express Checkout',
-            'stripe_checkout' => 'Stripe Checkout',
-        ];
+        $this->gatewayFactories = $gatewayFactories;
     }
 
     /**
@@ -173,12 +171,12 @@ final class ManagingPaymentMethodsContext implements Context
     }
 
     /**
-     * @Given I want to create a new payment method
-     * @Given I want to create a new payment method with :factory gateway factory
+     * @When I want to create a new offline payment method
+     * @When I want to create a new payment method with :factory gateway factory
      */
     public function iWantToCreateANewPaymentMethod($factory = 'Offline')
     {
-        $this->createPage->open(['factory' => array_search($factory, $this->gatewayFactories)]);
+        $this->createPage->open(['factory' => array_search($factory, $this->gatewayFactories, true)]);
     }
 
     /**
@@ -296,9 +294,9 @@ final class ManagingPaymentMethodsContext implements Context
     }
 
     /**
-     * @Then I should be notified that I must specify paypal :element
+     * @Then I should be notified that I have to specify paypal :element
      */
-    public function iShouldBeNotifiedThatIMustSpecifyPaypal($element)
+    public function iShouldBeNotifiedThatIHaveToSpecifyPaypal($element)
     {
         Assert::same(
             $this->createPage->getValidationMessage('paypal_'.$element),
@@ -358,6 +356,14 @@ final class ManagingPaymentMethodsContext implements Context
     public function theCodeFieldShouldBeDisabled()
     {
         Assert::true($this->updatePage->isCodeDisabled());
+    }
+
+    /**
+     * @Then the factory name field should be disabled
+     */
+    public function theFactoryNameFieldShouldBeDisabled()
+    {
+        Assert::true($this->updatePage->isFactoryNameFieldDisabled());
     }
 
     /**
@@ -442,16 +448,16 @@ final class ManagingPaymentMethodsContext implements Context
     }
 
     /**
-     * @When I configure it for username :username, with :password password and :signature signature
+     * @When I configure it with test paypal credentials
      */
-    public function iConfigureItForUsernameWithPasswordAndSignature($username, $password, $signature)
+    public function iConfigureItWithTestPaypalCredentials()
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
-        $currentPage->setPaypalGatewayUsername($username);
-        $currentPage->setPaypalGatewayPassword($password);
-        $currentPage->setPaypalGatewaySignature($signature);
+        $currentPage->setPaypalGatewayUsername('TEST');
+        $currentPage->setPaypalGatewayPassword('TEST');
+        $currentPage->setPaypalGatewaySignature('TEST');
     }
 
     /**
@@ -475,17 +481,13 @@ final class ManagingPaymentMethodsContext implements Context
     }
 
     /**
-     * @Given I configure it with :secretKey secret key, :publishableKey publishable key, :layoutTemplate layout template and :obtainTokenTemplate obtain token template
+     * @When I configure it with test stripe gateway data
      */
-    public function iConfigureItWithSecretKeyPublishableKeyLayoutTemplateAndObtainTokenTemplate(
-        $secretKey,
-        $publishableKey,
-        $layoutTemplate,
-        $obtainTokenTemplate
-    ) {
-        $this->createPage->setStripeSecretKey($secretKey);
-        $this->createPage->setStripePublishableKey($publishableKey);
-        $this->createPage->setStripeLayoutTemplate($layoutTemplate);
-        $this->createPage->setStripeObtainTokenTemplate($obtainTokenTemplate);
+    public function iConfigureItWithTestStripeGatewayData()
+    {
+        $this->createPage->setStripeSecretKey('TEST');
+        $this->createPage->setStripePublishableKey('TEST');
+        $this->createPage->setStripeLayoutTemplate('layout.html');
+        $this->createPage->setStripeObtainTokenTemplate('obtain.html');
     }
 }

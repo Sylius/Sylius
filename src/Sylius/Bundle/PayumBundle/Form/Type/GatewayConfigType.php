@@ -50,6 +50,8 @@ final class GatewayConfigType extends AbstractResourceType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $factoryName = $options['data']->getFactoryName();
+
         $builder
             ->add('gatewayName', TextType::class, [
                 'label' => 'sylius.form.gateway_config.gateway_name',
@@ -57,37 +59,27 @@ final class GatewayConfigType extends AbstractResourceType
             ->add('factoryName', TextType::class, [
                 'label' => 'sylius.form.gateway_config.factory_name',
                 'disabled' => true,
-                'data' => $options['factory'],
+                'data' => $factoryName,
             ])
         ;
 
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($options) {
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($factoryName) {
             $gatewayConfig = $event->getData();
 
             if (!$gatewayConfig instanceof GatewayConfigInterface) {
                 return;
             }
 
-            if (!$this->gatewayConfigurationTypeRegistry->has('gateway_config', $options['factory'])) {
+            if (!$this->gatewayConfigurationTypeRegistry->has('gateway_config', $factoryName)) {
                 return;
             }
 
-            $configType = $this->gatewayConfigurationTypeRegistry->get('gateway_config', $options['factory']);
+            $configType = $this->gatewayConfigurationTypeRegistry->get('gateway_config', $factoryName);
             $event->getForm()->add('config', $configType, [
                 'label' => false,
                 'auto_initialize' => false,
             ]);
         });
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        parent::configureOptions($resolver);
-
-        $resolver->setDefault('factory', 'stripe_checkout');
     }
 
     /**

@@ -89,8 +89,6 @@ payum:
     gateways:
         offline:
             factory: offline
-        cash_on_delivery:
-            factory: offline
 
 stof_doctrine_extensions:
     default_locale: "%locale%"

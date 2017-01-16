@@ -11,7 +11,7 @@ Feature: Payment method unique code validation
 
     @ui
     Scenario: Trying to add payment method with taken code
-        Given I want to create a new payment method
+        Given I want to create a new offline payment method
         When I name it "Paypal Express Checkout" in "English (United States)"
         And I specify its code as "offline"
         And I try to add it

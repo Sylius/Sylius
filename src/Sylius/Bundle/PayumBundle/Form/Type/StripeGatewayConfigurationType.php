@@ -65,5 +65,4 @@ final class StripeGatewayConfigurationType extends AbstractType
             ])
         ;
     }
-
 }

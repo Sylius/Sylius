@@ -17,6 +17,8 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
@@ -57,29 +59,11 @@ final class PaypalGatewayConfigurationType extends AbstractType
                     ])
                 ],
             ])
-            ->add('payum_http_client', HiddenType::class, [
-                'label' => false,
-                // Hardcoded, as its the only payum client used now in sylius, could be extended to support many clients
-                'data' => '@sylius.payum.http_client',
-            ])
-            ->addModelTransformer(new CallbackTransformer(
-                function ($modelData) {
-                    if (empty($modelData)) {
-                        return $modelData;
-                    }
+            ->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) {
+                $data = $event->getData();
 
-                    $modelData['payum_http_client'] = $modelData['payum.http_client'];
-                    unset($modelData['payum.http_client']);
-
-                    return $modelData;
-                },
-                function ($formData) {
-                    $formData['payum.http_client'] = $formData['payum_http_client'];
-                    unset($formData['payum_http_client']);
-
-                    return $formData;
-                }
-            ))
+                $data['payum.http_client'] = '@sylius.payum.http_client';
+            })
         ;
     }
 }

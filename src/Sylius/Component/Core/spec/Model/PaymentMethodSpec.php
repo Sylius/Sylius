@@ -64,16 +64,6 @@ final class PaymentMethodSpec extends ObjectBehavior
         $this->getGatewayConfig()->shouldReturn($gatewayConfig);
     }
 
-    function it_returns_name_from_gateway_config_while_getting_a_gateway(GatewayConfigInterface $gatewayConfig)
-    {
-        $this->getGateway()->shouldReturn(null);
-
-        $gatewayConfig->getGatewayName()->willReturn('gateway');
-        $this->setGatewayConfig($gatewayConfig);
-
-        $this->getGateway()->shouldReturn('gateway');
-    }
-
     public function getMatchers()
     {
         return [
