@@ -492,11 +492,17 @@ final class ProductContext implements Context
 
     /**
      * @Given /^(this product) has ([^"]+) attribute "([^"]+)" with value "([^"]+)"$/
+     * @Given /^(this product) has ([^"]+) attribute "([^"]+)" with value "([^"]+)" in ("[^"]+" locale)$/
      */
-    public function thisProductHasAttributeWithValue(ProductInterface $product, $productAttributeType, $productAttributeName, $value)
-    {
+    public function thisProductHasAttributeWithValue(
+        ProductInterface $product,
+        $productAttributeType,
+        $productAttributeName,
+        $value,
+        $language = 'en_US'
+    ) {
         $attribute = $this->createProductAttribute($productAttributeType, $productAttributeName);
-        $attributeValue = $this->createProductAttributeValue($value, $attribute);
+        $attributeValue = $this->createProductAttributeValue($value, $attribute, $language);
         $product->addAttribute($attributeValue);
 
         $this->objectManager->flush();
@@ -766,15 +772,17 @@ final class ProductContext implements Context
     /**
      * @param string $value
      * @param ProductAttributeInterface $attribute
+     * @param string $localeCode
      *
      * @return ProductAttributeValueInterface
      */
-    private function createProductAttributeValue($value, ProductAttributeInterface $attribute)
+    private function createProductAttributeValue($value, ProductAttributeInterface $attribute, $localeCode)
     {
         /** @var ProductAttributeValueInterface $attributeValue */
         $attributeValue = $this->attributeValueFactory->createNew();
         $attributeValue->setAttribute($attribute);
         $attributeValue->setValue($value);
+        $attributeValue->setLocaleCode($localeCode);
 
         $this->objectManager->persist($attributeValue);
 

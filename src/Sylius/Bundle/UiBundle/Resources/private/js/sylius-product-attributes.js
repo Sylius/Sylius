@@ -68,7 +68,6 @@
     function setAttributeChoiceListener() {
         var $attributeChoice = $('#attributeChoice');
         $attributeChoice.find('button').on('click', function(event) {
-            var $attributesContainer = $('#attributesContainer');
             event.preventDefault();
 
             var $attributeChoiceSelect = $attributeChoice.find('select');
@@ -94,7 +93,11 @@
                 },
                 success: function(data) {
                     var finalData = modifyAttributeForms($(data));
-                    $attributesContainer.append(finalData);
+
+                    $(finalData).each(function() {
+                        var localeCode = $(this).find('input[type="hidden"]').last().val();
+                        $('#attributesContainer > div[data-tab="'+localeCode+'"]').append(this);
+                    });
 
                     $('#sylius_product_attribute_choice').val('');
 

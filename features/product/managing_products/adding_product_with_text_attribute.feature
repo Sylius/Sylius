@@ -10,7 +10,7 @@ Feature: Adding a new product with text attribute
         And the store has a text product attribute "Overall length"
         And I am logged in as an administrator
 
-    @ui @javascript @todo
+    @ui @javascript
     Scenario: Adding a text attribute to product
         Given I want to create a new simple product
         When I specify its code as "44_MAGNUM"
@@ -22,7 +22,7 @@ Feature: Adding a new product with text attribute
         And the product "44 Magnum" should appear in the store
         And attribute "Gun caliber" of product "44 Magnum" should be "11 mm"
 
-    @ui @javascript @todo
+    @ui @javascript
     Scenario: Adding multiple text attributes to product
         Given I want to create a new simple product
         When I specify its code as "44_MAGNUM"

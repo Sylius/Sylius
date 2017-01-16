@@ -81,8 +81,10 @@ class ProductAttributeController extends ResourceController
             throw new BadRequestHttpException();
         }
 
+        $localeCodes = $this->get('sylius.translation_locale_provider')->getDefinedLocalesCodes();
+
         foreach ($attributes as $attribute) {
-            $forms[$attribute->getId()] = $this->getAttributeForm($attribute);
+            $forms[$attribute->getId()] = $this->getAttributeFormsInAllLocales($attribute, $localeCodes);
         }
 
         return $this->render($template, [
@@ -94,18 +96,22 @@ class ProductAttributeController extends ResourceController
 
     /**
      * @param AttributeInterface $attribute
+     * @param string[] $localeCodes
      *
-     * @return FormView
+     * @return array
      */
-    protected function getAttributeForm(AttributeInterface $attribute)
+    protected function getAttributeFormsInAllLocales(AttributeInterface $attribute, array $localeCodes)
     {
         $attributeForm = $this->get('sylius.form_registry.attribute_type')->get($attribute->getType(), 'default');
 
-        $form = $this
-            ->get('form.factory')
-            ->createNamed('value', $attributeForm, null, ['label' => $attribute->getName()])
-        ;
+        foreach ($localeCodes as $localeCode) {
+            $forms[$localeCode] = $this
+                ->get('form.factory')
+                ->createNamed('value', $attributeForm, null, ['label' => $attribute->getName()])
+                ->createView()
+            ;
+        }
 
-        return $form->createView();
+        return $forms;
     }
 }

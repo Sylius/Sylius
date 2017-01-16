@@ -288,10 +288,11 @@ class Product implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function hasAttributeByCode($attributeCode)
+    public function hasAttributeByCodeAndLocale($attributeCode, $localeCode)
     {
         foreach ($this->attributes as $attribute) {
-            if ($attribute->getAttribute()->getCode() === $attributeCode) {
+            if ($attribute->getAttribute()->getCode() === $attributeCode &&
+                $attribute->getLocaleCode() === $localeCode) {
                 return true;
             }
         }
@@ -302,10 +303,11 @@ class Product implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function getAttributeByCode($attributeCode)
+    public function getAttributeByCodeAndLocale($attributeCode, $localeCode)
     {
         foreach ($this->attributes as $attribute) {
-            if ($attributeCode === $attribute->getAttribute()->getCode()) {
+            if ($attribute->getAttribute()->getCode() === $attributeCode &&
+                $attribute->getLocaleCode() === $localeCode) {
                 return $attribute;
             }
         }
