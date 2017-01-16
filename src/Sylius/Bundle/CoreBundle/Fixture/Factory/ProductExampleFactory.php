@@ -241,17 +241,20 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
             ->setNormalizer('product_attributes', function (Options $options, array $productAttributes) {
                 $productAttributesValues = [];
                 foreach ($productAttributes as $code => $value) {
-                    /** @var ProductAttributeInterface $productAttribute */
-                    $productAttribute = $this->productAttributeRepository->findOneBy(['code' => $code]);
+                    foreach ($this->getLocales() as $localeCode) {
+                        /** @var ProductAttributeInterface $productAttribute */
+                        $productAttribute = $this->productAttributeRepository->findOneBy(['code' => $code]);
 
-                    Assert::notNull($productAttribute);
+                        Assert::notNull($productAttribute);
 
-                    /** @var ProductAttributeValueInterface $productAttributeValue */
-                    $productAttributeValue = $this->productAttributeValueFactory->createNew();
-                    $productAttributeValue->setAttribute($productAttribute);
-                    $productAttributeValue->setValue($value ?: $this->getRandomValueForProductAttribute($productAttribute));
+                        /** @var ProductAttributeValueInterface $productAttributeValue */
+                        $productAttributeValue = $this->productAttributeValueFactory->createNew();
+                        $productAttributeValue->setAttribute($productAttribute);
+                        $productAttributeValue->setValue($value ?: $this->getRandomValueForProductAttribute($productAttribute));
+                        $productAttributeValue->setLocaleCode($localeCode);
 
-                    $productAttributesValues[] = $productAttributeValue;
+                        $productAttributesValues[] = $productAttributeValue;
+                    }
                 }
 
                 return $productAttributesValues;
