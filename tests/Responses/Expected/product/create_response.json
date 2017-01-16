@@ -1,20 +1,25 @@
 {
     "id": @integer@,
+    "code": "MUG_TH",
     "attributes": [],
-    "created_at": "@string@.isDateTime()",
-    "updated_at": "@string@.isDateTime()",
+    "variants": [],
     "translations": {
         "en": {
-            "id": @integer@,
             "locale": "en",
+            "id": @integer@,
             "name": "Theme Mug",
             "slug": "theme-mug"
         },
         "nl": {
-            "id": @integer@,
             "locale": "nl",
+            "id": @integer@,
             "name": "Theme Mug",
             "slug": "theme-mug2"
+        }
+    },
+    "_links": {
+        "self": {
+            "href": "@string@"
         }
     }
 }

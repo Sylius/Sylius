@@ -21,3 +21,18 @@ Sylius\Component\Product\Model\Product:
         translations:
             expose: true
             type: array
+    relations:
+        - rel: self
+          href:
+                route: sylius_api_product_show
+                parameters:
+                    id: expr(object.getId())
+                    version: 1
+        - rel: variants
+          exclusion:
+                exclude_if: expr(!object.hasVariants())
+          href:
+                route: sylius_api_product_variant_index
+                parameters:
+                    productId: expr(object.getId())
+                    version: 1

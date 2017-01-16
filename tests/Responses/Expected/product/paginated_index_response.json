@@ -24,141 +24,171 @@
         "items": [
             {
                 "id": @integer@,
-                "attributes": [],
-                "created_at": "@string@.isDateTime()",
-                "updated_at": "@string@.isDateTime()",
+                "code": "PRODUCT_11",
                 "translations": {
                     "en_US": {
-                        "locale": "en_US",
                         "id": @integer@,
+                        "locale": "en_US",
                         "name": "Product 11",
                         "slug": "product-11"
                     }
+                },
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
                 }
             },
             {
                 "id": @integer@,
-                "attributes": [],
-                "created_at": "@string@.isDateTime()",
-                "updated_at": "@string@.isDateTime()",
+                "code": "PRODUCT_12",
                 "translations": {
                     "en_US": {
-                        "locale": "en_US",
                         "id": @integer@,
+                        "locale": "en_US",
                         "name": "Product 12",
                         "slug": "product-12"
                     }
+                },
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
                 }
             },
             {
                 "id": @integer@,
-                "attributes": [],
-                "created_at": "@string@.isDateTime()",
-                "updated_at": "@string@.isDateTime()",
+                "code": "PRODUCT_13",
                 "translations": {
                     "en_US": {
-                        "locale": "en_US",
                         "id": @integer@,
+                        "locale": "en_US",
                         "name": "Product 13",
                         "slug": "product-13"
                     }
+                },
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
                 }
             },
             {
                 "id": @integer@,
-                "attributes": [],
-                "created_at": "@string@.isDateTime()",
-                "updated_at": "@string@.isDateTime()",
+                "code": "PRODUCT_14",
                 "translations": {
                     "en_US": {
-                        "locale": "en_US",
                         "id": @integer@,
+                        "locale": "en_US",
                         "name": "Product 14",
                         "slug": "product-14"
                     }
+                },
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
                 }
             },
             {
                 "id": @integer@,
-                "attributes": [],
-                "created_at": "@string@.isDateTime()",
-                "updated_at": "@string@.isDateTime()",
+                "code": "PRODUCT_15",
                 "translations": {
                     "en_US": {
-                        "locale": "en_US",
                         "id": @integer@,
+                        "locale": "en_US",
                         "name": "Product 15",
                         "slug": "product-15"
                     }
+                },
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
                 }
             },
             {
                 "id": @integer@,
-                "attributes": [],
-                "created_at": "@string@.isDateTime()",
-                "updated_at": "@string@.isDateTime()",
+                "code": "PRODUCT_16",
                 "translations": {
                     "en_US": {
-                        "locale": "en_US",
                         "id": @integer@,
+                        "locale": "en_US",
                         "name": "Product 16",
                         "slug": "product-16"
                     }
+                },
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
                 }
             },
             {
                 "id": @integer@,
-                "attributes": [],
-                "created_at": "@string@.isDateTime()",
-                "updated_at": "@string@.isDateTime()",
+                "code": "PRODUCT_17",
                 "translations": {
                     "en_US": {
-                        "locale": "en_US",
                         "id": @integer@,
+                        "locale": "en_US",
                         "name": "Product 17",
                         "slug": "product-17"
                     }
+                },
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
                 }
             },
             {
                 "id": @integer@,
-                "attributes": [],
-                "created_at": "@string@.isDateTime()",
-                "updated_at": "@string@.isDateTime()",
+                "code": "PRODUCT_18",
                 "translations": {
                     "en_US": {
-                        "locale": "en_US",
                         "id": @integer@,
+                        "locale": "en_US",
                         "name": "Product 18",
                         "slug": "product-18"
                     }
-                }
-            },
-            {
-                "id": @integer@,
-                "attributes": [],
-                "created_at": "@string@.isDateTime()",
-                "updated_at": "@string@.isDateTime()",
-                "translations": {
-                    "en_US": {
-                        "locale": "en_US",
-                        "id": @integer@,
-                        "name": "Product 19",
-                        "slug": "product-19"
+                },
+                "_links": {
+                    "self": {
+                        "href": "@string@"
                     }
                 }
             },
             {
                 "id": @integer@,
-                "attributes": [],
-                "created_at": "@string@.isDateTime()",
-                "updated_at": "@string@.isDateTime()",
+                "code": "PRODUCT_19",
                 "translations": {
                     "en_US": {
-                        "locale": "en_US",
                         "id": @integer@,
+                        "locale": "en_US",
+                        "name": "Product 19",
+                        "slug": "product-19"
+                    }
+                },
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "code": "PRODUCT_20",
+                "translations": {
+                    "en_US": {
+                        "id": @integer@,
+                        "locale": "en_US",
                         "name": "Product 20",
                         "slug": "product-20"
+                    }
+                },
+                "_links": {
+                    "self": {
+                        "href": "@string@"
                     }
                 }
             }

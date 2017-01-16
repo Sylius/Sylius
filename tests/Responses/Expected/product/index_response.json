@@ -21,151 +21,181 @@
         "items": [
             {
                 "id": @integer@,
-                "attributes": [],
-                "created_at": "@string@.isDateTime()",
-                "updated_at": "@string@.isDateTime()",
+                "code": "MUG_SW",
                 "translations": {
                     "en": {
-                        "locale": "en",
                         "id": @integer@,
+                        "locale": "en",
                         "name": "Star wars mug",
                         "slug": "mug-star-wars",
                         "description": "@string@"
                     },
                     "en_US": {
-                        "locale": "en_US",
                         "id": @integer@,
+                        "locale": "en_US",
                         "name": "Star Wars mug",
                         "slug": "star-wars-mug",
                         "description": "@string@"
                     }
+                },
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
                 }
             },
             {
                 "id": @integer@,
-                "attributes": [],
-                "created_at": "@string@.isDateTime()",
-                "updated_at": "@string@.isDateTime()",
+                "code": "MUG_LOTR",
                 "translations": {
                     "en_US": {
-                        "locale": "en_US",
                         "id": @integer@,
+                        "locale": "en_US",
                         "name": "Lotr mug",
                         "slug": "mug-lotr",
                         "description": "@string@"
                     }
+                },
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
                 }
             },
             {
                 "id": @integer@,
-                "attributes": [],
-                "created_at": "@string@.isDateTime()",
-                "updated_at": "@string@.isDateTime()",
+                "code": "MUG_BB",
                 "translations": {
                     "en_US": {
-                        "locale": "en_US",
                         "id": @integer@,
+                        "locale": "en_US",
                         "name": "Breaking bad mug",
                         "slug": "mug-breaking-bad",
                         "description": "@string@"
                     }
+                },
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
                 }
             },
             {
                 "id": @integer@,
-                "attributes": [],
-                "created_at": "@string@.isDateTime()",
-                "updated_at": "@string@.isDateTime()",
+                "code": "PRODUCT_4",
                 "translations": {
                     "en_US": {
-                        "locale": "en_US",
                         "id": @integer@,
+                        "locale": "en_US",
                         "name": "Product 4",
                         "slug": "product-4"
                     }
+                },
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
                 }
             },
             {
                 "id": @integer@,
-                "attributes": [],
-                "created_at": "@string@.isDateTime()",
-                "updated_at": "@string@.isDateTime()",
+                "code": "PRODUCT_5",
                 "translations": {
                     "en_US": {
-                        "locale": "en_US",
                         "id": @integer@,
+                        "locale": "en_US",
                         "name": "Product 5",
                         "slug": "product-5"
                     }
+                },
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
                 }
             },
             {
                 "id": @integer@,
-                "attributes": [],
-                "created_at": "@string@.isDateTime()",
-                "updated_at": "@string@.isDateTime()",
+                "code": "PRODUCT_6",
                 "translations": {
                     "en_US": {
-                        "locale": "en_US",
                         "id": @integer@,
+                        "locale": "en_US",
                         "name": "Product 6",
                         "slug": "product-6"
                     }
+                },
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
                 }
             },
             {
                 "id": @integer@,
-                "attributes": [],
-                "created_at": "@string@.isDateTime()",
-                "updated_at": "@string@.isDateTime()",
+                "code": "PRODUCT_7",
                 "translations": {
                     "en_US": {
-                        "locale": "en_US",
                         "id": @integer@,
+                        "locale": "en_US",
                         "name": "Product 7",
                         "slug": "product-7"
                     }
+                },
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
                 }
             },
             {
                 "id": @integer@,
-                "attributes": [],
-                "created_at": "@string@.isDateTime()",
-                "updated_at": "@string@.isDateTime()",
+                "code": "PRODUCT_8",
                 "translations": {
                     "en_US": {
-                        "locale": "en_US",
                         "id": @integer@,
+                        "locale": "en_US",
                         "name": "Product 8",
                         "slug": "product-8"
                     }
-                }
-            },
-            {
-                "id": @integer@,
-                "attributes": [],
-                "created_at": "@string@.isDateTime()",
-                "updated_at": "@string@.isDateTime()",
-                "translations": {
-                    "en_US": {
-                        "locale": "en_US",
-                        "id": @integer@,
-                        "name": "Product 9",
-                        "slug": "product-9"
+                },
+                "_links": {
+                    "self": {
+                        "href": "@string@"
                     }
                 }
             },
             {
                 "id": @integer@,
-                "attributes": [],
-                "created_at": "@string@.isDateTime()",
-                "updated_at": "@string@.isDateTime()",
+                "code": "PRODUCT_9",
                 "translations": {
                     "en_US": {
-                        "locale": "en_US",
                         "id": @integer@,
+                        "locale": "en_US",
+                        "name": "Product 9",
+                        "slug": "product-9"
+                    }
+                },
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "code": "PRODUCT_10",
+                "translations": {
+                    "en_US": {
+                        "id": @integer@,
+                        "locale": "en_US",
                         "name": "Product 10",
                         "slug": "product-10"
+                    }
+                },
+                "_links": {
+                    "self": {
+                        "href": "@string@"
                     }
                 }
             }
