@@ -19,5 +19,6 @@ Cookbook
     taxons-menu
     facebook-login
     cron-jobs
+    creating-extension
 
 .. include:: /cookbook/map.rst.inc
