@@ -93,8 +93,7 @@ final class OrderInventoryOperatorSpec extends ObjectBehavior
         $this->cancel($order);
     }
 
-
-    function it_increases_on_hand_during_cancelling(
+    function it_increases_on_hand_during_cancelling_of_a_paid_order(
         OrderInterface $order,
         OrderItemInterface $orderItem,
         ProductVariantInterface $variant
@@ -112,6 +111,23 @@ final class OrderInventoryOperatorSpec extends ObjectBehavior
         $this->cancel($order);
     }
 
+    function it_increases_on_hand_during_cancelling_of_a_refunded_order(
+        OrderInterface $order,
+        OrderItemInterface $orderItem,
+        ProductVariantInterface $variant
+    ) {
+        $order->getPaymentState()->willReturn(OrderPaymentStates::STATE_REFUNDED);
+        $order->getItems()->willReturn([$orderItem]);
+        $orderItem->getVariant()->willReturn($variant);
+        $variant->isTracked()->willReturn(true);
+
+        $orderItem->getQuantity()->willReturn(10);
+        $variant->getOnHand()->willReturn(0);
+
+        $variant->setOnHand(10)->shouldBeCalled();
+
+        $this->cancel($order);
+    }
 
     function it_throws_an_invalid_argument_exception_if_difference_between_on_hold_and_item_quantity_is_smaller_than_zero_during_cancelling(
         OrderInterface $order,
