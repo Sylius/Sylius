@@ -10,6 +10,7 @@ sylius:
             options: Options
             meta_keywords: Meta mots-clés
             meta_description: Méta description
+            slug: Slug
             taxons: Taxons
         product_variant:
             available_on: Disponible le

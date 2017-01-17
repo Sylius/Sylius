@@ -21,9 +21,11 @@ sylius:
                 amount: Kwota
             type: Typ
         promotion_coupon:
+            expires_at: Wygasa
             usage_limit: Limit użycia
         promotion_coupon_generator_instruction:
             amount: Kwota
+            expires_at: Wygasa
             usage_limit: Limit użycia
         promotion_rule:
             cart_quantity_configuration:

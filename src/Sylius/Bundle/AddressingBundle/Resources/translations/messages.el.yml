@@ -9,6 +9,7 @@ sylius:
             country: Χώρα
             first_name: Όνομα
             last_name: Επώνυμο
+            phone_number: Αριθμός τηλεφώνου
             postcode: Ταχ. Κώδικας
             street: Οδός
             province: Επαρχία
@@ -21,6 +22,7 @@ sylius:
             enabled: Ενεργοποιημένο
         province:
             name: Ονομασία
+            abbreviation: Συντομογραφία
             select: Επιλέξτε
         zone:
             add_member: Προσθήκη μέλους
@@ -31,6 +33,10 @@ sylius:
                 country: Χώρα
                 province: Επαρχία
                 zone: Ζώνη
+            scope: Πεδίο εφαρμογής
+            scopes:
+                all: Όλα
             select: Επιλέξτε
+            select_scope: Επιλέξτε πεδίο
         zone_member:
             select: Επιλέξτε

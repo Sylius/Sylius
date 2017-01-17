@@ -122,6 +122,7 @@ sylius:
             name: Nom
         promotion_filter:
             products: Filtre de produits
+            taxons: Filtre de taxons
         promotion_rule:
             customer_group:
                 group: Groupe de clients

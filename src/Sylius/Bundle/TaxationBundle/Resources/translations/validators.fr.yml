@@ -7,6 +7,7 @@ sylius:
             not_blank: Veuillez entrez le nom de la catégorie de la taxe.
         code:
             not_blank: Veuillez saisir le code de catégorie de la taxe.
+            regex: Le code de la catégorie de taxe ne peut être constitué que de lettres, nombres et tirets.
             unique: Ce code de catégorie de taxe existe déjà.
     tax_rate:
         category:
@@ -21,4 +22,5 @@ sylius:
             not_blank: Veuillez choisir une zone de taxe.
         code:
             not_blank: Veuillez saisir le code du taux de taxe.
+            regex: Le code de la catégorie de taxe ne peut être constitué que de lettres, nombres et tirets.
             unique: Le taux de taxe avec ce code existe déjà.

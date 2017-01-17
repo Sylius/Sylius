@@ -5,7 +5,7 @@ sylius:
     menu:
         shop:
             account:
-                address_book: 'Carnets d''adresse'
+                address_book: 'Carnet d’adresses'
                 change_password: 'Changer votre mot de passe'
                 dashboard: 'Tableau de bord'
                 header: 'Votre compte'

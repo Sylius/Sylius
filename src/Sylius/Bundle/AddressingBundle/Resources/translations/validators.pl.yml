@@ -32,6 +32,7 @@ sylius:
     country:
         code:
             not_blank: Proszę podać kod ISO kraju.
+            regex: Kod kraju może się składać wyłącznie z liter, cyfr, myślników i podkreśleń.
             unique: Kod ISO kraju musi być unikalny.
     province:
         code:
@@ -47,6 +48,7 @@ sylius:
     zone:
         code:
             not_blank: Proszę podać kod strefy.
+            regex: Kod strefy może się składać wyłącznie z liter, cyfr, myślników i podkreśleń.
             unique: Kod strefy musi być unikalny.
         members:
             min_count: '{1} Proszę podać co najmniej 1 kraj.|{2,3,4} Proszę podać co najmniej {{ limit }} kraje.|[5,Inf[ Proszę podać co najmniej {{ limit }} krajów.'
@@ -57,4 +59,5 @@ sylius:
     zone_member:
         code:
             not_blank: Proszę wybrać członka strefy.
+            regex: Kod strefy może się składać wyłącznie z liter, cyfr, myślników i podkreśleń.
         unique: Wybrany członek należy już do tej strefy.

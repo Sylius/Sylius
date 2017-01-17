@@ -28,6 +28,7 @@ sylius:
             taxonomies: Kategorie
             locale_default: Domyślne ustawienia regionalne
             locales: Ustawienia regionalne
+            contact_email: E-mail do kontaktu
             currency_base: Waluta podstawowa
             currencies: Waluty
             shipping_methods: Metody wysyłki
@@ -119,7 +120,14 @@ sylius:
             type: Rodzaj powiązania
         product_association_type:
             name: Nazwa
+        promotion_filter:
+            products: Filtr produktów
+            taxons: Filtr taksonomii
         promotion_rule:
+            customer_group:
+                group: Grupa klientów
+            has_taxon:
+                taxons: Taksonomie
             product:
                 products: Produkty
             total_of_items_from_taxon:
@@ -127,8 +135,11 @@ sylius:
                 amount: Kwota
         payment_method:
             channels: Kanały
+        product_attribute:
+            position: Położenie
         zone:
             scopes:
+                shipping: Wysyłka
                 tax: Podatek
     installer:
         extensions:
