@@ -1,5 +1,5 @@
-Contributing
-============
+The Contribution Guide
+======================
 
 .. note::
 

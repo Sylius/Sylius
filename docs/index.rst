@@ -38,8 +38,8 @@ The Customization Guide is helpful while wanting to adapt Sylius to your persona
 
 .. include:: /customization/map.rst.inc
 
-The API Guide
--------------
+The REST API Reference
+----------------------
 
 This chapter covers the REST API of Sylius platform.
 
@@ -50,8 +50,8 @@ This chapter covers the REST API of Sylius platform.
 
 .. include:: /api/map.rst.inc
 
-Cookbook
---------
+The Cookbook
+------------
 
 Specific solutions for specific needs.
 
@@ -98,8 +98,8 @@ E-Commerce components for PHP.
 
 .. include:: /components/map.rst.inc
 
-Contributing
-------------
+The Contribution Guide
+----------------------
 
 A guide to contribute to Sylius.
 

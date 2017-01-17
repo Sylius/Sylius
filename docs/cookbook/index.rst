@@ -1,5 +1,5 @@
-Cookbook
-========
+The Cookbook
+============
 
 .. toctree::
     :hidden:
