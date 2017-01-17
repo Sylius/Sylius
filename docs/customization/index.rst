@@ -9,6 +9,7 @@ The Customization Guide is helpful while wanting to adapt Sylius to your persona
     model
     form
     repository
+    factory
     controller
     validation
     menu
