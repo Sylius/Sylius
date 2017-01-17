@@ -40,7 +40,7 @@ Example Result
 
     If you use Guzzle check out `OAuth2 plugin`__ and use Password Credentials.
 
-__ https://github.com/commerceguys/guzzle-oauth2-plugin
+__ https://github.com/Sainsburys/guzzle-oauth2-plugin
 
 Obtain access token
 ~~~~~~~~~~~~~~~~~~~
