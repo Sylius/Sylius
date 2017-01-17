@@ -20,7 +20,7 @@ interface CalculatorInterface
 {
     /**
      * @param ShipmentInterface $subject
-     * @param array                    $configuration
+     * @param array $configuration
      *
      * @return int
      */

@@ -1,5 +1,0 @@
-suites:
-    main:
-        namespace: Sylius\Component\Cart
-        psr4_prefix: Sylius\Component\Cart
-        src_path: .

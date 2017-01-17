@@ -3,5 +3,5 @@
 
 sylius:
     resource:
-        not_enabled: Podany zasób jest wyłączony
-        not_disabled: Podany zasób jest włączony
+        not_enabled: "Podany zasób jest wyłączony"
+        not_disabled: "Podany zasób jest włączony"

@@ -33,9 +33,11 @@ Sylius\Component\Taxation\Model\TaxRate:
           href:
                 route: sylius_api_tax_rate_show
                 parameters:
-                    id: expr(object.getId())
+                    code: expr(object.getCode())
+                    version: 1
         - rel: category
           href:
                 route: sylius_api_tax_category_show
                 parameters:
                     id: expr(object.getCategory().getId())
+                    version: 1

@@ -4,14 +4,14 @@
 sylius:
     form:
         review:
+            author: 作者
+            comment: 备注
             header: 添加评论
             rating: 评分
-            title: 标题
-            comment: 备注
-            author: 作者
             status:
+                approved: 已批准
                 label: 状态
                 new: 新增
-                approved: 已批准
                 rejected: 已被拒绝
             submit: 提交
+            title: 标题

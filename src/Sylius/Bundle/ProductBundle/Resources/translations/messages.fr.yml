@@ -10,12 +10,24 @@ sylius:
             options: Options
             meta_keywords: Meta mots-clés
             meta_description: Méta description
-            taxons: Famille de tags
+            slug: Slug
+            taxons: Taxons
         product_variant:
             available_on: Disponible le
-            available_until: "Disponible jusqu'au"
+            available_until: Disponible jusqu'au
+            name: Nom
         association_type:
             name: Nom
+            translations: Traductions
         association:
-            type: "Type d'association"
+            type: Type d'association
             product: Produits associés
+        variant:
+            name: Nom
+        option:
+            name: Nom
+            position: Emplacement
+            values: Valeurs possibles
+        option_value:
+            add_value: Ajouter une valeur
+            value: Valeur

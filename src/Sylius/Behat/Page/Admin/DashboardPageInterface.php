@@ -47,6 +47,16 @@ interface DashboardPageInterface extends SymfonyPageInterface
      * @return int
      */
     public function getAverageOrderValue();
-    
+
+    /**
+     * @return string
+     */
+    public function getSubHeader();
+
     public function logOut();
+
+    /**
+     * @param string $channelName
+     */
+    public function chooseChannel($channelName);
 }

@@ -11,15 +11,15 @@
 
 namespace Sylius\Bundle\ResourceBundle\Tests\Command;
 
-use Sylius\Component\Resource\Metadata\RegistryInterface;
 use Sylius\Bundle\ResourceBundle\Command\DebugResourceCommand;
-use Symfony\Component\Console\Tester\CommandTester;
 use Sylius\Component\Resource\Metadata\Metadata;
+use Sylius\Component\Resource\Metadata\RegistryInterface;
+use Symfony\Component\Console\Tester\CommandTester;
 
 /**
  * @author Daniel Leech <daniel@dantleech.com>
  */
-class DebugResourceCommandTest extends \PHPUnit_Framework_TestCase
+final class DebugResourceCommandTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var RegistryInterface
@@ -44,13 +44,7 @@ class DebugResourceCommandTest extends \PHPUnit_Framework_TestCase
      */
     public function testListAll()
     {
-        $metadata1 = $this->createMetadata('one');
-        $metadata2 = $this->createMetadata('two');
-
-        $this->registry->getAll()->willReturn([
-            $metadata1->reveal(),
-            $metadata2->reveal(),
-        ]);
+        $this->registry->getAll()->willReturn([$this->createMetadata('one'), $this->createMetadata('two')]);
         $this->tester->execute([]);
         $display = $this->tester->getDisplay();
 
@@ -71,9 +65,7 @@ EOT
      */
     public function testDebugResource()
     {
-        $metadata1 = $this->createMetadata('one');
-
-        $this->registry->get('metadata.one')->willReturn($metadata1->reveal());
+        $this->registry->get('metadata.one')->willReturn($this->createMetadata('one'));
         $this->tester->execute([
             'resource' => 'metadata.one',
         ]);
@@ -95,16 +87,14 @@ EOT
     }
 
     /**
-     * @param mixed $suffix
+     * @param string $suffix
+     *
+     * @return Metadata
      */
     private function createMetadata($suffix)
     {
-        $metadata = $this->prophesize(Metadata::class);
-        $metadata->getName()->willReturn($suffix);
-        $metadata->getApplicationName()->willReturn('sylius');
-        $metadata->getAlias()->willReturn('sylius.'.$suffix);
-        $metadata->getDriver()->willReturn('doctrine/foobar');
-        $metadata->getParameters()->willReturn([
+        $metadata = Metadata::fromAliasAndConfiguration(sprintf('sylius.%s', $suffix), [
+            'driver' => 'doctrine/foobar',
             'classes' => [
                 'foo' => 'bar',
                 'bar' => 'foo',

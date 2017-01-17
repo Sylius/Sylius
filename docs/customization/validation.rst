@@ -11,7 +11,7 @@ Let's take the example of changing the length of ``name`` for the ``Product`` en
 In the ``sylius`` validation group the minimum length is equal to 2.
 What if you'd want to have at least 10 characters?
 
-1. Create the ``AppBundle\Resources\config\validation.yml``.
+1. Create the ``app\Resources\config\validation.yml``.
 
 In this file you need to overwrite the whole validation of your field that you are willing to modify.
 Take this configuration from the ``Sylius\Bundle\ProductBundle\Resources\config\validation.xml`` - you can choose format ``xml`` or ``yaml``.
@@ -32,6 +32,10 @@ Give it a new, custom validation group - ``[app_product]``.
                     max: 255
                     maxMessage: sylius.product.name.max_length
                     groups: [app_product]
+
+.. tip::
+
+    When using custom validation messages see `here how to add them <http://symfony.com/doc/current/validation/translations.html>`_.
 
 2. Configure the new validation group in the ``app/config/config.yml``.
 

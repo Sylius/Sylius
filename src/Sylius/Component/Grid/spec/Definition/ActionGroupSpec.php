@@ -12,13 +12,10 @@
 namespace spec\Sylius\Component\Grid\Definition;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use Sylius\Component\Grid\Definition\ActionGroup;
 use Sylius\Component\Grid\Definition\Action;
+use Sylius\Component\Grid\Definition\ActionGroup;
 
 /**
- * @mixin ActionGroup
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class ActionGroupSpec extends ObjectBehavior
@@ -30,7 +27,7 @@ final class ActionGroupSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Grid\Definition\ActionGroup');
+        $this->shouldHaveType(ActionGroup::class);
     }
 
     function it_has_code()

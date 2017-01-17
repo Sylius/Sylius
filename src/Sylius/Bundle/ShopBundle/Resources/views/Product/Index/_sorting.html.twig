@@ -1,0 +1,52 @@
+{% if resources.data.nbResults > 0 %}
+
+{% set definition = resources.definition %}
+
+{% set route = app.request.attributes.get('_route') %}
+{% set route_parameters = app.request.attributes.get('_route_params') %}
+
+{% set criteria = app.request.query.get('criteria', {}) %}
+
+{% set default_path = path(route, {'criteria': criteria}|merge(route_parameters)) %}
+{% set from_a_to_z_path = path(route, {'sorting': {'name': 'asc'}, 'criteria': criteria}|merge(route_parameters)) %}
+{% set from_z_to_a_path = path(route, {'sorting': {'name': 'desc'}, 'criteria': criteria}|merge(route_parameters)) %}
+{% set oldest_first_path = path(route, {'sorting': {'createdAt': 'asc'}, 'criteria': criteria}|merge(route_parameters)) %}
+{% set newest_first_path = path(route, {'sorting': {'createdAt': 'desc'}, 'criteria': criteria}|merge(route_parameters)) %}
+{% set cheapest_first_path = path(route, {'sorting': {'price': 'asc'}, 'criteria': criteria}|merge(route_parameters)) %}
+{% set most_expensive_first_path = path(route, {'sorting': {'price': 'desc'}, 'criteria': criteria}|merge(route_parameters)) %}
+
+{% if app.request.query.get('sorting') is empty %}
+    {% set current_sorting_label = 'sylius.ui.by_position'|trans|lower %}
+{% elseif app.request.query.get('sorting').name is defined and app.request.query.get('sorting').name == 'asc'%}
+    {% set current_sorting_label = 'sylius.ui.from_a_to_z'|trans|lower %}
+{% elseif app.request.query.get('sorting').name is defined and app.request.query.get('sorting').name == 'desc'%}
+    {% set current_sorting_label = 'sylius.ui.from_z_to_a'|trans|lower %}
+{% elseif app.request.query.get('sorting').createdAt is defined and app.request.query.get('sorting').createdAt == 'desc'%}
+    {% set current_sorting_label = 'sylius.ui.newest_first'|trans|lower %}
+{% elseif app.request.query.get('sorting').createdAt is defined and app.request.query.get('sorting').createdAt == 'asc'%}
+    {% set current_sorting_label = 'sylius.ui.oldest_first'|trans|lower %}
+{% elseif app.request.query.get('sorting').price is defined and app.request.query.get('sorting').price == 'asc'%}
+    {% set current_sorting_label = 'sylius.ui.cheapest_first'|trans|lower %}
+{% elseif app.request.query.get('sorting').price is defined and app.request.query.get('sorting').price == 'desc' %}
+    {% set current_sorting_label = 'sylius.ui.most_expensive_first'|trans|lower %}
+{% endif %}
+
+<div class="ui right floated small header">
+    <div class="content">
+        {{ 'sylius.ui.display'|trans }}
+        <div class="ui inline dropdown">
+            <div class="text">{{ current_sorting_label }}</div>
+            <i class="dropdown icon"></i>
+            <div class="menu">
+                <a class="item" href="{{ default_path }}" data-text="{{ 'sylius.ui.by_position'|trans|lower }}">{{ 'sylius.ui.by_position'|trans }}</a>
+                <a class="item" href="{{ from_a_to_z_path }}" data-text="{{ 'sylius.ui.from_a_to_z'|trans|lower }}">{{ 'sylius.ui.from_a_to_z'|trans }}</a>
+                <a class="item" href="{{ from_z_to_a_path }}" data-text="{{ 'sylius.ui.from_z_to_a'|trans|lower }}">{{ 'sylius.ui.from_z_to_a'|trans }}</a>
+                <a class="item" href="{{ newest_first_path }}" data-text="{{ 'sylius.ui.newest_first'|trans|lower }}">{{ 'sylius.ui.newest_first'|trans }}</a>
+                <a class="item" href="{{ oldest_first_path }}" data-text="{{ 'sylius.ui.oldest_first'|trans|lower }}">{{ 'sylius.ui.oldest_first'|trans }}</a>
+                <a class="item" href="{{ cheapest_first_path }}" data-text="{{ 'sylius.ui.cheapest_first'|trans|lower }}">{{ 'sylius.ui.cheapest_first'|trans }}</a>
+                <a class="item" href="{{ most_expensive_first_path }}" data-text="{{ 'sylius.ui.most_expensive_first'|trans|lower }}">{{ 'sylius.ui.most_expensive_first'|trans }}</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}

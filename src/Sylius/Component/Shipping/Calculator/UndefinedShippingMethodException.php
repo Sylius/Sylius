@@ -12,9 +12,6 @@
 namespace Sylius\Component\Shipping\Calculator;
 
 /**
- * This exception should be thrown by calculator when given
- * shipment does not have a shipping method defined.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class UndefinedShippingMethodException extends \InvalidArgumentException

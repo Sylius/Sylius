@@ -18,9 +18,10 @@ use Payum\Core\Model\Payment as PayumPayment;
 use Payum\Core\Request\Capture;
 use Payum\Core\Request\Convert;
 use Sylius\Bundle\PayumBundle\Request\GetStatus;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface as SyliusPaymentInterface;
 
-class CapturePaymentAction extends GatewayAwareAction
+final class CapturePaymentAction extends GatewayAwareAction
 {
     /**
      * {@inheritdoc}
@@ -33,6 +34,8 @@ class CapturePaymentAction extends GatewayAwareAction
 
         /** @var $payment SyliusPaymentInterface */
         $payment = $request->getModel();
+
+        /** @var OrderInterface $order */
         $order = $payment->getOrder();
 
         $this->gateway->execute($status = new GetStatus($payment));
@@ -41,15 +44,17 @@ class CapturePaymentAction extends GatewayAwareAction
                 $this->gateway->execute($convert = new Convert($payment, 'array', $request->getToken()));
                 $payment->setDetails($convert->getResult());
             } catch (RequestNotSupportedException $e) {
+                $totalAmount = $order->getTotal();
                 $payumPayment = new PayumPayment();
                 $payumPayment->setNumber($order->getNumber());
-                $payumPayment->setTotalAmount($order->getTotal());
+                $payumPayment->setTotalAmount($totalAmount);
                 $payumPayment->setCurrencyCode($order->getCurrencyCode());
                 $payumPayment->setClientEmail($order->getCustomer()->getEmail());
                 $payumPayment->setClientId($order->getCustomer()->getId());
                 $payumPayment->setDescription(sprintf(
                     'Payment contains %d items for a total of %01.2f',
-                    $order->getItems()->count(), $order->getTotal() / 100
+                    $order->getItems()->count(),
+                    round($totalAmount / 100, 2)
                 ));
                 $payumPayment->setDetails($payment->getDetails());
 
@@ -76,6 +81,6 @@ class CapturePaymentAction extends GatewayAwareAction
         return
             $request instanceof Capture &&
             $request->getModel() instanceof SyliusPaymentInterface
-        ;
+            ;
     }
 }

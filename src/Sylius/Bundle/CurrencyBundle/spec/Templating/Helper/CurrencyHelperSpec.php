@@ -17,8 +17,6 @@ use Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelperInterface;
 use Symfony\Component\Templating\Helper\Helper;
 
 /**
- * @mixin CurrencyHelper
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
@@ -26,7 +24,7 @@ final class CurrencyHelperSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelper');
+        $this->shouldHaveType(CurrencyHelper::class);
     }
 
     function it_is_a_templating_helper()
@@ -34,12 +32,12 @@ final class CurrencyHelperSpec extends ObjectBehavior
         $this->shouldHaveType(Helper::class);
     }
 
-    function it_implements_currency_helper_interface()
+    function it_implements_a_currency_helper_interface()
     {
         $this->shouldImplement(CurrencyHelperInterface::class);
     }
 
-    function it_transforms_currency_code_into_symbol()
+    function it_transforms_a_currency_code_into_symbol()
     {
         $this->convertCurrencyCodeToSymbol('USD')->shouldReturn('$');
     }

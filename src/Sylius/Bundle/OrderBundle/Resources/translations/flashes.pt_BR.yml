@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    cart:
+        add_item: 'O item foi adicionado ao carrinho'
+        remove_item: 'O item foi removido do carrinho'
+        save: 'O carrinho foi atualizado com sucesso'

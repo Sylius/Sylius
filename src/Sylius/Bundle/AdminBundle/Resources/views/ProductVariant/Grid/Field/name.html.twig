@@ -1,0 +1,14 @@
+<span class="ui small header">
+    {% set product = data.product %}
+    {{ data.name is null ? product.name : data.name }}
+</span>
+{% if data.optionValues|length > 0 %}
+    <br>
+    <div class="ui horizontal divided list">
+        {% for optionValue in data.optionValues %}
+            <div class="item">
+                {{ optionValue.value }}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}

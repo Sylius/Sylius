@@ -17,6 +17,7 @@ use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\ChoiceList\View\ChoiceView;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
@@ -28,7 +29,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class TaxonChoiceType extends AbstractType
+final class TaxonChoiceType extends AbstractType
 {
     /**
      * @var TaxonRepositoryInterface
@@ -67,36 +68,9 @@ class TaxonChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    protected function buildTreeChoices($choices, $level = 0)
-    {
-        $result = [];
-
-        /** @var TaxonInterface $choice */
-        foreach ($choices as $choice) {
-            $result[] = new ChoiceView(
-                str_repeat('-', $level).' '.$choice->getName(),
-                $choice->getId(),
-                $choice,
-                []
-            );
-
-            if (!$choice->getChildren()->isEmpty()) {
-                $result = array_merge(
-                    $result,
-                    $this->buildTreeChoices($choice->getChildren(), $level + 1)
-                );
-            }
-        }
-
-        return $result;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getParent()
     {
-        return 'choice';
+        return ChoiceType::class;
     }
 
     /**
@@ -104,30 +78,20 @@ class TaxonChoiceType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $repository = $this->taxonRepository;
-        $choiceList = function (Options $options) use ($repository) {
-            /* @var TaxonRepositoryInterface $repository */
-            if (null !== $options['root']) {
-                if (is_string($options['root'])) {
-                    $taxons = $repository->findChildrenByRootCode($options['root']);
-                } else {
-                    $taxons = $repository->findChildren($options['root']);
-                }
-            } else {
-                $taxons = $repository->findNodesTreeSorted();
-            }
-
-            if (null !== $options['filter']) {
-                $taxons = array_filter($taxons, $options['filter']);
-            }
-
-            return new ObjectChoiceList($taxons, null, [], null, 'id');
-        };
-
         $resolver
             ->setDefaults([
+                'choices' => function (Options $options) {
+                    $taxons = $this->taxonRepository->findNodesTreeSorted();
+
+                    if (null !== $options['filter']) {
+                        $taxons = array_filter($taxons, $options['filter']);
+                    }
+
+                    return $taxons;
+                },
+                'choice_value' => 'id',
+                'choice_label' => 'name',
                 'choice_translation_domain' => false,
-                'choice_list' => $choiceList,
                 'root' => null,
                 'filter' => null,
             ])
@@ -139,7 +103,7 @@ class TaxonChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_taxon_choice';
     }

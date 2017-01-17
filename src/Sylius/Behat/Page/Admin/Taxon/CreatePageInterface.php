@@ -11,6 +11,8 @@
 
 namespace Sylius\Behat\Page\Admin\Taxon;
 
+use Behat\Mink\Element\NodeElement;
+use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 
@@ -43,11 +45,6 @@ interface CreatePageInterface extends BaseCreatePageInterface
     public function describeItAs($description, $languageCode);
 
     /**
-     * @param TaxonInterface $taxon
-     */
-    public function chooseParent(TaxonInterface $taxon);
-
-    /**
      * @param string $name
      *
      * @return bool
@@ -66,8 +63,28 @@ interface CreatePageInterface extends BaseCreatePageInterface
     public function specifyCode($code);
 
     /**
-     * @param string $permalink
+     * @param string $slug
      * @param string $languageCode
      */
-    public function specifyPermalink($permalink, $languageCode);
+    public function specifySlug($slug, $languageCode);
+
+    /**
+     * @param string $path
+     * @param string $code
+     */
+    public function attachImage($path, $code = null);
+
+    /**
+     * @param TaxonInterface|null $parentTaxon
+     *
+     * @return NodeElement[]
+     *
+     * @throws ElementNotFoundException
+     */
+    public function getLeaves(TaxonInterface $parentTaxon = null);
+
+    /**
+     * @param string $locale
+     */
+    public function activateLanguageTab($locale);
 }

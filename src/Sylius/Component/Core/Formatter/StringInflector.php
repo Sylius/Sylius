@@ -14,7 +14,7 @@ namespace Sylius\Component\Core\Formatter;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class StringInflector
+final class StringInflector
 {
     /**
      * @param string $value
@@ -23,7 +23,7 @@ class StringInflector
      */
     public static function nameToCode($value)
     {
-        return str_replace(' ', '_', $value);
+        return str_replace([' ', '-'], '_', $value);
     }
 
     /**
@@ -41,8 +41,12 @@ class StringInflector
      *
      * @return string
      */
-    public static function nameToUpercaseCode($value)
+    public static function nameToUppercaseCode($value)
     {
         return strtoupper(self::nameToCode($value));
+    }
+
+    private function __construct()
+    {
     }
 }

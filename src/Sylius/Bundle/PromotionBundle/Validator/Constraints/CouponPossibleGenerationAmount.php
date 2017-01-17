@@ -16,12 +16,12 @@ use Symfony\Component\Validator\Constraint;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class CouponPossibleGenerationAmount extends Constraint
+final class CouponPossibleGenerationAmount extends Constraint
 {
     /**
      * @var string
      */
-    public $message = 'sylius.promotion_coupon_generate_instruction.possible_generation_amount';
+    public $message = 'sylius.promotion_coupon_generator_instruction.possible_generation_amount';
 
     /**
      * {@inheritdoc}

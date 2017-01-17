@@ -20,11 +20,9 @@ final class OrderCheckoutTransitions
 
     const TRANSITION_ADDRESS = 'address';
     const TRANSITION_COMPLETE = 'complete';
-    const TRANSITION_READDRESS = 'readdress';
-    const TRANSITION_RESELECT_PAYMENT = 'reselect_payment';
-    const TRANSITION_RESELECT_SHIPPING = 'reselect_shipping';
     const TRANSITION_SELECT_PAYMENT = 'select_payment';
     const TRANSITION_SELECT_SHIPPING = 'select_shipping';
+    const TRANSITION_SKIP_PAYMENT = 'skip_payment';
 
     private function __construct()
     {

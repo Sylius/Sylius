@@ -12,5 +12,5 @@ sylius:
             mismatch: Wpisane hasła nie pasują
             wrong_current: Podane hasło jest inne od istniejącego.
         password:
-            min: 'Hasło musi mieć co najmniej {{ limit }} znaków.'
-            max: 'Hasło nie może być dłuższe niż {{ limit }} znaków.'
+            min: Hasło musi mieć co najmniej {{ limit }} znaków.
+            max: Hasło nie może być dłuższe niż {{ limit }} znaków.

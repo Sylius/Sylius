@@ -17,8 +17,6 @@ use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
 
 /**
- * @mixin InventoryUnit
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class InventoryUnitSpec extends ObjectBehavior
@@ -28,7 +26,7 @@ final class InventoryUnitSpec extends ObjectBehavior
         $this->shouldHaveType(InventoryUnit::class);
     }
 
-    function it_implements_Sylius_inventory_unit_interface()
+    function it_implements_inventory_unit_interface()
     {
         $this->shouldImplement(InventoryUnitInterface::class);
     }
@@ -47,31 +45,5 @@ final class InventoryUnitSpec extends ObjectBehavior
     {
         $this->setStockable($stockable);
         $this->getStockable()->shouldReturn($stockable);
-    }
-
-    function it_has_checkout_state_by_default()
-    {
-        $this->getInventoryState()->shouldReturn(InventoryUnitInterface::STATE_CHECKOUT);
-    }
-
-    function its_state_is_mutable()
-    {
-        $this->setInventoryState(InventoryUnitInterface::STATE_ONHOLD);
-        $this->getInventoryState()->shouldReturn(InventoryUnitInterface::STATE_ONHOLD);
-    }
-
-    function it_is_sold_if_its_state_says_so()
-    {
-        $this->setInventoryState(InventoryUnitInterface::STATE_SOLD);
-
-        $this->shouldBeSold();
-    }
-
-    function it_returns_its_stockable_name(StockableInterface $stockable)
-    {
-        $stockable->getInventoryName()->willReturn('[IPHONE5] iPhone 5');
-        $this->setStockable($stockable);
-
-        $this->getInventoryName()->shouldReturn('[IPHONE5] iPhone 5');
     }
 }

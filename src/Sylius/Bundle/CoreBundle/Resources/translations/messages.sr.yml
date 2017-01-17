@@ -3,7 +3,17 @@
 
 sylius:
     form:
+        promotion_action:
+            add_product_configuration:
+                product: Производ
         order_filter:
             payment_state: Стање плаћања
         product_variant:
             tax_category: Категорија производа
+    installer:
+        extensions:
+            "off": false
+            "on": true
+        settings:
+            "off": false
+            "on": true

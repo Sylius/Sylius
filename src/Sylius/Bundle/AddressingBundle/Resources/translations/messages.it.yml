@@ -13,6 +13,7 @@ sylius:
             postcode: CAP
             street: Indirizzo
             province: Provincia
+            zone: Zona
         country:
             add_province: Aggiungi provincia
             name: Nome
@@ -33,6 +34,8 @@ sylius:
                 province: Provincia
                 zone: Zona
             scope: Ambito
+            scopes:
+                all: Tutti
             select: Scegli
             select_scope: Selezionare il campo di applicazione
         zone_member:

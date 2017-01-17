@@ -3,16 +3,22 @@
 
 sylius:
     form:
-        group:
-            name: Pavadinimas
-            roles: Rolės
         customer:
             first_name: Vardas
-            groups: Grupės
+            group: Grupė
             last_name: Pavardė
             email: El. paštas
             phone_number: Telefono numeris
+            gender: Lytis
+            birthday: Gimimo diena
             billing_address: Mokėtojo adresas
             different_billing_address: Naudoti kitą adresą apmokėjimui?
+            only_customer_registration: Sukurti paskyrą?
+            subscribed_to_newsletter: Užsisakyti naujienlaiškį
+        customer_group:
+            name: Pavadinimas
+            roles: Rolės
     gender:
         unknown: Nežinoma
+        male: Vyras
+        female: Moteris

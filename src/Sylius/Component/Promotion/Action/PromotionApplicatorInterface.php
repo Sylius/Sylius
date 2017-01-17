@@ -20,16 +20,12 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 interface PromotionApplicatorInterface
 {
     /**
-     * Apply all promotion actions to the given subject
-     *
      * @param PromotionSubjectInterface $subject
      * @param PromotionInterface $promotion
      */
     public function apply(PromotionSubjectInterface $subject, PromotionInterface $promotion);
 
     /**
-     * Revert all promotion actions to the given subject
-     *
      * @param PromotionSubjectInterface $subject
      * @param PromotionInterface $promotion
      */

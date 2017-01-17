@@ -11,8 +11,8 @@
 {%- block form_errors -%}
     {%- if errors|length > 0 -%}
         {%- for error in errors -%}
-            <div class="ui red pointing label sylius-validation-error">
-            {{ error.message }}
+            <div class="ui red {% if form.parent is not empty %}pointing {% endif %}label sylius-validation-error"{% if form.parent is empty %} style="margin-bottom: 10px;"{% endif %}>
+                {{ error.message }}
             </div>
         {%- endfor -%}
     {%- endif -%}
@@ -154,6 +154,14 @@
     </div>
 {% endblock %}
 
+{% block sylius_promotion_configuration_widget %}
+    <div class="configuration">
+        {% for child in form %}
+            <hr/>{{ form_row(child) }}<hr/>
+        {% endfor %}
+    </div>
+{% endblock %}
+
 {% block sylius_product_option_value_widget %}
     <div class="ui segment">
         {{ form_row(form.code) }}
@@ -166,19 +174,6 @@
                 {% endif %}
             {% endfor %}
             </div>
-    </div>
-{% endblock %}
-
-{% block sylius_image_widget %}
-    <div class="ui upload box segment">
-        {% if form.vars.value.path|default(null) is null %}
-            <label for="{{ form.file.vars.id }}" class="ui icon labeled button"><i class="cloud upload icon"></i> {{ 'sylius.ui.choose_file'|trans }}</label>
-        {% else %}
-            <img class="ui small bordered image" src="{{ form.vars.value.path|imagine_filter('sylius_small') }}" alt="" />
-        {% endif %}
-        <div class="ui hidden element">
-            {{ form_widget(form.file) }}
-        </div>
     </div>
 {% endblock %}
 
@@ -196,3 +191,20 @@
         {% endfor %}
     </div>
 {%- endblock sylius_translations_row %}
+
+{% block sylius_resource_autocomplete_choice_row %}
+    {{- form_label(form) -}}
+    <div
+            class="sylius-autocomplete ui fluid search selection dropdown {% if multiple %}multiple{% endif %}"
+            data-url="{{ remote_url }}"
+            data-choice-name="{{ choice_name }}"
+            data-choice-value="{{ choice_value }}"
+            data-criteria-type="{{ remote_criteria_type }}"
+            data-criteria-name="{{ remote_criteria_name }}"
+    >
+        {{ form_row(form, {'attr': {'class' : 'autocomplete'}}) }}
+        <i class="dropdown icon"></i>
+        <div class="default text">{% if placeholder is defined %} {{ placeholder|trans }} {% endif %}</div>
+        <div class="menu"></div>
+    </div>
+{% endblock %}

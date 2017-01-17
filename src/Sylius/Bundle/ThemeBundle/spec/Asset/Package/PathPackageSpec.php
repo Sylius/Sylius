@@ -20,8 +20,6 @@ use Symfony\Component\Asset\PackageInterface;
 use Symfony\Component\Asset\VersionStrategy\VersionStrategyInterface;
 
 /**
- * @mixin PathPackage
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class PathPackageSpec extends ObjectBehavior
@@ -36,7 +34,7 @@ final class PathPackageSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Asset\Package\PathPackage');
+        $this->shouldHaveType(PathPackage::class);
     }
 
     function it_implements_package_interface_interface()

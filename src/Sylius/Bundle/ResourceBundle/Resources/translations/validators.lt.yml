@@ -3,5 +3,5 @@
 
 sylius:
     resource:
-        not_enabled: Resursas yra išjungtas
-        not_disabled: Resursas yra įjungtas
+        not_enabled: "Resursas yra išjungtas"
+        not_disabled: "Resursas yra įjungtas"

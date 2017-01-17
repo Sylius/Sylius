@@ -11,14 +11,14 @@
 
 namespace Sylius\Component\Resource\Factory;
 
-use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Resource\Model\TranslatableInterface;
+use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class TranslatableFactory implements TranslatableFactoryInterface
+final class TranslatableFactory implements TranslatableFactoryInterface
 {
     /**
      * @var FactoryInterface
@@ -26,15 +26,15 @@ class TranslatableFactory implements TranslatableFactoryInterface
     private $factory;
 
     /**
-     * @var LocaleProviderInterface
+     * @var TranslationLocaleProviderInterface
      */
     private $localeProvider;
 
     /**
      * @param FactoryInterface $factory
-     * @param LocaleProviderInterface $localeProvider
+     * @param TranslationLocaleProviderInterface $localeProvider
      */
-    public function __construct(FactoryInterface $factory, LocaleProviderInterface $localeProvider)
+    public function __construct(FactoryInterface $factory, TranslationLocaleProviderInterface $localeProvider)
     {
         $this->factory = $factory;
         $this->localeProvider = $localeProvider;
@@ -42,6 +42,8 @@ class TranslatableFactory implements TranslatableFactoryInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @throws UnexpectedTypeException
      */
     public function createNew()
     {

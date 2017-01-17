@@ -22,8 +22,6 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
- * @mixin DefaultChannelFactory
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class DefaultChannelFactorySpec extends ObjectBehavior
@@ -43,22 +41,21 @@ final class DefaultChannelFactorySpec extends ObjectBehavior
             $channelRepository,
             $currencyRepository,
             $localeRepository,
-            'EUR',
             'en_US'
         );
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Test\Services\DefaultChannelFactory');
+        $this->shouldHaveType(DefaultChannelFactory::class);
     }
 
-    function it_implements_default_channel_factory_interface()
+    function it_implements_a_default_channel_factory_interface()
     {
         $this->shouldImplement(DefaultChannelFactoryInterface::class);
     }
 
-    function it_creates_default_channel_and_persist_it(
+    function it_creates_a_default_channel_and_persist_it(
         ChannelFactoryInterface $channelFactory,
         FactoryInterface $currencyFactory,
         FactoryInterface $localeFactory,
@@ -73,8 +70,7 @@ final class DefaultChannelFactorySpec extends ObjectBehavior
         $locale->setCode('en_US')->shouldBeCalled();
 
         $currencyFactory->createNew()->willReturn($currency);
-        $currency->setCode('EUR')->shouldBeCalled();
-        $currency->setExchangeRate(1.00)->shouldBeCalled();
+        $currency->setCode('USD')->shouldBeCalled();
 
         $channelFactory->createNamed('Default')->willReturn($channel);
 
@@ -82,11 +78,11 @@ final class DefaultChannelFactorySpec extends ObjectBehavior
         $channel->setTaxCalculationStrategy('order_items_based')->shouldBeCalled();
 
         $channel->addCurrency($currency)->shouldBeCalled();
-        $channel->setDefaultCurrency($currency)->shouldBeCalled();
+        $channel->setBaseCurrency($currency)->shouldBeCalled();
         $channel->addLocale($locale)->shouldBeCalled();
         $channel->setDefaultLocale($locale)->shouldBeCalled();
 
-        $currencyRepository->findOneBy(['code' => 'EUR'])->willReturn(null);
+        $currencyRepository->findOneBy(['code' => 'USD'])->willReturn(null);
         $localeRepository->findOneBy(['code' => 'en_US'])->willReturn(null);
 
         $currencyRepository->add($currency)->shouldBeCalled();

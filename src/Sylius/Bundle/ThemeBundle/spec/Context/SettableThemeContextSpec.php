@@ -12,22 +12,18 @@
 namespace spec\Sylius\Bundle\ThemeBundle\Context;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\ThemeBundle\Context\SettableThemeContext;
 use Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface;
-use Sylius\Bundle\ThemeBundle\HierarchyProvider\ThemeHierarchyProviderInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
 /**
- * @mixin SettableThemeContext
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class SettableThemeContextSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Context\SettableThemeContext');
+        $this->shouldHaveType(SettableThemeContext::class);
     }
 
     function it_implements_theme_context_interface()

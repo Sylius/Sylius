@@ -40,7 +40,7 @@ class UserOAuth implements UserOAuthInterface
     /**
      * @var string
      */
-    protected  $refreshToken;
+    protected $refreshToken;
 
     /**
      * @var UserInterface

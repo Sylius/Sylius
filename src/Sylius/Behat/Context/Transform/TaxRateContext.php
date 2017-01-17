@@ -35,6 +35,7 @@ final class TaxRateContext implements Context
 
     /**
      * @Transform :taxRate
+     * @Transform /^"([^"]+)" tax rate$/
      */
     public function getTaxRateByName($taxRateName)
     {

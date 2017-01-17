@@ -12,15 +12,16 @@
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
-use Sylius\Component\Addressing\Repository\ZoneRepositoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\TaxRateInterface;
-use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Component\Taxation\Repository\TaxCategoryRepositoryInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -53,9 +54,9 @@ final class TaxationContext implements Context
     private $taxCategoryRepository;
 
     /**
-     * @var ZoneRepositoryInterface
+     * @var ObjectManager
      */
-    private $zoneRepository;
+    private $objectManager;
 
     /**
      * @param SharedStorageInterface $sharedStorage
@@ -63,7 +64,7 @@ final class TaxationContext implements Context
      * @param FactoryInterface $taxCategoryFactory
      * @param RepositoryInterface $taxRateRepository
      * @param TaxCategoryRepositoryInterface $taxCategoryRepository
-     * @param ZoneRepositoryInterface $zoneRepository
+     * @param ObjectManager $objectManager
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -71,20 +72,20 @@ final class TaxationContext implements Context
         FactoryInterface $taxCategoryFactory,
         RepositoryInterface $taxRateRepository,
         TaxCategoryRepositoryInterface $taxCategoryRepository,
-        ZoneRepositoryInterface $zoneRepository
+        ObjectManager $objectManager
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->taxRateFactory = $taxRateFactory;
         $this->taxCategoryFactory = $taxCategoryFactory;
         $this->taxRateRepository = $taxRateRepository;
         $this->taxCategoryRepository = $taxCategoryRepository;
-        $this->zoneRepository = $zoneRepository;
+        $this->objectManager = $objectManager;
     }
 
     /**
-     * @Given the store has :taxRateName tax rate of :taxRateAmount% for :taxCategoryName within :zone zone
-     * @Given the store has :taxRateName tax rate of :taxRateAmount% for :taxCategoryName within :zone zone identified by :taxRateCode code 
-     * @Given /^the store has "([^"]+)" tax rate of ([^"]+)% for "([^"]+)" for (the rest of the world)$/
+     * @Given the store has :taxRateName tax rate of :taxRateAmount% for :taxCategoryName within the :zone zone
+     * @Given the store has :taxRateName tax rate of :taxRateAmount% for :taxCategoryName within the :zone zone identified by the :taxRateCode code
+     * @Given /^the store has "([^"]+)" tax rate of ([^"]+)% for "([^"]+)" for the (rest of the world)$/
      */
     public function storeHasTaxRateWithinZone(
         $taxRateName,
@@ -116,7 +117,7 @@ final class TaxationContext implements Context
     }
 
     /**
-     * @Given the store has included in price :taxRateName tax rate of :taxRateAmount% for :taxCategoryName within :zone zone
+     * @Given the store has included in price :taxRateName tax rate of :taxRateAmount% for :taxCategoryName within the :zone zone
      */
     public function storeHasIncludedInPriceTaxRateWithinZone($taxRateName, $taxRateAmount, $taxCategoryName, ZoneInterface $zone)
     {
@@ -148,18 +149,34 @@ final class TaxationContext implements Context
     }
 
     /**
+     * @Given /^the ("[^"]+" tax rate) has changed to ([^"]+)%$/
+     */
+    public function theTaxRateIsOfAmount(TaxRateInterface $taxRate, $amount)
+    {
+        $taxRate->setAmount($this->getAmountFromString($amount));
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @param string $taxCategoryName
      *
      * @return TaxCategoryInterface
      */
     private function getOrCreateTaxCategory($taxCategoryName)
     {
-        $taxCategory = $this->taxCategoryRepository->findOneByName($taxCategoryName);
-        if (null === $taxCategory) {
-            $taxCategory = $this->createTaxCategory($taxCategoryName);
+        $taxCategories = $this->taxCategoryRepository->findByName($taxCategoryName);
+        if (empty($taxCategories)) {
+            return $this->createTaxCategory($taxCategoryName);
         }
 
-        return $taxCategory;
+        Assert::eq(
+            1,
+            count($taxCategories),
+            sprintf('%d tax categories has been found with name "%s".', count($taxCategories), $taxCategoryName)
+        );
+
+        return $taxCategories[0];
     }
 
     /**

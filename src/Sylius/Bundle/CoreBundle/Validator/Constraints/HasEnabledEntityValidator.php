@@ -24,17 +24,17 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 /**
  * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
-class HasEnabledEntityValidator extends ConstraintValidator
+final class HasEnabledEntityValidator extends ConstraintValidator
 {
     /**
      * @var ManagerRegistry
      */
-    protected $registry;
+    private $registry;
 
     /**
      * @var PropertyAccessor
      */
-    protected $accessor;
+    private $accessor;
 
     /**
      * @param ManagerRegistry $registry
@@ -86,7 +86,7 @@ class HasEnabledEntityValidator extends ConstraintValidator
         if ($this->isLastEnabledEntity($results, $entity)) {
             $errorPath = null !== $constraint->errorPath ? $constraint->errorPath : $constraint->enabledPath;
 
-            $this->context->addViolationAt($errorPath, $constraint->message);
+            $this->context->buildViolation($constraint->message)->atPath($errorPath)->addViolation();
         }
     }
 

@@ -4,6 +4,6 @@
 sylius:
     form:
         channel:
-            name: Ονομασία
             description: Περιγραφή
             enabled: Ενεργοποιημένο
+            name: Ονομασία

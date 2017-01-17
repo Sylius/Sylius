@@ -1,0 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    customer:
+        register: 'Grazie per esserti registrato, controlla la tua e-mail per verificare l''account.'

@@ -5,5 +5,13 @@ sylius:
     form:
         product:
             name: الاسم
+        product_variant:
+            name: الاسم
         association_type:
             name: الاسم
+        variant:
+            name: الاسم
+        option:
+            name: الاسم
+        option_value:
+            value: القيمة

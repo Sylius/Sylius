@@ -4,7 +4,7 @@ Sylius\Component\Core\Model\Channel:
         name: "Web Channel"
         hostname: "localhost"
         description: "Lorem ipsum"
-        defaultCurrency: "@currency"
+        baseCurrency: "@currency"
         defaultLocale: "@locale"
         color: "black"
         enabled: true
@@ -13,8 +13,6 @@ Sylius\Component\Core\Model\Channel:
 Sylius\Component\Currency\Model\Currency:
     currency:
         code: EUR
-        exchangeRate: 1
-        enabled: true
 
 Sylius\Component\Locale\Model\Locale:
     locale:

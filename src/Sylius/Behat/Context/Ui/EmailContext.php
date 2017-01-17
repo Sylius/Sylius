@@ -14,6 +14,7 @@ namespace Sylius\Behat\Context\Ui;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Test\Services\EmailCheckerInterface;
 use Webmozart\Assert\Assert;
 
@@ -45,10 +46,14 @@ final class EmailContext implements Context
     /**
      * @Then it should be sent to :recipient
      * @Then the email with reset token should be sent to :recipient
+     * @Then the email with contact request should be sent to :recipient
      */
     public function anEmailShouldBeSentTo($recipient)
     {
-        $this->assertEmailHasRecipient($recipient);
+        Assert::true(
+            $this->emailChecker->hasRecipient($recipient),
+            sprintf('An email should have been sent to %s.', $recipient)
+        );
     }
 
     /**
@@ -56,14 +61,14 @@ final class EmailContext implements Context
      */
     public function numberOfEmailsShouldBeSentTo($count, $recipient)
     {
-        $this->assertEmailHasRecipient($recipient);
+        $actualMessagesCount = $this->emailChecker->countMessagesTo($recipient);
 
         Assert::eq(
-            $this->emailChecker->getMessagesCount(),
+            $actualMessagesCount,
             $count,
             sprintf(
                 '%d messages were sent, while there should be %d.',
-                $this->emailChecker->getMessagesCount(),
+                $actualMessagesCount,
                 $count
             )
         );
@@ -74,44 +79,60 @@ final class EmailContext implements Context
      */
     public function aWelcomingEmailShouldHaveBeenSentTo($recipient)
     {
-        $this->assertEmailHasRecipient($recipient);
-        $this->assertEmailContainsMessage('Welcome to our store');
-
+        $this->assertEmailContainsMessageTo('Welcome to our store', $recipient);
     }
 
     /**
-     * @Then an email with shipment's details of order :order should be sent to :recipient
+     * @Then /^an email with the summary of (order placed by "([^"]+)") should be sent to him$/
+     */
+    public function anEmailWithOrderConfirmationShouldBeSentTo(OrderInterface $order)
+    {
+        $this->assertEmailContainsMessageTo(
+            sprintf(
+                'Your order no. %s has been successfully placed.',
+                $order->getNumber()
+            ),
+            $order->getCustomer()->getEmailCanonical()
+        );
+    }
+
+    /**
+     * @Then /^an email with shipment's details of (this order) should be sent to "([^"]+)"$/
      */
     public function anEmailWithShipmentDetailsOfOrderShouldBeSentTo(OrderInterface $order, $recipient)
     {
-        $this->assertEmailHasRecipient($recipient);
-
-        $this->assertEmailContainsMessage($order->getNumber());
-        $this->assertEmailContainsMessage($order->getLastShipment()->getMethod()->getName());
+        $this->assertEmailContainsMessageTo($order->getNumber(), $recipient);
+        $this->assertEmailContainsMessageTo($this->getShippingMethodName($order), $recipient);
 
         $tracking = $this->sharedStorage->get('tracking_code');
-        $this->assertEmailContainsMessage($tracking);
-    }
-
-    /**
-     * @param string $recipient
-     */
-    private function assertEmailHasRecipient($recipient)
-    {
-        Assert::true(
-            $this->emailChecker->hasRecipient($recipient),
-            'An email should have been sent to %s.'
-        );
+        $this->assertEmailContainsMessageTo($tracking, $recipient);
     }
 
     /**
      * @param string $message
+     * @param string $recipient
      */
-    private function assertEmailContainsMessage($message)
+    private function assertEmailContainsMessageTo($message, $recipient)
     {
         Assert::true(
-            $this->emailChecker->hasMessage($message),
-            sprintf('Message "%s" was not found in any email.', $message)
+            $this->emailChecker->hasMessageTo($message, $recipient),
+            sprintf('Message "%s" was not sent to "%s".', $message, $recipient)
         );
+    }
+
+    /**
+     * @param OrderInterface $order
+     *
+     * @return string
+     */
+    private function getShippingMethodName(OrderInterface $order)
+    {
+        /** @var ShipmentInterface $shipment */
+        $shipment = $order->getShipments()->first();
+        if (false === $shipment) {
+            throw new \LogicException('Order should have at least one shipment.');
+        }
+
+        return $shipment->getMethod()->getName();
     }
 }

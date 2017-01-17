@@ -19,8 +19,6 @@ use Sylius\Behat\Service\NotificationChecker;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 
 /**
- * @mixin NotificationChecker
- *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
@@ -33,7 +31,7 @@ final class NotificationCheckerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Behat\Service\NotificationChecker');
+        $this->shouldHaveType(NotificationChecker::class);
     }
 
     function it_implements_notification_checker_interface()

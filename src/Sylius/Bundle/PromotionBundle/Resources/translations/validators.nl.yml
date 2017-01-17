@@ -7,30 +7,35 @@ sylius:
             unique: De opgegeven promotiecode is reeds in gebruik.
             not_blank: Gelieve een promotiecode in te geven.
         description:
-            max_length: 'Promotie omschrijving mag niet langer zijn dan 1 teken.|Promotie omschrijving mag niet langer zijn dan {{ limit }} tekens.'
-            min_length: 'Promotie omschrijving moet minstens 1 teken lang zijn.|Promotie omschrijving moet minstens {{ limit }} tekens lang zijn.'
+            max_length: Promotie omschrijving mag niet langer zijn dan 1 teken.|Promotie omschrijving mag niet langer zijn dan {{ limit }} tekens.
+            min_length: Promotie omschrijving moet minstens 1 teken lang zijn.|Promotie omschrijving moet minstens {{ limit }} tekens lang zijn.
             not_blank: Voer een promotie omschrijving in.
-        name:
-            max_length: 'Promotie naam mag niet langer zijn dan 1 teken.|Promotie naam mag niet langer zijn dan {{ limit }} tekens.'
-            min_length: 'Promotie naam moet minstens 1 teken lang zijn.|Promotie naam moet minstens {{ limit }} tekens lang zijn.'
-            not_blank: Voer een promotie naam in.
         end_date_cannot_be_set_prior_start_date: Einddatum kan niet voor de begindatum liggen.
+        name:
+            max_length: Promotie naam mag niet langer zijn dan 1 teken.|Promotie naam mag niet langer zijn dan {{ limit }} tekens.
+            min_length: Promotie naam moet minstens 1 teken lang zijn.|Promotie naam moet minstens {{ limit }} tekens lang zijn.
+            not_blank: Voer een promotie naam in.
+    promotion_action:
+        percentage_discount_configuration:
+            min: De waarde van een kortingspercentage moet ten minste 0% zijn.
+            max: De maximale waarde van een kortingspercentage is 100%.
     promotion_coupon:
         code:
-            max_length: 'Coupon code mag niet langer zijn dan 1 teken.|Coupon code mag niet langer zijn dan {{ limit }} tekens.'
-            min_length: 'Coupon code moet minstens 1 teken lang zijn.|Coupon code moet minstens {{ limit }} tekens lang zijn.'
+            max_length: Coupon code mag niet langer zijn dan 1 teken.|Coupon code mag niet langer zijn dan {{ limit }} tekens.
+            min_length: Coupon code moet minstens 1 teken lang zijn.|Coupon code moet minstens {{ limit }} tekens lang zijn.
             not_blank: Voer een coupon code in.
             unique: Deze coupon bestaat al.
+        is_invalid: Couponcode is ongeldig.
         usage_limit:
-            min: 'Coupon gebruikslimiet moet minstens {{ limit }} zijn.'
-    promotion_coupon_generate_instruction:
+            min: Coupon gebruikslimiet moet minstens {{ limit }} zijn.
+    promotion_coupon_generator_instruction:
         amount:
-            min: 'Hoeveelheid te genereren coupons moet minstens {{ limit }} zijn.'
+            min: Hoeveelheid te genereren coupons moet minstens {{ limit }} zijn.
             not_blank: Voer het aantal te genereren coupons in.
-        usage_limit:
-            min: 'Gebruikslimiet van de gegenereerde coupons moet minstens {{ limit }} zijn.'
         code_length:
-            min: 'Couponcode moet ten minste {{ limit }} tekens lang zijn.'
-            max: 'Couponcode mag niet meer dan {{ limit }} karakters bevatten.'
+            min: Couponcode moet ten minste {{ limit }} tekens lang zijn.
+            max: Couponcode mag niet meer dan {{ limit }} karakters bevatten.
             not_blank: Voer de lengte van de couponcode in.
-        possible_generation_amount: 'Ongeldige lengte van de coupon code of aantal codes. Het is niet mogelijk om %expectedAmount% unieke coupon codes te genereren met een lengte van %codeLength%. Mogelijk aantal gegenereerde codes is %possibleAmount%.'
+        possible_generation_amount: Ongeldige lengte van de coupon code of aantal codes. Het is niet mogelijk om %expectedAmount% unieke coupon codes te genereren met een lengte van %codeLength%. Mogelijk aantal gegenereerde codes is %possibleAmount%.
+        usage_limit:
+            min: Gebruikslimiet van de gegenereerde coupons moet minstens {{ limit }} zijn.

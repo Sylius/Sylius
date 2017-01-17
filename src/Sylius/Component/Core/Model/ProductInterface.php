@@ -13,9 +13,8 @@ namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Channel\Model\ChannelsAwareInterface;
 use Sylius\Component\Product\Model\ProductInterface as BaseProductInterface;
+use Sylius\Component\Review\Model\ReviewInterface;
 use Sylius\Component\Review\Model\ReviewableInterface;
-use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
-use Sylius\Component\Taxonomy\Model\TaxonsAwareInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -23,9 +22,10 @@ use Sylius\Component\Taxonomy\Model\TaxonsAwareInterface;
  */
 interface ProductInterface extends
     BaseProductInterface,
-    TaxonsAwareInterface,
+    ProductTaxonsAwareInterface,
     ChannelsAwareInterface,
-    ReviewableInterface
+    ReviewableInterface,
+    ImageAwareInterface
 {
     /*
      * Variant selection methods.
@@ -38,8 +38,6 @@ interface ProductInterface extends
     const VARIANT_SELECTION_CHOICE = 'choice';
     const VARIANT_SELECTION_MATCH = 'match';
 
-    const METADATA_CLASS_IDENTIFIER = 'Product';
-
     /**
      * @return string
      */
@@ -47,6 +45,8 @@ interface ProductInterface extends
 
     /**
      * @param string $variantSelectionMethod
+     *
+     * @throws \InvalidArgumentException
      */
     public function setVariantSelectionMethod($variantSelectionMethod);
 
@@ -71,16 +71,6 @@ interface ProductInterface extends
     public function setShortDescription($shortDescription);
 
     /**
-     * @return ShippingCategoryInterface
-     */
-    public function getShippingCategory();
-
-    /**
-     * @param ShippingCategoryInterface $category
-     */
-    public function setShippingCategory(ShippingCategoryInterface $category = null);
-
-    /**
      * @return TaxonInterface
      */
     public function getMainTaxon();
@@ -91,22 +81,7 @@ interface ProductInterface extends
     public function setMainTaxon(TaxonInterface $mainTaxon = null);
 
     /**
-     * @return ProductVariantInterface
+     * @return ReviewInterface[]
      */
-    public function getFirstVariant();
-
-    /**
-     * @return int
-     */
-    public function getPrice();
-
-    /**
-     * @return ImageInterface
-     */
-    public function getImage();
-
-    /**
-     * @return ImageInterface[]
-     */
-    public function getImages();
+    public function getAcceptedReviews();
 }

@@ -1,0 +1,33 @@
+sylius_grid:
+    grids:
+        sylius_admin_customer_group:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%sylius.model.customer_group.class%"
+            sorting:
+                name: asc
+            fields:
+                code:
+                    type: string
+                    label: sylius.ui.code
+                    sortable: ~
+                name:
+                    type: string
+                    label: sylius.ui.name
+                    sortable: ~
+            filters:
+                search:
+                    type: string
+                    label: sylius.ui.search
+                    options:
+                        fields: [code, name]
+            actions:
+                main:
+                    create:
+                        type: create
+                item:
+                    update:
+                        type: update
+                    delete:
+                        type: delete

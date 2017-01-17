@@ -12,13 +12,10 @@
 namespace spec\Sylius\Bundle\ThemeBundle\Loader;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Loader\CircularDependencyFoundException;
+use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
 /**
- * @mixin CircularDependencyFoundException
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class CircularDependencyFoundExceptionSpec extends ObjectBehavior
@@ -30,7 +27,7 @@ final class CircularDependencyFoundExceptionSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Loader\CircularDependencyFoundException');
+        $this->shouldHaveType(CircularDependencyFoundException::class);
     }
 
     function it_is_a_domain_exception()

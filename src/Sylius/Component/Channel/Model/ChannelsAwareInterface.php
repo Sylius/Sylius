@@ -14,8 +14,6 @@ namespace Sylius\Component\Channel\Model;
 use Doctrine\Common\Collections\Collection;
 
 /**
- * Interface implemented by objects related to multiple channels
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface ChannelsAwareInterface
@@ -24,11 +22,6 @@ interface ChannelsAwareInterface
      * @return Collection|ChannelInterface[]
      */
     public function getChannels();
-
-    /**
-     * @param Collection $collection
-     */
-    public function setChannels(Collection $collection);
 
     /**
      * @param ChannelInterface $channel

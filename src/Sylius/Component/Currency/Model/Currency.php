@@ -12,7 +12,6 @@
 namespace Sylius\Component\Currency\Model;
 
 use Sylius\Component\Resource\Model\TimestampableTrait;
-use Sylius\Component\Resource\Model\ToggleableTrait;
 use Symfony\Component\Intl\Intl;
 
 /**
@@ -20,7 +19,7 @@ use Symfony\Component\Intl\Intl;
  */
 class Currency implements CurrencyInterface
 {
-    use TimestampableTrait, ToggleableTrait;
+    use TimestampableTrait;
 
     /**
      * @var mixed
@@ -32,11 +31,6 @@ class Currency implements CurrencyInterface
      */
     protected $code;
 
-    /**
-     * @var float
-     */
-    protected $exchangeRate;
-
     public function __construct()
     {
         $this->createdAt = new \DateTime();
@@ -47,7 +41,7 @@ class Currency implements CurrencyInterface
      */
     public function __toString()
     {
-        return $this->code;
+        return $this->getCode();
     }
 
     /**
@@ -63,7 +57,7 @@ class Currency implements CurrencyInterface
      */
     public function getName()
     {
-        return Intl::getCurrencyBundle()->getCurrencyName($this->code);
+        return Intl::getCurrencyBundle()->getCurrencyName($this->getCode());
     }
 
     /**
@@ -80,21 +74,5 @@ class Currency implements CurrencyInterface
     public function setCode($code)
     {
         $this->code = $code;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getExchangeRate()
-    {
-        return $this->exchangeRate;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setExchangeRate($rate)
-    {
-        $this->exchangeRate = $rate;
     }
 }

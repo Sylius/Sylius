@@ -1,8 +1,12 @@
 {% for type in ['success', 'error', 'info', 'warning'] %}
-    {% for message in app.session.flashbag.get(type) %}
+    {% for flash in app.session.flashbag.get(type) %}
         {% if 'error' == type %}
             {% set result = 'negative' %}
             {% set icon = 'remove' %}
+        {% endif %}
+        {% if 'info' == type %}
+            {% set result = 'info' %}
+            {% set icon = 'info' %}
         {% endif %}
         <div class="ui icon {{ result|default('positive') }} message">
             <i class="close icon"></i>
@@ -12,7 +16,13 @@
                     {% set header = 'sylius.ui.'~type %}
                     {{ header|trans }}
                 </div>
-                <p>{{ message }}</p>
+                <p>
+                {% if flash is iterable %}
+                    {{ flash.message|trans(flash.parameters, 'flashes') }}
+                {% else %}
+                    {{ flash|trans({}, 'flashes') }}
+                {% endif %}
+                </p>
             </div>
         </div>
     {% endfor %}

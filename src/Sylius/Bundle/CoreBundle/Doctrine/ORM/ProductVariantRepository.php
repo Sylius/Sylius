@@ -11,19 +11,25 @@
 
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
-use Sylius\Bundle\ProductBundle\Doctrine\ORM\VariantRepository as BaseVariantRepository;
+use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductVariantRepository as BaseProductVariantRepository;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 
 /**
- * @author Alexandre Bacco <alexandre.bacco@gmail.com>
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-class ProductVariantRepository extends BaseVariantRepository implements ProductVariantRepositoryInterface
+class ProductVariantRepository extends BaseProductVariantRepository implements ProductVariantRepositoryInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function getFormQueryBuilder()
+    public function createInventoryListQueryBuilder($locale)
     {
-        return $this->createQueryBuilder('o');
+        return $this
+            ->createQueryBuilder('o')
+            ->leftJoin('o.translations', 'translation')
+            ->andWhere('translation.locale = :locale')
+            ->andWhere('o.tracked = true')
+            ->setParameter('locale', $locale)
+        ;
     }
 }

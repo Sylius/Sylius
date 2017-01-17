@@ -18,7 +18,7 @@ use Symfony\Component\DependencyInjection\Reference;
 /**
  * @author Mark McKelvie <mark.mckelvie@reiss.com>
  */
-class RegisterTaxCalculationStrategiesPass implements CompilerPassInterface
+final class RegisterTaxCalculationStrategiesPass implements CompilerPassInterface
 {
     /**
      * {@inheritdoc}

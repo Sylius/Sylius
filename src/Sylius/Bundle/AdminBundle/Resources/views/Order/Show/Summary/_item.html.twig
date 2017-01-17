@@ -1,3 +1,5 @@
+{% import "@SyliusAdmin/Common/Macro/money.html.twig" as money %}
+
 {% set orderPromotionAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT') %}
 {% set itemPromotionAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT') %}
 {% set shippingAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::SHIPPING_ADJUSTMENT') %}
@@ -8,51 +10,27 @@
 
 <tr>
     <td class="single line">
-        <div class="ui header">
-            {% include '@SyliusAdmin/Product/_mainImage.html.twig' with {'product': product, 'filter': 'sylius_admin_product_tiny_thumbnail'} %}
-            <div class="content">
-                <a href="{{ path('sylius_admin_product_update', {'id': product.id}) }}" class="sylius-product-name">{{ product.name }}</a>
-                <span class="sub header">
-                    {{ product.code }}
-                </span>
-            </div>
-        </div>
-        {% if product.hasOptions() %}
-            <div class="ui horizontal divided list sylius-product-options">
-                {% for option in variant.options %}
-                    <div class="item" data-sylius-option-name="{{ option.name }}">
-                        {{ option.value }}
-                    </div>
-                {% endfor %}
-            </div>
-        {% elseif variant.name is not null %}
-            <div class="ui horizontal divided list">
-                <div class="item sylius-product-variant-name">
-                    {{ variant.name }}
-                </div>
-            </div>
-        {% endif %}
+        {% include '@SyliusAdmin/Product/_info.html.twig' %}
     </td>
     <td class="right aligned unit-price">
-        {{ item.unitPrice|sylius_price(order.currencyCode, order.exchangeRate) }}
+        {{ money.format(item.unitPrice, order.currencyCode) }}
     </td>
     <td class="right aligned discounted-unit-price">
-        {{ item.discountedUnitPrice|sylius_price(order.currencyCode, order.exchangeRate) }}
+        {{ money.format(item.discountedUnitPrice, order.currencyCode) }}
     </td>
     <td class="right aligned quantity">
         {{ item.quantity }}
     </td>
     <td class="right aligned subtotal">
-        {{ item.subtotal|sylius_price(order.currencyCode, order.exchangeRate) }}
+        {{ money.format(item.subtotal, order.currencyCode) }}
     </td>
     <td class="right aligned discount">
-        {% set itemDiscount = item.getAdjustmentsTotalRecursively(orderPromotionAdjustment) %}
-        {% if not itemDiscount == 0 %}-{% endif %}{{ (-1 * itemDiscount)|sylius_price(order.currencyCode, order.exchangeRate) }}
+        {{ money.format(item.getAdjustmentsTotalRecursively(orderPromotionAdjustment), order.currencyCode) }}
     </td>
     <td class="right aligned tax">
-        {{ item.taxTotal|sylius_price(order.currencyCode, order.exchangeRate) }}
+        {{ money.format(item.taxTotal, order.currencyCode) }}
     </td>
     <td class="right aligned total">
-        {{ item.total|sylius_price(order.currencyCode, order.exchangeRate) }}
+        {{ money.format(item.total, order.currencyCode) }}
     </td>
 </tr>

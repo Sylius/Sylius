@@ -2,5 +2,14 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    ui:
-        the_channel_cannot_be_deleted_at_least_one_enabled_channel_is_required: "Il canale non può essere eliminato. E' necessario almeno un canale abilitato."
+    channel:
+        delete_error: 'Il canale non può essere eliminato. È richiesto almeno un canale abilitato.'
+    contact:
+        request_success: 'La tua richiesta di contatto è stata inoltrata correttamente.'
+        request_error: 'Si è verificato un problema durante l''invio della richiesta di contatto. Si prega di riprovare più tardi.'
+    customer:
+        add_address: 'L''indirizzo è stato aggiunto con successo.'
+        impersonate: 'Hai impersonato con successo il cliente %name%.'
+        set_address_as_default: 'Indirizzo è stato impostato come predefinito.'
+    product:
+        out_of_stock: 'In magazzino la rimanenza di questo prodotto è solo %quantity%.'

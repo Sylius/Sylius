@@ -11,15 +11,13 @@
 
 namespace Sylius\Bundle\UserBundle\EventListener;
 
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Webmozart\Assert\Assert;
 
 /**
- * User delete listener.
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
@@ -38,7 +36,7 @@ class UserDeleteListener
 
     /**
      * @param TokenStorageInterface $tokenStorage
-     * @param SessionInterface         $session
+     * @param SessionInterface $session
      */
     public function __construct(TokenStorageInterface $tokenStorage, SessionInterface $session)
     {
@@ -48,19 +46,17 @@ class UserDeleteListener
 
     /**
      * @param GenericEvent $event
+     *
+     * @throws \InvalidArgumentException
      */
     public function deleteUser(GenericEvent $event)
     {
         $user = $event->getSubject();
+        Assert::isInstanceOf($user, UserInterface::class);
 
-        if (!$user instanceof UserInterface) {
-            throw new UnexpectedTypeException(
-                $user,
-                UserInterface::class
-            );
-        }
+        $token = $this->tokenStorage->getToken();
 
-        if (($token = $this->tokenStorage->getToken()) && ($loggedUser = $token->getUser()) && ($loggedUser->getId() === $user->getId())) {
+        if ((null !== $token) && ($loggedUser = $token->getUser()) && ($loggedUser->getId() === $user->getId())) {
             $event->stopPropagation();
             $this->session->getBag('flashes')->add('error', 'Cannot remove currently logged in user.');
         }

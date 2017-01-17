@@ -32,9 +32,27 @@ class Action
     private $label;
 
     /**
+     * @var boolean
+     */
+    private $enabled = true;
+
+    /**
+     * @var string
+     */
+    private $icon;
+
+    /**
      * @var array
      */
     private $options = [];
+
+    /**
+     * @var int
+     *
+     * Position equals to 100 to ensure that wile sorting actions by position ASC
+     * the action buttons positioned by default will be last
+     */
+    private $position = 100;
 
     /**
      * @param string $name
@@ -44,20 +62,17 @@ class Action
     {
         $this->name = $name;
         $this->type = $type;
-        $this->label = $name;
     }
 
     /**
      * @param string $name
      * @param string $type
      *
-     * @return Action
+     * @return self
      */
     public static function fromNameAndType($name, $type)
     {
-        $field = new Action($name, $type);
-
-        return $field;
+        return new self($name, $type);
     }
 
     /**
@@ -93,6 +108,38 @@ class Action
     }
 
     /**
+     * @return boolean
+     */
+    public function isEnabled()
+    {
+        return $this->enabled;
+    }
+
+    /**
+     * @param boolean $enabled
+     */
+    public function setEnabled($enabled)
+    {
+        $this->enabled = $enabled;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIcon()
+    {
+        return $this->icon;
+    }
+
+    /**
+     * @param string $icon
+     */
+    public function setIcon($icon)
+    {
+        $this->icon = $icon;
+    }
+
+    /**
      * @return array
      */
     public function getOptions()
@@ -106,5 +153,21 @@ class Action
     public function setOptions(array $options)
     {
         $this->options = $options;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    /**
+     * @param int $position
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
     }
 }

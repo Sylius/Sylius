@@ -23,7 +23,7 @@ use Webmozart\Assert\Assert;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class UnitsPromotionAdjustmentsApplicator implements UnitsPromotionAdjustmentsApplicatorInterface
+final class UnitsPromotionAdjustmentsApplicator implements UnitsPromotionAdjustmentsApplicatorInterface
 {
     /**
      * @var AdjustmentFactoryInterface
@@ -70,8 +70,11 @@ class UnitsPromotionAdjustmentsApplicator implements UnitsPromotionAdjustmentsAp
      * @param PromotionInterface $promotion
      * @param int $itemPromotionAmount
      */
-    private function applyAdjustmentsOnItemUnits(OrderItemInterface $item, PromotionInterface $promotion, $itemPromotionAmount)
-    {
+    private function applyAdjustmentsOnItemUnits(
+        OrderItemInterface $item,
+        PromotionInterface $promotion,
+        $itemPromotionAmount
+    ) {
         $splitPromotionAmount = $this->distributor->distribute($itemPromotionAmount, $item->getQuantity());
 
         $i = 0;

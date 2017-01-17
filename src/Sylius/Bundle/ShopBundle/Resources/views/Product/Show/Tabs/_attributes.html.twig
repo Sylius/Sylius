@@ -1,0 +1,14 @@
+<div class="ui bottom attached tab segment" data-tab="attributes">
+    <table id="sylius-product-attributes" class="ui definition table">
+        <tbody>
+        {% for attribute in product.attributes|sort_by('attribute.position') %}
+            <tr>
+                <td class="sylius-product-attribute-name">{{ attribute.name }}</td>
+                <td class="sylius-product-attribute-value">
+                    {% include [('SyliusAttributeBundle:Types:'~attribute.attribute.type~'.html.twig'), 'SyliusAttributeBundle:Types:default.html.twig'] with {'attribute': attribute} %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>

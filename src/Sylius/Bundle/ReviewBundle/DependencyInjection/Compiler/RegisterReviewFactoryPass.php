@@ -19,7 +19,7 @@ use Symfony\Component\DependencyInjection\Definition;
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-class RegisterReviewFactoryPass implements CompilerPassInterface
+final class RegisterReviewFactoryPass implements CompilerPassInterface
 {
     /**
      * {@inheritdoc}
@@ -32,7 +32,6 @@ class RegisterReviewFactoryPass implements CompilerPassInterface
 
             $reviewFactory = $container->setDefinition(sprintf('sylius.factory.'.$subject.'_review'), $reviewFactoryDefinition);
             $reviewFactory->addArgument($factory);
-            $reviewFactory->addArgument($container->findDefinition('sylius.repository.'.$subject));
         }
     }
 }

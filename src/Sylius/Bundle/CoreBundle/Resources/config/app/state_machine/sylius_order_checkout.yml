@@ -1,0 +1,48 @@
+winzou_state_machine:
+    sylius_order_checkout:
+        class: "%sylius.model.order.class%"
+        property_path: checkoutState
+        graph: sylius_order_checkout
+        state_machine_class: "%sylius.state_machine.class%"
+        states:
+            cart: ~
+            addressed: ~
+            shipping_selected: ~
+            payment_skipped: ~
+            payment_selected: ~
+            completed: ~
+        transitions:
+            address:
+                from: [cart, addressed, shipping_selected, payment_selected, payment_skipped]
+                to: addressed
+            select_shipping:
+                from: [addressed, shipping_selected, payment_selected, payment_skipped]
+                to: shipping_selected
+            skip_payment:
+                    from: [shipping_selected]
+                    to: payment_skipped
+            select_payment:
+                from: [payment_selected, shipping_selected]
+                to: payment_selected
+            complete:
+                from: [payment_selected, payment_skipped]
+                to: completed
+        callbacks:
+            after:
+                sylius_process_cart:
+                    on: ["select_shipping", "address", "select_payment"]
+                    do: ["@sylius.order_processing.order_processor", "process"]
+                    args: ["object"]
+                sylius_create_order:
+                    on: ["complete"]
+                    do: ["@sm.callback.cascade_transition", "apply"]
+                    args: ["object", "event", "'create'", "'sylius_order'"]
+                sylius_save_checkout_completion_date:
+                    on: ["complete"]
+                    do: ["object", "completeCheckout"]
+                    args: ["object"]
+                sylius_skip_payment:
+                    on: ["select_shipping"]
+                    do: ["@sylius.state_resolver.order_checkout", "resolve"]
+                    args: ["object"]
+                    priority: 1

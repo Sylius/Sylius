@@ -1,0 +1,10 @@
+# This file is a part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_shop_contact_request:
+    path: /
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.shop.contact:requestAction
+        _sylius:
+            redirect: sylius_shop_homepage

@@ -3,7 +3,7 @@
 
 cached:
     extensions:
-        Behat\Symfony2Extension:
+        FriendsOfBehat\SymfonyExtension:
             kernel:
                 env: test_cached
                 debug: false

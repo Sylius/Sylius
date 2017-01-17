@@ -6,9 +6,6 @@ Sylius\Component\Product\Model\Product:
             expose: true
             type: integer
             xml_attribute: true
-        name:
-            expose: true
-            type: string
         description:
             expose: true
             type: string
@@ -22,5 +19,7 @@ Sylius\Component\Product\Model\Product:
             expose: true
             type: DateTime
     virtual_properties:
+        getName:
+            serialized_name: name
         getVariants:
             serialized_name: variants

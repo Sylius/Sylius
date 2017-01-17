@@ -11,43 +11,35 @@
 
 namespace Sylius\Bundle\CustomerBundle\Form\Type;
 
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class CustomerType extends CustomerProfileType
+final class CustomerType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        parent::buildForm($builder, $options);
-
         $builder
-            ->add('firstName', 'text', [
-                'label' => 'sylius.form.customer.first_name',
-                'required' => false,
-            ])
-            ->add('lastName', 'text', [
-                'label' => 'sylius.form.customer.last_name',
-                'required' => false,
-            ])
-            ->add('groups', 'sylius_group_choice', [
-                'label' => 'sylius.form.customer.groups',
-                'multiple' => true,
+            ->add('group', CustomerGroupChoiceType::class, [
                 'required' => false,
             ])
         ;
     }
 
+    public function getParent()
+    {
+        return CustomerProfileType::class;
+    }
+
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_customer';
     }

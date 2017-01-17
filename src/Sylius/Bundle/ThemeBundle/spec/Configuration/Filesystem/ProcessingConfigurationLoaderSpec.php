@@ -17,8 +17,6 @@ use Sylius\Bundle\ThemeBundle\Configuration\Filesystem\ConfigurationLoaderInterf
 use Sylius\Bundle\ThemeBundle\Configuration\Filesystem\ProcessingConfigurationLoader;
 
 /**
- * @mixin ProcessingConfigurationLoader
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class ProcessingConfigurationLoaderSpec extends ObjectBehavior
@@ -30,7 +28,7 @@ final class ProcessingConfigurationLoaderSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Configuration\Filesystem\ProcessingConfigurationLoader');
+        $this->shouldHaveType(ProcessingConfigurationLoader::class);
     }
 
     function it_implements_loader_interface()

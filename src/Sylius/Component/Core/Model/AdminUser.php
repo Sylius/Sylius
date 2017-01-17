@@ -29,12 +29,19 @@ class AdminUser extends User implements AdminUserInterface
     protected $lastName;
 
     /**
-     * @var array
+     * @var string
      */
-    protected $roles = [AdminUserInterface::DEFAULT_ADMIN_ROLE];
+    protected $localeCode;
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->roles = [AdminUserInterface::DEFAULT_ADMIN_ROLE];
+    }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getFirstName()
     {
@@ -42,7 +49,7 @@ class AdminUser extends User implements AdminUserInterface
     }
 
     /**
-     * @param string $firstName
+     * {@inheritdoc}
      */
     public function setFirstName($firstName)
     {
@@ -50,7 +57,7 @@ class AdminUser extends User implements AdminUserInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getLastName()
     {
@@ -58,10 +65,26 @@ class AdminUser extends User implements AdminUserInterface
     }
 
     /**
-     * @param string $lastName
+     * {@inheritdoc}
      */
     public function setLastName($lastName)
     {
         $this->lastName = $lastName;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLocaleCode()
+    {
+        return $this->localeCode;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setLocaleCode($code)
+    {
+        $this->localeCode = $code;
     }
 }

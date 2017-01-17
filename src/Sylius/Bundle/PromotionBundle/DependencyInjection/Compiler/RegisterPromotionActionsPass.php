@@ -16,19 +16,20 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * Registers all promotion actions in registry service.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class RegisterPromotionActionsPass implements CompilerPassInterface
+final class RegisterPromotionActionsPass implements CompilerPassInterface
 {
+    /**
+     * {@inheritdoc}
+     */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('sylius.registry.promotion_action')) {
+        if (!$container->hasDefinition('sylius.registry_promotion_action')) {
             return;
         }
 
-        $registry = $container->getDefinition('sylius.registry.promotion_action');
+        $registry = $container->getDefinition('sylius.registry_promotion_action');
         $actions = [];
 
         $actionsServices = $container->findTaggedServiceIds('sylius.promotion_action');

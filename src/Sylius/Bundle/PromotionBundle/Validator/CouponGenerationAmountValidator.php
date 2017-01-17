@@ -11,14 +11,17 @@
 
 namespace Sylius\Bundle\PromotionBundle\Validator;
 
+use Sylius\Bundle\PromotionBundle\Validator\Constraints\CouponPossibleGenerationAmount;
 use Sylius\Component\Promotion\Generator\GenerationPolicyInterface;
+use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class CouponGenerationAmountValidator extends ConstraintValidator
+final class CouponGenerationAmountValidator extends ConstraintValidator
 {
     /**
      * @var GenerationPolicyInterface
@@ -42,6 +45,12 @@ class CouponGenerationAmountValidator extends ConstraintValidator
             return;
         }
 
+        /** @var PromotionCouponGeneratorInstructionInterface $value */
+        Assert::isInstanceOf($instruction, PromotionCouponGeneratorInstructionInterface::class);
+
+        /** @var CouponPossibleGenerationAmount $constraint */
+        Assert::isInstanceOf($constraint, CouponPossibleGenerationAmount::class);
+
         if (!$this->generationPolicy->isGenerationPossible($instruction)) {
             $this->context->addViolation(
                 $constraint->message,
@@ -51,7 +60,6 @@ class CouponGenerationAmountValidator extends ConstraintValidator
                     '%possibleAmount%' => $this->generationPolicy->getPossibleGenerationAmount($instruction)
                 )
             );
-
         }
     }
 }

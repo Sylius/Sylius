@@ -13,6 +13,7 @@ namespace Sylius\Bundle\ShopBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -39,6 +40,6 @@ class HomepageController
      */
     public function indexAction(Request $request)
     {
-        return $this->templatingEngine->renderResponse('SyliusShopBundle:Homepage:index.html.twig');
+        return $this->templatingEngine->renderResponse('@SyliusShop/Homepage/index.html.twig');
     }
 }

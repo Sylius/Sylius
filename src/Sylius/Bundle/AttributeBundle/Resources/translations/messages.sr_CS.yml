@@ -4,4 +4,29 @@
 sylius:
     form:
         attribute:
+            add: Dodaj
+            add_attributes: Dodaj atribute
+            choices: Izbor
+            code: Kod
             name: Ime
+            translations: Prevodi
+            type: Tip
+        attribute_type:
+            checkbox: Polje za potvrdu
+            configuration: Konfiguracija
+            date: Datum
+            datetime: Datum i vreme
+            integer: Ceo broj
+            percent: Procenat
+            text: Тekst
+            textarea: Polje za tekst
+            title: Tip atributa
+            validation: Validacija
+        attribute_type_configuration:
+            datetime:
+                format: Format
+            date:
+                format: Format
+            text:
+                min: Min. dužina
+                max: Maks. dužina

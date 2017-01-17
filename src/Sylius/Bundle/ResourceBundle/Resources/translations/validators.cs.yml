@@ -3,5 +3,5 @@
 
 sylius:
     resource:
-        not_enabled: Uvedený prostředek je zakázán
-        not_disabled: Uvedený prostředek je povolen
+        not_enabled: "Uvedený prostředek je zakázán"
+        not_disabled: "Uvedený prostředek je povolen"

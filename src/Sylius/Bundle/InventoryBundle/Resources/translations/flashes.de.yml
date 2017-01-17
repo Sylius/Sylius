@@ -1,9 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-    inventory_unit:
-        backorder: Bestandseinheit zurück bestellt.
-        sell: Bestandseinheit erfüllt.
-        return: Bestandseinheit zurück.
-        transition_fail: Die Aktion konnte mit dem aktuellen Status nicht ausgeführt werden

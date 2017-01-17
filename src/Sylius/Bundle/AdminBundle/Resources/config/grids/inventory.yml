@@ -1,0 +1,52 @@
+sylius_grid:
+    grids:
+        sylius_admin_inventory:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%sylius.model.product_variant.class%"
+                    repository:
+                        method: createInventoryListQueryBuilder
+                        arguments: ["%locale%"]
+            fields:
+                name:
+                    type: twig
+                    path: .
+                    label: sylius.ui.name
+                    options:
+                        template: "@SyliusAdmin/ProductVariant/Grid/Field/name.html.twig"
+                code:
+                    type: string
+                    label: sylius.ui.code
+                inventory:
+                    type: twig
+                    path: .
+                    label: sylius.ui.inventory
+                    options:
+                        template: "@SyliusAdmin/ProductVariant/Grid/Field/inventory.html.twig"
+            filters:
+                code:
+                    type: string
+                    label: sylius.ui.code
+                name:
+                    type: string
+                    label: sylius.ui.name
+                    options:
+                        fields: [translation.name]
+            actions:
+                item:
+                    update_product:
+                        type: update
+                        label: sylius.ui.edit_product
+                        options:
+                            link:
+                                route: sylius_admin_product_update
+                                parameters:
+                                    id: resource.product.id
+                    update:
+                        type: update
+                        options:
+                            link:
+                                parameters:
+                                    id: resource.id
+                                    productId: resource.product.id

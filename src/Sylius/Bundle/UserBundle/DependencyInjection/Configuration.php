@@ -13,7 +13,6 @@ namespace Sylius\Bundle\UserBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\UserBundle\Controller\UserController;
-use Sylius\Bundle\UserBundle\Form\Type\UserRegistrationType;
 use Sylius\Bundle\UserBundle\Form\Type\UserType;
 use Sylius\Component\Resource\Factory\Factory;
 use Sylius\Component\User\Model\User;
@@ -23,15 +22,10 @@ use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
- * This class contains the configuration information for the bundle.
- *
- * This information is solely responsible for how the different configuration
- * sections are normalized, and merged.
- *
  * @author Bartosz Siejka <bartosz.siejka@lakion.com>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class Configuration implements ConfigurationInterface
+final class Configuration implements ConfigurationInterface
 {
     /**
      * {@inheritdoc}
@@ -83,7 +77,9 @@ class Configuration implements ConfigurationInterface
                                                     ->scalarNode('field_name')
                                                         ->defaultValue('passwordResetToken')
                                                         ->validate()
-                                                        ->ifTrue(function ($tokenFieldName) { return !is_string($tokenFieldName); })
+                                                        ->ifTrue(function ($tokenFieldName) {
+                                                            return !is_string($tokenFieldName);
+                                                        })
                                                             ->thenInvalid('Invalid resetting token field "%s"')
                                                         ->end()
                                                     ->end()
@@ -99,7 +95,9 @@ class Configuration implements ConfigurationInterface
                                                     ->scalarNode('field_name')
                                                         ->defaultValue('passwordResetToken')
                                                         ->validate()
-                                                        ->ifTrue(function ($passwordResetToken) { return !is_string($passwordResetToken); })
+                                                        ->ifTrue(function ($passwordResetToken) {
+                                                            return !is_string($passwordResetToken);
+                                                        })
                                                             ->thenInvalid('Invalid resetting pin field "%s"')
                                                         ->end()
                                                     ->end()
@@ -120,7 +118,9 @@ class Configuration implements ConfigurationInterface
                                                     ->scalarNode('field_name')
                                                         ->defaultValue('emailVerificationToken')
                                                         ->validate()
-                                                        ->ifTrue(function ($emailVerificationToken) { return !is_string($emailVerificationToken); })
+                                                        ->ifTrue(function ($emailVerificationToken) {
+                                                            return !is_string($emailVerificationToken);
+                                                        })
                                                             ->thenInvalid('Invalid verification token field "%s"')
                                                         ->end()
                                                     ->end()
@@ -136,26 +136,7 @@ class Configuration implements ConfigurationInterface
                                             ->scalarNode('controller')->defaultValue(UserController::class)->cannotBeEmpty()->end()
                                             ->scalarNode('repository')->cannotBeEmpty()->end()
                                             ->scalarNode('factory')->defaultValue(Factory::class)->end()
-                                            ->arrayNode('form')
-                                                ->addDefaultsIfNotSet()
-                                                ->children()
-                                                    ->scalarNode('default')->defaultValue(UserType::class)->cannotBeEmpty()->end()
-                                                    ->scalarNode('registration')->end()
-                                                ->end()
-                                            ->end()
-                                        ->end()
-                                    ->end()
-                                    ->arrayNode('validation_groups')
-                                        ->addDefaultsIfNotSet()
-                                        ->children()
-                                            ->arrayNode('default')
-                                                ->prototype('scalar')->end()
-                                                ->defaultValue(['sylius'])
-                                            ->end()
-                                            ->arrayNode('registration')
-                                                ->prototype('scalar')->end()
-                                                ->defaultValue(['sylius', 'sylius_user_registration'])
-                                            ->end()
+                                            ->scalarNode('form')->cannotBeEmpty()->end()
                                         ->end()
                                     ->end()
                                 ->end()

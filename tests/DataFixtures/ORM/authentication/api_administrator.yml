@@ -6,14 +6,14 @@ Sylius\Bundle\ApiBundle\Model\Client:
 
 Sylius\Bundle\ApiBundle\Model\AccessToken:
     oauth_access_token:
-        client: @oauth
-        user: @admin
+        client: "@oauth"
+        user: "@admin"
         token: SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ
 
 Sylius\Bundle\ApiBundle\Model\RefreshToken:
     oauth_refresh_token:
-        client: @oauth
-        user: @admin
+        client: "@oauth"
+        user: "@admin"
         token: SampleRefreshTokenODllODY4ZTQyOThlNWIyMjA1ZDhmZjE1ZDYyMGMwOTUxOWM2NGFmNGRjNjQ2NDBhMDVlNGZjMmQ0YzgyNDM2Ng
 
 Sylius\Component\Core\Model\AdminUser:
@@ -23,3 +23,4 @@ Sylius\Component\Core\Model\AdminUser:
         enabled: true
         email: api@sylius.com
         username: sylius
+        localeCode: en

@@ -11,34 +11,34 @@
 
 namespace Sylius\Bundle\ResourceBundle\Form\Type;
 
-use Sylius\Bundle\ResourceBundle\Form\Builder\DefaultFormBuilderInterface;
-use Sylius\Component\Resource\Metadata\MetadataInterface;
+use Sylius\Component\Registry\ServiceRegistryInterface;
+use Sylius\Component\Resource\Metadata\RegistryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class DefaultResourceType extends AbstractType
+final class DefaultResourceType extends AbstractType
 {
     /**
-     * @var MetadataInterface
+     * @var RegistryInterface
      */
-    private $metadata;
+    private $metadataRegistry;
 
     /**
-     * @var DefaultFormBuilderInterface
+     * @var ServiceRegistryInterface
      */
-    private $defaultFormBuilder;
+    private $formBuilderRegistry;
 
     /**
-     * @param MetadataInterface $metadata
-     * @param DefaultFormBuilderInterface $defaultFormBuilder
+     * @param RegistryInterface $metadataRegistry
+     * @param ServiceRegistryInterface $formBuilderRegistry
      */
-    public function __construct(MetadataInterface $metadata, DefaultFormBuilderInterface $defaultFormBuilder)
+    public function __construct(RegistryInterface $metadataRegistry, ServiceRegistryInterface $formBuilderRegistry)
     {
-        $this->metadata = $metadata;
-        $this->defaultFormBuilder = $defaultFormBuilder;
+        $this->metadataRegistry = $metadataRegistry;
+        $this->formBuilderRegistry = $formBuilderRegistry;
     }
 
     /**
@@ -46,14 +46,17 @@ class DefaultResourceType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $this->defaultFormBuilder->build($this->metadata, $builder, $options);
+        $metadata = $this->metadataRegistry->getByClass($options['data_class']);
+        $formBuilder = $this->formBuilderRegistry->get($metadata->getDriver());
+
+        $formBuilder->build($metadata, $builder, $options);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
-        return sprintf('%s_%s', $this->metadata->getApplicationName(), $this->metadata->getName());
+        return 'sylius_resource';
     }
 }

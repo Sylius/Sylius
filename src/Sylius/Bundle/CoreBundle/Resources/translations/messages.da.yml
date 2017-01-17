@@ -3,11 +3,6 @@
 
 sylius:
     form:
-        action:
-            add_product_configuration:
-                price: Enhedspris
-                quantity: Mængde
-                variant: Variant
         block:
             body: Krop
             id: ID
@@ -19,17 +14,20 @@ sylius:
                 different_billing_address: Brug anden faktureringsadresse?
             payment_method: Betalingsmåde
             shipping_method: Fragtmetoder
+        promotion_action:
+            add_product_configuration:
+                product: Produkt
         group:
             name: Navn
             roles: Roller
         channel:
             taxonomies: Taksonomier
             locales: Landekoder
-            currency_default: Standard valuta
             shipping_methods: Fragtmetoder
             payment_methods: Betalingsmetoder
             tax_zone_default: Standard moms zone
         image:
+            code: Kode
             file: Billede
         locale:
             code: Kode
@@ -46,8 +44,8 @@ sylius:
             id: ID
             title: Titel
         product:
+            images: Billeder
             restricted_zone: Begrænset zone
-            shipping_category: Fragt kategori
             short_description: Kort beskrivelse
             variant_selection_method: Variant udvælgelsesmetode
             enabled: Aktiveret
@@ -56,15 +54,7 @@ sylius:
             code: Kode
         product_variant:
             tax_category: Momskategori
-        settings:
-            general:
-                currency: Standard valuta
-                locale: Sprog
-                meta_description: Meta beskrivelse
-                meta_keywords: Meta søgeord
-                title: Sidetitel
-            taxation:
-                default_tax_zone: Standard moms zone
+            shipping_category: Fragt kategori
         shipment_filter:
             created_at_from: Fra
             created_at_to: Til
@@ -77,7 +67,9 @@ sylius:
         shipping_method:
             zone: Zone
         taxon:
+            code: Kode
             file: Vælg billede
+            images: Billeder
         taxonomy:
             file: Vælg billede
         user:
@@ -95,7 +87,6 @@ sylius:
         variant:
             depth: Dybde
             height: Højde
-            images: Billeder
             on_hand: Nuværende lager antal
             price: Pris
             sku: SKU
@@ -105,10 +96,30 @@ sylius:
             email: Email
         product_association_type:
             name: Navn
-        promotion_rule:
-            contains_taxon:
-                count: Antal
-            taxon:
-                taxons: Taxons
-            total_of_items_from_taxon:
-                amount: Beløb
+    installer:
+        extensions:
+            apc: APC
+            ctype: Ctype
+            gd: GD
+            help: Installer og aktiver %extension% udvidelsen.
+            iconv: Iconv
+            icu: ICU
+            intl: Intl
+            json_encode: JSON
+            "off": false
+            "on": true
+            pcre: PCRE
+            pdo: BOB
+            php_xml: PHP-XML
+            session_start: Session
+            simplexml_import_dom: SimpleXML
+            token_get_all: Tokenizer
+        filesystem:
+            exists: eksisterer
+            not_exists: Findes ikke
+        settings:
+            any: enhver
+            "off": false
+            "on": true
+            timezone: tidszone
+            version: PHP version

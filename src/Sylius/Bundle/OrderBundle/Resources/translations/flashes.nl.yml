@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    cart:
+        add_item: 'Product is toegevoegd aan de winkelwagen'
+        remove_item: 'Product is verwijderd uit de winkelwagen'
+        save: 'De winkelwagen is bijgewerkt'

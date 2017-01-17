@@ -22,7 +22,7 @@ use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ThemeCollector extends DataCollector
+final class ThemeCollector extends DataCollector
 {
     /**
      * @var ThemeRepositoryInterface

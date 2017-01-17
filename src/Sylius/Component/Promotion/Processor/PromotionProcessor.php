@@ -12,76 +12,72 @@
 namespace Sylius\Component\Promotion\Processor;
 
 use Sylius\Component\Promotion\Action\PromotionApplicatorInterface;
-use Sylius\Component\Promotion\Checker\PromotionSubjectEligibilityCheckerInterface;
+use Sylius\Component\Promotion\Checker\Eligibility\PromotionEligibilityCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Promotion\Provider\PreQualifiedPromotionsProviderInterface;
 
 /**
- * Process all active promotions.
- *
- * Checks all rules and applies configured actions if rules are eligible.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class PromotionProcessor implements PromotionProcessorInterface
+final class PromotionProcessor implements PromotionProcessorInterface
 {
     /**
      * @var PreQualifiedPromotionsProviderInterface
      */
-    protected $preQualifiedPromotionsProvider;
+    private $preQualifiedPromotionsProvider;
 
     /**
-     * @var PromotionSubjectEligibilityCheckerInterface
+     * @var PromotionEligibilityCheckerInterface
      */
-    protected $checker;
+    private $promotionEligibilityChecker;
 
     /**
      * @var PromotionApplicatorInterface
      */
-    protected $applicator;
+    private $promotionApplicator;
 
     /**
      * @param PreQualifiedPromotionsProviderInterface $preQualifiedPromotionsProvider
-     * @param PromotionSubjectEligibilityCheckerInterface $checker
-     * @param PromotionApplicatorInterface $applicator
+     * @param PromotionEligibilityCheckerInterface $promotionEligibilityChecker
+     * @param PromotionApplicatorInterface $promotionApplicator
      */
     public function __construct(
         PreQualifiedPromotionsProviderInterface $preQualifiedPromotionsProvider,
-        PromotionSubjectEligibilityCheckerInterface $checker,
-        PromotionApplicatorInterface $applicator
+        PromotionEligibilityCheckerInterface $promotionEligibilityChecker,
+        PromotionApplicatorInterface $promotionApplicator
     ) {
         $this->preQualifiedPromotionsProvider = $preQualifiedPromotionsProvider;
-        $this->checker = $checker;
-        $this->applicator = $applicator;
+        $this->promotionEligibilityChecker = $promotionEligibilityChecker;
+        $this->promotionApplicator = $promotionApplicator;
     }
 
     /**
-     * @param PromotionSubjectInterface $subject
-     *
-     * @return mixed
+     * {@inheritdoc}
      */
     public function process(PromotionSubjectInterface $subject)
     {
         foreach ($subject->getPromotions() as $promotion) {
-            $this->applicator->revert($subject, $promotion);
+            $this->promotionApplicator->revert($subject, $promotion);
         }
 
         $eligiblePromotions = [];
 
         foreach ($this->preQualifiedPromotionsProvider->getPromotions($subject) as $promotion) {
-            if (!$this->checker->isEligible($subject, $promotion)) {
+            if (!$this->promotionEligibilityChecker->isEligible($subject, $promotion)) {
                 continue;
             }
 
             if ($promotion->isExclusive()) {
-                return $this->applicator->apply($subject, $promotion);
+                $this->promotionApplicator->apply($subject, $promotion);
+
+                return;
             }
 
             $eligiblePromotions[] = $promotion;
         }
 
         foreach ($eligiblePromotions as $promotion) {
-            $this->applicator->apply($subject, $promotion);
+            $this->promotionApplicator->apply($subject, $promotion);
         }
     }
 }

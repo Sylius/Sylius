@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\Exception;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\Exception\InvalidDriverException;
 
 /**
  * @author Arnaud Langlade <aRn0D.dev@gmail.com>
@@ -25,7 +26,7 @@ final class InvalidDriverExceptionSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\Exception\InvalidDriverException');
+        $this->shouldHaveType(InvalidDriverException::class);
     }
 
     function it_extends_exception()

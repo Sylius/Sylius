@@ -5,4 +5,4 @@ sylius:
     menu:
         shop:
             account:
-                dashboard: Nadzorna plošča
+                dashboard: 'Nadzorna plošča'

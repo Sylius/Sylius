@@ -12,12 +12,14 @@
 namespace Sylius\Bundle\ProductBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class ProductTranslationType extends AbstractResourceType
+final class ProductTranslationType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}
@@ -25,18 +27,21 @@ class ProductTranslationType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', 'text', [
+            ->add('name', TextType::class, [
                 'label' => 'sylius.form.product.name',
             ])
-            ->add('description', 'textarea', [
+            ->add('slug', TextType::class, [
+                'label' => 'sylius.form.product.slug',
+            ])
+            ->add('description', TextareaType::class, [
                 'required' => false,
                 'label' => 'sylius.form.product.description',
             ])
-            ->add('metaKeywords', 'text', [
+            ->add('metaKeywords', TextType::class, [
                 'required' => false,
                 'label' => 'sylius.form.product.meta_keywords',
             ])
-            ->add('metaDescription', 'text', [
+            ->add('metaDescription', TextType::class, [
                 'required' => false,
                 'label' => 'sylius.form.product.meta_description',
             ])
@@ -46,7 +51,7 @@ class ProductTranslationType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_product_translation';
     }

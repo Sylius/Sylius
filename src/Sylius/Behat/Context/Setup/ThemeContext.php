@@ -13,13 +13,11 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\ThemeBundle\Configuration\Test\TestThemeConfigurationManagerInterface;
-use Sylius\Bundle\ThemeBundle\Factory\ThemeFactoryInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
-use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Behat\Service\SharedStorageInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
@@ -37,16 +35,6 @@ final class ThemeContext implements Context
     private $themeRepository;
 
     /**
-     * @var ThemeFactoryInterface
-     */
-    private $themeFactory;
-
-    /**
-     * @var ChannelRepositoryInterface
-     */
-    private $channelRepository;
-
-    /**
      * @var ObjectManager
      */
     private $channelManager;
@@ -59,23 +47,17 @@ final class ThemeContext implements Context
     /**
      * @param SharedStorageInterface $sharedStorage
      * @param ThemeRepositoryInterface $themeRepository
-     * @param ThemeFactoryInterface $themeFactory
-     * @param ChannelRepositoryInterface $channelRepository
      * @param ObjectManager $channelManager
      * @param TestThemeConfigurationManagerInterface $testThemeConfigurationManager
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         ThemeRepositoryInterface $themeRepository,
-        ThemeFactoryInterface $themeFactory,
-        ChannelRepositoryInterface $channelRepository,
         ObjectManager $channelManager,
         TestThemeConfigurationManagerInterface $testThemeConfigurationManager
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->themeRepository = $themeRepository;
-        $this->themeFactory = $themeFactory;
-        $this->channelRepository = $channelRepository;
         $this->channelManager = $channelManager;
         $this->testThemeConfigurationManager = $testThemeConfigurationManager;
     }

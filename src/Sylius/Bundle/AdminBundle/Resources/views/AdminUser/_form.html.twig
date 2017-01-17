@@ -1,0 +1,29 @@
+<div class="ui two column stackable grid">
+    {{ form_errors(form) }}
+    <div class="column">
+        <div class="ui segment">
+            <h4 class="ui dividing header">{{ 'sylius.ui.general_info'|trans }}</h4>
+            <div class="two fields">
+                {{ form_row(form.username) }}
+                {{ form_row(form.email) }}
+            </div>
+        </div>
+        <div class="ui segment">
+            {{ form_row(form.plainPassword) }}
+            {{ form_row(form.enabled) }}
+        </div>
+    </div>
+    <div class="column">
+        <div class="ui segment">
+            <h4 class="ui dividing header">{{ 'sylius.ui.additional_information'|trans }}</h4>
+            <div class="two fields">
+                {{ form_row(form.firstName) }}
+                {{ form_row(form.lastName) }}
+            </div>
+        </div>
+        <div class="ui segment">
+            <h4 class="ui dividing header">{{ 'sylius.ui.preferences'|trans }}</h4>
+            {{ form_row(form.localeCode) }}
+        </div>
+    </div>
+</div>

@@ -5,8 +5,7 @@ Feature: Browsing products
     I want to be able to browse products
 
     Background:
-        Given the store is available in "English (United States)"
-        And the store has "Dice Brewing" and "Eclipse" products
+        Given the store has "Dice Brewing" and "Eclipse" products
         And I am logged in as an administrator
 
     @ui

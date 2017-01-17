@@ -20,8 +20,6 @@ use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @mixin RequestConfiguration
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Arnaud Langade <arn0d.dev@gmail.com>
  */
@@ -34,7 +32,7 @@ final class RequestConfigurationSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration');
+        $this->shouldHaveType(RequestConfiguration::class);
     }
 
     function it_has_request(Request $request)
@@ -91,18 +89,36 @@ final class RequestConfigurationSpec extends ObjectBehavior
         $this->getTemplate('foo.html')->shouldReturn('AppBundle:Product:show.html.twig');
     }
 
-    function it_generates_form_type(MetadataInterface $metadata, Parameters $parameters)
+    function it_gets_form_type_and_its_options(MetadataInterface $metadata, Parameters $parameters)
     {
+        $parameters->get('form')->willReturn(['type' => 'sylius_custom_resource']);
+        $this->getFormType()->shouldReturn('sylius_custom_resource');
+        $this->getFormOptions()->shouldReturn([]);
+
+        $parameters->get('form')->willReturn('sylius_custom_resource');
+        $this->getFormType()->shouldReturn('sylius_custom_resource');
+        $this->getFormOptions()->shouldReturn([]);
+
+        $parameters->get('form')->willReturn(['type' => 'sylius_custom_resource', 'options' => ['key' => 'value']]);
+        $this->getFormType()->shouldReturn('sylius_custom_resource');
+        $this->getFormOptions()->shouldReturn(['key' => 'value']);
+
+        $metadata->getClass('form')->willReturn('\Fully\Qualified\ClassName');
+        $parameters->get('form')->willReturn([]);
+        $this->getFormType()->shouldReturn('\Fully\Qualified\ClassName');
+        $this->getFormOptions()->shouldReturn([]);
+
+        $metadata->getClass('form')->willReturn('\Fully\Qualified\ClassName');
+        $parameters->get('form')->willReturn(['options' => ['key' => 'value']]);
+        $this->getFormType()->shouldReturn('\Fully\Qualified\ClassName');
+        $this->getFormOptions()->shouldReturn(['key' => 'value']);
+
+        $metadata->getClass('form')->willReturn(['default' => 'sylius_custom_resource', 'choice' => 'sylius_resource_choice']);
         $metadata->getApplicationName()->willReturn('sylius');
-        $metadata->getName()->willReturn('product');
-
-        $parameters->get('form', 'sylius_product')->willReturn('sylius_product');
-        $this->getFormType()->shouldReturn('sylius_product');
-        $this->getFormOptions()->shouldReturn([]);
-
-        $parameters->get('form', 'sylius_product')->willReturn('sylius_product_pricing');
-        $this->getFormType()->shouldReturn('sylius_product_pricing');
-        $this->getFormOptions()->shouldReturn([]);
+        $metadata->getName()->willReturn('resource');
+        $parameters->get('form')->willReturn(['options' => ['key' => 'value']]);
+        $this->getFormType()->shouldReturn('sylius_resource');
+        $this->getFormOptions()->shouldReturn(['key' => 'value']);
     }
 
     function it_generates_form_type_with_array_configuration(MetadataInterface $metadata, Parameters $parameters)
@@ -110,13 +126,9 @@ final class RequestConfigurationSpec extends ObjectBehavior
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
 
-        $parameters->get('form', 'sylius_product')->willReturn(['type'=> 'sylius_product', 'options' => ['validation_groups' => ['sylius']]]);
+        $parameters->get('form')->willReturn(['type'=> 'sylius_product', 'options' => ['validation_groups' => ['sylius']]]);
         $this->getFormType()->shouldReturn('sylius_product');
         $this->getFormOptions()->shouldReturn(['validation_groups' => ['sylius']]);
-
-        $parameters->get('form', 'sylius_product')->willReturn(['type'=> 'sylius_product_pricing', 'options' => ['validation_groups' => ['sylius', 'custom_group']]]);
-        $this->getFormType()->shouldReturn('sylius_product_pricing');
-        $this->getFormOptions()->shouldReturn(['validation_groups' => ['sylius', 'custom_group']]);
     }
 
     function it_generates_route_names(MetadataInterface $metadata, Parameters $parameters)
@@ -520,8 +532,10 @@ final class RequestConfigurationSpec extends ObjectBehavior
         $this->hasStateMachine()->shouldReturn(false);
 
         $parameters->has('state_machine')->willReturn(true);
-        $parameters->get('state_machine[graph]', null, true)->willReturn('sylius_product_review_state');
-        $parameters->get('state_machine[transition]', null, true)->willReturn('approve');
+        $parameters->get('state_machine')->willReturn([
+            'graph' => 'sylius_product_review_state',
+            'transition' => 'approve',
+        ]);
 
         $this->hasStateMachine()->shouldReturn(true);
         $this->getStateMachineGraph()->shouldReturn('sylius_product_review_state');

@@ -1,0 +1,11 @@
+{% if taxonId %}
+    {% for productTaxon in product.productTaxons%}
+        {% if taxonId == productTaxon.taxon.id %}
+            <div style="width: 100%; text-align: center;">
+                <div class="ui input position" style="width: 50px;">
+                    <input type='text' value="{{ productTaxon.position }}" data-id="{{ productTaxon.id }}" class="sylius-product-taxon-position" style="text-align: center;" />
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endif %}

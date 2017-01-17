@@ -24,11 +24,9 @@ interface SelectShippingPageInterface extends SymfonyPageInterface
     public function selectShippingMethod($shippingMethod);
 
     /**
-     * @param string $shippingMethod
-     *
-     * @return bool
+     * @return string[]
      */
-    public function hasShippingMethod($shippingMethod);
+    public function getShippingMethods();
 
     /**
      * @return bool
@@ -38,7 +36,7 @@ interface SelectShippingPageInterface extends SymfonyPageInterface
     /**
      * @param string $shippingMethodName
      * @param string $fee
-     * 
+     *
      * @return bool
      */
     public function hasShippingMethodFee($shippingMethodName, $fee);
@@ -55,4 +53,31 @@ interface SelectShippingPageInterface extends SymfonyPageInterface
     public function changeAddress();
 
     public function changeAddressByStepLabel();
+
+    /**
+     * @return mixed string
+     */
+    public function getPurchaserEmail();
+
+    /**
+     * @return string
+     */
+    public function getValidationMessageForShipment();
+
+    /**
+     * @return bool
+     */
+    public function hasNoAvailableShippingMethodsWarning();
+
+    /**
+     * @return bool
+     */
+    public function isNextStepButtonUnavailable();
+
+    /**
+     * @param string $shippingMethodName
+     *
+     * @return bool
+     */
+    public function hasShippingMethod($shippingMethodName);
 }

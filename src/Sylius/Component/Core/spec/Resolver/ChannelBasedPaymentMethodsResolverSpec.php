@@ -17,7 +17,6 @@ use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
 use Sylius\Component\Core\Resolver\ChannelBasedPaymentMethodsResolver;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Model\PaymentInterface as BasePaymentInterface;
 use Sylius\Component\Payment\Resolver\PaymentMethodsResolverInterface;
@@ -37,11 +36,11 @@ final class ChannelBasedPaymentMethodsResolverSpec extends ObjectBehavior
         $this->shouldHaveType(ChannelBasedPaymentMethodsResolver::class);
     }
 
-    function it_implements_payment_methods_resolver_interface()
+    function it_implements_a_payment_methods_resolver_interface()
     {
         $this->shouldImplement(PaymentMethodsResolverInterface::class);
     }
-    
+
     function it_returns_payment_methods_matched_for_order_channel(
         PaymentInterface $payment,
         OrderInterface $order,
@@ -57,12 +56,12 @@ final class ChannelBasedPaymentMethodsResolverSpec extends ObjectBehavior
             ->findEnabledForChannel($channel)
             ->willReturn([$firstPaymentMethod, $secondPaymentMethod])
         ;
-        
+
         $this->getSupportedMethods($payment)->shouldReturn([$firstPaymentMethod, $secondPaymentMethod]);
-        
+
     }
 
-    function it_returns_empty_collection_if_there_is_no_enabled_payment_methods_for_order_channel(
+    function it_returns_an_empty_collection_if_there_is_no_enabled_payment_methods_for_order_channel(
         PaymentInterface $payment,
         OrderInterface $order,
         ChannelInterface $channel,
@@ -79,7 +78,7 @@ final class ChannelBasedPaymentMethodsResolverSpec extends ObjectBehavior
         $this->getSupportedMethods($payment)->shouldReturn([]);
 
     }
-    
+
     function it_supports_shipments_with_order_and_its_shipping_address_defined(
         PaymentInterface $payment,
         OrderInterface $order,
@@ -87,14 +86,14 @@ final class ChannelBasedPaymentMethodsResolverSpec extends ObjectBehavior
     ) {
         $payment->getOrder()->willReturn($order);
         $order->getChannel()->willReturn($channel);
-        
+
         $this->supports($payment)->shouldReturn(true);
     }
 
     function it_does_not_support_payments_for_order_with_not_assigned_channel(
         PaymentInterface $payment,
         OrderInterface $order
-        
+
     ) {
         $payment->getOrder()->willReturn($order);
         $order->getChannel()->willReturn(null);

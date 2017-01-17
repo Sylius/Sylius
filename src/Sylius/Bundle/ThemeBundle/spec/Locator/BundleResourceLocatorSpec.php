@@ -21,8 +21,6 @@ use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
- * @mixin BundleResourceLocator
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class BundleResourceLocatorSpec extends ObjectBehavior
@@ -34,7 +32,7 @@ final class BundleResourceLocatorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Locator\BundleResourceLocator');
+        $this->shouldHaveType(BundleResourceLocator::class);
     }
 
     function it_implements_resource_locator_interface()

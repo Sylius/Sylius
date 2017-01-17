@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="sylius.doctrine.odm.mongodb.unitOfWork" class="Doctrine\ODM\MongoDB\UnitOfWork" public="false">
+            <factory service="doctrine.odm.mongodb.document_manager" method="getUnitOfWork" />
+        </service>
+
+        <service id="sylius.manager.taxon" alias="doctrine.odm.mongodb.document_manager" />
+        <service id="sylius.doctrine.odm.mongodb.metadata.taxon" class="Doctrine\ODM\MongoDB\Mapping\ClassMetadata" public="false">
+            <argument>%sylius.model.taxon.class%</argument>
+            <factory service="sylius.manager.taxon" method="getClassMetadata" />
+        </service>
+
+        <service id="sylius.repository.taxon" class="Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB\DocumentRepository">
+            <argument type="service" id="sylius.manager.taxon" />
+            <argument type="service" id="sylius.doctrine.odm.mongodb.unitOfWork" />
+            <argument type="service" id="sylius.doctrine.odm.mongodb.metadata.taxon" />
+        </service>
+    </services>
+</container>

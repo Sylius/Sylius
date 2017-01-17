@@ -1,0 +1,13 @@
+sylius_admin_ajax_generate_product_slug:
+    path: /generate-slug/
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product_slug:generateAction
+
+sylius_admin_ajax_product_index:
+    path: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product:indexAction
+        _sylius:
+            grid: sylius_admin_product

@@ -5,34 +5,36 @@ env:
         - SYLIUS_CACHE_DIR=$HOME/.sylius-cache
         - SYLIUS_BUILD_DIR=etc/build
 
-sudo: false
-
 matrix:
     include:
         -
-            php: 7.0
+            sudo: required
+            php: 7.1
             env: SYLIUS_SUITE="application"
             services:
                 - memcached
         -
-            php: 7.0
+            sudo: false
+            php: 7.1
             env: SYLIUS_SUITE="docs packages"
             addons:
                 apt:
                     packages:
                         - parallel
         -
+            sudo: required
             php: 5.6
             env: SYLIUS_SUITE="application"
             services:
                 - memcached
-        -
-            php: 5.6
-            env: SYLIUS_SUITE="packages"
-            addons:
-                apt:
-                    packages:
-                        - parallel
+#        -
+#            sudo: false
+#            php: 5.6
+#            env: SYLIUS_SUITE="packages"
+#            addons:
+#                apt:
+#                    packages:
+#                        - parallel
 
 cache:
     directories:
@@ -66,3 +68,6 @@ after_failure:
 
 after_script:
     - etc/travis/run-suite after_script "${SYLIUS_SUITE}"
+
+notifications:
+    email: false

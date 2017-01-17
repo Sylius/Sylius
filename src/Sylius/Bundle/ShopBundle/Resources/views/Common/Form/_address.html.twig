@@ -4,12 +4,21 @@
 </div>
 {{ form_row(form.company) }}
 {{ form_row(form.street) }}
-{{ form_row(form.countryCode) }}
-<div class="province-container field" data-url="{{ path('sylius_shop_partial_provinces') }}">
+
+{% include '@SyliusShop/Common/Form/_countryCode.html.twig' with {'form': form.countryCode} %}
+
+<div class="province-container field" data-url="{{ path('sylius_shop_ajax_render_province_form') }}">
     {% if form.provinceCode is defined %}
         {{ form_row(form.provinceCode, {'attr': {'class': 'ui dropdown'}}) }}
+    {% elseif form.provinceName is defined %}
+        {{ form_row(form.provinceName) }}
     {% endif %}
 </div>
+
+{% if form.provinceCode is defined %}
+    {{ form_errors(form) }}
+{% endif %}
+
 <div class="two fields">
     {{ form_row(form.city) }}
     {{ form_row(form.postcode) }}

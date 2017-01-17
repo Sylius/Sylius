@@ -4,7 +4,7 @@
 default:
     suites:
         ui_managing_inventory:
-            contexts_as_services:
+            contexts_services:
                 - sylius.behat.context.hook.doctrine_orm
 
                 - sylius.behat.context.setup.admin_security
@@ -17,7 +17,7 @@ default:
                 - sylius.behat.context.setup.shipping
                 - sylius.behat.context.setup.user
 
-                - sylius.behat.context.transform.addressing
+                - sylius.behat.context.transform.address
                 - sylius.behat.context.transform.customer
                 - sylius.behat.context.transform.lexical
                 - sylius.behat.context.transform.order
@@ -27,7 +27,9 @@ default:
                 - sylius.behat.context.transform.shared_storage
                 - sylius.behat.context.transform.shipping_method
 
+                - sylius.behat.context.ui.admin.managing_inventory
                 - sylius.behat.context.ui.admin.managing_product_variants
+                - sylius.behat.context.ui.admin.notification
 
             filters:
                 tags: "@managing_inventory && @ui"

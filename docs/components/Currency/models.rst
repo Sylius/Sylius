@@ -15,10 +15,6 @@ Every currency is represented by a **Currency** model which by default has the f
 +--------------+-------------------------------------------+
 | code         | Currency's code                           |
 +--------------+-------------------------------------------+
-| exchangeRate | Currency's Exchange rate                  |
-+--------------+-------------------------------------------+
-| enabled      | Indicates whether the currency is enabled |
-+--------------+-------------------------------------------+
 | createdAt    | Date of creation                          |
 +--------------+-------------------------------------------+
 | updatedAt    | Date of last update                       |

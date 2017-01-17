@@ -15,6 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
+use Sylius\Component\Payment\Resolver\PaymentMethodsResolver;
 use Sylius\Component\Payment\Resolver\PaymentMethodsResolverInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -30,7 +31,7 @@ final class PaymentMethodsResolverSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Payment\Resolver\PaymentMethodsResolver');
+        $this->shouldHaveType(PaymentMethodsResolver::class);
     }
 
     function it_implements_methods_resolver_interface()

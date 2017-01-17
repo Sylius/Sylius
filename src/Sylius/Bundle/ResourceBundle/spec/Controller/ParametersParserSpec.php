@@ -12,8 +12,10 @@
 namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ResourceBundle\ExpressionLanguage\ExpressionLanguage;
+use Sylius\Bundle\ResourceBundle\Controller\ParametersParser;
 use Sylius\Bundle\ResourceBundle\Controller\ParametersParserInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -23,9 +25,9 @@ use Symfony\Component\HttpFoundation\Request;
  */
 final class ParametersParserSpec extends ObjectBehavior
 {
-    function let(ExpressionLanguage $expression)
+    function let(ContainerInterface $container, ExpressionLanguage $expression)
     {
-        $this->beConstructedWith($expression);
+        $this->beConstructedWith($container, $expression);
     }
 
     function it_implements_parameters_parser_interface()
@@ -33,7 +35,7 @@ final class ParametersParserSpec extends ObjectBehavior
         $this->shouldImplement(ParametersParserInterface::class);
     }
 
-    function it_should_parse_parameters(Request $request, ExpressionLanguage $expression)
+    function it_should_parse_parameters(Request $request)
     {
         $request->get('criteria')->willReturn('New criteria');
         $request->get('sorting')->willReturn('New sorting');
@@ -75,12 +77,15 @@ final class ParametersParserSpec extends ObjectBehavior
         );
     }
 
-    function it_should_parse_expression_with_parameters(Request $request, ExpressionLanguage $expression)
-    {
+    function it_should_parse_expression_with_parameters(
+        ContainerInterface $container,
+        ExpressionLanguage $expression,
+        Request $request
+    ) {
         $request->get('foo')->willReturn('bar');
         $request->get('baz')->willReturn(1);
 
-        $expression->evaluate('service("demo_service")')->willReturn('demo_object');
+        $expression->evaluate('service("demo_service")', ['container' => $container])->willReturn('demo_object');
 
         $this->parseRequestValues(
             [
@@ -103,7 +108,10 @@ final class ParametersParserSpec extends ObjectBehavior
             ]
         );
 
-        $expression->evaluate('service("demo_service")->getWith("bar")')->willReturn('demo_object->getWith("bar")');
+        $expression
+            ->evaluate('service("demo_service")->getWith("bar")', ['container' => $container])
+            ->willReturn('demo_object->getWith("bar")')
+    ;
 
         $this->parseRequestValues(
             [
@@ -126,7 +134,10 @@ final class ParametersParserSpec extends ObjectBehavior
             ]
         );
 
-        $expression->evaluate('service("demo_service")->getWith("bar", 1)')->willReturn('demo_object->getWith("bar", 1)');
+        $expression
+            ->evaluate('service("demo_service")->getWith("bar", 1)', ['container' => $container])
+            ->willReturn('demo_object->getWith("bar", 1)')
+        ;
 
         $this->parseRequestValues(
             [
@@ -149,7 +160,10 @@ final class ParametersParserSpec extends ObjectBehavior
             ]
         );
 
-        $expression->evaluate('service("demo_service")->getWith("bar")->andGet(1)')->willReturn('demo_object->getWith("bar")->andGet(1)');
+        $expression
+            ->evaluate('service("demo_service")->getWith("bar")->andGet(1)', ['container' => $container])
+            ->willReturn('demo_object->getWith("bar")->andGet(1)')
+        ;
 
         $this->parseRequestValues(
             [

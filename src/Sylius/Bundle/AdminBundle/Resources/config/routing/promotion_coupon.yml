@@ -4,7 +4,7 @@ sylius_admin_promotion_coupon_index:
     defaults:
         _controller: sylius.controller.promotion_coupon:indexAction
         _sylius:
-            template: SyliusAdminBundle:Crud:index.html.twig
+            template: "@SyliusAdmin/Crud/index.html.twig"
             grid: sylius_admin_promotion_coupon
             section: admin
             permission: true
@@ -13,7 +13,7 @@ sylius_admin_promotion_coupon_index:
                     parameters:
                         promotionId: $promotionId
                 templates:
-                    breadcrumb: SyliusAdminBundle:PromotionCoupon/Breadcrumb:_index.html.twig
+                    breadcrumb: "@SyliusAdmin/PromotionCoupon/Index/_breadcrumb.html.twig"
                 icon: tags
                 subheader: sylius.ui.manage_discounts_and_promotional_campaigns
 
@@ -27,7 +27,7 @@ sylius_admin_promotion_coupon_create:
                 method: createForPromotion
                 arguments:
                   - expr:service('sylius.repository.promotion').find($promotionId)
-            template: SyliusAdminBundle:Crud:create.html.twig
+            template: "@SyliusAdmin/Crud/create.html.twig"
             grid: sylius_admin_promotion_coupon
             section: admin
             redirect:
@@ -39,8 +39,8 @@ sylius_admin_promotion_coupon_create:
                     parameters:
                         promotionId: $promotionId
                 templates:
-                    form: SyliusAdminBundle:PromotionCoupon:_form.html.twig
-                    breadcrumb: SyliusAdminBundle:PromotionCoupon/Breadcrumb:_create.html.twig
+                    form: "@SyliusAdmin/PromotionCoupon/_form.html.twig"
+                    breadcrumb: "@SyliusAdmin/PromotionCoupon/Create/_breadcrumb.html.twig"
                 subheader: sylius.ui.manage_discounts_and_promotional_campaigns
 
 sylius_admin_promotion_coupon_update:
@@ -49,7 +49,7 @@ sylius_admin_promotion_coupon_update:
     defaults:
         _controller: sylius.controller.promotion_coupon:updateAction
         _sylius:
-            template: SyliusAdminBundle:Crud:update.html.twig
+            template: "@SyliusAdmin/Crud/update.html.twig"
             grid: sylius_admin_promotion_coupon
             section: admin
             redirect:
@@ -62,8 +62,8 @@ sylius_admin_promotion_coupon_update:
                         id: $id
                         promotionId: $promotionId
                 templates:
-                    form: SyliusAdminBundle:PromotionCoupon:_form.html.twig
-                    breadcrumb: SyliusAdminBundle:PromotionCoupon/Breadcrumb:_update.html.twig
+                    form: "@SyliusAdmin/PromotionCoupon/_form.html.twig"
+                    breadcrumb: "@SyliusAdmin/PromotionCoupon/Update/_breadcrumb.html.twig"
                 subheader: sylius.ui.manage_discounts_and_promotional_campaigns
 
 sylius_admin_promotion_coupon_generate:
@@ -72,7 +72,7 @@ sylius_admin_promotion_coupon_generate:
     defaults:
         _controller: sylius.controller.promotion_coupon:generateAction
         _sylius:
-            template: SyliusAdminBundle:PromotionCoupon:generate.html.twig
+            template: "@SyliusAdmin/PromotionCoupon/generate.html.twig"
             section: admin
             redirect:
                 route: sylius_admin_promotion_coupon_index

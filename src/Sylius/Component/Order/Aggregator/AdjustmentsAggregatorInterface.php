@@ -22,6 +22,8 @@ interface AdjustmentsAggregatorInterface
      * @param AdjustmentInterface[] $adjustments
      *
      * @return array
+     *
+     * @throws \InvalidArgumentException
      */
     public function aggregate(array $adjustments);
 }

@@ -4,6 +4,6 @@
 sylius:
     form:
         review:
-            title: Títol
             status:
                 new: Nou
+            title: Títol

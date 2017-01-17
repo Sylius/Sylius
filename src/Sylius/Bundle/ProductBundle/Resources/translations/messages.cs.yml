@@ -10,8 +10,17 @@ sylius:
             options: Možnosti
             meta_keywords: Meta klíčová slova
             meta_description: Meta popis
-            taxons: Taxony
         product_variant:
             available_on: Dostupný od
+            name: Jméno
         association_type:
             name: Jméno
+            translations: Překlady
+        variant:
+            name: Jméno
+        option:
+            name: Jméno
+            values: Možné hodnoty
+        option_value:
+            add_value: Přidání hodnoty
+            value: Hodnota

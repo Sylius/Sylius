@@ -3,29 +3,6 @@
 
 sylius:
     form:
-        action:
-            fixed_discount_configuration:
-                amount: Ποσό
-            percentage_discount_configuration:
-                percentage: Ποσοστό
-            shipping_discount_configuration:
-                percentage: Ποσοστό
-            type: Τύπος
-        rule:
-            contains_product_configuration:
-                variants: Προϊόντα
-            cart_quantity_configuration:
-                count: Πλήθος
-            item_total_configuration:
-                amount: Ποσό
-            shipping_country_configuration:
-                country: Χώρα
-            type: Τύπος
-        coupon:
-            usage_limit: Όριο χρήσης
-        coupon_generate_instruction:
-            amount: Ποσό
-            usage_limit: Όριο χρήσης
         promotion:
             actions: Ενέργειες
             description: Περιγραφή
@@ -34,3 +11,15 @@ sylius:
             rules: Κανόνες
             starts_at: Αρχίζει με
             usage_limit: Όριο χρήσης
+        promotion_action:
+            type: Τύπος
+        promotion_coupon:
+            usage_limit: Όριο χρήσης
+        promotion_coupon_generator_instruction:
+            usage_limit: Όριο χρήσης
+        promotion_rule:
+            cart_quantity_configuration:
+                count: Πλήθος
+            shipping_country_configuration:
+                country: Χώρα
+            type: Τύπος

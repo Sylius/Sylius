@@ -1,0 +1,14 @@
+sylius_grid:
+    grids:
+        sylius_admin_customer_order:
+            extends: sylius_admin_order
+            driver:
+                options:
+                    repository:
+                        method: createByCustomerIdQueryBuilder
+                        arguments:
+                            customerId: $id
+            filters:
+                customer:
+                    type: string
+                    enabled: false

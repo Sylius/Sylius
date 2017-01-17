@@ -12,14 +12,12 @@
 namespace Sylius\Component\Addressing\Matcher;
 
 use Sylius\Component\Addressing\Model\AddressInterface;
+use Sylius\Component\Addressing\Model\Scope;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
- * This implementation can match addresses against zones by country and province.
- * It also handles sub-zones.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  * @author Jan Góralski <jan.goralski@lakion.com>
@@ -32,8 +30,6 @@ class ZoneMatcher implements ZoneMatcherInterface
     protected $zoneRepository;
 
     /**
-     * Zone matching priorities.
-     *
      * @var array
      */
     protected $priorities = [
@@ -144,7 +140,7 @@ class ZoneMatcher implements ZoneMatcherInterface
             return $this->zoneRepository->findAll();
         }
 
-        return $this->zoneRepository->findBy(['scope' => $scope]);
+        return $this->zoneRepository->findBy(['scope' => [$scope, Scope::ALL]]);
     }
 
     /**

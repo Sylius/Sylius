@@ -1,0 +1,8 @@
+sylius_admin_partial_channel_index:
+    path: /
+    defaults:
+        _controller: sylius.controller.channel:indexAction
+        _sylius:
+            repository:
+                method: findAll
+            template: $template

@@ -16,6 +16,7 @@ use Behat\Mink\Session;
 use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Symfony\Component\Routing\RouterInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -30,26 +31,26 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * @var string
      */
-    private $resourceName;
+    private $routeName;
 
     /**
      * @param Session $session
      * @param array $parameters
      * @param RouterInterface $router
      * @param TableAccessorInterface $tableAccessor
-     * @param string $resourceName
+     * @param string $routeName
      */
     public function __construct(
         Session $session,
         array $parameters,
         RouterInterface $router,
         TableAccessorInterface $tableAccessor,
-        $resourceName
+        $routeName
     ) {
         parent::__construct($session, $parameters, $router);
 
         $this->tableAccessor = $tableAccessor;
-        $this->resourceName = strtolower($resourceName);
+        $this->routeName = $routeName;
     }
 
     /**
@@ -66,6 +67,25 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         } catch (ElementNotFoundException $exception) {
             return false;
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getColumnFields($columnName)
+    {
+        return $this->tableAccessor->getIndexedColumn($this->getElement('table'), $columnName);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function sortBy($fieldName)
+    {
+        $sortableHeaders = $this->tableAccessor->getSortableHeaders($this->getElement('table'));
+        Assert::keyExists($sortableHeaders, $fieldName, sprintf('Column "%s" is not sortable.', $fieldName));
+
+        $sortableHeaders[$fieldName]->find('css', 'a')->click();
     }
 
     /**
@@ -109,9 +129,14 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         $table = $this->getElement('table');
 
         $deletedRow = $tableAccessor->getRowWithFields($table, $parameters);
-        $actionButtons = $tableAccessor->getFieldFromRow($table, $deletedRow, 'Actions');
+        $actionButtons = $tableAccessor->getFieldFromRow($table, $deletedRow, 'actions');
 
         $actionButtons->pressButton('Delete');
+    }
+
+    public function filter()
+    {
+        $this->getElement('filter')->press();
     }
 
     /**
@@ -119,15 +144,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
      */
     public function getRouteName()
     {
-        return sprintf('sylius_admin_%s_index', $this->resourceName);
-    }
-
-    /**
-     * @return string
-     */
-    protected function getResourceName()
-    {
-        return $this->resourceName;
+        return $this->routeName;
     }
 
     /**
@@ -144,6 +161,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
+            'filter' => 'button:contains("Filter")',
             'table' => '.table',
         ]);
     }

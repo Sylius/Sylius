@@ -16,8 +16,6 @@ use Prophecy\Argument;
 use Sylius\Bundle\FixturesBundle\Fixture\FixtureNotFoundException;
 
 /**
- * @mixin FixtureNotFoundException
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class FixtureNotFoundExceptionSpec extends ObjectBehavior

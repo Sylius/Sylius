@@ -18,16 +18,14 @@ use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Variation\Resolver\VariantResolverInterface;
+use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 
 /**
- * @mixin CartItemFactory
- *
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 final class CartItemFactorySpec extends ObjectBehavior
 {
-    function let(FactoryInterface $decoratedFactory, VariantResolverInterface $variantResolver)
+    function let(FactoryInterface $decoratedFactory, ProductVariantResolverInterface $variantResolver)
     {
         $this->beConstructedWith($decoratedFactory, $variantResolver);
     }
@@ -37,7 +35,7 @@ final class CartItemFactorySpec extends ObjectBehavior
         $this->shouldHaveType(CartItemFactory::class);
     }
 
-    function it_implements_cart_item_factory_interface()
+    function it_implements_a_cart_item_factory_interface()
     {
         $this->shouldImplement(CartItemFactoryInterface::class);
     }
@@ -47,7 +45,7 @@ final class CartItemFactorySpec extends ObjectBehavior
         $this->shouldImplement(FactoryInterface::class);
     }
 
-    function it_creates_new_cart_item(FactoryInterface $decoratedFactory, OrderItemInterface $cartItem)
+    function it_creates_a_new_cart_item(FactoryInterface $decoratedFactory, OrderItemInterface $cartItem)
     {
         $decoratedFactory->createNew()->willReturn($cartItem);
 
@@ -56,7 +54,7 @@ final class CartItemFactorySpec extends ObjectBehavior
 
     function it_creates_a_cart_item_and_assigns_a_product_variant(
         FactoryInterface $decoratedFactory,
-        VariantResolverInterface $variantResolver,
+        ProductVariantResolverInterface $variantResolver,
         OrderItemInterface $cartItem,
         ProductInterface $product,
         ProductVariantInterface $productVariant

@@ -7,6 +7,5 @@ sylius:
             description: Descriere
             name: Nume
             parent: Părinte
-            permalink: Permalink
         taxonomy:
             name: Nume

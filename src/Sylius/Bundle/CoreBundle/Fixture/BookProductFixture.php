@@ -14,37 +14,26 @@ namespace Sylius\Bundle\CoreBundle\Fixture;
 use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
 use Sylius\Component\Attribute\AttributeType\IntegerAttributeType;
 use Sylius\Component\Attribute\AttributeType\TextAttributeType;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class BookProductFixture extends AbstractFixture
+class BookProductFixture extends AbstractFixture
 {
     /**
-     * @var TaxonFixture
+     * @var AbstractResourceFixture
      */
     private $taxonFixture;
 
     /**
-     * @var RepositoryInterface
-     */
-    private $taxonRepository;
-
-    /**
-     * @var ProductAttributeFixture
+     * @var AbstractResourceFixture
      */
     private $productAttributeFixture;
 
     /**
-     * @var ProductOptionFixture
-     */
-    private $productOptionFixture;
-
-    /**
-     * @var ProductFixture
+     * @var AbstractResourceFixture
      */
     private $productFixture;
 
@@ -59,23 +48,17 @@ final class BookProductFixture extends AbstractFixture
     private $optionsResolver;
 
     /**
-     * @param TaxonFixture $taxonFixture
-     * @param RepositoryInterface $taxonRepository
-     * @param ProductAttributeFixture $productAttributeFixture
-     * @param ProductOptionFixture $productOptionFixture
-     * @param ProductFixture $productFixture
+     * @param AbstractResourceFixture $taxonFixture
+     * @param AbstractResourceFixture $productAttributeFixture
+     * @param AbstractResourceFixture $productFixture
      */
     public function __construct(
-        TaxonFixture $taxonFixture,
-        RepositoryInterface $taxonRepository,
-        ProductAttributeFixture $productAttributeFixture,
-        ProductOptionFixture $productOptionFixture,
-        ProductFixture $productFixture
+        AbstractResourceFixture $taxonFixture,
+        AbstractResourceFixture $productAttributeFixture,
+        AbstractResourceFixture $productFixture
     ) {
         $this->taxonFixture = $taxonFixture;
-        $this->taxonRepository = $taxonRepository;
         $this->productAttributeFixture = $productAttributeFixture;
-        $this->productOptionFixture = $productOptionFixture;
         $this->productFixture = $productFixture;
 
         $this->faker = \Faker\Factory::create();
@@ -113,26 +96,30 @@ final class BookProductFixture extends AbstractFixture
         ]]]);
 
         $this->productAttributeFixture->load(['custom' => [
-            ['name' => 'Book author', 'code' => 'BOOK-AUTHOR', 'type' => TextAttributeType::TYPE],
-            ['name' => 'Book ISBN', 'code' => 'BOOK-ISBN', 'type' => TextAttributeType::TYPE],
-            ['name' => 'Book pages', 'code' => 'BOOK-PAGES', 'type' => IntegerAttributeType::TYPE],
+            ['name' => 'Book author', 'code' => 'book_author', 'type' => TextAttributeType::TYPE],
+            ['name' => 'Book ISBN', 'code' => 'book_isbn', 'type' => TextAttributeType::TYPE],
+            ['name' => 'Book pages', 'code' => 'book_pages', 'type' => IntegerAttributeType::TYPE],
         ]]);
 
         $products = [];
+        $productsNames = $this->getUniqueNames($options['amount']);
         for ($i = 0; $i < $options['amount']; ++$i) {
-            $name = $this->faker->name;
+            $authorName = $this->faker->name;
 
             $products[] = [
-                'name' => sprintf('Book "%s" by %s', $this->faker->word, $name),
+                'name' => sprintf('Book "%s" by %s', $productsNames[$i], $authorName),
                 'code' => $this->faker->uuid,
                 'main_taxon' => 'books',
                 'taxons' => ['books'],
                 'product_attributes' => [
-                    'BOOK-AUTHOR' => $name,
-                    'BOOK-ISBN' => $this->faker->isbn13,
-                    'BOOK-PAGES' => $this->faker->numberBetween(42, 1024),
+                    'book_author' => $authorName,
+                    'book_isbn' => $this->faker->isbn13,
+                    'book_pages' => $this->faker->numberBetween(42, 1024),
                 ],
-                'images' => [sprintf('%s/../Resources/fixtures/%s', __DIR__, 'books.jpg')],
+                'images' => [
+                    'main' => sprintf('%s/../Resources/fixtures/%s', __DIR__, 'books.jpg'),
+                    'thumbnail' => sprintf('%s/../Resources/fixtures/%s', __DIR__, 'books.jpg'),
+                ],
             ];
         }
 
@@ -148,5 +135,25 @@ final class BookProductFixture extends AbstractFixture
             ->children()
                 ->integerNode('amount')->isRequired()->min(0)->end()
         ;
+    }
+
+    /**
+     * @param int $amount
+     *
+     * @return string
+     */
+    private function getUniqueNames($amount)
+    {
+        $productsNames = [];
+
+        for ($i = 0; $i < $amount; ++$i) {
+            $name = $this->faker->word;
+            while (in_array($name, $productsNames)) {
+                $name = $this->faker->word;
+            }
+            $productsNames[] = $name;
+        }
+
+        return $productsNames;
     }
 }

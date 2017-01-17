@@ -19,22 +19,22 @@ class Reviewer implements ReviewerInterface
     /**
      * @var int
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      */
-    private $email;
+    protected $email;
 
     /**
      * @var string
      */
-    private $firstName;
+    protected $firstName;
 
     /**
      * @var string
      */
-    private $lastName;
+    protected $lastName;
 
     /**
      * @return int

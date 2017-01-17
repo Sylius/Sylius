@@ -24,7 +24,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
@@ -235,7 +234,7 @@ class ResourceController extends Controller
 
         $form = $this->resourceFormFactory->create($configuration, $newResource);
 
-        if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
             $newResource = $form->getData();
 
             $event = $this->eventDispatcher->dispatchPreEvent(ResourceActions::CREATE, $configuration, $newResource);
@@ -247,6 +246,10 @@ class ResourceController extends Controller
                 $this->flashHelper->addFlashFromEvent($configuration, $event);
 
                 return $this->redirectHandler->redirectToIndex($configuration, $newResource);
+            }
+
+            if ($configuration->hasStateMachine()) {
+                $this->stateMachine->apply($configuration, $newResource);
             }
 
             $this->repository->add($newResource);
@@ -293,7 +296,7 @@ class ResourceController extends Controller
 
         $form = $this->resourceFormFactory->create($configuration, $resource);
 
-        if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH']) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
+        if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH'], true) && $form->handleRequest($request)->isValid()) {
             $resource = $form->getData();
 
             $event = $this->eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource);
@@ -352,6 +355,10 @@ class ResourceController extends Controller
 
         $this->isGrantedOr403($configuration, ResourceActions::DELETE);
         $resource = $this->findOr404($configuration);
+
+        if ($configuration->isCsrfProtectionEnabled() && !$this->isCsrfTokenValid($resource->getId(), $request->get('_csrf_token'))) {
+            throw new HttpException(Response::HTTP_FORBIDDEN, 'Invalid csrf token.');
+        }
 
         $event = $this->eventDispatcher->dispatchPreEvent(ResourceActions::DELETE, $configuration, $resource);
 
@@ -415,105 +422,6 @@ class ResourceController extends Controller
         $this->flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource);
 
         return $this->redirectHandler->redirectToResource($configuration, $resource);
-    }
-
-    /**
-     * @param Request $request
-     *
-     * @return RedirectResponse
-     */
-    public function enableAction(Request $request)
-    {
-        return $this->toggle($request, true);
-    }
-    /**
-     * @param Request $request
-     *
-     * @return RedirectResponse
-     */
-    public function disableAction(Request $request)
-    {
-        return $this->toggle($request, false);
-    }
-
-    /**
-     * @param Request $request
-     * @param $enabled
-     *
-     * @return RedirectResponse
-     */
-    protected function toggle(Request $request, $enabled)
-    {
-        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
-
-        $this->isGrantedOr403($configuration, ResourceActions::UPDATE);
-
-        $resource = $this->findOr404($configuration);
-        $resource->setEnabled($enabled);
-
-        $this->eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource);
-        $this->manager->flush();
-        $this->eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource);
-
-        if (!$configuration->isHtmlRequest()) {
-            return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
-        }
-
-        $this->flashHelper->addSuccessFlash($configuration, $enabled ? 'enable' : 'disable', $resource);
-
-        return $this->redirectHandler->redirectToIndex($configuration, $resource);
-    }
-
-    /**
-     * @param Request $request
-     *
-     * @return Response
-     */
-    public function moveUpAction(Request $request)
-    {
-        return $this->move($request, 1);
-    }
-
-    /**
-     * @param Request $request
-     *
-     * @return Response
-     */
-    public function moveDownAction(Request $request)
-    {
-        return $this->move($request, -1);
-    }
-
-    /**
-     * @param Request $request
-     * @param int $movement
-     *
-     * @return RedirectResponse
-     */
-    protected function move(Request $request, $movement)
-    {
-        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
-        $resource = $this->findOr404($configuration);
-
-        $position = $configuration->getSortablePosition();
-        $accessor = PropertyAccess::createPropertyAccessor();
-        $accessor->setValue(
-            $resource,
-            $position,
-            $accessor->getValue($resource, $position) + $movement
-        );
-
-        $this->eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource);
-        $this->manager->flush();
-        $this->eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource);
-
-        if (!$configuration->isHtmlRequest()) {
-            return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
-        }
-
-        $this->flashHelper->addSuccessFlash($configuration, 'move', $resource);
-
-        return $this->redirectHandler->redirectToIndex($configuration, $resource);
     }
 
     /**

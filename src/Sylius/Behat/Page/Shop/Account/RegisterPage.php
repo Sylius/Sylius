@@ -13,6 +13,7 @@ namespace Sylius\Behat\Page\Shop\Account;
 
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Component\Core\Formatter\StringInflector;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -34,7 +35,11 @@ class RegisterPage extends SymfonyPage implements RegisterPageInterface
      */
     public function checkValidationMessageFor($element, $message)
     {
-        $errorLabel = $this->getElement($element)->getParent()->find('css', '.sylius-validation-error');
+        $errorLabel = $this
+            ->getElement(StringInflector::nameToCode($element))
+            ->getParent()
+            ->find('css', '.sylius-validation-error')
+        ;
 
         if (null === $errorLabel) {
             throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.sylius-validation-error');
@@ -107,12 +112,12 @@ class RegisterPage extends SymfonyPage implements RegisterPageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'first name' => '#sylius_customer_registration_firstName',
-            'last name' => '#sylius_customer_registration_lastName',
             'email' => '#sylius_customer_registration_email',
+            'first_name' => '#sylius_customer_registration_firstName',
+            'last_name' => '#sylius_customer_registration_lastName',
+            'password_verification' => '#sylius_customer_registration_user_plainPassword_second',
             'password' => '#sylius_customer_registration_user_plainPassword_first',
-            'password verification' => '#sylius_customer_registration_user_plainPassword_second',
-            'phone number' => '#sylius_customer_registration_phoneNumber',
+            'phone_number' => '#sylius_customer_registration_phoneNumber',
         ]);
     }
 }

@@ -20,32 +20,21 @@ use Symfony\Component\DependencyInjection\Reference;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SyliusShippingExtension extends AbstractResourceExtension
+final class SyliusShippingExtension extends AbstractResourceExtension
 {
     /**
      * {@inheritdoc}
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $config = $this->processConfiguration($this->getConfiguration($config, $container), $config);
+        $config = $this->processConfiguration($this->getConfiguration([], $container), $config);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        $loader->load(sprintf('driver/%s.xml', $config['driver']));
+        $loader->load(sprintf('services/integrations/%s.xml', $config['driver']));
 
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
         $this->mapFormValidationGroupsParameters($config, $container);
 
-        $configFiles = [
-            'services.xml',
-        ];
-
-        foreach ($configFiles as $configFile) {
-            $loader->load($configFile);
-        }
-
-        $shippingMethod = $container->getDefinition('sylius.form.type.shipping_method');
-        $shippingMethod->addArgument(new Reference('sylius.registry.shipping_calculator'));
-        $shippingMethod->addArgument(new Reference('sylius.registry.shipping_rule_checker'));
-        $shippingMethod->addArgument(new Reference('form.registry'));
+        $loader->load('services.xml');
     }
 }

@@ -13,8 +13,8 @@ namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Locale\Model\LocaleInterface;
-use Sylius\Component\Product\Model\OptionInterface;
-use Sylius\Component\Product\Model\OptionValueInterface;
+use Sylius\Component\Product\Model\ProductOptionInterface;
+use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
@@ -23,7 +23,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class ProductOptionExampleFactory implements ExampleFactoryInterface
+class ProductOptionExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     /**
      * @var FactoryInterface
@@ -65,29 +65,9 @@ final class ProductOptionExampleFactory implements ExampleFactoryInterface
         $this->localeRepository = $localeRepository;
 
         $this->faker = \Faker\Factory::create();
-        $this->optionsResolver =
-            (new OptionsResolver())
-                ->setDefault('name', function (Options $options) {
-                    return $this->faker->words(3, true);
-                })
-                ->setDefault('code', function (Options $options) {
-                    return StringInflector::nameToCode($options['name']);
-                })
-                ->setDefault('values', null)
-                ->setDefault('values', function (Options $options, $values) {
-                    if (is_array($values)) {
-                        return $values;
-                    }
+        $this->optionsResolver = new OptionsResolver();
 
-                    $values = [];
-                    for ($i = 1; $i <= 5; ++$i) {
-                        $values[sprintf('%s-option#%d', $options['code'], $i)] = sprintf('%s #i%d', $options['name'], $i);
-                    }
-
-                    return $values;
-                })
-                ->setAllowedTypes('values', 'array')
-        ;
+        $this->configureOptions($this->optionsResolver);
     }
 
     /**
@@ -96,8 +76,8 @@ final class ProductOptionExampleFactory implements ExampleFactoryInterface
     public function create(array $options = [])
     {
         $options = $this->optionsResolver->resolve($options);
-        
-        /** @var OptionInterface $productOption */
+
+        /** @var ProductOptionInterface $productOption */
         $productOption = $this->productOptionFactory->createNew();
         $productOption->setCode($options['code']);
 
@@ -109,7 +89,7 @@ final class ProductOptionExampleFactory implements ExampleFactoryInterface
         }
 
         foreach ($options['values'] as $code => $value) {
-            /** @var OptionValueInterface $productOptionValue */
+            /** @var ProductOptionValueInterface $productOptionValue */
             $productOptionValue = $this->productOptionValueFactory->createNew();
             $productOptionValue->setCode($code);
 
@@ -118,13 +98,41 @@ final class ProductOptionExampleFactory implements ExampleFactoryInterface
                 $productOptionValue->setFallbackLocale($localeCode);
 
                 $productOptionValue->setValue($value);
-
             }
 
             $productOption->addValue($productOptionValue);
         }
 
         return $productOption;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver
+            ->setDefault('name', function (Options $options) {
+                return $this->faker->words(3, true);
+            })
+            ->setDefault('code', function (Options $options) {
+                return StringInflector::nameToCode($options['name']);
+            })
+            ->setDefault('values', null)
+            ->setDefault('values', function (Options $options, $values) {
+                if (is_array($values)) {
+                    return $values;
+                }
+
+                $values = [];
+                for ($i = 1; $i <= 5; ++$i) {
+                    $values[sprintf('%s-option#%d', $options['code'], $i)] = sprintf('%s #i%d', $options['name'], $i);
+                }
+
+                return $values;
+            })
+            ->setAllowedTypes('values', 'array')
+        ;
     }
 
     /**

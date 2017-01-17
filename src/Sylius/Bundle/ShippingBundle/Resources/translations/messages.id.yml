@@ -6,6 +6,7 @@ sylius:
         shipping_category:
             name: Nama
         shipping_method:
+            channels: Saluran
             enabled: Diaktifkan
             name: Nama
             tax_category: Kategori Pajak

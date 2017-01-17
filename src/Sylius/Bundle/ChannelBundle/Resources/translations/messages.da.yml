@@ -4,6 +4,6 @@
 sylius:
     form:
         channel:
-            name: Navn
             description: Beskrivelse
             enabled: Aktiveret
+            name: Navn

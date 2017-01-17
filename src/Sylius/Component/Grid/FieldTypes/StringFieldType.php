@@ -18,7 +18,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class StringFieldType implements FieldTypeInterface
+final class StringFieldType implements FieldTypeInterface
 {
     /**
      * @var DataExtractorInterface
@@ -48,13 +48,5 @@ class StringFieldType implements FieldTypeInterface
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'string';
     }
 }

@@ -11,9 +11,10 @@
 
 namespace Sylius\Component\Core\Cart\Context;
 
-use Sylius\Component\Cart\Context\CartContextInterface;
-use Sylius\Component\Cart\Context\CartNotFoundException;
-use Sylius\Component\Cart\Model\CartInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Order\Context\CartContextInterface;
+use Sylius\Component\Order\Context\CartNotFoundException;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Core\Context\ShopperContextInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -36,7 +37,7 @@ final class ShopBasedCartContext implements CartContextInterface
     private $shopperContext;
 
     /**
-     * @var CartInterface|null
+     * @var OrderInterface|null
      */
     private $cart;
 
@@ -63,8 +64,11 @@ final class ShopBasedCartContext implements CartContextInterface
         $cart = $this->cartContext->getCart();
 
         try {
-            $cart->setChannel($this->shopperContext->getChannel());
-            $cart->setCurrencyCode($this->shopperContext->getCurrencyCode());
+            /** @var ChannelInterface $channel */
+            $channel = $this->shopperContext->getChannel();
+
+            $cart->setChannel($channel);
+            $cart->setCurrencyCode($channel->getBaseCurrency()->getCode());
             $cart->setLocaleCode($this->shopperContext->getLocaleCode());
         } catch (ChannelNotFoundException $exception) {
             throw new CartNotFoundException('Sylius was not able to prepare the cart.', $exception);
@@ -74,10 +78,28 @@ final class ShopBasedCartContext implements CartContextInterface
             throw new CartNotFoundException('Sylius was not able to prepare the cart.', $exception);
         }
 
-        $cart->setCustomer($this->shopperContext->getCustomer());
+        /** @var CustomerInterface $customer */
+        $customer = $this->shopperContext->getCustomer();
+        if (null !== $customer) {
+            $this->setCustomerAndAddressOnCart($cart, $customer);
+        }
 
         $this->cart = $cart;
 
         return $cart;
+    }
+
+    /**
+     * @param OrderInterface $cart
+     * @param CustomerInterface $customer
+     */
+    private function setCustomerAndAddressOnCart(OrderInterface $cart, CustomerInterface $customer)
+    {
+        $cart->setCustomer($customer);
+
+        $defaultAddress = $customer->getDefaultAddress();
+        if (null !== $defaultAddress) {
+            $cart->setShippingAddress(clone $defaultAddress);
+        }
     }
 }

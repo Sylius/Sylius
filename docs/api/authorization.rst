@@ -18,13 +18,13 @@ Sylius has configured OAuth2 authorization. The authorization process is standar
 Create OAuth client
 ~~~~~~~~~~~~~~~~~~~
 
-Use sylius command:
+Use Sylius command:
 
 .. code-block:: bash
 
-    php app/console sylius:oauth-server:create-client
-        --grant-type="password"
-        --grant-type="refresh_token"
+    php bin/console sylius:oauth-server:create-client \
+        --grant-type="password" \
+        --grant-type="refresh_token" \
         --grant-type="token"
 
 You will receive client public id and client secret
@@ -40,7 +40,7 @@ Example Result
 
     If you use Guzzle check out `OAuth2 plugin`__ and use Password Credentials.
 
-__ https://github.com/commerceguys/guzzle-oauth2-plugin
+__ https://github.com/Sainsburys/guzzle-oauth2-plugin
 
 Obtain access token
 ~~~~~~~~~~~~~~~~~~~
@@ -77,11 +77,11 @@ Example
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/oauth/v2/token
-        -d "client_id"=demo_client
-        -d "client_secret"=secret_demo_client
-        -d "grant_type"=password
-        -d "username"=api@example.com
+    curl http://sylius.dev/api/oauth/v2/token \
+        -d "client_id"=demo_client \
+        -d "client_secret"=secret_demo_client \
+        -d "grant_type"=password \
+        -d "username"=api@example.com \
         -d "password"=sylius-api
 
 .. tip::
@@ -118,7 +118,7 @@ Example
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/users/
+    curl http://sylius.dev/api/v1/users/
         -H "Authorization: Bearer NzFiYTM4ZTEwMjcwZTcyZWIzZTA0NmY3NjE3MTIyMjM1Y2NlMmNlNWEyMTAzY2UzYmY0YWIxYmUzNTkyMDcyNQ"
 
 .. note::
@@ -154,10 +154,10 @@ Example
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/oauth/v2/token
-        -d "client_id"=demo_client
-        -d "client_secret"=secret_demo_client
-        -d "grant_type"=refresh_token
+    curl http://sylius.dev/api/oauth/v2/token \
+        -d "client_id"=demo_client \
+        -d "client_secret"=secret_demo_client \
+        -d "grant_type"=refresh_token \
         -d "refresh_token"=MDk2ZmIwODBkYmE3YjNjZWQ4ZTk2NTk2N2JmNjkyZDQ4NzA3YzhiZDQzMjJjODI5MmQ4ZmYxZjlkZmU1ZDNkMQ
 
 Example Response

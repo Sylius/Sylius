@@ -4,5 +4,8 @@
 /composer.phar
 /composer.lock
 
+test/app/cache
+test/app/logs
+
 /phpspec.yml
 /phpunit.xml

@@ -12,10 +12,8 @@
 namespace Sylius\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
-use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\Admin\Customer\ShowPageInterface;
-use Sylius\Behat\Page\Shop\Account\LoginPageInterface;
-use Sylius\Behat\Page\Shop\User\RegisterPageInterface;
+use Sylius\Behat\Page\Shop\HomePageInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Webmozart\Assert\Assert;
@@ -42,37 +40,34 @@ final class UserContext implements Context
     private $customerShowPage;
 
     /**
-     * @var LoginPageInterface
+     * @var HomePageInterface
      */
-    private $loginPage;
+    private $homePage;
 
     /**
      * @param SharedStorageInterface $sharedStorage
      * @param UserRepositoryInterface $userRepository
      * @param ShowPageInterface $customerShowPage
-     * @param LoginPageInterface $loginPage
+     * @param HomePageInterface $homePage
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         UserRepositoryInterface $userRepository,
         ShowPageInterface $customerShowPage,
-        LoginPageInterface $loginPage
+        HomePageInterface $homePage
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->userRepository = $userRepository;
         $this->customerShowPage = $customerShowPage;
-        $this->loginPage = $loginPage;
+        $this->homePage = $homePage;
     }
 
     /**
-     * @Given I log in as :email with :password password
+     * @When I log out
      */
-    public function iLogInAsWithPassword($email, $password)
+    public function iLogOut()
     {
-        $this->loginPage->open();
-        $this->loginPage->specifyUsername($email);
-        $this->loginPage->specifyPassword($password);
-        $this->loginPage->logIn();
+        $this->homePage->logOut();
     }
 
     /**
@@ -86,30 +81,6 @@ final class UserContext implements Context
 
         $this->customerShowPage->open(['id' => $user->getCustomer()->getId()]);
         $this->customerShowPage->deleteAccount();
-    }
-
-    /**
-     * @When I try to delete my own account
-     */
-    public function iTryDeletingMyOwnAccount()
-    {
-        $admin = $this->sharedStorage->get('admin');
-
-        $this->customerShowPage->open(['id' => $admin->getId()]);
-    }
-
-    /**
-     * @Then I should not be able to do it
-     */
-    public function iShouldNotBeAbleToDeleteMyOwnAccount()
-    {
-        try {
-            $this->customerShowPage->deleteAccount();
-        } catch (ElementNotFoundException $exception) {
-            return;
-        }
-
-        throw new \DomainException('Delete account should throw an exception!');
     }
 
     /**

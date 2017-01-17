@@ -3,9 +3,8 @@
 
 sylius:
     form:
-        group:
+        customer:
+            phone_number: Số điện thoại
+        customer_group:
             name: Tên
             roles: Vai trò
-        customer:
-            groups: Nhóm
-            phone_number: Số điện thoại

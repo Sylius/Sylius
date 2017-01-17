@@ -3,12 +3,6 @@
 
 sylius:
     form:
-        action:
-            add_product_configuration:
-                price: Enhetspris
-                quantity: Antal
-                variant: Variant
-            customer_group: Kundgrupp
         block:
             body: Brödtext
             id: ID
@@ -22,8 +16,6 @@ sylius:
             shipping_method: Fraktsätt
         promotion:
             channels: Kanaler
-        coupon:
-            per_customer_usage_limit: Begränsning per kund
         group:
             name: Namn
             roles: Roller
@@ -31,7 +23,7 @@ sylius:
             taxonomies: Taxonomier
             locale_default: Standardspråk
             locales: Språk
-            currency_default: Standardvaluta
+            currency_base: Basvaluta
             currencies: Valutor
             shipping_methods: Leveransmetoder
             payment_methods: Betalningsmetoder
@@ -40,6 +32,7 @@ sylius:
             theme: Tema
             hostname: Värdnamn
         image:
+            code: Kod
             file: Bild
         locale:
             code: Kod
@@ -57,8 +50,8 @@ sylius:
             id: ID
             title: Titel
         product:
+            images: Bilder
             restricted_zone: Begränsat område
-            shipping_category: Kategori
             short_description: Kort beskrivning
             variant_selection_method: Metod för val av variant
             main_taxon: Huvudsaklig taxon
@@ -69,20 +62,7 @@ sylius:
             code: Kod
         product_variant:
             tax_category: Momskategori
-        settings:
-            general:
-                currency: Standardvaluta
-                locale: Språk
-                meta_description: Metabeskrivning
-                meta_keywords: Metasökord
-                title: Sidans titel
-                tracking_code:
-                    Tracking code (for example: Google Analytics-kod)
-            taxation:
-                default_tax_zone: Standardmomszon
-                default_tax_calculation_strategy: Standard skatteberäkningsstrategi
-            security:
-                enabled: Aktivera?
+            shipping_category: Kategori
         shipment_filter:
             created_at_from: Från
             created_at_to: Till
@@ -97,7 +77,9 @@ sylius:
         shipping_method:
             zone: Zon
         taxon:
+            code: Kod
             file: Välj bild
+            images: Bilder
         taxonomy:
             file: Välj bild
         user:
@@ -115,10 +97,8 @@ sylius:
         variant:
             depth: Djup
             height: Höjd
-            images: Bilder
             on_hand: I lager
             price: Pris
-            original_price: Ursprungligt pris
             sku: SKU
             weight: Vikt
             width: Bredd
@@ -134,31 +114,74 @@ sylius:
         product_association_type:
             name: Namn
         promotion_rule:
-            contains_taxon:
-                taxon: Taxon
-                count: Antal
-            taxon:
+            has_taxon:
                 taxons: Taxa
+            product:
+                products: Produkter
             total_of_items_from_taxon:
                 taxon: Taxon
                 amount: Antal
-    email:
-        order_confirmation:
-            name: Orderbekräftelse
-        order_comment:
-            name: Orderkommentar
-        shipment_confirmation:
-            name: Leveransbekräftelse
-        user_confirmation:
-            name: Användarbekräftelse
-            subject: Välkommen till vår butik
-            content: 'Välkommen till vår butik<br/><br/>du har precis registrerats.<br/>Tack %username%.'
-        password_reset:
-            name: Återställ lösenord
-            content: '<h3>Hej %username%</h3>För att återställa ditt lösenord - var god besök %url% <br/><br/>Hälsningar, the Team.'
-        verification:
-            name: E-postadress verifikation
-            content: 'För att verifiera din e-postadress - var god besök %url%'
+        payment_method:
+            channels: Kanaler
+        zone:
+            scopes:
+                shipping: Leverans
+                tax: Skatt
+    installer:
+        extensions:
+            header: tillägg
+            accelerator:
+                header: Accelerator
+                help: Aktivera Zend OpCache (rekommenderas starkt).
+            apc: APC
+            ctype: Ctype
+            gd: GD
+            help: Installera och aktivera tillägget %extension%.
+            iconv: Iconv
+            exif: Exif
+            fileinfo: Filinfo
+            icu: ICU
+            intl: Intl
+            json_encode: JSON
+            mbstring: Multibyte sträng
+            "off": false
+            "on": true
+            pcre: PCRE
+            pdo: PDO
+            php_xml: PHP-XML
+            session_start: Session
+            simplexml_import_dom: SimpleXML
+            token_get_all: Tokenizer
+        filesystem:
+            header: filsystem
+            cache:
+                header: cache
+            exists: tillgängligt
+            logs:
+                header: loggar
+            not_exists: ej tillgängligt
+            not_writable: ej skrivbart
+            parameters:
+                header: parameters.yml
+            vendors: vendors
+            writable: skrivbar
+        settings:
+            header: PHP-version och inställningar
+            detect_unicode: detect_unicode
+            magic_quotes_gpc: magic_quotes_gpc
+            non_deprecated: inte utdaterad
+            "off": false
+            "on": true
+            register_globals: register_globals
+            session:
+                auto_start: session.auto_start
+            short_open_tag: short_open_tag
+            timezone: tidszon
+            timezone_deprecated:
+                header: Utgången tidzon
+                help: 'Tidszonen %timezone% är utgången. Åtgärda din php.ini fil (lista med utgångna tidzoner http://php.net/manual/en/timezones.others.php).'
+            version: PHP-version
+            version_recommended: Rekommenderad PHP-version
     payum_gateway:
         cash_on_delivery: Postförskott
         offline: Offline

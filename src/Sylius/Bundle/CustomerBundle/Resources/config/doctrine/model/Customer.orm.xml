@@ -41,19 +41,9 @@
             <gedmo:timestampable on="update"/>
         </field>
 
-        <many-to-many field="groups" target-entity="Sylius\Component\Customer\Model\GroupInterface">
-            <cascade>
-                <cascade-all />
-            </cascade>
-            <join-table name="sylius_customer_group">
-                <join-columns>
-                    <join-column name="customer_id" referenced-column-name="id" on-delete="CASCADE"/>
-                </join-columns>
-                <inverse-join-columns>
-                    <join-column name="group_id" referenced-column-name="id" on-delete="CASCADE"/>
-                </inverse-join-columns>
-            </join-table>
-        </many-to-many>
+        <many-to-one field="group" target-entity="Sylius\Component\Customer\Model\CustomerGroupInterface">
+            <join-column name="customer_group_id" referenced-column-name="id" nullable="true" />
+        </many-to-one>
 
         <field name="phoneNumber" column="phone_number" type="string" nullable="true" />
         <field name="subscribedToNewsletter" column="subscribed_to_newsletter" type="boolean" />

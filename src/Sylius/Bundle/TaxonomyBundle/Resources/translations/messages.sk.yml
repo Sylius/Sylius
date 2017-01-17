@@ -7,6 +7,5 @@ sylius:
             description: Popis
             name: Názov
             parent: Nadradená kategória
-            permalink: Permalink
         taxonomy:
             name: Názov

@@ -14,11 +14,8 @@ namespace Sylius\Behat\Context\Ui;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\External\PaypalExpressCheckoutPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\CompletePageInterface;
-use Sylius\Behat\Page\Shop\Checkout\ThankYouPageInterface;
+use Sylius\Behat\Page\Shop\Order\ShowPageInterface;
 use Sylius\Behat\Service\Mocker\PaypalApiMocker;
-use Sylius\Component\Core\Repository\OrderRepositoryInterface;
-use Sylius\Behat\Service\SharedStorageInterface;
-use Webmozart\Assert\Assert;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -26,19 +23,14 @@ use Webmozart\Assert\Assert;
 final class PaypalContext implements Context
 {
     /**
-     * @var SharedStorageInterface
-     */
-    private $sharedStorage;
-
-    /**
      * @var PaypalExpressCheckoutPageInterface
      */
     private $paypalExpressCheckoutPage;
 
     /**
-     * @var ThankYouPageInterface
+     * @var ShowPageInterface
      */
-    private $thankYouPage;
+    private $orderDetails;
 
     /**
      * @var CompletePageInterface
@@ -51,49 +43,32 @@ final class PaypalContext implements Context
     private $paypalApiMocker;
 
     /**
-     * @var OrderRepositoryInterface
-     */
-    private $orderRepository;
-
-    /**
-     * @param SharedStorageInterface $sharedStorage
      * @param PaypalExpressCheckoutPageInterface $paypalExpressCheckoutPage
-     * @param ThankYouPageInterface $thankYouPage
+     * @param ShowPageInterface $orderDetails
      * @param CompletePageInterface $summaryPage
      * @param PaypalApiMocker $paypalApiMocker
-     * @param OrderRepositoryInterface $orderRepository
      */
     public function __construct(
-        SharedStorageInterface $sharedStorage,
         PaypalExpressCheckoutPageInterface $paypalExpressCheckoutPage,
-        ThankYouPageInterface $thankYouPage,
+        ShowPageInterface $orderDetails,
         CompletePageInterface $summaryPage,
-        PaypalApiMocker $paypalApiMocker,
-        OrderRepositoryInterface $orderRepository
+        PaypalApiMocker $paypalApiMocker
     ) {
-        $this->sharedStorage = $sharedStorage;
         $this->paypalExpressCheckoutPage = $paypalExpressCheckoutPage;
-        $this->thankYouPage = $thankYouPage;
+        $this->orderDetails = $orderDetails;
         $this->summaryPage = $summaryPage;
         $this->paypalApiMocker = $paypalApiMocker;
-        $this->orderRepository = $orderRepository;
     }
 
     /**
-     * @Given /^I confirm my order with paypal payment$/
+     * @When /^I confirm my order with paypal payment$/
+     * @Given /^I have confirmed my order with paypal payment$/
      */
     public function iConfirmMyOrderWithPaypalPayment()
     {
-        $this->paypalApiMocker->mockApiPaymentInitializeResponse();
-        $this->summaryPage->confirmOrder();
-    }
-
-    /**
-     * @Then I should be redirected back to PayPal Express Checkout page
-     */
-    public function iShouldBeRedirectedToPaypalExpressCheckoutPage()
-    {
-        Assert::true($this->paypalExpressCheckoutPage->isOpen());
+        $this->paypalApiMocker->performActionInApiInitializeScope(function () {
+            $this->summaryPage->confirmOrder();
+        });
     }
 
     /**
@@ -101,8 +76,9 @@ final class PaypalContext implements Context
      */
     public function iSignInToPaypalAndPaySuccessfully()
     {
-        $this->paypalApiMocker->mockApiSuccessfulPaymentResponse();
-        $this->paypalExpressCheckoutPage->pay();
+        $this->paypalApiMocker->performActionInApiSuccessfulScope(function () {
+            $this->paypalExpressCheckoutPage->pay();
+        });
     }
 
     /**
@@ -115,12 +91,46 @@ final class PaypalContext implements Context
     }
 
     /**
-     * @Given /^I tried to pay(?:| again)$/
      * @When /^I try to pay(?:| again)$/
      */
     public function iTryToPayAgain()
     {
-        $this->paypalApiMocker->mockApiPaymentInitializeResponse();
-        $this->thankYouPage->pay();
+        $this->paypalApiMocker->performActionInApiInitializeScope(function () {
+            $this->orderDetails->pay();
+        });
+    }
+
+    /**
+     * @Then I should be notified that my payment has been cancelled
+     */
+    public function iShouldBeNotifiedThatMyPaymentHasBeenCancelled()
+    {
+        $this->assertNotification('Payment has been cancelled.');
+    }
+
+    /**
+     * @Then I should be notified that my payment has been completed
+     */
+    public function iShouldBeNotifiedThatMyPaymentHasBeenCompleted()
+    {
+        $this->assertNotification('Payment has been completed.');
+    }
+
+    /**
+     * @param string $expectedNotification
+     */
+    private function assertNotification($expectedNotification)
+    {
+        $notifications = $this->orderDetails->getNotifications();
+        $hasNotifications = '';
+
+        foreach ($notifications as $notification) {
+            $hasNotifications .= $notification;
+            if ($notification === $expectedNotification) {
+                return;
+            }
+        }
+
+        throw new \RuntimeException(sprintf('There is no notificaiton with "%s". Got "%s"', $expectedNotification, $hasNotifications));
     }
 }

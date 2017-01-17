@@ -67,11 +67,11 @@ class Grid
      * @param string $driver
      * @param array $driverConfiguration
      *
-     * @return Grid
+     * @return self
      */
     public static function fromCodeAndDriverConfiguration($code, $driver, array $driverConfiguration)
     {
-        return new Grid($code, $driver, $driverConfiguration);
+        return new self($code, $driver, $driverConfiguration);
     }
 
     /**
@@ -146,6 +146,8 @@ class Grid
 
     /**
      * @param string $name
+     *
+     * @return Field
      */
     public function getField($name)
     {
@@ -158,6 +160,8 @@ class Grid
 
     /**
      * @param string $name
+     *
+     * @return bool
      */
     public function hasField($name)
     {
@@ -188,6 +192,8 @@ class Grid
 
     /**
      * @param string $name
+     *
+     * @return ActionGroup
      */
     public function getActionGroup($name)
     {
@@ -210,6 +216,8 @@ class Grid
 
     /**
      * @param string $name
+     *
+     * @return bool
      */
     public function hasActionGroup($name)
     {
@@ -252,6 +260,8 @@ class Grid
 
     /**
      * @param string $name
+     *
+     * @return bool
      */
     public function hasFilter($name)
     {

@@ -18,15 +18,13 @@ use Sylius\Component\Channel\Context\CompositeChannelContext;
 use Sylius\Component\Channel\Model\ChannelInterface;
 
 /**
- * @mixin CompositeChannelContext
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class CompositeChannelContextSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Channel\Context\CompositeChannelContext');
+        $this->shouldHaveType(CompositeChannelContext::class);
     }
 
     function it_implements_channel_context_interface()

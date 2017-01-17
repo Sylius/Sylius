@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Review\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Review\Model\Reviewer;
 use Sylius\Component\Review\Model\ReviewerInterface;
 
 /**
@@ -21,7 +22,7 @@ final class ReviewerSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Review\Model\Reviewer');
+        $this->shouldHaveType(Reviewer::class);
     }
 
     function it_implements_reviewer_interface()
@@ -29,19 +30,19 @@ final class ReviewerSpec extends ObjectBehavior
         $this->shouldImplement(ReviewerInterface::class);
     }
 
-    function it_has_email()
+    function it_has_an_email()
     {
         $this->setEmail('john.doe@example.com');
         $this->getEmail()->shouldReturn('john.doe@example.com');
     }
 
-    function it_has_first_name()
+    function it_has_a_first_name()
     {
         $this->setFirstName('John');
         $this->getFirstName()->shouldReturn('John');
     }
 
-    function it_has_last_name()
+    function it_has_a_last_name()
     {
         $this->setLastName('Doe');
         $this->getLastName()->shouldReturn('Doe');

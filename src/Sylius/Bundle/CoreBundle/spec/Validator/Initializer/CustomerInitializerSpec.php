@@ -12,9 +12,9 @@
 namespace spec\Sylius\Bundle\CoreBundle\Validator\Initializer;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
+use Sylius\Bundle\CoreBundle\Validator\Initializer\CustomerInitializer;
 use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Symfony\Component\Validator\ObjectInitializerInterface;
 
 /**
@@ -29,7 +29,7 @@ final class CustomerInitializerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Validator\Initializer\CustomerInitializer');
+        $this->shouldHaveType(CustomerInitializer::class);
     }
 
     function it_implements_symfony_validator_initializer_interface()

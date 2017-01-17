@@ -4,11 +4,11 @@
 default:
     suites:
         ui_customer_account:
-            contexts_as_services:
+            contexts_services:
                 - sylius.behat.context.hook.doctrine_orm
                 - sylius.behat.context.hook.email_spool
 
-                - sylius.behat.context.transform.addressing
+                - sylius.behat.context.transform.address
                 - sylius.behat.context.transform.country
                 - sylius.behat.context.transform.customer
                 - sylius.behat.context.transform.lexical
@@ -33,6 +33,8 @@ default:
                 - sylius.behat.context.setup.zone
 
                 - sylius.behat.context.ui.shop.account
+                - sylius.behat.context.ui.checkout
+                - sylius.behat.context.ui.shop.cart
                 - sylius.behat.context.ui.shop.currency
             filters:
                 tags: "@customer_account && @ui"

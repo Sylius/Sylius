@@ -4,8 +4,7 @@ namespace spec\Sylius\Bundle\CoreBundle\Fixture;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use Sylius\Bundle\AddressingBundle\Factory\ZoneFactoryInterface;
+use Sylius\Component\Addressing\Factory\ZoneFactoryInterface;
 use Sylius\Bundle\CoreBundle\Fixture\GeographicalFixture;
 use Sylius\Bundle\FixturesBundle\Fixture\FixtureInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
@@ -14,8 +13,6 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
- * @mixin GeographicalFixture
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class GeographicalFixtureSpec extends ObjectBehavior
@@ -40,7 +37,7 @@ final class GeographicalFixtureSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Fixture\GeographicalFixture');
+        $this->shouldHaveType(GeographicalFixture::class);
     }
 
     function it_is_a_fixture()
@@ -124,6 +121,40 @@ final class GeographicalFixtureSpec extends ObjectBehavior
                 'countries' => ['PL'],
                 'provinces' => [],
                 'zones' => [],
+            ],
+        ]]);
+    }
+
+    function it_creates_and_persist_a_country_and_a_zone_with_scope_containing_it(
+        FactoryInterface $countryFactory,
+        ObjectManager $countryManager,
+        ZoneFactoryInterface $zoneFactory,
+        ObjectManager $zoneManager,
+        CountryInterface $country,
+        ZoneInterface $zone
+    ) {
+        $countryFactory->createNew()->willReturn($country);
+        $country->setCode('PL')->shouldBeCalled();
+        $country->enable()->shouldBeCalled();
+
+        $zoneFactory->createWithMembers(['PL'])->willReturn($zone);
+        $zone->setCode('POLAND')->shouldBeCalled();
+        $zone->setName('Poland')->shouldBeCalled();
+        $zone->setType(ZoneInterface::TYPE_COUNTRY)->shouldBeCalled();
+
+        $countryManager->persist($country)->shouldBeCalled();
+        $zoneManager->persist($zone)->shouldBeCalled();
+
+        $countryManager->flush()->shouldBeCalled();
+        $zoneManager->flush()->shouldBeCalled();
+
+        $this->load(['countries' => ['PL'], 'provinces' => [], 'zones' => [
+            'POLAND' => [
+                'name' => 'Poland',
+                'countries' => ['PL'],
+                'provinces' => [],
+                'zones' => [],
+                'scope' => 'tax',
             ],
         ]]);
     }

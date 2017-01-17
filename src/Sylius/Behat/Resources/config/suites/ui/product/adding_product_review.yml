@@ -1,0 +1,24 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+default:
+    suites:
+        ui_adding_product_review:
+            contexts_services:
+                - sylius.behat.context.hook.doctrine_orm
+
+                - sylius.behat.context.transform.channel
+                - sylius.behat.context.transform.customer
+                - sylius.behat.context.transform.lexical
+                - sylius.behat.context.transform.product
+                - sylius.behat.context.transform.shared_storage
+
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.customer
+                - sylius.behat.context.setup.product
+                - sylius.behat.context.setup.product_review
+                - sylius.behat.context.setup.shop_security
+
+                - sylius.behat.context.ui.shop.product_review
+            filters:
+                tags: "@adding_product_review && @ui"

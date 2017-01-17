@@ -23,38 +23,18 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
     /**
      * {@inheritdoc}
      */
-    public function findChildren(TaxonInterface $taxon)
-    {
-        $root = $taxon->isRoot() ? $taxon : $taxon->getRoot();
-
-        $queryBuilder = $this->createQueryBuilder('o');
-        $queryBuilder
-            ->andWhere($queryBuilder->expr()->eq('o.root', ':root'))
-            ->andWhere($queryBuilder->expr()->lt('o.right', ':right'))
-            ->andWhere($queryBuilder->expr()->gt('o.left', ':left'))
-            ->setParameter('root', $root)
-            ->setParameter('left', $taxon->getLeft())
-            ->setParameter('right', $taxon->getRight())
-        ;
-
-        return $queryBuilder->getQuery()->getResult();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function findChildrenAsTree(TaxonInterface $taxon)
+    public function findChildren($parentCode)
     {
         $queryBuilder = $this->createQueryBuilder('o');
         $queryBuilder
             ->addSelect('translation')
             ->leftJoin('o.translations', 'translation')
-            ->addSelect('children')
-            ->leftJoin('o.children', 'children')
-            ->andWhere('o.parent = :parent')
-            ->addOrderBy('o.root')
-            ->addOrderBy('o.left')
-            ->setParameter('parent', $taxon)
+            ->addSelect('child')
+            ->leftJoin('o.children', 'child')
+            ->leftJoin('o.parent', 'parent')
+            ->andWhere('parent.code = :parentCode')
+            ->addOrderBy('o.position')
+            ->setParameter('parentCode', $parentCode)
         ;
 
         return $queryBuilder->getQuery()->getResult();
@@ -63,44 +43,13 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
     /**
      * {@inheritdoc}
      */
-    public function findChildrenByRootCode($code)
-    {
-        /** @var TaxonInterface|null $root */
-        $root = $this->findOneBy(['code' => $code]);
-
-        if (null === $root) {
-            return [];
-        }
-
-        return $this->findChildren($root);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function findChildrenAsTreeByRootCode($code)
-    {
-        /** @var TaxonInterface|null $root */
-        $root = $this->findOneBy(['code' => $code]);
-
-        if (null === $root) {
-            return [];
-        }
-
-        return $this->findChildrenAsTree($root);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function findOneByPermalink($permalink)
+    public function findOneBySlug($slug)
     {
         return $this->createQueryBuilder('o')
             ->addSelect('translation')
             ->leftJoin('o.translations', 'translation')
-            ->where('translation.permalink = :permalink')
-            ->setParameter('permalink', $permalink)
-            ->orderBy('o.left')
+            ->where('translation.slug = :slug')
+            ->setParameter('slug', $slug)
             ->getQuery()
             ->getOneOrNullResult()
         ;
@@ -109,15 +58,17 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
     /**
      * {@inheritdoc}
      */
-    public function findOneByName($name)
+    public function findByName($name, $locale)
     {
         return $this->createQueryBuilder('o')
             ->addSelect('translation')
             ->leftJoin('o.translations', 'translation')
-            ->where('translation.name = :name')
+            ->andWhere('translation.name = :name')
+            ->andWhere('translation.locale = :locale')
             ->setParameter('name', $name)
+            ->setParameter('locale', $locale)
             ->getQuery()
-            ->getOneOrNullResult()
+            ->getResult()
         ;
     }
 
@@ -129,6 +80,7 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
         $queryBuilder = $this->createQueryBuilder('o');
         $queryBuilder
             ->andWhere($queryBuilder->expr()->isNull($this->getPropertyName('parent')))
+            ->orderBy('o.position')
         ;
 
         return $queryBuilder->getQuery()->getResult();
@@ -143,6 +95,7 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
         $queryBuilder
             ->orderBy('o.root')
             ->addOrderBy('o.left')
+            ->addOrderBy('o.position')
         ;
     
         return $queryBuilder->getQuery()->getResult();
@@ -154,13 +107,5 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
     public function createListQueryBuilder()
     {
         return $this->createQueryBuilder('o')->leftJoin('o.translations', 'translation');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getFormQueryBuilder()
-    {
-        return $this->createQueryBuilder('o');
     }
 }

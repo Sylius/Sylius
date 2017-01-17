@@ -75,30 +75,6 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function chooseShippingMethod($shippingMethod)
-    {
-        $this->getDocument()->selectFieldOption('Shipping Methods', $shippingMethod);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isShippingMethodChosen($shippingMethod)
-    {
-        return $this->getElement('shipping_methods')->find('named', array('option', $shippingMethod))->hasAttribute('selected');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function choosePaymentMethod($paymentMethod)
-    {
-        $this->getDocument()->selectFieldOption('Payment Methods', $paymentMethod);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function chooseDefaultTaxZone($taxZone)
     {
         $this->getDocument()->selectFieldOption('Default tax zone', (null === $taxZone) ? '' : $taxZone);
@@ -110,14 +86,6 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     public function chooseTaxCalculationStrategy($taxZone)
     {
         $this->getDocument()->selectFieldOption('Tax calculation strategy', $taxZone);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isPaymentMethodChosen($paymentMethod)
-    {
-        return $this->getElement('payment_methods')->find('named', array('option', $paymentMethod))->hasAttribute('selected');
     }
 
     /**
@@ -151,6 +119,14 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function isBaseCurrencyDisabled()
+    {
+        return $this->getElement('base_currency')->hasAttribute('disabled');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getCodeElement()
     {
         return $this->getElement('code');
@@ -170,15 +146,14 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
+            'base_currency' => '#sylius_channel_baseCurrency',
             'code' => '#sylius_channel_code',
             'currencies' => '#sylius_channel_currencies',
-            'tax_calculation_strategy' => '#sylius_channel_taxCalculationStrategy',
             'default_tax_zone' => '#sylius_channel_defaultTaxZone',
             'enabled' => '#sylius_channel_enabled',
             'locales' => '#sylius_channel_locales',
             'name' => '#sylius_channel_name',
-            'payment_methods' => '#sylius_channel_paymentMethods',
-            'shipping_methods' => '#sylius_channel_shippingMethods',
+            'tax_calculation_strategy' => '#sylius_channel_taxCalculationStrategy',
         ]);
     }
 }

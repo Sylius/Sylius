@@ -12,7 +12,8 @@
                     "countryCode": {},
                     "street": {},
                     "city": {},
-                    "postcode": {}
+                    "postcode": {},
+                    "provinceName": {}
                 }
             },
             "billingAddress": {
@@ -51,7 +52,12 @@
                     }
                 }
             },
-            "differentBillingAddress": {}
+            "differentBillingAddress": {},
+            "customer": {
+                "children": {
+                    "email": {}
+                }
+            }
         }
     }
 }

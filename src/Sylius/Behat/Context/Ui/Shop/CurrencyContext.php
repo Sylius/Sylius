@@ -13,8 +13,6 @@ namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Shop\HomePageInterface;
-use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Component\Core\Currency\CurrencyStorageInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -28,42 +26,21 @@ final class CurrencyContext implements Context
     private $homePage;
 
     /**
-     * @var CurrencyStorageInterface
-     */
-    private $currencyStorage;
-
-    /**
-     * @var SharedStorageInterface
-     */
-    private $sharedStorage;
-    
-    /**
      * @param HomePageInterface $homePage
      */
-    public function __construct(HomePageInterface $homePage, CurrencyStorageInterface $currencyStorage, SharedStorageInterface $sharedStorage)
+    public function __construct(HomePageInterface $homePage)
     {
         $this->homePage = $homePage;
-        $this->currencyStorage = $currencyStorage;
-        $this->sharedStorage = $sharedStorage;
     }
 
     /**
      * @When I switch to the :currencyCode currency
-     * @When I change my currency to :currencyCode
+     * @Given I changed my currency to :currencyCode
      */
     public function iSwitchTheCurrencyToTheCurrency($currencyCode)
     {
         $this->homePage->open();
         $this->homePage->switchCurrency($currencyCode);
-    }
-
-    /**
-     * @Given the customer chose :currencyCode currency
-     * @Given I chose :currencyCode currency
-     */
-    public function theCustomerChoseTheCurrency($currencyCode)
-    {
-        $this->currencyStorage->set($this->sharedStorage->get('channel'), $currencyCode);
     }
 
     /**
@@ -100,15 +77,5 @@ final class CurrencyContext implements Context
                 implode('", "', $this->homePage->getAvailableCurrencies())
             ));
         }
-    }
-
-    /**
-     * @Then I should not be able to shop without default currency
-     */
-    public function iShouldNotBeAbleToShop()
-    {
-        $this->homePage->tryToOpen();
-
-        Assert::false($this->homePage->isOpen(), 'Homepage should not be opened!');
     }
 }

@@ -16,11 +16,11 @@ Feature: Seeing order items on order summary page
     @ui
     Scenario: Seeing order items and theirs quantity on the order summary page
         Given I have 4 products "Lannister Coat" in the cart
-        Given I have 2 products "Targaryen Jacket" in the cart
-        Given I have 3 products "Stark T-Shirt" in the cart
+        And I have 2 products "Targaryen Jacket" in the cart
+        And I have 3 products "Stark T-Shirt" in the cart
         And I am at the checkout addressing step
         When I specified the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And I proceed order with "Free" shipping method and "Offline" payment
+        And I proceed with "Free" shipping method and "Offline" payment
         Then I should be on the checkout summary step
         And I should have 4 "Lannister Coat" products in the cart
         And I should have 2 "Targaryen Jacket" products in the cart

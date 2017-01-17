@@ -3,13 +3,11 @@
   "items": @array@,
   "items_total": @integer@,
   "adjustments": @array@,
-  "comments": [],
   "adjustments_total": @integer@,
   "total": @integer@,
   "state": "cart",
   "created_at": "@string@.isDateTime()",
   "updated_at": "@string@.isDateTime()",
-  "expires_at": "@string@.isDateTime()",
   "channel": {
     "id": @integer@,
     "code": "CHANNEL",

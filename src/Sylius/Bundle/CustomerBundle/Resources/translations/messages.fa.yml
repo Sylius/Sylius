@@ -3,16 +3,22 @@
 
 sylius:
     form:
-        group:
-            name: نام
-            roles: نقش ها
         customer:
             first_name: نام
-            groups: گروه ها
+            group: گروه
             last_name: نام خانوادگی
             email: ایمیل
             phone_number: شماره تلفن
+            gender: جنسیت
+            birthday: تاریخ تولد
             billing_address: مشخصات پرداخت کننده
             different_billing_address: آدرس گیرنده با خریدار متفاوت است؟
+            only_customer_registration: ایجاد حساب کاربری؟
+            subscribed_to_newsletter: عضویت در خبرنامه
+        customer_group:
+            name: نام
+            roles: نقش ها
     gender:
         unknown: پرداخت نامعلوم
+        male: آقا
+        female: خانم

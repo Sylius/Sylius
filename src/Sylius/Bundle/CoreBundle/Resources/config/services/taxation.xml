@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="sylius.taxation.order_shipment_taxes_applicator" class="Sylius\Component\Core\Taxation\Applicator\OrderShipmentTaxesApplicator">
+            <argument type="service" id="sylius.tax_calculator" />
+            <argument type="service" id="sylius.factory.adjustment" />
+            <argument type="service" id="sylius.tax_rate_resolver" />
+        </service>
+        <service id="sylius.taxation.order_items_taxes_applicator" class="Sylius\Component\Core\Taxation\Applicator\OrderItemsTaxesApplicator">
+            <argument type="service" id="sylius.tax_calculator" />
+            <argument type="service" id="sylius.factory.adjustment" />
+            <argument type="service" id="sylius.integer_distributor" />
+            <argument type="service" id="sylius.tax_rate_resolver" />
+        </service>
+        <service id="sylius.taxation.order_item_units_taxes_applicator" class="Sylius\Component\Core\Taxation\Applicator\OrderItemUnitsTaxesApplicator">
+            <argument type="service" id="sylius.tax_calculator" />
+            <argument type="service" id="sylius.factory.adjustment" />
+            <argument type="service" id="sylius.tax_rate_resolver" />
+        </service>
+
+        <service id="sylius.taxation.order_items_based_strategy" class="Sylius\Bundle\CoreBundle\Taxation\Strategy\TaxCalculationStrategy">
+            <argument>order_items_based</argument>
+            <argument type="collection">
+                <argument type="service" id="sylius.taxation.order_items_taxes_applicator" />
+                <argument type="service" id="sylius.taxation.order_shipment_taxes_applicator" />
+            </argument>
+            <tag name="sylius.taxation.calculation_strategy" type="order_items_based" label="Order items based" />
+        </service>
+
+        <service id="sylius.taxation.order_item_units_based_strategy" class="Sylius\Bundle\CoreBundle\Taxation\Strategy\TaxCalculationStrategy">
+            <argument>order_item_units_based</argument>
+            <argument type="collection">
+                <argument type="service" id="sylius.taxation.order_item_units_taxes_applicator" />
+                <argument type="service" id="sylius.taxation.order_shipment_taxes_applicator" />
+            </argument>
+            <tag name="sylius.taxation.calculation_strategy" type="order_item_units_based" label="Order item units based" />
+        </service>
+    </services>
+</container>

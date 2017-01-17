@@ -11,8 +11,8 @@
 
 namespace spec\Sylius\Component\Review\Calculator;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Review\Calculator\AverageRatingCalculator;
 use Sylius\Component\Review\Calculator\ReviewableRatingCalculatorInterface;
 use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
@@ -24,7 +24,7 @@ final class AverageRatingCalculatorSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Review\Calculator\AverageRatingCalculator');
+        $this->shouldHaveType(AverageRatingCalculator::class);
     }
 
     function it_implements_average_price_calculator_interface()
@@ -39,8 +39,8 @@ final class AverageRatingCalculatorSpec extends ObjectBehavior
     ) {
         $reviewable->getReviews()->willReturn([$review1, $review2]);
 
-        $review1->getStatus()->willReturn(ReviewInterface::STATUS_ACCEPTED)->shouldBeCalled();
-        $review2->getStatus()->willReturn(ReviewInterface::STATUS_ACCEPTED)->shouldBeCalled();
+        $review1->getStatus()->willReturn(ReviewInterface::STATUS_ACCEPTED);
+        $review2->getStatus()->willReturn(ReviewInterface::STATUS_ACCEPTED);
 
         $review1->getRating()->willReturn(4);
         $review2->getRating()->willReturn(5);
@@ -56,21 +56,11 @@ final class AverageRatingCalculatorSpec extends ObjectBehavior
     }
 
     function it_returns_zero_if_given_reviewable_object_has_reviews_but_none_of_them_is_accepted(
-        ArrayCollection $reviews,
-        \Iterator $iterator,
         ReviewableInterface $reviewable,
         ReviewInterface $review
     ) {
-        $reviewable->getReviews()->willReturn($reviews)->shouldBeCalled();
-
-        $reviews->getIterator()->willReturn($iterator);
-        $iterator->rewind()->shouldBeCalled();
-        $iterator->valid()->willReturn(true, true, false)->shouldBeCalled();
-        $iterator->current()->willReturn($review);
-
-        $review->getStatus()->willReturn(ReviewInterface::STATUS_NEW)->shouldBeCalled();
-
-        $iterator->next()->shouldBeCalled();
+        $reviewable->getReviews()->willReturn([$review]);
+        $review->getStatus()->willReturn(ReviewInterface::STATUS_NEW);
 
         $this->calculate($reviewable)->shouldReturn(0);
     }

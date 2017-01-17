@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../etc/bash/common.lib.sh"
+
+validate_package() {
+    print_header "Validating" "$(package_path_to_package_name "$1")"
+    run_command "composer validate --ansi --strict $1/composer.json"
+}
+
+display_help_message() {
+    print_error "Usage: $0 <package paths or names>"
+}
+
+main() {
+    local packages=() options=() package_path
+
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            --help)
+                display_help_message
+                exit 0
+            ;;
+            -*)
+                print_error "Unknown option \"$1\""
+                exit 1
+            ;;
+            *)
+               packages+=("$1")
+            ;;
+        esac
+
+        shift
+    done
+
+    if [[ "${packages[@]}" = "" ]]; then
+        display_help_message
+        exit 1
+    fi
+
+    for package in "${packages[@]}"; do
+        package_path="$(cast_package_argument_to_package_path "${package}")"
+        exit_on_error "Package \"${package}\" is not found"
+
+        validate_package "${package_path}" "${options[*]}"
+    done
+}
+
+main "$@"

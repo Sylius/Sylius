@@ -11,6 +11,7 @@
 
 namespace Sylius\Behat\Page\Admin\Customer;
 
+use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Page\SymfonyPage;
 use Webmozart\Assert\Assert;
 
@@ -65,17 +66,9 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getShippingAddress()
+    public function getDefaultAddress()
     {
-        return $this->getElement('shipping_address')->getText();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getBillingAddress()
-    {
-        return $this->getElement('billing_address')->getText();
+        return $this->getElement('default_address')->getText();
     }
 
     /**
@@ -102,6 +95,139 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
+    public function hasDefaultAddressProvinceName($provinceName)
+    {
+        $defaultAddressProvince = $this->getElement('default_address')->getText();
+
+        return false !== stripos($defaultAddressProvince, $provinceName);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasVerifiedEmail()
+    {
+        $verifiedEmail = $this->getElement('verified_email');
+        if ($verifiedEmail->find('css', 'i.green')) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getGroupName()
+    {
+        $group = $this->getElement('group');
+
+        Assert::notNull($group, 'There should be element group on page.');
+
+        list($text, $groupName) = explode(':', $group->getText());
+
+        return trim($groupName);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasEmailVerificationInformation()
+    {
+        return null === $this->getDocument()->find('css', '#verified-email');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasImpersonateButton()
+    {
+        return $this->hasElement('impersonate_button');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function impersonate()
+    {
+        $this->getElement('impersonate_button')->click();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasCustomerPlacedAnyOrders()
+    {
+        return null !== $this->getElement('statistics')->find('css', '.sylius-orders-overall-count');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOverallOrdersCount()
+    {
+        $overallOrders = $this
+            ->getElement('statistics')
+            ->find('css', '.sylius-orders-overall-count')
+            ->getText()
+        ;
+
+        return (int) preg_replace('/[^0-9]/', '',$overallOrders);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOrdersCountInChannel($channelName)
+    {
+        $ordersCountStatistic = $this
+            ->getStatisticsForChannel($channelName)
+            ->find('css', '.sylius-orders-count')
+            ->getText()
+        ;
+
+        return (int) $this->getStatisticValue($ordersCountStatistic);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOrdersTotalInChannel($channelName)
+    {
+        $ordersCountStatistic = $this
+            ->getStatisticsForChannel($channelName)
+            ->find('css', '.sylius-orders-total')
+            ->getText()
+        ;
+
+        return $this->getStatisticValue($ordersCountStatistic);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAverageTotalInChannel($channelName)
+    {
+        $averageTotalStatistic = $this
+            ->getStatisticsForChannel($channelName)
+            ->find('css', '.sylius-order-average-total')
+            ->getText()
+        ;
+
+        return $this->getStatisticValue($averageTotalStatistic);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSuccessFlashMessage()
+    {
+        return trim($this->getElement('flash_message')->getText());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getRouteName()
     {
         return 'sylius_admin_customer_show';
@@ -113,14 +239,60 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'billing_address' => '#billingAddress address',
             'customer_email' => '#info .content.extra > a',
             'customer_name' => '#info .content > a',
+            'default_address' => '#defaultAddress address',
             'delete_account_button' => '#actions',
+            'flash_message' => '.ui.icon.positive.message .content p',
+            'group' => '.group',
+            'impersonate_button' => '#impersonate',
             'no_account' => '#no-account',
+            'statistics' => '#statistics',
             'registration_date' => '#info .content .date',
-            'shipping_address' => '#shippingAddress address',
             'subscribed_to_newsletter' => '#subscribed-to-newsletter',
+            'verified_email' => '#verified-email',
         ]);
+    }
+
+    /**
+     * @param string $channelName
+     *
+     * @return NodeElement
+     *
+     * @throws \InvalidArgumentException
+     */
+    private function getStatisticsForChannel($channelName)
+    {
+        $statisticsRibs = $this->getElement('statistics')->findAll('css', '.accordion > .title');
+
+        $statisticsRibs = array_filter($statisticsRibs, function (NodeElement $statistic) use ($channelName) {
+            return $channelName === trim($statistic->getText());
+        });
+
+        $actualStatisticsCount = count($statisticsRibs);
+        Assert::same(
+            1,
+            $actualStatisticsCount,
+            sprintf(
+                'Expected a single statistic for channel "%s", but %d were found.',
+                $channelName,
+                $actualStatisticsCount
+            )
+        );
+
+        $statisticsContents = $this->getElement('statistics')->findAll('css', '.accordion > .content');
+        $contentIndexes = array_keys($statisticsRibs);
+
+        return $statisticsContents[reset($contentIndexes)];
+    }
+
+    /**
+     * @param string $statistic
+     *
+     * @return string
+     */
+    private function getStatisticValue($statistic)
+    {
+        return trim(substr($statistic, strpos($statistic, ':') + 1));
     }
 }

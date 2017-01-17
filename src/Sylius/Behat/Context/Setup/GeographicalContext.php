@@ -13,10 +13,10 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Converter\CountryNameConverterInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
-use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -85,13 +85,9 @@ final class GeographicalContext implements Context
      * @Given /^the store ships to "([^"]+)" and "([^"]+)"$/
      * @Given /^the store ships to "([^"]+)", "([^"]+)" and "([^"]+)"$/
      */
-    public function storeShipsTo($country1, $country2 = null, $country3 = null)
+    public function storeShipsTo(...$countriesNames)
     {
-        foreach ([$country1, $country2, $country3] as $countryName) {
-            if (null === $countryName) {
-                continue;
-            }
-
+        foreach ($countriesNames as $countryName) {
             $this->countryRepository->add($this->createCountryNamed(trim($countryName)));
         }
     }
@@ -101,13 +97,9 @@ final class GeographicalContext implements Context
      * @Given /^the store operates in "([^"]*)" and "([^"]*)"$/
      * @Given /^the store(?:| also) has country "([^"]*)"$/
      */
-    public function theStoreOperatesIn($firstCountryName, $secondCountryName = null)
+    public function theStoreOperatesIn(...$countriesNames)
     {
-        foreach ([$firstCountryName, $secondCountryName] as $countryName) {
-            if (null === $countryName) {
-                break;
-            }
-
+        foreach ($countriesNames as $countryName) {
             $country = $this->createCountryNamed(trim($countryName));
             $this->sharedStorage->set('country', $country);
 
@@ -128,8 +120,8 @@ final class GeographicalContext implements Context
     }
 
     /**
-     * @Given /^(this country) has the "([^"]+)" province with "([^"]+)" code$/
-     * @Given /^(country "[^"]+") has the "([^"]+)" province with "([^"]+)" code$/
+     * @Given /^(this country)(?:| also) has the "([^"]+)" province with "([^"]+)" code$/
+     * @Given /^(?:|the )(country "[^"]+") has the "([^"]+)" province with "([^"]+)" code$/
      */
     public function theCountryHasProvinceWithCode(CountryInterface $country, $name, $code)
     {

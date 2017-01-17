@@ -1,0 +1,8 @@
+<div id="sylius-coupon">
+    <div class="ui coupon action input">
+        {{ form_widget(form, {'attr': {'placeholder': 'sylius.ui.enter_your_code'|trans~'...'}}) }}
+        <button type="submit" id="sylius-save" class="ui teal icon labeled button"><i class="ticket icon"></i> {{ 'sylius.ui.apply_coupon'|trans }}</button>
+    </div>
+    <br>
+    {{ form_errors(form) }}
+</div>

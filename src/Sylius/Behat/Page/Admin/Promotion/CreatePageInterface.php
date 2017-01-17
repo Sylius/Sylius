@@ -11,6 +11,7 @@
 
 namespace Sylius\Behat\Page\Admin\Promotion;
 
+use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
 
 /**
@@ -48,6 +49,13 @@ interface CreatePageInterface extends BaseCreatePageInterface
     public function fillRuleOption($option, $value);
 
     /**
+     * @param string $channelName
+     * @param string $option
+     * @param string $value
+     */
+    public function fillRuleOptionForChannel($channelName, $option, $value);
+
+    /**
      * @param string $actionName
      */
     public function addAction($actionName);
@@ -64,6 +72,13 @@ interface CreatePageInterface extends BaseCreatePageInterface
      * @param string $value
      */
     public function fillActionOption($option, $value);
+
+    /**
+     * @param string $channelName
+     * @param string $option
+     * @param string $value
+     */
+    public function fillActionOptionForChannel($channelName, $option, $value);
 
     /**
      * @param string $limit
@@ -88,4 +103,18 @@ interface CreatePageInterface extends BaseCreatePageInterface
      * @param \DateTime $dateTime
      */
     public function setEndsAt(\DateTime $dateTime);
+
+    /**
+     * @return string
+     *
+     * @throws ElementNotFoundException
+     */
+    public function getValidationMessageForAction();
+
+    /**
+     * @param string $option
+     * @param string $value
+     * @param bool $multiple
+     */
+    public function selectFilterOption($option, $value, $multiple = false);
 }

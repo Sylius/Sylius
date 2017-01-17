@@ -37,15 +37,13 @@ file via an interactive script. Please follow the steps. If you hit enter, the d
     secret (EDITME):
     locale (en_US):
     currency (USD):
-    wkhtmltopdf.bin_path (/usr/bin/wkhtmltopdf):
-    wkhtmltoimage.bin_path (/usr/bin/wkhtmltoimage):
 
 After everything is in place, run the following commands:
 
 .. code-block:: bash
 
     $ cd sylius # Move to the newly created directory
-    $ php app/console sylius:install
+    $ php bin/console sylius:install
 
 The ``sylius:install`` command actually runs several other commands, which will ask you some questions and check if everything is setup to run Sylius properly.
 

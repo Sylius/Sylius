@@ -6,27 +6,38 @@ sylius_api_channel_index:
     methods: [GET]
     defaults:
         _controller: sylius.controller.channel:indexAction
+        _sylius:
+            serialization_version: $version
 
 sylius_api_channel_create:
     path: /
     methods: [POST]
     defaults:
         _controller: sylius.controller.channel:createAction
+        _sylius:
+            serialization_version: $version
 
 sylius_api_channel_update:
     path: /{id}
     methods: [PUT, PATCH]
     defaults:
         _controller: sylius.controller.channel:updateAction
+        _sylius:
+            serialization_version: $version
 
 sylius_api_channel_delete:
     path: /{id}
     methods: [DELETE]
     defaults:
         _controller: sylius.controller.channel:deleteAction
+        _sylius:
+            serialization_version: $version
+            csrf_protection: false
 
 sylius_api_channel_show:
     path: /{id}
     methods: [GET]
     defaults:
         _controller: sylius.controller.channel:showAction
+        _sylius:
+            serialization_version: $version

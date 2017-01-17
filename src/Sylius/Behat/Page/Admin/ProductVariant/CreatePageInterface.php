@@ -12,6 +12,8 @@
 namespace Sylius\Behat\Page\Admin\ProductVariant;
 
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Currency\Model\CurrencyInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -20,8 +22,17 @@ interface CreatePageInterface extends BaseCreatePageInterface
 {
     /**
      * @param int $price
+     * @param string $channel
      */
-    public function specifyPrice($price);
+    public function specifyPrice($price, $channel);
+
+    /**
+     * @param int $height
+     * @param int $width
+     * @param int $depth
+     * @param int $weight
+     */
+    public function specifyHeightWidthDepthAndWeight($height, $width, $depth, $weight);
     
     /**
      * @param string $code
@@ -29,7 +40,51 @@ interface CreatePageInterface extends BaseCreatePageInterface
     public function specifyCode($code);
 
     /**
+     * @param int $currentStock
+     */
+    public function specifyCurrentStock($currentStock);
+
+    /**
+     * @param string $name
+     * @param string $language
+     */
+    public function nameItIn($name, $language);
+
+    /**
+     * @param string $optionName
+     * @param string $optionValue
+     */
+    public function selectOption($optionName, $optionValue);
+
+    /**
      * @param string $name
      */
-    public function nameIt($name);
+    public function choosePricingCalculator($name);
+
+    /**
+     * @param int $price
+     * @param ChannelInterface $channel
+     * @param CurrencyInterface $currency
+     */
+    public function specifyPriceForChannelAndCurrency($price, ChannelInterface $channel, CurrencyInterface $currency);
+
+    /**
+     * @return string
+     */
+    public function getValidationMessageForForm();
+
+    /**
+     * @param string $shippingCategoryName
+     */
+    public function selectShippingCategory($shippingCategoryName);
+
+    /**
+     * @return string
+     */
+    public function getPricesValidationMessage();
+
+    /**
+     * @return string
+     */
+    public function getFirstPriceValidationMessage();
 }

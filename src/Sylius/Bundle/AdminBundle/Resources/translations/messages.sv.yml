@@ -8,6 +8,7 @@ sylius:
                 catalog:
                     attributes: Attribut
                     header: Katalog
+                    inventory: Lager
                     options: Alternativ
                     products: Produkter
                     taxons: Taxa
@@ -25,14 +26,12 @@ sylius:
                     zones: Zoner
                 marketing:
                     header: Marknadsföring
+                    product_reviews: Produktrecensioner
                     promotions: Kampanjer
                 customers:
                     customers: Kunder
+                    groups: Grupper
                     header: Kunder
                 sales:
                     header: Försäljning
                     orders: Order
-                content:
-                    header: Innehåll
-                    static_contents: Statiskt innehåll
-                    routes: Rutter

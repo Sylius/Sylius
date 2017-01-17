@@ -11,6 +11,8 @@
 
 namespace Sylius\Bundle\PromotionBundle;
 
+use Sylius\Bundle\PromotionBundle\DependencyInjection\Compiler\CompositePromotionCouponEligibilityCheckerPass;
+use Sylius\Bundle\PromotionBundle\DependencyInjection\Compiler\CompositePromotionEligibilityCheckerPass;
 use Sylius\Bundle\PromotionBundle\DependencyInjection\Compiler\RegisterPromotionActionsPass;
 use Sylius\Bundle\PromotionBundle\DependencyInjection\Compiler\RegisterRuleCheckersPass;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
@@ -18,11 +20,9 @@ use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
- * Promotions are used to give discounts or other types of rewards to customers.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class SyliusPromotionBundle extends AbstractResourceBundle
+final class SyliusPromotionBundle extends AbstractResourceBundle
 {
     /**
      * {@inheritdoc}
@@ -40,6 +40,9 @@ class SyliusPromotionBundle extends AbstractResourceBundle
     public function build(ContainerBuilder $container)
     {
         parent::build($container);
+
+        $container->addCompilerPass(new CompositePromotionEligibilityCheckerPass());
+        $container->addCompilerPass(new CompositePromotionCouponEligibilityCheckerPass());
 
         $container->addCompilerPass(new RegisterRuleCheckersPass());
         $container->addCompilerPass(new RegisterPromotionActionsPass());

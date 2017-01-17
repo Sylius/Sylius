@@ -27,7 +27,7 @@ final class SyliusInventoryExtension extends AbstractResourceExtension
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $config = $this->processConfiguration($this->getConfiguration($config, $container), $config);
+        $config = $this->processConfiguration($this->getConfiguration([], $container), $config);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
@@ -35,6 +35,5 @@ final class SyliusInventoryExtension extends AbstractResourceExtension
         $loader->load('services.xml');
 
         $container->setAlias('sylius.availability_checker', $config['checker']);
-        $container->setAlias('sylius.inventory_operator', $config['operator']);
     }
 }

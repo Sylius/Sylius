@@ -15,7 +15,7 @@ use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\SymfonyPage;
 
 /**
- * @author Grzegorz Sadowski <grzegorz.sadowksi@lakion.com>
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 class ProfileUpdatePage extends SymfonyPage implements ProfileUpdatePageInterface
 {
@@ -92,9 +92,9 @@ class ProfileUpdatePage extends SymfonyPage implements ProfileUpdatePageInterfac
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
+            'email' => '#sylius_customer_profile_email',
             'first_name' => '#sylius_customer_profile_firstName',
             'last_name' => '#sylius_customer_profile_lastName',
-            'email' => '#sylius_customer_profile_email',
         ]);
     }
 }

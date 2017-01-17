@@ -24,6 +24,17 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function canBeDisabled()
+    {
+        $toggleableElement = $this->getToggleableElement();
+        $this->assertCheckboxState($toggleableElement, true);
+
+        return $toggleableElement->hasAttribute('disabled');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getToggleableElement()
     {
         return $this->getElement('enabled');

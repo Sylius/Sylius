@@ -1,0 +1,43 @@
+{% macro translationForm(translations) %}
+    {% import '@SyliusUi/Macro/flags.html.twig' as flags %}
+
+    <div class="ui styled fluid accordion">
+        {% for locale, translationForm in translations %}
+            <div data-locale="{{ locale }}">
+                <div class="title{% if 0 == loop.index0 %} active{% endif %}">
+                    <i class="dropdown icon"></i>
+                    {{ flags.fromLocaleCode(locale) }} {{ locale|sylius_locale_name }}
+                </div>
+                <div class="ui content{% if 0 == loop.index0 %} active{% endif %}">
+                    {% for field in translationForm %}
+                        {{ form_row(field) }}
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endmacro %}
+
+{% macro translationFormWithSlug(translations, slugFieldTemplate, resource) %}
+    {% import '@SyliusUi/Macro/flags.html.twig' as flags %}
+
+    <div class="ui styled fluid accordion">
+        {% for locale, translationForm in translations %}
+            <div data-locale="{{ locale }}">
+                <div class="title{% if 0 == loop.index0 %} active{% endif %}">
+                    <i class="dropdown icon"></i>
+                    {{ flags.fromLocaleCode(locale) }} {{ locale|sylius_locale_name }}
+                </div>
+                <div class="ui content{% if 0 == loop.index0 %} active{% endif %}">
+                    {% for field in translationForm %}
+                        {% if field.vars.name != 'slug' %}
+                            {{ form_row(field) }}
+                        {% else %}
+                            {% include slugFieldTemplate with { 'slugField': translationForm.slug, 'resource': resource } %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endmacro %}

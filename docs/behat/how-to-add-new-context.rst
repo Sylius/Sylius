@@ -5,8 +5,8 @@ To add a new context to Behat container it is needed to add a service in to one 
 
 .. code-block:: xml
 
-    <service id="sylius.behat.context.CONTEXT_CATEGORY.CONTEXT_NAME" class="%sylius.behat.context.CONTEXT_CATEGORY.CONTEXT_NAME.class%" scope="scenario">
-        <tag name="sylius.behat.context" />
+    <service id="sylius.behat.context.CONTEXT_CATEGORY.CONTEXT_NAME" class="%sylius.behat.context.CONTEXT_CATEGORY.CONTEXT_NAME.class%">
+        <tag name="fob.context_service" />
     </service>
 
 Then you can use it in your suite configuration:
@@ -16,7 +16,7 @@ Then you can use it in your suite configuration:
     default:
         suites:
             SUITE_NAME:
-                contexts_as_services:
+                contexts_services:
                     - "sylius.behat.context.CONTEXT_CATEGORY.CONTEXT_NAME"
 
                 filters:

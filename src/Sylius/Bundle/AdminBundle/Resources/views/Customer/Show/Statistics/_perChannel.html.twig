@@ -1,0 +1,4 @@
+{% import '@SyliusAdmin/Common/Macro/money.html.twig' as money %}
+<h5 class="sylius-orders-count">{{ 'sylius.ui.number_of_orders'|trans }}: {{ statistics.ordersCount }}</h5>
+<h5 class="sylius-orders-total">{{ 'sylius.ui.total_value_of_orders'|trans }}: {{ money.format(statistics.ordersValue, channel.baseCurrency.code) }}</h5>
+<h5 class="sylius-order-average-total">{{ 'sylius.ui.average_order_value'|trans }}: {{ money.format(statistics.averageOrderValue, channel.baseCurrency.code) }}</h5>

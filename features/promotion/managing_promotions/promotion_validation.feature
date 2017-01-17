@@ -51,3 +51,33 @@ Feature: Promotion validation
         And I make it available from "24.12.2017" to "12.12.2017"
         And I try to save my changes
         Then I should be notified that promotion cannot end before it start
+
+    @ui @javascript
+    Scenario: Trying to add a new promotion without specifying a percentage discount
+        Given I want to create a new promotion
+        When I specify its code as "christmas_sale"
+        And I name it "Christmas sale"
+        And I add the "Order percentage discount" action configured without a percentage value
+        And I try to add it
+        Then I should be notified that this value should not be blank
+        And promotion with name "Christmas sale" should not be added
+
+    @ui @javascript
+    Scenario: Trying to add a new promotion with a wrong percentage discount
+        Given I want to create a new promotion
+        When I specify its code as "christmas_sale"
+        And I name it "Christmas sale"
+        And I add the "Order percentage discount" action configured with a percentage value of 120%
+        And I try to add it
+        Then I should be notified that the maximum value of a percentage discount is 100%
+        And promotion with name "Christmas sale" should not be added
+
+    @ui @javascript
+    Scenario: Trying to add a new promotion with a negative percentage discount
+        Given I want to create a new promotion
+        When I specify its code as "christmas_sale"
+        And I name it "Christmas sale"
+        And I add the "Order percentage discount" action configured with a percentage value of -20%
+        And I try to add it
+        Then I should be notified that a percentage discount value must be at least 0%
+        And promotion with name "Christmas sale" should not be added

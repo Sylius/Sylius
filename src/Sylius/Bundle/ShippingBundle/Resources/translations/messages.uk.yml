@@ -6,36 +6,34 @@ sylius:
         rule:
             unit_count_configuration:
                 count: Кількість
+                equal: Дорівнює
+            type: Тип правила
         shipment:
-            state: Статус
+            state: Стан
             states:
-                checkout: Оформити замовлення
+                checkout: Підрахунок
                 pending: В очікуванні
-                ready: Готовий
-                shipped: Відправлено
-                returned: Повернуто
-                cancelled: Відхилено
-            tracking_code: Трекінг-код
+                ready: Готове
+                shipped: Доставлене
+                returned: Повернене
+                cancelled: Скасоване
+            tracking_code: Код відстеження
         shipping_calculator:
             flat_rate_configuration:
-                amount: Кількість
+                label: Фіксована ставка за доставку
             per_unit_rate_configuration:
-                amount: Кількість
-            weight_rate_configuration:
-                division: Ділення
-            volume_rate_configuration:
-                amount: Кількість
-                division: Ділення
+                label: Фіксована ставка за одиницю
         shipping_category:
             description: Опис
-            name: Ім’я
+            name: Назва
         shipping_method:
             calculator: Калькулятор
             category: Категорія
             category_requirement: Вимоги категорії
+            channels: Канали
             configuration: Конфігурація
             description: Опис
             enabled: Увімкнено
-            name: Ім’я
+            name: Назва
             tax_category: Категорія податку
             translations: Переклади

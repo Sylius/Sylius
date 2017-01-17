@@ -1,7 +1,11 @@
 sylius:
     form:
         currency:
-            exchange_rate: Exchange rate
-            enabled: Enabled
             base: Base currency
             code: Name
+            enabled: Enabled
+            exchange_rate: Exchange rate
+        exchange_rate:
+            source_currency: Source currency
+            target_currency: Target currency
+            ratio: Ratio

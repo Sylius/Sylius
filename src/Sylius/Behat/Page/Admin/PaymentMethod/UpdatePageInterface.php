@@ -43,6 +43,13 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function isPaymentMethodEnabled();
 
     /**
+     * @param string $channelName
+     *
+     * @return bool
+     */
+    public function isAvailableInChannel($channelName);
+
+    /**
      * @param string $language
      *
      * @return string

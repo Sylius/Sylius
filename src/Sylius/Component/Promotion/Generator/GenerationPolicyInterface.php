@@ -17,16 +17,16 @@ namespace Sylius\Component\Promotion\Generator;
 interface GenerationPolicyInterface
 {
     /**
-     * @param InstructionInterface $instruction
+     * @param PromotionCouponGeneratorInstructionInterface $instruction
      *
      * @return bool
      */
-    public function isGenerationPossible(InstructionInterface $instruction);
+    public function isGenerationPossible(PromotionCouponGeneratorInstructionInterface $instruction);
 
     /**
-     * @param InstructionInterface $instruction
+     * @param PromotionCouponGeneratorInstructionInterface $instruction
      *
      * @return int
      */
-    public function getPossibleGenerationAmount(InstructionInterface $instruction);
+    public function getPossibleGenerationAmount(PromotionCouponGeneratorInstructionInterface $instruction);
 }

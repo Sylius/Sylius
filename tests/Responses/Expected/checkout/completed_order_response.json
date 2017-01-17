@@ -1,17 +1,15 @@
 {
     "id": @integer@,
-    "completed_at": "@string@.isDateTime()",
+    "checkout_completed_at": "@string@.isDateTime()",
     "number": @string@,
     "items": @array@,
     "items_total": @integer@,
     "adjustments": @array@,
-    "comments": [],
     "adjustments_total": @integer@,
     "total": @integer@,
     "state": "new",
     "created_at": "@string@.isDateTime()",
     "updated_at": "@string@.isDateTime()",
-    "expires_at": "@string@.isDateTime()",
     "channel": {
         "id": @integer@,
         "code": "CHANNEL",

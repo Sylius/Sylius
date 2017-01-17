@@ -9,8 +9,16 @@ sylius:
             options: Opcije
             meta_keywords: Ključne riječi (Meta Keywords)
             meta_description: Opis (Meta Description)
-            taxons: Taksoni
         product_variant:
             available_on: Dostupno
+            name: Naziv grupe
         association_type:
             name: Naziv grupe
+        variant:
+            name: Naziv grupe
+        option:
+            name: Naziv grupe
+            values: Moguće vrijednosti
+        option_value:
+            add_value: Dodaj vrijednost
+            value: Vrijednost

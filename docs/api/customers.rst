@@ -1,7 +1,7 @@
 Customers API
 =============
 
-These endpoints will allow you to easily manage customers. Base URI is `/api/customers`.
+These endpoints will allow you to easily manage customers. Base URI is `/api/v1/customers`.
 Customer class is strongly coupled with a user class. Because of that we recommend these endpoints to manage all related to user actions
 
 When you get a collection of resources, "Default" serialization group will be used and following fields will be exposed:
@@ -73,7 +73,7 @@ Definition
 
 .. code-block:: text
 
-    GET /api/customers/
+    GET /api/v1/customers/
 
 +---------------+----------------+-------------------------------------------------------------------+
 | Parameter     | Parameter type | Description                                                       |
@@ -91,7 +91,7 @@ Example
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/customers/
+    curl http://sylius.dev/api/v1/customers/
         -H "Authorization: Bearer MWExMWM0NzE1NmUyZDgyZDJiMjEzMmFlMjQ4MzgwMmE4ZTkxYzM0YjdlN2U2YzliNDIyMTk1ZDhlNDYxYWE4Ng"
         -H “Accept: application/json”
 
@@ -228,7 +228,7 @@ Definition
 
 .. code-block:: text
 
-    GET /api/customers/{id}
+    GET /api/v1/customers/{id}
 
 +---------------+----------------+-------------------------------------------------------------------+
 | Parameter     | Parameter type | Description                                                       |
@@ -237,17 +237,13 @@ Definition
 +---------------+----------------+-------------------------------------------------------------------+
 | id            | url attribute  | Id of requested resource                                          |
 +---------------+----------------+-------------------------------------------------------------------+
-| page          | query          | *(optional)* Number of the page, by default = 1                   |
-+---------------+----------------+-------------------------------------------------------------------+
-| limit         | query          | *(optional)* Number of items to display per page, by default = 10 |
-+---------------+----------------+-------------------------------------------------------------------+
 
 Example
 .......
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/customers/399
+    curl http://sylius.dev/api/v1/customers/399
         -H "Authorization: Bearer MWExMWM0NzE1NmUyZDgyZDJiMjEzMmFlMjQ4MzgwMmE4ZTkxYzM0YjdlN2U2YzliNDIyMTk1ZDhlNDYxYWE4Ng"
         -H “Accept: application/json”
 
@@ -276,7 +272,7 @@ Example Response
         "first_name":"Levi",
         "last_name":"Friesen",
         "gender":"u",
-        "groups":[
+        "group":[
 
         ]
     }
@@ -289,7 +285,7 @@ Definition
 
 .. code-block:: text
 
-    POST /api/customers/
+    POST /api/v1/customers/
 
 +--------------------------+----------------+------------------------------------------------------------------------------------------------------+
 | Parameter                | Parameter type | Description                                                                                          |
@@ -320,14 +316,14 @@ Example
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/customers/
+    curl http://sylius.dev/api/v1/customers/
         -H "Authorization: Bearer MWExMWM0NzE1NmUyZDgyZDJiMjEzMmFlMjQ4MzgwMmE4ZTkxYzM0YjdlN2U2YzliNDIyMTk1ZDhlNDYxYWE4Ng"
         -H "Content-Type: application/json"
         -X POST
         --data '
             {
-                "firstName": "John",
-                "lastName": "Diggle",
+                "first_name": "John",
+                "last_name": "Diggle",
                 "email": "john.diggle@yahoo.com",
                 "gender": "m",
                 "user": {
@@ -360,7 +356,7 @@ Example Response
         "first_name":"John",
         "last_name":"Diggle",
         "gender":"m",
-        "groups":[
+        "group":[
 
         ]
     }
@@ -372,7 +368,7 @@ Example
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/customers/
+    curl http://sylius.dev/api/v1/customers/
         -H "Authorization: Bearer MWExMWM0NzE1NmUyZDgyZDJiMjEzMmFlMjQ4MzgwMmE4ZTkxYzM0YjdlN2U2YzliNDIyMTk1ZDhlNDYxYWE4Ng"
         -H "Accept: application/json"
         -X POST
@@ -391,12 +387,12 @@ Example Response
         "message":"Validation Failed",
         "errors":{
             "children":{
-                "firstName":{
+                "first_name":{
                     "errors":[
                         "Please enter your first name."
                     ]
                 },
-                "lastName":{
+                "last_name":{
                     "errors":[
                         "Please enter your last name."
                     ]
@@ -414,7 +410,7 @@ Example Response
                         "Please choose your gender."
                     ]
                 },
-                "groups":{
+                "group":{
 
                 }
             }
@@ -431,7 +427,7 @@ Definition
 
 .. code-block:: text
 
-    PUT /api/customers/{id}
+    PUT /api/v1/customers/{id}
 
 +--------------------------+----------------+------------------------------------------------------------------------------+
 | Parameter                | Parameter type | Description                                                                  |
@@ -464,14 +460,14 @@ Example
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/customers/399
+    curl http://sylius.dev/api/v1/customers/399
         -H "Authorization: Bearer MWExMWM0NzE1NmUyZDgyZDJiMjEzMmFlMjQ4MzgwMmE4ZTkxYzM0YjdlN2U2YzliNDIyMTk1ZDhlNDYxYWE4Ng"
         -H "Content-Type: application/json"
         -X PUT
         --data '
             {
-                "firstName": "John",
-                "lastName": "Diggle",
+                "first_name": "John",
+                "last_name": "Diggle",
                 "email": "john.diggle@example.com",
                 "gender": "m"
             }
@@ -491,7 +487,7 @@ Example
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/customers/399
+    curl http://sylius.dev/api/v1/customers/399
         -H "Authorization: Bearer MWExMWM0NzE1NmUyZDgyZDJiMjEzMmFlMjQ4MzgwMmE4ZTkxYzM0YjdlN2U2YzliNDIyMTk1ZDhlNDYxYWE4Ng"
         -H “Accept: application/json”
         -X PUT
@@ -510,12 +506,12 @@ Example Response
         "message":"Validation Failed",
         "errors":{
             "children":{
-                "firstName":{
+                "first_name":{
                     "errors":[
                         "Please enter your first name."
                     ]
                 },
-                "lastName":{
+                "last_name":{
                     "errors":[
                         "Please enter your last name."
                     ]
@@ -533,7 +529,7 @@ Example Response
                         "Please choose your gender."
                     ]
                 },
-                "groups":{
+                "group":{
 
                 }
             }
@@ -547,7 +543,7 @@ Definition
 
 .. code-block:: text
 
-    PATCH /api/customers/{id}
+    PATCH /api/v1/customers/{id}
 
 +--------------------------+----------------+--------------------------------------------------+
 | Parameter                | Parameter type | Description                                      |
@@ -580,7 +576,7 @@ Example
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/customers/399
+    curl http://sylius.dev/api/v1/customers/399
         -H "Authorization: Bearer MWExMWM0NzE1NmUyZDgyZDJiMjEzMmFlMjQ4MzgwMmE4ZTkxYzM0YjdlN2U2YzliNDIyMTk1ZDhlNDYxYWE4Ng"
         -H "Content-Type: application/json"
         -X PATCH
@@ -601,7 +597,7 @@ Definition
 
 .. code-block:: text
 
-    DELETE /api/customers/{id}
+    DELETE /api/v1/customers/{id}
 
 +---------------+----------------+-------------------------------------------+
 | Parameter     | Parameter type | Description                               |
@@ -616,7 +612,7 @@ Example
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/customers/399
+    curl http://sylius.dev/api/v1/customers/399
         -H "Authorization: Bearer MWExMWM0NzE1NmUyZDgyZDJiMjEzMmFlMjQ4MzgwMmE4ZTkxYzM0YjdlN2U2YzliNDIyMTk1ZDhlNDYxYWE4Ng"
         -H “Accept: application/json”
         -X DELETE
@@ -635,7 +631,7 @@ To browse all orders for specific customer, you can do the following call:
 
 .. code-block:: text
 
-    GET /api/customers/{id}/orders/
+    GET /api/v1/customers/{id}/orders/
 
 Parameters
 ..........

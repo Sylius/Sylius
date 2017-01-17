@@ -19,8 +19,6 @@ use Sylius\Bundle\FixturesBundle\Fixture\FixtureRegistry;
 use Sylius\Bundle\FixturesBundle\Fixture\FixtureRegistryInterface;
 
 /**
- * @mixin FixtureRegistry
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class FixtureRegistrySpec extends ObjectBehavior

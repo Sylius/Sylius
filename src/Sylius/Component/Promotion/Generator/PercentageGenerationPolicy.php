@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Promotion\Generator;
 
-use Sylius\Component\Promotion\Repository\CouponRepositoryInterface;
+use Sylius\Component\Promotion\Repository\PromotionCouponRepositoryInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -20,7 +20,7 @@ use Webmozart\Assert\Assert;
 final class PercentageGenerationPolicy implements GenerationPolicyInterface
 {
     /**
-     * @var CouponRepositoryInterface
+     * @var PromotionCouponRepositoryInterface
      */
     private $couponRepository;
 
@@ -32,7 +32,7 @@ final class PercentageGenerationPolicy implements GenerationPolicyInterface
     /**
      * {@inheritdoc}
      */
-    public function __construct(CouponRepositoryInterface $couponRepository, $ratio = 0.5)
+    public function __construct(PromotionCouponRepositoryInterface $couponRepository, $ratio = 0.5)
     {
         $this->couponRepository = $couponRepository;
         $this->ratio = $ratio;
@@ -41,7 +41,7 @@ final class PercentageGenerationPolicy implements GenerationPolicyInterface
     /**
      * {@inheritdoc}
      */
-    public function isGenerationPossible(InstructionInterface $instruction)
+    public function isGenerationPossible(PromotionCouponGeneratorInstructionInterface $instruction)
     {
         $expectedGenerationAmount = $instruction->getAmount();
         $possibleGenerationAmount = $this->calculatePossibleGenerationAmount($instruction);
@@ -52,17 +52,19 @@ final class PercentageGenerationPolicy implements GenerationPolicyInterface
     /**
      * {@inheritdoc}
      */
-    public function getPossibleGenerationAmount(InstructionInterface $instruction)
+    public function getPossibleGenerationAmount(PromotionCouponGeneratorInstructionInterface $instruction)
     {
         return $this->calculatePossibleGenerationAmount($instruction);
     }
 
     /**
-     * @param InstructionInterface $instruction
+     * @param PromotionCouponGeneratorInstructionInterface $instruction
      *
      * @return int
+     *
+     * @throws \InvalidArgumentException
      */
-    private function calculatePossibleGenerationAmount(InstructionInterface $instruction)
+    private function calculatePossibleGenerationAmount(PromotionCouponGeneratorInstructionInterface $instruction)
     {
         $expectedAmount = $instruction->getAmount();
         $expectedCodeLength = $instruction->getCodeLength();
@@ -71,7 +73,8 @@ final class PercentageGenerationPolicy implements GenerationPolicyInterface
             [$expectedAmount, $expectedCodeLength],
             'Code length or amount cannot be null.'
         );
-        $generatedAmount = $this->couponRepository->countCouponsByCodeLength($expectedCodeLength);
+
+        $generatedAmount = $this->couponRepository->countByCodeLength($expectedCodeLength);
 
         return floor(pow(16, $expectedCodeLength) * $this->ratio - $generatedAmount);
     }

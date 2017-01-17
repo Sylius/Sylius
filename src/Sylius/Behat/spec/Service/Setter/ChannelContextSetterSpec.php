@@ -12,15 +12,12 @@
 namespace spec\Sylius\Behat;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Behat\Service\Setter\ChannelContextSetter;
 use Sylius\Behat\Service\Setter\ChannelContextSetterInterface;
 use Sylius\Behat\Service\Setter\CookieSetterInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
 
 /**
- * @mixin ChannelContextSetter
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class ChannelContextSetterSpec extends ObjectBehavior
@@ -32,7 +29,7 @@ final class ChannelContextSetterSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Behat\Service\Setter\ChannelContextSetter');
+        $this->shouldHaveType(ChannelContextSetter::class);
     }
 
     function it_implements_channel_context_setter_interface()

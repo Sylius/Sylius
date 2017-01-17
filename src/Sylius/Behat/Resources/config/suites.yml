@@ -4,6 +4,7 @@
 imports:
     - suites/cli/installer.yml
 
+    - suites/domain/cart/shopping_cart.yml
     - suites/domain/order/managing_orders.yml
     - suites/domain/product/managing_products.yml
     - suites/domain/product/managing_product_variants.yml
@@ -11,45 +12,59 @@ imports:
     - suites/domain/promotion/managing_promotion_coupons.yml
 
     - suites/ui/account/customer.yml
+    - suites/ui/account/address_book.yml
     - suites/ui/account/login.yml
     - suites/ui/account/registration.yml
-    - suites/ui/account/verification.yml
+    - suites/ui/account/email_verification.yml
     - suites/ui/addressing/managing_countries.yml
     - suites/ui/addressing/managing_zones.yml
     - suites/ui/admin/dashboard.yml
+    - suites/ui/admin/impersonating_customers.yml
+    - suites/ui/admin/locale.yml
     - suites/ui/admin/login.yml
     - suites/ui/cart/shopping_cart.yml
-    - suites/ui/cmf/managing_routes.yml
-    - suites/ui/cmf/managing_static_contents.yml
-    - suites/ui/cmf/static_content.yml
     - suites/ui/channel/managing_channels.yml
     - suites/ui/channel/products_accessibility_in_multiple_channels.yml
     - suites/ui/channel/theming.yml
     - suites/ui/checkout/checkout.yml
     - suites/ui/checkout/paying_for_order.yml
+    - suites/ui/contact/requesting_contact.yml
     - suites/ui/currency/currencies.yml
     - suites/ui/currency/managing_currencies.yml
-    - suites/ui/inventory/inventory.yml
+    - suites/ui/currency/managing_exchange_rates.yml
+    - suites/ui/homepage/viewing_products.yml
+    - suites/ui/inventory/cart_inventory.yml
+    - suites/ui/inventory/checkout_inventory.yml
     - suites/ui/inventory/managing_inventory.yml
     - suites/ui/locale/locales.yml
     - suites/ui/locale/managing_locales.yml
     - suites/ui/order/managing_orders.yml
+    - suites/ui/order/modifying_address.yml
+    - suites/ui/order/order_history.yml
     - suites/ui/payment/managing_payment_methods.yml
+    - suites/ui/product/adding_product_review.yml
+    - suites/ui/product/managing_product_association_types.yml
     - suites/ui/product/managing_product_attributes.yml
     - suites/ui/product/managing_product_options.yml
+    - suites/ui/product/managing_product_reviews.yml
     - suites/ui/product/managing_product_variants.yml
     - suites/ui/product/managing_products.yml
+    - suites/ui/product/viewing_product_reviews.yml
     - suites/ui/product/viewing_products.yml
+    - suites/ui/promotion/applying_promotion_coupon.yml
     - suites/ui/promotion/applying_promotion_rules.yml
     - suites/ui/promotion/managing_promotion_coupons.yml
     - suites/ui/promotion/managing_promotions.yml
     - suites/ui/promotion/receiving_discount.yml
     - suites/ui/shipping/applying_shipping_fee.yml
+    - suites/ui/shipping/managing_shipping_categories.yml
     - suites/ui/shipping/managing_shipping_methods.yml
     - suites/ui/taxation/applying_taxes.yml
     - suites/ui/taxation/managing_tax_categories.yml
     - suites/ui/taxation/managing_tax_rates.yml
     - suites/ui/taxonomy/managing_taxons.yml
+    - suites/ui/user/customer_statistics.yml
     - suites/ui/user/managing_administrators.yml
+    - suites/ui/user/managing_customer_groups.yml
     - suites/ui/user/managing_customers.yml
     - suites/ui/user/managing_users.yml

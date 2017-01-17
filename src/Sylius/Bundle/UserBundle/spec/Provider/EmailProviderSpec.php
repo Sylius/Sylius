@@ -16,7 +16,6 @@ use Sylius\Bundle\UserBundle\Provider\AbstractUserProvider;
 use Sylius\Bundle\UserBundle\Provider\EmailProvider;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Sylius\Component\User\Model\User;
-use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
@@ -50,8 +49,11 @@ final class EmailProviderSpec extends ObjectBehavior
         $this->supportsClass(User::class)->shouldReturn(true);
     }
 
-    function it_loads_user_by_email($userRepository, $canonicalizer, User $user)
-    {
+    function it_loads_user_by_email(
+        UserRepositoryInterface $userRepository,
+        CanonicalizerInterface $canonicalizer,
+        User $user
+    ) {
         $canonicalizer->canonicalize('test@user.com')->willReturn('test@user.com');
 
         $userRepository->findOneByEmail('test@user.com')->willReturn($user);
@@ -59,7 +61,7 @@ final class EmailProviderSpec extends ObjectBehavior
         $this->loadUserByUsername('test@user.com')->shouldReturn($user);
     }
 
-    function it_updates_user_by_user_name($userRepository, User $user)
+    function it_updates_user_by_user_name(UserRepositoryInterface $userRepository, User $user)
     {
         $userRepository->find(1)->willReturn($user);
 

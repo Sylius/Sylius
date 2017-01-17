@@ -13,5 +13,19 @@ sylius:
             taxons: Taksonai
         product_variant:
             available_on: Prieinamas nuo
+            available_until: Prieinamas iki
+            name: Pavadinimas
         association_type:
             name: Pavadinimas
+            translations: Vertimai
+        association:
+            type: Sąryšio tipas
+            product: Susijusi prekė
+        variant:
+            name: Pavadinimas
+        option:
+            name: Pavadinimas
+            values: Galimos reikšmės
+        option_value:
+            add_value: Pridėti reikšmę
+            value: Reikšmė

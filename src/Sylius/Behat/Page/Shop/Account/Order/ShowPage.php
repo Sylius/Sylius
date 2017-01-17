@@ -132,7 +132,6 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             );
 
             return 1 === count($rows);
-
         } catch (\InvalidArgumentException $exception) {
             return false;
         }
@@ -149,17 +148,37 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
+    public function hasShippingProvinceName($provinceName)
+    {
+        $shippingAddressText = $this->getElement('shipping_address')->getText();
+
+        return false !== stripos($shippingAddressText, $provinceName);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasBillingProvinceName($provinceName)
+    {
+        $billingAddressText = $this->getElement('billing_address')->getText();
+
+        return false !== stripos($billingAddressText, $provinceName);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'billing_address' => '#billing-address',
+            'billing_address' => '#sylius-billing-address',
+            'shipping_address' => '#sylius-shipping-address',
             'number' => '#number',
             'order_items' => '#sylius-order',
-            'shipping_address' => '#shipping-address',
+            'payments' => '#sylius-payments',
+            'product_price' => '#sylius-order td:nth-child(2)',
             'subtotal' => '#subtotal',
             'total' => '#total',
-            'payments' => '#payments',
-            'product_price' => '#sylius-order td:nth-child(2)'
         ]);
     }
 
@@ -178,8 +197,8 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return
             (stripos($elementText, $customerName) !== false) &&
             (stripos($elementText, $street) !== false) &&
-            (stripos($elementText, $city) !== false) &&
-            (stripos($elementText, $countryName.' '.$postcode) !== false)
+            (stripos($elementText, $city.', '.$postcode) !== false) &&
+            (stripos($elementText, $countryName) !== false)
         ;
     }
 }

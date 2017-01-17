@@ -13,22 +13,30 @@ sylius:
             states:
                 checkout: Finalizar compra
                 pending: Pendente
+                ready: Preparado
+                shipped: Enviado
+                returned: Devolvido
                 cancelled: Cancelado
             tracking_code: Código de acompanhamento
         shipping_calculator:
             flat_rate_configuration:
+                label: Taxa fixa por envio
                 amount: Quantia
             per_unit_rate_configuration:
-                amount: Quantia
-            volume_rate_configuration:
-                label: Taxa com base no volume
+                label: Taxa fixa por unidade
                 amount: Quantia
         shipping_category:
             description: Descrição
             name: Nome
         shipping_method:
+            calculator: Calculadora
+            category: Categoria
+            category_requirement: Exigência de categoria
+            channels: Canais
+            configuration: Configuração
             description: Descrição
             enabled: Ativado
             name: Nome
             tax_category: Categoria de imposto
             translations: Traduções
+            position: Posição

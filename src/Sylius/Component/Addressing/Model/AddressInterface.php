@@ -42,6 +42,11 @@ interface AddressInterface extends TimestampableInterface, ResourceInterface
     /**
      * @return string
      */
+    public function getFullName();
+
+    /**
+     * @return string
+     */
     public function getPhoneNumber();
 
     /**
@@ -78,6 +83,16 @@ interface AddressInterface extends TimestampableInterface, ResourceInterface
      * @param string $provinceCode
      */
     public function setProvinceCode($provinceCode = null);
+
+    /**
+     * @return string
+     */
+    public function getProvinceName();
+
+    /**
+     * @param string $provinceName
+     */
+    public function setProvinceName($provinceName = null);
 
     /**
      * @return string

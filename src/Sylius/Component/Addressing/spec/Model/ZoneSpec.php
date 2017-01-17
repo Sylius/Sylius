@@ -13,6 +13,8 @@ namespace spec\Sylius\Component\Addressing\Model;
 
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Addressing\Model\Scope;
+use Sylius\Component\Addressing\Model\Zone;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 
@@ -24,7 +26,7 @@ final class ZoneSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Addressing\Model\Zone');
+        $this->shouldHaveType(Zone::class);
     }
 
     function it_implements_Sylius_zone_interface()
@@ -69,12 +71,6 @@ final class ZoneSpec extends ObjectBehavior
         $this->hasMembers()->shouldReturn(false);
     }
 
-    function its_members_are_mutable(Collection $members)
-    {
-        $this->setMembers($members);
-        $this->getMembers()->shouldReturn($members);
-    }
-
     function it_adds_member(ZoneMemberInterface $member)
     {
         $this->addMember($member);
@@ -91,9 +87,9 @@ final class ZoneSpec extends ObjectBehavior
         $this->hasMember($member)->shouldReturn(false);
     }
 
-    function it_has_no_scope_by_default()
+    function it_has_scope_all_by_default()
     {
-        $this->getScope()->shouldReturn(null);
+        $this->getScope()->shouldReturn(Scope::ALL);
     }
 
     function its_scope_is_mutable()

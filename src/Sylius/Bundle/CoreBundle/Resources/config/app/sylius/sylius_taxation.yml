@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_taxation:
+    resources:
+        tax_rate:
+            classes:
+                model: Sylius\Component\Core\Model\TaxRate

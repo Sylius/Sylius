@@ -5,4 +5,5 @@ sylius:
     locale:
         code:
             not_blank: Veuillez choisir le code régional.
+            regex: Le code régional peut uniquement être constitué de lettres, chiffres, tirets et tirets bas.
             unique: Le code régional doit être unique.

@@ -17,15 +17,13 @@ use Sylius\Bundle\ThemeBundle\Factory\ThemeFactoryInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
 /**
- * @mixin ThemeFactory
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class ThemeFactorySpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Factory\ThemeFactory');
+        $this->shouldHaveType(ThemeFactory::class);
     }
 
     function it_implements_theme_factory_interface()

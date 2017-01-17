@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="sylius.behat.page.admin.exchange_rate.create" class="Sylius\Behat\Page\Admin\ExchangeRate\CreatePage" parent="sylius.behat.page.admin.crud.create" public="false">
+            <argument type="string">sylius_admin_exchange_rate_create</argument>
+        </service>
+        <service id="sylius.behat.page.admin.exchange_rate.index" class="Sylius\Behat\Page\Admin\ExchangeRate\IndexPage" parent="sylius.behat.page.admin.crud.index" public="false">
+            <argument type="string">sylius_admin_exchange_rate_index</argument>
+        </service>
+        <service id="sylius.behat.page.admin.exchange_rate.update" class="Sylius\Behat\Page\Admin\ExchangeRate\UpdatePage" parent="sylius.behat.page.admin.crud.update" public="false">
+            <argument type="string">sylius_admin_exchange_rate_update</argument>
+        </service>
+    </services>
+</container>

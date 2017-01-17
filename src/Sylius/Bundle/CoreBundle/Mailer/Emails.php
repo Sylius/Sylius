@@ -14,12 +14,14 @@ namespace Sylius\Bundle\CoreBundle\Mailer;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class Emails
+final class Emails
 {
+    const CONTACT_REQUEST = 'contact_request';
     const ORDER_CONFIRMATION = 'order_confirmation';
-    const ORDER_COMMENT = 'order_comment';
-
     const SHIPMENT_CONFIRMATION = 'shipment_confirmation';
+    const USER_REGISTRATION = 'user_registration';
 
-    const USER_CONFIRMATION = 'user_confirmation';
+    private function __construct()
+    {
+    }
 }

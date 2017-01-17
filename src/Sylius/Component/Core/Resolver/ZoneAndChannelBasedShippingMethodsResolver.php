@@ -12,8 +12,10 @@
 namespace Sylius\Component\Core\Resolver;
 
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
+use Sylius\Component\Core\Model\Scope;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
+use Sylius\Component\Shipping\Checker\ShippingMethodEligibilityCheckerInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
 use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
@@ -35,15 +37,23 @@ class ZoneAndChannelBasedShippingMethodsResolver implements ShippingMethodsResol
     private $zoneMatcher;
 
     /**
+     * @var ShippingMethodEligibilityCheckerInterface
+     */
+    private $eligibilityChecker;
+
+    /**
      * @param ShippingMethodRepositoryInterface $shippingMethodRepository
      * @param ZoneMatcherInterface $zoneMatcher
+     * @param ShippingMethodEligibilityCheckerInterface $eligibilityChecker
      */
     public function __construct(
         ShippingMethodRepositoryInterface $shippingMethodRepository,
-        ZoneMatcherInterface $zoneMatcher
+        ZoneMatcherInterface $zoneMatcher,
+        ShippingMethodEligibilityCheckerInterface $eligibilityChecker
     ) {
         $this->shippingMethodRepository = $shippingMethodRepository;
         $this->zoneMatcher = $zoneMatcher;
+        $this->eligibilityChecker = $eligibilityChecker;
     }
 
     /**
@@ -56,12 +66,21 @@ class ZoneAndChannelBasedShippingMethodsResolver implements ShippingMethodsResol
         /** @var OrderInterface $order */
         $order = $subject->getOrder();
 
-        $zones = $this->zoneMatcher->matchAll($order->getShippingAddress());
+        $zones = $this->zoneMatcher->matchAll($order->getShippingAddress(), Scope::SHIPPING);
         if (empty($zones)) {
             return [];
         }
 
-        return $this->shippingMethodRepository->findEnabledForZonesAndChannel($zones, $order->getChannel());
+        $methods = [];
+
+        $shippingMethods = $this->shippingMethodRepository->findEnabledForZonesAndChannel($zones, $order->getChannel());
+        foreach ($shippingMethods as $shippingMethod) {
+            if ($this->eligibilityChecker->isEligible($subject, $shippingMethod)) {
+                $methods[] = $shippingMethod;
+            }
+        }
+
+        return $methods;
     }
 
     /**

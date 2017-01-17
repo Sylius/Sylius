@@ -42,6 +42,18 @@ class AttributeFactory implements AttributeFactoryInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @throws \BadMethodCallException
+     */
+    public function createNew()
+    {
+        throw new \BadMethodCallException(
+            'Method "createNew()" is not supported for attribute factory. Use "createTyped($type)" instead.'
+        );
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function createTyped($type)
     {
@@ -53,15 +65,5 @@ class AttributeFactory implements AttributeFactoryInterface
         $attribute->setStorageType($attributeType->getStorageType());
 
         return $attribute;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function createNew()
-    {
-        throw new \BadMethodCallException(
-            'Method "createNew()" is not supported for attribute factory. Use "createTyped($type)" instead.'
-        );
     }
 }

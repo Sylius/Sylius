@@ -9,27 +9,38 @@ var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
 var uglify = require('gulp-uglify');
 var uglifycss = require('gulp-uglifycss');
+var argv = require('yargs').argv;
 
-var rootPath = '../../../../web/assets/';
+var rootPath = argv.rootPath;
 var shopRootPath = rootPath + 'shop/';
+var vendorPath = argv.vendorPath || '';
+var vendorShopPath = '' === vendorPath ? '' : vendorPath + 'ShopBundle/';
+var vendorUiPath = '' === vendorPath ? '../UiBundle/' : vendorPath + 'UiBundle/';
+var nodeModulesPath = argv.nodeModulesPath;
 
 var paths = {
     shop: {
         js: [
-            '../../../../node_modules/jquery/dist/jquery.min.js',
-            '../../../../node_modules/semantic-ui-css/semantic.min.js',
-            '../UiBundle/Resources/private/js/**',
-            'Resources/private/js/**'
+            nodeModulesPath + 'jquery/dist/jquery.min.js',
+            nodeModulesPath + 'semantic-ui-css/semantic.min.js',
+            nodeModulesPath + 'lightbox2/dist/js/lightbox.js',
+            vendorUiPath + 'Resources/private/js/**',
+            vendorShopPath + 'Resources/private/js/**'
         ],
         sass: [
-            '../UiBundle/Resources/private/sass/**',
-            'ShopBundle/Resources/private/scss/**'
+            vendorUiPath + 'Resources/private/sass/**',
+            vendorShopPath + 'Resources/private/sass/**'
         ],
         css: [
-            '../../../../node_modules/semantic-ui-css/semantic.min.css'
+            nodeModulesPath + 'semantic-ui-css/semantic.min.css',
+            nodeModulesPath + 'lightbox2/dist/css/lightbox.css',
+            vendorUiPath + 'Resources/private/css/**',
+            vendorShopPath + 'Resources/private/css/**',
+            vendorShopPath + 'Resources/private/scss/**'
         ],
         img: [
-            '../UiBundle/Resources/private/img/**'
+            vendorUiPath + 'Resources/private/img/**',
+            vendorShopPath + 'Resources/private/img/**'
         ]
     }
 };
@@ -37,14 +48,14 @@ var paths = {
 gulp.task('shop-js', function () {
     return gulp.src(paths.shop.js)
         .pipe(concat('app.js'))
-        .pipe(gulpif(env === 'prod', uglify))
+        .pipe(gulpif(env === 'prod', uglify()))
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest(shopRootPath + 'js/'))
     ;
 });
 
 gulp.task('shop-css', function() {
-    gulp.src(['../../../../node_modules/semantic-ui-css/themes/**/*']).pipe(gulp.dest(shopRootPath + 'css/themes/'));
+    gulp.src([nodeModulesPath + 'semantic-ui-css/themes/**/*']).pipe(gulp.dest(shopRootPath + 'css/themes/'));
 
     var cssStream = gulp.src(paths.shop.css)
             .pipe(concat('css-files.css'))
@@ -58,7 +69,7 @@ gulp.task('shop-css', function() {
     return merge(cssStream, sassStream)
         .pipe(order(['css-files.css', 'sass-files.scss']))
         .pipe(concat('style.css'))
-        .pipe(gulpif(env === 'prod', uglifycss))
+        .pipe(gulpif(env === 'prod', uglifycss()))
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest(shopRootPath + 'css/'))
         .pipe(livereload())
@@ -66,6 +77,8 @@ gulp.task('shop-css', function() {
 });
 
 gulp.task('shop-img', function() {
+    gulp.src([nodeModulesPath + 'lightbox2/dist/images/*']).pipe(gulp.dest(shopRootPath + 'images/'));
+
     return gulp.src(paths.shop.img)
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest(shopRootPath + 'img/'))

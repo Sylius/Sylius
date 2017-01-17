@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\CoreBundle\Theme;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Theme\ChannelBasedThemeContext;
 use Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
@@ -22,8 +21,6 @@ use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Core\Model\ChannelInterface;
 
 /**
- * @mixin ChannelBasedThemeContext
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class ChannelBasedThemeContextSpec extends ObjectBehavior
@@ -35,7 +32,7 @@ final class ChannelBasedThemeContextSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Theme\ChannelBasedThemeContext');
+        $this->shouldHaveType(ChannelBasedThemeContext::class);
     }
 
     function it_implements_theme_context_interface()

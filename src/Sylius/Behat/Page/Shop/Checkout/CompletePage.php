@@ -11,14 +11,14 @@
 
 namespace Sylius\Behat\Page\Shop\Checkout;
 
-use Behat\Mink\Session;
 use Behat\Mink\Element\NodeElement;
+use Behat\Mink\Session;
 use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Sylius\Component\Core\Model\AddressInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
-use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -109,13 +109,17 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasPaymentMethod(PaymentMethodInterface $paymentMethod)
+    public function getPaymentMethodName()
     {
-        if (!$this->hasElement('payment_method')) {
-            return false;
-        }
+        return $this->getElement('payment_method')->getText();
+    }
 
-        return false !== strpos($this->getElement('payment_method')->getText(), $paymentMethod->getName());
+    /**
+     * {@inheritdoc}
+     */
+    public function hasPaymentMethod()
+    {
+        return $this->hasElement('payment_method');
     }
 
     /**
@@ -146,6 +150,14 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     /**
      * {@inheritdoc}
      */
+    public function getBaseCurrencyOrderTotal()
+    {
+        return $this->getBaseTotalFromString($this->getElement('base_order_total')->getText());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function addNotes($notes)
     {
         $this->getElement('extra_notes')->setValue($notes);
@@ -166,6 +178,15 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     {
         return false !== stripos($this->getElement('promotion_discounts')->getText(), $promotionName);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasShippingPromotion($promotionName)
+    {
+        return false !== stripos($this->getElement('promotion_shipping_discounts')->getText(), $promotionName);
+    }
+
 
     /**
      * {@inheritdoc}
@@ -242,23 +263,53 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     /**
      * {@inheritdoc}
      */
+    public function hasShippingProvinceName($provinceName)
+    {
+        $shippingAddressText = $this->getElement('shipping_address')->getText();
+
+        return false !== stripos($shippingAddressText, $provinceName);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasBillingProvinceName($provinceName)
+    {
+        $billingAddressText = $this->getElement('billing_address')->getText();
+
+        return false !== stripos($billingAddressText, $provinceName);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getShippingPromotionDiscount($promotionName)
+    {
+        return $this->getElement('promotion_shipping_discounts')->find('css', '.description')->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
             'addressing_step_label' => '.steps a:contains("Address")',
-            'billing_address' => '#billing-address',
+            'billing_address' => '#sylius-billing-address',
+            'currency' => '#sylius-order-currency-code',
             'extra_notes' =>'#sylius_checkout_complete_notes',
             'items_table' => '#sylius-order',
-            'currency' => '#currency',
-            'locale' => '#locale',
+            'locale' => '#sylius-order-locale-name',
             'order_total' => 'td:contains("Total")',
-            'payment_method' => '#payment-method',
+            'base_order_total' => '#base-total',
+            'payment_method' => '#sylius-payment-method',
             'payment_step_label' => '.steps a:contains("Payment")',
             'product_row' => 'tbody tr:contains("%name%")',
             'promotion_discounts' => '#promotion-discounts',
+            'promotion_shipping_discounts' => '#promotion-shipping-discounts',
             'promotion_total' => '#promotion-total',
-            'shipping_address' => '#shipping-address',
-            'shipping_method' => '#shipping-method',
+            'shipping_address' => '#sylius-shipping-address',
+            'shipping_method' => '#sylius-shipping-method',
             'shipping_step_label' => '.steps a:contains("Shipping")',
             'shipping_total' => '#shipping-total',
             'tax_total' => '#tax-total',
@@ -329,7 +380,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
      */
     private function getPriceFromString($price)
     {
-        return (int) round((str_replace(['€', '£', '$'], '', $price) * 100), 2);
+        return (int) round(str_replace(['€', '£', '$'], '', $price) * 100, 2);
     }
 
     /**
@@ -340,6 +391,18 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     private function getTotalFromString($total)
     {
         $total = str_replace('Total:', '', $total);
+
+        return $this->getPriceFromString($total);
+    }
+
+    /**
+     * @param string $total
+     *
+     * @return int
+     */
+    private function getBaseTotalFromString($total)
+    {
+        $total = str_replace('Total in base currency:', '', $total);
 
         return $this->getPriceFromString($total);
     }

@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\InventoryBundle\DependencyInjection;
 
-use Sylius\Bundle\InventoryBundle\Controller\InventoryUnitController;
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Inventory\Model\InventoryUnit;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
@@ -39,7 +39,6 @@ final class Configuration implements ConfigurationInterface
             ->children()
                 ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
                 ->scalarNode('checker')->defaultValue('sylius.availability_checker.default')->cannotBeEmpty()->end()
-                ->scalarNode('operator')->defaultValue('sylius.inventory_operator.default')->cannotBeEmpty()->end()
             ->end()
         ;
 
@@ -56,7 +55,6 @@ final class Configuration implements ConfigurationInterface
         $node
             ->children()
                 ->arrayNode('resources')
-                    ->isRequired()
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->arrayNode('inventory_unit')
@@ -68,7 +66,7 @@ final class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->scalarNode('model')->defaultValue(InventoryUnit::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(InventoryUnitInterface::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('controller')->defaultValue(InventoryUnitController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                     ->end()

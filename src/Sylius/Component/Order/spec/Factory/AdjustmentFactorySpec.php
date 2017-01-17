@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Order\Factory;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Order\Factory\AdjustmentFactory;
 use Sylius\Component\Order\Factory\AdjustmentFactoryInterface;
 use Sylius\Component\Order\Model\AdjustmentInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -28,23 +29,27 @@ final class AdjustmentFactorySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Order\Factory\AdjustmentFactory');
+        $this->shouldHaveType(AdjustmentFactory::class);
     }
 
-    function it_implements_adjustment_factory_interface()
+    function it_implements_an_adjustment_factory_interface()
     {
         $this->shouldImplement(AdjustmentFactoryInterface::class);
     }
 
-    function it_creates_new_adjustment($adjustmentFactory, AdjustmentInterface $adjustment)
-    {
+    function it_creates_new_adjustment(
+        FactoryInterface $adjustmentFactory,
+        AdjustmentInterface $adjustment
+    ) {
         $adjustmentFactory->createNew()->willReturn($adjustment);
 
         $this->createNew()->shouldReturn($adjustment);
     }
 
-    function it_creates_new_adjustment_with_provided_data($adjustmentFactory, AdjustmentInterface $adjustment)
-    {
+    function it_creates_new_adjustment_with_provided_data(
+        FactoryInterface $adjustmentFactory,
+        AdjustmentInterface $adjustment
+    ) {
         $adjustmentFactory->createNew()->willReturn($adjustment);
         $adjustment->setType('tax')->shouldBeCalled();
         $adjustment->setLabel('Tax description')->shouldBeCalled();

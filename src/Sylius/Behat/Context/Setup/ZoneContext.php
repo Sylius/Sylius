@@ -13,16 +13,17 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\AddressingBundle\Factory\ZoneFactoryInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Addressing\Factory\ZoneFactoryInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
+use Sylius\Component\Addressing\Model\Scope;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
-use Sylius\Component\Addressing\Repository\ZoneRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Intl\Intl;
 
 /**
@@ -36,7 +37,7 @@ final class ZoneContext implements Context
     private $sharedStorage;
 
     /**
-     * @var ZoneRepositoryInterface
+     * @var RepositoryInterface
      */
     private $zoneRepository;
 
@@ -57,14 +58,14 @@ final class ZoneContext implements Context
 
     /**
      * @param SharedStorageInterface $sharedStorage
-     * @param ZoneRepositoryInterface $zoneRepository
+     * @param RepositoryInterface $zoneRepository
      * @param ObjectManager $objectManager
      * @param ZoneFactoryInterface $zoneFactory
      * @param FactoryInterface $zoneMemberFactory
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
-        ZoneRepositoryInterface $zoneRepository,
+        RepositoryInterface $zoneRepository,
         ObjectManager $objectManager,
         ZoneFactoryInterface $zoneFactory,
         FactoryInterface $zoneMemberFactory
@@ -122,12 +123,15 @@ final class ZoneContext implements Context
      */
     public function theStoreHasAZoneWithCode($zoneName, $code)
     {
-        $zone = $this->zoneFactory->createTyped(ZoneInterface::TYPE_ZONE);
-        $zone->setCode($code);
-        $zone->setName($zoneName);
+        $this->saveZone($this->setUpZone($zoneName, $code, Scope::ALL), 'zone');
+    }
 
-        $this->sharedStorage->set('zone', $zone);
-        $this->zoneRepository->add($zone);
+    /**
+     * @Given the store has a :scope zone :zoneName with code :code
+     */
+    public function theStoreHasAScopedZoneWithCode($scope, $zoneName, $code)
+    {
+        $this->saveZone($this->setUpZone($zoneName, $code, $scope), $scope . '_zone');
     }
 
     /**
@@ -145,8 +149,8 @@ final class ZoneContext implements Context
     }
 
     /**
-     * @Given /^(it) has the ("([^"]+)" province) member$/
-     * @Given /^(it) also has the ("([^"]+)" province) member$/
+     * @Given /^(it) has the ("[^"]+" province) member$/
+     * @Given /^(it) also has the ("[^"]+" province) member$/
      */
     public function itHasTheProvinceMemberAndTheProvinceMember(
         ZoneInterface $zone,
@@ -185,5 +189,32 @@ final class ZoneContext implements Context
         $zoneMember->setCode($code);
 
         return $zoneMember;
+    }
+
+    /**
+     * @param string $zoneName
+     * @param string $code
+     * @param string $scope
+     *
+     * @return ZoneInterface
+     */
+    private function setUpZone($zoneName, $code, $scope)
+    {
+        $zone = $this->zoneFactory->createTyped(ZoneInterface::TYPE_ZONE);
+        $zone->setCode($code);
+        $zone->setName($zoneName);
+        $zone->setScope($scope);
+
+        return $zone;
+    }
+
+    /**
+     * @param ZoneInterface $zone
+     * @param string $key
+     */
+    private function saveZone($zone, $key)
+    {
+        $this->sharedStorage->set($key, $zone);
+        $this->zoneRepository->add($zone);
     }
 }

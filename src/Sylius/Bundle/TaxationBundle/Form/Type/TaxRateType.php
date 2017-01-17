@@ -13,14 +13,15 @@ namespace Sylius\Bundle\TaxationBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\PercentType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Tax rate form type.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class TaxRateType extends AbstractResourceType
+final class TaxRateType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}
@@ -29,20 +30,20 @@ class TaxRateType extends AbstractResourceType
     {
         $builder
             ->addEventSubscriber(new AddCodeFormSubscriber())
-            ->add('name', 'text', [
+            ->add('name', TextType::class, [
                 'label' => 'sylius.form.tax_rate.name',
             ])
-            ->add('category', 'sylius_tax_category_choice', [
+            ->add('category', TaxCategoryChoiceType::class, [
                 'label' => 'sylius.form.tax_rate.category',
             ])
-            ->add('calculator', 'sylius_tax_calculator_choice', [
+            ->add('calculator', TaxCalculatorChoiceType::class, [
                 'label' => 'sylius.form.tax_rate.calculator',
             ])
-            ->add('amount', 'percent', [
+            ->add('amount', PercentType::class, [
                 'label' => 'sylius.form.tax_rate.amount',
-                'precision' => 3,
+                'scale' => 3,
             ])
-            ->add('includedInPrice', 'checkbox', [
+            ->add('includedInPrice', CheckboxType::class, [
                 'label' => 'sylius.form.tax_rate.included_in_price',
             ])
         ;
@@ -51,7 +52,7 @@ class TaxRateType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_tax_rate';
     }

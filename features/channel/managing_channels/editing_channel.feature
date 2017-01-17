@@ -28,3 +28,8 @@ Feature: Editing channel
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this channel name should be "Website store"
+
+    @ui
+    Scenario: Seeing disabled base currency field during channel edition
+        When I want to modify a channel "Web Channel"
+        Then the base currency field should be disabled

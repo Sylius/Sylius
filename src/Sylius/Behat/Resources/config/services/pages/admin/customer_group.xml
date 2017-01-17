@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="sylius.behat.page.admin.customer_group.create.class">Sylius\Behat\Page\Admin\CustomerGroup\CreatePage</parameter>
+        <parameter key="sylius.behat.page.admin.customer_group.index.class">%sylius.behat.page.admin.crud.index.class%</parameter>
+        <parameter key="sylius.behat.page.admin.customer_group.update.class">Sylius\Behat\Page\Admin\CustomerGroup\UpdatePage</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.behat.page.admin.customer_group.create" class="%sylius.behat.page.admin.customer_group.create.class%" parent="sylius.behat.page.admin.crud.create" public="false">
+            <argument type="string">sylius_admin_customer_group_create</argument>
+        </service>
+        <service id="sylius.behat.page.admin.customer_group.index" class="%sylius.behat.page.admin.customer_group.index.class%" parent="sylius.behat.page.admin.crud.index" public="false">
+            <argument type="string">sylius_admin_customer_group_index</argument>
+        </service>
+        <service id="sylius.behat.page.admin.customer_group.update" class="%sylius.behat.page.admin.customer_group.update.class%" parent="sylius.behat.page.admin.crud.update" public="false">
+            <argument type="string">sylius_admin_customer_group_update</argument>
+        </service>
+    </services>
+</container>

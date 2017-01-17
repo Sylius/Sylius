@@ -16,23 +16,21 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\EventListener\CartBlamerListener;
 use Sylius\Bundle\UserBundle\Event\UserEvent;
-use Sylius\Component\Cart\Context\CartContextInterface;
-use Sylius\Component\Cart\Context\CartNotFoundException;
-use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
+use Sylius\Component\Order\Context\CartContextInterface;
+use Sylius\Component\Order\Context\CartNotFoundException;
+use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 /**
- * @mixin CartBlamerListener
- *
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class CartBlamerListenerSpec extends ObjectBehavior
+final class CartBlamerListenerSpec extends ObjectBehavior
 {
     function let(ObjectManager $cartManager, CartContextInterface $cartContext)
     {
@@ -41,28 +39,28 @@ class CartBlamerListenerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\EventListener\CartBlamerListener');
+        $this->shouldHaveType(CartBlamerListener::class);
     }
 
     function it_throws_exception_when_cart_does_not_implement_core_order_interface_on_implicit_login(
+        BaseOrderInterface $order,
         CartContextInterface $cartContext,
-        CartInterface $cart,
-        UserEvent $userEvent,
-        ShopUserInterface $user
+        ShopUserInterface $user,
+        UserEvent $userEvent
     ) {
-        $cartContext->getCart()->willReturn($cart);
+        $cartContext->getCart()->willReturn($order);
         $userEvent->getUser()->willReturn($user);
         $this->shouldThrow(UnexpectedTypeException::class)->during('onImplicitLogin', [$userEvent]);
     }
 
     function it_throws_exception_when_cart_does_not_implement_core_order_interface_on_interactive_login(
+        BaseOrderInterface $order,
         CartContextInterface $cartContext,
-        CartInterface $cart,
         InteractiveLoginEvent $interactiveLoginEvent,
-        TokenInterface $token,
-        ShopUserInterface $user
+        ShopUserInterface $user,
+        TokenInterface $token
     ) {
-        $cartContext->getCart()->willReturn($cart);
+        $cartContext->getCart()->willReturn($order);
         $interactiveLoginEvent->getAuthenticationToken()->willReturn($token);
         $token->getUser()->willReturn($user);
         $this->shouldThrow(UnexpectedTypeException::class)->during('onInteractiveLogin', [$interactiveLoginEvent]);

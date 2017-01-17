@@ -7,6 +7,6 @@ sylius:
             description: Descripción
             name: Nombre
             parent: Padre
-            permalink: Link permanente
+            slug: Slug
         taxonomy:
             name: Nombre

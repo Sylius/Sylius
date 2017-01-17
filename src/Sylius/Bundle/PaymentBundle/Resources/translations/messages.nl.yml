@@ -32,3 +32,4 @@ sylius:
             gateway: Gateway
             instructions: Instructies
             name: Naam
+            position: Positie

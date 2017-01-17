@@ -14,6 +14,7 @@ namespace spec\Sylius\Component\Attribute\Model;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Attribute\AttributeType\CheckboxAttributeType;
 use Sylius\Component\Attribute\AttributeType\TextAttributeType;
+use Sylius\Component\Attribute\Model\Attribute;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 
 /**
@@ -30,10 +31,10 @@ final class AttributeSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Attribute\Model\Attribute');
+        $this->shouldHaveType(Attribute::class);
     }
 
-    function it_implements_Sylius_attribute_interface()
+    function it_implements_attribute_interface()
     {
         $this->shouldImplement(AttributeInterface::class);
     }
@@ -45,8 +46,8 @@ final class AttributeSpec extends ObjectBehavior
 
     function its_code_is_mutable()
     {
-        $this->setCode('testCode');
-        $this->getCode()->shouldReturn('testCode');
+        $this->setCode('t_shirt_collection');
+        $this->getCode()->shouldReturn('t_shirt_collection');
     }
 
     function it_has_no_name_by_default()
@@ -114,5 +115,12 @@ final class AttributeSpec extends ObjectBehavior
     {
         $this->setUpdatedAt($date);
         $this->getUpdatedAt()->shouldReturn($date);
+    }
+
+    function it_has_position()
+    {
+        $this->getPosition()->shouldReturn(null);
+        $this->setPosition(0);
+        $this->getPosition()->shouldReturn(0);
     }
 }

@@ -26,11 +26,16 @@ interface PrioritizedServiceRegistryInterface
     /**
      * @param object $service
      * @param int $priority
+     *
+     * @throws ExistingServiceException
+     * @throws \InvalidArgumentException
      */
     public function register($service, $priority = 0);
 
     /**
      * @param object $service
+     *
+     * @throws NonExistingServiceException
      */
     public function unregister($service);
 

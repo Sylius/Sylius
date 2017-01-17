@@ -26,12 +26,12 @@ Feature: Cancelling orders
 
     @ui
     Scenario: Cannot cancel an order, which is already cancelled
-        Given the customer canceled this order
+        Given the customer cancelled this order
         When I view the summary of the order "#00000022"
         Then I should not be able to cancel this order
 
     @ui
     Scenario: Checking order payment state of a cancelled order
-        Given this order was canceled
+        Given this order was cancelled
         When I browse orders
         Then this order should have order payment state "Cancelled"

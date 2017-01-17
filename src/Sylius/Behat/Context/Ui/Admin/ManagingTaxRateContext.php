@@ -13,9 +13,9 @@ namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
+use Sylius\Behat\Page\Admin\TaxRate\CreatePageInterface;
 use Sylius\Behat\Page\Admin\TaxRate\UpdatePageInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
-use Sylius\Behat\Page\Admin\TaxRate\CreatePageInterface;
 use Sylius\Component\Core\Model\TaxRateInterface;
 use Webmozart\Assert\Assert;
 
@@ -52,8 +52,8 @@ final class ManagingTaxRateContext implements Context
      */
     public function __construct(
         IndexPageInterface $indexPage,
-        CreatePageInterface $createPage, 
-        UpdatePageInterface $updatePage, 
+        CreatePageInterface $createPage,
+        UpdatePageInterface $updatePage,
         CurrentPageResolverInterface $currentPageResolver
     ) {
         $this->indexPage = $indexPage;
@@ -81,7 +81,6 @@ final class ManagingTaxRateContext implements Context
 
     /**
      * @When I specify its amount as :amount%
-     * @When I change its amount to :amount%
      * @When I do not specify its amount
      * @When I remove its amount
      */
@@ -288,6 +287,14 @@ final class ManagingTaxRateContext implements Context
     public function iDoNotSpecifyItsZone()
     {
         // Intentionally left blank to fulfill context expectation
+    }
+
+    /**
+     * @When I remove its zone
+     */
+    public function iRemoveItsZone()
+    {
+        $this->updatePage->removeZone();
     }
 
     /**

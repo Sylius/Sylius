@@ -25,11 +25,6 @@ interface OrderRepositoryInterface extends RepositoryInterface
     public function count();
 
     /**
-     * @return int
-     */
-    public function getTotalSales();
-
-    /**
      * @param int $count
      *
      * @return OrderInterface[]
@@ -37,16 +32,30 @@ interface OrderRepositoryInterface extends RepositoryInterface
     public function findLatest($count);
 
     /**
-     * @param int|string $number
-     *
-     * @return bool
-     */
-    public function isNumberUsed($number);
-
-    /**
-     * @param string $orderNumber
+     * @param string $number
      *
      * @return OrderInterface|null
      */
-    public function findOneByNumber($orderNumber);
+    public function findOneByNumber($number);
+
+    /**
+     * @param string $tokenValue
+     *
+     * @return OrderInterface|null
+     */
+    public function findOneByTokenValue($tokenValue);
+
+    /**
+     * @param mixed $id
+     *
+     * @return OrderInterface|null
+     */
+    public function findCartById($id);
+
+    /**
+     * @param \DateTime $terminalDate
+     *
+     * @return OrderInterface[]
+     */
+    public function findCartsNotModifiedSince(\DateTime $terminalDate);
 }

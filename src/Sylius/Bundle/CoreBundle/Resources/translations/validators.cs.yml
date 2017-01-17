@@ -2,17 +2,21 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    channel:
+        contact_email:
+            invalid: Tento email je neplatný.
+    contact:
+        email:
+            invalid: Tento email je neplatný.
+            not_blank: Prosím vložte Váš email.
     locale:
         code:
             not_blank: Prosím vložte místní (locale) kód.
             unique: Tento locale již existuje.
     product_variant:
         onHand:
-            min: 'Na skladě musí být více než {{ limit }}.'
+            min: Na skladě musí být více než {{ limit }}.
             not_blank: Prosím zadejte sklad.
-        price:
-            min: Cena nesmí být záporná.
-            not_blank: Prosím vložte cenu.
     product_translation:
         short_description:
-            max: 'Stručný popis nesmí být delší než {{ limit }} znaků.'
+            max: Stručný popis nesmí být delší než {{ limit }} znaků.

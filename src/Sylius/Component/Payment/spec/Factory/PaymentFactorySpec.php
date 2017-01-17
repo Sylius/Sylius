@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Payment\Factory;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Payment\Factory\PaymentFactory;
 use Sylius\Component\Payment\Factory\PaymentFactoryInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -28,7 +29,7 @@ final class PaymentFactorySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Payment\Factory\PaymentFactory');
+        $this->shouldHaveType(PaymentFactory::class);
     }
 
     function it_implements_Sylius_shipment_factory_interface()

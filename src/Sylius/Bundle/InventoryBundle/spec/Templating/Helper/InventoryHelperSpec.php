@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\InventoryBundle\Templating\Helper;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\InventoryBundle\Templating\Helper\InventoryHelper;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
 use Symfony\Component\Templating\Helper\Helper;
@@ -25,7 +26,7 @@ final class InventoryHelperSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\InventoryBundle\Templating\Helper\InventoryHelper');
+        $this->shouldHaveType(InventoryHelper::class);
     }
 
     function it_is_a_twig_extension()
@@ -34,7 +35,7 @@ final class InventoryHelperSpec extends ObjectBehavior
     }
 
     function it_delegates_the_stock_availability_checking_to_the_checker(
-        $checker,
+        AvailabilityCheckerInterface $checker,
         StockableInterface $stockable
     ) {
         $checker->isStockAvailable($stockable)->shouldBeCalled()->willReturn(true);
@@ -43,7 +44,7 @@ final class InventoryHelperSpec extends ObjectBehavior
     }
 
     function it_delegates_the_stock_sufficiency_checking_to_the_checker(
-        $checker,
+        AvailabilityCheckerInterface $checker,
         StockableInterface $stockable
     ) {
         $checker->isStockSufficient($stockable, 3)->shouldBeCalled()->willReturn(false);

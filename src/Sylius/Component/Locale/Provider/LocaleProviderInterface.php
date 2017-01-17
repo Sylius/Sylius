@@ -22,11 +22,6 @@ interface LocaleProviderInterface
     public function getAvailableLocalesCodes();
 
     /**
-     * @return string[]
-     */
-    public function getDefinedLocalesCodes();
-
-    /**
      * @return string
      */
     public function getDefaultLocaleCode();

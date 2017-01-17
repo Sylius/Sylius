@@ -5,4 +5,9 @@ sylius:
     form:
         email:
             enabled: Увімкнено
-            content: Зміст
+            subject: Тема
+            sender_name: Ім'я відправника
+            sender_address: Адреса відправника
+            content: Вміст
+            template: Шаблон
+            no_template: Використати користувацький шаблон

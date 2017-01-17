@@ -11,13 +11,10 @@
 
 namespace spec\Sylius\Component\Grid\Definition;
 
-use Sylius\Component\Grid\Definition\Field;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
+use Sylius\Component\Grid\Definition\Field;
 
 /**
- * @mixin Field
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class FieldSpec extends ObjectBehavior
@@ -29,7 +26,7 @@ final class FieldSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Grid\Definition\Field');
+        $this->shouldHaveType(Field::class);
     }
 
     function it_has_name()
@@ -58,6 +55,32 @@ final class FieldSpec extends ObjectBehavior
         $this->getLabel()->shouldReturn('Is enabled?');
     }
 
+    function it_is_toggleable()
+    {
+        $this->isEnabled()->shouldReturn(true);
+
+        $this->setEnabled(false);
+        $this->isEnabled()->shouldReturn(false);
+        $this->setEnabled(true);
+        $this->isEnabled()->shouldReturn(true);
+    }
+
+    function it_knows_by_which_property_it_can_be_sorted()
+    {
+        $this->getSortable()->shouldReturn(null);
+
+        $this->setSortable('method.enabled');
+        $this->getSortable()->shouldReturn('method.enabled');
+    }
+
+    function its_sorted_by_name_when_sortable_is_not_set()
+    {
+        $this->getSortable()->shouldReturn(null);
+
+        $this->setSortable(null);
+        $this->getSortable()->shouldReturn('enabled');
+    }
+
     function it_has_no_options_by_default()
     {
         $this->getOptions()->shouldReturn([]);
@@ -67,5 +90,16 @@ final class FieldSpec extends ObjectBehavior
     {
         $this->setOptions(['template' => 'SyliusUiBundle:Grid/Field:_status.html.twig']);
         $this->getOptions()->shouldReturn(['template' => 'SyliusUiBundle:Grid/Field:_status.html.twig']);
+    }
+
+    function it_has_last_position_by_default()
+    {
+        $this->getPosition()->shouldReturn(100);
+    }
+
+    function its_position_is_mutable()
+    {
+        $this->setPosition(1);
+        $this->getPosition()->shouldReturn(1);
     }
 }

@@ -21,7 +21,7 @@ Feature: Shipping an order
         When specify its tracking code as "#00044"
         And I ship this order
         Then I should be notified that the order has been successfully shipped
-        And an email with shipment's details of order "#00000666" should be sent to "lucy@teamlucifer.com"
+        And an email with shipment's details of this order should be sent to "lucy@teamlucifer.com"
         And it should have shipment in state shipped
 
     @ui
@@ -29,3 +29,9 @@ Feature: Shipping an order
         Given this order has already been shipped
         When I view the summary of the order "#00000666"
         Then I should not be able to ship this order
+
+    @ui
+    Scenario: Checking the shipment state of a completed order
+        Given this order has already been shipped
+        When I browse orders
+        Then this order should have order shipping state "Shipped"

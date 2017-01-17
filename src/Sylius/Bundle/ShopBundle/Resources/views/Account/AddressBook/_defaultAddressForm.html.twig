@@ -1,0 +1,9 @@
+{% set id = app.request.attributes.get('id') %}
+
+{{ form_start(form, {'action': path('sylius_shop_account_address_book_set_as_default', {'id': id}), 'method': 'PATCH'}) }}
+    <input hidden name="{{ form.defaultAddress.vars['full_name'] }}" value="{{ id }}" />
+    <button type="submit" class="ui labeled icon teal button">
+        <i class="save icon"></i>{{ 'sylius.ui.set_as_default'|trans }}
+    </button>
+{{ form_row(form._token) }}
+{{ form_end(form, {'render_rest': false}) }}

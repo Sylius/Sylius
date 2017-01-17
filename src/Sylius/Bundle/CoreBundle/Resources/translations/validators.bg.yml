@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    channel:
+        contact_email:
+            max: Електронната поща не трябва да надвишава {{ limit }} знака.
+            min: Имейлът трябва да бъде поне {{ limit }} знака.
+    user:
+        email:
+            unique: Този имейл вече е използван.

@@ -13,6 +13,7 @@ sylius:
             postcode: 邮编
             street: 街道
             province: 省/直辖市/自治区
+            zone: 区域
         country:
             add_province: 添加省
             name: 名称
@@ -33,6 +34,8 @@ sylius:
                 province: 省/直辖市/自治区
                 zone: 区域
             scope: 范围
+            scopes:
+                all: 全部
             select: 请选择
             select_scope: 选择范围
         zone_member:

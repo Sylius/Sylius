@@ -12,9 +12,11 @@
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\PaymentMethod\CreatePageInterface;
 use Sylius\Behat\Page\Admin\PaymentMethod\UpdatePageInterface;
+use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Webmozart\Assert\Assert;
@@ -46,6 +48,11 @@ final class ManagingPaymentMethodsContext implements Context
     private $currentPageResolver;
 
     /**
+     * @var NotificationCheckerInterface
+     */
+    private $notificationChecker;
+
+    /**
      * @param CreatePageInterface $createPage
      * @param IndexPageInterface $indexPage
      * @param UpdatePageInterface $updatePage
@@ -55,12 +62,14 @@ final class ManagingPaymentMethodsContext implements Context
         CreatePageInterface $createPage,
         IndexPageInterface $indexPage,
         UpdatePageInterface $updatePage,
-        CurrentPageResolverInterface $currentPageResolver
+        CurrentPageResolverInterface $currentPageResolver,
+        NotificationCheckerInterface $notificationChecker
     ) {
         $this->createPage = $createPage;
         $this->indexPage = $indexPage;
         $this->updatePage = $updatePage;
         $this->currentPageResolver = $currentPageResolver;
+        $this->notificationChecker = $notificationChecker;
     }
 
     /**
@@ -118,11 +127,20 @@ final class ManagingPaymentMethodsContext implements Context
 
     /**
      * @When I delete the :paymentMethod payment method
+     * @When I try to delete the :paymentMethod payment method
      */
     public function iDeletePaymentMethod(PaymentMethodInterface $paymentMethod)
     {
         $this->indexPage->open();
         $this->indexPage->deleteResourceOnPage(['code' => $paymentMethod->getCode(), 'name' => $paymentMethod->getName()]);
+    }
+
+    /**
+     * @Then I should be notified that it is in use
+     */
+    public function iShouldBeNotifiedThatItIsInUse()
+    {
+        $this->notificationChecker->checkNotification('Cannot delete, the payment method is in use.', NotificationType::failure());
     }
 
     /**
@@ -172,6 +190,14 @@ final class ManagingPaymentMethodsContext implements Context
     }
 
     /**
+     * @When make it available in channel :channel
+     */
+    public function iMakeItAvailableInChannel($channel)
+    {
+        $this->createPage->checkChannel($channel);
+    }
+
+    /**
      * @Given I set its instruction as :instructions in :language
      */
     public function iSetItsInstructionAsIn($instructions, $language)
@@ -203,11 +229,59 @@ final class ManagingPaymentMethodsContext implements Context
     }
 
     /**
+     * @Given /^(this payment method) should still be in the registry$/
+     */
+    public function thisPaymentMethodShouldStillBeInTheRegistry(PaymentMethodInterface $paymentMethod)
+    {
+        $this->thePaymentMethodShouldAppearInTheRegistry($paymentMethod->getName());
+    }
+
+    /**
+     * @Given I am browsing payment methods
      * @When I browse payment methods
      */
     public function iBrowsePaymentMethods()
     {
         $this->indexPage->open();
+    }
+
+    /**
+     * @Then the first payment method on the list should have :field :value
+     */
+    public function theFirstPaymentMethodOnTheListShouldHave($field, $value)
+    {
+        $actualValue = $this->indexPage->getColumnFields($field)[0];
+
+        Assert::same(
+            $actualValue,
+            $value,
+            sprintf('Expected first payment method\'s %s to be "%s", but it is "%s".', $field, $value, $actualValue)
+        );
+    }
+
+    /**
+     * @Then the last payment method on the list should have :field :value
+     */
+    public function theLastPaymentMethodOnTheListShouldHave($field, $value)
+    {
+        $fields = $this->indexPage->getColumnFields($field);
+        $actualValue = end($fields);
+
+        Assert::same(
+            $actualValue,
+            $value,
+            sprintf('Expected last payment method\'s %s to be "%s", but it is "%s".', $field, $value, $actualValue)
+        );
+    }
+
+    /**
+     * @When I switch the way payment methods are sorted by :field
+     * @When I start sorting payment methods by :field
+     * @Given the payment methods are already sorted by :field
+     */
+    public function iSortPaymentMethodsBy($field)
+    {
+        $this->indexPage->sortBy($field);
     }
 
     /**
@@ -217,8 +291,8 @@ final class ManagingPaymentMethodsContext implements Context
     {
         $foundRows = $this->indexPage->countItems();
 
-        Assert::eq(
-            ((int) $amount),
+        Assert::same(
+            (int) $amount,
             $foundRows,
             '%2$s rows with payment methods should appear on page, %s rows has been found'
         );
@@ -319,6 +393,21 @@ final class ManagingPaymentMethodsContext implements Context
         Assert::same(
             $this->updatePage->getPaymentMethodInstructions($language),
             $instructions
+        );
+    }
+
+    /**
+     * @Then the payment method :paymentMethod should be available in channel :channelName
+     */
+    public function thePaymentMethodShouldBeAvailableInChannel(
+        PaymentMethodInterface $paymentMethod,
+        $channelName
+    ) {
+        $this->iWantToModifyAPaymentMethod($paymentMethod);
+
+        Assert::true(
+            $this->updatePage->isAvailableInChannel($channelName),
+            sprintf('Payment method should be available in channel "%s" but it does not.', $channelName)
         );
     }
 

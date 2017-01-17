@@ -16,7 +16,7 @@ use Symfony\Component\Validator\Constraint;
 /**
  * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
-class HasEnabledEntity extends Constraint
+final class HasEnabledEntity extends Constraint
 {
     /**
      * @var string|null

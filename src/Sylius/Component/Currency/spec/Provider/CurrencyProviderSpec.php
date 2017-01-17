@@ -18,8 +18,6 @@ use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
- * @mixin CurrencyProvider
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class CurrencyProviderSpec extends ObjectBehavior
@@ -31,7 +29,7 @@ final class CurrencyProviderSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Currency\Provider\CurrencyProvider');
+        $this->shouldHaveType(CurrencyProvider::class);
     }
 
     function it_is_a_currency_provider_interface()

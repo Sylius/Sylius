@@ -4,14 +4,14 @@
 sylius:
     form:
         review:
+            author: Автор
+            comment: Комментарий
             header: Добавить отзыв
             rating: Рейтинг
-            title: Название
-            comment: Комментарий
-            author: Автор
             status:
+                approved: Одобрено
                 label: Статус
                 new: Новый
-                approved: Одобрено
                 rejected: Отклонено
             submit: Отправить
+            title: Название

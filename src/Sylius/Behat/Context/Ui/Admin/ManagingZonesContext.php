@@ -12,12 +12,12 @@
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
-use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
-use Sylius\Behat\Page\Admin\Zone\UpdatePageInterface;
-use Sylius\Behat\Page\Admin\Zone\CreatePageInterface;
-use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
-use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\NotificationType;
+use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
+use Sylius\Behat\Page\Admin\Zone\CreatePageInterface;
+use Sylius\Behat\Page\Admin\Zone\UpdatePageInterface;
+use Sylius\Behat\Service\NotificationCheckerInterface;
+use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 use Webmozart\Assert\Assert;
@@ -74,7 +74,7 @@ final class ManagingZonesContext implements Context
     }
 
     /**
-     * @Given I want to create a new zone consisting of :memberType
+     * @When I want to create a new zone consisting of :memberType
      */
     public function iWantToCreateANewZoneWithMembers($memberType)
     {
@@ -82,7 +82,7 @@ final class ManagingZonesContext implements Context
     }
 
     /**
-     * @Given I want to see all zones in store
+     * @When I want to see all zones in store
      */
     public function iWantToSeeAllZonesInStore()
     {
@@ -90,7 +90,7 @@ final class ManagingZonesContext implements Context
     }
 
     /**
-     * @Given /^I want to modify the (zone named "[^"]+")$/
+     * @When /^I want to modify the (zone named "[^"]+")$/
      */
     public function iWantToModifyAZoneNamed(ZoneInterface $zone)
     {
@@ -172,6 +172,14 @@ final class ManagingZonesContext implements Context
     }
 
     /**
+     * @When I select its scope as :scope
+     */
+    public function iSelectItsScopeAs($scope)
+    {
+        $this->createPage->selectScope($scope);
+    }
+
+    /**
      * @When I add it
      * @When I try to add it
      */
@@ -197,6 +205,20 @@ final class ManagingZonesContext implements Context
     }
 
     /**
+     * @Given its scope should be :scope
+     */
+    public function itsScopeShouldBe($scope)
+    {
+        $zoneScope = $this->updatePage->getScope();
+
+        Assert::same(
+            $scope,
+            $zoneScope,
+            sprintf('Zone should have scope "%s" but it has "%s".', $scope, $zoneScope)
+        );
+    }
+
+    /**
      * @Then /^(this zone) should have only (the "([^"]*)" (?:country|province|zone) member)$/
      */
     public function thisZoneShouldHaveOnlyTheProvinceMember(ZoneInterface $zone, ZoneMemberInterface $zoneMember)
@@ -206,7 +228,7 @@ final class ManagingZonesContext implements Context
         Assert::eq(
             1,
             $this->updatePage->countMembers(),
-            sprintf('Zone %s should have only %s zone member',$zone->getName(), $zoneMember->getCode())
+            sprintf('Zone %s should have only %s zone member', $zone->getName(), $zoneMember->getCode())
         );
     }
 
@@ -331,8 +353,8 @@ final class ManagingZonesContext implements Context
     {
         $resourcesOnPage = $this->indexPage->countItems();
 
-        Assert::eq(
-            $number,
+        Assert::same(
+            (int) $number,
             $resourcesOnPage,
             sprintf('On list should be %d zones but get %d', $number, $resourcesOnPage)
         );

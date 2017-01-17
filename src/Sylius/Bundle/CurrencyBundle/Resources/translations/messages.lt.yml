@@ -4,6 +4,6 @@
 sylius:
     form:
         currency:
-            exchange_rate: Valiutų kursas
-            enabled: Įjungta
             code: Pavadinimas
+            enabled: Įjungta
+            exchange_rate: Valiutų kursas

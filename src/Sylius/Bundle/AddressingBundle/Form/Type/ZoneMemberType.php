@@ -12,29 +12,20 @@
 namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Component\Addressing\Model\ZoneInterface;
-use Sylius\Component\Addressing\Model\ZoneMember;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class ZoneMemberType extends AbstractResourceType
+final class ZoneMemberType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $type = $options['zone_type'];
-
-        $builder
-            ->add('code', 'sylius_'.$type.'_code_choice', [
-                'label' => 'sylius.form.zone.types.'.$type,
-                'required' => true,
-            ])
-        ;
+        $builder->add('code', $options['entry_type'], array_merge($options['entry_options'], ['required' => true]));
     }
 
     /**
@@ -43,10 +34,11 @@ class ZoneMemberType extends AbstractResourceType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
+            ->setRequired('entry_type')
             ->setDefaults([
-                'empty_value' => 'sylius.form.zone_member.select',
-                'data_class' => ZoneMember::class,
-                'zone_type' => ZoneInterface::TYPE_COUNTRY,
+                'entry_options' => [],
+                'placeholder' => 'sylius.form.zone_member.select',
+                'data_class' => $this->dataClass,
             ])
         ;
     }
@@ -54,7 +46,7 @@ class ZoneMemberType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_zone_member';
     }

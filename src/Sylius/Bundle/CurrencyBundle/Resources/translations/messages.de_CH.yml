@@ -4,5 +4,5 @@
 sylius:
     form:
         currency:
-            enabled: Aktiviert
             code: Name
+            enabled: Aktiviert

@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    review:
+        accept: 'L''avis sur le produit a été accepté avec succès.'
+        reject: 'L''avis sur le produit a été rejeté avec succès.'
+        wait_for_the_acceptation: 'Votre commentaire est en attente d''approbation.'

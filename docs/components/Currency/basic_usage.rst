@@ -23,50 +23,6 @@ convert currency's code into a human friendly form.
 .. note::
    The output of ``getName`` may vary as the name is generated accordingly to the set locale.
 
-.. _component_currency_context_currency-context:
-
-CurrencyContext
----------------
-
-The **CurrencyContext** is responsible for keeping the currently
-set and default currency names in a given :doc:`/components/Storage/index`.
-
-.. tip::
-   You can use a custom storage, as long as it implements the :ref:`component_storage_storage-interface`.
-
-In this example let's use the default :ref:`component_storage_session-storage`.
-
-.. code-block:: php
-
-   <?php
-
-   use Sylius\Component\Currency\Context\CurrencyContext;
-   use Sylius\Component\Storage\SessionStorage;
-   use Symfony\Component\HttpFoundation\Session\Session;
-
-   $session = new Session();
-   $session->start();
-   $sessionStorage = new SessionStorage($session);
-
-   $currencyCode = 'USD'; // The currency code which will be used by default in this context.
-
-   $currencyContext = new CurrencyContext($sessionStorage, $currencyCode);
-
-   $currencyContext->getDefaultCurrencyCode(); // Returns 'USD'.
-   $currencyContext->getCurrencyCode('GBP'); // Returns 'USD' as the given code is not in storage.
-   $currencyContext->setCurrencyCode('GBP');
-   $currencyContext->getCurrencyCode('GBP'); // Returns 'GBP' for now it's available in the storage.
-
-Be aware that setting the default currency is done only once while creating the context,
-afterwards you cannot change it.
-
-.. note::
-   This service implements the :ref:`component_currency_context_currency-context-interface`.
-
-   For more detailed information go to `Sylius API CurrencyContext`_.
-
-.. _Sylius API CurrencyContext: http://api.sylius.org/Sylius/Component/Currency/Context/CurrencyContext.html
-
 .. _component_currency_converter_currency-converter:
 
 CurrencyConverter
@@ -74,25 +30,10 @@ CurrencyConverter
 
 The **CurrencyConverter** allows you to convert a value accordingly to the exchange rate of specified currency.
 
-.. code-block:: php
-
-   <?php
-
-   use Sylius\Component\Currency\Converter\CurrencyConverter;
-   use Sylius\Component\Currency\Model\Currency;
-   use Sylius\Component\Resource\Repository\InMemoryRepository;
-
-   $currency = new Currency();
-   $currency->setCode('USD');
-   $currency->setExchangeRate(1.5);
-
-   $currencyRepository = new InMemoryRepository(); // Let's assume our $currency is already in the repository.
-
-   $currencyConverter = new CurrencyConverter($currencyRepository);
-
-   $currencyConverter->convert(1000, 'USD'); // Returns 1500.
+This behaviour is used just for displaying the *approximate* value in another currency than the base currency of the channel.
 
 .. note::
+
    This service implements the :ref:`component_currency_converter_currency-converter-interface`.
 
    For more detailed information go to `Sylius API CurrencyConverter`_.
@@ -100,6 +41,7 @@ The **CurrencyConverter** allows you to convert a value accordingly to the excha
 .. _Sylius API CurrencyConverter: http://api.sylius.org/Sylius/Component/Currency/Converter/CurrencyConverter.html
 
 .. caution::
+
    Throws :ref:`component_currency_converter_unavailable-currency-exception`.
 
 .. _component_currency_provider_currency-provider:

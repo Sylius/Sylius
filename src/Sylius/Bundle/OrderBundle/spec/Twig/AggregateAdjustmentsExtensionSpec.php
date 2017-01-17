@@ -14,6 +14,7 @@ namespace spec\Sylius\Bundle\OrderBundle\Twig;
 use PhpSpec\Exception\Example\FailureException;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\OrderBundle\Templating\Helper\AdjustmentsHelper;
+use Sylius\Bundle\OrderBundle\Twig\AggregateAdjustmentsExtension;
 use Sylius\Component\Order\Model\AdjustmentInterface;
 
 /**
@@ -28,7 +29,7 @@ final class AggregateAdjustmentsExtensionSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\OrderBundle\Twig\AggregateAdjustmentsExtension');
+        $this->shouldHaveType(AggregateAdjustmentsExtension::class);
     }
 
     function it_is_twig_extension()
@@ -38,11 +39,16 @@ final class AggregateAdjustmentsExtensionSpec extends ObjectBehavior
 
     function it_has_functions()
     {
-        $this->getFunctions()->shouldHaveFunction(new \Twig_SimpleFunction('sylius_aggregate_adjustments', [$this, 'aggregateAdjustments']));
+        $this
+            ->getFunctions()
+            ->shouldHaveFunction(
+                new \Twig_SimpleFunction('sylius_aggregate_adjustments', [$this, 'aggregateAdjustments'])
+            )
+        ;
     }
 
-    function it_uses_helper_to_get_aggregated_adjustments(
-        $adjustmentsHelper,
+    function it_uses_a_helper_to_get_aggregated_adjustments(
+        AdjustmentsHelper $adjustmentsHelper,
         AdjustmentInterface $adjustment1,
         AdjustmentInterface $adjustment2,
         AdjustmentInterface $adjustment3
@@ -52,10 +58,13 @@ final class AggregateAdjustmentsExtensionSpec extends ObjectBehavior
             ->willReturn(['tax 1' => 1000, 'tax2' => 500])
         ;
 
-        $this->aggregateAdjustments([$adjustment1, $adjustment2, $adjustment3])->shouldReturn(['tax 1' => 1000, 'tax2' => 500]);
+        $this
+            ->aggregateAdjustments([$adjustment1, $adjustment2, $adjustment3])
+            ->shouldReturn(['tax 1' => 1000, 'tax2' => 500])
+        ;
     }
 
-    function it_has_name()
+    function it_has_a_name()
     {
         $this->getName()->shouldReturn('sylius_aggregate_adjustments');
     }
@@ -64,7 +73,6 @@ final class AggregateAdjustmentsExtensionSpec extends ObjectBehavior
     {
         return [
             'haveFunction' => function ($subject, $key) {
-
                 if (!is_array($subject)) {
                     throw new FailureException('Subject of "hasFunction" matcher must be an array');
                 }
@@ -75,7 +83,8 @@ final class AggregateAdjustmentsExtensionSpec extends ObjectBehavior
 
                 /** @var \Twig_SimpleFunction $subjectElement */
                 foreach ($subject as $subjectElement) {
-                    if ($subjectElement->getName() === $key->getName() && $subjectElement->getCallable()[1] === $key->getCallable()[1]) {
+                    if ($subjectElement->getName() === $key->getName()
+                        && $subjectElement->getCallable()[1] === $key->getCallable()[1]) {
                         return true;
                     }
                 }

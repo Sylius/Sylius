@@ -1,0 +1,16 @@
+<div class="ui column stackable grid">
+    <div class="row">
+        <div class="column">
+            {{ form_errors(form) }}
+            <div class="two fields">
+                {{ form_row(form.code) }}
+                {{ form_row(form.name) }}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column">
+            {{ form_row(form.description) }}
+        </div>
+    </div>
+</div>

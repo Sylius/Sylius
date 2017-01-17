@@ -22,11 +22,6 @@ sylius:
                 amount: Suma
             per_unit_rate_configuration:
                 amount: Suma
-            weight_rate_configuration:
-                division: Dalyba
-            volume_rate_configuration:
-                amount: Suma
-                division: Dalyba
         shipping_category:
             description: Aprašymas
             name: Pavadinimas
@@ -34,8 +29,10 @@ sylius:
             calculator: Skaičiuoklė
             category: Kategorija
             category_requirement: Kategorijos reikalavimas
+            channels: Kanalai
             configuration: Konfigūracija
             description: Aprašymas
             enabled: Įjungta
             name: Pavadinimas
             tax_category: Mokesčių kategorija
+            translations: Vertimai

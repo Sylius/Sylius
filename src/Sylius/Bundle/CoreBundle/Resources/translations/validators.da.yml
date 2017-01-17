@@ -2,6 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    contact:
+        email:
+            not_blank: Indtast venligst din email.
     locale:
         code:
             not_blank: Venligst angiv landekode.

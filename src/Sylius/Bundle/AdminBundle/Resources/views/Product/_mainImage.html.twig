@@ -1,3 +1,9 @@
-{% set path = product.image is not null ? product.image.path|imagine_filter(filter|default('sylius_admin_product_thumbnail')) : 'http://placehold.it/50x50' %}
+{% if product.imageByCode('thumbnail') is not null %}
+    {% set path = product.imageByCode('thumbnail').path|imagine_filter(filter|default('sylius_admin_product_thumbnail')) %}
+{% elseif product.images.first %}
+    {% set path = product.images.first.path|imagine_filter(filter|default('sylius_admin_product_thumbnail')) %}
+{% else %}
+    {% set path = 'http://placehold.it/50x50' %}
+{% endif %}
 
 <img src="{{ path }}" alt="" class="ui bordered image" />

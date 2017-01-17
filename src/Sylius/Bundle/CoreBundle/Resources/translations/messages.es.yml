@@ -3,12 +3,6 @@
 
 sylius:
     form:
-        action:
-            add_product_configuration:
-                price: Precio unitario
-                quantity: Cantidad
-                variant: Variante
-            customer_group: Grupo de clientes
         block:
             body: Cuerpo
             id: ID
@@ -17,12 +11,15 @@ sylius:
             coupon: Cupón
         checkout:
             addressing:
-                different_billing_address: ¿Usar una dirección diferente para la facturación?
+                different_billing_address: '¿Usar una dirección diferente para la facturación?'
             payment_method: Método de pago
             shipping_method: Método de envío
         promotion:
             channels: Canales
-        coupon:
+        promotion_action:
+            add_product_configuration:
+                product: Producto
+        promotion_coupon:
             per_customer_usage_limit: Límite de uso por cliente
         group:
             name: Nombre
@@ -31,15 +28,17 @@ sylius:
             taxonomies: Taxonomías
             locale_default: Configuración regional predeterminada
             locales: Idiomas
-            currency_default: Moneda por defecto
+            contact_email: Email de contacto
+            currency_base: Moneda base
             currencies: Monedas
             shipping_methods: Métodos de envío
             payment_methods: Métodos de pago
             tax_calculation_strategy: Estrategia de cálculo de impuestos
-            tax_zone_default: Zona fiscal por defecto
+            tax_zone_default: Zona de impuestos por defecto
             theme: Tema
             hostname: Nombre del host
         image:
+            code: Código
             file: Imagen
         locale:
             code: Código
@@ -57,8 +56,8 @@ sylius:
             id: ID
             title: Título
         product:
+            images: Imágenes
             restricted_zone: Zona restringida
-            shipping_category: Categoría de envío
             short_description: Descripción breve
             variant_selection_method: Método de selección variante
             main_taxon: Taxón principal
@@ -69,25 +68,12 @@ sylius:
             code: Código
         product_variant:
             tax_category: Categoría de impuestos
-        settings:
-            general:
-                currency: Moneda por defecto
-                locale: Idioma
-                meta_description: Meta descripción
-                meta_keywords: Meta palabras clave
-                title: Título de la página
-                tracking_code:
-                    Tracking code (for example: Código de Google Analytics)
-            taxation:
-                default_tax_zone: Zona fiscal por defecto
-                default_tax_calculation_strategy: Estrategia de cálculo de impuesto por defecto
-            security:
-                enabled: ¿Activar?
+            shipping_category: Categoría de envío
         shipment_filter:
             created_at_from: Desde
             created_at_to: Hasta
             number: Número de pedido
-            shipping_address: Enviar a
+            shipping_address: Enviar a nombre de
             channel: Todos los canales
         payment_filter:
             created_at_from: Desde
@@ -98,12 +84,14 @@ sylius:
         shipping_method:
             zone: Zona
         taxon:
+            code: Código
             file: Seleccione una imagen
+            images: Imágenes
         taxonomy:
             file: Seleccione una imagen
         user:
             billing_address: Dirección de facturación
-            different_billing_address: Usar una dirección diferente para la facturación?
+            different_billing_address: '¿Usar una dirección diferente para la facturación?'
             enabled: Activado
             first_name: Nombre
             groups: Grupos
@@ -116,10 +104,8 @@ sylius:
         variant:
             depth: Profundidad
             height: Alto
-            images: Imágenes
             on_hand: Existencias actuales
             price: Precio
-            original_price: Precio original
             sku: SKU
             weight: Peso
             width: Ancho
@@ -134,33 +120,86 @@ sylius:
             type: Tipos de asociación
         product_association_type:
             name: Nombre
+        promotion_filter:
+            products: Filtro de productos
+            taxons: Filtro de taxones
         promotion_rule:
-            contains_taxon:
-                taxon: Taxón
-                count: Contador
-            taxon:
-                taxons: Taxonomías
+            customer_group:
+                group: Grupo de clientes
+            has_taxon:
+                taxons: Taxones
+            product:
+                products: Productos
             total_of_items_from_taxon:
                 taxon: Taxón
                 amount: Cantidad
-    email:
-        order_confirmation:
-            name: Confirmación de pedido
-        order_comment:
-            name: Comentario del pedido
-        shipment_confirmation:
-            name: Confirmación del envío
-            content: 'Su pedido número %number% ha sido enviado mediante %method%.<br/>Puedes comprobar dónde se encuentra con el código de seguimiento "%tracking%".<br/><br/>Gracias por tu pedido.'
-        user_confirmation:
-            name: Confirmación de usuario
-            subject: Bienvenido a nuestra tienda
-            content: 'Bienvenido a nuestra tienda<br/><br/>Usted se acaba de registrar.<br/>Gracias %username%.'
-        password_reset:
-            name: Restablecer contraseña
-            content: '<h3>Hola %username%</h3>Para restablecer su contraseña - visite %url% <br/><br/>Atentamente, el equipo.'
-        verification:
-            name: Verificación de dirección de correo electrónico
-            content: 'Para verificar tu correo electrónico, por favor accede a %url%'
+        payment_method:
+            channels: Canales
+        product_attribute:
+            position: Posición
+        zone:
+            scopes:
+                shipping: Gastos de envío
+                tax: Impuestos
+    installer:
+        extensions:
+            header: extensiones
+            accelerator:
+                header: Acelerador
+                help: Activa Zend OpCache (muy recomendado).
+            apc: APC
+            ctype: Ctype
+            gd: GD
+            help: Instala y activa la extensión %extension%.
+            iconv: Iconv
+            exif: Exif
+            fileinfo: Información del archivo
+            icu: ICU
+            intl: Intl
+            json_encode: JSON
+            mbstring: Multibyte String
+            "off": false
+            "on": true
+            pcre: PCRE
+            pdo: PDO
+            php_xml: PHP-XML
+            session_start: Session
+            simplexml_import_dom: SimpleXML
+            token_get_all: Tokenizer
+        filesystem:
+            header: sistema de archivos
+            cache:
+                header: caché
+                help: 'Para ajustar los permisos ejecuta: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+            exists: existe
+            logs:
+                header: registros
+                help: 'Para ajustar los permisos ejecuta: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+            not_exists: No existe
+            not_writable: Sin permisos de escritura
+            parameters:
+                header: parametros.yml
+                help: 'Para ajustar los permisos ejecuta: sudo chmod a+w %path%'
+            vendors: Vendors
+            writable: Con permisos de escritura
+        settings:
+            header: Versión de PHP y configuración
+            any: Cualquiera
+            detect_unicode: detect_unicode
+            magic_quotes_gpc: magic_quotes_gpc
+            non_deprecated: No obsoleto
+            "off": false
+            "on": true
+            register_globals: register_globals
+            session:
+                auto_start: session.auto_start
+            short_open_tag: short_open_tag
+            timezone: timezone
+            timezone_deprecated:
+                header: Zona horaria obsoleta
+                help: 'La zona horaria %timezone% está obsoleta. Arregla tu fichero php.ini (Lista de zonas horarias obsoletas http://php.net/manual/en/timezones.others.php).'
+            version: Versión de PHP
+            version_recommended: Versión de PHP recomendada
     payum_gateway:
         cash_on_delivery: Pago contra reembolso
         offline: Desconectado

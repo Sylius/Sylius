@@ -12,7 +12,7 @@
 namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ResourceBundle\Controller\ParametersParser;
+use Sylius\Bundle\ResourceBundle\Controller\ParametersParserInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactory;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface;
@@ -21,21 +21,19 @@ use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @mixin RequestConfigurationFactory
- *
  * @author Arnaud Langade <arn0d.dev@gmail.com>
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class RequestConfigurationFactorySpec extends ObjectBehavior
 {
-    function let(ParametersParser $parametersParser)
+    function let(ParametersParserInterface $parametersParser)
     {
         $this->beConstructedWith($parametersParser, RequestConfiguration::class);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactory');
+        $this->shouldHaveType(RequestConfigurationFactory::class);
     }
 
     function it_implements_request_configuration_factory_interface()
@@ -44,62 +42,63 @@ final class RequestConfigurationFactorySpec extends ObjectBehavior
     }
 
     function it_creates_configuration_from_resource_metadata_and_request(
+        ParametersParserInterface $parametersParser,
         MetadataInterface $metadata,
         Request $request,
-        ParametersParser $parametersParser,
         ParameterBag $headersBag,
         ParameterBag $attributesBag
     ) {
         $request->headers = $headersBag;
         $request->attributes = $attributesBag;
 
-        $headersBag->has('Accept')->willReturn(false);
+        $headersBag->get('Accept')->willReturn(null);
 
-        $configuration = ['template' => ':Product:show.html.twig'];
-
-        $attributesBag->get('_sylius', [])->willReturn($configuration);
-        $parametersParser->parseRequestValues($configuration, $request)->willReturn($configuration);
+        $attributesBag->get('_sylius', [])->willReturn(['template' => ':Product:show.html.twig']);
+        $parametersParser
+            ->parseRequestValues(['template' => ':Product:show.html.twig'], $request)
+            ->willReturn(['template' => ':Product:list.html.twig'])
+        ;
 
         $this->create($metadata, $request)->shouldHaveType(RequestConfiguration::class);
     }
 
     function it_creates_configuration_without_default_settings(
+        ParametersParserInterface $parametersParser,
         MetadataInterface $metadata,
         Request $request,
-        ParametersParser $parametersParser,
         ParameterBag $headersBag,
         ParameterBag $attributesBag
     ) {
         $request->headers = $headersBag;
         $request->attributes = $attributesBag;
 
-        $configuration = ['template' => ':Product:list.html.twig'];
-
-        $attributesBag->get('_sylius', [])->willReturn($configuration);
-        $parametersParser->parseRequestValues($configuration, $request)->willReturn($configuration);
+        $attributesBag->get('_sylius', [])->willReturn(['template' => ':Product:list.html.twig']);
+        $parametersParser
+            ->parseRequestValues(['template' => ':Product:list.html.twig'], $request)
+            ->willReturn(['template' => ':Product:list.html.twig'])
+        ;
 
         $this->create($metadata, $request)->isSortable()->shouldReturn(false);
     }
 
     function it_creates_configuration_with_default_settings(
+        ParametersParserInterface $parametersParser,
         MetadataInterface $metadata,
         Request $request,
-        ParametersParser $parametersParser,
         ParameterBag $headersBag,
         ParameterBag $attributesBag
     ) {
-        $defaultParameters = ['sortable' => true];
-
-        $this->beConstructedWith($parametersParser, RequestConfiguration::class, $defaultParameters);
+        $this->beConstructedWith($parametersParser, RequestConfiguration::class, ['sortable' => true]);
 
         $request->headers = $headersBag;
         $request->attributes = $attributesBag;
 
-        $configuration = ['template' => ':Product:list.html.twig'];
-        $attributesBag->get('_sylius', [])->willReturn($configuration);
+        $attributesBag->get('_sylius', [])->willReturn(['template' => ':Product:list.html.twig']);
 
-        $configuration = ['template' => ':Product:list.html.twig', 'sortable' => true];
-        $parametersParser->parseRequestValues($configuration, $request)->willReturn($configuration);
+        $parametersParser
+            ->parseRequestValues(['template' => ':Product:list.html.twig', 'sortable' => true], $request)
+            ->willReturn(['template' => ':Product:list.html.twig', 'sortable' => true])
+        ;
 
         $this->create($metadata, $request)->isSortable()->shouldReturn(true);
     }

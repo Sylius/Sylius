@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\LocaleBundle\Context;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\LocaleBundle\Context\RequestBasedLocaleContext;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
@@ -22,8 +21,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
- * @mixin RequestBasedLocaleContext
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class RequestBasedLocaleContextSpec extends ObjectBehavior

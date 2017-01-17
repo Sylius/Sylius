@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\AttributeBundle\Validator\Constraints;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\AttributeBundle\Validator\Constraints\ValidAttributeValue;
 use Symfony\Component\Validator\Constraint;
 
 /**
@@ -21,12 +22,12 @@ final class ValidAttributeValueSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\AttributeBundle\Validator\Constraints\ValidAttributeValue');
+        $this->shouldHaveType(ValidAttributeValue::class);
     }
 
     function it_is_constraint()
     {
-        $this->shouldHaveType('Symfony\Component\Validator\Constraint');
+        $this->shouldHaveType(Constraint::class);
     }
 
     function it_has_targets()

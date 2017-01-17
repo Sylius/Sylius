@@ -1,4 +1,4 @@
-{% set promotionTotal =  cart.orderPromotionTotal %}
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
 
 <div class="ui segment">
     <h2 class="ui dividing header">{{ 'sylius.ui.summary'|trans }}</h2>
@@ -6,22 +6,28 @@
         <tbody>
         <tr>
             <td>{{ 'sylius.ui.tax'|trans }}:</td>
-            <td id="sylius-cart-tax-total" class="right aligned">{{ cart.taxTotal|sylius_price }}</td>
+            <td id="sylius-cart-tax-total" class="right aligned">{{ money.convertAndFormat(cart.taxTotal) }}</td>
         </tr>
         <tr>
             <td>{{ 'sylius.ui.shipping'|trans }}:</td>
-            <td id="sylius-cart-shipping-total" class="right aligned">{{ cart.shippingTotal|sylius_price }}</td>
+            <td id="sylius-cart-shipping-total" class="right aligned">{{ money.convertAndFormat(cart.shippingTotal) }}</td>
         </tr>
-        {% if promotionTotal %}
+        {% if cart.orderPromotionTotal %}
         <tr>
             <td>{{ 'sylius.ui.discount'|trans }}:</td>
-            <td id="sylius-cart-promotion-total" class="right aligned">-{{ (-1 * promotionTotal)|sylius_price }}</td>
+            <td id="sylius-cart-promotion-total" class="right aligned">{{ money.convertAndFormat(cart.orderPromotionTotal) }}</td>
         </tr>
         {% endif %}
         <tr style="font-size: 2em;">
             <td>{{ 'sylius.ui.order_total'|trans }}:</td>
-            <td id="sylius-cart-grand-total" class="right aligned">{{ cart.total|sylius_price }}</td>
+            <td id="sylius-cart-grand-total" class="right aligned">{{ money.convertAndFormat(cart.total) }}</td>
         </tr>
+        {% if cart.currencyCode is not same as(sylius.currencyCode) %}
+            <tr>
+                <td>{{ 'sylius.ui.base_currency_order_total'|trans }}:</td>
+                <td id="sylius-cart-base-grand-total" class="right aligned">{{ money.format(cart.total, cart.currencyCode) }}</td>
+            </tr>
+        {% endif %}
         </tbody>
     </table>
 </div>

@@ -1,15 +1,12 @@
 Filters
 =======
 
-Here you can find the list of all supported filters. Keep in mind you can very easily define your own!
+Here you can find the supported filters. Keep in mind you can very easily define your own!
 
-String (*string*)
------------------
+String
+------
 
-Simplest filter type. It can filter in one or multiple columns, by default it uses the filter name as field, but you can specify different set of fields.
-
-fields
-    Array of fields to filter
+Simplest filter type. It can filter in one or multiple fields.
 
 .. code-block:: yaml
 
@@ -17,128 +14,96 @@ fields
         grids:
             app_user:
                 filters:
-                    search:
+                    username:
                         type: string
-                        options:
-                            fields: [username, e-mail, firstName, lastName]
+                    email:
+                        type: string
+                    firstName:
+                        type: string
+                    lastName:
+                        type: string
 
 The filter allows the user to select following search options:
 
 * contains
 * not contains
+* equal
 * starts with
 * ends with
 * empty
 * not empty
-* equals
-* not equals
+* in
+* not in
 
-DateTime (*datetime*)
----------------------
+Boolean
+-------
 
-This filter has the following search options:
-
-* between
-* not between
-* more than
-* less than
-
-Date (*date*)
--------------
-
-This filter type works exactly the same way as *datetime*, but does not include the time.
-
-The filter has the following search options:
-
-* between
-* not between
-* more than
-* less than
-
-Boolean (*boolean*)
--------------------
-
-This filter checks if value is true or false.
-
-Entity (*entity*)
------------------
-
-This is entity filter and allows you to select appropriate entity from list and filter using this value.
-
-class
-    Entity name (full or short)
-multiple (Default: false)
-    Allow to select multiple values?
+This filter checks if a value is true or false.
 
 .. code-block:: yaml
 
     sylius_grid:
         grids:
-            app_user:
+            app_channel:
                 filters:
-                    brand:
+                    enabled:
+                        type: boolean
+
+Date
+----
+
+This filter checks if a chosen datetime field is between given dates.
+
+.. code-block:: yaml
+
+    sylius_grid:
+        grids:
+            app_order:
+                filters:
+                    createdAt:
+                        type: date
+                    completedAt:
+                        type: date
+
+Entity
+------
+
+This type filters by a chosen entity.
+
+.. code-block:: yaml
+
+    sylius_grid:
+        grids:
+            app_order:
+                filters:
+                    channel:
                         type: entity
-                        options:
-                            class: AppBundle:Brand
-                            multiple: true
+                        form_options:
+                            class: "%app.model.channel%"
+                    customer:
+                        type: entity
+                        form_options:
+                            class: "%app.model.customer%"
 
-Choice (*choice*)
------------------
+Money
+_____
 
-This filter allows the user to select one or multiple values and filter the result set.
-
-choices
-    Array of choices
-multiple (Default: false)
-    Allow to select multiple values?
+This filter checks if an amount is in range and in specific currency
 
 .. code-block:: yaml
 
     sylius_grid:
         grids:
-            app_user:
+            app_order:
                 filters:
-                    gender:
-                        type: choice
+                    total:
+                        type: money
+                        form_options:
+                            scale: 3
                         options:
-                            choices:
-                                male: Boys
-                                female: Girls
+                            currency_field: currencyCode
+                            scale: 3
 
-Country (*country*)
--------------------
+.. warning::
 
-This filter allows the user to select one or multiple countries.
-
-multiple (Default: false)
-    Allow to select multiple values?
-
-.. code-block:: yaml
-
-    sylius_grid:
-        grids:
-            app_user:
-                filters:
-                    from:
-                        type: country
-                        options:
-                            multiple: true
-
-Currency (*currency*)
----------------------
-
-This filter allows the user to select one or multiple currencies.
-
-multiple (Default: false)
-    Allow to select multiple values?
-
-.. code-block:: yaml
-
-    sylius_grid:
-        grids:
-            app_user:
-                filters:
-                    currency:
-                        type: currency
-                        options:
-                            multiple: true
+    Providing different ``scale`` between **form_options** and **options** may cause unwanted, and plausibly volatile results.

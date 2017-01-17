@@ -10,8 +10,16 @@ sylius:
             options: Ayarlar
             meta_keywords: Meta anahtar kelimeleri
             meta_description: Meta açıklama
-            taxons: Kategoriler
         product_variant:
             available_on: Mevcut üzerine
+            name: Ad
         association_type:
             name: Ad
+        variant:
+            name: Ad
+        option:
+            name: Ad
+            values: Olası değerler
+        option_value:
+            add_value: Değer ekle
+            value: Değer

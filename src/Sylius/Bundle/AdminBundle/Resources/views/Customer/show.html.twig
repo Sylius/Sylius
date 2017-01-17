@@ -6,66 +6,8 @@
 {% block title %}{{ parent() }} {{ 'sylius.ui.customer'|trans ~' '~ customer.email }}{% endblock %}
 
 {% block content %}
-    <div class="ui stackable two column grid">
-        <div class="column">
-            {% include '@SyliusAdmin/Customer/Show/_header.html.twig' %}
-        </div>
-        {% if customer.user is not null %}
-        <div class="right aligned column" id="actions">
-            {{ buttons.delete(path('sylius_admin_shop_user_delete', {'id': customer.user.id })) }}
-        </div>
-        {% else %}
-        <div class="right aligned column" id="no-account">
-            <div class="ui teal large label">
-                {{ 'sylius.ui.no_account'|trans }}
-            </div>
-        </div>
-        {% endif %}
-    </div>
+    {% include '@SyliusAdmin/Customer/Show/_header.html.twig' %}
     <div class="ui divider"></div>
-
-    {% include '@SyliusAdmin/Customer/Breadcrumb/_show.html.twig' %}
-
-    <div class="ui stackable grid">
-        <div class="five wide column" id="info">
-            <div class="ui fluid card">
-                <div class="content">
-                    <a href="{{ path('sylius_admin_customer_update', {'id': customer.id}) }}" class="header">
-                        {{ customer.fullName|default('sylius.ui.guest_customer'|trans) }}
-                    </a>
-                    <div class="meta">
-                        <span class="date">{{ 'sylius.ui.customer_since'|trans }} {{ customer.createdAt|date }}</span>
-                    </div>
-                    <br />
-                    <div id="subscribed-to-newsletter">
-                        {% if customer.subscribedToNewsletter %}
-                            <i class="green checkmark icon"></i>
-                        {% else %}
-                            <i class="red remove icon"></i>
-                        {% endif %}
-                        {{ 'sylius.ui.subscribed_to_newsletter'|trans }}
-                    </div>
-                </div>
-                <div class="extra content">
-                    <a href="mailto: {{ customer.email }}">
-                        <i class="envelope icon"></i> {{ customer.email }}
-                    </a>
-                </div>
-            </div>
-            <div class="ui two column stackable grid">
-                {% if customer.shippingAddress %}
-                    <div class="column" id="shippingAddress">
-                        <h4 class="ui dividing header">{{ 'sylius.ui.shipping_address'|trans }}</h4>
-                        {% include '@SyliusAdmin/Common/_address.html.twig' with {'address': customer.shippingAddress} %}
-                    </div>
-                {% endif %}
-                {% if customer.billingAddress %}
-                    <div class="column" id="billingAddress">
-                        <h4 class="ui dividing header">{{ 'sylius.ui.billing_address'|trans }}</h4>
-                        {% include '@SyliusAdmin/Common/_address.html.twig' with {'address': customer.billingAddress} %}
-                    </div>
-                {% endif %}
-            </div>
-        </div>
-    </div>
+    {% include '@SyliusAdmin/Customer/Show/_breadcrumb.html.twig' %}
+    {% include '@SyliusAdmin/Customer/Show/_content.html.twig' %}
 {% endblock %}

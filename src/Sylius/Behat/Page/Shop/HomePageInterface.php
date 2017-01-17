@@ -28,6 +28,13 @@ interface HomePageInterface extends SymfonyPageInterface
      */
     public function hasLogoutButton();
 
+    public function logOut();
+
+    /**
+     * @return string
+     */
+    public function getFullName();
+
     /**
      * @return string
      */
@@ -57,4 +64,9 @@ interface HomePageInterface extends SymfonyPageInterface
      * @param string $localeCode
      */
     public function switchLocale($localeCode);
+
+    /**
+     * @return array
+     */
+    public function getLatestProductsNames();
 }

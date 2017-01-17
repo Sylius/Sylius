@@ -48,7 +48,9 @@ final class CurrencyProvider implements CurrencyProviderInterface
         $currencies = $this->currencyRepository->findBy(['enabled' => true]);
 
         return array_map(
-            function (CurrencyInterface $currency) { return $currency->getCode(); },
+            function (CurrencyInterface $currency) {
+                return $currency->getCode();
+            },
             $currencies
         );
     }

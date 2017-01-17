@@ -3,35 +3,6 @@
 
 sylius:
     form:
-        action:
-            fixed_discount_configuration:
-                amount: Beløp
-            percentage_discount_configuration:
-                percentage: Prosent
-            shipping_discount_configuration:
-                percentage: Prosent
-            type: Type
-        rule:
-            taxonomy_configuration:
-                taxons: Taksonomier
-                exclude: Eksluder
-            contains_product_configuration:
-                variants: Produkter
-                exclude: Eksluder
-            cart_quantity_configuration:
-                count: Antall
-            item_total_configuration:
-                amount: Beløp
-            nth_order_configuration:
-                nth: Nth
-            shipping_country_configuration:
-                country: Land
-            type: Type
-        coupon:
-            usage_limit: Bruksgrense
-        coupon_generate_instruction:
-            amount: Beløp
-            usage_limit: Bruksgrense
         promotion:
             actions: Handlinger
             add_action: Legg til handling
@@ -43,3 +14,15 @@ sylius:
             rules: Regler
             starts_at: Starter på
             usage_limit: Bruksgrense
+        promotion_action:
+            type: Type
+        promotion_coupon:
+            usage_limit: Bruksgrense
+        promotion_coupon_generator_instruction:
+            usage_limit: Bruksgrense
+        promotion_rule:
+            cart_quantity_configuration:
+                count: Antall
+            shipping_country_configuration:
+                country: Land
+            type: Type

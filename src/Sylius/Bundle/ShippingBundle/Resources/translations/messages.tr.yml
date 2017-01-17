@@ -10,7 +10,7 @@ sylius:
         shipment:
             state: Durum
             states:
-                checkout: 'Ödeme  yap'
+                checkout: Ödeme  yap
                 pending: Beklemede
                 ready: Hazır
                 shipped: Kargolandı
@@ -21,19 +21,8 @@ sylius:
             flat_rate_configuration:
                 label: Sevkıyat başına sabit oran
                 amount: Miktar
-            flexible_rate_configuration:
-                label: Esnek oranı
             per_unit_rate_configuration:
                 amount: Miktar
-            weight_rate_configuration:
-                label: Temel ağırlık oranı
-                fixed: Sabit tutar
-                variable: Değişken tutar
-                division: Bölüm
-            volume_rate_configuration:
-                label: Temel birim oranı
-                amount: Miktar
-                division: Bölüm
         shipping_category:
             description: Açıklama
             name: Ad
@@ -41,6 +30,7 @@ sylius:
             calculator: Hesaplayıcı
             category: Kategori
             category_requirement: Kategori gereksinimi
+            channels: Kanallar
             configuration: Ayarlar
             description: Açıklama
             enabled: Etkin

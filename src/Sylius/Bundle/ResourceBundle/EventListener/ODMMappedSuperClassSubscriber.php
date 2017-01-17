@@ -21,7 +21,7 @@ use Doctrine\ODM\MongoDB\Mapping\ClassMetadataInfo;
  *
  * @author Ivannis Suárez Jérez <ivannis.suarez@gmail.com>
  */
-class ODMMappedSuperClassSubscriber extends AbstractDoctrineSubscriber
+final class ODMMappedSuperClassSubscriber extends AbstractDoctrineSubscriber
 {
     /**
      * @return array
@@ -102,7 +102,6 @@ class ODMMappedSuperClassSubscriber extends AbstractDoctrineSubscriber
                     }
                 }
             }
-
         }
     }
 

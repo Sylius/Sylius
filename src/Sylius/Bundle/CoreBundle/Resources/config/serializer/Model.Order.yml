@@ -22,5 +22,5 @@ Sylius\Component\Core\Model\Order:
             expose: true
         promotionCoupon:
             expose: true
-        completedAt:
+        checkoutCompletedAt:
             expose: true

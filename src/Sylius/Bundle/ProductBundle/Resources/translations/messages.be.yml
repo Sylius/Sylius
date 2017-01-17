@@ -9,8 +9,16 @@ sylius:
             options: Опцыі
             meta_keywords: Meta keywords
             meta_description: Meta description
-            taxons: Катэгорыі
         product_variant:
             available_on: У наяўнасці з
+            name: Імя
         association_type:
             name: Імя
+        variant:
+            name: Імя
+        option:
+            name: Імя
+            values: Магчымыя значэнні
+        option_value:
+            add_value: Дадаць значэнне
+            value: Значэнне

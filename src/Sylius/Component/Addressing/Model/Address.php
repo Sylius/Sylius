@@ -58,6 +58,11 @@ class Address implements AddressInterface
     /**
      * @var string
      */
+    protected $provinceName;
+
+    /**
+     * @var string
+     */
     protected $street;
 
     /**
@@ -116,11 +121,11 @@ class Address implements AddressInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getFullName()
     {
-        return $this->firstName.' '.$this->lastName;
+        return trim(sprintf('%s %s', $this->firstName, $this->lastName));
     }
 
     /**
@@ -193,6 +198,22 @@ class Address implements AddressInterface
         }
 
         $this->provinceCode = $provinceCode;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getProvinceName()
+    {
+        return $this->provinceName;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setProvinceName($provinceName = null)
+    {
+        $this->provinceName = $provinceName;
     }
 
     /**

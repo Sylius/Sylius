@@ -12,6 +12,8 @@
 namespace spec\Sylius\Component\Channel\Factory;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Channel\Factory\ChannelFactory;
+use Sylius\Component\Channel\Factory\ChannelFactoryInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
@@ -20,20 +22,19 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
  */
 final class ChannelFactorySpec extends ObjectBehavior
 {
-    function let(
-        FactoryInterface $defaultFactory
-    ) {
+    function let(FactoryInterface $defaultFactory)
+    {
         $this->beConstructedWith($defaultFactory);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Channel\Factory\ChannelFactory');
+        $this->shouldHaveType(ChannelFactory::class);
     }
 
     function it_implements_channel_factory_interface()
     {
-        $this->shouldImplement('Sylius\Component\Channel\Factory\ChannelFactoryInterface');
+        $this->shouldImplement(ChannelFactoryInterface::class);
     }
 
     function it_creates_channel_with_name($defaultFactory, ChannelInterface $channel)

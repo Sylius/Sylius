@@ -13,6 +13,7 @@ namespace spec\Sylius\Component\Payment\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Payment\Model\CreditCardInterface;
+use Sylius\Component\Payment\Model\Payment;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 
@@ -23,7 +24,7 @@ final class PaymentSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Payment\Model\Payment');
+        $this->shouldHaveType(Payment::class);
     }
 
     function it_implements_sylius_payment_interface()
@@ -98,9 +99,9 @@ final class PaymentSpec extends ObjectBehavior
         $this->shouldThrow('\InvalidArgumentException')->duringSetAmount(new \stdClass());
     }
 
-    function it_has_new_state_by_default()
+    function it_has_cart_state_by_default()
     {
-        $this->getState()->shouldReturn(PaymentInterface::STATE_NEW);
+        $this->getState()->shouldReturn(PaymentInterface::STATE_CART);
     }
 
     function its_state_is_mutable()

@@ -3,11 +3,6 @@
 
 sylius:
     form:
-        action:
-            add_product_configuration:
-                price: Enhetspris
-                quantity: Antall
-                variant: Variant
         block:
             body: Kropp
             id: ID
@@ -19,17 +14,20 @@ sylius:
                 different_billing_address: Bruk annen adresse for fakturering?
             payment_method: Betalingsmetode
             shipping_method: Fraktalternativ
+        promotion_action:
+            add_product_configuration:
+                product: Produkt
         group:
             name: Navn
             roles: Roller
         channel:
             taxonomies: Kategorisering
             locales: Nasjonale innstillinger
-            currency_default: Standard valuta
             shipping_methods: Fraktalternativ
             payment_methods: Betalingsmetoder
             tax_zone_default: Standard skattesone
         image:
+            code: Kode
             file: Bilde
         locale:
             code: Kode
@@ -46,8 +44,8 @@ sylius:
             id: ID
             title: Tittel
         product:
+            images: Bilder
             restricted_zone: Begrenset sone
-            shipping_category: Fraktkategori
             short_description: Kort beskrivelse
             variant_selection_method: Metode for valg av variant
             enabled: Aktivert
@@ -56,15 +54,7 @@ sylius:
             code: Kode
         product_variant:
             tax_category: Skattekategori
-        settings:
-            general:
-                currency: Standard valuta
-                locale: Språk
-                meta_description: Metabeskrivelse
-                meta_keywords: Meta nøkkelord
-                title: Sidetittel
-            taxation:
-                default_tax_zone: Standard skattesone
+            shipping_category: Fraktkategori
         shipment_filter:
             created_at_from: Fra
             created_at_to: Til
@@ -77,7 +67,9 @@ sylius:
         shipping_method:
             zone: Sone
         taxon:
+            code: Kode
             file: Velg bilde
+            images: Bilder
         taxonomy:
             file: Velg bilde
         user:
@@ -95,7 +87,6 @@ sylius:
         variant:
             depth: Dybde
             height: Høyde
-            images: Bilder
             on_hand: På lager
             price: Pris
             sku: Strekkode
@@ -108,10 +99,55 @@ sylius:
             email: E-post
         product_association_type:
             name: Navn
-        promotion_rule:
-            contains_taxon:
-                count: Antall
-            taxon:
-                taxons: Taksonomier
-            total_of_items_from_taxon:
-                amount: Beløp
+    installer:
+        extensions:
+            header: Utvidelser
+            accelerator:
+                header: Akselerator
+            apc: APC
+            ctype: Ctype
+            gd: GD
+            help: Installere og aktivere %extension% utvidelsen.
+            iconv: Iconv
+            icu: ICU
+            intl: Intl
+            json_encode: JSON
+            mbstring: Multibyte streng
+            "off": false
+            "on": true
+            pcre: PCRE
+            pdo: PDO
+            php_xml: PHP-XML
+            session_start: Økt
+            simplexml_import_dom: SimpleXML
+            token_get_all: Tokenizer
+        filesystem:
+            header: filsystem
+            cache:
+                header: mellomlagring/cache
+            exists: finnes
+            logs:
+                header: logger
+            not_exists: finnes ikke
+            not_writable: ikke skrivbar
+            parameters:
+                header: parameters.yml
+            vendors: leverandører
+            writable: skrivbar
+        settings:
+            header: PHP-versjon og -innstillinger
+            any: noen
+            detect_unicode: detect_unicode
+            magic_quotes_gpc: magic_quotes_gpc
+            non_deprecated: ikke foreldet
+            "off": false
+            "on": true
+            register_globals: register_globals
+            session:
+                auto_start: session.auto_start
+            short_open_tag: short_open_tag
+            timezone: tidssone
+            timezone_deprecated:
+                header: Utgått tidssone
+                help: 'Tidssonen %timezone% er avskrevet. Du må redigere din php.ini-fil (liste over avskrevene tidssoner http://php.net/manual/en/timezones.others.php).'
+            version: PHP-versjon

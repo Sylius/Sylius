@@ -21,7 +21,7 @@ interface DataProviderInterface
 {
     /**
      * @param Grid $grid
-     * @param array $parameters
+     * @param Parameters $parameters
      *
      * @return mixed
      */

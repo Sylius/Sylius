@@ -1,8 +1,5 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
-fos_oauth_server_token:
-  resource: "@FOSOAuthServerBundle/Resources/config/routing/token.xml"
-
 sylius_api_product:
     resource: "@SyliusApiBundle/Resources/config/routing/product.yml"
     prefix: /products
@@ -52,6 +49,7 @@ sylius_api_tax_category:
         alias: sylius.tax_category
         section: api
         grid: sylius_admin_tax_category
+        serialization_version: $version
     type: sylius.resource_api
 
 sylius_api_tax_rate:
@@ -62,6 +60,7 @@ sylius_api_shipping_category:
     resource: |
         alias: sylius.shipping_category
         section: api
+        serialization_version: $version
     type: sylius.resource_api
 
 sylius_api_shipping_method:
@@ -84,6 +83,7 @@ sylius_api_channel:
     resource: |
         alias: sylius.channel
         section: api
+        serialization_version: $version
     type: sylius.resource_api
 
 sylius_api_country:
@@ -92,7 +92,7 @@ sylius_api_country:
 
 sylius_api_province:
     resource: "@SyliusApiBundle/Resources/config/routing/province.yml"
-    prefix: /countries/{countryId}/provinces
+    prefix: /countries/{countryCode}/provinces
 
 sylius_api_zone:
     resource: "@SyliusApiBundle/Resources/config/routing/zone.yml"
@@ -105,10 +105,6 @@ sylius_api_user:
 sylius_api_customer:
     resource: "@SyliusApiBundle/Resources/config/routing/customer.yml"
     prefix: /customers
-
-sylius_api_setting:
-    resource: "@SyliusApiBundle/Resources/config/routing/setting.yml"
-    prefix: /settings
 
 sylius_api_locale:
     resource: "@SyliusApiBundle/Resources/config/routing/locale.yml"

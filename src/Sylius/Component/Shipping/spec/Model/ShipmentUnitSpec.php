@@ -13,6 +13,7 @@ namespace spec\Sylius\Component\Shipping\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
+use Sylius\Component\Shipping\Model\ShipmentUnit;
 use Sylius\Component\Shipping\Model\ShipmentUnitInterface;
 use Sylius\Component\Shipping\Model\ShippableInterface;
 
@@ -23,7 +24,7 @@ final class ShipmentUnitSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Shipping\Model\ShipmentUnit');
+        $this->shouldHaveType(ShipmentUnit::class);
     }
 
     function it_implements_Sylius_shipment_unit_interface()
@@ -65,17 +66,6 @@ final class ShipmentUnitSpec extends ObjectBehavior
     {
         $this->setShippable($shippable);
         $this->getShippable()->shouldReturn($shippable);
-    }
-
-    function it_has_ready_state_by_default()
-    {
-        $this->getShippingState()->shouldReturn(ShipmentInterface::STATE_READY);
-    }
-
-    function its_state_is_mutable()
-    {
-        $this->setShippingState(ShipmentInterface::STATE_SHIPPED);
-        $this->getShippingState()->shouldReturn(ShipmentInterface::STATE_SHIPPED);
     }
 
     function it_initializes_creation_date_by_default()

@@ -7,9 +7,20 @@ sylius_shop_product_show:
     defaults:
         _controller: sylius.controller.product:showAction
         _sylius:
-            template: SyliusShopBundle:Product:show.html.twig
+            template: "@SyliusShop/Product/show.html.twig"
             repository:
                 method: findOneBySlugAndChannel
                 arguments:
                     - $slug
-                    - 'expr:service("sylius.context.channel").getChannel()'
+                    - "expr:service('sylius.context.channel').getChannel()"
+
+sylius_shop_product_index:
+    path: /taxons/{slug}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product:indexAction
+        _sylius:
+            template: "@SyliusShop/Product/index.html.twig"
+            grid: sylius_shop_product
+    requirements:
+        slug: .+

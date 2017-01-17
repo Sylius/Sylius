@@ -13,6 +13,7 @@ sylius:
             postcode: CEP
             street: Rua
             province: Estado
+            zone: Zona
         country:
             add_province: Adicionar estado
             name: Nome
@@ -33,6 +34,8 @@ sylius:
                 province: Estado
                 zone: Região
             scope: Escopo
+            scopes:
+                all: Todos(as)
             select: Selecione
             select_scope: Selecione o escopo
         zone_member:

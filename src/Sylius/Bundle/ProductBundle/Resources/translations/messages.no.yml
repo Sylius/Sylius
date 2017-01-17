@@ -9,8 +9,16 @@ sylius:
             options: Instillinger
             meta_keywords: Meta nøkkelord
             meta_description: Metabeskrivelse
-            taxons: Taksonomier
         product_variant:
             available_on: Tilgjengelig
+            name: Navn
         association_type:
             name: Navn
+        variant:
+            name: Navn
+        option:
+            name: Navn
+            values: Mulige verdier
+        option_value:
+            add_value: Legg til verdi
+            value: Verdi

@@ -3,12 +3,9 @@
 
 sylius:
     form:
-        group:
-            name: Nome
-            roles: Funções
         customer:
             first_name: Nome próprio
-            groups: Grupos
+            group: Grupo
             last_name: Apelido
             email: Endereço de e-mail
             phone_number: Número de telefone
@@ -18,6 +15,9 @@ sylius:
             different_billing_address: Usar um endereço diferente para faturação?
             only_customer_registration: Criar conta?
             subscribed_to_newsletter: Subscrever a newsletter
+        customer_group:
+            name: Nome
+            roles: Funções
     gender:
         unknown: Desconhecido
         male: Masculino

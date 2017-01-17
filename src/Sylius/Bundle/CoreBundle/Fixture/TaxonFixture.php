@@ -16,7 +16,7 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class TaxonFixture extends AbstractResourceFixture
+class TaxonFixture extends AbstractResourceFixture
 {
     /**
      * {@inheritdoc}
@@ -35,6 +35,7 @@ final class TaxonFixture extends AbstractResourceFixture
             ->children()
                 ->scalarNode('name')->cannotBeEmpty()->end()
                 ->scalarNode('code')->cannotBeEmpty()->end()
+                ->scalarNode('slug')->cannotBeEmpty()->end()
                 ->scalarNode('description')->cannotBeEmpty()->end()
                 ->variableNode('children')->cannotBeEmpty()->defaultValue([])->end()
         ;

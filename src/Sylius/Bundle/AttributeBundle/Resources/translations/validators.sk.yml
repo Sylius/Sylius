@@ -5,15 +5,15 @@ sylius:
     attribute:
         name:
             not_blank: Zadajte názov vlastnosti.
-            min_length: 'Názov vlastnosti musí obsahovať minimálne 1 znak.|Názov vlastnosti musí obsahovať minimálne {{ limit }} znakov.'
-            max_length: 'Názov vlastnosti nesmie byť dlhší ako 1 znak.|Názov vlastnosti nesmie byť dlhší ako {{ limit }} znakov.'
+            min_length: Názov vlastnosti musí obsahovať minimálne 1 znak.|Názov vlastnosti musí obsahovať minimálne {{ limit }} znakov.
+            max_length: Názov vlastnosti nesmie byť dlhší ako 1 znak.|Názov vlastnosti nesmie byť dlhší ako {{ limit }} znakov.
         code:
             not_blank: Prosím, zadajte kód vlastnosti.
             unique: Tento kód sa už používa.
         presentation:
             not_blank: Zadajte verejný názov vlastnosti.
-            min_length: 'Verejný názov vlastnosti musí mať dĺžku aspoň 1 znak.|Verejný názov vlastnosti musí mať dĺžku aspoň {{ limit }} znakov.'
-            max_length: 'Verejný názov vlastnosti nesmie byt dlhší ako 1 znak.|Verejný názov vlastnosti nesmie byt dlhší ako {{ limit }} znakov.'
+            min_length: Verejný názov vlastnosti musí mať dĺžku aspoň 1 znak.|Verejný názov vlastnosti musí mať dĺžku aspoň {{ limit }} znakov.
+            max_length: Verejný názov vlastnosti nesmie byt dlhší ako 1 znak.|Verejný názov vlastnosti nesmie byt dlhší ako {{ limit }} znakov.
     attribute_value:
         attribute:
             not_blank: Vyberte vlastnosť.

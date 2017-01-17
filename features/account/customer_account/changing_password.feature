@@ -11,7 +11,7 @@ Feature: Changing a customer password
 
     @ui
     Scenario: Changing my password
-        Given I want to change my password
-        When I change password from "whitehouse" to "blackhouse"
+        When I want to change my password
+        And I change password from "whitehouse" to "blackhouse"
         And I save my changes
         Then I should be notified that my password has been successfully changed

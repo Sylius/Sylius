@@ -1,0 +1,21 @@
+{% if channels|length > 1 %}
+    <div class="ui simple dropdown item">
+        <span>
+            {{ 'sylius.ui.view_your_store'|trans }}
+        </span>
+        <i class="dropdown icon"></i>
+        <div class="menu">
+            {% for channel in channels if channel.hostname is not empty %}
+            <a href="http://{{ channel.hostname }}" target="_blank" class="item">
+                {% include '@SyliusAdmin/Common/_channel.html.twig' %}
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+{% elseif channels|length == 1 %}
+    {% set channel = channels|first %}
+
+    {% if channel.hostname is not empty %}
+    <a href="http://{{ channel.hostname }}" target="_blank" class="item">{{ 'sylius.ui.view_your_store'|trans }}</a>
+    {% endif %}
+{% endif %}

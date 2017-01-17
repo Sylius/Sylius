@@ -13,16 +13,22 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <parameters>
-        <parameter key="sylius.behat.page.admin.order.index.class">%sylius.behat.page.admin.crud.index.class%</parameter>
+        <parameter key="sylius.behat.page.admin.order.index.class">Sylius\Behat\Page\Admin\Order\IndexPage</parameter>
         <parameter key="sylius.behat.page.admin.order.show.class">Sylius\Behat\Page\Admin\Order\ShowPage</parameter>
+        <parameter key="sylius.behat.page.admin.order.update.class">Sylius\Behat\Page\Admin\Order\UpdatePage</parameter>
+        <parameter key="sylius.behat.page.admin.order.history.class">Sylius\Behat\Page\Admin\Order\HistoryPage</parameter>
     </parameters>
 
     <services>
-        <service id="sylius.behat.page.admin.order.index" class="%sylius.behat.page.admin.order.index.class%" parent="sylius.behat.page.admin.crud.index" scope="scenario" public="false">
-            <argument type="string">order</argument>
+        <service id="sylius.behat.page.admin.order.index" class="%sylius.behat.page.admin.order.index.class%" parent="sylius.behat.page.admin.crud.index" public="false">
+            <argument type="string">sylius_admin_order_index</argument>
         </service>
-        <service id="sylius.behat.page.admin.order.show" class="%sylius.behat.page.admin.order.show.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false">
+        <service id="sylius.behat.page.admin.order.show" class="%sylius.behat.page.admin.order.show.class%" parent="sylius.behat.symfony_page" public="false">
             <argument type="service" id="sylius.behat.table_accessor" />
         </service>
+        <service id="sylius.behat.page.admin.order.update" class="%sylius.behat.page.admin.order.update.class%" parent="sylius.behat.page.admin.crud.update" public="false">
+            <argument type="string">sylius_admin_order_update</argument>
+        </service>
+        <service id="sylius.behat.page.admin.order.history" class="%sylius.behat.page.admin.order.history.class%" parent="sylius.behat.symfony_page" />
     </services>
 </container>

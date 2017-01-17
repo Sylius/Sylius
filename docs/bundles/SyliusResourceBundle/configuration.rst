@@ -41,6 +41,24 @@ In your ``app/config/config.yml`` add:
 
 That's it! Your "Book" entity is now registered as Sylius Resource.
 
+You can also configure several doctrine drivers:
+
+.. code-block:: yaml
+
+    sylius_resource:
+        drivers:
+            - doctrine/orm
+            - doctrine/phpcr-odm
+        resources:
+            app.book:
+                classes:
+                    model: AppBundle\Entity\Book
+            app.article:
+                driver: doctrine/phpcr-odm
+                classes:
+                    model: AppBundle\Document\ArticleDocument
+
+
 Do you want to try it out? Add following lines to ``app/config/routing.yml``:
 
 .. code-block:: yaml
@@ -54,7 +72,7 @@ Full JSON/XML CRUD API is ready to use. Sounds crazy? Spin up the built-in serve
 
 .. code-block:: bash
 
-    php app/console server:run
+    php bin/console server:run
 
 You should see something like:
 
@@ -86,7 +104,7 @@ Run the ``debug:router`` command to see available routes:
 
 .. code-block:: bash
 
-    php app/console debug:router
+    php bin/console debug:router
 
     [router] Current routes
     Name            Method        Scheme Host Path

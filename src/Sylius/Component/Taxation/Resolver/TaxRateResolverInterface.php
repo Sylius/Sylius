@@ -21,7 +21,7 @@ interface TaxRateResolverInterface
 {
     /**
      * @param TaxableInterface $taxable
-     * @param array            $criteria
+     * @param array $criteria
      *
      * @return null|TaxRateInterface
      */

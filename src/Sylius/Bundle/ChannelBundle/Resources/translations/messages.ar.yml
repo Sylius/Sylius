@@ -4,6 +4,6 @@
 sylius:
     form:
         channel:
+            color: اللون
             name: الاسم
             url: عنوان URL
-            color: اللون

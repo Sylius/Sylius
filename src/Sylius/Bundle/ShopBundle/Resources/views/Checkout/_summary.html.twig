@@ -1,10 +1,12 @@
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+
 <div class="ui segment">
-    <table class="ui very basic table" id="checkout-subtotal">
+    <table class="ui very basic table" id="sylius-checkout-subtotal">
         <thead>
         <tr>
-            <th>{{ 'sylius.ui.item'|trans }}</th>
-            <th>{{ 'sylius.ui.quantity'|trans }}</th>
-            <th>{{ 'sylius.ui.subtotal'|trans }}</th>
+            <th class="sylius-table-column-item">{{ 'sylius.ui.item'|trans }}</th>
+            <th class="sylius-table-column-qty">{{ 'sylius.ui.quantity'|trans }}</th>
+            <th class="sylius-table-column-subtotal">{{ 'sylius.ui.subtotal'|trans }}</th>
         </tr>
         </thead>
         <tbody>
@@ -14,7 +16,7 @@
                 <td class="center aligned">
                     {{ item.quantity }}
                 </td>
-                <td id="item-{{ item.getVariant.product.slug }}-subtotal">{{ item.subtotal|sylius_price }}</td>
+                <td id="sylius-item-{{ item.variant.product.slug }}-subtotal">{{ money.convertAndFormat(item.subtotal) }}</td>
             </tr>
         {% endfor %}
         </tbody>

@@ -13,37 +13,32 @@ namespace Sylius\Bundle\CoreBundle\Fixture;
 
 use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
 use Sylius\Component\Attribute\AttributeType\TextAttributeType;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class StickerProductFixture extends AbstractFixture
+class StickerProductFixture extends AbstractFixture
 {
     /**
-     * @var TaxonFixture
+     * @var AbstractResourceFixture
      */
     private $taxonFixture;
 
     /**
-     * @var RepositoryInterface
-     */
-    private $taxonRepository;
-
-    /**
-     * @var ProductAttributeFixture
+     * @var AbstractResourceFixture
      */
     private $productAttributeFixture;
 
     /**
-     * @var ProductOptionFixture
+     * @var AbstractResourceFixture
      */
     private $productOptionFixture;
 
     /**
-     * @var ProductFixture
+     * @var AbstractResourceFixture
      */
     private $productFixture;
 
@@ -58,21 +53,18 @@ final class StickerProductFixture extends AbstractFixture
     private $optionsResolver;
 
     /**
-     * @param TaxonFixture $taxonFixture
-     * @param RepositoryInterface $taxonRepository
-     * @param ProductAttributeFixture $productAttributeFixture
-     * @param ProductOptionFixture $productOptionFixture
-     * @param ProductFixture $productFixture
+     * @param AbstractResourceFixture $taxonFixture
+     * @param AbstractResourceFixture $productAttributeFixture
+     * @param AbstractResourceFixture $productOptionFixture
+     * @param AbstractResourceFixture $productFixture
      */
     public function __construct(
-        TaxonFixture $taxonFixture,
-        RepositoryInterface $taxonRepository,
-        ProductAttributeFixture $productAttributeFixture,
-        ProductOptionFixture $productOptionFixture,
-        ProductFixture $productFixture
+        AbstractResourceFixture $taxonFixture,
+        AbstractResourceFixture $productAttributeFixture,
+        AbstractResourceFixture $productOptionFixture,
+        AbstractResourceFixture $productFixture
     ) {
         $this->taxonFixture = $taxonFixture;
-        $this->taxonRepository = $taxonRepository;
         $this->productAttributeFixture = $productAttributeFixture;
         $this->productOptionFixture = $productOptionFixture;
         $this->productFixture = $productFixture;
@@ -112,34 +104,40 @@ final class StickerProductFixture extends AbstractFixture
         ]]]);
 
         $this->productAttributeFixture->load(['custom' => [
-            ['name' => 'Sticker paper', 'code' => 'STICKER-PAPER', 'type' => TextAttributeType::TYPE],
-            ['name' => 'Sticker resolution', 'code' => 'STICKER-RESOLUTION', 'type' => TextAttributeType::TYPE],
+            ['name' => 'Sticker paper', 'code' => 'sticker_paper', 'type' => TextAttributeType::TYPE],
+            ['name' => 'Sticker resolution', 'code' => 'sticker_resolution', 'type' => TextAttributeType::TYPE],
         ]]);
 
         $this->productOptionFixture->load(['custom' => [
             [
-                'name' => 'Sticker SIZE',
-                'code' => 'STICKER-SIZE',
+                'name' => 'Sticker size',
+                'code' => 'sticker_size',
                 'values' => [
-                    'STICKER-SIZE-3' => '3"',
-                    'STICKER-SIZE-5' => '5"',
-                    'STICKER-SIZE-7' => '7"',
+                    'sticker_size-3' => '3"',
+                    'sticker_size_5' => '5"',
+                    'sticker_size_7' => '7"',
                 ],
             ],
         ]]);
 
         $products = [];
+        $productsNames = $this->getUniqueNames($options['amount']);
         for ($i = 0; $i < $options['amount']; ++$i) {
             $products[] = [
-                'name' => sprintf('Sticker "%s"', $this->faker->word),
+                'name' => sprintf('Sticker "%s"', $productsNames[$i]),
                 'code' => $this->faker->uuid,
                 'main_taxon' => 'stickers',
                 'taxons' => ['stickers'],
+                'variant_selection_method' => ProductInterface::VARIANT_SELECTION_CHOICE,
                 'product_attributes' => [
-                    'STICKER-PAPER' => sprintf('Paper from tree %s', $this->faker->randomElement(['Wung', 'Tanajno', 'Lemon-San', 'Me-Gusta'])),
-                    'STICKER-RESOLUTION' => $this->faker->randomElement(['JKM XD', '476DPI', 'FULL HD', '200DPI']),
+                    'sticker_paper' => sprintf('Paper from tree %s', $this->faker->randomElement(['Wung', 'Tanajno', 'Lemon-San', 'Me-Gusta'])),
+                    'sticker_resolution' => $this->faker->randomElement(['JKM XD', '476DPI', 'FULL HD', '200DPI']),
                 ],
-                'images' => [sprintf('%s/../Resources/fixtures/%s', __DIR__, 'stickers.jpg')],
+                'product_options' => ['sticker_size'],
+                'images' => [
+                    'main' => sprintf('%s/../Resources/fixtures/%s', __DIR__, 'stickers.jpg'),
+                    'thumbnail' => sprintf('%s/../Resources/fixtures/%s', __DIR__, 'stickers.jpg'),
+                ],
             ];
         }
 
@@ -155,5 +153,25 @@ final class StickerProductFixture extends AbstractFixture
             ->children()
                 ->integerNode('amount')->isRequired()->min(0)->end()
         ;
+    }
+
+    /**
+     * @param int $amount
+     *
+     * @return string
+     */
+    private function getUniqueNames($amount)
+    {
+        $productsNames = [];
+
+        for ($i = 0; $i < $amount; ++$i) {
+            $name = $this->faker->word;
+            while (in_array($name, $productsNames)) {
+                $name = $this->faker->word;
+            }
+            $productsNames[] = $name;
+        }
+
+        return $productsNames;
     }
 }

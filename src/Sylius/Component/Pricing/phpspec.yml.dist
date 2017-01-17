@@ -1,5 +1,0 @@
-suites:
-    main:
-        namespace: Sylius\Component\Pricing
-        psr4_prefix: Sylius\Component\Pricing
-        src_path: .

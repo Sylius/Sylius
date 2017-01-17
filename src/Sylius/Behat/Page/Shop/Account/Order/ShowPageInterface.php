@@ -76,4 +76,18 @@ interface ShowPageInterface extends SymfonyPageInterface
      * @return string
      */
     public function getItemPrice();
+
+    /**
+     * @param string $provinceName
+     *
+     * @return bool
+     */
+    public function hasShippingProvinceName($provinceName);
+
+    /**
+     * @param string $provinceName
+     *
+     * @return bool
+     */
+    public function hasBillingProvinceName($provinceName);
 }

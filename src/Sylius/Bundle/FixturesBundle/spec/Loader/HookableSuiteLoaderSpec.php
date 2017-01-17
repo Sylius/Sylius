@@ -21,8 +21,6 @@ use Sylius\Bundle\FixturesBundle\Loader\SuiteLoaderInterface;
 use Sylius\Bundle\FixturesBundle\Suite\SuiteInterface;
 
 /**
- * @mixin HookableSuiteLoader
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class HookableSuiteLoaderSpec extends ObjectBehavior

@@ -14,15 +14,15 @@ sylius_shop_partial_product_index_latest:
                     - "expr:service('sylius.context.channel').getChannel()"
                     - $count
 
-sylius_shop_partial_product_index_by_taxon_code:
-    path: /{code}
+sylius_shop_partial_product_show_by_slug:
+    path: /{slug}
     methods: [GET]
     defaults:
-        _controller: sylius.controller.product:indexAction
+        _controller: sylius.controller.product:showAction
         _sylius:
             template: $template
             repository:
-                method: findEnabledByTaxonCodeAndChannel
+                method: findOneBySlugAndChannel
                 arguments:
-                    - $code
+                    - $slug
                     - 'expr:service("sylius.context.channel").getChannel()'

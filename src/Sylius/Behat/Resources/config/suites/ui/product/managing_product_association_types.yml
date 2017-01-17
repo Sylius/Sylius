@@ -1,0 +1,21 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+default:
+    suites:
+        ui_managing_product_association_types:
+            contexts_services:
+                - sylius.behat.context.hook.doctrine_orm
+
+                - sylius.behat.context.transform.locale
+                - sylius.behat.context.transform.product_association_type
+                - sylius.behat.context.transform.shared_storage
+
+                - sylius.behat.context.setup.locale
+                - sylius.behat.context.setup.product_association
+                - sylius.behat.context.setup.admin_security
+
+                - sylius.behat.context.ui.admin.managing_product_association_types
+                - sylius.behat.context.ui.admin.notification
+            filters:
+                tags: "@managing_product_association_types && @ui"

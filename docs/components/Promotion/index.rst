@@ -11,4 +11,3 @@ Super-flexible promotions system with support of complex rules and actions. Coup
    checkers
    models
    interfaces
-   promotion_events

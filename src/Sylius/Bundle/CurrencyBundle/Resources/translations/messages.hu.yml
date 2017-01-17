@@ -4,7 +4,7 @@
 sylius:
     form:
         currency:
-            exchange_rate: Árfolyam
-            enabled: Engedélyezve
             base: Alapértelmezett pénznem
             code: Név
+            enabled: Engedélyezve
+            exchange_rate: Árfolyam

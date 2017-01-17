@@ -16,8 +16,6 @@ use Sylius\Component\User\Model\User;
 use Sylius\Component\User\Model\UserInterface;
 
 /**
- * @mixin User
- *
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  * @author Bartosz Siejka <bartosz.siejka@lakion.com>
  */

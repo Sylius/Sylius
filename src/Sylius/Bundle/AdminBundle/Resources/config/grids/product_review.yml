@@ -1,0 +1,73 @@
+sylius_grid:
+    grids:
+        sylius_admin_product_review:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%sylius.model.product_review.class%"
+            sorting:
+                date: desc
+            fields:
+                date:
+                    type: datetime
+                    label: sylius.ui.date
+                    path: createdAt
+                    sortable: createdAt
+                    options:
+                        format: d-m-Y H:i:s
+                title:
+                    type: string
+                    label: sylius.ui.title
+                    sortable: ~
+                rating:
+                    type: string
+                    label: sylius.ui.rating
+                    sortable: ~
+                status:
+                    type: twig
+                    label: sylius.ui.status
+                    sortable: ~
+                    options:
+                        template: "@SyliusUi/Grid/Field/state.html.twig"
+                        vars:
+                            labels: "@SyliusAdmin/ProductReview/Label/Status"
+                reviewSubject:
+                    type: string
+                    label: sylius.ui.product
+                author:
+                    type: string
+                    label: sylius.ui.customer
+            filters:
+                title:
+                    type: string
+                    label: sylius.ui.title
+            actions:
+                item:
+                    update:
+                        type: update
+                    accept:
+                        type: apply_transition
+                        label: sylius.ui.accept
+                        icon: checkmark
+                        options:
+                            link:
+                                route: sylius_admin_product_review_accept
+                                parameters:
+                                    id: resource.id
+                            class: green
+                            transition: accept
+                            graph: sylius_product_review
+                    reject:
+                        type: apply_transition
+                        label: sylius.ui.reject
+                        icon: remove
+                        options:
+                            link:
+                                route: sylius_admin_product_review_reject
+                                parameters:
+                                    id: resource.id
+                            class: yellow
+                            transition: reject
+                            graph: sylius_product_review
+                    delete:
+                        type: delete

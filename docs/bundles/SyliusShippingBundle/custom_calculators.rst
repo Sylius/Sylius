@@ -10,7 +10,7 @@ All shipping cost calculators implement ``CalculatorInterface``. In our example 
 
 .. code-block:: php
 
-    <?php 
+    <?php
 
     // src/Acme/ShopBundle\Shipping/DHLCalculator.php
 
@@ -66,7 +66,7 @@ First step is to define the configuration options, using the Symfony **OptionsRe
 
 .. code-block:: php
 
-    <?php 
+    <?php
 
     // src/Acme/ShopBundle\Shipping/DHLCalculator.php
 
@@ -75,7 +75,7 @@ First step is to define the configuration options, using the Symfony **OptionsRe
     use Acme\ShopBundle\Shipping\DHLService;
     use Sylius\Bundle\ShippingBundle\Calculator\Calculator;
     use Sylius\Bundle\ShippingBundle\Model\ShippingSubjectInterface;
-    use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+    use Symfony\Component\OptionsResolver\OptionsResolver;
 
     class DHLCalculator extends Calculator
     {
@@ -90,7 +90,7 @@ First step is to define the configuration options, using the Symfony **OptionsRe
         {
             return $this->dhlService->getShippingCostForWeight($subject->getShippingWeight());
         }
-        
+
         /**
         * {@inheritdoc}
         */
@@ -99,7 +99,7 @@ First step is to define the configuration options, using the Symfony **OptionsRe
             return true;
         }
 
-        public function setConfiguration(OptionsResolverInterface $resolver)
+        public function setConfiguration(OptionsResolver $resolver)
         {
             $resolver
                 ->setDefaults(array(
@@ -124,7 +124,7 @@ Done, we've set the default item limit to 10. Now we have to create a form type 
 
     use Symfony\Component\Form\AbstractType;
     use Symfony\Component\Form\FormBuilderInterface;
-    use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+    use Symfony\Component\OptionsResolver\OptionsResolver;
     use Symfony\Component\Validator\Constraints\NotBlank;
     use Symfony\Component\Validator\Constraints\Type;
 
@@ -143,7 +143,7 @@ Done, we've set the default item limit to 10. Now we have to create a form type 
             ;
         }
 
-        public function setDefaultOptions(OptionsResolverInterface $resolver)
+        public function configureOptions(OptionsResolver $resolver)
         {
             $resolver
                 ->setDefaults(array(
@@ -184,7 +184,7 @@ Finally, configure the calculator to use the form, by implementing simple ``getC
 
 .. code-block:: php
 
-    <?php 
+    <?php
 
     // src/Acme/ShopBundle\Shipping/DHLCalculator.php
 
@@ -193,7 +193,7 @@ Finally, configure the calculator to use the form, by implementing simple ``getC
     use Acme\ShopBundle\Shipping\DHLService;
     use Sylius\Bundle\ShippingBundle\Calculator\Calculator;
     use Sylius\Bundle\ShippingBundle\Model\ShippingSubjectInterface;
-    use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+    use Symfony\Component\OptionsResolver\OptionsResolver;
 
     class DHLCalculator extends Calculator
     {
@@ -208,7 +208,7 @@ Finally, configure the calculator to use the form, by implementing simple ``getC
         {
             return $this->dhlService->getShippingCostForWeight($subject->getShippingWeight());
         }
-        
+
         /**
         * {@inheritdoc}
         */
@@ -217,7 +217,7 @@ Finally, configure the calculator to use the form, by implementing simple ``getC
             return true;
         }
 
-        public function setConfiguration(OptionsResolverInterface $resolver)
+        public function setConfiguration(OptionsResolver $resolver)
         {
             $resolver
                 ->setDefaults(array(
@@ -239,7 +239,7 @@ Perfect, now we're able to use the configuration inside the ``calculate`` method
 
 .. code-block:: php
 
-    <?php 
+    <?php
 
     // src/Acme/ShopBundle\Shipping/DHLCalculator.php
 
@@ -248,7 +248,7 @@ Perfect, now we're able to use the configuration inside the ``calculate`` method
     use Acme\ShopBundle\Shipping\DHLService;
     use Sylius\Bundle\ShippingBundle\Calculator\Calculator;
     use Sylius\Bundle\ShippingBundle\Model\ShippingSubjectInterface;
-    use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+    use Symfony\Component\OptionsResolver\OptionsResolver;
 
     class DHLCalculator extends Calculator
     {
@@ -267,7 +267,7 @@ Perfect, now we're able to use the configuration inside the ``calculate`` method
 
             return $this->dhlService->getShippingCostForWeight($subject->getShippingWeight());
         }
-        
+
         /**
         * {@inheritdoc}
         */
@@ -276,7 +276,7 @@ Perfect, now we're able to use the configuration inside the ``calculate`` method
             return true;
         }
 
-        public function setConfiguration(OptionsResolverInterface $resolver)
+        public function setConfiguration(OptionsResolver $resolver)
         {
             $resolver
                 ->setDefaults(array(

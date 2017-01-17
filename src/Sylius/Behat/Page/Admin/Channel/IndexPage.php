@@ -27,6 +27,6 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
 
         $row = $this->getTableAccessor()->getRowWithFields($table, ['code' => $channelCode]);
 
-        return trim($this->getTableAccessor()->getFieldFromRow($table, $row, 'theme')->getText());
+        return trim($this->getTableAccessor()->getFieldFromRow($table, $row, 'themeName')->getText());
     }
 }

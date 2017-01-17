@@ -7,6 +7,5 @@ sylius:
             description: Aprašymas
             name: Pavadinimas
             parent: Motininis elementas
-            permalink: Nuolatinė nuoroda
         taxonomy:
             name: Pavadinimas

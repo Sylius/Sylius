@@ -6,33 +6,35 @@ sylius:
         admin:
             main:
                 catalog:
+                    association_types: Tipos de asociación
                     attributes: Atributos
                     header: Catálogo
+                    inventory: Inventario
                     options: Opciones de producto
                     products: Productos
-                    taxons: Taxonomías
+                    taxons: Taxones
                 configuration:
                     admin_users: Administradores
                     channels: Canales
                     countries: Países
                     currencies: Monedas
+                    exchange_rates: Tipos de cambio
                     header: Configuración
                     locales: Idiomas
                     payment_methods: Modos de pago
+                    shipping_categories: Categorías de envío
                     shipping_methods: Métodos de envío
                     tax_categories: Categorías de impuestos
                     tax_rates: Tasas de impuestos
                     zones: Zonas
                 marketing:
                     header: Marketing
+                    product_reviews: Reseñas de producto
                     promotions: Promociones
                 customers:
                     customers: Clientes
+                    groups: Grupos
                     header: Cliente
                 sales:
                     header: Ventas
                     orders: Pedidos
-                content:
-                    header: Contenido
-                    static_contents: Contenidos estáticos
-                    routes: Rutas

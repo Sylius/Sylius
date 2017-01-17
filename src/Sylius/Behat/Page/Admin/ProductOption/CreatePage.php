@@ -15,6 +15,7 @@ use Behat\Mink\Element\Element;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Behaviour\SpecifiesItsCode;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
@@ -51,9 +52,9 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      */
     public function checkValidationMessageForOptionValues($message)
     {
-        $optionValuesValidationElement = $this->getElement('values_validation')->find('css', '.ui.pointing');
+        $optionValuesValidationElement = $this->getElement('values_validation')->find('css', '.sylius-validation-error');
         if (null === $optionValuesValidationElement) {
-            throw new ElementNotFoundException($this->getDriver(), 'product option validation box', 'css', '.ui.pointing');
+            throw new ElementNotFoundException($this->getDriver(), 'product option validation box', 'css', '.sylius-validation-error');
         }
 
         return $optionValuesValidationElement->getText() === $message;
@@ -79,6 +80,8 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     {
         $optionValues = $this->getElement('values');
         $items = $optionValues->findAll('css', 'div[data-form-collection="item"]');
+
+        Assert::notEmpty($items);
 
         return end($items);
     }

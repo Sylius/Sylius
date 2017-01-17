@@ -13,6 +13,7 @@ sylius:
             postcode: Індэкс
             street: Вуліца
             province: Вобласць
+            zone: Зона
         country:
             add_province: Дадаць вобласць
             name: Назва

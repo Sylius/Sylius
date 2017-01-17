@@ -21,6 +21,8 @@ interface IntegerDistributorInterface
      * @param int $numberOfTargets
      *
      * @return array
+     *
+     * @throws \InvalidArgumentException
      */
     public function distribute($amount, $numberOfTargets);
 }

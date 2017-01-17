@@ -4,14 +4,14 @@
 sylius:
     form:
         review:
+            author: ผู้เขียน
+            comment: ความคิดเห็น
             header: เพิ่มรีวิว
             rating: การจัดอันดับ
-            title: หัวข้อ
-            comment: ความคิดเห็น
-            author: ผู้เขียน
             status:
+                approved: อนุมัติแล้ว
                 label: สถานะ
                 new: รายการใหม่
-                approved: อนุมัติแล้ว
                 rejected: ปฏิเสธ
             submit: ส่ง
+            title: หัวข้อ

@@ -20,8 +20,6 @@ use Sylius\Component\Order\Model\OrderSequenceInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
- * @mixin SequentialOrderNumberGenerator
- *
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 final class SequentialOrderNumberGeneratorSpec extends ObjectBehavior
@@ -33,15 +31,15 @@ final class SequentialOrderNumberGeneratorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\OrderBundle\NumberGenerator\SequentialOrderNumberGenerator');
+        $this->shouldHaveType(SequentialOrderNumberGenerator::class);
     }
 
-    function it_implements_order_number_generator_interface()
+    function it_implements_an_order_number_generator_interface()
     {
         $this->shouldImplement(OrderNumberGeneratorInterface::class);
     }
 
-    function it_generates_order_number(
+    function it_generates_an_order_number(
         EntityRepository $sequenceRepository,
         OrderSequenceInterface $sequence,
         OrderInterface $order
@@ -54,7 +52,7 @@ final class SequentialOrderNumberGeneratorSpec extends ObjectBehavior
         $this->generate($order)->shouldReturn('000000007');
     }
 
-    function it_generates_order_number_when_sequence_is_null(
+    function it_generates_an_order_number_when_sequence_is_null(
         EntityRepository $sequenceRepository,
         FactoryInterface $sequenceFactory,
         OrderSequenceInterface $sequence,

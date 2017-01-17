@@ -13,11 +13,12 @@ namespace Sylius\Component\Grid\View;
 
 use Sylius\Component\Grid\Definition\Grid;
 use Sylius\Component\Grid\Parameters;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class GridView
+class GridView implements GridViewInterface
 {
     /**
      * @var mixed
@@ -47,7 +48,7 @@ class GridView
     }
 
     /**
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getData()
     {
@@ -55,7 +56,7 @@ class GridView
     }
 
     /**
-     * @return Grid
+     * {@inheritdoc}
      */
     public function getDefinition()
     {
@@ -63,7 +64,7 @@ class GridView
     }
 
     /**
-     * @return Parameters
+     * {@inheritdoc}
      */
     public function getParameters()
     {
@@ -71,35 +72,49 @@ class GridView
     }
 
     /**
-     * @param string $fieldName
-     *
-     * @return bool
-     */
-    public function isSortedBy($fieldName)
-    {
-        $this->assertFieldExists($fieldName);
-
-        return array_key_exists($fieldName, $this->getCurrentSorting());
-    }
-
-    /**
-     * @param string $fieldName
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getSortingOrder($fieldName)
     {
-        $this->assertFieldExists($fieldName);
+        $this->assertFieldIsSortable($fieldName);
 
-        return $this->getCurrentSorting()[$fieldName];
+        $currentSorting = $this->getCurrentlySortedBy();
+
+        if (array_key_exists($fieldName, $currentSorting)) {
+            return $currentSorting[$fieldName];
+        }
+
+        $definedSorting = $this->definition->getSorting();
+
+        return reset($definedSorting) ?: null;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isSortedBy($fieldName)
+    {
+        $this->assertFieldIsSortable($fieldName);
+
+        if ($this->parameters->has('sorting')) {
+            return array_key_exists($fieldName, $this->parameters->get('sorting'));
+        }
+
+        $sortingDefinition = $this->getDefinition()->getSorting();
+        $sortedFields = array_keys($sortingDefinition);
+
+        return $fieldName === array_shift($sortedFields);
     }
 
     /**
      * @return array|mixed
      */
-    private function getCurrentSorting()
+    private function getCurrentlySortedBy()
     {
-        return $this->parameters->has('sorting') ? $this->parameters->get('sorting') : $this->definition->getSorting();
+        return $this->parameters->has('sorting')
+            ? array_merge($this->definition->getSorting(), $this->parameters->get('sorting'))
+            : $this->definition->getSorting()
+        ;
     }
 
     /**
@@ -107,10 +122,12 @@ class GridView
      *
      * @throws \InvalidArgumentException
      */
-    private function assertFieldExists($fieldName)
+    private function assertFieldIsSortable($fieldName)
     {
-        if (!$this->definition->hasField($fieldName)) {
-            throw new \InvalidArgumentException(sprintf('Field "%s" does not exist.', $fieldName));
-        }
+        Assert::true($this->definition->hasField($fieldName), sprintf('Field "%s" does not exist.', $fieldName));
+        Assert::true(
+            $this->definition->getField($fieldName)->isSortable(),
+            sprintf('Field "%s" is not sortable.', $fieldName)
+        );
     }
 }

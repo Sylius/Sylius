@@ -1,7 +1,7 @@
 Forms
 =====
 
-The bundle ships with a set of useful form types for all models. You can use the defaults or :doc:`override them </bundles/general/overriding_forms>` with your own types.
+The bundle ships with a set of useful form types for all models. You can use the defaults or :doc:`override them </customization/form>` with your own types.
 
 Address form
 ------------

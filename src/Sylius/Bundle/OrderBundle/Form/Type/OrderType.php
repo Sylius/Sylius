@@ -12,14 +12,14 @@
 namespace Sylius\Bundle\OrderBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Order form type.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class OrderType extends AbstractResourceType
+final class OrderType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}
@@ -27,12 +27,15 @@ class OrderType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('items', 'collection', [
-                'type' => 'sylius_order_item',
+            ->add('items', CollectionType::class, [
+                'entry_type' => OrderItemType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
                 'label' => 'sylius.form.order.items',
+            ])
+            ->add('notes', TextareaType::class, [
+                'label' => 'sylius.ui.notes',
             ])
         ;
     }
@@ -40,7 +43,7 @@ class OrderType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_order';
     }

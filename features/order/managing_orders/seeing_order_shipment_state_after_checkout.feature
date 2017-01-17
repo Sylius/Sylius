@@ -28,6 +28,6 @@ Feature: Seeing shipping states of an order after checkout steps
 
     @ui
     Scenario: Seeing cancelled order shipping state
-        Given the customer canceled this order
+        Given the customer cancelled this order
         When I browse orders
         Then order "#00000666" should have shipment state cancelled

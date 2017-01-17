@@ -11,6 +11,7 @@
 
 namespace Sylius\Behat\Page\Shop\Checkout;
 
+use Sylius\Behat\Page\SymfonyPageInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
@@ -19,7 +20,7 @@ use Sylius\Component\Payment\Model\PaymentMethodInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-interface CompletePageInterface
+interface CompletePageInterface extends SymfonyPageInterface
 {
     /**
      * @param string $productName
@@ -44,11 +45,14 @@ interface CompletePageInterface
     public function hasBillingAddress(AddressInterface $address);
 
     /**
-     * @param PaymentMethodInterface $paymentMethod
-     *
      * @return bool
      */
-    public function hasPaymentMethod(PaymentMethodInterface $paymentMethod);
+    public function getPaymentMethodName();
+
+    /**
+     * @return bool
+     */
+    public function hasPaymentMethod();
 
     /**
      * @param ShippingMethodInterface $shippingMethod
@@ -67,7 +71,7 @@ interface CompletePageInterface
 
     /**
      * @param float $total
-     * 
+     *
      * @return bool
      */
     public function hasOrderTotal($total);
@@ -79,28 +83,35 @@ interface CompletePageInterface
 
     /**
      * @param string $promotionTotal
-     * 
+     *
      * @return bool
      */
     public function hasPromotionTotal($promotionTotal);
 
     /**
      * @param string $promotionName
-     * 
+     *
      * @return bool
      */
     public function hasPromotion($promotionName);
 
     /**
+     * @param string $promotionName
+     *
+     * @return bool
+     */
+    public function hasShippingPromotion($promotionName);
+
+    /**
      * @param string $taxTotal
-     * 
+     *
      * @return bool
      */
     public function hasTaxTotal($taxTotal);
 
     /**
      * @param string $price
-     * 
+     *
      * @return bool
      */
     public function hasShippingTotal($price);
@@ -141,4 +152,30 @@ interface CompletePageInterface
     public function changePaymentMethod();
 
     public function confirmOrder();
+
+    /**
+     * @param string $provinceName
+     *
+     * @return bool
+     */
+    public function hasShippingProvinceName($provinceName);
+
+    /**
+     * @param string $provinceName
+     *
+     * @return bool
+     */
+    public function hasBillingProvinceName($provinceName);
+
+    /**
+     * @return string
+     */
+    public function getBaseCurrencyOrderTotal();
+
+    /**
+     * @param string $promotionName
+     * 
+     * @return string
+     */
+    public function getShippingPromotionDiscount($promotionName);
 }

@@ -15,7 +15,6 @@ In your ``app/config/config.yml``, under ``sylius_mailer`` you should configure 
     # app/config/config.yml
 
     sylius_mailer:
-        driver: doctrine/orm
         sender:
             name: Movie Database Example
             address: no-reply@movie-database-example.com
@@ -29,7 +28,7 @@ That's it! Your unique code is "movie_added_notification". Now, let's create the
 Creating Your Template
 ----------------------
 
-In your ``AppBundle/Resources/views/Email:movieAddedNotification.html.twig`` put the following Twig code:
+In your ``app/Resources/views/Email:movieAddedNotification.html.twig`` put the following Twig code:
 
 .. code-block:: twig
 

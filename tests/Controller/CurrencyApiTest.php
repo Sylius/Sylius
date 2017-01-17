@@ -42,202 +42,141 @@ class CurrencyApiTest extends JsonApiTestCase
         'ACCEPT' => 'application/json',
     ];
 
-    public function testCreateCurrencyAccessDeniedResponse()
+    /**
+     * @test
+     */
+    public function it_denies_creating_currency_for_non_authenticated_user()
     {
-        $this->client->request('POST', '/api/currencies/');
+        $this->client->request('POST', '/api/v1/currencies/');
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
     }
 
-    public function testCreateCurrencyValidationFailResponse()
+    /**
+     * @test
+     */
+    public function it_does_not_allow_to_create_currency_without_specifying_required_data()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
-        $this->client->request('POST', '/api/currencies/', [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('POST', '/api/v1/currencies/', [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'currency/create_validation_fail_response', Response::HTTP_BAD_REQUEST);
     }
 
-    public function testCreateCurrencyResponse()
+    /**
+     * @test
+     */
+    public function it_allows_to_create_currency_with_given_code()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
         $data =
 <<<EOT
         {
-            "code": "USD",
-            "exchangeRate": 1,
-            "enabled": true
+            "code": "USD"
         }
 EOT;
 
-        $this->client->request('POST', '/api/currencies/', [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('POST', '/api/v1/currencies/', [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
 
         $this->assertResponse($response, 'currency/create_response', Response::HTTP_CREATED);
     }
 
-    public function testGetCurrenciesListAccessDeniedResponse()
+    /**
+     * @test
+     */
+    public function it_denies_getting_currencies_for_non_authenticated_user()
     {
-        $this->client->request('GET', '/api/currencies/');
+        $this->client->request('GET', '/api/v1/currencies/');
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
     }
 
-    public function testGetCurrenciesListResponse()
+    /**
+     * @test
+     */
+    public function it_allows_to_get_currencies_list()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/currencies.yml');
 
-        $this->client->request('GET', '/api/currencies/', [], [], static::$authorizedHeader);
+        $this->client->request('GET', '/api/v1/currencies/', [], [], static::$authorizedHeader);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'currency/index_response', Response::HTTP_OK);
     }
 
-    public function testGetCurrencyAccessDeniedResponse()
+    /**
+     * @test
+     */
+    public function it_denies_getting_currency_for_non_authenticated_user()
     {
-        $this->client->request('GET', '/api/currencies/1');
+        $this->client->request('GET', '/api/v1/currencies/1');
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
     }
 
-    public function testGetCurrencyWhichDoesNotExistResponse()
+    /**
+     * @test
+     */
+    public function it_returns_not_found_response_when_requesting_details_of_a_currency_which_does_not_exist()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
-        $this->client->request('GET', '/api/currencies/-1', [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', '/api/v1/currencies/-1', [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
     }
 
-    public function testGetCurrencyResponse()
+    /**
+     * @test
+     */
+    public function it_allows_to_get_currency()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $currencies = $this->loadFixturesFromFile('resources/currencies.yml');
 
-        $this->client->request('GET', '/api/currencies/'.$currencies['currency_1']->getId(), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', '/api/v1/currencies/'.$currencies['currency_1']->getCode(), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'currency/show_response', Response::HTTP_OK);
     }
 
-    public function testFullUpdateCurrencyAccessDeniedResponse()
-    {
-        $this->client->request('PUT', '/api/currencies/1');
-
-        $response = $this->client->getResponse();
-        $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
-    }
-
-    public function testFullUpdateCurrencyWhichDoesNotExistResponse()
+    /**
+     * @test
+     */
+    public function it_returns_not_found_response_when_trying_to_delete_currency_which_does_not_exist()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
-        $this->client->request('PUT', '/api/currencies/-1', [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('DELETE', '/api/v1/currencies/-1', [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
     }
 
-    public function testFullUpdateCurrencyValidationFailResponse()
+    /**
+     * @test
+     */
+    public function it_allows_to_delete_currency()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $currencies = $this->loadFixturesFromFile('resources/currencies.yml');
 
-        $this->client->request('PUT', '/api/currencies/'.$currencies['currency_2']->getId(), [], [], static::$authorizedHeaderWithContentType);
-
-        $response = $this->client->getResponse();
-
-        $this->assertResponse($response, 'currency/update_validation_fail_response', Response::HTTP_BAD_REQUEST);
-    }
-
-    public function testFullUpdateCurrencyResponse()
-    {
-        $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $currencies = $this->loadFixturesFromFile('resources/currencies.yml');
-
-        $data =
-<<<EOT
-        {
-            "code": "EUR",
-            "exchangeRate": 1.0000,
-            "enabled": false
-        }
-EOT;
-
-        $this->client->request('PUT', '/api/currencies/'.$currencies['currency_2']->getId(), [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('DELETE', '/api/v1/currencies/'.$currencies['currency_1']->getCode(), [], [], static::$authorizedHeaderWithContentType, []);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
 
-        $this->client->request('GET', '/api/currencies/'.$currencies['currency_2']->getId(), [], [], static::$authorizedHeaderWithAccept);
-
-        $response = $this->client->getResponse();
-        $this->assertResponse($response, 'currency/update_response', Response::HTTP_OK);
-    }
-
-    public function testPartialUpdateCurrencyWhichDoesNotExistResponse()
-    {
-        $this->loadFixturesFromFile('authentication/api_administrator.yml');
-
-        $this->client->request('PATCH', '/api/currencies/-1', [], [], static::$authorizedHeaderWithAccept);
-
-        $response = $this->client->getResponse();
-        $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
-    }
-
-    public function testPartialUpdateCurrencyResponse()
-    {
-        $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $currencies = $this->loadFixturesFromFile('resources/currencies.yml');
-
-        $data =
-<<<EOT
-        {
-            "exchangeRate": 1,
-            "enabled": false
-        }
-EOT;
-
-        $this->client->request('PATCH', '/api/currencies/'.$currencies['currency_2']->getId(), [], [], static::$authorizedHeaderWithContentType, $data);
-
-        $response = $this->client->getResponse();
-        $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
-
-        $this->client->request('GET', '/api/currencies/'.$currencies['currency_2']->getId(), [], [], static::$authorizedHeaderWithAccept);
-
-        $response = $this->client->getResponse();
-        $this->assertResponse($response, 'currency/update_response', Response::HTTP_OK);
-    }
-
-    public function testDeleteCurrencyWhichDoesNotExistResponse()
-    {
-        $this->loadFixturesFromFile('authentication/api_administrator.yml');
-
-        $this->client->request('DELETE', '/api/currencies/-1', [], [], static::$authorizedHeaderWithAccept);
-
-        $response = $this->client->getResponse();
-        $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
-    }
-
-    public function testDeleteCurrencyResponse()
-    {
-        $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $currencies = $this->loadFixturesFromFile('resources/currencies.yml');
-
-        $this->client->request('DELETE', '/api/currencies/'.$currencies['currency_1']->getId(), [], [], static::$authorizedHeaderWithContentType, []);
-
-        $response = $this->client->getResponse();
-        $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
-
-        $this->client->request('GET', '/api/currencies/'.$currencies['currency_1']->getId(), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', '/api/v1/currencies/'.$currencies['currency_1']->getCode(), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);

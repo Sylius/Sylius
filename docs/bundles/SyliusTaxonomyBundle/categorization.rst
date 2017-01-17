@@ -70,7 +70,7 @@ Your product entity mapping should live inside ``Resources/config/doctrine/Produ
 
     </doctrine-mapping>
 
-Product is just an example where we have many to many realationship with taxons,
+Product is just an example where we have many to many relationship with taxons,
 which will make it possible to categorize products and list them by taxon later.
 
 You can classify any other model in your application the same way.
@@ -79,7 +79,7 @@ Creating your forms
 -------------------
 
 To be able to apply taxonomies on your products, or whatever you are categorizing or tagging,
-it is handy to use `sylius_taxon_selection` form type:
+it is handy to use `sylius_taxon_choice` form type:
 
 .. code-block:: php
 
@@ -90,16 +90,16 @@ it is handy to use `sylius_taxon_selection` form type:
 
     use Symfony\Component\Form\AbstractType;
     use Symfony\Component\Form\FormBuilderInterface;
-    use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+    use Symfony\Component\OptionsResolver\OptionsResolver;
 
     class ProductType extends AbstractType
     {
         public function buildForm(FormBuilderInterface $builder, array $options)
         {
-            $builder->add('taxons', 'sylius_taxon_selection');
+            $builder->add('taxons', 'sylius_taxon_choice');
         }
 
-        public function setDefaultOptions(OptionsResolverInterface $resolver)
+        public function configureOptions(OptionsResolver $resolver)
         {
             $resolver
                 ->setDefaults(array(
@@ -109,4 +109,4 @@ it is handy to use `sylius_taxon_selection` form type:
         }
     }
 
-This `sylius_taxon_selection` type will add a select input field for each taxonomy, with select option for each taxon.
+This `sylius_taxon_choice` type will add a select input field for each taxonomy, with select option for each taxon.

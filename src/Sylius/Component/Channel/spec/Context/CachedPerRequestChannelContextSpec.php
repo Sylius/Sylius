@@ -21,8 +21,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
- * @mixin CachedPerRequestChannelContext
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class CachedPerRequestChannelContextSpec extends ObjectBehavior
@@ -34,7 +32,7 @@ final class CachedPerRequestChannelContextSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Channel\Context\CachedPerRequestChannelContext');
+        $this->shouldHaveType(CachedPerRequestChannelContext::class);
     }
 
     function it_implements_channel_context_interface()
@@ -123,9 +121,11 @@ final class CachedPerRequestChannelContextSpec extends ObjectBehavior
     ) {
         $requestStack->getMasterRequest()->willReturn(null, null);
 
-        $decoratedChannelContext->getChannel()->will(
-            CompositePromise::it()->willThrow(ChannelNotFoundException::class)->andThenReturn($channel)
-        )->shouldBeCalledTimes(2);
+        $decoratedChannelContext
+            ->getChannel()
+            ->will(CompositePromise::it()->willThrow(ChannelNotFoundException::class)->andThenReturn($channel))
+            ->shouldBeCalledTimes(2)
+        ;
 
         $this->shouldThrow(ChannelNotFoundException::class)->during('getChannel');
         $this->getChannel()->shouldReturn($channel);

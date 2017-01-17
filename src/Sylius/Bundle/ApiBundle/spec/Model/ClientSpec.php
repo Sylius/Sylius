@@ -11,20 +11,21 @@
 
 namespace spec\Sylius\Bundle\ApiBundle\Model;
 
-use FOS\OAuthServerBundle\Entity\Client;
+use FOS\OAuthServerBundle\Entity\Client as FOSClient;
 use FOS\OAuthServerBundle\Model\ClientInterface;
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ApiBundle\Model\Client;
 
 final class ClientSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ApiBundle\Model\Client');
+        $this->shouldHaveType(Client::class);
     }
 
     function it_extends_fos_oauth_server_client_manager()
     {
-        $this->shouldHaveType(Client::class);
+        $this->shouldHaveType(FOSClient::class);
     }
 
     function it_implements_fos_oauth_server_client_manager_interface()

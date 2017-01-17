@@ -1,0 +1,21 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+default:
+    suites:
+        ui_managing_exchange_rates:
+            contexts_services:
+                - sylius.behat.context.hook.doctrine_orm
+
+                - sylius.behat.context.transform.shared_storage
+                - sylius.behat.context.transform.currency
+                - sylius.behat.context.transform.lexical
+
+                - sylius.behat.context.setup.admin_security
+                - sylius.behat.context.setup.currency
+                - sylius.behat.context.setup.exchange_rate
+
+                - sylius.behat.context.ui.admin.managing_exchange_rates
+                - sylius.behat.context.ui.admin.notification
+            filters:
+                tags: "@managing_exchange_rates && @ui"

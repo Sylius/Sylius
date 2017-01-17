@@ -23,7 +23,7 @@ final class CheckoutAddressingApiTest extends CheckoutApiTestCase
      */
     public function it_denies_order_addressing_for_non_authenticated_user()
     {
-        $this->client->request('PUT', '/api/checkouts/addressing/1/1');
+        $this->client->request('PUT', '/api/v1/checkouts/addressing/1');
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
@@ -36,7 +36,7 @@ final class CheckoutAddressingApiTest extends CheckoutApiTestCase
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
-        $this->client->request('PUT', '/api/checkouts/addressing/1/1', [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('PUT', '/api/v1/checkouts/addressing/1', [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NOT_FOUND);
@@ -45,12 +45,12 @@ final class CheckoutAddressingApiTest extends CheckoutApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allow_to_address_order_for_unexisting_customer()
+    public function it_does_not_allow_to_address_order_without_specifying_customer_email()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $checkoutData = $this->loadFixturesFromFile('resources/checkout.yml');
 
-        $url = sprintf('/api/checkouts/addressing/%d/0', $checkoutData['order1']->getId());
+        $url = sprintf('/api/v1/checkouts/addressing/%d', $checkoutData['order1']->getId());
         $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
@@ -63,17 +63,19 @@ final class CheckoutAddressingApiTest extends CheckoutApiTestCase
     public function it_does_not_allow_to_address_order_without_specifying_shipping_address()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $customers = $this->loadFixturesFromFile('resources/customers.yml');
         $checkoutData = $this->loadFixturesFromFile('resources/checkout.yml');
 
         $data =
 <<<EOT
         {
-            "differentBillingAddress": false
+            "different_billing_address": false,
+            "customer": {
+                "email": "john@doe.com"
+            }
         }
 EOT;
 
-        $url = sprintf('/api/checkouts/addressing/%d/%d', $checkoutData['order1']->getId(), $customers['customer_Oliver']->getId());
+        $url = sprintf('/api/v1/checkouts/addressing/%d', $checkoutData['order1']->getId());
         $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
@@ -87,25 +89,27 @@ EOT;
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/countries.yml');
-        $customers = $this->loadFixturesFromFile('resources/customers.yml');
         $checkoutData = $this->loadFixturesFromFile('resources/checkout.yml');
 
         $data =
 <<<EOT
         {
-            "shippingAddress": {
-                "firstName": "Hieronim",
-                "lastName": "Bosch",
+            "shipping_address": {
+                "first_name": "Hieronim",
+                "last_name": "Bosch",
                 "street": "Surrealism St.",
-                "countryCode": "NL",
+                "country_code": "NL",
                 "city": "’s-Hertogenbosch",
                 "postcode": "99-999"
             },
-            "differentBillingAddress": false
+            "different_billing_address": false,
+            "customer": {
+                "email": "john@doe.com"
+            }
         }
 EOT;
 
-        $url = sprintf('/api/checkouts/addressing/%d/%d', $checkoutData['order1']->getId(), $customers['customer_Oliver']->getId());
+        $url = sprintf('/api/v1/checkouts/addressing/%d', $checkoutData['order1']->getId());
         $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
@@ -125,19 +129,22 @@ EOT;
         $data =
 <<<EOT
         {
-            "shippingAddress": {
-                "firstName": "Hieronim",
-                "lastName": "Bosch",
+            "shipping_address": {
+                "first_name": "Hieronim",
+                "last_name": "Bosch",
                 "street": "Surrealism St.",
-                "countryCode": "NL",
+                "country_code": "NL",
                 "city": "’s-Hertogenbosch",
                 "postcode": "99-999"
             },
-            "differentBillingAddress": true
+            "different_billing_address": true,
+            "customer": {
+                "email": "john@doe.com"
+            }
         }
 EOT;
 
-        $url = sprintf('/api/checkouts/addressing/%d/%d', $checkoutData['order1']->getId(), $customers['customer_Oliver']->getId());
+        $url = sprintf('/api/v1/checkouts/addressing/%d', $checkoutData['order1']->getId());
         $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
@@ -151,41 +158,219 @@ EOT;
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/countries.yml');
-        $customers = $this->loadFixturesFromFile('resources/customers.yml');
         $checkoutData = $this->loadFixturesFromFile('resources/checkout.yml');
 
         $data =
 <<<EOT
         {
-            "shippingAddress": {
-                "firstName": "Hieronim",
-                "lastName": "Bosch",
+            "shipping_address": {
+                "first_name": "Hieronim",
+                "last_name": "Bosch",
                 "street": "Surrealism St.",
-                "countryCode": "NL",
+                "country_code": "NL",
                 "city": "’s-Hertogenbosch",
                 "postcode": "99-999"
             },
-            "billingAddress": {
-                "firstName": "Vincent",
-                "lastName": "van Gogh",
+            "billing_address": {
+                "first_name": "Vincent",
+                "last_name": "van Gogh",
                 "street": "Post-Impressionism St.",
-                "countryCode": "NL",
+                "country_code": "NL",
                 "city": "Groot Zundert",
                 "postcode": "88-888"
             },
-            "differentBillingAddress": true
+            "different_billing_address": true,
+            "customer": {
+                "email": "john@doe.com"
+            }
         }
 EOT;
 
-        $url = sprintf('/api/checkouts/addressing/%d/%d', $checkoutData['order1']->getId(), $customers['customer_Oliver']->getId());
+        $url = sprintf('/api/v1/checkouts/addressing/%d', $checkoutData['order1']->getId());
         $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
 
-        $this->client->request('GET', sprintf('/api/checkouts/%d', $checkoutData['order1']->getId()), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', sprintf('/api/v1/checkouts/%d', $checkoutData['order1']->getId()), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'checkout/addressed_order_response');
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_to_change_order_address_after_the_order_has_already_been_addressed()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/countries.yml');
+        $checkoutData = $this->loadFixturesFromFile('resources/checkout.yml');
+
+        $data =
+<<<EOT
+        {
+            "shipping_address": {
+                "first_name": "Vincent",
+                "last_name": "van Gogh",
+                "street": "Post-Impressionism St.",
+                "country_code": "NL",
+                "city": "Groot Zundert",
+                "postcode": "88-888"
+            },
+            "different_billing_address": false,
+            "customer": {
+                "email": "john@doe.com"
+            }
+        }
+EOT;
+
+        $orderId = $checkoutData['order1']->getId();
+
+        $url = sprintf('/api/v1/checkouts/addressing/%d', $orderId);
+        $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $newData =
+<<<EOT
+        {
+            "shipping_address": {
+                "first_name": "Hieronim",
+                "last_name": "Bosch",
+                "street": "Surrealism St.",
+                "country_code": "NL",
+                "city": "’s-Hertogenbosch",
+                "postcode": "99-999"
+            },
+            "different_billing_address": false,
+            "customer": {
+                "email": "john@doe.com"
+            }
+        }
+EOT;
+
+        $url = sprintf('/api/v1/checkouts/addressing/%d', $checkoutData['order1']->getId());
+        $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $newData);
+
+        $response = $this->client->getResponse();
+        $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_to_change_order_address_after_selecting_shipping_method()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/countries.yml');
+        $checkoutData = $this->loadFixturesFromFile('resources/checkout.yml');
+
+        $addressData =
+<<<EOT
+        {
+            "shipping_address": {
+                "first_name": "Vincent",
+                "last_name": "van Gogh",
+                "street": "Post-Impressionism St.",
+                "country_code": "NL",
+                "city": "Groot Zundert",
+                "postcode": "88-888"
+            },
+            "different_billing_address": false,
+            "customer": {
+                "email": "john@doe.com"
+            }
+        }
+EOT;
+
+        $orderId = $checkoutData['order1']->getId();
+
+        $url = sprintf('/api/v1/checkouts/addressing/%d', $orderId);
+        $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $addressData);
+
+        $this->selectOrderShippingMethod($orderId, $checkoutData['ups']->getId());
+
+        $newAddressData =
+<<<EOT
+        {
+            "shipping_address": {
+                "first_name": "Hieronim",
+                "last_name": "Bosch",
+                "street": "Surrealism St.",
+                "country_code": "NL",
+                "city": "’s-Hertogenbosch",
+                "postcode": "99-999"
+            },
+            "different_billing_address": false,
+            "customer": {
+                "email": "john@doe.com"
+            }
+        }
+EOT;
+
+        $url = sprintf('/api/v1/checkouts/addressing/%d', $checkoutData['order1']->getId());
+        $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $newAddressData);
+
+        $response = $this->client->getResponse();
+        $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_to_change_order_address_after_selecting_payment_method()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/countries.yml');
+        $checkoutData = $this->loadFixturesFromFile('resources/checkout.yml');
+
+        $addressData =
+<<<EOT
+        {
+            "shipping_address": {
+                "first_name": "Vincent",
+                "last_name": "van Gogh",
+                "street": "Post-Impressionism St.",
+                "country_code": "NL",
+                "city": "Groot Zundert",
+                "postcode": "88-888"
+            },
+            "different_billing_address": false,
+            "customer": {
+                "email": "john@doe.com"
+            }
+        }
+EOT;
+
+        $orderId = $checkoutData['order1']->getId();
+
+        $url = sprintf('/api/v1/checkouts/addressing/%d', $orderId);
+        $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $addressData);
+
+        $this->selectOrderShippingMethod($orderId, $checkoutData['ups']->getId());
+        $this->selectOrderPaymentMethod($orderId, $checkoutData['cash_on_delivery']->getId());
+
+        $newAddressData =
+<<<EOT
+        {
+            "shipping_address": {
+                "first_name": "Hieronim",
+                "last_name": "Bosch",
+                "street": "Surrealism St.",
+                "country_code": "NL",
+                "city": "’s-Hertogenbosch",
+                "postcode": "99-999"
+            },
+            "different_billing_address": false,
+            "customer": {
+                "email": "john@doe.com"
+            }
+        }
+EOT;
+
+        $url = sprintf('/api/v1/checkouts/addressing/%d', $checkoutData['order1']->getId());
+        $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $newAddressData);
+
+        $response = $this->client->getResponse();
+        $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
     }
 }

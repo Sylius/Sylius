@@ -91,17 +91,12 @@ final class ChannelFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function channel_payment_methods_are_optional()
+    public function channel_contact_email_is_optional()
     {
-        $this->assertConfigurationIsValid([['custom' => [['payment_methods' => ['en_US', 'pl_PL']]]]], 'custom.*.payment_methods');
-    }
-
-    /**
-     * @test
-     */
-    public function channel_shipping_methods_are_optional()
-    {
-        $this->assertConfigurationIsValid([['custom' => [['shipping_methods' => ['en_US', 'pl_PL']]]]], 'custom.*.shipping_methods');
+        $this->assertConfigurationIsValid(
+            [['custom' => [['contact_email' => 'contact@example.com']]]],
+            'custom.*.contact_email'
+        );
     }
 
     /**

@@ -12,12 +12,13 @@
 namespace Sylius\Bundle\AttributeBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class AttributeTypeChoiceType extends AbstractType
+final class AttributeTypeChoiceType extends AbstractType
 {
     /**
      * @var array
@@ -37,12 +38,10 @@ class AttributeTypeChoiceType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver
-            ->setDefaults([
-                'choice_translation_domain' => false,
-                'choices' => $this->attributeTypes
-            ])
-        ;
+        $resolver->setDefaults([
+            'choices' => array_flip($this->attributeTypes),
+            'choice_translation_domain' => false,
+        ]);
     }
 
     /**
@@ -50,13 +49,13 @@ class AttributeTypeChoiceType extends AbstractType
      */
     public function getParent()
     {
-        return 'choice';
+        return ChoiceType::class;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_attribute_type_choice';
     }

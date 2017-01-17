@@ -1,0 +1,5 @@
+{% if form.vars.choices|length == 1 %}
+    {{ form_row(form, {'value': form.vars.choices[0].value}) }}
+{% else %}
+    {{ form_row(form) }}
+{% endif %}

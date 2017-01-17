@@ -18,15 +18,13 @@ use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
 
 /**
- * @mixin RouteFactory
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class RouteFactorySpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Routing\RouteFactory');
+        $this->shouldHaveType(RouteFactory::class);
     }
 
     function it_implements_route_factory_interface()

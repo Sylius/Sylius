@@ -14,10 +14,8 @@ namespace Sylius\Bundle\MoneyBundle;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * Money bundle.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SyliusMoneyBundle extends Bundle
+final class SyliusMoneyBundle extends Bundle
 {
 }

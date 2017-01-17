@@ -17,7 +17,7 @@ use FOS\RestBundle\View\ViewHandler as RestViewHandler;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ViewHandler implements ViewHandlerInterface
+final class ViewHandler implements ViewHandlerInterface
 {
     /**
      * @var RestViewHandler

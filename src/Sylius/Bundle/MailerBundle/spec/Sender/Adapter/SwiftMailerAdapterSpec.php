@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\MailerBundle\Sender\Adapter;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\MailerBundle\Sender\Adapter\SwiftMailerAdapter;
 use Sylius\Component\Mailer\Event\EmailSendEvent;
 use Sylius\Component\Mailer\Model\EmailInterface;
 use Sylius\Component\Mailer\Renderer\RenderedEmail;
@@ -29,7 +30,7 @@ final class SwiftMailerAdapterSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\MailerBundle\Sender\Adapter\SwiftMailerAdapter');
+        $this->shouldHaveType(SwiftMailerAdapter::class);
     }
 
     function it_is_an_adapter()
@@ -38,10 +39,10 @@ final class SwiftMailerAdapterSpec extends ObjectBehavior
     }
 
     function it_sends_an_email(
-        $mailer,
+        \Swift_Mailer $mailer,
+        EmailInterface $email,
         EventDispatcherInterface $dispatcher,
-        RenderedEmail $renderedEmail,
-        EmailInterface $email
+        RenderedEmail $renderedEmail
     ) {
         $this->setEventDispatcher($dispatcher);
 

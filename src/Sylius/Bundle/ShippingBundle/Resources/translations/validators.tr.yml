@@ -6,7 +6,7 @@ sylius:
         name:
             max_length: 'Kategori adı en fazla {{ limit }} karakter olabilir.'
             min_length: 'Kategori ad en az {{ limit }} karakter uzunluğunda olmalıdır.'
-            not_blank: Lütfen kargo kategorisi adı giriniz.
+            not_blank: 'Lütfen kargo kategorisi adı giriniz.'
     shipping_method:
         calculator:
             max_length: sylius.Kargo_mthodu.hesaplama.maksimum_uzunluk
@@ -15,4 +15,4 @@ sylius:
         name:
             max_length: 'Kargo yönteminin adı {{ limit }} karakterden daha uzun olamaz.'
             min_length: 'Kargo yönteminin adı en az {{ limit }} karakter uzunluğunda olmalıdır.'
-            not_blank: Lütfen kargo yönteminin adını giriniz.
+            not_blank: 'Lütfen kargo yönteminin adını giriniz.'

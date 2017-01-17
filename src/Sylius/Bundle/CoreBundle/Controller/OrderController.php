@@ -11,113 +11,14 @@
 
 namespace Sylius\Bundle\CoreBundle\Controller;
 
-use Doctrine\ORM\EntityManager;
 use FOS\RestBundle\View\View;
-use Gedmo\Loggable\Entity\LogEntry;
-use Payum\Core\Registry\RegistryInterface;
-use Payum\Core\Security\GenericTokenFactoryInterface;
-use Payum\Core\Security\HttpRequestVerifierInterface;
-use Sylius\Bundle\PayumBundle\Request\GetStatus;
-use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
-use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\OrderProcessing\StateResolverInterface;
+use Sylius\Bundle\OrderBundle\Controller\OrderController as BaseOrderController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Webmozart\Assert\Assert;
 
-class OrderController extends ResourceController
+class OrderController extends BaseOrderController
 {
-    /**
-     * @param Request $request
-     *
-     * @return Response
-     *
-     * @throws NotFoundHttpException
-     */
-    public function historyAction(Request $request)
-    {
-        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
-        /** @var $order OrderInterface */
-        $order = $this->findOr404($configuration);
-
-        $repository = $this->get('doctrine')->getManager()->getRepository(LogEntry::class);
-
-        $items = [];
-        foreach ($order->getItems() as $item) {
-            $items[] = $repository->getLogEntries($item);
-        }
-
-        $view = View::create()
-            ->setTemplate($configuration->getTemplate('history.html'))
-            ->setData([
-                'order' => $order,
-                'logs' => [
-                    'order' => $repository->getLogEntries($order),
-                    'order_items' => $items,
-                    'billing_address' => $repository->getLogEntries($order->getBillingAddress()),
-                    'shipping_address' => $repository->getLogEntries($order->getShippingAddress()),
-                ],
-            ])
-        ;
-
-        return $this->viewHandler->handle($configuration, $view);
-    }
-
-    /**
-     * @param Request $request
-     * @param int $orderId
-     *
-     * @return Response
-     */
-    public function payAction(Request $request, $orderId)
-    {
-        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
-
-        $order = $this->repository->findOneForPayment($orderId);
-        Assert::notNull($order);
-
-        $payment = $order->getLastPayment();
-        $captureToken = $this->getTokenFactory()->createCaptureToken(
-            $payment->getMethod()->getGateway(),
-            $payment,
-            $configuration->getParameters()->get('after_pay[route]', null, true),
-            $configuration->getParameters()->get('after_pay[parameters]', [], true)
-        );
-
-        return $this->redirect($captureToken->getTargetUrl());
-    }
-
-    /**
-     * @param Request $request
-     *
-     * @return Response
-     */
-    public function afterPayAction(Request $request)
-    {
-        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
-
-        $token = $this->getHttpRequestVerifier()->verify($request);
-        $this->getHttpRequestVerifier()->invalidate($token);
-
-        $status = new GetStatus($token);
-        $this->getPayum()->getGateway($token->getGatewayName())->execute($status);
-        $payment = $status->getFirstModel();
-        $order = $payment->getOrder();
-
-        $orderStateResolver = $this->getOrderStateResolver();
-        $orderStateResolver->resolvePaymentState($order);
-        $orderStateResolver->resolveShippingState($order);
-
-        $this->getOrderManager()->flush();
-
-        return $this->redirectToRoute(
-            $configuration->getParameters()->get('redirect[route]', null, true),
-            $configuration->getParameters()->get('redirect[parameters]', [], true)
-        );
-    }
-
     /**
      * @param Request $request
      *
@@ -127,64 +28,29 @@ class OrderController extends ResourceController
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
-        $orderId = $this->getSession()->get('sylius_order_id');
-        Assert::notNull($orderId);
-        $order = $this->repository->findOneForPayment($orderId);
-        Assert::notNull($order);
+        $orderId = $request->getSession()->get('sylius_order_id', null);
 
-        $payment = $order->getLastPayment();
-        if (null !== $payment && $payment->getMethod()->getGateway() === 'offline') {
-            return $this->redirectToRoute('sylius_shop_order_pay', ['orderId' => $orderId]);
+        if (null === $orderId) {
+            $options = $configuration->getParameters()->get('after_failure');
+
+            return $this->redirectHandler->redirectToRoute(
+                $configuration,
+                isset($options['route']) ? $options['route'] : 'sylius_shop_homepage',
+                isset($options['parameters']) ? $options['parameters'] : []
+            );
         }
 
-        return $this->render($configuration->getParameters()->get('template'), ['order' => $order]);
-    }
+        $request->getSession()->remove('sylius_order_id');
+        $order = $this->repository->find($orderId);
+        Assert::notNull($order);
 
-    /**
-     * @return StateResolverInterface
-     */
-    private function getOrderStateResolver()
-    {
-        return $this->get('sylius.order_processing.state_resolver');
-    }
+        $view = View::create()
+            ->setData([
+                'order' => $order
+            ])
+            ->setTemplate($configuration->getParameters()->get('template'))
+        ;
 
-    /**
-     * @return SessionInterface
-     */
-    private function getSession()
-    {
-        return $this->get('session');
-    }
-
-    /**
-     * @return EntityManager
-     */
-    private function getOrderManager()
-    {
-        return $this->get('sylius.manager.order');
-    }
-
-    /**
-     * @return RegistryInterface
-     */
-    private function getPayum()
-    {
-        return $this->get('payum');
-    }
-
-    /**
-     * @return GenericTokenFactoryInterface
-     */
-    private function getTokenFactory()
-    {
-        return $this->getPayum()->getTokenFactory();
-    }
-
-    /**
-     * @return HttpRequestVerifierInterface
-     */
-    private function getHttpRequestVerifier()
-    {
-        return $this->getPayum()->getHttpRequestVerifier();
+        return $this->viewHandler->handle($configuration, $view);
     }
 }

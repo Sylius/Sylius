@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\ThemeBundle\Locator;
 
 use Sylius\Bundle\ThemeBundle\Factory\FinderFactoryInterface;
-use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 
 /**

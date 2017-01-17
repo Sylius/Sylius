@@ -91,9 +91,25 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
     /**
      * {@inheritdoc}
      */
+    public function getSubHeader()
+    {
+        return trim($this->getElement('sub_header')->getText());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function logOut()
     {
         $this->getElement('logout')->click();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function chooseChannel($channelName)
+    {
+        $this->getElement('channel_choosing_link', ['%channelName%' => $channelName])->click();
     }
 
     /**
@@ -110,14 +126,16 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'dropdown' => 'i.dropdown',
-            'logout' => '#sylius-logout-button',
-            'total_sales' => '#total-sales',
-            'new_orders' => '#new-orders',
-            'new_customers' => '#new-customers',
             'average_order_value' => '#average-order-value',
             'customer_list' => '#customers',
+            'dropdown' => 'i.dropdown',
+            'logout' => '#sylius-logout-button',
+            'new_customers' => '#new-customers',
+            'new_orders' => '#new-orders',
             'order_list' => '#orders',
+            'total_sales' => '#total-sales',
+            'sub_header' => '.ui.header .content .sub.header',
+            'channel_choosing_link' => 'a:contains("%channelName%")'
         ]);
     }
 }

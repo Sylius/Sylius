@@ -1,9 +1,12 @@
 {{ form_errors(form) }}
 <div class="ui segment">
-    <div class="three fields">
+    <div class="two fields">
         {{ form_row(form.type) }}
         {{ form_row(form.code) }}
+    </div>
+    <div class="two fields">
         {{ form_row(form.name) }}
+        {{ form_row(form.scope) }}
     </div>
 </div>
 <div class="ui segment">

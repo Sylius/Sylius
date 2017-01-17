@@ -19,8 +19,6 @@ use Sylius\Component\Shipping\Resolver\CompositeMethodsResolver;
 use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
 
 /**
- * @mixin CompositeMethodsResolver
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class CompositeMethodsResolverSpec extends ObjectBehavior
@@ -32,7 +30,7 @@ final class CompositeMethodsResolverSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Shipping\Resolver\CompositeMethodsResolver');
+        $this->shouldHaveType(CompositeMethodsResolver::class);
     }
 
     function it_implements_methods_resolver_interface()

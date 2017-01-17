@@ -17,13 +17,12 @@ use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Events;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
-use Sylius\Component\Locale\Context\LocaleContextInterface;
-use Sylius\Component\Locale\Context\LocaleNotFoundException;
-use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\Metadata\RegistryInterface;
 use Sylius\Component\Resource\Model\TranslatableInterface;
 use Sylius\Component\Resource\Model\TranslationInterface;
+use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
+use Sylius\Component\Resource\Translation\TranslatableEntityLocaleAssignerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -31,7 +30,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * @author Prezent Internet B.V. <info@prezent.nl>
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ORMTranslatableListener implements EventSubscriber
+final class ORMTranslatableListener implements EventSubscriber
 {
     /**
      * @var RegistryInterface
@@ -39,9 +38,9 @@ class ORMTranslatableListener implements EventSubscriber
     private $resourceMetadataRegistry;
 
     /**
-     * @var ContainerInterface
+     * @var TranslatableEntityLocaleAssignerInterface
      */
-    private $container;
+    private $translatableEntityLocaleAssigner;
 
     /**
      * @param RegistryInterface $resourceMetadataRegistry
@@ -52,7 +51,7 @@ class ORMTranslatableListener implements EventSubscriber
         ContainerInterface $container
     ) {
         $this->resourceMetadataRegistry = $resourceMetadataRegistry;
-        $this->container = $container;
+        $this->translatableEntityLocaleAssigner = $container->get('sylius.translatable_entity_locale_assigner');
     }
 
     /**
@@ -100,18 +99,7 @@ class ORMTranslatableListener implements EventSubscriber
             return;
         }
 
-        /** @var LocaleContextInterface $localeContext */
-        $localeContext = $this->container->get('sylius_resource.translation.locale_context');
-
-        /** @var LocaleProviderInterface $localeProvider */
-        $localeProvider = $this->container->get('sylius_resource.translation.locale_provider');
-
-        try {
-            $entity->setCurrentLocale($localeContext->getLocaleCode());
-        } catch (LocaleNotFoundException $exception) {
-            $entity->setCurrentLocale($localeProvider->getDefaultLocaleCode());
-        }
-        $entity->setFallbackLocale($localeProvider->getDefaultLocaleCode());
+        $this->translatableEntityLocaleAssigner->assignLocale($entity);
     }
 
     /**

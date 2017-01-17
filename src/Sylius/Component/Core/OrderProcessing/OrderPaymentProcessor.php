@@ -11,80 +11,72 @@
 
 namespace Sylius\Component\Core\OrderProcessing;
 
-use Sylius\Component\Core\Model\OrderInterface as CoreOrderInterface;
-use Sylius\Component\Order\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Core\Payment\Exception\NotProvidedOrderPaymentException;
+use Sylius\Component\Core\Payment\Provider\OrderPaymentProviderInterface;
+use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
-use Sylius\Component\Payment\Factory\PaymentFactoryInterface;
 use Webmozart\Assert\Assert;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Anna Walasek <anna.walasek@lakion.com>
  */
 final class OrderPaymentProcessor implements OrderProcessorInterface
 {
     /**
-     * @var PaymentFactoryInterface
+     * @var OrderPaymentProviderInterface
      */
-    private $paymentFactory;
+    private $orderPaymentProvider;
 
     /**
-     * @param PaymentFactoryInterface $paymentFactory
+     * @var string
      */
-    public function __construct(PaymentFactoryInterface $paymentFactory)
-    {
-        $this->paymentFactory = $paymentFactory;
+    private $targetState;
+
+    /**
+     * @param OrderPaymentProviderInterface $orderPaymentProvider
+     * @param string $targetState
+     */
+    public function __construct(
+        OrderPaymentProviderInterface $orderPaymentProvider,
+        $targetState = PaymentInterface::STATE_CART
+    ) {
+        $this->orderPaymentProvider = $orderPaymentProvider;
+        $this->targetState = $targetState;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function process(OrderInterface $order)
+    public function process(BaseOrderInterface $order)
     {
-        /** @var CoreOrderInterface $order */
-        Assert::isInstanceOf($order, CoreOrderInterface::class);
+        /** @var OrderInterface $order */
+        Assert::isInstanceOf($order, OrderInterface::class);
 
         if (OrderInterface::STATE_CANCELLED === $order->getState()) {
             return;
         }
+        
+        if (0 === $order->getTotal()) {
+            return;
+        }
 
-        $newPayment = $order->getLastPayment(PaymentInterface::STATE_NEW);
-        if (null !== $newPayment) {
-            $newPayment->setAmount($order->getTotal());
+        $lastPayment = $order->getLastPayment($this->targetState);
+        if (null !== $lastPayment) {
+            $lastPayment->setCurrencyCode($order->getCurrencyCode());
+            $lastPayment->setAmount($order->getTotal());
 
             return;
         }
 
-        /** @var $payment PaymentInterface */
-        $payment = $this->paymentFactory->createWithAmountAndCurrencyCode($order->getTotal(), $order->getCurrencyCode());
-        $this->setPaymentMethodIfNeeded($order, $payment);
-
-        $order->addPayment($payment);
-    }
-
-    /**
-     * @param OrderInterface $order
-     * @param PaymentInterface $payment
-     */
-    private function setPaymentMethodIfNeeded(OrderInterface $order, PaymentInterface $payment)
-    {
-        $lastPayment = $this->getLastPayment($order);
-
-        if (null === $lastPayment) {
+        try {
+            $newPayment = $this->orderPaymentProvider->provideOrderPayment($order, $this->targetState);
+            $order->addPayment($newPayment);
+        } catch (NotProvidedOrderPaymentException $exception) {
             return;
         }
-
-        $payment->setMethod($lastPayment->getMethod());
-    }
-
-    /**
-     * @param OrderInterface $order
-     *
-     * @return null|PaymentInterface
-     */
-    private function getLastPayment(OrderInterface $order)
-    {
-        return $order->getLastPayment(PaymentInterface::STATE_CANCELLED) ?: $order->getLastPayment(PaymentInterface::STATE_FAILED);
     }
 }

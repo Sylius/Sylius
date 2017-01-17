@@ -16,40 +16,15 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
+    <imports>
+        <import resource="services/action.xml" />
+        <import resource="services/controller.xml" />
+        <import resource="services/extension.xml" />
+    </imports>
+
     <services>
-        <!-- Generic -->
-        <service id="sylius.payum.action.capture_payment" class="Sylius\Bundle\PayumBundle\Action\CapturePaymentAction">
-            <tag name="payum.action" all="true" alias="sylius.capture_payment" />
-        </service>
-        <service id="sylius.payum.action.execute_same_request_with_payment_details" class="Sylius\Bundle\PayumBundle\Action\ExecuteSameRequestWithPaymentDetailsAction">
-            <tag name="payum.action" all="true" />
-        </service>
-
-        <service id="sylius.payum.extension.update_payment_state" class="Sylius\Bundle\PayumBundle\Extension\UpdatePaymentStateExtension">
-            <argument type="service" id="sm.factory" />
-
-            <tag name="payum.extension" all="true" />
-        </service>
-
         <service id="sylius.payum.http_client" class="Payum\Core\HttpClientInterface">
             <factory class="Payum\Core\Bridge\Guzzle\HttpClientFactory" method="create" />
-        </service>
-
-        <!-- PayPal -->
-        <service id="sylius.payum.action.convert_payment_to_paypal_express" class="Sylius\Bundle\PayumBundle\Action\ConvertPaymentToPaypalExpressAction">
-            <argument type="service" id="sylius.invoice_number_generator" />
-            <tag name="payum.action" factory="paypal_express_checkout" alias="sylius.convert_payment" />
-        </service>
-
-        <!-- Be2bill -->
-        <service id="sylius.payum.action.convert_payment_to_be2bill" class="Sylius\Bundle\PayumBundle\Action\ConvertPaymentToBe2BillAction">
-            <tag name="payum.action" factory="be2bill_direct" alias="sylius.convert_payment" />
-            <tag name="payum.action" factory="be2bill_offsite" alias="sylius.convert_payment" />
-        </service>
-
-        <!-- Offline -->
-        <service id="sylius.payum.offline.action.convert_payment" class="Sylius\Bundle\PayumBundle\Action\ConvertPaymentToOfflineAction">
-            <tag name="payum.action" factory="offline" alias="sylius.convert_payment" />
         </service>
     </services>
 </container>

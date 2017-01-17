@@ -9,29 +9,35 @@ var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
 var uglify = require('gulp-uglify');
 var uglifycss = require('gulp-uglifycss');
+var argv = require('yargs').argv;
 
-var rootPath = '../../../../web/assets/';
+var rootPath = argv.rootPath;
 var adminRootPath = rootPath + 'admin/';
+var vendorPath = argv.vendorPath || '';
+var vendorAdminPath = '' === vendorPath ? '' : vendorPath + 'AdminBundle/';
+var vendorUiPath = '' === vendorPath ? '../UiBundle/' : vendorPath + 'UiBundle/';
+var nodeModulesPath = argv.nodeModulesPath;
 
 var paths = {
     admin: {
         js: [
-            '../../../../node_modules/jquery/dist/jquery.min.js',
-            '../../../../node_modules/semantic-ui-css/semantic.min.js',
-            '../PromotionBundle/Resources/public/js/sylius-promotion.js',
-            '../ShippingBundle/Resources/public/js/**',
-            '../UiBundle/Resources/private/js/**',
-            '../UserBundle/Resources/public/js/sylius-user.js',
-            'Resources/private/js/**'
+            nodeModulesPath + 'jquery/dist/jquery.min.js',
+            nodeModulesPath + 'semantic-ui-css/semantic.min.js',
+            vendorUiPath + 'Resources/private/js/**',
+            vendorAdminPath + 'Resources/private/js/**'
         ],
         sass: [
-            '../UiBundle/Resources/private/sass/**'
+            vendorUiPath + 'Resources/private/sass/**',
+            vendorAdminPath + 'Resources/private/sass/**'
         ],
         css: [
-            '../../../../node_modules/semantic-ui-css/semantic.min.css'
+            nodeModulesPath + 'semantic-ui-css/semantic.min.css',
+            vendorUiPath + 'Resources/private/css/**',
+            vendorAdminPath + 'Resources/private/css/**'
         ],
         img: [
-            '../UiBundle/Resources/private/img/**'
+            vendorUiPath + 'Resources/private/img/**',
+            vendorAdminPath + 'Resources/private/img/**'
         ]
     }
 };
@@ -39,14 +45,14 @@ var paths = {
 gulp.task('admin-js', function () {
     return gulp.src(paths.admin.js)
         .pipe(concat('app.js'))
-        .pipe(gulpif(env === 'prod', uglify))
+        .pipe(gulpif(env === 'prod', uglify()))
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest(adminRootPath + 'js/'))
     ;
 });
 
 gulp.task('admin-css', function() {
-    gulp.src(['../../../../node_modules/semantic-ui-css/themes/**/*']).pipe(gulp.dest(adminRootPath + 'css/themes/'));
+    gulp.src([nodeModulesPath+'semantic-ui-css/themes/**/*']).pipe(gulp.dest(adminRootPath + 'css/themes/'));
 
     var cssStream = gulp.src(paths.admin.css)
         .pipe(concat('css-files.css'))
@@ -60,7 +66,7 @@ gulp.task('admin-css', function() {
     return merge(cssStream, sassStream)
         .pipe(order(['css-files.css', 'sass-files.scss']))
         .pipe(concat('style.css'))
-        .pipe(gulpif(env === 'prod', uglifycss))
+        .pipe(gulpif(env === 'prod', uglifycss()))
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest(adminRootPath + 'css/'))
         .pipe(livereload())

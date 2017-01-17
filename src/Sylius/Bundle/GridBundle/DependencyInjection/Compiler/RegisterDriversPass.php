@@ -18,7 +18,7 @@ use Symfony\Component\DependencyInjection\Reference;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class RegisterDriversPass implements CompilerPassInterface
+final class RegisterDriversPass implements CompilerPassInterface
 {
     /**
      * {@inheritdoc}
@@ -32,7 +32,7 @@ class RegisterDriversPass implements CompilerPassInterface
         $registry = $container->findDefinition('sylius.registry.grid_driver');
 
         foreach ($container->findTaggedServiceIds('sylius.grid_driver') as $id => $attributes) {
-            if (!isset($attributes[0]['alias']))  {
+            if (!isset($attributes[0]['alias'])) {
                 throw new \InvalidArgumentException('Tagged grid drivers needs to have `alias` attribute.');
             }
 

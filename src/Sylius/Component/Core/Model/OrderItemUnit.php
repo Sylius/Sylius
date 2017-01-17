@@ -11,7 +11,6 @@
 
 namespace Sylius\Component\Core\Model;
 
-use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Order\Model\OrderItemUnit as BaseOrderItemUnit;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Shipping\Model\ShipmentInterface as BaseShipmentInterface;
@@ -24,19 +23,9 @@ class OrderItemUnit extends BaseOrderItemUnit implements OrderItemUnitInterface
     use TimestampableTrait;
 
     /**
-     * @var string InventoryUnitInterface::STATE_*
-     */
-    protected $inventoryState = InventoryUnitInterface::STATE_CHECKOUT;
-
-    /**
-     * @var BaseShipmentInterface
+     * @var ShipmentInterface
      */
     protected $shipment;
-
-    /**
-     * @var string BaseShipmentInterface::STATE_*
-     */
-    protected $shippingState = BaseShipmentInterface::STATE_CART;
 
     /**
      * @param OrderItemInterface $orderItem
@@ -46,46 +35,6 @@ class OrderItemUnit extends BaseOrderItemUnit implements OrderItemUnitInterface
         parent::__construct($orderItem);
 
         $this->createdAt = new \DateTime();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getStockable()
-    {
-        return $this->orderItem->getVariant();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getInventoryName()
-    {
-        return $this->orderItem->getVariant()->getInventoryName();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getInventoryState()
-    {
-        return $this->inventoryState;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setInventoryState($state)
-    {
-        $this->inventoryState = $state;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isSold()
-    {
-        return InventoryUnitInterface::STATE_SOLD === $this->inventoryState;
     }
 
     /**
@@ -107,7 +56,7 @@ class OrderItemUnit extends BaseOrderItemUnit implements OrderItemUnitInterface
     /**
      * {@inheritdoc}
      */
-    public function getShippable()
+    public function getStockable()
     {
         return $this->orderItem->getVariant();
     }
@@ -115,22 +64,12 @@ class OrderItemUnit extends BaseOrderItemUnit implements OrderItemUnitInterface
     /**
      * {@inheritdoc}
      */
-    public function getShippingState()
+    public function getShippable()
     {
-        return $this->shippingState;
+        return $this->orderItem->getVariant();
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function setShippingState($state)
-    {
-        $this->shippingState = $state;
-    }
-
-    /**
-     * Returns sum of neutral and non neutral tax adjustments.
-     *
      * {@inheritdoc}
      */
     public function getTaxTotal()

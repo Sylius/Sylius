@@ -1,0 +1,16 @@
+# This file is a part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_shop_partial_product_review_latest:
+    path: /latest/{count}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product_review:indexAction
+        _sylius:
+            template: $template
+            repository:
+                method: findLatestByProductId
+                arguments:
+                    - $productId
+                    - $count
+        count: 3

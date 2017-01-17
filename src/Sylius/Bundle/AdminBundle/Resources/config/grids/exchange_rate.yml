@@ -1,0 +1,49 @@
+sylius_grid:
+    grids:
+        sylius_admin_exchange_rate:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%sylius.model.exchange_rate.class%"
+            sorting:
+                id: desc
+            fields:
+                id:
+                    type: string
+                    enabled: false
+                    sortable: ~
+                sourceCurrency:
+                    type: twig
+                    label: sylius.ui.base_currency
+                    path: .
+                    options:
+                        template: "@SyliusAdmin/ExchangeRate/Grid/Field/sourceCurrencyName.html.twig"
+                targetCurrency:
+                    type: twig
+                    label: sylius.ui.target_currency
+                    path: .
+                    options:
+                        template: "@SyliusAdmin/ExchangeRate/Grid/Field/targetCurrencyName.html.twig"
+                ratio:
+                    type: string
+                    label: sylius.ui.ratio
+                    sortable: ~
+            filters:
+                currency:
+                    type: entity
+                    label: sylius.ui.currency
+                    options:
+                        fields: [sourceCurrency, targetCurrency]
+                    form_options:
+                        class: "%sylius.model.currency.class%"
+                        choice_label: name
+
+            actions:
+                main:
+                    create:
+                        type: create
+                item:
+                    update:
+                        type: update
+                    delete:
+                        type: delete

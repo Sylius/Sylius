@@ -12,3 +12,4 @@ sylius:
         restore_deleted: '%resource% byl úspěšně obnoven.'
         enable: '%resource% byl úspěšně povolen.'
         disable: '%resource% byl úspěšně zakázán.'
+        delete_error: 'Nelze odstranit, %resource% je používán.'

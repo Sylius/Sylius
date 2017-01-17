@@ -13,51 +13,64 @@ namespace Sylius\Bundle\GridBundle\Form\Type\Filter;
 
 use Sylius\Component\Grid\Filter\StringFilter;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class StringFilterType extends AbstractType
+final class StringFilterType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        if (!isset($options['type'])) {
+            $builder
+                ->add('type', ChoiceType::class, [
+                    'choices' => [
+                        'sylius.ui.contains' => StringFilter::TYPE_CONTAINS,
+                        'sylius.ui.not_contains' => StringFilter::TYPE_NOT_CONTAINS,
+                        'sylius.ui.equal' => StringFilter::TYPE_EQUAL,
+                        'sylius.ui.empty' => StringFilter::TYPE_EMPTY,
+                        'sylius.ui.not_empty' => StringFilter::TYPE_NOT_EMPTY,
+                        'sylius.ui.starts_with' => StringFilter::TYPE_STARTS_WITH,
+                        'sylius.ui.ends_with' => StringFilter::TYPE_ENDS_WITH,
+                        'sylius.ui.in' => StringFilter::TYPE_IN,
+                        'sylius.ui.not_in' => StringFilter::TYPE_NOT_IN,
+                    ],
+                ])
+            ;
+        }
+
         $builder
-            ->add('type', 'choice', [
-                'choices' => [
-                    StringFilter::TYPE_CONTAINS => 'sylius.ui.contains',
-                    StringFilter::TYPE_NOT_CONTAINS => 'sylius.ui.not_contains',
-                    StringFilter::TYPE_EQUAL => 'sylius.ui.equal',
-                    StringFilter::TYPE_EMPTY => 'sylius.ui.empty',
-                    StringFilter::TYPE_NOT_EMPTY => 'sylius.ui.not_empty',
-                    StringFilter::TYPE_STARTS_WITH => 'sylius.ui.starts_with',
-                    StringFilter::TYPE_ENDS_WITH => 'sylius.ui.ends_with',
-                    StringFilter::TYPE_IN => 'sylius.ui.in',
-                    StringFilter::TYPE_NOT_IN => 'sylius.ui.not_in'
-                ]
-            ])
-            ->add('value', 'text', ['required' => false])
+            ->add('value', TextType::class, ['required' => false])
         ;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
             ->setDefaults([
-                'data_class' => null
+                'data_class' => null,
             ])
-            ->setOptional([
-                'fields'
-            ])
-            ->setAllowedTypes([
-                'fields' => ['array']
+            ->setDefined('type')
+            ->setAllowedValues('type', [
+                StringFilter::TYPE_CONTAINS,
+                StringFilter::TYPE_NOT_CONTAINS,
+                StringFilter::TYPE_EQUAL,
+                StringFilter::TYPE_EMPTY,
+                StringFilter::TYPE_NOT_EMPTY,
+                StringFilter::TYPE_STARTS_WITH,
+                StringFilter::TYPE_ENDS_WITH,
+                StringFilter::TYPE_IN,
+                StringFilter::TYPE_NOT_IN
             ])
         ;
     }
@@ -65,7 +78,7 @@ class StringFilterType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_grid_filter_string';
     }

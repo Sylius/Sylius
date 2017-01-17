@@ -25,5 +25,5 @@ To be eligible to a promotion, a subject must :
 3. respect promotions usages count if promotion has a limited number of usages
 4. if a coupon is provided with this order, it must be valid and belong to this promotion
 
-The service ``sylius.promotion_eligibility_checker`` checks all these constraints for you with the method ``isEligible()``  which returns ``true`` or ``false``. This service uses the class ``PromotionEligibilityChecker``.
+The service ``sylius.promotion_eligibility_checker`` checks all these constraints for you with the method ``isEligible()``  which returns ``true`` or ``false``. This service uses the class ``CompositePromotionEligibilityChecker``.
 

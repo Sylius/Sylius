@@ -12,6 +12,7 @@ It also includes a super flexible adjustments feature, which serves as a basis f
    installation
    models
    adjustments
-   builder
    services
+   cart_actions
    summary
+   processors

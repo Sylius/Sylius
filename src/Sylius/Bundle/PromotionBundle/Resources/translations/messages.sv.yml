@@ -3,55 +3,33 @@
 
 sylius:
     form:
-        action:
-            fixed_discount_configuration:
-                amount: Belopp
-            percentage_discount_configuration:
-                percentage: Procent
-            shipping_discount_configuration:
-                percentage: Procent
-            type: Typ
-        rule:
-            taxonomy_configuration:
-                taxons: Taxa
-                exclude: Exkludera
-            contains_product_configuration:
-                variants: Produkter
-                exclude: Exkludera
-            cart_quantity_configuration:
-                count: Antal
-                equal: Lika
-            item_total_configuration:
-                amount: Belopp
-            customer_loyalty_configuration:
-                time: Tid
-                unit:
-                    days: Dagar
-                    weeks: Veckor
-                    months: Månader
-                    years: År
-                    header: Enhet
-                after: Användare skapad efter denna period
-            shipping_country_configuration:
-                country: Land
-            type: Typ
-        coupon:
-            usage_limit: Användningsbegränsning
-            expires_at: Förfaller den
-        coupon_generate_instruction:
-            amount: Belopp
-            usage_limit: Användningsbegränsning
-            expires_at: Förfaller den
-            code_length: Kodlängd
         promotion:
             actions: Åtgärder
             add_action: Lägg till åtgärd
             add_rule: Lägg till regel
             coupon_based: Kupongbaserad
-            exclusive: Exklusiv
             description: Beskrivning
             ends_at: Slutar vid
+            exclusive: Exklusiv
             name: Namn
             rules: Regler
             starts_at: Startar vid
-            usage_limit: Användningsbegränsning
+        promotion_action:
+            fixed_discount_configuration:
+                amount: Antal
+            type: Typ
+        promotion_coupon_generator_instruction:
+            amount: Antal
+        promotion_rule:
+            cart_quantity_configuration:
+                count: Antal
+                equal: Lika
+            contains_product_configuration:
+                variants: Produkter
+            item_total_configuration:
+                amount: Antal
+            shipping_country_configuration:
+                country: Land
+            taxonomy_configuration:
+                taxons: Taxa
+            type: Typ

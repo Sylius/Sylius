@@ -4,7 +4,11 @@
 sylius:
     form:
         currency:
-            exchange_rate: Tasso di cambio
-            enabled: Abilitato
             base: Valuta base
             code: Nome
+            enabled: Abilitato
+            exchange_rate: Tasso di cambio
+        exchange_rate:
+            source_currency: Valuta di origine
+            target_currency: Valuta di destinazione
+            ratio: Rapporto

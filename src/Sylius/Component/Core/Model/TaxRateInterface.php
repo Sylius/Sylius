@@ -25,7 +25,7 @@ interface TaxRateInterface extends BaseTaxRateInterface
     public function getZone();
 
     /**
-     * @param ZoneInterface $zone
+     * @param ZoneInterface|null $zone
      */
-    public function setZone(ZoneInterface $zone);
+    public function setZone(ZoneInterface $zone = null);
 }

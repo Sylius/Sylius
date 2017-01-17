@@ -15,8 +15,6 @@ use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Request configuration factory.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface RequestConfigurationFactoryInterface

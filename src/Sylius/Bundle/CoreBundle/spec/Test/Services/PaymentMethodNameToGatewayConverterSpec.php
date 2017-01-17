@@ -14,6 +14,7 @@ namespace spec\Sylius\Bundle\CoreBundle\Test\Services;
 use Payum\Core\GatewayInterface;
 use Payum\Core\Registry\RegistryInterface;
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CoreBundle\Test\Services\PaymentMethodNameToGatewayConverter;
 use Sylius\Bundle\CoreBundle\Test\Services\PaymentMethodNameToGatewayConverterInterface;
 
 /**
@@ -28,7 +29,7 @@ final class PaymentMethodNameToGatewayConverterSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Test\Services\PaymentMethodNameToGatewayConverter');
+        $this->shouldHaveType(PaymentMethodNameToGatewayConverter::class);
     }
 
     function it_implements_payment_method_name_to_gateway_converter_interface()

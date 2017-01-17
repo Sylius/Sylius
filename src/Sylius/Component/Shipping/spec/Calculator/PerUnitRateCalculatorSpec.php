@@ -13,6 +13,7 @@ namespace spec\Sylius\Component\Shipping\Calculator;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Shipping\Calculator\CalculatorInterface;
+use Sylius\Component\Shipping\Calculator\PerUnitRateCalculator;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
 
 /**
@@ -22,7 +23,7 @@ final class PerUnitRateCalculatorSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Shipping\Calculator\PerUnitRateCalculator');
+        $this->shouldHaveType(PerUnitRateCalculator::class);
     }
 
     function it_should_implement_Sylius_shipping_calculator_interface()

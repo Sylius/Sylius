@@ -23,8 +23,6 @@ use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
- * @mixin EventDispatcher
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class EventDispatcherSpec extends ObjectBehavior
@@ -36,7 +34,7 @@ final class EventDispatcherSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\EventDispatcher');
+        $this->shouldHaveType(EventDispatcher::class);
     }
 
     function it_implements_event_dispatcher_interface()

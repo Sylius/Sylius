@@ -12,11 +12,11 @@
 namespace Sylius\Bundle\CoreBundle\Handler;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Component\Cart\Context\CartContextInterface;
-use Sylius\Component\Cart\Context\CartNotFoundException;
 use Sylius\Component\Core\Exception\HandleException;
 use Sylius\Component\Core\Locale\Handler\LocaleChangeHandlerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Order\Context\CartContextInterface;
+use Sylius\Component\Order\Context\CartNotFoundException;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -56,7 +56,7 @@ final class CartLocaleChangeHandler implements LocaleChangeHandlerInterface
             $this->cartManager->persist($cart);
             $this->cartManager->flush();
         } catch (CartNotFoundException $exception) {
-            throw new HandleException(self::class, 'Sylius was unable to find cart.', $exception);
+            throw new HandleException(self::class, 'Sylius was unable to find the cart.', $exception);
         }
     }
 }

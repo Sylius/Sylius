@@ -14,6 +14,7 @@ namespace Sylius\Behat\Page\Admin\ProductOption;
 use Behat\Mink\Element\Element;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
@@ -101,6 +102,8 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     {
         $optionValues = $this->getElement('values');
         $items = $optionValues->findAll('css', 'div[data-form-collection="item"]');
+
+        Assert::notEmpty($items);
 
         return end($items);
     }

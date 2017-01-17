@@ -6,3 +6,4 @@ sylius:
         attribute:
             code: Kode
             name: Nama
+            type: Jenis

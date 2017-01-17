@@ -14,7 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 use Sylius\Component\Attribute\Factory\AttributeFactoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Locale\Model\LocaleInterface;
-use Sylius\Component\Product\Model\OptionInterface;
+use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -22,7 +22,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class ProductAttributeExampleFactory implements ExampleFactoryInterface
+class ProductAttributeExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     /**
      * @var AttributeFactoryInterface
@@ -45,6 +45,11 @@ final class ProductAttributeExampleFactory implements ExampleFactoryInterface
     private $optionsResolver;
 
     /**
+     * @var array
+     */
+    private $attributeTypes;
+
+    /**
      * @param AttributeFactoryInterface $productAttributeFactory
      * @param RepositoryInterface $localeRepository
      * @param array $attributeTypes
@@ -56,21 +61,12 @@ final class ProductAttributeExampleFactory implements ExampleFactoryInterface
     ) {
         $this->productAttributeFactory = $productAttributeFactory;
         $this->localeRepository = $localeRepository;
+        $this->attributeTypes = $attributeTypes;
 
         $this->faker = \Faker\Factory::create();
-        $this->optionsResolver =
-            (new OptionsResolver())
-                ->setDefault('name', function (Options $options) {
-                    return $this->faker->words(3, true);
-                })
-                ->setDefault('code', function (Options $options) {
-                    return StringInflector::nameToCode($options['name']);
-                })
-                ->setDefault('type', function (Options $options) use ($attributeTypes) {
-                    return $this->faker->randomElement(array_keys($attributeTypes));
-                })
-                ->setAllowedValues('type', array_keys($attributeTypes))
-        ;
+        $this->optionsResolver = new OptionsResolver();
+
+        $this->configureOptions($this->optionsResolver);
     }
 
     /**
@@ -79,8 +75,8 @@ final class ProductAttributeExampleFactory implements ExampleFactoryInterface
     public function create(array $options = [])
     {
         $options = $this->optionsResolver->resolve($options);
-        
-        /** @var OptionInterface $productAttribute */
+
+        /** @var ProductOptionInterface $productAttribute */
         $productAttribute = $this->productAttributeFactory->createTyped($options['type']);
         $productAttribute->setCode($options['code']);
 
@@ -92,6 +88,25 @@ final class ProductAttributeExampleFactory implements ExampleFactoryInterface
         }
 
         return $productAttribute;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver
+            ->setDefault('name', function (Options $options) {
+                return $this->faker->words(3, true);
+            })
+            ->setDefault('code', function (Options $options) {
+                return StringInflector::nameToCode($options['name']);
+            })
+            ->setDefault('type', function (Options $options) {
+                return $this->faker->randomElement(array_keys($this->attributeTypes));
+            })
+            ->setAllowedValues('type', array_keys($this->attributeTypes))
+        ;
     }
 
     /**

@@ -12,14 +12,11 @@
 namespace Sylius\Bundle\PaymentBundle\DependencyInjection;
 
 use Sylius\Bundle\PaymentBundle\Form\Type\CreditCardType;
-use Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodChoiceType;
 use Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodTranslationType;
 use Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodType;
 use Sylius\Bundle\PaymentBundle\Form\Type\PaymentType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
-use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Component\Payment\Factory\PaymentFactory;
 use Sylius\Component\Payment\Model\CreditCard;
 use Sylius\Component\Payment\Model\CreditCardInterface;
 use Sylius\Component\Payment\Model\Payment;
@@ -35,14 +32,9 @@ use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
- * This class contains the configuration information for the bundle.
- *
- * This information is solely responsible for how the different configuration
- * sections are normalized, and merged.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class Configuration implements ConfigurationInterface
+final class Configuration implements ConfigurationInterface
 {
     /**
      * {@inheritdoc}
@@ -90,22 +82,7 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(TranslatableFactory::class)->end()
-                                        ->arrayNode('form')
-                                            ->addDefaultsIfNotSet()
-                                            ->children()
-                                                ->scalarNode('default')->defaultValue(PaymentMethodType::class)->cannotBeEmpty()->end()
-                                                ->scalarNode('choice')->defaultValue(PaymentMethodChoiceType::class)->cannotBeEmpty()->end()
-                                            ->end()
-                                        ->end()
-                                    ->end()
-                                ->end()
-                                ->arrayNode('validation_groups')
-                                    ->addDefaultsIfNotSet()
-                                    ->children()
-                                        ->arrayNode('default')
-                                            ->prototype('scalar')->end()
-                                            ->defaultValue(['sylius'])
-                                        ->end()
+                                        ->scalarNode('form')->defaultValue(PaymentMethodType::class)->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()
                                 ->arrayNode('translation')
@@ -120,22 +97,7 @@ class Configuration implements ConfigurationInterface
                                                 ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                                 ->scalarNode('repository')->cannotBeEmpty()->end()
                                                 ->scalarNode('factory')->defaultValue(Factory::class)->cannotBeEmpty()->end()
-                                                ->arrayNode('form')
-                                                    ->addDefaultsIfNotSet()
-                                                    ->children()
-                                                        ->scalarNode('default')->defaultValue(PaymentMethodTranslationType::class)->cannotBeEmpty()->end()
-                                                        ->scalarNode('choice')->defaultValue(ResourceChoiceType::class)->cannotBeEmpty()->end()
-                                                    ->end()
-                                                ->end()
-                                            ->end()
-                                        ->end()
-                                        ->arrayNode('validation_groups')
-                                            ->addDefaultsIfNotSet()
-                                            ->children()
-                                                ->arrayNode('default')
-                                                    ->prototype('scalar')->end()
-                                                    ->defaultValue(['sylius'])
-                                                ->end()
+                                                ->scalarNode('form')->defaultValue(PaymentMethodTranslationType::class)->cannotBeEmpty()->end()
                                             ->end()
                                         ->end()
                                     ->end()
@@ -153,22 +115,8 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode('interface')->defaultValue(PaymentInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
-                                        ->scalarNode('factory')->defaultValue(PaymentFactory::class)->end()
-                                        ->arrayNode('form')
-                                            ->addDefaultsIfNotSet()
-                                            ->children()
-                                                ->scalarNode('default')->defaultValue(PaymentType::class)->cannotBeEmpty()->end()
-                                            ->end()
-                                        ->end()
-                                    ->end()
-                                ->end()
-                                ->arrayNode('validation_groups')
-                                    ->addDefaultsIfNotSet()
-                                    ->children()
-                                        ->arrayNode('default')
-                                            ->prototype('scalar')->end()
-                                            ->defaultValue(['sylius'])
-                                        ->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                        ->scalarNode('form')->defaultValue(PaymentType::class)->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()
                             ->end()
@@ -185,21 +133,7 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
-                                        ->arrayNode('form')
-                                            ->addDefaultsIfNotSet()
-                                            ->children()
-                                                ->scalarNode('default')->defaultValue(CreditCardType::class)->cannotBeEmpty()->end()
-                                            ->end()
-                                        ->end()
-                                    ->end()
-                                ->end()
-                                ->arrayNode('validation_groups')
-                                    ->addDefaultsIfNotSet()
-                                    ->children()
-                                        ->arrayNode('default')
-                                            ->prototype('scalar')->end()
-                                            ->defaultValue(['sylius'])
-                                        ->end()
+                                        ->scalarNode('form')->defaultValue(CreditCardType::class)->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()
                             ->end()

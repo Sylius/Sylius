@@ -16,8 +16,11 @@ use Symfony\Component\Validator\Constraint;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class PromotionDateRange extends Constraint
+final class PromotionDateRange extends Constraint
 {
+    /**
+     * @var string
+     */
     public $message = 'sylius.promotion.end_date_cannot_be_set_prior_start_date';
 
     /**

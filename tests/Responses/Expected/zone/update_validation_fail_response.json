@@ -13,7 +13,11 @@
             },
             "type": {},
             "members": {},
-            "scope": {},
+            "scope": {
+                "errors": [
+                    "Please enter the scope."
+                ]
+            },
             "code": {}
         }
     }

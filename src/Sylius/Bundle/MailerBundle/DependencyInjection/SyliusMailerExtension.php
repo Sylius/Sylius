@@ -11,28 +11,24 @@
 
 namespace Sylius\Bundle\MailerBundle\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 /**
- * Mailer extension.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Jérémy Leherpeur <jeremy@leherpeur.net>
  */
-class SyliusMailerExtension extends AbstractResourceExtension
+final class SyliusMailerExtension extends Extension
 {
     /**
      * {@inheritdoc}
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $config = $this->processConfiguration($this->getConfiguration($config, $container), $config);
+        $config = $this->processConfiguration($this->getConfiguration([], $container), $config);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-
-        $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
         $configFiles = [
             'services.xml',

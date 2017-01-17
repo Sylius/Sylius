@@ -18,7 +18,6 @@ use Sylius\Behat\NotificationType;
  */
 final class NotificationExpectationMismatchException extends \RuntimeException
 {
-
     public function __construct(
         NotificationType $expectedType,
         $expectedMessage,

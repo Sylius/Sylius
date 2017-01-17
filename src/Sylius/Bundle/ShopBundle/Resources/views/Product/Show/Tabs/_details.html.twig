@@ -1,0 +1,7 @@
+<div class="ui bottom attached tab segment active" data-tab="details">
+    {% if product.description is not empty %}
+        {{ product.description }}
+    {% else %}
+        {{ 'sylius.ui.no_description'|trans }}.
+    {% endif %}
+</div>

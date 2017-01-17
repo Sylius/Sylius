@@ -32,9 +32,32 @@ class Filter
     private $label;
 
     /**
+     * @var boolean
+     */
+    private $enabled = true;
+
+    /**
+     * @var string
+     */
+    private $template;
+
+    /**
      * @var array
      */
     private $options = [];
+
+    /**
+     * @var array
+     */
+    private $formOptions = [];
+
+    /**
+     * @var int
+     *
+     * Position equals to 100 to ensure that wile sorting filters by position ASC
+     * the filters positioned by default will be last
+     */
+    private $position = 100;
 
     /**
      * @param string $name
@@ -52,11 +75,11 @@ class Filter
      * @param string $name
      * @param string $type
      *
-     * @return Filter
+     * @return self
      */
     public static function fromNameAndType($name, $type)
     {
-        return new Filter($name, $type);
+        return new self($name, $type);
     }
 
     /**
@@ -92,6 +115,38 @@ class Filter
     }
 
     /**
+     * @return boolean
+     */
+    public function isEnabled()
+    {
+        return $this->enabled;
+    }
+
+    /**
+     * @param boolean $enabled
+     */
+    public function setEnabled($enabled)
+    {
+        $this->enabled = $enabled;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTemplate()
+    {
+        return $this->template;
+    }
+
+    /**
+     * @param string $template
+     */
+    public function setTemplate($template)
+    {
+        $this->template = $template;
+    }
+
+    /**
      * @return array
      */
     public function getOptions()
@@ -105,5 +160,37 @@ class Filter
     public function setOptions($options)
     {
         $this->options = $options;
+    }
+
+    /**
+     * @return array
+     */
+    public function getFormOptions()
+    {
+        return $this->formOptions;
+    }
+
+    /**
+     * @param array $formOptions
+     */
+    public function setFormOptions($formOptions)
+    {
+        $this->formOptions = $formOptions;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    /**
+     * @param int $position
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
     }
 }

@@ -7,17 +7,20 @@ sylius_api_product_variant_index:
     defaults:
         _controller: sylius.controller.product_variant:indexAction
         _sylius:
+            serialization_version: $version
             paginate: $limit
             sortable: true
             filterable: true
             criteria:
-                object: $productId
+                product: $productId
 
 sylius_api_product_variant_create:
     path: /
     methods: [POST]
     defaults:
         _controller: sylius.controller.product_variant:createAction
+        _sylius:
+            serialization_version: $version
 
 sylius_api_product_variant_update:
     path: /{id}
@@ -25,8 +28,9 @@ sylius_api_product_variant_update:
     defaults:
         _controller: sylius.controller.product_variant:updateAction
         _sylius:
+            serialization_version: $version
             criteria:
-                object: $productId
+                product: $productId
                 master: false
 
 sylius_api_product_variant_delete:
@@ -35,9 +39,11 @@ sylius_api_product_variant_delete:
     defaults:
         _controller: sylius.controller.product_variant:deleteAction
         _sylius:
+            serialization_version: $version
             criteria:
-                object: $productId
+                product: $productId
                 master: false
+            csrf_protection: false
 
 sylius_api_product_variant_show:
     path: /{id}
@@ -45,6 +51,7 @@ sylius_api_product_variant_show:
     defaults:
         _controller: sylius.controller.product_variant:showAction
         _sylius:
+            serialization_version: $version
             criteria:
-                object: $productId
+                product: $productId
                 master: false

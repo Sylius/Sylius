@@ -10,6 +10,7 @@ sylius:
             postcode: Postcode
             street: Street
             province: Province
+            zone: Zone
         country:
             add_province: Add province
             name: Name
@@ -30,6 +31,8 @@ sylius:
                 province: Province
                 zone: Zone
             scope: Scope
+            scopes:
+                all: All
             select: Select
             select_scope: Select scope
         zone_member:

@@ -24,11 +24,6 @@ interface TaxonsAwareInterface
     public function getTaxons();
 
     /**
-     * @param Collection $collection
-     */
-    public function setTaxons(Collection $collection);
-
-    /**
      * @param TaxonInterface $taxon
      *
      * @return bool

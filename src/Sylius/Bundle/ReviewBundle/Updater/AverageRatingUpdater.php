@@ -36,8 +36,10 @@ class AverageRatingUpdater implements ReviewableRatingUpdaterInterface
      * @param ReviewableRatingCalculatorInterface $averageRatingCalculator
      * @param ObjectManager $reviewSubjectManager
      */
-    public function __construct(ReviewableRatingCalculatorInterface $averageRatingCalculator, ObjectManager $reviewSubjectManager)
-    {
+    public function __construct(
+        ReviewableRatingCalculatorInterface $averageRatingCalculator,
+        ObjectManager $reviewSubjectManager
+    ) {
         $this->averageRatingCalculator = $averageRatingCalculator;
         $this->reviewSubjectManager = $reviewSubjectManager;
     }

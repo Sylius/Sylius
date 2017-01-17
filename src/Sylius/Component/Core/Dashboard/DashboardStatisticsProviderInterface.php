@@ -11,13 +11,17 @@
 
 namespace Sylius\Component\Core\Dashboard;
 
+use Sylius\Component\Core\Model\ChannelInterface;
+
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface DashboardStatisticsProviderInterface
 {
     /**
+     * @param ChannelInterface $channel
+     *
      * @return DashboardStatistics
      */
-    public function getStatistics();
+    public function getStatisticsForChannel(ChannelInterface $channel);
 }

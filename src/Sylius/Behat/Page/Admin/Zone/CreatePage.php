@@ -15,7 +15,6 @@ use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Behaviour\NamesIt;
 use Sylius\Behat\Behaviour\SpecifiesItsCode;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
-use Webmozart\Assert\Assert;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -35,9 +34,9 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      */
     public function checkValidationMessageForMembers($message)
     {
-        $membersValidationElement = $this->getElement('ui_segment')->find('css', '.ui.pointing');
+        $membersValidationElement = $this->getElement('ui_segment')->find('css', '.sylius-validation-error');
         if (null === $membersValidationElement) {
-            throw new ElementNotFoundException($this->getDriver(), 'members validation box', 'css', '.ui.pointing');
+            throw new ElementNotFoundException($this->getDriver(), 'members validation box', 'css', '.sylius-validation-error');
         }
 
         return $membersValidationElement->getText() === $message;
@@ -58,6 +57,14 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         }
 
         $lastSelectItem->selectOption($name);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function selectScope($scope)
+    {
+        $this->getDocument()->selectFieldOption('Scope', $scope);
     }
 
     /**

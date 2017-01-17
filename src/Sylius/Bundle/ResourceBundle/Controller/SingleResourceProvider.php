@@ -16,17 +16,18 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SingleResourceProvider implements SingleResourceProviderInterface
+final class SingleResourceProvider implements SingleResourceProviderInterface
 {
     /**
      * {@inheritdoc}
      */
     public function get(RequestConfiguration $requestConfiguration, RepositoryInterface $repository)
     {
-        if (null !== $repositoryMethod = $requestConfiguration->getRepositoryMethod()) {
-            $callable = [$repository, $repositoryMethod];
+        $repositoryMethod = $requestConfiguration->getRepositoryMethod();
+        if (null !== $repositoryMethod) {
+            $arguments = array_values($requestConfiguration->getRepositoryArguments());
 
-            return call_user_func_array($callable, $requestConfiguration->getRepositoryArguments());
+            return $repository->$repositoryMethod(...$arguments);
         }
 
         $criteria = [];

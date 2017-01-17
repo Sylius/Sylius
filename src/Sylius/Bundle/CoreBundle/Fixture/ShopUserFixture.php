@@ -16,7 +16,7 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class ShopUserFixture extends AbstractResourceFixture
+class ShopUserFixture extends AbstractResourceFixture
 {
     /**
      * {@inheritdoc}
@@ -38,6 +38,7 @@ final class ShopUserFixture extends AbstractResourceFixture
                 ->scalarNode('last_name')->cannotBeEmpty()->end()
                 ->booleanNode('enabled')->end()
                 ->scalarNode('password')->cannotBeEmpty()->end()
+                ->scalarNode('customer_group')->end()
         ;
     }
 }

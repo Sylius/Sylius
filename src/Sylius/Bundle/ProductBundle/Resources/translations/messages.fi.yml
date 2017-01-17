@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        association_type:
+            translations: Käännökset
+        option_value:
+            add_value: Lisää arvo

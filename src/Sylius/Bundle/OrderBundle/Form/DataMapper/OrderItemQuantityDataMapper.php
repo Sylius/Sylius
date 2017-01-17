@@ -15,6 +15,8 @@ use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Symfony\Component\Form\DataMapperInterface;
 
 /**
+ * @internal
+ *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class OrderItemQuantityDataMapper implements DataMapperInterface
@@ -33,8 +35,10 @@ class OrderItemQuantityDataMapper implements DataMapperInterface
      * @param OrderItemQuantityModifierInterface $orderItemQuantityModifier
      * @param DataMapperInterface $propertyPathDataMapper
      */
-    public function __construct(OrderItemQuantityModifierInterface $orderItemQuantityModifier, DataMapperInterface $propertyPathDataMapper)
-    {
+    public function __construct(
+        OrderItemQuantityModifierInterface $orderItemQuantityModifier,
+        DataMapperInterface $propertyPathDataMapper
+    ) {
         $this->orderItemQuantityModifier = $orderItemQuantityModifier;
         $this->propertyPathDataMapper = $propertyPathDataMapper;
     }

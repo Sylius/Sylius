@@ -7,21 +7,6 @@ You can learn [how to contribute the patches](http://docs.sylius.org/en/latest/c
 and [how we use Behat & PHPSpec](http://docs.sylius.org/en/latest/contributing/code/bdd.html)
 in two separate parts of our [Contributing Guide](http://docs.sylius.org/en/latest/contributing/index.html).
 
-PR Table Template
------------------
-
-```
-| Q             | A
-| ------------- | ---
-| Bug fix?      | no|yes
-| New feature?  | no|yes
-| BC breaks?    | no|yes
-| Deprecations? | no|yes
-| Fixed tickets | #X
-| License       | MIT
-| Doc PR        | Sylius/Sylius-Docs#X
-```
-
 Security Issues
 ---------------
 

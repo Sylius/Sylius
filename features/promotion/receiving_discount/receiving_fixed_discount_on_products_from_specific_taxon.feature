@@ -21,7 +21,7 @@ Feature: Receiving fixed discount on products from specific taxon
         And my cart total should be "$90.00"
 
     @ui
-    Scenario: Receiving percentage discount on a multiple items from specific taxon
+    Scenario: Receiving fixed discount on a multiple items from specific taxon
         When I add 3 products "PHP T-Shirt" to the cart
         Then theirs price should be decreased by "$30.00"
         And my cart total should be "$270.00"

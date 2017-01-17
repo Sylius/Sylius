@@ -3,5 +3,5 @@
 
 sylius:
     resource:
-        not_enabled: 该资源已被禁用
-        not_disabled: 该资源已启用
+        not_enabled: "该资源已被禁用"
+        not_disabled: "该资源已启用"

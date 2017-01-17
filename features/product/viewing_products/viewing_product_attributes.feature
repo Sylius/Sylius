@@ -48,3 +48,14 @@ Feature: Viewing product's attributes
         And this product has percent attribute "T-shirt cotton content" with value 50%
         When I check this product's details
         Then I should see the product attribute "T-shirt cotton content" with value "50 %"
+
+    @ui
+    Scenario: The product attributes are listed by their respective position
+        Given the store has a product "T-shirt banana"
+        And this product has percent attribute "Wool content" at position 2
+        And this product has percent attribute "Polyester content" at position 0
+        And this product has percent attribute "Cotton content" at position 1
+        When I check this product's details
+        Then I should see 3 attributes
+        And the first attribute should be "Polyester content"
+        And the last attribute should be "Wool content"

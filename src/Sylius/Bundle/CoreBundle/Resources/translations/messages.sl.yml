@@ -3,12 +3,6 @@
 
 sylius:
     form:
-        action:
-            add_product_configuration:
-                price: Cena za enoto
-                quantity: Količina
-                variant: Različica
-            customer_group: Skupina kupcev
         block:
             body: Telo
             id: ID
@@ -22,8 +16,9 @@ sylius:
             shipping_method: Način pošiljanja
         promotion:
             channels: Kanali
-        coupon:
-            per_customer_usage_limit: Omejitev uporabe na kupca
+        promotion_action:
+            add_product_configuration:
+                product: Izdelek
         group:
             name: Ime
             roles: Vloge
@@ -31,13 +26,14 @@ sylius:
             taxonomies: Taksonomije
             locale_default: Privzeto območje
             locales: Področne nastavitve
-            currency_default: Privzeta valuta
             currencies: Valute
             shipping_methods: Načini dostave
             payment_methods: Načini plačil
+            tax_zone_default: Privzeta davčna cona
             theme: Tema
             hostname: Ime gostitelja
         image:
+            code: Koda
             file: Slika
         locale:
             code: Koda
@@ -55,8 +51,8 @@ sylius:
             id: ID
             title: Naslov
         product:
+            images: Slike
             restricted_zone: Območje z omejitvami
-            shipping_category: Kategorija dostave
             short_description: Kratek opis
             variant_selection_method: Način izbora variante
             main_taxon: Glavni takson
@@ -66,16 +62,7 @@ sylius:
             code: Koda
         product_variant:
             tax_category: Kategorija davka
-        settings:
-            general:
-                currency: Privzeta valuta
-                locale: Jezik
-                tracking_code:
-                    Tracking code (for example: Koda Google Analytics)
-            taxation:
-                default_tax_calculation_strategy: Privzeta strategija izračuna davka
-            security:
-                enabled: Omogočeno?
+            shipping_category: Kategorija dostave
         shipment_filter:
             created_at_from: Od
             created_at_to: Za
@@ -90,6 +77,9 @@ sylius:
             channel: Vsi kanali
         shipping_method:
             zone: Cona
+        taxon:
+            code: Koda
+            images: Slike
         user:
             groups: Skupine
             roles: Vloge
@@ -100,10 +90,8 @@ sylius:
         variant:
             depth: Globina
             height: Višina
-            images: Slike
             on_hand: Trenutna zaloga
             price: Cena
-            original_price: Prvotna cena
             sku: SKU
             weight: Teža
             width: Širina
@@ -119,23 +107,61 @@ sylius:
         product_association_type:
             name: Ime
         promotion_rule:
-            contains_taxon:
-                taxon: Sistematske skupine
-                count: Število
-            taxon:
-                taxons: Taksoni
             total_of_items_from_taxon:
                 taxon: Sistematske skupine
-                amount: Znesek
-    email:
-        order_confirmation:
-            name: Potrditev naročila
-        order_comment:
-            name: Opombe pri naročilu
-        shipment_confirmation:
-            name: Potrditev pošiljke
-        user_confirmation:
-            name: Potrditev uporabnika
-            subject: Dobrodošli v naši trgovini
-        password_reset:
-            name: Ponastavitev gesla
+        payment_method:
+            channels: Kanali
+    installer:
+        extensions:
+            header: razširitve
+            accelerator:
+                header: Pospeševalnik
+            apc: APC
+            ctype: Ctype
+            gd: GD
+            help: Namestite in omogočite razširitev %extension%.
+            iconv: Iconv
+            exif: Exif
+            fileinfo: Fileinfo
+            icu: ICU
+            intl: Intl
+            json_encode: JSON
+            mbstring: Večbajtni niz
+            "off": false
+            "on": true
+            pcre: PCRE
+            pdo: PDO
+            php_xml: PHP-XML
+            session_start: Seja
+            simplexml_import_dom: SimpleXML
+            token_get_all: Tokenizer
+        filesystem:
+            header: datotečni sistem
+            cache:
+                header: predpomnilnik
+            exists: obstaja
+            logs:
+                header: dnevniki
+            not_exists: ne obstaja
+            not_writable: nezapisljivo
+            parameters:
+                header: parameters.yml
+            vendors: izdelovalci
+            writable: zapisljivo
+        settings:
+            header: PHP različica in nastavitve
+            any: katerakoli
+            detect_unicode: detect_unicode
+            magic_quotes_gpc: magic_quotes_gpc
+            non_deprecated: ni opuščeno
+            "off": false
+            "on": true
+            register_globals: register_globals
+            session:
+                auto_start: session.auto_start
+            short_open_tag: short_open_tag
+            timezone: časovni pas
+            timezone_deprecated:
+                header: Opuščeni časovni pas
+                help: 'Časovni pas %timezone% je opuščen. Popravite vašo datoteko php.ini (seznam opuščenih časovni pasov http://php.net/manual/en/timezones.others.php).'
+            version: Različica PHP

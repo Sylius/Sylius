@@ -5,12 +5,12 @@ sylius:
     attribute:
         name:
             not_blank: Silahkan masukkan nama atribut.
-            min_length: 'Nama atribut setidaknya 1 karakter . |Nama atribut harus setidaknya {{ limit }} karakter.'
-            max_length: 'Nama atribut tidak boleh lebih dari 1 karakter. |Nama atribut tidak boleh lebih dari {{ limit }} karakter.'
+            min_length: Nama atribut setidaknya 1 karakter . |Nama atribut harus setidaknya {{ limit }} karakter.
+            max_length: Nama atribut tidak boleh lebih dari 1 karakter. |Nama atribut tidak boleh lebih dari {{ limit }} karakter.
         presentation:
             not_blank: Masukkan atribut presentasi.
-            min_length: 'Presentasi atribut harus setidaknya 1 karakter . |Atribut presentasi setidaknya harus {{ limit }} karakter.'
-            max_length: 'Presentasi atribut tidak boleh lebih dari 1 karakter. |Presentasi atribut tidak boleh lebih dari {{ limit }} karakter.'
+            min_length: Presentasi atribut harus setidaknya 1 karakter . |Atribut presentasi setidaknya harus {{ limit }} karakter.
+            max_length: Presentasi atribut tidak boleh lebih dari 1 karakter. |Presentasi atribut tidak boleh lebih dari {{ limit }} karakter.
     attribute_value:
         attribute:
             not_blank: Silakan pilih atribut.

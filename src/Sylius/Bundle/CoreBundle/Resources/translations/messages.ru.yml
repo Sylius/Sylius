@@ -3,12 +3,6 @@
 
 sylius:
     form:
-        action:
-            add_product_configuration:
-                price: Цена
-                quantity: Количество
-                variant: Вариант
-            customer_group: Группа клиента
         block:
             body: Содержание
             id: ID
@@ -22,7 +16,10 @@ sylius:
             shipping_method: Способ доставки
         promotion:
             channels: Каналы
-        coupon:
+        promotion_action:
+            add_product_configuration:
+                product: Товар
+        promotion_coupon:
             per_customer_usage_limit: Лимит использования на клиента
         group:
             name: Название
@@ -31,14 +28,16 @@ sylius:
             taxonomies: Список каталогов
             locale_default: Локаль по умолчанию
             locales: Языки
-            currency_default: Валюта по умолчанию
+            currency_base: Базовая валюта
             currencies: Валюты
             shipping_methods: Список способов доставки
             payment_methods: Список методов оплаты
+            tax_calculation_strategy: Способ расчета налогов
             tax_zone_default: Налоговая зона по умолчанию
             theme: Тема оформления
             hostname: Хост
         image:
+            code: Код
             file: Изображение
         locale:
             code: Код
@@ -56,8 +55,8 @@ sylius:
             id: ID
             title: Название
         product:
+            images: Изображения
             restricted_zone: Зона ограничений
-            shipping_category: Категория доставки
             short_description: Короткое описание
             variant_selection_method: Метод выбора вариантов
             main_taxon: Основной таксон
@@ -68,19 +67,7 @@ sylius:
             code: Код
         product_variant:
             tax_category: Категория налогов
-        settings:
-            general:
-                currency: Валюта по умолчанию
-                locale: Язык
-                meta_description: Описание метаданных
-                meta_keywords: Ключевые слова метаданных
-                title: Заголовок страницы
-                tracking_code:
-                    Tracking code (for example: Трекинг код (например код для Google Analytics)
-            taxation:
-                default_tax_zone: Налоговая зона по умолчанию
-            security:
-                enabled: Включить?
+            shipping_category: Категория доставки
         shipment_filter:
             created_at_from: От
             created_at_to: До
@@ -96,7 +83,9 @@ sylius:
         shipping_method:
             zone: Зона
         taxon:
+            code: Код
             file: Выберите изображение
+            images: Изображения
         taxonomy:
             file: Выберите изображение
         user:
@@ -114,10 +103,8 @@ sylius:
         variant:
             depth: Глубина
             height: Высота
-            images: Изображения
             on_hand: Количество на складе
             price: Цена
-            original_price: Исходная цена
             sku: Идентификатор товарной позиции
             weight: Вес
             width: Ширина
@@ -133,21 +120,77 @@ sylius:
         product_association_type:
             name: Название
         promotion_rule:
-            contains_taxon:
-                taxon: Налог
-                count: Кол-во
-            taxon:
-                taxons: Налоги
+            product:
+                products: Товары
             total_of_items_from_taxon:
                 taxon: Налог
                 amount: Сумма
-    email:
-        order_confirmation:
-            name: Подтверждение заказа
-        order_comment:
-            name: Комментарий к заказу
-        shipment_confirmation:
-            name: Подтверждение посылки
-        user_confirmation:
-            name: Подтверждение пользователя
-            subject: Добро пожаловать в наш магазин
+        payment_method:
+            channels: Каналы
+        zone:
+            scopes:
+                shipping: Способ доставки
+                tax: Налог
+    installer:
+        extensions:
+            header: расширения
+            accelerator:
+                header: Ускоритель
+                help: Включить Zend OpCache (рекомендуется).
+            apc: APC
+            ctype: CType
+            gd: GD
+            help: Установите и включите %extension%.
+            iconv: Iconv
+            exif: Exif
+            fileinfo: Информация о файле
+            icu: ICU
+            intl: Intl
+            json_encode: JSON
+            mbstring: Multibyte String
+            "off": false
+            "on": true
+            pcre: PCRE
+            pdo: PDO
+            php_xml: PHP-XML
+            session_start: Session
+            simplexml_import_dom: SimpleXML
+            token_get_all: Tokenizer
+        filesystem:
+            header: файловая система
+            cache:
+                header: кеш
+            exists: существует
+            logs:
+                header: журналы
+            not_exists: не существует
+            not_writable: не доступно для записи
+            parameters:
+                header: parameters.yml
+                help: 'Чтобы задать права доступа запустите команду: sudo chmod + w %path%'
+            vendors: поставщики
+            writable: доступно для записи
+        settings:
+            header: Настройки и версия PHP
+            any: любой
+            detect_unicode: detect_unicode
+            magic_quotes_gpc: magic_quotes_gpc
+            non_deprecated: не устаревшее
+            "off": false
+            "on": true
+            register_globals: register_globals
+            session:
+                auto_start: session.auto_start
+            short_open_tag: short_open_tag
+            timezone: Часовой пояс
+            timezone_deprecated:
+                header: Устаревший часовой пояс
+                help: 'Часовой пояс %timezone% является устаревшим. Исправьте файл php.ini (список устаревших часовых поясов http://php.net/manual/en/timezones.others.php).'
+            version: Версия PHP
+            version_recommended: Рекомендуемая версия PHP
+    payum_gateway:
+        cash_on_delivery: Наличными при доставке
+        offline: Офлайн
+        paypal_express_checkout: PayPal Express Checkout
+    shipping_method_resolver:
+        by_zones_and_channel: По зонам и каналам

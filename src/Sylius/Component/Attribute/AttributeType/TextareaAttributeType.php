@@ -17,7 +17,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class TextareaAttributeType implements AttributeTypeInterface
+final class TextareaAttributeType implements AttributeTypeInterface
 {
     const TYPE = 'textarea';
 

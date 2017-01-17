@@ -18,7 +18,7 @@ use Sylius\Component\Shipping\Repository\ShippingMethodRepositoryInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class DefaultShippingMethodResolver implements DefaultShippingMethodResolverInterface
+final class DefaultShippingMethodResolver implements DefaultShippingMethodResolverInterface
 {
     /**
      * @var ShippingMethodRepositoryInterface

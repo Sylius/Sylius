@@ -3,9 +3,12 @@
 
 sylius:
     form:
-        rule:
-            contains_product_configuration:
-                variants: Пороизводи
         promotion:
             add_action: Додајте акцију
             add_rule: Додајте правило
+        promotion_action:
+            type: Тип
+        promotion_rule:
+            shipping_country_configuration:
+                country: Земља
+            type: Тип

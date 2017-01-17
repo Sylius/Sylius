@@ -2,5 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    ui:
-        the_channel_cannot_be_deleted_at_least_one_enabled_channel_is_required: Kanał nie może być usunięty, wymagane jest aby co najmniej jeden kanał był włączony.
+    channel:
+        delete_error: 'Kanał nie może być usunięty, wymagane jest aby co najmniej jeden kanał był włączony.'
+    customer:
+        add_address: 'Adres został pomyślnie dodany.'
+        set_address_as_default: 'Adres został ustawiony jako domyślny.'

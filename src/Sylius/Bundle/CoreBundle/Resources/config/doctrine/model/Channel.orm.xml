@@ -19,12 +19,13 @@
     <mapped-superclass name="Sylius\Component\Core\Model\Channel" table="sylius_channel">
         <field name="themeName" column="theme_name" type="string" nullable="true" />
         <field name="taxCalculationStrategy" column="tax_calculation_strategy" type="string" />
+        <field name="contactEmail" column="contact_email" type="string" nullable="true" />
 
         <many-to-one field="defaultLocale" target-entity="Sylius\Component\Locale\Model\LocaleInterface">
             <join-column name="default_locale_id" referenced-column-name="id" nullable="false" />
         </many-to-one>
-        <many-to-one field="defaultCurrency" target-entity="Sylius\Component\Currency\Model\CurrencyInterface">
-            <join-column name="default_currency_id" referenced-column-name="id" nullable="false" />
+        <many-to-one field="baseCurrency" target-entity="Sylius\Component\Currency\Model\CurrencyInterface">
+            <join-column name="base_currency_id" referenced-column-name="id" nullable="false" />
         </many-to-one>
         <many-to-one field="defaultTaxZone" target-entity="Sylius\Component\Addressing\Model\ZoneInterface">
             <join-column name="default_tax_zone_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
@@ -46,36 +47,6 @@
                 </join-columns>
                 <inverse-join-columns>
                     <join-column name="locale_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
-                </inverse-join-columns>
-            </join-table>
-        </many-to-many>
-        <many-to-many field="shippingMethods" target-entity="Sylius\Component\Shipping\Model\ShippingMethodInterface">
-            <join-table name="sylius_channel_shipping_methods">
-                <join-columns>
-                    <join-column name="channel_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
-                </join-columns>
-                <inverse-join-columns>
-                    <join-column name="shipping_method_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
-                </inverse-join-columns>
-            </join-table>
-        </many-to-many>
-        <many-to-many field="paymentMethods" target-entity="Sylius\Component\Payment\Model\PaymentMethodInterface">
-            <join-table name="sylius_channel_payment_methods">
-                <join-columns>
-                    <join-column name="channel_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
-                </join-columns>
-                <inverse-join-columns>
-                    <join-column name="payment_method_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
-                </inverse-join-columns>
-            </join-table>
-        </many-to-many>
-        <many-to-many field="taxons" target-entity="Sylius\Component\Taxonomy\Model\TaxonInterface">
-            <join-table name="sylius_channel_taxon">
-                <join-columns>
-                    <join-column name="channel_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
-                </join-columns>
-                <inverse-join-columns>
-                    <join-column name="taxon_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
                 </inverse-join-columns>
             </join-table>
         </many-to-many>

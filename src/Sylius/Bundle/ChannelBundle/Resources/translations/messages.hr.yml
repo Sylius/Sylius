@@ -4,6 +4,6 @@
 sylius:
     form:
         channel:
-            name: Naziv grupe
             description: Opis
             enabled: Omogući
+            name: Naziv grupe

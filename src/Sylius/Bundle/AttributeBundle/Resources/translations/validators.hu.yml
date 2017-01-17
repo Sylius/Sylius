@@ -5,15 +5,15 @@ sylius:
     attribute:
         name:
             not_blank: Kérjük, írja be az attribútum nevét.
-            min_length: 'Az értéknek legalább 1 karakternek kell lennie.|Az értéknek legalább {{ limit }} karakternek kell lennie.'
-            max_length: 'Az értéknek hosszabbnak kell lennie 1 karakternél.|Az értéknek hosszabbnak kell lennie {{ limit }} karakternél.'
+            min_length: Az értéknek legalább 1 karakternek kell lennie.|Az értéknek legalább {{ limit }} karakternek kell lennie.
+            max_length: Az értéknek hosszabbnak kell lennie 1 karakternél.|Az értéknek hosszabbnak kell lennie {{ limit }} karakternél.
         code:
             not_blank: Kérjük, írja be az attribútum kódját.
             unique: Ez a kód már használatban van.
         presentation:
             not_blank: Kérjük, adja meg az attribútum bemutatását.
-            min_length: 'Attribútum bemutatása, legalább 1 karakter hosszúnak kell lennie. | Attribútum bemutatása, legalább {{ limit }} karakter hosszúnak kell lennie.'
-            max_length: 'Attribútum bemutatása, legalább 1 karakter hosszúnak kell lennie. | Attribútum bemutatása, legalább {{ limit }} karakter hosszúnak kell lennie.'
+            min_length: Attribútum bemutatása, legalább 1 karakter hosszúnak kell lennie. | Attribútum bemutatása, legalább {{ limit }} karakter hosszúnak kell lennie.
+            max_length: Attribútum bemutatása, legalább 1 karakter hosszúnak kell lennie. | Attribútum bemutatása, legalább {{ limit }} karakter hosszúnak kell lennie.
     attribute_value:
         attribute:
             not_blank: Kérjük válasszon!

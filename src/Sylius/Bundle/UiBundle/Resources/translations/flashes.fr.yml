@@ -2,5 +2,14 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    ui:
-        the_channel_cannot_be_deleted_at_least_one_enabled_channel_is_required: Le canal de distribution ne peut pas être supprimé, il faut au moins un canal de distribution activé.
+    channel:
+        delete_error: 'Le canal ne peut pas être supprimé, il faut au moins un canal activé.'
+    contact:
+        request_success: 'Votre demande de contact a été soumise avec succès.'
+        request_error: 'Un problème est survenu lors de l’envoi de la demande de contact. Veuillez réessayer ultérieurement.'
+    customer:
+        add_address: 'L''adresse a été ajoutée avec succès.'
+        impersonate: 'Vous voyez maintenant le site en tant que %name%.'
+        set_address_as_default: 'Cette adresse est maintenant l''adresse par défaut.'
+    product:
+        out_of_stock: 'Il ne reste que %quantity% produit(s) en stock.'

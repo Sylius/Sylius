@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\OrderBundle\Templating\Helper;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\OrderBundle\Templating\Helper\AdjustmentsHelper;
 use Sylius\Component\Order\Aggregator\AdjustmentsAggregatorInterface;
 use Sylius\Component\Order\Model\AdjustmentInterface;
 use Symfony\Component\Templating\Helper\Helper;
@@ -28,16 +29,16 @@ final class AdjustmentsHelperSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\OrderBundle\Templating\Helper\AdjustmentsHelper');
+        $this->shouldHaveType(AdjustmentsHelper::class);
     }
 
-    function it_is_helper()
+    function it_is_a_helper()
     {
         $this->shouldHaveType(Helper::class);
     }
 
     function it_returns_aggregated_adjustments(
-        $adjustmentsAggregator,
+        AdjustmentsAggregatorInterface $adjustmentsAggregator,
         AdjustmentInterface $adjustment1,
         AdjustmentInterface $adjustment2,
         AdjustmentInterface $adjustment3
@@ -47,10 +48,13 @@ final class AdjustmentsHelperSpec extends ObjectBehavior
             ->willReturn(['tax 1' => 1000, 'tax2' => 500])
         ;
 
-        $this->getAggregatedAdjustments([$adjustment1, $adjustment2, $adjustment3])->shouldReturn(['tax 1' => 1000, 'tax2' => 500]);
+        $this
+            ->getAggregatedAdjustments([$adjustment1, $adjustment2, $adjustment3])
+            ->shouldReturn(['tax 1' => 1000, 'tax2' => 500])
+        ;
     }
 
-    function it_has_name()
+    function it_has_a_name()
     {
         $this->getName()->shouldReturn('sylius_adjustments');
     }

@@ -24,7 +24,7 @@ class SharedStorage implements SharedStorageInterface
     /**
      * @var string|null
      */
-    private $latestKey = null;
+    private $latestKey;
 
     /**
      * {@inheritdoc}

@@ -12,5 +12,5 @@ sylius:
             mismatch: 输入的密码不匹配
             wrong_current: 提供的密码是一个当前登录密码不匹配。
         password:
-            min: '密码必须至少 {{ limit }} 个字符长。'
-            max: '密码不能超过 {{ limit }} 个字符。'
+            min: 密码必须至少 {{ limit }} 个字符长。
+            max: 密码不能超过 {{ limit }} 个字符。

@@ -13,7 +13,8 @@ namespace spec\Sylius\Component\User\Security;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\User\Model\CredentialsHolderInterface;
+use Sylius\Component\User\Model\UserInterface;
+use Sylius\Component\User\Security\PasswordUpdater;
 use Sylius\Component\User\Security\PasswordUpdaterInterface;
 use Sylius\Component\User\Security\UserPasswordEncoderInterface;
 
@@ -29,7 +30,7 @@ final class PasswordUpdaterSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\User\Security\PasswordUpdater');
+        $this->shouldHaveType(PasswordUpdater::class);
     }
 
     function it_implements_password_updater_interface()
@@ -37,7 +38,7 @@ final class PasswordUpdaterSpec extends ObjectBehavior
         $this->shouldImplement(PasswordUpdaterInterface::class);
     }
 
-    function it_updates_user_profile_with_encoded_password(UserPasswordEncoderInterface $userPasswordEncoder, CredentialsHolderInterface $user)
+    function it_updates_user_profile_with_encoded_password(UserPasswordEncoderInterface $userPasswordEncoder, UserInterface $user)
     {
         $user->getPlainPassword()->willReturn('topSecretPlainPassword');
 
@@ -49,7 +50,7 @@ final class PasswordUpdaterSpec extends ObjectBehavior
         $this->updatePassword($user);
     }
 
-    function it_does_nothing_if_plain_password_is_empty(UserPasswordEncoderInterface $userPasswordEncoder, CredentialsHolderInterface $user)
+    function it_does_nothing_if_plain_password_is_empty(UserPasswordEncoderInterface $userPasswordEncoder, UserInterface $user)
     {
         $user->getPlainPassword()->willReturn('');
 

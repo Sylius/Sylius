@@ -1,0 +1,31 @@
+winzou_state_machine:
+    sylius_order_shipping:
+        class: "%sylius.model.order.class%"
+        property_path: shippingState
+        graph: sylius_order_shipping
+        state_machine_class: "%sylius.state_machine.class%"
+        states:
+            cart: ~
+            ready: ~
+            cancelled: ~
+            partially_shipped: ~
+            shipped: ~
+        transitions:
+            request_shipping:
+                from: [cart]
+                to: ready
+            cancel:
+                from: [ready]
+                to: cancelled
+            partially_ship:
+                from: [ready]
+                to: partially_shipped
+            ship:
+                from: [ready, partially_shipped]
+                to: shipped
+        callbacks:
+            after:
+                sylius_resolve_state:
+                    on: ["ship"]
+                    do: ["@sylius.state_resolver.order", "resolve"]
+                    args: ["object"]

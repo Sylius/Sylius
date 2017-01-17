@@ -4,7 +4,7 @@
 sylius:
     form:
         credit_card:
-            cardholder_name: "Ім'я власника кредитної картки"
+            cardholder_name: Ім'я власника кредитної картки
             expiry_month: Місяць закінчення строку дії
             expiry_year: Рік закінчення строку дії
             number: Номер картки
@@ -15,18 +15,20 @@ sylius:
             method: Спосіб оплати
             state:
                 header: Статус платежу
-                checkout: Оформити замовлення
+                checkout: Підрахунок
                 completed: Завершено
-                failed: Помилка
+                authorized: Авторизований
+                failed: Невдало
                 new: Новий
                 pending: В очікуванні
                 processing: В процесі
-                unknown: Не вказаний
-                void: Порожнє
-                cancelled: Відхилено
-                refunded: Повернуто
+                unknown: Невідомо
+                void: Порожньо
+                cancelled: Скасовано
+                refunded: Відшкодовано
         payment_method:
             description: Опис
-            enabled: Ввімкнено?
+            enabled: Увімкнено?
             gateway: Шлюз
+            instructions: Інструкції
             name: Назва

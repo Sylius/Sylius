@@ -120,12 +120,12 @@ class User implements UserInterface
     protected $oauthAccounts;
 
     /**
-     * @var string 
+     * @var string
      */
     protected $email;
 
     /**
-     * @var string 
+     * @var string
      */
     protected $emailCanonical;
 
@@ -137,6 +137,14 @@ class User implements UserInterface
 
         // Set here to overwrite default value from trait
         $this->enabled = false;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return (string) $this->getUsername();
     }
 
     /**
@@ -162,7 +170,7 @@ class User implements UserInterface
     {
         $this->email = $email;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -170,7 +178,7 @@ class User implements UserInterface
     {
         return $this->emailCanonical;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -178,7 +186,7 @@ class User implements UserInterface
     {
         $this->emailCanonical = $emailCanonical;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -404,27 +412,13 @@ class User implements UserInterface
     /**
      * {@inheritdoc}
      */
-    public function setRoles(array $roles)
-    {
-        $this->roles = [];
-
-        foreach ($roles as $role) {
-            $this->addRole($role);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function isPasswordRequestNonExpired(\DateInterval $ttl)
     {
         return null !== $this->passwordRequestedAt && new \DateTime() <= $this->passwordRequestedAt->add($ttl);
     }
 
     /**
-     * Gets the timestamp that the user requested a password reset.
-     *
-     * @return null|\DateTime
+     * {@inheritdoc}
      */
     public function getPasswordRequestedAt()
     {
@@ -508,16 +502,6 @@ class User implements UserInterface
             $this->oauthAccounts->add($oauth);
             $oauth->setUser($this);
         }
-    }
-
-    /**
-     * Returns username.
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        return (string) $this->getUsername();
     }
 
     /**

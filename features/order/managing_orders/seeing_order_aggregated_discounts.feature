@@ -17,11 +17,12 @@ Feature: Seeing aggregated discounts of an order
         And I am logged in as an administrator
 
     @ui
-    Scenario: Seeing promotion discount on shipping is not aggregated in summary
+    Scenario: Seeing shipping and order promotions, but the shipping promotion is not aggregated in summary's promotion total
         Given the customer bought 2 "Longbow" products
         And the customer chose "DHL" shipping method to "United States" with "Cash on Delivery" payment
         When I view the summary of the order "#00000006"
         Then the order's items total should be "$280.00"
+        And the order's shipping promotion should be "Eagle eye promotion -$5.00"
         And the order's promotion discount should be "Eagle eye promotion -$20.00"
         And the order's promotion total should be "-$20.00"
         And there should be a shipping charge "DHL $10.00"
@@ -29,7 +30,7 @@ Feature: Seeing aggregated discounts of an order
         And the order's total should be "$285.00"
 
     @ui
-    Scenario: Seeing multiple promotions aggregated in summary
+    Scenario: Seeing multiple order promotions aggregated in summary
         Given there is a promotion "Big order discount"
         And it gives "$50.00" discount to every order with quantity at least 3
         And the customer bought 2 "Longbow" products
@@ -37,6 +38,7 @@ Feature: Seeing aggregated discounts of an order
         And the customer chose "DHL" shipping method to "United States" with "Cash on Delivery" payment
         When I view the summary of the order "#00000006"
         Then the order's items total should be "$830.00"
+        And the order's shipping promotion should be "Eagle eye promotion -$5.00"
         And the order's promotion discount should be "Eagle eye promotion -$20.00"
         And the order's promotion discount should be "Big order discount -$50.00"
         And the order's promotion total should be "-$70.00"

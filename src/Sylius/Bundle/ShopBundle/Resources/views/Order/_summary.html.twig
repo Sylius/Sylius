@@ -1,0 +1,21 @@
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+
+<h1 class="ui header">
+    <i class="circular cart icon"></i>
+    <div class="content">
+        {{ 'sylius.ui.summary_of_your_order'|trans }} #{{ order.number }}
+        <div class="sub header">
+            <div class="ui horizontal divided list">
+                <div class="item">
+                    {{ order.checkoutCompletedAt|date }}
+                </div>
+                <div class="item">
+                    {{ money.convertAndFormat(order.total) }}
+                </div>
+                <div class="item">
+                    {{ order.items|length }} {{ 'sylius.ui.items'|trans|lower }}
+                </div>
+            </div>
+        </div>
+    </div>
+</h1>

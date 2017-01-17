@@ -14,20 +14,15 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
-                                      http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
-                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
+                                      http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <mapped-superclass name="Sylius\Component\Order\Model\OrderItem" table="sylius_order_item">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
 
-        <field name="quantity" column="quantity" type="integer">
-            <gedmo:versioned />
-        </field>
-        <field name="unitPrice" column="unit_price" type="integer">
-            <gedmo:versioned />
-        </field>
+        <field name="quantity" column="quantity" type="integer" />
+        <field name="unitPrice" column="unit_price" type="integer" />
         <field name="unitsTotal" column="units_total" type="integer" />
         <field name="adjustmentsTotal" column="adjustments_total" type="integer" />
         <field name="total" column="total" type="integer" />
@@ -48,8 +43,6 @@
                 <cascade-all/>
             </cascade>
         </one-to-many>
-
-        <gedmo:loggable />
     </mapped-superclass>
 
 </doctrine-mapping>

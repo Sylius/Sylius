@@ -15,6 +15,7 @@ use Mockery\MockInterface;
 use Payum\Core\Bridge\Guzzle\HttpClient;
 use PhpSpec\ObjectBehavior;
 use PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer;
+use Sylius\Behat\Service\Mocker\Mocker;
 use Sylius\Behat\Service\Mocker\MockerInterface;
 
 /**
@@ -29,7 +30,7 @@ final class MockerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Behat\Service\Mocker\Mocker');
+        $this->shouldHaveType(Mocker::class);
     }
 
     function it_implements_behat_mocker_interface()

@@ -14,6 +14,7 @@ namespace Sylius\Component\Addressing\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\ToggleableTrait;
+use Symfony\Component\Intl\Intl;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -51,7 +52,7 @@ class Country implements CountryInterface
      */
     public function __toString()
     {
-        return $this->code;
+        return $this->getName() ?: $this->getCode();
     }
 
     /**
@@ -81,17 +82,17 @@ class Country implements CountryInterface
     /**
      * {@inheritdoc}
      */
-    public function getProvinces()
+    public function getName($locale = null)
     {
-        return $this->provinces;
+        return Intl::getRegionBundle()->getCountryName($this->code, $locale);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setProvinces(Collection $provinces)
+    public function getProvinces()
     {
-        $this->provinces = $provinces;
+        return $this->provinces;
     }
 
     /**

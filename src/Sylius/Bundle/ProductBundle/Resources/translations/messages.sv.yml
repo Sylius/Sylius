@@ -14,8 +14,18 @@ sylius:
         product_variant:
             available_on: Tillgänglig på
             available_until: Tillgänglig till
+            name: Namn
         association_type:
             name: Namn
+            translations: Översättningar
         association:
             type: Associationstyp
             product: Tillhörande produkt
+        variant:
+            name: Namn
+        option:
+            name: Namn
+            values: Möjliga värden
+        option_value:
+            add_value: Lägg till värde
+            value: Värde

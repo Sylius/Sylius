@@ -1,0 +1,21 @@
+# This file is a part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_shop_ajax_cart_add_item:
+    path: /add
+    methods: [POST]
+    defaults:
+        _controller: sylius.controller.order_item:addAction
+        _format: json
+        _sylius:
+            factory:
+                method: createForProduct
+                arguments: [expr:service('sylius.repository.product').find($productId)]
+            form:
+                type: Sylius\Bundle\CoreBundle\Form\Type\Order\AddToCartType
+                options:
+                    product: expr:service('sylius.repository.product').find($productId)
+            redirect:
+                route: sylius_shop_cart_summary
+                parameters: {}
+            flash: sylius.cart.add_item

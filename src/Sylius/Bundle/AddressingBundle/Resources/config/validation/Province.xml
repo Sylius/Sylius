@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
+    <class name="Sylius\Component\Addressing\Model\Province">
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+            <option name="fields">
+                <value>name</value>
+                <value>country</value>
+            </option>
+            <option name="errorPath">name</option>
+            <option name="message">sylius.province.name.unique</option>
+            <option name="groups">sylius</option>
+        </constraint>
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+            <option name="fields">code</option>
+            <option name="message">sylius.province.code.unique</option>
+            <option name="groups">sylius</option>
+        </constraint>
+        <property name="code">
+            <constraint name="NotBlank">
+                <option name="message">sylius.province.code.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+            <constraint name="Regex">
+                <option name="message">sylius.province.code.regex</option>
+                <option name="pattern">/^[A-Z]{2}-[A-Z0-9]{2,}$/</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+        <property name="name">
+            <constraint name="NotBlank">
+                <option name="message">sylius.province.name.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+            <constraint name="Length">
+                <option name="min">2</option>
+                <option name="max">255</option>
+                <option name="minMessage">sylius.province.name.min_length</option>
+                <option name="maxMessage">sylius.province.name.max_length</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+    </class>
+</constraint-mapping>

@@ -17,6 +17,7 @@ sylius:
             locales: Miền địa phương
             payment_methods: Phương thức thanh toán
         image:
+            code: Mã
             file: Hình ảnh
         locale:
             code: Mã
@@ -24,15 +25,15 @@ sylius:
             id: ID
             title: Tiêu đề
         product:
+            images: Hình ảnh
             channels: Kênh
         product_filter:
             name: Tên
             code: Mã
-        settings:
-            general:
-                locale: Ngôn ngữ
         taxon:
+            code: Mã
             file: Chọn ảnh
+            images: Hình ảnh
         taxonomy:
             file: Chọn ảnh
         user:
@@ -43,9 +44,17 @@ sylius:
             query: Tìm kiếm
         variant:
             height: Chiều cao
-            images: Hình ảnh
             price: Giá
             sku: MÃ SẢN PHẨM
             width: Chiều rộng
         product_association_type:
             name: Tên
+        payment_method:
+            channels: Kênh
+    installer:
+        extensions:
+            "off": false
+            "on": true
+        settings:
+            "off": false
+            "on": true

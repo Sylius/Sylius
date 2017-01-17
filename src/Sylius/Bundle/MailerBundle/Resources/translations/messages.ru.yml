@@ -5,8 +5,9 @@ sylius:
     form:
         email:
             enabled: Активен
+            subject: Тема
             sender_name: Имя отправителя
             sender_address: Адрес отправителя
-            content: Контент
+            content: Содержимое
             template: Шаблон
             no_template: Использовать пользовательский шаблон

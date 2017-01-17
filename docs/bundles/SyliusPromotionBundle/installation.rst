@@ -38,8 +38,9 @@ Don't worry, everything was automatically installed via Composer.
             new JMS\SerializerBundle\JMSSerializerBundle($this),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
-            new Sylius\Bundle\PromotionBundle\SyliusPromotionBundle(),
+            new winzou\Bundle\StateMachineBundle\winzouStateMachineBundle(),
             new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
+            new Sylius\Bundle\PromotionBundle\SyliusPromotionBundle(),
 
             // Other bundles...
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
@@ -50,46 +51,35 @@ Don't worry, everything was automatically installed via Composer.
 
     Please register the bundle before *DoctrineBundle*. This is important as we use listeners which have to be processed first.
 
-Container configuration
------------------------
+Promotion Subject configuration
+-------------------------------
 
-Put this configuration inside your ``app/config/config.yml``.
+.. note::
+
+    You need to have a class that is :doc:`registered as a sylius_resource </bundles/SyliusResourceBundle/configuration>`.
+    It can be for example a ``CarRentalOrderClass``.
+
+* Make your ``CarRentalOrder`` class implement the ``PromotionSubjectInterface``.
+
+Put its configuration inside your ``app/config/config.yml``.
 
 .. code-block:: yaml
 
+    # app/config/config.yml
     sylius_promotion:
-        driver: doctrine/orm # Configure the doctrine orm driver used in the documentation.
+        resources:
+            promotion_subject:
+                classes:
+                    model: AppBundle\Entity\CarRentalOrder
 
 And configure doctrine extensions which are used by the bundle.
 
 .. code-block:: yaml
 
+    # app/config/config.yml
     stof_doctrine_extensions:
         orm:
             default:
                 timestampable: true
-
-Routing configuration
----------------------
-
-Add the following to your ``app/config/routing.yml``.
-
-.. code-block:: yaml
-
-    sylius_promotion:
-        resource: "@SyliusPromotionBundle/Resources/config/routing.yml"
-
-Updating database schema
-------------------------
-
-Run the following command.
-
-.. code-block:: bash
-
-    $ php app/console doctrine:schema:update --force
-
-.. warning::
-
-    This should be done only in **dev** environment! We recommend using Doctrine migrations, to safely update your schema.
 
 Congratulations! The bundle is now installed and ready to use.

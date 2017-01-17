@@ -1,0 +1,11 @@
+{% import '@SyliusUi/Macro/messages.html.twig' as messages %}
+
+{% if product_reviews|length > 0 %}
+    <div class="ui large comments">
+        {% for review in product_reviews %}
+            {% include '@SyliusShop/ProductReview/_single.html.twig' %}
+        {% endfor %}
+    </div>
+{% else %}
+    {{ messages.info('sylius.ui.there_are_no_reviews') }}
+{% endif %}

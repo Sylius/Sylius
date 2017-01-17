@@ -40,13 +40,14 @@ final class PaymentMethodContext implements Context
      */
     public function getPaymentMethodByName($paymentMethodName)
     {
-        $paymentMethod = $this->paymentMethodRepository->findOneByName($paymentMethodName);
+        $paymentMethods = $this->paymentMethodRepository->findByName($paymentMethodName, 'en_US');
 
-        Assert::notNull(
-            $paymentMethod,
-            sprintf('Payment method with name "%s" does not exist', $paymentMethodName)
+        Assert::eq(
+            1,
+            count($paymentMethods),
+            sprintf('%d payment methods has been found with name "%s".', count($paymentMethods), $paymentMethodName)
         );
 
-        return $paymentMethod;
+        return $paymentMethods[0];
     }
 }

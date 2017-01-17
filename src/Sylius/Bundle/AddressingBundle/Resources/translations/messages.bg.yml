@@ -20,6 +20,7 @@ sylius:
             select: Изберете
         province:
             name: Име
+            abbreviation: Съкращение
             select: Изберете
         zone:
             add_member: Добавяне на член

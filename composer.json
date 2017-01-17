@@ -20,85 +20,76 @@
     ],
     "require": {
         "php": "^5.6|^7.0",
+
         "ext-exif": "*",
         "ext-fileinfo": "*",
         "ext-gd": "*",
-        "doctrine/collections": "~1.2",
-        "doctrine/common": "~2.5",
-        "doctrine/data-fixtures": "~1.1.0",
-        "doctrine/doctrine-bundle": "~1.3",
-        "doctrine/doctrine-cache-bundle": "~1.0",
-        "doctrine/doctrine-fixtures-bundle": "~2.2",
-        "doctrine/doctrine-migrations-bundle": "~1.0",
-        "doctrine/orm": "^2.4.8,<2.5",
-        "doctrine/phpcr-odm": "^1.3",
-        "friendsofsymfony/elastica-bundle": "^3.0.2",
-        "friendsofsymfony/oauth-server-bundle": "~1.4",
-        "friendsofsymfony/rest-bundle": "~1.5",
-        "fzaninotto/faker": "~1.2",
+
+        "doctrine/collections": "^1.3",
+        "doctrine/data-fixtures": "^1.1",
+        "doctrine/doctrine-bundle": "^1.6",
+        "doctrine/doctrine-cache-bundle": "^1.3",
+        "doctrine/doctrine-fixtures-bundle": "^2.3",
+        "doctrine/doctrine-migrations-bundle": "^1.2",
+        "doctrine/orm": "^2.5",
+        "friendsofsymfony/oauth-server-bundle": "^1.5",
+        "friendsofsymfony/rest-bundle": "^1.8",
+        "fzaninotto/faker": "^1.6",
         "gedmo/doctrine-extensions": "^2.4.12",
-        "incenteev/composer-parameter-handler": "~2.0",
-        "jackalope/jackalope": "^1.1.4",
-        "jackalope/jackalope-doctrine-dbal": "^1.1.2",
-        "jms/serializer-bundle": "^0.13|^1.0",
-        "jms/translation-bundle": "^1.1",
-        "knplabs/knp-gaufrette-bundle": "~0.1",
+        "incenteev/composer-parameter-handler": "^2.1",
+        "jms/serializer-bundle": "^1.1",
+        "knplabs/knp-gaufrette-bundle": "^0.3",
         "knplabs/knp-menu-bundle": "^2.1",
-        "knplabs/knp-snappy-bundle": "~1.2",
-        "liip/imagine-bundle": "~1.0",
+        "liip/imagine-bundle": "^1.6",
         "ocramius/proxy-manager": "^1.0",
-        "omnipay/omnipay": "~2.3",
-        "payum/omnipay-bridge": "~1.0",
-        "payum/payum": "~1.3",
-        "payum/payum-bundle": "~2.1",
-        "php-http/guzzle6-adapter": "~1.1",
+        "payum/payum": "^1.3",
+        "payum/payum-bundle": "^2.1",
+        "php-http/guzzle6-adapter": "^1.1",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0",
-        "sensio/distribution-bundle": "~3.0",
+        "sensio/distribution-bundle": "^5.0",
         "sonata-project/intl-bundle": "^2.2",
-        "stof/doctrine-extensions-bundle": "~1.1",
-        "swiftmailer/swiftmailer": "~5.0",
-        "symfony-cmf/block-bundle": "~1.2",
-        "symfony-cmf/content-bundle": "~1.2",
-        "symfony-cmf/media-bundle": "~1.2",
-        "symfony-cmf/menu-bundle": "^2.0",
-        "symfony-cmf/routing-bundle": "^1.4",
-        "symfony/monolog-bundle": "^2.8",
-        "symfony/polyfill-iconv": "~1.0",
-        "symfony/polyfill-intl-icu": "~1.0",
-        "symfony/polyfill-mbstring": "~1.0",
-        "symfony/swiftmailer-bundle": "^2.3",
-        "symfony/symfony": "^2.8",
-        "twig/extensions": "~1.0",
-        "twig/twig": "~1.11",
-        "webmozart/assert": "^1.0",
-        "white-october/pagerfanta-bundle": "~1.0",
-        "willdurand/hateoas-bundle": "^0.4|^1.0",
-        "winzou/state-machine-bundle": "~0.2",
-        "zendframework/zend-hydrator": "^1.0|^2.0",
-        "zendframework/zend-stdlib": "^2.0|^3.0"
+        "stof/doctrine-extensions-bundle": "^1.2",
+        "swiftmailer/swiftmailer": "^5.4",
+        "symfony/monolog-bundle": "^3.0",
+        "symfony/polyfill-iconv": "^1.3",
+        "symfony/polyfill-intl-icu": "^1.3",
+        "symfony/polyfill-mbstring": "^1.3",
+        "symfony/swiftmailer-bundle": "^2.4",
+        "symfony/symfony": "^3.2",
+        "twig/extensions": "^1.4",
+        "twig/twig": "^1.28",
+        "webmozart/assert": "^1.1",
+        "white-october/pagerfanta-bundle": "^1.0",
+        "willdurand/hateoas-bundle": "^1.2",
+        "winzou/state-machine-bundle": "^0.3",
+        "zendframework/zend-hydrator": "^2.2",
+        "zendframework/zend-stdlib": "^3.1"
     },
     "require-dev": {
         "akeneo/phpspec-skip-example-extension": "^2.0",
-        "behat/behat": "~3.0",
-        "behat/mink": "~1.6",
-        "behat/mink-browserkit-driver": "~1.2",
-        "behat/mink-extension": "~2.0",
-        "behat/mink-selenium2-driver": "~1.2",
-        "behat/symfony2-extension": "~2.0",
-        "fabpot/php-cs-fixer": "^1.11",
-        "hwi/oauth-bundle": "~0.3",
+        "behat/behat": "^3.2",
+        "behat/mink": "^1.7",
+        "behat/mink-browserkit-driver": "^1.3",
+        "behat/mink-extension": "^2.2",
+        "behat/mink-selenium2-driver": "^1.3",
+        "friends-of-behat/context-service-extension": "^0.3",
+        "friends-of-behat/cross-container-extension": "^0.2",
+        "friends-of-behat/performance-extension": "^1.0",
+        "friends-of-behat/service-container-extension": "^0.3",
+        "friends-of-behat/symfony-extension": "^0.2.1",
+        "friends-of-behat/variadic-extension": "^0.1",
+        "hwi/oauth-bundle": "^0.5",
         "lakion/api-test-case": "^1.0",
-        "lakion/mink-debug-extension": "^1.0.3",
+        "lakion/mink-debug-extension": "^1.2.3",
         "malukenho/kawaii-gherkin": "^0.1",
         "matthiasnoback/symfony-config-test": "^2.0",
         "matthiasnoback/symfony-dependency-injection-test": "^1.0",
         "mikey179/vfsStream": "^1.6",
         "pamil/prophecy-common": "^0.1",
-        "pamil/phpspec-generator-extension": "^0.4",
-        "phpspec/phpspec": "^3.0",
-        "phpunit/phpunit": "~4.1",
+        "phpspec/phpspec": "^3.2",
+        "phpunit/phpunit": "^5.6",
         "se/selenium-server-standalone": "^2.52",
-        "friends-of-behat/performance-extension": "^1.0"
+        "stripe/stripe-php": "^4.1"
     },
     "replace": {
         "sylius/addressing": "self.version",
@@ -107,11 +98,6 @@
         "sylius/api-bundle": "self.version",
         "sylius/attribute": "self.version",
         "sylius/attribute-bundle": "self.version",
-        "sylius/cart": "self.version",
-        "sylius/cart-bundle": "self.version",
-        "sylius/contact": "self.version",
-        "sylius/contact-bundle": "self.version",
-        "sylius/content-bundle": "self.version",
         "sylius/core": "self.version",
         "sylius/core-bundle": "self.version",
         "sylius/currency": "self.version",
@@ -119,8 +105,6 @@
         "sylius/customer": "self.version",
         "sylius/customer-bundle": "self.version",
         "sylius/fixtures-bundle": "self.version",
-        "sylius/flow-bundle": "self.version",
-        "sylius/installer-bundle": "self.version",
         "sylius/inventory": "self.version",
         "sylius/inventory-bundle": "self.version",
         "sylius/locale": "self.version",
@@ -131,8 +115,6 @@
         "sylius/payment": "self.version",
         "sylius/payment-bundle": "self.version",
         "sylius/payum-bundle": "self.version",
-        "sylius/pricing": "self.version",
-        "sylius/pricing-bundle": "self.version",
         "sylius/product": "self.version",
         "sylius/product-bundle": "self.version",
         "sylius/promotion": "self.version",
@@ -140,11 +122,9 @@
         "sylius/registry": "self.version",
         "sylius/resource": "self.version",
         "sylius/resource-bundle": "self.version",
-        "sylius/search-bundle": "self.version",
-        "sylius/settings-bundle": "self.version",
         "sylius/shipping": "self.version",
         "sylius/shipping-bundle": "self.version",
-        "sylius/storage": "self.version",
+        "sylius/shop-bundle": "self.version",
         "sylius/taxation": "self.version",
         "sylius/taxation-bundle": "self.version",
         "sylius/taxonomy": "self.version",
@@ -152,10 +132,7 @@
         "sylius/theme-bundle": "self.version",
         "sylius/ui-bundle": "self.version",
         "sylius/user": "self.version",
-        "sylius/user-bundle": "self.version",
-        "sylius/variation": "self.version",
-        "sylius/variation-bundle": "self.version",
-        "sylius/web-bundle": "self.version"
+        "sylius/user-bundle": "self.version"
     },
     "suggest": {
         "ext-iconv": "For better performance than using Symfony Polyfill Component",
@@ -172,14 +149,16 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
         ],
         "post-update-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
         ]
     },
     "autoload": {
@@ -187,24 +166,32 @@
             "Sylius\\Behat\\": "src/Sylius/Behat/",
             "Sylius\\Bundle\\": "src/Sylius/Bundle/",
             "Sylius\\Component\\": "src/Sylius/Component/"
-        }
+        },
+        "exclude-from-classmap": [
+            "src/Sylius/*/*/Tests/"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
             "Sylius\\Tests\\": "tests/"
-        }
+        },
+        "classmap": ["app/AppKernel.php", "app/AppCache.php"]
     },
     "config": {
         "bin-dir": "bin"
     },
     "extra": {
-        "branch-alias": {
-            "dev-master": "1.0-dev"
-        },
+        "symfony-app-dir": "app",
+        "symfony-bin-dir": "bin",
+        "symfony-var-dir": "var",
+        "symfony-web-dir": "web",
+        "symfony-tests-dir": "tests",
+        "symfony-assets-install": "relative",
         "incenteev-parameters": {
             "file": "app/config/parameters.yml"
         },
-        "symfony-app-dir": "app",
-        "symfony-web-dir": "web"
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
     }
 }

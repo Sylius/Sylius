@@ -20,8 +20,6 @@
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
-
-        <field name="inventoryState" column="inventory_state" type="string" />
     </mapped-superclass>
 
 </doctrine-mapping>

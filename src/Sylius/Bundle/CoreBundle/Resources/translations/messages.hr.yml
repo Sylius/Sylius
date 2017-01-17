@@ -3,11 +3,6 @@
 
 sylius:
     form:
-        action:
-            add_product_configuration:
-                price: Jedinična cijena
-                quantity: Količina
-                variant: Varijanta
         block:
             body: Poruka
             id: ID
@@ -21,17 +16,20 @@ sylius:
             shipping_method: Vrsta dostave
         promotion:
             channels: Kanali
+        promotion_action:
+            add_product_configuration:
+                product: Artikal
         group:
             name: Naziv grupe
             roles: Role (korisnička prava)
         channel:
             taxonomies: Glavne kategorije
             locales: Lokaliteti
-            currency_default: Zadana valuta
             shipping_methods: Načini slanja
             payment_methods: Načini plaćanja
             tax_zone_default: Zadana porezna zona
         image:
+            code: ISO kod
             file: Fotografija
         locale:
             code: ISO kod
@@ -48,8 +46,8 @@ sylius:
             id: ID
             title: Naslov
         product:
+            images: Slike
             restricted_zone: Ograničena zona pristupa
-            shipping_category: Kategorija pošiljke
             short_description: Kratak opis
             variant_selection_method: Način odabira varijante
             channels: Kanali
@@ -59,15 +57,7 @@ sylius:
             code: ISO kod
         product_variant:
             tax_category: Kategorija artikla
-        settings:
-            general:
-                currency: Zadana valuta
-                locale: Jezik
-                meta_description: Opis (Meta Description)
-                meta_keywords: Ključne riječi (Meta Keywords)
-                title: Naslov stranice
-            taxation:
-                default_tax_zone: Zadana porezna zona
+            shipping_category: Kategorija pošiljke
         shipment_filter:
             created_at_from: Od
             created_at_to: Do
@@ -80,7 +70,9 @@ sylius:
         shipping_method:
             zone: Regija
         taxon:
+            code: ISO kod
             file: Odaberite sliku
+            images: Slike
         taxonomy:
             file: Odaberite sliku
         user:
@@ -98,7 +90,6 @@ sylius:
         variant:
             depth: Dubina
             height: Visina
-            images: Slike
             on_hand: Treutno dostupno
             price: Cijena
             sku: KOD (SKU)
@@ -112,19 +103,59 @@ sylius:
         product_association_type:
             name: Naziv grupe
         promotion_rule:
-            contains_taxon:
-                count: Brojač
-            taxon:
-                taxons: Taksoni
             total_of_items_from_taxon:
                 amount: Iznos
-    email:
-        order_confirmation:
-            name: Potvrda narudžbe
-        order_comment:
-            name: Komentar na narudžbu
-        shipment_confirmation:
-            name: Potvrda dostave
-        user_confirmation:
-            name: Potvrda korisnika
-            subject: Dobrodošli na našu trgovinu
+        payment_method:
+            channels: Kanali
+    installer:
+        extensions:
+            header: Ekstenzije
+            accelerator:
+                header: Akcelerator
+            apc: APC
+            ctype: Ctype
+            gd: sylius.extensions.gd
+            help: Instaliraj i omoguči %extension% ekstenziju.
+            iconv: Iconv
+            icu: ICU
+            intl: Intl
+            json_encode: JSON
+            mbstring: Multibyte String
+            "off": false
+            "on": true
+            pcre: PCRE
+            pdo: PDO
+            php_xml: PHP-XML
+            session_start: Sesija
+            simplexml_import_dom: SimpleXML
+            token_get_all: Tokenizer
+        filesystem:
+            header: File system 
+            cache:
+                header: cache
+            exists: Postoji
+            logs:
+                header: Logovi
+            not_exists: Ne postoji
+            not_writable: Nije moguće pisati
+            parameters:
+                header: parameters.yml
+            vendors: vendors
+            writable: moguće pisati
+        settings:
+            header: PHP verzija i postavke
+            any: Bilo koje
+            detect_unicode: detect_unicode
+            magic_quotes_gpc: magic_quotes_gpc
+            non_deprecated: non deprecated
+            "off": false
+            "on": true
+            register_globals: register_globals
+            session:
+                auto_start: session.auto_start
+            short_open_tag: short_open_tag
+            timezone: Vremenska zona
+            timezone_deprecated:
+                header: Zastarjela vremenska zona
+                help: 'Vremenska zona %timezone% je zastarjela. Ispravite vaš php.ini dokument (popis zastarjelih zona http://php.net/manual/en/timezones.others.php).'
+            version: Verzija PHP-a

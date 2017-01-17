@@ -1,2 +1,16 @@
 * :doc:`/cookbook/installation-commands`
-* :doc:`/cookbook/registry`
+* :doc:`/cookbook/custom-model`
+* :doc:`/cookbook/custom-email`
+* :doc:`/cookbook/custom-promotion-rule`
+* :doc:`/cookbook/custom-promotion-action`
+* :doc:`/cookbook/paypal`
+* :doc:`/cookbook/stripe`
+* :doc:`/cookbook/api`
+* :doc:`/cookbook/disabling-shop-admin-api`
+* :doc:`/cookbook/images`
+* :doc:`/cookbook/images-gridfs`
+* :doc:`/cookbook/checkout`
+* :doc:`/cookbook/embedding-products`
+* :doc:`/cookbook/taxons-menu`
+* :doc:`/cookbook/facebook-login`
+* :doc:`/cookbook/cron-jobs`

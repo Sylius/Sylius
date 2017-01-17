@@ -10,12 +10,21 @@ sylius:
             options: 选项
             meta_keywords: Meta关键字：
             meta_description: META描述
-            taxons: 分类
         product_variant:
             available_on: 可用
             available_until: 有效期至
+            name: 名称
         association_type:
             name: 名称
+            translations: 翻译
         association:
             type: 关联类型
             product: 相关的产品
+        variant:
+            name: 名称
+        option:
+            name: 名称
+            values: 可能的值
+        option_value:
+            add_value: 添加值
+            value: 值

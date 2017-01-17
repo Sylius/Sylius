@@ -1,6 +1,6 @@
 @locales
 Feature: Switching the current locale
-    In order to see prices in my preferred locale
+    In order to browse shop in my preferred locale
     As a Customer
     I want to be able to switch locales
 

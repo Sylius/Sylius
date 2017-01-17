@@ -1,0 +1,15 @@
+<div class="ui hidden divider"></div>
+<div class="ui two column stackable grid">
+    <div class="column">
+        {{ headers.default(header|trans, 'cart', 'sylius.ui.edit_your_items_apply_coupon_or_proceed_to_the_checkout'|trans) }}
+    </div>
+    <div class="middle aligned column">
+        <form method="post" action="{{ path('sylius_shop_cart_clear') }}" >
+            <input type="hidden" name="_method" value="DELETE" />
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token(cart.id) }}" />
+            <button type="submit" id="sylius-cart-clear" class="ui right floated basic red button">
+                <i class="icon remove"></i> {{ 'sylius.ui.clear_cart'|trans }}
+            </button>
+        </form>
+    </div>
+</div>

@@ -2,27 +2,27 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    group:
-        name:
-            max: 'Nazwa grupy nie może być dłuższa niż {{ limit }} znaków.'
-            min: 'Nazwa grupy nie może być krótsza niż {{ limit }} znaków.'
-            not_blank: Proszę podać nazwę grupy.
     customer:
         first_name:
-            max: 'Imię nie może być dłuższe niż {{ limit }} znaków.'
-            min: 'Imię nie może mieć mniej niż {{ limit }} znaków.'
+            max: Imię nie może być dłuższe niż {{ limit }} znaków.
+            min: Imię nie może mieć mniej niż {{ limit }} znaków.
             not_blank: Proszę podać swoje imię.
         last_name:
-            max: 'Nazwisko nie może być dłuższe niż {{ limit }} znaków.'
-            min: 'Nazwisko nie może mieć mniej niż {{ limit }} znaków.'
+            max: Nazwisko nie może być dłuższe niż {{ limit }} znaków.
+            min: Nazwisko nie może mieć mniej niż {{ limit }} znaków.
             not_blank: Proszę podać swoje nazwisko.
         gender:
             not_blank: Proszę wybrać płeć.
         email:
             already_used: Ten e-mail jest już używany, proszę się zalogować lub użyć opcji przypominania hasła.
-            max: 'E-mail nie może być dłuższy niż {{ limit }} znaków.'
-            min: 'E-mail musi mieć co najmniej {{ limit }} znaków.'
+            max: E-mail nie może być dłuższy niż {{ limit }} znaków.
+            min: E-mail musi mieć co najmniej {{ limit }} znaków.
             not_blank: Proszę podać swój e-mail.
             invalid: Ten e-mail jest nieprawidłowy.
             unique: Ten e-mail jest już używany.
             registered: Ten e-mail jest już zarejestrowany, proszę się zalogować lub użyć opcji przypominania hasła.
+    customer_group:
+        name:
+            max: Nazwa grupy klientów nie może być dłuższa niż {{ limit }} znaków.
+            min: Nazwa grupy klientów musi mieć co najmniej {{ limit }} znaków.
+            not_blank: Wprowadź nazwę grupy klientów.

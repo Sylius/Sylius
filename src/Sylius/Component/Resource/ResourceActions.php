@@ -21,4 +21,8 @@ final class ResourceActions
     const CREATE = 'create';
     const UPDATE = 'update';
     const DELETE = 'delete';
+
+    private function __construct()
+    {
+    }
 }

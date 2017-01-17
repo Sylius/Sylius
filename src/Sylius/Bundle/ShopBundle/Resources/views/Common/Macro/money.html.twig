@@ -1,0 +1,15 @@
+{%- macro format(amount, currency_code) -%}
+    {{ amount|sylius_format_money(currency_code, sylius.localeCode) }}
+{%- endmacro -%}
+
+{%- macro convertAndFormat(amount) -%}
+    {% from _self import format %}
+
+    {{- format(amount|sylius_convert_money(sylius.channel.baseCurrency.code, sylius.currencyCode), sylius.currencyCode) }}
+{%- endmacro -%}
+
+{%- macro calculatePrice(variant) -%}
+    {% from _self import convertAndFormat %}
+
+    {{- convertAndFormat(variant|sylius_calculate_price({'channel': sylius.channel})) }}
+{%- endmacro -%}

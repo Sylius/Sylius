@@ -17,7 +17,7 @@ use Sylius\Bundle\LocaleBundle\Templating\Helper\LocaleHelperInterface;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class LocaleExtension extends \Twig_Extension
+final class LocaleExtension extends \Twig_Extension
 {
     /**
      * @var LocaleHelperInterface

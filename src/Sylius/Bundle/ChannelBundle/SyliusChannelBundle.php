@@ -19,11 +19,9 @@ use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
- * Channels bundle.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SyliusChannelBundle extends AbstractResourceBundle
+final class SyliusChannelBundle extends AbstractResourceBundle
 {
     /**
      * {@inheritdoc}
@@ -41,8 +39,6 @@ class SyliusChannelBundle extends AbstractResourceBundle
     public function build(ContainerBuilder $container)
     {
         parent::build($container);
-
-        $container->addCompilerPass(new RegisterChannelFactoryPass());
 
         $container->addCompilerPass(new CompositeChannelContextPass());
         $container->addCompilerPass(new CompositeRequestResolverPass());

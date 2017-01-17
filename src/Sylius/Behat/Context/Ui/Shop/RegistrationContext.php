@@ -14,14 +14,14 @@ namespace Sylius\Behat\Context\Ui\Shop;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Shop\Account\DashboardPageInterface;
+use Sylius\Behat\Page\Shop\Account\LoginPageInterface;
 use Sylius\Behat\Page\Shop\Account\ProfileUpdatePageInterface;
-use Sylius\Behat\Page\Shop\Account\VerificationPageInterface;
 use Sylius\Behat\Page\Shop\Account\RegisterPageInterface;
+use Sylius\Behat\Page\Shop\Account\VerificationPageInterface;
 use Sylius\Behat\Page\Shop\HomePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
-use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Behat\Service\SecurityServiceInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Webmozart\Assert\Assert;
 
@@ -46,6 +46,11 @@ class RegistrationContext implements Context
     private $homePage;
 
     /**
+     * @var LoginPageInterface
+     */
+    private $loginPage;
+
+    /**
      * @var RegisterPageInterface
      */
     private $registerPage;
@@ -61,16 +66,6 @@ class RegistrationContext implements Context
     private $profileUpdatePage;
 
     /**
-     * @var SecurityServiceInterface
-     */
-    private $securityService;
-
-    /**
-     * @var CurrentPageResolverInterface
-     */
-    private $currentPageResolver;
-
-    /**
      * @var NotificationCheckerInterface
      */
     private $notificationChecker;
@@ -79,37 +74,34 @@ class RegistrationContext implements Context
      * @param SharedStorageInterface $sharedStorage
      * @param DashboardPageInterface $dashboardPage
      * @param HomePageInterface $homePage
+     * @param LoginPageInterface $loginPage
      * @param RegisterPageInterface $registerPage
      * @param VerificationPageInterface $verificationPage
      * @param ProfileUpdatePageInterface $profileUpdatePage
-     * @param SecurityServiceInterface $securityService
-     * @param CurrentPageResolverInterface $currentPageResolver
      * @param NotificationCheckerInterface $notificationChecker
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         DashboardPageInterface $dashboardPage,
         HomePageInterface $homePage,
+        LoginPageInterface $loginPage,
         RegisterPageInterface $registerPage,
         VerificationPageInterface $verificationPage,
         ProfileUpdatePageInterface $profileUpdatePage,
-        SecurityServiceInterface $securityService,
-        CurrentPageResolverInterface $currentPageResolver,
         NotificationCheckerInterface $notificationChecker
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->dashboardPage = $dashboardPage;
         $this->homePage = $homePage;
+        $this->loginPage = $loginPage;
         $this->registerPage = $registerPage;
         $this->verificationPage = $verificationPage;
         $this->profileUpdatePage = $profileUpdatePage;
-        $this->securityService = $securityService;
-        $this->currentPageResolver = $currentPageResolver;
         $this->notificationChecker = $notificationChecker;
     }
 
     /**
-     * @Given /^I want to(?:| again) register a new account$/
+     * @When /^I want to(?:| again) register a new account$/
      */
     public function iWantToRegisterANewAccount()
     {
@@ -243,7 +235,7 @@ class RegistrationContext implements Context
     {
         Assert::true(
             $this->homePage->hasLogoutButton(),
-            'I should be on home page and, also i should be able to sign out.'
+            'I should be able to sign out.'
         );
     }
 
@@ -256,6 +248,39 @@ class RegistrationContext implements Context
             $this->homePage->hasLogoutButton(),
             'I should not be logged in.'
         );
+    }
+
+    /**
+     * @Then I should be able to log in as :email with :password password
+     */
+    public function iShouldBeAbleToLogInAsWithPassword($email, $password)
+    {
+        $this->iLogInAsWithPassword($email, $password);
+        $this->iShouldBeLoggedIn();
+    }
+
+    /**
+     * @Then I should not be able to log in as :email with :password password
+     */
+    public function iShouldNotBeAbleToLogInAsWithPassword($email, $password)
+    {
+        $this->iLogInAsWithPassword($email, $password);
+
+        Assert::true(
+            $this->loginPage->hasValidationErrorWith('Error Account is disabled.'),
+            'I should see validation error.'
+        );
+    }
+
+    /**
+     * @When I log in as :email with :password password
+     */
+    public function iLogInAsWithPassword($email, $password)
+    {
+        $this->loginPage->open();
+        $this->loginPage->specifyUsername($email);
+        $this->loginPage->specifyPassword($password);
+        $this->loginPage->logIn();
     }
 
     /**
@@ -273,12 +298,10 @@ class RegistrationContext implements Context
     }
 
     /**
-     * @Then /^(my) account should be verified$/
+     * @Then /^my account should be verified$/
      */
-    public function myAccountShouldBeVerified(ShopUserInterface $user)
+    public function myAccountShouldBeVerified()
     {
-        $this->securityService->logIn($user);
-
         Assert::true(
             $this->dashboardPage->isVerified(),
             'My account should be verified.'
@@ -291,6 +314,17 @@ class RegistrationContext implements Context
     public function iUseItToVerify(ShopUserInterface $user)
     {
         $this->verificationPage->verifyAccount($user->getEmailVerificationToken());
+    }
+
+    /**
+     * @When I verify my account using link sent to :customer
+     */
+    public function iVerifyMyAccount(CustomerInterface $customer)
+    {
+        $user = $customer->getUser();
+        Assert::notNull($user, 'No account for given customer');
+
+        $this->iUseItToVerify($user);
     }
 
     /**
@@ -334,7 +368,7 @@ class RegistrationContext implements Context
     }
 
     /**
-     * @Then I should be unable to resend the verification email
+     * @Then I should not be able to resend the verification email
      */
     public function iShouldBeUnableToResendVerificationEmail()
     {

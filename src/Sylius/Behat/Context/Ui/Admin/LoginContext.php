@@ -14,6 +14,7 @@ namespace Sylius\Behat\Context\Ui\Admin;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Account\LoginPageInterface;
 use Sylius\Behat\Page\Admin\DashboardPageInterface;
+use Sylius\Component\Core\Model\AdminUserInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -51,7 +52,6 @@ final class LoginContext implements Context
 
     /**
      * @When I specify the username as :username
-     * @When I do not specify the user name
      */
     public function iSpecifyTheUsername($username = null)
     {
@@ -119,6 +119,14 @@ final class LoginContext implements Context
             $this->dashboardPage->isOpen(),
             'I should be able to log in.'
         );
+    }
+
+    /**
+     * @When /^(this administrator) logs in using "([^"]+)" password$/
+     */
+    public function theyLogIn(AdminUserInterface $adminUser, $password)
+    {
+        $this->logInAgain($adminUser->getUsername(), $password);
     }
 
     /**

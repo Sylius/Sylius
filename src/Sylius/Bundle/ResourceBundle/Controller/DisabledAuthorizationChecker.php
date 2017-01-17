@@ -16,7 +16,7 @@ namespace Sylius\Bundle\ResourceBundle\Controller;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class DisabledAuthorizationChecker implements AuthorizationCheckerInterface
+final class DisabledAuthorizationChecker implements AuthorizationCheckerInterface
 {
     /**
      * {@inheritdoc}

@@ -6,59 +6,42 @@ Configurable fixtures for Symfony2 applications.
 Sylius
 ------
 
-**Sylius** - Modern ecommerce for Symfony2. Visit [Sylius.org](http://sylius.org).
+![Sylius](http://sylius.org/assets/img/logo.png)
 
-Tests
------
-
-```bash
-$ composer install
-$ bin/phpspec run -f pretty
-$ bin/phpunit --testdox
-```
+Sylius is an Open Source eCommerce solution built from decoupled components with powerful API and the highest quality code. [Read more on sylius.org](http://sylius.org).
 
 Documentation
 -------------
 
-Documentation is available on [**docs.sylius.org**](http://docs.sylius.org).
+Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/bundles/SyliusFixturesBundle/index.html).
 
 Contributing
 ------------
 
-All informations about contributing to Sylius can be found on [this page](http://docs.sylius.org/en/latest/contributing/index.html).
+[This page](http://docs.sylius.org/en/latest/contributing/index.html) contains all the information about contributing to Sylius.
 
-Sylius twitter account
-----------------------
+Follow Sylius' Development
+--------------------------
 
-If you want to keep up with updates, [follow the official Sylius account on twitter](http://twitter.com/Sylius).
+If you want to keep up with the updates and latest features, follow us on the following channels:
+
+* [Official Blog](https://sylius.org/blog)
+* [Sylius on Twitter](https://twitter.com/Sylius)
+* [Sylius on Facebook](https://facebook.com/SyliusEcommerce)
 
 Bug tracking
 ------------
 
-This bundle uses [GitHub issues](https://github.com/Sylius/Sylius/issues).
+Sylius uses [GitHub issues](https://github.com/Sylius/Sylius/issues).
 If you have found bug, please create an issue.
-
-Versioning
-----------
-
-Releases will be numbered with the format `major.minor.patch`.
-
-And constructed with the following guidelines.
-
-* Breaking backwards compatibility bumps the major.
-* New additions without breaking backwards compatibility bumps the minor.
-* Bug fixes and misc changes bump the patch.
-
-For more information on SemVer, please visit [semver.org website](http://semver.org/).  
-This versioning method is the same for all **Sylius** bundles and applications.
 
 MIT License
 -----------
 
-License can be found [here](https://github.com/Sylius/SyliusFixturesBundle/blob/master/Resources/meta/LICENSE).
+License can be found [here](https://github.com/Sylius/Sylius/blob/master/LICENSE).
 
 Authors
 -------
 
 The bundle was originally created by [Kamil Kokot](http://kamil.kokot.me).
-See the list of [contributors](https://github.com/Sylius/SyliusFixturesBundle/contributors).
+See the list of [contributors](https://github.com/Sylius/Sylius/contributors).

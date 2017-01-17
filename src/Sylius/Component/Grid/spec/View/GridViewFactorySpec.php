@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Grid\View;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Grid\Data\DataProviderInterface;
 use Sylius\Component\Grid\Definition\Grid;
 use Sylius\Component\Grid\Parameters;
@@ -21,8 +20,6 @@ use Sylius\Component\Grid\View\GridViewFactory;
 use Sylius\Component\Grid\View\GridViewFactoryInterface;
 
 /**
- * @mixin GridViewFactory
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class GridViewFactorySpec extends ObjectBehavior
@@ -34,7 +31,7 @@ final class GridViewFactorySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Grid\View\GridViewFactory');
+        $this->shouldHaveType(GridViewFactory::class);
     }
 
     function it_implements_grid_view_factory_interface()
@@ -44,22 +41,14 @@ final class GridViewFactorySpec extends ObjectBehavior
 
     function it_uses_data_provider_to_create_a_view_with_data_and_definition(
         DataProviderInterface $dataProvider,
-        Grid $grid,
-        Parameters $parameters
+        Grid $grid
     ) {
-        $expectedGridView = new GridView(['foo', 'bar'], $grid->getWrappedObject(), $parameters->getWrappedObject());
+        $parameters = new Parameters();
+
+        $expectedGridView = new GridView(['foo', 'bar'], $grid->getWrappedObject(), $parameters);
 
         $dataProvider->getData($grid, $parameters)->willReturn(['foo', 'bar']);
 
-        $this->create($grid, $parameters)->shouldBeSameGridViewAs($expectedGridView);
-    }
-
-    public function getMatchers()
-    {
-        return [
-            'beSameGridViewAs' => function ($subject, $key) {
-                return serialize($subject) === serialize($key);
-            },
-        ];
+        $this->create($grid, $parameters)->shouldBeLike($expectedGridView);
     }
 }

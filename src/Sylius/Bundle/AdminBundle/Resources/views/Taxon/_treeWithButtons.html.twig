@@ -1,0 +1,46 @@
+{% import '@SyliusUi/Macro/buttons.html.twig' as buttons %}
+{% import _self as tree %}
+
+{% macro render(taxons) %}
+    {% import '@SyliusUi/Macro/buttons.html.twig' as buttons %}
+    {% import _self as tree %}
+
+    {% for taxon in taxons if taxon.id != null %}
+        <div class="item" data-id="{{ taxon.id }}">
+            <i class="folder icon"></i>
+            <div class="content">
+                <div class="header">
+                    <a href="{{ path('sylius_admin_product_per_taxon_index', {'taxonId': taxon.id}) }}">
+                        {{ taxon.name }}
+                    </a>
+                    <br>
+                    <div class="ui mini buttons" style="margin-top: 5px;">
+                        {{ buttons.create(path('sylius_admin_taxon_create_for_parent', { 'id': taxon.id }), 'sylius.ui.add'|trans) }}
+                        {{ buttons.edit(path('sylius_admin_taxon_update', { 'id': taxon.id }), null, null, false) }}
+                        {{ buttons.delete(path('sylius_admin_taxon_delete', { 'id': taxon.id }), null, false, taxon.id) }}
+                        <a class="ui icon button sylius-taxon-move-up" data-url="{{ path('sylius_admin_ajax_taxon_move', { id: taxon.id }) }}" data-id="{{ taxon.id }}" data-position="{{ taxon.position }}">
+                            <i class="icon arrow up"></i>
+                        </a>
+                        <a class="ui icon button sylius-taxon-move-down" data-url="{{ path('sylius_admin_ajax_taxon_move', { id: taxon.id }) }}" data-id="{{ taxon.id }}" data-position="{{ taxon.position }}">
+                            <i class="icon arrow down"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="list">
+                    {{ tree.render(taxon.children) }}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endmacro %}
+
+<a href="{{ path('sylius_admin_taxon_create') }}" class="ui large fluid labeled icon primary button">
+    <i class="plus icon"></i>
+    {{ 'sylius.ui.create'|trans }}
+</a>
+
+<div class="ui segment">
+    <div class="ui list sylius-sortable-list">
+        {{ tree.render(taxons) }}
+    </div>
+</div>

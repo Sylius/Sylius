@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\UserBundle\Form\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\UserBundle\Form\Model\ChangePassword;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -20,7 +21,7 @@ final class ChangePasswordSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\UserBundle\Form\Model\ChangePassword');
+        $this->shouldHaveType(ChangePassword::class);
     }
 
     function it_has_current_password()

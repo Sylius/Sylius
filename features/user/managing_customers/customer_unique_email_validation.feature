@@ -12,6 +12,6 @@ Feature: Customer uniqueness of email validation
         Given the store has customer "f.baggins@example.com"
         And I want to create a new customer
         When I specify their email as "f.baggins@example.com"
-        And I try to add it
+        And I try to add them
         Then I should be notified that email must be unique
         And there should still be only one customer with email "f.baggins@example.com"

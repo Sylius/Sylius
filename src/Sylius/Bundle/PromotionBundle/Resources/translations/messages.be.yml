@@ -3,35 +3,6 @@
 
 sylius:
     form:
-        action:
-            fixed_discount_configuration:
-                amount: Сума
-            percentage_discount_configuration:
-                percentage: Адсотак
-            shipping_discount_configuration:
-                percentage: Адсотак
-            type: Тып
-        rule:
-            taxonomy_configuration:
-                taxons: Катэгорыі
-                exclude: Выключыць
-            contains_product_configuration:
-                variants: Тавары
-                exclude: Выключыць
-            cart_quantity_configuration:
-                count: Колькасць
-            item_total_configuration:
-                amount: Сума
-            nth_order_configuration:
-                nth: N-нны
-            shipping_country_configuration:
-                country: Краіна
-            type: Тып
-        coupon:
-            usage_limit: Ліміт карыстання
-        coupon_generate_instruction:
-            amount: Колькасць
-            usage_limit: Ліміт карыстання
         promotion:
             actions: Дзеянні
             add_action: Дадаць дзеянне
@@ -43,3 +14,20 @@ sylius:
             rules: Правілы
             starts_at: Пачатак
             usage_limit: Ліміт карыстання
+        promotion_action:
+            fixed_discount_configuration:
+                amount: Сума
+            type: Тып
+        promotion_coupon:
+            usage_limit: Ліміт карыстання
+        promotion_coupon_generator_instruction:
+            amount: Сума
+            usage_limit: Ліміт карыстання
+        promotion_rule:
+            cart_quantity_configuration:
+                count: Колькасць
+            item_total_configuration:
+                amount: Сума
+            shipping_country_configuration:
+                country: Краіна
+            type: Тып

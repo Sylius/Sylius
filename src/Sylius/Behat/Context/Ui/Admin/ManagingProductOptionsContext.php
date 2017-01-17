@@ -16,7 +16,7 @@ use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\ProductOption\CreatePageInterface;
 use Sylius\Behat\Page\Admin\ProductOption\UpdatePageInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
-use Sylius\Component\Product\Model\OptionInterface;
+use Sylius\Component\Product\Model\ProductOptionInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -55,8 +55,7 @@ final class ManagingProductOptionsContext implements Context
         CreatePageInterface $createPage,
         UpdatePageInterface $updatePage,
         CurrentPageResolverInterface $currentPageResolver
-    )
-    {
+    ) {
         $this->indexPage = $indexPage;
         $this->createPage = $createPage;
         $this->updatePage = $updatePage;
@@ -74,7 +73,7 @@ final class ManagingProductOptionsContext implements Context
     /**
      * @Given I want to modify the :productOption product option
      */
-    public function iWantToModifyAProductOption(OptionInterface $productOption)
+    public function iWantToModifyAProductOption(ProductOptionInterface $productOption)
     {
         $this->updatePage->open(['id' => $productOption->getId()]);
     }
@@ -150,14 +149,6 @@ final class ManagingProductOptionsContext implements Context
     }
 
     /**
-     * @When I delete the :optionValue option value of this product option
-     */
-    public function iDeleteTheOptionValueOfThisProductOption($optionValue)
-    {
-        $this->updatePage->removeOptionValue($optionValue);
-    }
-
-    /**
      * @Then the product option :productOptionName should appear in the registry
      * @Then the product option :productOptionName should be in the registry
      */
@@ -217,7 +208,7 @@ final class ManagingProductOptionsContext implements Context
      * @Then /^(this product option) should still be named "([^"]+)"$/
      * @Then /^(this product option) name should be "([^"]+)"$/
      */
-    public function thisProductOptionNameShouldStillBe(OptionInterface $productOption, $productOptionName)
+    public function thisProductOptionNameShouldStillBe(ProductOptionInterface $productOption, $productOptionName)
     {
         $this->iBrowseProductOptions();
 
@@ -267,8 +258,8 @@ final class ManagingProductOptionsContext implements Context
     {
         $foundRows = $this->indexPage->countItems();
 
-        Assert::eq(
-            $amount,
+        Assert::same(
+            (int) $amount,
             $foundRows,
             '%2$s rows with product options should appear on page, %s rows has been found'
         );
@@ -277,7 +268,7 @@ final class ManagingProductOptionsContext implements Context
     /**
      * @Then /^(this product option) should have the "([^"]*)" option value$/
      */
-    public function thisProductOptionShouldHaveTheOptionValue(OptionInterface $productOption, $optionValue)
+    public function thisProductOptionShouldHaveTheOptionValue(ProductOptionInterface $productOption, $optionValue)
     {
         $this->iWantToModifyAProductOption($productOption);
 
@@ -288,15 +279,31 @@ final class ManagingProductOptionsContext implements Context
     }
 
     /**
-     * @Then /^(this product option) should not have the "([^"]*)" option value$/
+     * @Then the first product option in the list should have :field :value
      */
-    public function thisProductOptionShouldNotHaveTheOptionValue(OptionInterface $productOption, $optionValue)
+    public function theFirstProductOptionInTheListShouldHave($field, $value)
     {
-        $this->iWantToModifyAProductOption($productOption);
+        $actualValue = $this->indexPage->getColumnFields($field)[0];
 
-        Assert::false(
-            $this->updatePage->isThereOptionValue($optionValue),
-            sprintf('%s is a value of this product option, but it should not.', $optionValue)
+        Assert::same(
+            $actualValue,
+            $value,
+            sprintf('Expected first product option\'s %s to be "%s", but it is "%s".', $field, $value, $actualValue)
+        );
+    }
+
+    /**
+     * @Then the last product option in the list should have :field :value
+     */
+    public function theLastProductOptionInTheListShouldHave($field, $value)
+    {
+        $fields = $this->indexPage->getColumnFields($field);
+        $actualValue = end($fields);
+
+        Assert::same(
+            $actualValue,
+            $value,
+            sprintf('Expected last product option\'s %s to be "%s", but it is "%s".', $field, $value, $actualValue)
         );
     }
 }

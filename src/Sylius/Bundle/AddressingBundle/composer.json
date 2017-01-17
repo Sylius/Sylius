@@ -22,16 +22,20 @@
     "require": {
         "php": "^5.6|^7.0",
 
-        "stof/doctrine-extensions-bundle": "~1.1",
+        "stof/doctrine-extensions-bundle": "^1.2",
         "sylius/addressing": "^1.0",
         "sylius/resource-bundle": "^1.0",
-        "symfony/framework-bundle": "^2.8"
+        "symfony/framework-bundle": "^3.2"
     },
     "require-dev": {
-        "phpspec/phpspec": "^3.0",
-        "doctrine/orm": "^2.4.8,<2.5",
-        "symfony/form": "^2.8",
-        "symfony/validator": "^2.8"
+        "doctrine/orm": "^2.5",
+        "phpspec/phpspec": "^3.2",
+        "symfony/form": "^3.2",
+        "symfony/validator": "^3.2",
+        "phpunit/phpunit": "^5.6",
+        "symfony/browser-kit": "^3.2",
+        "incenteev/composer-parameter-handler": "~2.0",
+        "polishsymfonycommunity/symfony-mocker-container": "^1.0"
     },
     "config": {
         "bin-dir": "bin"
@@ -40,7 +44,10 @@
         "psr-4": { "Sylius\\Bundle\\AddressingBundle\\": "" }
     },
     "autoload-dev": {
-        "psr-4": { "Sylius\\Bundle\\AddressingBundle\\spec\\": "spec/" }
+        "psr-4": {
+            "Sylius\\Bundle\\AddressingBundle\\spec\\": "spec/",
+            "AppBundle\\": "test/src/AppBundle/"
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -53,6 +60,9 @@
     "extra": {
         "branch-alias": {
             "dev-master": "1.0-dev"
+        },
+        "incenteev-parameters": {
+            "file": "test/app/config/parameters.yml"
         }
     }
 }

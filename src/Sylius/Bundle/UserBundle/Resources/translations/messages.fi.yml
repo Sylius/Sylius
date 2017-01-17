@@ -5,4 +5,19 @@ sylius:
     form:
         user:
             email: Sähköpostiosoite
+            enabled: Aktiivinen
+            password:
+                label: Salasana
+                confirmation: Todentaminen
+            remember_me: Muista minut
+            shipping_address: Toimitusosoite
             username: Käyttäjänimi
+        user_filter:
+            query: Haku
+        user_change_password:
+            confirmation: Vahvistus
+            current: Nykyinen salasana
+            new: Uusi salasana
+        user_reset_password:
+            confirmation: Vahvistus
+            new: Uusi salasana

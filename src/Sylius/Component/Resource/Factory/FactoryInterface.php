@@ -12,15 +12,11 @@
 namespace Sylius\Component\Resource\Factory;
 
 /**
- * Should be implemented by services responsible for creating new instance of a resource.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface FactoryInterface
 {
     /**
-     * Create a new resource.
-     *
      * @return object
      */
     public function createNew();

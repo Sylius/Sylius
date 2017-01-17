@@ -13,9 +13,11 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\CoreBundle\Test\Services\PaymentMethodNameToGatewayConverterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Component\Payment\Model\PaymentMethodInterface;
+use Sylius\Bundle\CoreBundle\Test\Services\PaymentMethodNameToGatewayConverterInterface;
+use Sylius\Component\Core\Formatter\StringInflector;
+use Sylius\Component\Core\Model\PaymentMethodInterface;
+use Sylius\Component\Payment\Model\PaymentMethodTranslationInterface;
 use Sylius\Component\Payment\Repository\PaymentMethodRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
@@ -42,6 +44,11 @@ final class PaymentContext implements Context
     private $paymentMethodFactory;
 
     /**
+     * @var FactoryInterface
+     */
+    private $paymentMethodTranslationFactory;
+
+    /**
      * @var PaymentMethodNameToGatewayConverterInterface
      */
     private $paymentMethodNameToGatewayConverter;
@@ -55,6 +62,7 @@ final class PaymentContext implements Context
      * @param SharedStorageInterface $sharedStorage
      * @param PaymentMethodRepositoryInterface $paymentMethodRepository
      * @param FactoryInterface $paymentMethodFactory
+     * @param FactoryInterface $paymentMethodTranslationFactory
      * @param PaymentMethodNameToGatewayConverterInterface $paymentMethodNameToGatewayConverter
      * @param ObjectManager $objectManager
      */
@@ -62,23 +70,37 @@ final class PaymentContext implements Context
         SharedStorageInterface $sharedStorage,
         PaymentMethodRepositoryInterface $paymentMethodRepository,
         FactoryInterface $paymentMethodFactory,
+        FactoryInterface $paymentMethodTranslationFactory,
         PaymentMethodNameToGatewayConverterInterface $paymentMethodNameToGatewayConverter,
         ObjectManager $objectManager
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->paymentMethodRepository = $paymentMethodRepository;
         $this->paymentMethodFactory = $paymentMethodFactory;
+        $this->paymentMethodTranslationFactory = $paymentMethodTranslationFactory;
         $this->paymentMethodNameToGatewayConverter = $paymentMethodNameToGatewayConverter;
         $this->objectManager = $objectManager;
     }
 
     /**
-     * @Given the store allows paying :paymentMethodName
-     * @Given the store allows paying with :paymentMethodName
+     * @Given the store (also )allows paying (with ):paymentMethodName
+     * @Given the store (also )allows paying with :paymentMethodName at position :position
      */
-    public function storeAllowsPaying($paymentMethodName)
+    public function storeAllowsPaying($paymentMethodName, $position = null)
     {
-        $this->createPaymentMethodFromNameAndCode($paymentMethodName, 'PM_'.$paymentMethodName, 'Payment method');
+        $this->createPaymentMethod($paymentMethodName, 'PM_'.$paymentMethodName, 'Payment method', true, $position);
+    }
+
+    /**
+     * @Given /^the store allows paying (\w+) for (all channels)$/
+     */
+    public function storeAllowsPayingForAllChannels($paymentMethodName, array $channels)
+    {
+        $paymentMethod = $this->createPaymentMethod($paymentMethodName, StringInflector::nameToUppercaseCode($paymentMethodName), 'Payment method', false);
+
+        foreach ($channels as $channel) {
+            $paymentMethod->addChannel($channel);
+        }
     }
 
     /**
@@ -86,7 +108,22 @@ final class PaymentContext implements Context
      */
     public function theStoreHasAPaymentMethodWithACode($paymentMethodName, $paymentMethodCode)
     {
-        $this->createPaymentMethodFromNameAndCode($paymentMethodName, $paymentMethodCode);
+        $this->createPaymentMethod($paymentMethodName, $paymentMethodCode);
+    }
+
+    /**
+     * @Given /^(this payment method) is named "([^"]+)" in the "([^"]+)" locale$/
+     */
+    public function thisPaymentMethodIsNamedIn(PaymentMethodInterface $paymentMethod, $name, $locale)
+    {
+        /** @var PaymentMethodTranslationInterface $translation */
+        $translation = $this->paymentMethodTranslationFactory->createNew();
+        $translation->setLocale($locale);
+        $translation->setName($name);
+
+        $paymentMethod->addTranslation($translation);
+
+        $this->objectManager->flush();
     }
 
     /**
@@ -114,7 +151,7 @@ final class PaymentContext implements Context
      */
     public function theStoreHasPaymentMethodNotAssignedToAnyChannel($paymentMethodName)
     {
-        $this->createPaymentMethodFromNameAndCode($paymentMethodName, 'PM_'.$paymentMethodName, 'Payment method', false);
+        $this->createPaymentMethod($paymentMethodName, 'PM_'.$paymentMethodName, 'Payment method', false);
     }
 
     /**
@@ -122,22 +159,26 @@ final class PaymentContext implements Context
      * @param string $code
      * @param bool $addForCurrentChannel
      * @param string $description
+     *
+     * @return PaymentMethodInterface
      */
-    private function createPaymentMethodFromNameAndCode($name, $code, $description = '', $addForCurrentChannel = true)
+    private function createPaymentMethod($name, $code, $description = '', $addForCurrentChannel = true, $position = null)
     {
         /** @var PaymentMethodInterface $paymentMethod */
         $paymentMethod = $this->paymentMethodFactory->createNew();
         $paymentMethod->setName(ucfirst($name));
         $paymentMethod->setCode($code);
+        $paymentMethod->setPosition($position);
         $paymentMethod->setGateway($this->paymentMethodNameToGatewayConverter->convert($name));
         $paymentMethod->setDescription($description);
 
         if ($addForCurrentChannel && $this->sharedStorage->has('channel')) {
-            $channel = $this->sharedStorage->get('channel');
-            $channel->addPaymentMethod($paymentMethod);
+            $paymentMethod->addChannel($this->sharedStorage->get('channel'));
         }
 
         $this->sharedStorage->set('payment_method', $paymentMethod);
         $this->paymentMethodRepository->add($paymentMethod);
+
+        return $paymentMethod;
     }
 }

@@ -1,7 +1,7 @@
 Users API
 =========
 
-Sylius users API endpoint is `/api/users` and it allows for browsing, creating & editing user data.
+Sylius users API endpoint is `/api/v1/users` and it allows for browsing, creating & editing user data.
 
 Index of all users
 ------------------
@@ -10,7 +10,7 @@ To browse all users available in the store you should call the following GET req
 
 .. code-block:: text
 
-    GET /api/users/
+    GET /api/v1/users/
 
 Parameters
 ~~~~~~~~~~
@@ -60,7 +60,7 @@ Response will contain a paginated list of users.
                     "email_canonical": "chelsie.witting@example.com",
                     "enabled": true,
                     "expired": false,
-                    "groups": [],
+                    "group": [],
                     "id": 481,
                     "locked": false,
                     "password": "EbOLtGHYxJKotA+bdb9BElhXPd8qZsnlo8CjDdCk+qFR22EEZJoOTntBX/M5GUXw2vnEqOKIEVPaJr66yxXqqQ==",
@@ -80,7 +80,7 @@ You can view a single user by executing the following request:
 
 .. code-block:: text
 
-    GET /api/users/481
+    GET /api/v1/users/481
 
 Response
 ~~~~~~~~
@@ -97,7 +97,7 @@ Response
         "email_canonical": "chelsie.witting@example.com",
         "enabled": true,
         "expired": false,
-        "groups": [],
+        "group": [],
         "id": 481,
         "locked": false,
         "password": "EbOLtGHYxJKotA+bdb9BElhXPd8qZsnlo8CjDdCk+qFR22EEZJoOTntBX/M5GUXw2vnEqOKIEVPaJr66yxXqqQ==",
@@ -114,14 +114,14 @@ To create a new user, you can execute the following request:
 
 .. code-block:: text
 
-    POST /api/users/
+    POST /api/v1/users/
 
 Parameters
 ~~~~~~~~~~
 
-firstName
+first_name
     Firstname of the customer
-lastName
+last_name
     Lastname of the customer
 email
     User e-mail
@@ -145,7 +145,7 @@ Response
         "email_canonical": "chelsie.witting@example.com",
         "enabled": true,
         "expired": false,
-        "groups": [],
+        "group": [],
         "id": 481,
         "locked": false,
         "password": "EbOLtGHYxJKotA+bdb9BElhXPd8qZsnlo8CjDdCk+qFR22EEZJoOTntBX/M5GUXw2vnEqOKIEVPaJr66yxXqqQ==",
@@ -162,18 +162,18 @@ You can update an existing user using PUT or PATCH method:
 
 .. code-block:: text
 
-    PUT /api/users/481
+    PUT /api/v1/users/481
 
 .. code-block:: text
 
-    PATCH /api/users/481
+    PATCH /api/v1/users/481
 
 Parameters
 ~~~~~~~~~~
 
-firstName
+first_name
     Firstname of the customer
-lastName
+last_name
     Lastname of the customer
 email
     User e-mail
@@ -196,7 +196,7 @@ You can delete (soft) a user from the system by making the following DELETE call
 
 .. code-block:: text
 
-    DELETE /api/users/24
+    DELETE /api/v1/users/24
 
 Response
 ~~~~~~~~
@@ -212,7 +212,7 @@ You can create a new password resetting request by calling the following API end
 
 .. code-block:: text
 
-    POST /api/password-resetting-requests/
+    POST /api/v1/password-resetting-requests/
 
 Parameters
 ~~~~~~~~~~
@@ -238,7 +238,7 @@ The successful response will contain the user object with a confirmation token a
         "email_canonical": "sylius@example.com",
         "enabled": true,
         "expired": false,
-        "groups": [],
+        "group": [],
         "id": 1,
         "last_login": "2014-12-08T13:08:02+0000",
         "locked": false,

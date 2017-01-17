@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="sylius.installer.checker.command_directory" class="Sylius\Bundle\CoreBundle\Installer\Checker\CommandDirectoryChecker">
+            <argument type="service" id="filesystem" />
+        </service>
+        <service id="sylius.installer.checker.sylius_requirements" class="Sylius\Bundle\CoreBundle\Installer\Checker\SyliusRequirementsChecker">
+            <argument type="service" id="sylius.requirements" />
+        </service>
+
+        <service id="sylius.commands_provider.database_setup" class="Sylius\Bundle\CoreBundle\Installer\Provider\DatabaseSetupCommandsProvider">
+            <argument type="service" id="doctrine" />
+        </service>
+
+        <service id="sylius.setup.currency" class="Sylius\Bundle\CoreBundle\Installer\Setup\CurrencySetup">
+            <argument type="service" id="sylius.repository.currency" />
+            <argument type="service" id="sylius.factory.currency" />
+        </service>
+        <service id="sylius.setup.locale" class="Sylius\Bundle\CoreBundle\Installer\Setup\LocaleSetup">
+            <argument type="service" id="sylius.repository.locale" />
+            <argument type="service" id="sylius.factory.locale" />
+            <argument>%locale%</argument>
+        </service>
+        <service id="sylius.setup.channel" class="Sylius\Bundle\CoreBundle\Installer\Setup\ChannelSetup">
+            <argument type="service" id="sylius.repository.channel" />
+            <argument type="service" id="sylius.factory.channel" />
+            <argument type="service" id="sylius.manager.channel" />
+        </service>
+    </services>
+</container>

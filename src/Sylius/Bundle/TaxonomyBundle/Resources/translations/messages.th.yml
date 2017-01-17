@@ -7,6 +7,6 @@ sylius:
             description: คำอธิบาย
             name: ชื่อ
             parent: หมวดแม่
-            permalink: ลิงค์ถาวร
+            slug: Slug
         taxonomy:
             name: ชื่อ

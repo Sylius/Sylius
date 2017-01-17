@@ -1,8 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-    payment:
-        complete: A fizetés befejeződött.
-        cancel: A fizetés meg lett szakítva.
-        transition_fail: A művelet nem hajtható végre, tekintettel a a fizetés jelenlegi állapotára

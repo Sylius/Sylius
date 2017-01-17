@@ -27,9 +27,17 @@ Feature: Receiving percentage discount promotion on order
         And my discount should be "-$20.00"
 
     @ui
-    Scenario: Receiving percentage discount is proportional to items values
+    Scenario: Receiving percentage discount is correct for two items with different price
         Given the store has a product "Vintage Watch" priced at "$1000.00"
         When I add product "PHP T-Shirt" to the cart
         And I add product "Vintage Watch" to the cart
         Then my cart total should be "$880.00"
         And my discount should be "-$220.00"
+
+    @ui
+    Scenario: Receiving percentage discount is proportional to items values
+        Given the store has a product "Symfony T-Shirt" priced at "$100.00"
+        When I add 11 products "PHP T-Shirt" to the cart
+        And I add product "Symfony T-Shirt" to the cart
+        Then my cart total should be "$960.00"
+        And my discount should be "-$240.00"

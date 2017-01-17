@@ -4,7 +4,7 @@
 sylius:
     form:
         currency:
-            exchange_rate: Обменный курс
-            enabled: Активен
             base: Базовая валюта
             code: Название
+            enabled: Активен
+            exchange_rate: Обменный курс

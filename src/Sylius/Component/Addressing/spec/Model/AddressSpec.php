@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Addressing\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Addressing\Model\Address;
 use Sylius\Component\Addressing\Model\AddressInterface;
 
 /**
@@ -21,7 +22,7 @@ final class AddressSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Addressing\Model\Address');
+        $this->shouldHaveType(Address::class);
     }
 
     function it_implements_Sylius_address_interface()
@@ -124,6 +125,17 @@ final class AddressSpec extends ObjectBehavior
 
         $this->setProvinceCode('DU');
         $this->getProvinceCode()->shouldReturn('DU');
+    }
+
+    function it_has_no_province_name_by_default()
+    {
+        $this->getProvinceName()->shouldReturn(null);
+    }
+
+    function its_province_name_is_mutable()
+    {
+        $this->setProvinceName('Utah');
+        $this->getProvinceName()->shouldReturn('Utah');
     }
 
     function it_has_no_company_by_default()

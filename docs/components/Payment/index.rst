@@ -7,7 +7,7 @@ It ships with default **Payment**, **PaymentMethod** and **CreditCard** models.
 
 .. note::
    This component does not provide any payment gateway.
-   Integrate it with `Payum <http://payum.forma-dev.com/>`_.
+   Integrate it with `Payum <https://github.com/Payum/Payum/>`_.
 
 .. toctree::
    :maxdepth: 2

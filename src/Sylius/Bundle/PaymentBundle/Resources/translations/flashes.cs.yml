@@ -1,8 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-    payment:
-        complete: Platba byla dokončena.
-        cancel: Platba byla zrušena.
-        transition_fail: Akci nelze provést vzhledem k současnému stavu platby

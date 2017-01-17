@@ -27,7 +27,7 @@ class UserRepository extends BaseUserRepository implements UserRepositoryInterfa
         $queryBuilder = $this->createQueryBuilder('o');
 
         $queryBuilder
-            ->leftJoin('o.customer', 'customer')
+            ->innerJoin('o.customer', 'customer')
             ->andWhere($queryBuilder->expr()->eq('customer.emailCanonical', ':email'))
             ->setParameter('email', $email)
         ;

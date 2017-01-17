@@ -3,8 +3,10 @@ sylius:
         admin:
             main:
                 catalog:
+                    association_types: Association types
                     attributes: Attributes
                     header: Catalog
+                    inventory: Inventory
                     options: Options
                     products: Products
                     taxons: Taxons
@@ -13,23 +15,23 @@ sylius:
                     channels: Channels
                     countries: Countries
                     currencies: Currencies
+                    exchange_rates: Exchange rates
                     header: Configuration
                     locales: Locales
                     payment_methods: Payment methods
+                    shipping_categories: Shipping categories
                     shipping_methods: Shipping methods
                     tax_categories: Tax categories
                     tax_rates: Tax rates
                     zones: Zones
                 marketing:
                     header: Marketing
+                    product_reviews: Product reviews
                     promotions: Promotions
                 customers:
                     customers: Customers
+                    groups: Groups
                     header: Customer
                 sales:
                     header: Sales
                     orders: Orders
-                content:
-                    header: Content
-                    static_contents: Static contents
-                    routes: Routes

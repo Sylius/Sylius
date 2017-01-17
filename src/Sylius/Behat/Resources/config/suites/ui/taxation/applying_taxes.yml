@@ -4,7 +4,7 @@
 default:
     suites:
         ui_applying_taxes:
-            contexts_as_services:
+            contexts_services:
                 - sylius.behat.context.hook.doctrine_orm
 
                 - sylius.behat.context.transform.zone
@@ -14,12 +14,14 @@ default:
                 - sylius.behat.context.transform.product
                 - sylius.behat.context.transform.product_variant
                 - sylius.behat.context.transform.shared_storage
+                - sylius.behat.context.transform.shipping_method
                 - sylius.behat.context.transform.tax_category
 
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.currency
                 - sylius.behat.context.setup.geographical
                 - sylius.behat.context.setup.product
+                - sylius.behat.context.setup.promotion
                 - sylius.behat.context.setup.shipping
                 - sylius.behat.context.setup.taxation
                 - sylius.behat.context.setup.user

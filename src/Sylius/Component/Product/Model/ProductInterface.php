@@ -11,14 +11,14 @@
 
 namespace Sylius\Component\Product\Model;
 
-use Sylius\Component\Association\Model\AssociableInterface;
+use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Attribute\Model\AttributeSubjectInterface;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\SlugAwareInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 use Sylius\Component\Resource\Model\ToggleableInterface;
 use Sylius\Component\Resource\Model\TranslatableInterface;
-use Sylius\Component\Variation\Model\VariableInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -26,15 +26,107 @@ use Sylius\Component\Variation\Model\VariableInterface;
  */
 interface ProductInterface extends
     AttributeSubjectInterface,
+    CodeAwareInterface,
+    ResourceInterface,
     SlugAwareInterface,
     TimestampableInterface,
     ToggleableInterface,
-    ProductTranslationInterface,
-    AssociableInterface,
-    CodeAwareInterface,
-    TranslatableInterface,
-    VariableInterface
+    TranslatableInterface
 {
+    /**
+     * @return string
+     */
+    public function getName();
+
+    /**
+     * @param string $name
+     */
+    public function setName($name);
+
+    /**
+     * @return string
+     */
+    public function getDescription();
+
+    /**
+     * @param string $description
+     */
+    public function setDescription($description);
+
+    /**
+     * @return string
+     */
+    public function getMetaKeywords();
+
+    /**
+     * @param string $metaKeywords
+     */
+    public function setMetaKeywords($metaKeywords);
+
+    /**
+     * @return string
+     */
+    public function getMetaDescription();
+
+    /**
+     * @param string $metaDescription
+     */
+    public function setMetaDescription($metaDescription);
+
+    /**
+     * @return bool
+     */
+    public function hasVariants();
+
+    /**
+     * @return Collection|ProductVariantInterface[]
+     */
+    public function getVariants();
+
+    /**
+     * @param ProductVariantInterface $variant
+     */
+    public function addVariant(ProductVariantInterface $variant);
+
+    /**
+     * @param ProductVariantInterface $variant
+     */
+    public function removeVariant(ProductVariantInterface $variant);
+
+    /**
+     * @param ProductVariantInterface $variant
+     *
+     * @return bool
+     */
+    public function hasVariant(ProductVariantInterface $variant);
+
+    /**
+     * @return bool
+     */
+    public function hasOptions();
+
+    /**
+     * @return Collection|ProductOptionInterface[]
+     */
+    public function getOptions();
+
+    /**
+     * @param ProductOptionInterface $option
+     */
+    public function addOption(ProductOptionInterface $option);
+
+    /**
+     * @param ProductOptionInterface $option
+     */
+    public function removeOption(ProductOptionInterface $option);
+
+    /**
+     * @param ProductOptionInterface $option
+     *
+     * @return bool
+     */
+    public function hasOption(ProductOptionInterface $option);
+
     /**
      * @return bool
      */
@@ -46,7 +138,7 @@ interface ProductInterface extends
     public function getAvailableOn();
 
     /**
-     * @param null|\DateTime $availableOn
+     * @param \DateTime|null $availableOn
      */
     public function setAvailableOn(\DateTime $availableOn = null);
 
@@ -56,7 +148,7 @@ interface ProductInterface extends
     public function getAvailableUntil();
 
     /**
-     * @param null|\DateTime $availableUntil
+     * @param \DateTime|null $availableUntil
      */
     public function setAvailableUntil(\DateTime $availableUntil = null);
 
@@ -74,9 +166,14 @@ interface ProductInterface extends
      * @param ProductAssociationInterface $association
      */
     public function removeAssociation(ProductAssociationInterface $association);
-    
+
     /**
      * @return bool
      */
     public function isSimple();
+
+    /**
+     * @return bool
+     */
+    public function isConfigurable();
 }

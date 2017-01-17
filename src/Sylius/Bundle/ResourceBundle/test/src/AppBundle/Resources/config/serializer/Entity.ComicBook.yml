@@ -1,0 +1,26 @@
+AppBundle\Entity\ComicBook:
+    exclusion_policy: ALL
+    properties:
+        id:
+            expose: true
+            type: integer
+            xml_attribute: true
+        author:
+            expose: true
+            type: string
+        authorFirstName:
+            expose: true
+            type: string
+            since_version: 1.1
+        authorLastName:
+            expose: true
+            type: string
+            since_version: 1.1
+        title:
+            expose: true
+            type: string
+    virtual_properties:
+        getAuthor:
+            serialized_name: author
+            since_version: 1.0
+            until_version: 1.1

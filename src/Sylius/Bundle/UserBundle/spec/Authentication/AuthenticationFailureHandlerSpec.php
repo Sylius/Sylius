@@ -14,7 +14,6 @@ namespace spec\Sylius\Bundle\UserBundle\Authentication;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\UserBundle\Authentication\AuthenticationFailureHandler;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
@@ -23,8 +22,6 @@ use Symfony\Component\Security\Http\Authentication\DefaultAuthenticationFailureH
 use Symfony\Component\Security\Http\HttpUtils;
 
 /**
- * @mixin AuthenticationFailureHandler
- *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 final class AuthenticationFailureHandlerSpec extends ObjectBehavior
@@ -36,7 +33,7 @@ final class AuthenticationFailureHandlerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\UserBundle\Authentication\AuthenticationFailureHandler');
+        $this->shouldHaveType(AuthenticationFailureHandler::class);
     }
 
     function it_extends_default_authentication_failure_handler()
@@ -49,7 +46,7 @@ final class AuthenticationFailureHandlerSpec extends ObjectBehavior
         $this->shouldImplement(AuthenticationFailureHandlerInterface::class);
     }
 
-    function it_returns_json_response_if_it_was_ajax_call(
+    function it_returns_json_response_if_request_is_xml_based(
         Request $request,
         AuthenticationException $authenticationException
     ) {

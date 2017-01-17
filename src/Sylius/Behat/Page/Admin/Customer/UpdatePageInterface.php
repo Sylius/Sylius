@@ -67,4 +67,9 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
      * @return bool
      */
     public function isSubscribedToTheNewsletter();
+
+    /**
+     * @return string
+     */
+    public function getGroupName();
 }

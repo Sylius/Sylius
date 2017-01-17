@@ -18,8 +18,6 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Processor;
 
 /**
- * @mixin SymfonyConfigurationProcessor
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class SymfonyConfigurationProcessorSpec extends ObjectBehavior
@@ -31,7 +29,7 @@ final class SymfonyConfigurationProcessorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Configuration\SymfonyConfigurationProcessor');
+        $this->shouldHaveType(SymfonyConfigurationProcessor::class);
     }
 
     function it_implements_configuration_processor_interface()

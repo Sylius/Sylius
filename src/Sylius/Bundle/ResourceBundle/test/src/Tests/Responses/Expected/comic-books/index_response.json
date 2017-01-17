@@ -1,0 +1,32 @@
+
+{
+    "page": 1,
+    "limit": 10,
+    "pages": 1,
+    "total": 2,
+    "_links": {
+        "self": {
+            "href": "\/v1\/comic-books\/?page=1&limit=10"
+        },
+        "first": {
+            "href": "\/v1\/comic-books\/?page=1&limit=10"
+        },
+        "last": {
+            "href": "\/v1\/comic-books\/?page=1&limit=10"
+        }
+    },
+    "_embedded": {
+      "items": [
+        {
+          "id": @integer@,
+          "author": "Andrea Sorrentino",
+          "title": "Old Man Logan"
+        },
+        {
+          "id": @integer@,
+          "author": "Brian Michael Bendis",
+          "title": "Civil War II"
+        }
+      ]
+    }
+}

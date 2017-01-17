@@ -8,29 +8,26 @@
 
 {% block content %}
 <div class="ui stackable two column grid">
-    <div class="column">
+    <div class="twelve wide column">
         {% include '@SyliusAdmin/Order/Show/_header.html.twig' %}
     </div>
-    <div class="right aligned column">
+    <div class="four wide right aligned column">
         {% include '@SyliusAdmin/Order/Show/_actions.html.twig' %}
     </div>
 </div>
-<div class="ui divider"></div>
-
-{% include '@SyliusAdmin/Order/Breadcrumb/_show.html.twig' %}
-
+{% include '@SyliusAdmin/Order/Show/_breadcrumb.html.twig' %}
 <div class="ui stackable grid">
     <div class="twelve wide column">
         <div class="ui segment">
             {% include '@SyliusAdmin/Order/Show/_summary.html.twig' %}
         </div>
+        {% include '@SyliusAdmin/Order/Show/_notes.html.twig' %}
     </div>
     <div class="four wide column">
         {% include '@SyliusAdmin/Order/Show/_customer.html.twig' %}
         {% include '@SyliusAdmin/Order/Show/_addresses.html.twig' %}
         {% include '@SyliusAdmin/Order/Show/_payments.html.twig' %}
         {% include '@SyliusAdmin/Order/Show/_shipments.html.twig' %}
-        {% include '@SyliusAdmin/Order/Show/_notes.html.twig' %}
     </div>
 </div>
 {% endblock %}

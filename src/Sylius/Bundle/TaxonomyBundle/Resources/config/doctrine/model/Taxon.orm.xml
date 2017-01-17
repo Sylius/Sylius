@@ -17,7 +17,7 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <mapped-superclass name="Sylius\Component\Taxonomy\Model\Taxon">
+    <mapped-superclass name="Sylius\Component\Taxonomy\Model\Taxon" table="sylius_taxon">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
@@ -29,6 +29,7 @@
         <many-to-one field="parent" target-entity="Sylius\Component\Taxonomy\Model\TaxonInterface" inversed-by="children">
             <join-column name="parent_id" referenced-column-name="id" nullable="true" on-delete="CASCADE" />
             <gedmo:tree-parent />
+            <gedmo:sortable-group />
         </many-to-one>
 
         <one-to-many field="children" target-entity="Sylius\Component\Taxonomy\Model\TaxonInterface" mapped-by="parent">
@@ -36,13 +37,9 @@
                 <cascade-all />
             </cascade>
             <order-by>
-                <order-by-field name="left" direction="ASC" />
+                <order-by-field name="position" direction="ASC" />
             </order-by>
         </one-to-many>
-
-        <order-by>
-            <order-by-field name="left" direction="ASC" />
-        </order-by>
 
         <field name="code" column="code" type="string" unique="true" />
         <field name="left" column="tree_left" type="integer">
@@ -53,6 +50,9 @@
         </field>
         <field name="level" column="tree_level" type="integer">
             <gedmo:tree-level />
+        </field>
+        <field name="position" type="integer">
+            <gedmo:sortable-position />
         </field>
 
         <gedmo:tree type="nested" />

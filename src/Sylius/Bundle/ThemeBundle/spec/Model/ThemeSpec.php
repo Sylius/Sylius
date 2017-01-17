@@ -18,8 +18,6 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeScreenshot;
 
 /**
- * @mixin Theme
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class ThemeSpec extends ObjectBehavior
@@ -31,7 +29,7 @@ final class ThemeSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Model\Theme');
+        $this->shouldHaveType(Theme::class);
     }
 
     function it_implements_theme_interface()

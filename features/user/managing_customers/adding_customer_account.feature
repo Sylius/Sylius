@@ -12,7 +12,7 @@ Feature: Adding a new customer account
         Given I want to create a new customer account
         When I specify their email as "l.skywalker@gmail.com"
         And I choose create account option
-        And I specify its password as "psw123"
+        And I specify their password as "psw123"
         And I add them
         Then I should be notified that it has been successfully created
         And the customer "l.skywalker@gmail.com" should appear in the store
@@ -23,7 +23,7 @@ Feature: Adding a new customer account
         Given the store has customer "Frodo Baggins" with email "f.baggins@example.com"
         And I want to edit this customer
         When I choose create account option
-        And I specify its password as "killSauron"
+        And I specify their password as "killSauron"
         And I save my changes
         Then I should be notified that it has been successfully edited
         And the customer "f.baggins@example.com" should appear in the store

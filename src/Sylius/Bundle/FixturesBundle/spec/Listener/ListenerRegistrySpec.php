@@ -19,8 +19,6 @@ use Sylius\Bundle\FixturesBundle\Listener\ListenerRegistry;
 use Sylius\Bundle\FixturesBundle\Listener\ListenerRegistryInterface;
 
 /**
- * @mixin ListenerRegistry
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class ListenerRegistrySpec extends ObjectBehavior

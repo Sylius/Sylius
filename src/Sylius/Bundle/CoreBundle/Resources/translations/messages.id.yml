@@ -3,11 +3,6 @@
 
 sylius:
     form:
-        action:
-            add_product_configuration:
-                price: Harga Satuan
-                quantity: Kuantitas
-                variant: Varian
         block:
             body: Body
             id: ID
@@ -19,13 +14,15 @@ sylius:
                 different_billing_address: Menggunakan alamat berbeda untuk penagihan?
             payment_method: Metode pembayaran
             shipping_method: Metode pengiriman
+        promotion:
+            channels: Saluran
         group:
             name: Nama
             roles: Peran
         channel:
-            currency_default: Mata uang default
             tax_zone_default: Standar Zona Pajak
         image:
+            code: Kode
             file: Gambar
         locale:
             code: Kode
@@ -39,25 +36,18 @@ sylius:
             id: ID
             title: Judul
         product:
+            images: Gambar
             restricted_zone: Zona Terbatas
-            shipping_category: Kategori Pengiriman
             short_description: Deskripsi singkat
             variant_selection_method: Metode Pilih Varian
+            channels: Saluran
             enabled: Diaktifkan
         product_filter:
             name: Nama
             code: Kode
         product_variant:
             tax_category: Kategori Pajak
-        settings:
-            general:
-                currency: Mata uang default
-                locale: Bahasa
-                meta_description: Meta Deskripsi
-                meta_keywords: Meta Kata Kunci
-                title: Judul Halaman
-            taxation:
-                default_tax_zone: Standar Zona Pajak
+            shipping_category: Kategori Pengiriman
         shipment_filter:
             created_at_from: Dari
             created_at_to: Untuk
@@ -70,7 +60,9 @@ sylius:
         shipping_method:
             zone: Zona
         taxon:
+            code: Kode
             file: Pilih Gambar
+            images: Gambar
         taxonomy:
             file: Pilih Gambar
         user:
@@ -88,7 +80,6 @@ sylius:
         variant:
             depth: Tebal
             height: Tinggi
-            images: Gambar
             on_hand: Stok
             price: Harga
             sku: SKU
@@ -98,3 +89,15 @@ sylius:
             email: Email
         product_association_type:
             name: Nama
+        promotion_rule:
+            product:
+                products: Produk
+        payment_method:
+            channels: Saluran
+    installer:
+        extensions:
+            "off": false
+            "on": true
+        settings:
+            "off": false
+            "on": true

@@ -11,35 +11,39 @@
 
 namespace spec\Sylius\Component\Core\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ShippingMethod;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
-use Sylius\Component\Shipping\Model\ShippingMethod;
+use Sylius\Component\Shipping\Model\ShippingMethod as BaseShippingMethod;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
 final class ShippingMethodSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Model\ShippingMethod');
+        $this->shouldHaveType(ShippingMethod::class);
     }
 
-    function it_should_implement_Sylius_core_shipping_method_interface()
+    function it_implements_a_shipping_method_interface()
     {
         $this->shouldImplement(ShippingMethodInterface::class);
     }
 
-    function it_should_extend_Sylius_shipping_method_mapped_superclass()
+    function it_extends_a_shipping_method()
     {
-        $this->shouldHaveType(ShippingMethod::class);
+        $this->shouldHaveType(BaseShippingMethod::class);
     }
 
-    function it_should_not_have_any_zone_defined_by_default()
+    function it_does_not_have_any_zone_defined_by_default()
     {
         $this->getZone()->shouldReturn(null);
     }
 
-    function it_should_allow_defining_zone(ZoneInterface $zone)
+    function it_allows_defining_zone(ZoneInterface $zone)
     {
         $this->setZone($zone);
         $this->getZone()->shouldReturn($zone);
@@ -49,5 +53,41 @@ final class ShippingMethodSpec extends ObjectBehavior
     {
         $this->setTaxCategory($category);
         $this->getTaxCategory()->shouldReturn($category);
+    }
+
+    function it_has_channels_collection(ChannelInterface $firstChannel, ChannelInterface $secondChannel)
+    {
+        $this->addChannel($firstChannel);
+        $this->addChannel($secondChannel);
+
+        $this->getChannels()->shouldBeSameAs(new ArrayCollection([$firstChannel, $secondChannel]));
+    }
+
+    function it_can_add_and_remove_channels(ChannelInterface $channel)
+    {
+        $this->addChannel($channel);
+        $this->hasChannel($channel)->shouldReturn(true);
+
+        $this->removeChannel($channel);
+        $this->hasChannel($channel)->shouldReturn(false);
+    }
+
+    public function getMatchers()
+    {
+        return [
+            'beSameAs' => function ($subject, $key) {
+                if (!$subject instanceof Collection || !$key instanceof Collection) {
+                    return false;
+                }
+
+                for ($i = 0; $i < $subject->count(); $i++) {
+                    if ($subject->get($i) !== $key->get($i)->getWrappedObject()) {
+                        return false;
+                    }
+                }
+
+                return true;
+            },
+        ];
     }
 }

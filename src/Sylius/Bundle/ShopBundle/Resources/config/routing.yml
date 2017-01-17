@@ -1,6 +1,14 @@
 # This file is a part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius_shop_ajax:
+    resource: "@SyliusShopBundle/Resources/config/routing/ajax.yml"
+    prefix: /ajax
+
+sylius_shop_partial:
+    resource: "@SyliusShopBundle/Resources/config/routing/partial.yml"
+    prefix: /_partial
+
 sylius_shop_homepage:
     path: /
     defaults:
@@ -9,11 +17,15 @@ sylius_shop_homepage:
 sylius_shop_security:
     resource: "@SyliusShopBundle/Resources/config/routing/security.yml"
 
-sylius_shop_taxon:
-    resource: "@SyliusShopBundle/Resources/config/routing/taxon.yml"
+sylius_shop_user:
+    resource: "@SyliusShopBundle/Resources/config/routing/shop_user.yml"
 
 sylius_shop_product:
     resource: "@SyliusShopBundle/Resources/config/routing/product.yml"
+
+sylius_shop_product_review:
+    resource: "@SyliusShopBundle/Resources/config/routing/product_review.yml"
+    prefix: /products/{slug}/reviews
 
 sylius_shop_cart:
     resource: "@SyliusShopBundle/Resources/config/routing/cart.yml"
@@ -22,6 +34,10 @@ sylius_shop_cart:
 sylius_shop_checkout:
     resource: "@SyliusShopBundle/Resources/config/routing/checkout.yml"
     prefix: /checkout
+
+sylius_shop_contact_request:
+    resource: "@SyliusShopBundle/Resources/config/routing/contact.yml"
+    prefix: /contact
 
 sylius_shop_order:
     resource: "@SyliusShopBundle/Resources/config/routing/order.yml"
@@ -37,33 +53,12 @@ sylius_shop_payum:
 sylius_shop_switch_currency:
     path: /switch-currency/{code}
     defaults:
-        _controller: sylius.controller.shop.currency:switchCurrencyAction
+        _controller: sylius.controller.shop.currency_switch:switchAction
 
 sylius_shop_switch_locale:
     path: /switch-locale/{code}
     defaults:
-        _controller: sylius.controller.shop.locale:switchLocaleAction
-
-sylius_shop_partial:
-    resource: "@SyliusShopBundle/Resources/config/routing/partial.yml"
-    prefix: /_partial
-
-sylius_shop_verification:
-    prefix: /verify
-    resource: "@SyliusShopBundle/Resources/config/routing/verification.yml"
-
-sylius_sitemap:
-    path: /sitemap.{_format}
-    methods: [GET]
-    defaults:
-        _controller: sylius.controller.sitemap:showAction
-        _format: xml
-    requirements:
-        _format: xml
-
-# Have to be the last one!
-sylius_shop_static_content:
-    resource: "@SyliusShopBundle/Resources/config/routing/static_content.yml"
+        _controller: sylius.controller.shop.locale_switch:switchAction
 
 _liip_imagine:
     resource: "@LiipImagineBundle/Resources/config/routing.xml"

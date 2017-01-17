@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\UserBundle\Form\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\UserBundle\Form\Model\PasswordReset;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -20,7 +21,7 @@ final class PasswordResetSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\UserBundle\Form\Model\PasswordReset');
+        $this->shouldHaveType(PasswordReset::class);
     }
 
     function it_has_new_password()

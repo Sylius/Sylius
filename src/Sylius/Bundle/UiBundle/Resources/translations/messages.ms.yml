@@ -3,8 +3,8 @@
 
 sylius:
     ui:
-        city: Bandar
-        company: Syarikat
-        "no": false
-        postcode: Poskod
-        "yes": true
+        city: 'Bandar'
+        company: 'Syarikat'
+        country: 'Negara'
+        postcode: 'Poskod'
+        type: 'Jenis'

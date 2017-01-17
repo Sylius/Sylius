@@ -1,0 +1,25 @@
+{% extends layout ?: 'SyliusPayumBundle::layout.html.twig' %}
+
+{% block content %}
+    {{ parent() }}
+
+    <form action="{{ actionUrl|default('') }}" method="POST">
+        <script
+                src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                data-key="{{ publishable_key }}"
+                data-image="{{ model.image|default("") }}"
+                data-name="{{ model.name|default("") }}"
+                data-description="{{ model.description|default("") }}"
+                data-amount="{{ model.amount }}"
+                data-currency="{{ model.currency|default("USD") }}">
+        </script>
+    </form>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        $(function() {$('form .stripe-button-el').click();});
+    </script>
+{% endblock %}

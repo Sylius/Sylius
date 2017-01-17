@@ -3,16 +3,22 @@
 
 sylius:
     form:
-        group:
-            name: Naam
-            roles: Rollen
         customer:
             first_name: Voornaam
-            groups: Groepen
+            group: Groep
             last_name: Achternaam
             email: E-mail
             phone_number: Telefoonnummer
+            gender: Geslacht
+            birthday: Verjaardag
             billing_address: Factuuradres
             different_billing_address: Gebruik een ander factuuradres?
+            only_customer_registration: Account aanmaken?
+            subscribed_to_newsletter: Abonneer op de nieuwsbrief
+        customer_group:
+            name: Naam
+            roles: Rollen
     gender:
         unknown: Onbekend
+        male: Man
+        female: Vrouw

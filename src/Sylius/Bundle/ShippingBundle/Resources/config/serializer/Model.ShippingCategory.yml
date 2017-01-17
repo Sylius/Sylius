@@ -33,5 +33,6 @@ Sylius\Component\Shipping\Model\ShippingCategory:
             route: sylius_api_shipping_category_show
             parameters:
                 id: expr(object.getId())
+                version: 1
             exclusion:
                 groups: [Detailed]

@@ -97,11 +97,11 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'amount' => '#sylius_promotion_coupon_generate_instruction_amount',
-            'usage_limit' => '#sylius_promotion_coupon_generate_instruction_usageLimit',
-            'expires_at' => '#sylius_promotion_coupon_generate_instruction_expiresAt',
-            'code_length' => '#sylius_promotion_coupon_generate_instruction_codeLength',
+            'amount' => '#sylius_promotion_coupon_generator_instruction_amount',
+            'code_length' => '#sylius_promotion_coupon_generator_instruction_codeLength',
+            'expires_at' => '#sylius_promotion_coupon_generator_instruction_expiresAt',
             'form' => '.two.column.stackable.grid',
+            'usage_limit' => '#sylius_promotion_coupon_generator_instruction_usageLimit',
         ]);
     }
 
@@ -115,12 +115,13 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
      */
     private function checkValidationMessageFor($element, $message)
     {
-        $foundElement = $this->getValidatedField($this->getElement($element));
-        if (null === $foundElement) {
-            throw new ElementNotFoundException($this->getSession(), 'Element', 'css', '#sylius_promotion_coupon_instruction_amount');
+        $foundElement = $this->getElement($element);
+        $validatedField = $this->getValidatedField($foundElement);
+        if (null === $validatedField) {
+            throw new ElementNotFoundException($this->getSession(), 'Element', 'css', $foundElement);
         }
 
-        return $message === $foundElement->find('css', '.pointing')->getText();
+        return $message === $validatedField->find('css', '.sylius-validation-error')->getText();
     }
 
     /**

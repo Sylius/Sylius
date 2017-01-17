@@ -9,8 +9,14 @@ sylius:
             options: Indstillinger
             meta_keywords: Meta søgeord
             meta_description: Meta beskrivelse
-            taxons: Taxons
         product_variant:
             available_on: Tilgængelig
+            name: Navn
         association_type:
             name: Navn
+        variant:
+            name: Navn
+        option:
+            name: Navn
+        option_value:
+            add_value: Tilføj værdi

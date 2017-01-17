@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Grid\Definition;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Grid\Definition\Action;
 use Sylius\Component\Grid\Definition\ActionGroup;
 use Sylius\Component\Grid\Definition\Field;
@@ -20,8 +19,6 @@ use Sylius\Component\Grid\Definition\Filter;
 use Sylius\Component\Grid\Definition\Grid;
 
 /**
- * @mixin Grid
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class GridSpec extends ObjectBehavior
@@ -37,7 +34,7 @@ final class GridSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Grid\Definition\Grid');
+        $this->shouldHaveType(Grid::class);
     }
 
     function it_has_code()
@@ -72,8 +69,8 @@ final class GridSpec extends ObjectBehavior
 
     function it_can_have_sorting_configuration()
     {
-        $this->setSorting(['name' => 'desc']);
-        $this->getSorting()->shouldReturn(['name' => 'desc']);
+        $this->setSorting(['name' => 'asc']);
+        $this->getSorting()->shouldReturn(['name' => 'asc']);
     }
 
     function it_does_not_have_any_fields_by_default()

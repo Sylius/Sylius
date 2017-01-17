@@ -29,7 +29,7 @@ class Promotion extends BasePromotion implements PromotionInterface
     public function __construct()
     {
         parent::__construct();
-        
+
         $this->channels = new ArrayCollection();
     }
 
@@ -39,14 +39,6 @@ class Promotion extends BasePromotion implements PromotionInterface
     public function getChannels()
     {
         return $this->channels;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setChannels(Collection $channels)
-    {
-        $this->channels = $channels;
     }
 
     /**

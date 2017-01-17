@@ -130,6 +130,14 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
+    public function refundOrderLastPayment(OrderInterface $order)
+    {
+        $this->getLastOrderPaymentElement($order)->pressButton('Refund');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function countItems()
     {
         return $this->tableAccessor->countTableBodyRows($this->getElement('table'));
@@ -147,7 +155,6 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             );
 
             return 1 === count($rows);
-
         } catch (\InvalidArgumentException $exception) {
             return false;
         }
@@ -226,11 +233,27 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
+    public function hasShippingPromotion($promotionName)
+    {
+        return $this->getElement('promotion_shipping_discounts')->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function hasTax($tax)
     {
         $taxesText = $this->getElement('taxes')->getText();
 
         return stripos($taxesText, $tax) !== false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getItemCode($itemName)
+    {
+        return $this->getItemProperty($itemName, 'sylius-product-variant-code');
     }
 
     /**
@@ -325,6 +348,14 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return $this->getElement('order_state')->getText();
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getPaymentState()
+    {
+        return $this->getElement('order_payment_state')->getText();
+    }
+
     public function cancelOrder()
     {
         $this->getDocument()->pressButton('Cancel');
@@ -348,6 +379,58 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
+    public function hasShippingProvinceName($provinceName)
+    {
+        $shippingAddressText = $this->getElement('shipping_address')->getText();
+
+        return false !== stripos($shippingAddressText, $provinceName);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasBillingProvinceName($provinceName)
+    {
+        $billingAddressText = $this->getElement('billing_address')->getText();
+
+        return false !== stripos($billingAddressText, $provinceName);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getIpAddressAssigned()
+    {
+        return $this->getElement('ip_address')->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOrderCurrency()
+    {
+        return $this->getElement('currency')->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasRefundButton()
+    {
+        return $this->getDocument()->hasButton('Refund');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getShippingPromotionData()
+    {
+        return $this->getElement('promotion_shipping_discounts')->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getRouteName()
     {
         return 'sylius_admin_order_show';
@@ -360,12 +443,18 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'billing_address' => '#billing-address',
+            'currency' => '#sylius-order-currency',
             'customer' => '#customer',
+            'ip_address' => '#ipAddress',
             'items_total' => '#items-total',
-            'payments' => '#payments',
+            'order_notes' => '#sylius-order-notes',
+            'order_payment_state' => '#payment-state > span',
+            'order_state' => '#sylius-order-state',
+            'payments' => '#sylius-payments',
             'promotion_discounts' => '#promotion-discounts',
+            'promotion_shipping_discounts' => '#promotion-shipping-discounts',
             'promotion_total' => '#promotion-total',
-            'shipments' => '#shipments',
+            'shipments' => '#sylius-shipments',
             'shipping_address' => '#shipping-address',
             'shipping_charges' => '#shipping-charges',
             'shipping_total' => '#shipping-total',
@@ -373,8 +462,6 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'tax_total' => '#tax-total',
             'taxes' => '#taxes',
             'total' => '#total',
-            'order_state' => 'div.sub.header > span.ui.label',
-            'order_notes' => '#sylius-order-notes',
         ]);
     }
 

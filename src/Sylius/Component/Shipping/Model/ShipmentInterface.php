@@ -20,7 +20,6 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  */
 interface ShipmentInterface extends ResourceInterface, ShippingSubjectInterface, TimestampableInterface
 {
-    // Shipment default states.
     const STATE_CART = 'cart';
     const STATE_READY = 'ready';
     const STATE_SHIPPED = 'shipped';

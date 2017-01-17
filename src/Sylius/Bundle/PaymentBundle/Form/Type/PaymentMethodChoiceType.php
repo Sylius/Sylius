@@ -17,19 +17,18 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Payment method choice type for document/entity/phpcr_document choice form types.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class PaymentMethodChoiceType extends AbstractType
+final class PaymentMethodChoiceType extends AbstractType
 {
     /**
      * @var PaymentMethodsResolverInterface
@@ -68,11 +67,18 @@ class PaymentMethodChoiceType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $choiceList = $this->createChoiceList();
-
         $resolver
             ->setDefaults([
-                'choice_list' => $choiceList,
+                'choices' => function (Options $options) {
+                    if (isset($options['subject'])) {
+                        return $this->paymentMethodsResolver->getSupportedMethods($options['subject']);
+                    }
+
+                    return $this->paymentMethodRepository->findAll();
+                },
+                'choice_value' => 'id',
+                'choice_label' => 'name',
+                'choice_translation_domain' => false,
             ])
             ->setDefined([
                 'subject',
@@ -86,31 +92,13 @@ class PaymentMethodChoiceType extends AbstractType
      */
     public function getParent()
     {
-        return 'choice';
+        return ChoiceType::class;
     }
-
     /**
-     * @return string
+     * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_payment_method_choice';
-    }
-
-    /**
-     * @return \Closure
-     */
-    private function createChoiceList()
-    {
-        return function (Options $options) 
-        {
-            if (isset($options['subject'])) {
-                $resolvedMethods = $this->paymentMethodsResolver->getSupportedMethods($options['subject']);
-            } else {
-                $resolvedMethods = $this->paymentMethodRepository->findAll();
-            }
-
-            return new ObjectChoiceList($resolvedMethods, null, [], null, 'id');
-        };
     }
 }

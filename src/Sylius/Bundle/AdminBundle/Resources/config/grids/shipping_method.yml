@@ -4,28 +4,42 @@ sylius_grid:
             driver:
                 name: doctrine/orm
                 options:
-                    class: %sylius.model.shipping_method.class%
+                    class: "%sylius.model.shipping_method.class%"
+                    repository:
+                        method: createListQueryBuilder
+                        arguments: ["%locale%"]
             sorting:
-                code: asc
+                position: asc
             fields:
+                position:
+                    type: twig
+                    label: sylius.ui.position
+                    sortable: ~
+                    options:
+                        template: "@SyliusUi/Grid/Field/position.html.twig"
                 code:
                     type: string
                     label: sylius.ui.code
+                    sortable: ~
                 name:
                     type: string
                     label: sylius.ui.name
+                    sortable: translation.name
                 zone:
                     type: string
                     label: sylius.ui.zone
                 enabled:
                     type: twig
                     label: sylius.ui.enabled
+                    sortable: ~
                     options:
-                        template: SyliusAdminBundle:Grid/Field:enabled.html.twig
+                        template: "@SyliusUi/Grid/Field/enabled.html.twig"
             filters:
-                code:
+                search:
                     type: string
-                    label: sylius.ui.code
+                    label: sylius.ui.search
+                    options:
+                        fields: [code, translation.name]
                 enabled:
                     type: boolean
                     label: sylius.ui.enabled

@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Taxation\Model;
 
+use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
@@ -39,4 +40,26 @@ interface TaxCategoryInterface extends CodeAwareInterface, TimestampableInterfac
      * @param string $description
      */
     public function setDescription($description);
+
+    /**
+     * @return Collection|TaxRateInterface[]
+     */
+    public function getRates();
+
+    /**
+     * @param TaxRateInterface $rate
+     */
+    public function addRate(TaxRateInterface $rate);
+
+    /**
+     * @param TaxRateInterface $rate
+     */
+    public function removeRate(TaxRateInterface $rate);
+
+    /**
+     * @param TaxRateInterface $rate
+     *
+     * @return bool
+     */
+    public function hasRate(TaxRateInterface $rate);
 }

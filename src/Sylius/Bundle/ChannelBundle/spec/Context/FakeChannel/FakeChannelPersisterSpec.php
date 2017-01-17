@@ -23,8 +23,6 @@ use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 /**
- * @mixin FakeChannelPersister
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class FakeChannelPersisterSpec extends ObjectBehavior
@@ -36,7 +34,7 @@ final class FakeChannelPersisterSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ChannelBundle\Context\FakeChannel\FakeChannelPersister');
+        $this->shouldHaveType(FakeChannelPersister::class);
     }
 
     function it_applies_only_to_master_requests(FilterResponseEvent $filterResponseEvent)
@@ -79,17 +77,20 @@ final class FakeChannelPersisterSpec extends ObjectBehavior
         $filterResponseEvent->getResponse()->willReturn($response);
 
         $response->headers = $responseHeaderBag;
-        $responseHeaderBag->setCookie(Argument::that(function (Cookie $cookie) {
-            if ($cookie->getName() !== '_channel_code') {
-                return false;
-            }
+        $responseHeaderBag
+            ->setCookie(Argument::that(function (Cookie $cookie) {
+                if ($cookie->getName() !== '_channel_code') {
+                    return false;
+                }
 
-            if ($cookie->getValue() !== 'fake_channel_code') {
-                return false;
-            }
+                if ($cookie->getValue() !== 'fake_channel_code') {
+                    return false;
+                }
 
-            return true;
-        }))->shouldBeCalled();
+                return true;
+            }))
+            ->shouldBeCalled()
+        ;
 
         $this->onKernelResponse($filterResponseEvent);
     }

@@ -42,11 +42,19 @@ final class DashboardContext implements Context
     }
 
     /**
-     * @Then I should be on the administration dashboard
+     * @When I open administration dashboard for :code channel
      */
-    public function iShouldBeOnAdministrationDashboard()
+    public function iOpenAdministrationDashboardForChannel($code)
     {
-        Assert::true($this->dashboardPage->isOpen());
+        $this->dashboardPage->open(['channelCode' => $code]);
+    }
+
+    /**
+     * @When I choose :channelName channel
+     */
+    public function iChooseChannel($channelName)
+    {
+        $this->dashboardPage->chooseChannel($channelName);
     }
 
     /**
@@ -54,7 +62,7 @@ final class DashboardContext implements Context
      */
     public function iShouldSeeNewOrders($number)
     {
-        Assert::same($this->dashboardPage->getNumberOfNewOrders(), $number);
+        Assert::same($this->dashboardPage->getNumberOfNewOrders(), (int) $number);
     }
 
     /**
@@ -62,7 +70,7 @@ final class DashboardContext implements Context
      */
     public function iShouldSeeNewCustomers($number)
     {
-        Assert::same($this->dashboardPage->getNumberOfNewCustomers(), $number);
+        Assert::same($this->dashboardPage->getNumberOfNewCustomers(), (int) $number);
     }
 
     /**
@@ -86,7 +94,7 @@ final class DashboardContext implements Context
      */
     public function iShouldSeeNewCustomersInTheList($number)
     {
-        Assert::same($this->dashboardPage->getNumberOfNewCustomersInTheList(), $number);
+        Assert::same($this->dashboardPage->getNumberOfNewCustomersInTheList(), (int) $number);
     }
 
     /**
@@ -94,6 +102,6 @@ final class DashboardContext implements Context
      */
     public function iShouldSeeNewOrdersInTheList($number)
     {
-        Assert::same($this->dashboardPage->getNumberOfNewOrdersInTheList(), $number);
+        Assert::same($this->dashboardPage->getNumberOfNewOrdersInTheList(), (int) $number);
     }
 }

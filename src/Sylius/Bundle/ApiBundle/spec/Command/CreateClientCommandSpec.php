@@ -15,6 +15,7 @@ use FOS\OAuthServerBundle\Model\ClientManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Model\Client;
+use Sylius\Bundle\ApiBundle\Command\CreateClientCommand;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -24,7 +25,7 @@ final class CreateClientCommandSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ApiBundle\Command\CreateClientCommand');
+        $this->shouldHaveType(CreateClientCommand::class);
     }
 
     public function it_is_a_container_aware_command()
@@ -37,7 +38,7 @@ final class CreateClientCommandSpec extends ObjectBehavior
         $this->getName()->shouldReturn('sylius:oauth-server:create-client');
     }
 
-    public function it_create_client(
+    public function it_creates_a_client(
         ContainerInterface $container,
         InputInterface $input,
         OutputInterface $output,

@@ -1,3 +1,5 @@
+{% from '@SyliusAdmin/Macro/translationForm.html.twig' import translationFormWithSlug %}
+
 <div class="ui active tab" data-tab="details">
     <h3 class="ui dividing header">{{ 'sylius.ui.details'|trans }}</h3>
     {{ form_errors(form) }}
@@ -6,15 +8,14 @@
         <div class="column">
             <div class="ui segment">
                 {{ form_row(form.code) }}
+                {{ form_row(form.enabled) }}
                 {% if product.simple %}
-                    {{ form_row(form.variant.code) }}
-                    {{ form_row(form.variant.price) }}
                     {{ form_row(form.variant.onHand) }}
+                    {{ form_row(form.variant.tracked) }}
                 {% else %}
                     {{ form_row(form.options) }}
                     {{ form_row(form.variantSelectionMethod) }}
                 {% endif %}
-                {{ form_row(form.enabled) }}
 
                 {# Nothing to see here. #}
                 <div class="ui hidden element">
@@ -24,20 +25,35 @@
         </div>
         <div class="column">
             {{ form_row(form.channels) }}
+
+            {% if product.simple %}
+                <h4 class="ui dividing header">{{ 'sylius.ui.pricing'|trans }}</h4>
+                {{ form_row(form.variant.channelPricings, {'label': false}) }}
+            {% endif %}
+
         </div>
     </div>
     <div class="ui hidden divider"></div>
-    <div class="ui styled fluid accordion">
-        {% for locale, translationForm in form.translations %}
-            <div class="title{% if 0 == loop.index0 %} active{% endif %}">
-                <i class="dropdown icon"></i>
-                <i class="{{ locale|slice(3, 2)|lower }} flag"></i> {{ locale|sylius_locale_name }}
+    {{ translationFormWithSlug(form.translations, '@SyliusAdmin/Product/_slugField.html.twig', product) }}
+    {% if product.simple %}
+    <div class="ui hidden divider"></div>
+    <div class="ui two column stackable grid">
+        <div class="column">
+            <div class="ui segment">
+                <h4 class="ui dividing header">{{ 'sylius.ui.shipping'|trans }}</h4>
+                {{ form_row(form.variant.shippingCategory) }}
+                {{ form_row(form.variant.width) }}
+                {{ form_row(form.variant.height) }}
+                {{ form_row(form.variant.depth) }}
+                {{ form_row(form.variant.weight) }}
             </div>
-            <div class="content{% if 0 == loop.index0 %} active{% endif %}">
-                {{ form_row(translationForm.name) }}
-                {{ form_row(translationForm.shortDescription, {'attr': {'rows': 3}}) }}
-                {{ form_row(translationForm.description) }}
+        </div>
+        <div class="column">
+            <div class="ui segment">
+                <h4 class="ui dividing header">{{ 'sylius.ui.taxes'|trans }}</h4>
+                {{ form_row(form.variant.taxCategory) }}
             </div>
-        {% endfor %}
+        </div>
     </div>
+    {% endif %}
 </div>

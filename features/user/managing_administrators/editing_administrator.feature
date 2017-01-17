@@ -5,7 +5,8 @@ Feature: Editing an administrator
     I want to be able to edit the administrator
 
     Background:
-        Given I am logged in as an administrator
+        Given the store operates on a single channel in "United States"
+        And I am logged in as an administrator
 
     @ui
     Scenario: Changing name and email of an existing administrator

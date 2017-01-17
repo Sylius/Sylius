@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ShippingBundle\Form\Type\Calculator;
 
+use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -20,7 +21,7 @@ use Symfony\Component\Validator\Constraints\Type;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class PerUnitRateConfigurationType extends AbstractType
+final class PerUnitRateConfigurationType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -28,12 +29,13 @@ class PerUnitRateConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('amount', 'sylius_money', [
+            ->add('amount', MoneyType::class, [
                 'label' => 'sylius.form.shipping_calculator.per_unit_rate_configuration.amount',
                 'constraints' => [
-                    new NotBlank(),
-                    new Type(['type' => 'integer']),
+                    new NotBlank(['groups' => ['sylius']]),
+                    new Type(['type' => 'integer', 'groups' => ['sylius']]),
                 ],
+                'currency' => $options['currency'],
             ])
         ;
     }
@@ -47,13 +49,16 @@ class PerUnitRateConfigurationType extends AbstractType
             ->setDefaults([
                 'data_class' => null,
             ])
+            ->setDefined(['currency'])
+            ->setAllowedTypes('currency', 'string')
+            ->setRequired(['currency'])
         ;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_shipping_calculator_per_unit_rate';
     }

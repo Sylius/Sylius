@@ -4,5 +4,12 @@
 /composer.phar
 /composer.lock
 
+test/app/cache
+test/app/logs
+
+/humbug.json
 /phpspec.yml
 /phpunit.xml
+
+/humbuglog.txt
+/humbuglog.json

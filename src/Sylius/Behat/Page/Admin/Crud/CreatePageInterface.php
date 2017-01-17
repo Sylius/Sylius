@@ -23,7 +23,7 @@ interface CreatePageInterface extends SymfonyPageInterface
      * @param string $element
      *
      * @return string
-     * 
+     *
      * @throws ElementNotFoundException
      */
     public function getValidationMessage($element);

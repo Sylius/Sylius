@@ -13,11 +13,11 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Component\Core\Model\AddressInterface;
-use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
+use Sylius\Component\Customer\Model\CustomerGroupInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Customer\Repository\CustomerRepositoryInterface;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
@@ -80,7 +80,7 @@ final class CustomerContext implements Context
     }
 
     /**
-     * @Given the store has customer :email
+     * @Given the store (also )has customer :email
      */
     public function theStoreHasCustomer($email)
     {
@@ -93,14 +93,6 @@ final class CustomerContext implements Context
     public function theStoreHasCustomerWithFirstName($email, $firstName)
     {
         $this->createCustomer($email, $firstName);
-    }
-
-    /**
-     * @Given the store has customer :email with last name :lastName
-     */
-    public function theStoreHasCustomerWithLastName($email, $lastName)
-    {
-        $this->createCustomer($email, null, $lastName);
     }
 
     /**
@@ -121,10 +113,11 @@ final class CustomerContext implements Context
     }
 
     /**
-     * @Given there is enabled customer account :email with password :password
+     * @Given there is a customer account :email
      * @Given there is a customer account :email identified by :password
+     * @Given there is enabled customer account :email with password :password
      */
-    public function theStoreHasEnabledCustomerAccountWithPassword($email, $password)
+    public function theStoreHasEnabledCustomerAccountWithPassword($email, $password = 'sylius')
     {
         $this->createCustomerWithUserAccount($email, $password, true);
     }
@@ -142,33 +135,31 @@ final class CustomerContext implements Context
     }
 
     /**
-     * @Given there is an administrator :name identified by an email :email and a password :password
+     * @Given /^(the customer) subscribed to the newsletter$/
      */
-    public function thereIsAdministratorIdentifiedByEmailAndPassword($name, $email, $password)
+    public function theCustomerSubscribedToTheNewsletter(CustomerInterface $customer)
     {
-        $names = explode(' ', $name);
-        $firstName = $names[0];
-        $lastName = count($names) > 1 ? $names[1] : null;
-
-        $this->createCustomerWithUserAccount($email, $password, true, $firstName, $lastName, 'ROLE_ADMINISTRATION_ACCESS');
-    }
-
-    /**
-     * @Given /^(his) shipping (address is "(?:[^"]+)", "(?:[^"]+)", "(?:[^"]+)", "(?:[^"]+)" for "(?:[^"]+)")$/
-     */
-    public function heHasShippingAddress(CustomerInterface $customer, AddressInterface $address)
-    {
-        $customer->setShippingAddress($address);
+        $customer->setSubscribedToNewsletter(true);
 
         $this->customerManager->flush();
     }
 
     /**
-     * @Given /^(his) billing (address is "(?:[^"]+)", "(?:[^"]+)", "(?:[^"]+)", "(?:[^"]+)" for "(?:[^"]+)")$/
+     * @Given /^(this customer) verified their email$/
      */
-    public function heHasBillingAddress(CustomerInterface $customer, AddressInterface $address)
+    public function theCustomerVerifiedTheirEmail(CustomerInterface $customer)
     {
-        $customer->setBillingAddress($address);
+        $customer->getUser()->setVerifiedAt(new \DateTime());
+
+        $this->customerManager->flush();
+    }
+
+    /**
+     * @Given /^(the customer) belongs to (group "([^"]+)")$/
+     */
+    public function theCustomerBelongsToGroup(CustomerInterface $customer, CustomerGroupInterface $customerGroup)
+    {
+        $customer->setGroup($customerGroup);
 
         $this->customerManager->flush();
     }
@@ -228,15 +219,5 @@ final class CustomerContext implements Context
 
         $this->sharedStorage->set('customer', $customer);
         $this->customerRepository->add($customer);
-    }
-
-    /**
-     * @Given /^(the customer) subscribed to the newsletter$/
-     */
-    public function theCustomerSubscribedToTheNewsletter(CustomerInterface $customer)
-    {
-        $customer->setSubscribedToNewsletter(true);
-
-        $this->customerManager->flush();
     }
 }

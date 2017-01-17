@@ -18,18 +18,16 @@ use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @mixin FakeChannelCodeProvider
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class FakeChannelCodeProviderSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ChannelBundle\Context\FakeChannel\FakeChannelCodeProvider');
+        $this->shouldHaveType(FakeChannelCodeProvider::class);
     }
 
-    function it_implements_channel_code_provider_interface()
+    function it_implements_a_channel_code_provider_interface()
     {
         $this->shouldImplement(FakeChannelCodeProviderInterface::class);
     }

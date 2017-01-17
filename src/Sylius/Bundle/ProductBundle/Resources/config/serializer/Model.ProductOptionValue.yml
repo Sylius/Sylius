@@ -1,0 +1,13 @@
+Sylius\Component\Product\Model\ProductOptionValue:
+    exclusion_policy: ALL
+    xml_root_name: option-value
+    properties:
+        code:
+            expose: true
+            type: string
+        value:
+            expose: true
+            type: string
+    virtual_properties:
+        getName:
+            serialized_name: name

@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    review:
+        accept: 'อนุมัติการรีวิวสินค้าแล้ว'
+        reject: 'การรีวิวสินค้าถูกยกเลิกแล้ว'
+        wait_for_the_acceptation: 'รีวิวของคุณอยู่ระหว่างรอการอนุมัติ'

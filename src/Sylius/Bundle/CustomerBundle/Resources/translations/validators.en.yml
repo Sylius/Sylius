@@ -1,9 +1,4 @@
 sylius:
-    group:
-        name:
-            max: Group name must not be longer than {{ limit }} characters.
-            min: Group name must be at least {{ limit }} characters long.
-            not_blank: Please enter group name.
     customer:
         first_name:
             max: First name must not be longer than {{ limit }} characters.
@@ -23,3 +18,11 @@ sylius:
             invalid: This email is invalid.
             unique: This email is already used.
             registered: This email is already registered, please login or use forgotten password.
+    customer_group:
+        code:
+            regex: Customer group code can only be comprised of letters, numbers, dashes and underscores.
+            unique: Customer group code has to be unique.
+        name:
+            max: Customer group name must not be longer than {{ limit }} characters.
+            min: Customer group name must be at least {{ limit }} characters long.
+            not_blank: Please enter a customer group name.

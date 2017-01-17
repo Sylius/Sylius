@@ -36,3 +36,6 @@ Sylius\Component\Addressing\Model\Address:
         provinceCode:
             expose: true
             type: string
+        provinceName:
+            expose: true
+            type: string

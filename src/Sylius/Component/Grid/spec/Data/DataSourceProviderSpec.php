@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Grid\Data;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Grid\Data\DataSourceProvider;
 use Sylius\Component\Grid\Data\DataSourceProviderInterface;
 use Sylius\Component\Grid\Data\DriverInterface;
@@ -22,8 +21,6 @@ use Sylius\Component\Grid\Parameters;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 
 /**
- * @mixin DataSourceProvider
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class DataSourceProviderSpec extends ObjectBehavior
@@ -35,7 +32,7 @@ final class DataSourceProviderSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Grid\Data\DataSourceProvider');
+        $this->shouldHaveType(DataSourceProvider::class);
     }
 
     function it_implements_grid_data_provider_interface()
@@ -46,9 +43,10 @@ final class DataSourceProviderSpec extends ObjectBehavior
     function it_uses_a_correct_driver_to_get_the_data_for_a_grid(
         ServiceRegistryInterface $driversRegistry,
         DriverInterface $driver,
-        Grid $grid,
-        Parameters $parameters
+        Grid $grid
     ) {
+        $parameters = new Parameters();
+
         $grid->getDriver()->willReturn('doctrine/orm');
         $grid->getDriverConfiguration()->willReturn(['resource' => 'sylius.tax_category']);
 
@@ -59,8 +57,10 @@ final class DataSourceProviderSpec extends ObjectBehavior
         $this->getDataSource($grid, $parameters)->shouldReturn(['foo', 'bar']);
     }
 
-    function it_throws_an_exception_if_driver_is_not_supported(Grid $grid, Parameters $parameters, ServiceRegistryInterface $driversRegistry)
+    function it_throws_an_exception_if_driver_is_not_supported(Grid $grid, ServiceRegistryInterface $driversRegistry)
     {
+        $parameters = new Parameters();
+
         $grid->getDriver()->willReturn('doctrine/banana');
         $driversRegistry->has('doctrine/banana')->willReturn(false);
 

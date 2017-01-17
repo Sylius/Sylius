@@ -19,14 +19,14 @@
     </parameters>
 
     <services>
-        <service id="sylius.behat.page.admin.currency.create" class="%sylius.behat.page.admin.currency.create.class%" parent="sylius.behat.page.admin.crud.create" scope="scenario" public="false">
-            <argument type="string">currency</argument>
+        <service id="sylius.behat.page.admin.currency.create" class="%sylius.behat.page.admin.currency.create.class%" parent="sylius.behat.page.admin.crud.create" public="false">
+            <argument type="string">sylius_admin_currency_create</argument>
         </service>
-        <service id="sylius.behat.page.admin.currency.index" class="%sylius.behat.page.admin.currency.index.class%" parent="sylius.behat.page.admin.crud.index" scope="scenario" public="false">
-            <argument type="string">currency</argument>
+        <service id="sylius.behat.page.admin.currency.index" class="%sylius.behat.page.admin.currency.index.class%" parent="sylius.behat.page.admin.crud.index" public="false">
+            <argument type="string">sylius_admin_currency_index</argument>
         </service>
-        <service id="sylius.behat.page.admin.currency.update" class="%sylius.behat.page.admin.currency.update.class%" parent="sylius.behat.page.admin.crud.update" scope="scenario" public="false">
-            <argument type="string">currency</argument>
+        <service id="sylius.behat.page.admin.currency.update" class="%sylius.behat.page.admin.currency.update.class%" parent="sylius.behat.page.admin.crud.update" public="false">
+            <argument type="string">sylius_admin_currency_update</argument>
         </service>
     </services>
 </container>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/4.8/phpunit.xsd"
+         backupGlobals="false"
+         colors="true"
+         bootstrap="test/app/autoload.php"
+>
+    <php>
+        <server name="KERNEL_DIR" value="test/app/" />
+        <server name="IS_DOCTRINE_ORM_SUPPORTED" value="true" />
+    </php>
+    <testsuites>
+        <testsuite name="SyliusCustomerBundle Test Suite">
+            <directory>./test/</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>

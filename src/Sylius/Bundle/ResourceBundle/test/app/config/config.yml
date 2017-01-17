@@ -1,8 +1,10 @@
 imports:
-    - { resource: parameters.yml }
-    - { resource: resources.yml }
+    - { resource: "@SyliusResourceBundle/test/app/config/parameters.yml" }
+    - { resource: "@SyliusResourceBundle/test/app/config/resources.yml" }
 
 framework:
+    assets: false
+    translator: { fallbacks: ["%locale%"] }
     secret: "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -42,13 +44,8 @@ fos_rest:
             - { path: '^/', priorities: ['json'], fallback_format: json, prefer_extension: true }
 
 services:
-    test.locale_provider:
-        class: Sylius\Component\Locale\Provider\ImmutableLocaleProvider
+    test.translation_locale_provider:
+        class: Sylius\Component\Resource\Translation\Provider\ImmutableTranslationLocaleProvider
         arguments:
-            - {"pl_PL": true, "en_US": true, "de_DE": true}
-            - "en_US"
-
-    test.locale_context:
-        class: Sylius\Component\Locale\Context\ImmutableLocaleContext
-        arguments:
+            - ["pl_PL", "en_US", "de_DE"]
             - "en_US"

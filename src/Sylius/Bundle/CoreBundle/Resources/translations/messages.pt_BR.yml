@@ -3,12 +3,6 @@
 
 sylius:
     form:
-        action:
-            add_product_configuration:
-                price: Preço unitário
-                quantity: Quantidade
-                variant: Variante
-            customer_group: Grupos de Clientes
         block:
             body: Texto
             id: ID
@@ -22,7 +16,10 @@ sylius:
             shipping_method: Forma de envio
         promotion:
             channels: Canais
-        coupon:
+        promotion_action:
+            add_product_configuration:
+                product: Produto
+        promotion_coupon:
             per_customer_usage_limit: Limite de uso por cliente
         group:
             name: Nome
@@ -31,15 +28,17 @@ sylius:
             taxonomies: Taxonomias
             locale_default: Localidade padrão
             locales: Localidades
-            currency_default: Moeda padrão
+            contact_email: Email de contato
+            currency_base: Moeda base
             currencies: Moedas
             shipping_methods: Métodos de envio
             payment_methods: Meios de pagamentos
             tax_calculation_strategy: Estratégia de cálculo de impostos
             tax_zone_default: Zona de imposto do padrão
-            theme:  Tema
+            theme: ' Tema'
             hostname: Nome do host
         image:
+            code: Código
             file: Imagem
         locale:
             code: Código
@@ -57,8 +56,8 @@ sylius:
             id: ID
             title: Título
         product:
+            images: Imagens
             restricted_zone: Zona restrita
-            shipping_category: Categoria de expedição
             short_description: Breve descrição
             variant_selection_method: Método de seleção da variação
             main_taxon: Táxon principal
@@ -69,20 +68,7 @@ sylius:
             code: Código
         product_variant:
             tax_category: Categoria de imposto
-        settings:
-            general:
-                currency: Moeda padrão
-                locale: Língua
-                meta_description: Meta descrição
-                meta_keywords: Meta palavra-chaves
-                title: Título da página
-                tracking_code:
-                    Tracking code (for example: Código do Google Analytics
-            taxation:
-                default_tax_zone: Zona de imposto do padrão
-                default_tax_calculation_strategy: Estratégia de cálculo do imposto de padrão
-            security:
-                enabled: Ativado?
+            shipping_category: Categoria de expedição
         shipment_filter:
             created_at_from: De
             created_at_to: Para
@@ -98,7 +84,9 @@ sylius:
         shipping_method:
             zone: Zona
         taxon:
+            code: Código
             file: Selecione a imagem
+            images: Imagens
         taxonomy:
             file: Selecione a imagem
         user:
@@ -116,10 +104,8 @@ sylius:
         variant:
             depth: Profundidade
             height: Altura
-            images: Imagens
             on_hand: Estoque atual
             price: Preço
-            original_price: Preço original
             sku: SKU
             weight: Peso
             width: Largura
@@ -134,32 +120,85 @@ sylius:
             type: Tipo de associação
         product_association_type:
             name: Nome
+        promotion_filter:
+            products: Filtro de Produtos
         promotion_rule:
-            contains_taxon:
-                taxon: Taxon
-                count: Contagem
-            taxon:
+            customer_group:
+                group: Grupo de Cliente
+            has_taxon:
                 taxons: Taxas
+            product:
+                products: Produtos
             total_of_items_from_taxon:
                 taxon: Taxon
-                amount: Quantidade
-    email:
-        order_confirmation:
-            name: Confirmação de compra
-        order_comment:
-            name: Comentários do pedido
-        shipment_confirmation:
-            name: Confirmação de postagem
-        user_confirmation:
-            name: Confirmação do usuário
-            subject: Bem-vindo à nossa loja
-            content: 'Bem-vindo à nossa loja <br/> <br/> você acaba de ser registrado. <br/> Obrigado %username%.'
-        password_reset:
-            name: Redefinir a senha
-            content: '<h3>Olá %username%</h3> Para resetar sua senha - por favor, visite %url% <br/> <br/> Atenciosamente, equipe.'
-        verification:
-            name: Verificação de endereço de e-mail
-            content: 'Para verificar o seu endereço de e-mail - por favor, visite %url%'
+                amount: Total
+        payment_method:
+            channels: Canais
+        product_attribute:
+            position: Posição
+        zone:
+            scopes:
+                shipping: Entrega
+                tax: Taxa
+    installer:
+        extensions:
+            header: extensões
+            accelerator:
+                header: Acelerador
+                help: Habilite o Zend OpCache (altamente recomendado).
+            apc: APC
+            ctype: CType
+            gd: GD
+            help: Instalar e habilitar a extensão %extension%.
+            iconv: Iconv
+            exif: Exif
+            fileinfo: Informação do arquivo
+            icu: ICU
+            intl: Intl
+            json_encode: JSON
+            mbstring: Multibyte String
+            "off": false
+            "on": true
+            pcre: PCRE
+            pdo: PDO
+            php_xml: PHP-XML
+            session_start: Sessão
+            simplexml_import_dom: SimpleXML
+            token_get_all: Tokenizer
+        filesystem:
+            header: sistema de arquivos
+            cache:
+                header: cache
+                help: 'Para configurar as permissões execute: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+            exists: existe
+            logs:
+                header: logs
+                help: 'Para configurar as permissões execute: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+            not_exists: Não existe
+            not_writable: não gravável
+            parameters:
+                header: parameters.yml
+                help: 'Para configurar as permissões execute: sudo chmod + w %path%'
+            vendors: fornecedores
+            writable: gravável
+        settings:
+            header: Configurações e versão do PHP
+            any: qualquer
+            detect_unicode: detect_unicode
+            magic_quotes_gpc: magic_quotes_gpc
+            non_deprecated: não substituído
+            "off": false
+            "on": true
+            register_globals: register_globals
+            session:
+                auto_start: session.auto_start
+            short_open_tag: short_open_tag
+            timezone: fuso horário
+            timezone_deprecated:
+                header: Fuso Horário obsoleto
+                help: 'Fuso horário %timezone% está obsoleto. Corrija o seu arquivo php. ini (lista de fusos horários preterido http://php.net/manual/en/timezones.others.php).'
+            version: Versão do PHP
+            version_recommended: Versão recomendada do PHP
     payum_gateway:
         cash_on_delivery: Pagamento em dinheiro na entrega
         offline: Desconectado

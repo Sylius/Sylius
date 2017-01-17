@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Order\Factory;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Order\Factory\OrderItemUnitFactory;
 use Sylius\Component\Order\Factory\OrderItemUnitFactoryInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
 use Sylius\Component\Order\Model\OrderItemUnit;
@@ -30,21 +31,23 @@ final class OrderItemUnitFactorySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Order\Factory\OrderItemUnitFactory');
+        $this->shouldHaveType(OrderItemUnitFactory::class);
     }
 
-    function it_implements_factory_interface()
+    function it_implements_a_factory_interface()
     {
         $this->shouldImplement(OrderItemUnitFactoryInterface::class);
     }
 
-    function it_throws_exception_while_trying_create_order_item_unit_without_order_item()
+    function it_throws_an_exception_while_trying_create_order_item_unit_without_order_item()
     {
         $this->shouldThrow(UnsupportedMethodException::class)->during('createNew');
     }
 
-    function it_creates_new_order_item_unit_with_given_order_item(OrderItemInterface $orderItem, OrderItemUnitInterface $orderItemUnit)
-    {
+    function it_creates_a_new_order_item_unit_with_given_order_item(
+        OrderItemInterface $orderItem,
+        OrderItemUnitInterface $orderItemUnit
+    ) {
         $orderItemUnit->getOrderItem()->willReturn($orderItem);
 
         $this->createForItem($orderItem)->shouldBeSameAs($orderItemUnit);

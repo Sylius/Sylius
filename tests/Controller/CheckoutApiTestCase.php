@@ -40,53 +40,55 @@ class CheckoutApiTestCase extends JsonApiTestCase
     protected function addressOrder($orderId)
     {
         $this->loadFixturesFromFile('resources/countries.yml');
-        $customers = $this->loadFixturesFromFile('resources/customers.yml');
 
         $data =
 <<<EOT
         {
-            "shippingAddress": {
-                "firstName": "Hieronim",
-                "lastName": "Bosch",
+            "shipping_address": {
+                "first_name": "Hieronim",
+                "last_name": "Bosch",
                 "street": "Surrealism St.",
-                "countryCode": "NL",
+                "country_code": "NL",
                 "city": "’s-Hertogenbosch",
                 "postcode": "99-999"
             },
-            "billingAddress": {
-                "firstName": "Vincent",
-                "lastName": "van Gogh",
+            "billing_address": {
+                "first_name": "Vincent",
+                "last_name": "van Gogh",
                 "street": "Post-Impressionism St.",
-                "countryCode": "NL",
+                "country_code": "NL",
                 "city": "Groot Zundert",
                 "postcode": "88-888"
             },
-            "differentBillingAddress": true
+            "different_billing_address": true,
+            "customer": {
+                "email": "john@doe.com"
+            }
         }
 EOT;
 
-        $url = sprintf('/api/checkouts/addressing/%d/%d', $orderId, $customers['customer_Oliver']->getId());
+        $url = sprintf('/api/v1/checkouts/addressing/%d', $orderId);
         $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
     }
 
     /**
      * @param int $orderId
-     * @param int $shippingMethodId
+     * @param int $shippingMethodCode
      */
-    protected function selectOrderShippingMethod($orderId, $shippingMethodId)
+    protected function selectOrderShippingMethod($orderId, $shippingMethodCode)
     {
         $data =
 <<<EOT
         {
             "shipments": [
                 {
-                    "method": {$shippingMethodId}
+                    "method": "{$shippingMethodCode}"
                 }
             ]
         }
 EOT;
 
-        $url = sprintf('/api/checkouts/select-shipping/%d', $orderId);
+        $url = sprintf('/api/v1/checkouts/select-shipping/%d', $orderId);
         $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
     }
 
@@ -107,7 +109,7 @@ EOT;
         }
 EOT;
 
-        $url = sprintf('/api/checkouts/select-payment/%d', $orderId);
+        $url = sprintf('/api/v1/checkouts/select-payment/%d', $orderId);
         $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
     }
 }

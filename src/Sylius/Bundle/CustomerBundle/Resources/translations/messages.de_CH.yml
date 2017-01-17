@@ -3,12 +3,12 @@
 
 sylius:
     form:
-        group:
-            name: Name
-            roles: Rollen
         customer:
             first_name: Vorname
             email: E-Mail
             phone_number: Telefonnummber
             billing_address: Rechnungsadresse
             different_billing_address: Eine andere Rechnungsadresse benutzen?
+        customer_group:
+            name: Name
+            roles: Rollen

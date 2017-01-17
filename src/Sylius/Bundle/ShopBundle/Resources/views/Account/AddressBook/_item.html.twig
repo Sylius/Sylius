@@ -1,0 +1,16 @@
+<div class="eight wide column">
+    <div class="ui segment address">
+        <div class="ui stackable two column grid">
+            <div class="column">
+                {% include '@SyliusShop/Common/_address.html.twig' with {'address': address} %}
+            </div>
+            <div class="right aligned column">
+                <div class="ui vertical small icon labeled buttons">
+                    {{ buttons.edit(path('sylius_shop_account_address_book_update', {'id': address.id})) }}
+                    {{ render(path('sylius_shop_account_address_book_set_as_default', {'id': address.id})) }}
+                    {{ buttons.delete(path('sylius_shop_account_address_book_delete', {'id': address.id}), null, true, address.id) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

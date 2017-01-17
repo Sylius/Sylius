@@ -11,25 +11,33 @@
 
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
-use Sylius\Bundle\ResourceBundle\ExpressionLanguage\ExpressionLanguage;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Dosena Ishmael <nukboon@gmail.com>
  */
-class ParametersParser implements ParametersParserInterface
+final class ParametersParser implements ParametersParserInterface
 {
+    /**
+     * @var ContainerInterface
+     */
+    private $container;
+
     /**
      * @var ExpressionLanguage
      */
     private $expression;
 
     /**
+     * @param ContainerInterface $container
      * @param ExpressionLanguage $expression
      */
-    public function __construct(ExpressionLanguage $expression)
+    public function __construct(ContainerInterface $container, ExpressionLanguage $expression)
     {
+        $this->container = $container;
         $this->expression = $expression;
     }
 
@@ -38,31 +46,48 @@ class ParametersParser implements ParametersParserInterface
      */
     public function parseRequestValues(array $parameters, Request $request)
     {
-        foreach ($parameters as $key => $value) {
-            if (is_array($value)) {
-                $parameters[$key] = $this->parseRequestValues($value, $request);
+        return array_map(function ($parameter) use ($request) {
+            if (is_array($parameter)) {
+                return $this->parseRequestValues($parameter, $request);
             }
 
-            if (is_string($value) && 0 === strpos($value, '$')) {
-                $parameterName = substr($value, 1);
-                $parameters[$key] = $request->get($parameterName);
-            }
+            return $this->parseRequestValue($parameter, $request);
+        }, $parameters);
+    }
 
-            if (is_string($value) && 0 === strpos($value, 'expr:')) {
-                $service = substr($value, 5);
-
-                if (preg_match_all('/(\$\w+)\W/', $service, $match)) {
-                    foreach ($match[1] as $parameterName) {
-                        $parameter = $request->get(substr(trim($parameterName), 1));
-                        $parameter = is_string($parameter) ? sprintf('"%s"', $parameter) : $parameter;
-                        $service = str_replace($parameterName, $parameter, $service);
-                    }
-                }
-
-                $parameters[$key] = $this->expression->evaluate($service);
-            }
+    /**
+     * @param mixed $parameter
+     * @param Request $request
+     *
+     * @return mixed
+     */
+    private function parseRequestValue($parameter, Request $request)
+    {
+        if (0 === strpos($parameter, '$')) {
+            return $request->get(substr($parameter, 1));
         }
 
-        return $parameters;
+        if (0 === strpos($parameter, 'expr:')) {
+            return $this->parseRequestValueExpression(substr($parameter, 5), $request);
+        }
+
+        return $parameter;
+    }
+
+    /**
+     * @param string $expression
+     * @param Request $request
+     *
+     * @return string
+     */
+    private function parseRequestValueExpression($expression, Request $request)
+    {
+        $expression = preg_replace_callback('/(\$\w+)/', function ($matches) use ($request) {
+            $variable = $request->get(substr($matches[1], 1));
+
+            return is_string($variable) ? sprintf('"%s"', $variable) : $variable;
+        }, $expression);
+
+        return $this->expression->evaluate($expression, ['container' => $this->container]);
     }
 }

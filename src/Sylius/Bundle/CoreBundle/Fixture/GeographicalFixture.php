@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Fixture;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\AddressingBundle\Factory\ZoneFactoryInterface;
+use Sylius\Component\Addressing\Factory\ZoneFactoryInterface;
 use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
@@ -24,7 +24,7 @@ use Symfony\Component\Intl\Intl;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class GeographicalFixture extends AbstractFixture
+class GeographicalFixture extends AbstractFixture
 {
     /**
      * @var FactoryInterface
@@ -72,7 +72,6 @@ final class GeographicalFixture extends AbstractFixture
         ZoneFactoryInterface $zoneFactory,
         ObjectManager $zoneManager
     ) {
-
         $this->countryFactory = $countryFactory;
         $this->countryManager = $countryManager;
         $this->provinceFactory = $provinceFactory;
@@ -146,6 +145,7 @@ final class GeographicalFixture extends AbstractFixture
                 ->arrayNode('countries')->prototype('scalar')->end()->end()
                 ->arrayNode('zones')->prototype('scalar')->end()->end()
                 ->arrayNode('provinces')->prototype('scalar')->end()->end()
+                ->scalarNode('scope')->end()
         ;
 
         $zoneNode

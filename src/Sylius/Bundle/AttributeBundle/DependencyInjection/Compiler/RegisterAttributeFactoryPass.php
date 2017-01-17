@@ -19,7 +19,7 @@ use Symfony\Component\DependencyInjection\Definition;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class RegisterAttributeFactoryPass implements CompilerPassInterface
+final class RegisterAttributeFactoryPass implements CompilerPassInterface
 {
     /**
      * {@inheritdoc}
@@ -32,7 +32,7 @@ class RegisterAttributeFactoryPass implements CompilerPassInterface
 
         $registry = $container->getDefinition('sylius.registry.attribute_type');
 
-        foreach ($container->getParameter('sylius.attribute.subjects') as $subject => $configuration) {
+        foreach (array_keys($container->getParameter('sylius.attribute.subjects')) as $subject) {
             $oldAttributeFactory = $container->getDefinition(sprintf('sylius.factory.%s_attribute', $subject));
             $attributeFactoryDefinition = new Definition(AttributeFactory::class);
 

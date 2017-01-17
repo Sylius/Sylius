@@ -11,8 +11,6 @@
 
 namespace Sylius\Behat\Page\Admin\PaymentMethod;
 
-use Behat\Mink\Element\NodeElement;
-use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Behaviour\SpecifiesItsCode;
 use Sylius\Behat\Behaviour\Toggles;
@@ -43,6 +41,14 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     public function chooseGateway($gateway)
     {
         $this->getElement('gateway')->selectOption($gateway);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function checkChannel($channelName)
+    {
+        $this->getDocument()->checkField($channelName);
     }
 
     /**

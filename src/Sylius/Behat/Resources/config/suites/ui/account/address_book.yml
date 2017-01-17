@@ -1,0 +1,25 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+default:
+    suites:
+        ui_address_book:
+            contexts_services:
+                - sylius.behat.context.hook.doctrine_orm
+
+                - sylius.behat.context.transform.address
+                - sylius.behat.context.transform.customer
+                - sylius.behat.context.transform.shared_storage
+                - sylius.behat.context.transform.user
+
+                - sylius.behat.context.setup.address
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.customer
+                - sylius.behat.context.setup.geographical
+                - sylius.behat.context.setup.product
+                - sylius.behat.context.setup.shop_security
+                - sylius.behat.context.setup.user
+
+                - sylius.behat.context.ui.shop.address_book
+            filters:
+                tags: "@address_book && @ui"

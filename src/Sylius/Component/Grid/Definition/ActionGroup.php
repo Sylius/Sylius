@@ -22,7 +22,7 @@ class ActionGroup
     private $name;
 
     /**
-     * @var array
+     * @var Action[]
      */
     private $actions = [];
 
@@ -36,10 +36,12 @@ class ActionGroup
 
     /**
      * @param string $name
+     *
+     * @return self
      */
     public static function named($name)
     {
-        return new ActionGroup($name);
+        return new self($name);
     }
 
     /**
@@ -72,6 +74,8 @@ class ActionGroup
 
     /**
      * @param string $name
+     *
+     * @return Action
      */
     public function getAction($name)
     {
@@ -84,6 +88,8 @@ class ActionGroup
 
     /**
      * @param string $name
+     *
+     * @return bool
      */
     public function hasAction($name)
     {

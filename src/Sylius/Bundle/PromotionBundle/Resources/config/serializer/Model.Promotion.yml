@@ -49,9 +49,11 @@ Sylius\Component\Promotion\Model\Promotion:
                 route: sylius_api_promotion_show
                 parameters:
                     id: expr(object.getId())
+                    version: 1
         - rel: coupons
           exclude_if: expr(!object.isCouponBased() || !object.getId())
           href:
                 route: sylius_api_promotion_coupon_index
                 parameters:
                     promotionId: expr(object.getId())
+                    version: 1

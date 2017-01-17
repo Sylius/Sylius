@@ -19,8 +19,6 @@ use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 
 /**
- * @mixin RecursiveFileLocator
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class RecursiveFileLocatorSpec extends ObjectBehavior
@@ -32,7 +30,7 @@ final class RecursiveFileLocatorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Locator\RecursiveFileLocator');
+        $this->shouldHaveType(RecursiveFileLocator::class);
     }
 
     function it_implements_sylius_file_locator_interface()

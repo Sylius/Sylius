@@ -12,22 +12,24 @@
 namespace Sylius\Bundle\AddressingBundle\Form\EventListener;
 
 use Doctrine\Common\Persistence\ObjectRepository;
+use Sylius\Bundle\AddressingBundle\Form\Type\ProvinceCodeChoiceType;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
-use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 
 /**
- * This listener adds the province field to form if needed.
+ * @internal
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Jan Góralski <jan.goralski@lakion.com>
+ * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class BuildAddressFormSubscriber implements EventSubscriberInterface
+final class BuildAddressFormSubscriber implements EventSubscriberInterface
 {
     /**
      * @var ObjectRepository
@@ -61,8 +63,6 @@ class BuildAddressFormSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * Removes or adds a province field based on the country set.
-     *
      * @param FormEvent $event
      */
     public function preSetData(FormEvent $event)
@@ -84,14 +84,18 @@ class BuildAddressFormSubscriber implements EventSubscriberInterface
             return;
         }
 
+        $form = $event->getForm();
+
         if ($country->hasProvinces()) {
-            $event->getForm()->add($this->createProvinceCodeChoiceForm($country, $address->getProvinceCode()));
+            $form->add($this->createProvinceCodeChoiceForm($country, $address->getProvinceCode()));
+
+            return;
         }
+
+        $form->add($this->createProvinceNameTextForm($address->getProvinceName()));
     }
 
     /**
-     * Removes or adds a province field based on the country set on submitted form.
-     *
      * @param FormEvent $event
      */
     public function preSubmit(FormEvent $event)
@@ -111,9 +115,15 @@ class BuildAddressFormSubscriber implements EventSubscriberInterface
             return;
         }
 
+        $form = $event->getForm();
+
         if ($country->hasProvinces()) {
-            $event->getForm()->add($this->createProvinceCodeChoiceForm($country));
+            $form->add($this->createProvinceCodeChoiceForm($country));
+
+            return;
         }
+
+        $form->add($this->createProvinceNameTextForm());
     }
 
     /**
@@ -124,13 +134,22 @@ class BuildAddressFormSubscriber implements EventSubscriberInterface
      */
     private function createProvinceCodeChoiceForm(CountryInterface $country, $provinceCode = null)
     {
-        return
-            $this
-                ->formFactory
-                    ->createNamed('provinceCode', 'sylius_province_code_choice', $provinceCode, [
-                    'country' => $country,
-                    'auto_initialize' => false,
-            ])
-        ;
+        return $this->formFactory->createNamed('provinceCode', ProvinceCodeChoiceType::class, $provinceCode, [
+            'country' => $country,
+            'auto_initialize' => false,
+        ]);
+    }
+
+    /**
+     * @param string|null $provinceName
+     *
+     * @return FormInterface
+     */
+    private function createProvinceNameTextForm($provinceName = null)
+    {
+        return $this->formFactory->createNamed('provinceName', TextType::class, $provinceName, [
+            'required' => false,
+            'auto_initialize' => false,
+        ]);
     }
 }

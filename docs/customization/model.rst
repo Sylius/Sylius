@@ -30,7 +30,7 @@ For the ``Country`` run:
 
 .. code-block:: bash
 
-    $ php app/console debug:container --parameter=sylius.model.country.class
+    $ php bin/console debug:container --parameter=sylius.model.country.class
 
 As a result you will get the ``Sylius\Component\Addressing\Model\Country`` - this is the class that you need to be extending.
 
@@ -102,7 +102,7 @@ Under the ``sylius_*`` where ``*`` is the name of the bundle of the model you ar
 
 .. code-block:: bash
 
-    $ php app/console doctrine:schema:update --force
+    $ php bin/console doctrine:schema:update --force
 
 * via migrations:
 
@@ -110,8 +110,8 @@ Which we strongly recommend over updating the schema.
 
 .. code-block:: bash
 
-    $ php app/console doctrine:migrations:diff
-    $ php app/console doctrine:migrations:migrate
+    $ php bin/console doctrine:migrations:diff
+    $ php bin/console doctrine:migrations:migrate
 
 .. tip::
 
@@ -127,6 +127,6 @@ What happens while overriding Models?
 * ``sylius.repository.country`` represents Doctrine repository for your new class.
 * ``sylius.manager.country`` represents Doctrine object manager for your new class.
 * ``sylius.controller.country`` represents the controller for your new class.
-* All Doctrine relations to ``Sylius\\Component\\Adressing\\Model\\Country`` are using your new class as *target-entity*, you do not need to update any mappings.
+* All Doctrine relations to ``Sylius\\Component\\Addressing\\Model\\Country`` are using your new class as *target-entity*, you do not need to update any mappings.
 * ``CountryType`` form type is using your model as ``data_class``.
 * ``Sylius\\Component\\Addressing\\Model\\Country`` is automatically turned into Doctrine Mapped Superclass.

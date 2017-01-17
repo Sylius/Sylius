@@ -6,7 +6,7 @@ sylius:
         name:
             max_length: 'Název kategorie nesmí mít více než {{ limit }} znaků.'
             min_length: 'Název kategorie musí mít alespoň {{ limit }} znaků.'
-            not_blank: Prosím, zadejte název expediční kategorie.
+            not_blank: 'Prosím, zadejte název expediční kategorie.'
     shipping_method:
         calculator:
             max_length: sylius.shipping_method.calculator.max_length
@@ -15,4 +15,4 @@ sylius:
         name:
             max_length: 'Název expediční metody nesmí být delší než {{ limit }} znaků.'
             min_length: 'Název expediční metody musí mít alespoň {{ limit }} znaků.'
-            not_blank: Zadejte prosím název expediční metody.
+            not_blank: 'Zadejte prosím název expediční metody.'

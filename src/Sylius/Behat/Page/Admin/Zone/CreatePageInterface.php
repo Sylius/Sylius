@@ -26,9 +26,14 @@ interface CreatePageInterface extends BaseCreatePageInterface
     public function checkValidationMessageForMembers($message);
 
     /**
-     * @param $name
+     * @param string $name
      */
     public function chooseMember($name);
+
+    /**
+     * @param string $scope
+     */
+    public function selectScope($scope);
 
     /**
      * @param string $type

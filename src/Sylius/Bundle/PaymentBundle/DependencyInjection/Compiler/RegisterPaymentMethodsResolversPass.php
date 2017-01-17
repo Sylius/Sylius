@@ -18,7 +18,7 @@ use Symfony\Component\DependencyInjection\Reference;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class RegisterPaymentMethodsResolversPass implements CompilerPassInterface
+final class RegisterPaymentMethodsResolversPass implements CompilerPassInterface
 {
     /**
      * {@inheritdoc}

@@ -9,4 +9,3 @@ sylius:
         tax_rate:
             category: Κατηγορία
             name: Ονομασία
-            amount: Ποσό

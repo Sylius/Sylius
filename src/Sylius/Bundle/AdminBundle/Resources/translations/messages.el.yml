@@ -7,7 +7,6 @@ sylius:
             main:
                 catalog:
                     options: Επιλογές
-                    products: Προϊόντα
                 configuration:
                     countries: Χώρες
                     header: Παραμετροποίηση
@@ -16,7 +15,7 @@ sylius:
                     zones: Ζώνες
                 marketing:
                     promotions: Προσφορές
+                customers:
+                    groups: Ομάδες
                 sales:
                     orders: Παραγγελίες
-                content:
-                    header: Περιεχόμενο

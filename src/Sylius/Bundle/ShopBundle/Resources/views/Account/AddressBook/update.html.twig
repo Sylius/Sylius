@@ -1,0 +1,30 @@
+{% extends '@SyliusShop/Account/AddressBook/layout.html.twig' %}
+
+{% form_theme form '@SyliusUi/Form/theme.html.twig' %}
+
+{% block subcontent %}
+    <div class="ui segment">
+        <h1 class="ui dividing header">
+            {{ 'sylius.ui.address_book'|trans }}
+            <div class="sub header">{{ 'sylius.ui.edit_my_address'|trans }}</div>
+        </h1>
+        {{ form_start(form, {'action': path('sylius_shop_account_address_book_update', {'id': address.id}), 'method': 'PUT', 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
+
+        {% include '@SyliusShop/Common/Form/_address.html.twig' with {'form': form} %}
+
+        <div class="ui two column grid">
+            <div class="column">
+                <a href="{{ path('sylius_shop_account_address_book_index') }}" class="ui large icon labeled button">
+                    <i class="left arrow icon"></i> {{ 'sylius.ui.cancel'|trans }}
+                </a>
+            </div>
+            <div class="right aligned column">
+                <button type="submit" class="ui large icon labeled blue button">
+                    <i class="icon save"></i> {{ 'sylius.ui.save_changes'|trans }}
+                </button>
+            </div>
+        </div>
+        {{ form_row(form._token) }}
+        {{ form_end(form, {'render_rest': false}) }}
+    </div>
+{% endblock %}

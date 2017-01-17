@@ -19,7 +19,7 @@ use Sylius\Component\Taxation\Model\TaxRateInterface;
 interface CalculatorInterface
 {
     /**
-     * @param float            $base
+     * @param float $base
      * @param TaxRateInterface $rate
      *
      * @return float

@@ -13,6 +13,8 @@ namespace spec\Sylius\Bundle\UserBundle\EventListener;
 
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
+use Sylius\Bundle\UserBundle\EventListener\PasswordUpdaterListener;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Security\PasswordUpdaterInterface;
@@ -30,11 +32,14 @@ final class PasswordUpdaterListenerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\UserBundle\EventListener\PasswordUpdaterListener');
+        $this->shouldHaveType(PasswordUpdaterListener::class);
     }
 
-    function it_updates_password_for_generic_event($passwordUpdater, GenericEvent $event, UserInterface $user)
-    {
+    function it_updates_password_for_generic_event(
+        PasswordUpdaterInterface $passwordUpdater,
+        GenericEvent $event,
+        UserInterface $user
+    ) {
         $event->getSubject()->willReturn($user);
 
         $user->getPlainPassword()->willReturn('testPassword');
@@ -44,16 +49,21 @@ final class PasswordUpdaterListenerSpec extends ObjectBehavior
         $this->genericEventUpdater($event);
     }
 
-    function it_allows_to_update_password_for_generic_event_for_user_interface_implementation_only(GenericEvent $event, UserInterface $user)
+    function it_allows_to_update_password_for_generic_event_for_user_interface_implementation_only(GenericEvent $event)
     {
-        $user = '';
-        $event->getSubject()->willReturn($user);
-        $this->shouldThrow(new UnexpectedTypeException($user, UserInterface::class))
-            ->duringGenericEventUpdater($event);
+        $event->getSubject()->willReturn('user');
+
+        $this
+            ->shouldThrow(new UnexpectedTypeException('user', UserInterface::class))
+            ->during('genericEventUpdater', [$event])
+        ;
     }
 
-    function it_updates_password_on_pre_persist_doctrine_event($passwordUpdater, LifecycleEventArgs $event, UserInterface $user)
-    {
+    function it_updates_password_on_pre_persist_doctrine_event(
+        PasswordUpdaterInterface $passwordUpdater,
+        LifecycleEventArgs $event,
+        UserInterface $user
+    ) {
         $event->getEntity()->willReturn($user);
 
         $user->getPlainPassword()->willReturn('testPassword');
@@ -63,8 +73,11 @@ final class PasswordUpdaterListenerSpec extends ObjectBehavior
         $this->prePersist($event);
     }
 
-    function it_updates_password_on_pre_update_doctrine_event($passwordUpdater, LifecycleEventArgs $event, UserInterface $user)
-    {
+    function it_updates_password_on_pre_update_doctrine_event(
+        PasswordUpdaterInterface $passwordUpdater,
+        LifecycleEventArgs $event,
+        UserInterface $user
+    ) {
         $event->getEntity()->willReturn($user);
 
         $user->getPlainPassword()->willReturn('testPassword');
@@ -74,19 +87,23 @@ final class PasswordUpdaterListenerSpec extends ObjectBehavior
         $this->preUpdate($event);
     }
 
-    function it_updates_password_on_pre_persist_doctrine_event_for_user_interface_implementation_only($passwordUpdater, LifecycleEventArgs $event, UserInterface $user)
+    function it_updates_password_on_pre_persist_doctrine_event_for_user_interface_implementation_only(
+        PasswordUpdaterInterface $passwordUpdater,
+        LifecycleEventArgs $event)
     {
-        $user = '';
-        $event->getEntity()->willReturn($user);
-        $passwordUpdater->updatePassword($user)->shouldNotBeCalled();
+        $event->getEntity()->willReturn('user');
+        $passwordUpdater->updatePassword(Argument::any())->shouldNotBeCalled();
+
         $this->prePersist($event);
     }
 
-    function it_updates_password_on_pre_update_doctrine_event_for_user_interface_implementation_only($passwordUpdater, LifecycleEventArgs $event, UserInterface $user)
-    {
-        $user = '';
-        $event->getEntity()->willReturn($user);
-        $passwordUpdater->updatePassword($user)->shouldNotBeCalled();
+    function it_updates_password_on_pre_update_doctrine_event_for_user_interface_implementation_only(
+        PasswordUpdaterInterface $passwordUpdater,
+        LifecycleEventArgs $event
+    ) {
+        $event->getEntity()->willReturn('user');
+        $passwordUpdater->updatePassword(Argument::any())->shouldNotBeCalled();
+
         $this->preUpdate($event);
     }
 }

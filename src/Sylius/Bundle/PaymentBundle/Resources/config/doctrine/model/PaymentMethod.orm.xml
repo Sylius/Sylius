@@ -22,6 +22,9 @@
         <field name="environment" column="environment" type="string" nullable="true" />
         <field name="enabled" column="is_enabled" type="boolean" />
 
+        <field name="position" type="integer">
+            <gedmo:sortable-position />
+        </field>
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>

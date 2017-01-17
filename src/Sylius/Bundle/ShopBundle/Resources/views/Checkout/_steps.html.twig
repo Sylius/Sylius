@@ -8,41 +8,37 @@
     {% set steps = {'address': 'completed', 'select_shipping': 'completed', 'select_payment': 'completed', 'complete': 'active'} %}
 {% endif %}
 
-<div class="ui four steps">
-    <a data-remote-form="sylius_checkout_readdress" class="{{ steps['address'] }} step" href="#">
+{% set is_order_total_zero = (order.total == 0) %}
+
+<div class="ui {{ is_order_total_zero ? 'three' : 'four' }} steps">
+    <a class="{{ steps['address'] }} step" href="{{ path('sylius_shop_checkout_address') }}">
         <i class="map icon"></i>
         <div class="content">
             <div class="title">{{ 'sylius.ui.address'|trans }}</div>
+            <div class="description">{{ 'sylius.ui.fill_in_your_billing_and_shipping_addresses'|trans }}</div>
         </div>
     </a>
-    <a data-remote-form="sylius_checkout_reselect_shipping" class="{{ steps['select_shipping'] }} step" href="#">
+    <a class="{{ steps['select_shipping'] }} step" href="{{ path('sylius_shop_checkout_select_shipping') }}">
         <i class="truck icon"></i>
         <div class="content">
             <div class="title">{{ 'sylius.ui.shipping'|trans }}</div>
+            <div class="description">{{ 'sylius.ui.choose_how_your_goods_will_be_delivered'|trans }}</div>
         </div>
     </a>
-    <a data-remote-form="sylius_checkout_reselect_payment" class="{{ steps['select_payment'] }} step" href="#">
+    {% if not is_order_total_zero %}
+    <a class="{{ steps['select_payment'] }} step" href="{{ path('sylius_shop_checkout_select_payment') }}">
         <i class="payment icon"></i>
         <div class="content">
             <div class="title">{{ 'sylius.ui.payment'|trans }}</div>
+            <div class="description">{{ 'sylius.ui.choose_how_you_will_pay'|trans }}</div>
         </div>
     </a>
-    <div class="{{ steps['complete'] }} step">
+    {% endif %}
+    <div class="{{ steps['complete'] }} step" href="{{ path('sylius_shop_checkout_complete') }}">
         <i class="checkered flag icon"></i>
         <div class="content">
             <div class="title">{{ 'sylius.ui.complete'|trans }}</div>
+            <div class="description">{{ 'sylius.ui.review_and_confirm_your_order'|trans }}</div>
         </div>
     </div>
 </div>
-
-<form id="sylius_checkout_readdress" action="{{ path('sylius_shop_checkout_readdress') }}" method="post">
-    <input type="hidden" name="_method" value="PUT" />
-</form>
-
-<form id="sylius_checkout_reselect_shipping" action="{{ path('sylius_shop_checkout_reselect_shipping') }}" method="post">
-    <input type="hidden" name="_method" value="PUT" />
-</form>
-
-<form id="sylius_checkout_reselect_payment" action="{{ path('sylius_shop_checkout_reselect_payment') }}" method="post">
-    <input type="hidden" name="_method" value="PUT" />
-</form>

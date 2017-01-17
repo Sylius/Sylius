@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../etc/bash/common.lib.sh"
+
+run_command "$(get_sylius_path)/bin/php-cs-fixer --ansi fix \"$(get_sylius_path)\" --config-file \"$(get_sylius_path)/etc/phpcs/.php_cs\""
+run_command "$(get_sylius_path)/bin/php-cs-fixer --ansi fix \"$(get_sylius_path)\" --config-file \"$(get_sylius_path)/etc/phpcs/.phpspec_cs\""

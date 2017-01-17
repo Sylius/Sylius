@@ -32,7 +32,7 @@ interface AddressPageInterface extends SymfonyPageInterface
     /**
      * @param string $element
      * @param string $message
-     * 
+     *
      * @return bool
      */
     public function checkValidationMessageFor($element, $message);
@@ -45,7 +45,7 @@ interface AddressPageInterface extends SymfonyPageInterface
     /**
      * @param string $province
      */
-    public function specifyBillingAddressProvince($province);
+    public function selectBillingAddressProvince($province);
 
     /**
      * @param AddressInterface $shippingAddress
@@ -55,7 +55,7 @@ interface AddressPageInterface extends SymfonyPageInterface
     /**
      * @param string $province
      */
-    public function specifyShippingAddressProvince($province);
+    public function selectShippingAddressProvince($province);
 
     /**
      * @return bool
@@ -81,7 +81,52 @@ interface AddressPageInterface extends SymfonyPageInterface
      */
     public function getItemSubtotal($itemName);
 
+    /**
+     * @return string
+     */
+    public function getShippingAddressCountry();
+
     public function nextStep();
 
     public function backToStore();
+
+    /**
+     * @param string $provinceName
+     */
+    public function specifyBillingAddressProvince($provinceName);
+
+    /**
+     * @param string $provinceName
+     */
+    public function specifyShippingAddressProvince($provinceName);
+
+    /**
+     * @return bool
+     */
+    public function hasShippingAddressInput();
+
+    /**
+     * @return bool
+     */
+    public function hasBillingAddressInput();
+
+    /**
+     * @param AddressInterface $address
+     */
+    public function selectShippingAddressFromAddressBook(AddressInterface $address);
+
+    /**
+     * @param AddressInterface $address
+     */
+    public function selectBillingAddressFromAddressBook(AddressInterface $address);
+
+    /**
+     * @return AddressInterface
+     */
+    public function getPreFilledShippingAddress();
+
+    /**
+     * @return AddressInterface
+     */
+    public function getPreFilledBillingAddress();
 }

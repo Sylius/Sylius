@@ -15,6 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Order\Model\AdjustmentInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
+use Sylius\Component\Order\Model\OrderItemUnit;
 use Sylius\Component\Order\Model\OrderItemUnitInterface;
 
 /**
@@ -32,21 +33,23 @@ final class OrderItemUnitSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Order\Model\OrderItemUnit');
+        $this->shouldHaveType(OrderItemUnit::class);
     }
 
-    function it_implements_order_item_unit_interface()
+    function it_implements_an_order_item_unit_interface()
     {
         $this->shouldImplement(OrderItemUnitInterface::class);
     }
 
-    function it_has_correct_total_when_there_are_no_adjustments()
+    function it_has_a_correct_total_when_there_are_no_adjustments()
     {
         $this->getTotal()->shouldReturn(1000);
     }
 
-    function it_includes_non_neutral_adjustments_in_total(AdjustmentInterface $adjustment, OrderItemInterface $orderItem)
-    {
+    function it_includes_non_neutral_adjustments_in_total(
+        AdjustmentInterface $adjustment,
+        OrderItemInterface $orderItem
+    ) {
         $adjustment->isNeutral()->willReturn(false);
         $adjustment->getAmount()->willReturn(400);
 

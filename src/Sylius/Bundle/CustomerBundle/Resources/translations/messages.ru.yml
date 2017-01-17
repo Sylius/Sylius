@@ -3,16 +3,22 @@
 
 sylius:
     form:
-        group:
-            name: Название
-            roles: Роли
         customer:
             first_name: Имя
-            groups: Группы
+            group: Группа
             last_name: Фамилия
             email: Email
             phone_number: Контактный телефон
+            gender: Пол
+            birthday: День рождения
             billing_address: Адрес для выставления счета
             different_billing_address: Использовать другой адрес для составления счета?
+            only_customer_registration: Создать учетную запись?
+            subscribed_to_newsletter: Подписаться на рассылку новостей
+        customer_group:
+            name: Название
+            roles: Роли
     gender:
         unknown: Неизвестен
+        male: Мужской
+        female: Женский

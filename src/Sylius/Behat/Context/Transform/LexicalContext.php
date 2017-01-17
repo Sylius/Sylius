@@ -19,13 +19,17 @@ use Behat\Behat\Context\Context;
 final class LexicalContext implements Context
 {
     /**
-     * @Transform /^"(?:€|£|￥|\$)((?:\d+\.)?\d+)"$/
+     * @Transform /^"(\-)?(?:€|£|￥|\$)((?:\d+\.)?\d+)"$/
      */
-    public function getPriceFromString($price)
+    public function getPriceFromString($sign, $price)
     {
         $this->validatePriceString($price);
 
-        return (int) round(($price * 100), 2);
+        if ('-' === $sign) {
+            $price *= -1;
+        }
+
+        return (int) round($price * 100, 2);
     }
 
     /**
@@ -37,21 +41,13 @@ final class LexicalContext implements Context
     }
 
     /**
-     * @Transform /^(?:\d+)$/
-     */
-    public function getAmountFromString($amount)
-    {
-        return (int) $amount;
-    }
-
-    /**
      * @param string $price
      *
      * @throws \InvalidArgumentException
      */
     private function validatePriceString($price)
     {
-        if (strlen(substr(strrchr($price, "."), 1)) > 2) {
+        if (strlen(substr(strrchr($price, '.'), 1)) > 2) {
             throw new \InvalidArgumentException('Price string should not have more than 2 decimal digits.');
         }
     }

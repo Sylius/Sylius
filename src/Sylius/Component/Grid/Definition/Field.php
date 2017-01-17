@@ -37,9 +37,27 @@ class Field
     private $label;
 
     /**
+     * @var boolean
+     */
+    private $enabled = true;
+
+    /**
+     * @var string|null
+     */
+    private $sortable;
+
+    /**
      * @var array
      */
     private $options = [];
+
+    /**
+     * @var int
+     *
+     * Position equals to 100 to ensure that wile sorting fields by position ASC
+     * the fields positioned by default will be last
+     */
+    private $position = 100;
 
     /**
      * @param string $name
@@ -58,11 +76,11 @@ class Field
      * @param string $name
      * @param string $type
      *
-     * @return Field
+     * @return self
      */
     public static function fromNameAndType($name, $type)
     {
-        return new Field($name, $type);
+        return new self($name, $type);
     }
 
     /**
@@ -114,6 +132,46 @@ class Field
     }
 
     /**
+     * @return boolean
+     */
+    public function isEnabled()
+    {
+        return $this->enabled;
+    }
+
+    /**
+     * @param boolean $enabled
+     */
+    public function setEnabled($enabled)
+    {
+        $this->enabled = $enabled;
+    }
+
+    /**
+     * @param string|null $sortable
+     */
+    public function setSortable($sortable)
+    {
+        $this->sortable = $sortable ?: $this->name;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getSortable()
+    {
+        return $this->sortable;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSortable()
+    {
+        return null !== $this->sortable;
+    }
+
+    /**
      * @return array
      */
     public function getOptions()
@@ -127,5 +185,21 @@ class Field
     public function setOptions(array $options)
     {
         $this->options = $options;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    /**
+     * @param int $position
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
     }
 }

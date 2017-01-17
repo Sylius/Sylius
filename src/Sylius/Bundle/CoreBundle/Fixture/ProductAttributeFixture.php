@@ -18,7 +18,7 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class ProductAttributeFixture extends AbstractResourceFixture
+class ProductAttributeFixture extends AbstractResourceFixture
 {
     /**
      * @var array

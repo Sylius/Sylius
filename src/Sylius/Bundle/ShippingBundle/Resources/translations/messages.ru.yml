@@ -6,6 +6,7 @@ sylius:
         rule:
             unit_count_configuration:
                 count: Кол-во
+                equal: Равно
             type: Тип измерения
         shipment:
             state: Cтатус
@@ -21,19 +22,8 @@ sylius:
             flat_rate_configuration:
                 label: Фиксированная ставка за доставку
                 amount: Сумма
-            flexible_rate_configuration:
-                label: Гибкий курс
             per_unit_rate_configuration:
                 amount: Сумма
-            weight_rate_configuration:
-                label: Ставка основная на весе
-                fixed: Фиксированная сумма
-                variable: Динамическая сумма
-                division: Деление
-            volume_rate_configuration:
-                label: Ставка на основе
-                amount: Сумма
-                division: Деление
         shipping_category:
             description: Описание
             name: Название
@@ -41,9 +31,10 @@ sylius:
             calculator: Калькулятор
             category: Категория
             category_requirement: Условия категории
+            channels: Каналы
             configuration: Конфигурация
             description: Описание
             enabled: Активен
             name: Название
             tax_category: Категория налогов
-            translations: ﻿Переводы
+            translations: '﻿Переводы'

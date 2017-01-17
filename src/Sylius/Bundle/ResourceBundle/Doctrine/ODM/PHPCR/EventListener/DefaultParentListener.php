@@ -2,12 +2,9 @@
 
 namespace Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener;
 
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Form\FormEvent;
 use Doctrine\ODM\PHPCR\DocumentManagerInterface;
-use PHPCR\Util\NodeHelper;
 use Doctrine\ODM\PHPCR\Mapping\ClassMetadata;
+use PHPCR\Util\NodeHelper;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 
 /**
@@ -40,7 +37,7 @@ class DefaultParentListener
     /**
      * @param DocumentManagerInterface $documentManager
      * @param string $parentPath
-     * @param bool $parentPath
+     * @param bool $autocreate
      * @param bool $force
      */
     public function __construct(
@@ -48,8 +45,7 @@ class DefaultParentListener
         $parentPath,
         $autocreate = false,
         $force = false
-    )
-    {
+    ) {
         $this->documentManager = $documentManager;
         $this->parentPath = $parentPath;
         $this->autocreate = $autocreate;
@@ -73,8 +69,7 @@ class DefaultParentListener
     private function resolveParent(
         $document,
         ClassMetadata $metadata
-    )
-    {
+    ) {
         if (!$parentField = $metadata->parentMapping) {
             throw new \RuntimeException(sprintf(
                 'A default parent path has been specified, but no parent mapping has been applied to document "%s"',

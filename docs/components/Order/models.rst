@@ -9,35 +9,35 @@ Order
 **Order** object represents order.
 Orders have the following properties:
 
-+------------------+---------------------------------------------+
-| Property         | Description                                 |
-+==================+=============================================+
-| id               | Unique id of the order                      |
-+------------------+---------------------------------------------+
-| completedAt      | Completion time of the order                |
-+------------------+---------------------------------------------+
-| number           | Number is human-friendly identifier         |
-+------------------+---------------------------------------------+
-| itemsTotal       | Total value of items in order               |
-+------------------+---------------------------------------------+
-| adjustmentsTotal | Total value of adjustments                  |
-+------------------+---------------------------------------------+
-| total            | Calculated total (items + adjustments)      |
-+------------------+---------------------------------------------+
-| items            | Collection of items                         |
-+------------------+---------------------------------------------+
-| adjustments      | Collection of adjustments                   |
-+------------------+---------------------------------------------+
-| comments         | Collection of comments                      |
-+------------------+---------------------------------------------+
-| identities       | Collection of identities                    |
-+------------------+---------------------------------------------+
-| createdAt        | Date when order was created                 |
-+------------------+---------------------------------------------+
-| updatedAt        | Date of last change                         |
-+------------------+---------------------------------------------+
-| state            | State of the order (e.g. "cart", "pending") |
-+------------------+---------------------------------------------+
++--------------------------+---------------------------------------------+
+| Property                 | Description                                 |
++==========================+=============================================+
+| id                       | Unique id of the order                      |
++--------------------------+---------------------------------------------+
+| checkoutCompletedAt      | The time at which checkout was completed    |
++--------------------------+---------------------------------------------+
+| number                   | Number is human-friendly identifier         |
++--------------------------+---------------------------------------------+
+| itemsTotal               | Total value of items in order               |
++----------------------------------+-------------------------------------+
+| adjustmentsTotal         | Total value of adjustments                  |
++--------------------------+---------------------------------------------+
+| total                    | Calculated total (items + adjustments)      |
++--------------------------+---------------------------------------------+
+| items                    | Collection of items                         |
++--------------------------+---------------------------------------------+
+| adjustments              | Collection of adjustments                   |
++--------------------------+---------------------------------------------+
+| comments                 | Collection of comments                      |
++--------------------------+---------------------------------------------+
+| identities               | Collection of identities                    |
++--------------------------+---------------------------------------------+
+| createdAt                | Date when order was created                 |
++--------------------------+---------------------------------------------+
+| updatedAt                | Date of last change                         |
++--------------------------+---------------------------------------------+
+| state                    | State of the order (e.g. "cart", "pending") |
++--------------------------+---------------------------------------------+
 
 .. note::
     This model implements the :ref:`component_order_model_order-interface`
