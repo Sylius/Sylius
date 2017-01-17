@@ -6,8 +6,20 @@ Sylius\Component\Product\Model\ProductVariant:
             expose: true
             type: integer
             xml_attribute: true
-        presentation:
-            expose: true
-            type: string
-        options:
-            expose: true
+            groups: [Default, Detailed]
+        code:
+            expose: true 
+            type: string 
+            groups: [Detailed, Default] 
+        position:
+            expose: true 
+            type: integer 
+            groups: [Detailed, Default] 
+        optionValues:
+            expose: true 
+            type: array 
+            groups: [Detailed] 
+        translations:
+            expose: true 
+            type: array 
+            groups: [Detailed] 

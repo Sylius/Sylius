@@ -15,6 +15,7 @@ Sylius\Component\Core\Model\ProductTranslation:
 Sylius\Component\Core\Model\ProductVariant:
     productVariant:
         code: MUG_1
+        position: 0
         product: "@product2"
 
 Sylius\Component\Core\Model\Product:

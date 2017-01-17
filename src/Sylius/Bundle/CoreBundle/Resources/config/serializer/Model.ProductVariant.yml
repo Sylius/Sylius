@@ -2,23 +2,51 @@ Sylius\Component\Core\Model\ProductVariant:
     exclusion_policy: ALL
     xml_root_name: variant
     properties:
-        sku:
-            expose: true
-            type: string
         onHold:
             expose: true
             type: integer
+            groups: [Detailed]
+        onHand:
+            expose: true
+            type: integer
+            groups: [Detailed]
         tracked:
             expose: true
             type: boolean
+            groups: [Default, Detailed]
         width:
             expose: true
             type: float
+            groups: [Detailed]
         height:
             expose: true
             type: float
+            groups: [Detailed]
         depth:
             expose: true
             type: float
-        images:
+            groups: [Detailed]
+        weight:
             expose: true
+            type: float
+            groups: [Detailed]
+        taxCategory:
+            expose: true
+            groups: [Default, Detailed]
+        shippingCategory:
+            expose: true
+            groups: [Default, Detailed]
+        channelPricings:
+            expose: true
+            type: array
+            groups: [Default, Detailed]
+    relations:
+        - rel: self
+          href:
+            route: sylius_api_product_variant_show
+            parameters:
+                id: expr(object.getId())
+                productId: expr(object.getProduct().getId())
+                version: 1
+            exclusion:
+                groups: [Detailed]

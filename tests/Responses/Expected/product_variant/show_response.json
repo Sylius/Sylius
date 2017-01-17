@@ -1,0 +1,22 @@
+{
+    "id": @integer@,
+    "code": "MUG_2",
+    "option_values": [],
+    "position": 2,
+    "translations": {
+        "en_US": {
+            "id": @integer@,
+            "locale": "en_US",
+            "name": "Mug 2"
+        }
+    },
+    "on_hold": 0,
+    "on_hand": 0,
+    "tracked": false,
+    "channel_pricings": [],
+    "_links": {
+        "self": {
+            "href": "@string@"
+        }
+    }
+}

@@ -1,0 +1,27 @@
+{
+    "id": @integer@,
+    "code": "MONSTER_MUG",
+    "option_values": [],
+    "position": 21,
+    "translations": {
+        "de": {
+            "id": @integer@,
+            "locale": "de",
+            "name": "Monsterbecher"
+        },
+        "en_US": {
+            "id": @integer@,
+            "locale": "en_US",
+            "name": "Monster Mug"
+        }
+    },
+    "on_hold": 0,
+    "on_hand": 0,
+    "tracked": false,
+    "channel_pricings": [],
+    "_links": {
+        "self": {
+            "href": "@string@"
+        }
+    }
+}

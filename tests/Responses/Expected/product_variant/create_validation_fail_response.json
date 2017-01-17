@@ -1,0 +1,40 @@
+{
+    "code": 400,
+    "message": "Validation Failed",
+    "errors": {
+        "children": {
+            "translations": {},
+            "availableOn": {
+                "children": {
+                    "date": {},
+                    "time": {}
+                }
+            },
+            "availableUntil": {
+                "children": {
+                    "date": {},
+                    "time": {}
+                }
+            },
+            "tracked": {},
+            "onHand": {},
+            "width": {},
+            "height": {},
+            "depth": {},
+            "weight": {},
+            "taxCategory": {},
+            "shippingCategory": {},
+            "channelPricings": {},
+            "code": {
+                "errors": [
+                    "Please enter the code."
+                ]
+            },
+            "optionValues": {
+              "children": {
+                "MUG_TYPE": {}
+              }
+            }
+        }
+    }
+}

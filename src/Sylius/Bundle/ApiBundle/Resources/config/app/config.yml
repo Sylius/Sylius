@@ -3,6 +3,8 @@
 
 imports:
     - { resource: "@SyliusApiBundle/Resources/config/grids/product.yml" }
+    - { resource: "@SyliusApiBundle/Resources/config/grids/product_variant.yml" }
+
     - { resource: "@SyliusApiBundle/Resources/config/app/fixtures.yml" }
 
 sylius_api:

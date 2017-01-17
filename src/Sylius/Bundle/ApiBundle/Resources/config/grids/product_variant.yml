@@ -1,0 +1,29 @@
+sylius_grid:
+    grids:
+        sylius_api_product_variant:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%sylius.model.product_variant.class%"
+                    repository:
+                        method: createQueryBuilderByProductId
+                        arguments: ["%locale%", $productId]
+            sorting:
+                position: asc
+            fields:
+                name:
+                    type: string
+                    path: translation.name
+                code:
+                    type: string
+                position:
+                    type: string
+                    path: .
+                    sortable: ~
+            filters:
+                code:
+                    type: string
+                name:
+                    type: string
+                    options:
+                        fields: [translation.name]
