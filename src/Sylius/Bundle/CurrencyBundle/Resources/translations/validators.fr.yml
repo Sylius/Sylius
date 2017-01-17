@@ -19,4 +19,5 @@ sylius:
             not_blank: Veuillez indiquer depuis quelle devise le taux de change doit être calculé.
         target_currency:
             not_blank: Veuillez indiquer vers quelle devise le taux de change doit être calculé.
+        unique_currency_pair: La paire de devises doit être unique.
         different_source_target_currency: La devise de référence et la devise cible doivent être différente.

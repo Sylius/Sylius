@@ -6,6 +6,8 @@ sylius:
         sku:
             not_blank: Bitte geben Sie die Bestandseinheit an.
             unique: Die Bestandseinheit muss eindeutig sein.
+        slug:
+            not_blank: Bitte eine Produkt SEO-URL angeben.
         code:
             not_blank: Bitte geben Sie einen Produktcode ein.
             regex: Produktkürzel darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
@@ -14,8 +16,6 @@ sylius:
             not_blank: Bitte gib Sie einen Produktnamen an.
             min_length: Der Produktname muss mindestens 1 Zeichen lang sein.|Der Produktname muss mindestens {{ limit }} Zeichen lang sein.
             max_length: Der Produktname darf nicht länger als 1 Zeichen sein.|Der Produktname darf nicht länger als {{ limit }} Zeichen sein.
-        slug:
-            not_blank: Bitte eine Produkt SEO-URL angeben.
     product_variant:
         combination: Die Variante mit den gewählten Einstellungen existiert schon.
         code:

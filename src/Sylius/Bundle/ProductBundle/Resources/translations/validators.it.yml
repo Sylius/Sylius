@@ -6,6 +6,8 @@ sylius:
         sku:
             not_blank: Inserisci il codice SKU del prodotto.
             unique: Il codice SKU del prodotto deve essere univoco.
+        slug:
+            not_blank: Inserisci lo slug del prodotto.
         code:
             not_blank: Inserisci il codice prodotto.
             regex: Il codice prodotto può contenere solo lettere, numeri, trattini e underscore.
@@ -14,8 +16,6 @@ sylius:
             not_blank: Inserisci il nome del prodotto.
             min_length: Il nome del prodotto deve essere lungo almeno 1 carattere. |Il nome del prodotto deve essere lungo almeno {{ limit }} caratteri.
             max_length: Il nome del prodotto non deve essere più lungo di 1 carattere. |Il nome del prodotto non deve essere più lungo di {{ limit }} caratteri.
-        slug:
-            not_blank: Inserisci lo slug del prodotto.
     product_variant:
         combination: La variante con questa opzione impostata esiste già.
         code:

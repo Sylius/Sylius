@@ -41,6 +41,9 @@ sylius:
             unique: Ce paramètre régional existe déjà.
         enabled:
             cannot_disable_base: La base locale ne peut pas être désactivée.
+    product:
+        variants:
+            all_prices_defined: Vous avez d’abord définir le prix des variantes de produit pour les canaux nouvellement affectés.
     product_attribute:
         invalid: La position doit être un entier positif.
     product_image:
@@ -55,6 +58,7 @@ sylius:
         onHand:
             min: Le stock disponible doit être plus grand que {{ limit }}.
             not_blank: Veuillez saisir le stock disponible.
+            reserved: Le nombre de produits en stock doit être supérieur au nombre de produits en instance
         original_price:
             min: Le prix initial ne peux pas être négatif.
         weight:

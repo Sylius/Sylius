@@ -46,6 +46,8 @@ sylius:
             not_blank: Veuillez fournir le nom de la région.
             unique: Le nom de la région doit être unique.
     zone:
+        scope:
+            not_blank: Veuillez saisir le champ d'application.
         code:
             not_blank: Merci de saisir le code de la zone.
             regex: Code de zone peut seulement être constitué de lettres, chiffres, tirets et traits de soulignement.
