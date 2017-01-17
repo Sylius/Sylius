@@ -13,7 +13,7 @@ Sylius has configured OAuth2 authorization. The authorization process is standar
 
 .. note::
 
-    User has to have ROLE_API role in order to access /api resources
+    User has to have ROLE_API_ACCESS role in order to access /api resources
 
 Create OAuth client
 ~~~~~~~~~~~~~~~~~~~
