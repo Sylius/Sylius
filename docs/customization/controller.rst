@@ -155,7 +155,7 @@ Your class needs to extend this base class.
         }
     }
 
-2. The next thing you have to do is to override the ``sylius.controller.frontend.order.class`` parameter in ``AppBundle/Resources/config/services.yml``.
+2. The next thing you have to do is to override the ``sylius.controller.frontend.order.class`` parameter in ``app/config/services.yml``.
 
 .. code-block:: yaml
 

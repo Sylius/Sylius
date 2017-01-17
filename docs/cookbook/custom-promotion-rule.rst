@@ -40,11 +40,11 @@ The new Rule needs a RuleChecker class:
         }
     }
 
-Register the new rule checker as a service in the ``AppBundle/Resources/config/services.yml``:
+Register the new rule checker as a service in the ``app/config/services.yml``:
 
 .. code-block:: yaml
 
-    # AppBundle/Resources/config/services.yml
+    # apps/config/services.yml
     app.promotion_rule_checker.premium_customer:
         class: AppBundle\Promotion\Checker\Rule\PremiumCustomerRuleChecker
         tags:
@@ -76,11 +76,11 @@ Create the configuration form type class:
         }
     }
 
-And configure it in the ``AppBundle/Resources/config/services.yml``:
+And configure it in the ``app/config/services.yml``:
 
 .. code-block:: yaml
 
-    # AppBundle/Resources/config/services.yml
+    # app/config/services.yml
     app.form.type.promotion_rule.premium_customer_configuration:
         class: AppBundle\Form\Type\Rule\PremiumCustomerConfigurationType
         tags:

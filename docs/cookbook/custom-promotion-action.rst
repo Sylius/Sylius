@@ -83,11 +83,11 @@ This class needs also a ``isConfigurationValid()`` method which was omitted in t
 Register the action as a service
 --------------------------------
 
-In the ``AppBundle/Resources/config/services.yml`` configure:
+In the ``app/config/services.yml`` configure:
 
 .. code-block:: yaml
 
-    # AppBundle/Resources/config/services.yml
+    # app/config/services.yml
     app.promotion_action.cheapest_product_discount:
         class: AppBundle\Promotion\Action\CheapestProductDiscountPromotionActionCommand
         arguments: ['@sylius.proportional_integer_distributor', '@sylius.promotion.units_promotion_adjustments_applicator']
@@ -121,11 +121,11 @@ The new action needs a form type to be available in the admin panel, while creat
 Register the form type as a service
 -----------------------------------
 
-In the ``AppBundle/Resources/config/services.yml`` configure:
+In the ``app/config/services.yml`` configure:
 
 .. code-block:: yaml
 
-    # AppBundle/Resources/config/services.yml
+    # app/config/services.yml
     app.form.type.promotion_action.cheapest_product_discount_configuration:
     class: AppBundle\Form\Type\Action\CheapestProductDiscountConfigurationType
     tags:
