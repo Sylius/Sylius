@@ -205,6 +205,17 @@ final class ProductVariantSpec extends ObjectBehavior
         $this->getChannelPricingForChannel($channel)->shouldReturn($channelPricing);
     }
 
+    function it_requires_shipping_by_default()
+    {
+        $this->isShippingRequired()->shouldReturn(true);
+    }
+
+    function its_shipping_can_be_not_required()
+    {
+        $this->setShippingRequired(false);
+        $this->isShippingRequired()->shouldReturn(false);
+    }
+
     public function getMatchers()
     {
         return [

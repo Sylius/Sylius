@@ -73,6 +73,11 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
      */
     protected $channelPricings;
 
+    /**
+     * @var bool
+     */
+    protected $shippingRequired = true;
+
     public function __construct()
     {
         parent::__construct();
@@ -360,5 +365,21 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
             $channelPricing->setProductVariant(null);
             $this->channelPricings->removeElement($channelPricing);
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isShippingRequired()
+    {
+        return $this->shippingRequired;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setShippingRequired($shippingRequired)
+    {
+        $this->shippingRequired = $shippingRequired;
     }
 }

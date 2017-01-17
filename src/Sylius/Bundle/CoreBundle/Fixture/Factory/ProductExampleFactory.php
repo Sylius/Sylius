@@ -266,6 +266,10 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
 
             ->setDefault('images', [])
             ->setAllowedTypes('images', 'array')
+
+            ->setDefault('shipping_required', function (Options $options) {
+                return $this->faker->boolean(90);
+            })
         ;
     }
 
@@ -327,6 +331,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
             $productVariant->setAvailableOn($this->faker->dateTimeThisYear);
             $productVariant->setCode(sprintf('%s-variant-%d', $options['code'], $i));
             $productVariant->setOnHand($this->faker->randomNumber(1));
+            $productVariant->setShippingRequired($options['shipping_required']);
 
             foreach ($this->channelRepository->findAll() as $channel) {
                 $this->createChannelPricings($productVariant, $channel);
