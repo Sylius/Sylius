@@ -11,18 +11,22 @@ Sylius\Component\Product\Model\Product:
             expose: true
             type: string
             groups: [Default, Detailed]
-        average_rating:
+        channels:
             expose: true
-            type:
+            type: array
+            groups: [Default, Detailed]
+        options:
+            expose: true
+            type: array
             groups: [Default, Detailed]
         attributes:
             expose: true
             type: array
             groups: [Detailed]
-        channels:
+        associations:
             expose: true
             type: array
-            gorups: [Default, Detailed]
+            groups: [Detailed]
         variants:
             expose: true
             type: array
@@ -30,7 +34,18 @@ Sylius\Component\Product\Model\Product:
         translations:
             expose: true
             type: array
-            groups: [Default, Detailed]
+            groups: [Detailed]
+        availableOn:
+            expose: true
+            type: DateTime
+            groups: [Detailed]
+        availableUntil:
+            expose: true
+            type: DateTime
+            groups: [Detailed]
+    virtual_properties:
+        getName:
+            serialized_name: name
     relations:
         - rel: self
           href:

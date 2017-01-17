@@ -1,27 +1,76 @@
 {
-    "page": 2,
+    "page": 1,
     "limit": 10,
     "pages": 3,
     "total": 22,
     "_links": {
         "self": {
-            "href": "\/api\/v1\/products\/?page=2&limit=10"
+            "href": "\/api\/v1\/products\/?sorting%5Bcode%5D=asc&page=1&limit=10"
         },
         "first": {
-            "href": "\/api\/v1\/products\/?page=1&limit=10"
+            "href": "\/api\/v1\/products\/?sorting%5Bcode%5D=asc&page=1&limit=10"
         },
         "last": {
-            "href": "\/api\/v1\/products\/?page=3&limit=10"
+            "href": "\/api\/v1\/products\/?sorting%5Bcode%5D=asc&page=3&limit=10"
         },
         "next": {
-            "href": "\/api\/v1\/products\/?page=3&limit=10"
-        },
-        "previous": {
-            "href": "\/api\/v1\/products\/?page=1&limit=10"
+            "href": "\/api\/v1\/products\/?sorting%5Bcode%5D=asc&page=2&limit=10"
         }
     },
     "_embedded": {
         "items": [
+            {
+                "id": @integer@,
+                "name": "Breaking bad mug",
+                "code": "MUG_BB",
+                "options": [],
+                "average_rating": 0,
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "name": "Lotr mug",
+                "code": "MUG_LOTR",
+                "options": [],
+                "average_rating": 0,
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "name": "Star wars mug",
+                "code": "MUG_SW",
+                "options": [],
+                "average_rating": 0,
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "name": "Product 10",
+                "code": "PRODUCT_10",
+                "options": [],
+                "average_rating": 0,
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            },
             {
                 "id": @integer@,
                 "name": "Product 11",
@@ -91,58 +140,6 @@
                 "id": @integer@,
                 "name": "Product 16",
                 "code": "PRODUCT_16",
-                "options": [],
-                "average_rating": 0,
-                "images": [],
-                "_links": {
-                    "self": {
-                        "href": "@string@"
-                    }
-                }
-            },
-            {
-                "id": @integer@,
-                "name": "Product 17",
-                "code": "PRODUCT_17",
-                "options": [],
-                "average_rating": 0,
-                "images": [],
-                "_links": {
-                    "self": {
-                        "href": "@string@"
-                    }
-                }
-            },
-            {
-                "id": @integer@,
-                "name": "Product 18",
-                "code": "PRODUCT_18",
-                "options": [],
-                "average_rating": 0,
-                "images": [],
-                "_links": {
-                    "self": {
-                        "href": "@string@"
-                    }
-                }
-            },
-            {
-                "id": @integer@,
-                "name": "Product 19",
-                "code": "PRODUCT_19",
-                "options": [],
-                "average_rating": 0,
-                "images": [],
-                "_links": {
-                    "self": {
-                        "href": "@string@"
-                    }
-                }
-            },
-            {
-                "id": @integer@,
-                "name": "Product 20",
-                "code": "PRODUCT_20",
                 "options": [],
                 "average_rating": 0,
                 "images": [],

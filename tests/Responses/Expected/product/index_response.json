@@ -21,23 +21,11 @@
         "items": [
             {
                 "id": @integer@,
+                "name": "Star wars mug",
                 "code": "MUG_SW",
-                "translations": {
-                    "en": {
-                        "id": @integer@,
-                        "locale": "en",
-                        "name": "Star wars mug",
-                        "slug": "mug-star-wars",
-                        "description": "@string@"
-                    },
-                    "en_US": {
-                        "id": @integer@,
-                        "locale": "en_US",
-                        "name": "Star Wars mug",
-                        "slug": "star-wars-mug",
-                        "description": "@string@"
-                    }
-                },
+                "options": [],
+                "average_rating": 0,
+                "images": [],
                 "_links": {
                     "self": {
                         "href": "@string@"
@@ -46,16 +34,11 @@
             },
             {
                 "id": @integer@,
+                "name": "Lotr mug",
                 "code": "MUG_LOTR",
-                "translations": {
-                    "en_US": {
-                        "id": @integer@,
-                        "locale": "en_US",
-                        "name": "Lotr mug",
-                        "slug": "mug-lotr",
-                        "description": "@string@"
-                    }
-                },
+                "options": [],
+                "average_rating": 0,
+                "images": [],
                 "_links": {
                     "self": {
                         "href": "@string@"
@@ -64,16 +47,11 @@
             },
             {
                 "id": @integer@,
+                "name": "Breaking bad mug",
                 "code": "MUG_BB",
-                "translations": {
-                    "en_US": {
-                        "id": @integer@,
-                        "locale": "en_US",
-                        "name": "Breaking bad mug",
-                        "slug": "mug-breaking-bad",
-                        "description": "@string@"
-                    }
-                },
+                "options": [],
+                "average_rating": 0,
+                "images": [],
                 "_links": {
                     "self": {
                         "href": "@string@"
@@ -82,15 +60,11 @@
             },
             {
                 "id": @integer@,
+                "name": "Product 4",
                 "code": "PRODUCT_4",
-                "translations": {
-                    "en_US": {
-                        "id": @integer@,
-                        "locale": "en_US",
-                        "name": "Product 4",
-                        "slug": "product-4"
-                    }
-                },
+                "options": [],
+                "average_rating": 0,
+                "images": [],
                 "_links": {
                     "self": {
                         "href": "@string@"
@@ -99,15 +73,11 @@
             },
             {
                 "id": @integer@,
+                "name": "Product 5",
                 "code": "PRODUCT_5",
-                "translations": {
-                    "en_US": {
-                        "id": @integer@,
-                        "locale": "en_US",
-                        "name": "Product 5",
-                        "slug": "product-5"
-                    }
-                },
+                "options": [],
+                "average_rating": 0,
+                "images": [],
                 "_links": {
                     "self": {
                         "href": "@string@"
@@ -116,15 +86,11 @@
             },
             {
                 "id": @integer@,
+                "name": "Product 6",
                 "code": "PRODUCT_6",
-                "translations": {
-                    "en_US": {
-                        "id": @integer@,
-                        "locale": "en_US",
-                        "name": "Product 6",
-                        "slug": "product-6"
-                    }
-                },
+                "options": [],
+                "average_rating": 0,
+                "images": [],
                 "_links": {
                     "self": {
                         "href": "@string@"
@@ -133,15 +99,11 @@
             },
             {
                 "id": @integer@,
+                "name": "Product 7",
                 "code": "PRODUCT_7",
-                "translations": {
-                    "en_US": {
-                        "id": @integer@,
-                        "locale": "en_US",
-                        "name": "Product 7",
-                        "slug": "product-7"
-                    }
-                },
+                "options": [],
+                "average_rating": 0,
+                "images": [],
                 "_links": {
                     "self": {
                         "href": "@string@"
@@ -150,15 +112,11 @@
             },
             {
                 "id": @integer@,
+                "name": "Product 8",
                 "code": "PRODUCT_8",
-                "translations": {
-                    "en_US": {
-                        "id": @integer@,
-                        "locale": "en_US",
-                        "name": "Product 8",
-                        "slug": "product-8"
-                    }
-                },
+                "options": [],
+                "average_rating": 0,
+                "images": [],
                 "_links": {
                     "self": {
                         "href": "@string@"
@@ -167,15 +125,11 @@
             },
             {
                 "id": @integer@,
+                "name": "Product 9",
                 "code": "PRODUCT_9",
-                "translations": {
-                    "en_US": {
-                        "id": @integer@,
-                        "locale": "en_US",
-                        "name": "Product 9",
-                        "slug": "product-9"
-                    }
-                },
+                "options": [],
+                "average_rating": 0,
+                "images": [],
                 "_links": {
                     "self": {
                         "href": "@string@"
@@ -184,15 +138,11 @@
             },
             {
                 "id": @integer@,
+                "name": "Product 10",
                 "code": "PRODUCT_10",
-                "translations": {
-                    "en_US": {
-                        "id": @integer@,
-                        "locale": "en_US",
-                        "name": "Product 10",
-                        "slug": "product-10"
-                    }
-                },
+                "options": [],
+                "average_rating": 0,
+                "images": [],
                 "_links": {
                     "self": {
                         "href": "@string@"

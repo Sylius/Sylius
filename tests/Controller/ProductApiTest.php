@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class ProductApiTest extends JsonApiTestCase
+final class ProductApiTest extends JsonApiTestCase
 {
     /**
      * @var array
@@ -227,5 +227,19 @@ EOT;
         $this->client->request('GET', '/api/v1/products/', ['page' => 2], [], static::$authorizedHeaderWithAccept);
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'product/paginated_index_response');
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_sorting_the_index_of_products()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/products.yml');
+        $this->loadFixturesFromFile('resources/many_products.yml');
+
+        $this->client->request('GET', '/api/v1/products/', ['sorting' => ['code' => 'asc']], [], static::$authorizedHeaderWithAccept);
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'product/sorted_index_response');
     }
 }

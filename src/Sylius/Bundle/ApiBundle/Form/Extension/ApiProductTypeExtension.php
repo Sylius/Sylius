@@ -15,18 +15,27 @@ use Sylius\Bundle\ApiBundle\Form\EventSubscriber\RemoveVariantSelectionFieldForm
 use Sylius\Bundle\ProductBundle\Form\Type\ProductType;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class ApiProductTypeExtension extends AbstractTypeExtension
+final class ApiProductTypeExtension extends AbstractTypeExtension
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->addEventSubscriber(new RemoveVariantSelectionFieldFormSubscriber());
+        $builder->addEventListener(FormEvents::PRE_SUBMIT , function (FormEvent $event) {
+            $data = $event->getData();
+
+            if (!array_key_exists('variantSelectionMethod', $data)) {
+                $form = $event->getForm();
+                $form->remove('variantSelectionMethod');
+            }
+        });
     }
 
     /**

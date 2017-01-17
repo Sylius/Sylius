@@ -1,22 +1,32 @@
 {
     "id": @integer@,
     "code": "MUG_TH",
+    "available_on": "@string@.isDateTime()",
     "attributes": [],
     "variants": [],
+    "options": [],
+    "associations": [],
     "translations": {
         "en": {
-            "locale": "en",
             "id": @integer@,
+            "locale": "en",
             "name": "Theme Mug",
             "slug": "theme-mug"
         },
         "nl": {
-            "locale": "nl",
             "id": @integer@,
+            "locale": "nl",
             "name": "Theme Mug",
             "slug": "theme-mug2"
+        },
+        "en_US": {
+            "locale": "en_US"
         }
     },
+    "product_taxons": [],
+    "reviews": [],
+    "average_rating": 0,
+    "images": [],
     "_links": {
         "self": {
             "href": "@string@"
