@@ -500,8 +500,8 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Given /^(this product) has ([^"]+) attribute "([^"]+)" with value "([^"]+)"$/
-     * @Given /^(this product) has ([^"]+) attribute "([^"]+)" with value "([^"]+)" in ("[^"]+" locale)$/
+     * @Given /^(this product) has (.+?) attribute "([^"]+)" with value "([^"]+)"$/
+     * @Given /^(this product) has (.+?) attribute "([^"]+)" with value "([^"]+)" in ("[^"]+" locale)$/
      */
     public function thisProductHasAttributeWithValue(
         ProductInterface $product,
@@ -510,7 +510,7 @@ final class ProductContext implements Context
         $value,
         $language = 'en_US'
     ) {
-        $attribute = $this->getOrCreateProductAttribute($productAttributeType, $productAttributeName);
+        $attribute = $this->provideProductAttribute($productAttributeType, $productAttributeName);
         $attributeValue = $this->createProductAttributeValue($value, $attribute, $language);
         $product->addAttribute($attributeValue);
 
@@ -522,7 +522,7 @@ final class ProductContext implements Context
      */
     public function thisProductHasPercentAttributeWithValue(ProductInterface $product, $productAttributeName, $value)
     {
-        $attribute = $this->getOrCreateProductAttribute('percent', $productAttributeName);
+        $attribute = $this->provideProductAttribute('percent', $productAttributeName);
         $attributeValue = $this->createProductAttributeValue($value/100, $attribute);
         $product->addAttribute($attributeValue);
 
@@ -534,7 +534,7 @@ final class ProductContext implements Context
      */
     public function thisProductHasCheckboxAttributeWithValue(ProductInterface $product, $productAttributeType, $productAttributeName, $value)
     {
-        $attribute = $this->getOrCreateProductAttribute($productAttributeType, $productAttributeName);
+        $attribute = $this->provideProductAttribute($productAttributeType, $productAttributeName);
         $booleanValue = ('Yes' === $value);
         $attributeValue = $this->createProductAttributeValue($booleanValue, $attribute);
         $product->addAttribute($attributeValue);
@@ -547,7 +547,7 @@ final class ProductContext implements Context
      */
     public function thisProductHasPercentAttributeWithValueAtPosition(ProductInterface $product, $productAttributeName, $position)
     {
-        $attribute = $this->getOrCreateProductAttribute('percent', $productAttributeName);
+        $attribute = $this->provideProductAttribute('percent', $productAttributeName);
         $attribute->setPosition($position);
         $attributeValue = $this->createProductAttributeValue(rand(1, 100)/100, $attribute);
 
@@ -561,7 +561,7 @@ final class ProductContext implements Context
      */
     public function thisProductHasDateTimeAttributeWithDate(ProductInterface $product, $productAttributeType, $productAttributeName, $date)
     {
-        $attribute = $this->getOrCreateProductAttribute($productAttributeType, $productAttributeName);
+        $attribute = $this->provideProductAttribute($productAttributeType, $productAttributeName);
         $attributeValue = $this->createProductAttributeValue(new \DateTime($date), $attribute);
 
         $product->addAttribute($attributeValue);
@@ -781,7 +781,7 @@ final class ProductContext implements Context
      *
      * @return ProductAttributeInterface
      */
-    private function getOrCreateProductAttribute($type, $name, $code = null)
+    private function provideProductAttribute($type, $name, $code = null)
     {
         if (null === $code) {
             $code = StringInflector::nameToCode($name);

@@ -50,17 +50,17 @@ interface AttributeSubjectInterface
 
     /**
      * @param string $attributeCode
-     * @param string $localeCode
+     * @param string|null $localeCode
      *
      * @return bool
      */
-    public function hasAttributeByCodeAndLocale($attributeCode, $localeCode);
+    public function hasAttributeByCodeAndLocale($attributeCode, $localeCode = null);
 
     /**
      * @param string $attributeCode
-     * @param string $localeCode
+     * @param string|null $localeCode
      *
      * @return AttributeValueInterface
      */
-    public function getAttributeByCodeAndLocale($attributeCode, $localeCode);
+    public function getAttributeByCodeAndLocale($attributeCode, $localeCode = null);
 }

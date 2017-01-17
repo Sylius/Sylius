@@ -17,9 +17,9 @@ Feature: Viewing product's attributes
     @ui
     Scenario: Viewing a detailed page with product's textarea attribute
         Given the store has a product "T-shirt banana"
-        And this product has textarea attribute "T-shirt details" with value "Banana is very good material."
+        And this product has textarea attribute "T-shirt details" with value "Banana is a very good material."
         When I check this product's details
-        Then I should see the product attribute "T-shirt details" with value "Banana is very good material."
+        Then I should see the product attribute "T-shirt details" with value "Banana is a very good material."
 
     @ui
     Scenario: Viewing a detailed page with product's checkbox attribute

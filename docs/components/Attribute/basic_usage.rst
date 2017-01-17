@@ -104,7 +104,7 @@ of the :ref:`component_attribute_model_attribute-subject-interface`.
        /**
         * {@inheritdoc}
         */
-       public function hasAttributeByCodeAndLocale($attributeCode, $localeCode)
+       public function hasAttributeByCodeAndLocale($attributeCode, $localeCode = null)
        {
    
        }
@@ -112,7 +112,7 @@ of the :ref:`component_attribute_model_attribute-subject-interface`.
        /**
         * {@inheritdoc}
         */
-       public function getAttributeByCodeAndLocale($attributeCode, $localeCode)
+       public function getAttributeByCodeAndLocale($attributeCode, $localeCode = null)
        {
    
        }

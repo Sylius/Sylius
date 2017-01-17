@@ -524,14 +524,17 @@ final class ManagingProductsContext implements Context
     {
         $this->updateSimpleProductPage->open(['id' => $product->getId()]);
 
+        $valueOnPage = $this->updateSimpleProductPage->getAttributeValue($attributeName, $language);
+
         Assert::same(
             $value,
-            $this->updateSimpleProductPage->getAttributeValue($attributeName, $language),
+            $valueOnPage,
             sprintf(
-                'Product attribute "%s" should have value "%s" in language "%s" but it does not.',
+                'Product attribute "%s" should have value "%s" in language "%s" but it has "%s".',
                 $attributeName,
                 $value,
-                $language
+                $language,
+                $valueOnPage
             )
         );
     }

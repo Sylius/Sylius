@@ -98,12 +98,13 @@ class ProductAttributeController extends ResourceController
      * @param AttributeInterface $attribute
      * @param string[] $localeCodes
      *
-     * @return array
+     * @return FormView[]
      */
     protected function getAttributeFormsInAllLocales(AttributeInterface $attribute, array $localeCodes)
     {
         $attributeForm = $this->get('sylius.form_registry.attribute_type')->get($attribute->getType(), 'default');
 
+        $forms = [];
         foreach ($localeCodes as $localeCode) {
             $forms[$localeCode] = $this
                 ->get('form.factory')

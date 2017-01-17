@@ -11,11 +11,11 @@ Feature: Viewing product's attributes in different locales
         And the store has a product "T-shirt banana"
         And this product has text attribute "T-shirt material" with value "Banana skin" in "English (United States)" locale
         And this product has text attribute "T-shirt material" with value "Skórka banana" in "Polish (Poland)" locale
-        And this product has textarea attribute "T-shirt details" with value "Banana is very good material." in "English (United States)" locale
+        And this product has textarea attribute "T-shirt details" with value "Banana is a very good material." in "English (United States)" locale
 
     @ui
     Scenario: Viewing a detailed page with product's text attribute after local change
         When I switch to the "Polish (Poland)" locale
         When I view product "T-shirt banana"
         Then I should see the product attribute "T-shirt material" with value "Skórka banana"
-        Then I should also see the product attribute "T-shirt details" with value "Banana is very good material."
+        Then I should also see the product attribute "T-shirt details" with value "Banana is a very good material."
