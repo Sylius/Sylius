@@ -19,6 +19,7 @@ use Sylius\Component\Grid\Definition\Grid;
 use Sylius\Component\Grid\Filtering\FilterInterface;
 use Sylius\Component\Grid\Filtering\FiltersApplicator;
 use Sylius\Component\Grid\Filtering\FiltersApplicatorInterface;
+use Sylius\Component\Grid\Filtering\FiltersCriteriaResolverInterface;
 use Sylius\Component\Grid\Parameters;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 
@@ -27,9 +28,9 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
  */
 final class FiltersApplicatorSpec extends ObjectBehavior
 {
-    function let(ServiceRegistryInterface $filtersRegistry)
+    function let(ServiceRegistryInterface $filtersRegistry, FiltersCriteriaResolverInterface $criteriaResolver)
     {
-        $this->beConstructedWith($filtersRegistry);
+        $this->beConstructedWith($filtersRegistry, $criteriaResolver);
     }
 
     function it_is_initializable()
@@ -43,6 +44,7 @@ final class FiltersApplicatorSpec extends ObjectBehavior
     }
 
     function it_does_nothing_when_there_are_no_filtering_criteria(
+        FiltersCriteriaResolverInterface $criteriaResolver,
         FilterInterface $stringFilter,
         Grid $grid,
         Filter $filter,
@@ -50,27 +52,25 @@ final class FiltersApplicatorSpec extends ObjectBehavior
     ) {
         $parameters = new Parameters();
 
-        $grid->getFilters()->willReturn([$filter]);
+        $grid->getFilters()->willReturn(['keywords' => $filter]);
 
-        $filter->getCriteria()->willReturn(null);
+        $criteriaResolver->hasCriteria($grid, $parameters)->willReturn(false);
 
-        $stringFilter->apply(
-            $dataSource,
-            Argument::any(),
-            Argument::any(),
-            Argument::any()
-        )->shouldNotBeCalled();
+        $stringFilter->apply($dataSource, Argument::any(), Argument::any(), Argument::any())->shouldNotBeCalled();
 
         $this->apply($dataSource, $grid, $parameters);
     }
 
     function it_filters_data_source_based_on_filters_default_criteria(
         ServiceRegistryInterface $filtersRegistry,
+        FiltersCriteriaResolverInterface $criteriaResolver,
         FilterInterface $stringFilter,
         Grid $grid,
         Filter $filter,
         DataSourceInterface $dataSource
     ) {
+        $parameters = new Parameters();
+
         $grid->getFilters()->willReturn(['keywords' => $filter]);
 
         $grid->hasFilter('keywords')->willReturn(true);
@@ -78,7 +78,9 @@ final class FiltersApplicatorSpec extends ObjectBehavior
 
         $filter->getType()->willReturn('string');
         $filter->getOptions()->willReturn(['fields' => ['firstName', 'lastName']]);
-        $filter->getCriteria()->willReturn('Banana');
+
+        $criteriaResolver->hasCriteria($grid, $parameters)->willReturn(true);
+        $criteriaResolver->getCriteria($grid, $parameters)->willReturn(['keywords' => 'Banana']);
 
         $filtersRegistry->get('string')->willReturn($stringFilter);
 
@@ -89,6 +91,7 @@ final class FiltersApplicatorSpec extends ObjectBehavior
 
     function it_filters_data_source_based_on_criteria_parameter(
         ServiceRegistryInterface $filtersRegistry,
+        FiltersCriteriaResolverInterface $criteriaResolver,
         FilterInterface $stringFilter,
         Grid $grid,
         Filter $filter,
@@ -104,7 +107,9 @@ final class FiltersApplicatorSpec extends ObjectBehavior
         $grid->getFilter('keywords')->willReturn($filter);
         $filter->getType()->willReturn('string');
         $filter->getOptions()->willReturn(['fields' => ['firstName', 'lastName']]);
-        $filter->getCriteria()->willReturn(null);
+
+        $criteriaResolver->hasCriteria($grid, $parameters)->willReturn(true);
+        $criteriaResolver->getCriteria($grid, $parameters)->willReturn(['keywords' => 'Banana', 'enabled' => true]);
 
         $filtersRegistry->get('string')->willReturn($stringFilter);
 

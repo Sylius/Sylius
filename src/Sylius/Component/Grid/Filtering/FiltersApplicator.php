@@ -28,11 +28,20 @@ final class FiltersApplicator implements FiltersApplicatorInterface
     private $filtersRegistry;
 
     /**
-     * @param ServiceRegistryInterface $filtersRegistry
+     * @var FiltersCriteriaResolverInterface
      */
-    public function __construct(ServiceRegistryInterface $filtersRegistry)
-    {
+    private $criteriaResolver;
+
+    /**
+     * @param ServiceRegistryInterface $filtersRegistry
+     * @param FiltersCriteriaResolverInterface $criteriaResolver
+     */
+    public function __construct(
+        ServiceRegistryInterface $filtersRegistry,
+        FiltersCriteriaResolverInterface $criteriaResolver
+    ) {
         $this->filtersRegistry = $filtersRegistry;
+        $this->criteriaResolver = $criteriaResolver;
     }
 
     /**
@@ -40,11 +49,11 @@ final class FiltersApplicator implements FiltersApplicatorInterface
      */
     public function apply(DataSourceInterface $dataSource, Grid $grid, Parameters $parameters)
     {
-        if (!$parameters->has('criteria') && !$this->hasDefaultFilteringCriteria($grid)) {
+        if (!$this->criteriaResolver->hasCriteria($grid, $parameters)) {
             return;
         }
 
-        $criteria = $parameters->get('criteria', $this->getDefaultFilteringCriteria($grid));
+        $criteria = $this->criteriaResolver->getCriteria($grid, $parameters);
         foreach ($criteria as $name => $data) {
             if (!$grid->hasFilter($name)) {
                 continue;
@@ -56,41 +65,5 @@ final class FiltersApplicator implements FiltersApplicatorInterface
             $filter = $this->filtersRegistry->get($gridFilter->getType());
             $filter->apply($dataSource, $name, $data, $gridFilter->getOptions());
         }
-    }
-
-    /**
-     * @param Grid $grid
-     *
-     * @return bool
-     */
-    private function hasDefaultFilteringCriteria(Grid $grid)
-    {
-        return !empty($this->getFiltersWithDefaultCriteria($grid->getFilters()));
-    }
-
-    /**
-     * @param Grid $grid
-     *
-     * @return Filter[]
-     */
-    private function getDefaultFilteringCriteria(Grid $grid)
-    {
-        $filters = $this->getFiltersWithDefaultCriteria($grid->getFilters());
-
-        return array_map(function (Filter $filter) {
-            return $filter->getCriteria();
-        }, $filters);
-    }
-
-    /**
-     * @param Filter[] $filters
-     *
-     * @return Filter[]
-     */
-    private function getFiltersWithDefaultCriteria(array $filters)
-    {
-        return array_filter($filters, function (Filter $filter) {
-            return !empty($filter->getCriteria());
-        });
     }
 }
