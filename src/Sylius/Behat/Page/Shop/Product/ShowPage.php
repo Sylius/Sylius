@@ -230,7 +230,8 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
      */
     public function hasAddToCartButton()
     {
-        return $this->getDocument()->hasButton('Add to cart');
+        return $this->getDocument()->hasButton('Add to cart')
+            && false === $this->getDocument()->findButton('Add to cart')->hasAttribute('disabled');
     }
 
     /**
