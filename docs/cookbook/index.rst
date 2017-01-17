@@ -14,6 +14,7 @@ Cookbook
     api
     disabling-shop-admin-api
     images
+    images-gridfs
     checkout
     embedding-products
     taxons-menu
