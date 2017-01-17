@@ -8,6 +8,7 @@ sylius_api_product_index:
         _controller: sylius.controller.product:indexAction
         _sylius:
             serialization_version: $version
+            serialization_groups: [Default]
             paginate: $limit
             sortable: true
             sorting:
@@ -45,3 +46,4 @@ sylius_api_product_show:
         _controller: sylius.controller.product:showAction
         _sylius:
             serialization_version: $version
+            serialization_groups: [Default, Detailed]
