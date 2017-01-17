@@ -7,8 +7,8 @@ Feature: Skipping shipping step when order does not require any shipping
     Background:
         Given the store operates on a single channel in "United States"
         And the store has a "Guards! Guards!" configurable product
-        And the product "Guards! Guards!" has "Guards! Guards! - book" variant priced at "$20.00"
-        And the product "Guards! Guards!" has "Guards! Guards! - ebook" variant priced at "$12.55" which does not require shipping
+        And this product has "Guards! Guards! - book" variant priced at "$20.00"
+        And this product has "Guards! Guards! - ebook" variant priced at "$12.55" which does not require shipping
         And the store has "SHL" shipping method with "$5.00" fee
         And I am a logged in customer
 

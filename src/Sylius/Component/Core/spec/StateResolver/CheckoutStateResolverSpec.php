@@ -15,6 +15,8 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use SM\Factory\FactoryInterface;
 use SM\StateMachine\StateMachineInterface;
+use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\StateResolver\CheckoutStateResolver;
 use Sylius\Component\Order\Model\OrderInterface;
@@ -40,44 +42,189 @@ final class CheckoutStateResolverSpec extends ObjectBehavior
         $this->shouldImplement(StateResolverInterface::class);
     }
 
-
-    function it_applies_transition_skip_payment_if_order_total_is_zero_and_this_transition_is_possible(
-        OrderInterface $order,
+    function it_applies_transition_skip_shipping_and_skip_payment_if_none_of_order_items_require_shipping_its_total_is_0_and_this_transitions_are_possible(
         FactoryInterface $stateMachineFactory,
+        OrderInterface $order,
+        OrderItemInterface $firstOrderItem,
+        OrderItemInterface $secondOrderItem,
+        ProductVariantInterface $firstProductVariant,
+        ProductVariantInterface $secondProductVariant,
         StateMachineInterface $stateMachine
     ) {
+        $order->getItems()->willReturn([$firstOrderItem, $secondOrderItem]);
         $order->getTotal()->willReturn(0);
-        $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
-        $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)->willReturn(true);
 
+        $firstOrderItem->getVariant()->willReturn($firstProductVariant);
+        $secondOrderItem->getVariant()->willReturn($secondProductVariant);
+
+        $firstProductVariant->isShippingRequired()->willReturn(false);
+        $secondProductVariant->isShippingRequired()->willReturn(false);
+
+        $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
+
+        $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)->willReturn(true);
+        $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)->shouldBeCalled();
+
+        $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)->willReturn(true);
         $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)->shouldBeCalled();
 
         $this->resolve($order);
     }
 
-    function it_does_nothing_if_order_total_is_not_zero(
-        OrderInterface $order,
+    function it_applies_transition_skip_shipping_if_none_of_order_items_require_shipping_and_this_transition_is_possible(
         FactoryInterface $stateMachineFactory,
+        OrderInterface $order,
+        OrderItemInterface $firstOrderItem,
+        OrderItemInterface $secondOrderItem,
+        ProductVariantInterface $firstProductVariant,
+        ProductVariantInterface $secondProductVariant,
         StateMachineInterface $stateMachine
     ) {
+        $order->getItems()->willReturn([$firstOrderItem, $secondOrderItem]);
         $order->getTotal()->willReturn(10);
-        $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
-        $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)->willReturn(true);
 
+        $firstOrderItem->getVariant()->willReturn($firstProductVariant);
+        $secondOrderItem->getVariant()->willReturn($secondProductVariant);
+
+        $firstProductVariant->isShippingRequired()->willReturn(false);
+        $secondProductVariant->isShippingRequired()->willReturn(false);
+
+        $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
+
+        $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)->willReturn(true);
+        $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)->shouldBeCalled();
+
+        $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)->willReturn(true);
+        $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)->shouldNotBeCalled();
+
+        $this->resolve($order);
+    }
+
+    function it_does_not_apply_skip_shipping_transition_if_at_least_one_product_variant_in_order_requires_shipping(
+        FactoryInterface $stateMachineFactory,
+        OrderInterface $order,
+        OrderItemInterface $firstOrderItem,
+        OrderItemInterface $secondOrderItem,
+        ProductVariantInterface $firstProductVariant,
+        ProductVariantInterface $secondProductVariant,
+        StateMachineInterface $stateMachine
+    ) {
+        $order->getItems()->willReturn([$firstOrderItem, $secondOrderItem]);
+        $order->getTotal()->willReturn(10);
+
+        $firstOrderItem->getVariant()->willReturn($firstProductVariant);
+        $secondOrderItem->getVariant()->willReturn($secondProductVariant);
+
+        $firstProductVariant->isShippingRequired()->willReturn(false);
+        $secondProductVariant->isShippingRequired()->willReturn(true);
+
+        $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
+
+        $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)->willReturn(true);
+        $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)->shouldNotBeCalled();
+
+        $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)->willReturn(true);
+        $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)->shouldNotBeCalled();
+
+        $this->resolve($order);
+    }
+
+    function it_does_not_apply_skip_shipping_transition_if_it_is_not_possible(
+        FactoryInterface $stateMachineFactory,
+        OrderInterface $order,
+        OrderItemInterface $firstOrderItem,
+        OrderItemInterface $secondOrderItem,
+        ProductVariantInterface $firstProductVariant,
+        ProductVariantInterface $secondProductVariant,
+        StateMachineInterface $stateMachine
+    ) {
+        $order->getItems()->willReturn([$firstOrderItem, $secondOrderItem]);
+        $order->getTotal()->willReturn(10);
+
+        $firstOrderItem->getVariant()->willReturn($firstProductVariant);
+        $secondOrderItem->getVariant()->willReturn($secondProductVariant);
+
+        $firstProductVariant->isShippingRequired()->willReturn(false);
+        $secondProductVariant->isShippingRequired()->willReturn(true);
+
+        $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
+
+        $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)->willReturn(true);
+        $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)->shouldNotBeCalled();
+
+        $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)->willReturn(true);
+        $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)->shouldNotBeCalled();
+
+        $this->resolve($order);
+    }
+
+    function it_applies_transition_skip_payment_if_order_total_is_zero_and_this_transition_is_possible(
+        FactoryInterface $stateMachineFactory,
+        OrderInterface $order,
+        OrderItemInterface $firstOrderItem,
+        ProductVariantInterface $firstProductVariant,
+        StateMachineInterface $stateMachine
+    ) {
+        $order->getItems()->willReturn([$firstOrderItem]);
+        $order->getTotal()->willReturn(0);
+
+        $firstOrderItem->getVariant()->willReturn($firstProductVariant);
+        $firstProductVariant->isShippingRequired()->willReturn(true);
+
+        $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
+
+        $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)->willReturn(true);
+        $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)->shouldNotBeCalled();
+
+        $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)->willReturn(true);
+        $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)->shouldBeCalled();
+
+        $this->resolve($order);
+    }
+
+    function it_does_not_apply_skip_payment_transition_if_order_total_is_not_zero(
+        FactoryInterface $stateMachineFactory,
+        OrderInterface $order,
+        OrderItemInterface $firstOrderItem,
+        ProductVariantInterface $firstProductVariant,
+        StateMachineInterface $stateMachine
+    ) {
+        $order->getItems()->willReturn([$firstOrderItem]);
+        $order->getTotal()->willReturn(10);
+
+        $firstOrderItem->getVariant()->willReturn($firstProductVariant);
+        $firstProductVariant->isShippingRequired()->willReturn(true);
+
+        $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
+
+        $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)->willReturn(true);
+        $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)->shouldNotBeCalled();
+
+        $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)->willReturn(true);
         $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)->shouldNotBeCalled();
 
         $this->resolve($order);
     }
 
     function it_does_nothing_if_transition_skip_payment_is_not_possible(
-        OrderInterface $order,
         FactoryInterface $stateMachineFactory,
+        OrderInterface $order,
+        OrderItemInterface $firstOrderItem,
+        ProductVariantInterface $firstProductVariant,
         StateMachineInterface $stateMachine
     ) {
-        $order->getTotal()->willReturn(0);
-        $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
-        $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)->willReturn(false);
+        $order->getItems()->willReturn([$firstOrderItem]);
+        $order->getTotal()->willReturn(10);
 
+        $firstOrderItem->getVariant()->willReturn($firstProductVariant);
+        $firstProductVariant->isShippingRequired()->willReturn(true);
+
+        $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
+
+        $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)->willReturn(false);
+        $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)->shouldNotBeCalled();
+
+        $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)->willReturn(false);
         $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)->shouldNotBeCalled();
 
         $this->resolve($order);

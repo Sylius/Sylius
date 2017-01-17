@@ -338,12 +338,31 @@ final class ProductContext implements Context
         $price,
         ChannelInterface $channel = null
     ) {
-        $this->createProductVariant(
+        return $this->createProductVariant(
             $product,
             $productVariantName,
             $price,
             StringInflector::nameToUppercaseCode($productVariantName),
             (null !== $channel) ? $channel : $this->sharedStorage->get('channel')
+        );
+    }
+
+    /**
+     * @Given /^(this product) has "([^"]+)" variant priced at ("[^"]+") which does not require shipping$/
+     */
+    public function theProductHasVariantWhichDoesNotRequireShipping(
+        ProductInterface $product,
+        $productVariantName,
+        $price
+    ) {
+        $this->createProductVariant(
+            $product,
+            $productVariantName,
+            $price,
+            StringInflector::nameToUppercaseCode($productVariantName),
+            $this->sharedStorage->get('channel'),
+            null,
+            false
         );
     }
 
@@ -750,6 +769,7 @@ final class ProductContext implements Context
      * @param string $code
      * @param ChannelInterface $channel
      * @param int $position
+     * @param bool $shippingRequired
      *
      * @return ProductVariantInterface
      */
@@ -759,7 +779,8 @@ final class ProductContext implements Context
         $price,
         $code,
         ChannelInterface $channel = null,
-        $position = null
+        $position = null,
+        $shippingRequired = true
     ) {
         $product->setVariantSelectionMethod(ProductInterface::VARIANT_SELECTION_CHOICE);
 
@@ -771,6 +792,7 @@ final class ProductContext implements Context
         $variant->setProduct($product);
         $variant->addChannelPricing($this->createChannelPricingForChannel($price, $channel));
         $variant->setPosition($position);
+        $variant->setShippingRequired($shippingRequired);
 
         $product->addVariant($variant);
 

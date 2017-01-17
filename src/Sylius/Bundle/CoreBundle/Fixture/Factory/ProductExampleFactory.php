@@ -267,9 +267,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
             ->setDefault('images', [])
             ->setAllowedTypes('images', 'array')
 
-            ->setDefault('shipping_required', function (Options $options) {
-                return $this->faker->boolean(90);
-            })
+            ->setDefault('shipping_required', true)
         ;
     }
 
