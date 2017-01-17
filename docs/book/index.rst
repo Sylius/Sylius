@@ -7,7 +7,7 @@ The Books helps to understand how Sylius works.
 Introduction
 ------------
 
-Introduction aims to describe the philosophy Sylius. it will also teach you about environments before you start installing it.
+Introduction aims to describe the philosophy of Sylius. It will also teach you about environments before you start installing it.
 
 .. toctree::
     :hidden:
@@ -19,7 +19,7 @@ Introduction aims to describe the philosophy Sylius. it will also teach you abou
 Installation
 ------------
 
-The installation chapter is of course a comprehent guide to installing Sylius on your machine, but it also provides
+The installation chapter is of course a comprehensive guide to installing Sylius on your machine, but it also provides
 a general instruction on upgrading Sylius in your project.
 
 .. toctree::
@@ -85,7 +85,7 @@ Orders
 ------
 
 In this chapter you will learn everything you need to know about orders in Sylius.
-This concepts comes together with a few additional ones, like promotions, payments, shipments or checkout in general.
+This concept comes together with a few additional ones, like promotions, payments, shipments or checkout in general.
 You should also have a look here if you are looking for Cart, which is in Sylius an Order in the ``cart`` state.
 
 .. toctree::
