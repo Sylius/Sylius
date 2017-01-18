@@ -30,24 +30,20 @@ final class ResourcesResolver implements ResourcesResolverInterface
             return $repository->$repositoryMethod(...$arguments);
         }
 
-        if (!$this->hasCriteriaRequest($requestConfiguration)) {
-            return $repository->findAll();
+        $criteria = [];
+        if ($requestConfiguration->isFilterable()) {
+            $criteria = $requestConfiguration->getCriteria();
         }
 
-        if (!$requestConfiguration->isPaginated()) {
-            return $repository->findBy($requestConfiguration->getCriteria(), $requestConfiguration->getSorting(), $requestConfiguration->getLimit());
+        $sorting = [];
+        if ($requestConfiguration->isSortable()) {
+            $sorting = $requestConfiguration->getSorting();
         }
 
-        return $repository->createPaginator($requestConfiguration->getCriteria(), $requestConfiguration->getSorting());
-    }
+        if ($requestConfiguration->isPaginated()) {
+            return $repository->createPaginator($criteria, $sorting);
+        }
 
-    /**
-     * @param RequestConfiguration $requestConfiguration
-     *
-     * @return bool
-     */
-    private function hasCriteriaRequest(RequestConfiguration $requestConfiguration)
-    {
-        return $requestConfiguration->isPaginated() || $requestConfiguration->isLimited() || $requestConfiguration->isFilterable() || $requestConfiguration->isSortable();
+        return $repository->findBy($criteria, $sorting, $requestConfiguration->getLimit());
     }
 }
