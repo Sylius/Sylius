@@ -23,6 +23,7 @@ default:
                 - sylius.behat.context.setup.locale
                 - sylius.behat.context.setup.product
                 - sylius.behat.context.setup.product_association
+                - sylius.behat.context.setup.product_attribute
                 - sylius.behat.context.setup.product_review
                 - sylius.behat.context.setup.product_taxon
                 - sylius.behat.context.setup.shop_security

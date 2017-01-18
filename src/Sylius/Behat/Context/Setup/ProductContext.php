@@ -15,7 +15,6 @@ use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Element\NodeElement;
 use Doctrine\Common\Persistence\ObjectManager;
-use org\bovigo\vfs\vfsStreamException;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Attribute\Factory\AttributeFactoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
@@ -29,8 +28,6 @@ use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Product\Factory\ProductFactoryInterface;
 use Sylius\Component\Product\Generator\SlugGeneratorInterface;
-use Sylius\Component\Product\Model\ProductAttributeInterface;
-use Sylius\Component\Product\Model\ProductAttributeValueInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Sylius\Component\Product\Model\ProductVariantTranslationInterface;
@@ -98,11 +95,6 @@ final class ProductContext implements Context
     /**
      * @var FactoryInterface
      */
-    private $attributeValueFactory;
-
-    /**
-     * @var FactoryInterface
-     */
     private $productOptionFactory;
 
     /**
@@ -147,7 +139,6 @@ final class ProductContext implements Context
      * @param ProductFactoryInterface $productFactory
      * @param FactoryInterface $productTranslationFactory
      * @param AttributeFactoryInterface $productAttributeFactory
-     * @param FactoryInterface $attributeValueFactory
      * @param FactoryInterface $productVariantFactory
      * @param FactoryInterface $productVariantTranslationFactory
      * @param FactoryInterface $channelPricingFactory
@@ -167,7 +158,6 @@ final class ProductContext implements Context
         ProductFactoryInterface $productFactory,
         FactoryInterface $productTranslationFactory,
         AttributeFactoryInterface $productAttributeFactory,
-        FactoryInterface $attributeValueFactory,
         FactoryInterface $productVariantFactory,
         FactoryInterface $productVariantTranslationFactory,
         FactoryInterface $channelPricingFactory,
@@ -186,7 +176,6 @@ final class ProductContext implements Context
         $this->productFactory = $productFactory;
         $this->productTranslationFactory = $productTranslationFactory;
         $this->productAttributeFactory = $productAttributeFactory;
-        $this->attributeValueFactory = $attributeValueFactory;
         $this->productVariantFactory = $productVariantFactory;
         $this->productVariantTranslationFactory = $productVariantTranslationFactory;
         $this->channelPricingFactory = $channelPricingFactory;
@@ -500,76 +489,6 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Given /^(this product) has (.+?) attribute "([^"]+)" with value "([^"]+)"$/
-     * @Given /^(this product) has (.+?) attribute "([^"]+)" with value "([^"]+)" in ("[^"]+" locale)$/
-     */
-    public function thisProductHasAttributeWithValue(
-        ProductInterface $product,
-        $productAttributeType,
-        $productAttributeName,
-        $value,
-        $language = 'en_US'
-    ) {
-        $attribute = $this->provideProductAttribute($productAttributeType, $productAttributeName);
-        $attributeValue = $this->createProductAttributeValue($value, $attribute, $language);
-        $product->addAttribute($attributeValue);
-
-        $this->objectManager->flush();
-    }
-
-    /**
-     * @Given /^(this product) has percent attribute "([^"]+)" with value ([^"]+)%$/
-     */
-    public function thisProductHasPercentAttributeWithValue(ProductInterface $product, $productAttributeName, $value)
-    {
-        $attribute = $this->provideProductAttribute('percent', $productAttributeName);
-        $attributeValue = $this->createProductAttributeValue($value/100, $attribute);
-        $product->addAttribute($attributeValue);
-
-        $this->objectManager->flush();
-    }
-
-    /**
-     * @Given /^(this product) has ([^"]+) attribute "([^"]+)" set to "([^"]+)"$/
-     */
-    public function thisProductHasCheckboxAttributeWithValue(ProductInterface $product, $productAttributeType, $productAttributeName, $value)
-    {
-        $attribute = $this->provideProductAttribute($productAttributeType, $productAttributeName);
-        $booleanValue = ('Yes' === $value);
-        $attributeValue = $this->createProductAttributeValue($booleanValue, $attribute);
-        $product->addAttribute($attributeValue);
-
-        $this->objectManager->flush();
-    }
-
-    /**
-     * @Given /^(this product) has percent attribute "([^"]+)" at position (\d+)$/
-     */
-    public function thisProductHasPercentAttributeWithValueAtPosition(ProductInterface $product, $productAttributeName, $position)
-    {
-        $attribute = $this->provideProductAttribute('percent', $productAttributeName);
-        $attribute->setPosition($position);
-        $attributeValue = $this->createProductAttributeValue(rand(1, 100)/100, $attribute);
-
-        $product->addAttribute($attributeValue);
-
-        $this->objectManager->flush();
-    }
-
-    /**
-     * @Given /^(this product) has ([^"]+) attribute "([^"]+)" with date "([^"]+)"$/
-     */
-    public function thisProductHasDateTimeAttributeWithDate(ProductInterface $product, $productAttributeType, $productAttributeName, $date)
-    {
-        $attribute = $this->provideProductAttribute($productAttributeType, $productAttributeName);
-        $attributeValue = $this->createProductAttributeValue(new \DateTime($date), $attribute);
-
-        $product->addAttribute($attributeValue);
-
-        $this->objectManager->flush();
-    }
-
-    /**
      * @Given /^(this product) has option "([^"]+)" with values "([^"]+)" and "([^"]+)"$/
      * @Given /^(this product) has option "([^"]+)" with values "([^"]+)", "([^"]+)" and "([^"]+)"$/
      */
@@ -753,67 +672,6 @@ final class ProductContext implements Context
     {
         $product->getVariants()->first()->setShippingCategory($shippingCategory);
         $this->objectManager->flush();
-    }
-
-    /**
-     * @param string $type
-     * @param string $name
-     * @param string $code
-     *
-     * @return ProductAttributeInterface
-     */
-    private function createProductAttribute($type, $name, $code)
-    {
-        $productAttribute = $this->productAttributeFactory->createTyped($type);
-
-        $productAttribute->setCode($code);
-        $productAttribute->setName($name);
-
-        $this->objectManager->persist($productAttribute);
-
-        return $productAttribute;
-    }
-
-    /**
-     * @param string $type
-     * @param string $name
-     * @param string|null $code
-     *
-     * @return ProductAttributeInterface
-     */
-    private function provideProductAttribute($type, $name, $code = null)
-    {
-        if (null === $code) {
-            $code = StringInflector::nameToCode($name);
-        }
-
-        /** @var ProductAttributeInterface $productAttribute */
-        $productAttribute = $this->productAttributeRepository->findOneBy(['code' => $code]);
-        if (null !== $productAttribute) {
-            return $productAttribute;
-        }
-
-        return $this->createProductAttribute($type, $name, $code);
-    }
-
-    /**
-     * @param string $value
-     * @param ProductAttributeInterface $attribute
-     * @param string $localeCode
-     *
-     * @return ProductAttributeValueInterface
-     */
-    private function createProductAttributeValue($value, ProductAttributeInterface $attribute, $localeCode = 'en_US')
-    {
-        /** @var ProductAttributeValueInterface $attributeValue */
-        $attributeValue = $this->attributeValueFactory->createNew();
-        $attributeValue->setAttribute($attribute);
-        $attributeValue->setValue($value);
-        $attributeValue->setLocaleCode($localeCode);
-
-        $this->objectManager->persist($attributeValue);
-
-        return $attributeValue;
     }
 
     /**

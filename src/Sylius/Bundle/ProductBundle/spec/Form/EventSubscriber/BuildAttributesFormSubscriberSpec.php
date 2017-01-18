@@ -72,4 +72,14 @@ final class BuildAttributesFormSubscriberSpec extends ObjectBehavior
 
         $this->preSetData($event);
     }
+
+    function it_throws_an_invalid_argument_exception_if_data_is_not_a_product(FormEvent $event, \stdClass $stdObject)
+    {
+        $event->getData()->willReturn($stdObject);
+
+        $this
+            ->shouldThrow(\InvalidArgumentException::class)
+            ->during('preSetData', [$event])
+        ;
+    }
 }
