@@ -125,7 +125,7 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Then I should see the product attribute :attributeName with value :expectedAttribute
+     * @Then I should (also) see the product attribute :attributeName with value :expectedAttribute
      */
     public function iShouldSeeTheProductAttributeWithValue($attributeName, $expectedAttribute)
     {

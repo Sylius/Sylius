@@ -18,7 +18,6 @@ use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Resource\Model\ToggleableTrait;
 use Sylius\Component\Resource\Model\TranslatableTrait;
-use Sylius\Component\Resource\Model\TranslationInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -246,6 +245,25 @@ class Product implements ProductInterface
     /**
      * {@inheritdoc}
      */
+    public function getAttributesByLocale($localeCode, $fallbackLocaleCode)
+    {
+        $attributes = $this->attributes->filter(
+            function (ProductAttributeValueInterface $attribute) use ($fallbackLocaleCode) {
+                return $attribute->getLocaleCode() === $fallbackLocaleCode;
+            }
+        );
+
+        $attributesWithFallback = [];
+        foreach ($attributes as $attribute) {
+            $attributesWithFallback[] = $this->getAttributeInDifferentLocale($attribute, $localeCode);
+        }
+
+        return $attributesWithFallback;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function addAttribute(AttributeValueInterface $attribute)
     {
         Assert::isInstanceOf(
@@ -288,10 +306,15 @@ class Product implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function hasAttributeByCode($attributeCode)
+    public function hasAttributeByCodeAndLocale($attributeCode, $localeCode = null)
     {
+        if (null === $localeCode) {
+            $localeCode = $this->getTranslation()->getLocale();
+        }
+
         foreach ($this->attributes as $attribute) {
-            if ($attribute->getAttribute()->getCode() === $attributeCode) {
+            if ($attribute->getAttribute()->getCode() === $attributeCode &&
+                $attribute->getLocaleCode() === $localeCode) {
                 return true;
             }
         }
@@ -302,10 +325,15 @@ class Product implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function getAttributeByCode($attributeCode)
+    public function getAttributeByCodeAndLocale($attributeCode, $localeCode = null)
     {
+        if (null === $localeCode) {
+            $localeCode = $this->getTranslation()->getLocale();
+        }
+
         foreach ($this->attributes as $attribute) {
-            if ($attributeCode === $attribute->getAttribute()->getCode()) {
+            if ($attribute->getAttribute()->getCode() === $attributeCode &&
+                $attribute->getLocaleCode() === $localeCode) {
                 return $attribute;
             }
         }
@@ -473,5 +501,23 @@ class Product implements ProductInterface
     protected function createTranslation()
     {
         return new ProductTranslation();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    private function getAttributeInDifferentLocale(ProductAttributeValueInterface $attributeValue, $localeCode)
+    {
+        if (!$this->hasAttributeByCodeAndLocale($attributeValue->getCode(), $localeCode)) {
+            return $attributeValue;
+        }
+
+        $attributeValueInDifferentLocale = $this->getAttributeByCodeAndLocale($attributeValue->getCode(), $localeCode);
+        if ('' === $attributeValueInDifferentLocale->getValue()
+            || null === $attributeValueInDifferentLocale->getValue()) {
+            return $attributeValue;
+        }
+
+        return $attributeValueInDifferentLocale;
     }
 }

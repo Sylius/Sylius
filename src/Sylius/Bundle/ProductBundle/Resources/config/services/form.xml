@@ -74,6 +74,8 @@
             <argument>%sylius.model.product.class%</argument>
             <argument type="collection"><argument>sylius</argument></argument>
             <argument type="service" id="sylius.product_variant_resolver.default" />
+            <argument type="service" id="sylius.factory.product_attribute_value" />
+            <argument type="service" id="sylius.translation_locale_provider" />
             <tag name="form.type" />
         </service>
 

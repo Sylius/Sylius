@@ -1,18 +1,24 @@
 {% set subject = metadata.name|replace({'_attribute': ''}) %}
-{% for attributeId, form in forms %}
-<div class="attribute" data-id="{{ attributeId }}">
-    {% set id = form.vars.label|replace(' ', '_')|lower %}
-    {% if 'type_checkbox' in form.vars.cache_key %}
-        {{ _self.checkboxField(form, count, id, subject, metadata.applicationName) }}
-    {% else %}
-        {{ _self.textField(form, count, id, subject, metadata.applicationName) }}
-    {% endif %}
-    <input type="hidden"
-           name="{{ metadata.applicationName }}_{{ subject }}[attributes][{{ count }}][attribute]"
-           id="{{ metadata.applicationName }}_{{ subject }}_attributes_{{ count }}_attribute"
-           value="{{ attributeId }}"/>
-    {% set count = count+1 %}
-</div>
+{% for attributeId, localeCodes in forms %}
+    {% for localeCode, form in localeCodes %}
+        <div class="attribute" data-id="{{ attributeId }}">
+            {% set id = form.vars.label|replace(' ', '_')|lower %}
+            {% if 'type_checkbox' in form.vars.cache_key %}
+                {{ _self.checkboxField(form, count, id, subject, metadata.applicationName) }}
+            {% else %}
+                {{ _self.textField(form, count, id, subject, metadata.applicationName) }}
+            {% endif %}
+            <input type="hidden"
+                   name="sylius_product[attributes][{{ count }}][attribute]"
+                   id="sylius_product_attributes_{{ count }}_attribute"
+                   value="{{ attributeId }}"/>
+            <input type="hidden"
+                   name="sylius_product[attributes][{{ count }}][localeCode]"
+                   id="sylius_product_attributes_{{ count }}_localeCode"
+                   value="{{ localeCode }}"/>
+            {% set count = count + 1 %}
+        </div>
+    {% endfor %}
 {% endfor %}
 
 {% macro formField(item, count, id, prefix, subject, applicationName) %}

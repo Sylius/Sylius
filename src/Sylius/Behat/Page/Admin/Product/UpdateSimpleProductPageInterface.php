@@ -48,16 +48,18 @@ interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
     public function addSelectedAttributes();
 
     /**
-     * @param string $attribute
+     * @param string $attributeName
+     * @param string $localeCode
      */
-    public function removeAttribute($attribute);
+    public function removeAttribute($attributeName, $localeCode);
 
     /**
-     * @param string $attribute
+     * @param string $attributeName
+     * @param string $localeCode
      *
      * @return string
      */
-    public function getAttributeValue($attribute);
+    public function getAttributeValue($attributeName, $localeCode);
 
     /**
      * @return int
@@ -65,11 +67,11 @@ interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
     public function getNumberOfAttributes();
 
     /**
-     * @param string $attribute
+     * @param string $attributeName
      *
      * @return bool
      */
-    public function hasAttribute($attribute);
+    public function hasAttribute($attributeName);
 
     /**
      * @param string $taxonName

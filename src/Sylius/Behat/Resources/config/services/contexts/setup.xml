@@ -117,6 +117,7 @@
         <service id="sylius.behat.context.setup.product" class="Sylius\Behat\Context\Setup\ProductContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="__symfony__.sylius.repository.product" />
+            <argument type="service" id="__symfony__.sylius.repository.product_attribute" />
             <argument type="service" id="__symfony__.sylius.factory.product" />
             <argument type="service" id="__symfony__.sylius.factory.product_translation" />
             <argument type="service" id="__symfony__.sylius.factory.product_attribute" />

@@ -69,6 +69,7 @@ abstract class AttributeValueType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('localeCode')
             ->add('attribute', $this->attributeChoiceType)
             ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
                 $attributeValue = $event->getData();

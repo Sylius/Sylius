@@ -70,4 +70,16 @@ interface AttributeValueInterface extends ResourceInterface
      * @return string
      */
     public function getType();
+
+    /**
+     * @return string
+     *
+     * @throws \InvalidArgumentException
+     */
+    public function getLocaleCode();
+
+    /**
+     * @param string
+     */
+    public function setLocaleCode($localeCode);
 }

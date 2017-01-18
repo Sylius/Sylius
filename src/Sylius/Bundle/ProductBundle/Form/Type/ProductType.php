@@ -11,12 +11,15 @@
 
 namespace Sylius\Bundle\ProductBundle\Form\Type;
 
+use Sylius\Bundle\ProductBundle\Form\EventSubscriber\BuildAttributesFormSubscriber;
 use Sylius\Bundle\ProductBundle\Form\EventSubscriber\ProductOptionFieldSubscriber;
 use Sylius\Bundle\ProductBundle\Form\EventSubscriber\SimpleProductSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceTranslationsType;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -33,15 +36,34 @@ final class ProductType extends AbstractResourceType
     private $variantResolver;
 
     /**
+     * @var FactoryInterface
+     */
+    private $attributeValueFactory;
+
+    /**
+     * @var TranslationLocaleProviderInterface
+     */
+    private $localeProvider;
+
+    /**
      * @param string $dataClass
      * @param string[] $validationGroups
      * @param ProductVariantResolverInterface $variantResolver
+     * @param FactoryInterface $attributeValueFactory
+     * @param TranslationLocaleProviderInterface $localeProvider
      */
-    public function __construct($dataClass, $validationGroups, ProductVariantResolverInterface $variantResolver)
-    {
+    public function __construct(
+        $dataClass,
+        $validationGroups,
+        ProductVariantResolverInterface $variantResolver,
+        FactoryInterface $attributeValueFactory,
+        TranslationLocaleProviderInterface $localeProvider
+    ) {
         parent::__construct($dataClass, $validationGroups);
 
         $this->variantResolver = $variantResolver;
+        $this->attributeValueFactory = $attributeValueFactory;
+        $this->localeProvider = $localeProvider;
     }
 
     /**
@@ -53,6 +75,7 @@ final class ProductType extends AbstractResourceType
             ->addEventSubscriber(new AddCodeFormSubscriber())
             ->addEventSubscriber(new ProductOptionFieldSubscriber($this->variantResolver))
             ->addEventSubscriber(new SimpleProductSubscriber())
+            ->addEventSubscriber(new BuildAttributesFormSubscriber($this->attributeValueFactory, $this->localeProvider))
             ->add('enabled', CheckboxType::class, [
                 'required' => false,
                 'label' => 'sylius.form.product.enabled',
@@ -64,7 +87,7 @@ final class ProductType extends AbstractResourceType
             ->add('attributes', CollectionType::class, [
                 'entry_type' => ProductAttributeValueType::class,
                 'required' => false,
-                'prototype' => false,
+                'prototype' => true,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
