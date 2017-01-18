@@ -308,13 +308,11 @@ class Product implements ProductInterface
      */
     public function hasAttributeByCodeAndLocale($attributeCode, $localeCode = null)
     {
-        if (null === $localeCode) {
-            $localeCode = $this->getTranslation()->getLocale();
-        }
+        $localeCode = $localeCode ?: $this->getTranslation()->getLocale();
 
         foreach ($this->attributes as $attribute) {
-            if ($attribute->getAttribute()->getCode() === $attributeCode &&
-                $attribute->getLocaleCode() === $localeCode) {
+            if ($attribute->getAttribute()->getCode() === $attributeCode
+                && $attribute->getLocaleCode() === $localeCode) {
                 return true;
             }
         }

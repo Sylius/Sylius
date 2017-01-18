@@ -121,7 +121,6 @@
             <argument type="service" id="__symfony__.sylius.factory.product" />
             <argument type="service" id="__symfony__.sylius.factory.product_translation" />
             <argument type="service" id="__symfony__.sylius.factory.product_attribute" />
-            <argument type="service" id="__symfony__.sylius.factory.product_attribute_value" />
             <argument type="service" id="__symfony__.sylius.factory.product_variant" />
             <argument type="service" id="__symfony__.sylius.factory.product_variant_translation" />
             <argument type="service" id="__symfony__.sylius.factory.channel_pricing" />
@@ -151,6 +150,8 @@
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="__symfony__.sylius.repository.product_attribute" />
             <argument type="service" id="__symfony__.sylius.factory.product_attribute" />
+            <argument type="service" id="__symfony__.sylius.factory.product_attribute_value" />
+            <argument type="service" id="__symfony__.doctrine.orm.entity_manager" />
             <tag name="fob.context_service" />
         </service>
 

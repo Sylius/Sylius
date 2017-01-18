@@ -19,6 +19,7 @@ use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInte
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
@@ -59,13 +60,16 @@ final class BuildAttributesFormSubscriber implements EventSubscriberInterface
 
     /**
      * @param FormEvent $event
+     *
+     * @throws \InvalidArgumentException
      */
     public function preSetData(FormEvent $event)
     {
         /** @var ProductInterface $product */
         $product = $event->getData();
 
-        $localeCodes = $this->localeProvider->getDefinedLocalesCodes();
+        Assert::isInstanceOf($product, ProductInterface::class);
+
         $defaultLocaleCode = $this->localeProvider->getDefaultLocaleCode();
 
         $attributes = $product->getAttributes()->filter(
@@ -75,11 +79,22 @@ final class BuildAttributesFormSubscriber implements EventSubscriberInterface
         );
 
         foreach ($attributes as $attribute) {
-            foreach ($localeCodes as $localeCode) {
-                if (!$product->hasAttributeByCodeAndLocale($attribute->getCode(), $localeCode)) {
-                    $attributeValue = $this->createProductAttributeValue($attribute->getAttribute(), $localeCode);
-                    $product->addAttribute($attributeValue);
-                }
+            $this->resolveLocalizedAttributes($product, $attribute);
+        }
+    }
+
+    /**
+     * @param ProductInterface $product
+     * @param ProductAttributeValueInterface $attribute
+     */
+    private function resolveLocalizedAttributes(ProductInterface $product, ProductAttributeValueInterface $attribute)
+    {
+        $localeCodes = $this->localeProvider->getDefinedLocalesCodes();
+
+        foreach ($localeCodes as $localeCode) {
+            if (!$product->hasAttributeByCodeAndLocale($attribute->getCode(), $localeCode)) {
+                $attributeValue = $this->createProductAttributeValue($attribute->getAttribute(), $localeCode);
+                $product->addAttribute($attributeValue);
             }
         }
     }

@@ -11,6 +11,8 @@
 
 namespace Sylius\Bundle\AttributeBundle\Form\Type;
 
+use Sylius\Bundle\LocaleBundle\Form\Type\LocaleChoiceType;
+use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ResourceToIdentifierTransformer;
 use Sylius\Bundle\ResourceBundle\Form\Registry\FormTypeRegistryInterface;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Attribute\Model\AttributeInterface;
@@ -20,6 +22,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\ReversedTransformer;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -38,6 +41,11 @@ abstract class AttributeValueType extends AbstractResourceType
     protected $attributeRepository;
 
     /**
+     * @var RepositoryInterface
+     */
+    protected $localeRepository;
+
+    /**
      * @var FormTypeRegistryInterface
      */
     protected $formTypeRegistry;
@@ -47,6 +55,7 @@ abstract class AttributeValueType extends AbstractResourceType
      * @param array $validationGroups
      * @param string $attributeChoiceType
      * @param RepositoryInterface $attributeRepository
+     * @param RepositoryInterface $localeRepository
      * @param FormTypeRegistryInterface $formTypeTypeRegistry
      */
     public function __construct(
@@ -54,12 +63,14 @@ abstract class AttributeValueType extends AbstractResourceType
         array $validationGroups,
         $attributeChoiceType,
         RepositoryInterface $attributeRepository,
+        RepositoryInterface $localeRepository,
         FormTypeRegistryInterface $formTypeTypeRegistry
     ) {
         parent::__construct($dataClass, $validationGroups);
 
         $this->attributeChoiceType = $attributeChoiceType;
         $this->attributeRepository = $attributeRepository;
+        $this->localeRepository = $localeRepository;
         $this->formTypeRegistry = $formTypeTypeRegistry;
     }
 
@@ -69,7 +80,7 @@ abstract class AttributeValueType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('localeCode')
+            ->add('localeCode', LocaleChoiceType::class)
             ->add('attribute', $this->attributeChoiceType)
             ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
                 $attributeValue = $event->getData();
@@ -100,6 +111,10 @@ abstract class AttributeValueType extends AbstractResourceType
                 $this->addValueField($event->getForm(), $attribute);
             })
         ;
+
+        $builder->get('localeCode')->addModelTransformer(
+            new ReversedTransformer(new ResourceToIdentifierTransformer($this->localeRepository, 'code'))
+        );
     }
 
     /**

@@ -66,6 +66,7 @@
             <argument type="collection"><argument>sylius</argument></argument>
             <argument>Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeChoiceType</argument>
             <argument type="service" id="sylius.repository.product_attribute" />
+            <argument type="service" id="sylius.repository.locale" />
             <argument type="service" id="sylius.form_registry.attribute_type" />
             <tag name="form.type" />
         </service>
