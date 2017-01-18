@@ -87,7 +87,6 @@ class ProductAttributeController extends ResourceController
 
         return $this->render($template, [
             'forms' => $forms,
-            'count' => $request->query->get('count'),
             'metadata' => $this->metadata,
         ]);
     }

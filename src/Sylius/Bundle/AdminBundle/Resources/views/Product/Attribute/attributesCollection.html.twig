@@ -1,8 +1,5 @@
 {% extends 'SyliusUiBundle:Form:theme.html.twig' %}
 
-{% from '@SyliusAdmin/Product/Attribute/attributeValues.html.twig' import checkboxField %}
-{% from '@SyliusAdmin/Product/Attribute/attributeValues.html.twig' import textField %}
-
 {% block collection_widget -%}
     {% spaceless %}
         {% for child in form %}
