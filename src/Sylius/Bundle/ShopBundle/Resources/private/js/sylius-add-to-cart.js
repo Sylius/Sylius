@@ -15,6 +15,12 @@
             $(this).on('submit', function(event) {
                 refresh(this, event);
             });
+        },
+        disable: function() {
+            $('button[type=submit]', this).attr('disabled', 'disabled');
+        },
+        enable: function() {
+            $('button[type=submit]', this).removeAttr('disabled');
         }
     });
 

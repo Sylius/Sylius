@@ -293,7 +293,7 @@ final class ProductContext implements Context
     {
         Assert::false(
             $this->showPage->hasAddToCartButton(),
-            'Add to cart button should not be visible.'
+            'Add to cart button should be absent or disabled.'
         );
     }
 

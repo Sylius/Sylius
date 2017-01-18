@@ -16,6 +16,7 @@ use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
+use Symfony\Component\Form\Exception\TransformationFailedException;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -84,6 +85,10 @@ final class ProductVariantToProductOptionsTransformer implements DataTransformer
             return $variant;
         }
 
-        return null;
+        throw new TransformationFailedException(sprintf(
+            'Variant "%s" not found for product %s',
+            !empty($optionValues[0]) ? $optionValues[0]->getCode() : '',
+            $this->product->getCode()
+        ));
     }
 }
