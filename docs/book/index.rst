@@ -14,5 +14,6 @@ The Books helps to understand how Sylius works.
     customers/index
     products/index
     orders/index
+    themes/index
 
 .. include:: /book/map.rst.inc
