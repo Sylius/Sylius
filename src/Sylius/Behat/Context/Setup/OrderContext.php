@@ -278,7 +278,7 @@ final class OrderContext implements Context
         foreach ($order->getShipments() as $shipment) {
             $shipment->setMethod($shippingMethod);
         }
-        
+
         $this->applyTransitionOnOrderCheckout($order, OrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING);
         $this->applyTransitionOnOrderCheckout($order, OrderCheckoutTransitions::TRANSITION_COMPLETE);
         $this->stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH)->apply(OrderPaymentTransitions::TRANSITION_PAY);
@@ -553,6 +553,16 @@ final class OrderContext implements Context
     public function thisOrderIsAlreadyPaid(OrderInterface $order)
     {
         $this->applyPaymentTransitionOnOrder($order, PaymentTransitions::TRANSITION_COMPLETE);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^(this order) has been refunded$/
+     */
+    public function thisOrderHasBeenRefunded(OrderInterface $order)
+    {
+        $this->applyPaymentTransitionOnOrder($order, PaymentTransitions::TRANSITION_REFUND);
 
         $this->objectManager->flush();
     }
