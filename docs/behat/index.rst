@@ -1,5 +1,5 @@
-Behat guide
-===========
+The Behat Guide
+===============
 
 .. toctree::
     :hidden:

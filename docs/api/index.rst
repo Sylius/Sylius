@@ -1,5 +1,5 @@
-The API Guide
-=============
+The REST API Reference
+======================
 
 .. toctree::
     :hidden:

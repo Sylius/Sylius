@@ -11,6 +11,8 @@
 
 namespace Sylius\Component\Attribute\Model;
 
+use Webmozart\Assert\Assert;
+
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -31,6 +33,11 @@ class AttributeValue implements AttributeValueInterface
      * @var AttributeInterface
      */
     protected $attribute;
+
+    /**
+     * @var string
+     */
+    protected $localeCode;
 
     /**
      * @var string
@@ -105,6 +112,24 @@ class AttributeValue implements AttributeValueInterface
     public function setAttribute(AttributeInterface $attribute)
     {
         $this->attribute = $attribute;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLocaleCode()
+    {
+        return $this->localeCode;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setLocaleCode($localeCode)
+    {
+        Assert::string($localeCode);
+
+        $this->localeCode = $localeCode;
     }
 
     /**

@@ -62,15 +62,17 @@ interface CreateSimpleProductPageInterface extends BaseCreatePageInterface
     public function specifySlugIn($slug, $locale);
 
     /**
-     * @param string $attribute
+     * @param string $attributeName
      * @param string $value
+     * @param string $localeCode
      */
-    public function addAttribute($attribute, $value);
+    public function addAttribute($attributeName, $value, $localeCode);
 
     /**
-     * @param string $attribute
+     * @param string $attributeName
+     * @param string $localeCode
      */
-    public function removeAttribute($attribute);
+    public function removeAttribute($attributeName, $localeCode);
 
     /**
      * @param string $path

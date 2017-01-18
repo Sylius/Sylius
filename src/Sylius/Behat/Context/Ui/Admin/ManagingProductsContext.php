@@ -492,18 +492,20 @@ final class ManagingProductsContext implements Context
 
     /**
      * @When I set its :attribute attribute to :value
+     * @When I set its :attribute attribute to :value in :language
      */
-    public function iSetItsAttributeTo($attribute, $value)
+    public function iSetItsAttributeTo($attribute, $value, $language = 'en_US')
     {
-        $this->createSimpleProductPage->addAttribute($attribute, $value);
+        $this->createSimpleProductPage->addAttribute($attribute, $value, $language);
     }
 
     /**
      * @When I remove its :attribute attribute
+     * @When I remove its :attribute attribute from :language
      */
-    public function iRemoveItsAttribute($attribute)
+    public function iRemoveItsAttribute($attribute, $language = 'en_US')
     {
-        $this->createSimpleProductPage->removeAttribute($attribute);
+        $this->createSimpleProductPage->removeAttribute($attribute, $language);
     }
 
     /**
@@ -515,16 +517,25 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then /^attribute "([^"]+)" of (product "[^"]+") should be "([^"]+)"$/
+     * @Then attribute :attributeName of product :product should be :value
+     * @Then attribute :attributeName of product :product should be :value in :language
      */
-    public function itsAttributeShouldBe($attribute, ProductInterface $product, $value)
+    public function itsAttributeShouldBe($attributeName, ProductInterface $product, $value, $language = 'en_US')
     {
         $this->updateSimpleProductPage->open(['id' => $product->getId()]);
 
+        $valueOnPage = $this->updateSimpleProductPage->getAttributeValue($attributeName, $language);
+
         Assert::same(
             $value,
-            $this->updateSimpleProductPage->getAttributeValue($attribute),
-            sprintf('ProductAttribute "%s" should have value "%s" but it does not.', $attribute, $value)
+            $valueOnPage,
+            sprintf(
+                'Product attribute "%s" should have value "%s" in language "%s" but it has "%s".',
+                $attributeName,
+                $value,
+                $language,
+                $valueOnPage
+            )
         );
     }
 

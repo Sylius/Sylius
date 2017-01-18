@@ -16,7 +16,7 @@ Feature: Adding a new product with text attribute
         When I specify its code as "44_MAGNUM"
         And I name it "44 Magnum" in "English (United States)"
         And I set its price to "$100.00" for "United States" channel
-        And I set its "Gun caliber" attribute to "11 mm"
+        And I set its "Gun caliber" attribute to "11 mm" in "English (United States)"
         And I add it
         Then I should be notified that it has been successfully created
         And the product "44 Magnum" should appear in the store
@@ -28,8 +28,8 @@ Feature: Adding a new product with text attribute
         When I specify its code as "44_MAGNUM"
         And I name it "44 Magnum" in "English (United States)"
         And I set its price to "$100.00" for "United States" channel
-        And I set its "Gun caliber" attribute to "11 mm"
-        And I set its "Overall length" attribute to "30.5 cm"
+        And I set its "Gun caliber" attribute to "11 mm" in "English (United States)"
+        And I set its "Overall length" attribute to "30.5 cm" in "English (United States)"
         And I add it
         Then I should be notified that it has been successfully created
         And the product "44 Magnum" should appear in the store
@@ -42,8 +42,8 @@ Feature: Adding a new product with text attribute
         When I specify its code as "44_MAGNUM"
         And I name it "44 Magnum" in "English (United States)"
         And I set its price to "$100.00" for "United States" channel
-        And I set its "Gun caliber" attribute to "11 mm"
-        And I set its "Overall length" attribute to "30.5 cm"
+        And I set its "Gun caliber" attribute to "11 mm" in "English (United States)"
+        And I set its "Overall length" attribute to "30.5 cm" in "English (United States)"
         And I remove its "Gun caliber" attribute
         And I add it
         Then I should be notified that it has been successfully created

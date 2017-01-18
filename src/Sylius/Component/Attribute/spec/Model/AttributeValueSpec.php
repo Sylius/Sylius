@@ -69,6 +69,17 @@ final class AttributeValueSpec extends ObjectBehavior
         $this->getAttribute()->shouldReturn($attribute);
     }
 
+    function it_has_no_default_locale_code()
+    {
+        $this->getLocaleCode()->shouldReturn(null);
+    }
+
+    function its_locale_code_is_mutable()
+    {
+        $this->setLocaleCode('en');
+        $this->getLocaleCode()->shouldReturn('en');
+    }
+
     function it_has_no_value_by_default()
     {
         $this->getValue()->shouldReturn(null);

@@ -37,6 +37,7 @@ use Sylius\Component\Product\Model\ProductVariantTranslationInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Model\TranslationInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -58,6 +59,11 @@ final class ProductContext implements Context
      * @var ProductRepositoryInterface
      */
     private $productRepository;
+
+    /**
+     * @var RepositoryInterface
+     */
+    private $productAttributeRepository;
 
     /**
      * @var ProductFactoryInterface
@@ -137,6 +143,7 @@ final class ProductContext implements Context
     /**
      * @param SharedStorageInterface $sharedStorage
      * @param ProductRepositoryInterface $productRepository
+     * @param RepositoryInterface $productAttributeRepository
      * @param ProductFactoryInterface $productFactory
      * @param FactoryInterface $productTranslationFactory
      * @param AttributeFactoryInterface $productAttributeFactory
@@ -156,6 +163,7 @@ final class ProductContext implements Context
     public function __construct(
         SharedStorageInterface $sharedStorage,
         ProductRepositoryInterface $productRepository,
+        RepositoryInterface $productAttributeRepository,
         ProductFactoryInterface $productFactory,
         FactoryInterface $productTranslationFactory,
         AttributeFactoryInterface $productAttributeFactory,
@@ -174,6 +182,7 @@ final class ProductContext implements Context
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->productRepository = $productRepository;
+        $this->productAttributeRepository = $productAttributeRepository;
         $this->productFactory = $productFactory;
         $this->productTranslationFactory = $productTranslationFactory;
         $this->productAttributeFactory = $productAttributeFactory;
@@ -491,12 +500,18 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Given /^(this product) has ([^"]+) attribute "([^"]+)" with value "([^"]+)"$/
+     * @Given /^(this product) has (.+?) attribute "([^"]+)" with value "([^"]+)"$/
+     * @Given /^(this product) has (.+?) attribute "([^"]+)" with value "([^"]+)" in ("[^"]+" locale)$/
      */
-    public function thisProductHasAttributeWithValue(ProductInterface $product, $productAttributeType, $productAttributeName, $value)
-    {
-        $attribute = $this->createProductAttribute($productAttributeType, $productAttributeName);
-        $attributeValue = $this->createProductAttributeValue($value, $attribute);
+    public function thisProductHasAttributeWithValue(
+        ProductInterface $product,
+        $productAttributeType,
+        $productAttributeName,
+        $value,
+        $language = 'en_US'
+    ) {
+        $attribute = $this->provideProductAttribute($productAttributeType, $productAttributeName);
+        $attributeValue = $this->createProductAttributeValue($value, $attribute, $language);
         $product->addAttribute($attributeValue);
 
         $this->objectManager->flush();
@@ -507,7 +522,7 @@ final class ProductContext implements Context
      */
     public function thisProductHasPercentAttributeWithValue(ProductInterface $product, $productAttributeName, $value)
     {
-        $attribute = $this->createProductAttribute('percent', $productAttributeName);
+        $attribute = $this->provideProductAttribute('percent', $productAttributeName);
         $attributeValue = $this->createProductAttributeValue($value/100, $attribute);
         $product->addAttribute($attributeValue);
 
@@ -519,7 +534,7 @@ final class ProductContext implements Context
      */
     public function thisProductHasCheckboxAttributeWithValue(ProductInterface $product, $productAttributeType, $productAttributeName, $value)
     {
-        $attribute = $this->createProductAttribute($productAttributeType, $productAttributeName);
+        $attribute = $this->provideProductAttribute($productAttributeType, $productAttributeName);
         $booleanValue = ('Yes' === $value);
         $attributeValue = $this->createProductAttributeValue($booleanValue, $attribute);
         $product->addAttribute($attributeValue);
@@ -532,7 +547,7 @@ final class ProductContext implements Context
      */
     public function thisProductHasPercentAttributeWithValueAtPosition(ProductInterface $product, $productAttributeName, $position)
     {
-        $attribute = $this->createProductAttribute('percent', $productAttributeName);
+        $attribute = $this->provideProductAttribute('percent', $productAttributeName);
         $attribute->setPosition($position);
         $attributeValue = $this->createProductAttributeValue(rand(1, 100)/100, $attribute);
 
@@ -546,7 +561,7 @@ final class ProductContext implements Context
      */
     public function thisProductHasDateTimeAttributeWithDate(ProductInterface $product, $productAttributeType, $productAttributeName, $date)
     {
-        $attribute = $this->createProductAttribute($productAttributeType, $productAttributeName);
+        $attribute = $this->provideProductAttribute($productAttributeType, $productAttributeName);
         $attributeValue = $this->createProductAttributeValue(new \DateTime($date), $attribute);
 
         $product->addAttribute($attributeValue);
@@ -743,17 +758,13 @@ final class ProductContext implements Context
     /**
      * @param string $type
      * @param string $name
-     * @param string|null $code
+     * @param string $code
      *
      * @return ProductAttributeInterface
      */
-    private function createProductAttribute($type, $name, $code = null)
+    private function createProductAttribute($type, $name, $code)
     {
         $productAttribute = $this->productAttributeFactory->createTyped($type);
-
-        if (null === $code) {
-            $code = StringInflector::nameToCode($name);
-        }
 
         $productAttribute->setCode($code);
         $productAttribute->setName($name);
@@ -764,17 +775,41 @@ final class ProductContext implements Context
     }
 
     /**
+     * @param string $type
+     * @param string $name
+     * @param string|null $code
+     *
+     * @return ProductAttributeInterface
+     */
+    private function provideProductAttribute($type, $name, $code = null)
+    {
+        if (null === $code) {
+            $code = StringInflector::nameToCode($name);
+        }
+
+        /** @var ProductAttributeInterface $productAttribute */
+        $productAttribute = $this->productAttributeRepository->findOneBy(['code' => $code]);
+        if (null !== $productAttribute) {
+            return $productAttribute;
+        }
+
+        return $this->createProductAttribute($type, $name, $code);
+    }
+
+    /**
      * @param string $value
      * @param ProductAttributeInterface $attribute
+     * @param string $localeCode
      *
      * @return ProductAttributeValueInterface
      */
-    private function createProductAttributeValue($value, ProductAttributeInterface $attribute)
+    private function createProductAttributeValue($value, ProductAttributeInterface $attribute, $localeCode = 'en_US')
     {
         /** @var ProductAttributeValueInterface $attributeValue */
         $attributeValue = $this->attributeValueFactory->createNew();
         $attributeValue->setAttribute($attribute);
         $attributeValue->setValue($value);
+        $attributeValue->setLocaleCode($localeCode);
 
         $this->objectManager->persist($attributeValue);
 

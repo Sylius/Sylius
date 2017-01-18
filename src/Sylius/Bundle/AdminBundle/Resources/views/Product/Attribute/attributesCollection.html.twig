@@ -1,14 +1,27 @@
 {% extends 'SyliusUiBundle:Form:theme.html.twig' %}
 
-{% from '@SyliusAdmin/Product/Attribute/attributeValues.html.twig' import checkboxField %}
-{% from '@SyliusAdmin/Product/Attribute/attributeValues.html.twig' import textField %}
-
 {% block collection_widget -%}
-    {% spaceless %}
-        {% for child in form %}
-            {{ _self.collection_item(child, allow_delete, button_delete_label, loop.index0) }}
+    {% import '@SyliusUi/Macro/flags.html.twig' as flags %}
+
+    <div class="ui top attached tabular menu">
+        {% for localeCode, translationForm in attr.translations %}
+            <a class="item{% if 0 == loop.index0 %} active{% endif %}" data-tab="{{ localeCode }}">
+                {{ flags.fromLocaleCode(localeCode) }} {{ localeCode|sylius_locale_name }}
+            </a>
         {% endfor %}
-    {% endspaceless %}
+    </div>
+
+    {% for localeCode, translationForm in attr.translations %}
+        <div class="ui bottom attached tab segment{% if 0 == loop.index0 %} active{% endif %}" data-tab="{{ localeCode }}">
+            {% spaceless %}
+                {% for child in form %}
+                    {% if localeCode == child.localeCode.vars.value %}
+                        {{ _self.collection_item(child, allow_delete, button_delete_label, loop.index0) }}
+                    {% endif %}
+                {% endfor %}
+            {% endspaceless %}
+        </div>
+    {% endfor %}
 {%- endblock collection_widget %}
 
 {% macro collection_item(form, allow_delete, button_delete_label, index) %}
@@ -32,5 +45,6 @@
             </div>
         {% endif %}
         <input type="hidden" name="{{ form.attribute.vars.full_name }}" id="{{ form.attribute.vars.id }}" value="{{ form.vars.data.attribute.id }}"/>
+        <input type="hidden" name="{{ form.localeCode.vars.full_name }}" id="{{ form.localeCode.vars.id }}" value="{{ form.localeCode.vars.value }}"/>
     </div>
 {% endmacro %}

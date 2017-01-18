@@ -17,7 +17,7 @@ The Book
 --------
 
 The Developer's guide to leveraging the flexibility of Sylius. Here you will find all the concepts used in Sylius.
-The Books helps to understand how Sylius works.
+:doc:`The Book </book/index>` helps to understand how Sylius works.
 
 .. toctree::
    :hidden:
@@ -29,7 +29,7 @@ The Books helps to understand how Sylius works.
 The Customization Guide
 -----------------------
 
-The Customization Guide is helpful while wanting to adapt Sylius to your personal business needs.
+:doc:`The Customization Guide </customization/index>` is helpful while wanting to adapt Sylius to your personal business needs.
 
 .. toctree::
    :hidden:
@@ -38,10 +38,10 @@ The Customization Guide is helpful while wanting to adapt Sylius to your persona
 
 .. include:: /customization/map.rst.inc
 
-The API Guide
--------------
+The REST API Reference
+----------------------
 
-This chapter covers the REST API of Sylius platform.
+:doc:`The API guide </api/index>` covers the REST API of Sylius platform.
 
 .. toctree::
    :hidden:
@@ -50,10 +50,10 @@ This chapter covers the REST API of Sylius platform.
 
 .. include:: /api/map.rst.inc
 
-Cookbook
---------
+The Cookbook
+------------
 
-Specific solutions for specific needs.
+:doc:`The Cookbook </cookbook/index>` is a collection of specific solutions for specific needs.
 
 .. toctree::
    :hidden:
@@ -65,7 +65,7 @@ Specific solutions for specific needs.
 The Behat Guide
 ---------------
 
-Learn how to write clean and reusable features, contexts and pages.
+In :doc:`the behat Guide </behat/index>` you will learn how to write clean and reusable features, contexts and pages.
 
 .. toctree::
    :hidden:
@@ -77,7 +77,7 @@ Learn how to write clean and reusable features, contexts and pages.
 Bundles
 -------
 
-Documentation of all Sylius bundles.
+:doc:`Documentation of all Sylius bundles </bundles/index>`.
 
 .. toctree::
    :hidden:
@@ -89,7 +89,7 @@ Documentation of all Sylius bundles.
 Components
 ----------
 
-E-Commerce components for PHP.
+:doc:`E-Commerce components for PHP documentation </components/index>`.
 
 .. toctree::
    :hidden:
@@ -98,10 +98,10 @@ E-Commerce components for PHP.
 
 .. include:: /components/map.rst.inc
 
-Contributing
-------------
+The Contribution Guide
+----------------------
 
-A guide to contribute to Sylius.
+:doc:`The Contribution Guide </contributing/index>` to Sylius.
 
 .. toctree::
    :hidden:

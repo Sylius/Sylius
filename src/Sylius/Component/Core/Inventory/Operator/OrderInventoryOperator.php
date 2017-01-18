@@ -26,7 +26,11 @@ final class OrderInventoryOperator implements OrderInventoryOperatorInterface
      */
     public function cancel(OrderInterface $order)
     {
-        if (OrderPaymentStates::STATE_PAID === $order->getPaymentState()) {
+        if (in_array(
+            $order->getPaymentState(),
+            [OrderPaymentStates::STATE_PAID, OrderPaymentStates::STATE_REFUNDED],
+            true
+        )) {
             $this->giveBack($order);
 
             return;
@@ -34,7 +38,7 @@ final class OrderInventoryOperator implements OrderInventoryOperatorInterface
 
         $this->release($order);
     }
-    
+
     /**
      * {@inheritdoc}
      */
