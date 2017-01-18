@@ -351,11 +351,11 @@ Parameters
 ~~~~~~~~~~
 
 channel
-    The id of channel
+    Channel code (e.g. "US_WEB")
 customer *(optional)*
     The id of customer
-currency
-    Currency code
+localeCode
+    Locale code (e.g. "en_US")
 
 Response
 ~~~~~~~~
