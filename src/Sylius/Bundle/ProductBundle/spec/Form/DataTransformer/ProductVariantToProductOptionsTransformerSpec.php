@@ -19,6 +19,7 @@ use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
+use Symfony\Component\Form\Exception\TransformationFailedException;
 
 final class ProductVariantToProductOptionsTransformerSpec extends ObjectBehavior
 {
@@ -73,13 +74,16 @@ final class ProductVariantToProductOptionsTransformerSpec extends ObjectBehavior
         ;
     }
 
-    function it_reverse_transforms_variable_without_variants_into_null(
+    function it_throws_exception_when_trying_to_reverse_transform_variable_without_variants(
         ProductInterface $variable,
         ProductOptionValueInterface $optionValue
     ) {
         $variable->getVariants()->willReturn([]);
+        $variable->getCode()->willReturn('example');
 
-        $this->reverseTransform([$optionValue])->shouldReturn(null);
+        $this
+            ->shouldThrow(TransformationFailedException::class)
+            ->duringReverseTransform([$optionValue]);
     }
 
     function it_reverse_transforms_variable_with_variants_if_options_match(
@@ -94,24 +98,30 @@ final class ProductVariantToProductOptionsTransformerSpec extends ObjectBehavior
         $this->reverseTransform([$optionValue])->shouldReturn($variant);
     }
 
-    function it_does_not_reverse_transform_variable_with_variants_if_options_not_match(
+    function it_throws_exception_when_trying_to_reverse_transform_variable_with_variants_if_options_not_match(
         ProductInterface $variable,
         ProductVariantInterface $variant,
         ProductOptionValueInterface $optionValue
     ) {
         $variable->getVariants()->willReturn([$variant]);
+        $variable->getCode()->willReturn('example');
 
         $variant->hasOptionValue($optionValue)->willReturn(false);
 
-        $this->reverseTransform([$optionValue])->shouldReturn(null);
+        $this
+            ->shouldThrow(TransformationFailedException::class)
+            ->duringReverseTransform([$optionValue]);
     }
 
-    function it_does_not_reverse_transform_variable_with_variants_if_options_are_missing(
+    function it_throws_exception_when_trying_to_reverse_transform_variable_with_variants_if_options_are_missing(
         ProductInterface $variable,
         ProductVariantInterface $variant
     ) {
         $variable->getVariants()->willReturn([$variant]);
+        $variable->getCode()->willReturn('example');
 
-        $this->reverseTransform([null])->shouldReturn(null);
+        $this
+            ->shouldThrow(TransformationFailedException::class)
+            ->duringReverseTransform([null]);
     }
 }
