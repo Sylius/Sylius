@@ -529,6 +529,24 @@ final class OrderContext implements Context
     }
 
     /**
+     * @Given /^(this customer) has(?:| also) placed (an order "[^"]+") buying a single ("[^"]+" product) for ("[^"]+") on the ("[^"]+" channel)$/
+     */
+    public function customerHasPlacedAnOrderBuyingASingleProductForOnTheChannel(
+        CustomerInterface $customer,
+        $orderNumber,
+        ProductInterface $product,
+        $price,
+        ChannelInterface $channel
+    ) {
+        $order = $this->createOrder($customer, $orderNumber, $channel);
+        $order->setState(OrderInterface::STATE_NEW);
+
+        $this->addVariantWithPriceToOrder($order, $product->getVariants()->first(), $price);
+
+        $this->orderRepository->add($order);
+    }
+
+    /**
      * @Given /^(this order) is already paid$/
      * @Given the order :order is already paid
      */
