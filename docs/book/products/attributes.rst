@@ -19,6 +19,8 @@ There are a few available types of an Attribute:
 * integer
 * percent
 * textarea
+* date
+* datetime
 
 What these types may be useful for?
 
@@ -27,6 +29,8 @@ What these types may be useful for?
 - integer - number of elements when a product is a set of items.
 - percent - show how much cotton is there in a piece of clothing
 - textarea - display more detailed information about a product
+- date - release date of a movie
+- datetime - accurate date and time of an event
 
 How to create an Attribute?
 ---------------------------
