@@ -434,7 +434,7 @@ final class OrderContext implements Context
         ProductInterface $product
     ) {
         for ($i = 0; $i < $orderCount; $i++) {
-            $order = $this->createOrder($customer, uniqid('#'), $channel, $channel->getBaseCurrency()->getCode());
+            $order = $this->createOrder($customer, uniqid('#'), $channel);
 
             $this->addProductVariantsToOrderWithChannelPrice(
                 $order,
@@ -529,19 +529,19 @@ final class OrderContext implements Context
     }
 
     /**
-     * @Given /^(this customer) has(?:| also) placed (an order "[^"]+") buying a single ("[^"]+" product) for ("[^"]+") in ("[^"]+" currency)$/
+     * @Given /^(this customer) has(?:| also) placed (an order "[^"]+") buying a single ("[^"]+" product) for ("[^"]+") on the ("[^"]+" channel)$/
      */
-    public function customerHasPlacedAnOrderBuyingASingleProductForInCurrency(
+    public function customerHasPlacedAnOrderBuyingASingleProductForOnTheChannel(
         CustomerInterface $customer,
         $orderNumber,
         ProductInterface $product,
-        $total,
-        CurrencyInterface $currency
+        $price,
+        ChannelInterface $channel
     ) {
-        $order = $this->createOrder($customer, $orderNumber, null, $currency->getCode());
+        $order = $this->createOrder($customer, $orderNumber, $channel);
         $order->setState(OrderInterface::STATE_NEW);
 
-        $this->addVariantWithPriceToOrder($order, $product->getVariants()->first(), $total);
+        $this->addVariantWithPriceToOrder($order, $product->getVariants()->first(), $price);
 
         $this->orderRepository->add($order);
     }
@@ -681,7 +681,6 @@ final class OrderContext implements Context
      * @param CustomerInterface $customer
      * @param string $number
      * @param ChannelInterface|null $channel
-     * @param string|null $currencyCode
      * @param string|null $localeCode
      *
      * @return OrderInterface
@@ -690,10 +689,9 @@ final class OrderContext implements Context
         CustomerInterface $customer,
         $number = null,
         ChannelInterface $channel = null,
-        $currencyCode = null,
         $localeCode = null
     ) {
-        $order = $this->createCart($customer, $channel, $currencyCode, $localeCode);
+        $order = $this->createCart($customer, $channel, $localeCode);
 
         if (null !== $number) {
             $order->setNumber($number);
@@ -707,7 +705,6 @@ final class OrderContext implements Context
     /**
      * @param CustomerInterface $customer
      * @param ChannelInterface|null $channel
-     * @param string|null $currencyCode
      * @param string|null $localeCode
      *
      * @return OrderInterface
@@ -715,7 +712,6 @@ final class OrderContext implements Context
     private function createCart(
         CustomerInterface $customer,
         ChannelInterface $channel = null,
-        $currencyCode = null,
         $localeCode = null
     ) {
         /** @var OrderInterface $order */
@@ -724,11 +720,7 @@ final class OrderContext implements Context
         $order->setCustomer($customer);
         $order->setChannel((null !== $channel) ? $channel : $this->sharedStorage->get('channel'));
         $order->setLocaleCode((null !== $localeCode) ? $localeCode : $this->sharedStorage->get('locale')->getCode());
-
-        $currencyCode = $currencyCode ? $currencyCode : $order->getChannel()->getBaseCurrency()->getCode();
-        $currency = $this->currencyRepository->findOneBy(['code' => $currencyCode]);
-
-        $order->setCurrencyCode($currency->getCode());
+        $order->setCurrencyCode($order->getChannel()->getBaseCurrency()->getCode());
 
         return $order;
     }
