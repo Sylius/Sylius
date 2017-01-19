@@ -10,6 +10,7 @@ sylius_api_customer_index:
             serialization_version: $version
             serialization_groups: [Default]
             paginate: $limit
+            sortable: true
             sorting:
                 id: desc
 
