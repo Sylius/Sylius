@@ -486,6 +486,8 @@ final class CartContext implements Context
      */
     public function myCartSTotalShouldBe($total)
     {
+        $this->summaryPage->open();
+
         Assert::same(
             $total,
             $this->summaryPage->getCartTotal(),

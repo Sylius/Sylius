@@ -13,6 +13,7 @@ namespace Sylius\Behat\Page\Shop\Product;
 
 use Behat\Mink\Driver\Selenium2Driver;
 use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Behat\Page\UnexpectedPageException;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Webmozart\Assert\Assert;
@@ -271,6 +272,28 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         Assert::notNull($products);
 
         return null !== $products->find('css', sprintf('.sylius-product-name:contains("%s")', $productName));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function open(array $urlParameters = [])
+    {
+        $start = microtime(true);
+        $end = $start + 5;
+        do {
+            try {
+                parent::open($urlParameters);
+                $isOpen = true;
+            } catch (UnexpectedPageException $exception) {
+                $isOpen = false;
+                sleep(1);
+            }
+        } while(!$isOpen && microtime(true) < $end);
+
+        if (!$isOpen) {
+            throw new UnexpectedPageException();
+        }
     }
 
     /**

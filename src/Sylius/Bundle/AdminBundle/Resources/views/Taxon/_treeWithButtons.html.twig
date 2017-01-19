@@ -18,13 +18,6 @@
                         {{ buttons.create(path('sylius_admin_taxon_create_for_parent', { 'id': taxon.id }), 'sylius.ui.add'|trans) }}
                         {{ buttons.edit(path('sylius_admin_taxon_update', { 'id': taxon.id }), null, null, false) }}
                         {{ buttons.delete(path('sylius_admin_taxon_delete', { 'id': taxon.id }), null, false, taxon.id) }}
-                        <form action="{{ url }}" method="post">
-                            <input type="hidden" name="_method" value="DELETE">
-                            <button class="ui red {% if labeled %}labeled {% endif %}icon button" type="submit" data-requires-confirmation>
-                                <i class="icon trash"></i> {{ (message is empty and labeled) ? 'sylius.ui.delete'|trans : message }}
-                            </button>
-                            <input type="hidden" name="_csrf_token" value="{{ csrf_token(resourceId) }}" />
-                        </form>
                         <a class="ui icon button sylius-taxon-move-up" data-url="{{ path('sylius_admin_ajax_taxon_move', { id: taxon.id }) }}" data-id="{{ taxon.id }}" data-position="{{ taxon.position }}">
                             <i class="icon arrow up"></i>
                         </a>

@@ -12,44 +12,36 @@
 
     $.fn.extend({
         addToCart: function () {
-            $(this).on('submit', function(event) {
-                refresh(this, event);
+            var element = $(this);
+            var href = $(element).attr('action');
+            var redirectUrl = $(element).data('redirect');
+            var validationElement = $('#sylius-cart-validation-error');
+
+            $(element).api({
+                method: 'POST',
+                on: 'submit',
+                cache: false,
+                url: href,
+                beforeSend: function (settings) {
+                    settings.data = $(this).serialize();
+
+                    return settings;
+                },
+                onSuccess: function (response) {
+                    validationElement.addClass('hidden');
+                    window.location.replace(redirectUrl);
+                },
+                onFailure: function (response) {
+                    validationElement.removeClass('hidden');
+                    var validationMessage = '';
+
+                    $.each(response.errors.errors, function (key, message) {
+                        validationMessage += message;
+                    });
+                    validationElement.html(validationMessage);
+                    $(element).removeClass('loading');
+                },
             });
-        },
-        disable: function() {
-            $('button[type=submit]', this).attr('disabled', 'disabled');
-        },
-        enable: function() {
-            $('button[type=submit]', this).removeAttr('disabled');
         }
     });
-
-    function refresh(element, event) {
-        event.preventDefault();
-        var data = $(element).serialize();
-        var href = $(element).attr('action');
-        var redirectUrl = $(element).data('redirect');
-        var validationElement = $('#sylius-cart-validation-error');
-
-        $.ajax({
-            type: "POST",
-            url: href,
-            data: data,
-            cache: false,
-            success: function (response) {
-                validationElement.addClass('hidden');
-                window.location.replace(redirectUrl);
-            },
-            error: function (response) {
-                validationElement.removeClass('hidden');
-                var validationMessage = '';
-                $.each(response.responseJSON.errors.errors, function (key, message) {
-                    validationMessage += message;
-                });
-                validationElement.html(validationMessage);
-                $(element).removeClass('loading');
-            }
-        })
-    }
-
 })( jQuery );
