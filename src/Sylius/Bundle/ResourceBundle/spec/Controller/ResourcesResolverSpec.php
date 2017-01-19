@@ -34,7 +34,7 @@ final class ResourcesResolverSpec extends ObjectBehavior
         $this->shouldImplement(ResourcesResolverInterface::class);
     }
 
-    function it_gets_all_resources_if_not_paginated_and_there_is_no_limit(
+    function it_gets_all_resources_if_has_no_criteria(
         RequestConfiguration $requestConfiguration,
         RepositoryInterface $repository,
         ResourceInterface $firstResource,
@@ -44,10 +44,11 @@ final class ResourcesResolverSpec extends ObjectBehavior
         $requestConfiguration->getRepositoryMethod(null)->willReturn(null);
 
         $requestConfiguration->isPaginated()->willReturn(false);
-        $requestConfiguration->isLimited()->willReturn(false);
-        $requestConfiguration->getSorting()->willReturn([]);
+        $requestConfiguration->isFilterable()->willReturn(false);
+        $requestConfiguration->isSortable()->willReturn(false);
+        $requestConfiguration->getLimit()->willReturn(null);
 
-        $repository->findBy([], [])->willReturn([$firstResource, $secondResource]);
+        $repository->findBy([], [], null)->willReturn([$firstResource, $secondResource]);
 
         $this->getResources($requestConfiguration, $repository)->shouldReturn([$firstResource, $secondResource]);
     }
@@ -63,6 +64,8 @@ final class ResourcesResolverSpec extends ObjectBehavior
         $requestConfiguration->getRepositoryMethod(null)->willReturn(null);
 
         $requestConfiguration->isPaginated()->willReturn(false);
+        $requestConfiguration->isFilterable()->willReturn(true);
+        $requestConfiguration->isSortable()->willReturn(true);
         $requestConfiguration->isLimited()->willReturn(true);
         $requestConfiguration->getLimit()->willReturn(15);
 
@@ -103,8 +106,8 @@ final class ResourcesResolverSpec extends ObjectBehavior
         $requestConfiguration->isPaginated()->willReturn(true);
         $requestConfiguration->getPaginationMaxPerPage()->willReturn(5);
         $requestConfiguration->isLimited()->willReturn(false);
-        $requestConfiguration->getCriteria()->willReturn([]);
-        $requestConfiguration->getSorting()->willReturn([]);
+        $requestConfiguration->isFilterable()->willReturn(false);
+        $requestConfiguration->isSortable()->willReturn(false);
 
         $repository->createPaginator([], [])->willReturn($paginator);
 
