@@ -3,6 +3,7 @@
 
 sylius_admin_dashboard_redirect:
     path: /admin
+    methods: [GET]
     defaults:
         _controller: FrameworkBundle:Redirect:redirect
         route: sylius_admin_dashboard

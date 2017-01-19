@@ -31,6 +31,7 @@ sylius_shop_cart_clear:
 
 sylius_shop_cart_item_remove:
     path: /{id}/remove
+    methods: [DELETE]
     defaults:
         _controller: sylius.controller.order_item:removeAction
         _sylius:

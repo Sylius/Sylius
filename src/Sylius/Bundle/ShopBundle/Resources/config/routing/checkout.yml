@@ -3,6 +3,7 @@
 
 sylius_shop_checkout_start:
     path: /
+    methods: [GET]
     defaults:
         _controller: FrameworkBundle:Redirect:redirect
         route: sylius_shop_checkout_address
