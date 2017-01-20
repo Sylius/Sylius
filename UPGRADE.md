@@ -82,6 +82,9 @@ After:
 ### Payment / PaymentBundle
 
 * Changed default ``Payment::$state`` from *new* to *cart*.
+* Credit Card model and all related code have been removed.
+* `->getSource()` and `->setSource(PaymentSourceInterface $source)` have been removed from `PaymentInterface`.
+* `PaymentSourceInterface` has been removed.
 
 ### PayumBundle
 

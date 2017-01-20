@@ -48,11 +48,6 @@ class Payment implements PaymentInterface
     protected $state = PaymentInterface::STATE_CART;
 
     /**
-     * @var CreditCardInterface
-     */
-    protected $creditCard;
-
-    /**
      * @var array
      */
     protected $details = [];
@@ -84,32 +79,6 @@ class Payment implements PaymentInterface
     public function setMethod(PaymentMethodInterface $method = null)
     {
         $this->method = $method;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getSource()
-    {
-        if (null !== $this->creditCard) {
-            return $this->creditCard;
-        }
-
-        return null;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setSource(PaymentSourceInterface $source = null)
-    {
-        if (null === $source) {
-            $this->creditCard = null;
-        }
-
-        if ($source instanceof CreditCardInterface) {
-            $this->creditCard = $source;
-        }
     }
 
     /**

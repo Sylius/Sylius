@@ -41,11 +41,5 @@
             <argument>%sylius.payment_gateways%</argument>
             <tag name="form.type" />
         </service>
-
-        <service id="sylius.form.type.credit_card" class="Sylius\Bundle\PaymentBundle\Form\Type\CreditCardType">
-            <argument>%sylius.model.credit_card.class%</argument>
-            <argument type="collection"><argument>sylius</argument></argument>
-            <tag name="form.type" />
-        </service>
     </services>
 </container>

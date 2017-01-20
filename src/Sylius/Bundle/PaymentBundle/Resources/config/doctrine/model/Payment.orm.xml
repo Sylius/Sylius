@@ -28,13 +28,6 @@
         <field name="state" column="state" type="string" />
         <field name="details" column="details" type="json_array" />
 
-        <many-to-one field="creditCard" target-entity="Sylius\Component\Payment\Model\CreditCardInterface">
-            <cascade>
-                <cascade-all/>
-            </cascade>
-            <join-column name="credit_card_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
-        </many-to-one>
-
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>
