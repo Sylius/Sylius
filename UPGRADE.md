@@ -5,6 +5,7 @@
 ### Addressing / AddressingBundle
 
 ### AdminBundle
+* Route `sylius_admin_order_shipment_ship` has been added to have specific end point only for updating via http PUT method and `sylius_admin_partial_shipment_ship` route is only for rendering the form.
 
 ### ApiBundle
 
@@ -151,6 +152,25 @@ These services will be generated automatically based on subject name.
 ## Application:
 
 ### Configuration
+
+### Security
+
+Some change has been made to `app/config/security.yml`
+  ```yaml
+    firewalls:
+        admin:
+            form_login:
+                csrf_token_generator: security.csrf.token_manager
+                csrf_parameter: _csrf_admin_security_token
+                csrf_token_id: admin_authenticate
+        shop:
+            form_login:
+                csrf_token_generator: security.csrf.token_manager
+                csrf_parameter: _csrf_shop_security_token
+                csrf_token_id: shop_authenticate
+  ```
+From now one you need to pass csrf token to your login-check request so you need to add `<input type="hidden" value={{ csrf_token('csrf_token_id') }} name="csrf_parameter">` into your login form.
+Example input `<input type="hidden" name="_csrf_admin_security_token" value="{{ csrf_token('admin_authenticate') }}">`
 
 ### Behat
 
