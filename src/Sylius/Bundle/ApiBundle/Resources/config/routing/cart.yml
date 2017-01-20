@@ -1,7 +1,7 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-sylius_api_order_index:
+sylius_api_cart_index:
     path: /
     methods: [GET]
     defaults:
@@ -13,7 +13,7 @@ sylius_api_order_index:
             sorting:
                 updatedAt: desc
 
-sylius_api_order_create:
+sylius_api_cart_create:
     path: /
     methods: [POST]
     defaults:
@@ -22,7 +22,7 @@ sylius_api_order_create:
             serialization_version: $version
             form: Sylius\Bundle\ApiBundle\Form\Type\OrderType
 
-sylius_api_order_delete:
+sylius_api_cart_delete:
     path: /{id}
     methods: [DELETE]
     defaults:
@@ -32,7 +32,7 @@ sylius_api_order_delete:
             serialization_version: $version
             csrf_protection: false
 
-sylius_api_order_show:
+sylius_api_cart_show:
     path: /{id}
     methods: [GET]
     defaults:

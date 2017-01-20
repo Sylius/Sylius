@@ -1,18 +1,6 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-sylius_api_order_item_index:
-    path: /
-    methods: [GET]
-    defaults:
-        _controller: sylius.controller.order_item:indexAction
-        _sylius:
-            serialization_version: $version
-            filterable: true
-            criteria:
-                order: $orderId
-            paginate: false
-
 sylius_api_order_item_create:
     path: /
     methods: [POST]
@@ -20,6 +8,10 @@ sylius_api_order_item_create:
         _controller: sylius.controller.order_item:createAction
         _sylius:
             serialization_version: $version
+            factory:
+                method: createForCart
+                arguments:
+                  - expr:service('sylius.repository.order').find($cartId)
 
 sylius_api_order_item_update:
     path: /{id}
