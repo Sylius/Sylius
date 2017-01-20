@@ -1,0 +1,12 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_api_order_delete:
+    path: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.order:deleteAction
+        _format: json
+        _sylius:
+            serialization_version: $version
+            csrf_protection: false

@@ -143,7 +143,18 @@ EOT;
     /**
      * @test
      */
-    public function it_returns_not_found_response_when_trying_to_delete_order_which_does_not_exist()
+    public function it_denies_carts_deletion_for_non_authenticated_user()
+    {
+        $this->client->request('DELETE', '/api/v1/carts/-1');
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
+    }
+
+    /**
+     * @test
+     */
+    public function it_returns_not_found_response_when_trying_to_delete_cart_which_does_not_exist()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -156,7 +167,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_delete_order()
+    public function it_allows_to_delete_cart()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $carts = $this->loadFixturesFromFile('resources/carts.yml');
@@ -167,6 +178,20 @@ EOT;
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
 
         $this->client->request('GET', '/api/v1/carts/'.$carts['order_001']->getId(), [], [], static::$authorizedHeaderWithContentType);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
+    }
+
+    /**
+     * @test
+     */
+    public function it_does_not_allow_to_delete_orders_in_state_different_than_cart()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $carts = $this->loadFixturesFromFile('resources/order.yml');
+
+        $this->client->request('DELETE', '/api/v1/carts/'.$carts['order_001']->getId(), [], [], static::$authorizedHeaderWithContentType, []);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
@@ -390,5 +415,54 @@ EOT;
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'cart/update_hard_available_cart_item_validation_error_response', Response::HTTP_BAD_REQUEST);
+    }
+
+    /**
+     * @test
+     */
+    public function it_denies_carts_item_deletation_for_non_authenticated_user()
+    {
+        $this->client->request('DELETE', '/api/v1/carts/-1/items/-1');
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
+    }
+
+    /**
+     * @test
+     */
+    public function it_returns_not_found_response_when_trying_to_delete_cart_item_which_does_not_exist()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $fulfilledCart = $this->loadFixturesFromFile('resources/fulfilled_cart.yml');
+        /** @var OrderInterface $order */
+        $order = $fulfilledCart['fulfilled_cart'];
+
+        $url = sprintf('/api/v1/carts/%s/items/-1', $order->getId());
+
+        $this->client->request('DELETE', $url, [], [], static::$authorizedHeaderWithContentType);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_to_delete_cart_item()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $fulfilledCart = $this->loadFixturesFromFile('resources/fulfilled_cart.yml');
+        /** @var OrderInterface $order */
+        $order = $fulfilledCart['fulfilled_cart'];
+        /** @var OrderItemInterface $orderItem */
+        $orderItem = $fulfilledCart['hard_available_mug_item'];
+
+        $url = sprintf('/api/v1/carts/%s/items/%s', $order->getId(), $orderItem->getId());
+
+        $this->client->request('DELETE', $url, [], [], static::$authorizedHeaderWithContentType);
+
+        $response = $this->client->getResponse();
+        $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
     }
 }

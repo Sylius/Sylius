@@ -31,6 +31,9 @@ sylius_api_cart_delete:
         _sylius:
             serialization_version: $version
             csrf_protection: false
+            repository:
+                method: findCartById
+                arguments: [$id]
 
 sylius_api_cart_show:
     path: /{id}
