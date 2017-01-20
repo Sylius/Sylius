@@ -8,6 +8,7 @@ sylius_api_order_item_create:
         _controller: sylius.controller.order_item:createAction
         _sylius:
             serialization_version: $version
+            form: Sylius\Bundle\ApiBundle\Form\Type\OrderItemType
             factory:
                 method: createForCart
                 arguments:
@@ -20,6 +21,7 @@ sylius_api_order_item_update:
         _controller: sylius.controller.order_item:updateAction
         _sylius:
             serialization_version: $version
+            form: Sylius\Bundle\ApiBundle\Form\Type\OrderItemType
             criteria:
                 order: $orderId
 

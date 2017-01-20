@@ -59,7 +59,7 @@ final class CartApiTest extends JsonApiTestCase
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $orderData = $this->loadFixturesFromFile('resources/carts.yml');
 
-        $this->client->request('GET', '/api/v1/carts/'.$orderData['order-001']->getId(), [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('GET', '/api/v1/carts/'.$orderData['order_001']->getId(), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'cart/show_response', Response::HTTP_OK);
@@ -159,14 +159,144 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $carts = $this->loadFixturesFromFile('resources/carts.yml');
 
-        $this->client->request('DELETE', '/api/v1/carts/'.$carts['order-001']->getId(), [], [], static::$authorizedHeaderWithContentType, []);
+        $this->client->request('DELETE', '/api/v1/carts/'.$carts['order_001']->getId(), [], [], static::$authorizedHeaderWithContentType, []);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
 
-        $this->client->request('GET', '/api/v1/carts/'.$carts['order-001']->getId(), [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('GET', '/api/v1/carts/'.$carts['order_001']->getId(), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
+    }
+
+    /**
+     * @test
+     */
+    public function it_denies_adding_a_product_to_cart_for_non_authenticated_user()
+    {
+        $this->client->request('POST', '/api/v1/carts/1/items/');
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
+    }
+
+    /**
+     * @test
+     */
+    public function it_does_not_allow_to_add_item_to_cart_without_providing_all_needed_fields()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $carts = $this->loadFixturesFromFile('resources/carts.yml');
+
+        $this->client->request('POST', sprintf('/api/v1/carts/%s/items/', $carts['order_001']->getId()), [], [], static::$authorizedHeaderWithContentType);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'cart/add_to_cart_validation_fail_response', Response::HTTP_BAD_REQUEST);
+    }
+
+    /**
+     * @test
+     */
+    public function it_adds_an_item_to_the_cart()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $carts = $this->loadFixturesFromFile('resources/carts.yml');
+
+        $data =
+<<<EOT
+        {
+            "variant": "MUG_SW",
+            "quantity": 1
+        }
+EOT;
+        $this->client->request('POST', sprintf('/api/v1/carts/%s/items/', $carts['order_001']->getId()), [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'cart/add_to_cart_response', Response::HTTP_CREATED);
+    }
+
+    /**
+     * @test
+     */
+    public function it_does_not_allow_to_add_item_with_negative_quantity()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $carts = $this->loadFixturesFromFile('resources/carts.yml');
+
+        $data =
+<<<EOT
+        {
+            "variant": "MUG_SW",
+            "quantity": -1
+        }
+EOT;
+        $this->client->request('POST', sprintf('/api/v1/carts/%s/items/', $carts['order_001']->getId()), [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'cart/add_to_cart_quantity_validation_fail_response', Response::HTTP_BAD_REQUEST);
+    }
+
+    /**
+     * @test
+     */
+    public function it_adds_an_item_to_the_cart_with_quantity_bigger_than_one()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $carts = $this->loadFixturesFromFile('resources/carts.yml');
+
+        $data =
+<<<EOT
+        {
+            "variant": "MUG_SW",
+            "quantity": 3
+        }
+EOT;
+        $this->client->request('POST', sprintf('/api/v1/carts/%s/items/', $carts['order_001']->getId()), [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'cart/add_to_cart_with_bigger_quantity_response', Response::HTTP_CREATED);
+    }
+
+    /**
+     * @test
+     */
+    public function it_adds_an_item_to_the_cart_with_that_contains_tracked_variant()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $carts = $this->loadFixturesFromFile('resources/carts.yml');
+
+        $data =
+<<<EOT
+        {
+            "variant": "HARD_AVAILABLE_MUG",
+            "quantity": 1
+        }
+EOT;
+        $this->client->request('POST', sprintf('/api/v1/carts/%s/items/', $carts['order_001']->getId()), [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'cart/add_to_cart_hard_available_item_response', Response::HTTP_CREATED);
+    }
+
+    /**
+     * @test
+     */
+    public function it_checks_if_requested_variant_is_available()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $carts = $this->loadFixturesFromFile('resources/carts.yml');
+
+        $data =
+<<<EOT
+        {
+            "variant": "HARD_AVAILABLE_MUG",
+            "quantity": 3
+        }
+EOT;
+        $this->client->request('POST', sprintf('/api/v1/carts/%s/items/', $carts['order_001']->getId()), [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'cart/add_to_cart_hard_available_item_validation_error_response', Response::HTTP_BAD_REQUEST);
     }
 }

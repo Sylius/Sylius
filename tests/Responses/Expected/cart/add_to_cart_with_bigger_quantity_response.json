@@ -1,0 +1,86 @@
+{
+    "id": @integer@,
+    "order": {
+        "id": @integer@,
+        "items": [],
+        "items_total": 60,
+        "adjustments": [],
+        "adjustments_total": 0,
+        "total": 60,
+        "state": "cart",
+        "created_at": "@string@.isDateTime()",
+        "updated_at": "@string@.isDateTime()",
+        "channel": {
+            "id": @integer@,
+            "code": "WEB",
+            "name": "Web Channel",
+            "description": "Lorem ipsum",
+            "hostname": "localhost",
+            "color": "black",
+            "created_at": "@string@.isDateTime()",
+            "updated_at": "@string@.isDateTime()",
+            "enabled": true,
+            "tax_calculation_strategy": "order_items_based",
+            "_links": {
+                "self": {
+                    "href": "@string@"
+                }
+            }
+        },
+        "payments": [],
+        "shipments": [],
+        "checkout_state": "cart"
+    },
+    "quantity": 3,
+    "unit_price": 20,
+    "total": 60,
+    "immutable": false,
+    "units": [
+        {
+            "id": @integer@,
+            "adjustments": [],
+            "adjustments_total": 0,
+            "_links": {
+                "order": {
+                    "href": "@string@"
+                }
+            }
+        },
+        {
+            "id": @integer@,
+            "adjustments": [],
+            "adjustments_total": 0,
+            "_links": {
+                "order": {
+                    "href": "@string@"
+                }
+            }
+        },
+        {
+            "id": @integer@,
+            "adjustments": [],
+            "adjustments_total": 0,
+            "_links": {
+                "order": {
+                    "href": "@string@"
+                }
+            }
+        }
+    ],
+    "units_total": 60,
+    "adjustments": [],
+    "adjustments_total": 0,
+    "variant": {
+       "id": @integer@,
+       "on_hold": 0,
+       "tracked": false
+    },
+    "_links": {
+       "product": {
+           "href": "@string@"
+       },
+       "variant": {
+           "href": "@string@"
+       }
+    }
+}
