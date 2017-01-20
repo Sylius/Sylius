@@ -25,6 +25,12 @@ security:
                 csrf_token_generator: security.csrf.token_manager
                 csrf_parameter: _csrf_admin_security_token
                 csrf_token_id: admin_authenticate
+            remember_me:
+                secret: "%secret%"
+                path: /admin
+                name: APP_ADMIN_REMEMBER_ME
+                lifetime: 31536000
+                remember_me_parameter: _remember_me
             logout:
                 path: sylius_admin_logout
                 target: sylius_admin_login
@@ -59,9 +65,8 @@ security:
                 csrf_token_id: shop_authenticate
             remember_me:
                 secret: "%secret%"
-                name: APP_REMEMBER_ME
+                name: APP_SHOP_REMEMBER_ME
                 lifetime: 31536000
-                always_remember_me: true
                 remember_me_parameter: _remember_me
             logout:
                 path: sylius_shop_logout
