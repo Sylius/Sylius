@@ -318,7 +318,29 @@ EOT;
      */
     public function it_allows_creating_product_with_product_taxons()
     {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/locales.yml');
+        $this->loadFixturesFromFile('resources/taxons.yml');
 
+        $data =
+<<<EOT
+        {
+            "code": "MUG_TH",
+            "translations": {
+                "en": {
+                    "name": "Theme Mug",
+                    "slug": "theme-mug"
+                }
+            },
+            "product_taxons": "YELLOW_MUGS,MUGS"
+            
+        }
+EOT;
+
+        $this->client->request('POST', '/api/v1/products/', [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'product/create_with_product_taxons_response', Response::HTTP_CREATED);
     }
 
     /**

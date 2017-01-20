@@ -65,7 +65,7 @@ final class ProductTaxonAutocompleteChoiceType extends AbstractType
         $resolver->setDefaults([
             'resource' => 'sylius.taxon',
             'choice_name' => 'name',
-            'choice_value' => 'id',
+            'choice_value' => 'code',
         ]);
     }
 
