@@ -100,6 +100,7 @@ final class ProductApiTest extends JsonApiTestCase
         $this->client->request('DELETE', '/api/v1/products/-1', [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
+
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
     }
 
@@ -242,4 +243,126 @@ EOT;
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'product/sorted_index_response');
     }
+
+    /**
+     * @test
+     */
+    public function it_allows_creating_product_with_options()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/product_options.yml');
+        $this->loadFixturesFromFile('resources/locales.yml');
+
+        $data =
+<<<EOT
+        {
+            "code": "MUG_TH",
+            "options": [
+                 "MUG_SIZE",
+                 "MUG_COLOR"
+            ],
+            "translations": {
+                "en": {
+                    "name": "Theme Mug",
+                    "slug": "theme-mug"
+                }
+            }
+        }
+EOT;
+
+        $this->client->request('POST', '/api/v1/products/', [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'product/create_with_options_response', Response::HTTP_CREATED);
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_creating_product_with_main_taxon() 
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/taxons.yml');
+        $this->loadFixturesFromFile('resources/locales.yml');
+
+        $data =
+<<<EOT
+        {
+            "code": "MUG_TH",
+            "main_taxon": "MUGS",
+            "translations": {
+                "en": {
+                    "name": "Theme Mug",
+                    "slug": "theme-mug"
+                }
+            }
+        }
+EOT;
+
+        $this->client->request('POST', '/api/v1/products/', [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'product/create_with_main_taxon_response', Response::HTTP_CREATED);
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_creating_product_with_images()
+    {
+        
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_creating_product_with_product_taxons()
+    {
+
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_creating_product_with_channels()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/channels.yml');
+
+        $data = 
+<<<EOT
+        {
+            "code": "MUG_TH",
+            "channels": [
+                "WEB",
+                "MOB"
+            ],
+            "translations": {
+                "en__US": {
+                    "name": "Theme Mug",
+                    "slug": "theme-mug"
+                }
+            }
+        }
+EOT;
+
+        $this->client->request('POST', '/api/v1/products/', [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'product/create_with_channels_response', Response::HTTP_CREATED);
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_creating_product_with_attributes()
+    {
+
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_creating_product_with_associations()
+    {}
 }

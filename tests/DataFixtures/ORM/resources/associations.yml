@@ -1,0 +1,3 @@
+Sylius\Component\Product\Model\ProductAssociationType:
+    productAssociationType:
+        code: similar_products

@@ -1,0 +1,36 @@
+{
+    "id": @integer@,
+    "code": "MUG_TH",
+    "available_on": "@string@.isDateTime()",
+    "attributes": [],
+    "variants": [],
+    "options": [
+        {
+            "code": "MUG_SIZE"
+        },
+        {
+            "code": "MUG_COLOR"
+        }
+    ],
+    "associations": [],
+    "translations": {
+        "en": {
+            "id": @integer@,
+            "locale": "en",
+            "name": "Theme Mug",
+            "slug": "theme-mug"
+        },
+        "en_US": {
+            "locale": "en_US"
+        }
+    },
+    "product_taxons": [],
+    "reviews": [],
+    "average_rating": 0,
+    "images": [],
+    "_links": {
+        "self": {
+            "href": "@string@"
+        }
+    }
+}

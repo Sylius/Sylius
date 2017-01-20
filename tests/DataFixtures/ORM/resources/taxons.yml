@@ -1,0 +1,3 @@
+Sylius\Component\Core\Model\Taxon:
+    taxon1:
+        code: MUGS
