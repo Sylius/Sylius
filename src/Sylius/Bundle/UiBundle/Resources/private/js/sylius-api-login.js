@@ -16,6 +16,7 @@
             var apiSettings = apiSettings;
             var passwordField = element.find('input[type=\'password\']');
             var emailField = element.find('input[type=\'email\']');
+            var csrfTokenField = element.find('input[type=\'hidden\']');
             var signInButton = element.find('.button');
             var validationField = element.find('.red.label');
 
@@ -30,6 +31,7 @@
                         _username: emailField.val(),
                         _password: passwordField.val()
                     };
+                    settings.data[csrfTokenField.attr('name')] = csrfTokenField.val();
 
                     return settings;
                 },

@@ -1,5 +1,6 @@
 sylius_admin_partial_order_latest:
     path: /latest/{count}
+    methods: [GET]
     defaults:
         _controller: sylius.controller.order:indexAction
         _sylius:
@@ -10,6 +11,7 @@ sylius_admin_partial_order_latest:
 
 sylius_admin_partial_order_latest_in_channel:
     path: /latest/{channelCode}/{count}
+    methods: [GET]
     defaults:
         _controller: sylius.controller.order:indexAction
         _sylius:

@@ -11,6 +11,7 @@ sylius_shop_ajax_cart:
 
 sylius_shop_ajax_render_province_form:
     path: /render-province-form
+    methods: [GET]
     defaults:
         _controller: sylius.controller.province:choiceOrTextFieldFormAction
         _sylius:

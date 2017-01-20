@@ -1,5 +1,6 @@
 sylius_admin_login:
     path: /login
+    methods: [GET]
     defaults:
         _controller: sylius.controller.security:loginAction
         _sylius:
@@ -8,8 +9,10 @@ sylius_admin_login:
 
 sylius_admin_login_check:
     path: /login-check
+    methods: [POST]
     defaults:
         _controller: sylius.controller.security:checkAction
 
 sylius_admin_logout:
     path: /logout
+    methods: [GET]

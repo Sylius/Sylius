@@ -11,6 +11,7 @@ sylius_shop_account_address_book:
 
 sylius_shop_account_root:
     path: /
+    methods: [GET]
     defaults:
         _controller: FrameworkBundle:Redirect:redirect
         route: sylius_shop_account_dashboard

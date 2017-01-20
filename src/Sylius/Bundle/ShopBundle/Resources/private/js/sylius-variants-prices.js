@@ -34,10 +34,10 @@ function handleProductOptionsChange() {
 
         if ($price !== undefined) {
             $('#product-price').text($price);
-            $('#sylius-product-adding-to-cart').enable();
+            $('button[type=submit]').removeAttr('disabled');
         } else {
             $('#product-price').text($('#sylius-variants-pricing').attr('data-unavailable-text'));
-            $('#sylius-product-adding-to-cart').disable();
+            $('button[type=submit]').attr('disabled', 'disabled');
         }
     });
 }

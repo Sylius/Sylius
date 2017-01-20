@@ -1,6 +1,6 @@
 sylius_admin_partial_shipment_ship:
     path: /{id}/ship
-    methods: [GET, PUT]
+    methods: [GET]
     defaults:
         _controller: sylius.controller.shipment:updateAction
         _sylius:
@@ -13,7 +13,6 @@ sylius_admin_partial_shipment_ship:
             state_machine:
                 graph: sylius_shipment
                 transition: ship
-            redirect: referer
             section: admin
             template: "@SyliusAdmin/Shipment/Partial/_ship.html.twig"
             form: Sylius\Bundle\ShippingBundle\Form\Type\ShipmentShipType

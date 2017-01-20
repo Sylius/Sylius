@@ -4,6 +4,7 @@
 
     <div class="ui action input" id="sylius-api-login-form">
         <input type="password" placeholder="{{ 'sylius.ui.password'|trans }}">
+        <input type="hidden" name="_csrf_shop_security_token" value="{{ csrf_token('shop_authenticate') }}">
         <a class="ui blue button" href="#" id="sylius-api-login-submit" data-url="{{ path('sylius_shop_login_check') }}">
             {{ 'sylius.ui.sign_in'|trans }}
         </a>

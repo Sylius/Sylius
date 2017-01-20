@@ -1,5 +1,5 @@
 <div class="ui segment">
-    {{ form_start(form, {'action': path('sylius_admin_partial_shipment_ship', configuration.vars.route.parameters), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
+    {{ form_start(form, {'action': path('sylius_admin_order_shipment_ship', configuration.vars.route.parameters), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
     <input type="hidden" name="_method" value="PUT">
     <div class="ui fluid action input">
         {{ form_widget(form.tracking, {'attr': {'placeholder': 'sylius.ui.tracking_code'|trans ~ '...'}}) }}

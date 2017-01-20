@@ -14,6 +14,7 @@ sylius_admin_order:
 
 sylius_admin_order_show:
     path: /orders/{id}
+    methods: [GET]
     defaults:
         _controller: sylius.controller.order:showAction
         _sylius:
@@ -22,6 +23,7 @@ sylius_admin_order_show:
 
 sylius_admin_order_history:
     path: /orders/{id}/history
+    methods: [GET]
     defaults:
         _controller: sylius.controller.order:showAction
         _sylius:
@@ -85,3 +87,27 @@ sylius_admin_order_payment_refund:
                 transition: refund
             redirect: referer
             flash: sylius.payment.refunded
+
+sylius_admin_order_shipment_ship:
+    path: /{id}/ship
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.shipment:updateAction
+        _sylius:
+            event: ship
+            repository:
+                method: findOneByOrderId
+                arguments:
+                    id: $id
+                    orderId: $orderId
+            state_machine:
+                graph: sylius_shipment
+                transition: ship
+            redirect: referer
+            section: admin
+            form: Sylius\Bundle\ShippingBundle\Form\Type\ShipmentShipType
+            vars:
+                route:
+                    parameters:
+                        orderId: $orderId
+                        id: $id

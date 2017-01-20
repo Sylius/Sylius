@@ -22,6 +22,9 @@ security:
                 default_target_path: sylius_admin_dashboard
                 use_forward: false
                 use_referer: true
+                csrf_token_generator: security.csrf.token_manager
+                csrf_parameter: _csrf_admin_security_token
+                csrf_token_id: admin_authenticate
             logout:
                 path: sylius_admin_logout
                 target: sylius_admin_login
@@ -51,6 +54,9 @@ security:
                 default_target_path: sylius_shop_homepage
                 use_forward: false
                 use_referer: true
+                csrf_token_generator: security.csrf.token_manager
+                csrf_parameter: _csrf_shop_security_token
+                csrf_token_id: shop_authenticate
             remember_me:
                 secret: "%secret%"
                 name: APP_REMEMBER_ME
@@ -70,6 +76,7 @@ security:
 
     access_control:
         - { path: "^/_partial.*", ip: 127.0.0.1 }
+        - { path: "^/admin/_partial.*", ip: 127.0.0.1 }
 
         - { path: ^/login.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }

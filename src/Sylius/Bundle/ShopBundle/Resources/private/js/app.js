@@ -48,6 +48,7 @@
             throttle: 500
         });
 
+        $('.sylius-cart-remove-button').removeFromCart();
         $('#sylius-product-adding-to-cart').addToCart();
 
         $('#sylius-shipping-address').addressBook();

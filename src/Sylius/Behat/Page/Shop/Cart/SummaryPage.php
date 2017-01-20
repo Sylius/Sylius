@@ -123,7 +123,8 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     public function removeProduct($productName)
     {
         $itemElement = $this->getElement('product_row', ['%name%' => $productName]);
-        $itemElement->find('css', 'a.sylius-cart-remove-button')->click();
+        $itemElement->find('css', 'button.sylius-cart-remove-button')->press();
+
     }
 
     /**

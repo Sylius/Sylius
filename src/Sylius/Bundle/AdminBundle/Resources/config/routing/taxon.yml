@@ -15,6 +15,7 @@ sylius_admin_taxon:
 
 sylius_admin_taxon_index:
     path: /taxons/
+    methods: [GET]
     defaults:
         _controller: FrameworkBundle:Redirect:redirect
         route: sylius_admin_taxon_create
@@ -22,6 +23,7 @@ sylius_admin_taxon_index:
 
 sylius_admin_taxon_create_for_parent:
     path: /taxons/new/{id}
+    methods: [GET, POST]
     defaults:
         _controller: sylius.controller.taxon:createAction
         _sylius:
