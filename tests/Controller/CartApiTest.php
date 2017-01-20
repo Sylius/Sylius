@@ -12,6 +12,8 @@
 namespace Sylius\Tests\Controller;
 
 use Lakion\ApiTestCase\JsonApiTestCase;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Order\Model\OrderItemInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -298,5 +300,95 @@ EOT;
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'cart/add_to_cart_hard_available_item_validation_error_response', Response::HTTP_BAD_REQUEST);
+    }
+
+    /**
+     * @test
+     */
+    public function it_denies_updating_a_cart_item_quantity_for_non_authenticated_user()
+    {
+        $this->client->request('PUT', '/api/v1/carts/1/items/1');
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
+    }
+
+    /**
+     * @test
+     */
+    public function it_does_not_allow_to_update_items_variant()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $fulfilledCart = $this->loadFixturesFromFile('resources/fulfilled_cart.yml');
+        /** @var OrderInterface $order */
+        $order = $fulfilledCart['fulfilled_cart'];
+        /** @var OrderItemInterface $orderItem */
+        $orderItem = $fulfilledCart['sw_mug_item'];
+
+        $data =
+<<<EOT
+        {
+            "variant": "MUG_SW"
+        }
+EOT;
+
+        $url = sprintf('/api/v1/carts/%s/items/%s', $order->getId(), $orderItem->getId());
+
+        $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'cart/update_cart_item_validation_fail_response', Response::HTTP_BAD_REQUEST);
+    }
+
+    /**
+     * @test
+     */
+    public function it_updates_item_quantity()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $fulfilledCart = $this->loadFixturesFromFile('resources/fulfilled_cart.yml');
+        /** @var OrderInterface $order */
+        $order = $fulfilledCart['fulfilled_cart'];
+        /** @var OrderItemInterface $orderItem */
+        $orderItem = $fulfilledCart['sw_mug_item'];
+
+        $url = sprintf('/api/v1/carts/%s/items/%s', $order->getId(), $orderItem->getId());
+
+        $data =
+<<<EOT
+        {
+            "quantity": 3
+        }
+EOT;
+        $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $response = $this->client->getResponse();
+        $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
+    }
+
+    /**
+     * @test
+     */
+    public function it_checks_if_requested_variant_is_available_during_quantity_update()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $fulfilledCart = $this->loadFixturesFromFile('resources/fulfilled_cart.yml');
+        /** @var OrderInterface $order */
+        $order = $fulfilledCart['fulfilled_cart'];
+        /** @var OrderItemInterface $orderItem */
+        $orderItem = $fulfilledCart['hard_available_mug_item'];
+
+        $url = sprintf('/api/v1/carts/%s/items/%s', $order->getId(), $orderItem->getId());
+
+        $data =
+<<<EOT
+        {
+            "quantity": 3
+        }
+EOT;
+        $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'cart/update_hard_available_cart_item_validation_error_response', Response::HTTP_BAD_REQUEST);
     }
 }
