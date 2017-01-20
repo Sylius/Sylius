@@ -648,6 +648,7 @@ sylius:
         user_details: 'اطلاعات کاربر'
         username: 'نام کاربری'
         users_list_of_all_users_registered_in_store: 'کاربران <small> لیست همه کاربران ثبت شده در این فروشگاه </small>'
+        value: 'مقدار'
         values: 'مقادیر'
         variant: 'ترکیب محصول'
         variant_selection_method: 'انتخاب نوع ترکیب بندی'

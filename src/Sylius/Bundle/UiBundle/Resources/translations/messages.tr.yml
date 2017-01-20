@@ -447,6 +447,7 @@ sylius:
         user_details: 'Kullanıcı detayları'
         username: 'Kullanıcı adı'
         users_list_of_all_users_registered_in_store: '<small>Tüm kullanıcıların listesini deposunda kayıtlı</small> kullanıcılar'
+        value: 'Değer'
         variant: 'Çeşit'
         variant_selection_method: 'Varyant seçme yöntemi'
         variants: 'Türevleri'

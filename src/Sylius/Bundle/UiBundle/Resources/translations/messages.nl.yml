@@ -825,6 +825,7 @@ sylius:
         user_details: 'Gebruikersdetails'
         username: 'Gebruikersnaam'
         users_list_of_all_users_registered_in_store: 'Gebruikers <small>Lijst van alle gebruikers in de winkel</small>'
+        value: 'Waarde'
         values: 'Waarden'
         variant: 'Variant'
         variant_selection_method: 'Variant selectie methode'

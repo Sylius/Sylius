@@ -24,6 +24,7 @@ sylius:
             name: Názov
         option:
             name: Názov
+            position: Pozícia
             values: Možné hodnoty
         option_value:
             add_value: Pridať hodnotu

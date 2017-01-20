@@ -32,7 +32,7 @@ sylius:
     country:
         code:
             not_blank: Veuillez entrer le code ISO du pays.
-            regex: Le code du pays peut uniquement être constitué de lettres, chiffres, tirets et de soulignements.
+            regex: Le code du pays peut uniquement être constitué de lettres, chiffres, tirets et de tirets bas.
             unique: Le code ISO du pays doit être unique.
     province:
         code:
@@ -50,7 +50,7 @@ sylius:
             not_blank: Veuillez saisir le champ d'application.
         code:
             not_blank: Merci de saisir le code de la zone.
-            regex: Code de zone peut seulement être constitué de lettres, chiffres, tirets et traits de soulignement.
+            regex: Le code de la zone doit uniquement comprendre des lettres, chiffres, tirets et de tirets bas.
             unique: Le code de la zone doit être unique.
         members:
             min_count: Veuillez ajouter au moins {{limit}} zone(s) membre(s).

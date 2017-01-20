@@ -462,6 +462,7 @@ sylius:
         user_details: 'Údaje o uživateli'
         username: 'Uživatelské jméno'
         users_list_of_all_users_registered_in_store: 'Uživatelé <small>seznam všech uživatelů registrovaných v obchodě</small>'
+        value: 'Hodnota'
         variant: 'Varianta'
         variant_selection_method: 'Metoda výběru varianty'
         variants: 'Varianty'

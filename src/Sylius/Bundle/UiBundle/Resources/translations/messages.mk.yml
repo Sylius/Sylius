@@ -20,3 +20,4 @@ sylius:
         street: 'Улица'
         topic: 'Тема'
         type: 'Вид'
+        value: 'Вредност'

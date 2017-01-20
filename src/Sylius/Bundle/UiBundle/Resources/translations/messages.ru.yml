@@ -769,6 +769,7 @@ sylius:
         user_details: 'Детали пользователя'
         username: 'Логин'
         users_list_of_all_users_registered_in_store: 'Пользователи <small>список всех пользователей зарегистрированных в магазине</small>'
+        value: 'Значение'
         values: 'Значения'
         variant: 'Вариант'
         variant_selection_method: 'Метод выбора вариантов'

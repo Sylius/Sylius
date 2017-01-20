@@ -661,6 +661,7 @@ sylius:
         used: 'Використано'
         user_details: 'Інформація про користувача'
         username: 'Ім''я користувача'
+        value: 'Значення'
         variant: 'Різновид'
         variant_selection_method: 'Метод вибору варіанту'
         view_more: 'Детальніше'

@@ -497,6 +497,7 @@ sylius:
         user_details: 'Vartotojo duomenys'
         username: 'Vartotojo vardas'
         users_list_of_all_users_registered_in_store: 'Vartotojai <small>visų registruotų vartotojų sąrašas</small>'
+        value: 'Reikšmė'
         variant: 'Variantas'
         variant_selection_method: 'Varianto pasirinkimo būdas'
         variants: 'Variantai'
