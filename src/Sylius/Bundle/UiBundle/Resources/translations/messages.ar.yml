@@ -36,3 +36,4 @@ sylius:
         street: 'الشارع'
         topic: 'الموضوع'
         type: 'نوع'
+        value: 'القيمة'

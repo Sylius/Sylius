@@ -627,6 +627,7 @@ sylius:
         user_details: 'Hollësi të përdoruesit'
         username: 'Username'
         users_list_of_all_users_registered_in_store: 'Përdorues <small>Lista e të gjithë përdoruesve të regjistruar në arkiv</small>'
+        value: 'Vlera'
         values: 'Vlerat'
         variant: 'Varianti i llojit të monedhës'
         variant_selection_method: 'Metoda rezervë e përzgjedhjes'

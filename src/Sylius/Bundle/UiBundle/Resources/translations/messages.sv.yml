@@ -372,6 +372,7 @@ sylius:
         update_cart: 'Uppdatera varukorgen'
         usage: 'Användning'
         username: 'Användarnanm'
+        value: 'Värde'
         values: 'Värden'
         variant: 'Variant'
         variant_selection_method: 'Metod för val av variant'

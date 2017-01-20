@@ -273,6 +273,7 @@ sylius:
         user_details: 'Потребителски детайли'
         username: 'Потребителско име'
         users_list_of_all_users_registered_in_store: 'Потребители, <small>списък с всички потребители, регистрирани в магазина</small>'
+        value: 'Стойност'
         view_more: 'Виж повече'
         warning: 'Внимание'
         welcome_to_your_space: 'Добре дошли във вашето лично пространство'

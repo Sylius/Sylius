@@ -845,6 +845,7 @@ sylius:
         user_details: 'รายละเอียดผู้ใช้'
         username: 'ชื่อผู้ใช้'
         users_list_of_all_users_registered_in_store: 'ผู้ใช้ <small>รายชื่อผู้ใช้ทั้งหมด</small>'
+        value: 'ค่า'
         values: 'ค่า'
         variant: 'Variant'
         variant_selection_method: 'วิธีการเลือกตัวแปร'

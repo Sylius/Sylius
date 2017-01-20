@@ -343,6 +343,7 @@ sylius:
         user_details: 'Detalii utilizator'
         username: 'Nume de utilizator'
         users_list_of_all_users_registered_in_store: 'Utilizatori <small>Lista tuturor utilizatorilor înregistraţi</small>'
+        value: 'Valoare'
         variant: 'Variantă'
         variant_selection_method: 'Metoda de selectare a variantei'
         view_more: 'Detalii'

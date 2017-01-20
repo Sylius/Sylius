@@ -720,6 +720,7 @@ sylius:
         user_details: 'Felhasználói adatok'
         username: 'Felhasználónév'
         users_list_of_all_users_registered_in_store: 'Felhasználók <small>Az áruházban regisztált felhasználók</small>'
+        value: 'Érték'
         values: 'Értékek'
         variant: 'Változat'
         variant_selection_method: 'Változat kiválasztási módszer'

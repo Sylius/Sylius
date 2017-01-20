@@ -557,6 +557,7 @@ sylius:
         user_details: 'Korisnički detalji'
         username: 'Korisničko ime'
         users_list_of_all_users_registered_in_store: 'Korisnici <small>Lista svih registriranih korisnika</small>'
+        value: 'Vrijednost'
         values: 'Vrijednosti'
         variant: 'Varijanta'
         variant_selection_method: 'Način odabira varijante'

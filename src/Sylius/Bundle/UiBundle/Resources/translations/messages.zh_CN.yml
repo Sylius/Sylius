@@ -676,6 +676,7 @@ sylius:
         user_details: '用户详情'
         username: '用户名'
         users_list_of_all_users_registered_in_store: '用户 <small>在该店铺中注册的所有用户列表</small>'
+        value: '值'
         values: '值'
         variant: '变量'
         variant_selection_method: '变量选择方法'

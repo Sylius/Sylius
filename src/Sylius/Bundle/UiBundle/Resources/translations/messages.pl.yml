@@ -745,6 +745,7 @@ sylius:
         user_details: 'Szczegóły użytkownika'
         username: 'Nazwa użytkownika'
         users_list_of_all_users_registered_in_store: 'Użytkownicy <small>Lista wszystkich zarejestrowanych użytkowników w sklepie</small>'
+        value: 'Wartość'
         values: 'Wartości'
         variant: 'Wariant'
         variant_selection_method: 'Metody wyboru wariantu'

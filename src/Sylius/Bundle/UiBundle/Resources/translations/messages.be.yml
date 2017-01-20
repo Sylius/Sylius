@@ -318,6 +318,7 @@ sylius:
         user_details: 'Звесткі аб карыстальніку'
         username: 'Юзернэйм'
         users_list_of_all_users_registered_in_store: 'Карыстальнікі<small>Спіс усіх карыстальнікаў у краме</small>'
+        value: 'Значэнне'
         variant: 'Варыянт'
         variant_selection_method: 'Метад выбару варыянта'
         view_more: 'Глядзець болей'
