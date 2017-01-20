@@ -11,14 +11,11 @@
 
 namespace Sylius\Bundle\PaymentBundle\DependencyInjection;
 
-use Sylius\Bundle\PaymentBundle\Form\Type\CreditCardType;
 use Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodTranslationType;
 use Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodType;
 use Sylius\Bundle\PaymentBundle\Form\Type\PaymentType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Component\Payment\Model\CreditCard;
-use Sylius\Component\Payment\Model\CreditCardInterface;
 use Sylius\Component\Payment\Model\Payment;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentMethod;
@@ -117,23 +114,6 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                         ->scalarNode('form')->defaultValue(PaymentType::class)->cannotBeEmpty()->end()
-                                    ->end()
-                                ->end()
-                            ->end()
-                        ->end()
-                        ->arrayNode('credit_card')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->variableNode('options')->end()
-                                ->arrayNode('classes')
-                                    ->addDefaultsIfNotSet()
-                                    ->children()
-                                        ->scalarNode('model')->defaultValue(CreditCard::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('interface')->defaultValue(CreditCardInterface::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('repository')->cannotBeEmpty()->end()
-                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
-                                        ->scalarNode('form')->defaultValue(CreditCardType::class)->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()
                             ->end()

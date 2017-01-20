@@ -42,16 +42,6 @@ interface PaymentInterface extends TimestampableInterface, ResourceInterface
     public function setMethod(PaymentMethodInterface $method = null);
 
     /**
-     * @return PaymentSourceInterface
-     */
-    public function getSource();
-
-    /**
-     * @param null|PaymentSourceInterface $source
-     */
-    public function setSource(PaymentSourceInterface $source = null);
-
-    /**
      * @return string
      */
     public function getState();
