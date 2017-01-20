@@ -39,7 +39,7 @@ To manage the currently used currency, we use the **CurrencyContext**. You can a
 Currency Converter
 ------------------
 
-The **Sylius\Component\Currency\Converter\CurrencyConverter** is a service available under the ``sylius.currency_converter`` id.
+The ``Sylius\Component\Currency\Converter\CurrencyConverter`` is a service available under the ``sylius.currency_converter`` id.
 
 It lets you to convert money values from one currency to another.
 
