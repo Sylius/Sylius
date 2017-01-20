@@ -166,14 +166,27 @@ Some change has been made to `app/config/security.yml`
                 csrf_token_generator: security.csrf.token_manager
                 csrf_parameter: _csrf_admin_security_token
                 csrf_token_id: admin_authenticate
+            remember_me:
+                secret: "%secret%"
+                path: /admin
+                name: APP_ADMIN_REMEMBER_ME
+                lifetime: 31536000 //custom lifetime
+                remember_me_parameter: _remember_me
         shop:
             form_login:
                 csrf_token_generator: security.csrf.token_manager
                 csrf_parameter: _csrf_shop_security_token
                 csrf_token_id: shop_authenticate
+            remember_me:
+                secret: "%secret%"
+                name: APP_SHOP_REMEMBER_ME
+                lifetime: 31536000
+                remember_me_parameter: _remember_me
   ```
 From now one you need to pass csrf token to your login-check request so you need to add `<input type="hidden" value={{ csrf_token('csrf_token_id') }} name="csrf_parameter">` into your login form.
 Example input `<input type="hidden" name="_csrf_admin_security_token" value="{{ csrf_token('admin_authenticate') }}">`
+
+The remember me feature did not work properly due to missing additional configuration.
 
 ### Behat
 
