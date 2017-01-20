@@ -5,3 +5,22 @@ Sylius\Component\Core\Model\Product:
         shortDescription:
             expose: true
             type: string
+        averageRating:
+            expose: true
+            type: float
+            groups: [Default, Detailed]
+        images:
+            expose: true
+            type: array
+            groups: [Default, Detailed]
+        reviews:
+            expose: true
+            type: array
+            groups: [Detailed]
+        productTaxons:
+            expose: true
+            type: array
+            groups: [Detailed]
+        mainTaxon:
+            expose: true
+            groups: [Detailed]

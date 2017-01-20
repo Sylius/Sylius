@@ -1,0 +1,35 @@
+{
+    "id": @integer@,
+    "name": "Star wars mug",
+    "code": "MUG_SW",
+    "available_on": "@string@.isDateTime()",
+    "attributes": [],
+    "variants": [],
+    "options": [],
+    "associations": [],
+    "translations": {
+        "en": {
+            "id": @integer@,
+            "locale": "en",
+            "name": "Star wars mug",
+            "slug": "mug-star-wars",
+            "description": "@string@"
+        },
+        "en_US": {
+            "id": @integer@,
+            "locale": "en_US",
+            "name": "Star Wars mug",
+            "slug": "star-wars-mug",
+            "description": "@string@"
+        }
+    },
+    "product_taxons": [],
+    "reviews": [],
+    "average_rating": 0,
+    "images": [],
+    "_links": {
+        "self": {
+            "href": "@string@"
+        }
+    }
+}

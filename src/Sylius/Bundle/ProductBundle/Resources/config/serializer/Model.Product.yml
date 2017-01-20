@@ -6,20 +6,52 @@ Sylius\Component\Product\Model\Product:
             expose: true
             type: integer
             xml_attribute: true
-        description:
+            groups: [Default, Detailed]
+        code:
             expose: true
             type: string
+            groups: [Default, Detailed]
+        channels:
+            expose: true
+            type: array
+            groups: [Default, Detailed]
+        options:
+            expose: true
+            type: array
+            groups: [Default, Detailed]
         attributes:
             expose: true
-            max_depth: 2
-        createdAt:
+            type: array
+            groups: [Detailed]
+        associations:
+            expose: true
+            type: array
+            groups: [Detailed]
+        variants:
+            expose: true
+            type: array
+            groups: [Detailed]
+        translations:
+            expose: true
+            type: array
+            groups: [Detailed]
+        availableOn:
             expose: true
             type: DateTime
-        updatedAt:
+            groups: [Detailed]
+        availableUntil:
             expose: true
             type: DateTime
+            groups: [Detailed]
     virtual_properties:
         getName:
             serialized_name: name
-        getVariants:
-            serialized_name: variants
+    relations:
+        - rel: self
+          href:
+            route: sylius_api_product_show
+            parameters:
+                id: expr(object.getId())
+                version: 1
+            exclusion:
+                groups: [Detailed]

@@ -1,0 +1,154 @@
+{
+    "page": 1,
+    "limit": 10,
+    "pages": 3,
+    "total": 22,
+    "_links": {
+        "self": {
+            "href": "\/api\/v1\/products\/?page=1&limit=10"
+        },
+        "first": {
+            "href": "\/api\/v1\/products\/?page=1&limit=10"
+        },
+        "last": {
+            "href": "\/api\/v1\/products\/?page=3&limit=10"
+        },
+        "next": {
+            "href": "\/api\/v1\/products\/?page=2&limit=10"
+        }
+    },
+    "_embedded": {
+        "items": [
+            {
+                "id": @integer@,
+                "name": "Star wars mug",
+                "code": "MUG_SW",
+                "options": [],
+                "average_rating": 0,
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "name": "Lotr mug",
+                "code": "MUG_LOTR",
+                "options": [],
+                "average_rating": 0,
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "name": "Breaking bad mug",
+                "code": "MUG_BB",
+                "options": [],
+                "average_rating": 0,
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "name": "Product 4",
+                "code": "PRODUCT_4",
+                "options": [],
+                "average_rating": 0,
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "name": "Product 5",
+                "code": "PRODUCT_5",
+                "options": [],
+                "average_rating": 0,
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "name": "Product 6",
+                "code": "PRODUCT_6",
+                "options": [],
+                "average_rating": 0,
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "name": "Product 7",
+                "code": "PRODUCT_7",
+                "options": [],
+                "average_rating": 0,
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "name": "Product 8",
+                "code": "PRODUCT_8",
+                "options": [],
+                "average_rating": 0,
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "name": "Product 9",
+                "code": "PRODUCT_9",
+                "options": [],
+                "average_rating": 0,
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "name": "Product 10",
+                "code": "PRODUCT_10",
+                "options": [],
+                "average_rating": 0,
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            }
+        ]
+    }
+}

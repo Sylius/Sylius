@@ -8,6 +8,7 @@ sylius_api_product_index:
         _controller: sylius.controller.product:indexAction
         _sylius:
             serialization_version: $version
+            serialization_groups: [Default]
             paginate: $limit
             sortable: true
             sorting:
@@ -20,7 +21,6 @@ sylius_api_product_create:
         _controller: sylius.controller.product:createAction
         _sylius:
             serialization_version: $version
-            form: sylius_api_product
 
 sylius_api_product_update:
     path: /{id}
@@ -29,7 +29,6 @@ sylius_api_product_update:
         _controller: sylius.controller.product:updateAction
         _sylius:
             serialization_version: $version
-            form: sylius_api_product
 
 sylius_api_product_delete:
     path: /{id}
@@ -47,3 +46,4 @@ sylius_api_product_show:
         _controller: sylius.controller.product:showAction
         _sylius:
             serialization_version: $version
+            serialization_groups: [Default, Detailed]
