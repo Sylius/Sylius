@@ -1,5 +1,5 @@
 Sylius\Component\Core\Model\Channel:
-    channel-web:
+    channel_web:
         code: "WEB"
         name: "Web Channel"
         hostname: "localhost"

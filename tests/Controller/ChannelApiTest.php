@@ -46,7 +46,7 @@ final class ChannelApiTest extends JsonApiTestCase
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $channelData = $this->loadFixturesFromFile('resources/channels.yml');
 
-        $this->client->request('GET', '/api/v1/channels/'.$channelData['channel-web']->getId(), [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('GET', '/api/v1/channels/'.$channelData['channel_web']->getId(), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'channel/show_response', Response::HTTP_OK);
