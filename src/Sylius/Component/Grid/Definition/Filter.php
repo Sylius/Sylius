@@ -52,6 +52,11 @@ class Filter
     private $formOptions = [];
 
     /**
+     * @var mixed
+     */
+    private $criteria;
+
+    /**
      * @var int
      *
      * Position equals to 100 to ensure that wile sorting filters by position ASC
@@ -192,5 +197,21 @@ class Filter
     public function setPosition($position)
     {
         $this->position = $position;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCriteria()
+    {
+        return $this->criteria;
+    }
+
+    /**
+     * @param mixed $criteria
+     */
+    public function setCriteria($criteria)
+    {
+        $this->criteria = $criteria;
     }
 }

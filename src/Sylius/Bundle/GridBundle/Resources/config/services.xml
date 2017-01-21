@@ -37,8 +37,10 @@
             <argument type="service" id="sylius.grid.filters_applicator" />
             <argument type="service" id="sylius.grid.sorter" />
         </service>
+        <service id="sylius.grid.filters_criteria_resolver" class="Sylius\Component\Grid\Filtering\FiltersCriteriaResolver" />
         <service id="sylius.grid.filters_applicator" class="Sylius\Component\Grid\Filtering\FiltersApplicator">
             <argument type="service" id="sylius.registry.grid_filter" />
+            <argument type="service" id="sylius.grid.filters_criteria_resolver" />
         </service>
         <service id="sylius.grid.sorter" class="Sylius\Component\Grid\Sorting\Sorter" />
         <service id="sylius.grid.data_source_provider" class="Sylius\Component\Grid\Data\DataSourceProvider">

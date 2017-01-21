@@ -38,6 +38,7 @@ sylius_grid:
             update: "@SyliusUi/Grid/Action/update.html.twig"
             apply_transition: "@SyliusUi/Grid/Action/applyTransition.html.twig"
             links: "@SyliusUi/Grid/Action/links.html.twig"
+            archive: "@SyliusUi/Grid/Action/archive.html.twig"
 
             create_product_attribute: "@SyliusAdmin/ProductAttribute/Grid/Action/create.html.twig"
             update_product_positions: "@SyliusAdmin/Product/Grid/Action/updatePositions.html.twig"
@@ -49,6 +50,7 @@ sylius_grid:
             date: "@SyliusUi/Grid/Filter/date.html.twig"
             entity: "@SyliusUi/Grid/Filter/entity.html.twig"
             money: "@SyliusUi/Grid/Filter/money.html.twig"
+            exists: "@SyliusUi/Grid/Filter/exists.html.twig"
 
 liip_imagine:
     filter_sets:

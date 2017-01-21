@@ -12,6 +12,7 @@
 namespace Sylius\Component\Grid\Filtering;
 
 use Sylius\Component\Grid\Data\DataSourceInterface;
+use Sylius\Component\Grid\Definition\Filter;
 use Sylius\Component\Grid\Definition\Grid;
 use Sylius\Component\Grid\Parameters;
 use Sylius\Component\Registry\ServiceRegistryInterface;
@@ -27,11 +28,20 @@ final class FiltersApplicator implements FiltersApplicatorInterface
     private $filtersRegistry;
 
     /**
-     * @param ServiceRegistryInterface $filtersRegistry
+     * @var FiltersCriteriaResolverInterface
      */
-    public function __construct(ServiceRegistryInterface $filtersRegistry)
-    {
+    private $criteriaResolver;
+
+    /**
+     * @param ServiceRegistryInterface $filtersRegistry
+     * @param FiltersCriteriaResolverInterface $criteriaResolver
+     */
+    public function __construct(
+        ServiceRegistryInterface $filtersRegistry,
+        FiltersCriteriaResolverInterface $criteriaResolver
+    ) {
         $this->filtersRegistry = $filtersRegistry;
+        $this->criteriaResolver = $criteriaResolver;
     }
 
     /**
@@ -39,12 +49,11 @@ final class FiltersApplicator implements FiltersApplicatorInterface
      */
     public function apply(DataSourceInterface $dataSource, Grid $grid, Parameters $parameters)
     {
-        if (!$parameters->has('criteria')) {
+        if (!$this->criteriaResolver->hasCriteria($grid, $parameters)) {
             return;
         }
 
-        $criteria = $parameters->get('criteria');
-
+        $criteria = $this->criteriaResolver->getCriteria($grid, $parameters);
         foreach ($criteria as $name => $data) {
             if (!$grid->hasFilter($name)) {
                 continue;

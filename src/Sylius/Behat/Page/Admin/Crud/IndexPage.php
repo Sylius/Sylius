@@ -134,6 +134,19 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         $actionButtons->pressButton('Delete');
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getActionsForResource(array $parameters)
+    {
+        $tableAccessor = $this->getTableAccessor();
+        $table = $this->getElement('table');
+
+        $resourceRow = $tableAccessor->getRowWithFields($table, $parameters);
+
+        return $tableAccessor->getFieldFromRow($table, $resourceRow, 'actions');
+    }
+
     public function filter()
     {
         $this->getElement('filter')->press();

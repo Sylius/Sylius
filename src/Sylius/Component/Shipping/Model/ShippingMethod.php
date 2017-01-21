@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Shipping\Model;
 
+use Sylius\Component\Resource\Model\ArchivableTrait;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Resource\Model\ToggleableTrait;
 use Sylius\Component\Resource\Model\TranslatableTrait;
@@ -21,7 +22,7 @@ use Sylius\Component\Resource\Model\TranslatableTrait;
  */
 class ShippingMethod implements ShippingMethodInterface
 {
-    use TimestampableTrait, ToggleableTrait;
+    use ArchivableTrait, TimestampableTrait, ToggleableTrait;
     use TranslatableTrait {
         __construct as private initializeTranslationsCollection;
     }

@@ -166,4 +166,17 @@ final class ShippingMethodSpec extends ObjectBehavior
         $this->setUpdatedAt($date);
         $this->getUpdatedAt()->shouldReturn($date);
     }
+
+    function it_has_no_archiving_date_by_default()
+    {
+        $this->getArchivedAt()->shouldReturn(null);
+    }
+
+    function its_archiving_date_is_mutable()
+    {
+        $date = new \DateTime();
+
+        $this->setArchivedAt($date);
+        $this->getArchivedAt()->shouldReturn($date);
+    }
 }

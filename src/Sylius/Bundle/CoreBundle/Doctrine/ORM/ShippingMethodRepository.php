@@ -69,7 +69,8 @@ class ShippingMethodRepository extends BaseShippingMethodRepository implements S
     {
         $queryBuilder = $this
             ->createQueryBuilder('o')
-            ->where('o.enabled = true')
+            ->andWhere('o.enabled = true')
+            ->andWhere('o.archivedAt IS NULL')
         ;
 
         $queryBuilder

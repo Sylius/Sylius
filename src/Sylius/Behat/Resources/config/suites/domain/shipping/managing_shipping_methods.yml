@@ -1,0 +1,19 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+default:
+    suites:
+        domain_managing_shipping_methods:
+            contexts_services:
+                - sylius.behat.context.hook.doctrine_orm
+
+                - sylius.behat.context.transform.shipping_method
+
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.shipping
+
+                - sylius.behat.context.domain.managing_shipping_methods
+                - sylius.behat.context.domain.security
+
+            filters:
+                tags: "@managing_shipping_methods && @domain"
