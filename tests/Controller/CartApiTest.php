@@ -30,11 +30,19 @@ final class CartApiTest extends JsonApiTestCase
     ];
 
     /**
+     * @var array
+     */
+    private static $authorizedHeaderWithAccept = [
+        'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
+        'ACCEPT' => 'application/json',
+    ];
+
+    /**
      * @test
      */
     public function it_denies_getting_an_order_for_non_authenticated_user()
     {
-        $this->client->request('GET', '/api/v1/carts/');
+        $this->client->request('GET', '/api/v1/carts/-1');
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
@@ -47,7 +55,7 @@ final class CartApiTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
-        $this->client->request('GET', '/api/v1/carts/-1', [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('GET', '/api/v1/carts/-1', [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
@@ -61,10 +69,24 @@ final class CartApiTest extends JsonApiTestCase
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $orderData = $this->loadFixturesFromFile('resources/carts.yml');
 
-        $this->client->request('GET', '/api/v1/carts/'.$orderData['order_001']->getId(), [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('GET', '/api/v1/carts/'.$orderData['order_001']->getId(), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'cart/show_response', Response::HTTP_OK);
+    }
+
+    /**
+     * @test
+     */
+    public function it_does_not_show_orders_in_stare_other_than_cart()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $orderData = $this->loadFixturesFromFile('resources/order.yml');
+
+        $this->client->request('GET', '/api/v1/carts/'.$orderData['order_001']->getId(), [], [], static::$authorizedHeaderWithAccept);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
     }
 
     /**
@@ -134,10 +156,24 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/carts.yml');
 
-        $this->client->request('GET', '/api/v1/carts/', [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('GET', '/api/v1/carts/', [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'cart/index_response', Response::HTTP_OK);
+    }
+
+    /**
+     * @test
+     */
+    public function it_does_not_allow_to_list_orders_in_state_different_than_cart()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/order.yml');
+
+        $this->client->request('GET', '/api/v1/carts/', [], [], static::$authorizedHeaderWithAccept);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'cart/empty_index_response', Response::HTTP_OK);
     }
 
     /**
@@ -172,7 +208,7 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $carts = $this->loadFixturesFromFile('resources/carts.yml');
 
-        $this->client->request('DELETE', '/api/v1/carts/'.$carts['order_001']->getId(), [], [], static::$authorizedHeaderWithContentType, []);
+        $this->client->request('DELETE', '/api/v1/carts/'.$carts['order_001']->getId(), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
@@ -191,7 +227,7 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $carts = $this->loadFixturesFromFile('resources/order.yml');
 
-        $this->client->request('DELETE', '/api/v1/carts/'.$carts['order_001']->getId(), [], [], static::$authorizedHeaderWithContentType, []);
+        $this->client->request('DELETE', '/api/v1/carts/'.$carts['order_001']->getId(), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);

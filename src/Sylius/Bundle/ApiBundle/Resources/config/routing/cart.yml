@@ -10,8 +10,7 @@ sylius_api_cart_index:
             serialization_version: $version
             paginate: $limit
             sortable: true
-            sorting:
-                updatedAt: desc
+            grid: sylius_api_cart
 
 sylius_api_cart_create:
     path: /
@@ -42,3 +41,6 @@ sylius_api_cart_show:
         _controller: sylius.controller.order:showAction
         _sylius:
             serialization_version: $version
+            repository:
+                method: findCartById
+                arguments: [$id]

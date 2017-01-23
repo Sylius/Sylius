@@ -12,7 +12,7 @@ sylius_api_order_item_create:
             factory:
                 method: createForCart
                 arguments:
-                  - expr:service('sylius.repository.order').find($cartId)
+                  - "expr:service('sylius.repository.order').findCartById($cartId)"
 
 sylius_api_order_item_update:
     path: /{id}
@@ -22,8 +22,6 @@ sylius_api_order_item_update:
         _sylius:
             serialization_version: $version
             form: Sylius\Bundle\ApiBundle\Form\Type\OrderItemType
-            criteria:
-                order: $orderId
 
 sylius_api_order_item_delete:
     path: /{id}
@@ -32,6 +30,4 @@ sylius_api_order_item_delete:
         _controller: sylius.controller.order_item:deleteAction
         _sylius:
             serialization_version: $version
-            criteria:
-                order: $orderId
             csrf_protection: false

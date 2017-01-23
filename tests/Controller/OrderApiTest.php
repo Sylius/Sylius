@@ -30,6 +30,14 @@ final class OrderApiTest extends JsonApiTestCase
     ];
 
     /**
+     * @var array
+     */
+    private static $authorizedHeaderWithAccept = [
+        'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
+        'CONTENT_TYPE' => 'application/json',
+    ];
+
+    /**
      * @test
      */
     public function it_denies_order_deletion_for_non_authenticated_user()
@@ -65,5 +73,58 @@ final class OrderApiTest extends JsonApiTestCase
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
+    }
+
+
+    /**
+     * @test
+     */
+    public function it_denies_getting_an_order_for_non_authenticated_user()
+    {
+        $this->client->request('GET', '/api/v1/orders/-1');
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
+    }
+
+    /**
+     * @test
+     */
+    public function it_returns_not_found_response_when_requesting_details_of_an_order_which_does_not_exist()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+
+        $this->client->request('GET', '/api/v1/orders/-1', [], [], static::$authorizedHeaderWithAccept);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_to_get_cart()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $orderData = $this->loadFixturesFromFile('resources/carts.yml');
+
+        $this->client->request('GET', '/api/v1/orders/'.$orderData['order_001']->getId(), [], [], static::$authorizedHeaderWithAccept);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'order/cart_show_response', Response::HTTP_OK);
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_to_get_an_order()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $orderData = $this->loadFixturesFromFile('resources/order.yml');
+
+        $this->client->request('GET', '/api/v1/orders/'.$orderData['order_001']->getId(), [], [], static::$authorizedHeaderWithAccept);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'order/order_show_response', Response::HTTP_OK);
     }
 }

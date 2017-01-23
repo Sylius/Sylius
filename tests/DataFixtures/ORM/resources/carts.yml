@@ -3,6 +3,7 @@ Sylius\Component\Core\Model\Order:
         channel: "@channel_web"
         currencyCode: USD
         localeCode: en_US
+        state: cart
         customer: "@customer_oliver"
 
 Sylius\Component\Core\Model\Channel:

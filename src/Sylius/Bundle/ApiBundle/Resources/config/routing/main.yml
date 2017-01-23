@@ -25,8 +25,13 @@ sylius_api_cart:
     prefix: /carts
 
 sylius_api_order:
-    resource: "@SyliusApiBundle/Resources/config/routing/order.yml"
-    prefix: /orders
+    resource: |
+        alias: sylius.order
+        section: api
+        only: [show, delete]
+        grid: sylius_admin_order
+        serialization_version: $version
+    type: sylius.resource_api
 
 sylius_api_cart_item:
     resource: "@SyliusApiBundle/Resources/config/routing/cart_item.yml"

@@ -3,10 +3,14 @@
     "message": "Validation Failed",
     "errors": {
         "children": {
-            "customer": {},
+            "customer": {
+                "errors": [
+                    "This value should not be blank."
+                ]
+            },
             "localeCode": {
-                    "errors": [
-                        "This value should not be blank."
+                "errors": [
+                    "This value should not be blank."
                 ]
             },
             "channel": {
