@@ -92,5 +92,6 @@ You should also have a look here if you are looking for Cart, which is in Sylius
     :hidden:
 
     orders/index
+    themes/index
 
 .. include:: /book/orders/map.rst.inc
