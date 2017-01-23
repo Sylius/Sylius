@@ -35,6 +35,19 @@ The filter allows the user to select following search options:
 * in
 * not in
 
+If you don't want display to user matching possibilites, you can choose one in a configuration. Then only the value input will display. You can achieve it adding options.type parameter:
+
+.. code-block:: yaml
+
+    sylius_grid:
+        grids:
+            app_user:
+                filters:
+                    username:
+                        type: string
+                        options:
+                            type: contains
+
 Boolean
 -------
 
