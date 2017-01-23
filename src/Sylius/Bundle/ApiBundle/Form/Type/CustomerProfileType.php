@@ -9,20 +9,19 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ApiBundle\Form\Extension;
+namespace Sylius\Bundle\ApiBundle\Form\Type;
 
 use Sylius\Bundle\ApiBundle\Form\EventSubscriber\AddUserFormSubscriber;
 use Sylius\Bundle\CoreBundle\Form\Type\User\ShopUserType;
 use Sylius\Bundle\CustomerBundle\Form\Type\CustomerGroupChoiceType;
-use Sylius\Bundle\CustomerBundle\Form\Type\CustomerProfileType;
+use Sylius\Bundle\CustomerBundle\Form\Type\CustomerProfileType as BaseCustomerProfileType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Validator\Constraints\Valid;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-final class ApiCustomerType extends AbstractResourceType
+final class CustomerProfileType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}
@@ -45,6 +44,6 @@ final class ApiCustomerType extends AbstractResourceType
      */
     public function getParent()
     {
-        return CustomerProfileType::class;
+        return BaseCustomerProfileType::class;
     }
 }
