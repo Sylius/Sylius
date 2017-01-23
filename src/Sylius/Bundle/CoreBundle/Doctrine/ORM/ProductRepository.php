@@ -11,10 +11,8 @@
 
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
-use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 
 /**
@@ -28,12 +26,9 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
      */
     public function createListQueryBuilder($locale, $taxonId = null)
     {
-        $queryBuilder = $this->createQueryBuilder('o');
-
-        $queryBuilder
+        $queryBuilder = $this->createQueryBuilder('o')
             ->addSelect('translation')
-            ->leftJoin('o.translations', 'translation')
-            ->andWhere('translation.locale = :locale')
+            ->leftJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
             ->setParameter('locale', $locale)
         ;
 
@@ -55,17 +50,15 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
     {
         return $this->createQueryBuilder('o')
             ->addSelect('translation')
-            ->leftJoin('o.translations', 'translation')
+            ->leftJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
             ->innerJoin('o.variants', 'variant')
             ->innerJoin('variant.channelPricings', 'channelPricing')
             ->innerJoin('o.productTaxons', 'productTaxon')
-            ->leftJoin('productTaxon.taxon', 'taxon')
-            ->leftJoin('taxon.translations', 'taxonTranslation')
-            ->innerJoin('o.channels', 'channel')
-            ->andWhere('translation.locale = :locale')
+            ->innerJoin('productTaxon.taxon', 'taxon')
+            ->innerJoin('taxon.translations', 'taxonTranslation')
             ->andWhere('taxonTranslation.locale = :locale')
             ->andWhere('taxonTranslation.slug = :taxonSlug')
-            ->andWhere('channel = :channel')
+            ->andWhere(':channel MEMBER OF o.channels')
             ->andWhere('o.enabled = true')
             ->andWhere('channelPricing.channel = :channel')
             ->groupBy('o.id')
@@ -81,10 +74,9 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
     public function findLatestByChannel(ChannelInterface $channel, $count)
     {
         return $this->createQueryBuilder('o')
-            ->innerJoin('o.channels', 'channel')
-            ->addOrderBy('o.createdAt', 'desc')
+            ->andWhere(':channel MEMBER OF o.channels')
             ->andWhere('o.enabled = true')
-            ->andWhere('channel = :channel')
+            ->addOrderBy('o.createdAt', 'DESC')
             ->setParameter('channel', $channel)
             ->setMaxResults($count)
             ->getQuery()
@@ -98,10 +90,9 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
     public function findOneBySlugAndChannel($slug, ChannelInterface $channel)
     {
         return $this->createQueryBuilder('o')
-            ->leftJoin('o.translations', 'translation')
-            ->innerJoin('o.channels', 'channel')
+            ->innerJoin('o.translations', 'translation')
             ->andWhere('translation.slug = :slug')
-            ->andWhere('channel = :channel')
+            ->andWhere(':channel MEMBER OF o.channels')
             ->andWhere('o.enabled = true')
             ->setParameter('slug', $slug)
             ->setParameter('channel', $channel)
@@ -116,7 +107,7 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
     public function findOneBySlug($slug)
     {
         return $this->createQueryBuilder('o')
-            ->leftJoin('o.translations', 'translation')
+            ->innerJoin('o.translations', 'translation')
             ->andWhere('translation.slug = :slug')
             ->andWhere('o.enabled = true')
             ->setParameter('slug', $slug)

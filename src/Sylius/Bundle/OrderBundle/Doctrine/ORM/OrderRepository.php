@@ -27,15 +27,13 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
      */
     public function count()
     {
-        $count = $this->createQueryBuilder('o')
+        return (int) $this->createQueryBuilder('o')
             ->select('COUNT(o.id)')
             ->andWhere('o.state != :state')
             ->setParameter('state', OrderInterface::STATE_CART)
             ->getQuery()
             ->getSingleScalarResult()
         ;
-
-        return (int) $count;
     }
 
     /**
@@ -45,9 +43,9 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
     {
         return $this->createQueryBuilder('o')
             ->andWhere('o.state != :state')
-            ->setMaxResults($count)
-            ->orderBy('o.checkoutCompletedAt', 'desc')
             ->setParameter('state', OrderInterface::STATE_CART)
+            ->addOrderBy('o.checkoutCompletedAt', 'DESC')
+            ->setMaxResults($count)
             ->getQuery()
             ->getResult()
         ;
@@ -89,7 +87,7 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
     public function findCartById($id)
     {
         return $this->createQueryBuilder('o')
-            ->where('o.id = :id')
+            ->andWhere('o.id = :id')
             ->andWhere('o.state = :state')
             ->setParameter('state', OrderInterface::STATE_CART)
             ->setParameter('id', $id)
@@ -104,7 +102,7 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
     public function findCartsNotModifiedSince(\DateTime $terminalDate)
     {
         return $this->createQueryBuilder('o')
-            ->where('o.state = :state')
+            ->andWhere('o.state = :state')
             ->andWhere('o.updatedAt < :terminalDate')
             ->setParameter('state', OrderInterface::STATE_CART)
             ->setParameter('terminalDate', $terminalDate)
@@ -119,7 +117,7 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
     public function findOrdersUnpaidSince(\DateTime $terminalDate)
     {
         return $this->createQueryBuilder('o')
-            ->where('o.checkoutState = :checkoutState')
+            ->andWhere('o.checkoutState = :checkoutState')
             ->andWhere('o.paymentState != :paymentState')
             ->andWhere('o.state = :orderState')
             ->andWhere('o.checkoutCompletedAt < :terminalDate')

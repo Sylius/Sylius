@@ -27,8 +27,7 @@ class ShippingMethodRepository extends BaseShippingMethodRepository implements S
     public function createListQueryBuilder($locale)
     {
         return $this->createQueryBuilder('o')
-            ->leftJoin('o.translations', 'translation')
-            ->andWhere('translation.locale = :locale')
+            ->leftJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
             ->setParameter('locale', $locale)
         ;
     }
@@ -38,8 +37,7 @@ class ShippingMethodRepository extends BaseShippingMethodRepository implements S
      */
     public function findEnabledForChannel(ChannelInterface $channel)
     {
-        return $this
-            ->createEnabledForChannelQueryBuilder($channel)
+        return $this->createEnabledForChannelQueryBuilder($channel)
             ->getQuery()
             ->getResult()
         ;
@@ -50,11 +48,10 @@ class ShippingMethodRepository extends BaseShippingMethodRepository implements S
      */
     public function findEnabledForZonesAndChannel(array $zones, ChannelInterface $channel)
     {
-        return $this
-            ->createEnabledForChannelQueryBuilder($channel)
+        return $this->createEnabledForChannelQueryBuilder($channel)
             ->andWhere('o.zone IN (:zones)')
             ->setParameter('zones', $zones)
-            ->orderBy('o.position', 'asc')
+            ->addOrderBy('o.position', 'ASC')
             ->getQuery()
             ->getResult()
         ;
@@ -67,18 +64,11 @@ class ShippingMethodRepository extends BaseShippingMethodRepository implements S
      */
     protected function createEnabledForChannelQueryBuilder(ChannelInterface $channel)
     {
-        $queryBuilder = $this
-            ->createQueryBuilder('o')
+        return $this->createQueryBuilder('o')
             ->andWhere('o.enabled = true')
             ->andWhere('o.archivedAt IS NULL')
-        ;
-
-        $queryBuilder
-            ->innerJoin('o.channels', 'channel')
-            ->andWhere($queryBuilder->expr()->eq('channel', ':channel'))
+            ->andWhere(':channel MEMBER OF o.channels')
             ->setParameter('channel', $channel)
         ;
-
-        return $queryBuilder;
     }
 }

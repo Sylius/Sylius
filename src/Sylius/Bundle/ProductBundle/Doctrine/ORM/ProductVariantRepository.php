@@ -26,9 +26,8 @@ class ProductVariantRepository extends EntityRepository implements ProductVarian
      */
     public function createQueryBuilderByProductId($locale, $productId)
     {
-        return $this
-            ->createQueryBuilder('o')
-            ->leftJoin('o.translations', 'translation')
+        return $this->createQueryBuilder('o')
+            ->innerJoin('o.translations', 'translation')
             ->andWhere('translation.locale = :locale')
             ->andWhere('o.product = :productId')
             ->setParameter('locale', $locale)
@@ -42,7 +41,7 @@ class ProductVariantRepository extends EntityRepository implements ProductVarian
     public function findByName($name, $locale)
     {
         return $this->createQueryBuilder('o')
-            ->leftJoin('o.translations', 'translation')
+            ->innerJoin('o.translations', 'translation')
             ->andWhere('translation.name = :name')
             ->andWhere('translation.locale = :locale')
             ->setParameter('name', $name)
@@ -58,7 +57,7 @@ class ProductVariantRepository extends EntityRepository implements ProductVarian
     public function findByNameAndProduct($name, $locale, ProductInterface $product)
     {
         return $this->createQueryBuilder('o')
-            ->leftJoin('o.translations', 'translation')
+            ->innerJoin('o.translations', 'translation')
             ->andWhere('translation.name = :name')
             ->andWhere('translation.locale = :locale')
             ->andWhere('o.product = :product')
