@@ -308,14 +308,6 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_creating_product_with_images()
-    {
-        
-    }
-
-    /**
-     * @test
-     */
     public function it_allows_creating_product_with_product_taxons()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
@@ -386,5 +378,15 @@ EOT;
      * @test
      */
     public function it_allows_creating_product_with_associations()
-    {}
+    {
+
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_creating_product_with_images()
+    {
+
+    }
 }
