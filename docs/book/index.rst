@@ -92,6 +92,17 @@ You should also have a look here if you are looking for Cart, which is in Sylius
     :hidden:
 
     orders/index
-    themes/index
 
 .. include:: /book/orders/map.rst.inc
+
+Themes
+------
+
+Here you will learn basics about the Theming concept of Sylius. How to change the theme of your shop? keep reading!
+
+.. toctree::
+    :hidden:
+
+    themes/index
+
+.. include:: /book/themes/map.rst.inc
