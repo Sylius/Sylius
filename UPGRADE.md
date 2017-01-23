@@ -274,6 +274,10 @@ These services will be generated automatically based on subject name.
 
 ### ThemeBundle
 
+* `Sylius\Bundle\ThemeBundle\Translation\Provider\Locale\FallbackLocalesProvider` and `Sylius\Bundle\ThemeBundle\Translation\Provider\Locale\FallbackLocalesProviderInterface` have been removed.
+* The fallback locales generation of `Sylius\Bundle\ThemeBundle\Translation\Translator` has been nerfed to more strongly rely on symfony's default logic.
+From now on it won't compute every possible permutation of fallback locales from the given one, but only the themeless version, the base locale with and without theme's modifier, and every pre-configured fallback with and without the modifier.
+
 ### UiBundle
 
 * `Sylius\Bundle\UiBundle\Menu\AbstractMenuBuilder` was removed, you should add the following code to classes previously extending it:
@@ -337,6 +341,13 @@ These services will be generated automatically based on subject name.
   ```
 
 * Payum gateways configuration is now done in Admin panel. Don't use `yml` file to configure your custom gateways.
+
+* While providing multiple locales you need to insert the two letter base (i.e. `en`), along with the `%locale%` parameter, to the fallbacks array in `app/config/config.yml`.
+
+  ```yaml
+  framework:
+      translator: { fallbacks: ["%locale%", "en"] }
+  ```
 
 ### Security
 
