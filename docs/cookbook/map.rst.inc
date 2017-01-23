@@ -14,3 +14,4 @@
 * :doc:`/cookbook/taxons-menu`
 * :doc:`/cookbook/facebook-login`
 * :doc:`/cookbook/cron-jobs`
+* :doc:`/cookbook/creating-extension`
