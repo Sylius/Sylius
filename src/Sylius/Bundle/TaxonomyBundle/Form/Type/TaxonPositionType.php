@@ -41,7 +41,7 @@ final class TaxonPositionType extends AbstractResourceType
         parent::configureOptions($resolver);
 
         $resolver->setDefaults([
-            'csrf_protection' => false,
+            'csrf_token_id' => 'taxon_position',
         ]);
     }
 
