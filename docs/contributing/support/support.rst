@@ -11,15 +11,17 @@ Slack
 Most of us use Slack for their online communication with co-workers. We know that it is not convenient to have another chat window open,
 therefore we've chosen Slack for the live communication with the community.
 
-We have setup following rooms so far:
+We have created following rooms so far:
 
 #general - for discussions about Sylius development itself,
 #docs - for discussions related to the documentation,
-#support - for asking questions and helping others.
-If you have any suggestions, please let us know in the comments section below this post.
+#support - for asking questions and helping others,
+#random - for the non-work banter and water cooler conversation.
+
+If you have any suggestions, please let us know on Slack!
 
 Slack requires inviting new members, but this can be done automatically, just go to `slackinvite.me/to/sylius-devs <https://slackinvite.me/to/sylius-devs>`_,
-enter your e-mail and you will get an e-mail with invitation, where you can setup your login and password.
+enter your email and you will get an invitation.
 If possible, please use GitHub username - it will help us to recognize each other easily!
 
 StackOverflow
@@ -27,7 +29,7 @@ StackOverflow
 
 We encourage asking Sylius related questions on the `stackoverflow.com <http://stackoverflow.com>`_ platform.
 
-* Search for the question before asking, maybe someone did have this problem already,
+* Search for the question before asking, maybe someone has already solved your problem,
 * Be specific about your question, this is what SO is about, concrete questions and solutions,
 * Be sure to tag them with **sylius** tag - it will make it easier to find for people who can answer it.
 

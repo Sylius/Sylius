@@ -2,7 +2,7 @@ Contributing Code
 =================
 
 .. toctree::
-    :maxdepth: 2
+    :hidden:
 
     bugs
     patches
@@ -12,3 +12,5 @@ Contributing Code
     conventions
     git
     license
+
+.. include:: /contributing/code/map.rst.inc
