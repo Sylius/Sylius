@@ -6,6 +6,7 @@
             {% for code in currencies %}
                 {% if code is not same as(active) %}
                     <form action="{{ path('sylius_shop_switch_currency', {'code': code}) }}" method="post" >
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('switch_currency') }}" />
                         <button type="submit" class="item sylius-available-currency">
                             {{ code }}
                         </button>

@@ -19,6 +19,8 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\Security\Csrf\CsrfToken;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -47,21 +49,29 @@ final class LocaleSwitchController
     private $localeChangeHandler;
 
     /**
+     * @var CsrfTokenManagerInterface
+     */
+    private $csrfTokenManager;
+
+    /**
      * @param EngineInterface $templatingEngine
      * @param LocaleContextInterface $localeContext
      * @param LocaleProviderInterface $localeProvider
      * @param LocaleChangeHandlerInterface $localeChangeHandler
+     * @param CsrfTokenManagerInterface $csrfTokenManager
      */
     public function __construct(
         EngineInterface $templatingEngine,
         LocaleContextInterface $localeContext,
         LocaleProviderInterface $localeProvider,
-        LocaleChangeHandlerInterface $localeChangeHandler
+        LocaleChangeHandlerInterface $localeChangeHandler,
+        CsrfTokenManagerInterface $csrfTokenManager
     ) {
         $this->templatingEngine = $templatingEngine;
         $this->localeContext = $localeContext;
         $this->localeProvider = $localeProvider;
         $this->localeChangeHandler = $localeChangeHandler;
+        $this->csrfTokenManager = $csrfTokenManager;
     }
 
     /**
@@ -88,6 +98,10 @@ final class LocaleSwitchController
                 Response::HTTP_NOT_ACCEPTABLE,
                 sprintf('The locale code "%s" is invalid.', $code)
             );
+        }
+
+        if (!$this->csrfTokenManager->isTokenValid(new CsrfToken('switch_locale', $request->request->get('_csrf_token')))) {
+            throw new HttpException(Response::HTTP_FORBIDDEN, 'Invalid csrf token.');
         }
 
         $this->localeChangeHandler->handle($code);
