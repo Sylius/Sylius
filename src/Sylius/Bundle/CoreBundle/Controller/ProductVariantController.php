@@ -37,6 +37,10 @@ class ProductVariantController extends ResourceController
         $this->isGrantedOr403($configuration, ResourceActions::UPDATE);
         $productVariantsToUpdate = $request->get('productVariants');
 
+        if ($configuration->isCsrfProtectionEnabled() && !$this->isCsrfTokenValid('update-product-variant-position', $request->request->get('_csrf_token'))) {
+            throw new HttpException(Response::HTTP_FORBIDDEN, 'Invalid csrf token.');
+        }
+
         if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH'], true) && null !== $productVariantsToUpdate) {
             foreach ($productVariantsToUpdate as $productVariantToUpdate) {
                 if (!is_numeric($productVariantToUpdate['position'])) {

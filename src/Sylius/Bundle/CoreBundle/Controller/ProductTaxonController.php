@@ -29,13 +29,18 @@ class ProductTaxonController extends ResourceController
 {
     /**
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     *
+     * @return Response
      */
     public function updatePositionsAction(Request $request)
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
         $this->isGrantedOr403($configuration, ResourceActions::UPDATE);
         $productTaxons = $request->get('productTaxons');
+
+        if ($configuration->isCsrfProtectionEnabled() && !$this->isCsrfTokenValid('update-product-taxon-position', $request->request->get('_csrf_token'))) {
+            throw new HttpException(Response::HTTP_FORBIDDEN, 'Invalid csrf token.');
+        }
 
         if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH'], true) && null !== $productTaxons) {
             foreach ($productTaxons as $productTaxon) {
@@ -52,6 +57,7 @@ class ProductTaxonController extends ResourceController
                 $this->manager->flush();
             }
         }
+
         return new JsonResponse();
     }
 }

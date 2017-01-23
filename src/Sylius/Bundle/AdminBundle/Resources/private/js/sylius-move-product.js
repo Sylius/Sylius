@@ -13,12 +13,14 @@
     $.fn.extend({
         moveProduct: function (positionInput) {
             var productIds = [];
+            var element = $(this);
 
-            $(this).api({
+            element.api({
                 method: 'PUT',
                 beforeSend: function (settings) {
                     settings.data = {
-                        productTaxons: productIds
+                        productTaxons: productIds,
+                        _csrf_token: element.data('csrf-token')
                     };
 
                     return settings;
