@@ -16,6 +16,8 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
+use Sylius\Component\Core\OrderCheckoutStates;
+use Sylius\Component\Core\OrderPaymentStates;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 
 class OrderRepository extends BaseOrderRepository implements OrderRepositoryInterface
@@ -205,6 +207,25 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
             ->setParameter('channel', $channel)
             ->setParameter('state', OrderInterface::STATE_CART)
             ->setMaxResults($count)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findOrdersUnpaidSince(\DateTime $terminalDate)
+    {
+        return $this->createQueryBuilder('o')
+            ->where('o.checkoutState = :checkoutState')
+            ->andWhere('o.paymentState != :paymentState')
+            ->andWhere('o.state = :orderState')
+            ->andWhere('o.checkoutCompletedAt < :terminalDate')
+            ->setParameter('checkoutState', OrderCheckoutStates::STATE_COMPLETED)
+            ->setParameter('paymentState', OrderPaymentStates::STATE_PAID)
+            ->setParameter('orderState', OrderInterface::STATE_NEW)
+            ->setParameter('terminalDate', $terminalDate)
             ->getQuery()
             ->getResult()
         ;

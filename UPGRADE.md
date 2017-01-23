@@ -86,6 +86,9 @@ After:
 
 ### Order / OrderBundle
 
+* Method `findOrdersUnpaidSince` of `Sylius\Bundle\OrderBundle\Doctrine\ORM\OrderRepository` has been moved to `Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository` as it depends on Core component. 
+ If you haven't been using this method, you can remove the 'CoreBundle' dependency.
+
 ### Payment / PaymentBundle
 
 * Changed default ``Payment::$state`` from *new* to *cart*.
