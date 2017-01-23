@@ -371,7 +371,39 @@ EOT;
      */
     public function it_allows_creating_product_with_attributes()
     {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/locales.yml');
+        $this->loadFixturesFromFile('resources/product_attributes.yml');
 
+        $data =
+<<<EOT
+        {
+            "code": "MUG_TH",
+            "attributes": [
+                {
+                    "attribute": "mug_material",
+                    "locale_code": "en_US",
+                    "value": "concrete"
+                },
+                {
+                    "attribute": "mug_collection",
+                    "locale_code": "en_US",
+                    "value": "make live harder"
+                }
+            ],
+            "translations": {
+                "en__US": {
+                    "name": "Theme Mug",
+                    "slug": "theme-mug"
+                }
+            }
+        }
+EOT;
+
+        $this->client->request('POST', '/api/v1/products/', [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'product/create_with_attributes_response', Response::HTTP_CREATED);
     }
 
     /**

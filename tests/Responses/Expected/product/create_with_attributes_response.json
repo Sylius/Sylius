@@ -1,0 +1,42 @@
+{
+    "id": @integer@,
+    "name": "Theme Mug",
+    "code": "MUG_TH",
+    "available_on": "@string@.isDateTime()",
+    "attributes": [
+        {
+            "id": @integer@,
+            "code": "mug_material",
+            "name": "Mug collection",
+            "value": "concrete",
+            "type": "text"
+        },
+        {
+            "id": @integer@,
+            "code": "mug_collection",
+            "name": "Mug material",
+            "value": "make live harder",
+            "type": "text"
+        }
+    ],
+    "variants": [],
+    "options": [],
+    "associations": [],
+    "translations": {
+        "en_US": {
+            "id": @integer@,
+            "locale": "en_US",
+            "name": "Theme Mug",
+            "slug": "theme-mug"
+        }
+    },
+    "product_taxons": [],
+    "reviews": [],
+    "average_rating": 0,
+    "images": [],
+    "_links": {
+        "self": {
+            "href": "@string@"
+        }
+    }
+}
