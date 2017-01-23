@@ -75,9 +75,6 @@ final class DataSource implements DataSourceInterface
         $paginator->setNormalizeOutOfRangePages(true);
         $paginator->setCurrentPage($parameters->get('page', 1));
 
-        // This prevents Pagerfanta from querying database from a template
-        $paginator->getCurrentPageResults();
-
         return $paginator;
     }
 }
