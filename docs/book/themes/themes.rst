@@ -4,7 +4,7 @@
 Themes
 ======
 
-Theming is method of customizing how do your channels look like in Sylius. Each channel can have a different Theme.
+Theming is a method of customizing how your channels look like in Sylius. Each channel can have a different tqheme.
 
 How to enable themes in a project?
 ----------------------------------
@@ -20,7 +20,7 @@ To use themes inside of your project you need to add these few lines to your ``a
 How to create themes?
 ---------------------
 
-Let's see how to customize the view of cart widget inside of your custom theme.
+Let's see how to customize the login view inside of your custom theme.
 
 1. Inside of the ``app/themes/`` directory create a new directory for your theme:
 
@@ -31,7 +31,7 @@ Let it be ``CrimsonTheme/`` for instance.
 .. code-block:: yaml
 
    {
-       "name": "sylius/crimson-theme",
+       "name": "acme/crimson-theme",
        "authors": [
            {
                "name": "James Potter",
@@ -47,41 +47,35 @@ Let it be ``CrimsonTheme/`` for instance.
 
 3. Customize a template:
 
-In order to customize the cart widget you should take the content of ``@SyliusShopBundle/views/Cart/_widget.html.twig`` file
-and paste it to your theme directory: ``app/themes/CrimsonTheme/SyliusShopBundle/views/Cart/_widget.html.twig``
+In order to customize the login view you should take the content of ``@SyliusShopBundle/views/login.html.twig`` file
+and paste it to your theme directory: ``app/themes/CrimsonTheme/SyliusShopBundle/views/login.html.twig``
 
-Then change the colour of the widget by simply adding style to it ``style="background-color: crimson"``, and for example
-add a heading when the cart is empty.
+Let's remove the registration column in this example:
 
 .. code-block:: twig
 
-   {% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+   {% extends '@SyliusShop/layout.html.twig' %}
 
-   <div id="sylius-cart-button" class="ui circular cart button">
-       <i class="cart icon"></i>
-       <span id="sylius-cart-total">
-           {{ money.convertAndFormat(cart.itemsTotal) }}
-       </span>
-       {% transchoice cart.items|length %}sylius.ui.item.choice{% endtranschoice %}
-   </div>
-   <div class="ui large flowing cart hidden popup" style="background-color: crimson">
-       {% if cart.empty %}
-           <h1>
-               This Is My Headline
-           </h1>
-           {{ 'sylius.ui.your_cart_is_empty'|trans }}.
-       {% else %}
-           <div class="ui list">
-               {% for item in cart.items %}
-                   <div class="item">{{ item.quantity }} x <strong>{{ item.product }}</strong> {{ money.convertAndFormat(item.unitPrice) }}</div>
-               {% endfor %}
-               <div class="item"><strong>{{ 'sylius.ui.subtotal'|trans }}</strong>: {{ money.convertAndFormat(cart.itemsTotal) }}</div>
+   {% form_theme form 'SyliusUiBundle:Form:theme.html.twig' %}
+
+   {% import 'SyliusUiBundle:Macro:messages.html.twig' as messages %}
+
+   {% block content %}
+       {% include '@SyliusShop/Login/_header.html.twig' %}
+       <div class="ui padded segment">
+           <div class="ui one column very relaxed stackable grid">
+               <div class="column">
+                   <h4 class="ui dividing header">{{ 'sylius.ui.registered_customers'|trans }}</h4>
+                   <p>{{ 'sylius.ui.if_you_have_an_account_sign_in_with_your_email_address'|trans }}.</p>
+                   {{ form_start(form, {'action': path('sylius_shop_login_check'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
+                       {% include '@SyliusShop/Login/_form.html.twig' %}
+                       <button type="submit" class="ui blue submit button">{{ 'sylius.ui.login'|trans }}</button>
+                       <a href="{{ path('sylius_shop_request_password_reset_token') }}" class="ui right floated button">{{ 'sylius.ui.forgot_password'|trans }}</a>
+                   {{ form_end(form, {'render_rest': false}) }}
+               </div>
            </div>
-           <a href="{{ path('sylius_shop_cart_summary') }}" class="ui fluid basic text button">{{ 'sylius.ui.view_and_edit_cart'|trans }}</a>
-           <div class="ui divider"></div>
-           <a href="{{ path('sylius_shop_checkout_start') }}" class="ui fluid primary button">{{ 'sylius.ui.checkout'|trans }}</a>
-       {% endif %}
-   </div>
+       </div>
+   {% endblock %}
 
 .. tip::
 
@@ -102,7 +96,8 @@ In the administration panel go to channels and change the theme of your desired 
 
 .. note::
 
-   You can override any template of Sylius like that, but also add the ``web/assets/`` inside of the theme directory to override the css or js files.
+   You can override any template of Sylius like that, as well as static files by adding a ``web/assets/`` directory
+   in the theme directory to override CSS or JS files.
 
 Learn more
 ----------
