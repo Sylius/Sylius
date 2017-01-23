@@ -22,6 +22,7 @@ sylius_api_locale_create:
         _controller: sylius.controller.locale:createAction
         _sylius:
             serialization_version: $version
+            csrf_protection: false
 
 sylius_api_locale_delete:
     path: /{code}

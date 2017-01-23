@@ -18,6 +18,7 @@ sylius_api_country_create:
         _controller: sylius.controller.country:createAction
         _sylius:
             serialization_version: $version
+            csrf_protection: false
 
 sylius_api_country_update:
     path: /{code}
@@ -28,6 +29,7 @@ sylius_api_country_update:
             serialization_version: $version
             criteria:
                 code: $code
+            csrf_protection: false
 
 sylius_api_country_delete:
     path: /{code}

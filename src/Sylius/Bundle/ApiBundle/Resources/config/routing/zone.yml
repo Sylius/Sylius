@@ -22,6 +22,7 @@ sylius_api_zone_create:
                 method: createTyped
                 arguments:
                     type: $type
+            csrf_protection: false
 
 sylius_api_zone_update:
     path: /{code}
@@ -32,6 +33,7 @@ sylius_api_zone_update:
             serialization_version: $version
             criteria:
                 code: $code
+            csrf_protection: false
 
 sylius_api_zone_delete:
     path: /{code}
