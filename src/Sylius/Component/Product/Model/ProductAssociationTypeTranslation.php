@@ -16,17 +16,17 @@ use Sylius\Component\Resource\Model\AbstractTranslation;
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-final class ProductAssociationTypeTranslation extends AbstractTranslation implements ProductAssociationTypeTranslationInterface
+class ProductAssociationTypeTranslation extends AbstractTranslation implements ProductAssociationTypeTranslationInterface
 {
     /**
      * @var mixed
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      */
-    private $name;
+    protected $name;
 
     /**
      * {@inheritdoc}
