@@ -25,7 +25,7 @@ class PaymentMethod extends BasePaymentMethod implements PaymentMethodInterface
     /**
      * @var Collection
      */
-    private $channels;
+    protected $channels;
 
     public function __construct()
     {
