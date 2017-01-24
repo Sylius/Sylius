@@ -16,6 +16,7 @@ sylius_api_channel_create:
         _controller: sylius.controller.channel:createAction
         _sylius:
             serialization_version: $version
+            csrf_protection: false
 
 sylius_api_channel_update:
     path: /{id}
@@ -24,6 +25,7 @@ sylius_api_channel_update:
         _controller: sylius.controller.channel:updateAction
         _sylius:
             serialization_version: $version
+            csrf_protection: false
 
 sylius_api_channel_delete:
     path: /{id}

@@ -21,6 +21,7 @@ sylius_api_promotion_coupon_create:
         _controller: sylius.controller.promotion_coupon:createAction
         _sylius:
             serialization_version: $version
+            csrf_protection: false
 
 sylius_api_promotion_coupon_update:
     path: /{id}
@@ -29,6 +30,7 @@ sylius_api_promotion_coupon_update:
         _controller: sylius.controller.promotion_coupon:updateAction
         _sylius:
             serialization_version: $version
+            csrf_protection: false
 
 sylius_api_promotion_coupon_delete:
     path: /{id}

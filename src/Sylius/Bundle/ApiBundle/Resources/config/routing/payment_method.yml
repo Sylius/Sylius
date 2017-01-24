@@ -20,6 +20,7 @@ sylius_api_payment_method_create:
         _controller: sylius.controller.payment_method:createAction
         _sylius:
             serialization_version: $version
+            csrf_protection: false
 
 sylius_api_payment_method_update:
     path: /{id}
@@ -28,6 +29,7 @@ sylius_api_payment_method_update:
         _controller: sylius.controller.payment_method:updateAction
         _sylius:
             serialization_version: $version
+            csrf_protection: false
 
 sylius_api_payment_method_delete:
     path: /{id}

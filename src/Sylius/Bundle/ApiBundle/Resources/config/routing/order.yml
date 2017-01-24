@@ -21,6 +21,7 @@ sylius_api_order_create:
         _sylius:
             serialization_version: $version
             form: Sylius\Bundle\ApiBundle\Form\Type\OrderType
+            csrf_protection: false
 
 sylius_api_order_delete:
     path: /{id}

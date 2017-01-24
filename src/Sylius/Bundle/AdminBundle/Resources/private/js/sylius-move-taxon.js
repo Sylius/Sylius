@@ -17,7 +17,8 @@
                 on: 'click',
                 beforeSend: function (settings) {
                     settings.data = {
-                        position: $(this).data('position') - 1
+                        position: $(this).data('position') - 1,
+                        _token: $(this).data('csrf-token')
                     };
 
                     return settings;
@@ -33,7 +34,8 @@
                 on: 'click',
                 beforeSend: function (settings) {
                     settings.data = {
-                        position: $(this).data('position') + 1
+                        position: $(this).data('position') + 1,
+                        _token: $(this).data('csrf-token')
                     };
 
                     return settings;

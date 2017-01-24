@@ -17,6 +17,7 @@ sylius_api_adjustment_create:
         _controller: sylius.controller.adjustment:createAction
         _sylius:
             serialization_version: $version
+            csrf_protection: false
 
 sylius_api_adjustment_update:
     path: /{id}
@@ -25,6 +26,7 @@ sylius_api_adjustment_update:
         _controller: sylius.controller.adjustment:updateAction
         _sylius:
             serialization_version: $version
+            csrf_protection: false
 
 sylius_api_adjustment_delete:
     path: /{id}

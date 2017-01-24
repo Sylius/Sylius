@@ -21,6 +21,7 @@ sylius_api_product_variant_create:
         _controller: sylius.controller.product_variant:createAction
         _sylius:
             serialization_version: $version
+            csrf_protection: false
 
 sylius_api_product_variant_update:
     path: /{id}
@@ -32,6 +33,7 @@ sylius_api_product_variant_update:
             criteria:
                 product: $productId
                 master: false
+            csrf_protection: false
 
 sylius_api_product_variant_delete:
     path: /{id}
