@@ -2,9 +2,11 @@ Contributing Documentation
 ==========================
 
 .. toctree::
-    :maxdepth: 2
+    :hidden:
 
     overview
     format
     standards
     license
+
+.. include:: /contributing/documentation/map.rst.inc
