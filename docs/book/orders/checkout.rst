@@ -105,7 +105,7 @@ and of course flush your order after that via the manager.
 
     $stateMachineFactory = $this->container->get('sm.factory');
 
-    $stateMachine = $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)
+    $stateMachine = $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH);
     $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_ADDRESS);
 
     $this->container->get('sylius.manager.order')->flush();
@@ -132,7 +132,7 @@ How to perform the Selecting shipping Step programmatically?
 Before approaching this step be sure that your Order is in the ``addressed`` state. In this state your order
 will already have a default ShippingMethod assigned, but in this step you can change it and have everything recalculated automatically.
 
-Firstly either create new (see how in the `Shipments concept </book/orders/shipments>`) or retrieve a **ShippingMethod**
+Firstly either create new (see how in the `Shipments concept </book/orders/shipments>`_) or retrieve a **ShippingMethod**
 from the repository to assign it to your order's shipment created defaultly in the addressing step.
 
 .. code-block:: php
@@ -140,7 +140,7 @@ from the repository to assign it to your order's shipment created defaultly in t
     // Let's assume you have a method with code 'DHL' that has everything set properly
     $shippingMethod = $this->container->get('sylius.repository.shipping_method')->findOneByCode('DHL');
 
-    // Shipments are a Collection, so even though you hve one Shipment by default you have to iterate over them
+    // Shipments are a Collection, so even though you have one Shipment by default you have to iterate over them
     foreach ($order->getShipments() as $shipment) {
         $shipment->setMethod($shippingMethod);
     }
@@ -181,7 +181,7 @@ How to perform the Selecting payment step programmatically?
 Before this step your Order should be in the ``shipping_selected`` state. It will have a default Payment selected after the addressing step,
 but in this step you can change it.
 
-Firstly either create new (see how in the `Payments concept </book/orders/payments`) or retrieve a **PaymentMethod**
+Firstly either create new (see how in the `Payments concept </book/orders/payments>`_) or retrieve a **PaymentMethod**
 from the repository to assign it to your order's payment created defaultly in the addressing step.
 
 .. code-block:: php
@@ -230,7 +230,7 @@ Before executing the completing transition you can set some notes to your order.
 
 .. code-block:: php
 
-    $order->setNotes('Thank you dear shop owners! I am allergic to tape so please use something els for packaging.')
+    $order->setNotes('Thank you dear shop owners! I am allergic to tape so please use something else for packaging.')
 
 After that get the StateMachine for the Order via the StateMachineFactory with a proper schema,
 and apply a proper transition and flush the order via the manager.
