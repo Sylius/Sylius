@@ -198,5 +198,11 @@
             <argument type="service" id="sylius.fixture.example_factory.address" />
             <tag name="sylius_fixtures.fixture" />
         </service>
+
+        <service id="sylius.fixture.api_client" class="Sylius\Bundle\CoreBundle\Fixture\ApiClientFixture">
+            <argument type="service" id="sylius.manager.api_client" />
+            <argument type="service" id="sylius.fixture.example_factory.api_client" />
+            <tag name="sylius_fixtures.fixture" />
+        </service>
     </services>
 </container>

@@ -136,5 +136,9 @@
             <argument type="service" id="sylius.repository.country" />
             <argument type="service" id="sylius.repository.customer" />
         </service>
+
+        <service id="sylius.fixture.example_factory.api_client" class="Sylius\Bundle\CoreBundle\Fixture\Factory\ApiClientExampleFactory">
+            <argument type="service" id="fos_oauth_server.client_manager.default" />
+        </service>
     </services>
 </container>
