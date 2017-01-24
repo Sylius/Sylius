@@ -9,11 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Order\Model;
+namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Order\Model\OrderSequence;
-use Sylius\Component\Order\Model\OrderSequenceInterface;
+use Sylius\Component\Core\Model\OrderSequence;
+use Sylius\Component\Core\Model\OrderSequenceInterface;
+use Sylius\Component\Order\Model\OrderSequence as BaseOrderSequence;
 
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
@@ -25,24 +26,18 @@ final class OrderSequenceSpec extends ObjectBehavior
         $this->shouldHaveType(OrderSequence::class);
     }
 
-    function it_implements_order_sequence_interface()
+    function it_implements_an_order_sequence_interface()
     {
         $this->shouldImplement(OrderSequenceInterface::class);
+    }
+
+    function it_extends_an_order_sequence()
+    {
+        $this->shouldHaveType(BaseOrderSequence::class);
     }
 
     function it_has_version_1_by_default()
     {
         $this->getVersion()->shouldReturn(1);
-    }
-
-    function it_has_zero_index_after_initialized()
-    {
-        $this->getIndex()->shouldReturn(0);
-    }
-
-    function it_increments_index()
-    {
-        $this->incrementIndex();
-        $this->getIndex()->shouldReturn(1);
     }
 }

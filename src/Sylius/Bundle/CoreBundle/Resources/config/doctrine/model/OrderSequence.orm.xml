@@ -16,12 +16,8 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <mapped-superclass name="Sylius\Component\Order\Model\OrderSequence" table="sylius_order_sequence">
-        <id name="id" column="id" type="integer">
-            <generator strategy="AUTO" />
-        </id>
-
-        <field name="index" column="idx" type="integer" />
+    <mapped-superclass name="Sylius\Component\Core\Model\OrderSequence" table="sylius_order_sequence">
+        <field name="version" type="integer" version="true" />
     </mapped-superclass>
 
 </doctrine-mapping>
