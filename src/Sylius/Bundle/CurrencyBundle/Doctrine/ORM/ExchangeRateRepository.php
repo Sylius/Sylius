@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CurrencyBundle\Doctrine\ORM;
 
 use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\Query\Expr\Orx;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Currency\Model\ExchangeRateInterface;
@@ -29,25 +30,17 @@ class ExchangeRateRepository extends EntityRepository implements ExchangeRateRep
      */
     public function findOneWithCurrencyPair($firstCurrencyCode, $secondCurrencyCode)
     {
-        $queryBuilder = $this
-            ->createQueryBuilder('o')
-            ->addSelect('sourceCurrency')
-            ->leftJoin('o.sourceCurrency', 'sourceCurrency')
-            ->addSelect('targetCurrency')
-            ->leftJoin('o.targetCurrency', 'targetCurrency')
-        ;
+        $expr = $this->getEntityManager()->getExpressionBuilder();
 
-        return $queryBuilder
-            ->where(
-                $queryBuilder->expr()->andX(
-                    $queryBuilder->expr()->eq('sourceCurrency.code', ':firstCurrency'),
-                    $queryBuilder->expr()->eq('targetCurrency.code', ':secondCurrency')
-                ))
-            ->orWhere(
-                $queryBuilder->expr()->andX(
-                    $queryBuilder->expr()->eq('sourceCurrency.code', ':secondCurrency'),
-                    $queryBuilder->expr()->eq('targetCurrency.code', ':firstCurrency')
-                ))
+        return $this->createQueryBuilder('o')
+            ->addSelect('sourceCurrency')
+            ->addSelect('targetCurrency')
+            ->innerJoin('o.sourceCurrency', 'sourceCurrency')
+            ->innerJoin('o.targetCurrency', 'targetCurrency')
+            ->andWhere($expr->orX(
+                'sourceCurrency.code = :firstCurrency AND targetCurrency.code = :secondCurrency',
+                'targetCurrency.code = :firstCurrency AND sourceCurrency.code = :secondCurrency'
+            ))
             ->setParameter('firstCurrency', $firstCurrencyCode)
             ->setParameter('secondCurrency', $secondCurrencyCode)
             ->getQuery()

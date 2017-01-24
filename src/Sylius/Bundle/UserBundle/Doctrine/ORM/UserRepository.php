@@ -25,14 +25,9 @@ class UserRepository extends EntityRepository implements UserRepositoryInterface
      */
     public function findOneByEmail($email)
     {
-        $queryBuilder = $this->createQueryBuilder('o');
-
-        $queryBuilder
-            ->andWhere($queryBuilder->expr()->eq('o.emailCanonical', ':email'))
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.emailCanonical = :email')
             ->setParameter('email', $email)
-        ;
-
-        return $queryBuilder
             ->getQuery()
             ->getOneOrNullResult()
         ;

@@ -25,14 +25,8 @@ class PromotionRepository extends EntityRepository implements PromotionRepositor
      */
     public function findActive()
     {
-        $queryBuilder = $this
-            ->createQueryBuilder('o')
-            ->orderBy('o.priority', 'desc')
-        ;
-
-        $this->filterByActive($queryBuilder);
-
-        return $queryBuilder
+        return $this->filterByActive($this->createQueryBuilder('o'))
+            ->addOrderBy('o.priority', 'desc')
             ->getQuery()
             ->getResult()
         ;
@@ -54,24 +48,10 @@ class PromotionRepository extends EntityRepository implements PromotionRepositor
      */
     protected function filterByActive(QueryBuilder $queryBuilder, \DateTime $date = null)
     {
-        if (null === $date) {
-            $date = new \Datetime();
-        }
-
         return $queryBuilder
-            ->where(
-                $queryBuilder->expr()->orX(
-                    $queryBuilder->expr()->isNull($this->getPropertyName('startsAt')),
-                    $queryBuilder->expr()->lt($this->getPropertyName('startsAt'), ':date')
-                )
-            )
-            ->andWhere(
-                $queryBuilder->expr()->orX(
-                    $queryBuilder->expr()->isNull($this->getPropertyName('endsAt')),
-                    $queryBuilder->expr()->gt($this->getPropertyName('endsAt'), ':date')
-                )
-            )
-            ->setParameter('date', $date)
+            ->andWhere('o.startsAt IS NULL OR o.startsAt < :date')
+            ->andWhere('o.endsAt IS NULL OR o.endsAt > :date')
+            ->setParameter('date', $date ?: new \DateTime())
         ;
     }
 }

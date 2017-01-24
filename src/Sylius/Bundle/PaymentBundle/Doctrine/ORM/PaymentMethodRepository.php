@@ -25,8 +25,8 @@ class PaymentMethodRepository extends EntityRepository implements PaymentMethodR
     public function findByName($name, $locale)
     {
         return $this->createQueryBuilder('o')
-            ->leftJoin('o.translations', 'translation')
-            ->where('translation.name = :name')
+            ->innerJoin('o.translations', 'translation')
+            ->andWhere('translation.name = :name')
             ->andWhere('translation.locale = :locale')
             ->setParameter('name', $name)
             ->setParameter('locale', $locale)

@@ -27,8 +27,8 @@ class AttributeRepository extends EntityRepository implements AttributeRepositor
     {
         return $this->createQueryBuilder('o')
             ->addSelect('translation')
-            ->leftJoin('o.translations', 'translation')
-            ->where('translation.name = :name')
+            ->innerJoin('o.translations', 'translation')
+            ->andWhere('translation.name = :name')
             ->andWhere('translation.locale = :locale')
             ->setParameter('name', $name)
             ->setParameter('locale', $locale)

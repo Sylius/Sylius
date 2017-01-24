@@ -25,7 +25,7 @@ class ProductOptionRepository extends EntityRepository implements ProductOptionR
     public function createListQueryBuilder($locale)
     {
         return $this->createQueryBuilder('o')
-            ->leftJoin('o.translations', 'translation')
+            ->innerJoin('o.translations', 'translation')
             ->andWhere('translation.locale = :locale')
             ->setParameter('locale', $locale)
         ;
@@ -37,7 +37,7 @@ class ProductOptionRepository extends EntityRepository implements ProductOptionR
     public function findByName($name, $locale)
     {
         return $this->createQueryBuilder('o')
-            ->leftJoin('o.translations', 'translation')
+            ->innerJoin('o.translations', 'translation')
             ->andWhere('translation.name = :name')
             ->andWhere('translation.locale = :locale')
             ->setParameter('name', $name)
