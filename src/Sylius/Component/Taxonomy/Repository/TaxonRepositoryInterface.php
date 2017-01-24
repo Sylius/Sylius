@@ -44,10 +44,11 @@ interface TaxonRepositoryInterface extends RepositoryInterface
 
     /**
      * @param string $slug
+     * @param string $locale
      *
      * @return TaxonInterface|null
      */
-    public function findOneBySlug($slug);
+    public function findOneBySlug($slug, $locale);
 
     /**
      * @param string $name
