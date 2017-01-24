@@ -12,33 +12,13 @@
 -->
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <imports>
+        <import resource="services/form.xml" />
+    </imports>
     <services>
         <service id="sylius.oauth_server.client_manager" class="Sylius\Bundle\ApiBundle\Model\ClientManager">
             <argument type="service" id="fos_oauth_server.entity_manager" />
             <argument>%fos_oauth_server.model.client.class%</argument>
-        </service>
-
-        <service id="sylius.form.type.client" class="Sylius\Bundle\ApiBundle\Form\Type\ClientType">
-            <argument>%sylius.model.api_client.class%</argument>
-            <argument type="collection"><argument>sylius</argument></argument>
-            <tag name="form.type" />
-        </service>
-
-        <service id="sylius.form.type.api_order" class="Sylius\Bundle\ApiBundle\Form\Type\OrderType">
-            <argument>%sylius.model.order.class%</argument>
-            <argument type="collection"><argument>sylius</argument></argument>
-            <argument type="service" id="sylius.repository.locale" />
-            <tag name="form.type" />
-        </service>
-
-        <service id="sylius.form.type.api_customer" class="Sylius\Bundle\ApiBundle\Form\Extension\ApiCustomerType">
-            <argument>%sylius.model.customer.class%</argument>
-            <argument type="collection"><argument>sylius</argument></argument>
-            <tag name="form.type" />
-        </service>
-
-        <service id="sylius.form.extension.type.api_product" class="Sylius\Bundle\ApiBundle\Form\Extension\ApiProductTypeExtension">
-            <tag name="form.type_extension" extended-type="Sylius\Bundle\ProductBundle\Form\Type\ProductType" />
         </service>
     </services>
 </container>

@@ -21,6 +21,7 @@ sylius_api_product_create:
         _controller: sylius.controller.product:createAction
         _sylius:
             serialization_version: $version
+            form: Sylius\Bundle\ApiBundle\Form\Type\ProductType
 
 sylius_api_product_update:
     path: /{id}
@@ -29,6 +30,7 @@ sylius_api_product_update:
         _controller: sylius.controller.product:updateAction
         _sylius:
             serialization_version: $version
+            form: Sylius\Bundle\ApiBundle\Form\Type\ProductType
 
 sylius_api_product_delete:
     path: /{id}

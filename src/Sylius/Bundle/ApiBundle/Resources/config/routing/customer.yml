@@ -32,7 +32,7 @@ sylius_api_customer_create:
             serialization_version: $version
             serialization_groups: [Detailed]
             form:
-                type: Sylius\Bundle\ApiBundle\Form\Extension\ApiCustomerType
+                type: Sylius\Bundle\ApiBundle\Form\Type\CustomerProfileType
 
 sylius_api_customer_update:
     path: /{id}
@@ -42,7 +42,7 @@ sylius_api_customer_update:
         _sylius:
             serialization_version: $version
             form:
-                type: Sylius\Bundle\ApiBundle\Form\Extension\ApiCustomerType
+                type: Sylius\Bundle\ApiBundle\Form\Type\CustomerProfileType
 
 sylius_api_customer_delete:
     path: /{id}

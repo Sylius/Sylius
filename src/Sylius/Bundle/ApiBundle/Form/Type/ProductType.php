@@ -9,11 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ApiBundle\Form\Extension;
+namespace Sylius\Bundle\ApiBundle\Form\Type;
 
-use Sylius\Bundle\ApiBundle\Form\EventSubscriber\RemoveVariantSelectionFieldFormSubscriber;
-use Sylius\Bundle\ProductBundle\Form\Type\ProductType;
-use Symfony\Component\Form\AbstractTypeExtension;
+use Sylius\Bundle\ProductBundle\Form\Type\ProductType as BaseProductType;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -21,7 +20,7 @@ use Symfony\Component\Form\FormEvents;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-final class ApiProductTypeExtension extends AbstractTypeExtension
+final class ProductType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -41,8 +40,8 @@ final class ApiProductTypeExtension extends AbstractTypeExtension
     /**
      * {@inheritdoc}
      */
-    public function getExtendedType()
+    public function getParent()
     {
-        return ProductType::class;
+        return BaseProductType::class;
     }
 }
