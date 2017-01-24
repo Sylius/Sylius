@@ -4,7 +4,24 @@
 Themes
 ======
 
-Theming is a method of customizing how your channels look like in Sylius. Each channel can have a different tqheme.
+Theming is a method of customizing how your channels look like in Sylius. Each channel can have a different theme.
+
+What is the purpose of using themes?
+------------------------------------
+
+There are some criteria that you have to analyze before choosing either :doc:`standard Symfony template overriding </customization/template>` or themes.
+
+**When you should choose standard template overriding:**
+
+* you have only one channel
+* **or** you do not need different looks/themes on each of you channels
+* you need only basic changes in the views (changing colors, some blocks rearranging)
+
+**When you should use Sylius themes:**
+
+* you have more than one channel for a single Sylius instance
+* **and** you want each channel to have their own look and behaviour
+* you change a lot of things in the views
 
 How to enable themes in a project?
 ----------------------------------
