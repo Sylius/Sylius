@@ -12,6 +12,7 @@
 namespace Sylius\Tests\Controller;
 
 use Lakion\ApiTestCase\JsonApiTestCase;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -409,15 +410,52 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_creating_product_with_associations()
+    public function it_allows_creating_product_with_images()
     {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/locales.yml');
 
+        $data =
+<<<EOT
+        {
+            "code": "MUG_TH",
+            "images": [
+                {
+                    "code": "FORD_MUG"
+                },
+                {
+                    "code": "MUGS"
+                }
+            ],
+            "translations": {
+                "en__US": {
+                    "name": "Theme Mug",
+                    "slug": "theme-mug"
+                }
+            }
+        }
+EOT;
+
+        $this->client->request(
+            'POST',
+            '/api/v1/products/',
+            [],
+            ['images' => [
+                ['file' => new UploadedFile(sprintf('%s/../Resources/fixtures/ford.jpg', __DIR__), "ford")],
+                ['file' => new UploadedFile(sprintf('%s/../Resources/fixtures/mugs.jpg', __DIR__), "mugs")],
+            ]],
+            static::$authorizedHeaderWithContentType,
+            $data
+        );
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'product/create_with_images_response', Response::HTTP_CREATED);
     }
 
     /**
      * @test
      */
-    public function it_allows_creating_product_with_images()
+    public function it_allows_creating_product_with_associations()
     {
 
     }
