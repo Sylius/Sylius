@@ -1,0 +1,23 @@
+{% import 'SyliusUiBundle:Macro:table.html.twig' as table %}
+{% import 'SyliusUiBundle:Macro:messages.html.twig' as messages %}
+
+{% set definition = resources.definition %}
+{% set data = resources.data %}
+
+{% if data|length > 0 %}
+    <table class="ui stackable celled table">
+        <thead>
+            <tr>
+                {{ table.headers(resources, definition, app.request.attributes) }}
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in data %}
+                {{ table.row(resources, definition, row) }}
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    {{ messages.info('sylius.ui.no_results_to_display') }}
+{% endif %}
+
