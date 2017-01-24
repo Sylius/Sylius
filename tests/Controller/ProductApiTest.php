@@ -40,8 +40,8 @@ final class ProductApiTest extends JsonApiTestCase
      */
     public function it_does_not_allow_to_show_products_list_when_access_is_denied()
     {
-        $products = $this->loadFixturesFromFile('resources/products.yml');
-        $this->client->request('GET', '/api/v1/products/'.$products['product1']->getId());
+        $this->loadFixturesFromFile('resources/products.yml');
+        $this->client->request('GET', '/api/v1/products/');
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);

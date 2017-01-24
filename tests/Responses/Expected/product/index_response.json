@@ -21,8 +21,8 @@
         "items": [
             {
                 "id": @integer@,
-                "name": "Star wars mug",
-                "code": "MUG_SW",
+                "name": "Breaking bad mug",
+                "code": "MUG_BB",
                 "options": [],
                 "average_rating": 0,
                 "images": [],
@@ -47,86 +47,8 @@
             },
             {
                 "id": @integer@,
-                "name": "Breaking bad mug",
-                "code": "MUG_BB",
-                "options": [],
-                "average_rating": 0,
-                "images": [],
-                "_links": {
-                    "self": {
-                        "href": "@string@"
-                    }
-                }
-            },
-            {
-                "id": @integer@,
-                "name": "Product 4",
-                "code": "PRODUCT_4",
-                "options": [],
-                "average_rating": 0,
-                "images": [],
-                "_links": {
-                    "self": {
-                        "href": "@string@"
-                    }
-                }
-            },
-            {
-                "id": @integer@,
-                "name": "Product 5",
-                "code": "PRODUCT_5",
-                "options": [],
-                "average_rating": 0,
-                "images": [],
-                "_links": {
-                    "self": {
-                        "href": "@string@"
-                    }
-                }
-            },
-            {
-                "id": @integer@,
-                "name": "Product 6",
-                "code": "PRODUCT_6",
-                "options": [],
-                "average_rating": 0,
-                "images": [],
-                "_links": {
-                    "self": {
-                        "href": "@string@"
-                    }
-                }
-            },
-            {
-                "id": @integer@,
-                "name": "Product 7",
-                "code": "PRODUCT_7",
-                "options": [],
-                "average_rating": 0,
-                "images": [],
-                "_links": {
-                    "self": {
-                        "href": "@string@"
-                    }
-                }
-            },
-            {
-                "id": @integer@,
-                "name": "Product 8",
-                "code": "PRODUCT_8",
-                "options": [],
-                "average_rating": 0,
-                "images": [],
-                "_links": {
-                    "self": {
-                        "href": "@string@"
-                    }
-                }
-            },
-            {
-                "id": @integer@,
-                "name": "Product 9",
-                "code": "PRODUCT_9",
+                "name": "Star Wars mug",
+                "code": "MUG_SW",
                 "options": [],
                 "average_rating": 0,
                 "images": [],
@@ -140,6 +62,84 @@
                 "id": @integer@,
                 "name": "Product 10",
                 "code": "PRODUCT_10",
+                "options": [],
+                "average_rating": 0,
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "name": "Product 11",
+                "code": "PRODUCT_11",
+                "options": [],
+                "average_rating": 0,
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "name": "Product 12",
+                "code": "PRODUCT_12",
+                "options": [],
+                "average_rating": 0,
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "name": "Product 13",
+                "code": "PRODUCT_13",
+                "options": [],
+                "average_rating": 0,
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "name": "Product 14",
+                "code": "PRODUCT_14",
+                "options": [],
+                "average_rating": 0,
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "name": "Product 15",
+                "code": "PRODUCT_15",
+                "options": [],
+                "average_rating": 0,
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "name": "Product 16",
+                "code": "PRODUCT_16",
                 "options": [],
                 "average_rating": 0,
                 "images": [],

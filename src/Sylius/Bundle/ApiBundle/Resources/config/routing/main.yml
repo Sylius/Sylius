@@ -1,8 +1,8 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
+
 sylius_api_product:
     resource: "@SyliusApiBundle/Resources/config/routing/product.yml"
-    prefix: /products
 
 sylius_api_product_variant:
     resource: "@SyliusApiBundle/Resources/config/routing/product_variant.yml"
