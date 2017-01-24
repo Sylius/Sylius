@@ -62,11 +62,9 @@ class ApiClientExampleFactory extends AbstractExampleFactory implements ExampleF
         if (isset($options['random_id'])) {
             $client->setRandomId($options['random_id']);
         }
-
         if (isset($options['secret'])) {
             $client->setSecret($options['secret']);
         }
-
         $client->setAllowedGrantTypes($options['allowed_grant_types']);
 
         return $client;

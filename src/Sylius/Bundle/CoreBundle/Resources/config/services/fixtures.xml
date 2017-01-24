@@ -204,5 +204,11 @@
             <argument type="service" id="sylius.fixture.example_factory.api_client" />
             <tag name="sylius_fixtures.fixture" />
         </service>
+
+        <service id="sylius.fixture.api_access_token" class="Sylius\Bundle\CoreBundle\Fixture\ApiAccessTokenFixture">
+            <argument type="service" id="sylius.manager.api_access_token" />
+            <argument type="service" id="sylius.fixture.example_factory.api_access_token" />
+            <tag name="sylius_fixtures.fixture" />
+        </service>
     </services>
 </container>
