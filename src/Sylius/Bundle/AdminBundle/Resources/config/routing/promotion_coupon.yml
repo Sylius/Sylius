@@ -85,5 +85,6 @@ sylius_admin_promotion_coupon_delete:
     defaults:
         _controller: sylius.controller.promotion_coupon:deleteAction
         _sylius:
+            section: admin
             redirect: referer
             permission: true
