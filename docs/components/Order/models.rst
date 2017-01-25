@@ -18,25 +18,23 @@ Orders have the following properties:
 +--------------------------+---------------------------------------------+
 | number                   | Number is human-friendly identifier         |
 +--------------------------+---------------------------------------------+
-| itemsTotal               | Total value of items in order               |
-+----------------------------------+-------------------------------------+
-| adjustmentsTotal         | Total value of adjustments                  |
-+--------------------------+---------------------------------------------+
-| total                    | Calculated total (items + adjustments)      |
+| notes                    | Additional inforamtion about order          |
 +--------------------------+---------------------------------------------+
 | items                    | Collection of items                         |
 +--------------------------+---------------------------------------------+
+| itemsTotal               | Total value of items in order (default 0)   |
++--------------------------+---------------------------------------------+
 | adjustments              | Collection of adjustments                   |
 +--------------------------+---------------------------------------------+
-| comments                 | Collection of comments                      |
+| adjustmentsTotal         | Total value of adjustments (default 0)      |
 +--------------------------+---------------------------------------------+
-| identities               | Collection of identities                    |
+| total                    | Calculated total (items + adjustments)      |
++--------------------------+---------------------------------------------+
+| state                    | State of the order (e.g. "cart", "pending") |
 +--------------------------+---------------------------------------------+
 | createdAt                | Date when order was created                 |
 +--------------------------+---------------------------------------------+
 | updatedAt                | Date of last change                         |
-+--------------------------+---------------------------------------------+
-| state                    | State of the order (e.g. "cart", "pending") |
 +--------------------------+---------------------------------------------+
 
 .. note::
