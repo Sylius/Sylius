@@ -101,6 +101,9 @@ After:
 
 ### Resource / ResourceBundle
 
+* Removed `sylius_resource.resources.*.translation.fields` configuration key, it was not used at all - if causing issues,
+  remove your configuration under it.
+
 ### Review / ReviewBundle
 
 Service `sylius.average_rating_updater` name has been changed to `sylius.product_review.average_rating_updater` and service `sylius.listener.review_change` name has been changed to `sylius.listener.product_review_change`
