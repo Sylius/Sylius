@@ -12,6 +12,57 @@
 -->
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="sylius.form.type.product_association.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+        </parameter>
+        <parameter key="sylius.form.type.product_association_type.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+        </parameter>
+        <parameter key="sylius.form.type.product_association_type_translation.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+        </parameter>
+        <parameter key="sylius.form.type.product_attribute.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+        </parameter>
+        <parameter key="sylius.form.type.product_attribute_translation.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+        </parameter>
+        <parameter key="sylius.form.type.product_attribute_value.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+        </parameter>
+        <parameter key="sylius.form.type.product.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+        </parameter>
+        <parameter key="sylius.form.type.product_translation.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+        </parameter>
+        <parameter key="sylius.form.type.product_generate_variants.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+        </parameter>
+        <parameter key="sylius.form.type.product_option.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+        </parameter>
+        <parameter key="sylius.form.type.product_option_translation.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+        </parameter>
+        <parameter key="sylius.form.type.product_option_value.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+        </parameter>
+        <parameter key="sylius.form.type.product_option_value_translation.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+        </parameter>
+        <parameter key="sylius.form.type.product_variant.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+        </parameter>
+        <parameter key="sylius.form.type.product_variant_translation.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+        </parameter>
+        <parameter key="sylius.form.type.product_variant_generation.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+        </parameter>
+    </parameters>
+
     <services>
         <service id="sylius.form.type.product_association" class="Sylius\Bundle\ProductBundle\Form\Type\ProductAssociationType">
             <argument>%sylius.model.product_association.class%</argument>
@@ -98,7 +149,7 @@
 
         <service id="sylius.form.type.product_generate_variants" class="Sylius\Bundle\ProductBundle\Form\Type\ProductGenerateVariantsType">
             <argument>%sylius.model.product.class%</argument>
-            <argument>%sylius.form.type.product.validation_groups%</argument>
+            <argument>%sylius.form.type.product_generate_variants.validation_groups%</argument>
             <argument type="service" id="sylius.form.event_subscriber.product_variant_generator" />
             <tag name="form.type" />
         </service>
@@ -146,7 +197,7 @@
 
         <service id="sylius.form.type.product_variant_generation" class="Sylius\Bundle\ProductBundle\Form\Type\ProductVariantGenerationType">
             <argument>%sylius.model.product_variant.class%</argument>
-            <argument>%sylius.form.type.product_variant.validation_groups%</argument>
+            <argument>%sylius.form.type.product_variant_generation.validation_groups%</argument>
             <tag name="form.type" />
         </service>
 

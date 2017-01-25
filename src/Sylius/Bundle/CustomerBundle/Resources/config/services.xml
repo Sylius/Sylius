@@ -13,8 +13,15 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <parameters>
+        <parameter key="sylius.form.type.customer.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+        </parameter>
         <parameter key="sylius.form.type.customer_profile.validation_groups" type="collection">
+            <parameter>sylius</parameter>
             <parameter>sylius_customer_profile</parameter>
+        </parameter>
+        <parameter key="sylius.form.type.customer_group.validation_groups" type="collection">
+            <parameter>sylius</parameter>
         </parameter>
     </parameters>
 
