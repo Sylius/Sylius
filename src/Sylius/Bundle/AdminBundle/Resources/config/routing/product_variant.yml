@@ -71,6 +71,7 @@ sylius_admin_product_variant_delete:
     defaults:
         _controller: sylius.controller.product_variant:deleteAction
         _sylius:
+            section: admin
             redirect: referer
             permission: true
 

@@ -18,6 +18,7 @@ use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -87,18 +88,33 @@ final class ResourceDeleteSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $requestAttributes = $event->getRequest()->attributes;
+        if (!$event->isMasterRequest()) {
+            return;
+        }
+
+        $eventRequest = $event->getRequest();
+        $requestAttributes = $eventRequest->attributes;
         $originalRoute = $requestAttributes->get('_route');
+
+        if (!$this->isMethodDelete($eventRequest) ||
+            !$this->isSyliusRoute($originalRoute) ||
+            !$this->isAdminSection($requestAttributes->get('_sylius', []))
+        ) {
+            return;
+        }
+
         $resourceName = $this->getResourceNameFromRoute($originalRoute);
 
-        if (!$this->isHtmlRequest($event->getRequest())) {
+        $message = $this->translator->trans('sylius.resource.delete_error', ['%resource%' => $resourceName], 'flashes');
+
+        if (!$this->isHtmlRequest($eventRequest)) {
             $event->setResponse(
                 $this->viewHandler->handle(View::create([
                     'error' => [
                         'code' => $exception->getSQLState(),
-                        'message' => $this->translator->trans('sylius.resource.delete_error', ['%resource%' => $resourceName], 'flashes'),
-                    ]
-                ], 409))
+                        'message' => $message,
+                    ],
+                ], Response::HTTP_METHOD_NOT_ALLOWED))
             );
 
             return;
@@ -108,13 +124,9 @@ final class ResourceDeleteSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $this->session->getBag('flashes')->add(
-            'error',
-            $this->translator->trans('sylius.resource.delete_error', ['%resource%' => $resourceName], 'flashes')
-        );
+        $this->session->getBag('flashes')->add('error', $message);
 
-        $referrer = $event->getRequest()->headers->get('referer');
-
+        $referrer = $eventRequest->headers->get('referer');
         if (null !== $referrer) {
             $event->setResponse(new RedirectResponse($referrer));
 
@@ -141,15 +153,14 @@ final class ResourceDeleteSubscriber implements EventSubscriberInterface
     /**
      * @param string $originalRoute
      * @param string $targetAction
-     * @param array $parameters
      *
      * @return RedirectResponse
      */
-    private function createRedirectResponse($originalRoute, $targetAction, array $parameters = [])
+    private function createRedirectResponse($originalRoute, $targetAction)
     {
         $redirectRoute = str_replace(ResourceActions::DELETE, $targetAction, $originalRoute);
 
-        return new RedirectResponse($this->router->generate($redirectRoute, $parameters));
+        return new RedirectResponse($this->router->generate($redirectRoute));
     }
 
     /**
@@ -160,5 +171,35 @@ final class ResourceDeleteSubscriber implements EventSubscriberInterface
     private function isHtmlRequest(Request $request)
     {
         return 'html' === $request->getRequestFormat();
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return bool
+     */
+    private function isMethodDelete(Request $request)
+    {
+        return Request::METHOD_DELETE === $request->getMethod();
+    }
+
+    /**
+     * @param string $route
+     *
+     * @return bool
+     */
+    private function isSyliusRoute($route)
+    {
+        return 0 === strpos($route, 'sylius');
+    }
+
+    /**
+     * @param array $syliusParameters
+     *
+     * @return bool
+     */
+    private function isAdminSection(array $syliusParameters)
+    {
+        return array_key_exists('section', $syliusParameters) && 'admin' === $syliusParameters['section'];
     }
 }
