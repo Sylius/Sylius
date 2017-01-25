@@ -70,30 +70,7 @@ Same way like for **createAction** you can override the default form.
             _controller: app.controller.user:updateAction
             _sylius:
                 template: App:Backend/User:update.html.twig
-                form: app_user_custom
-
-Passing Custom Options to Form
-------------------------------
-
-Same way like for **createAction** you can pass options to the form.
-
-Below you can see the usage for specifying a custom options, in this case, ``validation_groups``, but you can pass any option accepted by the form.
-
-.. code-block:: yaml
-
-    # routing.yml
-
-    app_user_update:
-        path: /users/{id}/edit
-        methods: [GET, PUT]
-        defaults:
-            _controller: app.controller.user:updateAction
-            _sylius:
-                template: App:Backend/User:create.html.twig
-                form:
-                    type: app_user_custom
-                    options:
-                        validation_groups: ['sylius', 'my_custom_group']
+                form: App\Bundle\Form\UserType
 
 Overriding the Criteria
 -----------------------

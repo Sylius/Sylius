@@ -56,23 +56,10 @@ Just like for the **show** and **index** actions, you can customize the template
 Using Custom Form
 -----------------
 
-You can also use custom form type on per route basis. By default it generates the form type name following the simple convention ``bundle prefix + _ + resource logical name``.
+You can also use custom form type on per route basis. Following Symfony3 conventions `forms types`__ are resolved by FQCN.
 Below you can see the usage for specifying a custom form.
 
-.. code-block:: yaml
-
-    # routing.yml
-
-    app_user_create:
-        path: /users/new
-        methods: [GET, POST]
-        defaults:
-            _controller: app.controller.user:createAction
-            _sylius:
-                template: App:Backend/User:create.html.twig
-                form: app_user_custom
-
-or use directly a class.
+__ http://symfony.com/doc/current/forms.html#building-the-form
 
 .. code-block:: yaml
 
@@ -86,30 +73,6 @@ or use directly a class.
             _sylius:
                 template: App:Backend/User:create.html.twig
                 form: App\Bundle\Form\UserType
-
-Passing Custom Options to Form
-------------------------------
-
-What happens when you need pass some options to the form?.
-Well, there's a configuration for that!
-
-Below you can see the usage for specifying a custom options, in this case, ``validation_groups``, but you can pass any option accepted by the form.
-
-.. code-block:: yaml
-
-    # routing.yml
-
-    app_user_create:
-        path: /users/new
-        methods: [GET, POST]
-        defaults:
-            _controller: app.controller.user:createAction
-            _sylius:
-                template: App:Backend/User:create.html.twig
-                form:
-                    type: app_user_custom
-                    options:
-                        validation_groups: ['sylius', 'my_custom_group']
 
 Using Custom Factory Method
 ---------------------------
