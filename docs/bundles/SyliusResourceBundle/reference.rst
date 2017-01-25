@@ -13,11 +13,6 @@ Configuration Reference
                     controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                     repository: ~
                     factory: Sylius\Component\Resource\Factory\Factory
-                    form:
-                        default: ~
-                        choice: ~
-                        foo: ~
-                        bar: ~
                 options:
                     object_manager: default
                 validation_groups:
@@ -29,11 +24,6 @@ Configuration Reference
                         controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                         repository: ~
                         factory: Sylius\Component\Resource\Factory\Factory
-                        form:
-                            default: ~
-                            choice: ~
-                            foo: ~
-                            bar: ~
                     validation_groups:
                         default: [sylius]
 
@@ -48,7 +38,7 @@ Routing Generator Configuration Reference
             path: library
             section: admin
             templates: :Book
-            form: app_book_simple
+            form: AppBunle/Form/Type/SimpleBookType
             redirect: create
             except: ['show']
             only: ['create', 'index']

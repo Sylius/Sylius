@@ -179,7 +179,7 @@ Creating a product using custom form and a redirection method:
         defaults:
             _controller: sylius.controller.product:createAction
             _sylius:
-                form: app_user_product # Use this form type!
+                form: AppStoreBundle/Form/Type/CustomFormType # Use this form type!
                 template: AppStoreBundle:Product:create.html.twig # Use a custom template.
                 factory:
                     method: createForStore # Use a custom factory method to create a product.

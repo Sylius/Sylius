@@ -24,10 +24,10 @@ You need to create a simple class:
         public function buildForm(FormBuilderInterface $builder, array $options)
         {
             // Build your custom form!
-            $builder->add('title', 'text');
+            $builder->add('title', TextType::class);
         }
 
-        public function getName()
+        public function getBlockPrefix()
         {
             return 'app_book';
         }

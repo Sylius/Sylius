@@ -202,10 +202,16 @@ If you want to use a custom form:
     app_book:
         resource: |
             alias: app.book
-            form: app_book_admin
+            form: AppBundle/Form/Type/AdminBookType
         type: sylius.resource
 
-``create`` and ``update`` actions will use ``app_book_admin`` form type.
+``create`` and ``update`` actions will use AppBundle/Form/Type/AdminBookType form type.
+
+.. note::
+
+    Remember, that if your form type has some dependencies you have to declare it as a service and tag with **name: form.type**. You can read more about it `here`__
+
+__ http://docs.sylius.org/en/latest/bundles/SyliusResourceBundle/forms.html#custom-resource-form
 
 Using a Custom Redirect
 -----------------------
