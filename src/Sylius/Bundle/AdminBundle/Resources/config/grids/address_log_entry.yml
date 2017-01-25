@@ -8,7 +8,7 @@ sylius_grid:
                     repository:
                         method: createByObjectIdQueryBuilder
                         arguments:
-                            objectId: $objectId
+                            objectId: $id
             fields:
                 action:
                     type: twig

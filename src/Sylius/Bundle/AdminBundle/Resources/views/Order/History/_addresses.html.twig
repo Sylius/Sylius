@@ -1,0 +1,10 @@
+<div class="ui segment">
+    <div class="ui two column stackable grid">
+        <div class="column">
+            {% include '@SyliusAdmin/Order/History/_address.html.twig' with {'type': 'shipping', address: order.shippingAddress} %}
+        </div>
+        <div class="column">
+            {% include '@SyliusAdmin/Order/History/_address.html.twig' with {'type': 'billing', address: order.billingAddress} %}
+        </div>
+    </div>
+</div>

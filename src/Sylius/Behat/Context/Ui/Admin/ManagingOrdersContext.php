@@ -994,8 +994,8 @@ final class ManagingOrdersContext implements Context
     public function thereShouldBeCountChangesInTheRegistry($count)
     {
         Assert::same(
-            (int) $count,
-            $this->historyPage->countShippingAddressChanges()
+            $this->historyPage->countShippingAddressChanges(),
+            (int) $count
         );
     }
 

@@ -1,24 +1,8 @@
-{% import 'SyliusUiBundle:Macro:table.html.twig' as table %}
-
-{% set definition = resources.definition %}
-{% set data = resources.data %}
-
-<div class="ui segment">
-    {% if data|length > 0 %}
-        <table class="ui sortable stackable celled table">
-            <thead>
-                <tr>
-                    {{ table.headers(resources, definition, app.request.attributes) }}
-                </tr>
-            </thead>
-            <tbody>
-                {% for row in data %}
-                    {{ table.row(resources, definition, row) }}
-                {% endfor %}
-            </tbody>
-        </table>
-    {% else %}
-        {{ messages.info('sylius.ui.no_results_to_display') }}
-    {% endif %}
+<div class="column">
+    <h4 class="ui top attached styled header">
+        {{ ('sylius.ui.'~type~'_address')|trans }}
+    </h4>
+    <div class="ui attached segment" id="{{ type }}-address-changes">
+        {{ render(url('sylius_admin_partial_address_log_entry_index', {'id': address.id})) }}
+    </div>
 </div>
-
