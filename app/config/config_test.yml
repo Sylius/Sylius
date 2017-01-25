@@ -52,4 +52,4 @@ sylius_theme:
         test: ~
 
 twig:
-    exception_controller: "Sylius\\Bundle\\CoreBundle\\Controller\\VerboseExceptionController::showAction"
+    exception_controller: "sylius.controller.verbose_exception:showAction"

@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Controller;
 
-use FOS\RestBundle\Controller\ExceptionController as BaseExceptionController;
+use FOS\RestBundle\Controller\TwigExceptionController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Log\DebugLoggerInterface;
 
@@ -23,8 +23,18 @@ use Symfony\Component\HttpKernel\Log\DebugLoggerInterface;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class VerboseExceptionController extends BaseExceptionController
+final class VerboseExceptionController
 {
+    /**
+     * @var TwigExceptionController
+     */
+    private $controller;
+
+    public function __construct(TwigExceptionController $controller)
+    {
+        $this->controller = $controller;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -32,6 +42,6 @@ final class VerboseExceptionController extends BaseExceptionController
     {
         $request->attributes->set('showException', true);
 
-        return parent::showAction($request, $exception, $logger);
+        return $this->controller->showAction($request, $exception, $logger);
     }
 }
