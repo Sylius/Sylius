@@ -117,6 +117,7 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('form')->defaultValue(ChannelPricingType::class)->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()
+                                ->arrayNode('validation_groups')->defaultValue(['sylius'])->prototype('scalar')->end()->end()
                             ->end()
                         ->end()
                     ->end()
