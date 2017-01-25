@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Core\Test\Services;
+namespace spec\Sylius\Component\Core\Payment;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Payment\InvoiceNumberGeneratorInterface;
-use Sylius\Component\Core\Test\Services\RandomInvoiceNumberGenerator;
+use Sylius\Component\Core\Payment\RandomInvoiceNumberGenerator;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>

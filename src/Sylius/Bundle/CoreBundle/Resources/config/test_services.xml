@@ -17,7 +17,7 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <!--Paypal-->
-        <service id="sylius.invoice_number_generator" class="Sylius\Component\Core\Test\Services\RandomInvoiceNumberGenerator" />
+        <service id="sylius.invoice_number_generator" class="Sylius\Component\Core\Payment\RandomInvoiceNumberGenerator" />
         <service id="sylius.payment_method_name_to_gateway_converter" class="Sylius\Bundle\CoreBundle\Test\Services\PaymentMethodNameToGatewayConverter">
             <argument type="service" id="payum" />
         </service>

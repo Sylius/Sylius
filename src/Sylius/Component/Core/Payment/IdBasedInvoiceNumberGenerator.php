@@ -17,7 +17,7 @@ use Sylius\Component\Payment\Model\PaymentInterface;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class IdBasedInvoiceNumberGenerator implements InvoiceNumberGeneratorInterface
+final class IdBasedInvoiceNumberGenerator implements InvoiceNumberGeneratorInterface
 {
     /**
      * {@inheritdoc}
