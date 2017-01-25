@@ -34,6 +34,8 @@
 
 * State resolvers have been made final. In order to change theirs behavior please decorate them or provide your own implementation. 
 
+* `Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\RoutingRepositoryPass` was removed, implement it yourself.
+
 ### Currency / CurrencyBundle
 
 ### Customer / CustomerBundle
