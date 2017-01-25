@@ -18,6 +18,6 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SyliusUiBundle extends Bundle
+final class SyliusUiBundle extends Bundle
 {
 }

@@ -24,7 +24,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SyliusShopExtension extends Extension
+final class SyliusShopExtension extends Extension
 {
     /**
      * {@inheritdoc}

@@ -14,7 +14,7 @@ namespace Sylius\Bundle\PayumBundle;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 
-class SyliusPayumBundle extends AbstractResourceBundle
+final class SyliusPayumBundle extends AbstractResourceBundle
 {
     /**
      * {@inheritdoc}
