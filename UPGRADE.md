@@ -80,6 +80,8 @@ After:
 
 ### Locale / LocaleBundle
 
+* `Locale` model's `$enabled` field has been removed along with all logic depending on it.
+
 ### Mailer / MailerBundle
 
 ### MoneyBundle
