@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Test;
+namespace Sylius\Tests\Driver;
 
 use Doctrine\DBAL\Driver\PDOMySql\Driver;
 
