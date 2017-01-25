@@ -24,26 +24,26 @@
 
         <service id="sylius.form.type.order" class="Sylius\Bundle\OrderBundle\Form\Type\OrderType">
             <argument>%sylius.model.order.class%</argument>
-            <argument type="collection"><argument>sylius</argument></argument>
+            <argument>%sylius.form.type.order.validation_groups%</argument>
             <tag name="form.type" />
         </service>
 
         <service id="sylius.form.type.order_item" class="Sylius\Bundle\OrderBundle\Form\Type\OrderItemType">
             <argument>%sylius.model.order_item.class%</argument>
-            <argument type="collection"><argument>sylius</argument></argument>
+            <argument>%sylius.form.type.order_item.validation_groups%</argument>
             <argument type="service" id="sylius.form.data_mapper.order_item_quantity" />
             <tag name="form.type" />
         </service>
 
         <service id="sylius.form.type.cart" class="Sylius\Bundle\OrderBundle\Form\Type\CartType">
             <argument>%sylius.model.order.class%</argument>
-            <argument type="collection"><argument>sylius</argument></argument>
+            <argument>%sylius.form.type.order.validation_groups%</argument>
             <tag name="form.type" />
         </service>
 
         <service id="sylius.form.type.cart_item" class="Sylius\Bundle\OrderBundle\Form\Type\CartItemType">
             <argument>%sylius.model.order_item.class%</argument>
-            <argument type="collection"><argument>sylius</argument></argument>
+            <argument>%sylius.form.type.order_item.validation_groups%</argument>
             <argument type="service" id="sylius.form.data_mapper.order_item_quantity" />
             <tag name="form.type" />
         </service>

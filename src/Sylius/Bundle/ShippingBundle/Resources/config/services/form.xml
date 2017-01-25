@@ -17,7 +17,7 @@
 
         <service id="sylius.form.type.shipping_method" class="Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType">
             <argument>%sylius.model.shipping_method.class%</argument>
-            <argument type="collection"><argument>sylius</argument></argument>
+            <argument>%sylius.form.type.shipping_method.validation_groups%</argument>
             <argument>Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodTranslationType</argument>
             <argument type="service" id="sylius.registry.shipping_calculator" />
             <argument type="service" id="sylius.registry.shipping_rule_checker" />
@@ -28,7 +28,7 @@
 
         <service id="sylius.form.type.shipping_method_translation" class="Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodTranslationType">
             <argument>%sylius.model.shipping_method_translation.class%</argument>
-            <argument type="collection"><argument>sylius</argument></argument>
+            <argument>%sylius.form.type.shipping_method_translation.validation_groups%</argument>
             <tag name="form.type" />
         </service>
 
@@ -41,7 +41,7 @@
 
         <service id="sylius.form.type.shipping_category" class="Sylius\Bundle\ShippingBundle\Form\Type\ShippingCategoryType">
             <argument>%sylius.model.shipping_category.class%</argument>
-            <argument type="collection"><argument>sylius</argument></argument>
+            <argument>%sylius.form.type.shipping_category.validation_groups%</argument>
             <tag name="form.type" />
         </service>
 
@@ -52,13 +52,13 @@
 
         <service id="sylius.form.type.shipment" class="Sylius\Bundle\ShippingBundle\Form\Type\ShipmentType">
             <argument>%sylius.model.shipment.class%</argument>
-            <argument type="collection"><argument>sylius</argument></argument>
+            <argument>%sylius.form.type.shipment.validation_groups%</argument>
             <tag name="form.type" />
         </service>
 
         <service id="sylius.form.type.shipment_ship" class="Sylius\Bundle\ShippingBundle\Form\Type\ShipmentShipType">
             <argument>%sylius.model.shipment.class%</argument>
-            <argument type="collection"><argument>sylius</argument></argument>
+            <argument>%sylius.form.type.shipment.validation_groups%</argument>
             <tag name="form.type" />
         </service>
 

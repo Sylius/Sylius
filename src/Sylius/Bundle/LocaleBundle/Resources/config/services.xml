@@ -15,7 +15,7 @@
     <services>
         <service id="sylius.form.type.locale" class="Sylius\Bundle\LocaleBundle\Form\Type\LocaleType">
             <argument>%sylius.model.locale.class%</argument>
-            <argument type="collection"><argument>sylius</argument></argument>
+            <argument>%sylius.form.type.locale.validation_groups%</argument>
             <tag name="form.type" />
         </service>
 

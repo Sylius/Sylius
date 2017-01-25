@@ -19,7 +19,7 @@
         </service>
         <service id="sylius.form.type.checkout_select_shipping" class="Sylius\Bundle\CoreBundle\Form\Type\Checkout\SelectShippingType">
             <argument>%sylius.model.order.class%</argument>
-            <argument type="collection"><argument>sylius</argument></argument>
+            <argument>%sylius.form.type.order.validation_groups%</argument>
             <tag name="form.type" />
         </service>
         <service id="sylius.form.type.checkout_shipment" class="Sylius\Bundle\CoreBundle\Form\Type\Checkout\ShipmentType">
@@ -28,7 +28,7 @@
         </service>
         <service id="sylius.form.type.checkout_select_payment" class="Sylius\Bundle\CoreBundle\Form\Type\Checkout\SelectPaymentType">
             <argument>%sylius.model.order.class%</argument>
-            <argument type="collection"><argument>sylius</argument></argument>
+            <argument>%sylius.form.type.order.validation_groups%</argument>
             <tag name="form.type" />
         </service>
         <service id="sylius.form.type.checkout_payment" class="Sylius\Bundle\CoreBundle\Form\Type\Checkout\PaymentType">

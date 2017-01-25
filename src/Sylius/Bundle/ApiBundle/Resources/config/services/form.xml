@@ -15,20 +15,20 @@
     <services>
         <service id="sylius.form.type.api_client" class="Sylius\Bundle\ApiBundle\Form\Type\ClientType">
             <argument>%sylius.model.api_client.class%</argument>
-            <argument type="collection"><argument>sylius</argument></argument>
+            <argument>%sylius.form.type.api_client.validation_groups%</argument>
             <tag name="form.type" />
         </service>
 
         <service id="sylius.form.type.api_order" class="Sylius\Bundle\ApiBundle\Form\Type\OrderType">
             <argument>%sylius.model.order.class%</argument>
-            <argument type="collection"><argument>sylius</argument></argument>
+            <argument>%sylius.form.type.order.validation_groups%</argument>
             <argument type="service" id="sylius.repository.locale" />
             <tag name="form.type" />
         </service>
 
         <service id="sylius.form.type.api_customer" class="Sylius\Bundle\ApiBundle\Form\Type\CustomerProfileType">
             <argument>%sylius.model.customer.class%</argument>
-            <argument type="collection"><argument>sylius</argument></argument>
+            <argument>%sylius.form.type.customer.validation_groups%</argument>
             <tag name="form.type" />
         </service>
 

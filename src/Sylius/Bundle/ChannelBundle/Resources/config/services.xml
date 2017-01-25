@@ -19,7 +19,7 @@
 
         <service id="sylius.form.type.channel" class="Sylius\Bundle\ChannelBundle\Form\Type\ChannelType">
             <argument>%sylius.model.channel.class%</argument>
-            <argument type="collection"><argument>sylius</argument></argument>
+            <argument>%sylius.form.type.channel.validation_groups%</argument>
             <tag name="form.type" />
         </service>
 

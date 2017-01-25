@@ -15,7 +15,7 @@
     <services>
         <service id="sylius.form.type.address" class="Sylius\Bundle\AddressingBundle\Form\Type\AddressType">
             <argument>%sylius.model.address.class%</argument>
-            <argument type="collection"><argument>sylius</argument></argument>
+            <argument>%sylius.form.type.address.validation_groups%</argument>
             <argument type="service">
                 <service class="Sylius\Bundle\AddressingBundle\Form\EventListener\BuildAddressFormSubscriber">
                     <argument type="service" id="sylius.repository.country" />
@@ -27,7 +27,7 @@
 
         <service id="sylius.form.type.country" class="Sylius\Bundle\AddressingBundle\Form\Type\CountryType">
             <argument>%sylius.model.country.class%</argument>
-            <argument type="collection"><argument>sylius</argument></argument>
+            <argument>%sylius.form.type.country.validation_groups%</argument>
             <tag name="form.type" />
         </service>
 
@@ -43,7 +43,7 @@
 
         <service id="sylius.form.type.province" class="Sylius\Bundle\AddressingBundle\Form\Type\ProvinceType">
             <argument>%sylius.model.province.class%</argument>
-            <argument type="collection"><argument>sylius</argument></argument>
+            <argument>%sylius.form.type.province.validation_groups%</argument>
             <tag name="form.type" />
         </service>
 
@@ -59,7 +59,7 @@
 
         <service id="sylius.form.type.zone" class="Sylius\Bundle\AddressingBundle\Form\Type\ZoneType">
             <argument>%sylius.model.zone.class%</argument>
-            <argument type="collection"><argument>sylius</argument></argument>
+            <argument>%sylius.form.type.zone.validation_groups%</argument>
             <argument>%sylius.scope.zone%</argument>
             <tag name="form.type" />
         </service>
@@ -76,7 +76,7 @@
 
         <service id="sylius.form.type.zone_member" class="Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberType">
             <argument>%sylius.model.zone_member.class%</argument>
-            <argument type="collection"><argument>sylius</argument></argument>
+            <argument>%sylius.form.type.zone_member.validation_groups%</argument>
             <tag name="form.type" />
         </service>
     </services>

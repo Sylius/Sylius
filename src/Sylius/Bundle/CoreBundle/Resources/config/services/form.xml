@@ -79,17 +79,17 @@
 
         <service id="sylius.form.type.product_review" class="Sylius\Bundle\CoreBundle\Form\Type\Product\ProductReviewType">
             <argument>%sylius.model.product_review.class%</argument>
-            <argument type="collection"><argument>sylius</argument></argument>
+            <argument>%sylius.form.type.product_review.validation_groups%</argument>
             <tag name="form.type" />
         </service>
         <service id="sylius.form.type.admin_user" class="Sylius\Bundle\CoreBundle\Form\Type\User\AdminUserType">
             <argument>%sylius.model.admin_user.class%</argument>
-            <argument type="collection"><argument>sylius</argument></argument>
+            <argument>%sylius.form.type.admin_user.validation_groups%</argument>
             <tag name="form.type" />
         </service>
         <service id="sylius.form.type.shop_user" class="Sylius\Bundle\CoreBundle\Form\Type\User\ShopUserType">
             <argument>%sylius.model.shop_user.class%</argument>
-            <argument type="collection"><argument>sylius</argument></argument>
+            <argument>%sylius.form.type.shop_user.validation_groups%</argument>
             <tag name="form.type" />
         </service>
         <service id="sylius.form.type.shop_user_registration" class="Sylius\Bundle\CoreBundle\Form\Type\User\ShopUserRegistrationType">
@@ -193,7 +193,7 @@
 
         <service id="sylius.form.type.channel_pricing" class="Sylius\Bundle\CoreBundle\Form\Type\Product\ChannelPricingType">
             <argument>%sylius.model.channel_pricing.class%</argument>
-            <argument type="collection"><argument>sylius</argument></argument>
+            <argument>%sylius.form.type.channel_pricing.validation_groups%</argument>
             <tag name="form.type" />
         </service>
 

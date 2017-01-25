@@ -15,19 +15,19 @@
     <services>
         <service id="sylius.form.type.payment" class="Sylius\Bundle\PaymentBundle\Form\Type\PaymentType">
             <argument>%sylius.model.payment.class%</argument>
-            <argument type="collection"><argument>sylius</argument></argument>
+            <argument>%sylius.form.type.payment.validation_groups%</argument>
             <tag name="form.type" />
         </service>
 
         <service id="sylius.form.type.payment_method" class="Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodType">
             <argument>%sylius.model.payment_method.class%</argument>
-            <argument type="collection"><argument>sylius</argument></argument>
+            <argument>%sylius.form.type.payment_method.validation_groups%</argument>
             <tag name="form.type" />
         </service>
 
         <service id="sylius.form.type.payment_method_translation" class="Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodTranslationType">
             <argument>%sylius.model.payment_method_translation.class%</argument>
-            <argument type="collection"><argument>sylius</argument></argument>
+            <argument>%sylius.form.type.payment_method_translation.validation_groups%</argument>
             <tag name="form.type" />
         </service>
 

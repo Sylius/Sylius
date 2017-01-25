@@ -15,19 +15,19 @@
     <services>
         <service id="sylius.form.type.taxon" class="Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonType">
             <argument>%sylius.model.taxon.class%</argument>
-            <argument type="collection"><argument>sylius</argument></argument>
+            <argument>%sylius.form.type.taxon.validation_groups%</argument>
             <tag name="form.type" />
         </service>
 
         <service id="sylius.form.type.taxon_translation" class="Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonTranslationType">
             <argument>%sylius.model.taxon_translation.class%</argument>
-            <argument type="collection"><argument>sylius</argument></argument>
+            <argument>%sylius.form.type.taxon_translation.validation_groups%</argument>
             <tag name="form.type" />
         </service>
 
         <service id="sylius.form.type.taxon_position" class="Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonPositionType">
             <argument>%sylius.model.taxon.class%</argument>
-            <argument type="collection"><argument>sylius</argument></argument>
+            <argument>%sylius.form.type.taxon.validation_groups%</argument>
             <tag name="form.type" />
         </service>
 

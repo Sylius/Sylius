@@ -15,20 +15,20 @@
     <services>
         <service id="sylius.form.type.promotion" class="Sylius\Bundle\PromotionBundle\Form\Type\PromotionType">
             <argument>%sylius.model.promotion.class%</argument>
-            <argument type="collection"><argument>sylius</argument></argument>
+            <argument>%sylius.form.type.promotion.validation_groups%</argument>
             <tag name="form.type" />
         </service>
 
         <service id="sylius.form.type.promotion_action" class="Sylius\Bundle\PromotionBundle\Form\Type\PromotionActionType">
             <argument>%sylius.model.promotion_action.class%</argument>
-            <argument type="collection"><argument>sylius</argument></argument>
+            <argument>%sylius.form.type.promotion_action.validation_groups%</argument>
             <argument type="service" id="sylius.form.event_subscriber.build_promotion_action" />
             <tag name="form.type" />
         </service>
 
         <service id="sylius.form.type.promotion_rule" class="Sylius\Bundle\PromotionBundle\Form\Type\PromotionRuleType">
             <argument>%sylius.model.promotion_rule.class%</argument>
-            <argument type="collection"><argument>sylius</argument></argument>
+            <argument>%sylius.form.type.promotion_rule.validation_groups%</argument>
             <argument type="service" id="sylius.registry_promotion_rule_checker" />
             <argument type="service" id="sylius.form.event_subscriber.build_promotion_rule" />
             <tag name="form.type" />
@@ -36,7 +36,7 @@
 
         <service id="sylius.form.type.promotion_coupon" class="Sylius\Bundle\PromotionBundle\Form\Type\PromotionCouponType">
             <argument>%sylius.model.promotion_coupon.class%</argument>
-            <argument type="collection"><argument>sylius</argument></argument>
+            <argument>%sylius.form.type.promotion_coupon.validation_groups%</argument>
             <tag name="form.type" />
         </service>
 

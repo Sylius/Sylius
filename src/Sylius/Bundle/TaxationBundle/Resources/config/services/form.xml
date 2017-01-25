@@ -15,7 +15,7 @@
     <services>
         <service id="sylius.form.type.tax_category" class="Sylius\Bundle\TaxationBundle\Form\Type\TaxCategoryType">
             <argument>%sylius.model.tax_category.class%</argument>
-            <argument type="collection"><argument>sylius</argument></argument>
+            <argument>%sylius.form.type.tax_category.validation_groups%</argument>
             <tag name="form.type" />
         </service>
 
@@ -26,7 +26,7 @@
 
         <service id="sylius.form.type.tax_rate" class="Sylius\Bundle\TaxationBundle\Form\Type\TaxRateType">
             <argument>%sylius.model.tax_rate.class%</argument>
-            <argument type="collection"><argument>sylius</argument></argument>
+            <argument>%sylius.form.type.tax_rate.validation_groups%</argument>
             <tag name="form.type" />
         </service>
 

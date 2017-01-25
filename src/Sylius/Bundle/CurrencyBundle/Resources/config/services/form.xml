@@ -15,7 +15,7 @@
     <services>
         <service id="sylius.form.type.currency" class="Sylius\Bundle\CurrencyBundle\Form\Type\CurrencyType">
             <argument>%sylius.model.currency.class%</argument>
-            <argument type="collection"><argument>sylius</argument></argument>
+            <argument>%sylius.form.type.currency.validation_groups%</argument>
             <tag name="form.type" />
         </service>
 
@@ -26,7 +26,7 @@
 
         <service id="sylius.form.type.exchange_rate" class="Sylius\Bundle\CurrencyBundle\Form\Type\ExchangeRateType">
             <argument>%sylius.model.exchange_rate.class%</argument>
-            <argument type="collection"><argument>sylius</argument></argument>
+            <argument>%sylius.form.type.exchange_rate.validation_groups%</argument>
             <tag name="form.type" />
         </service>
     </services>
