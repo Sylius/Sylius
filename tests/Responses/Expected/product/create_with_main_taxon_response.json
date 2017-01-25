@@ -1,5 +1,6 @@
 {
     "id": @integer@,
+    "name": "Theme Mug",
     "code": "MUG_TH",
     "available_on": "@string@.isDateTime()",
     "attributes": [],
@@ -7,19 +8,17 @@
     "options": [],
     "associations": [],
     "translations": {
-        "en": {
+        "en_US": {
             "id": @integer@,
-            "locale": "en",
+            "locale": "en_US",
             "name": "Theme Mug",
             "slug": "theme-mug"
-        },
-        "en_US": {
-            "locale": "en_US"
         }
     },
     "product_taxons": [],
     "main_taxon": {
         "id": @integer@,
+        "name": "mugs",
         "code": "MUGS",
         "children": []
     },

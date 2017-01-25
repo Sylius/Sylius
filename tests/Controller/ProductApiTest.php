@@ -263,7 +263,7 @@ EOT;
                  "MUG_COLOR"
             ],
             "translations": {
-                "en": {
+                "en_US": {
                     "name": "Theme Mug",
                     "slug": "theme-mug"
                 }
@@ -292,7 +292,7 @@ EOT;
             "code": "MUG_TH",
             "main_taxon": "MUGS",
             "translations": {
-                "en": {
+                "en_US": {
                     "name": "Theme Mug",
                     "slug": "theme-mug"
                 }
@@ -320,7 +320,7 @@ EOT;
         {
             "code": "MUG_TH",
             "translations": {
-                "en": {
+                "en_US": {
                     "name": "Theme Mug",
                     "slug": "theme-mug"
                 }
