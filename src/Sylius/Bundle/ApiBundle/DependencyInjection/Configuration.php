@@ -89,7 +89,6 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('form')->defaultValue(ClientType::class)->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()
-                                ->arrayNode('validation_groups')->defaultValue(['sylius'])->prototype('scalar')->end()->end()
                             ->end()
                         ->end()
                         ->arrayNode('api_access_token')

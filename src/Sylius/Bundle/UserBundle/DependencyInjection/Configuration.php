@@ -139,7 +139,6 @@ final class Configuration implements ConfigurationInterface
                                             ->scalarNode('form')->cannotBeEmpty()->end()
                                         ->end()
                                     ->end()
-                                    ->arrayNode('validation_groups')->defaultValue(['sylius'])->prototype('scalar')->end()->end()
                                 ->end()
                             ->end()
                         ->end()
