@@ -5,11 +5,9 @@
         <div class="menu">
             {% for code in currencies %}
                 {% if code is not same as(active) %}
-                    <form action="{{ path('sylius_shop_switch_currency', {'code': code}) }}" method="post" >
-                        <button type="submit" class="item sylius-available-currency">
-                            {{ code }}
-                        </button>
-                    </form>
+                <a href="{{ path('sylius_shop_switch_currency', {'code': code}) }}" class="item sylius-available-currency">
+                    {{ code }}
+                </a>
                 {% endif %}
             {% endfor %}
         </div>
