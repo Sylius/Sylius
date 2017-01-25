@@ -16,10 +16,3 @@ Feature: Channel independent translatable entities locales
         When I want to create a new translatable entity
         Then I should be able to translate it in "English (United States)"
         And I should be able to translate it in "German (Germany)"
-
-    @ui
-    Scenario: Using all locales to translate an entity
-        Given the store has disabled locale "Polish (Poland)"
-        When I want to create a new translatable entity
-        Then I should be able to translate it in "English (United States)"
-        And I should be able to translate it in "Polish (Poland)"

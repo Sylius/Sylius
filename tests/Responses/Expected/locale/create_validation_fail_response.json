@@ -7,8 +7,7 @@
                 "errors": [
                     "Please enter locale code."
                 ]
-            },
-            "enabled": {}
+            }
         }
     }
 }
