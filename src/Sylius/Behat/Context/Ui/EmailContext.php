@@ -15,7 +15,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
-use Sylius\Component\Core\Test\Services\EmailCheckerInterface;
+use Sylius\Behat\Service\EmailCheckerInterface;
 use Webmozart\Assert\Assert;
 
 /**

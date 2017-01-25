@@ -101,5 +101,9 @@
             <argument type="service" id="__symfony__.sylius.repository.locale" />
             <argument>%__symfony__.locale%</argument>
         </service>
+
+        <service id="sylius.behat.email_checker" class="Sylius\Behat\Service\EmailChecker">
+            <argument>%__symfony__.kernel.cache_dir%/spool</argument>
+        </service>
     </services>
 </container>

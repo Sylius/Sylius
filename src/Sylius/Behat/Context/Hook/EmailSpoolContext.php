@@ -12,7 +12,7 @@
 namespace Sylius\Behat\Context\Hook;
 
 use Behat\Behat\Context\Context;
-use Sylius\Component\Core\Test\Services\EmailCheckerInterface;
+use Sylius\Behat\Service\EmailCheckerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**

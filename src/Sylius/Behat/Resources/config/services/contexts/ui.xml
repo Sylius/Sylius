@@ -440,7 +440,7 @@
 
         <service id="sylius.behat.context.ui.email" class="Sylius\Behat\Context\Ui\EmailContext">
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="__symfony__.sylius.behat.email_checker" />
+            <argument type="service" id="sylius.behat.email_checker" />
             <tag name="fob.context_service" />
         </service>
     </services>

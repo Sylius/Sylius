@@ -60,6 +60,8 @@
   were moved to `Sylius\Behat\Service\DefaultChannelFactory` and `Sylius\Behat\Service\DefaultUnitedStatesChannelFactory`,
   change your usages accrodingly (and use it only for testing purposes!).
 
+* `Sylius\Component\Core\Test\Services\EmailChecker` was moved to `Sylius\Behat\Service\EmailChecker`,
+  change your usages accrodingly (and use it only for testing purposes!).
 ### Currency / CurrencyBundle
 
 ### Customer / CustomerBundle
