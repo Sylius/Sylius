@@ -1,0 +1,167 @@
+{
+    "id": @integer@,
+    "name": "Theme Mug",
+    "code": "MUG_TH",
+    "available_on": "@string@.isDateTime()",
+    "attributes": [],
+    "variants": [],
+    "options": [],
+    "associations": [
+        {
+            "id": @integer@,
+            "type": {
+                "id": @integer@,
+                "code": "similar",
+                "created_at": "@string@.isDateTime()",
+                "updated_at": "@string@.isDateTime()",
+                "translations": [
+                    {
+                      "id": @integer@,
+                      "locale": "en"
+                    }
+                ],
+                "current_locale": "en",
+                "fallback_locale": "en_US"
+            },
+            "associated_products": [
+                {
+                    "id": @integer@,
+                    "name": "Star wars mug",
+                    "code": "MUG_SW",
+                    "available_on": "@string@.isDateTime()",
+                    "attributes": [],
+                    "variants": [],
+                    "options": [],
+                    "associations": [],
+                    "translations": {
+                        "en": {
+                            "id": @integer@,
+                            "locale": "en",
+                            "name": "Star wars mug",
+                            "slug": "mug-star-wars",
+                            "description": "@string@"
+                        },
+                        "en_US": {
+                            "id": @integer@,
+                            "locale": "en_US",
+                            "name": "Star Wars mug",
+                            "slug": "star-wars-mug",
+                            "description": "@string@"
+                        }
+                    },
+                    "product_taxons": [],
+                    "reviews": [],
+                    "average_rating": 0,
+                    "images": [],
+                    "_links": {
+                        "self": {
+                            "href": "@string@"
+                        }
+                    }
+                }
+            ],
+            "created_at": "@string@.isDateTime()",
+            "updated_at": "@string@.isDateTime()"
+        },
+        {
+            "id": @integer@,
+            "type": {
+                "id": @integer@,
+                "code": "accessories",
+                "created_at": "@string@.isDateTime()",
+                "updated_at": "@string@.isDateTime()",
+                "translations": [
+                    {
+                      "id": @integer@,
+                      "locale": "en"
+                    }
+                ],
+                "current_locale": "en",
+                "fallback_locale": "en_US"
+            },
+            "associated_products": [
+                {
+                    "id": @integer@,
+                    "name": "Lotr mug",
+                    "code": "MUG_LOTR",
+                    "available_on": "@string@.isDateTime()",
+                    "attributes": [],
+                    "variants": [
+                        {
+                            "id": @integer@,
+                            "on_hold": 0,
+                            "tracked": false
+                        }
+                    ],
+                    "options": [],
+                    "associations": [],
+                    "translations": {
+                        "en_US": {
+                            "id": @integer@,
+                            "locale": "en_US",
+                            "name": "Lotr mug",
+                            "slug": "mug-lotr",
+                            "description": "@string@"
+                        }
+                    },
+                    "product_taxons": [],
+                    "reviews": [],
+                    "average_rating": 0,
+                    "images": [],
+                    "_links": {
+                        "self": {
+                            "href": "@string@"
+                        }
+                    }
+                },
+                {
+                    "id": @integer@,
+                    "name": "Breaking bad mug",
+                    "code": "MUG_BB",
+                    "available_on": "@string@.isDateTime()",
+                    "attributes": [],
+                    "variants": [],
+                    "options": [],
+                    "associations": [],
+                    "translations": {
+                        "en_US": {
+                            "id": @integer@,
+                            "locale": "en_US",
+                            "name": "Breaking bad mug",
+                            "slug": "mug-breaking-bad",
+                            "description": "@string@"
+                        }
+                    },
+                    "product_taxons": [],
+                    "reviews": [],
+                    "average_rating": 0,
+                    "images": [],
+                    "_links": {
+                        "self": {
+                            "href": "@string@"
+                        }
+                    }
+                }
+            ],
+            "created_at": "@string@.isDateTime()",
+            "updated_at": "@string@.isDateTime()"
+        }
+    ],
+    "translations": {
+        "en_US": {
+            "id": @integer@,
+            "locale": "en_US",
+            "name": "Theme Mug",
+            "slug": "theme-mug"
+        }
+    },
+    "product_taxons": [],
+    "reviews": [],
+    "average_rating": 0,
+    "images": [],
+    "_links": {
+        "self": {
+            "href": "@string@"
+        }
+    }
+}

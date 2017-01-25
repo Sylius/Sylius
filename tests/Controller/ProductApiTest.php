@@ -457,6 +457,31 @@ EOT;
      */
     public function it_allows_creating_product_with_associations()
     {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/associations.yml');
+        $this->loadFixturesFromFile('resources/locales.yml');
+        $this->loadFixturesFromFile('resources/products.yml');
 
+        $data =
+<<<EOT
+        {
+            "code": "MUG_TH",
+            "associations": {
+                "similar": "MUG1,MUG_SW",
+                "accessories": "MUG_LOTR,MUG_BB"
+            },
+            "translations": {
+                "en__US": {
+                    "name": "Theme Mug",
+                    "slug": "theme-mug"
+                }
+            }
+        }
+EOT;
+
+        $this->client->request('POST', '/api/v1/products/', [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'product/create_with_associations_response', Response::HTTP_CREATED);
     }
 }

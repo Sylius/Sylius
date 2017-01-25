@@ -14,6 +14,7 @@ namespace spec\Sylius\Bundle\ProductBundle\Form\DataTransformer;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductRepository;
 use Sylius\Bundle\ProductBundle\Form\DataTransformer\ProductsToProductAssociationsTransformer;
 use Sylius\Component\Product\Model\ProductAssociationInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
@@ -69,16 +70,16 @@ final class ProductsToProductAssociationsTransformerSpec extends ObjectBehavior
             ])
         );
 
-        $firstAssociatedProduct->getId()->willReturn(7);
-        $secondAssociatedProduct->getId()->willReturn(21);
+        $firstAssociatedProduct->getCode()->willReturn('FIRST');
+        $secondAssociatedProduct->getCode()->willReturn('SECOND');
 
         $productAssociationType->getCode()->willReturn('accessories');
 
         $this->transform([$productAssociation])->shouldReturn([
-            'accessories' => '7,21',
+            'accessories' => 'FIRST,SECOND',
         ]);
     }
-
+    
     function it_reverse_transforms_null_into_null()
     {
         $this->reverseTransform(null)->shouldReturn(null);
