@@ -20,7 +20,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-class SyliusReviewBundle extends AbstractResourceBundle
+final class SyliusReviewBundle extends AbstractResourceBundle
 {
     /**
      * {@inheritdoc}

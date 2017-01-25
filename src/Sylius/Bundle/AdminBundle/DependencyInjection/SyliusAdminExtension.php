@@ -19,7 +19,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SyliusAdminExtension extends Extension
+final class SyliusAdminExtension extends Extension
 {
     /**
      * {@inheritdoc}

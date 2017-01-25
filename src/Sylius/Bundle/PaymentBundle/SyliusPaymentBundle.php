@@ -21,7 +21,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SyliusPaymentBundle extends AbstractResourceBundle
+final class SyliusPaymentBundle extends AbstractResourceBundle
 {
     /**
      * {@inheritdoc}

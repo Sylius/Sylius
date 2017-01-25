@@ -17,7 +17,7 @@ use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SyliusApiBundle extends AbstractResourceBundle
+final class SyliusApiBundle extends AbstractResourceBundle
 {
     /**
      * {@inheritdoc}

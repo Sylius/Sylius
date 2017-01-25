@@ -18,7 +18,7 @@ use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class SyliusAddressingBundle extends AbstractResourceBundle
+final class SyliusAddressingBundle extends AbstractResourceBundle
 {
     /**
      * {@inheritdoc}

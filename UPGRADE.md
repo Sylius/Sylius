@@ -1,5 +1,8 @@
 # UPGRADE FROM 1.0.0-beta.1 to 1.0.0-beta.2
 
+* Bundles, container extensions and bundles configurations were made final and can't be extended anymore, follow Symfony
+  best practices and do not extend them.
+
 ## Packages:
 
 ### Addressing / AddressingBundle
@@ -32,7 +35,7 @@
   and a scope 'tax' or 'all' is required in `Sylius\Component\Core\OrderProcessing\OrderTaxesProcessor`. 
   A migration file has been prepared  which fill in "all" as scope for zones that didn't have it specified, so they will be resolved by new implementation.
 
-* State resolvers have been made final. In order to change theirs behavior please decorate them or provide your own implementation. 
+* State resolvers have been made final. In order to change theirs behavior please decorate them or provide your own implementation.
 
 * `Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\RoutingRepositoryPass` was removed, implement it yourself.
 

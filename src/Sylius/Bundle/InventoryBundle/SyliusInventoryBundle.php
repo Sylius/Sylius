@@ -17,7 +17,7 @@ use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SyliusInventoryBundle extends AbstractResourceBundle
+final class SyliusInventoryBundle extends AbstractResourceBundle
 {
     /**
      * {@inheritdoc}
