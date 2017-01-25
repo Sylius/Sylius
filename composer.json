@@ -33,7 +33,7 @@
         "doctrine/doctrine-migrations-bundle": "^1.2",
         "doctrine/orm": "^2.5",
         "friendsofsymfony/oauth-server-bundle": "^1.5",
-        "friendsofsymfony/rest-bundle": "^1.8",
+        "friendsofsymfony/rest-bundle": "^2.1",
         "fzaninotto/faker": "^1.6",
         "gedmo/doctrine-extensions": "^2.4.12",
         "incenteev/composer-parameter-handler": "^2.1",
