@@ -43,6 +43,13 @@ abstract class AbstractDriver implements DriverInterface
         if ($metadata->hasClass('factory')) {
             $this->addFactory($container, $metadata);
         }
+
+        if ($metadata->hasClass('form')) {
+            $container->setParameter(
+                sprintf('%s.form.type.%s.validation_groups', $metadata->getApplicationName(), $metadata->getName()),
+                $metadata->getParameter('validation_groups')
+            );
+        }
     }
 
     /**

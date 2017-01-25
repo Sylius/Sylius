@@ -33,7 +33,6 @@ final class SyliusShippingExtension extends AbstractResourceExtension
         $loader->load(sprintf('services/integrations/%s.xml', $config['driver']));
 
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
-        $this->mapFormValidationGroupsParameters($config, $container);
 
         $loader->load('services.xml');
     }
