@@ -41,7 +41,7 @@ Create the form's service :
         class: AppBundle\Form\Type\BookType
         tags:
             - { name: form.type }
-        arguments: ['%sylius.model.order.class%']
+        arguments: ['%app.model.book.class%']
 
 Now, configure it under ``sylius_resource``:
 
