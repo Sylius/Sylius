@@ -50,18 +50,19 @@
   were made final, use decoration and implement `Sylius\Component\Core\Payment\InvoiceNumberGeneratorInterface` instead of
   extending them.
 
-* `Sylius\Bundle\CoreBundle\Test\Services\PaymentMethodNameToGatewayConverter` was moved to `Sylius\Behat\Service\PaymentMethodNameToGatewayConverter`,
-  change your usages accordingly (and use it only for testing purposes!).
-
-* `Sylius\Component\Core\Test\Factory\TestPromotionFactory` was moved to `Sylius\Behat\Service\TestPromotionFactory`,
-  change your usages accrodingly (and use it only for testing purposes!).
+* The following test services were moved to `Sylius\Behat\Service` namespace, change your usages accordingly and use them
+  only for testing purposes:
   
-* `Sylius\Component\Core\Test\Services\DefaultChannelFactory` and `Sylius\Component\Core\Test\Services\DefaultUnitedStatesChannelFactory`
-  were moved to `Sylius\Behat\Service\DefaultChannelFactory` and `Sylius\Behat\Service\DefaultUnitedStatesChannelFactory`,
-  change your usages accrodingly (and use it only for testing purposes!).
+   * `Sylius\Bundle\CoreBundle\Test\Services\PaymentMethodNameToGatewayConverterInterface`
+   * `Sylius\Bundle\CoreBundle\Test\Services\PaymentMethodNameToGatewayConverter`
+   * `Sylius\Component\Core\Test\Factory\TestPromotionFactoryInterface`
+   * `Sylius\Component\Core\Test\Factory\TestPromotionFactory`
+   * `Sylius\Component\Core\Test\Services\DefaultChannelFactoryInterface`
+   * `Sylius\Component\Core\Test\Services\DefaultChannelFactory`
+   * `Sylius\Component\Core\Test\Services\DefaultUnitedStatesChannelFactory`
+   * `Sylius\Component\Core\Test\Services\EmailCheckerInterface`
+   * `Sylius\Component\Core\Test\Services\EmailChecker`
 
-* `Sylius\Component\Core\Test\Services\EmailChecker` was moved to `Sylius\Behat\Service\EmailChecker`,
-  change your usages accrodingly (and use it only for testing purposes!).
 ### Currency / CurrencyBundle
 
 ### Customer / CustomerBundle
