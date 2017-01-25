@@ -33,6 +33,16 @@ You need to create a simple class:
         }
     }
 
+Create the form's service :
+
+.. code-block:: yaml
+
+    app.book.form.type:
+        class: AppBundle\Form\Type\BookType
+        tags:
+            - { name: form.type }
+        arguments: ['%sylius.model.order.class%']
+
 Now, configure it under ``sylius_resource``:
 
 .. code-block:: yaml
