@@ -36,16 +36,6 @@ final class LocaleNotFoundException extends \RuntimeException
 
     /**
      * @param string $localeCode
-     *
-     * @return self
-     */
-    public static function disabled($localeCode)
-    {
-        return new self(sprintf('Locale "%s" is disabled!', $localeCode));
-    }
-
-    /**
-     * @param string $localeCode
      * @param array $availableLocalesCodes
      *
      * @return self

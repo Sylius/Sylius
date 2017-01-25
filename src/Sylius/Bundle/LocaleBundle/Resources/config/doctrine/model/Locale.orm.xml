@@ -23,7 +23,6 @@
         </id>
 
         <field name="code" column="code" type="string" length="12" unique="true"/>
-        <field name="enabled" column="enabled" type="boolean" />
 
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>

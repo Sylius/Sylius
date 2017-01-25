@@ -21,7 +21,6 @@
         <field name="id" id="true" strategy="AUTO" />
 
         <field fieldName="code" name="code" type="string" length="12" />
-        <field fieldName="enabled" name="enabled" type="boolean" />
 
         <field fieldName="createdAt" name="createdAt" type="date">
             <gedmo:timestampable on="create"/>
