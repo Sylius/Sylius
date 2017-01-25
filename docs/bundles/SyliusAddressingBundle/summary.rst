@@ -17,10 +17,7 @@ Configuration Reference
                     controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                     repository: ~
                     factory: Sylius\Component\Resource\Factory\Factory
-                    form:
-                        default: Sylius\Bundle\AddressingBundle\Form\Type\AddressType
-                validation_groups:
-                    default: [ sylius ]
+                    form: Sylius\Bundle\AddressingBundle\Form\Type\AddressType
             country:
                 classes:
                     model: Sylius\Component\Addressing\Model\Country
@@ -28,13 +25,7 @@ Configuration Reference
                     controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                     repository: ~
                     factory: Sylius\Component\Resource\Factory\Factory
-                    form:
-                        default: Sylius\Bundle\AddressingBundle\Form\Type\CountryType
-                        choice: Sylius\Bundle\AddressingBundle\Form\Type\CountryChoiceType
-                        from_identifier: Sylius\Bundle\ResourceBundle\Form\Type\ResourceFromIdentifierType
-                validation_groups:
-                    default: [ sylius ]
-                    from_identifier: [ sylius ]
+                    form: Sylius\Bundle\AddressingBundle\Form\Type\CountryType
             province:
                 classes:
                     model: Sylius\Component\Addressing\Model\Province
@@ -42,11 +33,7 @@ Configuration Reference
                     controller: Sylius\Bundle\AddressingBundle\Controller\ProvinceController
                     repository: ~
                     factory: Sylius\Component\Resource\Factory\Factory
-                    form:
-                        default: Sylius\Bundle\AddressingBundle\Form\Type\ProvinceType
-                        choice: Sylius\Bundle\AddressingBundle\Form\Type\ProvinceChoiceType
-                validation_groups:
-                    default: [ sylius ]
+                    form: Sylius\Bundle\AddressingBundle\Form\Type\ProvinceType
             zone:
                 classes:
                     model: Sylius\Component\Addressing\Model\Zone
@@ -54,11 +41,7 @@ Configuration Reference
                     controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                     repository: ~
                     factory: Sylius\Component\Resource\Factory\Factory
-                    form:
-                        default: Sylius\Bundle\AddressingBundle\Form\Type\ZoneType
-                        choice: Sylius\Bundle\resourceBundle\Form\type\ResourceChoiceType
-                validation_groups:
-                    default: [ sylius ]
+                    form: Sylius\Bundle\AddressingBundle\Form\Type\ZoneType
             zone_member:
                 classes:
                     model: Sylius\Component\Addressing\Model\ZoneMember
@@ -66,10 +49,7 @@ Configuration Reference
                     controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                     repository: ~
                     factory: Sylius\Component\Resource\Factory\Factory
-                    form:
-                        default: Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberType
-                validation_groups:
-                    default: [ sylius ]
+                    form: Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberType
 
 Tests
 -----

@@ -278,7 +278,7 @@ and change the **redirect route** in ``sylius_shop_checkout_address``. The rest 
                 form:
                     type: sylius_checkout_complete
                     options:
-                        validation_groups: 'sylius_checkout_complete'
+                        validation_groups: [sylius_checkout_complete]
 
 .. tip::
 

@@ -18,22 +18,16 @@ Configuration reference
                     model: Sylius\Component\Core\Model\Order
                     controller: Sylius\Bundle\CoreBundle\Controller\OrderController
                     repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository
-                    form:
-                        default: Sylius\Bundle\CoreBundle\Form\Type\Order\OrderType
+                    form: Sylius\Bundle\CoreBundle\Form\Type\Order\OrderType
                     interface: Sylius\Component\Order\Model\OrderInterface
                     factory: Sylius\Component\Resource\Factory\Factory
-                validation_groups:
-                    default: [ sylius ]
             order_item:
                 classes:
                     model: Sylius\Component\Core\Model\OrderItem
-                    form:
-                        default: Sylius\Bundle\CoreBundle\Form\Type\Order\OrderItemType
+                    form: Sylius\Bundle\CoreBundle\Form\Type\Order\OrderItemType
                     interface: Sylius\Component\Order\Model\OrderItemInterface
                     controller: Sylius\Bundle\OrderBundle\Controller\OrderItemController
                     factory: Sylius\Component\Resource\Factory\Factory
-                validation_groups:
-                    default: [ sylius ]
             order_item_unit:
                 classes:
                     model: Sylius\Component\Core\Model\OrderItemUnit
@@ -46,8 +40,6 @@ Configuration reference
                     interface: Sylius\Component\Order\Model\AdjustmentInterface
                     controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                     factory: Sylius\Component\Resource\Factory\Factory
-                validation_groups:
-                    default: [ sylius ]
             order_sequence:
                 classes:
                     model: Sylius\Component\Order\Model\OrderSequence

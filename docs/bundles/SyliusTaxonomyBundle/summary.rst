@@ -17,16 +17,7 @@ Configuration Reference
                     controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                     repository: ~
                     factory:    Sylius\Component\Resource\Factory\TranslatableFactory
-                    form:
-                        default: Sylius\Bundle\TaxonomiesBundle\Form\Type\TaxonType
-                        from_identifier: Sylius\Bundle\ResourceBundle\Form\Type\ResourceFromIdentifierType
-                        to_identifier: Sylius\Bundle\ResourceBundle\Form\Type\ResourceToHiddenIdentifierType
-                        to_hidden_identifier: Sylius\Bundle\ResourceBundle\Form\Type\ResourceToIdentifierType
-                validation_groups:
-                    default: [ sylius ]
-                    from_identifier: [ sylius ]
-                    to_identifier: [ sylius ]
-                    to_hidden_identifier: [ sylius ]
+                    form: Sylius\Bundle\TaxonomiesBundle\Form\Type\TaxonType
                 translation:
                     classes:
                         model:      Sylius\Component\Taxonomy\Model\TaxonTranslation
@@ -34,12 +25,7 @@ Configuration Reference
                         controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                         repository: ~
                         factory:    Sylius\Component\Resource\Factory\Factory
-                        form:
-                            default: Sylius\Bundle\TaxonomiesBundle\Form\Type\TaxonTranslationType
-                    validation_groups:
-                        default: [ sylius ]
-                    fields:
-                        default: [ name ]
+                        form: Sylius\Bundle\TaxonomiesBundle\Form\Type\TaxonTranslationType
 
 Tests
 -----
