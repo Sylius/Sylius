@@ -40,21 +40,16 @@ final class ChannelBasedLocaleProviderSpec extends ObjectBehavior
         $this->shouldImplement(LocaleProviderInterface::class);
     }
 
-    function it_returns_only_channels_enabled_locales_as_available_ones(
+    function it_returns_all_channels_locales_as_available_ones(
         ChannelContextInterface $channelContext,
         ChannelInterface $channel,
-        LocaleInterface $enabledLocale,
-        LocaleInterface $disabledLocale
+        LocaleInterface $enabledLocale
     ) {
         $channelContext->getChannel()->willReturn($channel);
 
         $channel->getLocales()->willReturn(new ArrayCollection([
             $enabledLocale->getWrappedObject(),
-            $disabledLocale->getWrappedObject(),
         ]));
-
-        $enabledLocale->isEnabled()->willReturn(true);
-        $disabledLocale->isEnabled()->willReturn(false);
 
         $enabledLocale->getCode()->willReturn('en_US');
 

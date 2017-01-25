@@ -51,7 +51,7 @@ The locale context can be injected into any of your services and give you access
 Available Locales Provider
 --------------------------
 
-The Locale Provider service (``sylius.locale_provider``) is responsible for returning all languages available for the current user. By default, it filters out all disabled locales.
+The Locale Provider service (``sylius.locale_provider``) is responsible for returning all languages available for the current user. By default, returns all configured locales.
 You can easily modify this logic by overriding this service.
 
 .. code-block:: php
@@ -67,7 +67,7 @@ You can easily modify this logic by overriding this service.
         }
     }
 
-To get all languages configured in the store, including the disabled ones, use the locales repository:
+To get all languages configured in the store, regardless of your availability logic, use the locales repository:
 
 .. code-block:: php
 

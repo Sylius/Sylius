@@ -11,13 +11,10 @@
 
 namespace Sylius\Bundle\CoreBundle\Controller;
 
-use Sylius\Bundle\ResourceBundle\Controller\RedirectHandlerInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Core\Model\ProductTaxonInterface;
 use Sylius\Component\Resource\ResourceActions;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -43,6 +40,7 @@ class ProductTaxonController extends ResourceController
         }
 
         if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH'], true) && null !== $productTaxons) {
+            /** @var ProductTaxonInterface $productTaxon */
             foreach ($productTaxons as $productTaxon) {
                 if (!is_numeric($productTaxon['position'])) {
                     throw new HttpException(
@@ -51,9 +49,9 @@ class ProductTaxonController extends ResourceController
                     );
                 }
 
-                /** @var ProductTaxonInterface $productTaxon */
                 $productTaxonFromBase = $this->repository->findOneBy(['id' => $productTaxon['id']]);
                 $productTaxonFromBase->setPosition($productTaxon['position']);
+
                 $this->manager->flush();
             }
         }
