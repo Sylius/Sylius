@@ -90,9 +90,9 @@ Example
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/v1/products/
-        -H "Authorization: Bearer MWExMWM0NzE1NmUyZDgyZDJiMjEzMmFlMjQ4MzgwMmE4ZTkxYzM0YjdlN2U2YzliNDIyMTk1ZDhlNDYxYWE4Ng"
-        -H “Accept: application/json”
+    curl http://sylius.dev/api/v1/products/ \
+        -H "Authorization: Bearer MWExMWM0NzE1NmUyZDgyZDJiMjEzMmFlMjQ4MzgwMmE4ZTkxYzM0YjdlN2U2YzliNDIyMTk1ZDhlNDYxYWE4Ng" \
+        -H "Accept: application/json"
 
 Example Response
 ~~~~~~~~~~~~~~~~
@@ -181,9 +181,9 @@ Example
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/v1/products/2
-        -H "Authorization: Bearer MWExMWM0NzE1NmUyZDgyZDJiMjEzMmFlMjQ4MzgwMmE4ZTkxYzM0YjdlN2U2YzliNDIyMTk1ZDhlNDYxYWE4Ng"
-        -H “Accept: application/json”
+    curl http://sylius.dev/api/v1/products/2 \
+        -H "Authorization: Bearer MWExMWM0NzE1NmUyZDgyZDJiMjEzMmFlMjQ4MzgwMmE4ZTkxYzM0YjdlN2U2YzliNDIyMTk1ZDhlNDYxYWE4Ng" \
+        -H "Accept: application/json"
 
 Example Response
 ~~~~~~~~~~~~~~~~
@@ -300,10 +300,10 @@ Example
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/v1/products/
-        -H "Authorization: Bearer MWExMWM0NzE1NmUyZDgyZDJiMjEzMmFlMjQ4MzgwMmE4ZTkxYzM0YjdlN2U2YzliNDIyMTk1ZDhlNDYxYWE4Ng"
-        -H "Content-Type: application/json"
-        -X POST
+    curl http://sylius.dev/api/v1/products/ \
+        -H "Authorization: Bearer MWExMWM0NzE1NmUyZDgyZDJiMjEzMmFlMjQ4MzgwMmE4ZTkxYzM0YjdlN2U2YzliNDIyMTk1ZDhlNDYxYWE4Ng" \
+        -H "Content-Type: application/json" \
+        -X POST \
         --data '
             {
                 "translations": {
@@ -359,9 +359,9 @@ Example
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/v1/products/
-        -H "Authorization: Bearer MWExMWM0NzE1NmUyZDgyZDJiMjEzMmFlMjQ4MzgwMmE4ZTkxYzM0YjdlN2U2YzliNDIyMTk1ZDhlNDYxYWE4Ng"
-        -H “Accept: application/json”
+    curl http://sylius.dev/api/v1/products/ \
+        -H "Authorization: Bearer MWExMWM0NzE1NmUyZDgyZDJiMjEzMmFlMjQ4MzgwMmE4ZTkxYzM0YjdlN2U2YzliNDIyMTk1ZDhlNDYxYWE4Ng" \
+        -H "Accept: application/json" \
         -X POST
 
 Example Response
@@ -455,10 +455,10 @@ Example
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/v1/product/3
-        -H "Authorization: Bearer MWExMWM0NzE1NmUyZDgyZDJiMjEzMmFlMjQ4MzgwMmE4ZTkxYzM0YjdlN2U2YzliNDIyMTk1ZDhlNDYxYWE4Ng"
-        -H "Content-Type: application/json"
-        -X PUT
+    curl http://sylius.dev/api/v1/product/3 \
+        -H "Authorization: Bearer MWExMWM0NzE1NmUyZDgyZDJiMjEzMmFlMjQ4MzgwMmE4ZTkxYzM0YjdlN2U2YzliNDIyMTk1ZDhlNDYxYWE4Ng" \
+        -H "Content-Type: application/json" \
+        -X PUT \
         --data '
             {
                 "translations": {
@@ -484,9 +484,9 @@ Example
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/v1/products/3
-        -H "Authorization: Bearer MWExMWM0NzE1NmUyZDgyZDJiMjEzMmFlMjQ4MzgwMmE4ZTkxYzM0YjdlN2U2YzliNDIyMTk1ZDhlNDYxYWE4Ng"
-        -H “Accept: application/json”
+    curl http://sylius.dev/api/v1/products/3 \
+        -H "Authorization: Bearer MWExMWM0NzE1NmUyZDgyZDJiMjEzMmFlMjQ4MzgwMmE4ZTkxYzM0YjdlN2U2YzliNDIyMTk1ZDhlNDYxYWE4Ng" \
+        -H "Accept: application/json" \
         -X PUT
 
 Example Response
@@ -568,10 +568,10 @@ Example
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/v1/product/3
-        -H "Authorization: Bearer MWExMWM0NzE1NmUyZDgyZDJiMjEzMmFlMjQ4MzgwMmE4ZTkxYzM0YjdlN2U2YzliNDIyMTk1ZDhlNDYxYWE4Ng"
-        -H "Content-Type: application/json"
-        -X PATCH
+    curl http://sylius.dev/api/v1/product/3 \
+        -H "Authorization: Bearer MWExMWM0NzE1NmUyZDgyZDJiMjEzMmFlMjQ4MzgwMmE4ZTkxYzM0YjdlN2U2YzliNDIyMTk1ZDhlNDYxYWE4Ng" \
+        -H "Content-Type: application/json" \
+        -X PATCH \
         --data '
             {
                 "translations": {
@@ -612,9 +612,9 @@ Example
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/v1/products/3
-        -H "Authorization: Bearer MWExMWM0NzE1NmUyZDgyZDJiMjEzMmFlMjQ4MzgwMmE4ZTkxYzM0YjdlN2U2YzliNDIyMTk1ZDhlNDYxYWE4Ng"
-        -H “Accept: application/json”
+    curl http://sylius.dev/api/v1/products/3 \
+        -H "Authorization: Bearer MWExMWM0NzE1NmUyZDgyZDJiMjEzMmFlMjQ4MzgwMmE4ZTkxYzM0YjdlN2U2YzliNDIyMTk1ZDhlNDYxYWE4Ng" \
+        -H "Accept: application/json" \
         -X DELETE
 
 Example Response
