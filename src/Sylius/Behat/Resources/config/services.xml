@@ -74,5 +74,9 @@
         <service id="sylius.behat.payment_method_name_to_gateway_converter" class="Sylius\Behat\Service\PaymentMethodNameToGatewayConverter">
             <argument type="service" id="__symfony__.payum" />
         </service>
+
+        <service id="sylius.behat.test_promotion_factory" class="Sylius\Behat\Service\TestPromotionFactory">
+            <argument type="service" id="__symfony__.sylius.factory.promotion" />
+        </service>
     </services>
 </container>

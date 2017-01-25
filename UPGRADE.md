@@ -53,6 +53,9 @@
 * `Sylius\Bundle\CoreBundle\Test\Services\PaymentMethodNameToGatewayConverter` was moved to `Sylius\Behat\Service\PaymentMethodNameToGatewayConverter`,
   change your usages accordingly (and use it only for testing purposes!).
 
+* `Sylius\Component\Core\Test\Factory\TestPromotionFactory` was moved to `Sylius\Behat\Service\TestPromotionFactory`,
+  change your usages accrodingly (and use it only for testing purposes!).
+
 ### Currency / CurrencyBundle
 
 ### Customer / CustomerBundle

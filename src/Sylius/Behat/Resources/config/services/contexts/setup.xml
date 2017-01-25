@@ -183,7 +183,7 @@
             <argument type="service" id="__symfony__.sylius.factory.promotion_action" />
             <argument type="service" id="__symfony__.sylius.factory.promotion_coupon" />
             <argument type="service" id="__symfony__.sylius.factory.promotion_rule" />
-            <argument type="service" id="__symfony__.sylius.test.factory.promotion" />
+            <argument type="service" id="sylius.behat.test_promotion_factory" />
             <argument type="service" id="__symfony__.sylius.repository.promotion" />
             <argument type="service" id="__symfony__.doctrine.orm.entity_manager" />
             <tag name="fob.context_service" />

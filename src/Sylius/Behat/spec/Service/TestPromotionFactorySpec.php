@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Core\Test\Factory;
+namespace spec\Sylius\Behat\Service;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
-use Sylius\Component\Core\Test\Factory\TestPromotionFactory;
-use Sylius\Component\Core\Test\Factory\TestPromotionFactoryInterface;
+use Sylius\Behat\Service\TestPromotionFactory;
+use Sylius\Behat\Service\TestPromotionFactoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
@@ -44,8 +44,8 @@ final class TestPromotionFactorySpec extends ObjectBehavior
         $promotionFactory->createNew()->willReturn($promotion);
         $promotion->setName('Super promotion')->shouldBeCalled();
         $promotion->setCode('super_promotion')->shouldBeCalled();
-        $promotion->setStartsAt(Argument::type('\DateTime'))->shouldBeCalled();
-        $promotion->setEndsAt(Argument::type('\DateTime'))->shouldBeCalled();
+        $promotion->setStartsAt(Argument::type(\DateTime::class))->shouldBeCalled();
+        $promotion->setEndsAt(Argument::type(\DateTime::class))->shouldBeCalled();
 
         $this->create('Super promotion')->shouldReturn($promotion);
     }
@@ -58,8 +58,8 @@ final class TestPromotionFactorySpec extends ObjectBehavior
         $promotionFactory->createNew()->willReturn($promotion);
         $promotion->setName('Super promotion')->shouldBeCalled();
         $promotion->setCode('super_promotion')->shouldBeCalled();
-        $promotion->setStartsAt(Argument::type('\DateTime'))->shouldBeCalled();
-        $promotion->setEndsAt(Argument::type('\DateTime'))->shouldBeCalled();
+        $promotion->setStartsAt(Argument::type(\DateTime::class))->shouldBeCalled();
+        $promotion->setEndsAt(Argument::type(\DateTime::class))->shouldBeCalled();
         $promotion->addChannel($channel)->shouldBeCalled();
 
         $this->createForChannel('Super promotion', $channel)->shouldReturn($promotion);

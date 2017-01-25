@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Core\Test\Factory;
+namespace Sylius\Behat\Service;
 
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -18,7 +18,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class TestPromotionFactory implements TestPromotionFactoryInterface
+final class TestPromotionFactory implements TestPromotionFactoryInterface
 {
     /**
      * @var FactoryInterface
