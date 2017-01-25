@@ -70,5 +70,9 @@
         </service>
 
         <service id="sylius.behat.shared_storage" class="Sylius\Behat\Service\SharedStorage" public="false"/>
+
+        <service id="sylius.behat.payment_method_name_to_gateway_converter" class="Sylius\Behat\Service\PaymentMethodNameToGatewayConverter">
+            <argument type="service" id="__symfony__.payum" />
+        </service>
     </services>
 </container>

@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CoreBundle\Test\Services;
+namespace spec\Sylius\Behat\Service;
 
 use Payum\Core\GatewayInterface;
 use Payum\Core\Registry\RegistryInterface;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Test\Services\PaymentMethodNameToGatewayConverter;
-use Sylius\Bundle\CoreBundle\Test\Services\PaymentMethodNameToGatewayConverterInterface;
+use Sylius\Behat\Service\PaymentMethodNameToGatewayConverter;
+use Sylius\Behat\Service\PaymentMethodNameToGatewayConverterInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>

@@ -50,6 +50,9 @@
   were made final, use decoration and implement `Sylius\Component\Core\Payment\InvoiceNumberGeneratorInterface` instead of
   extending them.
 
+* `Sylius\Bundle\CoreBundle\Test\Services\PaymentMethodNameToGatewayConverter` was moved to `Sylius\Behat\Service\PaymentMethodNameToGatewayConverter`,
+  change your usages accordingly (and use it only for testing purposes!).
+
 ### Currency / CurrencyBundle
 
 ### Customer / CustomerBundle
