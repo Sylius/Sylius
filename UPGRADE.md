@@ -55,6 +55,10 @@
 
 * `Sylius\Component\Core\Test\Factory\TestPromotionFactory` was moved to `Sylius\Behat\Service\TestPromotionFactory`,
   change your usages accrodingly (and use it only for testing purposes!).
+  
+* `Sylius\Component\Core\Test\Services\DefaultChannelFactory` and `Sylius\Component\Core\Test\Services\DefaultUnitedStatesChannelFactory`
+  were moved to `Sylius\Behat\Service\DefaultChannelFactory` and `Sylius\Behat\Service\DefaultUnitedStatesChannelFactory`,
+  change your usages accrodingly (and use it only for testing purposes!).
 
 ### Currency / CurrencyBundle
 

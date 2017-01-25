@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Core\Test\Services;
+namespace Sylius\Behat\Service;
 
 use Sylius\Component\Channel\Factory\ChannelFactoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;

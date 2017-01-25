@@ -78,5 +78,28 @@
         <service id="sylius.behat.test_promotion_factory" class="Sylius\Behat\Service\TestPromotionFactory">
             <argument type="service" id="__symfony__.sylius.factory.promotion" />
         </service>
+
+        <service id="sylius.behat.default_united_states_channel_factory" class="Sylius\Behat\Service\DefaultUnitedStatesChannelFactory">
+            <argument type="service" id="__symfony__.sylius.repository.channel" />
+            <argument type="service" id="__symfony__.sylius.repository.country" />
+            <argument type="service" id="__symfony__.sylius.repository.currency" />
+            <argument type="service" id="__symfony__.sylius.repository.locale" />
+            <argument type="service" id="__symfony__.sylius.repository.zone" />
+            <argument type="service" id="__symfony__.sylius.factory.channel" />
+            <argument type="service" id="__symfony__.sylius.factory.country" />
+            <argument type="service" id="__symfony__.sylius.factory.currency" />
+            <argument type="service" id="__symfony__.sylius.factory.locale" />
+            <argument type="service" id="__symfony__.sylius.factory.zone" />
+            <argument>%__symfony__.locale%</argument>
+        </service>
+        <service id="sylius.behat.default_channel_factory" class="Sylius\Behat\Service\DefaultChannelFactory">
+            <argument type="service" id="__symfony__.sylius.factory.channel" />
+            <argument type="service" id="__symfony__.sylius.factory.currency" />
+            <argument type="service" id="__symfony__.sylius.factory.locale" />
+            <argument type="service" id="__symfony__.sylius.repository.channel" />
+            <argument type="service" id="__symfony__.sylius.repository.currency" />
+            <argument type="service" id="__symfony__.sylius.repository.locale" />
+            <argument>%__symfony__.locale%</argument>
+        </service>
     </services>
 </container>

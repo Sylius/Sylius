@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Core\Test\Services;
+namespace spec\Sylius\Behat\Service;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Factory\ZoneFactoryInterface;
@@ -18,8 +18,8 @@ use Sylius\Component\Addressing\Model\Scope;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Factory\ChannelFactoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Test\Services\DefaultChannelFactoryInterface;
-use Sylius\Component\Core\Test\Services\DefaultUnitedStatesChannelFactory;
+use Sylius\Behat\Service\DefaultChannelFactoryInterface;
+use Sylius\Behat\Service\DefaultUnitedStatesChannelFactory;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;

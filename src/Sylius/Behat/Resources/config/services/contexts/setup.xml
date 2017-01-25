@@ -28,8 +28,8 @@
 
         <service id="sylius.behat.context.setup.channel" class="Sylius\Behat\Context\Setup\ChannelContext">
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="__symfony__.sylius.behat.factory.default_united_states_channel" />
-            <argument type="service" id="__symfony__.sylius.behat.factory.default_channel" />
+            <argument type="service" id="sylius.behat.default_united_states_channel_factory" />
+            <argument type="service" id="sylius.behat.default_channel_factory" />
             <argument type="service" id="__symfony__.sylius.repository.channel" />
             <argument type="service" id="__symfony__.sylius.manager.channel" />
             <argument type="service" id="__symfony__.sylius.storage.currency" />

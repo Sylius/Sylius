@@ -13,12 +13,12 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Behat\Service\DefaultChannelFactoryInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Currency\CurrencyStorageInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Test\Services\DefaultChannelFactoryInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
