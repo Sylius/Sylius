@@ -12,6 +12,18 @@
 -->
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="sylius.form.type.user_request_password_reset.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+        </parameter>
+        <parameter key="sylius.form.type.user_reset_password.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+        </parameter>
+        <parameter key="sylius.form.type.user_change_password.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+        </parameter>
+    </parameters>
+
     <services>
         <service id="sylius.authentication.success_handler" class="Sylius\Bundle\UserBundle\Authentication\AuthenticationSuccessHandler" parent="security.authentication.success_handler" public="false" />
         <service id="sylius.authentication.failure_handler" class="Sylius\Bundle\UserBundle\Authentication\AuthenticationFailureHandler" parent="security.authentication.failure_handler" public="false" />
@@ -59,17 +71,17 @@
         </service>
         <service id="sylius.form.type.user_request_password_reset" class="Sylius\Bundle\UserBundle\Form\Type\UserRequestPasswordResetType">
             <argument type="string">Sylius\Bundle\UserBundle\Form\Model\PasswordResetRequest</argument>
-            <argument type="collection"><argument>sylius</argument></argument>
+            <argument>%sylius.form.type.user_request_password_reset.validation_groups%</argument>
             <tag name="form.type" />
         </service>
         <service id="sylius.form.type.user_reset_password" class="Sylius\Bundle\UserBundle\Form\Type\UserResetPasswordType">
             <argument type="string">Sylius\Bundle\UserBundle\Form\Model\PasswordReset</argument>
-            <argument type="collection"><argument>sylius</argument></argument>
+            <argument>%sylius.form.type.user_reset_password.validation_groups%</argument>
             <tag name="form.type" />
         </service>
         <service id="sylius.form.type.user_change_password" class="Sylius\Bundle\UserBundle\Form\Type\UserChangePasswordType">
             <argument type="string">Sylius\Bundle\UserBundle\Form\Model\ChangePassword</argument>
-            <argument type="collection"><argument>sylius</argument></argument>
+            <argument>%sylius.form.type.user_change_password.validation_groups%</argument>
             <tag name="form.type" />
         </service>
     </services>

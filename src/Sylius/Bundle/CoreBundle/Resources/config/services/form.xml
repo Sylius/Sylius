@@ -12,6 +12,28 @@
 -->
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="sylius.form.type.shop_user_registration.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+            <parameter>sylius_user_registration</parameter>
+        </parameter>
+        <parameter key="sylius.form.type.customer_guest.validation_groups" type="collection">
+            <parameter>sylius_customer_guest</parameter>
+        </parameter>
+        <parameter key="sylius.form.type.customer_simple_registration.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+            <parameter>sylius_user_registration</parameter>
+        </parameter>
+        <parameter key="sylius.form.type.customer_registration.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+            <parameter>sylius_user_registration</parameter>
+            <parameter>sylius_customer_profile</parameter>
+        </parameter>
+        <parameter key="sylius.form.type.add_to_cart.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+        </parameter>
+    </parameters>
+
     <services>
         <service id="sylius.form.extension.type.country" class="Sylius\Bundle\CoreBundle\Form\Extension\CountryTypeExtension">
             <argument type="service" id="sylius.repository.country" />
@@ -94,7 +116,7 @@
         </service>
         <service id="sylius.form.type.shop_user_registration" class="Sylius\Bundle\CoreBundle\Form\Type\User\ShopUserRegistrationType">
             <argument>%sylius.model.shop_user.class%</argument>
-            <argument type="collection"><argument>sylius</argument><argument>sylius_user_registration</argument></argument>
+            <argument>%sylius.form.type.shop_user_registration.validation_groups%</argument>
             <tag name="form.type" />
         </service>
 
@@ -159,23 +181,19 @@
 
         <service id="sylius.form.type.customer_guest" class="Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerGuestType">
             <argument>%sylius.model.customer.class%</argument>
-            <argument type="collection"><argument>sylius_customer_guest</argument></argument>
+            <argument>%sylius.form.type.customer_guest.validation_groups%</argument>
             <argument type="service" id="sylius.repository.customer" />
             <tag name="form.type" />
         </service>
         <service id="sylius.form.type.customer_simple_registration" class="Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerSimpleRegistrationType">
             <argument>%sylius.model.customer.class%</argument>
-            <argument type="collection"><argument>sylius</argument><argument>sylius_user_registration</argument></argument>
+            <argument>%sylius.form.type.customer_simple_registration.validation_groups%</argument>
             <argument type="service" id="sylius.repository.customer" />
             <tag name="form.type" />
         </service>
         <service id="sylius.form.type.customer_registration" class="Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerRegistrationType">
             <argument>%sylius.model.customer.class%</argument>
-            <argument type="collection">
-                <argument>sylius</argument>
-                <argument>sylius_user_registration</argument>
-                <argument>sylius_customer_profile</argument>
-            </argument>
+            <argument>%sylius.form.type.customer_registration.validation_groups%</argument>
             <argument type="service" id="sylius.repository.customer" />
             <tag name="form.type" />
         </service>
@@ -187,7 +205,7 @@
 
         <service id="sylius.form.type.add_to_cart" class="Sylius\Bundle\CoreBundle\Form\Type\Order\AddToCartType">
             <argument>Sylius\Bundle\OrderBundle\Controller\AddToCartCommand</argument>
-            <argument type="collection"><argument>sylius</argument></argument>
+            <argument>%sylius.form.type.add_to_cart.validation_groups%</argument>
             <tag name="form.type" />
         </service>
 

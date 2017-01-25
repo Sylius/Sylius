@@ -12,6 +12,12 @@
 -->
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="sylius.form.type.customer_profile.validation_groups" type="collection">
+            <parameter>sylius_customer_profile</parameter>
+        </parameter>
+    </parameters>
+
     <services>
         <service id="sylius.form.type.customer" class="Sylius\Bundle\CustomerBundle\Form\Type\CustomerType">
             <argument>%sylius.model.customer.class%</argument>
@@ -21,7 +27,7 @@
 
         <service id="sylius.form.type.customer_profile" class="Sylius\Bundle\CustomerBundle\Form\Type\CustomerProfileType">
             <argument>%sylius.model.customer.class%</argument>
-            <argument type="collection"><argument>sylius</argument><argument>sylius_customer_profile</argument></argument>
+            <argument>%sylius.form.type.customer_profile.validation_groups%</argument>
             <tag name="form.type" />
         </service>
 
