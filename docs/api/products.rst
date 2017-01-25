@@ -40,6 +40,9 @@ If you request for a more detailed data, you will receive an object with followi
 +-----------------+----------------------------------------------------------------------------+
 | attributes      | Collection of attributes connected with product (for example material)     |
 +-----------------+----------------------------------------------------------------------------+
+| associations    | Collection of products associated with created product                     |
+|                 | (for example accessories to this product)                                  |
++-----------------+----------------------------------------------------------------------------+
 | variants        | Collection of variants connected with product                              |
 +-----------------+----------------------------------------------------------------------------+
 | reviews         | Collection of reviews passed by customers                                  |
@@ -425,6 +428,249 @@ Example Response
         }
     }
 
+You can also create a product with additional (not required) fields, like:
+
++----------------+-----------------------------------------------------------------------------+
+| Field          | Description                                                                 |
++================+=============================================================================+
+| channels       | Collection of channels to which product was assigned                        |
++----------------+-----------------------------------------------------------------------------+
+| translations   | Collection of translations (each contains slug and name in given language). |
+|                | Only the translation for default locale is required, the rest are optional  |
++----------------+-----------------------------------------------------------------------------+
+| options        | Options assigned to product                                                 |
++----------------+-----------------------------------------------------------------------------+
+| images         | Images assigned to product                                                  |
++----------------+-----------------------------------------------------------------------------+
+| attributes     | Collection of attributes connected with product (for example material)      |
++----------------+-----------------------------------------------------------------------------+
+| associations   | Collection of products associated with created product                      |
+|                | (for example accessories to this product)                                   |
++----------------+-----------------------------------------------------------------------------+
+| product_taxons | Collection of relations between product and taxons                          |
++----------------+-----------------------------------------------------------------------------+
+| main_taxon     | The main taxon to whose product is assigned                                 |
++----------------+-----------------------------------------------------------------------------+
+
+Example
+.......
+
+.. code-block:: bash
+
+    curl http://sylius.dev/api/v1/products/
+        -H "Authorization: Bearer MWExMWM0NzE1NmUyZDgyZDJiMjEzMmFlMjQ4MzgwMmE4ZTkxYzM0YjdlN2U2YzliNDIyMTk1ZDhlNDYxYWE4Ng"
+        -H “Accept: application/json”
+        -X POST
+        --data '
+            {
+                "code": "MUG_TH",
+                "main_taxon": "mugs",
+                "product_taxons": "category,mugs",
+                "channels": [
+                    "US_WEB"
+                ],
+                "attributes": [
+                     {
+                         "attribute": "mug_material",
+                         "locale_code": "en_US",
+                         "value": "concrete"
+                     }
+                 ],
+                "options": [
+                    "mug_type"
+                ],
+                 "associations": {
+                     "accessories": "f1fd2fab-c024-3192-9505-dfc8f2aef872,f1fd2fab-c024-3192-9505-dfc8f2aef872"
+                 },
+                "translations": {
+                    "en__US": {
+                        "name": "Theme Mug",
+                        "slug": "theme-mug"
+                    },
+                    "pl": {
+                        "name": "Kubek z motywem",
+                        "slug": "kubek-z-motywem"
+                    }
+                }
+            }
+        '
+
+Example Response
+~~~~~~~~~~~~~~~~
+
+.. code-block:: text
+
+    STATUS: 201 CREATED
+
+.. code-block:: json
+
+    {
+        "name": "Theme Mug",
+        "id": 129,
+        "code": "MUG_TH",
+        "available_on": "2017-01-25T14:03:37+0100",
+        "attributes": [
+            {
+                "code": "mug_material",
+                "name": "Mug material",
+                "value": "concrete",
+                "type": "text",
+                "id": 275
+            }
+        ],
+        "variants": [],
+        "options": [
+            {
+                "code": "mug_type"
+            }
+        ],
+        "associations": [
+            {
+                "id": 26,
+                "type": {
+                    "id": 3,
+                    "code": "accessories",
+                    "created_at": "2017-01-25T11:51:39+0100",
+                    "updated_at": "2017-01-25T11:51:39+0100",
+                    "translations": [
+                        {
+                            "locale": "en_US",
+                            "id": 3,
+                            "name": "Accessories"
+                        }
+                    ],
+                    "current_locale": "en_US",
+                    "fallback_locale": "en_US"
+                },
+                "associated_products": [
+                    {
+                        "name": "Mug \"molestias\"",
+                        "id": 61,
+                        "code": "f1fd2fab-c024-3192-9505-dfc8f2aef872",
+                        "available_on": "2017-01-20T14:52:03+0100",
+                        "attributes": [
+                            {
+                                "code": "mug_material",
+                                "name": "Mug material",
+                                "value": "Banana skin",
+                                "type": "text",
+                                "id": 136
+                            }
+                        ],
+                        "variants": [
+                            {
+                                "id": 331,
+                                "on_hold": 0,
+                                "tracked": false
+                            },
+                            {
+                                "id": 332,
+                                "on_hold": 0,
+                                "tracked": false
+                            },
+                            {
+                                "id": 333,
+                                "on_hold": 0,
+                                "tracked": false
+                            }
+                        ],
+                        "options": [
+                            {
+                                "code": "mug_type"
+                            }
+                        ],
+                        "associations": [],
+                        "translations": {
+                            "en_US": {
+                                "locale": "en_US",
+                                "id": 61,
+                                "name": "Mug \"molestias\"",
+                                "slug": "mug-molestias",
+                                "description": "Aut non quos esse ut non. Ducimus cumque ut libero molestiae velit.",
+                                "short_description": "Odio aliquam voluptatem sed consequatur."
+                            }
+                        },
+                        "product_taxons": [
+                            {
+                                "id": 79,
+                                "position": 0
+                            }
+                        ],
+                        "main_taxon": {
+                            "name": "Mugs",
+                            "id": 9,
+                            "code": "mugs",
+                            "children": []
+                        },
+                        "reviews": [],
+                        "average_rating": 0,
+                        "images": [
+                            {
+                                "id": 121,
+                                "code": "main",
+                                "path": "88/63/409aa25d19ffeb598978850bbadf.jpeg"
+                            },
+                            {
+                                "id": 122,
+                                "code": "thumbnail",
+                                "path": "55/ef/9e30653e7cfae268ebed7ba3b099.jpeg"
+                            }
+                        ],
+                        "_links": {
+                            "self": {
+                                "href": "/api/v1/products/61"
+                            }
+                        }
+                    }
+                ],
+                "created_at": "2017-01-25T14:03:38+0100",
+                "updated_at": "2017-01-25T14:03:38+0100"
+            }
+        ],
+        "translations": {
+            "en_US": {
+                "locale": "en_US",
+                "id": 130,
+                "name": "Theme Mug",
+                "slug": "theme-mug"
+            },
+            "pl": {
+                "locale": "pl",
+                "id": 131,
+                "name": "Kubek z motywem",
+                "slug": "kubek-z-motywem"
+            }
+        },
+        "product_taxons": [
+            {
+                "id": 155,
+                "position": 0
+            },
+            {
+                "id": 156,
+                "position": 15
+            }
+        ],
+        "main_taxon": {
+            "name": "Mugs",
+            "id": 9,
+            "code": "mugs",
+            "children": []
+        },
+        "reviews": [],
+        "average_rating": 0,
+        "images": [],
+        "_links": {
+            "self": {
+                "href": "/api/v1/products/129"
+            }
+        }
+    }
+
+.. note::
+
+    The images should be passed in array as an attribute (files) of request. See how it is done in Sylius
+    `here <https://github.com/Sylius/Sylius/blob/master/tests/Controller/ProductApiTest.php>`_.
 
 Updating Product
 ----------------
