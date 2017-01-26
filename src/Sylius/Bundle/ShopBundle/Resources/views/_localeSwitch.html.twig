@@ -6,6 +6,7 @@
             {% for code in locales %}
                 {% if code is not same as(active) %}
                     <form action="{{ path('sylius_shop_switch_locale', {'code': code}) }}" method="post" >
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('switch_locale') }}" />
                         <button type="submit" class="item sylius-available-locale">
                             {{ code|sylius_locale_name }}
                         </button>

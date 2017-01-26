@@ -19,6 +19,8 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\Security\Csrf\CsrfToken;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -46,21 +48,29 @@ final class CurrencySwitchController
     private $currencyChangeHandler;
 
     /**
+     * @var CsrfTokenManagerInterface
+     */
+    private $csrfTokenManager;
+
+    /**
      * @param EngineInterface $templatingEngine
      * @param CurrencyContextInterface $currencyContext
      * @param CurrencyProviderInterface $currencyProvider
      * @param CurrencyChangeHandlerInterface $currencyChangeHandler
+     * @param CsrfTokenManagerInterface $csrfTokenManager
      */
     public function __construct(
         EngineInterface $templatingEngine,
         CurrencyContextInterface $currencyContext,
         CurrencyProviderInterface $currencyProvider,
-        CurrencyChangeHandlerInterface $currencyChangeHandler
+        CurrencyChangeHandlerInterface $currencyChangeHandler,
+        CsrfTokenManagerInterface $csrfTokenManager
     ) {
         $this->templatingEngine = $templatingEngine;
         $this->currencyContext = $currencyContext;
         $this->currencyProvider = $currencyProvider;
         $this->currencyChangeHandler = $currencyChangeHandler;
+        $this->csrfTokenManager = $csrfTokenManager;
     }
 
     /**
@@ -87,6 +97,10 @@ final class CurrencySwitchController
                 Response::HTTP_NOT_ACCEPTABLE,
                 sprintf('The currency code "%s" is invalid.', $code)
             );
+        }
+
+        if (!$this->csrfTokenManager->isTokenValid(new CsrfToken('switch_currency', $request->request->get('_csrf_token')))) {
+            throw new HttpException(Response::HTTP_FORBIDDEN, 'Invalid csrf token.');
         }
 
         $this->currencyChangeHandler->handle($code);

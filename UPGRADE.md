@@ -117,6 +117,7 @@ These services will be generated automatically based on subject name.
 ### Shipping / ShippingBundle
 
 ### ShopBundle
+* Route `sylius_shop_switch_currency` and `sylius_shop_switch_locale` http methods have changed from GET to POST also these routes have been protected by csrf token.
 
 ### Taxation / TaxationBundle
 
