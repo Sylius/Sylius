@@ -47,7 +47,7 @@
             },
             {
                 "id": @integer@,
-                "name": "Star wars mug",
+                "name": "Star Wars mug",
                 "code": "MUG_SW",
                 "options": [],
                 "average_rating": 0,

@@ -1,21 +1,17 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-sylius_api_product_index:
-    path: /
-    methods: [GET]
-    defaults:
-        _controller: sylius.controller.product:indexAction
-        _sylius:
-            serialization_version: $version
-            serialization_groups: [Default]
-            paginate: $limit
-            sortable: true
-            sorting:
-                createdAt: desc
+sylius_api_product:
+    resource: |
+        alias: sylius.product
+        section: api
+        except: ['create', 'update']
+        grid: sylius_api_product
+        serialization_version: $version
+    type: sylius.resource_api
 
 sylius_api_product_create:
-    path: /
+    path: /products/
     methods: [POST]
     defaults:
         _controller: sylius.controller.product:createAction
@@ -24,28 +20,10 @@ sylius_api_product_create:
             form: Sylius\Bundle\ApiBundle\Form\Type\ProductType
 
 sylius_api_product_update:
-    path: /{id}
+    path: /products/{id}
     methods: [POST, PUT, PATCH]
     defaults:
         _controller: sylius.controller.product:updateAction
         _sylius:
             serialization_version: $version
             form: Sylius\Bundle\ApiBundle\Form\Type\ProductType
-
-sylius_api_product_delete:
-    path: /{id}
-    methods: [DELETE]
-    defaults:
-        _controller: sylius.controller.product:deleteAction
-        _sylius:
-            serialization_version: $version
-            csrf_protection: false
-
-sylius_api_product_show:
-    path: /{id}
-    methods: [GET]
-    defaults:
-        _controller: sylius.controller.product:showAction
-        _sylius:
-            serialization_version: $version
-            serialization_groups: [Default, Detailed]

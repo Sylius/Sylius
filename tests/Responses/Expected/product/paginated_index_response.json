@@ -24,84 +24,6 @@
         "items": [
             {
                 "id": @integer@,
-                "name": "Product 11",
-                "code": "PRODUCT_11",
-                "options": [],
-                "average_rating": 0,
-                "images": [],
-                "_links": {
-                    "self": {
-                        "href": "@string@"
-                    }
-                }
-            },
-            {
-                "id": @integer@,
-                "name": "Product 12",
-                "code": "PRODUCT_12",
-                "options": [],
-                "average_rating": 0,
-                "images": [],
-                "_links": {
-                    "self": {
-                        "href": "@string@"
-                    }
-                }
-            },
-            {
-                "id": @integer@,
-                "name": "Product 13",
-                "code": "PRODUCT_13",
-                "options": [],
-                "average_rating": 0,
-                "images": [],
-                "_links": {
-                    "self": {
-                        "href": "@string@"
-                    }
-                }
-            },
-            {
-                "id": @integer@,
-                "name": "Product 14",
-                "code": "PRODUCT_14",
-                "options": [],
-                "average_rating": 0,
-                "images": [],
-                "_links": {
-                    "self": {
-                        "href": "@string@"
-                    }
-                }
-            },
-            {
-                "id": @integer@,
-                "name": "Product 15",
-                "code": "PRODUCT_15",
-                "options": [],
-                "average_rating": 0,
-                "images": [],
-                "_links": {
-                    "self": {
-                        "href": "@string@"
-                    }
-                }
-            },
-            {
-                "id": @integer@,
-                "name": "Product 16",
-                "code": "PRODUCT_16",
-                "options": [],
-                "average_rating": 0,
-                "images": [],
-                "_links": {
-                    "self": {
-                        "href": "@string@"
-                    }
-                }
-            },
-            {
-                "id": @integer@,
                 "name": "Product 17",
                 "code": "PRODUCT_17",
                 "options": [],
@@ -143,6 +65,84 @@
                 "id": @integer@,
                 "name": "Product 20",
                 "code": "PRODUCT_20",
+                "options": [],
+                "average_rating": 0,
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "name": "Product 21",
+                "code": "PRODUCT_21",
+                "options": [],
+                "average_rating": 0,
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "name": "Product 22",
+                "code": "PRODUCT_22",
+                "options": [],
+                "average_rating": 0,
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "name": "Product 4",
+                "code": "PRODUCT_4",
+                "options": [],
+                "average_rating": 0,
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "name": "Product 5",
+                "code": "PRODUCT_5",
+                "options": [],
+                "average_rating": 0,
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "name": "Product 6",
+                "code": "PRODUCT_6",
+                "options": [],
+                "average_rating": 0,
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "name": "Product 7",
+                "code": "PRODUCT_7",
                 "options": [],
                 "average_rating": 0,
                 "images": [],
