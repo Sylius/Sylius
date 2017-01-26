@@ -32,14 +32,6 @@
 
         <service id="sylius.expression_language" class="Symfony\Component\DependencyInjection\ExpressionLanguage" public="false" />
 
-        <service id="sylius.event_subscriber.resource_delete" class="Sylius\Bundle\ResourceBundle\EventListener\ResourceDeleteSubscriber">
-            <argument type="service" id="router" />
-            <argument type="service" id="session" />
-            <argument type="service" id="translator" />
-            <argument type="service" id="fos_rest.view_handler" />
-            <tag name="kernel.event_subscriber" event="kernel.exception" />
-        </service>
-
         <service id="sylius.form.extension.type.collection" class="Sylius\Bundle\ResourceBundle\Form\Extension\CollectionTypeExtension">
             <tag name="form.type_extension" extended-type="Symfony\Component\Form\Extension\Core\Type\CollectionType" />
         </service>
