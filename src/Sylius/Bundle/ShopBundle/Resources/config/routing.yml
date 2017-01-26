@@ -53,13 +53,13 @@ sylius_shop_payum:
 
 sylius_shop_switch_currency:
     path: /switch-currency/{code}
-    methods: [POST]
+    methods: [GET]
     defaults:
         _controller: sylius.controller.shop.currency_switch:switchAction
 
 sylius_shop_switch_locale:
     path: /switch-locale/{code}
-    methods: [POST]
+    methods: [GET]
     defaults:
         _controller: sylius.controller.shop.locale_switch:switchAction
 

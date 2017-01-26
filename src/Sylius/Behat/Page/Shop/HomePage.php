@@ -91,7 +91,7 @@ class HomePage extends SymfonyPage implements HomePageInterface
         } catch (UnsupportedDriverActionException $exception) {
         }
 
-        $this->getElement('currency_selector')->pressButton($currencyCode);
+        $this->getElement('currency_selector')->clickLink($currencyCode);
     }
 
     /**
@@ -120,7 +120,7 @@ class HomePage extends SymfonyPage implements HomePageInterface
      */
     public function switchLocale($localeCode)
     {
-        $this->getElement('locale_selector')->pressButton($localeCode);
+        $this->getElement('locale_selector')->clickLink($localeCode);
     }
 
     /**
