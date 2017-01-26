@@ -18,3 +18,7 @@ twig:
 
 sylius_channel:
     debug: true
+
+fos_rest:
+    exception:
+        debug: true
