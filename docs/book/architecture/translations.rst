@@ -4,7 +4,7 @@
 Translations
 ============
 
-Sylius uses the approach of personal translations - where each entity is binded with a translation entity, that has it's
+Sylius uses the approach of personal translations - where each entity is bound with a translation entity, that has it's
 own table (instead of keeping all translations in one table for the whole system).
 This results in having the ``ProductTranslation`` class and ``sylius_product_translation`` table for the ``Product`` entity.
 
@@ -43,46 +43,74 @@ Assuming that we would like to have a translatable model of a ``Supplier``, we n
        /**
         * @param string $name
         */
-       public function setTitle($name)
+       public function setName($name)
        {
            $this->name = $name;
        }
    }
 
-The actual entity get access to its translation by using the ``TranslatableTrait`` which provides the ``getTranslation()`` method.
+The actual entity has access to its translation by using the ``TranslatableTrait`` which provides the ``getTranslation()`` method.
 
 .. code-block:: php
 
-<?php
+   <?php
 
-namespace AppBundle\Entity;
+   namespace AppBundle\Entity;
 
-use Sylius\Component\Resource\Model\TranslatableInterface;
-use Sylius\Component\Resource\Model\TranslatableTrait;
+   use Sylius\Component\Resource\Model\TranslatableInterface;
+   use Sylius\Component\Resource\Model\TranslatableTrait;
 
-class Supplier implements TranslatableInterface
-{
-    use TranslatableTrait;
+   class Supplier implements TranslatableInterface
+   {
+       use TranslatableTrait;
 
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->getTranslation()->getName();
-    }
+       /**
+        * @return string
+        */
+       public function getName()
+       {
+           return $this->getTranslation()->getName();
+       }
 
-    /**
-     * @param string $name
-     */
-    public function setName($name)
-    {
-        $this->getTranslation()->setName($name);
-    }
-}
+       /**
+        * @param string $name
+        */
+       public function setName($name)
+       {
+           $this->getTranslation()->setName($name);
+       }
+   }
 
-The ``getTranslation()`` method get a translation for the current locale, while we are in the shop, but we can also manualy
+The ``getTranslation()`` method gets a translation for the current locale, while we are in the shop, but we can also manually
 impose the locale - ``getTranslation('pl_PL')`` will return a polish translation.
+
+How to add a new translation programmatically?
+----------------------------------------------
+
+You can programmatically add a translation to any of the translatable resources in Sylius.
+Let's see how to do it on the example of a ProductTranslation.
+
+.. code-block:: php
+
+   // Find a product to add a translation to it
+
+   /** @var ProductInterface $product */
+   $product = $this->container->get('sylius.repository.product')->findOneBy(['name' => 'Radiohead Mug']);
+
+   // Create a new translation of product, give it a translated name and slug in the chosen locale
+
+   /** @var ProductTranslation $translation */
+   $translation = new ProductTranslation();
+
+   $translation->setLocale('pl_PL');
+   $translation->setName('Kubek Radiohead');
+   $translation->setSlug('kubek-radiohead');
+
+   // Add the translation to your product
+   $product->addTranslation($translation);
+
+   // Remember to save the product after adding the translation
+   $this->container->get('sylius.manager.product')->flush($product);
 
 Learn more
 ----------
