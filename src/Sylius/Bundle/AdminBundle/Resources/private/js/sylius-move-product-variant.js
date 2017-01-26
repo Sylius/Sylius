@@ -13,12 +13,14 @@
     $.fn.extend({
         moveProductVariant: function (positionInput) {
             var productVariantIds = [];
+            var element = $(this);
 
-            $(this).api({
+            element.api({
                 method: 'PUT',
                 beforeSend: function (settings) {
                     settings.data = {
-                        productVariants: productVariantIds
+                        productVariants: productVariantIds,
+                        _csrf_token: element.data('csrf-token')
                     };
 
                     return settings;
