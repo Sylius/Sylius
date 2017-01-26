@@ -29,8 +29,6 @@ final class SyliusPromotionExtension extends AbstractResourceExtension
         $config = $this->processConfiguration($this->getConfiguration([], $container), $config);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        $this->mapFormValidationGroupsParameters($config, $container);
-
         $loader->load('services.xml');
         $loader->load(sprintf('services/integrations/%s.xml', $config['driver']));
 

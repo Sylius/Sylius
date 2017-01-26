@@ -16,11 +16,7 @@ Configuration reference
                           repository: Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository
                           controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                           factory:    Sylius\Component\Resource\Factory\Factory
-                          form:
-                              default: Sylius\Bundle\AttributeBundle\Form\Type\AttributeType
-                              choice:  Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType
-                      validation_groups:
-                          default: [ sylius ]
+                          form: Sylius\Bundle\AttributeBundle\Form\Type\AttributeType
                       translation:
                           classes:
                               model:      Sylius\Component\Attribute\Model\AttributeTranslation
@@ -28,10 +24,7 @@ Configuration reference
                               controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                               repository: ~ # Required: The repository class for the attribute translation.
                               factory:    Sylius\Component\Resource\Factory\Factory
-                              form:
-                                  default: Sylius\Bundle\AttributeBundle\Form\Type\AttributeTranslationType
-                          validation_groups:
-                              default: [ sylius ]
+                              form: Sylius\Bundle\AttributeBundle\Form\Type\AttributeTranslationType
                   attribute_value:
                       classes:
                           model:      ~ # Required: The model of the attribute value
@@ -39,7 +32,4 @@ Configuration reference
                           controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                           repository: ~ # Required: The repository class for the attribute value.
                           factory:    Sylius\Component\Resource\Factory\Factory
-                          form:
-                              default: Sylius\Bundle\AttributeBundle\Form\Type\AttributeValueType
-                      validation_groups:
-                          default: [ sylius ]
+                          form: Sylius\Bundle\AttributeBundle\Form\Type\AttributeValueType

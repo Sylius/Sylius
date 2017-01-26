@@ -128,7 +128,7 @@ final class Configuration implements ConfigurationInterface
                                                 ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                                 ->scalarNode('repository')->cannotBeEmpty()->end()
                                                 ->scalarNode('factory')->defaultValue(Factory::class)->end()
-                                                ->scalarNode('default')->defaultValue(ShippingMethodTranslationType::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('form')->defaultValue(ShippingMethodTranslationType::class)->cannotBeEmpty()->end()
                                             ->end()
                                         ->end()
                                     ->end()

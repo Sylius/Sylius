@@ -15,8 +15,6 @@ Configuration Reference
                     factory: Sylius\Component\Resource\Factory\Factory
                 options:
                     object_manager: default
-                validation_groups:
-                    default: [sylius]
                 translation:
                     classes:
                         model: ~
@@ -24,8 +22,6 @@ Configuration Reference
                         controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                         repository: ~
                         factory: Sylius\Component\Resource\Factory\Factory
-                    validation_groups:
-                        default: [sylius]
 
 Routing Generator Configuration Reference
 -----------------------------------------

@@ -24,22 +24,13 @@ Configuration reference
                     interface: Sylius\Component\Customer\Model\CustomerInterface
                     controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                     factory: Sylius\Component\Resource\Factory\Factory
-                validation_groups:
-                    default: [ sylius ]
-                    profile: [ sylius, sylius_customer_profile ]
             customer_group:
                 classes:
                     model: Sylius\Component\Customer\Model\CustomerGroup
                     interface: Sylius\Component\Customer\Model\CustomerGroupInterface
                     controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                     factory: Sylius\Component\Resource\Factory\Factory
-                    form:
-                        default: Sylius\Bundle\CustomerBundle\Form\Type\CustomerGroupType
-                        choice: Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType
-                        from_identifier: Sylius\Bundle\ResourceBundle\Form\Type\ResourceFromIdentifierType
-                validation_groups:
-                    default: [ sylius ]
-                    from_identifier: [ sylius ]
+                    form: Sylius\Bundle\CustomerBundle\Form\Type\CustomerGroupType
 
 `phpspec2 <http://phpspec.net>`_ examples
 -----------------------------------------

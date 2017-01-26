@@ -17,8 +17,6 @@ Summary
                     repository: ~
                     factory:    Sylius\Component\Resource\Factory\Factory
                     form: Sylius\Bundle\PromotionBundle\Form\Type\PromotionType
-                validation_groups:
-                    default: [ sylius ]
             promotion_rule:
                 classes:
                     factory: Sylius\Component\Core\Factory\PromotionRuleFactory
@@ -27,10 +25,7 @@ Summary
                     controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                     repository: ~
                     factory:    Sylius\Component\Resource\Factory\Factory
-                    form:
-                        default: Sylius\Bundle\PromotionBundle\Form\Type\PromotionRuleType
-                validation_groups:
-                    default: [ sylius ]
+                    form: Sylius\Bundle\PromotionBundle\Form\Type\PromotionRuleType
             promotion_coupon:
                 classes:
                     model:      Sylius\Component\Promotion\Model\PromotionAction
@@ -39,8 +34,6 @@ Summary
                     repository: ~
                     factory:    Sylius\Component\Resource\Factory\Factory
                     form: Sylius\Bundle\PromotionBundle\Form\Type\PromotionActionType
-                validation_groups:
-                    default: [ sylius ]
             promotion_action:
                 classes:
                     model:      Sylius\Component\Promotion\Model\Coupon
@@ -48,10 +41,7 @@ Summary
                     controller: Sylius\Bundle\PromotionBundle\Controller\PromotionCouponController
                     repository: ~
                     factory:    Sylius\Component\Resource\Factory\Factory
-                    form:
-                        default: Sylius\Bundle\PromotionBundle\Form\Type\PromotionActionType
-                validation_groups:
-                    default: [ sylius ]
+                    form: Sylius\Bundle\PromotionBundle\Form\Type\PromotionActionType
 
 
 

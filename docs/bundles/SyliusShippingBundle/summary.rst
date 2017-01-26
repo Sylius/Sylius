@@ -17,10 +17,7 @@ Configuration Reference
                     controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                     repository: ~
                     factory:    Sylius\Component\Resource\Factory\Factory
-                    form:
-                        default: Sylius\Bundle\ShippingBundle\Form\Type\ShipmentType
-                validation_groups:
-                    default: [ sylius ]
+                    form: Sylius\Bundle\ShippingBundle\Form\Type\ShipmentType
             shipment_item:
                 classes:
                     model:      Sylius\Component\Shipping\Model\ShipmentItem
@@ -28,8 +25,7 @@ Configuration Reference
                     controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                     repository: ~
                     factory:    Sylius\Component\Resource\Factory\Factory
-                    form:
-                        default: Sylius\Bundle\ShippingBundle\Form\Type\ShipmentItemType
+                    form: Sylius\Bundle\ShippingBundle\Form\Type\ShipmentItemType
             shipping_method:
                 classes:
                     model:      Sylius\Component\Shipping\Model\ShippingMethod
@@ -37,11 +33,7 @@ Configuration Reference
                     controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                     repository: ~
                     factory:    Sylius\Component\Resource\Factory\Factory
-                    form:
-                        default: Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType
-                        choice:  Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType
-                validation_groups:
-                    default: [ sylius ]
+                    form: Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType
                 translation:
                     classes:
                         model:      Sylius\Component\Shipping\Model\ShippingMethodTranslation
@@ -49,10 +41,7 @@ Configuration Reference
                         controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                         repository: ~
                         factory:    Sylius\Component\Resource\Factory\Factory
-                        form:
-                            default: Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodTranslationType
-                    validation_groups:
-                        default: [ sylius ]
+                        form: Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodTranslationType
             shipping_category:
                 classes:
                     model:      Sylius\Component\Shipping\Model\ShippingCategory
@@ -60,15 +49,7 @@ Configuration Reference
                     controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                     repository: ~
                     factory:    Sylius\Component\Resource\Factory\Factory
-                    form:
-                        default: Sylius\Bundle\ShippingBundle\Form\Type\ShippingCategoryType
-                        choice:  Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType
-                validation_groups:
-                    default: [ sylius ]
-
-        validation_groups:
-            shipping_calculator_flat_rate_configuration: [sylius]
-            shipping_calculator_per_item_rate_configuration: [sylius]
+                    form: Sylius\Bundle\ShippingBundle\Form\Type\ShippingCategoryType
 
 Tests
 -----

@@ -12,10 +12,28 @@
 -->
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="sylius.form.type.address.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+        </parameter>
+        <parameter key="sylius.form.type.country.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+        </parameter>
+        <parameter key="sylius.form.type.province.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+        </parameter>
+        <parameter key="sylius.form.type.zone.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+        </parameter>
+        <parameter key="sylius.form.type.zone_member.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+        </parameter>
+    </parameters>
+
     <services>
         <service id="sylius.form.type.address" class="Sylius\Bundle\AddressingBundle\Form\Type\AddressType">
             <argument>%sylius.model.address.class%</argument>
-            <argument type="collection"><argument>sylius</argument></argument>
+            <argument>%sylius.form.type.address.validation_groups%</argument>
             <argument type="service">
                 <service class="Sylius\Bundle\AddressingBundle\Form\EventListener\BuildAddressFormSubscriber">
                     <argument type="service" id="sylius.repository.country" />
@@ -27,7 +45,7 @@
 
         <service id="sylius.form.type.country" class="Sylius\Bundle\AddressingBundle\Form\Type\CountryType">
             <argument>%sylius.model.country.class%</argument>
-            <argument type="collection"><argument>sylius</argument></argument>
+            <argument>%sylius.form.type.country.validation_groups%</argument>
             <tag name="form.type" />
         </service>
 
@@ -43,7 +61,7 @@
 
         <service id="sylius.form.type.province" class="Sylius\Bundle\AddressingBundle\Form\Type\ProvinceType">
             <argument>%sylius.model.province.class%</argument>
-            <argument type="collection"><argument>sylius</argument></argument>
+            <argument>%sylius.form.type.province.validation_groups%</argument>
             <tag name="form.type" />
         </service>
 
@@ -59,7 +77,7 @@
 
         <service id="sylius.form.type.zone" class="Sylius\Bundle\AddressingBundle\Form\Type\ZoneType">
             <argument>%sylius.model.zone.class%</argument>
-            <argument type="collection"><argument>sylius</argument></argument>
+            <argument>%sylius.form.type.zone.validation_groups%</argument>
             <argument>%sylius.scope.zone%</argument>
             <tag name="form.type" />
         </service>
@@ -76,7 +94,7 @@
 
         <service id="sylius.form.type.zone_member" class="Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberType">
             <argument>%sylius.model.zone_member.class%</argument>
-            <argument type="collection"><argument>sylius</argument></argument>
+            <argument>%sylius.form.type.zone_member.validation_groups%</argument>
             <tag name="form.type" />
         </service>
     </services>

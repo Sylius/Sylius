@@ -18,8 +18,7 @@ Configuration reference
                     classes:
                         model: Sylius\Component\Core\Model\AdminUser
                         repository: Sylius\Bundle\UserBundle\Doctrine\ORM\UserRepository
-                        form:
-                            default: Sylius\Bundle\CoreBundle\Form\Type\User\AdminUserType
+                        form: Sylius\Bundle\CoreBundle\Form\Type\User\AdminUserType
                         interface: Sylius\Component\User\Model\UserInterface
                         controller: Sylius\Bundle\UserBundle\Controller\UserController
                         factory: Sylius\Component\Resource\Factory\Factory
@@ -36,17 +35,12 @@ Configuration reference
                         token:
                             length: 16
                             field_name: emailVerificationToken
-                    validation_groups:
-                        default: [ sylius ]
-                        registration: [ sylius, sylius_user_registration ]
             shop:
                 user:
                     classes:
                         model: Sylius\Component\Core\Model\ShopUser
                         repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\UserRepository
-                        form:
-                            default: Sylius\Bundle\CoreBundle\Form\Type\User\ShopUserType
-                            registration: Sylius\Bundle\CoreBundle\Form\Type\User\UserRegistrationType
+                        form: Sylius\Bundle\CoreBundle\Form\Type\User\ShopUserType
                         interface: Sylius\Component\User\Model\UserInterface
                         controller: Sylius\Bundle\UserBundle\Controller\UserController
                         factory: Sylius\Component\Resource\Factory\Factory
@@ -63,9 +57,6 @@ Configuration reference
                         token:
                             length: 16
                             field_name: emailVerificationToken
-                    validation_groups:
-                        default: [ sylius ]
-                        registration: [ sylius, sylius_user_registration ]
             oauth:
                 user:
                     classes:
@@ -73,8 +64,7 @@ Configuration reference
                         interface: Sylius\Component\User\Model\UserOAuthInterface
                         controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                         factory: Sylius\Component\Resource\Factory\Factory
-                        form:
-                            default: Sylius\Bundle\UserBundle\Form\Type\UserType
+                        form: Sylius\Bundle\UserBundle\Form\Type\UserType
                     templates: 'SyliusUserBundle:User'
                     resetting:
                         token:
@@ -88,9 +78,6 @@ Configuration reference
                         token:
                             length: 16
                             field_name: emailVerificationToken
-                    validation_groups:
-                        default: [ sylius ]
-                        registration: [ sylius, sylius_user_registration ]
 
 
 `phpspec2 <http://phpspec.net>`_ examples

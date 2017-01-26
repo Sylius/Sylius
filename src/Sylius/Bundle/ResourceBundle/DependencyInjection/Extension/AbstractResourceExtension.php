@@ -58,17 +58,4 @@ abstract class AbstractResourceExtension extends Extension
             }
         }
     }
-
-    /**
-     * @param array $config
-     * @param ContainerBuilder $container
-     */
-    protected function mapFormValidationGroupsParameters(array $config, ContainerBuilder $container)
-    {
-        if (isset($config['validation_groups'])) {
-            foreach ($config['validation_groups'] as $name => $groups) {
-                $container->setParameter(sprintf('sylius.validation_groups.%s', $name), $groups);
-            }
-        }
-    }
 }
