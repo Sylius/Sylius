@@ -12,18 +12,14 @@
 namespace Sylius\Bundle\AdminBundle\EventListener;
 
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
-use FOS\RestBundle\View\View;
-use FOS\RestBundle\View\ViewHandlerInterface as RestViewHandlerInterface;
 use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
@@ -41,31 +37,13 @@ final class ResourceDeleteSubscriber implements EventSubscriberInterface
     private $session;
 
     /**
-     * @var TranslatorInterface
-     */
-    private $translator;
-
-    /**
-     * @var RestViewHandlerInterface
-     */
-    private $viewHandler;
-
-    /**
      * @param UrlGeneratorInterface $router
      * @param SessionInterface $session
-     * @param TranslatorInterface $translator
-     * @param RestViewHandlerInterface $viewHandler
      */
-    public function __construct(
-        UrlGeneratorInterface $router,
-        SessionInterface $session,
-        TranslatorInterface $translator,
-        RestViewHandlerInterface $viewHandler
-    ) {
+    public function __construct(UrlGeneratorInterface $router, SessionInterface $session)
+    {
         $this->router = $router;
         $this->session = $session;
-        $this->translator = $translator;
-        $this->viewHandler = $viewHandler;
     }
 
     /**
@@ -88,7 +66,7 @@ final class ResourceDeleteSubscriber implements EventSubscriberInterface
             return;
         }
 
-        if (!$event->isMasterRequest()) {
+        if (!$event->isMasterRequest() || 'html' !== $event->getRequest()->getRequestFormat()) {
             return;
         }
 
@@ -105,26 +83,14 @@ final class ResourceDeleteSubscriber implements EventSubscriberInterface
 
         $resourceName = $this->getResourceNameFromRoute($originalRoute);
 
-        $message = $this->translator->trans('sylius.resource.delete_error', ['%resource%' => $resourceName], 'flashes');
-
-        if (!$this->isHtmlRequest($eventRequest)) {
-            $event->setResponse(
-                $this->viewHandler->handle(View::create([
-                    'error' => [
-                        'code' => $exception->getSQLState(),
-                        'message' => $message,
-                    ],
-                ], Response::HTTP_METHOD_NOT_ALLOWED))
-            );
-
-            return;
-        }
-
         if (null === $requestAttributes->get('_controller')) {
             return;
         }
 
-        $this->session->getBag('flashes')->add('error', $message);
+        $this->session->getBag('flashes')->add('error', [
+            'message' => 'sylius.resource.delete_error',
+            'parameters' => ['%resource%' => $resourceName],
+        ]);
 
         $referrer = $eventRequest->headers->get('referer');
         if (null !== $referrer) {
@@ -161,16 +127,6 @@ final class ResourceDeleteSubscriber implements EventSubscriberInterface
         $redirectRoute = str_replace(ResourceActions::DELETE, $targetAction, $originalRoute);
 
         return new RedirectResponse($this->router->generate($redirectRoute));
-    }
-
-    /**
-     * @param Request $request
-     *
-     * @return bool
-     */
-    private function isHtmlRequest(Request $request)
-    {
-        return 'html' === $request->getRequestFormat();
     }
 
     /**
