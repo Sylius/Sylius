@@ -68,7 +68,7 @@ final class CheckoutAddressingApiTest extends CheckoutApiTestCase
         $data =
 <<<EOT
         {
-            "different_billing_address": false,
+            "different_shipping_address": false,
             "customer": {
                 "email": "john@doe.com"
             }
@@ -94,7 +94,7 @@ EOT;
         $data =
 <<<EOT
         {
-            "shipping_address": {
+            "billing_address": {
                 "first_name": "Hieronim",
                 "last_name": "Bosch",
                 "street": "Surrealism St.",
@@ -102,7 +102,7 @@ EOT;
                 "city": "’s-Hertogenbosch",
                 "postcode": "99-999"
             },
-            "different_billing_address": false,
+            "different_shipping_address": false,
             "customer": {
                 "email": "john@doe.com"
             }
@@ -123,13 +123,13 @@ EOT;
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/countries.yml');
-        $customers = $this->loadFixturesFromFile('resources/customers.yml');
+        $this->loadFixturesFromFile('resources/customers.yml');
         $checkoutData = $this->loadFixturesFromFile('resources/checkout.yml');
 
         $data =
 <<<EOT
         {
-            "shipping_address": {
+            "billing_address": {
                 "first_name": "Hieronim",
                 "last_name": "Bosch",
                 "street": "Surrealism St.",
@@ -137,7 +137,7 @@ EOT;
                 "city": "’s-Hertogenbosch",
                 "postcode": "99-999"
             },
-            "different_billing_address": true,
+            "different_shipping_address": true,
             "customer": {
                 "email": "john@doe.com"
             }
@@ -163,7 +163,7 @@ EOT;
         $data =
 <<<EOT
         {
-            "shipping_address": {
+            "billing_address": {
                 "first_name": "Hieronim",
                 "last_name": "Bosch",
                 "street": "Surrealism St.",
@@ -171,7 +171,7 @@ EOT;
                 "city": "’s-Hertogenbosch",
                 "postcode": "99-999"
             },
-            "billing_address": {
+            "shipping_address": {
                 "first_name": "Vincent",
                 "last_name": "van Gogh",
                 "street": "Post-Impressionism St.",
@@ -179,7 +179,7 @@ EOT;
                 "city": "Groot Zundert",
                 "postcode": "88-888"
             },
-            "different_billing_address": true,
+            "different_shipping_address": true,
             "customer": {
                 "email": "john@doe.com"
             }
@@ -210,7 +210,7 @@ EOT;
         $data =
 <<<EOT
         {
-            "shipping_address": {
+            "billing_address": {
                 "first_name": "Vincent",
                 "last_name": "van Gogh",
                 "street": "Post-Impressionism St.",
@@ -218,7 +218,7 @@ EOT;
                 "city": "Groot Zundert",
                 "postcode": "88-888"
             },
-            "different_billing_address": false,
+            "different_shipping_address": false,
             "customer": {
                 "email": "john@doe.com"
             }
@@ -233,7 +233,7 @@ EOT;
         $newData =
 <<<EOT
         {
-            "shipping_address": {
+            "billing_address": {
                 "first_name": "Hieronim",
                 "last_name": "Bosch",
                 "street": "Surrealism St.",
@@ -241,7 +241,7 @@ EOT;
                 "city": "’s-Hertogenbosch",
                 "postcode": "99-999"
             },
-            "different_billing_address": false,
+            "different_shipping_address": false,
             "customer": {
                 "email": "john@doe.com"
             }
@@ -267,7 +267,7 @@ EOT;
         $addressData =
 <<<EOT
         {
-            "shipping_address": {
+            "billing_address": {
                 "first_name": "Vincent",
                 "last_name": "van Gogh",
                 "street": "Post-Impressionism St.",
@@ -275,7 +275,7 @@ EOT;
                 "city": "Groot Zundert",
                 "postcode": "88-888"
             },
-            "different_billing_address": false,
+            "different_shipping_address": false,
             "customer": {
                 "email": "john@doe.com"
             }
@@ -292,7 +292,7 @@ EOT;
         $newAddressData =
 <<<EOT
         {
-            "shipping_address": {
+            "billing_address": {
                 "first_name": "Hieronim",
                 "last_name": "Bosch",
                 "street": "Surrealism St.",
@@ -300,7 +300,7 @@ EOT;
                 "city": "’s-Hertogenbosch",
                 "postcode": "99-999"
             },
-            "different_billing_address": false,
+            "different_shipping_address": false,
             "customer": {
                 "email": "john@doe.com"
             }
@@ -326,7 +326,7 @@ EOT;
         $addressData =
 <<<EOT
         {
-            "shipping_address": {
+            "billing_address": {
                 "first_name": "Vincent",
                 "last_name": "van Gogh",
                 "street": "Post-Impressionism St.",
@@ -334,7 +334,7 @@ EOT;
                 "city": "Groot Zundert",
                 "postcode": "88-888"
             },
-            "different_billing_address": false,
+            "different_shipping_address": false,
             "customer": {
                 "email": "john@doe.com"
             }
@@ -352,7 +352,7 @@ EOT;
         $newAddressData =
 <<<EOT
         {
-            "shipping_address": {
+            "billing_address": {
                 "first_name": "Hieronim",
                 "last_name": "Bosch",
                 "street": "Surrealism St.",
@@ -360,14 +360,14 @@ EOT;
                 "city": "’s-Hertogenbosch",
                 "postcode": "99-999"
             },
-            "different_billing_address": false,
+            "different_shipping_address": false,
             "customer": {
                 "email": "john@doe.com"
             }
         }
 EOT;
 
-        $url = sprintf('/api/v1/checkouts/addressing/%d', $checkoutData['order1']->getId());
+        $url = sprintf('/api/v1/checkouts/addressing/%d', $orderId);
         $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $newAddressData);
 
         $response = $this->client->getResponse();

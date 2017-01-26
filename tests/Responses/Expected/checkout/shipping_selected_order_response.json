@@ -25,8 +25,8 @@
             }
         }
     },
-    "shipping_address": @...@,
     "billing_address": @...@,
+    "shipping_address": @...@,
     "payments": @array@,
     "shipments": [
         {
