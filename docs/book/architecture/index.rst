@@ -11,6 +11,7 @@ that you need to notice.
     architecture
     resource_layer
     state_machine
+    translations
     emails
     contact
     fixtures
