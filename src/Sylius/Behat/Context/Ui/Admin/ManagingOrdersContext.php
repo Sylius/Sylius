@@ -617,7 +617,7 @@ final class ManagingOrdersContext implements Context
             'Order payment state should be %2$s, but it is %s.'
         );
     }
-    
+
     /**
      * @Then it's payment state should be refunded
      */
@@ -903,7 +903,7 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then I should see :provinceName ad province in the billing address
+     * @Then I should see :provinceName as province in the billing address
      */
     public function iShouldSeeAdProvinceInTheBillingAddress($provinceName)
     {

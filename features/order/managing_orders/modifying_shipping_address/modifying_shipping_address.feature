@@ -12,7 +12,7 @@ Feature: Modifying a customer shipping address after an order has been placed
         And there is a customer "mike@ross.com" that placed an order "#00000001"
         And the customer bought a single "Suit"
         And the customer "Mike Ross" addressed it to "350 5th Ave", "10118" "New York" in the "United States"
-        And the customer set the billing address as "Mike Ross", "350 5th Ave", "10118", "New York", "United States"
+        And the customer set the shipping address as "Mike Ross", "350 5th Ave", "10118", "New York", "United States"
         And the customer chose "Free" shipping method with "Cash on Delivery" payment
         And I am logged in as an administrator
 

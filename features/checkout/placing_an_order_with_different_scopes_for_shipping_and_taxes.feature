@@ -23,7 +23,7 @@ Feature: Placing an order with different scopes for shipping and taxes
         And this product belongs to "Clothes" tax category
         And I have product "Jane's Vest" in the cart
         Given I am at the checkout addressing step
-        When I specify the shipping address for "Patrick Jane" from "Sixth Street", "78701", "Austin", "United States", "Texas"
+        When I specify the billing address for "Patrick Jane" from "Sixth Street", "78701", "Austin", "United States", "Texas"
         And I complete the addressing step
         And I proceed with "Free" shipping method and "Offline" payment
         Then I should be on the checkout summary step
@@ -39,7 +39,7 @@ Feature: Placing an order with different scopes for shipping and taxes
         And this product belongs to "Clothes" tax category
         And I have product "Jane's Vest" in the cart
         Given I am at the checkout addressing step
-        When I specify the shipping address for "Patrick Jane" from "Sixth Street", "78701", "Austin", "United States", "Texas"
+        When I specify the billing address for "Patrick Jane" from "Sixth Street", "78701", "Austin", "United States", "Texas"
         And I complete the addressing step
         And I proceed with "Free" shipping method and "Offline" payment
         Then I should be on the checkout summary step
@@ -53,7 +53,7 @@ Feature: Placing an order with different scopes for shipping and taxes
         And the store ships everything for free within the "US" zone
         And I have product "Jane's Vest" in the cart
         Given I am at the checkout addressing step
-        When I specify the shipping address for "Patrick Jane" from "Sixth Street", "78701", "Austin", "United States", "Texas"
+        When I specify the billing address for "Patrick Jane" from "Sixth Street", "78701", "Austin", "United States", "Texas"
         And I complete the addressing step
         And I proceed with "Free" shipping method and "Offline" payment
         Then I should be on the checkout summary step

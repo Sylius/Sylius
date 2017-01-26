@@ -14,7 +14,7 @@ Feature: Returning to the addressing step and changing address data
         Given I have product "Apollo 11 T-Shirt" in the cart
         And I am at the checkout addressing step
         When I specify the email as "jon.snow@example.com"
-        And I specify the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step
         And I decide to change my address
         And I specify the email as "ned.stark@example.com"

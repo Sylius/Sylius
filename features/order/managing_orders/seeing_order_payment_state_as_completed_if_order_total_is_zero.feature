@@ -12,7 +12,7 @@ Feature: Seeing payment state as paid after checkout steps if order total is zer
         And the promotion gives "$10.00" discount to every order with quantity at least 1
         And there is a customer "lucy@teamlucifer.com" that placed an order "#00000666"
         And the customer bought a single "Angel T-Shirt"
-        And the customer "Lucifer Morningstar" addressed it to "Seaside Fwy", "90802" "Los Angeles" in the "United States" with identical billing address
+        And the customer "Lucifer Morningstar" addressed it to "Seaside Fwy", "90802" "Los Angeles" in the "United States" with identical shipping address
         And the customer chose "Free" shipping method
         And I am logged in as an administrator
 

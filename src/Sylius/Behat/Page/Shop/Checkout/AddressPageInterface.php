@@ -22,7 +22,7 @@ interface AddressPageInterface extends SymfonyPageInterface
     /**
      * @throws \RuntimeException
      */
-    public function chooseDifferentBillingAddress();
+    public function chooseDifferentShippingAddress();
 
     /**
      * @return bool
@@ -84,7 +84,7 @@ interface AddressPageInterface extends SymfonyPageInterface
     /**
      * @return string
      */
-    public function getShippingAddressCountry();
+    public function getBillingAddressCountry();
 
     public function nextStep();
 

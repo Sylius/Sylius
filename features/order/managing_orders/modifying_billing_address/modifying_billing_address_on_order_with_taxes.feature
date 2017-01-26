@@ -13,7 +13,7 @@ Feature: Modifying a customer's billing address on an order with taxes
         And it belongs to "Suits" tax category
         And there is a customer "mike@ross.com" that placed an order "#00000001"
         And the customer bought a single "Suit"
-        And the customer "Mike Ross" addressed it to "350 5th Ave", "10118" "New York" in the "United States" with identical billing address
+        And the customer "Mike Ross" addressed it to "350 5th Ave", "10118" "New York" in the "United States" with identical shipping address
         And the customer chose "Free" shipping method with "Offline" payment
         And I am logged in as an administrator
 

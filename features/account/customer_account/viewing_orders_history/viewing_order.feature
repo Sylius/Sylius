@@ -13,13 +13,13 @@ Feature: Viewing details of an order
         And I placed an order "#00000666"
         And I bought a single "Angel T-Shirt"
         And I addressed it to "Lucifer Morningstar", "Seaside Fwy", "90802" "Los Angeles" in the "United States"
-        And for the billing address of "Mazikeen Lilim" in the "Pacific Coast Hwy", "90806" "Los Angeles", "United States"
+        And for the shipping address of "Mazikeen Lilim" in the "Pacific Coast Hwy", "90806" "Los Angeles", "United States"
         And I chose "Free" shipping method with "Cash on Delivery" payment
 
     @ui
     Scenario: Viewing basic information about an order
         When I view the summary of the order "#00000666"
         And it should has number "#00000666"
-        And I should see "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States" as shipping address
-        And I should see "Mazikeen Lilim", "Pacific Coast Hwy", "90806", "Los Angeles", "United States" as billing address
+        And I should see "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States" as billing address
+        And I should see "Mazikeen Lilim", "Pacific Coast Hwy", "90806", "Los Angeles", "United States" as shipping address
         And I should see "$39.00" as order's total

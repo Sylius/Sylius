@@ -13,7 +13,7 @@ Feature: Returning from shipping step to addressing step
     @ui
     Scenario: Going back to addressing step with button
         Given I have product "Apollo 11 T-Shirt" in the cart
-        And I specified the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I decide to change my address
         Then I should be redirected to the addressing step
         And I should be able to go to the shipping step again
@@ -21,7 +21,7 @@ Feature: Returning from shipping step to addressing step
     @ui
     Scenario: Going back to the addressing step with steps panel
         Given I have product "Apollo 11 T-Shirt" in the cart
-        And I specified the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I go to the addressing step
         Then I should be redirected to the addressing step
         And I should be able to go to the shipping step again

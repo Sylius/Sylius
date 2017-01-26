@@ -13,7 +13,7 @@ Feature: Apply correct taxes based on customer data
         And the store has "VAT" tax rate of 10% for "Clothes" for the rest of the world
         And the store has a product "PHP T-Shirt" priced at "$100.00"
         And it belongs to "Clothes" tax category
-        And there is user "john@example.com" identified by "password123", with "Germany" as shipping country
+        And there is user "john@example.com" identified by "password123", with "Germany" as billing country
         And I am logged in as "john@example.com"
 
     @todo
@@ -23,18 +23,18 @@ Feature: Apply correct taxes based on customer data
         And my cart taxes should be "$10.00"
 
     @todo
-    Scenario: Proper taxes after specifying shipping address
+    Scenario: Proper taxes after specifying billing address
         When I add product "PHP T-Shirt" to the cart
         And I log in as "john@example.com" with "password123" password
-        And I proceed without selecting shipping address
+        And I proceed without selecting billing address
         Then my cart total should be "$110.00"
         And my cart taxes should be "$10.00"
 
     @todo
-    Scenario: Proper taxes for logged in Customer with already specified shipping address
+    Scenario: Proper taxes for logged in Customer with already specified billing address
         Given I am a logged in customer
-        And my default shipping address is "Germany"
+        And my default billing address is "Germany"
         When I add product "PHP T-Shirt" to the cart
-        And I proceed without selecting shipping address
+        And I proceed without selecting billing address
         Then my cart total should be "$110.00"
         And my cart taxes should be "$10.00"

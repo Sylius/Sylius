@@ -11,12 +11,12 @@ Feature: Modifying a customer billing address after an order has been placed
         And the store has a product "Suit" priced at "$400.00"
         And there is a customer "mike@ross.com" that placed an order "#00000001"
         And the customer bought a single "Suit"
-        And the customer "Mike Ross" addressed it to "350 5th Ave", "10118" "New York" in the "United States" with identical billing address
+        And the customer "Mike Ross" addressed it to "350 5th Ave", "10118" "New York" in the "United States" with identical shipping address
         And the customer chose "Free" shipping method with "Cash on Delivery" payment
         And I am logged in as an administrator
 
     @ui
-    Scenario: Modifying a customer's billing address
+    Scenario: Modifying a customer's shipping address
         When I view the summary of the order "#00000001"
         And I want to modify a customer's billing address of this order
         And I specify their new billing address as "Los Angeles", "Seaside Fwy", "90802", "United States" for "Lucifer Morningstar"
