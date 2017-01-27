@@ -63,7 +63,7 @@ sylius:
         api: 'Api'
         apply_coupon: 'Aplicar cupón'
         archival: 'Archivo'
-        archive: 'Archivo'
+        archive: 'Archivar'
         are_your_sure_you_want_to_perform_this_action: '¿Está seguro que quiere realizar esta acción?'
         association: 'Asociación'
         association_types: 'Tipos de asociación'
