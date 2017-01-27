@@ -9,3 +9,5 @@ Sylius\Component\Core\Model\ProductTaxon:
         position:
             expose: true
             type: integer
+        taxon:
+            expose: true

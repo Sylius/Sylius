@@ -89,11 +89,11 @@ Definition
 
 
 Example
-.......
+^^^^^^^
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/v1/products/ \
+    $ curl http://sylius.dev/api/v1/products/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
@@ -130,7 +130,7 @@ Example Response
                  {
                      "name": "Mug \"earum\"",
                      "id": 2,
-                     "code": "d6e6efaf-f3ef-34cf-86b3-646586aa62ef",
+                     "code": "d6e6efaf",
                      "options": [
                          {
                              "code": "mug_type"
@@ -180,11 +180,11 @@ Definition
 +---------------+----------------+-------------------------------------------------------------------+
 
 Example
-.......
+^^^^^^^
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/v1/products/2 \
+    $ curl http://sylius.dev/api/v1/products/2 \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
@@ -200,7 +200,7 @@ Example Response
     {
         "id": 2,
         "name": "Mug \"earum\"",
-        "code": "d6e6efaf-f3ef-34cf-86b3-646586aa62ef",
+        "code": "d6e6efaf",
         "available_on": "2017-01-18T10:32:17+0100",
         "attributes": [
             {
@@ -299,11 +299,11 @@ Definition
 +------------------------------------+----------------+--------------------------------------+
 
 Example
-.......
+^^^^^^^
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/v1/products/ \
+    $ curl http://sylius.dev/api/v1/products/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST \
@@ -358,11 +358,11 @@ Example Response
 If you try to create a resource without name, code or slug, you will receive a 400 error.
 
 Example
-.......
+^^^^^^^
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/v1/products/ \
+    $ curl http://sylius.dev/api/v1/products/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X POST
@@ -428,44 +428,45 @@ Example Response
         }
     }
 
-You can also create a product with additional (not required) fields, like:
+You can also create a product with additional (not required) fields:
 
-+----------------+-----------------------------------------------------------------------------+
-| Field          | Description                                                                 |
-+================+=============================================================================+
-| channels       | Collection of channels to which product was assigned                        |
-+----------------+-----------------------------------------------------------------------------+
-| translations   | Collection of translations (each contains slug and name in given language). |
-|                | Only the translation for default locale is required, the rest are optional  |
-+----------------+-----------------------------------------------------------------------------+
-| options        | Options assigned to product                                                 |
-+----------------+-----------------------------------------------------------------------------+
-| images         | Images assigned to product                                                  |
-+----------------+-----------------------------------------------------------------------------+
-| attributes     | Collection of attributes connected with product (for example material)      |
-+----------------+-----------------------------------------------------------------------------+
-| associations   | Collection of products associated with created product                      |
-|                | (for example accessories to this product)                                   |
-+----------------+-----------------------------------------------------------------------------+
-| product_taxons | Collection of relations between product and taxons                          |
-+----------------+-----------------------------------------------------------------------------+
-| main_taxon     | The main taxon to whose product is assigned                                 |
-+----------------+-----------------------------------------------------------------------------+
++-------------------------------------+----------------+-----------------------------------------------------------------------------------+
+| Parameter                           | Parameter type | Description                                                                       |
++=====================================+================+===================================================================================+
+| channels                            | request        | Collection of channels codes, which we want to associate with created product     |
++-------------------------------------+----------------+-----------------------------------------------------------------------------------+
+| translations['locale_code']['name'] | request        | Collection of translations (each contains slug and name in given locale).         |
+| translations['locale_code']['slug'] |                | Only the translation for default locale is required, the rest are optional        |
++-------------------------------------+----------------+-----------------------------------------------------------------------------------+
+| options                             | request        | Collection of options codes, which we want to associate with created product      |
++-------------------------------------+----------------+-----------------------------------------------------------------------------------+
+| images                              | request        | Collection of images codes, which we want to associate with created product       |
++-------------------------------------+----------------+-----------------------------------------------------------------------------------+
+| attributes                          | request        | Array of attributes (each object has information about selected attribute's code, |
+|                                     |                | its value and locale in which it was defined)                                     |
++-------------------------------------+----------------+-----------------------------------------------------------------------------------+
+| associations                        | request        | Object with code of productAssociationType and string in which the codes of       |
+|                                     |                | associated products was written down.                                             |
++-------------------------------------+----------------+-----------------------------------------------------------------------------------+
+| product_taxons                      | request        | String in which the codes of taxons was written down (separated by comma)         |
++-------------------------------------+----------------+-----------------------------------------------------------------------------------+
+| main_taxon                          | request        | The main taxon's code to whose product is assigned                                |
++-------------------------------------+----------------+-----------------------------------------------------------------------------------+
 
 Example
-.......
+^^^^^^^
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/v1/products/
-        -H "Authorization: Bearer MWExMWM0NzE1NmUyZDgyZDJiMjEzMmFlMjQ4MzgwMmE4ZTkxYzM0YjdlN2U2YzliNDIyMTk1ZDhlNDYxYWE4Ng"
-        -H “Accept: application/json”
-        -X POST
+    $ curl http://sylius.dev/api/v1/products/ \
+        -H "Authorization: Bearer SampleToken" \
+        -H "Accept: application/json" \
+        -X POST \
         --data '
             {
                 "code": "MUG_TH",
                 "main_taxon": "mugs",
-                "product_taxons": "category,mugs",
+                "product_taxons": "mugs",
                 "channels": [
                     "US_WEB"
                 ],
@@ -480,14 +481,14 @@ Example
                     "mug_type"
                 ],
                  "associations": {
-                     "accessories": "f1fd2fab-c024-3192-9505-dfc8f2aef872,f1fd2fab-c024-3192-9505-dfc8f2aef872"
+                     "accessories": "f1fd2fab,f1fd2fab-c024"
                  },
                 "translations": {
                     "en__US": {
                         "name": "Theme Mug",
                         "slug": "theme-mug"
                     },
-                    "pl": {
+                    "pl__PL": {
                         "name": "Kubek z motywem",
                         "slug": "kubek-z-motywem"
                     }
@@ -506,16 +507,16 @@ Example Response
 
     {
         "name": "Theme Mug",
-        "id": 129,
+        "id": 62,
         "code": "MUG_TH",
-        "available_on": "2017-01-25T14:03:37+0100",
+        "available_on": "2017-02-01T14:39:29+0100",
         "attributes": [
             {
                 "code": "mug_material",
                 "name": "Mug material",
                 "value": "concrete",
                 "type": "text",
-                "id": 275
+                "id": 136
             }
         ],
         "variants": [],
@@ -526,16 +527,16 @@ Example Response
         ],
         "associations": [
             {
-                "id": 26,
+                "id": 11,
                 "type": {
-                    "id": 3,
+                    "id": 2,
                     "code": "accessories",
-                    "created_at": "2017-01-25T11:51:39+0100",
-                    "updated_at": "2017-01-25T11:51:39+0100",
+                    "created_at": "2017-02-01T14:38:13+0100",
+                    "updated_at": "2017-02-01T14:38:13+0100",
                     "translations": [
                         {
                             "locale": "en_US",
-                            "id": 3,
+                            "id": 2,
                             "name": "Accessories"
                         }
                     ],
@@ -544,32 +545,32 @@ Example Response
                 },
                 "associated_products": [
                     {
-                        "name": "Mug \"molestias\"",
-                        "id": 61,
-                        "code": "f1fd2fab-c024-3192-9505-dfc8f2aef872",
-                        "available_on": "2017-01-20T14:52:03+0100",
+                        "name": "Mug \"perspiciatis\"",
+                        "id": 1,
+                        "code": "c67af0cf-2f5e-30a1-ba80-6be7a253b500",
+                        "available_on": "2017-02-01T14:10:19+0100",
                         "attributes": [
                             {
                                 "code": "mug_material",
                                 "name": "Mug material",
                                 "value": "Banana skin",
                                 "type": "text",
-                                "id": 136
+                                "id": 1
                             }
                         ],
                         "variants": [
                             {
-                                "id": 331,
+                                "id": 1,
                                 "on_hold": 0,
                                 "tracked": false
                             },
                             {
-                                "id": 332,
+                                "id": 2,
                                 "on_hold": 0,
                                 "tracked": false
                             },
                             {
-                                "id": 333,
+                                "id": 3,
                                 "on_hold": 0,
                                 "tracked": false
                             }
@@ -583,22 +584,28 @@ Example Response
                         "translations": {
                             "en_US": {
                                 "locale": "en_US",
-                                "id": 61,
-                                "name": "Mug \"molestias\"",
-                                "slug": "mug-molestias",
-                                "description": "Aut non quos esse ut non. Ducimus cumque ut libero molestiae velit.",
-                                "short_description": "Odio aliquam voluptatem sed consequatur."
+                                "id": 1,
+                                "name": "Mug \"perspiciatis\"",
+                                "slug": "mug-perspiciatis",
+                                "description": " Voluptatum et rerum necessitatibus modi non vel.\n\nQuae modi cumque.",
+                                "short_description": "Vitae minima ut."
                             }
                         },
                         "product_taxons": [
                             {
-                                "id": 79,
+                                "id": 1,
+                                "taxon": {
+                                    "name": "Mugs",
+                                    "id": 2,
+                                    "code": "mugs",
+                                    "children": []
+                                },
                                 "position": 0
                             }
                         ],
                         "main_taxon": {
                             "name": "Mugs",
-                            "id": 9,
+                            "id": 2,
                             "code": "mugs",
                             "children": []
                         },
@@ -606,54 +613,141 @@ Example Response
                         "average_rating": 0,
                         "images": [
                             {
-                                "id": 121,
+                                "id": 1,
                                 "code": "main",
-                                "path": "88/63/409aa25d19ffeb598978850bbadf.jpeg"
+                                "path": "2d/39/f32ac66cd2e5e69ef8a87f9490b2.jpeg"
                             },
                             {
-                                "id": 122,
+                                "id": 2,
                                 "code": "thumbnail",
-                                "path": "55/ef/9e30653e7cfae268ebed7ba3b099.jpeg"
+                                "path": "b8/d0/c80dabb28dfc53795be8fa88444c.jpeg"
                             }
                         ],
                         "_links": {
                             "self": {
-                                "href": "/api/v1/products/61"
+                                "href": "/api/v1/products/1"
+                            }
+                        }
+                    },
+                    {
+                        "name": "Mug \"et\"",
+                        "id": 2,
+                        "code": "e5e45464-c35f-3c05-b3ea-4743ccafb28e",
+                        "available_on": "2017-02-01T14:10:19+0100",
+                        "attributes": [
+                            {
+                                "code": "mug_material",
+                                "name": "Mug material",
+                                "value": "Invisible porcelain",
+                                "type": "text",
+                                "id": 2
+                            }
+                        ],
+                        "variants": [
+                            {
+                                "id": 4,
+                                "on_hold": 0,
+                                "tracked": false
+                            },
+                            {
+                                "id": 5,
+                                "on_hold": 0,
+                                "tracked": false
+                            },
+                            {
+                                "id": 6,
+                                "on_hold": 0,
+                                "tracked": false
+                            }
+                        ],
+                        "options": [
+                            {
+                                "code": "mug_type"
+                            }
+                        ],
+                        "associations": [],
+                        "translations": {
+                            "en_US": {
+                                "locale": "en_US",
+                                "id": 2,
+                                "name": "Mug \"et\"",
+                                "slug": "mug-et",
+                                "description": "Omnis perspiciatis quia aperiam magni occaecati",
+                                "short_description": "Laboriosam blanditiis."
+                            }
+                        },
+                        "product_taxons": [
+                            {
+                                "id": 2,
+                                "taxon": {
+                                    "name": "Mugs",
+                                    "id": 2,
+                                    "code": "mugs",
+                                    "children": []
+                                },
+                                "position": 1
+                            }
+                        ],
+                        "main_taxon": {
+                            "name": "Mugs",
+                            "id": 2,
+                            "code": "mugs",
+                            "children": []
+                        },
+                        "reviews": [],
+                        "average_rating": 0,
+                        "images": [
+                            {
+                                "id": 3,
+                                "code": "main",
+                                "path": "bc/93/e2986698753c469277570a416ad2.jpeg"
+                            },
+                            {
+                                "id": 4,
+                                "code": "thumbnail",
+                                "path": "86/78/092031fdb34daeac17f7da621424.jpeg"
+                            }
+                        ],
+                        "_links": {
+                            "self": {
+                                "href": "/api/v1/products/2"
                             }
                         }
                     }
                 ],
-                "created_at": "2017-01-25T14:03:38+0100",
-                "updated_at": "2017-01-25T14:03:38+0100"
+                "created_at": "2017-02-01T14:39:29+0100",
+                "updated_at": "2017-02-01T14:39:29+0100"
             }
         ],
         "translations": {
             "en_US": {
                 "locale": "en_US",
-                "id": 130,
+                "id": 62,
                 "name": "Theme Mug",
                 "slug": "theme-mug"
             },
-            "pl": {
-                "locale": "pl",
-                "id": 131,
+            "pl_PL": {
+                "locale": "pl_PL",
+                "id": 63,
                 "name": "Kubek z motywem",
                 "slug": "kubek-z-motywem"
             }
         },
         "product_taxons": [
             {
-                "id": 155,
-                "position": 0
-            },
-            {
-                "id": 156,
+                "id": 76,
+                "taxon": {
+                    "name": "Mugs",
+                    "id": 2,
+                    "code": "mugs",
+                    "children": []
+                },
                 "position": 15
             }
         ],
         "main_taxon": {
             "name": "Mugs",
-            "id": 9,
+            "id": 2,
             "code": "mugs",
             "children": []
         },
@@ -662,7 +756,7 @@ Example Response
         "images": [],
         "_links": {
             "self": {
-                "href": "/api/v1/products/129"
+                "href": "/api/v1/products/62"
             }
         }
     }
@@ -697,11 +791,11 @@ Definition
 +------------------------------------+----------------+--------------------------------------+
 
 Example
-.......
+^^^^^^^
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/v1/product/3 \
+    $ curl http://sylius.dev/api/v1/products/3 \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PUT \
@@ -726,11 +820,11 @@ Example Response
 If you try to perform full product update without all required fields specified, you will receive a 400 error.
 
 Example
-.......
+^^^^^^^
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/v1/products/3 \
+    $ curl http://sylius.dev/api/v1/products/3 \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X PUT
@@ -810,11 +904,11 @@ Definition
 +---------------+----------------+--------------------------------------------------------+
 
 Example
-.......
+^^^^^^^
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/v1/product/3 \
+    $ curl http://sylius.dev/api/v1/products/3 \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PATCH \
@@ -854,11 +948,11 @@ Definition
 +---------------+----------------+-------------------------------------------+
 
 Example
-.......
+^^^^^^^
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/v1/products/3 \
+    $ curl http://sylius.dev/api/v1/products/3 \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X DELETE

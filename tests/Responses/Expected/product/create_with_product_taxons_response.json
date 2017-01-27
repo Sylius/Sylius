@@ -18,10 +18,22 @@
     "product_taxons": [
         {
             "id": @integer@,
+            "taxon": {
+                "id": @integer@,
+                "name": "yellow mugs",
+                "code": "YELLOW_MUGS",
+                "children": []
+            },
             "position": 0
         },
         {
             "id": @integer@,
+            "taxon": {
+                "id": @integer@,
+                "name": "mugs",
+                "code": "MUGS",
+                "children": []
+            },
             "position": 0
         }
     ],

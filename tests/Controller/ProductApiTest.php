@@ -326,7 +326,6 @@ EOT;
                 }
             },
             "product_taxons": "YELLOW_MUGS,MUGS"
-            
         }
 EOT;
 
@@ -353,7 +352,7 @@ EOT;
                 "MOB"
             ],
             "translations": {
-                "en__US": {
+                "en_US": {
                     "name": "Theme Mug",
                     "slug": "theme-mug"
                 }
@@ -393,7 +392,7 @@ EOT;
                 }
             ],
             "translations": {
-                "en__US": {
+                "en_US": {
                     "name": "Theme Mug",
                     "slug": "theme-mug"
                 }
@@ -428,7 +427,7 @@ EOT;
                 }
             ],
             "translations": {
-                "en__US": {
+                "en_US": {
                     "name": "Theme Mug",
                     "slug": "theme-mug"
                 }
@@ -471,7 +470,7 @@ EOT;
                 "accessories": "MUG_LOTR,MUG_BB"
             },
             "translations": {
-                "en__US": {
+                "en_US": {
                     "name": "Theme Mug",
                     "slug": "theme-mug"
                 }
