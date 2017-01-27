@@ -9,12 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
+namespace Sylius\Bundle\ApiBundle\Fixture\Factory;
 
 use FOS\OAuthServerBundle\Model\ClientManagerInterface;
 use Sylius\Bundle\ApiBundle\Model\AccessTokenInterface;
 use Sylius\Bundle\ApiBundle\Model\ClientInterface;
 use Sylius\Bundle\ApiBundle\Model\UserInterface;
+use Sylius\Bundle\CoreBundle\Fixture\Factory\AbstractExampleFactory;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -25,7 +26,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class ApiAccessTokenExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
+class ApiAccessTokenExampleFactory extends AbstractExampleFactory
 {
     /**
      * @var FactoryInterface
@@ -110,6 +111,8 @@ class ApiAccessTokenExampleFactory extends AbstractExampleFactory implements Exa
             ->setDefault('client', LazyOption::randomOne($this->clientRepository))
             ->setAllowedTypes('client', ['string', ClientInterface::class, 'null'])
             ->setNormalizer('client', LazyOption::findOneBy($this->clientRepository, 'randomId'))
+            ->setDefault('expires_at', null)
+            ->setAllowedTypes('expires_at', ['null', \DateTime::class])
         ;
     }
 }

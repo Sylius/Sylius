@@ -210,19 +210,3 @@ sylius_fixtures:
                 address:
                     options:
                         random: 10
-
-                api_client:
-                    options:
-                        custom:
-                            default_api_client:
-                                random_id: "demo_client"
-                                secret: "secret_demo_client"
-                                allowed_grant_types: ['password']
-
-                access_token:
-                    options:
-                        custom:
-                            default_access_token:
-                                client: "demo_client"
-                                user: "api@example.com"
-                                token: "SampleTokenMWExMWM0NzE1NmUyZDgyZDJiMjEzMmFlMjQ4MzgwMmE4ZTkxYzM0YjdlN2U2YzliNDIyMTk1ZDhlNDYxYWE4Ng"

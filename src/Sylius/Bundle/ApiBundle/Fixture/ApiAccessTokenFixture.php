@@ -9,21 +9,22 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Fixture;
+namespace Sylius\Bundle\ApiBundle\Fixture;
 
+use Sylius\Bundle\CoreBundle\Fixture\AbstractResourceFixture;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class ApiClientFixture extends AbstractResourceFixture
+class ApiAccessTokenFixture extends AbstractResourceFixture
 {
     /**
      * {@inheritdoc}
      */
     public function getName()
     {
-        return 'api_client';
+        return 'access_token';
     }
 
     /**
@@ -33,9 +34,10 @@ class ApiClientFixture extends AbstractResourceFixture
     {
         $resourceNode
             ->children()
-                ->scalarNode('random_id')->cannotBeEmpty()->end()
-                ->scalarNode('secret')->cannotBeEmpty()->end()
-                ->variableNode('allowed_grant_types')->cannotBeEmpty()->defaultValue([])->end()
+                ->scalarNode('client')->cannotBeEmpty()->end()
+                ->scalarNode('token')->cannotBeEmpty()->end()
+                ->scalarNode('user')->cannotBeEmpty()->end()
+                ->scalarNode('expires_at')->end()
         ;
     }
 }

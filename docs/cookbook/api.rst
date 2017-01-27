@@ -27,8 +27,12 @@ Run your application on a built-in server:
 
 .. tip::
 
-    If you have run Sylius fixtures(``$ php bin/console sylius:fixtures:load``) you will have a default user for API already configured.
-    It is the ``api@example.com`` user with password ``sylius-api``.
+    Some test fixtures are provided with a default Sylius fixture suite(which can be obtain by executing: ``$ php bin/console sylius:fixtures:load``). By default Sylius will provide following data:
+     * Sample user: api@example.com
+     * Sample password: sylius-api
+     * Sample random client: demo_client
+     * Sample client secret: demo_client
+     * Sample access token: SampleToken
 
 To obtain authorization token for the default user run:
 

@@ -9,18 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Tests\Fixture;
+namespace Sylius\Bundle\ApiBundle\Tests\Fixture;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
-use Sylius\Bundle\CoreBundle\Fixture\ApiAccessTokenFixture;
+use Sylius\Bundle\ApiBundle\Fixture\ApiAccessTokenFixture;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
-use Sylius\Bundle\CoreBundle\Fixture\ApiClientFixture;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class AccessTokenFixtureTest extends \PHPUnit_Framework_TestCase
+class ApiAccessTokenFixtureTest extends \PHPUnit_Framework_TestCase
 {
     use ConfigurationTestCaseTrait;
 
@@ -38,7 +37,7 @@ class AccessTokenFixtureTest extends \PHPUnit_Framework_TestCase
     public function access_token_can_be_created_with_custom_random_id()
     {
         $this->assertConfigurationIsValid([['custom' => [[
-                'client' => 'some_client',
+            'client' => 'some_client',
         ]]]], 'custom.*.client');
     }
 
@@ -48,7 +47,7 @@ class AccessTokenFixtureTest extends \PHPUnit_Framework_TestCase
     public function access_token_can_be_created_with_custom_secret()
     {
         $this->assertConfigurationIsValid([['custom' => [[
-                'user' => 'api@example.com'
+            'user' => 'api@example.com'
         ]]]], 'custom.*.user');
     }
 

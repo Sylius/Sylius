@@ -181,16 +181,16 @@ Default values in dev environment
 In a developer environment there are default client id, client secret and default access token provided to allow you to test our API just out-of-the-box.
 In order to access them, please use the following values:
 
-+---------------+---------------------------------------------------------------------------------------------------+
-| Parameter     | Value                                                                                             |
-+===============+===================================================================================================+
-| client_id     | demo_client                                                                                       |
-+---------------+---------------------------------------------------------------------------------------------------+
-| client_secret | secret_demo_client                                                                                |
-+---------------+---------------------------------------------------------------------------------------------------+
-| grant_type    | password                                                                                          |
-+---------------+---------------------------------------------------------------------------------------------------+
-| access_token  | SampleTokenMWExMWM0NzE1NmUyZDgyZDJiMjEzMmFlMjQ4MzgwMmE4ZTkxYzM0YjdlN2U2YzliNDIyMTk1ZDhlNDYxYWE4Ng |
-+---------------+---------------------------------------------------------------------------------------------------+
++---------------+--------------------+
+| Parameter     | Value              |
++===============+====================+
+| client_id     | demo_client        |
++---------------+--------------------+
+| client_secret | secret_demo_client |
++---------------+--------------------+
+| grant_type    | password           |
++---------------+--------------------+
+| access_token  | SampleToken        |
++---------------+--------------------+
 
 These values will be used later on to make it easier for you to check, how our API works.

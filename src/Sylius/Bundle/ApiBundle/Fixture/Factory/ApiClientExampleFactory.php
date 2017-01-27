@@ -9,17 +9,18 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
+namespace Sylius\Bundle\ApiBundle\Fixture\Factory;
 
 use FOS\OAuthServerBundle\Model\ClientManagerInterface;
 use Sylius\Bundle\ApiBundle\Model\ClientInterface;
+use Sylius\Bundle\CoreBundle\Fixture\Factory\AbstractExampleFactory;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class ApiClientExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
+class ApiClientExampleFactory extends AbstractExampleFactory
 {
     /**
      * @var ClientManagerInterface
@@ -59,12 +60,9 @@ class ApiClientExampleFactory extends AbstractExampleFactory implements ExampleF
         /** @var ClientInterface $client */
         $client = $this->clientManager->createClient();
 
-        if (isset($options['random_id'])) {
-            $client->setRandomId($options['random_id']);
-        }
-        if (isset($options['secret'])) {
-            $client->setSecret($options['secret']);
-        }
+        $client->setRandomId($options['random_id']);
+        $client->setSecret($options['secret']);
+
         $client->setAllowedGrantTypes($options['allowed_grant_types']);
 
         return $client;
