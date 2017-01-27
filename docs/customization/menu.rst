@@ -94,12 +94,12 @@ In the example below we are adding a one new item to **the menu in the My Accoun
 
     use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
 
-    final class AdminMenuListener
+    final class AccountMenuListener
     {
         /**
          * @param MenuBuilderEvent $event
          */
-        public function addAccountMenuItems(FrontendMenuBuilderEvent $event)
+        public function addAccountMenuItems(MenuBuilderEvent $event)
         {
             $menu = $event->getMenu();
 
@@ -133,7 +133,7 @@ Remember to import the ``app/config/services.yml`` into the ``app/config/config.
 
 **3.** Result:
 
-After these two steps your admin panel menu should look like that, the new item appears at the bottom:
+After these two steps your user account menu should look like that, the new item appears at the bottom:
 
 .. image:: ../_images/account_menu.png
     :align: center
