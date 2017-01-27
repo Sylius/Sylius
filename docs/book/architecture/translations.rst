@@ -8,7 +8,7 @@ Sylius uses the approach of personal translations - where each entity is bound w
 own table (instead of keeping all translations in one table for the whole system).
 This results in having the ``ProductTranslation`` class and ``sylius_product_translation`` table for the ``Product`` entity.
 
-The *engine* for handling translations in Sylius is the **ResourceBundle**
+The logic of handling translations in Sylius is in the **ResourceBundle**
 
 The fields of an entity that are meant to be translatable are saved on the translation entity, only their getters and setters
 are also on the original model.
@@ -81,8 +81,14 @@ The actual entity has access to its translation by using the ``TranslatableTrait
        }
    }
 
+Fallback Translations
+---------------------
+
 The ``getTranslation()`` method gets a translation for the current locale, while we are in the shop, but we can also manually
-impose the locale - ``getTranslation('pl_PL')`` will return a polish translation.
+impose the locale - ``getTranslation('pl_PL')`` will return a polish translation **if there is a translation in this locale**.
+
+But when the translation for the chosen locale is unavailable, instead the translation for the **fallback locale**
+(the one that was either set in ``config.yml`` or using the ``setFallbackLocale()`` method from the TranslatableTrait on the entity) is used.
 
 How to add a new translation programmatically?
 ----------------------------------------------
@@ -95,7 +101,7 @@ Let's see how to do it on the example of a ProductTranslation.
    // Find a product to add a translation to it
 
    /** @var ProductInterface $product */
-   $product = $this->container->get('sylius.repository.product')->findOneBy(['name' => 'Radiohead Mug']);
+   $product = $this->container->get('sylius.repository.product')->findOneBy(['code' => 'radiohead-mug-code']);
 
    // Create a new translation of product, give it a translated name and slug in the chosen locale
 
