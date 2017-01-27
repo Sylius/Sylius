@@ -94,7 +94,7 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
         $cart->setCurrencyCode('PLN')->shouldBeCalled();
         $cart->setLocaleCode('pl')->shouldBeCalled();
         $cart->setCustomer($customer)->shouldBeCalled();
-        $cart->setShippingAddress($defaultAddress)->shouldBeCalled();
+        $cart->setBillingAddress($defaultAddress)->shouldBeCalled();
 
         $this->getCart()->shouldReturn($cart);
     }
