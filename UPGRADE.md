@@ -192,6 +192,11 @@ Some change has been made to `app/config/security.yml`
                 name: APP_SHOP_REMEMBER_ME
                 lifetime: 31536000
                 remember_me_parameter: _remember_me
+    access_control:
+        - { path: "^/_partial.*", role: IS_AUTHENTICATED_ANONYMOUSLY, ips: [127.0.0.1, ::1] }
+        - { path: "^/_partial.*", role: ROLE_NO_ACCESS }
+        - { path: "^/admin/_partial.*", role: IS_AUTHENTICATED_ANONYMOUSLY, ips: [127.0.0.1, ::1] }
+        - { path: "^/admin/_partial.*", role: ROLE_NO_ACCESS }
   ```
 From now one you need to pass csrf token to your login-check request so you need to add `<input type="hidden" value={{ csrf_token('csrf_token_id') }} name="csrf_parameter">` into your login form.
 Example input `<input type="hidden" name="_csrf_admin_security_token" value="{{ csrf_token('admin_authenticate') }}">`
