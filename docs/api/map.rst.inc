@@ -4,8 +4,10 @@
 * :doc:`/api/orders`
 * :doc:`/api/checkouts`
 * :doc:`/api/products`
+* :doc:`/api/product_variants`
 * :doc:`/api/users`
 * :doc:`/api/customers`
 * :doc:`/api/shipments`
+* :doc:`/api/shipping_categories`
 * :doc:`/api/payments`
 * :doc:`/api/promotions`
