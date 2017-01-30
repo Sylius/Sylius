@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ResourceBundle\Event;
 
 use Symfony\Component\EventDispatcher\GenericEvent;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @author Jérémy Leherpeur <jeremy@leherpeur.net>
@@ -42,6 +43,11 @@ class ResourceControllerEvent extends GenericEvent
      * @var int
      */
     private $errorCode = 500;
+
+    /**
+     * @var Response
+     */
+    private $response;
 
     /**
      * @param string $message
@@ -129,5 +135,29 @@ class ResourceControllerEvent extends GenericEvent
     public function setErrorCode($errorCode)
     {
         $this->errorCode = $errorCode;
+    }
+
+    /**
+     * @param Response $response
+     */
+    public function setResponse(Response $response)
+    {
+        $this->response = $response;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasResponse()
+    {
+        return null !== $this->response;
+    }
+
+    /**
+     * @return Response
+     */
+    public function getResponse()
+    {
+        return $this->response;
     }
 }

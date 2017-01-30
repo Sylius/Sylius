@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\ResourceBundle\Event;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -76,5 +77,27 @@ final class ResourceControllerEventSpec extends ObjectBehavior
     {
         $this->setMessageParameters(['parameters']);
         $this->getMessageParameters()->shouldReturn(['parameters']);
+    }
+
+    function it_has_response()
+    {
+        $response = new Response();
+
+        $this->setResponse($response);
+
+        $this->getResponse()->shouldReturn($response);
+    }
+
+    function it_has_response_if_it_was_set_before()
+    {
+        $response = new Response();
+        $this->setResponse($response);
+
+        $this->hasResponse()->shouldReturn(true);
+    }
+
+    function it_has_not_response_if_it_was_not_set_before()
+    {
+        $this->hasResponse()->shouldReturn(false);
     }
 }
