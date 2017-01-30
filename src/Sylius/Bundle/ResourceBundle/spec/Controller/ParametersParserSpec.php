@@ -14,7 +14,7 @@ namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ResourceBundle\Controller\ParametersParserInterface;
 use Symfony\Component\DependencyInjection\Container;
-use Symfony\Component\DependencyInjection\ExpressionLanguage;
+use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -24,18 +24,20 @@ use Symfony\Component\HttpFoundation\Request;
  */
 final class ParametersParserSpec extends ObjectBehavior
 {
-    function it_implements_parameters_parser_interface()
+    function let()
     {
         $this->beConstructedWith(new Container(), new ExpressionLanguage());
+    }
+
+    function it_implements_parameters_parser_interface()
+    {
         $this->shouldImplement(ParametersParserInterface::class);
     }
 
-    function it_should_parse_string_parameters()
+    function it_parses_string_parameters()
     {
         $request = new Request();
         $request->request->set('string', 'Lorem ipsum');
-
-        $this->beConstructedWith(new Container(), new ExpressionLanguage());
 
         $this
             ->parseRequestValues(['nested' => ['string' => '$string']], $request)
@@ -43,12 +45,10 @@ final class ParametersParserSpec extends ObjectBehavior
         ;
     }
 
-    function it_should_parse_boolean_parameters()
+    function it_parses_boolean_parameters()
     {
         $request = new Request();
         $request->request->set('boolean', true);
-
-        $this->beConstructedWith(new Container(), new ExpressionLanguage());
 
         $this
             ->parseRequestValues(['nested' => ['boolean' => '$boolean']], $request)
@@ -56,12 +56,10 @@ final class ParametersParserSpec extends ObjectBehavior
         ;
     }
 
-    function it_should_parse_array_parameters()
+    function it_parses_array_parameters()
     {
         $request = new Request();
         $request->request->set('array', ['foo' => 'bar']);
-
-        $this->beConstructedWith(new Container(), new ExpressionLanguage());
 
         $this
             ->parseRequestValues(['nested' => ['array' => '$array']], $request)
@@ -69,42 +67,57 @@ final class ParametersParserSpec extends ObjectBehavior
         ;
     }
 
-    function it_should_parse_expressions()
+    function it_parses_expressions()
     {
-        $service = new \stdClass();
-
-        $container = new Container();
-        $container->set('service', $service);
-
-        $expression = new ExpressionLanguage();
-
         $request = new Request();
 
-        $this->beConstructedWith($container, $expression);
-
         $this
-            ->parseRequestValues(['nested' => ['service' => 'expr:service("service")']], $request)
-            ->shouldReturn(['nested' => ['service' => $service]])
+            ->parseRequestValues(['nested' => ['boolean' => 'expr:"foo" in ["foo", "bar"]']], $request)
+            ->shouldReturn(['nested' => ['boolean' => true]])
         ;
     }
 
-    function it_should_parse_expressions_with_parameters()
+    function it_parses_expressions_with_string_parameters()
     {
-        $service = new \stdClass();
-
-        $container = new Container();
-        $container->set('service', $service);
-
-        $expression = new ExpressionLanguage();
-
         $request = new Request();
-        $request->request->set('serviceName', 'service');
-
-        $this->beConstructedWith($container, $expression);
+        $request->request->set('string', 'lorem ipsum');
 
         $this
-            ->parseRequestValues(['nested' => ['service' => 'expr:service($serviceName)']], $request)
-            ->shouldReturn(['nested' => ['service' => $service]])
+            ->parseRequestValues(['expression' => 'expr:$string === "lorem ipsum"'], $request)
+            ->shouldReturn(['expression' => true])
+        ;
+    }
+
+    function it_parses_expressions_with_scalar_parameters()
+    {
+        $request = new Request();
+        $request->request->set('number', 6);
+
+        $this
+            ->parseRequestValues(['expression' => 'expr:$number === 6'], $request)
+            ->shouldReturn(['expression' => true])
+        ;
+    }
+
+    function it_throws_an_exception_if_array_parameter_is_injected_into_expression()
+    {
+        $request = new Request();
+        $request->request->set('array', ['foo', 'bar']);
+
+        $this
+            ->shouldThrow(\InvalidArgumentException::class)
+            ->during('parseRequestValues', [['expression' => 'expr:"foo" in $array'], $request])
+        ;
+    }
+
+    function it_throws_an_exception_if_object_parameter_is_injected_into_expression()
+    {
+        $request = new Request();
+        $request->request->set('object', new \stdClass());
+
+        $this
+            ->shouldThrow(\InvalidArgumentException::class)
+            ->during('parseRequestValues', [['expression' => 'expr:$object.callMethod()'], $request])
         ;
     }
 }

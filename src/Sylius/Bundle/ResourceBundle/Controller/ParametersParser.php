@@ -85,6 +85,14 @@ final class ParametersParser implements ParametersParserInterface
         $expression = preg_replace_callback('/(\$\w+)/', function ($matches) use ($request) {
             $variable = $request->get(substr($matches[1], 1));
 
+            if (is_array($variable) || is_object($variable)) {
+                throw new \InvalidArgumentException(sprintf(
+                    'Cannot use %s ($%s) as parameter in expression.',
+                    gettype($variable),
+                    $matches[1]
+                ));
+            }
+
             return is_string($variable) ? sprintf('"%s"', $variable) : $variable;
         }, $expression);
 
