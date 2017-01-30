@@ -11,6 +11,7 @@
 
 namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
+use FOS\RestBundle\Context\Context;
 use FOS\RestBundle\View\View;
 use FOS\RestBundle\View\ViewHandler as RestViewHandler;
 use JMS\Serializer\SerializationContext;
@@ -60,7 +61,7 @@ final class ViewHandlerSpec extends ObjectBehavior
     ) {
         $requestConfiguration->isHtmlRequest()->willReturn(false);
         $view = View::create();
-        $view->setSerializationContext(new SerializationContext());
+        $view->setContext(new Context());
 
         $requestConfiguration->getSerializationGroups()->willReturn(['Detailed']);
         $requestConfiguration->getSerializationVersion()->willReturn('2.0.0');

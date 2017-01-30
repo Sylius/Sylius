@@ -50,6 +50,3 @@ swiftmailer:
 sylius_theme:
     sources:
         test: ~
-
-twig:
-    exception_controller: "Sylius\\Bundle\\CoreBundle\\Controller\\VerboseExceptionController::showAction"

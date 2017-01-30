@@ -48,6 +48,7 @@ swiftmailer:
     password: "%mailer_password%"
 
 fos_rest:
+    exception: ~
     view:
         formats:
             json: true
