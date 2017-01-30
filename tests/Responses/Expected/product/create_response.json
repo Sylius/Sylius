@@ -1,5 +1,6 @@
 {
     "id": @integer@,
+    "name": "Theme Mug",
     "code": "MUG_TH",
     "available_on": "@string@.isDateTime()",
     "attributes": [],
@@ -7,20 +8,17 @@
     "options": [],
     "associations": [],
     "translations": {
-        "en": {
+        "en_US": {
             "id": @integer@,
-            "locale": "en",
+            "locale": "en_US",
             "name": "Theme Mug",
             "slug": "theme-mug"
         },
-        "nl": {
+        "nl_NL": {
             "id": @integer@,
-            "locale": "nl",
-            "name": "Theme Mug",
-            "slug": "theme-mug2"
-        },
-        "en_US": {
-            "locale": "en_US"
+            "locale": "nl_NL",
+            "name": "Mok van het thema",
+            "slug": "mok-van-het-thema"
         }
     },
     "product_taxons": [],
