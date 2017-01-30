@@ -81,6 +81,10 @@
             <argument type="service" id="sylius.repository.customer" />
         </service>
         <service id="sylius.inventory.order_inventory_operator" class="Sylius\Component\Core\Inventory\Operator\OrderInventoryOperator"/>
+        <service id="sylius.custom_inventory.order_inventory_operator" class="Sylius\Component\Core\Inventory\Operator\ORMOrderInventoryOperator" decorates="sylius.inventory.order_inventory_operator" public="false">
+            <argument type="service" id="sylius.custom_inventory.order_inventory_operator.inner" />
+            <argument type="service" id="sylius.manager.product_variant" />
+        </service>
 
         <service id="sylius.custom_factory.order_item" class="Sylius\Component\Core\Factory\CartItemFactory" decorates="sylius.factory.order_item" decoration-priority="256" public="false">
             <argument type="service" id="sylius.custom_factory.order_item.inner" />
