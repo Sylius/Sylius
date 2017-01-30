@@ -14,9 +14,13 @@ namespace Sylius\Bundle\FixturesBundle\Command;
 use Sylius\Bundle\FixturesBundle\Loader\SuiteLoaderInterface;
 use Sylius\Bundle\FixturesBundle\Suite\SuiteRegistryInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\ConfirmationQuestion;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
@@ -40,8 +44,29 @@ final class FixturesLoadCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $suiteName = $input->getArgument('suite');
+        if ($input->isInteractive()) {
+            /** @var QuestionHelper $questionHelper */
+            $questionHelper = $this->getHelper('question');
 
+            $output->writeln(sprintf(
+                "\n<error>Warning! Loading fixtures will purge your database for the %s environment.</error>\n",
+                $input->getOption('env')
+            ));
+
+            if (!$questionHelper->ask($input, $output, new ConfirmationQuestion('Continue? (y/N) ', false))) {
+                return;
+            }
+        }
+
+        $this->loadSuites($input);
+    }
+
+    /**
+     * @param InputInterface $input
+     */
+    private function loadSuites(InputInterface $input)
+    {
+        $suiteName = $input->getArgument('suite');
         $suite = $this->getSuiteRegistry()->getSuite($suiteName);
 
         $this->getSuiteLoader()->load($suite);
