@@ -4,22 +4,6 @@ Interfaces
 Model Interfaces
 ----------------
 
-.. _component_payment_model_credit-card-interface:
-
-CreditCardInterface
-~~~~~~~~~~~~~~~~~~~
-
-This interface should be implemented by any custom model representing a credit card.
-It also contains all the default :doc:`/components/Payment/credit_card_types`.
-
-.. note::
-   This interface extends the :ref:`component_payment_model_payment-source-interface`
-   and the :ref:`component_resource_model_timestampable-interface`.
-
-   For more detailed information go to `Sylius API CreditCardInterface`_.
-
-.. _Sylius API CreditCardInterface: http://api.sylius.org/Sylius/Component/Payment/Model/CreditCardInterface.html
-
 .. _component_payment_model_payment-interface:
 
 PaymentInterface
@@ -84,8 +68,6 @@ PaymentSourceInterface
 ~~~~~~~~~~~~~~~~~~~~~~
 
 This interface needs to be implemented by any custom payment source.
-
-The default payment source is :ref:`component_payment_model_credit-card`.
 
 .. note::
    For more detailed information go to `Sylius API PaymentSourceInterface`_.

@@ -3,7 +3,7 @@ Payment
 
 PHP library which provides abstraction of payments management.
 
-It ships with default **Payment**, **PaymentMethod** and **CreditCard** models.
+It ships with default **Payment** and **PaymentMethod** models.
 
 .. note::
    This component does not provide any payment gateway.
@@ -16,6 +16,5 @@ It ships with default **Payment**, **PaymentMethod** and **CreditCard** models.
    basic_usage
    models
    interfaces
-   credit_card_types
    default_fee_calculators
    state_machine

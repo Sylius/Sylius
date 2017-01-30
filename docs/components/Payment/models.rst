@@ -21,8 +21,6 @@ Every payment is represented by a **Payment** instance and has the following pro
 +------------+---------------------------------------------+
 | state      | Payment's state                             |
 +------------+---------------------------------------------+
-| creditCard | Credit card as a source                     |
-+------------+---------------------------------------------+
 | details    | Payment's details                           |
 +------------+---------------------------------------------+
 | createdAt  | Date of creation                            |
@@ -40,44 +38,6 @@ Every payment is represented by a **Payment** instance and has the following pro
 
 .. hint::
    All default payment states are available in :ref:`component_payment_payment-states`.
-
-.. _component_payment_model_credit-card:
-
-CreditCard
-----------
-
-Every credit card is represented by a **CreditCard** instance and has the following properties:
-
-+----------------+-------------------------------------------+
-| Property       | Description                               |
-+================+===========================================+
-| id             | Unique id of the credit card              |
-+----------------+-------------------------------------------+
-| token          | Payment gateway token                     |
-+----------------+-------------------------------------------+
-| type           | Type of credit card (VISA, MasterCard...) |
-+----------------+-------------------------------------------+
-| cardholderName | Cardholder's name                         |
-+----------------+-------------------------------------------+
-| number         | Card number                               |
-+----------------+-------------------------------------------+
-| securityCode   | Security code                             |
-+----------------+-------------------------------------------+
-| expiryMonth    | Expiry month                              |
-+----------------+-------------------------------------------+
-| expiryYear     | Expiry year                               |
-+----------------+-------------------------------------------+
-| createdAt      | Date of creation                          |
-+----------------+-------------------------------------------+
-| updatedAt      | Date of the last update                   |
-+----------------+-------------------------------------------+
-
-.. note::
-   This model implements the :ref:`component_payment_model_credit-card-interface`.
-
-   For more detailed information go to `Sylius API CreditCard`_.
-
-.. _Sylius API CreditCard: http://api.sylius.org/Sylius/Component/Payment/Model/CreditCard.html
 
 .. _component_payment_model_payment-method:
 
