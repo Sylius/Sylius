@@ -16,7 +16,6 @@ use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\ChoiceList\View\ChoiceView;
-use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -81,21 +80,15 @@ final class TaxonChoiceType extends AbstractType
         $resolver
             ->setDefaults([
                 'choices' => function (Options $options) {
-                    $taxons = $this->taxonRepository->findNodesTreeSorted();
-
-                    if (null !== $options['filter']) {
-                        $taxons = array_filter($taxons, $options['filter']);
-                    }
-
-                    return $taxons;
+                    return $this->getTaxons($options['root_code'], $options['filter']);
                 },
                 'choice_value' => 'id',
                 'choice_label' => 'name',
                 'choice_translation_domain' => false,
-                'root' => null,
+                'root_code' => null,
                 'filter' => null,
             ])
-            ->setAllowedTypes('root', [TaxonInterface::class, 'string', 'null'])
+            ->setAllowedTypes('root_code', ['string', 'null'])
             ->setAllowedTypes('filter', ['callable', 'null'])
         ;
     }
@@ -106,5 +99,22 @@ final class TaxonChoiceType extends AbstractType
     public function getBlockPrefix()
     {
         return 'sylius_taxon_choice';
+    }
+
+    /**
+     * @param string|null $rootCode
+     * @param callable|null $filter
+     *
+     * @return TaxonInterface[]
+     */
+    private function getTaxons($rootCode = null, $filter = null)
+    {
+        $taxons = $this->taxonRepository->findNodesTreeSorted($rootCode);
+
+        if (null !== $filter) {
+            $taxons = array_filter($taxons, $filter);
+        }
+
+        return $taxons;
     }
 }
