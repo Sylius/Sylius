@@ -102,7 +102,7 @@ final class OrderApiTest extends JsonApiTestCase
         {
             "customer": "oliver.queen@star-city.com",
             "channel": "WEB",
-            "locale_code": "en_US"
+            "localeCode": "en_US"
         }
 EOT;
 

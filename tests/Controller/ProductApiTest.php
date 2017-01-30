@@ -135,11 +135,11 @@ final class ProductApiTest extends JsonApiTestCase
         {
             "code": "MUG_TH",
             "translations": {
-                "nl": {
-                    "name": "Theme Mug",
-                    "slug": "theme-mug2"
+                "nl_NL": {
+                    "name": "Mok van het thema",
+                    "slug": "mok-van-het-thema"
                 },
-                "en": {
+                "en_US": {
                     "name": "Theme Mug",
                     "slug": "theme-mug"
                 }
@@ -179,7 +179,7 @@ EOT;
 <<<EOT
         {
             "translations": {
-                "en__US": {
+                "en_US": {
                   "name": "Star Wars",
                   "slug": "star-wars"
                 }
@@ -204,7 +204,7 @@ EOT;
 <<<EOT
         {
             "translations": {
-                "en": {
+                "en_US": {
                     "name": "Mug Star Wars Episode V"
                 }
             }
