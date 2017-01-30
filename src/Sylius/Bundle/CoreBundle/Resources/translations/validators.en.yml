@@ -86,6 +86,9 @@ sylius:
     user:
         email:
             unique: This email is already used.
+            min: Minimal number of caracteres not reached.
+            max: Maximal number of caracteres reached.
+            invalid: This email is invalid.
         username:
             unique: This username is already used.
             not_blank: Please enter your name.
