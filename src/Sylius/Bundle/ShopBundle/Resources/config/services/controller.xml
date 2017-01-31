@@ -34,6 +34,7 @@
         </service>
 
         <service id="sylius.controller.shop.locale_switch" class="Sylius\Bundle\ShopBundle\Controller\LocaleSwitchController">
+            <argument type="service" id="router" />
             <argument type="service" id="templating" />
             <argument type="service" id="sylius.context.locale" />
             <argument type="service" id="sylius.locale_provider" />

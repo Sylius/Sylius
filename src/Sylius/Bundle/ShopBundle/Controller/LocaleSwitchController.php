@@ -11,14 +11,13 @@
 
 namespace Sylius\Bundle\ShopBundle\Controller;
 
-use Sylius\Component\Core\Locale\Handler\LocaleChangeHandlerInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\Routing\RouterInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -26,6 +25,11 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
  */
 final class LocaleSwitchController
 {
+    /**
+     * @var RouterInterface
+     */
+    private $router;
+
     /**
      * @var EngineInterface
      */
@@ -42,15 +46,18 @@ final class LocaleSwitchController
     private $localeProvider;
 
     /**
+     * @param RouterInterface $router
      * @param EngineInterface $templatingEngine
      * @param LocaleContextInterface $localeContext
      * @param LocaleProviderInterface $localeProvider
      */
     public function __construct(
+        RouterInterface $router,
         EngineInterface $templatingEngine,
         LocaleContextInterface $localeContext,
         LocaleProviderInterface $localeProvider
     ) {
+        $this->router = $router;
         $this->templatingEngine = $templatingEngine;
         $this->localeContext = $localeContext;
         $this->localeProvider = $localeProvider;
@@ -68,12 +75,11 @@ final class LocaleSwitchController
     }
 
     /**
-     * @param Request $request
      * @param string $code
      *
      * @return Response
      */
-    public function switchAction(Request $request, $code)
+    public function switchAction($code)
     {
         if (!in_array($code, $this->localeProvider->getAvailableLocalesCodes(), true)) {
             throw new HttpException(
@@ -82,6 +88,6 @@ final class LocaleSwitchController
             );
         }
 
-        return new RedirectResponse($request->headers->get('referer', $request->getSchemeAndHttpHost()));
+        return new RedirectResponse($this->router->generate('sylius_shop_homepage', ['_locale' => $code]));
     }
 }
