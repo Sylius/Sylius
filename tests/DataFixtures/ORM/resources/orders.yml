@@ -24,7 +24,6 @@ Sylius\Component\Currency\Model\Currency:
 Sylius\Component\Locale\Model\Locale:
     locale:
         code: en_US
-        enabled: true
 
 Sylius\Component\Core\Model\Customer:
     customer_oliver:

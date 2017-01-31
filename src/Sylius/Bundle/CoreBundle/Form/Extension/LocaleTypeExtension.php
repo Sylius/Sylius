@@ -32,18 +32,11 @@ final class LocaleTypeExtension extends AbstractTypeExtension
     private $localeRepository;
 
     /**
-     * @var string
-     */
-    private $baseLocale;
-
-    /**
-     * @param string $baseLocale
      * @param RepositoryInterface $localeRepository
      */
-    public function __construct(RepositoryInterface $localeRepository, $baseLocale)
+    public function __construct(RepositoryInterface $localeRepository)
     {
         $this->localeRepository = $localeRepository;
-        $this->baseLocale = $baseLocale;
     }
 
     /**
@@ -60,6 +53,7 @@ final class LocaleTypeExtension extends AbstractTypeExtension
             $locale = $event->getData();
             if ($locale instanceof LocaleInterface && null !== $locale->getCode()) {
                 $options['disabled'] = true;
+
                 $options['choices'] = [$this->getLocaleName($locale->getCode()) => $locale->getCode()];
             } else {
                 $options['choices'] = array_flip($this->getAvailableLocales());
@@ -67,15 +61,6 @@ final class LocaleTypeExtension extends AbstractTypeExtension
 
             $form = $event->getForm();
             $form->add('code', \Symfony\Component\Form\Extension\Core\Type\LocaleType::class, $options);
-
-            if ($this->baseLocale !== $locale->getCode()) {
-                return;
-            }
-
-            $form->add('enabled', CheckboxType::class, [
-                'label' => 'sylius.form.locale.enabled',
-                'disabled' => true,
-            ]);
         });
     }
 

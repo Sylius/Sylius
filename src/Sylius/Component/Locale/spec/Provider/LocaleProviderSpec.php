@@ -39,7 +39,7 @@ final class LocaleProviderSpec extends ObjectBehavior
 
     function it_returns_all_enabled_locales(RepositoryInterface $localeRepository, LocaleInterface $locale)
     {
-        $localeRepository->findBy(['enabled' => true])->willReturn([$locale]);
+        $localeRepository->findAll()->willReturn([$locale]);
         $locale->getCode()->willReturn('en_US');
 
         $this->getAvailableLocalesCodes()->shouldReturn(['en_US']);

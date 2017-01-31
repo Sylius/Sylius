@@ -14,8 +14,7 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <parameters>
         <parameter key="sylius.behat.page.admin.locale.create.class">Sylius\Behat\Page\Admin\Locale\CreatePage</parameter>
-        <parameter key="sylius.behat.page.admin.locale.index.class">Sylius\Behat\Page\Admin\Locale\IndexPage</parameter>
-        <parameter key="sylius.behat.page.admin.locale.update.class">Sylius\Behat\Page\Admin\Locale\UpdatePage</parameter>
+        <parameter key="sylius.behat.page.admin.locale.index.class">%sylius.behat.page.admin.crud.index.class%</parameter>
     </parameters>
 
     <services>
@@ -24,9 +23,6 @@
         </service>
         <service id="sylius.behat.page.admin.locale.index" class="%sylius.behat.page.admin.locale.index.class%" parent="sylius.behat.page.admin.crud.index" public="false">
             <argument type="string">sylius_admin_locale_index</argument>
-        </service>
-        <service id="sylius.behat.page.admin.locale.update" class="%sylius.behat.page.admin.locale.update.class%" parent="sylius.behat.page.admin.crud.update" public="false">
-            <argument type="string">sylius_admin_locale_update</argument>
         </service>
     </services>
 </container>

@@ -1,5 +1,4 @@
 sylius:
     form:
         locale:
-            enabled: Enabled
             name: Name

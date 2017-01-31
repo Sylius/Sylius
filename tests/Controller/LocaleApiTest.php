@@ -100,8 +100,7 @@ class LocaleApiTest extends JsonApiTestCase
         $data =
 <<<EOT
         {
-            "code": "es",
-            "enabled": true
+            "code": "es"
         }
 EOT;
 

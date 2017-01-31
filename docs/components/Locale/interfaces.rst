@@ -12,8 +12,8 @@ LocaleInterface
 This interface should be implemented by models representing a single **Locale**.
 
 .. note::
-    This interface extends :ref:`component_resource_model_code-aware-interface`,
-    :ref:`component_resource_model_timestampable-interface` and :ref:`component_resource_model_toggleable-interface`.
+    This interface extends :ref:`component_resource_model_code-aware-interface` and
+    :ref:`component_resource_model_timestampable-interface`.
 
     For more detailed information go to `Sylius API LocaleInterface`_.
 

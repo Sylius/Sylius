@@ -11,9 +11,6 @@ Sylius\Component\Locale\Model\Locale:
             expose: true
             type: string
             groups: [Default, Detailed]
-        enabled:
-            expose: true
-            groups: [Default, Detailed]
         createdAt:
             expose: true
             type: DateTime

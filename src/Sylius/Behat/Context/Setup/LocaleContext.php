@@ -92,19 +92,6 @@ final class LocaleContext implements Context
     }
 
     /**
-     * @Given the store has disabled locale :localeCode
-     * @Given the locale :localeCode is disabled (as well)
-     * @Given the locale :localeCode gets disabled
-     */
-    public function theStoreHasDisabledLocale($localeCode)
-    {
-        $locale = $this->provideLocale($localeCode);
-        $locale->disable();
-
-        $this->saveLocale($locale);
-    }
-
-    /**
      * @Given the locale :localeCode does not exist in the store
      */
     public function theStoreDoesNotHaveLocale($localeCode)

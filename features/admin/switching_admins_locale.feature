@@ -6,9 +6,8 @@ Feature: Switching locales on admin's panel
 
     Background:
         Given the store operates on a single channel
-        And that channel allows to shop using "English (United States)", "Spanish (Mexico)" and "Portuguese (Brazil)" locales
+        And that channel allows to shop using "English (United States)" and "Spanish (Mexico)" locales
         And it uses the "English (United States)" locale by default
-        And the locale "Portuguese (Brazil)" is disabled
         And I am logged in as an administrator
         And I am using "English (United States)" locale for my panel
 
@@ -17,12 +16,6 @@ Feature: Switching locales on admin's panel
         Given I am editing my details
         When I set my locale to "Spanish (Mexico)"
         Then I should be viewing the administration panel in "Spanish (Mexico)"
-
-    @ui
-    Scenario: Admin's panel can be viewed in a disabled locale
-        Given I am editing my details
-        When I set my locale to "Portuguese (Brazil)"
-        Then I should be viewing the administration panel in "Portuguese (Brazil)"
 
     @ui
     Scenario: Changing my preferred language to a locale that does not exist in the store
@@ -34,7 +27,7 @@ Feature: Switching locales on admin's panel
     @ui
     Scenario: Changing panel's locale doesn't change shop's locale
         Given I am editing my details
-        When I set my locale to "Portuguese (Brazil)"
+        When I set my locale to "Spanish (Mexico)"
         Then I should still shop using the "English (United States)" locale
 
     @ui
@@ -47,6 +40,6 @@ Feature: Switching locales on admin's panel
     Scenario: Locales are saved per each admin's preference
         Given I am using "Spanish (Mexico)" locale for my panel
         And there is an administrator "admin@example.com" identified by "sylius"
-        And this administrator is using "Portuguese (Brazil)" locale
+        And this administrator is using "French (France)" locale
         When this administrator logs in using "sylius" password
-        Then they should be viewing the administration panel in "Portuguese (Brazil)"
+        Then they should be viewing the administration panel in "French (France)"

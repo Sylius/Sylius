@@ -13,8 +13,8 @@ namespace Sylius\Bundle\CoreBundle\Collector;
 
 use Sylius\Bundle\CoreBundle\Application\Kernel;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
-use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Context\ShopperContextInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Currency\Context\CurrencyNotFoundException;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Symfony\Component\HttpFoundation\Request;

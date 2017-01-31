@@ -2,7 +2,7 @@
     "page": 1,
     "limit": 10,
     "pages": 1,
-    "total": 4,
+    "total": 3,
     "_links": {
         "self": {
             "href": "\/api\/v1\/locales\/?page=1&limit=10"
@@ -18,26 +18,17 @@
         "items": [
             {
                 "id": @integer@,
-                "code": "en",
-                "enabled": true
+                "code": "en"
             },
             {
 
                 "id": @integer@,
-                "code": "nl",
-                "enabled": true
+                "code": "nl"
             },
             {
 
                 "id": @integer@,
-                "code": "fr",
-                "enabled": true
-            },
-            {
-
-                "id": @integer@,
-                "code": "de",
-                "enabled": false
+                "code": "fr"
             }
         ]
     }

@@ -17,8 +17,6 @@ Locale has the following properties:
 +-------------+-----------------------------------------+
 | code        | Locale's code                           |
 +-------------+-----------------------------------------+
-| enabled     | Indicates whether locale is available   |
-+-------------+-----------------------------------------+
 | createdAt   | Date when locale was created            |
 +-------------+-----------------------------------------+
 | updatedAt   | Date of last change                     |

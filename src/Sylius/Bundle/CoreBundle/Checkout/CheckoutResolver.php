@@ -20,7 +20,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestMatcherInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -33,7 +32,7 @@ final class CheckoutResolver implements EventSubscriberInterface
     private $cartContext;
 
     /**
-     * @var UrlGeneratorInterface
+     * @var CheckoutStateUrlGeneratorInterface
      */
     private $urlGenerator;
 
@@ -49,13 +48,13 @@ final class CheckoutResolver implements EventSubscriberInterface
 
     /**
      * @param CartContextInterface $cartContext
-     * @param UrlGeneratorInterface $urlGenerator
+     * @param CheckoutStateUrlGeneratorInterface $urlGenerator
      * @param RequestMatcherInterface $requestMatcher
      * @param FactoryInterface $stateMachineFactory
      */
     public function __construct(
         CartContextInterface $cartContext,
-        UrlGeneratorInterface $urlGenerator,
+        CheckoutStateUrlGeneratorInterface $urlGenerator,
         RequestMatcherInterface $requestMatcher,
         FactoryInterface $stateMachineFactory
     ) {

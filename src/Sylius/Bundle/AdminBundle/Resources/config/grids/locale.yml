@@ -19,19 +19,10 @@ sylius_grid:
                     sortable: code
                     options:
                         template: "@SyliusAdmin/Locale/Grid/Field/name.html.twig"
-                enabled:
-                    type: twig
-                    label: sylius.ui.enabled
-                    sortable: ~
-                    options:
-                        template: "@SyliusUi/Grid/Field/enabled.html.twig"
             filters:
                 code:
                     type: string
                     label: sylius.ui.code
-                enabled:
-                    type: boolean
-                    label: sylius.ui.enabled
             actions:
                 main:
                     create:
