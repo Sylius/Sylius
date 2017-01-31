@@ -10,7 +10,7 @@ use Webmozart\Assert\Assert;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class OrderDetailsContext implements Context
+final class CheckoutOrderDetailsContext implements Context
 {
     /**
      * @var ShowPageInterface

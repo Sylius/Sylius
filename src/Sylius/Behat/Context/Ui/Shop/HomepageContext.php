@@ -46,10 +46,7 @@ final class HomepageContext implements Context
      */
     public function iShouldBeRedirectedToTheHomepage()
     {
-        Assert::true(
-            $this->homePage->isOpen(),
-            'Shop homepage should be opened, but it is not.'
-        );
+        Assert::true($this->homePage->isOpen());
     }
 
     /**

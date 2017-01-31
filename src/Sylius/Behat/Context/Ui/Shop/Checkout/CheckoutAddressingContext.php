@@ -15,7 +15,7 @@ use Webmozart\Assert\Assert;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class AddressingContext implements Context
+final class CheckoutAddressingContext implements Context
 {
     /**
      * @var SharedStorageInterface
@@ -70,6 +70,34 @@ final class AddressingContext implements Context
     public function iAmAtTheCheckoutAddressingStep()
     {
         $this->addressPage->open();
+    }
+
+    /**
+     * @Given /^I have completed addressing step with email "([^"]+)" and ("[^"]+" based shipping address)$/
+     * @When /^I complete addressing step with email "([^"]+)" and ("[^"]+" based shipping address)$/
+     */
+    public function iCompleteAddressingStepWithEmail($email, AddressInterface $address)
+    {
+        $this->addressPage->open();
+        $this->iSpecifyTheEmail($email);
+        $this->iSpecifyTheShippingAddressAs($address);
+        $this->iCompleteTheAddressingStep();
+    }
+
+    /**
+     * @When I specify the province name manually as :provinceName for shipping address
+     */
+    public function iSpecifyTheProvinceNameManuallyAsForShippingAddress($provinceName)
+    {
+        $this->addressPage->specifyShippingAddressProvince($provinceName);
+    }
+
+    /**
+     * @When I specify the province name manually as :provinceName for billing address
+     */
+    public function iSpecifyTheProvinceNameManuallyAsForBillingAddress($provinceName)
+    {
+        $this->addressPage->specifyBillingAddressProvince($provinceName);
     }
 
     /**
@@ -178,22 +206,6 @@ final class AddressingContext implements Context
     }
 
     /**
-     * @Then I should have :countryName selected as country
-     */
-    public function iShouldHaveSelectedAsCountry($countryName)
-    {
-        Assert::same($countryName, $this->addressPage->getShippingAddressCountry());
-    }
-
-    /**
-     * @Then I should have no country selected
-     */
-    public function iShouldHaveNoCountrySelected()
-    {
-        Assert::same('Select', $this->addressPage->getShippingAddressCountry());
-    }
-
-    /**
      * @When I complete the addressing step
      * @When I try to complete the addressing step
      */
@@ -258,6 +270,22 @@ final class AddressingContext implements Context
     }
 
     /**
+     * @Then I should have :countryName selected as country
+     */
+    public function iShouldHaveSelectedAsCountry($countryName)
+    {
+        Assert::same($countryName, $this->addressPage->getShippingAddressCountry());
+    }
+
+    /**
+     * @Then I should have no country selected
+     */
+    public function iShouldHaveNoCountrySelected()
+    {
+        Assert::same('Select', $this->addressPage->getShippingAddressCountry());
+    }
+
+    /**
      * @Then I should be able to log in
      */
     public function iShouldBeAbleToLogIn()
@@ -283,6 +311,7 @@ final class AddressingContext implements Context
 
     /**
      * @Then I should be redirected to the addressing step
+     * @Then I should be on the checkout addressing step
      */
     public function iShouldBeRedirectedToTheAddressingStep()
     {
@@ -300,53 +329,11 @@ final class AddressingContext implements Context
     }
 
     /**
-     * @Given /^I have completed addressing step with email "([^"]+)" and ("[^"]+" based shipping address)$/
-     * @When /^I complete addressing step with email "([^"]+)" and ("[^"]+" based shipping address)$/
-     */
-    public function iCompleteAddressingStepWithEmail($email, AddressInterface $address)
-    {
-        $this->addressPage->open();
-        $this->iSpecifyTheEmail($email);
-        $this->iSpecifyTheShippingAddressAs($address);
-        $this->iCompleteTheAddressingStep();
-    }
-
-    /**
-     * @Then I should be on the checkout addressing step
-     */
-    public function iShouldBeOnTheCheckoutAddressingStep()
-    {
-        Assert::true(
-            $this->addressPage->isOpen(),
-            'Checkout addressing page should be opened, but it is not.'
-        );
-    }
-
-    /**
-     * @When I specify the province name manually as :provinceName for shipping address
-     */
-    public function iSpecifyTheProvinceNameManuallyAsForShippingAddress($provinceName)
-    {
-        $this->addressPage->specifyShippingAddressProvince($provinceName);
-    }
-
-    /**
-     * @When I specify the province name manually as :provinceName for billing address
-     */
-    public function iSpecifyTheProvinceNameManuallyAsForBillingAddress($provinceName)
-    {
-        $this->addressPage->specifyBillingAddressProvince($provinceName);
-    }
-
-    /**
      * @Then I should not be able to specify province name manually for shipping address
      */
     public function iShouldNotBeAbleToSpecifyProvinceNameManuallyForShippingAddress()
     {
-        Assert::false(
-            $this->addressPage->hasShippingAddressInput(),
-            'I should not be able to specify manually the province for shipping address, but I can.'
-        );
+        Assert::false($this->addressPage->hasShippingAddressInput());
     }
 
     /**
@@ -354,10 +341,7 @@ final class AddressingContext implements Context
      */
     public function iShouldNotBeAbleToSpecifyProvinceNameManuallyForBillingAddress()
     {
-        Assert::false(
-            $this->addressPage->hasBillingAddressInput(),
-            'I should not be able to specify manually the province for billing address, but I can.'
-        );
+        Assert::false($this->addressPage->hasBillingAddressInput());
     }
 
     /**

@@ -16,7 +16,6 @@ Feature: Placing an order after moving back in checkout process
         Given I had product "PHP T-Shirt" in the cart
         And I was at the checkout summary step
         When I go back to addressing step of the checkout
-        But I do not modify anything
         And I return to the checkout summary step
         And I confirm my order
         Then I should see the thank you page
@@ -26,7 +25,6 @@ Feature: Placing an order after moving back in checkout process
         Given I had product "PHP T-Shirt" in the cart
         And I was at the checkout summary step
         When I go back to shipping step of the checkout
-        But I do not modify anything
         And I return to the checkout summary step
         And I confirm my order
         Then I should see the thank you page
@@ -36,7 +34,6 @@ Feature: Placing an order after moving back in checkout process
         Given I had product "PHP T-Shirt" in the cart
         And I was at the checkout summary step
         When I go back to payment step of the checkout
-        But I do not modify anything
         And I return to the checkout summary step
         And I confirm my order
         Then I should see the thank you page

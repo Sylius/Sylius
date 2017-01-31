@@ -15,7 +15,7 @@ use Webmozart\Assert\Assert;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class CompleteContext implements Context
+final class CheckoutCompleteContext implements Context
 {
     /**
      * @var SharedStorageInterface
@@ -39,6 +39,7 @@ final class CompleteContext implements Context
 
     /**
      * @When I try to open checkout complete page
+     * @When I want to complete checkout
      */
     public function iTryToOpenCheckoutCompletePage()
     {
@@ -68,14 +69,6 @@ final class CompleteContext implements Context
     public function iReturnToTheCheckoutSummaryStep()
     {
         $this->completePage->open();
-    }
-
-    /**
-     * @When I want to complete checkout
-     */
-    public function iWantToCompleteCheckout()
-    {
-        $this->completePage->tryToOpen();
     }
 
     /**
@@ -125,7 +118,7 @@ final class CompleteContext implements Context
     }
 
     /**
-     * @Given I should have :quantity :productName products in the cart
+     * @Then I should have :quantity :productName products in the cart
      */
     public function iShouldHaveProductsInTheCart($quantity, $productName)
     {
@@ -191,7 +184,7 @@ final class CompleteContext implements Context
     /**
      * @Then my order's shipping method should be :shippingMethod
      */
-    public function myOrderSShippingMethodShouldBe(ShippingMethodInterface $shippingMethod)
+    public function myOrdersShippingMethodShouldBe(ShippingMethodInterface $shippingMethod)
     {
         Assert::true($this->completePage->hasShippingMethod($shippingMethod));
     }
@@ -199,7 +192,7 @@ final class CompleteContext implements Context
     /**
      * @Then my order's payment method should be :paymentMethod
      */
-    public function myOrderSPaymentMethodShouldBe(PaymentMethodInterface $paymentMethod)
+    public function myOrdersPaymentMethodShouldBe(PaymentMethodInterface $paymentMethod)
     {
         Assert::same($this->completePage->getPaymentMethodName(), $paymentMethod->getName());
     }
@@ -213,19 +206,11 @@ final class CompleteContext implements Context
     }
 
     /**
-     * @Given /^I should be notified that (this product) does not have sufficient stock$/
+     * @Then /^I should be notified that (this product) does not have sufficient stock$/
      */
     public function iShouldBeNotifiedThatThisProductDoesNotHaveSufficientStock(ProductInterface $product)
     {
         Assert::true($this->completePage->hasProductOutOfStockValidationMessage($product));
-    }
-
-    /**
-     * @Then my order's locale should be :localeName
-     */
-    public function myOrderSLocaleShouldBe($localeName)
-    {
-        Assert::true($this->completePage->hasLocale($localeName));
     }
 
     /**
@@ -234,6 +219,14 @@ final class CompleteContext implements Context
     public function iShouldNotBeNotifiedThatThisProductDoesNotHaveSufficientStock(ProductInterface $product)
     {
         Assert::false($this->completePage->hasProductOutOfStockValidationMessage($product));
+    }
+
+    /**
+     * @Then my order's locale should be :localeName
+     */
+    public function myOrderLocaleShouldBe($localeName)
+    {
+        Assert::true($this->completePage->hasLocale($localeName));
     }
 
     /**

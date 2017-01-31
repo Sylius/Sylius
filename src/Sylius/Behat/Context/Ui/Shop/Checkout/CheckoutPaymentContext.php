@@ -10,7 +10,7 @@ use Webmozart\Assert\Assert;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class PaymentContext implements Context
+final class CheckoutPaymentContext implements Context
 {
     /**
      * @var SelectPaymentPageInterface
@@ -66,17 +66,6 @@ final class PaymentContext implements Context
     }
 
     /**
-     * @Then I should be on the checkout payment step
-     */
-    public function iShouldBeOnTheCheckoutPaymentStep()
-    {
-        Assert::true(
-            $this->selectPaymentPage->isOpen(),
-            'Checkout payment page should be opened, but it is not.'
-        );
-    }
-
-    /**
      * @When I go back to payment step of the checkout
      */
     public function iAmAtTheCheckoutPaymentStep()
@@ -101,14 +90,11 @@ final class PaymentContext implements Context
     }
 
     /**
-     * @Then I should not be able to select :paymentMethodName payment method
+     * @Then I should be on the checkout payment step
      */
-    public function iShouldNotBeAbleToSelectPaymentMethod($paymentMethodName)
+    public function iShouldBeOnTheCheckoutPaymentStep()
     {
-        Assert::false(
-            $this->selectPaymentPage->hasPaymentMethod($paymentMethodName),
-            sprintf('Payment method "%s" should not be available, but it does.', $paymentMethodName)
-        );
+        Assert::true($this->selectPaymentPage->isOpen());
     }
 
     /**
@@ -116,10 +102,15 @@ final class PaymentContext implements Context
      */
     public function iShouldBeAbleToSelectPaymentMethod($paymentMethodName)
     {
-        Assert::true(
-            $this->selectPaymentPage->hasPaymentMethod($paymentMethodName),
-            sprintf('Payment method "%s" should be available, but it does not.', $paymentMethodName)
-        );
+        Assert::true($this->selectPaymentPage->hasPaymentMethod($paymentMethodName));
+    }
+
+    /**
+     * @Then I should not be able to select :paymentMethodName payment method
+     */
+    public function iShouldNotBeAbleToSelectPaymentMethod($paymentMethodName)
+    {
+        Assert::false($this->selectPaymentPage->hasPaymentMethod($paymentMethodName));
     }
 
     /**
@@ -127,23 +118,17 @@ final class PaymentContext implements Context
      */
     public function iShouldBeRedirectedToThePaymentStep()
     {
-        Assert::true(
-            $this->selectPaymentPage->isOpen(),
-            'Checkout payment step should be opened, but it is not.'
-        );
+        Assert::true($this->selectPaymentPage->isOpen());
     }
 
     /**
-     * @Given I should be able to go to the summary page again
+     * @Then I should be able to go to the summary page again
      */
     public function iShouldBeAbleToGoToTheSummaryPageAgain()
     {
         $this->selectPaymentPage->nextStep();
 
-        Assert::true(
-            $this->completePage->isOpen(),
-            'Checkout summary page should be opened, but it is not.'
-        );
+        Assert::true($this->completePage->isOpen());
     }
 
     /**

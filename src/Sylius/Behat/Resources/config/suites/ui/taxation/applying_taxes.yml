@@ -29,8 +29,8 @@ default:
                 - sylius.behat.context.setup.shop_security
 
                 - sylius.behat.context.ui.shop.cart
-                - sylius.behat.context.ui.checkout
-                - sylius.behat.context.ui.checkout.addressing
+                - sylius.behat.context.ui.shop.checkout
+                - sylius.behat.context.ui.shop.checkout.addressing
                 - sylius.behat.context.ui.user
             filters:
                 tags: "@applying_taxes && @ui"

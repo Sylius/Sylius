@@ -11,7 +11,7 @@ use Webmozart\Assert\Assert;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class ShippingContext implements Context
+final class CheckoutShippingContext implements Context
 {
     /**
      * @var SelectShippingPageInterface
@@ -45,11 +45,21 @@ final class ShippingContext implements Context
 
     /**
      * @Given I have proceeded selecting :shippingMethodName shipping method
+     * @When I proceed with :shippingMethodName shipping method
      */
     public function iHaveProceededSelectingShippingMethod($shippingMethodName)
     {
         $this->iSelectShippingMethod($shippingMethodName);
         $this->selectShippingPage->nextStep();
+    }
+
+    /**
+     * @Given I have selected :shippingMethod shipping method
+     * @When I select :shippingMethod shipping method
+     */
+    public function iSelectShippingMethod($shippingMethod)
+    {
+        $this->selectShippingPage->selectShippingMethod($shippingMethod);
     }
 
     /**
@@ -61,12 +71,27 @@ final class ShippingContext implements Context
     }
 
     /**
-     * @Given I have selected :shippingMethod shipping method
-     * @When I select :shippingMethod shipping method
+     * @When /^I(?:| try to) complete the shipping step$/
      */
-    public function iSelectShippingMethod($shippingMethod)
+    public function iCompleteTheShippingStep()
     {
-        $this->selectShippingPage->selectShippingMethod($shippingMethod);
+        $this->selectShippingPage->nextStep();
+    }
+
+    /**
+     * @When I decide to change my address
+     */
+    public function iDecideToChangeMyAddress()
+    {
+        $this->selectShippingPage->changeAddress();
+    }
+
+    /**
+     * @When I go back to shipping step of the checkout
+     */
+    public function iGoBackToShippingStepOfTheCheckout()
+    {
+        $this->selectShippingPage->open();
     }
 
     /**
@@ -100,31 +125,8 @@ final class ShippingContext implements Context
     }
 
     /**
-     * @When /^I(?:| try to) complete the shipping step$/
-     */
-    public function iCompleteTheShippingStep()
-    {
-        $this->selectShippingPage->nextStep();
-    }
-
-    /**
-     * @When I decide to change my address
-     */
-    public function iDecideToChangeMyAddress()
-    {
-        $this->selectShippingPage->changeAddress();
-    }
-
-    /**
-     * @When I go back to shipping step of the checkout
-     */
-    public function iGoBackToShippingStepOfTheCheckout()
-    {
-        $this->selectShippingPage->open();
-    }
-
-    /**
      * @Then I should be on the checkout shipping step
+     * @Then I should be redirected to the shipping step
      */
     public function iShouldBeOnTheCheckoutShippingStep()
     {
@@ -150,15 +152,7 @@ final class ShippingContext implements Context
     }
 
     /**
-     * @Then I should be redirected to the shipping step
-     */
-    public function iShouldBeRedirectedToTheShippingStep()
-    {
-        Assert::true($this->selectShippingPage->isOpen());
-    }
-
-    /**
-     * @Given I should be able to go to the payment step again
+     * @Then I should be able to go to the payment step again
      */
     public function iShouldBeAbleToGoToThePaymentStepAgain()
     {
@@ -168,7 +162,7 @@ final class ShippingContext implements Context
     }
 
     /**
-     * @Given I should see shipping method :shippingMethodName with fee :fee
+     * @Then I should see shipping method :shippingMethodName with fee :fee
      */
     public function iShouldSeeShippingFee($shippingMethodName, $fee)
     {

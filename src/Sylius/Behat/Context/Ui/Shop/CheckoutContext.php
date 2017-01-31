@@ -9,19 +9,18 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Behat\Context\Ui;
+namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
-use Sylius\Behat\Context\Ui\Shop\Checkout\AddressingContext;
-use Sylius\Behat\Context\Ui\Shop\Checkout\PaymentContext;
-use Sylius\Behat\Context\Ui\Shop\Checkout\ShippingContext;
+use Sylius\Behat\Context\Ui\Shop\Checkout\CheckoutAddressingContext;
+use Sylius\Behat\Context\Ui\Shop\Checkout\CheckoutPaymentContext;
+use Sylius\Behat\Context\Ui\Shop\Checkout\CheckoutShippingContext;
 use Sylius\Behat\Page\Shop\Checkout\AddressPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\CompletePageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SelectPaymentPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SelectShippingPageInterface;
 use Sylius\Behat\Page\UnexpectedPageException;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
-use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Webmozart\Assert\Assert;
 
@@ -56,17 +55,17 @@ final class CheckoutContext implements Context
     private $currentPageResolver;
 
     /**
-     * @var AddressingContext
+     * @var CheckoutAddressingContext
      */
     private $addressingContext;
 
     /**
-     * @var ShippingContext
+     * @var CheckoutShippingContext
      */
     private $shippingContext;
 
     /**
-     * @var PaymentContext
+     * @var CheckoutPaymentContext
      */
     private $paymentContext;
 
@@ -76,9 +75,9 @@ final class CheckoutContext implements Context
      * @param SelectShippingPageInterface $selectShippingPage
      * @param CompletePageInterface $completePage
      * @param CurrentPageResolverInterface $currentPageResolver
-     * @param AddressingContext $addressingContext
-     * @param ShippingContext $shippingContext
-     * @param PaymentContext $paymentContext
+     * @param CheckoutAddressingContext $addressingContext
+     * @param CheckoutShippingContext $shippingContext
+     * @param CheckoutPaymentContext $paymentContext
      */
     public function __construct(
         AddressPageInterface $addressPage,
@@ -86,9 +85,9 @@ final class CheckoutContext implements Context
         SelectShippingPageInterface $selectShippingPage,
         CompletePageInterface $completePage,
         CurrentPageResolverInterface $currentPageResolver,
-        AddressingContext $addressingContext,
-        ShippingContext $shippingContext,
-        PaymentContext $paymentContext
+        CheckoutAddressingContext $addressingContext,
+        CheckoutShippingContext $shippingContext,
+        CheckoutPaymentContext $paymentContext
     ) {
         $this->addressPage = $addressPage;
         $this->selectPaymentPage = $selectPaymentPage;
@@ -107,6 +106,53 @@ final class CheckoutContext implements Context
     {
         $this->addressingContext->iSpecifiedTheShippingAddress();
         $this->iProceedOrderWithShippingMethodAndPayment('Free', 'Offline');
+    }
+
+    /**
+     * @Given I chose :shippingMethodName shipping method
+     * @When I proceed selecting :shippingMethodName shipping method
+     */
+    public function iProceedSelectingShippingMethod($shippingMethodName)
+    {
+        $this->iProceedSelectingShippingCountryAndShippingMethod(null, $shippingMethodName);
+    }
+
+    /**
+     * @Given I have proceeded selecting :paymentMethodName payment method
+     * @When I proceed selecting :paymentMethodName payment method
+     */
+    public function iProceedSelectingPaymentMethod($paymentMethodName)
+    {
+        $this->iProceedSelectingShippingCountryAndShippingMethod();
+        $this->paymentContext->iChoosePaymentMethod($paymentMethodName);
+    }
+
+    /**
+     * @Given I have proceeded order with :shippingMethodName shipping method and :paymentMethodName payment
+     * @When I proceed with :shippingMethodName shipping method and :paymentMethodName payment
+     */
+    public function iProceedOrderWithShippingMethodAndPayment($shippingMethodName, $paymentMethodName)
+    {
+        $this->shippingContext->iHaveProceededSelectingShippingMethod($shippingMethodName);
+        $this->paymentContext->iChoosePaymentMethod($paymentMethodName);
+    }
+
+    /**
+     * @When /^I proceed selecting ("[^"]+" as shipping country) with "([^"]+)" method$/
+     */
+    public function iProceedSelectingShippingCountryAndShippingMethod(CountryInterface $shippingCountry = null, $shippingMethodName = null)
+    {
+        $this->addressingContext->iProceedSelectingShippingCountry($shippingCountry);
+        $this->shippingContext->iHaveProceededSelectingShippingMethod($shippingMethodName ?: 'Free');
+    }
+
+    /**
+     * @When /^I change shipping method to "([^"]*)"$/
+     */
+    public function iChangeShippingMethod($shippingMethodName)
+    {
+        $this->paymentContext->iDecideToChangeMyShippingMethod();
+        $this->shippingContext->iHaveProceededSelectingShippingMethod($shippingMethodName);
     }
 
     /**
@@ -156,90 +202,20 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @When /^I proceed selecting ("[^"]+" as shipping country) with "([^"]+)" method$/
-     */
-    public function iProceedSelectingShippingCountryAndShippingMethod(CountryInterface $shippingCountry = null, $shippingMethodName = null)
-    {
-        $this->addressingContext->iProceedSelectingShippingCountry($shippingCountry);
-
-        $this->shippingContext->iHaveProceededSelectingShippingMethod($shippingMethodName ?: 'Free');
-    }
-
-    /**
-     * @When /^I proceed selecting "([^"]+)" shipping method$/
-     * @Given /^I chose "([^"]*)" shipping method$/
-     */
-    public function iProceedSelectingShippingMethod($shippingMethodName)
-    {
-        $this->iProceedSelectingShippingCountryAndShippingMethod(null, $shippingMethodName);
-    }
-
-    /**
-     * @Given I have proceeded selecting :paymentMethodName payment method
-     * @When /^I (?:proceed|proceeded) selecting "([^"]+)" payment method$/
-     */
-    public function iProceedSelectingPaymentMethod($paymentMethodName = 'Offline')
-    {
-        $this->iProceedSelectingShippingCountryAndShippingMethod();
-        $this->paymentContext->iChoosePaymentMethod($paymentMethodName);
-    }
-
-    /**
-     * @When /^I change shipping method to "([^"]*)"$/
-     */
-    public function iChangeShippingMethod($shippingMethodName)
-    {
-        $this->paymentContext->iDecideToChangeMyShippingMethod();
-        $this->shippingContext->iHaveProceededSelectingShippingMethod($shippingMethodName);
-    }
-
-    /**
-     * @When /^I do not modify anything$/
-     */
-    public function iDoNotModifyAnything()
-    {
-        // Intentionally left blank to fulfill context expectation
-    }
-
-    /**
-     * @Given I have proceeded order with :shippingMethod shipping method and :paymentMethod payment
-     * @When I proceed with :shippingMethod shipping method and :paymentMethod payment
-     */
-    public function iProceedOrderWithShippingMethodAndPayment($shippingMethod, $paymentMethod)
-    {
-        $this->iProceedOrderWithShippingMethod($shippingMethod);
-        $this->paymentContext->iChoosePaymentMethod($paymentMethod);
-    }
-
-    /**
-     * @When I proceed with :shippingMethod shipping method
-     */
-    public function iProceedOrderWithShippingMethod($shippingMethod)
-    {
-        $this->shippingContext->iHaveProceededSelectingShippingMethod($shippingMethod);
-    }
-
-    /**
      * @Then the subtotal of :item item should be :price
      */
     public function theSubtotalOfItemShouldBe($item, $price)
     {
-        $currentPage = $this->resolveCurrentStepPage();
-        $actualPrice = $currentPage->getItemSubtotal($item);
-
-        Assert::eq($actualPrice, $price, sprintf('The %s subtotal should be %s, but is %s', $item, $price, $actualPrice));
-    }
-
-    /**
-     * @return AddressPageInterface|SelectPaymentPageInterface|SelectShippingPageInterface|CompletePageInterface
-     */
-    private function resolveCurrentStepPage()
-    {
-        return $this->currentPageResolver->getCurrentPageWithForm([
+        /** @var AddressPageInterface|SelectPaymentPageInterface|SelectShippingPageInterface|CompletePageInterface $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([
             $this->addressPage,
             $this->selectPaymentPage,
             $this->selectShippingPage,
             $this->completePage,
         ]);
+
+        $actualPrice = $currentPage->getItemSubtotal($item);
+
+        Assert::eq($actualPrice, $price, sprintf('The %s subtotal should be %s, but is %s', $item, $price, $actualPrice));
     }
 }

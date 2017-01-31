@@ -10,7 +10,7 @@ use Webmozart\Assert\Assert;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class ThankYouContext implements Context
+final class CheckoutThankYouContext implements Context
 {
     /**
      * @var ThankYouPageInterface
@@ -42,7 +42,7 @@ final class ThankYouContext implements Context
     }
 
     /**
-     * @Given I should be informed with :paymentMethod payment method instructions
+     * @Then I should be informed with :paymentMethod payment method instructions
      */
     public function iShouldBeInformedWithPaymentMethodInstructions(PaymentMethodInterface $paymentMethod)
     {
