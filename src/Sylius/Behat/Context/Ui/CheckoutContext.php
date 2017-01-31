@@ -13,6 +13,7 @@ namespace Sylius\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Context\Ui\Shop\Checkout\AddressingContext;
+use Sylius\Behat\Context\Ui\Shop\Checkout\ShippingContext;
 use Sylius\Behat\Page\Shop\Checkout\AddressPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\CompletePageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SelectPaymentPageInterface;
@@ -70,6 +71,11 @@ final class CheckoutContext implements Context
     private $addressingContext;
 
     /**
+     * @var ShippingContext
+     */
+    private $shippingContext;
+
+    /**
      * @param SharedStorageInterface $sharedStorage
      * @param AddressPageInterface $addressPage
      * @param SelectPaymentPageInterface $selectPaymentPage
@@ -77,6 +83,7 @@ final class CheckoutContext implements Context
      * @param CompletePageInterface $completePage
      * @param CurrentPageResolverInterface $currentPageResolver
      * @param AddressingContext $addressingContext
+     * @param ShippingContext $shippingContext
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -85,7 +92,8 @@ final class CheckoutContext implements Context
         SelectShippingPageInterface $selectShippingPage,
         CompletePageInterface $completePage,
         CurrentPageResolverInterface $currentPageResolver,
-        AddressingContext $addressingContext
+        AddressingContext $addressingContext,
+        ShippingContext $shippingContext
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->addressPage = $addressPage;
@@ -94,6 +102,7 @@ final class CheckoutContext implements Context
         $this->completePage = $completePage;
         $this->currentPageResolver = $currentPageResolver;
         $this->addressingContext = $addressingContext;
+        $this->shippingContext = $shippingContext;
     }
 
     /**
@@ -103,23 +112,6 @@ final class CheckoutContext implements Context
     {
         $this->addressingContext->iSpecifiedTheShippingAddress();
         $this->iProceedOrderWithShippingMethodAndPayment('Free', 'Offline');
-    }
-
-    /**
-     * @Given I have proceeded selecting :shippingMethodName shipping method
-     */
-    public function iHaveProceededSelectingShippingMethod($shippingMethodName)
-    {
-        $this->iSelectShippingMethod($shippingMethodName);
-        $this->selectShippingPage->nextStep();
-    }
-
-    /**
-     * @When I try to open checkout shipping page
-     */
-    public function iTryToOpenCheckoutShippingPage()
-    {
-        $this->selectShippingPage->tryToOpen();
     }
 
     /**
@@ -136,64 +128,6 @@ final class CheckoutContext implements Context
     public function iTryToOpenCheckoutCompletePage()
     {
         $this->completePage->tryToOpen();
-    }
-
-    /**
-     * @Given I have selected :shippingMethod shipping method
-     * @When I select :shippingMethod shipping method
-     */
-    public function iSelectShippingMethod($shippingMethod)
-    {
-        $this->selectShippingPage->selectShippingMethod($shippingMethod);
-    }
-
-    /**
-     * @Then I should not be able to select :shippingMethodName shipping method
-     */
-    public function iShouldNotBeAbleToSelectShippingMethod($shippingMethodName)
-    {
-        Assert::false(
-            in_array($shippingMethodName, $this->selectShippingPage->getShippingMethods(), true),
-            sprintf('Shipping method "%s" should not be available but it does.', $shippingMethodName)
-        );
-    }
-
-    /**
-     * @Then I should have :shippingMethodName shipping method available as the first choice
-     */
-    public function iShouldHaveShippingMethodAvailableAsFirstChoice($shippingMethodName)
-    {
-        $shippingMethods = $this->selectShippingPage->getShippingMethods();
-        $firstShippingMethod = reset($shippingMethods);
-
-        Assert::same($shippingMethodName, $firstShippingMethod);
-    }
-
-    /**
-     * @Then I should have :shippingMethodName shipping method available as the last choice
-     */
-    public function iShouldHaveShippingMethodAvailableAsLastChoice($shippingMethodName)
-    {
-        $shippingMethods = $this->selectShippingPage->getShippingMethods();
-        $lastShippingMethod = end($shippingMethods);
-
-        Assert::same($shippingMethodName, $lastShippingMethod);
-    }
-
-    /**
-     * @When /^I(?:| try to) complete the shipping step$/
-     */
-    public function iCompleteTheShippingStep()
-    {
-        $this->selectShippingPage->nextStep();
-    }
-
-    /**
-     * @When I decide to change my address
-     */
-    public function iDecideToChangeMyAddress()
-    {
-        $this->selectShippingPage->changeAddress();
     }
 
     /**
@@ -265,8 +199,7 @@ final class CheckoutContext implements Context
     {
         $this->addressingContext->iProceedSelectingShippingCountry($shippingCountry);
 
-        $this->selectShippingPage->selectShippingMethod($shippingMethodName ?: 'Free');
-        $this->selectShippingPage->nextStep();
+        $this->shippingContext->iHaveProceededSelectingShippingMethod($shippingMethodName ?: 'Free');
     }
 
     /**
@@ -288,14 +221,6 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @When I go back to shipping step of the checkout
-     */
-    public function iGoBackToShippingStepOfTheCheckout()
-    {
-        $this->selectShippingPage->open();
-    }
-
-    /**
      * @Given I have proceeded selecting :paymentMethodName payment method
      * @When /^I (?:proceed|proceeded) selecting "([^"]+)" payment method$/
      */
@@ -311,8 +236,7 @@ final class CheckoutContext implements Context
     public function iChangeShippingMethod($shippingMethodName)
     {
         $this->selectPaymentPage->changeShippingMethod();
-        $this->selectShippingPage->selectShippingMethod($shippingMethodName);
-        $this->selectShippingPage->nextStep();
+        $this->shippingContext->iHaveProceededSelectingShippingMethod($shippingMethodName);
     }
 
     /**
@@ -357,17 +281,6 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Then I should be on the checkout shipping step
-     */
-    public function iShouldBeOnTheCheckoutShippingStep()
-    {
-        Assert::true(
-            $this->selectShippingPage->isOpen(),
-            'Checkout shipping page should be opened, but it is not.'
-        );
-    }
-
-    /**
      * @Then I should be on the checkout complete step
      */
     public function iShouldBeOnTheCheckoutCompleteStep()
@@ -394,17 +307,6 @@ final class CheckoutContext implements Context
         Assert::true(
             $this->completePage->isOpen(),
             'Checkout summary page should be opened, but it is not.'
-        );
-    }
-
-    /**
-     * @Then I should be informed that my order cannot be shipped to this address
-     */
-    public function iShouldBeInformedThatMyOrderCannotBeShippedToThisAddress()
-    {
-        Assert::true(
-            $this->selectShippingPage->hasNoShippingMethodsMessage(),
-            'Shipping page should have no shipping methods message but it does not.'
         );
     }
 
@@ -501,8 +403,7 @@ final class CheckoutContext implements Context
      */
     public function iProceedOrderWithShippingMethodAndPayment($shippingMethod, $paymentMethod)
     {
-        $this->iSelectShippingMethod($shippingMethod);
-        $this->iCompleteTheShippingStep();
+        $this->iProceedOrderWithShippingMethod($shippingMethod);
         $this->iSelectPaymentMethod($paymentMethod);
         $this->iCompleteThePaymentStep();
     }
@@ -512,8 +413,7 @@ final class CheckoutContext implements Context
      */
     public function iProceedOrderWithShippingMethod($shippingMethod)
     {
-        $this->iSelectShippingMethod($shippingMethod);
-        $this->iCompleteTheShippingStep();
+        $this->shippingContext->iHaveProceededSelectingShippingMethod($shippingMethod);
     }
 
     /**
@@ -624,40 +524,6 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Then I should be able to go to the complete step again
-     */
-    public function iShouldBeAbleToGoToTheCompleteStepAgain()
-    {
-        $this->selectShippingPage->nextStep();
-
-        Assert::true($this->completePage->isOpen());
-    }
-
-    /**
-     * @Then I should be redirected to the shipping step
-     */
-    public function iShouldBeRedirectedToTheShippingStep()
-    {
-        Assert::true(
-            $this->selectShippingPage->isOpen(),
-            'Checkout shipping step should be opened, but it is not.'
-        );
-    }
-
-    /**
-     * @Given I should be able to go to the payment step again
-     */
-    public function iShouldBeAbleToGoToThePaymentStepAgain()
-    {
-        $this->selectShippingPage->nextStep();
-
-        Assert::true(
-            $this->selectPaymentPage->isOpen(),
-            'Checkout payment step should be opened, but it is not.'
-        );
-    }
-
-    /**
      * @Then I should be redirected to the payment step
      */
     public function iShouldBeRedirectedToThePaymentStep()
@@ -678,17 +544,6 @@ final class CheckoutContext implements Context
         Assert::true(
             $this->completePage->isOpen(),
             'Checkout summary page should be opened, but it is not.'
-        );
-    }
-
-    /**
-     * @Given I should see shipping method :shippingMethodName with fee :fee
-     */
-    public function iShouldSeeShippingFee($shippingMethodName, $fee)
-    {
-        Assert::true(
-            $this->selectShippingPage->hasShippingMethodFee($shippingMethodName, $fee),
-            sprintf('The shipping fee should be %s, but it does not.', $fee)
         );
     }
 
@@ -774,17 +629,6 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Then there should be information about no available shipping methods
-     */
-    public function thereShouldBeInformationAboutNoShippingMethodsAvailableForMyShippingAddress()
-    {
-        Assert::true(
-            $this->selectShippingPage->hasNoAvailableShippingMethodsWarning(),
-            'There should be warning about no available shipping methods, but it does not.'
-        );
-    }
-
-    /**
      * @Then I should have :paymentMethodName payment method available as the first choice
      */
     public function iShouldHavePaymentMethodAvailableAsFirstChoice($paymentMethodName)
@@ -804,39 +648,6 @@ final class CheckoutContext implements Context
         $lastPaymentMethod = end($paymentMethods);
 
         Assert::same($paymentMethodName, $lastPaymentMethod);
-    }
-
-    /**
-     * @Then I should see :shippingMethodName shipping method
-     */
-    public function iShouldSeeShippingMethod($shippingMethodName)
-    {
-        Assert::true(
-            $this->selectShippingPage->hasShippingMethod($shippingMethodName),
-            sprintf('There should be %s shipping method, but it is not.', $shippingMethodName)
-        );
-    }
-
-    /**
-     * @Then I should not see :shippingMethodName shipping method
-     */
-    public function iShouldNotSeeShippingMethod($shippingMethodName)
-    {
-        Assert::false(
-            $this->selectShippingPage->hasShippingMethod($shippingMethodName),
-            sprintf('There should not be %s shipping method, but it is.', $shippingMethodName)
-        );
-    }
-
-    /**
-     * @Then I should be checking out as :email
-     */
-    public function iShouldBeCheckingOutAs($email)
-    {
-        Assert::same(
-            'Checking out as '.$email.'.',
-            $this->selectShippingPage->getPurchaserEmail()
-        );
     }
 
     /**
@@ -862,17 +673,15 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @return SymfonyPageInterface
+     * @return AddressPageInterface|SelectPaymentPageInterface|SelectShippingPageInterface|CompletePageInterface
      */
     private function resolveCurrentStepPage()
     {
-        $possiblePages = [
+        return $this->currentPageResolver->getCurrentPageWithForm([
             $this->addressPage,
             $this->selectPaymentPage,
             $this->selectShippingPage,
             $this->completePage,
-        ];
-
-        return $this->currentPageResolver->getCurrentPageWithForm($possiblePages);
+        ]);
     }
 }

@@ -277,6 +277,7 @@
             <argument type="service" id="sylius.behat.page.shop.checkout.complete" />
             <argument type="service" id="sylius.behat.current_page_resolver" />
             <argument type="service" id="sylius.behat.context.ui.checkout.addressing" />
+            <argument type="service" id="sylius.behat.context.ui.checkout.shipping" />
             <tag name="fob.context_service" />
         </service>
 
@@ -296,6 +297,13 @@
             <argument type="service" id="__symfony__.sylius.factory.address" />
             <argument type="service" id="__symfony__.sylius.address_comparator" />
             <argument type="service" id="sylius.behat.page.shop.checkout.select_shipping" />
+            <tag name="fob.context_service" />
+        </service>
+
+        <service id="sylius.behat.context.ui.checkout.shipping" class="Sylius\Behat\Context\Ui\Shop\Checkout\ShippingContext">
+            <argument type="service" id="sylius.behat.page.shop.checkout.select_shipping" />
+            <argument type="service" id="sylius.behat.page.shop.checkout.select_payment" />
+            <argument type="service" id="sylius.behat.page.shop.checkout.complete" />
             <tag name="fob.context_service" />
         </service>
 
