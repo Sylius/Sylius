@@ -32,3 +32,4 @@ sylius:
             gateway: Portal
             instructions: Instruktioner
             name: Namn
+            position: Position

@@ -9,6 +9,7 @@ sylius:
             max_length: Attributnamn får inte vara längre än 1 tecken.|Attributnamn får inte vara längre än {{ limit }} tecken.
         code:
             not_blank: Var god ange en attributkod.
+            regex: Attributs kod kan endast bestå av bokstäver, siffror, bindestreck och understreck.
             unique: Denna kod används redan.
         presentation:
             not_blank: Ange attributpresentation.

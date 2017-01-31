@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    cart:
+        add_item: 'Позиция добавлена в корзину'
+        remove_item: 'Позиция удалена из корзины'
+        save: 'Корзина успешно обновлена'

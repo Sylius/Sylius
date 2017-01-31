@@ -12,14 +12,18 @@ sylius:
             ends_at: Slutar vid
             exclusive: Exklusiv
             name: Namn
+            priority: Prioritet
             rules: Regler
             starts_at: Startar vid
         promotion_action:
             fixed_discount_configuration:
                 amount: Antal
             type: Typ
+        promotion_coupon:
+            expires_at: Förfaller den
         promotion_coupon_generator_instruction:
             amount: Antal
+            expires_at: Förfaller den
         promotion_rule:
             cart_quantity_configuration:
                 count: Antal

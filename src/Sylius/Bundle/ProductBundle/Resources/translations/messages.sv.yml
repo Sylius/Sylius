@@ -10,6 +10,7 @@ sylius:
             options: Alternativ
             meta_keywords: Metasökord
             meta_description: Metabeskrivning
+            slug: Permalänk
             taxons: Taxa
         product_variant:
             available_on: Tillgänglig på
@@ -25,6 +26,7 @@ sylius:
             name: Namn
         option:
             name: Namn
+            position: Position
             values: Möjliga värden
         option_value:
             add_value: Lägg till värde

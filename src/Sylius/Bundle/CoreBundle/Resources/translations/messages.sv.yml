@@ -16,6 +16,11 @@ sylius:
             shipping_method: Fraktsätt
         promotion:
             channels: Kanaler
+        promotion_action:
+            add_product_configuration:
+                product: Produkt
+        promotion_coupon:
+            per_customer_usage_limit: Användningsbegränsning per kund
         group:
             name: Namn
             roles: Roller
@@ -23,6 +28,7 @@ sylius:
             taxonomies: Taxonomier
             locale_default: Standardspråk
             locales: Språk
+            contact_email: Kontakt e-post
             currency_base: Basvaluta
             currencies: Valutor
             shipping_methods: Leveransmetoder
@@ -113,7 +119,11 @@ sylius:
             type: Associationstyp
         product_association_type:
             name: Namn
+        promotion_filter:
+            products: Produktfilter
         promotion_rule:
+            customer_group:
+                group: Kundgrupp
             has_taxon:
                 taxons: Taxa
             product:
@@ -123,6 +133,8 @@ sylius:
                 amount: Antal
         payment_method:
             channels: Kanaler
+        product_attribute:
+            position: Position
         zone:
             scopes:
                 shipping: Leverans
