@@ -167,6 +167,8 @@ These services will be generated automatically based on subject name.
 
 ## Application:
 
+* `sylius_admin_dashboard_redirect` route was removed, use `sylius_admin_dashboard` instead.
+
 ### Configuration
 
 ### Security
