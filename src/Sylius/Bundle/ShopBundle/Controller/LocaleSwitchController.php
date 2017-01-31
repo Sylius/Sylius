@@ -42,26 +42,18 @@ final class LocaleSwitchController
     private $localeProvider;
 
     /**
-     * @var LocaleChangeHandlerInterface
-     */
-    private $localeChangeHandler;
-
-    /**
      * @param EngineInterface $templatingEngine
      * @param LocaleContextInterface $localeContext
      * @param LocaleProviderInterface $localeProvider
-     * @param LocaleChangeHandlerInterface $localeChangeHandler
      */
     public function __construct(
         EngineInterface $templatingEngine,
         LocaleContextInterface $localeContext,
-        LocaleProviderInterface $localeProvider,
-        LocaleChangeHandlerInterface $localeChangeHandler
+        LocaleProviderInterface $localeProvider
     ) {
         $this->templatingEngine = $templatingEngine;
         $this->localeContext = $localeContext;
         $this->localeProvider = $localeProvider;
-        $this->localeChangeHandler = $localeChangeHandler;
     }
 
     /**
@@ -83,14 +75,12 @@ final class LocaleSwitchController
      */
     public function switchAction(Request $request, $code)
     {
-        if (!in_array($code, $this->localeProvider->getAvailableLocalesCodes())) {
+        if (!in_array($code, $this->localeProvider->getAvailableLocalesCodes(), true)) {
             throw new HttpException(
                 Response::HTTP_NOT_ACCEPTABLE,
                 sprintf('The locale code "%s" is invalid.', $code)
             );
         }
-
-        $this->localeChangeHandler->handle($code);
 
         return new RedirectResponse($request->headers->get('referer', $request->getSchemeAndHttpHost()));
     }

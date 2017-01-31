@@ -13,20 +13,6 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="sylius.handler.locale_change.composite" class="Sylius\Component\Core\Locale\Handler\CompositeLocaleChangeHandler" public="false" />
-
-        <service id="sylius.handler.locale_change.cart" class="Sylius\Bundle\CoreBundle\Handler\CartLocaleChangeHandler">
-            <argument type="service" id="sylius.context.cart" />
-            <argument type="service" id="sylius.manager.order" />
-            <tag name="sylius.locale.change_handler" />
-        </service>
-        <service id="sylius.handler.locale_change.shop" class="Sylius\Bundle\CoreBundle\Handler\ShopLocaleChangeHandler">
-            <argument type="service" id="sylius.storage.locale" />
-            <argument type="service" id="sylius.context.channel.composite" />
-            <argument type="service" id="event_dispatcher" />
-            <tag name="sylius.locale.change_handler" />
-        </service>
-
         <service id="sylius.handler.shop_user_logout" class="Sylius\Bundle\CoreBundle\EventListener\ShopUserLogoutHandler">
             <argument type="service" id="security.http_utils" />
             <argument>/</argument>
