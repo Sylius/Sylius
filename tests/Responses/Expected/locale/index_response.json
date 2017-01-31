@@ -18,25 +18,25 @@
         "items": [
             {
                 "id": @integer@,
-                "code": "en",
+                "code": "en_US",
                 "enabled": true
             },
             {
 
                 "id": @integer@,
-                "code": "nl",
+                "code": "nl_NL",
                 "enabled": true
             },
             {
 
                 "id": @integer@,
-                "code": "fr",
+                "code": "fr_FR",
                 "enabled": true
             },
             {
 
                 "id": @integer@,
-                "code": "de",
+                "code": "de_CH",
                 "enabled": false
             }
         ]

@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\ApiBundle\DependencyInjection;
 
-use Sylius\Bundle\ApiBundle\Controller\TokenController;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -37,11 +36,6 @@ final class SyliusApiExtension extends AbstractResourceExtension implements Prep
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
         $loader->load('services.xml');
-
-        $container->setDefinition('fos_oauth_server.controller.token', new Definition(TokenController::class, [
-            new Reference('fos_oauth_server.server'),
-            new Reference('fos_rest.decoder_provider'),
-        ]));
     }
 
     /**

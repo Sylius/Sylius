@@ -1,7 +1,7 @@
 Sylius\Component\Locale\Model\Locale:
-    locale_{en, nl, fr}:
+    locale_{en_US, nl_NL, fr_FR}:
         code: <current()>
         enabled: true
-    locale_de:
-        code: de
+    locale_de_CH:
+        code: de_CH
         enabled: false
