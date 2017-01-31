@@ -111,4 +111,4 @@ twig:
 
 fos_rest:
     body_listener:
-        array_normalizer: fos_rest.normalizer.camel_keys
+        array_normalizer: sylius.normalizer.camel_keys

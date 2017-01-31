@@ -20,5 +20,6 @@
             <argument type="service" id="fos_oauth_server.entity_manager" />
             <argument>%fos_oauth_server.model.client.class%</argument>
         </service>
+        <service id="sylius.normalizer.camel_keys" class="Sylius\Bundle\ApiBundle\Normalizer\LocaleAwareCamelKeysNormalizer" />
     </services>
 </container>
