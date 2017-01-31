@@ -30,10 +30,11 @@ final class SyliusOrderExtension extends AbstractResourceExtension
         $config = $this->processConfiguration($this->getConfiguration([], $container), $config);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
+        $loader->load(sprintf('services/integrations/%s.xml', $config['driver']));
+
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
         $loader->load('services.xml');
-        $loader->load(sprintf('services/integrations/%s.xml', $config['driver']));
 
         $container->setParameter('sylius_order.cart_expiration_period', $config['expiration']['cart']);
         $container->setParameter('sylius_order.order_expiration_period', $config['expiration']['order']);

@@ -87,7 +87,7 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('model')->defaultValue(ExchangeRate::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(ExchangeRateInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('repository')->defaultValue(ExchangeRateRepository::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->cannotBeEmpty()->end()
                                         ->scalarNode('form')->defaultValue(ExchangeRateType::class)->cannotBeEmpty()->end()
                                     ->end()
