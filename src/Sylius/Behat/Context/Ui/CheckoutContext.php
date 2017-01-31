@@ -13,12 +13,12 @@ namespace Sylius\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Context\Ui\Shop\Checkout\AddressingContext;
+use Sylius\Behat\Context\Ui\Shop\Checkout\PaymentContext;
 use Sylius\Behat\Context\Ui\Shop\Checkout\ShippingContext;
 use Sylius\Behat\Page\Shop\Checkout\AddressPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\CompletePageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SelectPaymentPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SelectShippingPageInterface;
-use Sylius\Behat\Page\SymfonyPageInterface;
 use Sylius\Behat\Page\UnexpectedPageException;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -76,6 +76,11 @@ final class CheckoutContext implements Context
     private $shippingContext;
 
     /**
+     * @var PaymentContext
+     */
+    private $paymentContext;
+
+    /**
      * @param SharedStorageInterface $sharedStorage
      * @param AddressPageInterface $addressPage
      * @param SelectPaymentPageInterface $selectPaymentPage
@@ -84,6 +89,7 @@ final class CheckoutContext implements Context
      * @param CurrentPageResolverInterface $currentPageResolver
      * @param AddressingContext $addressingContext
      * @param ShippingContext $shippingContext
+     * @param PaymentContext $paymentContext
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -93,7 +99,8 @@ final class CheckoutContext implements Context
         CompletePageInterface $completePage,
         CurrentPageResolverInterface $currentPageResolver,
         AddressingContext $addressingContext,
-        ShippingContext $shippingContext
+        ShippingContext $shippingContext,
+        PaymentContext $paymentContext
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->addressPage = $addressPage;
@@ -103,6 +110,7 @@ final class CheckoutContext implements Context
         $this->currentPageResolver = $currentPageResolver;
         $this->addressingContext = $addressingContext;
         $this->shippingContext = $shippingContext;
+        $this->paymentContext = $paymentContext;
     }
 
     /**
@@ -115,27 +123,11 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @When I try to open checkout payment page
-     */
-    public function iTryToOpenCheckoutPaymentPage()
-    {
-        $this->selectPaymentPage->tryToOpen();
-    }
-
-    /**
      * @When I try to open checkout complete page
      */
     public function iTryToOpenCheckoutCompletePage()
     {
         $this->completePage->tryToOpen();
-    }
-
-    /**
-     * @When I decide to change order shipping method
-     */
-    public function iDecideToChangeMyShippingMethod()
-    {
-        $this->selectPaymentPage->changeShippingMethod();
     }
 
     /**
@@ -212,22 +204,13 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @When /^I choose "([^"]*)" payment method$/
-     */
-    public function iChoosePaymentMethod($paymentMethodName)
-    {
-        $this->selectPaymentPage->selectPaymentMethod($paymentMethodName ?: 'Offline');
-        $this->selectPaymentPage->nextStep();
-    }
-
-    /**
      * @Given I have proceeded selecting :paymentMethodName payment method
      * @When /^I (?:proceed|proceeded) selecting "([^"]+)" payment method$/
      */
     public function iProceedSelectingPaymentMethod($paymentMethodName = 'Offline')
     {
         $this->iProceedSelectingShippingCountryAndShippingMethod();
-        $this->iChoosePaymentMethod($paymentMethodName);
+        $this->paymentContext->iChoosePaymentMethod($paymentMethodName);
     }
 
     /**
@@ -235,7 +218,7 @@ final class CheckoutContext implements Context
      */
     public function iChangeShippingMethod($shippingMethodName)
     {
-        $this->selectPaymentPage->changeShippingMethod();
+        $this->paymentContext->iDecideToChangeMyShippingMethod();
         $this->shippingContext->iHaveProceededSelectingShippingMethod($shippingMethodName);
     }
 
@@ -265,14 +248,6 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @When I want to pay for order
-     */
-    public function iWantToPayForOrder()
-    {
-        $this->selectPaymentPage->tryToOpen();
-    }
-
-    /**
      * @When I confirm my order
      */
     public function iConfirmMyOrder()
@@ -286,17 +261,6 @@ final class CheckoutContext implements Context
     public function iShouldBeOnTheCheckoutCompleteStep()
     {
         Assert::true($this->completePage->isOpen());
-    }
-
-    /**
-     * @Then I should be on the checkout payment step
-     */
-    public function iShouldBeOnTheCheckoutPaymentStep()
-    {
-        Assert::true(
-            $this->selectPaymentPage->isOpen(),
-            'Checkout payment page should be opened, but it is not.'
-        );
     }
 
     /**
@@ -344,57 +308,11 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @When I go back to payment step of the checkout
-     */
-    public function iAmAtTheCheckoutPaymentStep()
-    {
-        $this->selectPaymentPage->open();
-    }
-
-    /**
-     * @When I complete the payment step
-     */
-    public function iCompleteThePaymentStep()
-    {
-        $this->selectPaymentPage->nextStep();
-    }
-
-    /**
-     * @When I select :name payment method
-     */
-    public function iSelectPaymentMethod($name)
-    {
-        $this->selectPaymentPage->selectPaymentMethod($name);
-    }
-
-    /**
      * @When /^I do not modify anything$/
      */
     public function iDoNotModifyAnything()
     {
         // Intentionally left blank to fulfill context expectation
-    }
-
-    /**
-     * @Then I should not be able to select :paymentMethodName payment method
-     */
-    public function iShouldNotBeAbleToSelectPaymentMethod($paymentMethodName)
-    {
-        Assert::false(
-            $this->selectPaymentPage->hasPaymentMethod($paymentMethodName),
-            sprintf('Payment method "%s" should not be available, but it does.', $paymentMethodName)
-        );
-    }
-
-    /**
-     * @Then I should be able to select :paymentMethodName payment method
-     */
-    public function iShouldBeAbleToSelectPaymentMethod($paymentMethodName)
-    {
-        Assert::true(
-            $this->selectPaymentPage->hasPaymentMethod($paymentMethodName),
-            sprintf('Payment method "%s" should be available, but it does not.', $paymentMethodName)
-        );
     }
 
     /**
@@ -404,8 +322,7 @@ final class CheckoutContext implements Context
     public function iProceedOrderWithShippingMethodAndPayment($shippingMethod, $paymentMethod)
     {
         $this->iProceedOrderWithShippingMethod($shippingMethod);
-        $this->iSelectPaymentMethod($paymentMethod);
-        $this->iCompleteThePaymentStep();
+        $this->paymentContext->iChoosePaymentMethod($paymentMethod);
     }
 
     /**
@@ -524,30 +441,6 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Then I should be redirected to the payment step
-     */
-    public function iShouldBeRedirectedToThePaymentStep()
-    {
-        Assert::true(
-            $this->selectPaymentPage->isOpen(),
-            'Checkout payment step should be opened, but it is not.'
-        );
-    }
-
-    /**
-     * @Given I should be able to go to the summary page again
-     */
-    public function iShouldBeAbleToGoToTheSummaryPageAgain()
-    {
-        $this->selectPaymentPage->nextStep();
-
-        Assert::true(
-            $this->completePage->isOpen(),
-            'Checkout summary page should be opened, but it is not.'
-        );
-    }
-
-    /**
      * @Then the subtotal of :item item should be :price
      */
     public function theSubtotalOfItemShouldBe($item, $price)
@@ -626,28 +519,6 @@ final class CheckoutContext implements Context
             $this->completePage->hasBillingProvinceName($provinceName),
             sprintf('Cannot find billing address with province %s', $provinceName)
         );
-    }
-
-    /**
-     * @Then I should have :paymentMethodName payment method available as the first choice
-     */
-    public function iShouldHavePaymentMethodAvailableAsFirstChoice($paymentMethodName)
-    {
-        $paymentMethods = $this->selectPaymentPage->getPaymentMethods();
-        $firstPaymentMethod = reset($paymentMethods);
-
-        Assert::same($paymentMethodName, $firstPaymentMethod);
-    }
-
-    /**
-     * @Then I should have :paymentMethodName payment method available as the last choice
-     */
-    public function iShouldHavePaymentMethodAvailableAsLastChoice($paymentMethodName)
-    {
-        $paymentMethods = $this->selectPaymentPage->getPaymentMethods();
-        $lastPaymentMethod = end($paymentMethods);
-
-        Assert::same($paymentMethodName, $lastPaymentMethod);
     }
 
     /**

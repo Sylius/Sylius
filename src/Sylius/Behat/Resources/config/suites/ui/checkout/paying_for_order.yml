@@ -29,6 +29,7 @@ default:
                 - sylius.behat.context.ui.checkout
                 - sylius.behat.context.ui.checkout.addressing
                 - sylius.behat.context.ui.checkout.order_details
+                - sylius.behat.context.ui.checkout.payment
                 - sylius.behat.context.ui.checkout.shipping
                 - sylius.behat.context.ui.checkout.thank_you
                 - sylius.behat.context.ui.shop.cart

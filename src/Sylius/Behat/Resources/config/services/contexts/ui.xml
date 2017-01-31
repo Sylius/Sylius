@@ -278,6 +278,7 @@
             <argument type="service" id="sylius.behat.current_page_resolver" />
             <argument type="service" id="sylius.behat.context.ui.checkout.addressing" />
             <argument type="service" id="sylius.behat.context.ui.checkout.shipping" />
+            <argument type="service" id="sylius.behat.context.ui.checkout.payment" />
             <tag name="fob.context_service" />
         </service>
 
@@ -302,6 +303,12 @@
 
         <service id="sylius.behat.context.ui.checkout.shipping" class="Sylius\Behat\Context\Ui\Shop\Checkout\ShippingContext">
             <argument type="service" id="sylius.behat.page.shop.checkout.select_shipping" />
+            <argument type="service" id="sylius.behat.page.shop.checkout.select_payment" />
+            <argument type="service" id="sylius.behat.page.shop.checkout.complete" />
+            <tag name="fob.context_service" />
+        </service>
+
+        <service id="sylius.behat.context.ui.checkout.payment" class="Sylius\Behat\Context\Ui\Shop\Checkout\PaymentContext">
             <argument type="service" id="sylius.behat.page.shop.checkout.select_payment" />
             <argument type="service" id="sylius.behat.page.shop.checkout.complete" />
             <tag name="fob.context_service" />
