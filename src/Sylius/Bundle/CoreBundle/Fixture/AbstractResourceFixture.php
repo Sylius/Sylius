@@ -83,12 +83,10 @@ abstract class AbstractResourceFixture implements FixtureInterface
 
             if (0 === ($i % 10)) {
                 $this->objectManager->flush();
-                $this->objectManager->clear();
             }
         }
 
         $this->objectManager->flush();
-        $this->objectManager->clear();
     }
 
     /**
