@@ -5,5 +5,10 @@
     "first_name": "Barry",
     "last_name": "Doe",
     "birthday": "@string@.isDateTime()",
-    "gender": "u"
+    "gender": "u",
+    "_links": {
+        "self": {
+            "href": "@string@"
+        }
+    }
 }

@@ -48,6 +48,7 @@ final class OrderItemType extends AbstractResourceType
     {
         $builder
             ->add('quantity', IntegerType::class, [
+                'attr' => ['min' => 1],
                 'label' => 'sylius.ui.quantity',
             ])
             ->setDataMapper($this->dataMapper)

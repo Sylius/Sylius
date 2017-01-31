@@ -1,0 +1,20 @@
+Sylius\Component\Order\Model\OrderItemUnit:
+    exclusion_policy: ALL
+    xml_root_name: order
+    properties:
+        id:
+            expose: true
+            type: integer
+            groups: [Default, Detailed, DetailedCart]
+        orderItem:
+            expose: true
+            type: Sylius\Component\Order\Model\OrderItem
+            groups: [Default, Detailed, DetailedCart]
+        adjustments:
+            expose: true
+            type: array
+            groups: [Default, Detailed, DetailedCart]
+        adjustmentsTotal:
+            expose: true
+            type: integer
+            groups: [Default, Detailed, DetailedCart]

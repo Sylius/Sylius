@@ -22,6 +22,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.org>
@@ -57,9 +58,7 @@ final class OrderItemType extends AbstractType
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
             $orderItem = $event->getData();
 
-            if (null === $orderItem) {
-                throw new UnexpectedTypeException($orderItem, OrderItemInterface::class);
-            }
+            Assert::notNull($orderItem);
 
             if (null !== $orderItem->getId()) {
                 $form = $event->getForm();
@@ -82,6 +81,6 @@ final class OrderItemType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'sylius_api_cart_item';
+        return 'sylius_api_order_item';
     }
 }

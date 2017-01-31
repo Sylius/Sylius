@@ -6,8 +6,17 @@
   "adjustments_total": @integer@,
   "total": @integer@,
   "state": "cart",
-  "created_at": "@string@.isDateTime()",
-  "updated_at": "@string@.isDateTime()",
+  "customer": {
+    "id": @integer@,
+    "email": "john@doe.com",
+    "email_canonical": "john@doe.com",
+    "gender": "u",
+    "_links": {
+      "self": {
+        "href": "@string@"
+      }
+    }
+  },
   "channel": {
     "id": @integer@,
     "code": "CHANNEL",
@@ -59,5 +68,6 @@
     }
   ],
   "shipments": @array@,
+  "currency_code": "EUR",
   "checkout_state": "payment_selected"
 }

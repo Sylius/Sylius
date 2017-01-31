@@ -20,13 +20,23 @@
                 "id": @integer@,
                 "email": "Joe@doe.com",
                 "first_name": "Joe",
-                "last_name": "Doe"
+                "last_name": "Doe",
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
             },
             {
                 "id": @integer@,
                 "email": "Barry@doe.com",
                 "first_name": "Barry",
-                "last_name": "Doe"
+                "last_name": "Doe",
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
             },
             {
                 "id": @integer@,
@@ -37,7 +47,12 @@
                 },
                 "email": "Thea@doe.com",
                 "first_name": "Thea",
-                "last_name": "Doe"
+                "last_name": "Doe",
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
             },
             {
                 "id": @integer@,
@@ -48,7 +63,12 @@
                 },
                 "email": "Roy@doe.com",
                 "first_name": "Roy",
-                "last_name": "Doe"
+                "last_name": "Doe",
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
             },
             {
                 "id": @integer@,
@@ -59,7 +79,12 @@
                 },
                 "email": "Oliver@doe.com",
                 "first_name": "Oliver",
-                "last_name": "Doe"
+                "last_name": "Doe",
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
             }
         ]
     }

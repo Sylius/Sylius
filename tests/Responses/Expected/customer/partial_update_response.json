@@ -14,5 +14,10 @@
     "first_name": "John",
     "last_name": "Doe",
     "gender": "u",
-    "birthday": "@string@.isDateTime()"
+    "birthday": "@string@.isDateTime()",
+    "_links": {
+        "self": {
+            "href": "@string@"
+        }
+    }
 }

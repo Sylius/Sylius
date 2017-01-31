@@ -11,6 +11,7 @@ sylius_api_cart_index:
             paginate: $limit
             sortable: true
             grid: sylius_api_cart
+            serialization_groups: [Default]
 
 sylius_api_cart_create:
     path: /
@@ -20,6 +21,7 @@ sylius_api_cart_create:
         _sylius:
             serialization_version: $version
             form: Sylius\Bundle\ApiBundle\Form\Type\OrderType
+            serialization_groups: [DetailedCart]
 
 sylius_api_cart_delete:
     path: /{id}
@@ -44,3 +46,4 @@ sylius_api_cart_show:
             repository:
                 method: findCartById
                 arguments: [$id]
+            serialization_groups: [DetailedCart]

@@ -11,62 +11,26 @@ sylius_grid:
                 number: desc
             fields:
                 channel:
-                    type: twig
-                    label: sylius.ui.channel
+                    type: string
+                    path: channel.code
                     sortable: channel.code
-                    options:
-                        template: "@SyliusAdmin/Order/Grid/Field/channel.html.twig"
                 number:
-                    type: twig
-                    label: sylius.ui.number
+                    type: string
                     path: .
                     sortable: ~
-                    options:
-                        template: "@SyliusAdmin/Order/Grid/Field/number.html.twig"
                 date:
                     type: datetime
-                    label: sylius.ui.date
                     path: checkoutCompletedAt
                     sortable: checkoutCompletedAt
-                    options:
-                        format: d-m-Y H:i:s
                 customer:
-                    type: twig
-                    label: sylius.ui.customer
-                    sortable: customer.lastName
+                    type: string
+                    sortable: customer.email
+                    path: customer.email
                     options:
                         template: "@SyliusAdmin/Order/Grid/Field/customer.html.twig"
-                state:
-                    type: twig
-                    label: sylius.ui.state
-                    sortable: ~
-                    options:
-                        template: "@SyliusUi/Grid/Field/state.html.twig"
-                        vars:
-                            labels: "@SyliusAdmin/Order/Label/State"
-                paymentState:
-                    type: twig
-                    label: sylius.ui.payment_state
-                    sortable: ~
-                    options:
-                        template: "@SyliusUi/Grid/Field/state.html.twig"
-                        vars:
-                            labels: "@SyliusAdmin/Order/Label/PaymentState"
-                shippingState:
-                    type: twig
-                    label: sylius.ui.shipping_state
-                    sortable: ~
-                    options:
-                        template: "@SyliusUi/Grid/Field/state.html.twig"
-                        vars:
-                            labels: "@SyliusAdmin/Order/Label/ShippingState"
                 total:
-                    type: twig
-                    label: sylius.ui.total
-                    path: .
+                    type: integer
                     sortable: total
-                    options:
-                        template: "@SyliusAdmin/Order/Grid/Field/total.html.twig"
                 currencyCode:
                     type: string
                     label: sylius.ui.currency
@@ -74,24 +38,20 @@ sylius_grid:
             filters:
                 number:
                     type: string
-                    label: sylius.ui.number
                 customer:
                     type: string
-                    label: sylius.ui.customer
                     options:
-                        fields: [customer.email, customer.firstName, customer.lastName]
+                        fields: [customer.email]
                 date:
                     type: date
                     label: sylius.ui.date
                     options:
                         field: checkoutCompletedAt
                 channel:
-                    type: entity
-                    label: sylius.ui.channel
-                    form_options:
-                        class: "%sylius.model.channel.class%"
+                    type: string
+                    options:
+                        fields: [channel.code]
                 total:
                     type: money
-                    label: sylius.ui.total
                     options:
                         currency_field: currencyCode

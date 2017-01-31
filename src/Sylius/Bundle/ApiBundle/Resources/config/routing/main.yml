@@ -28,7 +28,7 @@ sylius_api_order:
     resource: |
         alias: sylius.order
         section: api
-        only: [show, delete]
+        only: [show]
         grid: sylius_admin_order
         serialization_version: $version
     type: sylius.resource_api

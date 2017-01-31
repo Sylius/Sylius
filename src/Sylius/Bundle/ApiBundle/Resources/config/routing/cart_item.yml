@@ -13,6 +13,7 @@ sylius_api_order_item_create:
                 method: createForCart
                 arguments:
                   - "expr:service('sylius.repository.order').findCartById($cartId)"
+            serialization_groups: [DetailedCart]
 
 sylius_api_order_item_update:
     path: /{id}
@@ -22,6 +23,9 @@ sylius_api_order_item_update:
         _sylius:
             serialization_version: $version
             form: Sylius\Bundle\ApiBundle\Form\Type\OrderItemType
+            repository:
+                method: findOneByIdAndCartId
+                arguments: [$id, $cartId]
 
 sylius_api_order_item_delete:
     path: /{id}
@@ -31,3 +35,6 @@ sylius_api_order_item_delete:
         _sylius:
             serialization_version: $version
             csrf_protection: false
+            repository:
+                method: findOneByIdAndCartId
+                arguments: [$id, $cartId]

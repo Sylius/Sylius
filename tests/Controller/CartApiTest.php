@@ -40,7 +40,7 @@ final class CartApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_denies_getting_an_order_for_non_authenticated_user()
+    public function it_denies_getting_an_cart_for_non_authenticated_user()
     {
         $this->client->request('GET', '/api/v1/carts/-1');
 
@@ -51,7 +51,7 @@ final class CartApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_returns_not_found_response_when_requesting_details_of_an_order_which_does_not_exist()
+    public function it_returns_not_found_response_when_requesting_details_of_an_cart_which_does_not_exist()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -64,12 +64,14 @@ final class CartApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_to_get_order()
+    public function it_allows_to_get_cart()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $orderData = $this->loadFixturesFromFile('resources/carts.yml');
+        $cartData = $this->loadFixturesFromFile('resources/cart.yml');
+        /** @var OrderInterface $cart */
+        $cart = $cartData['order_001'];
 
-        $this->client->request('GET', '/api/v1/carts/'.$orderData['order_001']->getId(), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', '/api/v1/carts/'.$cart->getId(), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'cart/show_response', Response::HTTP_OK);
@@ -78,12 +80,14 @@ final class CartApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_does_not_show_orders_in_stare_other_than_cart()
+    public function it_does_not_show_orders_in_state_other_than_cart()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $orderData = $this->loadFixturesFromFile('resources/order.yml');
+        /** @var OrderInterface $cart */
+        $order = $orderData['order_001'];
 
-        $this->client->request('GET', '/api/v1/carts/'.$orderData['order_001']->getId(), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', '/api/v1/carts/'.$order->getId(), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
@@ -119,7 +123,7 @@ final class CartApiTest extends JsonApiTestCase
     public function it_allows_to_create_cart()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $this->loadFixturesFromFile('resources/carts.yml');
+        $this->loadFixturesFromFile('resources/cart.yml');
 
         $data =
 <<<EOT
@@ -154,7 +158,7 @@ EOT;
     public function it_allows_to_get_carts_list()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $this->loadFixturesFromFile('resources/carts.yml');
+        $this->loadFixturesFromFile('resources/cart.yml');
 
         $this->client->request('GET', '/api/v1/carts/', [], [], static::$authorizedHeaderWithAccept);
 
@@ -165,7 +169,7 @@ EOT;
     /**
      * @test
      */
-    public function it_does_not_allow_to_list_orders_in_state_different_than_cart()
+    public function it_does_not_allow_to_list_carts_in_state_different_than_cart()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/order.yml');
@@ -206,14 +210,18 @@ EOT;
     public function it_allows_to_delete_cart()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $carts = $this->loadFixturesFromFile('resources/carts.yml');
+        $carts = $this->loadFixturesFromFile('resources/cart.yml');
 
-        $this->client->request('DELETE', '/api/v1/carts/'.$carts['order_001']->getId(), [], [], static::$authorizedHeaderWithContentType);
+        /** @var OrderItemInterface $cart */
+        $cart = $carts['order_001'];
+        $url = '/api/v1/carts/'.$cart->getId();
+
+        $this->client->request('DELETE', $url, [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
 
-        $this->client->request('GET', '/api/v1/carts/'.$carts['order_001']->getId(), [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('GET', $url, [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
@@ -227,7 +235,10 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $carts = $this->loadFixturesFromFile('resources/order.yml');
 
-        $this->client->request('DELETE', '/api/v1/carts/'.$carts['order_001']->getId(), [], [], static::$authorizedHeaderWithContentType);
+        /** @var OrderItemInterface $cart */
+        $cart = $carts['order_001'];
+
+        $this->client->request('DELETE', '/api/v1/carts/'.$cart->getId(), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
@@ -247,12 +258,16 @@ EOT;
     /**
      * @test
      */
-    public function it_does_not_allow_to_add_item_to_cart_without_providing_all_needed_fields()
+    public function it_does_not_allow_to_add_item_to_cart_without_providing_required_fields()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $carts = $this->loadFixturesFromFile('resources/carts.yml');
+        $carts = $this->loadFixturesFromFile('resources/cart.yml');
 
-        $this->client->request('POST', sprintf('/api/v1/carts/%s/items/', $carts['order_001']->getId()), [], [], static::$authorizedHeaderWithContentType);
+        /** @var OrderInterface $cart */
+        $cart = $carts['order_001'];
+        $url = sprintf('/api/v1/carts/%s/items/', $cart->getId());
+
+        $this->client->request('POST', $url, [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'cart/add_to_cart_validation_fail_response', Response::HTTP_BAD_REQUEST);
@@ -264,7 +279,11 @@ EOT;
     public function it_adds_an_item_to_the_cart()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $carts = $this->loadFixturesFromFile('resources/carts.yml');
+        $carts = $this->loadFixturesFromFile('resources/cart.yml');
+
+        /** @var OrderInterface $cart */
+        $cart = $carts['order_001'];
+        $url = sprintf('/api/v1/carts/%s/items/', $cart->getId());
 
         $data =
 <<<EOT
@@ -273,7 +292,7 @@ EOT;
             "quantity": 1
         }
 EOT;
-        $this->client->request('POST', sprintf('/api/v1/carts/%s/items/', $carts['order_001']->getId()), [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('POST', $url, [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'cart/add_to_cart_response', Response::HTTP_CREATED);
@@ -285,7 +304,11 @@ EOT;
     public function it_does_not_allow_to_add_item_with_negative_quantity()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $carts = $this->loadFixturesFromFile('resources/carts.yml');
+        $carts = $this->loadFixturesFromFile('resources/cart.yml');
+
+        /** @var OrderInterface $cart */
+        $cart = $carts['order_001'];
+        $url = sprintf('/api/v1/carts/%s/items/', $cart->getId());
 
         $data =
 <<<EOT
@@ -294,7 +317,7 @@ EOT;
             "quantity": -1
         }
 EOT;
-        $this->client->request('POST', sprintf('/api/v1/carts/%s/items/', $carts['order_001']->getId()), [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('POST', $url, [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'cart/add_to_cart_quantity_validation_fail_response', Response::HTTP_BAD_REQUEST);
@@ -306,7 +329,11 @@ EOT;
     public function it_adds_an_item_to_the_cart_with_quantity_bigger_than_one()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $carts = $this->loadFixturesFromFile('resources/carts.yml');
+        $carts = $this->loadFixturesFromFile('resources/cart.yml');
+
+        /** @var OrderInterface $cart */
+        $cart = $carts['order_001'];
+        $url = sprintf('/api/v1/carts/%s/items/', $cart->getId());
 
         $data =
 <<<EOT
@@ -315,7 +342,7 @@ EOT;
             "quantity": 3
         }
 EOT;
-        $this->client->request('POST', sprintf('/api/v1/carts/%s/items/', $carts['order_001']->getId()), [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('POST', $url, [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'cart/add_to_cart_with_bigger_quantity_response', Response::HTTP_CREATED);
@@ -324,10 +351,14 @@ EOT;
     /**
      * @test
      */
-    public function it_adds_an_item_to_the_cart_with_that_contains_tracked_variant()
+    public function it_adds_an_item_with_tracked_variant_to_the_cart()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $carts = $this->loadFixturesFromFile('resources/carts.yml');
+        $carts = $this->loadFixturesFromFile('resources/cart.yml');
+
+        /** @var OrderInterface $cart */
+        $cart = $carts['order_001'];
+        $url = sprintf('/api/v1/carts/%s/items/', $cart->getId());
 
         $data =
 <<<EOT
@@ -336,7 +367,7 @@ EOT;
             "quantity": 1
         }
 EOT;
-        $this->client->request('POST', sprintf('/api/v1/carts/%s/items/', $carts['order_001']->getId()), [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('POST', $url, [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'cart/add_to_cart_hard_available_item_response', Response::HTTP_CREATED);
@@ -348,7 +379,11 @@ EOT;
     public function it_checks_if_requested_variant_is_available()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $carts = $this->loadFixturesFromFile('resources/carts.yml');
+        $carts = $this->loadFixturesFromFile('resources/cart.yml');
+
+        /** @var OrderInterface $cart */
+        $cart = $carts['order_001'];
+        $url = sprintf('/api/v1/carts/%s/items/', $cart->getId());
 
         $data =
 <<<EOT
@@ -357,7 +392,7 @@ EOT;
             "quantity": 3
         }
 EOT;
-        $this->client->request('POST', sprintf('/api/v1/carts/%s/items/', $carts['order_001']->getId()), [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('POST', $url, [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'cart/add_to_cart_hard_available_item_validation_error_response', Response::HTTP_BAD_REQUEST);
@@ -381,10 +416,12 @@ EOT;
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $fulfilledCart = $this->loadFixturesFromFile('resources/fulfilled_cart.yml');
-        /** @var OrderInterface $order */
-        $order = $fulfilledCart['fulfilled_cart'];
-        /** @var OrderItemInterface $orderItem */
-        $orderItem = $fulfilledCart['sw_mug_item'];
+
+        /** @var OrderInterface $cart */
+        $cart = $fulfilledCart['fulfilled_cart'];
+        /** @var OrderItemInterface $cartItem */
+        $cartItem = $fulfilledCart['sw_mug_item'];
+        $url = sprintf('/api/v1/carts/%s/items/%s', $cart->getId(), $cartItem->getId());
 
         $data =
 <<<EOT
@@ -393,7 +430,6 @@ EOT;
         }
 EOT;
 
-        $url = sprintf('/api/v1/carts/%s/items/%s', $order->getId(), $orderItem->getId());
 
         $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
 
@@ -408,12 +444,13 @@ EOT;
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $fulfilledCart = $this->loadFixturesFromFile('resources/fulfilled_cart.yml');
-        /** @var OrderInterface $order */
-        $order = $fulfilledCart['fulfilled_cart'];
-        /** @var OrderItemInterface $orderItem */
-        $orderItem = $fulfilledCart['sw_mug_item'];
 
-        $url = sprintf('/api/v1/carts/%s/items/%s', $order->getId(), $orderItem->getId());
+        /** @var OrderInterface $cart */
+        $cart = $fulfilledCart['fulfilled_cart'];
+        /** @var OrderItemInterface $cartItem */
+        $cartItem = $fulfilledCart['sw_mug_item'];
+        $updateUrl = sprintf('/api/v1/carts/%s/items/%s', $cart->getId(), $cartItem->getId());
+        $orderUrl = sprintf('/api/v1/carts/%s', $cart->getId());
 
         $data =
 <<<EOT
@@ -421,10 +458,15 @@ EOT;
             "quantity": 3
         }
 EOT;
-        $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('PUT', $updateUrl, [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
+
+        $this->client->request('GET', $orderUrl, [], [], static::$authorizedHeaderWithAccept);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'cart/increase_quantity_response', Response::HTTP_OK);
     }
 
     /**
@@ -434,12 +476,12 @@ EOT;
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $fulfilledCart = $this->loadFixturesFromFile('resources/fulfilled_cart.yml');
-        /** @var OrderInterface $order */
-        $order = $fulfilledCart['fulfilled_cart'];
-        /** @var OrderItemInterface $orderItem */
-        $orderItem = $fulfilledCart['hard_available_mug_item'];
 
-        $url = sprintf('/api/v1/carts/%s/items/%s', $order->getId(), $orderItem->getId());
+        /** @var OrderInterface $cart */
+        $cart = $fulfilledCart['fulfilled_cart'];
+        /** @var OrderItemInterface $cartItem */
+        $cartItem = $fulfilledCart['hard_available_mug_item'];
+        $url = sprintf('/api/v1/carts/%s/items/%s', $cart->getId(), $cartItem->getId());
 
         $data =
 <<<EOT
@@ -456,7 +498,7 @@ EOT;
     /**
      * @test
      */
-    public function it_denies_carts_item_deletation_for_non_authenticated_user()
+    public function it_denies_carts_item_deletion_for_non_authenticated_user()
     {
         $this->client->request('DELETE', '/api/v1/carts/-1/items/-1');
 
@@ -471,10 +513,10 @@ EOT;
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $fulfilledCart = $this->loadFixturesFromFile('resources/fulfilled_cart.yml');
-        /** @var OrderInterface $order */
-        $order = $fulfilledCart['fulfilled_cart'];
 
-        $url = sprintf('/api/v1/carts/%s/items/-1', $order->getId());
+        /** @var OrderInterface $cart */
+        $cart = $fulfilledCart['fulfilled_cart'];
+        $url = sprintf('/api/v1/carts/%s/items/-1', $cart->getId());
 
         $this->client->request('DELETE', $url, [], [], static::$authorizedHeaderWithContentType);
 
@@ -489,12 +531,12 @@ EOT;
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $fulfilledCart = $this->loadFixturesFromFile('resources/fulfilled_cart.yml');
-        /** @var OrderInterface $order */
-        $order = $fulfilledCart['fulfilled_cart'];
-        /** @var OrderItemInterface $orderItem */
-        $orderItem = $fulfilledCart['hard_available_mug_item'];
 
-        $url = sprintf('/api/v1/carts/%s/items/%s', $order->getId(), $orderItem->getId());
+        /** @var OrderInterface $cart */
+        $cart = $fulfilledCart['fulfilled_cart'];
+        /** @var OrderItemInterface $cartItem */
+        $cartItem = $fulfilledCart['hard_available_mug_item'];
+        $url = sprintf('/api/v1/carts/%s/items/%s', $cart->getId(), $cartItem->getId());
 
         $this->client->request('DELETE', $url, [], [], static::$authorizedHeaderWithContentType);
 

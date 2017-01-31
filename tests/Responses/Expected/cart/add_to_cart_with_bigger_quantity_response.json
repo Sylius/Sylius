@@ -7,80 +7,58 @@
         "adjustments": [],
         "adjustments_total": 0,
         "total": 60,
-        "state": "cart",
-        "created_at": "@string@.isDateTime()",
-        "updated_at": "@string@.isDateTime()",
-        "channel": {
+        "customer": {
             "id": @integer@,
-            "code": "WEB",
-            "name": "Web Channel",
-            "description": "Lorem ipsum",
-            "hostname": "localhost",
-            "color": "black",
-            "created_at": "@string@.isDateTime()",
-            "updated_at": "@string@.isDateTime()",
-            "enabled": true,
-            "tax_calculation_strategy": "order_items_based",
+            "email": "oliver.queen@star-city.com",
+            "first_name": "Oliver",
+            "last_name": "Queen",
             "_links": {
                 "self": {
                     "href": "@string@"
                 }
             }
         },
-        "payments": [],
-        "shipments": [],
+        "channel": {
+            "code": "WEB",
+            "_links": {
+                "self": {
+                    "href": "@string@"
+                }
+            }
+        },
+        "currency_code": "USD",
         "checkout_state": "cart"
     },
     "quantity": 3,
     "unit_price": 20,
     "total": 60,
-    "immutable": false,
     "units": [
         {
             "id": @integer@,
             "adjustments": [],
-            "adjustments_total": 0,
-            "_links": {
-                "order": {
-                    "href": "@string@"
-                }
-            }
+            "adjustments_total": 0
         },
         {
             "id": @integer@,
             "adjustments": [],
-            "adjustments_total": 0,
-            "_links": {
-                "order": {
-                    "href": "@string@"
-                }
-            }
+            "adjustments_total": 0
         },
         {
             "id": @integer@,
             "adjustments": [],
-            "adjustments_total": 0,
-            "_links": {
-                "order": {
-                    "href": "@string@"
-                }
-            }
+            "adjustments_total": 0
         }
     ],
     "units_total": 60,
     "adjustments": [],
     "adjustments_total": 0,
-    "variant": {
-       "id": @integer@,
-       "on_hold": 0,
-       "tracked": false
-    },
+    "variant": {},
     "_links": {
-       "product": {
-           "href": "@string@"
-       },
-       "variant": {
-           "href": "@string@"
-       }
+        "product": {
+            "href": "@string@"
+        },
+        "variant": {
+            "href": "@string@"
+        }
     }
 }

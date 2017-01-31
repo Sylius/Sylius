@@ -53,7 +53,11 @@ final class OrderType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('customer', CustomerChoiceType::class)
+            ->add('customer', CustomerChoiceType::class, [
+                'constraints' => [
+                    new NotBlank(['groups' => ['sylius']]),
+                ],
+            ])
             ->add('localeCode', LocaleChoiceType::class, [
                 'constraints' => [
                     new NotBlank(['groups' => ['sylius']]),

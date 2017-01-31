@@ -5,11 +5,11 @@ Sylius\Component\Customer\Model\Customer:
         id:
             expose: true
             type: integer
-            groups: [Default, Detailed]
+            groups: [Default, Detailed, DetailedCart]
         email:
             expose: true
             type: string
-            groups: [Default, Detailed]
+            groups: [Default, Detailed, DetailedCart]
         emailCanonical:
             expose: true
             type: string
@@ -17,11 +17,11 @@ Sylius\Component\Customer\Model\Customer:
         firstName:
             expose: true
             type: string
-            groups: [Default, Detailed]
+            groups: [Default, Detailed, DetailedCart]
         lastName:
             expose: true
             type: string
-            groups: [Default, Detailed]
+            groups: [Default, Detailed, DetailedCart]
         gender:
             expose: true
             type: string
@@ -34,3 +34,12 @@ Sylius\Component\Customer\Model\Customer:
             expose: true
             type: array
             groups: [Detailed]
+    relations:
+        - rel: self
+          href:
+            route: sylius_api_customer_show
+            parameters:
+                id: expr(object.getId())
+                version: 1
+          exclusion:
+            groups: [Default, Detailed, DetailedCart]
