@@ -32,5 +32,6 @@ default:
 
                 - sylius.behat.context.ui.shop.cart
                 - sylius.behat.context.ui.checkout
+                - sylius.behat.context.ui.checkout.addressing
             filters:
                 tags: "@applying_promotion_rules && @ui"

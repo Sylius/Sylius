@@ -47,6 +47,7 @@ default:
                 - sylius.behat.context.ui.admin.managing_orders
                 - sylius.behat.context.ui.channel
                 - sylius.behat.context.ui.checkout
+                - sylius.behat.context.ui.checkout.addressing
                 - sylius.behat.context.ui.checkout.thank_you
                 - sylius.behat.context.ui.shop.address_book
                 - sylius.behat.context.ui.shop.cart
