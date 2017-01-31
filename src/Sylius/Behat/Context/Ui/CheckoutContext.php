@@ -17,7 +17,6 @@ use Sylius\Behat\Page\Shop\Checkout\CompletePageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SelectPaymentPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SelectShippingPageInterface;
 use Sylius\Behat\Page\Shop\HomePageInterface;
-use Sylius\Behat\Page\Shop\Order\ShowPageInterface;
 use Sylius\Behat\Page\SymfonyPageInterface;
 use Sylius\Behat\Page\UnexpectedPageException;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
@@ -70,11 +69,6 @@ final class CheckoutContext implements Context
     private $completePage;
 
     /**
-     * @var ShowPageInterface
-     */
-    private $orderDetails;
-
-    /**
      * @var FactoryInterface
      */
     private $addressFactory;
@@ -96,7 +90,6 @@ final class CheckoutContext implements Context
      * @param SelectPaymentPageInterface $selectPaymentPage
      * @param SelectShippingPageInterface $selectShippingPage
      * @param CompletePageInterface $completePage
-     * @param ShowPageInterface $orderDetails
      * @param FactoryInterface $addressFactory
      * @param CurrentPageResolverInterface $currentPageResolver
      * @param AddressComparatorInterface $addressComparator
@@ -108,7 +101,6 @@ final class CheckoutContext implements Context
         SelectPaymentPageInterface $selectPaymentPage,
         SelectShippingPageInterface $selectShippingPage,
         CompletePageInterface $completePage,
-        ShowPageInterface $orderDetails,
         FactoryInterface $addressFactory,
         CurrentPageResolverInterface $currentPageResolver,
         AddressComparatorInterface $addressComparator
@@ -119,7 +111,6 @@ final class CheckoutContext implements Context
         $this->selectPaymentPage = $selectPaymentPage;
         $this->selectShippingPage = $selectShippingPage;
         $this->completePage = $completePage;
-        $this->orderDetails = $orderDetails;
         $this->addressFactory = $addressFactory;
         $this->currentPageResolver = $currentPageResolver;
         $this->addressComparator = $addressComparator;
@@ -182,14 +173,6 @@ final class CheckoutContext implements Context
     public function iTryToOpenCheckoutCompletePage()
     {
         $this->completePage->tryToOpen();
-    }
-
-    /**
-     * @When /^I want to browse order details for (this order)$/
-     */
-    public function iWantToBrowseOrderDetailsForThisOrder(OrderInterface $order)
-    {
-        $this->orderDetails->open(['tokenValue' => $order->getTokenValue()]);
     }
 
     /**
@@ -488,14 +471,6 @@ final class CheckoutContext implements Context
     {
         $this->selectPaymentPage->selectPaymentMethod($paymentMethodName ?: 'Offline');
         $this->selectPaymentPage->nextStep();
-    }
-
-    /**
-     * @When I change payment method to :paymentMethodName
-     */
-    public function iChangePaymentMethodTo($paymentMethodName)
-    {
-        $this->orderDetails->choosePaymentMethod($paymentMethodName);
     }
 
     /**
@@ -961,28 +936,6 @@ final class CheckoutContext implements Context
         Assert::true(
             $this->selectShippingPage->isOpen(),
             'Checkout shipping step should be opened, but it is not.'
-        );
-    }
-
-    /**
-     * @Then /^I should be able to pay(?| again)$/
-     */
-    public function iShouldBeAbleToPayAgain()
-    {
-        Assert::true(
-            $this->orderDetails->hasPayAction(),
-            'I should be able to pay, but I am not able to.'
-        );
-    }
-
-    /**
-     * @Then I should not be able to pay
-     */
-    public function iShouldNotBeAbleToPayAgain()
-    {
-        Assert::false(
-            $this->orderDetails->hasPayAction(),
-            'I should not be able to pay, but I am able to.'
         );
     }
 
