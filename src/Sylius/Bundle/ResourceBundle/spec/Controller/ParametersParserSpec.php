@@ -12,9 +12,8 @@
 namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ResourceBundle\Controller\ParametersParser;
 use Sylius\Bundle\ResourceBundle\Controller\ParametersParserInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -25,9 +24,9 @@ use Symfony\Component\HttpFoundation\Request;
  */
 final class ParametersParserSpec extends ObjectBehavior
 {
-    function let(ContainerInterface $container, ExpressionLanguage $expression)
+    function let()
     {
-        $this->beConstructedWith($container, $expression);
+        $this->beConstructedWith(new Container(), new ExpressionLanguage());
     }
 
     function it_implements_parameters_parser_interface()
@@ -35,155 +34,90 @@ final class ParametersParserSpec extends ObjectBehavior
         $this->shouldImplement(ParametersParserInterface::class);
     }
 
-    function it_should_parse_parameters(Request $request)
+    function it_parses_string_parameters()
     {
-        $request->get('criteria')->willReturn('New criteria');
-        $request->get('sorting')->willReturn('New sorting');
+        $request = new Request();
+        $request->request->set('string', 'Lorem ipsum');
 
-        $this->parseRequestValues(
-            [
-                'criteria' => '$criteria',
-                'sortable' => '$sorting',
-            ],
-            $request
-        )->shouldReturn(
-            [
-                'criteria' => 'New criteria',
-                'sortable' => 'New sorting',
-            ]
-        );
+        $this
+            ->parseRequestValues(['nested' => ['string' => '$string']], $request)
+            ->shouldReturn(['nested' => ['string' => 'Lorem ipsum']])
+        ;
     }
 
-    function it_should_parse_complex_parameters(Request $request)
+    function it_parses_boolean_parameters()
     {
-        $request->get('enable')->willReturn(true);
-        $request->get('sorting')->willReturn('New sorting');
+        $request = new Request();
+        $request->request->set('boolean', true);
 
-        $this->parseRequestValues(
-            [
-                'criteria' => [
-                    'enable' => '$enable',
-                ],
-                'sortable' => '$sorting',
-            ],
-            $request
-        )->shouldReturn(
-            [
-                'criteria' => [
-                    'enable' => true,
-                ],
-                'sortable' => 'New sorting',
-            ]
-        );
+        $this
+            ->parseRequestValues(['nested' => ['boolean' => '$boolean']], $request)
+            ->shouldReturn(['nested' => ['boolean' => true]])
+        ;
     }
 
-    function it_should_parse_expression_with_parameters(
-        ContainerInterface $container,
-        ExpressionLanguage $expression,
-        Request $request
-    ) {
-        $request->get('foo')->willReturn('bar');
-        $request->get('baz')->willReturn(1);
+    function it_parses_array_parameters()
+    {
+        $request = new Request();
+        $request->request->set('array', ['foo' => 'bar']);
 
-        $expression->evaluate('service("demo_service")', ['container' => $container])->willReturn('demo_object');
-
-        $this->parseRequestValues(
-            [
-                'factory' => [
-                    'method' => 'createByParameter',
-                    'arguments' => [
-                        'expr:service("demo_service")',
-                    ],
-                ],
-            ],
-            $request
-        )->shouldReturn(
-            [
-                'factory' => [
-                    'method' => 'createByParameter',
-                    'arguments' => [
-                        'demo_object',
-                    ],
-                ],
-            ]
-        );
-
-        $expression
-            ->evaluate('service("demo_service")->getWith("bar")', ['container' => $container])
-            ->willReturn('demo_object->getWith("bar")')
-    ;
-
-        $this->parseRequestValues(
-            [
-                'factory' => [
-                    'method' => 'createByParameter',
-                    'arguments' => [
-                        'expr:service("demo_service")->getWith($foo)',
-                    ],
-                ],
-            ],
-            $request
-        )->shouldReturn(
-            [
-                'factory' => [
-                    'method' => 'createByParameter',
-                    'arguments' => [
-                        'demo_object->getWith("bar")',
-                    ],
-                ],
-            ]
-        );
-
-        $expression
-            ->evaluate('service("demo_service")->getWith("bar", 1)', ['container' => $container])
-            ->willReturn('demo_object->getWith("bar", 1)')
+        $this
+            ->parseRequestValues(['nested' => ['array' => '$array']], $request)
+            ->shouldReturn(['nested' => ['array' => ['foo' => 'bar']]])
         ;
+    }
 
-        $this->parseRequestValues(
-            [
-                'factory' => [
-                    'method' => 'createByParameter',
-                    'arguments' => [
-                        'expr:service("demo_service")->getWith($foo, $baz)',
-                    ],
-                ],
-            ],
-            $request
-        )->shouldReturn(
-            [
-                'factory' => [
-                    'method' => 'createByParameter',
-                    'arguments' => [
-                        'demo_object->getWith("bar", 1)',
-                    ],
-                ],
-            ]
-        );
+    function it_parses_expressions()
+    {
+        $request = new Request();
 
-        $expression
-            ->evaluate('service("demo_service")->getWith("bar")->andGet(1)', ['container' => $container])
-            ->willReturn('demo_object->getWith("bar")->andGet(1)')
+        $this
+            ->parseRequestValues(['nested' => ['boolean' => 'expr:"foo" in ["foo", "bar"]']], $request)
+            ->shouldReturn(['nested' => ['boolean' => true]])
         ;
+    }
 
-        $this->parseRequestValues(
-            [
-                'factory' => [
-                    'method' => 'createByParameter',
-                    'arguments' => [
-                        'expr:service("demo_service")->getWith($foo)->andGet($baz)',
-                    ],
-                ],
-            ],
-            $request
-        )->shouldReturn(
-            [
-                'factory' => [
-                    'method' => 'createByParameter',
-                    'arguments' => [
-                        'demo_object->getWith("bar")->andGet(1)',
-                    ],
-                ],
-            ]
-        );
+    function it_parses_expressions_with_string_parameters()
+    {
+        $request = new Request();
+        $request->request->set('string', 'lorem ipsum');
+
+        $this
+            ->parseRequestValues(['expression' => 'expr:$string === "lorem ipsum"'], $request)
+            ->shouldReturn(['expression' => true])
+        ;
+    }
+
+    function it_parses_expressions_with_scalar_parameters()
+    {
+        $request = new Request();
+        $request->request->set('number', 6);
+
+        $this
+            ->parseRequestValues(['expression' => 'expr:$number === 6'], $request)
+            ->shouldReturn(['expression' => true])
+        ;
+    }
+
+    function it_throws_an_exception_if_array_parameter_is_injected_into_expression()
+    {
+        $request = new Request();
+        $request->request->set('array', ['foo', 'bar']);
+
+        $this
+            ->shouldThrow(\InvalidArgumentException::class)
+            ->during('parseRequestValues', [['expression' => 'expr:"foo" in $array'], $request])
+        ;
+    }
+
+    function it_throws_an_exception_if_object_parameter_is_injected_into_expression()
+    {
+        $request = new Request();
+        $request->request->set('object', new \stdClass());
+
+        $this
+            ->shouldThrow(\InvalidArgumentException::class)
+            ->during('parseRequestValues', [['expression' => 'expr:$object.callMethod()'], $request])
+        ;
     }
 }
