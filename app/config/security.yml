@@ -80,18 +80,14 @@ security:
             security: false
 
     access_control:
-        - { path: "^/_partial.*", role: IS_AUTHENTICATED_ANONYMOUSLY, ips: [127.0.0.1, ::1] }
-        - { path: "^/_partial.*", role: ROLE_NO_ACCESS }
-        - { path: "^/admin/_partial.*", role: IS_AUTHENTICATED_ANONYMOUSLY, ips: [127.0.0.1, ::1] }
-        - { path: "^/admin/_partial.*", role: ROLE_NO_ACCESS }
+        - { path: "^/[^/]++/_partial", role: IS_AUTHENTICATED_ANONYMOUSLY, ips: [127.0.0.1, ::1] }
+        - { path: "^/[^/]++/_partial", role: ROLE_NO_ACCESS }
 
-        - { path: ^/login.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/verify, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: "/account.*", role: ROLE_USER }
+        - { path: "^/[^/]++/login", role: IS_AUTHENTICATED_ANONYMOUSLY }
 
-        - { path: ^/admin/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin/login-check, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: "^/admin.*", role: ROLE_ADMINISTRATION_ACCESS }
+        - { path: "^/(?!admin|api)[^/]++/register", role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: "^/(?!admin|api)[^/]++/verify", role: IS_AUTHENTICATED_ANONYMOUSLY }
 
-        - { path: ^/api, role: ROLE_API_ACCESS }
+        - { path: "^/admin", role: ROLE_ADMINISTRATION_ACCESS }
+        - { path: "^/api", role: ROLE_API_ACCESS }
+        - { path: "^/(?!admin|api)[^/]++/account", role: ROLE_USER }
