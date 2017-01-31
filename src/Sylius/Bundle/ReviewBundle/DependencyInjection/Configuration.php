@@ -71,7 +71,7 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('model')->isRequired()->end()
                                         ->scalarNode('interface')->defaultValue(ReviewInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('repository')->defaultValue(EntityRepository::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->cannotBeEmpty()->end()
                                         ->scalarNode('form')->defaultValue(ReviewType::class)->cannotBeEmpty()->end()
                                     ->end()
