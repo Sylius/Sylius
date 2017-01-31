@@ -120,6 +120,11 @@ final class ThemeFilesystemLoader implements \Twig_LoaderInterface, \Twig_Exists
         try {
             return stat($this->findTemplate($name)) !== false;
         } catch (\Exception $exception) {
+            // In Twig 2.0, exists is part of \Twig_LoaderInterface
+            if ($this->decoratedLoader instanceof \Twig_ExistsLoaderInterface || method_exists('\\Twig_LoaderInterface', 'exists')) {
+                return $this->decoratedLoader->exists($name);
+            }
+
             return false;
         }
     }
