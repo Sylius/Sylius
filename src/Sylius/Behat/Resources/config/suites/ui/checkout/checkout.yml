@@ -52,6 +52,7 @@ default:
                 - sylius.behat.context.ui.shop.address_book
                 - sylius.behat.context.ui.shop.cart
                 - sylius.behat.context.ui.shop.currency
+                - sylius.behat.context.ui.shop.homepage
                 - sylius.behat.context.ui.shop.locale
             filters:
                 tags: "@checkout && @ui"

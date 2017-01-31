@@ -17,7 +17,6 @@ use Sylius\Behat\Page\Shop\Checkout\AddressPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\CompletePageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SelectPaymentPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SelectShippingPageInterface;
-use Sylius\Behat\Page\Shop\HomePageInterface;
 use Sylius\Behat\Page\SymfonyPageInterface;
 use Sylius\Behat\Page\UnexpectedPageException;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
@@ -39,11 +38,6 @@ final class CheckoutContext implements Context
      * @var SharedStorageInterface
      */
     private $sharedStorage;
-
-    /**
-     * @var HomePageInterface
-     */
-    private $homePage;
 
     /**
      * @var AddressPageInterface
@@ -77,7 +71,6 @@ final class CheckoutContext implements Context
 
     /**
      * @param SharedStorageInterface $sharedStorage
-     * @param HomePageInterface $homePage
      * @param AddressPageInterface $addressPage
      * @param SelectPaymentPageInterface $selectPaymentPage
      * @param SelectShippingPageInterface $selectShippingPage
@@ -87,7 +80,6 @@ final class CheckoutContext implements Context
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
-        HomePageInterface $homePage,
         AddressPageInterface $addressPage,
         SelectPaymentPageInterface $selectPaymentPage,
         SelectShippingPageInterface $selectShippingPage,
@@ -96,7 +88,6 @@ final class CheckoutContext implements Context
         AddressingContext $addressingContext
     ) {
         $this->sharedStorage = $sharedStorage;
-        $this->homePage = $homePage;
         $this->addressPage = $addressPage;
         $this->selectPaymentPage = $selectPaymentPage;
         $this->selectShippingPage = $selectShippingPage;
@@ -629,17 +620,6 @@ final class CheckoutContext implements Context
         Assert::same(
             $this->completePage->getPaymentMethodName(),
             $paymentMethod->getName()
-        );
-    }
-
-    /**
-     * @Then I should be redirected to the homepage
-     */
-    public function iShouldBeRedirectedToTheHomepage()
-    {
-        Assert::true(
-            $this->homePage->isOpen(),
-            'Shop homepage should be opened, but it is not.'
         );
     }
 
