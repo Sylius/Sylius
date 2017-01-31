@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    user:
+        expire_password_reset_token: 'Ключ для сброса пароля истек.'
+        change_password: 'Ваш пароль изменён!'
+        reset_password: 'Ваш пароль был успешно сброшен!'
+        reset_password_request: 'Если указанный e-mail существует в нашей системе, мы отправим на него инструкцию о том, как сбросить ваш пароль.'
+        verify_email: 'Ваш адрес электронной почты был успешно проверен.'
+        verify_email_by_invalid_token: 'Ключ проверки не верный.'
+        verify_email_request: 'Письмо со ссылкой для проверки было отправлено на вашу электронную почту.'
+        verify_verified_email: 'Ваш адрес электронной почты уже проверен.'

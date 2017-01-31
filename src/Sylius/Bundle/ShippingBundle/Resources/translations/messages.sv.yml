@@ -20,8 +20,10 @@ sylius:
             tracking_code: Spårningskod
         shipping_calculator:
             flat_rate_configuration:
+                label: Schablonbelopp per sändning
                 amount: Antal
             per_unit_rate_configuration:
+                label: Schablonbelopp per enhet
                 amount: Antal
         shipping_category:
             description: Beskrivning
@@ -37,3 +39,4 @@ sylius:
             name: Namn
             tax_category: Momskategori
             translations: Översättningar
+            position: Position

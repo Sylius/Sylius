@@ -1,0 +1,15 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    channel:
+        delete_error: 'Канал не может быть удален. Требуется по крайней мере один активный канал.'
+    contact:
+        request_success: 'Ваш запрос успешно отправлен.'
+        request_error: 'Возникла проблема при отправке запроса. Пожалуйста, повторите попытку позже.'
+    customer:
+        add_address: 'Адрес был успешно добавлен.'
+        impersonate: 'Успешно изменили имя на %name%.'
+        set_address_as_default: 'Адрес был задан как по умолчанию.'
+    product:
+        out_of_stock: 'В наличии только %quantity% этого продукта.'
