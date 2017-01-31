@@ -18,7 +18,6 @@ use Sylius\Behat\Page\Shop\Checkout\SelectPaymentPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SelectShippingPageInterface;
 use Sylius\Behat\Page\Shop\HomePageInterface;
 use Sylius\Behat\Page\Shop\Order\ShowPageInterface;
-use Sylius\Behat\Page\Shop\Order\ThankYouPageInterface;
 use Sylius\Behat\Page\SymfonyPageInterface;
 use Sylius\Behat\Page\UnexpectedPageException;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
@@ -61,11 +60,6 @@ final class CheckoutContext implements Context
     private $selectPaymentPage;
 
     /**
-     * @var ThankYouPageInterface
-     */
-    private $thankYouPage;
-
-    /**
      * @var SelectShippingPageInterface
      */
     private $selectShippingPage;
@@ -100,7 +94,6 @@ final class CheckoutContext implements Context
      * @param HomePageInterface $homePage
      * @param AddressPageInterface $addressPage
      * @param SelectPaymentPageInterface $selectPaymentPage
-     * @param ThankYouPageInterface $thankYouPage
      * @param SelectShippingPageInterface $selectShippingPage
      * @param CompletePageInterface $completePage
      * @param ShowPageInterface $orderDetails
@@ -113,7 +106,6 @@ final class CheckoutContext implements Context
         HomePageInterface $homePage,
         AddressPageInterface $addressPage,
         SelectPaymentPageInterface $selectPaymentPage,
-        ThankYouPageInterface $thankYouPage,
         SelectShippingPageInterface $selectShippingPage,
         CompletePageInterface $completePage,
         ShowPageInterface $orderDetails,
@@ -125,7 +117,6 @@ final class CheckoutContext implements Context
         $this->homePage = $homePage;
         $this->addressPage = $addressPage;
         $this->selectPaymentPage = $selectPaymentPage;
-        $this->thankYouPage = $thankYouPage;
         $this->selectShippingPage = $selectShippingPage;
         $this->completePage = $completePage;
         $this->orderDetails = $orderDetails;
@@ -577,7 +568,7 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @When I want to pay for order 
+     * @When I want to pay for order
      */
     public function iWantToPayForOrder()
     {
@@ -606,39 +597,6 @@ final class CheckoutContext implements Context
     public function iSignIn()
     {
         $this->addressPage->signIn();
-    }
-
-    /**
-     * @Then I should see the thank you page
-     */
-    public function iShouldSeeTheThankYouPage()
-    {
-        Assert::true(
-            $this->thankYouPage->hasThankYouMessage(),
-            'I should see thank you message, but I do not.'
-        );
-    }
-
-    /**
-     * @Then I should not see the thank you page
-     */
-    public function iShouldNotSeeTheThankYouPage()
-    {
-        Assert::false(
-            $this->thankYouPage->isOpen(),
-            'I should not see thank you message, but I do.'
-        );
-    }
-
-    /**
-     * @Given I should be informed with :paymentMethod payment method instructions
-     */
-    public function iShouldBeInformedWithPaymentMethodInstructions(PaymentMethodInterface $paymentMethod)
-    {
-        Assert::same(
-            $this->thankYouPage->getInstructions(),
-            $paymentMethod->getInstructions()
-        );
     }
 
     /**
@@ -914,7 +872,7 @@ final class CheckoutContext implements Context
      */
     public function shouldBeAppliedToMyOrderShipping($promotionName)
     {
-        Assert::true($this->completePage->hasShippingPromotion($promotionName));    
+        Assert::true($this->completePage->hasShippingPromotion($promotionName));
     }
 
     /**
@@ -1308,28 +1266,6 @@ final class CheckoutContext implements Context
         Assert::false(
             $this->completePage->hasPaymentMethod(),
             'There should be no information about payment method, but it is.'
-        );
-    }
-
-    /**
-     * @Then I should not see any instructions about payment method
-     */
-    public function iShouldNotSeeAnyInstructionsAboutPaymentMethod()
-    {
-        Assert::false(
-            $this->thankYouPage->hasInstructions(),
-            'There should be no instructions about payment method, but it is.'
-        );
-    }
-
-    /**
-     * @Then I should not be able to change payment method
-     */
-    public function iShouldNotBeAbleToChangeMyPaymentMethod()
-    {
-        Assert::false(
-            $this->thankYouPage->hasChangePaymentMethodButton(),
-            'There should be no button to change payment method, but it is.'
         );
     }
 

@@ -27,6 +27,7 @@ default:
                 - sylius.behat.context.transform.shipping_method
 
                 - sylius.behat.context.ui.checkout
+                - sylius.behat.context.ui.checkout.thank_you
                 - sylius.behat.context.ui.shop.cart
                 - sylius.behat.context.ui.paypal
 
