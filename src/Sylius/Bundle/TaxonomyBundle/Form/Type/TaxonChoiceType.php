@@ -92,10 +92,8 @@ final class TaxonChoiceType extends AbstractType
                 'choice_value' => 'id',
                 'choice_label' => 'name',
                 'choice_translation_domain' => false,
-                'root' => null,
                 'filter' => null,
             ])
-            ->setAllowedTypes('root', [TaxonInterface::class, 'string', 'null'])
             ->setAllowedTypes('filter', ['callable', 'null'])
         ;
     }
