@@ -11,9 +11,10 @@
 
 namespace Sylius\Bundle\GridBundle\Doctrine\ORM;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
 use Sylius\Component\Grid\Data\DriverInterface;
 use Sylius\Component\Grid\Parameters;
+use Sylius\Component\Registry\ServiceRegistryInterface;
+use Sylius\Component\Resource\Metadata\RegistryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -23,16 +24,23 @@ final class Driver implements DriverInterface
     const NAME = 'doctrine/orm';
 
     /**
-     * @var ManagerRegistry
+     * @var RegistryInterface
      */
-    private $managerRegistry;
+    private $metadataRegistry;
 
     /**
-     * @param ManagerRegistry $managerRegistry
+     * @var ServiceRegistryInterface
      */
-    public function __construct(ManagerRegistry $managerRegistry)
+    private $repositoryRegistry;
+
+    /**
+     * @param RegistryInterface $metadataRegistry
+     * @param ServiceRegistryInterface $repositoryRegistry
+     */
+    public function __construct(RegistryInterface $metadataRegistry, ServiceRegistryInterface $repositoryRegistry)
     {
-        $this->managerRegistry = $managerRegistry;
+        $this->metadataRegistry = $metadataRegistry;
+        $this->repositoryRegistry = $repositoryRegistry;
     }
 
     /**
@@ -44,9 +52,8 @@ final class Driver implements DriverInterface
             throw new \InvalidArgumentException('"class" must be configured.');
         }
 
-        $repository = $this->managerRegistry
-            ->getManagerForClass($configuration['class'])
-            ->getRepository($configuration['class']);
+        $metadata = $this->metadataRegistry->getByClass($configuration['class']);
+        $repository = $this->repositoryRegistry->get($metadata->getAlias());
 
         if (isset($configuration['repository']['method'])) {
             $method = $configuration['repository']['method'];
