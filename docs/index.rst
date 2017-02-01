@@ -110,6 +110,18 @@ The Contribution Guide
 
 .. include:: /contributing/map.rst.inc
 
+Support
+-------
+
+:doc:`The Support section </support/index>` for Sylius.
+
+.. toctree::
+   :hidden:
+
+   support/index
+
+.. include:: /support/map.rst.inc
+
 .. _Sylius: http://sylius.org
 .. _`Symfony Framework`: http://symfony.com
 .. _`Quick Tour`: http://symfony.com/doc/current/quick_tour
