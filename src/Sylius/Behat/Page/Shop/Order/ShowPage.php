@@ -17,7 +17,7 @@ use Sylius\Behat\Page\SymfonyPage;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-final class ShowPage extends SymfonyPage implements ShowPageInterface
+class ShowPage extends SymfonyPage implements ShowPageInterface
 {
     /**
      * {@inheritdoc}
