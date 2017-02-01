@@ -17,7 +17,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * @author Magdalena Banasiak <magdalena.banasiak@gmail.com>
  */
-class SyliuProductBundleTest extends WebTestCase
+class SyliusProductBundleTest extends WebTestCase
 {
     /**
      * @test
