@@ -79,8 +79,12 @@ final class LocaleSwitchController
      *
      * @return Response
      */
-    public function switchAction($code)
+    public function switchAction($code = null)
     {
+        if (null === $code) {
+            $code = $this->localeProvider->getDefaultLocaleCode();
+        }
+
         if (!in_array($code, $this->localeProvider->getAvailableLocalesCodes(), true)) {
             throw new HttpException(
                 Response::HTTP_NOT_ACCEPTABLE,
