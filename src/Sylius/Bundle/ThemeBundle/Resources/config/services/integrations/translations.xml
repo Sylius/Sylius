@@ -16,7 +16,6 @@
         <service id="sylius.theme.translation.translator" class="Sylius\Bundle\ThemeBundle\Translation\Translator" decorates="translator.default" decoration-priority="256" public="false">
             <argument type="service" id="sylius.theme.translation.loader_provider" />
             <argument type="service" id="sylius.theme.translation.resource_provider" />
-            <argument type="service" id="sylius.theme.translation.fallback_locales_provider" />
             <argument type="service" id="translator.selector" />
             <argument>%kernel.default_locale%</argument>
             <argument type="collection">
@@ -58,7 +57,5 @@
         <service id="sylius.theme.translation.ordering_files_finder" class="Sylius\Bundle\ThemeBundle\Translation\Finder\OrderingTranslationFilesFinder" decorates="sylius.theme.translation.files_finder" decoration-priority="256" public="false">
             <argument type="service" id="sylius.theme.translation.ordering_files_finder.inner" />
         </service>
-
-        <service id="sylius.theme.translation.fallback_locales_provider" class="Sylius\Bundle\ThemeBundle\Translation\Provider\Locale\FallbackLocalesProvider" public="false" />
     </services>
 </container>

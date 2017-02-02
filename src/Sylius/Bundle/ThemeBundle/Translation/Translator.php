@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\ThemeBundle\Translation;
 
 use Sylius\Bundle\ThemeBundle\Translation\Provider\Loader\TranslatorLoaderProviderInterface;
-use Sylius\Bundle\ThemeBundle\Translation\Provider\Locale\FallbackLocalesProviderInterface;
 use Sylius\Bundle\ThemeBundle\Translation\Provider\Resource\TranslatorResourceProviderInterface;
 use Symfony\Component\HttpKernel\CacheWarmer\WarmableInterface;
 use Symfony\Component\Translation\MessageSelector;
@@ -42,11 +41,6 @@ final class Translator extends BaseTranslator implements WarmableInterface
     private $resourceProvider;
 
     /**
-     * @var FallbackLocalesProviderInterface
-     */
-    private $fallbackLocalesProvider;
-
-    /**
      * @var bool
      */
     private $resourcesLoaded = false;
@@ -54,7 +48,6 @@ final class Translator extends BaseTranslator implements WarmableInterface
     /**
      * @param TranslatorLoaderProviderInterface $loaderProvider
      * @param TranslatorResourceProviderInterface $resourceProvider
-     * @param FallbackLocalesProviderInterface $fallbackLocalesProvider
      * @param MessageSelector $messageSelector
      * @param string $locale
      * @param array $options
@@ -62,7 +55,6 @@ final class Translator extends BaseTranslator implements WarmableInterface
     public function __construct(
         TranslatorLoaderProviderInterface $loaderProvider,
         TranslatorResourceProviderInterface $resourceProvider,
-        FallbackLocalesProviderInterface $fallbackLocalesProvider,
         MessageSelector $messageSelector,
         $locale,
         array $options = []
@@ -71,7 +63,6 @@ final class Translator extends BaseTranslator implements WarmableInterface
 
         $this->loaderProvider = $loaderProvider;
         $this->resourceProvider = $resourceProvider;
-        $this->fallbackLocalesProvider = $fallbackLocalesProvider;
 
         $this->options = array_merge($this->options, $options);
         if (null !== $this->options['cache_dir'] && $this->options['debug']) {
@@ -121,7 +112,46 @@ final class Translator extends BaseTranslator implements WarmableInterface
      */
     protected function computeFallbackLocales($locale)
     {
-        return $this->fallbackLocalesProvider->computeFallbackLocales($locale, $this->getFallbackLocales());
+        $themeModifier = $this->getLocaleModifier($locale);
+        $localeWithoutModifier = $this->getLocaleWithoutModifier($locale, $themeModifier);
+
+        $computedFallbackLocales = parent::computeFallbackLocales($locale);
+        array_unshift($computedFallbackLocales, $localeWithoutModifier);
+
+        $fallbackLocales = [];
+        foreach(array_diff($computedFallbackLocales, [$locale]) as $computedFallback) {
+            $fallback = $computedFallback . $themeModifier;
+            if (null !== $themeModifier && $locale !== $fallback) {
+                $fallbackLocales[] = $fallback;
+            }
+
+            $fallbackLocales[] = $computedFallback;
+        }
+
+        return array_unique($fallbackLocales);
+    }
+
+    /**
+     * @param string $locale
+     *
+     * @return string
+     */
+    private function getLocaleModifier($locale)
+    {
+        $modifier = strrchr($locale, '@');
+
+        return $modifier ?: '';
+    }
+
+    /**
+     * @param string $locale
+     * @param string $modifier
+     *
+     * @return string
+     */
+    private function getLocaleWithoutModifier($locale, $modifier)
+    {
+        return str_replace($modifier, '', $locale);
     }
 
     private function initialize()
