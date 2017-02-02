@@ -89,13 +89,3 @@ Contributing Documentation
     documentation/index
 
 .. include:: /contributing/documentation/map.rst.inc
-
-Support
--------
-
-.. toctree::
-    :hidden:
-
-    support/index
-
-.. include:: /contributing/support/map.rst.inc
