@@ -32,7 +32,7 @@ interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
      * @return bool
      */
     public function isSlugReadOnlyIn($locale);
-    
+
     /**
      * @param string $channelName
      * @param int $price
@@ -100,47 +100,40 @@ interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
     public function enableSlugModification($locale);
 
     /**
-     * @param string $code
+     * @param string $type
      *
      * @return bool
      */
-    public function isImageWithCodeDisplayed($code);
+    public function isImageWithTypeDisplayed($type);
 
     /**
      * @param string $path
-     * @param string $code
+     * @param string $type
      */
-    public function attachImage($path, $code = null);
+    public function attachImage($path, $type = null);
 
     /**
-     * @param string $code
+     * @param string $type
      * @param string $path
      */
-    public function changeImageWithCode($code, $path);
+    public function changeImageWithType($type, $path);
 
     /**
-     * @param string $code
+     * @param string $type
      */
-    public function removeImageWithCode($code);
+    public function removeImageWithType($type);
 
     public function removeFirstImage();
+
+    /**
+     * @param string $type
+     */
+    public function modifyFirstImageType($type);
 
     /**
      * @return int
      */
     public function countImages();
-
-    /**
-     * @return bool
-     */
-    public function isImageCodeDisabled();
-
-    /**
-     * @return string
-     *
-     * @throws ElementNotFoundException
-     */
-    public function getValidationMessageForImage();
 
     /**
      * @param ProductAssociationTypeInterface $productAssociationType
@@ -194,13 +187,4 @@ interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
      * @return string
      */
     public function getPriceForChannel($channelName);
-
-    /**
-     * @param int $position
-     *
-     * @return string
-     *
-     * @throws ElementNotFoundException
-     */
-    public function getValidationMessageForImageAtPosition($position);
 }

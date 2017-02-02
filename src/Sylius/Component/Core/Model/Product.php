@@ -37,7 +37,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     protected $productTaxons;
 
     /**
-     * @var ChannelInterface[]|Collection
+     * @var Collection|ChannelInterface[]
      */
     protected $channels;
 
@@ -298,15 +298,11 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function getImageByCode($code)
+    public function getImagesByType($type)
     {
-        foreach ($this->images as $image) {
-            if ($code === $image->getCode()) {
-                return $image;
-            }
-        }
-
-        return null;
+        return $this->images->filter(function (ImageInterface $image) use ($type) {
+            return $type === $image->getType();
+        });
     }
 
     /**

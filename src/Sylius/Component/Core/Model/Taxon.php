@@ -23,7 +23,7 @@ use Sylius\Component\Taxonomy\Model\TaxonTranslation;
 class Taxon extends BaseTaxon implements TaxonInterface
 {
     use TimestampableTrait;
-    
+
     /**
      * @var Collection|ImageInterface[]
      */
@@ -49,15 +49,11 @@ class Taxon extends BaseTaxon implements TaxonInterface
     /**
      * {@inheritdoc}
      */
-    public function getImageByCode($code)
+    public function getImagesByType($type)
     {
-        foreach ($this->images as $image) {
-            if ($code === $image->getCode()) {
-                return $image;
-            }
-        }
-
-        return null;
+        return $this->images->filter(function (ImageInterface $image) use ($type) {
+            return $type === $image->getType();
+        });
     }
 
     /**

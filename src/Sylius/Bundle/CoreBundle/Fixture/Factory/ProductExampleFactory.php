@@ -356,11 +356,14 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
      */
     private function createImages(ProductInterface $product, array $options)
     {
-        foreach ($options['images'] as $imageCode => $imagePath) {
+        foreach ($options['images'] as $image) {
+            $imagePath = array_shift($image);
+            $uploadedImage = new UploadedFile($imagePath, basename($imagePath));
+
             /** @var ImageInterface $productImage */
             $productImage = $this->productImageFactory->createNew();
-            $productImage->setCode($imageCode);
-            $productImage->setFile(new UploadedFile($imagePath, basename($imagePath)));
+            $productImage->setFile($uploadedImage);
+            $productImage->setType(end($image) ?: null);
 
             $this->imageUploader->upload($productImage);
 

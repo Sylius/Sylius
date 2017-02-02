@@ -44,10 +44,6 @@ sylius:
     product_attribute:
         invalid: Position must be an integer.
     product_image:
-        code:
-            not_blank: Please enter an image code.
-            regex: Image code can only be comprised of letters, numbers, dashes and underscores.
-            unique: Image code must be unique within this product.
         file:
             max_size: The image is too big - {{ size }}{{ suffix }}. Maximum allowed size is {{ limit }}{{ suffix }}.
             upload_ini_size: The image is too big. Maximum allowed size is {{ limit }}{{ suffix }}.
@@ -76,10 +72,6 @@ sylius:
         short_description:
             max: Short description must not be longer then {{ limit }} characters.
     taxon_image:
-        code:
-            not_blank: Please enter an image code.
-            regex: Image code can only be comprised of letters, numbers, dashes and underscores.
-            unique: Image code must be unique within this taxon.
         file:
             max_size: The image is too big - {{ size }}{{ suffix }}. Maximum allowed size is {{ limit }}{{ suffix }}.
             upload_ini_size: The image is too big. Maximum allowed size is {{ limit }}{{ suffix }}.

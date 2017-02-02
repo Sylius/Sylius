@@ -13,7 +13,6 @@ namespace Sylius\Behat\Page\Admin\Product;
 
 use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\NodeElement;
-use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -155,9 +154,9 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     /**
      * {@inheritdoc}
      */
-    public function isImageWithCodeDisplayed($code)
+    public function isImageWithTypeDisplayed($type)
     {
-        $imageElement = $this->getImageElementByCode($code);
+        $imageElement = $this->getImageElementByType($type);
 
         if (null === $imageElement) {
             return false;
@@ -174,7 +173,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     /**
      * {@inheritdoc}
      */
-    public function attachImage($path, $code = null)
+    public function attachImage($path, $type = null)
     {
         $this->clickTabIfItsNotActive('media');
 
@@ -183,8 +182,8 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         $this->getDocument()->clickLink('Add');
 
         $imageForm = $this->getLastImageElement();
-        if (null !== $code) {
-            $imageForm->fillField('Code', $code);
+        if (null !== $type) {
+            $imageForm->fillField('Type', $type);
         }
 
         $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath.$path);
@@ -193,29 +192,42 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     /**
      * {@inheritdoc}
      */
-    public function changeImageWithCode($code, $path)
+    public function changeImageWithType($type, $path)
     {
         $filesPath = $this->getParameter('files_path');
 
-        $imageForm = $this->getImageElementByCode($code);
+        $imageForm = $this->getImageElementByType($type);
         $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath.$path);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function removeImageWithCode($code)
+    public function removeImageWithType($type)
     {
         $this->clickTabIfItsNotActive('media');
 
-        $imageElement = $this->getImageElementByCode($code);
+        $imageElement = $this->getImageElementByType($type);
         $imageElement->clickLink('Delete');
     }
 
     public function removeFirstImage()
     {
+        $this->clickTabIfItsNotActive('media');
+
         $imageElement = $this->getFirstImageElement();
         $imageElement->clickLink('Delete');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function modifyFirstImageType($type)
+    {
+        $this->clickTabIfItsNotActive('media');
+
+        $firstImage = $this->getFirstImageElement();
+        $this->setImageType($firstImage, $type);
     }
 
     /**
@@ -231,34 +243,9 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     /**
      * {@inheritdoc}
      */
-    public function isImageCodeDisabled()
-    {
-        return 'disabled' === $this->getLastImageElement()->findField('Code')->getAttribute('disabled');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function isSlugReadOnlyIn($locale)
     {
         return 'readonly' === $this->getElement('slug', ['%locale%' => $locale])->getAttribute('readonly');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getValidationMessageForImage()
-    {
-        $this->clickTabIfItsNotActive('media');
-
-        $imageForm = $this->getLastImageElement();
-
-        $foundElement = $imageForm->find('css', '.sylius-validation-error');
-        if (null === $foundElement) {
-            throw new ElementNotFoundException($this->getSession(), 'Tag', 'css', '.sylius-validation-error');
-        }
-
-        return $foundElement->getText();
     }
 
     /**
@@ -368,6 +355,19 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         }
     }
 
+    public function getPriceForChannel($channelName)
+    {
+        return $this->getElement('price', ['%channel%' => $channelName])->getValue();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getCodeElement()
+    {
+        return $this->getElement('code');
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -378,36 +378,6 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         }
 
         return parent::getElement($name, $parameters);
-    }
-
-    public function getPriceForChannel($channelName)
-    {
-        return $this->getElement('price', ['%channel%' => $channelName])->getValue();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getValidationMessageForImageAtPosition($position)
-    {
-        $this->clickTabIfItsNotActive('media');
-
-        $images = $this->getImageElements();
-
-        $foundElement = $images[$position]->find('css', '.sylius-validation-error');
-        if (null === $foundElement) {
-            throw new ElementNotFoundException($this->getSession(), 'Tag', 'css', '.sylius-validation-error');
-        }
-
-        return $foundElement->getText();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getCodeElement()
-    {
-        return $this->getElement('code');
     }
 
     /**
@@ -475,20 +445,20 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     }
 
     /**
-     * @param string $code
+     * @param string $type
      *
      * @return NodeElement
      */
-    private function getImageElementByCode($code)
+    private function getImageElementByType($type)
     {
         $images = $this->getElement('images');
-        $inputCode = $images->find('css', 'input[value="'.$code.'"]');
+        $typeInput = $images->find('css', 'input[value="'.$type.'"]');
 
-        if (null === $inputCode) {
+        if (null === $typeInput) {
             return null;
         }
 
-        return $inputCode->getParent()->getParent()->getParent();
+        return $typeInput->getParent()->getParent()->getParent();
     }
 
     /**
@@ -543,5 +513,15 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         $this->getDocument()->waitFor(10, function () use ($slugElement, $value) {
             return $value !== $slugElement->getValue();
         });
+    }
+
+    /**
+     * @param NodeElement $imageElement
+     * @param string $type
+     */
+    private function setImageType(NodeElement $imageElement, $type)
+    {
+        $typeField = $imageElement->findField('Type');
+        $typeField->setValue($type);
     }
 }

@@ -7,7 +7,7 @@
             <generator strategy="AUTO" />
         </id>
 
-        <field name="code" column="code" type="string" unique="false" />
+        <field name="type" column="type" type="string" nullable="true" />
 
         <field name="path" />
     </mapped-superclass>

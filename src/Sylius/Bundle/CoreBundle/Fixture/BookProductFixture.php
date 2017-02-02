@@ -117,8 +117,8 @@ class BookProductFixture extends AbstractFixture
                     'book_pages' => $this->faker->numberBetween(42, 1024),
                 ],
                 'images' => [
-                    'main' => sprintf('%s/../Resources/fixtures/%s', __DIR__, 'books.jpg'),
-                    'thumbnail' => sprintf('%s/../Resources/fixtures/%s', __DIR__, 'books.jpg'),
+                    [sprintf('%s/../Resources/fixtures/%s', __DIR__, 'books.jpg'), 'main'],
+                    [sprintf('%s/../Resources/fixtures/%s', __DIR__, 'books.jpg'), 'thumbnail'],
                 ],
             ];
         }
