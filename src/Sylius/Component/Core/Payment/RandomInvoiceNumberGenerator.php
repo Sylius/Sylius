@@ -9,16 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Core\Test\Services;
+namespace Sylius\Component\Core\Payment;
 
-use Sylius\Component\Core\Payment\InvoiceNumberGeneratorInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class RandomInvoiceNumberGenerator implements InvoiceNumberGeneratorInterface
+final class RandomInvoiceNumberGenerator implements InvoiceNumberGeneratorInterface
 {
     /**
      * {@inheritdoc}

@@ -39,6 +39,17 @@
 
 * `Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\RoutingRepositoryPass` was removed, implement it yourself.
 
+* `Sylius\Bundle\CoreBundle\Test\MySqlDriver` and `Sylius\Bundle\CoreBundle\Test\PgSqlDriver` were moved to test namespace,
+  provide your own implementation or use Doctrin DBAL's `Doctrine\DBAL\Driver\PDOMySql\Driver` and 
+  `Doctrine\DBAL\Driver\PDOPgSql\Driver` instead.
+
+* `Sylius\Component\Core\Test\Services\RandomInvoiceNumberGenerator` was moved to `Sylius\Component\Core\Payment\RandomInvoiceNumberGenerator`,
+  change your usages accordingly.
+
+* `Sylius\Component\Core\Payment\RandomInvoiceNumberGenerator` and `Sylius\Component\Core\Payment\IdBasedInvoiceNumberGenerator`
+  were made final, use decoration and implement `Sylius\Component\Core\Payment\InvoiceNumberGeneratorInterface` instead of
+  extending them.
+
 ### Currency / CurrencyBundle
 
 ### Customer / CustomerBundle
