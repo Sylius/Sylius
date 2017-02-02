@@ -51,6 +51,11 @@ Assuming that we would like to have a translatable model of a ``Supplier``, we n
 
 The actual entity has access to its translation by using the ``TranslatableTrait`` which provides the ``getTranslation()`` method.
 
+.. warning::
+
+   Remember that the **Translations collection** of the entity
+   (from the TranslatableTrait) has to be initialized in the constructor!
+
 .. code-block:: php
 
    <?php
@@ -62,7 +67,14 @@ The actual entity has access to its translation by using the ``TranslatableTrait
 
    class Supplier implements TranslatableInterface
    {
-       use TranslatableTrait;
+       use TranslatableTrait {
+           __construct as private initializeTranslationsCollection;
+       }
+
+       public function __construct()
+       {
+           $this->initializeTranslationsCollection();
+       }
 
        /**
         * @return string
