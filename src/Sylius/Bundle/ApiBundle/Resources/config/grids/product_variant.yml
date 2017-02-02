@@ -13,12 +13,10 @@ sylius_grid:
             fields:
                 name:
                     type: string
-                    path: translation.name
                 code:
                     type: string
                 position:
                     type: string
-                    path: .
                     sortable: ~
             filters:
                 code:

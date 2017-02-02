@@ -16,7 +16,10 @@
     "channel_pricings":[],
     "_links":{
         "self":{
-          "href":"@string@"
+          "href": "@string@"
+        },
+        "product": {
+          "href": "@string@"
         }
     }
 }

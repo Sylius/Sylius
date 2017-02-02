@@ -63,12 +63,14 @@ If you request more detailed data, you will receive an object with the following
 
 .. note::
 
-    Read more about :doc:`Product Variants <\components\Product\models#variant>`
+    Read more about `Product Variant`__
+
+__ http://docs.sylius.org/en/latest/components/Product/models.html#variant
 
 Collection of Product Variants
 ------------------------------
 
-You can retrieve the full product variants list for selected product by making the following request:
+To retrieve the paginated list of variants for selected product you will need to call the ``/api/v1/products/product_id/variants/`` endpoint with ``GET`` method.
 
 Definition
 ^^^^^^^^^^
@@ -94,10 +96,12 @@ Definition
 Example
 .......
 
+To see the first page of all product variants for the product with id equals to 1 use the method below.
+
 .. code-block:: bash
 
-    $ curl http://sylius.dev/api/v1/products/1/variants/ \
-        -H "Authorization: Bearer MWExMWM0NzE1NmUyZDgyZDJiMjEzMmFlMjQ4MzgwMmE4ZTkxYzM0YjdlN2U2YzliNDIyMTk1ZDhlNDYxYWE4Ng" \
+    $ curl http://demo.sylius.org/api/v1/products/1/variants/ \
+        -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
 Example Response
@@ -172,6 +176,9 @@ Example Response
                     "_links": {
                         "self": {
                             "href": "/api/v1/products/1/variants/1"
+                        },
+                        "product": {
+                            "href": "/api/v1/products/1"
                         }
                     }
                 },
@@ -220,6 +227,9 @@ Example Response
                     "_links": {
                         "self": {
                             "href": "/api/v1/products/1/variants/2"
+                        },
+                        "product": {
+                            "href": "/api/v1/products/1"
                         }
                     }
                 }
@@ -230,7 +240,7 @@ Example Response
 Getting a Single Product Variant
 --------------------------------
 
-You can request detailed product variant information by executing the following request:
+To retrieve the details of the product variant you will need to call the ``/api/v1/products/product_id/variants/variant_id`` endpoint with ``GET`` method.
 
 Definition
 ^^^^^^^^^^
@@ -252,10 +262,12 @@ Definition
 Example
 .......
 
+To see the details for the the product variant with id equals to 1, which is defined for the product with id equals to 1 use the method below.
+
 .. code-block:: bash
 
-    $ curl http://sylius.dev/api/v1/products/1/variants/1 \
-        -H "Authorization: Bearer MWExMWM0NzE1NmUyZDgyZDJiMjEzMmFlMjQ4MzgwMmE4ZTkxYzM0YjdlN2U2YzliNDIyMTk1ZDhlNDYxYWE4Ng" \
+    $ curl http://demo.sylius.org/api/v1/products/1/variants/1 \
+        -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
 Example Response
@@ -312,6 +324,9 @@ Example Response
         "_links": {
             "self": {
                 "href": "/api/v1/products/1/variants/1"
+            },
+            "product": {
+                "href": "/api/v1/products/1"
             }
 	    }
     }
@@ -319,12 +334,14 @@ Example Response
 Creating a Product Variant
 --------------------------
 
+To create new product variant you will need to call the ``/api/v1/products/product_id/variants/`` endpoint with ``POST`` method.
+
 Definition
 ^^^^^^^^^^
 
 .. code-block:: text
 
-    POST http://sylius.dev/api/v1/products/1/variants/
+    POST /api/v1/products/1/variants/
 
 +---------------+----------------+----------------------------------------------------------+
 | Parameter     | Parameter type | Description                                              |
@@ -341,10 +358,12 @@ Definition
 Example
 .......
 
+To create new product variant for the product with id equals to 1 use the below method.
+
 .. code-block:: bash
 
-    $ curl http://sylius.dev/api/v1/products/62/variants/ \
-        -H "Authorization: Bearer MWExMWM0NzE1NmUyZDgyZDJiMjEzMmFlMjQ4MzgwMmE4ZTkxYzM0YjdlN2U2YzliNDIyMTk1ZDhlNDYxYWE4Ng" \
+    $ curl http://demo.sylius.org/api/v1/products/62/variants/ \
+        -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST \
         --data '
@@ -375,6 +394,9 @@ Example Response
         "_links": {
             "self": {
                 "href": "/api/v1/products/1/variants/333"
+            },
+            "product": {
+                "href": "/api/v1/products/1"
             }
         }
     }
@@ -388,8 +410,8 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://sylius.dev/api/v1/products/1/variants/ \
-        -H "Authorization: Bearer MWExMWM0NzE1NmUyZDgyZDJiMjEzMmFlMjQ4MzgwMmE4ZTkxYzM0YjdlN2U2YzliNDIyMTk1ZDhlNDYxYWE4Ng" \
+    $ curl http://demo.sylius.org/api/v1/products/1/variants/ \
+        -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X POST
 
@@ -425,45 +447,55 @@ Example Response
 
 You can also create a product variant with additional (not required) fields:
 
-+--------------------------------------+----------------+------------------------------------------------------------------------------------------------+
-| Parameter                            | Parameter type | Description                                                                                    |
-+======================================+================+================================================================================================+
-|translations['locale_code']['name']   | request        | Name of the product variant                                                                    |
-+--------------------------------------+----------------+------------------------------------------------------------------------------------------------+
-| position                             | request        | Position of variant in product                                                                 |
-+--------------------------------------+----------------+------------------------------------------------------------------------------------------------+
-| tracked                              | request        | The information if the variant is tracked by inventory (true or false)                         |
-+--------------------------------------+----------------+------------------------------------------------------------------------------------------------+
-| channel_pricings                     | request        | Collection of objects which contains prices for all enabled channels                           |
-+--------------------------------------+----------------+------------------------------------------------------------------------------------------------+
-| tax_category                         | request        | Code of object which provides information about tax category to which variant is assigned      |
-+--------------------------------------+----------------+------------------------------------------------------------------------------------------------+
-| shipping_category                    | request        | Code of object which provides information about shipping category to which variant is assigned |
-+--------------------------------------+----------------+------------------------------------------------------------------------------------------------+
-| option_values                        | request        | Object with information about ProductOption (by code) and ProductOptionValue (by code)         |
-+--------------------------------------+----------------+------------------------------------------------------------------------------------------------+
-| onHand                               | request        | Information about the number of product in given variant currently available in shop           |
-+--------------------------------------+----------------+------------------------------------------------------------------------------------------------+
-| width                                | request        | The width of variant                                                                           |
-+--------------------------------------+----------------+------------------------------------------------------------------------------------------------+
-| height                               | request        | The height of variant                                                                          |
-+--------------------------------------+----------------+------------------------------------------------------------------------------------------------+
-| depth                                | request        | The depth of variant                                                                           |
-+--------------------------------------+----------------+------------------------------------------------------------------------------------------------+
-| weight                               | request        | The weight of variant                                                                          |
-+--------------------------------------+----------------+------------------------------------------------------------------------------------------------+
++--------------------------------------+----------------+-------------------------------------------------------------------------------------------------------------+
+| Parameter                            | Parameter type | Description                                                                                                 |
++======================================+================+=============================================================================================================+
+| Authorization                        | header         | Token received during authentication                                                                        |
++--------------------------------------+----------------+-------------------------------------------------------------------------------------------------------------+
+| id                                   | url attribute  | Id of requested resource                                                                                    |
++--------------------------------------+----------------+-------------------------------------------------------------------------------------------------------------+
+| productId                            | url attribute  | Id of product for which the variants should be displayed                                                    |
++--------------------------------------+----------------+-------------------------------------------------------------------------------------------------------------+
+| code                                 | request        | **(unique)** Product variant identifier                                                                     |
++--------------------------------------+----------------+-------------------------------------------------------------------------------------------------------------+
+|translations['locale_code']['name']   | request        | *(optional)* Name of the product variant                                                                    |
++--------------------------------------+----------------+-------------------------------------------------------------------------------------------------------------+
+| position                             | request        | *(optional)* Position of variant in product                                                                 |
++--------------------------------------+----------------+-------------------------------------------------------------------------------------------------------------+
+| tracked                              | request        | *(optional)* The information if the variant is tracked by inventory (true or false)                         |
++--------------------------------------+----------------+-------------------------------------------------------------------------------------------------------------+
+| channel_pricings                     | request        | *(optional)* Collection of objects which contains prices for all enabled channels                           |
++--------------------------------------+----------------+-------------------------------------------------------------------------------------------------------------+
+| tax_category                         | request        | *(optional)* Code of object which provides information about tax category to which variant is assigned      |
++--------------------------------------+----------------+-------------------------------------------------------------------------------------------------------------+
+| shipping_category                    | request        | *(optional)* Code of object which provides information about shipping category to which variant is assigned |
++--------------------------------------+----------------+-------------------------------------------------------------------------------------------------------------+
+| option_values                        | request        | *(optional)* Object with information about ProductOption (by code) and ProductOptionValue (by code)         |
++--------------------------------------+----------------+-------------------------------------------------------------------------------------------------------------+
+| onHand                               | request        | *(optional)* Information about the number of product in given variant currently available in shop           |
++--------------------------------------+----------------+-------------------------------------------------------------------------------------------------------------+
+| width                                | request        | *(optional)* The width of variant                                                                           |
++--------------------------------------+----------------+-------------------------------------------------------------------------------------------------------------+
+| height                               | request        | *(optional)* The height of variant                                                                          |
++--------------------------------------+----------------+-------------------------------------------------------------------------------------------------------------+
+| depth                                | request        | *(optional)* The depth of variant                                                                           |
++--------------------------------------+----------------+-------------------------------------------------------------------------------------------------------------+
+| weight                               | request        | *(optional)* The weight of variant                                                                          |
++--------------------------------------+----------------+-------------------------------------------------------------------------------------------------------------+
 
 .. warning::
 
-    The channel must be created and enabled before the prices will be defined for they.
+    Channels must be created and enabled before the prices will be defined for they.
 
 Example
 .......
 
+Here is an example of creating a product variant with additional data for the product with id equals to 62.
+
 .. code-block:: bash
 
-    $ curl http://sylius.dev/api/v1/products/62/variants/ \
-        -H "Authorization: Bearer MWExMWM0NzE1NmUyZDgyZDJiMjEzMmFlMjQ4MzgwMmE4ZTkxYzM0YjdlN2U2YzliNDIyMTk1ZDhlNDYxYWE4Ng" \
+    $ curl http://demo.sylius.org/api/v1/products/62/variants/ \
+        -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST \
         --data '
@@ -598,6 +630,9 @@ Example Response
         "_links": {
             "self": {
                 "href": "/api/v1/products/62/variants/345"
+            },
+            "product": {
+                "href": "/api/v1/products/62"
             }
         }
     }
@@ -605,14 +640,14 @@ Example Response
 Updating Product Variant
 ------------------------
 
-You can request full or partial update of resource. For full product variant update, you should use PUT method.
+To full update a product variant you will need to call the ``/api/v1/products/product_id/variants/variant_id`` endpoint with ``PUT`` method.
 
 Definition
 ^^^^^^^^^^
 
 .. code-block:: text
 
-    PUT /api/v1/sylius.dev/api/v1/products/{productId}/variants/{id}
+    PUT /api/v1/products/{productId}/variants/{id}
 
 +---------------+----------------+----------------------------------------------------------+
 | Parameter     | Parameter type | Description                                              |
@@ -629,10 +664,12 @@ Definition
 Example
 .......
 
+To full update the product variant with id equals to 342 for the product with id equals to 1 use the below method.
+
 .. code-block:: bash
 
-    curl http://sylius.dev/api/v1/products/63/variants/342 \
-        -H "Authorization: Bearer MWExMWM0NzE1NmUyZDgyZDJiMjEzMmFlMjQ4MzgwMmE4ZTkxYzM0YjdlN2U2YzliNDIyMTk1ZDhlNDYxYWE4Ng" \
+    curl http://demo.sylius.org/api/v1/products/63/variants/342 \
+        -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PUT \
         --data '
@@ -671,14 +708,14 @@ Example Response
 
     STATUS: 204 No Content
 
-In order to perform a partial update, you should use a PATCH method.
+To partial update a product variant you will need to call the ``/api/v1/products/product_id/variants/variant_id`` endpoint with ``PATCH`` method.
 
 Definition
 ^^^^^^^^^^
 
 .. code-block:: text
 
-    PATCH /api/v1/sylius.dev/api/v1/products/{productId}/variants/{id}
+    PATCH /api/v1/products/{productId}/variants/{id}
 
 +-------------------------------------+----------------+----------------------------------------------------------+
 | Parameter                           | Parameter type | Description                                              |
@@ -695,10 +732,12 @@ Definition
 Example
 .......
 
+To partial update the product variant with id equals to 342 for the product with id equals to 1 use the below method.
+
 .. code-block:: bash
 
-    $ curl http://sylius.dev/api/v1/products/62/variants/342 \
-        -H "Authorization: Bearer MWExMWM0NzE1NmUyZDgyZDJiMjEzMmFlMjQ4MzgwMmE4ZTkxYzM0YjdlN2U2YzliNDIyMTk1ZDhlNDYxYWE4Ng" \
+    $ curl http://demo.sylius.org/api/v1/products/62/variants/342 \
+        -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PATCH \
         --data '
@@ -721,12 +760,14 @@ Example Response
 Deleting Product Variant
 ------------------------
 
+To delete a product variant you will need to call the ``/api/v1/products/product_id/variants/variant_id`` endpoint with ``DELETE`` method.
+
 Definition
 ^^^^^^^^^^
 
 .. code-block:: text
 
-    DELETE /api/v1/sylius.dev/api/v1/products/{productId}/variants/{id}
+    DELETE /api/v1/products/{productId}/variants/{id}
 
 +-------------------------------------+----------------+----------------------------------------------------------+
 | Parameter                           | Parameter type | Description                                              |
@@ -741,10 +782,12 @@ Definition
 Example
 .......
 
+To delete the product variant with id equals to 333 from product with id equals to 1 use the method below.
+
 .. code-block:: bash
 
-    $ curl http://sylius.dev/api/v1/products/1/variants/333 \
-        -H "Authorization: Bearer MWExMWM0NzE1NmUyZDgyZDJiMjEzMmFlMjQ4MzgwMmE4ZTkxYzM0YjdlN2U2YzliNDIyMTk1ZDhlNDYxYWE4Ng" \
+    $ curl http://demo.sylius.org/api/v1/products/1/variants/333 \
+        -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X DELETE
 

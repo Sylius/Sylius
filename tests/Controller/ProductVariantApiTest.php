@@ -166,10 +166,10 @@ EOT;
         {
             "code": "MONSTER_MUG",
             "translations": {
-                "de": {
+                "de_CH": {
                     "name": "Monsterbecher"
                 },
-                "en__US": {
+                "en_US": {
                     "name": "Monster Mug"
                 }
             }
@@ -367,7 +367,7 @@ EOT;
 <<<EOT
         {
             "translations": {
-                "de": {
+                "de_CH": {
                     "name": "Monsterbecher"
 
                 }

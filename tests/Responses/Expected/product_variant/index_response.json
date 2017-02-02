@@ -38,6 +38,9 @@
                 "_links": {
                     "self": {
                         "href": "@string@"
+                    },
+                    "product": {
+                      "href": "@string@"
                     }
                 }
             },
@@ -60,6 +63,9 @@
                 "_links": {
                     "self": {
                         "href": "@string@"
+                    },
+                    "product": {
+                      "href": "@string@"
                     }
                 }
             },
@@ -82,6 +88,9 @@
                 "_links": {
                     "self": {
                         "href": "@string@"
+                    },
+                    "product": {
+                      "href": "@string@"
                     }
                 }
             },
@@ -104,6 +113,9 @@
                 "_links": {
                     "self": {
                         "href": "@string@"
+                    },
+                    "product": {
+                      "href": "@string@"
                     }
                 }
             },
@@ -126,6 +138,9 @@
                 "_links": {
                     "self": {
                         "href": "@string@"
+                    },
+                    "product": {
+                      "href": "@string@"
                     }
                 }
             },
@@ -148,6 +163,9 @@
                 "_links": {
                     "self": {
                         "href": "@string@"
+                    },
+                    "product": {
+                      "href": "@string@"
                     }
                 }
             },
@@ -170,6 +188,9 @@
                 "_links": {
                     "self": {
                         "href": "@string@"
+                    },
+                    "product": {
+                      "href": "@string@"
                     }
                 }
             },
@@ -192,6 +213,9 @@
                 "_links": {
                     "self": {
                         "href": "@string@"
+                    },
+                    "product": {
+                      "href": "@string@"
                     }
                 }
             },
@@ -214,6 +238,9 @@
                 "_links": {
                     "self": {
                         "href": "@string@"
+                    },
+                    "product": {
+                      "href": "@string@"
                     }
                 }
             },
@@ -236,6 +263,9 @@
                 "_links": {
                     "self": {
                         "href": "@string@"
+                    },
+                    "product": {
+                      "href": "@string@"
                     }
                 }
             }

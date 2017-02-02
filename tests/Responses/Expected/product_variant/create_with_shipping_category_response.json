@@ -24,6 +24,9 @@
     "_links": {
         "self": {
             "href": "@string@"
+        },
+        "product": {
+          "href": "@string@"
         }
     }
 }

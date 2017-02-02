@@ -54,7 +54,6 @@ final class ProductVariantTypeExtension extends AbstractTypeExtension
             ])
             ->add('onHand', IntegerType::class, [
                 'label' => 'sylius.form.variant.on_hand',
-                'empty_data' => null
             ])
             ->add('width', NumberType::class, [
                 'required' => false,

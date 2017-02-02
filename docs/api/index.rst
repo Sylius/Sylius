@@ -10,6 +10,7 @@ The REST API Reference
     orders
     checkouts
     products
+    product_variants
     users
     customers
     shipments

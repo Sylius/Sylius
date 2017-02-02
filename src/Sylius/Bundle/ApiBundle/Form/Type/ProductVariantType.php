@@ -29,11 +29,10 @@ final class ProductVariantType extends AbstractType
     {
         $builder->addEventListener(FormEvents::PRE_SUBMIT , function (FormEvent $event) {
             $data = $event->getData();
-            $form = $event->getForm();
 
             if (!array_key_exists('onHand', $data)) {
-                $data['onHand'] = $form->getNormData()->getOnHand();
-                $event->setData($data);
+                $form = $event->getForm();
+                $form->remove('onHand');
             }
         });
     }
