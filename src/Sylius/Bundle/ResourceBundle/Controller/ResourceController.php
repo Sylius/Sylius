@@ -13,11 +13,14 @@ namespace Sylius\Bundle\ResourceBundle\Controller;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use FOS\RestBundle\View\View;
+use Sylius\Bundle\ResourceBundle\Grid\View\ResourceGridView;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Resource\ResourceActions;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -178,12 +181,7 @@ class ResourceController extends Controller
             $view
                 ->setTemplate($configuration->getTemplate(ResourceActions::SHOW . '.html'))
                 ->setTemplateVar($this->metadata->getName())
-                ->setData([
-                    'configuration' => $configuration,
-                    'metadata' => $this->metadata,
-                    'resource' => $resource,
-                    $this->metadata->getName() => $resource,
-                ])
+                ->setData($this->provideShowTemplateData($configuration, $resource))
             ;
         }
 
@@ -208,12 +206,7 @@ class ResourceController extends Controller
             $view
                 ->setTemplate($configuration->getTemplate(ResourceActions::INDEX . '.html'))
                 ->setTemplateVar($this->metadata->getPluralName())
-                ->setData([
-                    'configuration' => $configuration,
-                    'metadata' => $this->metadata,
-                    'resources' => $resources,
-                    $this->metadata->getPluralName() => $resources,
-                ])
+                ->setData($this->provideIndexTemplateData($configuration, $resources))
             ;
         }
 
@@ -269,13 +262,7 @@ class ResourceController extends Controller
         }
 
         $view = View::create()
-            ->setData([
-                'configuration' => $configuration,
-                'metadata' => $this->metadata,
-                'resource' => $newResource,
-                $this->metadata->getName() => $newResource,
-                'form' => $form->createView(),
-            ])
+            ->setData($this->provideFormTemplateData($configuration, $newResource, $form))
             ->setTemplate($configuration->getTemplate(ResourceActions::CREATE . '.html'))
         ;
 
@@ -331,13 +318,7 @@ class ResourceController extends Controller
         }
 
         $view = View::create()
-            ->setData([
-                'configuration' => $configuration,
-                'metadata' => $this->metadata,
-                'resource' => $resource,
-                $this->metadata->getName() => $resource,
-                'form' => $form->createView(),
-            ])
+            ->setData($this->provideFormTemplateData($configuration, $resource, $form))
             ->setTemplate($configuration->getTemplate(ResourceActions::UPDATE . '.html'))
         ;
 
@@ -446,7 +427,7 @@ class ResourceController extends Controller
     /**
      * @param RequestConfiguration $configuration
      *
-     * @return \Sylius\Component\Resource\Model\ResourceInterface
+     * @return ResourceInterface
      *
      * @throws NotFoundHttpException
      */
@@ -457,5 +438,58 @@ class ResourceController extends Controller
         }
 
         return $resource;
+    }
+
+    /**
+     * @param RequestConfiguration $configuration
+     * @param ResourceInterface $resource
+     *
+     * @return array
+     */
+    protected function provideShowTemplateData(RequestConfiguration $configuration, ResourceInterface $resource)
+    {
+        return [
+            'configuration' => $configuration,
+            'metadata' => $this->metadata,
+            'resource' => $resource,
+            $this->metadata->getName() => $resource,
+        ];
+    }
+
+    /**
+     * @param RequestConfiguration $configuration
+     * @param mixed $resources
+     *
+     * @return array
+     */
+    protected function provideIndexTemplateData(RequestConfiguration $configuration, $resources)
+    {
+        return [
+            'configuration' => $configuration,
+            'metadata' => $this->metadata,
+            'resources' => $resources,
+            $this->metadata->getPluralName() => $resources,
+        ];
+    }
+
+    /**
+     * @param RequestConfiguration $configuration
+     * @param ResourceInterface $resource
+     * @param FormInterface $form
+     *
+     * @return array
+     */
+    protected function provideFormTemplateData(
+        RequestConfiguration $configuration,
+        ResourceInterface $resource,
+        FormInterface $form
+    ) {
+        return [
+            'configuration' => $configuration,
+            'metadata' => $this->metadata,
+            'resource' => $resource,
+            $this->metadata->getName() => $resource,
+            'form' => $form->createView(),
+        ];
     }
 }
