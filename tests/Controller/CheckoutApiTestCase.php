@@ -12,6 +12,9 @@
 namespace Sylius\Tests\Controller;
 
 use Lakion\ApiTestCase\JsonApiTestCase;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\PaymentMethodInterface;
+use Sylius\Component\Core\Model\ShippingMethodInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -35,9 +38,9 @@ class CheckoutApiTestCase extends JsonApiTestCase
     ];
 
     /**
-     * @param int $orderId
+     * @param OrderInterface $order
      */
-    protected function addressOrder($orderId)
+    protected function addressOrder(OrderInterface $order)
     {
         $this->loadFixturesFromFile('resources/countries.yml');
 
@@ -67,49 +70,59 @@ class CheckoutApiTestCase extends JsonApiTestCase
         }
 EOT;
 
-        $url = sprintf('/api/v1/checkouts/addressing/%d', $orderId);
+        $url = sprintf('/api/v1/checkouts/addressing/%d', $order->getId());
         $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
     }
 
     /**
-     * @param int $orderId
-     * @param int $shippingMethodCode
+     * @param OrderInterface $order
+     * @param ShippingMethodInterface $shippingMethod
      */
-    protected function selectOrderShippingMethod($orderId, $shippingMethodCode)
+    protected function selectOrderShippingMethod(OrderInterface $order, ShippingMethodInterface $shippingMethod)
     {
         $data =
 <<<EOT
         {
             "shipments": [
                 {
-                    "method": "{$shippingMethodCode}"
+                    "method": "{$shippingMethod->getCode()}"
                 }
             ]
         }
 EOT;
 
-        $url = sprintf('/api/v1/checkouts/select-shipping/%d', $orderId);
+        $url = sprintf('/api/v1/checkouts/select-shipping/%d', $order->getId());
         $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
     }
 
     /**
-     * @param int $orderId
-     * @param int $paymentMethodId
+     * @param OrderInterface $order
+     * @param PaymentMethodInterface $paymentMethod
      */
-    protected function selectOrderPaymentMethod($orderId, $paymentMethodId)
+    protected function selectOrderPaymentMethod(OrderInterface $order, PaymentMethodInterface $paymentMethod)
     {
         $data =
 <<<EOT
         {
             "payments": [
                 {
-                    "method": {$paymentMethodId}
+                    "method": {$paymentMethod->getId()}
                 }
             ]
         }
 EOT;
 
-        $url = sprintf('/api/v1/checkouts/select-payment/%d', $orderId);
+        $url = sprintf('/api/v1/checkouts/select-payment/%d', $order->getId());
         $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
+    }
+
+    /**
+     * @param OrderInterface $cart
+     *
+     * @return string
+     */
+    protected function getCheckoutSummaryUrl(OrderInterface $cart)
+    {
+        return sprintf('/api/v1/checkouts/%d', $cart->getId());
     }
 }

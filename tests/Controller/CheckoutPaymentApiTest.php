@@ -11,6 +11,9 @@
 
 namespace Sylius\Tests\Controller;
 
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\PaymentMethodInterface;
+use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -48,13 +51,14 @@ final class CheckoutPaymentApiTest extends CheckoutApiTestCase
     public function it_does_not_allow_to_select_payment_for_order_that_is_not_addressed_and_has_no_shipping_method_selected()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $orders = $this->loadFixturesFromFile('resources/checkout.yml');
+        $checkoutData = $this->loadFixturesFromFile('resources/checkout.yml');
 
-        $orderId = $orders['order1']->getId();
-        $this->addressOrder($orderId);
+        /** @var OrderInterface $cart */
+        $cart = $checkoutData['order1'];
 
-        $url = sprintf('/api/v1/checkouts/select-payment/%d', $orderId);
-        $this->client->request('PATCH', $url, [], [], static::$authorizedHeaderWithContentType);
+        $this->addressOrder($cart);
+
+        $this->client->request('PATCH',  $this->getSelectPaymentUrl($cart), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'checkout/payment_invalid_order_state', Response::HTTP_INTERNAL_SERVER_ERROR);
@@ -68,9 +72,13 @@ final class CheckoutPaymentApiTest extends CheckoutApiTestCase
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $checkoutData = $this->loadFixturesFromFile('resources/checkout.yml');
 
-        $orderId = $checkoutData['order1']->getId();
-        $this->addressOrder($orderId);
-        $this->selectOrderShippingMethod($orderId, $checkoutData['ups']->getCode());
+        /** @var OrderInterface $cart */
+        $cart = $checkoutData['order1'];
+        /** @var ShippingMethodInterface $shippingMethod */
+        $shippingMethod = $checkoutData['ups'];
+
+        $this->addressOrder($cart);
+        $this->selectOrderShippingMethod($cart, $shippingMethod);
 
         $data =
 <<<EOT
@@ -83,8 +91,7 @@ final class CheckoutPaymentApiTest extends CheckoutApiTestCase
         }
 EOT;
 
-        $url = sprintf('/api/v1/checkouts/select-payment/%d', $orderId);
-        $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('PUT',  $this->getSelectPaymentUrl($cart), [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
 
@@ -99,29 +106,33 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $checkoutData = $this->loadFixturesFromFile('resources/checkout.yml');
 
-        $orderId = $checkoutData['order1']->getId();
-        $this->addressOrder($orderId);
-        $this->selectOrderShippingMethod($orderId, $checkoutData['ups']->getCode());
+        /** @var OrderInterface $cart */
+        $cart = $checkoutData['order1'];
+        /** @var ShippingMethodInterface $shippingMethod */
+        $shippingMethod = $checkoutData['ups'];
+        /** @var PaymentMethodInterface $paymentMethod */
+        $paymentMethod = $checkoutData['cash_on_delivery'];
+
+        $this->addressOrder($cart);
+        $this->selectOrderShippingMethod($cart, $shippingMethod);
 
         $data =
 <<<EOT
         {
             "payments": [
                 {
-                    "method": {$checkoutData['cash_on_delivery']->getId()}
+                    "method": {$paymentMethod->getId()}
                 }
             ]
         }
 EOT;
 
-        $url = sprintf('/api/v1/checkouts/select-payment/%d', $orderId);
-        $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('PUT', $this->getSelectPaymentUrl($cart), [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
-
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
 
-        $this->client->request('GET', sprintf('/api/v1/checkouts/%d', $checkoutData['order1']->getId()), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', $this->getCheckoutSummaryUrl($cart), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'checkout/payment_selected_order_response');
@@ -135,27 +146,42 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $checkoutData = $this->loadFixturesFromFile('resources/checkout.yml');
 
-        $orderId = $checkoutData['order1']->getId();
-        $this->addressOrder($orderId);
-        $this->selectOrderShippingMethod($orderId, $checkoutData['ups']->getCode());
-        $this->selectOrderPaymentMethod($orderId, $checkoutData['cash_on_delivery']->getId());
+        /** @var OrderInterface $cart */
+        $cart = $checkoutData['order1'];
+        /** @var ShippingMethodInterface $shippingMethod */
+        $shippingMethod = $checkoutData['ups'];
+        /** @var PaymentMethodInterface $paymentMethod */
+        $paymentMethod = $checkoutData['cash_on_delivery'];
+
+        $this->addressOrder($cart);
+        $this->selectOrderShippingMethod($cart, $shippingMethod);
+        $this->selectOrderPaymentMethod($cart, $paymentMethod);
 
         $data =
 <<<EOT
         {
             "payments": [
                 {
-                    "method": {$checkoutData['pay_by_check']->getId()}
+                    "method": {$paymentMethod->getId()}
                 }
             ]
         }
 EOT;
 
-        $url = sprintf('/api/v1/checkouts/select-payment/%d', $orderId);
-        $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('PUT', $this->getSelectPaymentUrl($cart), [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
 
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
+    }
+
+    /**
+     * @param OrderInterface $cart
+     *
+     * @return string
+     */
+    private function getSelectPaymentUrl(OrderInterface $cart)
+    {
+        return sprintf('/api/v1/checkouts/select-payment/%d', $cart->getId());
     }
 }
