@@ -27,6 +27,5 @@ default:
                 - sylius.behat.context.setup.taxonomy
 
                 - sylius.behat.context.ui.shop.cart
-                - sylius.behat.context.ui.checkout
             filters:
                 tags: "@applying_promotion_coupon && @ui"

@@ -43,13 +43,19 @@ default:
                 - sylius.behat.context.setup.user
                 - sylius.behat.context.setup.zone
 
-                - sylius.behat.context.ui.email
                 - sylius.behat.context.ui.admin.managing_orders
                 - sylius.behat.context.ui.channel
-                - sylius.behat.context.ui.checkout
+                - sylius.behat.context.ui.email
                 - sylius.behat.context.ui.shop.address_book
                 - sylius.behat.context.ui.shop.cart
+                - sylius.behat.context.ui.shop.checkout
+                - sylius.behat.context.ui.shop.checkout.addressing
+                - sylius.behat.context.ui.shop.checkout.complete
+                - sylius.behat.context.ui.shop.checkout.payment
+                - sylius.behat.context.ui.shop.checkout.shipping
+                - sylius.behat.context.ui.shop.checkout.thank_you
                 - sylius.behat.context.ui.shop.currency
+                - sylius.behat.context.ui.shop.homepage
                 - sylius.behat.context.ui.shop.locale
             filters:
                 tags: "@checkout && @ui"

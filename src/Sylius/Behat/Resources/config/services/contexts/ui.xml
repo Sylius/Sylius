@@ -269,18 +269,53 @@
             <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.ui.checkout" class="Sylius\Behat\Context\Ui\CheckoutContext">
-            <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="sylius.behat.page.shop.home" />
+        <service id="sylius.behat.context.ui.shop.checkout" class="Sylius\Behat\Context\Ui\Shop\CheckoutContext">
             <argument type="service" id="sylius.behat.page.shop.checkout.address" />
             <argument type="service" id="sylius.behat.page.shop.checkout.select_payment" />
-            <argument type="service" id="sylius.behat.page.shop.order.thank_you" />
             <argument type="service" id="sylius.behat.page.shop.checkout.select_shipping" />
             <argument type="service" id="sylius.behat.page.shop.checkout.complete" />
-            <argument type="service" id="sylius.behat.page.shop.order.show" />
-            <argument type="service" id="__symfony__.sylius.factory.address" />
             <argument type="service" id="sylius.behat.current_page_resolver" />
+            <argument type="service" id="sylius.behat.context.ui.shop.checkout.addressing" />
+            <argument type="service" id="sylius.behat.context.ui.shop.checkout.shipping" />
+            <argument type="service" id="sylius.behat.context.ui.shop.checkout.payment" />
+            <tag name="fob.context_service" />
+        </service>
+
+        <service id="sylius.behat.context.ui.shop.checkout.thank_you" class="Sylius\Behat\Context\Ui\Shop\Checkout\CheckoutThankYouContext">
+            <argument type="service" id="sylius.behat.page.shop.order.thank_you" />
+            <tag name="fob.context_service" />
+        </service>
+
+        <service id="sylius.behat.context.ui.shop.checkout.order_details" class="Sylius\Behat\Context\Ui\Shop\Checkout\CheckoutOrderDetailsContext">
+            <argument type="service" id="sylius.behat.page.shop.order.show" />
+            <tag name="fob.context_service" />
+        </service>
+
+        <service id="sylius.behat.context.ui.shop.checkout.addressing" class="Sylius\Behat\Context\Ui\Shop\Checkout\CheckoutAddressingContext">
+            <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="sylius.behat.page.shop.checkout.address" />
+            <argument type="service" id="__symfony__.sylius.factory.address" />
             <argument type="service" id="__symfony__.sylius.address_comparator" />
+            <argument type="service" id="sylius.behat.page.shop.checkout.select_shipping" />
+            <tag name="fob.context_service" />
+        </service>
+
+        <service id="sylius.behat.context.ui.shop.checkout.shipping" class="Sylius\Behat\Context\Ui\Shop\Checkout\CheckoutShippingContext">
+            <argument type="service" id="sylius.behat.page.shop.checkout.select_shipping" />
+            <argument type="service" id="sylius.behat.page.shop.checkout.select_payment" />
+            <argument type="service" id="sylius.behat.page.shop.checkout.complete" />
+            <tag name="fob.context_service" />
+        </service>
+
+        <service id="sylius.behat.context.ui.shop.checkout.payment" class="Sylius\Behat\Context\Ui\Shop\Checkout\CheckoutPaymentContext">
+            <argument type="service" id="sylius.behat.page.shop.checkout.select_payment" />
+            <argument type="service" id="sylius.behat.page.shop.checkout.complete" />
+            <tag name="fob.context_service" />
+        </service>
+
+        <service id="sylius.behat.context.ui.shop.checkout.complete" class="Sylius\Behat\Context\Ui\Shop\Checkout\CheckoutCompleteContext">
+            <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="sylius.behat.page.shop.checkout.complete" />
             <tag name="fob.context_service" />
         </service>
 

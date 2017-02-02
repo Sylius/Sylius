@@ -42,6 +42,14 @@ final class HomepageContext implements Context
     }
 
     /**
+     * @Then I should be redirected to the homepage
+     */
+    public function iShouldBeRedirectedToTheHomepage()
+    {
+        Assert::true($this->homePage->isOpen());
+    }
+
+    /**
      * @Then I should see :numberOfProducts products in the list
      */
     public function iShouldSeeProductsInTheList($numberOfProducts)

@@ -16,7 +16,7 @@ Feature: Changing the method after order confirmation
     @ui
     Scenario: Retrying the payment with offline payment
         Given I added product "PHP T-Shirt" to the cart
-        And I proceeded selecting "PayPal Express Checkout" payment method
+        And I have proceeded selecting "PayPal Express Checkout" payment method
         And I have confirmed my order with paypal payment
         And I have cancelled my PayPal payment
         When I change payment method to "Offline"
