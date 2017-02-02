@@ -56,14 +56,21 @@ final class FlashHelper implements FlashHelperInterface
     public function addSuccessFlash(RequestConfiguration $requestConfiguration, $actionName, ResourceInterface $resource = null)
     {
         $metadata = $requestConfiguration->getMetadata();
-        $metadataName = $metadata->getHumanizedName();
+        $metadataName = ucfirst($metadata->getHumanizedName());
+        $parameters = ['%resource%' => $metadataName];
 
         $message = $requestConfiguration->getFlashMessage($actionName);
         if (false === $message) {
             return;
         }
 
-        if ($this->isTranslationDefined($message, $this->defaultLocale)) {
+        if ($this->isTranslationDefined($message, $this->defaultLocale, $parameters)) {
+            if (!$this->translator instanceof TranslatorBagInterface) {
+                $this->addFlash('success', $message, $parameters);
+
+                return;
+            }
+
             $this->addFlash('success', $message);
 
             return;
@@ -72,7 +79,7 @@ final class FlashHelper implements FlashHelperInterface
         $this->addFlash(
             'success',
             $this->getResourceMessage($actionName),
-            ['%resource%' => ucfirst($metadataName)]
+            $parameters
         );
     }
 
@@ -125,10 +132,11 @@ final class FlashHelper implements FlashHelperInterface
     /**
      * @param string $message
      * @param string $locale
+     * @param array $parameters
      *
      * @return bool
      */
-    private function isTranslationDefined($message, $locale)
+    private function isTranslationDefined($message, $locale, array $parameters)
     {
         if ($this->translator instanceof TranslatorBagInterface) {
             $defaultCatalogue = $this->translator->getCatalogue($locale);
@@ -136,6 +144,6 @@ final class FlashHelper implements FlashHelperInterface
             return $defaultCatalogue->has($message, 'flashes');
         }
 
-        return false;
+        return $message !== $this->translator->trans($message, $parameters,'flashes');
     }
 }
