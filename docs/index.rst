@@ -19,12 +19,46 @@ The Book
 The Developer's guide to leveraging the flexibility of Sylius. Here you will find all the concepts used in Sylius.
 :doc:`The Book </book/index>` helps to understand how Sylius works.
 
+.. image:: _images/introduction.png
+   :target: `Introduction`_
+   :scale: 55%
+
+.. image:: _images/installation.png
+   :target: `Installation`_
+   :scale: 55%
+
+.. image:: _images/architecture.png
+   :target: `Architecture`_
+   :scale: 55%
+
+.. image:: _images/configuration.png
+   :target: `Configuration`_
+   :scale: 55%
+
+|
+
+.. image:: _images/customers.png
+   :target: `Customers`_
+   :scale: 55%
+
+.. image:: _images/products.png
+   :target: `Products`_
+   :scale: 55%
+
+.. image:: _images/carts_and_orders.png
+   :target: `Carts & Orders`_
+   :scale: 55%
+
+.. image:: _images/themes.png
+   :target: `Themes`_
+   :scale: 55%
+
 .. toctree::
    :hidden:
 
    book/index
 
-.. include:: /book/map.rst.inc
+|
 
 The Customization Guide
 -----------------------
@@ -113,3 +147,11 @@ The Contribution Guide
 .. _Sylius: http://sylius.org
 .. _`Symfony Framework`: http://symfony.com
 .. _`Quick Tour`: http://symfony.com/doc/current/quick_tour
+.. _`Introduction`: http://docs.sylius.org/en/latest/book/introduction/index.html
+.. _`Installation`: http://docs.sylius.org/en/latest/book/installation/index.html
+.. _`Architecture`: http://docs.sylius.org/en/latest/book/architecture/index.html
+.. _`Configuration`: http://docs.sylius.org/en/latest/book/configuration/index.html
+.. _`Customers`: http://docs.sylius.org/en/latest/book/customers/index.html
+.. _`Products`: http://docs.sylius.org/en/latest/book/products/index.html
+.. _`Carts & Orders`: http://docs.sylius.org/en/latest/book/orders/index.html
+.. _`Themes`: http://docs.sylius.org/en/latest/book/themes/index.html
