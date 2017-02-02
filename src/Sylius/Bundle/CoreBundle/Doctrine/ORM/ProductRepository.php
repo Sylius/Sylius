@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
 use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 
 /**
@@ -46,26 +47,31 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
     /**
      * {@inheritdoc}
      */
-    public function createQueryBuilderByChannelAndTaxonSlug(ChannelInterface $channel, $taxonSlug, $locale)
+    public function createShopListQueryBuilder(ChannelInterface $channel, TaxonInterface $taxon, $locale, array $sorting)
     {
-        return $this->createQueryBuilder('o')
+        $queryBuilder = $this->createQueryBuilder('o')
             ->addSelect('translation')
             ->leftJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
-            ->innerJoin('o.variants', 'variant')
-            ->innerJoin('variant.channelPricings', 'channelPricing')
             ->innerJoin('o.productTaxons', 'productTaxon')
-            ->innerJoin('productTaxon.taxon', 'taxon')
-            ->innerJoin('taxon.translations', 'taxonTranslation')
-            ->andWhere('taxonTranslation.locale = :locale')
-            ->andWhere('taxonTranslation.slug = :taxonSlug')
+            ->andWhere('productTaxon.taxon = :taxon')
             ->andWhere(':channel MEMBER OF o.channels')
             ->andWhere('o.enabled = true')
-            ->andWhere('channelPricing.channel = :channel')
-            ->groupBy('o.id')
+            ->addGroupBy('o.id')
             ->setParameter('locale', $locale)
-            ->setParameter('taxonSlug', $taxonSlug)
+            ->setParameter('taxon', $taxon)
             ->setParameter('channel', $channel)
         ;
+
+        // Grid hack, we do not need to join these if we don't sort by price
+        if (isset($sorting['price'])) {
+            $queryBuilder
+                ->innerJoin('o.variants', 'variant')
+                ->innerJoin('variant.channelPricings', 'channelPricing')
+                ->andWhere('channelPricing.channel = :channel')
+            ;
+        }
+
+        return $queryBuilder;
     }
 
     /**

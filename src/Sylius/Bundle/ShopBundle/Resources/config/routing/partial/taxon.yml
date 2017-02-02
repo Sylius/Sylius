@@ -12,6 +12,7 @@ sylius_shop_partial_taxon_show_by_slug:
                 method: findOneBySlug
                 arguments:
                     - $slug
+                    - "expr:service('sylius.context.channel').getChannel().getDefaultLocale().getCode()"
     requirements:
         slug: .+
 

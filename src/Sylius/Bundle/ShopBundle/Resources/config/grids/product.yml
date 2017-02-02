@@ -9,11 +9,12 @@ sylius_grid:
                 options:
                     class: "%sylius.model.product.class%"
                     repository:
-                        method: createQueryBuilderByChannelAndTaxonSlug
+                        method: createShopListQueryBuilder
                         arguments:
                             channel: "expr:service('sylius.context.channel').getChannel()"
-                            taxonId: $slug
+                            taxon: "expr:service('sylius.repository.taxon').findOneBySlug($slug, service('sylius.context.channel').getChannel().getDefaultLocale().getCode())"
                             locale: "expr:service('sylius.context.channel').getChannel().getDefaultLocale().getCode()"
+                            sorting: "expr:service('request_stack').getCurrentRequest().get('sorting', [])"
             sorting:
                 position: asc
             fields:

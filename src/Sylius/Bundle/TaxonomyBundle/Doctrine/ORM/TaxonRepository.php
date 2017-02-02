@@ -41,13 +41,15 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
     /**
      * {@inheritdoc}
      */
-    public function findOneBySlug($slug)
+    public function findOneBySlug($slug, $locale)
     {
         return $this->createQueryBuilder('o')
             ->addSelect('translation')
             ->innerJoin('o.translations', 'translation')
             ->andWhere('translation.slug = :slug')
+            ->andWhere('translation.locale = :locale')
             ->setParameter('slug', $slug)
+            ->setParameter('locale', $locale)
             ->getQuery()
             ->getOneOrNullResult()
         ;

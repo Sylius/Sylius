@@ -32,13 +32,13 @@ interface ProductRepositoryInterface extends BaseProductRepositoryInterface
 
     /**
      * @param ChannelInterface $channel
-     * @param string $taxonSlug
+     * @param TaxonInterface $taxon
      * @param string $locale
+     * @param array $sorting
      *
      * @return QueryBuilder
      */
-    public function createQueryBuilderByChannelAndTaxonSlug(ChannelInterface $channel, $taxonSlug, $locale);
-
+    public function createShopListQueryBuilder(ChannelInterface $channel, TaxonInterface $taxon, $locale, array $sorting);
 
     /**
      * @param ChannelInterface $channel

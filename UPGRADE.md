@@ -38,6 +38,9 @@
 * State resolvers have been made final. In order to change theirs behavior please decorate them or provide your own implementation.
 
 * `Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\RoutingRepositoryPass` was removed, implement it yourself.
+ 
+* Method `createQueryBuilderByChannelAndTaxonSlug` from `Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepositoryInterface` 
+  was renamed to `createShopListQueryBuilder` and receives taxon object instead of taxon slug string as the second parameter.
 
 * `Sylius\Bundle\CoreBundle\Test\MySqlDriver` and `Sylius\Bundle\CoreBundle\Test\PgSqlDriver` were moved to test namespace,
   provide your own implementation or use Doctrin DBAL's `Doctrine\DBAL\Driver\PDOMySql\Driver` and 
