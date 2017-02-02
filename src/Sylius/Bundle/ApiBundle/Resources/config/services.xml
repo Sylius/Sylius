@@ -14,6 +14,8 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <imports>
         <import resource="services/form.xml" />
+        <import resource="services/fixture.xml" />
+        <import resource="services/fixtures_factories.xml" />
     </imports>
     <services>
         <service id="sylius.oauth_server.client_manager" class="Sylius\Bundle\ApiBundle\Model\ClientManager">

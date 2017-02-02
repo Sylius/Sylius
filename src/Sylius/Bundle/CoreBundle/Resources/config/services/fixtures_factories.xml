@@ -136,5 +136,15 @@
             <argument type="service" id="sylius.repository.country" />
             <argument type="service" id="sylius.repository.customer" />
         </service>
+
+        <service id="sylius.fixture.example_factory.api_client" class="Sylius\Bundle\CoreBundle\Fixture\Factory\ApiClientExampleFactory">
+            <argument type="service" id="fos_oauth_server.client_manager.default" />
+        </service>
+
+        <service id="sylius.fixture.example_factory.api_access_token" class="Sylius\Bundle\CoreBundle\Fixture\Factory\ApiAccessTokenExampleFactory">
+            <argument type="service" id="sylius.factory.api_access_token" />
+            <argument type="service" id="sylius.repository.admin_user" />
+            <argument type="service" id="sylius.repository.api_client" />
+        </service>
     </services>
 </container>

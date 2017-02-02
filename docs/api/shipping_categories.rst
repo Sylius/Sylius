@@ -64,7 +64,7 @@ Example
 .. code-block:: bash
 
     curl http://sylius.dev/api/v1/shipping-categories/ \
-        -H "Authorization: Bearer MWExMWM0NzE1NmUyZDgyZDJiMjEzMmFlMjQ4MzgwMmE4ZTkxYzM0YjdlN2U2YzliNDIyMTk1ZDhlNDYxYWE4Ng" \
+        -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
 Example Response
@@ -144,7 +144,7 @@ Example
 .. code-block:: bash
 
     curl http://sylius.dev/api/v1/shipping-categories/1 \
-        -H "Authorization: Bearer MWExMWM0NzE1NmUyZDgyZDJiMjEzMmFlMjQ4MzgwMmE4ZTkxYzM0YjdlN2U2YzliNDIyMTk1ZDhlNDYxYWE4Ng" \
+        -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
 Example Response
@@ -196,7 +196,7 @@ Example
 .. code-block:: bash
 
     curl http://sylius.dev/api/v1/shipping-categories/ \
-        -H "Authorization: Bearer MWExMWM0NzE1NmUyZDgyZDJiMjEzMmFlMjQ4MzgwMmE4ZTkxYzM0YjdlN2U2YzliNDIyMTk1ZDhlNDYxYWE4Ng" \
+        -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST \
         --data '
@@ -236,7 +236,7 @@ Example
 .. code-block:: bash
 
     curl http://sylius.dev/api/v1/shipping-categories/-1 \
-        -H "Authorization: Bearer MWExMWM0NzE1NmUyZDgyZDJiMjEzMmFlMjQ4MzgwMmE4ZTkxYzM0YjdlN2U2YzliNDIyMTk1ZDhlNDYxYWE4Ng" \
+        -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X POST
 
@@ -299,7 +299,7 @@ Example
 .. code-block:: bash
 
     curl http://sylius.dev/api/v1/shipping-categories/3 \
-        -H "Authorization: Bearer MWExMWM0NzE1NmUyZDgyZDJiMjEzMmFlMjQ4MzgwMmE4ZTkxYzM0YjdlN2U2YzliNDIyMTk1ZDhlNDYxYWE4Ng" \
+        -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PUT \
         --data '
@@ -324,7 +324,7 @@ Example
 .. code-block:: bash
 
     curl http://sylius.dev/api/v1/shipping-categories/-1 \
-        -H "Authorization: Bearer MWExMWM0NzE1NmUyZDgyZDJiMjEzMmFlMjQ4MzgwMmE4ZTkxYzM0YjdlN2U2YzliNDIyMTk1ZDhlNDYxYWE4Ng" \
+        -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X PUT
 
@@ -379,7 +379,7 @@ Example
 .. code-block:: bash
 
     curl http://sylius.dev/api/v1/shipping-categories/3 \
-        -H "Authorization: Bearer MWExMWM0NzE1NmUyZDgyZDJiMjEzMmFlMjQ4MzgwMmE4ZTkxYzM0YjdlN2U2YzliNDIyMTk1ZDhlNDYxYWE4Ng" \
+        -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PATCH \
         --data '{"name": "Light"}'
@@ -415,7 +415,7 @@ Example
 .. code-block:: bash
 
     curl http://sylius.dev/api/v1/shipping-categories/3 \
-        -H "Authorization: Bearer MWExMWM0NzE1NmUyZDgyZDJiMjEzMmFlMjQ4MzgwMmE4ZTkxYzM0YjdlN2U2YzliNDIyMTk1ZDhlNDYxYWE4Ng" \
+        -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X DELETE
 

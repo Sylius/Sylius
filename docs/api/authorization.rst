@@ -174,3 +174,23 @@ You can now use new token to send requests
         "scope": null,
         "refresh_token": "MWI4NzVkNThjZDc2Y2M1N2JiNzBmOTQ0MDFmY2U0YzVjYzllMDE1OTU5OWFiMzJiZTY5NGU4NzYyODU1N2ZjYQ"
     }
+
+Default values in dev environment
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In a developer environment there are default client id, client secret and default access token provided to allow you to test our API just out-of-the-box.
+In order to access them, please use the following values:
+
++---------------+--------------------+
+| Parameter     | Value              |
++===============+====================+
+| client_id     | demo_client        |
++---------------+--------------------+
+| client_secret | secret_demo_client |
++---------------+--------------------+
+| grant_type    | password           |
++---------------+--------------------+
+| access_token  | SampleToken        |
++---------------+--------------------+
+
+These values will be used later on to make it easier for you to check, how our API works.
