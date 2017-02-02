@@ -11,6 +11,7 @@
 
 namespace Sylius\Behat\Page\Shop\Checkout;
 
+use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
 use Sylius\Behat\Page\SymfonyPage;
@@ -18,7 +19,6 @@ use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
-use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -48,7 +48,6 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
 
         $this->tableAccessor = $tableAccessor;
     }
-
 
     /**
      * {@inheritdoc}
@@ -187,7 +186,6 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
         return false !== stripos($this->getElement('promotion_shipping_discounts')->getText(), $promotionName);
     }
 
-
     /**
      * {@inheritdoc}
      */
@@ -222,6 +220,14 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
         $message = sprintf('%s does not have sufficient stock.', $product->getName());
 
         return $this->getElement('validation_errors')->getText() === $message;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getValidationErrors()
+    {
+        return $this->getElement('validation_errors')->getText();
     }
 
     /**
@@ -286,6 +292,25 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     public function getShippingPromotionDiscount($promotionName)
     {
         return $this->getElement('promotion_shipping_discounts')->find('css', '.description')->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function tryToOpen(array $urlParameters = [])
+    {
+        if ($this->getDriver() instanceof Selenium2Driver) {
+            $start = microtime(true);
+            $end = $start + 15;
+            do {
+                parent::tryToOpen($urlParameters);
+                sleep(1);
+            } while(!$this->isOpen() && microtime(true) < $end);
+
+            return;
+        }
+
+        parent::tryToOpen($urlParameters);
     }
 
     /**

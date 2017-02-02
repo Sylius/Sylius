@@ -10,6 +10,7 @@ use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
+use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -259,5 +260,24 @@ final class CheckoutCompleteContext implements Context
     public function thisPromotionShouldGiveDiscount(PromotionInterface $promotion, $discount)
     {
         Assert::same($this->completePage->getShippingPromotionDiscount($promotion->getName()), $discount);
+    }
+
+    /**
+     * @Then /^I should not be able to confirm order because (product "[^"]+") does not belong to ("([^"]+)" shipping category)$/
+     */
+    public function iShouldNotBeAbleToConfirmOrderBecauseDoesNotBelongsToShippingCategory(
+        ProductInterface $product,
+        ShippingCategoryInterface $shippingCategory
+    ) {
+        $this->completePage->confirmOrder();
+
+        Assert::same(
+            $this->completePage->getValidationErrors(),
+            sprintf(
+                'Product "%s" does not fit requirements for "%s" shipping method. Please reselect shipping method',
+                $product->getName(),
+                $shippingCategory->getName()
+            )
+        );
     }
 }
