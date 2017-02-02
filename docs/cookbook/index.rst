@@ -21,5 +21,6 @@ The Cookbook
     facebook-login
     cron-jobs
     creating-extension
+    custom-redirect-after-cart-add-action
 
 .. include:: /cookbook/map.rst.inc

@@ -22,7 +22,6 @@ use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Order\Modifier\OrderModifierInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -77,7 +76,10 @@ class OrderItemController extends ResourceController
             $cartManager->persist($cart);
             $cartManager->flush();
 
-            $this->eventDispatcher->dispatchPostEvent(CartActions::ADD, $configuration, $orderItem);
+            $resourceControllerEvent = $this->eventDispatcher->dispatchPostEvent(CartActions::ADD, $configuration, $orderItem);
+            if ($resourceControllerEvent->hasResponse()) {
+                return $resourceControllerEvent->getResponse();
+            }
 
             $this->flashHelper->addSuccessFlash($configuration, CartActions::ADD, $orderItem);
 

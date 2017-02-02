@@ -15,3 +15,4 @@
 * :doc:`/cookbook/facebook-login`
 * :doc:`/cookbook/cron-jobs`
 * :doc:`/cookbook/creating-extension`
+* :doc:`/cookbook/custom-redirect-after-cart-add-action`
