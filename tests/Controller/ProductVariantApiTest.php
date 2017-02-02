@@ -379,4 +379,30 @@ EOT;
 
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
     }
+
+    /**
+     * @test
+     */
+    public function it_not_change_on_hand_after_updating_product_variant()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $product_variants_data = $this->loadFixturesFromFile('resources/product_variants.yml');
+        $this->loadFixturesFromFile('resources/locales.yml');
+
+        $data =
+<<<EOT
+        {
+            "tracked": false
+        }
+EOT;
+        $this->client->request('PATCH', sprintf('/api/v1/products/%s/variants/%s', $product_variants_data['product2']->getId(), $product_variants_data['productVariant21']->getId()), [], [], static::$authorizedHeaderWithContentType, $data);
+        $response = $this->client->getResponse();
+
+        $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
+
+        $this->client->request('GET', sprintf('/api/v1/products/%s/variants/%s', $product_variants_data['product2']->getId(), $product_variants_data['productVariant21']->getId()), [], [], static::$authorizedHeaderWithAccept);
+        $response = $this->client->getResponse();
+
+        $this->assertResponse($response, 'product_variant/not_changed_on_hand_response', Response::HTTP_OK);
+    }
 }
