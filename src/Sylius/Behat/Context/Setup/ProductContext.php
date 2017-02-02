@@ -652,12 +652,19 @@ final class ProductContext implements Context
 
     /**
      * @Given /^(this product) belongs to ("([^"]+)" shipping category)$/
-     * @When /^administrator change (shipping category to "[^"]+") for (product "[^"]+")$/
      */
     public function thisProductBelongsToShippingCategory(ProductInterface $product, ShippingCategoryInterface $shippingCategory)
     {
         $product->getVariants()->first()->setShippingCategory($shippingCategory);
         $this->objectManager->flush();
+    }
+
+    /**
+     * @When administrator change shipping category to :shippingCategory for product :product
+     */
+    public function administratorChangeShippingCategoryToForProduct(ShippingCategoryInterface $shippingCategory, ProductInterface $product)
+    {
+        $this->thisProductBelongsToShippingCategory($product, $shippingCategory);
     }
 
     /**

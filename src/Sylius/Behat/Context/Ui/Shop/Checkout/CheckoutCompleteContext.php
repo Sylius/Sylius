@@ -263,20 +263,17 @@ final class CheckoutCompleteContext implements Context
     }
 
     /**
-     * @Then /^I should not be able to confirm order because (product "[^"]+") does not belong to ("([^"]+)" shipping category)$/
+     * @Then I should not be able to confirm order because products does not fit :shippingMethod requirements
      */
-    public function iShouldNotBeAbleToConfirmOrderBecauseDoesNotBelongsToShippingCategory(
-        ProductInterface $product,
-        ShippingCategoryInterface $shippingCategory
-    ) {
+    public function iShouldNotBeAbleToConfirmOrderBecauseDoesNotBelongsToShippingCategory(ShippingMethodInterface $shippingMethod)
+    {
         $this->completePage->confirmOrder();
 
         Assert::same(
             $this->completePage->getValidationErrors(),
             sprintf(
-                'Product "%s" does not fit requirements for "%s" shipping method. Please reselect shipping method',
-                $product->getName(),
-                $shippingCategory->getName()
+                'Product does not fit requirements for %s shipping method. Please reselect shipping method.',
+                $shippingMethod->getName()
             )
         );
     }

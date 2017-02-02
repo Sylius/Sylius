@@ -25,7 +25,7 @@ Feature: Order shipping method integrity
         And I have proceeded order with "DHL" shipping method and "Offline" payment
         When I add product "T-shirt Breaking Bad" to the cart
         And I want to complete checkout
-        Then I should not be able to confirm order because product "T-shirt Breaking Bad" does not belong to "Heavy stuff" shipping category
+        Then I should not be able to confirm order because products does not fit "DHL" requirements
         And I should not see the thank you page
 
     @ui @javascript
@@ -36,7 +36,7 @@ Feature: Order shipping method integrity
         And I have proceeded order with "FedEx" shipping method and "Offline" payment
         When I remove product "T-shirt Breaking Bad" from the cart
         And I want to complete checkout
-        Then I should not be able to confirm order because product "WestWorld host" does not belong to "Small stuff" shipping category
+        Then I should not be able to confirm order because products does not fit "FedEx" requirements
         And I should not see the thank you page
 
     @ui
@@ -46,5 +46,5 @@ Feature: Order shipping method integrity
         And I have proceeded order with "DHL" shipping method and "Offline" payment
         When administrator change shipping category to "Small stuff" for product "WestWorld host"
         And I want to complete checkout
-        Then I should not be able to confirm order because product "WestWorld host" does not belong to "Heavy stuff" shipping category
+        Then I should not be able to confirm order because products does not fit "DHL" requirements
         And I should not see the thank you page

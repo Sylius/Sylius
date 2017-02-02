@@ -38,7 +38,7 @@ final class CheckoutThankYouContext implements Context
      */
     public function iShouldNotSeeTheThankYouPage()
     {
-        Assert::true($this->thankYouPage->isOpen());
+        Assert::false($this->thankYouPage->isOpen());
     }
 
     /**

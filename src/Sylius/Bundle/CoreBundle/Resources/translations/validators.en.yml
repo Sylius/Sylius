@@ -30,6 +30,7 @@ sylius:
     cart_item:
         not_available: '%itemName% does not have sufficient stock.'
     order:
+        shipping_method_integrity: 'Product does not fit requirements for %shippingMethodName% shipping method. Please reselect shipping method.'
         currency_code:
             not_valid: The currency code you entered is invalid.
     locale:
