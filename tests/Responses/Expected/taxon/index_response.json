@@ -1,0 +1,159 @@
+{
+    "page": 1,
+    "limit": 10,
+    "pages": 1,
+    "total": 7,
+    "_links": {
+        "self": {
+            "href": "\/api\/v1\/taxons\/?page=1&limit=10"
+        },
+        "first": {
+            "href": "\/api\/v1\/taxons\/?page=1&limit=10"
+        },
+        "last": {
+            "href": "\/api\/v1\/taxons\/?page=1&limit=10"
+        }
+    },
+    "_embedded": {
+        "items": [
+            {
+                "id": @integer@,
+                "code": "category",
+                "position": 0,
+                "translations": []
+            },
+            {
+                "id": @integer@,
+                "code": "mugs",
+                "root": {
+                    "id": @integer@,
+                    "code": "category",
+                    "position": 0,
+                    "translations": []
+                },
+                "parent": {
+                    "id": @integer@,
+                    "code": "category",
+                    "position": 0,
+                    "translations": []
+                },
+                "position": 0,
+                "translations": []
+            },
+            {
+                "id": @integer@,
+                "code": "stickers",
+                "root": {
+                    "id": @integer@,
+                    "code": "category",
+                    "position": 0,
+                    "translations": []
+                },
+                "parent": {
+                    "id": @integer@,
+                    "code": "category",
+                    "position": 0,
+                    "translations": []
+                },
+                "position": 1,
+                "translations": []
+            },
+            {
+                "id": @integer@,
+                "code": "books",
+                "root": {
+                    "id": @integer@,
+                    "code": "category",
+                    "position": 0,
+                    "translations": []
+                },
+                "parent": {
+                    "id": @integer@,
+                    "code": "category",
+                    "position": 0,
+                    "translations": []
+                },
+                "position": 2,
+                "translations": []
+            },
+            {
+                "id": @integer@,
+                "code": "t-shirts",
+                "root": {
+                    "id": @integer@,
+                    "code": "category",
+                    "position": 0,
+                    "translations": []
+                },
+                "parent": {
+                    "id": @integer@,
+                    "code": "category",
+                    "position": 0,
+                    "translations": []
+                },
+                "position": 3,
+                "translations": []
+            },
+            {
+                "id": @integer@,
+                "code": "men",
+                "root": {
+                    "id": @integer@,
+                    "code": "category",
+                    "position": 0,
+                    "translations": []
+                },
+                "parent": {
+                    "id": @integer@,
+                    "code": "t-shirts",
+                    "root": {
+                        "id": @integer@,
+                        "code": "category",
+                        "position": 0,
+                        "translations": []
+                    },
+                    "parent": {
+                        "id": @integer@,
+                        "code": "category",
+                        "position": 0,
+                        "translations": []
+                    },
+                    "position": 3,
+                    "translations": []
+                },
+                "position": 0,
+                "translations": []
+            },
+            {
+                "id": @integer@,
+                "code": "women",
+                "root": {
+                    "id": @integer@,
+                    "code": "category",
+                    "position": 0,
+                    "translations": []
+                },
+                "parent": {
+                    "id": @integer@,
+                    "code": "t-shirts",
+                    "root": {
+                        "id": @integer@,
+                        "code": "category",
+                        "position": 0,
+                        "translations": []
+                    },
+                    "parent": {
+                        "id": @integer@,
+                        "code": "category",
+                        "position": 0,
+                        "translations": []
+                    },
+                    "position": 3,
+                    "translations": []
+                },
+                "position": 1,
+                "translations": []
+            }
+        ]
+    }
+}

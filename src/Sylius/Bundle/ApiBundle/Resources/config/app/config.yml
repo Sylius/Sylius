@@ -4,9 +4,10 @@
 imports:
     - { resource: "@SyliusApiBundle/Resources/config/app/fixtures.yml" }
 
+    - { resource: "@SyliusApiBundle/Resources/config/grids/cart.yml" }
     - { resource: "@SyliusApiBundle/Resources/config/grids/product.yml" }
     - { resource: "@SyliusApiBundle/Resources/config/grids/product_variant.yml" }
-    - { resource: "@SyliusApiBundle/Resources/config/grids/cart.yml" }
+    - { resource: "@SyliusApiBundle/Resources/config/grids/taxon.yml" }
 
 sylius_api:
     resources:

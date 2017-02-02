@@ -1,0 +1,216 @@
+{
+    "id": @integer@,
+    "code": "women",
+    "root": {
+        "id": @integer@,
+        "code": "category",
+        "children": [
+            {
+                "id": @integer@,
+                "code": "mugs",
+                "children": [],
+                "left": 2,
+                "right": 3,
+                "level": 1,
+                "position": 0,
+                "translations": []
+            },
+            {
+                "id": @integer@,
+                "code": "stickers",
+                "children": [],
+                "left": 4,
+                "right": 5,
+                "level": 1,
+                "position": 1,
+                "translations": []
+            },
+            {
+                "id": @integer@,
+                "code": "books",
+                "children": [],
+                "left": 6,
+                "right": 7,
+                "level": 1,
+                "position": 2,
+                "translations": []
+            },
+            {
+                "id": @integer@,
+                "code": "t-shirts",
+                "children": [
+                    {
+                        "id": @integer@,
+                        "code": "men",
+                        "children": [],
+                        "left": 9,
+                        "right": 10,
+                        "level": 2,
+                        "position": 0,
+                        "translations": []
+                    }
+                ],
+                "left": 8,
+                "right": 13,
+                "level": 1,
+                "position": 3,
+                "translations": []
+            }
+        ],
+        "left": 1,
+        "right": 14,
+        "level": 0,
+        "position": 0,
+        "translations": []
+    },
+    "parent": {
+        "id": @integer@,
+        "code": "t-shirts",
+        "root": {
+            "id": @integer@,
+            "code": "category",
+            "children": [
+                {
+                    "id": @integer@,
+                    "code": "mugs",
+                    "children": [],
+                    "left": 2,
+                    "right": 3,
+                    "level": 1,
+                    "position": 0,
+                    "translations": []
+                },
+                {
+                    "id": @integer@,
+                    "code": "stickers",
+                    "children": [],
+                    "left": 4,
+                    "right": 5,
+                    "level": 1,
+                    "position": 1,
+                    "translations": []
+                },
+                {
+                    "id": @integer@,
+                    "code": "books",
+                    "children": [],
+                    "left": 6,
+                    "right": 7,
+                    "level": 1,
+                    "position": 2,
+                    "translations": []
+                }
+            ],
+            "left": 1,
+            "right": 14,
+            "level": 0,
+            "position": 0,
+            "translations": []
+        },
+        "parent": {
+            "id": @integer@,
+            "code": "category",
+            "children": [
+                {
+                    "id": @integer@,
+                    "code": "mugs",
+                    "children": [],
+                    "left": 2,
+                    "right": 3,
+                    "level": 1,
+                    "position": 0,
+                    "translations": []
+                },
+                {
+                    "id": @integer@,
+                    "code": "stickers",
+                    "children": [],
+                    "left": 4,
+                    "right": 5,
+                    "level": 1,
+                    "position": 1,
+                    "translations": []
+                },
+                {
+                    "id": @integer@,
+                    "code": "books",
+                    "children": [],
+                    "left": 6,
+                    "right": 7,
+                    "level": 1,
+                    "position": 2,
+                    "translations": []
+                }
+            ],
+            "left": 1,
+            "right": 14,
+            "level": 0,
+            "position": 0,
+            "translations": []
+        },
+        "children": [
+            {
+                "id": @integer@,
+                "code": "men",
+                "root": {
+                    "id": @integer@,
+                    "code": "category",
+                    "children": [
+                        {
+                            "id": @integer@,
+                            "code": "mugs",
+                            "children": [],
+                            "left": 2,
+                            "right": 3,
+                            "level": 1,
+                            "position": 0,
+                            "translations": []
+                        },
+                        {
+                            "id": @integer@,
+                            "code": "stickers",
+                            "children": [],
+                            "left": 4,
+                            "right": 5,
+                            "level": 1,
+                            "position": 1,
+                            "translations": []
+                        },
+                        {
+                            "id": @integer@,
+                            "code": "books",
+                            "children": [],
+                            "left": 6,
+                            "right": 7,
+                            "level": 1,
+                            "position": 2,
+                            "translations": []
+                        }
+                    ],
+                    "left": 1,
+                    "right": 14,
+                    "level": 0,
+                    "position": 0,
+                    "translations": []
+                },
+                "children": [],
+                "left": 9,
+                "right": 10,
+                "level": 2,
+                "position": 0,
+                "translations": []
+            }
+        ],
+        "left": 8,
+        "right": 13,
+        "level": 1,
+        "position": 3,
+        "translations": []
+    },
+    "children": [],
+    "left": 11,
+    "right": 12,
+    "level": 2,
+    "position": 1,
+    "translations": []
+}

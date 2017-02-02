@@ -1,0 +1,23 @@
+{
+    "id": @integer@,
+    "code": "fluffy_pets",
+    "children": [],
+    "left": 1,
+    "right": 2,
+    "level": 0,
+    "position": 1,
+    "translations": {
+        "en_US": {
+            "id": @integer@,
+            "locale": "en_US",
+            "name": "Fluffy Pets",
+            "slug": "fluffy-pets"
+        },
+        "nl_NL": {
+            "id": @integer@,
+            "locale": "nl_NL",
+            "name": "Pluizige Huisdieren",
+            "slug": "pluizige-huisdieren"
+        }
+    }
+}
