@@ -75,7 +75,71 @@ final class FlashHelperSpec extends ObjectBehavior
         $this->addSuccessFlash($requestConfiguration, ResourceActions::CREATE, $resource);
     }
 
-    function it_adds_resource_message_flash_bag_is_not_available(
+    function it_adds_resource_message_when_catalogue_is_unavailable_and_given_message_cannot_be_translated(
+        SessionInterface $session,
+        TranslatorInterface $translator,
+        FlashBagInterface $flashBag,
+        MetadataInterface $metadata,
+        RequestConfiguration $requestConfiguration,
+        ResourceInterface $resource
+    ) {
+        $parameters = ['%resource%' => 'Product'];
+
+        $metadata->getApplicationName()->willReturn('sylius');
+        $metadata->getHumanizedName()->willReturn('product');
+
+        $requestConfiguration->getMetadata()->willReturn($metadata);
+        $requestConfiguration->getFlashMessage(ResourceActions::CREATE)->willReturn('sylius.product.create');
+
+        $translator->trans('sylius.product.create', $parameters, 'flashes')->willReturn('sylius.product.create');
+
+        $session->getBag('flashes')->willReturn($flashBag);
+        $flashBag->add(
+            'success',
+            [
+                'message' => 'sylius.resource.create',
+                'parameters' => $parameters,
+            ]
+        )->shouldBeCalled();
+
+        $this->addSuccessFlash($requestConfiguration, ResourceActions::CREATE, $resource);
+    }
+
+    function it_adds_resource_message_when_catalogue_is_unavailable_and_given_message_can_be_translated(
+        SessionInterface $session,
+        TranslatorInterface $translator,
+        FlashBagInterface $flashBag,
+        MetadataInterface $metadata,
+        RequestConfiguration $requestConfiguration,
+        ResourceInterface $resource
+    ) {
+        $parameters = ['%resource%' => 'Spoon'];
+
+        $metadata->getApplicationName()->willReturn('app');
+        $metadata->getHumanizedName()->willReturn('spoon');
+
+        $requestConfiguration->getMetadata()->willReturn($metadata);
+        $requestConfiguration->getFlashMessage(ResourceActions::CREATE)
+            ->willReturn('%resource% is the best cutlery of them all!')
+        ;
+
+        $translator->trans('%resource% is the best cutlery of them all!', $parameters, 'flashes')
+            ->willReturn('Spoon is the best cutlery of them all!')
+        ;
+
+        $session->getBag('flashes')->willReturn($flashBag);
+        $flashBag->add(
+            'success',
+            [
+                'message' => '%resource% is the best cutlery of them all!',
+                'parameters' => $parameters,
+            ]
+        )->shouldBeCalled();
+
+        $this->addSuccessFlash($requestConfiguration, ResourceActions::CREATE, $resource);
+    }
+
+    function it_adds_resource_message_if_message_was_not_found_in_the_catalogue(
         SessionInterface $session,
         TranslatorBagInterface $translator,
         MessageCatalogueInterface $messageCatalogue,
@@ -84,8 +148,6 @@ final class FlashHelperSpec extends ObjectBehavior
         RequestConfiguration $requestConfiguration,
         ResourceInterface $resource
     ) {
-        $this->beConstructedWith($session, $translator, 'en');
-
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getHumanizedName()->willReturn('product');
 
@@ -117,8 +179,6 @@ final class FlashHelperSpec extends ObjectBehavior
         RequestConfiguration $requestConfiguration,
         ResourceInterface $resource
     ) {
-        $this->beConstructedWith($session, $translator, 'en');
-
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getHumanizedName()->willReturn('product');
 
@@ -144,8 +204,6 @@ final class FlashHelperSpec extends ObjectBehavior
         RequestConfiguration $requestConfiguration,
         ResourceInterface $resource
     ) {
-        $this->beConstructedWith($session, $translator, 'en');
-
         $metadata->getApplicationName()->willReturn('app');
         $metadata->getHumanizedName()->willReturn('book');
 
