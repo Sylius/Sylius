@@ -16,7 +16,7 @@ use Sylius\Behat\Page\SymfonyPage;
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-final class UpdatePage extends SymfonyPage implements UpdatePageInterface
+class UpdatePage extends SymfonyPage implements UpdatePageInterface
 {
     /**
      * {@inheritdoc}
