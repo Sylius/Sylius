@@ -4,5 +4,4 @@
 sylius:
     form:
         locale:
-            enabled: Įjungta
             name: Pavadinimas

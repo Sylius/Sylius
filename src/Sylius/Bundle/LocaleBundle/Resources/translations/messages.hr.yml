@@ -4,5 +4,4 @@
 sylius:
     form:
         locale:
-            enabled: Omogući
             name: Naziv grupe

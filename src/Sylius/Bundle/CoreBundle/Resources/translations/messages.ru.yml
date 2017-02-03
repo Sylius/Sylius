@@ -28,6 +28,7 @@ sylius:
             taxonomies: Список каталогов
             locale_default: Локаль по умолчанию
             locales: Языки
+            contact_email: Контактный адрес электронной почты
             currency_base: Базовая валюта
             currencies: Валюты
             shipping_methods: Список способов доставки
@@ -119,7 +120,14 @@ sylius:
             type: Типы взаимосвязи
         product_association_type:
             name: Название
+        promotion_filter:
+            products: Фильтр товаров
+            taxons: Фильтр таксонов
         promotion_rule:
+            customer_group:
+                group: Группа клиента
+            has_taxon:
+                taxons: Таксоны
             product:
                 products: Товары
             total_of_items_from_taxon:
@@ -127,6 +135,8 @@ sylius:
                 amount: Сумма
         payment_method:
             channels: Каналы
+        product_attribute:
+            position: Позиция
         zone:
             scopes:
                 shipping: Способ доставки
@@ -160,9 +170,11 @@ sylius:
             header: файловая система
             cache:
                 header: кеш
+                help: 'Чтобы выставить разрешения запустите: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
             exists: существует
             logs:
                 header: журналы
+                help: 'Чтобы выставить разрешения запустите: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
             not_exists: не существует
             not_writable: не доступно для записи
             parameters:

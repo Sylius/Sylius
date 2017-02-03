@@ -23,6 +23,7 @@ sylius:
                 label: Фиксированная ставка за доставку
                 amount: Сумма
             per_unit_rate_configuration:
+                label: Фиксированная ставка за единицу товара
                 amount: Сумма
         shipping_category:
             description: Описание
@@ -38,3 +39,4 @@ sylius:
             name: Название
             tax_category: Категория налогов
             translations: '﻿Переводы'
+            position: Позиция

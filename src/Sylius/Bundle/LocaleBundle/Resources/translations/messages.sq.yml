@@ -4,5 +4,4 @@
 sylius:
     form:
         locale:
-            enabled: E aktivizuar
             name: Emri

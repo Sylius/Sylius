@@ -4,5 +4,4 @@
 sylius:
     form:
         locale:
-            enabled: 已启用
             name: 名称
