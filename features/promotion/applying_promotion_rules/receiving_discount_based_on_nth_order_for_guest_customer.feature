@@ -15,7 +15,7 @@ Feature: Receiving discount based on nth order
         Given there is a promotion "1st order promotion"
         And it gives "$20.00" off customer's 1st order
         When I add product "PHP T-Shirt" to the cart
-        And I complete addressing step with email "john.doe@example.com" and "United States" based shipping address
+        And I complete addressing step with email "john.doe@example.com" and "United States" based billing address
         Then my cart total should be "$80.00"
         And my discount should be "-$20.00"
 
@@ -27,7 +27,7 @@ Feature: Receiving discount based on nth order
         And the customer bought a single "PHP T-Shirt"
         And the customer chose "Free" shipping method to "United States" with "Cash on Delivery" payment
         When I add product "PHP T-Shirt" to the cart
-        And I complete addressing step with email "john.doe@example.com" and "United States" based shipping address
+        And I complete addressing step with email "john.doe@example.com" and "United States" based billing address
         Then my cart total should be "$100.00"
         And there should be no discount
 
@@ -36,6 +36,6 @@ Feature: Receiving discount based on nth order
         Given there is a promotion "2nd order promotion"
         And it gives "$10.00" off customer's 2nd order
         When I add product "PHP T-Shirt" to the cart
-        And I complete addressing step with email "john.doe@example.com" and "United States" based shipping address
+        And I complete addressing step with email "john.doe@example.com" and "United States" based billing address
         Then my cart total should be "$100.00"
         And there should be no discount

@@ -99,7 +99,7 @@ final class ShopBasedCartContext implements CartContextInterface
 
         $defaultAddress = $customer->getDefaultAddress();
         if (null !== $defaultAddress) {
-            $cart->setShippingAddress(clone $defaultAddress);
+            $cart->setBillingAddress(clone $defaultAddress);
         }
     }
 }

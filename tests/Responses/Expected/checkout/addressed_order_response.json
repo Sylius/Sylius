@@ -25,7 +25,7 @@
             }
         }
     },
-    "shipping_address": {
+    "billing_address": {
         "id": @integer@,
         "first_name": "Hieronim",
         "last_name": "Bosch",
@@ -36,7 +36,7 @@
         "created_at": "@string@.isDateTime()",
         "updated_at": "@string@.isDateTime()"
     },
-    "billing_address": {
+    "shipping_address": {
         "id": @integer@,
         "first_name": "Vincent",
         "last_name": "van Gogh",

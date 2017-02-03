@@ -14,6 +14,6 @@ Feature: Selecting order shipping method
     @ui
     Scenario: Selecting one of available shipping method
         Given I have product "Targaryen T-Shirt" in the cart
-        And I specified the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         When I select "Raven Post" shipping method
         And I complete the shipping step

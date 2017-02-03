@@ -80,13 +80,13 @@
                 $('select.country-select').trigger('change');
             }
 
-            var billingAddressCheckbox = $('input[type="checkbox"][name$="[differentBillingAddress]"]');
-            var billingAddressContainer = $('#sylius-billing-address-container');
-            var toggleBillingAddress = function() {
-                billingAddressContainer.toggle(billingAddressCheckbox.prop('checked'));
+            var shippingAddressCheckbox = $('input[type="checkbox"][name$="[differentShippingAddress]"]');
+            var shippingAddressContainer = $('#sylius-shipping-address-container');
+            var toggleShippingAddress = function() {
+                shippingAddressContainer.toggle(shippingAddressCheckbox.prop('checked'));
             };
-            toggleBillingAddress();
-            billingAddressCheckbox.on('change', toggleBillingAddress);
+            toggleShippingAddress();
+            shippingAddressCheckbox.on('change', toggleShippingAddress);
 
             var getProvinceInputValue = function (valueSelector) {
                 return undefined == valueSelector ? '' : 'value="'+ valueSelector +'"';

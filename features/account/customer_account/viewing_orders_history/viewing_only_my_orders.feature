@@ -12,11 +12,11 @@ Feature: Viewing orders on my account page
         And I am a logged in customer
         And I placed an order "#00000666"
         And I bought a single "Angel T-Shirt"
-        And I addressed it to "Lucifer Morningstar", "Seaside Fwy", "90802" "Los Angeles" in the "United States" with identical billing address
+        And I addressed it to "Lucifer Morningstar", "Seaside Fwy", "90802" "Los Angeles" in the "United States" with identical shipping address
         And I chose "Free" shipping method with "Cash on Delivery" payment
         And there is another customer "oliver@teamarrow.com" that placed an order "#00000999"
         And the customer bought a single "Green Arrow"
-        And the customer "Oliver Queen" addressed it to "Seaside Fwy", "90802" "Los Angeles" in the "United States" with identical billing address
+        And the customer "Oliver Queen" addressed it to "Seaside Fwy", "90802" "Los Angeles" in the "United States" with identical shipping address
 
     @ui
     Scenario: Viewing orders

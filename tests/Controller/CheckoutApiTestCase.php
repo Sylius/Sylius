@@ -44,7 +44,7 @@ class CheckoutApiTestCase extends JsonApiTestCase
         $data =
 <<<EOT
         {
-            "shipping_address": {
+            "billing_address": {
                 "first_name": "Hieronim",
                 "last_name": "Bosch",
                 "street": "Surrealism St.",
@@ -52,7 +52,7 @@ class CheckoutApiTestCase extends JsonApiTestCase
                 "city": "’s-Hertogenbosch",
                 "postcode": "99-999"
             },
-            "billing_address": {
+            "shipping_address": {
                 "first_name": "Vincent",
                 "last_name": "van Gogh",
                 "street": "Post-Impressionism St.",
@@ -60,7 +60,7 @@ class CheckoutApiTestCase extends JsonApiTestCase
                 "city": "Groot Zundert",
                 "postcode": "88-888"
             },
-            "different_billing_address": true,
+            "different_shipping_address": true,
             "customer": {
                 "email": "john@doe.com"
             }

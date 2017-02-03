@@ -14,7 +14,7 @@ Feature: Returning from payment step to one of previous steps
     @ui
     Scenario: Going back to shipping step with button
         Given I have product "Hulk Mug" in the cart
-        And I specified the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the shipping step
         When I decide to change order shipping method
         Then I should be redirected to the shipping step
@@ -23,7 +23,7 @@ Feature: Returning from payment step to one of previous steps
     @ui
     Scenario: Going back to shipping step with steps panel
         Given I have product "Hulk Mug" in the cart
-        And I specified the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the shipping step
         When I go to the shipping step
         Then I should be redirected to the shipping step
@@ -32,7 +32,7 @@ Feature: Returning from payment step to one of previous steps
     @ui
     Scenario: Going back to addressing step with steps panel
         Given I have product "Hulk Mug" in the cart
-        And I specified the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the shipping step
         When I go to the addressing step
         Then I should be redirected to the addressing step

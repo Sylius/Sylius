@@ -19,7 +19,7 @@ Feature: Seeing product's variant with specify quantity of items on hand
     Scenario: Seeing decreased quantity of product's items in selected variant after order payment
         Given there is a customer "lucy@teamlucifer.com" that placed an order "#00000666"
         And the customer bought 3 units of "Green" variant of product "T-shirt banana"
-        And the customer "Lucifer Morningstar" addressed it to "Seaside Fwy", "90802" "Los Angeles" in the "United States" with identical billing address
+        And the customer "Lucifer Morningstar" addressed it to "Seaside Fwy", "90802" "Los Angeles" in the "United States" with identical shipping address
         And the customer chose "Free" shipping method with "Cash on Delivery" payment
         And this order is already paid
         When I view all variants of the product "T-shirt banana"
@@ -30,7 +30,7 @@ Feature: Seeing product's variant with specify quantity of items on hand
         Given there is a customer "lucy@teamlucifer.com" that placed an order "#00000666"
         And the customer bought 3 units of "Yellow" variant of product "T-shirt banana"
         And the customer bought 2 units of "Green" variant of product "T-shirt banana"
-        And the customer "Lucifer Morningstar" addressed it to "Seaside Fwy", "90802" "Los Angeles" in the "United States" with identical billing address
+        And the customer "Lucifer Morningstar" addressed it to "Seaside Fwy", "90802" "Los Angeles" in the "United States" with identical shipping address
         And the customer chose "Free" shipping method with "Cash on Delivery" payment
         And this order is already paid
         When I view all variants of the product "T-shirt banana"

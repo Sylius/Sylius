@@ -234,8 +234,8 @@ class OrderFixture extends AbstractFixture
         $address->setCity($this->faker->city);
         $address->setPostcode($this->faker->postcode);
 
-        $order->setShippingAddress($address);
-        $order->setBillingAddress(clone $address);
+        $order->setBillingAddress($address);
+        $order->setShippingAddress(clone $address);
 
         $this->applyCheckoutStateTransition($order, OrderCheckoutTransitions::TRANSITION_ADDRESS);
     }

@@ -14,7 +14,7 @@ Feature: Viewing payment's amount on my account panel
         And I am logged in as "lucy@teamlucifer.com"
         And I placed an order "#00000666"
         And I bought an "Angel T-Shirt" and an "Angel Mug"
-        And I addressed it to "Lucifer Morningstar", "Seaside Fwy", "90802" "Los Angeles" in the "United States" with identical billing address
+        And I addressed it to "Lucifer Morningstar", "Seaside Fwy", "90802" "Los Angeles" in the "United States" with identical shipping address
         And I chose "DHL" shipping method with "Cash on Delivery" payment
 
     @ui

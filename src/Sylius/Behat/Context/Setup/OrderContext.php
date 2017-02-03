@@ -187,7 +187,7 @@ final class OrderContext implements Context
     {
         /** @var OrderInterface $order */
         $order = $this->sharedStorage->get('order');
-        $order->setShippingAddress($address);
+        $order->setBillingAddress($address);
 
         $this->objectManager->flush();
     }
@@ -203,22 +203,21 @@ final class OrderContext implements Context
         $shippingAddress = $order->getShippingAddress();
         $shippingAddress->setStreet($street);
 
-        $this->objectManager->flush();
-
         $this->applyTransitionOnOrderCheckout($order, OrderCheckoutTransitions::TRANSITION_ADDRESS);
+
+        $this->objectManager->flush();
     }
 
     /**
-     * @Given /^the customer set the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)")$/
-     * @Given /^for the billing address (of "[^"]+" in the "[^"]+", "[^"]+" "[^"]+", "[^"]+")$/
-     * @Given /^for the billing address (of "[^"]+" in the "[^"]+", "[^"]+" "([^"]+)", "[^"]+", "[^"]+")$/
+     * @Given /^the customer set the shipping (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)")$/
+     * @Given /^for the shipping address (of "[^"]+" in the "[^"]+", "[^"]+" "[^"]+", "[^"]+"(?:|, "[^"]+"))$/
      */
-    public function forTheBillingAddressOf(AddressInterface $address)
+    public function forTheShippingAddressOf(AddressInterface $address)
     {
         /** @var OrderInterface $order */
         $order = $this->sharedStorage->get('order');
 
-        $order->setBillingAddress($address);
+        $order->setShippingAddress($address);
 
         $this->applyTransitionOnOrderCheckout($order, OrderCheckoutTransitions::TRANSITION_ADDRESS);
 
@@ -226,13 +225,13 @@ final class OrderContext implements Context
     }
 
     /**
-     * @Given /^the customer ("[^"]+" addressed it to "[^"]+", "[^"]+" "[^"]+" in the "[^"]+") with identical billing address$/
-     * @Given /^I (addressed it to "[^"]+", "[^"]+", "[^"]+" "[^"]+" in the "[^"]+") with identical billing address$/
+     * @Given /^the customer ("[^"]+" addressed it to "[^"]+", "[^"]+" "[^"]+" in the "[^"]+") with identical shipping address$/
+     * @Given /^I (addressed it to "[^"]+", "[^"]+", "[^"]+" "[^"]+" in the "[^"]+") with identical shipping address$/
      */
-    public function theCustomerAddressedItToWithIdenticalBillingAddress(AddressInterface $address)
+    public function theCustomerAddressedItToWithIdenticalShippingAddress(AddressInterface $address)
     {
         $this->theCustomerAddressedItTo($address);
-        $this->forTheBillingAddressOf(clone $address);
+        $this->forTheShippingAddressOf(clone $address);
     }
 
     /**
@@ -770,8 +769,8 @@ final class OrderContext implements Context
         AddressInterface $address,
         PaymentMethodInterface $paymentMethod
     ) {
-        $order->setShippingAddress($address);
-        $order->setBillingAddress(clone $address);
+        $order->setBillingAddress($address);
+        $order->setShippingAddress(clone $address);
 
         $this->applyTransitionOnOrderCheckout($order, OrderCheckoutTransitions::TRANSITION_ADDRESS);
 

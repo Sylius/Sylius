@@ -62,20 +62,18 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
     /**
      * {@inheritdoc}
      */
-    public function chooseDifferentBillingAddress()
+    public function chooseDifferentShippingAddress()
     {
         $driver = $this->getDriver();
         if ($driver instanceof Selenium2Driver) {
-            $this->getElement('different_billing_address_label')->click();
+            $this->getElement('different_shipping_address_label')->click();
 
             return;
         }
 
-        $billingAddressSwitch = $this->getElement('different_billing_address');
-        Assert::false(
-            $billingAddressSwitch->isChecked(),
-            'Previous state of different billing address switch was true expected to be false'
-        );
+        $billingAddressSwitch = $this->getElement('different_shipping_address');
+
+        Assert::false($billingAddressSwitch->isChecked());
 
         $billingAddressSwitch->check();
     }
@@ -209,7 +207,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getShippingAddressCountry()
+    public function getBillingAddressCountry()
     {
         return $this->getElement('shipping_country')->find('css', 'option:selected')->getText();
     }
@@ -331,8 +329,8 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
             'billing_province' => '[name="sylius_checkout_address[billingAddress][provinceName]"]',
             'checkout_subtotal' => '#sylius-checkout-subtotal',
             'customer_email' => '#sylius_checkout_address_customer_email',
-            'different_billing_address' => '#sylius_checkout_address_differentBillingAddress',
-            'different_billing_address_label' => '#sylius_checkout_address_differentBillingAddress ~ label',
+            'different_shipping_address' => '#sylius_checkout_address_differentShippingAddress',
+            'different_shipping_address_label' => '#sylius_checkout_address_differentShippingAddress ~ label',
             'login_button' => '#sylius-api-login-submit',
             'login_password' => 'input[type=\'password\']',
             'next_step' => '#next-step',
