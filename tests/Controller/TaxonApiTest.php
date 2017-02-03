@@ -12,6 +12,7 @@
 namespace Sylius\Tests\Controller;
 
 use Lakion\ApiTestCase\JsonApiTestCase;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -193,8 +194,6 @@ EOT;
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'taxon/create_with_parent_response', Response::HTTP_CREATED);
     }
-    
-    
 
     /**
      * @test
@@ -212,7 +211,40 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_updating_taxon()
+    public function it_allows_create_product_with_images()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+
+        $data =
+<<<EOT
+        {
+            "code": "toys",
+            "images": [
+                { 
+                    "code": "ford"
+                },
+                {
+                    "code": "mug"
+                }
+            ]
+        }
+EOT;
+
+        $this->client->request('POST', '/api/v1/taxons/', [], [
+            'images' => [
+                ['file' => new UploadedFile(sprintf('%s/../Resources/fixtures/ford.jpg', __DIR__), "ford")],
+                ['file' => new UploadedFile(sprintf('%s/../Resources/fixtures/mugs.jpg', __DIR__), "mugs")],
+            ]
+        ], static::$authorizedHeaderWithContentType, $data);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'taxon/create_with_images_response', Response::HTTP_CREATED);
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_updating_taxon_with_parent()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $taxons = $this->loadFixturesFromFile('resources/taxons.yml');
@@ -222,9 +254,9 @@ EOT;
 <<<EOT
         {
             "translations": {
-                "en__US": {
+                "en_US": {
                   "name": "Women",
-                  "slug": "t-shirts/women"
+                  "slug": "books/women"
                 }
             },
             "parent": "books"
@@ -232,6 +264,33 @@ EOT;
 EOT;
         $this->client->request('PUT', '/api/v1/taxons/'. $taxons["Women"]->getId(), [], [], static::$authorizedHeaderWithContentType, $data);
         $response = $this->client->getResponse();
+
+        $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_updating_root_taxon()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $taxons = $this->loadFixturesFromFile('resources/taxons.yml');
+        $this->loadFixturesFromFile('resources/locales.yml');
+
+        $data =
+<<<EOT
+        {
+            "translations": {
+                "en_US": {
+                  "name": "Categories",
+                  "slug": "categories"
+                }
+            }
+        }
+EOT;
+        $this->client->request('PUT', '/api/v1/taxons/'. $taxons["Category"]->getId(), [], [], static::$authorizedHeaderWithContentType, $data);
+        $response = $this->client->getResponse();
+
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
     }
 

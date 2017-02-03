@@ -1,6 +1,7 @@
 Sylius\Component\Core\Model\Taxon:
     exclusion_policy: ALL
-    properites:
+    xml_root_name: taxon
+    properties:
         images:
             expose: true
             type: array
