@@ -82,7 +82,7 @@ final class TaxonChoiceType extends AbstractType
                 'choices' => function (Options $options) {
                     return $this->getTaxons($options['root_code'], $options['filter']);
                 },
-                'choice_value' => 'id',
+                'choice_value' => 'code',
                 'choice_label' => 'name',
                 'choice_translation_domain' => false,
                 'root_code' => null,
