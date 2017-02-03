@@ -180,7 +180,7 @@ interface CompletePageInterface extends SymfonyPageInterface
     public function getShippingPromotionDiscount($promotionName);
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getValidationErrors();
 }
