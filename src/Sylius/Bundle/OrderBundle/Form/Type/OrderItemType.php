@@ -24,7 +24,7 @@ final class OrderItemType extends AbstractResourceType
     /**
      * @var DataMapperInterface
      */
-    protected $dataMapper;
+    private $dataMapper;
 
     /**
      * @param string $dataClass

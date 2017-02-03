@@ -26,7 +26,7 @@ final class AddressType extends AbstractResourceType
     /**
      * @var EventSubscriberInterface
      */
-    protected $buildAddressFormSubscriber;
+    private $buildAddressFormSubscriber;
 
     /**
      * @param string $dataClass

@@ -27,7 +27,7 @@ final class ProductAssociationTypeChoiceType extends AbstractType
     /**
      * @var RepositoryInterface
      */
-    protected $productAssociationTypeRepository;
+    private $productAssociationTypeRepository;
 
     /**
      * @param RepositoryInterface $productAssociationTypeRepository

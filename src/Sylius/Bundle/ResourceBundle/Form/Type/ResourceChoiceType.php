@@ -27,7 +27,7 @@ final class ResourceChoiceType extends AbstractType
     /**
      * @var ServiceRegistryInterface
      */
-    protected $resourceRepositoryRegistry;
+    private $resourceRepositoryRegistry;
 
     /**
      * @param ServiceRegistryInterface $resourceRepositoryRegistry

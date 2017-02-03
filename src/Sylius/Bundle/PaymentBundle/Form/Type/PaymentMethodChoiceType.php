@@ -33,12 +33,12 @@ final class PaymentMethodChoiceType extends AbstractType
     /**
      * @var PaymentMethodsResolverInterface
      */
-    protected $paymentMethodsResolver;
+    private $paymentMethodsResolver;
 
     /**
      * @var RepositoryInterface
      */
-    protected $paymentMethodRepository;
+    private $paymentMethodRepository;
 
     /**
      * @param PaymentMethodsResolverInterface $paymentMethodsResolver

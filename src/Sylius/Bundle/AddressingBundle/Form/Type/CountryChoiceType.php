@@ -25,7 +25,7 @@ final class CountryChoiceType extends AbstractType
     /**
      * @var RepositoryInterface
      */
-    protected $countryRepository;
+    private $countryRepository;
 
     /**
      * @param RepositoryInterface $countryRepository

@@ -28,12 +28,12 @@ final class ResourceToIdentifierType extends AbstractType
     /**
      * @var RepositoryInterface
      */
-    protected $repository;
+    private $repository;
 
     /**
      * @var MetadataInterface
      */
-    protected $metadata;
+    private $metadata;
 
     /**
      * @param RepositoryInterface $repository

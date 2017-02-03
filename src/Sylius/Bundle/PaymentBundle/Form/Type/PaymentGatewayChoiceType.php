@@ -23,7 +23,7 @@ final class PaymentGatewayChoiceType extends AbstractType
     /**
      * @var array
      */
-    protected $gateways;
+    private $gateways;
 
     /**
      * @param array $gateways

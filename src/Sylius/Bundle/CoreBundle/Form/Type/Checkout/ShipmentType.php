@@ -26,7 +26,7 @@ final class ShipmentType extends AbstractType
     /**
      * @var string
      */
-    protected $dataClass;
+    private $dataClass;
 
     /**
      * @param string $dataClass
