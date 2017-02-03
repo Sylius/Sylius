@@ -274,7 +274,7 @@ final class CheckoutAddressingContext implements Context
      */
     public function iShouldHaveSelectedAsCountry($countryName)
     {
-        Assert::same($countryName, $this->addressPage->getShippingAddressCountry());
+        Assert::same($this->addressPage->getShippingAddressCountry(), $countryName);
     }
 
     /**
@@ -282,7 +282,7 @@ final class CheckoutAddressingContext implements Context
      */
     public function iShouldHaveNoCountrySelected()
     {
-        Assert::same('Select', $this->addressPage->getShippingAddressCountry());
+        Assert::same($this->addressPage->getShippingAddressCountry(), 'Select');
     }
 
     /**
@@ -397,9 +397,6 @@ final class CheckoutAddressingContext implements Context
     private function assertElementValidationMessage($type, $element, $expectedMessage)
     {
         $element = sprintf('%s_%s', $type, implode('_', explode(' ', $element)));
-        Assert::true(
-            $this->addressPage->checkValidationMessageFor($element, $expectedMessage),
-            sprintf('The %s should be required.', $element)
-        );
+        Assert::true($this->addressPage->checkValidationMessageFor($element, $expectedMessage));
     }
 }

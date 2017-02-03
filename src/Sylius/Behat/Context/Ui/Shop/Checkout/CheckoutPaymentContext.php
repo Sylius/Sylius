@@ -137,9 +137,8 @@ final class CheckoutPaymentContext implements Context
     public function iShouldHavePaymentMethodAvailableAsFirstChoice($paymentMethodName)
     {
         $paymentMethods = $this->selectPaymentPage->getPaymentMethods();
-        $firstPaymentMethod = reset($paymentMethods);
 
-        Assert::same($paymentMethodName, $firstPaymentMethod);
+        Assert::same(reset($paymentMethods), $paymentMethodName);
     }
 
     /**
@@ -148,8 +147,7 @@ final class CheckoutPaymentContext implements Context
     public function iShouldHavePaymentMethodAvailableAsLastChoice($paymentMethodName)
     {
         $paymentMethods = $this->selectPaymentPage->getPaymentMethods();
-        $lastPaymentMethod = end($paymentMethods);
 
-        Assert::same($paymentMethodName, $lastPaymentMethod);
+        Assert::same(end($paymentMethods), $paymentMethodName);
     }
 }

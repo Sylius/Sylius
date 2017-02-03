@@ -190,7 +190,10 @@ final class ManagingExchangeRatesContext implements Context
      */
     public function iShouldSeeAnExchangeRateBetweenAndOnTheList($sourceCurrencyName, $targetCurrencyName)
     {
-        $this->assertExchangeRateIsOnList($sourceCurrencyName, $targetCurrencyName);
+        Assert::true($this->indexPage->isSingleResourceOnPage([
+            'sourceCurrency' => $sourceCurrencyName,
+            'targetCurrency' => $targetCurrencyName,
+        ]));
     }
 
     /**
@@ -198,11 +201,7 @@ final class ManagingExchangeRatesContext implements Context
      */
     public function thisExchangeRateShouldHaveRatioOf($ratio)
     {
-        Assert::eq(
-            $ratio,
-            $this->updatePage->getRatio(),
-            'Exchange rate\'s ratio should be %s, but is %s instead.'
-        );
+        Assert::eq($this->updatePage->getRatio(), $ratio);
     }
 
     /**
@@ -242,10 +241,7 @@ final class ManagingExchangeRatesContext implements Context
      */
     public function iShouldSeeThatTheSourceCurrencyIsDisabled()
     {
-        Assert::true(
-            $this->updatePage->isSourceCurrencyDisabled(),
-            'The source currency is not disabled.'
-        );
+        Assert::true($this->updatePage->isSourceCurrencyDisabled());
     }
 
     /**
@@ -253,10 +249,7 @@ final class ManagingExchangeRatesContext implements Context
      */
     public function iShouldSeeThatTheTargetCurrencyIsDisabled()
     {
-        Assert::true(
-            $this->updatePage->isTargetCurrencyDisabled(),
-            'The target currency is not disabled.'
-        );
+        Assert::true($this->updatePage->isTargetCurrencyDisabled());
     }
 
     /**
@@ -283,9 +276,7 @@ final class ManagingExchangeRatesContext implements Context
      */
     public function iShouldBeNotifiedThatSourceAndTargetCurrenciesMustDiffer()
     {
-        $expectedMessage = 'The source and target currencies must differ.';
-
-        $this->assertFormHasValidationMessage($expectedMessage);
+        $this->assertFormHasValidationMessage('The source and target currencies must differ.');
     }
 
     /**
@@ -293,30 +284,7 @@ final class ManagingExchangeRatesContext implements Context
      */
     public function iShouldBeNotifiedThatTheCurrencyPairMustBeUnique()
     {
-        $expectedMessage = 'The currency pair must be unique.';
-
-        $this->assertFormHasValidationMessage($expectedMessage);
-    }
-
-    /**
-     * @param string $sourceCurrencyName
-     * @param string $targetCurrencyName
-     *
-     * @throws \InvalidArgumentException
-     */
-    private function assertExchangeRateIsOnList($sourceCurrencyName, $targetCurrencyName)
-    {
-        Assert::true(
-            $this->indexPage->isSingleResourceOnPage([
-                'sourceCurrency' => $sourceCurrencyName,
-                'targetCurrency' => $targetCurrencyName,
-            ]),
-            sprintf(
-                'An exchange rate with source currency %s and target currency %s was not found on the list.',
-                $sourceCurrencyName,
-                $targetCurrencyName
-            )
-        );
+        $this->assertFormHasValidationMessage('The currency pair must be unique.');
     }
 
     /**
@@ -371,10 +339,8 @@ final class ManagingExchangeRatesContext implements Context
      */
     private function assertCountOfExchangeRatesOnTheList($count)
     {
-        $actualCount = $this->indexPage->countItems();
-
         Assert::same(
-            $actualCount,
+            $this->indexPage->countItems(),
             (int) $count,
             'Expected %2$d exchange rates to be on the list, but found %d instead.'
         );

@@ -43,8 +43,8 @@ final class TaxCategoryContext implements Context
         $taxCategories = $this->taxCategoryRepository->findByName($taxCategoryName);
 
         Assert::eq(
-            1,
             count($taxCategories),
+            1,
             sprintf('%d tax categories has been found with name "%s".', count($taxCategories), $taxCategoryName)
         );
 

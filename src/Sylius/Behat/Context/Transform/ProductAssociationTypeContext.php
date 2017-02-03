@@ -45,8 +45,8 @@ final class ProductAssociationTypeContext implements Context
         );
 
         Assert::eq(
-            1,
             count($productAssociationTypes),
+            1,
             sprintf(
                 '%d product association types has been found with name "%s".',
                 count($productAssociationTypes),

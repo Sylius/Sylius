@@ -71,7 +71,7 @@ final class CustomerGroupContext implements Context
         /** @var CustomerGroupInterface $customerGroup */
         $customerGroup = $this->customerGroupFactory->createNew();
 
-        $customerGroup->setCode($code ? $code : $this->generateCodeFromName($name));
+        $customerGroup->setCode($code ?: $this->generateCodeFromName($name));
         $customerGroup->setName(ucfirst($name));
 
         $this->sharedStorage->set('customer_group', $customerGroup);

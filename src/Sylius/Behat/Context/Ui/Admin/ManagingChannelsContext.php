@@ -136,10 +136,7 @@ final class ManagingChannelsContext implements Context
     {
         $this->iWantToBrowseChannels();
 
-        Assert::true($this->indexPage->isSingleResourceOnPage(
-            ['nameAndDescription' => $channelName]),
-            sprintf('Channel with name %s has not been found.', $channelName)
-        );
+        Assert::true($this->indexPage->isSingleResourceOnPage(['nameAndDescription' => $channelName]));
     }
 
     /**
@@ -218,10 +215,7 @@ final class ManagingChannelsContext implements Context
     {
         $this->iWantToBrowseChannels();
 
-        Assert::false(
-            $this->indexPage->isSingleResourceOnPage([$element => $value]),
-            sprintf('Channel with %s "%s" was created, but it should not.', $element, $value)
-        );
+        Assert::false($this->indexPage->isSingleResourceOnPage([$element => $value]));
     }
 
     /**
@@ -255,15 +249,10 @@ final class ManagingChannelsContext implements Context
     {
         $this->iWantToBrowseChannels();
 
-        Assert::true(
-            $this->indexPage->isSingleResourceOnPage(
-                [
-                    'code' => $channel->getCode(),
-                    'nameAndDescription' => $channelName,
-                ]
-            ),
-            sprintf('Channel name %s has not been assigned properly.', $channelName)
-        );
+        Assert::true($this->indexPage->isSingleResourceOnPage([
+            'code' => $channel->getCode(),
+            'nameAndDescription' => $channelName,
+        ]));
     }
 
     /**
@@ -290,10 +279,7 @@ final class ManagingChannelsContext implements Context
     {
         $this->iWantToBrowseChannels();
 
-        Assert::true(
-            $this->indexPage->isSingleResourceOnPage([$element => $value]),
-            sprintf('Channel with %s %s cannot be found.', $element, $value)
-        );
+        Assert::true($this->indexPage->isSingleResourceOnPage([$element => $value]));
     }
 
     /**
@@ -309,13 +295,7 @@ final class ManagingChannelsContext implements Context
      */
     public function iShouldSeeChannelsInTheList($numberOfChannels)
     {
-        $foundRows = $this->indexPage->countItems();
-
-        Assert::eq(
-            (int) $numberOfChannels,
-            $foundRows,
-            sprintf('%s rows with channels should appear on page, %s rows has been found', $numberOfChannels, $foundRows)
-        );
+        Assert::same($this->indexPage->countItems(), (int) $numberOfChannels);
     }
 
     /**
@@ -323,10 +303,7 @@ final class ManagingChannelsContext implements Context
      */
     public function theCodeFieldShouldBeDisabled()
     {
-        Assert::true(
-            $this->updatePage->isCodeDisabled(),
-            'Code should be immutable, but it does not.'
-        );
+        Assert::true($this->updatePage->isCodeDisabled());
     }
 
     /**
@@ -360,10 +337,7 @@ final class ManagingChannelsContext implements Context
      */
     public function thisChannelShouldNoLongerExistInTheRegistry($channelName)
     {
-        Assert::false(
-            $this->indexPage->isSingleResourceOnPage(['nameAndDescription' => $channelName]),
-            sprintf('Channel with name %s exists but should not.', $channelName)
-        );
+        Assert::false($this->indexPage->isSingleResourceOnPage(['nameAndDescription' => $channelName]));
     }
 
     /**
@@ -394,10 +368,7 @@ final class ManagingChannelsContext implements Context
     {
         $this->updatePage->open(['id' => $channel->getId()]);
 
-        Assert::true(
-            $this->updatePage->isLocaleChosen($locale),
-            sprintf('Language %s should be selected but it is not', $locale)
-        );
+        Assert::true($this->updatePage->isLocaleChosen($locale));
     }
 
     /**
@@ -417,10 +388,7 @@ final class ManagingChannelsContext implements Context
     {
         $this->updatePage->open(['id' => $channel->getId()]);
 
-        Assert::true(
-            $this->updatePage->isCurrencyChosen($currencyCode),
-            sprintf('Currency %s should be selected but it is not', $currencyCode)
-        );
+        Assert::true($this->updatePage->isCurrencyChosen($currencyCode));
     }
 
     /**
@@ -458,10 +426,7 @@ final class ManagingChannelsContext implements Context
     {
         $this->updatePage->open(['id' => $channel->getId()]);
 
-        Assert::true(
-            $this->updatePage->isDefaultTaxZoneChosen($taxZone),
-            sprintf('Default tax zone %s should be selected, but it is not', $taxZone)
-        );
+        Assert::true($this->updatePage->isDefaultTaxZoneChosen($taxZone));
     }
 
     /**
@@ -471,10 +436,7 @@ final class ManagingChannelsContext implements Context
     {
         $this->updatePage->open(['id' => $channel->getId()]);
 
-        Assert::false(
-            $this->updatePage->isAnyDefaultTaxZoneChosen(),
-            'Channel should not have default tax zone, but it has.'
-        );
+        Assert::false($this->updatePage->isAnyDefaultTaxZoneChosen());
     }
 
     /**
@@ -484,10 +446,7 @@ final class ManagingChannelsContext implements Context
     {
         $this->updatePage->open(['id' => $channel->getId()]);
 
-        Assert::true(
-            $this->updatePage->isTaxCalculationStrategyChosen($taxCalculationStrategy),
-            sprintf('Tax calculation strategy %s should be selected, but it is not', $taxCalculationStrategy)
-        );
+        Assert::true($this->updatePage->isTaxCalculationStrategyChosen($taxCalculationStrategy));
     }
 
     /**
@@ -495,10 +454,7 @@ final class ManagingChannelsContext implements Context
      */
     public function theBaseCurrencyFieldShouldBeDisabled()
     {
-        Assert::true(
-            $this->updatePage->isBaseCurrencyDisabled(),
-            'Base currency should be immutable, but it is not.'
-        );
+        Assert::true($this->updatePage->isBaseCurrencyDisabled());
     }
 
     /**
@@ -509,13 +465,9 @@ final class ManagingChannelsContext implements Context
     {
         $this->iWantToBrowseChannels();
 
-        Assert::true(
-            $this->indexPage->isSingleResourceOnPage(
-                [
-                    'nameAndDescription' => $channel->getName(),
-                    'enabled' => $state,
-                ]
-            ), sprintf('Channel with name %s and state %s has not been found.', $channel->getName(), $state)
-        );
+        Assert::true($this->indexPage->isSingleResourceOnPage([
+            'nameAndDescription' => $channel->getName(),
+            'enabled' => $state,
+        ]));
     }
 }

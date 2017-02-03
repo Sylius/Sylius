@@ -166,10 +166,7 @@ final class ManagingShippingMethodsContext implements Context
     {
         $this->iWantToBrowseShippingMethods();
 
-        Assert::true(
-            $this->indexPage->isSingleResourceOnPage(['name' => $shipmentMethodName]),
-            sprintf('The shipping method with name %s has not been found.', $shipmentMethodName)
-        );
+        Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $shipmentMethodName]));
     }
 
     /**
@@ -189,10 +186,7 @@ final class ManagingShippingMethodsContext implements Context
     ) {
         $this->iWantToModifyAShippingMethod($shippingMethod);
 
-        Assert::true(
-            $this->updatePage->isAvailableInChannel($channelName),
-            sprintf('Shipping method should be available in channel "%s" but it does not.', $channelName)
-        );
+        Assert::true($this->updatePage->isAvailableInChannel($channelName));
     }
 
     /**
@@ -210,10 +204,7 @@ final class ManagingShippingMethodsContext implements Context
     {
         $this->iWantToBrowseShippingMethods();
 
-        Assert::true(
-            $this->indexPage->isSingleResourceOnPage([$element => $code]),
-            sprintf('Shipping method with %s %s cannot be found.', $element, $code)
-        );
+        Assert::true($this->indexPage->isSingleResourceOnPage([$element => $code]));
     }
 
     /**
@@ -230,10 +221,7 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function theCodeFieldShouldBeDisabled()
     {
-        Assert::true(
-            $this->updatePage->isCodeDisabled(),
-            'Code should be immutable, but it does not.'
-        );
+        Assert::true($this->updatePage->isCodeDisabled());
     }
 
     /**
@@ -244,15 +232,10 @@ final class ManagingShippingMethodsContext implements Context
     {
         $this->iWantToBrowseShippingMethods();
 
-        Assert::true(
-            $this->indexPage->isSingleResourceOnPage(
-                [
-                    'code' => $shippingMethod->getCode(),
-                    'name' => $shippingMethodName,
-                ]
-            ),
-            sprintf('Shipping method name %s has not been assigned properly.', $shippingMethodName)
-        );
+        Assert::true($this->indexPage->isSingleResourceOnPage([
+            'code' => $shippingMethod->getCode(),
+            'name' => $shippingMethodName,
+        ]));
     }
 
     /**
@@ -314,11 +297,7 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function thereShouldBeNoShippingMethodsOnTheList($count)
     {
-        Assert::same(
-            $this->indexPage->countItems(),
-            (int) $count,
-            'There should be %2$d shipping methods on the list, found %d instead.'
-        );
+        Assert::same($this->indexPage->countItems(), (int) $count);
     }
 
     /**
@@ -326,15 +305,8 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function theOnlyShippingMethodOnTheListShouldBe($name)
     {
-        Assert::same(
-            (int) $this->indexPage->countItems(),
-            1,
-            'There should be only one shipping method on the list, found %d instead.'
-        );
-        Assert::true(
-            $this->indexPage->isSingleResourceOnPage(['name' => $name]),
-            sprintf('Shipping method "%s" was not found on the list.', $name)
-        );
+        Assert::same((int) $this->indexPage->countItems(), 1);
+        Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $name]));
     }
 
     /**
@@ -344,10 +316,7 @@ final class ManagingShippingMethodsContext implements Context
     {
         $this->iWantToBrowseShippingMethods();
 
-        Assert::false(
-            $this->indexPage->isSingleResourceOnPage([$element => $name]),
-            sprintf('Shipping method with %s %s was created, but it should not.', $element, $name)
-        );
+        Assert::false($this->indexPage->isSingleResourceOnPage([$element => $name]));
     }
 
     /**
@@ -424,13 +393,8 @@ final class ManagingShippingMethodsContext implements Context
     public function theFirstShippingMethodOnTheListShouldHave($field, $value)
     {
         $fields = $this->indexPage->getColumnFields($field);
-        $actualValue = reset($fields);
 
-        Assert::same(
-            $actualValue,
-            $value,
-            sprintf('Expected first shipping method\'s %s to be "%s", but it is "%s".', $field, $value, $actualValue)
-        );
+        Assert::same(reset($fields), $value);
     }
 
     /**
@@ -439,13 +403,8 @@ final class ManagingShippingMethodsContext implements Context
     public function theLastShippingMethodOnTheListShouldHave($field, $value)
     {
         $fields = $this->indexPage->getColumnFields($field);
-        $actualValue = end($fields);
 
-        Assert::same(
-            $actualValue,
-            $value,
-            sprintf('Expected last shipping method\'s %s to be "%s", but it is "%s".', $field, $value, $actualValue)
-        );
+        Assert::same(end($fields), $value);
     }
 
     /**
@@ -463,12 +422,7 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iShouldSeeShippingMethodsInTheList($numberOfShippingMethods)
     {
-        $foundRows = $this->indexPage->countItems();
-
-        Assert::true(
-            ((int) $numberOfShippingMethods) === $foundRows,
-            sprintf('%s rows with shipping methods should appear on page, %s rows has been found', $numberOfShippingMethods, $foundRows)
-        );
+        Assert::same($this->indexPage->countItems(), (int) $numberOfShippingMethods);
     }
 
     /**
@@ -518,10 +472,7 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function thisShippingMethodShouldNoLongerExistInTheRegistry(ShippingMethodInterface $shippingMethod)
     {
-        Assert::false(
-            $this->indexPage->isSingleResourceOnPage(['code' => $shippingMethod->getCode()]),
-            sprintf('Shipping method with code %s exists but should not.', $shippingMethod->getCode())
-        );
+        Assert::false($this->indexPage->isSingleResourceOnPage(['code' => $shippingMethod->getCode()]));
     }
 
     /**
@@ -566,12 +517,9 @@ final class ManagingShippingMethodsContext implements Context
     {
         $this->iWantToBrowseShippingMethods();
 
-        Assert::true(
-            $this->indexPage->isSingleResourceOnPage(
-                [
-                    'name' => $shippingMethod->getName(),
-                    'enabled' => $state,
-                ]
-            ), sprintf('Shipping method with name %s and state %s has not been found.', $shippingMethod->getName(), $state));
+        Assert::true($this->indexPage->isSingleResourceOnPage([
+            'name' => $shippingMethod->getName(),
+            'enabled' => $state,
+        ]));
     }
 }

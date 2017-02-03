@@ -233,10 +233,7 @@ final class AddressBookContext implements Context
      */
     public function thisAddressShouldHavePersonFirstNameAndLastName($fullName)
     {
-        Assert::true(
-            $this->addressBookIndexPage->hasAddressOf($fullName),
-            sprintf('An address of "%s" should be on the list.', $fullName)
-        );
+        Assert::true($this->addressBookIndexPage->hasAddressOf($fullName));
     }
 
     /**
@@ -244,10 +241,7 @@ final class AddressBookContext implements Context
      */
     public function iShouldStillBeOnAddressAdditionPage()
     {
-        Assert::true(
-            $this->addressBookCreatePage->isOpen(),
-            'The address creation page should be opened.'
-        );
+        Assert::true($this->addressBookCreatePage->isOpen());
     }
 
     /**
@@ -265,13 +259,7 @@ final class AddressBookContext implements Context
      */
     public function iShouldStillHaveAsMySpecifiedProvince($value)
     {
-        $actualValue = $this->addressBookUpdatePage->getSpecifiedProvince();
-
-        Assert::same(
-            $actualValue,
-            $value,
-            sprintf('Address\'s province should be %s, but is %s.', $value, $actualValue)
-        );
+        Assert::same($this->addressBookUpdatePage->getSpecifiedProvince(), $value);
     }
 
     /**
@@ -279,13 +267,7 @@ final class AddressBookContext implements Context
      */
     public function iShouldStillHaveAsMyChosenProvince($value)
     {
-        $actualValue = $this->addressBookUpdatePage->getSelectedProvince();
-
-        Assert::same(
-            $actualValue,
-            $value,
-            sprintf('Address\'s province should be %s, but is %s.', $value, $actualValue)
-        );
+        Assert::same($this->addressBookUpdatePage->getSelectedProvince(), $value);
     }
 
     /**
@@ -293,10 +275,7 @@ final class AddressBookContext implements Context
      */
     public function iShouldBeNotifiedThatTheProvinceNeedsToBeSpecified()
     {
-        Assert::true(
-            $this->addressBookCreatePage->hasProvinceValidationMessage(),
-            'Province validation messages should be visible.'
-        );
+        Assert::true($this->addressBookCreatePage->hasProvinceValidationMessage());
     }
 
     /**
@@ -304,13 +283,7 @@ final class AddressBookContext implements Context
      */
     public function iShouldBeNotifiedAboutErrors($expectedCount)
     {
-        $actualCount = $this->addressBookCreatePage->countValidationMessages();
-
-        Assert::same(
-            (int) $expectedCount,
-            $actualCount,
-            sprintf('There should be %d validation messages, but %d has been found.', $expectedCount, $actualCount)
-        );
+        Assert::same($this->addressBookCreatePage->countValidationMessages(), (int) $expectedCount);
     }
 
     /**
@@ -318,10 +291,7 @@ final class AddressBookContext implements Context
      */
     public function thereShouldBeNoAddresses()
     {
-        Assert::true(
-            $this->addressBookIndexPage->hasNoAddresses(),
-            'There should be no addresses on the list.'
-        );
+        Assert::true($this->addressBookIndexPage->hasNoAddresses());
     }
 
     /**
@@ -329,10 +299,7 @@ final class AddressBookContext implements Context
      */
     public function iShouldNotSeeAddressOf($fullName)
     {
-        Assert::false(
-            $this->addressBookIndexPage->hasAddressOf($fullName),
-            sprintf('The address of "%s" should not be on the list.', $fullName)
-        );
+        Assert::false($this->addressBookIndexPage->hasAddressOf($fullName));
     }
 
     /**
@@ -343,7 +310,7 @@ final class AddressBookContext implements Context
     {
         $this->addressBookIndexPage->open();
 
-        $this->assertAddressesCountOnPage((int) $count);
+        Assert::same($this->addressBookIndexPage->getAddressesCount(), (int) $count);
     }
 
     /**
@@ -369,14 +336,7 @@ final class AddressBookContext implements Context
     {
         $address = $this->getAddressOf($this->sharedStorage->getLatestResource());
 
-        Assert::false(
-            $this->addressBookUpdatePage->isOpen(['id' => $address->getId()]),
-            sprintf(
-                'I should be unable to edit the address of "%s %s"',
-                $address->getFirstName(),
-                $address->getLastName()
-            )
-        );
+        Assert::false($this->addressBookUpdatePage->isOpen(['id' => $address->getId()]));
     }
 
     /**
@@ -400,10 +360,7 @@ final class AddressBookContext implements Context
      */
     public function iShouldHaveNoDefaultAddress()
     {
-        Assert::true(
-            $this->addressBookIndexPage->hasNoDefaultAddress(),
-            'There should be no default address.'
-        );
+        Assert::true($this->addressBookIndexPage->hasNoDefaultAddress());
     }
 
     /**
@@ -414,11 +371,7 @@ final class AddressBookContext implements Context
         $actualFullName = $this->addressBookIndexPage->getFullNameOfDefaultAddress();
         $expectedFullName = sprintf('%s %s', $address->getFirstName(), $address->getLastName());
 
-        Assert::same(
-            $expectedFullName,
-            $actualFullName,
-            sprintf('The default address should be of "%s", but is of "%s".', $expectedFullName, $actualFullName)
-        );
+        Assert::same($actualFullName, $expectedFullName);
     }
 
     /**
@@ -448,25 +401,5 @@ final class AddressBookContext implements Context
                 $this->addressBookCreatePage,
                 $this->addressBookUpdatePage
         ]);
-    }
-
-    /**
-     * @param int $expectedCount
-     *
-     * @throws \InvalidArgumentException
-     */
-    private function assertAddressesCountOnPage($expectedCount)
-    {
-        $actualCount = $this->addressBookIndexPage->getAddressesCount();
-
-        Assert::same(
-            $expectedCount,
-            $actualCount,
-            sprintf(
-                'There should be %d addresses on the list, but %d addresses has been found.',
-                $expectedCount,
-                $actualCount
-            )
-        );
     }
 }

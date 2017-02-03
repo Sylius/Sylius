@@ -145,10 +145,7 @@ final class ManagingTaxonsContext implements Context
      */
     public function theSlugFieldShouldNotBeEditable($language = 'en_US')
     {
-        Assert::true(
-            $this->updatePage->isSlugReadOnly($language),
-            sprintf('Slug in "%s" should be immutable, but it does not.', $language)
-        );
+        Assert::true($this->updatePage->isSlugReadOnly($language));
     }
 
     /**
@@ -234,10 +231,7 @@ final class ManagingTaxonsContext implements Context
     public function theTaxonShouldAppearInTheRegistry(TaxonInterface $taxon)
     {
         $this->updatePage->open(['id' => $taxon->getId()]);
-        Assert::true(
-            $this->updatePage->hasResourceValues(['code' => $taxon->getCode()]),
-            sprintf('Taxon %s should be in the registry.', $taxon->getName())
-        );
+        Assert::true($this->updatePage->hasResourceValues(['code' => $taxon->getCode()]));
     }
 
     /**
@@ -245,10 +239,7 @@ final class ManagingTaxonsContext implements Context
      */
     public function thisTaxonElementShouldBe($element, $value)
     {
-        Assert::true(
-            $this->updatePage->hasResourceValues([$element => $value]),
-            sprintf('Taxon with %s should have %s value.', $element, $value)
-        );
+        Assert::true($this->updatePage->hasResourceValues([$element => $value]));
     }
 
     /**
@@ -260,11 +251,7 @@ final class ManagingTaxonsContext implements Context
             $this->updatePage->activateLanguageTab($language);
         }
 
-        Assert::same(
-            $this->updatePage->getSlug($language),
-            $value,
-            sprintf('Taxon should have slug "%s" but it has not.', $value)
-        );
+        Assert::same($this->updatePage->getSlug($language), $value);
     }
 
     /**
@@ -272,10 +259,7 @@ final class ManagingTaxonsContext implements Context
      */
     public function theCodeFieldShouldBeDisabled()
     {
-        Assert::true(
-            $this->updatePage->isCodeDisabled(),
-            'Code field should be disabled but it is not.'
-        );
+        Assert::true($this->updatePage->isCodeDisabled());
     }
 
     /**
@@ -285,10 +269,7 @@ final class ManagingTaxonsContext implements Context
     {
         $this->updatePage->open(['id' => $taxon->getId()]);
 
-        Assert::true(
-            $this->updatePage->hasResourceValues(['slug' => $slug]),
-            sprintf('Taxon\'s slug should be %s.', $slug)
-        );
+        Assert::true($this->updatePage->hasResourceValues(['slug' => $slug]));
     }
 
     /**
@@ -296,10 +277,7 @@ final class ManagingTaxonsContext implements Context
      */
     public function thisTaxonShouldBelongsTo(TaxonInterface $taxon)
     {
-        Assert::true(
-            $this->updatePage->hasResourceValues(['parent' => $taxon->getId()]),
-            sprintf('Current taxon should have %s parent taxon.', $taxon->getName())
-        );
+        Assert::true($this->updatePage->hasResourceValues(['parent' => $taxon->getId()]));
     }
 
     /**
@@ -307,12 +285,7 @@ final class ManagingTaxonsContext implements Context
      */
     public function itShouldNotBelongToAnyOtherTaxon()
     {
-        $parent = $this->updatePage->getParent();
-
-        Assert::isEmpty(
-            $parent,
-            sprintf('Current taxon should not belong to any other, but it does belong to "%s"', $parent)
-        );
+        Assert::isEmpty($this->updatePage->getParent());
     }
 
     /**
@@ -353,10 +326,7 @@ final class ManagingTaxonsContext implements Context
      */
     public function thereShouldStillBeOnlyOneTaxonWithCode($code)
     {
-        Assert::true(
-            $this->updatePage->hasResourceValues(['code' => $code]),
-            sprintf('Taxon with code %s cannot be found.', $code)
-        );
+        Assert::true($this->updatePage->hasResourceValues(['code' => $code]));
     }
 
     /**
@@ -365,11 +335,7 @@ final class ManagingTaxonsContext implements Context
      */
     public function taxonNamedShouldNotBeAdded($name)
     {
-        Assert::eq(
-            0,
-            $this->createPage->countTaxonsByName($name),
-            sprintf('Taxon %s should not exist.', $name)
-        );
+        Assert::same($this->createPage->countTaxonsByName($name), 0);
     }
 
     /**
@@ -377,13 +343,7 @@ final class ManagingTaxonsContext implements Context
      */
     public function iShouldSeeTaxonsInTheList($number)
     {
-        $taxonsOnPage = $this->createPage->countTaxons();
-
-        Assert::same(
-            (int) $number,
-            $taxonsOnPage,
-            sprintf('On list should be %d taxons but get %d.', $number, $taxonsOnPage)
-        );
+        Assert::same($this->createPage->countTaxons(), (int) $number);
     }
 
     /**
@@ -391,11 +351,7 @@ final class ManagingTaxonsContext implements Context
      */
     public function iShouldSeeTheTaxonNamedInTheList($name)
     {
-        Assert::eq(
-            1,
-            $this->createPage->countTaxonsByName($name),
-            sprintf('Taxon %s does not exist or multiple taxons with this name exist.', $name)
-        );
+        Assert::same($this->createPage->countTaxonsByName($name), 1);
     }
 
     /**
@@ -422,10 +378,7 @@ final class ManagingTaxonsContext implements Context
      */
     public function thisTaxonShouldHaveAnImageWithCode($code)
     {
-        Assert::true(
-            $this->updatePage->isImageWithCodeDisplayed($code),
-            sprintf('Image with a code %s should have been displayed.', $code)
-        );
+        Assert::true($this->updatePage->isImageWithCodeDisplayed($code));
     }
 
     /**
@@ -433,10 +386,7 @@ final class ManagingTaxonsContext implements Context
      */
     public function thisTaxonShouldNotHaveAnImageWithCode($code)
     {
-        Assert::false(
-            $this->updatePage->isImageWithCodeDisplayed($code),
-            sprintf('Image with a code %s should not have been displayed.', $code)
-        );
+        Assert::false($this->updatePage->isImageWithCodeDisplayed($code));
     }
 
     /**
@@ -462,11 +412,7 @@ final class ManagingTaxonsContext implements Context
     {
         $this->iWantToModifyATaxon($taxon);
 
-        Assert::eq(
-            0,
-            $this->updatePage->countImages(),
-            'This taxon has %2$s, but it should not have.'
-        );
+        Assert::same($this->updatePage->countImages(), 0);
     }
 
     /**
@@ -503,11 +449,7 @@ final class ManagingTaxonsContext implements Context
     {
         $this->iWantToModifyATaxon($taxon);
 
-        Assert::eq(
-            1,
-            $this->updatePage->countImages(),
-            'This taxon has %2$s images, but it should have only one.'
-        );
+        Assert::same($this->updatePage->countImages(), 1);
     }
 
     /**
@@ -515,10 +457,7 @@ final class ManagingTaxonsContext implements Context
      */
     public function theImageCodeFieldShouldBeDisabled()
     {
-        Assert::true(
-            $this->updatePage->isImageCodeDisabled(),
-            'Image code field should be disabled but it is not.'
-        );
+        Assert::true($this->updatePage->isImageCodeDisabled());
     }
 
     /**

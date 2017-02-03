@@ -58,11 +58,6 @@ final class ProductContext implements Context
     private $productRepository;
 
     /**
-     * @var RepositoryInterface
-     */
-    private $productAttributeRepository;
-
-    /**
      * @var ProductFactoryInterface
      */
     private $productFactory;
@@ -71,11 +66,6 @@ final class ProductContext implements Context
      * @var FactoryInterface
      */
     private $productTranslationFactory;
-
-    /**
-     * @var AttributeFactoryInterface
-     */
-    private $productAttributeFactory;
 
     /**
      * @var FactoryInterface
@@ -135,10 +125,8 @@ final class ProductContext implements Context
     /**
      * @param SharedStorageInterface $sharedStorage
      * @param ProductRepositoryInterface $productRepository
-     * @param RepositoryInterface $productAttributeRepository
      * @param ProductFactoryInterface $productFactory
      * @param FactoryInterface $productTranslationFactory
-     * @param AttributeFactoryInterface $productAttributeFactory
      * @param FactoryInterface $productVariantFactory
      * @param FactoryInterface $productVariantTranslationFactory
      * @param FactoryInterface $channelPricingFactory
@@ -154,10 +142,8 @@ final class ProductContext implements Context
     public function __construct(
         SharedStorageInterface $sharedStorage,
         ProductRepositoryInterface $productRepository,
-        RepositoryInterface $productAttributeRepository,
         ProductFactoryInterface $productFactory,
         FactoryInterface $productTranslationFactory,
-        AttributeFactoryInterface $productAttributeFactory,
         FactoryInterface $productVariantFactory,
         FactoryInterface $productVariantTranslationFactory,
         FactoryInterface $channelPricingFactory,
@@ -172,10 +158,8 @@ final class ProductContext implements Context
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->productRepository = $productRepository;
-        $this->productAttributeRepository = $productAttributeRepository;
         $this->productFactory = $productFactory;
         $this->productTranslationFactory = $productTranslationFactory;
-        $this->productAttributeFactory = $productAttributeFactory;
         $this->productVariantFactory = $productVariantFactory;
         $this->productVariantTranslationFactory = $productVariantTranslationFactory;
         $this->channelPricingFactory = $channelPricingFactory;

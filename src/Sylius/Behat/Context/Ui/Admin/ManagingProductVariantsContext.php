@@ -230,10 +230,7 @@ final class ManagingProductVariantsContext implements Context
     {
         $this->iWantToViewAllVariantsOfThisProduct($product);
 
-        Assert::true(
-            $this->indexPage->isSingleResourceOnPage(['code' => $productVariantCode]),
-            sprintf('The product variant with code %s has not been found.', $productVariantCode)
-        );
+        Assert::true($this->indexPage->isSingleResourceOnPage(['code' => $productVariantCode]));
     }
 
     /**
@@ -243,10 +240,7 @@ final class ManagingProductVariantsContext implements Context
     {
         $this->iWantToViewAllVariantsOfThisProduct($product);
 
-        Assert::false(
-            $this->indexPage->isSingleResourceOnPage(['code' => $productVariantCode]),
-            sprintf('The product variant with code %s has not been found.', $productVariantCode)
-        );
+        Assert::false($this->indexPage->isSingleResourceOnPage(['code' => $productVariantCode]));
     }
 
     /**
@@ -272,10 +266,7 @@ final class ManagingProductVariantsContext implements Context
     {
         $this->updatePage->open(['id' => $productVariant->getId(), 'productId' => $productVariant->getProduct()->getId()]);
 
-        Assert::same(
-            $this->updatePage->getPriceForChannel($channelName),
-            $price
-        );
+        Assert::same($this->updatePage->getPriceForChannel($channelName), $price);
     }
 
     /**
@@ -285,7 +276,7 @@ final class ManagingProductVariantsContext implements Context
     {
         $this->updatePage->open(['id' => $productVariant->getId(), 'productId' => $productVariant->getProduct()->getId()]);
 
-        Assert::same($name, $this->updatePage->getNameInLanguage($language));
+        Assert::same($this->updatePage->getNameInLanguage($language), $name);
     }
 
     /**
@@ -304,13 +295,7 @@ final class ManagingProductVariantsContext implements Context
      */
     public function iShouldSeeProductVariantsInTheList($numberOfProductVariants = 0)
     {
-        $foundRows = $this->indexPage->countItems();
-
-        Assert::same(
-            (int) $numberOfProductVariants,
-            $foundRows,
-            '%s rows with product variants should appear on page, %s rows has been found'
-        );
+        Assert::same($this->indexPage->countItems(), (int) $numberOfProductVariants);
     }
 
     /**
@@ -331,10 +316,7 @@ final class ManagingProductVariantsContext implements Context
     {
         $this->iWantToViewAllVariantsOfThisProduct($productVariant->getProduct());
 
-        Assert::false(
-            $this->indexPage->isSingleResourceOnPage(['name' => $productVariant->getName()]),
-            sprintf('Product variant with code %s exists but should not.', $productVariant->getName())
-        );
+        Assert::false($this->indexPage->isSingleResourceOnPage(['name' => $productVariant->getName()]));
     }
 
     /**
@@ -369,10 +351,7 @@ final class ManagingProductVariantsContext implements Context
      */
     public function theCodeFieldShouldBeDisabled()
     {
-        Assert::true(
-            $this->updatePage->isCodeDisabled(),
-            'Code should be immutable, but it does not.'
-        );
+        Assert::true($this->updatePage->isCodeDisabled());
     }
 
     /**
@@ -498,10 +477,10 @@ final class ManagingProductVariantsContext implements Context
      */
     public function thisVariantShouldHaveItemsOnHand($productVariantName, $quantity)
     {
-        Assert::true(
-            $this->indexPage->isSingleResourceWithSpecificElementOnPage(['name' => $productVariantName], sprintf('td > div.ui.label:contains("%s")', $quantity)),
-            sprintf('The product variant %s should have %s items on hand, but it does not.', $productVariantName, $quantity)
-        );
+        Assert::true($this->indexPage->isSingleResourceWithSpecificElementOnPage(
+            ['name' => $productVariantName],
+            sprintf('td > div.ui.label:contains("%s")', $quantity)
+        ));
     }
 
     /**
@@ -511,10 +490,10 @@ final class ManagingProductVariantsContext implements Context
     {
         $this->indexPage->open(['productId' => $product->getId()]);
 
-        Assert::true(
-            $this->indexPage->isSingleResourceWithSpecificElementOnPage(['name' => $productVariantName], sprintf('td > div.ui.label:contains("%s")', $quantity)),
-            sprintf('The product variant %s should have %s items on hand, but it does not.', $productVariantName, $quantity)
-        );
+        Assert::true($this->indexPage->isSingleResourceWithSpecificElementOnPage(
+            ['name' => $productVariantName],
+            sprintf('td > div.ui.label:contains("%s")', $quantity)
+        ));
     }
 
     /**
@@ -524,10 +503,7 @@ final class ManagingProductVariantsContext implements Context
     {
         $this->iWantToModifyAProduct($productVariant);
 
-        Assert::false(
-            $this->updatePage->isTracked(),
-            'This variant should not be tracked, but it is.'
-        );
+        Assert::false($this->updatePage->isTracked());
     }
 
     /**
@@ -537,10 +513,7 @@ final class ManagingProductVariantsContext implements Context
     {
         $this->iWantToModifyAProduct($productVariant);
 
-        Assert::true(
-            $this->updatePage->isTracked(),
-            'This variant should be tracked, but it is not.'
-        );
+        Assert::true($this->updatePage->isTracked());
     }
 
     /**
@@ -548,10 +521,10 @@ final class ManagingProductVariantsContext implements Context
      */
     public function iShouldSeeThatIsNotTracked(ProductVariantInterface $productVariant)
     {
-        Assert::true(
-            $this->indexPage->isSingleResourceOnPage(['name' => $productVariant->getName(), 'inventory' => 'Not tracked']),
-            sprintf('This "%s" variant should have label not tracked, but it does not have', $productVariant->getName())
-        );
+        Assert::true($this->indexPage->isSingleResourceOnPage([
+            'name' => $productVariant->getName(),
+            'inventory' => 'Not tracked',
+        ]));
     }
 
     /**
@@ -559,10 +532,10 @@ final class ManagingProductVariantsContext implements Context
      */
     public function iShouldSeeThatTheVariantHasZeroOnHandQuantity(ProductVariantInterface $productVariant)
     {
-        Assert::true(
-            $this->indexPage->isSingleResourceOnPage(['name' => $productVariant->getName(), 'inventory' => '0 Available on hand']),
-            sprintf('This "%s" variant should have 0 on hand quantity, but it does not.', $productVariant->getName())
-        );
+        Assert::true($this->indexPage->isSingleResourceOnPage([
+            'name' => $productVariant->getName(),
+            'inventory' => '0 Available on hand',
+        ]));
     }
 
     /**
@@ -583,18 +556,8 @@ final class ManagingProductVariantsContext implements Context
     {
         /** @var ProductVariantInterface $variant */
         $variant = $this->defaultProductVariantResolver->getVariant($product);
-        $actualQuantity = $this->indexPage->getOnHandQuantityFor($variant);
 
-        Assert::same(
-            (int) $quantity,
-            $actualQuantity,
-            sprintf(
-                'Unexpected on hand quantity for "%s" variant. It should be "%s" but is "%s"',
-                $variant->getName(),
-                $quantity,
-                $actualQuantity
-            )
-        );
+        Assert::same($this->indexPage->getOnHandQuantityFor($variant), (int) $quantity);
     }
 
     /**
@@ -631,13 +594,7 @@ final class ManagingProductVariantsContext implements Context
      */
     public function theFirstVariantInTheListShouldHave($field, $value)
     {
-        $actualValue = $this->indexPage->getColumnFields($field)[0];
-
-        Assert::same(
-            $actualValue,
-            $value,
-            sprintf('Expected first variant\'s %s to be "%s", but it is "%s".', $field, $value, $actualValue)
-        );
+        Assert::same($this->indexPage->getColumnFields($field)[0], $value);
     }
 
     /**
@@ -645,14 +602,9 @@ final class ManagingProductVariantsContext implements Context
      */
     public function theLastVariantInTheListShouldHave($field, $value)
     {
-        $fields = $this->indexPage->getColumnFields($field);
-        $actualValue = end($fields);
+        $values = $this->indexPage->getColumnFields($field);
 
-        Assert::same(
-            $actualValue,
-            $value,
-            sprintf('Expected last variant\'s %s to be "%s", but it is "%s".', $field, $value, $actualValue)
-        );
+        Assert::same(end($values), $value);
     }
 
     /**
@@ -728,7 +680,7 @@ final class ManagingProductVariantsContext implements Context
     {
         // Intentionally left blank to fulfill context expectation
     }
-    
+
     /**
      * @When I change its quantity of inventory to :amount
      */
@@ -744,10 +696,7 @@ final class ManagingProductVariantsContext implements Context
     {
         $this->indexPage->open(['productId' => $productVariant->getProduct()->getId()]);
 
-        Assert::same(
-            $this->indexPage->getOnHandQuantityFor($productVariant),
-            (int) $amountInStock
-        );
+        Assert::same($this->indexPage->getOnHandQuantityFor($productVariant), (int) $amountInStock);
     }
 
     /**
@@ -784,8 +733,8 @@ final class ManagingProductVariantsContext implements Context
         $actualAmount = $this->indexPage->getOnHoldQuantityFor($variant);
 
         Assert::same(
-            (int) $expectedAmount,
             $actualAmount,
+            (int) $expectedAmount,
             sprintf(
                 'Unexpected on hold quantity for "%s" variant. It should be "%s" but is "%s"',
                 $variant->getName(),

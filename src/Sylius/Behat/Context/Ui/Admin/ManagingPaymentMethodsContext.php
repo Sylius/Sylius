@@ -158,10 +158,7 @@ final class ManagingPaymentMethodsContext implements Context
      */
     public function thisPaymentMethodElementShouldBe($element, $value)
     {
-        Assert::true(
-            $this->updatePage->hasResourceValues([$element => $value]),
-            sprintf('Payment method %s should be %s', $element, $value)
-        );
+        Assert::true($this->updatePage->hasResourceValues([$element => $value]));
     }
 
     /**
@@ -222,10 +219,7 @@ final class ManagingPaymentMethodsContext implements Context
     {
         $this->indexPage->open();
 
-        Assert::true(
-            $this->indexPage->isSingleResourceOnPage(['name' => $paymentMethodName]),
-            sprintf('Payment method with name %s has not been found.', $paymentMethodName)
-        );
+        Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $paymentMethodName]));
     }
 
     /**
@@ -250,13 +244,7 @@ final class ManagingPaymentMethodsContext implements Context
      */
     public function theFirstPaymentMethodOnTheListShouldHave($field, $value)
     {
-        $actualValue = $this->indexPage->getColumnFields($field)[0];
-
-        Assert::same(
-            $actualValue,
-            $value,
-            sprintf('Expected first payment method\'s %s to be "%s", but it is "%s".', $field, $value, $actualValue)
-        );
+        Assert::same($this->indexPage->getColumnFields($field)[0], $value);
     }
 
     /**
@@ -264,14 +252,9 @@ final class ManagingPaymentMethodsContext implements Context
      */
     public function theLastPaymentMethodOnTheListShouldHave($field, $value)
     {
-        $fields = $this->indexPage->getColumnFields($field);
-        $actualValue = end($fields);
+        $values = $this->indexPage->getColumnFields($field);
 
-        Assert::same(
-            $actualValue,
-            $value,
-            sprintf('Expected last payment method\'s %s to be "%s", but it is "%s".', $field, $value, $actualValue)
-        );
+        Assert::same(end($values), $value);
     }
 
     /**
@@ -289,13 +272,7 @@ final class ManagingPaymentMethodsContext implements Context
      */
     public function iShouldSeePaymentMethodsInTheList($amount)
     {
-        $foundRows = $this->indexPage->countItems();
-
-        Assert::same(
-            (int) $amount,
-            $foundRows,
-            '%2$s rows with payment methods should appear on page, %s rows has been found'
-        );
+        Assert::same($this->indexPage->countItems(), (int) $amount);
     }
 
     /**
@@ -313,10 +290,7 @@ final class ManagingPaymentMethodsContext implements Context
     {
         $this->iBrowsePaymentMethods();
 
-        Assert::false(
-            $this->indexPage->isSingleResourceOnPage([$element => $value]),
-            sprintf('Payment method with %s %s was created, but it should not.', $element, $value)
-        );
+        Assert::false($this->indexPage->isSingleResourceOnPage([$element => $value]));
     }
 
     /**
@@ -326,13 +300,10 @@ final class ManagingPaymentMethodsContext implements Context
     {
         $this->iBrowsePaymentMethods();
 
-        Assert::true(
-            $this->indexPage->isSingleResourceOnPage([
-                'code' => $paymentMethod->getCode(),
-                'name' => $paymentMethodName,
-            ]),
-            sprintf('Payment method name %s has not been assigned properly.', $paymentMethodName)
-        );
+        Assert::true($this->indexPage->isSingleResourceOnPage([
+            'code' => $paymentMethod->getCode(),
+            'name' => $paymentMethodName,
+        ]));
     }
 
     /**
@@ -352,10 +323,7 @@ final class ManagingPaymentMethodsContext implements Context
      */
     public function theCodeFieldShouldBeDisabled()
     {
-        Assert::true(
-            $this->updatePage->isCodeDisabled(),
-            'Code field should be disabled'
-        );
+        Assert::true($this->updatePage->isCodeDisabled());
     }
 
     /**
@@ -363,10 +331,7 @@ final class ManagingPaymentMethodsContext implements Context
      */
     public function thisPaymentMethodShouldBeEnabled()
     {
-        Assert::true(
-            $this->updatePage->isPaymentMethodEnabled(),
-            'Payment method should be enabled'
-        );
+        Assert::true($this->updatePage->isPaymentMethodEnabled());
     }
 
     /**
@@ -374,10 +339,7 @@ final class ManagingPaymentMethodsContext implements Context
      */
     public function thisPaymentMethodShouldBeDisabled()
     {
-        Assert::false(
-            $this->updatePage->isPaymentMethodEnabled(),
-            'Payment method should be disabled'
-        );
+        Assert::false($this->updatePage->isPaymentMethodEnabled());
     }
 
     /**
@@ -390,10 +352,7 @@ final class ManagingPaymentMethodsContext implements Context
     ) {
         $this->iWantToModifyAPaymentMethod($paymentMethod);
 
-        Assert::same(
-            $this->updatePage->getPaymentMethodInstructions($language),
-            $instructions
-        );
+        Assert::same($this->updatePage->getPaymentMethodInstructions($language), $instructions);
     }
 
     /**
@@ -405,10 +364,7 @@ final class ManagingPaymentMethodsContext implements Context
     ) {
         $this->iWantToModifyAPaymentMethod($paymentMethod);
 
-        Assert::true(
-            $this->updatePage->isAvailableInChannel($channelName),
-            sprintf('Payment method should be available in channel "%s" but it does not.', $channelName)
-        );
+        Assert::true($this->updatePage->isAvailableInChannel($channelName));
     }
 
     /**
@@ -416,10 +372,10 @@ final class ManagingPaymentMethodsContext implements Context
      */
     public function thisPaymentMethodShouldNoLongerExistInTheRegistry(PaymentMethodInterface $paymentMethod)
     {
-        Assert::false(
-            $this->indexPage->isSingleResourceOnPage(['code' => $paymentMethod->getCode(), 'name' => $paymentMethod->getName()]),
-            sprintf('Payment method %s should no longer exist in the registry', $paymentMethod->getName())
-        );
+        Assert::false($this->indexPage->isSingleResourceOnPage([
+            'code' => $paymentMethod->getCode(),
+            'name' => $paymentMethod->getName(),
+        ]));
     }
 
     /**
@@ -437,9 +393,6 @@ final class ManagingPaymentMethodsContext implements Context
     {
         $this->iBrowsePaymentMethods();
 
-        Assert::true(
-            $this->indexPage->isSingleResourceOnPage([$element => $code]),
-            sprintf('Payment method with %s %s cannot be found.', $element, $code)
-        );
+        Assert::true($this->indexPage->isSingleResourceOnPage([$element => $code]));
     }
 }

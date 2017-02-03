@@ -54,12 +54,6 @@ final class HomepageContext implements Context
      */
     public function iShouldSeeProductsInTheList($numberOfProducts)
     {
-        $foundProductsNames = $this->homePage->getLatestProductsNames();
-
-        Assert::same(
-            (int) $numberOfProducts,
-            count($foundProductsNames),
-            '%d rows with products should appear on page, %d rows has been found'
-        );
+        Assert::same(count($this->homePage->getLatestProductsNames()), (int) $numberOfProducts);
     }
 }

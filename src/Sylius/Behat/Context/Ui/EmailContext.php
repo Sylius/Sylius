@@ -50,10 +50,7 @@ final class EmailContext implements Context
      */
     public function anEmailShouldBeSentTo($recipient)
     {
-        Assert::true(
-            $this->emailChecker->hasRecipient($recipient),
-            sprintf('An email should have been sent to %s.', $recipient)
-        );
+        Assert::true($this->emailChecker->hasRecipient($recipient));
     }
 
     /**
@@ -61,17 +58,7 @@ final class EmailContext implements Context
      */
     public function numberOfEmailsShouldBeSentTo($count, $recipient)
     {
-        $actualMessagesCount = $this->emailChecker->countMessagesTo($recipient);
-
-        Assert::eq(
-            $actualMessagesCount,
-            $count,
-            sprintf(
-                '%d messages were sent, while there should be %d.',
-                $actualMessagesCount,
-                $count
-            )
-        );
+        Assert::same($this->emailChecker->countMessagesTo($recipient), (int) $count);
     }
 
     /**
@@ -114,10 +101,7 @@ final class EmailContext implements Context
      */
     private function assertEmailContainsMessageTo($message, $recipient)
     {
-        Assert::true(
-            $this->emailChecker->hasMessageTo($message, $recipient),
-            sprintf('Message "%s" was not sent to "%s".', $message, $recipient)
-        );
+        Assert::true($this->emailChecker->hasMessageTo($message, $recipient));
     }
 
     /**

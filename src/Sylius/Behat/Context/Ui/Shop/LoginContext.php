@@ -150,14 +150,8 @@ final class LoginContext implements Context
      */
     public function iShouldBeLoggedIn()
     {
-        Assert::true(
-            $this->homePage->isOpen(),
-            'I should be on the homepage.'
-        );
-        Assert::true(
-            $this->homePage->hasLogoutButton(),
-            'I should be able to sign out.'
-        );
+        Assert::true($this->homePage->isOpen());
+        Assert::true($this->homePage->hasLogoutButton());
     }
 
     /**
@@ -165,10 +159,7 @@ final class LoginContext implements Context
      */
     public function iShouldNotBeLoggedIn()
     {
-        Assert::false(
-            $this->homePage->hasLogoutButton(),
-            'I should not be logged in.'
-        );
+        Assert::false($this->homePage->hasLogoutButton());
     }
 
     /**
@@ -176,10 +167,7 @@ final class LoginContext implements Context
      */
     public function iShouldBeNotifiedAboutBadCredentials()
     {
-        Assert::true(
-            $this->loginPage->hasValidationErrorWith('Error Invalid credentials.'),
-            'I should see validation error.'
-        );
+        Assert::true($this->loginPage->hasValidationErrorWith('Error Invalid credentials.'));
     }
 
     /**
@@ -187,10 +175,7 @@ final class LoginContext implements Context
      */
     public function iShouldBeNotifiedAboutDisabledAccount()
     {
-        Assert::true(
-            $this->loginPage->hasValidationErrorWith('Error Account is disabled.'),
-            'I should see validation error.'
-        );
+        Assert::true($this->loginPage->hasValidationErrorWith('Error Account is disabled.'));
     }
 
     /**
@@ -206,10 +191,7 @@ final class LoginContext implements Context
      */
     public function iShouldBeNotifiedThatElementIsRequired($elementName)
     {
-        Assert::true(
-            $this->resetPasswordPage->checkValidationMessageFor($elementName, sprintf('Please enter your %s.', $elementName)),
-            sprintf('The %s should be required.', $elementName)
-        );
+        Assert::true($this->resetPasswordPage->checkValidationMessageFor($elementName, sprintf('Please enter your %s.', $elementName)));
     }
 
     /**

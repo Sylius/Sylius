@@ -258,6 +258,6 @@ final class CheckoutCompleteContext implements Context
      */
     public function thisPromotionShouldGiveDiscount(PromotionInterface $promotion, $discount)
     {
-        Assert::same($discount, $this->completePage->getShippingPromotionDiscount($promotion->getName()));
+        Assert::same($this->completePage->getShippingPromotionDiscount($promotion->getName()), $discount);
     }
 }

@@ -49,8 +49,8 @@ final class TaxonContext implements Context
         $taxons = $this->taxonRepository->findByName($name, 'en_US');
 
         Assert::eq(
-            1,
             count($taxons),
+            1,
             sprintf('%d taxons has been found with name "%s".', count($taxons), $name)
         );
 

@@ -222,10 +222,7 @@ final class ManagingOrdersContext implements Context
      */
     public function iShouldSeeASingleOrderFromCustomer(CustomerInterface $customer)
     {
-        Assert::true(
-            $this->indexPage->isSingleResourceOnPage(['customer' => $customer->getEmail()]),
-            sprintf('Cannot find order for customer "%s" in the list.', $customer->getEmail())
-        );
+        Assert::true($this->indexPage->isSingleResourceOnPage(['customer' => $customer->getEmail()]));
     }
 
     /**
@@ -233,10 +230,7 @@ final class ManagingOrdersContext implements Context
      */
     public function itShouldBePlacedByCustomer($customerEmail)
     {
-        Assert::true(
-            $this->showPage->hasCustomer($customerEmail),
-            sprintf('Cannot find customer "%s".', $customerEmail)
-        );
+        Assert::true($this->showPage->hasCustomer($customerEmail));
     }
 
     /**
@@ -255,10 +249,7 @@ final class ManagingOrdersContext implements Context
             $this->iSeeTheOrder($order);
         }
 
-        Assert::true(
-            $this->showPage->hasShippingAddress($customerName, $street, $postcode, $city, $countryName),
-            sprintf('Cannot find shipping address "%s, %s %s, %s".', $street, $postcode, $city, $countryName)
-        );
+        Assert::true($this->showPage->hasShippingAddress($customerName, $street, $postcode, $city, $countryName));
     }
 
     /**
@@ -278,10 +269,7 @@ final class ManagingOrdersContext implements Context
             $this->iSeeTheOrder($order);
         }
 
-        Assert::true(
-            $this->showPage->hasBillingAddress($customerName, $street, $postcode, $city, $countryName),
-            sprintf('Cannot find shipping address "%s, %s %s, %s".', $street, $postcode, $city, $countryName)
-        );
+        Assert::true($this->showPage->hasBillingAddress($customerName, $street, $postcode, $city, $countryName));
     }
 
     /**
@@ -289,10 +277,7 @@ final class ManagingOrdersContext implements Context
      */
     public function itShouldBeShippedViaShippingMethod($shippingMethodName)
     {
-        Assert::true(
-            $this->showPage->hasShipment($shippingMethodName),
-            sprintf('Cannot find shipment "%s".', $shippingMethodName)
-        );
+        Assert::true($this->showPage->hasShipment($shippingMethodName));
     }
 
     /**
@@ -300,10 +285,7 @@ final class ManagingOrdersContext implements Context
      */
     public function itShouldBePaidWith($paymentMethodName)
     {
-        Assert::true(
-            $this->showPage->hasPayment($paymentMethodName),
-            sprintf('Cannot find payment "%s".', $paymentMethodName)
-        );
+        Assert::true($this->showPage->hasPayment($paymentMethodName));
     }
 
     /**
@@ -313,13 +295,7 @@ final class ManagingOrdersContext implements Context
      */
     public function itShouldHaveAmountOfItems($amount = 1)
     {
-        $itemsCount = $this->showPage->countItems();
-
-        Assert::same(
-            (int)$amount,
-            $itemsCount,
-            sprintf('There should be %d items, but get %d.', $amount, $itemsCount)
-        );
+        Assert::same($this->showPage->countItems(), (int) $amount);
     }
 
     /**
@@ -327,10 +303,7 @@ final class ManagingOrdersContext implements Context
      */
     public function theProductShouldBeInTheItemsList($productName)
     {
-        Assert::true(
-            $this->showPage->isProductInTheList($productName),
-            sprintf('Product %s is not in the item list.', $productName)
-        );
+        Assert::true($this->showPage->isProductInTheList($productName));
     }
 
     /**
@@ -338,13 +311,7 @@ final class ManagingOrdersContext implements Context
      */
     public function theOrdersItemsTotalShouldBe($itemsTotal)
     {
-        $itemsTotalOnPage = $this->showPage->getItemsTotal();
-
-        Assert::eq(
-            $itemsTotalOnPage,
-            $itemsTotal,
-            'Items total is %s, but should be %s.'
-        );
+        Assert::eq($this->showPage->getItemsTotal(), $itemsTotal);
     }
 
     /**
@@ -352,13 +319,7 @@ final class ManagingOrdersContext implements Context
      */
     public function theOrdersTotalShouldBe($total)
     {
-        $totalOnPage = $this->showPage->getTotal();
-
-        Assert::eq(
-            $totalOnPage,
-            $total,
-            'Total is %s, but should be %s.'
-        );
+        Assert::eq($this->showPage->getTotal(), $total);
     }
 
     /**
@@ -366,10 +327,7 @@ final class ManagingOrdersContext implements Context
      */
     public function theOrdersShippingChargesShouldBe($shippingCharge)
     {
-        Assert::true(
-            $this->showPage->hasShippingCharge($shippingCharge),
-            sprintf('Shipping charges is not "%s".', $shippingCharge)
-        );
+        Assert::true($this->showPage->hasShippingCharge($shippingCharge));
     }
 
     /**
@@ -377,13 +335,7 @@ final class ManagingOrdersContext implements Context
      */
     public function theOrdersShippingTotalShouldBe($shippingTotal)
     {
-        $shippingTotalOnPage = $this->showPage->getShippingTotal();
-
-        Assert::eq(
-            $shippingTotal,
-            $shippingTotalOnPage,
-            sprintf('Shipping total is "%s", but should be "%s".', $shippingTotalOnPage, $shippingTotal)
-        );
+        Assert::eq($this->showPage->getShippingTotal(), $shippingTotal);
     }
 
     /**
@@ -391,9 +343,7 @@ final class ManagingOrdersContext implements Context
      */
     public function theOrdersPaymentShouldBe($paymentAmount)
     {
-        $actualPaymentAmount = $this->showPage->getPaymentAmount();
-
-        Assert::eq($paymentAmount, $actualPaymentAmount);
+        Assert::eq($this->showPage->getPaymentAmount(), $paymentAmount);
     }
 
     /**
@@ -401,10 +351,7 @@ final class ManagingOrdersContext implements Context
      */
     public function theOrderShouldHaveTax($tax)
     {
-        Assert::true(
-            $this->showPage->hasTax($tax),
-            sprintf('Order should have tax "%s", but it does not.', $tax)
-        );
+        Assert::true($this->showPage->hasTax($tax));
     }
 
     /**
@@ -412,13 +359,7 @@ final class ManagingOrdersContext implements Context
      */
     public function theOrdersTaxTotalShouldBe($taxTotal)
     {
-        $taxTotalOnPage = $this->showPage->getTaxTotal();
-
-        Assert::eq(
-            $taxTotal,
-            $taxTotalOnPage,
-            sprintf('Tax total is "%s", but should be "%s".', $taxTotalOnPage, $taxTotal)
-        );
+        Assert::eq($this->showPage->getTaxTotal(), $taxTotal);
     }
 
     /**
@@ -426,10 +367,7 @@ final class ManagingOrdersContext implements Context
      */
     public function theOrdersPromotionDiscountShouldBe($promotionDiscount)
     {
-        Assert::true(
-            $this->showPage->hasPromotionDiscount($promotionDiscount),
-            sprintf('Promotion discount is not "%s".', $promotionDiscount)
-        );
+        Assert::true($this->showPage->hasPromotionDiscount($promotionDiscount));
     }
 
     /**
@@ -445,13 +383,7 @@ final class ManagingOrdersContext implements Context
      */
     public function theOrdersPromotionTotalShouldBe($promotionTotal)
     {
-        $promotionTotalOnPage = $this->showPage->getPromotionTotal();
-
-        Assert::eq(
-            $promotionTotalOnPage,
-            $promotionTotal,
-            'Promotion total is %s, but should be %s.'
-        );
+        Assert::eq($this->showPage->getPromotionTotal(), $promotionTotal);
     }
 
     /**
@@ -467,13 +399,7 @@ final class ManagingOrdersContext implements Context
      */
     public function itemCodeShouldBe($itemName, $code)
     {
-        $itemCodeOnPage = $this->showPage->getItemCode($itemName);
-
-        Assert::same(
-            $itemCodeOnPage,
-            $code,
-            'Item code is %s, but should be %s.'
-        );
+        Assert::same($this->showPage->getItemCode($itemName), $code);
     }
 
     /**
@@ -481,13 +407,7 @@ final class ManagingOrdersContext implements Context
      */
     public function itemUnitPriceShouldBe($itemName, $unitPrice)
     {
-        $itemUnitPriceOnPage = $this->showPage->getItemUnitPrice($itemName);
-
-        Assert::eq(
-            $itemUnitPriceOnPage,
-            $unitPrice,
-            'Item unit price is %s, but should be %s.'
-        );
+        Assert::eq($this->showPage->getItemUnitPrice($itemName), $unitPrice);
     }
 
     /**
@@ -495,13 +415,7 @@ final class ManagingOrdersContext implements Context
      */
     public function itemDiscountedUnitPriceShouldBe($itemName, $discountedUnitPrice)
     {
-        $itemUnitPriceOnPage = $this->showPage->getItemDiscountedUnitPrice($itemName);
-
-        Assert::eq(
-            $itemUnitPriceOnPage,
-            $discountedUnitPrice,
-            'Item discounted unit price is %s, but should be %s.'
-        );
+        Assert::eq($this->showPage->getItemDiscountedUnitPrice($itemName), $discountedUnitPrice);
     }
 
     /**
@@ -509,13 +423,7 @@ final class ManagingOrdersContext implements Context
      */
     public function itemQuantityShouldBe($itemName, $quantity)
     {
-        $itemQuantityOnPage = $this->showPage->getItemQuantity($itemName);
-
-        Assert::eq(
-            $itemQuantityOnPage,
-            $quantity,
-            'Item quantity is %s, but should be %s.'
-        );
+        Assert::eq($this->showPage->getItemQuantity($itemName), $quantity);
     }
 
     /**
@@ -523,13 +431,7 @@ final class ManagingOrdersContext implements Context
      */
     public function itemSubtotalShouldBe($itemName, $subtotal)
     {
-        $itemSubtotalOnPage = $this->showPage->getItemSubtotal($itemName);
-
-        Assert::eq(
-            $itemSubtotalOnPage,
-            $subtotal,
-            'Item subtotal is %s, but should be %s.'
-        );
+        Assert::eq($this->showPage->getItemSubtotal($itemName), $subtotal);
     }
 
     /**
@@ -537,13 +439,7 @@ final class ManagingOrdersContext implements Context
      */
     public function theItemShouldHaveDiscount($itemName, $discount)
     {
-        $itemDiscountOnPage = $this->showPage->getItemDiscount($itemName);
-
-        Assert::eq(
-            $itemDiscountOnPage,
-            $discount,
-            'Item discount is %s, but should be %s.'
-        );
+        Assert::eq($this->showPage->getItemDiscount($itemName), $discount);
     }
 
     /**
@@ -551,13 +447,7 @@ final class ManagingOrdersContext implements Context
      */
     public function itemTaxShouldBe($itemName, $tax)
     {
-        $itemTaxOnPage = $this->showPage->getItemTax($itemName);
-
-        Assert::eq(
-            $itemTaxOnPage,
-            $tax,
-            'Item tax is %s, but should be %s.'
-        );
+        Assert::eq($this->showPage->getItemTax($itemName), $tax);
     }
 
     /**
@@ -565,13 +455,7 @@ final class ManagingOrdersContext implements Context
      */
     public function itemTotalShouldBe($itemName, $total)
     {
-        $itemTotalOnPage = $this->showPage->getItemTotal($itemName);
-
-        Assert::eq(
-            $itemTotalOnPage,
-            $total,
-            'Item total is %s, but should be %s.'
-        );
+        Assert::eq($this->showPage->getItemTotal($itemName), $total);
     }
 
     /**
@@ -579,9 +463,10 @@ final class ManagingOrdersContext implements Context
      */
     public function iShouldBeNotifiedThatTheOrderSPaymentHasBeenSuccessfullyCompleted()
     {
-        $this
-            ->notificationChecker
-            ->checkNotification('Payment has been successfully updated.', NotificationType::success());
+        $this->notificationChecker->checkNotification(
+            'Payment has been successfully updated.',
+            NotificationType::success()
+        );
     }
 
     /**
@@ -589,9 +474,10 @@ final class ManagingOrdersContext implements Context
      */
     public function iShouldBeNotifiedThatTheOrderSPaymentHasBeenSuccessfullyRefunded()
     {
-        $this
-            ->notificationChecker
-            ->checkNotification('Payment has been successfully refunded.', NotificationType::success());
+        $this->notificationChecker->checkNotification(
+            'Payment has been successfully refunded.',
+            NotificationType::success()
+        );
     }
 
     /**
@@ -600,10 +486,7 @@ final class ManagingOrdersContext implements Context
      */
     public function itShouldHavePaymentState($paymentState)
     {
-        Assert::true(
-            $this->showPage->hasPayment($paymentState),
-            sprintf('It should have payment with %s state', $paymentState)
-        );
+        Assert::true($this->showPage->hasPayment($paymentState));
     }
 
     /**
@@ -611,23 +494,15 @@ final class ManagingOrdersContext implements Context
      */
     public function itShouldHaveOrderPaymentState($orderPaymentState)
     {
-        Assert::same(
-            $this->showPage->getPaymentState(),
-            $orderPaymentState,
-            'Order payment state should be %2$s, but it is %s.'
-        );
+        Assert::same($this->showPage->getPaymentState(), $orderPaymentState);
     }
-    
+
     /**
      * @Then it's payment state should be refunded
      */
     public function orderPaymentStateShouldBeRefunded()
     {
-        Assert::same(
-            $this->showPage->getPaymentState(),
-            'Refunded',
-            'Order payment state should be refunded, but it is not.'
-        );
+        Assert::same($this->showPage->getPaymentState(), 'Refunded');
     }
 
     /**
@@ -635,10 +510,7 @@ final class ManagingOrdersContext implements Context
      */
     public function iShouldNotBeAbleToFinalizeItsPayment(OrderInterface $order)
     {
-        Assert::false(
-            $this->showPage->canCompleteOrderLastPayment($order),
-            'It should not have complete payment button.'
-        );
+        Assert::false($this->showPage->canCompleteOrderLastPayment($order));
     }
 
     /**
@@ -657,10 +529,7 @@ final class ManagingOrdersContext implements Context
      */
     public function iShouldNotBeAbleToShipThisOrder(OrderInterface $order)
     {
-        Assert::false(
-            $this->showPage->canShipOrder($order),
-            'It should not have ship shipment button.'
-        );
+        Assert::false($this->showPage->canShipOrder($order));
     }
 
     /**
@@ -687,10 +556,7 @@ final class ManagingOrdersContext implements Context
      */
     public function iShouldNotBeAbleToCancelThisOrder()
     {
-        Assert::false(
-            $this->showPage->hasCancelButton(),
-            'There should not be a cancel button, but it is.'
-        );
+        Assert::false($this->showPage->hasCancelButton());
     }
 
     /**
@@ -699,11 +565,7 @@ final class ManagingOrdersContext implements Context
      */
     public function itsStateShouldBe($state)
     {
-        Assert::same(
-            $this->showPage->getOrderState(),
-            $state,
-            'The order state should be %2$s, but it is %s.'
-        );
+        Assert::same($this->showPage->getOrderState(), $state);
     }
 
     /**
@@ -711,10 +573,7 @@ final class ManagingOrdersContext implements Context
      */
     public function itShouldHaveState($state)
     {
-        Assert::true(
-            $this->indexPage->isSingleResourceOnPage(['state' => $state]),
-            sprintf('Cannot find order with "%s" state in the list.', $state)
-        );
+        Assert::true($this->indexPage->isSingleResourceOnPage(['state' => $state]));
     }
 
     /**
@@ -729,7 +588,8 @@ final class ManagingOrdersContext implements Context
             $user,
             function () use ($note, $order) {
                 $this->showPage->open(['id' => $order->getId()]);
-                Assert::true($this->showPage->hasNote($note), sprintf('I should see %s note, but I do not see', $note));
+
+                Assert::true($this->showPage->hasNote($note));
             }
         );
     }
@@ -739,10 +599,7 @@ final class ManagingOrdersContext implements Context
      */
     public function iShouldSeeOrderWithNumber($orderNumber)
     {
-        Assert::true(
-            $this->indexPage->isSingleResourceOnPage(['number' => $orderNumber]),
-            sprintf('Cannot find order with "%s" number in the list.', $orderNumber)
-        );
+        Assert::true($this->indexPage->isSingleResourceOnPage(['number' => $orderNumber]));
     }
 
     /**
@@ -750,10 +607,7 @@ final class ManagingOrdersContext implements Context
      */
     public function iShouldNotSeeOrderWithNumber($orderNumber)
     {
-        Assert::false(
-            $this->indexPage->isSingleResourceOnPage(['number' => $orderNumber]),
-            sprintf('Order with "%s" number should not be in the list.', $orderNumber)
-        );
+        Assert::false($this->indexPage->isSingleResourceOnPage(['number' => $orderNumber]));
     }
 
     /**
@@ -761,10 +615,7 @@ final class ManagingOrdersContext implements Context
      */
     public function iShouldNotSeeAnyOrderWithCurrency($currencyCode)
     {
-        Assert::false(
-            $this->indexPage->isSingleResourceOnPage(['currencyCode' => $currencyCode]),
-            sprintf('Order with currency "%s" should not be on the list.', $currencyCode)
-        );
+        Assert::false($this->indexPage->isSingleResourceOnPage(['currencyCode' => $currencyCode]));
     }
 
     /**
@@ -772,13 +623,7 @@ final class ManagingOrdersContext implements Context
      */
     public function theFirstOrderShouldHaveNumber($number)
     {
-        $actualNumber = $this->indexPage->getColumnFields('number')[0];
-
-        Assert::eq(
-            $actualNumber,
-            $number,
-            sprintf('Expected first order\'s number to be %s, but it is %s.', $number, $actualNumber)
-        );
+        Assert::eq($this->indexPage->getColumnFields('number')[0], $number);
     }
 
     /**
@@ -786,10 +631,7 @@ final class ManagingOrdersContext implements Context
      */
     public function itShouldHaveShipmentState($shipmentState)
     {
-        Assert::true(
-            $this->showPage->hasShipment($shipmentState),
-            sprintf('It should have shipment with %s state', $shipmentState)
-        );
+        Assert::true($this->showPage->hasShipment($shipmentState));
     }
 
     /**
@@ -797,10 +639,7 @@ final class ManagingOrdersContext implements Context
      */
     public function thisOrderShipmentStateShouldBe($shippingState)
     {
-        Assert::true(
-            $this->indexPage->isSingleResourceOnPage(['shippingState' => $shippingState]),
-            sprintf('Order should have %s shipping state', $shippingState)
-        );
+        Assert::true($this->indexPage->isSingleResourceOnPage(['shippingState' => $shippingState]));
     }
 
     /**
@@ -809,10 +648,7 @@ final class ManagingOrdersContext implements Context
      */
     public function theOrderShouldHavePaymentState(OrderInterface $order, $orderPaymentState)
     {
-        Assert::true(
-            $this->indexPage->isSingleResourceOnPage(['paymentState' => $orderPaymentState]),
-            sprintf('Cannot find order with "%s" order payment state in the list.', $orderPaymentState)
-        );
+        Assert::true($this->indexPage->isSingleResourceOnPage(['paymentState' => $orderPaymentState]));
     }
 
     /**
@@ -820,10 +656,7 @@ final class ManagingOrdersContext implements Context
      */
     public function theOrderShouldHaveShipmentState(OrderInterface $order, $orderShipmentState)
     {
-        Assert::true(
-            $this->indexPage->isSingleResourceOnPage(['shippingState' => $orderShipmentState]),
-            sprintf('Cannot find order with "%s" order shipping state on the list.', $orderShipmentState)
-        );
+        Assert::true($this->indexPage->isSingleResourceOnPage(['shippingState' => $orderShipmentState]));
     }
 
     /**
@@ -831,9 +664,7 @@ final class ManagingOrdersContext implements Context
      */
     public function theOrderShouldHaveNumberOfPayments($number)
     {
-        $actualNumberOfPayments = $this->showPage->getPaymentsCount();
-
-        Assert::same((int)$number, $actualNumberOfPayments);
+        Assert::same($this->showPage->getPaymentsCount(), (int) $number);
     }
 
     /**
@@ -841,10 +672,7 @@ final class ManagingOrdersContext implements Context
      */
     public function iShouldSeeTheOrderWithTotal($orderNumber, $total)
     {
-        Assert::true(
-            $this->indexPage->isSingleResourceOnPage(['total' => $total]),
-            sprintf('The total of order "%s" is not "%s".', $orderNumber, $total)
-        );
+        Assert::true($this->indexPage->isSingleResourceOnPage(['total' => $total]));
     }
 
     /**
@@ -896,10 +724,7 @@ final class ManagingOrdersContext implements Context
      */
     public function iShouldSeeAsProvinceInTheShippingAddress($provinceName)
     {
-        Assert::true(
-            $this->showPage->hasShippingProvinceName($provinceName),
-            sprintf('Cannot find shipping address with province %s', $provinceName)
-        );
+        Assert::true($this->showPage->hasShippingProvinceName($provinceName));
     }
 
     /**
@@ -907,10 +732,7 @@ final class ManagingOrdersContext implements Context
      */
     public function iShouldSeeAdProvinceInTheBillingAddress($provinceName)
     {
-        Assert::true(
-            $this->showPage->hasBillingProvinceName($provinceName),
-            sprintf('Cannot find shipping address with province %s', $provinceName)
-        );
+        Assert::true($this->showPage->hasBillingProvinceName($provinceName));
     }
 
     /**
@@ -925,11 +747,7 @@ final class ManagingOrdersContext implements Context
             function () use ($order) {
                 $this->showPage->open(['id' => $order->getId()]);
 
-                Assert::notSame(
-                    $this->showPage->getIpAddressAssigned(),
-                    '',
-                    'There should be IP address assigned to order, but there is not.'
-                );
+                Assert::notSame($this->showPage->getIpAddressAssigned(), '');
             }
         );
     }
@@ -965,11 +783,8 @@ final class ManagingOrdersContext implements Context
     {
         $this->sharedSecurityService->performActionAsAdminUser($user, function () use ($order, $currency) {
             $this->showPage->open(['id' => $order->getId()]);
-            Assert::same(
-                $this->showPage->getOrderCurrency(),
-                $currency,
-                'The order has been placed in %s, but it was expected to be placed in %s'
-            );
+
+            Assert::same($this->showPage->getOrderCurrency(), $currency);
         });
     }
 
@@ -981,10 +796,7 @@ final class ManagingOrdersContext implements Context
         $this->sharedSecurityService->performActionAsAdminUser($user, function () use ($total) {
             $this->indexPage->open();
 
-            Assert::true(
-                $this->indexPage->isSingleResourceOnPage(['total' => $total]),
-                sprintf('The order with total "%s" has not been found.', $total)
-            );
+            Assert::true($this->indexPage->isSingleResourceOnPage(['total' => $total]));
         });
     }
 
@@ -993,10 +805,7 @@ final class ManagingOrdersContext implements Context
      */
     public function thereShouldBeCountChangesInTheRegistry($count)
     {
-        Assert::same(
-            $this->historyPage->countShippingAddressChanges(),
-            (int) $count
-        );
+        Assert::same($this->historyPage->countShippingAddressChanges(), (int) $count);
     }
 
     /**
@@ -1012,11 +821,7 @@ final class ManagingOrdersContext implements Context
      */
     public function iShouldNotSeeInformationAboutPayments()
     {
-        Assert::same(
-            0,
-            $this->showPage->getPaymentsCount(),
-            'There should be no payments, but they are.'
-        );
+        Assert::same($this->showPage->getPaymentsCount(), 0);
     }
 
     /**
@@ -1029,9 +834,6 @@ final class ManagingOrdersContext implements Context
     private function assertElementValidationMessage($type, $element, $expectedMessage)
     {
         $element = sprintf('%s_%s', $type, implode('_', explode(' ', $element)));
-        Assert::true(
-            $this->updatePage->checkValidationMessageFor($element, $expectedMessage),
-            sprintf('The %s should be required.', $element)
-        );
+        Assert::true($this->updatePage->checkValidationMessageFor($element, $expectedMessage));
     }
 }

@@ -57,13 +57,7 @@ final class ManagingInventoryContext implements Context
      */
     public function iShouldSeeOnlyOneTrackedVariantInTheList()
     {
-        $foundRows = $this->indexPage->countItems();
-
-        Assert::same(
-            1,
-            $foundRows,
-            '%s rows with tracked product variants should appear on page, %s rows has been found.'
-        );
+        Assert::same($this->indexPage->countItems(), 1);
     }
 
     /**
@@ -71,16 +65,9 @@ final class ManagingInventoryContext implements Context
      */
     public function iShouldSeeThatTheProductVariantHasQuantityOnHand($productVariantName, $quantity)
     {
-        Assert::true(
-            $this->indexPage->isSingleResourceOnPage([
-                'name' => $productVariantName,
-                'inventory' => sprintf('%s Available on hand', $quantity)
-            ]),
-            sprintf(
-                'This "%s" variant should have %s on hand quantity, but it does not.',
-                $productVariantName,
-                $quantity
-            )
-        );
+        Assert::true($this->indexPage->isSingleResourceOnPage([
+            'name' => $productVariantName,
+            'inventory' => sprintf('%s Available on hand', $quantity),
+        ]));
     }
 }

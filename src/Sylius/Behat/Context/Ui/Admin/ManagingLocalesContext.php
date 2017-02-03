@@ -72,6 +72,7 @@ final class ManagingLocalesContext implements Context
     public function storeShouldBeAvailableInLanguage($name)
     {
         $doesLocaleExist = $this->indexPage->isSingleResourceOnPage(['name' => $name]);
+
         Assert::true($doesLocaleExist);
     }
 

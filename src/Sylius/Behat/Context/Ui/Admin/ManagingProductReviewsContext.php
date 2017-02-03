@@ -67,10 +67,7 @@ final class ManagingProductReviewsContext implements Context
      */
     public function iShouldSeeTheProductReviewTitleInTheList($title)
     {
-        Assert::true(
-            $this->indexPage->isSingleResourceOnPage(['title' => $title]),
-            sprintf('Product review with a title %s should exist but it does not.', $title)
-        );
+        Assert::true($this->indexPage->isSingleResourceOnPage(['title' => $title]));
     }
 
     /**
@@ -78,11 +75,7 @@ final class ManagingProductReviewsContext implements Context
      */
     public function iShouldSeeReviewsInTheList($amount)
     {
-        Assert::same(
-            (int) $amount,
-            $this->indexPage->countItems(),
-            '%2$s rows with product reviews should appear on page, %s rows has been found'
-        );
+        Assert::same($this->indexPage->countItems(), (int) $amount);
     }
 
     /**
@@ -133,11 +126,7 @@ final class ManagingProductReviewsContext implements Context
      */
     public function thisProductReviewRatingShouldBe($rating)
     {
-        Assert::same(
-            $rating,
-            $this->updatePage->getRating(),
-            'Product review should have rating %s, but it has %s'
-        );
+        Assert::same($this->updatePage->getRating(), $rating);
     }
 
     /**
@@ -153,11 +142,7 @@ final class ManagingProductReviewsContext implements Context
      */
     public function iShouldBeEditingReviewOfProduct($productName)
     {
-        Assert::same(
-            $productName,
-            $this->updatePage->getProductName(),
-            'Product should have name %s, but it has %s'
-        );
+        Assert::same($this->updatePage->getProductName(), $productName);
     }
 
     /**
@@ -165,11 +150,7 @@ final class ManagingProductReviewsContext implements Context
      */
     public function iShouldSeeTheCustomerSName($customerName)
     {
-        Assert::same(
-            $customerName,
-            $this->updatePage->getCustomerName(),
-            'Customer should have name %s, but they have %s'
-        );
+        Assert::same($this->updatePage->getCustomerName(), $customerName);
     }
 
     /**
@@ -193,14 +174,10 @@ final class ManagingProductReviewsContext implements Context
      */
     public function thisProductReviewStatusShouldBe(ReviewInterface $productReview, $status)
     {
-        Assert::true(
-            $this->indexPage->isSingleResourceOnPage(['title' => $productReview->getTitle(), 'status' => $status]),
-            sprintf(
-                'Product review with title "%s" and status "%s" is not in the list.',
-                $productReview->getTitle(),
-                $status
-            )
-        );
+        Assert::true($this->indexPage->isSingleResourceOnPage([
+            'title' => $productReview->getTitle(),
+            'status' => $status,
+        ]));
     }
 
     /**
@@ -209,7 +186,8 @@ final class ManagingProductReviewsContext implements Context
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyUpdated($action)
     {
         $this->notificationChecker->checkNotification(
-            sprintf('Review has been successfully %s.', $action), NotificationType::success()
+            sprintf('Review has been successfully %s.', $action),
+            NotificationType::success()
         );
     }
 
@@ -227,10 +205,7 @@ final class ManagingProductReviewsContext implements Context
      */
     public function thisProductReviewShouldNoLongerExistInTheRegistry(ReviewInterface $productReview)
     {
-        Assert::false(
-            $this->indexPage->isSingleResourceOnPage(['title' => $productReview->getTitle()]),
-            sprintf('Product review with title "%s" should no longer exist in the registry.', $productReview->getTitle())
-        );
+        Assert::false($this->indexPage->isSingleResourceOnPage(['title' => $productReview->getTitle()]));
     }
 
     /**
@@ -248,10 +223,7 @@ final class ManagingProductReviewsContext implements Context
     {
         $this->iWantToBrowseProductReviews();
 
-        Assert::true(
-            $this->indexPage->isSingleResourceOnPage(['title' => $productReviewTitle]),
-            sprintf('Product review title %s has not been assigned properly.', $productReviewTitle)
-        );
+        Assert::true($this->indexPage->isSingleResourceOnPage(['title' => $productReviewTitle]));
     }
 
     /**
@@ -270,10 +242,7 @@ final class ManagingProductReviewsContext implements Context
      */
     private function assertElementValue($element, $value)
     {
-        Assert::true(
-            $this->updatePage->hasResourceValues([$element => $value]),
-            sprintf('Product review should have %s with %s value.', $element, $value)
-        );
+        Assert::true($this->updatePage->hasResourceValues([$element => $value]));
     }
 
     /**
@@ -282,9 +251,6 @@ final class ManagingProductReviewsContext implements Context
      */
     private function assertFieldValidationMessage($element, $expectedMessage)
     {
-        Assert::same(
-            $this->updatePage->getValidationMessage($element),
-            $expectedMessage
-        );
+        Assert::same($this->updatePage->getValidationMessage($element), $expectedMessage);
     }
 }

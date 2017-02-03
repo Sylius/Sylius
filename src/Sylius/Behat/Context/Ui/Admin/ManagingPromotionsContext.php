@@ -127,10 +127,7 @@ final class ManagingPromotionsContext implements Context
     {
         $this->indexPage->open();
 
-        Assert::true(
-            $this->indexPage->isSingleResourceOnPage(['name' => $promotionName]),
-            sprintf('Promotion with name %s has not been found.', $promotionName)
-        );
+        Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $promotionName]));
     }
 
     /**
@@ -274,10 +271,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function thisPromotionShouldBeCouponBased(PromotionInterface $promotion)
     {
-        Assert::true(
-            $this->indexPage->isCouponBasedFor($promotion),
-            sprintf('Promotion with name "%s" should be coupon based', $promotion->getName())
-        );
+        Assert::true($this->indexPage->isCouponBasedFor($promotion));
     }
 
     /**
@@ -285,10 +279,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iShouldBeAbleToManageCouponsForThisPromotion(PromotionInterface $promotion)
     {
-        Assert::true(
-            $this->indexPage->isAbleToManageCouponsFor($promotion),
-            sprintf('I should be able to manage coupons for given promotion with name %s but apparently i am not.', $promotion->getName())
-        );
+        Assert::true($this->indexPage->isAbleToManageCouponsFor($promotion));
     }
 
     /**
@@ -322,10 +313,7 @@ final class ManagingPromotionsContext implements Context
     {
         $this->indexPage->open();
 
-        Assert::false(
-            $this->indexPage->isSingleResourceOnPage([$element => $name]),
-            sprintf('Promotion with %s "%s" has been created, but it should not.', $element, $name)
-        );
+        Assert::false($this->indexPage->isSingleResourceOnPage([$element => $name]));
     }
 
     /**
@@ -335,10 +323,7 @@ final class ManagingPromotionsContext implements Context
     {
         $this->indexPage->open();
 
-        Assert::true(
-            $this->indexPage->isSingleResourceOnPage([$element => $value]),
-            sprintf('Promotion with %s "%s" cannot be found.', $element, $value)
-        );
+        Assert::true($this->indexPage->isSingleResourceOnPage([$element => $value]));
     }
 
     /**
@@ -358,10 +343,7 @@ final class ManagingPromotionsContext implements Context
     {
         $this->iWantToModifyAPromotion($promotion);
 
-        Assert::true(
-            $this->updatePage->hasResourceValues(['usage_limit' => $usageLimit]),
-            sprintf('Promotion %s does not have usage limit set to %s.', $promotion->getName(), $usageLimit)
-        );
+        Assert::true($this->updatePage->hasResourceValues(['usage_limit' => $usageLimit]));
     }
 
     /**
@@ -417,10 +399,7 @@ final class ManagingPromotionsContext implements Context
     {
         $this->iWantToModifyAPromotion($promotion);
 
-        Assert::true(
-            $this->updatePage->checkChannelsState($channelName),
-            sprintf('Promotion %s is not %s, but it should be.', $promotion->getName(), $channelName)
-        );
+        Assert::true($this->updatePage->checkChannelsState($channelName));
     }
 
     /**
@@ -438,10 +417,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function theCodeFieldShouldBeDisabled()
     {
-        Assert::true(
-            $this->updatePage->isCodeDisabled(),
-            'Code should be immutable, but it does not.'
-        );
+        Assert::true($this->updatePage->isCodeDisabled());
     }
 
     /**
@@ -472,10 +448,7 @@ final class ManagingPromotionsContext implements Context
     {
         $this->indexPage->open();
 
-        Assert::false(
-            $this->indexPage->isSingleResourceOnPage(['code' => $promotion->getCode()]),
-            sprintf('Promotion with code %s exists but should not.', $promotion->getCode())
-        );
+        Assert::false($this->indexPage->isSingleResourceOnPage(['code' => $promotion->getCode()]));
     }
 
     /**
@@ -507,15 +480,9 @@ final class ManagingPromotionsContext implements Context
     {
         $this->iWantToModifyAPromotion($promotion);
 
-        Assert::true(
-            $this->updatePage->hasStartsAt($startsDate),
-            sprintf('Promotion %s should starts at %s, but it isn\'t.', $promotion->getName(), date('D, d M Y H:i:s', $startsDate->getTimestamp()))
-        );
+        Assert::true($this->updatePage->hasStartsAt($startsDate));
 
-        Assert::true(
-            $this->updatePage->hasEndsAt($endsDate),
-            sprintf('Promotion %s should ends at %s, but it isn\'t.', $promotion->getName(), date('D, d M Y H:i:s', $endsDate->getTimestamp()))
-        );
+        Assert::true($this->updatePage->hasEndsAt($endsDate));
     }
 
     /**
@@ -656,9 +623,6 @@ final class ManagingPromotionsContext implements Context
     {
         $this->iWantToModifyAPromotion($promotion);
 
-        Assert::true(
-            $this->updatePage->hasResourceValues([$field => 1]),
-            sprintf('Promotion %s is not %s, but it should be.', $promotion->getName(), str_replace('_', ' ', $field))
-        );
+        Assert::true($this->updatePage->hasResourceValues([$field => 1]));
     }
 }
