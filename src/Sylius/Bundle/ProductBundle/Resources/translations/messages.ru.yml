@@ -11,6 +11,7 @@ sylius:
             meta_keywords: Ключевые слова метаданных
             meta_description: Описание метаданных
             slug: Псевдоним
+            taxons: Таксоны
         product_variant:
             available_on: Доступен с
             available_until: Доступно до
@@ -25,6 +26,7 @@ sylius:
             name: Название
         option:
             name: Название
+            position: Позиция
             values: Возможные значения
         option_value:
             add_value: Добавить значение

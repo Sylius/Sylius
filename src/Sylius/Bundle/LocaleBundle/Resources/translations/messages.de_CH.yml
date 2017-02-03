@@ -4,5 +4,4 @@
 sylius:
     form:
         locale:
-            enabled: Aktiviert
             name: Name

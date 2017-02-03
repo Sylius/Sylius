@@ -32,3 +32,4 @@ sylius:
             gateway: Терминал
             instructions: Инструкции
             name: Название
+            position: Позиция

@@ -30,6 +30,8 @@ sylius:
             code_length: Длина кода
             expires_at: Истекает
             usage_limit: Предел использования
+        promotion_filter:
+            price_range: Фильтр диапазона цен
         promotion_rule:
             cart_quantity_configuration:
                 count: Кол-во
@@ -39,8 +41,11 @@ sylius:
                 variants: Товары
             item_total_configuration:
                 amount: Сумма
+            nth_order_configuration:
+                nth: Количество
             shipping_country_configuration:
                 country: Страна
             taxonomy_configuration:
                 exclude: Исключить
+                taxons: Таксоны
             type: Тип
