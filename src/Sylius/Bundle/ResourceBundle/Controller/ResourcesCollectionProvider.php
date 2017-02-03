@@ -48,12 +48,19 @@ final class ResourcesCollectionProvider implements ResourcesCollectionProviderIn
     public function get(RequestConfiguration $requestConfiguration, RepositoryInterface $repository)
     {
         $resources = $this->resourcesResolver->getResources($requestConfiguration, $repository);
+        $paginationLimits = [];
 
-        $paginator = $resources instanceof ResourceGridView ? $resources->getData() : $resources;
+        if ($resources instanceof ResourceGridView) {
+            $paginator = $resources->getData();
+            $paginationLimits = $resources->getDefinition()->getLimits();
+        } else {
+            $paginator = $resources;
+        }
 
         if ($paginator instanceof Pagerfanta) {
             $request = $requestConfiguration->getRequest();
-            $paginator->setMaxPerPage($requestConfiguration->getPaginationMaxPerPage());
+
+            $paginator->setMaxPerPage($request->query->get('limit', reset($paginationLimits) ?: $requestConfiguration->getPaginationMaxPerPage()));
             $paginator->setCurrentPage($request->query->get('page', 1));
 
             // This prevents Pagerfanta from querying database from a template

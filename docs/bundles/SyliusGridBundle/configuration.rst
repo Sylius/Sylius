@@ -14,6 +14,7 @@ Here you will find all configuration options of ``sylius_grid``.
                         class: "%app.model.user%"
                 sorting:
                     name: asc
+                limits: [10, 25, 50, 100]
                 fields:
                     name:
                         type: twig # Type of field

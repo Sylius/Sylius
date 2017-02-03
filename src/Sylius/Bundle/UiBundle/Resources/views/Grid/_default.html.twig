@@ -28,7 +28,20 @@
 {% endif %}
 
 <div class="ui segment">
-    {{ pagination.simple(data) }}
+    {% if definition.limits|length > 1 and data|length > min(definition.limits) %}
+    <div class="ui two column fluid stackable grid">
+        <div class="fourteen wide column">
+            {{ pagination.simple(data) }}
+        </div>
+        <div class="two wide column">
+            <div class="ui fluid one item menu sylius-paginate">
+                {{ pagination.perPage(data, definition.limits) }}
+            </div>
+        </div>
+    </div>
+    {% else %}
+        {{ pagination.simple(data) }}
+    {% endif %}
     {% if data|length > 0 %}
         <table class="ui sortable stackable celled table">
             <thead>

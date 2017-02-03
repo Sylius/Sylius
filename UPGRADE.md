@@ -115,7 +115,7 @@
 * Custom options for filter form types was extracted from ``options`` to ``form_options`` in grid configuration.
 
 Before:
-```php
+```yaml
     sylius_grid:
         grids:
             app_order:
@@ -128,7 +128,7 @@ Before:
 ```
 
 After:
-```php
+```yaml
     sylius_grid:
         grids:
             app_order:
@@ -139,6 +139,14 @@ After:
                             fields: [channel]
                         form_options:
                             class: "%app.model.channel%"
+```
+
+* Grid configuration was upgraded to allow setting the number of maximum visible items per page on index.
+```yaml
+    sylius_grid:
+        grids:
+            app_order:
+                limits: [15, 20, 30]
 ```
 
 ### Inventory / InventoryBundle

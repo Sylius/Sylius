@@ -1,0 +1,16 @@
+{% set paginationLimits = (resources.definition.limits) %}
+
+<div class="ui right floated small header">
+    <div class="content">
+        <div class="ui inline dropdown sylius-paginate">
+            {{ 'sylius.ui.show'|trans }} {{ resources.data.maxPerPage }}
+            <i class="dropdown icon"></i>
+            <div class="menu">
+            {% for limit in paginationLimits if limit != resources.data.maxPerPage %}
+                {% set path = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({'limit': limit})) %}
+                <a class="item" href="{{ path }}">{{ limit }}</a>
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>

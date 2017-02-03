@@ -46,6 +46,7 @@ final class SyliusGridExtensionTest extends AbstractExtensionTestCase
                     ]
                 ],
                 'sorting' => [],
+                'limits' => [10, 25, 50],
                 'fields' => [],
                 'filters' => [],
                 'actions' => [],
