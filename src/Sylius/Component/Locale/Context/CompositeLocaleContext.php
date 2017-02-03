@@ -41,14 +41,18 @@ final class CompositeLocaleContext implements LocaleContextInterface
      */
     public function getLocaleCode()
     {
+        $lastException = null;
+
         foreach ($this->localeContexts as $localeContext) {
             try {
                 return $localeContext->getLocaleCode();
             } catch (LocaleNotFoundException $exception) {
+                $lastException = $exception;
+
                 continue;
             }
         }
 
-        throw new LocaleNotFoundException();
+        throw new LocaleNotFoundException(null, $lastException);
     }
 }
