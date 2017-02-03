@@ -127,7 +127,6 @@ class TaxonApiTest extends JsonApiTestCase
     public function it_allows_create_taxon_with_multiple_translations()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $this->loadFixturesFromFile('resources/taxons.yml');
         $this->loadFixturesFromFile('resources/locales.yml');
 
         $data =
@@ -152,6 +151,50 @@ EOT;
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'taxon/create_response', Response::HTTP_CREATED);
     }
+
+    /**
+     * @test
+     */
+    public function it_allows_create_root_taxon()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+
+        $data =
+<<<EOT
+        {
+            "code": "fluffy_pets"
+        }
+EOT;
+
+        $this->client->request('POST', '/api/v1/taxons/', [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'taxon/create_root_response', Response::HTTP_CREATED);
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_create_taxon_with_parent()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/taxons.yml');
+
+        $data =
+<<<EOT
+        {
+            "code": "horror",
+            "parent": "books"
+        }
+EOT;
+
+        $this->client->request('POST', '/api/v1/taxons/', [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'taxon/create_with_parent_response', Response::HTTP_CREATED);
+    }
+    
+    
 
     /**
      * @test
