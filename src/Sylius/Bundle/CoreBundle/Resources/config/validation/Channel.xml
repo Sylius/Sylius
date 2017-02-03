@@ -30,6 +30,7 @@
         </property>
         <property name="taxCalculationStrategy">
             <constraint name="NotBlank" />
+          <option name="groups">sylius</option>
         </property>
         <property name="contactEmail">
             <constraint name="Length">
