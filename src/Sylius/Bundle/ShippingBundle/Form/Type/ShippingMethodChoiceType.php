@@ -34,17 +34,17 @@ final class ShippingMethodChoiceType extends AbstractType
     /**
      * @var ShippingMethodsResolverInterface
      */
-    protected $shippingMethodsResolver;
+    private $shippingMethodsResolver;
 
     /**
      * @var ServiceRegistryInterface
      */
-    protected $calculators;
+    private $calculators;
 
     /**
      * @var RepositoryInterface
      */
-    protected $repository;
+    private $repository;
 
     /**
      * @param ShippingMethodsResolverInterface $shippingMethodsResolver

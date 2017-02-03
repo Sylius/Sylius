@@ -23,7 +23,7 @@ final class PromotionActionChoiceType extends AbstractType
     /**
      * @var array
      */
-    protected $actions;
+    private $actions;
 
     /**
      * @param array $actions

@@ -26,7 +26,7 @@ final class LocaleChoiceType extends AbstractType
     /**
      * @var RepositoryInterface
      */
-    protected $localeRepository;
+    private $localeRepository;
 
     /**
      * @param RepositoryInterface $repository

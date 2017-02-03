@@ -20,7 +20,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 final class PromotionRuleChoiceType extends AbstractType
 {
-    protected $rules;
+    /**
+     * @var array
+     */
+    private $rules;
 
     public function __construct(array $rules)
     {

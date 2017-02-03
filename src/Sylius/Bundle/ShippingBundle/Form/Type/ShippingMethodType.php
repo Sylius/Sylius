@@ -37,27 +37,27 @@ final class ShippingMethodType extends AbstractResourceType
     /**
      * @var string
      */
-    protected $shippingMethodTranslationType;
+    private $shippingMethodTranslationType;
 
     /**
      * @var ServiceRegistryInterface
      */
-    protected $calculatorRegistry;
+    private $calculatorRegistry;
 
     /**
      * @var ServiceRegistryInterface
      */
-    protected $checkerRegistry;
+    private $checkerRegistry;
 
     /**
      * @var FormTypeRegistryInterface
      */
-    protected $formTypeRegistry;
+    private $formTypeRegistry;
 
     /**
      * @var EventSubscriberInterface
      */
-    protected $buildShippingMethodFormSubscriber;
+    private $buildShippingMethodFormSubscriber;
 
     /**
      * @param string $dataClass

@@ -23,7 +23,7 @@ final class CalculatorChoiceType extends AbstractType
     /**
      * @var array
      */
-    protected $calculators;
+    private $calculators;
 
     /**
      * @param array $calculators

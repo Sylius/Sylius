@@ -25,7 +25,7 @@ final class ZoneChoiceType extends AbstractType
     /**
      * @var RepositoryInterface
      */
-    protected $zoneRepository;
+    private $zoneRepository;
 
     /**
      * @param RepositoryInterface $zoneRepository

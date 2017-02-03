@@ -25,7 +25,7 @@ final class ProvinceCodeChoiceType extends AbstractType
     /**
      * @var RepositoryInterface
      */
-    protected $provinceRepository;
+    private $provinceRepository;
 
     /**
      * @param RepositoryInterface $provinceRepository

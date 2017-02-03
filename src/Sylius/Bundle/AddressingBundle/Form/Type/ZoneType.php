@@ -31,7 +31,7 @@ final class ZoneType extends AbstractResourceType
     /**
      * @var array
      */
-    protected $scopeChoices;
+    private $scopeChoices;
 
     /**
      * @param string   $dataClass

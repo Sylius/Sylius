@@ -26,12 +26,12 @@ final class ProductAssociationsType extends AbstractType
     /**
      * @var RepositoryInterface
      */
-    protected $productAssociationTypeRepository;
+    private $productAssociationTypeRepository;
 
     /**
      * @var DataTransformerInterface
      */
-    protected $productsToProductAssociationsTransformer;
+    private $productsToProductAssociationsTransformer;
 
     /**
      * @param RepositoryInterface $productAssociationTypeRepository

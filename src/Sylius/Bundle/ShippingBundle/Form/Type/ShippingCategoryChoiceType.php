@@ -27,7 +27,7 @@ final class ShippingCategoryChoiceType extends AbstractType
     /**
      * @var RepositoryInterface
      */
-    protected $shippingCategoryRepository;
+    private $shippingCategoryRepository;
 
     /**
      * @param RepositoryInterface $shippingCategoryRepository

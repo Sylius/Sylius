@@ -27,7 +27,7 @@ final class ChannelChoiceType extends AbstractType
     /**
      * @var RepositoryInterface
      */
-    protected $channelRepository;
+    private $channelRepository;
 
     /**
      * @param RepositoryInterface $channelRepository

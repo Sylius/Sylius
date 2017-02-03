@@ -33,7 +33,7 @@ final class TaxonChoiceType extends AbstractType
     /**
      * @var TaxonRepositoryInterface
      */
-    protected $taxonRepository;
+    private $taxonRepository;
 
     /**
      * @param TaxonRepositoryInterface $taxonRepository
