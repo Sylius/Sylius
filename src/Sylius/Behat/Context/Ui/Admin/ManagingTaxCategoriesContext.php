@@ -76,10 +76,7 @@ final class ManagingTaxCategoriesContext implements Context
      */
     public function thisTaxCategoryShouldNoLongerExistInTheRegistry(TaxCategoryInterface $taxCategory)
     {
-        Assert::false(
-            $this->indexPage->isSingleResourceOnPage(['code' => $taxCategory->getCode()]),
-            sprintf('Tax category with code %s exists but should not.', $taxCategory->getCode())
-        );
+        Assert::false($this->indexPage->isSingleResourceOnPage(['code' => $taxCategory->getCode()]));
     }
 
     /**
@@ -125,10 +122,7 @@ final class ManagingTaxCategoriesContext implements Context
     public function theTaxCategoryShouldAppearInTheRegistry($taxCategoryName)
     {
         $this->indexPage->open();
-        Assert::true(
-            $this->indexPage->isSingleResourceOnPage(['nameAndDescription' => $taxCategoryName]),
-            sprintf('Tax category with name %s has not been found.', $taxCategoryName)
-        );
+        Assert::true($this->indexPage->isSingleResourceOnPage(['nameAndDescription' => $taxCategoryName]));
     }
 
     /**
@@ -162,10 +156,7 @@ final class ManagingTaxCategoriesContext implements Context
      */
     public function theCodeFieldShouldBeDisabled()
     {
-        Assert::true(
-            $this->updatePage->isCodeDisabled(),
-            'Code should be immutable, but it does not.'
-        );
+        Assert::true($this->updatePage->isCodeDisabled());
     }
 
     /**
@@ -175,10 +166,7 @@ final class ManagingTaxCategoriesContext implements Context
     public function thisTaxCategoryNameShouldBe(TaxCategoryInterface $taxCategory, $taxCategoryName)
     {
         $this->indexPage->open();
-        Assert::true(
-            $this->indexPage->isSingleResourceOnPage(['code' => $taxCategory->getCode(), 'nameAndDescription' => $taxCategoryName]),
-            sprintf('Tax category name %s was not assigned properly.', $taxCategoryName)
-        );
+        Assert::true($this->indexPage->isSingleResourceOnPage(['code' => $taxCategory->getCode(), 'nameAndDescription' => $taxCategoryName]));
     }
 
     /**
@@ -195,10 +183,7 @@ final class ManagingTaxCategoriesContext implements Context
     public function thereShouldStillBeOnlyOneTaxCategoryWith($element, $code)
     {
         $this->indexPage->open();
-        Assert::true(
-            $this->indexPage->isSingleResourceOnPage([$element => $code]),
-            sprintf('Tax category with %s %s cannot be found.', $element, $code)
-        );
+        Assert::true($this->indexPage->isSingleResourceOnPage([$element => $code]));
     }
 
     /**
@@ -218,9 +203,6 @@ final class ManagingTaxCategoriesContext implements Context
     public function taxCategoryWithElementValueShouldNotBeAdded($element, $name)
     {
         $this->indexPage->open();
-        Assert::false(
-            $this->indexPage->isSingleResourceOnPage([$element => $name]),
-            sprintf('Tax category with %s %s was created, but it should not.', $element, $name)
-        );
+        Assert::false($this->indexPage->isSingleResourceOnPage([$element => $name]));
     }
 }

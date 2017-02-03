@@ -43,8 +43,8 @@ final class ProductOptionContext implements Context
         $productOptions = $this->productOptionRepository->findByName($productOptionName, 'en_US');
 
         Assert::eq(
-            1,
             count($productOptions),
+            1,
             sprintf('%d product options has been found with name "%s".', count($productOptions), $productOptionName)
         );
 

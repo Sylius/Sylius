@@ -27,7 +27,6 @@ use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\OrderPaymentTransitions;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
-use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Order\OrderTransitions;
@@ -71,11 +70,6 @@ final class OrderContext implements Context
     private $itemQuantityModifier;
 
     /**
-     * @var RepositoryInterface
-     */
-    private $currencyRepository;
-
-    /**
      * @var FactoryInterface
      */
     private $customerFactory;
@@ -106,7 +100,6 @@ final class OrderContext implements Context
      * @param FactoryInterface $orderFactory
      * @param FactoryInterface $orderItemFactory
      * @param OrderItemQuantityModifierInterface $itemQuantityModifier
-     * @param RepositoryInterface $currencyRepository
      * @param FactoryInterface $customerFactory
      * @param RepositoryInterface $customerRepository
      * @param ObjectManager $objectManager
@@ -119,7 +112,6 @@ final class OrderContext implements Context
         FactoryInterface $orderFactory,
         FactoryInterface $orderItemFactory,
         OrderItemQuantityModifierInterface $itemQuantityModifier,
-        RepositoryInterface $currencyRepository,
         FactoryInterface $customerFactory,
         RepositoryInterface $customerRepository,
         ObjectManager $objectManager,
@@ -131,7 +123,6 @@ final class OrderContext implements Context
         $this->orderFactory = $orderFactory;
         $this->orderItemFactory = $orderItemFactory;
         $this->itemQuantityModifier = $itemQuantityModifier;
-        $this->currencyRepository = $currencyRepository;
         $this->customerFactory = $customerFactory;
         $this->customerRepository = $customerRepository;
         $this->objectManager = $objectManager;

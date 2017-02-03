@@ -71,10 +71,7 @@ final class ManagingPromotionCouponsContext implements Context
      */
     public function couponShouldNotExistInTheRegistry(PromotionCouponInterface $coupon)
     {
-        Assert::null(
-            $this->couponRepository->findOneBy(['code' => $coupon->getCode()]),
-            sprintf('The coupon with code %s should not exist', $coupon->getCode())
-        );
+        Assert::null($this->couponRepository->findOneBy(['code' => $coupon->getCode()]));
     }
 
     /**
@@ -90,9 +87,6 @@ final class ManagingPromotionCouponsContext implements Context
      */
     public function couponShouldStillExistInTheRegistry(PromotionCouponInterface $coupon)
     {
-        Assert::notNull(
-            $this->couponRepository->find($coupon->getId()),
-            sprintf('The coupon with id %s should exist', $coupon->getId())
-        );
+        Assert::notNull($this->couponRepository->find($coupon->getId()));
     }
 }

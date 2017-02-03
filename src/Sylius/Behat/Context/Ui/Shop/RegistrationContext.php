@@ -186,10 +186,7 @@ class RegistrationContext implements Context
     {
         $this->dashboardPage->open();
 
-        Assert::true(
-            $this->dashboardPage->hasCustomerEmail($email),
-            sprintf('Cannot find customer email "%s".', $email)
-        );
+        Assert::true($this->dashboardPage->hasCustomerEmail($email));
     }
 
     /**
@@ -233,10 +230,7 @@ class RegistrationContext implements Context
      */
     public function iShouldBeLoggedIn()
     {
-        Assert::true(
-            $this->homePage->hasLogoutButton(),
-            'I should be able to sign out.'
-        );
+        Assert::true($this->homePage->hasLogoutButton());
     }
 
     /**
@@ -244,10 +238,7 @@ class RegistrationContext implements Context
      */
     public function iShouldNotBeLoggedIn()
     {
-        Assert::false(
-            $this->homePage->hasLogoutButton(),
-            'I should not be logged in.'
-        );
+        Assert::false($this->homePage->hasLogoutButton());
     }
 
     /**
@@ -266,10 +257,7 @@ class RegistrationContext implements Context
     {
         $this->iLogInAsWithPassword($email, $password);
 
-        Assert::true(
-            $this->loginPage->hasValidationErrorWith('Error Account is disabled.'),
-            'I should see validation error.'
-        );
+        Assert::true($this->loginPage->hasValidationErrorWith('Error Account is disabled.'));
     }
 
     /**
@@ -302,10 +290,7 @@ class RegistrationContext implements Context
      */
     public function myAccountShouldBeVerified()
     {
-        Assert::true(
-            $this->dashboardPage->isVerified(),
-            'My account should be verified.'
-        );
+        Assert::true($this->dashboardPage->isVerified());
     }
 
     /**
@@ -361,10 +346,7 @@ class RegistrationContext implements Context
     {
         $this->dashboardPage->open();
 
-        Assert::false(
-            $this->dashboardPage->isVerified(),
-            'Account should not be verified.'
-        );
+        Assert::false($this->dashboardPage->isVerified());
     }
 
     /**
@@ -374,10 +356,7 @@ class RegistrationContext implements Context
     {
         $this->dashboardPage->open();
 
-        Assert::false(
-            $this->dashboardPage->hasResendVerificationEmailButton(),
-            'You should not be able to resend the verification email.'
-        );
+        Assert::false($this->dashboardPage->hasResendVerificationEmailButton());
     }
 
     /**
@@ -422,10 +401,7 @@ class RegistrationContext implements Context
     {
         $this->profileUpdatePage->open();
 
-        Assert::true(
-            $this->profileUpdatePage->isSubscribedToTheNewsletter(),
-            'I should be subscribed to the newsletter, but I am not'
-        );
+        Assert::true($this->profileUpdatePage->isSubscribedToTheNewsletter());
     }
 
     /**
@@ -434,9 +410,6 @@ class RegistrationContext implements Context
      */
     private function assertFieldValidationMessage($element, $expectedMessage)
     {
-        Assert::true(
-            $this->registerPage->checkValidationMessageFor($element, $expectedMessage),
-            sprintf('The %s should be required.', $element)
-        );
+        Assert::true($this->registerPage->checkValidationMessageFor($element, $expectedMessage));
     }
 }

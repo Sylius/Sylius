@@ -117,11 +117,7 @@ final class ProductReviewContext implements Context
      */
     public function iShouldBeNotifiedThatIMustCheckReviewRating()
     {
-        Assert::same(
-            $this->createPage->getRateValidationMessage(),
-            'You must check review rating.',
-            'There should be rate validation error, but there is not.'
-        );
+        Assert::same($this->createPage->getRateValidationMessage(), 'You must check review rating.');
     }
 
     /**
@@ -129,11 +125,7 @@ final class ProductReviewContext implements Context
      */
     public function iShouldBeNotifiedThatTitleIsRequired()
     {
-        Assert::same(
-            $this->createPage->getTitleValidationMessage(),
-            'Review title should not be blank.',
-            'There should be title validation error, but there is not.'
-        );
+        Assert::same($this->createPage->getTitleValidationMessage(), 'Review title should not be blank.');
     }
 
     /**
@@ -141,11 +133,7 @@ final class ProductReviewContext implements Context
      */
     public function iShouldBeNotifiedThatTitleMustHaveAtLeast2Characters()
     {
-        Assert::same(
-            'Review title must have at least 2 characters.',
-            $this->createPage->getTitleValidationMessage(),
-            'There should be title length validation error, but there is not.'
-        );
+        Assert::same($this->createPage->getTitleValidationMessage(), 'Review title must have at least 2 characters.');
     }
 
     /**
@@ -153,11 +141,7 @@ final class ProductReviewContext implements Context
      */
     public function iShouldBeNotifiedThatTitleMustHaveAtMost255Characters()
     {
-        Assert::same(
-            'Review title must have at most 255 characters.',
-            $this->createPage->getTitleValidationMessage(),
-            'There should be title length validation error, but there is not.'
-        );
+        Assert::same($this->createPage->getTitleValidationMessage(), 'Review title must have at most 255 characters.');
     }
 
     /**
@@ -165,11 +149,7 @@ final class ProductReviewContext implements Context
      */
     public function iShouldBeNotifiedThatCommentIsRequired()
     {
-        Assert::same(
-            $this->createPage->getCommentValidationMessage(),
-            'Review comment should not be blank.',
-            'There should be comment validation error, but there is not.'
-        );
+        Assert::same($this->createPage->getCommentValidationMessage(), 'Review comment should not be blank.');
     }
 
     /**
@@ -177,11 +157,7 @@ final class ProductReviewContext implements Context
      */
     public function iShouldBeNotifiedThatIMustEnterMyEmail()
     {
-        Assert::same(
-            $this->createPage->getAuthorValidationMessage(),
-            'Please enter your email.',
-            'There should be author validation error, but there is not.'
-        );
+        Assert::same($this->createPage->getAuthorValidationMessage(), 'Please enter your email.');
     }
 
     /**
@@ -191,8 +167,7 @@ final class ProductReviewContext implements Context
     {
         Assert::same(
             $this->createPage->getAuthorValidationMessage(),
-            'This email is already registered, please login or use forgotten password.',
-            'There should be author validation error, but there is not.'
+            'This email is already registered, please login or use forgotten password.'
         );
     }
 

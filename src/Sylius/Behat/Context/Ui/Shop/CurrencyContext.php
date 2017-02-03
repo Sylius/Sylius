@@ -50,7 +50,7 @@ final class CurrencyContext implements Context
     {
         $this->homePage->open();
 
-        Assert::same($currencyCode, $this->homePage->getActiveCurrency());
+        Assert::same($this->homePage->getActiveCurrency(), $currencyCode);
     }
 
     /**

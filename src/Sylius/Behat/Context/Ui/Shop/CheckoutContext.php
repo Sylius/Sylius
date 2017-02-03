@@ -214,8 +214,6 @@ final class CheckoutContext implements Context
             $this->completePage,
         ]);
 
-        $actualPrice = $currentPage->getItemSubtotal($item);
-
-        Assert::eq($actualPrice, $price, sprintf('The %s subtotal should be %s, but is %s', $item, $price, $actualPrice));
+        Assert::eq($currentPage->getItemSubtotal($item), $price);
     }
 }

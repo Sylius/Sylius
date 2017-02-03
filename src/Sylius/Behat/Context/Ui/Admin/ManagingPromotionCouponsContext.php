@@ -249,11 +249,7 @@ final class ManagingPromotionCouponsContext implements Context
     {
         $this->indexPage->open(['promotionId' => $promotion->getId()]);
 
-        Assert::same(
-            (int) $number,
-            $this->indexPage->countItems(),
-            'There should be %s coupons but is %s'
-        );
+        Assert::same($this->indexPage->countItems(), (int) $number);
     }
 
     /**
@@ -261,10 +257,7 @@ final class ManagingPromotionCouponsContext implements Context
      */
     public function thereShouldBeCouponWithCode($code)
     {
-        Assert::true(
-            $this->indexPage->isSingleResourceOnPage(['code' => $code]),
-            sprintf('There should be coupon with code %s but it is not.', $code)
-        );
+        Assert::true($this->indexPage->isSingleResourceOnPage(['code' => $code]));
     }
 
     /**
@@ -272,10 +265,7 @@ final class ManagingPromotionCouponsContext implements Context
      */
     public function thisCouponShouldBeValidUntil(\DateTime $date)
     {
-        Assert::true(
-            $this->indexPage->isSingleResourceOnPage(['expiresAt' => date('d-m-Y', $date->getTimestamp())]),
-            sprintf('There should be coupon with expires date %s', date('d-m-Y', $date->getTimestamp()))
-        );
+        Assert::true($this->indexPage->isSingleResourceOnPage(['expiresAt' => date('d-m-Y', $date->getTimestamp())]));
     }
 
     /**
@@ -283,10 +273,7 @@ final class ManagingPromotionCouponsContext implements Context
      */
     public function thisCouponShouldHaveUsageLimit($limit)
     {
-        Assert::true(
-            $this->indexPage->isSingleResourceOnPage(['usageLimit' => $limit]),
-            sprintf('There should be coupon with %s usage limit', $limit)
-        );
+        Assert::true($this->indexPage->isSingleResourceOnPage(['usageLimit' => $limit]));
     }
 
     /**
@@ -294,10 +281,7 @@ final class ManagingPromotionCouponsContext implements Context
      */
     public function couponShouldHaveUsageLimit(PromotionCouponInterface $promotionCoupon, $used)
     {
-        Assert::true(
-            $this->indexPage->isSingleResourceOnPage(['code' => $promotionCoupon->getCode(), 'used' => $used]),
-            sprintf('Coupon %s should be used % time', $promotionCoupon->getCode(), $used)
-        );
+        Assert::true($this->indexPage->isSingleResourceOnPage(['code' => $promotionCoupon->getCode(), 'used' => $used]));
     }
 
     /**
@@ -305,10 +289,7 @@ final class ManagingPromotionCouponsContext implements Context
      */
     public function thisCouponShouldHavePerCustomerUsageLimit($limit)
     {
-        Assert::true(
-            $this->indexPage->isSingleResourceOnPage(['perCustomerUsageLimit' => $limit]),
-            sprintf('There should be coupon with %s per customer usage limit', $limit)
-        );
+        Assert::true($this->indexPage->isSingleResourceOnPage(['perCustomerUsageLimit' => $limit]));
     }
 
     /**
@@ -316,10 +297,7 @@ final class ManagingPromotionCouponsContext implements Context
      */
     public function theCodeFieldShouldBeDisabled()
     {
-        Assert::true(
-            $this->updatePage->isCodeDisabled(),
-            'Code field should be disabled'
-        );
+        Assert::true($this->updatePage->isCodeDisabled());
     }
 
     /**
@@ -349,10 +327,7 @@ final class ManagingPromotionCouponsContext implements Context
      */
     public function iShouldBeNotifiedThatGenerateAmountIsRequired()
     {
-        Assert::true(
-            $this->generatePage->checkAmountValidation('Please enter amount of coupons to generate.'),
-            'Generate amount violation message should appear on page, but it does not.'
-        );
+        Assert::true($this->generatePage->checkAmountValidation('Please enter amount of coupons to generate.'));
     }
 
     /**
@@ -360,10 +335,7 @@ final class ManagingPromotionCouponsContext implements Context
      */
     public function iShouldBeNotifiedThatCodeLengthIsRequired()
     {
-        Assert::true(
-            $this->generatePage->checkCodeLengthValidation('Please enter coupon code length.'),
-            'Generate code length violation message should appear on page, but it does not.'
-        );
+        Assert::true($this->generatePage->checkCodeLengthValidation('Please enter coupon code length.'));
     }
 
     /**
@@ -373,10 +345,7 @@ final class ManagingPromotionCouponsContext implements Context
     {
         $this->indexPage->open(['promotionId' => $promotion->getId()]);
 
-        Assert::true(
-            $this->indexPage->isSingleResourceOnPage(['code' => $code]),
-            sprintf('There is no coupon with code %s.', $code)
-        );
+        Assert::true($this->indexPage->isSingleResourceOnPage(['code' => $code]));
     }
 
     /**
@@ -395,10 +364,7 @@ final class ManagingPromotionCouponsContext implements Context
      */
     public function couponShouldNotExistInTheRegistry(PromotionCouponInterface $coupon)
     {
-        Assert::false(
-            $this->indexPage->isSingleResourceOnPage(['code' => $coupon->getCode()]),
-            sprintf('Coupon with code %s should not exist.', $coupon->getCode())
-        );
+        Assert::false($this->indexPage->isSingleResourceOnPage(['code' => $coupon->getCode()]));
     }
 
     /**
@@ -425,10 +391,7 @@ final class ManagingPromotionCouponsContext implements Context
      */
     public function couponShouldStillExistInTheRegistry(PromotionCouponInterface $coupon)
     {
-        Assert::true(
-            $this->indexPage->isSingleResourceOnPage(['code' => $coupon->getCode()]),
-            sprintf('Coupon with code %s should exist.', $coupon->getCode())
-        );
+        Assert::true($this->indexPage->isSingleResourceOnPage(['code' => $coupon->getCode()]));
     }
 
     /**
@@ -438,9 +401,6 @@ final class ManagingPromotionCouponsContext implements Context
     {
         $message = sprintf('Invalid coupons code length or coupons amount. It is not possible to generate %d unique coupons with code length equals %d. Possible generate amount is 8.', $amount, $codeLength);
 
-        Assert::true(
-            $this->generatePage->checkGenerationValidation($message),
-            'Generate violation message should appear on page, but it does not.'
-        );
+        Assert::true($this->generatePage->checkGenerationValidation($message));
     }
 }

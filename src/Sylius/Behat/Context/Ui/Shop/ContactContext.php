@@ -133,12 +133,6 @@ final class ContactContext implements Context
      */
     private function assertFieldValidationMessage(PageInterface $page, $element, $expectedMessage)
     {
-        $currentMessage = $page->getValidationMessageFor($element);
-
-        Assert::same(
-            $currentMessage,
-            $expectedMessage,
-            'There is a message: "%s", but should be: "%s".'
-        );
+        Assert::same($page->getValidationMessageFor($element), $expectedMessage);
     }
 }

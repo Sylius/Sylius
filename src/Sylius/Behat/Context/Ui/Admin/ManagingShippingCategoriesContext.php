@@ -75,12 +75,7 @@ class ManagingShippingCategoriesContext implements Context
      */
     public function iShouldSeeShippingCategoriesInTheList($numberOfShippingCategories)
     {
-        $foundRows = $this->indexPage->countItems();
-
-        Assert::true(
-            ((int) $numberOfShippingCategories) === $foundRows,
-            sprintf('%s rows with shipping categories should appear on page, %s rows has been found', $numberOfShippingCategories, $foundRows)
-        );
+        Assert::same($this->indexPage->countItems(), (int) $numberOfShippingCategories);
     }
 
     /**
@@ -137,10 +132,7 @@ class ManagingShippingCategoriesContext implements Context
     {
         $this->iWantToBrowseShippingCategories();
 
-        Assert::true(
-            $this->indexPage->isSingleResourceOnPage(['code' => $shippingCategory->getCode()]),
-            sprintf('The shipping category with code %s has not been found.', $shippingCategory->getCode())
-        );
+        Assert::true($this->indexPage->isSingleResourceOnPage(['code' => $shippingCategory->getCode()]));
     }
 
     /**
@@ -157,10 +149,7 @@ class ManagingShippingCategoriesContext implements Context
      */
     public function thisShippingCategoryShouldNoLongerExistInTheRegistry(ShippingCategoryInterface $shippingCategory)
     {
-        Assert::false(
-            $this->indexPage->isSingleResourceOnPage(['code' => $shippingCategory->getCode()]),
-            sprintf('Shipping category with code %s exists but should not.', $shippingCategory->getCode())
-        );
+        Assert::false($this->indexPage->isSingleResourceOnPage(['code' => $shippingCategory->getCode()]));
     }
 
     /**
@@ -168,10 +157,7 @@ class ManagingShippingCategoriesContext implements Context
      */
     public function shippingCategoryWithNameShouldNotBeAdded($shippingCategoryName)
     {
-        Assert::false(
-            $this->indexPage->isSingleResourceOnPage(['name' => $shippingCategoryName]),
-            sprintf('Shipping category with name %s exists but should not.', $shippingCategoryName)
-        );
+        Assert::false($this->indexPage->isSingleResourceOnPage(['name' => $shippingCategoryName]));
     }
 
     /**
@@ -204,10 +190,7 @@ class ManagingShippingCategoriesContext implements Context
      */
     public function theCodeFieldShouldBeDisabled()
     {
-        Assert::true(
-            $this->updatePage->isCodeDisabled(),
-            'Code should be immutable, but it does not.'
-        );
+        Assert::true($this->updatePage->isCodeDisabled());
     }
 
     /**
@@ -215,10 +198,7 @@ class ManagingShippingCategoriesContext implements Context
      */
     public function thisShippingCategoryNameShouldBe($shippingCategoryName)
     {
-        Assert::true(
-            $this->updatePage->hasResourceValues(['name' => $shippingCategoryName]),
-            sprintf('Shipping category should have name %s, but it does not.', $shippingCategoryName)
-        );
+        Assert::true($this->updatePage->hasResourceValues(['name' => $shippingCategoryName]));
     }
 
     /**
@@ -239,9 +219,6 @@ class ManagingShippingCategoriesContext implements Context
     {
         $this->iWantToBrowseShippingCategories();
 
-        Assert::true(
-            $this->indexPage->isSingleResourceOnPage(['code' => $code]),
-            sprintf('Shipping method with code %s cannot be found.', $code)
-        );
+        Assert::true($this->indexPage->isSingleResourceOnPage(['code' => $code]));
     }
 }

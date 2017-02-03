@@ -60,10 +60,7 @@ final class CartContext implements Context
     {
         $this->expiredCartsRemover->remove();
 
-        Assert::null(
-            $cart->getId(),
-            'This cart should not exist in registry but it does.'
-        );
+        Assert::null($cart->getId());
     }
 
     /**
@@ -73,9 +70,6 @@ final class CartContext implements Context
     {
         $this->expiredCartsRemover->remove();
 
-        Assert::notNull(
-            $cart->getId(),
-            'This cart should be in registry but it is not.'
-        );
+        Assert::notNull($cart->getId());
     }
 }

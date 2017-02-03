@@ -44,8 +44,8 @@ class ShippingCategoryContext implements Context
         $shippingCategories = $this->shippingCategoryRepository->findBy(['name' => $shippingCategoryName]);
 
         Assert::eq(
-            1,
             count($shippingCategories),
+            1,
             sprintf('%d shipping category has been found with name "%s".', count($shippingCategories), $shippingCategoryName)
         );
 

@@ -142,10 +142,7 @@ final class ManagingTaxRateContext implements Context
     {
         $this->indexPage->open();
 
-        Assert::true(
-            $this->indexPage->isSingleResourceOnPage(['name' => $taxRateName]),
-            sprintf('Tax rate with name %s has not been found.', $taxRateName)
-        );
+        Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $taxRateName]));
     }
 
     /**
@@ -162,10 +159,7 @@ final class ManagingTaxRateContext implements Context
      */
     public function thisTaxRateShouldNoLongerExistInTheRegistry(TaxRateInterface $taxRate)
     {
-        Assert::false(
-            $this->indexPage->isSingleResourceOnPage(['code' => $taxRate->getCode()]),
-            sprintf('Tax rate with code %s exists but should not.', $taxRate->getCode())
-        );
+        Assert::false($this->indexPage->isSingleResourceOnPage(['code' => $taxRate->getCode()]));
     }
 
     /**
@@ -182,10 +176,7 @@ final class ManagingTaxRateContext implements Context
      */
     public function theCodeFieldShouldBeDisabled()
     {
-        Assert::true(
-            $this->updatePage->isCodeDisabled(),
-            'Code should be immutable, but it does not.'
-        );
+        Assert::true($this->updatePage->isCodeDisabled());
     }
 
     /**
@@ -230,10 +221,7 @@ final class ManagingTaxRateContext implements Context
     {
         $this->indexPage->open();
 
-        Assert::true(
-            $this->indexPage->isSingleResourceOnPage([$element => $code]),
-            sprintf('Tax rate with %s %s cannot be found.', $element, $code)
-        );
+        Assert::true($this->indexPage->isSingleResourceOnPage([$element => $code]));
     }
 
     /**
@@ -275,10 +263,7 @@ final class ManagingTaxRateContext implements Context
     {
         $this->indexPage->open();
 
-        Assert::false(
-            $this->indexPage->isSingleResourceOnPage([$element => $name]),
-            sprintf('Tax rate with %s %s was created, but it should not.', $element, $name)
-        );
+        Assert::false($this->indexPage->isSingleResourceOnPage([$element => $name]));
     }
 
     /**
@@ -315,12 +300,10 @@ final class ManagingTaxRateContext implements Context
         $this->indexPage->open();
 
         Assert::true(
-            $this->indexPage->isSingleResourceOnPage(
-                [
+            $this->indexPage->isSingleResourceOnPage([
                     'code' => $taxRate->getCode(),
                     $element => $taxRateElement,
-                ]
-            ),
+            ]),
             sprintf('Tax rate %s %s has not been assigned properly.', $element, $taxRateElement)
         );
     }

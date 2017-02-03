@@ -43,8 +43,8 @@ final class PaymentMethodContext implements Context
         $paymentMethods = $this->paymentMethodRepository->findByName($paymentMethodName, 'en_US');
 
         Assert::eq(
-            1,
             count($paymentMethods),
+            1,
             sprintf('%d payment methods has been found with name "%s".', count($paymentMethods), $paymentMethodName)
         );
 

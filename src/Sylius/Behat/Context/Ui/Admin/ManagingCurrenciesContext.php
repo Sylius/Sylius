@@ -86,10 +86,7 @@ final class ManagingCurrenciesContext implements Context
     {
         $this->indexPage->open();
 
-        Assert::true(
-            $this->indexPage->isSingleResourceOnPage(['code' => $currency->getCode()]),
-            sprintf('Currency %s should exist but it does not.', $currency->getCode())
-        );
+        Assert::true($this->indexPage->isSingleResourceOnPage(['code' => $currency->getCode()]));
     }
 
     /**
@@ -130,11 +127,7 @@ final class ManagingCurrenciesContext implements Context
      */
     public function theCodeFiledShouldBeDisabled()
     {
-        Assert::eq(
-            'disabled',
-            $this->updatePage->getCodeDisabledAttribute(),
-            'Code field should be disabled but is not.'
-        );
+        Assert::same($this->updatePage->getCodeDisabledAttribute(), 'disabled');
     }
 
     /**
@@ -152,10 +145,7 @@ final class ManagingCurrenciesContext implements Context
     {
         $this->indexPage->open();
 
-        Assert::true(
-            $this->indexPage->isSingleResourceOnPage([$element => $codeValue]),
-            sprintf('Currency with %s %s cannot be found.', $element, $codeValue)
-        );
+        Assert::true($this->indexPage->isSingleResourceOnPage([$element => $codeValue]));
     }
 
     /**
@@ -171,14 +161,6 @@ final class ManagingCurrenciesContext implements Context
      */
     public function iShouldSeeCurrenciesInTheList($amountOfCurrencies)
     {
-        Assert::same(
-            (int) $amountOfCurrencies,
-            $this->indexPage->countItems(),
-            sprintf(
-                'Amount of currencies should be equal %d, but was %d.',
-                $amountOfCurrencies,
-                $this->indexPage->countItems()
-            )
-        );
+        Assert::same($this->indexPage->countItems(), (int) $amountOfCurrencies);
     }
 }

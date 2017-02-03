@@ -44,8 +44,8 @@ final class ChannelContext implements Context
         $channels = $this->channelRepository->findByName($channelName);
 
         Assert::eq(
-            1,
             count($channels),
+            1,
             sprintf('%d channels has been found with name "%s".', count($channels), $channelName)
         );
 

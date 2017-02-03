@@ -64,10 +64,7 @@ final class ProductContext implements Context
     {
         $this->showPage->tryToOpen(['slug' => $product->getSlug()]);
 
-        Assert::true(
-            $this->showPage->isOpen(['slug' => $product->getSlug()]),
-            'Product show page should be open, but it does not.'
-        );
+        Assert::true($this->showPage->isOpen(['slug' => $product->getSlug()]));
     }
 
     /**
@@ -77,10 +74,7 @@ final class ProductContext implements Context
     {
         $this->showPage->tryToOpen(['slug' => $product->getSlug()]);
 
-        Assert::false(
-            $this->showPage->isOpen(['slug' => $product->getSlug()]),
-            'Product show page should not be open, but it does.'
-        );
+        Assert::false($this->showPage->isOpen(['slug' => $product->getSlug()]));
     }
 
     /**
@@ -97,11 +91,7 @@ final class ProductContext implements Context
      */
     public function iShouldSeeProductName($name)
     {
-        Assert::same(
-            $name,
-            $this->showPage->getName(),
-            'Product should have name %s, but it has %s'
-        );
+        Assert::same($this->showPage->getName(), $name);
     }
 
     /**
@@ -118,10 +108,7 @@ final class ProductContext implements Context
      */
     public function iShouldBeOnProductDetailedPage(ProductInterface $product)
     {
-        Assert::true(
-            $this->showPage->isOpen(['slug' => $product->getSlug()]),
-            sprintf('Product %s show page should be open, but it does not.', $product->getName())
-        );
+        Assert::true($this->showPage->isOpen(['slug' => $product->getSlug()]));
     }
 
     /**
@@ -129,17 +116,7 @@ final class ProductContext implements Context
      */
     public function iShouldSeeTheProductAttributeWithValue($attributeName, $expectedAttribute)
     {
-        $certainAttribute = $this->showPage->getAttributeByName($attributeName);
-        Assert::same(
-            $certainAttribute,
-            $expectedAttribute,
-            sprintf(
-                'Product should have attribute %s with value %s, but has %s.',
-                $attributeName,
-                $expectedAttribute,
-                $certainAttribute
-            )
-        );
+        Assert::same($this->showPage->getAttributeByName($attributeName), $expectedAttribute);
     }
 
     /**
@@ -147,13 +124,7 @@ final class ProductContext implements Context
      */
     public function iShouldSeeAttributes($count)
     {
-        $attributes = $this->getProductAttributes();
-
-        Assert::same(
-            count($attributes),
-            (int) $count,
-            'Product should have %2$d attributes, but has %d instead.'
-        );
+        Assert::same(count($this->getProductAttributes()), (int) $count);
     }
 
     /**
@@ -162,13 +133,8 @@ final class ProductContext implements Context
     public function theFirstAttributeShouldBe($name)
     {
         $attributes = $this->getProductAttributes();
-        $firstAttribute = reset($attributes);
 
-        Assert::same(
-            $firstAttribute->getText(),
-            $name,
-            'Expected the first attribute to be %2$s, found %s instead.'
-        );
+        Assert::same(reset($attributes)->getText(), $name);
     }
 
     /**
@@ -177,13 +143,8 @@ final class ProductContext implements Context
     public function theLastAttributeShouldBe($name)
     {
         $attributes = $this->getProductAttributes();
-        $lastAttribute = end($attributes);
 
-        Assert::same(
-            $lastAttribute->getText(),
-            $name,
-            'Expected the first attribute to be %2$s, found %s instead.'
-        );
+        Assert::same(end($attributes)->getText(), $name);
     }
 
     /**
@@ -247,10 +208,7 @@ final class ProductContext implements Context
      */
     public function iShouldSeeProduct($productName)
     {
-        Assert::true(
-            $this->indexPage->isProductOnList($productName),
-            sprintf('The product %s should appear on page, but it does not.', $productName)
-        );
+        Assert::true($this->indexPage->isProductOnList($productName));
     }
 
     /**
@@ -258,10 +216,7 @@ final class ProductContext implements Context
      */
     public function iShouldNotSeeProduct($productName)
     {
-        Assert::false(
-            $this->indexPage->isProductOnList($productName),
-            sprintf('The product %s should not appear on page, but it does.', $productName)
-        );
+        Assert::false($this->indexPage->isProductOnList($productName));
     }
 
     /**
@@ -269,10 +224,7 @@ final class ProductContext implements Context
      */
     public function iShouldSeeEmptyListOfProducts()
     {
-        Assert::true(
-            $this->indexPage->isEmpty(),
-            'There should appear information about empty list of products, but it does not.'
-        );
+        Assert::true($this->indexPage->isEmpty());
     }
 
     /**
@@ -280,10 +232,7 @@ final class ProductContext implements Context
      */
     public function iShouldSeeItIsOutOfStock()
     {
-        Assert::true(
-            $this->showPage->isOutOfStock(),
-            'Out of stock label should be visible.'
-        );
+        Assert::true($this->showPage->isOutOfStock());
     }
 
     /**
@@ -291,10 +240,7 @@ final class ProductContext implements Context
      */
     public function iShouldBeUnableToAddItToTheCart()
     {
-        Assert::false(
-            $this->showPage->hasAddToCartButton(),
-            'Add to cart button should be absent or disabled.'
-        );
+        Assert::false($this->showPage->hasAddToCartButton());
     }
 
     /**
@@ -303,11 +249,7 @@ final class ProductContext implements Context
      */
     public function iShouldSeeTheProductPrice($price)
     {
-        Assert::same(
-            $price,
-            $this->showPage->getPrice(),
-            'Product should have price %2$s, but it has %s'
-        );
+        Assert::same($this->showPage->getPrice(), $price);
     }
 
     /**
@@ -331,7 +273,7 @@ final class ProductContext implements Context
      */
     public function itsCurrentVariantShouldBeNamed($name)
     {
-        Assert::same($name, $this->showPage->getCurrentVariantName());
+        Assert::same($this->showPage->getCurrentVariantName(), $name);
     }
 
     /**
@@ -339,10 +281,7 @@ final class ProductContext implements Context
      */
     public function iShouldSeeTheProductWithPrice($productName, $productPrice)
     {
-        Assert::true(
-            $this->indexPage->isProductWithPriceOnList($productName, $productPrice),
-            sprintf('The product %s with price %s should appear on page, but it does not.', $productName, $productPrice)
-        );
+        Assert::true($this->indexPage->isProductWithPriceOnList($productName, $productPrice));
     }
 
     /**
@@ -350,10 +289,7 @@ final class ProductContext implements Context
      */
     public function iShouldBeNotifiedThatThisProductDoesNotHaveSufficientStock(ProductInterface $product)
     {
-        Assert::true(
-            $this->showPage->hasProductOutOfStockValidationMessage($product),
-            sprintf('I should see validation message for %s product', $product->getName())
-        );
+        Assert::true($this->showPage->hasProductOutOfStockValidationMessage($product));
     }
 
     /**
@@ -361,10 +297,7 @@ final class ProductContext implements Context
      */
     public function iShouldNotBeNotifiedThatThisProductDoesNotHaveSufficientStock(ProductInterface $product)
     {
-        Assert::false(
-            $this->showPage->hasProductOutOfStockValidationMessage($product),
-            sprintf('I should see validation message for %s product', $product->getName())
-        );
+        Assert::false($this->showPage->hasProductOutOfStockValidationMessage($product));
     }
 
     /**
@@ -372,10 +305,7 @@ final class ProductContext implements Context
      */
     public function iShouldSeeAMainImage()
     {
-        Assert::true(
-            $this->showPage->isMainImageDisplayed(),
-            'The main image should have been displayed.'
-        );
+        Assert::true($this->showPage->isMainImageDisplayed());
     }
 
     /**
@@ -393,13 +323,7 @@ final class ProductContext implements Context
      */
     public function iShouldSeeProductsInTheList($numberOfProducts)
     {
-        $foundRows = $this->indexPage->countProductsItems();
-
-        Assert::same(
-            (int) $numberOfProducts,
-            $foundRows,
-            '%s rows with products should appear on page, %s rows has been found'
-        );
+        Assert::same($this->indexPage->countProductsItems(), (int) $numberOfProducts);
     }
 
     /**
@@ -407,10 +331,7 @@ final class ProductContext implements Context
      */
     public function iShouldSeeProductWithName($name)
     {
-        Assert::true(
-            $this->indexPage->isProductOnPageWithName($name),
-            sprintf('The product with name "%s" has not been found.', $name)
-        );
+        Assert::true($this->indexPage->isProductOnPageWithName($name));
     }
 
     /**
@@ -418,13 +339,7 @@ final class ProductContext implements Context
      */
     public function theFirstProductOnTheListShouldHaveName($name)
     {
-        $actualName = $this->indexPage->getFirstProductNameFromList();
-
-        Assert::same(
-            $actualName,
-            $name,
-            sprintf('Expected first product\'s name to be "%s", but it is "%s".', $name, $actualName)
-        );
+        Assert::same($this->indexPage->getFirstProductNameFromList(), $name);
     }
 
     /**
@@ -432,13 +347,7 @@ final class ProductContext implements Context
      */
     public function theLastProductOnTheListShouldHaveName($name)
     {
-        $actualName = $this->indexPage->getLastProductNameFromList();
-
-        Assert::same(
-            $actualName,
-            $name,
-            sprintf('Expected last product\'s name to be "%s", but it is "%s".', $name, $actualName)
-        );
+        Assert::same($this->indexPage->getLastProductNameFromList(), $name);
     }
 
     /**
@@ -446,11 +355,7 @@ final class ProductContext implements Context
      */
     public function iShouldSeeProductReviews($count)
     {
-        Assert::same(
-            (int) $count,
-            $this->showPage->countReviews(),
-            'Product has %2$s reviews, but should have %s.'
-        );
+        Assert::same($this->showPage->countReviews(), (int) $count);
     }
 
     /**
@@ -471,10 +376,7 @@ final class ProductContext implements Context
      */
     public function iShouldNotSeeReviewTitled($title)
     {
-        Assert::false(
-            $this->showPage->hasReviewTitled($title),
-            sprintf('Product should not have review titled "%s" but it does.', $title)
-        );
+        Assert::false($this->showPage->hasReviewTitled($title));
     }
 
     /**
@@ -490,11 +392,7 @@ final class ProductContext implements Context
      */
     public function iShouldSeeNumberOfProductReviewsInTheList($count)
     {
-        Assert::same(
-            (int) $count,
-            $this->productReviewsIndexPage->countReviews(),
-            'Product has %2$s reviews in the list, but should have %s.'
-        );
+        Assert::same($this->productReviewsIndexPage->countReviews(), (int) $count);
     }
 
     /**
@@ -502,10 +400,7 @@ final class ProductContext implements Context
      */
     public function iShouldNotSeeReviewTitledInTheList($title)
     {
-        Assert::false(
-            $this->productReviewsIndexPage->hasReviewTitled($title),
-            sprintf('Product should not have review titled "%s" but it does.', $title)
-        );
+        Assert::false($this->productReviewsIndexPage->hasReviewTitled($title));
     }
 
     /**
@@ -513,10 +408,7 @@ final class ProductContext implements Context
      */
     public function iShouldBeNotifiedThatThereAreNoReviews()
     {
-        Assert::true(
-            $this->productReviewsIndexPage->hasNoReviewsMessage(),
-            'There should be message about no reviews but there is not.'
-        );
+        Assert::true($this->productReviewsIndexPage->hasNoReviewsMessage());
     }
 
     /**
@@ -524,13 +416,7 @@ final class ProductContext implements Context
      */
     public function iShouldSeeAsItsAverageRating($rating)
     {
-        $averageRating = $this->showPage->getAverageRating();
-
-        Assert::same(
-            (float) $rating,
-            $averageRating,
-            'Product should have average rating %2$s but has %s.'
-        );
+        Assert::same($this->showPage->getAverageRating(), (float) $rating);
     }
 
     /**
@@ -562,10 +448,7 @@ final class ProductContext implements Context
      */
     public function theyShouldHaveOrderLikeAnd(...$productNames)
     {
-        Assert::true(
-            $this->indexPage->hasProductsInOrder($productNames),
-            'The products have wrong order.'
-        );
+        Assert::true($this->indexPage->hasProductsInOrder($productNames));
     }
 
     /**

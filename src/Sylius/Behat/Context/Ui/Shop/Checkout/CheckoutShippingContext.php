@@ -108,9 +108,8 @@ final class CheckoutShippingContext implements Context
     public function iShouldHaveShippingMethodAvailableAsFirstChoice($shippingMethodName)
     {
         $shippingMethods = $this->selectShippingPage->getShippingMethods();
-        $firstShippingMethod = reset($shippingMethods);
 
-        Assert::same($shippingMethodName, $firstShippingMethod);
+        Assert::same(reset($shippingMethods), $shippingMethodName);
     }
 
     /**
@@ -119,9 +118,8 @@ final class CheckoutShippingContext implements Context
     public function iShouldHaveShippingMethodAvailableAsLastChoice($shippingMethodName)
     {
         $shippingMethods = $this->selectShippingPage->getShippingMethods();
-        $lastShippingMethod = end($shippingMethods);
 
-        Assert::same($shippingMethodName, $lastShippingMethod);
+        Assert::same(end($shippingMethods), $shippingMethodName);
     }
 
     /**
@@ -198,6 +196,6 @@ final class CheckoutShippingContext implements Context
      */
     public function iShouldBeCheckingOutAs($email)
     {
-        Assert::same('Checking out as '.$email.'.', $this->selectShippingPage->getPurchaserEmail());
+        Assert::same($this->selectShippingPage->getPurchaserEmail(), 'Checking out as '.$email.'.');
     }
 }

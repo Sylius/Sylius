@@ -91,10 +91,7 @@ final class CartContext implements Context
     {
         $this->summaryPage->open();
 
-        Assert::true(
-             $this->summaryPage->isEmpty(),
-            'There should appear information about empty cart, but it does not.'
-        );
+        Assert::true($this->summaryPage->isEmpty());
     }
 
     /**
@@ -122,11 +119,8 @@ final class CartContext implements Context
     public function myCartTotalShouldBe($total)
     {
         $this->summaryPage->open();
-        Assert::same(
-            $this->summaryPage->getGrandTotal(),
-            $total,
-            'Grand total should be %2$s, but it is %s.'
-        );
+
+        Assert::same($this->summaryPage->getGrandTotal(), $total);
     }
 
     /**
@@ -136,11 +130,7 @@ final class CartContext implements Context
     {
         $this->summaryPage->open();
 
-        Assert::same(
-            $this->summaryPage->getBaseGrandTotal(),
-            $total,
-            'Base grand total should be %2$s, but it is %s.'
-        );
+        Assert::same($this->summaryPage->getBaseGrandTotal(), $total);
     }
 
     /**
@@ -150,11 +140,7 @@ final class CartContext implements Context
     {
         $this->summaryPage->open();
 
-        Assert::same(
-            $this->summaryPage->getTaxTotal(),
-            $taxTotal,
-            'Tax total value should be %2$s, but it is %s.'
-        );
+        Assert::same($this->summaryPage->getTaxTotal(), $taxTotal);
     }
 
     /**
@@ -165,11 +151,7 @@ final class CartContext implements Context
     {
         $this->summaryPage->open();
 
-        Assert::same(
-            $this->summaryPage->getShippingTotal(),
-            $shippingTotal,
-            'Shipping total value should be %2$s, but it is %s.'
-        );
+        Assert::same($this->summaryPage->getShippingTotal(), $shippingTotal);
     }
 
     /**
@@ -179,11 +161,7 @@ final class CartContext implements Context
     {
         $this->summaryPage->open();
 
-        Assert::same(
-            $this->summaryPage->getPromotionTotal(),
-            $promotionsTotal,
-            'Promotion total value should be %2$s, but it is %s.'
-        );
+        Assert::same($this->summaryPage->getPromotionTotal(), $promotionsTotal);
     }
 
     /**
@@ -230,11 +208,7 @@ final class CartContext implements Context
         $itemTotal = $this->summaryPage->getItemTotal($product->getName());
         $regularUnitPrice = $this->summaryPage->getItemUnitRegularPrice($product->getName());
 
-        Assert::same(
-            ($quantity * $regularUnitPrice) - $amount,
-            $this->getPriceFromString($itemTotal),
-            'Price after discount should be %s, but it is %2$s.'
-        );
+        Assert::same($this->getPriceFromString($itemTotal), ($quantity * $regularUnitPrice) - $amount);
     }
 
     /**
@@ -244,10 +218,7 @@ final class CartContext implements Context
     {
         $this->summaryPage->open();
 
-        Assert::false(
-            $this->summaryPage->isItemDiscounted($product->getName()),
-            'The price should not be decreased, but it is.'
-        );
+        Assert::false($this->summaryPage->isItemDiscounted($product->getName()));
     }
 
     /**
@@ -315,10 +286,7 @@ final class CartContext implements Context
     {
         $this->summaryPage->waitForRedirect(3);
 
-        Assert::true(
-            $this->summaryPage->isOpen(),
-            'Cart summary page should be open, but it does not.'
-        );
+        Assert::true($this->summaryPage->isOpen());
     }
 
     /**
@@ -334,10 +302,7 @@ final class CartContext implements Context
      */
     public function thereShouldBeOneItemInMyCart()
     {
-        Assert::true(
-            $this->summaryPage->isSingleItemOnPage(),
-            'There should be only one item on list, but it does not.'
-        );
+        Assert::true($this->summaryPage->isSingleItemOnPage());
     }
 
     /**
@@ -345,10 +310,7 @@ final class CartContext implements Context
      */
     public function thisProductShouldHaveName($itemName)
     {
-        Assert::true(
-            $this->summaryPage->hasItemNamed($itemName),
-            sprintf('The product with name %s should appear on the list, but it does not.', $itemName)
-        );
+        Assert::true($this->summaryPage->hasItemNamed($itemName));
     }
 
     /**
@@ -356,10 +318,7 @@ final class CartContext implements Context
      */
     public function thisItemShouldHaveVariant($variantName)
     {
-        Assert::true(
-            $this->summaryPage->hasItemWithVariantNamed($variantName),
-            sprintf('The product with variant %s should appear on the list, but it does not.', $variantName)
-        );
+        Assert::true($this->summaryPage->hasItemWithVariantNamed($variantName));
     }
 
     /**
@@ -367,10 +326,7 @@ final class CartContext implements Context
      */
     public function thisItemShouldHaveCode($variantCode)
     {
-        Assert::true(
-            $this->summaryPage->hasItemWithCode($variantCode),
-            sprintf('The product with code %s should appear on the list, but it does not.', $variantCode)
-        );
+        Assert::true($this->summaryPage->hasItemWithCode($variantCode));
     }
 
     /**
@@ -389,10 +345,7 @@ final class CartContext implements Context
      */
     public function thisItemShouldHaveOptionValue(ProductInterface $product, $optionName, $optionValue)
     {
-        Assert::true(
-            $this->summaryPage->hasItemWithOptionValue($product->getName(), $optionName, $optionValue),
-            sprintf('Product in cart "%s" should have option %s with value %s, but it has not.', $product->getName(), $optionName, $optionValue)
-        );
+        Assert::true($this->summaryPage->hasItemWithOptionValue($product->getName(), $optionName, $optionValue));
     }
 
     /**
@@ -408,11 +361,7 @@ final class CartContext implements Context
      */
     public function iShouldSeeWithQuantityInMyCart($productName, $quantity)
     {
-        Assert::same(
-            $this->summaryPage->getQuantity($productName),
-            (int) $quantity,
-            'The quantity of product should be %2$s, but it is %s'
-        );
+        Assert::same($this->summaryPage->getQuantity($productName), (int) $quantity);
     }
 
     /**
@@ -420,11 +369,7 @@ final class CartContext implements Context
      */
     public function iShouldSeeProductWithUnitPriceInMyCart($productName, $unitPrice)
     {
-        Assert::same(
-            $this->summaryPage->getItemUnitPrice($productName),
-            $unitPrice,
-            'The unit price of product should be %2$s, but it is %s.'
-        );
+        Assert::same($this->summaryPage->getItemUnitPrice($productName), $unitPrice);
     }
 
     /**
@@ -440,10 +385,7 @@ final class CartContext implements Context
      */
     public function iShouldBeNotifiedThatCouponIsInvalid()
     {
-        Assert::same(
-            $this->summaryPage->getPromotionCouponValidationMessage(),
-            'Coupon code is invalid.'
-        );
+        Assert::same($this->summaryPage->getPromotionCouponValidationMessage(), 'Coupon code is invalid.');
     }
 
     /**
@@ -453,10 +395,7 @@ final class CartContext implements Context
     {
         $this->summaryPage->open();
 
-        Assert::same(
-            $this->summaryPage->getItemTotal($productName),
-            $productPrice
-        );
+        Assert::same($this->summaryPage->getItemTotal($productName), $productPrice);
     }
 
     /**
@@ -464,10 +403,7 @@ final class CartContext implements Context
      */
     public function iShouldBeNotifiedThatThisProductDoesNotHaveSufficientStock(ProductInterface $product)
     {
-        Assert::true(
-            $this->summaryPage->hasProductOutOfStockValidationMessage($product),
-            sprintf('I should see validation message for %s product', $product->getName())
-        );
+        Assert::true($this->summaryPage->hasProductOutOfStockValidationMessage($product));
     }
 
     /**
@@ -475,10 +411,7 @@ final class CartContext implements Context
      */
     public function iShouldNotBeNotifiedThatThisProductCannotBeUpdated(ProductInterface $product)
     {
-        Assert::false(
-            $this->summaryPage->hasProductOutOfStockValidationMessage($product),
-            sprintf('I should see validation message for %s product', $product->getName())
-        );
+        Assert::false($this->summaryPage->hasProductOutOfStockValidationMessage($product));
     }
 
     /**
@@ -488,11 +421,7 @@ final class CartContext implements Context
     {
         $this->summaryPage->open();
 
-        Assert::same(
-            $total,
-            $this->summaryPage->getCartTotal(),
-            'Cart should have %s total, but it has %2$s.'
-        );
+        Assert::same($this->summaryPage->getCartTotal(), $total);
     }
 
     /**

@@ -53,7 +53,7 @@ final class LocaleContext implements Context
     {
         $this->homePage->open();
 
-        Assert::same($localeName, $this->homePage->getActiveLocale());
+        Assert::same($this->homePage->getActiveLocale(), $localeName);
     }
 
     /**
