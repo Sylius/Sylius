@@ -22,7 +22,6 @@ Feature: Viewing product's associations
 
     @ui
     Scenario: Viewing a detailed page with product's associations after locale change
-        When I switch to the "Polish (Poland)" locale
-        And I view product "LG G3"
+        When I view product "LG G3" in the "Polish (Poland)" locale
         Then I should see the product association "Akcesoria" with products "LG headphones" and "LG earphones"
         And I should also see the product association "Alternatywy" with products "LG G4" and "LG G5"

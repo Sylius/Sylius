@@ -3,7 +3,7 @@
 {% endblock %}
 
 {% block body %}
-    {% set url = order.channel.hostname is not null ? 'http://' ~ order.channel.hostname ~ path('sylius_shop_order_show', { 'tokenValue': order.tokenValue}) : url('sylius_shop_order_show', { 'tokenValue': order.tokenValue}) %}
+    {% set url = order.channel.hostname is not null ? 'http://' ~ order.channel.hostname ~ path('sylius_shop_order_show', {'tokenValue': order.tokenValue, '_locale': order.localeCode}) : url('sylius_shop_order_show', {'tokenValue': order.tokenValue, '_locale': order.localeCode}) %}
     {% autoescape %}
         Your order no. {{ order.number }} has been successfully placed.
         <br/>

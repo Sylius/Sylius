@@ -15,7 +15,6 @@ Feature: Viewing product's attributes in different locales
 
     @ui
     Scenario: Viewing a detailed page with product's text attribute after local change
-        When I switch to the "Polish (Poland)" locale
-        When I view product "T-shirt banana"
+        When I view product "T-shirt banana" in the "Polish (Poland)" locale
         Then I should see the product attribute "T-shirt material" with value "Skórka banana"
-        Then I should also see the product attribute "T-shirt details" with value "Banana is a very good material."
+        And I should also see the product attribute "T-shirt details" with value "Banana is a very good material."

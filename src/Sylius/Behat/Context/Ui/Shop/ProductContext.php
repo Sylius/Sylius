@@ -78,12 +78,14 @@ final class ProductContext implements Context
     }
 
     /**
-     * @When /^I check (this product)'s details/
+     * @When /^I check (this product)'s details$/
+     * @When /^I check (this product)'s details in the ("([^"]+)" locale)$/
      * @When I view product :product
+     * @When I view product :product in the :localeCode locale
      */
-    public function iOpenProductPage(ProductInterface $product)
+    public function iOpenProductPage(ProductInterface $product, $localeCode = 'en_US')
     {
-        $this->showPage->open(['slug' => $product->getSlug()]);
+        $this->showPage->open(['slug' => $product->getTranslation($localeCode)->getSlug(), '_locale' => $localeCode]);
     }
 
     /**

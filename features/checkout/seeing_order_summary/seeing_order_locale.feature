@@ -15,16 +15,13 @@ Feature: Seeing order locale on order summary page
     @ui
     Scenario: Seeing order locale on the order summary page
         Given I have product "Stark T-Shirt" in the cart
-        When I specified the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And I proceed with "Free" shipping method and "Offline" payment
+        When I proceed through checkout process
         Then I should be on the checkout summary step
         And my order's locale should be "English (United States)"
 
     @ui
     Scenario: Seeing order locale on the order summary page after change channel locale
         Given I have product "Stark T-Shirt" in the cart
-        When I change my locale to "French (France)"
-        And I specified the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And I proceed with "Free" shipping method and "Offline" payment
+        When I proceed through checkout process in the "French (France)" locale
         Then I should be on the checkout summary step
         And my order's locale should be "français (France)"

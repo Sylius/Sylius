@@ -10,7 +10,7 @@
                     {{ order.currencyCode }}
                 </div>
                 <div class="item" id="sylius-order-locale-name">
-                    {{ flags.fromLocaleCode(order.localeCode) }}{{ order.localeCode|locale }}
+                    {{ flags.fromLocaleCode(sylius.localeCode) }}{{ sylius.localeCode|locale }}
                 </div>
             </div>
         </div>

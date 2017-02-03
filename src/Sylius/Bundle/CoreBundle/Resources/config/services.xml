@@ -141,6 +141,10 @@
             <argument type="service" id="sm.factory" />
         </service>
 
+        <service id="sylius.order_locale_assigner" class="Sylius\Component\Core\Order\OrderLocaleAssigner">
+            <argument type="service" id="sylius.context.locale" />
+        </service>
+
         <service id="sylius.customer_statistics_provider" class="Sylius\Component\Core\Customer\Statistics\CustomerStatisticsProvider">
             <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="sylius.repository.channel" />
