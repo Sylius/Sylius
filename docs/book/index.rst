@@ -81,11 +81,12 @@ Associations, Reviews, Attributes, Taxons etc.
 
 .. include:: /book/products/map.rst.inc
 
-Orders
-------
+Carts & Orders
+--------------
 
 In this chapter you will learn everything you need to know about orders in Sylius.
 This concept comes together with a few additional ones, like promotions, payments, shipments or checkout in general.
+
 You should also have a look here if you are looking for Cart, which is in Sylius an Order in the ``cart`` state.
 
 .. toctree::
