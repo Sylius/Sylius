@@ -17,7 +17,7 @@
                      data-postcode="{{ address.postcode }}"
                      data-phone-number="{{ address.phoneNumber }}"
                 >
-                    <strong>{{ address.firstName }} {{ address.lastName }}</strong>, {{ address.street }}, {{ address.city }} {{ address.postcode }}
+                    <strong>{{ address.firstName }} {{ address.lastName }}</strong>, {{ address.street }}, {{ address.city }} {{ address.postcode }}, {{ address.countryCode|sylius_country_name }}
                 </div>
             {% endfor %}
         </div>
