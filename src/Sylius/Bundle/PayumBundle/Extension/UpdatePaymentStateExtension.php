@@ -55,8 +55,16 @@ final class UpdatePaymentStateExtension implements ExtensionInterface
      */
     public function onPostExecute(Context $context)
     {
-        if ($context->getPrevious()) {
+        $previousStack = $context->getPrevious();
+        $stackSize = count($previousStack);
+        
+        if ($stackSize > 1) {
             return;
+        } elseif ($stackSize === 1) {
+            $previousActionClassName = get_class($previousStack[0]->getAction());
+            if (false === stripos($previousActionClassName, 'NotifyNullAction')) {
+                return;
+            }
         }
 
         /** @var Generic $request */
