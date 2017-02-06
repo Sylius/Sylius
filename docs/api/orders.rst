@@ -3,18 +3,18 @@ Orders API
 
 Sylius orders API endpoint is `/api/v1/orders`.
 
-If you request an order, you will receive an object with the following fields:
+If you request an order via API, you will receive an object with the following fields:
 
 +-----------------------+--------------------------------------------------------------------+
 | Field                 | Description                                                        |
 +=======================+====================================================================+
-| id                    | Id of an order                                                     |
+| id                    | Id of the order                                                    |
 +-----------------------+--------------------------------------------------------------------+
-| items                 | List of items related to order                                     |
+| items                 | List of items related to the order                                 |
 +-----------------------+--------------------------------------------------------------------+
 | items_total           | Sum of all items prices                                            |
 +-----------------------+--------------------------------------------------------------------+
-| adjustments           | List of adjustments related to order                               |
+| adjustments           | List of adjustments related to the order                           |
 +-----------------------+--------------------------------------------------------------------+
 | adjustments_total     | Sum of all order adjustments                                       |
 +-----------------------+--------------------------------------------------------------------+
@@ -24,15 +24,15 @@ If you request an order, you will receive an object with the following fields:
 +-----------------------+--------------------------------------------------------------------+
 | channel               | :doc:`Default channel serialization </api/channels>`               |
 +-----------------------+--------------------------------------------------------------------+
-| currency_code         | Currency of a order                                                |
+| currency_code         | Currency of the order                                              |
 +-----------------------+--------------------------------------------------------------------+
-| checkout_state        | :doc:`State of checkout process </components/Order/state_machine>` |
+| checkout_state        | :doc:`State of the checkout process </book/orders/checkout>`       |
 +-----------------------+--------------------------------------------------------------------+
-| state                 | :doc:`One of available order states </book/orders/checkout>`       |
+| state                 | :doc:`State of the order </components/Order/state_machine>`        |
 +-----------------------+--------------------------------------------------------------------+
 | checkout_completed_at | Date when the checkout has been completed                          |
 +-----------------------+--------------------------------------------------------------------+
-| number                | Serial number of an order                                          |
+| number                | Serial number of the order                                         |
 +-----------------------+--------------------------------------------------------------------+
 | shipping_address      | Detailed address serialization                                     |
 +-----------------------+--------------------------------------------------------------------+
@@ -74,7 +74,8 @@ Example
 
 .. note::
 
-    The value *21* was taken from previous responses, where we managed a cart. Your value can be different. If you need more information about cart api please, check :doc:`this doc </api/carts>`
+    The value *21* was taken from previous responses, where we managed the cart.
+    Your value can be different. If you need more information about Cart API please, check :doc:`this article </api/carts>`.
 
 Example Response
 ~~~~~~~~~~~~~~~~

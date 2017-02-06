@@ -5,7 +5,9 @@ These endpoints will allow you to easily manage cart and cart items. Base URI is
 
 .. note::
 
-    If you still don't know the difference between Cart and Order concepts in Sylius, please read :doc:`this article </book/orders/orders>` carefully.
+    Remember that a **Cart** in Sylius is an **Order** in the state ``cart``.
+
+    If you don't understand the difference between Cart and Order concepts in Sylius yet, please read :doc:`this article </book/orders/orders>` carefully.
 
 Cart structure
 --------------
@@ -13,20 +15,20 @@ Cart structure
 Cart API response structure
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If you request a cart, you will receive an object with the following fields:
+If you request a cart via API, you will receive an object with the following fields:
 
 +-------------------+-------------------------------------------------------------------+
 | Field             | Description                                                       |
 +===================+===================================================================+
-| id                | Id of cart                                                        |
+| id                | Id of the cart                                                    |
 +-------------------+-------------------------------------------------------------------+
-| items             | List of items related to cart                                     |
+| items             | List of items in the cart                                         |
 +-------------------+-------------------------------------------------------------------+
 | items_total       | Sum of all items prices                                           |
 +-------------------+-------------------------------------------------------------------+
-| adjustments       | List of adjustments related to cart                               |
+| adjustments       | List of adjustments related to the cart                           |
 +-------------------+-------------------------------------------------------------------+
-| adjustments_total | Sum of all order adjustments                                      |
+| adjustments_total | Sum of all order adjustments values                               |
 +-------------------+-------------------------------------------------------------------+
 | total             | Sum of items total and adjustments total                          |
 +-------------------+-------------------------------------------------------------------+
@@ -36,71 +38,72 @@ If you request a cart, you will receive an object with the following fields:
 +-------------------+-------------------------------------------------------------------+
 | currency_code     | Currency of the cart                                              |
 +-------------------+-------------------------------------------------------------------+
-| checkout_state    | State of checkout process                                         |
+| checkout_state    | State of the checkout process of the cart                         |
 +-------------------+-------------------------------------------------------------------+
 
 CartItem API response structure
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Each cart item will be build as follows:
+Each CartItem in an API response will be build as follows:
 
-+-------------------+------------------------------------------+
-| Field             | Description                              |
-+===================+==========================================+
-| id                | Id of cart item                          |
-+-------------------+------------------------------------------+
-| quantity          | Quantity of item units                   |
-+-------------------+------------------------------------------+
-| unit_price        | Price of each item unit                  |
-+-------------------+------------------------------------------+
-| total             | Sum of units total and adjustments total |
-+-------------------+------------------------------------------+
-| units             | List of units related to cart            |
-+-------------------+------------------------------------------+
-| units_total       | Sum of all units prices                  |
-+-------------------+------------------------------------------+
-| adjustments       | List of adjustments related to item      |
-+-------------------+------------------------------------------+
-| adjustments_total | Sum of all item adjustments              |
-+-------------------+------------------------------------------+
-| variant           | Default variant serialization            |
-+-------------------+------------------------------------------+
++-------------------+------------------------------------------------------------+
+| Field             | Description                                                |
++===================+============================================================+
+| id                | Id of the cart item                                        |
++-------------------+------------------------------------------------------------+
+| quantity          | Quantity of item units                                     |
++-------------------+------------------------------------------------------------+
+| unit_price        | Price of each item unit                                    |
++-------------------+------------------------------------------------------------+
+| total             | Sum of units total and adjustments total of that cart item |
++-------------------+------------------------------------------------------------+
+| units             | A collection of units related to the cart item             |
++-------------------+------------------------------------------------------------+
+| units_total       | Sum of all units prices of the cart item                   |
++-------------------+------------------------------------------------------------+
+| adjustments       | List of adjustments related to the cart item               |
++-------------------+------------------------------------------------------------+
+| adjustments_total | Sum of all item adjustments related to that cart item      |
++-------------------+------------------------------------------------------------+
+| variant           | Default variant serialization                              |
++-------------------+------------------------------------------------------------+
 
 CartItemUnit API response structure
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Each cart item unit will be build as follows:
+Each CartItemUnit API response will be build as follows:
 
-+-------------------+-------------------------------------+
-| Field             | Description                         |
-+===================+=====================================+
-| id                | Id of cart item unit                |
-+-------------------+-------------------------------------+
-| adjustments       | List of adjustments related to unit |
-+-------------------+-------------------------------------+
-| adjustments_total | Sum of all units adjustments        |
-+-------------------+-------------------------------------+
++-------------------+------------------------------------------+
+| Field             | Description                              |
++===================+==========================================+
+| id                | Id of the cart item unit                 |
++-------------------+------------------------------------------+
+| adjustments       | List of adjustments related to the unit  |
++-------------------+------------------------------------------+
+| adjustments_total | Sum of all units adjustments of the unit |
++-------------------+------------------------------------------+
 
 Adjustment API response structure
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-And each adjustment will be build as follows:
+And each Adjustment will be build as follows:
 
-+--------+---------------------------------------------------------+
-| Field  | Description                                             |
-+========+=========================================================+
-| id     | Id of cart item unit                                    |
-+--------+---------------------------------------------------------+
-| type   | Type of an adjustment (E.g. *order_promotion* or *tax*) |
-+--------+---------------------------------------------------------+
-| label  | Label of adjustment                                     |
-+--------+---------------------------------------------------------+
-| amount | Amount of adjustment                                    |
-+--------+---------------------------------------------------------+
++--------+----------------------------------------------------------+
+| Field  | Description                                              |
++========+==========================================================+
+| id     | Id of the adjustment                                     |
++--------+----------------------------------------------------------+
+| type   | Type of the adjustment (E.g. *order_promotion* or *tax*) |
++--------+----------------------------------------------------------+
+| label  | Label of the adjustment                                  |
++--------+----------------------------------------------------------+
+| amount | Amount of the adjustment (value)                         |
++--------+----------------------------------------------------------+
 
 .. note::
 
-    If it is still confusing to you, learn more about :doc:`Carts (Orders) </components/Order/models>` and :doc:`Adjustments </book/orders/adjustments>`.
+    If it is confusing to you, learn more about :doc:`Carts (Orders) in the component docs </components/Order/models>`
+    and :doc:`Adjustments concept </book/orders/adjustments>`.
 
 Creating a Cart
 ---------------
@@ -114,29 +117,27 @@ Definition
 
     POST /api/v1/carts/
 
-+--------------------+----------------+----------------------------------------------------+
-| Parameter          | Parameter type | Description                                        |
-+====================+================+====================================================+
-| Authorization      | header         | Token received during authentication               |
-+--------------------+----------------+----------------------------------------------------+
-| customer           | request        | Email of related customer                          |
-+--------------------+----------------+----------------------------------------------------+
-| channel            | request        | Code of related channel                            |
-+--------------------+----------------+----------------------------------------------------+
-| locale_code        | request        | Code of locale in which the cart should be created |
-+--------------------+----------------+----------------------------------------------------+
-| criteria[customer] | query          | Code of locale in which the cart should be created |
-+--------------------+----------------+----------------------------------------------------+
++--------------------+----------------+----------------------------------------------------------+
+| Parameter          | Parameter type | Description                                              |
++====================+================+==========================================================+
+| Authorization      | header         | Token received during authentication                     |
++--------------------+----------------+----------------------------------------------------------+
+| customer           | request        | Email of the related customer                            |
++--------------------+----------------+----------------------------------------------------------+
+| channel            | request        | Code of the related channel                              |
++--------------------+----------------+----------------------------------------------------------+
+| locale_code        | request        | Code of the locale in which the cart should be created   |
++--------------------+----------------+----------------------------------------------------------+
 
 Example
 ^^^^^^^
 
-To create a new cart for the ``shop@example.com`` user in the ``US_WEB`` channel in the ``en_US`` locale use the below method.
+To create a new cart for the ``shop@example.com`` user in the ``US_WEB`` channel with the ``en_US`` locale use the below method:
 
 .. warning::
 
     Remember, that it doesn't replicate the environment of shop usage. It is more like an admin part of cart creation, which will allow you to manage
-    cart from admin perspective. ShopAPI is still an experimental concept.
+    cart from the admin perspective. ShopAPI is still an experimental concept.
 
 .. code-block:: bash
 
@@ -152,8 +153,8 @@ To create a new cart for the ``shop@example.com`` user in the ``US_WEB`` channel
             }
         '
 
-Example Response
-^^^^^^^^^^^^^^^^
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
@@ -197,11 +198,11 @@ Example Response
 
 .. note::
 
-    A currency code will be added automatically based on a channel settings. :doc:`Read more about channels </book/configuration/channels>`
+    A currency code will be added automatically based on the channel settings. Read more about channels :doc:`here </book/configuration/channels>`.
 
 .. warning::
 
-    If you try to create a resource without name or code, you will receive a 400 Bad Request error.
+    If you try to create a resource without name or code, you will receive a ``400 Bad Request`` error, that will contain validation errors.
 
 Example
 ^^^^^^^
@@ -213,8 +214,8 @@ Example
         -H "Accept: application/json" \
         -X POST
 
-Example Response
-^^^^^^^^^^^^^^^^
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
@@ -249,7 +250,7 @@ Example Response
 Collection of Carts
 -------------------
 
-To retrieve the paginated list of carts you will need to call the ``/api/v1/carts/`` endpoint with ``GET`` method.
+To retrieve a paginated list of carts you will need to call the ``/api/v1/carts/`` endpoint with ``GET`` method.
 
 Definition
 ^^^^^^^^^^
@@ -271,7 +272,7 @@ Definition
 Example
 ^^^^^^^
 
-To see the first page of all carts use the method below.
+To see the first page of the paginated carts collection use the below method:
 
 .. code-block:: bash
 
@@ -279,8 +280,8 @@ To see the first page of all carts use the method below.
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
-Example Response
-^^^^^^^^^^^^^^^^
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
@@ -346,7 +347,7 @@ Example Response
 Getting a Single Cart
 ---------------------
 
-To retrieve the details of the cart you will need to call the ``/api/v1/carts/{id}`` endpoint with ``GET`` method.
+To retrieve details of the cart you will need to call the ``/api/v1/carts/{id}`` endpoint with ``GET`` method.
 
 Definition
 ^^^^^^^^^^
@@ -360,13 +361,13 @@ Definition
 +===============+================+======================================+
 | Authorization | header         | Token received during authentication |
 +---------------+----------------+--------------------------------------+
-| id            | url attribute  | Id of requested resource             |
+| id            | url attribute  | Id of the requested resource         |
 +---------------+----------------+--------------------------------------+
 
 Example
 ^^^^^^^
 
-To see the details of the cart with id 21 use the method below.
+To see details of the cart with ``id = 21`` use the below method:
 
 .. code-block:: bash
 
@@ -376,10 +377,11 @@ To see the details of the cart with id 21 use the method below.
 
 .. note::
 
-    The value *21* was taken from create response. Your value can be different. Check list of all carts if you are not sure which id should be used.
+    The *21* value was taken from the previous create response. Your value can be different.
+    Check in the list of all carts if you are not sure which id should be used.
 
-Example Response
-^^^^^^^^^^^^^^^^
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
@@ -424,7 +426,7 @@ Example Response
 Deleting a Cart
 ---------------
 
-To delete a cart you will need to call the ``/api/v1/carts/{id}`` endpoint with ``DELETE`` method.
+To delete a cart you will need to call the ``/api/v1/carts/{id}`` endpoint with the ``DELETE`` method.
 
 Definition
 ^^^^^^^^^^
@@ -433,18 +435,18 @@ Definition
 
     DELETE /api/v1/carts/{id}
 
-+---------------+----------------+-------------------------------------------+
-| Parameter     | Parameter type | Description                               |
-+===============+================+===========================================+
-| Authorization | header         | Token received during authentication      |
-+---------------+----------------+-------------------------------------------+
-| id            | url attribute  | Id of requested resource                  |
-+---------------+----------------+-------------------------------------------+
++---------------+----------------+--------------------------------------+
+| Parameter     | Parameter type | Description                          |
++===============+================+======================================+
+| Authorization | header         | Token received during authentication |
++---------------+----------------+--------------------------------------+
+| id            | url attribute  | Id of the requested resource         |
++---------------+----------------+--------------------------------------+
 
 Example
 ^^^^^^^
 
-To delete the cart with id 21 use the method below.
+To delete the cart with ``id = 21`` use the below method:
 
 .. code-block:: bash
 
@@ -455,10 +457,10 @@ To delete the cart with id 21 use the method below.
 
 .. note::
 
-    Remember the *21* value from the previous example. Here we are deleting a previously fetch cart, so it is the same id.
+    Remember the *21* value from the previous example. Here we are deleting a previously fetched cart, so it is the same id.
 
-Example Response
-^^^^^^^^^^^^^^^^
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
@@ -467,7 +469,7 @@ Example Response
 Creating a Cart Item
 --------------------
 
-To add a new cart item to the existing cart you will need to call the ``/api/v1/carts/{cartId}/items/`` endpoint with ``POST`` method.
+To add a new cart item to an existing cart you will need to call the ``/api/v1/carts/{cartId}/items/`` endpoint with ``POST`` method.
 
 Definition
 ^^^^^^^^^^
@@ -476,22 +478,23 @@ Definition
 
     POST /api/v1/carts/{cartId}/items/
 
-+---------------+----------------+---------------------------------------------------------------------+
-| Parameter     | Parameter type | Description                                                         |
-+===============+================+=====================================================================+
-| Authorization | header         | Token received during authentication                                |
-+---------------+----------------+---------------------------------------------------------------------+
-| cartId        | url attribute  | Id of requested cart                                                |
-+---------------+----------------+---------------------------------------------------------------------+
-| variant       | request        | Code of item you want to add to cart                                |
-+---------------+----------------+---------------------------------------------------------------------+
-| quantity      | request        | Amount of variants you want to add to cart (cannot be lower than 1) |
-+---------------+----------------+---------------------------------------------------------------------+
++---------------+----------------+----------------------------------------------------------------+
+| Parameter     | Parameter type | Description                                                    |
++===============+================+================================================================+
+| Authorization | header         | Token received during authentication                           |
++---------------+----------------+----------------------------------------------------------------+
+| cartId        | url attribute  | Id of the requested cart                                       |
++---------------+----------------+----------------------------------------------------------------+
+| variant       | request        | Code of the item you want to add to the cart                   |
++---------------+----------------+----------------------------------------------------------------+
+| quantity      | request        | Amount of variants you want to add to the cart (cannot be < 1) |
++---------------+----------------+----------------------------------------------------------------+
 
 Example
 ^^^^^^^
 
-To add a new item with one variant with code MEDIUM_MUG_CUP the cart with id 21(assume, that we didn't remove it in a previous example) use the method below.
+To add a new item of a variant with code ``MEDIUM_MUG_CUP``
+to the cart with id 21(assuming, that we didn't remove it in the previous example) use the below method:
 
 .. code-block:: bash
 
@@ -506,8 +509,8 @@ To add a new item with one variant with code MEDIUM_MUG_CUP the cart with id 21(
             }
         '
 
-Example Response
-^^^^^^^^^^^^^^^^
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
@@ -589,12 +592,13 @@ Example Response
 
 .. tip::
 
-    In Sylius the prices are stored as an integers. So in order to present a proper amount to the end user, you should divide price by 100 by default
+    In Sylius the prices are stored as an integers (``1059`` represents ``10.59$``).
+    So in order to present a proper amount to the end user, you should divide price by 100 by default.
 
 Updating a Cart Item
 --------------------
 
-To change the quantity of cart item you will need to call the ``/api/v1/carts/{cartId}/items/{cartItemId}`` endpoint with ``PUT`` method.
+To change the quantity of a cart item you will need to call the ``/api/v1/carts/{cartId}/items/{cartItemId}`` endpoint with the ``PUT`` method.
 
 Definition
 ^^^^^^^^^^
@@ -603,24 +607,25 @@ Definition
 
     PUT /api/v1/carts/{cartId}/items/{id}
 
-+---------------+----------------+---------------------------------------------------------------------+
-| Parameter     | Parameter type | Description                                                         |
-+===============+================+=====================================================================+
-| Authorization | header         | Token received during authentication                                |
-+---------------+----------------+---------------------------------------------------------------------+
-| cartId        | url attribute  | Id of requested cart                                                |
-+---------------+----------------+---------------------------------------------------------------------+
-| cartItemId    | url attribute  | Id of requested cart item                                           |
-+---------------+----------------+---------------------------------------------------------------------+
-| quantity      | request        | Amount of variants you want to add to cart (cannot be lower than 1) |
-+---------------+----------------+---------------------------------------------------------------------+
++---------------+----------------+-------------------------------------------------------------+
+| Parameter     | Parameter type | Description                                                 |
++===============+================+=============================================================+
+| Authorization | header         | Token received during authentication                        |
++---------------+----------------+-------------------------------------------------------------+
+| cartId        | url attribute  | Id of the requested cart                                    |
++---------------+----------------+-------------------------------------------------------------+
+| cartItemId    | url attribute  | Id of the requested cart item                               |
++---------------+----------------+-------------------------------------------------------------+
+| quantity      | request        | Amount of items you want to add to the cart (cannot be < 1) |
++---------------+----------------+-------------------------------------------------------------+
 
 Example
 ^^^^^^^
 
-.. code-block:: bash
+To change the quantity of the cart item with ``id = 58`` in the cart of ``id = 21`` to 3 use the below method:
 
-To change a quantity to 3 of the cart item with id 58 of cart 21 use the method below.
+
+.. code-block:: bash
 
     $ curl http://demo.sylius.org/api/v1/carts/21/items/58 \
         -H "Authorization: Bearer SampleToken" \
@@ -628,22 +633,23 @@ To change a quantity to 3 of the cart item with id 58 of cart 21 use the method 
         -X PUT \
         --data '{"quantity": 3}'
 
-.. note::
-
-    If you are not sure where did the value 58 came from, check the previous response, and look for cart item id
-
 .. tip::
 
-    This action can be send with *PATCH* method as well
+    If you are not sure where does the value **58** come from, check the previous response, and look for the cart item id.
 
-Example Response
-^^^^^^^^^^^^^^^^
+
+.. note::
+
+    This action can be sent with *PATCH* method as well.
+
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
     STATUS: 204 No Content
 
-Now we can check what does the cart look like after changing quality
+Now we can check how does the cart look like after changing the quantity of a cart item.
 
 .. code-block:: bash
 
@@ -651,8 +657,8 @@ Now we can check what does the cart look like after changing quality
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
-Example Response
-^^^^^^^^^^^^^^^^
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
@@ -765,19 +771,19 @@ Example Response
 
 .. tip::
 
-    In this response you can see that promotion and shipping have been taken into account to calculate the appropriate price
+    In this response you can see that promotion and shipping have been taken into account to calculate the appropriate price.
 
 Deleting a Cart Item
 --------------------
 
-To delete the cart item you will need to call the ``/api/v1/carts/{cartId}/items/{cartItemId}`` endpoint with ``DELETE`` method.
+To delete a cart item from a cart you will need to call the ``/api/v1/carts/{cartId}/items/{cartItemId}`` endpoint with the ``DELETE`` method.
 
 Definition
 ^^^^^^^^^^
 
-.. code-block:: text
+To delete the cart item with ``id = 58`` from the cart with ``id = 21`` use the below method:
 
-To delete the cart item with id 58 of cart 21 use the method below.
+.. code-block:: text
 
     DELETE /api/v1/carts/{cartId}/items/{id}
 
@@ -786,9 +792,9 @@ To delete the cart item with id 58 of cart 21 use the method below.
 +===============+================+======================================+
 | Authorization | header         | Token received during authentication |
 +---------------+----------------+--------------------------------------+
-| cartId        | url attribute  | Id of requested cart                 |
+| cartId        | url attribute  | Id of the requested cart             |
 +---------------+----------------+--------------------------------------+
-| cartItemId    | url attribute  | Id of requested cart item            |
+| cartItemId    | url attribute  | Id of the requested cart item        |
 +---------------+----------------+--------------------------------------+
 
 Example
@@ -801,8 +807,8 @@ Example
         -H "Accept: application/json" \
         -X DELETE
 
-Example Response
-^^^^^^^^^^^^^^^^
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
