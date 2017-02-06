@@ -40,6 +40,25 @@ final class ORMOrderInventoryOperatorSpec extends ObjectBehavior
         $this->shouldImplement(OrderInventoryOperatorInterface::class);
     }
 
+    function it_locks_tracked_variants_during_cancelling(
+        OrderInventoryOperatorInterface $decoratedOperator,
+        EntityManagerInterface $productVariantManager,
+        OrderInterface $order,
+        OrderItemInterface $orderItem,
+        ProductVariantInterface $variant
+    ) {
+        $order->getItems()->willReturn([$orderItem]);
+        $orderItem->getVariant()->willReturn($variant);
+        $variant->isTracked()->willReturn(true);
+        $variant->getVersion()->willReturn('7');
+
+        $productVariantManager->lock($variant, LockMode::OPTIMISTIC, '7')->shouldBeCalled();
+
+        $decoratedOperator->cancel($order)->shouldBeCalled();
+
+        $this->cancel($order);
+    }
+
     function it_locks_tracked_variants_during_holding(
         OrderInventoryOperatorInterface $decoratedOperator,
         EntityManagerInterface $productVariantManager,
@@ -57,5 +76,24 @@ final class ORMOrderInventoryOperatorSpec extends ObjectBehavior
         $decoratedOperator->hold($order)->shouldBeCalled();
 
         $this->hold($order);
+    }
+
+    function it_locks_tracked_variants_during_selling(
+        OrderInventoryOperatorInterface $decoratedOperator,
+        EntityManagerInterface $productVariantManager,
+        OrderInterface $order,
+        OrderItemInterface $orderItem,
+        ProductVariantInterface $variant
+    ) {
+        $order->getItems()->willReturn([$orderItem]);
+        $orderItem->getVariant()->willReturn($variant);
+        $variant->isTracked()->willReturn(true);
+        $variant->getVersion()->willReturn('7');
+
+        $productVariantManager->lock($variant, LockMode::OPTIMISTIC, '7')->shouldBeCalled();
+
+        $decoratedOperator->sell($order)->shouldBeCalled();
+
+        $this->sell($order);
     }
 }

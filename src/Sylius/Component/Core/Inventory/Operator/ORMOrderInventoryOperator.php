@@ -46,9 +46,13 @@ final class ORMOrderInventoryOperator implements OrderInventoryOperatorInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @throws OptimisticLockException
      */
     public function cancel(OrderInterface $order)
     {
+        $this->lockProductVariants($order);
+
         $this->decoratedOperator->cancel($order);
     }
 
@@ -66,9 +70,13 @@ final class ORMOrderInventoryOperator implements OrderInventoryOperatorInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @throws OptimisticLockException
      */
     public function sell(OrderInterface $order)
     {
+        $this->lockProductVariants($order);
+
         $this->decoratedOperator->sell($order);
     }
 

@@ -13,6 +13,10 @@ sylius:
         add_address: 'Address has been successfully added.'
         impersonate: 'Successfully impersonated customer %name%.'
         set_address_as_default: 'Address has been set as default.'
+    order:
+        apply_state_machine_transition_error: 'There was an unexpected problem with updating an order. Please, try to update order again.'
+    payment:
+        apply_state_machine_transition_error: 'There was an unexpected problem with updating a payment. Please, try to update payment again.'
     product:
         out_of_stock: 'There is only %quantity% of this product in the stock.'
     order:

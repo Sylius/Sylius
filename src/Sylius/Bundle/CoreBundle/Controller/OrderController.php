@@ -18,6 +18,7 @@ use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Webmozart\Assert\Assert;
 
@@ -129,5 +130,50 @@ class OrderController extends BaseOrderController
         ;
 
         return $this->viewHandler->handle($configuration, $view);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function applyStateMachineTransitionAction(Request $request)
+    {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+
+        $this->isGrantedOr403($configuration, ResourceActions::UPDATE);
+        $order = $this->findOr404($configuration);
+
+        $event = $this->eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $order);
+
+        if ($event->isStopped() && !$configuration->isHtmlRequest()) {
+            throw new HttpException($event->getErrorCode(), $event->getMessage());
+        }
+        if ($event->isStopped()) {
+            $this->flashHelper->addFlashFromEvent($configuration, $event);
+
+            return $this->redirectHandler->redirectToResource($configuration, $order);
+        }
+
+        if (!$this->stateMachine->can($configuration, $order)) {
+            throw new BadRequestHttpException();
+        }
+
+        try {
+            $this->stateMachine->apply($configuration, $order);
+            $this->manager->flush();
+        } catch (OptimisticLockException $exception) {
+            $this->addFlash('error', 'sylius.order.apply_state_machine_transition_error');
+
+            return $this->redirectHandler->redirectToResource($configuration, $order);
+        }
+
+        $this->eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $order);
+
+        if (!$configuration->isHtmlRequest()) {
+            return $this->viewHandler->handle($configuration, View::create($order, Response::HTTP_OK));
+        }
+
+        $this->flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $order);
+
+        return $this->redirectHandler->redirectToResource($configuration, $order);
     }
 }
