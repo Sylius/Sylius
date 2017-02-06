@@ -94,6 +94,23 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
     /**
      * {@inheritdoc}
      */
+    public function findOneForCheckoutComplete($id)
+    {
+        return $this->createQueryBuilder('o')
+            ->addSelect('items')
+            ->addSelect('variants')
+            ->leftJoin('o.items', 'items')
+            ->leftJoin('items.variant', 'variants')
+            ->andWhere('o.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function countByCustomerAndCoupon(CustomerInterface $customer, PromotionCouponInterface $coupon)
     {
         return (int) $this->createQueryBuilder('o')

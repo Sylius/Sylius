@@ -75,9 +75,9 @@ sylius_shop_checkout_complete:
             flash: false
             template: SyliusShopBundle:Checkout:complete.html.twig
             repository:
-                method: find
+                method: findOneForCheckoutComplete
                 arguments:
-                    - "expr:service('sylius.context.cart').getCart()"
+                    - "expr:service('sylius.context.cart').getCart().getId()"
             state_machine:
                 graph: sylius_order_checkout
                 transition: complete
