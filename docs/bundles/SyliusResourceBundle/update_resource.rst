@@ -1,41 +1,35 @@
 Updating Resources
 ==================
 
-To display an edit form of a particular resource, change it or update it via API, you should use the **updateAction** action of your **app.controller.user** service.
+To display an edit form of a particular resource, change it or update it via API, you should use the **updateAction** action of your **app.controller.book** service.
 
 .. code-block:: yaml
 
-    # routing.yml
+    # app/config/routing.yml
 
-    app_user_update:
-        path: /users/{id}/edit
+    app_book_update:
+        path: /books/{id}/edit
         methods: [GET, PUT]
         defaults:
-            _controller: app.controller.user:updateAction
+            _controller: app.controller.book:updateAction
 
-Done! Now when you go to ``/users/5/edit``, ResourceController will use the repository (``app.repository.user``) to find the user with ID === **5**.
-If found it will create the ``app_user`` form, and set the existing user as data.
-
-.. note::
-
-    Currently, this bundle does not generate a form for you, the right form type has to be updated and registered in the container manually.
-
-As a response, it will render the ``App:User:update.html.twig`` template with form view as the ``form`` variable and the existing User as the ``user`` variable.
+Done! Now when you go to ``/books/5/edit``, ResourceController will use the repository (``app.repository.book``) to find the book with id == **5**.
+If found it will create the ``app_book`` form, and set the existing book as data.
 
 Submitting the Form
 -------------------
 
-You can use exactly the same route to handle the submit of the form and update the user.
+You can use exactly the same route to handle the submit of the form and updating the book.
 
 .. code-block:: html
 
-    <form method="post" action="{{ path('app_user_update', {'id': user.id}) }}">
+    <form method="post" action="{{ path('app_book_update', {'id': book.id}) }}">
         <input type="hidden" name="_method" value="PUT" />
 
 On submit, the update action with method PUT, will bind the request on the form, and if it is valid it will use the right manager to persist the resource.
-Then, by default it redirects to ``app_user_show`` to display the updated user, but like for creation of the resource - it's customizable.
+Then, by default it redirects to ``app_book_show`` to display the updated book, but like for creation of the resource - it's customizable.
 
-When validation fails, it will simply render the form again.
+When validation fails, it will simply render the form again, but with error messages.
 
 Changing the Template
 ---------------------
@@ -44,15 +38,15 @@ Just like for other actions, you can customize the template.
 
 .. code-block:: yaml
 
-    # routing.yml
+    # app/config/routing.yml
 
-    app_user_update:
-        path: /users/{id}/edit
+    app_book_update:
+        path: /books/{id}/edit
         methods: [GET, PUT]
         defaults:
-            _controller: app.controller.user:updateAction
+            _controller: app.controller.book:updateAction
             _sylius:
-                template: App:Backend/User:update.html.twig
+                template: Admin/Book/update.html.twig
 
 Using Custom Form
 -----------------
@@ -61,39 +55,36 @@ Same way like for **createAction** you can override the default form.
 
 .. code-block:: yaml
 
-    # routing.yml
+    # app/config/routing.yml
 
-    app_user_update:
-        path: /users/{id}/edit
+    app_book_update:
+        path: /books/{id}/edit
         methods: [GET, PUT]
         defaults:
-            _controller: app.controller.user:updateAction
+            _controller: app.controller.book:updateAction
             _sylius:
-                template: App:Backend/User:update.html.twig
-                form: App\Bundle\Form\UserType
+                form: AppBundle\Form\BookType
 
 Passing Custom Options to Form
 ------------------------------
 
 Same way like for **createAction** you can pass options to the form.
 
-Below you can see the usage for specifying a custom options, in this case, ``validation_groups``, but you can pass any option accepted by the form.
+Below you can see how to specify custom options, in this case, ``validation_groups``, but you can pass any option accepted by the form.
 
 .. code-block:: yaml
 
-    # routing.yml
+    # app/config/routing.yml
 
-    app_user_update:
-        path: /users/{id}/edit
+    app_book_update:
+        path: /books/{id}/edit
         methods: [GET, PUT]
         defaults:
-            _controller: app.controller.user:updateAction
+            _controller: app.controller.book:updateAction
             _sylius:
-                template: App:Backend/User:create.html.twig
                 form:
-                    type: app_user_custom
-                    options:
-                        validation_groups: [sylius, my_custom_group]
+                    type: app_book_custom
+                    validation_groups: [sylius, my_custom_group]
 
 Overriding the Criteria
 -----------------------
@@ -102,15 +93,15 @@ By default, the **updateAction** will look for the resource by id. You can easil
 
 .. code-block:: yaml
 
-    # routing.yml
+    # app/config/routing.yml
 
-    app_user_update:
-        path: /users/{username}/edit
+    app_book_update:
+        path: /books/{title}/edit
         methods: [GET, PUT]
         defaults:
-            _controller: app.controller.user:updateAction
+            _controller: app.controller.book:updateAction
             _sylius:
-                criteria: { username: $username }
+                criteria: { title: $title }
 
 Custom Redirect After Success
 -----------------------------
@@ -119,53 +110,53 @@ By default the controller will try to get the id of resource and redirect to the
 
 .. code-block:: yaml
 
-    # routing.yml
+    # app/config/routing.yml
 
-    app_user_update:
-        path: /users/{id}/edit
+    app_book_update:
+        path: /books/{id}/edit
         methods: [GET, PUT]
         defaults:
-            _controller: app.controller.user:updateAction
+            _controller: app.controller.book:updateAction
             _sylius:
-                redirect: app_user_index
+                redirect: app_book_index
 
-You can also perform more complex redirects, with parameters. For example...
+You can also perform more complex redirects, with parameters. For example:
 
 .. code-block:: yaml
 
-    # routing.yml
+    # app/config/routing.yml
 
-    app_user_update:
-        path: /competition/{competitionId}/users/{id}/edit
+    app_book_update:
+        path: /genre/{genreId}/books/{id}/edit
         methods: [GET, PUT]
         defaults:
-            _controller: app.controller.user:updateAction
+            _controller: app.controller.book:updateAction
             _sylius:
                 redirect:
-                    route: app_competition_show
-                    parameters: { id: $competitionId }
+                    route: app_genre_show
+                    parameters: { id: $genreId }
 
 Configuration Reference
 -----------------------
 
 .. code-block:: yaml
 
-    # routing.yml
+    # app/config/routing.yml
 
-    app_user_update:
-        path: /users/{username}/edit
+    app_book_update:
+        path: /genre/{genreId}/books/{title}/edit
         methods: [GET, PUT, PATCH]
         defaults:
-            _controller: app.controller.user:updateAction
+            _controller: app.controller.book:updateAction
             _sylius:
-                template: :User:editProfile.html.twig
-                form: app_user_profile
+                template: Book/editInGenre.html.twig
+                form: app_book_custom
                 repository:
-                    method: findCurrentUserByUsername
-                    arguments: [$username, expr:service('app.context.user')]
+                    method: findBookByTitle
+                    arguments: [$title, expr:service('app.context.book')]
                 criteria:
                     enabled: true
-                    groupId: $groupId
+                    genreId: $genreId
                 redirect:
-                    route: app_profile_show
-                    parameters: { username: resource.username }
+                    route: app_book_show
+                    parameters: { title: resource.title }
