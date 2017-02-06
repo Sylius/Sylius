@@ -4,6 +4,8 @@
 sylius:
     channel:
         delete_error: 'The channel cannot be deleted. At least one enabled channel is required.'
+    chcekout:
+        complete_error: 'There was an unexpected problem with completing an order. Please, try to place your order again.'
     contact:
         request_success: 'Your contact request has been submitted successfully.'
         request_error: 'A problem occurred while sending the contact request. Please try again later.'

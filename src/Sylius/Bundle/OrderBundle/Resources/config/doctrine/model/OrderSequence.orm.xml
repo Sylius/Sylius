@@ -20,7 +20,6 @@
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
-
         <field name="index" column="idx" type="integer" />
     </mapped-superclass>
 

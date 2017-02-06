@@ -15,6 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderSequence;
 use Sylius\Component\Core\Model\OrderSequenceInterface;
 use Sylius\Component\Order\Model\OrderSequence as BaseOrderSequence;
+use Sylius\Component\Resource\Model\VersionedInterface;
 
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
@@ -29,6 +30,11 @@ final class OrderSequenceSpec extends ObjectBehavior
     function it_implements_an_order_sequence_interface()
     {
         $this->shouldImplement(OrderSequenceInterface::class);
+    }
+
+    function it_implements_a_versioned_interface()
+    {
+        $this->shouldImplement(VersionedInterface::class);
     }
 
     function it_extends_an_order_sequence()

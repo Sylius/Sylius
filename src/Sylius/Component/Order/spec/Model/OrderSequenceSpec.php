@@ -30,11 +30,6 @@ final class OrderSequenceSpec extends ObjectBehavior
         $this->shouldImplement(OrderSequenceInterface::class);
     }
 
-    function it_has_version_1_by_default()
-    {
-        $this->getVersion()->shouldReturn(1);
-    }
-
     function it_has_zero_index_after_initialized()
     {
         $this->getIndex()->shouldReturn(0);
