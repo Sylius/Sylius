@@ -1,3 +1,7 @@
+.. note:: 
+
+    In order to add a new locale to your store you have to assign it to a channel.
+
 .. index::
    single: Locales
 
