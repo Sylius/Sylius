@@ -145,5 +145,11 @@
             <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="sylius.repository.channel" />
         </service>
+
+        <service id="sylius.sequential_order_number_generator" class="Sylius\Bundle\CoreBundle\Order\NumberGenerator\SequentialOrderNumberGenerator">
+            <argument type="service" id="sylius.repository.order_sequence" />
+            <argument type="service" id="sylius.factory.order_sequence" />
+            <argument type="service" id="sylius.manager.order_sequence" />
+        </service>
     </services>
 </container>
