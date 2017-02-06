@@ -1,9 +1,10 @@
 Services
 ========
 
-When you register an entity as a resource, there are several services registered for you. For ``app.book`` resource, following services are available:
+When you register an entity as a resource, several services are registered for you.
+For the ``app.book`` resource, the following services are available:
 
-* ``app.controller.book`` instanceof ``ResourceController``;
-* ``app.factory.book`` instance of :ref:`component_resource_factory_factory-interface`;
-* ``app.repository.book`` instance of :ref:`component_resource_repository_repository-interface`;
-* ``app.manager.book`` alias to appropriate Doctrine's ``ObjectManager``.
+* ``app.controller.book`` - instance of ``ResourceController``;
+* ``app.factory.book`` - instance of :ref:`component_resource_factory_factory-interface`;
+* ``app.repository.book`` - instance of :ref:`component_resource_repository_repository-interface`;
+* ``app.manager.book`` - alias to an appropriate Doctrine's ``ObjectManager``.
