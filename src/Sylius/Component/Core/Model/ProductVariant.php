@@ -26,6 +26,11 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * @var int
      */
+    protected $version = 1;
+
+    /**
+     * @var int
+     */
     protected $onHold = 0;
 
     /**
@@ -103,6 +108,14 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
         }
 
         return $string;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getVersion()
+    {
+        return $this->version;
     }
 
     /**
