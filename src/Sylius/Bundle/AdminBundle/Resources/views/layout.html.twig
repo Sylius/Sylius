@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block topbar %}
-    <a class="icon item" id="sidebar-toggle">
+    <a class="icon item" id="sidebar-toggle" title="{{ 'sylius.ui.toggle_sidebar'|trans }}">
         <i class="sidebar icon"></i>
     </a>
     {{ render(url('sylius_admin_partial_channel_index', {'template': '@SyliusAdmin/_channelLinks.html.twig'})) }}
@@ -17,7 +17,7 @@
 
 {% block sidebar %}
     <a class="item" href="{{ path('sylius_admin_dashboard') }}"><b>Sylius</b></a>
-    {{ knp_menu_render('sylius.admin.main', {'template': 'SyliusUiBundle:Menu:sidebar.html.twig'}) }}
+    {{ knp_menu_render('sylius.admin.main', {'template': 'SyliusUiBundle:Menu:sidebar.html.twig', 'currentClass': 'active'}) }}
 {% endblock %}
 
 {% block footer %}
