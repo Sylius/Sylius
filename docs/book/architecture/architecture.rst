@@ -119,9 +119,9 @@ Third Party Libraries
 
 Sylius uses a lot of libraries for various tasks:
 
-* `SymfonyCMF <http://cmf.symfony.com/>`_ for content management
+* `Payum <https://github.com/Payum/Payum>`_ for payments
+* `KnpMenu <http://symfony.com/doc/current/bundles/KnpMenuBundle/index.html>`_ - for shop and admin menus
 * `Gaufrette <https://github.com/KnpLabs/Gaufrette>`_ for filesystem abstraction (store images locally, Amazon S3 or external server)
 * `Imagine <https://github.com/liip/LiipImagineBundle>`_ for images processing, generating thumbnails and cropping
-* `Snappy <https://github.com/KnpLabs/snappy>`_ for generating PDF files
 * `Pagerfanta <https://github.com/whiteoctober/Pagerfanta>`_ for pagination
-* `Payum <https://github.com/Payum/Payum>`_ for payments
+* `WInzou State Machine <https://github.com/winzou/StateMachineBundle>`_ -  for the state machines handling
