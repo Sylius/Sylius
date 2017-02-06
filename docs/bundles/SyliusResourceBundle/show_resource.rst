@@ -5,63 +5,64 @@ Your newly created controller service supports basic CRUD operations and is conf
 
 The simplest action is **showAction**. It is used to display a single resource. To use it, the only thing you need to do is register a proper route.
 
-Let's assume that you have a ``app.user`` resource registered. To display a single user, define the following routing:
+Let's assume that you have a ``app.book`` resource registered. To display a single Book, define the following routing:
 
 .. code-block:: yaml
 
-    # routing.yml
+    # app/config/routing.yml
 
-    app_user_show:
-        path: /users/{id}
+    app_book_show:
+        path: /books/{id}
         methods: [GET]
         defaults:
-            _controller: app.controller.user:showAction
+            _controller: app.controller.book:showAction
 
-Done! Now when you go to ``/users/3``, ResourceController will use the repository (``app.repository.user``) to find user with given id.
-If the requested user resource does not exist, it will throw a 404 exception.
+Done! Now when you go to ``/books/3``, ResourceController will use the repository (``app.repository.book``) to find a Book with the given id (``3``).
+If the requested book resource does not exist, it will throw a ``404 Not Found`` exception.
 
-When a user is found, the default template will be rendered - ``App:User:show.html.twig`` (like you configured it in `config.yml`) with the User result as the ``user`` variable.
-That's the most basic usage of the simple ``showAction`` action.
+When a Book is found, the default template will be rendered - ``App:Book:show.html.twig`` (like you configured it in the ``config.yml``)
+with the Book result as the ``book`` variable. That's the most basic usage of the simple ``showAction``.
 
 Using a Custom Template
 -----------------------
 
-Okay, but what if you want now to display same User resource, but with a different representation?
+Okay, but what if you want to display the same Book resource, but with a different representation in a view?
 
 .. code-block:: yaml
 
     # routing.yml
 
-    app_backend_user_show:
-        path: /backend/users/{id}
+    app_admin_book_show:
+        path: /admin/books/{id}
         methods: [GET]
         defaults:
-            _controller: app.controller.user:showAction
+            _controller: app.controller.book:showAction
             _sylius:
-                template: App:Backend/User:show.html.twig
+                template: Admin/Book/show.html.twig
 
-Nothing more to do here, when you go to ``/backend/users/3``, the controller will try to find the user and render it using the custom template you specified under the route configuration. Simple, isn't it?
+Nothing more to do here, when you go to ``/admin/books/3``, the controller will try to find the Book and render
+it using the custom template you specified under the route configuration. Simple, isn't it?
 
 Overriding Default Criteria
 ---------------------------
 
-Displaying the user by id can be boring... and let's say we do not want to allow viewing disabled users? There is a solution for that!
+Displaying books by id can be boring... and let's say we do not want to allow viewing disabled books. There is a solution for that!
 
 .. code-block:: yaml
 
     # routing.yml
 
-    app_user_show:
-        path: /users/{username}
+    app_book_show:
+        path: /books/{title}
         methods: [GET]
         defaults:
-            _controller: app.controller.user:showAction
+            _controller: app.controller.book:showAction
             _sylius:
                 criteria:
-                    username: $username
-                    enabled:  true
+                    title: $title
+                    enabled: true
 
-With this configuration, the controller will look for a user with the given username and exclude disabled users.
+With this configuration, the controller will look for a book with the given title and exclude disabled books.
 Internally, it simply uses the ``$repository->findOneBy(array $criteria)`` method to look for the resource.
 
 Using Custom Repository Methods
@@ -74,17 +75,17 @@ Creating yet another action to change the method called could be a solution but 
 
     # routing.yml
 
-    app_user_show:
-        path: /users/{username}
+    app_book_show:
+        path: /books/{author}
         methods: [GET]
         defaults:
-            _controller: app.controller.user:showAction
+            _controller: app.controller.book:showAction
             _sylius:
                 repository:
-                    method: findOneWithFriends
-                    arguments: [$username]
+                    method: findOneNewestByAuthor
+                    arguments: [$author]
 
-Internally, it simply uses the ``$repository->findOneWithFriends($username)`` method, where ``username`` is taken from the current request.
+Internally, it simply uses the ``$repository->findOneNewestByAuthor($author)`` method, where ``author`` is taken from the current request.
 
 Configuration Reference
 -----------------------
@@ -93,18 +94,17 @@ Configuration Reference
 
     # routing.yml
 
-    app_user_show:
-        path: /users/{username}
+    app_book_show:
+        path: /books/{author}
         methods: [GET]
         defaults:
-            _controller: app.controller.user:showAction
+            _controller: app.controller.book:showAction
             _sylius:
-                template: :User:profile.html.twig
+                template: Book/show.html.twig
                 repository:
-                    method: findOneWithFriends
-                    arguments: [$username]
+                    method: findOneNewestByAuthor
+                    arguments: [$author]
                 criteria:
                     enabled: true
-                    groupId: $groupId
                 serialization_groups: [Custom, Details]
                 serialization_version: 1.0.2
