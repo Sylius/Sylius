@@ -17,9 +17,11 @@ Sylius\Component\Taxonomy\Model\Taxon:
             groups: [Detailed]
         root:
             expose: true
+            max_depth: 2
             groups: [Default, Detailed]
         parent:
             expose: true
+            max_depth: 2
             groups: [Default, Detailed]
         left:
             expose: true
@@ -41,3 +43,15 @@ Sylius\Component\Taxonomy\Model\Taxon:
             expose: true
             type: array
             groups: [Default, Detailed]
+    virtual_properties:
+        getName:
+            serialized_name: name
+    relations:
+        - rel: self
+          href:
+            route: sylius_api_taxon_show
+            parameters:
+                id: expr(object.getId())
+                version: 1
+            exclusion:
+                groups: [Detailed]

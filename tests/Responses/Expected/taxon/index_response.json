@@ -20,7 +20,17 @@
                 "id": @integer@,
                 "code": "category",
                 "position": 0,
-                "translations": []
+                "translations": {
+                    "en": {
+                        "locale": "en"
+                    }
+                },
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
             },
             {
                 "id": @integer@,
@@ -29,16 +39,38 @@
                     "id": @integer@,
                     "code": "category",
                     "position": 0,
-                    "translations": []
+                    "translations": [],
+                    "images": [],
+                    "_links": {
+                        "self": {
+                            "href": "@string@"
+                        }
+                    }
                 },
                 "parent": {
                     "id": @integer@,
                     "code": "category",
                     "position": 0,
-                    "translations": []
+                    "translations": [],
+                    "images": [],
+                    "_links": {
+                        "self": {
+                            "href": "@string@"
+                        }
+                    }
                 },
                 "position": 0,
-                "translations": []
+                "translations": {
+                    "en": {
+                        "locale": "en"
+                    }
+                },
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
             },
             {
                 "id": @integer@,
@@ -47,16 +79,38 @@
                     "id": @integer@,
                     "code": "category",
                     "position": 0,
-                    "translations": []
+                    "translations": [],
+                    "images": [],
+                    "_links": {
+                        "self": {
+                            "href": "@string@"
+                        }
+                    }
                 },
                 "parent": {
                     "id": @integer@,
                     "code": "category",
                     "position": 0,
-                    "translations": []
+                    "translations": [],
+                    "images": [],
+                    "_links": {
+                        "self": {
+                            "href": "@string@"
+                        }
+                    }
                 },
                 "position": 1,
-                "translations": []
+                "translations": {
+                    "en": {
+                        "locale": "en"
+                    }
+                },
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
             },
             {
                 "id": @integer@,
@@ -65,16 +119,38 @@
                     "id": @integer@,
                     "code": "category",
                     "position": 0,
-                    "translations": []
+                    "translations": [],
+                    "images": [],
+                    "_links": {
+                        "self": {
+                            "href": "@string@"
+                        }
+                    }
                 },
                 "parent": {
                     "id": @integer@,
                     "code": "category",
                     "position": 0,
-                    "translations": []
+                    "translations": [],
+                    "images": [],
+                    "_links": {
+                        "self": {
+                            "href": "@string@"
+                        }
+                    }
                 },
                 "position": 2,
-                "translations": []
+                "translations": {
+                    "en": {
+                        "locale": "en"
+                    }
+                },
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
             },
             {
                 "id": @integer@,
@@ -83,16 +159,38 @@
                     "id": @integer@,
                     "code": "category",
                     "position": 0,
-                    "translations": []
+                    "translations": [],
+                    "images": [],
+                    "_links": {
+                        "self": {
+                            "href": "@string@"
+                        }
+                    }
                 },
                 "parent": {
                     "id": @integer@,
                     "code": "category",
                     "position": 0,
-                    "translations": []
+                    "translations": [],
+                    "images": [],
+                    "_links": {
+                        "self": {
+                            "href": "@string@"
+                        }
+                    }
                 },
                 "position": 3,
-                "translations": []
+                "translations": {
+                    "en": {
+                        "locale": "en"
+                    }
+                },
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
             },
             {
                 "id": @integer@,
@@ -101,28 +199,38 @@
                     "id": @integer@,
                     "code": "category",
                     "position": 0,
-                    "translations": []
+                    "translations": [],
+                    "images": [],
+                    "_links": {
+                        "self": {
+                            "href": "@string@"
+                        }
+                    }
                 },
                 "parent": {
                     "id": @integer@,
                     "code": "t-shirts",
-                    "root": {
-                        "id": @integer@,
-                        "code": "category",
-                        "position": 0,
-                        "translations": []
-                    },
-                    "parent": {
-                        "id": @integer@,
-                        "code": "category",
-                        "position": 0,
-                        "translations": []
-                    },
                     "position": 3,
-                    "translations": []
+                    "translations": [],
+                    "images": [],
+                    "_links": {
+                        "self": {
+                            "href": "@string@"
+                        }
+                    }
                 },
                 "position": 0,
-                "translations": []
+                "translations": {
+                    "en": {
+                        "locale": "en"
+                    }
+                },
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
             },
             {
                 "id": @integer@,
@@ -131,28 +239,38 @@
                     "id": @integer@,
                     "code": "category",
                     "position": 0,
-                    "translations": []
+                    "translations": [],
+                    "images": [],
+                    "_links": {
+                        "self": {
+                            "href": "@string@"
+                        }
+                    }
                 },
                 "parent": {
                     "id": @integer@,
                     "code": "t-shirts",
-                    "root": {
-                        "id": @integer@,
-                        "code": "category",
-                        "position": 0,
-                        "translations": []
-                    },
-                    "parent": {
-                        "id": @integer@,
-                        "code": "category",
-                        "position": 0,
-                        "translations": []
-                    },
                     "position": 3,
-                    "translations": []
+                    "translations": [],
+                    "images": [],
+                    "_links": {
+                        "self": {
+                            "href": "@string@"
+                        }
+                    }
                 },
                 "position": 1,
-                "translations": []
+                "translations": {
+                    "en": {
+                        "locale": "en"
+                    }
+                },
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
             }
         ]
     }

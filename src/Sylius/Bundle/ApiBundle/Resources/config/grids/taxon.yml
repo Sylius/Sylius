@@ -12,3 +12,5 @@ sylius_grid:
                     type: string
                     options:
                         fields: [translation.name]
+                code:
+                    type: string

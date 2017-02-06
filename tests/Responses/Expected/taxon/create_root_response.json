@@ -6,5 +6,15 @@
     "right": 2,
     "level": 0,
     "position": 0,
-    "translations": []
+    "translations": {
+        "en_US": {
+            "locale": "en_US"
+        }
+    },
+    "images": [],
+    "_links": {
+        "self": {
+            "href": "@string@"
+        }
+    }
 }

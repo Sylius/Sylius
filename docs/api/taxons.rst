@@ -3,401 +3,68 @@ Taxons API
 
 These endpoints will allow you to easily manage taxons. Base URI is `/api/v1/taxons`.
 
-When you get a collection of resources, "Default" serialization group will be used and following fields will be exposed:
+Taxon structure
+---------------
 
-+--------------+--------------------------------------------------------------------------------------------+
-| Field        | Description                                                                                |
-+==============+============================================================================================+
-| id           | Id of taxon                                                                                |
-+--------------+--------------------------------------------------------------------------------------------+
-| code         | Unique taxon identifier                                                                    |
-+--------------+--------------------------------------------------------------------------------------------+
-| root         | The main ancestor of taxon                                                                 |
-+--------------+--------------------------------------------------------------------------------------------+
-| parent       | The parent of taxon                                                                        |
-+--------------+--------------------------------------------------------------------------------------------+
-| translations | Collection of translations (each contains slug and name and description in given language) |
-+--------------+--------------------------------------------------------------------------------------------+
-| position     | The position of taxon among other taxons                                                   |
-+--------------+--------------------------------------------------------------------------------------------+
-| images       | Images assigned to taxon                                                                   |
-+--------------+--------------------------------------------------------------------------------------------+
+Taxon API response structure
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If you request for a more detailed data, you will receive an object with following fields:
+If you request a taxon via API, you will receive an object with the following fields:
 
-+--------------+--------------------------------------------------------------------------------------------+
-| Field        | Description                                                                                |
-+==============+============================================================================================+
-| id           | Id of taxon                                                                                |
-+--------------+--------------------------------------------------------------------------------------------+
-| code         | Unique taxon identifier                                                                    |
-+--------------+--------------------------------------------------------------------------------------------+
-| root         | The main ancestor of taxon                                                                 |
-+--------------+--------------------------------------------------------------------------------------------+
-| parent       | The parent of taxon                                                                        |
-+--------------+--------------------------------------------------------------------------------------------+
-| translations | Collection of translations (each contains slug and name and description in given language) |
-+--------------+--------------------------------------------------------------------------------------------+
-| position     | The position of taxon among other taxons                                                   |
-+--------------+--------------------------------------------------------------------------------------------+
-| images       | Images assigned to taxon                                                                   |
-+--------------+--------------------------------------------------------------------------------------------+
-| left         | Location within taxonomy                                                                   |
-+--------------+--------------------------------------------------------------------------------------------+
-| right        | Location within taxonomy                                                                   |
-+--------------+--------------------------------------------------------------------------------------------+
-| level        | How deep taxon is in the tree                                                              |
-+--------------+--------------------------------------------------------------------------------------------+
-| children     | Sub taxons                                                                                 |
-+--------------+--------------------------------------------------------------------------------------------+
++--------------+--------------------------------------------------------------------------------------------------+
+| Field        | Description                                                                                      |
++==============+==================================================================================================+
+| id           | Id of the taxon                                                                                  |
++--------------+--------------------------------------------------------------------------------------------------+
+| code         | Unique taxon identifier                                                                          |
++--------------+--------------------------------------------------------------------------------------------------+
+| root         | The main ancestor of the taxon                                                                   |
++--------------+--------------------------------------------------------------------------------------------------+
+| parent       | Parent of the taxon                                                                              |
++--------------+--------------------------------------------------------------------------------------------------+
+| translations | Collection of translations (each contains slug, name and description in the respective language) |
++--------------+--------------------------------------------------------------------------------------------------+
+| position     | The position of the taxon among other taxons                                                     |
++--------------+--------------------------------------------------------------------------------------------------+
+| images       | Images assigned to the taxon                                                                     |
++--------------+--------------------------------------------------------------------------------------------------+
 
+If you request for more detailed data, you will receive an object with the following fields:
+
++--------------+--------------------------------------------------------------------------------------------------+
+| Field        | Description                                                                                      |
++==============+==================================================================================================+
+| id           | Id of the taxon                                                                                  |
++--------------+--------------------------------------------------------------------------------------------------+
+| code         | Unique taxon identifier                                                                          |
++--------------+--------------------------------------------------------------------------------------------------+
+| root         | The main ancestor of the taxon                                                                   |
++--------------+--------------------------------------------------------------------------------------------------+
+| parent       | Parent of the taxon                                                                              |
++--------------+--------------------------------------------------------------------------------------------------+
+| translations | Collection of translations (each contains slug, name and description in the respective language) |
++--------------+--------------------------------------------------------------------------------------------------+
+| position     | Position of the taxon among other taxons                                                         |
++--------------+--------------------------------------------------------------------------------------------------+
+| images       | Images assigned to the taxon                                                                     |
++--------------+--------------------------------------------------------------------------------------------------+
+| left         | Location within the whole taxonomy                                                               |
++--------------+--------------------------------------------------------------------------------------------------+
+| right        | Location within the whole taxonomy                                                               |
++--------------+--------------------------------------------------------------------------------------------------+
+| level        | How deep the taxon is in the tree                                                                |
++--------------+--------------------------------------------------------------------------------------------------+
+| children     | Descendants of the taxon                                                                         |
++--------------+--------------------------------------------------------------------------------------------------+
 
 .. note::
 
-    Read more about `Taxon`__
+    Read more about :doc:`Taxons </components/Taxonomy/models>`.
 
-__ http://docs.sylius.org/en/latest/components/Taxonomy/models.html#taxon
+Creating a Taxon
+----------------
 
-Collection of Taxons
---------------------
-
-To retrieve the paginated list of taxons you will need to call the ``/api/v1/taxons/`` endpoint with ``GET`` method.
-
-Definition
-^^^^^^^^^^
-
-.. code-block:: text
-
-    GET /api/v1/taxons/
-
-+---------------------------------------+----------------+---------------------------------------------------+
-| Parameter                             | Parameter type | Description                                       |
-+=======================================+================+===================================================+
-| Authorization                         | header         | Token received during authentication              |
-+---------------------------------------+----------------+---------------------------------------------------+
-| limit                                 | query          | *(optional)* Number of items to display per page, |
-|                                       |                | by default = 10                                   |
-+---------------------------------------+----------------+---------------------------------------------------+
-
-To see the first page of all taxons use the method below.
-
-Example
-.......
-
-.. code-block:: bash
-
-    $ curl http://demo.sylius.org/api/v1/taxons/ \
-        -H "Authorization: Bearer SampleToken" \
-        -H "Accept: application/json"
-
-Example Response
-~~~~~~~~~~~~~~~~
-
-.. code-block:: text
-
-    STATUS: 200 OK
-
-.. code-block:: json
-    {
-        "page": 1,
-        "limit": 10,
-        "pages": 1,
-        "total": 4,
-        "_links": {
-            "self": {
-                "href": "\/api\/v1\/taxons\/?page=1&limit=10"
-            },
-            "first": {
-                "href": "\/api\/v1\/taxons\/?page=1&limit=10"
-            },
-            "last": {
-                "href": "\/api\/v1\/taxons\/?page=1&limit=10"
-            }
-        },
-        "_embedded": {
-            "items": [
-                {
-                    "id": 1031,
-                    "code": "category",
-                    "position": 0,
-                    "translations": [],
-                    "images": [],
-                        "_links": {
-                            "self": {
-                                "href": "\/api\/v1\/taxons\/1031"
-                            }
-                        }
-                },
-                {
-                    "id": 1032,
-                    "code": "t-shirts",
-                    "root": {
-                        "id": 1031,
-                        "code": "category",
-                        "position": 0,
-                        "translations": [],
-                        "images": [],
-                        "_links": {
-                            "self": {
-                                "href": "\/api\/v1\/taxons\/1031"
-                            }
-                        }
-                    },
-                    "parent": {
-                        "id": 1031,
-                        "code": "category",
-                        "position": 0,
-                        "translations": [],
-                        "images": [],
-                        "_links": {
-                            "self": {
-                                "href": "\/api\/v1\/taxons\/1031"
-                            }
-                        }
-                    },
-                    "position": 0,
-                    "translations": [],
-                    "images": [],
-                    "_links": {
-                        "self": {
-                            "href": "\/api\/v1\/taxons\/1032"
-                        }
-                    }
-                },
-                {
-                    "id": 1033,
-                    "code": "men",
-                    "root": {
-                        "id": 1031,
-                        "code": "category",
-                        "position": 0,
-                        "translations": [],
-                        "images": [],
-                        "_links": {
-                            "self": {
-                                "href": "\/api\/v1\/taxons\/1031"
-                            }
-                        }
-                    },
-                    "parent": {
-                        "id": 1032,
-                        "code": "t-shirts",
-                        "root": {
-                            "id": 1031,
-                            "code": "category",
-                            "position": 0,
-                            "translations": [],
-                            "images": [],
-                            "_links": {
-                                "self": {
-                                    "href": "\/api\/v1\/taxons\/1031"
-                                }
-                            }
-                        },
-                        "parent": {
-                            "id": 1031,
-                            "code": "category",
-                            "position": 0,
-                            "translations": [],
-                            "images": [],
-                        "_links": {
-                            "self": {
-                                "href": "\/api\/v1\/taxons\/1031"
-                            }
-                        }
-                        },
-                        "position": 0,
-                        "translations": [],
-                        "images": [],
-                        "_links": {
-                            "self": {
-                                "href": "\/api\/v1\/taxons\/1032"
-                            }
-                        }
-                    },
-                    "position": 0,
-                    "translations": [],
-                    "images": [],
-                        "_links": {
-                            "self": {
-                                "href": "\/api\/v1\/taxons\/1033"
-                            }
-                        }
-                },
-                {
-                    "id": 1034,
-                    "code": "women",
-                    "root": {
-                        "id": 1031,
-                        "code": "category",
-                        "position": 0,
-                        "translations": [],
-                        "images": [],
-                        "_links": {
-                            "self": {
-                                "href": "\/api\/v1\/taxons\/1031"
-                            }
-                        }
-                    },
-                    "parent": {
-                        "code": "t-shirts",
-                        "root": {
-                            "id": 1031,
-                            "code": "category",
-                            "position": 0,
-                            "translations": [],
-                            "images": [],
-                        "_links": {
-                            "self": {
-                                "href": "\/api\/v1\/taxons\/1031"
-                            }
-                        }
-                        },
-                        "parent": {
-                            "id": 1031,
-                            "code": "category",
-                            "position": 0,
-                            "translations": [],
-                            "images": [],
-                        "_links": {
-                            "self": {
-                                "href": "\/api\/v1\/taxons\/1031"
-                            }
-                        }
-                        },
-                        "position": 0,
-                        "translations": [],
-                        "images": [],
-                        "_links": {
-                            "self": {
-                                "href": "\/api\/v1\/taxons\/1032"
-                            }
-                        }
-                    },
-                    "position": 1,
-                    "translations": [],
-                    "images": [],
-                    "_links": {
-                        "self": {
-                            "href": "\/api\/v1\/taxons\/1034"
-                        }
-                    }
-                }
-            ]
-        }
-    }
-
-Getting a Single Taxon
-----------------------
-
-To retrieve the details of the taxon you will need to call the ``/api/v1/taxons/taxon_id`` endpoint with ``GET`` method.
-
-Definition
-^^^^^^^^^^
-
-.. code-block:: text
-
-    GET /api/v1/taxons/{id}
-
-+---------------+----------------+-------------------------------------------------------------------+
-| Parameter     | Parameter type | Description                                                       |
-+===============+================+===================================================================+
-| Authorization | header         | Token received during authentication                              |
-+---------------+----------------+-------------------------------------------------------------------+
-| id            | url attribute  | Id of requested resource                                          |
-+---------------+----------------+-------------------------------------------------------------------+
-
-Example
-.......
-
-To see the details for the the taxon  with id equals to 987 use the method below.
-
-.. code-block:: bash
-
-    $ curl http://demo.sylius.org/api/v1/taxons/987 \
-        -H "Authorization: Bearer SampleToken" \
-        -H "Accept: application/json"
-
-Example Response
-~~~~~~~~~~~~~~~~
-
-.. code-block:: text
-
-    STATUS: 200 OK
-
-.. code-block:: json
-
-    {
-        "id": 1035,
-        "code": "category",
-        "children": [
-            {
-                "id": 1036,
-                "code": "t-shirts",
-                "children": [
-                    {
-                        "id": 1037,
-                        "code": "men",
-                        "children": [],
-                        "left": 3,
-                        "right": 4,
-                        "level": 2,
-                        "position": 0,
-                        "translations": [],
-                        "images": [],
-                        "_links": {
-                            "self": {
-                                "href": "\/api\/v1\/taxons\/1037"
-                            }
-                        }
-                    },
-                    {
-                        "id": 1038,
-                        "code": "women",
-                        "children": [],
-                        "left": 5,
-                        "right": 6,
-                        "level": 2,
-                        "position": 1,
-                        "translations": [],
-                        "images": [],
-                        "_links": {
-                            "self": {
-                                "href": "\/api\/v1\/taxons\/1038"
-                            }
-                        }
-                    }
-                ],
-                "left": 2,
-                "right": 7,
-                "level": 1,
-                "position": 0,
-                "translations": [],
-                "images": [],
-                "_links": {
-                    "self": {
-                        "href": "\/api\/v1\/taxons\/1036"
-                    }
-                }
-            }
-        ],
-        "left": 1,
-        "right": 8,
-        "level": 0,
-        "position": 0,
-        "translations": [],
-        "images": [],
-        "_links": {
-            "self": {
-                "href": "\/api\/v1\/taxons\/1035"
-            }
-        }
-    }
-
-Creating Taxon
---------------
-
-To create new taxon you will need to call the ``/api/v1/taxons/`` endpoint with ``POST`` method.
+To create a new taxon you will need to call the ``/api/v1/taxons/`` endpoint with the ``POST`` method.
 
 Definition
 ^^^^^^^^^^
@@ -415,9 +82,9 @@ Definition
 +------------------------------------+----------------+--------------------------------------+
 
 Example
-.......
+^^^^^^^
 
-To create new taxon use the below method.
+To create new taxon use the below method:
 
 .. code-block:: bash
 
@@ -433,10 +100,10 @@ To create new taxon use the below method.
 
 .. note::
 
-    If you want to create you taxon under other taxon you should pass also a parent code.
+    If you want to create your taxon as a child of another taxon, you should pass also the parent taxon's code.
 
-Example Response
-~~~~~~~~~~~~~~~~
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
@@ -445,7 +112,7 @@ Example Response
 .. code-block:: json
 
     {
-        "id": 8,
+        "id": 11,
         "code": "toys",
         "children": [],
         "left": 1,
@@ -456,25 +123,27 @@ Example Response
         "images": [],
         "_links": {
             "self": {
-                "href": "\/api\/v1\/taxons\/8"
+                "href": "/api/v1/taxons/11"
             }
         }
     }
 
-If you try to create a taxon without code  you will receive a 400 error.
+.. warning::
+
+    If you try to create a taxon without code you will receive a ``400 Bad Request`` error, that will contain validation errors.
 
 Example
-.......
+^^^^^^^
 
 .. code-block:: bash
 
-    curl http://demo.sylius.org/api/v1/taxons/ \
+    $ curl http://demo.sylius.org/api/v1/taxons/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X POST
 
-Example Response
-~~~~~~~~~~~~~~~~
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
@@ -501,26 +170,26 @@ Example Response
 
 You can also create a taxon with additional (not required) fields:
 
-+-------------------------------------------+----------------+-------------------------------------------------------+
-| Parameter                                 | Parameter type | Description                                           |
-+====================================+================+==============================================================+
-| Authorization                             | header         | Token received during authentication                  |
-+-------------------------------------------+----------------+-------------------------------------------------------+
-| code                                      | request        | **(unique)** Taxon identifier                         |
-+-------------------------------------------+----------------+-------------------------------------------------------+
-|translations['locale_code']['name']        | request        |  *(optional)* Name of the taxon                       |
-+-------------------------------------------+----------------+-------------------------------------------------------+
-|translations['locale_code']['slug']        | request        | *(optional)* **(unique)** Slug                        |
-+-------------------------------------------+----------------+-------------------------------------------------------+
-|translations['locale_code']['description'] | request        | *(optional)* Description of taxon                     |
-+-------------------------------------------+----------------+-------------------------------------------------------+
-| parent                                    | request        | *(optional)* The parent's code of taxon               |
-+-------------------------------------------+----------------+-------------------------------------------------------+
-| images                                    | request        | *(optional)* Images codes assigned to taxon           |
-+-------------------------------------------+----------------+-------------------------------------------------------+
++--------------------------------------------+----------------+-------------------------------------------------+
+| Parameter                                  | Parameter type | Description                                     |
++============================================+================+=================================================+
+| Authorization                              | header         | Token received during authentication            |
++--------------------------------------------+----------------+-------------------------------------------------+
+| code                                       | request        | **(unique)** Taxon identifier                   |
++--------------------------------------------+----------------+-------------------------------------------------+
+| translations['locale_code']['name']        | request        | *(optional)* Name of the taxon                  |
++--------------------------------------------+----------------+-------------------------------------------------+
+| translations['locale_code']['slug']        | request        | *(optional)* **(unique)** Slug                  |
++--------------------------------------------+----------------+-------------------------------------------------+
+| translations['locale_code']['description'] | request        | *(optional)* Description of the taxon           |
++--------------------------------------------+----------------+-------------------------------------------------+
+| parent                                     | request        | *(optional)* The parent taxon's code            |
++--------------------------------------------+----------------+-------------------------------------------------+
+| images                                     | request        | *(optional)* Images codes assigned to the taxon |
++--------------------------------------------+----------------+-------------------------------------------------+
 
 Example
-.......
+^^^^^^^
 
 .. code-block:: bash
 
@@ -529,26 +198,26 @@ Example
         -H "Accept: application/json" \
         -X POST
         --data '
-           {
+            {
                 "code":"toys",
                 "translations":{
                     "en_US": {
                         "name": "Toys",
                         "slug": "category/toys",
-                        "description": "The Toys"
+                        "description": "Toys for boys"
                     }
                 },
                 "parent": "category",
                 "images": [
                     {
-                        "code": "ford"
+                        "type": "ford"
                     }
                 ]
             }
         '
 
-Example Response
-~~~~~~~~~~~~~~~~
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
@@ -557,49 +226,19 @@ Example Response
 .. code-block:: json
 
     {
-        "id": 1051,
+        "name": "toys",
+        "id": 9,
         "code": "toys",
         "root": {
-            "id": 1047,
+            "name": "Category",
+            "id": 1,
             "code": "category",
             "children": [
                 {
-                    "id": 1048,
-                    "code": "t-shirts",
-                    "children": [
-                        {
-                            "id": 1049,
-                            "code": "men",
-                            "children": [],
-                            "left": 3,
-                            "right": 4,
-                            "level": 2,
-                            "position": 0,
-                            "translations": [],
-                            "images": [],
-                            "_links": {
-                                "self": {
-                                    "href": "\/api\/v1\/taxons\/1049"
-                                }
-                            }
-                        },
-                        {
-                            "id": 1050,
-                            "code": "women",
-                            "children": [],
-                            "left": 5,
-                            "right": 6,
-                            "level": 2,
-                            "position": 1,
-                            "translations": [],
-                            "images": [],
-                            "_links": {
-                                "self": {
-                                    "href": "\/api\/v1\/taxons\/1050"
-                                }
-                            }
-                        }
-                    ],
+                    "name": "T-Shirts",
+                    "id": 5,
+                    "code": "t_shirts",
+                    "children": [],
                     "left": 2,
                     "right": 7,
                     "level": 1,
@@ -608,7 +247,7 @@ Example Response
                     "images": [],
                     "_links": {
                         "self": {
-                            "href": "\/api\/v1\/taxons\/1050"
+                            "href": "\/api\/v1\/taxons\/5"
                         }
                     }
                 }
@@ -617,55 +256,32 @@ Example Response
             "right": 10,
             "level": 0,
             "position": 0,
-            "translations": [],
+            "translations": {
+                "en_US": {
+                    "locale": "en_US",
+                    "id": 1,
+                    "name": "Category",
+                    "slug": "category",
+                    "description": "Consequatur illo amet aliquam."
+                }
+            },
             "images": [],
             "_links": {
                 "self": {
-                    "href": "\/api\/v1\/taxons\/1051"
+                    "href": "\/api\/v1\/taxons\/1"
                 }
             }
         },
         "parent": {
-            "id": 1047,
+            "name": "Category",
+            "id": 1,
             "code": "category",
             "children": [
                 {
-                    "id": 1048,
-                    "code": "t-shirts",
-                    "children": [
-                        {
-                            "id": 1049,
-                            "code": "men",
-                            "children": [],
-                            "left": 3,
-                            "right": 4,
-                            "level": 2,
-                            "position": 0,
-                            "translations": [],
-                            "images": [],
-                            "_links": {
-                                "self": {
-                                    "href": "\/api\/v1\/taxons\/1049"
-                                }
-                            }
-                        },
-                        {
-                            "id": 1050,
-                            "code": "women",
-                            "children": [],
-                            "left": 5,
-                            "right": 6,
-                            "level": 2,
-                            "position": 1,
-                            "translations": [],
-                            "images": [],
-                            "_links": {
-                                "self": {
-                                    "href": "\/api\/v1\/taxons\/1050"
-                                }
-                            }
-                        }
-                    ],
+                    "name": "T-Shirts",
+                    "id": 5,
+                    "code": "t_shirts",
+                    "children": [],
                     "left": 2,
                     "right": 7,
                     "level": 1,
@@ -674,7 +290,7 @@ Example Response
                     "images": [],
                     "_links": {
                         "self": {
-                            "href": "\/api\/v1\/taxons\/1048"
+                            "href": "\/api\/v1\/taxons\/5"
                         }
                     }
                 }
@@ -683,11 +299,19 @@ Example Response
             "right": 10,
             "level": 0,
             "position": 0,
-            "translations": [],
+            "translations": {
+                "en_US": {
+                    "locale": "en_US",
+                    "id": 1,
+                    "name": "Category",
+                    "slug": "category",
+                    "description": "Consequatur illo amet aliquam."
+                }
+            },
             "images": [],
             "_links": {
                 "self": {
-                    "href": "\/api\/v1\/taxons\/1047"
+                    "href": "\/api\/v1\/taxons\/1"
                 }
             }
         },
@@ -699,30 +323,471 @@ Example Response
         "translations": {
             "en_US": {
                 "locale": "en_US",
-                "id": 74,
-                "name": "Toys",
-                "slug": "category\/toys",
-                "description": "The Toys"
+                "id": 9,
+                "name": "toys",
+                "slug": "toys",
+                "description": "Toys for boys"
             }
         },
         "images": [
             {
                 "id": 1,
-                "code": "ford",
+                "type": "ford",
                 "path": "b9/65/01cec3d87aa2b819e195331843f6.jpeg"
-		    }
+            }
         ],
         "_links": {
             "self": {
-                "href": "\/api\/v1\/taxons\/1051"
+                "href": "\/api\/v1\/taxons\/9"
             }
+        }
+    }
+
+.. note::
+
+    The images should be passed in array as an attribute (files) of request. See how it is done in Sylius
+    `here <https://github.com/Sylius/Sylius/blob/master/tests/Controller/TaxonApiTest.php>`_.
+
+Getting a Single Taxon
+----------------------
+
+To retrieve the details of the taxon you will need to call the ``/api/v1/taxons/taxon_id`` endpoint with the ``GET`` method.
+
+Definition
+^^^^^^^^^^
+
+.. code-block:: text
+
+    GET /api/v1/taxons/{id}
+
++---------------+----------------+--------------------------------------+
+| Parameter     | Parameter type | Description                          |
++===============+================+======================================+
+| Authorization | header         | Token received during authentication |
++---------------+----------------+--------------------------------------+
+| id            | url attribute  | Id of requested taxon                |
++---------------+----------------+--------------------------------------+
+
+Example
+^^^^^^^
+
+To see the details for the the taxon with ``id = 9`` use the below method:
+
+.. code-block:: bash
+
+    $ curl http://demo.sylius.org/api/v1/taxons/9 \
+        -H "Authorization: Bearer SampleToken" \
+        -H "Accept: application/json"
+
+.. note::
+
+    The *9* value was taken from the previous create response. Your value can be different.
+    Check in the list of all taxons if you are not sure which id should be used.
+
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
+
+.. code-block:: text
+
+    STATUS: 200 OK
+
+.. code-block:: json
+
+    {
+        "name": "toys",
+        "id": 9,
+        "code": "toys",
+        "root": {
+            "name": "Category",
+            "id": 1,
+            "code": "category",
+            "children": [
+                {
+                    "name": "T-Shirts",
+                    "id": 5,
+                    "code": "t_shirts",
+                    "children": [],
+                    "left": 2,
+                    "right": 7,
+                    "level": 1,
+                    "position": 0,
+                    "translations": [],
+                    "images": [],
+                    "_links": {
+                        "self": {
+                            "href": "\/api\/v1\/taxons\/5"
+                        }
+                    }
+                }
+            ],
+            "left": 1,
+            "right": 10,
+            "level": 0,
+            "position": 0,
+            "translations": {
+                "en_US": {
+                    "locale": "en_US",
+                    "id": 1,
+                    "name": "Category",
+                    "slug": "category",
+                    "description": "Consequatur illo amet aliquam. Excepturi ut vel maiores dignissimos possimus ut nulla. Corporis qui nisi commodi odit. Alias est velit cum iure."
+                }
+            },
+            "images": [],
+            "_links": {
+                "self": {
+                    "href": "\/api\/v1\/taxons\/1"
+                }
+            }
+        },
+        "parent": {
+            "name": "Category",
+            "id": 1,
+            "code": "category",
+            "children": [
+                {
+                    "name": "T-Shirts",
+                    "id": 5,
+                    "code": "t_shirts",
+                    "children": [],
+                    "left": 2,
+                    "right": 7,
+                    "level": 1,
+                    "position": 0,
+                    "translations": [],
+                    "images": [],
+                    "_links": {
+                        "self": {
+                            "href": "\/api\/v1\/taxons\/5"
+                        }
+                    }
+                }
+            ],
+            "left": 1,
+            "right": 10,
+            "level": 0,
+            "position": 0,
+            "translations": {
+                "en_US": {
+                    "locale": "en_US",
+                    "id": 1,
+                    "name": "Category",
+                    "slug": "category",
+                    "description": "Consequatur illo amet aliquam. Excepturi ut vel maiores dignissimos possimus ut nulla. Corporis qui nisi commodi odit. Alias est velit cum iure."
+                }
+            },
+            "images": [],
+            "_links": {
+                "self": {
+                    "href": "\/api\/v1\/taxons\/1"
+                }
+            }
+        },
+        "children": [],
+        "left": 8,
+        "right": 9,
+        "level": 1,
+        "position": 1,
+        "translations": {
+            "en_US": {
+                "locale": "en_US",
+                "id": 9,
+                "name": "toys",
+                "slug": "toys",
+                "description": "Toys for boys"
+            }
+        },
+        "images": [
+            {
+                "id": 1,
+                "type": "ford",
+                "path": "b9/65/01cec3d87aa2b819e195331843f6.jpeg"
+            }
+        ],
+        "_links": {
+            "self": {
+                "href": "\/api\/v1\/taxons\/9"
+            }
+        }
+    }
+
+Collection of Taxons
+--------------------
+
+To retrieve a paginated list of taxons you will need to call the ``/api/v1/taxons/`` endpoint with the ``GET`` method.
+
+Definition
+^^^^^^^^^^
+
+.. code-block:: text
+
+    GET /api/v1/taxons/
+
++---------------+----------------+-------------------------------------------------------------------+
+| Parameter     | Parameter type | Description                                                       |
++===============+================+===================================================================+
+| Authorization | header         | Token received during authentication                              |
++---------------+----------------+-------------------------------------------------------------------+
+| page          | query          | *(optional)* Number of the page, by default = 1                   |
++---------------+----------------+-------------------------------------------------------------------+
+| paginate      | query          | *(optional)* Number of items to display per page, by default = 10 |
++---------------+----------------+-------------------------------------------------------------------+
+
+To see the first page of all taxons use the below method:
+
+Example
+^^^^^^^
+
+.. code-block:: bash
+
+    $ curl http://demo.sylius.org/api/v1/taxons/ \
+        -H "Authorization: Bearer SampleToken" \
+        -H "Accept: application/json"
+
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
+
+.. code-block:: text
+
+    STATUS: 200 OK
+
+.. code-block:: json
+
+    {
+        "page": 1,
+        "limit": 10,
+        "pages": 1,
+        "total": 5,
+        "_links": {
+            "self": {
+                "href": "\/api\/v1\/taxons\/?page=1&limit=10"
+            },
+            "first": {
+                "href": "\/api\/v1\/taxons\/?page=1&limit=10"
+            },
+            "last": {
+                "href": "\/api\/v1\/taxons\/?page=1&limit=10"
+            }
+        },
+        "_embedded": {
+            "items": [
+                {
+                    "name": "Category",
+                    "id": 1,
+                    "code": "category",
+                    "position": 0,
+                    "translations": {
+                        "en_US": {
+                            "locale": "en_US",
+                            "id": 1,
+                            "name": "Category",
+                            "slug": "category",
+                            "description": "Consequatur illo amet aliquam. Excepturi ut vel maiores dignissimos possimus ut nulla. Corporis qui nisi commodi odit. Alias est velit cum iure."
+                        }
+                    },
+                    "images": [],
+                    "_links": {
+                        "self": {
+                            "href": "\/api\/v1\/taxons\/1"
+                        }
+                    }
+                },
+                {
+                    "name": "T-Shirts",
+                    "id": 5,
+                    "code": "t_shirts",
+                    "root": {
+                        "name": "Category",
+                        "id": 1,
+                        "code": "category",
+                        "position": 0,
+                        "translations": [],
+                        "images": [],
+                        "_links": {
+                            "self": {
+                                "href": "\/api\/v1\/taxons\/1"
+                            }
+                        }
+                    },
+                    "parent": {
+                        "name": "Category",
+                        "id": 1,
+                        "code": "category",
+                        "position": 0,
+                        "translations": [],
+                        "images": [],
+                        "_links": {
+                            "self": {
+                                "href": "\/api\/v1\/taxons\/1"
+                            }
+                        }
+                    },
+                    "position": 0,
+                    "translations": {
+                        "en_US": {
+                            "locale": "en_US",
+                            "id": 5,
+                            "name": "T-Shirts",
+                            "slug": "t-shirts",
+                            "description": "Modi aut laborum aut sint aut ea itaque porro."
+                        }
+                    },
+                    "images": [],
+                    "_links": {
+                        "self": {
+                            "href": "\/api\/v1\/taxons\/5"
+                        }
+                    }
+                },
+                {
+                    "name": "Men",
+                    "id": 6,
+                    "code": "mens_t_shirts",
+                    "root": {
+                        "name": "Category",
+                        "id": 1,
+                        "code": "category",
+                        "position": 0,
+                        "translations": [],
+                        "images": [],
+                        "_links": {
+                            "self": {
+                                "href": "\/api\/v1\/taxons\/1"
+                            }
+                        }
+                    },
+                    "parent": {
+                        "name": "T-Shirts",
+                        "id": 5,
+                        "code": "t_shirts",
+                        "position": 0,
+                        "translations": [],
+                        "images": [],
+                        "_links": {
+                            "self": {
+                                "href": "\/api\/v1\/taxons\/5"
+                            }
+                        }
+                    },
+                    "position": 0,
+                    "translations": {
+                        "en_US": {
+                            "locale": "en_US",
+                            "id": 6,
+                            "name": "Men",
+                            "slug": "t-shirts\/men",
+                            "description": "Reprehenderit vero atque eaque sunt perferendis est."
+                        }
+                    },
+                    "images": [],
+                    "_links": {
+                        "self": {
+                            "href": "\/api\/v1\/taxons\/6"
+                        }
+                    }
+                },
+                {
+                    "name": "Women",
+                    "id": 7,
+                    "code": "womens_t_shirts",
+                    "root": {
+                        "name": "Category",
+                        "id": 1,
+                        "code": "category",
+                        "position": 0,
+                        "translations": [],
+                        "images": [],
+                        "_links": {
+                            "self": {
+                                "href": "\/api\/v1\/taxons\/1"
+                            }
+                        }
+                    },
+                    "parent": {
+                        "name": "T-Shirts",
+                        "id": 5,
+                        "code": "t_shirts",
+                        "position": 0,
+                        "translations": [],
+                        "images": [],
+                        "_links": {
+                            "self": {
+                                "href": "\/api\/v1\/taxons\/5"
+                            }
+                        }
+                    },
+                    "position": 1,
+                    "translations": {
+                        "en_US": {
+                            "locale": "en_US",
+                            "id": 7,
+                            "name": "Women",
+                            "slug": "t-shirts\/women",
+                            "description": "Illum quia beatae assumenda impedit."
+                        }
+                    },
+                    "images": [],
+                    "_links": {
+                        "self": {
+                            "href": "\/api\/v1\/taxons\/7"
+                        }
+                    }
+                },
+                {
+                    "name": "toys",
+                    "id": 9,
+                    "code": "toys",
+                    "root": {
+                        "name": "Category",
+                        "id": 1,
+                        "code": "category",
+                        "position": 0,
+                        "translations": [],
+                        "images": [],
+                        "_links": {
+                            "self": {
+                                "href": "\/api\/v1\/taxons\/1"
+                            }
+                        }
+                    },
+                    "parent": {
+                        "name": "Category",
+                        "id": 1,
+                        "code": "category",
+                        "position": 0,
+                        "translations": [],
+                        "images": [],
+                        "_links": {
+                            "self": {
+                                "href": "\/api\/v1\/taxons\/1"
+                            }
+                        }
+                    },
+                    "position": 1,
+                    "translations": {
+                        "en_US": {
+                            "locale": "en_US",
+                            "id": 9,
+                            "name": "toys",
+                            "slug": "toys",
+                            "description": "Toys for boys"
+                        }
+                    },
+                    "images": [],
+                    "_links": {
+                        "self": {
+                            "href": "\/api\/v1\/taxons\/9"
+                        }
+                    }
+                }
+            ]
         }
     }
 
 Updating Taxon
 --------------
 
-To full update a taxon you will need to call the ``/api/v1/taxons/taxon_id`` endpoint with ``PUT`` method.
+To fully update a taxon you will need to call the ``/api/v1/taxons/taxon_id`` endpoint with ``PUT`` method.
 
 Definition
 ^^^^^^^^^^
@@ -731,26 +796,32 @@ Definition
 
     PUT /api/v1/taxons/{id}
 
-+------------------------------------+----------------+--------------------------------------+
-| Parameter                          | Parameter type | Description                          |
-+====================================+================+======================================+
-| Authorization                      | header         | Token received during authentication |
-+------------------------------------+----------------+--------------------------------------+
-| id                                 | url attribute  | Id of requested resource             |
-+------------------------------------+----------------+--------------------------------------+
-|translations['locale_code']['name'] | request        | Name of the taxon                    |
-+------------------------------------+----------------+--------------------------------------+
-|translations['locale_code']['slug'] | request        | **(unique)** Slug                    |
-+------------------------------------+----------------+--------------------------------------+
++--------------------------------------------+----------------+-------------------------------------------------+
+| Parameter                                  | Parameter type | Description                                     |
++============================================+================+=================================================+
+| Authorization                              | header         | Token received during authentication            |
++--------------------------------------------+----------------+-------------------------------------------------+
+| id                                         | url attribute  | Id of the requested taxon                       |
++--------------------------------------------+----------------+-------------------------------------------------+
+| translations['locale_code']['name']        | request        | *(optional)* Name of the taxon                  |
++--------------------------------------------+----------------+-------------------------------------------------+
+| translations['locale_code']['slug']        | request        | *(optional)* **(unique)** Slug                  |
++--------------------------------------------+----------------+-------------------------------------------------+
+| translations['locale_code']['description'] | request        | *(optional)* Description of the taxon           |
++--------------------------------------------+----------------+-------------------------------------------------+
+| parent                                     | request        | *(optional)* The parent taxon's code            |
++--------------------------------------------+----------------+-------------------------------------------------+
+| images                                     | request        | *(optional)* Images codes assigned to the taxon |
++--------------------------------------------+----------------+-------------------------------------------------+
 
 Example
-.......
+^^^^^^^
 
-To full update the taxon with id equals to 3 use the below method.
+To full update the taxon with ``id = 9`` use the below method:
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/taxons/3 \
+    $ curl http://demo.sylius.org/api/v1/taxons/9 \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PUT \
@@ -758,21 +829,21 @@ To full update the taxon with id equals to 3 use the below method.
             {
                 "translations": {
                     "en_US": {
-                        "name": "Books",
-                        "slug": "category/books"
+                        "name": "Dolls",
+                        "slug": "dolls"
                     }
                 }
 	        }
         '
 
-Example Response
-~~~~~~~~~~~~~~~~
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
     STATUS: 204 No Content
 
-To partial update a taxon you will need to call the ``/api/v1/taxons/taxon_id`` endpoint with ``PATCH`` method.
+To update a taxon partially you will need to call the ``/api/v1/taxons/taxon_id`` endpoint with the ``PATCH`` method.
 
 Definition
 ^^^^^^^^^^
@@ -781,22 +852,22 @@ Definition
 
     PATCH /api/v1/taxons/{id}
 
-+---------------+----------------+--------------------------------------------------------+
-| Parameter     | Parameter type | Description                                            |
-+===============+================+========================================================+
-| Authorization | header         | Token received during authentication                   |
-+---------------+----------------+--------------------------------------------------------+
-| id            | url attribute  | Id of requested resource                               |
-+---------------+----------------+--------------------------------------------------------+
++---------------+----------------+--------------------------------------+
+| Parameter     | Parameter type | Description                          |
++===============+================+======================================+
+| Authorization | header         | Token received during authentication |
++---------------+----------------+--------------------------------------+
+| id            | url attribute  | Id of the requested taxon            |
++---------------+----------------+--------------------------------------+
 
 Example
-.......
+^^^^^^^
 
-To partial update the taxon with id equals to 3  use the below method.
+To partial update the taxon with ``id = 9`` use the below method:
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/taxons/3 \
+    $ curl http://demo.sylius.org/api/v1/taxons/9 \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PATCH \
@@ -804,24 +875,24 @@ To partial update the taxon with id equals to 3  use the below method.
             {
                 "translations": {
                     "en_US": {
-                        "name": "Books",
-                        "slug": "books"
+                        "name": "Dolls",
+                        "slug": "dolls"
                     }
                 }
             }
         '
 
-Example Response
-~~~~~~~~~~~~~~~~
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
     STATUS: 204 No Content
 
-Deleting Taxon
---------------
+Deleting a Taxon
+----------------
 
-To delete a taxon you will need to call the ``/api/v1/taxons/taxon_id` endpoint with ``DELETE`` method.
+To delete a taxon you will need to call the ``/api/v1/taxons/taxon_id`` endpoint with the ``DELETE`` method.
 
 Definition
 ^^^^^^^^^^
@@ -835,23 +906,27 @@ Definition
 +===============+================+======================================+
 | Authorization | header         | Token received during authentication |
 +---------------+----------------+--------------------------------------+
-| id            | url attribute  | Id of removed taxon                  |
+| id            | url attribute  | Id of the taxon to be removed        |
 +---------------+----------------+--------------------------------------+
 
 Example
-.......
+^^^^^^^
 
-To delete the taxon with id equals to 3 use the method below.
+To delete the taxon with ``id = 9`` use the below method:
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/taxons/3 \
+    $ curl http://demo.sylius.org/api/v1/taxons/9 \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X DELETE
 
-Example Response
-~~~~~~~~~~~~~~~~
+.. note::
+
+    Remember the *9* value comes from the previous example. Here we are deleting a previously updated taxon, so it is the same id.
+
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 

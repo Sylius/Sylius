@@ -254,7 +254,7 @@ final class ManagingTaxonsContext implements Context
      */
     public function thisTaxonShouldBelongsTo(TaxonInterface $taxon)
     {
-        Assert::true($this->updatePage->hasResourceValues(['parent' => $taxon->getId()]));
+        Assert::true($this->updatePage->hasResourceValues(['parent' => $taxon->getCode()]));
     }
 
     /**

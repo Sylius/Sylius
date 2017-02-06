@@ -1,29 +1,21 @@
 Sylius\Component\Core\Model\Taxon:
-    Category:
+    category:
         code: "category"
-        children:
-            - "@Mugs"
-            - "@Stickers"
-            - "@Books"
-            - "@T-Shirts"
-    Mugs:
+    mugs:
         code: "mugs"
-        parent: "@Category"
-    Stickers:
+        parent: "@category"
+    stickers:
         code: "stickers"
-        parent: "@Category"
-    Books:
+        parent: "@category"
+    books:
         code: "books"
-        parent: "@Category"
-    T-Shirts:
+        parent: "@category"
+    t-shirts:
         code: "t-shirts"
-        parent: "@Category"
-        children:
-            - "@Men"
-            - "@Women"
-    Men:
+        parent: "@category"
+    men:
         code: "men"
-        parent: "@T-Shirts"
-    Women:
+        parent: "@t-shirts"
+    women:
         code: "women"
-        parent: "@T-Shirts"
+        parent: "@t-shirts"

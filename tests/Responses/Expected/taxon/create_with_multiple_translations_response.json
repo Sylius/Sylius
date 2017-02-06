@@ -1,6 +1,7 @@
 {
     "id": @integer@,
-    "code": "women",
+    "name": "Fluffy Pets",
+    "code": "fluffy_pets",
     "root": {
         "id": @integer@,
         "code": "category",
@@ -71,7 +72,7 @@
             }
         ],
         "left": 1,
-        "right": 14,
+        "right": 16,
         "level": 0,
         "position": 0,
         "translations": {
@@ -88,48 +89,64 @@
     },
     "parent": {
         "id": @integer@,
-        "code": "t-shirts",
-        "root": {
-            "id": @integer@,
-            "code": "category",
-            "children": [],
-            "left": 1,
-            "right": 14,
-            "level": 0,
-            "position": 0,
-            "translations": [],
-            "images": [],
-            "_links": {
-                "self": {
-                    "href": "@string@"
-                }
-            }
-        },
-        "parent": {
-            "id": @integer@,
-            "code": "category",
-            "children": [],
-            "left": 1,
-            "right": 14,
-            "level": 0,
-            "position": 0,
-            "translations": [],
-            "images": [],
-            "_links": {
-                "self": {
-                    "href": "@string@"
-                }
-            }
-        },
+        "code": "category",
         "children": [
             {
                 "id": @integer@,
-                "code": "men",
+                "code": "mugs",
                 "children": [],
-                "left": 9,
-                "right": 10,
-                "level": 2,
+                "left": 2,
+                "right": 3,
+                "level": 1,
                 "position": 0,
+                "translations": [],
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "code": "stickers",
+                "children": [],
+                "left": 4,
+                "right": 5,
+                "level": 1,
+                "position": 1,
+                "translations": [],
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "code": "books",
+                "children": [],
+                "left": 6,
+                "right": 7,
+                "level": 1,
+                "position": 2,
+                "translations": [],
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "code": "t-shirts",
+                "children": [],
+                "left": 8,
+                "right": 13,
+                "level": 1,
+                "position": 3,
                 "translations": [],
                 "images": [],
                 "_links": {
@@ -139,10 +156,10 @@
                 }
             }
         ],
-        "left": 8,
-        "right": 13,
-        "level": 1,
-        "position": 3,
+        "left": 1,
+        "right": 16,
+        "level": 0,
+        "position": 0,
         "translations": {
             "en": {
                 "locale": "en"
@@ -156,13 +173,22 @@
         }
     },
     "children": [],
-    "left": 11,
-    "right": 12,
-    "level": 2,
-    "position": 1,
+    "left": 14,
+    "right": 15,
+    "level": 1,
+    "position": 4,
     "translations": {
-        "en": {
-            "locale": "en"
+        "en_US": {
+            "id": @integer@,
+            "locale": "en_US",
+            "name": "Fluffy Pets",
+            "slug": "fluffy-pets"
+        },
+        "nl_NL": {
+            "id": @integer@,
+            "locale": "nl_NL",
+            "name": "Pluizige Huisdieren",
+            "slug": "pluizige-huisdieren"
         }
     },
     "images": [],

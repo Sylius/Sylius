@@ -1,11 +1,12 @@
 {
+    "name": "Fluffy Pets",
     "id": @integer@,
     "code": "fluffy_pets",
     "children": [],
     "left": 1,
     "right": 2,
     "level": 0,
-    "position": 1,
+    "position": 0,
     "translations": {
         "en_US": {
             "id": @integer@,
@@ -18,6 +19,12 @@
             "locale": "nl_NL",
             "name": "Pluizige Huisdieren",
             "slug": "pluizige-huisdieren"
+        }
+    },
+    "images": [],
+    "_links": {
+        "self": {
+            "href": "@string@"
         }
     }
 }

@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class TaxonApiTest extends JsonApiTestCase
+final class TaxonApiTest extends JsonApiTestCase
 {
     /**
      * @var array
@@ -69,7 +69,6 @@ class TaxonApiTest extends JsonApiTestCase
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/taxons.yml');
 
-
         $this->client->request('GET', '/api/v1/taxons/', [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
@@ -83,8 +82,9 @@ class TaxonApiTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $taxons = $this->loadFixturesFromFile('resources/taxons.yml');
+        $taxon = $taxons['women'];
 
-        $this->client->request('GET', '/api/v1/taxons/'.$taxons['Women']->getId(), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', '/api/v1/taxons/'.$taxon->getId(), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'taxon/show_response', Response::HTTP_OK);
@@ -93,7 +93,22 @@ class TaxonApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allow_delete_taxon_if_it_does_not_exist()
+    public function it_allows_showing_root_taxon()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $taxons = $this->loadFixturesFromFile('resources/taxons.yml');
+        $taxon = $taxons['category'];
+
+        $this->client->request('GET', '/api/v1/taxons/'.$taxon->getId(), [], [], static::$authorizedHeaderWithAccept);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'taxon/show_root_response', Response::HTTP_OK);
+    }
+
+    /**
+     * @test
+     */
+    public function it_does_not_allow_to_delete_taxon_if_it_does_not_exist()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -106,17 +121,18 @@ class TaxonApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_delete_taxon()
+    public function it_allows_deleting_taxon()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $taxons = $this->loadFixturesFromFile('resources/taxons.yml');
+        $taxon = $taxons['men'];
 
-        $this->client->request('DELETE', '/api/v1/taxons/'.$taxons['Men']->getId(), [], [], static::$authorizedHeaderWithContentType, []);
+        $this->client->request('DELETE', '/api/v1/taxons/'.$taxon->getId(), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
 
-        $this->client->request('GET', '/api/v1/taxons/'.$taxons['Men']->getId(), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', '/api/v1/taxons/'.$taxon->getId(), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
@@ -125,7 +141,27 @@ class TaxonApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_create_taxon_with_multiple_translations()
+    public function it_allows_deleting_root_taxon()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $taxons = $this->loadFixturesFromFile('resources/taxons.yml');
+        $taxon = $taxons['category'];
+
+        $this->client->request('DELETE', '/api/v1/taxons/'.$taxon->getId(), [], [], static::$authorizedHeaderWithContentType);
+
+        $response = $this->client->getResponse();
+        $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
+
+        $this->client->request('GET', '/api/v1/taxons/'.$taxon->getId(), [], [], static::$authorizedHeaderWithAccept);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_creating_root_taxon_with_multiple_translations()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/locales.yml');
@@ -150,13 +186,13 @@ EOT;
         $this->client->request('POST', '/api/v1/taxons/', [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'taxon/create_response', Response::HTTP_CREATED);
+        $this->assertResponse($response, 'taxon/create_root_with_multiple_translations_response', Response::HTTP_CREATED);
     }
 
     /**
      * @test
      */
-    public function it_allows_create_root_taxon()
+    public function it_allows_creating_root_taxon()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -176,7 +212,41 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_create_taxon_with_parent()
+    public function it_allows_creating_taxon_with_multiple_translations()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/locales.yml');
+        $this->loadFixturesFromFile('resources/taxons.yml');
+
+        $data =
+<<<EOT
+        {
+            "code": "fluffy_pets",
+            "parent": "category",
+            "translations": {
+                "en_US": {
+                    "name": "Fluffy Pets",
+                    "slug": "fluffy-pets"
+                },
+                "nl_NL": {
+                    "name": "Pluizige Huisdieren",
+                    "slug": "pluizige-huisdieren"
+                }
+            }
+        }
+EOT;
+
+        $this->client->request('POST', '/api/v1/taxons/', [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'taxon/create_with_multiple_translations_response', Response::HTTP_CREATED);
+    }
+
+
+    /**
+     * @test
+     */
+    public function it_allows_creating_taxon_with_parent()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/taxons.yml');
@@ -202,7 +272,7 @@ EOT;
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
-        $this->client->request('POST', '/api/v1/taxons/', [], [], static::$authorizedHeaderWithContentType, []);
+        $this->client->request('POST', '/api/v1/taxons/', [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'taxon/create_validation_fail_response', Response::HTTP_BAD_REQUEST);
@@ -211,7 +281,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_create_product_with_images()
+    public function it_allows_creating_taxon_with_images()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -220,11 +290,11 @@ EOT;
         {
             "code": "toys",
             "images": [
-                { 
-                    "code": "ford"
+                {
+                    "type": "ford"                
                 },
                 {
-                    "code": "mug"
+                    "type": "mugs"
                 }
             ]
         }
@@ -247,8 +317,9 @@ EOT;
     public function it_allows_updating_taxon_with_parent()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $taxons = $this->loadFixturesFromFile('resources/taxons.yml');
         $this->loadFixturesFromFile('resources/locales.yml');
+        $taxons = $this->loadFixturesFromFile('resources/taxons.yml');
+        $taxon = $taxons["women"];
 
         $data =
 <<<EOT
@@ -262,7 +333,7 @@ EOT;
             "parent": "books"
         }
 EOT;
-        $this->client->request('PUT', '/api/v1/taxons/'. $taxons["Women"]->getId(), [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('PUT', '/api/v1/taxons/'. $taxon->getId(), [], [], static::$authorizedHeaderWithContentType, $data);
         $response = $this->client->getResponse();
 
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
@@ -274,8 +345,9 @@ EOT;
     public function it_allows_updating_root_taxon()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $taxons = $this->loadFixturesFromFile('resources/taxons.yml');
         $this->loadFixturesFromFile('resources/locales.yml');
+        $taxons = $this->loadFixturesFromFile('resources/taxons.yml');
+        $taxon = $taxons["category"];
 
         $data =
 <<<EOT
@@ -288,7 +360,7 @@ EOT;
             }
         }
 EOT;
-        $this->client->request('PUT', '/api/v1/taxons/'. $taxons["Category"]->getId(), [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('PUT', '/api/v1/taxons/'. $taxon->getId(), [], [], static::$authorizedHeaderWithContentType, $data);
         $response = $this->client->getResponse();
 
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
@@ -300,8 +372,9 @@ EOT;
     public function it_allows_updating_partial_information_about_taxon()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $taxons = $this->loadFixturesFromFile('resources/taxons.yml');
         $this->loadFixturesFromFile('resources/locales.yml');
+        $taxons = $this->loadFixturesFromFile('resources/taxons.yml');
+        $taxon = $taxons["women"];
 
         $data =
 <<<EOT
@@ -314,7 +387,33 @@ EOT;
             }
         }
 EOT;
-        $this->client->request('PATCH', '/api/v1/taxons/'. $taxons["Women"]->getId(), [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('PATCH', '/api/v1/taxons/'. $taxon->getId(), [], [], static::$authorizedHeaderWithContentType, $data);
+        $response = $this->client->getResponse();
+        $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_updating_partial_information_about_root_taxon()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/locales.yml');
+        $taxons = $this->loadFixturesFromFile('resources/taxons.yml');
+        $taxon = $taxons["category"];
+
+        $data =
+<<<EOT
+        {
+            "translations": {
+                "en_US": {
+                    "name": "Category",
+                    "slug": "category"
+                }
+            }
+        }
+EOT;
+        $this->client->request('PATCH', '/api/v1/taxons/'. $taxon->getId(), [], [], static::$authorizedHeaderWithContentType, $data);
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
     }
