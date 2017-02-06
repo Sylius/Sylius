@@ -26,7 +26,7 @@
     <services>
         <service id="sylius.form.type_extension.form.request_handler"
                  class="Sylius\Bundle\ResourceBundle\Form\Extension\HttpFoundation\HttpFoundationRequestHandler"
-                 decorates="form.type_extension.form.request_handler" public="false" />
+                 decorates="form.type_extension.form.request_handler" decoration-priority="256" public="false" />
 
         <service id="sylius.resource_registry" class="Sylius\Component\Resource\Metadata\Registry" public="false" />
 

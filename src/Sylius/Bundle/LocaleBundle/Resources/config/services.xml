@@ -34,7 +34,7 @@
             <argument>%sylius_locale.locale%</argument>
         </service>
 
-        <service id="sylius.context.locale.composite" class="Sylius\Component\Locale\Context\CompositeLocaleContext" decorates="sylius.context.locale" public="false" />
+        <service id="sylius.context.locale.composite" class="Sylius\Component\Locale\Context\CompositeLocaleContext" decorates="sylius.context.locale" decoration-priority="256" public="false" />
 
         <service id="sylius.locale_provider" class="Sylius\Component\Locale\Provider\LocaleProvider">
             <argument type="service" id="sylius.repository.locale" />

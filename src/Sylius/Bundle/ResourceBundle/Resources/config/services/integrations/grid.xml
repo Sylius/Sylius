@@ -18,13 +18,13 @@
             <argument type="service" id="sylius.resource_controller.parameters_parser" />
         </service>
 
-        <service id="sylius.resource_controller.resources_resolver.grid_aware" class="Sylius\Bundle\ResourceBundle\Grid\Controller\ResourcesResolver" decorates="sylius.resource_controller.resources_resolver">
+        <service id="sylius.resource_controller.resources_resolver.grid_aware" class="Sylius\Bundle\ResourceBundle\Grid\Controller\ResourcesResolver" decorates="sylius.resource_controller.resources_resolver" decoration-priority="256">
             <argument type="service" id="sylius.resource_controller.resources_resolver.grid_aware.inner" />
             <argument type="service" id="sylius.grid.provider" />
             <argument type="service" id="sylius.grid.resource_view_factory" />
         </service>
 
-        <service id="sylius.custom_grid_renderer.twig" class="Sylius\Bundle\ResourceBundle\Grid\Renderer\TwigGridRenderer" decorates="sylius.grid.renderer.twig">
+        <service id="sylius.custom_grid_renderer.twig" class="Sylius\Bundle\ResourceBundle\Grid\Renderer\TwigGridRenderer" decorates="sylius.grid.renderer.twig" decoration-priority="256">
             <argument type="service" id="sylius.custom_grid_renderer.twig.inner" />
             <argument type="service" id="twig" />
             <argument type="service" id="sylius.grid_options_parser" />
