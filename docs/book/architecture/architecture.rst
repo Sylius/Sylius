@@ -124,4 +124,4 @@ Sylius uses a lot of libraries for various tasks:
 * `Gaufrette <https://github.com/KnpLabs/Gaufrette>`_ for filesystem abstraction (store images locally, Amazon S3 or external server)
 * `Imagine <https://github.com/liip/LiipImagineBundle>`_ for images processing, generating thumbnails and cropping
 * `Pagerfanta <https://github.com/whiteoctober/Pagerfanta>`_ for pagination
-* `WInzou State Machine <https://github.com/winzou/StateMachineBundle>`_ -  for the state machines handling
+* `Winzou State Machine <https://github.com/winzou/StateMachineBundle>`_ -  for the state machines handling
