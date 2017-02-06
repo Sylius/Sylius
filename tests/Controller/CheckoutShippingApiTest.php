@@ -74,6 +74,55 @@ final class CheckoutShippingApiTest extends CheckoutApiTestCase
     /**
      * @test
      */
+    public function it_does_not_provide_details_of_unexisting_cart()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+
+        $this->client->request('PUT', '/api/v1/checkouts/select-shipping/0', [], [], static::$authorizedHeaderWithContentType);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
+    }
+
+    /**
+     * @test
+     */
+    public function it_provides_details_about_available_shipping_method()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $checkoutData = $this->loadFixturesFromFile('resources/checkout.yml');
+
+        /** @var OrderInterface $cart */
+        $cart = $checkoutData['order1'];
+
+        $this->addressOrder($cart);
+
+        $this->client->request('GET', $this->getSelectShippingUrl($cart), [], [], static::$authorizedHeaderWithContentType);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'checkout/get_available_shipping_methods', Response::HTTP_OK);
+    }
+
+    /**
+     * @test
+     */
+    public function it_does_not_provide_details_about_available_shipping_method_before_addressing()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $checkoutData = $this->loadFixturesFromFile('resources/checkout.yml');
+
+        /** @var OrderInterface $cart */
+        $cart = $checkoutData['order1'];
+
+        $this->client->request('GET', $this->getSelectShippingUrl($cart), [], [], static::$authorizedHeaderWithContentType);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'checkout/get_available_shipping_methods_failed', Response::HTTP_BAD_REQUEST);
+    }
+
+    /**
+     * @test
+     */
     public function it_does_not_allow_to_select_unexisting_shipping_method()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
@@ -98,7 +147,6 @@ EOT;
         $this->client->request('PUT', $this->getSelectShippingUrl($cart), [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
-
         $this->assertResponse($response, 'checkout/shipping_validation_failed', Response::HTTP_BAD_REQUEST);
     }
 
@@ -112,17 +160,20 @@ EOT;
 
         /** @var OrderInterface $cart */
         $cart = $checkoutData['order1'];
-        /** @var ShippingMethodInterface $shippingMethod */
-        $shippingMethod = $checkoutData['ups'];
 
         $this->addressOrder($cart);
+
+        $this->client->request('GET', $this->getSelectShippingUrl($cart), [], [], static::$authorizedHeaderWithContentType);
+
+        $response = $this->client->getResponse();
+        $rawResponse = json_decode($response->getContent());
 
         $data =
 <<<EOT
         {
             "shipments": [
                 {
-                    "method": "{$shippingMethod->getCode()}"
+                    "method": "{$rawResponse->shipments[0]->methods[0]->code}"
                 }
             ]
         }
@@ -149,18 +200,21 @@ EOT;
 
         /** @var OrderInterface $cart */
         $cart = $checkoutData['order1'];
-        /** @var ShippingMethodInterface $shippingMethod */
-        $shippingMethod = $checkoutData['ups'];
 
         $this->addressOrder($cart);
-        $this->selectOrderShippingMethod($cart, $shippingMethod);
+        $this->selectOrderShippingMethod($cart);
+
+        $this->client->request('GET', $this->getSelectShippingUrl($cart), [], [], static::$authorizedHeaderWithContentType);
+
+        $response = $this->client->getResponse();
+        $rawResponse = json_decode($response->getContent());
 
         $data =
 <<<EOT
         {
             "shipments": [
                 {
-                    "method": "{$shippingMethod->getCode()}"
+                    "method": "{$rawResponse->shipments[0]->methods[0]->code}"
                 }
             ]
         }
@@ -182,21 +236,24 @@ EOT;
 
         /** @var OrderInterface $cart */
         $cart = $checkoutData['order1'];
-        /** @var ShippingMethodInterface $shippingMethod */
-        $shippingMethod = $checkoutData['ups'];
         /** @var PaymentMethodInterface $paymentMethod */
         $paymentMethod = $checkoutData['cash_on_delivery'];
 
         $this->addressOrder($cart);
-        $this->selectOrderShippingMethod($cart, $shippingMethod);
+        $this->selectOrderShippingMethod($cart);
         $this->selectOrderPaymentMethod($cart, $paymentMethod);
+
+        $this->client->request('GET', $this->getSelectShippingUrl($cart), [], [], static::$authorizedHeaderWithContentType);
+
+        $response = $this->client->getResponse();
+        $rawResponse = json_decode($response->getContent());
 
         $data =
 <<<EOT
         {
             "shipments": [
                 {
-                    "method": "{$shippingMethod->getCode()}"
+                    "method": "{$rawResponse->shipments[0]->methods[0]->code}"
                 }
             ]
         }

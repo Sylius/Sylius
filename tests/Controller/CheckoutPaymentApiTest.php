@@ -74,11 +74,9 @@ final class CheckoutPaymentApiTest extends CheckoutApiTestCase
 
         /** @var OrderInterface $cart */
         $cart = $checkoutData['order1'];
-        /** @var ShippingMethodInterface $shippingMethod */
-        $shippingMethod = $checkoutData['ups'];
 
         $this->addressOrder($cart);
-        $this->selectOrderShippingMethod($cart, $shippingMethod);
+        $this->selectOrderShippingMethod($cart);
 
         $data =
 <<<EOT
@@ -108,13 +106,11 @@ EOT;
 
         /** @var OrderInterface $cart */
         $cart = $checkoutData['order1'];
-        /** @var ShippingMethodInterface $shippingMethod */
-        $shippingMethod = $checkoutData['ups'];
         /** @var PaymentMethodInterface $paymentMethod */
         $paymentMethod = $checkoutData['cash_on_delivery'];
 
         $this->addressOrder($cart);
-        $this->selectOrderShippingMethod($cart, $shippingMethod);
+        $this->selectOrderShippingMethod($cart);
 
         $data =
 <<<EOT
@@ -148,13 +144,11 @@ EOT;
 
         /** @var OrderInterface $cart */
         $cart = $checkoutData['order1'];
-        /** @var ShippingMethodInterface $shippingMethod */
-        $shippingMethod = $checkoutData['ups'];
         /** @var PaymentMethodInterface $paymentMethod */
         $paymentMethod = $checkoutData['cash_on_delivery'];
 
         $this->addressOrder($cart);
-        $this->selectOrderShippingMethod($cart, $shippingMethod);
+        $this->selectOrderShippingMethod($cart);
         $this->selectOrderPaymentMethod($cart, $paymentMethod);
 
         $data =

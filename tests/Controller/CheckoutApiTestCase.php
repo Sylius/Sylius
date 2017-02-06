@@ -78,20 +78,26 @@ EOT;
      * @param OrderInterface $order
      * @param ShippingMethodInterface $shippingMethod
      */
-    protected function selectOrderShippingMethod(OrderInterface $order, ShippingMethodInterface $shippingMethod)
+    protected function selectOrderShippingMethod(OrderInterface $order)
     {
+        $url = sprintf('/api/v1/checkouts/select-shipping/%d', $order->getId());
+
+        $this->client->request('GET', $url, [], [], static::$authorizedHeaderWithContentType);
+
+        $response = $this->client->getResponse();
+        $rawResponse = json_decode($response->getContent());
+
         $data =
 <<<EOT
         {
             "shipments": [
                 {
-                    "method": "{$shippingMethod->getCode()}"
+                    "method": "{$rawResponse->shipments[0]->methods[0]->code}"
                 }
             ]
         }
 EOT;
 
-        $url = sprintf('/api/v1/checkouts/select-shipping/%d', $order->getId());
         $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
     }
 

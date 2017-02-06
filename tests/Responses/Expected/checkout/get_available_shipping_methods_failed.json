@@ -1,0 +1,4 @@
+{
+    "code": 400,
+    "message": "The shipment methods cannot be resolved in the current state of cart!"
+}

@@ -278,8 +278,6 @@ EOT;
 
         /** @var OrderInterface $cart */
         $cart = $checkoutData['order1'];
-        /** @var ShippingMethodInterface $shippingMethod */
-        $shippingMethod = $checkoutData['ups'];
 
         $addressData =
 <<<EOT
@@ -301,7 +299,7 @@ EOT;
 
         $this->client->request('PUT', $this->getAddressingUrl($cart), [], [], static::$authorizedHeaderWithContentType, $addressData);
 
-        $this->selectOrderShippingMethod($cart, $shippingMethod);
+        $this->selectOrderShippingMethod($cart);
 
         $newAddressData =
 <<<EOT
@@ -338,8 +336,6 @@ EOT;
 
         /** @var OrderInterface $cart */
         $cart = $checkoutData['order1'];
-        /** @var ShippingMethodInterface $shippingMethod */
-        $shippingMethod = $checkoutData['ups'];
         /** @var PaymentMethodInterface $paymentMethod */
         $paymentMethod = $checkoutData['cash_on_delivery'];
 
@@ -363,7 +359,7 @@ EOT;
 
         $this->client->request('PUT', $this->getAddressingUrl($cart), [], [], static::$authorizedHeaderWithContentType, $addressData);
 
-        $this->selectOrderShippingMethod($cart, $shippingMethod);
+        $this->selectOrderShippingMethod($cart);
         $this->selectOrderPaymentMethod($cart, $paymentMethod);
 
         $newAddressData =

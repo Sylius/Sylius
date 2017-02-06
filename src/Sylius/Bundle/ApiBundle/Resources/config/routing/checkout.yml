@@ -1,6 +1,7 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 #
+
 sylius_api_checkout_show:
     path: /{id}
     methods: [GET]
@@ -23,6 +24,14 @@ sylius_api_checkout_addressing:
             state_machine:
                 graph: sylius_order_checkout
                 transition: address
+
+sylius_api_checkout_available_shipping_methods:
+    path: /select-shipping/{orderId}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.order:showAvailableShippingMethodsAction
+        _sylius:
+            serialization_version: $version
 
 sylius_api_checkout_select_shipping:
     path: /select-shipping/{orderId}

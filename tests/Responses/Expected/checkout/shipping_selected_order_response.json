@@ -35,20 +35,22 @@
             "method": {
                 "id": @integer@,
                 "code": "UPS",
-                "category_requirement": @integer@,
+                "category_requirement": 1,
                 "calculator": "flat_rate",
                 "configuration": {
-                    "amount": 10
+                    "CHANNEL": {
+                        "amount": 10
+                    }
                 },
                 "created_at": "@string@.isDateTime()",
                 "updated_at": "@string@.isDateTime()",
                 "enabled": true,
                 "_links": {
                     "self": {
-                        "href": @string@
+                        "href": "\/api\/v1\/shipping-methods\/UPS"
                     },
                     "zone": {
-                        "href": @string@
+                        "href": "\/api\/v1\/zones\/EU"
                     }
                 }
             },
@@ -59,7 +61,7 @@
                     "href": @string@
                 },
                 "method": {
-                    "href": @string@
+                    "href": "\/api\/v1\/shipping-methods\/UPS"
                 },
                 "order": {
                     "href": @string@
