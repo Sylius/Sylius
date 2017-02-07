@@ -1,24 +1,24 @@
 Getting a Collection of Resources
 =================================
 
-To get a paginated list of users, we will use **indexAction** of our controller!
-In the default scenario, it will return an instance of paginator, with a list of Users.
+To get a paginated list of Books, we will use **indexAction** of our controller.
+In the default scenario, it will return an instance of paginator, with a list of Books.
 
 .. code-block:: yaml
 
-    # routing.yml
+    # app/config/routing.yml
 
-    app_user_index:
-        path: /users
+    app_book_index:
+        path: /books
         methods: [GET]
         defaults:
-            _controller: app.controller.user:indexAction
+            _controller: app.controller.book:indexAction
 
-When you go to ``/users``, ResourceController will use the repository (``app.repository.user``) to create a paginator.
-The default template will be rendered - ``App:User:index.html.twig`` with the paginator as the ``users`` variable.
+When you go to ``/books``, the ResourceController will use the repository (``app.repository.book``) to create a paginator.
+The default template will be rendered - ``App:Book:index.html.twig`` with the paginator as the ``books`` variable.
 
-A paginator can be a simple array if you disable the pagination otherwise it is a instance of ``Pagerfanta\Pagerfanta``
-which is the `library <https://github.com/whiteoctober/Pagerfanta>`_ used to manage the pagination.
+A paginator can be a simple array, if you disable the pagination, otherwise it is an instance of ``Pagerfanta\Pagerfanta``
+which is a `library <https://github.com/whiteoctober/Pagerfanta>`_ used to manage the pagination.
 
 Overriding the Template and Criteria
 ------------------------------------
@@ -27,41 +27,41 @@ Just like for the **showAction**, you can override the default template and crit
 
 .. code-block:: yaml
 
-    # routing.yml
+    # app/config/routing.yml
 
-    app_user_index_inactive:
-        path: /users/inactive
+    app_book_index_inactive:
+        path: /books/disabled
         methods: [GET]
         defaults:
-            _controller: app.controller.user:indexAction
+            _controller: app.controller.book:indexAction
             _sylius:
                 criteria:
                     enabled: false
-                template: App:User:inactive.html.twig
+                template: Book/disabled.html.twig
 
-This action will render a custom template with a paginator only for disabled users.
+This action will render a custom template with a paginator only for disabled Books.
 
 Sorting
 -------
 
-Except filtering, you can also sort users.
+Except filtering, you can also sort Books.
 
 .. code-block:: yaml
 
-    # routing.yml
+    # app/config/routing.yml
 
-    app_user_index_top:
-        path: /users/top
+    app_book_index_top:
+        path: /books/top
         methods: [GET]
         defaults:
-            _controller: app.controller.user:indexAction
+            _controller: app.controller.book:indexAction
             _sylius:
                 sortable: true
                 sorting:
                     score: desc
-                template: App:User:top.html.twig
+                template: Book/top.html.twig
 
-Under that route, you can paginate over the users by their score.
+Under that route, you can paginate over the Books by their score.
 
 Using a Custom Repository Method
 --------------------------------
@@ -81,21 +81,21 @@ You can also control the "max per page" for paginator, using ``paginate`` parame
 
 .. code-block:: yaml
 
-    # routing.yml
+    # app/config/routing.yml
 
-    app_user_index_top:
-        path: /users/top
+    app_book_index_top:
+        path: /books/top
         methods: [GET]
         defaults:
-            _controller: app.controller.user:indexAction
+            _controller: app.controller.book:indexAction
             _sylius:
                 paginate: 5
                 sortable: true
                 sorting:
                     score: desc
-                template: App:User:top.html.twig
+                template: Book/top.html.twig
 
-This will paginate users by 5 per page, where 10 is the default.
+This will paginate 5 books per page, where 10 is the default.
 
 Disabling Pagination - Getting a Simple Collection
 --------------------------------------------------
@@ -104,43 +104,43 @@ Pagination is handy, but you do not always want to do it, you can disable pagina
 
 .. code-block:: yaml
 
-    # routing.yml
+    # app/config/routing.yml
 
-    app_user_index_top3:
-        path: /users/top
+    app_book_index_top3:
+        path: /books/top
         methods: [GET]
         defaults:
-            _controller: app.controller.user:indexAction
+            _controller: app.controller.book:indexAction
             _sylius:
                 paginate: false
                 limit: 3
                 sortable: true
                 sorting:
                     score: desc
-                template: App:User:top3.html.twig
+                template: Book/top3.html.twig
 
-That action will return the top 3 users by score, as the ``users`` variable.
+That action will return the top 3 books by score, as the ``books`` variable.
 
 Configuration Reference
 -----------------------
 
 .. code-block:: yaml
 
-    # routing.yml
+    # app/config/routing.yml
 
-    app_user_index:
-        path: /{groupName}/users
+    app_book_index:
+        path: /{author}/books
         methods: [GET]
         defaults:
-            _controller: app.controller.user:indexAction
+            _controller: app.controller.book:indexAction
             _sylius:
-                template: :Group:users.html.twig
+                template: Author/books.html.twig
                 repository:
-                    method: createPaginatorByGroupName
-                    arguments: [$groupName]
+                    method: createPaginatorByAuthor
+                    arguments: [$author]
                 criteria:
                     enabled: true
-                    group.name: $groupName
+                    author.name: $author
                 paginate: false # Or: 50
                 limit: 100 # Or: false
                 serialization_groups: [Custom, Details]
