@@ -91,12 +91,10 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
      */
     public function findNodesTreeSorted($rootCode = null)
     {
-        return $this->createQueryBuilder('o')
+        $queryBuilder = $this->createQueryBuilder('o')
             ->addOrderBy('o.root')
             ->addOrderBy('o.left')
             ->addOrderBy('o.position')
-            ->getQuery()
-            ->getResult()
         ;
 
         if (null !== $rootCode) {
