@@ -1,31 +1,10 @@
-<!DOCTYPE html>
+{% extends '@SyliusShop/layout.html.twig' %}
 
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-    <title>{% block title %}Sylius{% endblock %}</title>
-
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-
-    {% block metatags %}
-    {% endblock %}
-
-    {% block stylesheets %}
-        {% include '@SyliusUi/_stylesheets.html.twig' with {'path': 'assets/shop/css/style.css'} %}
-    {% endblock %}
-</head>
-
-<body>
-<div class="ui container">
-    {% block content %}
-    {% endblock %}
-    <div class="ui hidden divider"></div>
-</div>
-
-{% block javascripts %}
-    {% include '@SyliusUi/_javascripts.html.twig' with {'path': 'assets/shop/js/app.js'} %}
+{% block top %}
+    {# Clear the topmost section. We do not want it in the checkout.  #}
 {% endblock %}
-</body>
-</html>
+
+{% block header %}
+    {# Override the normal page header with a custom one for all checkout steps. #}
+    {% include '@SyliusShop/Checkout/_header.html.twig' %}
+{% endblock %}
