@@ -57,7 +57,7 @@ abstract class AttributeChoiceType extends AbstractType
                 'choices' => function (Options $options) {
                     return $this->attributeRepository->findAll();
                 },
-                'choice_value' => 'id',
+                'choice_value' => 'code',
                 'choice_label' => 'name',
                 'choice_translation_domain' => false,
             ])

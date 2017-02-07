@@ -12,6 +12,7 @@
 namespace Sylius\Tests\Controller;
 
 use Lakion\ApiTestCase\JsonApiTestCase;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -100,6 +101,7 @@ final class ProductApiTest extends JsonApiTestCase
         $this->client->request('DELETE', '/api/v1/products/-1', [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
+
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
     }
 
@@ -241,5 +243,244 @@ EOT;
         $this->client->request('GET', '/api/v1/products/', ['sorting' => ['code' => 'asc']], [], static::$authorizedHeaderWithAccept);
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'product/sorted_index_response');
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_creating_product_with_options()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/product_options.yml');
+        $this->loadFixturesFromFile('resources/locales.yml');
+
+        $data =
+<<<EOT
+        {
+            "code": "MUG_TH",
+            "options": [
+                 "MUG_SIZE",
+                 "MUG_COLOR"
+            ],
+            "translations": {
+                "en_US": {
+                    "name": "Theme Mug",
+                    "slug": "theme-mug"
+                }
+            }
+        }
+EOT;
+
+        $this->client->request('POST', '/api/v1/products/', [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'product/create_with_options_response', Response::HTTP_CREATED);
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_creating_product_with_main_taxon() 
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/taxons.yml');
+        $this->loadFixturesFromFile('resources/locales.yml');
+
+        $data =
+<<<EOT
+        {
+            "code": "MUG_TH",
+            "main_taxon": "MUGS",
+            "translations": {
+                "en_US": {
+                    "name": "Theme Mug",
+                    "slug": "theme-mug"
+                }
+            }
+        }
+EOT;
+
+        $this->client->request('POST', '/api/v1/products/', [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'product/create_with_main_taxon_response', Response::HTTP_CREATED);
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_creating_product_with_product_taxons()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/locales.yml');
+        $this->loadFixturesFromFile('resources/taxons.yml');
+
+        $data =
+<<<EOT
+        {
+            "code": "MUG_TH",
+            "translations": {
+                "en_US": {
+                    "name": "Theme Mug",
+                    "slug": "theme-mug"
+                }
+            },
+            "product_taxons": "YELLOW_MUGS,MUGS"
+        }
+EOT;
+
+        $this->client->request('POST', '/api/v1/products/', [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'product/create_with_product_taxons_response', Response::HTTP_CREATED);
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_creating_product_with_channels()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/channels.yml');
+
+        $data = 
+<<<EOT
+        {
+            "code": "MUG_TH",
+            "channels": [
+                "WEB",
+                "MOB"
+            ],
+            "translations": {
+                "en_US": {
+                    "name": "Theme Mug",
+                    "slug": "theme-mug"
+                }
+            }
+        }
+EOT;
+
+        $this->client->request('POST', '/api/v1/products/', [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'product/create_with_channels_response', Response::HTTP_CREATED);
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_creating_product_with_attributes()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/locales.yml');
+        $this->loadFixturesFromFile('resources/product_attributes.yml');
+
+        $data =
+<<<EOT
+        {
+            "code": "MUG_TH",
+            "attributes": [
+                {
+                    "attribute": "mug_material",
+                    "locale_code": "en_US",
+                    "value": "concrete"
+                },
+                {
+                    "attribute": "mug_collection",
+                    "locale_code": "en_US",
+                    "value": "make live harder"
+                }
+            ],
+            "translations": {
+                "en_US": {
+                    "name": "Theme Mug",
+                    "slug": "theme-mug"
+                }
+            }
+        }
+EOT;
+
+        $this->client->request('POST', '/api/v1/products/', [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'product/create_with_attributes_response', Response::HTTP_CREATED);
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_creating_product_with_images()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/locales.yml');
+
+        $data =
+<<<EOT
+        {
+            "code": "MUG_TH",
+            "images": [
+                {
+                    "code": "FORD_MUG"
+                },
+                {
+                    "code": "MUGS"
+                }
+            ],
+            "translations": {
+                "en_US": {
+                    "name": "Theme Mug",
+                    "slug": "theme-mug"
+                }
+            }
+        }
+EOT;
+
+        $this->client->request(
+            'POST',
+            '/api/v1/products/',
+            [],
+            ['images' => [
+                ['file' => new UploadedFile(sprintf('%s/../Resources/fixtures/ford.jpg', __DIR__), "ford")],
+                ['file' => new UploadedFile(sprintf('%s/../Resources/fixtures/mugs.jpg', __DIR__), "mugs")],
+            ]],
+            static::$authorizedHeaderWithContentType,
+            $data
+        );
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'product/create_with_images_response', Response::HTTP_CREATED);
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_creating_product_with_associations()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/associations.yml');
+        $this->loadFixturesFromFile('resources/locales.yml');
+        $this->loadFixturesFromFile('resources/products.yml');
+
+        $data =
+<<<EOT
+        {
+            "code": "MUG_TH",
+            "associations": {
+                "similar": "MUG1,MUG_SW",
+                "accessories": "MUG_LOTR,MUG_BB"
+            },
+            "translations": {
+                "en_US": {
+                    "name": "Theme Mug",
+                    "slug": "theme-mug"
+                }
+            }
+        }
+EOT;
+
+        $this->client->request('POST', '/api/v1/products/', [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'product/create_with_associations_response', Response::HTTP_CREATED);
     }
 }

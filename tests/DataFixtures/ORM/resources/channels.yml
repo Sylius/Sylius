@@ -4,15 +4,27 @@ Sylius\Component\Core\Model\Channel:
         name: "Web Channel"
         hostname: "localhost"
         description: "Lorem ipsum"
-        baseCurrency: "@currency"
+        baseCurrency: "@currency1"
         defaultLocale: "@locale"
         color: "black"
         enabled: true
         taxCalculationStrategy: "order_items_based"
+    channel-mob:
+        code: "MOB"
+        name: "Mobile Channel"
+        hostname: "localhost"
+        description: "Lorem ipsum psore"
+        baseCurrency: "@currency2"
+        defaultLocale: "@locale"
+        color: "yellow"
+        enabled: true
+        taxCalculationStrategy: "order_items_based"
 
 Sylius\Component\Currency\Model\Currency:
-    currency:
+    currency1:
         code: EUR
+    currency2:
+        code: USD
 
 Sylius\Component\Locale\Model\Locale:
     locale:

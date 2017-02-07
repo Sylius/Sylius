@@ -69,13 +69,13 @@ final class ProductsToProductAssociationsTransformerSpec extends ObjectBehavior
             ])
         );
 
-        $firstAssociatedProduct->getId()->willReturn(7);
-        $secondAssociatedProduct->getId()->willReturn(21);
+        $firstAssociatedProduct->getCode()->willReturn('FIRST');
+        $secondAssociatedProduct->getCode()->willReturn('SECOND');
 
         $productAssociationType->getCode()->willReturn('accessories');
 
         $this->transform([$productAssociation])->shouldReturn([
-            'accessories' => '7,21',
+            'accessories' => 'FIRST,SECOND',
         ]);
     }
 

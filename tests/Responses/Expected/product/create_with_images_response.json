@@ -1,0 +1,50 @@
+{
+    "id": @integer@,
+    "name": "Theme Mug",
+    "code": "MUG_TH",
+    "available_on": "@string@.isDateTime()",
+    "attributes": [],
+    "variants": [],
+    "options": [],
+    "associations": [],
+    "translations": {
+        "en_US": {
+            "id": @integer@,
+            "locale": "en_US",
+            "name": "Theme Mug",
+            "slug": "theme-mug"
+        }
+    },
+    "product_taxons": [],
+    "reviews": [],
+    "average_rating": 0,
+    "images": [
+        {
+            "id": @integer@,
+            "code": "FORD_MUG",
+            "file": {
+                "test": true,
+                "original_name": "ford",
+                "mime_type": "application\/octet-stream",
+                "error": 0
+            },
+            "path": "@string@"
+        },
+        {
+            "id": @integer@,
+            "code": "MUGS",
+            "file": {
+                "test": true,
+                "original_name": "mugs",
+                "mime_type": "application\/octet-stream",
+                "error": 0
+            },
+            "path": "@string@"
+        }
+    ],
+    "_links": {
+        "self": {
+            "href": "@string@"
+        }
+    }
+}

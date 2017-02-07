@@ -37,7 +37,7 @@
                         $.each(response._embedded.items, function (index, item) {
                             myResults.push({
                                 name: item.name,
-                                value: item.id
+                                value: item.code
                             });
                         });
 
@@ -49,20 +49,20 @@
                 },
                 onAdd: function(addedValue, addedText, $addedChoice) {
                     var inputAssociation = $addedChoice.parents('.product-select').find('input[name*="[associations]"]');
-                    var associatedProductIds = 0 < inputAssociation.val().length ? inputAssociation.val().split(',') : [];
+                    var associatedProductCodes = 0 < inputAssociation.val().length ? inputAssociation.val().split(',') : [];
 
-                    associatedProductIds.push(addedValue);
-                    $.unique(associatedProductIds.sort());
+                    associatedProductCodes.push(addedValue);
+                    $.unique(associatedProductCodes.sort());
 
-                    inputAssociation.attr('value', associatedProductIds.join());
+                    inputAssociation.attr('value', associatedProductCodes.join());
                 },
                 onRemove: function(removedValue, removedText, $removedChoice) {
                     var inputAssociation = $removedChoice.parents('.product-select').find('input[name*="[associations]"]');
-                    var associatedProductIds = 0 < inputAssociation.val().length ? inputAssociation.val().split(',') : [];
+                    var associatedProductCodes = 0 < inputAssociation.val().length ? inputAssociation.val().split(',') : [];
 
-                    associatedProductIds.splice($.inArray(removedValue, associatedProductIds), 1);
+                    associatedProductCodes.splice($.inArray(removedValue, associatedProductCodes), 1);
 
-                    inputAssociation.attr('value', associatedProductIds.join());
+                    inputAssociation.attr('value', associatedProductCodes.join());
                 }
             });
         }

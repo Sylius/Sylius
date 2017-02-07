@@ -19,15 +19,13 @@ Sylius\Component\Core\Model\ProductVariant:
 
 Sylius\Component\Core\Model\Product:
     product1:
-        updatedAt: 2015-10-10
-        currentLocale: 'en_US'
         fallbackLocale: 'en_US'
+        currentLocale: 'en_US'
         code: 'MUG_SW'
         translations:
             - "@productTranslation1"
             - "@productTranslation2"
     product2:
-        updatedAt: 2015-10-04
         currentLocale: 'en_US'
         fallbackLocale: 'en_US'
         code: 'MUG_LOTR'
@@ -37,7 +35,6 @@ Sylius\Component\Core\Model\Product:
         variants:
             - "@productVariant"
     product3:
-        updatedAt: 2015-10-05
         currentLocale: 'en_US'
         fallbackLocale: 'en_US'
         code: 'MUG_BB'
