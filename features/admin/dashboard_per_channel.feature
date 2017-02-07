@@ -14,10 +14,10 @@ Feature: Statistics dashboard per channel
         And I am logged in as an administrator
 
     @ui
-    Scenario: Seeing basic statistics for entire store in channel
+    Scenario: Seeing basic statistics for the first channel by default
         Given 3 customers have placed 4 orders for total of "$8566.00" mostly "Onion" product
         And then 2 more customers have placed 2 orders for total of "$459.00" mostly "Banana" product
-        When I open administration dashboard for "Poland" channel
+        When I open administration dashboard
         Then I should see 4 new orders
         And I should see 5 new customers
         And there should be total sales of "$8,566.00"
@@ -38,14 +38,12 @@ Feature: Statistics dashboard per channel
     Scenario: Seeing recent orders in a specific channel
         Given 3 customers have placed 4 orders for total of "$8566.00" mostly "Onion" product
         And then 2 more customers have placed 2 orders for total of "$459.00" mostly "Banana" product
-        When I open administration dashboard
-        And I choose "Poland" channel
+        When I open administration dashboard for "Poland" channel
         Then I should see 4 new orders in the list
 
     @ui
     Scenario: Seeing recent orders in a specific channel
         Given 3 customers have placed 4 orders for total of "$8566.00" mostly "Onion" product
         And then 2 more customers have placed 2 orders for total of "$459.00" mostly "Banana" product
-        When I open administration dashboard
-        And I choose "United States" channel
+        When I open administration dashboard for "United States" channel
         Then I should see 2 new orders in the list
