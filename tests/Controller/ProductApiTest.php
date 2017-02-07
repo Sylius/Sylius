@@ -420,10 +420,10 @@ EOT;
             "code": "MUG_TH",
             "images": [
                 {
-                    "code": "FORD_MUG"
+                    "type": "FORD_MUG"
                 },
                 {
-                    "code": "MUGS"
+                    "type": "MUGS"
                 }
             ],
             "translations": {
