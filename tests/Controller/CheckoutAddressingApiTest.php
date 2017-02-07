@@ -336,8 +336,6 @@ EOT;
 
         /** @var OrderInterface $cart */
         $cart = $checkoutData['order1'];
-        /** @var PaymentMethodInterface $paymentMethod */
-        $paymentMethod = $checkoutData['cash_on_delivery'];
 
         $addressData =
 <<<EOT
@@ -360,7 +358,7 @@ EOT;
         $this->client->request('PUT', $this->getAddressingUrl($cart), [], [], static::$authorizedHeaderWithContentType, $addressData);
 
         $this->selectOrderShippingMethod($cart);
-        $this->selectOrderPaymentMethod($cart, $paymentMethod);
+        $this->selectOrderPaymentMethod($cart);
 
         $newAddressData =
 <<<EOT

@@ -22,26 +22,32 @@ sylius_api_payment_method_create:
             serialization_version: $version
 
 sylius_api_payment_method_update:
-    path: /{id}
+    path: /{code}
     methods: [PUT, PATCH]
     defaults:
         _controller: sylius.controller.payment_method:updateAction
         _sylius:
             serialization_version: $version
+            criteria:
+                code: $code
 
 sylius_api_payment_method_delete:
-    path: /{id}
+    path: /{code}
     methods: [DELETE]
     defaults:
         _controller: sylius.controller.payment_method:deleteAction
         _sylius:
             serialization_version: $version
+            criteria:
+                code: $code
             csrf_protection: false
 
 sylius_api_payment_method_show:
-    path: /{id}
+    path: /{code}
     methods: [GET]
     defaults:
         _controller: sylius.controller.payment_method:showAction
         _sylius:
             serialization_version: $version
+            criteria:
+                code: $code

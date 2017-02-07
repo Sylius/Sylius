@@ -38,5 +38,5 @@ Sylius\Component\Payment\Model\Payment:
           href:
                 route: sylius_api_payment_method_show
                 parameters:
-                    id: expr(object.getMethod().getId())
+                    code: expr(object.getMethod().getCode())
                     version: 1

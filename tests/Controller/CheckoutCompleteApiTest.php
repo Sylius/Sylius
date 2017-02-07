@@ -59,8 +59,7 @@ final class CheckoutCompleteApiTest extends CheckoutApiTestCase
         $this->addressOrder($cart);
         $this->selectOrderShippingMethod($cart);
 
-        $url = sprintf('/api/v1/checkouts/complete/%d', $cart->getId());
-        $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('PUT', $this->getCheckoutCompleteUrl($cart), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'checkout/complete_invalid_order_state', Response::HTTP_INTERNAL_SERVER_ERROR);
@@ -76,15 +75,12 @@ final class CheckoutCompleteApiTest extends CheckoutApiTestCase
 
         /** @var OrderInterface $cart */
         $cart = $checkoutData['order1'];
-        /** @var PaymentMethodInterface $paymentMethod */
-        $paymentMethod = $checkoutData['cash_on_delivery'];
 
         $this->addressOrder($cart);
         $this->selectOrderShippingMethod($cart);
-        $this->selectOrderPaymentMethod($cart, $paymentMethod);
+        $this->selectOrderPaymentMethod($cart);
 
-        $url = sprintf('/api/v1/checkouts/complete/%d', $cart->getId());
-        $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('PUT', $this->getCheckoutCompleteUrl($cart), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
@@ -93,5 +89,15 @@ final class CheckoutCompleteApiTest extends CheckoutApiTestCase
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'checkout/completed_order_response');
+    }
+
+    /**
+     * @param OrderInterface $cart
+     *
+     * @return string
+     */
+    private function getCheckoutCompleteUrl(OrderInterface $cart)
+    {
+        return sprintf('/api/v1/checkouts/complete/%d', $cart->getId());
     }
 }

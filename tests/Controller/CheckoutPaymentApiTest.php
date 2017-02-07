@@ -99,6 +99,62 @@ EOT;
     /**
      * @test
      */
+    public function it_provides_details_about_available_payment_methods()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $checkoutData = $this->loadFixturesFromFile('resources/checkout.yml');
+
+        /** @var OrderInterface $cart */
+        $cart = $checkoutData['order1'];
+
+        $this->addressOrder($cart);
+        $this->selectOrderShippingMethod($cart);
+
+        $this->client->request('GET', $this->getSelectPaymentUrl($cart), [], [], static::$authorizedHeaderWithContentType);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'checkout/get_available_payment_methods', Response::HTTP_OK);
+    }
+
+    /**
+     * @test
+     */
+    public function it_does_not_provide_details_about_available_payment_method2_before_addressing()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $checkoutData = $this->loadFixturesFromFile('resources/checkout.yml');
+
+        /** @var OrderInterface $cart */
+        $cart = $checkoutData['order1'];
+
+        $this->client->request('GET', $this->getSelectPaymentUrl($cart), [], [], static::$authorizedHeaderWithContentType);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'checkout/get_available_payment_methods_failed', Response::HTTP_BAD_REQUEST);
+    }
+
+    /**
+     * @test
+     */
+    public function it_does_not_provide_details_about_available_payment_methods_before_choosing_shipping_method()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $checkoutData = $this->loadFixturesFromFile('resources/checkout.yml');
+
+        /** @var OrderInterface $cart */
+        $cart = $checkoutData['order1'];
+
+        $this->addressOrder($cart);
+
+        $this->client->request('GET', $this->getSelectPaymentUrl($cart), [], [], static::$authorizedHeaderWithContentType);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'checkout/get_available_payment_methods_failed', Response::HTTP_BAD_REQUEST);
+    }
+
+    /**
+     * @test
+     */
     public function it_allows_to_select_payment_method_for_order()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
@@ -112,12 +168,17 @@ EOT;
         $this->addressOrder($cart);
         $this->selectOrderShippingMethod($cart);
 
+        $this->client->request('GET', $this->getSelectPaymentUrl($cart), [], [], static::$authorizedHeaderWithContentType);
+
+        $response = $this->client->getResponse();
+        $rawResponse = json_decode($response->getContent(), true);
+
         $data =
 <<<EOT
         {
             "payments": [
                 {
-                    "method": {$paymentMethod->getId()}
+                    "method": "{$rawResponse['payments'][0]['methods'][0]['code']}"
                 }
             ]
         }
@@ -144,19 +205,22 @@ EOT;
 
         /** @var OrderInterface $cart */
         $cart = $checkoutData['order1'];
-        /** @var PaymentMethodInterface $paymentMethod */
-        $paymentMethod = $checkoutData['cash_on_delivery'];
 
         $this->addressOrder($cart);
         $this->selectOrderShippingMethod($cart);
-        $this->selectOrderPaymentMethod($cart, $paymentMethod);
+        $this->selectOrderPaymentMethod($cart);
+
+        $this->client->request('GET', $this->getSelectPaymentUrl($cart), [], [], static::$authorizedHeaderWithContentType);
+
+        $response = $this->client->getResponse();
+        $rawResponse = json_decode($response->getContent(), true);
 
         $data =
 <<<EOT
         {
             "payments": [
                 {
-                    "method": {$paymentMethod->getId()}
+                    "method": "{$rawResponse['payments'][0]['methods'][0]['code']}"
                 }
             ]
         }

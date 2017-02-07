@@ -166,14 +166,14 @@ EOT;
         $this->client->request('GET', $this->getSelectShippingUrl($cart), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
-        $rawResponse = json_decode($response->getContent());
+        $rawResponse = json_decode($response->getContent(), true);
 
         $data =
 <<<EOT
         {
             "shipments": [
                 {
-                    "method": "{$rawResponse->shipments[0]->methods[0]->code}"
+                    "method": "{$rawResponse['shipments'][0]['methods'][0]['code']}"
                 }
             ]
         }
@@ -207,14 +207,14 @@ EOT;
         $this->client->request('GET', $this->getSelectShippingUrl($cart), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
-        $rawResponse = json_decode($response->getContent());
+        $rawResponse = json_decode($response->getContent(), true);
 
         $data =
 <<<EOT
         {
             "shipments": [
                 {
-                    "method": "{$rawResponse->shipments[0]->methods[0]->code}"
+                    "method": "{$rawResponse['shipments'][0]['methods'][0]['code']}"
                 }
             ]
         }
@@ -236,24 +236,22 @@ EOT;
 
         /** @var OrderInterface $cart */
         $cart = $checkoutData['order1'];
-        /** @var PaymentMethodInterface $paymentMethod */
-        $paymentMethod = $checkoutData['cash_on_delivery'];
 
         $this->addressOrder($cart);
         $this->selectOrderShippingMethod($cart);
-        $this->selectOrderPaymentMethod($cart, $paymentMethod);
+        $this->selectOrderPaymentMethod($cart);
 
         $this->client->request('GET', $this->getSelectShippingUrl($cart), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
-        $rawResponse = json_decode($response->getContent());
+        $rawResponse = json_decode($response->getContent(), true);
 
         $data =
 <<<EOT
         {
             "shipments": [
                 {
-                    "method": "{$rawResponse->shipments[0]->methods[0]->code}"
+                    "method": "{$rawResponse['shipments'][0]['methods'][0]['code']}"
                 }
             ]
         }

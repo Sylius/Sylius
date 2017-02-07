@@ -15,6 +15,7 @@ use FOS\RestBundle\View\View;
 use SM\StateMachine\StateMachineInterface;
 use Sylius\Bundle\OrderBundle\Controller\OrderController as BaseOrderController;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Payment\Resolver\PaymentMethodsResolverInterface;
 use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -71,7 +72,7 @@ class OrderController extends BaseOrderController
         /** @var OrderInterface $cart */
         $cart = $this->getCartOr404($request->attributes->get('orderId'));
 
-        if (!$this->getCartStateMachine($cart, 'sylius_order_checkout')->can('select_shipping')) {
+        if (!$this->isCheckoutTransitionPossible($cart, 'select_shipping')) {
             throw new BadRequestHttpException('The shipment methods cannot be resolved in the current state of cart!');
         }
 
@@ -87,11 +88,46 @@ class OrderController extends BaseOrderController
     }
 
     /**
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function showAvailablePaymentMethodsAction(Request $request)
+    {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+
+        /** @var OrderInterface $cart */
+        $cart = $this->getCartOr404($request->attributes->get('orderId'));
+
+        if (!$this->isCheckoutTransitionPossible($cart, 'select_payment')) {
+            throw new BadRequestHttpException('The payment methods cannot be resolved in the current state of cart!');
+        }
+
+        $payments = [];
+
+        foreach ($cart->getPayments() as $payment) {
+            $payments['payments'][] = [
+                'methods' => $this->getPaymentMethodsResolver()->getSupportedMethods($payment),
+            ];
+        }
+
+        return $this->viewHandler->handle($configuration, View::create($payments));
+    }
+
+    /**
      * @return ShippingMethodsResolverInterface
      */
     protected function getShippingMethodsResolver()
     {
         return $this->get('sylius.shipping_methods_resolver');
+    }
+
+    /**
+     * @return PaymentMethodsResolverInterface
+     */
+    protected function getPaymentMethodsResolver()
+    {
+        return $this->get('sylius.payment_methods_resolver');
     }
 
     /**
@@ -112,12 +148,12 @@ class OrderController extends BaseOrderController
 
     /**
      * @param OrderInterface $cart
-     * @param string $graph
+     * @param string $transition
      *
-     * @return StateMachineInterface
+     * @return bool
      */
-    protected function getCartStateMachine(OrderInterface $cart, $graph)
+    private function isCheckoutTransitionPossible(OrderInterface $cart, $transition)
     {
-        return $this->get('sm.factory')->get($cart, $graph);
+        return $this->get('sm.factory')->get($cart, 'sylius_order_checkout')->can($transition);
     }
 }

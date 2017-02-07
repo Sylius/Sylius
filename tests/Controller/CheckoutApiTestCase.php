@@ -76,7 +76,6 @@ EOT;
 
     /**
      * @param OrderInterface $order
-     * @param ShippingMethodInterface $shippingMethod
      */
     protected function selectOrderShippingMethod(OrderInterface $order)
     {
@@ -85,14 +84,14 @@ EOT;
         $this->client->request('GET', $url, [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
-        $rawResponse = json_decode($response->getContent());
+        $rawResponse = json_decode($response->getContent(), true);
 
         $data =
 <<<EOT
         {
             "shipments": [
                 {
-                    "method": "{$rawResponse->shipments[0]->methods[0]->code}"
+                    "method": "{$rawResponse['shipments'][0]['methods'][0]['code']}"
                 }
             ]
         }
@@ -103,22 +102,27 @@ EOT;
 
     /**
      * @param OrderInterface $order
-     * @param PaymentMethodInterface $paymentMethod
      */
-    protected function selectOrderPaymentMethod(OrderInterface $order, PaymentMethodInterface $paymentMethod)
+    protected function selectOrderPaymentMethod(OrderInterface $order)
     {
+        $url = sprintf('/api/v1/checkouts/select-payment/%d', $order->getId());
+
+        $this->client->request('GET', $url, [], [], static::$authorizedHeaderWithContentType);
+
+        $response = $this->client->getResponse();
+        $rawResponse = json_decode($response->getContent(), true);
+
         $data =
 <<<EOT
         {
             "payments": [
                 {
-                    "method": {$paymentMethod->getId()}
+                    "method": "{$rawResponse['payments'][0]['methods'][0]['code']}"
                 }
             ]
         }
 EOT;
 
-        $url = sprintf('/api/v1/checkouts/select-payment/%d', $order->getId());
         $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
     }
 
