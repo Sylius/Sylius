@@ -30,10 +30,10 @@ final class AdminUserType extends UserType
 
         $builder
             ->add('firstName', TextType::class, [
-            	'label' => 'sylius.ui.first_name',
+            	'label' => 'sylius.form.user.first_name',
             ])
             ->add('lastName', TextType::class, [
-            	'label' => 'sylius.ui.last_name',
+            	'label' => 'sylius.form.user.last_name',
             ])
             ->add('localeCode', LocaleType::class, [
                 'label' => 'sylius.ui.locale',
