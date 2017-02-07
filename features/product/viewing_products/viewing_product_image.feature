@@ -7,7 +7,7 @@ Feature: Viewing a product's image on a product details page
     Background:
         Given the store operates on a single channel in "United States"
         And the store has a product "Lamborghini Gallardo Model"
-        And this product has an image "lamborghini.jpg" with a code "main"
+        And this product has an image "lamborghini.jpg" with "main" type
 
     @ui @javascript
     Scenario: Viewing a product's image on a product details page

@@ -1,8 +1,8 @@
 @managing_taxons
 Feature: Taxon validation
-    In order to avoid making mistakes when managing a taxons
+    In order to avoid making mistakes when managing taxons
     As an Administrator
-    I want to be prevented from adding it without specifying required fields
+    I want to be prevented from adding any without specifying required fields
 
     Background:
         Given the store is available in "English (United States)"
@@ -15,7 +15,7 @@ Feature: Taxon validation
         And I name it "T-Shirts" in "English (United States)"
         And I try to add it
         Then I should be notified that code is required
-        And Taxon named "T-Shirts" should not be added
+        And taxon named "T-Shirts" should not be added
 
     @ui
     Scenario: Trying to add a taxon without specifying its name

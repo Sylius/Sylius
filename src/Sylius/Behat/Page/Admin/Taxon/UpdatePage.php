@@ -64,15 +64,15 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function attachImage($path, $code = null)
+    public function attachImage($path, $type = null)
     {
         $filesPath = $this->getParameter('files_path');
 
         $this->getDocument()->find('css', '[data-form-collection="add"]')->click();
 
         $imageForm = $this->getLastImageElement();
-        if (null !== $code) {
-            $imageForm->fillField('Code', $code);
+        if (null !== $type) {
+            $imageForm->fillField('Type', $type);
         }
 
         $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath.$path);
@@ -81,9 +81,9 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function isImageWithCodeDisplayed($code)
+    public function isImageWithTypeDisplayed($type)
     {
-        $imageElement = $this->getImageElementByCode($code);
+        $imageElement = $this->getImageElementByType($type);
 
         if (null === $imageElement) {
             return false;
@@ -108,9 +108,9 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function removeImageWithCode($code)
+    public function removeImageWithType($type)
     {
-        $imageElement = $this->getImageElementByCode($code);
+        $imageElement = $this->getImageElementByType($type);
         $imageElement->clickLink('Delete');
     }
 
@@ -141,12 +141,23 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function changeImageWithCode($code, $path)
+    public function changeImageWithType($type, $path)
     {
         $filesPath = $this->getParameter('files_path');
 
-        $imageForm = $this->getImageElementByCode($code);
+        $imageForm = $this->getImageElementByType($type);
         $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath.$path);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function modifyFirstImageType($type)
+    {
+        $firstImage = $this->getFirstImageElement();
+
+        $typeField = $firstImage->findField('Type');
+        $typeField->setValue($type);
     }
 
     /**
@@ -170,9 +181,9 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
      */
     public function getValidationMessageForImage()
     {
-        $provinceForm = $this->getLastImageElement();
+        $lastImageElement = $this->getLastImageElement();
 
-        $foundElement = $provinceForm->find('css', '.sylius-validation-error');
+        $foundElement = $lastImageElement->find('css', '.sylius-validation-error');
         if (null === $foundElement) {
             throw new ElementNotFoundException($this->getSession(), 'Tag', 'css', '.sylius-validation-error');
         }
@@ -186,21 +197,13 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     public function getValidationMessageForImageAtPlace($place)
     {
         $images = $this->getImageElements();
-        
+
         $foundElement = $images[$place]->find('css', '.sylius-validation-error');
         if (null === $foundElement) {
             throw new ElementNotFoundException($this->getSession(), 'Tag', 'css', '.sylius-validation-error');
         }
 
         return $foundElement->getText();
-    }
-
-    /**
-     * @return bool
-     */
-    public function isImageCodeDisabled()
-    {
-        return 'disabled' === $this->getLastImageElement()->findField('Code')->getAttribute('disabled');
     }
 
     /**
@@ -278,6 +281,8 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     {
         $imageElements = $this->getImageElements();
 
+        Assert::notEmpty($imageElements);
+
         return reset($imageElements);
     }
 
@@ -292,20 +297,20 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     }
 
     /**
-     * @param string $code
+     * @param string $type
      *
      * @return NodeElement
      */
-    private function getImageElementByCode($code)
+    private function getImageElementByType($type)
     {
         $images = $this->getElement('images');
-        $inputCode = $images->find('css', 'input[value="'.$code.'"]');
+        $typeInput = $images->find('css', 'input[value="'.$type.'"]');
 
-        if (null === $inputCode) {
+        if (null === $typeInput) {
             return null;
         }
 
-        return $inputCode->getParent()->getParent()->getParent();
+        return $typeInput->getParent()->getParent()->getParent();
     }
 
     /**

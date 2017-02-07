@@ -15,10 +15,6 @@
     <class name="Sylius\Component\Core\Model\Taxon">
         <property name="images">
             <constraint name="Valid" />
-            <constraint name="Sylius\Bundle\ResourceBundle\Validator\Constraints\UniqueWithinCollectionConstraint">
-                <option name="message">sylius.taxon_image.code.unique</option>
-                <option name="groups">sylius</option>
-            </constraint>
         </property>
     </class>
 </constraint-mapping>

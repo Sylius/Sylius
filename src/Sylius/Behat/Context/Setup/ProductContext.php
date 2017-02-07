@@ -631,17 +631,18 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Given /^(this product) has(?:| also) an image "([^"]+)" with a code "([^"]+)"$/
-     * @Given /^the ("[^"]+" product) has(?:| also) an image "([^"]+)" with a code "([^"]+)"$/
+     * @Given /^(this product)(?:| also) has an image "([^"]+)" with "([^"]+)" type$/
+     * @Given /^the ("[^"]+" product)(?:| also) has an image "([^"]+)" with "([^"]+)" type$/
+     * @Given /^(it)(?:| also) has an image "([^"]+)" with "([^"]+)" type$/
      */
-    public function thisProductHasAnImageWithACode(ProductInterface $product, $imagePath, $imageCode)
+    public function thisProductHasAnImageWithType(ProductInterface $product, $imagePath, $imageType)
     {
         $filesPath = $this->getParameter('files_path');
 
         /** @var ImageInterface $productImage */
         $productImage = $this->productImageFactory->createNew();
         $productImage->setFile(new UploadedFile($filesPath.$imagePath, basename($imagePath)));
-        $productImage->setCode($imageCode);
+        $productImage->setType($imageType);
         $this->imageUploader->upload($productImage);
 
         $product->addImage($productImage);

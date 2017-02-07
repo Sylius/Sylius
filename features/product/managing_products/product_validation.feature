@@ -114,8 +114,7 @@ Feature: Products validation
         And I want to modify this product
         When I remove its name from "English (United States)" translation
         And I try to save my changes
-        Then I should not be notified that simple product code has to be unique
-        And this product should still be named "Dice Brewing"
+        Then this product should still be named "Dice Brewing"
 
     @ui
     Scenario: Trying to assign new channel to an existing configurable product without specifying its all variant prices for this channel

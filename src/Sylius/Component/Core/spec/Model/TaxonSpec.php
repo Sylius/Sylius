@@ -11,6 +11,7 @@
 
 namespace spec\Sylius\Component\Core\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ImageAwareInterface;
@@ -57,13 +58,13 @@ final class TaxonSpec extends ObjectBehavior
         $this->hasImage($image)->shouldReturn(false);
     }
 
-    function it_returns_an_image_by_code(ImageInterface $image)
+    function it_returns_images_by_type(ImageInterface $image)
     {
-        $image->getCode()->willReturn('thumbnail');
+        $image->getType()->willReturn('thumbnail');
         $image->setOwner($this)->shouldBeCalled();
 
         $this->addImage($image);
 
-        $this->getImageByCode('thumbnail')->shouldReturn($image);
+        $this->getImagesByType('thumbnail')->shouldBeLike(new ArrayCollection([$image->getWrappedObject()]));
     }
 }

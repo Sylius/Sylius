@@ -15,6 +15,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Taxon\CreateForParentPageInterface;
 use Sylius\Behat\Page\Admin\Taxon\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Taxon\UpdatePageInterface;
+use Sylius\Behat\Page\SymfonyPageInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
@@ -100,26 +101,23 @@ final class ManagingTaxonsContext implements Context
 
     /**
      * @When I specify its code as :code
+     * @When I do not specify its code
      */
-    public function iSpecifyItsCodeAs($code)
+    public function iSpecifyItsCodeAs($code = null)
     {
         $this->createPage->specifyCode($code);
     }
 
     /**
      * @When I name it :name in :language
-     */
-    public function iNameItIn($name, $language)
-    {
-        $this->createPage->nameIt($name, $language);
-    }
-
-    /**
      * @When I rename it to :name in :language
+     * @When I do not specify its name
      */
-    public function iRenameItIn($name, $language)
+    public function iNameItIn($name = null, $language = 'en_US')
     {
-        $this->updatePage->nameIt($name, $language);
+        $currentPage = $this->resolveCurrentPage();
+
+        $currentPage->nameIt($name, $language);
     }
 
     /**
@@ -129,12 +127,7 @@ final class ManagingTaxonsContext implements Context
      */
     public function iSetItsSlugToIn($slug = null, $language = 'en_US')
     {
-        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([
-            $this->createPage,
-            $this->createForParentPage,
-            $this->updatePage,
-        ]);
+        $currentPage = $this->resolveCurrentPage();
 
         $currentPage->specifySlug($slug, $language);
     }
@@ -180,22 +173,6 @@ final class ManagingTaxonsContext implements Context
     public function iChangeItsParentTaxonTo(TaxonInterface $taxon)
     {
         $this->updatePage->chooseParent($taxon);
-    }
-
-    /**
-     * @When I do not specify its code
-     */
-    public function iDoNotSpecifyItsCode()
-    {
-        // Intentionally left blank to fulfill context expectation
-    }
-
-    /**
-     * @When I do not specify its name
-     */
-    public function iDoNotSpecifyItsName()
-    {
-        // Intentionally left blank to fulfill context expectation
     }
 
     /**
@@ -293,8 +270,7 @@ final class ManagingTaxonsContext implements Context
      */
     public function iShouldBeNotifiedThatTaxonWithThisCodeAlreadyExists()
     {
-        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+        $currentPage = $this->resolveCurrentPage();
 
         Assert::same($currentPage->getValidationMessage('code'), 'Taxon with given code already exists.');
     }
@@ -304,8 +280,7 @@ final class ManagingTaxonsContext implements Context
      */
     public function iShouldBeNotifiedThatTaxonSlugMustBeUnique()
     {
-        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+        $currentPage = $this->resolveCurrentPage();
 
         Assert::same($currentPage->getValidationMessage('slug'), 'Taxon slug must be unique.');
     }
@@ -315,14 +290,13 @@ final class ManagingTaxonsContext implements Context
      */
     public function iShouldBeNotifiedThatIsRequired($element)
     {
-        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+        $currentPage = $this->resolveCurrentPage();
 
         Assert::same($currentPage->getValidationMessage($element), sprintf('Please enter taxon %s.', $element));
     }
 
     /**
-     * @Then /^there should still be only one taxon with code "([^"]+)"$/
+     * @Then /^there should(?:| still) be only one taxon with code "([^"]+)"$/
      */
     public function thereShouldStillBeOnlyOneTaxonWithCode($code)
     {
@@ -330,7 +304,7 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
-     * @Then /^Taxon named "([^"]+)" should not be added$/
+     * @Then /^taxon named "([^"]+)" should not be added$/
      * @Then the taxon named :name should no longer exist in the registry
      */
     public function taxonNamedShouldNotBeAdded($name)
@@ -355,46 +329,38 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
-     * @When I attach the :path image with a code :code
+     * @When I attach the :path image with :type type
+     * @When I attach the :path image
      */
-    public function iAttachImageWithACode($path, $code)
+    public function iAttachImageWithType($path, $type = null)
     {
-        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+        $currentPage = $this->resolveCurrentPage();
 
-        $currentPage->attachImage($path, $code);
+        $currentPage->attachImage($path, $type);
     }
 
     /**
-     * @When I attach the :path image without a code
+     * @Then /^(?:it|this taxon) should(?:| also) have an image with "([^"]*)" type$/
      */
-    public function iAttachImageWithoutACode($path)
+    public function thisTaxonShouldHaveAnImageWithType($type)
     {
-        $this->updatePage->attachImage($path);
+        Assert::true($this->updatePage->isImageWithTypeDisplayed($type));
     }
 
     /**
-     * @Then /^this taxon should have(?:| also) an image with a code "([^"]*)"$/
+     * @Then /^(?:this taxon|it) should not have(?:| also) any images with "([^"]*)" type$/
      */
-    public function thisTaxonShouldHaveAnImageWithCode($code)
+    public function thisTaxonShouldNotHaveAnImageWithType($code)
     {
-        Assert::true($this->updatePage->isImageWithCodeDisplayed($code));
+        Assert::false($this->updatePage->isImageWithTypeDisplayed($code));
     }
 
     /**
-     * @Then /^this taxon should not have(?:| also) an image with a code "([^"]*)"$/
+     * @When /^I(?:| also) remove an image with "([^"]*)" type$/
      */
-    public function thisTaxonShouldNotHaveAnImageWithCode($code)
+    public function iRemoveAnImageWithType($code)
     {
-        Assert::false($this->updatePage->isImageWithCodeDisplayed($code));
-    }
-
-    /**
-     * @When /^I remove(?:| also) an image with a code "([^"]*)"$/
-     */
-    public function iRemoveAnImageWithACode($code)
-    {
-        $this->updatePage->removeImageWithCode($code);
+        $this->updatePage->removeImageWithType($code);
     }
 
     /**
@@ -408,7 +374,7 @@ final class ManagingTaxonsContext implements Context
     /**
      * @Then /^(this taxon) should not have any images$/
      */
-    public function thisTaxonShouldNotHaveImages(TaxonInterface $taxon)
+    public function thisTaxonShouldNotHaveAnyImages(TaxonInterface $taxon)
     {
         $this->iWantToModifyATaxon($taxon);
 
@@ -416,60 +382,41 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
-     * @When I change the image with the :code code to :path
+     * @When I change the image with the :type type to :path
      */
-    public function iChangeItsImageToPathForTheCode($path, $code)
+    public function iChangeItsImageToPathForTheType($path, $type)
     {
-        $this->updatePage->changeImageWithCode($code, $path);
+        $this->updatePage->changeImageWithType($type, $path);
     }
 
     /**
-     * @Then I should be notified that the image with this code already exists
+     * @When I change the first image type to :type
      */
-    public function iShouldBeNotifiedThatTheImageWithThisCodeAlreadyExists()
+    public function iChangeTheFirstImageTypeTo($type)
     {
-        Assert::same($this->updatePage->getValidationMessageForImage(), 'Image code must be unique within this taxon.');
+        $this->updatePage->modifyFirstImageType($type);
     }
 
     /**
-     * @Then I should be notified that an image code is required
+     * @Then /^(this taxon) should have only one image$/
+     * @Then /^(this taxon) should(?:| still) have (\d+) images?$/
      */
-    public function iShouldBeNotifiedThatAnImageCodeIsRequired()
-    {
-        Assert::same(
-            $this->updatePage->getValidationMessageForImage(),
-            'Please enter an image code.'
-        );
-    }
-
-    /**
-     * @Then there should still be only one image in the :taxon taxon
-     */
-    public function thereShouldStillBeOnlyOneImageInThisTaxon(TaxonInterface $taxon)
+    public function thereShouldStillBeOnlyOneImageInThisTaxon(TaxonInterface $taxon, $count = 1)
     {
         $this->iWantToModifyATaxon($taxon);
 
-        Assert::same($this->updatePage->countImages(), 1);
+        Assert::same($this->updatePage->countImages(), (int) $count);
     }
 
     /**
-     * @Then the image code field should be disabled
+     * @return SymfonyPageInterface|CreatePageInterface|CreateForParentPageInterface|UpdatePageInterface
      */
-    public function theImageCodeFieldShouldBeDisabled()
+    private function resolveCurrentPage()
     {
-        Assert::true($this->updatePage->isImageCodeDisabled());
-    }
-
-    /**
-     * @Then I should be notified that the :imageNumber image should have an unique code
-     */
-    public function iShouldBeNotifiedThatTheFirstImageShouldHaveAnUniqueCode($imageNumber)
-    {
-        preg_match_all('!\d+!', $imageNumber, $matches);
-
-        Assert::same(
-            $this->updatePage->getValidationMessageForImageAtPlace(((int) $matches[0][0]) - 1),
-            'Image code must be unique within this taxon.'
-        );
+        return $this->currentPageResolver->getCurrentPageWithForm([
+            $this->createPage,
+            $this->createForParentPage,
+            $this->updatePage,
+        ]);
     }
 }

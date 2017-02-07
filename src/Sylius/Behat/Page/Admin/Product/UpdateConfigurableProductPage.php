@@ -13,7 +13,6 @@ namespace Sylius\Behat\Page\Admin\Product;
 
 use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\NodeElement;
-use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
@@ -69,9 +68,9 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
     public function selectMainTaxon(TaxonInterface $taxon)
     {
         $this->openTaxonBookmarks();
-        
+
         Assert::isInstanceOf($this->getDriver(), Selenium2Driver::class);
-        
+
         $this->getDriver()->executeScript(sprintf('$(\'input.search\').val(\'%s\')', $taxon->getName()));
         $this->getElement('search')->click();
         $this->getElement('search')->waitFor(10, function () {
@@ -92,9 +91,9 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
     /**
      * {@inheritdoc}
      */
-    public function isImageWithCodeDisplayed($code)
+    public function isImageWithTypeDisplayed($type)
     {
-        $imageElement = $this->getImageElementByCode($code);
+        $imageElement = $this->getImageElementByType($type);
 
         if (null === $imageElement) {
             return false;
@@ -111,7 +110,7 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
     /**
      * {@inheritdoc}
      */
-    public function attachImage($path, $code = null)
+    public function attachImage($path, $type = null)
     {
         $this->clickTabIfItsNotActive('media');
 
@@ -120,8 +119,8 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
         $this->getDocument()->clickLink('Add');
 
         $imageForm = $this->getLastImageElement();
-        if (null !== $code) {
-            $imageForm->fillField('Code', $code);
+        if (null !== $type) {
+            $imageForm->fillField('Type', $type);
         }
 
         $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath.$path);
@@ -130,22 +129,22 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
     /**
      * {@inheritdoc}
      */
-    public function changeImageWithCode($code, $path)
+    public function changeImageWithType($type, $path)
     {
         $filesPath = $this->getParameter('files_path');
 
-        $imageForm = $this->getImageElementByCode($code);
+        $imageForm = $this->getImageElementByType($type);
         $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath.$path);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function removeImageWithCode($code)
+    public function removeImageWithType($type)
     {
         $this->clickTabIfItsNotActive('media');
 
-        $imageElement = $this->getImageElementByCode($code);
+        $imageElement = $this->getImageElementByType($type);
         $imageElement->clickLink('Delete');
     }
 
@@ -158,36 +157,22 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
     /**
      * {@inheritdoc}
      */
-    public function countImages()
+    public function modifyFirstImageType($type)
     {
-        $imageElements = $this->getImageElements();
+        $this->clickTabIfItsNotActive('media');
 
-        return count($imageElements);
-    }
-
-    /**
-     * @return bool
-     */
-    public function isImageCodeDisabled()
-    {
-        return 'disabled' === $this->getLastImageElement()->findField('Code')->getAttribute('disabled');
+        $firstImage = $this->getFirstImageElement();
+        $this->setImageType($firstImage, $type);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getValidationMessageForImage()
+    public function countImages()
     {
-        $this->clickTabIfItsNotActive('media');
+        $imageElements = $this->getImageElements();
 
-        $imageForm = $this->getLastImageElement();
-
-        $foundElement = $imageForm->find('css', '.sylius-validation-error');
-        if (null === $foundElement) {
-            throw new ElementNotFoundException($this->getSession(), 'Tag', 'css', '.sylius-validation-error');
-        }
-
-        return $foundElement->getText();
+        return count($imageElements);
     }
 
     /**
@@ -235,20 +220,20 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
     }
 
     /**
-     * @param string $code
+     * @param string $type
      *
      * @return NodeElement
      */
-    private function getImageElementByCode($code)
+    private function getImageElementByType($type)
     {
         $images = $this->getElement('images');
-        $inputCode = $images->find('css', 'input[value="'.$code.'"]');
+        $typeInput = $images->find('css', 'input[value="'.$type.'"]');
 
-        if (null === $inputCode) {
+        if (null === $typeInput) {
             return null;
         }
 
-        return $inputCode->getParent()->getParent()->getParent();
+        return $typeInput->getParent()->getParent()->getParent();
     }
 
     /**
@@ -283,5 +268,15 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
         Assert::notEmpty($imageElements);
 
         return reset($imageElements);
+    }
+
+    /**
+     * @param NodeElement $imageElement
+     * @param string $type
+     */
+    private function setImageType(NodeElement $imageElement, $type)
+    {
+        $typeField = $imageElement->findField('Type');
+        $typeField->setValue($type);
     }
 }

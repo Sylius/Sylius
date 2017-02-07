@@ -135,8 +135,8 @@ class StickerProductFixture extends AbstractFixture
                 ],
                 'product_options' => ['sticker_size'],
                 'images' => [
-                    'main' => sprintf('%s/../Resources/fixtures/%s', __DIR__, 'stickers.jpg'),
-                    'thumbnail' => sprintf('%s/../Resources/fixtures/%s', __DIR__, 'stickers.jpg'),
+                    [sprintf('%s/../Resources/fixtures/%s', __DIR__, 'stickers.jpg'), 'main'],
+                    [sprintf('%s/../Resources/fixtures/%s', __DIR__, 'stickers.jpg'), 'thumbnail'],
                 ],
             ];
         }

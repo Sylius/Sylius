@@ -94,7 +94,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     /**
      * {@inheritdoc}
      */
-    public function attachImage($path, $code = null)
+    public function attachImage($path, $type = null)
     {
         $this->clickTabIfItsNotActive('media');
 
@@ -103,8 +103,8 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         $this->getDocument()->clickLink('Add');
 
         $imageForm = $this->getLastImageElement();
-        if (null !== $code) {
-            $imageForm->fillField('Code', $code);
+        if (null !== $type) {
+            $imageForm->fillField('Type', $type);
         }
 
         $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath.$path);

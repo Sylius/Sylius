@@ -49,22 +49,17 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function specifySlug($slug, $languageCode);
 
     /**
-     * @return bool
-     */
-    public function isImageCodeDisabled();
-
-    /**
      * @param string $path
-     * @param string $code
+     * @param string $type
      */
-    public function attachImage($path, $code = null);
+    public function attachImage($path, $type = null);
 
     /**
-     * @param string $code
+     * @param string $type
      *
      * @return bool
      */
-    public function isImageWithCodeDisplayed($code);
+    public function isImageWithTypeDisplayed($type);
 
     /**
      * @param string $languageCode
@@ -74,9 +69,9 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function isSlugReadOnly($languageCode = 'en_US');
 
     /**
-     * @param string $code
+     * @param string $type
      */
-    public function removeImageWithCode($code);
+    public function removeImageWithType($type);
 
     public function removeFirstImage();
 
@@ -91,10 +86,15 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function countImages();
 
     /**
-     * @param string $code
+     * @param string $type
      * @param string $path
      */
-    public function changeImageWithCode($code, $path);
+    public function changeImageWithType($type, $path);
+
+    /**
+     * @param string $type
+     */
+    public function modifyFirstImageType($type);
 
     /**
      * @return string

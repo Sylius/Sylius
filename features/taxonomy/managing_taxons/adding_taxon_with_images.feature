@@ -13,21 +13,21 @@ Feature: Adding a new taxon with images
         Given I want to create a new taxon
         When I specify its code as "t-shirts"
         And I name it "T-Shirts" in "English (United States)"
-        And I attach the "t-shirts.jpg" image with a code "banner"
+        And I attach the "t-shirts.jpg" image with "banner" type
         And I add it
         Then I should be notified that it has been successfully created
         And the "T-Shirts" taxon should appear in the registry
-        And this taxon should have an image with a code "banner"
+        And this taxon should have an image with "banner" type
 
     @ui @javascript
     Scenario: Adding a new taxon with multiple images
         Given I want to create a new taxon
         When I specify its code as "t-shirts"
         And I name it "T-Shirts" in "English (United States)"
-        And I attach the "t-shirts.jpg" image with a code "banner"
-        And I attach the "t-shirts.jpg" image with a code "thumbnail"
+        And I attach the "t-shirts.jpg" image with "banner" type
+        And I attach the "t-shirts.jpg" image with "thumbnail" type
         And I add it
         Then I should be notified that it has been successfully created
         And the "T-Shirts" taxon should appear in the registry
-        And this taxon should have an image with a code "banner"
-        And this taxon should have also an image with a code "thumbnail"
+        And this taxon should have an image with "banner" type
+        And it should also have an image with "thumbnail" type

@@ -25,4 +25,4 @@ Feature: Editing product's attributes
         And I remove its "Gun caliber" attribute
         And I try to add new attributes
         And I save my changes
-        And product "44 Magnum" should not have any attributes
+        Then product "44 Magnum" should not have any attributes

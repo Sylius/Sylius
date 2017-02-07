@@ -24,11 +24,11 @@ interface ImageAwareInterface
     public function getImages();
 
     /**
-     * @param $code
+     * @param string $type
      *
-     * @return ImageInterface|null;
+     * @return Collection|ImageInterface[]
      */
-    public function getImageByCode($code);
+    public function getImagesByType($type);
 
     /**
      * @return bool
