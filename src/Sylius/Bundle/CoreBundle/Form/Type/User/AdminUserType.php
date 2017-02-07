@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Form\Type\User;
 
 use Sylius\Bundle\UserBundle\Form\Type\UserType;
 use Symfony\Component\Form\Extension\Core\Type\LocaleType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -28,11 +29,11 @@ final class AdminUserType extends UserType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('firstName', null, [
-            	'label' => 'sylius.ui.first_name'
+            ->add('firstName', TextType::class, [
+            	'label' => 'sylius.ui.first_name',
             ])
-            ->add('lastName', null, [
-            	'label' => 'sylius.ui.last_name'
+            ->add('lastName', TextType::class, [
+            	'label' => 'sylius.ui.last_name',
             ])
             ->add('localeCode', LocaleType::class, [
                 'label' => 'sylius.ui.locale',
