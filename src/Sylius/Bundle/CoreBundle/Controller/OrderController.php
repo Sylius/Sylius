@@ -59,7 +59,7 @@ class OrderController extends BaseOrderController
             } catch (OptimisticLockException $exception) {
                 $this->addFlash('error', 'sylius.checkout.complete_error');
 
-                return $this->redirectHandler->redirectToRoute($configuration, 'sylius_shop_homepage');
+                return $this->redirectHandler->redirectToRoute($configuration, 'sylius_shop_checkout_complete');
             }
 
             $this->eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $order);
