@@ -10,6 +10,10 @@ Sylius\Component\Core\Model\Order:
             expose: true
             type: string
             groups: [Default, Detailed, DetailedCart]
+        localeCode:
+            expose: true
+            type: string
+            groups: [Default, Detailed, DetailedCart]
         shippingAddress:
             expose: true
             groups: [Detailed]

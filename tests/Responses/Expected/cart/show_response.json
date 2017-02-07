@@ -25,5 +25,6 @@
         }
     },
     "currency_code": "USD",
+    "locale_code": "en_US",
     "checkout_state": "cart"
 }

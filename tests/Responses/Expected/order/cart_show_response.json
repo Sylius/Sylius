@@ -38,6 +38,7 @@
         }
     },
     "currency_code": "USD",
+    "locale_code": "en_US",
     "payments": [],
     "shipments": [],
     "checkout_state": "cart"

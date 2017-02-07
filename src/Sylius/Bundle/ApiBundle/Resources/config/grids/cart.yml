@@ -26,8 +26,6 @@ sylius_grid:
                     type: string
                     sortable: customer.email
                     path: customer.email
-                    options:
-                        template: "@SyliusAdmin/Order/Grid/Field/customer.html.twig"
                 total:
                     type: integer
                     sortable: total

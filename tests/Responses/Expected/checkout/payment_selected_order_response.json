@@ -69,5 +69,6 @@
   ],
   "shipments": @array@,
   "currency_code": "EUR",
+  "locale_code": "en_US",
   "checkout_state": "payment_selected"
 }

@@ -77,5 +77,6 @@
         }
     ],
     "currency_code": "EUR",
+    "locale_code": "en_US",
     "checkout_state": "shipping_selected"
 }
