@@ -28,8 +28,12 @@ final class AdminUserType extends UserType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('firstName')
-            ->add('lastName')
+            ->add('firstName', null, [
+            	'label' => 'sylius.ui.first_name'
+            ])
+            ->add('lastName', null, [
+            	'label' => 'sylius.ui.last_name'
+            ])
             ->add('localeCode', LocaleType::class, [
                 'label' => 'sylius.ui.locale',
                 'placeholder' => null,
