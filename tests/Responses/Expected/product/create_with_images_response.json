@@ -21,7 +21,7 @@
     "images": [
         {
             "id": @integer@,
-            "code": "FORD_MUG",
+            "type": "FORD_MUG",
             "file": {
                 "test": true,
                 "original_name": "ford",
@@ -32,7 +32,7 @@
         },
         {
             "id": @integer@,
-            "code": "MUGS",
+            "type": "MUGS",
             "file": {
                 "test": true,
                 "original_name": "mugs",
