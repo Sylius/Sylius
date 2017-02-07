@@ -19,7 +19,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-final class ShippingMethodIntegrityValidator extends ConstraintValidator
+final class OrderShippingMethodEligibilityValidator extends ConstraintValidator
 {
     /**
      * @var ShippingMethodEligibilityCheckerInterface
@@ -39,9 +39,19 @@ final class ShippingMethodIntegrityValidator extends ConstraintValidator
      *
      * {@inheritdoc}
      */
-    public function validate($value, Constraint $constraint)
+    public function validate($order, Constraint $constraint)
     {
-        $shipments = $value->getShipments();
+        if (!$order instanceof OrderInterface) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    'This validator can only work with "%s", but got "%s".',
+                    OrderInterface::class,
+                    get_class($order)
+                )
+            );
+        }
+
+        $shipments = $order->getShipments();
         if ($shipments->isEmpty()) {
             return;
         }

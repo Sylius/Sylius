@@ -13,3 +13,5 @@ sylius:
         set_address_as_default: 'Address has been set as default.'
     product:
         out_of_stock: 'There is only %quantity% of this product in the stock.'
+    order:
+        promotion_integrity: 'You are no longer eligible for this promotion %promotionName%.'

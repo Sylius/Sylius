@@ -16,19 +16,19 @@ use Symfony\Component\Validator\Constraint;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-final class ShippingMethodIntegrity extends Constraint
+final class OrderShippingMethodEligibility extends Constraint
 {
     /**
      * @var string
      */
-    public $message = 'sylius.order.shipping_method_integrity';
+    public $message = 'sylius.order.shipping_method_eligibility';
 
     /**
      * {@inheritdoc}
      */
     public function validatedBy()
     {
-        return 'sylius_shipping_method_integrity_validator';
+        return 'sylius_order_shipping_method_eligibility_validator';
     }
 
     /**
