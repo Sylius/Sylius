@@ -61,7 +61,7 @@ Then get a customer from the repository, which you would like to make an author 
 
     $review->setAuthor($customer);
 
-Remember to set the that is the subject of your review and then add the review to the repository.
+Remember to set the object that is the subject of your review and then add the review to the repository.
 
 .. code-block:: php
 
