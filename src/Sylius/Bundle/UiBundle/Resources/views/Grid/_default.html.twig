@@ -12,7 +12,7 @@
     <div class="ui segment">
         <form method="get" action="{{ path }}" class="ui loadable form">
             <div class="two fields">
-            {% for filter in definition.filters if filter.enabled %}
+            {% for filter in definition.filters|sort_by('position') if filter.enabled %}
                 {{ sylius_grid_render_filter(grid, filter) }}
 
                 {% if loop.index0 % 2 %}
