@@ -146,4 +146,56 @@ EOT;
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NOT_FOUND);
     }
+
+    /**
+     * @test
+     */
+    public function it_does_not_apply_sorting_for_un_existing_field()
+    {
+        $this->loadFixturesFromFile('more_books.yml');
+
+        $this->client->request('GET', '/books/sortable/', ['sorting' => ['name' => 'DESC']]);
+        $response = $this->client->getResponse();
+
+        $this->assertResponseCode($response, Response::HTTP_OK);
+    }
+
+    /**
+     * @test
+     */
+    public function it_does_not_apply_filtering_for_un_existing_field()
+    {
+        $this->loadFixturesFromFile('more_books.yml');
+
+        $this->client->request('GET', '/books/filterable/', ['criteria' => ['name' => 'John']]);
+        $response = $this->client->getResponse();
+
+        $this->assertResponseCode($response, Response::HTTP_OK);
+    }
+
+    /**
+     * @test
+     */
+    public function it_applies_sorting_for_existing_field()
+    {
+        $this->loadFixturesFromFile('more_books.yml');
+
+        $this->client->request('GET', '/books/sortable/', ['sorting' => ['id' => 'DESC']]);
+        $response = $this->client->getResponse();
+
+        $this->assertResponseCode($response, Response::HTTP_OK);
+    }
+
+    /**
+     * @test
+     */
+    public function it_applies_filtering_for_existing_field()
+    {
+        $this->loadFixturesFromFile('more_books.yml');
+
+        $this->client->request('GET', '/books/filterable/', ['criteria' => ['author' => 'J.R.R. Tolkien']]);
+        $response = $this->client->getResponse();
+
+        $this->assertResponseCode($response, Response::HTTP_OK);
+    }
 }
