@@ -24,6 +24,10 @@ When you look inside the ``CoreBundle/Resources/config/app/state_machine/sylius_
 
 There are only two possible transitions: ``accept`` (from ``new`` to ``accepted``) and ``reject`` (from ``new`` to ``rejected``).
 
+.. image:: ../../_images/sylius_product_review.png
+    :align: center
+    :scale: 70%
+
 When a review is accepted **the average rating of a product is updated**.
 
 How is the average rating calculated?

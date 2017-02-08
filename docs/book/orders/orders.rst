@@ -112,6 +112,10 @@ Order has also its own state, which can have the following values:
 * ``fulfilled`` - when the order payments and shipments are completed,
 * ``cancelled`` - when the order was cancelled.
 
+.. image:: ../../_images/sylius_order.png
+    :align: center
+    :scale: 70%
+
 .. tip::
 
     The state machine of order is an obvious extension to the :doc:`state machine of checkout </book/orders/checkout>`.

@@ -47,6 +47,10 @@ The available transitions between these states are:
             from: [new, processing]
             to: void
 
+.. image:: ../../_images/sylius_payment.png
+    :align: center
+    :scale: 70%
+
 Of course, you can define your own states and transitions to create a workflow, that perfectly matches your needs.
 Full configuration can be seen in the `PaymentBundle/Resources/config/app/state_machine.yml <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/PaymentBundle/Resources/config/app/state_machine.yml>`_.
 

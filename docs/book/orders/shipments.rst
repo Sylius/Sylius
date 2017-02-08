@@ -34,6 +34,10 @@ The allowed transitions between these states are:
             from: [ready]
             to: cancelled
 
+.. image:: ../../_images/sylius_shipment.png
+    :align: center
+    :scale: 70%
+
 Shipping Methods
 ----------------
 
