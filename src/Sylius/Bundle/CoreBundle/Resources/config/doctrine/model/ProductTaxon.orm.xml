@@ -18,6 +18,10 @@
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <mapped-superclass name="Sylius\Component\Core\Model\ProductTaxon" table="sylius_product_taxon">
+        <unique-constraints>
+            <unique-constraint columns="product_id,taxon_id" name="product_taxon_idx" />
+        </unique-constraints>
+    
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
