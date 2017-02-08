@@ -40,7 +40,7 @@ Feature: Order shipping method integrity
         And I should not see the thank you page
 
     @ui
-    Scenario: Validate shipping method after administrator changes in shipping method requirements
+    Scenario: Validate shipping method after administrator changes shipping method requirements
         Given I added product "Westworld host" to the cart
         And I have completed addressing step with email "guest@example.com" and "United States" based shipping address
         And I have proceeded order with "DHL" shipping method and "Offline" payment

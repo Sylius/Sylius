@@ -412,6 +412,14 @@ class Order implements OrderInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getCopy()
+    {
+        return clone $this;
+    }
+
+    /**
      * Items total + Adjustments total.
      */
     protected function recalculateTotal()

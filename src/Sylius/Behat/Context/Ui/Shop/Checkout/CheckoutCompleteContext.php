@@ -327,4 +327,15 @@ final class CheckoutCompleteContext implements Context
             )
         );
     }
+
+    /**
+     * @Then I should be informed that order total has been changed
+     */
+    public function iShouldBeInformedThatOrderTotalHasBeenChanged()
+    {
+        $this->notificationChecker->checkNotification(
+            'Your order total has been changed, check your order information and confirm it again.',
+            NotificationType::failure()
+        );
+    }
 }

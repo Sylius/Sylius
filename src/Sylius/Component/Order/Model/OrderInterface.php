@@ -141,4 +141,9 @@ interface OrderInterface extends AdjustableInterface, ResourceInterface, Timesta
      * @param string|null $type
      */
     public function removeAdjustmentsRecursively($type = null);
+
+    /**
+     * @return self
+     */
+    public function getCopy();
 }

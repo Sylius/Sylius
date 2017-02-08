@@ -368,7 +368,6 @@ final class ShippingContext implements Context
         $channel = $this->sharedStorage->get('channel');
         $configuration = $this->getConfigurationByChannels([$channel], $fee);
 
-
         $this->saveShippingMethod($this->shippingMethodExampleFactory->create([
             'name' => $shippingMethodName,
             'enabled' => true,
@@ -450,6 +449,19 @@ final class ShippingContext implements Context
     public function theShippingMethodIsArchival(ShippingMethodInterface $shippingMethod)
     {
         $shippingMethod->setArchivedAt(new \DateTime());
+        $this->shippingMethodManager->flush();
+    }
+
+    /**
+     * @Given /^the shipping fee for ("[^"]+" shipping method) has been changed to ("[^"]+")$/
+     */
+    public function theShippingFeeForShippingMethodHasBeenChangedTo(ShippingMethodInterface $shippingMethod, $fee)
+    {
+        $channel = $this->sharedStorage->get('channel');
+        $configuration = $this->getConfigurationByChannels([$channel], $fee);
+
+        $shippingMethod->setConfiguration($configuration);
+
         $this->shippingMethodManager->flush();
     }
 

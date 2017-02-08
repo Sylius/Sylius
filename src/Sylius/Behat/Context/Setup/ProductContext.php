@@ -619,6 +619,7 @@ final class ProductContext implements Context
     /**
      * @Given /^(this product)'s price is ("[^"]+")$/
      * @Given /^the (product "[^"]+") changed its price to ("[^"]+")$/
+     * @Given /^(this product) price has been changed to ("[^"]+")$/
      */
     public function theProductChangedItsPriceTo(ProductInterface $product, $price)
     {

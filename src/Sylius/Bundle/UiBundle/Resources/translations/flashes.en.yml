@@ -15,3 +15,4 @@ sylius:
         out_of_stock: 'There is only %quantity% of this product in the stock.'
     order:
         promotion_integrity: 'You are no longer eligible for this promotion %promotionName%.'
+        total_integrity: 'Your order total has been changed, check your order information and confirm it again.'

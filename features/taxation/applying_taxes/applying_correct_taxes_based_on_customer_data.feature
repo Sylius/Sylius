@@ -13,28 +13,27 @@ Feature: Apply correct taxes based on customer data
         And the store has "VAT" tax rate of 10% for "Clothes" for the rest of the world
         And the store has a product "PHP T-Shirt" priced at "$100.00"
         And it belongs to "Clothes" tax category
-        And there is user "john@example.com" identified by "password123", with "Germany" as shipping country
-        And I am logged in as "john@example.com"
+        And there is user "john@example.com" with "Germany" as shipping country
 
-    @todo
-    Scenario: Proper taxes for taxed product
+    @ui
+    Scenario: Proper taxes for logged in Customer
+        Given I am logged in as "john@example.com"
         When I add product "PHP T-Shirt" to the cart
         Then my cart total should be "$110.00"
         And my cart taxes should be "$10.00"
 
-    @todo
+    @ui
     Scenario: Proper taxes after specifying shipping address
-        When I add product "PHP T-Shirt" to the cart
-        And I log in as "john@example.com" with "password123" password
-        And I proceed without selecting shipping address
-        Then my cart total should be "$110.00"
-        And my cart taxes should be "$10.00"
-
-    @todo
-    Scenario: Proper taxes for logged in Customer with already specified shipping address
         Given I am a logged in customer
-        And my default shipping address is "Germany"
         When I add product "PHP T-Shirt" to the cart
-        And I proceed without selecting shipping address
+        And I specified the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        Then my cart total should be "$123.00"
+        And my cart taxes should be "$23.00"
+
+    @ui
+    Scenario: Proper taxes after specifying shipping address
+        Given I am a logged in customer
+        When I add product "PHP T-Shirt" to the cart
+        And I specified the shipping address as "Ankh Morpork", "Frost Alley", "90210", "Germany" for "Jon Snow"
         Then my cart total should be "$110.00"
         And my cart taxes should be "$10.00"
