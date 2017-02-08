@@ -128,31 +128,6 @@ interface ProductInterface extends
     public function hasOption(ProductOptionInterface $option);
 
     /**
-     * @return bool
-     */
-    public function isAvailable();
-
-    /**
-     * @return \DateTime
-     */
-    public function getAvailableOn();
-
-    /**
-     * @param \DateTime|null $availableOn
-     */
-    public function setAvailableOn(\DateTime $availableOn = null);
-
-    /**
-     * @return \DateTime
-     */
-    public function getAvailableUntil();
-
-    /**
-     * @param \DateTime|null $availableUntil
-     */
-    public function setAvailableUntil(\DateTime $availableUntil = null);
-
-    /**
      * @param ProductAssociationInterface $association
      */
     public function addAssociation(ProductAssociationInterface $association);

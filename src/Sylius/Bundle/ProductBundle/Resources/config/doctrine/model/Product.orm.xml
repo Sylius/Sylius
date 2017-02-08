@@ -20,10 +20,6 @@
         </id>
         <field name="code" column="code" type="string" unique="true" nullable="false"/>
 
-        <field name="availableOn" column="available_on" type="datetime" nullable="true" />
-
-        <field name="availableUntil" column="available_until" type="datetime" nullable="true" />
-
         <one-to-many field="attributes" target-entity="Sylius\Component\Product\Model\ProductAttributeValueInterface" mapped-by="subject" orphan-removal="true">
             <cascade>
                 <cascade-all />

@@ -2,7 +2,6 @@
     "id": @integer@,
     "name": "Star Wars mug",
     "code": "MUG_SW",
-    "available_on": "@string@.isDateTime()",
     "attributes": [],
     "variants": [],
     "options": [],

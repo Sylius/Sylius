@@ -2,7 +2,6 @@
     "id": @integer@,
     "name": "Theme Mug",
     "code": "MUG_TH",
-    "available_on": "@string@.isDateTime()",
     "attributes": [],
     "variants": [],
     "options": [],

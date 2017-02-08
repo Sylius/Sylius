@@ -168,6 +168,7 @@ After:
 
 * `ProductVariant::$name` property (and corresponding getter and setter) was removed to make it translatable. Therefore, `ProductVariantTranslation` was introduced with one `$name` property. All product variants names are migrated to new concept with migration `Version2016121415313`. Look at [this PR](https://github.com/Sylius/Sylius/pull/7091) if you have any problems with upgrade.
 * `ProductAssociationType::$name` property (and corresponding getter and setter) was removed to make it translatable. Therefore, `ProductAssociationTypeTranslation` was introduced with one `$name` property. All product association types names are migrated to new concept with migration `Version20161219160441`. Look at [this PR](https://github.com/Sylius/Sylius/pull/7134) if you have any problems with upgrade.
+* `Product::$availableOn` and `Product::$availableUntil` properties (and corresponding getters and setters) were removed. Look at [this PR](https://github.com/Sylius/Sylius/pull/7451) if you have any problems with upgrade.
 
 ### Promotion / PromotionBundle
 
