@@ -14,4 +14,4 @@ Sale channels management implementation in PHP.
 Learn more
 ----------
 
-* :doc:`Channels - Configuration Documentation </book/configuration/channels>`.
+* :doc:`Channels in the Sylius platform </book/configuration/channels>` - concept documentation

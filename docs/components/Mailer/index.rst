@@ -10,3 +10,8 @@ Sylius Mailer component abstracts the process of sending e-mails. It also provid
    basic_usage
    models
    interfaces
+
+Learn more
+----------
+
+* :doc:`Emails in the Sylius platform </book/architecture/emails>` - concept documentation

@@ -12,3 +12,8 @@ E-Commerce PHP library for creating and managing sales orders.
    interfaces
    state_machine
    processors
+
+Learn more
+----------
+
+* :doc:`Carts & Orders in the Sylius platform </book/orders/index>` - concept documentation

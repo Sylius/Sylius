@@ -10,13 +10,20 @@ Sylius Documentation
 .. note::
 
     This documentation assumes you have a working knowledge of the Symfony
-    Framework. If you haven't, please start by reading the `Quick Tour`_ from
-    the Symfony documentation.
+    Framework. If you're not familiar with Symfony, please start with
+    reading the `Quick Tour`_ from the Symfony documentation.
+
+.. tip::
+
+   **The Book, Customization Guide, REST API Reference, Cookbook, Contribution Guide and Behat Guide**
+   are chapters describing the usage of **the whole Sylius platform**, on the examples for Sylius-Standard distribution.
+
+   For tips on using only some bundles of Sylius head to Bundles and Components docs.
 
 The Book
 --------
 
-The Developer's guide to leveraging the flexibility of Sylius. Here you will find all the concepts used in Sylius.
+The Developer's guide to leveraging the flexibility of Sylius. Here you will find all the concepts used in the Sylius platform.
 :doc:`The Book </book/index>` helps to understand how Sylius works.
 
 .. image:: _images/introduction.png

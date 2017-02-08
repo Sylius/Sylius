@@ -14,7 +14,7 @@ A Supplier needs three essential fields: ``name``, ``description`` and ``enabled
 2. Generate the entity
 ----------------------
 
-Sylius provides the `SensioGeneratorBundle <http://symfony.com/doc/current/bundles/SensioGeneratorBundle/index.html>`_,
+Symfony, the framework Sylius uses, provides the `SensioGeneratorBundle <http://symfony.com/doc/current/bundles/SensioGeneratorBundle/index.html>`_,
 that simplifies the process of adding a model.
 
 You need to use such a command in your project directory.
@@ -81,7 +81,7 @@ And add these few lines in the ``resources.yml`` file:
     sylius_resource:
         resources:
             app.supplier:
-                driver: doctrine/orm
+                driver: doctrine/orm # You can use also different driver here
                 classes:
                     model: AppBundle\Entity\Supplier
 

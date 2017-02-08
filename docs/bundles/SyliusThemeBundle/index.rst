@@ -14,3 +14,8 @@ Flexible theming system for Symfony applications.
     theme_inheritance
     theme_configuration_reference
     summary
+
+Learn more
+----------
+
+* :doc:`Themes in the Sylius platform </book/themes/index>` - concept documentation

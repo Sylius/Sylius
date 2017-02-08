@@ -12,3 +12,8 @@ provides you with basic Address, Country, Province and Zone models.
    models
    interfaces
    zone_types
+
+Learn more
+----------
+
+* :doc:`Addresses in the Sylius platform </book/customers/addresses/index>` - concept documentation

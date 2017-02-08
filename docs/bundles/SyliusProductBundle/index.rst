@@ -11,3 +11,8 @@ The Sylius product catalog is made available as set of 2 standalone bundles. Thi
    product
    forms
    summary
+
+Learn more
+----------
+
+* :doc:`Products in the Sylius platform </book/products/index>` - concept documentation

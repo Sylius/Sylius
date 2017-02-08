@@ -14,3 +14,8 @@ Configurable fixtures management for Symfony applications.
     builtin_listeners
     commands
     summary
+
+Learn more
+----------
+
+* :doc:`Fixtures in the Sylius platform </book/architecture/fixtures>` - concept documentation

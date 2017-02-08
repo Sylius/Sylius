@@ -11,3 +11,7 @@ Managing different locales for PHP apps.
    models
    interfaces
 
+Learn more
+----------
+
+* :doc:`Locales in the Sylius platform </book/configuration/locales>` - concept documentation
