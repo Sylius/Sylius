@@ -27,7 +27,7 @@
             <argument type="service" id="kernel" />
         </service>
 
-        <service id="sylius.theme.templating.name_parser" class="Sylius\Bundle\ThemeBundle\Templating\TemplateNameParser" decorates="templating.name_parser" public="false">
+        <service id="sylius.theme.templating.name_parser" class="Sylius\Bundle\ThemeBundle\Templating\TemplateNameParser" decorates="templating.name_parser" decoration-priority="256" public="false">
             <argument type="service" id="sylius.theme.templating.name_parser.inner" />
             <argument type="service" id="kernel" />
         </service>
@@ -38,12 +38,12 @@
             <argument type="service" id="sylius.theme.locator.resource" />
         </service>
 
-        <service id="sylius.theme.templating.locator.cached" class="Sylius\Bundle\ThemeBundle\Templating\Locator\CachedTemplateLocator" decorates="sylius.theme.templating.locator" public="false">
+        <service id="sylius.theme.templating.locator.cached" class="Sylius\Bundle\ThemeBundle\Templating\Locator\CachedTemplateLocator" decorates="sylius.theme.templating.locator" decoration-priority="256" public="false">
             <argument type="service" id="sylius.theme.templating.locator.cached.inner" />
             <argument type="service" id="sylius.theme.templating.cache" />
         </service>
 
-        <service id="sylius.theme.templating.file_locator" class="Sylius\Bundle\ThemeBundle\Templating\Locator\TemplateFileLocator" decorates="templating.locator" public="false">
+        <service id="sylius.theme.templating.file_locator" class="Sylius\Bundle\ThemeBundle\Templating\Locator\TemplateFileLocator" decorates="templating.locator" decoration-priority="256" public="false">
             <argument type="service" id="sylius.theme.templating.file_locator.inner" />
             <argument type="service" id="sylius.context.theme" />
             <argument type="service" id="sylius.theme.hierarchy_provider" />

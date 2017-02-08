@@ -53,7 +53,7 @@
 
         <service id="sylius.adjustments_aggregator" class="Sylius\Component\Order\Aggregator\AdjustmentsByLabelAggregator" />
 
-        <service id="sylius.custom_factory.adjustment" class="Sylius\Component\Order\Factory\AdjustmentFactory" decorates="sylius.factory.adjustment" public="false">
+        <service id="sylius.custom_factory.adjustment" class="Sylius\Component\Order\Factory\AdjustmentFactory" decorates="sylius.factory.adjustment" decoration-priority="256" public="false">
             <argument type="service" id="sylius.custom_factory.adjustment.inner" />
         </service>
 

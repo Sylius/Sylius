@@ -23,7 +23,7 @@
             </call>
         </service>
 
-        <service id="sylius.custom_factory.taxon" class="Sylius\Component\Taxonomy\Factory\TaxonFactory" decorates="sylius.factory.taxon" public="false">
+        <service id="sylius.custom_factory.taxon" class="Sylius\Component\Taxonomy\Factory\TaxonFactory" decorates="sylius.factory.taxon" decoration-priority="256" public="false">
             <argument type="service" id="sylius.custom_factory.taxon.inner" />
         </service>
 
