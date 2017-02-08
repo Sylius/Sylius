@@ -17,6 +17,7 @@ winzou_state_machine:
                 from: [cart]
                 to: awaiting_payment
             partially_pay:
+                from: [awaiting_payment, partially_paid]
                 to: partially_paid
             cancel:
                 from: [awaiting_payment]
@@ -25,9 +26,10 @@ winzou_state_machine:
                 from: [awaiting_payment, partially_paid]
                 to: paid
             partially_refund:
+                from: [paid, partially_paid, partially_refunded]
                 to: partially_refunded
             refund:
-                from: [paid, partially_refunded]
+                from: [paid,, partially_paid, partially_refunded]
                 to: refunded
         callbacks:
             after:
