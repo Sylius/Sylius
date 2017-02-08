@@ -19,3 +19,8 @@ You'll get familiar with it in later parts of this documentation.
    zones
    forms
    summary
+
+Learn more
+----------
+
+* :doc:`Addresses in the Sylius platform </book/customers/addresses/index>` - concept documentation

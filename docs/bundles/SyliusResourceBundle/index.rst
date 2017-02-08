@@ -31,3 +31,8 @@ So far we support:
    update_resource
    delete_resource
    reference
+
+Learn more
+----------
+
+* :doc:`Resource Layer in the Sylius platform </book/architecture/resource_layer>` - concept documentation

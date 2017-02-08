@@ -11,3 +11,8 @@ and their aim is to help the store owner manage products.
    basic_usage
    models
    interfaces
+
+Learn more
+----------
+
+* :doc:`Taxons in the Sylius platform </book/products/taxons>` - concept documentation

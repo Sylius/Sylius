@@ -12,3 +12,8 @@ and attach them to any object by implementing a simple interface.
    basic_usage
    models
    interfaces
+
+Learn more
+----------
+
+* :doc:`Attributes in the Sylius platform </book/products/attributes>` - concept documentation

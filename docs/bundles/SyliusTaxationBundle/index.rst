@@ -18,3 +18,8 @@ As with any Sylius bundle, you can override all the models, controllers, reposit
    calculating_taxes
    custom_calculators
    summary
+
+Learn more
+----------
+
+* :doc:`Taxation in the Sylius platform </book/orders/taxation>` - concept documentation

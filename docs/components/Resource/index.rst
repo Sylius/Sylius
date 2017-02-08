@@ -13,3 +13,8 @@ Domain management abstraction for PHP. It provides interface for most common ope
    service
    translation
    summary
+
+Learn more
+----------
+
+* :doc:`Resource Layer in the Sylius platform </book/architecture/resource_layer>` - concept documentation

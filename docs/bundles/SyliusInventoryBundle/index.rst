@@ -22,3 +22,8 @@ You'll get familiar with them in later parts of this documentation.
    services
    extension
    summary
+
+Learn more
+----------
+
+* :doc:`Inventory in the Sylius platform </book/products/inventory>` - concept documentation
