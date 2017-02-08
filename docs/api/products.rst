@@ -47,10 +47,6 @@ If you request for a more detailed data, you will receive an object with followi
 +-----------------+----------------------------------------------------------------------------+
 | reviews         | Collection of reviews passed by customers                                  |
 +-----------------+----------------------------------------------------------------------------+
-| available_on    | When the product is available                                              |
-+-----------------+----------------------------------------------------------------------------+
-| available_until | Till when the product is available                                         |
-+-----------------+----------------------------------------------------------------------------+
 | product_taxons  | Collection of relations between product and taxons                         |
 +-----------------+----------------------------------------------------------------------------+
 | main_taxon      | The main taxon to whose product is assigned                                |
@@ -201,7 +197,6 @@ Example Response
         "id": 2,
         "name": "Mug \"earum\"",
         "code": "d6e6efaf",
-        "available_on": "2017-01-18T10:32:17+0100",
         "attributes": [
             {
                 "code": "mug_material",
@@ -332,7 +327,6 @@ Example Response
         "id": 61,
         "name": "Truck Simulator",
         "code": "TS3",
-        "available_on": "2017-01-18T14:05:52+0100",
         "attributes": [],
         "variants": [],
         "options": [],
@@ -509,7 +503,6 @@ Example Response
         "name": "Theme Mug",
         "id": 62,
         "code": "MUG_TH",
-        "available_on": "2017-02-01T14:39:29+0100",
         "attributes": [
             {
                 "code": "mug_material",
@@ -548,7 +541,6 @@ Example Response
                         "name": "Mug \"perspiciatis\"",
                         "id": 1,
                         "code": "c67af0cf-2f5e-30a1-ba80-6be7a253b500",
-                        "available_on": "2017-02-01T14:10:19+0100",
                         "attributes": [
                             {
                                 "code": "mug_material",
@@ -633,7 +625,6 @@ Example Response
                         "name": "Mug \"et\"",
                         "id": 2,
                         "code": "e5e45464-c35f-3c05-b3ea-4743ccafb28e",
-                        "available_on": "2017-02-01T14:10:19+0100",
                         "attributes": [
                             {
                                 "code": "mug_material",

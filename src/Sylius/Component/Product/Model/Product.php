@@ -75,7 +75,6 @@ class Product implements ProductInterface
         $this->initializeTranslationsCollection();
 
         $this->createdAt = new \DateTime();
-        $this->availableOn = new \DateTime();
         $this->attributes = new ArrayCollection();
         $this->associations = new ArrayCollection();
         $this->variants = new ArrayCollection();

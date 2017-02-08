@@ -35,14 +35,6 @@ Sylius\Component\Product\Model\Product:
             expose: true
             type: array
             groups: [Detailed]
-        availableOn:
-            expose: true
-            type: DateTime
-            groups: [Detailed]
-        availableUntil:
-            expose: true
-            type: DateTime
-            groups: [Detailed]
     virtual_properties:
         getName:
             serialized_name: name
