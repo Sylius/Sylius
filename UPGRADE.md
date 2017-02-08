@@ -15,6 +15,56 @@
 ### ApiBundle
 
 * All api routes are prefixed with version number. For example route: `/api/customers` has changed to `/api/v1/customers`. 
+* Routing definition for Shipping Categories has been removed and replaced with auto generated resource routing. Also, Shipping Categories are resolved by code instead of id.
+ One can either change the way, how the routes are handled on theirs app (send `code` instead of `id`) or replace previous routing import with following definition:
+ ```yaml
+    sylius_api_shipping_category_index:
+        path: /
+        methods: [GET]
+        defaults:
+            _controller: sylius.controller.shipping_category:indexAction
+            _sylius:
+                serialization_version: $version
+                serialization_groups: [Default]
+                paginate: $limit
+                sortable: true
+                sorting:
+                    name: desc
+    
+    sylius_api_shipping_category_create:
+        path: /
+        methods: [POST]
+        defaults:
+            _controller: sylius.controller.shipping_category:createAction
+            _sylius:
+                serialization_version: $version
+    
+    sylius_api_shipping_category_update:
+        path: /{id}
+        methods: [PUT, PATCH]
+        defaults:
+            _controller: sylius.controller.shipping_category:updateAction
+            _sylius:
+                serialization_version: $version
+    
+    sylius_api_shipping_category_delete:
+        path: /{id}
+        methods: [DELETE]
+        defaults:
+            _controller: sylius.controller.shipping_category:deleteAction
+            _sylius:
+                serialization_version: $version
+                csrf_protection: false
+    
+    sylius_api_shipping_category_show:
+        path: /{id}
+        methods: [GET]
+        defaults:
+            _controller: sylius.controller.shipping_category:showAction
+            _sylius:
+                serialization_version: $version
+                serialization_groups: [Detailed]
+ ```
 
 ### Attribute / AttributeBundle
 

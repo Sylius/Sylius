@@ -76,6 +76,7 @@ final class ResourceLoader implements LoaderInterface
         $routes = $this->routeFactory->createRouteCollection();
 
         $rootPath = sprintf('/%s/', isset($configuration['path']) ? $configuration['path'] : Urlizer::urlize($metadata->getPluralName()));
+        $identifier = sprintf('{%s}', $configuration['identifier']);
 
         if (in_array('index', $routesToGenerate)) {
             $indexRoute = $this->createRoute($metadata, $configuration, $rootPath, 'index', ['GET'], $isApi);
@@ -88,17 +89,17 @@ final class ResourceLoader implements LoaderInterface
         }
 
         if (in_array('update', $routesToGenerate)) {
-            $updateRoute = $this->createRoute($metadata, $configuration, $isApi ? $rootPath . '{id}' : $rootPath . '{id}/edit', 'update', $isApi ? ['PUT', 'PATCH'] : ['GET', 'PUT', 'PATCH'], $isApi);
+            $updateRoute = $this->createRoute($metadata, $configuration, $isApi ? $rootPath . $identifier : $rootPath . $identifier . '/edit', 'update', $isApi ? ['PUT', 'PATCH'] : ['GET', 'PUT', 'PATCH'], $isApi);
             $routes->add($this->getRouteName($metadata, $configuration, 'update'), $updateRoute);
         }
 
         if (in_array('show', $routesToGenerate)) {
-            $showRoute = $this->createRoute($metadata, $configuration, $rootPath . '{id}', 'show', ['GET'], $isApi);
+            $showRoute = $this->createRoute($metadata, $configuration, $rootPath . $identifier, 'show', ['GET'], $isApi);
             $routes->add($this->getRouteName($metadata, $configuration, 'show'), $showRoute);
         }
 
         if (in_array('delete', $routesToGenerate)) {
-            $deleteRoute = $this->createRoute($metadata, $configuration, $rootPath . '{id}', 'delete', ['DELETE'], $isApi);
+            $deleteRoute = $this->createRoute($metadata, $configuration, $rootPath . $identifier, 'delete', ['DELETE'], $isApi);
             $routes->add($this->getRouteName($metadata, $configuration, 'delete'), $deleteRoute);
         }
 
@@ -164,6 +165,9 @@ final class ResourceLoader implements LoaderInterface
         }
         if (isset($configuration['section'])) {
             $defaults['_sylius']['section'] = $configuration['section'];
+        }
+        if (!empty($configuration['criteria']) && in_array($actionName, ['show', 'update', 'delete'], true)) {
+            $defaults['_sylius']['criteria'] = $configuration['criteria'];
         }
         if (isset($configuration['templates']) && in_array($actionName, ['show', 'index', 'create', 'update'], true)) {
             $defaults['_sylius']['template'] = sprintf('%s:%s.html.twig', $configuration['templates'], $actionName);
