@@ -44,7 +44,7 @@ class ProductTaxonController extends ResourceController
             foreach ($productTaxons as $productTaxon) {
                 if (!is_numeric($productTaxon['position'])) {
                     throw new HttpException(
-                        Response::HTTP_NOT_ACCEPTABLE,
+                        Response::HTTP_BAD_REQUEST,
                         sprintf('The productTaxon position "%s" is invalid.', $productTaxon['position'])
                     );
                 }

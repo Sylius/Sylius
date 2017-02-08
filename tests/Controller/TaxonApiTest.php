@@ -12,6 +12,7 @@
 namespace Sylius\Tests\Controller;
 
 use Lakion\ApiTestCase\JsonApiTestCase;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -430,5 +431,39 @@ EOT;
         $this->client->request('GET', '/api/v1/taxons/', ['page' => 2], [], static::$authorizedHeaderWithAccept);
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'taxon/paginated_index_response');
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_to_update_position_of_product_in_a_taxon()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/products.yml');
+        $productTaxons = $this->loadFixturesFromFile('resources/product_taxons.yml');
+
+        /** @var TaxonInterface $taxon */
+        $taxon = $productTaxons['mugs'];
+
+        $data =
+<<<EOT
+        {
+            "positionsData": [
+                {
+                    "product_code": "MUG_SW",
+                    "position": 2
+                },
+                {
+                    "product_code": "MUG_BB",
+                    "position": 0
+                }
+            ]
+        }
+EOT;
+
+        $this->client->request('PUT', sprintf('/api/v1/taxons/%s/products', $taxon->getCode()) , [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $response = $this->client->getResponse();
+        $this->assertResponseCode($response, Response::HTTP_OK);
     }
 }
