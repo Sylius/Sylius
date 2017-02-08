@@ -63,7 +63,7 @@ Example
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/v1/shipping-categories/ \
+    $ curl http://demo.sylius.org/api/v1/shipping-categories/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
@@ -100,7 +100,7 @@ Example Response
                     "name": "Regular",
                     "_links": {
                         "self": {
-                            "href": "\/api\/shipping-categories\/1"
+                            "href": "\/api\/shipping-categories\/SC1"
                         }
                     }
                 },
@@ -110,7 +110,7 @@ Example Response
                     "name": "Heavy",
                     "_links": {
                         "self": {
-                            "href": "\/api\/shipping-categories\/2"
+                            "href": "\/api\/shipping-categories\/SC2"
                         }
                     }
                 }
@@ -128,14 +128,14 @@ Definition
 
 .. code-block:: text
 
-    GET /api/v1/shipping-categories/{id}
+    GET /api/v1/shipping-categories/{code}
 
 +---------------+----------------+-------------------------------------------------------------------+
 | Parameter     | Parameter type | Description                                                       |
 +===============+================+===================================================================+
 | Authorization | header         | Token received during authentication                              |
 +---------------+----------------+-------------------------------------------------------------------+
-| id            | url attribute  | Id of requested resource                                          |
+| code          | url attribute  | Code of requested resource                                        |
 +---------------+----------------+-------------------------------------------------------------------+
 
 Example
@@ -143,7 +143,7 @@ Example
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/v1/shipping-categories/1 \
+    $ curl http://demo.sylius.org/api/v1/shipping-categories/SC1 \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
@@ -163,7 +163,7 @@ Example Response
         "description": "Regular weight items",
         "_links": {
             "self": {
-                "href": "\/api\/shipping-categories\/1"
+                "href": "\/api\/shipping-categories\/SC1"
             }
         }
     }
@@ -195,7 +195,7 @@ Example
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/v1/shipping-categories/ \
+    $ curl http://demo.sylius.org/api/v1/shipping-categories/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST \
@@ -223,7 +223,7 @@ Example Response
         "description": "Light weight items",
         "_links": {
             "self": {
-                "href": "\/api\/shipping-categories\/3"
+                "href": "\/api\/shipping-categories\/SC3"
             }
         }
     }
@@ -235,7 +235,7 @@ Example
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/v1/shipping-categories/-1 \
+    $ curl http://demo.sylius.org/api/v1/shipping-categories/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X POST
@@ -279,14 +279,14 @@ Definition
 
 .. code-block:: text
 
-    PUT /api/v1/shipping-categories/{id}
+    PUT /api/v1/shipping-categories/{code}
 
 +---------------+----------------+-------------------------------------------+
 | Parameter     | Parameter type | Description                               |
 +===============+================+===========================================+
 | Authorization | header         | Token received during authentication      |
 +---------------+----------------+-------------------------------------------+
-| id            | url attribute  | Id of requested resource                  |
+| code          | url attribute  | Code of requested resource                |
 +---------------+----------------+-------------------------------------------+
 | name          | request        | Name of creating shipping category        |
 +---------------+----------------+-------------------------------------------+
@@ -298,7 +298,7 @@ Example
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/v1/shipping-categories/3 \
+    $ curl http://demo.sylius.org/api/v1/shipping-categories/SC3 \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PUT \
@@ -323,7 +323,7 @@ Example
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/v1/shipping-categories/-1 \
+    $ curl http://demo.sylius.org/api/v1/shipping-categories/SC3 \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X PUT
@@ -359,14 +359,14 @@ Definition
 
 .. code-block:: text
 
-    PATCH /api/v1/shipping-categories/{id}
+    PATCH /api/v1/shipping-categories/{code}
 
 +---------------+----------------+--------------------------------------------------------+
 | Parameter     | Parameter type | Description                                            |
 +===============+================+========================================================+
 | Authorization | header         | Token received during authentication                   |
 +---------------+----------------+--------------------------------------------------------+
-| id            | url attribute  | Id of requested resource                               |
+| code          | url attribute  | Code of requested resource                             |
 +---------------+----------------+--------------------------------------------------------+
 | name          | request        | *(optional)* Name of creating shipping category        |
 +---------------+----------------+--------------------------------------------------------+
@@ -378,7 +378,7 @@ Example
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/v1/shipping-categories/3 \
+    $ curl http://demo.sylius.org/api/v1/shipping-categories/SC3 \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PATCH \
@@ -399,14 +399,14 @@ Definition
 
 .. code-block:: text
 
-    DELETE /api/v1/shipping-categories/{id}
+    DELETE /api/v1/shipping-categories/{code}
 
 +---------------+----------------+-------------------------------------------+
 | Parameter     | Parameter type | Description                               |
 +===============+================+===========================================+
 | Authorization | header         | Token received during authentication      |
 +---------------+----------------+-------------------------------------------+
-| id            | url attribute  | Id of requested resource                  |
+| code          | url attribute  | Code of requested resource                |
 +---------------+----------------+-------------------------------------------+
 
 Example
@@ -414,7 +414,7 @@ Example
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/v1/shipping-categories/3 \
+    $ curl http://demo.sylius.org/api/v1/shipping-categories/SC3 \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X DELETE
