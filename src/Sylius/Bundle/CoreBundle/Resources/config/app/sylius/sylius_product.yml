@@ -6,6 +6,7 @@ sylius_product:
         product:
             classes:
                 model: Sylius\Component\Core\Model\Product
+                controller: Sylius\Bundle\CoreBundle\Controller\ProductController
                 repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepository
             translation:
                 classes:

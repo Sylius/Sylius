@@ -15,10 +15,12 @@ sylius:
         set_address_as_default: 'Address has been set as default.'
     order:
         apply_state_machine_transition_error: 'There was an unexpected problem with updating an order. Please, try to update order again.'
+        promotion_integrity: 'You are no longer eligible for this promotion %promotionName%.'
+        total_integrity: 'Your order total has been changed, check your order information and confirm it again.'
+        update_error: 'There was an unexpected problem with updating a product. Please, try to update product again.'
     payment:
         apply_state_machine_transition_error: 'There was an unexpected problem with updating a payment. Please, try to update payment again.'
     product:
         out_of_stock: 'There is only %quantity% of this product in the stock.'
-    order:
-        promotion_integrity: 'You are no longer eligible for this promotion %promotionName%.'
-        total_integrity: 'Your order total has been changed, check your order information and confirm it again.'
+    product_variant:
+        update_error: 'There was an unexpected problem with updating a product variant. Please, try to update product variant again.'
