@@ -85,11 +85,12 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
     protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = [])
     {
         foreach ($criteria as $property => $value) {
+            if (!in_array($property, $this->_class->getFieldNames())) {
+                continue;
+            }
+
             $name = $this->getPropertyName($property);
 
-            if (!in_array($name, $this->_class->getFieldNames())) {
-                return;
-            }
             if (null === $value) {
                 $queryBuilder->andWhere($queryBuilder->expr()->isNull($name));
             } elseif (is_array($value)) {
@@ -112,7 +113,7 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
     {
         foreach ($sorting as $property => $order) {
             if (!in_array($property, $this->_class->getFieldNames())) {
-                return;
+                continue;
             }
 
             if (!empty($order)) {
