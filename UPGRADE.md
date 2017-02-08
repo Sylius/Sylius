@@ -114,6 +114,16 @@
   * `Sylius\Component\Core\Provider\ChannelBasedCurrencyProvider`
   * `Sylius\Component\Core\SyliusCurrencyEvents`
 
+* The following classes and interfaces was removed due to changes in locales handling (prepending them in URLs):
+
+  * `Sylius\Bundle\CoreBundle\Handler\CartLocaleChangeHandler`
+  * `Sylius\Bundle\CoreBundle\Handler\ShopLocaleChangeHandler`
+  * `Sylius\Component\Core\Locale\Context\StorageBasedLocaleContext`
+  * `Sylius\Component\Core\Locale\Handler\CompositeLocaleChangeHandler`
+  * `Sylius\Component\Core\Locale\Handler\LocaleChangeHandlerInterface`
+  * `Sylius\Component\Core\Locale\LocaleStorageInterface`
+  * `Sylius\Component\Core\Locale\SessionBasedLocaleStorage`
+
 ### Currency / CurrencyBundle
 
 * The following classes were removed due to being no longer used in current implementation:
@@ -265,44 +275,78 @@ These services will be generated automatically based on subject name.
 
 * `sylius_admin_dashboard_redirect` route was removed, use `sylius_admin_dashboard` instead.
 
+* All shop routes became prepended with locale code, see below for required routing and security changes.
+
 ### Configuration
+
+* Move `sylius_shop` routing below `sylius_admin` and `sylius_api` in `app/config/security.yml` and replace it with the following one:
+
+  ```yaml
+  sylius_shop:
+      resource: "@SyliusShopBundle/Resources/config/routing.yml"
+      prefix: /{_locale}
+      requirements:
+          _locale: ^[a-z]{2}(?:_[A-Z]{2})?$
+  
+  sylius_shop_default_locale:
+      path: /
+      methods: [GET]
+      defaults:
+          _controller: sylius.controller.shop.locale_switch:switchAction
+  ```
 
 ### Security
 
-Some change has been made to `app/config/security.yml`
+* Firewalls configuration was changed to provide better CSRF protection and turn on remember me feature, update your `app/config/security.yml`:
+  
   ```yaml
-    firewalls:
-        admin:
-            form_login:
-                csrf_token_generator: security.csrf.token_manager
-                csrf_parameter: _csrf_admin_security_token
-                csrf_token_id: admin_authenticate
-            remember_me:
-                secret: "%secret%"
-                path: /admin
-                name: APP_ADMIN_REMEMBER_ME
-                lifetime: 31536000 //custom lifetime
-                remember_me_parameter: _remember_me
-        shop:
-            form_login:
-                csrf_token_generator: security.csrf.token_manager
-                csrf_parameter: _csrf_shop_security_token
-                csrf_token_id: shop_authenticate
-            remember_me:
-                secret: "%secret%"
-                name: APP_SHOP_REMEMBER_ME
-                lifetime: 31536000
-                remember_me_parameter: _remember_me
-    access_control:
-        - { path: "^/_partial.*", role: IS_AUTHENTICATED_ANONYMOUSLY, ips: [127.0.0.1, ::1] }
-        - { path: "^/_partial.*", role: ROLE_NO_ACCESS }
-        - { path: "^/admin/_partial.*", role: IS_AUTHENTICATED_ANONYMOUSLY, ips: [127.0.0.1, ::1] }
-        - { path: "^/admin/_partial.*", role: ROLE_NO_ACCESS }
+  security:
+      firewalls:
+          admin:
+              form_login:
+                  csrf_token_generator: security.csrf.token_manager
+                  csrf_parameter: _csrf_admin_security_token
+                  csrf_token_id: admin_authenticate
+              remember_me:
+                  secret: "%secret%"
+                  path: /admin
+                  name: APP_ADMIN_REMEMBER_ME
+                  lifetime: 31536000
+                  remember_me_parameter: _remember_me
+          shop:
+              form_login:
+                  csrf_token_generator: security.csrf.token_manager
+                  csrf_parameter: _csrf_shop_security_token
+                  csrf_token_id: shop_authenticate
+              remember_me:
+                  secret: "%secret%"
+                  name: APP_SHOP_REMEMBER_ME
+                  lifetime: 31536000
+                  remember_me_parameter: _remember_me
   ```
-From now one you need to pass csrf token to your login-check request so you need to add `<input type="hidden" value={{ csrf_token('csrf_token_id') }} name="csrf_parameter">` into your login form.
-Example input `<input type="hidden" name="_csrf_admin_security_token" value="{{ csrf_token('admin_authenticate') }}">`
 
-The remember me feature did not work properly due to missing additional configuration.
+  From now on you need to pass CSRF token to your login-check request so you need to add `<input type="hidden" value={{ csrf_token('csrf_token_id') }} name="csrf_parameter">` into your login form.
+  Example input for admin login looks like `<input type="hidden" name="_csrf_admin_security_token" value="{{ csrf_token('admin_authenticate') }}">`.
+
+  The remember me feature did not work properly due to missing additional configuration.
+  
+* Securing partial routes and prepending shop URLs with locales need changes in `access_control` section of your `app/config/security.yml`:
+
+  ```yaml
+    security:
+        access_control:
+            - { path: "^/[^/]++/_partial", role: IS_AUTHENTICATED_ANONYMOUSLY, ips: [127.0.0.1, ::1] }
+            - { path: "^/[^/]++/_partial", role: ROLE_NO_ACCESS }
+        
+            - { path: "^/[^/]++/login", role: IS_AUTHENTICATED_ANONYMOUSLY }
+        
+            - { path: "^/(?!admin|api)[^/]++/register", role: IS_AUTHENTICATED_ANONYMOUSLY }
+            - { path: "^/(?!admin|api)[^/]++/verify", role: IS_AUTHENTICATED_ANONYMOUSLY }
+        
+            - { path: "^/admin", role: ROLE_ADMINISTRATION_ACCESS }
+            - { path: "^/api", role: ROLE_API_ACCESS }
+            - { path: "^/(?!admin|api)[^/]++/account", role: ROLE_USER }
+  ```
 
 ### Behat
 
