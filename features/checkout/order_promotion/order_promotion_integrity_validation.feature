@@ -15,7 +15,7 @@ Feature: Order promotions integrity
         And I am a logged in customer
 
     @ui
-    Scenario: I proceed to checkout summary page with a promotion, which expires in 2 hours, but I complete my checkout next day
+    Scenario: Preventing customer from completing checkout with already expired promotion
         Given I added product "PHP T-Shirt" to the cart
         And I have proceeded selecting "Offline" payment method
         And this promotion has already expired

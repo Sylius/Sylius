@@ -482,11 +482,4 @@ final class OrderSpec extends ObjectBehavior
         $this->setNotes('something squishy');
         $this->getNotes()->shouldReturn('something squishy');
     }
-
-    function it_can_copy_it_self()
-    {
-        $order = $this->getWrappedObject();
-
-        $this->getCopy()->shouldBeLike($order);
-    }
 }

@@ -15,6 +15,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Shipping\Checker\ShippingMethodEligibilityCheckerInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -41,15 +42,7 @@ final class OrderShippingMethodEligibilityValidator extends ConstraintValidator
      */
     public function validate($order, Constraint $constraint)
     {
-        if (!$order instanceof OrderInterface) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    'This validator can only work with "%s", but got "%s".',
-                    OrderInterface::class,
-                    get_class($order)
-                )
-            );
-        }
+        Assert::isInstanceOf($order, OrderInterface::class);
 
         $shipments = $order->getShipments();
         if ($shipments->isEmpty()) {

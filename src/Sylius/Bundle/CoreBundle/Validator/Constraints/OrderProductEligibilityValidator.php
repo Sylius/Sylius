@@ -15,6 +15,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -28,15 +29,7 @@ final class OrderProductEligibilityValidator extends ConstraintValidator
      */
     public function validate($order, Constraint $constraint)
     {
-        if (!$order instanceof OrderInterface) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    'This validator can only work with "%s", but got "%s".',
-                    OrderInterface::class,
-                    get_class($order)
-                )
-            );
-        }
+        Assert::isInstanceOf($order, OrderInterface::class);
 
         /** @var OrderItemInterface[] $orderItems */
         $orderItems = $order->getItems();

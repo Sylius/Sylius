@@ -19,6 +19,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\RouterInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -63,15 +64,7 @@ final class OrderPromotionIntegrityChecker
         /** @var OrderInterface $order */
         $order = $event->getSubject();
 
-        if (!$order instanceof OrderInterface) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    'This checker can only work with "%s", but got "%s".',
-                    OrderInterface::class,
-                    get_class($order)
-                )
-            );
-        }
+        Assert::isInstanceOf($order, OrderInterface::class);
 
         $promotions = $order->getPromotions();
         foreach ($promotions as $promotion) {

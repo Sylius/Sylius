@@ -23,6 +23,16 @@ Feature: Inform customer about any order total changes during checkout process
         And I should not see the thank you page
 
     @ui
+    Scenario: Be able to confirm order after information appears
+        Given I am a logged in customer
+        And I added product "PHP T-Shirt" to the cart
+        And I have proceeded selecting "Offline" payment method
+        And this product price has been changed to "$25.00"
+        And I have confirmed order
+        When I confirm my order
+        Then I should see the thank you page
+
+    @ui
     Scenario: Inform customer about order total change due to tax change
         Given I am a logged in customer
         And I added product "PHP T-Shirt" to the cart

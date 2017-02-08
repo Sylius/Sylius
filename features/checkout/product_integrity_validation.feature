@@ -12,7 +12,7 @@ Feature: Order products integrity
         And I am a logged in customer
 
     @ui
-    Scenario: Validate that products in order are not disabled
+    Scenario: Preventing customer from completing checkout with no longer available products
         Given I have product "PHP T-Shirt" in the cart
         And I have proceeded selecting "Offline" payment method
         But this product has been disabled

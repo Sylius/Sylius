@@ -44,7 +44,7 @@ Feature: Order shipping method integrity
         Given I added product "Westworld host" to the cart
         And I have completed addressing step with email "guest@example.com" and "United States" based shipping address
         And I have proceeded order with "DHL" shipping method and "Offline" payment
-        And product "Westworld host" has its shipping category changed to "Small stuff"
+        And product "Westworld host" shipping category has been changed to "Small stuff"
         When I want to complete checkout
         Then I should not be able to confirm order because products does not fit "DHL" requirements
         And I should not see the thank you page

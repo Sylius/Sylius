@@ -11,6 +11,7 @@
 
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
+use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\EventListener\OrderTotalIntegrityChecker;
@@ -25,9 +26,9 @@ use Symfony\Component\Routing\RouterInterface;
  */
 final class OrderTotalIntegrityCheckerSpec extends ObjectBehavior
 {
-    function let(OrderProcessorInterface $orderProcessor, RouterInterface $router)
+    function let(OrderProcessorInterface $orderProcessor, RouterInterface $router, ObjectManager $manager)
     {
-        $this->beConstructedWith($orderProcessor, $router);
+        $this->beConstructedWith($orderProcessor, $router, $manager);
     }
 
     function it_is_initializable()
@@ -37,20 +38,18 @@ final class OrderTotalIntegrityCheckerSpec extends ObjectBehavior
 
     function it_does_nothing_if_prices_do_not_change(
         OrderProcessorInterface $orderProcessor,
-        OrderInterface $originalOrder,
-        OrderInterface $copiedOrder,
+        OrderInterface $order,
         ResourceControllerEvent $event
     ) {
-        $event->getSubject()->willReturn($originalOrder);
-        $originalOrder->getCopy()->willReturn($copiedOrder);
+        $event->getSubject()->willReturn($order);
 
-        $originalOrder->getTotal()->willReturn(1000);
-        $copiedOrder->getTotal()->willReturn(1000);
+        $orderProcessor->process($order)->shouldBeCalled();
 
-        $orderProcessor->process($copiedOrder)->shouldBeCalled();
+        $order->getTotal()->willReturn(1000);
+        $order->getTotal()->willReturn(1000);
+
         $event->stop(Argument::any())->shouldNotBeCalled();
         $event->setResponse(Argument::any())->shouldNotBeCalled();
-        $orderProcessor->process($originalOrder)->shouldNotBeCalled();
 
         $this->check($event);
     }
@@ -58,21 +57,21 @@ final class OrderTotalIntegrityCheckerSpec extends ObjectBehavior
     function it_stops_process_when_it_detects_any_difference_in_order_total(
         OrderProcessorInterface $orderProcessor,
         RouterInterface $router,
-        OrderInterface $originalOrder,
-        OrderInterface $copiedOrder,
+        ObjectManager $manager,
+        OrderInterface $order,
         ResourceControllerEvent $event
     ) {
-        $event->getSubject()->willReturn($originalOrder);
-        $originalOrder->getCopy()->willReturn($copiedOrder);
+        $event->getSubject()->willReturn($order);
 
-        $originalOrder->getTotal()->willReturn(1000);
-        $copiedOrder->getTotal()->willReturn(1500);
+        $order->getTotal()->willReturn(1000, 1500);
 
         $router->generate('sylius_shop_checkout_complete')->willReturn('checkout-complete.com');
 
-        $orderProcessor->process($copiedOrder)->shouldBeCalled();
+        $orderProcessor->process($order)->shouldBeCalled();
         $event->stop('sylius.order.total_integrity', ResourceControllerEvent::TYPE_ERROR)->shouldBeCalled();
         $event->setResponse(new RedirectResponse('checkout-complete.com'))->shouldBeCalled();
+        $manager->persist($order)->shouldBeCalled();
+        $manager->flush()->shouldBeCalled();
 
         $this->check($event);
     }

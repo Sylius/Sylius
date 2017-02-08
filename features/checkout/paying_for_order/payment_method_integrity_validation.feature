@@ -12,7 +12,7 @@ Feature: Order payment method integrity
         And I am a logged in customer
 
     @ui
-    Scenario: Validate payment method which was disabled by administrator
+    Scenario: Preventing customer from completing checkout with no longer available payment method
         Given I have product "PHP T-Shirt" in the cart
         And I have proceeded selecting "Offline" payment method
         But this payment method has been disabled

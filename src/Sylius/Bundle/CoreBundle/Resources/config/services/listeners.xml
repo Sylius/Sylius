@@ -91,6 +91,7 @@
         <service id="sylius.listener.order_total_integrity_checker" class="Sylius\Bundle\CoreBundle\EventListener\OrderTotalIntegrityChecker">
             <argument type="service" id="sylius.order_processing.order_processor" />
             <argument type="service" id="router" />
+            <argument type="service" id="sylius.manager.order" />
             <tag name="kernel.event_listener" event="sylius.order.pre_complete" method="check" />
         </service>
     </services>

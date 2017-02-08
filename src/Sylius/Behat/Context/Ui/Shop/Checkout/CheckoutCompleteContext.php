@@ -84,6 +84,7 @@ final class CheckoutCompleteContext implements Context
     }
 
     /**
+     * @Given I have confirmed order
      * @When I confirm my order
      */
     public function iConfirmMyOrder()

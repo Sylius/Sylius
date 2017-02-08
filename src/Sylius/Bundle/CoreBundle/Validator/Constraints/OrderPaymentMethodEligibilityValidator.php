@@ -14,6 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -21,26 +22,18 @@ use Symfony\Component\Validator\ConstraintValidator;
 final class OrderPaymentMethodEligibilityValidator extends ConstraintValidator
 {
     /**
-     * @param OrderInterface $value
+     * @param OrderInterface $order
      *
      * {@inheritdoc}
      */
     public function validate($order, Constraint $constraint)
     {
-        if (!$order instanceof OrderInterface) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    'This validator can only work with "%s", but got "%s".',
-                    OrderInterface::class,
-                    get_class($order)
-                )
-            );
-        }
+        Assert::isInstanceOf($order, OrderInterface::class);
 
         $payments = $order->getPayments();
 
         foreach ($payments as $payment) {
-            if(!$payment->getMethod()->isEnabled()) {
+            if (!$payment->getMethod()->isEnabled()) {
                 $this->context->addViolation(
                     $constraint->message,
                     ['%paymentMethodName%' => $payment->getMethod()->getName()]

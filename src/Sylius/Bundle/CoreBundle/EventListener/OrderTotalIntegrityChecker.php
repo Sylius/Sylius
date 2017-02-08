@@ -11,11 +11,13 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
+use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\RouterInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -33,13 +35,23 @@ final class OrderTotalIntegrityChecker
     private $router;
 
     /**
+     * @var ObjectManager
+     */
+    private $manager;
+
+    /**
      * @param OrderProcessorInterface $orderProcessors
      * @param RouterInterface $router
+     * @param ObjectManager $manager
      */
-    public function __construct(OrderProcessorInterface $orderProcessors, RouterInterface $router)
-    {
+    public function __construct(
+        OrderProcessorInterface $orderProcessors,
+        RouterInterface $router,
+        ObjectManager $manager
+    ) {
         $this->orderProcessors = $orderProcessors;
         $this->router = $router;
+        $this->manager = $manager;
     }
 
     /**
@@ -47,25 +59,20 @@ final class OrderTotalIntegrityChecker
      */
     public function check(ResourceControllerEvent $event)
     {
-        /** @var OrderInterface $originalOrder */
-        $originalOrder = $event->getSubject();
+        /** @var OrderInterface $order */
+        $order = $event->getSubject();
 
-        if (!$originalOrder instanceof OrderInterface) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    'This checker can only work with "%s", but got "%s".',
-                    OrderInterface::class,
-                    get_class($originalOrder)
-                )
-            );
-        }
+        Assert::isInstanceOf($order, OrderInterface::class);
 
-        $copiedOrder = $originalOrder->getCopy();
-        $this->orderProcessors->process($copiedOrder);
+        $oldTotal = $order->getTotal();
+        $this->orderProcessors->process($order);
 
-        if ($originalOrder->getTotal() !== $copiedOrder->getTotal()) {
+        if ($order->getTotal() !== $oldTotal) {
             $event->stop('sylius.order.total_integrity', ResourceControllerEvent::TYPE_ERROR);
             $event->setResponse(new RedirectResponse($this->router->generate('sylius_shop_checkout_complete')));
+
+            $this->manager->persist($order);
+            $this->manager->flush();
         }
     }
 }
