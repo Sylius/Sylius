@@ -14,7 +14,8 @@
 
 ### ApiBundle
 
-* All api routes are prefixed with version number. For example route: `/api/customers` has changed to `/api/v1/customers`. 
+* Change the import path of your API routing from `src/Sylius/Bundle/ApiBundle/Resources/config/routing/main.yml` to `src/Sylius/Bundle/ApiBundle/Resources/config/routing.yml`. API became versioned, so you need to prefix them accordingly (e.g. `/api/customer` -> `/api/v1/customer`). 
+
 * Routing definition for Shipping Categories has been removed and replaced with auto generated resource routing. Also, Shipping Categories are resolved by code instead of id.
  One can either change the way, how the routes are handled on theirs app (send `code` instead of `id`) or replace previous routing import with following definition:
  ```yaml
