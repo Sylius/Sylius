@@ -29,7 +29,7 @@ sylius_api_checkout_available_shipping_methods:
     path: /select-shipping/{orderId}
     methods: [GET]
     defaults:
-        _controller: sylius.controller.order:showAvailableShippingMethodsAction
+        _controller: sylius.controller.show_available_shipping_methods:showAction
         _sylius:
             serialization_version: $version
 
@@ -52,7 +52,7 @@ sylius_api_checkout_available_payment_methods:
     path: /select-payment/{orderId}
     methods: [GET]
     defaults:
-        _controller: sylius.controller.order:showAvailablePaymentMethodsAction
+        _controller: sylius.controller.show_available_payment_methods:showAction
         _sylius:
             serialization_version: $version
 

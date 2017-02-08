@@ -99,11 +99,13 @@ Sylius\Component\Shipping\Model\ShippingMethodTranslation:
     upsTranslation1:
         name: 'UPS'
         locale: 'en_US'
+        description: <paragraph(2)>
         translatable: "@ups"
     dhlTranslation1:
         name: 'DHL'
         locale: 'en_US'
         translatable: "@dhl"
+        description: <paragraph(2)>
 
 Sylius\Component\Core\Model\PaymentMethod:
     cash_on_delivery:
@@ -123,10 +125,12 @@ Sylius\Component\Payment\Model\PaymentMethodTranslation:
     cash_on_delivery_translation1:
         name: 'Cach on delivery'
         locale: 'en_US'
+        description: <paragraph(2)>
         translatable: "@cash_on_delivery"
     pay_by_check_translation1:
         name: 'Pay by check'
         locale: 'en_US'
+        description: <paragraph(2)>
         translatable: "@pay_by_check"
 
 Sylius\Component\Currency\Model\Currency:

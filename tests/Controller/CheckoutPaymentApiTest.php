@@ -119,7 +119,7 @@ EOT;
     /**
      * @test
      */
-    public function it_does_not_provide_details_about_available_payment_method2_before_addressing()
+    public function it_does_not_provide_details_about_available_payment_methods_before_addressing()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $checkoutData = $this->loadFixturesFromFile('resources/checkout.yml');

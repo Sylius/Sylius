@@ -5,46 +5,16 @@
                 {
                     "id": @integer@,
                     "code": "UPS",
-                    "category_requirement": 1,
-                    "calculator": "flat_rate",
-                    "configuration": {
-                        "CHANNEL": {
-                            "amount": 10
-                        }
-                    },
-                    "created_at": "@string@.isDateTime()",
-                    "updated_at": "@string@.isDateTime()",
-                    "enabled": true,
-                    "_links": {
-                        "self": {
-                            "href": "\/api\/v1\/shipping-methods\/UPS"
-                        },
-                        "zone": {
-                            "href": "\/api\/v1\/zones\/EU"
-                        }
-                    }
+                    "name": "UPS",
+                    "description": "@string@",
+                    "price": 10
                 },
                 {
                     "id": @integer@,
                     "code": "DHL",
-                    "category_requirement": 1,
-                    "calculator": "flat_rate",
-                    "configuration": {
-                        "CHANNEL": {
-                            "amount": 20
-                        }
-                    },
-                    "created_at": "@string@.isDateTime()",
-                    "updated_at": "@string@.isDateTime()",
-                    "enabled": true,
-                    "_links": {
-                        "self": {
-                            "href": "\/api\/v1\/shipping-methods\/DHL"
-                        },
-                        "zone": {
-                            "href": "\/api\/v1\/zones\/EU"
-                        }
-                    }
+                    "name": "DHL",
+                    "description": "@string@",
+                    "price": 20
                 }
             ]
         }
