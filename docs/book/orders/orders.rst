@@ -130,6 +130,13 @@ This lets you to divide an order into several different shipments that have own 
 
     If you are not familiar with the shipments concept :doc:`check the documentation</book/orders/shipments>`.
 
+State machine of Shipping in an Order
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. image:: ../../_images/sylius_order_shipping.png
+    :align: center
+    :scale: 70%
+
 How to add a Shipment to an Order?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -181,6 +188,13 @@ It lets you to divide paying for an order into several different methods that ha
 .. tip::
 
     If you are not familiar with the Payments concept :doc:`check the documentation</book/orders/payments>`.
+
+State machine of Payment in an Order
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. image:: ../../_images/sylius_order_payment.png
+    :align: center
+    :scale: 70%
 
 How to add a Payment to an Order?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
