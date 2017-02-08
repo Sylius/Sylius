@@ -1,0 +1,47 @@
+{% extends 'knp_menu.html.twig' %}
+
+{% block root %}
+    <div class="four wide right aligned column">
+        {{ block('items') }}
+    </div>
+{% endblock %}
+
+{% block items %}
+    <div class="ui buttons">
+        {% for item in item.children %}
+            {{ block('item') }}
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block item %}
+    {% if 'transition' == item.attribute('type') %}
+        {{ block('transition') }}
+    {% else %}
+        {{ block('link') }}
+    {% endif %}
+{% endblock %}
+
+{% block transition %}
+    {% set color = item.labelAttribute('color') %}
+
+    <form action="{{ item.uri }}" method="post" style="float: right;">
+        <input type="hidden" name="_method" value="PUT">
+        <button class="ui {% if color %}{{ color }} {% endif %}labeled icon loadable button" type="submit">
+            {{ block('icon') }}
+            {{ item.label|trans }}
+        </button>
+    </form>
+{% endblock %}
+
+{% block link %}
+    <a href="{{ item.uri }}" class="ui labeled icon button">
+        {{ block('icon') }}
+        {{ item.label|trans }}
+    </a>
+{% endblock %}
+
+{% block icon %}
+    {% set icon = item.labelAttribute('icon') %}
+    {% if icon %}<i class="icon {{ icon }}"></i> {% endif %}
+{% endblock %}

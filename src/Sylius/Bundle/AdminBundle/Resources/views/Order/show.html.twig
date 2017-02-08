@@ -11,9 +11,9 @@
     <div class="twelve wide column">
         {% include '@SyliusAdmin/Order/Show/_header.html.twig' %}
     </div>
-    <div class="four wide right aligned column">
-        {% include '@SyliusAdmin/Order/Show/_actions.html.twig' %}
-    </div>
+
+    {% set menu = knp_menu_get('sylius.admin.order.show', [], {'order': order}) %}
+    {{ knp_menu_render(menu, {'template': '@SyliusAdmin/Order/Menu/show.html.twig'}) }}
 </div>
 {% include '@SyliusAdmin/Order/Show/_breadcrumb.html.twig' %}
 <div class="ui stackable grid">

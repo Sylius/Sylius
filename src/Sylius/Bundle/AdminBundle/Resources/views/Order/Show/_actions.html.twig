@@ -1,7 +1,0 @@
-<a href="{{ path('sylius_admin_order_history', {'id': order.id}) }}" class="ui labeled icon button"><i class="history icon"></i>{{ 'sylius.ui.history'|trans }}</a>
-{% if sm_can(order, 'cancel', 'sylius_order') %}
-    <form action="{{ path('sylius_admin_order_cancel', {'id': order.id}) }}" method="post" style="float: right;">
-        <input type="hidden" name="_method" value="PUT">
-        <button class="ui yellow labeled icon loadable button" type="submit"><i class="ban icon"></i> {{'sylius.ui.cancel'|trans  }}</button>
-    </form>
-{% endif %}
