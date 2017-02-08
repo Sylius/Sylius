@@ -3,279 +3,73 @@ Products API
 
 These endpoints will allow you to easily manage products. Base URI is `/api/v1/products`.
 
-When you get a collection of resources, "Default" serialization group will be used and following fields will be exposed:
+Product structure
+-----------------
+
+Product API response structure
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+If you request a product via API, you will receive an object with the following fields:
 
 +----------------+----------------------------------------------------------------------------+
 | Field          | Description                                                                |
 +================+============================================================================+
-| id             | Id of product                                                              |
+| id             | Id of the product                                                          |
 +----------------+----------------------------------------------------------------------------+
 | code           | Unique product identifier (for example SKU)                                |
 +----------------+----------------------------------------------------------------------------+
 | average_rating | Average from accepted ratings given by customer                            |
 +----------------+----------------------------------------------------------------------------+
-| channels       | Collection of channels to which product was assigned                       |
+| channels       | Collection of channels to which the product was assigned                   |
 +----------------+----------------------------------------------------------------------------+
 | translations   | Collection of translations (each contains slug and name in given language) |
 +----------------+----------------------------------------------------------------------------+
-| options        | Options assigned to this product                                           |
+| options        | Options assigned to the product                                            |
 +----------------+----------------------------------------------------------------------------+
-| images         | Images assigned to product                                                 |
+| images         | Images assigned to the product                                             |
 +----------------+----------------------------------------------------------------------------+
 
-If you request for a more detailed data, you will receive an object with following fields:
+If you request for more detailed data, you will receive an object with the following fields:
 
 +-----------------+----------------------------------------------------------------------------+
 | Field           | Description                                                                |
 +=================+============================================================================+
-| id              | Id of product                                                              |
+| id              | Id of the product                                                          |
 +-----------------+----------------------------------------------------------------------------+
 | code            | Unique product identifier                                                  |
 +-----------------+----------------------------------------------------------------------------+
 | average_rating  | Average from ratings given by customer                                     |
 +-----------------+----------------------------------------------------------------------------+
-| channels        | Collection of channels to which product was assigned                       |
+| channels        | Collection of channels to which the product was assigned                   |
 +-----------------+----------------------------------------------------------------------------+
 | translations    | Collection of translations (each contains slug and name in given language) |
 +-----------------+----------------------------------------------------------------------------+
-| attributes      | Collection of attributes connected with product (for example material)     |
+| attributes      | Collection of attributes connected with the product (for example material) |
 +-----------------+----------------------------------------------------------------------------+
-| associations    | Collection of products associated with created product                     |
+| associations    | Collection of products associated with the created product                 |
 |                 | (for example accessories to this product)                                  |
 +-----------------+----------------------------------------------------------------------------+
-| variants        | Collection of variants connected with product                              |
+| variants        | Collection of variants connected with the product                          |
 +-----------------+----------------------------------------------------------------------------+
 | reviews         | Collection of reviews passed by customers                                  |
 +-----------------+----------------------------------------------------------------------------+
 | product_taxons  | Collection of relations between product and taxons                         |
 +-----------------+----------------------------------------------------------------------------+
-| main_taxon      | The main taxon to whose product is assigned                                |
+| main_taxon      | The main taxon to whose the product is assigned                            |
 +-----------------+----------------------------------------------------------------------------+
 
 
 .. note::
 
-    Read more about `Products`__
+    Read more about :doc: `Product </components/Product/models>`
 
-__ http://docs.sylius.org/en/latest/components/Product/models.html#product
+Creating a Product
+------------------
 
-Collection of Products
-----------------------
-
-You can retrieve the full products list by making the following request:
+To create a new product you will need to call the ``/api/v1/products/`` endpoint with the ``POST`` method.
 
 Definition
-..........
-
-.. code-block:: text
-
-    GET /api/v1/products/
-
-+---------------------------------------+----------------+---------------------------------------------------+
-| Parameter                             | Parameter type | Description                                       |
-+=======================================+================+===================================================+
-| Authorization                         | header         | Token received during authentication              |
-+---------------------------------------+----------------+---------------------------------------------------+
-| limit                                 | query          | *(optional)* Number of items to display per page, |
-|                                       |                | by default = 10                                   |
-+---------------------------------------+----------------+---------------------------------------------------+
-| sorting['name_of_field']['direction'] | query          | *(optional)* Field and direction of sorting,      |
-|                                       |                | by default 'desc' and 'createdAt'                 |
-+---------------------------------------+----------------+---------------------------------------------------+
-
-
-Example
-^^^^^^^
-
-.. code-block:: bash
-
-    $ curl http://sylius.dev/api/v1/products/ \
-        -H "Authorization: Bearer SampleToken" \
-        -H "Accept: application/json"
-
-Example Response
-~~~~~~~~~~~~~~~~
-
-.. code-block:: text
-
-    STATUS: 200 OK
-
-.. code-block:: json
-
-     {
-         "page": 1,
-         "limit": 10,
-         "pages": 1,
-         "total": 1,
-         "_links": {
-             "self": {
-                 "href": "/api/v1/products/?page=1&limit=10"
-             },
-             "first": {
-                 "href": "/api/v1/products/?page=1&limit=10"
-             },
-             "last": {
-                 "href": "/api/v1/products/?page=6&limit=10"
-             },
-             "next": {
-                 "href": "/api/v1/products/?page=2&limit=10"
-             }
-         },
-         "_embedded": {
-             "items": [
-                 {
-                     "name": "Mug \"earum\"",
-                     "id": 2,
-                     "code": "d6e6efaf",
-                     "options": [
-                         {
-                             "code": "mug_type"
-                         }
-                     ],
-                     "average_rating": 2,
-                     "images": [
-                         {
-                             "id": 3,
-                             "code": "main",
-                             "path": "af/ae/88f740736b8b79696513a5fe9c31.jpeg"
-                         },
-                         {
-                             "id": 4,
-                             "code": "thumbnail",
-                             "path": "71/8d/9dd518beda0571b133dbdf7f5d0a.jpeg"
-                         }
-                     ],
-                     "_links": {
-                         "self": {
-                             "href": "/api/v1/products/2"
-                         }
-                     }
-                 }
-             ]
-         }
-     }
-
-Getting a Single Product
-------------------------
-
-You can request detailed product information by executing the following request:
-
-Definition
-..........
-
-.. code-block:: text
-
-    GET /api/v1/products/{id}
-
-+---------------+----------------+-------------------------------------------------------------------+
-| Parameter     | Parameter type | Description                                                       |
-+===============+================+===================================================================+
-| Authorization | header         | Token received during authentication                              |
-+---------------+----------------+-------------------------------------------------------------------+
-| id            | url attribute  | Id of requested resource                                          |
-+---------------+----------------+-------------------------------------------------------------------+
-
-Example
-^^^^^^^
-
-.. code-block:: bash
-
-    $ curl http://sylius.dev/api/v1/products/2 \
-        -H "Authorization: Bearer SampleToken" \
-        -H "Accept: application/json"
-
-Example Response
-~~~~~~~~~~~~~~~~
-
-.. code-block:: text
-
-    STATUS: 200 OK
-
-.. code-block:: json
-
-    {
-        "id": 2,
-        "name": "Mug \"earum\"",
-        "code": "d6e6efaf",
-        "attributes": [
-            {
-                "code": "mug_material",
-                "name": "Mug material",
-                "value": "Invisible porcelain",
-                "id": 2
-            }
-        ],
-        "variants": [
-            {
-                "id": 4,
-                "on_hold": 0,
-                "tracked": false
-            }
-        ],
-        "options": [
-            {
-                "code": "mug_type"
-            }
-        ],
-        "translations": {
-            "en_US": {
-                "locale": "en_US",
-                "id": 2,
-                "name": "Mug \"earum\"",
-                "slug": "mug-earum",
-                "description": "Et qui neque at sit voluptate sint omnis. Quos assumenda magni eos nemo qui accusamus.",
-                "short_description": "Molestiae quaerat in voluptate."
-            }
-        },
-        "product_taxons": [
-            {
-                "id": 2,
-                "position": 1
-            }
-        ],
-        "main_taxon": {
-            "name": "Mugs",
-            "id": 2,
-            "code": "mugs",
-            "children": []
-        },
-        "reviews": [
-            {
-                "id": 41,
-                "title": "Nice",
-                "rating": 2,
-                "comment": "Nice",
-                "author": {
-                    "id": 22,
-                    "email": "banana@exmp.com",
-                    "email_canonical": "banana@exmp.com",
-                    "gender": "u"
-                },
-                "status": "new",
-                "created_at": "2017-01-18T11:15:44+0100",
-                "updated_at": "2017-01-18T11:15:45+0100"
-            }
-        ],
-        "average_rating": 2,
-        "images": [
-            {
-                "id": 3,
-                "code": "main",
-                "path": "af/ae/88f740736b8b79696513a5fe9c31.jpeg"
-            }
-        ],
-        "_links": {
-            "self": {
-                "href": "/api/v1/products/2"
-            }
-        }
-    }
-
-Creating Product
-----------------
-
-Definition
-..........
+^^^^^^^^^^
 
 .. code-block:: text
 
@@ -296,9 +90,11 @@ Definition
 Example
 ^^^^^^^
 
+To create new product use the below method:
+
 .. code-block:: bash
 
-    $ curl http://sylius.dev/api/v1/products/ \
+    $ curl http://demo.sylius.org/api/v1/products/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST \
@@ -314,8 +110,8 @@ Example
             }
         '
 
-Example Response
-~~~~~~~~~~~~~~~~
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
@@ -348,21 +144,22 @@ Example Response
             }
         }
     }
+.. warning::
 
-If you try to create a resource without name, code or slug, you will receive a 400 error.
+    If you try to create a product without name, code or slug, you will receive a ``400 Bad Request`` error, that will contain validation errors.
 
 Example
 ^^^^^^^
 
 .. code-block:: bash
 
-    $ curl http://sylius.dev/api/v1/products/ \
+    $ curl http://demo.sylius.org/api/v1/products/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X POST
 
-Example Response
-~~~~~~~~~~~~~~~~
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
@@ -452,7 +249,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://sylius.dev/api/v1/products/ \
+    $ curl http://demo.sylius.org/api/v1/products/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X POST \
@@ -486,12 +283,17 @@ Example
                         "name": "Kubek z motywem",
                         "slug": "kubek-z-motywem"
                     }
-                }
+                },
+                "images": [
+                    {
+                        "type": "ford"
+                    }
+                ]
             }
         '
 
-Example Response
-~~~~~~~~~~~~~~~~
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
@@ -744,7 +546,13 @@ Example Response
         },
         "reviews": [],
         "average_rating": 0,
-        "images": [],
+        "images": [
+            {
+                "id": 1,
+                "type": "ford",
+                "path": "b9/65/01cec3d87aa2b819e195331843f6.jpeg"
+            }
+        ],
         "_links": {
             "self": {
                 "href": "/api/v1/products/62"
@@ -757,13 +565,232 @@ Example Response
     The images should be passed in array as an attribute (files) of request. See how it is done in Sylius
     `here <https://github.com/Sylius/Sylius/blob/master/tests/Controller/ProductApiTest.php>`_.
 
-Updating Product
-----------------
+Getting a Single Product
+------------------------
 
-You can request full or partial update of resource. For full product update, you should use PUT method.
+To retrieve the details of the product you will need to call the ``/api/v1/product/product_id`` endpoint with the ``GET`` method.
 
 Definition
-..........
+^^^^^^^^^^
+
+.. code-block:: text
+
+    GET /api/v1/products/{id}
+
++---------------+----------------+--------------------------------------+
+| Parameter     | Parameter type | Description                          |
++===============+================+======================================+
+| Authorization | header         | Token received during authentication |
++---------------+----------------+--------------------------------------+
+| id            | url attribute  | Id of requested resource             |
++---------------+----------------+--------------------------------------+
+
+Example
+^^^^^^^
+
+.. code-block:: bash
+
+    $ curl http://demo.sylius.org/api/v1/products/2 \
+        -H "Authorization: Bearer SampleToken" \
+        -H "Accept: application/json"
+
+.. note::
+
+    The *2* is an exemplary value. Your value can be different.
+    Check in the list of all products if you are not sure which id should be used.
+
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
+
+.. code-block:: text
+
+    STATUS: 200 OK
+
+.. code-block:: json
+
+    {
+        "id": 2,
+        "name": "Mug \"earum\"",
+        "code": "d6e6efaf",
+        "available_on": "2017-01-18T10:32:17+0100",
+        "attributes": [
+            {
+                "code": "mug_material",
+                "name": "Mug material",
+                "value": "Invisible porcelain",
+                "id": 2
+            }
+        ],
+        "variants": [
+            {
+                "id": 4,
+                "on_hold": 0,
+                "tracked": false
+            }
+        ],
+        "options": [
+            {
+                "code": "mug_type"
+            }
+        ],
+        "translations": {
+            "en_US": {
+                "locale": "en_US",
+                "id": 2,
+                "name": "Mug \"earum\"",
+                "slug": "mug-earum",
+                "description": "Et qui neque at sit voluptate sint omnis. Quos assumenda magni eos nemo qui accusamus.",
+                "short_description": "Molestiae quaerat in voluptate."
+            }
+        },
+        "product_taxons": [
+            {
+                "id": 2,
+                "position": 1
+            }
+        ],
+        "main_taxon": {
+            "name": "Mugs",
+            "id": 2,
+            "code": "mugs",
+            "children": []
+        },
+        "reviews": [
+            {
+                "id": 41,
+                "title": "Nice",
+                "rating": 2,
+                "comment": "Nice",
+                "author": {
+                    "id": 22,
+                    "email": "banana@exmp.com",
+                    "email_canonical": "banana@exmp.com",
+                    "gender": "u"
+                },
+                "status": "new",
+                "created_at": "2017-01-18T11:15:44+0100",
+                "updated_at": "2017-01-18T11:15:45+0100"
+            }
+        ],
+        "average_rating": 2,
+        "images": [
+            {
+                "id": 3,
+                "code": "main",
+                "path": "af/ae/88f740736b8b79696513a5fe9c31.jpeg"
+            }
+        ],
+        "_links": {
+            "self": {
+                "href": "/api/v1/products/2"
+            }
+        }
+    }
+
+Collection of Products
+----------------------
+
+To retrieve a paginated list of products you will need to call the ``/api/v1/products/`` endpoint with the ``GET`` method.
+
+Definition
+^^^^^^^^^^
+
+.. code-block:: text
+
+    GET /api/v1/products/
+
++---------------------------------------+----------------+---------------------------------------------------+
+| Parameter                             | Parameter type | Description                                       |
++=======================================+================+===================================================+
+| Authorization                         | header         | Token received during authentication              |
++---------------------------------------+----------------+---------------------------------------------------+
+| limit                                 | query          | *(optional)* Number of items to display per page, |
+|                                       |                | by default = 10                                   |
++---------------------------------------+----------------+---------------------------------------------------+
+| sorting['name_of_field']['direction'] | query          | *(optional)* Field and direction of sorting,      |
+|                                       |                | by default 'desc' and 'createdAt'                 |
++---------------------------------------+----------------+---------------------------------------------------+
+
+To see the first page of all products use the below method:
+
+Example
+^^^^^^^
+
+.. code-block:: bash
+
+    $ curl http://demo.sylius.org/api/v1/products/ \
+        -H "Authorization: Bearer SampleToken" \
+        -H "Accept: application/json"
+
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
+
+.. code-block:: text
+
+    STATUS: 200 OK
+
+.. code-block:: json
+
+     {
+         "page": 1,
+         "limit": 10,
+         "pages": 1,
+         "total": 1,
+         "_links": {
+             "self": {
+                 "href": "/api/v1/products/?page=1&limit=10"
+             },
+             "first": {
+                 "href": "/api/v1/products/?page=1&limit=10"
+             },
+             "last": {
+                 "href": "/api/v1/products/?page=6&limit=10"
+             },
+             "next": {
+                 "href": "/api/v1/products/?page=2&limit=10"
+             }
+         },
+         "_embedded": {
+             "items": [
+                 {
+                     "name": "Mug \"earum\"",
+                     "id": 2,
+                     "code": "d6e6efaf",
+                     "options": [
+                         {
+                             "code": "mug_type"
+                         }
+                     ],
+                     "average_rating": 2,
+                     "images": [
+                         {
+                             "id": 3,
+                             "code": "main",
+                             "path": "af/ae/88f740736b8b79696513a5fe9c31.jpeg"
+                         },
+                         {
+                             "id": 4,
+                             "code": "thumbnail",
+                             "path": "71/8d/9dd518beda0571b133dbdf7f5d0a.jpeg"
+                         }
+                     ],
+                     "_links": {
+                         "self": {
+                             "href": "/api/v1/products/2"
+                         }
+                     }
+                 }
+             ]
+         }
+     }
+
+Updating a Product
+------------------
+
+To fully update a product you will need to call the ``/api/v1/products/product_id`` endpoint with ``PUT`` method.
+
+Definition
+^^^^^^^^^^
 
 .. code-block:: text
 
@@ -784,9 +811,11 @@ Definition
 Example
 ^^^^^^^
 
+ To full update the product with ``id = 3`` use the below method:
+
 .. code-block:: bash
 
-    $ curl http://sylius.dev/api/v1/products/3 \
+    $ curl http://demo.sylius.org/api/v1/products/3 \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PUT \
@@ -801,27 +830,27 @@ Example
 	        }
         '
 
-Example Response
-~~~~~~~~~~~~~~~~
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
     STATUS: 204 No Content
 
-If you try to perform full product update without all required fields specified, you will receive a 400 error.
+If you try to perform full product update without all required fields specified, you will receive a ``400 Bad Request`` error.
 
 Example
 ^^^^^^^
 
 .. code-block:: bash
 
-    $ curl http://sylius.dev/api/v1/products/3 \
+    $ curl http://demo.sylius.org/api/v1/products/3 \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X PUT
 
-Example Response
-~~~~~~~~~~~~~~~~
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
@@ -877,29 +906,31 @@ Example Response
 	    }
     }
 
-In order to perform a partial update, you should use a PATCH method.
+To update a product partially you will need to call the ``/api/v1/products/product_id`` endpoint with the ``PATCH`` method.
 
 Definition
-..........
+^^^^^^^^^^
 
 .. code-block:: text
 
     PATCH /api/v1/products/{id}
 
-+---------------+----------------+--------------------------------------------------------+
-| Parameter     | Parameter type | Description                                            |
-+===============+================+========================================================+
-| Authorization | header         | Token received during authentication                   |
-+---------------+----------------+--------------------------------------------------------+
-| id            | url attribute  | Id of requested resource                               |
-+---------------+----------------+--------------------------------------------------------+
++---------------+----------------+--------------------------------------+
+| Parameter     | Parameter type | Description                          |
++===============+================+======================================+
+| Authorization | header         | Token received during authentication |
++---------------+----------------+--------------------------------------+
+| id            | url attribute  | Id of requested resource             |
++---------------+----------------+--------------------------------------+
 
 Example
 ^^^^^^^
 
+To partial update the product with ``id = 3`` use the below method:
+
 .. code-block:: bash
 
-    $ curl http://sylius.dev/api/v1/products/3 \
+    $ curl http://demo.sylius.org/api/v1/products/3 \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PATCH \
@@ -913,43 +944,45 @@ Example
             }
         '
 
-Example Response
-~~~~~~~~~~~~~~~~
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
     STATUS: 204 No Content
 
-Deleting Product
-----------------
+Deleting a Product
+------------------
+
+To delete a product you will need to call the ``/api/v1/products/product_id`` endpoint with the ``DELETE`` method.
 
 Definition
-..........
+^^^^^^^^^^
 
 .. code-block:: text
 
     DELETE /api/v1/products/{id}
 
-+---------------+----------------+-------------------------------------------+
-| Parameter     | Parameter type | Description                               |
-+===============+================+===========================================+
-| Authorization | header         | Token received during authentication      |
-+---------------+----------------+-------------------------------------------+
-| id            | url attribute  | Id of removed product                     |
-+---------------+----------------+-------------------------------------------+
++---------------+----------------+--------------------------------------+
+| Parameter     | Parameter type | Description                          |
++===============+================+======================================+
+| Authorization | header         | Token received during authentication |
++---------------+----------------+--------------------------------------+
+| id            | url attribute  | Id of removed product                |
++---------------+----------------+--------------------------------------+
 
 Example
 ^^^^^^^
 
 .. code-block:: bash
 
-    $ curl http://sylius.dev/api/v1/products/3 \
+    $ curl http://demo.sylius.org/api/v1/products/3 \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X DELETE
 
-Example Response
-~~~~~~~~~~~~~~~~
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
