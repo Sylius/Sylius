@@ -28,11 +28,11 @@ If you request a cart via API, you will receive an object with the following fie
 +-------------------+-------------------------------------------------------------------+
 | adjustments       | List of adjustments related to the cart                           |
 +-------------------+-------------------------------------------------------------------+
-| adjustments_total | Sum of all order adjustments values                               |
+| adjustments_total | Sum of all cart adjustments values                                |
 +-------------------+-------------------------------------------------------------------+
 | total             | Sum of items total and adjustments total                          |
 +-------------------+-------------------------------------------------------------------+
-| customer          | :doc:`Customer detailed serialization </api/customers>` for order |
+| customer          | :doc:`Customer detailed serialization </api/customers>` for cart  |
 +-------------------+-------------------------------------------------------------------+
 | channel           | :doc:`Default channel serialization </api/channels>`              |
 +-------------------+-------------------------------------------------------------------+
@@ -108,7 +108,7 @@ And each Adjustment will be build as follows:
 Creating a Cart
 ---------------
 
-To create a new cart you will need to call the ``/api/v1/carts/`` endpoint with ``POST`` method.
+To create a new cart you will need to call the ``/api/v1/carts/`` endpoint with the ``POST`` method.
 
 Definition
 ^^^^^^^^^^
@@ -137,7 +137,7 @@ To create a new cart for the ``shop@example.com`` user in the ``US_WEB`` channel
 .. warning::
 
     Remember, that it doesn't replicate the environment of shop usage. It is more like an admin part of cart creation, which will allow you to manage
-    cart from the admin perspective. ShopAPI is still an experimental concept.
+    the cart from the admin perspective. ShopAPI is still an experimental concept.
 
 .. code-block:: bash
 
@@ -193,6 +193,7 @@ Exemplary Response
             }
         },
         "currency_code":"USD",
+        "locale_code": "en_US",
         "checkout_state":"cart"
     }
 
@@ -202,7 +203,7 @@ Exemplary Response
 
 .. warning::
 
-    If you try to create a resource without name or code, you will receive a ``400 Bad Request`` error, that will contain validation errors.
+    If you try to create a resource without localeCode, channel or customer, you will receive a ``400 Bad Request`` error, that will contain validation errors.
 
 Example
 ^^^^^^^
@@ -250,7 +251,7 @@ Exemplary Response
 Collection of Carts
 -------------------
 
-To retrieve a paginated list of carts you will need to call the ``/api/v1/carts/`` endpoint with ``GET`` method.
+To retrieve a paginated list of carts you will need to call the ``/api/v1/carts/`` endpoint with the ``GET`` method.
 
 Definition
 ^^^^^^^^^^
@@ -266,7 +267,7 @@ Definition
 +---------------+----------------+------------------------------------------------------------------+
 | page          | query          | *(optional)* Number of the page, by default = 1                  |
 +---------------+----------------+------------------------------------------------------------------+
-| limit         | query          | *(optional)* Number of carts displayed per page, by default = 10 |
+| paginate      | query          | *(optional)* Number of carts displayed per page, by default = 10 |
 +---------------+----------------+------------------------------------------------------------------+
 
 Example
@@ -338,6 +339,7 @@ Exemplary Response
                         }
                     },
                     "currency_code":"USD",
+                    "locale_code": "en_US",
                     "checkout_state":"cart"
                 }
             ]
@@ -361,7 +363,7 @@ Definition
 +===============+================+======================================+
 | Authorization | header         | Token received during authentication |
 +---------------+----------------+--------------------------------------+
-| id            | url attribute  | Id of the requested resource         |
+| id            | url attribute  | Id of the requested cart             |
 +---------------+----------------+--------------------------------------+
 
 Example
@@ -420,6 +422,7 @@ Exemplary Response
             }
         },
         "currency_code":"USD",
+    "locale_code": "en_US",
         "checkout_state":"cart"
     }
 
@@ -440,7 +443,7 @@ Definition
 +===============+================+======================================+
 | Authorization | header         | Token received during authentication |
 +---------------+----------------+--------------------------------------+
-| id            | url attribute  | Id of the requested resource         |
+| id            | url attribute  | Id of the requested cart             |
 +---------------+----------------+--------------------------------------+
 
 Example
@@ -457,7 +460,7 @@ To delete the cart with ``id = 21`` use the below method:
 
 .. note::
 
-    Remember the *21* value from the previous example. Here we are deleting a previously fetched cart, so it is the same id.
+    Remember the *21* value comes from the previous example. Here we are deleting a previously fetched cart, so it is the same id.
 
 Exemplary Response
 ^^^^^^^^^^^^^^^^^^
@@ -494,7 +497,7 @@ Example
 ^^^^^^^
 
 To add a new item of a variant with code ``MEDIUM_MUG_CUP``
-to the cart with id 21(assuming, that we didn't remove it in the previous example) use the below method:
+to the cart with id = 21 (assuming, that we didn't remove it in the previous example) use the below method:
 
 .. code-block:: bash
 
@@ -527,9 +530,7 @@ Exemplary Response
             ],
             "items_total":175,
             "adjustments":[
-                {
 
-                }
             ],
             "adjustments_total":7515,
             "total":7690,
@@ -558,6 +559,7 @@ Exemplary Response
                 }
             },
             "currency_code":"USD",
+            "locale_code": "en_US",
             "checkout_state":"cart"
         },
         "quantity":1,
@@ -598,7 +600,7 @@ Exemplary Response
 Updating a Cart Item
 --------------------
 
-To change the quantity of a cart item you will need to call the ``/api/v1/carts/{cartId}/items/{cartItemId}`` endpoint with the ``PUT`` method.
+To change the quantity of a cart item you will need to call the ``/api/v1/carts/{cartId}/items/{cartItemId}`` endpoint with the ``PUT`` or ``PATCH`` method.
 
 Definition
 ^^^^^^^^^^
@@ -637,10 +639,6 @@ To change the quantity of the cart item with ``id = 58`` in the cart of ``id = 2
 
     If you are not sure where does the value **58** come from, check the previous response, and look for the cart item id.
 
-
-.. note::
-
-    This action can be sent with *PATCH* method as well.
 
 Exemplary Response
 ^^^^^^^^^^^^^^^^^^
@@ -766,6 +764,7 @@ Exemplary Response
             }
         },
         "currency_code":"USD",
+    "locale_code": "en_US",
         "checkout_state":"cart"
     }
 

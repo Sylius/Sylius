@@ -24,6 +24,14 @@ sylius_api_cart:
     resource: "@SyliusApiBundle/Resources/config/routing/cart.yml"
     prefix: /carts
 
+sylius_api_adjustment:
+    resource: "@SyliusApiBundle/Resources/config/routing/adjustment.yml"
+    prefix: /orders/{orderId}/adjustments
+
+sylius_api_cart_item:
+    resource: "@SyliusApiBundle/Resources/config/routing/cart_item.yml"
+    prefix: /carts/{cartId}/items
+
 sylius_api_order:
     resource: |
         alias: sylius.order
@@ -32,14 +40,6 @@ sylius_api_order:
         grid: sylius_admin_order
         serialization_version: $version
     type: sylius.resource_api
-
-sylius_api_cart_item:
-    resource: "@SyliusApiBundle/Resources/config/routing/cart_item.yml"
-    prefix: /carts/{cartId}/items
-
-sylius_api_adjustment:
-    resource: "@SyliusApiBundle/Resources/config/routing/adjustment.yml"
-    prefix: /orders/{orderId}/adjustments
 
 sylius_api_checkout:
     resource: "@SyliusApiBundle/Resources/config/routing/checkout.yml"

@@ -38,9 +38,9 @@ If you request an order via API, you will receive an object with the following f
 +-----------------------+--------------------------------------------------------------------+
 | billing_address       | Detailed address serialization                                     |
 +-----------------------+--------------------------------------------------------------------+
-| shipments             | Detailed shipment serialization                                    |
+| shipments             | Detailed serialization of all related shipments                    |
 +-----------------------+--------------------------------------------------------------------+
-| payments              | Detailed payment serialization                                     |
+| payments              | Detailed serialization of all related payments                     |
 +-----------------------+--------------------------------------------------------------------+
 
 Getting a single order
@@ -60,7 +60,7 @@ Definition
 +===============+================+======================================+
 | Authorization | header         | Token received during authentication |
 +---------------+----------------+--------------------------------------+
-| id            | url attribute  | Id of requested resource             |
+| id            | url attribute  | Id of requested order                |
 +---------------+----------------+--------------------------------------+
 
 Example

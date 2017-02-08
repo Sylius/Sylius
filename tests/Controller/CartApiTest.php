@@ -71,7 +71,7 @@ final class CartApiTest extends JsonApiTestCase
         /** @var OrderInterface $cart */
         $cart = $cartData['order_001'];
 
-        $this->client->request('GET', '/api/v1/carts/'.$cart->getId(), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', $this->getCartUrl($cart), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'cart/show_response', Response::HTTP_OK);
@@ -87,7 +87,7 @@ final class CartApiTest extends JsonApiTestCase
         /** @var OrderInterface $cart */
         $order = $orderData['order_001'];
 
-        $this->client->request('GET', '/api/v1/carts/'.$order->getId(), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', $this->getCartUrl($order), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
@@ -185,7 +185,12 @@ EOT;
      */
     public function it_denies_carts_deletion_for_non_authenticated_user()
     {
-        $this->client->request('DELETE', '/api/v1/carts/-1');
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $carts = $this->loadFixturesFromFile('resources/cart.yml');
+        /** @var OrderInterface $cart */
+        $cart = $carts['order_001'];
+
+        $this->client->request('DELETE', $this->getCartUrl($cart));
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
@@ -212,16 +217,15 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $carts = $this->loadFixturesFromFile('resources/cart.yml');
 
-        /** @var OrderItemInterface $cart */
+        /** @var OrderInterface $cart */
         $cart = $carts['order_001'];
-        $url = '/api/v1/carts/'.$cart->getId();
 
-        $this->client->request('DELETE', $url, [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('DELETE', $this->getCartUrl($cart), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
 
-        $this->client->request('GET', $url, [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('GET', $this->getCartUrl($cart), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
@@ -233,12 +237,12 @@ EOT;
     public function it_does_not_allow_to_delete_orders_in_state_different_than_cart()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $carts = $this->loadFixturesFromFile('resources/order.yml');
+        $orders = $this->loadFixturesFromFile('resources/order.yml');
 
-        /** @var OrderItemInterface $cart */
-        $cart = $carts['order_001'];
+        /** @var OrderItemInterface $order */
+        $order = $orders['order_001'];
 
-        $this->client->request('DELETE', '/api/v1/carts/'.$cart->getId(), [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('DELETE', $this->getCartUrl($order), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
@@ -265,9 +269,8 @@ EOT;
 
         /** @var OrderInterface $cart */
         $cart = $carts['order_001'];
-        $url = sprintf('/api/v1/carts/%s/items/', $cart->getId());
 
-        $this->client->request('POST', $url, [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('POST', $this->getCartItemListUrl($cart), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'cart/add_to_cart_validation_fail_response', Response::HTTP_BAD_REQUEST);
@@ -283,7 +286,6 @@ EOT;
 
         /** @var OrderInterface $cart */
         $cart = $carts['order_001'];
-        $url = sprintf('/api/v1/carts/%s/items/', $cart->getId());
 
         $data =
 <<<EOT
@@ -292,7 +294,7 @@ EOT;
             "quantity": 1
         }
 EOT;
-        $this->client->request('POST', $url, [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('POST', $this->getCartItemListUrl($cart), [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'cart/add_to_cart_response', Response::HTTP_CREATED);
@@ -308,7 +310,6 @@ EOT;
 
         /** @var OrderInterface $cart */
         $cart = $carts['order_001'];
-        $url = sprintf('/api/v1/carts/%s/items/', $cart->getId());
 
         $data =
 <<<EOT
@@ -317,7 +318,7 @@ EOT;
             "quantity": -1
         }
 EOT;
-        $this->client->request('POST', $url, [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('POST', $this->getCartItemListUrl($cart), [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'cart/add_to_cart_quantity_validation_fail_response', Response::HTTP_BAD_REQUEST);
@@ -333,7 +334,6 @@ EOT;
 
         /** @var OrderInterface $cart */
         $cart = $carts['order_001'];
-        $url = sprintf('/api/v1/carts/%s/items/', $cart->getId());
 
         $data =
 <<<EOT
@@ -342,7 +342,7 @@ EOT;
             "quantity": 3
         }
 EOT;
-        $this->client->request('POST', $url, [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('POST', $this->getCartItemListUrl($cart), [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'cart/add_to_cart_with_bigger_quantity_response', Response::HTTP_CREATED);
@@ -358,7 +358,6 @@ EOT;
 
         /** @var OrderInterface $cart */
         $cart = $carts['order_001'];
-        $url = sprintf('/api/v1/carts/%s/items/', $cart->getId());
 
         $data =
 <<<EOT
@@ -367,7 +366,7 @@ EOT;
             "quantity": 1
         }
 EOT;
-        $this->client->request('POST', $url, [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('POST', $this->getCartItemListUrl($cart), [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'cart/add_to_cart_hard_available_item_response', Response::HTTP_CREATED);
@@ -383,7 +382,6 @@ EOT;
 
         /** @var OrderInterface $cart */
         $cart = $carts['order_001'];
-        $url = sprintf('/api/v1/carts/%s/items/', $cart->getId());
 
         $data =
 <<<EOT
@@ -392,7 +390,7 @@ EOT;
             "quantity": 3
         }
 EOT;
-        $this->client->request('POST', $url, [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('POST', $this->getCartItemListUrl($cart), [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'cart/add_to_cart_hard_available_item_validation_error_response', Response::HTTP_BAD_REQUEST);
@@ -421,7 +419,6 @@ EOT;
         $cart = $fulfilledCart['fulfilled_cart'];
         /** @var OrderItemInterface $cartItem */
         $cartItem = $fulfilledCart['sw_mug_item'];
-        $url = sprintf('/api/v1/carts/%s/items/%s', $cart->getId(), $cartItem->getId());
 
         $data =
 <<<EOT
@@ -431,7 +428,7 @@ EOT;
 EOT;
 
 
-        $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('PUT', $this->getCartItemUrl($cart, $cartItem), [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'cart/update_cart_item_validation_fail_response', Response::HTTP_BAD_REQUEST);
@@ -449,8 +446,6 @@ EOT;
         $cart = $fulfilledCart['fulfilled_cart'];
         /** @var OrderItemInterface $cartItem */
         $cartItem = $fulfilledCart['sw_mug_item'];
-        $updateUrl = sprintf('/api/v1/carts/%s/items/%s', $cart->getId(), $cartItem->getId());
-        $orderUrl = sprintf('/api/v1/carts/%s', $cart->getId());
 
         $data =
 <<<EOT
@@ -458,12 +453,12 @@ EOT;
             "quantity": 3
         }
 EOT;
-        $this->client->request('PUT', $updateUrl, [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('PUT', $this->getCartItemUrl($cart, $cartItem), [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
 
-        $this->client->request('GET', $orderUrl, [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', $this->getCartUrl($cart), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'cart/increase_quantity_response', Response::HTTP_OK);
@@ -481,7 +476,6 @@ EOT;
         $cart = $fulfilledCart['fulfilled_cart'];
         /** @var OrderItemInterface $cartItem */
         $cartItem = $fulfilledCart['hard_available_mug_item'];
-        $url = sprintf('/api/v1/carts/%s/items/%s', $cart->getId(), $cartItem->getId());
 
         $data =
 <<<EOT
@@ -489,7 +483,7 @@ EOT;
             "quantity": 3
         }
 EOT;
-        $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('PUT', $this->getCartItemUrl($cart, $cartItem), [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'cart/update_hard_available_cart_item_validation_error_response', Response::HTTP_BAD_REQUEST);
@@ -536,11 +530,40 @@ EOT;
         $cart = $fulfilledCart['fulfilled_cart'];
         /** @var OrderItemInterface $cartItem */
         $cartItem = $fulfilledCart['hard_available_mug_item'];
-        $url = sprintf('/api/v1/carts/%s/items/%s', $cart->getId(), $cartItem->getId());
 
-        $this->client->request('DELETE', $url, [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('DELETE', $this->getCartItemUrl($cart, $cartItem), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
+    }
+
+    /**
+     * @param OrderInterface $cart
+     *
+     * @return string
+     */
+    private function getCartUrl(OrderInterface $cart)
+    {
+        return '/api/v1/carts/' . $cart->getId();
+    }
+
+    /**
+     * @param OrderInterface $cart
+     *
+     * @return string
+     */
+    private function getCartItemListUrl(OrderInterface $cart)
+    {
+        return sprintf('/api/v1/carts/%s/items/', $cart->getId());
+    }
+
+    /**
+     * @param OrderInterface $cart
+     * @param OrderItemInterface $cartItem
+     * @return string
+     */
+    private function getCartItemUrl(OrderInterface $cart, OrderItemInterface $cartItem)
+    {
+        return sprintf('/api/v1/carts/%s/items/%s', $cart->getId(), $cartItem->getId());
     }
 }

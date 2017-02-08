@@ -6,7 +6,9 @@
             "This form should not contain extra fields."
         ],
         "children": {
-            "quantity": {}
+            "quantity": {
+
+            }
         }
     }
 }
