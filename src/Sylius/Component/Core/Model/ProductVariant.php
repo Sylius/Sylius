@@ -121,6 +121,14 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
+    public function setVersion($version)
+    {
+        $this->version = $version;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function isInStock()
     {
         return 0 < $this->onHand;
