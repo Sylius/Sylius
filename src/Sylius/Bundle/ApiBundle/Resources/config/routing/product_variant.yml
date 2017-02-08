@@ -1,16 +1,17 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
-#
+
 sylius_api_product_variant_index:
     path: /
     methods: [GET]
     defaults:
         _controller: sylius.controller.product_variant:indexAction
         _sylius:
-            serialization_version: $version
             paginate: $limit
-            sortable: true
-            filterable: true
+            serialization_version: $version
+            grid: sylius_api_product_variant
+            section: api
+            serialization_group: [Default]
             criteria:
                 product: $productId
 
@@ -21,6 +22,11 @@ sylius_api_product_variant_create:
         _controller: sylius.controller.product_variant:createAction
         _sylius:
             serialization_version: $version
+            form: Sylius\Bundle\ApiBundle\Form\Type\ProductVariantType
+            factory:
+                method: createForProduct
+                arguments:
+                  - expr:service('sylius.repository.product').find($productId)
 
 sylius_api_product_variant_update:
     path: /{id}
@@ -29,6 +35,7 @@ sylius_api_product_variant_update:
         _controller: sylius.controller.product_variant:updateAction
         _sylius:
             serialization_version: $version
+            form: Sylius\Bundle\ApiBundle\Form\Type\ProductVariantType
             criteria:
                 product: $productId
                 master: false
@@ -52,6 +59,7 @@ sylius_api_product_variant_show:
         _controller: sylius.controller.product_variant:showAction
         _sylius:
             serialization_version: $version
+            serialization_group: [Default, Detailed]
             criteria:
                 product: $productId
                 master: false

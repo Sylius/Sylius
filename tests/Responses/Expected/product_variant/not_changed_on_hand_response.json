@@ -1,0 +1,25 @@
+{
+    "id":@integer@,
+    "code":"SMALL_STICKER",
+    "option_values":[],
+    "position":0,
+    "translations": {
+        "en_US": {
+          "id": @integer@,
+          "locale":"en_US",
+          "name":"Small sticker"
+        }
+    },
+    "on_hold":0,
+    "on_hand":8,
+    "tracked":false,
+    "channel_pricings":[],
+    "_links":{
+        "self":{
+          "href": "@string@"
+        },
+        "product": {
+          "href": "@string@"
+        }
+    }
+}

@@ -1,0 +1,32 @@
+{
+    "id": @integer@,
+    "code": "MONSTER_MUG",
+    "option_values": [],
+    "position": 21,
+    "translations": [],
+    "on_hold": 0,
+    "on_hand": 0,
+    "tracked": false,
+    "tax_category": {
+        "id": @integer@,
+        "code": "TC1",
+        "name": "Tax Category 1",
+        "description": "@string@",
+        "created_at": "@string@.isDateTime()",
+        "updated_at": "@string@.isDateTime()",
+        "_links": {
+            "self": {
+                "href": "@string@"
+            }
+        }
+    },
+    "channel_pricings": [],
+    "_links": {
+        "self": {
+            "href": "@string@"
+        },
+        "product": {
+          "href": "@string@"
+        }
+    }
+}

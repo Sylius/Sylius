@@ -1,0 +1,274 @@
+{
+    "page": 1,
+    "limit": 10,
+    "pages": 2,
+    "total": 20,
+    "_links": {
+        "self": {
+            "href": "@string@"
+        },
+        "first": {
+            "href": "@string@"
+        },
+        "last": {
+            "href": "@string@"
+        },
+        "next": {
+            "href": "@string@"
+        }
+    },
+    "_embedded": {
+        "items": [
+            {
+                "id": @integer@,
+                "code": "MUG_1",
+                "option_values": [],
+                "position": 1,
+                "translations": {
+                    "en_US": {
+                      "id": @integer@,
+                      "locale": "en_US",
+                       "name": "Mug 1"
+                    }
+                },
+                "on_hold": 0,
+                "on_hand": 0,
+                "tracked": false,
+                "channel_pricings": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    },
+                    "product": {
+                      "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "code": "MUG_2",
+                "option_values": [],
+                "position": 2,
+                "translations": {
+                    "en_US": {
+                      "id": @integer@,
+                      "locale": "en_US",
+                       "name": "Mug 2"
+                    }
+                },
+                "on_hold": 0,
+                "on_hand": 0,
+                "tracked": false,
+                "channel_pricings": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    },
+                    "product": {
+                      "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "code": "MUG_3",
+                "option_values": [],
+                "position": 3,
+                "translations": {
+                    "en_US": {
+                      "id": @integer@,
+                      "locale": "en_US",
+                       "name": "Mug 3"
+                    }
+                },
+                "on_hold": 0,
+                "on_hand": 0,
+                "tracked": false,
+                "channel_pricings": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    },
+                    "product": {
+                      "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "code": "MUG_4",
+                "option_values": [],
+                "position": 4,
+                "translations": {
+                    "en_US": {
+                      "id": @integer@,
+                      "locale": "en_US",
+                       "name": "Mug 4"
+                    }
+                },
+                "on_hold": 0,
+                "on_hand": 0,
+                "tracked": false,
+                "channel_pricings": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    },
+                    "product": {
+                      "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "code": "MUG_5",
+                "option_values": [],
+                "position": 5,
+                "translations": {
+                    "en_US": {
+                      "id": @integer@,
+                      "locale": "en_US",
+                       "name": "Mug 5"
+                    }
+                },
+                "on_hold": 0,
+                "on_hand": 0,
+                "tracked": false,
+                "channel_pricings": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    },
+                    "product": {
+                      "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "code": "MUG_6",
+                "option_values": [],
+                "position": 6,
+                "translations": {
+                    "en_US": {
+                      "id": @integer@,
+                      "locale": "en_US",
+                       "name": "Mug 6"
+                    }
+                },
+                "on_hold": 0,
+                "on_hand": 0,
+                "tracked": false,
+                "channel_pricings": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    },
+                    "product": {
+                      "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "code": "MUG_7",
+                "option_values": [],
+                "position": 7,
+                "translations": {
+                    "en_US": {
+                      "id": @integer@,
+                      "locale": "en_US",
+                       "name": "Mug 7"
+                    }
+                },
+                "on_hold": 0,
+                "on_hand": 0,
+                "tracked": false,
+                "channel_pricings": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    },
+                    "product": {
+                      "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "code": "MUG_8",
+                "option_values": [],
+                "position": 8,
+                "translations": {
+                    "en_US": {
+                      "id": @integer@,
+                      "locale": "en_US",
+                       "name": "Mug 8"
+                    }
+                },
+                "on_hold": 0,
+                "on_hand": 0,
+                "tracked": false,
+                "channel_pricings": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    },
+                    "product": {
+                      "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "code": "MUG_9",
+                "option_values": [],
+                "position": 9,
+                "translations": {
+                    "en_US": {
+                      "id": @integer@,
+                      "locale": "en_US",
+                       "name": "Mug 9"
+                    }
+                },
+                "on_hold": 0,
+                "on_hand": 0,
+                "tracked": false,
+                "channel_pricings": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    },
+                    "product": {
+                      "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "code": "MUG_10",
+                "option_values": [],
+                "position": 10,
+                "translations": {
+                    "en_US": {
+                      "id": @integer@,
+                      "locale": "en_US",
+                       "name": "Mug 10"
+                    }
+                },
+                "on_hold": 0,
+                "on_hand": 0,
+                "tracked": false,
+                "channel_pricings": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    },
+                    "product": {
+                      "href": "@string@"
+                    }
+                }
+            }
+        ]
+    }
+}

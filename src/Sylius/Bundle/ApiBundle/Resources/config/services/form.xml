@@ -48,5 +48,9 @@
         <service id="sylius.form.type.api_product" class="Sylius\Bundle\ApiBundle\Form\Type\ProductType">
             <tag name="form.type" />
         </service>
+
+        <service id="sylius.form.type.api_product_variant" class="Sylius\Bundle\ApiBundle\Form\Type\ProductVariantType">
+            <tag name="form.type" />
+        </service>
     </services>
 </container>
