@@ -12,6 +12,7 @@ You've got four events that you should be subscribing to:
     sylius.menu.shop.account # For the menu of the MyAccount section in shop
     sylius.menu.admin.main # For the Admin Panel menu
     sylius.menu.admin.customer.show # For the buttons menu on top of the show page of the Customer (/admin/customers/{id})
+    sylius.menu.admin.order.show # For the buttons menu on top of the show page of the Order (/admin/orders/{id})
 
 How to customize Admin Menu?
 ----------------------------
@@ -154,7 +155,7 @@ How to customize Admin Customer Show Menu?
     ``edit``, ``show``, ``delete``, ``link`` (default), and ``transition`` (for state machines).
 
     Buttons (except for the ``link`` and ``transition`` types) already have a defined color, icon and label.
-    The ``link`` and ``tramsition`` types buttons can be customized with the ``setLabel('label')``, ``setLabelAttribute('color', 'color')``
+    The ``link`` and ``transition`` types buttons can be customized with the ``setLabel('label')``, ``setLabelAttribute('color', 'color')``
     and ``setLabelAttribute('icon', 'icon')`` methods.
 
     The ``delete`` button must have also the ``resource_id`` attribute set (for csrf token purposes).
@@ -183,7 +184,8 @@ type is default to make the example easily customizable.
                 ->setAttribute('type', 'link')
                 ->setLabel('Pink Menu Button')
                 ->setLabelAttribute('icon', 'star')
-                ->setLabelAttribute('color', 'pink');
+                ->setLabelAttribute('color', 'pink')
+            ;
         }
     }
 
@@ -198,6 +200,75 @@ listener to the ``sylius.menu.admin.customer.show`` event in the ``app/config/se
             class: AppBundle\Menu\AdminCustomerShowMenuListener
             tags:
                 - { name: kernel.event_listener, event: sylius.menu.admin.customer.show, method: addAdminCustomerMenuItems }
+
+Remember to import the ``app/config/services.yml`` into the ``app/config/config.yml``.
+
+.. code-block:: yaml
+
+    # app/config/config.yml
+    imports:
+        - { resource: "services.yml" }
+
+How to customize Admin Order Show Menu?
+---------------------------------------
+
+.. tip::
+
+    Admin order show menu is the set of buttons (currently only ``Cancel`` button) in the right top corner on the ``/admin/orders/{id}`` url.
+
+**1.** In order to add buttons to the Admin Order Show menu in **Sylius** you have to create a ``AppBundle\Menu\AdminOrderShowMenuListener`` class.
+
+.. note::
+
+    **This menu is build from buttons.** There are a few button types available:
+    ``edit``, ``show``, ``delete``, ``link`` (default), and ``transition`` (for state machines).
+
+    Buttons (except for the ``link`` and ``transition`` types) already have a defined color, icon and label.
+    The ``link`` and ``transition`` types buttons can be customized with the ``setLabel('label')``, ``setLabelAttribute('color', 'color')``
+    and ``setLabelAttribute('icon', 'icon')`` methods.
+
+    The ``delete`` button must have also the ``resource_id`` attribute set (for csrf token purposes).
+
+In the example below we are adding a one new button to the Admin Order Show Menu. It has the type set, even though the ``link``
+type is default to make the example easily customizable.
+
+.. code-block:: php
+
+    <?php
+
+    namespace AppBundle\Menu;
+
+    use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
+
+    final class AdminOrderShowMenuListener
+    {
+        /**
+         * @param MenuBuilderEvent $event
+         */
+        public function addAdminOrderShowMenuItems(MenuBuilderEvent $event)
+        {
+            $menu = $event->getMenu();
+
+            $menu->addChild('new', ['route' => 'sylius_admin_order_index'])
+                ->setAttribute('type', 'link')
+                ->setLabel('Maroon Menu Button')
+                ->setLabelAttribute('icon', 'star')
+                ->setLabelAttribute('color', 'maroon')
+            ;
+        }
+    }
+
+**2.** After creating your class with a proper method for the menu customizations you need, subscribe your
+listener to the ``sylius.menu.admin.order.show`` event in the ``app/config/services.yml``.
+
+.. code-block:: yaml
+
+    # app/config/services.yml
+    services:
+        app.listener.admin.order.show.menu_builder:
+            class: AppBundle\Menu\AdminOrderShowMenuListener
+            tags:
+                - { name: kernel.event_listener, event: sylius.menu.admin.order.show, method: addAdminOrderShowMenuItems }
 
 Remember to import the ``app/config/services.yml`` into the ``app/config/config.yml``.
 
