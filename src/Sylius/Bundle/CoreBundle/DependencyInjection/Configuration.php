@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CoreBundle\DependencyInjection;
 
 use Sylius\Bundle\CoreBundle\Controller\ProductTaxonController;
 use Sylius\Bundle\CoreBundle\Form\Type\Product\ChannelPricingType;
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Core\Model\ChannelPricing;
@@ -69,6 +70,7 @@ final class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->scalarNode('model')->defaultValue(ProductImage::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(ProductImageInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                     ->end()
                                 ->end()
@@ -83,6 +85,7 @@ final class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->scalarNode('model')->defaultValue(TaxonImage::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(TaxonImageInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                     ->end()
                                 ->end()
@@ -112,6 +115,7 @@ final class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->scalarNode('model')->defaultValue(ChannelPricing::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(ChannelPricingInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
                                         ->scalarNode('form')->defaultValue(ChannelPricingType::class)->cannotBeEmpty()->end()
