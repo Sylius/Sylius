@@ -202,7 +202,7 @@ class RequestConfiguration
         $redirect = $this->parameters->get('redirect');
 
         if (!is_array($redirect) || empty($redirect['hash'])) {
-            return;
+            return '';
         }
 
         return '#'.$redirect['hash'];
@@ -212,7 +212,7 @@ class RequestConfiguration
      * Get redirect referer, This will detected by configuration
      * If not exists, The `referrer` from headers will be used.
      *
-     * @return null|string
+     * @return string
      */
     public function getRedirectReferer()
     {
