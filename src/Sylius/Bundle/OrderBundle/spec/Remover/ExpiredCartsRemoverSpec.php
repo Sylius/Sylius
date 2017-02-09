@@ -9,23 +9,25 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Order\Remover;
+namespace spec\Sylius\Bundle\OrderBundle\Remover;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\OrderBundle\Remover\ExpiredCartsRemover;
+use Sylius\Bundle\OrderBundle\SyliusCartsRemoveEvents;
 use Sylius\Component\Order\Model\OrderInterface;
-use Sylius\Component\Order\Remover\ExpiredCartsRemover;
 use Sylius\Component\Order\Remover\ExpiredCartsRemoverInterface;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class ExpiredCartsRemoverSpec extends ObjectBehavior
 {
-    function let(OrderRepositoryInterface $orderRepository)
+    function let(OrderRepositoryInterface $orderRepository, EventDispatcher $eventDispatcher)
     {
-        $this->beConstructedWith($orderRepository, '2 months');
+        $this->beConstructedWith($orderRepository, $eventDispatcher, '2 months');
     }
 
     function it_is_initializable()
@@ -40,6 +42,7 @@ final class ExpiredCartsRemoverSpec extends ObjectBehavior
 
     function it_removes_a_cart_which_has_been_updated_before_configured_date(
         OrderRepositoryInterface $orderRepository,
+        EventDispatcher $eventDispatcher,
         OrderInterface $firstCart,
         OrderInterface $secondCart
     ) {
@@ -48,8 +51,18 @@ final class ExpiredCartsRemoverSpec extends ObjectBehavior
             $secondCart
         ]);
 
+        $eventDispatcher
+            ->dispatch(SyliusCartsRemoveEvents::CARTS_PRE_REMOVE, Argument::any())
+            ->shouldBeCalled()
+        ;
+
         $orderRepository->remove($firstCart)->shouldBeCalled();
         $orderRepository->remove($secondCart)->shouldBeCalled();
+
+        $eventDispatcher
+            ->dispatch(SyliusCartsRemoveEvents::CARTS_POST_REMOVE, Argument::any())
+            ->shouldBeCalled()
+        ;
 
         $this->remove();
     }
