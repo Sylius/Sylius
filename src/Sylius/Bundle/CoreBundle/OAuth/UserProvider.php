@@ -167,12 +167,12 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
      */
     private function updateUserByOAuthUserResponse(UserInterface $user, UserResponseInterface $response)
     {
-
         if (null == $oauth = $user->getOAuthAccount($response->getResourceOwner()->getName())) {
             $oauth = $this->oauthFactory->createNew();
             $oauth->setIdentifier($response->getUsername());
             $oauth->setProvider($response->getResourceOwner()->getName());
         }
+
         $oauth->setAccessToken($response->getAccessToken());
         $oauth->setRefreshToken($response->getRefreshToken());
 
