@@ -60,7 +60,7 @@ final class CustomerShowMenuBuilder
         }
 
         $customer = $options['customer'];
-        $this->addChilds($menu, $customer);
+        $this->addChildren($menu, $customer);
 
         $this->eventDispatcher->dispatch(self::EVENT_NAME, new MenuBuilderEvent($this->factory, $menu));
 
@@ -70,7 +70,7 @@ final class CustomerShowMenuBuilder
     /**
      * @param ItemInterface $menu
      */
-    private function addChilds(ItemInterface $menu, CustomerInterface $customer)
+    private function addChildren(ItemInterface $menu, CustomerInterface $customer)
     {
         if (null !== $customer->getUser()) {
             $menu->setExtra('column_id', 'actions');
@@ -81,6 +81,7 @@ final class CustomerShowMenuBuilder
                     'routeParameters' => ['id' => $customer->getId()]
                 ])
                 ->setAttribute('type', 'edit')
+                ->setLabel('sylius.ui.edit')
             ;
 
             $menu
@@ -89,7 +90,7 @@ final class CustomerShowMenuBuilder
                     'routeParameters' => ['id' => $customer->getId()]
                 ])
                 ->setAttribute('type', 'show')
-                ->setLabelAttribute('message', 'sylius.ui.show_orders')
+                ->setLabel('sylius.ui.show_orders')
             ;
 
             $menu
@@ -99,6 +100,7 @@ final class CustomerShowMenuBuilder
                 ])
                 ->setAttribute('type', 'delete')
                 ->setAttribute('resource_id', $customer->getId())
+                ->setLabel('sylius.ui.delete')
             ;
 
             return;
@@ -112,7 +114,7 @@ final class CustomerShowMenuBuilder
                 'routeParameters' => ['id' => $customer->getId()]
             ])
             ->setAttribute('type', 'show')
-            ->setLabelAttribute('message', 'sylius.ui.show_orders')
+            ->setLabel('sylius.ui.show_orders')
         ;
     }
 }

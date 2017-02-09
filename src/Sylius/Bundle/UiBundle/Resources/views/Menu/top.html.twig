@@ -19,16 +19,16 @@
 {% endblock %}
 
 {% block item %}
-    {% set message = item.labelAttribute('message') %}
-
     {% if 'edit' == item.attribute('type') %}
-        {{ buttons.edit(item.uri, message) }}
+        {{ buttons.edit(item.uri, item.label) }}
     {% elseif 'show' == item.attribute('type') %}
-        {{ buttons.show(item.uri, message) }}
+        {{ buttons.show(item.uri, item.label) }}
     {% elseif 'delete' == item.attribute('type') %}
-        {{ buttons.delete(item.uri, message, true, item.attribute('resource_id')) }}
+        {{ buttons.delete(item.uri, item.label|trans, true, item.attribute('resource_id')) }}
+    {% elseif 'transition' == item.attribute('type') %}
+        {{ block('transition') }}
     {% else %}
-        {{ block(item.attribute('type')) }}
+        {{ block('link') }}
     {% endif %}
 {% endblock %}
 
@@ -37,7 +37,7 @@
 
     <a href="{{ item.uri }}" class="ui {% if color %}{{ color }} {% endif %}labeled icon button">
         {{ block('icon') }}
-        {{ message|trans }}
+        {{ item.label|trans }}
     </a>
 {% endblock %}
 
@@ -48,7 +48,7 @@
         <input type="hidden" name="_method" value="PUT">
         <button class="ui {% if color %}{{ color }} {% endif %}labeled icon loadable button" type="submit">
             {{ block('icon') }}
-            {{ message|trans }}
+            {{ item.label|trans }}
         </button>
     </form>
 {% endblock %}
