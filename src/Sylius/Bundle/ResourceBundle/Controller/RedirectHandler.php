@@ -99,6 +99,6 @@ final class RedirectHandler implements RedirectHandlerInterface
      */
     public function redirectToReferer(RequestConfiguration $configuration)
     {
-        return $this->redirect($configuration, $configuration->getRedirectReferer());
+        return $this->redirect($configuration, $configuration->getRedirectReferer().$configuration->getRedirectHash());
     }
 }

@@ -195,14 +195,14 @@ class RequestConfiguration
     /**
      * Get url hash fragment (#text) which is you configured.
      *
-     * @return null|string
+     * @return string
      */
     public function getRedirectHash()
     {
         $redirect = $this->parameters->get('redirect');
 
         if (!is_array($redirect) || empty($redirect['hash'])) {
-            return null;
+            return;
         }
 
         return '#'.$redirect['hash'];
