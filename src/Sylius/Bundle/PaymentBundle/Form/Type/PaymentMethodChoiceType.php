@@ -76,7 +76,7 @@ final class PaymentMethodChoiceType extends AbstractType
 
                     return $this->paymentMethodRepository->findAll();
                 },
-                'choice_value' => 'id',
+                'choice_value' => 'code',
                 'choice_label' => 'name',
                 'choice_translation_domain' => false,
             ])

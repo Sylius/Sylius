@@ -11,6 +11,9 @@
 
 namespace Sylius\Tests\Controller;
 
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\PaymentMethodInterface;
+use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -50,8 +53,10 @@ final class CheckoutAddressingApiTest extends CheckoutApiTestCase
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $checkoutData = $this->loadFixturesFromFile('resources/checkout.yml');
 
-        $url = sprintf('/api/v1/checkouts/addressing/%d', $checkoutData['order1']->getId());
-        $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType);
+        /** @var OrderInterface $cart */
+        $cart = $checkoutData['order1'];
+
+        $this->client->request('PUT', $this->getAddressingUrl($cart), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'checkout/addressing_invalid_customer', Response::HTTP_BAD_REQUEST);
@@ -65,6 +70,9 @@ final class CheckoutAddressingApiTest extends CheckoutApiTestCase
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $checkoutData = $this->loadFixturesFromFile('resources/checkout.yml');
 
+        /** @var OrderInterface $cart */
+        $cart = $checkoutData['order1'];
+
         $data =
 <<<EOT
         {
@@ -75,8 +83,7 @@ final class CheckoutAddressingApiTest extends CheckoutApiTestCase
         }
 EOT;
 
-        $url = sprintf('/api/v1/checkouts/addressing/%d', $checkoutData['order1']->getId());
-        $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('PUT', $this->getAddressingUrl($cart), [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'checkout/addressing_validation_failed_shipping_address', Response::HTTP_BAD_REQUEST);
@@ -90,6 +97,9 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/countries.yml');
         $checkoutData = $this->loadFixturesFromFile('resources/checkout.yml');
+
+        /** @var OrderInterface $cart */
+        $cart = $checkoutData['order1'];
 
         $data =
 <<<EOT
@@ -109,8 +119,7 @@ EOT;
         }
 EOT;
 
-        $url = sprintf('/api/v1/checkouts/addressing/%d', $checkoutData['order1']->getId());
-        $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('PUT', $this->getAddressingUrl($cart), [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
@@ -123,8 +132,11 @@ EOT;
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/countries.yml');
-        $customers = $this->loadFixturesFromFile('resources/customers.yml');
+        $this->loadFixturesFromFile('resources/customers.yml');
         $checkoutData = $this->loadFixturesFromFile('resources/checkout.yml');
+
+        /** @var OrderInterface $cart */
+        $cart = $checkoutData['order1'];
 
         $data =
 <<<EOT
@@ -144,8 +156,7 @@ EOT;
         }
 EOT;
 
-        $url = sprintf('/api/v1/checkouts/addressing/%d', $checkoutData['order1']->getId());
-        $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('PUT', $this->getAddressingUrl($cart), [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'checkout/addressing_validation_failed_billing_address', Response::HTTP_BAD_REQUEST);
@@ -159,6 +170,9 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/countries.yml');
         $checkoutData = $this->loadFixturesFromFile('resources/checkout.yml');
+
+        /** @var OrderInterface $cart */
+        $cart = $checkoutData['order1'];
 
         $data =
 <<<EOT
@@ -186,13 +200,12 @@ EOT;
         }
 EOT;
 
-        $url = sprintf('/api/v1/checkouts/addressing/%d', $checkoutData['order1']->getId());
-        $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('PUT', $this->getAddressingUrl($cart), [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
 
-        $this->client->request('GET', sprintf('/api/v1/checkouts/%d', $checkoutData['order1']->getId()), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', $this->getCheckoutSummaryUrl($cart), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'checkout/addressed_order_response');
@@ -206,6 +219,9 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/countries.yml');
         $checkoutData = $this->loadFixturesFromFile('resources/checkout.yml');
+
+        /** @var OrderInterface $cart */
+        $cart = $checkoutData['order1'];
 
         $data =
 <<<EOT
@@ -225,10 +241,7 @@ EOT;
         }
 EOT;
 
-        $orderId = $checkoutData['order1']->getId();
-
-        $url = sprintf('/api/v1/checkouts/addressing/%d', $orderId);
-        $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('PUT', $this->getAddressingUrl($cart), [], [], static::$authorizedHeaderWithContentType, $data);
 
         $newData =
 <<<EOT
@@ -248,8 +261,7 @@ EOT;
         }
 EOT;
 
-        $url = sprintf('/api/v1/checkouts/addressing/%d', $checkoutData['order1']->getId());
-        $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $newData);
+        $this->client->request('PUT', $this->getAddressingUrl($cart), [], [], static::$authorizedHeaderWithContentType, $newData);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
@@ -264,6 +276,9 @@ EOT;
         $this->loadFixturesFromFile('resources/countries.yml');
         $checkoutData = $this->loadFixturesFromFile('resources/checkout.yml');
 
+        /** @var OrderInterface $cart */
+        $cart = $checkoutData['order1'];
+
         $addressData =
 <<<EOT
         {
@@ -282,12 +297,9 @@ EOT;
         }
 EOT;
 
-        $orderId = $checkoutData['order1']->getId();
+        $this->client->request('PUT', $this->getAddressingUrl($cart), [], [], static::$authorizedHeaderWithContentType, $addressData);
 
-        $url = sprintf('/api/v1/checkouts/addressing/%d', $orderId);
-        $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $addressData);
-
-        $this->selectOrderShippingMethod($orderId, $checkoutData['ups']->getId());
+        $this->selectOrderShippingMethod($cart);
 
         $newAddressData =
 <<<EOT
@@ -307,8 +319,7 @@ EOT;
         }
 EOT;
 
-        $url = sprintf('/api/v1/checkouts/addressing/%d', $checkoutData['order1']->getId());
-        $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $newAddressData);
+        $this->client->request('PUT', $this->getAddressingUrl($cart), [], [], static::$authorizedHeaderWithContentType, $newAddressData);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
@@ -323,6 +334,9 @@ EOT;
         $this->loadFixturesFromFile('resources/countries.yml');
         $checkoutData = $this->loadFixturesFromFile('resources/checkout.yml');
 
+        /** @var OrderInterface $cart */
+        $cart = $checkoutData['order1'];
+
         $addressData =
 <<<EOT
         {
@@ -341,13 +355,10 @@ EOT;
         }
 EOT;
 
-        $orderId = $checkoutData['order1']->getId();
+        $this->client->request('PUT', $this->getAddressingUrl($cart), [], [], static::$authorizedHeaderWithContentType, $addressData);
 
-        $url = sprintf('/api/v1/checkouts/addressing/%d', $orderId);
-        $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $addressData);
-
-        $this->selectOrderShippingMethod($orderId, $checkoutData['ups']->getId());
-        $this->selectOrderPaymentMethod($orderId, $checkoutData['cash_on_delivery']->getId());
+        $this->selectOrderShippingMethod($cart);
+        $this->selectOrderPaymentMethod($cart);
 
         $newAddressData =
 <<<EOT
@@ -367,10 +378,19 @@ EOT;
         }
 EOT;
 
-        $url = sprintf('/api/v1/checkouts/addressing/%d', $checkoutData['order1']->getId());
-        $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $newAddressData);
+        $this->client->request('PUT', $this->getAddressingUrl($cart), [], [], static::$authorizedHeaderWithContentType, $newAddressData);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
+    }
+
+    /**
+     * @param OrderInterface $cart
+     *
+     * @return string
+     */
+    private function getAddressingUrl(OrderInterface $cart)
+    {
+        return sprintf('/api/v1/checkouts/addressing/%d', $cart->getId());
     }
 }
