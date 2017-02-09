@@ -30,10 +30,6 @@ winzou_state_machine:
                     do: ["@sylius.unique_id_based_order_token_assigner", "assignTokenValue"]
                     args: ["object"]
             after:
-                sylius_send_order_confirmation_email:
-                    on: ["create"]
-                    do: ["@sylius.email_manager.order", "sendConfirmationEmail"]
-                    args: ["object"]
                 sylius_request_shipping:
                     on: ["create"]
                     do: ["@sm.callback.cascade_transition", "apply"]
