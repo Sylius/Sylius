@@ -72,7 +72,7 @@ final class CustomerShowMenuBuilderSpec extends ObjectBehavior
             ->willReturn($menu)
         ;
         $menu->setAttribute('type', 'show')->shouldBeCalled()->willReturn($menu);
-        $menu->setLabel('sylius.ui.show_orders')->shouldBeCalled()->willReturn($menu);
+        $menu->setLabelAttribute('message', 'sylius.ui.show_orders')->shouldBeCalled()->willReturn($menu);
 
         $menu
             ->addChild('user_delete', [
@@ -83,7 +83,7 @@ final class CustomerShowMenuBuilderSpec extends ObjectBehavior
             ->willReturn($menu)
         ;
         $menu->setAttribute('type', 'delete')->shouldBeCalled()->willReturn($menu);
-        $menu->setAttribute('customer_id', 7)->shouldBeCalled()->willReturn($menu);
+        $menu->setAttribute('resource_id', 7)->shouldBeCalled()->willReturn($menu);
 
         $eventDispatcher
             ->dispatch('sylius.menu.admin.customer.show', Argument::type(MenuBuilderEvent::class))
@@ -106,10 +106,6 @@ final class CustomerShowMenuBuilderSpec extends ObjectBehavior
 
         $menu->setExtra('column_id', 'no-account')->shouldBeCalled()->willReturn($menu);
 
-        $menu->addChild('guest')->shouldBeCalled()->willReturn($menu);
-        $menu->setLabel('sylius.ui.guest')->shouldBeCalled()->willReturn($menu);
-        $menu->setLabelAttribute('icon', 'spy')->shouldBeCalled()->willReturn($menu);
-
         $menu
             ->addChild('order_index', [
                 'route' => 'sylius_admin_customer_order_index',
@@ -119,7 +115,7 @@ final class CustomerShowMenuBuilderSpec extends ObjectBehavior
             ->willReturn($menu)
         ;
         $menu->setAttribute('type', 'show')->shouldBeCalled()->willReturn($menu);
-        $menu->setLabel('sylius.ui.show_orders')->shouldBeCalled()->willReturn($menu);
+        $menu->setLabelAttribute('message', 'sylius.ui.show_orders')->shouldBeCalled()->willReturn($menu);
 
         $eventDispatcher
             ->dispatch('sylius.menu.admin.customer.show', Argument::type(MenuBuilderEvent::class))

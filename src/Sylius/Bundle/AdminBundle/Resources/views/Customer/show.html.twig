@@ -10,7 +10,7 @@
         {% include '@SyliusAdmin/Customer/Show/_header.html.twig' %}
 
         {% set menu = knp_menu_get('sylius.admin.customer.show', [], {'customer': customer}) %}
-        {{ knp_menu_render(menu, {'template': '@SyliusAdmin/Customer/Menu/show.html.twig'}) }}
+        {{ knp_menu_render(menu, {'template': '@SyliusUi/Menu/top.html.twig'}) }}
     </div>
 
     <div class="ui divider"></div>

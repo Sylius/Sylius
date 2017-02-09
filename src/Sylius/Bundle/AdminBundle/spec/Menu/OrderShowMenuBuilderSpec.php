@@ -54,14 +54,15 @@ final class OrderShowMenuBuilderSpec extends ObjectBehavior
         $order->getId()->willReturn(7);
 
         $menu
-            ->addChild('dashboard', [
+            ->addChild('order_history', [
                 'route' => 'sylius_admin_order_history',
                 'routeParameters' => ['id' => 7]
             ])
             ->shouldBeCalled()
             ->willReturn($menu)
         ;
-        $menu->setLabel('sylius.ui.history')->shouldBeCalled()->willReturn($menu);
+        $menu->setAttribute('type', 'link')->shouldBeCalled()->willReturn($menu);
+        $menu->setLabelAttribute('message', 'sylius.ui.history')->shouldBeCalled()->willReturn($menu);
         $menu->setLabelAttribute('icon', 'history')->shouldBeCalled()->willReturn($menu);
 
         $stateMachineFactory->get($order, OrderTransitions::GRAPH)->willReturn($stateMachine);
@@ -76,7 +77,7 @@ final class OrderShowMenuBuilderSpec extends ObjectBehavior
             ->willReturn($menu)
         ;
         $menu->setAttribute('type', 'transition')->shouldBeCalled()->willReturn($menu);
-        $menu->setLabel('sylius.ui.cancel')->shouldBeCalled()->willReturn($menu);
+        $menu->setLabelAttribute('message', 'sylius.ui.cancel')->shouldBeCalled()->willReturn($menu);
         $menu->setLabelAttribute('icon', 'ban')->shouldBeCalled()->willReturn($menu);
         $menu->setLabelAttribute('color', 'yellow')->shouldBeCalled()->willReturn($menu);
 
@@ -101,14 +102,15 @@ final class OrderShowMenuBuilderSpec extends ObjectBehavior
         $order->getId()->willReturn(7);
 
         $menu
-            ->addChild('dashboard', [
+            ->addChild('order_history', [
                 'route' => 'sylius_admin_order_history',
                 'routeParameters' => ['id' => 7]
             ])
             ->shouldBeCalled()
             ->willReturn($menu)
         ;
-        $menu->setLabel('sylius.ui.history')->shouldBeCalled()->willReturn($menu);
+        $menu->setAttribute('type', 'link')->shouldBeCalled()->willReturn($menu);
+        $menu->setLabelAttribute('message', 'sylius.ui.history')->shouldBeCalled()->willReturn($menu);
         $menu->setLabelAttribute('icon', 'history')->shouldBeCalled()->willReturn($menu);
 
         $stateMachineFactory->get($order, OrderTransitions::GRAPH)->willReturn($stateMachine);

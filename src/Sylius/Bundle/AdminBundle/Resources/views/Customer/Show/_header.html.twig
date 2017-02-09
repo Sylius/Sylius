@@ -4,7 +4,18 @@
         <div class="content">
             {{ customer.fullName|default('sylius.ui.guest_customer'|trans) }}
             <div class="sub header">
-                {{ customer.email }}
+                <div class="ui horizontal divided list">
+                    <div class="item">
+                        {{ customer.email }}
+                    </div>
+                    {% if customer.user is null %}
+                        <div class="item">
+                            <span class="ui label">
+                                <i class="icon spy"></i> {{ 'sylius.ui.guest'|trans }}
+                            </span>
+                        </div>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </h1>

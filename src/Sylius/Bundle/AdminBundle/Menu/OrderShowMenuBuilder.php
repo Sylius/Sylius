@@ -75,7 +75,8 @@ final class OrderShowMenuBuilder
                 'route' => 'sylius_admin_order_history',
                 'routeParameters' => ['id' => $order->getId()]
             ])
-            ->setLabel('sylius.ui.history')
+            ->setAttribute('type', 'link')
+            ->setLabelAttribute('message', 'sylius.ui.history')
             ->setLabelAttribute('icon', 'history')
         ;
 
@@ -87,7 +88,7 @@ final class OrderShowMenuBuilder
                     'routeParameters' => ['id' => $order->getId()]
                 ])
                 ->setAttribute('type', 'transition')
-                ->setLabel('sylius.ui.cancel')
+                ->setLabelAttribute('message', 'sylius.ui.cancel')
                 ->setLabelAttribute('icon', 'ban')
                 ->setLabelAttribute('color', 'yellow')
             ;

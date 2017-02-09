@@ -89,7 +89,7 @@ final class CustomerShowMenuBuilder
                     'routeParameters' => ['id' => $customer->getId()]
                 ])
                 ->setAttribute('type', 'show')
-                ->setLabel('sylius.ui.show_orders')
+                ->setLabelAttribute('message', 'sylius.ui.show_orders')
             ;
 
             $menu
@@ -98,7 +98,7 @@ final class CustomerShowMenuBuilder
                     'routeParameters' => ['id' => $customer->getUser()->getId()]
                 ])
                 ->setAttribute('type', 'delete')
-                ->setAttribute('customer_id', $customer->getId())
+                ->setAttribute('resource_id', $customer->getId())
             ;
 
             return;
@@ -107,18 +107,12 @@ final class CustomerShowMenuBuilder
         $menu->setExtra('column_id', 'no-account');
 
         $menu
-            ->addChild('guest')
-            ->setLabel('sylius.ui.guest')
-            ->setLabelAttribute('icon', 'spy')
-        ;
-
-        $menu
             ->addChild('order_index', [
                 'route' => 'sylius_admin_customer_order_index',
                 'routeParameters' => ['id' => $customer->getId()]
             ])
             ->setAttribute('type', 'show')
-            ->setLabel('sylius.ui.show_orders')
+            ->setLabelAttribute('message', 'sylius.ui.show_orders')
         ;
     }
 }

@@ -8,12 +8,12 @@
 
 {% block content %}
 <div class="ui stackable two column grid">
-    <div class="twelve wide column">
+    <div class="ten wide column">
         {% include '@SyliusAdmin/Order/Show/_header.html.twig' %}
     </div>
 
     {% set menu = knp_menu_get('sylius.admin.order.show', [], {'order': order}) %}
-    {{ knp_menu_render(menu, {'template': '@SyliusAdmin/Order/Menu/show.html.twig'}) }}
+    {{ knp_menu_render(menu, {'template': '@SyliusUi/Menu/top.html.twig'}) }}
 </div>
 {% include '@SyliusAdmin/Order/Show/_breadcrumb.html.twig' %}
 <div class="ui stackable grid">
