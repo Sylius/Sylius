@@ -198,8 +198,8 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     public static function getVariantSelectionMethodLabels()
     {
         return [
-            self::VARIANT_SELECTION_CHOICE => 'Variant choice',
-            self::VARIANT_SELECTION_MATCH => 'Options matching',
+            self::VARIANT_SELECTION_CHOICE => 'sylius.ui.variant_choice',
+            self::VARIANT_SELECTION_MATCH => 'sylius.ui.options_matching',
         ];
     }
 

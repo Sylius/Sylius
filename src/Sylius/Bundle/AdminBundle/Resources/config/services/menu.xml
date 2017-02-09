@@ -31,5 +31,11 @@
             <argument type="service" id="sm.factory" />
             <tag name="knp_menu.menu_builder" method="createMenu" alias="sylius.admin.order.show" />
         </service>
+
+        <service id="sylius.admin.menu_builder.product_form" class="Sylius\Bundle\AdminBundle\Menu\ProductFormMenuBuilder">
+            <argument type="service" id="knp_menu.factory" />
+            <argument type="service" id="event_dispatcher" />
+            <tag name="knp_menu.menu_builder" method="createMenu" alias="sylius.admin.product_form" />
+        </service>
     </services>
 </container>

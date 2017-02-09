@@ -1,17 +1,34 @@
-<div class="ui large fluid vertical menu">
-    <a href="#" class="active item" data-tab="details">
-        {{ 'sylius.ui.details'|trans }}
-    </a>
-    <a href="#" class="item" data-tab="taxonomy">
-        {{ 'sylius.ui.taxonomy'|trans }}
-    </a>
-    <a class="item" data-tab="attributes">
-        {{ 'sylius.ui.attributes'|trans }}
-    </a>
-    <a class="item" data-tab="associations">
-        {{ 'sylius.ui.associations'|trans }}
-    </a>
-    <a href="#" class="item" data-tab="media">
-        {{ 'sylius.ui.media'|trans }}
-    </a>
+{% extends 'knp_menu.html.twig' %}
+
+{% block list %}
+{% set form = (options.form) %}
+<div class="ui stackable grid">
+    <div class="three wide column">
+        <div class="ui large fluid vertical menu">
+            {% for item in item.children %}
+                {{ block('item') }}
+            {% endfor %}
+        </div>
+    </div>
+    <div class="thirteen wide column">
+        {{ form_errors(form) }}
+        <div class="ui segment">
+            {% for item in item.children %}
+                {% include item.attribute('template') with {'form': form, 'product': options.product} %}
+            {% endfor %}
+        </div>
+    </div>
 </div>
+{% endblock %}
+
+{% block item %}
+    {%- set attributes = item.attributes %}
+    {%- set classes = item.attribute('class') is not empty ? [item.attribute('class')] : [] %}
+    {%- if item.actsLikeFirst %}
+        {%- set classes = classes|merge(['active']) %}
+    {%- endif %}
+    {%- if classes is not empty %}
+        {%- set attributes = attributes|merge({'class': classes|join(' ')}) %}
+    {%- endif %}
+    <a class="item{% if attributes.class is defined %} {{ attributes.class }}{% endif %}" data-tab="{{ item.name }}">{{ item.label|trans }}</a>
+{% endblock %}
