@@ -44,6 +44,10 @@ The transitions on the order checkout state machine are:
           from: [payment_selected]
           to: completed
 
+.. image:: ../../_images/sylius_order_checkout.png
+    :align: center
+    :scale: 70%
+
 Steps of Checkout
 -----------------
 
