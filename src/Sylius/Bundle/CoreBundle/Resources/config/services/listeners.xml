@@ -81,6 +81,10 @@
             <argument type="service" id="sylius.email_manager.order" />
             <tag name="kernel.event_listener" event="sylius.order.post_complete" method="sendConfirmationEmail" />
         </service>
+        <service id="sylius.listener.shipment_ship" class="Sylius\Bundle\CoreBundle\EventListener\ShipmentShipListener">
+            <argument type="service" id="sylius.email_manager.shipment" />
+            <tag name="kernel.event_listener" event="sylius.shipment.post_ship" method="sendConfirmationEmail" />
+        </service>
         <service id="sylius.listener.review_create" class="Sylius\Bundle\CoreBundle\EventListener\ReviewCreateListener">
             <argument type="service" id="sylius.context.customer" />
             <tag name="kernel.event_listener" event="sylius.product_review.pre_create" method="ensureReviewHasAuthor" />
