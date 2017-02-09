@@ -3,13 +3,12 @@
     "message": "Validation Failed",
     "errors": {
         "children": {
-            "customer": {},
-            "localeCode": {
-                    "errors": [
-                        "This value should not be blank."
+            "quantity": {
+                "errors": [
+                    "Quantity of an order item cannot be lower than 1."
                 ]
             },
-            "channel": {
+            "variant": {
                 "errors": [
                     "This value should not be blank."
                 ]

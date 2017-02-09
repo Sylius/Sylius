@@ -1,18 +1,6 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-sylius_api_order_item_index:
-    path: /
-    methods: [GET]
-    defaults:
-        _controller: sylius.controller.order_item:indexAction
-        _sylius:
-            serialization_version: $version
-            filterable: true
-            criteria:
-                order: $orderId
-            paginate: false
-
 sylius_api_order_item_create:
     path: /
     methods: [POST]
@@ -20,6 +8,12 @@ sylius_api_order_item_create:
         _controller: sylius.controller.order_item:createAction
         _sylius:
             serialization_version: $version
+            form: Sylius\Bundle\ApiBundle\Form\Type\OrderItemType
+            factory:
+                method: createForCart
+                arguments:
+                  - "expr:service('sylius.repository.order').findCartById($cartId)"
+            serialization_groups: [DetailedCart]
 
 sylius_api_order_item_update:
     path: /{id}
@@ -28,8 +22,10 @@ sylius_api_order_item_update:
         _controller: sylius.controller.order_item:updateAction
         _sylius:
             serialization_version: $version
-            criteria:
-                order: $orderId
+            form: Sylius\Bundle\ApiBundle\Form\Type\OrderItemType
+            repository:
+                method: findOneByIdAndCartId
+                arguments: [$id, $cartId]
 
 sylius_api_order_item_delete:
     path: /{id}
@@ -38,6 +34,7 @@ sylius_api_order_item_delete:
         _controller: sylius.controller.order_item:deleteAction
         _sylius:
             serialization_version: $version
-            criteria:
-                order: $orderId
             csrf_protection: false
+            repository:
+                method: findOneByIdAndCartId
+                arguments: [$id, $cartId]

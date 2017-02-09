@@ -1,12 +1,13 @@
 Sylius\Component\Core\Model\Order:
-    order-001:
-        channel: "@channel-web"
+    order_001:
+        channel: "@channel_web"
         currencyCode: USD
         localeCode: en_US
         customer: "@customer_oliver"
+        state: completed
 
 Sylius\Component\Core\Model\Channel:
-    channel-web:
+    channel_web:
         code: "WEB"
         name: "Web Channel"
         hostname: "localhost"

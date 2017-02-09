@@ -14,6 +14,7 @@ namespace spec\Sylius\Component\Core\Factory;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Factory\CartItemFactory;
 use Sylius\Component\Core\Factory\CartItemFactoryInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
@@ -65,5 +66,17 @@ final class CartItemFactorySpec extends ObjectBehavior
         $cartItem->setVariant($productVariant)->shouldBeCalled();
 
         $this->createForProduct($product)->shouldReturn($cartItem);
+    }
+
+    function it_creates_a_cart_item_for_given_cart(
+        FactoryInterface $decoratedFactory,
+        OrderItemInterface $cartItem,
+        OrderInterface $order
+    ) {
+        $decoratedFactory->createNew()->willReturn($cartItem);
+
+        $cartItem->setOrder($order)->shouldBeCalled();
+
+        $this->createForCart($order)->shouldReturn($cartItem);
     }
 }

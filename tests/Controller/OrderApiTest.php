@@ -12,6 +12,8 @@
 namespace Sylius\Tests\Controller;
 
 use Lakion\ApiTestCase\JsonApiTestCase;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Order\Model\OrderItemInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -22,7 +24,7 @@ final class OrderApiTest extends JsonApiTestCase
     /**
      * @var array
      */
-    private static $authorizedHeaderWithContentType = [
+    private static $authorizedHeaderWithAccept = [
         'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
         'CONTENT_TYPE' => 'application/json',
     ];
@@ -32,7 +34,7 @@ final class OrderApiTest extends JsonApiTestCase
      */
     public function it_denies_getting_an_order_for_non_authenticated_user()
     {
-        $this->client->request('GET', '/api/v1/orders/');
+        $this->client->request('GET', '/api/v1/orders/-1');
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
@@ -45,7 +47,7 @@ final class OrderApiTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
-        $this->client->request('GET', '/api/v1/orders/-1', [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('GET', '/api/v1/orders/-1', [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
@@ -54,119 +56,28 @@ final class OrderApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_to_get_order()
+    public function it_allows_to_get_cart()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $orderData = $this->loadFixturesFromFile('resources/orders.yml');
+        $orderData = $this->loadFixturesFromFile('resources/cart.yml');
 
-        $this->client->request('GET', '/api/v1/orders/'.$orderData['order-001']->getId(), [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('GET', '/api/v1/orders/'.$orderData['order_001']->getId(), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'order/show_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'order/cart_show_response', Response::HTTP_OK);
     }
 
     /**
      * @test
      */
-    public function it_denies_creating_order_for_non_authenticated_user()
-    {
-        $this->client->request('POST', '/api/v1/orders/');
-
-        $response = $this->client->getResponse();
-        $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
-    }
-
-    /**
-     * @test
-     */
-    public function it_does_not_allow_to_create_order_without_specifying_required_data()
+    public function it_allows_to_get_an_order()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $orderData = $this->loadFixturesFromFile('resources/order.yml');
 
-        $this->client->request('POST', '/api/v1/orders/', [], [], static::$authorizedHeaderWithContentType);
-
-        $response = $this->client->getResponse();
-        $this->assertResponse($response, 'order/create_validation_fail_response', Response::HTTP_BAD_REQUEST);
-    }
-
-    /**
-     * @test
-     */
-    public function it_allows_to_create_order()
-    {
-        $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $this->loadFixturesFromFile('resources/orders.yml');
-
-        $data =
-<<<EOT
-        {
-            "customer": "oliver.queen@star-city.com",
-            "channel": "WEB",
-            "locale_code": "en_US"
-        }
-EOT;
-
-        $this->client->request('POST', '/api/v1/orders/', [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('GET', '/api/v1/orders/'.$orderData['order_001']->getId(), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
-
-        $this->assertResponse($response, 'order/show_response', Response::HTTP_CREATED);
-    }
-
-    /**
-     * @test
-     */
-    public function it_denies_getting_orders_for_non_authenticated_user()
-    {
-        $this->client->request('GET', '/api/v1/orders/');
-
-        $response = $this->client->getResponse();
-        $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
-    }
-
-    /**
-     * @test
-     */
-    public function it_allows_to_get_orders_list()
-    {
-        $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $this->loadFixturesFromFile('resources/orders.yml');
-
-        $this->client->request('GET', '/api/v1/orders/', [], [], static::$authorizedHeaderWithContentType);
-
-        $response = $this->client->getResponse();
-        $this->assertResponse($response, 'order/index_response', Response::HTTP_OK);
-    }
-
-    /**
-     * @test
-     */
-    public function it_returns_not_found_response_when_trying_to_delete_order_which_does_not_exist()
-    {
-        $this->loadFixturesFromFile('authentication/api_administrator.yml');
-
-        $this->client->request('DELETE', '/api/v1/orders/-1', [], [], static::$authorizedHeaderWithContentType);
-
-        $response = $this->client->getResponse();
-        $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
-    }
-
-    /**
-     * @test
-     */
-    public function it_allows_to_delete_order()
-    {
-        $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $orders = $this->loadFixturesFromFile('resources/orders.yml');
-
-        $this->client->request('DELETE', '/api/v1/orders/'.$orders['order-001']->getId(), [], [], static::$authorizedHeaderWithContentType, []);
-
-        $response = $this->client->getResponse();
-        $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
-
-        $this->client->request('GET', '/api/v1/orders/'.$orders['order-001']->getId(), [], [], static::$authorizedHeaderWithContentType);
-
-        $response = $this->client->getResponse();
-        $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
+        $this->assertResponse($response, 'order/order_show_response', Response::HTTP_OK);
     }
 }

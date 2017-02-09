@@ -13,5 +13,10 @@
     "email_canonical": "john.diggle@yahoo.com",
     "first_name": "John",
     "last_name": "Diggle",
-    "gender": "m"
+    "gender": "m",
+    "_links": {
+        "self": {
+            "href": "@string@"
+        }
+    }
 }

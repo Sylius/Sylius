@@ -4,21 +4,24 @@ Sylius\Component\Core\Model\OrderItem:
     properties:
         variant:
             expose: true
+            groups: [Default, Detailed, DetailedCart]
     relations:
         - rel: product
           exclusion:
-                exclude_if: expr(!object.getVariant())
+            exclude_if: expr(!object.getVariant())
+            groups: [Default, Detailed, DetailedCart]
           href:
-                route: sylius_api_product_show
-                parameters:
-                    id: expr(object.getVariant().getProduct().getId())
-                    version: 1
+            route: sylius_api_product_show
+            parameters:
+                id: expr(object.getVariant().getProduct().getId())
+                version: 1
         - rel: variant
           exclusion:
-                exclude_if: expr(!object.getVariant())
+            exclude_if: expr(!object.getVariant())
+            groups: [Default, Detailed, DetailedCart]
           href:
-                route: sylius_api_product_variant_show
-                parameters:
-                    id: expr(object.getVariant().getId())
-                    productId: expr(object.getVariant().getProduct().getId())
-                    version: 1
+            route: sylius_api_product_variant_show
+            parameters:
+                id: expr(object.getVariant().getId())
+                productId: expr(object.getVariant().getProduct().getId())
+                version: 1

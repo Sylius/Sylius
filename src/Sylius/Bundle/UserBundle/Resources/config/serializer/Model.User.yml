@@ -5,23 +5,23 @@ Sylius\Component\User\Model\User:
         id:
             expose: true
             type: integer
-            groups: [Default, Detailed]
+            groups: [Default, Detailed, DetailedCart]
         username:
             expose: true
             type: string
-            groups: [Default, Detailed, Secured]
+            groups: [Default, Detailed, DetailedCart, Secured]
         usernameCanonical:
             expose: true
             type: string
-            groups: [Detailed]
+            groups: [Detailed, DetailedCart]
         email:
             expose: true
             type: string
-            groups: [Default, Detailed]
+            groups: [Default, Detailed, DetailedCart]
         emailCanonical:
             expose: true
             type: string
-            groups: [Detailed]
+            groups: [Detailed, DetailedCart]
         enabled:
             expose: true
             type: boolean

@@ -23,5 +23,12 @@
             <argument>%fos_oauth_server.model.client.class%</argument>
         </service>
         <service id="sylius.normalizer.camel_keys" class="Sylius\Bundle\ApiBundle\Normalizer\LocaleAwareCamelKeysNormalizer" />
+
+        <service id="sylius.listener.api.add_to_cart" class="Sylius\Bundle\ApiBundle\EventListener\AddToCartListener">
+            <argument type="service" id="sylius.order_processing.order_processor.composite" />
+            <argument type="service" id="sylius.manager.order" />
+            <tag name="kernel.event_listener" event="sylius.order_item.pre_create" method="recalculateOrder" />
+            <tag name="kernel.event_listener" event="sylius.order_item.pre_update" method="recalculateOrder" />
+        </service>
     </services>
 </container>

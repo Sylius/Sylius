@@ -7,6 +7,7 @@ The REST API Reference
     introduction
     authorization
     channels
+    carts
     orders
     checkouts
     products

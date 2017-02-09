@@ -5,3 +5,4 @@ Sylius\Component\Core\Model\Channel:
         taxCalculationStrategy:
             expose: true
             type: string
+            groups: [Detailed]

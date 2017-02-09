@@ -5,9 +5,21 @@
     "adjustments": [],
     "adjustments_total": 0,
     "total": 0,
-    "state": "cart",
-    "created_at": "@string@.isDateTime()",
-    "updated_at": "@string@.isDateTime()",
+    "state": "completed",
+    "customer": {
+        "id": @integer@,
+        "email": "oliver.queen@star-city.com",
+        "email_canonical": "oliver.queen@star-city.com",
+        "first_name": "Oliver",
+        "last_name": "Queen",
+        "birthday": "@string@.isDateTime()",
+        "gender": "u",
+        "_links": {
+            "self": {
+                "href": "@string@"
+            }
+        }
+    },
     "channel": {
         "id": @integer@,
         "code": "WEB",
@@ -27,5 +39,7 @@
     },
     "payments": [],
     "shipments": [],
+    "currency_code": "USD",
+    "locale_code": "en_US",
     "checkout_state": "cart"
 }

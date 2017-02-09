@@ -8,8 +8,17 @@
     "adjustments_total": @integer@,
     "total": @integer@,
     "state": "new",
-    "created_at": "@string@.isDateTime()",
-    "updated_at": "@string@.isDateTime()",
+    "customer": {
+        "id": @integer@,
+        "email": "john@doe.com",
+        "email_canonical": "john@doe.com",
+        "gender": "u",
+        "_links": {
+            "self": {
+                "href": "@string@"
+            }
+        }
+    },
     "channel": {
         "id": @integer@,
         "code": "CHANNEL",
@@ -31,5 +40,7 @@
     "billing_address": @...@,
     "payments": @array@,
     "shipments": @array@,
+    "currency_code": "EUR",
+    "locale_code": "en_US",
     "checkout_state": "completed"
 }
