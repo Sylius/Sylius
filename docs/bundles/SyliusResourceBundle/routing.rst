@@ -232,3 +232,64 @@ If you want to change that behavior, use the following configuration:
             alias: app.book
             redirect: update
         type: sylius.resource
+
+API Versioning
+--------------
+
+One of the ResourceBundle dependencies is JMSSerializer, which provides a useful functionality of `object versioning`__. It is possible to take an advantage of it almost out of the box.
+If you would like to return only the second version of your object serializations, use the following snippet:
+
+.. code-block:: yaml
+
+    app_book:
+        resource: |
+            alias: app.book
+            serialization_version: 2
+        type: sylius.resource_api
+
+What is more, you can use a path variable to dynamically change your request. You can achieve this by setting a path prefix when importing file or specify it in the path option.
+
+.. code-block:: yaml
+
+    app_book:
+        resource: |
+            alias: app.book
+            serialization_version: $version
+        type: sylius.resource_api
+
+.. note::
+
+    Remember that a dynamically resolved `books` prefix is no longer available when you specify ``path``, and it has to be defined manually.
+
+Using a Custom Identifier
+-------------------------
+
+As you could notice the generated routing resolves resources by the ``id`` field. But sometimes it is more convenient to use a custom identifier field instead, let's say a ``code`` (or any other field of your choice which can uniquely identify your resource).
+If you want to look for books by ``isbn``, use the following configuration:
+
+.. code-block:: yaml
+
+    app_book:
+        resource: |
+            identifier: isbn
+            alias: app.book
+            criteria:
+                isbn: $isbn
+        type: sylius.resource
+
+Which will result in the following routes:
+
+.. code-block:: bash
+
+    $ php bin/console debug:router
+
+    ------------------------ --------------- -------- ------ -------------------------
+    Name                     Method          Scheme   Host   Path
+    ------------------------ --------------- -------- ------ -------------------------
+    app_book_show            GET             ANY      ANY    /books/{isbn}
+    app_book_index           GET             ANY      ANY    /books/
+    app_book_create          GET|POST        ANY      ANY    /books/new
+    app_book_update          GET|PUT|PATCH   ANY      ANY    /books/{isbn}/edit
+    app_book_delete          DELETE          ANY      ANY    /books/{isbn}
+
+__ http://jmsyst.com/libs/serializer/master/cookbook/exclusion_strategies#versioning-objects

@@ -42,11 +42,15 @@ Routing Generator Configuration Reference
         resource: |
             alias: app.book
             path: library
+            identifier: code
+            criteria:
+                code: $code
             section: admin
             templates: :Book
             form: AppBundle/Form/Type/SimpleBookType
             redirect: create
             except: ['show']
             only: ['create', 'index']
+            serialization_version: 1
         type: sylius.resource
 
