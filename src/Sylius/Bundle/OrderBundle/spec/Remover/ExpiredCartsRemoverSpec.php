@@ -11,6 +11,7 @@
 
 namespace spec\Sylius\Bundle\OrderBundle\Remover;
 
+use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\OrderBundle\Remover\ExpiredCartsRemover;
@@ -25,9 +26,9 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
  */
 final class ExpiredCartsRemoverSpec extends ObjectBehavior
 {
-    function let(OrderRepositoryInterface $orderRepository, EventDispatcher $eventDispatcher)
+    function let(OrderRepositoryInterface $orderRepository, ObjectManager $orderManager, EventDispatcher $eventDispatcher)
     {
-        $this->beConstructedWith($orderRepository, $eventDispatcher, '2 months');
+        $this->beConstructedWith($orderRepository, $orderManager, $eventDispatcher, '2 months');
     }
 
     function it_is_initializable()
@@ -42,6 +43,7 @@ final class ExpiredCartsRemoverSpec extends ObjectBehavior
 
     function it_removes_a_cart_which_has_been_updated_before_configured_date(
         OrderRepositoryInterface $orderRepository,
+        ObjectManager $orderManager,
         EventDispatcher $eventDispatcher,
         OrderInterface $firstCart,
         OrderInterface $secondCart
@@ -56,8 +58,9 @@ final class ExpiredCartsRemoverSpec extends ObjectBehavior
             ->shouldBeCalled()
         ;
 
-        $orderRepository->remove($firstCart)->shouldBeCalled();
-        $orderRepository->remove($secondCart)->shouldBeCalled();
+        $orderManager->remove($firstCart);
+        $orderManager->remove($secondCart);
+        $orderManager->flush();
 
         $eventDispatcher
             ->dispatch(SyliusCartsRemoveEvents::CARTS_POST_REMOVE, Argument::any())

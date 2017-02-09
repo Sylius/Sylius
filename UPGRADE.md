@@ -155,8 +155,8 @@ After:
 
 * Method `findOrdersUnpaidSince` of `Sylius\Bundle\OrderBundle\Doctrine\ORM\OrderRepository` has been moved to `Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository` as it depends on Core component. 
  If you haven't been using this method, you can remove the 'CoreBundle' dependency.
-* The `ExpiredCartsRemover` service has been moved from the component and into the bundle. In addition, it dispatches the `sylius.carts.pre_remove` and `sylius.carts.post_remove` events, both of which hold the collection of carts to be, or already removed, depending on the event.
-  Also, as of now, it depends on the `sylius.manager.order` to remove the carts instead of the repository, to not flush on every outdated `cart`, but the whole collection.
+* The `ExpiredCartsRemover` service has been moved from the component and into the bundle. In addition it dispatches the `sylius.carts.pre_remove` and `sylius.carts.post_remove` events, both of which hold the collection of carts to be, or already removed, depending on the event.
+ Also, as of now, it depends on the `sylius.manager.order` to remove the carts instead of the repository in order to not flush every outdated `cart`, but the whole collection.
 
 ### Payment / PaymentBundle
 

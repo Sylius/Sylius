@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\OrderBundle\Remover;
 
+use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\OrderBundle\SyliusCartsRemoveEvents;
 use Sylius\Component\Order\Remover\ExpiredCartsRemoverInterface;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface;
@@ -28,6 +29,11 @@ final class ExpiredCartsRemover implements ExpiredCartsRemoverInterface
     private $orderRepository;
 
     /**
+     * @var ObjectManager
+     */
+    private $orderManager;
+
+    /**
      * @var EventDispatcherInterface
      */
     private $eventDispatcher;
@@ -39,15 +45,18 @@ final class ExpiredCartsRemover implements ExpiredCartsRemoverInterface
 
     /**
      * @param OrderRepositoryInterface $orderRepository
+     * @param ObjectManager $orderManager
      * @param EventDispatcherInterface $eventDispatcher
      * @param string $expirationPeriod
      */
     public function __construct(
         OrderRepositoryInterface $orderRepository,
+        ObjectManager $orderManager,
         EventDispatcherInterface $eventDispatcher,
         $expirationPeriod
     ) {
         $this->orderRepository = $orderRepository;
+        $this->orderManager = $orderManager;
         $this->eventDispatcher = $eventDispatcher;
         $this->expirationPeriod = $expirationPeriod;
     }
@@ -59,8 +68,10 @@ final class ExpiredCartsRemover implements ExpiredCartsRemoverInterface
         $this->eventDispatcher->dispatch(SyliusCartsRemoveEvents::CARTS_PRE_REMOVE, new GenericEvent($expiredCarts));
 
         foreach ($expiredCarts as $expiredCart) {
-            $this->orderRepository->remove($expiredCart);
+            $this->orderManager->remove($expiredCart);
         }
+
+        $this->orderManager->flush();
 
         $this->eventDispatcher->dispatch(SyliusCartsRemoveEvents::CARTS_POST_REMOVE, new GenericEvent($expiredCarts));
     }

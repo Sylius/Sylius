@@ -59,6 +59,7 @@
 
         <service id="sylius.expired_carts_remover" class="Sylius\Bundle\OrderBundle\Remover\ExpiredCartsRemover">
             <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="sylius.manager.order" />
             <argument type="service" id="event_dispatcher" />
             <argument>%sylius_order.cart_expiration_period%</argument>
         </service>
