@@ -32,6 +32,9 @@ sylius:
     order:
         currency_code:
             not_valid: The currency code you entered is invalid.
+        payment_method_eligibility: 'This payment method %paymentMethodName% has been disabled. Please reselect your payment method.'
+        product_eligibility: 'This product %productName% has been disabled.'
+        shipping_method_eligibility: 'Product does not fit requirements for %shippingMethodName% shipping method. Please reselect your shipping method.'
     locale:
         code:
             not_blank: Please enter locale code.

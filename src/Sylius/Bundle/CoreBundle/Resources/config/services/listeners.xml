@@ -81,5 +81,18 @@
             <argument type="service" id="sylius.context.customer" />
             <tag name="kernel.event_listener" event="sylius.product_review.pre_create" method="ensureReviewHasAuthor" />
         </service>
+        <service id="sylius.listener.order_promotion_integrity_checker" class="Sylius\Bundle\CoreBundle\EventListener\OrderPromotionIntegrityChecker">
+            <argument type="service" id="sylius.promotion_eligibility_checker" />
+            <argument type="service" id="event_dispatcher" />
+            <argument type="service" id="router" />
+            <tag name="kernel.event_listener" event="sylius.order.pre_complete" method="check" />
+        </service>
+
+        <service id="sylius.listener.order_total_integrity_checker" class="Sylius\Bundle\CoreBundle\EventListener\OrderTotalIntegrityChecker">
+            <argument type="service" id="sylius.order_processing.order_processor" />
+            <argument type="service" id="router" />
+            <argument type="service" id="sylius.manager.order" />
+            <tag name="kernel.event_listener" event="sylius.order.pre_complete" method="check" />
+        </service>
     </services>
 </container>

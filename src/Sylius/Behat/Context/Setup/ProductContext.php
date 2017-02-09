@@ -619,6 +619,7 @@ final class ProductContext implements Context
     /**
      * @Given /^(this product)'s price is ("[^"]+")$/
      * @Given /^the (product "[^"]+") changed its price to ("[^"]+")$/
+     * @Given /^(this product) price has been changed to ("[^"]+")$/
      */
     public function theProductChangedItsPriceTo(ProductInterface $product, $price)
     {
@@ -652,10 +653,20 @@ final class ProductContext implements Context
 
     /**
      * @Given /^(this product) belongs to ("([^"]+)" shipping category)$/
+     * @Given product :product shipping category has been changed to :shippingCategory
      */
     public function thisProductBelongsToShippingCategory(ProductInterface $product, ShippingCategoryInterface $shippingCategory)
     {
         $product->getVariants()->first()->setShippingCategory($shippingCategory);
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^(this product) has been disabled$/
+     */
+    public function thisProductHasBeenDisabled(ProductInterface $product)
+    {
+        $product->disable();
         $this->objectManager->flush();
     }
 

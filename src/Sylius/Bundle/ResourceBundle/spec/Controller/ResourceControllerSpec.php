@@ -889,6 +889,7 @@ final class ResourceControllerSpec extends ObjectBehavior
 
         $eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($event);
         $event->isStopped()->willReturn(true);
+        $event->hasResponse()->willReturn(false);
         $flashHelper->addFlashFromEvent($configuration, $event)->shouldBeCalled();
 
         $manager->flush()->shouldNotBeCalled();

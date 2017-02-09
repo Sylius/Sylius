@@ -3,7 +3,9 @@
 namespace Sylius\Behat\Context\Ui\Shop\Checkout;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Shop\Checkout\CompletePageInterface;
+use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
@@ -28,13 +30,23 @@ final class CheckoutCompleteContext implements Context
     private $completePage;
 
     /**
+     * @var NotificationCheckerInterface
+     */
+    private $notificationChecker;
+
+    /**
      * @param SharedStorageInterface $sharedStorage
      * @param CompletePageInterface $completePage
+     * @param NotificationCheckerInterface $notificationChecker
      */
-    public function __construct(SharedStorageInterface $sharedStorage, CompletePageInterface $completePage)
-    {
+    public function __construct(
+        SharedStorageInterface $sharedStorage,
+        CompletePageInterface $completePage,
+        NotificationCheckerInterface $notificationChecker
+    ) {
         $this->sharedStorage = $sharedStorage;
         $this->completePage = $completePage;
+        $this->notificationChecker = $notificationChecker;
     }
 
     /**
@@ -72,6 +84,7 @@ final class CheckoutCompleteContext implements Context
     }
 
     /**
+     * @Given I have confirmed order
      * @When I confirm my order
      */
     public function iConfirmMyOrder()
@@ -259,5 +272,71 @@ final class CheckoutCompleteContext implements Context
     public function thisPromotionShouldGiveDiscount(PromotionInterface $promotion, $discount)
     {
         Assert::same($this->completePage->getShippingPromotionDiscount($promotion->getName()), $discount);
+    }
+
+    /**
+     * @Then I should not be able to confirm order because products does not fit :shippingMethod requirements
+     */
+    public function iShouldNotBeAbleToConfirmOrderBecauseDoesNotBelongsToShippingCategory(ShippingMethodInterface $shippingMethod)
+    {
+        $this->completePage->confirmOrder();
+
+        Assert::same(
+            $this->completePage->getValidationErrors(),
+            sprintf(
+                'Product does not fit requirements for %s shipping method. Please reselect your shipping method.',
+                $shippingMethod->getName()
+            )
+        );
+    }
+
+    /**
+     * @Then /^I should be informed that (this promotion) is no longer applied$/
+     */
+    public function iShouldBeInformedThatMyPromotionIsNoLongerApplied(PromotionInterface $promotion)
+    {
+        $this->notificationChecker->checkNotification(
+            sprintf('You are no longer eligible for this promotion %s.', $promotion->getName()),
+            NotificationType::failure()
+        );
+    }
+
+    /**
+     * @Then /^I should be informed that (this payment method) has been disabled$/
+     */
+    public function iShouldBeInformedThatThisPaymentMethodHasBeenDisabled(PaymentMethodInterface $paymentMethod)
+    {
+        Assert::same(
+            $this->completePage->getValidationErrors(),
+            sprintf(
+                'This payment method %s has been disabled. Please reselect your payment method.',
+                $paymentMethod->getName()
+            )
+        );
+    }
+
+    /**
+     * @Then /^I should be informed that (this product) has been disabled$/
+     */
+    public function iShouldBeInformedThatThisProductHasBeenDisabled(ProductInterface $product)
+    {
+        Assert::same(
+            $this->completePage->getValidationErrors(),
+            sprintf(
+                'This product %s has been disabled.',
+                $product->getName()
+            )
+        );
+    }
+
+    /**
+     * @Then I should be informed that order total has been changed
+     */
+    public function iShouldBeInformedThatOrderTotalHasBeenChanged()
+    {
+        $this->notificationChecker->checkNotification(
+            'Your order total has been changed, check your order information and confirm it again.',
+            NotificationType::failure()
+        );
     }
 }
