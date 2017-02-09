@@ -6,7 +6,13 @@
 {% block title %}{{ parent() }} {{ 'sylius.ui.customer'|trans ~' '~ customer.email }}{% endblock %}
 
 {% block content %}
-    {% include '@SyliusAdmin/Customer/Show/_header.html.twig' %}
+    <div class="ui stackable two column grid">
+        {% include '@SyliusAdmin/Customer/Show/_header.html.twig' %}
+
+        {% set menu = knp_menu_get('sylius.admin.customer.show', [], {'customer': customer}) %}
+        {{ knp_menu_render(menu, {'template': '@SyliusAdmin/Customer/Menu/show.html.twig'}) }}
+    </div>
+
     <div class="ui divider"></div>
     {% include '@SyliusAdmin/Customer/Show/_breadcrumb.html.twig' %}
     {% include '@SyliusAdmin/Customer/Show/_content.html.twig' %}
