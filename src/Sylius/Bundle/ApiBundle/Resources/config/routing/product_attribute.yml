@@ -20,6 +20,10 @@ sylius_api_product_attribute_create:
         _controller: sylius.controller.product_attribute:createAction
         _sylius:
             serialization_version: $version
+            factory:
+                method: createTyped
+                arguments:
+                    type: $type
 
 sylius_api_product_attribute_update:
     path: /{id}
