@@ -22,6 +22,7 @@ sylius_api_product_variant_create:
         _controller: sylius.controller.product_variant:createAction
         _sylius:
             serialization_version: $version
+            section: api
             form: Sylius\Bundle\ApiBundle\Form\Type\ProductVariantType
             factory:
                 method: createForProduct
@@ -35,6 +36,7 @@ sylius_api_product_variant_update:
         _controller: sylius.controller.product_variant:updateAction
         _sylius:
             serialization_version: $version
+            section: api
             form: Sylius\Bundle\ApiBundle\Form\Type\ProductVariantType
             criteria:
                 product: $productId
@@ -47,6 +49,7 @@ sylius_api_product_variant_delete:
         _controller: sylius.controller.product_variant:deleteAction
         _sylius:
             serialization_version: $version
+            section: api
             criteria:
                 product: $productId
                 master: false
@@ -59,6 +62,7 @@ sylius_api_product_variant_show:
         _controller: sylius.controller.product_variant:showAction
         _sylius:
             serialization_version: $version
+            section: api
             serialization_group: [Default, Detailed]
             criteria:
                 product: $productId
