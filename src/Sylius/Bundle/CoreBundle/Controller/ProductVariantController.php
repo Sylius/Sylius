@@ -56,6 +56,10 @@ class ProductVariantController extends ResourceController
             try {
                 $this->manager->flush();
             } catch (OptimisticLockException $exception) {
+                if (!$configuration->isHtmlRequest()) {
+                    return $this->viewHandler->handle($configuration, View::create($form, Response::HTTP_BAD_REQUEST));
+                }
+
                 $this->addFlash('error', 'sylius.product_variant.update_error');
 
                 return $this->redirectHandler->redirectToResource($configuration, $productVariant);

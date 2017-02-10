@@ -414,10 +414,13 @@ EOT;
         /** @var ProductVariantInterface $productVariant */
         $productVariant = $productVariantsData['productVariant1'];
 
+        $version = $productVariantsData['productVariant1']->getVersion();
+
         $data =
 <<<EOT
         {
-            "code": "NEW_MUG_CODE"
+            "code": "NEW_MUG_CODE",
+            "version": $version
         }
 EOT;
         $this->client->request('PUT', $this->getVariantUrl($product, $productVariant), [], [], static::$authorizedHeaderWithContentType, $data);
