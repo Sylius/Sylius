@@ -68,6 +68,9 @@
                 serialization_version: $version
                 serialization_groups: [Detailed]
  ```
+ 
+* Routing definition for Channels has been removed and replaced with auto generated resource routing. Channels are now resolved by code instead of id.
+You can bring back previous configuration by overriding current routing with your definition.
 
 ### Attribute / AttributeBundle
 

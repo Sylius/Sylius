@@ -1,0 +1,39 @@
+{
+    "page": 1,
+    "limit": 10,
+    "pages": 1,
+    "total": 2,
+    "_links": {
+        "self": {
+            "href": "\/api\/v1\/channels\/?page=1&limit=10"
+        },
+        "first": {
+            "href": "\/api\/v1\/channels\/?page=1&limit=10"
+        },
+        "last": {
+            "href": "\/api\/v1\/channels\/?page=1&limit=10"
+        }
+    },
+    "_embedded": {
+        "items": [
+            {
+                "id": @integer@,
+                "code": "WEB",
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/channels\/WEB"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "code": "MOB",
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/channels\/MOB"
+                    }
+                }
+            }
+        ]
+    }
+}

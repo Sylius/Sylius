@@ -1,6 +1,9 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius_api_channel:
+    resource: "@SyliusApiBundle/Resources/config/routing/channel.yml"
+
 sylius_api_product:
     resource: "@SyliusApiBundle/Resources/config/routing/product.yml"
 
@@ -79,13 +82,6 @@ sylius_api_payment_method:
 sylius_api_payment:
     resource: "@SyliusApiBundle/Resources/config/routing/payment.yml"
     prefix: /payments
-
-sylius_api_channel:
-    resource: |
-        alias: sylius.channel
-        section: api
-        serialization_version: $version
-    type: sylius.resource_api
 
 sylius_api_country:
     resource: "@SyliusApiBundle/Resources/config/routing/country.yml"

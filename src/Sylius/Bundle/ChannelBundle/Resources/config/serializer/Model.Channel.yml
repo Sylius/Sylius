@@ -6,7 +6,7 @@ Sylius\Component\Channel\Model\Channel:
             expose: true
             type: integer
             xml_attribute: true
-            groups: [Detailed]
+            groups: [Default, Detailed]
         code:
             expose: true
             type: string
@@ -44,7 +44,7 @@ Sylius\Component\Channel\Model\Channel:
           href:
             route: sylius_api_channel_show
             parameters:
-                id: expr(object.getId())
+                code: expr(object.getCode())
                 version: 1
           exclusion:
             groups: [Default, Detailed, DetailedCart]
