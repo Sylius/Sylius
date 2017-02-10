@@ -2,6 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    form:
+        image:
+            type: 類型
     installer:
         extensions:
             "off": false

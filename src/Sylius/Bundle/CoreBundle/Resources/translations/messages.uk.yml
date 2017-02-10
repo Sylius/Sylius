@@ -35,7 +35,7 @@ sylius:
             theme: Тема
             hostname: Ім'я хоста
         image:
-            code: Код
+            type: Тип
             file: Зображення
         locale:
             code: Код

@@ -3,20 +3,89 @@
 
 sylius:
     channel:
+        base_currency:
+            not_blank: Zadejt základní měnu kanálu.
+        default_locale:
+            not_blank: Zadejte výchozí národní prostředí kanálu.
         contact_email:
             invalid: Tento email je neplatný.
+            max: E-mail nesmí být delší než {{ limit }} znaků.
+            min: E-mail musí být alespoň {{ limit }} znaků.
+    channel_pricing:
+        price:
+            min: Cena musí být alespoň {{ limit }}.
+            not_blank: Prosím vložte cenu.
+    checkout:
+        shipping_method:
+            not_blank: Vyberte prosím způsob dopravy.
     contact:
         email:
             invalid: Tento email je neplatný.
             not_blank: Prosím vložte Váš email.
+        message:
+            not_blank: Prosím vložte Vaši zprávu.
+    currency:
+        enabled:
+            cannot_disable_base: Základní měna nemůže být zakázána.
+    customer:
+        currency_code:
+            not_valid: Kód měny, kterou jste zadali, je neplatný.
+    cart_item:
+        not_available: '%itemName% nemá žádné dostatečné skladové zásoby.'
+    order:
+        currency_code:
+            not_valid: Kód měny, kterou jste zadali, je neplatný.
+        payment_method_eligibility: 'Tato platební metoda %paymentMethodName% byla zakázána. Prosím znovu vyberte způsob platby.'
+        product_eligibility: 'Tento produkt %productName% byl zakázán.'
+        shipping_method_eligibility: 'Produkt se nevejde požadavky na %shippingMethodName% způsob dopravy. Prosím znovu vyberte způsob dopravy.'
     locale:
         code:
             not_blank: Prosím vložte místní (locale) kód.
             unique: Tento locale již existuje.
+        enabled:
+            cannot_disable_base: Základní prostředí nemůže být zakázán.
+    product:
+        variants:
+            all_prices_defined: Musíte nejprve definovat ceny varianty produktu pro nově přiřazené kanály.
+    product_attribute:
+        invalid: Pozice musí být celé číslo.
+    product_image:
+        file:
+            max_size: Obrázek je příliš velký - {{ size }}{{ suffix }}. Maximální povolená velikost je {{ limit }}{{ suffix }}.
+            upload_ini_size: Obrázek je příliš velký. Maximální povolená velikost je {{ limit }}{{ suffix }}.
     product_variant:
         onHand:
             min: Na skladě musí být více než {{ limit }}.
             not_blank: Prosím zadejte sklad.
+            reserved: Na skladě musí být větší, než je počet na jednotky
+        original_price:
+            min: Původní cena nesmí být záporná.
+        weight:
+            min: Hmotnost nemůže být záporná.
+            invalid: Váha musí být číslo.
+        width:
+            min: Šířka nemůže být záporná.
+            invalid: Šířka musí být číslo.
+        height:
+            min: Hmotnost nemůže být záporná.
+            invalid: Váha musí být číslo.
+        depth:
+            min: Hloubka nemůže být záporná.
+            invalid: Hloubka musí být číslo.
+        channel_pricing:
+            all_defined: 'Je nutné definovat cenu pro každý kanál.'
     product_translation:
         short_description:
             max: Stručný popis nesmí být delší než {{ limit }} znaků.
+    taxon_image:
+        file:
+            max_size: Obrázek je příliš velký - {{ size }}{{ suffix }}. Maximální povolená velikost je {{ limit }}{{ suffix }}.
+            upload_ini_size: Obrázek je příliš velký. Maximální povolená velikost je {{ limit }}{{ suffix }}.
+    user:
+        email:
+            unique: Tento e-mail je již používán.
+        username:
+            unique: Toto uživatelské jméno je již použito.
+            not_blank: Zadej své jméno.
+        locale_code:
+            not_blank: Prosím vyberte národní prostředí.

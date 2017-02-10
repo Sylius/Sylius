@@ -3,12 +3,18 @@
 
 sylius:
     channel:
+        base_currency:
+            not_blank: Prosím, zadajte predvolenú menu pre kanál.
         default_locale:
             not_blank: Zadajte predvolený jazyk pre kanál.
         contact_email:
             invalid: Tento e-mail je neplatný.
             max: E-mail nesmie byť dlhší ako {{ limit }} znakov.
             min: E-mail musí byť aspoň {{ limit }} znakov.
+    channel_pricing:
+        price:
+            min: Cena musí byť aspoň {{ limit }}.
+            not_blank: Prosím, zadajte cenu.
     checkout:
         shipping_method:
             not_blank: Prosím zadajte spôsob dopravy.
@@ -16,6 +22,11 @@ sylius:
         email:
             invalid: Tento e-mail je neplatný.
             not_blank: Zadajte Váš e-mail.
+        message:
+            not_blank: Prosím, zadajte správu.
+    currency:
+        enabled:
+            cannot_disable_base: Základná mena sa nedá vypnúť.
     customer:
         currency_code:
             not_valid: Zadaný kód meny nie je neplatný.
@@ -26,9 +37,6 @@ sylius:
         code:
             not_blank: Zadajte kód jazyka.
             unique: Tento jazyk už existuje.
-    product_image:
-        code:
-            unique: Kód obrázku musí byť pre tento produkt unikátny.
     product_variant:
         onHand:
             min: Počet položiek na sklade musí byť viac ako {{ limit }}.
@@ -38,9 +46,6 @@ sylius:
     product_translation:
         short_description:
             max: Stručný popis nesmie byť dlhší ako {{ limit }} znakov.
-    taxon_image:
-        code:
-            unique: Kód obrázku musí byť pre túto kategóriu unikátny.
     user:
         email:
             unique: Tento e-mail sa už používa.

@@ -20,7 +20,7 @@ sylius:
         channel:
             tax_zone_default: Zona d'impostos per defecte
         image:
-            code: Codi
+            type: Tipus
             file: Imatge
         locale:
             code: Codi

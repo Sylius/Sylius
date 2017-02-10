@@ -12,6 +12,8 @@ sylius:
             currency_base: Основна валута
             shipping_methods: Начин на доставка
             payment_methods: Методи на плащане
+        image:
+            type: Тип
         order_filter:
             payment_state: Състояние на плащане
         product_variant:

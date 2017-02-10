@@ -37,7 +37,7 @@ sylius:
             theme: Tematica
             hostname: Hostname
         image:
-            code: Cod
+            type: Tip
             file: Imagine
         locale:
             code: Cod

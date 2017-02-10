@@ -5,6 +5,8 @@ sylius:
     form:
         group:
             name: الاسم
+        image:
+            type: نوع
         product_filter:
             name: الاسم
         user:

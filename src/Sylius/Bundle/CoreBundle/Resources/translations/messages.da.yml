@@ -27,7 +27,7 @@ sylius:
             payment_methods: Betalingsmetoder
             tax_zone_default: Standard moms zone
         image:
-            code: Kode
+            type: Type
             file: Billede
         locale:
             code: Kode

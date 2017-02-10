@@ -44,10 +44,6 @@ sylius:
     product_attribute:
         invalid: ตำแหน่งต้องเป็นจำนวนเต็ม
     product_image:
-        code:
-            not_blank: กรุณาป้อนรหัสรูปภาพ
-            regex: รหัสภาพต้องประกอบด้วยตัวอักษร ตัวเลข เส้นประ และขีดเส้นใต้เท่านั้น
-            unique: รหัสภาพต้องไม่ซ้ำกันภายในสินค้านี้
         file:
             max_size: ภาพใหญ่เกินไป - {{ size }}{{ suffix }} ขนาดสูงสุดคือ {{ limit }}{{ suffix }}
             upload_ini_size: ภาพใหญ่เกินไป ขนาดสูงสุดคือ {{ limit }}{{ suffix }}
@@ -74,10 +70,6 @@ sylius:
         short_description:
             max: คำอธิบายสั้น ต้องมีความยาวไม่เกิน {{ limit }} ตัวอักษร
     taxon_image:
-        code:
-            not_blank: กรุณาป้อนรหัสรูปภาพ
-            regex: รหัสภาพต้องประกอบด้วยตัวอักษร ตัวเลข เส้นประ และขีดเส้นใต้เท่านั้น
-            unique: รหัสภาพต้องไม่ซ้ำกันภายในหมวดหมู่สินค้านี้
         file:
             max_size: ภาพใหญ่เกินไป - {{ size }}{{ suffix }} ขนาดสูงสุดคือ {{ limit }}{{ suffix }}
             upload_ini_size: ภาพใหญ่เกินไป ขนาดสูงสุดคือ {{ limit }}{{ suffix }}

@@ -22,7 +22,7 @@ sylius:
         channel:
             tax_zone_default: Προεπιλεγμένη φορολογική ζώνη
         image:
-            code: Κώδικος
+            type: Τύπος
             file: Εικόνα
         locale:
             code: Κώδικος

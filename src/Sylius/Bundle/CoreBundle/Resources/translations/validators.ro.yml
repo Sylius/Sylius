@@ -32,13 +32,7 @@ sylius:
             cannot_disable_base: Setările regionale de bază nu pot fi dezactivate.
     product_attribute:
         invalid: Poziţia trebuie să fie un număr întreg.
-    product_image:
-        code:
-            not_blank: Vă rugăm să introduceţi un cod de imagine.
     product_variant:
         onHand:
             min: Stocul curent trebuie să fie mai mare decât {{ limit }}.
             not_blank: Vă rugăm să introduceţi stocul curent.
-    taxon_image:
-        code:
-            not_blank: Vă rugăm să introduceţi un cod de imagine.

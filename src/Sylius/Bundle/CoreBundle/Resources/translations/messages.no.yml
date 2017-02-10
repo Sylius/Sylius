@@ -27,7 +27,7 @@ sylius:
             payment_methods: Betalingsmetoder
             tax_zone_default: Standard skattesone
         image:
-            code: Kode
+            type: Type
             file: Bilde
         locale:
             code: Kode

@@ -34,7 +34,6 @@ sylius:
             theme: Tema
             hostname: Emri i hostit
         image:
-            code: Kodi
             file: Imazhi
         locale:
             code: Kodi

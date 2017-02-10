@@ -35,7 +35,7 @@ sylius:
             theme: Aparência
             hostname: Nome do servidor
         image:
-            code: Código
+            type: Tipo
             file: Imagem
         locale:
             code: Código

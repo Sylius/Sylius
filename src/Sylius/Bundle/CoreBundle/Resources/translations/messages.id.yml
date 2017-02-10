@@ -22,7 +22,7 @@ sylius:
         channel:
             tax_zone_default: Standar Zona Pajak
         image:
-            code: Kode
+            type: Jenis
             file: Gambar
         locale:
             code: Kode

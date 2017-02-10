@@ -25,7 +25,6 @@ sylius:
             theme: テーマ
             hostname: ホスト名
         image:
-            code: コード
             file: 画像
         locale:
             code: コード

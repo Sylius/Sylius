@@ -3,6 +3,8 @@
 
 sylius:
     form:
+        image:
+            type: Вид
         attribute:
             product_attribute_value:
                 value: Вредност

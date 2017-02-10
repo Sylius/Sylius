@@ -27,7 +27,7 @@ sylius:
             payment_methods: Метады аплаты
             tax_zone_default: Галоўная падатковая зона
         image:
-            code: Код
+            type: Тып
             file: малюнак
         locale:
             code: Код
