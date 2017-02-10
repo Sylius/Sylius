@@ -14,7 +14,7 @@ namespace Sylius\Bundle\AdminBundle\Menu;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
-use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
+use Sylius\Bundle\AdminBundle\Event\OrderShowMenuBuilderEvent;
 use Sylius\Component\Order\OrderTransitions;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -94,7 +94,10 @@ final class OrderShowMenuBuilder
             ;
         }
 
-        $this->eventDispatcher->dispatch(self::EVENT_NAME, new MenuBuilderEvent($this->factory, $menu));
+        $this->eventDispatcher->dispatch(
+            self::EVENT_NAME,
+            new OrderShowMenuBuilderEvent($this->factory, $menu, $order, $stateMachine)
+        );
 
         return $menu;
     }
