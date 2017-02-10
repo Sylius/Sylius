@@ -15,7 +15,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\OrderBundle\Remover\ExpiredCartsRemover;
-use Sylius\Bundle\OrderBundle\SyliusCartsRemoveEvents;
+use Sylius\Bundle\OrderBundle\SyliusExpiredCartsEvents;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Remover\ExpiredCartsRemoverInterface;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface;
@@ -54,7 +54,7 @@ final class ExpiredCartsRemoverSpec extends ObjectBehavior
         ]);
 
         $eventDispatcher
-            ->dispatch(SyliusCartsRemoveEvents::CARTS_PRE_REMOVE, Argument::any())
+            ->dispatch(SyliusExpiredCartsEvents::PRE_REMOVE, Argument::any())
             ->shouldBeCalled()
         ;
 
@@ -63,7 +63,7 @@ final class ExpiredCartsRemoverSpec extends ObjectBehavior
         $orderManager->flush();
 
         $eventDispatcher
-            ->dispatch(SyliusCartsRemoveEvents::CARTS_POST_REMOVE, Argument::any())
+            ->dispatch(SyliusExpiredCartsEvents::POST_REMOVE, Argument::any())
             ->shouldBeCalled()
         ;
 
