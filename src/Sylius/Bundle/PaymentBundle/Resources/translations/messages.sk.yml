@@ -32,3 +32,4 @@ sylius:
             gateway: Brána
             instructions: Inštrukcie
             name: Názov
+            position: Pozícia

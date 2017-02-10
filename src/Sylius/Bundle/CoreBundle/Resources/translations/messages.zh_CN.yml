@@ -37,7 +37,7 @@ sylius:
             theme: 主题
             hostname: 主机名
         image:
-            code: 代码
+            type: 类型
             file: 图像
         locale:
             code: 代码

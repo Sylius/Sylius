@@ -47,10 +47,6 @@ sylius:
     product_attribute:
         invalid: Posição deve ser um número inteiro.
     product_image:
-        code:
-            not_blank: Por favor, insira um código de imagem.
-            regex: Código da imagem somente pode ser composto por letras, números, hifens e traços.
-            unique: Código de imagem deve ser exclusivo dentro deste produto.
         file:
             max_size: A imagem é muito grande - {{ size }}{{ suffix }}. Máximo permitido tamanho é {{ limit }}{{ suffix }}.
             upload_ini_size: A imagem é muito grande. Máximo permitido tamanho é {{ limit }}{{ suffix }}.
@@ -78,10 +74,6 @@ sylius:
         short_description:
             max: Breve descrição não pode ser maior que {{ limit }} caracteres.
     taxon_image:
-        code:
-            not_blank: Por favor, insira um código de imagem.
-            regex: Código da imagem somente pode ser composto por letras, números, hifens e traços.
-            unique: Código de imagem deve ser exclusivo dentro desta categoria.
         file:
             max_size: A imagem é muito grande - {{ size }}{{ suffix }}. Máximo permitido tamanho é {{ limit }}{{ suffix }}.
             upload_ini_size: A imagem é muito grande. Máximo permitido tamanho é {{ limit }}{{ suffix }}.

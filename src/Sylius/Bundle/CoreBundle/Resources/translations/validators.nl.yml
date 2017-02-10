@@ -42,10 +42,6 @@ sylius:
     product_attribute:
         invalid: Positie moet een geheel getal zijn.
     product_image:
-        code:
-            not_blank: Voer een code voor de afbeelding in.
-            regex: Afbeeldingscode kan alleen bestaan uit letters, cijfers, streepjes en liggende streepjes.
-            unique: Afbeelding code moet uniek zijn voor dit product.
         file:
             max_size: De afbeelding is te groot - {{ size }}{{ suffix }}. Maximaal toegestane grootte is {{ limit }}{{ suffix }}.
             upload_ini_size: Het beeld is te groot. Maximaal toegestane grootte is {{ limit }}{{ suffix }}.
@@ -72,10 +68,6 @@ sylius:
         short_description:
             max: Korte omschrijving mag niet meer dan {{ limit }} tekens bevatten.
     taxon_image:
-        code:
-            not_blank: Voer een code voor de afbeelding in.
-            regex: Afbeeldingscode kan alleen bestaan uit letters, cijfers, streepjes en liggende streepjes.
-            unique: Afbeeldingscode moet uniek zijn voor dit taxon.
         file:
             max_size: De afbeelding is te groot - {{ size }}{{ suffix }}. Maximaal toegestane grootte is {{ limit }}{{ suffix }}.
             upload_ini_size: Het beeld is te groot. Maximaal toegestane grootte is {{ limit }}{{ suffix }}.

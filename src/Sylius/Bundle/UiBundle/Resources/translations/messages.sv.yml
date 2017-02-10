@@ -119,7 +119,7 @@ sylius:
         charges_and_taxes: 'Avgifter och skatter'
         cheapest_first: 'Lägst pris först'
         checkbox: 'Kryssruta'
-        checking_out_as: 'Kolla in som'
+        checking_out_as: 'Beställer som'
         checkout: 'Kassa'
         choose_channel: 'Välj kanal'
         choose_file: 'Välj fil'

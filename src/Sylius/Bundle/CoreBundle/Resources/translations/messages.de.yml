@@ -38,7 +38,7 @@ sylius:
             theme: Template
             hostname: Server-Name
         image:
-            code: Code
+            type: Typ
             file: Foto
         locale:
             code: Code

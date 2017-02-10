@@ -21,8 +21,10 @@ sylius:
         shipping_calculator:
             flat_rate_configuration:
                 label: Paušálna sadzba za zásielku
+                amount: Suma
             per_unit_rate_configuration:
                 label: Paušálna suma za položku
+                amount: Suma
         shipping_category:
             description: Popis
             name: Názov
@@ -37,3 +39,4 @@ sylius:
             name: Názov
             tax_category: Daňová kategória
             translations: Preklady
+            position: Pozícia

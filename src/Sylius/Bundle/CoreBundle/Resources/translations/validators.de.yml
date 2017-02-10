@@ -47,10 +47,6 @@ sylius:
     product_attribute:
         invalid: Position muss eine Ganzzahl sein.
     product_image:
-        code:
-            not_blank: Bitte geben Sie einen Bild-Code an.
-            regex: Kürzel der Abbildung darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
-            unique: Code der Abbildung muss innerhalb dieses Produktes einzigartig sein.
         file:
             max_size: Das Bild ist zu groß - {{ size }}{{ suffix }}. Maximal zulässige Größe {{ limit }}{{ suffix }}.
             upload_ini_size: Das Bild ist zu groß. Maximal zulässige Größe {{ limit }}{{ suffix }}.
@@ -79,10 +75,6 @@ sylius:
         short_description:
             max: Kurzbeschreibung darf nicht länger als {{ limit }} Zeichen sein.
     taxon_image:
-        code:
-            not_blank: Bitte geben Sie einen Bild-Code an.
-            regex: Kürzel der Abbildung darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
-            unique: Bild-Code muss innerhalb dieser Produktgruppe eindeutig sein.
         file:
             max_size: Das Bild ist zu groß - {{ size }}{{ suffix }}. Maximal zulässige Größe {{ limit }}{{ suffix }}.
             upload_ini_size: Das Bild ist zu groß. Maximal zulässige Größe {{ limit }}{{ suffix }}.

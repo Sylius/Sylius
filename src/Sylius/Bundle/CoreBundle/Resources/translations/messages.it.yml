@@ -38,7 +38,7 @@ sylius:
             theme: Tema
             hostname: Hostname
         image:
-            code: Codice
+            type: Tipo
             file: Immagine
         locale:
             code: Codice

@@ -29,7 +29,7 @@ sylius:
             payment_methods: Načini plaćanja
             tax_zone_default: Zadana porezna zona
         image:
-            code: ISO kod
+            type: Vrsta
             file: Fotografija
         locale:
             code: ISO kod

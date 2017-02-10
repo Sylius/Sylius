@@ -9,6 +9,7 @@ sylius:
             max_length: Název atributu nesmí být delší než 1 znak. |Název atributu nesmí být delší než {{ limit }} znaků.
         code:
             not_blank: Prosím zadejte kód vlastnosti.
+            regex: Kód země může tvořit pouze písmena, číslice, pomlčky a podtržítka.
             unique: Tento kód je již používán.
         presentation:
             not_blank: Prosím zadejte vlastnost prezentace.

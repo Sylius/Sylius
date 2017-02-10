@@ -35,7 +35,7 @@ sylius:
             tax_zone_default: Numatyta mokesčių zona
             theme: Tema
         image:
-            code: Kodas
+            type: Tipas
             file: Paveikslėlis
         locale:
             code: Kodas

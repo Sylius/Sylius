@@ -33,7 +33,7 @@ sylius:
             theme: Tema
             hostname: Ime gostitelja
         image:
-            code: Koda
+            type: Vrsta
             file: Slika
         locale:
             code: Koda

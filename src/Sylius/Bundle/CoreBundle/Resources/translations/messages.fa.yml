@@ -37,7 +37,7 @@ sylius:
             theme: قالب
             hostname: نام میزبان
         image:
-            code: نام انگلیسی
+            type: نوع
             file: عکس
         locale:
             code: نام انگلیسی

@@ -19,6 +19,8 @@ sylius:
         promotion_action:
             add_product_configuration:
                 product: Produkt
+        promotion_coupon:
+            per_customer_usage_limit: Limit pre použitie jedným zákazníkom
         group:
             name: Názov
             roles: Role
@@ -26,6 +28,7 @@ sylius:
             taxonomies: Triedenia
             locale_default: Predvolený jazyk
             locales: Jazyky
+            contact_email: Kontaktný e-mail
             currency_base: Základná mena
             currencies: Meny
             shipping_methods: Spôsoby doručenia
@@ -35,7 +38,7 @@ sylius:
             theme: Téma
             hostname: Hostname
         image:
-            code: Kód
+            type: Typ
             file: Obrázok
         locale:
             code: Kód
@@ -117,11 +120,23 @@ sylius:
             type: Typ priradenia
         product_association_type:
             name: Názov
+        promotion_filter:
+            products: Filter produktov
+            taxons: Filter kategórií
         promotion_rule:
+            customer_group:
+                group: Skupina zákazníkov
+            has_taxon:
+                taxons: Kategórie
+            product:
+                products: Produkty
             total_of_items_from_taxon:
                 taxon: Kategória
+                amount: Suma
         payment_method:
             channels: Kanály
+        product_attribute:
+            position: Pozícia
         zone:
             scopes:
                 shipping: Doručenie

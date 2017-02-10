@@ -35,7 +35,7 @@ sylius:
             theme: Téma
             hostname: Hoszt neve
         image:
-            code: Kód
+            type: Típus
             file: Kép
         locale:
             code: Kód

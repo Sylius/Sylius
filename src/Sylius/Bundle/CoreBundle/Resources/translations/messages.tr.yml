@@ -30,7 +30,7 @@ sylius:
             payment_methods: Ödeme Yöntemleri
             tax_zone_default: Varsayılan vergi bölgesi
         image:
-            code: Kod
+            type: Türü
             file: Resim
         locale:
             code: Kod

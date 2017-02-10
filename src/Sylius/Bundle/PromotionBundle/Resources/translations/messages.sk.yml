@@ -17,15 +17,22 @@ sylius:
             starts_at: Začiatok
             usage_limit: Limit použitia
         promotion_action:
+            fixed_discount_configuration:
+                amount: Suma
             type: Typ
         promotion_coupon:
             usage_limit: Limit použitia
         promotion_coupon_generator_instruction:
+            amount: Suma
             usage_limit: Limit použitia
         promotion_rule:
             cart_quantity_configuration:
                 count: Počet
                 equal: Rovná sa
+            contains_product_configuration:
+                variants: Produkty
+            item_total_configuration:
+                amount: Suma
             shipping_country_configuration:
                 country: Štát
             type: Typ

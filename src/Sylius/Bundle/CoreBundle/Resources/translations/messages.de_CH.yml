@@ -20,7 +20,7 @@ sylius:
         channel:
             tax_zone_default: Standard Steuerzone
         image:
-            code: Code
+            type: Typ
             file: Bild
         locale:
             code: Code
