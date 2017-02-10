@@ -12,6 +12,7 @@
 namespace Sylius\Tests\Controller;
 
 use Lakion\ApiTestCase\JsonApiTestCase;
+use Sylius\Component\Addressing\Model\CountryInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -113,8 +114,9 @@ EOT;
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $countries = $this->loadFixturesFromFile('resources/countries.yml');
+        $country = $countries['country_NL'];
 
-        $this->client->request('GET', '/api/v1/countries/'.$countries['country_NL']->getCode(), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', $this->getCountryUrl($country), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'country/show_response', Response::HTTP_OK);
@@ -152,15 +154,25 @@ EOT;
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $countries = $this->loadFixturesFromFile('resources/countries.yml');
+        $country = $countries['country_NL'];
 
-        $this->client->request('DELETE', '/api/v1/countries/' . $countries['country_NL']->getCode(), [], [], static::$authorizedHeaderWithContentType, []);
+        $this->client->request('DELETE', $this->getCountryUrl($country), [], [], static::$authorizedHeaderWithContentType, []);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
 
-        $this->client->request('GET', '/api/v1/countries/' . $countries['country_NL']->getCode(), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', $this->getCountryUrl($country), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
+    }
+
+    /**
+     * @param CountryInterface $country
+     * @return string
+     */
+    private function getCountryUrl(CountryInterface $country)
+    {
+        return '/api/v1/countries/' . $country->getCode();
     }
 }

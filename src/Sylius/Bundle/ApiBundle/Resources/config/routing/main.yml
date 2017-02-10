@@ -4,6 +4,9 @@
 sylius_api_channel:
     resource: "@SyliusApiBundle/Resources/config/routing/channel.yml"
 
+sylius_api_country:
+    resource: "@SyliusApiBundle/Resources/config/routing/country.yml"
+
 sylius_api_product:
     resource: "@SyliusApiBundle/Resources/config/routing/product.yml"
 
@@ -82,10 +85,6 @@ sylius_api_payment_method:
 sylius_api_payment:
     resource: "@SyliusApiBundle/Resources/config/routing/payment.yml"
     prefix: /payments
-
-sylius_api_country:
-    resource: "@SyliusApiBundle/Resources/config/routing/country.yml"
-    prefix: /countries
 
 sylius_api_exchange_rate:
     resource: "@SyliusApiBundle/Resources/config/routing/exchange_rate.yml"
