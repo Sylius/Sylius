@@ -12,7 +12,7 @@
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\EmailManager\ShipmentEmailManager;
+use Sylius\Bundle\CoreBundle\EmailManager\ShipmentEmailManagerInterface;
 use Sylius\Bundle\CoreBundle\EventListener\ShipmentShipListener;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -22,7 +22,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  */
 final class ShipmentShipListenerSpec extends ObjectBehavior
 {
-    function let(ShipmentEmailManager $shipmentEmailManager)
+    function let(ShipmentEmailManagerInterface $shipmentEmailManager)
     {
         $this->beConstructedWith($shipmentEmailManager);
     }
@@ -33,7 +33,7 @@ final class ShipmentShipListenerSpec extends ObjectBehavior
     }
 
     function it_sends_a_confirmation_email(
-        ShipmentEmailManager $shipmentEmailManager,
+        ShipmentEmailManagerInterface $shipmentEmailManager,
         GenericEvent $event,
         ShipmentInterface $shipment
     ) {

@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Sylius\Bundle\CoreBundle\EmailManager\OrderEmailManager;
+use Sylius\Bundle\CoreBundle\EmailManager\OrderEmailManagerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Webmozart\Assert\Assert;
@@ -22,14 +22,14 @@ use Webmozart\Assert\Assert;
 final class OrderCompleteListener
 {
     /**
-     * @var OrderEmailManager
+     * @var OrderEmailManagerInterface
      */
     private $orderEmailManager;
 
     /**
-     * @param OrderEmailManager $orderEmailManager
+     * @param OrderEmailManagerInterface $orderEmailManager
      */
-    public function __construct(OrderEmailManager $orderEmailManager)
+    public function __construct(OrderEmailManagerInterface $orderEmailManager)
     {
         $this->orderEmailManager = $orderEmailManager;
     }

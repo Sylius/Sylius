@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Sylius\Bundle\CoreBundle\EmailManager\ShipmentEmailManager;
+use Sylius\Bundle\CoreBundle\EmailManager\ShipmentEmailManagerInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Webmozart\Assert\Assert;
@@ -22,14 +22,14 @@ use Webmozart\Assert\Assert;
 final class ShipmentShipListener
 {
     /**
-     * @var ShipmentEmailManager
+     * @var ShipmentEmailManagerInterface
      */
     private $shipmentEmailManager;
 
     /**
-     * @param ShipmentEmailManager $shipmentEmailManager
+     * @param ShipmentEmailManagerInterface $shipmentEmailManager
      */
-    public function __construct(ShipmentEmailManager $shipmentEmailManager)
+    public function __construct(ShipmentEmailManagerInterface $shipmentEmailManager)
     {
         $this->shipmentEmailManager = $shipmentEmailManager;
     }

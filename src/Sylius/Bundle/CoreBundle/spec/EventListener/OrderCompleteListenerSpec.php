@@ -12,7 +12,7 @@
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\EmailManager\OrderEmailManager;
+use Sylius\Bundle\CoreBundle\EmailManager\OrderEmailManagerInterface;
 use Sylius\Bundle\CoreBundle\EventListener\OrderCompleteListener;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -22,7 +22,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  */
 final class OrderCompleteListenerSpec extends ObjectBehavior
 {
-    function let(OrderEmailManager $orderEmailManager)
+    function let(OrderEmailManagerInterface $orderEmailManager)
     {
         $this->beConstructedWith($orderEmailManager);
     }
@@ -33,7 +33,7 @@ final class OrderCompleteListenerSpec extends ObjectBehavior
     }
 
     function it_sends_a_confirmation_email(
-        OrderEmailManager $orderEmailManager,
+        OrderEmailManagerInterface $orderEmailManager,
         GenericEvent $event,
         OrderInterface $order
     ) {
