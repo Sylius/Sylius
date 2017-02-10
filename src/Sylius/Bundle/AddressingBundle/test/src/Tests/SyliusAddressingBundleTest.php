@@ -17,12 +17,12 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * @author Magdalena Banasiak <magdalena.banasiak@gmail.com>
  */
-class SyliusAdressingBundleTest extends WebTestCase
+class SyliusAddressingBundleTest extends WebTestCase
 {
     /**
      * @test
      */
-    public function its_services_are_intitializable()
+    public function its_services_are_initializable()
     {
         /** @var ContainerInterface $container */
         $container = self::createClient()->getContainer();
@@ -30,7 +30,7 @@ class SyliusAdressingBundleTest extends WebTestCase
         $services = $container->getServiceIds();
 
         $services = array_filter($services, function ($serviceId) {
-            return false !== strpos($serviceId, 'sylius');
+            return 0 === strpos($serviceId, 'sylius.');
         });
 
         foreach ($services as $id) {
