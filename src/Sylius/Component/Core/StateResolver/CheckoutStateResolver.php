@@ -13,9 +13,11 @@ namespace Sylius\Component\Core\StateResolver;
 
 use SM\Factory\FactoryInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\StateResolver\StateResolverInterface;
+use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
@@ -28,11 +30,20 @@ final class CheckoutStateResolver implements StateResolverInterface
     private $stateMachineFactory;
 
     /**
-     * @param FactoryInterface $stateMachineFactory
+     * @var ShippingMethodsResolverInterface
      */
-    public function __construct(FactoryInterface $stateMachineFactory)
-    {
+    private $shippingMethodsResolver;
+
+    /**
+     * @param FactoryInterface $stateMachineFactory
+     * @param ShippingMethodsResolverInterface $shippingMethodsResolver
+     */
+    public function __construct(
+        FactoryInterface $stateMachineFactory,
+        ShippingMethodsResolverInterface $shippingMethodsResolver
+    ) {
         $this->stateMachineFactory = $stateMachineFactory;
+        $this->shippingMethodsResolver = $shippingMethodsResolver;
     }
 
     /**
@@ -42,7 +53,10 @@ final class CheckoutStateResolver implements StateResolverInterface
     {
         $stateMachine = $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH);
 
-        if (!$this->isShippingRequired($order) && $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)) {
+        if (
+            (!$this->isShippingRequired($order) || $this->isOnlyOneShippingMethodAvailableForEachShipment($order))
+            && $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)
+        ) {
             $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING);
         }
 
@@ -67,5 +81,26 @@ final class CheckoutStateResolver implements StateResolverInterface
         }
 
         return false;
+    }
+
+    /**
+     * @param OrderInterface $order
+     *
+     * @return bool
+     */
+    private function isOnlyOneShippingMethodAvailableForEachShipment(OrderInterface $order)
+    {
+        if (!$order->hasShipments()) {
+            return false;
+        }
+
+        /** @var ShipmentInterface $shipment */
+        foreach ($order->getShipments() as $shipment) {
+            if (1 !== count($this->shippingMethodsResolver->getSupportedMethods($shipment))) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

@@ -12,24 +12,26 @@
 namespace spec\Sylius\Component\Core\StateResolver;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use SM\Factory\FactoryInterface;
 use SM\StateMachine\StateMachineInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\StateResolver\CheckoutStateResolver;
-use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\StateResolver\StateResolverInterface;
+use Sylius\Component\Shipping\Model\ShippingMethodInterface;
+use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
 final class CheckoutStateResolverSpec extends ObjectBehavior
 {
-    function let(FactoryInterface $stateMachineFactory)
+    function let(FactoryInterface $stateMachineFactory, ShippingMethodsResolverInterface $shippingMethodsResolver)
     {
-        $this->beConstructedWith($stateMachineFactory);
+        $this->beConstructedWith($stateMachineFactory, $shippingMethodsResolver);
     }
 
     function it_is_initializable()
@@ -60,6 +62,8 @@ final class CheckoutStateResolverSpec extends ObjectBehavior
         $firstProductVariant->isShippingRequired()->willReturn(false);
         $secondProductVariant->isShippingRequired()->willReturn(false);
 
+        $order->hasShipments()->willReturn(false);
+
         $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
 
         $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)->willReturn(true);
@@ -88,6 +92,44 @@ final class CheckoutStateResolverSpec extends ObjectBehavior
 
         $firstProductVariant->isShippingRequired()->willReturn(false);
         $secondProductVariant->isShippingRequired()->willReturn(false);
+
+        $order->hasShipments()->willReturn(false);
+
+        $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
+
+        $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)->willReturn(true);
+        $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)->shouldBeCalled();
+
+        $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)->willReturn(true);
+        $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)->shouldNotBeCalled();
+
+        $this->resolve($order);
+    }
+
+    function it_applies_transition_skip_shipping_if_only_one_shipping_method_is_available_for_each_order_shipment_and_this_transition_is_possible(
+        FactoryInterface $stateMachineFactory,
+        OrderInterface $order,
+        OrderItemInterface $firstOrderItem,
+        OrderItemInterface $secondOrderItem,
+        ProductVariantInterface $firstProductVariant,
+        ProductVariantInterface $secondProductVariant,
+        ShippingMethodInterface $shippingMethod,
+        ShippingMethodsResolverInterface $shippingMethodsResolver,
+        ShipmentInterface $shipment,
+        StateMachineInterface $stateMachine
+    ) {
+        $order->getItems()->willReturn([$firstOrderItem, $secondOrderItem]);
+        $order->getTotal()->willReturn(10);
+
+        $firstOrderItem->getVariant()->willReturn($firstProductVariant);
+        $secondOrderItem->getVariant()->willReturn($secondProductVariant);
+
+        $firstProductVariant->isShippingRequired()->willReturn(false);
+        $secondProductVariant->isShippingRequired()->willReturn(false);
+
+        $order->hasShipments()->willReturn(true);
+        $order->getShipments()->willReturn([$shipment]);
+        $shippingMethodsResolver->getSupportedMethods($shipment)->willReturn([$shippingMethod]);
 
         $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
 
@@ -118,6 +160,8 @@ final class CheckoutStateResolverSpec extends ObjectBehavior
         $firstProductVariant->isShippingRequired()->willReturn(false);
         $secondProductVariant->isShippingRequired()->willReturn(true);
 
+        $order->hasShipments()->willReturn(false);
+
         $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
 
         $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)->willReturn(true);
@@ -147,6 +191,8 @@ final class CheckoutStateResolverSpec extends ObjectBehavior
         $firstProductVariant->isShippingRequired()->willReturn(false);
         $secondProductVariant->isShippingRequired()->willReturn(true);
 
+        $order->hasShipments()->willReturn(false);
+
         $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
 
         $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)->willReturn(true);
@@ -170,6 +216,8 @@ final class CheckoutStateResolverSpec extends ObjectBehavior
 
         $firstOrderItem->getVariant()->willReturn($firstProductVariant);
         $firstProductVariant->isShippingRequired()->willReturn(true);
+
+        $order->hasShipments()->willReturn(false);
 
         $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
 
@@ -195,6 +243,8 @@ final class CheckoutStateResolverSpec extends ObjectBehavior
         $firstOrderItem->getVariant()->willReturn($firstProductVariant);
         $firstProductVariant->isShippingRequired()->willReturn(true);
 
+        $order->hasShipments()->willReturn(false);
+
         $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
 
         $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)->willReturn(true);
@@ -218,6 +268,8 @@ final class CheckoutStateResolverSpec extends ObjectBehavior
 
         $firstOrderItem->getVariant()->willReturn($firstProductVariant);
         $firstProductVariant->isShippingRequired()->willReturn(true);
+
+        $order->hasShipments()->willReturn(false);
 
         $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
 
