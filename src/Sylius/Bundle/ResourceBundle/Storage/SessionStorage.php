@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ResourceBundle\Storage;
 
+use Sylius\Component\Resource\Storage\StorageInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**

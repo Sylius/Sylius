@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ResourceBundle\Storage;
+namespace Sylius\Component\Resource\Storage;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>

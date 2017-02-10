@@ -46,7 +46,6 @@ final class SyliusCoreBundle extends AbstractResourceBundle
 
         $container->addCompilerPass(new LazyCacheWarmupPass());
         $container->addCompilerPass(new RegisterTaxCalculationStrategiesPass());
-        $container->addCompilerPass(new RegisterCurrencyHandlersPass());
         $container->addCompilerPass(new RegisterLocaleHandlersPass());
         $container->addCompilerPass(new TranslatableEntityLocalePass());
     }

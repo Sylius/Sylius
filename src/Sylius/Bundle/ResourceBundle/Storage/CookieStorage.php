@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ResourceBundle\Storage;
 
+use Sylius\Component\Resource\Storage\StorageInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\ParameterBag;
@@ -73,8 +74,7 @@ final class CookieStorage implements StorageInterface, EventSubscriberInterface
         }
 
         $response = $event->getResponse();
-        foreach ($this->responseCookies as $name => $value)
-        {
+        foreach ($this->responseCookies as $name => $value) {
             $response->headers->setCookie(new Cookie($name, $value));
         }
 

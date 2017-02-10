@@ -12,7 +12,7 @@
 namespace spec\Sylius\Bundle\ResourceBundle\Storage;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ResourceBundle\Storage\StorageInterface;
+use Sylius\Component\Resource\Storage\StorageInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 

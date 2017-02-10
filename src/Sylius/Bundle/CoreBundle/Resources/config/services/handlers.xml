@@ -27,15 +27,6 @@
             <tag name="sylius.locale.change_handler" />
         </service>
 
-        <service id="sylius.handler.currency_change.composite" class="Sylius\Component\Core\Currency\Handler\CompositeCurrencyChangeHandler" public="false" />
-
-        <service id="sylius.handler.currency_change.shop" class="Sylius\Bundle\CoreBundle\Handler\ShopCurrencyChangeHandler">
-            <argument type="service" id="sylius.storage.currency" />
-            <argument type="service" id="sylius.context.channel.composite" />
-            <argument type="service" id="event_dispatcher" />
-            <tag name="sylius.currency.change_handler" />
-        </service>
-
         <service id="sylius.handler.shop_user_logout" class="Sylius\Bundle\CoreBundle\EventListener\ShopUserLogoutHandler">
             <argument type="service" id="security.http_utils" />
             <argument>/</argument>

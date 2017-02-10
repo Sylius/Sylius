@@ -44,11 +44,6 @@ final class SyliusMoneyExtension extends Extension implements PrependExtensionIn
             return;
         }
 
-        $config = $container->getExtensionConfig($this->getAlias());
-        $config = $this->processConfiguration($this->getConfiguration([], $container), $config);
-
-        $container->prependExtensionConfig('sylius_currency', ['currency' => $config['currency']]);
-
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services/integrations/currency.xml');
     }
