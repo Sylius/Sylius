@@ -11,14 +11,14 @@
 {% set order_requires_payment = (order.total != 0) %}
 {% set order_requires_shipping = (order.shipments|length > 0) %}
 
-{% set stepsCount = 'four' %}
+{% set steps_count = 'four' %}
 {% if not order_requires_payment and not order_requires_shipping %}
-    {% set stepsCount = 'two' %}
+    {% set steps_count = 'two' %}
 {% elseif not order_requires_payment or not order_requires_shipping %}
-    {% set stepsCount = 'three' %}
+    {% set steps_count = 'three' %}
 {% endif %}
 
-<div class="ui {{ stepsCount }} steps">
+<div class="ui {{ steps_count }} steps">
     <a class="{{ steps['address'] }} step" href="{{ path('sylius_shop_checkout_address') }}">
         <i class="map icon"></i>
         <div class="content">

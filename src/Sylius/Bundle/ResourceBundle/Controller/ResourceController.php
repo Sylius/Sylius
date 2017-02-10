@@ -315,13 +315,17 @@ class ResourceController extends Controller
             }
 
             $this->manager->flush();
-            $this->eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource);
+            $postEvent = $this->eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource);
 
             if (!$configuration->isHtmlRequest()) {
                 return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
             }
 
             $this->flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource);
+
+            if ($postEvent->hasResponse()) {
+                return $postEvent->getResponse();
+            }
 
             return $this->redirectHandler->redirectToResource($configuration, $resource);
         }

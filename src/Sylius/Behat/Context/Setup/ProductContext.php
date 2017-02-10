@@ -338,7 +338,7 @@ final class ProductContext implements Context
         $price,
         ChannelInterface $channel = null
     ) {
-        return $this->createProductVariant(
+        $this->createProductVariant(
             $product,
             $productVariantName,
             $price,
