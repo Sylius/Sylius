@@ -11,10 +11,10 @@
 
 namespace Sylius\Bundle\OrderBundle;
 
-final class SyliusCartsRemoveEvents
+final class SyliusExpiredCartsEvents
 {
-    const CARTS_PRE_REMOVE = 'sylius.carts.pre_remove';
-    const CARTS_POST_REMOVE = 'sylius.carts.post_remove';
+    const PRE_REMOVE = 'sylius.carts.pre_remove';
+    const POST_REMOVE = 'sylius.carts.post_remove';
 
     private function __construct()
     {
