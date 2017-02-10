@@ -14,6 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Controller;
 use Doctrine\ORM\OptimisticLockException;
 use FOS\RestBundle\View\View;
 use Sylius\Bundle\OrderBundle\Controller\OrderController as BaseOrderController;
+use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -39,6 +40,7 @@ class OrderController extends BaseOrderController
         if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH'], true) && $form->handleRequest($request)->isValid()) {
             $order = $form->getData();
 
+            /** @var ResourceControllerEvent $event */
             $event = $this->eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $order);
 
             if ($event->isStopped() && !$configuration->isHtmlRequest()) {
@@ -46,6 +48,10 @@ class OrderController extends BaseOrderController
             }
             if ($event->isStopped()) {
                 $this->flashHelper->addFlashFromEvent($configuration, $event);
+
+                if ($event->hasResponse()) {
+                    return $event->getResponse();
+                }
 
                 return $this->redirectHandler->redirectToResource($configuration, $order);
             }
