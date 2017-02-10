@@ -5,24 +5,28 @@ These endpoints will allow you to easily manage product variants. Base URI is `/
 
 When you get a collection of resources, "Default" serialization group will be used and the following fields will be exposed:
 
-+-------------------+---------------------------------------------------------------------------+
-| Field             | Description                                                               |
-+===================+===========================================================================+
-| id                | Id of product variant                                                     |
-+-------------------+---------------------------------------------------------------------------+
-| code              | Unique product variant's identifier                                       |
-+-------------------+---------------------------------------------------------------------------+
-| position          | Position of variant in product                                            |
-|                   | (each product can have many variants and they can be ordered by position) |
-+-------------------+---------------------------------------------------------------------------+
-| tracked           | The information if the variant is tracked by inventory                    |
-+-------------------+---------------------------------------------------------------------------+
-| channel_pricings  | Collection of prices defined for all enabled channels                     |
-+-------------------+---------------------------------------------------------------------------+
-| tax_category      | Tax category to which variant is assigned                                 |
-+-------------------+---------------------------------------------------------------------------+
-| shipping_category | Shipping category to which variant is assigned                            |
-+-------------------+---------------------------------------------------------------------------+
++-------------------+------------------------------------------------------------------------------------------------+
+| Field             | Description                                                                                    |
++===================+================================================================================================+
+| id                | Id of product variant                                                                          |
++-------------------+------------------------------------------------------------------------------------------------+
+| code              | Unique product variant's identifier                                                            |
++-------------------+------------------------------------------------------------------------------------------------+
+| position          | Position of variant in product                                                                 |
+|                   | (each product can have many variants and they can be ordered by position)                      |
++-------------------+------------------------------------------------------------------------------------------------+
+| option_values     | Collection of options in which product is available (for example: small, medium and large mug) |
++-------------------+------------------------------------------------------------------------------------------------+
+| translations      | Collection of translations (each contains name in given language)                              |
++-------------------+------------------------------------------------------------------------------------------------+
+| tracked           | The information if the variant is tracked by inventory                                         |
++-------------------+------------------------------------------------------------------------------------------------+
+| channel_pricings  | Collection of prices defined for all enabled channels                                          |
++-------------------+------------------------------------------------------------------------------------------------+
+| tax_category      | Tax category to which variant is assigned                                                      |
++-------------------+------------------------------------------------------------------------------------------------+
+| shipping_category | Shipping category to which variant is assigned                                                 |
++-------------------+------------------------------------------------------------------------------------------------+
 
 If you request more detailed data, you will receive an object with the following fields:
 
@@ -148,22 +152,12 @@ Example Response
                             "name": "blanditiis"
                         }
                     },
-                    "on_hold": 0,
-                    "on_hand": 1,
                     "tracked": false,
                     "channel_pricings": [
                         {
                             "id": 1,
                             "channel": {
-                                "id": 1,
                                 "code": "US_WEB",
-                                "name": "US Web Store",
-                                "hostname": "localhost:8000",
-                                "color": "Sienna",
-                                "created_at": "2017-01-27T11:09:49+0100",
-                                "updated_at": "2017-01-27T11:09:49+0100",
-                                "enabled": true,
-                                "tax_calculation_strategy": "order_items_based",
                                 "_links": {
                                     "self": {
                                         "href": "/api/v1/channels/1"
@@ -199,22 +193,12 @@ Example Response
                             "name": "tenetur"
                         }
                     },
-                    "on_hold": 0,
-                    "on_hand": 0,
                     "tracked": false,
                     "channel_pricings": [
                         {
                             "id": 2,
                             "channel": {
-                                "id": 1,
                                 "code": "US_WEB",
-                                "name": "US Web Store",
-                                "hostname": "localhost:8000",
-                                "color": "Sienna",
-                                "created_at": "2017-01-27T11:09:49+0100",
-                                "updated_at": "2017-01-27T11:09:49+0100",
-                                "enabled": true,
-                                "tax_calculation_strategy": "order_items_based",
                                 "_links": {
                                     "self": {
                                         "href": "/api/v1/channels/1"

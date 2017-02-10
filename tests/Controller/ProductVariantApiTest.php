@@ -70,7 +70,7 @@ final class ProductVariantApiTest extends JsonApiTestCase
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $product_variants_data = $this->loadFixturesFromFile('resources/product_variants.yml');
 
-        $this->client->request('GET', sprintf('/api/v1/products/%s/variants/%s', $product_variants_data['product1']->getId(), $product_variants_data['productVariant2']->getId()), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', sprintf('/api/v1/products/%s/variants/%s', $product_variants_data['product1']->getId(), $product_variants_data['productVariant2']->getCode()), [], [], static::$authorizedHeaderWithAccept);
         $response = $this->client->getResponse();
 
         $this->assertResponse($response, 'product_variant/show_response', Response::HTTP_OK);
@@ -322,12 +322,12 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $product_variants_data = $this->loadFixturesFromFile('resources/product_variants.yml');
 
-        $this->client->request('DELETE', sprintf('/api/v1/products/%s/variants/%s', $product_variants_data['product1']->getId(), $product_variants_data['productVariant1']->getId()), [], [], static::$authorizedHeaderWithContentType, []);
+        $this->client->request('DELETE', sprintf('/api/v1/products/%s/variants/%s', $product_variants_data['product1']->getId(), $product_variants_data['productVariant1']->getCode()), [], [], static::$authorizedHeaderWithContentType, []);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
 
-        $this->client->request('GET', sprintf('/api/v1/products/%s/variants/%s', $product_variants_data['product1']->getId(), $product_variants_data['productVariant1']->getId()), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', sprintf('/api/v1/products/%s/variants/%s', $product_variants_data['product1']->getId(), $product_variants_data['productVariant1']->getCode()), [], [], static::$authorizedHeaderWithAccept);
         $response = $this->client->getResponse();
 
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
@@ -347,7 +347,7 @@ EOT;
             "code": "NEW_MUG_CODE"
         }
 EOT;
-        $this->client->request('PUT', sprintf('/api/v1/products/%s/variants/%s', $product_variants_data['product1']->getId(), $product_variants_data['productVariant1']->getId()), [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('PUT', sprintf('/api/v1/products/%s/variants/%s', $product_variants_data['product1']->getId(), $product_variants_data['productVariant1']->getCode()), [], [], static::$authorizedHeaderWithContentType, $data);
         $response = $this->client->getResponse();
 
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
@@ -374,7 +374,7 @@ EOT;
             }
         }
 EOT;
-        $this->client->request('PATCH', sprintf('/api/v1/products/%s/variants/%s', $product_variants_data['product1']->getId(), $product_variants_data['productVariant1']->getId()), [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('PATCH', sprintf('/api/v1/products/%s/variants/%s', $product_variants_data['product1']->getId(), $product_variants_data['productVariant1']->getCode()), [], [], static::$authorizedHeaderWithContentType, $data);
         $response = $this->client->getResponse();
 
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
@@ -395,12 +395,12 @@ EOT;
             "tracked": false
         }
 EOT;
-        $this->client->request('PATCH', sprintf('/api/v1/products/%s/variants/%s', $product_variants_data['product2']->getId(), $product_variants_data['productVariant21']->getId()), [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('PATCH', sprintf('/api/v1/products/%s/variants/%s', $product_variants_data['product2']->getId(), $product_variants_data['productVariant21']->getCode()), [], [], static::$authorizedHeaderWithContentType, $data);
         $response = $this->client->getResponse();
 
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
 
-        $this->client->request('GET', sprintf('/api/v1/products/%s/variants/%s', $product_variants_data['product2']->getId(), $product_variants_data['productVariant21']->getId()), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', sprintf('/api/v1/products/%s/variants/%s', $product_variants_data['product2']->getId(), $product_variants_data['productVariant21']->getCode()), [], [], static::$authorizedHeaderWithAccept);
         $response = $this->client->getResponse();
 
         $this->assertResponse($response, 'product_variant/not_changed_on_hand_response', Response::HTTP_OK);

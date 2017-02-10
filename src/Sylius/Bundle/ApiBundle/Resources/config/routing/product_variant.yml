@@ -11,7 +11,7 @@ sylius_api_product_variant_index:
             serialization_version: $version
             grid: sylius_api_product_variant
             section: api
-            serialization_group: [Default]
+            serialization_groups: [Default]
             criteria:
                 product: $productId
 
@@ -21,6 +21,7 @@ sylius_api_product_variant_create:
     defaults:
         _controller: sylius.controller.product_variant:createAction
         _sylius:
+            serialization_groups: [Default, Detailed]
             serialization_version: $version
             section: api
             form: Sylius\Bundle\ApiBundle\Form\Type\ProductVariantType
@@ -63,7 +64,7 @@ sylius_api_product_variant_show:
         _sylius:
             serialization_version: $version
             section: api
-            serialization_group: [Default, Detailed]
+            serialization_groups: [Default, Detailed]
             criteria:
                 product: $productId
                 master: false
