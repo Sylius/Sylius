@@ -11,40 +11,28 @@
             "type": {
                 "id": @integer@,
                 "code": "similar",
-                "created_at": "@string@.isDateTime()",
-                "updated_at": "@string@.isDateTime()",
-                "translations": [
-                    {
-                      "id": @integer@,
-                      "locale": "en"
+                "translations": {
+                    "en": {
+                        "id": @integer@,
+                        "locale": "en"
                     }
-                ],
-                "current_locale": "en",
-                "fallback_locale": "en_US"
+                }
             },
-            "associated_products": @array@,
-            "created_at": "@string@.isDateTime()",
-            "updated_at": "@string@.isDateTime()"
+            "associated_products": @array@
         },
         {
             "id": @integer@,
             "type": {
                 "id": @integer@,
                 "code": "accessories",
-                "created_at": "@string@.isDateTime()",
-                "updated_at": "@string@.isDateTime()",
-                "translations": [
-                    {
-                      "id": @integer@,
-                      "locale": "en"
+                "translations": {
+                    "en": {
+                        "id": @integer@,
+                        "locale": "en"
                     }
-                ],
-                "current_locale": "en",
-                "fallback_locale": "en_US"
+                }
             },
-            "associated_products": @array@,
-            "created_at": "@string@.isDateTime()",
-            "updated_at": "@string@.isDateTime()"
+            "associated_products": @array@
         }
     ],
     "translations": {
