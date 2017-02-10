@@ -11,6 +11,8 @@ Sylius\Component\Shipping\Model\Shipment:
             type: string
         method:
             expose: true
+        tracking:
+            expose: true
         createdAt:
             expose: true
             type: DateTime

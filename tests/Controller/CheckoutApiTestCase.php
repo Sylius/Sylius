@@ -165,12 +165,26 @@ EOT;
 
     /**
      * @param mixed $cartId
-     *
-     * @return string
      */
     protected function completeOrder($cartId)
     {
         $this->client->request('PUT', sprintf('/api/v1/checkouts/complete/%d', $cartId), [], [], static::$authorizedHeaderWithContentType);
+    }
+
+    /**
+     * @return mixed
+     */
+    protected function prepareOrder()
+    {
+        $cartId = $this->createCart();
+
+        $this->addItemToCart($cartId);
+        $this->addressOrder($cartId);
+        $this->selectOrderShippingMethod($cartId);
+        $this->selectOrderPaymentMethod($cartId);
+        $this->completeOrder($cartId);
+
+        return $cartId;
     }
 
     /**
