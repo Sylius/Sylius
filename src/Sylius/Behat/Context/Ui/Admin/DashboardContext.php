@@ -46,7 +46,7 @@ final class DashboardContext implements Context
      */
     public function iOpenAdministrationDashboardForChannel($code)
     {
-        $this->dashboardPage->open(['channelCode' => $code]);
+        $this->dashboardPage->open(['channel' => $code]);
     }
 
     /**
