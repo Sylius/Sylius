@@ -235,6 +235,8 @@ These services will be generated automatically based on subject name.
 
 ### User / UserBundle
 
+* All classes under `Sylius\Bundle\UserBundle\EventListener` have been made final. Provide your custom implementation if you need to change theirs logic.
+
 ## Application:
 
 * `sylius_admin_dashboard_redirect` route was removed, use `sylius_admin_dashboard` instead.

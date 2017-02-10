@@ -54,13 +54,9 @@
             <argument type="service" id="event_dispatcher" />
             <tag name="kernel.event_listener" event="sylius.customer.post_register" method="sendVerificationEmail" />
         </service>
-        <service id="sylius.listener.password_updater" class="Sylius\Bundle\CoreBundle\EventListener\PasswordUpdaterListener">
+        <service id="sylius.listener.core_password_updater" class="Sylius\Bundle\CoreBundle\EventListener\PasswordUpdaterListener">
             <argument type="service" id="sylius.security.password_updater" />
-            <tag name="kernel.event_listener" event="sylius.user.pre_password_reset" method="genericEventUpdater" />
-            <tag name="kernel.event_listener" event="sylius.user.pre_password_change" method="genericEventUpdater" />
             <tag name="kernel.event_listener" event="sylius.customer.pre_update" method="customerUpdateEvent" />
-            <tag name="doctrine.event_listener" event="prePersist" />
-            <tag name="doctrine.event_listener" event="preUpdate" />
         </service>
         <service id="sylius.translator.listener" class="Symfony\Component\HttpKernel\EventListener\TranslatorListener">
             <argument type="service" id="translator" />

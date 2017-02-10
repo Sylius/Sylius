@@ -13,19 +13,18 @@ namespace Sylius\Bundle\UserBundle\EventListener;
 
 use Sylius\Bundle\UserBundle\Mailer\Emails;
 use Sylius\Component\Mailer\Sender\SenderInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class MailerListener
+final class MailerListener
 {
     /**
      * @var SenderInterface
      */
-    protected $emailSender;
+    private $emailSender;
 
     /**
      * @param SenderInterface $emailSender
@@ -60,18 +59,11 @@ class MailerListener
     }
 
     /**
-     * @param mixed  $user
+     * @param UserInterface $user
      * @param string $emailCode
      */
-    protected function sendEmail($user, $emailCode)
+    private function sendEmail(UserInterface $user, $emailCode)
     {
-        if (!$user instanceof UserInterface) {
-            throw new UnexpectedTypeException(
-                $user,
-                UserInterface::class
-            );
-        }
-
         $this->emailSender->send($emailCode,
             [$user->getEmail()],
             [

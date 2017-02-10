@@ -19,12 +19,12 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\Security\Http\SecurityEvents;
 
-class UserLastLoginSubscriber implements EventSubscriberInterface
+final class UserLastLoginSubscriber implements EventSubscriberInterface
 {
     /**
      * @var ObjectManager
      */
-    protected $userManager;
+    private $userManager;
 
     /**
      * @var string
@@ -72,7 +72,7 @@ class UserLastLoginSubscriber implements EventSubscriberInterface
     /**
      * @param UserInterface $user
      */
-    protected function updateUserLastLogin(UserInterface $user)
+    private function updateUserLastLogin(UserInterface $user)
     {
         if ($user instanceof $this->userClass) {
             $user->setLastLogin(new \DateTime());

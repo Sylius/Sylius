@@ -19,12 +19,12 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 /**
  * @author Łukasz CHruściel <lukasz.chrusciel@lakion.com>
  */
-class UserReloaderListener
+final class UserReloaderListener
 {
     /**
      * @var UserReloaderInterface
      */
-    protected $userReloader;
+    private $userReloader;
 
     /**
      * @param UserReloaderInterface $userReloader
