@@ -166,7 +166,7 @@ final class ResourceLoader implements LoaderInterface
         if (isset($configuration['section'])) {
             $defaults['_sylius']['section'] = $configuration['section'];
         }
-        if (!empty($configuration['criteria']) && in_array($actionName, ['show', 'update', 'delete'], true)) {
+        if (!empty($configuration['criteria'])) {
             $defaults['_sylius']['criteria'] = $configuration['criteria'];
         }
         if (isset($configuration['templates']) && in_array($actionName, ['show', 'index', 'create', 'update'], true)) {
