@@ -78,7 +78,7 @@ sylius_shop_checkout_complete:
     path: /complete
     methods: [GET, PUT]
     defaults:
-        _controller: sylius.controller.order:updateAction
+        _controller: sylius.controller.order:completeAction
         _sylius:
             event: complete
             flash: false
