@@ -160,7 +160,7 @@ How to customize Admin Customer Show Menu?
 
     The ``delete`` button must have also the ``resource_id`` attribute set (for csrf token purposes).
 
-In the example below we are adding a one new button to the Admin Customer Show Menu. It has the type set, even though the ``link``
+In the example below, we are adding one new button to the Admin Customer Show Menu. It has the type set, even though the ``link``
 type is default to make the example easily customizable.
 
 .. code-block:: php
@@ -169,23 +169,30 @@ type is default to make the example easily customizable.
 
     namespace AppBundle\Menu;
 
-    use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
+    use Sylius\Bundle\AdminBundle\Event\CustomerShowMenuBuilderEvent;
 
     final class AdminCustomerShowMenuListener
     {
         /**
-         * @param MenuBuilderEvent $event
+         * @param CustomerShowMenuBuilderEvent $event
          */
-        public function addAdminCustomerShowMenuItems(MenuBuilderEvent $event)
+        public function addAdminCustomerShowMenuItems(CustomerShowMenuBuilderEvent $event)
         {
             $menu = $event->getMenu();
+            $customer = $event->getCustomer();
 
-            $menu->addChild('new', ['route' => 'sylius_admin_customer_index'])
-                ->setAttribute('type', 'link')
-                ->setLabel('Pink Menu Button')
-                ->setLabelAttribute('icon', 'star')
-                ->setLabelAttribute('color', 'pink')
-            ;
+            if (null !== $customer->getUser()) {
+                $menu
+                    ->addChild('impersonate', [
+                        'route' => 'sylius_admin_impersonate_user',
+                        'routeParameters' => ['username' => $customer->getUser()->getEmailCanonical()]
+                    ])
+                    ->setAttribute('type', 'link')
+                    ->setLabel('Impersonate')
+                    ->setLabelAttribute('icon', 'unhide')
+                    ->setLabelAttribute('color', 'blue')
+                ;
+            }
         }
     }
 
@@ -229,8 +236,12 @@ How to customize Admin Order Show Menu?
 
     The ``delete`` button must have also the ``resource_id`` attribute set (for csrf token purposes).
 
-In the example below we are adding a one new button to the Admin Order Show Menu. It has the type set, even though the ``link``
-type is default to make the example easily customizable.
+In the example below, we are adding one new button to the Admin Order Show Menu. It is a ``transition`` type button,
+that will let the admin fulfill the order.
+
+.. warning::
+
+    There is no ``sylius_admin_order_fulfill`` route in Sylius. Create this route if you need it.
 
 .. code-block:: php
 
@@ -238,23 +249,32 @@ type is default to make the example easily customizable.
 
     namespace AppBundle\Menu;
 
-    use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
+    use Sylius\Bundle\AdminBundle\Event\OrderShowMenuBuilderEvent;
+    use Sylius\Component\Order\Model\OrderInterface;
 
     final class AdminOrderShowMenuListener
     {
         /**
-         * @param MenuBuilderEvent $event
+         * @param OrderShowMenuBuilderEvent $event
          */
-        public function addAdminOrderShowMenuItems(MenuBuilderEvent $event)
+        public function addAdminOrderShowMenuItems(OrderShowMenuBuilderEvent $event)
         {
             $menu = $event->getMenu();
+            $order = $event->getOrder();
+            $stateMachine = $event->getStateMachine();
 
-            $menu->addChild('new', ['route' => 'sylius_admin_order_index'])
-                ->setAttribute('type', 'link')
-                ->setLabel('Maroon Menu Button')
-                ->setLabelAttribute('icon', 'star')
-                ->setLabelAttribute('color', 'maroon')
-            ;
+            if ($stateMachine->can(OrderTransitions::TRANSITION_FULFILL)) {
+                $menu
+                    ->addChild('fulfill', [
+                        'route' => 'sylius_admin_order_fulfill',
+                        'routeParameters' => ['id' => $order->getId()]
+                    ])
+                    ->setAttribute('type', 'transition')
+                    ->setLabel('Fulfill')
+                    ->setLabelAttribute('icon', 'checkmark')
+                    ->setLabelAttribute('color', 'green')
+                ;
+            }
         }
     }
 
