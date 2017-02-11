@@ -1,8 +1,8 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-sylius_api_order_item_create:
-    path: /
+sylius_api_cart_item_create:
+    path: /items/
     methods: [POST]
     defaults:
         _controller: sylius.controller.order_item:createAction
@@ -15,26 +15,14 @@ sylius_api_order_item_create:
                   - "expr:service('sylius.repository.order').findCartById($cartId)"
             serialization_groups: [DetailedCart]
 
-sylius_api_order_item_update:
-    path: /{id}
-    methods: [PUT, PATCH]
-    defaults:
-        _controller: sylius.controller.order_item:updateAction
-        _sylius:
-            serialization_version: $version
-            form: Sylius\Bundle\ApiBundle\Form\Type\OrderItemType
-            repository:
-                method: findOneByIdAndCartId
-                arguments: [$id, $cartId]
-
-sylius_api_order_item_delete:
-    path: /{id}
-    methods: [DELETE]
-    defaults:
-        _controller: sylius.controller.order_item:deleteAction
-        _sylius:
-            serialization_version: $version
-            csrf_protection: false
-            repository:
-                method: findOneByIdAndCartId
-                arguments: [$id, $cartId]
+sylius_api_cart_item:
+    resource: |
+        alias: sylius.order_item
+        path: 'items'
+        only: [update, delete]
+        section: api
+        form: Sylius\Bundle\ApiBundle\Form\Type\OrderItemType
+        serialization_version: $version
+        criteria:
+            cart: $cartId
+    type: sylius.resource_api

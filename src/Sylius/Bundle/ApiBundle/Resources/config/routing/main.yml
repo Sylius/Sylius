@@ -30,7 +30,7 @@ sylius_api_adjustment:
 
 sylius_api_cart_item:
     resource: "@SyliusApiBundle/Resources/config/routing/cart_item.yml"
-    prefix: /carts/{cartId}/items
+    prefix: /carts/{cartId}
 
 sylius_api_order:
     resource: |
