@@ -37,5 +37,10 @@
             <argument type="service" id="sylius.templating.helper.variant_resolver" />
             <tag name="twig.extension" />
         </service>
+
+        <service id="sylius.templating.helper.checkout_steps" class="Sylius\Bundle\CoreBundle\Templating\Helper\CheckoutStepsHelper" lazy="true">
+            <argument type="service" id="sylius.checker.order_shipping_method_selection_requirement" />
+            <tag name="templating.helper" alias="sylius_checkout_steps" />
+        </service>
     </services>
 </container>

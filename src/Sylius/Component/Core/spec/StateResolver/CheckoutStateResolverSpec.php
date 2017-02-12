@@ -14,6 +14,7 @@ namespace spec\Sylius\Component\Core\StateResolver;
 use PhpSpec\ObjectBehavior;
 use SM\Factory\FactoryInterface;
 use SM\StateMachine\StateMachineInterface;
+use Sylius\Component\Core\Checker\OrderShippingMethodSelectionRequirementCheckerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
@@ -29,9 +30,11 @@ use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
  */
 final class CheckoutStateResolverSpec extends ObjectBehavior
 {
-    function let(FactoryInterface $stateMachineFactory, ShippingMethodsResolverInterface $shippingMethodsResolver)
-    {
-        $this->beConstructedWith($stateMachineFactory, $shippingMethodsResolver);
+    function let(
+        FactoryInterface $stateMachineFactory,
+        OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker
+    ) {
+        $this->beConstructedWith($stateMachineFactory, $orderShippingMethodSelectionRequirementChecker);
     }
 
     function it_is_initializable()
@@ -44,25 +47,15 @@ final class CheckoutStateResolverSpec extends ObjectBehavior
         $this->shouldImplement(StateResolverInterface::class);
     }
 
-    function it_applies_transition_skip_shipping_and_skip_payment_if_none_of_order_items_require_shipping_its_total_is_0_and_this_transitions_are_possible(
+    function it_applies_transition_skip_shipping_and_skip_payment_if_shipping_method_selection_is_not_required_and_its_total_is_0_and_this_transitions_are_possible(
         FactoryInterface $stateMachineFactory,
         OrderInterface $order,
-        OrderItemInterface $firstOrderItem,
-        OrderItemInterface $secondOrderItem,
-        ProductVariantInterface $firstProductVariant,
-        ProductVariantInterface $secondProductVariant,
+        OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker,
         StateMachineInterface $stateMachine
     ) {
-        $order->getItems()->willReturn([$firstOrderItem, $secondOrderItem]);
         $order->getTotal()->willReturn(0);
 
-        $firstOrderItem->getVariant()->willReturn($firstProductVariant);
-        $secondOrderItem->getVariant()->willReturn($secondProductVariant);
-
-        $firstProductVariant->isShippingRequired()->willReturn(false);
-        $secondProductVariant->isShippingRequired()->willReturn(false);
-
-        $order->hasShipments()->willReturn(false);
+        $orderShippingMethodSelectionRequirementChecker->isShippingMethodSelectionRequired($order)->willReturn(false);
 
         $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
 
@@ -75,25 +68,15 @@ final class CheckoutStateResolverSpec extends ObjectBehavior
         $this->resolve($order);
     }
 
-    function it_applies_transition_skip_shipping_if_none_of_order_items_require_shipping_and_this_transition_is_possible(
+    function it_applies_transition_skip_shipping_if_shipping_method_selection_is_not_required_and_this_transition_is_possible(
         FactoryInterface $stateMachineFactory,
         OrderInterface $order,
-        OrderItemInterface $firstOrderItem,
-        OrderItemInterface $secondOrderItem,
-        ProductVariantInterface $firstProductVariant,
-        ProductVariantInterface $secondProductVariant,
+        OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker,
         StateMachineInterface $stateMachine
     ) {
-        $order->getItems()->willReturn([$firstOrderItem, $secondOrderItem]);
         $order->getTotal()->willReturn(10);
 
-        $firstOrderItem->getVariant()->willReturn($firstProductVariant);
-        $secondOrderItem->getVariant()->willReturn($secondProductVariant);
-
-        $firstProductVariant->isShippingRequired()->willReturn(false);
-        $secondProductVariant->isShippingRequired()->willReturn(false);
-
-        $order->hasShipments()->willReturn(false);
+        $orderShippingMethodSelectionRequirementChecker->isShippingMethodSelectionRequired($order)->willReturn(false);
 
         $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
 
@@ -106,61 +89,15 @@ final class CheckoutStateResolverSpec extends ObjectBehavior
         $this->resolve($order);
     }
 
-    function it_applies_transition_skip_shipping_if_only_one_shipping_method_is_available_for_each_order_shipment_and_this_transition_is_possible(
+    function it_does_not_apply_skip_shipping_transition_if_shipping_method_selection_is_required(
         FactoryInterface $stateMachineFactory,
         OrderInterface $order,
-        OrderItemInterface $firstOrderItem,
-        OrderItemInterface $secondOrderItem,
-        ProductVariantInterface $firstProductVariant,
-        ProductVariantInterface $secondProductVariant,
-        ShippingMethodInterface $shippingMethod,
-        ShippingMethodsResolverInterface $shippingMethodsResolver,
-        ShipmentInterface $shipment,
+        OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker,
         StateMachineInterface $stateMachine
     ) {
-        $order->getItems()->willReturn([$firstOrderItem, $secondOrderItem]);
         $order->getTotal()->willReturn(10);
 
-        $firstOrderItem->getVariant()->willReturn($firstProductVariant);
-        $secondOrderItem->getVariant()->willReturn($secondProductVariant);
-
-        $firstProductVariant->isShippingRequired()->willReturn(false);
-        $secondProductVariant->isShippingRequired()->willReturn(false);
-
-        $order->hasShipments()->willReturn(true);
-        $order->getShipments()->willReturn([$shipment]);
-        $shippingMethodsResolver->getSupportedMethods($shipment)->willReturn([$shippingMethod]);
-
-        $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
-
-        $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)->willReturn(true);
-        $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)->shouldBeCalled();
-
-        $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)->willReturn(true);
-        $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)->shouldNotBeCalled();
-
-        $this->resolve($order);
-    }
-
-    function it_does_not_apply_skip_shipping_transition_if_at_least_one_product_variant_in_order_requires_shipping(
-        FactoryInterface $stateMachineFactory,
-        OrderInterface $order,
-        OrderItemInterface $firstOrderItem,
-        OrderItemInterface $secondOrderItem,
-        ProductVariantInterface $firstProductVariant,
-        ProductVariantInterface $secondProductVariant,
-        StateMachineInterface $stateMachine
-    ) {
-        $order->getItems()->willReturn([$firstOrderItem, $secondOrderItem]);
-        $order->getTotal()->willReturn(10);
-
-        $firstOrderItem->getVariant()->willReturn($firstProductVariant);
-        $secondOrderItem->getVariant()->willReturn($secondProductVariant);
-
-        $firstProductVariant->isShippingRequired()->willReturn(false);
-        $secondProductVariant->isShippingRequired()->willReturn(true);
-
-        $order->hasShipments()->willReturn(false);
+        $orderShippingMethodSelectionRequirementChecker->isShippingMethodSelectionRequired($order)->willReturn(true);
 
         $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
 
@@ -176,22 +113,12 @@ final class CheckoutStateResolverSpec extends ObjectBehavior
     function it_does_not_apply_skip_shipping_transition_if_it_is_not_possible(
         FactoryInterface $stateMachineFactory,
         OrderInterface $order,
-        OrderItemInterface $firstOrderItem,
-        OrderItemInterface $secondOrderItem,
-        ProductVariantInterface $firstProductVariant,
-        ProductVariantInterface $secondProductVariant,
+        OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker,
         StateMachineInterface $stateMachine
     ) {
-        $order->getItems()->willReturn([$firstOrderItem, $secondOrderItem]);
         $order->getTotal()->willReturn(10);
 
-        $firstOrderItem->getVariant()->willReturn($firstProductVariant);
-        $secondOrderItem->getVariant()->willReturn($secondProductVariant);
-
-        $firstProductVariant->isShippingRequired()->willReturn(false);
-        $secondProductVariant->isShippingRequired()->willReturn(true);
-
-        $order->hasShipments()->willReturn(false);
+        $orderShippingMethodSelectionRequirementChecker->isShippingMethodSelectionRequired($order)->willReturn(true);
 
         $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
 
@@ -207,17 +134,12 @@ final class CheckoutStateResolverSpec extends ObjectBehavior
     function it_applies_transition_skip_payment_if_order_total_is_zero_and_this_transition_is_possible(
         FactoryInterface $stateMachineFactory,
         OrderInterface $order,
-        OrderItemInterface $firstOrderItem,
-        ProductVariantInterface $firstProductVariant,
+        OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker,
         StateMachineInterface $stateMachine
     ) {
-        $order->getItems()->willReturn([$firstOrderItem]);
         $order->getTotal()->willReturn(0);
 
-        $firstOrderItem->getVariant()->willReturn($firstProductVariant);
-        $firstProductVariant->isShippingRequired()->willReturn(true);
-
-        $order->hasShipments()->willReturn(false);
+        $orderShippingMethodSelectionRequirementChecker->isShippingMethodSelectionRequired($order)->willReturn(true);
 
         $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
 
@@ -233,17 +155,12 @@ final class CheckoutStateResolverSpec extends ObjectBehavior
     function it_does_not_apply_skip_payment_transition_if_order_total_is_not_zero(
         FactoryInterface $stateMachineFactory,
         OrderInterface $order,
-        OrderItemInterface $firstOrderItem,
-        ProductVariantInterface $firstProductVariant,
+        OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker,
         StateMachineInterface $stateMachine
     ) {
-        $order->getItems()->willReturn([$firstOrderItem]);
         $order->getTotal()->willReturn(10);
 
-        $firstOrderItem->getVariant()->willReturn($firstProductVariant);
-        $firstProductVariant->isShippingRequired()->willReturn(true);
-
-        $order->hasShipments()->willReturn(false);
+        $orderShippingMethodSelectionRequirementChecker->isShippingMethodSelectionRequired($order)->willReturn(true);
 
         $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
 
@@ -256,20 +173,15 @@ final class CheckoutStateResolverSpec extends ObjectBehavior
         $this->resolve($order);
     }
 
-    function it_does_nothing_if_transition_skip_payment_is_not_possible(
+    function it_does_not_apply_skip_payment_transition_if_transition_skip_payment_is_not_possible(
         FactoryInterface $stateMachineFactory,
         OrderInterface $order,
-        OrderItemInterface $firstOrderItem,
-        ProductVariantInterface $firstProductVariant,
+        OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker,
         StateMachineInterface $stateMachine
     ) {
-        $order->getItems()->willReturn([$firstOrderItem]);
         $order->getTotal()->willReturn(10);
 
-        $firstOrderItem->getVariant()->willReturn($firstProductVariant);
-        $firstProductVariant->isShippingRequired()->willReturn(true);
-
-        $order->hasShipments()->willReturn(false);
+        $orderShippingMethodSelectionRequirementChecker->isShippingMethodSelectionRequired($order)->willReturn(true);
 
         $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
 
