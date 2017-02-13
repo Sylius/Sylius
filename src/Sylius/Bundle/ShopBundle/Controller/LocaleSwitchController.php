@@ -11,13 +11,13 @@
 
 namespace Sylius\Bundle\ShopBundle\Controller;
 
+use Sylius\Bundle\ShopBundle\Locale\LocaleSwitcherInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use Symfony\Component\Routing\RouterInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -25,11 +25,6 @@ use Symfony\Component\Routing\RouterInterface;
  */
 final class LocaleSwitchController
 {
-    /**
-     * @var RouterInterface
-     */
-    private $router;
-
     /**
      * @var EngineInterface
      */
@@ -46,21 +41,26 @@ final class LocaleSwitchController
     private $localeProvider;
 
     /**
-     * @param RouterInterface $router
+     * @var LocaleSwitcherInterface
+     */
+    private $localeSwitcher;
+
+    /**
      * @param EngineInterface $templatingEngine
      * @param LocaleContextInterface $localeContext
      * @param LocaleProviderInterface $localeProvider
+     * @param LocaleSwitcherInterface $localeSwitcher
      */
     public function __construct(
-        RouterInterface $router,
         EngineInterface $templatingEngine,
         LocaleContextInterface $localeContext,
-        LocaleProviderInterface $localeProvider
+        LocaleProviderInterface $localeProvider,
+        LocaleSwitcherInterface $localeSwitcher
     ) {
-        $this->router = $router;
         $this->templatingEngine = $templatingEngine;
         $this->localeContext = $localeContext;
         $this->localeProvider = $localeProvider;
+        $this->localeSwitcher = $localeSwitcher;
     }
 
     /**
@@ -75,11 +75,12 @@ final class LocaleSwitchController
     }
 
     /**
+     * @param Request $request
      * @param string $code
      *
      * @return Response
      */
-    public function switchAction($code = null)
+    public function switchAction(Request $request, $code = null)
     {
         if (null === $code) {
             $code = $this->localeProvider->getDefaultLocaleCode();
@@ -92,6 +93,6 @@ final class LocaleSwitchController
             );
         }
 
-        return new RedirectResponse($this->router->generate('sylius_shop_homepage', ['_locale' => $code]));
+        return $this->localeSwitcher->handle($request, $code);
     }
 }

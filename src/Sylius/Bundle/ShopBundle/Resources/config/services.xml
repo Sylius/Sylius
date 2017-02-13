@@ -16,4 +16,17 @@
         <import resource="services/controller.xml" />
         <import resource="services/menu.xml" />
     </imports>
+
+    <services>
+        <service id="sylius.shop.locale_switcher.storage" class="Sylius\Bundle\ShopBundle\Locale\StorageBasedLocaleSwitcher" public="false">
+            <argument type="service" id="sylius.storage.locale" />
+            <argument type="service" id="sylius.context.channel" />
+        </service>
+
+        <service id="sylius.shop.locale_switcher.url" class="Sylius\Bundle\ShopBundle\Locale\UrlBasedLocaleSwitcher" public="false">
+            <argument type="service" id="router" />
+        </service>
+
+        <service id="sylius.shop.locale_switcher" alias="sylius.shop.locale_switcher.url" />
+    </services>
 </container>

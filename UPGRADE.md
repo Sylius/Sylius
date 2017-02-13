@@ -118,11 +118,8 @@
 
   * `Sylius\Bundle\CoreBundle\Handler\CartLocaleChangeHandler`
   * `Sylius\Bundle\CoreBundle\Handler\ShopLocaleChangeHandler`
-  * `Sylius\Component\Core\Locale\Context\StorageBasedLocaleContext`
   * `Sylius\Component\Core\Locale\Handler\CompositeLocaleChangeHandler`
   * `Sylius\Component\Core\Locale\Handler\LocaleChangeHandlerInterface`
-  * `Sylius\Component\Core\Locale\LocaleStorageInterface`
-  * `Sylius\Component\Core\Locale\SessionBasedLocaleStorage`
 
 ### Currency / CurrencyBundle
 
