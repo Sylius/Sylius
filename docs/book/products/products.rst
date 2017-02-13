@@ -45,6 +45,14 @@ Variants
 
 Variants may be created out of Options of the product, but you are also able to use product variations system without the options at all.
 
+Virtual Product Variants, that do not require shipping
+------------------------------------------------------
+
+.. tip::
+
+     On the ProductVariant there is a possibility to make a product virtual - by setting its ``shippingRequired`` property to ``false``.
+     In such a way you can have products that will be downloadable or installable for instance.
+
 How to create a Product with a Variant?
 ---------------------------------------
 
