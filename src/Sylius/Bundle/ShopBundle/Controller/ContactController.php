@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\ShopBundle\Controller;
 
-use Sylius\Bundle\CoreBundle\EmailManager\ContactEmailManager;
+use Sylius\Bundle\CoreBundle\EmailManager\ContactEmailManagerInterface;
 use Sylius\Bundle\CoreBundle\Form\Type\ContactType;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
@@ -53,7 +53,7 @@ class ContactController
     private $customerContext;
 
     /**
-     * @var ContactEmailManager
+     * @var ContactEmailManagerInterface
      */
     private $contactEmailManager;
 
@@ -63,7 +63,7 @@ class ContactController
      * @param EngineInterface $templatingEngine
      * @param ChannelContextInterface $channelContext
      * @param CustomerContextInterface $customerContext
-     * @param ContactEmailManager $contactEmailManager
+     * @param ContactEmailManagerInterface $contactEmailManager
      */
     public function __construct(
         RouterInterface $router,
@@ -71,7 +71,7 @@ class ContactController
         EngineInterface $templatingEngine,
         ChannelContextInterface $channelContext,
         CustomerContextInterface $customerContext,
-        ContactEmailManager $contactEmailManager
+        ContactEmailManagerInterface $contactEmailManager
     ) {
         $this->router = $router;
         $this->formFactory = $formFactory;
