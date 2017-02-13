@@ -41,6 +41,8 @@ final class ArrayToDefinitionConverterSpec extends ObjectBehavior
 
         $grid->setSorting(['code' => 'desc']);
 
+        $grid->setLimits([9, 18]);
+
         $codeField = Field::fromNameAndType('code', 'string');
         $codeField->setLabel('System Code');
         $codeField->setPath('method.code');
@@ -70,6 +72,7 @@ final class ArrayToDefinitionConverterSpec extends ObjectBehavior
             'sorting' => [
                 'code' => 'desc',
             ],
+            'limits' => [9, 18],
             'fields' => [
                 'code' => [
                     'type' => 'string',

@@ -27,6 +27,10 @@ final class ArrayToDefinitionConverter implements ArrayToDefinitionConverterInte
             $grid->setSorting($configuration['sorting']);
         }
 
+        if (array_key_exists('limits', $configuration)) {
+            $grid->setLimits($configuration['limits']);
+        }
+
         foreach ($configuration['fields'] as $name => $fieldConfiguration) {
             $grid->addField($this->convertField($name, $fieldConfiguration));
         }
