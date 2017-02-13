@@ -18,7 +18,7 @@ use Symfony\Component\EventDispatcher\Event;
 /**
  * @author Patrik Karisch <patrik.karisch@abimus.com>
  */
-final class MenuBuilderEvent extends Event
+class MenuBuilderEvent extends Event
 {
     /**
      * @var FactoryInterface
