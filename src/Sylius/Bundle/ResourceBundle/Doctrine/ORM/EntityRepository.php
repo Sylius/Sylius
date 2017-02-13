@@ -85,7 +85,7 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
     protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = [])
     {
         foreach ($criteria as $property => $value) {
-            if (!in_array($property, $this->_class->getFieldNames())) {
+            if (!in_array($property, array_merge($this->_class->getAssociationNames(), $this->_class->getFieldNames()))) {
                 continue;
             }
 
@@ -112,7 +112,7 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
     protected function applySorting(QueryBuilder $queryBuilder, array $sorting = [])
     {
         foreach ($sorting as $property => $order) {
-            if (!in_array($property, $this->_class->getFieldNames())) {
+            if (!in_array($property, array_merge($this->_class->getAssociationNames(), $this->_class->getFieldNames()))) {
                 continue;
             }
 
