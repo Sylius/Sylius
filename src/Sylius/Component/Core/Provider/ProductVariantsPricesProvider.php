@@ -62,7 +62,7 @@ final class ProductVariantsPricesProvider implements ProductVariantsPricesProvid
 
         /** @var ProductOptionValueInterface $option */
         foreach ($variant->getOptionValues() as $option) {
-            $optionMap[$option->getOptionCode()] = $option->getValue();
+            $optionMap[$option->getOptionCode()] = $option->getCode();
         }
 
         $optionMap['value'] = $this->productVariantPriceCalculator->calculate($variant, ['channel' => $channel]);
