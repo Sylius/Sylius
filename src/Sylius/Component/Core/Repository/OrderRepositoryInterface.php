@@ -55,6 +55,13 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
     public function findByCustomer(CustomerInterface $customer);
 
     /**
+     * @param CustomerInterface $customer
+     *
+     * @return OrderInterface[]
+     */
+    public function findForCustomerStatistics(CustomerInterface $customer);
+
+    /**
      * @param int $id
      *
      * @return OrderInterface|null

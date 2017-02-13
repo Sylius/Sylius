@@ -64,6 +64,19 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
     /**
      * {@inheritdoc}
      */
+    public function findForCustomerStatistics(CustomerInterface $customer)
+    {
+        return $this->createByCustomerIdQueryBuilder($customer->getId())
+            ->andWhere('o.state NOT IN (:states)')
+            ->setParameter('states', [OrderInterface::STATE_CART, OrderInterface::STATE_CANCELLED])
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function findOneForPayment($id)
     {
         return $this->createQueryBuilder('o')
