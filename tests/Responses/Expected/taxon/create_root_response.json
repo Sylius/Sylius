@@ -1,0 +1,20 @@
+{
+    "id": @integer@,
+    "code": "fluffy_pets",
+    "children": [],
+    "left": 1,
+    "right": 2,
+    "level": 0,
+    "position": 0,
+    "translations": {
+        "en_US": {
+            "locale": "en_US"
+        }
+    },
+    "images": [],
+    "_links": {
+        "self": {
+            "href": "@string@"
+        }
+    }
+}

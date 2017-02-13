@@ -18,7 +18,6 @@ sylius_api_product_attribute:
 
 sylius_api_taxon:
     resource: "@SyliusApiBundle/Resources/config/routing/taxon.yml"
-    prefix: /taxons
 
 sylius_api_cart:
     resource: "@SyliusApiBundle/Resources/config/routing/cart.yml"

@@ -12,3 +12,4 @@
 * :doc:`/api/shipping_categories`
 * :doc:`/api/payments`
 * :doc:`/api/promotions`
+* :doc:`/api/taxons`

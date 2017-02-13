@@ -325,7 +325,7 @@ EOT;
                     "slug": "theme-mug"
                 }
             },
-            "product_taxons": "YELLOW_MUGS,MUGS"
+            "product_taxons": "category,mugs"
         }
 EOT;
 

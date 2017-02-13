@@ -1,0 +1,277 @@
+{
+    "page": 1,
+    "limit": 10,
+    "pages": 1,
+    "total": 7,
+    "_links": {
+        "self": {
+            "href": "\/api\/v1\/taxons\/?page=1&limit=10"
+        },
+        "first": {
+            "href": "\/api\/v1\/taxons\/?page=1&limit=10"
+        },
+        "last": {
+            "href": "\/api\/v1\/taxons\/?page=1&limit=10"
+        }
+    },
+    "_embedded": {
+        "items": [
+            {
+                "id": @integer@,
+                "code": "category",
+                "position": 0,
+                "translations": {
+                    "en": {
+                        "locale": "en"
+                    }
+                },
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "code": "mugs",
+                "root": {
+                    "id": @integer@,
+                    "code": "category",
+                    "position": 0,
+                    "translations": [],
+                    "images": [],
+                    "_links": {
+                        "self": {
+                            "href": "@string@"
+                        }
+                    }
+                },
+                "parent": {
+                    "id": @integer@,
+                    "code": "category",
+                    "position": 0,
+                    "translations": [],
+                    "images": [],
+                    "_links": {
+                        "self": {
+                            "href": "@string@"
+                        }
+                    }
+                },
+                "position": 0,
+                "translations": {
+                    "en": {
+                        "locale": "en"
+                    }
+                },
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "code": "stickers",
+                "root": {
+                    "id": @integer@,
+                    "code": "category",
+                    "position": 0,
+                    "translations": [],
+                    "images": [],
+                    "_links": {
+                        "self": {
+                            "href": "@string@"
+                        }
+                    }
+                },
+                "parent": {
+                    "id": @integer@,
+                    "code": "category",
+                    "position": 0,
+                    "translations": [],
+                    "images": [],
+                    "_links": {
+                        "self": {
+                            "href": "@string@"
+                        }
+                    }
+                },
+                "position": 1,
+                "translations": {
+                    "en": {
+                        "locale": "en"
+                    }
+                },
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "code": "books",
+                "root": {
+                    "id": @integer@,
+                    "code": "category",
+                    "position": 0,
+                    "translations": [],
+                    "images": [],
+                    "_links": {
+                        "self": {
+                            "href": "@string@"
+                        }
+                    }
+                },
+                "parent": {
+                    "id": @integer@,
+                    "code": "category",
+                    "position": 0,
+                    "translations": [],
+                    "images": [],
+                    "_links": {
+                        "self": {
+                            "href": "@string@"
+                        }
+                    }
+                },
+                "position": 2,
+                "translations": {
+                    "en": {
+                        "locale": "en"
+                    }
+                },
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "code": "t-shirts",
+                "root": {
+                    "id": @integer@,
+                    "code": "category",
+                    "position": 0,
+                    "translations": [],
+                    "images": [],
+                    "_links": {
+                        "self": {
+                            "href": "@string@"
+                        }
+                    }
+                },
+                "parent": {
+                    "id": @integer@,
+                    "code": "category",
+                    "position": 0,
+                    "translations": [],
+                    "images": [],
+                    "_links": {
+                        "self": {
+                            "href": "@string@"
+                        }
+                    }
+                },
+                "position": 3,
+                "translations": {
+                    "en": {
+                        "locale": "en"
+                    }
+                },
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "code": "men",
+                "root": {
+                    "id": @integer@,
+                    "code": "category",
+                    "position": 0,
+                    "translations": [],
+                    "images": [],
+                    "_links": {
+                        "self": {
+                            "href": "@string@"
+                        }
+                    }
+                },
+                "parent": {
+                    "id": @integer@,
+                    "code": "t-shirts",
+                    "position": 3,
+                    "translations": [],
+                    "images": [],
+                    "_links": {
+                        "self": {
+                            "href": "@string@"
+                        }
+                    }
+                },
+                "position": 0,
+                "translations": {
+                    "en": {
+                        "locale": "en"
+                    }
+                },
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "code": "women",
+                "root": {
+                    "id": @integer@,
+                    "code": "category",
+                    "position": 0,
+                    "translations": [],
+                    "images": [],
+                    "_links": {
+                        "self": {
+                            "href": "@string@"
+                        }
+                    }
+                },
+                "parent": {
+                    "id": @integer@,
+                    "code": "t-shirts",
+                    "position": 3,
+                    "translations": [],
+                    "images": [],
+                    "_links": {
+                        "self": {
+                            "href": "@string@"
+                        }
+                    }
+                },
+                "position": 1,
+                "translations": {
+                    "en": {
+                        "locale": "en"
+                    }
+                },
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            }
+        ]
+    }
+}

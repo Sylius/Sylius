@@ -1,51 +1,11 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
-sylius_api_taxon_index:
-    path: /
-    methods: [GET]
-    defaults:
-        _controller: sylius.controller.taxon:indexAction
-        _sylius:
-            serialization_version: $version
-            paginate: $limit
-            sortable: true
-            filterable: true
 
-sylius_api_taxon_show:
-    path: /{code}
-    methods: [GET]
-    defaults:
-        _controller: sylius.controller.taxon:showAction
-        _sylius:
-            serialization_version: $version
-            criteria:
-                code: $code
-
-sylius_api_taxon_create:
-    path: /
-    methods: [POST]
-    defaults:
-        _controller: sylius.controller.taxon:createAction
-        _sylius:
-            serialization_version: $version
-
-sylius_api_taxon_update:
-    path: /{code}
-    methods: [PUT, PATCH]
-    defaults:
-        _controller: sylius.controller.taxon:updateAction
-        _sylius:
-            serialization_version: $version
-            criteria:
-                code: $code
-
-sylius_api_taxon_delete:
-    path: /{code}
-    methods: [DELETE]
-    defaults:
-        _controller: sylius.controller.taxon:deleteAction
-        _sylius:
-            serialization_version: $version
-            criteria:
-                code: $code
-            csrf_protection: false
+sylius_admin_taxon:
+    resource: |
+        alias: sylius.taxon
+        section: api
+        form: Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonType
+        grid: sylius_api_taxon
+        serialization_version: $version
+    type: sylius.resource_api
