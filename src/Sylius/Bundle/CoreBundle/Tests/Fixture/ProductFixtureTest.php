@@ -121,6 +121,14 @@ final class ProductFixtureTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @test
+     */
+    public function product_can_require_shipping()
+    {
+        $this->assertConfigurationIsValid([['custom' => [['shipping_required' => false]]]], 'custom.*.shipping_required');
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function getConfiguration()

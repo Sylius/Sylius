@@ -28,9 +28,6 @@ sylius_shop_checkout_address:
             state_machine:
                 graph: sylius_order_checkout
                 transition: address
-            redirect:
-                route: sylius_shop_checkout_select_shipping
-                parameters: []
 
 sylius_shop_checkout_select_shipping:
     path: /select-shipping
@@ -49,9 +46,6 @@ sylius_shop_checkout_select_shipping:
             state_machine:
                 graph: sylius_order_checkout
                 transition: select_shipping
-            redirect:
-                route: sylius_shop_checkout_select_payment
-                parameters: []
 
 sylius_shop_checkout_select_payment:
     path: /select-payment
@@ -70,9 +64,6 @@ sylius_shop_checkout_select_payment:
             state_machine:
                 graph: sylius_order_checkout
                 transition: select_payment
-            redirect:
-                route: sylius_shop_checkout_complete
-                parameters: []
 
 sylius_shop_checkout_complete:
     path: /complete

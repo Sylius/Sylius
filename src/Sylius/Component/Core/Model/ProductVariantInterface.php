@@ -113,4 +113,14 @@ interface ProductVariantInterface extends
      * @param ChannelPricingInterface $channelPricing
      */
     public function removeChannelPricing(ChannelPricingInterface $channelPricing);
+
+    /**
+     * @return bool
+     */
+    public function isShippingRequired();
+
+    /**
+     * @param bool $shippingRequired
+     */
+    public function setShippingRequired($shippingRequired);
 }

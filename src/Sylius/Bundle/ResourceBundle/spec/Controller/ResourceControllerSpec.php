@@ -915,7 +915,8 @@ final class ResourceControllerSpec extends ObjectBehavior
         EventDispatcherInterface $eventDispatcher,
         RedirectHandlerInterface $redirectHandler,
         FlashHelperInterface $flashHelper,
-        ResourceControllerEvent $event,
+        ResourceControllerEvent $preEvent,
+        ResourceControllerEvent $postEvent,
         Request $request,
         Response $redirectResponse
     ) {
@@ -944,14 +945,75 @@ final class ResourceControllerSpec extends ObjectBehavior
         $form->isValid()->willReturn(true);
         $form->getData()->willReturn($resource);
 
-        $eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($event);
-        $event->isStopped()->willReturn(false);
+        $eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($preEvent);
+        $preEvent->isStopped()->willReturn(false);
 
         $manager->flush()->shouldBeCalled();
-        $eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource)->shouldBeCalled();
+        $eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($postEvent);
+
+        $postEvent->hasResponse()->willReturn(false);
 
         $flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource)->shouldBeCalled();
         $redirectHandler->redirectToResource($configuration, $resource)->willReturn($redirectResponse);
+
+        $this->updateAction($request)->shouldReturn($redirectResponse);
+    }
+
+    function it_uses_response_from_post_event_if_defined(
+        MetadataInterface $metadata,
+        RequestConfigurationFactoryInterface $requestConfigurationFactory,
+        RequestConfiguration $configuration,
+        AuthorizationCheckerInterface $authorizationChecker,
+        ObjectManager $manager,
+        RepositoryInterface $repository,
+        SingleResourceProviderInterface $singleResourceProvider,
+        ResourceInterface $resource,
+        ResourceFormFactoryInterface $resourceFormFactory,
+        Form $form,
+        EventDispatcherInterface $eventDispatcher,
+        RedirectHandlerInterface $redirectHandler,
+        FlashHelperInterface $flashHelper,
+        ResourceControllerEvent $preEvent,
+        ResourceControllerEvent $postEvent,
+        Request $request,
+        Response $redirectResponse
+    ) {
+        $metadata->getApplicationName()->willReturn('sylius');
+        $metadata->getName()->willReturn('product');
+
+        $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->hasPermission()->willReturn(true);
+        $configuration->getPermission(ResourceActions::UPDATE)->willReturn('sylius.product.update');
+        $configuration->hasStateMachine()->willReturn(false);
+
+        $authorizationChecker->isGranted($configuration, 'sylius.product.update')->willReturn(true);
+
+        $configuration->isHtmlRequest()->willReturn(true);
+        $configuration->getTemplate(ResourceActions::UPDATE . '.html')->willReturn('SyliusShopBundle:Product:update.html.twig');
+
+        $singleResourceProvider->get($configuration, $repository)->willReturn($resource);
+        $resourceFormFactory->create($configuration, $resource)->willReturn($form);
+
+        $request->isMethod('PATCH')->willReturn(false);
+        $request->getMethod()->willReturn('PUT');
+
+        $form->handleRequest($request)->willReturn($form);
+
+        $form->isSubmitted()->willReturn(true);
+        $form->isValid()->willReturn(true);
+        $form->getData()->willReturn($resource);
+
+        $eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($preEvent);
+        $preEvent->isStopped()->willReturn(false);
+
+        $manager->flush()->shouldBeCalled();
+        $flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource)->shouldBeCalled();
+        $eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($postEvent);
+
+        $postEvent->hasResponse()->willReturn(true);
+        $postEvent->getResponse()->willReturn($redirectResponse);
+
+        $redirectHandler->redirectToResource($configuration, $resource)->shouldNotBeCalled();
 
         $this->updateAction($request)->shouldReturn($redirectResponse);
     }
@@ -1011,7 +1073,6 @@ final class ResourceControllerSpec extends ObjectBehavior
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         RequestConfiguration $configuration,
         AuthorizationCheckerInterface $authorizationChecker,
-        ViewHandlerInterface $viewHandler,
         ObjectManager $manager,
         RepositoryInterface $repository,
         SingleResourceProviderInterface $singleResourceProvider,
@@ -1071,7 +1132,8 @@ final class ResourceControllerSpec extends ObjectBehavior
         EventDispatcherInterface $eventDispatcher,
         RedirectHandlerInterface $redirectHandler,
         FlashHelperInterface $flashHelper,
-        ResourceControllerEvent $event,
+        ResourceControllerEvent $preEvent,
+        ResourceControllerEvent $postEvent,
         Request $request,
         Response $redirectResponse
     ) {
@@ -1100,12 +1162,14 @@ final class ResourceControllerSpec extends ObjectBehavior
         $form->isValid()->willReturn(true);
         $form->getData()->willReturn($resource);
 
-        $eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($event);
-        $event->isStopped()->willReturn(false);
+        $eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($preEvent);
+        $preEvent->isStopped()->willReturn(false);
 
         $manager->flush()->shouldBeCalled();
         $stateMachine->apply($configuration, $resource)->shouldBeCalled();
-        $eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource)->shouldBeCalled();
+        $eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($postEvent);
+
+        $postEvent->hasResponse()->willReturn(false);
 
         $flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource)->shouldBeCalled();
         $redirectHandler->redirectToResource($configuration, $resource)->willReturn($redirectResponse);
