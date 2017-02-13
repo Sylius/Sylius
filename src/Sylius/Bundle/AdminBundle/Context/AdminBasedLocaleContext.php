@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Context;
+namespace Sylius\Bundle\AdminBundle\Context;
 
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;

@@ -18,6 +18,11 @@
     </imports>
 
     <services>
+        <service id="sylius.context.locale.admin_based" class="Sylius\Bundle\AdminBundle\Context\AdminBasedLocaleContext">
+            <argument type="service" id="security.token_storage" />
+            <tag name="sylius.context.locale" priority="128" />
+        </service>
+
         <service id="sylius.event_subscriber.resource_delete" class="Sylius\Bundle\AdminBundle\EventListener\ResourceDeleteSubscriber">
             <argument type="service" id="router" />
             <argument type="service" id="session" />
