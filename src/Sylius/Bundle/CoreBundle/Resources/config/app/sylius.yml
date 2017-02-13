@@ -8,6 +8,7 @@ imports:
     - { resource: "@SyliusCoreBundle/Resources/config/app/sylius/sylius_order.yml" }
     - { resource: "@SyliusCoreBundle/Resources/config/app/sylius/sylius_payment.yml" }
     - { resource: "@SyliusCoreBundle/Resources/config/app/sylius/sylius_product.yml" }
+    - { resource: "@SyliusCoreBundle/Resources/config/app/sylius/sylius_product_taxon.yml" }
     - { resource: "@SyliusCoreBundle/Resources/config/app/sylius/sylius_promotion.yml" }
     - { resource: "@SyliusCoreBundle/Resources/config/app/sylius/sylius_resource.yml" }
     - { resource: "@SyliusCoreBundle/Resources/config/app/sylius/sylius_review.yml" }

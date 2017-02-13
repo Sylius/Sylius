@@ -19,10 +19,8 @@
             <argument type="service" id="sylius.payment_methods_resolver" />
             <argument type="service" id="fos_rest.view_handler" />
         </service>
-        <service id="sylius.controller.update_product_taxon_position" class="Sylius\Bundle\ApiBundle\Controller\UpdateProductTaxonPosition">
-            <argument type="service" id="sylius.repository.product" />
+        <service id="sylius.controller.update_product_taxon_position" class="Sylius\Bundle\ApiBundle\Controller\ProductTaxonPositionController">
             <argument type="service" id="sylius.repository.product_taxon" />
-            <argument type="service" id="sylius.repository.taxon" />
             <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
         <service id="sylius.controller.show_available_shipping_methods" class="Sylius\Bundle\ApiBundle\Controller\ShowAvailableShippingMethodsController">

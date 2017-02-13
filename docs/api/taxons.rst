@@ -935,15 +935,15 @@ Exemplary Response
 Set position of product in a Taxon
 ----------------------------------
 
-The products in Sylius can by group by taxon, therefore every product has an relation between itself and selected taxon.
-What is more, every product can have specific position in taxon to which it is belongs to. To put products in specific order
-you will need to call the ``/api/v1/taxons/taxon_code/products`` endpoint wih the ``PUT`` method.
+The products in Sylius can by grouped by taxon, therefore for every product there is a relation between the product and the assigned taxon.
+What is more, every product can have a specific position in the taxon to which it belongs. To put products in a specific order
+you will need to call the ``/api/v1/taxons/code/products`` endpoint wih the ``PUT`` method.
 
 Definition
 ^^^^^^^^^^
 .. code-block:: text
 
-    PUT /api/v1/taxons/{taxonCode}/products
+    PUT /api/v1/taxons/{code}/products
 
 +---------------+----------------+-----------------------------------------------------------------+
 | Parameter     | Parameter type | Description                                                     |
@@ -956,7 +956,7 @@ Definition
 Example
 ^^^^^^^
 
-To change order of products with code ``7f260b98-aad8-3932-b628-1ac135d47767`` and ``c7127357-db24-3931-adb8-e80fc44e1507`` in taxon with code ``womens_t_shirts`` use the below method:
+To change the order of products with codes ``yellow_t_shirt`` and ``princess_t_shirt`` in taxon with code ``womens_t_shirts`` use the below method:
 
 .. code-block:: bash
 
@@ -966,13 +966,13 @@ To change order of products with code ``7f260b98-aad8-3932-b628-1ac135d47767`` a
         -X PUT
         --data '
             {
-                "positionsData": [
+                "products_positions": [
                     {
-                        "product_code": "7f260b98-aad8-3932-b628-1ac135d47767",
+                        "product_code": "yellow_t_shirt",
                         "position": 3
                     },
                     {
-                        "product_code": "c7127357-db24-3931-adb8-e80fc44e1507",
+                        "product_code": "princess_t_shirt",
                         "position": 0
                     }
                 ]
@@ -981,12 +981,13 @@ To change order of products with code ``7f260b98-aad8-3932-b628-1ac135d47767`` a
 
 .. note::
 
-    Remember the *7f260b98-aad8-3932-b628-1ac135d47767* and *c7127357-db24-3931-adb8-e80fc44e1507* and *womens_t_shirts* are just exemplary codes and
-    there could be selected other. Check in the list of all product if you are not sure which codes should be used.
+    Remember the *yellow_t_shirt* and *princess_t_shirt* and *womens_t_shirts*
+    are just exemplary codes and you can change them for the ones you need.
+    Check in the list of all products if you are not sure which codes should be used.
 
 Exemplary Response
 ^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
-    STATUS: 200 OK
+    STATUS: 204 NO CONTENT

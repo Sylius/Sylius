@@ -8,10 +8,10 @@ Sylius\Component\Core\Model\ProductTaxon:
         taxon: "@mugs"
         position: 0
     productTaxon2:
-            product: "@product2"
-            taxon: "@mugs"
-            position: 1
+        product: "@product2"
+        taxon: "@mugs"
+        position: 1
     productTaxon3:
-            product: "@product3"
-            taxon: "@mugs"
-            position: 2
+        product: "@product3"
+        taxon: "@mugs"
+        position: 2

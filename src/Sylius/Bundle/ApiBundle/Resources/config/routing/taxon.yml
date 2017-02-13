@@ -9,14 +9,3 @@ sylius_api_taxon:
         grid: sylius_api_taxon
         serialization_version: $version
     type: sylius.resource_api
-
-sylius_api_taxon_productss_update_position:
-    path: /taxons/{taxonCode}/products
-    methods: [PUT]
-    defaults:
-        _controller: sylius.controller.update_product_taxon_position:updatePositionsAction
-        _sylius:
-            serialization_version: $version
-            csrf_protection: false
-            criteria:
-                taxonCode: $taxonCode
