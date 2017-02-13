@@ -56,11 +56,6 @@ class Email implements EmailInterface
      */
     protected $senderAddress;
 
-    public function __construct()
-    {
-        $this->createdAt = new \DateTime();
-    }
-
     /**
      * {@inheritdoc}
      */

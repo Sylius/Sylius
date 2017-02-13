@@ -157,6 +157,9 @@ After:
 
 ### Mailer / MailerBundle
 
+* Modified `SenderInterface::send` and `AdapterInterface::send` methods, to take an `attachments` array as the last, optional argument.
+* Upgraded `SwiftMailerAdapter` to take the new parameter into account. The `attachments` array should contain absolute paths to the files being sent with the email.
+
 ### MoneyBundle
 
 ### Order / OrderBundle

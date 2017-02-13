@@ -47,7 +47,8 @@ class SwiftMailerAdapter extends AbstractAdapter
         $senderName,
         RenderedEmail $renderedEmail,
         EmailInterface $email,
-        array $data
+        array $data,
+        array $attachments = []
     ) {
         $message = \Swift_Message::newInstance()
             ->setSubject($renderedEmail->getSubject())
@@ -56,6 +57,12 @@ class SwiftMailerAdapter extends AbstractAdapter
         ;
 
         $message->setBody($renderedEmail->getBody(), 'text/html');
+
+        foreach($attachments as $attachment) {
+            $file = \Swift_Attachment::fromPath($attachment);
+
+            $message->attach($file);
+        }
 
         $emailSendEvent = new EmailSendEvent($message, $email, $data, $recipients);
 
