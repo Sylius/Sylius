@@ -106,11 +106,13 @@ final class LoadMetadataSubscriber implements EventSubscriber
         return [
             'fieldName' => 'author',
             'targetEntity' => $reviewerEntity,
-            'joinColumn' => [
-                'name' => 'author_id',
-                'referencedColumnName' => $reviewerEntityMetadata->fieldMappings['id']['columnName'],
-                'nullable' => false,
-                'onDelete' => 'CASCADE',
+            'joinColumns' => [
+                [
+                    'name' => 'author_id',
+                    'referencedColumnName' => $reviewerEntityMetadata->fieldMappings['id']['columnName'],
+                    'nullable' => false,
+                    'onDelete' => 'CASCADE',
+                ]
             ],
             'cascade' => ['persist'],
         ];
