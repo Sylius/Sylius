@@ -47,7 +47,7 @@ final class CustomerStatisticsProvider implements CustomerStatisticsProviderInte
      */
     public function getCustomerStatistics(CustomerInterface $customer)
     {
-        $orders = $this->orderRepository->findByCustomer($customer);
+        $orders = $this->orderRepository->findForCustomerStatistics($customer);
         if (empty($orders)) {
             return new CustomerStatistics([]);
         }
