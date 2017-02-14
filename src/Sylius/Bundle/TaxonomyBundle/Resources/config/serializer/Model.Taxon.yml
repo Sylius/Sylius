@@ -6,14 +6,52 @@ Sylius\Component\Taxonomy\Model\Taxon:
             expose: true
             type: integer
             xml_attribute: true
+            groups: [Default, Detailed]
         code:
             expose: true
             type: string
-        path:
-            expose: true
-            type: string
+            groups: [Default, Detailed]
         children:
             expose: true
+            type: array
+            groups: [Detailed]
+        root:
+            expose: true
+            max_depth: 2
+            groups: [Default, Detailed]
+        parent:
+            expose: true
+            max_depth: 2
+            groups: [Default, Detailed]
+        left:
+            expose: true
+            type: integer
+            groups: [Detailed]
+        right:
+            expose: true
+            type: integer
+            groups: [Detailed]
+        level:
+            expose: true
+            type: integer
+            groups: [Detailed]
+        position:
+            expose: true
+            type: integer
+            groups: [Default, Detailed]
+        translations:
+            expose: true
+            type: array
+            groups: [Default, Detailed]
     virtual_properties:
         getName:
             serialized_name: name
+    relations:
+        - rel: self
+          href:
+            route: sylius_api_taxon_show
+            parameters:
+                id: expr(object.getId())
+                version: 1
+            exclusion:
+                groups: [Detailed]

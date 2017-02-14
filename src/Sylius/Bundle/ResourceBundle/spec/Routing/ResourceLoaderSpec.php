@@ -255,6 +255,9 @@ EOT;
             '_controller' => 'sylius.controller.product_option:indexAction',
             '_sylius'     => [
                 'permission' => false,
+                'criteria' => [
+                    'code' => '$code',
+                ]
             ],
         ];
         $routeFactory->createRoute('/product-options/', $indexDefaults, [], [], '', [], ['GET'])->willReturn($indexRoute);
@@ -264,6 +267,9 @@ EOT;
             '_controller' => 'sylius.controller.product_option:createAction',
             '_sylius'     => [
                 'permission' => false,
+                'criteria' => [
+                    'code' => '$code',
+                ]
             ],
         ];
         $routeFactory->createRoute('/product-options/new', $createDefaults, [], [], '', [], ['GET', 'POST'])->willReturn($createRoute);

@@ -167,6 +167,17 @@ The method ``process($order)`` of the `CompositeOrderProcessor <https://github.c
 Here this method is responsible for: controlling the **shipping charges** which depend on the chosen ShippingMethod,
 controlling the **promotions** that depend on the shipping method.
 
+Skipping shipping step
+''''''''''''''''''''''
+
+What if in the order you have only products that do not require shipping (they are downloadable for example)?
+
+.. note::
+
+    When all of the :doc:`ProductVariants </book/products/products>` of the order have the ``shippingRequired``
+    property set to ``false``, then Sylius assumes that the whole order **does not require shipping**,
+    and **the shipping step of checkout will be skipped**.
+
 Selecting payment
 ~~~~~~~~~~~~~~~~~
 
@@ -212,8 +223,11 @@ and apply a proper transition and flush the order via the manager.
 
 **What happens during the transition?**
 
-The method ``process($order)`` of the `CompositeOrderProcessor <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Core/OrderProcessing/CompositeOrderProcessor.php>`_ is run and checks all the adjustments on the order.
-The method ``update($order)`` of the `OrderExchangeRateAndCurrencyUpdater <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Core/OrderProcessing/OrderExchangeRateAndCurrencyUpdater.php>`_ is run.
+The method ``process($order)`` of the
+`CompositeOrderProcessor <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Core/OrderProcessing/CompositeOrderProcessor.php>`_
+is run and checks all the adjustments on the order.
+The method ``update($order)`` of the
+`OrderExchangeRateAndCurrencyUpdater <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Core/OrderProcessing/OrderExchangeRateAndCurrencyUpdater.php>`_ is run.
 Here this method is responsible for controlling the **exchangeRate** of the order's currency.
 
 Finalizing

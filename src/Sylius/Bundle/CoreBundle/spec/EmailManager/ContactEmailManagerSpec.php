@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\CoreBundle\EmailManager;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\EmailManager\ContactEmailManager;
+use Sylius\Bundle\CoreBundle\EmailManager\ContactEmailManagerInterface;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 
 /**
@@ -28,6 +29,11 @@ final class ContactEmailManagerSpec extends ObjectBehavior
     function it_is_initializable()
     {
         $this->shouldHaveType(ContactEmailManager::class);
+    }
+
+    function it_implements_a_contact_email_manager_interface()
+    {
+        $this->shouldImplement(ContactEmailManagerInterface::class);
     }
 
     function it_sends_a_contact_request_email(SenderInterface $sender)

@@ -17,6 +17,7 @@ sylius_grid:
                             sorting: "expr:service('request_stack').getCurrentRequest().get('sorting', [])"
             sorting:
                 position: asc
+            limits: [9, 18, 27]
             fields:
                 createdAt:
                     type: datetime

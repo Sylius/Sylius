@@ -73,6 +73,17 @@ final class GridSpec extends ObjectBehavior
         $this->getSorting()->shouldReturn(['name' => 'asc']);
     }
 
+    function it_has_no_pagination_limits_by_default()
+    {
+        $this->getLimits()->shouldReturn([]);
+    }
+
+    function its_pagination_limits_can_be_configured()
+    {
+        $this->setLimits([20, 50, 100]);
+        $this->getLimits()->shouldReturn([20, 50, 100]);
+    }
+
     function it_does_not_have_any_fields_by_default()
     {
         $this->getFields()->shouldReturn([]);

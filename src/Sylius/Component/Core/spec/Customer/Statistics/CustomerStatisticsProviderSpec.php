@@ -51,7 +51,7 @@ final class CustomerStatisticsProviderSpec extends ObjectBehavior
         $expectedStatistics = new CustomerStatistics([]);
 
         $channelRepository->findAll()->willReturn([$channel]);
-        $orderRepository->findByCustomer($customer)->willReturn([]);
+        $orderRepository->findForCustomerStatistics($customer)->willReturn([]);
 
         $this->getCustomerStatistics($customer)->shouldBeLike($expectedStatistics);
     }
@@ -76,7 +76,7 @@ final class CustomerStatisticsProviderSpec extends ObjectBehavior
         ]);
 
         $channelRepository->findAll()->willReturn([$channel, $channelWithoutOrders]);
-        $orderRepository->findByCustomer($customer)->willReturn([$firstOrder, $secondOrder]);
+        $orderRepository->findForCustomerStatistics($customer)->willReturn([$firstOrder, $secondOrder]);
 
         $this->getCustomerStatistics($customer)->shouldBeLike($expectedStatistics);
     }
@@ -115,7 +115,7 @@ final class CustomerStatisticsProviderSpec extends ObjectBehavior
         ]);
 
         $channelRepository->findAll()->willReturn([$firstChannel, $secondChannel]);
-        $orderRepository->findByCustomer($customer)->willReturn($allOrders);
+        $orderRepository->findForCustomerStatistics($customer)->willReturn($allOrders);
 
         $this->getCustomerStatistics($customer)->shouldBeLike($expectedStatistics);
     }

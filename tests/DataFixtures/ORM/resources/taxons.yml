@@ -1,25 +1,21 @@
-Sylius\Component\Taxonomy\Model\TaxonTranslation:
-    taxonTranslation1:
-        locale: en
-        name: 'mugs'
-        slug: 'mugs'
-        translatable: "@taxon1"
-    taxonTranslation2:
-        locale: en
-        name: "yellow mugs"
-        slug: "yellow-mugs"
-        translatable: "@taxon2"
-
 Sylius\Component\Core\Model\Taxon:
-    taxon1:
-        code: MUGS
-        fallbackLocale: en
-        currentLocale: en
-        translations:
-            - "@taxonTranslation2"
-    taxon2:
-        code: YELLOW_MUGS
-        fallbackLocale: en
-        currentLocale: en
-        translations:
-            - "@taxonTranslation1"
+    category:
+        code: "category"
+    mugs:
+        code: "mugs"
+        parent: "@category"
+    stickers:
+        code: "stickers"
+        parent: "@category"
+    books:
+        code: "books"
+        parent: "@category"
+    t-shirts:
+        code: "t-shirts"
+        parent: "@category"
+    men:
+        code: "men"
+        parent: "@t-shirts"
+    women:
+        code: "women"
+        parent: "@t-shirts"

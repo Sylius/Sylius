@@ -1,0 +1,16 @@
+{
+    "code": 400,
+    "message": "Validation Failed",
+    "errors": {
+        "children": {
+            "translations": {},
+            "images": {},
+            "code": {
+                "errors": [
+                    "Please enter taxon code."
+                ]
+            },
+            "parent": {}
+        }
+    }
+}

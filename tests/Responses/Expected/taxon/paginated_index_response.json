@@ -1,0 +1,136 @@
+{
+    "page": 2,
+    "limit": 10,
+    "pages": 2,
+    "total": 17,
+    "_links": {
+        "self": {
+            "href": "\/api\/v1\/taxons\/?page=2&limit=10"
+        },
+        "first": {
+            "href": "\/api\/v1\/taxons\/?page=1&limit=10"
+        },
+        "last": {
+            "href": "\/api\/v1\/taxons\/?page=2&limit=10"
+        },
+        "previous": {
+            "href": "\/api\/v1\/taxons\/?page=1&limit=10"
+        }
+    },
+    "_embedded": {
+        "items": [
+            {
+                "id": @integer@,
+                "code": "taxon4",
+                "position": 4,
+                "translations": {
+                    "en": {
+                        "locale": "en"
+                    }
+                },
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "code": "taxon5",
+                "position": 5,
+                "translations": {
+                    "en": {
+                        "locale": "en"
+                    }
+                },
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "code": "taxon6",
+                "position": 6,
+                "translations": {
+                    "en": {
+                        "locale": "en"
+                    }
+                },
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "code": "taxon7",
+                "position": 7,
+                "translations": {
+                    "en": {
+                        "locale": "en"
+                    }
+                },
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "code": "taxon8",
+                "position": 8,
+                "translations": {
+                    "en": {
+                        "locale": "en"
+                    }
+                },
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "code": "taxon9",
+                "position": 9,
+                "translations": {
+                    "en": {
+                        "locale": "en"
+                    }
+                },
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "code": "taxon10",
+                "position": 10,
+                "translations": {
+                    "en": {
+                        "locale": "en"
+                    }
+                },
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            }
+        ]
+    }
+}

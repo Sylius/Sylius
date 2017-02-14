@@ -1,0 +1,59 @@
+{% extends 'knp_menu.html.twig' %}
+
+{% import '@SyliusUi/Macro/buttons.html.twig' as buttons %}
+
+{% block root %}
+    {% set id = item.extra('column_id') %}
+
+    <div class="six wide right aligned column"{% if id %} id="{{ id }}"{% endif %}>
+        {{ block('items') }}
+    </div>
+{% endblock %}
+
+{% block items %}
+    <div class="ui buttons">
+        {% for item in item.children %}
+            {{ block('item') }}
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block item %}
+    {% if 'edit' == item.attribute('type') %}
+        {{ buttons.edit(item.uri, item.label) }}
+    {% elseif 'show' == item.attribute('type') %}
+        {{ buttons.show(item.uri, item.label) }}
+    {% elseif 'delete' == item.attribute('type') %}
+        {{ buttons.delete(item.uri, item.label|trans, true, item.attribute('resource_id')) }}
+    {% elseif 'transition' == item.attribute('type') %}
+        {{ block('transition') }}
+    {% else %}
+        {{ block('link') }}
+    {% endif %}
+{% endblock %}
+
+{% block link %}
+    {% set color = item.labelAttribute('color') %}
+
+    <a href="{{ item.uri }}" class="ui {% if color %}{{ color }} {% endif %}labeled icon button">
+        {{ block('icon') }}
+        {{ item.label|trans }}
+    </a>
+{% endblock %}
+
+{% block transition %}
+    {% set color = item.labelAttribute('color') %}
+
+    <form action="{{ item.uri }}" method="post" style="float: right;">
+        <input type="hidden" name="_method" value="PUT">
+        <button class="ui {% if color %}{{ color }} {% endif %}labeled icon loadable button" type="submit">
+            {{ block('icon') }}
+            {{ item.label|trans }}
+        </button>
+    </form>
+{% endblock %}
+
+{% block icon %}
+    {% set icon = item.labelAttribute('icon') %}
+    {% if icon %}<i class="icon {{ icon }}"></i> {% endif %}
+{% endblock %}

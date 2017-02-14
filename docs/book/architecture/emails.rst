@@ -100,7 +100,7 @@ Example using **EmailManager**:
 
 .. code-block:: php
 
-    /** @var OrderEmailManager $sender */
+    /** @var OrderEmailManagerInterface $sender */
     $orderEmailManager = $this->container->get('sylius.email_manager.order');
 
     $orderEmailManager->sendConfirmationEmail($order);

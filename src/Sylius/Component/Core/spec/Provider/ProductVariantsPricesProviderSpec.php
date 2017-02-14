@@ -75,30 +75,30 @@ final class ProductVariantsPricesProviderSpec extends ObjectBehavior
         $small->getOptionCode()->willReturn('t_shirt_size');
         $large->getOptionCode()->willReturn('t_shirt_size');
 
-        $black->getValue()->willReturn('Black');
-        $white->getValue()->willReturn('White');
-        $small->getValue()->willReturn('Small');
-        $large->getValue()->willReturn('Large');
+        $black->getCode()->willReturn('black');
+        $white->getCode()->willReturn('white');
+        $small->getCode()->willReturn('small');
+        $large->getCode()->willReturn('large');
 
         $this->provideVariantsPrices($tShirt, $channel)->shouldReturn([
             [
-                't_shirt_color' => 'Black',
-                't_shirt_size' => 'Small',
+                't_shirt_color' => 'black',
+                't_shirt_size' => 'small',
                 'value' => 1000,
             ],
             [
-                't_shirt_color' => 'White',
-                't_shirt_size' => 'Small',
+                't_shirt_color' => 'white',
+                't_shirt_size' => 'small',
                 'value' => 1500,
             ],
             [
-                't_shirt_color' => 'Black',
-                't_shirt_size' => 'Large',
+                't_shirt_color' => 'black',
+                't_shirt_size' => 'large',
                 'value' => 2000,
             ],
             [
-                't_shirt_color' => 'White',
-                't_shirt_size' => 'Large',
+                't_shirt_color' => 'white',
+                't_shirt_size' => 'large',
                 'value' => 2500,
             ]
         ]);

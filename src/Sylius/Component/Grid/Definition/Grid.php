@@ -38,6 +38,11 @@ class Grid
     /**
      * @var array
      */
+    private $limits = [];
+
+    /**
+     * @var array
+     */
     private $fields = [];
 
     /**
@@ -120,6 +125,22 @@ class Grid
     public function setSorting(array $sorting)
     {
         $this->sorting = $sorting;
+    }
+
+    /**
+     * @return array
+     */
+    public function getLimits()
+    {
+        return $this->limits;
+    }
+
+    /**
+     * @param array $limits
+     */
+    public function setLimits(array $limits)
+    {
+        $this->limits = $limits;
     }
 
     /**

@@ -261,6 +261,37 @@ What is more, you can use a path variable to dynamically change your request. Yo
 
     Remember that a dynamically resolved `books` prefix is no longer available when you specify ``path``, and it has to be defined manually.
 
+Using a Custom Criteria
+-----------------------
+
+Sometimes it is convenient to add some additional constraint when resolving resources. For example, one could want to present a list of all books from some library (which id would be a part of path).
+Assuming that the path prefix is `/libraries/{libraryId}`, if you would like to list all books from this library, you could use the following snippet:
+
+.. code-block:: yaml
+
+    app_book:
+        resource: |
+            alias: app.book
+            criteria:
+                library: $libraryId
+        type: sylius.resource
+
+Which will result in the following routes:
+
+.. code-block:: bash
+
+    $ php bin/console debug:router
+
+    ------------------------ --------------- -------- ------ ---------------------------------------
+    Name                     Method          Scheme   Host   Path
+    ------------------------ --------------- -------- ------ ---------------------------------------
+    app_book_show            GET             ANY      ANY    /libraries/{libraryId}/books/{id}
+    app_book_index           GET             ANY      ANY    /libraries/{libraryId}/books/
+    app_book_create          GET|POST        ANY      ANY    /libraries/{libraryId}/books/new
+    app_book_update          GET|PUT|PATCH   ANY      ANY    /libraries/{libraryId}/books/{id}/edit
+    app_book_delete          DELETE          ANY      ANY    /libraries/{libraryId}/books/{id}
+
+
 Using a Custom Identifier
 -------------------------
 
