@@ -10,7 +10,8 @@ If you want to override a controller action, check which controller you should b
     There are two types of controllers we can define in Sylius:
 
     **Resource Controllers** - are based only on one Entity, so they return only the resources they have in their name. For instance a ``ProductController`` should return only products.
-    **Standard Controllers** - non-resource; these may use many entities at once, they are useful on more general pages. We are extending these controllers only if the actions we want cannot be done through yaml configuration - like sending emails.
+    **Standard Controllers** - non-resource; these may use many entities at once, they are useful on more general pages.
+    We are extending these controllers only if the actions we want cannot be done through yaml configuration - like sending emails.
 
 Why would you customize a Controller?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -109,57 +110,67 @@ getting a list of recommended products from your external api.
 How to customize a Standard Controller:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Let's assume that you would like to send some kind of emails (which are not resources) after something has been purchased in your shop - to do this you should modify an ``afterPurchaseAction`` on the ``OrderController``.
+Let's assume that you would like to add some logic to the Homepage.
 
-1. Create a new Controller class under the ``AppBundle/Controller/Frontend`` namespace.
+1. Create a new Controller class under the ``AppBundle/Controller/Shop`` namespace.
 
-Run ``$ php bin/console debug:container sylius.controller.frontend.order``.
+Run ``$ php bin/console debug:container sylius.controller.shop.homepage``.
 
-Your class needs to extend this base class.
+Your class needs to extend the Symfony's Controller, and if you still need the methods of the original HompageController,
+then copy its methods to the new one.
 
 .. code-block:: php
 
     <?php
 
-    namespace AppBundle\Controller\Frontend;
+    namespace AppBundle\Controller\Shop;
 
-    use Sylius\Bundle\WebBundle\Controller\Frontend\Account\OrderController as BaseOrderController;
-    use Sylius\Bundle\PayumBundle\Request\GetStatus;
+    use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+    use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\Response;
 
-    class OrderController extends BaseOrderController
+    class HomepageController extends Controller
     {
+        /**
+         * @var EngineInterface
+         */
+        private $templatingEngine;
+
+        /**
+         * @param EngineInterface $templatingEngine
+         */
+        public function __construct(EngineInterface $templatingEngine)
+        {
+            $this->templatingEngine = $templatingEngine;
+        }
+
         /**
          * @param Request $request
          *
          * @return Response
          */
-        public function afterPurchaseAction(Request $request)
+        public function indexAction(Request $request)
         {
-            $token = $this->getHttpRequestVerifier()->verify($request);
-            $this->getHttpRequestVerifier()->invalidate($token);
+            return $this->templatingEngine->renderResponse('@SyliusShop/Homepage/index.html.twig');
+        }
 
-            $status = new GetStatus($token);
-            $this->getPayum()->getGateway($token->getGatewayName())->execute($status);
-            $payment = $status->getFirstModel();
-            $order = $payment->getOrder();
-            $this->checkAccessToOrder($order);
-
-            $this->getOrderManager()->flush();
-
-            $emailManager = $this->get('sylius.email_manager.order');
-            $emailManager->sendConfirmationEmail($order);
-
-            return $this->redirectToRoute('sylius_checkout_thank_you');
+        /**
+         * @param Request $request
+         *
+         * @return Response
+         */
+        public function customAction(Request $request)
+        {
+            // Put your custom logic here
         }
     }
 
-2. The next thing you have to do is to override the ``sylius.controller.frontend.order.class`` parameter in ``app/config/services.yml``.
+2. The next thing you have to do is to override the ``sylius.controller.shop.homepage`` service definition in the ``app/config/services.yml``.
 
 .. code-block:: yaml
 
-    parameters:
-        sylius.controller.frontend.order.class: AppBundle\Controller\Frontend\OrderController
+    services:
+        sylius.controller.shop.homepage: AppBundle\Controller\Shop\HomepageController
 
-From now on your ``afterPurchaseAction`` of the ``OrderController`` will also send emails in addition to its default behaviour.
+From now on your ``customAction`` of the ``HomepageController`` will be available alongside the ``indexAction`` from the base class.
