@@ -21,10 +21,6 @@ winzou_state_machine:
                 to: cancelled
         callbacks:
             after:
-                sylius_send_shipping_confirmation_email:
-                    to: ["shipped"]
-                    do: ["@sylius.email_manager.shipment", "sendConfirmationEmail"]
-                    args: ["object"]
                 sylius_resolve_state:
                     on: ["ship"]
                     do: ["@sylius.state_resolver.order_shipping", "resolve"]
