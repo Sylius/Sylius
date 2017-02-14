@@ -463,7 +463,7 @@ class ResourceController extends Controller
     protected function findOr404(RequestConfiguration $configuration)
     {
         if (null === $resource = $this->singleResourceProvider->get($configuration, $this->repository)) {
-            throw new NotFoundHttpException();
+            throw new NotFoundHttpException(sprintf('The "%s" has not been found', $this->metadata->getHumanizedName()));
         }
 
         return $resource;
