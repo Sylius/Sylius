@@ -47,6 +47,10 @@ final class OrderShippingMethodSelectionRequirementChecker implements OrderShipp
             return true;
         }
 
+        if (!$order->getChannel()->isSkippingShippingStepAllowed()) {
+            return true;
+        }
+
         /** @var ShipmentInterface $shipment */
         foreach ($order->getShipments() as $shipment) {
             if (1 !== count($this->shippingMethodsResolver->getSupportedMethods($shipment))) {
