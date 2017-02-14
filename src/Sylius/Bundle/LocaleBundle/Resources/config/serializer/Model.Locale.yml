@@ -19,3 +19,10 @@ Sylius\Component\Locale\Model\Locale:
             expose: true
             type: DateTime
             groups: [Detailed]
+    relations:
+        - rel: self
+          href:
+                route: sylius_api_locale_show
+                parameters:
+                    code: expr(object.getCode())
+                    version: 1

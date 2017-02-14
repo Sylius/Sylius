@@ -1,59 +1,59 @@
-Currencies API
-==============
+Locales API
+===========
 
-These endpoints will allow you to easily manage currencies. Base URI is `/api/v1/currencies`.
+These endpoints will allow you to easily manage locales. Base URI is `/api/v1/locales`.
 
-Currency structure
-------------------
+Locale structure
+----------------
 
-Currency API response structure
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Locale API response structure
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If you request a currency via API, you will receive an object with the following fields:
+If you request a locale via API, you will receive an object with the following fields:
 
-+--------------+----------------------------+
-| Field        | Description                |
-+==============+============================+
-| id           | Id of the currency         |
-+--------------+----------------------------+
-| code         | Unique currency identifier |
-+--------------+----------------------------+
++--------------+--------------------------+
+| Field        | Description              |
++==============+==========================+
+| id           | Id of the locale         |
++--------------+--------------------------+
+| code         | Unique locale identifier |
++--------------+--------------------------+
 
 If you request for more detailed data, you will receive an object with the following fields:
 
-+------------------------+----------------------------------+
-| Field                  | Description                      |
-+========================+==================================+
-| id                     | Id of the currency               |
-+------------------------+----------------------------------+
-| code                   | Unique currency identifier       |
-+------------------------+----------------------------------+
-| updatedAt              | Last update date of the currency |
-+------------------------+----------------------------------+
-| createdAt              | Creation date of the currency    |
-+------------------------+----------------------------------+
++------------------------+--------------------------------+
+| Field                  | Description                    |
++========================+================================+
+| id                     | Id of the locale               |
++------------------------+--------------------------------+
+| code                   | Unique locale identifier       |
++------------------------+--------------------------------+
+| updatedAt              | Last update date of the locale |
++------------------------+--------------------------------+
+| createdAt              | Creation date of the locale    |
++------------------------+--------------------------------+
 .. note::
 
-    Read more about :doc:`Currencies </components/currency/models>`.
+    Read more about :doc:`Locales </components/locale/models>`.
 
-Creating a Currency
+Creating a Locale
 -------------------
 
-To create a new currency you will need to call the ``/api/v1/currencies/`` endpoint with the ``POST`` method.
+To create a new locale you will need to call the ``/api/v1/locales/`` endpoint with the ``POST`` method.
 
 Definition
 ^^^^^^^^^^
 
 .. code-block:: text
 
-    POST /api/v1/currencies/
+    POST /api/v1/locales/
 
 +------------------------------------+----------------+--------------------------------------+
 | Parameter                          | Parameter type | Description                          |
 +====================================+================+======================================+
 | Authorization                      | header         | Token received during authentication |
 +------------------------------------+----------------+--------------------------------------+
-| code                               | request        | **(unique)** Currency identifier     |
+| code                               | request        | **(unique)** Locale identifier       |
 +------------------------------------+----------------+--------------------------------------+
 
 Example
@@ -61,13 +61,13 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://sylius.dev/api/v1/currencies/ \
+    $ curl http://sylius.dev/api/v1/locales/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST \
         --data '
             {
-                "code": "PLN"
+                "code": "pl"
             }
         '
 
@@ -82,24 +82,24 @@ Exemplary Response
 
     {
         "id": 4,
-        "code": "PLN",
-        "created_at": "2017-02-14T11:38:40+0100",
-        "updated_at": "2017-02-14T11:38:41+0100",
+        "code": "pl",
+        "created_at": "2017-02-14T12:49:38+0100",
+        "updated_at": "2017-02-14T12:49:39+0100",
         "_links": {
             "self": {
-                "href": "\/api\/v1\/currencies\/PLN"
+                "href": "\/api\/v1\/locales\/pl"
             }
 	    }
     }
 
-If you try to create a currency without code you will receive a 400 error.
+If you try to create a locale without code you will receive a 400 error.
 
 Example
 ^^^^^^^
 
 .. code-block:: bash
 
-    $ curl http://sylius.dev/api/v1/currencies/ \
+    $ curl http://sylius.dev/api/v1/locales/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X POST
@@ -120,47 +120,47 @@ Exemplary Response
             "children": {
                 "code": {
                     "errors": [
-                        "Please choose currency code."
+                        "Please enter locale code."
                     ]
                 }
             }
         }
     }
 
-Getting a Single Currency
--------------------------
+Getting a Single Locale
+-----------------------
 
-To retrieve the details of the currency you will need to call the ``/api/v1/currencies/currency_code`` endpoint with the ``GET`` method.
+To retrieve the details of the locale you will need to call the ``/api/v1/locales/locale_code`` endpoint with the ``GET`` method.
 
 Definition
 ^^^^^^^^^^
 
 .. code-block:: text
 
-    GET /api/v1/currencies/{code}
+    GET /api/v1/locales/{code}
 
 +---------------+----------------+--------------------------------------+
 | Parameter     | Parameter type | Description                          |
 +===============+================+======================================+
 | Authorization | header         | Token received during authentication |
 +---------------+----------------+--------------------------------------+
-| code          | url attribute  | Code of requested currency           |
+| code          | url attribute  | Code of requested locale             |
 +---------------+----------------+--------------------------------------+
 
 Example
 ^^^^^^^
 
-To see the details for the the currency with ``code = PLN`` use the below method:
+To see the details for the the locale with ``code = pl`` use the below method:
 
 .. code-block:: bash
 
-     $ curl http://demo.sylius.org/api/v1/currencies/PLN \
+     $ curl http://demo.sylius.org/api/v1/locales/pl \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
 .. note::
 
-    The *PLN* is just an example. Your value can be different.
+    *pl* is just an example. Your value can be different.
 
 Exemplary Response
 ^^^^^^^^^^^^^^^^^^
@@ -173,27 +173,27 @@ Exemplary Response
 
    {
         "id": 4,
-        "code": "PLN",
-        "created_at": "2017-02-14T11:38:40+0100",
-        "updated_at": "2017-02-14T11:38:41+0100",
+        "code": "pl",
+        "created_at": "2017-02-14T12:49:38+0100",
+        "updated_at": "2017-02-14T12:49:39+0100",
         "_links": {
             "self": {
-                "href": "\/api\/v1\/currencies\/PLN"
+                "href": "\/api\/v1\/locales\/pl"
             }
         }
     }
 
-Collection of Currencies
-------------------------
+Collection of Locales
+---------------------
 
-To retrieve a paginated list of currencies you will need to call the ``/api/v1/currencies/`` endpoint with the ``GET`` method.
+To retrieve a paginated list of locales you will need to call the ``/api/v1/locales/`` endpoint with the ``GET`` method.
 
 Definition
 ^^^^^^^^^^
 
 .. code-block:: text
 
-    GET /api/v1/currencies/
+    GET /api/v1/locales/
 
 +---------------+----------------+-------------------------------------------------------------------+
 | Parameter     | Parameter type | Description                                                       |
@@ -205,14 +205,14 @@ Definition
 | paginate      | query          | *(optional)* Number of items to display per page, by default = 10 |
 +---------------+----------------+-------------------------------------------------------------------+
 
-To see the first page of all currencies use the below method:
+To see the first page of all locales use the below method:
 
 Example
 ^^^^^^^
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/currencies/ \
+    $ curl http://demo.sylius.org/api/v1/locales/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
@@ -232,41 +232,41 @@ Exemplary Response
         "total": 3,
         "_links": {
             "self": {
-                "href": "\/api\/v1\/currencies\/?page=1&limit=10"
+                "href": "\/api\/v1\/locales\/?page=1&limit=10"
             },
             "first": {
-                "href": "\/api\/v1\/currencies\/?page=1&limit=10"
+                "href": "\/api\/v1\/locales\/?page=1&limit=10"
             },
             "last": {
-                "href": "\/api\/v1\/currencies\/?page=1&limit=10"
+                "href": "\/api\/v1\/locales\/?page=1&limit=10"
             }
         },
         "_embedded": {
             "items": [
                 {
-                    "id": 3,
-                    "code": "USD",
+                    "id": 2,
+                    "code": "en_US",
                     "_links": {
                         "self": {
-                            "href": "\/api\/v1\/currencies\/USD"
+                            "href": "\/api\/v1\/locales\/en_US"
+                        }
+                    }
+                },
+                {
+                    "id": 3,
+                    "code": "af",
+                    "_links": {
+                        "self": {
+                            "href": "\/api\/v1\/locales\/af"
                         }
                     }
                 },
                 {
                     "id": 4,
-                    "code": "PLN",
+                    "code": "pl",
                     "_links": {
                         "self": {
-                            "href": "\/api\/v1\/currencies\/PLN"
-                        }
-                    }
-                },
-                {
-                    "id": 5,
-                    "code": "EUR",
-                    "_links": {
-                        "self": {
-                            "href": "\/api\/v1\/currencies\/EUR"
+                            "href": "\/api\/v1\/locales\/pl"
                         }
                     }
                 }
@@ -274,32 +274,32 @@ Exemplary Response
         }
     }
 
-Deleting Currency
------------------
+Deleting Locale
+---------------
 
-To delete a currency you will need to call the ``/api/v1/currencies/currency_code`` endpoint with the ``DELETE`` method.
+To delete a locale you will need to call the ``/api/v1/locales/locale_code`` endpoint with the ``DELETE`` method.
 
 Definition
 ^^^^^^^^^^
 
 .. code-block:: text
 
-    DELETE /api/v1/currencies/{code}
+    DELETE /api/v1/locales/{code}
 
-+---------------+----------------+-------------------------------------------+
-| Parameter     | Parameter type | Description                               |
-+===============+================+===========================================+
-| Authorization | header         | Token received during authentication      |
-+---------------+----------------+-------------------------------------------+
-| code          | url attribute  | Code of removed currency                  |
-+---------------+----------------+-------------------------------------------+
++---------------+----------------+--------------------------------------+
+| Parameter     | Parameter type | Description                          |
++===============+================+======================================+
+| Authorization | header         | Token received during authentication |
++---------------+----------------+--------------------------------------+
+| code          | url attribute  | Code of removed locale               |
++---------------+----------------+--------------------------------------+
 
 Example
 ^^^^^^^
 
 .. code-block:: bash
 
-    $ curl http://sylius.dev/api/v1/currencies/PLN \
+    $ curl http://sylius.dev/api/v1/locales/pl \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X DELETE

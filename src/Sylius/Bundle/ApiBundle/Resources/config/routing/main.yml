@@ -10,6 +10,9 @@ sylius_api_country:
 sylius_api_currency:
     resource: "@SyliusApiBundle/Resources/config/routing/currency.yml"
 
+sylius_api_locale:
+    resource: "@SyliusApiBundle/Resources/config/routing/locale.yml"
+
 sylius_api_product:
     resource: "@SyliusApiBundle/Resources/config/routing/product.yml"
 
@@ -108,7 +111,4 @@ sylius_api_customer:
     resource: "@SyliusApiBundle/Resources/config/routing/customer.yml"
     prefix: /customers
 
-sylius_api_locale:
-    resource: "@SyliusApiBundle/Resources/config/routing/locale.yml"
-    prefix: /locales
 

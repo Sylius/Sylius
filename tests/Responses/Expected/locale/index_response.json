@@ -18,22 +18,39 @@
         "items": [
             {
                 "id": @integer@,
-                "code": "en_US"
+                "code": "en_US",
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/locales\/en_US"
+                    }
+                }
             },
             {
-
                 "id": @integer@,
-                "code": "nl_NL"
+                "code": "nl_NL",
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/locales\/nl_NL"
+                    }
+                }
             },
             {
-
                 "id": @integer@,
-                "code": "fr_FR"
+                "code": "fr_FR",
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/locales\/fr_FR"
+                    }
+                }
             },
             {
-
                 "id": @integer@,
-                "code": "de_CH"
+                "code": "de_CH",
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/locales\/de_CH"
+                    }
+                }
             }
         ]
     }

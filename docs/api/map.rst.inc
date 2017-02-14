@@ -2,6 +2,7 @@
 * :doc:`/api/authorization`
 * :doc:`/api/channels`
 * :doc:`/api/carts`
+* :doc:`/api/locales`
 * :doc:`/api/orders`
 * :doc:`/api/checkouts`
 * :doc:`/api/products`
