@@ -41,7 +41,6 @@ final class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->cannotBeEmpty()->end()
-                ->scalarNode('currency')->defaultValue('USD')->cannotBeEmpty()->end()
             ->end()
         ;
 

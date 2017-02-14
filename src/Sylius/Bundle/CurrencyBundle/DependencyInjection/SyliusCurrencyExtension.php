@@ -34,7 +34,5 @@ final class SyliusCurrencyExtension extends AbstractResourceExtension
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
         $loader->load('services.xml');
-
-        $container->setParameter('sylius_currency.currency', $config['currency']);
     }
 }

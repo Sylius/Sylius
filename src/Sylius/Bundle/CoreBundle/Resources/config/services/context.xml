@@ -47,24 +47,19 @@
             <tag name="sylius.context.cart" priority="-555" />
         </service>
 
-        <service id="sylius.currency_provider.channel_based" class="Sylius\Component\Core\Provider\ChannelBasedCurrencyProvider" decorates="sylius.currency_provider" decoration-priority="256">
-            <argument type="service" id="sylius.context.channel" />
-        </service>
-
-        <service id="sylius.storage.currency" class="Sylius\Component\Core\Currency\SessionBasedCurrencyStorage">
-            <argument type="service" id="session" />
+        <service id="sylius.storage.currency" class="Sylius\Component\Core\Currency\CurrencyStorage">
+            <argument type="service" id="sylius.storage.cookie" />
         </service>
 
         <service id="sylius.context.currency.storage_based" class="Sylius\Component\Core\Currency\Context\StorageBasedCurrencyContext">
             <argument type="service" id="sylius.context.channel" />
             <argument type="service" id="sylius.storage.currency" />
-            <argument type="service" id="sylius.currency_provider" />
-            <tag name="sylius.context.currency" priority="-888" />
+            <tag name="sylius.context.currency" />
         </service>
 
-        <service id="sylius.context.currency.provider_based" class="Sylius\Component\Currency\Context\ProviderBasedCurrencyContext">
-            <argument type="service" id="sylius.currency_provider" />
-            <tag name="sylius.context.currency" priority="-999" />
+        <service id="sylius.context.currency.channel_aware" class="Sylius\Component\Core\Currency\Context\ChannelAwareCurrencyContext" decorates="sylius.context.currency" decoration-priority="256">
+            <argument type="service" id="sylius.context.currency.channel_aware.inner" />
+            <argument type="service" id="sylius.context.channel" />
         </service>
 
         <service id="sylius.locale_provider.channel_based" class="Sylius\Component\Core\Provider\ChannelBasedLocaleProvider" decorates="sylius.locale_provider" decoration-priority="256">

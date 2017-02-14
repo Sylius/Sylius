@@ -52,32 +52,24 @@ final class ChannelContext implements Context
     private $channelManager;
 
     /**
-     * @var CurrencyStorageInterface
-     */
-    private $currencyStorage;
-
-    /**
      * @param SharedStorageInterface $sharedStorage
      * @param DefaultChannelFactoryInterface $unitedStatesChannelFactory
      * @param DefaultChannelFactoryInterface $defaultChannelFactory
      * @param ChannelRepositoryInterface $channelRepository
      * @param ObjectManager $channelManager
-     * @param CurrencyStorageInterface $currencyStorage
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         DefaultChannelFactoryInterface $unitedStatesChannelFactory,
         DefaultChannelFactoryInterface $defaultChannelFactory,
         ChannelRepositoryInterface $channelRepository,
-        ObjectManager $channelManager,
-        CurrencyStorageInterface $currencyStorage
+        ObjectManager $channelManager
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->unitedStatesChannelFactory = $unitedStatesChannelFactory;
         $this->defaultChannelFactory = $defaultChannelFactory;
         $this->channelRepository = $channelRepository;
         $this->channelManager = $channelManager;
-        $this->currencyStorage = $currencyStorage;
     }
 
     /**
@@ -125,7 +117,6 @@ final class ChannelContext implements Context
 
         $this->sharedStorage->setClipboard($defaultData);
         $this->sharedStorage->set('channel', $defaultData['channel']);
-        $this->currencyStorage->set($defaultData['channel'], $defaultData['currency']->getCode());
     }
 
     /**

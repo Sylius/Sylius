@@ -32,7 +32,6 @@
             <argument type="service" id="__symfony__.sylius.behat.factory.default_channel" />
             <argument type="service" id="__symfony__.sylius.repository.channel" />
             <argument type="service" id="__symfony__.sylius.manager.channel" />
-            <argument type="service" id="__symfony__.sylius.storage.currency" />
             <argument>%__behat__.mink.parameters%</argument>
             <tag name="fob.context_service" />
         </service>
