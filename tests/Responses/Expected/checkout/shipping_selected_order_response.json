@@ -8,8 +8,11 @@
     "state": "cart",
     "customer": {
         "id": @integer@,
-        "email": "john@doe.com",
-        "email_canonical": "john@doe.com",
+        "email": "oliver.queen@star-city.com",
+        "email_canonical": "oliver.queen@star-city.com",
+        "first_name": "Oliver",
+        "last_name": "Queen",
+        "birthday": "@string@.isDateTime()",
         "gender": "u",
         "_links": {
             "self": {

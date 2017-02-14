@@ -38,9 +38,49 @@ class CheckoutApiTestCase extends JsonApiTestCase
     ];
 
     /**
-     * @param OrderInterface $order
+     * @return mixed
      */
-    protected function addressOrder(OrderInterface $order)
+    protected function createCart()
+    {
+        $data =
+<<<EOT
+        {
+            "customer": "oliver.queen@star-city.com",
+            "channel": "CHANNEL",
+            "locale_code": "en_US"
+        }
+EOT;
+
+        $this->client->request('POST', '/api/v1/carts/', [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $response = $this->client->getResponse();
+        $rawResponse = json_decode($response->getContent(), true);
+
+        return $rawResponse['id'];
+    }
+
+    /**
+     * @param mixed $cartId
+     */
+    protected function addItemToCart($cartId)
+    {
+        $url = sprintf('/api/v1/carts/%d/items/', $cartId);
+
+        $data =
+<<<EOT
+        {
+            "variant": "MUG_SW",
+            "quantity": 1
+        }
+EOT;
+
+        $this->client->request('POST', $url, [], [], static::$authorizedHeaderWithContentType, $data);
+    }
+
+    /**
+     * @param mixed $cartId
+     */
+    protected function addressOrder($cartId)
     {
         $this->loadFixturesFromFile('resources/countries.yml');
 
@@ -63,23 +103,20 @@ class CheckoutApiTestCase extends JsonApiTestCase
                 "city": "Groot Zundert",
                 "postcode": "88-888"
             },
-            "different_billing_address": true,
-            "customer": {
-                "email": "john@doe.com"
-            }
+            "different_billing_address": true
         }
 EOT;
 
-        $url = sprintf('/api/v1/checkouts/addressing/%d', $order->getId());
+        $url = sprintf('/api/v1/checkouts/addressing/%d', $cartId);
         $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
     }
 
     /**
-     * @param OrderInterface $order
+     * @param mixed $cartId
      */
-    protected function selectOrderShippingMethod(OrderInterface $order)
+    protected function selectOrderShippingMethod($cartId)
     {
-        $url = sprintf('/api/v1/checkouts/select-shipping/%d', $order->getId());
+        $url = sprintf('/api/v1/checkouts/select-shipping/%d', $cartId);
 
         $this->client->request('GET', $url, [], [], static::$authorizedHeaderWithContentType);
 
@@ -101,11 +138,11 @@ EOT;
     }
 
     /**
-     * @param OrderInterface $order
+     * @param mixed $cartId
      */
-    protected function selectOrderPaymentMethod(OrderInterface $order)
+    protected function selectOrderPaymentMethod($cartId)
     {
-        $url = sprintf('/api/v1/checkouts/select-payment/%d', $order->getId());
+        $url = sprintf('/api/v1/checkouts/select-payment/%d', $cartId);
 
         $this->client->request('GET', $url, [], [], static::$authorizedHeaderWithContentType);
 
@@ -127,12 +164,12 @@ EOT;
     }
 
     /**
-     * @param OrderInterface $cart
+     * @param mixed $cartId
      *
      * @return string
      */
-    protected function getCheckoutSummaryUrl(OrderInterface $cart)
+    protected function getCheckoutSummaryUrl($cartId)
     {
-        return sprintf('/api/v1/checkouts/%d', $cart->getId());
+        return sprintf('/api/v1/checkouts/%d', $cartId);
     }
 }

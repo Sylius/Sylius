@@ -75,12 +75,7 @@
                     }
                 }
             },
-            "differentBillingAddress": {},
-            "customer": {
-                "children": {
-                    "email": {}
-                }
-            }
+            "differentBillingAddress": {}
         }
     }
 }

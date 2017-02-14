@@ -51,15 +51,14 @@ final class CheckoutCompleteApiTest extends CheckoutApiTestCase
     public function it_does_not_allow_to_complete_order_that_is_not_addressed_and_has_no_shipping_and_payment_method_selected()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $checkoutData = $this->loadFixturesFromFile('resources/checkout.yml');
+        $this->loadFixturesFromFile('resources/checkout.yml');
 
-        /** @var OrderInterface $cart */
-        $cart = $checkoutData['order1'];
+        $cartId = $this->createCart();
+        $this->addItemToCart($cartId);
+        $this->addressOrder($cartId);
+        $this->selectOrderShippingMethod($cartId);
 
-        $this->addressOrder($cart);
-        $this->selectOrderShippingMethod($cart);
-
-        $this->client->request('PUT', $this->getCheckoutCompleteUrl($cart), [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('PUT', $this->getCheckoutCompleteUrl($cartId), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'checkout/complete_invalid_order_state', Response::HTTP_INTERNAL_SERVER_ERROR);
@@ -71,33 +70,32 @@ final class CheckoutCompleteApiTest extends CheckoutApiTestCase
     public function it_allows_to_complete_order_that_is_addressed_and_has_shipping_and_payment_method_selected()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $checkoutData = $this->loadFixturesFromFile('resources/checkout.yml');
+        $this->loadFixturesFromFile('resources/checkout.yml');
 
-        /** @var OrderInterface $cart */
-        $cart = $checkoutData['order1'];
+        $cartId = $this->createCart();
+        $this->addItemToCart($cartId);
+        $this->addressOrder($cartId);
+        $this->selectOrderShippingMethod($cartId);
+        $this->selectOrderPaymentMethod($cartId);
 
-        $this->addressOrder($cart);
-        $this->selectOrderShippingMethod($cart);
-        $this->selectOrderPaymentMethod($cart);
-
-        $this->client->request('PUT', $this->getCheckoutCompleteUrl($cart), [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('PUT', $this->getCheckoutCompleteUrl($cartId), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
 
-        $this->client->request('GET', $this->getCheckoutSummaryUrl($cart), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', $this->getCheckoutSummaryUrl($cartId), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'checkout/completed_order_response');
     }
 
     /**
-     * @param OrderInterface $cart
+     * @param mixed $cartId
      *
      * @return string
      */
-    private function getCheckoutCompleteUrl(OrderInterface $cart)
+    private function getCheckoutCompleteUrl($cartId)
     {
-        return sprintf('/api/v1/checkouts/complete/%d', $cart->getId());
+        return sprintf('/api/v1/checkouts/complete/%d', $cartId);
     }
 }
