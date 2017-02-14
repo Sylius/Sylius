@@ -59,7 +59,7 @@
         "twig/extensions": "^1.4",
         "twig/twig": "^1.28",
         "webmozart/assert": "^1.1",
-        "white-october/pagerfanta-bundle": "^1.0",
+        "white-october/pagerfanta-bundle": " ^1.0.8",
         "willdurand/hateoas-bundle": "^1.2",
         "winzou/state-machine-bundle": "^0.3",
         "zendframework/zend-hydrator": "^2.2",
