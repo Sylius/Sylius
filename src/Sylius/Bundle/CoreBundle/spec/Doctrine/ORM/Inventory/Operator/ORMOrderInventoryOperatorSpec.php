@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Core\Inventory\Operator;
+namespace spec\Sylius\Bundle\CoreBundle\Doctrine\ORM\Inventory\Operator;
 
 use Doctrine\DBAL\LockMode;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CoreBundle\Doctrine\ORM\Inventory\Operator\ORMOrderInventoryOperator;
 use Sylius\Component\Core\Inventory\Operator\OrderInventoryOperatorInterface;
-use Sylius\Component\Core\Inventory\Operator\ORMOrderInventoryOperator;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;

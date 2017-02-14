@@ -9,11 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Core\Inventory\Operator;
+namespace Sylius\Bundle\CoreBundle\Doctrine\ORM\Inventory\Operator;
 
 use Doctrine\DBAL\LockMode;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\OptimisticLockException;
+use Sylius\Component\Core\Inventory\Operator\OrderInventoryOperatorInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 
