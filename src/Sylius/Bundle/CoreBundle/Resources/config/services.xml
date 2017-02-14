@@ -165,5 +165,9 @@
             <argument type="service" id="sylius.factory.order_sequence" />
             <argument type="service" id="sylius.manager.order_sequence" />
         </service>
+
+        <service id="sylius.custom_resource_controller.resource_updater" class="Sylius\Bundle\CoreBundle\Updater\ResourceUpdater" decorates="sylius.resource_controller.resource_updater" public="false">
+            <argument type="service" id="sylius.custom_resource_controller.resource_updater.inner" />
+        </service>
     </services>
 </container>
