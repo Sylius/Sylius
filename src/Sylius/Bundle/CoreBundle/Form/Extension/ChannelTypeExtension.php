@@ -20,6 +20,7 @@ use Sylius\Bundle\CurrencyBundle\Form\Type\CurrencyChoiceType;
 use Sylius\Bundle\LocaleBundle\Form\Type\LocaleChoiceType;
 use Sylius\Bundle\ThemeBundle\Form\Type\ThemeNameChoiceType;
 use Symfony\Component\Form\AbstractTypeExtension;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -66,6 +67,10 @@ final class ChannelTypeExtension extends AbstractTypeExtension
             ])
             ->add('contactEmail', EmailType::class, [
                 'label' => 'sylius.form.channel.contact_email',
+                'required' => false,
+            ])
+            ->add('skippingShippingStepAllowed', CheckboxType::class, [
+                'label' => 'sylius.form.channel.skipping_shipping_step_allowed',
                 'required' => false,
             ])
             ->addEventSubscriber(new AddBaseCurrencySubscriber())

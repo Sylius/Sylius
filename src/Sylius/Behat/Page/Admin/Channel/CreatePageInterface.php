@@ -81,4 +81,6 @@ interface CreatePageInterface extends BaseCreatePageInterface
      * @param string $taxCalculationStrategy
      */
     public function chooseTaxCalculationStrategy($taxCalculationStrategy);
+
+    public function allowToSkipShippingStep();
 }

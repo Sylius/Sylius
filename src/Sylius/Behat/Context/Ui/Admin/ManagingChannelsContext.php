@@ -120,6 +120,14 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
+     * @When I allow to skip shipping step if only one shipping method is available
+     */
+    public function iAllowToSkipShippingStepIfOnlyOneShippingMethodIsAvailable()
+    {
+        $this->createPage->allowToSkipShippingStep();
+    }
+
+    /**
      * @When I add it
      * @When I try to add it
      */

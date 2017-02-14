@@ -105,6 +105,11 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         $this->getDocument()->selectFieldOption('Tax calculation strategy', $taxZone);
     }
 
+    public function allowToSkipShippingStep()
+    {
+        $this->getDocument()->checkField('Skip shipping step if only one shipping method is available?');
+    }
+
     /**
      * {@inheritdoc}
      */
