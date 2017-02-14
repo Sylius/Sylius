@@ -23,14 +23,14 @@
         <div id="menu" class="ui large sticky inverted stackable menu">
             {{ render(controller('sylius.controller.shop.currency_switch:renderAction')) }}
             {{ render(controller('sylius.controller.shop.locale_switch:renderAction')) }}
-            {% include '@SyliusShop/Homepage/Menu/_security.html.twig' %}
+            {% include '@SyliusShop/Menu/_security.html.twig' %}
         </div>
     {% endblock %}
 
     <div class="ui container">
         {% block header %}
             <header>
-                {% include '@SyliusShop/Homepage/_header.html.twig' %}
+                {% include '@SyliusShop/_header.html.twig' %}
 
                 {{ render(url('sylius_shop_partial_taxon_index_by_code', {'code': 'category', 'template': '@SyliusShop/Taxon/_horizontalMenu.html.twig'})) }}
             </header>
@@ -43,7 +43,7 @@
     </div>
 
     {% block footer %}
-        {% include '@SyliusShop/Homepage/_footer.html.twig' %}
+        {% include '@SyliusShop/_footer.html.twig' %}
     {% endblock %}
 </div>
 
