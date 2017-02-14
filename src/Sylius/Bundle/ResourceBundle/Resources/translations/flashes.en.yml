@@ -13,3 +13,4 @@ sylius:
         enable: '%resource% has been successfully enabled.'
         disable: '%resource% has been successfully disabled.'
         delete_error: 'Cannot delete, the %resource% is in use.'
+        race_condition_error: 'Cannot update, the %resource% was previously modified.'

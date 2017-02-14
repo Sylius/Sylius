@@ -28,6 +28,12 @@ interface FlashHelperInterface
 
     /**
      * @param RequestConfiguration $requestConfiguration
+     * @param string $actionName
+     */
+    public function addErrorFlash(RequestConfiguration $requestConfiguration, $actionName);
+
+    /**
+     * @param RequestConfiguration $requestConfiguration
      * @param ResourceControllerEvent $event
      */
     public function addFlashFromEvent(RequestConfiguration $requestConfiguration, ResourceControllerEvent $event);

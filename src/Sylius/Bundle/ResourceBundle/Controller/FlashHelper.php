@@ -86,6 +86,39 @@ final class FlashHelper implements FlashHelperInterface
     /**
      * {@inheritdoc}
      */
+    public function addErrorFlash(RequestConfiguration $requestConfiguration, $actionName)
+    {
+        $metadata = $requestConfiguration->getMetadata();
+        $metadataName = ucfirst($metadata->getHumanizedName());
+        $parameters = ['%resource%' => $metadataName];
+
+        $message = $requestConfiguration->getFlashMessage($actionName);
+        if (false === $message) {
+            return;
+        }
+
+        if ($this->isTranslationDefined($message, $this->defaultLocale, $parameters)) {
+            if (!$this->translator instanceof TranslatorBagInterface) {
+                $this->addFlash('error', $message, $parameters);
+
+                return;
+            }
+
+            $this->addFlash('error', $message);
+
+            return;
+        }
+
+        $this->addFlash(
+            'error',
+            $this->getResourceMessage($actionName),
+            $parameters
+        );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function addFlashFromEvent(RequestConfiguration $requestConfiguration, ResourceControllerEvent $event)
     {
         $this->addFlash($event->getMessageType(), $event->getMessage(), $event->getMessageParameters());
