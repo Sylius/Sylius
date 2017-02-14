@@ -84,14 +84,12 @@ final class LoadMetadataSubscriber implements EventSubscriber
             'fieldName' => 'reviewSubject',
             'targetEntity' => $reviewableEntity,
             'inversedBy' => 'reviews',
-            'joinColumns' => [
-                [
-                    'name' => $subject.'_id',
-                    'referencedColumnName' => $reviewableEntityMetadata->fieldMappings['id']['columnName'],
-                    'nullable' => false,
-                    'onDelete' => 'CASCADE',
-                ],
-            ],
+            'joinColumns' => [[
+                'name' => $subject.'_id',
+                'referencedColumnName' => $reviewableEntityMetadata->fieldMappings['id']['columnName'],
+                'nullable' => false,
+                'onDelete' => 'CASCADE',
+            ]],
         ];
     }
 
@@ -106,14 +104,12 @@ final class LoadMetadataSubscriber implements EventSubscriber
         return [
             'fieldName' => 'author',
             'targetEntity' => $reviewerEntity,
-            'joinColumns' => [
-                [
-                    'name' => 'author_id',
-                    'referencedColumnName' => $reviewerEntityMetadata->fieldMappings['id']['columnName'],
-                    'nullable' => false,
-                    'onDelete' => 'CASCADE',
-                ]
-            ],
+            'joinColumns' => [[
+                'name' => 'author_id',
+                'referencedColumnName' => $reviewerEntityMetadata->fieldMappings['id']['columnName'],
+                'nullable' => false,
+                'onDelete' => 'CASCADE',
+            ]],
             'cascade' => ['persist'],
         ];
     }
