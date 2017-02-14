@@ -6,19 +6,17 @@ Sylius\Component\Shipping\Model\Shipment:
             expose: true
             type: integer
             xml_attribute: true
+            groups: [Default, Detailed]
         state:
             expose: true
             type: string
+            groups: [Default, Detailed]
         method:
             expose: true
+            groups: [Default, Detailed]
         tracking:
             expose: true
-        createdAt:
-            expose: true
-            type: DateTime
-        updatedAt:
-            expose: true
-            type: DateTime
+            groups: [Default, Detailed]
     relations:
         - rel: self
           exclusion:

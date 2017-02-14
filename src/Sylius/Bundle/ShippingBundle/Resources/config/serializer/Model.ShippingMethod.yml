@@ -9,28 +9,15 @@ Sylius\Component\Shipping\Model\ShippingMethod:
         name:
             expose: true
             type: string
+            groups: [Default, Detailed]
         enabled:
             expose: true
             type: boolean
-        categoryRequirement:
-            expose: true
-            type: integer
-        calculator:
-            expose: true
-            type: string
-        configuration:
-            expose: true
-            type: array
-            xml_key_value_pairs: true
-        createdAt:
-            expose: true
-            type: DateTime
-        updatedAt:
-            expose: true
-            type: DateTime
+            groups: [Default, Detailed]
         code:
             expose: true
             type: string
+            groups: [Default, Detailed]
     relations:
         - rel: self
           href:

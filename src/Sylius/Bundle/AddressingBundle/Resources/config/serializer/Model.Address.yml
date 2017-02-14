@@ -9,33 +9,36 @@ Sylius\Component\Addressing\Model\Address:
         firstName:
             expose: true
             type: string
+            groups: [Default, Detailed]
         lastName:
             expose: true
             type: string
+            groups: [Default, Detailed]
         street:
             expose: true
             type: string
+            groups: [Default, Detailed]
         city:
             expose: true
             type: string
+            groups: [Default, Detailed]
         postcode:
             expose: true
             type: string
+            groups: [Default, Detailed]
         phoneNumber:
             expose: true
             type: string
-        createdAt:
-            expose: true
-            type: DateTime
-        updatedAt:
-            expose: true
-            type: DateTime
+            groups: [Default, Detailed]
         countryCode:
             expose: true
             type: string
+            groups: [Default, Detailed]
         provinceCode:
             expose: true
             type: string
+            groups: [Default, Detailed]
         provinceName:
             expose: true
             type: string
+            groups: [Default, Detailed]

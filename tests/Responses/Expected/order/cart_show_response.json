@@ -38,7 +38,6 @@
                 "tracked": false,
                 "channel_pricings": [
                     {
-                        "id": @integer@,
                         "channel": {
                             "id": @integer@,
                             "code": "CHANNEL",
@@ -127,8 +126,6 @@
             "method": {
                 "id": @integer@,
                 "code": "cod",
-                "created_at": "@string@.isDateTime()",
-                "updated_at": "@string@.isDateTime()",
                 "channels": [
                     {
                         "id": @integer@,
@@ -156,8 +153,6 @@
             },
             "amount": 30,
             "state": "cart",
-            "created_at": "@string@.isDateTime()",
-            "updated_at": "@string@.isDateTime()",
             "_links": {
                 "self": {
                     "href": "@string@"
@@ -178,15 +173,6 @@
             "method": {
                 "id": @integer@,
                 "code": "UPS",
-                "category_requirement": 1,
-                "calculator": "flat_rate",
-                "configuration": {
-                    "CHANNEL": {
-                        "amount": 10
-                    }
-                },
-                "created_at": "@string@.isDateTime()",
-                "updated_at": "@string@.isDateTime()",
                 "enabled": true,
                 "_links": {
                     "self": {
@@ -197,8 +183,6 @@
                     }
                 }
             },
-            "created_at": "@string@.isDateTime()",
-            "updated_at": "@string@.isDateTime()",
             "_links": {
                 "self": {
                     "href": "@string@"

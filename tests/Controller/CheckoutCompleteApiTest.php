@@ -90,6 +90,38 @@ final class CheckoutCompleteApiTest extends CheckoutApiTestCase
     }
 
     /**
+     * @test
+     */
+    public function it_allows_to_add_a_note_to_order_when_completing()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/checkout.yml');
+
+        $cartId = $this->createCart();
+        $this->addItemToCart($cartId);
+        $this->addressOrder($cartId);
+        $this->selectOrderShippingMethod($cartId);
+        $this->selectOrderPaymentMethod($cartId);
+
+        $data =
+<<<EOT
+        {
+            "notes": "Please, call me before delivery"
+        }
+EOT;
+
+        $this->client->request('PUT', $this->getCheckoutCompleteUrl($cartId), [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $response = $this->client->getResponse();
+        $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
+
+        $this->client->request('GET', $this->getCheckoutSummaryUrl($cartId), [], [], static::$authorizedHeaderWithAccept);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'checkout/completed_order_response');
+    }
+
+    /**
      * @param mixed $cartId
      *
      * @return string

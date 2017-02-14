@@ -6,18 +6,15 @@ Sylius\Component\Payment\Model\PaymentMethod:
             expose: true
             type: integer
             xml_attribute: true
+            groups: [Default, Detailed]
         code:
             expose: true
             type: string
+            groups: [Default, Detailed]
         name:
             expose: true
             type: string
-        createdAt:
-            expose: true
-            type: DateTime
-        updatedAt:
-            expose: true
-            type: DateTime
+            groups: [Default, Detailed]
     relations:
         - rel: self
           href:

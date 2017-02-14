@@ -5,9 +5,11 @@ Sylius\Component\Product\Model\ProductOptionValue:
         code:
             expose: true
             type: string
+            groups: [Default, Detailed]
         value:
             expose: true
             type: string
+            groups: [Detailed]
     virtual_properties:
         getName:
             serialized_name: name
