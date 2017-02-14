@@ -23,7 +23,7 @@
         <div id="menu" class="ui large sticky inverted stackable menu">
             {{ render(controller('sylius.controller.shop.currency_switch:renderAction')) }}
             {{ render(controller('sylius.controller.shop.locale_switch:renderAction')) }}
-            {% include '@SyliusShop/Menu/_security.html.twig' %}
+            {{ render(controller('sylius.controller.shop.security_widget:renderAction')) }}
         </div>
     {% endblock %}
 
