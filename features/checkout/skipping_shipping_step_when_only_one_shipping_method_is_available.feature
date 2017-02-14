@@ -6,6 +6,7 @@ Feature: Skipping shipping step when only one shipping method is available
 
     Background:
         Given the store operates on a single channel in "United States"
+        And on this channel shipping step is skipped if only a single shipping method is available
         And the store has a product "Guards! Guards!" priced at "$20.00"
         And the store allows paying with "Paypal Express Checkout"
         And I am a logged in customer

@@ -173,4 +173,14 @@ final class ChannelContext implements Context
         $this->channelManager->flush();
         $this->sharedStorage->set('channel', $channel);
     }
+
+    /**
+     * @Given /^on (this channel) shipping step is skipped if only a single shipping method is available$/
+     */
+    public function onThisChannelShippingStepIsSkippedIfOnlyASingleShippingMethodIsAvailable(ChannelInterface $channel)
+    {
+        $channel->setSkippingShippingStepAllowed(true);
+
+        $this->channelManager->flush();
+    }
 }
