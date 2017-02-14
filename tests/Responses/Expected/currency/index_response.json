@@ -18,15 +18,30 @@
         "items": [
             {
                 "id": @integer@,
-                "code": "USD"
+                "code": "USD",
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/currencies\/USD"
+                    }
+                }
             },
             {
                 "id": @integer@,
-                "code": "GBP"
+                "code": "EUR",
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/currencies\/EUR"
+                    }
+                }
             },
             {
                 "id": @integer@,
-                "code": "EUR"
+                "code": "GBP",
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/currencies\/GBP"
+                    }
+                }
             }
         ]
     }

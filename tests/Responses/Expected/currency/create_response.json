@@ -1,4 +1,9 @@
 {
     "id": @integer@,
-    "code": "USD"
+    "code": "USD",
+    "_links": {
+        "self": {
+            "href": "\/api\/v1\/currencies\/USD"
+        }
+    }
 }
