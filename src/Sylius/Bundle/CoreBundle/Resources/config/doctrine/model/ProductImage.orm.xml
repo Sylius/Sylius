@@ -16,5 +16,15 @@
         <many-to-one field="owner" target-entity="Sylius\Component\Product\Model\ProductInterface" inversed-by="images">
             <join-column name="owner_id" referenced-column-name="id" nullable="false" on-delete="CASCADE"/>
         </many-to-one>
+        <many-to-many field="productVariants" target-entity="Sylius\Component\Product\Model\ProductVariantInterface" orphan-removal="true">
+            <join-table name="sylius_product_image_product_variants">
+                <join-columns>
+                    <join-column name="image_id" referenced-column-name="id" on-delete="CASCADE" />
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="variant_id" referenced-column-name="id" on-delete="CASCADE" />
+                </inverse-join-columns>
+            </join-table>
+        </many-to-many>
     </mapped-superclass>
 </doctrine-mapping>

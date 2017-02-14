@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
@@ -192,7 +191,10 @@ final class ProductVariantSpec extends ObjectBehavior
         $this->addChannelPricing($firstChannelPricing);
         $this->addChannelPricing($secondChannelPricing);
 
-        $this->getChannelPricings()->shouldBeSameAs(new ArrayCollection(['WEB' => $firstChannelPricing, 'MOB' => $secondChannelPricing]));
+        $this->getChannelPricings()->shouldBeLike(new ArrayCollection([
+            'WEB' => $firstChannelPricing->getWrappedObject(),
+            'MOB' => $secondChannelPricing->getWrappedObject(),
+        ]));
     }
 
     function it_checks_if_contains_channel_pricing_for_given_channel(
@@ -237,22 +239,5 @@ final class ProductVariantSpec extends ObjectBehavior
     {
         $this->setShippingRequired(false);
         $this->isShippingRequired()->shouldReturn(false);
-    }
-
-    public function getMatchers()
-    {
-        return [
-            'beSameAs' => function ($subject, $key) {
-                if (!$subject instanceof Collection || !$key instanceof Collection) {
-                    return false;
-                }
-                foreach ($subject as $code => $value) {
-                    if ($value !== $key->get($code)->getWrappedObject()) {
-                        return false;
-                    }
-                }
-                return true;
-            },
-        ];
     }
 }
