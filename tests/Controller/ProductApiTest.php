@@ -12,6 +12,7 @@
 namespace Sylius\Tests\Controller;
 
 use Lakion\ApiTestCase\JsonApiTestCase;
+use Sylius\Component\Product\Model\ProductInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -84,8 +85,9 @@ final class ProductApiTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $products = $this->loadFixturesFromFile('resources/products.yml');
+        $product = $products['product1'];
 
-        $this->client->request('GET', '/api/v1/products/'.$products['product1']->getId(), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', $this->getProductUrl($product), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'product/show_response', Response::HTTP_OK);
@@ -112,13 +114,15 @@ final class ProductApiTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $products = $this->loadFixturesFromFile('resources/products.yml');
+        $product = $products['product1'];
 
-        $this->client->request('DELETE', '/api/v1/products/'.$products['product1']->getId(), [], [], static::$authorizedHeaderWithContentType, []);
+        $this->client->request('DELETE', $this->getProductUrl($product), [], [], static::$authorizedHeaderWithContentType, []);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
+        $product = $products['product1'];
 
-        $this->client->request('GET', '/api/v1/products/'.$products['product1']->getId(), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', $this->getProductUrl($product), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
@@ -176,6 +180,7 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $products = $this->loadFixturesFromFile('resources/products.yml');
         $this->loadFixturesFromFile('resources/locales.yml');
+        $product = $products["product3"];
 
         $data =
 <<<EOT
@@ -188,7 +193,7 @@ EOT;
             }
         }
 EOT;
-        $this->client->request('PUT', '/api/v1/products/'. $products["product3"]->getId(), [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('PUT', $this->getProductUrl($product), [], [], static::$authorizedHeaderWithContentType, $data);
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
     }
@@ -201,6 +206,7 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $products = $this->loadFixturesFromFile('resources/products.yml');
         $this->loadFixturesFromFile('resources/locales.yml');
+        $product = $products["product1"];
 
         $data =
 <<<EOT
@@ -212,7 +218,7 @@ EOT;
             }
         }
 EOT;
-        $this->client->request('PATCH', '/api/v1/products/'. $products["product1"]->getId(), [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('PATCH', $this->getProductUrl($product), [], [], static::$authorizedHeaderWithContentType, $data);
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
     }
@@ -482,5 +488,15 @@ EOT;
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'product/create_with_associations_response', Response::HTTP_CREATED);
+    }
+
+    /**
+     * @param ProductInterface $product
+     *
+     * @return string
+     */
+    private function getProductUrl(ProductInterface $product)
+    {
+        return '/api/v1/products/' . $product->getCode();
     }
 }

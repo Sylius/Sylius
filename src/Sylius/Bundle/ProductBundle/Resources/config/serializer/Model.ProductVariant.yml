@@ -37,5 +37,5 @@ Sylius\Component\Product\Model\ProductVariant:
           href:
             route: sylius_api_product_show
             parameters:
-                id: expr(object.getProduct().getId())
+                code: expr(object.getProduct().getCode())
                 version: 1
