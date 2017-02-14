@@ -80,25 +80,23 @@ final class LoadMetadataSubscriberSpec extends ObjectBehavior
             'fieldName' => 'reviewSubject',
             'targetEntity' => 'AcmeBundle\Entity\ReviewableModel',
             'inversedBy' => 'reviews',
-            'joinColumns' => [
-                [
-                    'name' => 'reviewable_id',
-                    'referencedColumnName' => 'id',
-                    'nullable' => false,
-                    'onDelete' => 'CASCADE',
-                ],
-            ],
+            'joinColumns' => [[
+                'name' => 'reviewable_id',
+                'referencedColumnName' => 'id',
+                'nullable' => false,
+                'onDelete' => 'CASCADE',
+            ]],
         ])->shouldBeCalled();
 
         $metadata->mapManyToOne([
             'fieldName' => 'author',
             'targetEntity' => 'AcmeBundle\Entity\ReviewerModel',
-            'joinColumn' => [
+            'joinColumns' => [[
                 'name' => 'author_id',
                 'referencedColumnName' => 'id',
                 'nullable' => false,
                 'onDelete' => 'CASCADE',
-            ],
+            ]],
             'cascade' => ['persist'],
         ])->shouldBeCalled();
 
