@@ -104,7 +104,25 @@
   were made final, use decoration and implement `Sylius\Component\Core\Payment\InvoiceNumberGeneratorInterface` instead of
   extending them.
 
+* `Sylius\Component\Core\Currency\SessionBasedCurrencyStorage` was removed and replaced by more generic `Sylius\Component\Core\Currency\CurrencyStorage`
+
+* The following classes were removed due to being no longer used in current implementation:
+
+  * `Sylius\Bundle\CoreBundle\Handler\ShopCurrencyChangeHandler`
+  * `Sylius\Component\Core\Currency\Handler\CompositeCurrencyChangeHandler`
+  * `Sylius\Component\Core\Currency\Handler\CurrencyChangeHandlerInterface`
+  * `Sylius\Component\Core\Provider\ChannelBasedCurrencyProvider`
+  * `Sylius\Component\Core\SyliusCurrencyEvents`
+
 ### Currency / CurrencyBundle
+
+* The following classes were removed due to being no longer used in current implementation:
+
+  * `Sylius\Component\Currency\Provider\CurrencyProviderInterface`
+  * `Sylius\Component\Currency\Context\ProviderBasedCurrencyContext`
+  * `Sylius\Component\Currency\Provider\CurrencyProvider`
+
+  `sylius_currency.currency` configuration option was removed as well as `sylius_currency.currency` parameter.
 
 ### Customer / CustomerBundle
 
