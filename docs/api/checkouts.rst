@@ -33,9 +33,13 @@ After the order will be finished following action will be available for admin
 | Completing the payment | Complete orders payment |
 +------------------------+-------------------------+
 
-.. note::
+.. tip::
 
     If you are not familiar with concept of checkout in Sylius, please read :doc:`this article </book/orders/checkout>` carefully first.
+
+.. note::
+
+    We do not present a order serialization in this chapter, because it is the same order serialization as described in :doc:`article about orders </api/orders>`.
 
 Addressing step
 ---------------
@@ -339,6 +343,7 @@ Of course you can specify different shipping and billing address. If Elon would 
                 }
             }
         '
+
 Exemplary Response
 ^^^^^^^^^^^^^^^^^^
 
@@ -535,78 +540,33 @@ Shipping step
 -------------
 
 When order contains the address information, we are able to determine the stock locations and available shipping methods.
-You can get these informations by first calling a GET request on the checkout unique URL.
+First we need to get information about available shipping methods to know our choices:
+
+Definition
+^^^^^^^^^^
 
 .. code-block:: text
 
-    GET /api/v1/checkouts/44
+    GET /api/v1/checkouts/select-shipping/{id}
 
-.. code-block:: text
++---------------+----------------+--------------------------------------+
+| Parameter     | Parameter type | Description                          |
++===============+================+======================================+
+| Authorization | header         | Token received during authentication |
++---------------+----------------+--------------------------------------+
+| id            | url attribute  | Id of the requested cart             |
++---------------+----------------+--------------------------------------+
 
-    STATUS: 200 OK
+Example
+^^^^^^^
 
-.. code-block:: json
+To check available shipping methods for previously addressed cart, one could use following command:
 
-    [
-        {
-            "methods": [
-                {
-                    "_links": {
-                        "self": {
-                            "href": "/app_dev.php/api/v1/shipping-methods/4"
-                        },
-                        "zone": {
-                            "href": "/app_dev.php/api/v1/zones/4"
-                        }
-                    },
-                    "calculator": "flexible_rate",
-                    "category_requirement": 1,
-                    "configuration": {
-                        "additional_item_cost": 500,
-                        "additional_item_limit": 10,
-                        "first_item_cost": 4000
-                    },
-                    "created_at": "2014-12-03T09:54:28+0000",
-                    "enabled": true,
-                    "id": 4,
-                    "name": "FedEx World Shipping",
-                    "updated_at": "2014-12-03T09:54:28+0000"
-                }
-            ],
-            "shipment": {
-                "_links": {
-                    "order": {
-                        "href": "/app_dev.php/api/v1/orders/52"
-                    }
-                },
-                "created_at": "2014-12-15T14:11:32+0000",
-                "state": "checkout"
-            }
-        }
-    ]
+.. code-block:: bash
 
-Response contains the proposed shipments and for each, it also has a list of shipping methods available.
-
-Next step is updating the order with the types of shipping method that we have selected.
-To do so, you need to call another PUT request, but this time with different set of parameters.
-
-You need to pass an id of shipping method for every id, you should obtain them in the previous request.
-
-.. code-block:: text
-
-    PUT /api/v1/checkouts/44
-
-Parameters
-~~~~~~~~~~
-
-shipments[X][method]
-    The id of the shipping method, where X is the shipment number.
-    Leave empty to add new
-
-Response
-~~~~~~~~
-
-Response will contain an updated order information.
+    $ curl http://127.0.0.1:8000/api/v1/checkouts/select-shipping/21 \
+        -H "Authorization: Bearer SampleToken" \
+        -H "Content-Type: application/json"
 
 .. code-block:: text
 
@@ -615,74 +575,272 @@ Response will contain an updated order information.
 .. code-block:: json
 
     {
-        "adjustments": {
-        },
-        "adjustments_total": 4750,
-        "billing_address": {
-        },
-        "channel": {
-        },
-        "checkout_state": "shipping",
-        "comments": [],
-        "confirmed": true,
-        "created_at": "2014-12-15T13:15:22+0000",
-        "email": "xschaefer@example.com",
-        "expires_at": "2014-12-15T16:15:22+0000",
-        "id": 52,
-        "items": [
-        ],
-        "items_total": 1500000,
-        "payments": [],
-        "shipments": [
+        "shipments":[
             {
-                "_links": {
-                    "method": {
-                        "href": "/app_dev.php/api/v1/shipping-methods/4"
+                "methods":[
+                    {
+                        "id":1,
+                        "code":"ups",
+                        "name":"UPS",
+                        "description":"Dolorem consequatur itaque neque non voluptas dolor.",
+                        "price":8787
                     },
-                    "order": {
-                        "href": "/app_dev.php/api/v1/orders/52"
+                    {
+                        "id":2,
+                        "code":"dhl_express",
+                        "name":"DHL Express",
+                        "description":"Voluptatem ipsum dolor vitae corrupti eum repellat.",
+                        "price":3549
                     },
-                    "self": {
-                        "href": "/app_dev.php/api/v1/shipments/51"
+                    {
+                        "id":3,
+                        "code":"fedex",
+                        "name":"FedEx",
+                        "description":"Qui nostrum minus accusantium molestiae voluptatem eaque.",
+                        "price":3775
                     }
-                },
-                "created_at": "2014-12-15T14:30:40+0000",
-                "id": 51,
-                "method": {
-                    "_links": {
-                        "self": {
-                            "href": "/app_dev.php/api/v1/shipping-methods/4"
-                        },
-                        "zone": {
-                            "href": "/app_dev.php/api/v1/zones/4"
-                        }
-                    },
-                    "calculator": "flexible_rate",
-                    "category_requirement": 1,
-                    "configuration": {
-                        "additional_item_cost": 500,
-                        "additional_item_limit": 10,
-                        "first_item_cost": 4000
-                    },
-                    "created_at": "2014-12-03T09:54:28+0000",
-                    "enabled": true,
-                    "id": 4,
-                    "name": "FedEx World Shipping",
-                    "updated_at": "2014-12-03T09:54:28+0000"
-                },
-                "state": "checkout",
-                "updated_at": "2014-12-15T14:30:41+0000"
+                ]
             }
-        ],
-        "shipping_address": {
-        },
-        "state": "cart",
-        "total": 1504750,
-        "updated_at": "2014-12-15T14:30:41+0000",
-        "user": {
-        }
+        ]
     }
 
+Response contains the proposed shipments and for each, it also has a list of shipping methods available with calculated price.
+
+.. warning::
+
+    Because of custom calculation logic for this endpoint the regular rules of overriding does not apply for this endpoint. In order to achieve different message one has to provide custom controller and build the message by his own. Exemplary implementation can be found `here`__
+
+Next step is updating the order with the types of shipping method that one has selected. A PUT request has to be send for each available shipment,
+
+Definition
+^^^^^^^^^^
+
+.. code-block:: text
+
+    PUT /api/v1/checkouts/select-shipping/{id}
+
++------------------------+----------------+--------------------------------------+
+| Parameter              | Parameter type | Description                          |
++========================+================+======================================+
+| Authorization          | header         | Token received during authentication |
++------------------------+----------------+--------------------------------------+
+| id                     | url attribute  | Id of the requested cart             |
++------------------------+----------------+--------------------------------------+
+| shipments[X]['method'] | request        | Code of chosen shipping method       |
++------------------------+----------------+--------------------------------------+
+
+Where X is a number of shipment in returned array.
+
+Example
+^^^^^^^
+
+To choose a `DHL Express` method for our shipment (the cheapest one), one could use the following code:
+
+.. code-block:: bash
+
+    $ curl http://127.0.0.1:8000/api/v1/checkouts/select-shipping/21 \
+        -H "Authorization: Bearer SampleToken" \
+        -H "Content-Type: application/json" \
+        -X PUT \
+        --data '
+        {
+            "shipments": [
+                {
+                    "method": "dhl_express"
+                }
+            ]
+        }
+        '
+
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
+
+.. code-block:: text
+
+    STATUS: 204 No Content
+
+Now you can check the state of order asking for checkout summary just like before:
+
+Example
+^^^^^^^
+
+To check the checkout process state for cart with `id = 21`, we need to execute this command:
+
+.. code-block:: bash
+
+    $ curl http://127.0.0.1:8000/api/v1/checkouts/21 \
+        -H "Authorization: Bearer SampleToken" \
+        -H "Accept: application/json"
+
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
+
+.. code-block:: text
+
+    STATUS: 200 Ok
+
+    {
+        "id":21,
+        "items":[
+            {
+                "id":74,
+                "quantity":1,
+                "unit_price":100000,
+                "total":100000,
+                "units":[
+                    {
+                        "id":228,
+                        "adjustments":[
+
+                        ],
+                        "adjustments_total":0
+                    }
+                ],
+                "units_total":100000,
+                "adjustments":[
+
+                ],
+                "adjustments_total":0,
+                "variant":{
+                    "id":331,
+                    "code":"MEDIUM_MUG_CUP",
+                    "option_values":[
+                        {
+                            "code":"mug_type_medium"
+                        }
+                    ],
+                    "position":2,
+                    "translations":{
+                        "en_US":{
+
+                        }
+                    },
+                    "on_hold":0,
+                    "on_hand":10,
+                    "tracked":false,
+                    "channel_pricings":[
+                        {
+                            "channel":{
+                                "id":1,
+                                "code":"US_WEB",
+                                "name":"US Web Store",
+                                "hostname":"localhost",
+                                "color":"MediumPurple",
+                                "created_at":"2017-02-14T11:10:02+0100",
+                                "updated_at":"2017-02-14T11:10:02+0100",
+                                "enabled":true,
+                                "tax_calculation_strategy":"order_items_based",
+                                "_links":{
+                                    "self":{
+                                        "href":"\/api\/v1\/channels\/1"
+                                    }
+                                }
+                            },
+                            "price":100000
+                        }
+                    ]
+                },
+                "_links":{
+                    "product":{
+                        "href":"\/api\/v1\/products\/5"
+                    },
+                    "variant":{
+                        "href":"\/api\/v1\/products\/5\/variants\/331"
+                    }
+                }
+            }
+        ],
+        "items_total":100000,
+        "adjustments":[
+            {
+                "id":251,
+                "type":"shipping",
+                "label":"DHL Express",
+                "amount":3549
+            }
+        ],
+        "adjustments_total":3549,
+        "total":103549,
+        "state":"cart",
+        "customer":{
+            "id":1,
+            "email":"shop@example.com",
+            "email_canonical":"shop@example.com",
+            "first_name":"John",
+            "last_name":"Doe",
+            "gender":"u",
+            "user":{
+                "id":1,
+                "username":"shop@example.com",
+                "username_canonical":"shop@example.com",
+                "roles":[
+                    "ROLE_USER"
+                ],
+                "enabled":true
+            },
+            "_links":{
+                "self":{
+                    "href":"\/api\/v1\/customers\/1"
+                }
+            }
+        },
+        "channel":{
+            "id":1,
+            "code":"US_WEB",
+            "name":"US Web Store",
+            "hostname":"localhost",
+            "color":"MediumPurple",
+            "created_at":"2017-02-14T11:10:02+0100",
+            "updated_at":"2017-02-14T11:10:02+0100",
+            "enabled":true,
+            "tax_calculation_strategy":"order_items_based",
+            "_links":{
+                "self":{
+                    "href":"\/api\/v1\/channels\/1"
+                }
+            }
+        },
+        "shipping_address":{
+            "first_name":"Frederick D.",
+            "last_name":"Gregory",
+            "country_code":"US",
+            "street":"300 E St SW",
+            "city":"\u2019Washington",
+            "postcode":"DC 20546"
+        },
+        "billing_address":{
+            "first_name":"Frederick D.",
+            "last_name":"Gregory",
+            "country_code":"US",
+            "street":"300 E St SW",
+            "city":"\u2019Washington",
+            "postcode":"DC 20546"
+        },
+        "payments":[
+            {
+                "id":21,
+                "method":{
+                    "id":1,
+                    "code":"cash_on_delivery"
+                },
+                "amount":103549,
+                "state":"cart"
+            }
+        ],
+        "shipments":[
+            {
+                "id":21,
+                "state":"cart",
+                "method":{
+                    "code":"dhl_express",
+                    "enabled":true
+                }
+            }
+        ],
+        "currency_code":"USD",
+        "locale_code":"en_US",
+        "checkout_state":"shipping_selected"
+    }
 
 Payment step
 ------------
@@ -1440,3 +1598,5 @@ You can check the payment status in the payment lists on order response.
 .. code-block:: json
 
     {"to": "do"}
+
+__ https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/ApiBundle/Controller/ShowAvailableShippingMethodsController.php
