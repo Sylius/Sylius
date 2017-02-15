@@ -12,6 +12,7 @@ sylius_shop_partial_product_index_latest:
                 method: findLatestByChannel
                 arguments:
                     - "expr:service('sylius.context.channel').getChannel()"
+                    - "expr:service('sylius.context.locale').getLocaleCode()"
                     - $count
 
 sylius_shop_partial_product_show_by_slug:

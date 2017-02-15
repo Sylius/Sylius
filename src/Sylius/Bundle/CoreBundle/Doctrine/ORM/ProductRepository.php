@@ -77,13 +77,16 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
     /**
      * {@inheritdoc}
      */
-    public function findLatestByChannel(ChannelInterface $channel, $count)
+    public function findLatestByChannel(ChannelInterface $channel, $locale, $count)
     {
         return $this->createQueryBuilder('o')
+            ->addSelect('translation')
+            ->leftJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
             ->andWhere(':channel MEMBER OF o.channels')
             ->andWhere('o.enabled = true')
             ->addOrderBy('o.createdAt', 'DESC')
             ->setParameter('channel', $channel)
+            ->setParameter('locale', $locale)
             ->setMaxResults($count)
             ->getQuery()
             ->getResult()
