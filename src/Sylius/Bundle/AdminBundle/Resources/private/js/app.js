@@ -18,9 +18,7 @@
             $('#user-form').toggle();
         });
 
-        $.each($('.sylius-autocomplete'), function (index, element) {
-            $(element).autoComplete();
-        });
+        $('.sylius-autocomplete').autoComplete();
         $('.product-select.ui.fluid.multiple.search.selection.dropdown').productAutoComplete();
         $('div#attributeChoice > .ui.dropdown.search').productAttributes();
 
