@@ -9,15 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Core\Order;
+namespace Sylius\Bundle\CoreBundle\EventListener;
 
+use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class OrderLocaleAssigner implements OrderLocaleAssignerInterface
+final class OrderLocaleAssigner
 {
     /**
      * @var LocaleContextInterface
@@ -33,10 +35,15 @@ final class OrderLocaleAssigner implements OrderLocaleAssignerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param ResourceControllerEvent $event
      */
-    public function assignLocale(OrderInterface $order)
+    public function assignLocale(ResourceControllerEvent $event)
     {
+        /** @var OrderInterface $order */
+        $order = $event->getSubject();
+
+        Assert::isInstanceOf($order, OrderInterface::class);
+
         $order->setLocaleCode($this->localeContext->getLocaleCode());
     }
 }

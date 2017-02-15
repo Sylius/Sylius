@@ -1,10 +1,94 @@
 {
     "id": @integer@,
-    "items": [],
-    "items_total": 0,
-    "adjustments": [],
-    "adjustments_total": 0,
-    "total": 0,
+    "items": [
+        {
+            "id": @integer@,
+            "quantity": 1,
+            "unit_price": 20,
+            "total": 20,
+            "units": [
+                {
+                    "id": @integer@,
+                    "adjustments": [],
+                    "adjustments_total": 0,
+                    "_links": {
+                        "order": {
+                            "href": "@string@"
+                        }
+                    }
+                }
+            ],
+            "units_total": 20,
+            "adjustments": [],
+            "adjustments_total": 0,
+            "variant": {
+                "id": @integer@,
+                "code": "MUG_SW",
+                "option_values": [],
+                "position": 0,
+                "translations": {
+                    "en_US": {
+                        "locale": "en_US",
+                        "id": @integer@,
+                        "name": "Star wars mug"
+                    }
+                },
+                "on_hold": 0,
+                "on_hand": 0,
+                "tracked": false,
+                "channel_pricings": [
+                    {
+                        "id": @integer@,
+                        "channel": {
+                            "id": @integer@,
+                            "code": "CHANNEL",
+                            "name": "Channel",
+                            "description": "Lorem ipsum",
+                            "hostname": "localhost",
+                            "color": "black",
+                            "created_at": "@string@.isDateTime()",
+                            "updated_at": "@string@.isDateTime()",
+                            "enabled": true,
+                            "tax_calculation_strategy": "order_items_based",
+                            "_links": {
+                                "self": {
+                                    "href": "@string@"
+                                }
+                            }
+                        },
+                        "price": 20
+                    }
+                ],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    },
+                    "product": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            "_links": {
+                "product": {
+                    "href": "@string@"
+                },
+                "variant": {
+                    "href": "@string@"
+                }
+            }
+        }
+    ],
+    "items_total": 20,
+    "adjustments": [
+        {
+            "id": @integer@,
+            "type": "shipping",
+            "label": "UPS",
+            "amount": 10
+        }
+    ],
+    "adjustments_total": 10,
+    "total": 30,
     "state": "cart",
     "customer": {
         "id": @integer@,
@@ -22,8 +106,8 @@
     },
     "channel": {
         "id": @integer@,
-        "code": "WEB",
-        "name": "Web Channel",
+        "code": "CHANNEL",
+        "name": "Channel",
         "description": "Lorem ipsum",
         "hostname": "localhost",
         "color": "black",
@@ -37,9 +121,98 @@
             }
         }
     },
-    "currency_code": "USD",
+    "payments": [
+        {
+            "id": @integer@,
+            "method": {
+                "id": @integer@,
+                "code": "cod",
+                "created_at": "@string@.isDateTime()",
+                "updated_at": "@string@.isDateTime()",
+                "channels": [
+                    {
+                        "id": @integer@,
+                        "code": "CHANNEL",
+                        "name": "Channel",
+                        "description": "Lorem ipsum",
+                        "hostname": "localhost",
+                        "color": "black",
+                        "created_at": "@string@.isDateTime()",
+                        "updated_at": "@string@.isDateTime()",
+                        "enabled": true,
+                        "tax_calculation_strategy": "order_items_based",
+                        "_links": {
+                            "self": {
+                                "href": "@string@"
+                            }
+                        }
+                    }
+                ],
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/payment-methods\/cod"
+                    }
+                }
+            },
+            "amount": 30,
+            "state": "cart",
+            "created_at": "@string@.isDateTime()",
+            "updated_at": "@string@.isDateTime()",
+            "_links": {
+                "self": {
+                    "href": "@string@"
+                },
+                "payment-method": {
+                    "href": "\/api\/v1\/payment-methods\/cod"
+                },
+                "order": {
+                    "href": "@string@"
+                }
+            }
+        }
+    ],
+    "shipments": [
+        {
+            "id": @integer@,
+            "state": "cart",
+            "method": {
+                "id": @integer@,
+                "code": "UPS",
+                "category_requirement": 1,
+                "calculator": "flat_rate",
+                "configuration": {
+                    "CHANNEL": {
+                        "amount": 10
+                    }
+                },
+                "created_at": "@string@.isDateTime()",
+                "updated_at": "@string@.isDateTime()",
+                "enabled": true,
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/shipping-methods\/UPS"
+                    },
+                    "zone": {
+                        "href": "\/api\/v1\/zones\/EU"
+                    }
+                }
+            },
+            "created_at": "@string@.isDateTime()",
+            "updated_at": "@string@.isDateTime()",
+            "_links": {
+                "self": {
+                    "href": "@string@"
+                },
+                "method": {
+                    "href": "\/api\/v1\/shipping-methods\/UPS"
+                },
+                "order": {
+                    "href": "@string@"
+                }
+            }
+        }
+    ],
+    "currency_code": "EUR",
     "locale_code": "en_US",
-    "payments": [],
-    "shipments": [],
     "checkout_state": "cart"
 }

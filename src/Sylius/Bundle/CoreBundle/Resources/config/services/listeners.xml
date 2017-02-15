@@ -102,5 +102,10 @@
             <argument type="service" id="sylius.manager.order" />
             <tag name="kernel.event_listener" event="sylius.order.pre_complete" method="check" />
         </service>
+
+        <service id="sylius.order_locale_assigner" class="Sylius\Bundle\CoreBundle\EventListener\OrderLocaleAssigner">
+            <argument type="service" id="sylius.context.locale" />
+            <tag name="kernel.event_listener" event="sylius.order.pre_complete" method="assignLocale" />
+        </service>
     </services>
 </container>

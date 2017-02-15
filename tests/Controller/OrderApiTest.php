@@ -19,16 +19,8 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-final class OrderApiTest extends JsonApiTestCase
+final class OrderApiTest extends CheckoutApiTestCase
 {
-    /**
-     * @var array
-     */
-    private static $authorizedHeaderWithAccept = [
-        'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
-        'CONTENT_TYPE' => 'application/json',
-    ];
-
     /**
      * @test
      */
@@ -59,9 +51,12 @@ final class OrderApiTest extends JsonApiTestCase
     public function it_allows_to_get_cart()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $orderData = $this->loadFixturesFromFile('resources/cart.yml');
+        $this->loadFixturesFromFile('resources/checkout.yml');
 
-        $this->client->request('GET', '/api/v1/orders/'.$orderData['order_001']->getId(), [], [], static::$authorizedHeaderWithAccept);
+        $cartId = $this->createCart();
+        $this->addItemToCart($cartId);
+
+        $this->client->request('GET', $this->getOrderUrl($cartId), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'order/cart_show_response', Response::HTTP_OK);
@@ -73,11 +68,28 @@ final class OrderApiTest extends JsonApiTestCase
     public function it_allows_to_get_an_order()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $orderData = $this->loadFixturesFromFile('resources/order.yml');
+        $this->loadFixturesFromFile('resources/checkout.yml');
 
-        $this->client->request('GET', '/api/v1/orders/'.$orderData['order_001']->getId(), [], [], static::$authorizedHeaderWithAccept);
+        $cartId = $this->createCart();
+        $this->addItemToCart($cartId);
+        $this->addressOrder($cartId);
+        $this->selectOrderShippingMethod($cartId);
+        $this->selectOrderPaymentMethod($cartId);
+        $this->completeOrder($cartId);
+
+        $this->client->request('GET', $this->getOrderUrl($cartId), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'order/order_show_response', Response::HTTP_OK);
+    }
+
+    /**
+     * @param $cartId
+     *
+     * @return string
+     */
+    private function getOrderUrl($cartId)
+    {
+        return '/api/v1/orders/' . $cartId;
     }
 }

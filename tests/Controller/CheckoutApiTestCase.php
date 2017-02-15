@@ -168,6 +168,16 @@ EOT;
      *
      * @return string
      */
+    protected function completeOrder($cartId)
+    {
+        $this->client->request('PUT', sprintf('/api/v1/checkouts/complete/%d', $cartId), [], [], static::$authorizedHeaderWithContentType);
+    }
+
+    /**
+     * @param mixed $cartId
+     *
+     * @return string
+     */
     protected function getCheckoutSummaryUrl($cartId)
     {
         return sprintf('/api/v1/checkouts/%d', $cartId);
