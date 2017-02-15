@@ -17,34 +17,9 @@
                 var criteriaType = $(this).data('criteria-type');
                 var criteriaName = $(this).data('criteria-name');
                 var remoteUrl = $(this).data('url');
-
-                if (0 < element.find('input.autocomplete').val().split(',').length) {
-                    var menuElement = element.find('div.menu');
-
-                    menuElement.api({
-                        on: 'now',
-                        method: 'GET',
-                        url: remoteUrl,
-                        data: {
-                            criteria: {}
-                        },
-                        beforeSend: function (settings) {
-                            settings.data.criteria[criteriaName] = {type: criteriaType, value: ''};
-                            settings.data.criteria[criteriaName].value = settings.urlData.query;
-
-                            return settings;
-                        },
-                        onSuccess: function (response) {
-                            var choiceName = element.data('choice-name');
-                            var choiceValue = element.data('choice-value');
-                            $.each(response._embedded.items, function (index, item) {
-                                menuElement.append(
-                                    $('<div class="item" data-value="'+item[choiceValue]+'">'+item[choiceName]+'</div>')
-                                );
-                            });
-                        }
-                    });
-                }
+                var choiceName = $(this).data('choice-name');
+                var choiceValue = $(this).data('choice-value');
+                var autocompleteValue = $(this).find('input.autocomplete').val();
 
                 element.dropdown({
                     on: 'now',
@@ -81,6 +56,32 @@
                         }
                     }
                 });
+
+                if (0 < autocompleteValue.split(',').length) {
+                    var menuElement = element.find('div.menu');
+
+                    menuElement.api({
+                        on: 'now',
+                        method: 'GET',
+                        url: remoteUrl,
+                        data: {
+                            criteria: {}
+                        },
+                        beforeSend: function (settings) {
+                            settings.data.criteria[choiceValue] = {type: 'in', value: '', limit: 1000};
+                            settings.data.criteria[choiceValue].value = autocompleteValue;
+
+                            return settings;
+                        },
+                        onSuccess: function (response) {
+                            $.each(response._embedded.items, function (index, item) {
+                                menuElement.append(
+                                    $('<div class="item" data-value="'+item[choiceValue]+'">'+item[choiceName]+'</div>')
+                                );
+                            });
+                        }
+                    });
+                }
 
                 window.setTimeout(function () {
                     element.dropdown('set selected', element.find('input.autocomplete').val().split(','));
