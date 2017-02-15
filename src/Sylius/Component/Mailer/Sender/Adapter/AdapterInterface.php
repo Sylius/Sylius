@@ -27,6 +27,16 @@ interface AdapterInterface
      * @param string $senderName
      * @param RenderedEmail $renderedEmail
      * @param EmailInterface $email
+     * @param array $data
+     * @param array $attachments
      */
-    public function send(array $recipients, $senderAddress, $senderName, RenderedEmail $renderedEmail, EmailInterface $email, array $data);
+    public function send(
+        array $recipients,
+        $senderAddress,
+        $senderName,
+        RenderedEmail $renderedEmail,
+        EmailInterface $email,
+        array $data,
+        array $attachments = []
+    );
 }
