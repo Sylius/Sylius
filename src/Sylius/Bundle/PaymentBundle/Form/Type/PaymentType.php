@@ -38,13 +38,10 @@ final class PaymentType extends AbstractResourceType
                 'choices' => [
                     'sylius.form.payment.state.processing' => PaymentInterface::STATE_PROCESSING,
                     'sylius.form.payment.state.failed' => PaymentInterface::STATE_FAILED,
-                    'sylius.form.payment.state.void' => PaymentInterface::STATE_VOID,
                     'sylius.form.payment.state.completed' => PaymentInterface::STATE_COMPLETED,
-                    'sylius.form.payment.state.authorized' => PaymentInterface::STATE_AUTHORIZED,
                     'sylius.form.payment.state.new' => PaymentInterface::STATE_NEW,
                     'sylius.form.payment.state.cancelled' => PaymentInterface::STATE_CANCELLED,
                     'sylius.form.payment.state.refunded' => PaymentInterface::STATE_REFUNDED,
-                    'sylius.form.payment.state.unknown' => PaymentInterface::STATE_UNKNOWN,
                 ],
                 'label' => 'sylius.form.payment.state.header',
             ])
