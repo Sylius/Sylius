@@ -69,7 +69,7 @@ final class LocaleSwitchController
      */
     public function renderAction()
     {
-        return $this->templatingEngine->renderResponse('@SyliusShop/_localeSwitch.html.twig', [
+        return $this->templatingEngine->renderResponse('@SyliusShop/Menu/_localeSwitch.html.twig', [
             'active' => $this->localeContext->getLocaleCode(),
             'locales' => $this->localeProvider->getAvailableLocalesCodes(),
         ]);

@@ -217,6 +217,14 @@ These services will be generated automatically based on subject name.
 
 ### ShopBundle
 
+* The following templates were moved:
+
+  * `@SyliusShop/Homepage/_header.html.twig` -> `@SyliusShop/_header.html.twig`
+  * `@SyliusShop/Homepage/_footer.html.twig` -> `@SyliusShop/_footer.html.twig`
+  * `@SyliusShop/Homepage/Menu/_security.html.twig` -> `@SyliusShop/Menu/_security.html.twig`
+  * `@SyliusShop/_currencySwitch.html.twig` -> `@SyliusShop/Menu/_currencySwitch.html.twig`
+  * `@SyliusShop/_localeSwitch.html.twig` -> `@SyliusShop/Menu/_localeSwitch.html.twig`
+
 ### Taxation / TaxationBundle
 
 ### Taxonomy / TaxonomyBundle

@@ -39,5 +39,9 @@
             <argument type="service" id="sylius.locale_provider" />
             <argument type="service" id="sylius.handler.locale_change" />
         </service>
+
+        <service id="sylius.controller.shop.security_widget" class="Sylius\Bundle\ShopBundle\Controller\SecurityWidgetController">
+            <argument type="service" id="templating" />
+        </service>
     </services>
 </container>
