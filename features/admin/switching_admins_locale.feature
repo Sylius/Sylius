@@ -28,6 +28,7 @@ Feature: Switching locales on admin's panel
     Scenario: Changing panel's locale doesn't change shop's locale
         Given I am editing my details
         When I set my locale to "Spanish (Mexico)"
+        And I browse that channel
         Then I should still shop using the "English (United States)" locale
 
     @ui

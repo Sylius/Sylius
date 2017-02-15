@@ -51,8 +51,6 @@ final class LocaleContext implements Context
      */
     public function iShouldShopUsingTheLocale($localeName)
     {
-        $this->homePage->open();
-
         Assert::same($this->homePage->getActiveLocale(), $localeName);
     }
 
@@ -62,8 +60,6 @@ final class LocaleContext implements Context
      */
     public function iShouldBeAbleToShopUsingTheLocale($localeName)
     {
-        $this->homePage->open();
-
         Assert::oneOf($localeName, $this->homePage->getAvailableLocales());
     }
 
@@ -73,8 +69,6 @@ final class LocaleContext implements Context
      */
     public function iShouldNotBeAbleToShopUsingTheLocale($localeName)
     {
-        $this->homePage->open();
-
         if (in_array($localeName, $this->homePage->getAvailableLocales(), true)) {
             throw new \InvalidArgumentException(sprintf(
                 'Expected "%s" not to be in "%s"',

@@ -12,6 +12,7 @@
 namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Page\Shop\HomePageInterface;
 use Sylius\Behat\Service\Setter\ChannelContextSetterInterface;
 
 /**
@@ -25,11 +26,18 @@ final class CurrentChannelContext implements Context
     private $channelContextSetter;
 
     /**
-     * @param ChannelContextSetterInterface $channelContextSetter
+     * @var HomePageInterface
      */
-    public function __construct(ChannelContextSetterInterface $channelContextSetter)
+    private $homePage;
+
+    /**
+     * @param ChannelContextSetterInterface $channelContextSetter
+     * @param HomePageInterface $homePage
+     */
+    public function __construct(ChannelContextSetterInterface $channelContextSetter, HomePageInterface $homePage)
     {
         $this->channelContextSetter = $channelContextSetter;
+        $this->homePage = $homePage;
     }
 
     /**
@@ -40,5 +48,7 @@ final class CurrentChannelContext implements Context
     public function iBrowseChannel($channel)
     {
         $this->channelContextSetter->setChannel($channel);
+
+        $this->homePage->open();
     }
 }

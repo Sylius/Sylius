@@ -9,10 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CoreBundle\Context;
+namespace spec\Sylius\Bundle\AdminBundle\Context;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Context\AdminBasedLocaleContext;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
@@ -28,11 +27,6 @@ final class AdminBasedLocaleContextSpec extends ObjectBehavior
     function let(TokenStorageInterface $tokenStorage)
     {
         $this->beConstructedWith($tokenStorage);
-    }
-
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(AdminBasedLocaleContext::class);
     }
 
     function it_implements_locale_context_interface()

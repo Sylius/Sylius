@@ -36,6 +36,7 @@ final class SyliusShopExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
         $loader->load('services.xml');
+        $loader->load(sprintf('services/integrations/locale/%s.xml', $config['locale_switcher']));
 
         $this->configureCheckoutResolverIfNeeded($config['checkout_resolver'], $container);
     }
