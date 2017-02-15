@@ -18,11 +18,11 @@ Sylius\Component\Product\Model\ProductVariant:
         optionValues:
             expose: true 
             type: array 
-            groups: [Detailed] 
+            groups: [Detailed, Default] 
         translations:
             expose: true 
             type: array 
-            groups: [Detailed] 
+            groups: [Detailed, Default] 
     relations:
         - rel: self
           href:

@@ -26,13 +26,11 @@
                 "position": 1,
                 "translations": {
                     "en_US": {
-                      "id": @integer@,
-                      "locale": "en_US",
-                       "name": "Mug 1"
+                        "id": @integer@,
+                        "locale": "en_US",
+                        "name": "Mug 1"
                     }
                 },
-                "on_hold": 0,
-                "on_hand": 0,
                 "tracked": false,
                 "channel_pricings": [],
                 "_links": {
@@ -40,7 +38,7 @@
                         "href": "@string@"
                     },
                     "product": {
-                      "href": "@string@"
+                        "href": "@string@"
                     }
                 }
             },
@@ -51,13 +49,11 @@
                 "position": 2,
                 "translations": {
                     "en_US": {
-                      "id": @integer@,
-                      "locale": "en_US",
-                       "name": "Mug 2"
+                        "id": @integer@,
+                        "locale": "en_US",
+                        "name": "Mug 2"
                     }
                 },
-                "on_hold": 0,
-                "on_hand": 0,
                 "tracked": false,
                 "channel_pricings": [],
                 "_links": {
@@ -65,7 +61,7 @@
                         "href": "@string@"
                     },
                     "product": {
-                      "href": "@string@"
+                        "href": "@string@"
                     }
                 }
             },
@@ -76,13 +72,11 @@
                 "position": 3,
                 "translations": {
                     "en_US": {
-                      "id": @integer@,
-                      "locale": "en_US",
-                       "name": "Mug 3"
+                        "id": @integer@,
+                        "locale": "en_US",
+                        "name": "Mug 3"
                     }
                 },
-                "on_hold": 0,
-                "on_hand": 0,
                 "tracked": false,
                 "channel_pricings": [],
                 "_links": {
@@ -90,7 +84,7 @@
                         "href": "@string@"
                     },
                     "product": {
-                      "href": "@string@"
+                        "href": "@string@"
                     }
                 }
             },
@@ -101,13 +95,11 @@
                 "position": 4,
                 "translations": {
                     "en_US": {
-                      "id": @integer@,
-                      "locale": "en_US",
-                       "name": "Mug 4"
+                        "id": @integer@,
+                        "locale": "en_US",
+                        "name": "Mug 4"
                     }
                 },
-                "on_hold": 0,
-                "on_hand": 0,
                 "tracked": false,
                 "channel_pricings": [],
                 "_links": {
@@ -115,7 +107,7 @@
                         "href": "@string@"
                     },
                     "product": {
-                      "href": "@string@"
+                        "href": "@string@"
                     }
                 }
             },
@@ -126,13 +118,11 @@
                 "position": 5,
                 "translations": {
                     "en_US": {
-                      "id": @integer@,
-                      "locale": "en_US",
-                       "name": "Mug 5"
+                        "id": @integer@,
+                        "locale": "en_US",
+                        "name": "Mug 5"
                     }
                 },
-                "on_hold": 0,
-                "on_hand": 0,
                 "tracked": false,
                 "channel_pricings": [],
                 "_links": {
@@ -140,7 +130,7 @@
                         "href": "@string@"
                     },
                     "product": {
-                      "href": "@string@"
+                        "href": "@string@"
                     }
                 }
             },
@@ -151,13 +141,11 @@
                 "position": 6,
                 "translations": {
                     "en_US": {
-                      "id": @integer@,
-                      "locale": "en_US",
-                       "name": "Mug 6"
+                        "id": @integer@,
+                        "locale": "en_US",
+                        "name": "Mug 6"
                     }
                 },
-                "on_hold": 0,
-                "on_hand": 0,
                 "tracked": false,
                 "channel_pricings": [],
                 "_links": {
@@ -165,7 +153,7 @@
                         "href": "@string@"
                     },
                     "product": {
-                      "href": "@string@"
+                        "href": "@string@"
                     }
                 }
             },
@@ -176,13 +164,11 @@
                 "position": 7,
                 "translations": {
                     "en_US": {
-                      "id": @integer@,
-                      "locale": "en_US",
-                       "name": "Mug 7"
+                        "id": @integer@,
+                        "locale": "en_US",
+                        "name": "Mug 7"
                     }
                 },
-                "on_hold": 0,
-                "on_hand": 0,
                 "tracked": false,
                 "channel_pricings": [],
                 "_links": {
@@ -190,7 +176,7 @@
                         "href": "@string@"
                     },
                     "product": {
-                      "href": "@string@"
+                        "href": "@string@"
                     }
                 }
             },
@@ -201,13 +187,11 @@
                 "position": 8,
                 "translations": {
                     "en_US": {
-                      "id": @integer@,
-                      "locale": "en_US",
-                       "name": "Mug 8"
+                        "id": @integer@,
+                        "locale": "en_US",
+                        "name": "Mug 8"
                     }
                 },
-                "on_hold": 0,
-                "on_hand": 0,
                 "tracked": false,
                 "channel_pricings": [],
                 "_links": {
@@ -215,7 +199,7 @@
                         "href": "@string@"
                     },
                     "product": {
-                      "href": "@string@"
+                        "href": "@string@"
                     }
                 }
             },
@@ -226,13 +210,11 @@
                 "position": 9,
                 "translations": {
                     "en_US": {
-                      "id": @integer@,
-                      "locale": "en_US",
-                       "name": "Mug 9"
+                        "id": @integer@,
+                        "locale": "en_US",
+                        "name": "Mug 9"
                     }
                 },
-                "on_hold": 0,
-                "on_hand": 0,
                 "tracked": false,
                 "channel_pricings": [],
                 "_links": {
@@ -240,7 +222,7 @@
                         "href": "@string@"
                     },
                     "product": {
-                      "href": "@string@"
+                        "href": "@string@"
                     }
                 }
             },
@@ -251,13 +233,11 @@
                 "position": 10,
                 "translations": {
                     "en_US": {
-                      "id": @integer@,
-                      "locale": "en_US",
-                       "name": "Mug 10"
+                        "id": @integer@,
+                        "locale": "en_US",
+                        "name": "Mug 10"
                     }
                 },
-                "on_hold": 0,
-                "on_hand": 0,
                 "tracked": false,
                 "channel_pricings": [],
                 "_links": {
@@ -265,7 +245,7 @@
                         "href": "@string@"
                     },
                     "product": {
-                      "href": "@string@"
+                        "href": "@string@"
                     }
                 }
             }
