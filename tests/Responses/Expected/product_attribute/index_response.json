@@ -1,0 +1,42 @@
+{
+    "page": 1,
+    "limit": 10,
+    "pages": 1,
+    "total": 2,
+    "_links": {
+        "self": {
+            "href": "\/api\/v1\/product-attributes\/?page=1&limit=10"
+        },
+        "first": {
+            "href": "\/api\/v1\/product-attributes\/?page=1&limit=10"
+        },
+        "last": {
+            "href": "\/api\/v1\/product-attributes\/?page=1&limit=10"
+        }
+    },
+    "_embedded": {
+        "items": [
+            {
+                "id": @integer@,
+                "created_at": "@string@.isDateTime()",
+                "updated_at": "@string@.isDateTime()",
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/product-attributes\/mug_material"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "created_at": "@string@.isDateTime()",
+                "updated_at": "@string@.isDateTime()",
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/product-attributes\/mug_collection"
+                    }
+                }
+            }
+        ]
+    }
+}
+

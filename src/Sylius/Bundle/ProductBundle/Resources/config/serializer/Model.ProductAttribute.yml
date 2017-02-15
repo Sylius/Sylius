@@ -6,19 +6,33 @@ Sylius\Component\Product\Model\ProductAttribute:
             expose: true
             type: integer
             xml_attribute: true
+            gorups: [Default, Detailed]
         position:
             expose: true
             type: integer
+            gorups: [Default, Detailed]
         name:
             expose: true
             type: string
+            gorups: [Default, Detailed]
         presentation:
             expose: true
             type: string
+            gorups: [Detailed]
         createdAt:
             expose: true
             type: DateTime
+            gorups: [Detailed]
         updatedAt:
             expose: true
             type: DateTime
-
+            gorups: [Detailed]
+    relations:
+        - rel: self
+          href:
+            route: sylius_api_product_attribute_show
+            parameters:
+                code: expr(object.getCode())
+                version: 1
+            exclusion:
+                groups: [Detailed]
