@@ -98,12 +98,6 @@ class ResourceAutocompleteChoiceType extends AbstractType
                 'repository' => function (Options $options) {
                     return $this->resourceRepositoryRegistry->get($options['resource']);
                 },
-                'get_resource_repository' => function (Options $options) {
-                    return $options['resource_repository']($this->resourceRepositoryRegistry, $options);
-                },
-                'resource_repository' => function (ServiceRegistryInterface $repositoryRegistry, Options $options) {
-                    return $repositoryRegistry->get($options['resource']);
-                },
             ])
             ->setAllowedTypes('resource', ['string'])
             ->setAllowedTypes('multiple', ['bool'])

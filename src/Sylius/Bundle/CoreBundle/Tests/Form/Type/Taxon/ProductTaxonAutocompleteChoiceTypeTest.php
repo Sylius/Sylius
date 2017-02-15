@@ -39,17 +39,26 @@ final class ProductTaxonAutocompleteChoiceTypeTest extends TypeTestCase
      */
     private $productTaxonFactory;
 
+    /**
+     * @var RepositoryInterface
+     */
+    private $productTaxonRepository;
+
     protected function setUp()
     {
         $this->resourceRepositoryRegistry = $this->prophesize(ServiceRegistryInterface::class);
         $this->productTaxonFactory = $this->prophesize(FactoryInterface::class);
+        $this->productTaxonRepository = $this->prophesize(RepositoryInterface::class);
 
         parent::setUp();
     }
 
     protected function getExtensions()
     {
-        $productTaxonAutoCompleteType = new ProductTaxonAutocompleteChoiceType($this->productTaxonFactory->reveal());
+        $productTaxonAutoCompleteType = new ProductTaxonAutocompleteChoiceType(
+            $this->productTaxonFactory->reveal(),
+            $this->productTaxonRepository->reveal()
+        );
         $resourceAutoCompleteType = new ResourceAutocompleteChoiceType($this->resourceRepositoryRegistry->reveal());
 
         return [
@@ -62,32 +71,27 @@ final class ProductTaxonAutocompleteChoiceTypeTest extends TypeTestCase
      */
     public function it_creates_new_product_taxons_based_on_given_product_and_passed_taxon_codes()
     {
-        $formData = 'mug,book';
-
         $taxon = $this->prophesize(TaxonInterface::class);
         $product = $this->prophesize(ProductInterface::class);
 
         $taxonRepository = $this->prophesize(TaxonRepositoryInterface::class);
-        $productTaxonRepository=  $this->prophesize(RepositoryInterface::class);
 
         $this->resourceRepositoryRegistry->get('sylius.taxon')->willReturn($taxonRepository);
-        $this->resourceRepositoryRegistry->get('sylius.product_taxon')->willReturn($productTaxonRepository);
         $taxonRepository->findOneBy(['code' => 'mug'])->willReturn($taxon);
         $taxonRepository->findOneBy(['code' => 'book'])->willReturn($taxon);
-        $productTaxonRepository->findOneBy(['product' => $product, 'taxon' => $taxon])->willReturn(null);
-
+        $this->productTaxonRepository->findOneBy(['product' => $product, 'taxon' => $taxon])->willReturn(null);
 
         $productTaxon = $this->prophesize(ProductTaxonInterface::class);
 
         $this->productTaxonFactory->createNew()->willReturn($productTaxon);
 
-        $form = $this->factory->create(ProductTaxonAutocompleteChoiceType::class, new ArrayCollection([]), [
+        $form = $this->factory->create(ProductTaxonAutocompleteChoiceType::class, new ArrayCollection(), [
             'label' => 'sylius.form.product.taxons',
             'product' => $product->reveal(),
             'multiple' => true,
         ]);
 
-        $form->submit($formData);
+        $form->submit('mug,book');
         $this->assertEquals(new ArrayCollection([$productTaxon->reveal(), $productTaxon->reveal()]), $form->getData());
     }
 
@@ -96,28 +100,23 @@ final class ProductTaxonAutocompleteChoiceTypeTest extends TypeTestCase
      */
     public function it_returns_existing_product_taxons_based_on_given_product_and_passed_taxon_codes()
     {
-        $formData = 'mug,book';
-
         $taxon = $this->prophesize(TaxonInterface::class);
         $product = $this->prophesize(ProductInterface::class);
         $productTaxon = $this->prophesize(ProductTaxonInterface::class);
-
         $taxonRepository = $this->prophesize(TaxonRepositoryInterface::class);
-        $productTaxonRepository=  $this->prophesize(RepositoryInterface::class);
 
         $this->resourceRepositoryRegistry->get('sylius.taxon')->willReturn($taxonRepository);
-        $this->resourceRepositoryRegistry->get('sylius.product_taxon')->willReturn($productTaxonRepository);
         $taxonRepository->findOneBy(['code' => 'mug'])->willReturn($taxon);
         $taxonRepository->findOneBy(['code' => 'book'])->willReturn($taxon);
-        $productTaxonRepository->findOneBy(['product' => $product, 'taxon' => $taxon])->willReturn($productTaxon);
+        $this->productTaxonRepository->findOneBy(['product' => $product, 'taxon' => $taxon])->willReturn($productTaxon);
 
-        $form = $this->factory->create(ProductTaxonAutocompleteChoiceType::class, new ArrayCollection([]), [
+        $form = $this->factory->create(ProductTaxonAutocompleteChoiceType::class, new ArrayCollection(), [
             'label' => 'sylius.form.product.taxons',
             'product' => $product->reveal(),
             'multiple' => true,
         ]);
 
-        $form->submit($formData);
+        $form->submit('mug,book');
         $this->assertEquals(new ArrayCollection([$productTaxon->reveal(), $productTaxon->reveal()]), $form->getData());
     }
 
@@ -126,19 +125,13 @@ final class ProductTaxonAutocompleteChoiceTypeTest extends TypeTestCase
      */
     public function it_returns_new_product_taxon_based_on_given_product_and_passed_taxon_code()
     {
-        $formData = 'mug';
-
         $taxon = $this->prophesize(TaxonInterface::class);
         $product = $this->prophesize(ProductInterface::class);
-
         $taxonRepository = $this->prophesize(TaxonRepositoryInterface::class);
-        $productTaxonRepository=  $this->prophesize(RepositoryInterface::class);
 
         $this->resourceRepositoryRegistry->get('sylius.taxon')->willReturn($taxonRepository);
-        $this->resourceRepositoryRegistry->get('sylius.product_taxon')->willReturn($productTaxonRepository);
         $taxonRepository->findOneBy(['code' => 'mug'])->willReturn($taxon);
-        $productTaxonRepository->findOneBy(['product' => $product, 'taxon' => $taxon])->willReturn(null);
-
+        $this->productTaxonRepository->findOneBy(['product' => $product, 'taxon' => $taxon])->willReturn(null);
 
         $productTaxon = $this->prophesize(ProductTaxonInterface::class);
 
@@ -150,7 +143,7 @@ final class ProductTaxonAutocompleteChoiceTypeTest extends TypeTestCase
             'multiple' => false,
         ]);
 
-        $form->submit($formData);
+        $form->submit('mug');
         $this->assertEquals($productTaxon->reveal(), $form->getData());
     }
 
@@ -159,19 +152,15 @@ final class ProductTaxonAutocompleteChoiceTypeTest extends TypeTestCase
      */
     public function it_returns_existing_product_taxon_based_on_given_product_and_passed_taxon_code()
     {
-        $formData = 'mug';
-
         $taxon = $this->prophesize(TaxonInterface::class);
         $product = $this->prophesize(ProductInterface::class);
         $productTaxon = $this->prophesize(ProductTaxonInterface::class);
 
         $taxonRepository = $this->prophesize(TaxonRepositoryInterface::class);
-        $productTaxonRepository=  $this->prophesize(RepositoryInterface::class);
 
         $this->resourceRepositoryRegistry->get('sylius.taxon')->willReturn($taxonRepository);
-        $this->resourceRepositoryRegistry->get('sylius.product_taxon')->willReturn($productTaxonRepository);
         $taxonRepository->findOneBy(['code' => 'mug'])->willReturn($taxon);
-        $productTaxonRepository->findOneBy(['product' => $product, 'taxon' => $taxon])->willReturn($productTaxon);
+        $this->productTaxonRepository->findOneBy(['product' => $product, 'taxon' => $taxon])->willReturn($productTaxon);
 
         $form = $this->factory->create(ProductTaxonAutocompleteChoiceType::class, null, [
             'label' => 'sylius.form.product.taxons',
@@ -179,7 +168,7 @@ final class ProductTaxonAutocompleteChoiceTypeTest extends TypeTestCase
             'multiple' => false,
         ]);
 
-        $form->submit($formData);
+        $form->submit('mug');
         $this->assertEquals($productTaxon->reveal(), $form->getData());
     }
 }
