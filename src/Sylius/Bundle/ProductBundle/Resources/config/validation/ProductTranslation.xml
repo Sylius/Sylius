@@ -27,7 +27,11 @@
             </constraint>
         </property>
         <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
-            <option name="fields">slug</option>
+            <option name="fields">
+                <value>locale</value>
+                <value>slug</value>
+            </option>
+            <option name="errorPath">slug</option>
             <option name="message">sylius.product.slug.unique</option>
             <option name="groups">sylius</option>
         </constraint>
