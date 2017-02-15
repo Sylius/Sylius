@@ -23,7 +23,8 @@ sylius_shop_partial_product_show_by_slug:
         _sylius:
             template: $template
             repository:
-                method: findOneBySlugAndChannel
+                method: findOneByChannelAndSlug
                 arguments:
+                    - "expr:service('sylius.context.channel').getChannel()"
+                    - "expr:service('sylius.context.locale').getLocaleCode()"
                     - $slug
-                    - 'expr:service("sylius.context.channel").getChannel()'

@@ -50,16 +50,11 @@ interface ProductRepositoryInterface extends BaseProductRepositoryInterface
     public function findLatestByChannel(ChannelInterface $channel, $locale, $count);
 
     /**
-     * @param string $slug
      * @param ChannelInterface $channel
-     *
-     * @return ProductInterface|null
-     */
-    public function findOneBySlugAndChannel($slug, ChannelInterface $channel);
-    /**
+     * @param string $locale
      * @param string $slug
      *
      * @return ProductInterface|null
      */
-    public function findOneBySlug($slug);
+    public function findOneByChannelAndSlug(ChannelInterface $channel, $locale, $slug);
 }
