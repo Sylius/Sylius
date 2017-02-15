@@ -122,7 +122,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
      */
     public function addProductTaxon(ProductTaxonInterface $productTaxon)
     {
-        if (!$this->hasProductTaxon($productTaxon)) {
+        if($this->filterProductTaxonsByTaxon($productTaxon->getTaxon())->isEmpty()){
             $this->productTaxons->add($productTaxon);
             $productTaxon->setProduct($this);
         }
