@@ -13,10 +13,7 @@ namespace Sylius\Bundle\CustomerBundle\DependencyInjection;
 
 use Sylius\Bundle\CustomerBundle\Form\Type\CustomerGroupType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
-use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Bundle\ResourceBundle\Form\Type\ResourceFromIdentifierType;
-use Sylius\Bundle\CustomerBundle\Form\Type\CustomerProfileType;
 use Sylius\Bundle\CustomerBundle\Form\Type\CustomerType;
 use Sylius\Component\Customer\Model\CustomerGroup;
 use Sylius\Component\Resource\Factory\Factory;

@@ -11,13 +11,6 @@
 
 namespace Sylius\Bundle\MailerBundle\DependencyInjection;
 
-use Sylius\Bundle\MailerBundle\Form\Type\EmailType;
-use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
-use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
-use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Component\Mailer\Model\Email;
-use Sylius\Component\Mailer\Model\EmailInterface;
-use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
