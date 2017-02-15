@@ -131,6 +131,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         RepositoryInterface $repository,
         SingleResourceProviderInterface $singleResourceProvider
     ) {
+        $metadata->getHumanizedName()->willReturn('product');
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
         $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::SHOW)->willReturn('sylius.product.show');
@@ -139,7 +140,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $singleResourceProvider->get($configuration, $repository)->willReturn(null);
 
         $this
-            ->shouldThrow(new NotFoundHttpException())
+            ->shouldThrow(new NotFoundHttpException('The "product" has not been found'))
             ->during('showAction', [$request])
         ;
     }
@@ -687,6 +688,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         RepositoryInterface $repository,
         SingleResourceProviderInterface $singleResourceProvider
     ) {
+        $metadata->getHumanizedName()->willReturn('product');
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
         $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::UPDATE)->willReturn('sylius.product.update');
@@ -695,7 +697,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $singleResourceProvider->get($configuration, $repository)->willReturn(null);
 
         $this
-            ->shouldThrow(new NotFoundHttpException())
+            ->shouldThrow(new NotFoundHttpException('The "product" has not been found'))
             ->during('updateAction', [$request])
         ;
     }
@@ -1205,6 +1207,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         RepositoryInterface $repository,
         SingleResourceProviderInterface $singleResourceProvider
     ) {
+        $metadata->getHumanizedName()->willReturn('product');
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
         $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::DELETE)->willReturn('sylius.product.delete');
@@ -1213,7 +1216,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $singleResourceProvider->get($configuration, $repository)->willReturn(null);
 
         $this
-            ->shouldThrow(new NotFoundHttpException())
+            ->shouldThrow(new NotFoundHttpException('The "product" has not been found'))
             ->during('deleteAction', [$request])
         ;
     }
@@ -1491,6 +1494,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         RepositoryInterface $repository,
         SingleResourceProviderInterface $singleResourceProvider
     ) {
+        $metadata->getHumanizedName()->willReturn('product');
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
         $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::UPDATE)->willReturn('sylius.product.update');
@@ -1499,7 +1503,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $singleResourceProvider->get($configuration, $repository)->willReturn(null);
 
         $this
-            ->shouldThrow(new NotFoundHttpException())
+            ->shouldThrow(new NotFoundHttpException('The "product" has not been found'))
             ->during('applyStateMachineTransitionAction', [$request])
         ;
     }
