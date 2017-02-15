@@ -12,6 +12,8 @@
 namespace spec\Sylius\Component\Grid\Definition;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
+use Sylius\Bundle\GridBundle\Event\GridDefinitionConverterEvent;
 use Sylius\Component\Grid\Definition\Action;
 use Sylius\Component\Grid\Definition\ActionGroup;
 use Sylius\Component\Grid\Definition\ArrayToDefinitionConverter;
@@ -19,12 +21,18 @@ use Sylius\Component\Grid\Definition\ArrayToDefinitionConverterInterface;
 use Sylius\Component\Grid\Definition\Field;
 use Sylius\Component\Grid\Definition\Filter;
 use Sylius\Component\Grid\Definition\Grid;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class ArrayToDefinitionConverterSpec extends ObjectBehavior
 {
+    function let(EventDispatcherInterface $eventDispatcher)
+    {
+        $this->beConstructedWith($eventDispatcher);
+    }
+
     function it_is_initializable()
     {
         $this->shouldHaveType(ArrayToDefinitionConverter::class);
@@ -35,9 +43,13 @@ final class ArrayToDefinitionConverterSpec extends ObjectBehavior
         $this->shouldImplement(ArrayToDefinitionConverterInterface::class);
     }
 
-    function it_converts_an_array_to_grid_definition()
+    function it_converts_an_array_to_grid_definition(EventDispatcherInterface $eventDispatcher)
     {
-        $grid = Grid::fromCodeAndDriverConfiguration('sylius_admin_tax_category', 'doctrine/orm', ['resource' => 'sylius.tax_category']);
+        $grid = Grid::fromCodeAndDriverConfiguration(
+            'sylius_admin_tax_category',
+            'doctrine/orm',
+            ['resource' => 'sylius.tax_category']
+        );
 
         $grid->setSorting(['code' => 'desc']);
 
@@ -63,6 +75,11 @@ final class ArrayToDefinitionConverterSpec extends ObjectBehavior
         $filter->setOptions(['fields' => ['firstName', 'lastName']]);
         $filter->setCriteria('true');
         $grid->addFilter($filter);
+
+        $eventDispatcher
+            ->dispatch('sylius.grid.admin_tax_category', Argument::type(GridDefinitionConverterEvent::class))
+            ->shouldBeCalled()
+        ;
 
         $definitionArray = [
             'driver' => [
