@@ -14,9 +14,12 @@ namespace Sylius\Bundle\CoreBundle\Form\Type\Taxon;
 use Sylius\Bundle\CoreBundle\Form\DataTransformer\ProductTaxonToTaxonTransformer;
 use Sylius\Bundle\ResourceBundle\Form\DataTransformer\RecursiveTransformer;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceAutocompleteChoiceType;
+use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -45,14 +48,14 @@ final class ProductTaxonAutocompleteChoiceType extends AbstractType
         if ($options['multiple']) {
             $builder->addModelTransformer(
                 new RecursiveTransformer(
-                    new ProductTaxonToTaxonTransformer($this->productTaxonFactory)
+                    new ProductTaxonToTaxonTransformer($this->productTaxonFactory, $options['get_resource_repository'], $options['product'])
                 )
             );
         }
 
         if (!$options['multiple']) {
             $builder->addModelTransformer(
-                new ProductTaxonToTaxonTransformer($this->productTaxonFactory)
+                new ProductTaxonToTaxonTransformer($this->productTaxonFactory, $options['get_resource_repository'], $options['product'])
             );
         }
     }
@@ -66,7 +69,15 @@ final class ProductTaxonAutocompleteChoiceType extends AbstractType
             'resource' => 'sylius.taxon',
             'choice_name' => 'name',
             'choice_value' => 'code',
+            'resource_repository' => function (ServiceRegistryInterface $repositoryRegistry, Options $options) {
+                return $repositoryRegistry->get('sylius.product_taxon');
+            },
         ]);
+
+        $resolver
+            ->setRequired('product')
+            ->setAllowedTypes('product', ProductInterface::class)
+        ;
     }
 
     /**

@@ -21,6 +21,8 @@ use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -47,10 +49,16 @@ final class ProductTypeExtension extends AbstractTypeExtension
                 'choice_value' => 'code',
                 'multiple' => false,
             ])
-            ->add('productTaxons', ProductTaxonAutocompleteChoiceType::class, [
-                'label' => 'sylius.form.product.taxons',
-                'multiple' => true,
-            ])
+            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+                $product = $event->getData();
+                $form = $event->getForm();
+
+                $form->add('productTaxons', ProductTaxonAutocompleteChoiceType::class, [
+                    'label' => 'sylius.form.product.taxons',
+                    'product' => $product,
+                    'multiple' => true,
+                ]);
+            })
             ->add('variantSelectionMethod', ChoiceType::class, [
                 'choices' => array_flip(Product::getVariantSelectionMethodLabels()),
                 'label' => 'sylius.form.product.variant_selection_method',

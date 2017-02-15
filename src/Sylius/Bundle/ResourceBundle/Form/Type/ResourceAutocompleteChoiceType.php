@@ -20,6 +20,7 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -48,7 +49,7 @@ class ResourceAutocompleteChoiceType extends AbstractType
         if (!$options['multiple']) {
             $builder->addModelTransformer(
                 new ResourceToIdentifierTransformer(
-                    $this->resourceRepositoryRegistry->get($options['resource']),
+                    $options['repository'],
                     $options['choice_value']
                 )
             );
@@ -59,7 +60,7 @@ class ResourceAutocompleteChoiceType extends AbstractType
                 ->addModelTransformer(
                     new RecursiveTransformer(
                         new ResourceToIdentifierTransformer(
-                            $this->resourceRepositoryRegistry->get($options['resource']),
+                            $options['repository'],
                             $options['choice_value']
                         )
                     )
@@ -94,6 +95,15 @@ class ResourceAutocompleteChoiceType extends AbstractType
             ->setDefaults([
                 'multiple' => false,
                 'placeholder' => '',
+                'repository' => function (Options $options) {
+                    return $this->resourceRepositoryRegistry->get($options['resource']);
+                },
+                'get_resource_repository' => function (Options $options) {
+                    return $options['resource_repository']($this->resourceRepositoryRegistry, $options);
+                },
+                'resource_repository' => function (ServiceRegistryInterface $repositoryRegistry, Options $options) {
+                    return $repositoryRegistry->get($options['resource']);
+                },
             ])
             ->setAllowedTypes('resource', ['string'])
             ->setAllowedTypes('multiple', ['bool'])
