@@ -499,7 +499,7 @@ EOT;
      */
     private function getVariantListUrl(ProductInterface $product)
     {
-        return sprintf('/api/v1/products/%s/variants/', $product->getId());
+        return sprintf('/api/v1/products/%s/variants/', $product->getCode());
     }
 
     /**
@@ -510,6 +510,6 @@ EOT;
      */
     private function getVariantUrl(ProductInterface $product, ProductVariantInterface $productVariant)
     {
-        return sprintf('%s%s', $this->getVariantListUrl($product), $productVariant->getId());
+        return sprintf('%s%s', $this->getVariantListUrl($product), $productVariant->getCode());
     }
 }

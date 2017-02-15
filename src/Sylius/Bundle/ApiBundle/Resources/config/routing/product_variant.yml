@@ -1,6 +1,7 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+
 sylius_api_product_variant_index:
     path: /
     methods: [GET]
@@ -28,10 +29,10 @@ sylius_api_product_variant_create:
             factory:
                 method: createForProduct
                 arguments:
-                  - expr:service('sylius.repository.product').find($productId)
+                  - expr:service('sylius.repository.product').findOneByCode($productCode)
 
 sylius_api_product_variant_update:
-    path: /{id}
+    path: /{code}
     methods: [PUT, PATCH]
     defaults:
         _controller: sylius.controller.product_variant:updateAction
@@ -39,25 +40,27 @@ sylius_api_product_variant_update:
             serialization_version: $version
             section: api
             form: Sylius\Bundle\ApiBundle\Form\Type\ProductVariantType
-            criteria:
-                product: $productId
-                master: false
+            repository:
+                method: findOneByCode
+                arguments: [$code]
+
 
 sylius_api_product_variant_delete:
-    path: /{id}
+    path: /{code}
     methods: [DELETE]
     defaults:
         _controller: sylius.controller.product_variant:deleteAction
         _sylius:
             serialization_version: $version
             section: api
-            criteria:
-                product: $productId
-                master: false
+            repository:
+                method: findOneByCode
+                arguments: [$code]
             csrf_protection: false
 
+
 sylius_api_product_variant_show:
-    path: /{id}
+    path: /{code}
     methods: [GET]
     defaults:
         _controller: sylius.controller.product_variant:showAction
@@ -65,6 +68,6 @@ sylius_api_product_variant_show:
             serialization_version: $version
             section: api
             serialization_groups: [Default, Detailed]
-            criteria:
-                product: $productId
-                master: false
+            repository:
+                method: findOneByCode
+                arguments: [$code]

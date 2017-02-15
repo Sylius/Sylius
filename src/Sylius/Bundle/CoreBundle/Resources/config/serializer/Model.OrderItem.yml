@@ -22,6 +22,6 @@ Sylius\Component\Core\Model\OrderItem:
           href:
             route: sylius_api_product_variant_show
             parameters:
-                id: expr(object.getVariant().getId())
-                productId: expr(object.getVariant().getProduct().getId())
+                code: expr(object.getVariant().getCode())
+                productCode: expr(object.getVariant().getProduct().getCode())
                 version: 1

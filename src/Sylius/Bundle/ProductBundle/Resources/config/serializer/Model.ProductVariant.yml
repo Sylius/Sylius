@@ -28,8 +28,8 @@ Sylius\Component\Product\Model\ProductVariant:
           href:
             route: sylius_api_product_variant_show
             parameters:
-                id: expr(object.getId())
-                productId: expr(object.getProduct().getId())
+                code: expr(object.getCode())
+                productCode: expr(object.getProduct().getCode())
                 version: 1
             exclusion:
                 groups: [Detailed]

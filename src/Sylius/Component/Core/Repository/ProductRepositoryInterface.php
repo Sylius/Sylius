@@ -57,4 +57,11 @@ interface ProductRepositoryInterface extends BaseProductRepositoryInterface
      * @return ProductInterface|null
      */
     public function findOneByChannelAndSlug(ChannelInterface $channel, $locale, $slug);
+
+    /**
+     * @param string $code
+     *
+     * @return @return ProductInterface|null
+     */
+    public function findOneByCode($code);
 }
