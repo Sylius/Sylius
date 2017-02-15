@@ -237,6 +237,6 @@
         }
     ],
     "currency_code": "EUR",
-    "locale_code": "en",
+    "locale_code": "en_US",
     "checkout_state": "completed"
 }
