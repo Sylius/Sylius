@@ -6,6 +6,7 @@
 * :doc:`/cookbook/paypal`
 * :doc:`/cookbook/stripe`
 * :doc:`/cookbook/api`
+* :doc:`/cookbook/disabling-localised-urls`
 * :doc:`/cookbook/disabling-shop-admin-api`
 * :doc:`/cookbook/images`
 * :doc:`/cookbook/images-gridfs`

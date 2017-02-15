@@ -12,6 +12,7 @@ The Cookbook
     paypal
     stripe
     api
+    disabling-localised-urls
     disabling-shop-admin-api
     images
     images-gridfs
