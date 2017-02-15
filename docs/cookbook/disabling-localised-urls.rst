@@ -1,7 +1,7 @@
 How to disable localised URLs?
 ==============================
 
-**1.** Customise tha application routing in the ``app/config/routing.yml``.
+**1.** Customise the application routing in the ``app/config/routing.yml``.
 
 Replace:
 
