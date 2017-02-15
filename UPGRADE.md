@@ -235,6 +235,9 @@ These services will be generated automatically based on subject name.
   * `@SyliusShop/_currencySwitch.html.twig` -> `@SyliusShop/Menu/_currencySwitch.html.twig`
   * `@SyliusShop/_localeSwitch.html.twig` -> `@SyliusShop/Menu/_localeSwitch.html.twig`
 
+* `HomepageController` has been made final and can't be extended anymore, follow Symfony best practices and do not extend it.
+   Instead extend the `Symfony\Bundle\FrameworkBundle\Controller\Controller` and override the `sylius.controller.shop.homepage` service definition.
+   
 ### Taxation / TaxationBundle
 
 ### Taxonomy / TaxonomyBundle

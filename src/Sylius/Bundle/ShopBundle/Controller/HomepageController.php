@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class HomepageController
+final class HomepageController
 {
     /**
      * @var EngineInterface
