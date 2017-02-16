@@ -26,7 +26,7 @@ final class OrderApiTest extends CheckoutApiTestCase
      */
     public function it_denies_getting_an_order_for_non_authenticated_user()
     {
-        $this->client->request('GET', '/api/v1/orders/-1');
+        $this->client->request('GET', $this->getOrderUrl(-1));
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
@@ -39,7 +39,7 @@ final class OrderApiTest extends CheckoutApiTestCase
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
-        $this->client->request('GET', '/api/v1/orders/-1', [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', $this->getOrderUrl(-1), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
@@ -70,26 +70,285 @@ final class OrderApiTest extends CheckoutApiTestCase
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/checkout.yml');
 
-        $cartId = $this->createCart();
-        $this->addItemToCart($cartId);
-        $this->addressOrder($cartId);
-        $this->selectOrderShippingMethod($cartId);
-        $this->selectOrderPaymentMethod($cartId);
-        $this->completeOrder($cartId);
+        $orderId = $this->prepareOrder();
 
-        $this->client->request('GET', $this->getOrderUrl($cartId), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', $this->getOrderUrl($orderId), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'order/order_show_response', Response::HTTP_OK);
     }
 
     /**
-     * @param $cartId
+     * @test
+     */
+    public function it_denies_canceling_an_order_for_non_authenticated_user()
+    {
+        $this->client->request('PUT', $this->getCancelUrl(-1));
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
+    }
+
+    /**
+     * @test
+     */
+    public function it_returns_not_found_response_when_canceling_an_order_which_does_not_exist()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+
+        $this->client->request('PUT', $this->getCancelUrl(-1), [], [], static::$authorizedHeaderWithAccept);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_to_cancel_an_order()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/checkout.yml');
+
+        $orderId = $this->prepareOrder();
+
+        $this->client->request('PUT', $this->getCancelUrl($orderId), [], [], static::$authorizedHeaderWithAccept);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'order/order_canceled_show_response', Response::HTTP_OK);
+    }
+
+    /**
+     * @test
+     */
+    public function it_denies_shipping_an_order_for_non_authenticated_user()
+    {
+        $this->client->request('PUT', $this->getShipOrderShipmentUrl(-1, -1));
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
+    }
+
+    /**
+     * @test
+     */
+    public function it_returns_not_found_response_when_shipping_an_order_which_does_not_exist()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+
+        $this->client->request('PUT', $this->getShipOrderShipmentUrl(-1, -1), [], [], static::$authorizedHeaderWithAccept);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
+    }
+
+    /**
+     * @test
+     */
+    public function it_returns_not_found_response_when_shipping_does_not_exist_for_the_order()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/checkout.yml');
+
+        $orderId = $this->prepareOrder();
+
+        $this->client->request('PUT', $this->getShipOrderShipmentUrl($orderId, -1), [], [], static::$authorizedHeaderWithAccept);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_to_ship_an_order()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/checkout.yml');
+
+        $orderId = $this->prepareOrder();
+
+        $this->client->request('GET', $this->getOrderUrl($orderId), [], [], static::$authorizedHeaderWithContentType);
+
+        $response = $this->client->getResponse();
+        $rawResponse = json_decode($response->getContent(), true);
+
+        $this->client->request('PUT', $this->getShipOrderShipmentUrl($orderId, $rawResponse['shipments'][0]['id']), [], [], static::$authorizedHeaderWithAccept);
+
+        $response = $this->client->getResponse();
+        $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
+
+        $this->client->request('GET', $this->getOrderUrl($orderId), [], [], static::$authorizedHeaderWithAccept);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'order/order_shipped_show_response', Response::HTTP_OK);
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_to_ship_an_order_with_shipment_code()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/checkout.yml');
+
+        $orderId = $this->prepareOrder();
+
+        $this->client->request('GET', $this->getOrderUrl($orderId), [], [], static::$authorizedHeaderWithContentType);
+
+        $response = $this->client->getResponse();
+        $rawResponse = json_decode($response->getContent(), true);
+
+
+        $data =
+<<<EOT
+        {
+            "tracking": "BANANAS"
+        }
+EOT;
+
+        $this->client->request('PUT', $this->getShipOrderShipmentUrl($orderId, $rawResponse['shipments'][0]['id']), [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $response = $this->client->getResponse();
+        $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
+
+        $this->client->request('GET', $this->getOrderUrl($orderId), [], [], static::$authorizedHeaderWithAccept);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'order/order_shipped_with_tracking_show_response', Response::HTTP_OK);
+    }
+
+    /**
+     * @test
+     */
+    public function it_denies_completing_the_payment_for_the_order_for_non_authenticated_user()
+    {
+        $this->client->request('PUT', $this->getCompleteOrderPaymentUrl(-1, -1));
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
+    }
+
+    /**
+     * @test
+     */
+    public function it_returns_not_found_response_when_completing_the_payment_for_the_order_which_does_not_exist()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+
+        $this->client->request('PUT', $this->getShipOrderShipmentUrl(-1, -1), [], [], static::$authorizedHeaderWithAccept);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
+    }
+
+    /**
+     * @test
+     */
+    public function it_returns_not_found_response_when_completing_payment_does_not_exist_for_the_order()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/checkout.yml');
+
+        $orderId = $this->prepareOrder();
+
+        $this->client->request('PUT', $this->getCompleteOrderPaymentUrl($orderId, -1), [], [], static::$authorizedHeaderWithAccept);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_to_complete_the_payment_for_the_order()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/checkout.yml');
+
+        $orderId = $this->prepareOrder();
+
+        $this->client->request('GET', $this->getOrderUrl($orderId), [], [], static::$authorizedHeaderWithContentType);
+
+        $response = $this->client->getResponse();
+        $rawResponse = json_decode($response->getContent(), true);
+
+        $this->client->request('PUT', $this->getCompleteOrderPaymentUrl($orderId, $rawResponse['payments'][0]['id']), [], [], static::$authorizedHeaderWithAccept);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'order/order_payed_show_response', Response::HTTP_OK);
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_to_complete_the_payment_and_ship_the_order()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/checkout.yml');
+
+        $orderId = $this->prepareOrder();
+
+        $this->client->request('GET', $this->getOrderUrl($orderId), [], [], static::$authorizedHeaderWithContentType);
+
+        $response = $this->client->getResponse();
+        $rawResponse = json_decode($response->getContent(), true);
+
+        $this->client->request('PUT', $this->getShipOrderShipmentUrl($orderId, $rawResponse['shipments'][0]['id']), [], [], static::$authorizedHeaderWithAccept);
+
+        $response = $this->client->getResponse();
+        $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
+
+        $this->client->request('PUT', $this->getCompleteOrderPaymentUrl($orderId, $rawResponse['payments'][0]['id']), [], [], static::$authorizedHeaderWithAccept);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'order/order_payed_show_response', Response::HTTP_OK);
+
+        $this->client->request('GET', $this->getOrderUrl($orderId), [], [], static::$authorizedHeaderWithAccept);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'order/order_fulfilled_show_response', Response::HTTP_OK);
+    }
+
+    /**
+     * @param mixed $orderId
      *
      * @return string
      */
-    private function getOrderUrl($cartId)
+    private function getOrderUrl($orderId)
     {
-        return '/api/v1/orders/' . $cartId;
+        return '/api/v1/orders/' . $orderId;
+    }
+
+    /**
+     * @param mixed $orderId
+     * @param mixed $shipmentId
+     *
+     * @return string
+     */
+    private function getShipOrderShipmentUrl($orderId, $shipmentId)
+    {
+        return sprintf('%s/shipments/%s/ship', $this->getOrderUrl($orderId), $shipmentId);
+    }
+
+    /**
+     * @param mixed $orderId
+     * @param mixed $paymentId
+     *
+     * @return string
+     */
+    private function getCompleteOrderPaymentUrl($orderId, $paymentId)
+    {
+        return sprintf('%s/payments/%s/complete', $this->getOrderUrl($orderId), $paymentId);
+    }
+
+    /**
+     * @param mixed $orderId
+     *
+     * @return string
+     */
+    private function getCancelUrl($orderId)
+    {
+        return $this->getOrderUrl($orderId) . '/cancel';
     }
 }

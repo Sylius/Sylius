@@ -1,0 +1,48 @@
+{
+    "id": @integer@,
+    "method": {
+        "id": @integer@,
+        "code": "cod",
+        "created_at": "@string@.isDateTime()",
+        "updated_at": "@string@.isDateTime()",
+        "channels": [
+            {
+                "id": @integer@,
+                "code": "CHANNEL",
+                "name": "Channel",
+                "description": "Lorem ipsum",
+                "hostname": "localhost",
+                "color": "black",
+                "created_at": "@string@.isDateTime()",
+                "updated_at": "@string@.isDateTime()",
+                "enabled": true,
+                "tax_calculation_strategy": "order_items_based",
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            }
+        ],
+        "_links": {
+            "self": {
+                "href": "\/api\/v1\/payment-methods\/cod"
+            }
+        }
+    },
+    "amount": 30,
+    "state": "completed",
+    "created_at": "@string@.isDateTime()",
+    "updated_at": "@string@.isDateTime()",
+    "_links": {
+        "self": {
+            "href": "@string@"
+        },
+        "payment-method": {
+            "href": "\/api\/v1\/payment-methods\/cod"
+        },
+        "order": {
+            "href": "@string@"
+        }
+    }
+}
