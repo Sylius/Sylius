@@ -13,9 +13,11 @@ namespace spec\Sylius\Bundle\CoreBundle\Form\DataTransformer;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Form\DataTransformer\ProductTaxonToTaxonTransformer;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductTaxonInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
@@ -24,9 +26,9 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
  */
 final class ProductTaxonToTaxonTransformerSpec extends ObjectBehavior
 {
-    function let(FactoryInterface $productTaxonFactory)
+    function let(FactoryInterface $productTaxonFactory, RepositoryInterface $productTaxonRepository, ProductInterface $product)
     {
-        $this->beConstructedWith($productTaxonFactory);
+        $this->beConstructedWith($productTaxonFactory, $productTaxonRepository, $product);
     }
 
     function it_is_initializable()
@@ -53,13 +55,28 @@ final class ProductTaxonToTaxonTransformerSpec extends ObjectBehavior
         $this->transform(null)->shouldReturn(null);
     }
 
-    function it_transforms_taxon_to_product_taxon(
+    function it_transforms_taxon_to_new_product_taxon(
+        FactoryInterface $productTaxonFactory,
+        RepositoryInterface $productTaxonRepository,
+        ProductInterface $product,
         ProductTaxonInterface $productTaxon,
-        TaxonInterface $taxon,
-        FactoryInterface $productTaxonFactory
+        TaxonInterface $taxon
     ) {
+        $productTaxonRepository->findOneBy(['taxon' => $taxon, 'product' => $product])->willReturn(null);
         $productTaxonFactory->createNew()->willReturn($productTaxon);
         $productTaxon->setTaxon($taxon)->shouldBeCalled();
+        $productTaxon->setProduct($product)->shouldBeCalled();
+
+        $this->reverseTransform($taxon)->shouldReturn($productTaxon);
+    }
+
+    function it_transforms_taxon_to_existing_product_taxon(
+        RepositoryInterface $productTaxonRepository,
+        ProductTaxonInterface $productTaxon,
+        ProductInterface $product,
+        TaxonInterface $taxon
+    ) {
+        $productTaxonRepository->findOneBy(['taxon' => $taxon, 'product' => $product])->willReturn($productTaxon);
 
         $this->reverseTransform($taxon)->shouldReturn($productTaxon);
     }
