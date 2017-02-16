@@ -20,6 +20,7 @@ sylius_api_order_cancel:
             state_machine:
                 graph: sylius_order
                 transition: cancel
+            return_content: false
 
 sylius_api_order_shipment_ship:
     path: /orders/{orderId}/shipments/{id}/ship
@@ -55,3 +56,4 @@ sylius_api_order_payment_complete:
                 graph: sylius_payment
                 transition: complete
             section: api
+            return_content: false

@@ -38,6 +38,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Resource\ResourceActions;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\ParameterBag;
@@ -1027,6 +1028,7 @@ final class ResourceControllerSpec extends ObjectBehavior
 
     function it_returns_a_non_html_response_for_correctly_updated_resource(
         MetadataInterface $metadata,
+        ParameterBagInterface $parameterBag,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         ViewHandlerInterface $viewHandler,
         RepositoryInterface $repository,
@@ -1051,6 +1053,9 @@ final class ResourceControllerSpec extends ObjectBehavior
         $configuration->getPermission(ResourceActions::UPDATE)->willReturn('sylius.product.update');
         $configuration->isHtmlRequest()->willReturn(false);
         $configuration->hasStateMachine()->willReturn(false);
+
+        $configuration->getParameters()->willReturn($parameterBag);
+        $parameterBag->get('return_content', false)->willReturn(false);
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.update')->willReturn(true);
 
@@ -1648,6 +1653,7 @@ final class ResourceControllerSpec extends ObjectBehavior
 
     function it_applies_state_machine_transition_on_resource_and_returns_200_for_non_html_requests(
         MetadataInterface $metadata,
+        ParameterBagInterface $parameterBag,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         ViewHandlerInterface $viewHandler,
         RepositoryInterface $repository,
@@ -1667,8 +1673,11 @@ final class ResourceControllerSpec extends ObjectBehavior
         $metadata->getName()->willReturn('product');
 
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->getParameters()->willReturn($parameterBag);
         $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::UPDATE)->willReturn('sylius.product.update');
+
+        $parameterBag->get('return_content', true)->willReturn(true);
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.update')->willReturn(true);
         $singleResourceProvider->get($configuration, $repository)->willReturn($resource);
@@ -1684,6 +1693,54 @@ final class ResourceControllerSpec extends ObjectBehavior
         $eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource)->shouldBeCalled();
 
         $expectedView = View::create($resource, 200);
+
+        $viewHandler->handle($configuration, Argument::that($this->getViewComparingCallback($expectedView)))->willReturn($response);
+
+        $this->applyStateMachineTransitionAction($request)->shouldReturn($response);
+    }
+
+    function it_applies_state_machine_transition_on_resource_and_returns_204_for_non_html_requests_if_additional_option_added(
+        MetadataInterface $metadata,
+        ParameterBagInterface $parameterBag,
+        RequestConfigurationFactoryInterface $requestConfigurationFactory,
+        ViewHandlerInterface $viewHandler,
+        RepositoryInterface $repository,
+        ObjectManager $manager,
+        SingleResourceProviderInterface $singleResourceProvider,
+        AuthorizationCheckerInterface $authorizationChecker,
+        EventDispatcherInterface $eventDispatcher,
+        StateMachineInterface $stateMachine,
+        ResourceUpdateHandlerInterface $resourceUpdateHandler,
+        RequestConfiguration $configuration,
+        ResourceInterface $resource,
+        ResourceControllerEvent $event,
+        Request $request,
+        Response $response
+    ) {
+        $metadata->getApplicationName()->willReturn('sylius');
+        $metadata->getName()->willReturn('product');
+
+        $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->getParameters()->willReturn($parameterBag);
+        $configuration->hasPermission()->willReturn(true);
+        $configuration->getPermission(ResourceActions::UPDATE)->willReturn('sylius.product.update');
+
+        $parameterBag->get('return_content', true)->willReturn(false);
+
+        $authorizationChecker->isGranted($configuration, 'sylius.product.update')->willReturn(true);
+        $singleResourceProvider->get($configuration, $repository)->willReturn($resource);
+
+        $configuration->isHtmlRequest()->willReturn(false);
+
+        $eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($event);
+        $event->isStopped()->willReturn(false);
+
+        $stateMachine->can($configuration, $resource)->willReturn(true);
+        $resourceUpdateHandler->handle($resource, $configuration, $manager)->shouldBeCalled();
+
+        $eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource)->shouldBeCalled();
+
+        $expectedView = View::create(null, 204);
 
         $viewHandler->handle($configuration, Argument::that($this->getViewComparingCallback($expectedView)))->willReturn($response);
 
