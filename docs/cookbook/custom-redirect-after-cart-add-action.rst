@@ -1,5 +1,5 @@
-How to change a redirect after cart add action?
-===============================================
+How to change a redirect after the add to cart action?
+======================================================
 
 Currently **Sylius** by default is using route definition and **sylus-add-to-cart.js** script to handle redirect after successful add to cart action.
 

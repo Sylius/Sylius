@@ -1,6 +1,12 @@
 How to disable localised URLs?
 ==============================
 
+URLs in Sylius are localised, this means they contain the ``/locale`` prefix with the current locale.
+For example when the ``English (United States)`` locale is currently chosen in the channel, the URL of homepage will
+look like that ``localhost:8000/en_US/``.
+
+If you do not need localised URLs, this guide will help you to disable this feature.
+
 **1.** Customise the application routing in the ``app/config/routing.yml``.
 
 Replace:

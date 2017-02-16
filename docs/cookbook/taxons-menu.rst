@@ -1,5 +1,5 @@
-How to render a menu of taxons?
-===============================
+How to render a menu of taxons (categories) in a view?
+======================================================
 
 The way of rendering a menu of taxons is a supereasy reusable action, that you can adapt into any place you need.
 
