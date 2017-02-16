@@ -12,12 +12,56 @@
 namespace Sylius\Bundle\CoreBundle\Form\Type\Product;
 
 use Sylius\Bundle\CoreBundle\Form\Type\ImageType;
+use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantChoiceType;
+use Sylius\Component\Core\Model\ProductInterface;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 final class ProductImageType extends ImageType
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        parent::buildForm($builder, $options);
+
+        if (isset($options['product']) && $options['product'] instanceof ProductInterface) {
+            $builder
+                ->add('productVariants', ProductVariantChoiceType::class, [
+                    'label' => 'sylius.ui.product_variants',
+                    'multiple' => true,
+                    'expanded' => false,
+                    'required' => false,
+                    'product' => $options['product'],
+                ])
+            ;
+        }
+    }
+
+    public function buildView(FormView $view, FormInterface $form, array $options)
+    {
+        parent::buildView($view, $form, $options);
+
+        $view->vars['product'] = $options['product'];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        parent::configureOptions($resolver);
+
+        $resolver->setDefined('product');
+        $resolver->setAllowedTypes('product', ProductInterface::class);
+    }
+
     /**
      * {@inheritdoc}
      */

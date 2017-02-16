@@ -65,6 +65,7 @@ final class ProductTypeExtension extends AbstractTypeExtension
             ])
             ->add('images', CollectionType::class, [
                 'entry_type' => ProductImageType::class,
+                'entry_options' => ['product' => $options['data']],
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
