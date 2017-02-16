@@ -8,6 +8,10 @@ sylius_grid:
                     repository:
                         method: createListQueryBuilder
             filters:
+                code:
+                    type: string
+                    options:
+                        fields: [code]
                 name:
                     type: string
                     options:
