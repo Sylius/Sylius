@@ -1,0 +1,22 @@
+{
+    "id": @integer@,
+    "code": "Holliday",
+    "name": "Holliday promotion",
+    "priority": 0,
+    "exclusive": false,
+    "used": 0,
+    "coupon_based": true,
+    "rules": [],
+    "actions": [],
+    "created_at": "@string@.isDateTime()",
+    "updated_at": "@string@.isDateTime()",
+    "channels": [],
+    "_links": {
+        "self": {
+            "href": "\/api\/v1\/promotions\/Holliday"
+        },
+        "coupons": {
+            "href": "\/api\/v1\/promotions\/Holliday\/coupons\/"
+        }
+    }
+}

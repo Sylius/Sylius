@@ -6,54 +6,70 @@ Sylius\Component\Promotion\Model\Promotion:
             expose: true
             type: integer
             xml_attribute: true
+            groups: [Default, Detailed]
         code:
             expose: true
             type: string
+            groups: [Default, Detailed]
         name:
             expose: true
             type: string
+            groups: [Default, Detailed]
         startsAt:
             expose: true
             type: DateTime
+            groups: [Detailed]
         endsAt:
             expose: true
             type: DateTime
+            groups: [Detailed]
         usageLimit:
             expose: true
             type: integer
+            groups: [Detailed]
         used:
             expose: true
             type: integer
+            groups: [Detailed]
         priority:
             expose: true
             type: integer
+            groups: [Detailed]
         couponBased:
             expose: true
             type: boolean
+            groups: [Detailed]
         exclusive:
             expose: true
             type: boolean
+            groups: [Detailed]
         rules:
             expose: true
+            type: array
+            groups: [Detailed]
         actions:
             expose: true
+            type: array
+            groups: [Detailed]
         createdAt:
             expose: true
             type: DateTime
+            groups: [Detailed]
         updatedAt:
             expose: true
             type: DateTime
+            groups: [Detailed]
     relations:
         - rel: self
           href:
                 route: sylius_api_promotion_show
                 parameters:
-                    id: expr(object.getId())
+                    code: expr(object.getCode())
                     version: 1
         - rel: coupons
-          exclude_if: expr(!object.isCouponBased() || !object.getId())
+          exclude_if: expr(!object.isCouponBased() || !object.getCode())
           href:
                 route: sylius_api_promotion_coupon_index
                 parameters:
-                    promotionId: expr(object.getId())
+                    promotionCode: expr(object.getCode())
                     version: 1

@@ -1,0 +1,47 @@
+{
+    "page": 1,
+    "limit": 10,
+    "pages": 1,
+    "total": 2,
+    "_links": {
+        "self": {
+            "href": "\/api\/v1\/promotions\/?page=1&limit=10"
+        },
+        "first": {
+            "href": "\/api\/v1\/promotions\/?page=1&limit=10"
+        },
+        "last": {
+            "href": "\/api\/v1\/promotions\/?page=1&limit=10"
+        }
+    },
+    "_embedded": {
+        "items": [
+            {
+                "id": @integer@,
+                "code": "Sunday",
+                "name": "Sunday promotion",
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/promotions\/Sunday"
+                    },
+                    "coupons": {
+                        "href": "\/api\/v1\/promotions\/Sunday\/coupons\/"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "code": "Holliday",
+                "name": "Holliday promotion",
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/promotions\/Holliday"
+                    },
+                    "coupons": {
+                        "href": "\/api\/v1\/promotions\/Holliday\/coupons\/"
+                    }
+                }
+            }
+        ]
+    }
+}

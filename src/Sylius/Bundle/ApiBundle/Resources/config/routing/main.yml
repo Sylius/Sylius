@@ -26,6 +26,13 @@ sylius_api_product_variant:
     resource: "@SyliusApiBundle/Resources/config/routing/product_variant.yml"
     prefix: /products/{productCode}/variants
 
+sylius_api_promotion:
+    resource: "@SyliusApiBundle/Resources/config/routing/promotion.yml"
+
+sylius_api_promotion_coupon:
+    resource: "@SyliusApiBundle/Resources/config/routing/promotion_coupon.yml"
+    prefix: /promotions/{promotionCode}/coupons
+
 sylius_api_taxon:
     resource: "@SyliusApiBundle/Resources/config/routing/taxon.yml"
 
@@ -47,14 +54,6 @@ sylius_api_order:
 sylius_api_checkout:
     resource: "@SyliusApiBundle/Resources/config/routing/checkout.yml"
     prefix: /checkouts
-
-sylius_api_promotion:
-    resource: "@SyliusApiBundle/Resources/config/routing/promotion.yml"
-    prefix: /promotions
-
-sylius_api_promotion_coupon:
-    resource: "@SyliusApiBundle/Resources/config/routing/promotion_coupon.yml"
-    prefix: /promotions/{promotionId}/coupons
 
 sylius_api_tax_category:
     resource: |
