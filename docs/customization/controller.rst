@@ -11,7 +11,7 @@ If you want to override a controller action, check which controller you should b
 
     **Resource Controllers** - are based only on one Entity, so they return only the resources they have in their name. For instance a ``ProductController`` should return only products.
     **Standard Controllers** - non-resource; these may use many entities at once, they are useful on more general pages.
-    We are extending these controllers only if the actions we want cannot be done through yaml configuration - like sending emails.
+    We are defining these controllers only if the actions we want cannot be done through yaml configuration - like sending emails.
 
 Why would you customize a Controller?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -114,10 +114,7 @@ Let's assume that you would like to add some logic to the Homepage.
 
 1. Create a new Controller class under the ``AppBundle/Controller/Shop`` namespace.
 
-Run ``$ php bin/console debug:container sylius.controller.shop.homepage``.
-
-Your class needs to extend the Symfony's Controller, and if you still need the methods of the original HompageController,
-then copy its methods to the new one.
+If you still need the methods of the original HomepageController, then copy its body to the new class.
 
 .. code-block:: php
 
@@ -125,12 +122,11 @@ then copy its methods to the new one.
 
     namespace AppBundle\Controller\Shop;
 
-    use Symfony\Bundle\FrameworkBundle\Controller\Controller;
     use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\Response;
 
-    class HomepageController extends Controller
+    final class HomepageController
     {
         /**
          * @var EngineInterface
@@ -172,5 +168,9 @@ then copy its methods to the new one.
 
     services:
         sylius.controller.shop.homepage: AppBundle\Controller\Shop\HomepageController
+
+.. tip::
+
+    Run ``$ php bin/console debug:container sylius.controller.shop.homepage`` to check if the class has changed to your implementation.
 
 From now on your ``customAction`` of the ``HomepageController`` will be available alongside the ``indexAction`` from the base class.
