@@ -15,6 +15,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Resource\Exception\RaceConditionException;
+use Sylius\Component\Resource\Exception\ResourceException;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -327,12 +328,12 @@ class ResourceController extends Controller
 
             try {
                 $this->resourceUpdater->applyTransitionAndFlush($resource, $configuration, $this->manager);
-            } catch (RaceConditionException $exception) {
+            } catch (ResourceException $exception) {
                 if (!$configuration->isHtmlRequest()) {
                     return $this->viewHandler->handle($configuration, View::create($form, Response::HTTP_BAD_REQUEST));
                 }
 
-                $this->flashHelper->addErrorFlash($configuration, 'race_condition_error');
+                $this->flashHelper->addErrorFlash($configuration, $exception->getFlash());
 
                 return $this->redirectHandler->redirectToReferer($configuration);
             }
@@ -440,12 +441,12 @@ class ResourceController extends Controller
 
         try {
             $this->resourceUpdater->applyTransitionAndFlush($resource, $configuration, $this->manager);
-        } catch (RaceConditionException $exception) {
+        } catch (ResourceException $exception) {
             if (!$configuration->isHtmlRequest()) {
                 return $this->viewHandler->handle($configuration, View::create($resource, Response::HTTP_BAD_REQUEST));
             }
 
-            $this->flashHelper->addErrorFlash($configuration, 'race_condition_error');
+            $this->flashHelper->addErrorFlash($configuration, $exception->getFlash());
 
             return $this->redirectHandler->redirectToReferer($configuration);
         }

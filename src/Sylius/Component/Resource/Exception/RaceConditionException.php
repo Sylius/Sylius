@@ -14,13 +14,18 @@ namespace Sylius\Component\Resource\Exception;
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-class RaceConditionException extends \Exception
+class RaceConditionException extends ResourceException
 {
     /**
-     * {@inheritdoc}
+     * @param \Exception $previous
      */
-    public function __construct()
+    public function __construct(\Exception $previous = null)
     {
-        parent::__construct('Operated entity was previously modified.');
+        parent::__construct(
+            'Operated entity was previously modified.',
+            'race_condition_error',
+            null !== $previous ? $previous->getCode() : 0,
+            $previous
+        );
     }
 }

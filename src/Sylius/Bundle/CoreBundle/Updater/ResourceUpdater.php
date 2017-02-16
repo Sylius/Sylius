@@ -49,7 +49,7 @@ final class ResourceUpdater implements ResourceUpdaterInterface
         try {
             $this->decoratedUpdater->applyTransitionAndFlush($resource, $configuration, $manager);
         } catch (OptimisticLockException $exception) {
-            throw new RaceConditionException();
+            throw new RaceConditionException($exception);
         }
     }
 }

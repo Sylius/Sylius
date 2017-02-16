@@ -12,16 +12,16 @@
 namespace spec\Sylius\Component\Resource\Exception;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Resource\Exception\RaceConditionException;
+use Sylius\Component\Resource\Exception\ResourceException;
 
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-final class RaceConditionExceptionSpec extends ObjectBehavior
+final class ResourceExceptionSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType(RaceConditionException::class);
+        $this->shouldHaveType(ResourceException::class);
     }
 
     function it_extends_an_exception()
@@ -31,11 +31,11 @@ final class RaceConditionExceptionSpec extends ObjectBehavior
 
     function it_has_a_message()
     {
-        $this->getMessage()->shouldReturn('Operated entity was previously modified.');
+        $this->getMessage()->shouldReturn('Ups, something went wrong, please try again.');
     }
 
     function it_has_a_flash()
     {
-        $this->getFlash()->shouldReturn('race_condition_error');
+        $this->getFlash()->shouldReturn('something_went_wrong_error');
     }
 }
