@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\GridBundle\Event;
+namespace Sylius\Component\Grid\Event;
 
 use Sylius\Component\Grid\Definition\Grid;
 use Symfony\Component\EventDispatcher\Event;

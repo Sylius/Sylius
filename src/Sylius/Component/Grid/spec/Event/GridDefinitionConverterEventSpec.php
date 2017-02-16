@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\GridBundle\Event;
+namespace spec\Sylius\Component\Grid\Event;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\GridBundle\Event\GridDefinitionConverterEvent;
 use Sylius\Component\Grid\Definition\Grid;
+use Sylius\Component\Grid\Event\GridDefinitionConverterEvent;
 
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>

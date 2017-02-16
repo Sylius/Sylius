@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Grid\Definition;
 
-use Sylius\Bundle\GridBundle\Event\GridDefinitionConverterEvent;
+use Sylius\Component\Grid\Event\GridDefinitionConverterEvent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
