@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\CoreBundle\Templating\Helper;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Templating\Helper\CheckoutStepsHelper;
+use Sylius\Component\Core\Checker\OrderPaymentMethodSelectionRequirementCheckerInterface;
 use Sylius\Component\Core\Checker\OrderShippingMethodSelectionRequirementCheckerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Templating\Helper\Helper;
@@ -22,9 +23,14 @@ use Symfony\Component\Templating\Helper\Helper;
  */
 final class CheckoutStepsHelperSpec extends ObjectBehavior
 {
-    function let(OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker)
-    {
-        $this->beConstructedWith($orderShippingMethodSelectionRequirementChecker);
+    function let(
+        OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
+        OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker
+    ) {
+        $this->beConstructedWith(
+            $orderPaymentMethodSelectionRequirementChecker,
+            $orderShippingMethodSelectionRequirementChecker
+        );
     }
 
     function it_is_initializable()
@@ -46,13 +52,12 @@ final class CheckoutStepsHelperSpec extends ObjectBehavior
         $this->isShippingRequired($order)->shouldReturn(true);
     }
 
-    function it_checks_if_order_required_payment(OrderInterface $order)
-    {
-        $order->getTotal()->willReturn(100);
+    function it_checks_if_order_required_payment(
+        OrderInterface $order,
+        OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker
+    ) {
+        $orderPaymentMethodSelectionRequirementChecker->isPaymentMethodSelectionRequired($order)->willReturn(true);
         $this->isPaymentRequired($order)->shouldReturn(true);
-
-        $order->getTotal()->willReturn(0);
-        $this->isPaymentRequired($order)->shouldReturn(false);
     }
 
     function it_has_name()

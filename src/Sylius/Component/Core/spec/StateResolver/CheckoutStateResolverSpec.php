@@ -14,6 +14,7 @@ namespace spec\Sylius\Component\Core\StateResolver;
 use PhpSpec\ObjectBehavior;
 use SM\Factory\FactoryInterface;
 use SM\StateMachine\StateMachineInterface;
+use Sylius\Component\Core\Checker\OrderPaymentMethodSelectionRequirementCheckerInterface;
 use Sylius\Component\Core\Checker\OrderShippingMethodSelectionRequirementCheckerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
@@ -32,9 +33,14 @@ final class CheckoutStateResolverSpec extends ObjectBehavior
 {
     function let(
         FactoryInterface $stateMachineFactory,
+        OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
         OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker
     ) {
-        $this->beConstructedWith($stateMachineFactory, $orderShippingMethodSelectionRequirementChecker);
+        $this->beConstructedWith(
+            $stateMachineFactory,
+            $orderPaymentMethodSelectionRequirementChecker,
+            $orderShippingMethodSelectionRequirementChecker
+        );
     }
 
     function it_is_initializable()
@@ -47,13 +53,14 @@ final class CheckoutStateResolverSpec extends ObjectBehavior
         $this->shouldImplement(StateResolverInterface::class);
     }
 
-    function it_applies_transition_skip_shipping_and_skip_payment_if_shipping_method_selection_is_not_required_and_its_total_is_0_and_this_transitions_are_possible(
+    function it_applies_transition_skip_shipping_and_skip_payment_if_shipping_method_selection_is_not_required_and_payment_method_selection_is_not_required_and_this_transitions_are_possible(
         FactoryInterface $stateMachineFactory,
         OrderInterface $order,
+        OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
         OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker,
         StateMachineInterface $stateMachine
     ) {
-        $order->getTotal()->willReturn(0);
+        $orderPaymentMethodSelectionRequirementChecker->isPaymentMethodSelectionRequired($order)->willReturn(false);
 
         $orderShippingMethodSelectionRequirementChecker->isShippingMethodSelectionRequired($order)->willReturn(false);
 
@@ -71,10 +78,11 @@ final class CheckoutStateResolverSpec extends ObjectBehavior
     function it_applies_transition_skip_shipping_if_shipping_method_selection_is_not_required_and_this_transition_is_possible(
         FactoryInterface $stateMachineFactory,
         OrderInterface $order,
+        OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
         OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker,
         StateMachineInterface $stateMachine
     ) {
-        $order->getTotal()->willReturn(10);
+        $orderPaymentMethodSelectionRequirementChecker->isPaymentMethodSelectionRequired($order)->willReturn(true);
 
         $orderShippingMethodSelectionRequirementChecker->isShippingMethodSelectionRequired($order)->willReturn(false);
 
@@ -92,10 +100,11 @@ final class CheckoutStateResolverSpec extends ObjectBehavior
     function it_does_not_apply_skip_shipping_transition_if_shipping_method_selection_is_required(
         FactoryInterface $stateMachineFactory,
         OrderInterface $order,
+        OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
         OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker,
         StateMachineInterface $stateMachine
     ) {
-        $order->getTotal()->willReturn(10);
+        $orderPaymentMethodSelectionRequirementChecker->isPaymentMethodSelectionRequired($order)->willReturn(true);
 
         $orderShippingMethodSelectionRequirementChecker->isShippingMethodSelectionRequired($order)->willReturn(true);
 
@@ -113,10 +122,11 @@ final class CheckoutStateResolverSpec extends ObjectBehavior
     function it_does_not_apply_skip_shipping_transition_if_it_is_not_possible(
         FactoryInterface $stateMachineFactory,
         OrderInterface $order,
+        OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
         OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker,
         StateMachineInterface $stateMachine
     ) {
-        $order->getTotal()->willReturn(10);
+        $orderPaymentMethodSelectionRequirementChecker->isPaymentMethodSelectionRequired($order)->willReturn(true);
 
         $orderShippingMethodSelectionRequirementChecker->isShippingMethodSelectionRequired($order)->willReturn(true);
 
@@ -131,13 +141,14 @@ final class CheckoutStateResolverSpec extends ObjectBehavior
         $this->resolve($order);
     }
 
-    function it_applies_transition_skip_payment_if_order_total_is_zero_and_this_transition_is_possible(
+    function it_applies_transition_skip_payment_if_payment_method_selection_is_not_required_and_this_transition_is_possible(
         FactoryInterface $stateMachineFactory,
         OrderInterface $order,
+        OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
         OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker,
         StateMachineInterface $stateMachine
     ) {
-        $order->getTotal()->willReturn(0);
+        $orderPaymentMethodSelectionRequirementChecker->isPaymentMethodSelectionRequired($order)->willReturn(false);
 
         $orderShippingMethodSelectionRequirementChecker->isShippingMethodSelectionRequired($order)->willReturn(true);
 
@@ -152,13 +163,14 @@ final class CheckoutStateResolverSpec extends ObjectBehavior
         $this->resolve($order);
     }
 
-    function it_does_not_apply_skip_payment_transition_if_order_total_is_not_zero(
+    function it_does_not_apply_skip_payment_transition_if_payment_method_selection_is_required(
         FactoryInterface $stateMachineFactory,
         OrderInterface $order,
+        OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
         OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker,
         StateMachineInterface $stateMachine
     ) {
-        $order->getTotal()->willReturn(10);
+        $orderPaymentMethodSelectionRequirementChecker->isPaymentMethodSelectionRequired($order)->willReturn(true);
 
         $orderShippingMethodSelectionRequirementChecker->isShippingMethodSelectionRequired($order)->willReturn(true);
 
@@ -176,10 +188,11 @@ final class CheckoutStateResolverSpec extends ObjectBehavior
     function it_does_not_apply_skip_payment_transition_if_transition_skip_payment_is_not_possible(
         FactoryInterface $stateMachineFactory,
         OrderInterface $order,
+        OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
         OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker,
         StateMachineInterface $stateMachine
     ) {
-        $order->getTotal()->willReturn(10);
+        $orderPaymentMethodSelectionRequirementChecker->isPaymentMethodSelectionRequired($order)->willReturn(true);
 
         $orderShippingMethodSelectionRequirementChecker->isShippingMethodSelectionRequired($order)->willReturn(true);
 

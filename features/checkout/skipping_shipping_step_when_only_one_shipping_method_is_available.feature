@@ -26,7 +26,7 @@ Feature: Skipping shipping step when only one shipping method is available
     @ui
     Scenario: Seeing checkout payment page after addressing if only one shipping method is available for current channel
         Given the store has "DHL" shipping method with "$5.00" fee
-        Given the store has "FedEx" shipping method with "$15.00" fee not assigned to any channel
+        And the store has "FedEx" shipping method with "$15.00" fee not assigned to any channel
         And I have product "Guards! Guards!" in the cart
         And I am at the checkout addressing step
         When I specify the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
@@ -39,7 +39,7 @@ Feature: Skipping shipping step when only one shipping method is available
     @ui
     Scenario: Seeing checkout payment page after addressing if only one shipping method is enabled for current channel
         Given the store has "DHL" shipping method with "$5.00" fee
-        Given the store has disabled "FedEx" shipping method with "$15.00" fee
+        And the store has disabled "FedEx" shipping method with "$15.00" fee
         And I have product "Guards! Guards!" in the cart
         And I am at the checkout addressing step
         When I specify the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"

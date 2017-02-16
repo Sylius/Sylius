@@ -12,6 +12,7 @@
 namespace Sylius\Component\Core\StateResolver;
 
 use SM\Factory\FactoryInterface;
+use Sylius\Component\Core\Checker\OrderPaymentMethodSelectionRequirementCheckerInterface;
 use Sylius\Component\Core\Checker\OrderShippingMethodSelectionRequirementCheckerInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
@@ -32,19 +33,27 @@ final class CheckoutStateResolver implements StateResolverInterface
     private $stateMachineFactory;
 
     /**
+     * @var OrderPaymentMethodSelectionRequirementCheckerInterface
+     */
+    private $orderPaymentMethodSelectionRequirementChecker;
+
+    /**
      * @var OrderShippingMethodSelectionRequirementCheckerInterface
      */
     private $orderShippingMethodSelectionRequirementChecker;
 
     /**
      * @param FactoryInterface $stateMachineFactory
+     * @param OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker
      * @param OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker
      */
     public function __construct(
         FactoryInterface $stateMachineFactory,
+        OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
         OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker
     ) {
         $this->stateMachineFactory = $stateMachineFactory;
+        $this->orderPaymentMethodSelectionRequirementChecker = $orderPaymentMethodSelectionRequirementChecker;
         $this->orderShippingMethodSelectionRequirementChecker = $orderShippingMethodSelectionRequirementChecker;
     }
 
@@ -62,7 +71,10 @@ final class CheckoutStateResolver implements StateResolverInterface
             $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING);
         }
 
-        if (0 === $order->getTotal() && $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)) {
+        if (
+            !$this->orderPaymentMethodSelectionRequirementChecker->isPaymentMethodSelectionRequired($order)
+            && $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)
+        ) {
             $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT);
         }
     }

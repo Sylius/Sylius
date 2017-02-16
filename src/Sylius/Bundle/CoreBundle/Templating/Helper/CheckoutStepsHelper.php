@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Templating\Helper;
 
+use Sylius\Component\Core\Checker\OrderPaymentMethodSelectionRequirementCheckerInterface;
 use Sylius\Component\Core\Checker\OrderShippingMethodSelectionRequirementCheckerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Templating\Helper\Helper;
@@ -21,16 +22,24 @@ use Symfony\Component\Templating\Helper\Helper;
 class CheckoutStepsHelper extends Helper
 {
     /**
+     * @var OrderPaymentMethodSelectionRequirementCheckerInterface
+     */
+    private $orderPaymentMethodSelectionRequirementChecker;
+
+    /**
      * @var OrderShippingMethodSelectionRequirementCheckerInterface
      */
     private $orderShippingMethodSelectionRequirementChecker;
 
     /**
+     * @param OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker
      * @param OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker
      */
     public function __construct(
+        OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
         OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker
     ) {
+        $this->orderPaymentMethodSelectionRequirementChecker = $orderPaymentMethodSelectionRequirementChecker;
         $this->orderShippingMethodSelectionRequirementChecker = $orderShippingMethodSelectionRequirementChecker;
     }
 
@@ -51,7 +60,7 @@ class CheckoutStepsHelper extends Helper
      */
     public function isPaymentRequired(OrderInterface $order)
     {
-        return 0 < $order->getTotal();
+        return $this->orderPaymentMethodSelectionRequirementChecker->isPaymentMethodSelectionRequired($order);
     }
 
     /**

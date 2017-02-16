@@ -19,6 +19,7 @@ class Version20170214104908 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE sylius_channel ADD skipping_shipping_step_allowed TINYINT(1) NOT NULL');
+        $this->addSql('UPDATE sylius_channel SET skipping_shipping_step_allowed = 0');
     }
 
     /**

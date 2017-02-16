@@ -16,5 +16,6 @@
         <service id="sylius.checker.order_shipping_method_selection_requirement" class="Sylius\Component\Core\Checker\OrderShippingMethodSelectionRequirementChecker">
             <argument type="service" id="sylius.shipping_methods_resolver" />
         </service>
+        <service id="sylius.checker.order_payment_method_selection_requirement" class="Sylius\Component\Core\Checker\OrderPaymentMethodSelectionRequirementChecker" />
     </services>
 </container>

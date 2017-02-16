@@ -8,8 +8,8 @@
     {% set steps = {'address': 'completed', 'select_shipping': 'completed', 'select_payment': 'completed', 'complete': 'active'} %}
 {% endif %}
 
-{% set order_requires_payment = is_payment_required(order) %}
-{% set order_requires_shipping = is_shipping_required(order) %}
+{% set order_requires_payment = sylius_is_payment_required(order) %}
+{% set order_requires_shipping = sylius_is_shipping_required(order) %}
 
 {% set steps_count = 'four' %}
 {% if not order_requires_payment and not order_requires_shipping %}
