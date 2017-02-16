@@ -200,8 +200,13 @@ After:
 * Credit Card model and all related code have been removed.
 * `->getSource()` and `->setSource(PaymentSourceInterface $source)` have been removed from `PaymentInterface`.
 * `PaymentSourceInterface` has been removed.
+* `void` transition and state has been removed due to being not used.
 
 ### PayumBundle
+
+* There were changes made with handling payment states:
+    - *authorized* is treated as *processing*
+    - *payedout* is treated as *refunded*
 
 ### Product / ProductBundle
 
