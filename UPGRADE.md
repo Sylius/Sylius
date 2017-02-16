@@ -69,7 +69,7 @@
                 serialization_groups: [Detailed]
  ```
  
-* Routing definition for Channels has been removed and replaced with auto generated resource routing. Channels are now resolved by code instead of id.
+* Routing definition for Channels has been removed and replaced with auto generated resource routing. Channels are now resolved by code instead of id and only index and show endpoint are available.
 You can bring back previous configuration by overriding current routing with your definition.
 
 * Routing definition for Countries has been removed and replaced with auto generated resource routing.
@@ -81,10 +81,13 @@ You can bring back previous configuration by overriding current routing with you
 * Routing definition for Products has been changed and products are now resolved by code instead of id.
 You can bring back previous configuration by overriding current routing with your definition.
 
-* Routing definition for ProductVariants has been changed and productVariants are now resolved by code instead of id.
+* Routing definition for ProductVariants has been changed and ProductVariants are now resolved by code instead of id.
 You can bring back previous configuration by overriding current routing with your definition.
 
-* Routing definition for ProductAttributes has been changed and productAttributes are now resolved by code instead of id.
+* Routing definition for ProductAttributes has been changed and ProductAttributes are now resolved by code instead of id and only index and show endpoint are available.
+You can bring back previous configuration by overriding current routing with your definition.
+
+* Routing definition for ProductOptions has been changed and ProductOptions are now resolved by code instead of id and only index and show endpoint are available. 
 You can bring back previous configuration by overriding current routing with your definition.
 
 ### Attribute / AttributeBundle

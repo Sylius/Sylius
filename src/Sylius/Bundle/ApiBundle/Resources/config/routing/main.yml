@@ -19,13 +19,12 @@ sylius_api_product:
 sylius_api_product_attribute:
     resource: "@SyliusApiBundle/Resources/config/routing/product_attribute.yml"
 
+sylius_api_product_option:
+    resource: "@SyliusApiBundle/Resources/config/routing/product_option.yml"
+
 sylius_api_product_variant:
     resource: "@SyliusApiBundle/Resources/config/routing/product_variant.yml"
     prefix: /products/{productCode}/variants
-
-sylius_api_product_option:
-    resource: "@SyliusApiBundle/Resources/config/routing/product_option.yml"
-    prefix: /product-options
 
 sylius_api_taxon:
     resource: "@SyliusApiBundle/Resources/config/routing/taxon.yml"

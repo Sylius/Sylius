@@ -1,10 +1,21 @@
 Sylius\Component\Product\Model\ProductOption:
     exclusion_policy: ALL
-    xml_root_name: option
+    xml_root_name: product-option
     properties:
+        id:
+            expose: true
+            type: integer
+            xml_attribute: true
+            gorups: [Default, Detailed]
         code:
             exopse: true
             type: string
-        name:
+            gorups: [Default, Detailed]
+        position:
             expose: true
-            type: string
+            type: integer
+            gorups: [Default, Detailed]
+        values:
+            expose: true
+            type: array
+            gorups: [Detailed]
