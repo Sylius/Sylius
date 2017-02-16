@@ -18,7 +18,7 @@ Payment State Machine
 ---------------------
 
 A Payment that is assigned to an order will have it's own state machine with a few available states:
-``cart``, ``new``, ``processing``, ``completed``, ``failed``, ``cancelled``, ``void``, ``refunded``.
+``cart``, ``new``, ``processing``, ``completed``, ``failed``, ``cancelled``, ``refunded``.
 
 The available transitions between these states are:
 
@@ -43,9 +43,6 @@ The available transitions between these states are:
         refund:
             from: [completed]
             to: refunded
-        void:
-            from: [new, processing]
-            to: void
 
 .. image:: ../../_images/sylius_payment.png
     :align: center
