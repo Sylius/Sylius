@@ -50,6 +50,9 @@
             }, 50);
         });
 
+        $('.sylius-tabular-form').addTabErrors();
+        $('.ui.accordion').addAccordionErrors();
+
         $(document).productSlugGenerator();
         $(document).taxonSlugGenerator();
     });
