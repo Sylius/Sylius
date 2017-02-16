@@ -26,7 +26,7 @@ final class ResourceUpdater implements ResourceUpdaterInterface
     /**
      * @var ResourceUpdaterInterface
      */
-    protected $decoratedUpdater;
+    private $decoratedUpdater;
 
     /**
      * @param ResourceUpdaterInterface $decoratedUpdater

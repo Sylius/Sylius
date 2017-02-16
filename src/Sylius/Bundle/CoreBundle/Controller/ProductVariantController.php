@@ -11,9 +11,6 @@
 
 namespace Sylius\Bundle\CoreBundle\Controller;
 
-use Doctrine\DBAL\LockMode;
-use Doctrine\ORM\OptimisticLockException;
-use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Resource\ResourceActions;

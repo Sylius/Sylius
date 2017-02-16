@@ -279,6 +279,8 @@ class ResourceController extends Controller
             return $this->viewHandler->handle($configuration, View::create($form, Response::HTTP_BAD_REQUEST));
         }
 
+        $this->eventDispatcher->dispatch(ResourceActions::INITIALIZE_CREATE, $configuration, $newResource);
+
         $view = View::create()
             ->setData([
                 'configuration' => $configuration,
@@ -330,7 +332,7 @@ class ResourceController extends Controller
                 $this->resourceUpdater->applyTransitionAndFlush($resource, $configuration, $this->manager);
             } catch (ResourceException $exception) {
                 if (!$configuration->isHtmlRequest()) {
-                    return $this->viewHandler->handle($configuration, View::create($form, Response::HTTP_BAD_REQUEST));
+                    return $this->viewHandler->handle($configuration, View::create($form, Response::HTTP_CONFLICT));
                 }
 
                 $this->flashHelper->addErrorFlash($configuration, $exception->getFlash());
@@ -357,7 +359,7 @@ class ResourceController extends Controller
             return $this->viewHandler->handle($configuration, View::create($form, Response::HTTP_BAD_REQUEST));
         }
 
-        $this->eventDispatcher->dispatch(ResourceActions::INITIALIZE, $configuration, $resource);
+        $this->eventDispatcher->dispatch(ResourceActions::INITIALIZE_UPDATE, $configuration, $resource);
 
         $view = View::create()
             ->setData([
@@ -443,7 +445,7 @@ class ResourceController extends Controller
             $this->resourceUpdater->applyTransitionAndFlush($resource, $configuration, $this->manager);
         } catch (ResourceException $exception) {
             if (!$configuration->isHtmlRequest()) {
-                return $this->viewHandler->handle($configuration, View::create($resource, Response::HTTP_BAD_REQUEST));
+                return $this->viewHandler->handle($configuration, View::create($resource, Response::HTTP_CONFLICT));
             }
 
             $this->flashHelper->addErrorFlash($configuration, $exception->getFlash());

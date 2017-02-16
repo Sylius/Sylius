@@ -22,7 +22,7 @@ final class ResourceUpdater implements ResourceUpdaterInterface
     /**
      * @var StateMachineInterface
      */
-    protected $stateMachine;
+    private $stateMachine;
 
     /**
      * @param StateMachineInterface $stateMachine

@@ -74,7 +74,8 @@
         <service id="sylius.listener.locker" class="Sylius\Bundle\CoreBundle\EventListener\LockerListener">
             <argument type="service" id="doctrine.orm.entity_manager" />
             <argument type="service" id="sylius.product_variant_resolver.default" />
-            <tag name="kernel.event_listener" event="sylius.product_variant.initialize" method="lock" />
+            <tag name="kernel.event_listener" event="sylius.product.initialize_update" method="lock" />
+            <tag name="kernel.event_listener" event="sylius.product_variant.initialize_update" method="lock" />
         </service>
     </services>
 </container>
