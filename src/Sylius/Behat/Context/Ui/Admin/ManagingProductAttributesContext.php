@@ -97,6 +97,14 @@ final class ManagingProductAttributesContext implements Context
     }
 
     /**
+     * @When /^I(?:| also) add material "([^"]+)"/
+     */
+    public function iAddMaterial($materialName)
+    {
+        $this->createPage->addAttributeValue($materialName);
+    }
+
+    /**
      * @Then I should see the product attribute :name in the list
      */
     public function iShouldSeeTheProductAttributeInTheList($name)
