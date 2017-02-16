@@ -1,5 +1,5 @@
-How to embed a list of products?
-================================
+How to embed a list of products into a view?
+============================================
 
 Let's imagine that you would like to render **a list of 5 latest products by a chosen taxon**. Such an action can take place
 on the category page. Here are the steps that you will need to take:
