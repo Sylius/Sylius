@@ -1,0 +1,18 @@
+{
+    "id": @integer@,
+    "code": "UPS",
+    "category_requirement": 1,
+    "calculator": "flat_rate",
+    "configuration": [],
+    "created_at": "@string@.isDateTime()",
+    "updated_at": "@string@.isDateTime()",
+    "enabled": true,
+    "_links": {
+        "self": {
+            "href": "\/api\/v1\/shipping-methods\/UPS"
+        },
+        "zone": {
+            "href": "\/api\/v1\/zones\/EU"
+        }
+    }
+}

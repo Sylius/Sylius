@@ -96,6 +96,9 @@ You can bring back previous configuration by overriding current routing with you
 * Routing definition for PromotionCoupons has been changed and PromotionCoupons are now resolved by code instead of id and only index and show endpoint are available. 
 You can bring back previous configuration by overriding current routing with your definition.
 
+* Routing definition for ShippingMethods has been changed and ShippingMethods are now resolved by code instead of id and only show endpoint is available. 
+You can bring back previous configuration by overriding current routing with your definition.
+
 ### Attribute / AttributeBundle
 
 * `AttributeValue::$localeCode` property was added to make it translatable. Now, every attribute value has a locale code to be displayed properly in different locales. All attribute values are migrated to the new concept with migration `Version20170109143010`. Look at [this PR](https://github.com/Sylius/Sylius/pull/7219) if you have any problems with upgrade.

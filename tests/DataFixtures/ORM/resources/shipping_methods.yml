@@ -1,0 +1,11 @@
+Sylius\Component\Core\Model\ShippingMethod:
+    ups:
+        code: UPS
+        enabled: true
+        calculator: 'flat_rate'
+        zone: "@zone_eu"
+    dhl:
+        code: DHL
+        enabled: true
+        calculator: 'flat_rate'
+        zone: "@zone_eu"
