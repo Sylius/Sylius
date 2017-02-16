@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CoreBundle\EventListener;
+namespace spec\Sylius\Bundle\ShopBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\CoreBundle\EventListener\OrderPromotionIntegrityChecker;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
+use Sylius\Bundle\ShopBundle\EventListener\OrderPromotionIntegrityChecker;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Promotion\Checker\Eligibility\PromotionEligibilityCheckerInterface;

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\EventListener;
+namespace Sylius\Bundle\ShopBundle\EventListener;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;

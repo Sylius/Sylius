@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CoreBundle\EventListener;
+namespace spec\Sylius\Bundle\ShopBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Assigner\IpAssignerInterface;
-use Sylius\Bundle\CoreBundle\EventListener\OrderCustomerIpListener;
+use Sylius\Bundle\ShopBundle\EventListener\OrderCustomerIpListener;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Request;

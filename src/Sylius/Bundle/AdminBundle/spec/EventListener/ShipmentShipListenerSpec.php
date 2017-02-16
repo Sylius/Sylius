@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CoreBundle\EventListener;
+namespace spec\Sylius\Bundle\AdminBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\AdminBundle\EventListener\ShipmentShipListener;
 use Sylius\Bundle\CoreBundle\EmailManager\ShipmentEmailManagerInterface;
-use Sylius\Bundle\CoreBundle\EventListener\ShipmentShipListener;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
