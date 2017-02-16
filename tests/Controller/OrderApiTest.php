@@ -132,7 +132,7 @@ final class OrderApiTest extends CheckoutApiTestCase
     /**
      * @test
      */
-    public function it_returns_not_found_response_when_shipping_an_order_which_does_not_exist()
+    public function it_returns_not_found_response_when_trying_to_ship_an_order_which_does_not_exist()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
