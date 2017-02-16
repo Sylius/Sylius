@@ -23,6 +23,10 @@ final class ArrayToDefinitionConverter implements ArrayToDefinitionConverterInte
     {
         $grid = Grid::fromCodeAndDriverConfiguration($code, $configuration['driver']['name'], $configuration['driver']['options']);
 
+        if(isset($configuration['hints'])){
+            $grid->setQueryHints($configuration['hints']);
+        }
+
         if (array_key_exists('sorting', $configuration)) {
             $grid->setSorting($configuration['sorting']);
         }

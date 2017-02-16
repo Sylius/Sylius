@@ -56,6 +56,11 @@ class Grid
     private $actionGroups = [];
 
     /**
+     * @var array
+     */
+    private $queryHints = [];
+
+    /**
      * @param string $code
      * @param string $driver
      * @param array $driverConfiguration
@@ -287,5 +292,21 @@ class Grid
     public function hasFilter($name)
     {
         return array_key_exists($name, $this->filters);
+    }
+
+    /**
+     * @return array
+     */
+    public function getQueryHints()
+    {
+        return $this->queryHints;
+    }
+
+    /**
+     * @param array $queryHints
+     */
+    public function setQueryHints(array $queryHints)
+    {
+        $this->queryHints = $queryHints;
     }
 }

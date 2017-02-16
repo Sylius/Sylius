@@ -73,7 +73,7 @@ final class DataSource implements DataSourceInterface
     /**
      * {@inheritdoc}
      */
-    public function getData(Parameters $parameters)
+    public function getData(Parameters $parameters, $queryHints=[])
     {
         $orderBy = $this->queryBuilder->orderBy();
         foreach ($this->expressionBuilder->getOrderBys() as $field => $direction) {

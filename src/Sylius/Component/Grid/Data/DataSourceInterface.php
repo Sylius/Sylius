@@ -36,8 +36,9 @@ interface DataSourceInterface
 
     /**
      * @param Parameters $parameters
+     * @param array $queryHints
      *
      * @return mixed
      */
-    public function getData(Parameters $parameters);
+    public function getData(Parameters $parameters, $queryHints=[]);
 }
