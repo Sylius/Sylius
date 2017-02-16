@@ -56,16 +56,10 @@ sylius_api_checkout:
     prefix: /checkouts
 
 sylius_api_tax_category:
-    resource: |
-        alias: sylius.tax_category
-        section: api
-        grid: sylius_admin_tax_category
-        serialization_version: $version
-    type: sylius.resource_api
+    resource: "@SyliusApiBundle/Resources/config/routing/tax_category.yml"
 
 sylius_api_tax_rate:
     resource: "@SyliusApiBundle/Resources/config/routing/tax_rate.yml"
-    prefix: /tax-rates
 
 sylius_api_shipping_category:
     resource: "@SyliusApiBundle/Resources/config/routing/shipping_category.yml"

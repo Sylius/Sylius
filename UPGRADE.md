@@ -96,7 +96,10 @@ You can bring back previous configuration by overriding current routing with you
 * Routing definition for PromotionCoupons has been changed and PromotionCoupons are now resolved by code instead of id and only index and show endpoint are available. 
 You can bring back previous configuration by overriding current routing with your definition.
 
-* Routing definition for ShippingMethods has been changed and ShippingMethods are now resolved by code instead of id and only show endpoint is available. 
+* Routing definition for TaxCategories has been removed and replaced with auto generated resource routing. TaxCategories are now resolved by code instead of id.
+You can bring back previous configuration by overriding current routing with your definition.
+
+* Routing definition for TaxRates has been removed and replaced with auto generated resource routing. Only show endpoint is available. 
 You can bring back previous configuration by overriding current routing with your definition.
 
 ### Attribute / AttributeBundle

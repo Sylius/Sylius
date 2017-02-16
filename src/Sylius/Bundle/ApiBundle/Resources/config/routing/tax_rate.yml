@@ -1,53 +1,13 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-sylius_api_tax_rate_index:
-    path: /
-    methods: [GET]
-    defaults:
-        _controller: sylius.controller.tax_rate:indexAction
-        _sylius:
-            serialization_version: $version
-            paginate: $limit
-            sortable: true
-            sorting:
-                name: desc
-
-sylius_api_tax_rate_create:
-    path: /
-    methods: [POST]
-    defaults:
-        _controller: sylius.controller.tax_rate:createAction
-        _sylius:
-            serialization_version: $version
-
-sylius_api_tax_rate_update:
-    path: /{code}
-    methods: [PUT, PATCH]
-    defaults:
-        _controller: sylius.controller.tax_rate:updateAction
-        _sylius:
-            serialization_version: $version
-            criteria:
-                code: $code
-
-sylius_api_tax_rate_delete:
-    path: /{code}
-    methods: [DELETE]
-    defaults:
-        _controller: sylius.controller.tax_rate:deleteAction
-        _sylius:
-            serialization_version: $version
-            criteria:
-                code: $code
-            csrf_protection: false
-
-sylius_api_tax_rate_show:
-    path: /{code}
-    methods: [GET]
-    defaults:
-        _controller: sylius.controller.tax_rate:showAction
-        _sylius:
-            serialization_version: $version
-            criteria:
-                code: $code
+sylius_api_tax_rate:
+    resource: |
+        identifier: code
+        alias: sylius.tax_rate
+        section: api
+        only: ['show', 'index']
+        serialization_version: $version
+        criteria:
+            code: $code
+    type: sylius.resource_api
