@@ -290,7 +290,7 @@ These services will be generated automatically based on subject name.
 
 ### Configuration
 
-* Move `sylius_shop` routing below `sylius_admin` and `sylius_api` in `app/config/security.yml` and replace it with the following one:
+* Move `sylius_shop` routing below `sylius_admin` and `sylius_api` in `app/config/routing.yml` and replace it with the following one:
 
   ```yaml
   sylius_shop:
