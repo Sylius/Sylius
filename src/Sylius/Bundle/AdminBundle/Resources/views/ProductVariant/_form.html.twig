@@ -1,12 +1,2 @@
-{{ form_errors(form) }}
-
-<div class="ui stackable grid">
-    <div class="three wide column">
-        {% include '@SyliusAdmin/ProductVariant/_menu.html.twig' %}
-    </div>
-    <div class="thirteen wide column">
-        <div class="ui segment">
-            {% include '@SyliusAdmin/ProductVariant/_tabs.html.twig' %}
-        </div>
-    </div>
-</div>
+{% set menu = knp_menu_get('sylius.admin.product_variant_form', [], {'product_variant': product_variant}) %}
+{{ knp_menu_render(menu, {'template': 'SyliusAdminBundle:ProductVariant:_menu.html.twig', 'form': form, 'product_variant': product_variant}) }}
