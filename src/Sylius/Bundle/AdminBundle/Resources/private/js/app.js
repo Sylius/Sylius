@@ -19,6 +19,7 @@
         });
 
         $('.sylius-autocomplete').autoComplete();
+
         $('.product-select.ui.fluid.multiple.search.selection.dropdown').productAutoComplete();
         $('div#attributeChoice > .ui.dropdown.search').productAttributes();
 
