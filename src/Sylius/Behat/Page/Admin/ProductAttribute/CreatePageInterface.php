@@ -33,4 +33,9 @@ interface CreatePageInterface extends BaseCreatePageInterface
      * @return bool
      */
     public function isTypeDisabled();
+
+    /**
+     * @param string $value
+     */
+    public function addAttributeValue($value);
 }
