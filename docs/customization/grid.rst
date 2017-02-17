@@ -102,6 +102,31 @@ If you would like to disable some actions in any grid, you just need to set its 
                             type: delete
                             enabled: false
 
+How to modify an action of a grid?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+If you would like to change the link to which an action button is redirecting, this is what you have to do:
+
+.. code-block:: yaml
+
+    # app/config/grids.yml
+    sylius_grid:
+        grids:
+            sylius_admin_product:
+                actions:
+                    item:
+                        show:
+                            type: show
+                            label: Show in the shop
+                            options:
+                                link:
+                                    route: sylius_shop_product_show
+                                    parameters:
+                                        slug: resource.slug
+
+The above grid modification will chane the redirect of the ``show`` action to redirect to the shop, instead of admin show.
+Also the label was changed here.
+
 How to modify positions of fields, filters and actions in a grid?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
