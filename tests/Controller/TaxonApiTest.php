@@ -85,7 +85,7 @@ final class TaxonApiTest extends JsonApiTestCase
         $taxons = $this->loadFixturesFromFile('resources/taxons.yml');
         $taxon = $taxons['women'];
 
-        $this->client->request('GET', $this->getTaxonUrl($taxon), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', '/api/v1/taxons/'.$taxon->getId(), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'taxon/show_response', Response::HTTP_OK);
