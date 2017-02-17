@@ -1,0 +1,12 @@
+{
+    "id": @integer@,
+    "ratio": 0.85157,
+    "source_currency": {
+        "id": @integer@,
+        "code": "EUR"
+    },
+    "target_currency": {
+        "id": @integer@,
+        "code": "GBP"
+    }
+}
