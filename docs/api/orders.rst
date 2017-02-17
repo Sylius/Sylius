@@ -43,8 +43,22 @@ If you request an order via API, you will receive an object with the following f
 | payments              | Detailed serialization of all related payments                     |
 +-----------------------+--------------------------------------------------------------------+
 
-Getting a single order
-----------------------
+Orders endpoint gives an access point to finalized carts, so to the orders that have been placed. At this moment only certain actions are allowed:
+
++------------------------+------------------------------+
+| Action                 | Description                  |
++========================+==============================+
+| Show                   | Presenting of the order      |
++------------------------+------------------------------+
+| Cancelling             | Cancelling of the order      |
++------------------------+------------------------------+
+| Shipping               | Shipping of the order        |
++------------------------+------------------------------+
+| Completing the payment | Complete the order's payment |
++------------------------+------------------------------+
+
+Show Action
+-----------
 
 You can request detailed order information by executing the following request:
 
@@ -60,7 +74,7 @@ Definition
 +===============+================+======================================+
 | Authorization | header         | Token received during authentication |
 +---------------+----------------+--------------------------------------+
-| id            | url attribute  | Id of requested order                |
+| id            | url attribute  | Id of the requested order            |
 +---------------+----------------+--------------------------------------+
 
 Example
@@ -74,7 +88,7 @@ Example
 
 .. note::
 
-    The value *21* was taken from previous responses, where we managed the cart.
+    The value *21* was taken from previous responses, where we managed the cart and proceed the checkout.
     Your value can be different. If you need more information about Cart API please, check :doc:`this article </api/carts>`.
 
 Example Response
@@ -88,103 +102,21 @@ Example Response
 
     {
         "id":21,
-        "checkout_completed_at":"2017-01-27T16:15:08+0100",
-        "number":"000000020",
+        "checkout_completed_at":"2017-02-15T13:31:33+0100",
+        "number":"000000021",
         "items":[
             {
-                "id":54,
-                "quantity":3,
-                "unit_price":70,
-                "total":198,
-                "units":[
-                    {
-                        "id":166,
-                        "adjustments":[
-                            {
-                                "id":139,
-                                "type":"order_promotion",
-                                "label":"Christmas",
-                                "amount":-4
-                            }
-                        ],
-                        "adjustments_total":-4,
-                        "_links":{
-                            "order":{
-                                "href":"\/api\/v1\/orders\/21"
-                            }
-                        }
-                    },
-                    {
-                        "id":167,
-                        "adjustments":[
-                            {
-                                "id":140,
-                                "type":"order_promotion",
-                                "label":"Christmas",
-                                "amount":-4
-                            }
-                        ],
-                        "adjustments_total":-4,
-                        "_links":{
-                            "order":{
-                                "href":"\/api\/v1\/orders\/21"
-                            }
-                        }
-                    },
-                    {
-                        "id":168,
-                        "adjustments":[
-                            {
-                                "id":141,
-                                "type":"order_promotion",
-                                "label":"Christmas",
-                                "amount":-4
-                            }
-                        ],
-                        "adjustments_total":-4,
-                        "_links":{
-                            "order":{
-                                "href":"\/api\/v1\/orders\/21"
-                            }
-                        }
-                    }
-                ],
-                "units_total":198,
-                "adjustments":[
-
-                ],
-                "adjustments_total":0,
-                "variant":{
-                    "id":37,
-                    "on_hold":0,
-                    "tracked":false
-                },
-                "_links":{
-                    "product":{
-                        "href":"\/api\/v1\/products\/13"
-                    },
-                    "variant":{
-                        "href":"\/api\/v1\/products\/13\/variants\/37"
-                    }
-                }
-            },
-            {
-                "id":55,
+                "id":74,
                 "quantity":1,
-                "unit_price":818,
-                "total":769,
+                "unit_price":100000,
+                "total":100000,
                 "units":[
                     {
-                        "id":169,
+                        "id":228,
                         "adjustments":[
-                            {
-                                "id":142,
-                                "type":"order_promotion",
-                                "label":"Christmas",
-                                "amount":-49
-                            }
+
                         ],
-                        "adjustments_total":-49,
+                        "adjustments_total":0,
                         "_links":{
                             "order":{
                                 "href":"\/api\/v1\/orders\/21"
@@ -192,186 +124,95 @@ Example Response
                         }
                     }
                 ],
-                "units_total":769,
+                "units_total":100000,
                 "adjustments":[
 
                 ],
                 "adjustments_total":0,
                 "variant":{
-                    "id":289,
+                    "id":331,
+                    "code":"MEDIUM_MUG_CUP",
+                    "option_values":[
+                        {
+                            "name":"Mug type",
+                            "code":"mug_type_medium"
+                        }
+                    ],
+                    "position":2,
+                    "translations":{
+                        "en_US":{
+                            "locale":"en_US",
+                            "id":331,
+                            "name":"Medium Mug"
+                        }
+                    },
                     "on_hold":0,
-                    "tracked":false
+                    "on_hand":10,
+                    "tracked":false,
+                    "channel_pricings":[
+                        {
+                            "id":331,
+                            "channel":{
+                                "id":1,
+                                "code":"US_WEB",
+                                "name":"US Web Store",
+                                "hostname":"localhost",
+                                "color":"MediumPurple",
+                                "created_at":"2017-02-14T11:10:02+0100",
+                                "updated_at":"2017-02-14T11:10:02+0100",
+                                "enabled":true,
+                                "tax_calculation_strategy":"order_items_based",
+                                "_links":{
+                                    "self":{
+                                        "href":"\/api\/v1\/channels\/1"
+                                    }
+                                }
+                            },
+                            "price":100000
+                        }
+                    ],
+                    "_links":{
+                        "self":{
+                            "href":"\/api\/v1\/products\/5\/variants\/331"
+                        },
+                        "product":{
+                            "href":"\/api\/v1\/products\/5"
+                        }
+                    }
                 },
                 "_links":{
                     "product":{
-                        "href":"\/api\/v1\/products\/58"
+                        "href":"\/api\/v1\/products\/5"
                     },
                     "variant":{
-                        "href":"\/api\/v1\/products\/58\/variants\/289"
-                    }
-                }
-            },
-            {
-                "id":56,
-                "quantity":2,
-                "unit_price":338,
-                "total":635,
-                "units":[
-                    {
-                        "id":170,
-                        "adjustments":[
-                            {
-                                "id":143,
-                                "type":"order_promotion",
-                                "label":"Christmas",
-                                "amount":-21
-                            }
-                        ],
-                        "adjustments_total":-21,
-                        "_links":{
-                            "order":{
-                                "href":"\/api\/v1\/orders\/21"
-                            }
-                        }
-                    },
-                    {
-                        "id":171,
-                        "adjustments":[
-                            {
-                                "id":144,
-                                "type":"order_promotion",
-                                "label":"Christmas",
-                                "amount":-20
-                            }
-                        ],
-                        "adjustments_total":-20,
-                        "_links":{
-                            "order":{
-                                "href":"\/api\/v1\/orders\/21"
-                            }
-                        }
-                    }
-                ],
-                "units_total":635,
-                "adjustments":[
-
-                ],
-                "adjustments_total":0,
-                "variant":{
-                    "id":12,
-                    "on_hold":0,
-                    "tracked":false
-                },
-                "_links":{
-                    "product":{
-                        "href":"\/api\/v1\/products\/4"
-                    },
-                    "variant":{
-                        "href":"\/api\/v1\/products\/4\/variants\/12"
-                    }
-                }
-            },
-            {
-                "id":57,
-                "quantity":3,
-                "unit_price":520,
-                "total":1466,
-                "units":[
-                    {
-                        "id":172,
-                        "adjustments":[
-                            {
-                                "id":145,
-                                "type":"order_promotion",
-                                "label":"Christmas",
-                                "amount":-32
-                            }
-                        ],
-                        "adjustments_total":-32,
-                        "_links":{
-                            "order":{
-                                "href":"\/api\/v1\/orders\/21"
-                            }
-                        }
-                    },
-                    {
-                        "id":173,
-                        "adjustments":[
-                            {
-                                "id":146,
-                                "type":"order_promotion",
-                                "label":"Christmas",
-                                "amount":-31
-                            }
-                        ],
-                        "adjustments_total":-31,
-                        "_links":{
-                            "order":{
-                                "href":"\/api\/v1\/orders\/21"
-                            }
-                        }
-                    },
-                    {
-                        "id":174,
-                        "adjustments":[
-                            {
-                                "id":147,
-                                "type":"order_promotion",
-                                "label":"Christmas",
-                                "amount":-31
-                            }
-                        ],
-                        "adjustments_total":-31,
-                        "_links":{
-                            "order":{
-                                "href":"\/api\/v1\/orders\/21"
-                            }
-                        }
-                    }
-                ],
-                "units_total":1466,
-                "adjustments":[
-
-                ],
-                "adjustments_total":0,
-                "variant":{
-                    "id":56,
-                    "on_hold":0,
-                    "tracked":false
-                },
-                "_links":{
-                    "product":{
-                        "href":"\/api\/v1\/products\/19"
-                    },
-                    "variant":{
-                        "href":"\/api\/v1\/products\/19\/variants\/56"
+                        "href":"\/api\/v1\/products\/5\/variants\/331"
                     }
                 }
             }
         ],
-        "items_total":3068,
+        "items_total":100000,
         "adjustments":[
             {
-                "id":148,
+                "id":252,
                 "type":"shipping",
                 "label":"DHL Express",
-                "amount":2160
+                "amount":3549
             }
         ],
-        "adjustments_total":2160,
-        "total":5228,
+        "adjustments_total":3549,
+        "total":103549,
         "state":"new",
         "customer":{
-            "id":8,
-            "email":"eturner@senger.com",
-            "email_canonical":"eturner@senger.com",
-            "first_name":"Ricky",
-            "last_name":"Swift",
+            "id":1,
+            "email":"shop@example.com",
+            "email_canonical":"shop@example.com",
+            "first_name":"John",
+            "last_name":"Doe",
             "gender":"u",
             "user":{
-                "id":8,
-                "username":"eturner@senger.com",
-                "username_canonical":"eturner@senger.com",
+                "id":1,
+                "username":"shop@example.com",
+                "username_canonical":"shop@example.com",
                 "roles":[
                     "ROLE_USER"
                 ],
@@ -379,7 +220,7 @@ Example Response
             },
             "_links":{
                 "self":{
-                    "href":"\/api\/v1\/customers\/8"
+                    "href":"\/api\/v1\/customers\/1"
                 }
             }
         },
@@ -387,10 +228,10 @@ Example Response
             "id":1,
             "code":"US_WEB",
             "name":"US Web Store",
-            "hostname":"localhost:8000",
-            "color":"MediumSpringGreen",
-            "created_at":"2017-01-27T16:15:02+0100",
-            "updated_at":"2017-01-27T16:15:02+0100",
+            "hostname":"localhost",
+            "color":"MediumPurple",
+            "created_at":"2017-02-14T11:10:02+0100",
+            "updated_at":"2017-02-14T11:10:02+0100",
             "enabled":true,
             "tax_calculation_strategy":"order_items_based",
             "_links":{
@@ -400,44 +241,44 @@ Example Response
             }
         },
         "shipping_address":{
-            "id":58,
-            "first_name":"Mittie",
-            "last_name":"Schoen",
+            "id":71,
+            "first_name":"Frederick D.",
+            "last_name":"Gregory",
             "country_code":"US",
-            "street":"Gutmann Parkways",
-            "city":"West Devonte",
-            "postcode":"68192-0107",
-            "created_at":"2017-01-27T16:15:08+0100",
-            "updated_at":"2017-01-27T16:15:08+0100"
+            "street":"300 E St SW",
+            "city":"\u2019Washington",
+            "postcode":"DC 20546",
+            "created_at":"2017-02-14T11:55:40+0100",
+            "updated_at":"2017-02-14T17:00:17+0100"
         },
         "billing_address":{
-            "id":59,
-            "first_name":"Mittie",
-            "last_name":"Schoen",
+            "id":72,
+            "first_name":"Frederick D.",
+            "last_name":"Gregory",
             "country_code":"US",
-            "street":"Gutmann Parkways",
-            "city":"West Devonte",
-            "postcode":"68192-0107",
-            "created_at":"2017-01-27T16:15:08+0100",
-            "updated_at":"2017-01-27T16:15:08+0100"
+            "street":"300 E St SW",
+            "city":"\u2019Washington",
+            "postcode":"DC 20546",
+            "created_at":"2017-02-14T11:55:40+0100",
+            "updated_at":"2017-02-14T17:00:17+0100"
         },
         "payments":[
             {
-                "id":20,
+                "id":21,
                 "method":{
-                    "id":1,
-                    "code":"cash_on_delivery",
-                    "created_at":"2017-01-27T16:15:02+0100",
-                    "updated_at":"2017-01-27T16:15:02+0100",
+                    "id":2,
+                    "code":"bank_transfer",
+                    "created_at":"2017-02-14T11:10:02+0100",
+                    "updated_at":"2017-02-14T11:10:02+0100",
                     "channels":[
                         {
                             "id":1,
                             "code":"US_WEB",
                             "name":"US Web Store",
-                            "hostname":"localhost:8000",
-                            "color":"MediumSpringGreen",
-                            "created_at":"2017-01-27T16:15:02+0100",
-                            "updated_at":"2017-01-27T16:15:02+0100",
+                            "hostname":"localhost",
+                            "color":"MediumPurple",
+                            "created_at":"2017-02-14T11:10:02+0100",
+                            "updated_at":"2017-02-14T11:10:02+0100",
                             "enabled":true,
                             "tax_calculation_strategy":"order_items_based",
                             "_links":{
@@ -449,20 +290,20 @@ Example Response
                     ],
                     "_links":{
                         "self":{
-                            "href":"\/api\/v1\/payment-methods\/1"
+                            "href":"\/api\/v1\/payment-methods\/bank_transfer"
                         }
                     }
                 },
-                "amount":5228,
+                "amount":103549,
                 "state":"new",
-                "created_at":"2017-01-27T16:15:08+0100",
-                "updated_at":"2017-01-27T16:15:08+0100",
+                "created_at":"2017-02-14T11:53:41+0100",
+                "updated_at":"2017-02-15T13:31:33+0100",
                 "_links":{
                     "self":{
-                        "href":"\/api\/v1\/payments\/20"
+                        "href":"\/api\/v1\/payments\/21"
                     },
                     "payment-method":{
-                        "href":"\/api\/v1\/payment-methods\/1"
+                        "href":"\/api\/v1\/payment-methods\/bank_transfer"
                     },
                     "order":{
                         "href":"\/api\/v1\/orders\/21"
@@ -472,7 +313,7 @@ Example Response
         ],
         "shipments":[
             {
-                "id":20,
+                "id":21,
                 "state":"ready",
                 "method":{
                     "id":2,
@@ -481,11 +322,11 @@ Example Response
                     "calculator":"flat_rate",
                     "configuration":{
                         "US_WEB":{
-                            "amount":2160
+                            "amount":3549
                         }
                     },
-                    "created_at":"2017-01-27T16:15:02+0100",
-                    "updated_at":"2017-01-27T16:15:02+0100",
+                    "created_at":"2017-02-14T11:10:02+0100",
+                    "updated_at":"2017-02-14T11:10:02+0100",
                     "enabled":true,
                     "_links":{
                         "self":{
@@ -496,11 +337,11 @@ Example Response
                         }
                     }
                 },
-                "created_at":"2017-01-27T16:15:08+0100",
-                "updated_at":"2017-01-27T16:15:08+0100",
+                "created_at":"2017-02-14T11:53:41+0100",
+                "updated_at":"2017-02-15T13:31:33+0100",
                 "_links":{
                     "self":{
-                        "href":"\/api\/v1\/shipments\/20"
+                        "href":"\/api\/v1\/shipments\/21"
                     },
                     "method":{
                         "href":"\/api\/v1\/shipping-methods\/dhl_express"
@@ -512,5 +353,436 @@ Example Response
             }
         ],
         "currency_code":"USD",
+        "locale_code":"en_US",
         "checkout_state":"completed"
+    }
+
+Cancel Action
+-------------
+
+You can cancel an already placed order by executing the following request:
+
+Definition
+^^^^^^^^^^
+
+.. code-block:: text
+
+    PUT /api/v1/orders/{id}/cancel
+
++---------------+----------------+--------------------------------------+
+| Parameter     | Parameter type | Description                          |
++===============+================+======================================+
+| Authorization | header         | Token received during authentication |
++---------------+----------------+--------------------------------------+
+| id            | url attribute  | Id of the requested order            |
++---------------+----------------+--------------------------------------+
+
+Example
+^^^^^^^
+
+.. code-block:: bash
+
+    $ curl http://demo.sylius.org/api/v1/orders/21/cancel \
+        -H "Authorization: Bearer SampleToken" \
+        -H "Accept: application/json" \
+        -X PUT
+
+Example Response
+~~~~~~~~~~~~~~~~
+
+.. code-block:: text
+
+    STATUS: 200 Ok
+
+.. code-block:: json
+
+    {
+        "id":21,
+        "checkout_completed_at":"2017-02-15T13:31:33+0100",
+        "number":"000000021",
+        "items":[
+            {
+                "id":74,
+                "quantity":1,
+                "unit_price":100000,
+                "total":100000,
+                "units":[
+                    {
+                        "id":228,
+                        "adjustments":[
+
+                        ],
+                        "adjustments_total":0,
+                        "_links":{
+                            "order":{
+                                "href":"\/api\/v1\/orders\/21"
+                            }
+                        }
+                    }
+                ],
+                "units_total":100000,
+                "adjustments":[
+
+                ],
+                "adjustments_total":0,
+                "variant":{
+                    "id":331,
+                    "code":"MEDIUM_MUG_CUP",
+                    "option_values":[
+                        {
+                            "name":"Mug type",
+                            "code":"mug_type_medium"
+                        }
+                    ],
+                    "position":2,
+                    "translations":{
+                        "en_US":{
+                            "locale":"en_US",
+                            "id":331,
+                            "name":"Medium Mug"
+                        }
+                    },
+                    "on_hold":0,
+                    "on_hand":10,
+                    "tracked":false,
+                    "channel_pricings":[
+                        {
+                            "id":331,
+                            "channel":{
+                                "id":1,
+                                "code":"US_WEB",
+                                "name":"US Web Store",
+                                "hostname":"localhost",
+                                "color":"MediumPurple",
+                                "created_at":"2017-02-14T11:10:02+0100",
+                                "updated_at":"2017-02-14T11:10:02+0100",
+                                "enabled":true,
+                                "tax_calculation_strategy":"order_items_based",
+                                "_links":{
+                                    "self":{
+                                        "href":"\/api\/v1\/channels\/1"
+                                    }
+                                }
+                            },
+                            "price":100000
+                        }
+                    ],
+                    "_links":{
+                        "self":{
+                            "href":"\/api\/v1\/products\/5\/variants\/331"
+                        },
+                        "product":{
+                            "href":"\/api\/v1\/products\/5"
+                        }
+                    }
+                },
+                "_links":{
+                    "product":{
+                        "href":"\/api\/v1\/products\/5"
+                    },
+                    "variant":{
+                        "href":"\/api\/v1\/products\/5\/variants\/331"
+                    }
+                }
+            }
+        ],
+        "items_total":100000,
+        "adjustments":[
+            {
+                "id":252,
+                "type":"shipping",
+                "label":"DHL Express",
+                "amount":3549
+            }
+        ],
+        "adjustments_total":3549,
+        "total":103549,
+        "state":"cancelled",
+        "customer":{
+            "id":1,
+            "email":"shop@example.com",
+            "email_canonical":"shop@example.com",
+            "first_name":"John",
+            "last_name":"Doe",
+            "gender":"u",
+            "user":{
+                "id":1,
+                "username":"shop@example.com",
+                "username_canonical":"shop@example.com",
+                "roles":[
+                    "ROLE_USER"
+                ],
+                "enabled":true
+            },
+            "_links":{
+                "self":{
+                    "href":"\/api\/v1\/customers\/1"
+                }
+            }
+        },
+        "channel":{
+            "id":1,
+            "code":"US_WEB",
+            "name":"US Web Store",
+            "hostname":"localhost",
+            "color":"MediumPurple",
+            "created_at":"2017-02-14T11:10:02+0100",
+            "updated_at":"2017-02-14T11:10:02+0100",
+            "enabled":true,
+            "tax_calculation_strategy":"order_items_based",
+            "_links":{
+                "self":{
+                    "href":"\/api\/v1\/channels\/1"
+                }
+            }
+        },
+        "shipping_address":{
+            "id":71,
+            "first_name":"Frederick D.",
+            "last_name":"Gregory",
+            "country_code":"US",
+            "street":"300 E St SW",
+            "city":"\u2019Washington",
+            "postcode":"DC 20546",
+            "created_at":"2017-02-14T11:55:40+0100",
+            "updated_at":"2017-02-14T17:00:17+0100"
+        },
+        "billing_address":{
+            "id":72,
+            "first_name":"Frederick D.",
+            "last_name":"Gregory",
+            "country_code":"US",
+            "street":"300 E St SW",
+            "city":"\u2019Washington",
+            "postcode":"DC 20546",
+            "created_at":"2017-02-14T11:55:40+0100",
+            "updated_at":"2017-02-14T17:00:17+0100"
+        },
+        "payments":[
+            {
+                "id":21,
+                "method":{
+                    "id":2,
+                    "code":"bank_transfer",
+                    "created_at":"2017-02-14T11:10:02+0100",
+                    "updated_at":"2017-02-14T11:10:02+0100",
+                    "channels":[
+                        {
+                            "id":1,
+                            "code":"US_WEB",
+                            "name":"US Web Store",
+                            "hostname":"localhost",
+                            "color":"MediumPurple",
+                            "created_at":"2017-02-14T11:10:02+0100",
+                            "updated_at":"2017-02-14T11:10:02+0100",
+                            "enabled":true,
+                            "tax_calculation_strategy":"order_items_based",
+                            "_links":{
+                                "self":{
+                                    "href":"\/api\/v1\/channels\/1"
+                                }
+                            }
+                        }
+                    ],
+                    "_links":{
+                        "self":{
+                            "href":"\/api\/v1\/payment-methods\/bank_transfer"
+                        }
+                    }
+                },
+                "amount":103549,
+                "state":"cancelled",
+                "created_at":"2017-02-14T11:53:41+0100",
+                "updated_at":"2017-02-15T13:31:33+0100",
+                "_links":{
+                    "self":{
+                        "href":"\/api\/v1\/payments\/21"
+                    },
+                    "payment-method":{
+                        "href":"\/api\/v1\/payment-methods\/bank_transfer"
+                    },
+                    "order":{
+                        "href":"\/api\/v1\/orders\/21"
+                    }
+                }
+            }
+        ],
+        "shipments":[
+            {
+                "id":21,
+                "state":"cancelled",
+                "method":{
+                    "id":2,
+                    "code":"dhl_express",
+                    "category_requirement":1,
+                    "calculator":"flat_rate",
+                    "configuration":{
+                        "US_WEB":{
+                            "amount":3549
+                        }
+                    },
+                    "created_at":"2017-02-14T11:10:02+0100",
+                    "updated_at":"2017-02-14T11:10:02+0100",
+                    "enabled":true,
+                    "_links":{
+                        "self":{
+                            "href":"\/api\/v1\/shipping-methods\/dhl_express"
+                        },
+                        "zone":{
+                            "href":"\/api\/v1\/zones\/US"
+                        }
+                    }
+                },
+                "created_at":"2017-02-14T11:53:41+0100",
+                "updated_at":"2017-02-15T13:31:33+0100",
+                "_links":{
+                    "self":{
+                        "href":"\/api\/v1\/shipments\/21"
+                    },
+                    "method":{
+                        "href":"\/api\/v1\/shipping-methods\/dhl_express"
+                    },
+                    "order":{
+                        "href":"\/api\/v1\/orders\/21"
+                    }
+                }
+            }
+        ],
+        "currency_code":"USD",
+        "locale_code":"en_US",
+        "checkout_state":"completed"
+    }
+
+Ship Action
+-----------
+
+You can ship an already placed order by executing the following request:
+
+Definition
+^^^^^^^^^^
+
+.. code-block:: text
+
+    PUT /api/v1/orders/{orderId}/shipments/{id}/ship
+
++---------------+----------------+------------------------------------------------+
+| Parameter     | Parameter type | Description                                    |
++===============+================+================================================+
+| Authorization | header         | Token received during authentication           |
++---------------+----------------+------------------------------------------------+
+| orderId       | url attribute  | Id of the requested order                      |
++---------------+----------------+------------------------------------------------+
+| id            | url attribute  | Id of the shipped shipment                     |
++---------------+----------------+------------------------------------------------+
+| tracking      | request        | *(optional)* The tracking code of the shipment |
++---------------+----------------+------------------------------------------------+
+
+Example
+^^^^^^^
+
+.. code-block:: bash
+
+    $ curl http://demo.sylius.org/api/v1/orders/21/shipments/21/ship \
+        -H "Authorization: Bearer SampleToken" \
+        -H "Accept: application/json" \
+        -X PUT
+
+Example Response
+~~~~~~~~~~~~~~~~
+
+.. code-block:: text
+
+    STATUS: 204 No Content
+
+.. note::
+
+    It is important to emphasise that in this example the shipment id is the same value as for the order, but it is a coincidence rather than a rule.
+
+Complete The Payment Action
+---------------------------
+
+You can complete the payment of an already placed order by executing the following request:
+
+Definition
+^^^^^^^^^^
+
+.. code-block:: text
+
+    PUT /api/v1/orders/{orderId}/payments/{id}/complete
+
++---------------+----------------+--------------------------------------+
+| Parameter     | Parameter type | Description                          |
++===============+================+======================================+
+| Authorization | header         | Token received during authentication |
++---------------+----------------+--------------------------------------+
+| orderId       | url attribute  | Id of the requested order            |
++---------------+----------------+--------------------------------------+
+| id            | url attribute  | Id of payment to complete            |
++---------------+----------------+--------------------------------------+
+
+Example
+^^^^^^^
+
+.. code-block:: bash
+
+    $ curl http://demo.sylius.orgg/api/v1/orders/21/payments/21/complete \
+        -H "Authorization: Bearer SampleToken" \
+        -H "Accept: application/json" \
+        -X PUT
+
+Example Response
+~~~~~~~~~~~~~~~~
+
+.. code-block:: text
+
+    STATUS: 200 Ok
+
+.. code-block:: json
+
+    {
+        "id":21,
+        "method":{
+            "id":2,
+            "code":"bank_transfer",
+            "created_at":"2017-02-14T11:10:02+0100",
+            "updated_at":"2017-02-14T11:10:02+0100",
+            "channels":[
+                {
+                    "id":1,
+                    "code":"US_WEB",
+                    "name":"US Web Store",
+                    "hostname":"localhost",
+                    "color":"MediumPurple",
+                    "created_at":"2017-02-14T11:10:02+0100",
+                    "updated_at":"2017-02-14T11:10:02+0100",
+                    "enabled":true,
+                    "tax_calculation_strategy":"order_items_based",
+                    "_links":{
+                        "self":{
+                            "href":"\/api\/v1\/channels\/1"
+                        }
+                    }
+                }
+            ],
+            "_links":{
+                "self":{
+                    "href":"\/api\/v1\/payment-methods\/bank_transfer"
+                }
+            }
+        },
+        "amount":103549,
+        "state":"completed",
+        "created_at":"2017-02-14T11:53:41+0100",
+        "updated_at":"2017-02-16T14:33:27+0100",
+        "_links":{
+            "self":{
+                "href":"\/api\/v1\/payments\/21"
+            },
+            "payment-method":{
+                "href":"\/api\/v1\/payment-methods\/bank_transfer"
+            },
+            "order":{
+                "href":"\/api\/v1\/orders\/21"
+            }
+        }
     }
