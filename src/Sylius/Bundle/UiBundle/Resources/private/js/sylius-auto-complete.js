@@ -22,13 +22,13 @@
                 var autocompleteValue = $(this).find('input.autocomplete').val();
 
                 element.dropdown({
-                    on: 'now',
                     delay: {
                         search: 250
                     },
                     forceSelection: false,
                     apiSettings: {
                         dataType: 'JSON',
+                        cache: false,
                         data: {
                             criteria: {}
                         },
