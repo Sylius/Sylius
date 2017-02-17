@@ -19,28 +19,15 @@ use Sylius\Bundle\GridBundle\Templating\Helper\GridHelper;
 final class GridExtension extends \Twig_Extension
 {
     /**
-     * @var GridHelper
-     */
-    private $gridHelper;
-
-    /**
-     * @param GridHelper $gridHelper
-     */
-    public function __construct(GridHelper $gridHelper)
-    {
-        $this->gridHelper = $gridHelper;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('sylius_grid_render', [$this->gridHelper, 'renderGrid'], ['is_safe' => ['html']]),
-            new \Twig_SimpleFunction('sylius_grid_render_field', [$this->gridHelper, 'renderField'], ['is_safe' => ['html']]),
-            new \Twig_SimpleFunction('sylius_grid_render_action', [$this->gridHelper, 'renderAction'], ['is_safe' => ['html']]),
-            new \Twig_SimpleFunction('sylius_grid_render_filter', [$this->gridHelper, 'renderFilter'], ['is_safe' => ['html']]),
+            new \Twig_SimpleFunction('sylius_grid_render', [GridHelper::class, 'renderGrid'], ['is_safe' => ['html']]),
+            new \Twig_SimpleFunction('sylius_grid_render_field', [GridHelper::class, 'renderField'], ['is_safe' => ['html']]),
+            new \Twig_SimpleFunction('sylius_grid_render_action', [GridHelper::class, 'renderAction'], ['is_safe' => ['html']]),
+            new \Twig_SimpleFunction('sylius_grid_render_filter', [GridHelper::class, 'renderFilter'], ['is_safe' => ['html']]),
         ];
     }
 

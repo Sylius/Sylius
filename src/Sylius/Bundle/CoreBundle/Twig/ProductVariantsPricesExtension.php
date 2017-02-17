@@ -19,25 +19,12 @@ use Sylius\Bundle\CoreBundle\Templating\Helper\ProductVariantsPricesHelper;
 final class ProductVariantsPricesExtension extends \Twig_Extension
 {
     /**
-     * @var ProductVariantsPricesHelper
-     */
-    private $productVariantsPricesHelper;
-
-    /**
-     * @param ProductVariantsPricesHelper $productVariantsPricesHelper
-     */
-    public function __construct(ProductVariantsPricesHelper $productVariantsPricesHelper)
-    {
-        $this->productVariantsPricesHelper = $productVariantsPricesHelper;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('sylius_product_variant_prices', [$this->productVariantsPricesHelper, 'getPrices']),
+            new \Twig_SimpleFunction('sylius_product_variant_prices', [ProductVariantsPricesHelper::class, 'getPrices']),
         ];
     }
 

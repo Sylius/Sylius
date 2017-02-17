@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\MoneyBundle\Twig;
 
-use Sylius\Bundle\MoneyBundle\Templating\Helper\ConvertMoneyHelperInterface;
+use Sylius\Bundle\MoneyBundle\Templating\Helper\ConvertMoneyHelper;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
@@ -19,25 +19,12 @@ use Sylius\Bundle\MoneyBundle\Templating\Helper\ConvertMoneyHelperInterface;
 final class ConvertMoneyExtension extends \Twig_Extension
 {
     /**
-     * @var ConvertMoneyHelperInterface
-     */
-    private $helper;
-
-    /**
-     * @param ConvertMoneyHelperInterface $helper
-     */
-    public function __construct(ConvertMoneyHelperInterface $helper)
-    {
-        $this->helper = $helper;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function getFilters()
     {
         return [
-            new \Twig_SimpleFilter('sylius_convert_money', [$this->helper, 'convertAmount']),
+            new \Twig_SimpleFilter('sylius_convert_money', [ConvertMoneyHelper::class, 'convertAmount']),
         ];
     }
 

@@ -11,8 +11,7 @@
 
 namespace Sylius\Bundle\AddressingBundle\Twig;
 
-use Sylius\Component\Addressing\Model\AddressInterface;
-use Sylius\Component\Addressing\Provider\ProvinceNamingProviderInterface;
+use Sylius\Component\Addressing\Provider\ProvinceNamingProvider;
 
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
@@ -20,47 +19,14 @@ use Sylius\Component\Addressing\Provider\ProvinceNamingProviderInterface;
 class ProvinceNamingExtension extends \Twig_Extension
 {
     /**
-     * @var ProvinceNamingProviderInterface
-     */
-    private $provinceNamingProvider;
-
-    /**
-     * @param ProvinceNamingProviderInterface $provinceNamingProvider
-     */
-    public function __construct(ProvinceNamingProviderInterface $provinceNamingProvider)
-    {
-        $this->provinceNamingProvider = $provinceNamingProvider;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function getFilters()
     {
         return [
-            new \Twig_SimpleFilter('sylius_province_name', [$this, 'getProvinceName']),
-            new \Twig_SimpleFilter('sylius_province_abbreviation', [$this, 'getProvinceAbbreviation']),
+            new \Twig_SimpleFilter('sylius_province_name', [ProvinceNamingProvider::class, 'getProvinceName']),
+            new \Twig_SimpleFilter('sylius_province_abbreviation', [ProvinceNamingProvider::class, 'getProvinceAbbreviation']),
         ];
-    }
-
-    /**
-     * @param AddressInterface $address
-     *
-     * @return string
-     */
-    public function getProvinceName(AddressInterface $address)
-    {
-        return $this->provinceNamingProvider->getName($address);
-    }
-
-    /**
-     * @param AddressInterface $address
-     *
-     * @return string
-     */
-    public function getProvinceAbbreviation(AddressInterface $address)
-    {
-        return $this->provinceNamingProvider->getAbbreviation($address);
     }
 
     /**

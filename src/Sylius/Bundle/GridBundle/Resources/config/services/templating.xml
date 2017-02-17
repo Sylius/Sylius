@@ -16,6 +16,7 @@
         <service id="sylius.templating.helper.grid" class="Sylius\Bundle\GridBundle\Templating\Helper\GridHelper" lazy="true">
             <argument type="service" id="sylius.grid.renderer" />
             <tag name="templating.helper" alias="sylius_grid" />
+            <tag name="twig.runtime" />
         </service>
     </services>
 </container>

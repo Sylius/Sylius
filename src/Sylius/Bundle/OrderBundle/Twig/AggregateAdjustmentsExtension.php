@@ -19,36 +19,13 @@ use Sylius\Bundle\OrderBundle\Templating\Helper\AdjustmentsHelper;
 final class AggregateAdjustmentsExtension extends \Twig_Extension
 {
     /**
-     * @var AdjustmentsHelper
-     */
-    private $adjustmentsHelper;
-
-    /**
-     * @param AdjustmentsHelper $adjustmentsHelper
-     */
-    public function __construct(AdjustmentsHelper $adjustmentsHelper)
-    {
-        $this->adjustmentsHelper = $adjustmentsHelper;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('sylius_aggregate_adjustments', [$this, 'aggregateAdjustments']),
+            new \Twig_SimpleFunction('sylius_aggregate_adjustments', [AdjustmentsHelper::class, 'aggregateAdjustments']),
         ];
-    }
-
-    /**
-     * @param array $adjustments
-     *
-     * @return array
-     */
-    public function aggregateAdjustments(array $adjustments)
-    {
-        return $this->adjustmentsHelper->getAggregatedAdjustments($adjustments);
     }
 
     /**

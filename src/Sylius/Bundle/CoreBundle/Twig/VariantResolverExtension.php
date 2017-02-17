@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Twig;
 
-use Symfony\Component\Templating\Helper\Helper;
+use Sylius\Bundle\CoreBundle\Templating\Helper\VariantResolverHelper;
 
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
@@ -19,25 +19,12 @@ use Symfony\Component\Templating\Helper\Helper;
 final class VariantResolverExtension extends \Twig_Extension
 {
     /**
-     * @var Helper
-     */
-    private $helper;
-
-    /**
-     * @param Helper $helper
-     */
-    public function __construct(Helper $helper)
-    {
-        $this->helper = $helper;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function getFilters()
     {
         return [
-            new \Twig_SimpleFilter('sylius_resolve_variant', [$this->helper, 'resolveVariant']),
+            new \Twig_SimpleFilter('sylius_resolve_variant', [VariantResolverHelper::class, 'resolveVariant']),
         ];
     }
 
