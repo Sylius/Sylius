@@ -77,13 +77,16 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
     /**
      * {@inheritdoc}
      */
-    public function findLatestByChannel(ChannelInterface $channel, $count)
+    public function findLatestByChannel(ChannelInterface $channel, $locale, $count)
     {
         return $this->createQueryBuilder('o')
+            ->addSelect('translation')
+            ->leftJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
             ->andWhere(':channel MEMBER OF o.channels')
             ->andWhere('o.enabled = true')
             ->addOrderBy('o.createdAt', 'DESC')
             ->setParameter('channel', $channel)
+            ->setParameter('locale', $locale)
             ->setMaxResults($count)
             ->getQuery()
             ->getResult()
@@ -93,29 +96,16 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
     /**
      * {@inheritdoc}
      */
-    public function findOneBySlugAndChannel($slug, ChannelInterface $channel)
+    public function findOneByChannelAndSlug(ChannelInterface $channel, $locale, $slug)
     {
         return $this->createQueryBuilder('o')
-            ->innerJoin('o.translations', 'translation')
+            ->addSelect('translation')
+            ->innerJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
             ->andWhere('translation.slug = :slug')
             ->andWhere(':channel MEMBER OF o.channels')
             ->andWhere('o.enabled = true')
-            ->setParameter('slug', $slug)
             ->setParameter('channel', $channel)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function findOneBySlug($slug)
-    {
-        return $this->createQueryBuilder('o')
-            ->innerJoin('o.translations', 'translation')
-            ->andWhere('translation.slug = :slug')
-            ->andWhere('o.enabled = true')
+            ->setParameter('locale', $locale)
             ->setParameter('slug', $slug)
             ->getQuery()
             ->getOneOrNullResult()

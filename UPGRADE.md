@@ -121,6 +121,19 @@
   * `Sylius\Component\Core\Locale\Handler\CompositeLocaleChangeHandler`
   * `Sylius\Component\Core\Locale\Handler\LocaleChangeHandlerInterface`
 
+* `Sylius\Component\Core\Repository\ProductRepositoryInterface` definition changed. 
+
+  * `findLatestByChannel(ChannelInterface $channel, int $count)` was changed to 
+    `findLatestByChannel(ChannelInterface $channel, string $locale, int $count)`.
+    Please provide your current locale to fetch products together with their translations.
+     
+  * `findOneBySlugAndChannel(string $slug, ChannelInterface $channel)` was changed to
+    `findOneByChannelAndSlug(ChannelInterface $channel, string $locale, string $slug)`.
+    Please provide your current locale to fetch product together with its translations.
+    
+  * `findOneBySlug(string $slug)` was removed and replaced with more specific
+    `findOneByChannelAndSlug(ChannelInterface $channel, string $locale, string $slug)`.
+
 ### Currency / CurrencyBundle
 
 * The following classes were removed due to being no longer used in current implementation:

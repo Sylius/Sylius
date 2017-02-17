@@ -182,15 +182,7 @@ final class ProductContext implements Context
      */
     public function storeHasAProductPricedAt($productName, $price = 100, ChannelInterface $channel = null)
     {
-        if (null === $channel && $this->sharedStorage->has('channel')) {
-            $channel = $this->sharedStorage->get('channel');
-        }
-        $product = $this->createProduct($productName, $price, null, $channel);
-        $product->setDescription('Awesome '.$productName);
-
-        if (null !== $channel) {
-            $product->addChannel($channel);
-        }
+        $product = $this->createProduct($productName, $price, $channel);
 
         $this->saveProduct($product);
     }
@@ -221,13 +213,9 @@ final class ProductContext implements Context
      */
     public function storeHasProductWithCode($productName, $code, $date = null)
     {
-        $product = $this->createProduct($productName, 0, $date);
-
+        $product = $this->createProduct($productName);
+        $product->setCreatedAt(new \DateTime($date));
         $product->setCode($code);
-
-        if ($this->sharedStorage->has('channel')) {
-            $product->addChannel($this->sharedStorage->get('channel'));
-        }
 
         $this->saveProduct($product);
     }
@@ -240,8 +228,6 @@ final class ProductContext implements Context
         $product = $this->createProduct($productName, $price);
         /** @var ProductVariantInterface $productVariant */
         $productVariant = $this->defaultVariantResolver->getVariant($product);
-
-        $product->setDescription('Awesome '.$productName);
 
         foreach ($channels as $channel) {
             $product->addChannel($channel);
@@ -285,18 +271,26 @@ final class ProductContext implements Context
      */
     public function storeHasAConfigurableProduct($productName, $slug = null)
     {
-        /** @var ProductInterface $product */
-        $product = $this->productFactory->createNew();
-
-        $product->setName($productName);
-        $product->setCode(StringInflector::nameToUppercaseCode($productName));
-        $product->setSlug($slug?:$this->slugGenerator->generate($productName));
-
-        $product->setDescription('Awesome '.$productName);
-
+        /** @var ChannelInterface|null $channel */
+        $channel = null;
         if ($this->sharedStorage->has('channel')) {
             $channel = $this->sharedStorage->get('channel');
+        }
+
+        /** @var ProductInterface $product */
+        $product = $this->productFactory->createNew();
+        $product->setCode(StringInflector::nameToUppercaseCode($productName));
+
+        if (null !== $channel) {
             $product->addChannel($channel);
+
+            foreach ($channel->getLocales() as $locale) {
+                $product->setFallbackLocale($locale->getCode());
+                $product->setCurrentLocale($locale->getCode());
+
+                $product->setName($productName);
+                $product->setSlug($slug ?: $this->slugGenerator->generate($productName));
+            }
         }
 
         $this->saveProduct($product);
@@ -320,8 +314,7 @@ final class ProductContext implements Context
     public function thisChannelHasProducts(ChannelInterface $channel, ...$productsNames)
     {
         foreach ($productsNames as $productName) {
-            $product = $this->createProduct($productName);
-            $product->addChannel($channel);
+            $product = $this->createProduct($productName, 0, $channel);
 
             $this->saveProduct($product);
         }
@@ -438,10 +431,7 @@ final class ProductContext implements Context
      */
     public function thereIsProductAvailableInGivenChannel($productName, ChannelInterface $channel)
     {
-        $product = $this->createProduct($productName, 0, null, $channel);
-
-        $product->setDescription('Awesome ' . $productName);
-        $product->addChannel($channel);
+        $product = $this->createProduct($productName, 0, $channel);
 
         $this->saveProduct($product);
     }
@@ -702,31 +692,42 @@ final class ProductContext implements Context
     /**
      * @param string $productName
      * @param int $price
-     * @param string|null $date
      * @param ChannelInterface|null $channel
      *
      * @return ProductInterface
      */
-    private function createProduct($productName, $price = 100, $date = null, ChannelInterface $channel = null)
+    private function createProduct($productName, $price = 100, ChannelInterface $channel = null)
     {
-        /** @var ProductInterface $product */
-        $product = $this->productFactory->createWithVariant();
-
-        $product->setName($productName);
-        $product->setCode(StringInflector::nameToUppercaseCode($productName));
-        $product->setSlug($this->slugGenerator->generate($productName));
-        $product->setCreatedAt(new \DateTime($date));
-
-        /** @var ProductVariantInterface $productVariant */
-        $productVariant = $this->defaultVariantResolver->getVariant($product);
-
         if (null === $channel && $this->sharedStorage->has('channel')) {
             $channel = $this->sharedStorage->get('channel');
         }
 
+        /** @var ProductInterface $product */
+        $product = $this->productFactory->createWithVariant();
+
+        $product->setCode(StringInflector::nameToUppercaseCode($productName));
+        $product->setName($productName);
+        $product->setSlug($this->slugGenerator->generate($productName));
+
+        if (null !== $channel) {
+            $product->addChannel($channel);
+
+            foreach ($channel->getLocales() as $locale) {
+                $product->setFallbackLocale($locale->getCode());
+                $product->setCurrentLocale($locale->getCode());
+
+                $product->setName($productName);
+                $product->setSlug($this->slugGenerator->generate($productName));
+            }
+        }
+
+        /** @var ProductVariantInterface $productVariant */
+        $productVariant = $this->defaultVariantResolver->getVariant($product);
+
         if (null !== $channel) {
             $productVariant->addChannelPricing($this->createChannelPricingForChannel($price, $channel));
         }
+
         $productVariant->setCode($product->getCode());
         $productVariant->setName($product->getName());
 
@@ -821,7 +822,11 @@ final class ProductContext implements Context
     private function addProductTranslation(ProductInterface $product, $name, $locale)
     {
         /** @var ProductTranslationInterface|TranslationInterface $translation */
-        $translation = $this->productTranslationFactory->createNew();
+        $translation = $product->getTranslation($locale);
+        if ($translation->getLocale() !== $locale) {
+            $translation = $this->productTranslationFactory->createNew();
+        }
+
         $translation->setLocale($locale);
         $translation->setName($name);
         $translation->setSlug($this->slugGenerator->generate($name));
