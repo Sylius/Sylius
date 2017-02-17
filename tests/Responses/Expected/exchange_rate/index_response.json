@@ -27,7 +27,12 @@
                     "id": @integer@,
                     "code": "GBP"
                 },
-                "updated_at": "@string@.isDateTime()"
+                "updated_at": "@string@.isDateTime()",
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/exchange-rates\/EUR-GBP"
+                    }
+                }
             },
             {
                 "id": @integer@,
@@ -40,7 +45,12 @@
                     "id": @integer@,
                     "code": "USD"
                 },
-                "updated_at": "@string@.isDateTime()"
+                "updated_at": "@string@.isDateTime()",
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/exchange-rates\/EUR-USD"
+                    }
+                }
             },
             {
                 "id": @integer@,
@@ -53,7 +63,12 @@
                     "id": @integer@,
                     "code": "GBP"
                 },
-                "updated_at": "@string@.isDateTime()"
+                "updated_at": "@string@.isDateTime()",
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/exchange-rates\/USD-GBP"
+                    }
+                }
             }
         ]
     }

@@ -8,8 +8,10 @@
                     "Please enter exchange rate ratio."
                 ]
             },
-            "sourceCurrency": {},
-            "targetCurrency": {}
+            "sourceCurrency": {
+            },
+            "targetCurrency": {
+            }
         }
     }
 }

@@ -8,8 +8,10 @@
                     "The ratio must be a number."
                 ]
             },
-            "sourceCurrency": {},
-            "targetCurrency": {}
+            "sourceCurrency": {
+            },
+            "targetCurrency": {
+            }
         }
     }
 }

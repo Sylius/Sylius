@@ -136,7 +136,7 @@ EOT;
      */
     public function it_denies_getting_exchange_rate_for_non_authenticated_user()
     {
-        $this->client->request('GET', '/api/v1/exchange-rates/1');
+        $this->client->request('GET', '/api/v1/exchange-rates/EUR-USD');
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
@@ -149,7 +149,7 @@ EOT;
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
-        $this->client->request('GET', '/api/v1/exchange-rates/-1', [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', '/api/v1/exchange-rates/EUR-USD', [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
@@ -177,7 +177,7 @@ EOT;
      */
     public function it_denies_updating_exchange_rate_for_non_authenticated_user()
     {
-        $this->client->request('PUT', '/api/v1/exchange-rates/1');
+        $this->client->request('PUT', '/api/v1/exchange-rates/EUR-USD');
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
@@ -190,7 +190,7 @@ EOT;
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
-        $this->client->request('PUT', '/api/v1/exchange-rates/-1', [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('PUT', '/api/v1/exchange-rates/EUR-USD', [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
@@ -273,7 +273,7 @@ EOT;
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
-        $this->client->request('DELETE', '/api/v1/exchange-rates/-1', [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('DELETE', '/api/v1/exchange-rates/EUR-USD', [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
@@ -308,6 +308,6 @@ EOT;
      */
     private function getExchangeRateUrl(ExchangeRateInterface $exchangeRate)
     {
-        return '/api/v1/exchange-rates/' . $exchangeRate->getId();
+        return sprintf('/api/v1/exchange-rates/%s-%s', $exchangeRate->getSourceCurrency()->getCode(), $exchangeRate->getTargetCurrency()->getCode());
     }
 }
