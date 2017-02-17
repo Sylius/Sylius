@@ -20,7 +20,7 @@ How to customize grids?
 
 .. tip::
 
-    First of all if you are attempting to change anything in any state machine in **Sylius** you will need a special file:
+    One way to change anything in any state machine in **Sylius** is to create a special file in the ``app/config/`` directory:
     ``app/config/grids.yml`` which has to be imported in the ``app/config/config.yml``.
 
 .. code-block:: yaml
@@ -31,11 +31,11 @@ How to customize grids?
 
 
 How to remove a field from grid?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If you would like to remove a field for an existing Sylius grid, you will need to disable it in the `app/config/grids.yml`.
+If you would like to remove a field for an existing Sylius grid, you will need to disable it in the ``app/config/grids.yml``.
 
-Let's imagine that we would like to hide the **titles of product reviews** field on the `sylius_admin_product_review` grid.
+Let's imagine that we would like to hide the **titles of product reviews** field on the ``sylius_admin_product_review`` grid.
 
 .. code-block:: yaml
 
@@ -47,10 +47,10 @@ Let's imagine that we would like to hide the **titles of product reviews** field
                     title:
                         enabled: false
 
-That's all. Now the `title` field will be disabled.
+That's all. Now the ``title`` field will be disabled.
 
 How to modify a field of grid?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 If you would like to modify for instance a label of any field from grid, that's what you need to do:
 
@@ -65,11 +65,11 @@ If you would like to modify for instance a label of any field from grid, that's 
                         label: "When was it added?"
 
 How to remove a filter from grid?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If you would like to remove a filter for an existing Sylius grid, you will need to disable it in the `app/config/grids.yml`.
+If you would like to remove a filter for an existing Sylius grid, you will need to disable it in the ``app/config/grids.yml``.
 
-Let's imagine that we would like to hide the **titles filter of product reviews** on the `sylius_admin_product_review` grid.
+Let's imagine that we would like to hide the **titles filter of product reviews** on the ``sylius_admin_product_review`` grid.
 
 .. code-block:: yaml
 
@@ -81,12 +81,12 @@ Let's imagine that we would like to hide the **titles filter of product reviews*
                     title:
                         enabled: false
 
-That's all. Now the `title` filter will be disabled.
+That's all. Now the ``title`` filter will be disabled.
 
 How to remove an action from grid?
-----------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If you would like to disable some actions for any grid you just need to set their `enabled` option to `false` like below:
+If you would like to disable some actions for any grid you just need to set their ``enabled`` option to ``false`` like below:
 
 .. code-block:: yaml
 
@@ -100,12 +100,12 @@ If you would like to disable some actions for any grid you just need to set thei
                             type: delete
                             enabled: false
 
-How to modify positions of fields, filters and actions in grid?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+How to modify positions of fields, filters and actions in a grid?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 For fields, filters and actions it is possible to easily change the order in which they are displayed in the grid.
 
-See an example of fields order modification on the `sylius_admin_product_review` grid below:
+See an example of fields order modification on the ``sylius_admin_product_review`` grid below:
 
 .. code-block:: yaml
 
@@ -127,8 +127,8 @@ See an example of fields order modification on the `sylius_admin_product_review`
                     author:
                         position: 4
 
-Customize grids by events
--------------------------
+Customizing grids by events
+---------------------------
 
 There is also another way to customize grids: **via events**.
 Every grid configuration dispatches an event when its definition is being converted.
@@ -190,6 +190,66 @@ Remember to import the ``app/config/services.yml`` into the ``app/config/config.
 **3.** Result:
 
 After these two steps your admin product grid should not have the image field.
+
+How to override an entire grid?
+-------------------------------
+
+.. tip::
+
+    This is the other way to customize grids. If you need to change more, than just slight adjustments we do recommend
+    to override an entire grid file in the ``app/Resources/`` directory.
+
+Let's assume that you would like to modify the ``shipping_categories`` grid by removing filters and the delete action from it.
+
+* To achieve that you need to create the ``app/Resources/SyliusAdminBundle/config/grids/shipping_category.yml`` file.
+
+* Then into the created file copy the content of ``Sylius/Bundle/AdminBundle/Resources/config/grids/shipping_category.yml``.
+
+* And modify it to your needs:
+
+.. code-block:: yaml
+
+    # app/Resources/SyliusAdminBundle/config/grids/shipping_category.yml
+    sylius_grid:
+        grids:
+            sylius_admin_shipping_category:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        class: "%sylius.model.shipping_category.class%"
+                        repository:
+                            method: createListQueryBuilder
+                fields:
+                    code:
+                        type: string
+                        label: sylius.ui.code
+                    name:
+                        type: string
+                        label: sylius.ui.name
+                    createdAt:
+                        type: datetime
+                        label: sylius.ui.creation_date
+                        options:
+                            format: d-m-Y H:i
+                    updatedAt:
+                        type: datetime
+                        label: sylius.ui.updating_date
+                        options:
+                            format: d-m-Y H:i
+                actions:
+                    main:
+                        create:
+                            type: create
+                    item:
+                        update:
+                            type: update
+
+In the above example the ``delete`` action and the filters section have been removed.
+
+* That's it! The grid has been modified and it will look like that:
+
+.. image:: ../_images/overriding_grids.png
+    :align: center
 
 Learn more
 ----------
