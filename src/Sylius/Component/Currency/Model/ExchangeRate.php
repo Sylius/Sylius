@@ -61,7 +61,7 @@ class ExchangeRate implements ExchangeRateInterface
      */
     public function setRatio($ratio)
     {
-        Assert::float($ratio);
+        Assert::nullOrFloat($ratio);
 
         $this->ratio = $ratio;
     }

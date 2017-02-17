@@ -36,7 +36,6 @@ final class ExchangeRateSpec extends ObjectBehavior
         $this->shouldThrow(\InvalidArgumentException::class)->during('setRatio', ['1.01']);
         $this->shouldThrow(\InvalidArgumentException::class)->during('setRatio', ['asd']);
         $this->shouldThrow(\InvalidArgumentException::class)->during('setRatio', [[]]);
-        $this->shouldThrow(\InvalidArgumentException::class)->during('setRatio', [null]);
         $this->shouldThrow(\InvalidArgumentException::class)->during('setRatio', [false]);
         $this->shouldThrow(\InvalidArgumentException::class)->during('setRatio', [new \stdClass()]);
     }
