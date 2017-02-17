@@ -8,5 +8,6 @@
     "target_currency": {
         "id": @integer@,
         "code": "GBP"
-    }
+    },
+    "updated_at": "@string@.isDateTime()"
 }

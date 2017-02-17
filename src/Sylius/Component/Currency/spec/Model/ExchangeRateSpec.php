@@ -62,4 +62,26 @@ final class ExchangeRateSpec extends ObjectBehavior
         $this->setTargetCurrency($currency);
         $this->getTargetCurrency()->shouldReturn($currency);
     }
+
+    function it_initializes_creation_date_by_default()
+    {
+        $this->getCreatedAt()->shouldHaveType(\DateTime::class);
+    }
+
+    function its_creation_date_is_mutable(\DateTime $date)
+    {
+        $this->setCreatedAt($date);
+        $this->getCreatedAt()->shouldReturn($date);
+    }
+
+    function it_has_no_last_update_date_by_default()
+    {
+        $this->getUpdatedAt()->shouldReturn(null);
+    }
+
+    function its_last_update_date_is_mutable(\DateTime $date)
+    {
+        $this->setUpdatedAt($date);
+        $this->getUpdatedAt()->shouldReturn($date);
+    }
 }

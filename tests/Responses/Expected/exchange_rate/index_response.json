@@ -26,7 +26,8 @@
                 "target_currency": {
                     "id": @integer@,
                     "code": "GBP"
-                }
+                },
+                "updated_at": "@string@.isDateTime()"
             },
             {
                 "id": @integer@,
@@ -38,7 +39,8 @@
                 "target_currency": {
                     "id": @integer@,
                     "code": "USD"
-                }
+                },
+                "updated_at": "@string@.isDateTime()"
             },
             {
                 "id": @integer@,
@@ -50,7 +52,8 @@
                 "target_currency": {
                     "id": @integer@,
                     "code": "GBP"
-                }
+                },
+                "updated_at": "@string@.isDateTime()"
             }
         ]
     }

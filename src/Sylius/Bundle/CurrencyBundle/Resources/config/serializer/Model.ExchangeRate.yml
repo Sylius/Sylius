@@ -16,4 +16,6 @@ Sylius\Component\Currency\Model\ExchangeRate:
         targetCurrency:
             expose: true
             groups: [Default, Detailed]
-
+        updatedAt:
+            expose: true
+            groups: [Default, Detailed]
