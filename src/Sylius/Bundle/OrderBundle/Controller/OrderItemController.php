@@ -22,11 +22,14 @@ use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Order\Modifier\OrderModifierInterface;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -58,6 +61,13 @@ class OrderItemController extends ResourceController
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
             /** @var AddToCartCommandInterface $addCartItemCommand */
             $addToCartCommand = $form->getData();
+
+            $errors = $this->getCartItemErrors($addToCartCommand->getCartItem());
+            if (0 < count($errors)) {
+                $form = $this->getAddToCartFormWithErrors($errors, $form);
+
+                return $this->handleBadAjaxRequestView($configuration, $form);
+            }
 
             $event = $this->eventDispatcher->dispatchPreEvent(CartActions::ADD, $configuration, $orderItem);
 
@@ -91,7 +101,7 @@ class OrderItemController extends ResourceController
         }
 
         if (!$configuration->isHtmlRequest()) {
-            return $this->viewHandler->handle($configuration, View::create($form, Response::HTTP_BAD_REQUEST));
+            return $this->handleBadAjaxRequestView($configuration, $form);
         }
 
         $view = View::create()
@@ -240,5 +250,47 @@ class OrderItemController extends ResourceController
     protected function getCartManager()
     {
         return $this->get('sylius.manager.order');
+    }
+
+    /**
+     * @param OrderItemInterface $orderItem
+     *
+     * @return ConstraintViolationListInterface
+     */
+    private function getCartItemErrors(OrderItemInterface $orderItem)
+    {
+        return $this
+            ->get('validator')
+            ->validate($orderItem, null, $this->getParameter('sylius.form.type.order_item.validation_groups'))
+        ;
+    }
+
+    /**
+     * @param ConstraintViolationListInterface $errors
+     * @param FormInterface $form
+     *
+     * @return FormInterface
+     */
+    private function getAddToCartFormWithErrors(ConstraintViolationListInterface $errors, FormInterface $form)
+    {
+        foreach ($errors as $error) {
+            $form->get('cartItem')->get($error->getPropertyPath())->addError(new FormError($error->getMessage()));
+        }
+
+        return $form;
+    }
+
+    /**
+     * @param RequestConfiguration $configuration
+     * @param FormInterface $form
+     *
+     * @return Response
+     */
+    private function handleBadAjaxRequestView(RequestConfiguration $configuration, FormInterface $form)
+    {
+        return $this->viewHandler->handle(
+            $configuration,
+            View::create($form, Response::HTTP_BAD_REQUEST)->setData(['errors' => $form->getErrors(true, true)])
+        );
     }
 }
