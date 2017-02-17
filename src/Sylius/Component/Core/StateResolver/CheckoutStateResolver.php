@@ -12,13 +12,18 @@
 namespace Sylius\Component\Core\StateResolver;
 
 use SM\Factory\FactoryInterface;
+use Sylius\Component\Core\Checker\OrderPaymentMethodSelectionRequirementCheckerInterface;
+use Sylius\Component\Core\Checker\OrderShippingMethodSelectionRequirementCheckerInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\StateResolver\StateResolverInterface;
+use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class CheckoutStateResolver implements StateResolverInterface
 {
@@ -28,11 +33,28 @@ final class CheckoutStateResolver implements StateResolverInterface
     private $stateMachineFactory;
 
     /**
-     * @param FactoryInterface $stateMachineFactory
+     * @var OrderPaymentMethodSelectionRequirementCheckerInterface
      */
-    public function __construct(FactoryInterface $stateMachineFactory)
-    {
+    private $orderPaymentMethodSelectionRequirementChecker;
+
+    /**
+     * @var OrderShippingMethodSelectionRequirementCheckerInterface
+     */
+    private $orderShippingMethodSelectionRequirementChecker;
+
+    /**
+     * @param FactoryInterface $stateMachineFactory
+     * @param OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker
+     * @param OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker
+     */
+    public function __construct(
+        FactoryInterface $stateMachineFactory,
+        OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
+        OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker
+    ) {
         $this->stateMachineFactory = $stateMachineFactory;
+        $this->orderPaymentMethodSelectionRequirementChecker = $orderPaymentMethodSelectionRequirementChecker;
+        $this->orderShippingMethodSelectionRequirementChecker = $orderShippingMethodSelectionRequirementChecker;
     }
 
     /**
@@ -42,30 +64,18 @@ final class CheckoutStateResolver implements StateResolverInterface
     {
         $stateMachine = $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH);
 
-        if (!$this->isShippingRequired($order) && $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)) {
+        if (
+            !$this->orderShippingMethodSelectionRequirementChecker->isShippingMethodSelectionRequired($order)
+            && $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)
+        ) {
             $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING);
         }
 
-        if (0 === $order->getTotal() && $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)) {
+        if (
+            !$this->orderPaymentMethodSelectionRequirementChecker->isPaymentMethodSelectionRequired($order)
+            && $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)
+        ) {
             $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT);
         }
-    }
-
-
-    /**
-     * @param OrderInterface $order
-     *
-     * @return bool
-     */
-    private function isShippingRequired(OrderInterface $order)
-    {
-        /** @var OrderItemInterface $orderItem */
-        foreach ($order->getItems() as $orderItem) {
-            if ($orderItem->getVariant()->isShippingRequired()) {
-                return true;
-            }
-        }
-
-        return false;
     }
 }

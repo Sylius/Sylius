@@ -63,6 +63,11 @@ class Channel extends BaseChannel implements ChannelInterface
      */
     protected $contactEmail;
 
+    /**
+     * @var bool
+     */
+    protected $skippingShippingStepAllowed = false;
+
     public function __construct()
     {
         parent::__construct();
@@ -237,5 +242,21 @@ class Channel extends BaseChannel implements ChannelInterface
     public function setContactEmail($contactEmail)
     {
         $this->contactEmail = $contactEmail;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isSkippingShippingStepAllowed()
+    {
+        return $this->skippingShippingStepAllowed;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setSkippingShippingStepAllowed($skippingShippingStepAllowed)
+    {
+        $this->skippingShippingStepAllowed = $skippingShippingStepAllowed;
     }
 }
