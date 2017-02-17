@@ -13,13 +13,12 @@
     $.fn.extend({
         addTabErrors: function () {
             var element = $(this);
-            var tabElements = element.find('.ui.segment');
 
-            $(tabElements).each(function () {
+            $('.ui.segment > .ui.tab').each(function () {
                 var errors = $(this).find('.sylius-validation-error');
 
                 if(0 !== errors.length) {
-                    var tabName = $(this).find('.ui.tab').attr('data-tab');
+                    var tabName = $(this).attr('data-tab');
                     var tabWithErrors = $(element).find('a.item[data-tab="' + tabName + '"]');
 
                     var label = tabWithErrors.html();
