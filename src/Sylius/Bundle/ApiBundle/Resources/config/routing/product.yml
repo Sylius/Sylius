@@ -9,43 +9,6 @@ sylius_api_product:
         grid: sylius_api_product
         form: Sylius\Bundle\ApiBundle\Form\Type\ProductType
         serialization_version: $version
+        criteria:
+            code: $code
     type: sylius.resource_api
-
-sylius_api_product_delete:
-    path: /products/{code}
-    methods: [DELETE]
-    defaults:
-        _controller: sylius.controller.product:deleteAction
-        _sylius:
-            serialization_version: $version
-            section: api
-            repository:
-                method: findOneByCode
-                arguments: [$code]
-            csrf_protection: false
-
-sylius_api_product_update:
-    path: /products/{code}
-    methods: [PUT, PATCH]
-    defaults:
-        _controller: sylius.controller.product:updateAction
-        _sylius:
-            serialization_version: $version
-            section: api
-            form: Sylius\Bundle\ApiBundle\Form\Type\ProductType
-            repository:
-                method: findOneByCode
-                arguments: [$code]
-
-sylius_api_product_show:
-    path: /products/{code}
-    methods: [GET]
-    defaults:
-        _controller: sylius.controller.product:showAction
-        _sylius:
-            serialization_version: $version
-            section: api
-            serialization_groups: [Default, Detailed]
-            repository:
-                method: findOneByCode
-                arguments: [$code]

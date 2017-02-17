@@ -19,7 +19,7 @@ Sylius\Component\Currency\Model\Currency:
             expose: true
             type: boolean
             groups: [Default, Detailed]
-         createdAt:
+        createdAt:
             expose: true
             type: DateTime
             groups: [Detailed]

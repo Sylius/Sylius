@@ -61,7 +61,7 @@ interface ProductRepositoryInterface extends BaseProductRepositoryInterface
     /**
      * @param string $code
      *
-     * @return @return ProductInterface|null
+     * @return ProductInterface|null
      */
     public function findOneByCode($code);
 }

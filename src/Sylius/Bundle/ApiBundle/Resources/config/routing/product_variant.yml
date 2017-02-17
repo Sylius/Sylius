@@ -1,7 +1,6 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-
 sylius_api_product_variant_index:
     path: /
     methods: [GET]

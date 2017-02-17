@@ -87,7 +87,7 @@ You can bring back previous configuration by overriding current routing with you
 	* `Promotions`, which are now resolved by code instead of id and only index and show endpoint are available.
 	* `Promotions Coupons`, which are now resolved by code instead of id and only index and show endpoint are available.
 	* `Tax Categories`, which are now resolved by code instead of id.
-	* `Tax Rates`, which have now only index and show endpoint is available. 
+	* `Tax Rates`, which have now only index and show endpoint available. 
 	* `Payment Methods`, which have now only show endpoint available. 
 
   You can bring back previous configuration by overriding current routing with your definition.

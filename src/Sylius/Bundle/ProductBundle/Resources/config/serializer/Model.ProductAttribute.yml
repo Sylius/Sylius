@@ -6,27 +6,27 @@ Sylius\Component\Product\Model\ProductAttribute:
             expose: true
             type: integer
             xml_attribute: true
-            gorups: [Default, Detailed]
+            groups: [Default, Detailed]
+        code:
+            expose: true
+            type: string
+            groups: [Default, Detailed]
         position:
             expose: true
             type: integer
-            gorups: [Default, Detailed]
+            groups: [Default, Detailed]
         name:
             expose: true
             type: string
-            gorups: [Default, Detailed]
-        presentation:
-            expose: true
-            type: string
-            gorups: [Detailed]
+            groups: [Default, Detailed]
         createdAt:
             expose: true
             type: DateTime
-            gorups: [Detailed]
+            groups: [Detailed]
         updatedAt:
             expose: true
             type: DateTime
-            gorups: [Detailed]
+            groups: [Detailed]
     relations:
         - rel: self
           href:

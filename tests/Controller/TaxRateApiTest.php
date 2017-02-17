@@ -10,6 +10,7 @@
  */
 
 namespace Sylius\Tests\Controller;
+
 use Lakion\ApiTestCase\JsonApiTestCase;
 use Sylius\Component\Taxation\Model\TaxRateInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,7 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class TaxRateApiTest extends JsonApiTestCase
+final class TaxRateApiTest extends JsonApiTestCase
 {
     /**
      * @var array

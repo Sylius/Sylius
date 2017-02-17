@@ -1,8 +1,6 @@
 {
     "id": @integer@,
     "code": "cod",
-    "created_at": "@string@.isDateTime()",
-    "updated_at": "@string@.isDateTime()",
     "channels": [
         {
             "id": @integer@,
@@ -22,6 +20,12 @@
             }
         }
     ],
+    "gateway_config": {
+        "id": @integer@,
+        "gateway_name": "Offline",
+        "factory_name": "offline",
+        "config": []
+    },
     "_links": {
         "self": {
             "href": "\/api\/v1\/payment-methods\/cod"

@@ -32,9 +32,10 @@ If you request for more detailed data, you will receive an object with the follo
 +------------------------+----------------------------------+
 | createdAt              | Creation date of the currency    |
 +------------------------+----------------------------------+
+
 .. note::
 
-    Read more about :doc:`Currencies </components/currency/models>`.
+    Read more about :doc:`Currency in the component docs</components/Currency/models>`.
 
 Creating a Currency
 -------------------
@@ -89,7 +90,7 @@ Exemplary Response
             "self": {
                 "href": "\/api\/v1\/currencies\/PLN"
             }
-	    }
+        }
     }
 
 If you try to create a currency without code you will receive a 400 error.
@@ -130,7 +131,7 @@ Exemplary Response
 Getting a Single Currency
 -------------------------
 
-To retrieve the details of the currency you will need to call the ``/api/v1/currencies/currency_code`` endpoint with the ``GET`` method.
+To retrieve the details of a currency you will need to call the ``/api/v1/currencies/currency_code`` endpoint with the ``GET`` method.
 
 Definition
 ^^^^^^^^^^

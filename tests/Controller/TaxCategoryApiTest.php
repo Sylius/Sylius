@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class TaxCategoryApiTest extends JsonApiTestCase
+final class TaxCategoryApiTest extends JsonApiTestCase
 {
     /**
      * @test

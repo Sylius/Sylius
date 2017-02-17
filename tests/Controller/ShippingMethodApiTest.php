@@ -10,6 +10,7 @@
  */
 
 namespace Sylius\Tests\Controller;
+
 use Lakion\ApiTestCase\JsonApiTestCase;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,7 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class ShippingMethodApiTest extends JsonApiTestCase
+final class ShippingMethodApiTest extends JsonApiTestCase
 {
     /**
      * @var array

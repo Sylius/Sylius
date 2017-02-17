@@ -10,6 +10,7 @@
  */
 
 namespace Sylius\Tests\Controller;
+
 use Lakion\ApiTestCase\JsonApiTestCase;
 use \Sylius\Component\Promotion\Model\PromotionInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,7 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class PromotionApiTest extends JsonApiTestCase
+final class PromotionApiTest extends JsonApiTestCase
 {
     /**
      * @var array
@@ -47,7 +48,6 @@ class PromotionApiTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/promotions.yml');
-
 
         $this->client->request('GET', '/api/v1/promotions/', [], [], static::$authorizedHeaderWithAccept);
 

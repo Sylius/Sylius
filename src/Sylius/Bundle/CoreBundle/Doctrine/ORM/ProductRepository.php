@@ -118,8 +118,7 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
     public function findOneByCode($code)
     {
         return $this->createQueryBuilder('o')
-            ->andWhere('o.code = :code')
-            ->andWhere('o.enabled = true')
+            ->where('o.code = :code')
             ->setParameter('code', $code)
             ->getQuery()
             ->getOneOrNullResult()

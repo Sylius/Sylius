@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * @author Axel Vankrunkelsven <axel@digilabs.be>
  */
-class CurrencyApiTest extends JsonApiTestCase
+final class CurrencyApiTest extends JsonApiTestCase
 {
     /**
      * @var array
@@ -187,6 +187,7 @@ EOT;
 
     /**
      * @param CurrencyInterface $currency
+     *
      * @return string
      */
     private function getCurrencyUrl(CurrencyInterface $currency)

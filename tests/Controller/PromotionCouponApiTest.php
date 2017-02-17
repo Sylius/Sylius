@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class PromotionCouponApiTest extends JsonApiTestCase
+final class PromotionCouponApiTest extends JsonApiTestCase
 {
     /**
      * @var array
@@ -39,7 +39,7 @@ class PromotionCouponApiTest extends JsonApiTestCase
 
         $this->loadFixturesFromFile('resources/promotion_coupons.yml');
 
-        $this->client->request('GET', $this->getPromotionCouponUrl($promotion));
+        $this->client->request('GET', $this->getPromotionCouponsUrl($promotion));
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
@@ -55,7 +55,7 @@ class PromotionCouponApiTest extends JsonApiTestCase
         $promotion = $promotions['promotion2'];
         $this->loadFixturesFromFile('resources/promotion_coupons.yml');
 
-        $this->client->request('GET', $this->getPromotionCouponUrl($promotion), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', $this->getPromotionCouponsUrl($promotion), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'promotion_coupon/index_response', Response::HTTP_OK);
@@ -102,10 +102,16 @@ class PromotionCouponApiTest extends JsonApiTestCase
      */
     private function getPromotionCouponUrl(PromotionInterface $promotion, PromotionCouponInterface $coupon = null)
     {
-        if(null == $coupon) {
-            return sprintf('/api/v1/promotions/%s/coupons/', $promotion->getCode());
-        }
-
         return sprintf('/api/v1/promotions/%s/coupons/%s', $promotion->getCode(), $coupon->getCode());
+    }
+
+    /**
+     * @param PromotionInterface $promotion
+     *
+     * @return string
+     */
+    private function getPromotionCouponsUrl(PromotionInterface $promotion)
+    {
+        return sprintf('/api/v1/promotions/%s/coupons/', $promotion->getCode());
     }
 }

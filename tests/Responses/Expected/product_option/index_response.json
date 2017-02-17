@@ -19,14 +19,12 @@
             {
                 "id": @integer@,
                 "code": "MUG_SIZE",
-                "position": 0,
-                "values": []
+                "position": 0
             },
             {
                 "id": @integer@,
                 "code": "MUG_COLOR",
-                "position": 1,
-                "values": []
+                "position": 1
             }
         ]
     }

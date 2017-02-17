@@ -10,6 +10,7 @@
  */
 
 namespace Sylius\Tests\Controller;
+
 use Lakion\ApiTestCase\JsonApiTestCase;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,7 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class PaymentMethodApiTest extends JsonApiTestCase
+final class PaymentMethodApiTest extends JsonApiTestCase
 {
     /**
      * @var array

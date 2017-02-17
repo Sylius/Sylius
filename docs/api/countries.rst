@@ -33,7 +33,7 @@ If you request for more detailed data, you will receive an object with the follo
 
 .. note::
 
-    Read more about :doc:`Countries </components/addressing/models>`.
+    Read more about :doc:`Country in the component docs</components/Addressing/models>`.
 
 Creating a Country
 ------------------
@@ -168,7 +168,7 @@ Exemplary Response
         "id": 6,
         "code": "PL",
         "enabled": true,
-            "_links": {
+        "_links": {
             "self": {
                 "href": "/api/v1/countries/PL"
             }
@@ -178,7 +178,7 @@ Exemplary Response
 Getting a Single Country
 ------------------------
 
-To retrieve the details of the country you will need to call the ``/api/v1/countries/country_code`` endpoint with the ``GET`` method.
+To retrieve the details of the country you will need to call the ``/api/v1/countries/code`` endpoint with the ``GET`` method.
 
 Definition
 ^^^^^^^^^^
@@ -314,7 +314,7 @@ Exemplary Response
 Deleting Country
 ----------------
 
-To delete a country you will need to call the ``/api/v1/countries/country_code`` endpoint with the ``DELETE`` method.
+To delete a country you will need to call the ``/api/v1/countries/code`` endpoint with the ``DELETE`` method.
 
 Definition
 ^^^^^^^^^^

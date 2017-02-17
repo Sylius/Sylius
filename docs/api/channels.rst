@@ -34,7 +34,7 @@ If you request for more detailed data, you will receive an object with the follo
 +------------------------+------------------------------------------------------------------------+
 | hostname               | Name of the host for the channel                                       |
 +------------------------+------------------------------------------------------------------------+
-| enabled                | Givens an information about channel availability                       |
+| enabled                | Gives an information about channel availability                        |
 +------------------------+------------------------------------------------------------------------+
 | description            | Description of the channel                                             |
 +------------------------+------------------------------------------------------------------------+
@@ -52,14 +52,14 @@ If you request for more detailed data, you will receive an object with the follo
 Getting a Single Channel
 ------------------------
 
-To retrieve the details of the channel you will need to call the ``/api/v1/channe/channel_code`` endpoint with the ``GET`` method.
+To retrieve the details of a specific channel you will need to call the ``/api/v1/channels/code`` endpoint with the ``GET`` method.
 
 Definition
 ^^^^^^^^^^
 
 .. code-block:: text
 
-    GET /api/v1/channel/{code}
+    GET /api/v1/channels/{code}
 
 +---------------+----------------+--------------------------------------+
 | Parameter     | Parameter type | Description                          |

@@ -11,6 +11,8 @@ The REST API Reference
     locales
     orders
     checkouts
+    countries
+    currencies
     products
     product_variants
     users

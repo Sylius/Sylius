@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * @author Jeroen Thora <jeroen.thora@intracto.com>
  */
-class CountryApiTest extends JsonApiTestCase
+final class CountryApiTest extends JsonApiTestCase
 {
     /**
      * @var array
@@ -169,6 +169,7 @@ EOT;
 
     /**
      * @param CountryInterface $country
+     *
      * @return string
      */
     private function getCountryUrl(CountryInterface $country)

@@ -195,6 +195,7 @@ EOT;
 EOT;
         $this->client->request('PUT', $this->getProductUrl($product), [], [], static::$authorizedHeaderWithContentType, $data);
         $response = $this->client->getResponse();
+
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
     }
 

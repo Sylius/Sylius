@@ -6,16 +6,16 @@ Sylius\Component\Product\Model\ProductOption:
             expose: true
             type: integer
             xml_attribute: true
-            gorups: [Default, Detailed]
+            groups: [Default, Detailed]
         code:
             exopse: true
             type: string
-            gorups: [Default, Detailed]
+            groups: [Default, Detailed]
         position:
             expose: true
             type: integer
-            gorups: [Default, Detailed]
+            groups: [Default, Detailed]
         values:
             expose: true
             type: array
-            gorups: [Detailed]
+            groups: [Detailed]

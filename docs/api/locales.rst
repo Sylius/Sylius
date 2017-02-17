@@ -32,9 +32,10 @@ If you request for more detailed data, you will receive an object with the follo
 +------------------------+--------------------------------+
 | createdAt              | Creation date of the locale    |
 +------------------------+--------------------------------+
+
 .. note::
 
-    Read more about :doc:`Locales </components/locale/models>`.
+    Read more about :doc:`Locale in the component docs</components/Locale/models>`.
 
 Creating a Locale
 -------------------
@@ -130,7 +131,7 @@ Exemplary Response
 Getting a Single Locale
 -----------------------
 
-To retrieve the details of the locale you will need to call the ``/api/v1/locales/locale_code`` endpoint with the ``GET`` method.
+To retrieve the details of the locale you will need to call the ``/api/v1/locales/code`` endpoint with the ``GET`` method.
 
 Definition
 ^^^^^^^^^^
@@ -171,7 +172,7 @@ Exemplary Response
 
 .. code-block:: json
 
-   {
+    {
         "id": 4,
         "code": "pl",
         "created_at": "2017-02-14T12:49:38+0100",
@@ -277,7 +278,7 @@ Exemplary Response
 Deleting Locale
 ---------------
 
-To delete a locale you will need to call the ``/api/v1/locales/locale_code`` endpoint with the ``DELETE`` method.
+To delete a locale you will need to call the ``/api/v1/locales/code`` endpoint with the ``DELETE`` method.
 
 Definition
 ^^^^^^^^^^
