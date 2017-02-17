@@ -105,14 +105,37 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
 
         Assert::isInstanceOf($this->getDriver(), Selenium2Driver::class);
 
-        $this->getDriver()->executeScript(sprintf('$(\'input.search\').val(\'%s\')', $taxon->getName()));
-        $this->getElement('search')->click();
-        $this->getElement('search')->waitFor(10,
-            function () {
-                return $this->hasElement('search_item_selected');
-            });
-        $itemSelected = $this->getElement('search_item_selected');
-        $itemSelected->click();
+        $mainTaxonElement = $this->getElement('main_taxon')->getParent();
+
+        $isVisibleScript = sprintf(
+            '$(document.evaluate("%s", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue).dropdown("is visible")',
+            $mainTaxonElement->getXpath()
+        );
+        $isAnyAsyncActionInProgressScript = sprintf(
+            'jQuery.active'
+        );
+
+        $this->getDocument()->waitFor(5, function () use ($isAnyAsyncActionInProgressScript) {
+            return !(bool) $this->getDriver()->evaluateScript($isAnyAsyncActionInProgressScript);
+        });
+
+        $mainTaxonElement->click();
+
+        $this->getDocument()->waitFor(5, function () use ($isAnyAsyncActionInProgressScript) {
+            return !(bool) $this->getDriver()->evaluateScript($isAnyAsyncActionInProgressScript);
+        });
+
+        $this->getDocument()->waitFor(5, function () use ($isVisibleScript) {
+            return $this->getDriver()->evaluateScript($isVisibleScript);
+        });
+
+        $mainTaxonItemElement = $mainTaxonElement->find('css', sprintf('div.item:contains("%s")', $taxon->getName()));
+
+        $mainTaxonItemElement->click();
+
+        $this->getDocument()->waitFor(5, function () use ($isVisibleScript) {
+            return !$this->getDriver()->evaluateScript($isVisibleScript);
+        });
     }
 
     /**
@@ -398,8 +421,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
             'name' => '#sylius_product_translations_%locale%_name',
             'price' => '#sylius_product_variant_channelPricings [data-form-collection="item"]:contains("%channel%") input',
             'pricing_configuration' => '#sylius_calculator_container',
-            'search' => '.ui.fluid.search.selection.dropdown',
-            'search_item_selected' => 'div.menu > div.item.selected',
+            'main_taxon' => '#sylius_product_mainTaxon',
             'slug' => '#sylius_product_translations_%locale%_slug',
             'tab' => '.menu [data-tab="%name%"]',
             'taxonomy' => 'a[data-tab="taxonomy"]',
