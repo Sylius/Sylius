@@ -1,8 +1,10 @@
 Customizing Grids
 =================
 
-We assume that you are familiar what grids are. If not check the documentation of the :doc:`Grid Bundle </bundles/SyliusGridBundle/index>`
-and :doc:`Grid Component </components/Grid/index>` first.
+.. note::
+
+    We assume that you are familiar with grids. If not check the documentation of the :doc:`Grid Bundle </bundles/SyliusGridBundle/index>`
+    and :doc:`Grid Component </components/Grid/index>` first.
 
 Why would you customize grids?
 ------------------------------
@@ -10,17 +12,17 @@ Why would you customize grids?
 When you would like to change how the index view of an entity looks like in the administration panel,
 then you have to override its grid.
 
-* remove a field from grid
-* change a field of grid
+* remove a field from a grid
+* change a field of a grid
 * reorder fields
-* override entire grid
+* override an entire grid
 
 How to customize grids?
 -----------------------
 
 .. tip::
 
-    One way to change anything in any state machine in **Sylius** is to create a special file in the ``app/config/`` directory:
+    One way to change anything in any grid in **Sylius** is to create a special file in the ``app/config/`` directory:
     ``app/config/grids.yml`` which has to be imported in the ``app/config/config.yml``.
 
 .. code-block:: yaml
@@ -30,12 +32,12 @@ How to customize grids?
         - { resource: "grids.yml" }
 
 
-How to remove a field from grid?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+How to remove a field from a grid?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If you would like to remove a field for an existing Sylius grid, you will need to disable it in the ``app/config/grids.yml``.
+If you would like to remove a field from an existing Sylius grid, you will need to disable it in the ``app/config/grids.yml``.
 
-Let's imagine that we would like to hide the **titles of product reviews** field on the ``sylius_admin_product_review`` grid.
+Let's imagine that we would like to hide the **title of product review** field on the ``sylius_admin_product_review`` grid.
 
 .. code-block:: yaml
 
@@ -47,12 +49,12 @@ Let's imagine that we would like to hide the **titles of product reviews** field
                     title:
                         enabled: false
 
-That's all. Now the ``title`` field will be disabled.
+That's all. Now the ``title`` field will be disabled (invisible).
 
-How to modify a field of grid?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+How to modify a field of a grid?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If you would like to modify for instance a label of any field from grid, that's what you need to do:
+If you would like to modify for instance a label of any field from a grid, that's what you need to do:
 
 .. code-block:: yaml
 
@@ -64,10 +66,10 @@ If you would like to modify for instance a label of any field from grid, that's 
                     date:
                         label: "When was it added?"
 
-How to remove a filter from grid?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+How to remove a filter from a grid?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If you would like to remove a filter for an existing Sylius grid, you will need to disable it in the ``app/config/grids.yml``.
+If you would like to remove a filter from an existing Sylius grid, you will need to disable it in the ``app/config/grids.yml``.
 
 Let's imagine that we would like to hide the **titles filter of product reviews** on the ``sylius_admin_product_review`` grid.
 
@@ -83,10 +85,10 @@ Let's imagine that we would like to hide the **titles filter of product reviews*
 
 That's all. Now the ``title`` filter will be disabled.
 
-How to remove an action from grid?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+How to remove an action from a grid?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If you would like to disable some actions for any grid you just need to set their ``enabled`` option to ``false`` like below:
+If you would like to disable some actions in any grid, you just need to set its ``enabled`` option to ``false`` like below:
 
 .. code-block:: yaml
 
