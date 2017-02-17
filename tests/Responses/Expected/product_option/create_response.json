@@ -1,0 +1,16 @@
+{
+    "name": "Mug size",
+    "code": "MUG_SIZE",
+    "values": [
+        {
+            "name": "Mug size",
+            "value": "Small",
+            "code": "MUG_SIZE_SMALL"
+        },
+        {
+            "name": "Mug size",
+            "value": "Large",
+            "code": "MUG_SIZE_LARGE"
+        }
+    ]
+}
