@@ -11,7 +11,7 @@ Let's take the example of changing the length of ``name`` for the ``Product`` en
 In the ``sylius`` validation group the minimum length is equal to 2.
 What if you'd want to have at least 10 characters?
 
-1. Create the ``app\Resources\config\validation.yml``.
+1. Create the ``AppBundle\Resources\config\validation.yml``.
 
 In this file you need to overwrite the whole validation of your field that you are willing to modify.
 Take this configuration from the ``Sylius\Bundle\ProductBundle\Resources\config\validation.xml`` - you can choose format ``xml`` or ``yaml``.
@@ -37,12 +37,13 @@ Give it a new, custom validation group - ``[app_product]``.
 
     When using custom validation messages see `here how to add them <http://symfony.com/doc/current/validation/translations.html>`_.
 
-2. Configure the new validation group in the ``app/config/services.yml``.
+2. Configure the new validation group in the ``AppBundle/Resources/config/services.yml``.
 
 .. code-block:: yaml
 
     parameters:
         sylius.form.type.product_translation.validation_groups: [app_product]
+        sylius.form.type.product.validation_groups: [app_product] # the product class also needs to be aware of the translation'a validation
 
-Done. Now in all forms where the Product ``name`` is being used your new validation group will be applied,
+Done. Now in all forms where the Product ``name`` is being used, your new validation group will be applied,
 not letting users add products with name shorter than 10 characters.
