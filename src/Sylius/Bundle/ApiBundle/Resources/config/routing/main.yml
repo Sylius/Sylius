@@ -88,7 +88,6 @@ sylius_api_province:
 
 sylius_api_zone:
     resource: "@SyliusApiBundle/Resources/config/routing/zone.yml"
-    prefix: /zones
 
 sylius_api_user:
     resource: "@SyliusApiBundle/Resources/config/routing/user.yml"
