@@ -15,6 +15,7 @@ The REST API Reference
     currencies
     products
     product_attributes
+    product_options
     product_variants
     users
     customers

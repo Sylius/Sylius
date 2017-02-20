@@ -9,6 +9,7 @@
 * :doc:`/api/currencies`
 * :doc:`/api/products`
 * :doc:`/api/product_attributes`
+* :doc:`/api/product_options`
 * :doc:`/api/product_variants`
 * :doc:`/api/users`
 * :doc:`/api/customers`
