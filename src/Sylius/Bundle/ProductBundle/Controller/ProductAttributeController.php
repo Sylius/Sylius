@@ -108,7 +108,7 @@ class ProductAttributeController extends ResourceController
         foreach ($localeCodes as $localeCode) {
             $forms[$localeCode] = $this
                 ->get('form.factory')
-                ->createNamed('value', $attributeForm, null, ['label' => $attribute->getName()])
+                ->createNamed('value', $attributeForm, null, ['label' => $attribute->getName(), 'configuration' => $attribute->getConfiguration()])
                 ->createView()
             ;
         }

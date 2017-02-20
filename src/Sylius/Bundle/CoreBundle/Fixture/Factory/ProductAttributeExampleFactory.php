@@ -14,6 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 use Sylius\Component\Attribute\Factory\AttributeFactoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Locale\Model\LocaleInterface;
+use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
@@ -76,7 +77,7 @@ class ProductAttributeExampleFactory extends AbstractExampleFactory implements E
     {
         $options = $this->optionsResolver->resolve($options);
 
-        /** @var ProductOptionInterface $productAttribute */
+        /** @var ProductAttributeInterface $productAttribute */
         $productAttribute = $this->productAttributeFactory->createTyped($options['type']);
         $productAttribute->setCode($options['code']);
 
@@ -86,6 +87,8 @@ class ProductAttributeExampleFactory extends AbstractExampleFactory implements E
 
             $productAttribute->setName($options['name']);
         }
+
+        $productAttribute->setConfiguration($options['configuration']);
 
         return $productAttribute;
     }
@@ -104,6 +107,9 @@ class ProductAttributeExampleFactory extends AbstractExampleFactory implements E
             })
             ->setDefault('type', function (Options $options) {
                 return $this->faker->randomElement(array_keys($this->attributeTypes));
+            })
+            ->setDefault('configuration', function (Options $options) {
+                return [];
             })
             ->setAllowedValues('type', array_keys($this->attributeTypes))
         ;

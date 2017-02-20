@@ -30,6 +30,9 @@
     {% elseif item.vars.name != '_token' %}
         {% set namePrefix = prefix|replace({'_': ']['}) %}
         {% set dataName = applicationName~'_'~subject~'[attributes]['~count~namePrefix~']['~item.vars.name~']' %}
+        {% if item.vars.multiple is defined and item.vars.multiple %}
+            {% set dataName = dataName~'[]' %}
+        {% endif %}
 
         {{ form_widget(item, {'id': id, 'attr': {'data-name': dataName }}) }}
     {% endif %}

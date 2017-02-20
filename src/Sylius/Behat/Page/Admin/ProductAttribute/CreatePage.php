@@ -22,6 +22,11 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     use SpecifiesItsCode;
 
     /**
+     * @var int
+     */
+    private $choiceListIndex = 0;
+
+    /**
      * {@inheritdoc}
      */
     public function nameIt($name, $language)
@@ -40,9 +45,21 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function addAttributeValue($value)
+    {
+        $this->getDocument()->clickLink('Add');
+        $this->getElement('attribute_choice_list_element', ['%index%' => $this->choiceListIndex])->setValue($value);
+        $this->choiceListIndex++;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
+            'attribute_choice_list' => 'div[data-form-collection="list"]',
+            'attribute_choice_list_element' => '#sylius_product_attribute_configuration_choices_%index%',
             'code' => '#sylius_product_attribute_code',
             'name' => '#sylius_product_attribute_translations_en_US_name',
             'type' => '#sylius_product_attribute_type',

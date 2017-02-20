@@ -1,0 +1,8 @@
+{% if attribute.value is not null %}
+    {% set values = attribute.attribute.configuration.choices %}
+    {% if attribute.value is iterable %}
+        {% for value in attribute.value %}{{ values[value] }} {% endfor %}
+    {% else %}
+        {{ values[attribute.value] }}
+    {% endif %}
+{% endif %}
