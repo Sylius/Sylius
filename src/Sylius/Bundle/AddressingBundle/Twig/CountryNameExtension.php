@@ -43,12 +43,4 @@ class CountryNameExtension extends \Twig_Extension
 
         return Intl::getRegionBundle()->getCountryName($country, $locale);
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_country_name';
-    }
 }

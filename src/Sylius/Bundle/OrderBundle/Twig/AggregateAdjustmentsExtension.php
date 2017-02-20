@@ -50,12 +50,4 @@ final class AggregateAdjustmentsExtension extends \Twig_Extension
     {
         return $this->adjustmentsHelper->getAggregatedAdjustments($adjustments);
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_aggregate_adjustments';
-    }
 }

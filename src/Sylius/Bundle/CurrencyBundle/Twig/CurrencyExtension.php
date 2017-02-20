@@ -40,12 +40,4 @@ final class CurrencyExtension extends \Twig_Extension
             new \Twig_SimpleFilter('sylius_currency_symbol', [$this->helper, 'convertCurrencyCodeToSymbol']),
         ];
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_currency';
-    }
 }

@@ -37,12 +37,4 @@ class PercentageExtension extends \Twig_Extension
 
         return $percentage.' %';
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_percentage';
-    }
 }

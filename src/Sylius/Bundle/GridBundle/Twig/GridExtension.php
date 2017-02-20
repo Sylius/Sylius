@@ -43,12 +43,4 @@ final class GridExtension extends \Twig_Extension
             new \Twig_SimpleFunction('sylius_grid_render_filter', [$this->gridHelper, 'renderFilter'], ['is_safe' => ['html']]),
         ];
     }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'sylius_grid';
-    }
 }

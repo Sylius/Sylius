@@ -41,12 +41,4 @@ final class CheckoutStepsExtension extends \Twig_Extension
             new \Twig_SimpleFunction('sylius_is_payment_required', [$this->checkoutStepsHelper, 'isPaymentRequired']),
         ];
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_shipping_steps';
-    }
 }

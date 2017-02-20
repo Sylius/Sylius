@@ -62,12 +62,4 @@ class ProvinceNamingExtension extends \Twig_Extension
     {
         return $this->provinceNamingProvider->getAbbreviation($address);
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_province_naming';
-    }
 }
