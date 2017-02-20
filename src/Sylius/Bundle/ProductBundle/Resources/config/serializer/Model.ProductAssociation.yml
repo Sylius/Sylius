@@ -1,0 +1,19 @@
+Sylius\Component\Product\Model\ProductAssociation:
+    exclusion_policy: ALL
+    xml_root_name: product-association
+    properties:
+        id:
+            expose: true
+            type: integer
+            xml_attribute: true
+            groups: [Default, Detailed]
+        type:
+            expose: true
+            groups: [Default, Detailed]
+        product:
+            expose: true
+            groups: [Default, Detailed]
+        associatedProducts:
+            expose: true
+            type: array
+            groups: [Default, Detailed]

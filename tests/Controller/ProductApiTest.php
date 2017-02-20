@@ -280,7 +280,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_creating_product_with_main_taxon() 
+    public function it_allows_creating_product_with_main_taxon()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/taxons.yml');
@@ -343,7 +343,7 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/channels.yml');
 
-        $data = 
+        $data =
 <<<EOT
         {
             "code": "MUG_TH",
