@@ -931,3 +931,63 @@ Exemplary Response
 .. code-block:: text
 
     STATUS: 204 No Content
+
+Set position of product in a Taxon
+----------------------------------
+
+The products in Sylius can by grouped by taxon, therefore for every product there is a relation between the product and the assigned taxon.
+What is more, every product can have a specific position in the taxon to which it belongs. To put products in a specific order
+you will need to call the ``/api/v1/taxons/code/products`` endpoint wih the ``PUT`` method.
+
+Definition
+^^^^^^^^^^
+.. code-block:: text
+
+    PUT /api/v1/taxons/{code}/products
+
++---------------+----------------+-----------------------------------------------------------------+
+| Parameter     | Parameter type | Description                                                     |
++===============+================+=================================================================+
+| Authorization | header         | Token received during authentication                            |
++---------------+----------------+-----------------------------------------------------------------+
+| code          | url attribute  | Code of the taxon in which the order of product will be changed |
++---------------+----------------+-----------------------------------------------------------------+
+
+Example
+^^^^^^^
+
+To change the order of products with codes ``yellow_t_shirt`` and ``princess_t_shirt`` in taxon with code ``womens_t_shirts`` use the below method:
+
+.. code-block:: bash
+
+    $ curl http://demo.sylius.org/api/v1/taxons/womens_t_shirts/products \
+        -H "Authorization: Bearer SampleToken" \
+        -H "Accept: application/json" \
+        -X PUT
+        --data '
+            {
+                "products_positions": [
+                    {
+                        "product_code": "yellow_t_shirt",
+                        "position": 3
+                    },
+                    {
+                        "product_code": "princess_t_shirt",
+                        "position": 0
+                    }
+                ]
+            }
+        '
+
+.. note::
+
+    Remember the *yellow_t_shirt* and *princess_t_shirt* and *womens_t_shirts*
+    are just exemplary codes and you can change them for the ones you need.
+    Check in the list of all products if you are not sure which codes should be used.
+
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
+
+.. code-block:: text
+
+    STATUS: 204 NO CONTENT

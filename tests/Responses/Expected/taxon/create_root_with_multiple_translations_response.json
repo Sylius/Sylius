@@ -1,6 +1,6 @@
 {
-    "name": "Fluffy Pets",
     "id": @integer@,
+    "name": "Fluffy Pets",
     "code": "fluffy_pets",
     "children": [],
     "left": 1,

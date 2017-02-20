@@ -12,6 +12,7 @@
 namespace Sylius\Tests\Controller;
 
 use Lakion\ApiTestCase\JsonApiTestCase;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -84,7 +85,7 @@ final class TaxonApiTest extends JsonApiTestCase
         $taxons = $this->loadFixturesFromFile('resources/taxons.yml');
         $taxon = $taxons['women'];
 
-        $this->client->request('GET', '/api/v1/taxons/'.$taxon->getId(), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', $this->getTaxonUrl($taxon), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'taxon/show_response', Response::HTTP_OK);
@@ -99,7 +100,7 @@ final class TaxonApiTest extends JsonApiTestCase
         $taxons = $this->loadFixturesFromFile('resources/taxons.yml');
         $taxon = $taxons['category'];
 
-        $this->client->request('GET', '/api/v1/taxons/'.$taxon->getId(), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', $this->getTaxonUrl($taxon), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'taxon/show_root_response', Response::HTTP_OK);
@@ -127,12 +128,12 @@ final class TaxonApiTest extends JsonApiTestCase
         $taxons = $this->loadFixturesFromFile('resources/taxons.yml');
         $taxon = $taxons['men'];
 
-        $this->client->request('DELETE', '/api/v1/taxons/'.$taxon->getId(), [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('DELETE', $this->getTaxonUrl($taxon), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
 
-        $this->client->request('GET', '/api/v1/taxons/'.$taxon->getId(), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', $this->getTaxonUrl($taxon), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
@@ -147,12 +148,12 @@ final class TaxonApiTest extends JsonApiTestCase
         $taxons = $this->loadFixturesFromFile('resources/taxons.yml');
         $taxon = $taxons['category'];
 
-        $this->client->request('DELETE', '/api/v1/taxons/'.$taxon->getId(), [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('DELETE', $this->getTaxonUrl($taxon), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
 
-        $this->client->request('GET', '/api/v1/taxons/'.$taxon->getId(), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', $this->getTaxonUrl($taxon), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
@@ -333,7 +334,7 @@ EOT;
             "parent": "books"
         }
 EOT;
-        $this->client->request('PUT', '/api/v1/taxons/'. $taxon->getId(), [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('PUT', $this->getTaxonUrl($taxon), [], [], static::$authorizedHeaderWithContentType, $data);
         $response = $this->client->getResponse();
 
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
@@ -360,7 +361,7 @@ EOT;
             }
         }
 EOT;
-        $this->client->request('PUT', '/api/v1/taxons/'. $taxon->getId(), [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('PUT', $this->getTaxonUrl($taxon), [], [], static::$authorizedHeaderWithContentType, $data);
         $response = $this->client->getResponse();
 
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
@@ -387,7 +388,7 @@ EOT;
             }
         }
 EOT;
-        $this->client->request('PATCH', '/api/v1/taxons/'. $taxon->getId(), [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('PATCH', $this->getTaxonUrl($taxon), [], [], static::$authorizedHeaderWithContentType, $data);
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
     }
@@ -413,7 +414,7 @@ EOT;
             }
         }
 EOT;
-        $this->client->request('PATCH', '/api/v1/taxons/'. $taxon->getId(), [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('PATCH', $this->getTaxonUrl($taxon), [], [], static::$authorizedHeaderWithContentType, $data);
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
     }
@@ -430,5 +431,89 @@ EOT;
         $this->client->request('GET', '/api/v1/taxons/', ['page' => 2], [], static::$authorizedHeaderWithAccept);
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'taxon/paginated_index_response');
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_to_update_position_of_product_in_a_taxon()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/products.yml');
+        $productTaxons = $this->loadFixturesFromFile('resources/product_taxons.yml');
+
+        /** @var TaxonInterface $taxon */
+        $taxon = $productTaxons['mugs'];
+
+        $data =
+<<<EOT
+        {
+            "products_positions": [
+                {
+                    "product_code": "MUG_SW",
+                    "position": 2
+                },
+                {
+                    "product_code": "MUG_BB",
+                    "position": 0
+                }
+            ]
+        }
+EOT;
+
+        $this->client->request('PUT', $this->getTaxonProductsPositionsChangeUrl($taxon), [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $response = $this->client->getResponse();
+        $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
+    }
+
+    /**
+     * @test
+     */
+    public function it_does_not_allows_to_update_position_of_product_in_a_taxon_with_inccorect_data()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/products.yml');
+        $productTaxons = $this->loadFixturesFromFile('resources/product_taxons.yml');
+
+        /** @var TaxonInterface $taxon */
+        $taxon = $productTaxons['mugs'];
+
+        $data =
+<<<EOT
+        {
+            "products_positions": [
+                {
+                    "product_code": "MUG_SW",
+                    "position": "second"
+                }
+            ]
+        }
+EOT;
+
+        $this->client->request('PUT', $this->getTaxonProductsPositionsChangeUrl($taxon) , [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'taxon/update_validation_fail_response', Response::HTTP_BAD_REQUEST);
+    }
+
+    /**
+     * @param TaxonInterface $taxon
+     *
+     * @return string
+     */
+    private function getTaxonUrl(TaxonInterface $taxon)
+    {
+        return '/api/v1/taxons/' . $taxon->getId();
+    }
+
+    /**
+     * @param TaxonInterface $taxon
+     *
+     * @return string
+     */
+    private function getTaxonProductsPositionsChangeUrl(TaxonInterface $taxon)
+    {
+        return sprintf('/api/v1/taxons/%s/products', $taxon->getCode());
     }
 }
