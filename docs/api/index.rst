@@ -14,6 +14,7 @@ The REST API Reference
     countries
     currencies
     products
+    product_attributes
     product_variants
     users
     customers
