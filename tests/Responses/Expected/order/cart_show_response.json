@@ -4,13 +4,13 @@
         {
             "id": @integer@,
             "quantity": 1,
-            "unit_price": 20,
+            "unitPrice": 20,
             "total": 20,
             "units": [
                 {
                     "id": @integer@,
                     "adjustments": [],
-                    "adjustments_total": 0,
+                    "adjustmentsTotal": 0,
                     "_links": {
                         "order": {
                             "href": "@string@"
@@ -18,13 +18,13 @@
                     }
                 }
             ],
-            "units_total": 20,
+            "unitsTotal": 20,
             "adjustments": [],
-            "adjustments_total": 0,
+            "adjustmentsTotal": 0,
             "variant": {
                 "id": @integer@,
                 "code": "MUG_SW",
-                "option_values": [],
+                "optionValues": [],
                 "position": 0,
                 "translations": {
                     "en_US": {
@@ -33,10 +33,10 @@
                         "name": "Star wars mug"
                     }
                 },
-                "on_hold": 0,
-                "on_hand": 0,
+                "onHold": 0,
+                "onHand": 0,
                 "tracked": false,
-                "channel_pricings": [
+                "channelPricings": [
                     {
                         "channel": {
                             "id": @integer@,
@@ -45,10 +45,10 @@
                             "description": "Lorem ipsum",
                             "hostname": "localhost",
                             "color": "black",
-                            "created_at": "@string@.isDateTime()",
-                            "updated_at": "@string@.isDateTime()",
+                            "createdAt": "@string@.isDateTime()",
+                            "updatedAt": "@string@.isDateTime()",
                             "enabled": true,
-                            "tax_calculation_strategy": "order_items_based",
+                            "taxCalculationStrategy": "order_items_based",
                             "_links": {
                                 "self": {
                                     "href": "@string@"
@@ -77,7 +77,7 @@
             }
         }
     ],
-    "items_total": 20,
+    "itemsTotal": 20,
     "adjustments": [
         {
             "id": @integer@,
@@ -86,15 +86,15 @@
             "amount": 10
         }
     ],
-    "adjustments_total": 10,
+    "adjustmentsTotal": 10,
     "total": 30,
     "state": "cart",
     "customer": {
         "id": @integer@,
         "email": "oliver.queen@star-city.com",
-        "email_canonical": "oliver.queen@star-city.com",
-        "first_name": "Oliver",
-        "last_name": "Queen",
+        "emailCanonical": "oliver.queen@star-city.com",
+        "firstName": "Oliver",
+        "lastName": "Queen",
         "birthday": "@string@.isDateTime()",
         "gender": "u",
         "_links": {
@@ -110,10 +110,10 @@
         "description": "Lorem ipsum",
         "hostname": "localhost",
         "color": "black",
-        "created_at": "@string@.isDateTime()",
-        "updated_at": "@string@.isDateTime()",
+        "createdAt": "@string@.isDateTime()",
+        "updatedAt": "@string@.isDateTime()",
         "enabled": true,
-        "tax_calculation_strategy": "order_items_based",
+        "taxCalculationStrategy": "order_items_based",
         "_links": {
             "self": {
                 "href": "@string@"
@@ -134,10 +134,10 @@
                         "description": "Lorem ipsum",
                         "hostname": "localhost",
                         "color": "black",
-                        "created_at": "@string@.isDateTime()",
-                        "updated_at": "@string@.isDateTime()",
+                        "createdAt": "@string@.isDateTime()",
+                        "updatedAt": "@string@.isDateTime()",
                         "enabled": true,
-                        "tax_calculation_strategy": "order_items_based",
+                        "taxCalculationStrategy": "order_items_based",
                         "_links": {
                             "self": {
                                 "href": "@string@"
@@ -145,10 +145,10 @@
                         }
                     }
                 ],
-                "gateway_config": {
+                "gatewayConfig": {
                     "id": @integer@,
-                    "gateway_name": "Offline",
-                    "factory_name": "offline",
+                    "gatewayName": "Offline",
+                    "factoryName": "offline",
                     "config": []
                 },
                 "_links": {
@@ -202,7 +202,7 @@
             }
         }
     ],
-    "currency_code": "EUR",
-    "locale_code": "en_US",
-    "checkout_state": "cart"
+    "currencyCode": "EUR",
+    "localeCode": "en_US",
+    "checkoutState": "cart"
 }

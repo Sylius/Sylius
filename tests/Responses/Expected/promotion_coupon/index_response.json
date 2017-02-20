@@ -20,8 +20,8 @@
                 "id": @integer@,
                 "code": "1765C",
                 "used": 0,
-                "created_at": "@string@.isDateTime()",
-                "updated_at": "@string@.isDateTime()",
+                "createdAt": "@string@.isDateTime()",
+                "updatedAt": "@string@.isDateTime()",
                 "_links": {
                     "self": {
                         "href": "\/api\/v1\/promotions\/Holliday\/coupons\/1765C"
@@ -35,8 +35,8 @@
                 "id": @integer@,
                 "code": "CAE14",
                 "used": 0,
-                "created_at": "@string@.isDateTime()",
-                "updated_at": "@string@.isDateTime()",
+                "createdAt": "@string@.isDateTime()",
+                "updatedAt": "@string@.isDateTime()",
                 "_links": {
                     "self": {
                         "href": "\/api\/v1\/promotions\/Holliday\/coupons\/CAE14"

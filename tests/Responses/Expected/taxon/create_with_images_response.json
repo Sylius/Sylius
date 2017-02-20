@@ -17,8 +17,8 @@
             "type": "ford",
             "file": {
                 "test": true,
-                "original_name": "ford",
-                "mime_type": "application\/octet-stream",
+                "originalName": "ford",
+                "mimeType": "application\/octet-stream",
                 "error": 0
             },
             "path": "@string@"
@@ -28,8 +28,8 @@
             "type": "mugs",
             "file": {
                 "test": true,
-                "original_name": "mugs",
-                "mime_type": "application\/octet-stream",
+                "originalName": "mugs",
+                "mimeType": "application\/octet-stream",
                 "error": 0
             },
             "path": "@string@"

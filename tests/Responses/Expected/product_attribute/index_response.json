@@ -18,8 +18,8 @@
         "items": [
             {
                 "id": @integer@,
-                "created_at": "@string@.isDateTime()",
-                "updated_at": "@string@.isDateTime()",
+                "createdAt": "@string@.isDateTime()",
+                "updatedAt": "@string@.isDateTime()",
                 "_links": {
                     "self": {
                         "href": "\/api\/v1\/product-attributes\/mug_material"
@@ -28,8 +28,8 @@
             },
             {
                 "id": @integer@,
-                "created_at": "@string@.isDateTime()",
-                "updated_at": "@string@.isDateTime()",
+                "createdAt": "@string@.isDateTime()",
+                "updatedAt": "@string@.isDateTime()",
                 "_links": {
                     "self": {
                         "href": "\/api\/v1\/product-attributes\/mug_collection"

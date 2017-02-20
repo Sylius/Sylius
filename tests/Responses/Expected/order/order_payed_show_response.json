@@ -11,10 +11,10 @@
                 "description": "Lorem ipsum",
                 "hostname": "localhost",
                 "color": "black",
-                "created_at": "@string@.isDateTime()",
-                "updated_at": "@string@.isDateTime()",
+                "createdAt": "@string@.isDateTime()",
+                "updatedAt": "@string@.isDateTime()",
                 "enabled": true,
-                "tax_calculation_strategy": "order_items_based",
+                "taxCalculationStrategy": "order_items_based",
                 "_links": {
                     "self": {
                         "href": "@string@"
@@ -22,10 +22,10 @@
                 }
             }
         ],
-        "gateway_config": {
+        "gatewayConfig": {
             "id": @integer@,
-            "gateway_name": "Offline",
-            "factory_name": "offline",
+            "gatewayName": "Offline",
+            "factoryName": "offline",
             "config": []
         },
         "_links": {

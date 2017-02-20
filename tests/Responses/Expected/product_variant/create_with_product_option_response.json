@@ -1,7 +1,7 @@
 {
     "id": @integer@,
     "code": "MONSTER_MUG",
-    "option_values": [
+    "optionValues": [
         {
             "name": "Mug type",
             "code": "MUG_TYPE_MEDIUM"
@@ -14,10 +14,10 @@
           "locale": "en_US"
         }
     },
-    "on_hold": 0,
-    "on_hand": 0,
+    "onHold": 0,
+    "onHand": 0,
     "tracked": false,
-    "channel_pricings": [],
+    "channelPricings": [],
     "_links": {
         "self": {
             "href": "@string@"

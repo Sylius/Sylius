@@ -3,15 +3,15 @@
     "order": {
         "id": @integer@,
         "items": [],
-        "items_total": 60,
+        "itemsTotal": 60,
         "adjustments": [],
-        "adjustments_total": 0,
+        "adjustmentsTotal": 0,
         "total": 60,
         "customer": {
             "id": @integer@,
             "email": "oliver.queen@star-city.com",
-            "first_name": "Oliver",
-            "last_name": "Queen",
+            "firstName": "Oliver",
+            "lastName": "Queen",
             "_links": {
                 "self": {
                     "href": "@string@"
@@ -26,33 +26,33 @@
                 }
             }
         },
-        "currency_code": "USD",
-        "locale_code": "en_US",
-        "checkout_state": "cart"
+        "currencyCode": "USD",
+        "localeCode": "en_US",
+        "checkoutState": "cart"
     },
     "quantity": 3,
-    "unit_price": 20,
+    "unitPrice": 20,
     "total": 60,
     "units": [
         {
             "id": @integer@,
             "adjustments": [],
-            "adjustments_total": 0
+            "adjustmentsTotal": 0
         },
         {
             "id": @integer@,
             "adjustments": [],
-            "adjustments_total": 0
+            "adjustmentsTotal": 0
         },
         {
             "id": @integer@,
             "adjustments": [],
-            "adjustments_total": 0
+            "adjustmentsTotal": 0
         }
     ],
-    "units_total": 60,
+    "unitsTotal": 60,
     "adjustments": [],
-    "adjustments_total": 0,
+    "adjustmentsTotal": 0,
     "variant": {},
     "_links": {
         "product": {

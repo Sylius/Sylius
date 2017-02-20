@@ -14,17 +14,17 @@
             "slug": "theme-mug"
         }
     },
-    "product_taxons": [],
+    "productTaxons": [],
     "reviews": [],
-    "average_rating": 0,
+    "averageRating": 0,
     "images": [
         {
             "id": @integer@,
             "type": "FORD_MUG",
             "file": {
                 "test": true,
-                "original_name": "ford",
-                "mime_type": "application\/octet-stream",
+                "originalName": "ford",
+                "mimeType": "application\/octet-stream",
                 "error": 0
             },
             "path": "@string@"
@@ -34,8 +34,8 @@
             "type": "MUGS",
             "file": {
                 "test": true,
-                "original_name": "mugs",
-                "mime_type": "application\/octet-stream",
+                "originalName": "mugs",
+                "mimeType": "application\/octet-stream",
                 "error": 0
             },
             "path": "@string@"

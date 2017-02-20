@@ -27,7 +27,7 @@
                 "name": "Product 17",
                 "code": "PRODUCT_17",
                 "options": [],
-                "average_rating": 0,
+                "averageRating": 0,
                 "images": [],
                 "_links": {
                     "self": {
@@ -40,7 +40,7 @@
                 "name": "Product 18",
                 "code": "PRODUCT_18",
                 "options": [],
-                "average_rating": 0,
+                "averageRating": 0,
                 "images": [],
                 "_links": {
                     "self": {
@@ -53,7 +53,7 @@
                 "name": "Product 19",
                 "code": "PRODUCT_19",
                 "options": [],
-                "average_rating": 0,
+                "averageRating": 0,
                 "images": [],
                 "_links": {
                     "self": {
@@ -66,7 +66,7 @@
                 "name": "Product 20",
                 "code": "PRODUCT_20",
                 "options": [],
-                "average_rating": 0,
+                "averageRating": 0,
                 "images": [],
                 "_links": {
                     "self": {
@@ -79,7 +79,7 @@
                 "name": "Product 21",
                 "code": "PRODUCT_21",
                 "options": [],
-                "average_rating": 0,
+                "averageRating": 0,
                 "images": [],
                 "_links": {
                     "self": {
@@ -92,7 +92,7 @@
                 "name": "Product 22",
                 "code": "PRODUCT_22",
                 "options": [],
-                "average_rating": 0,
+                "averageRating": 0,
                 "images": [],
                 "_links": {
                     "self": {
@@ -105,7 +105,7 @@
                 "name": "Product 4",
                 "code": "PRODUCT_4",
                 "options": [],
-                "average_rating": 0,
+                "averageRating": 0,
                 "images": [],
                 "_links": {
                     "self": {
@@ -118,7 +118,7 @@
                 "name": "Product 5",
                 "code": "PRODUCT_5",
                 "options": [],
-                "average_rating": 0,
+                "averageRating": 0,
                 "images": [],
                 "_links": {
                     "self": {
@@ -131,7 +131,7 @@
                 "name": "Product 6",
                 "code": "PRODUCT_6",
                 "options": [],
-                "average_rating": 0,
+                "averageRating": 0,
                 "images": [],
                 "_links": {
                     "self": {
@@ -144,7 +144,7 @@
                 "name": "Product 7",
                 "code": "PRODUCT_7",
                 "options": [],
-                "average_rating": 0,
+                "averageRating": 0,
                 "images": [],
                 "_links": {
                     "self": {

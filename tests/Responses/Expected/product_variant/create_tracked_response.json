@@ -1,13 +1,13 @@
 {
     "id": @integer@,
     "code": "MONSTER_MUG",
-    "option_values": [],
+    "optionValues": [],
     "position": 21,
     "translations": [],
-    "on_hold": 0,
-    "on_hand": 5,
+    "onHold": 0,
+    "onHand": 5,
     "tracked": true,
-    "channel_pricings": [],
+    "channelPricings": [],
     "_links": {
         "self": {
             "href": "@string@"
