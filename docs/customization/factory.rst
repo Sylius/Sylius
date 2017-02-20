@@ -91,7 +91,7 @@ Take its interface (``Sylius\Component\Product\Factory\ProductFactoryInterface``
     }
 
 2. In order to decorate the base ProductFactory with your implementation you need to configure it
-as a decorating service in the ``app\Resources\config\services.yml``.
+as a decorating service in the ``app/Resources/config/services.yml``.
 
 .. code-block:: yaml
 
