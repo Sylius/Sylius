@@ -23,7 +23,6 @@
             <argument type="service" id="fos_oauth_server.entity_manager" />
             <argument>%fos_oauth_server.model.client.class%</argument>
         </service>
-        <service id="sylius.normalizer.camel_keys" class="Sylius\Bundle\ApiBundle\Normalizer\LocaleAwareCamelKeysNormalizer" />
 
         <service id="sylius.listener.api.add_to_cart" class="Sylius\Bundle\ApiBundle\EventListener\AddToCartListener">
             <argument type="service" id="sylius.order_processing.order_processor.composite" />
