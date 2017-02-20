@@ -127,6 +127,70 @@ See an example of fields order modification on the `sylius_admin_product_review`
                     author:
                         position: 4
 
+Customize grids by events
+-------------------------
+
+There is also another way to customize grids: **via events**.
+Every grid configuration dispatches an event when its definition is being converted.
+
+For example, **sylius_admin_product** grid dispatches such an event:
+
+.. code-block:: php
+
+    sylius.grid.admin_product # For the grid of products in admin
+
+To show you an example of a grid customization using events, we will remove a field from a grid using that method.
+Here are the steps, that you need to take:
+
+**1.** In order to remove fields from the product grid in **Sylius** you have to create a ``AppBundle\Grid\AdminProductsGridListener`` class.
+
+In the example below we are removing the ``images`` field from the ``sylius_admin_product`` grid.
+
+.. code-block:: php
+
+    <?php
+
+    namespace AppBundle\Grid;
+
+    use Sylius\Bundle\GridBundle\Event\GridDefinitionConverterEvent;
+
+    final class AdminProductsGridListener
+    {
+        /**
+         * @param GridDefinitionConverterEvent $event
+         */
+        public function removeImageField(GridDefinitionConverterEvent $event)
+        {
+            $grid = $event->getGrid();
+
+            $grid->removeField('image');
+        }
+    }
+
+**2.** After creating your class with a proper method for the grid customizations you need, subscribe your
+listener to the ``sylius.grid.admin_product`` event in the ``app/config/services.yml``.
+
+.. code-block:: yaml
+
+    # app/config/services.yml
+    services:
+        app.listener.admin.products_grid:
+            class: AppBundle\Grid\AdminProductsGridListener
+            tags:
+                - { name: kernel.event_listener, event: sylius.grid.admin_product, method: removeImageField }
+
+Remember to import the ``app/config/services.yml`` into the ``app/config/config.yml``.
+
+.. code-block:: yaml
+
+    # app/config/config.yml
+    imports:
+        - { resource: "services.yml" }
+
+**3.** Result:
+
+After these two steps your admin product grid should not have the image field.
+
 Learn more
 ----------
 

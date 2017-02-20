@@ -150,6 +150,8 @@
 
 ### Grid / GridBundle
 
+* In `Sylius\Component\Grid\Definition\ArrayToDefinitionConverter` was changed a constructor, now the necessary property is `Symfony\Component\EventDispatcher\EventDispatcherInterface`.
+
 * Custom options for filter form types was extracted from ``options`` to ``form_options`` in grid configuration.
 
 Before:
