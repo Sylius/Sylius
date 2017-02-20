@@ -11,6 +11,7 @@
 
 * Route `sylius_admin_order_shipment_ship` has been added to have specific end point only for updating via http PUT method and `sylius_admin_partial_shipment_ship` route is only for rendering the form.
 * Rename any `sylius_admin_address_log_entry_index` usages to `sylius_admin_partial_log_entry_index`.
+* The `sylius_admin_order_shipment_ship` path has been changed from `/{id}/ship` to `/orders/{id}/ship` to keep consistency. Change the path definition or redeclare it if you are using an absolute path instead of twig helper.
 
 ### ApiBundle
 
