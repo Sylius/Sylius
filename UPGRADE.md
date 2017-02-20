@@ -68,42 +68,29 @@
                 serialization_version: $version
                 serialization_groups: [Detailed]
  ```
- 
-* Routing definition for Channels has been removed and replaced with auto generated resource routing. Channels are now resolved by code instead of id and only index and show endpoint are available.
+* Routing definition for `Products` has been changed and products are now resolved by code instead of id.
 You can bring back previous configuration by overriding current routing with your definition.
 
-* Routing definition for Countries has been removed and replaced with auto generated resource routing.
+* Routing definition for `Product Variants` has been changed and ProductVariants are now resolved by code instead of id.
 You can bring back previous configuration by overriding current routing with your definition.
 
-* Routing definition for Locales has been removed and replaced with auto generated resource routing.
+* Routing definition for `Taxons` has been changed and Taxons are now resolved by code instead of id. 
 You can bring back previous configuration by overriding current routing with your definition.
 
-* Routing definition for Products has been changed and products are now resolved by code instead of id.
-You can bring back previous configuration by overriding current routing with your definition.
+* Routing for the following resources has been removed and replaced with the auto generated routing:
 
-* Routing definition for ProductVariants has been changed and ProductVariants are now resolved by code instead of id.
-You can bring back previous configuration by overriding current routing with your definition.
+	* `Channels`, which are now resolved by code instead of id and only index and show endpoint are available.
+	* `Countries`, which are now resolved by code instead of id.
+	* `Locales`, which  are now resolved by code instead of id. 
+	* `Product Attributes`, which are now by code instead of id and only index and show endpoint are available.
+	* `Product Options`, which are now resolved by code instead of id and only index and show endpoint are available.
+	* `Promotions`, which are now resolved by code instead of id and only index and show endpoint are available.
+	* `Promotions Coupons`, which are now resolved by code instead of id and only index and show endpoint are available.
+	* `Tax Categories`, which are now resolved by code instead of id.
+	* `Tax Rates`, which have now only index and show endpoint is available. 
+	* `Payment Methods`, which have now only show endpoint available. 
 
-* Routing definition for ProductAttributes has been changed and ProductAttributes are now resolved by code instead of id and only index and show endpoint are available.
-You can bring back previous configuration by overriding current routing with your definition.
-
-* Routing definition for ProductOptions has been changed and ProductOptions are now resolved by code instead of id and only index and show endpoint are available. 
-You can bring back previous configuration by overriding current routing with your definition.
-
-* Routing definition for Promotions has been changed and Promotions are now resolved by code instead of id and only index and show endpoint are available. 
-You can bring back previous configuration by overriding current routing with your definition.
-
-* Routing definition for PromotionCoupons has been changed and PromotionCoupons are now resolved by code instead of id and only index and show endpoint are available. 
-You can bring back previous configuration by overriding current routing with your definition.
-
-* Routing definition for TaxCategories has been removed and replaced with auto generated resource routing. TaxCategories are now resolved by code instead of id.
-You can bring back previous configuration by overriding current routing with your definition.
-
-* Routing definition for TaxRates has been removed and replaced with auto generated resource routing. Only show endpoint is available. 
-You can bring back previous configuration by overriding current routing with your definition.
-
-* Routing definition for Taxons has been changed and Taxons are now resolved by code instead of id. 
-You can bring back previous configuration by overriding current routing with your definition.
+  You can bring back previous configuration by overriding current routing with your definition.
 
 ### Attribute / AttributeBundle
 
