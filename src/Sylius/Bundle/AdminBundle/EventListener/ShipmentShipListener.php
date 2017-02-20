@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\EventListener;
+namespace Sylius\Bundle\AdminBundle\EventListener;
 
 use Sylius\Bundle\CoreBundle\EmailManager\ShipmentEmailManagerInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;

@@ -48,12 +48,6 @@
             <tag name="doctrine.event_listener" event="prePersist" />
             <tag name="doctrine.event_listener" event="preUpdate" />
         </service>
-        <service id="sylius.listener.user_registration" class="Sylius\Bundle\CoreBundle\EventListener\UserRegistrationListener">
-            <argument type="service" id="sylius.manager.shop_user" />
-            <argument type="service" id="sylius.shop_user.token_generator.email_verification" />
-            <argument type="service" id="event_dispatcher" />
-            <tag name="kernel.event_listener" event="sylius.customer.post_register" method="sendVerificationEmail" />
-        </service>
         <service id="sylius.listener.password_updater" class="Sylius\Bundle\CoreBundle\EventListener\PasswordUpdaterListener">
             <argument type="service" id="sylius.security.password_updater" />
             <tag name="kernel.event_listener" event="sylius.user.pre_password_reset" method="genericEventUpdater" />
@@ -72,40 +66,9 @@
             <argument>_sylius.cart</argument>
             <tag name="kernel.event_subscriber" />
         </service>
-        <service id="sylius.listener.order_customer_ip" class="Sylius\Bundle\CoreBundle\EventListener\OrderCustomerIpListener">
-            <argument type="service" id="sylius.customer_ip_assigner" />
-            <argument type="service" id="request_stack" />
-            <tag name="kernel.event_listener" event="sylius.order.pre_complete" method="assignCustomerIpToOrder" />
-        </service>
-        <service id="sylius.listener.order_complete" class="Sylius\Bundle\CoreBundle\EventListener\OrderCompleteListener">
-            <argument type="service" id="sylius.email_manager.order" />
-            <tag name="kernel.event_listener" event="sylius.order.post_complete" method="sendConfirmationEmail" />
-        </service>
-        <service id="sylius.listener.shipment_ship" class="Sylius\Bundle\CoreBundle\EventListener\ShipmentShipListener">
-            <argument type="service" id="sylius.email_manager.shipment" />
-            <tag name="kernel.event_listener" event="sylius.shipment.post_ship" method="sendConfirmationEmail" />
-        </service>
         <service id="sylius.listener.review_create" class="Sylius\Bundle\CoreBundle\EventListener\ReviewCreateListener">
             <argument type="service" id="sylius.context.customer" />
             <tag name="kernel.event_listener" event="sylius.product_review.pre_create" method="ensureReviewHasAuthor" />
-        </service>
-        <service id="sylius.listener.order_promotion_integrity_checker" class="Sylius\Bundle\CoreBundle\EventListener\OrderPromotionIntegrityChecker">
-            <argument type="service" id="sylius.promotion_eligibility_checker" />
-            <argument type="service" id="event_dispatcher" />
-            <argument type="service" id="router" />
-            <tag name="kernel.event_listener" event="sylius.order.pre_complete" method="check" />
-        </service>
-
-        <service id="sylius.listener.order_total_integrity_checker" class="Sylius\Bundle\CoreBundle\EventListener\OrderTotalIntegrityChecker">
-            <argument type="service" id="sylius.order_processing.order_processor" />
-            <argument type="service" id="router" />
-            <argument type="service" id="sylius.manager.order" />
-            <tag name="kernel.event_listener" event="sylius.order.pre_complete" method="check" />
-        </service>
-
-        <service id="sylius.order_locale_assigner" class="Sylius\Bundle\CoreBundle\EventListener\OrderLocaleAssigner">
-            <argument type="service" id="sylius.context.locale" />
-            <tag name="kernel.event_listener" event="sylius.order.pre_complete" method="assignLocale" />
         </service>
     </services>
 </container>

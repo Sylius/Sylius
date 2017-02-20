@@ -15,5 +15,6 @@
     <imports>
         <import resource="services/controller.xml" />
         <import resource="services/menu.xml" />
+        <import resource="services/listeners.xml" />
     </imports>
 </container>
