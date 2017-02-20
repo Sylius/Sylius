@@ -40,12 +40,4 @@ final class ProductVariantsPricesExtension extends \Twig_Extension
             new \Twig_SimpleFunction('sylius_product_variant_prices', [$this->productVariantsPricesHelper, 'getPrices']),
         ];
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_product_variant_prices';
-    }
 }

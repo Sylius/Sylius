@@ -65,12 +65,4 @@ class SortByExtension extends \Twig_Extension
 
         return $array;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sort_by';
-    }
 }

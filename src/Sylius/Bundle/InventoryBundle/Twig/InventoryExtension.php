@@ -41,12 +41,4 @@ final class InventoryExtension extends \Twig_Extension
              new \Twig_SimpleFunction('sylius_inventory_is_sufficient', [$this->helper, 'isStockSufficient']),
         ];
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_inventory';
-    }
 }

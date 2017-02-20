@@ -40,12 +40,4 @@ final class PriceExtension extends \Twig_Extension
             new \Twig_SimpleFilter('sylius_calculate_price', [$this->helper, 'getPrice']),
         ];
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_calculate_price';
-    }
 }

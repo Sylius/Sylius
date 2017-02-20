@@ -40,12 +40,4 @@ final class FormatMoneyExtension extends \Twig_Extension
             new \Twig_SimpleFilter('sylius_format_money', [$this->helper, 'formatAmount']),
         ];
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_format_money';
-    }
 }

@@ -37,25 +37,7 @@ final class AggregateAdjustmentsExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('sylius_aggregate_adjustments', [$this, 'aggregateAdjustments']),
+            new \Twig_SimpleFunction('sylius_aggregate_adjustments', [$this->adjustmentsHelper, 'getAggregatedAdjustments']),
         ];
-    }
-
-    /**
-     * @param array $adjustments
-     *
-     * @return array
-     */
-    public function aggregateAdjustments(array $adjustments)
-    {
-        return $this->adjustmentsHelper->getAggregatedAdjustments($adjustments);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_aggregate_adjustments';
     }
 }

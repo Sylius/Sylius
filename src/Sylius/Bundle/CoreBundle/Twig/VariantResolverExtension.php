@@ -40,12 +40,4 @@ final class VariantResolverExtension extends \Twig_Extension
             new \Twig_SimpleFilter('sylius_resolve_variant', [$this->helper, 'resolveVariant']),
         ];
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_resolve_variant';
-    }
 }
