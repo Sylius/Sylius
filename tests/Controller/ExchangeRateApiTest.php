@@ -72,8 +72,8 @@ final class ExchangeRateApiTest extends JsonApiTestCase
 <<<EOT
         {
             "ratio": "0,8515706",
-            "source_currency": "EUR",
-            "target_currency": "GBP"
+            "sourceCurrency": "EUR",
+            "targetCurrency": "GBP"
         }
 EOT;
 
@@ -95,8 +95,8 @@ EOT;
 <<<EOT
         {
             "ratio": "0,8515706",
-            "source_currency": "EUR",
-            "target_currency": "GBP"
+            "sourceCurrency": "EUR",
+            "targetCurrency": "GBP"
         }
 EOT;
 

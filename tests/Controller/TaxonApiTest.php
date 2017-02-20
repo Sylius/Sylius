@@ -448,13 +448,13 @@ EOT;
         $data =
 <<<EOT
         {
-            "products_positions": [
+            "productsPositions": [
                 {
-                    "product_code": "MUG_SW",
+                    "productCode": "MUG_SW",
                     "position": 2
                 },
                 {
-                    "product_code": "MUG_BB",
+                    "productCode": "MUG_BB",
                     "position": 0
                 }
             ]
@@ -482,9 +482,9 @@ EOT;
         $data =
 <<<EOT
         {
-            "products_positions": [
+            "productsPositions": [
                 {
-                    "product_code": "MUG_SW",
+                    "productCode": "MUG_SW",
                     "position": "second"
                 }
             ]

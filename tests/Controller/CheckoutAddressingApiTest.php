@@ -59,7 +59,7 @@ final class CheckoutAddressingApiTest extends CheckoutApiTestCase
         $data =
 <<<EOT
         {
-            "different_billing_address": false
+            "differentBillingAddress": false
         }
 EOT;
 
@@ -84,15 +84,15 @@ EOT;
         $data =
 <<<EOT
         {
-            "shipping_address": {
-                "first_name": "Hieronim",
-                "last_name": "Bosch",
+            "shippingAddress": {
+                "firstName": "Hieronim",
+                "lastName": "Bosch",
                 "street": "Surrealism St.",
-                "country_code": "NL",
+                "countryCode": "NL",
                 "city": "’s-Hertogenbosch",
                 "postcode": "99-999"
             },
-            "different_billing_address": false
+            "differentBillingAddress": false
         }
 EOT;
 
@@ -118,15 +118,15 @@ EOT;
         $data =
 <<<EOT
         {
-            "shipping_address": {
-                "first_name": "Hieronim",
-                "last_name": "Bosch",
+            "shippingAddress": {
+                "firstName": "Hieronim",
+                "lastName": "Bosch",
                 "street": "Surrealism St.",
-                "country_code": "NL",
+                "countryCode": "NL",
                 "city": "’s-Hertogenbosch",
                 "postcode": "99-999"
             },
-            "different_billing_address": true
+            "differentBillingAddress": true
         }
 EOT;
 
@@ -151,23 +151,23 @@ EOT;
         $data =
 <<<EOT
         {
-            "shipping_address": {
-                "first_name": "Hieronim",
-                "last_name": "Bosch",
+            "shippingAddress": {
+                "firstName": "Hieronim",
+                "lastName": "Bosch",
                 "street": "Surrealism St.",
-                "country_code": "NL",
+                "countryCode": "NL",
                 "city": "’s-Hertogenbosch",
                 "postcode": "99-999"
             },
-            "billing_address": {
-                "first_name": "Vincent",
-                "last_name": "van Gogh",
+            "billingAddress": {
+                "firstName": "Vincent",
+                "lastName": "van Gogh",
                 "street": "Post-Impressionism St.",
-                "country_code": "NL",
+                "countryCode": "NL",
                 "city": "Groot Zundert",
                 "postcode": "88-888"
             },
-            "different_billing_address": true
+            "differentBillingAddress": true
         }
 EOT;
 
@@ -197,15 +197,15 @@ EOT;
         $data =
 <<<EOT
         {
-            "shipping_address": {
-                "first_name": "Vincent",
-                "last_name": "van Gogh",
+            "shippingAddress": {
+                "firstName": "Vincent",
+                "lastName": "van Gogh",
                 "street": "Post-Impressionism St.",
-                "country_code": "NL",
+                "countryCode": "NL",
                 "city": "Groot Zundert",
                 "postcode": "88-888"
             },
-            "different_billing_address": false
+            "differentBillingAddress": false
         }
 EOT;
 
@@ -214,15 +214,15 @@ EOT;
         $newData =
 <<<EOT
         {
-            "shipping_address": {
-                "first_name": "Hieronim",
-                "last_name": "Bosch",
+            "shippingAddress": {
+                "firstName": "Hieronim",
+                "lastName": "Bosch",
                 "street": "Surrealism St.",
-                "country_code": "NL",
+                "countryCode": "NL",
                 "city": "’s-Hertogenbosch",
                 "postcode": "99-999"
             },
-            "different_billing_address": false
+            "differentBillingAddress": false
         }
 EOT;
 
@@ -247,15 +247,15 @@ EOT;
         $addressData =
 <<<EOT
         {
-            "shipping_address": {
-                "first_name": "Vincent",
-                "last_name": "van Gogh",
+            "shippingAddress": {
+                "firstName": "Vincent",
+                "lastName": "van Gogh",
                 "street": "Post-Impressionism St.",
-                "country_code": "NL",
+                "countryCode": "NL",
                 "city": "Groot Zundert",
                 "postcode": "88-888"
             },
-            "different_billing_address": false
+            "differentBillingAddress": false
         }
 EOT;
 
@@ -266,15 +266,15 @@ EOT;
         $newAddressData =
 <<<EOT
         {
-            "shipping_address": {
-                "first_name": "Hieronim",
-                "last_name": "Bosch",
+            "shippingAddress": {
+                "firstName": "Hieronim",
+                "lastName": "Bosch",
                 "street": "Surrealism St.",
-                "country_code": "NL",
+                "countryCode": "NL",
                 "city": "’s-Hertogenbosch",
                 "postcode": "99-999"
             },
-            "different_billing_address": false
+            "differentBillingAddress": false
         }
 EOT;
 
@@ -299,15 +299,15 @@ EOT;
         $addressData =
 <<<EOT
         {
-            "shipping_address": {
-                "first_name": "Vincent",
-                "last_name": "van Gogh",
+            "shippingAddress": {
+                "firstName": "Vincent",
+                "lastName": "van Gogh",
                 "street": "Post-Impressionism St.",
-                "country_code": "NL",
+                "countryCode": "NL",
                 "city": "Groot Zundert",
                 "postcode": "88-888"
             },
-            "different_billing_address": false
+            "differentBillingAddress": false
         }
 EOT;
 
@@ -319,15 +319,15 @@ EOT;
         $newAddressData =
 <<<EOT
         {
-            "shipping_address": {
-                "first_name": "Hieronim",
-                "last_name": "Bosch",
+            "shippingAddress": {
+                "firstName": "Hieronim",
+                "lastName": "Bosch",
                 "street": "Surrealism St.",
-                "country_code": "NL",
+                "countryCode": "NL",
                 "city": "’s-Hertogenbosch",
                 "postcode": "99-999"
             },
-            "different_billing_address": false
+            "differentBillingAddress": false
         }
 EOT;
 
