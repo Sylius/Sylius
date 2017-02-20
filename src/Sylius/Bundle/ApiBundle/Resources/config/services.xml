@@ -31,5 +31,10 @@
             <tag name="kernel.event_listener" event="sylius.order_item.pre_create" method="recalculateOrder" />
             <tag name="kernel.event_listener" event="sylius.order_item.pre_update" method="recalculateOrder" />
         </service>
+
+        <service id="jms_serializer.serialized_name_annotation_strategy" class="%jms_serializer.serialized_name_annotation_strategy.class%" public="false">
+            <argument type="service" id="jms_serializer.identical_property_naming_strategy" />
+        </service>
+        <service id="jms_serializer.identical_property_naming_strategy" class="JMS\Serializer\Naming\IdenticalPropertyNamingStrategy" public="false" />
     </services>
 </container>
