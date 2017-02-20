@@ -1,16 +1,13 @@
 sylius:
     form:
         gateway_config:
-            factory_name: Factory name
-            gateway_name: Gateway name
+            type: Type
         gateway_configuration:
             paypal:
                 password: Password
                 signature: Signature
                 username: Username
             stripe:
-                layout_template: Layout template
-                obtain_token_template: Obtain token template
                 publishable_key: Publishable key
                 secret_key: Secret key
     payum_gateway_factory:

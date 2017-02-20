@@ -45,24 +45,6 @@ final class StripeGatewayConfigurationType extends AbstractType
                     ])
                 ],
             ])
-            ->add('layout_template', TextType::class, [
-                'label' => 'sylius.form.gateway_configuration.stripe.layout_template',
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'sylius.gateway_config.stripe.layout_template.not_blank',
-                        'groups' => 'sylius',
-                    ])
-                ],
-            ])
-            ->add('obtain_token_template', TextType::class, [
-                'label' => 'sylius.form.gateway_configuration.stripe.obtain_token_template',
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'sylius.gateway_config.stripe.obtain_token_template.not_blank',
-                        'groups' => 'sylius',
-                    ])
-                ],
-            ])
         ;
     }
 }

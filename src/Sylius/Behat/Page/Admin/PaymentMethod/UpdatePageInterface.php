@@ -28,11 +28,6 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function nameIt($name, $languageCode);
 
     /**
-     * @param string $gatewayName
-     */
-    public function nameGateway($gatewayName);
-
-    /**
      * @param string $username
      */
     public function setPaypalGatewayUsername($username);

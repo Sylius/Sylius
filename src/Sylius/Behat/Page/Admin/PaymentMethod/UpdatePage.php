@@ -26,14 +26,6 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function nameGateway($gatewayName)
-    {
-        $this->getDocument()->fillField('Gateway name', $gatewayName);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function setPaypalGatewayUsername($username)
     {
         $this->getDocument()->fillField('Username', $username);

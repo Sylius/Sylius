@@ -39,17 +39,6 @@ Feature: Payment method validation
         And the payment method with code "PEC" should not be added
 
     @ui
-    Scenario: Trying to add a new paypal payment method with wrong name
-        Given I want to create a new payment method with "Paypal Express Checkout" gateway factory
-        When I name it "Paypal Express Checkout" in "English (United States)"
-        And I specify its code as "PEC"
-        And I configure it with test paypal credentials
-        And I name the gateway "Paypal express checkout"
-        And I add it
-        Then I should be notified that gateway name should contain only letters and underscores
-        And the payment method with code "PEC" should not be added
-
-    @ui
     Scenario: Trying to remove name from an existing payment method
         Given I want to modify the "Offline" payment method
         When I remove its name from "English (United States)" translation

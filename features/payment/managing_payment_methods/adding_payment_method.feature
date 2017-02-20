@@ -13,7 +13,6 @@ Feature: Adding a new payment method
         When I want to create a new offline payment method
         And I name it "Offline" in "English (United States)"
         And I specify its code as "OFF"
-        And I name the gateway "offline"
         And I add it
         Then I should be notified that it has been successfully created
         And the payment method "Offline" should appear in the registry
@@ -23,7 +22,6 @@ Feature: Adding a new payment method
         Given I want to create a new offline payment method
         When I name it "Offline" in "English (United States)"
         And I specify its code as "OFF"
-        And I name the gateway "offline"
         And I describe it as "Payment method Offline" in "English (United States)"
         And I add it
         Then I should be notified that it has been successfully created
@@ -34,7 +32,6 @@ Feature: Adding a new payment method
         Given I want to create a new offline payment method
         When I name it "Offline" in "English (United States)"
         And I specify its code as "OFF"
-        And I name the gateway "Offline"
         And I set its instruction as "Bank account: 0000 1111 2222 3333" in "English (United States)"
         And I add it
         Then I should be notified that it has been successfully created
@@ -46,7 +43,6 @@ Feature: Adding a new payment method
         Given I want to create a new offline payment method
         When I name it "Offline" in "English (United States)"
         And I specify its code as "OFF"
-        And I name the gateway "offline"
         And make it available in channel "United States"
         And I add it
         Then I should be notified that it has been successfully created
@@ -58,7 +54,6 @@ Feature: Adding a new payment method
         Given I want to create a new payment method with "Paypal Express Checkout" gateway factory
         When I name it "Paypal Express Checkout" in "English (United States)"
         And I specify its code as "PEC"
-        And I name the gateway "Paypal"
         And I configure it with test paypal credentials
         And I add it
         Then I should be notified that it has been successfully created
@@ -69,7 +64,6 @@ Feature: Adding a new payment method
         Given I want to create a new payment method with "Stripe Checkout" gateway factory
         When I name it "Stripe Checkout" in "English (United States)"
         And I specify its code as "SC"
-        And I name the gateway "stripe_checkout"
         And I configure it with test stripe gateway data
         And I add it
         Then I should be notified that it has been successfully created

@@ -33,11 +33,6 @@ interface CreatePageInterface extends BaseCreatePageInterface
     public function specifyCode($code);
 
     /**
-     * @param string $gatewayName
-     */
-    public function nameGateway($gatewayName);
-
-    /**
      * @param string $channelName
      */
     public function checkChannel($channelName);
@@ -78,16 +73,6 @@ interface CreatePageInterface extends BaseCreatePageInterface
      * @param string $publishableKey
      */
     public function setStripePublishableKey($publishableKey);
-
-    /**
-     * @param string $layoutTemplate
-     */
-    public function setStripeLayoutTemplate($layoutTemplate);
-
-    /**
-     * @param string $obtainTokenTemplate
-     */
-    public function setStripeObtainTokenTemplate($obtainTokenTemplate);
 
     /**
      * @return bool

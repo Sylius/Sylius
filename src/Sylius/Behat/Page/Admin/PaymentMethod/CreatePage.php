@@ -38,14 +38,6 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function nameGateway($gatewayName)
-    {
-        $this->getDocument()->fillField('Gateway name', $gatewayName);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function checkChannel($channelName)
     {
         $this->getDocument()->checkField($channelName);
@@ -109,22 +101,6 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     public function setStripePublishableKey($publishableKey)
     {
         $this->getDocument()->fillField('Publishable key', $publishableKey);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setStripeLayoutTemplate($layoutTemplate)
-    {
-        $this->getDocument()->fillField('Layout template', $layoutTemplate);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setStripeObtainTokenTemplate($obtainTokenTemplate)
-    {
-        $this->getDocument()->fillField('Obtain token template', $obtainTokenTemplate);
     }
 
     /**

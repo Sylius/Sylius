@@ -437,17 +437,6 @@ final class ManagingPaymentMethodsContext implements Context
     }
 
     /**
-     * @When I name the gateway :gatewayName
-     */
-    public function iNameTheGateway($gatewayName)
-    {
-        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
-
-        $currentPage->nameGateway($gatewayName);
-    }
-
-    /**
      * @When I configure it with test paypal credentials
      */
     public function iConfigureItWithTestPaypalCredentials()
@@ -487,7 +476,5 @@ final class ManagingPaymentMethodsContext implements Context
     {
         $this->createPage->setStripeSecretKey('TEST');
         $this->createPage->setStripePublishableKey('TEST');
-        $this->createPage->setStripeLayoutTemplate('layout.html');
-        $this->createPage->setStripeObtainTokenTemplate('obtain.html');
     }
 }

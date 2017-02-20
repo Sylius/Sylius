@@ -14,8 +14,12 @@ namespace Sylius\Bundle\CoreBundle\Form\Extension;
 use Sylius\Bundle\ChannelBundle\Form\Type\ChannelChoiceType;
 use Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodType;
 use Sylius\Bundle\PayumBundle\Form\Type\GatewayConfigType;
+use Sylius\Component\Core\Formatter\StringInflector;
+use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -39,6 +43,18 @@ final class PaymentMethodTypeExtension extends AbstractTypeExtension
                 'label' => false,
                 'data' => $gatewayFactory,
             ])
+            ->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
+                $paymentMethod = $event->getData();
+
+                if (!$paymentMethod instanceof PaymentMethodInterface) {
+                    return;
+                }
+
+                $gatewayConfig = $paymentMethod->getGatewayConfig();
+                if (null === $gatewayConfig->getGatewayName()) {
+                    $gatewayConfig->setGatewayName(StringInflector::nameToLowercaseCode($paymentMethod->getName()));
+                }
+            })
         ;
     }
 

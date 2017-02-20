@@ -1,8 +1,5 @@
 sylius:
     gateway_config:
-        gateway_name:
-            not_blank: Please enter gateway name.
-            regex: Gateway name should contain only letters and underscores.
         paypal:
             password:
                 not_blank: Please enter paypal password.
@@ -15,7 +12,3 @@ sylius:
                 not_blank: Please enter stripe secret key.
             publishable_key:
                 not_blank: Please enter stripe publishable key.
-            layout_template:
-                not_blank: Please enter stripe layout template.
-            obtain_token_template:
-                not_blank: Please enter stripe obtain token template.
