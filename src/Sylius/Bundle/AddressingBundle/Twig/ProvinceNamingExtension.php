@@ -38,28 +38,8 @@ class ProvinceNamingExtension extends \Twig_Extension
     public function getFilters()
     {
         return [
-            new \Twig_SimpleFilter('sylius_province_name', [$this, 'getProvinceName']),
-            new \Twig_SimpleFilter('sylius_province_abbreviation', [$this, 'getProvinceAbbreviation']),
+            new \Twig_SimpleFilter('sylius_province_name', [$this->provinceNamingProvider, 'getName']),
+            new \Twig_SimpleFilter('sylius_province_abbreviation', [$this->provinceNamingProvider, 'getAbbreviation']),
         ];
-    }
-
-    /**
-     * @param AddressInterface $address
-     *
-     * @return string
-     */
-    public function getProvinceName(AddressInterface $address)
-    {
-        return $this->provinceNamingProvider->getName($address);
-    }
-
-    /**
-     * @param AddressInterface $address
-     *
-     * @return string
-     */
-    public function getProvinceAbbreviation(AddressInterface $address)
-    {
-        return $this->provinceNamingProvider->getAbbreviation($address);
     }
 }
