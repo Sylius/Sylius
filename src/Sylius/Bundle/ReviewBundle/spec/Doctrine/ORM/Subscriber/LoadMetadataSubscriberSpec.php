@@ -94,7 +94,7 @@ final class LoadMetadataSubscriberSpec extends ObjectBehavior
             'joinColumns' => [[
                 'name' => 'author_id',
                 'referencedColumnName' => 'id',
-                'nullable' => true,
+                'nullable' => false,
                 'onDelete' => 'CASCADE',
             ]],
             'cascade' => ['persist'],

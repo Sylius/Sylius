@@ -65,11 +65,11 @@ final class ProductReviewContext implements Context
     }
 
     /**
-     * @Given /^(this product) has one review$/
+     * @Given /^(this product) has one review from (customer "[^"]+")$/
      */
-    public function productHasAReview(ProductInterface $product)
+    public function productHasAReview(ProductInterface $product, CustomerInterface $customer)
     {
-        $review = $this->createProductReview($product, 'Title', 5, 'Comment');
+        $review = $this->createProductReview($product, 'Title', 5, 'Comment', $customer);
 
         $this->productReviewRepository->add($review);
     }
