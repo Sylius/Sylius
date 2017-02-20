@@ -27,8 +27,8 @@ Overwrite the state machine of Checkout
 Open the `CoreBundle/Resources/config/app/state_machine/sylius_order_checkout.yml <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/CoreBundle/Resources/config/app/state_machine/sylius_order_checkout.yml>`_
 and place its content in the ``app/Resources/SyliusCoreBundle/config/app/state_machine/sylius_order_checkout.yml``
 which is a `standard procedure of overriding configs in Symfony <http://symfony.com/doc/current/bundles/inheritance.html#overriding-resources-templates-routing-etc>`_.
-Remove the ``shipment_selected`` state, ``select_shipment`` transition. Remove the ``select_shipment`` from the
-``sylius_process_cart`` callback.
+Remove the ``shipping_selected`` and ``shipping_skipped`` states, ``select_shipping`` and ``skip_shipping`` transitions.
+Remove the ``select_shipping`` and ``skip_shipping`` transition from the ``sylius_process_cart`` callback.
 
 .. code-block:: yaml
 
@@ -42,17 +42,21 @@ Remove the ``shipment_selected`` state, ``select_shipment`` transition. Remove t
             states:
                 cart: ~
                 addressed: ~
+                payment_skipped: ~
                 payment_selected: ~
                 completed: ~
             transitions:
                 address:
-                    from: [cart, addressed, payment_selected]
+                    from: [cart, addressed, payment_selected, payment_skipped]
                     to: addressed
+                skip_payment:
+                    from: [addressed]
+                    to: payment_skipped
                 select_payment:
                     from: [addressed, payment_selected]
                     to: payment_selected
                 complete:
-                    from: [payment_selected]
+                    from: [payment_selected, payment_skipped]
                     to: completed
             callbacks:
                 after:
@@ -64,23 +68,25 @@ Remove the ``shipment_selected`` state, ``select_shipment`` transition. Remove t
                         on: ["complete"]
                         do: ["@sm.callback.cascade_transition", "apply"]
                         args: ["object", "event", "'create'", "'sylius_order'"]
-                    sylius_hold_inventory:
+                    sylius_save_checkout_completion_date:
                         on: ["complete"]
-                        do: ["@sylius.inventory.order_inventory_operator", "hold"]
+                        do: ["object", "completeCheckout"]
                         args: ["object"]
-                    sylius_assign_token:
-                        on: ["complete"]
-                        do: ["@sylius.unique_id_based_order_token_assigner", "assignTokenValue"]
+                    sylius_skip_shipping:
+                        on: ["address"]
+                        do: ["@sylius.state_resolver.order_checkout", "resolve"]
                         args: ["object"]
-                    sylius_increment_promotions_usages:
-                        on: ["complete"]
-                        do: ["@sylius.promotion_usage_modifier", "increment"]
+                        priority: 1
+                    sylius_skip_payment:
+                        on: ["address"]
+                        do: ["@sylius.state_resolver.order_checkout", "resolve"]
                         args: ["object"]
+                        priority: 1
 
 .. tip::
 
-    To check if your new state machine configuration is overiding the old one run:
-    ``$ php bin/console debug:config winzou_state_machine`` and check the configuration of ``sylius_order_checkout``.
+    To check if your new state machine configuration is overriding the old one run:
+    ``$ php bin/console debug:winzou:state-machine`` and check the configuration of ``sylius_order_checkout``.
 
 Adjust Checkout Resolver
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -93,6 +99,7 @@ Make these changes in the ``config.yml``.
     # app/config/config.yml
     sylius_shop:
         checkout_resolver:
+            pattern: /checkout/.+
             route_map:
                 cart:
                     route: sylius_shop_checkout_address
@@ -100,15 +107,18 @@ Make these changes in the ``config.yml``.
                     route: sylius_shop_checkout_select_payment
                 payment_selected:
                     route: sylius_shop_checkout_complete
+                payment_skipped:
+                    route: sylius_shop_checkout_complete
 
 Adjust Checkout Templates
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 After you have got the resolver adjusted, modify the templates for checkout. You have to remove shipping from steps and
-disable the hardcoded ability to go back to the shipping step. You will achieve that by overriding two files:
+disable the hardcoded ability to go back to the shipping step and the number of steps being displayed in the checkout navigation.
+You will achieve that by overriding two files:
 
 * `ShopBundle/Resources/views/Checkout/_steps.html.twig <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/ShopBundle/Resources/views/Checkout/_steps.html.twig>`_
-* `ShopBundle/Resources/views/Checkout/SelectPayment/_form.html.twig <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/ShopBundle/Resources/views/Checkout/SelectPayment/_form.html.twig>`_
+* `ShopBundle/Resources/views/Checkout/SelectPayment/_navigation.html.twig <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/ShopBundle/Resources/views/Checkout/SelectPayment/_navigation.html.twig>`_
 
 .. code-block:: html
 
@@ -121,7 +131,14 @@ disable the hardcoded ability to go back to the shipping step. You will achieve 
         {% set steps = {'address': 'completed', 'select_payment': 'completed', 'complete': 'active'} %}
     {% endif %}
 
-    <div class="ui three steps">
+    {% set order_requires_payment = sylius_is_payment_required(order) %}
+
+    {% set steps_count = 'three' %}
+    {% if not order_requires_payment %}
+        {% set steps_count = 'two' %}
+    {% endif %}
+
+    <div class="ui {{ steps_count }} steps">
         <a class="{{ steps['address'] }} step" href="{{ path('sylius_shop_checkout_address') }}">
             <i class="map icon"></i>
             <div class="content">
@@ -129,6 +146,7 @@ disable the hardcoded ability to go back to the shipping step. You will achieve 
                 <div class="description">{{ 'sylius.ui.fill_in_your_billing_and_shipping_addresses'|trans }}</div>
             </div>
         </a>
+        {% if order_requires_payment %}
         <a class="{{ steps['select_payment'] }} step" href="{{ path('sylius_shop_checkout_select_payment') }}">
             <i class="payment icon"></i>
             <div class="content">
@@ -136,6 +154,7 @@ disable the hardcoded ability to go back to the shipping step. You will achieve 
                 <div class="description">{{ 'sylius.ui.choose_how_you_will_pay'|trans }}</div>
             </div>
         </a>
+        {% endif %}
         <div class="{{ steps['complete'] }} step" href="{{ path('sylius_shop_checkout_complete') }}">
             <i class="checkered flag icon"></i>
             <div class="content">
@@ -147,49 +166,15 @@ disable the hardcoded ability to go back to the shipping step. You will achieve 
 
 .. code-block:: html
 
-    {# app/Resources/SyliusShopBundle/views/Checkout/SelectPayment/_form.html.twig #}
-    <div class="ui unmargined segments">
-        {% set disabled = false %}
-        {% for payment in order.payments %}
-            <div class="ui segment">
-                <div class="ui dividing header">{{ 'sylius.ui.payment'|trans }} #{{ loop.index }}</div>
-                <div class="ui fluid stackable items">
-                    {% set payment_form = form.payments[loop.index0] %}
-                    {{ form_errors(payment_form.method) }}
-                    {% for payment_method_choice in payment_form.method %}
-                        <div class="item">
-                            <div class="field">
-                                <div class="ui radio checkbox">
-                                    {{ form_widget(payment_method_choice) }}
-                                </div>
-                            </div>
-                            <div class="content">
-                                <a class="header">{{ form_label(payment_method_choice) }}</a>
-                                {% if payment_method_choice.parent.vars.choices[loop.index0].data.description is not null %}
-                                    <div class="description">
-                                        <p>{{ payment_method_choice.parent.vars.choices[loop.index0].data.description }}</p>
-                                    </div>
-                                {% endif %}
-                            </div>
-                        </div>
-                    {% else %}
-                        {% set disabled = true %}
-                        {% include '@SyliusShop/Checkout/SelectPayment/_no_payment_methods_available.twig' %}
-                    {% endfor %}
-                </div>
-            </div>
-        {% else %}
-            {% set disabled = true %}
-            {% include '@SyliusShop/Checkout/SelectPayment/_no_payment_methods_available.twig' %}
-        {% endfor %}
-    </div>
-    <div class="ui hidden divider"></div>
+    {# app/Resources/SyliusShopBundle/views/Checkout/SelectPayment/_navigation.html.twig #}
+    {% set enabled = order.payments|length %}
+
     <div class="ui two column grid">
         <div class="column">
             <a href="{{ path('sylius_shop_checkout_address') }}" class="ui large icon labeled button"><i class="arrow left icon"></i> {{ 'sylius.ui.change_address'|trans }}</a>
         </div>
         <div class="right aligned column">
-            <button type="submit" id="next-step" class="ui large primary icon labeled {% if disabled %} disabled {% endif %} button">
+            <button type="submit" id="next-step" class="ui large primary icon labeled{% if not enabled %} disabled{% endif %} button">
                 <i class="arrow right icon"></i>
                 {{ 'sylius.ui.next'|trans }}
             </button>
@@ -200,15 +185,17 @@ Overwrite routing for Checkout
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Unfortunately there is no better way - you have to overwrite the whole routing for Checkout.
-To do that copy the content of `ShopBundle/Resources/config/routing/checkout.yml <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/ShopBundle/Resources/config/routing/checkout.yml>`_
-to the ``app/Resources/SyliusShopBundle/config/routing/checkout.yml`` file. **Remove routing** of ``sylius_shop_checkout_select_shipping``
-and change the **redirect route** in ``sylius_shop_checkout_address``. The rest should remain the same.
+To do that copy the content of
+`ShopBundle/Resources/config/routing/checkout.yml <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/ShopBundle/Resources/config/routing/checkout.yml>`_
+to the ``app/Resources/SyliusShopBundle/config/routing/checkout.yml`` file.
+**Remove routing** of ``sylius_shop_checkout_select_shipping``. The rest should remain the same.
 
 .. code-block:: yaml
 
     # app/Resources/SyliusShopBundle/config/routing/checkout.yml
     sylius_shop_checkout_start:
         path: /
+        methods: [GET]
         defaults:
             _controller: FrameworkBundle:Redirect:redirect
             route: sylius_shop_checkout_address
@@ -223,18 +210,16 @@ and change the **redirect route** in ``sylius_shop_checkout_address``. The rest 
                 flash: false
                 template: SyliusShopBundle:Checkout:address.html.twig
                 form:
-                    type: sylius_checkout_address
+                    type: Sylius\Bundle\CoreBundle\Form\Type\Checkout\AddressType
                     options:
                         customer: expr:service('sylius.context.customer').getCustomer()
                 repository:
                     method: find
-                    arguments: [expr:service('sylius.context.cart').getCart()]
+                    arguments:
+                        - "expr:service('sylius.context.cart').getCart()"
                 state_machine:
                     graph: sylius_order_checkout
                     transition: address
-                redirect:
-                    route: sylius_shop_checkout_select_payment
-                    parameters: []
 
     sylius_shop_checkout_select_payment:
         path: /select-payment
@@ -245,40 +230,39 @@ and change the **redirect route** in ``sylius_shop_checkout_address``. The rest 
                 event: payment
                 flash: false
                 template: SyliusShopBundle:Checkout:selectPayment.html.twig
-                form: sylius_checkout_select_payment
+                form: Sylius\Bundle\CoreBundle\Form\Type\Checkout\SelectPaymentType
                 repository:
                     method: find
-                    arguments: [expr:service('sylius.context.cart').getCart()]
+                    arguments:
+                        - "expr:service('sylius.context.cart').getCart()"
                 state_machine:
                     graph: sylius_order_checkout
                     transition: select_payment
-                redirect:
-                    route: sylius_shop_checkout_complete
-                    parameters: []
 
     sylius_shop_checkout_complete:
         path: /complete
         methods: [GET, PUT]
         defaults:
-            _controller: sylius.controller.order:updateAction
+            _controller: sylius.controller.order:completeAction
             _sylius:
-                event: summary
+                event: complete
                 flash: false
                 template: SyliusShopBundle:Checkout:complete.html.twig
                 repository:
                     method: find
-                    arguments: [expr:service('sylius.context.cart').getCart()]
+                    arguments:
+                        - "expr:service('sylius.context.cart').getCart()"
                 state_machine:
                     graph: sylius_order_checkout
                     transition: complete
                 redirect:
                     route: sylius_shop_order_pay
                     parameters:
-                        paymentId: expr:service('sylius.context.cart').getCart().getLastNewPayment().getId()
+                        tokenValue: resource.tokenValue
                 form:
-                    type: sylius_checkout_complete
+                    type: Sylius\Bundle\CoreBundle\Form\Type\Checkout\CompleteType
                     options:
-                        validation_groups: [sylius_checkout_complete]
+                        validation_groups: 'sylius_checkout_complete'
 
 .. tip::
 
