@@ -28,8 +28,8 @@ use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
-use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -547,7 +547,7 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @When /^I choose main (taxon "([^"]+)")$/
+     * @When /^I choose main (taxon "[^"]+")$/
      */
     public function iChooseMainTaxon(TaxonInterface $taxon)
     {
