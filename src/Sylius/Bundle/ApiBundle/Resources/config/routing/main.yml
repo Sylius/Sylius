@@ -88,6 +88,9 @@ sylius_api_country:
     resource: "@SyliusApiBundle/Resources/config/routing/country.yml"
     prefix: /countries
 
+sylius_api_exchange_rate:
+    resource: "@SyliusApiBundle/Resources/config/routing/exchange_rate.yml"
+
 sylius_api_province:
     resource: "@SyliusApiBundle/Resources/config/routing/province.yml"
     prefix: /countries/{countryCode}/provinces

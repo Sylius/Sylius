@@ -49,6 +49,10 @@ class UniqueCurrencyPairValidator extends ConstraintValidator
             return;
         }
 
+        if (null === $value->getSourceCurrency() || null === $value->getTargetCurrency()) {
+            return;
+        }
+
         if (!$this->isCurrencyPairUnique($value->getSourceCurrency(), $value->getTargetCurrency())) {
             $this->context->buildViolation($constraint->message)->addViolation();
         }

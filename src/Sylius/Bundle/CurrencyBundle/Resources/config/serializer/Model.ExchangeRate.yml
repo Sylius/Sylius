@@ -9,8 +9,11 @@ Sylius\Component\Currency\Model\ExchangeRate:
         ratio:
             expose: true
             type: float
+            groups: [Default, Detailed]
         sourceCurrency:
             expose: true
+            groups: [Default, Detailed]
         targetCurrency:
             expose: true
+            groups: [Default, Detailed]
 

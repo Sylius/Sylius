@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_api_exchange_rate:
+    resource: |
+        alias: sylius.exchange_rate
+        section: api
+        serialization_version: $version
+    type: sylius.resource_api
