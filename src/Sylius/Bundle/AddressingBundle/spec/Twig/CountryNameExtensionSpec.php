@@ -20,14 +20,9 @@ use Sylius\Component\Addressing\Model\CountryInterface;
  */
 final class CountryNameExtensionSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(CountryNameExtension::class);
-    }
-
     function it_is_a_twig_extension()
     {
-        $this->shouldHaveType('Twig_Extension');
+        $this->shouldHaveType(\Twig_Extension::class);
     }
 
     function it_translates_country_iso_code_into_name()
@@ -45,10 +40,5 @@ final class CountryNameExtensionSpec extends ObjectBehavior
     function it_translates_country_code_to_name_according_to_locale()
     {
         $this->translateCountryIsoCode('IE', 'es')->shouldReturn('Irlanda');
-    }
-
-    function it_has_name()
-    {
-        $this->getName()->shouldReturn('sylius_country_name');
     }
 }

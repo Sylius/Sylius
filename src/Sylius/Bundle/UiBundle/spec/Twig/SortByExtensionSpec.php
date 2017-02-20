@@ -22,19 +22,9 @@ use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
  */
 final class SortByExtensionSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(SortByExtension::class);
-    }
-
     function it_extends_twig_extensions()
     {
         $this->shouldHaveType(\Twig_Extension::class);
-    }
-
-    function it_has_name()
-    {
-        $this->getName()->shouldReturn('sort_by');
     }
 
     function it_sorts_in_ascending_order_by_default(
