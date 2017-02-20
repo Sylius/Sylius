@@ -77,7 +77,16 @@ Here you will find all configuration options of ``sylius_grid``.
                             enabled: true
                             icon: ~
                             position: 100
-                            options: { }
+                            options:
+                                links:
+                                    simple:
+                                        label: sylius.ui.simple_user
+                                        icon: plus
+                                        route: app_admin_user_create_simple
+                                    configurable:
+                                        label: sylius.ui.configurable_user
+                                        icon: plus
+                                        route: app_admin_user_create
                     item:
                         update:
                             type: update
@@ -99,7 +108,11 @@ Here you will find all configuration options of ``sylius_grid``.
                             enabled: true
                             icon: ~
                             position: 100
-                            options: { }
+                            options:
+                                link:
+                                    route: app_user_show
+                                    parameters:
+                                        id: resource.id
                         archive:
                             type: archive
                             label: sylius.ui.archive
