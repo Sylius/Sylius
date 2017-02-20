@@ -1,6 +1,4 @@
 {
     "id": @integer@,
-    "code": "USD",
-    "created_at": "@string@.isDateTime()",
-    "updated_at": "@string@.isDateTime()"
+    "code": "USD"
 }

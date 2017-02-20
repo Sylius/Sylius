@@ -1,0 +1,21 @@
+Sylius\Component\Currency\Model\Currency:
+    USD:
+        code: USD
+    EUR:
+        code: EUR
+    GBP:
+        code: GBP
+
+Sylius\Component\Currency\Model\ExchangeRate:
+    eur_gbp_exchange_rate:
+        ratio: 0.85
+        sourceCurrency: "@EUR"
+        targetCurrency: "@GBP"
+    eur_usd_exchange_rate:
+        ratio: 1.06
+        sourceCurrency: "@EUR"
+        targetCurrency: "@USD"
+    usd_gbp_exchange_rate:
+        ratio: 1.24
+        sourceCurrency: "@USD"
+        targetCurrency: "@GBP"

@@ -1,0 +1,75 @@
+{
+    "page": 1,
+    "limit": 10,
+    "pages": 1,
+    "total": 3,
+    "_links": {
+        "self": {
+            "href": "\/api\/v1\/exchange-rates\/?page=1&limit=10"
+        },
+        "first": {
+            "href": "\/api\/v1\/exchange-rates\/?page=1&limit=10"
+        },
+        "last": {
+            "href": "\/api\/v1\/exchange-rates\/?page=1&limit=10"
+        }
+    },
+    "_embedded": {
+        "items": [
+            {
+                "id": @integer@,
+                "ratio": 0.85,
+                "source_currency": {
+                    "id": @integer@,
+                    "code": "EUR"
+                },
+                "target_currency": {
+                    "id": @integer@,
+                    "code": "GBP"
+                },
+                "updated_at": "@string@.isDateTime()",
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/exchange-rates\/EUR-GBP"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "ratio": 1.06,
+                "source_currency": {
+                    "id": @integer@,
+                    "code": "EUR"
+                },
+                "target_currency": {
+                    "id": @integer@,
+                    "code": "USD"
+                },
+                "updated_at": "@string@.isDateTime()",
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/exchange-rates\/EUR-USD"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "ratio": 1.24,
+                "source_currency": {
+                    "id": @integer@,
+                    "code": "USD"
+                },
+                "target_currency": {
+                    "id": @integer@,
+                    "code": "GBP"
+                },
+                "updated_at": "@string@.isDateTime()",
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/exchange-rates\/USD-GBP"
+                    }
+                }
+            }
+        ]
+    }
+}

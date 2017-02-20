@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Currency\Model;
 
+use Sylius\Component\Resource\Model\TimestampableTrait;
 use Webmozart\Assert\Assert;
 
 /**
@@ -18,6 +19,8 @@ use Webmozart\Assert\Assert;
  */
 class ExchangeRate implements ExchangeRateInterface
 {
+    use TimestampableTrait;
+
     /**
      * @var mixed
      */
@@ -37,6 +40,11 @@ class ExchangeRate implements ExchangeRateInterface
      * @var CurrencyInterface
      */
     protected $targetCurrency;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+    }
 
     /**
      * {@inheritdoc}
@@ -61,7 +69,7 @@ class ExchangeRate implements ExchangeRateInterface
      */
     public function setRatio($ratio)
     {
-        Assert::float($ratio);
+        Assert::nullOrFloat($ratio);
 
         $this->ratio = $ratio;
     }

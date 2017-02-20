@@ -9,8 +9,23 @@ Sylius\Component\Currency\Model\ExchangeRate:
         ratio:
             expose: true
             type: float
+            groups: [Default, Detailed]
         sourceCurrency:
             expose: true
+            groups: [Default, Detailed]
         targetCurrency:
             expose: true
-
+            groups: [Default, Detailed]
+        updatedAt:
+            expose: true
+            groups: [Default, Detailed]
+    relations:
+        - rel: self
+          href:
+            route: sylius_api_exchange_rate_show
+            parameters:
+                sourceCurrencyCode: expr(object.getSourceCurrency().getCode())
+                targetCurrencyCode: expr(object.getTargetCurrency().getCode())
+                version: 1
+            exclusion:
+                groups: [Default, Detailed]
