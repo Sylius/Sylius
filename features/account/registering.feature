@@ -19,6 +19,19 @@ Feature: Account registration
         Then I should be notified that new account has been successfully created
         But I should not be logged in
 
+    @ui @todo
+    Scenario: Registering a new account with minimum information when channel has disabled registration verification
+        Given on this channel registration verification is disabled
+        When I want to register a new account
+        And I specify the first name as "Saul"
+        And I specify the last name as "Goodman"
+        And I specify the email as "goodman@gmail.com"
+        And I specify the password as "heisenberg"
+        And I confirm this password
+        And I register this account
+        Then I should be notified that new account has been successfully created
+        And I should be logged in
+
     @ui
     Scenario: Registering a new account with all details
         When I want to register a new account
@@ -50,3 +63,16 @@ Feature: Account registration
         When I register with email "ghastly@bespoke.com" and password "suitsarelife"
         Then I should be notified that new account has been successfully created
         And a welcoming email should have been sent to "ghastly@bespoke.com"
+
+    @ui @email @todo
+    Scenario: Receiving a verification email after registration
+        When I register with email "ghastly@bespoke.com" and password "suitsarelife"
+        Then I should be notified that new account has been successfully created
+        And a verification email should have been sent to "ghastly@bespoke.com"
+
+    @ui @email @todo
+    Scenario: Not receiving a verification email after registration when channel has disabled registration verification
+        Given on this channel registration verification is disabled
+        When I register with email "ghastly@bespoke.com" and password "suitsarelife"
+        Then I should be notified that new account has been successfully created
+        And a verification email should not have been sent to "ghastly@bespoke.com"
