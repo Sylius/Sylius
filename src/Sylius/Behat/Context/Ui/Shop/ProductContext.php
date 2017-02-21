@@ -283,7 +283,7 @@ final class ProductContext implements Context
      */
     public function iShouldSeeTheProductWithPrice($productName, $productPrice)
     {
-        Assert::true($this->indexPage->isProductWithPriceOnList($productName, $productPrice));
+        Assert::same($this->indexPage->getProductPrice($productName), $productPrice);
     }
 
     /**
@@ -345,11 +345,29 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Then the first product on the list should have name :name and price :price
+     */
+    public function theFirstProductOnTheListShouldHaveNameAndPrice($name, $price)
+    {
+        Assert::same($this->indexPage->getFirstProductNameFromList(), $name);
+        Assert::same($this->indexPage->getProductPrice($name), $price);
+    }
+
+    /**
      * @Then the last product on the list should have name :name
      */
     public function theLastProductOnTheListShouldHaveName($name)
     {
         Assert::same($this->indexPage->getLastProductNameFromList(), $name);
+    }
+
+    /**
+     * @Then the last product on the list should have name :name and price :price
+     */
+    public function theLastProductOnTheListShouldHaveNameAndPrice($name, $price)
+    {
+        Assert::same($this->indexPage->getLastProductNameFromList(), $name);
+        Assert::same($this->indexPage->getProductPrice($name), $price);
     }
 
     /**

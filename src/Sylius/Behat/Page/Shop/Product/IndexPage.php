@@ -100,11 +100,11 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function isProductWithPriceOnList($productName, $productPrice)
+    public function getProductPrice($productName)
     {
         $container = $this->getDocument()->find('css', sprintf('.sylius-product-name:contains("%s")', $productName))->getParent();
 
-        return $productPrice === $container->find('css', '.sylius-product-price')->getText();
+        return $container->find('css', '.sylius-product-price')->getText();
     }
 
     /**
