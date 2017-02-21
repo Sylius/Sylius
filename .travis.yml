@@ -10,7 +10,9 @@ matrix:
         -
             sudo: required
             php: 7.1
-            env: SYLIUS_SUITE="application"
+            env:
+                - SYLIUS_SUITE="application"
+                - TRAVIS_NODE_VERSION="7.5"
             services:
                 - memcached
         -
@@ -24,19 +26,14 @@ matrix:
         -
             sudo: required
             php: 5.6
-            env: SYLIUS_SUITE="application"
+            env:
+                - SYLIUS_SUITE="application"
+                - TRAVIS_NODE_VERSION="7.5"
             services:
                 - memcached
-#        -
-#            sudo: false
-#            php: 5.6
-#            env: SYLIUS_SUITE="packages"
-#            addons:
-#                apt:
-#                    packages:
-#                        - parallel
 
 cache:
+    yarn: true
     directories:
         - ~/.composer/cache/files
         - ~/.cache/pip

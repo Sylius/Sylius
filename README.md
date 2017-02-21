@@ -25,8 +25,8 @@ $ wget http://getcomposer.org/composer.phar
 $ php composer.phar create-project -s beta sylius/sylius-standard project
 $ cd project
 $ php bin/console sylius:install
-$ npm install
-$ npm run gulp
+$ yarn install
+$ yarn run gulp
 $ php bin/console server:start
 $ open http://localhost:8000/
 ```
