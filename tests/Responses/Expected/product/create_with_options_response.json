@@ -6,10 +6,12 @@
     "variants": [],
     "options": [
         {
-            "code": "MUG_SIZE"
+            "code": "MUG_SIZE",
+            "values": []
         },
         {
-            "code": "MUG_COLOR"
+            "code": "MUG_COLOR",
+            "values": []
         }
     ],
     "associations": [],

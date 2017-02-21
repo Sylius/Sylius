@@ -3,8 +3,10 @@ Sylius\Component\Product\Model\ProductOption:
     xml_root_name: option
     properties:
         code:
-            exopse: true
-            type: string
-        name:
             expose: true
             type: string
+        values:
+            expose: true
+    virtual_properties:
+        getName:
+            serialized_name: name
