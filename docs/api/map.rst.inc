@@ -15,6 +15,7 @@
 * :doc:`/api/customers`
 * :doc:`/api/shipments`
 * :doc:`/api/shipping_categories`
+* :doc:`/api/shipping_methods`
 * :doc:`/api/payments`
 * :doc:`/api/promotions`
 * :doc:`/api/promotion_coupons`

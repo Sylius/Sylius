@@ -21,6 +21,7 @@ The REST API Reference
     customers
     shipments
     shipping_categories
+    shipping_methods
     payments
     promotions
     promotion_coupons
