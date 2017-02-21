@@ -4,11 +4,22 @@
 
 <div class="ui segment">
     {{ form_errors(form) }}
-    <div class="three fields">
+    <div class="two fields">
         {{ form_row(form.code) }}
-        {{ form_row(form.gateway) }}
         {{ form_row(form.position) }}
     </div>
+    <div class="two fields">
+        {{ form_row(form.gatewayConfig.factoryName) }}
+    </div>
+    <h4 class="ui dividing header">{{ 'sylius.ui.gateway_configuration'|trans }}</h4>
+    {% if form.gatewayConfig.config is defined %}
+        {% for field in form.gatewayConfig.config %}
+            {% if loop.index is odd %}<div class="two fields">{% endif %}
+            {{ form_row(field) }}
+            {% if loop.index is even %}</div>{% endif %}
+        {% endfor %}
+        {% if form.gatewayConfig.config|length is odd %}</div>{% endif %}
+    {% endif %}
     {{ form_row(form.enabled) }}
     <h4 class="ui dividing header">{{ 'sylius.ui.availability'|trans }}</h4>
     {{ form_row(form.channels) }}

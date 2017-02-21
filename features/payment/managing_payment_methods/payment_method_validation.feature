@@ -11,22 +11,31 @@ Feature: Payment method validation
 
     @ui
     Scenario: Trying to add a new payment method without specifying its code
-        Given I want to create a new payment method
+        Given I want to create a new payment method with "Paypal Express Checkout" gateway factory
         When I name it "Paypal Express Checkout" in "English (United States)"
         But I do not specify its code
-        And I choose "Paypal Express Checkout" gateway
         And I add it
         Then I should be notified that code is required
         And the payment method with name "Paypal Express Checkout" should not be added
 
     @ui
     Scenario: Trying to add a new payment method without specifying its name
-        Given I want to create a new payment method
+        Given I want to create a new payment method with "Paypal Express Checkout" gateway factory
         When I specify its code as "PEC"
-        And I choose "Paypal Express Checkout" gateway
         But I do not name it
         And I add it
         Then I should be notified that name is required
+        And the payment method with code "PEC" should not be added
+
+    @ui
+    Scenario: Trying to add a new paypal payment method without specifying required configuration
+        Given I want to create a new payment method with "Paypal Express Checkout" gateway factory
+        When I name it "Paypal Express Checkout" in "English (United States)"
+        And I specify its code as "PEC"
+        And I configure it for username "TEST" with "TEST" signature
+        But I do not specify configuration password
+        And I add it
+        Then I should be notified that I have to specify paypal password
         And the payment method with code "PEC" should not be added
 
     @ui

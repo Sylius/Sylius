@@ -342,6 +342,7 @@ sylius:
         fulfill: 'Fulfill'
         fulfilled: 'Fulfilled'
         gateway: 'Gateway'
+        gateway_configuration: 'Gateway configuration'
         general_info: 'General Info'
         general_settings: 'General Settings'
         generate: 'Generate'

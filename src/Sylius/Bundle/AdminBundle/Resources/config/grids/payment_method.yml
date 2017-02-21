@@ -26,11 +26,10 @@ sylius_grid:
                     label: sylius.ui.name
                     sortable: translation.name
                 gateway:
-                    type: twig
+                    type: string
+                    path: gatewayConfig.gatewayName
                     label: sylius.ui.gateway
                     sortable: ~
-                    options:
-                        template: "@SyliusUi/Grid/Field/label.html.twig"
                 enabled:
                     type: twig
                     label: sylius.ui.enabled
@@ -49,7 +48,7 @@ sylius_grid:
             actions:
                 main:
                     create:
-                        type: create
+                        type: create_payment_method
                 item:
                     update:
                         type: update

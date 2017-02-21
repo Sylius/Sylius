@@ -29,7 +29,6 @@ sylius:
         payment_method:
             description: Description
             enabled: Enabled?
-            gateway: Gateway
             instructions: Instructions
             name: Name
             position: Position

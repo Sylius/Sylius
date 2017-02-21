@@ -11,6 +11,8 @@
 
 * Route `sylius_admin_order_shipment_ship` has been added to have specific end point only for updating via http PUT method and `sylius_admin_partial_shipment_ship` route is only for rendering the form.
 * Rename any `sylius_admin_address_log_entry_index` usages to `sylius_admin_partial_log_entry_index`.
+* Changed the way how payment methods are created. Now you choose desired gateway first and configure payment method with it. All parameters that were previously configured in `yml` configuration file
+  are now managed for each payment method in the Admin panel.
 
 ### ApiBundle
 
@@ -134,6 +136,10 @@
   * `findOneBySlug(string $slug)` was removed and replaced with more specific
     `findOneByChannelAndSlug(ChannelInterface $channel, string $locale, string $slug)`.
 
+* Added `Payment::$gatewayConfig` property (with corresponding getter and setter) to allow dynamic gateways. Use it instead of old `Payment::$gateway` property.
+
+* Added custom `PaymentMethodFactory` with `createWithGateway($gatewayFactory)` method.
+
 ### Currency / CurrencyBundle
 
 * The following classes were removed due to being no longer used in current implementation:
@@ -222,6 +228,10 @@ After:
 * There were changes made with handling payment states:
     - *authorized* is treated as *processing*
     - *payedout* is treated as *refunded*
+
+* Removed `Payment::$gateway` property and corresponding methods.
+
+* Introduced `PaypalGatewayConfigurationType` and `StripeGatewayConfigurationType` for dynamic gateways configuration.
 
 ### Product / ProductBundle
 
@@ -325,6 +335,8 @@ These services will be generated automatically based on subject name.
       defaults:
           _controller: sylius.controller.shop.locale_switch:switchAction
   ```
+
+* Payum gateways configuration is now done in Admin panel. Don't use `yml` file to configure your custom gateways.
 
 ### Security
 

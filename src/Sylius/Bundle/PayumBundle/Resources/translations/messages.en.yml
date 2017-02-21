@@ -1,0 +1,16 @@
+sylius:
+    form:
+        gateway_config:
+            type: Type
+        gateway_configuration:
+            paypal:
+                password: Password
+                signature: Signature
+                username: Username
+            stripe:
+                publishable_key: Publishable key
+                secret_key: Secret key
+    payum_gateway_factory:
+        offline: Offline
+        paypal_express_checkout: Paypal express checkout
+        stripe_checkout: Stripe checkout

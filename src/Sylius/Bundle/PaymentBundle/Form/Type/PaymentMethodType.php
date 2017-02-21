@@ -13,9 +13,9 @@ namespace Sylius\Bundle\PaymentBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceTranslationsType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -32,9 +32,6 @@ final class PaymentMethodType extends AbstractResourceType
             ->add('translations', ResourceTranslationsType::class, [
                 'entry_type' => PaymentMethodTranslationType::class,
                 'label' => 'sylius.form.payment_method.name',
-            ])
-            ->add('gateway', PaymentGatewayChoiceType::class, [
-                'label' => 'sylius.form.payment_method.gateway',
             ])
             ->add('position', IntegerType::class, [
                 'required' => false,

@@ -51,9 +51,25 @@ final class PaymentMethodFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function payment_method_gateway_is_optional()
+    public function payment_method_gateway_name_is_optional()
     {
-        $this->assertConfigurationIsValid([['custom' => [['gateway' => 'online']]]], 'custom.*.gateway');
+        $this->assertConfigurationIsValid([['custom' => [['gatewayName' => 'Online']]]], 'custom.*.gatewayName');
+    }
+
+    /**
+     * @test
+     */
+    public function payment_method_gateway_factory_is_optional()
+    {
+        $this->assertConfigurationIsValid([['custom' => [['gatewayFactory' => 'offline']]]], 'custom.*.gatewayFactory');
+    }
+
+    /**
+     * @test
+     */
+    public function payment_method_gateway_configuration_is_optional()
+    {
+        $this->assertConfigurationIsValid([['custom' => [['gatewayConfig' => []]]]], 'custom.*.gatewayConfig');
     }
 
     /**

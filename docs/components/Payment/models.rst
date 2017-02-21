@@ -59,7 +59,7 @@ Every method of payment is represented by a **PaymentMethod** instance and has t
 +----------------------------+-----------------------------------------------------------------+
 | description                | Payment method's description                                    |
 +----------------------------+-----------------------------------------------------------------+
-| gateway                    | Payment method's gateway to use                                 |
+| gatewayConfig              | Payment method's gateway (and its configuration) to use         |
 +----------------------------+-----------------------------------------------------------------+
 | position                   | Payment method's position among other methods                   |
 +----------------------------+-----------------------------------------------------------------+
