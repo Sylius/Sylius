@@ -149,4 +149,15 @@ final class ChannelSpec extends ObjectBehavior
         $this->setSkippingShippingStepAllowed(true);
         $this->isSkippingShippingStepAllowed()->shouldReturn(true);
     }
+
+    function it_has_disabled_registration_verification_by_default()
+    {
+        $this->isDisabledRegistrationVerification()->shouldReturn(false);
+    }
+
+    function it_can_disable_registration_verification()
+    {
+        $this->setDisabledRegistrationVerification(true);
+        $this->isDisabledRegistrationVerification()->shouldReturn(true);
+    }
 }

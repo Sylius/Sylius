@@ -68,6 +68,11 @@ class Channel extends BaseChannel implements ChannelInterface
      */
     protected $skippingShippingStepAllowed = false;
 
+    /**
+     * @var bool
+     */
+    protected $disabledRegistrationVerification = false;
+
     public function __construct()
     {
         parent::__construct();
@@ -258,5 +263,21 @@ class Channel extends BaseChannel implements ChannelInterface
     public function setSkippingShippingStepAllowed($skippingShippingStepAllowed)
     {
         $this->skippingShippingStepAllowed = $skippingShippingStepAllowed;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isDisabledRegistrationVerification()
+    {
+        return $this->disabledRegistrationVerification;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDisabledRegistrationVerification($disabledRegistrationVerification)
+    {
+        $this->disabledRegistrationVerification = $disabledRegistrationVerification;
     }
 }

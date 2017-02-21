@@ -95,4 +95,14 @@ interface ChannelInterface extends
      * @param bool $skippingShippingStepAllowed
      */
     public function setSkippingShippingStepAllowed($skippingShippingStepAllowed);
+
+    /**
+     * @return bool
+     */
+    public function isDisabledRegistrationVerification();
+
+    /**
+     * @param bool $disabledRegistrationVerification
+     */
+    public function setDisabledRegistrationVerification($disabledRegistrationVerification);
 }
