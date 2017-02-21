@@ -95,7 +95,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
      */
     public function __toString()
     {
-        $string = $this->getProduct()->getName();
+        $string = (string) $this->getProduct()->getName();
 
         if (!$this->getOptionValues()->isEmpty()) {
             $string .= '(';
