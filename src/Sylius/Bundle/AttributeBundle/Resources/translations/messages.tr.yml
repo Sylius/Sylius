@@ -11,3 +11,4 @@ sylius:
             type: Türü
         attribute_type:
             configuration: Ayarlar
+            select: Ülke seçin

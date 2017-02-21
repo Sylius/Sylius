@@ -23,16 +23,16 @@ sylius:
             name: Emri
             roles: Funksionet
         channel:
-            taxonomies: Kategorizimet
+            currencies: Monedhat
+            currency_base: Valuta baze
+            hostname: Emri i hostit
             locale_default: Lokalizimi i parazgjedhur
             locales: Rajonet
-            currency_base: Valuta baze
-            currencies: Monedhat
-            shipping_methods: Mënyrat e dërgesës
             payment_methods: Mënyrat e pagesës
+            shipping_methods: Mënyrat e dërgesës
             tax_zone_default: Zona e paracakruar e taksimit
+            taxonomies: Kategorizimet
             theme: Tema
-            hostname: Emri i hostit
         image:
             file: Imazhi
         locale:

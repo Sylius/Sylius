@@ -18,6 +18,7 @@ sylius:
             datetime: Дата и время
             integer: Целое число
             percent: Процент
+            select: Выбрать
             text: Текст
             textarea: Текстовая область
             title: Тип атрибута
@@ -27,6 +28,8 @@ sylius:
                 format: Формат
             date:
                 format: Формат
+            select:
+                values: Значения
             text:
                 min: Минимальная длина
                 max: Максимальная длина

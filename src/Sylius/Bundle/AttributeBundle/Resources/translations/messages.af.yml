@@ -5,3 +5,5 @@ sylius:
     form:
         attribute:
             type: Tipe
+        attribute_type:
+            select: Kies

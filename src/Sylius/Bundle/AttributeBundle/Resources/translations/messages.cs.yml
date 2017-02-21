@@ -18,6 +18,7 @@ sylius:
             datetime: Datum a čas
             integer: Číslo
             percent: Procent
+            select: Vybrat
             text: Text
             textarea: Textové pole
             title: Typ atributu

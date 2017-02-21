@@ -25,17 +25,17 @@ sylius:
             name: Nume
             roles: Roluri
         channel:
-            taxonomies: Categorizări
+            currencies: Valute
+            currency_base: Monedă de bază
+            hostname: Hostname
             locale_default: Setări regionale implicite
             locales: Setări regionale
-            currency_base: Monedă de bază
-            currencies: Valute
-            shipping_methods: Metode de livrare
             payment_methods: Metode de plată
+            shipping_methods: Metode de livrare
             tax_calculation_strategy: Strategia de calculul impozitului
             tax_zone_default: Zona de taxă implicită
+            taxonomies: Categorizări
             theme: Tematica
-            hostname: Hostname
         image:
             type: Tip
             file: Imagine

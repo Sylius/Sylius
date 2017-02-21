@@ -25,18 +25,18 @@ sylius:
             name: Jméno
             roles: Role
         channel:
-            taxonomies: Taxonomie
+            contact_email: Kontaktní e-mail
+            currencies: Měny
+            currency_base: Základní měna
+            hostname: Hostname
             locale_default: Výchozí Jazyk
             locales: Lokalizace
-            contact_email: Kontaktní e-mail
-            currency_base: Základní měna
-            currencies: Měny
-            shipping_methods: Způsoby dopravy
             payment_methods: Způsoby platby
+            shipping_methods: Způsoby dopravy
             tax_calculation_strategy: Strategie výpočtu daně
             tax_zone_default: Výchozí sazba DPH
+            taxonomies: Taxonomie
             theme: Vzhled
-            hostname: Hostname
         image:
             type: Typ
             file: Obrázek

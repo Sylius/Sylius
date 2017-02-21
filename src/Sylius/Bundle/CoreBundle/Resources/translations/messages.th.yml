@@ -25,18 +25,18 @@ sylius:
             name: ชื่อ
             roles: Roles
         channel:
-            taxonomies: การจัดประเภท
+            contact_email: ติดต่ออีเมล์
+            currencies: สกุลเงิน
+            currency_base: ฐานสกุลเงิน
+            hostname: Hostname
             locale_default: ตำแหน่งที่ตั้งเริ่มต้น
             locales: ภาษาที่ใช้
-            contact_email: ติดต่ออีเมล์
-            currency_base: ฐานสกุลเงิน
-            currencies: สกุลเงิน
-            shipping_methods: วิธีการจัดส่ง
             payment_methods: วิธีการชำระเงิน
+            shipping_methods: วิธีการจัดส่ง
             tax_calculation_strategy: กลยุทธ์การคำนวณภาษี
             tax_zone_default: เขตภาษีเริ่มต้น
+            taxonomies: การจัดประเภท
             theme: ธีม
-            hostname: Hostname
         image:
             type: ชนิด
             file: รูปภาพ

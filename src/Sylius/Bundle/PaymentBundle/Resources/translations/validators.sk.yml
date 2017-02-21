@@ -22,6 +22,8 @@ sylius:
     payment:
         currency_code:
             not_valid: Zadaný kód meny nie je neplatný.
+        method:
+            not_blank: 'Vyberte prosím spôsob platby.'
     payment_method:
         gateway:
             not_blank: Prosím zvolťe spôsob platby.
@@ -39,4 +41,5 @@ sylius:
                 not_blank: Zadajte poplatok percentom.
         code:
             not_blank: 'Zadajte kód pre spôsob platby.'
+            regex: 'Kód spôsobu platby môže obsahovať iba písmená, čísla, pomlčky a znaky podčiarknutia.'
             unique: 'Spôsob platby s daným kódom už existuje.'

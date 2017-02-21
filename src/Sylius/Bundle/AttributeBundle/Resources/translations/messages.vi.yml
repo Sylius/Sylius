@@ -7,3 +7,5 @@ sylius:
             code: Mã
             name: Tên
             type: Phân loại
+        attribute_type:
+            select: Chọn

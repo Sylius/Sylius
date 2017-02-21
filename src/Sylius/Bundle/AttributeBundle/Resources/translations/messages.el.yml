@@ -9,3 +9,4 @@ sylius:
             type: Τύπος
         attribute_type:
             configuration: Παραμετροποίηση
+            select: Επιλέξτε

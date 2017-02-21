@@ -18,6 +18,7 @@ sylius:
             datetime: تاریخ و زمان
             integer: عددی
             percent: درصدی
+            select: انتخاب
             text: متنی
             textarea: متن طولانی
             title: انواع قابلیت
@@ -27,6 +28,8 @@ sylius:
                 format: فرمت تاریخ
             date:
                 format: فرمت تاریخ
+            select:
+                values: مقادیر
             text:
                 min: حداقل تعداد حروف
                 max: حداکثر تعداد حروف

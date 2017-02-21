@@ -18,6 +18,7 @@ sylius:
             datetime: Datum i vreme
             integer: Ceo broj
             percent: Procenat
+            select: Izaberite
             text: Тekst
             textarea: Polje za tekst
             title: Tip atributa

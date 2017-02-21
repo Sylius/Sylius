@@ -8,3 +8,4 @@ sylius:
         failed: 'Platbu sa nepodarilo dokončiť.'
         processing: 'Platba sa spracováva.'
         refunded: 'Platba bola úspešne refundovaná.'
+        unknown: 'Vyskytol sa neznámy problém s platbou.'

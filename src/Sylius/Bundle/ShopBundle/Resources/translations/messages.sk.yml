@@ -5,6 +5,7 @@ sylius:
     menu:
         shop:
             account:
+                address_book: 'Adresár'
                 change_password: 'Zmena hesla'
                 dashboard: 'Administračný panel'
                 header: 'Váš účet'

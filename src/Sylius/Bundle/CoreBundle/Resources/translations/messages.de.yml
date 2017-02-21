@@ -25,18 +25,18 @@ sylius:
             name: Name
             roles: Rollen
         channel:
-            taxonomies: Klassifizierungen
+            contact_email: Kontakt E-Mail
+            currencies: Währungen
+            currency_base: Basis-Währung
+            hostname: Server-Name
             locale_default: Standard Lokalisierung
             locales: Gebietsschemata
-            contact_email: Kontakt E-Mail
-            currency_base: Basis-Währung
-            currencies: Währungen
-            shipping_methods: Versandmethoden
             payment_methods: Zahlungsmethoden
+            shipping_methods: Versandmethoden
             tax_calculation_strategy: Steuerberechnungsgrundlage
             tax_zone_default: Standard Steuerzone
+            taxonomies: Klassifizierungen
             theme: Template
-            hostname: Server-Name
         image:
             type: Typ
             file: Foto

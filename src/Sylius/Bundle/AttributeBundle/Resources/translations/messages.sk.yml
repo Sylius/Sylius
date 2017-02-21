@@ -18,6 +18,7 @@ sylius:
             datetime: Dátum a čas
             integer: Číslo
             percent: Percento
+            select: Vyberte
             text: Text
             textarea: Textové pole
             title: Typy vlastností
@@ -27,6 +28,8 @@ sylius:
                 format: Formát
             date:
                 format: Formát
+            select:
+                values: Hodnoty
             text:
                 min: Min. dĺžka
                 max: Max dĺžka
