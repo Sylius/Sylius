@@ -73,6 +73,10 @@ final class ChannelTypeExtension extends AbstractTypeExtension
                 'label' => 'sylius.form.channel.skipping_shipping_step_allowed',
                 'required' => false,
             ])
+            ->add('disabledRegistrationVerification', CheckboxType::class, [
+                'label' => 'sylius.form.channel.disabled_registration_verification',
+                'required' => false,
+            ])
             ->addEventSubscriber(new AddBaseCurrencySubscriber())
             ->addEventSubscriber(new ChannelFormSubscriber())
         ;

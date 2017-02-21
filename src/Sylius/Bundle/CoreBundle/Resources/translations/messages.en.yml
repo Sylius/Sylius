@@ -25,6 +25,7 @@ sylius:
             contact_email: Contact email
             currencies: Currencies
             currency_base: Base currency
+            disabled_registration_verification: Disable registration verification?
             hostname: Hostname
             locale_default: Default locale
             locales: Locales
