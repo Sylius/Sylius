@@ -26,6 +26,7 @@ The REST API Reference
     promotions
     promotion_coupons
     taxons
+    tax_categories
     tax_rates
 
 .. include:: /api/map.rst.inc
