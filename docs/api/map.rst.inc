@@ -7,6 +7,7 @@
 * :doc:`/api/checkouts`
 * :doc:`/api/countries`
 * :doc:`/api/currencies`
+* :doc:`/api/payment_methods`
 * :doc:`/api/products`
 * :doc:`/api/product_attributes`
 * :doc:`/api/product_options`

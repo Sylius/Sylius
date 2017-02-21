@@ -13,6 +13,7 @@ The REST API Reference
     checkouts
     countries
     currencies
+    payment_methods
     products
     product_attributes
     product_options
