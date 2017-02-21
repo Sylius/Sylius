@@ -23,6 +23,7 @@ The REST API Reference
     shipping_categories
     payments
     promotions
+    promotion_coupons
     taxons
 
 .. include:: /api/map.rst.inc

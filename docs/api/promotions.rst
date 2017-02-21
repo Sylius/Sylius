@@ -78,7 +78,7 @@ Definition
 +===============+================+======================================+
 | Authorization | header         | Token received during authentication |
 +---------------+----------------+--------------------------------------+
-| code          | url attribute  | Code of requested promotion          |
+| code          | url attribute  | Code of requested promotion  |
 +---------------+----------------+--------------------------------------+
 
 Example

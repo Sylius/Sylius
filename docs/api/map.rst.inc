@@ -17,4 +17,5 @@
 * :doc:`/api/shipping_categories`
 * :doc:`/api/payments`
 * :doc:`/api/promotions`
+* :doc:`/api/promotion_coupons`
 * :doc:`/api/taxons`
