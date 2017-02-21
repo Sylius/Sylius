@@ -1,0 +1,13 @@
+Sylius\Component\Core\Model\ChannelPricing:
+    exclusion_policy: ALL
+    xml_root_name: channel
+    properties:
+        channel:
+            expose: true
+            groups: [Default, Detailed]
+        price:
+            expose: true
+            groups: [Default, Detailed]
+        productVariant:
+            expose: true
+            groups: [Default, Detailed]

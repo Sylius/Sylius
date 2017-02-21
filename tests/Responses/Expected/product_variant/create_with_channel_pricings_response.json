@@ -14,7 +14,6 @@
     "tracked": false,
     "channel_pricings": [
         {
-            "id": @integer@,
             "channel": {
                 "id": @integer@,
                 "code": "WEB",
@@ -35,7 +34,6 @@
             "price": 124300
         },
         {
-            "id": @integer@,
             "channel": {
                 "id": @integer@,
                 "code": "MOB",

@@ -9,6 +9,7 @@ sylius_api_checkout_show:
         _controller: sylius.controller.order:showAction
         _sylius:
             serialization_version: $version
+            serialization_groups: [Detailed]
 
 sylius_api_checkout_addressing:
     path: /addressing/{orderId}
@@ -30,8 +31,6 @@ sylius_api_checkout_available_shipping_methods:
     methods: [GET]
     defaults:
         _controller: sylius.controller.show_available_shipping_methods:showAction
-        _sylius:
-            serialization_version: $version
 
 sylius_api_checkout_select_shipping:
     path: /select-shipping/{orderId}
@@ -53,8 +52,6 @@ sylius_api_checkout_available_payment_methods:
     methods: [GET]
     defaults:
         _controller: sylius.controller.show_available_payment_methods:showAction
-        _sylius:
-            serialization_version: $version
 
 sylius_api_checkout_select_payment:
     path: /select-payment/{orderId}

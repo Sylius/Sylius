@@ -1,235 +1,370 @@
-Checkouts API
-=============
+Checkout API
+============
+
+These endpoints will allow you to go through the order checkout from the admin perspective. It can be useful for integrations with tools like `Twillo <https://www.twilio.com/docs/>`_ or an inspiration for your custom Shop API.
+Base URI is `/api/v1/checkouts/`.
 
 After you create a cart (an empty order) and add some items to it, you can start the checkout via API.
 This basically means updating the order with concrete information, step by step, in a correct order.
 
-Default Sylius checkout via API is constructed from the following steps:
+Sylius checkout flow is built from 4 steps, which have to be done in a certain order (unless you will customize it).
 
-addressing
-    You enter customer shipping and billing address
-shipping
-    Shipments are proposed and you can select methods
-payment
-    Payments are calculated and methods proposed
-finalize
-    Final order is built and you can confirm it, cart will become an order
-purchase
-    You provide Sylius with payment information and order is paid
++------------+---------------------------------------------------------+
+| Step       | Description                                             |
++============+=========================================================+
+| addressing | Shipping and billing addresses are assigned to the cart |
++------------+---------------------------------------------------------+
+| shipping   | Choosing a shipping method from the available ones      |
++------------+---------------------------------------------------------+
+| payment    | Choosing a payment method from the available ones       |
++------------+---------------------------------------------------------+
+| finalize   | The order is built and its data can be confirmed        |
++------------+---------------------------------------------------------+
 
-Sylius API endpoint is ``/api/v1/checkouts``.
+.. tip::
+
+    If you are not familiar with the concept of checkout in Sylius, please carefully read :doc:`this article </book/orders/checkout>` first.
+
+.. note::
+
+    We do not present the order serialization in this chapter, because it is the same order serialization as described in :doc:`the article about orders </api/orders>`.
 
 Addressing step
 ---------------
 
 After you added some items to the cart, to start the checkout you simply need to provide a shipping address. You can also specify a different billing address if needed.
 
-You need to pass order id in the following url and make a PUT call:
+Definition
+^^^^^^^^^^
 
 .. code-block:: text
 
-    PUT /api/v1/checkouts/44
+    PUT /api/v1/checkouts/addressing/{id}
 
-Parameters
-~~~~~~~~~~
++------------------------------+----------------+-----------------------------------------------------------------------------------------------------+
+| Parameter                    | Parameter type | Description                                                                                         |
++==============================+================+=====================================================================================================+
+| Authorization                | header         | Token received during authentication                                                                |
++------------------------------+----------------+-----------------------------------------------------------------------------------------------------+
+| id                           | url attribute  | Id of the requested cart                                                                            |
++------------------------------+----------------+-----------------------------------------------------------------------------------------------------+
+| different_billing_address    | request        | If false, the billing address fields are not required and data from the shipping address is copied  |
++------------------------------+----------------+-----------------------------------------------------------------------------------------------------+
+| shipping_address[first_name] | request        | First name for the shipping address                                                                 |
++------------------------------+----------------+-----------------------------------------------------------------------------------------------------+
+| shipping_address[last_name]  | request        | Last name for the shipping address                                                                  |
++------------------------------+----------------+-----------------------------------------------------------------------------------------------------+
+| shipping_address[city]       | request        | City name                                                                                           |
++------------------------------+----------------+-----------------------------------------------------------------------------------------------------+
+| shipping_address[postcode]   | request        | Postcode                                                                                            |
++------------------------------+----------------+-----------------------------------------------------------------------------------------------------+
+| shipping_address[street]     | request        | Street                                                                                              |
++------------------------------+----------------+-----------------------------------------------------------------------------------------------------+
+| shipping_address[country]    | request        | Id of the country                                                                                   |
++------------------------------+----------------+-----------------------------------------------------------------------------------------------------+
+| shipping_address[province]   | request        | *(optional)* Id of the province                                                                     |
++------------------------------+----------------+-----------------------------------------------------------------------------------------------------+
+| billing_address[first_name]  | request        | *(optional)* First name for the billing address                                                     |
++------------------------------+----------------+-----------------------------------------------------------------------------------------------------+
+| billing_address[last_name]   | request        | *(optional)* Last name for the billing address                                                      |
++------------------------------+----------------+-----------------------------------------------------------------------------------------------------+
+| billing_address[city]        | request        | *(optional)* City name                                                                              |
++------------------------------+----------------+-----------------------------------------------------------------------------------------------------+
+| billing_address[postcode]    | request        | *(optional)* Postcode                                                                               |
++------------------------------+----------------+-----------------------------------------------------------------------------------------------------+
+| billing_address[street]      | request        | *(optional)* Street                                                                                 |
++------------------------------+----------------+-----------------------------------------------------------------------------------------------------+
+| billing_address[country]     | request        | *(optional)* Id of the country                                                                      |
++------------------------------+----------------+-----------------------------------------------------------------------------------------------------+
+| billing_address[province]    | request        | *(optional)* Id of the province                                                                     |
++------------------------------+----------------+-----------------------------------------------------------------------------------------------------+
 
-shipping_address[first_name]
-    Firstname for shipping address
-shipping_address[last_name]
-    Lastname for shipping address
-shipping_address[city]
-    City name
-shipping_address[postcode]
-    Postcode
-shipping_address[street]
-    Address line 1
-shipping_address[country]
-    Id of the country
-shipping_address[province] *(optional)*
-    Id of the province
+.. note::
 
-If you do not specify the billing address block, shipping address will be used for that purpose.
+    Remember a cart with `id = 21` :doc:`for the Cart API documentation </api/carts>`? We will take the same cart as an exemplary cart for checkout process.
 
-billing_address[first_name]
-    Firstname for billing address
-billing_address[last_name]
-    Lastname for billing address
-billing_address[city]
-    City name
-billing_address[postcode]
-    Postcode
-billing_address[street]
-    Address line 1
-billing_address[country]
-    Id of the country
-billing_address[province] *(optional)*
-    Id of the province
+Example
+^^^^^^^
 
-Response
-~~~~~~~~
+To address the cart for a user that lives in ``Los Angeles`` in the United States, the following snippet can be used:
 
-The response will contain the updated order information.
+.. code-block:: bash
+
+    $ curl http://demo.sylius.org/api/v1/checkouts/addressing/21 \
+        -H "Authorization: Bearer SampleToken" \
+        -H "Content-Type: application/json" \
+        -X PUT \
+        --data '
+            {
+                "shipping_address": {
+                    "first_name": "Elon",
+                    "last_name": "Musk",
+                    "street": "10941 Savona Rd",
+                    "country_code": "US",
+                    "city": "’Los Angeles",
+                    "postcode": "CA 90077"
+                },
+                "different_billing_address": false
+            }
+        '
+
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
-    STATUS: 200 OK
+    STATUS: 204 No Content
+
+Now you can check the state of the order, by asking for the checkout summary:
+
+Example
+^^^^^^^
+
+To check the checkout process state for the cart with `id = 21`, we need to execute this command:
+
+.. code-block:: bash
+
+    $ curl http://demo.sylius.org/api/v1/checkouts/21 \
+        -H "Authorization: Bearer SampleToken" \
+        -H "Accept: application/json"
+
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
+
+.. code-block:: text
+
+    STATUS: 200 Ok
 
 .. code-block:: json
 
     {
-        "adjustments": ,
-        "adjustments_total": -250,
-        "shipping_address": {
-            "_links": {
-                "country": {
-                    "href": "/app_dev.php/api/v1/countries/9"
+        "id":21,
+        "items":[
+            {
+                "id":74,
+                "quantity":1,
+                "unit_price":100000,
+                "total":100000,
+                "units":[
+                    {
+                        "id":228,
+                        "adjustments":[
+                        ],
+                        "adjustments_total":0
+                    }
+                ],
+                "units_total":100000,
+                "adjustments":[
+                ],
+                "adjustments_total":0,
+                "variant":{
+                    "id":331,
+                    "code":"MEDIUM_MUG_CUP",
+                    "option_values":[
+                        {
+                            "code":"mug_type_medium"
+                        }
+                    ],
+                    "position":2,
+                    "translations":{
+                        "en_US":{
+                        }
+                    },
+                    "on_hold":0,
+                    "on_hand":10,
+                    "tracked":false,
+                    "channel_pricings":[
+                        {
+                            "channel":{
+                                "id":1,
+                                "code":"US_WEB",
+                                "name":"US Web Store",
+                                "hostname":"localhost",
+                                "color":"MediumPurple",
+                                "created_at":"2017-02-14T11:10:02+0100",
+                                "updated_at":"2017-02-14T11:10:02+0100",
+                                "enabled":true,
+                                "tax_calculation_strategy":"order_items_based",
+                                "_links":{
+                                    "self":{
+                                        "href":"\/api\/v1\/channels\/1"
+                                    }
+                                }
+                            },
+                            "price":100000
+                        }
+                    ]
+                },
+                "_links":{
+                    "product":{
+                        "href":"\/api\/v1\/products\/5"
+                    },
+                    "variant":{
+                        "href":"\/api\/v1\/products\/5\/variants\/331"
+                    }
                 }
+            }
+        ],
+        "items_total":100000,
+        "adjustments":[
+            {
+                "id":249,
+                "type":"shipping",
+                "label":"UPS",
+                "amount":8787
+            }
+        ],
+        "adjustments_total":8787,
+        "total":108787,
+        "state":"cart",
+        "customer":{
+            "id":1,
+            "email":"shop@example.com",
+            "email_canonical":"shop@example.com",
+            "first_name":"John",
+            "last_name":"Doe",
+            "gender":"u",
+            "user":{
+                "id":1,
+                "username":"shop@example.com",
+                "username_canonical":"shop@example.com",
+                "roles":[
+                    "ROLE_USER"
+                ],
+                "enabled":true
             },
-            "city": "New York",
-            "created_at": "2014-12-15T13:37:28+0000",
-            "first_name": "John",
-            "id": 105,
-            "last_name": "Doe",
-            "postcode": "12435",
-            "street": "Test",
-            "updated_at": "2014-12-15T13:37:29+0000"
-        },
-        "billing_address": {
-            "_links": {
-                "country": {
-                    "href": "/app_dev.php/api/v1/countries/9"
+            "_links":{
+                "self":{
+                    "href":"\/api\/v1\/customers\/1"
                 }
-            },
-            "city": "New York",
-            "created_at": "2014-12-15T13:37:28+0000",
-            "first_name": "John",
-            "id": 106,
-            "last_name": "Doe",
-            "postcode": "12435",
-            "street": "Test",
-            "updated_at": "2014-12-15T13:37:29+0000"
+            }
         },
-        "channel": {
-            "_links": {
-                "self": {
-                    "href": "/app_dev.php/api/v1/channels/3"
+        "channel":{
+            "id":1,
+            "code":"US_WEB",
+            "name":"US Web Store",
+            "hostname":"localhost",
+            "color":"MediumPurple",
+            "created_at":"2017-02-14T11:10:02+0100",
+            "updated_at":"2017-02-14T11:10:02+0100",
+            "enabled":true,
+            "tax_calculation_strategy":"order_items_based",
+            "_links":{
+                "self":{
+                    "href":"\/api\/v1\/channels\/1"
                 }
-            },
-            "code": "WEB-US",
-            "color": "Pink",
-            "created_at": "2014-12-03T09:54:28+0000",
-            "enabled": true,
-            "id": 3,
-            "name": "United States Webstore",
-            "type": "web",
-            "updated_at": "2014-12-03T09:58:29+0000"
+            }
         },
-        "checkout_state": "addressing",
-        "comments": [],
-        "confirmed": true,
-        "created_at": "2014-12-15T13:15:22+0000",
-        "email": "xschaefer@example.com",
-        "expires_at": "2014-12-15T16:15:22+0000",
-        "id": 52,
-        "items": [],
-        "items_total": 1500000,
-        "payments": [],
-        "shipments": [],
-        "state": "cart",
-        "total": 1499750,
-        "updated_at": "2014-12-15T13:37:29+0000",
-        "user": {
-            "credentials_expired": false,
-            "email": "xschaefer@example.com",
-            "email_canonical": "xschaefer@example.com",
-            "enabled": true,
-            "expired": false,
-            "group": [],
-            "id": 5,
-            "locked": false,
-            "roles": [],
-            "username": "xschaefer@example.com",
-            "username_canonical": "xschaefer@example.com"
-        }
+        "shipping_address":{
+            "first_name":"Elon",
+            "last_name":"Musk",
+            "country_code":"US",
+            "street":"10941 Savona Rd",
+            "city":"\u2019Los Angeles",
+            "postcode":"CA 90077"
+        },
+        "billing_address":{
+            "first_name":"Elon",
+            "last_name":"Musk",
+            "country_code":"US",
+            "street":"10941 Savona Rd",
+            "city":"\u2019Los Angeles",
+            "postcode":"CA 90077"
+        },
+        "payments":[
+            {
+                "id":21,
+                "method":{
+                    "id":1,
+                    "code":"cash_on_delivery"
+                },
+                "amount":108787,
+                "state":"cart"
+            }
+        ],
+        "shipments":[
+            {
+                "id":21,
+                "state":"cart",
+                "method":{
+                    "code":"ups",
+                    "enabled":true
+                }
+            }
+        ],
+        "currency_code":"USD",
+        "locale_code":"en_US",
+        "checkout_state":"addressed"
     }
 
+Of course, you can specify different shipping and billing addresses. If our user Elon would like to send a gift to the NASA administrator, Frederick D. Gregory, he could send the following request:
+
+.. code-block:: bash
+
+    $ curl http://demo.sylius.org/api/v1/checkouts/addressing/21 \
+        -H "Authorization: Bearer SampleToken" \
+        -H "Content-Type: application/json" \
+        -X PUT \
+        --data '
+            {
+                "shipping_address": {
+                    "first_name": " Frederick D.",
+                    "last_name": "Gregory",
+                    "street": "300 E St SW",
+                    "country_code": "US",
+                    "city": "’Washington",
+                    "postcode": "DC 20546"
+                },
+                "different_billing_address": true,
+                "billing_address": {
+                    "first_name": "Elon",
+                    "last_name": "Musk",
+                    "street": "10941 Savona Rd",
+                    "country_code": "US",
+                    "city": "’Los Angeles",
+                    "postcode": "CA 90077"
+                }
+            }
+        '
+
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
+
+.. code-block:: text
+
+    STATUS: 204 No Content
 
 Shipping step
 -------------
 
-When order contains the address information, we are able to determine the stock locations and available shipping methods.
-You can get these informations by first calling a GET request on the checkout unique URL.
+When the order contains the address information, we are able to determine the available shipping methods.
+First, we need to get the available shipping methods to have our choice list:
+
+Definition
+^^^^^^^^^^
 
 .. code-block:: text
 
-    GET /api/v1/checkouts/44
+    GET /api/v1/checkouts/select-shipping/{id}
 
-.. code-block:: text
++---------------+----------------+--------------------------------------+
+| Parameter     | Parameter type | Description                          |
++===============+================+======================================+
+| Authorization | header         | Token received during authentication |
++---------------+----------------+--------------------------------------+
+| id            | url attribute  | Id of the requested cart             |
++---------------+----------------+--------------------------------------+
 
-    STATUS: 200 OK
+Example
+^^^^^^^
 
-.. code-block:: json
+To check available shipping methods for the previously addressed cart, you can use the following command:
 
-    [
-        {
-            "methods": [
-                {
-                    "_links": {
-                        "self": {
-                            "href": "/app_dev.php/api/v1/shipping-methods/4"
-                        },
-                        "zone": {
-                            "href": "/app_dev.php/api/v1/zones/4"
-                        }
-                    },
-                    "calculator": "flexible_rate",
-                    "category_requirement": 1,
-                    "configuration": {
-                        "additional_item_cost": 500,
-                        "additional_item_limit": 10,
-                        "first_item_cost": 4000
-                    },
-                    "created_at": "2014-12-03T09:54:28+0000",
-                    "enabled": true,
-                    "id": 4,
-                    "name": "FedEx World Shipping",
-                    "updated_at": "2014-12-03T09:54:28+0000"
-                }
-            ],
-            "shipment": {
-                "_links": {
-                    "order": {
-                        "href": "/app_dev.php/api/v1/orders/52"
-                    }
-                },
-                "created_at": "2014-12-15T14:11:32+0000",
-                "state": "checkout"
-            }
-        }
-    ]
+.. code-block:: bash
 
-Response contains the proposed shipments and for each, it also has a list of shipping methods available.
-
-Next step is updating the order with the types of shipping method that we have selected.
-To do so, you need to call another PUT request, but this time with different set of parameters.
-
-You need to pass an id of shipping method for every id, you should obtain them in the previous request.
-
-.. code-block:: text
-
-    PUT /api/v1/checkouts/44
-
-Parameters
-~~~~~~~~~~
-
-shipments[X][method]
-    The id of the shipping method, where X is the shipment number.
-    Leave empty to add new
-
-Response
-~~~~~~~~
-
-Response will contain an updated order information.
+    $ curl http://demo.sylius.org/api/v1/checkouts/select-shipping/21 \
+        -H "Authorization: Bearer SampleToken" \
+        -H "Content-Type: application/json"
 
 .. code-block:: text
 
@@ -238,185 +373,293 @@ Response will contain an updated order information.
 .. code-block:: json
 
     {
-        "adjustments": {
-        },
-        "adjustments_total": 4750,
-        "billing_address": {
-        },
-        "channel": {
-        },
-        "checkout_state": "shipping",
-        "comments": [],
-        "confirmed": true,
-        "created_at": "2014-12-15T13:15:22+0000",
-        "email": "xschaefer@example.com",
-        "expires_at": "2014-12-15T16:15:22+0000",
-        "id": 52,
-        "items": [
-        ],
-        "items_total": 1500000,
-        "payments": [],
-        "shipments": [
+        "shipments":[
             {
-                "_links": {
-                    "method": {
-                        "href": "/app_dev.php/api/v1/shipping-methods/4"
+                "methods":[
+                    {
+                        "id":1,
+                        "code":"ups",
+                        "name":"UPS",
+                        "description":"Dolorem consequatur itaque neque non voluptas dolor.",
+                        "price":8787
                     },
-                    "order": {
-                        "href": "/app_dev.php/api/v1/orders/52"
+                    {
+                        "id":2,
+                        "code":"dhl_express",
+                        "name":"DHL Express",
+                        "description":"Voluptatem ipsum dolor vitae corrupti eum repellat.",
+                        "price":3549
                     },
-                    "self": {
-                        "href": "/app_dev.php/api/v1/shipments/51"
+                    {
+                        "id":3,
+                        "code":"fedex",
+                        "name":"FedEx",
+                        "description":"Qui nostrum minus accusantium molestiae voluptatem eaque.",
+                        "price":3775
                     }
-                },
-                "created_at": "2014-12-15T14:30:40+0000",
-                "id": 51,
-                "method": {
-                    "_links": {
-                        "self": {
-                            "href": "/app_dev.php/api/v1/shipping-methods/4"
-                        },
-                        "zone": {
-                            "href": "/app_dev.php/api/v1/zones/4"
-                        }
-                    },
-                    "calculator": "flexible_rate",
-                    "category_requirement": 1,
-                    "configuration": {
-                        "additional_item_cost": 500,
-                        "additional_item_limit": 10,
-                        "first_item_cost": 4000
-                    },
-                    "created_at": "2014-12-03T09:54:28+0000",
-                    "enabled": true,
-                    "id": 4,
-                    "name": "FedEx World Shipping",
-                    "updated_at": "2014-12-03T09:54:28+0000"
-                },
-                "state": "checkout",
-                "updated_at": "2014-12-15T14:30:41+0000"
+                ]
             }
-        ],
-        "shipping_address": {
-        },
-        "state": "cart",
-        "total": 1504750,
-        "updated_at": "2014-12-15T14:30:41+0000",
-        "user": {
-        }
+        ]
     }
 
+The response contains proposed shipments and for each of them, it has a list of the available shipping methods alongside their calculated prices.
+
+.. warning::
+
+    Because of the custom calculation logic, the regular rules of overriding do not apply for this endpoint.
+    In order to have a different response, you have to provide a custom controller and build the message on your own.
+    Exemplary implementation can be found `here <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/ApiBundle/Controller/ShowAvailableShippingMethodsController.php>`__
+
+Next step is updating the order with the types of shipping methods that have been selected. A PUT request has to be send for each available shipment.
+
+Definition
+^^^^^^^^^^
+
+.. code-block:: text
+
+    PUT /api/v1/checkouts/select-shipping/{id}
+
++------------------------+----------------+----------------------------------------------------------------------------------------------+
+| Parameter              | Parameter type | Description                                                                                  |
++========================+================+==============================================================================================+
+| Authorization          | header         | Token received during authentication                                                         |
++------------------------+----------------+----------------------------------------------------------------------------------------------+
+| id                     | url attribute  | Id of the requested cart                                                                     |
++------------------------+----------------+----------------------------------------------------------------------------------------------+
+| shipments[X]['method'] | request        | Code of the chosen shipping method (Where X is the number of shipment in the returned array) |
++------------------------+----------------+----------------------------------------------------------------------------------------------+
+
+Example
+^^^^^^^
+
+To choose the `DHL Express` method for our shipment (the cheapest one), we can use the following snippet:
+
+.. code-block:: bash
+
+    $ curl http://demo.sylius.org/api/v1/checkouts/select-shipping/21 \
+        -H "Authorization: Bearer SampleToken" \
+        -H "Content-Type: application/json" \
+        -X PUT \
+        --data '
+            {
+                "shipments": [
+                    {
+                        "method": "dhl_express"
+                    }
+                ]
+            }
+        '
+
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
+
+.. code-block:: text
+
+    STATUS: 204 No Content
+
+While checking for the checkout process state of the cart with `id = 21`, you will get the following response:
+
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
+
+.. code-block:: text
+
+    STATUS: 200 Ok
+
+    {
+        "id":21,
+        "items":[
+            {
+                "id":74,
+                "quantity":1,
+                "unit_price":100000,
+                "total":100000,
+                "units":[
+                    {
+                        "id":228,
+                        "adjustments":[
+                        ],
+                        "adjustments_total":0
+                    }
+                ],
+                "units_total":100000,
+                "adjustments":[
+                ],
+                "adjustments_total":0,
+                "variant":{
+                    "id":331,
+                    "code":"MEDIUM_MUG_CUP",
+                    "option_values":[
+                        {
+                            "code":"mug_type_medium"
+                        }
+                    ],
+                    "position":2,
+                    "translations":{
+                        "en_US":{
+                        }
+                    },
+                    "on_hold":0,
+                    "on_hand":10,
+                    "tracked":false,
+                    "channel_pricings":[
+                        {
+                            "channel":{
+                                "id":1,
+                                "code":"US_WEB",
+                                "name":"US Web Store",
+                                "hostname":"localhost",
+                                "color":"MediumPurple",
+                                "created_at":"2017-02-14T11:10:02+0100",
+                                "updated_at":"2017-02-14T11:10:02+0100",
+                                "enabled":true,
+                                "tax_calculation_strategy":"order_items_based",
+                                "_links":{
+                                    "self":{
+                                        "href":"\/api\/v1\/channels\/1"
+                                    }
+                                }
+                            },
+                            "price":100000
+                        }
+                    ]
+                },
+                "_links":{
+                    "product":{
+                        "href":"\/api\/v1\/products\/5"
+                    },
+                    "variant":{
+                        "href":"\/api\/v1\/products\/5\/variants\/331"
+                    }
+                }
+            }
+        ],
+        "items_total":100000,
+        "adjustments":[
+            {
+                "id":251,
+                "type":"shipping",
+                "label":"DHL Express",
+                "amount":3549
+            }
+        ],
+        "adjustments_total":3549,
+        "total":103549,
+        "state":"cart",
+        "customer":{
+            "id":1,
+            "email":"shop@example.com",
+            "email_canonical":"shop@example.com",
+            "first_name":"John",
+            "last_name":"Doe",
+            "gender":"u",
+            "user":{
+                "id":1,
+                "username":"shop@example.com",
+                "username_canonical":"shop@example.com",
+                "roles":[
+                    "ROLE_USER"
+                ],
+                "enabled":true
+            },
+            "_links":{
+                "self":{
+                    "href":"\/api\/v1\/customers\/1"
+                }
+            }
+        },
+        "channel":{
+            "id":1,
+            "code":"US_WEB",
+            "name":"US Web Store",
+            "hostname":"localhost",
+            "color":"MediumPurple",
+            "created_at":"2017-02-14T11:10:02+0100",
+            "updated_at":"2017-02-14T11:10:02+0100",
+            "enabled":true,
+            "tax_calculation_strategy":"order_items_based",
+            "_links":{
+                "self":{
+                    "href":"\/api\/v1\/channels\/1"
+                }
+            }
+        },
+        "shipping_address":{
+            "first_name":"Frederick D.",
+            "last_name":"Gregory",
+            "country_code":"US",
+            "street":"300 E St SW",
+            "city":"\u2019Washington",
+            "postcode":"DC 20546"
+        },
+        "billing_address":{
+            "first_name":"Frederick D.",
+            "last_name":"Gregory",
+            "country_code":"US",
+            "street":"300 E St SW",
+            "city":"\u2019Washington",
+            "postcode":"DC 20546"
+        },
+        "payments":[
+            {
+                "id":21,
+                "method":{
+                    "id":1,
+                    "code":"cash_on_delivery"
+                },
+                "amount":103549,
+                "state":"cart"
+            }
+        ],
+        "shipments":[
+            {
+                "id":21,
+                "state":"cart",
+                "method":{
+                    "code":"dhl_express",
+                    "enabled":true
+                }
+            }
+        ],
+        "currency_code":"USD",
+        "locale_code":"en_US",
+        "checkout_state":"shipping_selected"
+    }
 
 Payment step
 ------------
 
 When we are done with shipping choices and we know the final price of an order, we can select a payment method.
 
-To obtain a list of available payment methods for this order, simply call a GET request again:
+Definition
+^^^^^^^^^^
 
 .. code-block:: text
 
-    GET /api/v1/checkouts/44
+    GET /api/v1/checkouts/select-payment/{id}
 
-.. code-block:: text
++---------------+----------------+--------------------------------------+
+| Parameter     | Parameter type | Description                          |
++===============+================+======================================+
+| Authorization | header         | Token received during authentication |
++---------------+----------------+--------------------------------------+
+| id            | url attribute  | Id of the requested cart             |
++---------------+----------------+--------------------------------------+
 
-    STATUS: 200 OK
+.. warning::
 
-.. code-block:: json
+    Similar to the shipping step, this one has its own controller, which has to be replaced if you want to make some changes. Exemplary implementation can be found `here <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/ApiBundle/Controller/ShowAvailablePaymentMethodsController.php>`__
 
-    {
-        "methods": {
-            "1": {
-                "_links": {
-                    "self": {
-                        "href": "/app_dev.php/api/v1/payment-methods/1"
-                    }
-                },
-                "id": 1,
-                "code": "dummy",
-                "created_at": "2014-12-03T09:54:28+0000",
-                "updated_at": "2014-12-03T09:54:28+0000"
-            },
-            "2": {
-                "_links": {
-                    "self": {
-                        "href": "/app_dev.php/api/v1/payment-methods/2"
-                    }
-                },
-                "id": 2,
-                "code": "paypal_express_checkout",
-                "created_at": "2014-12-03T09:54:28+0000",
-                "updated_at": "2014-12-03T09:54:28+0000"
-            },
-            "3": {
-                "_links": {
-                    "self": {
-                        "href": "/app_dev.php/api/v1/payment-methods/3"
-                    }
-                },
-                "id": 3,
-                "code": "stripe",
-                "created_at": "2014-12-03T09:54:28+0000",
-                "updated_at": "2014-12-03T09:54:28+0000"
-            },
-            "4": {
-                "_links": {
-                    "self": {
-                        "href": "/app_dev.php/api/v1/payment-methods/4"
-                    }
-                },
-                "id": 4,
-                "code": "be_2_bill",
-                "created_at": "2014-12-03T09:54:28+0000",
-                "updated_at": "2014-12-03T09:54:28+0000"
-            },
-            "5": {
-                "_links": {
-                    "self": {
-                        "href": "/app_dev.php/api/v1/payment-methods/5"
-                    }
-                },
-                "id": 5,
-                "code": "stripe_checkout",
-                "created_at": "2014-12-03T09:54:28+0000",
-                "updated_at": "2014-12-03T09:54:28+0000"
-            }
-        },
-        "payment": {
-            "_links": {
-                "self": {
-                  "href": "/app_dev.php/api/v1/payments/2"
-                },
-                "order": {
-                    "href": "/app_dev.php/api/v1/orders/52"
-                }
-            },
-            "id": 2,
-            "amount": 1504750,
-            "created_at": "2014-12-15T14:57:28+0000",
-            "updated_at": "2014-12-15T14:57:28+0000",
-            "state": "new"
-        }
-    }
+Example
+^^^^^^^
 
+To check available payment methods for the cart that has a shipping methods assigned, we need to execute this curl command:
 
-With that information, another PUT request with the id of payment method is enough to proceed:
+.. code-block:: bash
 
-.. code-block:: text
-
-    PUT /api/v1/checkouts/44
-
-Parameters
-~~~~~~~~~~
-
-payments[X][method]
-    The id of the payment method, where X is the payment number.
-    Leave empty to add new
-
-Response
-~~~~~~~~
-
-Response will contain the updated order information.
+    $ curl http://demo.sylius.org/api/v1/checkouts/select-payment/21 \
+        -H "Authorization: Bearer SampleToken" \
+        -H "Content-Type: application/json"
 
 .. code-block:: text
 
@@ -425,344 +668,108 @@ Response will contain the updated order information.
 .. code-block:: json
 
     {
-        "adjustments": [
-        ],
-        "adjustments_total": 4750,
-        "billing_address": {
-        },
-        "channel": {
-        },
-        "checkout_state": "payment",
-        "comments": [],
-        "confirmed": true,
-        "created_at": "2014-12-15T13:15:22+0000",
-        "email": "xschaefer@example.com",
-        "expires_at": "2014-12-15T16:15:22+0000",
-        "id": 52,
-        "items": [
-        ],
-        "items_total": 1500000,
-        "payments": [
+        "payments":[
             {
-                "_links": {
-                    "order": {
-                        "href": "/app_dev.php/api/v1/orders/52"
+                "methods":[
+                    {
+                        "id":1,
+                        "code":"cash_on_delivery",
+                        "name":"Cash on delivery",
+                        "description":"Ipsum dolor non esse quia sit."
                     },
-                    "payment-method": {
-                        "href": "/app_dev.php/api/v1/payment-methods/1"
-                    },
-                    "self": {
-                        "href": "/app_dev.php/api/v1/payments/51"
+                    {
+                        "id":2,
+                        "code":"bank_transfer",
+                        "name":"Bank transfer",
+                        "description":"Perspiciatis itaque earum quisquam ut dolor."
                     }
-                },
-                "amount": 1504750,
-                "created_at": "2014-12-15T15:02:54+0000",
-                "id": 51,
-                "method": {
-                    "_links": {
-                        "self": {
-                            "href": "/app_dev.php/api/v1/payment-methods/1"
-                        }
-                    },
-                    "created_at": "2014-12-03T09:54:28+0000",
-                    "id": 1,
-                    "name": "Dummy",
-                    "updated_at": "2014-12-03T09:54:28+0000"
-                },
-                "state": "new",
-                "updated_at": "2014-12-15T15:02:55+0000"
+                ]
             }
-        ],
-        "shipments": [
-        ],
-        "shipping_address": {
-        },
-        "state": "cart",
-        "total": 1504750,
-        "updated_at": "2014-12-15T15:02:55+0000",
-        "user": {
-        }
+        ]
     }
+
+
+With that information, another ``PUT`` request with the id of payment method is enough to proceed:
+
+Definition
+^^^^^^^^^^
+
+.. code-block:: text
+
+    PUT /api/v1/checkouts/select-payment/{id}
+
++----------------------+----------------+--------------------------------------+
+| Parameter            | Parameter type | Description                          |
++======================+================+======================================+
+| Authorization        | header         | Token received during authentication |
++----------------------+----------------+--------------------------------------+
+| id                   | url attribute  | Id of the requested cart             |
++----------------------+----------------+--------------------------------------+
+| payment[X]['method'] | request        | Code of chosen payment method        |
++----------------------+----------------+--------------------------------------+
+
+Example
+^^^^^^^
+
+To choose the ``Bank transfer`` method for our shipment, simply use the following code:
+
+.. code-block:: bash
+
+    $ curl http://demo.sylius.org/api/v1/checkouts/select-payment/21 \
+        -H "Authorization: Bearer SampleToken" \
+        -H "Content-Type: application/json" \
+        -X PUT \
+        --data '
+            {
+                "payments": [
+                    {
+                        "method": "bank_transfer"
+                    }
+                ]
+            }
+        '
+
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
+
+.. code-block:: text
+
+    STATUS: 204 No Content
 
 Finalize step
 -------------
 
-Now your order is fully constructed, you can get its latest snapshot by calling your last GET request:
+After choosing the payment method we are ready to finalize the cart and make an order. Now, you can get its snapshot by calling a ``GET`` request:
+
+.. tip::
+
+    The same definition has been used over this chapter, to see the current state of the gorder.
+
+Definition
+^^^^^^^^^^
 
 .. code-block:: text
 
-    GET /api/v1/checkouts/44
+    GET /api/v1/checkouts/{id}
 
-.. code-block:: text
++---------------+----------------+--------------------------------------+
+| Parameter     | Parameter type | Description                          |
++===============+================+======================================+
+| Authorization | header         | Token received during authentication |
++---------------+----------------+--------------------------------------+
+| id            | url attribute  | Id of the requested cart             |
++---------------+----------------+--------------------------------------+
 
-    STATUS: 200 OK
+Example
+^^^^^^^
 
-.. code-block:: json
+To check the fully constructed cart with `id = 21`, use the following command:
 
-    {
-        "adjustments": [
-            {
-                "amount": 0,
-                "created_at": "2014-12-15T13:37:29+0000",
-                "description": "No tax (0%)",
-                "id": 205,
-                "type": "tax",
-                "locked": false,
-                "neutral": false,
-                "updated_at": "2014-12-15T13:37:29+0000"
-            },
-            {
-                "amount": 5000,
-                "created_at": "2014-12-15T14:30:41+0000",
-                "description": "FedEx World Shipping",
-                "id": 207,
-                "type": "shipping",
-                "locked": false,
-                "neutral": false,
-                "updated_at": "2014-12-15T14:30:41+0000"
-            },
-            {
-                "amount": -250,
-                "created_at": "2014-12-15T14:30:41+0000",
-                "description": "Christmas Sale for orders over 100 EUR.",
-                "id": 208,
-                "type": "promotion",
-                "locked": false,
-                "neutral": false,
-                "updated_at": "2014-12-15T14:30:41+0000"
-            }
-        ],
-        "adjustments_total": 4750,
-        "billing_address": {
-            "_links": {
-                "country": {
-                    "href": "/app_dev.php/api/v1/countries/9"
-                }
-            },
-            "city": "New York",
-            "created_at": "2014-12-15T13:37:28+0000",
-            "first_name": "John",
-            "id": 106,
-            "last_name": "Doe",
-            "postcode": "12435",
-            "street": "Test",
-            "updated_at": "2014-12-15T13:37:29+0000"
-        },
-        "channel": {
-            "_links": {
-                "self": {
-                    "href": "/app_dev.php/api/v1/channels/3"
-                }
-            },
-            "code": "WEB-US",
-            "color": "Pink",
-            "created_at": "2014-12-03T09:54:28+0000",
-            "enabled": true,
-            "id": 3,
-            "name": "United States Webstore",
-            "type": "web",
-            "updated_at": "2014-12-03T09:58:29+0000"
-        },
-        "checkout_state": "payment_selected",
-        "comments": [],
-        "created_at": "2014-12-15T13:15:22+0000",
-        "updated_at": "2014-12-15T15:02:55+0000",
-        "expires_at": "2014-12-15T16:15:22+0000",
-        "id": 52,
-        "items": [
-            {
-                "_links": {
-                    "product": {
-                        "href": "/app_dev.php/api/v1/products/101"
-                    },
-                    "variant": {
-                        "href": "/app_dev.php/api/v1/products/101/variants/779"
-                    }
-                },
-                "adjustments": [],
-                "adjustments_total": 0,
-                "id": 277,
-                "immutable": false,
-                "inventory_units": [
-                    {
-                        "_links": {
-                            "order": {
-                                "href": "/app_dev.php/api/v1/orders/52"
-                            }
-                        },
-                        "created_at": "2014-12-15T13:18:48+0000",
-                        "id": 828,
-                        "inventory_state": "checkout",
-                        "updated_at": "2014-12-15T14:30:41+0000"
-                    },
-                    {
-                        "_links": {
-                            "order": {
-                                "href": "/app_dev.php/api/v1/orders/52"
-                            }
-                        },
-                        "created_at": "2014-12-15T13:18:48+0000",
-                        "id": 829,
-                        "inventory_state": "checkout",
-                        "updated_at": "2014-12-15T14:30:41+0000"
-                    },
-                    {
-                        "_links": {
-                            "order": {
-                                "href": "/app_dev.php/api/v1/orders/52"
-                            }
-                        },
-                        "created_at": "2014-12-15T13:18:48+0000",
-                        "id": 830,
-                        "inventory_state": "checkout",
-                        "updated_at": "2014-12-15T14:30:41+0000"
-                    }
-                ],
-                "quantity": 3,
-                "total": 1500000,
-                "unit_price": 500000,
-                "variant": {
-                    "available_on": "2014-04-01T06:43:02+0000",
-                    "created_at": "2014-12-03T09:54:35+0000",
-                    "id": 779,
-                    "master": true,
-                    "object": {
-                        "attributes": [
-                            {
-                                "id": 238,
-                                "name": "Book author",
-                                "presentation": "Author",
-                                "value": "Marlen Yost"
-                            },
-                            {
-                                "id": 239,
-                                "name": "Book ISBN",
-                                "presentation": "ISBN",
-                                "value": "326ccbc7-92d1-3aec-b3af-df8afdc5651d"
-                            },
-                            {
-                                "id": 240,
-                                "name": "Book pages",
-                                "presentation": "Number of pages",
-                                "value": "149"
-                            }
-                        ],
-                        "created_at": "2014-12-03T09:54:35+0000",
-                        "description": "Et eveniet voluptas ut magni vero temporibus nihil. Omnis possimus accusantium quia corporis culpa. Et recusandae asperiores qui architecto culpa autem sint accusantium. Officiis iusto accusantium perferendis aliquid ducimus.",
-                        "id": 101,
-                        "name": "Book \"Quidem\" by \"Marlen Yost\"",
-                        "options": [],
-                        "short_description": "Distinctio quos est eaque fugit totam repellendus.",
-                        "updated_at": "2014-12-03T09:54:35+0000"
-                    },
-                    "options": [],
-                    "sku": "326ccbc7-92d1-3aec-b3af-df8afdc5651d",
-                    "updated_at": "2014-12-03T09:54:35+0000"
-                }
-            }
-        ],
-        "items_total": 1500000,
-        "payments": [
-            {
-                "_links": {
-                    "order": {
-                        "href": "/app_dev.php/api/v1/orders/52"
-                    },
-                    "payment-method": {
-                        "href": "/app_dev.php/api/v1/payment-methods/1"
-                    },
-                    "self": {
-                        "href": "/app_dev.php/api/v1/payments/51"
-                    }
-                },
-                "amount": 1504750,
-                "created_at": "2014-12-15T15:02:54+0000",
-                "id": 51,
-                "method": {
-                    "_links": {
-                        "self": {
-                            "href": "/app_dev.php/api/v1/payment-methods/1"
-                        }
-                    },
-                    "created_at": "2014-12-03T09:54:28+0000",
-                    "id": 1,
-                    "name": "Dummy",
-                    "updated_at": "2014-12-03T09:54:28+0000"
-                },
-                "state": "new",
-                "updated_at": "2014-12-15T15:02:55+0000"
-            }
-        ],
-        "shipments": [
-            {
-                "_links": {
-                    "method": {
-                        "href": "/app_dev.php/api/v1/shipping-methods/4"
-                    },
-                    "order": {
-                        "href": "/app_dev.php/api/v1/orders/52"
-                    },
-                    "self": {
-                        "href": "/app_dev.php/api/v1/shipments/51"
-                    }
-                },
-                "created_at": "2014-12-15T14:30:40+0000",
-                "id": 51,
-                "method": {
-                    "_links": {
-                        "self": {
-                            "href": "/app_dev.php/api/v1/shipping-methods/4"
-                        },
-                        "zone": {
-                            "href": "/app_dev.php/api/v1/zones/4"
-                        }
-                    },
-                    "calculator": "flexible_rate",
-                    "category_requirement": 1,
-                    "configuration": {
-                        "additional_item_cost": 500,
-                        "additional_item_limit": 10,
-                        "first_item_cost": 4000
-                    },
-                    "created_at": "2014-12-03T09:54:28+0000",
-                    "enabled": true,
-                    "id": 4,
-                    "name": "FedEx World Shipping",
-                    "updated_at": "2014-12-03T09:54:28+0000"
-                },
-                "state": "checkout",
-                "updated_at": "2014-12-15T14:30:41+0000"
-            }
-        ],
-        "shipping_address": {
-            "_links": {
-                "country": {
-                    "href": "/app_dev.php/api/v1/countries/9"
-                }
-            },
-            "city": "New York",
-            "created_at": "2014-12-15T13:37:28+0000",
-            "first_name": "John",
-            "id": 105,
-            "last_name": "Doe",
-            "postcode": "12435",
-            "street": "Test",
-            "updated_at": "2014-12-15T13:37:29+0000"
-        },
-        "state": "cart",
-        "total": 1504750
-    }
+.. code-block:: bash
 
-This is how your final order looks, if you are happy with that response, simply call another PUT to confirm the checkout, which will became a real order and appear in the backend.
-
-.. code-block:: text
-
-    PUT /api/v1/checkouts/44
-
-Response
-~~~~~~~~
-
-Final response contains the full order information, now you can call the purchase action to actually pay for the order.
+    $ curl http://demo.sylius.org/api/v1/checkouts/21 \
+        -H "Authorization: Bearer SampleToken" \
+        -H "Content-Type: application/json"
 
 .. code-block:: text
 
@@ -771,295 +778,227 @@ Final response contains the full order information, now you can call the purchas
 .. code-block:: json
 
     {
-        "adjustments": [
+        "id":21,
+        "items":[
             {
-                "amount": 0,
-                "created_at": "2014-12-15T13:37:29+0000",
-                "label": "No tax (0%)",
-                "id": 205,
-                "type": "tax",
-                "locked": false,
-                "neutral": false,
-                "updated_at": "2014-12-15T13:37:29+0000"
-            },
-            {
-                "amount": 5000,
-                "created_at": "2014-12-15T14:30:41+0000",
-                "label": "FedEx World Shipping",
-                "id": 207,
-                "type": "shipping",
-                "locked": false,
-                "neutral": false,
-                "updated_at": "2014-12-15T14:30:41+0000"
-            },
-            {
-                "amount": -250,
-                "created_at": "2014-12-15T14:30:41+0000",
-                "description": "Christmas Sale for orders over 100 EUR.",
-                "id": 208,
-                "type": "order_promotion",
-                "locked": false,
-                "neutral": false,
-                "updated_at": "2014-12-15T14:30:41+0000"
-            }
-        ],
-        "adjustments_total": 4750,
-        "billing_address": {
-            "_links": {
-                "country": {
-                    "href": "/app_dev.php/api/v1/countries/9"
-                }
-            },
-            "city": "New York",
-            "created_at": "2014-12-15T13:37:28+0000",
-            "first_name": "John",
-            "id": 106,
-            "last_name": "Doe",
-            "postcode": "12435",
-            "street": "Test",
-            "updated_at": "2014-12-15T13:37:29+0000"
-        },
-        "channel": {
-            "_links": {
-                "self": {
-                    "href": "/app_dev.php/api/v1/channels/3"
-                }
-            },
-            "code": "WEB-US",
-            "color": "Pink",
-            "created_at": "2014-12-03T09:54:28+0000",
-            "enabled": true,
-            "id": 3,
-            "name": "United States Webstore",
-            "type": "web",
-            "updated_at": "2014-12-03T09:58:29+0000"
-        },
-        "comments": [],
-        "created_at": "2014-12-15T13:15:22+0000",
-        "updated_at": "2014-12-15T15:02:55+0000",
-        "expires_at": "2014-12-15T16:15:22+0000",
-        "id": 52,
-        "items": [
-            {
-                "_links": {
-                    "product": {
-                        "href": "/app_dev.php/api/v1/products/101"
-                    },
-                    "variant": {
-                        "href": "/app_dev.php/api/v1/products/101/variants/779"
-                    }
-                },
-                "adjustments": [],
-                "adjustments_total": 0,
-                "id": 277,
-                "immutable": false,
-                "inventory_units": [
+                "id":74,
+                "quantity":1,
+                "unit_price":100000,
+                "total":100000,
+                "units":[
                     {
-                        "_links": {
-                            "order": {
-                                "href": "/app_dev.php/api/v1/orders/52"
-                            }
-                        },
-                        "created_at": "2014-12-15T13:18:48+0000",
-                        "id": 828,
-                        "inventory_state": "checkout",
-                        "updated_at": "2014-12-15T14:30:41+0000"
-                    },
-                    {
-                        "_links": {
-                            "order": {
-                                "href": "/app_dev.php/api/v1/orders/52"
-                            }
-                        },
-                        "created_at": "2014-12-15T13:18:48+0000",
-                        "id": 829,
-                        "inventory_state": "checkout",
-                        "updated_at": "2014-12-15T14:30:41+0000"
-                    },
-                    {
-                        "_links": {
-                            "order": {
-                                "href": "/app_dev.php/api/v1/orders/52"
-                            }
-                        },
-                        "created_at": "2014-12-15T13:18:48+0000",
-                        "id": 830,
-                        "inventory_state": "checkout",
-                        "updated_at": "2014-12-15T14:30:41+0000"
+                        "id":228,
+                        "adjustments":[
+                        ],
+                        "adjustments_total":0
                     }
                 ],
-                "quantity": 3,
-                "total": 1500000,
-                "unit_price": 500000,
-                "variant": {
-                    "available_on": "2014-04-01T06:43:02+0000",
-                    "created_at": "2014-12-03T09:54:35+0000",
-                    "id": 779,
-                    "master": true,
-                    "object": {
-                        "attributes": [
-                            {
-                                "id": 238,
-                                "name": "Book author",
-                                "presentation": "Author",
-                                "value": "Marlen Yost"
-                            },
-                            {
-                                "id": 239,
-                                "name": "Book ISBN",
-                                "presentation": "ISBN",
-                                "value": "326ccbc7-92d1-3aec-b3af-df8afdc5651d"
-                            },
-                            {
-                                "id": 240,
-                                "name": "Book pages",
-                                "presentation": "Number of pages",
-                                "value": "149"
-                            }
-                        ],
-                        "created_at": "2014-12-03T09:54:35+0000",
-                        "description": "Et eveniet voluptas ut magni vero temporibus nihil. Omnis possimus accusantium quia corporis culpa. Et recusandae asperiores qui architecto culpa autem sint accusantium. Officiis iusto accusantium perferendis aliquid ducimus.",
-                        "id": 101,
-                        "name": "Book \"Quidem\" by \"Marlen Yost\"",
-                        "options": [],
-                        "short_description": "Distinctio quos est eaque fugit totam repellendus.",
-                        "updated_at": "2014-12-03T09:54:35+0000"
+                "units_total":100000,
+                "adjustments":[
+                ],
+                "adjustments_total":0,
+                "variant":{
+                    "id":331,
+                    "code":"MEDIUM_MUG_CUP",
+                    "option_values":[
+                        {
+                            "code":"mug_type_medium"
+                        }
+                    ],
+                    "position":2,
+                    "translations":{
+                        "en_US":{
+                        }
                     },
-                    "options": [],
-                    "sku": "326ccbc7-92d1-3aec-b3af-df8afdc5651d",
-                    "updated_at": "2014-12-03T09:54:35+0000"
+                    "on_hold":0,
+                    "on_hand":10,
+                    "tracked":false,
+                    "channel_pricings":[
+                        {
+                            "channel":{
+                                "id":1,
+                                "code":"US_WEB",
+                                "name":"US Web Store",
+                                "hostname":"localhost",
+                                "color":"MediumPurple",
+                                "created_at":"2017-02-14T11:10:02+0100",
+                                "updated_at":"2017-02-14T11:10:02+0100",
+                                "enabled":true,
+                                "tax_calculation_strategy":"order_items_based",
+                                "_links":{
+                                    "self":{
+                                        "href":"\/api\/v1\/channels\/1"
+                                    }
+                                }
+                            },
+                            "price":100000
+                        }
+                    ]
+                },
+                "_links":{
+                    "product":{
+                        "href":"\/api\/v1\/products\/5"
+                    },
+                    "variant":{
+                        "href":"\/api\/v1\/products\/5\/variants\/331"
+                    }
                 }
             }
         ],
-        "items_total": 1500000,
-        "payments": [
+        "items_total":100000,
+        "adjustments":[
             {
-                "_links": {
-                    "order": {
-                        "href": "/app_dev.php/api/v1/orders/52"
-                    },
-                    "payment-method": {
-                        "href": "/app_dev.php/api/v1/payment-methods/1"
-                    },
-                    "self": {
-                        "href": "/app_dev.php/api/v1/payments/51"
-                    }
-                },
-                "amount": 1504750,
-                "created_at": "2014-12-15T15:02:54+0000",
-                "id": 51,
-                "method": {
-                    "_links": {
-                        "self": {
-                            "href": "/app_dev.php/api/v1/payment-methods/1"
-                        }
-                    },
-                    "created_at": "2014-12-03T09:54:28+0000",
-                    "id": 1,
-                    "name": "Dummy",
-                    "updated_at": "2014-12-03T09:54:28+0000"
-                },
-                "state": "new",
-                "updated_at": "2014-12-15T15:02:55+0000"
+                "id":252,
+                "type":"shipping",
+                "label":"DHL Express",
+                "amount":3549
             }
         ],
-        "shipments": [
-            {
-                "_links": {
-                    "method": {
-                        "href": "/app_dev.php/api/v1/shipping-methods/4"
-                    },
-                    "order": {
-                        "href": "/app_dev.php/api/v1/orders/52"
-                    },
-                    "self": {
-                        "href": "/app_dev.php/api/v1/shipments/51"
-                    }
-                },
-                "created_at": "2014-12-15T14:30:40+0000",
-                "id": 51,
-                "method": {
-                    "_links": {
-                        "self": {
-                            "href": "/app_dev.php/api/v1/shipping-methods/4"
-                        },
-                        "zone": {
-                            "href": "/app_dev.php/api/v1/zones/4"
-                        }
-                    },
-                    "calculator": "flexible_rate",
-                    "category_requirement": 1,
-                    "configuration": {
-                        "additional_item_cost": 500,
-                        "additional_item_limit": 10,
-                        "first_item_cost": 4000
-                    },
-                    "created_at": "2014-12-03T09:54:28+0000",
-                    "enabled": true,
-                    "id": 4,
-                    "name": "FedEx World Shipping",
-                    "updated_at": "2014-12-03T09:54:28+0000"
-                },
-                "state": "onhold",
-                "updated_at": "2014-12-15T14:30:41+0000"
-            }
-        ],
-        "shipping_address": {
-            "_links": {
-                "country": {
-                    "href": "/app_dev.php/api/v1/countries/9"
-                }
+        "adjustments_total":3549,
+        "total":103549,
+        "state":"cart",
+        "customer":{
+            "id":1,
+            "email":"shop@example.com",
+            "email_canonical":"shop@example.com",
+            "first_name":"John",
+            "last_name":"Doe",
+            "gender":"u",
+            "user":{
+                "id":1,
+                "username":"shop@example.com",
+                "username_canonical":"shop@example.com",
+                "roles":[
+                    "ROLE_USER"
+                ],
+                "enabled":true
             },
-            "city": "New York",
-            "created_at": "2014-12-15T13:37:28+0000",
-            "first_name": "John",
-            "id": 105,
-            "last_name": "Doe",
-            "postcode": "12435",
-            "street": "Test",
-            "updated_at": "2014-12-15T13:37:29+0000"
+            "_links":{
+                "self":{
+                    "href":"\/api\/v1\/customers\/1"
+                }
+            }
         },
-        "total": 1504750,
-        "state": "new",
-        "number": "000000001",
-        "checkout_completed_at": "2016-06-24T10:55:28+0200",
-        "checkout_state": "completed",
+        "channel":{
+            "id":1,
+            "code":"US_WEB",
+            "name":"US Web Store",
+            "hostname":"localhost",
+            "color":"MediumPurple",
+            "created_at":"2017-02-14T11:10:02+0100",
+            "updated_at":"2017-02-14T11:10:02+0100",
+            "enabled":true,
+            "tax_calculation_strategy":"order_items_based",
+            "_links":{
+                "self":{
+                    "href":"\/api\/v1\/channels\/1"
+                }
+            }
+        },
+        "shipping_address":{
+            "first_name":"Frederick D.",
+            "last_name":"Gregory",
+            "country_code":"US",
+            "street":"300 E St SW",
+            "city":"\u2019Washington",
+            "postcode":"DC 20546"
+        },
+        "billing_address":{
+            "first_name":"Frederick D.",
+            "last_name":"Gregory",
+            "country_code":"US",
+            "street":"300 E St SW",
+            "city":"\u2019Washington",
+            "postcode":"DC 20546"
+        },
+        "payments":[
+            {
+                "id":21,
+                "method":{
+                    "id":2,
+                    "code":"bank_transfer"
+                },
+                "amount":103549,
+                "state":"cart"
+            }
+        ],
+        "shipments":[
+            {
+                "id":21,
+                "state":"cart",
+                "method":{
+                    "code":"dhl_express",
+                    "enabled":true
+                }
+            }
+        ],
+        "currency_code":"USD",
+        "locale_code":"en_US",
+        "checkout_state":"payment_selected"
     }
 
-Purchase step
--------------
+This is how your final order will look like. If you are satisfied with that response, simply call another ``PUT`` request to confirm the checkout, which will become a real order and appear in the backend.
 
-TODO.
-
-.. code-block:: text
-
-    PUT /api/v1/checkouts/44
-
-Parameters
-~~~~~~~~~~
-
-type
-    Card type
-cardholderName
-    Card holder name
-number
-    Card number
-securityCode
-    Card security code
-expiryMonth
-    Month expire number
-expiryYear
-    Year of card expiration
-
-Response
-~~~~~~~~
-
-You can check the payment status in the payment lists on order response.
+Definition
+^^^^^^^^^^
 
 .. code-block:: text
 
-    STATUS: 200 OK
+    PUT /api/v1/checkouts/complete/{id}
 
-.. code-block:: json
++---------------+----------------+---------------------------------------------------------+
+| Parameter     | Parameter type | Description                                             |
++===============+================+=========================================================+
+| Authorization | header         | Token received during authentication                    |
++---------------+----------------+---------------------------------------------------------+
+| id            | url attribute  | Id of the requested cart                                |
++---------------+----------------+---------------------------------------------------------+
+| notes         | request        | *(optional)* Notes that should be attached to the order |
++---------------+----------------+---------------------------------------------------------+
 
-    {"to": "do"}
+Example
+^^^^^^^
+
+To finalize the previously built order, execute the following command:
+
+.. code-block:: bash
+
+    $ curl http://demo.sylius.org/api/v1/checkouts/complete/21 \
+        -H "Authorization: Bearer SampleToken" \
+        -H "Content-Type: application/json" \
+        -X PUT
+
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
+
+.. code-block:: text
+
+    STATUS: 204 No Content
+
+The order has been placed, from now on you can manage it only via orders endpoint.
+
+Of course the same result can be achieved when the order will be completed with some additional notes:
+
+Example
+^^^^^^^
+
+To finalize  the previously built order (assuming that, the previous example has not been executed), try the following command:
+
+.. code-block:: bash
+
+    $ curl http://demo.sylius.org/api/v1/checkouts/complete/21 \
+        -H "Authorization: Bearer SampleToken" \
+        -H "Content-Type: application/json" \
+        -X PUT \
+        --data '
+            {
+                "notes": "Please, call me before delivery"
+            }
+        '
+
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
+
+.. code-block:: text
+
+    STATUS: 204 No Content
