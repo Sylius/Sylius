@@ -10,6 +10,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var uglify = require('gulp-uglify');
 var uglifycss = require('gulp-uglifycss');
 var argv = require('yargs').argv;
+var debug = require('gulp-debug');
 
 var rootPath = argv.rootPath;
 var adminRootPath = rootPath + 'admin/';
@@ -44,9 +45,11 @@ var paths = {
 
 gulp.task('admin-js', function () {
     return gulp.src(paths.admin.js)
+        .pipe(debug({title: 'admin-js-source:'}))
         .pipe(concat('app.js'))
         .pipe(gulpif(env === 'prod', uglify()))
         .pipe(sourcemaps.write('./'))
+        .pipe(debug({title: 'admin-js-dest:'}))
         .pipe(gulp.dest(adminRootPath + 'js/'))
     ;
 });
@@ -55,19 +58,23 @@ gulp.task('admin-css', function() {
     gulp.src([nodeModulesPath+'semantic-ui-css/themes/**/*']).pipe(gulp.dest(adminRootPath + 'css/themes/'));
 
     var cssStream = gulp.src(paths.admin.css)
+        .pipe(debug({title: 'admin-css-file:'}))
         .pipe(concat('css-files.css'))
     ;
 
     var sassStream = gulp.src(paths.admin.sass)
+        .pipe(debug({title: 'admin-scss-file:'}))
         .pipe(sass())
         .pipe(concat('sass-files.scss'))
     ;
 
     return merge(cssStream, sassStream)
+        .pipe(debug({title: 'admin-css-source:'}))
         .pipe(order(['css-files.css', 'sass-files.scss']))
         .pipe(concat('style.css'))
         .pipe(gulpif(env === 'prod', uglifycss()))
         .pipe(sourcemaps.write('./'))
+        .pipe(debug({title: 'admin-css-dest:'}))
         .pipe(gulp.dest(adminRootPath + 'css/'))
         .pipe(livereload())
     ;
@@ -75,7 +82,9 @@ gulp.task('admin-css', function() {
 
 gulp.task('admin-img', function() {
     return gulp.src(paths.admin.img)
+        .pipe(debug({title: 'admin-img-source:'}))
         .pipe(sourcemaps.write('./'))
+        .pipe(debug({title: 'admin-img-dest:'}))
         .pipe(gulp.dest(adminRootPath + 'img/'))
     ;
 });
