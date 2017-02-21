@@ -69,13 +69,6 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
     public function findOneForPayment($id);
 
     /**
-     * @param int $id
-     *
-     * @return OrderInterface|null
-     */
-    public function findOneForCheckoutComplete($id);
-
-    /**
      * @param string $number
      * @param CustomerInterface $customer
      *

@@ -26,7 +26,7 @@ use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceFormFactoryInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ResourcesCollectionProviderInterface;
-use Sylius\Bundle\ResourceBundle\Controller\ResourceUpdaterInterface;
+use Sylius\Bundle\ResourceBundle\Controller\ResourceUpdateHandlerInterface;
 use Sylius\Bundle\ResourceBundle\Controller\SingleResourceProviderInterface;
 use Sylius\Bundle\ResourceBundle\Controller\StateMachineInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ViewHandlerInterface;
@@ -71,7 +71,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         AuthorizationCheckerInterface $authorizationChecker,
         EventDispatcherInterface $eventDispatcher,
         StateMachineInterface $stateMachine,
-        ResourceUpdaterInterface $resourceUpdater,
+        ResourceUpdateHandlerInterface $resourceUpdateHandler,
         ContainerInterface $container
     ) {
         $this->beConstructedWith(
@@ -90,7 +90,7 @@ final class ResourceControllerSpec extends ObjectBehavior
             $authorizationChecker,
             $eventDispatcher,
             $stateMachine,
-            $resourceUpdater
+            $resourceUpdateHandler
         );
 
         $this->setContainer($container);
@@ -917,7 +917,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         FlashHelperInterface $flashHelper,
         AuthorizationCheckerInterface $authorizationChecker,
         EventDispatcherInterface $eventDispatcher,
-        ResourceUpdaterInterface $resourceUpdater,
+        ResourceUpdateHandlerInterface $resourceUpdateHandler,
         RequestConfiguration $configuration,
         ResourceInterface $resource,
         Form $form,
@@ -954,7 +954,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($preEvent);
         $preEvent->isStopped()->willReturn(false);
 
-        $resourceUpdater->applyTransitionAndFlush($resource, $configuration, $manager)->shouldBeCalled();
+        $resourceUpdateHandler->handle($resource, $configuration, $manager)->shouldBeCalled();
         $eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($postEvent);
 
         $postEvent->hasResponse()->willReturn(false);
@@ -976,7 +976,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         FlashHelperInterface $flashHelper,
         AuthorizationCheckerInterface $authorizationChecker,
         EventDispatcherInterface $eventDispatcher,
-        ResourceUpdaterInterface $resourceUpdater,
+        ResourceUpdateHandlerInterface $resourceUpdateHandler,
         RequestConfiguration $configuration,
         ResourceInterface $resource,
         Form $form,
@@ -1013,7 +1013,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($preEvent);
         $preEvent->isStopped()->willReturn(false);
 
-        $resourceUpdater->applyTransitionAndFlush($resource, $configuration, $manager)->shouldBeCalled();
+        $resourceUpdateHandler->handle($resource, $configuration, $manager)->shouldBeCalled();
         $flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource)->shouldBeCalled();
         $eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($postEvent);
 
@@ -1035,7 +1035,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         ResourceFormFactoryInterface $resourceFormFactory,
         AuthorizationCheckerInterface $authorizationChecker,
         EventDispatcherInterface $eventDispatcher,
-        ResourceUpdaterInterface $resourceUpdater,
+        ResourceUpdateHandlerInterface $resourceUpdateHandler,
         RequestConfiguration $configuration,
         ResourceInterface $resource,
         ResourceControllerEvent $event,
@@ -1067,7 +1067,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($event);
         $event->isStopped()->willReturn(false);
 
-        $resourceUpdater->applyTransitionAndFlush($resource, $configuration, $manager)->shouldBeCalled();
+        $resourceUpdateHandler->handle($resource, $configuration, $manager)->shouldBeCalled();
         $eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource)->shouldBeCalled();
 
         $expectedView = View::create(null, 204);
@@ -1136,7 +1136,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         FlashHelperInterface $flashHelper,
         AuthorizationCheckerInterface $authorizationChecker,
         EventDispatcherInterface $eventDispatcher,
-        ResourceUpdaterInterface $resourceUpdater,
+        ResourceUpdateHandlerInterface $resourceUpdateHandler,
         RequestConfiguration $configuration,
         ResourceInterface $resource,
         Form $form,
@@ -1173,7 +1173,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($preEvent);
         $preEvent->isStopped()->willReturn(false);
 
-        $resourceUpdater->applyTransitionAndFlush($resource, $configuration, $manager)->shouldBeCalled();
+        $resourceUpdateHandler->handle($resource, $configuration, $manager)->shouldBeCalled();
         $eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($postEvent);
 
         $postEvent->hasResponse()->willReturn(false);
@@ -1569,7 +1569,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         AuthorizationCheckerInterface $authorizationChecker,
         EventDispatcherInterface $eventDispatcher,
         StateMachineInterface $stateMachine,
-        ResourceUpdaterInterface $resourceUpdater,
+        ResourceUpdateHandlerInterface $resourceUpdateHandler,
         RequestConfiguration $configuration,
         ResourceInterface $resource,
         ResourceControllerEvent $event,
@@ -1592,7 +1592,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $event->isStopped()->willReturn(false);
 
         $stateMachine->can($configuration, $resource)->willReturn(true);
-        $resourceUpdater->applyTransitionAndFlush($resource, $configuration, $manager)->shouldBeCalled();
+        $resourceUpdateHandler->handle($resource, $configuration, $manager)->shouldBeCalled();
 
         $eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource)->shouldBeCalled();
 
@@ -1656,7 +1656,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         AuthorizationCheckerInterface $authorizationChecker,
         EventDispatcherInterface $eventDispatcher,
         StateMachineInterface $stateMachine,
-        ResourceUpdaterInterface $resourceUpdater,
+        ResourceUpdateHandlerInterface $resourceUpdateHandler,
         RequestConfiguration $configuration,
         ResourceInterface $resource,
         ResourceControllerEvent $event,
@@ -1679,7 +1679,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $event->isStopped()->willReturn(false);
 
         $stateMachine->can($configuration, $resource)->willReturn(true);
-        $resourceUpdater->applyTransitionAndFlush($resource, $configuration, $manager)->shouldBeCalled();
+        $resourceUpdateHandler->handle($resource, $configuration, $manager)->shouldBeCalled();
 
         $eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource)->shouldBeCalled();
 

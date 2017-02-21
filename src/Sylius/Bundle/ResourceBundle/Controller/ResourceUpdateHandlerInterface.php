@@ -17,14 +17,14 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-interface ResourceUpdaterInterface
+interface ResourceUpdateHandlerInterface
 {
     /**
      * @param ResourceInterface $resource
      * @param RequestConfiguration $requestConfiguration
      * @param ObjectManager $manager
      */
-    public function applyTransitionAndFlush(
+    public function handle(
         ResourceInterface $resource,
         RequestConfiguration $requestConfiguration,
         ObjectManager $manager

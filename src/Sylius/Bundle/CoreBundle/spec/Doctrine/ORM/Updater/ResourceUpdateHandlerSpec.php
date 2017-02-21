@@ -9,62 +9,62 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CoreBundle\Updater;
+namespace spec\Sylius\Bundle\CoreBundle\Doctrine\ORM\Updater;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\OptimisticLockException;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Updater\ResourceUpdater;
+use Sylius\Bundle\CoreBundle\Doctrine\ORM\Updater\ResourceUpdateHandler;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
-use Sylius\Bundle\ResourceBundle\Controller\ResourceUpdaterInterface;
+use Sylius\Bundle\ResourceBundle\Controller\ResourceUpdateHandlerInterface;
 use Sylius\Component\Resource\Exception\RaceConditionException;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-final class ResourceUpdaterSpec extends ObjectBehavior
+final class ResourceUpdateHandlerSpec extends ObjectBehavior
 {
-    function let(ResourceUpdaterInterface $decoratedUpdater)
+    function let(ResourceUpdateHandlerInterface $decoratedUpdater)
     {
         $this->beConstructedWith($decoratedUpdater);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(ResourceUpdater::class);
+        $this->shouldHaveType(ResourceUpdateHandler::class);
     }
 
-    function it_implements_a_resource_updater_interface()
+    function it_implements_a_resource_update_handler_interface()
     {
-        $this->shouldImplement(ResourceUpdaterInterface::class);
+        $this->shouldImplement(ResourceUpdateHandlerInterface::class);
     }
 
-    function it_uses_decorated_updater_to_apply_transition_and_flush(
-        ResourceUpdaterInterface $decoratedUpdater,
+    function it_uses_decorated_updater_to_handle_update(
+        ResourceUpdateHandlerInterface $decoratedUpdater,
         ResourceInterface $resource,
         RequestConfiguration $configuration,
         ObjectManager $manager
     ) {
-        $decoratedUpdater->applyTransitionAndFlush($resource, $configuration, $manager);
+        $decoratedUpdater->handle($resource, $configuration, $manager);
 
-        $this->applyTransitionAndFlush($resource, $configuration, $manager);
+        $this->handle($resource, $configuration, $manager);
     }
 
-    function it_throws_a_race_condition_exception_if_catch_optimistic_lock_exception(
-        ResourceUpdaterInterface $decoratedUpdater,
+    function it_throws_a_race_condition_exception_if_catch_an_optimistic_lock_exception(
+        ResourceUpdateHandlerInterface $decoratedUpdater,
         ResourceInterface $resource,
         RequestConfiguration $configuration,
         ObjectManager $manager
     ) {
         $decoratedUpdater
-            ->applyTransitionAndFlush($resource, $configuration, $manager)
+            ->handle($resource, $configuration, $manager)
             ->willThrow(OptimisticLockException::class)
         ;
 
         $this
             ->shouldThrow(RaceConditionException::class)
-            ->during('applyTransitionAndFlush', [$resource, $configuration, $manager])
+            ->during('handle', [$resource, $configuration, $manager])
         ;
     }
 }

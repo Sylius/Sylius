@@ -14,4 +14,4 @@ sylius:
         disable: '%resource% has been successfully disabled.'
         delete_error: 'Cannot delete, the %resource% is in use.'
         race_condition_error: 'Cannot update, the %resource% was previously modified.'
-        something_went_wrong_error: 'Ups, something went wrong, please try again.'
+        something_went_wrong_error: 'Something went wrong, please try again.'

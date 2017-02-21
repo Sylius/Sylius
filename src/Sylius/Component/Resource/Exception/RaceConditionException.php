@@ -14,7 +14,7 @@ namespace Sylius\Component\Resource\Exception;
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-class RaceConditionException extends ResourceException
+class RaceConditionException extends UpdateHandlingException
 {
     /**
      * @param \Exception $previous
@@ -24,6 +24,7 @@ class RaceConditionException extends ResourceException
         parent::__construct(
             'Operated entity was previously modified.',
             'race_condition_error',
+            409,
             null !== $previous ? $previous->getCode() : 0,
             $previous
         );

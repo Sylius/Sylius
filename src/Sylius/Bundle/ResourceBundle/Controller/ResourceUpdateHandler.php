@@ -17,7 +17,7 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-final class ResourceUpdater implements ResourceUpdaterInterface
+final class ResourceUpdateHandler implements ResourceUpdateHandlerInterface
 {
     /**
      * @var StateMachineInterface
@@ -35,7 +35,7 @@ final class ResourceUpdater implements ResourceUpdaterInterface
     /**
      * {@inheritdoc}
      */
-    public function applyTransitionAndFlush(
+    public function handle(
         ResourceInterface $resource,
         RequestConfiguration $configuration,
         ObjectManager $manager

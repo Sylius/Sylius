@@ -14,8 +14,7 @@ namespace Sylius\Bundle\ResourceBundle\Controller;
 use Doctrine\Common\Persistence\ObjectManager;
 use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
-use Sylius\Component\Resource\Exception\RaceConditionException;
-use Sylius\Component\Resource\Exception\ResourceException;
+use Sylius\Component\Resource\Exception\UpdateHandlingException;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -111,9 +110,9 @@ class ResourceController extends Controller
     protected $stateMachine;
 
     /**
-     * @var ResourceUpdaterInterface
+     * @var ResourceUpdateHandlerInterface
      */
-    protected $resourceUpdater;
+    protected $resourceUpdateHandler;
 
     /**
      * @param MetadataInterface $metadata
@@ -131,7 +130,7 @@ class ResourceController extends Controller
      * @param AuthorizationCheckerInterface $authorizationChecker
      * @param EventDispatcherInterface $eventDispatcher
      * @param StateMachineInterface $stateMachine
-     * @param ResourceUpdaterInterface $resourceUpdater
+     * @param ResourceUpdateHandlerInterface $resourceUpdateHandler
      */
     public function __construct(
         MetadataInterface $metadata,
@@ -149,7 +148,7 @@ class ResourceController extends Controller
         AuthorizationCheckerInterface $authorizationChecker,
         EventDispatcherInterface $eventDispatcher,
         StateMachineInterface $stateMachine,
-        ResourceUpdaterInterface $resourceUpdater
+        ResourceUpdateHandlerInterface $resourceUpdateHandler
     ) {
         $this->metadata = $metadata;
         $this->requestConfigurationFactory = $requestConfigurationFactory;
@@ -166,7 +165,7 @@ class ResourceController extends Controller
         $this->authorizationChecker = $authorizationChecker;
         $this->eventDispatcher = $eventDispatcher;
         $this->stateMachine = $stateMachine;
-        $this->resourceUpdater = $resourceUpdater;
+        $this->resourceUpdateHandler = $resourceUpdateHandler;
     }
 
     /**
@@ -279,7 +278,7 @@ class ResourceController extends Controller
             return $this->viewHandler->handle($configuration, View::create($form, Response::HTTP_BAD_REQUEST));
         }
 
-        $this->eventDispatcher->dispatch(ResourceActions::INITIALIZE_CREATE, $configuration, $newResource);
+        $this->eventDispatcher->dispatchInitializeEvent(ResourceActions::CREATE, $configuration, $newResource);
 
         $view = View::create()
             ->setData([
@@ -329,10 +328,13 @@ class ResourceController extends Controller
             }
 
             try {
-                $this->resourceUpdater->applyTransitionAndFlush($resource, $configuration, $this->manager);
-            } catch (ResourceException $exception) {
+                $this->resourceUpdateHandler->handle($resource, $configuration, $this->manager);
+            } catch (UpdateHandlingException $exception) {
                 if (!$configuration->isHtmlRequest()) {
-                    return $this->viewHandler->handle($configuration, View::create($form, Response::HTTP_CONFLICT));
+                    return $this->viewHandler->handle(
+                        $configuration,
+                        View::create($form, $exception->getApiResponseCode())
+                    );
                 }
 
                 $this->flashHelper->addErrorFlash($configuration, $exception->getFlash());
@@ -359,7 +361,7 @@ class ResourceController extends Controller
             return $this->viewHandler->handle($configuration, View::create($form, Response::HTTP_BAD_REQUEST));
         }
 
-        $this->eventDispatcher->dispatch(ResourceActions::INITIALIZE_UPDATE, $configuration, $resource);
+        $this->eventDispatcher->dispatchInitializeEvent(ResourceActions::UPDATE, $configuration, $resource);
 
         $view = View::create()
             ->setData([
@@ -442,10 +444,13 @@ class ResourceController extends Controller
         }
 
         try {
-            $this->resourceUpdater->applyTransitionAndFlush($resource, $configuration, $this->manager);
-        } catch (ResourceException $exception) {
+            $this->resourceUpdateHandler->handle($resource, $configuration, $this->manager);
+        } catch (UpdateHandlingException $exception) {
             if (!$configuration->isHtmlRequest()) {
-                return $this->viewHandler->handle($configuration, View::create($resource, Response::HTTP_CONFLICT));
+                return $this->viewHandler->handle(
+                    $configuration,
+                    View::create($resource, $exception->getApiResponseCode())
+                );
             }
 
             $this->flashHelper->addErrorFlash($configuration, $exception->getFlash());

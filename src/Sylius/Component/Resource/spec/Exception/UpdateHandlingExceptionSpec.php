@@ -12,16 +12,16 @@
 namespace spec\Sylius\Component\Resource\Exception;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Resource\Exception\ResourceException;
+use Sylius\Component\Resource\Exception\UpdateHandlingException;
 
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-final class ResourceExceptionSpec extends ObjectBehavior
+final class UpdateHandlingExceptionSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType(ResourceException::class);
+        $this->shouldHaveType(UpdateHandlingException::class);
     }
 
     function it_extends_an_exception()
@@ -37,5 +37,10 @@ final class ResourceExceptionSpec extends ObjectBehavior
     function it_has_a_flash()
     {
         $this->getFlash()->shouldReturn('something_went_wrong_error');
+    }
+
+    function it_has_an_api_response_code()
+    {
+        $this->getApiResponseCode()->shouldReturn(400);
     }
 }

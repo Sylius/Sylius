@@ -21,7 +21,7 @@ use Sylius\Component\Core\Model\OrderItemInterface;
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-final class ORMOrderInventoryOperator implements OrderInventoryOperatorInterface
+final class OrderInventoryOperator implements OrderInventoryOperatorInterface
 {
     /**
      * @var OrderInventoryOperatorInterface

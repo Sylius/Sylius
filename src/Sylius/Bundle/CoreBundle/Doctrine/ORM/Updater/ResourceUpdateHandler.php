@@ -9,31 +9,31 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Updater;
+namespace Sylius\Bundle\CoreBundle\Doctrine\ORM\Updater;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\OptimisticLockException;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
-use Sylius\Bundle\ResourceBundle\Controller\ResourceUpdaterInterface;
+use Sylius\Bundle\ResourceBundle\Controller\ResourceUpdateHandlerInterface;
 use Sylius\Component\Resource\Exception\RaceConditionException;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-final class ResourceUpdater implements ResourceUpdaterInterface
+final class ResourceUpdateHandler implements ResourceUpdateHandlerInterface
 {
     /**
-     * @var ResourceUpdaterInterface
+     * @var ResourceUpdateHandlerInterface
      */
-    private $decoratedUpdater;
+    private $decoratedHandler;
 
     /**
-     * @param ResourceUpdaterInterface $decoratedUpdater
+     * @param ResourceUpdateHandlerInterface $decoratedHandler
      */
-    public function __construct(ResourceUpdaterInterface $decoratedUpdater)
+    public function __construct(ResourceUpdateHandlerInterface $decoratedHandler)
     {
-        $this->decoratedUpdater = $decoratedUpdater;
+        $this->decoratedHandler = $decoratedHandler;
     }
 
     /**
@@ -41,13 +41,13 @@ final class ResourceUpdater implements ResourceUpdaterInterface
      *
      * @throws RaceConditionException
      */
-    public function applyTransitionAndFlush(
+    public function handle(
         ResourceInterface $resource,
         RequestConfiguration $configuration,
         ObjectManager $manager
     ) {
         try {
-            $this->decoratedUpdater->applyTransitionAndFlush($resource, $configuration, $manager);
+            $this->decoratedHandler->handle($resource, $configuration, $manager);
         } catch (OptimisticLockException $exception) {
             throw new RaceConditionException($exception);
         }

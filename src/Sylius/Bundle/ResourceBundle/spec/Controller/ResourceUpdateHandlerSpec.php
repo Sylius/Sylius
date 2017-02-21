@@ -14,15 +14,15 @@ namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
-use Sylius\Bundle\ResourceBundle\Controller\ResourceUpdater;
-use Sylius\Bundle\ResourceBundle\Controller\ResourceUpdaterInterface;
+use Sylius\Bundle\ResourceBundle\Controller\ResourceUpdateHandler;
+use Sylius\Bundle\ResourceBundle\Controller\ResourceUpdateHandlerInterface;
 use Sylius\Bundle\ResourceBundle\Controller\StateMachineInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-final class ResourceUpdaterSpec extends ObjectBehavior
+final class ResourceUpdateHandlerSpec extends ObjectBehavior
 {
     function let(StateMachineInterface $stateMachine)
     {
@@ -31,15 +31,15 @@ final class ResourceUpdaterSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(ResourceUpdater::class);
+        $this->shouldHaveType(ResourceUpdateHandler::class);
     }
 
-    function it_implements_a_resource_updater_interface()
+    function it_implements_a_resource_update_handler_interface()
     {
-        $this->shouldImplement(ResourceUpdaterInterface::class);
+        $this->shouldImplement(ResourceUpdateHandlerInterface::class);
     }
 
-    function it_applies_state_machine_transition(
+    function it_applies_a_state_machine_transition(
         StateMachineInterface $stateMachine,
         ResourceInterface $resource,
         RequestConfiguration $configuration,
@@ -50,10 +50,10 @@ final class ResourceUpdaterSpec extends ObjectBehavior
 
         $manager->flush()->shouldBeCalled();
 
-        $this->applyTransitionAndFlush($resource, $configuration, $manager);
+        $this->handle($resource, $configuration, $manager);
     }
 
-    function it_does_not_apply_state_machine_transition(
+    function it_does_not_apply_a_state_machine_transition(
         StateMachineInterface $stateMachine,
         ResourceInterface $resource,
         RequestConfiguration $configuration,
@@ -64,6 +64,6 @@ final class ResourceUpdaterSpec extends ObjectBehavior
 
         $manager->flush()->shouldBeCalled();
 
-        $this->applyTransitionAndFlush($resource, $configuration, $manager);
+        $this->handle($resource, $configuration, $manager);
     }
 }

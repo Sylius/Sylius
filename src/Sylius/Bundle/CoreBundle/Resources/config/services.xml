@@ -81,7 +81,7 @@
             <argument type="service" id="sylius.repository.customer" />
         </service>
         <service id="sylius.inventory.order_inventory_operator" class="Sylius\Component\Core\Inventory\Operator\OrderInventoryOperator"/>
-        <service id="sylius.custom_inventory.order_inventory_operator" class="Sylius\Bundle\CoreBundle\Doctrine\ORM\Inventory\Operator\ORMOrderInventoryOperator" decorates="sylius.inventory.order_inventory_operator" public="false">
+        <service id="sylius.custom_inventory.order_inventory_operator" class="Sylius\Bundle\CoreBundle\Doctrine\ORM\Inventory\Operator\OrderInventoryOperator" decorates="sylius.inventory.order_inventory_operator" public="false">
             <argument type="service" id="sylius.custom_inventory.order_inventory_operator.inner" />
             <argument type="service" id="sylius.manager.product_variant" />
         </service>
@@ -166,8 +166,8 @@
             <argument type="service" id="sylius.manager.order_sequence" />
         </service>
 
-        <service id="sylius.custom_resource_controller.resource_updater" class="Sylius\Bundle\CoreBundle\Updater\ResourceUpdater" decorates="sylius.resource_controller.resource_updater" public="false">
-            <argument type="service" id="sylius.custom_resource_controller.resource_updater.inner" />
+        <service id="sylius.custom_resource_controller.resource_update_handler" class="Sylius\Bundle\CoreBundle\Doctrine\ORM\Updater\ResourceUpdateHandler" decorates="sylius.resource_controller.resource_update_handler" public="false">
+            <argument type="service" id="sylius.custom_resource_controller.resource_update_handler.inner" />
         </service>
     </services>
 </container>
