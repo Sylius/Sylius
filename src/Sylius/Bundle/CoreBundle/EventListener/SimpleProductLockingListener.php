@@ -16,14 +16,13 @@ use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
-use Sylius\Component\Resource\Model\VersionedInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Webmozart\Assert\Assert;
 
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-final class LockerListener
+final class SimpleProductLockingListener
 {
     /**
      * @var EntityManagerInterface
@@ -50,24 +49,10 @@ final class LockerListener
      */
     public function lock(GenericEvent $event)
     {
-        $subject = $event->getSubject();
+        $product = $event->getSubject();
 
-        if ($subject instanceof ProductInterface) {
-            $this->lockProduct($subject);
+        Assert::isInstanceOf($product, ProductInterface::class);
 
-            return;
-        }
-
-        Assert::isInstanceOf($subject, VersionedInterface::class);
-
-        $this->manager->lock($subject, LockMode::OPTIMISTIC, $subject->getVersion());
-    }
-
-    /**
-     * @param ProductInterface $product
-     */
-    private function lockProduct(ProductInterface $product)
-    {
         if ($product->isSimple()) {
             /** @var ProductVariantInterface $productVariant */
             $productVariant = $this->variantResolver->getVariant($product);
