@@ -348,37 +348,37 @@ Exemplary Response
 Getting a Single Taxon
 ----------------------
 
-To retrieve the details of the taxon you will need to call the ``/api/v1/taxons/taxon_id`` endpoint with the ``GET`` method.
+To retrieve the details of the taxon you will need to call the ``/api/v1/taxons/code`` endpoint with the ``GET`` method.
 
 Definition
 ^^^^^^^^^^
 
 .. code-block:: text
 
-    GET /api/v1/taxons/{id}
+    GET /api/v1/taxons/{code}
 
 +---------------+----------------+--------------------------------------+
 | Parameter     | Parameter type | Description                          |
 +===============+================+======================================+
 | Authorization | header         | Token received during authentication |
 +---------------+----------------+--------------------------------------+
-| id            | url attribute  | Id of requested taxon                |
+| code          | url attribute  | Identifier of the requested taxon    |
 +---------------+----------------+--------------------------------------+
 
 Example
 ^^^^^^^
 
-To see the details for the the taxon with ``id = 9`` use the below method:
+To see the details for the the taxon with ``code = toys`` use the below method:
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/taxons/9 \
+    $ curl http://demo.sylius.org/api/v1/taxons/toys \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
 .. note::
 
-    The *9* value was taken from the previous create response. Your value can be different.
+    The *toys* value was taken from the previous create response. Your value can be different.
     Check in the list of all taxons if you are not sure which id should be used.
 
 Exemplary Response
@@ -427,7 +427,7 @@ Exemplary Response
                     "id": 1,
                     "name": "Category",
                     "slug": "category",
-                    "description": "Consequatur illo amet aliquam. Excepturi ut vel maiores dignissimos possimus ut nulla. Corporis qui nisi commodi odit. Alias est velit cum iure."
+                    "description": "Consequatur illo amet aliquam."
                 }
             },
             "images": [],
@@ -470,7 +470,7 @@ Exemplary Response
                     "id": 1,
                     "name": "Category",
                     "slug": "category",
-                    "description": "Consequatur illo amet aliquam. Excepturi ut vel maiores dignissimos possimus ut nulla. Corporis qui nisi commodi odit. Alias est velit cum iure."
+                    "description": "Consequatur illo amet aliquam."
                 }
             },
             "images": [],
@@ -520,15 +520,17 @@ Definition
 
     GET /api/v1/taxons/
 
-+---------------+----------------+-------------------------------------------------------------------+
-| Parameter     | Parameter type | Description                                                       |
-+===============+================+===================================================================+
-| Authorization | header         | Token received during authentication                              |
-+---------------+----------------+-------------------------------------------------------------------+
-| page          | query          | *(optional)* Number of the page, by default = 1                   |
-+---------------+----------------+-------------------------------------------------------------------+
-| paginate      | query          | *(optional)* Number of items to display per page, by default = 10 |
-+---------------+----------------+-------------------------------------------------------------------+
++---------------------------------------+----------------+---------------------------------------------------+
+| Parameter                             | Parameter type | Description                                       |
++=======================================+================+===================================================+
+| Authorization                         | header         | Token received during authentication              |
++---------------------------------------+----------------+---------------------------------------------------+
+| limit                                 | query          | *(optional)* Number of items to display per page, |
+|                                       |                | by default = 10                                   |
++---------------------------------------+----------------+---------------------------------------------------+
+| sorting['name_of_field']['direction'] | query          | *(optional)* Field and direction of sorting,      |
+|                                       |                | by default 'desc' and 'createdAt'                 |
++---------------------------------------+----------------+---------------------------------------------------+
 
 To see the first page of all taxons use the below method:
 
@@ -579,7 +581,7 @@ Exemplary Response
                             "id": 1,
                             "name": "Category",
                             "slug": "category",
-                            "description": "Consequatur illo amet aliquam. Excepturi ut vel maiores dignissimos possimus ut nulla. Corporis qui nisi commodi odit. Alias est velit cum iure."
+                            "description": "Consequatur illo amet aliquam."
                         }
                     },
                     "images": [],
@@ -784,41 +786,41 @@ Exemplary Response
 Updating Taxon
 --------------
 
-To fully update a taxon you will need to call the ``/api/v1/taxons/taxon_id`` endpoint with ``PUT`` method.
+To fully update a taxon you will need to call the ``/api/v1/taxons/code`` endpoint with ``PUT`` method.
 
 Definition
 ^^^^^^^^^^
 
 .. code-block:: text
 
-    PUT /api/v1/taxons/{id}
+    PUT /api/v1/taxons/{code}
 
-+--------------------------------------------+----------------+-------------------------------------------------+
-| Parameter                                  | Parameter type | Description                                     |
-+============================================+================+=================================================+
-| Authorization                              | header         | Token received during authentication            |
-+--------------------------------------------+----------------+-------------------------------------------------+
-| id                                         | url attribute  | Id of the requested taxon                       |
-+--------------------------------------------+----------------+-------------------------------------------------+
-| translations['locale_code']['name']        | request        | *(optional)* Name of the taxon                  |
-+--------------------------------------------+----------------+-------------------------------------------------+
-| translations['locale_code']['slug']        | request        | *(optional)* **(unique)** Slug                  |
-+--------------------------------------------+----------------+-------------------------------------------------+
-| translations['locale_code']['description'] | request        | *(optional)* Description of the taxon           |
-+--------------------------------------------+----------------+-------------------------------------------------+
-| parent                                     | request        | *(optional)* The parent taxon's code            |
-+--------------------------------------------+----------------+-------------------------------------------------+
-| images                                     | request        | *(optional)* Images codes assigned to the taxon |
-+--------------------------------------------+----------------+-------------------------------------------------+
++--------------------------------------------+----------------+----------------------------------------------------+
+| Parameter                                  | Parameter type | Description                                        |
++============================================+================+====================================================+
+| Authorization                              | header         | Token received during authentication               |
++--------------------------------------------+----------------+----------------------------------------------------+
+| code                                       | url attribute  | **(unique)** Identifier of the requested the taxon |
++--------------------------------------------+----------------+----------------------------------------------------+
+| translations['locale_code']['name']        | request        | *(optional)* Name of the taxon                     |
++--------------------------------------------+----------------+----------------------------------------------------+
+| translations['locale_code']['slug']        | request        | *(optional)* **(unique)** Slug                     |
++--------------------------------------------+----------------+----------------------------------------------------+
+| translations['locale_code']['description'] | request        | *(optional)* Description of the taxon              |
++--------------------------------------------+----------------+----------------------------------------------------+
+| parent                                     | request        | *(optional)* The parent taxon's code               |
++--------------------------------------------+----------------+----------------------------------------------------+
+| images                                     | request        | *(optional)* Images codes assigned to the taxon    |
++--------------------------------------------+----------------+----------------------------------------------------+
 
 Example
 ^^^^^^^
 
-To full update the taxon with ``id = 9`` use the below method:
+To full update the taxon with ``code = toys`` use the below method:
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/taxons/9 \
+    $ curl http://demo.sylius.org/api/v1/taxons/toys \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PUT \
@@ -840,31 +842,31 @@ Exemplary Response
 
     STATUS: 204 No Content
 
-To update a taxon partially you will need to call the ``/api/v1/taxons/taxon_id`` endpoint with the ``PATCH`` method.
+To update a taxon partially you will need to call the ``/api/v1/taxons/code`` endpoint with the ``PATCH`` method.
 
 Definition
 ^^^^^^^^^^
 
 .. code-block:: text
 
-    PATCH /api/v1/taxons/{id}
+    PATCH /api/v1/taxons/{code}
 
-+---------------+----------------+--------------------------------------+
-| Parameter     | Parameter type | Description                          |
-+===============+================+======================================+
-| Authorization | header         | Token received during authentication |
-+---------------+----------------+--------------------------------------+
-| id            | url attribute  | Id of the requested taxon            |
-+---------------+----------------+--------------------------------------+
++---------------+----------------+----------------------------------------------------+
+| Parameter     | Parameter type | Description                                        |
++===============+================+====================================================+
+| Authorization | header         | Token received during authentication               |
++---------------+----------------+----------------------------------------------------+
+| code          | url attribute  | **(unique)** Identifier of the requested the taxon |
++---------------+----------------+----------------------------------------------------+
 
 Example
 ^^^^^^^
 
-To partial update the taxon with ``id = 9`` use the below method:
+To partial update the taxon with ``code = toys`` use the below method:
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/taxons/9 \
+    $ curl http://demo.sylius.org/api/v1/taxons/toys \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PATCH \
@@ -889,7 +891,7 @@ Exemplary Response
 Deleting a Taxon
 ----------------
 
-To delete a taxon you will need to call the ``/api/v1/taxons/taxon_id`` endpoint with the ``DELETE`` method.
+To delete a taxon you will need to call the ``/api/v1/taxons/code`` endpoint with the ``DELETE`` method.
 
 Definition
 ^^^^^^^^^^
@@ -898,29 +900,29 @@ Definition
 
     DELETE /api/v1/taxons/{id}
 
-+---------------+----------------+--------------------------------------+
-| Parameter     | Parameter type | Description                          |
-+===============+================+======================================+
-| Authorization | header         | Token received during authentication |
-+---------------+----------------+--------------------------------------+
-| id            | url attribute  | Id of the taxon to be removed        |
-+---------------+----------------+--------------------------------------+
++---------------+----------------+----------------------------------------------------+
+| Parameter     | Parameter type | Description                                        |
++===============+================+====================================================+
+| Authorization | header         | Token received during authentication               |
++---------------+----------------+----------------------------------------------------+
+| code          | url attribute  | **(unique)** Identifier of the requested the taxon |
++---------------+----------------+----------------------------------------------------+
 
 Example
 ^^^^^^^
 
-To delete the taxon with ``id = 9`` use the below method:
+To delete the taxon with ``code = toys`` use the below method:
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/taxons/9 \
+    $ curl http://demo.sylius.org/api/v1/taxons/toys \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X DELETE
 
 .. note::
 
-    Remember the *9* value comes from the previous example. Here we are deleting a previously updated taxon, so it is the same id.
+    Remember the *toys* value comes from the previous example. Here we are deleting a previously updated taxon, so it is the same id.
 
 Exemplary Response
 ^^^^^^^^^^^^^^^^^^
