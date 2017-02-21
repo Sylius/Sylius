@@ -1,186 +1,201 @@
 Promotions API
 ==============
 
-Sylius promotion API endpoint is `/api/v1/promotions`.
+These endpoints will allow you to easily manage promotions. Base URI is `/api/v1/promotions`.
 
-Index of all promotions
------------------------
+Promotion structure
+-------------------
 
-You can retrieve the full list of promotions by making the following request:
+Promotion API response structure
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. code-block:: text
+If you request a promotion via API, you will receive an object with the following fields:
 
-    GET /api/v1/promotions
++-------+-----------------------------+
+| Field | Description                 |
++=======+=============================+
+| id    | Id of the promotion         |
++-------+-----------------------------+
+| code  | Unique promotion identifier |
++-------+-----------------------------+
+| name  | The name of the promotion   |
++-------+-----------------------------+
 
-Parameters
+If you request for more detailed data, you will receive an object with the following fields:
+
++-------------+-------------------------------------------------------------+
+| Field       | Description                                                 |
++=============+=============================================================+
+| id          | Id of the promotion                                         |
++-------------+-------------------------------------------------------------+
+| code        | Unique promotion identifier                                 |
++-------------+-------------------------------------------------------------+
+| name        | The name of the promotion                                   |
++-------------+-------------------------------------------------------------+
+| startsAt    | Start date                                                  |
++-------------+-------------------------------------------------------------+
+| endsAt      | End date                                                    |
++-------------+-------------------------------------------------------------+
+| usageLimit  | Promotion's usage limit                                     |
++-------------+-------------------------------------------------------------+
+| used        | Number of times this promotion has been used                |
++-------------+-------------------------------------------------------------+
+| priority    | When exclusive, promotion with top priority will be applied |
++-------------+-------------------------------------------------------------+
+| couponBased | Whether this promotion is triggered by a coupon             |
++-------------+-------------------------------------------------------------+
+| exclusive   | Cannot be applied together with other promotions            |
++-------------+-------------------------------------------------------------+
+| rules       | Associated rules                                            |
++-------------+-------------------------------------------------------------+
+| actions     | Associated actions                                          |
++-------------+-------------------------------------------------------------+
+| createdAt   | Date of creation                                            |
++-------------+-------------------------------------------------------------+
+| updatedAt   | Date of last update                                         |
++-------------+-------------------------------------------------------------+
+| channels    | Collection of channels in which the promotion is available  |
++-------------+-------------------------------------------------------------+
+
+.. note::
+
+    Read more about :doc:`Promotion in the component docs</components/Promotion/models>`.
+
+Getting a Single Promotion
+--------------------------
+
+To retrieve the details of the promotion you will need to call the ``/api/v1/promotions/code`` endpoint with the ``GET`` method.
+
+Definition
 ^^^^^^^^^^
 
-page
-    Number of the page, by default = 1
-limit
-    Number of items to display per page
+.. code-block:: text
 
-Response
-^^^^^^^^
+    GET /api/v1/promotions/{code}
+
++---------------+----------------+--------------------------------------+
+| Parameter     | Parameter type | Description                          |
++===============+================+======================================+
+| Authorization | header         | Token received during authentication |
++---------------+----------------+--------------------------------------+
+| code          | url attribute  | Code of requested promotion          |
++---------------+----------------+--------------------------------------+
+
+Example
+^^^^^^^
+
+To see the details for the the promotion with ``code = christmas`` use the below method:
+
+.. code-block:: bash
+
+     $ curl http://demo.sylius.org/api/v1/promotions/christmas \
+        -H "Authorization: Bearer SampleToken" \
+        -H "Accept: application/json"
+
+.. note::
+
+    *christmas* is just an example. Your value can be different.
+
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
-    STATUS: 200 OK
+     STATUS: 200 OK
 
 .. code-block:: json
 
     {
-        "page":1,
-        "limit":10,
-        "pages":1,
-        "total":3,
-        "_links":{
-            "self":{
-                "href":"\/api\/promotions\/?page=1"
-            },
-            "first":{
-                "href":"\/api\/promotions\/?page=1"
-            },
-            "last":{
-                "href":"\/api\/promotions\/?page=12"
-            },
-            "next":{
-                "href":"\/api\/promotions\/?page=2"
-            }
-        },
-        "_embedded":{
-            "items":[
-                {
-                    "_links": {
-                        "coupons": {
-                            "href": "/app_dev.php/api/v1/promotions/1/coupons/"
-                        },
-                        "self": {
-                            "href": "/app_dev.php/api/v1/promotions/1"
-                        }
-                    },
-                    "actions": [
-                        {
-                            "configuration": {
-                                "amount": 500
-                            },
-                            "id": 1,
-                            "type": "fixed_discount"
-                        }
-                    ],
-                    "coupon_based": false,
-                    "created_at": "2014-12-03T09:54:28+0000",
-                    "exclusive": false,
-                    "id": 1,
-                    "name": "New Year",
-                    "priority": 0,
-                    "rules": [
-                        {
-                            "configuration": {
-                                "count": 3
-                            },
-                            "id": 1,
-                            "type": "item_count"
-                        }
-                    ],
-                    "updated_at": "2014-12-03T09:54:28+0000",
-                    "used": 0
+        "id": 1,
+        "code": "christmas",
+        "name": "Christmas",
+        "priority": 0,
+        "exclusive": false,
+        "used": 19,
+        "coupon_based": false,
+        "rules": [
+            {
+                "id": 1,
+                "type": "cart_quantity",
+                "configuration": {
+                    "count": 3
                 }
-            ]
+            }
+        ],
+        "actions": [
+            {
+                "id": 1,
+                "type": "order_percentage_discount",
+                "configuration": {
+                    "percentage": 0.05
+                }
+            }
+        ],
+        "created_at": "2017-02-17T15:01:15+0100",
+        "updated_at": "2017-02-17T15:01:40+0100",
+        "channels": [
+            {
+                "id": 1,
+                "code": "US_WEB",
+                "name": "US Web Store",
+                "hostname": "localhost",
+                "color": "Khaki",
+                "created_at": "2017-02-17T15:01:14+0100",
+                "updated_at": "2017-02-17T15:01:14+0100",
+                "enabled": true,
+                "tax_calculation_strategy": "order_items_based",
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/channels\/US_WEB"
+                    }
+                }
+            }
+        ],
+        "_links": {
+            "self": {
+                "href": "\/api\/v1\/promotions\/christmas"
+            },
+            "coupons": {
+                "href": "\/api\/v1\/promotions\/christmas\/coupons\/"
+            }
         }
     }
 
-Getting a single promotion
---------------------------
+Collection of Promotions
+------------------------
 
-You can view a single promotion by executing the following request:
+To retrieve a paginated list of promotions you will need to call the ``/api/v1/promotions/`` endpoint with the ``GET`` method.
 
-.. code-block:: text
-
-    GET /api/v1/promotions/1
-
-Response
-^^^^^^^^
-
-.. code-block:: text
-
-    STATUS: 200 OK
-
-.. code-block:: json
-
-    {
-        "_links": {
-            "coupons": {
-                "href": "/app_dev.php/api/v1/promotions/1/coupons/"
-            },
-            "self": {
-                "href": "/app_dev.php/api/v1/promotions/1"
-            }
-        },
-        "actions": [
-            {
-                "configuration": {
-                    "amount": 500
-                },
-                "id": 1,
-                "type": "fixed_discount"
-            }
-        ],
-        "coupon_based": false,
-        "created_at": "2014-12-03T09:54:28+0000",
-        "exclusive": false,
-        "id": 1,
-        "name": "New Year",
-        "priority": 0,
-        "rules": [
-            {
-                "configuration": {
-                    "count": 3
-                },
-                "id": 1,
-                "type": "item_count"
-            }
-        ],
-        "updated_at": "2014-12-03T09:54:28+0000",
-        "used": 0
-    }
-
-Deleting a promotion
---------------------
-
-You can delete a promotion from the system by making the following DELETE call:
-
-.. code-block:: text
-
-    DELETE /api/v1/promotions/1
-
-Response
-^^^^^^^^
-
-.. code-block:: text
-
-    STATUS: 204 NO CONTENT
-
-Listing all coupons
--------------------
-
-You can get the coupons associated with given promotion by performing the following request:
-
-.. code-block:: text
-
-    GET /api/v1/promotions/1/coupons
-
-Parameters
+Definition
 ^^^^^^^^^^
 
-page
-    Number of the page, by default = 1
-limit
-    Number of items to display per page
+.. code-block:: text
 
+    GET /api/v1/promotions/
 
-Response
-^^^^^^^^
++---------------+----------------+-------------------------------------------------------------------+
+| Parameter     | Parameter type | Description                                                       |
++===============+================+===================================================================+
+| Authorization | header         | Token received during authentication                              |
++---------------+----------------+-------------------------------------------------------------------+
+| page          | query          | *(optional)* Number of the page, by default = 1                   |
++---------------+----------------+-------------------------------------------------------------------+
+| paginate      | query          | *(optional)* Number of items to display per page, by default = 10 |
++---------------+----------------+-------------------------------------------------------------------+
+
+To see the first page of all promotions use the below method:
+
+Example
+^^^^^^^
+
+.. code-block:: bash
+
+    $ curl http://demo.sylius.org/api/v1/promotions/ \
+        -H "Authorization: Bearer SampleToken" \
+        -H "Accept: application/json"
+
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
@@ -189,78 +204,49 @@ Response
 .. code-block:: json
 
     {
+        "page": 1,
+        "limit": 10,
+        "pages": 1,
+        "total": 2,
+        "_links": {
+            "self": {
+                "href": "\/api\/v1\/promotions\/?page=1&limit=10"
+            },
+            "first": {
+                "href": "\/api\/v1\/promotions\/?page=1&limit=10"
+            },
+            "last": {
+                "href": "\/api\/v1\/promotions\/?page=1&limit=10"
+            }
+        },
         "_embedded": {
             "items": [
                 {
-                    "_links": {
-                        "promotion": {
-                            "href": "/api/v1/promotions/1"
-                        },
-                        "self": {
-                            "href": "/api/v1/promotions/1/coupons/1"
-                        }
-                    },
-                    "code": "XAETWESF",
                     "id": 1,
-                    "usage_limit": 1,
-                    "used": 0
+                    "code": "christmas",
+                    "name": "Christmas",
+                    "_links": {
+                        "self": {
+                            "href": "\/api\/v1\/promotions\/christmas"
+                        },
+                        "coupons": {
+                            "href": "\/api\/v1\/promotions\/christmas\/coupons\/"
+                        }
+                    }
+                },
+                {
+                    "id": 2,
+                    "code": "new_year",
+                    "name": "New Year",
+                    "_links": {
+                        "self": {
+                            "href": "\/api\/v1\/promotions\/new_year"
+                        },
+                        "coupons": {
+                            "href": "\/api\/v1\/promotions\/new_year\/coupons\/"
+                        }
+                    }
                 }
             ]
-        },
-        "_links": {
-            "first": {
-                "href": "/api/v1/promotions/1/coupons/?page=1&limit=10"
-            },
-            "last": {
-                "href": "/api/v1/promotions/1/coupons/?page=1&limit=10"
-            },
-            "self": {
-                "href": "/api/v1/promotions/1/coupons/?page=1&limit=10"
-            }
-        },
-        "limit": 10,
-        "page": 1,
-        "pages": 1,
-        "total": 1
-    }
-
-Adding new coupon
------------------
-
-To create a new coupon for given promotion, you can execute the following request:
-
-.. code-block:: text
-
-    POST /api/v1/promotion/1/coupons/
-
-Parameters
-^^^^^^^^^^
-
-code
-    Coupon code
-usage_limit
-    The number of times that coupon can be used
-
-Response
-^^^^^^^^
-
-.. code-block:: text
-
-    STATUS: 201 CREATED
-
-.. code-block:: json
-
-    {
-        "_links": {
-            "promotion": {
-                "href": "/api/v1/promotions/1"
-            },
-            "self": {
-                "href": "/api/v1/promotions/1/coupons/2"
-            }
-        },
-        "code": "SUPER-AWESOME-SALE",
-        "id": 1,
-        "usage_limit": 3,
-        "used": 0
+        }
     }
