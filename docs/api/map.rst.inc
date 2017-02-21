@@ -20,3 +20,4 @@
 * :doc:`/api/promotions`
 * :doc:`/api/promotion_coupons`
 * :doc:`/api/taxons`
+* :doc:`/api/tax_rates`
