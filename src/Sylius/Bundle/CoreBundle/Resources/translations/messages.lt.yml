@@ -25,14 +25,14 @@ sylius:
             name: Pavadinimas
             roles: Rolės
         channel:
-            taxonomies: Taksonomijos
+            currencies: Valiutos
             locale_default: Numatytoji lokalė
             locales: Lokalės
-            currencies: Valiutos
-            shipping_methods: Pristatymo būdai
             payment_methods: Mokėjimo būdai
+            shipping_methods: Pristatymo būdai
             tax_calculation_strategy: Mokesčių skaičiavimo strategija
             tax_zone_default: Numatyta mokesčių zona
+            taxonomies: Taksonomijos
             theme: Tema
         image:
             type: Tipas

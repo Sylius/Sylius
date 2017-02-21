@@ -18,6 +18,7 @@ sylius:
             datetime: Datum in čas
             integer: Celo število
             percent: Odstotki
+            select: Izberite
             text: Tekst
             textarea: Besedilno polje
             title: Vrste atributov
@@ -27,6 +28,8 @@ sylius:
                 format: Oblika
             date:
                 format: Oblika
+            select:
+                values: Vrednosti
             text:
                 min: Najmanjša dolžina
                 max: Največja dolžina

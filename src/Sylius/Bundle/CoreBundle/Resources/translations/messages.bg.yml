@@ -7,11 +7,11 @@ sylius:
             add_product_configuration:
                 product: Продукт
         channel:
-            taxonomies: Категоризация
-            locales: Езикови променливи
             currency_base: Основна валута
-            shipping_methods: Начин на доставка
+            locales: Езикови променливи
             payment_methods: Методи на плащане
+            shipping_methods: Начин на доставка
+            taxonomies: Категоризация
         image:
             type: Тип
         order_filter:

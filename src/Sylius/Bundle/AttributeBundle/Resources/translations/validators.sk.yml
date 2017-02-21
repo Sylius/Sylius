@@ -9,6 +9,7 @@ sylius:
             max_length: Názov vlastnosti nesmie byť dlhší ako 1 znak.|Názov vlastnosti nesmie byť dlhší ako {{ limit }} znakov.
         code:
             not_blank: Prosím, zadajte kód vlastnosti.
+            regex: Kód vlastnosti môže obsahovať iba písmená, čísla, pomlčky a znaky podčiarknutia.
             unique: Tento kód sa už používa.
         presentation:
             not_blank: Zadajte verejný názov vlastnosti.

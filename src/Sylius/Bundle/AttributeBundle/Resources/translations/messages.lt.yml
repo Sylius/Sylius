@@ -18,6 +18,7 @@ sylius:
             datetime: Data ir laikas
             integer: Sveikasis skaičius
             percent: Procentai
+            select: Pasirinkite
             text: Tekstas
             textarea: Teksto laukas
             title: Atributo tipai

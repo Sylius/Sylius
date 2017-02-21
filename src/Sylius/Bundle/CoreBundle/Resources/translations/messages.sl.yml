@@ -23,15 +23,15 @@ sylius:
             name: Ime
             roles: Vloge
         channel:
-            taxonomies: Taksonomije
+            currencies: Valute
+            hostname: Ime gostitelja
             locale_default: Privzeto območje
             locales: Področne nastavitve
-            currencies: Valute
-            shipping_methods: Načini dostave
             payment_methods: Načini plačil
+            shipping_methods: Načini dostave
             tax_zone_default: Privzeta davčna cona
+            taxonomies: Taksonomije
             theme: Tema
-            hostname: Ime gostitelja
         image:
             type: Vrsta
             file: Slika

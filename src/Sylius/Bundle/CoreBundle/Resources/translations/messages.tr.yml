@@ -23,12 +23,12 @@ sylius:
             name: Ad
             roles: Roller
         channel:
-            taxonomies: Kategoriler
-            locales: Diller
             currencies: Para birimi
-            shipping_methods: Kargolama Yöntemleri
+            locales: Diller
             payment_methods: Ödeme Yöntemleri
+            shipping_methods: Kargolama Yöntemleri
             tax_zone_default: Varsayılan vergi bölgesi
+            taxonomies: Kategoriler
         image:
             type: Türü
             file: Resim

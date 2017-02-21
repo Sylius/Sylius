@@ -25,18 +25,18 @@ sylius:
             name: Namn
             roles: Roller
         channel:
-            taxonomies: Taxonomier
+            contact_email: Kontakt e-post
+            currencies: Valutor
+            currency_base: Basvaluta
+            hostname: Värdnamn
             locale_default: Standardspråk
             locales: Språk
-            contact_email: Kontakt e-post
-            currency_base: Basvaluta
-            currencies: Valutor
-            shipping_methods: Leveransmetoder
             payment_methods: Betalningsmetoder
+            shipping_methods: Leveransmetoder
             tax_calculation_strategy: Skatteberäkningsstrategi
             tax_zone_default: Standardmomszon
+            taxonomies: Taxonomier
             theme: Tema
-            hostname: Värdnamn
         image:
             type: Typ
             file: Bild

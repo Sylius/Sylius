@@ -23,17 +23,17 @@ sylius:
             name: Назва
             roles: Ролі
         channel:
-            taxonomies: Таксономії
+            currencies: Валюти
+            currency_base: Основна валюта
+            hostname: Ім'я хоста
             locale_default: Типова локаль
             locales: Локалі
-            currency_base: Основна валюта
-            currencies: Валюти
-            shipping_methods: Методи доставки
             payment_methods: Способи оплати
+            shipping_methods: Методи доставки
             tax_calculation_strategy: Стратегія податкового розрахунку
             tax_zone_default: Податкова зона за замовчуванням
+            taxonomies: Таксономії
             theme: Тема
-            hostname: Ім'я хоста
         image:
             type: Тип
             file: Зображення

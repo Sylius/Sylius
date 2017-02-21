@@ -25,18 +25,18 @@ sylius:
             name: Nome
             roles: Regole
         channel:
-            taxonomies: Tassonomie
+            contact_email: Email di contatto
+            currencies: Monete
+            currency_base: Valuta base
+            hostname: Hostname
             locale_default: Locale predefinita
             locales: Localizzazioni
-            contact_email: Email di contatto
-            currency_base: Valuta base
-            currencies: Monete
-            shipping_methods: Metodi di spedizione
             payment_methods: Metodi di pagamento
+            shipping_methods: Metodi di spedizione
             tax_calculation_strategy: Strategia di calcolo fiscale
             tax_zone_default: Aliquota predefinita
+            taxonomies: Tassonomie
             theme: Tema
-            hostname: Hostname
         image:
             type: Tipo
             file: Immagine

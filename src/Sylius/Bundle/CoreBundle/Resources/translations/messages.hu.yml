@@ -23,17 +23,17 @@ sylius:
             name: Név
             roles: Szerepek
         channel:
-            taxonomies: Taxonómiák
+            currencies: Pénznemek
+            currency_base: Alapértelmezett pénznem
+            hostname: Hoszt neve
             locale_default: Alapértelmezett nyelv
             locales: Területi beállítások
-            currency_base: Alapértelmezett pénznem
-            currencies: Pénznemek
-            shipping_methods: Szállítási módok
             payment_methods: Fizetési módok
+            shipping_methods: Szállítási módok
             tax_calculation_strategy: Adó számítási stratégia
             tax_zone_default: Alapértelmezett adósáv
+            taxonomies: Taxonómiák
             theme: Téma
-            hostname: Hoszt neve
         image:
             type: Típus
             file: Kép

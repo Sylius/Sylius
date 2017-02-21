@@ -18,6 +18,7 @@ sylius:
             datetime: Datum och tid
             integer: Heltal
             percent: Procent
+            select: Välj
             text: Text
             textarea: Textfält
             title: Attributtyper
@@ -27,6 +28,8 @@ sylius:
                 format: Format
             date:
                 format: Format
+            select:
+                values: Värden
             text:
                 min: Minimal längd
                 max: Maximal längd

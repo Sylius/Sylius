@@ -9,3 +9,4 @@ sylius:
             type: Тып
         attribute_type:
             configuration: Канфігурацыя
+            select: Выбярыце

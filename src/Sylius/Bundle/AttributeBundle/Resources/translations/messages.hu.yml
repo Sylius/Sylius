@@ -18,6 +18,7 @@ sylius:
             datetime: Dátum/idő
             integer: Egész szám
             percent: Százalék
+            select: Válassza ki
             text: Szöveg
             textarea: Szövegmező
             title: Attribútum típusok
@@ -27,6 +28,8 @@ sylius:
                 format: Formátum
             date:
                 format: Formátum
+            select:
+                values: Értékek
             text:
                 min: Minimális hossz
                 max: Maximális hossz

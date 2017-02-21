@@ -5,4 +5,5 @@ sylius:
     locale:
         code:
             not_blank: Prosím zvoľte kód jazyka.
+            regex: Kód jazyka môže obsahovať iba písmená, čísla, pomlčky a znaky podčiarknutia.
             unique: Kód jazyka musí byť jedinečný.

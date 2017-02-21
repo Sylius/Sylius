@@ -7,3 +7,5 @@ sylius:
             code: Code
             name: Name
             type: Typ
+        attribute_type:
+            select: Auswählen

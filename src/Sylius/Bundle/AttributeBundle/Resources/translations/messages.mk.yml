@@ -5,3 +5,5 @@ sylius:
     form:
         attribute:
             type: Вид
+        attribute_type:
+            select: Изберете

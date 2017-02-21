@@ -10,3 +10,4 @@ sylius:
             type: Type
         attribute_type:
             configuration: Konfiguration
+            select: Vælg

@@ -5,6 +5,7 @@ sylius:
     form:
         customer:
             first_name: Meno
+            group: Skupina
             last_name: Priezvisko
             email: E-mail
             phone_number: Telefónne číslo

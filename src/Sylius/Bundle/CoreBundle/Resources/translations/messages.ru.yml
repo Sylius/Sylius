@@ -25,18 +25,18 @@ sylius:
             name: Название
             roles: Роли
         channel:
-            taxonomies: Список каталогов
+            contact_email: Контактный адрес электронной почты
+            currencies: Валюты
+            currency_base: Базовая валюта
+            hostname: Хост
             locale_default: Локаль по умолчанию
             locales: Языки
-            contact_email: Контактный адрес электронной почты
-            currency_base: Базовая валюта
-            currencies: Валюты
-            shipping_methods: Список способов доставки
             payment_methods: Список методов оплаты
+            shipping_methods: Список способов доставки
             tax_calculation_strategy: Способ расчета налогов
             tax_zone_default: Налоговая зона по умолчанию
+            taxonomies: Список каталогов
             theme: Тема оформления
-            hostname: Хост
         image:
             type: Тип
             file: Изображение

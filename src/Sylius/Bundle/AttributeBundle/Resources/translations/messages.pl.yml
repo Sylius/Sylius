@@ -18,6 +18,7 @@ sylius:
             datetime: Data/godzina
             integer: Liczba całkowita
             percent: Procent
+            select: Wybierz
             text: Tekst
             textarea: Pole tekstowe
             title: Typy atrybutu
@@ -27,6 +28,8 @@ sylius:
                 format: Format
             date:
                 format: Format
+            select:
+                values: Wartości
             text:
                 min: Minimalna długość
                 max: Maksymalna długość

@@ -18,6 +18,7 @@ sylius:
             datetime: Дата й час
             integer: Ціле число
             percent: Відсоток
+            select: Виберіть
             text: Текст
             textarea: Текстове поле
             title: Типи атрибутів
