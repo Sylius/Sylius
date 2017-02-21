@@ -12,7 +12,10 @@
 namespace Sylius\Bundle\ShopBundle\EventListener;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Bundle\UserBundle\Security\UserLoginInterface;
 use Sylius\Bundle\UserBundle\UserEvents;
+use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Security\Generator\GeneratorInterface;
@@ -41,24 +44,48 @@ final class UserRegistrationListener
     private $eventDispatcher;
 
     /**
+     * @var ChannelContextInterface
+     */
+    private $channelContext;
+
+    /**
+     * @var UserLoginInterface
+     */
+    private $userLogin;
+
+    /**
+     * @var string
+     */
+    private $firewallContextName;
+
+    /**
      * @param ObjectManager $userManager
      * @param GeneratorInterface $tokenGenerator
      * @param EventDispatcherInterface $eventDispatcher
+     * @param ChannelContextInterface $channelContext
+     * @param UserLoginInterface $userLogin
+     * @param string $firewallContextName
      */
     public function __construct(
         ObjectManager $userManager,
         GeneratorInterface $tokenGenerator,
-        EventDispatcherInterface $eventDispatcher
+        EventDispatcherInterface $eventDispatcher,
+        ChannelContextInterface $channelContext,
+        UserLoginInterface $userLogin,
+        $firewallContextName
     ) {
         $this->userManager = $userManager;
         $this->tokenGenerator = $tokenGenerator;
         $this->eventDispatcher = $eventDispatcher;
+        $this->channelContext = $channelContext;
+        $this->userLogin = $userLogin;
+        $this->firewallContextName = $firewallContextName;
     }
 
     /**
      * @param GenericEvent $event
      */
-    public function sendVerificationEmail(GenericEvent $event)
+    public function handleUserVerification(GenericEvent $event)
     {
         $customer = $event->getSubject();
         Assert::isInstanceOf($customer, CustomerInterface::class);
@@ -66,13 +93,21 @@ final class UserRegistrationListener
         $user = $customer->getUser();
         Assert::notNull($user);
 
-        $this->handleUserVerificationToken($user);
+        /** @var ChannelInterface $channel */
+        $channel = $this->channelContext->getChannel();
+        if ($channel->isDisabledRegistrationVerification()) {
+            $this->verifyAndLogin($user);
+
+            return;
+        }
+
+        $this->sendVerificationEmail($user);
     }
 
     /**
      * @param ShopUserInterface $user
      */
-    private function handleUserVerificationToken(ShopUserInterface $user)
+    private function sendVerificationEmail(ShopUserInterface $user)
     {
         $token = $this->tokenGenerator->generate();
         $user->setEmailVerificationToken($token);
@@ -81,5 +116,19 @@ final class UserRegistrationListener
         $this->userManager->flush();
 
         $this->eventDispatcher->dispatch(UserEvents::REQUEST_VERIFICATION_TOKEN, new GenericEvent($user));
+    }
+
+    /**
+     * @param ShopUserInterface $user
+     */
+    private function verifyAndLogin(ShopUserInterface $user)
+    {
+        $user->setVerifiedAt(new \DateTime());
+        $user->setEnabled(true);
+
+        $this->userManager->persist($user);
+        $this->userManager->flush();
+
+        $this->userLogin->login($user, $this->firewallContextName);
     }
 }
