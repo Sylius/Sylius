@@ -5,3 +5,4 @@
 * :doc:`/book/products/pricing`
 * :doc:`/book/products/taxons`
 * :doc:`/book/products/inventory`
+* :doc:`/book/products/search`
