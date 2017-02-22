@@ -41,6 +41,14 @@ class ChannelPricing implements ChannelPricingInterface
     /**
      * {@inheritdoc}
      */
+    function __toString()
+    {
+        return (string) $this->getPrice();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getId()
     {
         return $this->id;

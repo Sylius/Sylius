@@ -11,17 +11,16 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
-use Sylius\Bundle\CoreBundle\Form\Type\Product\ChannelPricingType;
+use Sylius\Bundle\CoreBundle\Form\Type\ChannelPricing\ChannelPricingsType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType;
 use Sylius\Bundle\ShippingBundle\Form\Type\ShippingCategoryChoiceType;
 use Sylius\Bundle\TaxationBundle\Form\Type\TaxCategoryChoiceType;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -87,14 +86,9 @@ final class ProductVariantTypeExtension extends AbstractTypeExtension
                 'placeholder' => 'sylius.ui.no_requirement',
                 'label' => 'sylius.form.product_variant.shipping_category',
             ])
-            ->add('channelPricings', CollectionType::class, [
-                'entry_type' => ChannelPricingType::class,
+            ->add('channelPricings', ChannelPricingsType::class, [
                 'label' => 'sylius.form.variant.price',
-                'allow_add' => false,
-                'allow_delete' => false,
-                'error_bubbling' => false,
             ])
-            ->addEventSubscriber($this->channelPricingFormSubscriber)
         ;
     }
 
