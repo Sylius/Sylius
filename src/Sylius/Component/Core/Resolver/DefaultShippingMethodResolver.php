@@ -52,7 +52,7 @@ class DefaultShippingMethodResolver implements DefaultShippingMethodResolverInte
         if (empty($shippingMethods)) {
             throw new UnresolvedDefaultShippingMethodException();
         }
-        
+
         return $shippingMethods[0];
     }
 }
