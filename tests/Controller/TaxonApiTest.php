@@ -504,7 +504,7 @@ EOT;
      */
     private function getTaxonUrl(TaxonInterface $taxon)
     {
-        return '/api/v1/taxons/' . $taxon->getId();
+        return '/api/v1/taxons/' . $taxon->getCode();
     }
 
     /**

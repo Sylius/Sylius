@@ -68,6 +68,29 @@
                 serialization_version: $version
                 serialization_groups: [Detailed]
  ```
+* Routing definition for `Products` has been changed and products are now resolved by code instead of id.
+You can bring back previous configuration by overriding current routing with your definition.
+
+* Routing definition for `Product Variants` has been changed and ProductVariants are now resolved by code instead of id.
+You can bring back previous configuration by overriding current routing with your definition.
+
+* Routing definition for `Taxons` has been changed and Taxons are now resolved by code instead of id. 
+You can bring back previous configuration by overriding current routing with your definition.
+
+* Routing for the following resources has been removed and replaced with the auto generated routing:
+
+	* `Channels`, which are now resolved by code instead of id and only index and show endpoint are available.
+	* `Countries`, which are now resolved by code instead of id.
+	* `Locales`, which  are now resolved by code instead of id. 
+	* `Product Attributes`, which are now by code instead of id and only index and show endpoint are available.
+	* `Product Options`, which are now resolved by code instead of id and only index and show endpoint are available.
+	* `Promotions`, which are now resolved by code instead of id and only index and show endpoint are available.
+	* `Promotions Coupons`, which are now resolved by code instead of id and only index and show endpoint are available.
+	* `Tax Categories`, which are now resolved by code instead of id.
+	* `Tax Rates`, which have now only index and show endpoint available. 
+	* `Payment Methods`, which have now only show endpoint available. 
+
+  You can bring back previous configuration by overriding current routing with your definition.
 
 ### Attribute / AttributeBundle
 

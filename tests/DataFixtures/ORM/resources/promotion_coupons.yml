@@ -1,0 +1,7 @@
+Sylius\Component\Core\Model\PromotionCoupon:
+    promotionCoupon1:
+        code: 1765C
+        promotion: "@promotion2"
+    promotionCoupon2:
+        code: CAE14
+        promotion: "@promotion2"

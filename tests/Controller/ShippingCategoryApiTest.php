@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class ShippingCategoryApiTest extends JsonApiTestCase
+final class ShippingCategoryApiTest extends JsonApiTestCase
 {
     /**
      * @var array

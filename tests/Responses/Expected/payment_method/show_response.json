@@ -1,0 +1,34 @@
+{
+    "id": @integer@,
+    "code": "cod",
+    "channels": [
+        {
+            "id": @integer@,
+            "code": "WEB",
+            "name": "Web Channel",
+            "description": "Lorem ipsum",
+            "hostname": "localhost",
+            "color": "black",
+            "created_at": "@string@.isDateTime()",
+            "updated_at": "@string@.isDateTime()",
+            "enabled": true,
+            "tax_calculation_strategy": "order_items_based",
+            "_links": {
+                "self": {
+                    "href": "\/api\/v1\/channels\/WEB"
+                }
+            }
+        }
+    ],
+    "gateway_config": {
+        "id": @integer@,
+        "gateway_name": "Offline",
+        "factory_name": "offline",
+        "config": []
+    },
+    "_links": {
+        "self": {
+            "href": "\/api\/v1\/payment-methods\/cod"
+        }
+    }
+}

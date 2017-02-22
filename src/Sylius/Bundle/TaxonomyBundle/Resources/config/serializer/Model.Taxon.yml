@@ -51,7 +51,7 @@ Sylius\Component\Taxonomy\Model\Taxon:
           href:
             route: sylius_api_taxon_show
             parameters:
-                id: expr(object.getId())
+                code: expr(object.getCode())
                 version: 1
             exclusion:
                 groups: [Detailed]

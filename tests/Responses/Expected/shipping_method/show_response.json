@@ -1,0 +1,13 @@
+{
+    "id": @integer@,
+    "code": "UPS",
+    "enabled": true,
+    "_links": {
+        "self": {
+            "href": "\/api\/v1\/shipping-methods\/UPS"
+        },
+        "zone": {
+            "href": "\/api\/v1\/zones\/EU"
+        }
+    }
+}

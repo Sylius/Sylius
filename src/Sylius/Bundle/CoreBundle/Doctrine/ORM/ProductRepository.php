@@ -111,4 +111,17 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
             ->getOneOrNullResult()
         ;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findOneByCode($code)
+    {
+        return $this->createQueryBuilder('o')
+            ->where('o.code = :code')
+            ->setParameter('code', $code)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
 }

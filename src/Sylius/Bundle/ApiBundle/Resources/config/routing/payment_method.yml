@@ -1,53 +1,13 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-sylius_api_payment_method_index:
-    path: /
-    methods: [GET]
-    defaults:
-        _controller: sylius.controller.payment_method:indexAction
-        _sylius:
-            serialization_version: $version
-            paginate: $limit
-            sortable: true
-            sorting:
-                id: desc
-
-sylius_api_payment_method_create:
-    path: /
-    methods: [POST]
-    defaults:
-        _controller: sylius.controller.payment_method:createAction
-        _sylius:
-            serialization_version: $version
-
-sylius_api_payment_method_update:
-    path: /{code}
-    methods: [PUT, PATCH]
-    defaults:
-        _controller: sylius.controller.payment_method:updateAction
-        _sylius:
-            serialization_version: $version
-            criteria:
-                code: $code
-
-sylius_api_payment_method_delete:
-    path: /{code}
-    methods: [DELETE]
-    defaults:
-        _controller: sylius.controller.payment_method:deleteAction
-        _sylius:
-            serialization_version: $version
-            criteria:
-                code: $code
-            csrf_protection: false
-
-sylius_api_payment_method_show:
-    path: /{code}
-    methods: [GET]
-    defaults:
-        _controller: sylius.controller.payment_method:showAction
-        _sylius:
-            serialization_version: $version
-            criteria:
-                code: $code
+sylius_api_payment_method:
+    resource: |
+        identifier: code
+        alias: sylius.payment_method
+        section: api
+        only: ['show']
+        serialization_version: $version
+        criteria:
+            code: $code
+    type: sylius.resource_api

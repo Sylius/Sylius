@@ -2,5 +2,10 @@
     "id": @integer@,
     "code": "en_US",
     "created_at": "@string@.isDateTime()",
-    "updated_at": "@string@.isDateTime()"
+    "updated_at": "@string@.isDateTime()",
+    "_links": {
+        "self": {
+            "href": "\/api\/v1\/locales\/en_US"
+        }
+    }
 }

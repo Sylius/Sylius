@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
  * @author Joeri Timmermans <joeri.timmermans@intracto.com>
  * @group joeri
  */
-class LocaleApiTest extends JsonApiTestCase
+final class LocaleApiTest extends JsonApiTestCase
 {
     /**
      * @var array

@@ -35,6 +35,7 @@
                     }
                 },
                 "channel": {
+                    "id": @integer@,
                     "code": "WEB",
                     "_links": {
                         "self": {

@@ -8,8 +8,11 @@ The REST API Reference
     authorization
     channels
     carts
+    locales
     orders
     checkouts
+    countries
+    currencies
     products
     product_variants
     users

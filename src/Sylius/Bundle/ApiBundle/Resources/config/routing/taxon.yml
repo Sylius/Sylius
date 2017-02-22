@@ -3,9 +3,12 @@
 
 sylius_api_taxon:
     resource: |
+        identifier: code
         alias: sylius.taxon
         section: api
         form: Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonType
         grid: sylius_api_taxon
         serialization_version: $version
+        criteria:
+            code: $code
     type: sylius.resource_api

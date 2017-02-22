@@ -6,15 +6,15 @@ Sylius\Component\Addressing\Model\Country:
             expose: true
             type: integer
             xml_attribute: true
+            groups: [Default, Detailed]
         code:
             expose: true
             type: string
-        createdAt:
+            groups: [Default, Detailed]
+        enabled:
             expose: true
-            type: DateTime
-        updatedAt:
-            expose: true
-            type: DateTime
+            type: boolean
+            groups: [Detailed]
     relations:
         - rel: self
           href:

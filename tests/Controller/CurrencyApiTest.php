@@ -12,12 +12,13 @@
 namespace Sylius\Tests\Controller;
 
 use Lakion\ApiTestCase\JsonApiTestCase;
+use Sylius\Component\Currency\Model\CurrencyInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @author Axel Vankrunkelsven <axel@digilabs.be>
  */
-class CurrencyApiTest extends JsonApiTestCase
+final class CurrencyApiTest extends JsonApiTestCase
 {
     /**
      * @var array
@@ -143,8 +144,9 @@ EOT;
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $currencies = $this->loadFixturesFromFile('resources/currencies.yml');
+        $currency = $currencies['currency_1'];
 
-        $this->client->request('GET', '/api/v1/currencies/'.$currencies['currency_1']->getCode(), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', $this->getCurrencyUrl($currency), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'currency/show_response', Response::HTTP_OK);
@@ -170,15 +172,26 @@ EOT;
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $currencies = $this->loadFixturesFromFile('resources/currencies.yml');
+        $currency = $currencies['currency_1'];
 
-        $this->client->request('DELETE', '/api/v1/currencies/'.$currencies['currency_1']->getCode(), [], [], static::$authorizedHeaderWithContentType, []);
+        $this->client->request('DELETE', $this->getCurrencyUrl($currency), [], [], static::$authorizedHeaderWithContentType, []);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
 
-        $this->client->request('GET', '/api/v1/currencies/'.$currencies['currency_1']->getCode(), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', $this->getCurrencyUrl($currency), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
+    }
+
+    /**
+     * @param CurrencyInterface $currency
+     *
+     * @return string
+     */
+    private function getCurrencyUrl(CurrencyInterface $currency)
+    {
+        return '/api/v1/currencies/' . $currency->getCode();
     }
 }

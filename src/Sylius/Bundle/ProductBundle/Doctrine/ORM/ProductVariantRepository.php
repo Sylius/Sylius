@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ProductBundle\Doctrine\ORM;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Core\Model\Product;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Product\Repository\ProductVariantRepositoryInterface;
@@ -32,6 +33,21 @@ class ProductVariantRepository extends EntityRepository implements ProductVarian
             ->andWhere('o.product = :productId')
             ->setParameter('locale', $locale)
             ->setParameter('productId', $productId)
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createQueryBuilderByProductCode($locale, $productCode)
+    {
+        return $this->createQueryBuilder('o')
+            ->innerJoin('o.translations', 'translation')
+            ->innerJoin('o.product', 'product')
+            ->andWhere('translation.locale = :locale')
+            ->andWhere('product.code = :productCode')
+            ->setParameter('locale', $locale)
+            ->setParameter('productCode', $productCode)
         ;
     }
 
@@ -66,6 +82,19 @@ class ProductVariantRepository extends EntityRepository implements ProductVarian
             ->setParameter('product', $product)
             ->getQuery()
             ->getResult()
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findOneByCode($code)
+    {
+        return $this->createQueryBuilder('o')
+            ->where('o.code = :code')
+            ->setParameter('code', $code)
+            ->getQuery()
+            ->getOneOrNullResult()
         ;
     }
 }

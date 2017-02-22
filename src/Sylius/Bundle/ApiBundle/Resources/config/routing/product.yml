@@ -3,9 +3,12 @@
 
 sylius_api_product:
     resource: |
+        identifier: code
         alias: sylius.product
         section: api
         grid: sylius_api_product
         form: Sylius\Bundle\ApiBundle\Form\Type\ProductType
         serialization_version: $version
+        criteria:
+            code: $code
     type: sylius.resource_api

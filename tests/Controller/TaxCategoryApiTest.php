@@ -12,13 +12,14 @@
 namespace Sylius\Tests\Controller;
 
 use Lakion\ApiTestCase\JsonApiTestCase;
+use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class TaxCategoryApiTest extends JsonApiTestCase
+final class TaxCategoryApiTest extends JsonApiTestCase
 {
     /**
      * @test
@@ -181,8 +182,9 @@ EOT;
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $taxCategories = $this->loadFixturesFromFile('resources/tax_categories.yml');
+        $taxCategory  = $taxCategories['tax_category_1'];
 
-        $this->client->request('GET', '/api/v1/tax-categories/'.$taxCategories['tax_category_1']->getId(), [], [], [
+        $this->client->request('GET', $this->getTaxCategoryUrl($taxCategory), [], [], [
             'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
             'ACCEPT' => 'application/json',
         ]);
@@ -225,8 +227,9 @@ EOT;
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $taxCategories = $this->loadFixturesFromFile('resources/tax_categories.yml');
+        $taxCategory = $taxCategories['tax_category_1'];
 
-        $this->client->request('PUT', '/api/v1/tax-categories/'.$taxCategories['tax_category_1']->getId(), [], [], [
+        $this->client->request('PUT', $this->getTaxCategoryUrl($taxCategory), [], [], [
             'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
             'CONTENT_TYPE' => 'application/json',
         ]);
@@ -242,6 +245,7 @@ EOT;
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $taxCategories = $this->loadFixturesFromFile('resources/tax_categories.yml');
+        $taxCategory = $taxCategories['tax_category_1'];
 
         $data =
 <<<EOT
@@ -251,21 +255,13 @@ EOT;
         }
 EOT;
 
-        $this->client->request('PUT', '/api/v1/tax-categories/'.$taxCategories['tax_category_1']->getId(), [], [], [
+        $this->client->request('PUT', $this->getTaxCategoryUrl($taxCategory), [], [], [
             'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
             'CONTENT_TYPE' => 'application/json',
         ], $data);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
-
-        $this->client->request('GET', '/api/v1/tax-categories/'.$taxCategories['tax_category_1']->getId(), [], [], [
-            'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
-            'ACCEPT' => 'application/json',
-        ]);
-
-        $response = $this->client->getResponse();
-        $this->assertResponse($response, 'tax_category/update_response', Response::HTTP_OK);
     }
 
     /**
@@ -291,6 +287,7 @@ EOT;
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $taxCategories = $this->loadFixturesFromFile('resources/tax_categories.yml');
+        $taxCategory = $taxCategories['tax_category_1'];
 
         $data =
 <<<EOT
@@ -299,21 +296,13 @@ EOT;
         }
 EOT;
 
-        $this->client->request('PATCH', '/api/v1/tax-categories/'.$taxCategories['tax_category_1']->getId(), [], [], [
+        $this->client->request('PATCH', $this->getTaxCategoryUrl($taxCategory), [], [], [
             'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
             'CONTENT_TYPE' => 'application/json',
         ], $data);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
-
-        $this->client->request('GET', '/api/v1/tax-categories/'.$taxCategories['tax_category_1']->getId(), [], [], [
-            'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
-            'ACCEPT' => 'application/json',
-        ]);
-
-        $response = $this->client->getResponse();
-        $this->assertResponse($response, 'tax_category/partial_update_response', Response::HTTP_OK);
     }
 
     /**
@@ -339,8 +328,9 @@ EOT;
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $taxCategories = $this->loadFixturesFromFile('resources/tax_categories.yml');
+        $taxCategory = $taxCategories['tax_category_1'];
 
-        $this->client->request('DELETE', '/api/v1/tax-categories/'.$taxCategories['tax_category_1']->getId(), [], [], [
+        $this->client->request('DELETE', $this->getTaxCategoryUrl($taxCategory), [], [], [
             'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
             'CONTENT_TYPE' => 'application/json',
         ], []);
@@ -348,7 +338,7 @@ EOT;
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
 
-        $this->client->request('GET', '/api/v1/tax-categories/'.$taxCategories['tax_category_1']->getId(), [], [], [
+        $this->client->request('GET', $this->getTaxCategoryUrl($taxCategory), [], [], [
             'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
             'ACCEPT' => 'application/json',
         ]);
@@ -356,4 +346,15 @@ EOT;
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
     }
+
+    /**
+     * @param TaxCategoryInterface $taxCategory
+     *
+     * @return string
+     */
+    private function getTaxCategoryUrl(TaxCategoryInterface $taxCategory)
+    {
+        return 'api/v1/tax-categories/' . $taxCategory->getCode();
+    }
+
 }

@@ -45,4 +45,11 @@ interface ProductVariantRepositoryInterface extends RepositoryInterface
      * @return ProductVariantInterface[]
      */
     public function findByNameAndProduct($name, $locale, ProductInterface $product);
+
+    /**
+     * @param string $code
+     *
+     * @return ProductVariantInterface|null
+     */
+    public function findOneByCode($code);
 }
