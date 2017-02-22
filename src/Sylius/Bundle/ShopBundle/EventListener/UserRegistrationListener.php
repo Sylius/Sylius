@@ -96,9 +96,7 @@ final class UserRegistrationListener
         /** @var ChannelInterface $channel */
         $channel = $this->channelContext->getChannel();
         if ($channel->isDisabledRegistrationVerification()) {
-            $this->verifyAndLogin($user);
-
-            return;
+            $this->enableAndLogin($user);
         }
 
         $this->sendVerificationEmail($user);
@@ -121,13 +119,9 @@ final class UserRegistrationListener
     /**
      * @param ShopUserInterface $user
      */
-    private function verifyAndLogin(ShopUserInterface $user)
+    private function enableAndLogin(ShopUserInterface $user)
     {
-        $user->setVerifiedAt(new \DateTime());
         $user->setEnabled(true);
-
-        $this->userManager->persist($user);
-        $this->userManager->flush();
 
         $this->userLogin->login($user, $this->firewallContextName);
     }

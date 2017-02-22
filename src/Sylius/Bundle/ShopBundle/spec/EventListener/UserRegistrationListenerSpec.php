@@ -82,8 +82,10 @@ final class UserRegistrationListenerSpec extends ObjectBehavior
         $this->handleUserVerification($event);
     }
 
-    function it_verifies_and_signs_in_user(
+    function it_enables_and_signs_in_user(
         ObjectManager $userManager,
+        GeneratorInterface $tokenGenerator,
+        EventDispatcherInterface $eventDispatcher,
         ChannelContextInterface $channelContext,
         UserLoginInterface $userLogin,
         GenericEvent $event,
@@ -97,13 +99,19 @@ final class UserRegistrationListenerSpec extends ObjectBehavior
         $channelContext->getChannel()->willReturn($channel);
         $channel->isDisabledRegistrationVerification()->willReturn(true);
 
-        $user->setVerifiedAt(Argument::type('\DateTime'))->shouldBeCalled();
         $user->setEnabled(true)->shouldBeCalled();
+        $userLogin->login($user, 'shop')->shouldBeCalled();
+
+        $tokenGenerator->generate()->willReturn('1d7dbc5c3dbebe5c');
+        $user->setEmailVerificationToken('1d7dbc5c3dbebe5c')->shouldBeCalled();
 
         $userManager->persist($user)->shouldBeCalled();
         $userManager->flush()->shouldBeCalled();
 
-        $userLogin->login($user, 'shop')->shouldBeCalled();
+        $eventDispatcher
+            ->dispatch(UserEvents::REQUEST_VERIFICATION_TOKEN, Argument::type(GenericEvent::class))
+            ->shouldBeCalled()
+        ;
 
         $this->handleUserVerification($event);
     }

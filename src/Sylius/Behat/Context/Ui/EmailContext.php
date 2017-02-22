@@ -70,22 +70,6 @@ final class EmailContext implements Context
     }
 
     /**
-     * @Then a verification email should have been sent to :recipient
-     */
-    public function aVerificationEmailShouldHaveBeenSentTo($recipient)
-    {
-        $this->assertEmailContainsMessageTo('To verify your email address', $recipient);
-    }
-
-    /**
-     * @Then a verification email should not have been sent to :recipient
-     */
-    public function aVerificationEmailShouldNotHaveBeenSentTo($recipient)
-    {
-        $this->assertEmailNotContainsMessageTo('To verify your email address', $recipient);
-    }
-
-    /**
      * @Then /^an email with the summary of (order placed by "([^"]+)") should be sent to him$/
      */
     public function anEmailWithOrderConfirmationShouldBeSentTo(OrderInterface $order)
