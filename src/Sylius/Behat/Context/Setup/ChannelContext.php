@@ -174,11 +174,11 @@ final class ChannelContext implements Context
     }
 
     /**
-     * @Given /^on (this channel) registration verification is disabled$/
+     * @Given /^on (this channel) account verification is not required$/
      */
-    public function onThisChannelRegistrationVerificationIsDisabled(ChannelInterface $channel)
+    public function onThisChannelAccountVerificationIsNotRequired(ChannelInterface $channel)
     {
-        $channel->setDisabledRegistrationVerification(true);
+        $channel->setAccountVerificationRequired(false);
 
         $this->channelManager->flush();
     }

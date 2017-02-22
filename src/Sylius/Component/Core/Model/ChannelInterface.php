@@ -99,10 +99,10 @@ interface ChannelInterface extends
     /**
      * @return bool
      */
-    public function isDisabledRegistrationVerification();
+    public function isAccountVerificationRequired();
 
     /**
-     * @param bool $disabledRegistrationVerification
+     * @param bool $accountVerificationRequired
      */
-    public function setDisabledRegistrationVerification($disabledRegistrationVerification);
+    public function setAccountVerificationRequired($accountVerificationRequired);
 }

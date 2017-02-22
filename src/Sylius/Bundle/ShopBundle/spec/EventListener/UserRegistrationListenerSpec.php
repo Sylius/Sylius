@@ -66,7 +66,7 @@ final class UserRegistrationListenerSpec extends ObjectBehavior
         $customer->getUser()->willReturn($user);
 
         $channelContext->getChannel()->willReturn($channel);
-        $channel->isDisabledRegistrationVerification()->willReturn(false);
+        $channel->isAccountVerificationRequired()->willReturn(true);
 
         $tokenGenerator->generate()->willReturn('1d7dbc5c3dbebe5c');
         $user->setEmailVerificationToken('1d7dbc5c3dbebe5c')->shouldBeCalled();
@@ -97,7 +97,7 @@ final class UserRegistrationListenerSpec extends ObjectBehavior
         $customer->getUser()->willReturn($user);
 
         $channelContext->getChannel()->willReturn($channel);
-        $channel->isDisabledRegistrationVerification()->willReturn(true);
+        $channel->isAccountVerificationRequired()->willReturn(false);
 
         $user->setEnabled(true)->shouldBeCalled();
         $userLogin->login($user, 'shop')->shouldBeCalled();

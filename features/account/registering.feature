@@ -21,7 +21,7 @@ Feature: Account registration
 
     @ui
     Scenario: Registering a new account with minimum information when channel has disabled registration verification
-        Given on this channel registration verification is disabled
+        Given on this channel account verification is not required
         When I want to register a new account
         And I specify the first name as "Saul"
         And I specify the last name as "Goodman"

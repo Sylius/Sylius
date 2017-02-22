@@ -150,14 +150,14 @@ final class ChannelSpec extends ObjectBehavior
         $this->isSkippingShippingStepAllowed()->shouldReturn(true);
     }
 
-    function it_has_disabled_registration_verification_by_default()
+    function it_has_account_verification_required_by_default()
     {
-        $this->isDisabledRegistrationVerification()->shouldReturn(false);
+        $this->isAccountVerificationRequired()->shouldReturn(true);
     }
 
-    function it_can_disable_registration_verification()
+    function it_can_set_account_verification_required()
     {
-        $this->setDisabledRegistrationVerification(true);
-        $this->isDisabledRegistrationVerification()->shouldReturn(true);
+        $this->setAccountVerificationRequired(false);
+        $this->isAccountVerificationRequired()->shouldReturn(false);
     }
 }

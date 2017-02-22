@@ -95,7 +95,7 @@ final class UserRegistrationListener
 
         /** @var ChannelInterface $channel */
         $channel = $this->channelContext->getChannel();
-        if ($channel->isDisabledRegistrationVerification()) {
+        if (!$channel->isAccountVerificationRequired()) {
             $this->enableAndLogin($user);
         }
 

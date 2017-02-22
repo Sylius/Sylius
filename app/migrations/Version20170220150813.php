@@ -18,8 +18,8 @@ class Version20170220150813 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE sylius_channel ADD disabled_registration_verification TINYINT(1) NOT NULL');
-        $this->addSql('UPDATE sylius_channel SET disabled_registration_verification = 0');
+        $this->addSql('ALTER TABLE sylius_channel ADD account_verification_required TINYINT(1) NOT NULL');
+        $this->addSql('UPDATE sylius_channel SET account_verification_required = 1');
     }
 
     /**
@@ -30,6 +30,6 @@ class Version20170220150813 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE sylius_channel DROP disabled_registration_verification');
+        $this->addSql('ALTER TABLE sylius_channel DROP account_verification_required');
     }
 }

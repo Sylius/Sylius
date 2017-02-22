@@ -71,7 +71,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * @var bool
      */
-    protected $disabledRegistrationVerification = false;
+    protected $accountVerificationRequired = true;
 
     public function __construct()
     {
@@ -268,16 +268,16 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function isDisabledRegistrationVerification()
+    public function isAccountVerificationRequired()
     {
-        return $this->disabledRegistrationVerification;
+        return $this->accountVerificationRequired;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setDisabledRegistrationVerification($disabledRegistrationVerification)
+    public function setAccountVerificationRequired($accountVerificationRequired)
     {
-        $this->disabledRegistrationVerification = $disabledRegistrationVerification;
+        $this->accountVerificationRequired = $accountVerificationRequired;
     }
 }
