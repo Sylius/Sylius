@@ -92,7 +92,7 @@ final class ThemeAwareTranslator implements TranslatorInterface, TranslatorBagIn
      */
     public function setLocale($locale)
     {
-        $this->translator->setLocale($locale);
+        $this->translator->setLocale($this->transformLocale($locale));
     }
 
     /**
