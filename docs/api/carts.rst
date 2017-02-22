@@ -9,11 +9,8 @@ These endpoints will allow you to easily manage cart and cart items. Base URI is
 
     If you don't understand the difference between Cart and Order concepts in Sylius yet, please read :doc:`this article </book/orders/orders>` carefully.
 
-Cart structure
---------------
-
 Cart API response structure
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+----------------------------
 
 If you request a cart via API, you will receive an object with the following fields:
 
@@ -42,7 +39,7 @@ If you request a cart via API, you will receive an object with the following fie
 +-------------------+-------------------------------------------------------------------+
 
 CartItem API response structure
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------------
 
 Each CartItem in an API response will be build as follows:
 
@@ -69,7 +66,7 @@ Each CartItem in an API response will be build as follows:
 +-------------------+------------------------------------------------------------+
 
 CartItemUnit API response structure
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-----------------------------------
 
 Each CartItemUnit API response will be build as follows:
 
@@ -84,7 +81,7 @@ Each CartItemUnit API response will be build as follows:
 +-------------------+------------------------------------------+
 
 Adjustment API response structure
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+---------------------------------
 
 And each Adjustment will be build as follows:
 

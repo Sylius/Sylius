@@ -3,11 +3,8 @@ Locales API
 
 These endpoints will allow you to easily manage locales. Base URI is `/api/v1/locales`.
 
-Locale structure
-----------------
-
 Locale API response structure
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-----------------------------
 
 If you request a locale via API, you will receive an object with the following fields:
 
@@ -35,10 +32,10 @@ If you request for more detailed data, you will receive an object with the follo
 
 .. note::
 
-    Read more about :doc:`Locale in the component docs</components/Locale/models>`.
+    Read more about :doc:`Locales in the component docs</components/Locale/models>`.
 
 Creating a Locale
--------------------
+-----------------
 
 To create a new locale you will need to call the ``/api/v1/locales/`` endpoint with the ``POST`` method.
 
@@ -90,10 +87,10 @@ Exemplary Response
             "self": {
                 "href": "\/api\/v1\/locales\/pl"
             }
-	    }
+        }
     }
 
-If you try to create a locale without code you will receive a 400 error.
+If you try to create a locale without code you will receive a ``400 Bad Request`` error.
 
 Example
 ^^^^^^^
@@ -131,7 +128,7 @@ Exemplary Response
 Getting a Single Locale
 -----------------------
 
-To retrieve the details of the locale you will need to call the ``/api/v1/locales/code`` endpoint with the ``GET`` method.
+To retrieve the details of a locale you will need to call the ``/api/v1/locales/code`` endpoint with the ``GET`` method.
 
 Definition
 ^^^^^^^^^^
@@ -145,13 +142,13 @@ Definition
 +===============+================+======================================+
 | Authorization | header         | Token received during authentication |
 +---------------+----------------+--------------------------------------+
-| code          | url attribute  | Code of requested locale             |
+| code          | url attribute  | Code of the requested locale         |
 +---------------+----------------+--------------------------------------+
 
 Example
 ^^^^^^^
 
-To see the details for the the locale with ``code = pl`` use the below method:
+To see the details of the locale with ``code = pl`` use the below method:
 
 .. code-block:: bash
 
@@ -161,7 +158,7 @@ To see the details for the the locale with ``code = pl`` use the below method:
 
 .. note::
 
-    *pl* is just an example. Your value can be different.
+    The *pl* code is just an example. Your value can be different.
 
 Exemplary Response
 ^^^^^^^^^^^^^^^^^^
@@ -275,8 +272,8 @@ Exemplary Response
         }
     }
 
-Deleting Locale
----------------
+Deleting a Locale
+-----------------
 
 To delete a locale you will need to call the ``/api/v1/locales/code`` endpoint with the ``DELETE`` method.
 
@@ -292,7 +289,7 @@ Definition
 +===============+================+======================================+
 | Authorization | header         | Token received during authentication |
 +---------------+----------------+--------------------------------------+
-| code          | url attribute  | Code of removed locale               |
+| code          | url attribute  | Code of the removed locale           |
 +---------------+----------------+--------------------------------------+
 
 Example

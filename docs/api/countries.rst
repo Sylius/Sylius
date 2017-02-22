@@ -3,11 +3,8 @@ Countries API
 
 These endpoints will allow you to easily manage countries. Base URI is `/api/v1/countries`.
 
-Country structure
------------------
-
 Country API response structure
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+------------------------------
 
 If you request a country via API, you will receive an object with the following fields:
 
@@ -33,7 +30,7 @@ If you request for more detailed data, you will receive an object with the follo
 
 .. note::
 
-    Read more about :doc:`Country in the component docs</components/Addressing/models>`.
+    Read more about :doc:`Countries in the component docs</components/Addressing/models>`.
 
 Creating a Country
 ------------------
@@ -90,7 +87,7 @@ Exemplary Response
         }
     }
 
-If you try to create a country without code you will receive a 400 error.
+If you try to create a country without code you will receive a ``400 Bad Request`` error.
 
 Example
 ^^^^^^^
@@ -178,7 +175,7 @@ Exemplary Response
 Getting a Single Country
 ------------------------
 
-To retrieve the details of the country you will need to call the ``/api/v1/countries/code`` endpoint with the ``GET`` method.
+To retrieve the details of a country you will need to call the ``/api/v1/countries/code`` endpoint with the ``GET`` method.
 
 Definition
 ^^^^^^^^^^
@@ -192,13 +189,13 @@ Definition
 +===============+================+======================================+
 | Authorization | header         | Token received during authentication |
 +---------------+----------------+--------------------------------------+
-| code          | url attribute  | Code of requested country            |
+| code          | url attribute  | Code of the requested country        |
 +---------------+----------------+--------------------------------------+
 
 Example
 ^^^^^^^
 
-To see the details for the the country with ``code = US`` use the below method:
+To see the details of the country with ``code = US`` use the below method:
 
 .. code-block:: bash
 
@@ -208,7 +205,7 @@ To see the details for the the country with ``code = US`` use the below method:
 
 .. note::
 
-    The *US* is just an example. Your value can be different.
+    The *US* code is just an example. Your value can be different.
 
 Exemplary Response
 ^^^^^^^^^^^^^^^^^^
@@ -311,8 +308,8 @@ Exemplary Response
         }
     }
 
-Deleting Country
-----------------
+Deleting a Country
+------------------
 
 To delete a country you will need to call the ``/api/v1/countries/code`` endpoint with the ``DELETE`` method.
 
@@ -328,7 +325,7 @@ Definition
 +===============+================+===========================================+
 | Authorization | header         | Token received during authentication      |
 +---------------+----------------+-------------------------------------------+
-| code          | url attribute  | Code of removed country                   |
+| code          | url attribute  | Code of the removed country               |
 +---------------+----------------+-------------------------------------------+
 
 Example

@@ -3,11 +3,8 @@ Taxons API
 
 These endpoints will allow you to easily manage taxons. Base URI is `/api/v1/taxons`.
 
-Taxon structure
----------------
-
 Taxon API response structure
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+----------------------------
 
 If you request a taxon via API, you will receive an object with the following fields:
 

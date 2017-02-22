@@ -41,7 +41,7 @@ Collection of Shipping Categories
 You can retrieve the full shipment categories list by making the following request:
 
 Definition
-..........
+^^^^^^^^^^
 
 .. code-block:: text
 
@@ -59,7 +59,7 @@ Definition
 
 
 Example
-.......
+^^^^^^^
 
 .. code-block:: bash
 
@@ -67,8 +67,8 @@ Example
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
-Example Response
-~~~~~~~~~~~~~~~~
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
@@ -124,7 +124,7 @@ Getting a Single Shipping Category
 You can request detailed shipping category information by executing the following request:
 
 Definition
-..........
+^^^^^^^^^^
 
 .. code-block:: text
 
@@ -139,7 +139,7 @@ Definition
 +---------------+----------------+-------------------------------------------------------------------+
 
 Example
-.......
+^^^^^^^
 
 .. code-block:: bash
 
@@ -147,8 +147,8 @@ Example
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
-Example Response
-~~~~~~~~~~~~~~~~
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
@@ -172,7 +172,7 @@ Creating Shipping Category
 --------------------------
 
 Definition
-..........
+^^^^^^^^^^
 
 .. code-block:: text
 
@@ -191,7 +191,7 @@ Definition
 +---------------+----------------+--------------------------------------------------------+
 
 Example
-.......
+^^^^^^^
 
 .. code-block:: bash
 
@@ -207,8 +207,8 @@ Example
             }
         '
 
-Example Response
-~~~~~~~~~~~~~~~~
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
@@ -231,7 +231,7 @@ Example Response
 If you try to create a resource without name or code, you will receive a 400 error.
 
 Example
-.......
+^^^^^^^
 
 .. code-block:: bash
 
@@ -240,8 +240,8 @@ Example
         -H "Accept: application/json" \
         -X POST
 
-Example Response
-~~~~~~~~~~~~~~~~
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
@@ -275,7 +275,7 @@ Updating Shipping Category
 You can request full or partial update of resource. For full shipping category update, you should use PUT method.
 
 Definition
-..........
+^^^^^^^^^^
 
 .. code-block:: text
 
@@ -294,7 +294,7 @@ Definition
 +---------------+----------------+-------------------------------------------+
 
 Example
-.......
+^^^^^^^
 
 .. code-block:: bash
 
@@ -309,8 +309,8 @@ Example
             }
         '
 
-Example Response
-~~~~~~~~~~~~~~~~
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
@@ -319,7 +319,7 @@ Example Response
 If you try to perform full shipping category update without all required fields specified, you will receive a 400 error.
 
 Example
-.......
+^^^^^^^
 
 .. code-block:: bash
 
@@ -328,8 +328,8 @@ Example
         -H "Accept: application/json" \
         -X PUT
 
-Example Response
-~~~~~~~~~~~~~~~~
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
@@ -355,7 +355,7 @@ Example Response
 In order to perform a partial update, you should use a PATCH method.
 
 Definition
-..........
+^^^^^^^^^^
 
 .. code-block:: text
 
@@ -374,7 +374,7 @@ Definition
 +---------------+----------------+--------------------------------------------------------+
 
 Example
-.......
+^^^^^^^
 
 .. code-block:: bash
 
@@ -384,8 +384,8 @@ Example
         -X PATCH \
         --data '{"name": "Light"}'
 
-Example Response
-~~~~~~~~~~~~~~~~
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
@@ -395,7 +395,7 @@ Deleting Shipping Category
 --------------------------
 
 Definition
-..........
+^^^^^^^^^^
 
 .. code-block:: text
 
@@ -410,7 +410,7 @@ Definition
 +---------------+----------------+-------------------------------------------+
 
 Example
-.......
+^^^^^^^
 
 .. code-block:: bash
 
@@ -419,8 +419,8 @@ Example
         -H "Accept: application/json" \
         -X DELETE
 
-Example Response
-~~~~~~~~~~~~~~~~
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 

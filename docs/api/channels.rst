@@ -3,11 +3,8 @@ Channels API
 
 These endpoints will allow you to easily manage channels. Base URI is `/api/v1/channels`.
 
-Channel structure
------------------
-
 Channel API response structure
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+------------------------------
 
 If you request a channel via API, you will receive an object with the following fields:
 
@@ -72,7 +69,7 @@ Definition
 Example
 ^^^^^^^
 
-To see the details for the the channel with ``code = US_WEB`` use the below method:
+To see the details of the channel with ``code = US_WEB`` use the below method:
 
 .. code-block:: bash
 
@@ -89,7 +86,7 @@ Exemplary Response
 
 .. code-block:: text
 
-     STATUS: 200 OK
+    STATUS: 200 OK
 
 .. code-block:: json
 

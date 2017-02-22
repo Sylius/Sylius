@@ -91,8 +91,8 @@ Example
     The value *21* was taken from previous responses, where we managed the cart and proceed the checkout.
     Your value can be different. If you need more information about Cart API please, check :doc:`this article </api/carts>`.
 
-Example Response
-~~~~~~~~~~~~~~~~
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
@@ -387,8 +387,8 @@ Example
         -H "Accept: application/json" \
         -X PUT
 
-Example Response
-~~~~~~~~~~~~~~~~
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
@@ -687,8 +687,8 @@ Example
         -H "Accept: application/json" \
         -X PUT
 
-Example Response
-~~~~~~~~~~~~~~~~
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
@@ -730,8 +730,8 @@ Example
         -H "Accept: application/json" \
         -X PUT
 
-Example Response
-~~~~~~~~~~~~~~~~
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
