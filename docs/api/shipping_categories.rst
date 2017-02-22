@@ -316,7 +316,7 @@ Exemplary Response
 
     STATUS: 204 No Content
 
-If you try to perform full shipping category update without all required fields specified, you will receive a 400 error.
+If you try to perform full shipping category update without all the required fields specified, you will receive a 400 error.
 
 Example
 ^^^^^^^

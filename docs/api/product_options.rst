@@ -3,11 +3,8 @@ Product Options API
 
 These endpoints will allow you to easily manage product options. Base URI is `/api/v1/product-options`.
 
-Product Option structure
-------------------------
-
 Product Option API response structure
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------------------
 
 If you request a product option via API, you will receive an object with the following fields:
 
@@ -38,12 +35,12 @@ If you request for more detailed data, you will receive an object with the follo
 
 .. note::
 
-    Read more about :doc:`Product Option in the component docs</components/Product/models>`.
+    Read more about :doc:`Product Options in the component docs</components/Product/models>`.
 
 Getting a Single Product Option
 -------------------------------
 
-To retrieve the details of the product option you will need to call the ``/api/v1/product-options/code`` endpoint with the ``GET`` method.
+To retrieve the details of a product option you will need to call the ``/api/v1/product-options/code`` endpoint with the ``GET`` method.
 
 Definition
 ^^^^^^^^^^
@@ -57,13 +54,13 @@ Definition
 +===============+================+======================================+
 | Authorization | header         | Token received during authentication |
 +---------------+----------------+--------------------------------------+
-| code          | url attribute  | Code of requested product option  |
+| code          | url attribute  | Code of requested the product option |
 +---------------+----------------+--------------------------------------+
 
 Example
 ^^^^^^^
 
-To see the details for the the product option with ``code = mug_type`` use the below method:
+To see the details of the product option with ``code = mug_type`` use the below method:
 
 .. code-block:: bash
 
@@ -73,7 +70,7 @@ To see the details for the the product option with ``code = mug_type`` use the b
 
 .. note::
 
-    *mug_type* is just an example. Your value can be different.
+    The *mug_type* is just an example. Your value can be different.
 
 Exemplary Response
 ^^^^^^^^^^^^^^^^^^

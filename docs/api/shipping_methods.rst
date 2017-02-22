@@ -3,11 +3,8 @@ Shipping Methods API
 
 These endpoints will allow you to easily manage shipping methods. Base URI is `/api/v1/shipping-methods`.
 
-Shipping Method structure
--------------------------
-
 Shipping Method API response structure
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+--------------------------------------
 
 If you request a shipping method via API, you will receive an object with the following fields:
 
@@ -20,13 +17,13 @@ If you request a shipping method via API, you will receive an object with the fo
 +---------------------+----------------------------------------------------+
 | name                | The name of the shipping method                    |
 +---------------------+----------------------------------------------------+
-| enabled             | Determine if shipping method is enabled            |
+| enabled             | Determine if the shipping method is enabled        |
 +---------------------+----------------------------------------------------+
 | categoryRequirement | Reference to constant from ShippingMethodInterface |
 +---------------------+----------------------------------------------------+
 | calculator          | Reference to constant from DefaultCalculators      |
 +---------------------+----------------------------------------------------+
-| configuration       | Extra configuration for calculator                 |
+| configuration       | Extra configuration for the calculator             |
 +---------------------+----------------------------------------------------+
 | createdAt           | Date of creation                                   |
 +---------------------+----------------------------------------------------+
@@ -35,12 +32,12 @@ If you request a shipping method via API, you will receive an object with the fo
 
 .. note::
 
-    Read more about :doc:`Shipping Method in the component docs</components/Shipping/models>`.
+    Read more about :doc:`Shipping Methods in the component docs</components/Shipping/models>`.
 
 Getting a Single Shipping Method
 --------------------------------
 
-To retrieve the details of the shipping method you will need to call the ``/api/v1/shipping-methods/code`` endpoint with the ``GET`` method.
+To retrieve the details of a shipping method you will need to call the ``/api/v1/shipping-methods/code`` endpoint with the ``GET`` method.
 
 Definition
 ^^^^^^^^^^
@@ -49,18 +46,18 @@ Definition
 
     GET /api/v1/shipping-methods/{code}
 
-+---------------+----------------+--------------------------------------+
-| Parameter     | Parameter type | Description                          |
-+===============+================+======================================+
-| Authorization | header         | Token received during authentication |
-+---------------+----------------+--------------------------------------+
-| code          | url attribute  | Code of requested shipping method    |
-+---------------+----------------+--------------------------------------+
++---------------+----------------+---------------------------------------+
+| Parameter     | Parameter type | Description                           |
++===============+================+=======================================+
+| Authorization | header         | Token received during authentication  |
++---------------+----------------+---------------------------------------+
+| code          | url attribute  | Code of the requested shipping method |
++---------------+----------------+---------------------------------------+
 
 Example
 ^^^^^^^
 
-To see the details for the the shipping method with ``code = ups`` use the below method:
+To see the details of the shipping method with ``code = ups`` use the below method:
 
 .. code-block:: bash
 
@@ -70,7 +67,7 @@ To see the details for the the shipping method with ``code = ups`` use the below
 
 .. note::
 
-    *ups* is just an example. Your value can be different.
+    The *ups* is just an example. Your value can be different.
 
 Exemplary Response
 ^^^^^^^^^^^^^^^^^^
@@ -84,15 +81,6 @@ Exemplary Response
     {
         "id": 1,
         "code": "ups",
-        "category_requirement": 1,
-        "calculator": "flat_rate",
-        "configuration": {
-            "US_WEB": {
-                "amount": 1080
-            }
-        },
-        "created_at": "2017-02-17T15:01:15+0100",
-        "updated_at": "2017-02-17T15:01:15+0100",
         "enabled": true,
         "_links": {
             "self": {

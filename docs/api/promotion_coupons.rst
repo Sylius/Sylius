@@ -3,11 +3,8 @@ Promotion Coupons API
 
 These endpoints will allow you to easily manage promotion coupons. Base URI is `/api/v1/promotions/{promotionCode}/coupons`.
 
-Promotion Coupon structure
---------------------------
-
 Promotion Coupon API response structure
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+---------------------------------------
 
 If you request a promotion coupon via API, you will receive an object with the following fields:
 
@@ -45,12 +42,12 @@ If you request for more detailed data, you will receive an object with the follo
 
 .. note::
 
-    Read more about :doc:`Promotion Coupon in the component docs</components/Promotion/models>`.
+    Read more about :doc:`Promotion Coupons in the component docs</components/Promotion/models>`.
 
 Getting a Single Promotion Coupon
 ---------------------------------
 
-To retrieve the details of the promotion coupon you will need to call the ``/api/v1/promotions/promotionCode/coupons/code`` endpoint with the ``GET`` method.
+To retrieve the details of a promotion coupon you will need to call the ``/api/v1/promotions/promotionCode/coupons/code`` endpoint with the ``GET`` method.
 
 Definition
 ^^^^^^^^^^
@@ -64,7 +61,7 @@ Definition
 +===============+================+===================================================+
 | Authorization | header         | Token received during authentication              |
 +---------------+----------------+---------------------------------------------------+
-| code          | url attribute  | Code of requested promotion                       |
+| code          | url attribute  | Code of the requested coupon                      |
 +---------------+----------------+---------------------------------------------------+
 | promotionCode | url attribute  | Code of promotion to which the coupon is assigned |
 +---------------+----------------+---------------------------------------------------+
@@ -72,7 +69,7 @@ Definition
 Example
 ^^^^^^^
 
-To see the details for the the promotion coupon with ``code = A3BCB`` which belongs to promotion with ``code = autumnal_promo`` use the below method:
+To see the details of the promotion coupon with ``code = A3BCB`` which belongs to the promotion with ``code = autumnal_promo`` use the below method:
 
 .. code-block:: bash
 
@@ -82,7 +79,7 @@ To see the details for the the promotion coupon with ``code = A3BCB`` which belo
 
 .. note::
 
-    *A3BCB* and *autumnal_promo* are just examples. Your value can be different.
+    The *A3BCB* and *autumnal_promo* are just examples. Your value can be different.
 
 Exemplary Response
 ^^^^^^^^^^^^^^^^^^
@@ -96,11 +93,11 @@ Exemplary Response
     {
         "id": 6,
         "code": "A3BCB",
-        "usage_limit": 5,
+        "usageLimit": 5,
         "used": 0,
-        "expires_at": "2017-11-12T00:00:00+0100",
-        "created_at": "2017-02-21T11:11:59+0100",
-        "updated_at": "2017-02-21T11:11:59+0100",
+        "expiresAt": "2017-11-12T00:00:00+0100",
+        "createdAt": "2017-02-21T11:11:59+0100",
+        "updatedAt": "2017-02-21T11:11:59+0100",
         "_links": {
             "self": {
                 "href": "\/api\/v1\/promotions\/autumnal_promo\/coupons\/A3BCB"
@@ -135,7 +132,7 @@ Definition
 | paginate      | query          | *(optional)* Number of items to display per page, by default = 10 |
 +---------------+----------------+-------------------------------------------------------------------+
 
-To see the first page of all promotion coupons assigned to promotion with ``code = autumnal_promo`` use the below method:
+To see the first page of all promotion coupons assigned to the promotion with ``code = autumnal_promo`` use the below method:
 
 Example
 ^^^^^^^
@@ -176,11 +173,11 @@ Exemplary Response
                 {
                     "id": 6,
                     "code": "A3BCB",
-                    "usage_limit": 5,
+                    "usageLimit": 5,
                     "used": 0,
-                    "expires_at": "2017-11-12T00:00:00+0100",
-                    "created_at": "2017-02-21T11:11:59+0100",
-                    "updated_at": "2017-02-21T11:11:59+0100",
+                    "expiresAt": "2017-11-12T00:00:00+0100",
+                    "createdAt": "2017-02-21T11:11:59+0100",
+                    "updatedAt": "2017-02-21T11:11:59+0100",
                     "_links": {
                         "self": {
                             "href": "\/api\/v1\/promotions\/autumnal_promo\/coupons\/A3BCB"
@@ -193,11 +190,11 @@ Exemplary Response
                 {
                     "id": 7,
                     "code": "C9596",
-                    "usage_limit": 5,
+                    "usageLimit": 5,
                     "used": 0,
-                    "expires_at": "2017-11-12T00:00:00+0100",
-                    "created_at": "2017-02-21T11:11:59+0100",
-                    "updated_at": "2017-02-21T11:11:59+0100",
+                    "expiresAt": "2017-11-12T00:00:00+0100",
+                    "createdAt": "2017-02-21T11:11:59+0100",
+                    "updatedAt": "2017-02-21T11:11:59+0100",
                     "_links": {
                         "self": {
                             "href": "\/api\/v1\/promotions\/autumnal_promo\/coupons\/C9596"
@@ -210,11 +207,11 @@ Exemplary Response
                 {
                     "id": 8,
                     "code": "53385",
-                    "usage_limit": 5,
+                    "usageLimit": 5,
                     "used": 0,
-                    "expires_at": "2017-11-12T00:00:00+0100",
-                    "created_at": "2017-02-21T11:11:59+0100",
-                    "updated_at": "2017-02-21T11:11:59+0100",
+                    "expiresAt": "2017-11-12T00:00:00+0100",
+                    "createdAt": "2017-02-21T11:11:59+0100",
+                    "updatedAt": "2017-02-21T11:11:59+0100",
                     "_links": {
                         "self": {
                             "href": "\/api\/v1\/promotions\/autumnal_promo\/coupons\/53385"

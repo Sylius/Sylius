@@ -29,7 +29,7 @@ If you request a zone via API, you will receive an object with the following fie
 
 .. note::
 
-	Read more about :doc: `Zone model in the component docs</components/Addressing/models>`.
+	Read more about :doc:`the Zone model in the component docs</components/Addressing/models>`.
 
 Creating a Zone
 ---------------
@@ -41,7 +41,7 @@ Definition
 
 .. code-block:: text
 
-	POST /api/v1/zones/{type}
+    POST /api/v1/zones/{type}
 
 +---------------+----------------+--------------------------------------+
 | Parameter     | Parameter type | Description                          |
@@ -61,7 +61,7 @@ Definition
 
 .. note::
 
-	Read more about :doc: `Zone types in the component docs</components/Addressing/zone_types>`.
+    Read more about :doc: `Zone types in the component docs</components/Addressing/zone_types>`.
 
 Example
 ^^^^^^^
@@ -70,107 +70,107 @@ To create a new zone use the below method:
 
 .. code-block:: bash
 
-	$ curl http://demo.sylius.org/api/v1/zones/ \
-		-H "Authorization: Bearer SampleToken" \
-		-H "Content-Type: application/json" \
-		-X POST \
-		--data '
-			{
-	            "code": "EU",
-	            "name": "European Union",
-	            "scope": "all",
-	            "members": [
-	                {
-	                    "code": "PL"
-	                }
-	            ]
-	        }
-		'
+    $ curl http://demo.sylius.org/api/v1/zones/ \
+        -H "Authorization: Bearer SampleToken" \
+        -H "Content-Type: application/json" \
+        -X POST \
+        --data '
+            {
+                "code": "EU",
+                "name": "European Union",
+                "scope": "all",
+                "members": [
+                    {
+                        "code": "PL"
+                    }
+                ]
+            }
+        '
 
 Exemplary Response
 ^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
-	STATUS: 201 CREATED
+    STATUS: 201 CREATED
 
 .. code-block:: json
 
-	{
-		"id": 2,
-		"code": "EU",
-		"name": "European Union",
-		"type": "country",
-		"_links": {
-			"self": {
-				"href": "\/api\/v1\/zones\/EU"
-			}
-		}
-	}
+    {
+        "id": 2,
+        "code": "EU",
+        "name": "European Union",
+        "type": "country",
+        "_links": {
+            "self": {
+                "href": "\/api\/v1\/zones\/EU"
+            }
+        }
+    }
 
 .. warning::
 
-	If you try to create a zone without name, code, scope or member, you will receive a ``400 Bad Request`` error, that will contain validation errors.
+    If you try to create a zone without name, code, scope or member, you will receive a ``400 Bad Request`` error, that will contain validation errors.
 
 Example
 ^^^^^^^
 
 .. code-block:: bash
 
-	$ curl http://demo.sylius.org/api/v1/zones/ \
-		-H "Authorization: Bearer SampleToken" \
-		-H "Accept: application/json" \
-		-X POST
+    $ curl http://demo.sylius.org/api/v1/zones/ \
+        -H "Authorization: Bearer SampleToken" \
+        -H "Accept: application/json" \
+        -X POST
 
 Exemplary Response
 ^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
-	STATUS: 400 Bad Request
+    STATUS: 400 Bad Request
 
 .. code-block:: json
 
-	{
-		"code": 400,
-		"message": "Validation Failed",
-		"errors": {
-			"errors": [
-				"Please add at least 1 zone member."
-			],
-			"children": {
-				"name": {
-					"errors": [
-						"Please enter zone name."
-					]
-				},
-				"type": {},
-				"scope": {
-					"errors": [
-						"Please enter the scope."
-					]
-				},
-				"code": {
-					"errors": [
-						"Please enter zone code."
-					]
-				},
-				"members": {}
-			}
-		}
-	}
+    {
+        "code": 400,
+        "message": "Validation Failed",
+        "errors": {
+            "errors": [
+                "Please add at least 1 zone member."
+            ],
+            "children": {
+                "name": {
+                    "errors": [
+                        "Please enter zone name."
+                    ]
+                },
+                "type": {},
+                "scope": {
+                    "errors": [
+                        "Please enter the scope."
+                    ]
+                },
+                "code": {
+                    "errors": [
+                        "Please enter zone code."
+                    ]
+                },
+                "members": {}
+            }
+        }
+    }
 
 Getting a Single Zone
 ---------------------
 
-To retrieve the details of the zone you will need to call the ``/api/v1/zone/code`` endpoint with the ``GET`` method.
+To retrieve the details of a zone you will need to call the ``/api/v1/zone/code`` endpoint with the ``GET`` method.
 
 Definition
 ^^^^^^^^^^
 
 .. code-block:: text
 
-	GET /api/v1/zones/{code}
+    GET /api/v1/zones/{code}
 
 +---------------+----------------+--------------------------------------+
 | Parameter     | Parameter type | Description                          |
@@ -183,39 +183,39 @@ Definition
 Example
 ^^^^^^^
 
-To see the details for the the zone with ``code = EU`` use the below method:
+To see the details of the the zone with ``code = EU`` use the below method:
 
 .. code-block:: bash
 
-	$ curl http://demo.sylius.org/api/v1/zones/EU \
-		-H "Authorization: Bearer SampleToken" \
-		-H "Accept: application/json"
+    $ curl http://demo.sylius.org/api/v1/zones/EU \
+        -H "Authorization: Bearer SampleToken" \
+        -H "Accept: application/json"
 
 .. note::
 
-	*EU* is an exemplary value. Your value can be different.
-	Check in the list of all zones if you are not sure which code should be used.
+    The *EU* is an exemplary value. Your value can be different.
+    Check in the list of all zones if you are not sure which code should be used.
 
 Exemplary Response
 ^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
-	STATUS: 200 OK
+    STATUS: 200 OK
 
 .. code-block:: json
 
-	{
-		"id": 2,
-		"code": "EU",
-		"name": "European Union",
-		"type": "country",
-		"_links": {
-			"self": {
-				"href": "\/api\/v1\/zones\/EU"
-			}
-		}
-	}
+    {
+        "id": 2,
+        "code": "EU",
+        "name": "European Union",
+        "type": "country",
+        "_links": {
+            "self": {
+                "href": "\/api\/v1\/zones\/EU"
+            }
+        }
+    }
 
 Collection of Zones
 -------------------
@@ -227,7 +227,7 @@ Definition
 
 .. code-block:: text
 
-	GET /api/v1/zones/
+    GET /api/v1/zones/
 
 +---------------------------------------+----------------+---------------------------------------------------+
 | Parameter                             | Parameter type | Description                                       |
@@ -248,74 +248,74 @@ Example
 
 .. code-block:: bash
 
-	$ curl http://demo.sylius.org/api/v1/zones/ \
-		-H "Authorization: Bearer SampleToken" \
-		-H "Accept: application/json"
+    $ curl http://demo.sylius.org/api/v1/zones/ \
+        -H "Authorization: Bearer SampleToken" \
+        -H "Accept: application/json"
 
 Exemplary Response
 ^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
-	STATUS: 200 OK
+    STATUS: 200 OK
 
 .. code-block:: json
 
-	{
-		"page": 1,
-		"limit": 10,
-		"pages": 1,
-		"total": 2,
-		"_links": {
-			"self": {
-				"href": "\/api\/v1\/zones\/?page=1&limit=10"
-			},
-			"first": {
-				"href": "\/api\/v1\/zones\/?page=1&limit=10"
-			},
-			"last": {
-				"href": "\/api\/v1\/zones\/?page=1&limit=10"
-			}
-		},
-		"_embedded": {
-			"items": [
-				{
-					"id": 1,
-					"code": "US",
-					"name": "United States of America",
-					"type": "country",
-					"_links": {
-						"self": {
-							"href": "\/api\/v1\/zones\/US"
-						}
-					}
-				},
-				{
-					"id": 2,
-					"code": "EU",
-					"name": "European Union",
-					"type": "country",
-					"_links": {
-						"self": {
-							"href": "\/api\/v1\/zones\/EU"
-						}
-					}
-				}
-			]
-		}
-	}
+    {
+        "page": 1,
+        "limit": 10,
+        "pages": 1,
+        "total": 2,
+        "_links": {
+            "self": {
+                "href": "\/api\/v1\/zones\/?page=1&limit=10"
+            },
+            "first": {
+                "href": "\/api\/v1\/zones\/?page=1&limit=10"
+            },
+            "last": {
+                "href": "\/api\/v1\/zones\/?page=1&limit=10"
+            }
+        },
+        "_embedded": {
+            "items": [
+                {
+                    "id": 1,
+                    "code": "US",
+                    "name": "United States of America",
+                    "type": "country",
+                    "_links": {
+                        "self": {
+                            "href": "\/api\/v1\/zones\/US"
+                        }
+                    }
+                },
+                {
+                    "id": 2,
+                    "code": "EU",
+                    "name": "European Union",
+                    "type": "country",
+                    "_links": {
+                        "self": {
+                            "href": "\/api\/v1\/zones\/EU"
+                        }
+                    }
+                }
+            ]
+        }
+    }
 
 Updating a Zone
 ---------------
 
-To fully update a zone you will need to call the ``/api/v1/zones/code`` endpoint with ``PUT`` method.
+To fully update a zone you will need to call the ``/api/v1/zones/code`` endpoint with the ``PUT`` method.
 
 Definition
 ^^^^^^^^^^
 
 .. code-block:: text
 
-	PUT /api/v1/zones/{code}
+    PUT /api/v1/zones/{code}
 
 +---------------+----------------+--------------------------------------+
 | Parameter     | Parameter type | Description                          |
@@ -338,75 +338,74 @@ Example
 
 .. code-block:: bash
 
-	$ curl http://demo.sylius.org/api/v1/zones/EU \
-		-H "Authorization: Bearer SampleToken" \
-		-H "Content-Type: application/json" \
-		-X PUT \
-		--data '
-			{
-	            "name": "European Union Zone",
-	            "scope": "shipping",
-	            "members": [
-	                {
-	                    "code": "DE"
-	                }
-	            ]
-	        }
-		'
+    $ curl http://demo.sylius.org/api/v1/zones/EU \
+        -H "Authorization: Bearer SampleToken" \
+        -H "Content-Type: application/json" \
+        -X PUT \
+        --data '
+            {
+                "name": "European Union Zone",
+                "scope": "shipping",
+                "members": [
+                    {
+                        "code": "DE"
+                    }
+                ]
+            }
+        '
 
 Exemplary Response
 ^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
-	STATUS: 204 No Content
+    STATUS: 204 No Content
 
-If you try to perform a full zone update without all required fields specified, you will receive a ``400 Bad Request`` error.
+If you try to perform a full zone update without all the required fields specified, you will receive a ``400 Bad Request`` error.
 
 Example
 ^^^^^^^
 
 .. code-block:: bash
 
-	$ curl http://demo.sylius.org/api/v1/zones/EU \
-		-H "Authorization: Bearer SampleToken" \
-		-H "Accept: application/json" \
-		-X PUT
+    $ curl http://demo.sylius.org/api/v1/zones/EU \
+        -H "Authorization: Bearer SampleToken" \
+        -H "Accept: application/json" \
+        -X PUT
 
 Exemplary Response
 ^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
-	STATUS: 400 Bad Request
+    STATUS: 400 Bad Request
 
 .. code-block:: json
 
-	{
-		"code": 400,
-		"message": "Validation Failed",
-		"errors": {
-			"errors": [
-				"Please add at least 1 zone member."
-			],
-			"children": {
-				"name": {
-					"errors": [
-						"Please enter zone name."
-					]
-				},
-				"type": {},
-				"scope": {
-					"errors": [
-						"Please enter the scope."
-					]
-				},
-				"code": {},
-				"members": {}
-			}
-		}
-	}
-
+    {
+        "code": 400,
+        "message": "Validation Failed",
+        "errors": {
+            "errors": [
+                "Please add at least 1 zone member."
+            ],
+            "children": {
+                "name": {
+                    "errors": [
+                        "Please enter zone name."
+                    ]
+                },
+                "type": {},
+                "scope": {
+                    "errors": [
+                        "Please enter the scope."
+                    ]
+                },
+                "code": {},
+                "members": {}
+            }
+        }
+    }
 
 To update a zone partially you will need to call the ``/api/v1/zones/code`` endpoint with the ``PATCH`` method.
 
@@ -415,7 +414,7 @@ Definition
 
 .. code-block:: text
 
-	PATCH /api/v1/zones/{code}
+    PATCH /api/v1/zones/{code}
 
 +---------------+----------------+--------------------------------------+
 | Parameter     | Parameter type | Description                          |
@@ -434,22 +433,22 @@ To partially update the zone with ``code = EU`` use the below method:
 
 .. code-block:: bash
 
-	$ curl http://demo.sylius.org/api/v1/zones/EU \
-		-H "Authorization: Bearer SampleToken" \
-		-H "Content-Type: application/json" \
-		-X PATCH \
-		--data '
-			{
-	            "scope": "tax"
-			}
-		'
+    $ curl http://demo.sylius.org/api/v1/zones/EU \
+        -H "Authorization: Bearer SampleToken" \
+        -H "Content-Type: application/json" \
+        -X PATCH \
+        --data '
+            {
+                "scope": "tax"
+            }
+        '
 
 Exemplary Response
 ^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
-	STATUS: 204 No Content
+    STATUS: 204 No Content
 
 Deleting a Zone
 ---------------
@@ -461,7 +460,7 @@ Definition
 
 .. code-block:: text
 
-	DELETE /api/v1/zones/{code}
+    DELETE /api/v1/zones/{code}
 
 +---------------+----------------+--------------------------------------+
 | Parameter     | Parameter type | Description                          |
@@ -478,14 +477,14 @@ To delete the zone with ``code = EU`` use the below method:
 
 .. code-block:: bash
 
-	$ curl http://demo.sylius.org/api/v1/zones/EU \
-		-H "Authorization: Bearer SampleToken" \
-		-H "Accept: application/json" \
-		-X DELETE
+    $ curl http://demo.sylius.org/api/v1/zones/EU \
+        -H "Authorization: Bearer SampleToken" \
+        -H "Accept: application/json" \
+        -X DELETE
 
 Exemplary Response
 ^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
-	STATUS: 204 No Content
+    STATUS: 204 No Content

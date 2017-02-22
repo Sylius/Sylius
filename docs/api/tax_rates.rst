@@ -33,12 +33,12 @@ If you request a tax rate via API, you will receive an object with the following
 
 .. note::
 
-    Read more about :doc:`Tax Rate in the component docs</components/Taxation/models>`.
+    Read more about :doc:`Tax Rates in the component docs</components/Taxation/models>`.
 
 Getting a Single Tax Rate
 --------------------------
 
-To retrieve the details of the tax rate you will need to call the ``/api/v1/tax-rates/code`` endpoint with the ``GET`` method.
+To retrieve the details of a tax rate you will need to call the ``/api/v1/tax-rates/code`` endpoint with the ``GET`` method.
 
 Definition
 ^^^^^^^^^^
@@ -52,13 +52,13 @@ Definition
 +===============+================+======================================+
 | Authorization | header         | Token received during authentication |
 +---------------+----------------+--------------------------------------+
-| code          | url attribute  | Code of requested tax rate           |
+| code          | url attribute  | Code of the requested tax rate       |
 +---------------+----------------+--------------------------------------+
 
 Example
 ^^^^^^^
 
-To see the details for the the tax rate with ``code = clothing_sales_tax_7`` use the below method:
+To see the details of the the tax rate with ``code = clothing_sales_tax_7`` use the below method:
 
 .. code-block:: bash
 
@@ -68,7 +68,7 @@ To see the details for the the tax rate with ``code = clothing_sales_tax_7`` use
 
 .. note::
 
-    *clothing_sales_tax_7* is just an example. Your value can be different.
+    The *clothing_sales_tax_7* is just an example. Your value can be different.
 
 Exemplary Response
 ^^^^^^^^^^^^^^^^^^
@@ -84,10 +84,10 @@ Exemplary Response
         "code": "clothing_sales_tax_7",
         "name": "Clothing Sales Tax 7%",
         "amount": 0.07,
-        "included_in_price": false,
+        "includedInPrice": false,
         "calculator": "default",
-        "created_at": "2017-02-17T15:01:15+0100",
-        "updated_at": "2017-02-17T15:01:15+0100",
+        "createdAt": "2017-02-17T15:01:15+0100",
+        "updatedAt": "2017-02-17T15:01:15+0100",
         "_links": {
             "self": {
                 "href": "\/api\/v1\/tax-rates\/clothing_sales_tax_7"
@@ -166,10 +166,10 @@ Exemplary Response
                     "code": "clothing_sales_tax_7",
                     "name": "Clothing Sales Tax 7%",
                     "amount": 0.07,
-                    "included_in_price": false,
+                    "includedInPrice": false,
                     "calculator": "default",
-                    "created_at": "2017-02-17T15:01:15+0100",
-                    "updated_at": "2017-02-17T15:01:15+0100",
+                    "createdAt": "2017-02-17T15:01:15+0100",
+                    "updatedAt": "2017-02-17T15:01:15+0100",
                     "_links": {
                         "self": {
                             "href": "\/api\/v1\/tax-rates\/clothing_sales_tax_7"
@@ -187,10 +187,10 @@ Exemplary Response
                     "code": "books_sales_tax_2",
                     "name": "Books Sales Tax 2%",
                     "amount": 0.02,
-                    "included_in_price": true,
+                    "includedInPrice": true,
                     "calculator": "default",
-                    "created_at": "2017-02-17T15:01:15+0100",
-                    "updated_at": "2017-02-17T15:01:15+0100",
+                    "createdAt": "2017-02-17T15:01:15+0100",
+                    "updatedAt": "2017-02-17T15:01:15+0100",
                     "_links": {
                         "self": {
                             "href": "\/api\/v1\/tax-rates\/books_sales_tax_2"
@@ -208,10 +208,10 @@ Exemplary Response
                     "code": "sales_tax_20",
                     "name": "Sales Tax 20%",
                     "amount": 0.2,
-                    "included_in_price": true,
+                    "includedInPrice": true,
                     "calculator": "default",
-                    "created_at": "2017-02-17T15:01:15+0100",
-                    "updated_at": "2017-02-17T15:01:15+0100",
+                    "createdAt": "2017-02-17T15:01:15+0100",
+                    "updatedAt": "2017-02-17T15:01:15+0100",
                     "_links": {
                         "self": {
                             "href": "\/api\/v1\/tax-rates\/sales_tax_20"

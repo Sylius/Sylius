@@ -23,48 +23,48 @@ If you request a promotion via API, you will receive an object with the followin
 
 If you request for more detailed data, you will receive an object with the following fields:
 
-+-------------+-------------------------------------------------------------+
-| Field       | Description                                                 |
-+=============+=============================================================+
-| id          | Id of the promotion                                         |
-+-------------+-------------------------------------------------------------+
-| code        | Unique promotion identifier                                 |
-+-------------+-------------------------------------------------------------+
-| name        | The name of the promotion                                   |
-+-------------+-------------------------------------------------------------+
-| startsAt    | Start date                                                  |
-+-------------+-------------------------------------------------------------+
-| endsAt      | End date                                                    |
-+-------------+-------------------------------------------------------------+
-| usageLimit  | Promotion's usage limit                                     |
-+-------------+-------------------------------------------------------------+
-| used        | Number of times this promotion has been used                |
-+-------------+-------------------------------------------------------------+
-| priority    | When exclusive, promotion with top priority will be applied |
-+-------------+-------------------------------------------------------------+
-| couponBased | Whether this promotion is triggered by a coupon             |
-+-------------+-------------------------------------------------------------+
-| exclusive   | Cannot be applied together with other promotions            |
-+-------------+-------------------------------------------------------------+
-| rules       | Associated rules                                            |
-+-------------+-------------------------------------------------------------+
-| actions     | Associated actions                                          |
-+-------------+-------------------------------------------------------------+
-| createdAt   | Date of creation                                            |
-+-------------+-------------------------------------------------------------+
-| updatedAt   | Date of last update                                         |
-+-------------+-------------------------------------------------------------+
-| channels    | Collection of channels in which the promotion is available  |
-+-------------+-------------------------------------------------------------+
++-------------+--------------------------------------------------------------------------+
+| Field       | Description                                                              |
++=============+==========================================================================+
+| id          | Id of the promotion                                                      |
++-------------+--------------------------------------------------------------------------+
+| code        | Unique promotion identifier                                              |
++-------------+--------------------------------------------------------------------------+
+| name        | The name of the promotion                                                |
++-------------+--------------------------------------------------------------------------+
+| startsAt    | Start date                                                               |
++-------------+--------------------------------------------------------------------------+
+| endsAt      | End date                                                                 |
++-------------+--------------------------------------------------------------------------+
+| usageLimit  | Promotion's usage limit                                                  |
++-------------+--------------------------------------------------------------------------+
+| used        | Number of times this promotion has been used                             |
++-------------+--------------------------------------------------------------------------+
+| priority    | When exclusive, promotion with top priority will be applied              |
++-------------+--------------------------------------------------------------------------+
+| couponBased | Whether this promotion is triggered by a coupon                          |
++-------------+--------------------------------------------------------------------------+
+| exclusive   | When true the promotion cannot be applied together with other promotions |
++-------------+--------------------------------------------------------------------------+
+| rules       | Associated rules                                                         |
++-------------+--------------------------------------------------------------------------+
+| actions     | Associated actions                                                       |
++-------------+--------------------------------------------------------------------------+
+| createdAt   | Date of creation                                                         |
++-------------+--------------------------------------------------------------------------+
+| updatedAt   | Date of last update                                                      |
++-------------+--------------------------------------------------------------------------+
+| channels    | Collection of channels in which the promotion is available               |
++-------------+--------------------------------------------------------------------------+
 
 .. note::
 
-    Read more about :doc:`Promotion in the component docs</components/Promotion/models>`.
+    Read more about :doc:`Promotions in the component docs</components/Promotion/models>`.
 
 Getting a Single Promotion
 --------------------------
 
-To retrieve the details of the promotion you will need to call the ``/api/v1/promotions/code`` endpoint with the ``GET`` method.
+To retrieve the details of a promotion you will need to call the ``/api/v1/promotions/code`` endpoint with the ``GET`` method.
 
 Definition
 ^^^^^^^^^^
@@ -78,13 +78,13 @@ Definition
 +===============+================+======================================+
 | Authorization | header         | Token received during authentication |
 +---------------+----------------+--------------------------------------+
-| code          | url attribute  | Code of requested promotion  |
+| code          | url attribute  | Code of the requested promotion      |
 +---------------+----------------+--------------------------------------+
 
 Example
 ^^^^^^^
 
-To see the details for the the promotion with ``code = christmas`` use the below method:
+To see the details of the promotion with ``code = christmas`` use the below method:
 
 .. code-block:: bash
 
@@ -94,14 +94,14 @@ To see the details for the the promotion with ``code = christmas`` use the below
 
 .. note::
 
-    *christmas* is just an example. Your value can be different.
+    The *christmas* is just an example. Your value can be different.
 
 Exemplary Response
 ^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
-     STATUS: 200 OK
+    STATUS: 200 OK
 
 .. code-block:: json
 
@@ -112,7 +112,7 @@ Exemplary Response
         "priority": 0,
         "exclusive": false,
         "used": 19,
-        "coupon_based": false,
+        "couponBased": false,
         "rules": [
             {
                 "id": 1,
@@ -131,8 +131,8 @@ Exemplary Response
                 }
             }
         ],
-        "created_at": "2017-02-17T15:01:15+0100",
-        "updated_at": "2017-02-17T15:01:40+0100",
+        "createdAt": "2017-02-17T15:01:15+0100",
+        "updatedAt": "2017-02-17T15:01:40+0100",
         "channels": [
             {
                 "id": 1,

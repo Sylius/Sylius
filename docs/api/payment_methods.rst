@@ -3,11 +3,8 @@ Payment Methods API
 
 These endpoints will allow you to easily manage payment methods. Base URI is `/api/v1/payment-methods`.
 
-Payment Method structure
-------------------------
-
 Payment Method API response structure
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------------------
 
 If you request a payment method via API, you will receive an object with the following fields:
 
@@ -18,7 +15,7 @@ If you request a payment method via API, you will receive an object with the fol
 +-----------+-----------------------------------+
 | code      | Unique code of the payment method |
 +-----------+-----------------------------------+
-| name      | Payment method's name             |
+| name      | The payment method's name         |
 +-----------+-----------------------------------+
 | createdAt | Date of creation                  |
 +-----------+-----------------------------------+
@@ -27,12 +24,12 @@ If you request a payment method via API, you will receive an object with the fol
 
 .. note::
 
-    Read more about :doc:`Payment Method in the component docs</components/Payment/models>`.
+    Read more about :doc:`Payment Methods in the component docs</components/Payment/models>`.
 
 Getting a Single Payment Method
 -------------------------------
 
-To retrieve the details of the payment method you will need to call the ``/api/v1/payment-methods/code`` endpoint with the ``GET`` method.
+To retrieve the details of a payment method you will need to call the ``/api/v1/payment-methods/code`` endpoint with the ``GET`` method.
 
 Definition
 ^^^^^^^^^^
@@ -46,13 +43,13 @@ Definition
 +===============+================+======================================+
 | Authorization | header         | Token received during authentication |
 +---------------+----------------+--------------------------------------+
-| code          | url attribute  | Code of requested payment method     |
+| code          | url attribute  | Code of the requested payment method |
 +---------------+----------------+--------------------------------------+
 
 Example
 ^^^^^^^
 
-To see the details for the the payment method with ``code = cash_on_delivery`` use the below method:
+To see the details of the payment method with ``code = cash_on_delivery`` use the below method:
 
 .. code-block:: bash
 
@@ -62,7 +59,7 @@ To see the details for the the payment method with ``code = cash_on_delivery`` u
 
 .. note::
 
-    *cash_on_delivery* is just an example. Your value can be different.
+    The *cash_on_delivery* is just an example. Your value can be different.
 
 Exemplary Response
 ^^^^^^^^^^^^^^^^^^
@@ -76,19 +73,17 @@ Exemplary Response
     {
         "id": 1,
         "code": "cash_on_delivery",
-        "created_at": "2017-02-21T14:50:08+0100",
-        "updated_at": "2017-02-21T14:50:08+0100",
         "channels": [
             {
                 "id": 1,
                 "code": "US_WEB",
                 "name": "US Web Store",
                 "hostname": "localhost",
-                "color": "Violet",
-                "created_at": "2017-02-21T14:50:07+0100",
-                "updated_at": "2017-02-21T14:50:07+0100",
+                "color": "LightGreen",
+                "createdAt": "2017-02-22T15:06:16+0100",
+                "updatedAt": "2017-02-22T15:06:16+0100",
                 "enabled": true,
-                "tax_calculation_strategy": "order_items_based",
+                "taxCalculationStrategy": "order_items_based",
                 "_links": {
                     "self": {
                         "href": "\/api\/v1\/channels\/US_WEB"
@@ -96,6 +91,12 @@ Exemplary Response
                 }
             }
         ],
+        "gatewayConfig": {
+            "id": 1,
+            "gatewayName": "Offline",
+            "factoryName": "offline",
+            "config": []
+        },
         "_links": {
             "self": {
                 "href": "\/api\/v1\/payment-methods\/cash_on_delivery"

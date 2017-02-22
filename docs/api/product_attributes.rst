@@ -3,11 +3,8 @@ Product Attributes API
 
 These endpoints will allow you to easily manage product attributes. Base URI is `/api/v1/product-attributes`.
 
-Product Attribute structure
----------------------------
-
 Product Attribute API response structure
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+----------------------------------------
 
 If you request a product attribute via API, you will receive an object with the following fields:
 
@@ -43,12 +40,12 @@ If you request for more detailed data, you will receive an object with the follo
 
 .. note::
 
-    Read more about :doc:`Product Attribute in the component docs</components/Product/models>`.
+    Read more about :doc:`Product Attributes in the component docs</components/Product/models>`.
 
 Getting a Single Product Attribute
 ----------------------------------
 
-To retrieve the details of the product attribute you will need to call the ``/api/v1/product-attributes/code`` endpoint with the ``GET`` method.
+To retrieve the details of a product attribute you will need to call the ``/api/v1/product-attributes/code`` endpoint with the ``GET`` method.
 
 Definition
 ^^^^^^^^^^
@@ -57,18 +54,18 @@ Definition
 
     GET /api/v1/product-attributes/{code}
 
-+---------------+----------------+--------------------------------------+
-| Parameter     | Parameter type | Description                          |
-+===============+================+======================================+
-| Authorization | header         | Token received during authentication |
-+---------------+----------------+--------------------------------------+
-| code          | url attribute  | Code of requested product attribute  |
-+---------------+----------------+--------------------------------------+
++---------------+----------------+------------------------------------------+
+| Parameter     | Parameter type | Description                              |
++===============+================+==========================================+
+| Authorization | header         | Token received during authentication     |
++---------------+----------------+------------------------------------------+
+| code          | url attribute  | Code of the requested product attribute  |
++---------------+----------------+------------------------------------------+
 
 Example
 ^^^^^^^
 
-To see the details for the the product attribute with ``code = sticker_paper`` use the below method:
+To see the details of the product attribute with ``code = sticker_paper`` use the below method:
 
 .. code-block:: bash
 
@@ -78,7 +75,7 @@ To see the details for the the product attribute with ``code = sticker_paper`` u
 
 .. note::
 
-    *sticker_paper* is just an example. Your value can be different.
+    The *sticker_paper* is just an example. Your value can be different.
 
 Exemplary Response
 ^^^^^^^^^^^^^^^^^^
@@ -91,8 +88,8 @@ Exemplary Response
 
    {
         "id": 2,
-        "created_at": "2017-02-17T15:01:18+0100",
-        "updated_at": "2017-02-20T12:46:12+0100",
+        "createdAt": "2017-02-17T15:01:18+0100",
+        "updatedAt": "2017-02-20T12:46:12+0100",
         "_links": {
             "self": {
                 "href": "\/api\/v1\/product-attributes\/sticker_paper"
@@ -162,8 +159,8 @@ Exemplary Response
             "items": [
                 {
                     "id": 1,
-                    "created_at": "2017-02-17T15:01:16+0100",
-                    "updated_at": "2017-02-17T15:01:16+0100",
+                    "createdAt": "2017-02-17T15:01:16+0100",
+                    "updatedAt": "2017-02-17T15:01:16+0100",
                     "_links": {
                         "self": {
                             "href": "\/api\/v1\/product-attributes\/mug_material"
@@ -172,8 +169,8 @@ Exemplary Response
                 },
                 {
                     "id": 2,
-                    "created_at": "2017-02-17T15:01:18+0100",
-                    "updated_at": "2017-02-20T12:46:12+0100",
+                    "createdAt": "2017-02-17T15:01:18+0100",
+                    "updatedAt": "2017-02-20T12:46:12+0100",
                     "_links": {
                         "self": {
                             "href": "\/api\/v1\/product-attributes\/sticker_paper"
@@ -182,8 +179,8 @@ Exemplary Response
                 },
                 {
                     "id": 3,
-                    "created_at": "2017-02-17T15:01:18+0100",
-                    "updated_at": "2017-02-17T15:01:18+0100",
+                    "createdAt": "2017-02-17T15:01:18+0100",
+                    "updatedAt": "2017-02-17T15:01:18+0100",
                     "_links": {
                         "self": {
                             "href": "\/api\/v1\/product-attributes\/sticker_resolution"
@@ -192,8 +189,8 @@ Exemplary Response
                 },
                 {
                     "id": 4,
-                    "created_at": "2017-02-17T15:01:20+0100",
-                    "updated_at": "2017-02-17T15:01:20+0100",
+                    "createdAt": "2017-02-17T15:01:20+0100",
+                    "updatedAt": "2017-02-17T15:01:20+0100",
                     "_links": {
                         "self": {
                             "href": "\/api\/v1\/product-attributes\/book_author"
@@ -202,8 +199,8 @@ Exemplary Response
                 },
                 {
                     "id": 5,
-                    "created_at": "2017-02-17T15:01:20+0100",
-                    "updated_at": "2017-02-17T15:01:20+0100",
+                    "createdAt": "2017-02-17T15:01:20+0100",
+                    "updatedAt": "2017-02-17T15:01:20+0100",
                     "_links": {
                         "self": {
                             "href": "\/api\/v1\/product-attributes\/book_isbn"
@@ -212,8 +209,8 @@ Exemplary Response
                 },
                 {
                     "id": 6,
-                    "created_at": "2017-02-17T15:01:20+0100",
-                    "updated_at": "2017-02-17T15:01:20+0100",
+                    "createdAt": "2017-02-17T15:01:20+0100",
+                    "updatedAt": "2017-02-17T15:01:20+0100",
                     "_links": {
                         "self": {
                             "href": "\/api\/v1\/product-attributes\/book_pages"
@@ -222,8 +219,8 @@ Exemplary Response
                 },
                 {
                     "id": 7,
-                    "created_at": "2017-02-17T15:01:22+0100",
-                    "updated_at": "2017-02-17T15:01:22+0100",
+                    "createdAt": "2017-02-17T15:01:22+0100",
+                    "updatedAt": "2017-02-17T15:01:22+0100",
                     "_links": {
                         "self": {
                             "href": "\/api\/v1\/product-attributes\/t_shirt_brand"
@@ -232,8 +229,8 @@ Exemplary Response
                 },
                 {
                     "id": 8,
-                    "created_at": "2017-02-17T15:01:22+0100",
-                    "updated_at": "2017-02-17T15:01:22+0100",
+                    "createdAt": "2017-02-17T15:01:22+0100",
+                    "updatedAt": "2017-02-17T15:01:22+0100",
                     "_links": {
                         "self": {
                             "href": "\/api\/v1\/product-attributes\/t_shirt_collection"
@@ -242,8 +239,8 @@ Exemplary Response
                 },
                 {
                     "id": 9,
-                    "created_at": "2017-02-17T15:01:22+0100",
-                    "updated_at": "2017-02-17T15:01:22+0100",
+                    "createdAt": "2017-02-17T15:01:22+0100",
+                    "updatedAt": "2017-02-17T15:01:22+0100",
                     "_links": {
                         "self": {
                             "href": "\/api\/v1\/product-attributes\/t_shirt_material"

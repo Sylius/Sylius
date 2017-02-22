@@ -149,7 +149,7 @@ Exemplary Response
 .. code-block:: json
 
     {
-	    "code": 400,
+       "code": 400,
         "message": "Validation Failed",
         "errors": {
             "children": {
@@ -348,7 +348,7 @@ Exemplary Response
 Getting a Single Taxon
 ----------------------
 
-To retrieve the details of the taxon you will need to call the ``/api/v1/taxons/code`` endpoint with the ``GET`` method.
+To retrieve the details of a taxon you will need to call the ``/api/v1/taxons/code`` endpoint with the ``GET`` method.
 
 Definition
 ^^^^^^^^^^
@@ -368,7 +368,7 @@ Definition
 Example
 ^^^^^^^
 
-To see the details for the the taxon with ``code = toys`` use the below method:
+To see the details of the the taxon with ``code = toys`` use the below method:
 
 .. code-block:: bash
 
@@ -786,7 +786,7 @@ Exemplary Response
 Updating Taxon
 --------------
 
-To fully update a taxon you will need to call the ``/api/v1/taxons/code`` endpoint with ``PUT`` method.
+To fully update a taxon you will need to call the ``/api/v1/taxons/code`` endpoint with the ``PUT`` method.
 
 Definition
 ^^^^^^^^^^
@@ -800,7 +800,7 @@ Definition
 +============================================+================+====================================================+
 | Authorization                              | header         | Token received during authentication               |
 +--------------------------------------------+----------------+----------------------------------------------------+
-| code                                       | url attribute  | **(unique)** Identifier of the requested the taxon |
+| code                                       | url attribute  | **(unique)** Identifier of the requested taxon     |
 +--------------------------------------------+----------------+----------------------------------------------------+
 | translations['locale_code']['name']        | request        | *(optional)* Name of the taxon                     |
 +--------------------------------------------+----------------+----------------------------------------------------+
@@ -816,7 +816,7 @@ Definition
 Example
 ^^^^^^^
 
-To full update the taxon with ``code = toys`` use the below method:
+To fully update the taxon with ``code = toys`` use the below method:
 
 .. code-block:: bash
 
@@ -832,7 +832,7 @@ To full update the taxon with ``code = toys`` use the below method:
                         "slug": "dolls"
                     }
                 }
-	        }
+           }
         '
 
 Exemplary Response
@@ -856,13 +856,13 @@ Definition
 +===============+================+====================================================+
 | Authorization | header         | Token received during authentication               |
 +---------------+----------------+----------------------------------------------------+
-| code          | url attribute  | **(unique)** Identifier of the requested the taxon |
+| code          | url attribute  | **(unique)** Identifier of the requested taxon     |
 +---------------+----------------+----------------------------------------------------+
 
 Example
 ^^^^^^^
 
-To partial update the taxon with ``code = toys`` use the below method:
+To partially update the taxon with ``code = toys`` use the below method:
 
 .. code-block:: bash
 
@@ -905,7 +905,7 @@ Definition
 +===============+================+====================================================+
 | Authorization | header         | Token received during authentication               |
 +---------------+----------------+----------------------------------------------------+
-| code          | url attribute  | **(unique)** Identifier of the requested the taxon |
+| code          | url attribute  | **(unique)** Identifier of the requested taxon     |
 +---------------+----------------+----------------------------------------------------+
 
 Example
