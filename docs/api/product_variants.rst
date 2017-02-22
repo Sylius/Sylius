@@ -98,7 +98,7 @@ Definition
 +---------------------------------------+----------------+----------------------------------------------------------+
 
 Example
-.......
+^^^^^^^
 
 To see the first page of all product variants for the product with id equals to 1 use the method below.
 
@@ -108,8 +108,8 @@ To see the first page of all product variants for the product with id equals to 
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
-Example Response
-~~~~~~~~~~~~~~~~
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
@@ -244,7 +244,7 @@ Definition
 +---------------+----------------+----------------------------------------------------------+
 
 Example
-.......
+^^^^^^^
 
 To see the details for the the product variant with id equals to 1, which is defined for the product with id equals to 1 use the method below.
 
@@ -254,8 +254,8 @@ To see the details for the the product variant with id equals to 1, which is def
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
-Example Response
-~~~~~~~~~~~~~~~~
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
@@ -312,7 +312,7 @@ Example Response
             "product": {
                 "href": "/api/v1/products/1"
             }
-	    }
+        }
     }
 
 Creating a Product Variant
@@ -340,7 +340,7 @@ Definition
 +---------------+----------------+----------------------------------------------------------+
 
 Example
-.......
+^^^^^^^
 
 To create new product variant for the product with id equals to 1 use the below method.
 
@@ -352,12 +352,12 @@ To create new product variant for the product with id equals to 1 use the below 
         -X POST \
         --data '
             {
-	            "code": "MONSTER_MUG"
+                "code": "MONSTER_MUG"
             }
         '
 
-Example Response
-~~~~~~~~~~~~~~~~
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
@@ -390,7 +390,7 @@ Example Response
     If you try to create a resource without code, you will receive a `400 Bad Request` error.
 
 Example
-.......
+^^^^^^^
 
 .. code-block:: bash
 
@@ -399,8 +399,8 @@ Example
         -H "Accept: application/json" \
         -X POST
 
-Example Response
-~~~~~~~~~~~~~~~~
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
@@ -472,7 +472,7 @@ You can also create a product variant with additional (not required) fields:
     Channels must be created and enabled before the prices will be defined for they.
 
 Example
-.......
+^^^^^^^
 
 Here is an example of creating a product variant with additional data for the product with id equals to 62.
 
@@ -512,8 +512,8 @@ Here is an example of creating a product variant with additional data for the pr
             }
         '
 
-Example Response
-~~~~~~~~~~~~~~~~
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
@@ -646,7 +646,7 @@ Definition
 +---------------+----------------+----------------------------------------------------------+
 
 Example
-.......
+^^^^^^^
 
 To full update the product variant with id equals to 342 for the product with id equals to 1 use the below method.
 
@@ -685,8 +685,8 @@ To full update the product variant with id equals to 342 for the product with id
             }
         '
 
-Example Response
-~~~~~~~~~~~~~~~~
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
@@ -714,7 +714,7 @@ Definition
 +-------------------------------------+----------------+----------------------------------------------------------+
 
 Example
-.......
+^^^^^^^
 
 To partial update the product variant with id equals to 342 for the product with id equals to 1 use the below method.
 
@@ -734,8 +734,8 @@ To partial update the product variant with id equals to 342 for the product with
             }
         '
 
-Example Response
-~~~~~~~~~~~~~~~~
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
@@ -764,7 +764,7 @@ Definition
 +-------------------------------------+----------------+----------------------------------------------------------+
 
 Example
-.......
+^^^^^^^
 
 To delete the product variant with id equals to 333 from product with id equals to 1 use the method below.
 
@@ -775,8 +775,8 @@ To delete the product variant with id equals to 333 from product with id equals 
         -H "Accept: application/json" \
         -X DELETE
 
-Example Response
-~~~~~~~~~~~~~~~~
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 

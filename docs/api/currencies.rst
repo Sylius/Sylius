@@ -3,11 +3,8 @@ Currencies API
 
 These endpoints will allow you to easily manage currencies. Base URI is `/api/v1/currencies`.
 
-Currency structure
-------------------
-
 Currency API response structure
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------------
 
 If you request a currency via API, you will receive an object with the following fields:
 
@@ -35,7 +32,7 @@ If you request for more detailed data, you will receive an object with the follo
 
 .. note::
 
-    Read more about :doc:`Currency in the component docs</components/Currency/models>`.
+    Read more about :doc:`Currencies in the component docs</components/Currency/models>`.
 
 Creating a Currency
 -------------------
@@ -93,7 +90,7 @@ Exemplary Response
         }
     }
 
-If you try to create a currency without code you will receive a 400 error.
+If you try to create a currency without code you will receive a ``400 Bad Request`` error.
 
 Example
 ^^^^^^^
@@ -145,13 +142,13 @@ Definition
 +===============+================+======================================+
 | Authorization | header         | Token received during authentication |
 +---------------+----------------+--------------------------------------+
-| code          | url attribute  | Code of requested currency           |
+| code          | url attribute  | Code of the requested currency       |
 +---------------+----------------+--------------------------------------+
 
 Example
 ^^^^^^^
 
-To see the details for the the currency with ``code = PLN`` use the below method:
+To see the details of the currency with ``code = PLN`` use the below method:
 
 .. code-block:: bash
 
@@ -161,7 +158,7 @@ To see the details for the the currency with ``code = PLN`` use the below method
 
 .. note::
 
-    The *PLN* is just an example. Your value can be different.
+    The *PLN* code is just an example. Your value can be different.
 
 Exemplary Response
 ^^^^^^^^^^^^^^^^^^
@@ -275,8 +272,8 @@ Exemplary Response
         }
     }
 
-Deleting Currency
------------------
+Deleting a Currency
+-------------------
 
 To delete a currency you will need to call the ``/api/v1/currencies/currency_code`` endpoint with the ``DELETE`` method.
 
@@ -292,7 +289,7 @@ Definition
 +===============+================+===========================================+
 | Authorization | header         | Token received during authentication      |
 +---------------+----------------+-------------------------------------------+
-| code          | url attribute  | Code of removed currency                  |
+| code          | url attribute  | Code of the removed currency              |
 +---------------+----------------+-------------------------------------------+
 
 Example

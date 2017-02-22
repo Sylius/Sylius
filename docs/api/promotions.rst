@@ -13,7 +13,7 @@ You can retrieve the full list of promotions by making the following request:
     GET /api/v1/promotions
 
 Parameters
-~~~~~~~~~~
+^^^^^^^^^^
 
 page
     Number of the page, by default = 1
@@ -21,7 +21,7 @@ limit
     Number of items to display per page
 
 Response
-~~~~~~~~
+^^^^^^^^
 
 .. code-block:: text
 
@@ -100,7 +100,7 @@ You can view a single promotion by executing the following request:
     GET /api/v1/promotions/1
 
 Response
-~~~~~~~~
+^^^^^^^^
 
 .. code-block:: text
 
@@ -155,7 +155,7 @@ You can delete a promotion from the system by making the following DELETE call:
     DELETE /api/v1/promotions/1
 
 Response
-~~~~~~~~
+^^^^^^^^
 
 .. code-block:: text
 
@@ -171,7 +171,7 @@ You can get the coupons associated with given promotion by performing the follow
     GET /api/v1/promotions/1/coupons
 
 Parameters
-~~~~~~~~~~
+^^^^^^^^^^
 
 page
     Number of the page, by default = 1
@@ -180,7 +180,7 @@ limit
 
 
 Response
-~~~~~~~~
+^^^^^^^^
 
 .. code-block:: text
 
@@ -234,7 +234,7 @@ To create a new coupon for given promotion, you can execute the following reques
     POST /api/v1/promotion/1/coupons/
 
 Parameters
-~~~~~~~~~~
+^^^^^^^^^^
 
 code
     Coupon code
@@ -242,7 +242,7 @@ usage_limit
     The number of times that coupon can be used
 
 Response
-~~~~~~~~
+^^^^^^^^
 
 .. code-block:: text
 
