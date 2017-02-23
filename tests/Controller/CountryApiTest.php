@@ -83,6 +83,32 @@ EOT;
     /**
      * @test
      */
+    public function it_allows_to_create_country_with_provinces()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+
+        $data =
+<<<EOT
+        {
+            "code": "BE",
+            "provinces": [
+                {
+                    "code": "BE-LM",
+                    "name": "Limburg"
+                }
+            ]
+        }
+EOT;
+
+        $this->client->request('POST', '/api/v1/countries/', [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'country/create_with_province_response', Response::HTTP_CREATED);
+    }
+
+    /**
+     * @test
+     */
     public function it_returns_not_found_response_when_requesting_details_of_a_country_which_does_not_exist()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');

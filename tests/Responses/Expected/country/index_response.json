@@ -18,30 +18,15 @@
         "items": [
             {
                 "id": @integer@,
-                "code": "NL",
-                "_links": {
-                    "self": {
-                        "href": @string@
-                    }
-                }
+                "code": "NL"
             },
             {
                 "id": @integer@,
-                "code": "BE",
-                "_links": {
-                    "self": {
-                        "href": @string@
-                    }
-                }
+                "code": "BE"
             },
             {
                 "id": @integer@,
-                "code": "PL",
-                "_links": {
-                    "self": {
-                        "href": @string@
-                    }
-                }
+                "code": "PL"
             }
         ]
     }

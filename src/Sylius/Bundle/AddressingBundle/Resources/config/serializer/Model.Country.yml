@@ -15,10 +15,16 @@ Sylius\Component\Addressing\Model\Country:
             expose: true
             type: boolean
             groups: [Detailed]
+        provinces:
+            expose: true
+            type: array
+            groups: [Detailed]
     relations:
-        - rel: self
-          href:
+        -   rel: self
+            href:
                 route: sylius_api_country_show
                 parameters:
                     code: expr(object.getCode())
                     version: 1
+            exclusion:
+                groups: [Detailed]
