@@ -6,25 +6,41 @@ Sylius\Component\Addressing\Model\Zone:
             expose: true
             type: integer
             xml_attribute: true
+            groups: [Default, Detailed]
         code:
             expose: true
             type: string
+            groups: [Default, Detailed]
         name:
             expose: true
             type: string
+            groups: [Default, Detailed]
         type:
             expose: true
             type: string
+            groups: [Default, Detailed]
+        scope:
+            expose: true
+            type: string
+            groups: [Detailed]
+        members:
+            expose: true
+            type: array
+            groups: [Detailed]
         createdAt:
             expose: true
             type: DateTime
+            groups: [Detailed]
         updatedAt:
             expose: true
             type: DateTime
+            groups: [Detailed]
     relations:
-        - rel: self
-          href:
+        -   rel: self
+            href:
                 route: sylius_api_zone_show
                 parameters:
                     code: expr(object.getCode())
                     version: 1
+            exclusion:
+                groups: [Detailed]

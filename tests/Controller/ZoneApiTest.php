@@ -273,7 +273,7 @@ EOT;
         $this->client->request('GET', '/api/v1/zones/'.$zones['zone_eu']->getCode(), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'zone/update_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'zone/update_partially_response', Response::HTTP_OK);
     }
 
     /**
