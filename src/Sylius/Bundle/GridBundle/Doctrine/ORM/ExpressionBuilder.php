@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\GridBundle\Doctrine\ORM;
 
+use Doctrine\ORM\Query\Expr\Comparison;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Grid\Data\ExpressionBuilderInterface;
 
@@ -53,8 +54,7 @@ class ExpressionBuilder implements ExpressionBuilderInterface
      */
     public function comparison($field, $operator, $value)
     {
-        throw new \BadMethodCallException('Not supported yet.');
-        // TODO: Implement comparison() method.
+        return new Comparison($field, $operator, $value);
     }
 
     /**
