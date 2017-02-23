@@ -7,7 +7,7 @@ Coupon generator
 ----------------
 
 ``SyliusPromotionBundle`` provides a way of generating coupons for a promotion : the coupon generator.
-Provided as a service ``sylius.promotion_coupon_generator`` via the class ``Sylius\Bundle\PromotionBundle\Generator\PromotionCouponGenerator``, its goal is to generate unique coupon codes.
+Provided as a service ``sylius.promotion_coupon_generator`` via the class ``Sylius\Component\Promotion\Generator\PromotionCouponGenerator``, its goal is to generate unique coupon codes.
 
 PromotionCoupon controller
 --------------------------

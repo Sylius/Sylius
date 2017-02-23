@@ -1,7 +1,7 @@
 How actions are applied ?
 =========================
 
-Everything related to this subject is located in ``Sylius\Bundle\PromotionBundle\Action``.
+Everything related to this subject is located in ``Sylius\Component\Promotion\Action``.
 
 Actions
 -------
@@ -14,11 +14,11 @@ As ``SyliusPromotionBundle`` is totally independent, it does not provide actions
 
 .. note::
 
-    ``Sylius\Bundle\CoreBundle\Promotion\Action\FixedDiscountPromotionActionCommand`` from ``Sylius/Sylius-Standard`` is an example of action for a fixed amount discount. The related service is called ``sylius.promotion_action.fixed_discount``.
+    ``Sylius\Component\Core\Promotion\Action\FixedDiscountPromotionActionCommand`` from ``Sylius/Sylius-Standard`` is an example of action for a fixed amount discount. The related service is called ``sylius.promotion_action.fixed_discount``.
 
 .. note::
 
-    ``Sylius\Bundle\CoreBundle\Promotion\Action\PercentageDiscountPromotionActionCommand`` from ``Sylius/Sylius-Standard`` is an example of action for a discount based on percentage. The related service is called  ``sylius.promotion_action.percentage_discount``.
+    ``Sylius\Component\Core\Promotion\Action\PercentageDiscountPromotionActionCommand`` from ``Sylius/Sylius-Standard`` is an example of action for a discount based on percentage. The related service is called  ``sylius.promotion_action.percentage_discount``.
 
 Learn more about actions in the :doc:`promotions concept documentation </book/orders/promotions>` and in the :doc:`Cookbook </cookbook/index>`.
 
