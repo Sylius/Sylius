@@ -6,6 +6,7 @@
 * :doc:`/api/countries`
 * :doc:`/api/currencies`
 * :doc:`/api/customers`
+* :doc:`/api/exchange_rates`
 * :doc:`/api/locales`
 * :doc:`/api/orders`
 * :doc:`/api/payment_methods`

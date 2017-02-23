@@ -725,7 +725,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.orgg/api/v1/orders/21/payments/21/complete \
+    $ curl http://demo.sylius.org/api/v1/orders/21/payments/21/complete \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X PUT

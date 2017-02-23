@@ -12,6 +12,7 @@ The REST API Reference
     countries
     currencies
     customers
+    exchange_rates
     locales
     orders
     payment_methods

@@ -59,7 +59,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://sylius.dev/api/v1/currencies/ \
+    $ curl http://demo.sylius.org/api/v1/currencies/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST \
@@ -97,7 +97,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://sylius.dev/api/v1/currencies/ \
+    $ curl http://demo.sylius.org/api/v1/currencies/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X POST
@@ -297,7 +297,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://sylius.dev/api/v1/currencies/PLN \
+    $ curl http://demo.sylius.org/api/v1/currencies/PLN \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X DELETE

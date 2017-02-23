@@ -227,11 +227,43 @@ EOT;
         $data =
 <<<EOT
         {
-            "ratio": "0.84"
+            "ratio": 0.84
         }
 EOT;
 
         $this->client->request('PUT', $this->getExchangeRateUrl($exchangeRate), [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $response = $this->client->getResponse();
+        $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
+
+        $this->client->request('GET', $this->getExchangeRateUrl($exchangeRate), [], [], static::$authorizedHeaderWithAccept);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'exchange_rate/update_response', Response::HTTP_OK);
+    }
+
+
+    /**
+     * @test
+     */
+    public function it_does_not_allow_to_update_exchange_rates_currencies()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $exchangeRates = $this->loadFixturesFromFile('resources/exchange_rates.yml');
+
+        /** @var ExchangeRateInterface $exchangeRate */
+        $exchangeRate = $exchangeRates['eur_usd_exchange_rate'];
+
+        $data =
+<<<EOT
+        {
+            "ratio": 0.84,
+            "sourceCurrency": "GBP",
+            "targetCurrency": "EUR"
+        }
+EOT;
+
+        $this->client->request('PATCH', $this->getExchangeRateUrl($exchangeRate), [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
