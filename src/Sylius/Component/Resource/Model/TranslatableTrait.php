@@ -12,6 +12,7 @@
 namespace Sylius\Component\Resource\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\PersistentCollection;
 
 /**
  * @see TranslatableInterface
@@ -21,9 +22,14 @@ use Doctrine\Common\Collections\ArrayCollection;
 trait TranslatableTrait
 {
     /**
-     * @var TranslationInterface[]
+     * @var ArrayCollection|PersistentCollection|TranslationInterface[]
      */
     protected $translations;
+
+    /**
+     * @var array|TranslationInterface[]
+     */
+    protected $translationsCache = [];
 
     /**
      * @var string
@@ -59,13 +65,21 @@ trait TranslatableTrait
             throw new \RuntimeException('No locale has been set and current locale is undefined.');
         }
 
+        if (isset($this->translationsCache[$locale])) {
+            return $this->translationsCache[$locale];
+        }
+
         $translation = $this->translations->get($locale);
         if (null !== $translation) {
+            $this->translationsCache[$locale] = $translation;
+
             return $translation;
         }
 
         $fallbackTranslation = $this->translations->get($this->fallbackLocale);
         if (null !== $fallbackTranslation) {
+            $this->translationsCache[$this->fallbackLocale] = $fallbackTranslation;
+
             return $fallbackTranslation;
         }
 
@@ -73,6 +87,8 @@ trait TranslatableTrait
         $translation->setLocale($locale);
 
         $this->addTranslation($translation);
+
+        $this->translationsCache[$locale] = $translation;
 
         return $translation;
     }
@@ -92,7 +108,7 @@ trait TranslatableTrait
      */
     public function hasTranslation(TranslationInterface $translation)
     {
-        return $this->translations->containsKey($translation->getLocale());
+        return isset($this->translationsCache[$translation->getLocale()]) || $this->translations->containsKey($translation->getLocale());
     }
 
     /**
@@ -100,7 +116,9 @@ trait TranslatableTrait
      */
     public function addTranslation(TranslationInterface $translation)
     {
-        if (!$this->translations->containsKey($translation->getLocale())) {
+        if (!$this->hasTranslation($translation)) {
+            $this->translationsCache[$translation->getLocale()] = $translation;
+
             $this->translations->set($translation->getLocale(), $translation);
             $translation->setTranslatable($this);
         }
@@ -112,6 +130,8 @@ trait TranslatableTrait
     public function removeTranslation(TranslationInterface $translation)
     {
         if ($this->translations->removeElement($translation)) {
+            unset($this->translationsCache[$translation->getLocale()]);
+
             $translation->setTranslatable(null);
         }
     }
