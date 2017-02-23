@@ -34,7 +34,6 @@
                 "tracked": false,
                 "channelPricings": {
                     "CHANNEL": {
-                        "id": @integer@,
                         "channel": "CHANNEL",
                         "price": 20
                     }

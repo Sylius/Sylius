@@ -110,6 +110,7 @@ class ChannelPricingsType extends AbstractType implements EventSubscriberInterfa
         parent::configureOptions($resolver);
 
         $resolver->setDefault('entry_type', ChannelPricingType::class);
+        $resolver->setDefault('error_bubbling', false);
     }
 
     /**
