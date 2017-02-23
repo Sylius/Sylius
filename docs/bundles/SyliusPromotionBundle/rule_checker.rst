@@ -1,7 +1,7 @@
 How are rules checked ?
 =======================
 
-Everything related to this subject is located in ``Sylius\Bundle\PromotionBundle\Checker``.
+Everything related to this subject is located in ``Sylius\Component\Promotion\Checker``.
 
 Rule checkers
 -------------
