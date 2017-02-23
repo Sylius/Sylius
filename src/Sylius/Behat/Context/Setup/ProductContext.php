@@ -196,13 +196,7 @@ final class ProductContext implements Context
 
         /** @var ProductVariantInterface $productVariant */
         $productVariant = $this->defaultVariantResolver->getVariant($product);
-
-        /** @var ChannelPricingInterface $channelPricing */
-        $channelPricing = $this->channelPricingFactory->createNew();
-        $channelPricing->setPrice($price);
-        $channelPricing->setChannel($channel);
-
-        $productVariant->addChannelPricing($channelPricing);
+        $productVariant->addChannelPricing($this->createChannelPricingForChannel($price, $channel));
 
         $this->objectManager->flush();
     }

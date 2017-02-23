@@ -89,7 +89,7 @@ class ChannelPricingsType extends AbstractType implements EventSubscriberInterfa
         $variant = $event->getForm()->getParent()->getData();
 
         foreach ($channelPricings as $channelCode => $channelPricing) {
-            if (null === $channelPricing) {
+            if (null === $channelPricing->getPrice()) {
                 unset($channelPricings[$channelCode]);
 
                 continue;
