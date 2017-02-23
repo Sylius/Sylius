@@ -1,6 +1,3 @@
-{% set visible = options.visible is defined ? options.visible : true %}
-
-{% if visible %}
 <div class="ui{% if options.icon is defined %} labeled icon{% endif %} floating dropdown {{ options.class|default('') }} link button">
     {% if options.icon is defined %}<i class="{{ options.icon }} icon"></i>{% endif %}
     <span class="text">{{ action.label|trans }}</span>
@@ -17,4 +14,3 @@
         {% endfor %}
     </div>
 </div>
-{% endif %}
