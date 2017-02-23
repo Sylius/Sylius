@@ -16,5 +16,14 @@
         <service id="sylius.shop.locale_switcher" class="Sylius\Bundle\ShopBundle\Locale\UrlBasedLocaleSwitcher" public="false">
             <argument type="service" id="router" />
         </service>
+
+        <service id="sylius.listener.non_channel_request_locale" class="Sylius\Bundle\ShopBundle\EventListener\NonChannelLocaleListener">
+            <argument type="service" id="sylius.locale_provider" />
+            <argument type="service" id="security.firewall.map" />
+            <argument type="collection">
+                <argument type="string">shop</argument>
+            </argument>
+            <tag name="kernel.event_listener" event="kernel.request" method="restrictRequestLocale" priority="10"/>
+        </service>
     </services>
 </container>

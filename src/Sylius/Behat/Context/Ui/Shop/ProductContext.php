@@ -89,7 +89,31 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Given I should see the product name :name
+     * @When /^I try to check (this product)'s details in the ("([^"]+)" locale)$/
+     */
+    public function iTryToOpenProductPage(ProductInterface $product, $localeCode = 'en_US')
+    {
+        $this->showPage->tryToOpen([
+            'slug' => $product->getTranslation($localeCode)->getSlug(),
+            '_locale' => $localeCode,
+        ]);
+    }
+
+    /**
+     * @Then /^I should not be able to view (this product) in the ("([^"]+)" locale)$/
+     */
+    public function iShouldNotBeAbleToViewThisProductInLocale(ProductInterface $product, $localeCode = 'en_US')
+    {
+        Assert::false(
+            $this->showPage->isOpen([
+                'slug' => $product->getTranslation($localeCode)->getSlug(),
+                '_locale' => $localeCode,
+            ])
+        );
+    }
+
+    /**
+     * @Then I should see the product name :name
      */
     public function iShouldSeeProductName($name)
     {
@@ -450,7 +474,7 @@ final class ProductContext implements Context
         );
 
         foreach ($products as $product) {
-            $this->assertIsProductIsInAssociation($product->getName(), $productAssociationName);
+            $this->assertProductIsInAssociation($product->getName(), $productAssociationName);
         }
     }
 
@@ -477,7 +501,7 @@ final class ProductContext implements Context
      *
      * @throws \InvalidArgumentException
      */
-    private function assertIsProductIsInAssociation($productName, $productAssociationName)
+    private function assertProductIsInAssociation($productName, $productAssociationName)
     {
         Assert::true(
             $this->showPage->hasProductInAssociation($productName, $productAssociationName),
