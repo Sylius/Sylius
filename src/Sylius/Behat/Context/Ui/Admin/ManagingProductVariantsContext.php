@@ -22,7 +22,7 @@ use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Product\Resolver\DefaultProductVariantResolver;
+use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -36,7 +36,7 @@ final class ManagingProductVariantsContext implements Context
     private $sharedStorage;
 
     /**
-     * @var DefaultProductVariantResolver
+     * @var ProductVariantResolverInterface
      */
     private $defaultProductVariantResolver;
 
@@ -72,7 +72,7 @@ final class ManagingProductVariantsContext implements Context
 
     /**
      * @param SharedStorageInterface $sharedStorage
-     * @param DefaultProductVariantResolver $defaultProductVariantResolver
+     * @param ProductVariantResolverInterface $defaultProductVariantResolver
      * @param CreatePageInterface $createPage
      * @param IndexPageInterface $indexPage
      * @param UpdatePageInterface $updatePage
@@ -82,7 +82,7 @@ final class ManagingProductVariantsContext implements Context
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
-        DefaultProductVariantResolver $defaultProductVariantResolver,
+        ProductVariantResolverInterface $defaultProductVariantResolver,
         CreatePageInterface $createPage,
         IndexPageInterface $indexPage,
         UpdatePageInterface $updatePage,
