@@ -33,14 +33,16 @@ Sylius\Component\Core\Model\ProductVariant:
         currentLocale: en_US
         currentTranslation: "@sw_mug_translation"
         updatedAt: 2015-10-10
-        channelPricings: ["@sw_mug_web_channel_pricing"]
+        channelPricings:
+            CHANNEL: "@sw_mug_web_channel_pricing"
     hard_available_mug:
         code: HARD_AVAILABLE_MUG
         product: "@mug"
         currentLocale: en_US
         currentTranslation: "@hard_available_mug_translation"
         updatedAt: 2015-10-05
-        channelPricings: ["@hard_available_mug_web_channel_pricing"]
+        channelPricings:
+            CHANNEL: "@hard_available_mug_web_channel_pricing"
         tracked: true
         onHand: 2
 
@@ -56,10 +58,10 @@ Sylius\Component\Product\Model\ProductVariantTranslation:
 
 Sylius\Component\Core\Model\ChannelPricing:
     sw_mug_web_channel_pricing:
-        channel: "@channel"
+        channel: "CHANNEL"
         price: 20
     hard_available_mug_web_channel_pricing:
-        channel: "@channel"
+        channel: "CHANNEL"
         price: 20
 
 Sylius\Component\Core\Model\ShippingMethod:

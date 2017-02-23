@@ -46,9 +46,7 @@ class ChannelPricingsType extends AbstractType implements EventSubscriberInterfa
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->addEventSubscriber($this)
-        ;
+        $builder->addEventSubscriber($this);
     }
 
     /**

@@ -13,48 +13,18 @@
     "onHand": 0,
     "version": 1,
     "tracked": false,
-    "channelPricings": [
-        {
-            "channel": {
-                "id": @integer@,
-                "code": "WEB",
-                "name": "Web Channel",
-                "description": "@string@",
-                "hostname": "localhost",
-                "color": "black",
-                "createdAt": "@string@.isDateTime()",
-                "updatedAt": "@string@.isDateTime()",
-                "enabled": true,
-                "taxCalculationStrategy": "order_items_based",
-                "_links": {
-                    "self": {
-                        "href": "@string@"
-                    }
-                }
-            },
+    "channelPricings": {
+        "WEB": {
+            "id": @integer@,
+            "channel": "WEB",
             "price": 124300
         },
-        {
-            "channel": {
-                "id": @integer@,
-                "code": "MOB",
-                "name": "Mobile Channel",
-                "description": "@string@",
-                "hostname": "localhost",
-                "color": "yellow",
-                "createdAt": "@string@.isDateTime()",
-                "updatedAt": "@string@.isDateTime()",
-                "enabled": true,
-                "taxCalculationStrategy": "order_items_based",
-                "_links": {
-                    "self": {
-                        "href": "@string@"
-                    }
-                }
-            },
+        "MOB": {
+            "id": @integer@,
+            "channel": "MOB",
             "price": 34200
         }
-    ],
+    },
     "_links": {
         "self": {
             "href": "@string@"

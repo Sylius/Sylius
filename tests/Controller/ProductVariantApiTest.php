@@ -233,14 +233,14 @@ EOT;
 <<<EOT
         {
             "code": "MONSTER_MUG",
-            "channelPricings": [
-                {
+            "channelPricings": {
+                "WEB": {
                     "price": "1243"
                 },
-                {
+                "MOB": {
                     "price": "342"
                 }
-            ]
+            }
         }
 EOT;
         $this->client->request('POST', $this->getVariantListUrl($product), [], [], static::$authorizedHeaderWithContentType, $data);
