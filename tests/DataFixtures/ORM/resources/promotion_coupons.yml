@@ -5,3 +5,6 @@ Sylius\Component\Core\Model\PromotionCoupon:
     promotionCoupon2:
         code: CAE14
         promotion: "@promotion2"
+        used: 3
+        usageLimit: 4
+        expiresAt: <date()>

@@ -18,7 +18,7 @@ Sylius\Component\Promotion\Model\PromotionCoupon:
         usageLimit:
             expose: true
             type: integer
-            groups: [Detailed]
+            groups: [Default, Detailed]
         expiresAt:
             expose: true
             type: DateTime
@@ -32,16 +32,20 @@ Sylius\Component\Promotion\Model\PromotionCoupon:
             type: DateTime
             groups: [Detailed]
     relations:
-        - rel: self
-          href:
+        -   rel: self
+            href:
                 route: sylius_api_promotion_coupon_show
                 parameters:
                     promotionCode: expr(object.getPromotion().getCode())
                     code: expr(object.getCode())
                     version: 1
-        - rel: promotion
-          href:
+            exclusion:
+                groups: [Detailed]
+        -   rel: promotion
+            href:
                 route: sylius_api_promotion_show
                 parameters:
                     code: expr(object.getPromotion().getCode())
                     version: 1
+            exclusion:
+                groups: [Detailed]
