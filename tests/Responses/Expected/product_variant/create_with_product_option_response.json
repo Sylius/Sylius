@@ -3,15 +3,15 @@
     "code": "MONSTER_MUG",
     "optionValues": [
         {
-            "name": "Mug type",
-            "code": "MUG_TYPE_MEDIUM"
+            "code": "MUG_TYPE_MEDIUM",
+            "translations": []
         }
     ],
     "position": 21,
     "translations": {
         "en_US": {
-          "id": @integer@,
-          "locale": "en_US"
+            "id": @integer@,
+            "locale": "en_US"
         }
     },
     "onHold": 0,
@@ -20,10 +20,10 @@
     "channelPricings": [],
     "_links": {
         "self": {
-            "href": "@string@"
+            "href": "\/api\/v1\/products\/MUG_SW\/variants\/MONSTER_MUG"
         },
         "product": {
-          "href": "@string@"
+            "href": "\/api\/v1\/products\/MUG_SW"
         }
     }
 }

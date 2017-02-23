@@ -6,10 +6,7 @@ Sylius\Component\Product\Model\ProductOptionValue:
             expose: true
             type: string
             groups: [Default, Detailed]
-        value:
+        translations:
             expose: true
-            type: string
-            groups: [Detailed]
-    virtual_properties:
-        getName:
-            serialized_name: name
+            type: array
+            groups: [Default, Detailed]
