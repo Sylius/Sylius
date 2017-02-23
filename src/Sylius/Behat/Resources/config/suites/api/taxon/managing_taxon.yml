@@ -1,0 +1,20 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+default:
+    suites:
+        api_managing_taxons:
+            contexts_services:
+                - sylius.behat.context.hook.doctrine_orm
+
+                - sylius.behat.context.transform.locale
+                - sylius.behat.context.transform.shared_storage
+                - sylius.behat.context.transform.taxon
+
+                - sylius.behat.context.setup.locale
+                - sylius.behat.context.setup.admin_security
+                - sylius.behat.context.setup.taxonomy
+
+                - sylius.behat.context.api.admin.managing_taxons
+            filters:
+                tags: "@managing_taxons && @api"

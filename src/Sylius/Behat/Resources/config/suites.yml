@@ -2,6 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 imports:
+    - suites/api/taxon/managing_taxon.yml
+
     - suites/cli/installer.yml
 
     - suites/domain/cart/shopping_cart.yml
