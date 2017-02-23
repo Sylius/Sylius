@@ -10,12 +10,7 @@
                 {
                     "id": @integer@,
                     "adjustments": [],
-                    "adjustmentsTotal": 0,
-                    "_links": {
-                        "order": {
-                            "href": "@string@"
-                        }
-                    }
+                    "adjustmentsTotal": 0
                 }
             ],
             "unitsTotal": 20,
@@ -51,7 +46,7 @@
                             "taxCalculationStrategy": "order_items_based",
                             "_links": {
                                 "self": {
-                                    "href": "@string@"
+                                    "href": "\/api\/v1\/channels\/CHANNEL"
                                 }
                             }
                         },
@@ -60,18 +55,21 @@
                 ],
                 "_links": {
                     "self": {
-                        "href": "@string@"
+                        "href": "\/api\/v1\/products\/MUG\/variants\/MUG_SW"
                     },
                     "product": {
-                        "href": "@string@"
+                        "href": "\/api\/v1\/products\/MUG"
                     }
                 }
             },
             "_links": {
                 "product": {
-                    "href": "@string@"
+                    "href": "\/api\/v1\/products\/MUG"
                 },
                 "variant": {
+                    "href": "\/api\/v1\/products\/MUG\/variants\/MUG_SW"
+                },
+                "order": {
                     "href": "@string@"
                 }
             }
@@ -116,7 +114,7 @@
         "taxCalculationStrategy": "order_items_based",
         "_links": {
             "self": {
-                "href": "@string@"
+                "href": "\/api\/v1\/channels\/CHANNEL"
             }
         }
     },
@@ -140,7 +138,7 @@
                         "taxCalculationStrategy": "order_items_based",
                         "_links": {
                             "self": {
-                                "href": "@string@"
+                                "href": "\/api\/v1\/channels\/CHANNEL"
                             }
                         }
                     }

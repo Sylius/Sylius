@@ -6,10 +6,6 @@ Sylius\Component\Order\Model\OrderItem:
             expose: true
             type: integer
             groups: [Default, Detailed, DetailedCart]
-        order:
-            expose: true
-            type: Sylius\Component\Order\Model\Order
-            groups: [Default, Detailed, DetailedCart]
         quantity:
             expose: true
             type: integer
@@ -38,3 +34,12 @@ Sylius\Component\Order\Model\OrderItem:
             expose: true
             type: integer
             groups: [Default, Detailed, DetailedCart]
+    relations:
+        - rel: order
+          exclusion:
+            groups: [Default, Detailed, DetailedCart]
+          href:
+                route: sylius_api_order_show
+                parameters:
+                    id: expr(object.getOrder().getId())
+                    version: 1

@@ -1,35 +1,5 @@
 {
     "id": @integer@,
-    "order": {
-        "id": @integer@,
-        "items": [],
-        "itemsTotal": 20,
-        "adjustments": [],
-        "adjustmentsTotal": 0,
-        "total": 20,
-        "customer": {
-            "id": @integer@,
-            "email": "oliver.queen@star-city.com",
-            "firstName": "Oliver",
-            "lastName": "Queen",
-            "_links": {
-                "self": {
-                    "href": "@string@"
-                }
-            }
-        },
-        "channel": {
-            "code": "WEB",
-            "_links": {
-                "self": {
-                    "href": "@string@"
-                }
-            }
-        },
-        "currencyCode": "USD",
-        "localeCode": "en_US",
-        "checkoutState": "cart"
-    },
     "quantity": 1,
     "unitPrice": 20,
     "total": 20,
@@ -46,9 +16,12 @@
     "variant": {},
     "_links": {
         "product": {
-            "href": "@string@"
+            "href": "\/api\/v1\/products\/MUG"
         },
         "variant": {
+            "href": "\/api\/v1\/products\/MUG\/variants\/HARD_AVAILABLE_MUG"
+        },
+        "order": {
             "href": "@string@"
         }
     }

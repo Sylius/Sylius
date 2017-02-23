@@ -29,9 +29,12 @@
             "variant": {},
             "_links": {
                 "product": {
-                    "href": "@string@"
+                    "href": "\/api\/v1\/products\/MUG"
                 },
                 "variant": {
+                    "href": "\/api\/v1\/products\/MUG\/variants\/MUG_SW"
+                },
+                "order": {
                     "href": "@string@"
                 }
             }
@@ -54,9 +57,12 @@
             "variant": {},
             "_links": {
                 "product": {
-                    "href": "@string@"
+                    "href": "\/api\/v1\/products\/MUG"
                 },
                 "variant": {
+                    "href": "\/api\/v1\/products\/MUG\/variants\/HARD_AVAILABLE_MUG"
+                },
+                "order": {
                     "href": "@string@"
                 }
             }
@@ -81,7 +87,7 @@
         "code": "WEB",
         "_links": {
             "self": {
-                "href": "@string@"
+                "href": "\/api\/v1\/channels\/WEB"
             }
         }
     },

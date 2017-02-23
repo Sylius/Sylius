@@ -17,7 +17,7 @@
                 "taxCalculationStrategy": "order_items_based",
                 "_links": {
                     "self": {
-                        "href": "@string@"
+                        "href": "\/api\/v1\/channels\/CHANNEL"
                     }
                 }
             }
