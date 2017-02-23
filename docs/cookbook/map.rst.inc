@@ -11,6 +11,7 @@
 * :doc:`/cookbook/disabling-shop-admin-api`
 * :doc:`/cookbook/images`
 * :doc:`/cookbook/images-gridfs`
+* :doc:`/cookbook/images-on-entity`
 * :doc:`/cookbook/embedding-products`
 * :doc:`/cookbook/taxons-menu`
 * :doc:`/cookbook/facebook-login`

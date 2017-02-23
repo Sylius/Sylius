@@ -17,6 +17,7 @@ The Cookbook
     disabling-shop-admin-api
     images
     images-gridfs
+    images-on-entity
     embedding-products
     taxons-menu
     facebook-login
