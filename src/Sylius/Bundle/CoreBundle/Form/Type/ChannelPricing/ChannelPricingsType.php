@@ -15,16 +15,13 @@ use Sylius\Bundle\CoreBundle\Form\Type\Product\ChannelPricingType;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPricing;
-use Sylius\Component\Core\Model\ChannelPricingInterface;
-use Sylius\Component\Core\Model\ProductVariantInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Form\FormInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -51,20 +48,6 @@ class ChannelPricingsType extends AbstractType implements EventSubscriberInterfa
     {
         $builder
             ->addEventSubscriber($this)
-            ->addModelTransformer(new CallbackTransformer(
-                function($value) {
-                    $channelPricings = [];
-                    /** @var ChannelPricingInterface $channelPricing */
-                    foreach ($value as $channelPricing) {
-                        $channelPricings[$channelPricing->getChannel()->getCode()] = $channelPricing;
-                    }
-
-                    return $channelPricings;
-                },
-                function($value) {
-                    return $value;
-                }
-            ))
         ;
     }
 
@@ -74,7 +57,7 @@ class ChannelPricingsType extends AbstractType implements EventSubscriberInterfa
     public static function getSubscribedEvents()
     {
         return [
-            FormEvents::POST_SET_DATA => 'preSetData',
+            FormEvents::PRE_SET_DATA => 'preSetData',
             FormEvents::SUBMIT => 'submit',
         ];
     }
@@ -86,22 +69,9 @@ class ChannelPricingsType extends AbstractType implements EventSubscriberInterfa
     {
         $form = $event->getForm();
 
-        /** @var FormInterface $child */
-        foreach ($form as $child) {
-            $form->remove($child->getName());
-        }
-
-        /** @var ProductVariantInterface $variant */
-        $variant = $form->getParent()->getData();
-
         /** @var ChannelInterface $channel */
         foreach ($this->channelRepository->findAll() as $channel) {
-            if ($variant->hasChannelPricingForChannel($channel)) {
-                $form->add($channel->getCode(), ChannelPricingType::class, [
-                    'channel' => $channel,
-                    'data' => $variant->getChannelPricingForChannel($channel),
-                ]);
-
+            if ($form->has($channel->getCode())) {
                 continue;
             }
 
@@ -127,11 +97,21 @@ class ChannelPricingsType extends AbstractType implements EventSubscriberInterfa
                 continue;
             }
 
-            $channelPricing->setChannel($this->channelRepository->findOneByCode($channelCode));
+            $channelPricing->setChannel($channelCode);
             $channelPricing->setProductVariant($variant);
         }
 
         $event->setData($channelPricings);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        parent::configureOptions($resolver);
+
+        $resolver->setDefault('entry_type', ChannelPricingType::class);
     }
 
     /**

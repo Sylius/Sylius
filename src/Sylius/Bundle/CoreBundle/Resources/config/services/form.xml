@@ -102,11 +102,9 @@
             <tag name="form.type_extension" extended-type="Sylius\Bundle\ProductBundle\Form\Type\ProductTranslationType" />
         </service>
         <service id="sylius.form.extension.type.product_variant" class="Sylius\Bundle\CoreBundle\Form\Extension\ProductVariantTypeExtension">
-            <argument type="service" id="sylius.form.event_subscriber.channel_pricing" />
             <tag name="form.type_extension" extended-type="Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType" />
         </service>
         <service id="sylius.form.extension.type.product_variant_generation" class="Sylius\Bundle\CoreBundle\Form\Extension\ProductVariantGenerationTypeExtension">
-            <argument type="service" id="sylius.form.event_subscriber.channel_pricing" />
             <tag name="form.type_extension" extended-type="Sylius\Bundle\ProductBundle\Form\Type\ProductVariantGenerationType" />
         </service>
 
@@ -223,6 +221,7 @@
         <service id="sylius.form.type.channel_pricing" class="Sylius\Bundle\CoreBundle\Form\Type\Product\ChannelPricingType">
             <argument>%sylius.model.channel_pricing.class%</argument>
             <argument>%sylius.form.type.channel_pricing.validation_groups%</argument>
+            <argument type="service" id="sylius.repository.channel" />
             <tag name="form.type" />
         </service>
         <service id="sylius.form.type.channel_pricings" class="Sylius\Bundle\CoreBundle\Form\Type\ChannelPricing\ChannelPricingsType">

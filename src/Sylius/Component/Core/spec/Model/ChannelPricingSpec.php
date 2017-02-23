@@ -32,10 +32,10 @@ final class ChannelPricingSpec extends ObjectBehavior
         $this->shouldImplement(ChannelPricingInterface::class);
     }
 
-    function its_channel_is_mutable(ChannelInterface $channel)
+    function its_channel_code_is_mutable()
     {
-        $this->setChannel($channel);
-        $this->getChannel()->shouldReturn($channel);
+        $this->setChannel('WEB');
+        $this->getChannel()->shouldReturn('WEB');
     }
 
     function its_product_variant_is_mutable(ProductVariantInterface $productVariant)

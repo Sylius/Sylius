@@ -13,8 +13,11 @@ namespace Sylius\Bundle\CoreBundle\Form\Type\Product;
 
 use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -23,17 +26,44 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 final class ChannelPricingType extends AbstractResourceType
 {
     /**
+     * @var ChannelRepositoryInterface
+     */
+    private $channelRepository;
+
+    /**
+     * {@inheritdoc}
+     *
+     * @param ChannelRepositoryInterface $channelRepository
+     */
+    public function __construct(
+        $dataClass,
+        $validationGroups = [],
+        ChannelRepositoryInterface $channelRepository
+    ) {
+        parent::__construct($dataClass, $validationGroups);
+
+        $this->channelRepository = $channelRepository;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        /** @var ChannelInterface $channel */
-        $channel = $options['channel'];
+        $channelRepository = $this->channelRepository;
 
-        $builder->add('price', MoneyType::class, [
-            'label' => $channel->getName(),
-            'currency' => $channel->getBaseCurrency()->getCode(),
-        ]);
+        $builder
+            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($channelRepository, $options) {
+                /** @var ChannelInterface $channel */
+                $channel = (isset($options['channel'])) ? $options['channel'] : $channelRepository->findOneByCode($event->getData()->getChannel());
+                $form = $event->getForm();
+
+                $form->add('price', MoneyType::class, [
+                    'label' => $channel->getName(),
+                    'currency' => $channel->getBaseCurrency()->getCode(),
+                ]);
+            })
+        ;
     }
 
     /**
@@ -45,7 +75,7 @@ final class ChannelPricingType extends AbstractResourceType
 
         $resolver
             ->setRequired('channel')
-            ->setAllowedTypes('channel', ChannelInterface::class)
+            ->setDefault('channel', null)
         ;
     }
 

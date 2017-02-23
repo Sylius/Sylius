@@ -333,7 +333,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
             $productVariant->setShippingRequired($options['shipping_required']);
 
             foreach ($this->channelRepository->findAll() as $channel) {
-                $this->createChannelPricings($productVariant, $channel);
+                $this->createChannelPricings($productVariant, $channel->getCode());
             }
 
             ++$i;
@@ -342,13 +342,13 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
 
     /**
      * @param ProductVariantInterface $productVariant
-     * @param ChannelInterface $channel
+     * @param string $channelCode
      */
-    private function createChannelPricings(ProductVariantInterface $productVariant, ChannelInterface $channel)
+    private function createChannelPricings(ProductVariantInterface $productVariant, $channelCode)
     {
         /** @var ChannelPricingInterface $channelPricing */
         $channelPricing = $this->channelPricingFactory->createNew();
-        $channelPricing->setChannel($channel);
+        $channelPricing->setChannel($channelCode);
         $channelPricing->setPrice($this->faker->randomNumber(3));
 
         $productVariant->addChannelPricing($channelPricing);

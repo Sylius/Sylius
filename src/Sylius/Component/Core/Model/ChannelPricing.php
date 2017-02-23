@@ -11,8 +11,6 @@
 
 namespace Sylius\Component\Core\Model;
 
-use Sylius\Component\Channel\Model\ChannelInterface as BaseChannelInterface;
-
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
@@ -24,7 +22,7 @@ class ChannelPricing implements ChannelPricingInterface
     protected $id;
 
     /**
-     * @var ChannelInterface
+     * @var string
      */
     protected $channel;
 
@@ -65,7 +63,7 @@ class ChannelPricing implements ChannelPricingInterface
     /**
      * {@inheritdoc}
      */
-    public function setChannel(BaseChannelInterface $channel = null)
+    public function setChannel($channel)
     {
         $this->channel = $channel;
     }

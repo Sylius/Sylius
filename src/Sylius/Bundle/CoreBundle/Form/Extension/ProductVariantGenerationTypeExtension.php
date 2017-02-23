@@ -11,11 +11,9 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
-use Sylius\Bundle\CoreBundle\Form\Type\Product\ChannelPricingType;
+use Sylius\Bundle\CoreBundle\Form\Type\ChannelPricing\ChannelPricingsType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantGenerationType;
 use Symfony\Component\Form\AbstractTypeExtension;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -24,34 +22,14 @@ use Symfony\Component\Form\FormBuilderInterface;
 final class ProductVariantGenerationTypeExtension extends AbstractTypeExtension
 {
     /**
-     * @var EventSubscriberInterface
-     */
-    private $channelPricingFormSubscriber;
-
-    /**
-     * {@inheritdoc}
-     *
-     * @param EventSubscriberInterface $channelPricingFormSubscriber
-     */
-    public function __construct(EventSubscriberInterface $channelPricingFormSubscriber)
-    {
-        $this->channelPricingFormSubscriber = $channelPricingFormSubscriber;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('channelPricings', CollectionType::class, [
-                'entry_type' => ChannelPricingType::class,
+            ->add('channelPricings', ChannelPricingsType::class, [
                 'label' => 'sylius.form.variant.price',
-                'allow_add' => false,
-                'allow_delete' => false,
-                'error_bubbling' => false,
             ])
-            ->addEventSubscriber($this->channelPricingFormSubscriber)
         ;
     }
 

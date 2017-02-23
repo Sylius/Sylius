@@ -15,7 +15,6 @@ use Sylius\Bundle\CoreBundle\Form\Type\ChannelPricing\ChannelPricingsType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType;
 use Sylius\Bundle\ShippingBundle\Form\Type\ShippingCategoryChoiceType;
 use Sylius\Bundle\TaxationBundle\Form\Type\TaxCategoryChoiceType;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -28,21 +27,6 @@ use Symfony\Component\Form\FormBuilderInterface;
  */
 final class ProductVariantTypeExtension extends AbstractTypeExtension
 {
-    /**
-     * @var EventSubscriberInterface
-     */
-    private $channelPricingFormSubscriber;
-
-    /**
-     * {@inheritdoc}
-     *
-     * @param EventSubscriberInterface $channelPricingFormSubscriber
-     */
-    public function __construct(EventSubscriberInterface $channelPricingFormSubscriber)
-    {
-        $this->channelPricingFormSubscriber = $channelPricingFormSubscriber;
-    }
-
     /**
      * {@inheritdoc}
      */

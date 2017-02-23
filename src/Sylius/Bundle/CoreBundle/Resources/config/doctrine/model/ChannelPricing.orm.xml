@@ -19,19 +19,17 @@
 
     <mapped-superclass name="Sylius\Component\Core\Model\ChannelPricing" table="sylius_channel_pricing">
         <unique-constraints>
-            <unique-constraint columns="product_variant_id,channel_id" name="product_variant_channel_idx" />
+            <unique-constraint columns="product_variant_id,channel" name="product_variant_channel_idx" />
         </unique-constraints>
     
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
         <field name="price" column="price" type="integer"/>
+        <field name="channel" column="channel" type="string"/>
 
         <many-to-one field="productVariant" target-entity="Sylius\Component\Product\Model\ProductVariantInterface" inversed-by="channelPricings">
             <join-column name="product_variant_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
-        </many-to-one>
-        <many-to-one field="channel" target-entity="Sylius\Component\Channel\Model\ChannelInterface">
-            <join-column name="channel_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
         </many-to-one>
     </mapped-superclass>
 

@@ -8,7 +8,7 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-interface ChannelPricingInterface extends ResourceInterface, ChannelAwareInterface
+interface ChannelPricingInterface extends ResourceInterface
 {
     /**
      * @return ProductVariantInterface
@@ -29,4 +29,14 @@ interface ChannelPricingInterface extends ResourceInterface, ChannelAwareInterfa
      * @param int $price
      */
     public function setPrice($price);
+
+    /**
+     * @return string
+     */
+    public function getChannel();
+
+    /**
+     * @param string $channel
+     */
+    public function setChannel($channel);
 }

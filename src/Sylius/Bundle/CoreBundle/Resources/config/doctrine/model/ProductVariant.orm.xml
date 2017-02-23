@@ -36,7 +36,13 @@
             <join-column name="shipping_category_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
         </many-to-one>
 
-        <one-to-many field="channelPricings" target-entity="Sylius\Component\Core\Model\ChannelPricingInterface" mapped-by="productVariant" orphan-removal="true">
+        <one-to-many
+            field="channelPricings"
+            target-entity="Sylius\Component\Core\Model\ChannelPricingInterface"
+            mapped-by="productVariant"
+            orphan-removal="true"
+            index-by="channel"
+        >
             <cascade>
                 <cascade-all/>
             </cascade>
