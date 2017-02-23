@@ -164,6 +164,26 @@ final class ChannelContext implements Context
     }
 
     /**
+     * @Given /^on (this channel) shipping step is skipped if only a single shipping method is available$/
+     */
+    public function onThisChannelShippingStepIsSkippedIfOnlyASingleShippingMethodIsAvailable(ChannelInterface $channel)
+    {
+        $channel->setSkippingShippingStepAllowed(true);
+
+        $this->channelManager->flush();
+    }
+
+    /**
+     * @Given /^on (this channel) account verification is not required$/
+     */
+    public function onThisChannelAccountVerificationIsNotRequired(ChannelInterface $channel)
+    {
+        $channel->setAccountVerificationRequired(false);
+
+        $this->channelManager->flush();
+    }
+
+    /**
      * @param ChannelInterface $channel
      * @param bool $state
      */
@@ -172,15 +192,5 @@ final class ChannelContext implements Context
         $channel->setEnabled($state);
         $this->channelManager->flush();
         $this->sharedStorage->set('channel', $channel);
-    }
-
-    /**
-     * @Given /^on (this channel) shipping step is skipped if only a single shipping method is available$/
-     */
-    public function onThisChannelShippingStepIsSkippedIfOnlyASingleShippingMethodIsAvailable(ChannelInterface $channel)
-    {
-        $channel->setSkippingShippingStepAllowed(true);
-
-        $this->channelManager->flush();
     }
 }

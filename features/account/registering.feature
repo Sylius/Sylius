@@ -20,6 +20,19 @@ Feature: Account registration
         But I should not be logged in
 
     @ui
+    Scenario: Registering a new account with minimum information when channel has disabled registration verification
+        Given on this channel account verification is not required
+        When I want to register a new account
+        And I specify the first name as "Saul"
+        And I specify the last name as "Goodman"
+        And I specify the email as "goodman@gmail.com"
+        And I specify the password as "heisenberg"
+        And I confirm this password
+        And I register this account
+        Then I should be notified that new account has been successfully created
+        And I should be logged in
+
+    @ui
     Scenario: Registering a new account with all details
         When I want to register a new account
         And I specify the first name as "Saul"

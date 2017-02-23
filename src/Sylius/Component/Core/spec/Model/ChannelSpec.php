@@ -149,4 +149,15 @@ final class ChannelSpec extends ObjectBehavior
         $this->setSkippingShippingStepAllowed(true);
         $this->isSkippingShippingStepAllowed()->shouldReturn(true);
     }
+
+    function it_has_account_verification_required_by_default()
+    {
+        $this->isAccountVerificationRequired()->shouldReturn(true);
+    }
+
+    function it_can_set_account_verification_required()
+    {
+        $this->setAccountVerificationRequired(false);
+        $this->isAccountVerificationRequired()->shouldReturn(false);
+    }
 }

@@ -68,6 +68,11 @@ class Channel extends BaseChannel implements ChannelInterface
      */
     protected $skippingShippingStepAllowed = false;
 
+    /**
+     * @var bool
+     */
+    protected $accountVerificationRequired = true;
+
     public function __construct()
     {
         parent::__construct();
@@ -258,5 +263,21 @@ class Channel extends BaseChannel implements ChannelInterface
     public function setSkippingShippingStepAllowed($skippingShippingStepAllowed)
     {
         $this->skippingShippingStepAllowed = $skippingShippingStepAllowed;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isAccountVerificationRequired()
+    {
+        return $this->accountVerificationRequired;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setAccountVerificationRequired($accountVerificationRequired)
+    {
+        $this->accountVerificationRequired = $accountVerificationRequired;
     }
 }

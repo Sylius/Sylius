@@ -28,7 +28,10 @@
             <argument type="service" id="sylius.manager.shop_user" />
             <argument type="service" id="sylius.shop_user.token_generator.email_verification" />
             <argument type="service" id="event_dispatcher" />
-            <tag name="kernel.event_listener" event="sylius.customer.post_register" method="sendVerificationEmail" />
+            <argument type="service" id="sylius.context.channel" />
+            <argument type="service" id="sylius.security.user_login" />
+            <argument type="string">shop</argument>
+            <tag name="kernel.event_listener" event="sylius.customer.post_register" method="handleUserVerification" />
         </service>
 
         <service id="sylius.listener.order_promotion_integrity_checker" class="Sylius\Bundle\ShopBundle\EventListener\OrderPromotionIntegrityChecker">
