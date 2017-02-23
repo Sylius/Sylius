@@ -8,57 +8,57 @@ Product API response structure
 
 If you request a product via API, you will receive an object with the following fields:
 
-+----------------+----------------------------------------------------------------------------+
-| Field          | Description                                                                |
-+================+============================================================================+
-| id             | Id of the product                                                          |
-+----------------+----------------------------------------------------------------------------+
-| code           | Unique product identifier (for example SKU)                                |
-+----------------+----------------------------------------------------------------------------+
-| average_rating | Average from accepted ratings given by customer                            |
-+----------------+----------------------------------------------------------------------------+
-| channels       | Collection of channels to which the product was assigned                   |
-+----------------+----------------------------------------------------------------------------+
-| translations   | Collection of translations (each contains slug and name in given language) |
-+----------------+----------------------------------------------------------------------------+
-| options        | Options assigned to the product                                            |
-+----------------+----------------------------------------------------------------------------+
-| images         | Images assigned to the product                                             |
-+----------------+----------------------------------------------------------------------------+
++---------------+----------------------------------------------------------------------------+
+| Field         | Description                                                                |
++===============+============================================================================+
+| id            | Id of the product                                                          |
++---------------+----------------------------------------------------------------------------+
+| code          | Unique product identifier (for example SKU)                                |
++---------------+----------------------------------------------------------------------------+
+| averageRating | Average from accepted ratings given by customer                            |
++---------------+----------------------------------------------------------------------------+
+| channels      | Collection of channels to which the product was assigned                   |
++---------------+----------------------------------------------------------------------------+
+| translations  | Collection of translations (each contains slug and name in given language) |
++---------------+----------------------------------------------------------------------------+
+| options       | Options assigned to the product                                            |
++---------------+----------------------------------------------------------------------------+
+| images        | Images assigned to the product                                             |
++---------------+----------------------------------------------------------------------------+
 
 If you request for more detailed data, you will receive an object with the following fields:
 
-+-----------------+----------------------------------------------------------------------------+
-| Field           | Description                                                                |
-+=================+============================================================================+
-| id              | Id of the product                                                          |
-+-----------------+----------------------------------------------------------------------------+
-| code            | Unique product identifier                                                  |
-+-----------------+----------------------------------------------------------------------------+
-| average_rating  | Average from ratings given by customer                                     |
-+-----------------+----------------------------------------------------------------------------+
-| channels        | Collection of channels to which the product was assigned                   |
-+-----------------+----------------------------------------------------------------------------+
-| translations    | Collection of translations (each contains slug and name in given language) |
-+-----------------+----------------------------------------------------------------------------+
-| attributes      | Collection of attributes connected with the product (for example material) |
-+-----------------+----------------------------------------------------------------------------+
-| associations    | Collection of products associated with the created product                 |
-|                 | (for example accessories to this product)                                  |
-+-----------------+----------------------------------------------------------------------------+
-| variants        | Collection of variants connected with the product                          |
-+-----------------+----------------------------------------------------------------------------+
-| reviews         | Collection of reviews passed by customers                                  |
-+-----------------+----------------------------------------------------------------------------+
-| product_taxons  | Collection of relations between product and taxons                         |
-+-----------------+----------------------------------------------------------------------------+
-| main_taxon      | The main taxon to whose the product is assigned                            |
-+-----------------+----------------------------------------------------------------------------+
++---------------+----------------------------------------------------------------------------+
+| Field         | Description                                                                |
++===============+============================================================================+
+| id            | Id of the product                                                          |
++---------------+----------------------------------------------------------------------------+
+| code          | Unique product identifier                                                  |
++---------------+----------------------------------------------------------------------------+
+| averageRating | Average from ratings given by customer                                     |
++---------------+----------------------------------------------------------------------------+
+| channels      | Collection of channels to which the product was assigned                   |
++---------------+----------------------------------------------------------------------------+
+| translations  | Collection of translations (each contains slug and name in given language) |
++---------------+----------------------------------------------------------------------------+
+| attributes    | Collection of attributes connected with the product (for example material) |
++---------------+----------------------------------------------------------------------------+
+| associations  | Collection of products associated with the created product                 |
+|               | (for example accessories to this product)                                  |
++---------------+----------------------------------------------------------------------------+
+| variants      | Collection of variants connected with the product                          |
++---------------+----------------------------------------------------------------------------+
+| reviews       | Collection of reviews passed by customers                                  |
++---------------+----------------------------------------------------------------------------+
+| productTaxons | Collection of relations between product and taxons                         |
++---------------+----------------------------------------------------------------------------+
+| mainTaxon     | The main taxon to whose the product is assigned                            |
++---------------+----------------------------------------------------------------------------+
 
 
 .. note::
 
-    Read more about :doc: `Product model in the component docs</components/Product/models>`.
+    Read more about :doc:`Product model in the component docs</components/Product/models>`.
 
 Creating a Product
 ------------------
@@ -72,17 +72,17 @@ Definition
 
     POST /api/v1/products/
 
-+------------------------------------+----------------+--------------------------------------+
-| Parameter                          | Parameter type | Description                          |
-+====================================+================+======================================+
-| Authorization                      | header         | Token received during authentication |
-+------------------------------------+----------------+--------------------------------------+
-| code                               | request        | **(unique)** Product identifier      |
-+------------------------------------+----------------+--------------------------------------+
-|translations['locale_code']['name'] | request        | Name of the product                  |
-+------------------------------------+----------------+--------------------------------------+
-|translations['locale_code']['slug'] | request        | **(unique)** Slug                    |
-+------------------------------------+----------------+--------------------------------------+
++-----------------------------------+----------------+--------------------------------------+
+| Parameter                         | Parameter type | Description                          |
++===================================+================+======================================+
+| Authorization                     | header         | Token received during authentication |
++-----------------------------------+----------------+--------------------------------------+
+| code                              | request        | **(unique)** Product identifier      |
++-----------------------------------+----------------+--------------------------------------+
+|translations['localeCode']['name'] | request        | Name of the product                  |
++-----------------------------------+----------------+--------------------------------------+
+|translations['localeCode']['slug'] | request        | **(unique)** Slug                    |
++-----------------------------------+----------------+--------------------------------------+
 
 Example
 ^^^^^^^
@@ -97,15 +97,9 @@ To create a new product use the below method:
         -X POST \
         --data '
             {
-                "translations": {
-                    "en__US": {
-                        "name": "Truck Simulator",
-                        "slug": "truck-simulator"
-                    }
-                },
                 "code": "TS3"
             }
-        '
+    '
 
 Exemplary Response
 ^^^^^^^^^^^^^^^^^^
@@ -117,31 +111,24 @@ Exemplary Response
 .. code-block:: json
 
     {
-        "id": 61,
         "name": "Truck Simulator",
+        "id": 61,
         "code": "TS3",
         "attributes": [],
         "variants": [],
         "options": [],
-        "translations": {
-            "en_US": {
-                "locale": "en_US",
-                "id": 61,
-                "name": "Truck Simulator",
-                "slug": "truck-simulator"
-            }
-        },
-        "product_taxons": [],
+        "associations": [],
+        "translations": [],
+        "productTaxons": [],
         "reviews": [],
-        "average_rating": 0,
+        "averageRating": 0,
         "images": [],
         "_links": {
             "self": {
-                "href": "/api/v1/products/61"
+                "href": "\/api\/v1\/products\/TS3"
             }
         }
     }
-
 .. warning::
 
     If you try to create a product without name, code or slug, you will receive a ``400 Bad Request`` error, that will contain validation errors.
@@ -154,7 +141,7 @@ Example
     $ curl http://demo.sylius.org/api/v1/products/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
-        -X POST
+       -X POST
 
 Exemplary Response
 ^^^^^^^^^^^^^^^^^^
@@ -219,28 +206,28 @@ Exemplary Response
 
 You can also create a product with additional (not required) fields:
 
-+-------------------------------------+----------------+-----------------------------------------------------------------------------------+
-| Parameter                           | Parameter type | Description                                                                       |
-+=====================================+================+===================================================================================+
-| channels                            | request        | Collection of channels codes, which we want to associate with created product     |
-+-------------------------------------+----------------+-----------------------------------------------------------------------------------+
-| translations['locale_code']['name'] | request        | Collection of translations (each contains slug and name in given locale).         |
-| translations['locale_code']['slug'] |                | Only the translation for default locale is required, the rest are optional        |
-+-------------------------------------+----------------+-----------------------------------------------------------------------------------+
-| options                             | request        | Collection of options codes, which we want to associate with created product      |
-+-------------------------------------+----------------+-----------------------------------------------------------------------------------+
-| images                              | request        | Collection of images codes, which we want to associate with created product       |
-+-------------------------------------+----------------+-----------------------------------------------------------------------------------+
-| attributes                          | request        | Array of attributes (each object has information about selected attribute's code, |
-|                                     |                | its value and locale in which it was defined)                                     |
-+-------------------------------------+----------------+-----------------------------------------------------------------------------------+
-| associations                        | request        | Object with code of productAssociationType and string in which the codes of       |
-|                                     |                | associated products was written down.                                             |
-+-------------------------------------+----------------+-----------------------------------------------------------------------------------+
-| product_taxons                      | request        | String in which the codes of taxons was written down (separated by comma)         |
-+-------------------------------------+----------------+-----------------------------------------------------------------------------------+
-| main_taxon                          | request        | The main taxon's code to whose product is assigned                                |
-+-------------------------------------+----------------+-----------------------------------------------------------------------------------+
++------------------------------------+----------------+-----------------------------------------------------------------------------------+
+| Parameter                          | Parameter type | Description                                                                       |
++====================================+================+===================================================================================+
+| channels                           | request        | Collection of channels codes, which we want to associate with created product     |
++------------------------------------+----------------+-----------------------------------------------------------------------------------+
+| translations['localeCode']['name'] | request        | Collection of translations (each contains slug and name in given locale).         |
+| translations['localeCode']['slug'] |                | Only the translation for default locale is required, the rest are optional        |
++------------------------------------+----------------+-----------------------------------------------------------------------------------+
+| options                            | request        | Collection of options codes, which we want to associate with created product      |
++------------------------------------+----------------+-----------------------------------------------------------------------------------+
+| images                             | request        | Collection of images codes, which we want to associate with created product       |
++------------------------------------+----------------+-----------------------------------------------------------------------------------+
+| attributes                         | request        | Array of attributes (each object has information about selected attribute's code, |
+|                                    |                | its value and locale in which it was defined)                                     |
++------------------------------------+----------------+-----------------------------------------------------------------------------------+
+| associations                       | request        | Object with code of productAssociationType and string in which the codes of       |
+|                                    |                | associated products was written down.                                             |
++------------------------------------+----------------+-----------------------------------------------------------------------------------+
+| productTaxons                      | request        | String in which the codes of taxons was written down (separated by comma)         |
++------------------------------------+----------------+-----------------------------------------------------------------------------------+
+| mainTaxon                          | request        | The main taxon's code to whose product is assigned                                |
++------------------------------------+----------------+-----------------------------------------------------------------------------------+
 
 Example
 ^^^^^^^
@@ -254,30 +241,30 @@ Example
         --data '
             {
                 "code": "MUG_TH",
-                "main_taxon": "mugs",
-                "product_taxons": "mugs",
+                "mainTaxon": "mugs",
+                "productTaxons": "mugs",
                 "channels": [
                     "US_WEB"
                 ],
                 "attributes": [
-                    {
-                        "attribute": "mug_material",
-                        "locale_code": "en_US",
-                        "value": "concrete"
-                    }
-                ],
+                     {
+                         "attribute": "mug_material",
+                         "localeCode": "en_US",
+                         "value": "concrete"
+                     }
+                 ],
                 "options": [
                     "mug_type"
                 ],
-                "associations": {
-                    "accessories": "f1fd2fab,f1fd2fab-c024"
-                },
+                 "associations": {
+                     "accessories": "f1fd2fab,f1fd2fab-c024"
+                 },
                 "translations": {
-                    "en__US": {
+                    "en_US": {
                         "name": "Theme Mug",
                         "slug": "theme-mug"
                     },
-                    "pl__PL": {
+                    "pl_PL": {
                         "name": "Kubek z motywem",
                         "slug": "kubek-z-motywem"
                     }
@@ -301,7 +288,7 @@ Exemplary Response
 
     {
         "name": "Theme Mug",
-        "id": 62,
+        "id": 65,
         "code": "MUG_TH",
         "attributes": [
             {
@@ -309,23 +296,39 @@ Exemplary Response
                 "name": "Mug material",
                 "value": "concrete",
                 "type": "text",
-                "id": 136
+                "id": 137
             }
         ],
         "variants": [],
         "options": [
             {
-                "code": "mug_type"
+                "id": 1,
+                "code": "mug_type",
+                "position": 0,
+                "values": [
+                    {
+                        "name": "Mug type",
+                        "code": "mug_type_medium"
+                    },
+                    {
+                        "name": "Mug type",
+                        "code": "mug_type_double"
+                    },
+                    {
+                        "name": "Mug type",
+                        "code": "mug_type_monster"
+                    }
+                ]
             }
         ],
         "associations": [
             {
-                "id": 11,
+                "id": 12,
                 "type": {
                     "id": 2,
                     "code": "accessories",
-                    "created_at": "2017-02-01T14:38:13+0100",
-                    "updated_at": "2017-02-01T14:38:13+0100",
+                    "created_at": "2017-02-20T09:06:21+0100",
+                    "updated_at": "2017-02-20T09:06:21+0100",
                     "translations": [
                         {
                             "locale": "en_US",
@@ -338,222 +341,294 @@ Exemplary Response
                 },
                 "associated_products": [
                     {
-                        "name": "Mug \"perspiciatis\"",
-                        "id": 1,
-                        "code": "c67af0cf-2f5e-30a1-ba80-6be7a253b500",
-                        "attributes": [
-                            {
-                                "code": "mug_material",
-                                "name": "Mug material",
-                                "value": "Banana skin",
-                                "type": "text",
-                                "id": 1
-                            }
-                        ],
+                        "name": "Spoon",
+                        "id": 62,
+                        "code": "spoon",
+                        "attributes": [],
                         "variants": [
                             {
-                                "id": 1,
+                                "id": 331,
+                                "code": "spoon",
+                                "option_values": [],
+                                "position": 0,
+                                "translations": {
+                                    "en_US": {
+                                        "locale": "en_US",
+                                        "id": 331
+                                    }
+                                },
                                 "on_hold": 0,
-                                "tracked": false
-                            },
-                            {
-                                "id": 2,
-                                "on_hold": 0,
-                                "tracked": false
-                            },
-                            {
-                                "id": 3,
-                                "on_hold": 0,
-                                "tracked": false
+                                "on_hand": 0,
+                                "tracked": false,
+                                "channel_pricings": [],
+                                "_links": {
+                                    "self": {
+                                        "href": "\/api\/v1\/products\/spoon\/variants\/spoon"
+                                    },
+                                    "product": {
+                                        "href": "\/api\/v1\/products\/spoon"
+                                    }
+                                }
                             }
                         ],
-                        "options": [
-                            {
-                                "code": "mug_type"
-                            }
-                        ],
+                        "options": [],
                         "associations": [],
                         "translations": {
                             "en_US": {
                                 "locale": "en_US",
-                                "id": 1,
-                                "name": "Mug \"perspiciatis\"",
-                                "slug": "mug-perspiciatis",
-                                "description": " Voluptatum et rerum necessitatibus modi non vel.\n\nQuae modi cumque.",
-                                "short_description": "Vitae minima ut."
+                                "id": 62,
+                                "name": "Spoon",
+                                "slug": "spoon"
                             }
                         },
-                        "product_taxons": [
-                            {
-                                "id": 1,
-                                "taxon": {
-                                    "name": "Mugs",
-                                    "id": 2,
-                                    "code": "mugs",
-                                    "children": []
-                                },
-                                "position": 0
-                            }
-                        ],
-                        "main_taxon": {
-                            "name": "Mugs",
-                            "id": 2,
-                            "code": "mugs",
-                            "children": []
-                        },
+                        "productTaxons": [],
                         "reviews": [],
-                        "average_rating": 0,
-                        "images": [
-                            {
-                                "id": 1,
-                                "code": "main",
-                                "path": "2d/39/f32ac66cd2e5e69ef8a87f9490b2.jpeg"
-                            },
-                            {
-                                "id": 2,
-                                "code": "thumbnail",
-                                "path": "b8/d0/c80dabb28dfc53795be8fa88444c.jpeg"
-                            }
-                        ],
+                        "averageRating": 0,
+                        "images": [],
                         "_links": {
                             "self": {
-                                "href": "/api/v1/products/1"
+                                "href": "\/api\/v1\/products\/spoon"
                             }
                         }
                     },
                     {
-                        "name": "Mug \"et\"",
-                        "id": 2,
-                        "code": "e5e45464-c35f-3c05-b3ea-4743ccafb28e",
-                        "attributes": [
-                            {
-                                "code": "mug_material",
-                                "name": "Mug material",
-                                "value": "Invisible porcelain",
-                                "type": "text",
-                                "id": 2
-                            }
-                        ],
+                        "name": "Coffee",
+                        "id": 63,
+                        "code": "coffee",
+                        "attributes": [],
                         "variants": [
                             {
-                                "id": 4,
+                                "id": 332,
+                                "code": "coffee",
+                                "option_values": [],
+                                "position": 0,
+                                "translations": {
+                                    "en_US": {
+                                        "locale": "en_US",
+                                        "id": 332
+                                    }
+                                },
                                 "on_hold": 0,
-                                "tracked": false
-                            },
-                            {
-                                "id": 5,
-                                "on_hold": 0,
-                                "tracked": false
-                            },
-                            {
-                                "id": 6,
-                                "on_hold": 0,
-                                "tracked": false
+                                "on_hand": 0,
+                                "tracked": false,
+                                "channel_pricings": [],
+                                "_links": {
+                                    "self": {
+                                        "href": "\/api\/v1\/products\/coffee\/variants\/coffee"
+                                    },
+                                    "product": {
+                                        "href": "\/api\/v1\/products\/coffee"
+                                    }
+                                }
                             }
                         ],
-                        "options": [
-                            {
-                                "code": "mug_type"
-                            }
-                        ],
+                        "options": [],
                         "associations": [],
                         "translations": {
                             "en_US": {
                                 "locale": "en_US",
-                                "id": 2,
-                                "name": "Mug \"et\"",
-                                "slug": "mug-et",
-                                "description": "Omnis perspiciatis quia aperiam magni occaecati",
-                                "short_description": "Laboriosam blanditiis."
+                                "id": 63,
+                                "name": "Coffee",
+                                "slug": "coffee"
                             }
                         },
-                        "product_taxons": [
-                            {
-                                "id": 2,
-                                "taxon": {
-                                    "name": "Mugs",
-                                    "id": 2,
-                                    "code": "mugs",
-                                    "children": []
-                                },
-                                "position": 1
-                            }
-                        ],
-                        "main_taxon": {
-                            "name": "Mugs",
-                            "id": 2,
-                            "code": "mugs",
-                            "children": []
-                        },
+                        "productTaxons": [],
                         "reviews": [],
-                        "average_rating": 0,
-                        "images": [
-                            {
-                                "id": 3,
-                                "code": "main",
-                                "path": "bc/93/e2986698753c469277570a416ad2.jpeg"
-                            },
-                            {
-                                "id": 4,
-                                "code": "thumbnail",
-                                "path": "86/78/092031fdb34daeac17f7da621424.jpeg"
-                            }
-                        ],
+                        "averageRating": 0,
+                        "images": [],
                         "_links": {
                             "self": {
-                                "href": "/api/v1/products/2"
+                                "href": "\/api\/v1\/products\/coffee"
                             }
                         }
                     }
                 ],
-                "created_at": "2017-02-01T14:39:29+0100",
-                "updated_at": "2017-02-01T14:39:29+0100"
+                "created_at": "2017-02-20T09:23:28+0100",
+                "updated_at": "2017-02-20T09:23:28+0100"
             }
         ],
         "translations": {
             "en_US": {
                 "locale": "en_US",
-                "id": 62,
+                "id": 66,
                 "name": "Theme Mug",
                 "slug": "theme-mug"
             },
-            "pl_PL": {
-                "locale": "pl_PL",
-                "id": 63,
+            "pl": {
+                "locale": "pl",
+                "id": 67,
                 "name": "Kubek z motywem",
                 "slug": "kubek-z-motywem"
             }
         },
-        "product_taxons": [
+        "productTaxons": [
             {
-                "id": 76,
+                "id": 77,
                 "taxon": {
                     "name": "Mugs",
                     "id": 2,
                     "code": "mugs",
-                    "children": []
+                    "root": {
+                        "name": "Category",
+                        "id": 1,
+                        "code": "category",
+                        "children": [],
+                        "left": 1,
+                        "right": 12,
+                        "level": 0,
+                        "position": 0,
+                        "translations": {
+                            "en_US": {
+                                "locale": "en_US",
+                                "id": 1,
+                                "name": "Category",
+                                "slug": "category",
+                                "description": "Cum explicabo deserunt temporibus beatae et est quis."
+                            }
+                        },
+                        "images": [],
+                        "_links": {
+                            "self": {
+                                "href": "\/api\/v1\/taxons\/category"
+                            }
+                        }
+                    },
+                    "parent": {
+                        "name": "Category",
+                        "id": 1,
+                        "code": "category",
+                        "children": [],
+                        "left": 1,
+                        "right": 12,
+                        "level": 0,
+                        "position": 0,
+                        "translations": {
+                            "en_US": {
+                                "locale": "en_US",
+                                "id": 1,
+                                "name": "Category",
+                                "slug": "category",
+                                "description": "Cum explicabo deserunt temporibus beatae et est quis."
+                            }
+                        },
+                        "images": [],
+                        "_links": {
+                            "self": {
+                                "href": "\/api\/v1\/taxons\/category"
+                            }
+                        }
+                    },
+                    "children": [],
+                    "left": 2,
+                    "right": 3,
+                    "level": 1,
+                    "position": 0,
+                    "translations": {
+                        "en_US": {
+                            "locale": "en_US",
+                            "id": 2,
+                            "name": "Mugs",
+                            "slug": "mugs",
+                            "description": "Placeat dolor aut dolorum minima."
+                        }
+                    },
+                    "images": [],
+                    "_links": {
+                        "self": {
+                            "href": "\/api\/v1\/taxons\/mugs"
+                        }
+                    }
                 },
-                "position": 15
+                "position": 0
             }
         ],
-        "main_taxon": {
+        "mainTaxon": {
             "name": "Mugs",
             "id": 2,
             "code": "mugs",
-            "children": []
+            "root": {
+                "name": "Category",
+                "id": 1,
+                "code": "category",
+                "children": [],
+                "left": 1,
+                "right": 12,
+                "level": 0,
+                "position": 0,
+                "translations": {
+                    "en_US": {
+                        "locale": "en_US",
+                        "id": 1,
+                        "name": "Category",
+                        "slug": "category",
+                        "description": "Cum explicabo deserunt temporibus beatae et est quis."
+                    }
+                },
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/taxons\/category"
+                    }
+                }
+            },
+            "parent": {
+                "name": "Category",
+                "id": 1,
+                "code": "category",
+                "children": [],
+                "left": 1,
+                "right": 12,
+                "level": 0,
+                "position": 0,
+                "translations": {
+                    "en_US": {
+                        "locale": "en_US",
+                        "id": 1,
+                        "name": "Category",
+                        "slug": "category",
+                        "description": "Cum explicabo deserunt temporibus beatae et est quis."
+                    }
+                },
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/taxons\/category"
+                    }
+                }
+            },
+            "children": [],
+            "left": 2,
+            "right": 3,
+            "level": 1,
+            "position": 0,
+            "translations": {
+                "en_US": {
+                    "locale": "en_US",
+                    "id": 2,
+                    "name": "Mugs",
+                    "slug": "mugs",
+                    "description": "Placeat dolor aut dolorum minima."
+                }
+            },
+            "images": [
+                {
+                    "id": 1,
+                    "type": "ford",
+                    "path": "b9/65/01cec3d87aa2b819e195331843f6.jpeg"
+                }
+            ],
+            "_links": {
+                "self": {
+                    "href": "\/api\/v1\/taxons\/mugs"
+                }
+            }
         },
         "reviews": [],
-        "average_rating": 0,
-        "images": [
-            {
-                "id": 1,
-                "type": "ford",
-                "path": "b9/65/01cec3d87aa2b819e195331843f6.jpeg"
-            }
-        ],
+        "averageRating": 0,
+        "images": [],
         "_links": {
             "self": {
-                "href": "/api/v1/products/62"
+                "href": "\/api\/v1\/products\/MUG_TH"
             }
         }
     }
@@ -566,36 +641,38 @@ Exemplary Response
 Getting a Single Product
 ------------------------
 
-To retrieve the details of the product you will need to call the ``/api/v1/product/id`` endpoint with the ``GET`` method.
+To retrieve the details of a product you will need to call the ``/api/v1/product/code`` endpoint with the ``GET`` method.
 
 Definition
 ^^^^^^^^^^
 
 .. code-block:: text
 
-    GET /api/v1/products/{id}
+    GET /api/v1/products/{code}
 
 +---------------+----------------+--------------------------------------+
 | Parameter     | Parameter type | Description                          |
 +===============+================+======================================+
 | Authorization | header         | Token received during authentication |
 +---------------+----------------+--------------------------------------+
-| id            | url attribute  | Id of requested resource             |
+| code          | url attribute  | Unique product identifier            |
 +---------------+----------------+--------------------------------------+
 
 Example
 ^^^^^^^
 
+To see the details for the product with ``code = spoon`` use the below method:
+
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/products/2 \
+    $ curl http://demo.sylius.org/api/v1/products/spoon \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
 .. note::
 
-    *2* is an exemplary value. Your value can be different.
-    Check in the list of all products if you are not sure which id should be used.
+    The *spoon* is an exemplary value. Your value can be different.
+    Check in the list of all products if you are not sure which code should be used.
 
 Exemplary Response
 ^^^^^^^^^^^^^^^^^^
@@ -607,79 +684,53 @@ Exemplary Response
 .. code-block:: json
 
     {
-        "id": 2,
-        "name": "Mug \"earum\"",
-        "code": "d6e6efaf",
-        "attributes": [
-            {
-                "code": "mug_material",
-                "name": "Mug material",
-                "value": "Invisible porcelain",
-                "id": 2
-            }
-        ],
+        "name": "Spoon",
+        "id": 62,
+        "code": "spoon",
+        "attributes": [],
         "variants": [
             {
-                "id": 4,
+                "id": 331,
+                "code": "spoon",
+                "option_values": [],
+                "position": 0,
+                "translations": {
+                    "en_US": {
+                        "locale": "en_US",
+                        "id": 331
+                    }
+                },
                 "on_hold": 0,
-                "tracked": false
+                "on_hand": 0,
+                "tracked": false,
+                "channel_pricings": [],
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/products\/spoon\/variants\/spoon"
+                    },
+                    "product": {
+                        "href": "\/api\/v1\/products\/spoon"
+                    }
+                }
             }
         ],
-        "options": [
-            {
-                "code": "mug_type"
-            }
-        ],
+        "options": [],
+        "associations": [],
         "translations": {
             "en_US": {
                 "locale": "en_US",
-                "id": 2,
-                "name": "Mug \"earum\"",
-                "slug": "mug-earum",
-                "description": "Et qui neque at sit voluptate sint omnis. Quos assumenda magni eos nemo qui accusamus.",
-                "short_description": "Molestiae quaerat in voluptate."
+                "id": 62,
+                "name": "Spoon",
+                "slug": "spoon"
             }
         },
-        "product_taxons": [
-            {
-                "id": 2,
-                "position": 1
-            }
-        ],
-        "main_taxon": {
-            "name": "Mugs",
-            "id": 2,
-            "code": "mugs",
-            "children": []
-        },
-        "reviews": [
-            {
-                "id": 41,
-                "title": "Nice",
-                "rating": 2,
-                "comment": "Nice",
-                "author": {
-                    "id": 22,
-                    "email": "banana@exmp.com",
-                    "email_canonical": "banana@exmp.com",
-                    "gender": "u"
-                },
-                "status": "new",
-                "created_at": "2017-01-18T11:15:44+0100",
-                "updated_at": "2017-01-18T11:15:45+0100"
-            }
-        ],
-        "average_rating": 2,
-        "images": [
-            {
-                "id": 3,
-                "code": "main",
-                "path": "af/ae/88f740736b8b79696513a5fe9c31.jpeg"
-            }
-        ],
+        "productTaxons": [],
+        "reviews": [],
+        "averageRating": 0,
+        "images": [],
         "_links": {
             "self": {
-                "href": "/api/v1/products/2"
+                "href": "\/api\/v1\/products\/spoon"
             }
         }
     }
@@ -728,104 +779,145 @@ Exemplary Response
 
 .. code-block:: json
 
-     {
-         "page": 1,
-         "limit": 10,
-         "pages": 1,
-         "total": 1,
-         "_links": {
-             "self": {
-                 "href": "/api/v1/products/?page=1&limit=10"
-             },
-             "first": {
-                 "href": "/api/v1/products/?page=1&limit=10"
-             },
-             "last": {
-                 "href": "/api/v1/products/?page=6&limit=10"
-             },
-             "next": {
-                 "href": "/api/v1/products/?page=2&limit=10"
-             }
-         },
-         "_embedded": {
-             "items": [
-                 {
-                     "name": "Mug \"earum\"",
-                     "id": 2,
-                     "code": "d6e6efaf",
-                     "options": [
-                         {
-                             "code": "mug_type"
-                         }
-                     ],
-                     "average_rating": 2,
-                     "images": [
-                         {
-                             "id": 3,
-                             "code": "main",
-                             "path": "af/ae/88f740736b8b79696513a5fe9c31.jpeg"
-                         },
-                         {
-                             "id": 4,
-                             "code": "thumbnail",
-                             "path": "71/8d/9dd518beda0571b133dbdf7f5d0a.jpeg"
-                         }
-                     ],
-                     "_links": {
-                         "self": {
-                             "href": "/api/v1/products/2"
-                         }
-                     }
-                 }
-             ]
-         }
-     }
+    {
+        "page": 1,
+        "limit": 10,
+        "pages": 1,
+        "total": 4,
+        "_links": {
+            "self": {
+                "href": "\/api\/v1\/products\/?page=1&limit=10"
+            },
+            "first": {
+                "href": "\/api\/v1\/products\/?page=1&limit=10"
+            },
+            "last": {
+                "href": "\/api\/v1\/products\/?page=1&limit=10"
+            }
+        },
+        "_embedded": {
+            "items": [
+                {
+                    "name": "Coffee",
+                    "id": 63,
+                    "code": "coffee",
+                    "options": [],
+                    "averageRating": 0,
+                    "images": [],
+                    "_links": {
+                        "self": {
+                            "href": "\/api\/v1\/products\/coffee"
+                        }
+                    }
+                },
+                {
+                    "name": "Theme Mug",
+                    "id": 65,
+                    "code": "MUG_TH",
+                    "options": [
+                        {
+                            "id": 1,
+                            "code": "mug_type",
+                            "position": 0,
+                            "values": [
+                                {
+                                    "name": "Mug type",
+                                    "code": "mug_type_medium"
+                                },
+                                {
+                                    "name": "Mug type",
+                                    "code": "mug_type_double"
+                                },
+                                {
+                                    "name": "Mug type",
+                                    "code": "mug_type_monster"
+                                }
+                            ]
+                        }
+                    ],
+                    "averageRating": 0,
+                    "images": [],
+                    "_links": {
+                        "self": {
+                            "href": "\/api\/v1\/products\/MUG_TH"
+                        }
+                    }
+                },
+                {
+                    "name": "Spoon",
+                    "id": 62,
+                    "code": "spoon",
+                    "options": [],
+                    "averageRating": 0,
+                    "images": [],
+                    "_links": {
+                        "self": {
+                            "href": "\/api\/v1\/products\/spoon"
+                        }
+                    }
+                },
+                {
+                    "name": "Truck Simulator",
+                    "id": 61,
+                    "code": "TS3",
+                    "options": [],
+                    "averageRating": 0,
+                    "images": [],
+                    "_links": {
+                        "self": {
+                            "href": "\/api\/v1\/products\/TS3"
+                        }
+                    }
+                }
+            ]
+        }
+    }
 
 Updating a Product
 ------------------
 
-To fully update a product you will need to call the ``/api/v1/products/id`` endpoint with ``PUT`` method.
+To fully update a product you will need to call the ``/api/v1/products/code`` endpoint with the ``PUT`` method.
 
 Definition
 ^^^^^^^^^^
 
 .. code-block:: text
 
-    PUT /api/v1/products/{id}
+    PUT /api/v1/products/{code}
 
-+------------------------------------+----------------+--------------------------------------+
-| Parameter                          | Parameter type | Description                          |
-+====================================+================+======================================+
-| Authorization                      | header         | Token received during authentication |
-+------------------------------------+----------------+--------------------------------------+
-| id                                 | url attribute  | Id of requested resource             |
-+------------------------------------+----------------+--------------------------------------+
-|translations['locale_code']['name'] | request        | Name of the product                  |
-+------------------------------------+----------------+--------------------------------------+
-|translations['locale_code']['slug'] | request        | **(unique)** Slug                    |
-+------------------------------------+----------------+--------------------------------------+
++-----------------------------------+----------------+--------------------------------------+
+| Parameter                         | Parameter type | Description                          |
++===================================+================+======================================+
+| Authorization                     | header         | Token received during authentication |
++-----------------------------------+----------------+--------------------------------------+
+| code                              | url attribute  | Unique product identifier            |
++-----------------------------------+----------------+--------------------------------------+
+|translations['localeCode']['name'] | request        | Name of the product                  |
++-----------------------------------+----------------+--------------------------------------+
+|translations['localeCode']['slug'] | request        | **(unique)** Slug                    |
++-----------------------------------+----------------+--------------------------------------+
 
 Example
 ^^^^^^^
 
- To fully update the product with ``id = 3`` use the below method:
+ To fully update the product with ``code = spoon`` use the below method:
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/products/3 \
+    $ curl http://demo.sylius.org/api/v1/products/spoon \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PUT \
         --data '
             {
                 "translations": {
-                    "en__US": {
-                        "name": "nice banana",
-                        "slug": "nice-banana"
+                    "en_US": {
+                        "name": "Small spoon",
+                        "slug": "small-spoon"
                     }
                 }
             }
-        '
+    '
 
 Exemplary Response
 ^^^^^^^^^^^^^^^^^^
@@ -834,14 +926,14 @@ Exemplary Response
 
     STATUS: 204 No Content
 
-If you try to perform a full product update without all required fields specified, you will receive a ``400 Bad Request`` error.
+If you try to perform a full product update without all the required fields specified, you will receive a ``400 Bad Request`` error.
 
 Example
 ^^^^^^^
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/products/3 \
+    $ curl http://demo.sylius.org/api/v1/products/spoon \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X PUT
@@ -903,31 +995,31 @@ Exemplary Response
         }
     }
 
-To update a product partially you will need to call the ``/api/v1/products/id`` endpoint with the ``PATCH`` method.
+To update a product partially you will need to call the ``/api/v1/products/code`` endpoint with the ``PATCH`` method.
 
 Definition
 ^^^^^^^^^^
 
 .. code-block:: text
 
-    PATCH /api/v1/products/{id}
+    PATCH /api/v1/products/{code}
 
 +---------------+----------------+--------------------------------------+
 | Parameter     | Parameter type | Description                          |
 +===============+================+======================================+
 | Authorization | header         | Token received during authentication |
 +---------------+----------------+--------------------------------------+
-| id            | url attribute  | Id of requested resource             |
+| code          | url attribute  | Unique product identifier            |
 +---------------+----------------+--------------------------------------+
 
 Example
 ^^^^^^^
 
-To partially update the product with ``id = 3`` use the below method:
+To partially update the product with ``code = spoon`` use the below method:
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/products/3 \
+    $ curl http://demo.sylius.org/api/v1/products/spoon \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PATCH \
@@ -935,7 +1027,7 @@ To partially update the product with ``id = 3`` use the below method:
             {
                 "translations": {
                     "en__US": {
-                        "name": "nice banana"
+                        "name": "Small spoon"
                     }
                 }
             }
@@ -951,29 +1043,31 @@ Exemplary Response
 Deleting a Product
 ------------------
 
-To delete a product you will need to call the ``/api/v1/products/id`` endpoint with the ``DELETE`` method.
+To delete a product you will need to call the ``/api/v1/products/code`` endpoint with the ``DELETE`` method.
 
 Definition
 ^^^^^^^^^^
 
 .. code-block:: text
 
-    DELETE /api/v1/products/{id}
+    DELETE /api/v1/products/{code}
 
 +---------------+----------------+--------------------------------------+
 | Parameter     | Parameter type | Description                          |
 +===============+================+======================================+
 | Authorization | header         | Token received during authentication |
 +---------------+----------------+--------------------------------------+
-| id            | url attribute  | Id of removed product                |
+| code          | url attribute  | Unique product identifier            |
 +---------------+----------------+--------------------------------------+
 
 Example
 ^^^^^^^
 
+To delete the product with ``code = spoon`` use the below method:
+
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/products/3 \
+    $ curl http://demo.sylius.org/api/v1/products/spoon \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X DELETE

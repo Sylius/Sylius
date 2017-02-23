@@ -6,21 +6,29 @@ The REST API Reference
 
     introduction
     authorization
-    channels
     carts
-    locales
-    orders
+    channels
     checkouts
     countries
     currencies
-    products
-    product_variants
-    users
     customers
+    locales
+    orders
+    payment_methods
+    payments
+    product_attributes
+    product_options
+    product_variants
+    products
+    promotion_coupons
+    promotions
     shipments
     shipping_categories
-    payments
-    promotions
+    shipping_methods
+    tax_categories
+    tax_rates
     taxons
+    users
+    zones
 
 .. include:: /api/map.rst.inc
