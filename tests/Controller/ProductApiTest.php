@@ -297,7 +297,7 @@ EOT;
 <<<EOT
         {
             "code": "MUG_TH",
-            "main_taxon": "MUGS",
+            "mainTaxon": "MUGS",
             "translations": {
                 "en_US": {
                     "name": "Theme Mug",
@@ -332,7 +332,7 @@ EOT;
                     "slug": "theme-mug"
                 }
             },
-            "product_taxons": "category,mugs"
+            "productTaxons": "category,mugs"
         }
 EOT;
 
@@ -389,12 +389,12 @@ EOT;
             "attributes": [
                 {
                     "attribute": "mug_material",
-                    "locale_code": "en_US",
+                    "localeCode": "en_US",
                     "value": "concrete"
                 },
                 {
                     "attribute": "mug_collection",
-                    "locale_code": "en_US",
+                    "localeCode": "en_US",
                     "value": "make live harder"
                 }
             ],

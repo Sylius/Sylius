@@ -22,7 +22,7 @@
             {
                 "id": @integer@,
                 "code": "MUG_1",
-                "option_values": [],
+                "optionValues": [],
                 "position": 1,
                 "translations": {
                     "en_US": {
@@ -32,7 +32,7 @@
                     }
                 },
                 "tracked": false,
-                "channel_pricings": [],
+                "channelPricings": [],
                 "_links": {
                     "self": {
                         "href": "@string@"
@@ -45,7 +45,7 @@
             {
                 "id": @integer@,
                 "code": "MUG_2",
-                "option_values": [],
+                "optionValues": [],
                 "position": 2,
                 "translations": {
                     "en_US": {
@@ -55,7 +55,7 @@
                     }
                 },
                 "tracked": false,
-                "channel_pricings": [],
+                "channelPricings": [],
                 "_links": {
                     "self": {
                         "href": "@string@"
@@ -68,7 +68,7 @@
             {
                 "id": @integer@,
                 "code": "MUG_3",
-                "option_values": [],
+                "optionValues": [],
                 "position": 3,
                 "translations": {
                     "en_US": {
@@ -78,7 +78,7 @@
                     }
                 },
                 "tracked": false,
-                "channel_pricings": [],
+                "channelPricings": [],
                 "_links": {
                     "self": {
                         "href": "@string@"
@@ -91,7 +91,7 @@
             {
                 "id": @integer@,
                 "code": "MUG_4",
-                "option_values": [],
+                "optionValues": [],
                 "position": 4,
                 "translations": {
                     "en_US": {
@@ -101,7 +101,7 @@
                     }
                 },
                 "tracked": false,
-                "channel_pricings": [],
+                "channelPricings": [],
                 "_links": {
                     "self": {
                         "href": "@string@"
@@ -114,7 +114,7 @@
             {
                 "id": @integer@,
                 "code": "MUG_5",
-                "option_values": [],
+                "optionValues": [],
                 "position": 5,
                 "translations": {
                     "en_US": {
@@ -124,7 +124,7 @@
                     }
                 },
                 "tracked": false,
-                "channel_pricings": [],
+                "channelPricings": [],
                 "_links": {
                     "self": {
                         "href": "@string@"
@@ -137,7 +137,7 @@
             {
                 "id": @integer@,
                 "code": "MUG_6",
-                "option_values": [],
+                "optionValues": [],
                 "position": 6,
                 "translations": {
                     "en_US": {
@@ -147,7 +147,7 @@
                     }
                 },
                 "tracked": false,
-                "channel_pricings": [],
+                "channelPricings": [],
                 "_links": {
                     "self": {
                         "href": "@string@"
@@ -160,7 +160,7 @@
             {
                 "id": @integer@,
                 "code": "MUG_7",
-                "option_values": [],
+                "optionValues": [],
                 "position": 7,
                 "translations": {
                     "en_US": {
@@ -170,7 +170,7 @@
                     }
                 },
                 "tracked": false,
-                "channel_pricings": [],
+                "channelPricings": [],
                 "_links": {
                     "self": {
                         "href": "@string@"
@@ -183,7 +183,7 @@
             {
                 "id": @integer@,
                 "code": "MUG_8",
-                "option_values": [],
+                "optionValues": [],
                 "position": 8,
                 "translations": {
                     "en_US": {
@@ -193,7 +193,7 @@
                     }
                 },
                 "tracked": false,
-                "channel_pricings": [],
+                "channelPricings": [],
                 "_links": {
                     "self": {
                         "href": "@string@"
@@ -206,7 +206,7 @@
             {
                 "id": @integer@,
                 "code": "MUG_9",
-                "option_values": [],
+                "optionValues": [],
                 "position": 9,
                 "translations": {
                     "en_US": {
@@ -216,7 +216,7 @@
                     }
                 },
                 "tracked": false,
-                "channel_pricings": [],
+                "channelPricings": [],
                 "_links": {
                     "self": {
                         "href": "@string@"
@@ -229,7 +229,7 @@
             {
                 "id": @integer@,
                 "code": "MUG_10",
-                "option_values": [],
+                "optionValues": [],
                 "position": 10,
                 "translations": {
                     "en_US": {
@@ -239,7 +239,7 @@
                     }
                 },
                 "tracked": false,
-                "channel_pricings": [],
+                "channelPricings": [],
                 "_links": {
                     "self": {
                         "href": "@string@"

@@ -106,7 +106,3 @@ twig:
     exception_controller: "FOS\\RestBundle\\Controller\\ExceptionController::showAction"
     globals:
         sylius: "@sylius.context.shopper"
-
-fos_rest:
-    body_listener:
-        array_normalizer: sylius.normalizer.camel_keys

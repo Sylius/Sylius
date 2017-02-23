@@ -21,10 +21,10 @@
                 "code": "sales_tax",
                 "name": "Sales Tax 20%",
                 "amount": 0,
-                "included_in_price": false,
+                "includedInPrice": false,
                 "calculator": "flat_rate",
-                "created_at": "@string@.isDateTime()",
-                "updated_at": "@string@.isDateTime()",
+                "createdAt": "@string@.isDateTime()",
+                "updatedAt": "@string@.isDateTime()",
                 "_links": {
                     "self": {
                         "href": "\/api\/v1\/tax-rates\/sales_tax"
@@ -42,10 +42,10 @@
                 "code": "regular_tax",
                 "name": "Regular Tax 20%",
                 "amount": 0,
-                "included_in_price": false,
+                "includedInPrice": false,
                 "calculator": "flat_rate",
-                "created_at": "@string@.isDateTime()",
-                "updated_at": "@string@.isDateTime()",
+                "createdAt": "@string@.isDateTime()",
+                "updatedAt": "@string@.isDateTime()",
                 "_links": {
                     "self": {
                         "href": "\/api\/v1\/tax-rates\/regular_tax"

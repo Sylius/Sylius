@@ -23,7 +23,6 @@
             <argument type="service" id="fos_oauth_server.entity_manager" />
             <argument>%fos_oauth_server.model.client.class%</argument>
         </service>
-        <service id="sylius.normalizer.camel_keys" class="Sylius\Bundle\ApiBundle\Normalizer\LocaleAwareCamelKeysNormalizer" />
 
         <service id="sylius.listener.api.add_to_cart" class="Sylius\Bundle\ApiBundle\EventListener\AddToCartListener">
             <argument type="service" id="sylius.order_processing.order_processor.composite" />
@@ -31,5 +30,10 @@
             <tag name="kernel.event_listener" event="sylius.order_item.pre_create" method="recalculateOrder" />
             <tag name="kernel.event_listener" event="sylius.order_item.pre_update" method="recalculateOrder" />
         </service>
+
+        <service id="jms_serializer.serialized_name_annotation_strategy" class="%jms_serializer.serialized_name_annotation_strategy.class%" public="false">
+            <argument type="service" id="jms_serializer.identical_property_naming_strategy" />
+        </service>
+        <service id="jms_serializer.identical_property_naming_strategy" class="JMS\Serializer\Naming\IdenticalPropertyNamingStrategy" public="false" />
     </services>
 </container>

@@ -1,7 +1,7 @@
 {
     "id": @integer@,
     "code": "MONSTER_MUG",
-    "option_values": [],
+    "optionValues": [],
     "position": 21,
     "translations": {
         "en_US": {
@@ -9,10 +9,10 @@
             "locale": "en_US"
         }
     },
-    "on_hold": 0,
-    "on_hand": 0,
+    "onHold": 0,
+    "onHand": 0,
     "tracked": false,
-    "channel_pricings": [
+    "channelPricings": [
         {
             "channel": {
                 "id": @integer@,
@@ -21,10 +21,10 @@
                 "description": "@string@",
                 "hostname": "localhost",
                 "color": "black",
-                "created_at": "@string@.isDateTime()",
-                "updated_at": "@string@.isDateTime()",
+                "createdAt": "@string@.isDateTime()",
+                "updatedAt": "@string@.isDateTime()",
                 "enabled": true,
-                "tax_calculation_strategy": "order_items_based",
+                "taxCalculationStrategy": "order_items_based",
                 "_links": {
                     "self": {
                         "href": "@string@"
@@ -41,10 +41,10 @@
                 "description": "@string@",
                 "hostname": "localhost",
                 "color": "yellow",
-                "created_at": "@string@.isDateTime()",
-                "updated_at": "@string@.isDateTime()",
+                "createdAt": "@string@.isDateTime()",
+                "updatedAt": "@string@.isDateTime()",
                 "enabled": true,
-                "tax_calculation_strategy": "order_items_based",
+                "taxCalculationStrategy": "order_items_based",
                 "_links": {
                     "self": {
                         "href": "@string@"

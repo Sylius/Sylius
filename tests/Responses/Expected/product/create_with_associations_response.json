@@ -18,7 +18,7 @@
                     }
                 }
             },
-            "associated_products": @array@
+            "associatedProducts": @array@
         },
         {
             "id": @integer@,
@@ -32,7 +32,7 @@
                     }
                 }
             },
-            "associated_products": @array@
+            "associatedProducts": @array@
         }
     ],
     "translations": {
@@ -43,9 +43,9 @@
             "slug": "theme-mug"
         }
     },
-    "product_taxons": [],
+    "productTaxons": [],
     "reviews": [],
-    "average_rating": 0,
+    "averageRating": 0,
     "images": [],
     "_links": {
         "self": {

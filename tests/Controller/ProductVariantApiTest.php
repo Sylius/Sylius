@@ -291,7 +291,7 @@ EOT;
 <<<EOT
         {
             "code": "MONSTER_MUG",
-            "tax_category": "TC1"
+            "taxCategory": "TC1"
         }
 EOT;
 
@@ -317,7 +317,7 @@ EOT;
 <<<EOT
         {
             "code": "MONSTER_MUG",
-            "shipping_category": "SC1"
+            "shippingCategory": "SC1"
         }
 EOT;
 
@@ -343,8 +343,8 @@ EOT;
 <<<EOT
         {
             "code": "MONSTER_MUG",
-            "option_values": { 
-                "MUG__TYPE": "MUG_TYPE_MEDIUM" 
+            "optionValues": { 
+                "MUG_TYPE": "MUG_TYPE_MEDIUM" 
             }
         }
 EOT;

@@ -14,7 +14,7 @@
             "slug": "theme-mug"
         }
     },
-    "product_taxons": [
+    "productTaxons": [
         {
             "id": @integer@,
             "taxon": {
@@ -325,7 +325,7 @@
         }
     ],
     "reviews": [],
-    "average_rating": 0,
+    "averageRating": 0,
     "images": [],
     "_links": {
         "self": {
