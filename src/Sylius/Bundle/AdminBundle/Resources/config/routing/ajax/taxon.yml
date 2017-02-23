@@ -1,27 +1,49 @@
-sylius_admin_ajax_taxon_index:
-    path: /
+sylius_admin_ajax_taxon_root_nodes:
+    path: /root-nodes
     methods: [GET]
     defaults:
         _controller: sylius.controller.taxon:indexAction
         _sylius:
-            serialization_groups: [Ajax]
+            serialization_groups: [Autocomplete]
             repository:
-                method: searchByName
-                arguments:
-                    - $name
-                    - expr:service('sylius.context.locale').getLocaleCode()
+                method: findRootNodes
 
-sylius_admin_ajax_taxon_in_criteria:
-    path: /in
+sylius_admin_ajax_taxon_leafs:
+    path: /leafs
     methods: [GET]
     defaults:
         _controller: sylius.controller.taxon:indexAction
         _sylius:
-            serialization_groups: [Ajax]
+            serialization_groups: [Autocomplete]
+            repository:
+                method: findChildren
+                arguments:
+                    parentCode: $parentCode
+                    locale: expr:service('sylius.context.locale').getLocaleCode()
+
+sylius_admin_ajax_taxon_by_code:
+    path: /leaf
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.taxon:indexAction
+        _sylius:
+            serialization_groups: [Autocomplete]
             repository:
                 method: findBy
+                arguments: [code: $code]
+
+sylius_admin_ajax_taxon_by_name_phrase:
+    path: /search
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.taxon:indexAction
+        _sylius:
+            serialization_groups: [Autocomplete]
+            repository:
+                method: findByNamePart
                 arguments:
-                    - $criteria
+                    phrase: $phrase
+                    locale: expr:service('sylius.context.locale').getLocaleCode()
 
 sylius_admin_ajax_generate_taxon_slug:
     path: /generate-slug/

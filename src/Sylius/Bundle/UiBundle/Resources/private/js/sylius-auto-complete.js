@@ -59,11 +59,8 @@
                             on: 'now',
                             method: 'GET',
                             url: loadForEditUrl,
-                            data: {
-                                criteria: {}
-                            },
                             beforeSend: function (settings) {
-                                settings.data.criteria[choiceValue] = autocompleteValue.split(',');
+                                settings.data[choiceValue] = autocompleteValue.split(',');
 
                                 return settings;
                             },

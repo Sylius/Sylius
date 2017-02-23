@@ -1,8 +1,15 @@
 <div class="ui tab" data-tab="taxonomy">
     <h3 class="ui dividing header">{{ 'sylius.ui.taxonomy'|trans }}</h3>
-    <div class="field">
-        {{ form_row(form.mainTaxon, {'remote_url': path('sylius_admin_ajax_taxon_index'), 'load_edit_url': path('sylius_admin_ajax_taxon_in_criteria'), 'remote_criteria_type': 'contains', 'remote_criteria_name': 'name'}) }}
+    {{ form_row(form.mainTaxon, {'remote_url': path('sylius_admin_ajax_taxon_by_name_phrase'), 'remote_criteria_type': 'contains', 'remote_criteria_name': 'phrase', 'load_edit_url': path('sylius_admin_ajax_taxon_by_code')}) }}
+
+    <h4>Product Taxon</h4>
+    <div id="sylius-product-taxonomy-tree"
+         data-taxon-root-nodes-url="{{ path('sylius_admin_ajax_taxon_root_nodes') }}"
+         data-taxon-leafs-url="{{ path('sylius_admin_ajax_taxon_leafs') }}"
+    >
+        {{ form_widget(form.productTaxons) }}
+        <div class="ui inverted dimmer">
+            <div class="ui loader"></div>
+        </div>
     </div>
-    <div class="ui divider"></div>
-    {{ form_row(form.productTaxons, {'remote_url': path('sylius_admin_ajax_taxon_index'), 'load_edit_url': path('sylius_admin_ajax_taxon_in_criteria'), 'remote_criteria_type': 'contains', 'remote_criteria_name': 'name'}) }}
 </div>

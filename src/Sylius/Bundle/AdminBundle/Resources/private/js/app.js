@@ -51,6 +51,7 @@
 
         $('.sylius-tabular-form').addTabErrors();
         $('.ui.accordion').addAccordionErrors();
+        $('#sylius-product-taxonomy-tree').choiceTree('productTaxon', true, 1);
 
         $(document).productSlugGenerator();
         $(document).taxonSlugGenerator();
