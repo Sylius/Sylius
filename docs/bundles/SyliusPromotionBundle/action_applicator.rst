@@ -1,7 +1,7 @@
 How actions are applied ?
 =========================
 
-Everything related to this subject is located in ``Sylius\Bundle\PromotionBundle\Action``.
+Everything related to this subject is located in ``Sylius\Component\Promotion\Action``.
 
 Actions
 -------
