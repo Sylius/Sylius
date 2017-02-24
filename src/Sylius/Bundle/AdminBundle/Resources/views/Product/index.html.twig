@@ -5,12 +5,14 @@
 {% set definition = resources.definition %}
 {% set data = resources.data %}
 
+{% set header = configuration.vars.header|default(metadata.applicationName~'.ui.'~metadata.pluralName) %}
+
 {% block title %}{{ parent() }} {{ header|trans }}{% endblock %}
 
 {% block content %}
     <div class="ui stackable two column grid">
         {% include '@SyliusAdmin/Product/Index/_header.html.twig' %}
-        {% include '@SyliusAdmin/Product/Index/_actions.html.twig' %}
+        {% include '@SyliusAdmin/Crud/Index/_actions.html.twig' %}
     </div>
 
     <div class="ui two column stackable grid">

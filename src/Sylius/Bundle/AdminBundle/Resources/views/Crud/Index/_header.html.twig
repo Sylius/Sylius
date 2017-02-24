@@ -4,15 +4,6 @@
 
         {% include configuration.vars.templates.breadcrumb|default('@SyliusAdmin/Crud/Index/_breadcrumb.html.twig') %}
     </div>
-    <div class="middle aligned column">
-        <div class="ui right floated buttons">
-            {% if definition.actionGroups.main is defined and definition.getActions('main')|length > 0 %}
-                {% for action in definition.getActions('main') %}
-                    {% if action.enabled %}
-                        {{ sylius_grid_render_action(resources, action, null) }}
-                    {% endif %}
-                {% endfor %}
-            {% endif %}
-        </div>
-    </div>
+
+    {% include '@SyliusAdmin/Crud/Index/_actions.html.twig' %}
 </div>
