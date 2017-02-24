@@ -49,6 +49,7 @@ final class CurrentChannelContext implements Context
     {
         $this->channelContextSetter->setChannel($channel);
 
-        $this->homePage->open();
+        $defaultLocale = $channel->getDefaultLocale();
+        $this->homePage->open(['_locale' => $defaultLocale->getCode()]);
     }
 }
