@@ -276,10 +276,6 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
             ->getOneOrNullResult()
         ;
 
-        if (null === $order) {
-            return null;
-        }
-
         $this->associationHydrator->hydrateAssociations($order, [
             'adjustments',
             'items',
@@ -314,10 +310,6 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
             ->getOneOrNullResult()
         ;
 
-        if (null === $order) {
-            return null;
-        }
-
         $this->associationHydrator->hydrateAssociations($order, [
             'items',
             'items.variant',
@@ -343,10 +335,6 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
             ->getOneOrNullResult()
         ;
 
-        if (null === $order) {
-            return null;
-        }
-
         $this->associationHydrator->hydrateAssociations($order, [
             'items',
             'items.variant',
@@ -371,10 +359,6 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
             ->getQuery()
             ->getOneOrNullResult()
         ;
-
-        if (null === $order) {
-            return null;
-        }
 
         $this->associationHydrator->hydrateAssociations($order, [
             'items',
