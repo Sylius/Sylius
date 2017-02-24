@@ -15,10 +15,6 @@
     <class name="Sylius\Component\Core\Model\Product">
         <property name="images">
             <constraint name="Valid" />
-            <constraint name="Sylius\Bundle\ResourceBundle\Validator\Constraints\UniqueWithinCollectionConstraint">
-                <option name="message">sylius.product_image.code.unique</option>
-                <option name="groups">sylius</option>
-            </constraint>
         </property>
         <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\HasAllVariantPricesDefined">
             <option name="groups">sylius</option>

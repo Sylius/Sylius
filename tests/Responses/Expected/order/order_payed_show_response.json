@@ -1,0 +1,50 @@
+{
+    "id": @integer@,
+    "method": {
+        "id": @integer@,
+        "code": "cod",
+        "channels": [
+            {
+                "id": @integer@,
+                "code": "CHANNEL",
+                "name": "Channel",
+                "description": "Lorem ipsum",
+                "hostname": "localhost",
+                "color": "black",
+                "createdAt": "@string@.isDateTime()",
+                "updatedAt": "@string@.isDateTime()",
+                "enabled": true,
+                "taxCalculationStrategy": "order_items_based",
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            }
+        ],
+        "gatewayConfig": {
+            "id": @integer@,
+            "gatewayName": "Offline",
+            "factoryName": "offline",
+            "config": []
+        },
+        "_links": {
+            "self": {
+                "href": "\/api\/v1\/payment-methods\/cod"
+            }
+        }
+    },
+    "amount": 30,
+    "state": "completed",
+    "_links": {
+        "self": {
+            "href": "@string@"
+        },
+        "payment-method": {
+            "href": "\/api\/v1\/payment-methods\/cod"
+        },
+        "order": {
+            "href": "@string@"
+        }
+    }
+}

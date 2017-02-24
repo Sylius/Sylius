@@ -1,9 +1,6 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-sylius_shop:
-    resource: "@SyliusShopBundle/Resources/config/routing.yml"
-
 sylius_admin:
     resource: "@SyliusAdminBundle/Resources/config/routing.yml"
     prefix: /admin
@@ -11,3 +8,15 @@ sylius_admin:
 sylius_api:
     resource: "@SyliusApiBundle/Resources/config/routing.yml"
     prefix: /api
+
+sylius_shop:
+    resource: "@SyliusShopBundle/Resources/config/routing.yml"
+    prefix: /{_locale}
+    requirements:
+        _locale: ^[a-z]{2}(?:_[A-Z]{2})?$
+
+sylius_shop_default_locale:
+    path: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.shop.locale_switch:switchAction

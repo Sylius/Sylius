@@ -16,3 +16,6 @@ sylius:
             max_length: 'Název expediční metody nesmí být delší než {{ limit }} znaků.'
             min_length: 'Název expediční metody musí mít alespoň {{ limit }} znaků.'
             not_blank: 'Zadejte prosím název expediční metody.'
+    shipment:
+        shipping_method:
+            not_blank: 'Vyberte prosím způsob dopravy.'

@@ -25,20 +25,20 @@ sylius:
             name: Nome
             roles: Papéis
         channel:
-            taxonomies: Taxonomias
+            contact_email: Email de contato
+            currencies: Moedas
+            currency_base: Moeda base
+            hostname: Nome do host
             locale_default: Localidade padrão
             locales: Localidades
-            contact_email: Email de contato
-            currency_base: Moeda base
-            currencies: Moedas
-            shipping_methods: Métodos de envio
             payment_methods: Meios de pagamentos
+            shipping_methods: Métodos de envio
             tax_calculation_strategy: Estratégia de cálculo de impostos
             tax_zone_default: Zona de imposto do padrão
+            taxonomies: Taxonomias
             theme: ' Tema'
-            hostname: Nome do host
         image:
-            code: Código
+            type: Tipo
             file: Imagem
         locale:
             code: Código

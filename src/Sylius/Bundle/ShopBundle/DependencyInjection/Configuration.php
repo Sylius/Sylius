@@ -29,6 +29,7 @@ final class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
+                ->enumNode('locale_switcher')->values(['storage', 'url'])->defaultValue('url')->end()
                 ->arrayNode('checkout_resolver')
                     ->addDefaultsIfNotSet()
                     ->children()

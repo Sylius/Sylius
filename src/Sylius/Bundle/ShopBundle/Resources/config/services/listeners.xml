@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="sylius.listener.order_customer_ip" class="Sylius\Bundle\ShopBundle\EventListener\OrderCustomerIpListener">
+            <argument type="service" id="sylius.customer_ip_assigner" />
+            <argument type="service" id="request_stack" />
+            <tag name="kernel.event_listener" event="sylius.order.pre_complete" method="assignCustomerIpToOrder" />
+        </service>
+
+        <service id="sylius.listener.order_complete" class="Sylius\Bundle\ShopBundle\EventListener\OrderCompleteListener">
+            <argument type="service" id="sylius.email_manager.order" />
+            <tag name="kernel.event_listener" event="sylius.order.post_complete" method="sendConfirmationEmail" />
+        </service>
+
+        <service id="sylius.listener.user_registration" class="Sylius\Bundle\ShopBundle\EventListener\UserRegistrationListener">
+            <argument type="service" id="sylius.manager.shop_user" />
+            <argument type="service" id="sylius.shop_user.token_generator.email_verification" />
+            <argument type="service" id="event_dispatcher" />
+            <argument type="service" id="sylius.context.channel" />
+            <argument type="service" id="sylius.security.user_login" />
+            <argument type="string">shop</argument>
+            <tag name="kernel.event_listener" event="sylius.customer.post_register" method="handleUserVerification" />
+        </service>
+
+        <service id="sylius.listener.order_promotion_integrity_checker" class="Sylius\Bundle\ShopBundle\EventListener\OrderPromotionIntegrityChecker">
+            <argument type="service" id="sylius.promotion_eligibility_checker" />
+            <argument type="service" id="event_dispatcher" />
+            <argument type="service" id="router" />
+            <tag name="kernel.event_listener" event="sylius.order.pre_complete" method="check" />
+        </service>
+
+        <service id="sylius.listener.order_total_integrity_checker" class="Sylius\Bundle\ShopBundle\EventListener\OrderTotalIntegrityChecker">
+            <argument type="service" id="sylius.order_processing.order_processor" />
+            <argument type="service" id="router" />
+            <argument type="service" id="sylius.manager.order" />
+            <tag name="kernel.event_listener" event="sylius.order.pre_complete" method="check" />
+        </service>
+
+        <service id="sylius.order_locale_assigner" class="Sylius\Bundle\ShopBundle\EventListener\OrderLocaleAssigner">
+            <argument type="service" id="sylius.context.locale" />
+            <tag name="kernel.event_listener" event="sylius.order.pre_complete" method="assignLocale" />
+        </service>
+    </services>
+</container>

@@ -19,12 +19,17 @@ sylius:
         promotion_action:
             type: Typ
         promotion_coupon:
+            expires_at: Vyprší za
             usage_limit: Omezení použití
         promotion_coupon_generator_instruction:
+            expires_at: Vyprší za
             usage_limit: Omezení použití
         promotion_rule:
             cart_quantity_configuration:
                 count: Počet
+                equal: Rovno
+            contains_product_configuration:
+                variants: Produkty
             shipping_country_configuration:
                 country: Země
             type: Typ

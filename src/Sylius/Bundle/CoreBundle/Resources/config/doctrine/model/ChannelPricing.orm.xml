@@ -18,6 +18,10 @@
 >
 
     <mapped-superclass name="Sylius\Component\Core\Model\ChannelPricing" table="sylius_channel_pricing">
+        <unique-constraints>
+            <unique-constraint columns="product_variant_id,channel_id" name="product_variant_channel_idx" />
+        </unique-constraints>
+    
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>

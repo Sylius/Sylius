@@ -29,3 +29,8 @@ This means you can for instance create the following promotions :
    applying_promotions
    coupon_based
    summary
+
+Learn more
+----------
+
+* :doc:`Promotions in the Sylius platform </book/orders/promotions>` - concept documentation

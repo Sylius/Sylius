@@ -1,16 +1,17 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
-#
+
 sylius_api_product_variant_index:
     path: /
     methods: [GET]
     defaults:
         _controller: sylius.controller.product_variant:indexAction
         _sylius:
-            serialization_version: $version
             paginate: $limit
-            sortable: true
-            filterable: true
+            serialization_version: $version
+            grid: sylius_api_product_variant
+            section: api
+            serialization_groups: [Default]
             criteria:
                 product: $productId
 
@@ -20,38 +21,52 @@ sylius_api_product_variant_create:
     defaults:
         _controller: sylius.controller.product_variant:createAction
         _sylius:
+            serialization_groups: [Default, Detailed]
             serialization_version: $version
+            section: api
+            form: Sylius\Bundle\ApiBundle\Form\Type\ProductVariantType
+            factory:
+                method: createForProduct
+                arguments:
+                  - expr:service('sylius.repository.product').findOneByCode($productCode)
 
 sylius_api_product_variant_update:
-    path: /{id}
+    path: /{code}
     methods: [PUT, PATCH]
     defaults:
         _controller: sylius.controller.product_variant:updateAction
         _sylius:
             serialization_version: $version
-            criteria:
-                product: $productId
-                master: false
+            section: api
+            form: Sylius\Bundle\ApiBundle\Form\Type\ProductVariantType
+            repository:
+                method: findOneByCode
+                arguments: [$code]
+
 
 sylius_api_product_variant_delete:
-    path: /{id}
+    path: /{code}
     methods: [DELETE]
     defaults:
         _controller: sylius.controller.product_variant:deleteAction
         _sylius:
             serialization_version: $version
-            criteria:
-                product: $productId
-                master: false
+            section: api
+            repository:
+                method: findOneByCode
+                arguments: [$code]
             csrf_protection: false
 
+
 sylius_api_product_variant_show:
-    path: /{id}
+    path: /{code}
     methods: [GET]
     defaults:
         _controller: sylius.controller.product_variant:showAction
         _sylius:
             serialization_version: $version
-            criteria:
-                product: $productId
-                master: false
+            section: api
+            serialization_groups: [Default, Detailed]
+            repository:
+                method: findOneByCode
+                arguments: [$code]

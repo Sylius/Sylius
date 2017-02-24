@@ -28,5 +28,4 @@ sylius:
         payment_method:
             description: Opis
             enabled: Omogući?
-            gateway: Gateway
             name: Naziv

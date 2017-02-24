@@ -23,19 +23,19 @@ sylius:
             name: Nome
             roles: Funções
         channel:
-            taxonomies: Taxonomias
+            currencies: Moedas
+            currency_base: Moeda base
+            hostname: Nome do servidor
             locale_default: Localidade padrão
             locales: Linguagens
-            currency_base: Moeda base
-            currencies: Moedas
-            shipping_methods: Métodos de envio
             payment_methods: Métodos de pagamento
+            shipping_methods: Métodos de envio
             tax_calculation_strategy: Estratégia de cálculo do imposto
             tax_zone_default: Zona de imposto padrão
+            taxonomies: Taxonomias
             theme: Aparência
-            hostname: Nome do servidor
         image:
-            code: Código
+            type: Tipo
             file: Imagem
         locale:
             code: Código

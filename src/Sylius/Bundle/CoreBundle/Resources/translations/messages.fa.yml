@@ -25,19 +25,19 @@ sylius:
             name: نام
             roles: نقش ها
         channel:
-            taxonomies: رده بندی
+            currencies: واحدهای پول
+            currency_base: ارز پایه
+            hostname: نام میزبان
             locale_default: زبان پیش فرض
             locales: زبان ها
-            currency_base: ارز پایه
-            currencies: واحدهای پول
-            shipping_methods: شیوه های ارسال
             payment_methods: روش‌های پرداخت
+            shipping_methods: شیوه های ارسال
             tax_calculation_strategy: استراتژی محاسبه مالیات
             tax_zone_default: منطقه مالیاتی پیش فرض
+            taxonomies: رده بندی
             theme: قالب
-            hostname: نام میزبان
         image:
-            code: نام انگلیسی
+            type: نوع
             file: عکس
         locale:
             code: نام انگلیسی

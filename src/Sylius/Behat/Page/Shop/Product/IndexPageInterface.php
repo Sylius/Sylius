@@ -58,11 +58,10 @@ interface IndexPageInterface
 
     /**
      * @param string $productName
-     * @param string $productPrice
      *
-     * @return bool
+     * @return string
      */
-    public function isProductWithPriceOnList($productName, $productPrice);
+    public function getProductPrice($productName);
 
     /**
      * @param string $name

@@ -8,3 +8,5 @@ sylius:
             choices: الخيارات
             name: الاسم
             type: نوع
+        attribute_type:
+            select: اختر

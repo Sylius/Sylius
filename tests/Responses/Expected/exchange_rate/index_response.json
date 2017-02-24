@@ -1,0 +1,105 @@
+{
+    "page": 1,
+    "limit": 10,
+    "pages": 1,
+    "total": 3,
+    "_links": {
+        "self": {
+            "href": "\/api\/v1\/exchange-rates\/?page=1&limit=10"
+        },
+        "first": {
+            "href": "\/api\/v1\/exchange-rates\/?page=1&limit=10"
+        },
+        "last": {
+            "href": "\/api\/v1\/exchange-rates\/?page=1&limit=10"
+        }
+    },
+    "_embedded": {
+        "items": [
+            {
+                "id": @integer@,
+                "ratio": 0.85,
+                "sourceCurrency": {
+                    "id": @integer@,
+                    "code": "EUR",
+                    "_links": {
+                        "self": {
+                            "href": "\/api\/v1\/currencies\/EUR"
+                        }
+                    }
+                },
+                "targetCurrency": {
+                    "id": @integer@,
+                    "code": "GBP",
+                    "_links": {
+                        "self": {
+                            "href": "\/api\/v1\/currencies\/GBP"
+                        }
+                    }
+                },
+                "updatedAt": "@string@.isDateTime()",
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/exchange-rates\/EUR-GBP"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "ratio": 1.06,
+                "sourceCurrency": {
+                    "id": @integer@,
+                    "code": "EUR",
+                    "_links": {
+                        "self": {
+                            "href": "\/api\/v1\/currencies\/EUR"
+                        }
+                    }
+                },
+                "targetCurrency": {
+                    "id": @integer@,
+                    "code": "USD",
+                    "_links": {
+                        "self": {
+                            "href": "\/api\/v1\/currencies\/USD"
+                        }
+                    }
+                },
+                "updatedAt": "@string@.isDateTime()",
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/exchange-rates\/EUR-USD"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "ratio": 1.24,
+                "sourceCurrency": {
+                    "id": @integer@,
+                    "code": "USD",
+                    "_links": {
+                        "self": {
+                            "href": "\/api\/v1\/currencies\/USD"
+                        }
+                    }
+                },
+                "targetCurrency": {
+                    "id": @integer@,
+                    "code": "GBP",
+                    "_links": {
+                        "self": {
+                            "href": "\/api\/v1\/currencies\/GBP"
+                        }
+                    }
+                },
+                "updatedAt": "@string@.isDateTime()",
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/exchange-rates\/USD-GBP"
+                    }
+                }
+            }
+        ]
+    }
+}

@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
+use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
@@ -266,6 +267,8 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
 
             ->setDefault('images', [])
             ->setAllowedTypes('images', 'array')
+
+            ->setDefault('shipping_required', true)
         ;
     }
 
@@ -327,6 +330,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
             $productVariant->setAvailableOn($this->faker->dateTimeThisYear);
             $productVariant->setCode(sprintf('%s-variant-%d', $options['code'], $i));
             $productVariant->setOnHand($this->faker->randomNumber(1));
+            $productVariant->setShippingRequired($options['shipping_required']);
 
             foreach ($this->channelRepository->findAll() as $channel) {
                 $this->createChannelPricings($productVariant, $channel);
@@ -356,11 +360,14 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
      */
     private function createImages(ProductInterface $product, array $options)
     {
-        foreach ($options['images'] as $imageCode => $imagePath) {
+        foreach ($options['images'] as $image) {
+            $imagePath = array_shift($image);
+            $uploadedImage = new UploadedFile($imagePath, basename($imagePath));
+
             /** @var ImageInterface $productImage */
             $productImage = $this->productImageFactory->createNew();
-            $productImage->setCode($imageCode);
-            $productImage->setFile(new UploadedFile($imagePath, basename($imagePath)));
+            $productImage->setFile($uploadedImage);
+            $productImage->setType(end($image) ?: null);
 
             $this->imageUploader->upload($productImage);
 
@@ -414,6 +421,17 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
             case ProductAttributeValueInterface::STORAGE_DATE:
             case ProductAttributeValueInterface::STORAGE_DATETIME:
                 return $this->faker->dateTimeThisCentury;
+            case ProductAttributeValueInterface::STORAGE_JSON:
+                if ($productAttribute->getType() == SelectAttributeType::TYPE) {
+                    if ($productAttribute->getConfiguration()['multiple']) {
+                        return array_keys($this->faker->randomElements(
+                            $productAttribute->getConfiguration()['choices'],
+                            $this->faker->randomKey($productAttribute->getConfiguration()['choices']) + 1
+                        ));
+                    }
+
+                    return [$this->faker->randomKey($productAttribute->getConfiguration()['choices'])];
+                }
             default:
                 throw new \BadMethodCallException();
         }

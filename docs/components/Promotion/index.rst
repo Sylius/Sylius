@@ -11,3 +11,8 @@ Super-flexible promotions system with support of complex rules and actions. Coup
    checkers
    models
    interfaces
+
+Learn more
+----------
+
+* :doc:`Promotions in the Sylius platform </book/orders/promotions>` - concept documentation

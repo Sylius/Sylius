@@ -8,9 +8,17 @@
     {% set steps = {'address': 'completed', 'select_shipping': 'completed', 'select_payment': 'completed', 'complete': 'active'} %}
 {% endif %}
 
-{% set is_order_total_zero = (order.total == 0) %}
+{% set order_requires_payment = sylius_is_payment_required(order) %}
+{% set order_requires_shipping = sylius_is_shipping_required(order) %}
 
-<div class="ui {{ is_order_total_zero ? 'three' : 'four' }} steps">
+{% set steps_count = 'four' %}
+{% if not order_requires_payment and not order_requires_shipping %}
+    {% set steps_count = 'two' %}
+{% elseif not order_requires_payment or not order_requires_shipping %}
+    {% set steps_count = 'three' %}
+{% endif %}
+
+<div class="ui {{ steps_count }} steps">
     <a class="{{ steps['address'] }} step" href="{{ path('sylius_shop_checkout_address') }}">
         <i class="map icon"></i>
         <div class="content">
@@ -18,6 +26,7 @@
             <div class="description">{{ 'sylius.ui.fill_in_your_billing_and_shipping_addresses'|trans }}</div>
         </div>
     </a>
+    {% if order_requires_shipping %}
     <a class="{{ steps['select_shipping'] }} step" href="{{ path('sylius_shop_checkout_select_shipping') }}">
         <i class="truck icon"></i>
         <div class="content">
@@ -25,7 +34,8 @@
             <div class="description">{{ 'sylius.ui.choose_how_your_goods_will_be_delivered'|trans }}</div>
         </div>
     </a>
-    {% if not is_order_total_zero %}
+    {% endif %}
+    {% if order_requires_payment %}
     <a class="{{ steps['select_payment'] }} step" href="{{ path('sylius_shop_checkout_select_payment') }}">
         <i class="payment icon"></i>
         <div class="content">

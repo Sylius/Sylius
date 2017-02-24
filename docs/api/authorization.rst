@@ -4,19 +4,20 @@
 Authorization
 =============
 
-This part of documentation is about authorization to Sylius platform through API. In order to check this configuration, please set up your local copy of Sylius platform and change *sylius.dev*  to your address.
-
+This part of documentation is about authorization to Sylius platform through API. In order to check this configuration,
+please set up your local copy of Sylius platform and change *sylius.dev*  to your address.
 
 OAuth2
 ------
-Sylius has configured OAuth2 authorization. The authorization process is standard procedure. Authorize as admin and enjoy the API!
+
+Sylius has the OAuth2 authorization configured. The authorization process is a standard procedure. Authorize as admin and enjoy the API!
 
 .. note::
 
-    User has to have ROLE_API_ACCESS role in order to access /api resources
+    User has to have the ROLE_API_ACCESS role in order to access ``/api`` resources
 
 Create OAuth client
-~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^
 
 Use Sylius command:
 
@@ -29,8 +30,8 @@ Use Sylius command:
 
 You will receive client public id and client secret
 
-Example Result
-..............
+Exemplary Result
+''''''''''''''''
 
 .. code-block:: bash
 
@@ -38,17 +39,15 @@ Example Result
 
 .. tip::
 
-    If you use Guzzle check out `OAuth2 plugin`__ and use Password Credentials.
-
-__ https://github.com/Sainsburys/guzzle-oauth2-plugin
+    If you use Guzzle check out `OAuth2 plugin <https://github.com/Sainsburys/guzzle-oauth2-plugin>`_ and use Password Credentials.
 
 Obtain access token
-~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^
 
 Send the request with the following parameters:
 
 Definition
-..........
+''''''''''
 
 .. code-block:: text
 
@@ -73,7 +72,7 @@ Definition
     This action can be done by POST method as well.
 
 Example
-.......
+'''''''
 
 .. code-block:: bash
 
@@ -89,8 +88,8 @@ Example
     In a developer environment there is a default API user and client data. To use this credentials you have to load data fixtures.
     Otherwise you have to use your user data and replace client id and client secret with data generated in a previous step.
 
-Example Response
-................
+Exemplary Response
+''''''''''''''''''
 
 .. code-block:: json
 
@@ -102,8 +101,8 @@ Example Response
         "refresh_token": "MDk2ZmIwODBkYmE3YjNjZWQ4ZTk2NTk2N2JmNjkyZDQ4NzA3YzhiZDQzMjJjODI5MmQ4ZmYxZjlkZmU1ZDNkMQ"
     }
 
-Request for resource
-~~~~~~~~~~~~~~~~~~~~
+Request for a resource
+^^^^^^^^^^^^^^^^^^^^^^
 
 Put access token in the request header:
 
@@ -114,7 +113,7 @@ Put access token in the request header:
 You can now access any resource you want under /api prefix.
 
 Example
-.......
+'''''''
 
 .. code-block:: bash
 
@@ -126,12 +125,12 @@ Example
     You have to refresh your token after it expires.
 
 Refresh Token
-~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^
 
 Send request with the following parameters
 
 Definition
-..........
+''''''''''
 
 .. code-block:: text
 
@@ -150,7 +149,7 @@ Definition
 +---------------+----------------+---------------------------------------------------+
 
 Example
-.......
+'''''''
 
 .. code-block:: bash
 
@@ -160,8 +159,8 @@ Example
         -d "grant_type"=refresh_token \
         -d "refresh_token"=MDk2ZmIwODBkYmE3YjNjZWQ4ZTk2NTk2N2JmNjkyZDQ4NzA3YzhiZDQzMjJjODI5MmQ4ZmYxZjlkZmU1ZDNkMQ
 
-Example Response
-................
+Exemplary Response
+''''''''''''''''''
 
 You can now use new token to send requests
 
@@ -176,7 +175,7 @@ You can now use new token to send requests
     }
 
 Default values in dev environment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 In a developer environment there are default client id, client secret and default access token provided to allow you to test our API just out-of-the-box.
 In order to access them, please use the following values:

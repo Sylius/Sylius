@@ -29,7 +29,6 @@ sylius:
         payment_method:
             description: Beskrivning
             enabled: Aktiverad?
-            gateway: Portal
             instructions: Instruktioner
             name: Namn
             position: Position

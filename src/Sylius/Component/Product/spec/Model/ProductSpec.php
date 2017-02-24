@@ -87,35 +87,6 @@ final class ProductSpec extends ObjectBehavior
         $this->getDescription()->shouldReturn('This product is super cool because...');
     }
 
-    function it_initializes_availability_date_by_default()
-    {
-        $this->getAvailableOn()->shouldHaveType(\DateTime::class);
-    }
-
-    function it_is_available_by_default()
-    {
-        $this->shouldBeAvailable();
-    }
-
-    function its_availability_date_is_mutable(\DateTime $availableOnDate)
-    {
-        $this->setAvailableOn($availableOnDate);
-        $this->getAvailableOn()->shouldReturn($availableOnDate);
-    }
-
-    function it_is_available_only_if_availability_date_is_in_past()
-    {
-        $availableOn = new \DateTime('yesterday');
-
-        $this->setAvailableOn($availableOn);
-        $this->shouldBeAvailable();
-
-        $availableOn = new \DateTime('tomorrow');
-
-        $this->setAvailableOn($availableOn);
-        $this->shouldNotBeAvailable();
-    }
-
     function it_initializes_attribute_collection_by_default()
     {
         $this->getAttributes()->shouldHaveType(Collection::class);

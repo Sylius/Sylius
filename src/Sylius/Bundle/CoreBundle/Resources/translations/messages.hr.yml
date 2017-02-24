@@ -23,13 +23,13 @@ sylius:
             name: Naziv grupe
             roles: Role (korisnička prava)
         channel:
-            taxonomies: Glavne kategorije
             locales: Lokaliteti
-            shipping_methods: Načini slanja
             payment_methods: Načini plaćanja
+            shipping_methods: Načini slanja
             tax_zone_default: Zadana porezna zona
+            taxonomies: Glavne kategorije
         image:
-            code: ISO kod
+            type: Vrsta
             file: Fotografija
         locale:
             code: ISO kod

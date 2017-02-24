@@ -11,3 +11,8 @@ Inventory management for PHP applications.
    models
    interfaces
    state_machine
+
+Learn more
+----------
+
+* :doc:`Inventory in the Sylius platform </book/products/inventory>` - concept documentation

@@ -21,7 +21,7 @@
     </parameters>
 
     <services>
-        <service id="sylius.custom_factory.payment" class="Sylius\Component\Payment\Factory\PaymentFactory" decorates="sylius.factory.payment" public="false">
+        <service id="sylius.custom_factory.payment" class="Sylius\Component\Payment\Factory\PaymentFactory" decorates="sylius.factory.payment" decoration-priority="256" public="false">
             <argument type="service" id="sylius.custom_factory.payment.inner" />
         </service>
 

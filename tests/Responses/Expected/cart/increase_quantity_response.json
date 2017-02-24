@@ -1,0 +1,91 @@
+{
+    "id": @integer@,
+    "items": [
+        {
+            "id": @integer@,
+            "quantity": 3,
+            "unitPrice": 20,
+            "total": 60,
+            "units": [
+                {
+                    "id": @integer@,
+                    "adjustments": [],
+                    "adjustmentsTotal": 0
+                },
+                {
+                    "id": @integer@,
+                    "adjustments": [],
+                    "adjustmentsTotal": 0
+                },
+                {
+                    "id": @integer@,
+                    "adjustments": [],
+                    "adjustmentsTotal": 0
+                }
+            ],
+            "unitsTotal": 60,
+            "adjustments": [],
+            "adjustmentsTotal": 0,
+            "variant": {},
+            "_links": {
+                "product": {
+                    "href": "@string@"
+                },
+                "variant": {
+                    "href": "@string@"
+                }
+            }
+        },
+        {
+            "id": @integer@,
+            "quantity": 1,
+            "unitPrice": 20,
+            "total": 20,
+            "units": [
+                {
+                    "id": @integer@,
+                    "adjustments": [],
+                    "adjustmentsTotal": 0
+                }
+            ],
+            "unitsTotal": 20,
+            "adjustments": [],
+            "adjustmentsTotal": 0,
+            "variant": {},
+            "_links": {
+                "product": {
+                    "href": "@string@"
+                },
+                "variant": {
+                    "href": "@string@"
+                }
+            }
+        }
+    ],
+    "itemsTotal": 80,
+    "adjustments": [],
+    "adjustmentsTotal": 0,
+    "total": 80,
+    "customer": {
+        "id": @integer@,
+        "email": "oliver.queen@star-city.com",
+        "firstName": "Oliver",
+        "lastName": "Queen",
+        "_links": {
+            "self": {
+                "href": "@string@"
+            }
+        }
+    },
+    "channel": {
+        "code": "WEB",
+        "_links": {
+            "self": {
+                "href": "@string@"
+            }
+        }
+    },
+    "currencyCode": "USD",
+    "localeCode": "en_US",
+    "checkoutState": "cart"
+}

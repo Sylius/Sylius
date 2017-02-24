@@ -16,3 +16,8 @@ It also includes a super flexible adjustments feature, which serves as a basis f
    cart_actions
    summary
    processors
+
+Learn more
+----------
+
+* :doc:`Carts & Orders in the Sylius platform </book/orders/index>` - concept documentation

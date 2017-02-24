@@ -19,6 +19,23 @@ Inventory On Hold
 
 Putting inventory items ``onHold`` is a way of reserving them before the customer pays for the order. Items are put on hold when the checkout is completed.
 
+.. tip::
+
+   Putting items ``onHold`` does not remove them from ``onHand`` yet. If a customer buys 2 tracked items out of 5 being
+   in the inventory (``5 onHand``), after the checkout there will be ``5 onHand`` and ``2 onHold``.
+
+Availability Checker
+--------------------
+
+There is a service that will help you checking the availability of items in the inventory
+- `AvailabilityChecker <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Inventory/Checker/AvailabilityChecker.php>`_.
+
+It has two methods ``isStockAvailable`` (is there at least one item available)  and ``isStockSufficient`` (is there a given amount of items available).
+
+.. tip::
+
+   There are two respective twig functions for checking inventory: ``sylius_inventory_is_available`` and ``sylius_inventory_is_sufficient``.
+
 OrderInventoryOperator
 ----------------------
 

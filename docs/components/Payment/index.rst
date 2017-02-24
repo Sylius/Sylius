@@ -18,3 +18,8 @@ It ships with default **Payment** and **PaymentMethod** models.
    interfaces
    default_fee_calculators
    state_machine
+
+Learn more
+----------
+
+* :doc:`Payments in the Sylius platform </book/orders/payments>` - concept documentation

@@ -5,3 +5,5 @@ sylius:
     form:
         attribute:
             type: סוג
+        attribute_type:
+            select: בחירה

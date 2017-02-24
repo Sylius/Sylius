@@ -18,6 +18,7 @@ sylius:
             datetime: Datum / Zeit
             integer: Integer
             percent: Prozent
+            select: Bundesland auswählen
             text: Text
             textarea: Textfeld
             title: Attributtyp
@@ -27,6 +28,12 @@ sylius:
                 format: Format
             date:
                 format: Format
+            select:
+                multiple: Mehrere
+                values: Werte
+                choose: Wählen Sie eine Option
+                min: Min-Einträge
+                max: Max-Einträge
             text:
                 min: Mindestlänge
                 max: Maximale Länge

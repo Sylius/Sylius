@@ -3,15 +3,20 @@
     "user": {
         "id": @integer@,
         "username": "john.diggle@example.com",
-        "username_canonical": "john.diggle@example.com",
+        "usernameCanonical": "john.diggle@example.com",
         "roles": [
             "ROLE_USER"
         ],
         "enabled": true
     },
     "email": "john.diggle@example.com",
-    "email_canonical": "john.diggle@example.com",
-    "first_name": "John",
-    "last_name": "Diggle",
-    "gender": "m"
+    "emailCanonical": "john.diggle@example.com",
+    "firstName": "John",
+    "lastName": "Diggle",
+    "gender": "m",
+    "_links": {
+        "self": {
+            "href": "@string@"
+        }
+    }
 }

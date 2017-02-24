@@ -220,7 +220,7 @@ class RegistrationContext implements Context
     public function iShouldBeNotifiedThatNewAccountHasBeenSuccessfullyCreated()
     {
         $this->notificationChecker->checkNotification(
-            'Thank you for registering, check your email to verify your account.',
+            'Thank you for registering. If you are not logged in, check your email to verify your account.',
             NotificationType::success()
         );
     }

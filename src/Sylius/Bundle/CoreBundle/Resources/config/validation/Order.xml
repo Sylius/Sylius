@@ -16,6 +16,24 @@
         <constraint name="Sylius\Bundle\PromotionBundle\Validator\Constraints\PromotionSubjectCoupon">
             <option name="groups">sylius_promotion_coupon</option>
         </constraint>
+        <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\OrderShippingMethodEligibility">
+            <option name="message">sylius.order.shipping_method_eligibility</option>
+            <option name="groups">
+                <value>sylius_checkout_complete</value>
+            </option>
+        </constraint>
+        <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\OrderPaymentMethodEligibility">
+            <option name="message">sylius.order.payment_method_eligibility</option>
+            <option name="groups">
+                <value>sylius_checkout_complete</value>
+            </option>
+        </constraint>
+        <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\OrderProductEligibility">
+            <option name="message">sylius.order.product_eligibility</option>
+            <option name="groups">
+                <value>sylius_checkout_complete</value>
+            </option>
+        </constraint>
 
         <property name="shippingAddress">
             <constraint name="Valid" />

@@ -5,7 +5,7 @@ Configuration Reference
 
     sylius_resource:
         resources:
-            app.book
+            app.book:
                 driver: doctrine/orm
                 classes:
                     model: # Required!
@@ -13,8 +13,12 @@ Configuration Reference
                     controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                     repository: ~
                     factory: Sylius\Component\Resource\Factory\Factory
+                    form: Sylius\Bundle\ResourceBundle\Form\Type\DefaultResourceType
+                        validation_groups: [sylius]
                 options:
                     object_manager: default
+                templates:
+                    form: Book/_form.html.twig
                 translation:
                     classes:
                         model: ~
@@ -22,6 +26,12 @@ Configuration Reference
                         controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                         repository: ~
                         factory: Sylius\Component\Resource\Factory\Factory
+                        form: Sylius\Bundle\ResourceBundle\Form\Type\DefaultResourceType
+                            validation_groups: [sylius]
+                    templates:
+                        form: Book/Translation/_form.html.twig
+                    options: ~
+
 
 Routing Generator Configuration Reference
 -----------------------------------------
@@ -32,11 +42,15 @@ Routing Generator Configuration Reference
         resource: |
             alias: app.book
             path: library
+            identifier: code
+            criteria:
+                code: $code
             section: admin
             templates: :Book
-            form: AppBunle/Form/Type/SimpleBookType
+            form: AppBundle/Form/Type/SimpleBookType
             redirect: create
             except: ['show']
             only: ['create', 'index']
+            serialization_version: 1
         type: sylius.resource
 

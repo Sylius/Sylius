@@ -21,13 +21,13 @@ sylius:
             name: Імя
             roles: Ролі
         channel:
-            taxonomies: Катэгорыі
             locales: Месцы размяшчэння
-            shipping_methods: Метады дастаўкі
             payment_methods: Метады аплаты
+            shipping_methods: Метады дастаўкі
             tax_zone_default: Галоўная падатковая зона
+            taxonomies: Катэгорыі
         image:
-            code: Код
+            type: Тып
             file: малюнак
         locale:
             code: Код

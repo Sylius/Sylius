@@ -143,4 +143,21 @@ final class ChannelSpec extends ObjectBehavior
         $this->setContactEmail($contactEmail);
         $this->getContactEmail()->shouldReturn($contactEmail);
     }
+
+    function it_can_allow_to_skip_shipping_step_if_only_a_single_shipping_method_is_resolved()
+    {
+        $this->setSkippingShippingStepAllowed(true);
+        $this->isSkippingShippingStepAllowed()->shouldReturn(true);
+    }
+
+    function it_has_account_verification_required_by_default()
+    {
+        $this->isAccountVerificationRequired()->shouldReturn(true);
+    }
+
+    function it_can_set_account_verification_required()
+    {
+        $this->setAccountVerificationRequired(false);
+        $this->isAccountVerificationRequired()->shouldReturn(false);
+    }
 }

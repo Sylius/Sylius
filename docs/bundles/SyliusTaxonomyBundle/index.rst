@@ -10,3 +10,8 @@ Flexible categorization system for Symfony applications.
    taxon
    categorization
    summary
+
+Learn more
+----------
+
+* :doc:`Taxons in the Sylius platform </book/products/taxons>` - concept documentation

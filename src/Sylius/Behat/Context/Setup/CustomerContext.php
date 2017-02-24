@@ -14,6 +14,8 @@ namespace Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Addressing\Model\CountryInterface;
+use Sylius\Component\Core\Model\Address;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
@@ -76,7 +78,8 @@ final class CustomerContext implements Context
     public function theStoreHasCustomerWithNameAndEmail($name, $email)
     {
         $partsOfName = explode(' ', $name);
-        $this->createCustomer($email, $partsOfName[0], $partsOfName[1]);
+        $customer = $this->createCustomer($email, $partsOfName[0], $partsOfName[1]);
+        $this->customerRepository->add($customer);
     }
 
     /**
@@ -84,7 +87,9 @@ final class CustomerContext implements Context
      */
     public function theStoreHasCustomer($email)
     {
-        $this->createCustomer($email);
+        $customer = $this->createCustomer($email);
+
+        $this->customerRepository->add($customer);
     }
 
     /**
@@ -92,7 +97,9 @@ final class CustomerContext implements Context
      */
     public function theStoreHasCustomerWithFirstName($email, $firstName)
     {
-        $this->createCustomer($email, $firstName);
+        $customer = $this->createCustomer($email, $firstName);
+
+        $this->customerRepository->add($customer);
     }
 
     /**
@@ -101,7 +108,9 @@ final class CustomerContext implements Context
     public function theStoreHasCustomerWithNameAndRegistrationDate($email, $fullName, $since)
     {
         $names = explode(' ', $fullName);
-        $this->createCustomer($email, $names[0], $names[1], new \DateTime($since));
+        $customer = $this->createCustomer($email, $names[0], $names[1], new \DateTime($since));
+
+        $this->customerRepository->add($customer);
     }
 
     /**
@@ -109,7 +118,8 @@ final class CustomerContext implements Context
      */
     public function thereIsDisabledCustomerAccountWithPassword($email, $password)
     {
-        $this->createCustomerWithUserAccount($email, $password, false);
+        $customer = $this->createCustomerWithUserAccount($email, $password, false);
+        $this->customerRepository->add($customer);
     }
 
     /**
@@ -119,7 +129,8 @@ final class CustomerContext implements Context
      */
     public function theStoreHasEnabledCustomerAccountWithPassword($email, $password = 'sylius')
     {
-        $this->createCustomerWithUserAccount($email, $password, true);
+        $customer = $this->createCustomerWithUserAccount($email, $password, true);
+        $this->customerRepository->add($customer);
     }
 
     /**
@@ -131,7 +142,8 @@ final class CustomerContext implements Context
         $firstName = $names[0];
         $lastName = count($names) > 1 ? $names[1] : null;
 
-        $this->createCustomerWithUserAccount($email, $password, true, $firstName, $lastName);
+        $customer = $this->createCustomerWithUserAccount($email, $password, true, $firstName, $lastName);
+        $this->customerRepository->add($customer);
     }
 
     /**
@@ -165,10 +177,30 @@ final class CustomerContext implements Context
     }
 
     /**
+     * @Given there is user :email with :country as shipping country
+     */
+    public function thereIsUserIdentifiedByWithAsShippingCountry($email, CountryInterface $country)
+    {
+        $customer = $this->createCustomerWithUserAccount($email, 'password123', true, 'John', 'Doe');
+        $address = new Address();
+        $address->setCountryCode($country->getCode());
+        $address->setCity('Berlin');
+        $address->setFirstName($customer->getFirstName());
+        $address->setLastName($customer->getLastName());
+        $address->setStreet('street');
+        $address->setPostcode('123');
+        $customer->setDefaultAddress($address);
+
+        $this->customerRepository->add($customer);
+    }
+
+    /**
      * @param string $email
      * @param string|null $firstName
      * @param string|null $lastName
      * @param \DateTime|null $createdAt
+     *
+     * @return CustomerInterface
      */
     private function createCustomer($email, $firstName = null, $lastName = null, \DateTime $createdAt = null)
     {
@@ -183,7 +215,8 @@ final class CustomerContext implements Context
         }
 
         $this->sharedStorage->set('customer', $customer);
-        $this->customerRepository->add($customer);
+
+        return $customer;
     }
 
     /**
@@ -193,6 +226,8 @@ final class CustomerContext implements Context
      * @param string|null $firstName
      * @param string|null $lastName
      * @param string|null $role
+     *
+     * @return CustomerInterface
      */
     private function createCustomerWithUserAccount(
         $email,
@@ -218,6 +253,7 @@ final class CustomerContext implements Context
         $customer->setUser($user);
 
         $this->sharedStorage->set('customer', $customer);
-        $this->customerRepository->add($customer);
+
+        return $customer;
     }
 }

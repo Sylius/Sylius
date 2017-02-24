@@ -15,12 +15,14 @@ use Behat\Behat\Context\Context;
 use Behat\Mink\Element\NodeElement;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Core\Formatter\StringInflector;
+use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Model\TranslationInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxonomy\Generator\TaxonSlugGeneratorInterface;
+use Sylius\Component\Taxonomy\Model\TaxonTranslationInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
@@ -126,15 +128,16 @@ final class TaxonomyContext implements Context
     }
 
     /**
-     * @Given /^the ("[^"]+" taxon) has(?:| also) an image "([^"]+)" with a code "([^"]+)"$/
+     * @Given /^the ("[^"]+" taxon)(?:| also) has an image "([^"]+)" with "([^"]+)" type$/
      */
-    public function theTaxonHasAnImageWithACode(TaxonInterface $taxon, $imagePath, $imageCode)
+    public function theTaxonHasAnImageWithType(TaxonInterface $taxon, $imagePath, $imageType)
     {
         $filesPath = $this->getParameter('files_path');
 
+        /** @var ImageInterface $taxonImage */
         $taxonImage = $this->taxonImageFactory->createNew();
         $taxonImage->setFile(new UploadedFile($filesPath.$imagePath, basename($imagePath)));
-        $taxonImage->setCode($imageCode);
+        $taxonImage->setType($imageType);
         $this->imageUploader->upload($taxonImage);
 
         $taxon->addImage($taxonImage);
@@ -169,7 +172,7 @@ final class TaxonomyContext implements Context
         $taxon = $this->taxonFactory->createNew();
         $taxon->setCode(StringInflector::nameToCode($names['en_US']));
         foreach ($names as $locale => $name) {
-            /** @var TranslationInterface $taxonTranslation */
+            /** @var TranslationInterface|TaxonTranslationInterface $taxonTranslation */
             $taxonTranslation = $this->taxonTranslationFactory->createNew();
             $taxonTranslation->setLocale($locale);
             $taxonTranslation->setName($name);

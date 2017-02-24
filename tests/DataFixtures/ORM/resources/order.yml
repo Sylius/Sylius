@@ -1,0 +1,35 @@
+Sylius\Component\Core\Model\Order:
+    order_001:
+        channel: "@channel_web"
+        currencyCode: USD
+        localeCode: en_US
+        customer: "@customer_oliver"
+        state: completed
+
+Sylius\Component\Core\Model\Channel:
+    channel_web:
+        code: "WEB"
+        name: "Web Channel"
+        hostname: "localhost"
+        description: "Lorem ipsum"
+        baseCurrency: "@currency"
+        defaultLocale: "@locale"
+        color: "black"
+        enabled: true
+        taxCalculationStrategy: "order_items_based"
+
+Sylius\Component\Currency\Model\Currency:
+    currency:
+        code: USD
+
+Sylius\Component\Locale\Model\Locale:
+    locale:
+        code: en_US
+
+Sylius\Component\Core\Model\Customer:
+    customer_oliver:
+        firstName: Oliver
+        lastName: Queen
+        email: oliver.queen@star-city.com
+        emailCanonical: oliver.queen@star-city.com
+        birthday: <date()>

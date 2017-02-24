@@ -13,7 +13,7 @@ To browse all users available in the store you should call the following GET req
     GET /api/v1/users/
 
 Parameters
-~~~~~~~~~~
+^^^^^^^^^^
 
 page
     Number of the page, by default = 1
@@ -23,7 +23,7 @@ criteria[query]
     Username, email or first & last names
 
 Response
-~~~~~~~~
+^^^^^^^^
 
 Response will contain a paginated list of users.
 
@@ -74,7 +74,7 @@ Response will contain a paginated list of users.
     }
 
 Getting a single user
-------------------------
+---------------------
 
 You can view a single user by executing the following request:
 
@@ -83,7 +83,7 @@ You can view a single user by executing the following request:
     GET /api/v1/users/481
 
 Response
-~~~~~~~~
+^^^^^^^^
 
 .. code-block:: text
 
@@ -108,7 +108,7 @@ Response
     }
 
 Create an user
----------------
+--------------
 
 To create a new user, you can execute the following request:
 
@@ -117,7 +117,7 @@ To create a new user, you can execute the following request:
     POST /api/v1/users/
 
 Parameters
-~~~~~~~~~~
+^^^^^^^^^^
 
 first_name
     Firstname of the customer
@@ -131,7 +131,7 @@ enabled *(optional)*
     User account status (boolean)
 
 Response
-~~~~~~~~
+^^^^^^^^
 
 .. code-block:: text
 
@@ -156,7 +156,7 @@ Response
     }
 
 Updating a user
-------------------
+---------------
 
 You can update an existing user using PUT or PATCH method:
 
@@ -169,7 +169,7 @@ You can update an existing user using PUT or PATCH method:
     PATCH /api/v1/users/481
 
 Parameters
-~~~~~~~~~~
+^^^^^^^^^^
 
 first_name
     Firstname of the customer
@@ -183,14 +183,14 @@ enabled *(optional)*
     User account status (boolean)
 
 Response
-~~~~~~~~
+^^^^^^^^
 
 .. code-block:: text
 
     STATUS: 204 NO CONTENT
 
 Deleting a user
-------------------
+---------------
 
 You can delete (soft) a user from the system by making the following DELETE call:
 
@@ -199,7 +199,7 @@ You can delete (soft) a user from the system by making the following DELETE call
     DELETE /api/v1/users/24
 
 Response
-~~~~~~~~
+^^^^^^^^
 
 .. code-block:: text
 
@@ -215,13 +215,13 @@ You can create a new password resetting request by calling the following API end
     POST /api/v1/password-resetting-requests/
 
 Parameters
-~~~~~~~~~~
+^^^^^^^^^^
 
 username
     Username or e-mail
 
 Response
-~~~~~~~~
+^^^^^^^^
 
 The successful response will contain the user object with a confirmation token and date of password request.
 

@@ -78,16 +78,42 @@ final class ProductContext implements Context
     }
 
     /**
-     * @When /^I check (this product)'s details/
+     * @When /^I check (this product)'s details$/
+     * @When /^I check (this product)'s details in the ("([^"]+)" locale)$/
      * @When I view product :product
+     * @When I view product :product in the :localeCode locale
      */
-    public function iOpenProductPage(ProductInterface $product)
+    public function iOpenProductPage(ProductInterface $product, $localeCode = 'en_US')
     {
-        $this->showPage->open(['slug' => $product->getSlug()]);
+        $this->showPage->open(['slug' => $product->getTranslation($localeCode)->getSlug(), '_locale' => $localeCode]);
     }
 
     /**
-     * @Given I should see the product name :name
+     * @When /^I try to check (this product)'s details in the ("([^"]+)" locale)$/
+     */
+    public function iTryToOpenProductPage(ProductInterface $product, $localeCode = 'en_US')
+    {
+        $this->showPage->tryToOpen([
+            'slug' => $product->getTranslation($localeCode)->getSlug(),
+            '_locale' => $localeCode,
+        ]);
+    }
+
+    /**
+     * @Then /^I should not be able to view (this product) in the ("([^"]+)" locale)$/
+     */
+    public function iShouldNotBeAbleToViewThisProductInLocale(ProductInterface $product, $localeCode = 'en_US')
+    {
+        Assert::false(
+            $this->showPage->isOpen([
+                'slug' => $product->getTranslation($localeCode)->getSlug(),
+                '_locale' => $localeCode,
+            ])
+        );
+    }
+
+    /**
+     * @Then I should see the product name :name
      */
     public function iShouldSeeProductName($name)
     {
@@ -281,7 +307,7 @@ final class ProductContext implements Context
      */
     public function iShouldSeeTheProductWithPrice($productName, $productPrice)
     {
-        Assert::true($this->indexPage->isProductWithPriceOnList($productName, $productPrice));
+        Assert::same($this->indexPage->getProductPrice($productName), $productPrice);
     }
 
     /**
@@ -343,11 +369,29 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Then the first product on the list should have name :name and price :price
+     */
+    public function theFirstProductOnTheListShouldHaveNameAndPrice($name, $price)
+    {
+        Assert::same($this->indexPage->getFirstProductNameFromList(), $name);
+        Assert::same($this->indexPage->getProductPrice($name), $price);
+    }
+
+    /**
      * @Then the last product on the list should have name :name
      */
     public function theLastProductOnTheListShouldHaveName($name)
     {
         Assert::same($this->indexPage->getLastProductNameFromList(), $name);
+    }
+
+    /**
+     * @Then the last product on the list should have name :name and price :price
+     */
+    public function theLastProductOnTheListShouldHaveNameAndPrice($name, $price)
+    {
+        Assert::same($this->indexPage->getLastProductNameFromList(), $name);
+        Assert::same($this->indexPage->getProductPrice($name), $price);
     }
 
     /**
@@ -430,7 +474,7 @@ final class ProductContext implements Context
         );
 
         foreach ($products as $product) {
-            $this->assertIsProductIsInAssociation($product->getName(), $productAssociationName);
+            $this->assertProductIsInAssociation($product->getName(), $productAssociationName);
         }
     }
 
@@ -457,7 +501,7 @@ final class ProductContext implements Context
      *
      * @throws \InvalidArgumentException
      */
-    private function assertIsProductIsInAssociation($productName, $productAssociationName)
+    private function assertProductIsInAssociation($productName, $productAssociationName)
     {
         Assert::true(
             $this->showPage->hasProductInAssociation($productName, $productAssociationName),

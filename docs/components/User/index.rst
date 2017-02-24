@@ -9,3 +9,8 @@ Users management implementation in PHP.
    installation
    models
    basic_usage
+
+Learn more
+----------
+
+* :doc:`Customers & Users in the Sylius platform </book/customers/index>` - concept documentation

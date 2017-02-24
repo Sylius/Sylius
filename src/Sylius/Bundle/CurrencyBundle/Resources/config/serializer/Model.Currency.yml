@@ -27,3 +27,10 @@ Sylius\Component\Currency\Model\Currency:
             expose: true
             type: DateTime
             groups: [Detailed]
+    relations:
+        - rel: self
+          href:
+                route: sylius_api_currency_show
+                parameters:
+                    code: expr(object.getCode())
+                    version: 1

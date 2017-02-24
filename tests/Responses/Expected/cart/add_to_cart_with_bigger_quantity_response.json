@@ -1,0 +1,65 @@
+{
+    "id": @integer@,
+    "order": {
+        "id": @integer@,
+        "items": [],
+        "itemsTotal": 60,
+        "adjustments": [],
+        "adjustmentsTotal": 0,
+        "total": 60,
+        "customer": {
+            "id": @integer@,
+            "email": "oliver.queen@star-city.com",
+            "firstName": "Oliver",
+            "lastName": "Queen",
+            "_links": {
+                "self": {
+                    "href": "@string@"
+                }
+            }
+        },
+        "channel": {
+            "code": "WEB",
+            "_links": {
+                "self": {
+                    "href": "@string@"
+                }
+            }
+        },
+        "currencyCode": "USD",
+        "localeCode": "en_US",
+        "checkoutState": "cart"
+    },
+    "quantity": 3,
+    "unitPrice": 20,
+    "total": 60,
+    "units": [
+        {
+            "id": @integer@,
+            "adjustments": [],
+            "adjustmentsTotal": 0
+        },
+        {
+            "id": @integer@,
+            "adjustments": [],
+            "adjustmentsTotal": 0
+        },
+        {
+            "id": @integer@,
+            "adjustments": [],
+            "adjustmentsTotal": 0
+        }
+    ],
+    "unitsTotal": 60,
+    "adjustments": [],
+    "adjustmentsTotal": 0,
+    "variant": {},
+    "_links": {
+        "product": {
+            "href": "@string@"
+        },
+        "variant": {
+            "href": "@string@"
+        }
+    }
+}

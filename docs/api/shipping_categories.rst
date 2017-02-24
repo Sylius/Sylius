@@ -41,7 +41,7 @@ Collection of Shipping Categories
 You can retrieve the full shipment categories list by making the following request:
 
 Definition
-..........
+^^^^^^^^^^
 
 .. code-block:: text
 
@@ -59,16 +59,16 @@ Definition
 
 
 Example
-.......
+^^^^^^^
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/v1/shipping-categories/ \
+    $ curl http://demo.sylius.org/api/v1/shipping-categories/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
-Example Response
-~~~~~~~~~~~~~~~~
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
@@ -100,7 +100,7 @@ Example Response
                     "name": "Regular",
                     "_links": {
                         "self": {
-                            "href": "\/api\/shipping-categories\/1"
+                            "href": "\/api\/shipping-categories\/SC1"
                         }
                     }
                 },
@@ -110,7 +110,7 @@ Example Response
                     "name": "Heavy",
                     "_links": {
                         "self": {
-                            "href": "\/api\/shipping-categories\/2"
+                            "href": "\/api\/shipping-categories\/SC2"
                         }
                     }
                 }
@@ -124,31 +124,31 @@ Getting a Single Shipping Category
 You can request detailed shipping category information by executing the following request:
 
 Definition
-..........
+^^^^^^^^^^
 
 .. code-block:: text
 
-    GET /api/v1/shipping-categories/{id}
+    GET /api/v1/shipping-categories/{code}
 
 +---------------+----------------+-------------------------------------------------------------------+
 | Parameter     | Parameter type | Description                                                       |
 +===============+================+===================================================================+
 | Authorization | header         | Token received during authentication                              |
 +---------------+----------------+-------------------------------------------------------------------+
-| id            | url attribute  | Id of requested resource                                          |
+| code          | url attribute  | Code of requested resource                                        |
 +---------------+----------------+-------------------------------------------------------------------+
 
 Example
-.......
+^^^^^^^
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/v1/shipping-categories/1 \
+    $ curl http://demo.sylius.org/api/v1/shipping-categories/SC1 \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
-Example Response
-~~~~~~~~~~~~~~~~
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
@@ -163,7 +163,7 @@ Example Response
         "description": "Regular weight items",
         "_links": {
             "self": {
-                "href": "\/api\/shipping-categories\/1"
+                "href": "\/api\/shipping-categories\/SC1"
             }
         }
     }
@@ -172,7 +172,7 @@ Creating Shipping Category
 --------------------------
 
 Definition
-..........
+^^^^^^^^^^
 
 .. code-block:: text
 
@@ -191,11 +191,11 @@ Definition
 +---------------+----------------+--------------------------------------------------------+
 
 Example
-.......
+^^^^^^^
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/v1/shipping-categories/ \
+    $ curl http://demo.sylius.org/api/v1/shipping-categories/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST \
@@ -207,8 +207,8 @@ Example
             }
         '
 
-Example Response
-~~~~~~~~~~~~~~~~
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
@@ -223,7 +223,7 @@ Example Response
         "description": "Light weight items",
         "_links": {
             "self": {
-                "href": "\/api\/shipping-categories\/3"
+                "href": "\/api\/shipping-categories\/SC3"
             }
         }
     }
@@ -231,17 +231,17 @@ Example Response
 If you try to create a resource without name or code, you will receive a 400 error.
 
 Example
-.......
+^^^^^^^
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/v1/shipping-categories/-1 \
+    $ curl http://demo.sylius.org/api/v1/shipping-categories/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X POST
 
-Example Response
-~~~~~~~~~~~~~~~~
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
@@ -275,18 +275,18 @@ Updating Shipping Category
 You can request full or partial update of resource. For full shipping category update, you should use PUT method.
 
 Definition
-..........
+^^^^^^^^^^
 
 .. code-block:: text
 
-    PUT /api/v1/shipping-categories/{id}
+    PUT /api/v1/shipping-categories/{code}
 
 +---------------+----------------+-------------------------------------------+
 | Parameter     | Parameter type | Description                               |
 +===============+================+===========================================+
 | Authorization | header         | Token received during authentication      |
 +---------------+----------------+-------------------------------------------+
-| id            | url attribute  | Id of requested resource                  |
+| code          | url attribute  | Code of requested resource                |
 +---------------+----------------+-------------------------------------------+
 | name          | request        | Name of creating shipping category        |
 +---------------+----------------+-------------------------------------------+
@@ -294,11 +294,11 @@ Definition
 +---------------+----------------+-------------------------------------------+
 
 Example
-.......
+^^^^^^^
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/v1/shipping-categories/3 \
+    $ curl http://demo.sylius.org/api/v1/shipping-categories/SC3 \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PUT \
@@ -309,27 +309,27 @@ Example
             }
         '
 
-Example Response
-~~~~~~~~~~~~~~~~
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
     STATUS: 204 No Content
 
-If you try to perform full shipping category update without all required fields specified, you will receive a 400 error.
+If you try to perform full shipping category update without all the required fields specified, you will receive a 400 error.
 
 Example
-.......
+^^^^^^^
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/v1/shipping-categories/-1 \
+    $ curl http://demo.sylius.org/api/v1/shipping-categories/SC3 \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X PUT
 
-Example Response
-~~~~~~~~~~~~~~~~
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
@@ -355,18 +355,18 @@ Example Response
 In order to perform a partial update, you should use a PATCH method.
 
 Definition
-..........
+^^^^^^^^^^
 
 .. code-block:: text
 
-    PATCH /api/v1/shipping-categories/{id}
+    PATCH /api/v1/shipping-categories/{code}
 
 +---------------+----------------+--------------------------------------------------------+
 | Parameter     | Parameter type | Description                                            |
 +===============+================+========================================================+
 | Authorization | header         | Token received during authentication                   |
 +---------------+----------------+--------------------------------------------------------+
-| id            | url attribute  | Id of requested resource                               |
+| code          | url attribute  | Code of requested resource                             |
 +---------------+----------------+--------------------------------------------------------+
 | name          | request        | *(optional)* Name of creating shipping category        |
 +---------------+----------------+--------------------------------------------------------+
@@ -374,18 +374,18 @@ Definition
 +---------------+----------------+--------------------------------------------------------+
 
 Example
-.......
+^^^^^^^
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/v1/shipping-categories/3 \
+    $ curl http://demo.sylius.org/api/v1/shipping-categories/SC3 \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PATCH \
         --data '{"name": "Light"}'
 
-Example Response
-~~~~~~~~~~~~~~~~
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
@@ -395,32 +395,32 @@ Deleting Shipping Category
 --------------------------
 
 Definition
-..........
+^^^^^^^^^^
 
 .. code-block:: text
 
-    DELETE /api/v1/shipping-categories/{id}
+    DELETE /api/v1/shipping-categories/{code}
 
 +---------------+----------------+-------------------------------------------+
 | Parameter     | Parameter type | Description                               |
 +===============+================+===========================================+
 | Authorization | header         | Token received during authentication      |
 +---------------+----------------+-------------------------------------------+
-| id            | url attribute  | Id of requested resource                  |
+| code          | url attribute  | Code of requested resource                |
 +---------------+----------------+-------------------------------------------+
 
 Example
-.......
+^^^^^^^
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/v1/shipping-categories/3 \
+    $ curl http://demo.sylius.org/api/v1/shipping-categories/SC3 \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X DELETE
 
-Example Response
-~~~~~~~~~~~~~~~~
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 

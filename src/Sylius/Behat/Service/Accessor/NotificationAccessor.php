@@ -21,7 +21,7 @@ use Sylius\Behat\NotificationType;
  */
 final class NotificationAccessor implements NotificationAccessorInterface
 {
-    const NOTIFICATION_ELEMENT_CSS = '.message';
+    const NOTIFICATION_ELEMENT_CSS = '#sylius-flash-messages';
 
     /**
      * @var Session

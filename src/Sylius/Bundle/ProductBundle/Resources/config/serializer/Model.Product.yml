@@ -35,14 +35,6 @@ Sylius\Component\Product\Model\Product:
             expose: true
             type: array
             groups: [Detailed]
-        availableOn:
-            expose: true
-            type: DateTime
-            groups: [Detailed]
-        availableUntil:
-            expose: true
-            type: DateTime
-            groups: [Detailed]
     virtual_properties:
         getName:
             serialized_name: name
@@ -51,7 +43,7 @@ Sylius\Component\Product\Model\Product:
           href:
             route: sylius_api_product_show
             parameters:
-                id: expr(object.getId())
+                code: expr(object.getCode())
                 version: 1
             exclusion:
                 groups: [Detailed]

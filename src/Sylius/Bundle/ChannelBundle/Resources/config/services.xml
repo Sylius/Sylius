@@ -19,7 +19,7 @@
     </parameters>
 
     <services>
-        <service id="sylius.custom_factory.channel" class="Sylius\Component\Channel\Factory\ChannelFactory" decorates="sylius.factory.channel" public="false">
+        <service id="sylius.custom_factory.channel" class="Sylius\Component\Channel\Factory\ChannelFactory" decorates="sylius.factory.channel" decoration-priority="256" public="false">
             <argument type="service" id="sylius.custom_factory.channel.inner" />
         </service>
 

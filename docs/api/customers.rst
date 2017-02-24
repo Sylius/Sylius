@@ -2,9 +2,9 @@ Customers API
 =============
 
 These endpoints will allow you to easily manage customers. Base URI is `/api/v1/customers`.
-Customer class is strongly coupled with a user class. Because of that we recommend these endpoints to manage all related to user actions
+The Customer class is strongly coupled with the User class. Because of that we recommend these endpoints to manage all related to user actions.
 
-When you get a collection of resources, "Default" serialization group will be used and following fields will be exposed:
+When you get a collection of resources, "Default" serialization group will be used and the following fields will be exposed:
 
 +----------------+------------------------------------------+
 | Field          | Description                              |
@@ -58,10 +58,7 @@ If you request for a more detailed data, you will receive an object with followi
 
 .. note::
 
-    Read more about `Customer`__ and `User`__
-
-__ http://docs.sylius.org/en/latest/components/User/models.html#customer
-__ http://docs.sylius.org/en/latest/components/User/models.html#user
+    Read more about :doc:`Customers and Users </components/User/models>`.
 
 Collection of Customers
 -----------------------
@@ -69,7 +66,7 @@ Collection of Customers
 You can retrieve the full customers list by making the following request:
 
 Definition
-..........
+^^^^^^^^^^
 
 .. code-block:: text
 
@@ -85,9 +82,8 @@ Definition
 | limit         | query          | *(optional)* Number of items to display per page, by default = 10 |
 +---------------+----------------+-------------------------------------------------------------------+
 
-
 Example
-.......
+^^^^^^^
 
 .. code-block:: bash
 
@@ -95,8 +91,8 @@ Example
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
-Example Response
-~~~~~~~~~~~~~~~~
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
@@ -224,7 +220,7 @@ Getting a Single Customer
 You can request detailed customer information by executing the following request:
 
 Definition
-..........
+^^^^^^^^^^
 
 .. code-block:: text
 
@@ -239,7 +235,7 @@ Definition
 +---------------+----------------+-------------------------------------------------------------------+
 
 Example
-.......
+^^^^^^^
 
 .. code-block:: bash
 
@@ -247,8 +243,8 @@ Example
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
-Example Response
-~~~~~~~~~~~~~~~~
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
@@ -277,11 +273,11 @@ Example Response
         ]
     }
 
-Creating Customer
------------------
+Creating a Customer
+-------------------
 
 Definition
-..........
+^^^^^^^^^^
 
 .. code-block:: text
 
@@ -312,7 +308,7 @@ Definition
 +--------------------------+----------------+------------------------------------------------------------------------------------------------------+
 
 Example
-.......
+^^^^^^^
 
 .. code-block:: bash
 
@@ -332,8 +328,8 @@ Example
             }
         '
 
-Example Response
-~~~~~~~~~~~~~~~~
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
@@ -364,7 +360,7 @@ Example Response
 If you try to create a customer without email, first name, last name or gender, you will receive a 400 error.
 
 Example
-.......
+^^^^^^^
 
 .. code-block:: bash
 
@@ -373,8 +369,8 @@ Example
         -H "Accept: application/json" \
         -X POST
 
-Example Response
-~~~~~~~~~~~~~~~~
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
@@ -417,13 +413,13 @@ Example Response
         }
     }
 
-Updating Customer
------------------
+Updating a Customer
+-------------------
 
 You can request full or partial update of resource. For full customer update, you should use PUT method.
 
 Definition
-..........
+^^^^^^^^^^
 
 .. code-block:: text
 
@@ -456,7 +452,7 @@ Definition
 +--------------------------+----------------+------------------------------------------------------------------------------+
 
 Example
-.......
+^^^^^^^
 
 .. code-block:: bash
 
@@ -473,8 +469,8 @@ Example
             }
         '
 
-Example Response
-~~~~~~~~~~~~~~~~
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
@@ -483,7 +479,7 @@ Example Response
 If you try to perform full customer update without all required fields specified, you will receive a 400 error.
 
 Example
-.......
+^^^^^^^
 
 .. code-block:: bash
 
@@ -492,8 +488,8 @@ Example
         -H "Accept: application/json" \
         -X PUT
 
-Example Response
-~~~~~~~~~~~~~~~~
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
@@ -539,7 +535,7 @@ Example Response
 In order to perform a partial update, you should use a PATCH method.
 
 Definition
-..........
+^^^^^^^^^^
 
 .. code-block:: text
 
@@ -572,7 +568,7 @@ Definition
 +--------------------------+----------------+--------------------------------------------------+
 
 Example
-.......
+^^^^^^^
 
 .. code-block:: bash
 
@@ -582,18 +578,18 @@ Example
         -X PATCH \
         --data '{"first_name": "Joe"}'
 
-Example Response
-~~~~~~~~~~~~~~~~
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
     STATUS: 204 No Content
 
-Deleting Customer
------------------
+Deleting a Customer
+-------------------
 
 Definition
-..........
+^^^^^^^^^^
 
 .. code-block:: text
 
@@ -608,7 +604,7 @@ Definition
 +---------------+----------------+-------------------------------------------+
 
 Example
-.......
+^^^^^^^
 
 .. code-block:: bash
 
@@ -617,8 +613,8 @@ Example
         -H "Accept: application/json" \
         -X DELETE
 
-Example Response
-~~~~~~~~~~~~~~~~
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
@@ -634,7 +630,7 @@ To browse all orders for specific customer, you can do the following call:
     GET /api/v1/customers/{id}/orders/
 
 Parameters
-..........
+^^^^^^^^^^
 
 page
     Number of the page, by default = 1

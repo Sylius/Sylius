@@ -18,9 +18,8 @@
             $('#user-form').toggle();
         });
 
-        $.each($('.sylius-autocomplete'), function (index, element) {
-            $(element).autoComplete();
-        });
+        $('.sylius-autocomplete').autoComplete();
+
         $('.product-select.ui.fluid.multiple.search.selection.dropdown').productAutoComplete();
         $('div#attributeChoice > .ui.dropdown.search').productAttributes();
 
@@ -49,6 +48,9 @@
                 $('select[name^="sylius_promotion[rules]"][name$="[type]"]').last().change();
             }, 50);
         });
+
+        $('.sylius-tabular-form').addTabErrors();
+        $('.ui.accordion').addAccordionErrors();
 
         $(document).productSlugGenerator();
         $(document).taxonSlugGenerator();

@@ -1,7 +1,7 @@
 {% set subject = metadata.name|replace({'_attribute': ''}) %}
-{% for attributeId, localeCodes in forms %}
+{% for code, localeCodes in forms %}
     {% for localeCode, form in localeCodes %}
-        <div class="attribute" data-id="{{ attributeId }}">
+        <div class="attribute" data-id="{{ code }}">
             {% set id = form.vars.label|replace(' ', '_')|lower %}
             {% if 'type_checkbox' in form.vars.cache_key %}
                 {{ _self.checkboxField(form, count, id, subject, metadata.applicationName) }}
@@ -11,7 +11,7 @@
             <input type="hidden"
                    name="sylius_product[attributes][{{ count }}][attribute]"
                    id="sylius_product_attributes_{{ count }}_attribute"
-                   value="{{ attributeId }}"/>
+                   value="{{ code }}"/>
             <input type="hidden"
                    name="sylius_product[attributes][{{ count }}][localeCode]"
                    id="sylius_product_attributes_{{ count }}_localeCode"
@@ -30,6 +30,9 @@
     {% elseif item.vars.name != '_token' %}
         {% set namePrefix = prefix|replace({'_': ']['}) %}
         {% set dataName = applicationName~'_'~subject~'[attributes]['~count~namePrefix~']['~item.vars.name~']' %}
+        {% if item.vars.multiple is defined and item.vars.multiple %}
+            {% set dataName = dataName~'[]' %}
+        {% endif %}
 
         {{ form_widget(item, {'id': id, 'attr': {'data-name': dataName }}) }}
     {% endif %}

@@ -13,7 +13,7 @@ You can retrieve the full list payment by making the following request:
     GET /api/v1/payments/
 
 Parameters
-~~~~~~~~~~
+^^^^^^^^^^
 
 page
     Number of the page, by default = 1
@@ -31,7 +31,7 @@ criteria[createdAtTo] *(optional)*
     End date
 
 Response
-~~~~~~~~
+^^^^^^^^
 
 .. code-block:: text
 
@@ -75,7 +75,7 @@ You can view a single payment by executing the following request:
     GET /api/v1/payments/251
 
 Response
-~~~~~~~~
+^^^^^^^^
 
 .. code-block:: text
 
@@ -95,7 +95,7 @@ You can delete a payment from the system by making the following DELETE call:
     DELETE /api/v1/payments/99
 
 Response
-~~~~~~~~
+^^^^^^^^
 
 .. code-block:: text
 

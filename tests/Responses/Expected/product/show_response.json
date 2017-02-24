@@ -2,7 +2,6 @@
     "id": @integer@,
     "name": "Star Wars mug",
     "code": "MUG_SW",
-    "available_on": "@string@.isDateTime()",
     "attributes": [],
     "variants": [],
     "options": [],
@@ -23,9 +22,9 @@
             "description": "@string@"
         }
     },
-    "product_taxons": [],
+    "productTaxons": [],
     "reviews": [],
-    "average_rating": 0,
+    "averageRating": 0,
     "images": [],
     "_links": {
         "self": {

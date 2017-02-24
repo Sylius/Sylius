@@ -161,8 +161,8 @@ class TshirtProductFixture extends AbstractFixture
                 ],
                 'product_options' => ['t_shirt_color', 't_shirt_size'],
                 'images' => [
-                    'main' => sprintf('%s/../Resources/fixtures/%s', __DIR__, 't-shirts.jpg'),
-                    'thumbnail' => sprintf('%s/../Resources/fixtures/%s', __DIR__, 't-shirts.jpg'),
+                    [sprintf('%s/../Resources/fixtures/%s', __DIR__, 't-shirts.jpg'), 'main'],
+                    [sprintf('%s/../Resources/fixtures/%s', __DIR__, 't-shirts.jpg'), 'thumbnail'],
                 ],
             ];
         }

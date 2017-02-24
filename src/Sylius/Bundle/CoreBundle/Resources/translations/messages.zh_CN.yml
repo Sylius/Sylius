@@ -25,19 +25,19 @@ sylius:
             name: 名称
             roles: 角色
         channel:
-            taxonomies: 分类
+            currencies: 货币
+            currency_base: 基础货币
+            hostname: 主机名
             locale_default: 默认区域
             locales: 区域设置
-            currency_base: 基础货币
-            currencies: 货币
-            shipping_methods: 发货方式
             payment_methods: 支付方式
+            shipping_methods: 发货方式
             tax_calculation_strategy: 税收策略
             tax_zone_default: 默认税区
+            taxonomies: 分类
             theme: 主题
-            hostname: 主机名
         image:
-            code: 代码
+            type: 类型
             file: 图像
         locale:
             code: 代码

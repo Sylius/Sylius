@@ -26,9 +26,25 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function chooseGateway($gateway)
+    public function setPaypalGatewayUsername($username)
     {
-        $this->getElement('gateway')->selectOption($gateway);
+        $this->getDocument()->fillField('Username', $username);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPaypalGatewayPassword($password)
+    {
+        $this->getDocument()->fillField('Password', $password);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPaypalGatewaySignature($signature)
+    {
+        $this->getDocument()->fillField('Signature', $signature);
     }
 
     /**
@@ -45,6 +61,14 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     public function isPaymentMethodEnabled()
     {
         return (bool) $this->getToggleableElement()->getValue();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isFactoryNameFieldDisabled()
+    {
+        return 'disabled' === $this->getElement('factory_name')->getAttribute('disabled');
     }
 
     /**
@@ -88,7 +112,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'channel' => '.checkbox:contains("%channel%") input',
             'code' => '#sylius_payment_method_code',
             'enabled' => '#sylius_payment_method_enabled',
-            'gateway' => '#sylius_payment_method_gateway',
+            'factory_name' => '#sylius_payment_method_gatewayConfig_factoryName',
             'instructions' => '#sylius_payment_method_translations_%language%_instructions',
             'name' => '#sylius_payment_method_translations_en_US_name',
         ]);

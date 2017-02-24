@@ -25,7 +25,7 @@
 {%- endblock collection_widget %}
 
 {% macro collection_item(form, allow_delete, button_delete_label, index) %}
-    <div class="attribute" data-id="{{ form.vars.data.attribute.id }}">
+    <div class="attribute" data-id="{{ form.vars.data.attribute.code }}">
         {% set id = form.vars.id %}
         {% if 'checkbox' in form.children.value.vars.block_prefixes %}
             <div class="ui toggle checkbox" style="margin-top: 15px; margin-bottom: 15px;">
@@ -44,7 +44,7 @@
                 </button>
             </div>
         {% endif %}
-        <input type="hidden" name="{{ form.attribute.vars.full_name }}" id="{{ form.attribute.vars.id }}" value="{{ form.vars.data.attribute.id }}"/>
+        <input type="hidden" name="{{ form.attribute.vars.full_name }}" id="{{ form.attribute.vars.id }}" value="{{ form.vars.data.attribute.code }}"/>
         <input type="hidden" name="{{ form.localeCode.vars.full_name }}" id="{{ form.localeCode.vars.id }}" value="{{ form.localeCode.vars.value }}"/>
     </div>
 {% endmacro %}

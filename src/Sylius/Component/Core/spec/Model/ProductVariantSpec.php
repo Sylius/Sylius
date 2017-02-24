@@ -16,10 +16,10 @@ use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
-use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariant;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Product\Model\ProductVariant as BaseProductVariant;
+use Sylius\Component\Resource\Model\VersionedInterface;
 use Sylius\Component\Shipping\Model\ShippableInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxableInterface;
@@ -53,6 +53,16 @@ final class ProductVariantSpec extends ObjectBehavior
     function it_implements_a_shippable_interface()
     {
         $this->shouldImplement(ShippableInterface::class);
+    }
+
+    function it_implements_versioned_interface()
+    {
+        $this->shouldImplement(VersionedInterface::class);
+    }
+
+    function it_has_version_1_by_default()
+    {
+        $this->getVersion()->shouldReturn(1);
     }
 
     function it_has_no_weight_by_default()
@@ -203,6 +213,17 @@ final class ProductVariantSpec extends ObjectBehavior
         $channelPricing->getChannel()->willReturn($channel);
 
         $this->getChannelPricingForChannel($channel)->shouldReturn($channelPricing);
+    }
+
+    function it_requires_shipping_by_default()
+    {
+        $this->isShippingRequired()->shouldReturn(true);
+    }
+
+    function its_shipping_can_be_not_required()
+    {
+        $this->setShippingRequired(false);
+        $this->isShippingRequired()->shouldReturn(false);
     }
 
     public function getMatchers()

@@ -1,4 +1,25 @@
 {
-    "code": 500,
-    "message": "Transition \"select_shipping\" cannot be applied on state \"cart\" of object \"Sylius\\Component\\Core\\Model\\Order\" with graph \"sylius_order_checkout\""
+    "code": 400,
+    "message": "Validation Failed",
+    "errors": {
+        "children": {
+            "shipments": {
+                "children": [
+                    {
+                        "children": {
+                            "method": {
+                                "errors": [
+                                    "Please select shipping method."
+                                ],
+                                "children": [
+                                    {},
+                                    {}
+                                ]
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    }
 }

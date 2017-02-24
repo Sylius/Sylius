@@ -1,0 +1,17 @@
+{
+    "code": 400,
+    "message": "Validation Failed",
+    "errors": {
+        "children": {
+            "ratio": {
+                "errors": [
+                    "The ratio must be a number."
+                ]
+            },
+            "sourceCurrency": {
+            },
+            "targetCurrency": {
+            }
+        }
+    }
+}

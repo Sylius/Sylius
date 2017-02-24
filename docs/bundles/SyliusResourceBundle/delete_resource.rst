@@ -5,23 +5,23 @@ Deleting a resource is simple.
 
 .. code-block:: yaml
 
-    # routing.yml
+    # app/config/routing.yml
 
-    app_user_delete:
-        path: /users/{id}
+    app_book_delete:
+        path: /books/{id}
         methods: [DELETE]
         defaults:
-            _controller: app.controller.user:deleteAction
+            _controller: app.controller.book:deleteAction
 
-Calling the Action with Method DELETE
--------------------------------------
+Calling an Action with DELETE method
+------------------------------------
 
-Currently browsers do not support the "DELETE" http method. Fortunately, Symfony has a very useful feature. You can make a POST call with override parameter, which will
-force the framework to treat the request as specified method.
+Currently browsers do not support the "DELETE" http method. Fortunately, Symfony has a very useful feature.
+You can make a POST call with parameter override, which will force the framework to treat the request as the specified method.
 
 .. code-block:: html
 
-    <form method="post" action="{{ path('app_user_delete', {'id': user.id}) }}">
+    <form method="post" action="{{ path('app_book_delete', {'id': book.id}) }}">
         <input type="hidden" name="_method" value="DELETE" />
         <button type="submit">
             Delete
@@ -29,68 +29,68 @@ force the framework to treat the request as specified method.
     </form>
 
 On submit, the delete action with the method DELETE, will remove and flush the resource.
-Then, by default it redirects to ``app_user_index`` to display the users index, but like for other actions - it's customizable.
+Then, by default it redirects to ``app_book_index`` to display the books index, but just like for the other actions - it's customizable.
 
 Overriding the Criteria
 -----------------------
 
 By default, the **deleteAction** will look for the resource by id. However, you can easily change that.
-For example, you want to delete the user who belongs to particular company, not only by his id.
+For example, if you want to delete a book that belongs to a particular genre, not only by its id.
 
 .. code-block:: yaml
 
-    # routing.yml
+    # app/config/routing.yml
 
-    app_user_delete:
-        path: /companies/{companyId}/users/{id}
+    app_book_delete:
+        path: /genre/{genreId}/books/{id}
         methods: [DELETE]
         defaults:
-            _controller: app.controller.user:deleteAction
+            _controller: app.controller.book:deleteAction
             _sylius:
                 criteria:
-                    id:      $id
-                    company: $companyId
+                    id: $id
+                    genre: $genreId
 
 There are no magic hacks behind that, it simply takes parameters from request and builds the criteria array for the ``findOneBy`` repository method.
 
 Custom Redirect After Success
 -----------------------------
 
-By default the controller will try to get the id of the resource and redirect to the "index" route. To change that, use the following configuration.
+By default the controller will redirect to the "index" route after successful action. To change that, use the following configuration.
 
 .. code-block:: yaml
 
-    # routing.yml
+    # app/config/routing.yml
 
-    app_user_delete:
-        path: /competition/{competitionId}/users/{id}
+    app_book_delete:
+        path: /genre/{genreId}/books/{id}
         methods: [DELETE]
         defaults:
-            _controller: app.controller.user:deleteAction
+            _controller: app.controller.book:deleteAction
             _sylius:
                 redirect:
-                    route: app_competition_show
-                    parameters: { id: $competitionId }
+                    route: app_genre_show
+                    parameters: { id: $genreId }
 
 Configuration Reference
 -----------------------
 
 .. code-block:: yaml
 
-    # routing.yml
+    # app/config/routing.yml
 
-    app_group_user_remove:
-        path: /{groupName}/users/{id}/remove
+    app_genre_book_remove:
+        path: /{genreName}/books/{id}/remove
         methods: [DELETE]
         defaults:
-            _controller: app.controller.user:deleteAction
+            _controller: app.controller.book:deleteAction
             _sylius:
                 repository:
-                    method: findByGroupNameAndId
-                    arguments: [$groupName, $id]
+                    method: findByGenreNameAndId
+                    arguments: [$genreName, $id]
                 criteria:
-                    group.name: $groupName
+                    genre.name: $genreName
                     id: $id
                 redirect:
-                    route: app_group_show
-                    parameters: { groupName: $groupName }
+                    route: app_genre_show
+                    parameters: { genreName: $genreName }

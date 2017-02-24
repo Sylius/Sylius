@@ -138,6 +138,17 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @When I proceed through checkout process
+     * @When I proceed through checkout process in the :localeCode locale
+     */
+    public function iProceedThroughCheckoutProcess($localeCode = 'en_US')
+    {
+        $this->addressingContext->iProceedSelectingShippingCountry(null, $localeCode);
+        $this->shippingContext->iCompleteTheShippingStep();
+        $this->paymentContext->iCompleteThePaymentStep();
+    }
+
+    /**
      * @When /^I proceed selecting ("[^"]+" as shipping country) with "([^"]+)" method$/
      */
     public function iProceedSelectingShippingCountryAndShippingMethod(CountryInterface $shippingCountry = null, $shippingMethodName = null)

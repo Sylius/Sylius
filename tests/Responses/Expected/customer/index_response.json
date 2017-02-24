@@ -19,14 +19,24 @@
             {
                 "id": @integer@,
                 "email": "Joe@doe.com",
-                "first_name": "Joe",
-                "last_name": "Doe"
+                "firstName": "Joe",
+                "lastName": "Doe",
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
             },
             {
                 "id": @integer@,
                 "email": "Barry@doe.com",
-                "first_name": "Barry",
-                "last_name": "Doe"
+                "firstName": "Barry",
+                "lastName": "Doe",
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
             },
             {
                 "id": @integer@,
@@ -36,8 +46,13 @@
                     "enabled": true
                 },
                 "email": "Thea@doe.com",
-                "first_name": "Thea",
-                "last_name": "Doe"
+                "firstName": "Thea",
+                "lastName": "Doe",
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
             },
             {
                 "id": @integer@,
@@ -47,8 +62,13 @@
                     "enabled": true
                 },
                 "email": "Roy@doe.com",
-                "first_name": "Roy",
-                "last_name": "Doe"
+                "firstName": "Roy",
+                "lastName": "Doe",
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
             },
             {
                 "id": @integer@,
@@ -58,8 +78,13 @@
                     "enabled": true
                 },
                 "email": "Oliver@doe.com",
-                "first_name": "Oliver",
-                "last_name": "Doe"
+                "firstName": "Oliver",
+                "lastName": "Doe",
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
             }
         ]
     }

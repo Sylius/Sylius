@@ -5,6 +5,8 @@ sylius:
     form:
         promotion:
             channels: Kanavat
+        image:
+            type: Tyyppi
         product:
             channels: Kanavat
         guest:

@@ -1,0 +1,32 @@
+{
+    "id": @integer@,
+    "code": "MONSTER_MUG",
+    "optionValues": [],
+    "position": 21,
+    "translations": [],
+    "onHold": 0,
+    "onHand": 0,
+    "tracked": false,
+    "shippingCategory": {
+        "id": @integer@,
+        "code": "SC1",
+        "name": "Shipping Category 1",
+        "description": "@string@",
+        "createdAt": "@string@.isDateTime()",
+        "updatedAt": "@string@.isDateTime()",
+        "_links": {
+            "self": {
+                "href": "@string@"
+            }
+        }
+    },
+    "channelPricings": [],
+    "_links": {
+        "self": {
+            "href": "@string@"
+        },
+        "product": {
+          "href": "@string@"
+        }
+    }
+}

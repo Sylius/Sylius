@@ -41,16 +41,6 @@ class Product implements ProductInterface
     protected $code;
 
     /**
-     * @var \DateTime
-     */
-    protected $availableOn;
-
-    /**
-     * @var \DateTime
-     */
-    protected $availableUntil;
-
-    /**
      * @var Collection|AttributeValueInterface[]
      */
     protected $attributes;
@@ -75,7 +65,6 @@ class Product implements ProductInterface
         $this->initializeTranslationsCollection();
 
         $this->createdAt = new \DateTime();
-        $this->availableOn = new \DateTime();
         $this->attributes = new ArrayCollection();
         $this->associations = new ArrayCollection();
         $this->variants = new ArrayCollection();
@@ -192,46 +181,6 @@ class Product implements ProductInterface
     public function setMetaDescription($metaDescription)
     {
         $this->getTranslation()->setMetaDescription($metaDescription);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isAvailable()
-    {
-        return (new DateRange($this->availableOn, $this->availableUntil))->isInRange();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAvailableOn()
-    {
-        return $this->availableOn;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setAvailableOn(\DateTime $availableOn = null)
-    {
-        $this->availableOn = $availableOn;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAvailableUntil()
-    {
-        return $this->availableUntil;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setAvailableUntil(\DateTime $availableUntil = null)
-    {
-        $this->availableUntil = $availableUntil;
     }
 
     /**

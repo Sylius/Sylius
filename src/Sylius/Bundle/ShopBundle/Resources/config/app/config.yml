@@ -23,6 +23,8 @@ sylius_shop:
                 route: sylius_shop_checkout_select_shipping
             shipping_selected:
                 route: sylius_shop_checkout_select_payment
+            shipping_skipped:
+                route: sylius_shop_checkout_select_payment
             payment_selected:
                 route: sylius_shop_checkout_complete
             payment_skipped:

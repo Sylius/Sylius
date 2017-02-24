@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    payment:
+        cancelled: 'Platba bola zrušená.'
+        completed: 'Platba bola dokončená.'
+        failed: 'Platbu sa nepodarilo dokončiť.'
+        processing: 'Platba sa spracováva.'
+        refunded: 'Platba bola úspešne refundovaná.'
+        unknown: 'Vyskytol sa neznámy problém s platbou.'

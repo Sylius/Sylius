@@ -1,0 +1,254 @@
+{
+    "page": 1,
+    "limit": 10,
+    "pages": 2,
+    "total": 20,
+    "_links": {
+        "self": {
+            "href": "@string@"
+        },
+        "first": {
+            "href": "@string@"
+        },
+        "last": {
+            "href": "@string@"
+        },
+        "next": {
+            "href": "@string@"
+        }
+    },
+    "_embedded": {
+        "items": [
+            {
+                "id": @integer@,
+                "code": "MUG_1",
+                "optionValues": [],
+                "position": 1,
+                "translations": {
+                    "en_US": {
+                        "id": @integer@,
+                        "locale": "en_US",
+                        "name": "Mug 1"
+                    }
+                },
+                "tracked": false,
+                "channelPricings": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    },
+                    "product": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "code": "MUG_2",
+                "optionValues": [],
+                "position": 2,
+                "translations": {
+                    "en_US": {
+                        "id": @integer@,
+                        "locale": "en_US",
+                        "name": "Mug 2"
+                    }
+                },
+                "tracked": false,
+                "channelPricings": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    },
+                    "product": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "code": "MUG_3",
+                "optionValues": [],
+                "position": 3,
+                "translations": {
+                    "en_US": {
+                        "id": @integer@,
+                        "locale": "en_US",
+                        "name": "Mug 3"
+                    }
+                },
+                "tracked": false,
+                "channelPricings": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    },
+                    "product": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "code": "MUG_4",
+                "optionValues": [],
+                "position": 4,
+                "translations": {
+                    "en_US": {
+                        "id": @integer@,
+                        "locale": "en_US",
+                        "name": "Mug 4"
+                    }
+                },
+                "tracked": false,
+                "channelPricings": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    },
+                    "product": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "code": "MUG_5",
+                "optionValues": [],
+                "position": 5,
+                "translations": {
+                    "en_US": {
+                        "id": @integer@,
+                        "locale": "en_US",
+                        "name": "Mug 5"
+                    }
+                },
+                "tracked": false,
+                "channelPricings": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    },
+                    "product": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "code": "MUG_6",
+                "optionValues": [],
+                "position": 6,
+                "translations": {
+                    "en_US": {
+                        "id": @integer@,
+                        "locale": "en_US",
+                        "name": "Mug 6"
+                    }
+                },
+                "tracked": false,
+                "channelPricings": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    },
+                    "product": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "code": "MUG_7",
+                "optionValues": [],
+                "position": 7,
+                "translations": {
+                    "en_US": {
+                        "id": @integer@,
+                        "locale": "en_US",
+                        "name": "Mug 7"
+                    }
+                },
+                "tracked": false,
+                "channelPricings": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    },
+                    "product": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "code": "MUG_8",
+                "optionValues": [],
+                "position": 8,
+                "translations": {
+                    "en_US": {
+                        "id": @integer@,
+                        "locale": "en_US",
+                        "name": "Mug 8"
+                    }
+                },
+                "tracked": false,
+                "channelPricings": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    },
+                    "product": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "code": "MUG_9",
+                "optionValues": [],
+                "position": 9,
+                "translations": {
+                    "en_US": {
+                        "id": @integer@,
+                        "locale": "en_US",
+                        "name": "Mug 9"
+                    }
+                },
+                "tracked": false,
+                "channelPricings": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    },
+                    "product": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "code": "MUG_10",
+                "optionValues": [],
+                "position": 10,
+                "translations": {
+                    "en_US": {
+                        "id": @integer@,
+                        "locale": "en_US",
+                        "name": "Mug 10"
+                    }
+                },
+                "tracked": false,
+                "channelPricings": [],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    },
+                    "product": {
+                        "href": "@string@"
+                    }
+                }
+            }
+        ]
+    }
+}

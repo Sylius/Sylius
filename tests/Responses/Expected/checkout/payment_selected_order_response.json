@@ -1,13 +1,25 @@
 {
   "id": @integer@,
   "items": @array@,
-  "items_total": @integer@,
+  "itemsTotal": @integer@,
   "adjustments": @array@,
-  "adjustments_total": @integer@,
+  "adjustmentsTotal": @integer@,
   "total": @integer@,
   "state": "cart",
-  "created_at": "@string@.isDateTime()",
-  "updated_at": "@string@.isDateTime()",
+  "customer": {
+    "id": @integer@,
+    "email": "oliver.queen@star-city.com",
+    "emailCanonical": "oliver.queen@star-city.com",
+    "firstName": "Oliver",
+    "lastName": "Queen",
+    "birthday": "@string@.isDateTime()",
+    "gender": "u",
+    "_links": {
+      "self": {
+        "href": "@string@"
+      }
+    }
+  },
   "channel": {
     "id": @integer@,
     "code": "CHANNEL",
@@ -15,26 +27,26 @@
     "description": "Lorem ipsum",
     "hostname": "localhost",
     "color": "black",
-    "created_at": "@string@.isDateTime()",
-    "updated_at": "@string@.isDateTime()",
+    "createdAt": "@string@.isDateTime()",
+    "updatedAt": "@string@.isDateTime()",
     "enabled": true,
-    "tax_calculation_strategy": "order_items_based",
+    "taxCalculationStrategy": "order_items_based",
     "_links": {
       "self": {
         "href": @string@
       }
     }
   },
-  "shipping_address": @...@,
-  "billing_address": @...@,
+  "shippingAddress": @...@,
+  "billingAddress": @...@,
   "payments": [
     {
       "id": @integer@,
       "method": {
         "id": @integer@,
         "code": "Cash on delivery",
-        "created_at": "@string@.isDateTime()",
-        "updated_at": "@string@.isDateTime()",
+        "createdAt": "@string@.isDateTime()",
+        "updatedAt": "@string@.isDateTime()",
         "_links": {
           "self": {
             "href": @string@
@@ -43,8 +55,8 @@
       },
       "amount": @integer@,
       "state": "new",
-      "created_at": "@string@.isDateTime()",
-      "updated_at": "@string@.isDateTime()",
+      "createdAt": "@string@.isDateTime()",
+      "updatedAt": "@string@.isDateTime()",
       "_links": {
         "self": {
           "href": @string@
@@ -59,5 +71,7 @@
     }
   ],
   "shipments": @array@,
-  "checkout_state": "payment_selected"
+  "currencyCode": "EUR",
+  "localeCode": "en_US",
+  "checkoutState": "payment_selected"
 }

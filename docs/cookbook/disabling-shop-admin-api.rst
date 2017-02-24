@@ -2,14 +2,14 @@ How to disable default shop, admin or API of Sylius?
 ====================================================
 
 When you are using Sylius as a whole you may be needing to remove some of its parts. It is possible to remove
-for example Sylius' shop to have only administration and API. Or the other way, remove API if you do not need it.
+for example Sylius shop to have only administration panel and API. Or the other way, remove API if you do not need it.
 
 Therefore you have this guide that will help you when wanting to disable shop, admin or API of Sylius.
 
 How to disable Sylius shop?
 ---------------------------
 
-**1. Remove SyliusShopBundle from ``app/AppKernel``.**
+**1.** Remove SyliusShopBundle from ``app/AppKernel``.
 
 .. code-block:: php
 
@@ -30,7 +30,7 @@ How to disable Sylius shop?
         return array_merge(parent::registerBundles(), $bundles);
     }
 
-**2. Remove SyliusShopBundle's config import from ``app/config/config.yml``**
+**2.** Remove SyliusShopBundle's config import from ``app/config/config.yml``.
 
 Here you've got the line that should disappear from imports:
 
@@ -39,14 +39,14 @@ Here you've got the line that should disappear from imports:
     imports:
     #    - { resource: "@SyliusShopBundle/Resources/config/app/config.yml" } # remove or leave this line commented
 
-**3. Remove SyliusShopBundle routing configuration from ``app/config/routing.yml``**
+**3.** Remove SyliusShopBundle routing configuration from ``app/config/routing.yml``.
 
 .. code-block:: yaml
 
     # sylius_shop:
     #    resource: "@SyliusShopBundle/Resources/config/routing.yml" # remove or leave these lines commented
 
-**4. Remove security configuration from ``app/config/security.yml``**
+**4.** Remove security configuration from ``app/config/security.yml``.
 
 The part that has to be removed from this file is shown below:
 
@@ -87,7 +87,7 @@ The part that has to be removed from this file is shown below:
 How to disable Sylius Admin?
 ----------------------------
 
-**1. Remove SyliusAdminBundle from AppKernel.**
+**1.** Remove SyliusAdminBundle from ``app/AppKernel``.
 
 .. code-block:: php
 
@@ -108,7 +108,7 @@ How to disable Sylius Admin?
         return array_merge(parent::registerBundles(), $bundles);
     }
 
-**2. Remove SyliusAdminBundle's config import from ``app/config/config.yml``**
+**2.** Remove SyliusAdminBundle's config import from ``app/config/config.yml``.
 
 Here you've got the line that should disappear from imports:
 
@@ -117,14 +117,14 @@ Here you've got the line that should disappear from imports:
     imports:
     #    - { resource: "@SyliusAdminBundle/Resources/config/app/config.yml" } # remove or leave this line commented
 
-**3. Remove SyliusAdminBundle routing configuration from ``app/config/routing.yml``**
+**3.** Remove SyliusAdminBundle routing configuration from ``app/config/routing.yml``.
 
 .. code-block:: yaml
 
     #    sylius_shop:
     #        resource: "@SyliusAdminBundle/Resources/config/routing.yml"
 
-**4. Remove security configuration from ``app/config/security.yml``**
+**4.** Remove security configuration from ``app/config/security.yml``.
 
 The part that has to be removed from this file is shown below:
 
@@ -155,7 +155,7 @@ The part that has to be removed from this file is shown below:
 How to disable Sylius API?
 --------------------------
 
-**1. Remove SyliusApiBundle from AppKernel.**
+**1.** Remove SyliusApiBundle from ``app/AppKernel``.
 
 .. code-block:: php
 
@@ -176,7 +176,7 @@ How to disable Sylius API?
         return array_merge(parent::registerBundles(), $bundles);
     }
 
-**2. Remove SyliusApiBundle's config import from ``app/config/config.yml``**
+**2.** Remove SyliusApiBundle's config import from ``app/config/config.yml``.
 
 Here you've got the line that should disappear from imports:
 
@@ -185,14 +185,14 @@ Here you've got the line that should disappear from imports:
     imports:
     #    - { resource: "@SyliusApiBundle/Resources/config/app/config.yml" } # remove or leave this line commented
 
-**3. Remove SyliusApiBundle routing configuration from ``app/config/routing.yml``**
+**3.** Remove SyliusApiBundle routing configuration from ``app/config/routing.yml``.
 
 .. code-block:: yaml
 
     # sylius_shop:
     #    resource: "@SyliusApiBundle/Resources/config/routing.yml" # remove or leave these lines commented
 
-**4. Remove security configuration from ``app/config/security.yml``**
+**4.** Remove security configuration from ``app/config/security.yml``.
 
 The part that has to be removed from this file is shown below:
 
@@ -206,7 +206,7 @@ The part that has to be removed from this file is shown below:
     #        stateless:  true
     #        anonymous:  true
 
-**5. Remove fos_rest config from ``app/config/config.yml``**
+**5.** Remove fos_rest config from ``app/config/config.yml``.
 
 .. code-block:: yaml
 

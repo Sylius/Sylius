@@ -1,0 +1,63 @@
+Sylius\Component\Product\Model\ProductOptionTranslation:
+    productOptionTranslation:
+        name: "Mug type"
+        locale: en_US
+        translatable: "@productOption"
+
+Sylius\Component\Product\Model\ProductOption:
+    productOption:
+        code: MUG_TYPE
+        position: 0
+        fallbackLocale: en_US
+        currentLocale: en_US
+        translations:
+            - "@productOptionTranslation"
+
+Sylius\Component\Product\Model\ProductOptionValue:
+    productOptionValue:
+        code: MUG_TYPE_MEDIUM
+        option: "@productOption"
+
+Sylius\Component\Core\Model\Product:
+    product1:
+        fallbackLocale: en_US
+        currentLocale: en
+        code: MUG_SW
+        options:
+            - "@productOption"
+    product2:
+        fallbackLocale: en_US
+        currentLocale: en
+        code: STICKER
+
+Sylius\Component\Product\Model\ProductVariantTranslation:
+     productVariantTranslation{1..20}:
+         name: "Mug <current()>"
+         locale: en_US
+         translatable: "@productVariant<current()>"
+     productVariantTranslation21:
+          name: "Small sticker"
+          locale: en_US
+          translatable: "@productVariant21"
+
+Sylius\Component\Core\Model\ProductVariant:
+     productVariant{1..20}:
+         code: MUG_<current()>
+         version: 1
+         product: "@product1"
+         fallbackLocale: en_US
+         currentLocale: de
+         position: <current()>
+         translations:
+            - "@productVariantTranslation<current()>"
+     productVariant21:
+             code: SMALL_STICKER
+             version: 1
+             product: "@product2"
+             fallbackLocale: en_US
+             currentLocale: de
+             tracked: true
+             onHand: 8
+             position: 0
+             translations:
+                - "@productVariantTranslation21"

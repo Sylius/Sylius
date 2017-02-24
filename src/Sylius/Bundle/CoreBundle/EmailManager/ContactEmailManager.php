@@ -17,7 +17,7 @@ use Sylius\Component\Mailer\Sender\SenderInterface;
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-final class ContactEmailManager
+final class ContactEmailManager implements ContactEmailManagerInterface
 {
     /**
      * @var SenderInterface
@@ -33,8 +33,7 @@ final class ContactEmailManager
     }
 
     /**
-     * @param array $data
-     * @param array $recipients
+     * {@inheritdoc}
      */
     public function sendContactRequest(array $data, array $recipients)
     {

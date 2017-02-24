@@ -55,6 +55,32 @@ final class FlashHelper implements FlashHelperInterface
      */
     public function addSuccessFlash(RequestConfiguration $requestConfiguration, $actionName, ResourceInterface $resource = null)
     {
+        $this->addFlashWithType($requestConfiguration, $actionName, 'success');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addErrorFlash(RequestConfiguration $requestConfiguration, $actionName)
+    {
+        $this->addFlashWithType($requestConfiguration, $actionName, 'error');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addFlashFromEvent(RequestConfiguration $requestConfiguration, ResourceControllerEvent $event)
+    {
+        $this->addFlash($event->getMessageType(), $event->getMessage(), $event->getMessageParameters());
+    }
+
+    /**
+     * @param RequestConfiguration $requestConfiguration
+     * @param string $actionName
+     * @param string $type
+     */
+    private function addFlashWithType(RequestConfiguration $requestConfiguration, $actionName, $type)
+    {
         $metadata = $requestConfiguration->getMetadata();
         $metadataName = ucfirst($metadata->getHumanizedName());
         $parameters = ['%resource%' => $metadataName];
@@ -66,29 +92,21 @@ final class FlashHelper implements FlashHelperInterface
 
         if ($this->isTranslationDefined($message, $this->defaultLocale, $parameters)) {
             if (!$this->translator instanceof TranslatorBagInterface) {
-                $this->addFlash('success', $message, $parameters);
+                $this->addFlash($type, $message, $parameters);
 
                 return;
             }
 
-            $this->addFlash('success', $message);
+            $this->addFlash($type, $message);
 
             return;
         }
 
         $this->addFlash(
-            'success',
+            $type,
             $this->getResourceMessage($actionName),
             $parameters
         );
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addFlashFromEvent(RequestConfiguration $requestConfiguration, ResourceControllerEvent $event)
-    {
-        $this->addFlash($event->getMessageType(), $event->getMessage(), $event->getMessageParameters());
     }
 
     /**

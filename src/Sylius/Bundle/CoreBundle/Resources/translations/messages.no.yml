@@ -21,13 +21,13 @@ sylius:
             name: Navn
             roles: Roller
         channel:
-            taxonomies: Kategorisering
             locales: Nasjonale innstillinger
-            shipping_methods: Fraktalternativ
             payment_methods: Betalingsmetoder
+            shipping_methods: Fraktalternativ
             tax_zone_default: Standard skattesone
+            taxonomies: Kategorisering
         image:
-            code: Kode
+            type: Type
             file: Bilde
         locale:
             code: Kode

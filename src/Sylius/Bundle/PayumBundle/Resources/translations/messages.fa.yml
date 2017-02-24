@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        gateway_config:
+            type: نوع
+        gateway_configuration:
+            paypal:
+                password: کلمه عبور
+                username: نام کاربری
+    payum_gateway_factory:
+        offline: آفلاین

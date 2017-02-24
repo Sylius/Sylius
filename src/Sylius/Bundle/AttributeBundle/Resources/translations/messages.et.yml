@@ -5,3 +5,5 @@ sylius:
     form:
         attribute:
             type: Tüüp
+        attribute_type:
+            select: Vali

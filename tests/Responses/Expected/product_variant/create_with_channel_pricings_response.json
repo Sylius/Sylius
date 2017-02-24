@@ -1,0 +1,65 @@
+{
+    "id": @integer@,
+    "code": "MONSTER_MUG",
+    "optionValues": [],
+    "position": 21,
+    "translations": {
+        "en_US": {
+            "id": @integer@,
+            "locale": "en_US"
+        }
+    },
+    "onHold": 0,
+    "onHand": 0,
+    "tracked": false,
+    "channelPricings": [
+        {
+            "channel": {
+                "id": @integer@,
+                "code": "WEB",
+                "name": "Web Channel",
+                "description": "@string@",
+                "hostname": "localhost",
+                "color": "black",
+                "createdAt": "@string@.isDateTime()",
+                "updatedAt": "@string@.isDateTime()",
+                "enabled": true,
+                "taxCalculationStrategy": "order_items_based",
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            "price": 124300
+        },
+        {
+            "channel": {
+                "id": @integer@,
+                "code": "MOB",
+                "name": "Mobile Channel",
+                "description": "@string@",
+                "hostname": "localhost",
+                "color": "yellow",
+                "createdAt": "@string@.isDateTime()",
+                "updatedAt": "@string@.isDateTime()",
+                "enabled": true,
+                "taxCalculationStrategy": "order_items_based",
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            "price": 34200
+        }
+    ],
+    "_links": {
+        "self": {
+            "href": "@string@"
+        },
+        "product": {
+          "href": "@string@"
+        }
+    }
+}

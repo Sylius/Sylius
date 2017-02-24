@@ -18,5 +18,4 @@ sylius:
                 unknown: Άγνωστο
         payment_method:
             description: Περιγραφή
-            gateway: Πύλη
             name: Ονομασία

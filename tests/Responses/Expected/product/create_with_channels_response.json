@@ -1,0 +1,26 @@
+{
+    "id": @integer@,
+    "name": "Theme Mug",
+    "code": "MUG_TH",
+    "attributes": [],
+    "variants": [],
+    "options": [],
+    "associations": [],
+    "translations": {
+        "en_US": {
+            "id": @integer@,
+            "locale": "en_US",
+            "name": "Theme Mug",
+            "slug": "theme-mug"
+        }
+    },
+    "productTaxons": [],
+    "reviews": [],
+    "averageRating": 0,
+    "images": [],
+    "_links": {
+        "self": {
+            "href": "@string@"
+        }
+    }
+}

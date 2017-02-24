@@ -188,6 +188,29 @@ You can define by which field you want the grid to be sorted and how.
                     name: asc
                     ...
 
+Pagination
+----------
+
+You can limit how many items are visible on each page by providing an array of integers into the ``limits`` parameter.
+The first element of the array will be treated as the default, so by configuring:
+
+.. code-block:: yaml
+
+    # app/config/grids/admin/supplier.yml
+    sylius_grid:
+        grids:
+            app_admin_supplier:
+                    ...
+                limits: [30, 12, 48]
+                ...
+
+you will see thirty suppliers per page, also you will have the possibility to change the number of elements to either 12 or 48.
+
+.. note::
+
+    Pagination limits are set by default to 10, 25 and 50 items per page.
+    In order to turn it off, configure `limits: ~`.
+
 Actions Configuration
 ---------------------
 

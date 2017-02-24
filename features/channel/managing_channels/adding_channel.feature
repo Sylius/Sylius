@@ -31,6 +31,7 @@ Feature: Adding a new channel
         And I define its color as "blue"
         And I choose "Euro" as the base currency
         And I choose "English (United States)" as a default locale
+        And I allow to skip shipping step if only one shipping method is available
         And I add it
         Then I should be notified that it has been successfully created
         And the channel "Mobile channel" should appear in the registry

@@ -1,0 +1,228 @@
+{
+    "id": @integer@,
+    "checkoutCompletedAt": "@string@.isDateTime()",
+    "number": "000000001",
+    "items": [
+        {
+            "id": @integer@,
+            "quantity": 1,
+            "unitPrice": 20,
+            "total": 20,
+            "units": [
+                {
+                    "id": @integer@,
+                    "adjustments": [],
+                    "adjustmentsTotal": 0,
+                    "_links": {
+                        "order": {
+                            "href": "@string@"
+                        }
+                    }
+                }
+            ],
+            "unitsTotal": 20,
+            "adjustments": [],
+            "adjustmentsTotal": 0,
+            "variant": {
+                "id": @integer@,
+                "code": "MUG_SW",
+                "optionValues": [],
+                "position": 0,
+                "translations": {
+                    "en_US": {
+                        "locale": "en_US",
+                        "id": @integer@,
+                        "name": "Star wars mug"
+                    }
+                },
+                "onHold": 0,
+                "onHand": 0,
+                "tracked": false,
+                "channelPricings": [
+                    {
+                        "channel": {
+                            "id": @integer@,
+                            "code": "CHANNEL",
+                            "name": "Channel",
+                            "description": "Lorem ipsum",
+                            "hostname": "localhost",
+                            "color": "black",
+                            "createdAt": "@string@.isDateTime()",
+                            "updatedAt": "@string@.isDateTime()",
+                            "enabled": true,
+                            "taxCalculationStrategy": "order_items_based",
+                            "_links": {
+                                "self": {
+                                    "href": "@string@"
+                                }
+                            }
+                        },
+                        "price": 20
+                    }
+                ],
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    },
+                    "product": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            "_links": {
+                "product": {
+                    "href": "@string@"
+                },
+                "variant": {
+                    "href": "@string@"
+                }
+            }
+        }
+    ],
+    "itemsTotal": 20,
+    "adjustments": [
+        {
+            "id": @integer@,
+            "type": "shipping",
+            "label": "UPS",
+            "amount": 10
+        }
+    ],
+    "adjustmentsTotal": 10,
+    "total": 30,
+    "state": "fulfilled",
+    "customer": {
+        "id": @integer@,
+        "email": "oliver.queen@star-city.com",
+        "emailCanonical": "oliver.queen@star-city.com",
+        "firstName": "Oliver",
+        "lastName": "Queen",
+        "birthday": "@string@.isDateTime()",
+        "gender": "u",
+        "_links": {
+            "self": {
+                "href": "@string@"
+            }
+        }
+    },
+    "channel": {
+        "id": @integer@,
+        "code": "CHANNEL",
+        "name": "Channel",
+        "description": "Lorem ipsum",
+        "hostname": "localhost",
+        "color": "black",
+        "createdAt": "@string@.isDateTime()",
+        "updatedAt": "@string@.isDateTime()",
+        "enabled": true,
+        "taxCalculationStrategy": "order_items_based",
+        "_links": {
+            "self": {
+                "href": "@string@"
+            }
+        }
+    },
+    "shippingAddress": {
+        "id": @integer@,
+        "firstName": "Hieronim",
+        "lastName": "Bosch",
+        "countryCode": "NL",
+        "street": "Surrealism St.",
+        "city": "\u2019s-Hertogenbosch",
+        "postcode": "99-999"
+    },
+    "billingAddress": {
+        "id": @integer@,
+        "firstName": "Vincent",
+        "lastName": "van Gogh",
+        "countryCode": "NL",
+        "street": "Post-Impressionism St.",
+        "city": "Groot Zundert",
+        "postcode": "88-888"
+    },
+    "payments": [
+        {
+            "id": @integer@,
+            "method": {
+                "id": @integer@,
+                "code": "cod",
+                "channels": [
+                    {
+                        "id": @integer@,
+                        "code": "CHANNEL",
+                        "name": "Channel",
+                        "description": "Lorem ipsum",
+                        "hostname": "localhost",
+                        "color": "black",
+                        "createdAt": "@string@.isDateTime()",
+                        "updatedAt": "@string@.isDateTime()",
+                        "enabled": true,
+                        "taxCalculationStrategy": "order_items_based",
+                        "_links": {
+                            "self": {
+                                "href": "@string@"
+                            }
+                        }
+                    }
+                ],
+                "gatewayConfig": {
+                    "id": @integer@,
+                    "gatewayName": "Offline",
+                    "factoryName": "offline",
+                    "config": []
+                },
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/payment-methods\/cod"
+                    }
+                }
+            },
+            "amount": 30,
+            "state": "completed",
+            "_links": {
+                "self": {
+                    "href": "@string@"
+                },
+                "payment-method": {
+                    "href": "\/api\/v1\/payment-methods\/cod"
+                },
+                "order": {
+                    "href": "@string@"
+                }
+            }
+        }
+    ],
+    "shipments": [
+        {
+            "id": @integer@,
+            "state": "shipped",
+            "method": {
+                "id": @integer@,
+                "code": "UPS",
+                "enabled": true,
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/shipping-methods\/UPS"
+                    },
+                    "zone": {
+                        "href": "\/api\/v1\/zones\/EU"
+                    }
+                }
+            },
+            "_links": {
+                "self": {
+                    "href": "@string@"
+                },
+                "method": {
+                    "href": "\/api\/v1\/shipping-methods\/UPS"
+                },
+                "order": {
+                    "href": "@string@"
+                }
+            }
+        }
+    ],
+    "currencyCode": "EUR",
+    "localeCode": "en_US",
+    "checkoutState": "completed"
+}

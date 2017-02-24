@@ -3,8 +3,8 @@
     "code": "clothing",
     "name": "Clothing",
     "description": "All items classified as clothing.",
-    "created_at": "@string@.isDateTime()",
-    "updated_at": "@string@.isDateTime()",
+    "createdAt": "@string@.isDateTime()",
+    "updatedAt": "@string@.isDateTime()",
     "_links": {
         "self": {
             "href": "@string@"

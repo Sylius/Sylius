@@ -11,20 +11,46 @@
 
 namespace Sylius\Component\Grid\Definition;
 
+use Sylius\Component\Grid\Event\GridDefinitionConverterEvent;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class ArrayToDefinitionConverter implements ArrayToDefinitionConverterInterface
 {
+    const EVENT_NAME = 'sylius.grid.%s';
+
+    /**
+     * @var EventDispatcherInterface
+     */
+    private $eventDispatcher;
+
+    /**
+     * @param EventDispatcherInterface $eventDispatcher
+     */
+    public function __construct(EventDispatcherInterface $eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+    }
+
     /**
      * {@inheritdoc}
      */
     public function convert($code, array $configuration)
     {
-        $grid = Grid::fromCodeAndDriverConfiguration($code, $configuration['driver']['name'], $configuration['driver']['options']);
+        $grid = Grid::fromCodeAndDriverConfiguration(
+            $code,
+            $configuration['driver']['name'],
+            $configuration['driver']['options']
+        );
 
         if (array_key_exists('sorting', $configuration)) {
             $grid->setSorting($configuration['sorting']);
+        }
+
+        if (array_key_exists('limits', $configuration)) {
+            $grid->setLimits($configuration['limits']);
         }
 
         foreach ($configuration['fields'] as $name => $fieldConfiguration) {
@@ -38,6 +64,8 @@ final class ArrayToDefinitionConverter implements ArrayToDefinitionConverterInte
         foreach ($configuration['actions'] as $name => $actionGroupConfiguration) {
             $grid->addActionGroup($this->convertActionGroup($name, $actionGroupConfiguration));
         }
+
+        $this->eventDispatcher->dispatch($this->getEventName($code), new GridDefinitionConverterEvent($grid));
 
         return $grid;
     }
@@ -153,5 +181,15 @@ final class ArrayToDefinitionConverter implements ArrayToDefinitionConverterInte
         }
 
         return $action;
+    }
+
+    /**
+     * @param string $code
+     *
+     * @return string
+     */
+    private function getEventName($code)
+    {
+        return sprintf(self::EVENT_NAME, str_replace('sylius_', '', $code));
     }
 }

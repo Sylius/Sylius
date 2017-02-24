@@ -3,7 +3,7 @@ Feature: Viewing product's variants names
     In order to differentiate product's variants by names
     As a Customer
     I want to be aware of product's variants names
-    
+
     Background:
         Given the store operates on a channel named "Web-US" in "USD" currency
         And that channel allows to shop using "English (United States)" and "Polish (Poland)" locales
@@ -18,6 +18,5 @@ Feature: Viewing product's variants names
 
     @ui
     Scenario: Seeing proper variant's name after locale change
-        When I switch to the "Polish (Poland)" locale
-        And I view product "Die Hard Movie"
+        When I view product "Die Hard Movie" in the "Polish (Poland)" locale
         Then its current variant should be named "Szklana Pułapka - Wersja Reżyserska"

@@ -1,6 +1,11 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+parameters:
+    sylius.security.admin_regex: "^/admin"
+    sylius.security.api_regex: "^/api"
+    sylius.security.shop_regex: "^/(?!admin|api)[^/]++"
+
 security:
     providers:
         sylius_admin_user_provider:
@@ -13,7 +18,7 @@ security:
         admin:
             switch_user: true
             context: admin
-            pattern: /admin(?:/.*)?$
+            pattern: "%sylius.security.admin_regex%"
             form_login:
                 provider: sylius_admin_user_provider
                 login_path: sylius_admin_login
@@ -37,11 +42,11 @@ security:
             anonymous: true
 
         oauth_token:
-            pattern:  ^/api/oauth/v2/token
+            pattern: "%sylius.security.api_regex%/oauth/v2/token"
             security: false
 
         api:
-            pattern:    ^/api
+            pattern: "%sylius.security.api_regex%"
             fos_oauth:  true
             stateless:  true
             anonymous:  true
@@ -49,7 +54,7 @@ security:
         shop:
             switch_user: { role: ROLE_ALLOWED_TO_SWITCH }
             context: shop
-            pattern: /.*
+            pattern: "%sylius.security.shop_regex%"
             form_login:
                 success_handler: sylius.authentication.success_handler
                 failure_handler: sylius.authentication.failure_handler
@@ -80,18 +85,18 @@ security:
             security: false
 
     access_control:
-        - { path: "^/_partial.*", role: IS_AUTHENTICATED_ANONYMOUSLY, ips: [127.0.0.1, ::1] }
-        - { path: "^/_partial.*", role: ROLE_NO_ACCESS }
-        - { path: "^/admin/_partial.*", role: IS_AUTHENTICATED_ANONYMOUSLY, ips: [127.0.0.1, ::1] }
-        - { path: "^/admin/_partial.*", role: ROLE_NO_ACCESS }
+        - { path: "%sylius.security.admin_regex%/_partial", role: IS_AUTHENTICATED_ANONYMOUSLY, ips: [127.0.0.1, ::1] }
+        - { path: "%sylius.security.admin_regex%/_partial", role: ROLE_NO_ACCESS }
+        - { path: "%sylius.security.shop_regex%/_partial", role: IS_AUTHENTICATED_ANONYMOUSLY, ips: [127.0.0.1, ::1] }
+        - { path: "%sylius.security.shop_regex%/_partial", role: ROLE_NO_ACCESS }
 
-        - { path: ^/login.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/verify, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: "/account.*", role: ROLE_USER }
+        - { path: "%sylius.security.admin_regex%/login", role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: "%sylius.security.api_regex%/login", role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: "%sylius.security.shop_regex%/login", role: IS_AUTHENTICATED_ANONYMOUSLY }
 
-        - { path: ^/admin/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin/login-check, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: "^/admin.*", role: ROLE_ADMINISTRATION_ACCESS }
+        - { path: "%sylius.security.shop_regex%/register", role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: "%sylius.security.shop_regex%/verify", role: IS_AUTHENTICATED_ANONYMOUSLY }
 
-        - { path: ^/api, role: ROLE_API_ACCESS }
+        - { path: "%sylius.security.admin_regex%", role: ROLE_ADMINISTRATION_ACCESS }
+        - { path: "%sylius.security.api_regex%", role: ROLE_API_ACCESS }
+        - { path: "%sylius.security.shop_regex%/account", role: ROLE_USER }

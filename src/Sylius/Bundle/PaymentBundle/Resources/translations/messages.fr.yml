@@ -29,7 +29,6 @@ sylius:
         payment_method:
             description: Description
             enabled: Activé ?
-            gateway: Passerelle
             instructions: Instructions
             name: Nom
             position: Emplacement

@@ -70,9 +70,9 @@ interface CreatePageInterface extends BaseCreatePageInterface
 
     /**
      * @param string $path
-     * @param string $code
+     * @param string $type
      */
-    public function attachImage($path, $code = null);
+    public function attachImage($path, $type = null);
 
     /**
      * @param TaxonInterface|null $parentTaxon

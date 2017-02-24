@@ -12,45 +12,19 @@ Stripe is not available by default in Sylius, to have it you need to add its pac
 
     $ php composer require stripe/stripe-php:~2.0
 
-Configure the gateway
----------------------
+Add a payment method with the Stripe gateway in the Admin Panel
+---------------------------------------------------------------
 
 .. note::
 
     To test this configuration properly you will need a `developer account on Stripe <https://dashboard.stripe.com/register>`_.
-    Use its data (``secret_key`` and ``publishable_key``) in the **parameters.yml** file.
 
-.. code-block:: yaml
+* Create a new payment method, choosing the ``Stripe Credit Card`` gateway from the gateways choice dropdown and enable it for chosen channels.
 
-    # app/config/parameters.yml
-    parameters:
-        stripe.secret_key: TEST
-        stripe.publishable_key: TEST
+Go to the ``http://localhost:8000/admin/payment-methods/new/stripe_checkout`` url.
 
-Having these parameters defined you can configure the gateway inside the ``app/config/payum.yml`` file which has to be imported in the ``app/config/config.yml``.
-
-.. code-block:: yaml
-
-    # app/config/payum.yml
-    payum:
-        gateways:
-            credit_card:
-                factory: stripe_checkout
-                secret_key: "%stripe.secret_key%"
-                publishable_key: "%stripe.publishable_key%"
-                payum.template.layout: SyliusShopBundle::Checkout/layout.html.twig
-                payum.template.obtain_token: SyliusPayumBundle::Action/Stripe/obtainCheckoutToken.html.twig
-
-.. code-block:: yaml
-
-    # app/config/config.yml
-    imports:
-        - { resource: "payum.yml" }
-
-Add a payment method with the Stripe Credit card gateway in the Admin Panel
----------------------------------------------------------------------------
-
-* Create a new payment method, choose the ``Stripe Credit Card`` gateway for it and enable it in chosen channels.
+* Fill in the Stripe configuration form with your developer account data (``secret_key``, ``publishable_key``, ``layout_template`` and ``obtain_token_template``).
+* Save the new payment method.
 
 .. tip::
 

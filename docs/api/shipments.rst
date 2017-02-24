@@ -13,7 +13,7 @@ You can retrieve the full list shipment by making the following request:
     GET /api/v1/shipments/
 
 Parameters
-~~~~~~~~~~
+^^^^^^^^^^
 
 page
     Number of the page, by default = 1
@@ -33,7 +33,7 @@ criteria[createdAtTo] *(optional)*
     End date
 
 Response
-~~~~~~~~
+^^^^^^^^
 
 .. code-block:: text
 
@@ -114,7 +114,7 @@ You can view a single shipment by executing the following request:
     GET /api/v1/shipments/251
 
 Response
-~~~~~~~~
+^^^^^^^^
 
 .. code-block:: text
 
@@ -171,7 +171,7 @@ You can delete a shipment from the system by making the following DELETE call:
     DELETE /api/v1/shipments/24
 
 Response
-~~~~~~~~
+^^^^^^^^
 
 .. code-block:: text
 

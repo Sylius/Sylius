@@ -29,6 +29,6 @@ sylius:
         payment_method:
             description: Popis
             enabled: Zapnuté?
-            gateway: Brána
             instructions: Inštrukcie
             name: Názov
+            position: Pozícia

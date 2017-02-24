@@ -105,14 +105,14 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function attachImage($path, $code = null)
+    public function attachImage($path, $type = null)
     {
         $filesPath = $this->getParameter('files_path');
 
         $this->getDocument()->find('css', '[data-form-collection="add"]')->click();
 
         $imageForm = $this->getLastImageElement();
-        $imageForm->fillField('Code', $code);
+        $imageForm->fillField('Type', $type);
         $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath.$path);
     }
 

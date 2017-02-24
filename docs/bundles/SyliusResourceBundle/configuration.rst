@@ -8,7 +8,13 @@ Now you need to configure your first resource. Let's assume you have a *Book* en
 * author
 * description
 
-In your class, you need to implement a simple interface:
+.. tip::
+
+    You can see a full exemplary configuration of a typical resource
+    :doc:`here, in the "How to add a custom model?" cookbook </cookbook/custom-model>`.
+
+Implement the ResourceInterface in your model class.
+----------------------------------------------------
 
 .. code-block:: php
 
@@ -29,6 +35,9 @@ In your class, you need to implement a simple interface:
         }
     }
 
+Configure the class as a resource.
+----------------------------------
+
 In your ``app/config/config.yml`` add:
 
 .. code-block:: yaml
@@ -39,9 +48,14 @@ In your ``app/config/config.yml`` add:
                 classes:
                     model: AppBundle\Entity\Book
 
-That's it! Your "Book" entity is now registered as Sylius Resource.
+That's it! Your Book entity is now registered as Sylius Resource.
 
-You can also configure several doctrine drivers:
+You can also configure several doctrine drivers.
+------------------------------------------------
+
+.. note::
+
+    Remember that the ``doctrine/orm`` driver is used by default.
 
 .. code-block:: yaml
 
@@ -58,8 +72,15 @@ You can also configure several doctrine drivers:
                 classes:
                     model: AppBundle\Document\ArticleDocument
 
+Generate API routing.
+---------------------
 
-Do you want to try it out? Add following lines to ``app/config/routing.yml``:
+.. tip::
+
+    Learn more about using Sylius REST API in these articles:
+    :doc:`REST API Reference </api/index>`, :doc:`How to use Sylius API? - Cookbook </cookbook/api>`.
+
+Add the following lines to ``app/config/routing.yml``:
 
 .. code-block:: yaml
 
@@ -68,11 +89,12 @@ Do you want to try it out? Add following lines to ``app/config/routing.yml``:
             alias: app.book
         type: sylius.resource_api
 
-Full JSON/XML CRUD API is ready to use. Sounds crazy? Spin up the built-in server and give it a try:
+After that a full JSON/XML CRUD API is ready to use.
+Sounds crazy? Spin up the built-in server and give it a try:
 
 .. code-block:: bash
 
-    php bin/console server:run
+    $ php bin/console server:run
 
 You should see something like:
 
@@ -86,10 +108,15 @@ Now, in a separate Terminal window, call these commands:
 
 .. code-block:: bash
 
-   curl -i -X POST -H "Content-Type: application/json" -d '{"title": "Lord of The Rings", "author": "J. R. R. Tolkien", "description": "Amazing!"}' http://localhost:8000/books/
-   curl -i -X GET -H "Accept: application/json" http://localhost:8000/books/
+   $ curl -i -X POST -H "Content-Type: application/json" -d '{"title": "Lord of The Rings", "author": "J. R. R. Tolkien", "description": "Amazing!"}' http://localhost:8000/books/
+   $ curl -i -X GET -H "Accept: application/json" http://localhost:8000/books/
 
-As you can guess, other CRUD actions are available through this API. But, what if you want to render HTML pages? That's easy! Update the routing configuration:
+As you can guess, other CRUD actions are available through this API.
+
+Generate web routing.
+---------------------
+
+What if you want to render HTML pages? That's easy! Update the routing configuration:
 
 .. code-block:: yaml
 
@@ -104,16 +131,21 @@ Run the ``debug:router`` command to see available routes:
 
 .. code-block:: bash
 
-    php bin/console debug:router
+    $ php bin/console debug:router
 
-    [router] Current routes
-    Name            Method        Scheme Host Path
-    app_book_show   GET           ANY    ANY  /books/{id}
-    app_book_index  GET           ANY    ANY  /books/
-    app_book_create GET|POST      ANY    ANY  /books/new
-    app_book_update GET|PUT|PATCH ANY    ANY  /books/{id}/edit
-    app_book_delete DELETE        ANY    ANY  /books/{id}
+    ------------------------ --------------- -------- ------ -------------------------
+    Name                     Method          Scheme   Host   Path
+    ------------------------ --------------- -------- ------ -------------------------
+    app_book_show            GET             ANY      ANY    /books/{id}
+    app_book_index           GET             ANY      ANY    /books/
+    app_book_create          GET|POST        ANY      ANY    /books/new
+    app_book_update          GET|PUT|PATCH   ANY      ANY    /books/{id}/edit
+    app_book_delete          DELETE          ANY      ANY    /books/{id}
 
-Unfortunately, we do not provide default templates yet (but we will, soon) and you need to define them manually.
+.. tip::
 
-You can configure more options for the routing generation but you can also define each route manually to have it fully configurable. Continue reading to learn more!
+    Do you need **views** for your newly created entity? Read more about :doc:`Grids </bundles/SyliusGridBundle/index>`,
+    which are a separate bundle of Sylius, but may be very useful for views generation.
+
+You can configure more options for the routing generation but you can also define each route manually to have it fully configurable.
+Continue reading to learn more!

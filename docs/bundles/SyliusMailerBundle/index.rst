@@ -19,3 +19,8 @@ with any Symfony full-stack application.
     your_first_email
     using_custom_adapter
     configuration
+
+Learn more
+----------
+
+* :doc:`Emails in the Sylius platform </book/architecture/emails>` - concept documentation

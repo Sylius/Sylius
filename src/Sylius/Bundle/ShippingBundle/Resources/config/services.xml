@@ -42,7 +42,7 @@
             <tag name="sylius.shipping_method_resolver" type="default" label="Default" />
         </service>
 
-        <service id="sylius.resolver.default_shipping_method" class="Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolver">
+        <service id="sylius.shipping_method_resolver.default" class="Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolver">
             <argument type="service" id="sylius.repository.shipping_method" />
         </service>
 

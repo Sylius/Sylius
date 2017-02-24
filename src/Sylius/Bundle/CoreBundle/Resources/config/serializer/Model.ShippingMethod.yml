@@ -8,3 +8,5 @@ Sylius\Component\Core\Model\ShippingMethod:
                 parameters:
                     code: expr(object.getZone().getCode())
                     version: 1
+                exclusion:
+                    groups: [Detailed]

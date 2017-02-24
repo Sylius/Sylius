@@ -47,6 +47,19 @@ Twig
 
 To read more about Twig, `go here <http://twig.sensiolabs.org/>`_.
 
+Architecture
+------------
+
+On the below image you can see the symbolic representation of Sylius architecture.
+
+.. image:: ../../_images/architecture_overview.png
+    :align: center
+    :scale: 50%
+
+|
+
+Keep on reading this chapter to learn more about each of its parts: Shop, Admin, API, Core, Components and Bundles.
+
 Division into Components, Bundles, Platform
 -------------------------------------------
 

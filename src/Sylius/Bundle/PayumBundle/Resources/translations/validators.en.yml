@@ -1,0 +1,14 @@
+sylius:
+    gateway_config:
+        paypal:
+            password:
+                not_blank: Please enter paypal password.
+            signature:
+                not_blank: Please enter paypal signature.
+            username:
+                not_blank: Please enter paypal username.
+        stripe:
+            secret_key:
+                not_blank: Please enter stripe secret key.
+            publishable_key:
+                not_blank: Please enter stripe publishable key.

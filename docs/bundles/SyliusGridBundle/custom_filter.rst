@@ -49,7 +49,7 @@ And the form type:
 
     <?php
 
-    namespace AppBundle\Form\Type\Filterh;
+    namespace AppBundle\Form\Type\Filter;
 
     use Sylius\Component\Grid\Data\DataSourceInterface;
     use Sylius\Component\Grid\Filter\FilterInterface;

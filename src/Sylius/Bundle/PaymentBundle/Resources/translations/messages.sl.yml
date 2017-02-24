@@ -29,5 +29,4 @@ sylius:
         payment_method:
             description: Opis
             enabled: Omogočeno?
-            gateway: Prehod
             name: Ime

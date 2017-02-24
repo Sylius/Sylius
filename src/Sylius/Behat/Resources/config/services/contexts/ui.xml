@@ -114,6 +114,11 @@
             <argument type="service" id="sylius.behat.page.admin.payment_method.update" />
             <argument type="service" id="sylius.behat.current_page_resolver" />
             <argument type="service" id="sylius.behat.notification_checker" />
+            <argument type="collection">
+                <argument key="offline">Offline</argument>
+                <argument key="paypal_express_checkout">Paypal Express Checkout</argument>
+                <argument key="stripe_checkout">Stripe Checkout</argument>
+            </argument>
             <tag name="fob.context_service" />
         </service>
 
@@ -316,6 +321,7 @@
         <service id="sylius.behat.context.ui.shop.checkout.complete" class="Sylius\Behat\Context\Ui\Shop\Checkout\CheckoutCompleteContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.page.shop.checkout.complete" />
+            <argument type="service" id="sylius.behat.notification_checker" />
             <tag name="fob.context_service" />
         </service>
 
@@ -391,6 +397,7 @@
 
         <service id="sylius.behat.context.ui.shop.current_channel" class="Sylius\Behat\Context\Ui\Shop\CurrentChannelContext">
             <argument type="service" id="sylius.behat.channel_context_setter" />
+            <argument type="service" id="sylius.behat.page.shop.home" />
             <tag name="fob.context_service" />
         </service>
 

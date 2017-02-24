@@ -22,20 +22,22 @@ sylius:
             name: Name
             roles: Roles
         channel:
-            taxonomies: Taxonomies
+            contact_email: Contact email
+            currencies: Currencies
+            currency_base: Base currency
+            account_verification_required: Is account verification required?
+            hostname: Hostname
             locale_default: Default locale
             locales: Locales
-            contact_email: Contact email
-            currency_base: Base currency
-            currencies: Currencies
-            shipping_methods: Shipping Methods
             payment_methods: Payment Methods
+            shipping_methods: Shipping Methods
+            skipping_shipping_step_allowed: Skip shipping step if only one shipping method is available?
             tax_calculation_strategy: Tax calculation strategy
             tax_zone_default: Default tax zone
+            taxonomies: Taxonomies
             theme: Theme
-            hostname: Hostname
         image:
-            code: Code
+            type: Type
             file: Image
         locale:
             code: Code

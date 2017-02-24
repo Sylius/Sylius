@@ -29,7 +29,6 @@ sylius:
         payment_method:
             description: Descripción
             enabled: '¿Activado?'
-            gateway: Puerta de enlace
             instructions: Instrucciones
             name: Nombre
             position: Posición

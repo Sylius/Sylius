@@ -1,6 +1,7 @@
 {
     "id": @integer@,
     "code": "NL",
+    "enabled": true,
     "_links": {
         "self": {
             "href": @string@

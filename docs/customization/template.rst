@@ -6,7 +6,7 @@ Customizing Templates
     There are two kinds of templates in Sylius. **Shop** and **Admin** ones, plus you can create your own to satisfy your needs.
 
 Why would you customize a template?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------------
 
 The most important case for modifying the existing templates is of course **integrating your own layout of the system**.
 Sometimes even if you have decided to stay with the default layout provided by Sylius, you need to **slightly modify it to meet your
@@ -14,7 +14,7 @@ business requirements**.
 You may just need to **add your logo anywhere**.
 
 How to customize templates?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------
 
 .. note::
 
@@ -89,3 +89,37 @@ Copy the contents of the original template to make your work easier. And then mo
     </div>
 
 Done! If you do not see any changes on the ``/admin/countries/new`` url, clear your cache: ``$ php bin/console cache:clear``.
+
+Global Twig variables
+---------------------
+
+Each of the Twig templates in Sylius is provided with the ``sylius`` variable,
+that comes from the `ShopperContext <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Core/Context/ShopperContext.php>`_.
+
+The **ShopperContext** is composed of ``ChannelContext``, ``CurrencyContext``, ``LocaleContext`` and ``CustomerContext``.
+Therefore it has access to the current channel, currency, locale and customer.
+
+The variables available in Twig are:
+
++---------------------+----------------------------+
+| Twig variable       | ShopperContext method name |
++=====================+============================+
+| sylius.channel      | getChannel()               |
++---------------------+----------------------------+
+| sylius.currencyCode | getCurrencyCode()          |
++---------------------+----------------------------+
+| sylius.localeCode   | getLocaleCode()            |
++---------------------+----------------------------+
+| sylius.customer     | getCustomer()              |
++---------------------+----------------------------+
+
+How to use these Twig variables?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You can check for example what is the current channel by dumping the ``sylius.channel`` variable.
+
+.. code-block:: twig
+
+    {{ dump(sylius.channel) }}
+
+That's it, this will dump the content of the current Channel object.

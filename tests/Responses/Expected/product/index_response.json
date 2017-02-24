@@ -24,7 +24,7 @@
                 "name": "Breaking bad mug",
                 "code": "MUG_BB",
                 "options": [],
-                "average_rating": 0,
+                "averageRating": 0,
                 "images": [],
                 "_links": {
                     "self": {
@@ -37,7 +37,7 @@
                 "name": "Lotr mug",
                 "code": "MUG_LOTR",
                 "options": [],
-                "average_rating": 0,
+                "averageRating": 0,
                 "images": [],
                 "_links": {
                     "self": {
@@ -50,7 +50,7 @@
                 "name": "Star Wars mug",
                 "code": "MUG_SW",
                 "options": [],
-                "average_rating": 0,
+                "averageRating": 0,
                 "images": [],
                 "_links": {
                     "self": {
@@ -63,7 +63,7 @@
                 "name": "Product 10",
                 "code": "PRODUCT_10",
                 "options": [],
-                "average_rating": 0,
+                "averageRating": 0,
                 "images": [],
                 "_links": {
                     "self": {
@@ -76,7 +76,7 @@
                 "name": "Product 11",
                 "code": "PRODUCT_11",
                 "options": [],
-                "average_rating": 0,
+                "averageRating": 0,
                 "images": [],
                 "_links": {
                     "self": {
@@ -89,7 +89,7 @@
                 "name": "Product 12",
                 "code": "PRODUCT_12",
                 "options": [],
-                "average_rating": 0,
+                "averageRating": 0,
                 "images": [],
                 "_links": {
                     "self": {
@@ -102,7 +102,7 @@
                 "name": "Product 13",
                 "code": "PRODUCT_13",
                 "options": [],
-                "average_rating": 0,
+                "averageRating": 0,
                 "images": [],
                 "_links": {
                     "self": {
@@ -115,7 +115,7 @@
                 "name": "Product 14",
                 "code": "PRODUCT_14",
                 "options": [],
-                "average_rating": 0,
+                "averageRating": 0,
                 "images": [],
                 "_links": {
                     "self": {
@@ -128,7 +128,7 @@
                 "name": "Product 15",
                 "code": "PRODUCT_15",
                 "options": [],
-                "average_rating": 0,
+                "averageRating": 0,
                 "images": [],
                 "_links": {
                     "self": {
@@ -141,7 +141,7 @@
                 "name": "Product 16",
                 "code": "PRODUCT_16",
                 "options": [],
-                "average_rating": 0,
+                "averageRating": 0,
                 "images": [],
                 "_links": {
                     "self": {

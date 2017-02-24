@@ -3,4 +3,4 @@
 
 sylius:
     customer:
-        register: 'Thank you for registering, check your email to verify your account.'
+        register: 'Thank you for registering. If you are not logged in, check your email to verify your account.'

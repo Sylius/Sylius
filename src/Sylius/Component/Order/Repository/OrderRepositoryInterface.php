@@ -58,4 +58,9 @@ interface OrderRepositoryInterface extends RepositoryInterface
      * @return OrderInterface[]
      */
     public function findCartsNotModifiedSince(\DateTime $terminalDate);
+
+    /**
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function createCartQueryBuilder();
 }

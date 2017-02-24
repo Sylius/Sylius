@@ -17,18 +17,13 @@
     </imports>
 
     <services>
-        <service id="sylius.context.currency.composite" class="Sylius\Component\Currency\Context\CompositeCurrencyContext" decorates="sylius.context.currency" public="false" />
+        <service id="sylius.context.currency.composite" class="Sylius\Component\Currency\Context\CompositeCurrencyContext" decorates="sylius.context.currency" decoration-priority="256" public="false" />
 
         <service id="sylius.currency_converter" class="Sylius\Component\Currency\Converter\CurrencyConverter">
             <argument type="service" id="sylius.repository.exchange_rate" />
         </service>
 
         <service id="sylius.currency_name_converter" class="Sylius\Component\Currency\Converter\CurrencyNameConverter" />
-
-        <service id="sylius.currency_provider" class="Sylius\Component\Currency\Provider\CurrencyProvider">
-            <argument type="service" id="sylius.repository.currency" />
-            <argument>%sylius_currency.currency%</argument>
-        </service>
 
         <service id="sylius.templating.helper.currency" class="Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelper" lazy="true">
             <tag name="templating.helper" alias="sylius_currency" />

@@ -19,3 +19,5 @@ Sylius\Component\Attribute\Model\AttributeValue:
             serialized_name: name
         getValue:
             serialized_name: value
+        getType:
+            serialized_name: type

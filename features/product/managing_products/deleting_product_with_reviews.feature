@@ -6,7 +6,7 @@ Feature: Deleting a product with its reviews
 
     Background:
         Given the store has a product "Toyota GT86 model"
-        And this product has one review
+        And this product has one review from customer "john@doe.com"
         And I am logged in as an administrator
 
     @domain @ui

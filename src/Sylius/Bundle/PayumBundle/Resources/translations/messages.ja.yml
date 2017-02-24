@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        gateway_configuration:
+            paypal:
+                password: パスワード
+                username: ユーザー名

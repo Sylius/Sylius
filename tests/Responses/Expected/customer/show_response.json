@@ -1,9 +1,14 @@
 {
     "id": @integer@,
     "email": "Barry@doe.com",
-    "email_canonical": "barry@doe.com",
-    "first_name": "Barry",
-    "last_name": "Doe",
+    "emailCanonical": "barry@doe.com",
+    "firstName": "Barry",
+    "lastName": "Doe",
     "birthday": "@string@.isDateTime()",
-    "gender": "u"
+    "gender": "u",
+    "_links": {
+        "self": {
+            "href": "@string@"
+        }
+    }
 }

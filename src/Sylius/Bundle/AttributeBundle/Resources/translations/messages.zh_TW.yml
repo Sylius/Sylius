@@ -5,3 +5,5 @@ sylius:
     form:
         attribute:
             type: 類型
+        attribute_type:
+            select: 請選擇

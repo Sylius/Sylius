@@ -41,12 +41,4 @@ final class LocaleExtension extends \Twig_Extension
             new \Twig_SimpleFilter('sylius_locale_name', [$this->localeHelper, 'convertCodeToName']),
         ];
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_locale';
-    }
 }

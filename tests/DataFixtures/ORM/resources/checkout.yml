@@ -1,21 +1,3 @@
-Sylius\Component\Core\Model\Order:
-    order1:
-        channel: "@channel"
-        currencyCode: "EUR"
-        addItem: ["@orderItem1"]
-        localeCode: "en_US"
-
-Sylius\Component\Core\Model\OrderItem:
-    orderItem1:
-        quantity: 1
-        unitPrice: 2000
-        addUnit: ["@orderItemUnit1"]
-        variant: "@productVariant1"
-
-Sylius\Component\Core\Model\OrderItemUnit:
-    orderItemUnit1:
-        __construct: ["@orderItem1"]
-
 Sylius\Component\Core\Model\Channel:
     channel:
         code: "CHANNEL"
@@ -30,46 +12,53 @@ Sylius\Component\Core\Model\Channel:
         currencies: ["@currency"]
 
 Sylius\Component\Core\Model\Product:
-    product1:
-        updatedAt: 2015-10-10
+    mug:
+        code: MUG
+        channels: ["@channel"]
         currentLocale: en_US
-        currentTranslation: "@productTranslation1"
-        variants: ["@productVariant1"]
-        code: MUG_SW
-    product2:
-        updatedAt: 2015-10-04
-        currentLocale: en_US
-        currentTranslation: "@productTranslation2"
-        variants: ["@productVariant2"]
-        code: MUG_LOTR
+        currentTranslation: "@mug_translation"
 
 Sylius\Component\Core\Model\ProductTranslation:
-    productTranslation1:
-        slug: mug-star-wars
+    mug_translation:
+        slug: mug
         locale: en_US
-        name: 'Star wars mug'
+        name: 'Mug'
         description: <paragraph(2)>
-        translatable: "@product1"
-    productTranslation2:
-        slug: mug-lotr
-        locale: en_US
-        name: 'Lotr mug'
-        description: <paragraph(2)>
-        translatable: "@product2"
+        translatable: "@mug"
 
 Sylius\Component\Core\Model\ProductVariant:
-    productVariant1:
-        code: MUG_1
-        channelPricings: ["@channelPricing1"]
-    productVariant2:
-        code: MUG_2
-        channelPricings: ["@channelPricing2"]
+    mug_sw:
+        code: MUG_SW
+        product: "@mug"
+        currentLocale: en_US
+        currentTranslation: "@sw_mug_translation"
+        updatedAt: 2015-10-10
+        channelPricings: ["@sw_mug_web_channel_pricing"]
+    hard_available_mug:
+        code: HARD_AVAILABLE_MUG
+        product: "@mug"
+        currentLocale: en_US
+        currentTranslation: "@hard_available_mug_translation"
+        updatedAt: 2015-10-05
+        channelPricings: ["@hard_available_mug_web_channel_pricing"]
+        tracked: true
+        onHand: 2
+
+Sylius\Component\Product\Model\ProductVariantTranslation:
+    sw_mug_translation:
+        locale: en_US
+        name: 'Star wars mug'
+        translatable: "@mug_sw"
+    hard_available_mug_translation:
+        locale: en_US
+        name: 'Breaking bad mug'
+        translatable: "@hard_available_mug"
 
 Sylius\Component\Core\Model\ChannelPricing:
-    channelPricing1:
+    sw_mug_web_channel_pricing:
         channel: "@channel"
         price: 20
-    channelPricing2:
+    hard_available_mug_web_channel_pricing:
         channel: "@channel"
         price: 20
 
@@ -99,34 +88,44 @@ Sylius\Component\Shipping\Model\ShippingMethodTranslation:
     upsTranslation1:
         name: 'UPS'
         locale: 'en_US'
+        description: <paragraph(2)>
         translatable: "@ups"
     dhlTranslation1:
         name: 'DHL'
         locale: 'en_US'
         translatable: "@dhl"
+        description: <paragraph(2)>
 
 Sylius\Component\Core\Model\PaymentMethod:
     cash_on_delivery:
         code: cod
         enabled: true
-        gateway: 'offline'
+        gatewayConfig: '@offline'
         currentLocale: en_US
         currentTranslation: "@cash_on_delivery_translation1"
         channels: ['@channel']
     pay_by_check:
         code: pbc
         enabled: true
-        gateway: 'offline'
+        gatewayConfig: '@offline'
         channels: ['@channel']
+
+Sylius\Bundle\PayumBundle\Model\GatewayConfig:
+    offline:
+        gatewayName: 'Offline'
+        factoryName: 'offline'
+        config: []
 
 Sylius\Component\Payment\Model\PaymentMethodTranslation:
     cash_on_delivery_translation1:
         name: 'Cach on delivery'
         locale: 'en_US'
+        description: <paragraph(2)>
         translatable: "@cash_on_delivery"
     pay_by_check_translation1:
         name: 'Pay by check'
         locale: 'en_US'
+        description: <paragraph(2)>
         translatable: "@pay_by_check"
 
 Sylius\Component\Currency\Model\Currency:
@@ -147,3 +146,11 @@ Sylius\Component\Addressing\Model\Zone:
 Sylius\Component\Addressing\Model\ZoneMember:
     member_{NL, BE}:
         code: <current()>
+
+Sylius\Component\Core\Model\Customer:
+    customer_oliver:
+        firstName: Oliver
+        lastName: Queen
+        email: oliver.queen@star-city.com
+        emailCanonical: oliver.queen@star-city.com
+        birthday: <date()>

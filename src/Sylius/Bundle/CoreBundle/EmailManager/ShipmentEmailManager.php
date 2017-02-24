@@ -12,13 +12,14 @@
 namespace Sylius\Bundle\CoreBundle\EmailManager;
 
 use Sylius\Bundle\CoreBundle\Mailer\Emails;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 
 /**
  * @author Hussein Jafferjee <hussein@jafferjee.ca>
  */
-final class ShipmentEmailManager
+final class ShipmentEmailManager implements ShipmentEmailManagerInterface
 {
     /**
      * @var SenderInterface
@@ -34,11 +35,11 @@ final class ShipmentEmailManager
     }
 
     /**
-     * @param ShipmentInterface $shipment
+     * {@inheritdoc}
      */
     public function sendConfirmationEmail(ShipmentInterface $shipment)
     {
-        /** @var \Sylius\Component\Core\Model\OrderInterface $order */
+        /** @var OrderInterface $order */
         $order = $shipment->getOrder();
 
         $this->emailSender->send(Emails::SHIPMENT_CONFIRMATION, [$order->getCustomer()->getEmail()], [

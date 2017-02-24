@@ -28,5 +28,4 @@ sylius:
         payment_method:
             description: Апісанне
             enabled: Уключана?
-            gateway: Шлюз
             name: Назва

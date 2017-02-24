@@ -19,17 +19,11 @@ The following payment states are available by default:
 +------------------+------------+---------------------------------------------------------+
 | STATE_COMPLETED  | completed  | Completed payment                                       |
 +------------------+------------+---------------------------------------------------------+
-| STATE_AUTHORIZED | authorized | Payment which has been authorized                       |
-+------------------+------------+---------------------------------------------------------+
 | STATE_FAILED     | failed     | Payment has failed                                      |
 +------------------+------------+---------------------------------------------------------+
 | STATE_CANCELLED  | cancelled  | Cancelled by a customer or manager                      |
 +------------------+------------+---------------------------------------------------------+
-| STATE_VOID       | void       | Payment timed out or an order with it has been canceled |
-+------------------+------------+---------------------------------------------------------+
 | STATE_REFUNDED   | refunded   | A completed payment which has been refunded             |
-+------------------+------------+---------------------------------------------------------+
-| STATE_UNKNOWN    | unknown    | Payment is in an unknown state                          |
 +------------------+------------+---------------------------------------------------------+
 
 .. note::
@@ -56,8 +50,6 @@ The following payment transitions are available by default:
 | SYLIUS_CANCEL    | cancel     |
 +------------------+------------+
 | SYLIUS_REFUND    | refund     |
-+------------------+------------+
-| SYLIUS_VOID      | void       |
 +------------------+------------+
 
 There's also the default graph name included:

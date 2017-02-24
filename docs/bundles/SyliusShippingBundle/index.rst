@@ -25,3 +25,8 @@ Flexible shipping cost calculation system allows you to create your own calculat
    resolving_available_methods
    shipping_requirements
    summary
+
+Learn more
+----------
+
+* :doc:`Shipments in the Sylius platform </book/orders/shipments>` - concept documentation

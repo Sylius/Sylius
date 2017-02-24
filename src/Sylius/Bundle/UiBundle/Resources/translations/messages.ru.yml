@@ -233,7 +233,7 @@ sylius:
         default_currency: 'Валюта по умолчанию'
         default_locale: 'Локаль по умолчанию'
         default_shipping_address: 'sylius.account.address.default.shipping'
-        delete: 'sylius.account.address.action.delete'
+        delete: 'Удалить'
         delete_image: 'Удалить товар'
         deleted: '﻿Удалено'
         delivery_and_shipping: 'Отправка и доставка'

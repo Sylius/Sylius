@@ -1,7 +1,7 @@
-{% import 'SyliusUiBundle:Macro:pagination.html.twig' as pagination %}
-{% import 'SyliusUiBundle:Macro:buttons.html.twig' as buttons %}
-{% import 'SyliusUiBundle:Macro:messages.html.twig' as messages %}
-{% import 'SyliusUiBundle:Macro:table.html.twig' as table %}
+{% import '@SyliusUi/Macro/pagination.html.twig' as pagination %}
+{% import '@SyliusUi/Macro/buttons.html.twig' as buttons %}
+{% import '@SyliusUi/Macro/messages.html.twig' as messages %}
+{% import '@SyliusUi/Macro/table.html.twig' as table %}
 
 {% set definition = grid.definition %}
 {% set data = grid.data %}
@@ -12,7 +12,7 @@
     <div class="ui segment">
         <form method="get" action="{{ path }}" class="ui loadable form">
             <div class="two fields">
-            {% for filter in definition.filters if filter.enabled %}
+            {% for filter in definition.filters|sort_by('position') if filter.enabled %}
                 {{ sylius_grid_render_filter(grid, filter) }}
 
                 {% if loop.index0 % 2 %}
@@ -28,7 +28,20 @@
 {% endif %}
 
 <div class="ui segment">
-    {{ pagination.simple(data) }}
+    {% if definition.limits|length > 1 and data|length > min(definition.limits) %}
+    <div class="ui two column fluid stackable grid">
+        <div class="fourteen wide column">
+            {{ pagination.simple(data) }}
+        </div>
+        <div class="two wide column">
+            <div class="ui fluid one item menu sylius-paginate">
+                {{ pagination.perPage(data, definition.limits) }}
+            </div>
+        </div>
+    </div>
+    {% else %}
+        {{ pagination.simple(data) }}
+    {% endif %}
     {% if data|length > 0 %}
         <table class="ui sortable stackable celled table">
             <thead>

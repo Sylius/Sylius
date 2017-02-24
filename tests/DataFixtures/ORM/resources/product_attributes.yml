@@ -1,0 +1,37 @@
+Sylius\Component\Product\Model\ProductAttributeTranslation:
+    attributeTranslation1:
+        locale: de
+        name: 'Becher Sammlung'
+        translatable: "@productAttribute1"
+    attributeTranslation2:
+        locale: de
+        name: 'Becher Material'
+        translatable: "@productAttribute2"
+    attributeTranslation3:
+        locale: en_US
+        name: 'Mug collection'
+        translatable: "@productAttribute1"
+    attributeTranslation4:
+        locale: en_US
+        name: 'Mug material'
+        translatable: "@productAttribute2"
+
+Sylius\Component\Product\Model\ProductAttribute:
+    productAttribute1:
+        fallbackLocale: en_US
+        currentLocale: de
+        code: mug_material
+        type: text
+        storage_type: text
+        translations:
+            - "@attributeTranslation1"
+            - "@attributeTranslation3"
+    productAttribute2:
+        fallbackLocale: en_US
+        currentLocale: de
+        code: mug_collection
+        type: text
+        storage_type: text
+        translations:
+            - "@attributeTranslation2"
+            - "@attributeTranslation4"

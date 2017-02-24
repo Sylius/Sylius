@@ -8,3 +8,4 @@ sylius:
         failed: 'Payment has failed.'
         processing: 'Payment is being processed.'
         refunded: 'Payment has been successfully refunded.'
+        unknown: 'There was an unknown problem with payment.'

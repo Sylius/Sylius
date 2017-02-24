@@ -19,22 +19,26 @@ sylius:
         promotion_action:
             add_product_configuration:
                 product: Produkt
+        promotion_coupon:
+            per_customer_usage_limit: Omezení použití na zákazníka
         group:
             name: Jméno
             roles: Role
         channel:
-            taxonomies: Taxonomie
+            contact_email: Kontaktní e-mail
+            currencies: Měny
+            currency_base: Základní měna
+            hostname: Hostname
             locale_default: Výchozí Jazyk
             locales: Lokalizace
-            currencies: Měny
-            shipping_methods: Způsoby dopravy
             payment_methods: Způsoby platby
+            shipping_methods: Způsoby dopravy
             tax_calculation_strategy: Strategie výpočtu daně
             tax_zone_default: Výchozí sazba DPH
+            taxonomies: Taxonomie
             theme: Vzhled
-            hostname: Hostname
         image:
-            code: Kód
+            type: Typ
             file: Obrázek
         locale:
             code: Kód
@@ -56,6 +60,7 @@ sylius:
             restricted_zone: Zóna s omezeným přístupem
             short_description: Stručný popis
             variant_selection_method: Metoda výběru varianty
+            main_taxon: Hlavní taxonu
             channels: Kanály
             enabled: Povoleno
         product_filter:
@@ -115,19 +120,40 @@ sylius:
             type: Typy asociace
         product_association_type:
             name: Jméno
+        promotion_filter:
+            products: Filtr produktů
+            taxons: Taxonů filtr
+        promotion_rule:
+            customer_group:
+                group: Skupina zákazníků
+            has_taxon:
+                taxons: Taxony
+            product:
+                products: Produkty
+            total_of_items_from_taxon:
+                taxon: Taxonu
+                amount: Částka
         payment_method:
             channels: Kanály
+        product_attribute:
+            position: Pozice
+        zone:
+            scopes:
+                shipping: Přeprava
+                tax: Daň
     installer:
         extensions:
             header: rozšíření
             accelerator:
                 header: Akcelerátor
+                help: Povolte Zend OpCache (vysoce doporučeno).
             apc: APC
             ctype: Ctype
             gd: GD
             help: Nainstalujte a povolte %extension% rozšíření.
             iconv: Iconv
             exif: EXIF
+            fileinfo: FileInfo
             icu: ICU
             intl: Intl
             json_encode: JSON
@@ -144,13 +170,16 @@ sylius:
             header: souborový systém
             cache:
                 header: mezipaměť
+                help: 'To set permissions run: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
             exists: Existuje
             logs:
                 header: logy
+                help: 'To set permissions run: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
             not_exists: neexistuje
             not_writable: nelze zapisovat
             parameters:
                 header: parameters.yml
+                help: 'Chcete-li nastavit oprávnění spustit: sudo chmod a + w %path%'
             vendors: vendors
             writable: zapisovatelný
         settings:
@@ -170,6 +199,7 @@ sylius:
                 header: Zastaralé časové pásmo
                 help: 'Časové pásmo %timezone% je zastaralé. Spravte Váš php.ini soubor (seznam zastaralých časových pásem http://php.net/manual/en/timezones.others.php).'
             version: Verze PHP
+            version_recommended: Doporučená verze PHP
     payum_gateway:
         cash_on_delivery: Platba na dobírku
         offline: Offline

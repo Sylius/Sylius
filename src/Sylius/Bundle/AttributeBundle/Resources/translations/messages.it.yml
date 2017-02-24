@@ -18,6 +18,7 @@ sylius:
             datetime: DateTime
             integer: Numero intero
             percent: Percento
+            select: Scegli
             text: Testo
             textarea: Area di testo
             title: Tipi di attributo
@@ -27,6 +28,8 @@ sylius:
                 format: Formato
             date:
                 format: Formato
+            select:
+                values: Valori
             text:
                 min: Minima Lunghezza
                 max: Massima Lunghezza

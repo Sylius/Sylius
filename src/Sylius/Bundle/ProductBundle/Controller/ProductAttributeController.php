@@ -84,7 +84,7 @@ class ProductAttributeController extends ResourceController
         $localeCodes = $this->get('sylius.translation_locale_provider')->getDefinedLocalesCodes();
 
         foreach ($attributes as $attribute) {
-            $forms[$attribute->getId()] = $this->getAttributeFormsInAllLocales($attribute, $localeCodes);
+            $forms[$attribute->getCode()] = $this->getAttributeFormsInAllLocales($attribute, $localeCodes);
         }
 
         return $this->render($template, [
@@ -108,7 +108,7 @@ class ProductAttributeController extends ResourceController
         foreach ($localeCodes as $localeCode) {
             $forms[$localeCode] = $this
                 ->get('form.factory')
-                ->createNamed('value', $attributeForm, null, ['label' => $attribute->getName()])
+                ->createNamed('value', $attributeForm, null, ['label' => $attribute->getName(), 'configuration' => $attribute->getConfiguration()])
                 ->createView()
             ;
         }

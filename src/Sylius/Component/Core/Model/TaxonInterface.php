@@ -19,37 +19,5 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface as BaseTaxonInterface;
  */
 interface TaxonInterface extends BaseTaxonInterface, ImageAwareInterface
 {
-    /**
-     * @return bool
-     */
-    public function hasImages();
 
-    /**
-     * @param ImageInterface $image
-     *
-     * @return bool
-     */
-    public function hasImage(ImageInterface $image);
-
-    /**
-     * @return Collection|ImageInterface[]
-     */
-    public function getImages();
-
-    /**
-     * @param string $code
-     *
-     * @return ImageInterface|null
-     */
-    public function getImageByCode($code);
-
-    /**
-     * @param ImageInterface $image
-     */
-    public function removeImage(ImageInterface $image);
-
-    /**
-     * @param ImageInterface $image
-     */
-    public function addImage(ImageInterface $image);
 }

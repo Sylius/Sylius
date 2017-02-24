@@ -19,23 +19,27 @@ sylius:
         promotion_action:
             add_product_configuration:
                 product: Produkt
+        promotion_coupon:
+            per_customer_usage_limit: Limit pre použitie jedným zákazníkom
         group:
             name: Názov
             roles: Role
         channel:
-            taxonomies: Triedenia
+            contact_email: Kontaktný e-mail
+            currencies: Meny
+            currency_base: Základná mena
+            hostname: Hostname
             locale_default: Predvolený jazyk
             locales: Jazyky
-            currency_base: Základná mena
-            currencies: Meny
-            shipping_methods: Spôsoby doručenia
             payment_methods: Spôsoby platby
+            shipping_methods: Spôsoby doručenia
+            skipping_shipping_step_allowed: Preskočiť výber dopravy, ak je dostupný iba jeden spôsob dopravy?
             tax_calculation_strategy: Spôsob výpočtu dane
             tax_zone_default: Predvolené daňové pásmo
+            taxonomies: Triedenia
             theme: Téma
-            hostname: Hostname
         image:
-            code: Kód
+            type: Typ
             file: Obrázok
         locale:
             code: Kód
@@ -117,11 +121,23 @@ sylius:
             type: Typ priradenia
         product_association_type:
             name: Názov
+        promotion_filter:
+            products: Filter produktov
+            taxons: Filter kategórií
         promotion_rule:
+            customer_group:
+                group: Skupina zákazníkov
+            has_taxon:
+                taxons: Kategórie
+            product:
+                products: Produkty
             total_of_items_from_taxon:
                 taxon: Kategória
+                amount: Suma
         payment_method:
             channels: Kanály
+        product_attribute:
+            position: Pozícia
         zone:
             scopes:
                 shipping: Doručenie
@@ -155,13 +171,16 @@ sylius:
             header: súborový systém
             cache:
                 header: cache
+                help: 'Pre nastavenie oprávnení spusti: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
             exists: existuje
             logs:
                 header: záznamy
+                help: 'Pre nastavenie oprávnení spusti: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
             not_exists: neexistuje
             not_writable: nie je zapisovateľný
             parameters:
                 header: parameters.yml
+                help: 'Pre nastavenie oprávnení spusti: sudo chmod a+w %path%'
             vendors: vendors
             writable: zapisovateľné
         settings:

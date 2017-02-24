@@ -4,4 +4,4 @@ Sylius\Component\Core\Model\Customer:
     properties:
         user:
             expose: true
-            groups: [Default, Detailed]
+            groups: [Default, Detailed, DetailedCart]

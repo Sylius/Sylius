@@ -1,0 +1,17 @@
+{
+    "code": 400,
+    "message": "Validation Failed",
+    "errors": {
+        "children": {
+            "ratio": {
+                "errors": [
+                    "Please enter exchange rate ratio."
+                ]
+            },
+            "sourceCurrency": {
+            },
+            "targetCurrency": {
+            }
+        }
+    }
+}

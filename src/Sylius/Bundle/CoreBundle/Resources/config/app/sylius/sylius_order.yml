@@ -14,3 +14,6 @@ sylius_order:
         order_item_unit:
             classes:
                 model: Sylius\Component\Core\Model\OrderItemUnit
+        order_sequence:
+            classes:
+                model: Sylius\Component\Core\Model\OrderSequence

@@ -1,0 +1,29 @@
+{
+    "id": @integer@,
+    "code": "MONSTER_MUG",
+    "optionValues": [
+        {
+            "name": "Mug type",
+            "code": "MUG_TYPE_MEDIUM"
+        }
+    ],
+    "position": 21,
+    "translations": {
+        "en_US": {
+          "id": @integer@,
+          "locale": "en_US"
+        }
+    },
+    "onHold": 0,
+    "onHand": 0,
+    "tracked": false,
+    "channelPricings": [],
+    "_links": {
+        "self": {
+            "href": "@string@"
+        },
+        "product": {
+          "href": "@string@"
+        }
+    }
+}

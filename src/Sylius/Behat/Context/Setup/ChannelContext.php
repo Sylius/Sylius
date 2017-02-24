@@ -52,32 +52,24 @@ final class ChannelContext implements Context
     private $channelManager;
 
     /**
-     * @var CurrencyStorageInterface
-     */
-    private $currencyStorage;
-
-    /**
      * @param SharedStorageInterface $sharedStorage
      * @param DefaultChannelFactoryInterface $unitedStatesChannelFactory
      * @param DefaultChannelFactoryInterface $defaultChannelFactory
      * @param ChannelRepositoryInterface $channelRepository
      * @param ObjectManager $channelManager
-     * @param CurrencyStorageInterface $currencyStorage
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         DefaultChannelFactoryInterface $unitedStatesChannelFactory,
         DefaultChannelFactoryInterface $defaultChannelFactory,
         ChannelRepositoryInterface $channelRepository,
-        ObjectManager $channelManager,
-        CurrencyStorageInterface $currencyStorage
+        ObjectManager $channelManager
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->unitedStatesChannelFactory = $unitedStatesChannelFactory;
         $this->defaultChannelFactory = $defaultChannelFactory;
         $this->channelRepository = $channelRepository;
         $this->channelManager = $channelManager;
-        $this->currencyStorage = $currencyStorage;
     }
 
     /**
@@ -125,7 +117,6 @@ final class ChannelContext implements Context
 
         $this->sharedStorage->setClipboard($defaultData);
         $this->sharedStorage->set('channel', $defaultData['channel']);
-        $this->currencyStorage->set($defaultData['channel'], $defaultData['currency']->getCode());
     }
 
     /**
@@ -169,6 +160,26 @@ final class ChannelContext implements Context
     public function thisChannelHasContactEmailSetAs(ChannelInterface $channel, $contactEmail = null)
     {
         $channel->setContactEmail($contactEmail);
+        $this->channelManager->flush();
+    }
+
+    /**
+     * @Given /^on (this channel) shipping step is skipped if only a single shipping method is available$/
+     */
+    public function onThisChannelShippingStepIsSkippedIfOnlyASingleShippingMethodIsAvailable(ChannelInterface $channel)
+    {
+        $channel->setSkippingShippingStepAllowed(true);
+
+        $this->channelManager->flush();
+    }
+
+    /**
+     * @Given /^on (this channel) account verification is not required$/
+     */
+    public function onThisChannelAccountVerificationIsNotRequired(ChannelInterface $channel)
+    {
+        $channel->setAccountVerificationRequired(false);
+
         $this->channelManager->flush();
     }
 

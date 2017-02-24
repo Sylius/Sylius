@@ -13,11 +13,13 @@ namespace spec\Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Payum\Core\Model\GatewayConfigInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\PaymentMethod;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Model\PaymentMethod as BasePaymentMethod;
+use Sylius\Component\Resource\Exception\UnsupportedMethodException;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -54,6 +56,12 @@ final class PaymentMethodSpec extends ObjectBehavior
 
         $this->removeChannel($channel);
         $this->hasChannel($channel)->shouldReturn(false);
+    }
+
+    function its_gateway_config_is_mutable(GatewayConfigInterface $gatewayConfig)
+    {
+        $this->setGatewayConfig($gatewayConfig);
+        $this->getGatewayConfig()->shouldReturn($gatewayConfig);
     }
 
     public function getMatchers()

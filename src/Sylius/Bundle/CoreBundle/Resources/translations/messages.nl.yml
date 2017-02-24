@@ -25,19 +25,19 @@ sylius:
             name: Naam
             roles: Rollen
         channel:
-            taxonomies: Taxonomieën
+            currencies: Valuta's
+            currency_base: Standaardvaluta
+            hostname: Hostnaam
             locale_default: Standaardlandinstelling
             locales: Talen/Regio's
-            currency_base: Standaardvaluta
-            currencies: Valuta's
-            shipping_methods: Verzendmethodes
             payment_methods: Betaalmethodes
+            shipping_methods: Verzendmethodes
             tax_calculation_strategy: Belastingberekeningsstrategie
             tax_zone_default: Standaard belastingzone
+            taxonomies: Taxonomieën
             theme: Thema
-            hostname: Hostnaam
         image:
-            code: Code
+            type: Type
             file: Afbeelding
         locale:
             code: Code

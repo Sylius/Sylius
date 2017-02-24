@@ -24,6 +24,10 @@ When you look inside the ``CoreBundle/Resources/config/app/state_machine/sylius_
 
 There are only two possible transitions: ``accept`` (from ``new`` to ``accepted``) and ``reject`` (from ``new`` to ``rejected``).
 
+.. image:: ../../_images/sylius_product_review.png
+    :align: center
+    :scale: 70%
+
 When a review is accepted **the average rating of a product is updated**.
 
 How is the average rating calculated?
@@ -61,7 +65,7 @@ Then get a customer from the repository, which you would like to make an author 
 
     $review->setAuthor($customer);
 
-Remember to set the that is the subject of your review and then add the review to the repository.
+Remember to set the object that is the subject of your review and then add the review to the repository.
 
 .. code-block:: php
 

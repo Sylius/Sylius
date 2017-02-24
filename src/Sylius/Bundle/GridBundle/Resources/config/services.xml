@@ -23,7 +23,9 @@
         <service id="sylius.grid.data_extractor.property_access" class="Sylius\Component\Grid\DataExtractor\PropertyAccessDataExtractor">
             <argument type="service" id="property_accessor" />
         </service>
-        <service id="sylius.grid.array_to_definition_converter" class="Sylius\Component\Grid\Definition\ArrayToDefinitionConverter" />
+        <service id="sylius.grid.array_to_definition_converter" class="Sylius\Component\Grid\Definition\ArrayToDefinitionConverter">
+            <argument type="service" id="event_dispatcher" />
+        </service>
         <service id="sylius.grid.provider" class="Sylius\Component\Grid\Provider\ArrayGridProvider">
             <argument type="service" id="sylius.grid.array_to_definition_converter" />
             <argument>%sylius.grids_definitions%</argument>

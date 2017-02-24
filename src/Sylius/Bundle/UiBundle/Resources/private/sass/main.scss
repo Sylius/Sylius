@@ -22,6 +22,10 @@ body.pushable {
     background-color: $color-background;
   }
 }
+.ui.visible.left.sidebar~.fixed.menu,
+.ui.visible.left.sidebar~.pusher {
+  padding-right: 260px;
+}
 
 body.centered {
   background-color: $color-background;

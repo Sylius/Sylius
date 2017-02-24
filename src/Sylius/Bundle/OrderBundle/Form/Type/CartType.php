@@ -28,8 +28,8 @@ class CartType extends AbstractResourceType
         $builder
             ->add('items', CollectionType::class, [
                 'entry_type' => CartItemType::class,
-                'allow_add' => true,
-                'allow_delete' => true,
+                'allow_add' => false,
+                'allow_delete' => false,
                 'by_reference' => false,
                 'label' => 'sylius.form.cart.items',
             ])

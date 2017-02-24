@@ -72,7 +72,7 @@ Finally **the parent taxon** has to be added to the system using a repository, a
 How to assign a Taxon to a Product?
 -----------------------------------
 
-In order to categorize products you will need to assign your taxons to them - via the ``addTaxon()`` method on Product.
+In order to categorize products you will need to assign your taxons to them - via the ``addProductTaxon()`` method on Product.
 
 .. code-block:: php
 
@@ -90,7 +90,13 @@ In order to categorize products you will need to assign your taxons to them - vi
     $taxonRepository = $this->container->get('sylius.repository.taxon');
     $taxonRepository->add($taxon);
 
-    $product->addTaxon($taxon);
+
+    /** @var ProductTaxonInterface $productTaxon */
+    $productTaxon = $this->container->get('sylius.factory.product_taxon')->createNew();
+    $productTaxon->setTaxon($taxon);
+    $productTaxon->setProduct($product);
+
+    $product->addProductTaxon($productTaxon);
 
     /** @var EntityManagerInterface $productManager */
     $productManager = $this->container->get('sylius.manager.product');

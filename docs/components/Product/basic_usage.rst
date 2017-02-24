@@ -13,7 +13,6 @@ Creating a product
    $product = new Product();
 
    $product->getCreatedAt(); // Returns the \DateTime when it was created.
-   $product->getAvailableOn(); // By default returns the same value as getCreatedAt.
 
 Product attributes management
 -----------------------------

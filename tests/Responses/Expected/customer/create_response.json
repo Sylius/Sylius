@@ -1,8 +1,13 @@
 {
     "id": @integer@,
     "email": "john.diggle@yahoo.com",
-    "email_canonical": "john.diggle@yahoo.com",
-    "first_name": "John",
-    "last_name": "Diggle",
-    "gender": "m"
+    "emailCanonical": "john.diggle@yahoo.com",
+    "firstName": "John",
+    "lastName": "Diggle",
+    "gender": "m",
+    "_links": {
+        "self": {
+            "href": "@string@"
+        }
+    }
 }

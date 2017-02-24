@@ -18,6 +18,7 @@ sylius:
             datetime: Datum / tijd
             integer: Geheel getal
             percent: Percentage
+            select: Selecteer
             text: Tekst
             textarea: Tekstgebied
             title: Attribuuttypes
@@ -27,6 +28,8 @@ sylius:
                 format: Formaat
             date:
                 format: Formaat
+            select:
+                values: Waarden
             text:
                 min: Minimale lengte
                 max: Maximale lengte

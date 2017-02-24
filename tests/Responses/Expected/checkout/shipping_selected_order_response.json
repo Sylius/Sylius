@@ -1,13 +1,25 @@
 {
     "id": @integer@,
     "items": @array@,
-    "items_total": @integer@,
+    "itemsTotal": @integer@,
     "adjustments": @array@,
-    "adjustments_total": @integer@,
+    "adjustmentsTotal": @integer@,
     "total": @integer@,
     "state": "cart",
-    "created_at": "@string@.isDateTime()",
-    "updated_at": "@string@.isDateTime()",
+    "customer": {
+        "id": @integer@,
+        "email": "oliver.queen@star-city.com",
+        "emailCanonical": "oliver.queen@star-city.com",
+        "firstName": "Oliver",
+        "lastName": "Queen",
+        "birthday": "@string@.isDateTime()",
+        "gender": "u",
+        "_links": {
+            "self": {
+                "href": "@string@"
+            }
+        }
+    },
     "channel": {
         "id": @integer@,
         "code": "CHANNEL",
@@ -15,18 +27,18 @@
         "description": "Lorem ipsum",
         "hostname": "localhost",
         "color": "black",
-        "created_at": "@string@.isDateTime()",
-        "updated_at": "@string@.isDateTime()",
+        "createdAt": "@string@.isDateTime()",
+        "updatedAt": "@string@.isDateTime()",
         "enabled": true,
-        "tax_calculation_strategy": "order_items_based",
+        "taxCalculationStrategy": "order_items_based",
         "_links": {
             "self": {
                 "href": @string@
             }
         }
     },
-    "shipping_address": @...@,
-    "billing_address": @...@,
+    "shippingAddress": @...@,
+    "billingAddress": @...@,
     "payments": @array@,
     "shipments": [
         {
@@ -35,31 +47,33 @@
             "method": {
                 "id": @integer@,
                 "code": "UPS",
-                "category_requirement": @integer@,
+                "categoryRequirement": 1,
                 "calculator": "flat_rate",
                 "configuration": {
-                    "amount": 10
+                    "CHANNEL": {
+                        "amount": 10
+                    }
                 },
-                "created_at": "@string@.isDateTime()",
-                "updated_at": "@string@.isDateTime()",
+                "createdAt": "@string@.isDateTime()",
+                "updatedAt": "@string@.isDateTime()",
                 "enabled": true,
                 "_links": {
                     "self": {
-                        "href": @string@
+                        "href": "\/api\/v1\/shipping-methods\/UPS"
                     },
                     "zone": {
-                        "href": @string@
+                        "href": "\/api\/v1\/zones\/EU"
                     }
                 }
             },
-            "created_at": "@string@.isDateTime()",
-            "updated_at": "@string@.isDateTime()",
+            "createdAt": "@string@.isDateTime()",
+            "updatedAt": "@string@.isDateTime()",
             "_links": {
                 "self": {
                     "href": @string@
                 },
                 "method": {
-                    "href": @string@
+                    "href": "\/api\/v1\/shipping-methods\/UPS"
                 },
                 "order": {
                     "href": @string@
@@ -67,5 +81,7 @@
             }
         }
     ],
-    "checkout_state": "shipping_selected"
+    "currencyCode": "EUR",
+    "localeCode": "en_US",
+    "checkoutState": "shipping_selected"
 }

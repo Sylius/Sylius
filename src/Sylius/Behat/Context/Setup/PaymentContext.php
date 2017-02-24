@@ -14,7 +14,7 @@ namespace Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Bundle\CoreBundle\Test\Services\PaymentMethodNameToGatewayConverterInterface;
+use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Model\PaymentMethodTranslationInterface;
@@ -39,9 +39,9 @@ final class PaymentContext implements Context
     private $paymentMethodRepository;
 
     /**
-     * @var FactoryInterface
+     * @var ExampleFactoryInterface
      */
-    private $paymentMethodFactory;
+    private $paymentMethodExampleFactory;
 
     /**
      * @var FactoryInterface
@@ -49,37 +49,37 @@ final class PaymentContext implements Context
     private $paymentMethodTranslationFactory;
 
     /**
-     * @var PaymentMethodNameToGatewayConverterInterface
-     */
-    private $paymentMethodNameToGatewayConverter;
-
-    /**
      * @var ObjectManager
      */
-    private $objectManager;
+    private $paymentMethodManager;
+
+    /**
+     * @var array
+     */
+    private $gatewayFactories;
 
     /**
      * @param SharedStorageInterface $sharedStorage
      * @param PaymentMethodRepositoryInterface $paymentMethodRepository
-     * @param FactoryInterface $paymentMethodFactory
+     * @param ExampleFactoryInterface $paymentMethodExampleFactory
      * @param FactoryInterface $paymentMethodTranslationFactory
-     * @param PaymentMethodNameToGatewayConverterInterface $paymentMethodNameToGatewayConverter
-     * @param ObjectManager $objectManager
+     * @param ObjectManager $paymentMethodManager
+     * @param array $gatewayFactories
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         PaymentMethodRepositoryInterface $paymentMethodRepository,
-        FactoryInterface $paymentMethodFactory,
+        ExampleFactoryInterface $paymentMethodExampleFactory,
         FactoryInterface $paymentMethodTranslationFactory,
-        PaymentMethodNameToGatewayConverterInterface $paymentMethodNameToGatewayConverter,
-        ObjectManager $objectManager
+        ObjectManager $paymentMethodManager,
+        array $gatewayFactories
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->paymentMethodRepository = $paymentMethodRepository;
-        $this->paymentMethodFactory = $paymentMethodFactory;
+        $this->paymentMethodExampleFactory = $paymentMethodExampleFactory;
         $this->paymentMethodTranslationFactory = $paymentMethodTranslationFactory;
-        $this->paymentMethodNameToGatewayConverter = $paymentMethodNameToGatewayConverter;
-        $this->objectManager = $objectManager;
+        $this->paymentMethodManager = $paymentMethodManager;
+        $this->gatewayFactories = $gatewayFactories;
     }
 
     /**
@@ -88,7 +88,7 @@ final class PaymentContext implements Context
      */
     public function storeAllowsPaying($paymentMethodName, $position = null)
     {
-        $this->createPaymentMethod($paymentMethodName, 'PM_'.$paymentMethodName, 'Payment method', true, $position);
+        $this->createPaymentMethod($paymentMethodName, 'PM_'.$paymentMethodName, 'Offline', 'Payment method', true, $position);
     }
 
     /**
@@ -96,7 +96,7 @@ final class PaymentContext implements Context
      */
     public function storeAllowsPayingForAllChannels($paymentMethodName, array $channels)
     {
-        $paymentMethod = $this->createPaymentMethod($paymentMethodName, StringInflector::nameToUppercaseCode($paymentMethodName), 'Payment method', false);
+        $paymentMethod = $this->createPaymentMethod($paymentMethodName, StringInflector::nameToUppercaseCode($paymentMethodName), 'Offline', 'Payment method', false);
 
         foreach ($channels as $channel) {
             $paymentMethod->addChannel($channel);
@@ -108,7 +108,26 @@ final class PaymentContext implements Context
      */
     public function theStoreHasAPaymentMethodWithACode($paymentMethodName, $paymentMethodCode)
     {
-        $this->createPaymentMethod($paymentMethodName, $paymentMethodCode);
+        $this->createPaymentMethod($paymentMethodName, $paymentMethodCode, 'Offline');
+    }
+
+    /**
+     * @Given the store has a payment method :paymentMethodName with a code :paymentMethodCode and Paypal Express Checkout gateway
+     */
+    public function theStoreHasPaymentMethodWithCodeAndPaypalExpressCheckoutGateway(
+        $paymentMethodName,
+        $paymentMethodCode
+    ) {
+        $paymentMethod = $this->createPaymentMethod($paymentMethodName, $paymentMethodCode, 'Paypal Express Checkout');
+        $paymentMethod->getGatewayConfig()->setConfig([
+            'username' => 'TEST',
+            'password' => 'TEST',
+            'signature' => 'TEST',
+            'payum.http_client' => '@sylius.payum.http_client',
+            'sandbox' => true,
+        ]);
+
+        $this->paymentMethodManager->flush();
     }
 
     /**
@@ -123,17 +142,18 @@ final class PaymentContext implements Context
 
         $paymentMethod->addTranslation($translation);
 
-        $this->objectManager->flush();
+        $this->paymentMethodManager->flush();
     }
 
     /**
      * @Given the payment method :paymentMethod is disabled
+     * @Given /^(this payment method) has been disabled$/
      */
     public function theStoreHasAPaymentMethodDisabled(PaymentMethodInterface $paymentMethod)
     {
         $paymentMethod->disable();
 
-        $this->objectManager->flush();
+        $this->paymentMethodManager->flush();
     }
 
     /**
@@ -143,7 +163,7 @@ final class PaymentContext implements Context
     {
         $paymentMethod->setInstructions($instructions);
 
-        $this->objectManager->flush();
+        $this->paymentMethodManager->flush();
     }
 
     /**
@@ -151,29 +171,42 @@ final class PaymentContext implements Context
      */
     public function theStoreHasPaymentMethodNotAssignedToAnyChannel($paymentMethodName)
     {
-        $this->createPaymentMethod($paymentMethodName, 'PM_'.$paymentMethodName, 'Payment method', false);
+        $this->createPaymentMethod($paymentMethodName, 'PM_'.$paymentMethodName, 'Payment method', 'Offline', false);
     }
 
     /**
      * @param string $name
      * @param string $code
-     * @param bool $addForCurrentChannel
+     * @param string $gatewayFactory
      * @param string $description
+     * @param bool $addForCurrentChannel
+     * @param int|null $position
      *
      * @return PaymentMethodInterface
      */
-    private function createPaymentMethod($name, $code, $description = '', $addForCurrentChannel = true, $position = null)
-    {
-        /** @var PaymentMethodInterface $paymentMethod */
-        $paymentMethod = $this->paymentMethodFactory->createNew();
-        $paymentMethod->setName(ucfirst($name));
-        $paymentMethod->setCode($code);
-        $paymentMethod->setPosition($position);
-        $paymentMethod->setGateway($this->paymentMethodNameToGatewayConverter->convert($name));
-        $paymentMethod->setDescription($description);
+    private function createPaymentMethod(
+        $name,
+        $code,
+        $gatewayFactory = 'Offline',
+        $description = '',
+        $addForCurrentChannel = true,
+        $position = null
+    ) {
+        $gatewayFactory = array_search($gatewayFactory, $this->gatewayFactories);
 
-        if ($addForCurrentChannel && $this->sharedStorage->has('channel')) {
-            $paymentMethod->addChannel($this->sharedStorage->get('channel'));
+        /** @var PaymentMethodInterface $paymentMethod */
+        $paymentMethod = $this->paymentMethodExampleFactory->create([
+            'name' => ucfirst($name),
+            'code' => $code,
+            'description' => $description,
+            'gatewayName' => $gatewayFactory,
+            'gatewayFactory' => $gatewayFactory,
+            'enabled' => true,
+            'channels' => ($addForCurrentChannel && $this->sharedStorage->has('channel')) ? [$this->sharedStorage->get('channel')] : [],
+        ]);
+
+        if (null !== $position) {
+            $paymentMethod->setPosition($position);
         }
 
         $this->sharedStorage->set('payment_method', $paymentMethod);

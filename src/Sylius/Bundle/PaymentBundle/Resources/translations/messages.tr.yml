@@ -29,5 +29,4 @@ sylius:
         payment_method:
             description: Açıklama
             enabled: Etkin?
-            gateway: Ağ Geçidi
             name: Ad

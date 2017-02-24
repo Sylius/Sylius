@@ -28,5 +28,4 @@ sylius:
         payment_method:
             description: Descriere
             enabled: Activată?
-            gateway: Gateway
             name: Nume

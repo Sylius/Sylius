@@ -105,6 +105,27 @@ final class ProductAttributeContext implements Context
     }
 
     /**
+     * @Given /^(this product) has (.+?) attribute "([^"]+)" with values "([^"]+)", "([^"]+)"$/
+     */
+    public function thisProductHasSelectAttributeWithValues(
+        ProductInterface $product,
+        $productAttributeType,
+        $productAttributeName,
+        $firstAttributeValue,
+        $secondAttributeValue,
+        $language = 'en_US'
+    ) {
+        $values = [$firstAttributeValue, $secondAttributeValue];
+
+        $attribute = $this->provideProductAttribute($productAttributeType, $productAttributeName);
+        $attribute->setConfiguration(['multiple' => true, 'choices' => $values, 'min' => null, 'max' => null]);
+        $attributeValue = $this->createProductAttributeValue(array_keys($values), $attribute, $language);
+        $product->addAttribute($attributeValue);
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @Given /^(this product) has (.+?) attribute "([^"]+)" with value "([^"]+)"$/
      * @Given /^(this product) has (.+?) attribute "([^"]+)" with value "([^"]+)" in ("[^"]+" locale)$/
      */

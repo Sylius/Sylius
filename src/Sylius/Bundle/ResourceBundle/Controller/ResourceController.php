@@ -13,6 +13,8 @@ namespace Sylius\Bundle\ResourceBundle\Controller;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use FOS\RestBundle\View\View;
+use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
+use Sylius\Component\Resource\Exception\UpdateHandlingException;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -108,6 +110,11 @@ class ResourceController extends Controller
     protected $stateMachine;
 
     /**
+     * @var ResourceUpdateHandlerInterface
+     */
+    protected $resourceUpdateHandler;
+
+    /**
      * @param MetadataInterface $metadata
      * @param RequestConfigurationFactoryInterface $requestConfigurationFactory
      * @param ViewHandlerInterface $viewHandler
@@ -123,6 +130,7 @@ class ResourceController extends Controller
      * @param AuthorizationCheckerInterface $authorizationChecker
      * @param EventDispatcherInterface $eventDispatcher
      * @param StateMachineInterface $stateMachine
+     * @param ResourceUpdateHandlerInterface $resourceUpdateHandler
      */
     public function __construct(
         MetadataInterface $metadata,
@@ -139,7 +147,8 @@ class ResourceController extends Controller
         FlashHelperInterface $flashHelper,
         AuthorizationCheckerInterface $authorizationChecker,
         EventDispatcherInterface $eventDispatcher,
-        StateMachineInterface $stateMachine
+        StateMachineInterface $stateMachine,
+        ResourceUpdateHandlerInterface $resourceUpdateHandler
     ) {
         $this->metadata = $metadata;
         $this->requestConfigurationFactory = $requestConfigurationFactory;
@@ -156,6 +165,7 @@ class ResourceController extends Controller
         $this->authorizationChecker = $authorizationChecker;
         $this->eventDispatcher = $eventDispatcher;
         $this->stateMachine = $stateMachine;
+        $this->resourceUpdateHandler = $resourceUpdateHandler;
     }
 
     /**
@@ -193,7 +203,7 @@ class ResourceController extends Controller
     /**
      * @param Request $request
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function indexAction(Request $request)
     {
@@ -268,6 +278,8 @@ class ResourceController extends Controller
             return $this->viewHandler->handle($configuration, View::create($form, Response::HTTP_BAD_REQUEST));
         }
 
+        $this->eventDispatcher->dispatchInitializeEvent(ResourceActions::CREATE, $configuration, $newResource);
+
         $view = View::create()
             ->setData([
                 'configuration' => $configuration,
@@ -299,6 +311,7 @@ class ResourceController extends Controller
         if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH'], true) && $form->handleRequest($request)->isValid()) {
             $resource = $form->getData();
 
+            /** @var ResourceControllerEvent $event */
             $event = $this->eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource);
 
             if ($event->isStopped() && !$configuration->isHtmlRequest()) {
@@ -307,15 +320,29 @@ class ResourceController extends Controller
             if ($event->isStopped()) {
                 $this->flashHelper->addFlashFromEvent($configuration, $event);
 
+                if ($event->hasResponse()) {
+                    return $event->getResponse();
+                }
+
                 return $this->redirectHandler->redirectToResource($configuration, $resource);
             }
 
-            if ($configuration->hasStateMachine()) {
-                $this->stateMachine->apply($configuration, $resource);
+            try {
+                $this->resourceUpdateHandler->handle($resource, $configuration, $this->manager);
+            } catch (UpdateHandlingException $exception) {
+                if (!$configuration->isHtmlRequest()) {
+                    return $this->viewHandler->handle(
+                        $configuration,
+                        View::create($form, $exception->getApiResponseCode())
+                    );
+                }
+
+                $this->flashHelper->addErrorFlash($configuration, $exception->getFlash());
+
+                return $this->redirectHandler->redirectToReferer($configuration);
             }
 
-            $this->manager->flush();
-            $this->eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource);
+            $postEvent = $this->eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource);
 
             if (!$configuration->isHtmlRequest()) {
                 return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
@@ -323,12 +350,18 @@ class ResourceController extends Controller
 
             $this->flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource);
 
+            if ($postEvent->hasResponse()) {
+                return $postEvent->getResponse();
+            }
+
             return $this->redirectHandler->redirectToResource($configuration, $resource);
         }
 
         if (!$configuration->isHtmlRequest()) {
             return $this->viewHandler->handle($configuration, View::create($form, Response::HTTP_BAD_REQUEST));
         }
+
+        $this->eventDispatcher->dispatchInitializeEvent(ResourceActions::UPDATE, $configuration, $resource);
 
         $view = View::create()
             ->setData([
@@ -410,8 +443,20 @@ class ResourceController extends Controller
             throw new BadRequestHttpException();
         }
 
-        $this->stateMachine->apply($configuration, $resource);
-        $this->manager->flush();
+        try {
+            $this->resourceUpdateHandler->handle($resource, $configuration, $this->manager);
+        } catch (UpdateHandlingException $exception) {
+            if (!$configuration->isHtmlRequest()) {
+                return $this->viewHandler->handle(
+                    $configuration,
+                    View::create($resource, $exception->getApiResponseCode())
+                );
+            }
+
+            $this->flashHelper->addErrorFlash($configuration, $exception->getFlash());
+
+            return $this->redirectHandler->redirectToReferer($configuration);
+        }
 
         $this->eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource);
 
@@ -453,7 +498,7 @@ class ResourceController extends Controller
     protected function findOr404(RequestConfiguration $configuration)
     {
         if (null === $resource = $this->singleResourceProvider->get($configuration, $this->repository)) {
-            throw new NotFoundHttpException();
+            throw new NotFoundHttpException(sprintf('The "%s" has not been found', $this->metadata->getHumanizedName()));
         }
 
         return $resource;

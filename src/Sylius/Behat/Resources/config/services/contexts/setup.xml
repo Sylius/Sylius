@@ -32,7 +32,6 @@
             <argument type="service" id="__symfony__.sylius.behat.factory.default_channel" />
             <argument type="service" id="__symfony__.sylius.repository.channel" />
             <argument type="service" id="__symfony__.sylius.manager.channel" />
-            <argument type="service" id="__symfony__.sylius.storage.currency" />
             <argument>%__behat__.mink.parameters%</argument>
             <tag name="fob.context_service" />
         </service>
@@ -106,10 +105,14 @@
         <service id="sylius.behat.context.setup.payment" class="Sylius\Behat\Context\Setup\PaymentContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="__symfony__.sylius.repository.payment_method" />
-            <argument type="service" id="__symfony__.sylius.factory.payment_method" />
+            <argument type="service" id="__symfony__.sylius.fixture.example_factory.payment_method" />
             <argument type="service" id="__symfony__.sylius.factory.payment_method_translation" />
-            <argument type="service" id="__symfony__.sylius.payment_method_name_to_gateway_converter" />
-            <argument type="service" id="__symfony__.doctrine.orm.entity_manager" />
+            <argument type="service" id="__symfony__.sylius.manager.payment_method" />
+            <argument type="collection">
+                <argument key="offline">Offline</argument>
+                <argument key="paypal_express_checkout">Paypal Express Checkout</argument>
+                <argument key="stripe_checkout">Stripe Checkout</argument>
+            </argument>
             <tag name="fob.context_service" />
         </service>
 

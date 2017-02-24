@@ -24,14 +24,16 @@ Installation
 $ wget http://getcomposer.org/composer.phar
 $ php composer.phar create-project -s beta sylius/sylius-standard project
 $ cd project
+$ php bin/console sylius:install
 $ npm install
 $ npm run gulp
-$ php bin/console sylius:install
 $ php bin/console server:start
 $ open http://localhost:8000/
 ```
 
-To use Vagrant, see [this repository](http://github.com/Sylius/Vagrant).
+More information on installation can be found [in the documentation](http://docs.sylius.org/en/latest/book/installation/vagrant_installation.html).
+
+To use Vagrant, see [this repository](http://github.com/Sylius/Vagrant) and [this guide](http://docs.sylius.org/en/latest/book/installation/installation.html).
 
 Troubleshooting
 ---------------

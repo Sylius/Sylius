@@ -14,10 +14,10 @@ Feature: Adding a new product with images
         When I specify its code as "LAMBORGHINI_GALLARDO"
         And I name it "Lamborghini Gallardo Model" in "English (United States)"
         And I set its price to "$100.00" for "United States" channel
-        And I attach the "lamborghini.jpg" image with a code "banner"
+        And I attach the "lamborghini.jpg" image with "banner" type
         And I add it
         Then I should be notified that it has been successfully created
-        And the product "Lamborghini Gallardo Model" should have an image with a code "banner"
+        And the product "Lamborghini Gallardo Model" should have an image with "banner" type
 
     @ui @javascript
     Scenario: Adding a new simple product with multiple images
@@ -25,12 +25,12 @@ Feature: Adding a new product with images
         When I specify its code as "LAMBORGHINI_GALLARDO"
         And I name it "Lamborghini Gallardo Model" in "English (United States)"
         And I set its price to "$100.00" for "United States" channel
-        And I attach the "lamborghini.jpg" image with a code "banner"
-        And I attach the "lamborghini.jpg" image with a code "thumbnail"
+        And I attach the "lamborghini.jpg" image with "banner" type
+        And I attach the "lamborghini.jpg" image with "thumbnail" type
         And I add it
         Then I should be notified that it has been successfully created
-        And the product "Lamborghini Gallardo Model" should have an image with a code "banner"
-        And this product should have an image with a code "thumbnail"
+        And the product "Lamborghini Gallardo Model" should have an image with "banner" type
+        And it should also have an image with "thumbnail" type
 
     @ui @javascript
     Scenario: Adding a new configurable product with a single image
@@ -41,7 +41,7 @@ Feature: Adding a new product with images
         When I specify its code as "LAMBORGHINI_GALLARDO"
         And I name it "Lamborghini Gallardo Model" in "English (United States)"
         And I add the "Model scale" option to it
-        And I attach the "lamborghini.jpg" image with a code "banner"
+        And I attach the "lamborghini.jpg" image with "banner" type
         And I add it
         Then I should be notified that it has been successfully created
-        And the product "Lamborghini Gallardo Model" should have an image with a code "banner"
+        And the product "Lamborghini Gallardo Model" should have an image with "banner" type

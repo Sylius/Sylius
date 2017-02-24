@@ -17,9 +17,9 @@ use Payum\Core\Security\GenericTokenFactoryInterface;
 use Payum\Core\Security\HttpRequestVerifierInterface;
 use Sylius\Bundle\PayumBundle\Request\GetStatus;
 use Sylius\Bundle\PayumBundle\Request\ResolveNextRoute;
-use Sylius\Bundle\ResourceBundle\Controller\FlashHelperInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ViewHandlerInterface;
+use Sylius\Bundle\ResourceBundle\Form\Registry\FormTypeRegistryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
@@ -46,6 +46,11 @@ final class PayumController
     private $orderRepository;
 
     /**
+     * @var FormTypeRegistryInterface
+     */
+    private $gatewayConfigurationTypeRegistry;
+
+    /**
      * @var MetadataInterface
      */
     private $orderMetadata;
@@ -68,6 +73,7 @@ final class PayumController
     /**
      * @param Payum $payum
      * @param OrderRepositoryInterface $orderRepository
+     * @param FormTypeRegistryInterface $gatewayConfigurationTypeRegistry
      * @param MetadataInterface $orderMetadata
      * @param RequestConfigurationFactoryInterface $requestConfigurationFactory
      * @param ViewHandlerInterface $viewHandler
@@ -76,6 +82,7 @@ final class PayumController
     public function __construct(
         Payum $payum,
         OrderRepositoryInterface $orderRepository,
+        FormTypeRegistryInterface $gatewayConfigurationTypeRegistry,
         MetadataInterface $orderMetadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         ViewHandlerInterface $viewHandler,
@@ -83,6 +90,7 @@ final class PayumController
     ) {
         $this->payum = $payum;
         $this->orderRepository = $orderRepository;
+        $this->gatewayConfigurationTypeRegistry = $gatewayConfigurationTypeRegistry;
         $this->orderMetadata = $orderMetadata;
         $this->requestConfigurationFactory = $requestConfigurationFactory;
         $this->viewHandler = $viewHandler;
@@ -117,7 +125,7 @@ final class PayumController
         }
 
         $captureToken = $this->getTokenFactory()->createCaptureToken(
-            $payment->getMethod()->getGateway(),
+            $payment->getMethod()->getGatewayConfig()->getGatewayName(),
             $payment,
             isset($options['route']) ? $options['route'] : null,
             isset($options['parameters']) ? $options['parameters'] : []

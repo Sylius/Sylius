@@ -1,13 +1,13 @@
 {
     "id": @integer@,
-    "code": "SC1",
-    "name": "Shipping Category 1",
+    "code": "SC2",
+    "name": "Shipping Category 2",
     "description": "@string@",
-    "created_at": "@string@.isDateTime()",
-    "updated_at": "@string@.isDateTime()",
+    "createdAt": "@string@.isDateTime()",
+    "updatedAt": "@string@.isDateTime()",
     "_links": {
         "self": {
-            "href": "@string@"
+            "href": "\/api\/v1\/shipping-categories\/SC2"
         }
     }
 }

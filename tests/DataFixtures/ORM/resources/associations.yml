@@ -1,0 +1,5 @@
+Sylius\Component\Product\Model\ProductAssociationType:
+    productAssociationType1:
+        code: similar
+    productAssociationType2:
+        code: accessories

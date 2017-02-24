@@ -11,9 +11,11 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\DataTransformer;
 
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductTaxonInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
@@ -28,11 +30,28 @@ final class ProductTaxonToTaxonTransformer implements DataTransformerInterface
     private $productTaxonFactory;
 
     /**
-     * @param FactoryInterface $productTaxonFactory
+     * @var RepositoryInterface
      */
-    public function __construct(FactoryInterface $productTaxonFactory)
-    {
+    private $productTaxonRepository;
+
+    /**
+     * @var ProductInterface
+     */
+    private $product;
+
+    /**
+     * @param FactoryInterface $productTaxonFactory
+     * @param RepositoryInterface $productTaxonRepository
+     * @param ProductInterface $product
+     */
+    public function __construct(
+        FactoryInterface $productTaxonFactory,
+        RepositoryInterface $productTaxonRepository,
+        ProductInterface $product
+    ) {
         $this->productTaxonFactory = $productTaxonFactory;
+        $this->productTaxonRepository = $productTaxonRepository;
+        $this->product = $product;
     }
 
     /**
@@ -60,8 +79,14 @@ final class ProductTaxonToTaxonTransformer implements DataTransformerInterface
 
         $this->assertTransformationValueType($taxon, TaxonInterface::class);
 
-        $productTaxon = $this->productTaxonFactory->createNew();
-        $productTaxon->setTaxon($taxon);
+        /** @var ProductTaxonInterface $productTaxon */
+        $productTaxon = $this->productTaxonRepository->findOneBy(['taxon' => $taxon, 'product' => $this->product]);
+
+        if (null === $productTaxon) {
+            $productTaxon = $this->productTaxonFactory->createNew();
+            $productTaxon->setProduct($this->product);
+            $productTaxon->setTaxon($taxon);
+        }
 
         return $productTaxon;
     }

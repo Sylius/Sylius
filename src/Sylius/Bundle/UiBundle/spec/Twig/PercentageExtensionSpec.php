@@ -19,11 +19,6 @@ use Sylius\Bundle\UiBundle\Twig\PercentageExtension;
  */
 final class PercentageExtensionSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(PercentageExtension::class);
-    }
-
     function it_is_twig_extension()
     {
         $this->shouldHaveType(\Twig_Extension::class);
@@ -31,11 +26,6 @@ final class PercentageExtensionSpec extends ObjectBehavior
 
     function it_returns_float_number_as_percentage()
     {
-        $this->getPercentage(0.112)->shouldReturn("11.2 %");
-    }
-
-    function it_has_name()
-    {
-        $this->getName()->shouldReturn('sylius_percentage');
+        $this->getPercentage(0.112)->shouldReturn('11.2 %');
     }
 }

@@ -26,6 +26,7 @@ use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceFormFactoryInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ResourcesCollectionProviderInterface;
+use Sylius\Bundle\ResourceBundle\Controller\ResourceUpdateHandlerInterface;
 use Sylius\Bundle\ResourceBundle\Controller\SingleResourceProviderInterface;
 use Sylius\Bundle\ResourceBundle\Controller\StateMachineInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ViewHandlerInterface;
@@ -70,6 +71,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         AuthorizationCheckerInterface $authorizationChecker,
         EventDispatcherInterface $eventDispatcher,
         StateMachineInterface $stateMachine,
+        ResourceUpdateHandlerInterface $resourceUpdateHandler,
         ContainerInterface $container
     ) {
         $this->beConstructedWith(
@@ -87,7 +89,8 @@ final class ResourceControllerSpec extends ObjectBehavior
             $flashHelper,
             $authorizationChecker,
             $eventDispatcher,
-            $stateMachine
+            $stateMachine,
+            $resourceUpdateHandler
         );
 
         $this->setContainer($container);
@@ -131,6 +134,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         RepositoryInterface $repository,
         SingleResourceProviderInterface $singleResourceProvider
     ) {
+        $metadata->getHumanizedName()->willReturn('product');
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
         $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::SHOW)->willReturn('sylius.product.show');
@@ -139,7 +143,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $singleResourceProvider->get($configuration, $repository)->willReturn(null);
 
         $this
-            ->shouldThrow(new NotFoundHttpException())
+            ->shouldThrow(new NotFoundHttpException('The "product" has not been found'))
             ->during('showAction', [$request])
         ;
     }
@@ -687,6 +691,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         RepositoryInterface $repository,
         SingleResourceProviderInterface $singleResourceProvider
     ) {
+        $metadata->getHumanizedName()->willReturn('product');
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
         $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::UPDATE)->willReturn('sylius.product.update');
@@ -695,7 +700,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $singleResourceProvider->get($configuration, $repository)->willReturn(null);
 
         $this
-            ->shouldThrow(new NotFoundHttpException())
+            ->shouldThrow(new NotFoundHttpException('The "product" has not been found'))
             ->during('updateAction', [$request])
         ;
     }
@@ -889,6 +894,7 @@ final class ResourceControllerSpec extends ObjectBehavior
 
         $eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($event);
         $event->isStopped()->willReturn(true);
+        $event->hasResponse()->willReturn(false);
         $flashHelper->addFlashFromEvent($configuration, $event)->shouldBeCalled();
 
         $manager->flush()->shouldNotBeCalled();
@@ -903,18 +909,20 @@ final class ResourceControllerSpec extends ObjectBehavior
     function it_redirects_to_updated_resource(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
-        RequestConfiguration $configuration,
-        AuthorizationCheckerInterface $authorizationChecker,
-        ObjectManager $manager,
         RepositoryInterface $repository,
+        ObjectManager $manager,
         SingleResourceProviderInterface $singleResourceProvider,
-        ResourceInterface $resource,
         ResourceFormFactoryInterface $resourceFormFactory,
-        Form $form,
-        EventDispatcherInterface $eventDispatcher,
         RedirectHandlerInterface $redirectHandler,
         FlashHelperInterface $flashHelper,
-        ResourceControllerEvent $event,
+        AuthorizationCheckerInterface $authorizationChecker,
+        EventDispatcherInterface $eventDispatcher,
+        ResourceUpdateHandlerInterface $resourceUpdateHandler,
+        RequestConfiguration $configuration,
+        ResourceInterface $resource,
+        Form $form,
+        ResourceControllerEvent $preEvent,
+        ResourceControllerEvent $postEvent,
         Request $request,
         Response $redirectResponse
     ) {
@@ -943,11 +951,13 @@ final class ResourceControllerSpec extends ObjectBehavior
         $form->isValid()->willReturn(true);
         $form->getData()->willReturn($resource);
 
-        $eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($event);
-        $event->isStopped()->willReturn(false);
+        $eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($preEvent);
+        $preEvent->isStopped()->willReturn(false);
 
-        $manager->flush()->shouldBeCalled();
-        $eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource)->shouldBeCalled();
+        $resourceUpdateHandler->handle($resource, $configuration, $manager)->shouldBeCalled();
+        $eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($postEvent);
+
+        $postEvent->hasResponse()->willReturn(false);
 
         $flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource)->shouldBeCalled();
         $redirectHandler->redirectToResource($configuration, $resource)->willReturn($redirectResponse);
@@ -955,18 +965,79 @@ final class ResourceControllerSpec extends ObjectBehavior
         $this->updateAction($request)->shouldReturn($redirectResponse);
     }
 
+    function it_uses_response_from_post_event_if_defined(
+        MetadataInterface $metadata,
+        RequestConfigurationFactoryInterface $requestConfigurationFactory,
+        RepositoryInterface $repository,
+        ObjectManager $manager,
+        SingleResourceProviderInterface $singleResourceProvider,
+        ResourceFormFactoryInterface $resourceFormFactory,
+        RedirectHandlerInterface $redirectHandler,
+        FlashHelperInterface $flashHelper,
+        AuthorizationCheckerInterface $authorizationChecker,
+        EventDispatcherInterface $eventDispatcher,
+        ResourceUpdateHandlerInterface $resourceUpdateHandler,
+        RequestConfiguration $configuration,
+        ResourceInterface $resource,
+        Form $form,
+        ResourceControllerEvent $preEvent,
+        ResourceControllerEvent $postEvent,
+        Request $request,
+        Response $redirectResponse
+    ) {
+        $metadata->getApplicationName()->willReturn('sylius');
+        $metadata->getName()->willReturn('product');
+
+        $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->hasPermission()->willReturn(true);
+        $configuration->getPermission(ResourceActions::UPDATE)->willReturn('sylius.product.update');
+        $configuration->hasStateMachine()->willReturn(false);
+
+        $authorizationChecker->isGranted($configuration, 'sylius.product.update')->willReturn(true);
+
+        $configuration->isHtmlRequest()->willReturn(true);
+        $configuration->getTemplate(ResourceActions::UPDATE . '.html')->willReturn('SyliusShopBundle:Product:update.html.twig');
+
+        $singleResourceProvider->get($configuration, $repository)->willReturn($resource);
+        $resourceFormFactory->create($configuration, $resource)->willReturn($form);
+
+        $request->isMethod('PATCH')->willReturn(false);
+        $request->getMethod()->willReturn('PUT');
+
+        $form->handleRequest($request)->willReturn($form);
+
+        $form->isSubmitted()->willReturn(true);
+        $form->isValid()->willReturn(true);
+        $form->getData()->willReturn($resource);
+
+        $eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($preEvent);
+        $preEvent->isStopped()->willReturn(false);
+
+        $resourceUpdateHandler->handle($resource, $configuration, $manager)->shouldBeCalled();
+        $flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource)->shouldBeCalled();
+        $eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($postEvent);
+
+        $postEvent->hasResponse()->willReturn(true);
+        $postEvent->getResponse()->willReturn($redirectResponse);
+
+        $redirectHandler->redirectToResource($configuration, $resource)->shouldNotBeCalled();
+
+        $this->updateAction($request)->shouldReturn($redirectResponse);
+    }
+
     function it_returns_a_non_html_response_for_correctly_updated_resource(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
-        RequestConfiguration $configuration,
-        AuthorizationCheckerInterface $authorizationChecker,
         ViewHandlerInterface $viewHandler,
-        ObjectManager $manager,
         RepositoryInterface $repository,
+        ObjectManager $manager,
         SingleResourceProviderInterface $singleResourceProvider,
-        ResourceInterface $resource,
         ResourceFormFactoryInterface $resourceFormFactory,
+        AuthorizationCheckerInterface $authorizationChecker,
         EventDispatcherInterface $eventDispatcher,
+        ResourceUpdateHandlerInterface $resourceUpdateHandler,
+        RequestConfiguration $configuration,
+        ResourceInterface $resource,
         ResourceControllerEvent $event,
         Form $form,
         Request $request,
@@ -996,7 +1067,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($event);
         $event->isStopped()->willReturn(false);
 
-        $manager->flush()->shouldBeCalled();
+        $resourceUpdateHandler->handle($resource, $configuration, $manager)->shouldBeCalled();
         $eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource)->shouldBeCalled();
 
         $expectedView = View::create(null, 204);
@@ -1010,7 +1081,6 @@ final class ResourceControllerSpec extends ObjectBehavior
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         RequestConfiguration $configuration,
         AuthorizationCheckerInterface $authorizationChecker,
-        ViewHandlerInterface $viewHandler,
         ObjectManager $manager,
         RepositoryInterface $repository,
         SingleResourceProviderInterface $singleResourceProvider,
@@ -1058,19 +1128,20 @@ final class ResourceControllerSpec extends ObjectBehavior
     function it_applies_state_machine_transition_to_updated_resource_if_configured(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
-        RequestConfiguration $configuration,
-        AuthorizationCheckerInterface $authorizationChecker,
-        ObjectManager $manager,
         RepositoryInterface $repository,
+        ObjectManager $manager,
         SingleResourceProviderInterface $singleResourceProvider,
-        StateMachineInterface $stateMachine,
-        ResourceInterface $resource,
         ResourceFormFactoryInterface $resourceFormFactory,
-        Form $form,
-        EventDispatcherInterface $eventDispatcher,
         RedirectHandlerInterface $redirectHandler,
         FlashHelperInterface $flashHelper,
-        ResourceControllerEvent $event,
+        AuthorizationCheckerInterface $authorizationChecker,
+        EventDispatcherInterface $eventDispatcher,
+        ResourceUpdateHandlerInterface $resourceUpdateHandler,
+        RequestConfiguration $configuration,
+        ResourceInterface $resource,
+        Form $form,
+        ResourceControllerEvent $preEvent,
+        ResourceControllerEvent $postEvent,
         Request $request,
         Response $redirectResponse
     ) {
@@ -1099,12 +1170,13 @@ final class ResourceControllerSpec extends ObjectBehavior
         $form->isValid()->willReturn(true);
         $form->getData()->willReturn($resource);
 
-        $eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($event);
-        $event->isStopped()->willReturn(false);
+        $eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($preEvent);
+        $preEvent->isStopped()->willReturn(false);
 
-        $manager->flush()->shouldBeCalled();
-        $stateMachine->apply($configuration, $resource)->shouldBeCalled();
-        $eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource)->shouldBeCalled();
+        $resourceUpdateHandler->handle($resource, $configuration, $manager)->shouldBeCalled();
+        $eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($postEvent);
+
+        $postEvent->hasResponse()->willReturn(false);
 
         $flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource)->shouldBeCalled();
         $redirectHandler->redirectToResource($configuration, $resource)->willReturn($redirectResponse);
@@ -1140,6 +1212,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         RepositoryInterface $repository,
         SingleResourceProviderInterface $singleResourceProvider
     ) {
+        $metadata->getHumanizedName()->willReturn('product');
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
         $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::DELETE)->willReturn('sylius.product.delete');
@@ -1148,7 +1221,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $singleResourceProvider->get($configuration, $repository)->willReturn(null);
 
         $this
-            ->shouldThrow(new NotFoundHttpException())
+            ->shouldThrow(new NotFoundHttpException('The "product" has not been found'))
             ->during('deleteAction', [$request])
         ;
     }
@@ -1426,6 +1499,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         RepositoryInterface $repository,
         SingleResourceProviderInterface $singleResourceProvider
     ) {
+        $metadata->getHumanizedName()->willReturn('product');
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
         $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::UPDATE)->willReturn('sylius.product.update');
@@ -1434,7 +1508,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $singleResourceProvider->get($configuration, $repository)->willReturn(null);
 
         $this
-            ->shouldThrow(new NotFoundHttpException())
+            ->shouldThrow(new NotFoundHttpException('The "product" has not been found'))
             ->during('applyStateMachineTransitionAction', [$request])
         ;
     }
@@ -1487,16 +1561,17 @@ final class ResourceControllerSpec extends ObjectBehavior
     function it_applies_state_machine_transition_to_resource_and_redirects_for_html_request(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
-        RequestConfiguration $configuration,
-        AuthorizationCheckerInterface $authorizationChecker,
-        StateMachineInterface $stateMachine,
         RepositoryInterface $repository,
         ObjectManager $manager,
         SingleResourceProviderInterface $singleResourceProvider,
-        ResourceInterface $resource,
         RedirectHandlerInterface $redirectHandler,
         FlashHelperInterface $flashHelper,
+        AuthorizationCheckerInterface $authorizationChecker,
         EventDispatcherInterface $eventDispatcher,
+        StateMachineInterface $stateMachine,
+        ResourceUpdateHandlerInterface $resourceUpdateHandler,
+        RequestConfiguration $configuration,
+        ResourceInterface $resource,
         ResourceControllerEvent $event,
         Request $request,
         Response $redirectResponse
@@ -1517,8 +1592,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $event->isStopped()->willReturn(false);
 
         $stateMachine->can($configuration, $resource)->willReturn(true);
-        $stateMachine->apply($configuration, $resource)->shouldBeCalled();
-        $manager->flush()->shouldBeCalled();
+        $resourceUpdateHandler->handle($resource, $configuration, $manager)->shouldBeCalled();
 
         $eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource)->shouldBeCalled();
 
@@ -1575,15 +1649,16 @@ final class ResourceControllerSpec extends ObjectBehavior
     function it_applies_state_machine_transition_on_resource_and_returns_200_for_non_html_requests(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
-        RequestConfiguration $configuration,
-        AuthorizationCheckerInterface $authorizationChecker,
         ViewHandlerInterface $viewHandler,
-        StateMachineInterface $stateMachine,
-        ObjectManager $manager,
         RepositoryInterface $repository,
+        ObjectManager $manager,
         SingleResourceProviderInterface $singleResourceProvider,
-        ResourceInterface $resource,
+        AuthorizationCheckerInterface $authorizationChecker,
         EventDispatcherInterface $eventDispatcher,
+        StateMachineInterface $stateMachine,
+        ResourceUpdateHandlerInterface $resourceUpdateHandler,
+        RequestConfiguration $configuration,
+        ResourceInterface $resource,
         ResourceControllerEvent $event,
         Request $request,
         Response $response
@@ -1604,8 +1679,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $event->isStopped()->willReturn(false);
 
         $stateMachine->can($configuration, $resource)->willReturn(true);
-        $stateMachine->apply($configuration, $resource)->shouldBeCalled();
-        $manager->flush()->shouldBeCalled();
+        $resourceUpdateHandler->handle($resource, $configuration, $manager)->shouldBeCalled();
 
         $eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource)->shouldBeCalled();
 

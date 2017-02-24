@@ -11,6 +11,9 @@
 
 namespace Sylius\Tests\Controller;
 
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\PaymentMethodInterface;
+use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -48,13 +51,15 @@ final class CheckoutShippingApiTest extends CheckoutApiTestCase
     public function it_does_not_allow_to_select_shipping_for_order_that_is_not_addressed()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $checkoutData = $this->loadFixturesFromFile('resources/checkout.yml');
+        $this->loadFixturesFromFile('resources/checkout.yml');
 
-        $url = sprintf('/api/v1/checkouts/select-shipping/%d', $checkoutData['order1']->getId());
-        $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType);
+        $cartId = $this->createCart();
+        $this->addItemToCart($cartId);
+
+        $this->client->request('PUT', $this->getSelectShippingUrl($cartId), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'checkout/shipping_invalid_order_state', Response::HTTP_INTERNAL_SERVER_ERROR);
+        $this->assertResponse($response, 'checkout/shipping_invalid_order_state', Response::HTTP_BAD_REQUEST);
     }
 
     /**
@@ -62,8 +67,65 @@ final class CheckoutShippingApiTest extends CheckoutApiTestCase
      */
     public function it_does_not_allow_to_select_shipping_for_order_without_specifying_shipping_method()
     {
-        // TO-DO
-        // feature cannot be tested properly due to bug with cascade shipments validation
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/checkout.yml');
+
+        $cartId = $this->createCart();
+        $this->addItemToCart($cartId);
+        $this->addressOrder($cartId);
+
+        $this->client->request('PUT', $this->getSelectShippingUrl($cartId), [], [], static::$authorizedHeaderWithContentType);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'checkout/shipping_invalid_order_state', Response::HTTP_BAD_REQUEST);
+    }
+
+    /**
+     * @test
+     */
+    public function it_does_not_provide_details_of_unexisting_cart()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+
+        $this->client->request('PUT', '/api/v1/checkouts/select-shipping/0', [], [], static::$authorizedHeaderWithContentType);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
+    }
+
+    /**
+     * @test
+     */
+    public function it_provides_details_about_available_shipping_method()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/checkout.yml');
+
+        $cartId = $this->createCart();
+        $this->addItemToCart($cartId);
+        $this->addressOrder($cartId);
+
+        $this->client->request('GET', $this->getSelectShippingUrl($cartId), [], [], static::$authorizedHeaderWithContentType);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'checkout/get_available_shipping_methods', Response::HTTP_OK);
+    }
+
+    /**
+     * @test
+     */
+    public function it_does_not_provide_details_about_available_shipping_method_before_addressing()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/checkout.yml');
+
+        $cartId = $this->createCart();
+        $this->addItemToCart($cartId);
+
+        $this->client->request('GET', $this->getSelectShippingUrl($cartId), [], [], static::$authorizedHeaderWithContentType);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'checkout/get_available_shipping_methods_failed', Response::HTTP_BAD_REQUEST);
     }
 
     /**
@@ -72,10 +134,11 @@ final class CheckoutShippingApiTest extends CheckoutApiTestCase
     public function it_does_not_allow_to_select_unexisting_shipping_method()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $checkoutData = $this->loadFixturesFromFile('resources/checkout.yml');
+        $this->loadFixturesFromFile('resources/checkout.yml');
 
-        $orderId = $checkoutData['order1']->getId();
-        $this->addressOrder($orderId);
+        $cartId = $this->createCart();
+        $this->addItemToCart($cartId);
+        $this->addressOrder($cartId);
 
         $data =
 <<<EOT
@@ -88,11 +151,9 @@ final class CheckoutShippingApiTest extends CheckoutApiTestCase
         }
 EOT;
 
-        $url = sprintf('/api/v1/checkouts/select-shipping/%d', $orderId);
-        $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('PUT', $this->getSelectShippingUrl($cartId), [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
-
         $this->assertResponse($response, 'checkout/shipping_validation_failed', Response::HTTP_BAD_REQUEST);
     }
 
@@ -102,29 +163,34 @@ EOT;
     public function it_allows_to_select_shipping_method_for_order()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $checkoutData = $this->loadFixturesFromFile('resources/checkout.yml');
+        $this->loadFixturesFromFile('resources/checkout.yml');
 
-        $orderId = $checkoutData['order1']->getId();
-        $this->addressOrder($orderId);
+        $cartId = $this->createCart();
+        $this->addItemToCart($cartId);
+        $this->addressOrder($cartId);
+
+        $this->client->request('GET', $this->getSelectShippingUrl($cartId), [], [], static::$authorizedHeaderWithContentType);
+
+        $response = $this->client->getResponse();
+        $rawResponse = json_decode($response->getContent(), true);
 
         $data =
 <<<EOT
         {
             "shipments": [
                 {
-                    "method": "{$checkoutData['ups']->getCode()}"
+                    "method": "{$rawResponse['shipments'][0]['methods'][0]['code']}"
                 }
             ]
         }
 EOT;
 
-        $url = sprintf('/api/v1/checkouts/select-shipping/%d', $orderId);
-        $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('PUT', $this->getSelectShippingUrl($cartId), [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
 
-        $this->client->request('GET', sprintf('/api/v1/checkouts/%d', $checkoutData['order1']->getId()), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', $this->getCheckoutSummaryUrl($cartId), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'checkout/shipping_selected_order_response');
@@ -136,25 +202,30 @@ EOT;
     public function it_allows_to_change_order_shipping_method_after_its_already_been_chosen()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $checkoutData = $this->loadFixturesFromFile('resources/checkout.yml');
+        $this->loadFixturesFromFile('resources/checkout.yml');
 
-        $orderId = $checkoutData['order1']->getId();
-        $this->addressOrder($orderId);
-        $this->selectOrderShippingMethod($orderId, $checkoutData['ups']->getCode());
+        $cartId = $this->createCart();
+        $this->addItemToCart($cartId);
+        $this->addressOrder($cartId);
+        $this->selectOrderShippingMethod($cartId);
+
+        $this->client->request('GET', $this->getSelectShippingUrl($cartId), [], [], static::$authorizedHeaderWithContentType);
+
+        $response = $this->client->getResponse();
+        $rawResponse = json_decode($response->getContent(), true);
 
         $data =
 <<<EOT
         {
             "shipments": [
                 {
-                    "method": "{$checkoutData['dhl']->getCode()}"
+                    "method": "{$rawResponse['shipments'][0]['methods'][0]['code']}"
                 }
             ]
         }
 EOT;
 
-        $url = sprintf('/api/v1/checkouts/select-shipping/%d', $orderId);
-        $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('PUT', $this->getSelectShippingUrl($cartId), [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
@@ -166,28 +237,43 @@ EOT;
     public function it_allows_to_change_order_shipping_method_after_selecting_payment_method()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $checkoutData = $this->loadFixturesFromFile('resources/checkout.yml');
+        $this->loadFixturesFromFile('resources/checkout.yml');
 
-        $orderId = $checkoutData['order1']->getId();
-        $this->addressOrder($orderId);
-        $this->selectOrderShippingMethod($orderId, $checkoutData['ups']->getCode());
-        $this->selectOrderPaymentMethod($orderId, $checkoutData['cash_on_delivery']->getId());
+        $cartId = $this->createCart();
+        $this->addItemToCart($cartId);
+        $this->addressOrder($cartId);
+        $this->selectOrderShippingMethod($cartId);
+        $this->selectOrderPaymentMethod($cartId);
+
+        $this->client->request('GET', $this->getSelectShippingUrl($cartId), [], [], static::$authorizedHeaderWithContentType);
+
+        $response = $this->client->getResponse();
+        $rawResponse = json_decode($response->getContent(), true);
 
         $data =
 <<<EOT
         {
             "shipments": [
                 {
-                    "method": "{$checkoutData['dhl']->getCode()}"
+                    "method": "{$rawResponse['shipments'][0]['methods'][0]['code']}"
                 }
             ]
         }
 EOT;
 
-        $url = sprintf('/api/v1/checkouts/select-shipping/%d', $orderId);
-        $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('PUT', $this->getSelectShippingUrl($cartId), [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
+    }
+
+    /**
+     * @param mixed $cartId
+     *
+     * @return string
+     */
+    private function getSelectShippingUrl($cartId)
+    {
+        return sprintf('/api/v1/checkouts/select-shipping/%d', $cartId);
     }
 }

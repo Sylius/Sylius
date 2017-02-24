@@ -31,9 +31,6 @@ sylius:
             unique: این زبان قبلا در سیستم ثبت شده است.
         enabled:
             cannot_disable_base: زبان پایه را نمی توانید غیر فعال کنید.
-    product_image:
-        code:
-            unique: کد تصویر در این محصول باید منحصر به فرد باشد.
     product_variant:
         onHand:
             min: میزان موجودی باید بیشتر از {{ limit }} باشد.
@@ -43,9 +40,6 @@ sylius:
     product_translation:
         short_description:
             max: معرفی کوتاه نباید بیش از {{ limit }} حرف باشد.
-    taxon_image:
-        code:
-            unique: کد تصویر باید در این دسته منحصر به فرد باشد.
     user:
         email:
             unique: این ایمیل قبلا استفاده گردیده.

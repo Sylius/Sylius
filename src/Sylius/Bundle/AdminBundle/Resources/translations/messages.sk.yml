@@ -11,14 +11,18 @@ sylius:
                     header: Katalóg
                     inventory: Skladové zásoby
                     options: Voľby
+                    products: Produkty
+                    taxons: Kategórie
                 configuration:
                     admin_users: Administrátor
                     channels: Kanály
                     countries: Krajiny
                     currencies: Meny
+                    exchange_rates: Výmenné kurzy
                     header: Konfigurácia
                     locales: Jazyky
                     payment_methods: Spôsoby platby
+                    shipping_categories: Kategórie doručenia
                     shipping_methods: Spôsoby doručenia
                     tax_categories: Daňové kategórie
                     tax_rates: Daňové sadzby

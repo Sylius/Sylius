@@ -11,12 +11,7 @@
 
 namespace Sylius\Bundle\AttributeBundle\DependencyInjection;
 
-use Sylius\Bundle\AttributeBundle\Controller\ProductAttributeController;
-use Sylius\Bundle\AttributeBundle\Form\Type\AttributeTranslationType;
-use Sylius\Bundle\AttributeBundle\Form\Type\AttributeType;
-use Sylius\Bundle\AttributeBundle\Form\Type\AttributeValueType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
-use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Attribute\Model\Attribute;
 use Sylius\Component\Attribute\Model\AttributeInterface;

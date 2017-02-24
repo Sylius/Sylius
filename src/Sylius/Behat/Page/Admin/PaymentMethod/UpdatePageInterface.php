@@ -28,14 +28,29 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function nameIt($name, $languageCode);
 
     /**
-     * @param string $gateway
+     * @param string $username
      */
-    public function chooseGateway($gateway);
+    public function setPaypalGatewayUsername($username);
+
+    /**
+     * @param string $password
+     */
+    public function setPaypalGatewayPassword($password);
+
+    /**
+     * @param string $signature
+     */
+    public function setPaypalGatewaySignature($signature);
 
     /**
      * @return bool
      */
     public function isCodeDisabled();
+
+    /**
+     * @return bool
+     */
+    public function isFactoryNameFieldDisabled();
 
     /**
      * @return bool

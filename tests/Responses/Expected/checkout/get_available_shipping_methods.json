@@ -1,0 +1,22 @@
+{
+    "shipments": [
+        {
+            "methods": [
+                {
+                    "id": @integer@,
+                    "code": "UPS",
+                    "name": "UPS",
+                    "description": "@string@",
+                    "price": 10
+                },
+                {
+                    "id": @integer@,
+                    "code": "DHL",
+                    "name": "DHL",
+                    "description": "@string@",
+                    "price": 20
+                }
+            ]
+        }
+    ]
+}

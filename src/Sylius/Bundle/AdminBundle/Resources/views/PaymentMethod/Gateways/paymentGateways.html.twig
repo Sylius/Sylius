@@ -1,0 +1,5 @@
+{% for name, gateway in gatewayFactories %}
+    <a href="{{ path('sylius_admin_payment_method_create', { 'factory': name }) }}" id="{{ name }}" class="item">
+        {{ gateway|trans }}
+    </a>
+{% endfor %}

@@ -53,23 +53,32 @@ final class ManagingPaymentMethodsContext implements Context
     private $notificationChecker;
 
     /**
+     * @var array
+     */
+    private $gatewayFactories;
+
+    /**
      * @param CreatePageInterface $createPage
      * @param IndexPageInterface $indexPage
      * @param UpdatePageInterface $updatePage
      * @param CurrentPageResolverInterface $currentPageResolver
+     * @param NotificationCheckerInterface $notificationChecker
+     * @param array $gatewayFactories
      */
     public function __construct(
         CreatePageInterface $createPage,
         IndexPageInterface $indexPage,
         UpdatePageInterface $updatePage,
         CurrentPageResolverInterface $currentPageResolver,
-        NotificationCheckerInterface $notificationChecker
+        NotificationCheckerInterface $notificationChecker,
+        array $gatewayFactories
     ) {
         $this->createPage = $createPage;
         $this->indexPage = $indexPage;
         $this->updatePage = $updatePage;
         $this->currentPageResolver = $currentPageResolver;
         $this->notificationChecker = $notificationChecker;
+        $this->gatewayFactories = $gatewayFactories;
     }
 
     /**
@@ -162,11 +171,12 @@ final class ManagingPaymentMethodsContext implements Context
     }
 
     /**
-     * @Given I want to create a new payment method
+     * @When I want to create a new offline payment method
+     * @When I want to create a new payment method with :factory gateway factory
      */
-    public function iWantToCreateANewPaymentMethod()
+    public function iWantToCreateANewPaymentMethod($factory = 'Offline')
     {
-        $this->createPage->open();
+        $this->createPage->open(['factory' => array_search($factory, $this->gatewayFactories, true)]);
     }
 
     /**
@@ -284,6 +294,28 @@ final class ManagingPaymentMethodsContext implements Context
     }
 
     /**
+     * @Then I should be notified that I have to specify paypal :element
+     */
+    public function iShouldBeNotifiedThatIHaveToSpecifyPaypal($element)
+    {
+        Assert::same(
+            $this->createPage->getValidationMessage('paypal_'.$element),
+            sprintf('Please enter paypal %s.', $element)
+        );
+    }
+
+    /**
+     * @Then I should be notified that gateway name should contain only letters and underscores
+     */
+    public function iShouldBeNotifiedThatGatewayNameShouldContainOnlyLettersAndUnderscores()
+    {
+        Assert::same(
+            $this->createPage->getValidationMessage('gateway_name'),
+            'Gateway name should contain only letters and underscores.'
+        );
+    }
+
+    /**
      * @Then the payment method with :element :value should not be added
      */
     public function thePaymentMethodWithElementValueShouldNotBeAdded($element, $value)
@@ -324,6 +356,14 @@ final class ManagingPaymentMethodsContext implements Context
     public function theCodeFieldShouldBeDisabled()
     {
         Assert::true($this->updatePage->isCodeDisabled());
+    }
+
+    /**
+     * @Then the factory name field should be disabled
+     */
+    public function theFactoryNameFieldShouldBeDisabled()
+    {
+        Assert::true($this->updatePage->isFactoryNameFieldDisabled());
     }
 
     /**
@@ -394,5 +434,47 @@ final class ManagingPaymentMethodsContext implements Context
         $this->iBrowsePaymentMethods();
 
         Assert::true($this->indexPage->isSingleResourceOnPage([$element => $code]));
+    }
+
+    /**
+     * @When I configure it with test paypal credentials
+     */
+    public function iConfigureItWithTestPaypalCredentials()
+    {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+
+        $currentPage->setPaypalGatewayUsername('TEST');
+        $currentPage->setPaypalGatewayPassword('TEST');
+        $currentPage->setPaypalGatewaySignature('TEST');
+    }
+
+    /**
+     * @When I configure it for username :username with :signature signature
+     */
+    public function iConfigureItForUsernameWithSignature($username, $signature)
+    {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+
+        $currentPage->setPaypalGatewayUsername($username);
+        $currentPage->setPaypalGatewaySignature($signature);
+    }
+
+    /**
+     * @When I do not specify configuration password
+     */
+    public function iDoNotSpecifyConfigurationPassword()
+    {
+        // Intentionally left blank to fulfill context expectation
+    }
+
+    /**
+     * @When I configure it with test stripe gateway data
+     */
+    public function iConfigureItWithTestStripeGatewayData()
+    {
+        $this->createPage->setStripeSecretKey('TEST');
+        $this->createPage->setStripePublishableKey('TEST');
     }
 }

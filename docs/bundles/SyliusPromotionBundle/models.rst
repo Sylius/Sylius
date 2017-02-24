@@ -17,17 +17,17 @@ Configuration is always strict, which means, that if you set ``count`` to **4** 
 PromotionAction
 ---------------
 
-An ``PromotionAction`` defines the the nature of the discount. Common actions are :
+An ``PromotionAction`` defines the nature of the discount. Common actions are :
 
 - percentage discount
 - fixed amount discount
 
 An action is configured via the ``configuration`` attribute which is an array serialized into database. For percentage discount actions, you have to configure the ``percentage`` key, whereas the ``amount`` key is used for fixed discount rules.
 
-Coupon
-------
+PromotionCoupon
+---------------
 
-A ``Coupon`` is a ticket having a ``code`` that can be exchanged for a financial discount. A promotion can have none, one or several coupons.
+A ``PromotionCoupon`` is a ticket having a ``code`` that can be exchanged for a financial discount. A promotion can have none, one or several coupons.
 
 A coupon is considered as valid if the method ``isValid()`` returns ``true``. This method checks the number of times this coupon can be used (attribute ``usageLimit``), the number of times this has already been used (attribute ``used``) and the coupon expiration date (attribute ``expiresAt``). If ``usageLimit`` is not set, the coupon will be usable an unlimited times.
 

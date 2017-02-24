@@ -13,6 +13,7 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <imports>
+        <import resource="services/checkers.xml" />
         <import resource="services/checkout.xml" />
         <import resource="services/context.xml" />
         <import resource="services/dashboard.xml" />
@@ -25,6 +26,7 @@
         <import resource="services/installer_requirements.xml" />
         <import resource="services/listeners.xml" />
         <import resource="services/order_processing.xml" />
+        <import resource="services/payment.xml" />
         <import resource="services/promotion.xml" />
         <import resource="services/shipping.xml" />
         <import resource="services/state_resolvers.xml" />
@@ -65,6 +67,9 @@
         <service id="sylius.payment_method_resolver.default" class="Sylius\Component\Core\Resolver\DefaultPaymentMethodResolver">
             <argument type="service" id="sylius.repository.payment_method" />
         </service>
+        <service id="sylius.shipping_method_resolver.default" class="Sylius\Component\Core\Resolver\DefaultShippingMethodResolver">
+            <argument type="service" id="sylius.repository.shipping_method" />
+        </service>
         <service id="sylius.updater.order.exchange_rate" class="Sylius\Component\Core\Updater\OrderExchangeRateUpdater">
             <argument type="service" id="sylius.repository.currency" />
         </service>
@@ -76,13 +81,17 @@
             <argument type="service" id="sylius.repository.customer" />
         </service>
         <service id="sylius.inventory.order_inventory_operator" class="Sylius\Component\Core\Inventory\Operator\OrderInventoryOperator"/>
+        <service id="sylius.custom_inventory.order_inventory_operator" class="Sylius\Bundle\CoreBundle\Doctrine\ORM\Inventory\Operator\OrderInventoryOperator" decorates="sylius.inventory.order_inventory_operator" public="false">
+            <argument type="service" id="sylius.custom_inventory.order_inventory_operator.inner" />
+            <argument type="service" id="sylius.manager.product_variant" />
+        </service>
 
-        <service id="sylius.custom_factory.order_item" class="Sylius\Component\Core\Factory\CartItemFactory" decorates="sylius.factory.order_item" public="false">
+        <service id="sylius.custom_factory.order_item" class="Sylius\Component\Core\Factory\CartItemFactory" decorates="sylius.factory.order_item" decoration-priority="256" public="false">
             <argument type="service" id="sylius.custom_factory.order_item.inner" />
             <argument type="service" id="sylius.product_variant_resolver.default" />
         </service>
         <service id="sylius.factory.cart_item" alias="sylius.custom_factory.order_item" />
-        <service id="sylius.custom_factory.address" class="Sylius\Component\Core\Factory\AddressFactory" decorates="sylius.factory.address" public="false">
+        <service id="sylius.custom_factory.address" class="Sylius\Component\Core\Factory\AddressFactory" decorates="sylius.factory.address" decoration-priority="256" public="false">
             <argument type="service" id="sylius.custom_factory.address.inner" />
         </service>
 
@@ -95,6 +104,11 @@
             <tag name="twig.extension" />
         </service>
 
+        <service id="sylius.twig.extension.checkout_steps" class="Sylius\Bundle\CoreBundle\Twig\CheckoutStepsExtension" public="false">
+            <argument type="service" id="sylius.templating.helper.checkout_steps" />
+            <tag name="twig.extension" />
+        </service>
+
         <service id="sylius.unique_id_based_order_token_assigner" class="Sylius\Component\Core\TokenAssigner\UniqueIdBasedOrderTokenAssigner" />
 
         <service id="sylius.customer_unique_address_adder" class="Sylius\Component\Core\Customer\CustomerUniqueAddressAdder">
@@ -104,7 +118,7 @@
             <argument type="service" id="sylius.customer_unique_address_adder" />
         </service>
 
-        <service id="sylius.order_item_quantity_modifier.limiting" class="Sylius\Component\Core\Cart\Modifier\LimitingOrderItemQuantityModifier" decorates="sylius.order_item_quantity_modifier">
+        <service id="sylius.order_item_quantity_modifier.limiting" class="Sylius\Component\Core\Cart\Modifier\LimitingOrderItemQuantityModifier" decorates="sylius.order_item_quantity_modifier" decoration-priority="256">
             <argument type="service" id="sylius.order_item_quantity_modifier.limiting.inner" />
             <argument>9999</argument>
         </service>
@@ -144,6 +158,16 @@
         <service id="sylius.customer_statistics_provider" class="Sylius\Component\Core\Customer\Statistics\CustomerStatisticsProvider">
             <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="sylius.repository.channel" />
+        </service>
+
+        <service id="sylius.sequential_order_number_generator" class="Sylius\Bundle\CoreBundle\Order\NumberGenerator\SequentialOrderNumberGenerator">
+            <argument type="service" id="sylius.repository.order_sequence" />
+            <argument type="service" id="sylius.factory.order_sequence" />
+            <argument type="service" id="sylius.manager.order_sequence" />
+        </service>
+
+        <service id="sylius.custom_resource_controller.resource_update_handler" class="Sylius\Bundle\CoreBundle\Doctrine\ORM\Updater\ResourceUpdateHandler" decorates="sylius.resource_controller.resource_update_handler" public="false">
+            <argument type="service" id="sylius.custom_resource_controller.resource_update_handler.inner" />
         </service>
     </services>
 </container>

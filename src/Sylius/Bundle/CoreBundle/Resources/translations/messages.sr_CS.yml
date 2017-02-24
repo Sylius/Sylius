@@ -12,6 +12,8 @@ sylius:
                 product: Proizvod
         group:
             name: Ime
+        image:
+            type: Tip
         order_filter:
             payment_state: Stanje plaćanja
         page:

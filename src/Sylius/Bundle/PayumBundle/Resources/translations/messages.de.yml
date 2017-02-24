@@ -1,0 +1,19 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        gateway_config:
+            type: Typ
+        gateway_configuration:
+            paypal:
+                password: Passwort
+                signature: Signature
+                username: Benutzername
+            stripe:
+                publishable_key: Publishable key
+                secret_key: Secret key
+    payum_gateway_factory:
+        offline: Offline
+        paypal_express_checkout: PayPal Express Checkout
+        stripe_checkout: Stripe Checkout

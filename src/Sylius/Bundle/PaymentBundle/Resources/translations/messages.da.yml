@@ -25,5 +25,4 @@ sylius:
         payment_method:
             description: Beskrivelse
             enabled: Aktiveret?
-            gateway: Gateway
             name: Navn

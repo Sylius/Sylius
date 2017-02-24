@@ -6,34 +6,45 @@ Sylius\Component\Channel\Model\Channel:
             expose: true
             type: integer
             xml_attribute: true
+            groups: [Default, Detailed]
         code:
             expose: true
             type: string
+            groups: [Default, Detailed, DetailedCart]
         name:
             expose: true
             type: string
+            groups: [Detailed]
         hostname:
             expose: true
             type: string
+            groups: [Detailed]
         enabled:
             expose: true
             type: boolean
+            groups: [Detailed]
         description:
             expose: true
             type: string
+            groups: [Detailed]
         color:
             expose: true
             type: string
+            groups: [Detailed]
         createdAt:
             expose: true
             type: DateTime
+            groups: [Detailed]
         updatedAt:
             expose: true
             type: DateTime
+            groups: [Detailed]
     relations:
         - rel: self
           href:
-                route: sylius_api_channel_show
-                parameters:
-                    id: expr(object.getId())
-                    version: 1
+            route: sylius_api_channel_show
+            parameters:
+                code: expr(object.getCode())
+                version: 1
+          exclusion:
+            groups: [Default, Detailed, DetailedCart]

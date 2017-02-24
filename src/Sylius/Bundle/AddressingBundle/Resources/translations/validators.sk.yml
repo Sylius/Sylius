@@ -32,6 +32,7 @@ sylius:
     country:
         code:
             not_blank: Prosím zadajte ISO kód krajiny.
+            regex: Kód krajiny môže obsahovať iba písmená, čísla, pomlčky a znaky podčiarknutia.
             unique: ISO kód krajiny musí byť jedinečný.
     province:
         code:
@@ -45,8 +46,11 @@ sylius:
             not_blank: Prosím zadajte názov provincie.
             unique: Názov provincie musí byť jedinečný.
     zone:
+        scope:
+            not_blank: Prosím, zadajte oblasť.
         code:
             not_blank: Prosím zadajte kód zóny.
+            regex: Kód zóny môže obsahovať iba písmená, čísla, pomlčky a znaky podčiarknutia.
             unique: Kód zóny musí byť jedinečný.
         members:
             min_count: Prosím pridajte zóne aspoň {{ limit }} členov.
@@ -57,4 +61,5 @@ sylius:
     zone_member:
         code:
             not_blank: Prosím zvolte členom zóny.
+            regex: Kód člena zóny môže obsahovať iba písmená, čísla, pomlčky a znaky podčiarknutia.
         unique: Vybraný člen zóny je už v tejto zóne.

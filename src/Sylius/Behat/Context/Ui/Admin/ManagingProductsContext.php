@@ -23,12 +23,13 @@ use Sylius\Behat\Page\Admin\Product\IndexPerTaxonPageInterface;
 use Sylius\Behat\Page\Admin\Product\UpdateConfigurableProductPageInterface;
 use Sylius\Behat\Page\Admin\Product\UpdateSimpleProductPageInterface;
 use Sylius\Behat\Page\Admin\ProductReview\IndexPageInterface as ProductReviewIndexPageInterface;
+use Sylius\Behat\Page\SymfonyPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
-use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -432,7 +433,6 @@ final class ManagingProductsContext implements Context
      */
     public function iSaveMyChanges()
     {
-        /** @var UpdatePageInterface $currentPage */
         $currentPage = $this->resolveCurrentPage();
 
         $currentPage->saveChanges();
@@ -502,10 +502,10 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then product :product should not have any attributes
-     * @Then product :product should have :count attribute
+     * @Then /^product "[^"]+" should not have any attributes$/
+     * @Then /^product "[^"]+" should have (\d+) attributes?$/
      */
-    public function productShouldNotHaveAnyAttributes(ProductInterface $product, $count = 0)
+    public function productShouldNotHaveAnyAttributes($count = 0)
     {
         Assert::same($this->updateSimpleProductPage->getNumberOfAttributes(), (int) $count);
     }
@@ -547,7 +547,7 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @When /^I choose main (taxon "([^"]+)")$/
+     * @When /^I choose main (taxon "[^"]+")$/
      */
     public function iChooseMainTaxon(TaxonInterface $taxon)
     {
@@ -599,25 +599,14 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @When I attach the :path image with a code :code
+     * @When I attach the :path image with :type type
+     * @When I attach the :path image
      */
-    public function iAttachImageWithACode($path, $code)
+    public function iAttachImageWithType($path, $type = null)
     {
-        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->resolveCurrentPage();
 
-        $currentPage->attachImage($path, $code);
-    }
-
-    /**
-     * @When I attach the :path image without a code
-     */
-    public function iAttachImageWithoutACode($path)
-    {
-        /** @var UpdateSimpleProductPageInterface|UpdateConfigurableProductPageInterface $currentPage */
-        $currentPage = $this->resolveCurrentPage();
-
-        $currentPage->attachImage($path);
+        $currentPage->attachImage($path, $type);
     }
 
     /**
@@ -628,7 +617,6 @@ final class ManagingProductsContext implements Context
         ProductAssociationTypeInterface $productAssociationType,
         ...$productsNames
     ) {
-        /** @var UpdateSimpleProductPageInterface|UpdateConfigurableProductPageInterface $currentPage */
         $currentPage = $this->resolveCurrentPage();
 
         $currentPage->associateProducts($productAssociationType, $productsNames);
@@ -641,57 +629,49 @@ final class ManagingProductsContext implements Context
         $productName,
         ProductAssociationTypeInterface $productAssociationType
     ) {
-        /** @var UpdateSimpleProductPageInterface|UpdateConfigurableProductPageInterface $currentPage */
         $currentPage = $this->resolveCurrentPage();
 
         $currentPage->removeAssociatedProduct($productName, $productAssociationType);
     }
 
     /**
-     * @Then /^(this product) should have(?:| also) an image with a code "([^"]*)"$/
-     * @Then /^the (product "[^"]+") should have(?:| also) an image with a code "([^"]*)"$/
+     * @Then /^(?:this product|the product "[^"]+"|it) should(?:| also) have an image with "([^"]*)" type$/
      */
-    public function thisProductShouldHaveAnImageWithCode(ProductInterface $product, $code)
+    public function thisProductShouldHaveAnImageWithType($type)
     {
-        $this->sharedStorage->set('product', $product);
-
-        /** @var UpdateSimpleProductPageInterface|UpdateConfigurableProductPageInterface $currentPage */
         $currentPage = $this->resolveCurrentPage();
 
-        Assert::true($currentPage->isImageWithCodeDisplayed($code));
+        Assert::true($currentPage->isImageWithTypeDisplayed($type));
     }
 
     /**
-     * @Then /^this product should not have(?:| also) an image with a code "([^"]*)"$/
+     * @Then /^(?:this product|it)(?:| also) should not have any images with "([^"]*)" type$/
      */
-    public function thisProductShouldNotHaveAnImageWithCode($code)
+    public function thisProductShouldNotHaveAnyImagesWithType($code)
     {
-        /** @var UpdateSimpleProductPageInterface|UpdateConfigurableProductPageInterface $currentPage */
         $currentPage = $this->resolveCurrentPage();
 
-        Assert::false($currentPage->isImageWithCodeDisplayed($code));
+        Assert::false($currentPage->isImageWithTypeDisplayed($code));
     }
 
     /**
-     * @When I change the image with the :code code to :path
+     * @When I change the image with the :type type to :path
      */
-    public function iChangeItsImageToPathForTheCode($path, $code)
+    public function iChangeItsImageToPathForTheType($type, $path)
     {
-        /** @var UpdateSimpleProductPageInterface|UpdateConfigurableProductPageInterface $currentPage */
         $currentPage = $this->resolveCurrentPage();
 
-        $currentPage->changeImageWithCode($code, $path);
+        $currentPage->changeImageWithType($type, $path);
     }
 
     /**
-     * @When /^I remove(?:| also) an image with a code "([^"]*)"$/
+     * @When /^I(?:| also) remove an image with "([^"]*)" type$/
      */
-    public function iRemoveAnImageWithACode($code)
+    public function iRemoveAnImageWithType($code)
     {
-        /** @var UpdateSimpleProductPageInterface|UpdateConfigurableProductPageInterface $currentPage */
         $currentPage = $this->resolveCurrentPage();
 
-        $currentPage->removeImageWithCode($code);
+        $currentPage->removeImageWithType($code);
     }
 
     /**
@@ -699,10 +679,19 @@ final class ManagingProductsContext implements Context
      */
     public function iRemoveTheFirstImage()
     {
-        /** @var UpdateSimpleProductPageInterface|UpdateConfigurableProductPageInterface $currentPage */
         $currentPage = $this->resolveCurrentPage();
 
         $currentPage->removeFirstImage();
+    }
+
+    /**
+     * @When I change the first image type to :type
+     */
+    public function iChangeTheFirstImageTypeTo($type)
+    {
+        $currentPage = $this->resolveCurrentPage();
+
+        $currentPage->modifyFirstImageType($type);
     }
 
     /**
@@ -718,45 +707,15 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then the image code field should be disabled
+     * @Then /^(this product) should(?:| still) have (?:only one|(\d+)) images?$/
      */
-    public function theImageCodeFieldShouldBeDisabled()
-    {
-        /** @var UpdateSimpleProductPageInterface|UpdateConfigurableProductPageInterface $currentPage */
-        $currentPage = $this->resolveCurrentPage();
-
-        Assert::true($currentPage->isImageCodeDisabled());
-    }
-
-    /**
-     * @Then I should be notified that the image with this code already exists
-     */
-    public function iShouldBeNotifiedThatTheImageWithThisCodeAlreadyExists()
-    {
-        Assert::same($this->updateSimpleProductPage->getValidationMessageForImage(), 'Image code must be unique within this product.');
-    }
-
-    /**
-     * @Then I should be notified that an image code is required
-     */
-    public function iShouldBeNotifiedThatAnImageCodeIsRequired()
-    {
-        /** @var UpdateSimpleProductPageInterface|UpdateConfigurableProductPageInterface $currentPage */
-        $currentPage = $this->resolveCurrentPage();
-
-        Assert::same($currentPage->getValidationMessageForImage(), 'Please enter an image code.');
-    }
-
-    /**
-     * @Then there should still be only one image in the :product product
-     */
-    public function thereShouldStillBeOnlyOneImageInThisTaxon(ProductInterface $product)
+    public function thereShouldStillBeOnlyOneImageInThisProduct(ProductInterface $product, $count = 1)
     {
         $this->iWantToModifyAProduct($product);
 
         $currentPage = $this->resolveCurrentPage();
 
-        Assert::same($currentPage->countImages(), 1);
+        Assert::same($currentPage->countImages(), (int) $count);
     }
 
     /**
@@ -792,7 +751,7 @@ final class ManagingProductsContext implements Context
     /**
      * @Then this product should not have an association :productAssociationType with product :productName
      */
-    public function theProductShouldNotHaveAnAssociationWithProducts(
+    public function theProductShouldNotHaveAnAssociationWithProduct(
         ProductAssociationTypeInterface $productAssociationType,
         $productName
     ) {
@@ -805,23 +764,6 @@ final class ManagingProductsContext implements Context
     public function iShouldBeNotifiedThatSimpleProductCodeHasToBeUnique()
     {
         $this->assertValidationMessage('code', 'Simple product code must be unique among all products and product variants.');
-    }
-
-    /**
-     * @Then I should not be notified that simple product code has to be unique
-     */
-    public function iShouldNotBeNotifiedThatSimpleProductCodeHasToBeUnique()
-    {
-        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->resolveCurrentPage();
-
-        try {
-            $validationMessge = $currentPage->getValidationMessage('code');
-
-            Assert::notSame($validationMessge, 'Simple product code must be unique among all products and product variants.');
-        } catch (ElementNotFoundException $e) {
-            // intentionally left blank, as it could not have any validation at all
-        }
     }
 
     /**
@@ -918,17 +860,6 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then I should be notified that the :imageNumber image should have an unique code
-     */
-    public function iShouldBeNotifiedThatTheFirstImageShouldHaveAnUniqueCode($imageNumber)
-    {
-        Assert::same(
-            $this->updateSimpleProductPage->getValidationMessageForImageAtPosition((int) $imageNumber - 1),
-            'Image code must be unique within this product.'
-        );
-    }
-
-    /**
      * @Then I should be notified that I have to define product variants' prices for newly assigned channels first
      */
     public function iShouldBeNotifiedThatIHaveToDefineProductVariantsPricesForNewlyAssignedChannelsFirst()
@@ -969,7 +900,7 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @return IndexPageInterface|IndexPerTaxonPageInterface|CreateSimpleProductPageInterface|CreateConfigurableProductPageInterface|UpdateSimpleProductPageInterface|UpdateConfigurableProductPageInterface
+     * @return SymfonyPageInterface|IndexPageInterface|IndexPerTaxonPageInterface|CreateSimpleProductPageInterface|CreateConfigurableProductPageInterface|UpdateSimpleProductPageInterface|UpdateConfigurableProductPageInterface
      */
     private function resolveCurrentPage()
     {

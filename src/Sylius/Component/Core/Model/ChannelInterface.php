@@ -85,4 +85,24 @@ interface ChannelInterface extends
      * @param string $contactEmail
      */
     public function setContactEmail($contactEmail);
+
+    /**
+     * @return bool
+     */
+    public function isSkippingShippingStepAllowed();
+
+    /**
+     * @param bool $skippingShippingStepAllowed
+     */
+    public function setSkippingShippingStepAllowed($skippingShippingStepAllowed);
+
+    /**
+     * @return bool
+     */
+    public function isAccountVerificationRequired();
+
+    /**
+     * @param bool $accountVerificationRequired
+     */
+    public function setAccountVerificationRequired($accountVerificationRequired);
 }

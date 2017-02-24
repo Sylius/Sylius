@@ -1,0 +1,20 @@
+{
+    "payments": [
+        {
+            "methods": [
+                {
+                    "id": @integer@,
+                    "code": "cod",
+                    "name": "Cach on delivery",
+                    "description": "@string@"
+                },
+                {
+                    "id": @integer@,
+                    "code": "pbc",
+                    "name": "Pay by check",
+                    "description": "@string@"
+                }
+            ]
+        }
+    ]
+}

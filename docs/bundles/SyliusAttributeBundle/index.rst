@@ -14,3 +14,8 @@ product.
 
     installation
     configuration
+
+Learn more
+----------
+
+* :doc:`Attributes in the Sylius platform </book/products/attributes>` - concept documentation

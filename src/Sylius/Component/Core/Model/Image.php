@@ -24,7 +24,7 @@ abstract class Image implements ImageInterface
     /**
      * @var string
      */
-    protected $code;
+    protected $type;
 
     /**
      * @var \SplFileInfo
@@ -57,17 +57,17 @@ abstract class Image implements ImageInterface
     /**
      * {@inheritdoc}
      */
-    public function getCode()
+    public function getType()
     {
-        return $this->code;
+        return $this->type;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setCode($code)
+    public function setType($type)
     {
-        $this->code = $code;
+        $this->type = $type;
     }
 
     /**

@@ -78,4 +78,12 @@ class TestAppKernel extends AppKernel
     {
         return MockerContainer::class;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function registerBundles()
+    {
+        return array_merge(parent::registerBundles(), [new DAMA\DoctrineTestBundle\DAMADoctrineTestBundle()]);
+    }
 }

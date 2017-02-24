@@ -10,3 +10,7 @@ sylius:
             type: Vrsta
         attribute_type:
             configuration: Postavke
+            select: Odaberite
+        attribute_type_configuration:
+            select:
+                values: Vrijednosti

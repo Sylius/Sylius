@@ -11,6 +11,8 @@
 
 namespace Sylius\Component\Core\Factory;
 
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderItem;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
@@ -55,6 +57,18 @@ final class CartItemFactory implements CartItemFactoryInterface
     {
         $cartItem = $this->createNew();
         $cartItem->setVariant($this->variantResolver->getVariant($product));
+
+        return $cartItem;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createForCart(OrderInterface $order)
+    {
+        /** @var OrderItem $cartItem */
+        $cartItem = $this->createNew();
+        $cartItem->setOrder($order);
 
         return $cartItem;
     }

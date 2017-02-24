@@ -103,7 +103,7 @@ abstract class AttributeValueType extends AbstractResourceType
                     return;
                 }
 
-                $attribute = $this->attributeRepository->find($attributeValue['attribute']);
+                $attribute = $this->attributeRepository->findOneBy(['code' => $attributeValue['attribute']]);
                 if (!$attribute instanceof AttributeInterface) {
                     return;
                 }
@@ -125,6 +125,7 @@ abstract class AttributeValueType extends AbstractResourceType
     {
         $form->add('value', $this->formTypeRegistry->get($attribute->getType(), 'default'), [
             'auto_initialize' => false,
+            'configuration' => $attribute->getConfiguration(),
             'label' => $attribute->getName(),
         ]);
     }

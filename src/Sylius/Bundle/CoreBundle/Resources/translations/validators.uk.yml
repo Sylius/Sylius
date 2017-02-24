@@ -28,9 +28,6 @@ sylius:
             unique: Ця локаль вже існує.
         enabled:
             cannot_disable_base: Базова локаль не може бути недоступною.
-    product_image:
-        code:
-            unique: Код зображення має бути унікальним в межах цього продукту.
     product_variant:
         onHand:
             min: Кількість товару під рукою має бути більшою за {{ limit }}.
@@ -40,9 +37,6 @@ sylius:
     product_translation:
         short_description:
             max: Стислий опис має містити не більше {{ limit }} символів.
-    taxon_image:
-        code:
-            unique: Код зображення має бути унікальним в межах цього таксону.
     user:
         email:
             unique: Ця адреса електронної пошти вже використовується.

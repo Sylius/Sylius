@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class CustomerApiTest extends JsonApiTestCase
+final class CustomerApiTest extends JsonApiTestCase
 {
     /**
      * @var array
@@ -91,8 +91,8 @@ EOT;
         $data =
 <<<EOT
         {
-            "first_name": "John",
-            "last_name": "Diggle",
+            "firstName": "John",
+            "lastName": "Diggle",
             "email": "john.diggle@yahoo.com",
             "gender": "m"
         }
@@ -114,8 +114,8 @@ EOT;
         $data =
 <<<EOT
         {
-            "first_name": "John",
-            "last_name": "Diggle",
+            "firstName": "John",
+            "lastName": "Diggle",
             "email": "john.diggle@yahoo.com",
             "gender": "m",
             "user": {
@@ -256,8 +256,8 @@ EOT;
         $data =
 <<<EOT
         {
-            "first_name": "John",
-            "last_name": "Diggle",
+            "firstName": "John",
+            "lastName": "Diggle",
             "email": "john.diggle@example.com",
             "gender": "m"
         }
@@ -298,8 +298,8 @@ EOT;
         $data =
 <<<EOT
         {
-            "first_name": "John",
-            "last_name": "Doe"
+            "firstName": "John",
+            "lastName": "Doe"
         }
 EOT;
 

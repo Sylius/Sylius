@@ -18,6 +18,7 @@ sylius:
             datetime: Dată și Oră
             integer: Număr întreg
             percent: Procentaj
+            select: Selectaţi
             text: Text
             textarea: Zonă de text
             title: Tipuri de atribut
