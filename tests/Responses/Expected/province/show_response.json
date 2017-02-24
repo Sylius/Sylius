@@ -1,14 +1,14 @@
 {
-  "id": @integer@,
-  "code": "be_lim",
-  "name": "Limburg",
-  "abbreviation": "lim",
-  "_links": {
-    "self": {
-      "href": @string@
-    },
-    "country": {
-      "href": @string@
+    "id": @integer@,
+    "code": "be_lim",
+    "name": "Limburg",
+    "abbreviation": "lim",
+    "_links": {
+        "self": {
+            "href": "\/api\/v1\/countries\/BE\/provinces\/be_lim"
+        },
+        "country": {
+            "href": "\/api\/v1\/countries\/BE"
+        }
     }
-  }
 }
