@@ -26,16 +26,41 @@
             "unitsTotal": 60,
             "adjustments": [],
             "adjustmentsTotal": 0,
-            "variant": {},
+            "variant": {
+                "id": @integer@,
+                "code": "MUG_SW",
+                "optionValues": [],
+                "position": 0,
+                "translations": {
+                    "en_US": {
+                        "id": @integer@,
+                        "name": "Star wars mug"
+                    }
+                },
+                "tracked": false,
+                "channelPricings": [
+                    {
+                        "channel": {
+                            "code": "WEB",
+                            "_links": {
+                                "self": {
+                                    "href": "\/api\/v1\/channels\/WEB"
+                                }
+                            }
+                        },
+                        "price": 20
+                    }
+                ]
+            },
             "_links": {
+                "order": {
+                    "href": "@string@"
+                },
                 "product": {
                     "href": "\/api\/v1\/products\/MUG"
                 },
                 "variant": {
                     "href": "\/api\/v1\/products\/MUG\/variants\/MUG_SW"
-                },
-                "order": {
-                    "href": "@string@"
                 }
             }
         },
@@ -54,16 +79,41 @@
             "unitsTotal": 20,
             "adjustments": [],
             "adjustmentsTotal": 0,
-            "variant": {},
+            "variant": {
+                "id": @integer@,
+                "code": "HARD_AVAILABLE_MUG",
+                "optionValues": [],
+                "position": 3,
+                "translations": {
+                    "en_US": {
+                        "id": @integer@,
+                        "name": "Breaking bad mug"
+                    }
+                },
+                "tracked": true,
+                "channelPricings": [
+                    {
+                        "channel": {
+                            "code": "WEB",
+                            "_links": {
+                                "self": {
+                                    "href": "\/api\/v1\/channels\/WEB"
+                                }
+                            }
+                        },
+                        "price": 20
+                    }
+                ]
+            },
             "_links": {
+                "order": {
+                    "href": "@string@"
+                },
                 "product": {
                     "href": "\/api\/v1\/products\/MUG"
                 },
                 "variant": {
                     "href": "\/api\/v1\/products\/MUG\/variants\/HARD_AVAILABLE_MUG"
-                },
-                "order": {
-                    "href": "@string@"
                 }
             }
         }

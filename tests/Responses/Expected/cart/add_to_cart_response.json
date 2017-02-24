@@ -13,16 +13,51 @@
     "unitsTotal": 20,
     "adjustments": [],
     "adjustmentsTotal": 0,
-    "variant": {},
+    "variant": {
+        "id": @integer@,
+        "code": "MUG_SW",
+        "optionValues": [
+            {
+                "code": "MUG_SIZE_S",
+                "translations": {
+                    "en_US": {
+                        "id": @integer@,
+                        "value": "Size S"
+                    }
+                }
+            }
+        ],
+        "position": 0,
+        "translations": {
+            "en_US": {
+                "id": @integer@,
+                "name": "Star wars mug"
+            }
+        },
+        "tracked": false,
+        "channelPricings": [
+            {
+                "channel": {
+                    "code": "WEB",
+                    "_links": {
+                        "self": {
+                            "href": "\/api\/v1\/channels\/WEB"
+                        }
+                    }
+                },
+                "price": 20
+            }
+        ]
+    },
     "_links": {
+        "order": {
+            "href": "@string@"
+        },
         "product": {
             "href": "\/api\/v1\/products\/MUG"
         },
         "variant": {
             "href": "\/api\/v1\/products\/MUG\/variants\/MUG_SW"
-        },
-        "order": {
-            "href": "@string@"
         }
     }
 }

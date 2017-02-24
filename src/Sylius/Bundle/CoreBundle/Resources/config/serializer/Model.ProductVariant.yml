@@ -13,7 +13,7 @@ Sylius\Component\Core\Model\ProductVariant:
         tracked:
             expose: true
             type: boolean
-            groups: [Default, Detailed]
+            groups: [Default, Detailed, DetailedCart]
         width:
             expose: true
             type: float
@@ -32,11 +32,11 @@ Sylius\Component\Core\Model\ProductVariant:
             groups: [Detailed]
         taxCategory:
             expose: true
-            groups: [Default, Detailed]
+            groups: [Default, Detailed, DetailedCart]
         shippingCategory:
             expose: true
-            groups: [Default, Detailed]
+            groups: [Default, Detailed, DetailedCart]
         channelPricings:
             expose: true
             type: array
-            groups: [Default, Detailed]
+            groups: [Default, Detailed, DetailedCart]
