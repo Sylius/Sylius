@@ -28,7 +28,12 @@
                 "code": "PRODUCT_17",
                 "options": [],
                 "averageRating": 0,
-                "images": []
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/products\/PRODUCT_17"
+                    }
+                }
             },
             {
                 "id": @integer@,
@@ -36,7 +41,12 @@
                 "code": "PRODUCT_18",
                 "options": [],
                 "averageRating": 0,
-                "images": []
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/products\/PRODUCT_18"
+                    }
+                }
             },
             {
                 "id": @integer@,
@@ -44,7 +54,12 @@
                 "code": "PRODUCT_19",
                 "options": [],
                 "averageRating": 0,
-                "images": []
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/products\/PRODUCT_19"
+                    }
+                }
             },
             {
                 "id": @integer@,
@@ -52,7 +67,12 @@
                 "code": "PRODUCT_20",
                 "options": [],
                 "averageRating": 0,
-                "images": []
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/products\/PRODUCT_20"
+                    }
+                }
             },
             {
                 "id": @integer@,
@@ -60,7 +80,12 @@
                 "code": "PRODUCT_21",
                 "options": [],
                 "averageRating": 0,
-                "images": []
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/products\/PRODUCT_21"
+                    }
+                }
             },
             {
                 "id": @integer@,
@@ -68,7 +93,12 @@
                 "code": "PRODUCT_22",
                 "options": [],
                 "averageRating": 0,
-                "images": []
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/products\/PRODUCT_22"
+                    }
+                }
             },
             {
                 "id": @integer@,
@@ -76,7 +106,12 @@
                 "code": "PRODUCT_4",
                 "options": [],
                 "averageRating": 0,
-                "images": []
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/products\/PRODUCT_4"
+                    }
+                }
             },
             {
                 "id": @integer@,
@@ -84,7 +119,12 @@
                 "code": "PRODUCT_5",
                 "options": [],
                 "averageRating": 0,
-                "images": []
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/products\/PRODUCT_5"
+                    }
+                }
             },
             {
                 "id": @integer@,
@@ -92,7 +132,12 @@
                 "code": "PRODUCT_6",
                 "options": [],
                 "averageRating": 0,
-                "images": []
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/products\/PRODUCT_6"
+                    }
+                }
             },
             {
                 "id": @integer@,
@@ -100,7 +145,12 @@
                 "code": "PRODUCT_7",
                 "options": [],
                 "averageRating": 0,
-                "images": []
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/products\/PRODUCT_7"
+                    }
+                }
             }
         ]
     }

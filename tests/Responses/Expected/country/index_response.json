@@ -18,15 +18,30 @@
         "items": [
             {
                 "id": @integer@,
-                "code": "NL"
+                "code": "NL",
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/countries\/NL"
+                    }
+                }
             },
             {
                 "id": @integer@,
-                "code": "BE"
+                "code": "BE",
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/countries\/BE"
+                    }
+                }
             },
             {
                 "id": @integer@,
-                "code": "PL"
+                "code": "PL",
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/countries\/PL"
+                    }
+                }
             }
         ]
     }

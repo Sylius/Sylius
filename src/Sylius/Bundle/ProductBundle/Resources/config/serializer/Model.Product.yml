@@ -37,8 +37,6 @@ Sylius\Component\Product\Model\Product:
                 parameters:
                     code: expr(object.getCode())
                     version: 1
-            exclusion:
-                groups: [Detailed]
         -   rel: variants
             href:
                 route: sylius_api_product_variant_index

@@ -26,5 +26,3 @@ Sylius\Component\Addressing\Model\Country:
                 parameters:
                     code: expr(object.getCode())
                     version: 1
-            exclusion:
-                groups: [Detailed]

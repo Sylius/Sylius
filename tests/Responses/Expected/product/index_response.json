@@ -25,7 +25,12 @@
                 "code": "MUG_BB",
                 "options": [],
                 "averageRating": 0,
-                "images": []
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/products\/MUG_BB"
+                    }
+                }
             },
             {
                 "id": @integer@,
@@ -33,7 +38,12 @@
                 "code": "MUG_LOTR",
                 "options": [],
                 "averageRating": 0,
-                "images": []
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/products\/MUG_LOTR"
+                    }
+                }
             },
             {
                 "id": @integer@,
@@ -41,7 +51,12 @@
                 "code": "MUG_SW",
                 "options": [],
                 "averageRating": 0,
-                "images": []
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/products\/MUG_SW"
+                    }
+                }
             },
             {
                 "id": @integer@,
@@ -49,7 +64,12 @@
                 "code": "PRODUCT_10",
                 "options": [],
                 "averageRating": 0,
-                "images": []
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/products\/PRODUCT_10"
+                    }
+                }
             },
             {
                 "id": @integer@,
@@ -57,7 +77,12 @@
                 "code": "PRODUCT_11",
                 "options": [],
                 "averageRating": 0,
-                "images": []
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/products\/PRODUCT_11"
+                    }
+                }
             },
             {
                 "id": @integer@,
@@ -65,7 +90,12 @@
                 "code": "PRODUCT_12",
                 "options": [],
                 "averageRating": 0,
-                "images": []
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/products\/PRODUCT_12"
+                    }
+                }
             },
             {
                 "id": @integer@,
@@ -73,7 +103,12 @@
                 "code": "PRODUCT_13",
                 "options": [],
                 "averageRating": 0,
-                "images": []
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/products\/PRODUCT_13"
+                    }
+                }
             },
             {
                 "id": @integer@,
@@ -81,7 +116,12 @@
                 "code": "PRODUCT_14",
                 "options": [],
                 "averageRating": 0,
-                "images": []
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/products\/PRODUCT_14"
+                    }
+                }
             },
             {
                 "id": @integer@,
@@ -89,7 +129,12 @@
                 "code": "PRODUCT_15",
                 "options": [],
                 "averageRating": 0,
-                "images": []
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/products\/PRODUCT_15"
+                    }
+                }
             },
             {
                 "id": @integer@,
@@ -97,7 +142,12 @@
                 "code": "PRODUCT_16",
                 "options": [],
                 "averageRating": 0,
-                "images": []
+                "images": [],
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/products\/PRODUCT_16"
+                    }
+                }
             }
         ]
     }

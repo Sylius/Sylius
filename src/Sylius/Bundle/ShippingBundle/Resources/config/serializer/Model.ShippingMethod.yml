@@ -19,8 +19,8 @@ Sylius\Component\Shipping\Model\ShippingMethod:
             type: string
             groups: [Default, Detailed]
     relations:
-        - rel: self
-          href:
+        -   rel: self
+            href:
                 route: sylius_api_shipping_method_show
                 parameters:
                     code: expr(object.getCode())

@@ -24,4 +24,9 @@
             }
         }
     ]
+    "_links": {
+        "self": {
+            "href": "\/api\/v1\/products\/MUG_SIZE"
+        }
+    }
 }

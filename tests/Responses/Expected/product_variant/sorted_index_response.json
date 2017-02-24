@@ -5,16 +5,16 @@
     "total": 20,
     "_links": {
         "self": {
-            "href": "@string@"
+            "href": "\/api\/v1\/products\/MUG_SW\/variants\/?sorting%5Bposition%5D=desc&page=1&limit=10"
         },
         "first": {
-            "href": "@string@"
+            "href": "\/api\/v1\/products\/MUG_SW\/variants\/?sorting%5Bposition%5D=desc&page=1&limit=10"
         },
         "last": {
-            "href": "@string@"
+            "href": "\/api\/v1\/products\/MUG_SW\/variants\/?sorting%5Bposition%5D=desc&page=2&limit=10"
         },
         "next": {
-            "href": "@string@"
+            "href": "\/api\/v1\/products\/MUG_SW\/variants\/?sorting%5Bposition%5D=desc&page=2&limit=10"
         }
     },
     "_embedded": {
@@ -35,10 +35,7 @@
                 "channelPricings": [],
                 "_links": {
                     "self": {
-                        "href": "@string@"
-                    },
-                    "product": {
-                        "href": "@string@"
+                        "href": "\/api\/v1\/products\/MUG_SW\/variants\/MUG_20"
                     }
                 }
             },
@@ -58,10 +55,7 @@
                 "channelPricings": [],
                 "_links": {
                     "self": {
-                        "href": "@string@"
-                    },
-                    "product": {
-                        "href": "@string@"
+                        "href": "\/api\/v1\/products\/MUG_SW\/variants\/MUG_19"
                     }
                 }
             },
@@ -81,10 +75,7 @@
                 "channelPricings": [],
                 "_links": {
                     "self": {
-                        "href": "@string@"
-                    },
-                    "product": {
-                        "href": "@string@"
+                        "href": "\/api\/v1\/products\/MUG_SW\/variants\/MUG_18"
                     }
                 }
             },
@@ -104,10 +95,7 @@
                 "channelPricings": [],
                 "_links": {
                     "self": {
-                        "href": "@string@"
-                    },
-                    "product": {
-                        "href": "@string@"
+                        "href": "\/api\/v1\/products\/MUG_SW\/variants\/MUG_17"
                     }
                 }
             },
@@ -127,10 +115,7 @@
                 "channelPricings": [],
                 "_links": {
                     "self": {
-                        "href": "@string@"
-                    },
-                    "product": {
-                        "href": "@string@"
+                        "href": "\/api\/v1\/products\/MUG_SW\/variants\/MUG_16"
                     }
                 }
             },
@@ -150,10 +135,7 @@
                 "channelPricings": [],
                 "_links": {
                     "self": {
-                        "href": "@string@"
-                    },
-                    "product": {
-                        "href": "@string@"
+                        "href": "\/api\/v1\/products\/MUG_SW\/variants\/MUG_15"
                     }
                 }
             },
@@ -173,10 +155,7 @@
                 "channelPricings": [],
                 "_links": {
                     "self": {
-                        "href": "@string@"
-                    },
-                    "product": {
-                        "href": "@string@"
+                        "href": "\/api\/v1\/products\/MUG_SW\/variants\/MUG_14"
                     }
                 }
             },
@@ -196,10 +175,7 @@
                 "channelPricings": [],
                 "_links": {
                     "self": {
-                        "href": "@string@"
-                    },
-                    "product": {
-                        "href": "@string@"
+                        "href": "\/api\/v1\/products\/MUG_SW\/variants\/MUG_13"
                     }
                 }
             },
@@ -219,10 +195,7 @@
                 "channelPricings": [],
                 "_links": {
                     "self": {
-                        "href": "@string@"
-                    },
-                    "product": {
-                        "href": "@string@"
+                        "href": "\/api\/v1\/products\/MUG_SW\/variants\/MUG_12"
                     }
                 }
             },
@@ -242,10 +215,7 @@
                 "channelPricings": [],
                 "_links": {
                     "self": {
-                        "href": "@string@"
-                    },
-                    "product": {
-                        "href": "@string@"
+                        "href": "\/api\/v1\/products\/MUG_SW\/variants\/MUG_11"
                     }
                 }
             }

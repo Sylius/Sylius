@@ -42,5 +42,3 @@ Sylius\Component\Addressing\Model\Zone:
                 parameters:
                     code: expr(object.getCode())
                     version: 1
-            exclusion:
-                groups: [Detailed]

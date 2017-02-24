@@ -20,7 +20,12 @@
                 "id": @integer@,
                 "code": "EU",
                 "name": "European Union",
-                "type": "country"
+                "type": "country",
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/zones\/EU"
+                    }
+                }
             }
         ]
     }

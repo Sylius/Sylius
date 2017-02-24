@@ -18,4 +18,11 @@ Sylius\Component\Product\Model\ProductOption:
         values:
             expose: true
             type: array
-            groups: [Default, Detailed]
+            groups: [Detailed]
+    relations:
+        -   rel: self
+            href:
+                route: sylius_api_product_show
+                parameters:
+                    code: expr(object.getCode())
+                    version: 1

@@ -39,8 +39,6 @@ Sylius\Component\Promotion\Model\PromotionCoupon:
                     promotionCode: expr(object.getPromotion().getCode())
                     code: expr(object.getCode())
                     version: 1
-            exclusion:
-                groups: [Detailed]
         -   rel: promotion
             href:
                 route: sylius_api_promotion_show

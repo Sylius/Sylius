@@ -47,11 +47,9 @@ Sylius\Component\Taxonomy\Model\Taxon:
         getName:
             serialized_name: name
     relations:
-        - rel: self
-          href:
-            route: sylius_api_taxon_show
-            parameters:
-                code: expr(object.getCode())
-                version: 1
-            exclusion:
-                groups: [Detailed]
+        -   rel: self
+            href:
+                route: sylius_api_taxon_show
+                parameters:
+                    code: expr(object.getCode())
+                    version: 1

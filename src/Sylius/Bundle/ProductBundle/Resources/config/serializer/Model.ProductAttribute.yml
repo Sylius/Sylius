@@ -14,5 +14,3 @@ Sylius\Component\Product\Model\ProductAttribute:
                 parameters:
                     code: expr(object.getCode())
                     version: 1
-            exclusion:
-                groups: [Detailed]

@@ -36,7 +36,7 @@ Sylius\Component\Addressing\Model\Province:
                     code: expr(object.getCode())
                     version: 1
             exclusion:
-                groups: [Detailed]
+                groups: [Default, Detailed]
         -   rel: country
             href:
                 route: sylius_api_country_show

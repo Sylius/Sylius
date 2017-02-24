@@ -32,6 +32,11 @@
                         "locale": "en_US",
                         "name": "Mug collection"
                     }
+                },
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/product-attributes\/mug_material"
+                    }
                 }
             },
             {
@@ -49,6 +54,11 @@
                         "id": @integer@,
                         "locale": "en_US",
                         "name": "Mug material"
+                    }
+                },
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/product-attributes\/mug_collection"
                     }
                 }
             }
