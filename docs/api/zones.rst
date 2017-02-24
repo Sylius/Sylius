@@ -22,6 +22,24 @@ If you request a zone via API, you will receive an object with the following fie
 +-----------+------------------------+
 | type      | Type of the zone       |
 +-----------+------------------------+
+
+If you request for more detailed data, you will receive an object with the following fields:
+
++-----------+------------------------+
+| Field     | Description            |
++===========+========================+
+| id        | Id of the zone         |
++-----------+------------------------+
+| code      | Unique zone identifier |
++-----------+------------------------+
+| name      | Name of the zone       |
++-----------+------------------------+
+| type      | Type of the zone       |
++-----------+------------------------+
+| scope     | Scope of the zone      |
++-----------+------------------------+
+| members   | Members of the zone    |
++-----------+------------------------+
 | createdAt | Date of creation       |
 +-----------+------------------------+
 | updatedAt | Date of last update    |
@@ -29,7 +47,7 @@ If you request a zone via API, you will receive an object with the following fie
 
 .. note::
 
-	Read more about :doc:`the Zone model in the component docs</components/Addressing/models>`.
+    Read more about :doc:`the Zone model in the component docs</components/Addressing/models>`.
 
 Creating a Zone
 ---------------
@@ -61,16 +79,16 @@ Definition
 
 .. note::
 
-    Read more about :doc: `Zone types in the component docs</components/Addressing/zone_types>`.
+    Read more about :doc:`Zone types in the component docs</components/Addressing/zone_types>`.
 
 Example
 ^^^^^^^
 
-To create a new zone use the below method:
+To create a new country zone use the below method:
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/zones/ \
+    $ curl http://demo.sylius.org/api/v1/zones/country \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST \
@@ -101,6 +119,7 @@ Exemplary Response
         "code": "EU",
         "name": "European Union",
         "type": "country",
+        "scope": "all",
         "_links": {
             "self": {
                 "href": "\/api\/v1\/zones\/EU"
@@ -193,7 +212,7 @@ To see the details of the zone with ``code = EU`` use the below method:
 
 .. note::
 
-    The *EU* is an exemplary value. Your value can be different.
+    The *EU* code is an exemplary value. Your value can be different.
     Check in the list of all zones if you are not sure which code should be used.
 
 Exemplary Response
@@ -210,6 +229,7 @@ Exemplary Response
         "code": "EU",
         "name": "European Union",
         "type": "country",
+        "scope": "all",
         "_links": {
             "self": {
                 "href": "\/api\/v1\/zones\/EU"
