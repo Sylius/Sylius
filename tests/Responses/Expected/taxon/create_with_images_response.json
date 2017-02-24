@@ -15,23 +15,11 @@
         {
             "id": @integer@,
             "type": "ford",
-            "file": {
-                "test": true,
-                "originalName": "ford",
-                "mimeType": "application\/octet-stream",
-                "error": 0
-            },
             "path": "@string@"
         },
         {
             "id": @integer@,
             "type": "mugs",
-            "file": {
-                "test": true,
-                "originalName": "mugs",
-                "mimeType": "application\/octet-stream",
-                "error": 0
-            },
             "path": "@string@"
         }
     ],

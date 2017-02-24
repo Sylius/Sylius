@@ -18,4 +18,3 @@ Sylius\Component\Core\Model\Image:
         owner:
             expose: true
             groups: [Detailed]
-
