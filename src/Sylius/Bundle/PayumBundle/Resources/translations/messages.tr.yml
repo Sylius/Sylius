@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        gateway_config:
+            type: Türü
+        gateway_configuration:
+            paypal:
+                password: Şifre
+                username: Kullanıcı adı

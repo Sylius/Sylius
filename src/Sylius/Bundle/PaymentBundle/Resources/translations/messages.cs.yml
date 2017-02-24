@@ -29,5 +29,4 @@ sylius:
         payment_method:
             description: Popis
             enabled: Povoleno?
-            gateway: Brána
             name: Jméno

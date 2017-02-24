@@ -29,7 +29,6 @@ sylius:
         payment_method:
             description: Описание
             enabled: Включен?
-            gateway: Терминал
             instructions: Инструкции
             name: Название
             position: Позиция

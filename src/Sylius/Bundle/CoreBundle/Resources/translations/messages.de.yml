@@ -33,10 +33,11 @@ sylius:
             locales: Gebietsschemata
             payment_methods: Zahlungsmethoden
             shipping_methods: Versandmethoden
+            skipping_shipping_step_allowed: Versandart überspringen, wenn nur eine Versandart verfügbar ist?
             tax_calculation_strategy: Steuerberechnungsgrundlage
             tax_zone_default: Standard Steuerzone
             taxonomies: Klassifizierungen
-            theme: Template
+            theme: Theme
         image:
             type: Typ
             file: Foto

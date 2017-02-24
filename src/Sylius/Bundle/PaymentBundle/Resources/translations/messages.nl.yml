@@ -29,7 +29,6 @@ sylius:
         payment_method:
             description: Omschrijving
             enabled: Actief?
-            gateway: Gateway
             instructions: Instructies
             name: Naam
             position: Positie

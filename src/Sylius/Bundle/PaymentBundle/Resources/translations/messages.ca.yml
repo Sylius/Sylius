@@ -26,5 +26,4 @@ sylius:
         payment_method:
             description: Descripció
             enabled: Activat?
-            gateway: Pasarel·la
             name: Nom
