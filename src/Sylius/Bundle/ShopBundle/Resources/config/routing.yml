@@ -48,9 +48,6 @@ sylius_shop_account:
     resource: "@SyliusShopBundle/Resources/config/routing/account.yml"
     prefix: /account
 
-sylius_shop_payum:
-    resource: "@SyliusShopBundle/Resources/config/routing/payum.yml"
-
 sylius_shop_switch_currency:
     path: /switch-currency/{code}
     methods: [GET]
