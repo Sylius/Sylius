@@ -11,6 +11,8 @@
 
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Mapping;
 use Sylius\Bundle\OrderBundle\Doctrine\ORM\OrderRepository as BaseOrderRepository;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -22,6 +24,21 @@ use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 
 class OrderRepository extends BaseOrderRepository implements OrderRepositoryInterface
 {
+    /**
+     * @var AssociationHydrator
+     */
+    protected $associationHydrator;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __construct(EntityManager $em, Mapping\ClassMetadata $class)
+    {
+        parent::__construct($em, $class);
+
+        $this->associationHydrator = new AssociationHydrator($this->_em, $class);
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -145,7 +162,8 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
      */
     public function findCartByChannel($id, ChannelInterface $channel)
     {
-        return $this->createQueryBuilder('o')
+        /** @var OrderInterface $order */
+        $order = $this->createQueryBuilder('o')
             ->andWhere('o.id = :id')
             ->andWhere('o.state = :state')
             ->andWhere('o.channel = :channel')
@@ -155,6 +173,23 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
             ->getQuery()
             ->getOneOrNullResult()
         ;
+
+        $this->associationHydrator->hydrateAssociations($order, [
+            'adjustments',
+            'items',
+            'items.adjustments',
+            'items.units',
+            'items.units.adjustments',
+            'items.variant.optionValues',
+            'items.variant.optionValues.translations',
+            'items.variant.product',
+            'items.variant.product.translations',
+            'items.variant.product.images',
+            'items.variant.product.options',
+            'items.variant.product.options.translations',
+        ]);
+
+        return $order;
     }
 
     /**
