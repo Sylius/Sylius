@@ -8,20 +8,6 @@ Promotion Coupon API response structure
 
 If you request a promotion coupon via API, you will receive an object with the following fields:
 
-+-----------+--------------------------------------------------+
-| Field     | Description                                      |
-+===========+==================================================+
-| id        | Id of the coupon                                 |
-+-----------+--------------------------------------------------+
-| code      | Unique coupon identifier                         |
-+-----------+--------------------------------------------------+
-| used      | Number of times this coupon has been used        |
-+-----------+--------------------------------------------------+
-| expiresAt | The date when the coupon will be no longer valid |
-+-----------+--------------------------------------------------+
-
-If you request for more detailed data, you will receive an object with the following fields:
-
 +------------+--------------------------------------------------+
 | Field      | Description                                      |
 +============+==================================================+
@@ -35,10 +21,28 @@ If you request for more detailed data, you will receive an object with the follo
 +------------+--------------------------------------------------+
 | usageLimit | Number of times this coupon has been used        |
 +------------+--------------------------------------------------+
-| createdAt  | Date of creation                                 |
-+------------+--------------------------------------------------+
-| updatedAt  | Date of last update                              |
-+------------+--------------------------------------------------+
+
+If you request for more detailed data, you will receive an object with the following fields:
+
++-----------------------+--------------------------------------------------+
+| Field                 | Description                                      |
++=======================+==================================================+
+| id                    | Id of the coupon                                 |
++-----------------------+--------------------------------------------------+
+| code                  | Unique coupon identifier                         |
++-----------------------+--------------------------------------------------+
+| used                  | Number of times this coupon has been used        |
++-----------------------+--------------------------------------------------+
+| expiresAt             | The date when the coupon will be no longer valid |
++-----------------------+--------------------------------------------------+
+| usageLimit            | Number of times this coupon has been used        |
++-----------------------+--------------------------------------------------+
+| createdAt             | Date of creation                                 |
++-----------------------+--------------------------------------------------+
+| updatedAt             | Date of last update                              |
++-----------------------+--------------------------------------------------+
+| perCustomerUsageLimit | Date of last update                              |
++-----------------------+--------------------------------------------------+
 
 .. note::
 
@@ -79,7 +83,7 @@ To see the details of the promotion coupon with ``code = A3BCB`` which belongs t
 
 .. note::
 
-    The *A3BCB* and *autumnal_promo* are just examples. Your value can be different.
+    The *A3BCB* and *autumnal_promo* codes are just examples. Your value can be different.
 
 Exemplary Response
 ^^^^^^^^^^^^^^^^^^
@@ -176,8 +180,6 @@ Exemplary Response
                     "usageLimit": 5,
                     "used": 0,
                     "expiresAt": "2017-11-12T00:00:00+0100",
-                    "createdAt": "2017-02-21T11:11:59+0100",
-                    "updatedAt": "2017-02-21T11:11:59+0100",
                     "_links": {
                         "self": {
                             "href": "\/api\/v1\/promotions\/autumnal_promo\/coupons\/A3BCB"
@@ -193,14 +195,9 @@ Exemplary Response
                     "usageLimit": 5,
                     "used": 0,
                     "expiresAt": "2017-11-12T00:00:00+0100",
-                    "createdAt": "2017-02-21T11:11:59+0100",
-                    "updatedAt": "2017-02-21T11:11:59+0100",
                     "_links": {
                         "self": {
                             "href": "\/api\/v1\/promotions\/autumnal_promo\/coupons\/C9596"
-                        },
-                        "promotion": {
-                            "href": "\/api\/v1\/promotions\/autumnal_promo"
                         }
                     }
                 },
@@ -210,14 +207,9 @@ Exemplary Response
                     "usageLimit": 5,
                     "used": 0,
                     "expiresAt": "2017-11-12T00:00:00+0100",
-                    "createdAt": "2017-02-21T11:11:59+0100",
-                    "updatedAt": "2017-02-21T11:11:59+0100",
                     "_links": {
                         "self": {
                             "href": "\/api\/v1\/promotions\/autumnal_promo\/coupons\/53385"
-                        },
-                        "promotion": {
-                            "href": "\/api\/v1\/promotions\/autumnal_promo"
                         }
                     }
                 }
