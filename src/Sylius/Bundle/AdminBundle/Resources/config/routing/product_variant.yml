@@ -4,7 +4,7 @@ sylius_admin_product_variant_index:
     defaults:
         _controller: sylius.controller.product_variant:indexAction
         _sylius:
-            template: "@SyliusAdmin/Crud/index.html.twig"
+            template: "@SyliusAdmin/ProductVariant/index.html.twig"
             grid: sylius_admin_product_variant
             section: admin
             permission: true

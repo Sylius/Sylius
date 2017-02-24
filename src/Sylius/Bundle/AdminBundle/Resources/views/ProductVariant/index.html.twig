@@ -1,0 +1,19 @@
+{% extends 'SyliusAdminBundle::layout.html.twig' %}
+
+{% import 'SyliusUiBundle:Macro:headers.html.twig' as headers %}
+
+{% set definition = resources.definition %}
+{% set data = resources.data %}
+
+{% set header = configuration.vars.header|default(metadata.applicationName~'.ui.'~metadata.pluralName) %}
+
+{% block title %}{{ parent() }} {{ header|trans }}{% endblock %}
+
+{% block content %}
+    <div class="ui stackable two column grid">
+        {% include '@SyliusAdmin/ProductVariant/Index/_header.html.twig' %}
+        {% include '@SyliusAdmin/Crud/Index/_actions.html.twig' %}
+    </div>
+
+    {% include '@SyliusAdmin/Crud/Index/_content.html.twig' %}
+{% endblock %}
