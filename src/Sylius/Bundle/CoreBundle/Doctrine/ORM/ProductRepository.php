@@ -11,6 +11,8 @@
 
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Mapping;
 use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
@@ -22,6 +24,22 @@ use Sylius\Component\Core\Repository\ProductRepositoryInterface;
  */
 class ProductRepository extends BaseProductRepository implements ProductRepositoryInterface
 {
+    /**
+     * @var AssociationHydrator
+     */
+    private $associationHydrator;
+
+    /**
+     * @param EntityManager $em
+     * @param Mapping\ClassMetadata $class
+     */
+    public function __construct(EntityManager $em, Mapping\ClassMetadata $class)
+    {
+        parent::__construct($em, $class);
+
+        $this->associationHydrator = new AssociationHydrator($em, $class);
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -98,7 +116,7 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
      */
     public function findOneByChannelAndSlug(ChannelInterface $channel, $locale, $slug)
     {
-        return $this->createQueryBuilder('o')
+        $product = $this->createQueryBuilder('o')
             ->addSelect('translation')
             ->innerJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
             ->andWhere('translation.slug = :slug')
@@ -110,6 +128,18 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
             ->getQuery()
             ->getOneOrNullResult()
         ;
+
+        $this->associationHydrator->hydrateAssociations($product, [
+            'images',
+            'options',
+            'options.translations',
+            'variants',
+            'variants.channelPricings',
+            'variants.optionValues',
+            'variants.optionValues.translations',
+        ]);
+
+        return $product;
     }
 
     /**

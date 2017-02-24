@@ -90,7 +90,7 @@ final class AssociationHydrator
             ->from($classMetadata->name, 'subject')
             ->leftJoin(sprintf('subject.%s', $finalAssociation), 'associations')
             ->where('subject IN (:subjects)')
-            ->setParameter('subjects', $subjects)
+            ->setParameter('subjects', array_unique($subjects, \SORT_REGULAR))
             ->getQuery()
             ->getResult()
         ;
