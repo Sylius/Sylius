@@ -76,6 +76,26 @@ final class EventDispatcher implements EventDispatcherInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function dispatchInitializeEvent(
+        $eventName,
+        RequestConfiguration $requestConfiguration,
+        ResourceInterface $resource
+    ) {
+        $eventName = $requestConfiguration->getEvent() ?: $eventName;
+        $metadata = $requestConfiguration->getMetadata();
+        $event = $this->getEvent($resource);
+
+        $this->eventDispatcher->dispatch(
+            sprintf('%s.%s.initialize_%s', $metadata->getApplicationName(), $metadata->getName(), $eventName),
+            $event
+        );
+
+        return $event;
+    }
+
+    /**
      * @param ResourceInterface $resource
      *
      * @return ResourceControllerEvent

@@ -43,6 +43,7 @@ Sylius\Component\Product\Model\ProductVariantTranslation:
 Sylius\Component\Core\Model\ProductVariant:
      productVariant{1..20}:
          code: MUG_<current()>
+         version: 1
          product: "@product1"
          fallbackLocale: en_US
          currentLocale: de
@@ -51,6 +52,7 @@ Sylius\Component\Core\Model\ProductVariant:
             - "@productVariantTranslation<current()>"
      productVariant21:
              code: SMALL_STICKER
+             version: 1
              product: "@product2"
              fallbackLocale: en_US
              currentLocale: de

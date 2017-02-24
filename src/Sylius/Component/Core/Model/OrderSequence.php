@@ -30,4 +30,12 @@ class OrderSequence extends BaseOrderSequence implements OrderSequenceInterface
     {
         return $this->version;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setVersion($version)
+    {
+        $this->version = $version;
+    }
 }

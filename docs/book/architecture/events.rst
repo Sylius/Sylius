@@ -21,21 +21,25 @@ Events reference
 
 All Sylius bundles are using :doc:`SyliusResourceBundle </bundles/SyliusResourceBundle/index>`, which has some built-in events.
 
-+-------------------------------+----------------+
-| Event                         | Description    |
-+===============================+================+
-| sylius.<resource>.pre_create  | Before persist |
-+-------------------------------+----------------+
-| sylius.<resource>.post_create | After flush    |
-+-------------------------------+----------------+
-| sylius.<resource>.pre_update  | Before flush   |
-+-------------------------------+----------------+
-| sylius.<resource>.post_update | After flush    |
-+-------------------------------+----------------+
-| sylius.<resource>.pre_delete  | Before remove  |
-+-------------------------------+----------------+
-| sylius.<resource>.post_delete | After flush    |
-+-------------------------------+----------------+
++-------------------------------------+----------------------+
+| Event                               | Description          |
++=====================================+======================+
+| sylius.<resource>.pre_create        | Before persist       |
++-------------------------------------+----------------------+
+| sylius.<resource>.post_create       | After flush          |
++-------------------------------------+----------------------+
+| sylius.<resource>.pre_update        | Before flush         |
++-------------------------------------+----------------------+
+| sylius.<resource>.post_update       | After flush          |
++-------------------------------------+----------------------+
+| sylius.<resource>.pre_delete        | Before remove        |
++-------------------------------------+----------------------+
+| sylius.<resource>.post_delete       | After flush          |
++-------------------------------------+----------------------+
+| sylius.<resource>.initialize_create | Before creating view |
++-------------------------------------+----------------------+
+| sylius.<resource>.initialize_update | Before creating view |
++-------------------------------------+----------------------+
 
 CRUD events rules
 ~~~~~~~~~~~~~~~~~

@@ -70,5 +70,16 @@
             <argument type="service" id="sylius.context.customer" />
             <tag name="kernel.event_listener" event="sylius.product_review.pre_create" method="ensureReviewHasAuthor" />
         </service>
+
+        <service id="sylius.listener.locking" class="Sylius\Bundle\CoreBundle\EventListener\LockingListener">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <tag name="kernel.event_listener" event="sylius.product_variant.initialize_update" method="lock" />
+        </service>
+
+        <service id="sylius.listener.simple_product_locking" class="Sylius\Bundle\CoreBundle\EventListener\SimpleProductLockingListener">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="sylius.product_variant_resolver.default" />
+            <tag name="kernel.event_listener" event="sylius.product.initialize_update" method="lock" />
+        </service>
     </services>
 </container>

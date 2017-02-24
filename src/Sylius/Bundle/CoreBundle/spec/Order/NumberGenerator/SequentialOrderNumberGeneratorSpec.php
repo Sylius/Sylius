@@ -56,7 +56,6 @@ final class SequentialOrderNumberGeneratorSpec extends ObjectBehavior
         $sequenceRepository->findOneBy([])->willReturn($sequence);
 
         $sequenceManager->lock($sequence, LockMode::OPTIMISTIC, 7)->shouldBeCalled();
-
         $sequence->incrementIndex()->shouldBeCalled();
 
         $this->generate($order)->shouldReturn('000000007');
@@ -78,7 +77,6 @@ final class SequentialOrderNumberGeneratorSpec extends ObjectBehavior
         $sequenceManager->persist($sequence)->shouldBeCalled();
 
         $sequenceManager->lock($sequence, LockMode::OPTIMISTIC, 1)->shouldBeCalled();
-
         $sequence->incrementIndex()->shouldBeCalled();
 
         $this->generate($order)->shouldReturn('000000001');

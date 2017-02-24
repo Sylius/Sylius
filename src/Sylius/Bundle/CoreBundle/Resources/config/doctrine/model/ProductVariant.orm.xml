@@ -17,6 +17,8 @@
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <mapped-superclass name="Sylius\Component\Core\Model\ProductVariant" table="sylius_product_variant">
+        <field name="version" type="integer" version="true" />
+
         <field name="onHold" column="on_hold" type="integer" />
         <field name="onHand" column="on_hand" type="integer" />
         <field name="tracked" type="boolean" />
