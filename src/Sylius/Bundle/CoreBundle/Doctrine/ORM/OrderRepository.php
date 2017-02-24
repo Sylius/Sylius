@@ -162,8 +162,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
      */
     public function findCartByChannel($id, ChannelInterface $channel)
     {
-        /** @var OrderInterface $order */
-        $order = $this->createQueryBuilder('o')
+        return $this->createQueryBuilder('o')
             ->andWhere('o.id = :id')
             ->andWhere('o.state = :state')
             ->andWhere('o.channel = :channel')
@@ -173,23 +172,6 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
             ->getQuery()
             ->getOneOrNullResult()
         ;
-
-        $this->associationHydrator->hydrateAssociations($order, [
-            'adjustments',
-            'items',
-            'items.adjustments',
-            'items.units',
-            'items.units.adjustments',
-            'items.variant.optionValues',
-            'items.variant.optionValues.translations',
-            'items.variant.product',
-            'items.variant.product.translations',
-            'items.variant.product.images',
-            'items.variant.product.options',
-            'items.variant.product.options.translations',
-        ]);
-
-        return $order;
     }
 
     /**
@@ -277,5 +259,130 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
             ->getQuery()
             ->getResult()
         ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findCartForSummary($id)
+    {
+        /** @var OrderInterface $order */
+        $order = $this->createQueryBuilder('o')
+            ->andWhere('o.id = :id')
+            ->andWhere('o.state = :state')
+            ->setParameter('id', $id)
+            ->setParameter('state', OrderInterface::STATE_CART)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+
+        if (null === $order) {
+            return null;
+        }
+
+        $this->associationHydrator->hydrateAssociations($order, [
+            'adjustments',
+            'items',
+            'items.adjustments',
+            'items.units',
+            'items.units.adjustments',
+            'items.variant',
+            'items.variant.optionValues',
+            'items.variant.optionValues.translations',
+            'items.variant.product',
+            'items.variant.product.translations',
+            'items.variant.product.images',
+            'items.variant.product.options',
+            'items.variant.product.options.translations',
+        ]);
+
+        return $order;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findCartForAddressing($id)
+    {
+        /** @var OrderInterface $order */
+        $order = $this->createQueryBuilder('o')
+            ->andWhere('o.id = :id')
+            ->andWhere('o.state = :state')
+            ->setParameter('id', $id)
+            ->setParameter('state', OrderInterface::STATE_CART)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+
+        if (null === $order) {
+            return null;
+        }
+
+        $this->associationHydrator->hydrateAssociations($order, [
+            'items',
+            'items.variant',
+            'items.variant.product',
+            'items.variant.product.translations',
+        ]);
+
+        return $order;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findCartForSelectingShipping($id)
+    {
+        /** @var OrderInterface $order */
+        $order = $this->createQueryBuilder('o')
+            ->andWhere('o.id = :id')
+            ->andWhere('o.state = :state')
+            ->setParameter('id', $id)
+            ->setParameter('state', OrderInterface::STATE_CART)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+
+        if (null === $order) {
+            return null;
+        }
+
+        $this->associationHydrator->hydrateAssociations($order, [
+            'items',
+            'items.variant',
+            'items.variant.product',
+            'items.variant.product.translations',
+        ]);
+
+        return $order;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findCartForSelectingPayment($id)
+    {
+        /** @var OrderInterface $order */
+        $order = $this->createQueryBuilder('o')
+            ->andWhere('o.id = :id')
+            ->andWhere('o.state = :state')
+            ->setParameter('id', $id)
+            ->setParameter('state', OrderInterface::STATE_CART)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+
+        if (null === $order) {
+            return null;
+        }
+
+        $this->associationHydrator->hydrateAssociations($order, [
+            'items',
+            'items.variant',
+            'items.variant.product',
+            'items.variant.product.translations',
+        ]);
+
+        return $order;
     }
 }

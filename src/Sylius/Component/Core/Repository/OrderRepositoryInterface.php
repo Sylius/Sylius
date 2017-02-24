@@ -120,4 +120,24 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
      * @return OrderInterface[]
      */
     public function findOrdersUnpaidSince(\DateTime $terminalDate);
+
+    /**
+     * @return OrderInterface|null
+     */
+    public function findCartForSummary($id);
+
+    /**
+     * @return OrderInterface|null
+     */
+    public function findCartForAddressing($id);
+
+    /**
+     * @return OrderInterface|null
+     */
+    public function findCartForSelectingShipping($id);
+
+    /**
+     * @return OrderInterface|null
+     */
+    public function findCartForSelectingPayment($id);
 }
