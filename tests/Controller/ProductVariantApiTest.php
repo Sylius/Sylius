@@ -235,9 +235,11 @@ EOT;
             "code": "MONSTER_MUG",
             "channelPricings": {
                 "WEB": {
+                    "channel": "WEB",
                     "price": "1243"
                 },
                 "MOB": {
+                    "channel": "MOB",
                     "price": "342"
                 }
             }

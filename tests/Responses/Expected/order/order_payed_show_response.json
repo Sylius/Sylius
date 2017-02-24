@@ -34,28 +34,12 @@
                 "onHold": 0,
                 "onHand": 0,
                 "tracked": false,
-                "channelPricings": [
-                    {
-                        "channel": {
-                            "id": @integer@,
-                            "code": "CHANNEL",
-                            "name": "Channel",
-                            "description": "Lorem ipsum",
-                            "hostname": "localhost",
-                            "color": "black",
-                            "createdAt": "@string@.isDateTime()",
-                            "updatedAt": "@string@.isDateTime()",
-                            "enabled": true,
-                            "taxCalculationStrategy": "order_items_based",
-                            "_links": {
-                                "self": {
-                                    "href": "\/api\/v1\/channels\/CHANNEL"
-                                }
-                            }
-                        },
+                "channelPricings": {
+                    "CHANNEL": {
+                        "channel": "CHANNEL",
                         "price": 20
                     }
-                ],
+                },
                 "_links": {
                     "self": {
                         "href": "\/api\/v1\/products\/MUG\/variants\/MUG_SW"

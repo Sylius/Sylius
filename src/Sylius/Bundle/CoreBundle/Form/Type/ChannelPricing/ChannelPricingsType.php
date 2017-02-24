@@ -21,6 +21,7 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -66,6 +67,13 @@ class ChannelPricingsType extends AbstractType implements EventSubscriberInterfa
     public function preSetData(FormEvent $event)
     {
         $form = $event->getForm();
+
+        /** @var FormInterface $children */
+        foreach ($form as $children) {
+            if (null === $this->channelRepository->findOneByCode($children->getName())) {
+                $form->remove($children->getName());
+            }
+        }
 
         /** @var ChannelInterface $channel */
         foreach ($this->channelRepository->findAll() as $channel) {

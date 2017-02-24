@@ -35,19 +35,12 @@
             }
         },
         "tracked": false,
-        "channelPricings": [
-            {
-                "channel": {
-                    "code": "WEB",
-                    "_links": {
-                        "self": {
-                            "href": "\/api\/v1\/channels\/WEB"
-                        }
-                    }
-                },
+        "channelPricings": {
+            "WEB": {
+                "channel": "WEB",
                 "price": 20
             }
-        ]
+        }
     },
     "_links": {
         "order": {
