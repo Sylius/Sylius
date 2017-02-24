@@ -43,17 +43,144 @@ Instructions:
 10. Extend the ShippingMethodType with the images field
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+.. tip::
 
+    Read more about :doc:`customizing forms via extensions in the dedicated guide </customization/form>`.
+
+**Create the form extension class** for the ``Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType``:
+
+It needs to have the images field as a CollectionType. If you want to give a possibility to add more than one image to the entity
+set the ``allow_add`` option to ``true``.
+
+.. code-block:: php
+
+    <?php
+
+    namespace AppBundle\Form\Extension;
+
+    use AppBundle\Form\Type\ShippingMethod\ShippingMethodImageType;
+    use Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType;
+    use Symfony\Component\Form\AbstractTypeExtension;
+    use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+    use Symfony\Component\Form\FormBuilderInterface;
+
+    final class ShippingMethodTypeExtension extends AbstractTypeExtension
+    {
+        /**
+         * {@inheritdoc}
+         */
+        public function buildForm(FormBuilderInterface $builder, array $options)
+        {
+            $builder->add('images', CollectionType::class, [
+                'entry_type' => ShippingMethodImageType::class,
+                'allow_add' => false,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'label' => 'sylius.form.shipping_method.images',
+            ]);
+        }
+
+        /**
+         * {@inheritdoc}
+         */
+        public function getExtendedType()
+        {
+            return ShippingMethodType::class;
+        }
+    }
+
+Register the form extension as a service:
+
+.. code-block:: yaml
+
+    # services.yml
+    services:
+        app.form.extension.type.shipping_method:
+            class: AppBundle\Form\Extension\ShippingMethodTypeExtension
+            tags:
+                - { name: form.type_extension, extended_type: Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType }
 
 11. Override the definition of the ImageUploader service
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+In order to handle the image upload you need to attach the image upload listener to the ShippingMethod entity events:
 
+.. code-block:: yaml
+
+    # services.yml
+    services:
+        sylius.listener.image_upload:
+            class: Sylius\Bundle\CoreBundle\EventListener\ImageUploadListener
+            arguments: ['@sylius.image_uploader']
+            tags:
+                - { name: kernel.event_listener, event: "sylius.product.pre_create", method: "uploadImage" }
+                - { name: kernel.event_listener, event: "sylius.product.pre_update", method: "uploadImage" }
+                - { name: kernel.event_listener, event: "sylius.taxon.pre_create", method: "uploadImage" }
+                - { name: kernel.event_listener, event: "sylius.taxon.pre_update", method: "uploadImage" }
+                - { name: kernel.event_listener, event: "sylius.shipping_method.pre_create", method: "uploadImage" }
+                - { name: kernel.event_listener, event: "sylius.shipping_method.pre_update", method: "uploadImage" }
 
 12. Render the images field in the form view
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+In order to achieve that you will need to customize the form view from the ``SyliusAdminBundle/views/ShippingMethod/_form.html.twig`` file.
 
+Copy and pase its contents into your own ``app/Resources/SyliusAdminBundle/views/ShippingMethod/_form.html.twig`` file,
+and render the ``{{ form_row(form.images) }}`` field.
+
+.. code-block:: twig
+
+    {# app/Resources/SyliusAdminBundle/views/ShippingMethod/_form.html.twig #}
+
+    {% from '@SyliusAdmin/Macro/translationForm.html.twig' import translationForm %}
+
+    <div class="ui two column stackable grid">
+        <div class="column">
+            <div class="ui segment">
+                {{ form_errors(form) }}
+                <div class="three fields">
+                    {{ form_row(form.code) }}
+                    {{ form_row(form.zone) }}
+                    {{ form_row(form.position) }}
+                </div>
+                {{ form_row(form.enabled) }}
+                <h4 class="ui dividing header">{{ 'sylius.ui.availability'|trans }}</h4>
+                {{ form_row(form.channels) }}
+                <h4 class="ui dividing header">{{ 'sylius.ui.category_requirements'|trans }}</h4>
+                {{ form_row(form.category) }}
+                {% for categoryRequirementChoiceForm in form.categoryRequirement %}
+                    {{ form_row(categoryRequirementChoiceForm) }}
+                {% endfor %}
+                <h4 class="ui dividing header">{{ 'sylius.ui.taxes'|trans }}</h4>
+                {{ form_row(form.taxCategory) }}
+                <h4 class="ui dividing header">{{ 'sylius.ui.shipping_charges'|trans }}</h4>
+                {{ form_row(form.calculator) }}
+                {% for name, calculatorConfigurationPrototype in form.vars.prototypes %}
+                    <div id="{{ form.calculator.vars.id }}_{{ name }}" data-container=".configuration"
+                         data-prototype="{{ form_widget(calculatorConfigurationPrototype)|e }}">
+                    </div>
+                {% endfor %}
+
+                {# Here you go! #}
+                {{ form_row(form.images) }}
+
+                <div class="ui segment configuration">
+                    {% if form.configuration is defined %}
+                        {% for field in form.configuration %}
+                            {{ form_row(field) }}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            {{ translationForm(form.translations) }}
+        </div>
+    </div>
+
+.. tip::
+
+    Learn more about customizing templates :doc:`here </customization/template>`.
 
 Learn more
 ----------
