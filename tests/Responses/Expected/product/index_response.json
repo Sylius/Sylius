@@ -25,12 +25,7 @@
                 "code": "MUG_BB",
                 "options": [],
                 "averageRating": 0,
-                "images": [],
-                "_links": {
-                    "self": {
-                        "href": "@string@"
-                    }
-                }
+                "images": []
             },
             {
                 "id": @integer@,
@@ -38,12 +33,7 @@
                 "code": "MUG_LOTR",
                 "options": [],
                 "averageRating": 0,
-                "images": [],
-                "_links": {
-                    "self": {
-                        "href": "@string@"
-                    }
-                }
+                "images": []
             },
             {
                 "id": @integer@,
@@ -51,12 +41,7 @@
                 "code": "MUG_SW",
                 "options": [],
                 "averageRating": 0,
-                "images": [],
-                "_links": {
-                    "self": {
-                        "href": "@string@"
-                    }
-                }
+                "images": []
             },
             {
                 "id": @integer@,
@@ -64,12 +49,7 @@
                 "code": "PRODUCT_10",
                 "options": [],
                 "averageRating": 0,
-                "images": [],
-                "_links": {
-                    "self": {
-                        "href": "@string@"
-                    }
-                }
+                "images": []
             },
             {
                 "id": @integer@,
@@ -77,12 +57,7 @@
                 "code": "PRODUCT_11",
                 "options": [],
                 "averageRating": 0,
-                "images": [],
-                "_links": {
-                    "self": {
-                        "href": "@string@"
-                    }
-                }
+                "images": []
             },
             {
                 "id": @integer@,
@@ -90,12 +65,7 @@
                 "code": "PRODUCT_12",
                 "options": [],
                 "averageRating": 0,
-                "images": [],
-                "_links": {
-                    "self": {
-                        "href": "@string@"
-                    }
-                }
+                "images": []
             },
             {
                 "id": @integer@,
@@ -103,12 +73,7 @@
                 "code": "PRODUCT_13",
                 "options": [],
                 "averageRating": 0,
-                "images": [],
-                "_links": {
-                    "self": {
-                        "href": "@string@"
-                    }
-                }
+                "images": []
             },
             {
                 "id": @integer@,
@@ -116,12 +81,7 @@
                 "code": "PRODUCT_14",
                 "options": [],
                 "averageRating": 0,
-                "images": [],
-                "_links": {
-                    "self": {
-                        "href": "@string@"
-                    }
-                }
+                "images": []
             },
             {
                 "id": @integer@,
@@ -129,12 +89,7 @@
                 "code": "PRODUCT_15",
                 "options": [],
                 "averageRating": 0,
-                "images": [],
-                "_links": {
-                    "self": {
-                        "href": "@string@"
-                    }
-                }
+                "images": []
             },
             {
                 "id": @integer@,
@@ -142,12 +97,7 @@
                 "code": "PRODUCT_16",
                 "options": [],
                 "averageRating": 0,
-                "images": [],
-                "_links": {
-                    "self": {
-                        "href": "@string@"
-                    }
-                }
+                "images": []
             }
         ]
     }

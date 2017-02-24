@@ -3,7 +3,6 @@
     "name": "Theme Mug",
     "code": "MUG_TH",
     "attributes": [],
-    "variants": [],
     "options": [],
     "associations": [],
     "translations": {
@@ -15,12 +14,51 @@
         }
     },
     "productTaxons": [],
+    "channels": [
+        {
+            "id": @integer@,
+            "code": "WEB",
+            "name": "Web Channel",
+            "description": "Lorem ipsum",
+            "hostname": "localhost",
+            "color": "black",
+            "createdAt": "@string@.isDateTime()",
+            "updatedAt": "@string@.isDateTime()",
+            "enabled": true,
+            "taxCalculationStrategy": "order_items_based",
+            "_links": {
+                "self": {
+                    "href": "\/api\/v1\/channels\/WEB"
+                }
+            }
+        },
+        {
+            "id": @integer@,
+            "code": "MOB",
+            "name": "Mobile Channel",
+            "description": "Lorem ipsum psore",
+            "hostname": "localhost",
+            "color": "yellow",
+            "createdAt": "@string@.isDateTime()",
+            "updatedAt": "@string@.isDateTime()",
+            "enabled": true,
+            "taxCalculationStrategy": "order_items_based",
+            "_links": {
+                "self": {
+                    "href": "\/api\/v1\/channels\/MOB"
+                }
+            }
+        }
+    ],
     "reviews": [],
     "averageRating": 0,
     "images": [],
     "_links": {
         "self": {
-            "href": "@string@"
+            "href": "\/api\/v1\/products\/MUG_TH"
+        },
+        "variants": {
+            "href": "\/api\/v1\/products\/MUG_TH\/variants\/"
         }
     }
 }

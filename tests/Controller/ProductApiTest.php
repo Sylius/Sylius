@@ -354,10 +354,7 @@ EOT;
 <<<EOT
         {
             "code": "MUG_TH",
-            "channels": [
-                "WEB",
-                "MOB"
-            ],
+            "channels": ["MOB", "WEB"],
             "translations": {
                 "en_US": {
                     "name": "Theme Mug",

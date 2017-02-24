@@ -3,7 +3,6 @@
     "name": "Theme Mug",
     "code": "MUG_TH",
     "attributes": [],
-    "variants": [],
     "options": [],
     "associations": [
         {
@@ -44,12 +43,16 @@
         }
     },
     "productTaxons": [],
+    "channels": [],
     "reviews": [],
     "averageRating": 0,
     "images": [],
     "_links": {
         "self": {
-            "href": "@string@"
+            "href": "\/api\/v1\/products\/MUG_TH"
+        },
+        "variants": {
+            "href": "\/api\/v1\/products\/MUG_TH\/variants\/"
         }
     }
 }

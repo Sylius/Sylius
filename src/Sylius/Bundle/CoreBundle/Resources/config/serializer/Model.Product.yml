@@ -13,6 +13,10 @@ Sylius\Component\Core\Model\Product:
             expose: true
             type: array
             groups: [Default, Detailed]
+        channels:
+            expose: true
+            type: array
+            groups: [Detailed]
         reviews:
             expose: true
             type: array
