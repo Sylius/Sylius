@@ -25,23 +25,94 @@ Instructions:
 6. Add the mapping file for the ShippingMethodImage
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Your new entity will be saved in the databes, therefore it needs a mapping file, where you will set the ``ShippingMethod`` as the ``owner``
+of the ``ShippingMethodImage``.
+
+.. code-block:: yaml
+
+    # AppBundle/Resources/config/doctrine/ShippingMethodImage.orm.yml
+    AppBundle\Entity\ShippingMethodImage:
+        type: entity
+        table: app_shipping_method_image
+        manyToOne:
+            owner:
+                targetEntity: AppBundle\Entity\ShippingMethod
+                inversedBy: images
+                joinColumn:
+                    name: owner_id
+                    referencedColumnName: id
+                    nullable: false
+                    onDelete: CASCADE
+
 7. Register the ShippingMethodImage as a resource
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The ShippingMethodImage class needs to be registered as a Sylius resource:
+
+.. code-block:: yaml
+
+    # app/config/config.yml
+    sylius_resource:
+        resources:
+            app.shipping_method_image:
+                classes:
+                    model: AppBundle\Entity\ShippingMethodImage
 
 6. Create the ShippingMethodImageType class
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+This is how the class for ShippingMethodImageType should look like. Place it in the ``AppBundle\Form\Type\ShippingMethod`` directory.
+
+.. code-block:: php
+
+    <?php
+
+    namespace AppBundle\Form\Type\ShippingMethod;
+
+    use Sylius\Bundle\CoreBundle\Form\Type\ImageType;
+
+    final class ShippingMethodImageType extends ImageType
+    {
+        /**
+         * {@inheritdoc}
+         */
+        public function getBlockPrefix()
+        {
+            return 'app_shipping_method_image';
+        }
+    }
+
 7. Register the ShippingMethodImageType as a service
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-8. Register the ShippingMethodImageType as a resource form
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+After creating the form type class, you need to register it as a ``form.type`` service liek below:
 
-9. Add the ShippingMethodImageType to the resource form configuration
+.. code-block:: yaml
+
+    # services.yml
+    services:
+        app.form.type.shipping_method_image:
+            class: AppBundle\Form\Type\ShippingMethod\ShippingMethodImageType
+            tags:
+                - { name: form.type }
+            arguments: ['%app.model.shipping_method_image.class%']
+
+8. Add the ShippingMethodImageType to the resource form configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-10. Extend the ShippingMethodType with the images field
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+What is more the new form type needs to be configured as the resource form of the ``ShippingMethodImage``:
+
+.. code-block:: yaml
+
+    # app/config/config.yml
+    sylius_resource:
+        resources:
+            app.shipping_method_image:
+                classes:
+                    form: AppBundle\Form\Type\ShippingMethodImageType
+
+9. Extend the ShippingMethodType with the images field
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. tip::
 
@@ -100,7 +171,7 @@ Register the form extension as a service:
             tags:
                 - { name: form.type_extension, extended_type: Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType }
 
-11. Override the definition of the ImageUploader service
+10. Override the definition of the ImageUploader service
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 In order to handle the image upload you need to attach the image upload listener to the ShippingMethod entity events:
@@ -120,7 +191,7 @@ In order to handle the image upload you need to attach the image upload listener
                 - { name: kernel.event_listener, event: "sylius.shipping_method.pre_create", method: "uploadImage" }
                 - { name: kernel.event_listener, event: "sylius.shipping_method.pre_update", method: "uploadImage" }
 
-12. Render the images field in the form view
+11. Render the images field in the form view
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 In order to achieve that you will need to customize the form view from the ``SyliusAdminBundle/views/ShippingMethod/_form.html.twig`` file.
