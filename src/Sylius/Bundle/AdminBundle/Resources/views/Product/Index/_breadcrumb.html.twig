@@ -1,0 +1,18 @@
+{% import '@SyliusAdmin/Macro/breadcrumb.html.twig' as breadcrumb %}
+
+{% if taxon is defined %}
+    {% set breadcrumbs = [
+            { label: 'sylius.ui.administration'|trans, url: path('sylius_admin_dashboard') },
+            { label: 'sylius.ui.products'|trans, url: path('sylius_admin_product_index') },
+            { label: taxon.name },
+        ]
+    %}
+{% else %}
+    {% set breadcrumbs = [
+            { label: 'sylius.ui.administration'|trans, url: path('sylius_admin_dashboard') },
+            { label: 'sylius.ui.products'|trans },
+        ]
+    %}
+{% endif %}
+
+{{ breadcrumb.crumble(breadcrumbs) }}

@@ -1,0 +1,7 @@
+{% import 'SyliusUiBundle:Macro:headers.html.twig' as headers %}
+
+<div class="column">
+    {{ headers.default(taxon.name, configuration.vars.icon|default('cube'), configuration.vars.subheader|default('sylius.ui.manage_your_product_catalog')|trans) }}
+
+    {% include configuration.vars.templates.breadcrumb|default('@SyliusAdmin/Product/Index/_breadcrumb.html.twig') %}
+</div>
