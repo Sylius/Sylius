@@ -59,7 +59,7 @@ To see the details of the payment method with ``code = cash_on_delivery`` use th
 
 .. note::
 
-    The *cash_on_delivery* is just an example. Your value can be different.
+    The *cash_on_delivery* code is just an example. Your value can be different.
 
 Exemplary Response
 ^^^^^^^^^^^^^^^^^^
@@ -73,15 +73,27 @@ Exemplary Response
     {
         "id": 1,
         "code": "cash_on_delivery",
+        "position": 0,
+        "createdAt": "2017-02-24T16:14:03+0100",
+        "updatedAt": "2017-02-24T16:14:03+0100",
+        "enabled": true,
+        "translations": {
+            "en_US": {
+                "locale": "en_US",
+                "id": 1,
+                "name": "Cash on delivery",
+                "description": "Rerum expedita sit aut praesentium soluta sint aperiam."
+            }
+        },
         "channels": [
             {
                 "id": 1,
                 "code": "US_WEB",
                 "name": "US Web Store",
                 "hostname": "localhost",
-                "color": "LightGreen",
-                "createdAt": "2017-02-22T15:06:16+0100",
-                "updatedAt": "2017-02-22T15:06:16+0100",
+                "color": "SlateBlue",
+                "createdAt": "2017-02-24T16:14:03+0100",
+                "updatedAt": "2017-02-24T16:14:03+0100",
                 "enabled": true,
                 "taxCalculationStrategy": "order_items_based",
                 "_links": {
@@ -91,12 +103,6 @@ Exemplary Response
                 }
             }
         ],
-        "gatewayConfig": {
-            "id": 1,
-            "gatewayName": "Offline",
-            "factoryName": "offline",
-            "config": []
-        },
         "_links": {
             "self": {
                 "href": "\/api\/v1\/payment-methods\/cash_on_delivery"
