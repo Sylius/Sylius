@@ -6,15 +6,32 @@ Sylius\Component\Attribute\Model\Attribute:
             expose: true
             type: integer
             xml_attribute: true
-        name:
+            groups: [Default, Detailed]
+        code:
             expose: true
             type: string
-        presentation:
+            groups: [Default, Detailed]
+        position:
+            expose: true
+            type: integer
+            groups: [Default, Detailed]
+        type:
             expose: true
             type: string
+            groups: [Default, Detailed]
+        values:
+            expose: true
+            type: array
+            groups: [Detailed]
         createdAt:
             expose: true
             type: DateTime
+            groups: [Detailed]
         updatedAt:
             expose: true
             type: DateTime
+            groups: [Detailed]
+        translations:
+            expose: true
+            type: array
+            groups: [Default, Detailed]

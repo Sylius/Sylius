@@ -18,25 +18,40 @@
         "items": [
             {
                 "id": @integer@,
-                "createdAt": "@string@.isDateTime()",
-                "updatedAt": "@string@.isDateTime()",
-                "_links": {
-                    "self": {
-                        "href": "\/api\/v1\/product-attributes\/mug_material"
+                "code": "mug_material",
+                "type": "text",
+                "position": 0,
+                "translations": {
+                    "de": {
+                        "id": @integer@,
+                        "locale": "de",
+                        "name": "Becher Sammlung"
+                    },
+                    "en_US": {
+                        "id": @integer@,
+                        "locale": "en_US",
+                        "name": "Mug collection"
                     }
                 }
             },
             {
                 "id": @integer@,
-                "createdAt": "@string@.isDateTime()",
-                "updatedAt": "@string@.isDateTime()",
-                "_links": {
-                    "self": {
-                        "href": "\/api\/v1\/product-attributes\/mug_collection"
+                "code": "mug_collection",
+                "type": "text",
+                "position": 1,
+                "translations": {
+                    "de": {
+                        "id": @integer@,
+                        "locale": "de",
+                        "name": "Becher Material"
+                    },
+                    "en_US": {
+                        "id": @integer@,
+                        "locale": "en_US",
+                        "name": "Mug material"
                     }
                 }
             }
         ]
     }
 }
-
