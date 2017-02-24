@@ -183,7 +183,7 @@ Definition
 Example
 ^^^^^^^
 
-To see the details of the the zone with ``code = EU`` use the below method:
+To see the details of the zone with ``code = EU`` use the below method:
 
 .. code-block:: bash
 
