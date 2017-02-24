@@ -38,3 +38,5 @@ Sylius\Component\Payment\Model\PaymentMethod:
                 parameters:
                     code: expr(object.getCode())
                     version: 1
+            exclusion:
+                groups: [Detailed]
