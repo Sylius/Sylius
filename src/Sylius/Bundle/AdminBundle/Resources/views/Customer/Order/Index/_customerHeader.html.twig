@@ -1,0 +1,3 @@
+{% import 'SyliusUiBundle:Macro:headers.html.twig' as headers %}
+
+{{ headers.default(customer.fullname, configuration.vars.icon|default('cart'), configuration.vars.subheader|default('sylius.ui.process_your_orders')|trans) }}
