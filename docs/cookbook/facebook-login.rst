@@ -44,6 +44,9 @@ Set up the HWIOAuthBundle
         resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
         prefix:   /login
 
+    facebook:
+        path: "/login/check-facebook"
+
 Configure the connection to Facebook
 ------------------------------------
 
