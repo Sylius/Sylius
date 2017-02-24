@@ -144,6 +144,18 @@
             "method": {
                 "id": @integer@,
                 "code": "cod",
+                "position": 0,
+                "createdAt": "@string@.isDateTime()",
+                "updatedAt": "@string@.isDateTime()",
+                "enabled": true,
+                "translations": {
+                  "en_US": {
+                    "id": @integer@,
+                    "locale": "en_US",
+                    "name": "Cach on delivery",
+                    "description": "@string@"
+                  }
+                },
                 "channels": [
                     {
                         "id": @integer@,
@@ -163,31 +175,12 @@
                         }
                     }
                 ],
-                "gatewayConfig": {
-                    "id": @integer@,
-                    "gatewayName": "Offline",
-                    "factoryName": "offline",
-                    "config": []
-                },
                 "_links": {
                     "self": {
                         "href": "\/api\/v1\/payment-methods\/cod"
                     }
                 }
             },
-            "amount": 30,
-            "state": "completed",
-            "_links": {
-                "self": {
-                    "href": "@string@"
-                },
-                "payment-method": {
-                    "href": "\/api\/v1\/payment-methods\/cod"
-                },
-                "order": {
-                    "href": "@string@"
-                }
-            }
         }
     ],
     "shipments": [

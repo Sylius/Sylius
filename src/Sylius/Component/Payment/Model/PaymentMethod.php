@@ -38,21 +38,6 @@ class PaymentMethod implements PaymentMethodInterface
     /**
      * @var string
      */
-    protected $name;
-
-    /**
-     * @var string
-     */
-    protected $description;
-
-    /**
-     * @var string
-     */
-    protected $instructions;
-
-    /**
-     * @var string
-     */
     protected $environment;
 
     /**
@@ -72,7 +57,7 @@ class PaymentMethod implements PaymentMethodInterface
      */
     public function __toString()
     {
-        return $this->getTranslation()->__toString();
+        return $this->getName();
     }
 
     /**
