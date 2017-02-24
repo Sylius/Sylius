@@ -25,7 +25,7 @@ criteria[stockLocation] *(optional)*
     The id of stock location
 criteria[number] *(optional)*
     The order number
-criteria[shipping_address] *(optional)*
+criteria[shippingAddress] *(optional)*
     First or last name of the customer ship to address
 criteria[createdAtFrom] *(optional)*
     Starting date
@@ -74,7 +74,7 @@ Response
                             "href": "/api/v1/shipments/251"
                         }
                     },
-                    "created_at": "2014-11-26T23:00:34+0000",
+                    "createdAt": "2014-11-26T23:00:34+0000",
                     "id": 251,
                     "method": {
                         "_links": {
@@ -92,13 +92,13 @@ Response
                             "additional_item_limit": 10,
                             "first_item_cost": 4000
                         },
-                        "created_at": "2014-11-26T23:00:15+0000",
+                        "createdAt": "2014-11-26T23:00:15+0000",
                         "enabled": true,
                         "id": 120,
                         "name": "FedEx World Shipping",
-                        "updated_at": "2014-11-26T23:00:15+0000"
+                        "updatedAt": "2014-11-26T23:00:15+0000"
                     },
-                    "updated_at": "2014-11-26T23:00:34+0000"
+                    "updatedAt": "2014-11-26T23:00:34+0000"
                 }
             ]
         }
@@ -134,7 +134,7 @@ Response
                 "href": "/api/v1/shipments/251"
             }
         },
-        "created_at": "2014-11-26T23:00:34+0000",
+        "createdAt": "2014-11-26T23:00:34+0000",
         "id": 251,
         "method": {
             "_links": {
@@ -152,13 +152,13 @@ Response
                 "additional_item_limit": 10,
                 "first_item_cost": 4000
             },
-            "created_at": "2014-11-26T23:00:15+0000",
+            "createdAt": "2014-11-26T23:00:15+0000",
             "enabled": true,
             "id": 120,
             "name": "FedEx World Shipping",
-            "updated_at": "2014-11-26T23:00:15+0000"
+            "updatedAt": "2014-11-26T23:00:15+0000"
         },
-        "updated_at": "2014-11-26T23:00:34+0000"
+        "updatedAt": "2014-11-26T23:00:34+0000"
     }
 
 Deleting a shipment

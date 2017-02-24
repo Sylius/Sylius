@@ -96,10 +96,10 @@ Exemplary Response
         "name": "US Web Store",
         "hostname": "localhost",
         "color": "Wheat",
-        "created_at": "2017-02-10T13:14:20+0100",
-        "updated_at": "2017-02-10T13:14:20+0100",
+        "createdAt": "2017-02-10T13:14:20+0100",
+        "updatedAt": "2017-02-10T13:14:20+0100",
         "enabled": true,
-        "tax_calculation_strategy": "order_items_based",
+        "taxCalculationStrategy": "order_items_based",
         "_links": {
             "self": {
                 "href": "\/api\/v1\/channels\/US_WEB"

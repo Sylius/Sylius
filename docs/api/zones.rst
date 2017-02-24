@@ -237,7 +237,7 @@ Definition
 | limit                                 | query          | *(optional)* Number of items to display per page, |
 |                                       |                | by default = 10                                   |
 +---------------------------------------+----------------+---------------------------------------------------+
-| sorting['name_of_field']['direction'] | query          | *(optional)* Field and direction of sorting,      |
+| sorting['nameOfField']['direction']   | query          | *(optional)* Field and direction of sorting,      |
 |                                       |                | by default 'desc' and 'createdAt'                 |
 +---------------------------------------+----------------+---------------------------------------------------+
 

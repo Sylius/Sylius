@@ -21,11 +21,11 @@ If you request a cart via API, you will receive an object with the following fie
 +-------------------+-------------------------------------------------------------------+
 | items             | List of items in the cart                                         |
 +-------------------+-------------------------------------------------------------------+
-| items_total       | Sum of all items prices                                           |
+| itemsTotal        | Sum of all items prices                                           |
 +-------------------+-------------------------------------------------------------------+
 | adjustments       | List of adjustments related to the cart                           |
 +-------------------+-------------------------------------------------------------------+
-| adjustments_total | Sum of all cart adjustments values                                |
+| adjustmentsTotal  | Sum of all cart adjustments values                                |
 +-------------------+-------------------------------------------------------------------+
 | total             | Sum of items total and adjustments total                          |
 +-------------------+-------------------------------------------------------------------+
@@ -33,9 +33,9 @@ If you request a cart via API, you will receive an object with the following fie
 +-------------------+-------------------------------------------------------------------+
 | channel           | :doc:`Default channel serialization </api/channels>`              |
 +-------------------+-------------------------------------------------------------------+
-| currency_code     | Currency of the cart                                              |
+| currencyCode      | Currency of the cart                                              |
 +-------------------+-------------------------------------------------------------------+
-| checkout_state    | State of the checkout process of the cart                         |
+| checkoutState     | State of the checkout process of the cart                         |
 +-------------------+-------------------------------------------------------------------+
 
 CartItem API response structure
@@ -50,17 +50,17 @@ Each CartItem in an API response will be build as follows:
 +-------------------+------------------------------------------------------------+
 | quantity          | Quantity of item units                                     |
 +-------------------+------------------------------------------------------------+
-| unit_price        | Price of each item unit                                    |
+| unitPrice         | Price of each item unit                                    |
 +-------------------+------------------------------------------------------------+
 | total             | Sum of units total and adjustments total of that cart item |
 +-------------------+------------------------------------------------------------+
 | units             | A collection of units related to the cart item             |
 +-------------------+------------------------------------------------------------+
-| units_total       | Sum of all units prices of the cart item                   |
+| unitsTotal        | Sum of all units prices of the cart item                   |
 +-------------------+------------------------------------------------------------+
 | adjustments       | List of adjustments related to the cart item               |
 +-------------------+------------------------------------------------------------+
-| adjustments_total | Sum of all item adjustments related to that cart item      |
+| adjustmentsTotal  | Sum of all item adjustments related to that cart item      |
 +-------------------+------------------------------------------------------------+
 | variant           | Default variant serialization                              |
 +-------------------+------------------------------------------------------------+
@@ -77,7 +77,7 @@ Each CartItemUnit API response will be build as follows:
 +-------------------+------------------------------------------+
 | adjustments       | List of adjustments related to the unit  |
 +-------------------+------------------------------------------+
-| adjustments_total | Sum of all units adjustments of the unit |
+| adjustmentsTotal  | Sum of all units adjustments of the unit |
 +-------------------+------------------------------------------+
 
 Adjustment API response structure
@@ -123,7 +123,7 @@ Definition
 +--------------------+----------------+----------------------------------------------------------+
 | channel            | request        | Code of the related channel                              |
 +--------------------+----------------+----------------------------------------------------------+
-| locale_code        | request        | Code of the locale in which the cart should be created   |
+| localeCode         | request        | Code of the locale in which the cart should be created   |
 +--------------------+----------------+----------------------------------------------------------+
 
 Example
@@ -146,7 +146,7 @@ To create a new cart for the ``shop@example.com`` user in the ``US_WEB`` channel
             {
                 "customer": "shop@example.com",
                 "channel": "US_WEB",
-                "locale_code": "en_US"
+                "localeCode": "en_US"
             }
         '
 
@@ -164,21 +164,21 @@ Exemplary Response
         "items":[
 
         ],
-        "items_total":0,
+        "itemsTotal":0,
         "adjustments":[
 
         ],
-        "adjustments_total":0,
+        "adjustmentsTotal":0,
         "total":0,
         "customer":{
             "id":1,
             "email":"shop@example.com",
-            "first_name":"John",
-            "last_name":"Doe",
+            "firstName":"John",
+            "lastName":"Doe",
             "user":{
                 "id":1,
                 "username":"shop@example.com",
-                "username_canonical":"shop@example.com"
+                "usernameCanonical":"shop@example.com"
             }
         },
         "channel":{
@@ -189,9 +189,9 @@ Exemplary Response
                 }
             }
         },
-        "currency_code":"USD",
-        "locale_code": "en_US",
-        "checkout_state":"cart"
+        "currencyCode":"USD",
+        "localeCode": "en_US",
+        "checkoutState":"cart"
     }
 
 .. note::
@@ -310,17 +310,17 @@ Exemplary Response
                     "items":[
 
                     ],
-                    "items_total":0,
+                    "itemsTotal":0,
                     "adjustments":[
 
                     ],
-                    "adjustments_total":0,
+                    "adjustmentsTotal":0,
                     "total":0,
                     "customer":{
                         "id":1,
                         "email":"shop@example.com",
-                        "first_name":"John",
-                        "last_name":"Doe",
+                        "firstName":"John",
+                        "lastName":"Doe",
                         "user":{
                             "id":1,
                             "username":"shop@example.com",
@@ -335,9 +335,9 @@ Exemplary Response
                             }
                         }
                     },
-                    "currency_code":"USD",
-                    "locale_code": "en_US",
-                    "checkout_state":"cart"
+                    "currencyCode":"USD",
+                    "localeCode": "en_US",
+                    "checkoutState":"cart"
                 }
             ]
         }
@@ -393,21 +393,21 @@ Exemplary Response
         "items":[
 
         ],
-        "items_total":0,
+        "itemsTotal":0,
         "adjustments":[
 
         ],
-        "adjustments_total":0,
+        "adjustmentsTotal":0,
         "total":0,
         "customer":{
             "id":1,
             "email":"shop@example.com",
-            "first_name":"John",
-            "last_name":"Doe",
+            "firstName":"John",
+            "lastName":"Doe",
             "user":{
                 "id":1,
                 "username":"shop@example.com",
-                "username_canonical":"shop@example.com"
+                "usernameCanonical":"shop@example.com"
             }
         },
         "channel":{
@@ -418,9 +418,9 @@ Exemplary Response
                 }
             }
         },
-        "currency_code":"USD",
-    "locale_code": "en_US",
-        "checkout_state":"cart"
+        "currencyCode":"USD",
+        "localeCode": "en_US",
+        "checkoutState":"cart"
     }
 
 Deleting a Cart
@@ -525,21 +525,21 @@ Exemplary Response
             "items":[
 
             ],
-            "items_total":175,
+            "itemsTotal":175,
             "adjustments":[
 
             ],
-            "adjustments_total":7515,
+            "adjustmentsTotal":7515,
             "total":7690,
             "customer":{
                 "id":1,
                 "email":"shop@example.com",
-                "first_name":"John",
-                "last_name":"Doe",
+                "firstName":"John",
+                "lastName":"Doe",
                 "user":{
                     "id":1,
                     "username":"shop@example.com",
-                    "username_canonical":"shop@example.com"
+                    "usernameCanonical":"shop@example.com"
                 },
                 "_links":{
                     "self":{
@@ -555,12 +555,12 @@ Exemplary Response
                     }
                 }
             },
-            "currency_code":"USD",
-            "locale_code": "en_US",
-            "checkout_state":"cart"
+            "currencyCode":"USD",
+            "localeCode": "en_US",
+            "checkoutState":"cart"
         },
         "quantity":1,
-        "unit_price":175,
+        "unitPrice":175,
         "total":175,
         "units":[
             {
@@ -568,14 +568,14 @@ Exemplary Response
                 "adjustments":[
 
                 ],
-                "adjustments_total":0
+                "adjustmentsTotal":0
             }
         ],
-        "units_total":175,
+        "unitsTotal":175,
         "adjustments":[
 
         ],
-        "adjustments_total":0,
+        "adjustmentsTotal":0,
         "variant":{
 
         },
@@ -604,7 +604,7 @@ Definition
 
 .. code-block:: text
 
-    PUT /api/v1/carts/{cartId}/items/{id}
+    PUT /api/v1/carts/{cartId}/items/{cartItemId}
 
 +---------------+----------------+--------------------------------------------------------------+
 | Parameter     | Parameter type | Description                                                  |
@@ -667,7 +667,7 @@ Exemplary Response
             {
                 "id":58,
                 "quantity":3,
-                "unit_price":175,
+                "unitPrice":175,
                 "total":73,
                 "units":[
                     {
@@ -680,7 +680,7 @@ Exemplary Response
                                 "amount":-151
                             }
                         ],
-                        "adjustments_total":-151
+                        "adjustmentsTotal":-151
                     },
                     {
                         "id":195,
@@ -692,7 +692,7 @@ Exemplary Response
                                 "amount":-151
                             }
                         ],
-                        "adjustments_total":-151
+                        "adjustmentsTotal":-151
                     },
                     {
                         "id":196,
@@ -704,14 +704,14 @@ Exemplary Response
                                 "amount":-150
                             }
                         ],
-                        "adjustments_total":-150
+                        "adjustmentsTotal":-150
                     }
                 ],
-                "units_total":73,
+                "unitsTotal":73,
                 "adjustments":[
 
                 ],
-                "adjustments_total":0,
+                "adjustmentsTotal":0,
                 "variant":{
 
                 },
@@ -725,7 +725,7 @@ Exemplary Response
                 }
             }
         ],
-        "items_total":73,
+        "itemsTotal":73,
         "adjustments":[
             {
                 "id":218,
@@ -734,17 +734,17 @@ Exemplary Response
                 "amount":7515
             }
         ],
-        "adjustments_total":7515,
+        "adjustmentsTotal":7515,
         "total":7588,
         "customer":{
             "id":1,
             "email":"shop@example.com",
-            "first_name":"John",
-            "last_name":"Doe",
+            "firstName":"John",
+            "lastName":"Doe",
             "user":{
                 "id":1,
                 "username":"shop@example.com",
-                "username_canonical":"shop@example.com"
+                "usernameCanonical":"shop@example.com"
             },
             "_links":{
                 "self":{
@@ -760,9 +760,9 @@ Exemplary Response
                 }
             }
         },
-        "currency_code":"USD",
-    "locale_code": "en_US",
-        "checkout_state":"cart"
+        "currencyCode":"USD",
+    "localeCode": "en_US",
+        "checkoutState":"cart"
     }
 
 .. tip::
@@ -781,7 +781,7 @@ To delete the cart item with ``id = 58`` from the cart with ``id = 21`` use the 
 
 .. code-block:: text
 
-    DELETE /api/v1/carts/{cartId}/items/{id}
+    DELETE /api/v1/carts/{cartId}/items/{cartItemId}
 
 +---------------+----------------+--------------------------------------+
 | Parameter     | Parameter type | Description                          |

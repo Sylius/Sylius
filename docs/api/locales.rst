@@ -8,27 +8,27 @@ Locale API response structure
 
 If you request a locale via API, you will receive an object with the following fields:
 
-+--------------+--------------------------+
-| Field        | Description              |
-+==============+==========================+
-| id           | Id of the locale         |
-+--------------+--------------------------+
-| code         | Unique locale identifier |
-+--------------+--------------------------+
++-------+--------------------------+
+| Field | Description              |
++=======+==========================+
+| id    | Id of the locale         |
++-------+--------------------------+
+| code  | Unique locale identifier |
++-------+--------------------------+
 
 If you request for more detailed data, you will receive an object with the following fields:
 
-+------------------------+--------------------------------+
-| Field                  | Description                    |
-+========================+================================+
-| id                     | Id of the locale               |
-+------------------------+--------------------------------+
-| code                   | Unique locale identifier       |
-+------------------------+--------------------------------+
-| updatedAt              | Last update date of the locale |
-+------------------------+--------------------------------+
-| createdAt              | Creation date of the locale    |
-+------------------------+--------------------------------+
++-----------+--------------------------------+
+| Field     | Description                    |
++===========+================================+
+| id        | Id of the locale               |
++-----------+--------------------------------+
+| code      | Unique locale identifier       |
++-----------+--------------------------------+
+| updatedAt | Last update date of the locale |
++-----------+--------------------------------+
+| createdAt | Creation date of the locale    |
++-----------+--------------------------------+
 
 .. note::
 
@@ -46,13 +46,13 @@ Definition
 
     POST /api/v1/locales/
 
-+------------------------------------+----------------+--------------------------------------+
-| Parameter                          | Parameter type | Description                          |
-+====================================+================+======================================+
-| Authorization                      | header         | Token received during authentication |
-+------------------------------------+----------------+--------------------------------------+
-| code                               | request        | **(unique)** Locale identifier       |
-+------------------------------------+----------------+--------------------------------------+
++---------------+----------------+--------------------------------------+
+| Parameter     | Parameter type | Description                          |
++===============+================+======================================+
+| Authorization | header         | Token received during authentication |
++---------------+----------------+--------------------------------------+
+| code          | request        | **(unique)** Locale identifier       |
++---------------+----------------+--------------------------------------+
 
 Example
 ^^^^^^^
@@ -81,8 +81,8 @@ Exemplary Response
     {
         "id": 4,
         "code": "pl",
-        "created_at": "2017-02-14T12:49:38+0100",
-        "updated_at": "2017-02-14T12:49:39+0100",
+        "createdAt": "2017-02-14T12:49:38+0100",
+        "updatedAt": "2017-02-14T12:49:39+0100",
         "_links": {
             "self": {
                 "href": "\/api\/v1\/locales\/pl"
@@ -172,8 +172,8 @@ Exemplary Response
     {
         "id": 4,
         "code": "pl",
-        "created_at": "2017-02-14T12:49:38+0100",
-        "updated_at": "2017-02-14T12:49:39+0100",
+        "createdAt": "2017-02-14T12:49:38+0100",
+        "updatedAt": "2017-02-14T12:49:39+0100",
         "_links": {
             "self": {
                 "href": "\/api\/v1\/locales\/pl"

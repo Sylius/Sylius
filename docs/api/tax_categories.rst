@@ -272,17 +272,17 @@ Definition
 
     GET /api/v1/tax-categories/
 
-+---------------------------------------+----------------+---------------------------------------------------+
-| Parameter                             | Parameter type | Description                                       |
-+=======================================+================+===================================================+
-| Authorization                         | header         | Token received during authentication              |
-+---------------------------------------+----------------+---------------------------------------------------+
-| limit                                 | query          | *(optional)* Number of items to display per page, |
-|                                       |                | by default = 10                                   |
-+---------------------------------------+----------------+---------------------------------------------------+
-| sorting['name_of_field']['direction'] | query          | *(optional)* Field and direction of sorting,      |
-|                                       |                | by default 'desc' and 'createdAt'                 |
-+---------------------------------------+----------------+---------------------------------------------------+
++-------------------------------------+----------------+---------------------------------------------------+
+| Parameter                           | Parameter type | Description                                       |
++=====================================+================+===================================================+
+| Authorization                       | header         | Token received during authentication              |
++-------------------------------------+----------------+---------------------------------------------------+
+| limit                               | query          | *(optional)* Number of items to display per page, |
+|                                     |                | by default = 10                                   |
++-------------------------------------+----------------+---------------------------------------------------+
+| sorting['nameOfField']['direction'] | query          | *(optional)* Field and direction of sorting,      |
+|                                     |                | by default 'desc' and 'createdAt'                 |
++-------------------------------------+----------------+---------------------------------------------------+
 
 To see the first page of all tax categories use the below method:
 

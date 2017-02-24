@@ -140,10 +140,10 @@ Exemplary Response
                 "name": "US Web Store",
                 "hostname": "localhost",
                 "color": "Khaki",
-                "created_at": "2017-02-17T15:01:14+0100",
-                "updated_at": "2017-02-17T15:01:14+0100",
+                "createdAt": "2017-02-17T15:01:14+0100",
+                "updatedAt": "2017-02-17T15:01:14+0100",
                 "enabled": true,
-                "tax_calculation_strategy": "order_items_based",
+                "taxCalculationStrategy": "order_items_based",
                 "_links": {
                     "self": {
                         "href": "\/api\/v1\/channels\/US_WEB"

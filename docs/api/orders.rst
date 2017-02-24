@@ -12,11 +12,11 @@ If you request an order via API, you will receive an object with the following f
 +-----------------------+--------------------------------------------------------------------+
 | items                 | List of items related to the order                                 |
 +-----------------------+--------------------------------------------------------------------+
-| items_total           | Sum of all items prices                                            |
+| itemsTotal            | Sum of all items prices                                            |
 +-----------------------+--------------------------------------------------------------------+
 | adjustments           | List of adjustments related to the order                           |
 +-----------------------+--------------------------------------------------------------------+
-| adjustments_total     | Sum of all order adjustments                                       |
+| adjustmentsTotal      | Sum of all order adjustments                                       |
 +-----------------------+--------------------------------------------------------------------+
 | total                 | Sum of items total and adjustments total                           |
 +-----------------------+--------------------------------------------------------------------+
@@ -24,19 +24,19 @@ If you request an order via API, you will receive an object with the following f
 +-----------------------+--------------------------------------------------------------------+
 | channel               | :doc:`Default channel serialization </api/channels>`               |
 +-----------------------+--------------------------------------------------------------------+
-| currency_code         | Currency of the order                                              |
+| currencyCode          | Currency of the order                                              |
 +-----------------------+--------------------------------------------------------------------+
-| checkout_state        | :doc:`State of the checkout process </book/orders/checkout>`       |
+| checkoutState         | :doc:`State of the checkout process </book/orders/checkout>`       |
 +-----------------------+--------------------------------------------------------------------+
 | state                 | :doc:`State of the order </components/Order/state_machine>`        |
 +-----------------------+--------------------------------------------------------------------+
-| checkout_completed_at | Date when the checkout has been completed                          |
+| checkoutCompletedAt   | Date when the checkout has been completed                          |
 +-----------------------+--------------------------------------------------------------------+
 | number                | Serial number of the order                                         |
 +-----------------------+--------------------------------------------------------------------+
-| shipping_address      | Detailed address serialization                                     |
+| shippingAddress       | Detailed address serialization                                     |
 +-----------------------+--------------------------------------------------------------------+
-| billing_address       | Detailed address serialization                                     |
+| billingAddress        | Detailed address serialization                                     |
 +-----------------------+--------------------------------------------------------------------+
 | shipments             | Detailed serialization of all related shipments                    |
 +-----------------------+--------------------------------------------------------------------+
@@ -102,13 +102,13 @@ Exemplary Response
 
     {
         "id":21,
-        "checkout_completed_at":"2017-02-15T13:31:33+0100",
+        "checkoutCompletedAt":"2017-02-15T13:31:33+0100",
         "number":"000000021",
         "items":[
             {
                 "id":74,
                 "quantity":1,
-                "unit_price":100000,
+                "unitPrice":100000,
                 "total":100000,
                 "units":[
                     {
@@ -116,7 +116,7 @@ Exemplary Response
                         "adjustments":[
 
                         ],
-                        "adjustments_total":0,
+                        "adjustmentsTotal":0,
                         "_links":{
                             "order":{
                                 "href":"\/api\/v1\/orders\/21"
@@ -124,15 +124,15 @@ Exemplary Response
                         }
                     }
                 ],
-                "units_total":100000,
+                "unitsTotal":100000,
                 "adjustments":[
 
                 ],
-                "adjustments_total":0,
+                "adjustmentsTotal":0,
                 "variant":{
                     "id":331,
                     "code":"MEDIUM_MUG_CUP",
-                    "option_values":[
+                    "optionValues":[
                         {
                             "name":"Mug type",
                             "code":"mug_type_medium"
@@ -149,7 +149,7 @@ Exemplary Response
                     "on_hold":0,
                     "on_hand":10,
                     "tracked":false,
-                    "channel_pricings":[
+                    "channelPricings":[
                         {
                             "id":331,
                             "channel":{
@@ -158,10 +158,10 @@ Exemplary Response
                                 "name":"US Web Store",
                                 "hostname":"localhost",
                                 "color":"MediumPurple",
-                                "created_at":"2017-02-14T11:10:02+0100",
-                                "updated_at":"2017-02-14T11:10:02+0100",
+                                "createdAt":"2017-02-14T11:10:02+0100",
+                                "updatedAt":"2017-02-14T11:10:02+0100",
                                 "enabled":true,
-                                "tax_calculation_strategy":"order_items_based",
+                                "taxCalculationStrategy":"order_items_based",
                                 "_links":{
                                     "self":{
                                         "href":"\/api\/v1\/channels\/1"
@@ -190,7 +190,7 @@ Exemplary Response
                 }
             }
         ],
-        "items_total":100000,
+        "itemsTotal":100000,
         "adjustments":[
             {
                 "id":252,
@@ -199,20 +199,20 @@ Exemplary Response
                 "amount":3549
             }
         ],
-        "adjustments_total":3549,
+        "adjustmentsTotal":3549,
         "total":103549,
         "state":"new",
         "customer":{
             "id":1,
             "email":"shop@example.com",
-            "email_canonical":"shop@example.com",
-            "first_name":"John",
-            "last_name":"Doe",
+            "emailCanonical":"shop@example.com",
+            "firstName":"John",
+            "lastName":"Doe",
             "gender":"u",
             "user":{
                 "id":1,
                 "username":"shop@example.com",
-                "username_canonical":"shop@example.com",
+                "usernameCanonical":"shop@example.com",
                 "roles":[
                     "ROLE_USER"
                 ],
@@ -230,37 +230,37 @@ Exemplary Response
             "name":"US Web Store",
             "hostname":"localhost",
             "color":"MediumPurple",
-            "created_at":"2017-02-14T11:10:02+0100",
-            "updated_at":"2017-02-14T11:10:02+0100",
+            "createdAt":"2017-02-14T11:10:02+0100",
+            "updatedAt":"2017-02-14T11:10:02+0100",
             "enabled":true,
-            "tax_calculation_strategy":"order_items_based",
+            "taxCalculationStrategy":"order_items_based",
             "_links":{
                 "self":{
                     "href":"\/api\/v1\/channels\/1"
                 }
             }
         },
-        "shipping_address":{
+        "shippingAddress":{
             "id":71,
-            "first_name":"Frederick D.",
-            "last_name":"Gregory",
-            "country_code":"US",
+            "firstName":"Frederick D.",
+            "lastName":"Gregory",
+            "countryCode":"US",
             "street":"300 E St SW",
             "city":"\u2019Washington",
             "postcode":"DC 20546",
-            "created_at":"2017-02-14T11:55:40+0100",
-            "updated_at":"2017-02-14T17:00:17+0100"
+            "createdAt":"2017-02-14T11:55:40+0100",
+            "updatedAt":"2017-02-14T17:00:17+0100"
         },
-        "billing_address":{
+        "billingAddress":{
             "id":72,
-            "first_name":"Frederick D.",
-            "last_name":"Gregory",
-            "country_code":"US",
+            "firstName":"Frederick D.",
+            "lastName":"Gregory",
+            "countryCode":"US",
             "street":"300 E St SW",
             "city":"\u2019Washington",
             "postcode":"DC 20546",
-            "created_at":"2017-02-14T11:55:40+0100",
-            "updated_at":"2017-02-14T17:00:17+0100"
+            "createdAt":"2017-02-14T11:55:40+0100",
+            "updatedAt":"2017-02-14T17:00:17+0100"
         },
         "payments":[
             {
@@ -268,8 +268,8 @@ Exemplary Response
                 "method":{
                     "id":2,
                     "code":"bank_transfer",
-                    "created_at":"2017-02-14T11:10:02+0100",
-                    "updated_at":"2017-02-14T11:10:02+0100",
+                    "createdAt":"2017-02-14T11:10:02+0100",
+                    "updatedAt":"2017-02-14T11:10:02+0100",
                     "channels":[
                         {
                             "id":1,
@@ -277,10 +277,10 @@ Exemplary Response
                             "name":"US Web Store",
                             "hostname":"localhost",
                             "color":"MediumPurple",
-                            "created_at":"2017-02-14T11:10:02+0100",
-                            "updated_at":"2017-02-14T11:10:02+0100",
+                            "createdAt":"2017-02-14T11:10:02+0100",
+                            "updatedAt":"2017-02-14T11:10:02+0100",
                             "enabled":true,
-                            "tax_calculation_strategy":"order_items_based",
+                            "taxCalculationStrategy":"order_items_based",
                             "_links":{
                                 "self":{
                                     "href":"\/api\/v1\/channels\/1"
@@ -296,8 +296,8 @@ Exemplary Response
                 },
                 "amount":103549,
                 "state":"new",
-                "created_at":"2017-02-14T11:53:41+0100",
-                "updated_at":"2017-02-15T13:31:33+0100",
+                "createdAt":"2017-02-14T11:53:41+0100",
+                "updatedAt":"2017-02-15T13:31:33+0100",
                 "_links":{
                     "self":{
                         "href":"\/api\/v1\/payments\/21"
@@ -325,8 +325,8 @@ Exemplary Response
                             "amount":3549
                         }
                     },
-                    "created_at":"2017-02-14T11:10:02+0100",
-                    "updated_at":"2017-02-14T11:10:02+0100",
+                    "createdAt":"2017-02-14T11:10:02+0100",
+                    "updatedAt":"2017-02-14T11:10:02+0100",
                     "enabled":true,
                     "_links":{
                         "self":{
@@ -337,8 +337,8 @@ Exemplary Response
                         }
                     }
                 },
-                "created_at":"2017-02-14T11:53:41+0100",
-                "updated_at":"2017-02-15T13:31:33+0100",
+                "createdAt":"2017-02-14T11:53:41+0100",
+                "updatedAt":"2017-02-15T13:31:33+0100",
                 "_links":{
                     "self":{
                         "href":"\/api\/v1\/shipments\/21"
@@ -352,9 +352,9 @@ Exemplary Response
                 }
             }
         ],
-        "currency_code":"USD",
-        "locale_code":"en_US",
-        "checkout_state":"completed"
+        "currencyCode":"USD",
+        "localeCode":"en_US",
+        "checkoutState":"completed"
     }
 
 Cancel Action
@@ -398,13 +398,13 @@ Exemplary Response
 
     {
         "id":21,
-        "checkout_completed_at":"2017-02-15T13:31:33+0100",
+        "checkoutCompletedAt":"2017-02-15T13:31:33+0100",
         "number":"000000021",
         "items":[
             {
                 "id":74,
                 "quantity":1,
-                "unit_price":100000,
+                "unitPrice":100000,
                 "total":100000,
                 "units":[
                     {
@@ -412,7 +412,7 @@ Exemplary Response
                         "adjustments":[
 
                         ],
-                        "adjustments_total":0,
+                        "adjustmentsTotal":0,
                         "_links":{
                             "order":{
                                 "href":"\/api\/v1\/orders\/21"
@@ -420,15 +420,15 @@ Exemplary Response
                         }
                     }
                 ],
-                "units_total":100000,
+                "unitsTotal":100000,
                 "adjustments":[
 
                 ],
-                "adjustments_total":0,
+                "adjustmentsTotal":0,
                 "variant":{
                     "id":331,
                     "code":"MEDIUM_MUG_CUP",
-                    "option_values":[
+                    "optionValues":[
                         {
                             "name":"Mug type",
                             "code":"mug_type_medium"
@@ -445,7 +445,7 @@ Exemplary Response
                     "on_hold":0,
                     "on_hand":10,
                     "tracked":false,
-                    "channel_pricings":[
+                    "channelPricings":[
                         {
                             "id":331,
                             "channel":{
@@ -454,10 +454,10 @@ Exemplary Response
                                 "name":"US Web Store",
                                 "hostname":"localhost",
                                 "color":"MediumPurple",
-                                "created_at":"2017-02-14T11:10:02+0100",
-                                "updated_at":"2017-02-14T11:10:02+0100",
+                                "createdAt":"2017-02-14T11:10:02+0100",
+                                "updatedAt":"2017-02-14T11:10:02+0100",
                                 "enabled":true,
-                                "tax_calculation_strategy":"order_items_based",
+                                "taxCalculationStrategy":"order_items_based",
                                 "_links":{
                                     "self":{
                                         "href":"\/api\/v1\/channels\/1"
@@ -486,7 +486,7 @@ Exemplary Response
                 }
             }
         ],
-        "items_total":100000,
+        "itemsTotal":100000,
         "adjustments":[
             {
                 "id":252,
@@ -495,20 +495,20 @@ Exemplary Response
                 "amount":3549
             }
         ],
-        "adjustments_total":3549,
+        "adjustmentsTotal":3549,
         "total":103549,
         "state":"cancelled",
         "customer":{
             "id":1,
             "email":"shop@example.com",
-            "email_canonical":"shop@example.com",
-            "first_name":"John",
-            "last_name":"Doe",
+            "emailCanonical":"shop@example.com",
+            "firstName":"John",
+            "lastName":"Doe",
             "gender":"u",
             "user":{
                 "id":1,
                 "username":"shop@example.com",
-                "username_canonical":"shop@example.com",
+                "usernameCanonical":"shop@example.com",
                 "roles":[
                     "ROLE_USER"
                 ],
@@ -526,37 +526,37 @@ Exemplary Response
             "name":"US Web Store",
             "hostname":"localhost",
             "color":"MediumPurple",
-            "created_at":"2017-02-14T11:10:02+0100",
-            "updated_at":"2017-02-14T11:10:02+0100",
+            "createdAt":"2017-02-14T11:10:02+0100",
+            "updatedAt":"2017-02-14T11:10:02+0100",
             "enabled":true,
-            "tax_calculation_strategy":"order_items_based",
+            "taxCalculationStrategy":"order_items_based",
             "_links":{
                 "self":{
                     "href":"\/api\/v1\/channels\/1"
                 }
             }
         },
-        "shipping_address":{
+        "shippingAddress":{
             "id":71,
-            "first_name":"Frederick D.",
-            "last_name":"Gregory",
-            "country_code":"US",
+            "firstName":"Frederick D.",
+            "lastName":"Gregory",
+            "countryCode":"US",
             "street":"300 E St SW",
             "city":"\u2019Washington",
             "postcode":"DC 20546",
-            "created_at":"2017-02-14T11:55:40+0100",
-            "updated_at":"2017-02-14T17:00:17+0100"
+            "createdAt":"2017-02-14T11:55:40+0100",
+            "updatedAt":"2017-02-14T17:00:17+0100"
         },
-        "billing_address":{
+        "billingAddress":{
             "id":72,
-            "first_name":"Frederick D.",
-            "last_name":"Gregory",
-            "country_code":"US",
+            "firstName":"Frederick D.",
+            "lastName":"Gregory",
+            "countryCode":"US",
             "street":"300 E St SW",
             "city":"\u2019Washington",
             "postcode":"DC 20546",
-            "created_at":"2017-02-14T11:55:40+0100",
-            "updated_at":"2017-02-14T17:00:17+0100"
+            "createdAt":"2017-02-14T11:55:40+0100",
+            "updatedAt":"2017-02-14T17:00:17+0100"
         },
         "payments":[
             {
@@ -564,8 +564,8 @@ Exemplary Response
                 "method":{
                     "id":2,
                     "code":"bank_transfer",
-                    "created_at":"2017-02-14T11:10:02+0100",
-                    "updated_at":"2017-02-14T11:10:02+0100",
+                    "createdAt":"2017-02-14T11:10:02+0100",
+                    "updatedAt":"2017-02-14T11:10:02+0100",
                     "channels":[
                         {
                             "id":1,
@@ -573,10 +573,10 @@ Exemplary Response
                             "name":"US Web Store",
                             "hostname":"localhost",
                             "color":"MediumPurple",
-                            "created_at":"2017-02-14T11:10:02+0100",
-                            "updated_at":"2017-02-14T11:10:02+0100",
+                            "createdAt":"2017-02-14T11:10:02+0100",
+                            "updatedAt":"2017-02-14T11:10:02+0100",
                             "enabled":true,
-                            "tax_calculation_strategy":"order_items_based",
+                            "taxCalculationStrategy":"order_items_based",
                             "_links":{
                                 "self":{
                                     "href":"\/api\/v1\/channels\/1"
@@ -592,8 +592,8 @@ Exemplary Response
                 },
                 "amount":103549,
                 "state":"cancelled",
-                "created_at":"2017-02-14T11:53:41+0100",
-                "updated_at":"2017-02-15T13:31:33+0100",
+                "createdAt":"2017-02-14T11:53:41+0100",
+                "updatedAt":"2017-02-15T13:31:33+0100",
                 "_links":{
                     "self":{
                         "href":"\/api\/v1\/payments\/21"
@@ -621,8 +621,8 @@ Exemplary Response
                             "amount":3549
                         }
                     },
-                    "created_at":"2017-02-14T11:10:02+0100",
-                    "updated_at":"2017-02-14T11:10:02+0100",
+                    "createdAt":"2017-02-14T11:10:02+0100",
+                    "updatedAt":"2017-02-14T11:10:02+0100",
                     "enabled":true,
                     "_links":{
                         "self":{
@@ -633,8 +633,8 @@ Exemplary Response
                         }
                     }
                 },
-                "created_at":"2017-02-14T11:53:41+0100",
-                "updated_at":"2017-02-15T13:31:33+0100",
+                "createdAt":"2017-02-14T11:53:41+0100",
+                "updatedAt":"2017-02-15T13:31:33+0100",
                 "_links":{
                     "self":{
                         "href":"\/api\/v1\/shipments\/21"
@@ -648,9 +648,9 @@ Exemplary Response
                 }
             }
         ],
-        "currency_code":"USD",
-        "locale_code":"en_US",
-        "checkout_state":"completed"
+        "currencyCode":"USD",
+        "localeCode":"en_US",
+        "checkoutState":"completed"
     }
 
 Ship Action
@@ -744,8 +744,8 @@ Exemplary Response
         "method":{
             "id":2,
             "code":"bank_transfer",
-            "created_at":"2017-02-14T11:10:02+0100",
-            "updated_at":"2017-02-14T11:10:02+0100",
+            "createdAt":"2017-02-14T11:10:02+0100",
+            "updatedAt":"2017-02-14T11:10:02+0100",
             "channels":[
                 {
                     "id":1,
@@ -753,10 +753,10 @@ Exemplary Response
                     "name":"US Web Store",
                     "hostname":"localhost",
                     "color":"MediumPurple",
-                    "created_at":"2017-02-14T11:10:02+0100",
-                    "updated_at":"2017-02-14T11:10:02+0100",
+                    "createdAt":"2017-02-14T11:10:02+0100",
+                    "updatedAt":"2017-02-14T11:10:02+0100",
                     "enabled":true,
-                    "tax_calculation_strategy":"order_items_based",
+                    "taxCalculationStrategy":"order_items_based",
                     "_links":{
                         "self":{
                             "href":"\/api\/v1\/channels\/1"
@@ -772,8 +772,8 @@ Exemplary Response
         },
         "amount":103549,
         "state":"completed",
-        "created_at":"2017-02-14T11:53:41+0100",
-        "updated_at":"2017-02-16T14:33:27+0100",
+        "createdAt":"2017-02-14T11:53:41+0100",
+        "updatedAt":"2017-02-16T14:33:27+0100",
         "_links":{
             "self":{
                 "href":"\/api\/v1\/payments\/21"

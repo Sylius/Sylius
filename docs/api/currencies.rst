@@ -8,27 +8,27 @@ Currency API response structure
 
 If you request a currency via API, you will receive an object with the following fields:
 
-+--------------+----------------------------+
-| Field        | Description                |
-+==============+============================+
-| id           | Id of the currency         |
-+--------------+----------------------------+
-| code         | Unique currency identifier |
-+--------------+----------------------------+
++-------+----------------------------+
+| Field | Description                |
++=======+============================+
+| id    | Id of the currency         |
++-------+----------------------------+
+| code  | Unique currency identifier |
++-------+----------------------------+
 
 If you request for more detailed data, you will receive an object with the following fields:
 
-+------------------------+----------------------------------+
-| Field                  | Description                      |
-+========================+==================================+
-| id                     | Id of the currency               |
-+------------------------+----------------------------------+
-| code                   | Unique currency identifier       |
-+------------------------+----------------------------------+
-| updatedAt              | Last update date of the currency |
-+------------------------+----------------------------------+
-| createdAt              | Creation date of the currency    |
-+------------------------+----------------------------------+
++-----------+----------------------------------+
+| Field     | Description                      |
++===========+==================================+
+| id        | Id of the currency               |
++-----------+----------------------------------+
+| code      | Unique currency identifier       |
++-----------+----------------------------------+
+| updatedAt | Last update date of the currency |
++-----------+----------------------------------+
+| createdAt | Creation date of the currency    |
++-----------+----------------------------------+
 
 .. note::
 
@@ -46,13 +46,13 @@ Definition
 
     POST /api/v1/currencies/
 
-+------------------------------------+----------------+--------------------------------------+
-| Parameter                          | Parameter type | Description                          |
-+====================================+================+======================================+
-| Authorization                      | header         | Token received during authentication |
-+------------------------------------+----------------+--------------------------------------+
-| code                               | request        | **(unique)** Currency identifier     |
-+------------------------------------+----------------+--------------------------------------+
++---------------+----------------+--------------------------------------+
+| Parameter     | Parameter type | Description                          |
++===============+================+======================================+
+| Authorization | header         | Token received during authentication |
++---------------+----------------+--------------------------------------+
+| code          | request        | **(unique)** Currency identifier     |
++---------------+----------------+--------------------------------------+
 
 Example
 ^^^^^^^
@@ -81,8 +81,8 @@ Exemplary Response
     {
         "id": 4,
         "code": "PLN",
-        "created_at": "2017-02-14T11:38:40+0100",
-        "updated_at": "2017-02-14T11:38:41+0100",
+        "createdAt": "2017-02-14T11:38:40+0100",
+        "updatedAt": "2017-02-14T11:38:41+0100",
         "_links": {
             "self": {
                 "href": "\/api\/v1\/currencies\/PLN"
@@ -128,7 +128,7 @@ Exemplary Response
 Getting a Single Currency
 -------------------------
 
-To retrieve the details of a currency you will need to call the ``/api/v1/currencies/currency_code`` endpoint with the ``GET`` method.
+To retrieve the details of a currency you will need to call the ``/api/v1/currencies/currencyCode`` endpoint with the ``GET`` method.
 
 Definition
 ^^^^^^^^^^
@@ -172,8 +172,8 @@ Exemplary Response
    {
         "id": 4,
         "code": "PLN",
-        "created_at": "2017-02-14T11:38:40+0100",
-        "updated_at": "2017-02-14T11:38:41+0100",
+        "createdAt": "2017-02-14T11:38:40+0100",
+        "updatedAt": "2017-02-14T11:38:41+0100",
         "_links": {
             "self": {
                 "href": "\/api\/v1\/currencies\/PLN"
@@ -275,7 +275,7 @@ Exemplary Response
 Deleting a Currency
 -------------------
 
-To delete a currency you will need to call the ``/api/v1/currencies/currency_code`` endpoint with the ``DELETE`` method.
+To delete a currency you will need to call the ``/api/v1/currencies/currencyCode`` endpoint with the ``DELETE`` method.
 
 Definition
 ^^^^^^^^^^

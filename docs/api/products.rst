@@ -129,6 +129,7 @@ Exemplary Response
             }
         }
     }
+
 .. warning::
 
     If you try to create a product without name, code or slug, you will receive a ``400 Bad Request`` error, that will contain validation errors.
@@ -327,8 +328,8 @@ Exemplary Response
                 "type": {
                     "id": 2,
                     "code": "accessories",
-                    "created_at": "2017-02-20T09:06:21+0100",
-                    "updated_at": "2017-02-20T09:06:21+0100",
+                    "createdAt": "2017-02-20T09:06:21+0100",
+                    "updatedAt": "2017-02-20T09:06:21+0100",
                     "translations": [
                         {
                             "locale": "en_US",
@@ -349,7 +350,7 @@ Exemplary Response
                             {
                                 "id": 331,
                                 "code": "spoon",
-                                "option_values": [],
+                                "optionValues": [],
                                 "position": 0,
                                 "translations": {
                                     "en_US": {
@@ -360,7 +361,7 @@ Exemplary Response
                                 "on_hold": 0,
                                 "on_hand": 0,
                                 "tracked": false,
-                                "channel_pricings": [],
+                                "channelPricings": [],
                                 "_links": {
                                     "self": {
                                         "href": "\/api\/v1\/products\/spoon\/variants\/spoon"
@@ -400,7 +401,7 @@ Exemplary Response
                             {
                                 "id": 332,
                                 "code": "coffee",
-                                "option_values": [],
+                                "optionValues": [],
                                 "position": 0,
                                 "translations": {
                                     "en_US": {
@@ -411,7 +412,7 @@ Exemplary Response
                                 "on_hold": 0,
                                 "on_hand": 0,
                                 "tracked": false,
-                                "channel_pricings": [],
+                                "channelPricings": [],
                                 "_links": {
                                     "self": {
                                         "href": "\/api\/v1\/products\/coffee\/variants\/coffee"
@@ -443,8 +444,8 @@ Exemplary Response
                         }
                     }
                 ],
-                "created_at": "2017-02-20T09:23:28+0100",
-                "updated_at": "2017-02-20T09:23:28+0100"
+                "createdAt": "2017-02-20T09:23:28+0100",
+                "updatedAt": "2017-02-20T09:23:28+0100"
             }
         ],
         "translations": {
@@ -692,7 +693,7 @@ Exemplary Response
             {
                 "id": 331,
                 "code": "spoon",
-                "option_values": [],
+                "optionValues": [],
                 "position": 0,
                 "translations": {
                     "en_US": {
@@ -703,7 +704,7 @@ Exemplary Response
                 "on_hold": 0,
                 "on_hand": 0,
                 "tracked": false,
-                "channel_pricings": [],
+                "channelPricings": [],
                 "_links": {
                     "self": {
                         "href": "\/api\/v1\/products\/spoon\/variants\/spoon"
@@ -747,17 +748,17 @@ Definition
 
     GET /api/v1/products/
 
-+---------------------------------------+----------------+---------------------------------------------------+
-| Parameter                             | Parameter type | Description                                       |
-+=======================================+================+===================================================+
-| Authorization                         | header         | Token received during authentication              |
-+---------------------------------------+----------------+---------------------------------------------------+
-| limit                                 | query          | *(optional)* Number of items to display per page, |
-|                                       |                | by default = 10                                   |
-+---------------------------------------+----------------+---------------------------------------------------+
-| sorting['name_of_field']['direction'] | query          | *(optional)* Field and direction of sorting,      |
-|                                       |                | by default 'desc' and 'createdAt'                 |
-+---------------------------------------+----------------+---------------------------------------------------+
++-------------------------------------+----------------+---------------------------------------------------+
+| Parameter                           | Parameter type | Description                                       |
++=====================================+================+===================================================+
+| Authorization                       | header         | Token received during authentication              |
++-------------------------------------+----------------+---------------------------------------------------+
+| limit                               | query          | *(optional)* Number of items to display per page, |
+|                                     |                | by default = 10                                   |
++-------------------------------------+----------------+---------------------------------------------------+
+| sorting['nameOfField']['direction'] | query          | *(optional)* Field and direction of sorting,      |
+|                                     |                | by default 'desc' and 'createdAt'                 |
++-------------------------------------+----------------+---------------------------------------------------+
 
 To see the first page of all products use the below method:
 
