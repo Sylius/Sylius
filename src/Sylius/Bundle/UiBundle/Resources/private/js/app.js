@@ -9,20 +9,9 @@
 
 (function($) {
   $(document).ready(function() {
-    var $primarySidebar = $('#sidebar').first();
-    $primarySidebar.sidebar('setting', { dimPage: false, closable: false });
-    if(localStorage.getItem('sidebar_visible') === 'true') {
-        $primarySidebar.addClass('visible');
-    }
-    $('#sidebar-toggle').click(function () {
-        if(localStorage.getItem('sidebar_visible') !== 'true') {
-            localStorage.setItem('sidebar_visible', 'true');
-            $primarySidebar.sidebar('show');
-        } else {
-            localStorage.setItem('sidebar_visible', 'false');
-            $primarySidebar.sidebar('hide');
-        }
-    });
+    $('#sidebar').addClass('visible');
+    $('#sidebar').first().sidebar('attach events', '#sidebar-toggle', 'toggle');
+    $('#sidebar').first().sidebar('setting', { dimPage: false });
 
     $('.ui.checkbox').checkbox();
     $('.ui.accordion').accordion();
