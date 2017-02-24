@@ -368,7 +368,7 @@ Definition
 Example
 ^^^^^^^
 
-To see the details of the the taxon with ``code = toys`` use the below method:
+To see the details of the taxon with ``code = toys`` use the below method:
 
 .. code-block:: bash
 

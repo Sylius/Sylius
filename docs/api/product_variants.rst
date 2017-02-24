@@ -381,7 +381,7 @@ Definition
 Example
 ^^^^^^^
 
-To see the details of the the product variant with ``code = medium-theme-mug``, which is defined for the product with ``code = MUG-TH`` use the below method.
+To see the details of the product variant with ``code = medium-theme-mug``, which is defined for the product with ``code = MUG-TH`` use the below method.
 
 .. code-block:: bash
 

@@ -58,7 +58,7 @@ Definition
 Example
 ^^^^^^^
 
-To see the details of the the tax rate with ``code = clothing_sales_tax_7`` use the below method:
+To see the details of the tax rate with ``code = clothing_sales_tax_7`` use the below method:
 
 .. code-block:: bash
 
