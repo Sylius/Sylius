@@ -1,7 +1,6 @@
 <div class="ui stackable two column grid">
     <div class="column">
-        {{ headers.default(header|trans, configuration.vars.icon|default('plus'), configuration.vars.subheader|default(null)|trans) }}
-
+        {% include configuration.vars.templates.header_title|default('@SyliusAdmin/Crud/Create/_headerTitle.html.twig') %}
         {% include configuration.vars.templates.breadcrumb|default('@SyliusAdmin/Crud/Create/_breadcrumb.html.twig') %}
     </div>
     <div class="middle aligned column">
