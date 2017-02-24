@@ -29,6 +29,5 @@ sylius:
         payment_method:
             description: Opis
             enabled: Aktywna?
-            gateway: Bramka
             instructions: Instrukcje
             name: Nazwa

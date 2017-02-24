@@ -29,5 +29,4 @@ sylius:
         payment_method:
             description: Përshkrimi
             enabled: U mundësua?
-            gateway: Gateway
             name: Emri

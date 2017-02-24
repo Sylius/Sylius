@@ -29,6 +29,5 @@ sylius:
         payment_method:
             description: Leírás
             enabled: Engedélyezve?
-            gateway: Átjáró
             instructions: Utasítások
             name: Név

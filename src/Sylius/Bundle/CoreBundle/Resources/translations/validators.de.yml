@@ -35,6 +35,9 @@ sylius:
     order:
         currency_code:
             not_valid: Der eingegebene Währungscode ist ungültig.
+        payment_method_eligibility: 'Diese Zahlung Methode %paymentMethodName% wurde deaktiviert. Bitte wählen Sie eine andere Zahlungsart aus.'
+        product_eligibility: 'Dieses Produkt %productName% wurde deaktiviert.'
+        shipping_method_eligibility: 'Das Produkt erfüllt nicht die Voraussetzungen für die Versandart %shippingMethodName%. Bitte wählen Sie eine andere Versandart.'
     locale:
         code:
             not_blank: Bitte lokalen Code eingeben.

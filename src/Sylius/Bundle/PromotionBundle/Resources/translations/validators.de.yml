@@ -32,7 +32,7 @@ sylius:
             min: Das Nutzungslimit eines Gutscheincodes muss mindestens {{ limit }} sein.
     promotion_coupon_generator_instruction:
         amount:
-            min: Die Anzahl der zu erstellenden Gutscheinodes muss mindestens {{ limit }} sein.
+            min: Die Anzahl der zu erstellenden Gutscheincodes muss mindestens {{ limit }} sein.
             not_blank: Bitte geben Sie die Anzahl der zu generierenden Gutscheincodes ein.
         code_length:
             min: Der Gutscheincode muss mindestens {{ limit }} Zeichen lang sein.

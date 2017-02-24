@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        gateway_config:
+            type: Τύπος
+        gateway_configuration:
+            paypal:
+                password: Κωδικός πρόσβασης
+                username: Όνομα χρήστη
