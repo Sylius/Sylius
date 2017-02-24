@@ -8,7 +8,7 @@ Feature: Deleting a product
         Given the store operates on a single channel in "United States"
         And the store has a product "Toyota GT86 model"
         And this product has "1:43" variant priced at "$15.00"
-        And this product has one review
+        And this product has one review from customer "john@doe.com"
         And I am logged in as an administrator
 
     @ui
