@@ -6,6 +6,8 @@
 {% include '@SyliusShop/Product/Index/_pagination.html.twig' %}
 {% include '@SyliusShop/Product/Index/_sorting.html.twig' %}
 
+<div class="ui clearing hidden divider"></div>
+
 {% if resources.data|length > 0 %}
     <div class="ui three column stackable grid" id="products">
         {% for product in resources.data %}
