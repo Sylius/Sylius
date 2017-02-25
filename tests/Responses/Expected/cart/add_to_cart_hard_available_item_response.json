@@ -1,35 +1,5 @@
 {
     "id": @integer@,
-    "order": {
-        "id": @integer@,
-        "items": [],
-        "itemsTotal": 20,
-        "adjustments": [],
-        "adjustmentsTotal": 0,
-        "total": 20,
-        "customer": {
-            "id": @integer@,
-            "email": "oliver.queen@star-city.com",
-            "firstName": "Oliver",
-            "lastName": "Queen",
-            "_links": {
-                "self": {
-                    "href": "@string@"
-                }
-            }
-        },
-        "channel": {
-            "code": "WEB",
-            "_links": {
-                "self": {
-                    "href": "@string@"
-                }
-            }
-        },
-        "currencyCode": "USD",
-        "localeCode": "en_US",
-        "checkoutState": "cart"
-    },
     "quantity": 1,
     "unitPrice": 20,
     "total": 20,
@@ -43,13 +13,51 @@
     "unitsTotal": 20,
     "adjustments": [],
     "adjustmentsTotal": 0,
-    "variant": {},
+    "variant": {
+        "id": @integer@,
+        "code": "HARD_AVAILABLE_MUG",
+        "optionValues": [
+            {
+                "code": "MUG_SIZE_L",
+                "translations": {
+                    "en_US": {
+                        "id": @integer@,
+                        "value": "Size L"
+                    }
+                }
+            }
+        ],
+        "position": 1,
+        "translations": {
+            "en_US": {
+                "id": @integer@,
+                "name": "Breaking bad mug"
+            }
+        },
+        "tracked": true,
+        "channelPricings": [
+            {
+                "channel": {
+                    "code": "WEB",
+                    "_links": {
+                        "self": {
+                            "href": "\/api\/v1\/channels\/WEB"
+                        }
+                    }
+                },
+                "price": 20
+            }
+        ]
+    },
     "_links": {
-        "product": {
+        "order": {
             "href": "@string@"
         },
+        "product": {
+            "href": "\/api\/v1\/products\/MUG"
+        },
         "variant": {
-            "href": "@string@"
+            "href": "\/api\/v1\/products\/MUG\/variants\/HARD_AVAILABLE_MUG"
         }
     }
 }

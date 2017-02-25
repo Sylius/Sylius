@@ -14,56 +14,64 @@ Cart API response structure
 
 If you request a cart via API, you will receive an object with the following fields:
 
-+-------------------+-------------------------------------------------------------------+
-| Field             | Description                                                       |
-+===================+===================================================================+
-| id                | Id of the cart                                                    |
-+-------------------+-------------------------------------------------------------------+
-| items             | List of items in the cart                                         |
-+-------------------+-------------------------------------------------------------------+
-| itemsTotal        | Sum of all items prices                                           |
-+-------------------+-------------------------------------------------------------------+
-| adjustments       | List of adjustments related to the cart                           |
-+-------------------+-------------------------------------------------------------------+
-| adjustmentsTotal  | Sum of all cart adjustments values                                |
-+-------------------+-------------------------------------------------------------------+
-| total             | Sum of items total and adjustments total                          |
-+-------------------+-------------------------------------------------------------------+
-| customer          | :doc:`Customer detailed serialization </api/customers>` for cart  |
-+-------------------+-------------------------------------------------------------------+
-| channel           | :doc:`Default channel serialization </api/channels>`              |
-+-------------------+-------------------------------------------------------------------+
-| currencyCode      | Currency of the cart                                              |
-+-------------------+-------------------------------------------------------------------+
-| checkoutState     | State of the checkout process of the cart                         |
-+-------------------+-------------------------------------------------------------------+
++-------------------+---------------------------------------------------------------------------------------+
+| Field             | Description                                                                           |
++===================+=======================================================================================+
+| id                | Id of the cart                                                                        |
++-------------------+---------------------------------------------------------------------------------------+
+| items             | List of items in the cart                                                             |
++-------------------+---------------------------------------------------------------------------------------+
+| itemsTotal        | Sum of all items prices                                                               |
++-------------------+---------------------------------------------------------------------------------------+
+| adjustments       | List of adjustments related to the cart                                               |
++-------------------+---------------------------------------------------------------------------------------+
+| adjustmentsTotal  | Sum of all cart adjustments values                                                    |
++-------------------+---------------------------------------------------------------------------------------+
+| total             | Sum of items total and adjustments total                                              |
++-------------------+---------------------------------------------------------------------------------------+
+| customer          | :doc:`The customer object serialized with the default data </api/customers>` for cart |
++-------------------+---------------------------------------------------------------------------------------+
+| channel           | :doc:`The channel object serialized with the default data </api/channels>`            |
++-------------------+---------------------------------------------------------------------------------------+
+| currencyCode      | Currency of the cart                                                                  |
++-------------------+---------------------------------------------------------------------------------------+
+| localeCode        | Locale of the cart                                                                    |
++-------------------+---------------------------------------------------------------------------------------+
+| checkoutState     | State of the checkout process of the cart                                             |
++-------------------+---------------------------------------------------------------------------------------+
 
 CartItem API response structure
 -------------------------------
 
 Each CartItem in an API response will be build as follows:
 
-+-------------------+------------------------------------------------------------+
-| Field             | Description                                                |
-+===================+============================================================+
-| id                | Id of the cart item                                        |
-+-------------------+------------------------------------------------------------+
-| quantity          | Quantity of item units                                     |
-+-------------------+------------------------------------------------------------+
-| unitPrice         | Price of each item unit                                    |
-+-------------------+------------------------------------------------------------+
-| total             | Sum of units total and adjustments total of that cart item |
-+-------------------+------------------------------------------------------------+
-| units             | A collection of units related to the cart item             |
-+-------------------+------------------------------------------------------------+
-| unitsTotal        | Sum of all units prices of the cart item                   |
-+-------------------+------------------------------------------------------------+
-| adjustments       | List of adjustments related to the cart item               |
-+-------------------+------------------------------------------------------------+
-| adjustmentsTotal  | Sum of all item adjustments related to that cart item      |
-+-------------------+------------------------------------------------------------+
-| variant           | Default variant serialization                              |
-+-------------------+------------------------------------------------------------+
++-------------------+--------------------------------------------------------------------------------------------+
+| Field             | Description                                                                                |
++===================+============================================================================================+
+| id                | Id of the cart item                                                                        |
++-------------------+--------------------------------------------------------------------------------------------+
+| quantity          | Quantity of item units                                                                     |
++-------------------+--------------------------------------------------------------------------------------------+
+| unitPrice         | Price of each item unit                                                                    |
++-------------------+--------------------------------------------------------------------------------------------+
+| total             | Sum of units total and adjustments total of that cart item                                 |
++-------------------+--------------------------------------------------------------------------------------------+
+| units             | A collection of units related to the cart item                                             |
++-------------------+--------------------------------------------------------------------------------------------+
+| unitsTotal        | Sum of all units prices of the cart item                                                   |
++-------------------+--------------------------------------------------------------------------------------------+
+| adjustments       | List of adjustments related to the cart item                                               |
++-------------------+--------------------------------------------------------------------------------------------+
+| adjustmentsTotal  | Sum of all item adjustments related to that cart item                                      |
++-------------------+--------------------------------------------------------------------------------------------+
+| variant           | :doc:`The product variant object serialized with the default data </api/product_variants>` |
++-------------------+--------------------------------------------------------------------------------------------+
+| _link[product]    | Relative link to product                                                                   |
++-------------------+--------------------------------------------------------------------------------------------+
+| _link[variant]    | Relative link to variant                                                                   |
++-------------------+--------------------------------------------------------------------------------------------+
+| _link[order]      | Relative link to order                                                                     |
++-------------------+--------------------------------------------------------------------------------------------+
 
 CartItemUnit API response structure
 -----------------------------------
@@ -114,17 +122,17 @@ Definition
 
     POST /api/v1/carts/
 
-+--------------------+----------------+----------------------------------------------------------+
-| Parameter          | Parameter type | Description                                              |
-+====================+================+==========================================================+
-| Authorization      | header         | Token received during authentication                     |
-+--------------------+----------------+----------------------------------------------------------+
-| customer           | request        | Email of the related customer                            |
-+--------------------+----------------+----------------------------------------------------------+
-| channel            | request        | Code of the related channel                              |
-+--------------------+----------------+----------------------------------------------------------+
-| localeCode         | request        | Code of the locale in which the cart should be created   |
-+--------------------+----------------+----------------------------------------------------------+
++---------------+----------------+----------------------------------------------------------+
+| Parameter     | Parameter type | Description                                              |
++===============+================+==========================================================+
+| Authorization | header         | Token received during authentication                     |
++---------------+----------------+----------------------------------------------------------+
+| customer      | request        | Email of the related customer                            |
++---------------+----------------+----------------------------------------------------------+
+| channel       | request        | Code of the related channel                              |
++---------------+----------------+----------------------------------------------------------+
+| localeCode    | request        | Code of the locale in which the cart should be created   |
++---------------+----------------+----------------------------------------------------------+
 
 Example
 ^^^^^^^
@@ -138,7 +146,7 @@ To create a new cart for the ``shop@example.com`` user in the ``US_WEB`` channel
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/carts/ \
+    $ curl http://demo.sylius.org:8000/api/v1/carts/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST \
@@ -179,18 +187,23 @@ Exemplary Response
                 "id":1,
                 "username":"shop@example.com",
                 "usernameCanonical":"shop@example.com"
+            },
+            "_links":{
+                "self":{
+                    "href":"\/api\/v1\/customers\/1"
+                }
             }
         },
         "channel":{
             "code":"US_WEB",
             "_links":{
                 "self":{
-                    "href":"\/api\/v1\/channels\/1"
+                    "href":"\/api\/v1\/channels\/US_WEB"
                 }
             }
         },
         "currencyCode":"USD",
-        "localeCode": "en_US",
+        "localeCode":"en_US",
         "checkoutState":"cart"
     }
 
@@ -207,7 +220,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/carts/ \
+    $ curl http://demo.sylius.org:8000/api/v1/carts/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X POST
@@ -274,7 +287,7 @@ To see the first page of the paginated carts collection use the below method:
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/carts/ \
+    $ curl http://demo.sylius.org:8000/api/v1/carts/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
@@ -325,18 +338,24 @@ Exemplary Response
                             "id":1,
                             "username":"shop@example.com",
                             "enabled":true
+                        },
+                        "_links":{
+                            "self":{
+                                "href":"\/api\/v1\/customers\/1"
+                            }
                         }
                     },
                     "channel":{
+                        "id":1,
                         "code":"US_WEB",
                         "_links":{
                             "self":{
-                                "href":"\/api\/v1\/channels\/1"
+                                "href":"\/api\/v1\/channels\/US_WEB"
                             }
                         }
                     },
                     "currencyCode":"USD",
-                    "localeCode": "en_US",
+                    "localeCode":"en_US",
                     "checkoutState":"cart"
                 }
             ]
@@ -370,7 +389,7 @@ To see details of the cart with ``id = 21`` use the below method:
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/carts/21 \
+    $ curl http://demo.sylius.org:8000/api/v1/carts/21 \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
@@ -408,18 +427,23 @@ Exemplary Response
                 "id":1,
                 "username":"shop@example.com",
                 "usernameCanonical":"shop@example.com"
+            },
+            "_links":{
+                "self":{
+                    "href":"\/api\/v1\/customers\/1"
+                }
             }
         },
         "channel":{
             "code":"US_WEB",
             "_links":{
                 "self":{
-                    "href":"\/api\/v1\/channels\/1"
+                    "href":"\/api\/v1\/channels\/US_WEB"
                 }
             }
         },
         "currencyCode":"USD",
-        "localeCode": "en_US",
+        "localeCode":"en_US",
         "checkoutState":"cart"
     }
 
@@ -450,7 +474,7 @@ To delete the cart with ``id = 21`` use the below method:
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/carts/21 \
+    $ curl http://demo.sylius.org:8000/api/v1/carts/21 \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X DELETE
@@ -498,7 +522,7 @@ to the cart with id = 21 (assuming, that we didn't remove it in the previous exa
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/carts/21/items/ \
+    $ curl http://demo.sylius.org:8000/api/v1/carts/21/items/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST \
@@ -519,76 +543,72 @@ Exemplary Response
 .. code-block:: json
 
     {
-        "id":58,
-        "order":{
-            "id":21,
-            "items":[
-
-            ],
-            "itemsTotal":175,
-            "adjustments":[
-
-            ],
-            "adjustmentsTotal":7515,
-            "total":7690,
-            "customer":{
-                "id":1,
-                "email":"shop@example.com",
-                "firstName":"John",
-                "lastName":"Doe",
-                "user":{
-                    "id":1,
-                    "username":"shop@example.com",
-                    "usernameCanonical":"shop@example.com"
-                },
-                "_links":{
-                    "self":{
-                        "href":"\/api\/v1\/customers\/1"
-                    }
-                }
-            },
-            "channel":{
-                "code":"US_WEB",
-                "_links":{
-                    "self":{
-                        "href":"\/api\/v1\/channels\/2"
-                    }
-                }
-            },
-            "currencyCode":"USD",
-            "localeCode": "en_US",
-            "checkoutState":"cart"
-        },
+        "id":57,
         "quantity":1,
-        "unitPrice":175,
-        "total":175,
+        "unitPrice":250,
+        "total":250,
         "units":[
             {
-                "id":194,
+                "id":165,
                 "adjustments":[
 
                 ],
                 "adjustmentsTotal":0
             }
         ],
-        "unitsTotal":175,
+        "unitsTotal":250,
         "adjustments":[
 
         ],
         "adjustmentsTotal":0,
         "variant":{
-
+            "id":331,
+            "code":"MEDIUM_MUG_CUP",
+            "optionValues":[
+                {
+                    "code":"mug_type_medium",
+                    "translations":{
+                        "en_US":{
+                            "id":1,
+                            "value":"Medium mug"
+                        }
+                    }
+                }
+            ],
+            "position":2,
+            "translations":{
+                "en_US":{
+                    "id":331,
+                    "name":"Medium Mug"
+                }
+            },
+            "tracked":false,
+            "channelPricings":[
+                {
+                    "channel":{
+                        "code":"US_WEB",
+                        "_links":{
+                            "self":{
+                                "href":"\/api\/v1\/channels\/US_WEB"
+                            }
+                        }
+                    },
+                    "price":250
+                }
+            ]
         },
         "_links":{
+            "order":{
+                "href":"\/api\/v1\/orders\/21"
+            },
             "product":{
-                "href":"\/api\/v1\/products\/21"
+                "href":"\/api\/v1\/products\/07f2044a-855d-3c56-9274-b5167c2d5809"
             },
             "variant":{
-                "href":"\/api\/v1\/products\/21\/variants\/61"
+                "href":"\/api\/v1\/products\/07f2044a-855d-3c56-9274-b5167c2d5809\/variants\/MEDIUM_MUG_CUP"
             }
         }
     }
-
 .. tip::
 
     In Sylius the prices are stored as an integers (``1059`` represents ``10.59$``).
@@ -621,12 +641,12 @@ Definition
 Example
 ^^^^^^^
 
-To change the quantity of the cart item with ``id = 58`` in the cart of ``id = 21`` to 3 use the below method:
+To change the quantity of the cart item with ``id = 57`` in the cart of ``id = 21`` to 3 use the below method:
 
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/carts/21/items/58 \
+    $ curl http://demo.sylius.org:8000/api/v1/carts/21/items/57 \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PUT \
@@ -648,7 +668,7 @@ Now we can check how does the cart look like after changing the quantity of a ca
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/carts/21 \
+    $ curl http://demo.sylius.org:8000/api/v1/carts/21 \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
@@ -665,77 +685,98 @@ Exemplary Response
         "id":21,
         "items":[
             {
-                "id":58,
+                "id":57,
                 "quantity":3,
-                "unitPrice":175,
-                "total":73,
+                "unitPrice":250,
+                "total":750,
                 "units":[
                     {
-                        "id":194,
+                        "id":165,
                         "adjustments":[
-                            {
-                                "id":215,
-                                "type":"order_promotion",
-                                "label":"Christmas",
-                                "amount":-151
-                            }
+
                         ],
-                        "adjustmentsTotal":-151
+                        "adjustmentsTotal":0
                     },
                     {
-                        "id":195,
+                        "id":166,
                         "adjustments":[
-                            {
-                                "id":216,
-                                "type":"order_promotion",
-                                "label":"Christmas",
-                                "amount":-151
-                            }
+
                         ],
-                        "adjustmentsTotal":-151
+                        "adjustmentsTotal":0
                     },
                     {
-                        "id":196,
+                        "id":167,
                         "adjustments":[
-                            {
-                                "id":217,
-                                "type":"order_promotion",
-                                "label":"Christmas",
-                                "amount":-150
-                            }
+
                         ],
-                        "adjustmentsTotal":-150
+                        "adjustmentsTotal":0
                     }
                 ],
-                "unitsTotal":73,
+                "unitsTotal":750,
                 "adjustments":[
 
                 ],
                 "adjustmentsTotal":0,
                 "variant":{
-
+                    "id":331,
+                    "code":"MEDIUM_MUG_CUP",
+                    "optionValues":[
+                        {
+                            "code":"mug_type_medium",
+                            "translations":{
+                                "en_US":{
+                                    "id":1,
+                                    "value":"Medium mug"
+                                }
+                            }
+                        }
+                    ],
+                    "position":2,
+                    "translations":{
+                        "en_US":{
+                            "id":331,
+                            "name":"Medium Mug"
+                        }
+                    },
+                    "tracked":false,
+                    "channelPricings":[
+                        {
+                            "channel":{
+                                "code":"US_WEB",
+                                "_links":{
+                                    "self":{
+                                        "href":"\/api\/v1\/channels\/US_WEB"
+                                    }
+                                }
+                            },
+                            "price":250
+                        }
+                    ]
                 },
                 "_links":{
+                    "order":{
+                        "href":"\/api\/v1\/orders\/21"
+                    },
                     "product":{
-                        "href":"\/api\/v1\/products\/21"
+                        "href":"\/api\/v1\/products\/07f2044a-855d-3c56-9274-b5167c2d5809"
                     },
                     "variant":{
-                        "href":"\/api\/v1\/products\/21\/variants\/61"
+                        "href":"\/api\/v1\/products\/07f2044a-855d-3c56-9274-b5167c2d5809\/variants\/MEDIUM_MUG_CUP"
                     }
                 }
             }
         ],
-        "itemsTotal":73,
+        "itemsTotal":750,
         "adjustments":[
             {
-                "id":218,
+                "id":181,
                 "type":"shipping",
                 "label":"UPS",
-                "amount":7515
+                "amount":157
             }
         ],
-        "adjustmentsTotal":7515,
-        "total":7588,
+        "adjustmentsTotal":157,
+        "total":907,
         "customer":{
             "id":1,
             "email":"shop@example.com",
@@ -756,12 +797,12 @@ Exemplary Response
             "code":"US_WEB",
             "_links":{
                 "self":{
-                    "href":"\/api\/v1\/channels\/2"
+                    "href":"\/api\/v1\/channels\/US_WEB"
                 }
             }
         },
         "currencyCode":"USD",
-    "localeCode": "en_US",
+        "localeCode":"en_US",
         "checkoutState":"cart"
     }
 
@@ -798,7 +839,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/carts/21/items/58 \
+    $ curl http://demo.sylius.org:8000/api/v1/carts/21/items/58 \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X DELETE

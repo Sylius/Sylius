@@ -40,6 +40,7 @@ Sylius\Component\Core\Model\Product:
         channels: ["@channel_web"]
         currentLocale: en_US
         currentTranslation: "@mug_translation"
+        options: ["@mug-size"]
 
 Sylius\Component\Core\Model\ProductTranslation:
     mug_translation:
@@ -57,6 +58,7 @@ Sylius\Component\Core\Model\ProductVariant:
         currentTranslation: "@sw_mug_translation"
         updatedAt: 2015-10-10
         channelPricings: ["@sw_mug_web_channel_pricing"]
+        optionValues: ["@mug-size-s"]
     hard_available_mug:
         code: HARD_AVAILABLE_MUG
         product: "@mug"
@@ -64,6 +66,7 @@ Sylius\Component\Core\Model\ProductVariant:
         currentTranslation: "@hard_available_mug_translation"
         updatedAt: 2015-10-05
         channelPricings: ["@hard_available_mug_web_channel_pricing"]
+        optionValues: ["@mug-size-l"]
         tracked: true
         onHand: 2
 
@@ -84,3 +87,36 @@ Sylius\Component\Core\Model\ChannelPricing:
     hard_available_mug_web_channel_pricing:
         channel: "@channel_web"
         price: 20
+
+Sylius\Component\Product\Model\ProductOption:
+    mug-size:
+        code: "MUG_SIZE"
+    mug-color:
+        code: "MUG_COLOR"
+
+Sylius\Component\Product\Model\ProductOptionValue:
+    mug-size-s:
+        currentLocale: 'en_US'
+        fallbackLocale: 'en_US'
+        code: "MUG_SIZE_S"
+        option: "@mug-size"
+        translations:
+            - "@mug-size-s-translations"
+    mug-size-l:
+        currentLocale: 'en_US'
+        fallbackLocale: 'en_US'
+        code: "MUG_SIZE_L"
+        option: "@mug-size"
+        translations:
+            - "@mug-size-l-translations"
+
+Sylius\Component\Product\Model\ProductOptionValueTranslation:
+    mug-size-s-translations:
+        locale: 'en_US'
+        value: 'Size S'
+        translatable: "@mug-size-s"
+    mug-size-l-translations:
+        locale: 'en_US'
+        value: 'Size L'
+        translatable: "@mug-size-l"
+

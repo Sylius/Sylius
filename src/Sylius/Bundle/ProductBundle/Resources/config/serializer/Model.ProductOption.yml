@@ -18,4 +18,4 @@ Sylius\Component\Product\Model\ProductOption:
         values:
             expose: true
             type: array
-            groups: [Detailed]
+            groups: [Default, Detailed]

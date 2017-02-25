@@ -1,13 +1,15 @@
-Sylius\Component\Core\Model\ChannelPricing:
+Sylius\Component\Product\Model\ProductVariantTranslation:
     exclusion_policy: ALL
-    xml_root_name: channel
+    xml_root_name: variant
     properties:
-        channel:
+        id:
             expose: true
             groups: [Default, Detailed, DetailedCart]
-        price:
+        locale:
             expose: true
+            type: string
             groups: [Default, Detailed, DetailedCart]
-        productVariant:
+        name:
             expose: true
+            type: string
             groups: [Default, Detailed, DetailedCart]

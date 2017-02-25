@@ -6,23 +6,23 @@ Sylius\Component\Product\Model\ProductVariant:
             expose: true
             type: integer
             xml_attribute: true
-            groups: [Default, Detailed]
+            groups: [Default, Detailed, DetailedCart]
         code:
             expose: true 
             type: string 
-            groups: [Detailed, Default] 
+            groups: [Default, Detailed, DetailedCart] 
         position:
             expose: true 
             type: integer 
-            groups: [Detailed, Default] 
+            groups: [Default, Detailed, DetailedCart] 
         optionValues:
             expose: true 
             type: array 
-            groups: [Detailed, Default] 
+            groups: [Default, Detailed, DetailedCart] 
         translations:
             expose: true 
             type: array 
-            groups: [Detailed, Default] 
+            groups: [Default, Detailed, DetailedCart] 
     relations:
         - rel: self
           href:

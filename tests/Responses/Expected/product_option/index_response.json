@@ -19,12 +19,35 @@
             {
                 "id": @integer@,
                 "code": "MUG_SIZE",
-                "position": 0
+                "position": 0,
+                "values": [
+                    {
+                        "code": "MUG_SIZE_S",
+                        "translations": {
+                            "en_US": {
+                                "id": @integer@,
+                                "locale": "en_US",
+                                "value": "Size S"
+                            }
+                        }
+                    },
+                    {
+                        "code": "MUG_SIZE_L",
+                        "translations": {
+                            "en_US": {
+                                "id": @integer@,
+                                "locale": "en_US",
+                                "value": "Size L"
+                            }
+                        }
+                    }
+                ]
             },
             {
                 "id": @integer@,
                 "code": "MUG_COLOR",
-                "position": 1
+                "position": 1,
+                "values": []
             }
         ]
     }
