@@ -48,35 +48,35 @@ Definition
 +------------------------------+----------------+-----------------------------------------------------------------------------------------------------+
 | id                           | url attribute  | Id of the requested cart                                                                            |
 +------------------------------+----------------+-----------------------------------------------------------------------------------------------------+
-| different_billing_address    | request        | If false, the billing address fields are not required and data from the shipping address is copied  |
+| differentBillingAddress      | request        | If false, the billing address fields are not required and data from the shipping address is copied  |
 +------------------------------+----------------+-----------------------------------------------------------------------------------------------------+
-| shipping_address[first_name] | request        | First name for the shipping address                                                                 |
+| shippingAddress[firstName]   | request        | First name for the shipping address                                                                 |
 +------------------------------+----------------+-----------------------------------------------------------------------------------------------------+
-| shipping_address[last_name]  | request        | Last name for the shipping address                                                                  |
+| shippingAddress[lastName]    | request        | Last name for the shipping address                                                                  |
 +------------------------------+----------------+-----------------------------------------------------------------------------------------------------+
-| shipping_address[city]       | request        | City name                                                                                           |
+| shippingAddress[city]        | request        | City name                                                                                           |
 +------------------------------+----------------+-----------------------------------------------------------------------------------------------------+
-| shipping_address[postcode]   | request        | Postcode                                                                                            |
+| shippingAddress[postcode]    | request        | Postcode                                                                                            |
 +------------------------------+----------------+-----------------------------------------------------------------------------------------------------+
-| shipping_address[street]     | request        | Street                                                                                              |
+| shippingAddress[street]      | request        | Street                                                                                              |
 +------------------------------+----------------+-----------------------------------------------------------------------------------------------------+
-| shipping_address[country]    | request        | Id of the country                                                                                   |
+| shippingAddress[country]     | request        | Id of the country                                                                                   |
 +------------------------------+----------------+-----------------------------------------------------------------------------------------------------+
-| shipping_address[province]   | request        | *(optional)* Id of the province                                                                     |
+| shippingAddress[province]    | request        | *(optional)* Id of the province                                                                     |
 +------------------------------+----------------+-----------------------------------------------------------------------------------------------------+
-| billing_address[first_name]  | request        | *(optional)* First name for the billing address                                                     |
+| billingAddress[firstName]    | request        | *(optional)* First name for the billing address                                                     |
 +------------------------------+----------------+-----------------------------------------------------------------------------------------------------+
-| billing_address[last_name]   | request        | *(optional)* Last name for the billing address                                                      |
+| billingAddress[lastName]     | request        | *(optional)* Last name for the billing address                                                      |
 +------------------------------+----------------+-----------------------------------------------------------------------------------------------------+
-| billing_address[city]        | request        | *(optional)* City name                                                                              |
+| billingAddress[city]         | request        | *(optional)* City name                                                                              |
 +------------------------------+----------------+-----------------------------------------------------------------------------------------------------+
-| billing_address[postcode]    | request        | *(optional)* Postcode                                                                               |
+| billingAddress[postcode]     | request        | *(optional)* Postcode                                                                               |
 +------------------------------+----------------+-----------------------------------------------------------------------------------------------------+
-| billing_address[street]      | request        | *(optional)* Street                                                                                 |
+| billingAddress[street]       | request        | *(optional)* Street                                                                                 |
 +------------------------------+----------------+-----------------------------------------------------------------------------------------------------+
-| billing_address[country]     | request        | *(optional)* Id of the country                                                                      |
+| billingAddress[country]      | request        | *(optional)* Id of the country                                                                      |
 +------------------------------+----------------+-----------------------------------------------------------------------------------------------------+
-| billing_address[province]    | request        | *(optional)* Id of the province                                                                     |
+| billingAddress[province]     | request        | *(optional)* Id of the province                                                                     |
 +------------------------------+----------------+-----------------------------------------------------------------------------------------------------+
 
 .. note::
@@ -96,15 +96,15 @@ To address the cart for a user that lives in ``Los Angeles`` in the United State
         -X PUT \
         --data '
             {
-                "shipping_address": {
-                    "first_name": "Elon",
-                    "last_name": "Musk",
+                "shippingAddress": {
+                    "firstName": "Elon",
+                    "lastName": "Musk",
                     "street": "10941 Savona Rd",
-                    "country_code": "US",
+                    "countryCode": "US",
                     "city": "’Los Angeles",
                     "postcode": "CA 90077"
                 },
-                "different_billing_address": false
+                "differentBillingAddress": false
             }
         '
 
@@ -143,24 +143,24 @@ Exemplary Response
             {
                 "id":74,
                 "quantity":1,
-                "unit_price":100000,
+                "unitPrice":100000,
                 "total":100000,
                 "units":[
                     {
                         "id":228,
                         "adjustments":[
                         ],
-                        "adjustments_total":0
+                        "adjustmentsTotal":0
                     }
                 ],
-                "units_total":100000,
+                "unitsTotal":100000,
                 "adjustments":[
                 ],
-                "adjustments_total":0,
+                "adjustmentsTotal":0,
                 "variant":{
                     "id":331,
                     "code":"MEDIUM_MUG_CUP",
-                    "option_values":[
+                    "optionValues":[
                         {
                             "code":"mug_type_medium"
                         }
@@ -173,7 +173,7 @@ Exemplary Response
                     "on_hold":0,
                     "on_hand":10,
                     "tracked":false,
-                    "channel_pricings":[
+                    "channelPricings":[
                         {
                             "channel":{
                                 "id":1,
@@ -181,10 +181,10 @@ Exemplary Response
                                 "name":"US Web Store",
                                 "hostname":"localhost",
                                 "color":"MediumPurple",
-                                "created_at":"2017-02-14T11:10:02+0100",
-                                "updated_at":"2017-02-14T11:10:02+0100",
+                                "createdAt":"2017-02-14T11:10:02+0100",
+                                "updatedAt":"2017-02-14T11:10:02+0100",
                                 "enabled":true,
-                                "tax_calculation_strategy":"order_items_based",
+                                "taxCalculationStrategy":"order_items_based",
                                 "_links":{
                                     "self":{
                                         "href":"\/api\/v1\/channels\/1"
@@ -205,7 +205,7 @@ Exemplary Response
                 }
             }
         ],
-        "items_total":100000,
+        "itemsTotal":100000,
         "adjustments":[
             {
                 "id":249,
@@ -214,20 +214,20 @@ Exemplary Response
                 "amount":8787
             }
         ],
-        "adjustments_total":8787,
+        "adjustmentsTotal":8787,
         "total":108787,
         "state":"cart",
         "customer":{
             "id":1,
             "email":"shop@example.com",
-            "email_canonical":"shop@example.com",
-            "first_name":"John",
-            "last_name":"Doe",
+            "emailCanonical":"shop@example.com",
+            "firstName":"John",
+            "lastName":"Doe",
             "gender":"u",
             "user":{
                 "id":1,
                 "username":"shop@example.com",
-                "username_canonical":"shop@example.com",
+                "usernameCanonical":"shop@example.com",
                 "roles":[
                     "ROLE_USER"
                 ],
@@ -245,28 +245,28 @@ Exemplary Response
             "name":"US Web Store",
             "hostname":"localhost",
             "color":"MediumPurple",
-            "created_at":"2017-02-14T11:10:02+0100",
-            "updated_at":"2017-02-14T11:10:02+0100",
+            "createdAt":"2017-02-14T11:10:02+0100",
+            "updatedAt":"2017-02-14T11:10:02+0100",
             "enabled":true,
-            "tax_calculation_strategy":"order_items_based",
+            "taxCalculationStrategy":"order_items_based",
             "_links":{
                 "self":{
                     "href":"\/api\/v1\/channels\/1"
                 }
             }
         },
-        "shipping_address":{
-            "first_name":"Elon",
-            "last_name":"Musk",
-            "country_code":"US",
+        "shippingAddress":{
+            "firstName":"Elon",
+            "lastName":"Musk",
+            "countryCode":"US",
             "street":"10941 Savona Rd",
             "city":"\u2019Los Angeles",
             "postcode":"CA 90077"
         },
-        "billing_address":{
-            "first_name":"Elon",
-            "last_name":"Musk",
-            "country_code":"US",
+        "billingAddress":{
+            "firstName":"Elon",
+            "lastName":"Musk",
+            "countryCode":"US",
             "street":"10941 Savona Rd",
             "city":"\u2019Los Angeles",
             "postcode":"CA 90077"
@@ -292,9 +292,9 @@ Exemplary Response
                 }
             }
         ],
-        "currency_code":"USD",
-        "locale_code":"en_US",
-        "checkout_state":"addressed"
+        "currencyCode":"USD",
+        "localeCode":"en_US",
+        "checkoutState":"addressed"
     }
 
 Of course, you can specify different shipping and billing addresses. If our user Elon would like to send a gift to the NASA administrator, Frederick D. Gregory, he could send the following request:
@@ -307,20 +307,20 @@ Of course, you can specify different shipping and billing addresses. If our user
         -X PUT \
         --data '
             {
-                "shipping_address": {
-                    "first_name": " Frederick D.",
-                    "last_name": "Gregory",
+                "shippingAddress": {
+                    "firstName": " Frederick D.",
+                    "lastName": "Gregory",
                     "street": "300 E St SW",
-                    "country_code": "US",
+                    "countryCode": "US",
                     "city": "’Washington",
                     "postcode": "DC 20546"
                 },
-                "different_billing_address": true,
-                "billing_address": {
-                    "first_name": "Elon",
-                    "last_name": "Musk",
+                "differentBillingAddress": true,
+                "billingAddress": {
+                    "firstName": "Elon",
+                    "lastName": "Musk",
                     "street": "10941 Savona Rd",
-                    "country_code": "US",
+                    "countryCode": "US",
                     "city": "’Los Angeles",
                     "postcode": "CA 90077"
                 }
@@ -472,24 +472,24 @@ Exemplary Response
             {
                 "id":74,
                 "quantity":1,
-                "unit_price":100000,
+                "unitPrice":100000,
                 "total":100000,
                 "units":[
                     {
                         "id":228,
                         "adjustments":[
                         ],
-                        "adjustments_total":0
+                        "adjustmentsTotal":0
                     }
                 ],
-                "units_total":100000,
+                "unitsTotal":100000,
                 "adjustments":[
                 ],
-                "adjustments_total":0,
+                "adjustmentsTotal":0,
                 "variant":{
                     "id":331,
                     "code":"MEDIUM_MUG_CUP",
-                    "option_values":[
+                    "optionValues":[
                         {
                             "code":"mug_type_medium"
                         }
@@ -502,7 +502,7 @@ Exemplary Response
                     "on_hold":0,
                     "on_hand":10,
                     "tracked":false,
-                    "channel_pricings":[
+                    "channelPricings":[
                         {
                             "channel":{
                                 "id":1,
@@ -510,10 +510,10 @@ Exemplary Response
                                 "name":"US Web Store",
                                 "hostname":"localhost",
                                 "color":"MediumPurple",
-                                "created_at":"2017-02-14T11:10:02+0100",
-                                "updated_at":"2017-02-14T11:10:02+0100",
+                                "createdAt":"2017-02-14T11:10:02+0100",
+                                "updatedAt":"2017-02-14T11:10:02+0100",
                                 "enabled":true,
-                                "tax_calculation_strategy":"order_items_based",
+                                "taxCalculationStrategy":"order_items_based",
                                 "_links":{
                                     "self":{
                                         "href":"\/api\/v1\/channels\/1"
@@ -534,7 +534,7 @@ Exemplary Response
                 }
             }
         ],
-        "items_total":100000,
+        "itemsTotal":100000,
         "adjustments":[
             {
                 "id":251,
@@ -543,20 +543,20 @@ Exemplary Response
                 "amount":3549
             }
         ],
-        "adjustments_total":3549,
+        "adjustmentsTotal":3549,
         "total":103549,
         "state":"cart",
         "customer":{
             "id":1,
             "email":"shop@example.com",
-            "email_canonical":"shop@example.com",
-            "first_name":"John",
-            "last_name":"Doe",
+            "emailCanonical":"shop@example.com",
+            "firstName":"John",
+            "lastName":"Doe",
             "gender":"u",
             "user":{
                 "id":1,
                 "username":"shop@example.com",
-                "username_canonical":"shop@example.com",
+                "usernameCanonical":"shop@example.com",
                 "roles":[
                     "ROLE_USER"
                 ],
@@ -574,28 +574,28 @@ Exemplary Response
             "name":"US Web Store",
             "hostname":"localhost",
             "color":"MediumPurple",
-            "created_at":"2017-02-14T11:10:02+0100",
-            "updated_at":"2017-02-14T11:10:02+0100",
+            "createdAt":"2017-02-14T11:10:02+0100",
+            "updatedAt":"2017-02-14T11:10:02+0100",
             "enabled":true,
-            "tax_calculation_strategy":"order_items_based",
+            "taxCalculationStrategy":"order_items_based",
             "_links":{
                 "self":{
                     "href":"\/api\/v1\/channels\/1"
                 }
             }
         },
-        "shipping_address":{
-            "first_name":"Frederick D.",
-            "last_name":"Gregory",
-            "country_code":"US",
+        "shippingAddress":{
+            "firstName":"Frederick D.",
+            "lastName":"Gregory",
+            "countryCode":"US",
             "street":"300 E St SW",
             "city":"\u2019Washington",
             "postcode":"DC 20546"
         },
-        "billing_address":{
-            "first_name":"Frederick D.",
-            "last_name":"Gregory",
-            "country_code":"US",
+        "billingAddress":{
+            "firstName":"Frederick D.",
+            "lastName":"Gregory",
+            "countryCode":"US",
             "street":"300 E St SW",
             "city":"\u2019Washington",
             "postcode":"DC 20546"
@@ -621,9 +621,9 @@ Exemplary Response
                 }
             }
         ],
-        "currency_code":"USD",
-        "locale_code":"en_US",
-        "checkout_state":"shipping_selected"
+        "currencyCode":"USD",
+        "localeCode":"en_US",
+        "checkoutState":"shipping_selected"
     }
 
 Payment step
@@ -783,24 +783,24 @@ To check the fully constructed cart with `id = 21`, use the following command:
             {
                 "id":74,
                 "quantity":1,
-                "unit_price":100000,
+                "unitPrice":100000,
                 "total":100000,
                 "units":[
                     {
                         "id":228,
                         "adjustments":[
                         ],
-                        "adjustments_total":0
+                        "adjustmentsTotal":0
                     }
                 ],
-                "units_total":100000,
+                "unitsTotal":100000,
                 "adjustments":[
                 ],
-                "adjustments_total":0,
+                "adjustmentsTotal":0,
                 "variant":{
                     "id":331,
                     "code":"MEDIUM_MUG_CUP",
-                    "option_values":[
+                    "optionValues":[
                         {
                             "code":"mug_type_medium"
                         }
@@ -813,7 +813,7 @@ To check the fully constructed cart with `id = 21`, use the following command:
                     "on_hold":0,
                     "on_hand":10,
                     "tracked":false,
-                    "channel_pricings":[
+                    "channelPricings":[
                         {
                             "channel":{
                                 "id":1,
@@ -821,10 +821,10 @@ To check the fully constructed cart with `id = 21`, use the following command:
                                 "name":"US Web Store",
                                 "hostname":"localhost",
                                 "color":"MediumPurple",
-                                "created_at":"2017-02-14T11:10:02+0100",
-                                "updated_at":"2017-02-14T11:10:02+0100",
+                                "createdAt":"2017-02-14T11:10:02+0100",
+                                "updatedAt":"2017-02-14T11:10:02+0100",
                                 "enabled":true,
-                                "tax_calculation_strategy":"order_items_based",
+                                "taxCalculationStrategy":"order_items_based",
                                 "_links":{
                                     "self":{
                                         "href":"\/api\/v1\/channels\/1"
@@ -845,7 +845,7 @@ To check the fully constructed cart with `id = 21`, use the following command:
                 }
             }
         ],
-        "items_total":100000,
+        "itemsTotal":100000,
         "adjustments":[
             {
                 "id":252,
@@ -854,20 +854,20 @@ To check the fully constructed cart with `id = 21`, use the following command:
                 "amount":3549
             }
         ],
-        "adjustments_total":3549,
+        "adjustmentsTotal":3549,
         "total":103549,
         "state":"cart",
         "customer":{
             "id":1,
             "email":"shop@example.com",
-            "email_canonical":"shop@example.com",
-            "first_name":"John",
-            "last_name":"Doe",
+            "emailCanonical":"shop@example.com",
+            "firstName":"John",
+            "lastName":"Doe",
             "gender":"u",
             "user":{
                 "id":1,
                 "username":"shop@example.com",
-                "username_canonical":"shop@example.com",
+                "usernameCanonical":"shop@example.com",
                 "roles":[
                     "ROLE_USER"
                 ],
@@ -885,28 +885,28 @@ To check the fully constructed cart with `id = 21`, use the following command:
             "name":"US Web Store",
             "hostname":"localhost",
             "color":"MediumPurple",
-            "created_at":"2017-02-14T11:10:02+0100",
-            "updated_at":"2017-02-14T11:10:02+0100",
+            "createdAt":"2017-02-14T11:10:02+0100",
+            "updatedAt":"2017-02-14T11:10:02+0100",
             "enabled":true,
-            "tax_calculation_strategy":"order_items_based",
+            "taxCalculationStrategy":"order_items_based",
             "_links":{
                 "self":{
                     "href":"\/api\/v1\/channels\/1"
                 }
             }
         },
-        "shipping_address":{
-            "first_name":"Frederick D.",
-            "last_name":"Gregory",
-            "country_code":"US",
+        "shippingAddress":{
+            "firstName":"Frederick D.",
+            "lastName":"Gregory",
+            "countryCode":"US",
             "street":"300 E St SW",
             "city":"\u2019Washington",
             "postcode":"DC 20546"
         },
-        "billing_address":{
-            "first_name":"Frederick D.",
-            "last_name":"Gregory",
-            "country_code":"US",
+        "billingAddress":{
+            "firstName":"Frederick D.",
+            "lastName":"Gregory",
+            "countryCode":"US",
             "street":"300 E St SW",
             "city":"\u2019Washington",
             "postcode":"DC 20546"
@@ -932,9 +932,9 @@ To check the fully constructed cart with `id = 21`, use the following command:
                 }
             }
         ],
-        "currency_code":"USD",
-        "locale_code":"en_US",
-        "checkout_state":"payment_selected"
+        "currencyCode":"USD",
+        "localeCode":"en_US",
+        "checkoutState":"payment_selected"
     }
 
 This is how your final order will look like. If you are satisfied with that response, simply call another ``PUT`` request to confirm the checkout, which will become a real order and appear in the backend.

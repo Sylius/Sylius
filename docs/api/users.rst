@@ -57,7 +57,7 @@ Response will contain a paginated list of users.
                 {
                     "credentials_expired": false,
                     "email": "chelsie.witting@example.com",
-                    "email_canonical": "chelsie.witting@example.com",
+                    "emailCanonical": "chelsie.witting@example.com",
                     "enabled": true,
                     "expired": false,
                     "group": [],
@@ -67,7 +67,7 @@ Response will contain a paginated list of users.
                     "roles": [],
                     "salt": "h9ltmmawvdsk08oocogkws4sg040k04",
                     "username": "chelsie.witting@example.com",
-                    "username_canonical": "chelsie.witting@example.com"
+                    "usernameCanonical": "chelsie.witting@example.com"
                 }
             ]
         }
@@ -94,7 +94,7 @@ Response
     {
         "credentials_expired": false,
         "email": "chelsie.witting@example.com",
-        "email_canonical": "chelsie.witting@example.com",
+        "emailCanonical": "chelsie.witting@example.com",
         "enabled": true,
         "expired": false,
         "group": [],
@@ -104,7 +104,7 @@ Response
         "roles": [],
         "salt": "h9ltmmawvdsk08oocogkws4sg040k04",
         "username": "chelsie.witting@example.com",
-        "username_canonical": "chelsie.witting@example.com"
+        "usernameCanonical": "chelsie.witting@example.com"
     }
 
 Create an user
@@ -119,9 +119,9 @@ To create a new user, you can execute the following request:
 Parameters
 ^^^^^^^^^^
 
-first_name
+firstName
     Firstname of the customer
-last_name
+lastName
     Lastname of the customer
 email
     User e-mail
@@ -142,7 +142,7 @@ Response
     {
         "credentials_expired": false,
         "email": "chelsie.witting@example.com",
-        "email_canonical": "chelsie.witting@example.com",
+        "emailCanonical": "chelsie.witting@example.com",
         "enabled": true,
         "expired": false,
         "group": [],
@@ -152,7 +152,7 @@ Response
         "roles": [],
         "salt": "h9ltmmawvdsk08oocogkws4sg040k04",
         "username": "chelsie.witting@example.com",
-        "username_canonical": "chelsie.witting@example.com"
+        "usernameCanonical": "chelsie.witting@example.com"
     }
 
 Updating a user
@@ -171,9 +171,9 @@ You can update an existing user using PUT or PATCH method:
 Parameters
 ^^^^^^^^^^
 
-first_name
+firstName
     Firstname of the customer
-last_name
+lastName
     Lastname of the customer
 email
     User e-mail
@@ -235,17 +235,17 @@ The successful response will contain the user object with a confirmation token a
         "confirmation_token": "dzOeNrmdnn20IVHBW2Uaq-yAYsO2sY2hCXhfKdYl_xM",
         "credentials_expired": false,
         "email": "sylius@example.com",
-        "email_canonical": "sylius@example.com",
+        "emailCanonical": "sylius@example.com",
         "enabled": true,
         "expired": false,
         "group": [],
         "id": 1,
         "last_login": "2014-12-08T13:08:02+0000",
         "locked": false,
-        "password_requested_at": "2014-12-08T14:19:26+0000",
+        "password_requestedAt": "2014-12-08T14:19:26+0000",
         "roles": [
             "ROLE_ADMINISTRATION_ACCESS"
         ],
         "username": "sylius@example.com",
-        "username_canonical": "sylius@example.com"
+        "usernameCanonical": "sylius@example.com"
     }
