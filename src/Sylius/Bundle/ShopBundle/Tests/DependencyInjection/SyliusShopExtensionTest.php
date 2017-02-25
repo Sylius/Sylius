@@ -13,6 +13,8 @@ namespace Sylius\Bundle\ShopBundle\Tests\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Sylius\Bundle\ShopBundle\DependencyInjection\SyliusShopExtension;
+use Sylius\Bundle\ShopBundle\Locale\StorageBasedLocaleSwitcher;
+use Sylius\Bundle\ShopBundle\Locale\UrlBasedLocaleSwitcher;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -26,9 +28,11 @@ final class SyliusShopExtensionTest extends AbstractExtensionTestCase
     {
         $this->load([]);
 
+        $this->assertContainerBuilderHasService('sylius.controller.shop.contact');
+        $this->assertContainerBuilderHasService('sylius.controller.shop.currency_switch');
         $this->assertContainerBuilderHasService('sylius.controller.shop.homepage');
-        $this->assertContainerBuilderHasService('sylius.controller.shop.currency');
-        $this->assertContainerBuilderHasService('sylius.controller.shop.locale');
+        $this->assertContainerBuilderHasService('sylius.controller.shop.locale_switch');
+        $this->assertContainerBuilderHasService('sylius.controller.shop.security_widget');
     }
 
     /**
@@ -38,7 +42,12 @@ final class SyliusShopExtensionTest extends AbstractExtensionTestCase
     {
         $this->load([]);
 
-        $this->assertContainerBuilderHasService('sylius.listener.checkout_complete');
+        $this->assertContainerBuilderHasService('sylius.listener.order_customer_ip');
+        $this->assertContainerBuilderHasService('sylius.listener.order_complete');
+        $this->assertContainerBuilderHasService('sylius.listener.user_registration');
+        $this->assertContainerBuilderHasService('sylius.listener.order_promotion_integrity_checker');
+        $this->assertContainerBuilderHasService('sylius.listener.order_total_integrity_checker');
+        $this->assertContainerBuilderHasService('sylius.order_locale_assigner');
     }
 
     /**
@@ -48,8 +57,37 @@ final class SyliusShopExtensionTest extends AbstractExtensionTestCase
     {
         $this->load([]);
 
-        $this->assertContainerBuilderHasService('sylius.menu_builder.shop.account');
-        $this->assertContainerBuilderHasService('sylius.menu.shop.account');
+        $this->assertContainerBuilderHasService('sylius.shop.menu_builder.account');
+    }
+
+    /**
+     * @test
+     */
+    public function it_uses_url_based_locale_strategy_by_default()
+    {
+        $this->load([]);
+
+        $this->assertContainerBuilderHasService('sylius.shop.locale_switcher', UrlBasedLocaleSwitcher::class);
+        $this->assertContainerBuilderHasService('sylius.listener.non_channel_request_locale');
+
+        $this->assertContainerBuilderNotHasService('sylius.storage.locale');
+        $this->assertContainerBuilderNotHasService('sylius.context.locale.storage_based');
+    }
+
+    /**
+     * @test
+     */
+    public function it_uses_storage_based_locale_strategy_when_configured()
+    {
+        $this->load([
+            'locale_switcher' => 'storage',
+        ]);
+
+        $this->assertContainerBuilderHasService('sylius.shop.locale_switcher', StorageBasedLocaleSwitcher::class);
+        $this->assertContainerBuilderHasService('sylius.storage.locale');
+        $this->assertContainerBuilderHasService('sylius.context.locale.storage_based');
+
+        $this->assertContainerBuilderNotHasService('sylius.listener.non_channel_request_locale');
     }
 
     /**

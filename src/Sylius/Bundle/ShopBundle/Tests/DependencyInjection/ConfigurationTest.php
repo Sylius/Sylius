@@ -24,6 +24,48 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function it_has_default_configuration_for_locale_switching_strategy()
+    {
+        $this->assertProcessedConfigurationEquals(
+            [[]],
+            ['locale_switcher' => 'url'],
+            'locale_switcher'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function its_locale_switching_strategy_can_only_be_url_and_storage()
+    {
+        $this->assertConfigurationIsValid([[
+            'locale_switcher' => 'url',
+        ]]);
+
+        $this->assertConfigurationIsValid([[
+            'locale_switcher' => 'storage',
+        ]]);
+
+        $this->assertConfigurationIsInvalid([[
+            'locale_switcher' => 'native',
+        ]]);
+
+        $this->assertConfigurationIsInvalid([[
+            'locale_switcher' => true,
+        ]]);
+
+        $this->assertConfigurationIsInvalid([[
+            'locale_switcher' => [],
+        ]]);
+
+        $this->assertConfigurationIsInvalid([[
+            'locale_switcher' => 12,
+        ]]);
+    }
+
+    /**
+     * @test
+     */
     public function it_has_default_configuration_for_checkout_resolver_node()
     {
         $this->assertProcessedConfigurationEquals(
