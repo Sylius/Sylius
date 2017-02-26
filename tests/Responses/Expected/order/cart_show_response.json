@@ -191,7 +191,7 @@
                 "self": {
                     "href": "@string@"
                 },
-                "method": {
+                "shipping-method": {
                     "href": "\/api\/v1\/shipping-methods\/UPS"
                 },
                 "order": {

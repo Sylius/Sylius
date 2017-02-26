@@ -19,6 +19,14 @@ class ShipmentRepository extends EntityRepository implements ShipmentRepositoryI
     /**
      * {@inheritdoc}
      */
+    public function createListQueryBuilder()
+    {
+        return $this->createQueryBuilder('o');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function findOneByOrderId($shipmentId, $orderId)
     {
         return $this->createQueryBuilder('o')
