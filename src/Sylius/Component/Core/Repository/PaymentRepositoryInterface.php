@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Core\Repository;
 
+use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -19,6 +20,11 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 interface PaymentRepositoryInterface extends RepositoryInterface
 {
+    /**
+     * @return QueryBuilder
+     */
+    public function createListQueryBuilder();
+
     /**
      * @param mixed $paymentId
      * @param mixed $orderId
