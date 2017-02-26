@@ -43,13 +43,13 @@
                 "tracked": false,
                 "taxCategory": {
                     "id": @integer@,
-                    "code": "REGULAR_TAX",
-                    "name": "Regular Tax Category",
+                    "code": "TAXABLE_GOODS",
+                    "name": "Taxable Goods",
                     "createdAt": "@string@.isDateTime()",
                     "updatedAt": "@string@.isDateTime()",
                     "_links": {
                         "self": {
-                            "href": "\/api\/v1\/tax-categories\/REGULAR_TAX"
+                            "href": "\/api\/v1\/tax-categories\/TAXABLE_GOODS"
                         }
                     }
                 },
@@ -111,7 +111,7 @@
         "id": @integer@,
         "code": "CHANNEL",
         "name": "Channel",
-        "description": "Lorem ipsum",
+        "description": "@string@",
         "hostname": "localhost",
         "color": "black",
         "createdAt": "@string@.isDateTime()",
@@ -165,7 +165,7 @@
                         "id": @integer@,
                         "code": "CHANNEL",
                         "name": "Channel",
-                        "description": "Lorem ipsum",
+                        "description": "@string@",
                         "hostname": "localhost",
                         "color": "black",
                         "createdAt": "@string@.isDateTime()",

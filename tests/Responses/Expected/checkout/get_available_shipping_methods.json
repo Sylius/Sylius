@@ -7,14 +7,14 @@
                     "code": "UPS",
                     "name": "UPS",
                     "description": "@string@",
-                    "price": 10
+                    "price": 1000
                 },
                 {
                     "id": @integer@,
                     "code": "DHL",
                     "name": "DHL",
                     "description": "@string@",
-                    "price": 20
+                    "price": 2000
                 }
             ]
         }

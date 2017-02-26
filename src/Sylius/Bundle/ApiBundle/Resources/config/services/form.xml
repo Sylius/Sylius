@@ -39,6 +39,12 @@
             <tag name="form.type" />
         </service>
 
+        <service id="sylius.form.type.api_order_promotion_coupon" class="Sylius\Bundle\ApiBundle\Form\Type\OrderPromotionCouponType">
+            <argument>%sylius.model.order.class%</argument>
+            <argument>%sylius.form.type.api_order.validation_groups%</argument>
+            <tag name="form.type" />
+        </service>
+
         <service id="sylius.form.type.api_customer" class="Sylius\Bundle\ApiBundle\Form\Type\CustomerProfileType">
             <argument>%sylius.model.customer.class%</argument>
             <argument>%sylius.form.type.api_customer.validation_groups%</argument>
