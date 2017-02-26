@@ -163,6 +163,13 @@ You can bring back previous configuration by overriding current routing with you
 
 * Added custom `PaymentMethodFactory` with `createWithGateway($gatewayFactory)` method.
 
+* The following methods were added to `Sylius\Component\Core\Repository\OrderRepositoryInterface`:
+
+  * `findCartForSummary($id): ?OrderInterface`
+  * `findCartForAddressing($id): ?OrderInterface`
+  * `findCartForSelectingShipping($id): ?OrderInterface`
+  * `findCartForSelectingPayment($id): ?OrderInterface`
+
 ### Currency / CurrencyBundle
 
 * The following classes were removed due to being no longer used in current implementation:

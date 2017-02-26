@@ -16,6 +16,7 @@ use FOS\RestBundle\View\View;
 use Payum\Core\Registry\RegistryInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\SyliusCartEvents;
@@ -40,6 +41,9 @@ class OrderController extends ResourceController
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
         $cart = $this->getCurrentCart();
+        if (null !== $cart->getId()) {
+            $cart = $this->getOrderRepository()->findCartForSummary($cart->getId());
+        }
 
         if (!$configuration->isHtmlRequest()) {
             return $this->viewHandler->handle($configuration, View::create($cart));
@@ -218,6 +222,14 @@ class OrderController extends ResourceController
     protected function getContext()
     {
         return $this->get('sylius.context.cart');
+    }
+
+    /**
+     * @return OrderRepositoryInterface
+     */
+    protected function getOrderRepository()
+    {
+        return $this->get('sylius.repository.order');
     }
 
     /**
