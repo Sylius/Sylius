@@ -854,7 +854,7 @@ final class ProductContext implements Context
         /** @var ChannelPricingInterface $channelPricing */
         $channelPricing = $this->channelPricingFactory->createNew();
         $channelPricing->setPrice($price);
-        $channelPricing->setChannel($channel->getCode());
+        $channelPricing->setChannelCode($channel->getCode());
 
         return $channelPricing;
     }

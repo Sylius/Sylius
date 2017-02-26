@@ -27,7 +27,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ChannelPricingsType extends AbstractType implements EventSubscriberInterface
+final class ChannelPricingsType extends AbstractType implements EventSubscriberInterface
 {
     /**
      * @var ChannelRepositoryInterface
@@ -67,16 +67,15 @@ class ChannelPricingsType extends AbstractType implements EventSubscriberInterfa
     public function preSetData(FormEvent $event)
     {
         $form = $event->getForm();
+        $allChannels = $this->channelRepository->findAll();
 
         /** @var FormInterface $children */
-        foreach ($form as $children) {
-            if (null === $this->channelRepository->findOneByCode($children->getName())) {
-                $form->remove($children->getName());
-            }
+        foreach ($this->getChannelCodesToDelete($form, $allChannels) as $channelCode) {
+            $form->remove($channelCode);
         }
 
         /** @var ChannelInterface $channel */
-        foreach ($this->channelRepository->findAll() as $channel) {
+        foreach ($allChannels as $channel) {
             if ($form->has($channel->getCode())) {
                 continue;
             }
@@ -103,7 +102,7 @@ class ChannelPricingsType extends AbstractType implements EventSubscriberInterfa
                 continue;
             }
 
-            $channelPricing->setChannel($channelCode);
+            $channelPricing->setChannelCode($channelCode);
             $channelPricing->setProductVariant($variant);
         }
 
@@ -135,5 +134,23 @@ class ChannelPricingsType extends AbstractType implements EventSubscriberInterfa
     public function getBlockPrefix()
     {
         return 'sylius_channel_pricings';
+    }
+
+    /**
+     * @param FormInterface $form
+     * @param array $allChannels
+     *
+     * @return array
+     */
+    private function getChannelCodesToDelete(FormInterface $form, array $allChannels)
+    {
+        $currentChannelCodes = array_map(function (FormInterface $child) {
+            return $child->getName();
+        }, iterator_to_array($form));
+        $allChannelCodes = array_map(function (ChannelInterface $channel) {
+            return $channel->getCode();
+        }, $allChannels);
+
+        return array_diff($currentChannelCodes, $allChannelCodes);
     }
 }

@@ -583,19 +583,12 @@ Exemplary Response
                 }
             },
             "tracked":false,
-            "channelPricings":[
-                {
-                    "channel":{
-                        "code":"US_WEB",
-                        "_links":{
-                            "self":{
-                                "href":"\/api\/v1\/channels\/US_WEB"
-                            }
-                        }
-                    },
+            "channelPricings":{
+                "US_WEB": {
+                    "channelCode": "US_WEB",
                     "price":250
                 }
-            ]
+            }
         },
         "_links":{
             "order":{
@@ -739,19 +732,12 @@ Exemplary Response
                         }
                     },
                     "tracked":false,
-                    "channelPricings":[
-                        {
-                            "channel":{
-                                "code":"US_WEB",
-                                "_links":{
-                                    "self":{
-                                        "href":"\/api\/v1\/channels\/US_WEB"
-                                    }
-                                }
-                            },
+                    "channelPricings":{
+                        "US_WEB": {
+                            "channelCode": "US_WEB",
                             "price":250
                         }
-                    ]
+                    }
                 },
                 "_links":{
                     "order":{

@@ -15,11 +15,11 @@
     "tracked": false,
     "channelPricings": {
         "WEB": {
-            "channel": "WEB",
+            "channelCode": "WEB",
             "price": 124300
         },
         "MOB": {
-            "channel": "MOB",
+            "channelCode": "MOB",
             "price": 34200
         }
     },

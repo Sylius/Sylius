@@ -41,7 +41,7 @@
             target-entity="Sylius\Component\Core\Model\ChannelPricingInterface"
             mapped-by="productVariant"
             orphan-removal="true"
-            index-by="channel"
+            index-by="channelCode"
         >
             <cascade>
                 <cascade-all/>

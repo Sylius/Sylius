@@ -24,7 +24,7 @@ class ChannelPricing implements ChannelPricingInterface
     /**
      * @var string
      */
-    protected $channel;
+    protected $channelCode;
 
     /**
      * @var ProductVariantInterface
@@ -55,17 +55,17 @@ class ChannelPricing implements ChannelPricingInterface
     /**
      * {@inheritdoc}
      */
-    public function getChannel()
+    public function getChannelCode()
     {
-        return $this->channel;
+        return $this->channelCode;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setChannel($channel)
+    public function setChannelCode($channelCode)
     {
-        $this->channel = $channel;
+        $this->channelCode = $channelCode;
     }
 
     /**

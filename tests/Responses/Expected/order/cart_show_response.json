@@ -34,7 +34,7 @@
                 "tracked": false,
                 "channelPricings": {
                     "CHANNEL": {
-                        "channel": "CHANNEL",
+                        "channelCode": "CHANNEL",
                         "price": 20
                     }
                 },

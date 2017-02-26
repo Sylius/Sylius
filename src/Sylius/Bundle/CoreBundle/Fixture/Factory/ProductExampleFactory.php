@@ -348,7 +348,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
     {
         /** @var ChannelPricingInterface $channelPricing */
         $channelPricing = $this->channelPricingFactory->createNew();
-        $channelPricing->setChannel($channelCode);
+        $channelPricing->setChannelCode($channelCode);
         $channelPricing->setPrice($this->faker->randomNumber(3));
 
         $productVariant->addChannelPricing($channelPricing);

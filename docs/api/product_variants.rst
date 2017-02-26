@@ -250,7 +250,6 @@ Here is an example of creating a product variant with additional data for the pr
                 },
                 "channelPricings": {
                     "US_WEB": {
-                        "channel": "US_WEB",
                         "price": "1243",
                     }
                 },
@@ -328,7 +327,7 @@ Exemplary Response
             }
         "channelPricings": {
             "US_WEB": {
-                "channel": "US_WEB",
+                "channelCode": "US_WEB",
                 "price": 124300
             }
         },
@@ -394,17 +393,7 @@ Exemplary Response
         "onHold": 0,
         "onHand": 0,
         "tracked": false,
-<<<<<<< HEAD
         "channelPricings": [],
-=======
-        "channelPricings": {
-            "US_WEB": {
-                "id": 331,
-                "channel": "US_WEB",
-                "price": 1200
-            }
-        },
->>>>>>> [Docs] Changes in Docs and UPGRADE.md file
         "_links": {
             "self": {
                 "href": "\/api\/v1\/products\/MUG_TH\/variants\/medium-mug-theme"
@@ -533,26 +522,11 @@ Exemplary Response
                             }
                         }
                     },
-<<<<<<< HEAD
-                    "channelPricings": [
-                        {
-                            "channel": {
-                                "id": 1,
-                                "code": "US_WEB",
-                                "_links": {
-                                    "self": {
-                                        "href": "\/api\/v1\/channels\/US_WEB"
-                                    }
-                                }
-                            },
-                            "price": 124300
-=======
                     "tracked": false,
                     "channelPricings": {
                         "US_WEB": {
-                            "channel": "US_WEB",
+                            "channelCode": "US_WEB",
                             "price": 1200
->>>>>>> [Docs] Changes in Docs and UPGRADE.md file
                         }
                     },
                     "_links": {
@@ -629,21 +603,12 @@ To fully update the product variant with ``code = double-theme-mug`` for the pro
                         "name": "Monster mug"
                     }
                 },
-<<<<<<< HEAD
-                "channelPricings": [
-                    {
-                        "price": 543
-                    }
-                ],
                 "version": 1,
-=======
                 "channelPricings": {
                     "US_WEB": {
-                        "channel": "US_WEB",
-                        "price": "54"
+                        "price": 54
                     }
                 },
->>>>>>> [Docs] Changes in Docs and UPGRADE.md file
                 "tracked": true,
                 "onHand": 3,
                 "taxCategory": "other",

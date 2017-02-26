@@ -129,14 +129,14 @@ Sylius\Component\Product\Model\ProductVariantTranslation:
 
 Sylius\Component\Core\Model\ChannelPricing:
     sw_mug_web_channel_pricing:
-        channel: "WEB"
+        channelCode: "WEB"
         price: 20
     lotr_mug_web_channel_pricing:
-        channel: "WEB"
+        channelCode: "WEB"
         price: 20
     bb_mug_web_channel_pricing:
-        channel: "WEB"
+        channelCode: "WEB"
         price: 20
     hard_available_mug_web_channel_pricing:
-        channel: "WEB"
+        channelCode: "WEB"
         price: 20

@@ -168,7 +168,7 @@ final class ProductVariantSpec extends ObjectBehavior
 
     function it_adds_and_removes_channel_pricings(ChannelPricingInterface $channelPricing)
     {
-        $channelPricing->getChannel()->willReturn('WEB');
+        $channelPricing->getChannelCode()->willReturn('WEB');
 
         $channelPricing->setProductVariant($this)->shouldBeCalled();
         $this->addChannelPricing($channelPricing);
@@ -183,8 +183,8 @@ final class ProductVariantSpec extends ObjectBehavior
         ChannelPricingInterface $firstChannelPricing,
         ChannelPricingInterface $secondChannelPricing
     ) {
-        $firstChannelPricing->getChannel()->willReturn('WEB');
-        $secondChannelPricing->getChannel()->willReturn('MOB');
+        $firstChannelPricing->getChannelCode()->willReturn('WEB');
+        $secondChannelPricing->getChannelCode()->willReturn('MOB');
 
         $firstChannelPricing->setProductVariant($this)->shouldBeCalled();
         $secondChannelPricing->setProductVariant($this)->shouldBeCalled();
@@ -200,14 +200,14 @@ final class ProductVariantSpec extends ObjectBehavior
         ChannelInterface $secondChannel,
         ChannelPricingInterface $firstChannelPricing
     ) {
-        $firstChannelPricing->getChannel()->willReturn('WEB');
+        $firstChannelPricing->getChannelCode()->willReturn('WEB');
         $firstChannel->getCode()->willReturn('WEB');
         $secondChannel->getCode()->willReturn('MOB');
 
         $firstChannelPricing->setProductVariant($this)->shouldBeCalled();
         $this->addChannelPricing($firstChannelPricing);
 
-        $firstChannelPricing->getChannel()->willReturn($firstChannel);
+        $firstChannelPricing->getChannelCode()->willReturn($firstChannel);
 
         $this->hasChannelPricingForChannel($firstChannel)->shouldReturn(true);
         $this->hasChannelPricingForChannel($secondChannel)->shouldReturn(false);
@@ -217,13 +217,13 @@ final class ProductVariantSpec extends ObjectBehavior
         ChannelInterface $channel,
         ChannelPricingInterface $channelPricing
     ) {
-        $channelPricing->getChannel()->willReturn('WEB');
+        $channelPricing->getChannelCode()->willReturn('WEB');
         $channel->getCode()->willReturn('WEB');
 
         $channelPricing->setProductVariant($this)->shouldBeCalled();
         $this->addChannelPricing($channelPricing);
 
-        $channelPricing->getChannel()->willReturn($channel);
+        $channelPricing->getChannelCode()->willReturn($channel);
 
         $this->getChannelPricingForChannel($channel)->shouldReturn($channelPricing);
     }

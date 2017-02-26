@@ -40,7 +40,7 @@
                 "tracked": false,
                 "channelPricings": {
                     "WEB": {
-                        "channel": "WEB",
+                        "channelCode": "WEB",
                         "price": 20
                     }
                 }
@@ -86,7 +86,7 @@
                 "tracked": true,
                 "channelPricings": {
                     "WEB": {
-                        "channel": "WEB",
+                        "channelCode": "WEB",
                         "price": 20
                     }
                 }

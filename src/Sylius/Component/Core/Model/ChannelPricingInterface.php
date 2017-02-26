@@ -33,10 +33,10 @@ interface ChannelPricingInterface extends ResourceInterface
     /**
      * @return string
      */
-    public function getChannel();
+    public function getChannelCode();
 
     /**
-     * @param string $channel
+     * @param string $channelCode
      */
-    public function setChannel($channel);
+    public function setChannelCode($channelCode);
 }

@@ -58,10 +58,10 @@ Sylius\Component\Product\Model\ProductVariantTranslation:
 
 Sylius\Component\Core\Model\ChannelPricing:
     sw_mug_web_channel_pricing:
-        channel: "CHANNEL"
+        channelCode: "CHANNEL"
         price: 20
     hard_available_mug_web_channel_pricing:
-        channel: "CHANNEL"
+        channelCode: "CHANNEL"
         price: 20
 
 Sylius\Component\Core\Model\ShippingMethod:

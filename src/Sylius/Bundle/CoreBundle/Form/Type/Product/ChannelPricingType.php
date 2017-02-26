@@ -55,7 +55,7 @@ final class ChannelPricingType extends AbstractResourceType
         $builder
             ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($channelRepository, $options) {
                 /** @var ChannelInterface $channel */
-                $channel = (isset($options['channel'])) ? $options['channel'] : $channelRepository->findOneByCode($event->getData()->getChannel());
+                $channel = isset($options['channel']) ? $options['channel'] : $channelRepository->findOneByCode($event->getData()->getChannelCode());
                 $form = $event->getForm();
 
                 $form->add('price', MoneyType::class, [

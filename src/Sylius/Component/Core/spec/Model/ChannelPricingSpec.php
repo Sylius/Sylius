@@ -34,8 +34,8 @@ final class ChannelPricingSpec extends ObjectBehavior
 
     function its_channel_code_is_mutable()
     {
-        $this->setChannel('WEB');
-        $this->getChannel()->shouldReturn('WEB');
+        $this->setChannelCode('WEB');
+        $this->getChannelCode()->shouldReturn('WEB');
     }
 
     function its_product_variant_is_mutable(ProductVariantInterface $productVariant)

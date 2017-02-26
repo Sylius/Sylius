@@ -175,7 +175,7 @@ Exemplary Response
                     "tracked":false,
                     "channelPricings":{
                         "US_WEB":{
-                            "channel": "US_WEB",
+                            "channelCode": "US_WEB",
                             "price":100000
                         }
                     }
@@ -489,7 +489,7 @@ Exemplary Response
                     "tracked":false,
                     "channelPricings":{
                         "US_WEB":{
-                            "channel": "US_WEB",
+                            "channelCode": "US_WEB",
                             "price":100000
                         }
                     }
@@ -785,7 +785,7 @@ To check the fully constructed cart with `id = 21`, use the following command:
                     "tracked":false,
                     "channelPricings":{
                         "US_WEB":{
-                            "channel":"US_WEB",
+                            "channelCode":"US_WEB",
                             "price":100000
                         }
                     }

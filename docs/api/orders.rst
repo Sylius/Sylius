@@ -152,7 +152,7 @@ Exemplary Response
                     "tracked":false,
                     "channelPricings":{
                         "US_WEB":{
-                            "channel":"US_WEB",
+                            "channelCode":"US_WEB",
                             "price":100000
                         }
                     },
@@ -433,7 +433,7 @@ Exemplary Response
                     "tracked":false,
                     "channelPricings":{
                         "US_WEB":{
-                            "channel":"US_WEB",
+                            "channelCode":"US_WEB",
                             "price":100000
                         }
                     },
