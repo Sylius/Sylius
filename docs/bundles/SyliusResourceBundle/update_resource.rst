@@ -136,6 +136,30 @@ You can also perform more complex redirects, with parameters. For example:
                     route: app_genre_show
                     parameters: { id: $genreId }
 
+[API] Returning resource or no content
+--------------------------------------
+
+Depending on your app approach it can be useful to return a changed object or only the ``204 HTTP Code``, which indicates that everything worked smoothly.
+Sylius, by default is returning the ``204 HTTP Code``, which indicates an empty response. If you would like to receive a whole object as a response you should set a `return_content` option to true.
+
+.. code-block:: yaml
+
+    # app/config/routing.yml
+
+    app_book_update:
+        path: /books/{title}/edit
+        methods: [GET, PUT]
+        defaults:
+            _controller: app.controller.book:updateAction
+            _sylius:
+                criteria: { title: $title }
+                return_content: true
+
+.. warning::
+
+    The `return_content` flag is available for the `applyStateMachineTransitionAction` method as well. But these are the only ones which can be configured this way.
+    It is worth noticing, that the `applyStateMachineTransitionAction` returns a default `200 HTTP Code` response with a fully serialized object.
+
 Configuration Reference
 -----------------------
 
@@ -160,3 +184,4 @@ Configuration Reference
                 redirect:
                     route: app_book_show
                     parameters: { title: resource.title }
+                return_content: true

@@ -115,6 +115,11 @@ final class OrderApiTest extends CheckoutApiTestCase
         $this->client->request('PUT', $this->getCancelUrl($orderId), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
+        $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
+
+        $this->client->request('GET', $this->getOrderUrl($orderId), [], [], static::$authorizedHeaderWithAccept);
+
+        $response = $this->client->getResponse();
         $this->assertResponse($response, 'order/order_canceled_show_response', Response::HTTP_OK);
     }
 
@@ -276,6 +281,11 @@ EOT;
         $this->client->request('PUT', $this->getCompleteOrderPaymentUrl($orderId, $rawResponse['payments'][0]['id']), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
+        $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
+
+        $this->client->request('GET', $this->getOrderUrl($orderId), [], [], static::$authorizedHeaderWithAccept);
+
+        $response = $this->client->getResponse();
         $this->assertResponse($response, 'order/order_payed_show_response', Response::HTTP_OK);
     }
 
@@ -302,7 +312,7 @@ EOT;
         $this->client->request('PUT', $this->getCompleteOrderPaymentUrl($orderId, $rawResponse['payments'][0]['id']), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'order/order_payed_show_response', Response::HTTP_OK);
+        $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
 
         $this->client->request('GET', $this->getOrderUrl($orderId), [], [], static::$authorizedHeaderWithAccept);
 
