@@ -4,8 +4,8 @@
         {
             "id": @integer@,
             "quantity": 1,
-            "unitPrice": 20,
-            "total": 20,
+            "unitPrice": 2000,
+            "total": 2000,
             "units": [
                 {
                     "id": @integer@,
@@ -13,7 +13,7 @@
                     "adjustmentsTotal": 0
                 }
             ],
-            "unitsTotal": 20,
+            "unitsTotal": 2000,
             "adjustments": [],
             "adjustmentsTotal": 0,
             "variant": {
@@ -32,10 +32,22 @@
                 "onHold": 0,
                 "onHand": 0,
                 "tracked": false,
+                "taxCategory": {
+                    "id": @integer@,
+                    "code": "REGULAR_TAX",
+                    "name": "Regular Tax Category",
+                    "createdAt": "@string@.isDateTime()",
+                    "updatedAt": "@string@.isDateTime()",
+                    "_links": {
+                        "self": {
+                            "href": "\/api\/v1\/tax-categories\/REGULAR_TAX"
+                        }
+                    }
+                },
                 "channelPricings": {
                     "CHANNEL": {
                         "channelCode": "CHANNEL",
-                        "price": 20
+                        "price": 2000
                     }
                 },
                 "_links": {
@@ -48,29 +60,29 @@
                 }
             },
             "_links": {
+                "order": {
+                    "href": "@string@"
+                },
                 "product": {
                     "href": "\/api\/v1\/products\/MUG"
                 },
                 "variant": {
                     "href": "\/api\/v1\/products\/MUG\/variants\/MUG_SW"
-                },
-                "order": {
-                    "href": "@string@"
                 }
             }
         }
     ],
-    "itemsTotal": 20,
+    "itemsTotal": 2000,
     "adjustments": [
         {
             "id": @integer@,
             "type": "shipping",
             "label": "UPS",
-            "amount": 10
+            "amount": 1000
         }
     ],
-    "adjustmentsTotal": 10,
-    "total": 30,
+    "adjustmentsTotal": 1000,
+    "total": 3000,
     "state": "cart",
     "customer": {
         "id": @integer@,
@@ -115,8 +127,8 @@
                 "enabled": true,
                 "translations": {
                     "en_US": {
-                        "id": @integer@,
                         "locale": "en_US",
+                        "id": @integer@,
                         "name": "Cach on delivery",
                         "description": "@string@"
                     }
@@ -141,12 +153,12 @@
                     }
                 ],
                 "_links": {
-                  "self": {
-                    "href": "\/api\/v1\/payment-methods\/cod"
-                  }
+                    "self": {
+                        "href": "\/api\/v1\/payment-methods\/cod"
+                    }
                 }
             },
-            "amount": 30,
+            "amount": 3000,
             "state": "cart",
             "_links": {
                 "self": {

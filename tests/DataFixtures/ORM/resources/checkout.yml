@@ -35,6 +35,7 @@ Sylius\Component\Core\Model\ProductVariant:
         updatedAt: 2015-10-10
         channelPricings:
             CHANNEL: "@sw_mug_web_channel_pricing"
+        taxCategory: "@regular_tax"
     hard_available_mug:
         code: HARD_AVAILABLE_MUG
         product: "@mug"
@@ -43,6 +44,7 @@ Sylius\Component\Core\Model\ProductVariant:
         updatedAt: 2015-10-05
         channelPricings:
             CHANNEL: "@hard_available_mug_web_channel_pricing"
+        taxCategory: "@regular_tax"
         tracked: true
         onHand: 2
 
@@ -59,10 +61,10 @@ Sylius\Component\Product\Model\ProductVariantTranslation:
 Sylius\Component\Core\Model\ChannelPricing:
     sw_mug_web_channel_pricing:
         channelCode: "CHANNEL"
-        price: 20
+        price: 2000
     hard_available_mug_web_channel_pricing:
         channelCode: "CHANNEL"
-        price: 20
+        price: 2000
 
 Sylius\Component\Core\Model\ShippingMethod:
     ups:
@@ -71,7 +73,7 @@ Sylius\Component\Core\Model\ShippingMethod:
         calculator: 'flat_rate'
         configuration:
             CHANNEL:
-                amount: 10
+                amount: 1000
         zone: "@zone_eu"
         currentLocale: en_US
         currentTranslation: "@upsTranslation1"
@@ -82,7 +84,7 @@ Sylius\Component\Core\Model\ShippingMethod:
         calculator: 'flat_rate'
         configuration:
             CHANNEL:
-                amount: 20
+                amount: 2000
         zone: "@zone_eu"
         channel: ['@channel']
 
@@ -143,6 +145,7 @@ Sylius\Component\Addressing\Model\Zone:
         code: EU
         name: European Union
         type: country
+        scope: all
         members: ["@member_NL", "@member_BE"]
 
 Sylius\Component\Addressing\Model\ZoneMember:
@@ -156,3 +159,17 @@ Sylius\Component\Core\Model\Customer:
         email: oliver.queen@star-city.com
         emailCanonical: oliver.queen@star-city.com
         birthday: <date()>
+
+Sylius\Component\Taxation\Model\TaxCategory:
+    regular_tax:
+        code: REGULAR_TAX
+        name: Regular Tax Category
+
+Sylius\Component\Core\Model\TaxRate:
+    eu_regular_tax_rate:
+        code: eu_regular_tax_rate
+        name: EU Regular Tax 20%
+        amount: 0.2
+        zone: "@zone_eu"
+        calculator: 'default'
+        category: "@regular_tax"
