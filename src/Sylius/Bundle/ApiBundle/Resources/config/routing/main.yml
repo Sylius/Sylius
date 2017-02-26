@@ -72,7 +72,6 @@ sylius_api_shipping_method:
 
 sylius_api_shipment:
     resource: "@SyliusApiBundle/Resources/config/routing/shipment.yml"
-    prefix: /shipments
 
 sylius_api_payment_method:
     resource: "@SyliusApiBundle/Resources/config/routing/payment_method.yml"

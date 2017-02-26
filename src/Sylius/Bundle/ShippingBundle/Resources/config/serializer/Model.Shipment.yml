@@ -26,7 +26,7 @@ Sylius\Component\Shipping\Model\Shipment:
                 parameters:
                     id: expr(object.getId())
                     version: 1
-        - rel: method
+        - rel: shipping-method
           exclusion:
                 exclude_if: expr(!object.getMethod())
           href:

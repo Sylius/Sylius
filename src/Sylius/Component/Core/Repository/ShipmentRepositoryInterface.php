@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Core\Repository;
 
+use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -19,6 +20,11 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 interface ShipmentRepositoryInterface extends RepositoryInterface
 {
+    /**
+     * @return QueryBuilder
+     */
+    public function createListQueryBuilder();
+
     /**
      * @param mixed $shipmentId
      * @param mixed $orderId
