@@ -33,7 +33,7 @@
         "phpspec/phpspec": "^4.0",
         "phpunit/phpunit": "^5.6",
         "sylius/registry": "^1.0",
-        "twig/twig": "^1.28",
+        "twig/twig": "^2.0",
         "symfony/twig-bundle": "^3.2"
     },
     "config": {

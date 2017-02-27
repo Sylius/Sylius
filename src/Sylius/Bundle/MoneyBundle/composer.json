@@ -32,7 +32,7 @@
         "doctrine/orm": "~2.5.0",
         "phpspec/phpspec": "^4.0",
         "phpunit/phpunit": "^5.6",
-        "twig/twig": "^1.28",
+        "twig/twig": "^2.0",
         "sylius/currency-bundle": "^1.0",
         "symfony/form": "^3.2",
         "symfony/browser-kit": "^3.2",

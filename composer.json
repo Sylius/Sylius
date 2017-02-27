@@ -59,7 +59,7 @@
         "symfony/swiftmailer-bundle": "^2.4",
         "symfony/symfony": "~3.2.0|^3.3.6",
         "twig/extensions": "^1.4",
-        "twig/twig": "^1.28",
+        "twig/twig": "^2.0",
         "webmozart/assert": "^1.1",
         "white-october/pagerfanta-bundle": "^1.0.8",
         "willdurand/hateoas-bundle": "^1.2",
