@@ -22,5 +22,4 @@
 * :doc:`/api/tax_categories`
 * :doc:`/api/tax_rates`
 * :doc:`/api/taxons`
-* :doc:`/api/users`
 * :doc:`/api/zones`
