@@ -30,6 +30,8 @@ When you get a collection of resources, "Default" serialization group will be us
 +------------------+------------------------------------------------------------------------------------------------+
 | shippingCategory | Shipping category to which variant is assigned                                                 |
 +------------------+------------------------------------------------------------------------------------------------+
+| version          | Version of the product variant                                                                 |
++------------------+------------------------------------------------------------------------------------------------+
 
 If you request more detailed data, you will receive an object with the following fields:
 
@@ -50,6 +52,8 @@ If you request more detailed data, you will receive an object with the following
 | taxCategory      | Tax category to which variant is assigned                                                      |
 +------------------+------------------------------------------------------------------------------------------------+
 | shippingCategory | Shipping category to which variant is assigned                                                 |
++------------------+------------------------------------------------------------------------------------------------+
+| version          | Version of the product variant                                                                 |
 +------------------+------------------------------------------------------------------------------------------------+
 | optionValues     | Collection of options in which product is available (for example: small, medium and large mug) |
 +------------------+------------------------------------------------------------------------------------------------+
@@ -121,28 +125,25 @@ Exemplary Response
 .. code-block:: json
 
     {
-        "id": 334,
+        "id": 331,
         "code": "medium-mug-theme",
         "optionValues": [],
         "position": 0,
         "translations": [],
+        "version": 1,
         "onHold": 0,
         "onHand": 0,
         "tracked": false,
         "channelPricings": [],
         "_links": {
             "self": {
-                "href": "\/api\/v1\/products\/MUG-TH\/variants\/medium-mug-theme"
+                "href": "\/api\/v1\/products\/MUG_TH\/variants\/medium-mug-theme"
             },
             "product": {
-                "href": "\/api\/v1\/products\/MUG-TH"
+                "href": "\/api\/v1\/products\/MUG_TH"
             }
         }
     }
-
-.. note::
-
-    Be sure that the product for which you want to create a new variant is enabled.
 
 .. warning::
 
@@ -276,7 +277,7 @@ Exemplary Response
 .. code-block:: json
 
     {
-        "id": 335,
+        "id": 332,
         "code": "double-theme-mug",
         "optionValues": [
             {
@@ -288,10 +289,11 @@ Exemplary Response
         "translations": {
             "en_US": {
                 "locale": "en_US",
-                "id": 335,
+                "id": 332,
                 "name": "Double Theme Mug"
             }
         },
+        "version": 1,
         "onHold": 0,
         "onHand": 5,
         "tracked": true,
@@ -303,9 +305,9 @@ Exemplary Response
             "id": 3,
             "code": "other",
             "name": "Other",
-            "description": "Deserunt iure aspernatur et odit perferendis."
-            "createdAt": "2017-02-17T15:01:15+0100",
-            "updatedAt": "2017-02-17T15:01:15+0100",
+            "description": "Error est aut libero et. Recusandae rerum rem enim qui sapiente ea sed. Provident et aspernatur molestias et et.",
+            "createdAt": "2017-02-27T09:12:17+0100",
+            "updatedAt": "2017-02-27T09:12:17+0100",
             "_links": {
                 "self": {
                     "href": "\/api\/v1\/tax-categories\/other"
@@ -315,9 +317,9 @@ Exemplary Response
         "shippingCategory": {
             "id": 1,
             "code": "default",
-            "name": "Default",
-            "createdAt": "2017-02-20T11:17:00+0100",
-            "updatedAt": "2017-02-20T11:17:01+0100",
+            "name": "Default shipping category",
+            "createdAt": "2017-02-27T10:48:14+0100",
+            "updatedAt": "2017-02-27T10:48:15+0100",
             "_links": {
                 "self": {
                     "href": "\/api\/v1\/shipping-categories\/default"
@@ -326,15 +328,14 @@ Exemplary Response
         },
         "channelPricings": [
             {
-                "id": 333,
                 "channel": {
                     "id": 1,
                     "code": "US_WEB",
                     "name": "US Web Store",
                     "hostname": "localhost",
-                    "color": "Khaki",
-                    "createdAt": "2017-02-17T15:01:14+0100",
-                    "updatedAt": "2017-02-17T15:01:14+0100",
+                    "color": "DarkSeaGreen",
+                    "createdAt": "2017-02-27T09:12:16+0100",
+                    "updatedAt": "2017-02-27T09:12:16+0100",
                     "enabled": true,
                     "taxCalculationStrategy": "order_items_based",
                     "_links": {
@@ -348,10 +349,10 @@ Exemplary Response
         ],
         "_links": {
             "self": {
-                "href": "\/api\/v1\/products\/MUG-TH\/variants\/double-theme-mug"
+                "href": "\/api\/v1\/products\/MUG_TH\/variants\/double-theme-mug"
             },
             "product": {
-                "href": "\/api\/v1\/products\/MUG-TH"
+                "href": "\/api\/v1\/products\/MUG_TH"
             }
         }
     }
@@ -399,53 +400,22 @@ Exemplary Response
 .. code-block:: json
 
     {
-        "id": 333,
-        "code": "medium-theme-mug",
-        "optionValues": [
-            {
-                "name": "Mug type",
-                "code": "mug_type_medium"
-            }
-        ],
+        "id": 331,
+        "code": "medium-mug-theme",
+        "optionValues": [],
         "position": 0,
-        "translations": {
-            "en_US": {
-                "locale": "en_US",
-                "id": 333,
-                "name": "Medium theme mug"
-            }
-        },
+        "translations": [],
+        "version": 1,
         "onHold": 0,
         "onHand": 0,
         "tracked": false,
-        "channelPricings": [
-            {
-                "id": 331,
-                "channel": {
-                    "id": 1,
-                    "code": "US_WEB",
-                    "name": "US Web Store",
-                    "hostname": "localhost",
-                    "color": "Khaki",
-                    "createdAt": "2017-02-17T15:01:14+0100",
-                    "updatedAt": "2017-02-17T15:01:14+0100",
-                    "enabled": true,
-                    "taxCalculationStrategy": "order_items_based",
-                    "_links": {
-                        "self": {
-                            "href": "\/api\/v1\/channels\/US_WEB"
-                        }
-                    }
-                },
-                "price": 1200
-            }
-        ],
+        "channelPricings": [],
         "_links": {
             "self": {
-                "href": "\/api\/v1\/products\/MUG-TH\/variants\/medium-theme-mug"
+                "href": "\/api\/v1\/products\/MUG_TH\/variants\/medium-mug-theme"
             },
             "product": {
-                "href": "\/api\/v1\/products\/MUG-TH"
+                "href": "\/api\/v1\/products\/MUG_TH"
             }
         }
     }
@@ -500,41 +470,76 @@ Exemplary Response
         "page": 1,
         "limit": 10,
         "pages": 1,
-        "total": 1,
+        "total": 2,
         "_links": {
             "self": {
-                "href": "\/api\/v1\/products\/MUG-TH\/variants\/?page=1&limit=10"
+                "href": "\/api\/v1\/products\/MUG_TH\/variants\/?page=1&limit=10"
             },
             "first": {
-                "href": "\/api\/v1\/products\/MUG-TH\/variants\/?page=1&limit=10"
+                "href": "\/api\/v1\/products\/MUG_TH\/variants\/?page=1&limit=10"
             },
             "last": {
-                "href": "\/api\/v1\/products\/MUG-TH\/variants\/?page=1&limit=10"
+                "href": "\/api\/v1\/products\/MUG_TH\/variants\/?page=1&limit=10"
             }
         },
         "_embedded": {
             "items": [
                 {
-                    "id": 333,
-                    "code": "medium-theme-mug",
+                    "id": 331,
+                    "code": "medium-mug-theme",
+                    "optionValues": [],
+                    "position": 0,
+                    "translations": [],
+                    "version": 1,
+                    "tracked": false,
+                    "channelPricings": [],
+                    "_links": {
+                        "self": {
+                            "href": "\/api\/v1\/products\/MUG_TH\/variants\/medium-mug-theme"
+                        }
+                    }
+                },
+                {
+                    "id": 332,
+                    "code": "double-theme-mug",
                     "optionValues": [
                         {
                             "name": "Mug type",
-                            "code": "mug_type_medium"
+                            "code": "mug_type_double"
                         }
                     ],
-                    "position": 0,
+                    "position": 1,
                     "translations": {
                         "en_US": {
                             "locale": "en_US",
-                            "id": 333,
-                            "name": "Medium theme mug"
+                            "id": 332,
+                            "name": "Double Theme Mug"
                         }
                     },
-                    "tracked": false,
+                    "version": 1,
+                    "tracked": true,
+                    "taxCategory": {
+                        "id": 3,
+                        "code": "other",
+                        "name": "Other",
+                        "_links": {
+                            "self": {
+                                "href": "\/api\/v1\/tax-categories\/other"
+                            }
+                        }
+                    },
+                    "shippingCategory": {
+                        "id": 1,
+                        "code": "default",
+                        "name": "Default shipping category",
+                        "_links": {
+                            "self": {
+                                "href": "\/api\/v1\/shipping-categories\/default"
+                            }
+                        }
+                    },
                     "channelPricings": [
                         {
-                            "id": 331,
                             "channel": {
                                 "id": 1,
                                 "code": "US_WEB",
@@ -544,15 +549,12 @@ Exemplary Response
                                     }
                                 }
                             },
-                            "price": 1200
+                            "price": 124300
                         }
                     ],
                     "_links": {
                         "self": {
-                            "href": "\/api\/v1\/products\/MUG-TH\/variants\/medium-theme-mug"
-                        },
-                        "product": {
-                            "href": "\/api\/v1\/products\/MUG-TH"
+                            "href": "\/api\/v1\/products\/MUG_TH\/variants\/double-theme-mug"
                         }
                     }
                 }
@@ -626,9 +628,10 @@ To fully update the product variant with ``code = double-theme-mug`` for the pro
                 },
                 "channelPricings": [
                     {
-                        "price": "54"
+                        "price": 543
                     }
                 ],
+                "version": 1,
                 "tracked": true,
                 "onHand": 3,
                 "taxCategory": "other",
@@ -642,6 +645,10 @@ To fully update the product variant with ``code = double-theme-mug`` for the pro
                 }
             }
         '
+
+.. warning::
+
+    Do not forget to pass version of the variant. Without this  you will receive a ``409 Conflict`` error.
 
 Exemplary Response
 ^^^^^^^^^^^^^^^^^^
@@ -685,8 +692,8 @@ To partially update the product variant with ``code = double-theme-mug`` for the
         --data '
             {
                 "translations": {
-                    "de": {
-                        "name": "Monsterbecher"
+                    "pl": {
+                        "name": "Gigantyczny kubek"
                     }
                 }
             }
