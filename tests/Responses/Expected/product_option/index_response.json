@@ -41,8 +41,7 @@
                             }
                         }
                     }
-                ]
-                "position": 0,
+                ],
                 "_links": {
                     "self": {
                         "href": "\/api\/v1\/products\/MUG_SIZE"
@@ -53,8 +52,7 @@
                 "id": @integer@,
                 "code": "MUG_COLOR",
                 "position": 1,
-                "values": []
-                "position": 1,
+                "values": [],
                 "_links": {
                     "self": {
                         "href": "\/api\/v1\/products\/MUG_COLOR"

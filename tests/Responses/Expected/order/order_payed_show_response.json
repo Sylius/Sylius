@@ -181,6 +181,20 @@
                     }
                 }
             },
+            "amount": 30,
+            "state": "completed",
+            "_links": {
+                "self": {
+                    "href": "@string@"
+                },
+                "payment-method": {
+                    "href": "\/api\/v1\/payment-methods\/cod"
+                },
+                "order": {
+                    "href": "@string@"
+                }
+
+            }
         }
     ],
     "shipments": [
@@ -204,7 +218,7 @@
                 "self": {
                     "href": "@string@"
                 },
-                "method": {
+                "shipping-method": {
                     "href": "\/api\/v1\/shipping-methods\/UPS"
                 },
                 "order": {
