@@ -1,7 +1,7 @@
 How to add images to an entity?
 ===============================
 
-Extending entities with an ``images`` field is quite a popular usecase.
+Extending entities with an ``images`` field is quite a popular use case.
 In this cookbook we will present how to **add image to the Shipping Method entity**.
 
 Instructions:
@@ -101,7 +101,7 @@ you have to create your own ShippingMethod class that will extend it:
 2. Register your extended ShippingMethod as a resource's model class
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-With such a configuration in the ``config.yml`` you will register your ShippingMethod class in orer to overide the default one:
+With such a configuration in the ``config.yml`` you will register your ShippingMethod class in order to override the default one:
 
 .. code-block:: yaml
 
@@ -115,7 +115,7 @@ With such a configuration in the ``config.yml`` you will register your ShippingM
 3. Create the ShippingMethodImage class
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In the ``AppBundle/Entity`` namespace place the ``ShippingMethodImage`` class which should look like that:
+In the ``AppBundle\Entity`` namespace place the ``ShippingMethodImage`` class which should look like this:
 
 .. code-block:: php
 
@@ -132,7 +132,7 @@ In the ``AppBundle/Entity`` namespace place the ``ShippingMethodImage`` class wh
 4. Add the mapping file for the ShippingMethodImage
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Your new entity will be saved in the databes, therefore it needs a mapping file, where you will set the ``ShippingMethod`` as the ``owner``
+Your new entity will be saved in the database, therefore it needs a mapping file, where you will set the ``ShippingMethod`` as the ``owner``
 of the ``ShippingMethodImage``.
 
 .. code-block:: yaml
@@ -154,7 +154,7 @@ of the ``ShippingMethodImage``.
 5. Modify the ShippingMethod's mapping file
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The newly added ``images`` field has to be added on the mapping, with a relation to the ``ShippingMethodImage``:
+The newly added ``images`` field has to be added to the mapping, with a relation to the ``ShippingMethodImage``:
 
 .. code-block:: yaml
 
@@ -173,7 +173,7 @@ The newly added ``images`` field has to be added on the mapping, with a relation
 6. Register the ShippingMethodImage as a resource
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The ShippingMethodImage class needs to be registered as a Sylius resource:
+The ``ShippingMethodImage`` class needs to be registered as a Sylius resource:
 
 .. code-block:: yaml
 
@@ -187,13 +187,13 @@ The ShippingMethodImage class needs to be registered as a Sylius resource:
 7. Create the ShippingMethodImageType class
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This is how the class for ShippingMethodImageType should look like. Place it in the ``AppBundle\Form\Type\ShippingMethod`` directory.
+This is how the class for ``ShippingMethodImageType`` should look like. Place it in the ``AppBundle\Form\Type\`` directory.
 
 .. code-block:: php
 
     <?php
 
-    namespace AppBundle\Form\Type\ShippingMethod;
+    namespace AppBundle\Form\Type;
 
     use Sylius\Bundle\CoreBundle\Form\Type\ImageType;
 
@@ -211,14 +211,14 @@ This is how the class for ShippingMethodImageType should look like. Place it in 
 8. Register the ShippingMethodImageType as a service
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-After creating the form type class, you need to register it as a ``form.type`` service liek below:
+After creating the form type class, you need to register it as a ``form.type`` service like below:
 
 .. code-block:: yaml
 
     # services.yml
     services:
         app.form.type.shipping_method_image:
-            class: AppBundle\Form\Type\ShippingMethod\ShippingMethodImageType
+            class: AppBundle\Form\Type\ShippingMethodImageType
             tags:
                 - { name: form.type }
             arguments: ['%app.model.shipping_method_image.class%']
@@ -246,7 +246,7 @@ What is more the new form type needs to be configured as the resource form of th
 
 **Create the form extension class** for the ``Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType``:
 
-It needs to have the images field as a CollectionType. If you want to give a possibility to add more than one image to the entity
+It needs to have the images field as a CollectionType. If you want to give the possibility to add more than one image to the entity
 set the ``allow_add`` option to ``true``.
 
 .. code-block:: php
@@ -300,7 +300,7 @@ Register the form extension as a service:
 11. Override the definition of the ImageUploader service
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In order to handle the image upload you need to attach the image upload listener to the ShippingMethod entity events:
+In order to handle the image upload you need to attach the image upload listener to the ``ShippingMethod`` entity events:
 
 .. code-block:: yaml
 
@@ -322,7 +322,7 @@ In order to handle the image upload you need to attach the image upload listener
 
 In order to achieve that you will need to customize the form view from the ``SyliusAdminBundle/views/ShippingMethod/_form.html.twig`` file.
 
-Copy and pase its contents into your own ``app/Resources/SyliusAdminBundle/views/ShippingMethod/_form.html.twig`` file,
+Copy and paste its contents into your own ``app/Resources/SyliusAdminBundle/views/ShippingMethod/_form.html.twig`` file,
 and render the ``{{ form_row(form.images) }}`` field.
 
 .. code-block:: twig
