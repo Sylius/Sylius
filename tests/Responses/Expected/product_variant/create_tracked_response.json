@@ -6,6 +6,7 @@
     "translations": [],
     "onHold": 0,
     "onHand": 5,
+    "version": 1,
     "tracked": true,
     "channelPricings": [],
     "_links": {

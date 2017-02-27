@@ -31,6 +31,7 @@
                         "name": "Mug 1"
                     }
                 },
+                "version": 1,
                 "tracked": false,
                 "channelPricings": [],
                 "_links": {
@@ -51,6 +52,7 @@
                         "name": "Mug 2"
                     }
                 },
+                "version": 1,
                 "tracked": false,
                 "channelPricings": [],
                 "_links": {
@@ -71,6 +73,7 @@
                         "name": "Mug 3"
                     }
                 },
+                "version": 1,
                 "tracked": false,
                 "channelPricings": [],
                 "_links": {
@@ -91,6 +94,7 @@
                         "name": "Mug 4"
                     }
                 },
+                "version": 1,
                 "tracked": false,
                 "channelPricings": [],
                 "_links": {
@@ -111,6 +115,7 @@
                         "name": "Mug 5"
                     }
                 },
+                "version": 1,
                 "tracked": false,
                 "channelPricings": [],
                 "_links": {
@@ -131,6 +136,7 @@
                         "name": "Mug 6"
                     }
                 },
+                "version": 1,
                 "tracked": false,
                 "channelPricings": [],
                 "_links": {
@@ -151,6 +157,7 @@
                         "name": "Mug 7"
                     }
                 },
+                "version": 1,
                 "tracked": false,
                 "channelPricings": [],
                 "_links": {
@@ -171,6 +178,7 @@
                         "name": "Mug 8"
                     }
                 },
+                "version": 1,
                 "tracked": false,
                 "channelPricings": [],
                 "_links": {
@@ -191,6 +199,7 @@
                         "name": "Mug 9"
                     }
                 },
+                "version": 1,
                 "tracked": false,
                 "channelPricings": [],
                 "_links": {
@@ -211,6 +220,7 @@
                         "name": "Mug 10"
                     }
                 },
+                "version": 1,
                 "tracked": false,
                 "channelPricings": [],
                 "_links": {

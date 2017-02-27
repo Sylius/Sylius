@@ -16,6 +16,7 @@
     },
     "onHold": 0,
     "onHand": 0,
+    "version": 1,
     "tracked": false,
     "channelPricings": [],
     "_links": {

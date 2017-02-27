@@ -30,6 +30,7 @@
                         "name": "Star wars mug"
                     }
                 },
+                "version": 1,
                 "onHold": 0,
                 "onHand": 0,
                 "tracked": false,

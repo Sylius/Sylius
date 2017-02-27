@@ -10,6 +10,7 @@
           "name":"Small sticker"
         }
     },
+    "version": 2,
     "onHold":0,
     "onHand":8,
     "tracked":false,
