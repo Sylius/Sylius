@@ -47,7 +47,7 @@ Definition
 
 .. code-block:: text
 
-    GET /api/v1/product-attributes/{code}
+    GET /api/v1/product-options/{code}
 
 +---------------+----------------+--------------------------------------+
 | Parameter     | Parameter type | Description                          |
