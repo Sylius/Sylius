@@ -31,14 +31,14 @@
             },
             {
                 "id": @integer@,
-                "code": "Holliday",
-                "name": "Holliday promotion",
+                "code": "Holiday",
+                "name": "Holiday promotion",
                 "_links": {
                     "self": {
-                        "href": "\/api\/v1\/promotions\/Holliday"
+                        "href": "\/api\/v1\/promotions\/Holiday"
                     },
                     "coupons": {
-                        "href": "\/api\/v1\/promotions\/Holliday\/coupons\/"
+                        "href": "\/api\/v1\/promotions\/Holiday\/coupons\/"
                     }
                 }
             }

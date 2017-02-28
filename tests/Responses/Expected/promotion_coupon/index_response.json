@@ -5,13 +5,13 @@
     "total": 2,
     "_links": {
         "self": {
-            "href": "\/api\/v1\/promotions\/Holliday\/coupons\/?page=1&limit=10"
+            "href": "\/api\/v1\/promotions\/Holiday\/coupons\/?page=1&limit=10"
         },
         "first": {
-            "href": "\/api\/v1\/promotions\/Holliday\/coupons\/?page=1&limit=10"
+            "href": "\/api\/v1\/promotions\/Holiday\/coupons\/?page=1&limit=10"
         },
         "last": {
-            "href": "\/api\/v1\/promotions\/Holliday\/coupons\/?page=1&limit=10"
+            "href": "\/api\/v1\/promotions\/Holiday\/coupons\/?page=1&limit=10"
         }
     },
     "_embedded": {
@@ -22,7 +22,7 @@
                 "used": 0,
                 "_links": {
                     "self": {
-                        "href": "\/api\/v1\/promotions\/Holliday\/coupons\/1765C"
+                        "href": "\/api\/v1\/promotions\/Holiday\/coupons\/1765C"
                     }
                 }
             },
@@ -34,7 +34,7 @@
                 "expiresAt": "@string@.isDateTime()",
                 "_links": {
                     "self": {
-                        "href": "\/api\/v1\/promotions\/Holliday\/coupons\/CAE14"
+                        "href": "\/api\/v1\/promotions\/Holiday\/coupons\/CAE14"
                     }
                 }
             }

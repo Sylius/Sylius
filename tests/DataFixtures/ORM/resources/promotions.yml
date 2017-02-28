@@ -4,6 +4,6 @@ Sylius\Component\Core\Model\Promotion:
         name: Sunday promotion
         couponBased: false
     promotion2:
-        code: Holliday
-        name: Holliday promotion
+        code: Holiday
+        name: Holiday promotion
         couponBased: true
