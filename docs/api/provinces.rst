@@ -52,20 +52,20 @@ Definition
 
     GET /api/v1/codes/{countryCode}/provinces/{code}
 
-+---------------+----------------+---------------------------------------------+
-| Parameter     | Parameter type | Description                                 |
-+===============+================+=============================================+
-| Authorization | header         | Token received during authentication        |
-+---------------+----------------+---------------------------------------------+
-| countryCode   | url attribute  | Code of country to which province belonging |
-+---------------+----------------+---------------------------------------------+
-| code          | url attribute  | Code of requested province                  |
-+---------------+----------------+---------------------------------------------+
++---------------+----------------+---------------------------------------------------+
+| Parameter     | Parameter type | Description                                       |
++===============+================+===================================================+
+| Authorization | header         | Token received during authentication              |
++---------------+----------------+---------------------------------------------------+
+| countryCode   | url attribute  | Code of the country to which the province belongs |
++---------------+----------------+---------------------------------------------------+
+| code          | url attribute  | Code of the requested province                    |
++---------------+----------------+---------------------------------------------------+
 
 Example
 ^^^^^^^
 
-To see the details of the province with ``code = PL-MZ`` which belongs to country with ``code = PL`` use the below method:
+To see the details of the province with ``code = PL-MZ`` which belongs to the country with ``code = PL`` use the below method:
 
 .. code-block:: bash
 
@@ -75,7 +75,7 @@ To see the details of the province with ``code = PL-MZ`` which belongs to countr
 
 .. note::
 
-    The *PL* ans *PL-MZ* codes is just an example. Your value can be different.
+    The *PL* ans *PL-MZ* codes is just examples. Your value can be different.
 
 Exemplary Response
 ^^^^^^^^^^^^^^^^^^
@@ -112,15 +112,15 @@ Definition
 
     DELETE /api/v1/countries/{countryCode}/provinces/{code}
 
-+---------------+----------------+---------------------------------------------+
-| Parameter     | Parameter type | Description                                 |
-+===============+================+=============================================+
-| Authorization | header         | Token received during authentication        |
-+---------------+----------------+---------------------------------------------+
-| countryCode   | url attribute  | Code of country to which province belonging |
-+---------------+----------------+---------------------------------------------+
-| code          | url attribute  | Code of requested province                  |
-+---------------+----------------+---------------------------------------------+
++---------------+----------------+---------------------------------------------------+
+| Parameter     | Parameter type | Description                                       |
++===============+================+===================================================+
+| Authorization | header         | Token received during authentication              |
++---------------+----------------+---------------------------------------------------+
+| countryCode   | url attribute  | Code of the country to which the province belongs |
++---------------+----------------+---------------------------------------------------+
+| code          | url attribute  | Code of the requested province                    |
++---------------+----------------+---------------------------------------------------+
 
 Example
 ^^^^^^^

@@ -648,7 +648,7 @@ To fully update the product variant with ``code = double-theme-mug`` for the pro
 
 .. warning::
 
-    Do not forget to pass version of the variant. Without this  you will receive a ``409 Conflict`` error.
+    Do not forget to pass version of the variant. Without this you will receive a ``409 Conflict`` error.
 
 Exemplary Response
 ^^^^^^^^^^^^^^^^^^

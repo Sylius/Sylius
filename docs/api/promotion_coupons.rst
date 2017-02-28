@@ -41,7 +41,7 @@ If you request for more detailed data, you will receive an object with the follo
 +-----------------------+--------------------------------------------------+
 | updatedAt             | Date of last update                              |
 +-----------------------+--------------------------------------------------+
-| perCustomerUsageLimit | Date of last update                              |
+| perCustomerUsageLimit | Limit of the coupon usage by single customer     |
 +-----------------------+--------------------------------------------------+
 
 .. note::
