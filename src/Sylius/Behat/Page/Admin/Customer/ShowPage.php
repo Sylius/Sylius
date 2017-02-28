@@ -50,6 +50,14 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
+    public function getCustomerPhoneNumber()
+    {
+        return $this->getElement('customer_phone_number')->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getCustomerName()
     {
         return $this->getElement('customer_name')->getText();
@@ -221,7 +229,8 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return array_merge(parent::getDefinedElements(), [
             'customer_email' => '#info .content.extra > a',
             'customer_name' => '#info .content > a',
-            'default_address' => '#defaultAddress address',
+            'customer_phone_number' => '#phone-number',
+            'default_address' => '#default-address',
             'delete_account_button' => '#actions',
             'flash_message' => '.ui.icon.positive.message .content p',
             'group' => '.group',

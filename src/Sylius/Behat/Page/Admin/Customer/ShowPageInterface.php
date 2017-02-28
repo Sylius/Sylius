@@ -37,6 +37,11 @@ interface ShowPageInterface extends PageInterface
     /**
      * @return string
      */
+    public function getCustomerPhoneNumber();
+
+    /**
+     * @return string
+     */
     public function getCustomerName();
 
     /**

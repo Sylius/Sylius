@@ -411,7 +411,7 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Given he should be registered since :registrationDate
+     * @Then he should be registered since :registrationDate
      */
     public function hisRegistrationDateShouldBe($registrationDate)
     {
@@ -419,11 +419,19 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Given his email should be :email
+     * @Then his email should be :email
      */
     public function hisEmailShouldBe($email)
     {
         Assert::same($this->showPage->getCustomerEmail(), $email);
+    }
+
+    /**
+     * @Then his phone number should be :phoneNumber
+     */
+    public function hisPhoneNumberShouldBe($phoneNumber)
+    {
+        Assert::same($this->showPage->getCustomerPhoneNumber(), $phoneNumber);
     }
 
     /**
