@@ -1,0 +1,18 @@
+{
+    "id": @integer@,
+    "code": "1234",
+    "usageLimit": 10,
+    "used": 0,
+    "expiresAt": "2020-01-01T00:00:00+0100",
+    "createdAt": "@string@.isDateTime()",
+    "updatedAt": "@string@.isDateTime()",
+    "perCustomerUsageLimit": 1,
+    "_links": {
+        "self": {
+            "href": "\/api\/v1\/promotions\/Holliday\/coupons\/1234"
+        },
+        "promotion": {
+            "href": "\/api\/v1\/promotions\/Holliday"
+        }
+    }
+}

@@ -72,13 +72,103 @@ final class PromotionCouponApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allow_to_show_promotion_when_it_does_not_exist()
+    public function it_does_not_allow_to_create_coupon_for_not_authenticated_users()
+    {
+        $promotions = $this->loadFixturesFromFile('resources/promotions.yml');
+        $promotion = $promotions['promotion2'];
+
+        $this->client->request('POST', $this->getPromotionCouponsUrl($promotion));
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
+    }
+
+    /**
+     * @test
+     */
+    public function it_does_not_allow_to_create_coupon_without_specifying_required_data()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $promotions = $this->loadFixturesFromFile('resources/promotions.yml');
         $promotion = $promotions['promotion2'];
 
-        $this->client->request('GET', sprintf('/api/v1/promotions/%s/coupons/-1', $promotion->getCode()), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('POST', $this->getPromotionCouponsUrl($promotion), [], [], static::$authorizedHeaderWithAccept);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'promotion_coupon/create_validation_fail_response', Response::HTTP_BAD_REQUEST);
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_to_create_coupon_with_given_code()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $promotions = $this->loadFixturesFromFile('resources/promotions.yml');
+        $promotion = $promotions['promotion2'];
+
+        $data =
+<<<EOT
+        {
+            "code": "1234"
+        }
+EOT;
+
+        $this->client->request('POST', $this->getPromotionCouponsUrl($promotion), [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'promotion_coupon/create_response', Response::HTTP_CREATED);
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_to_create_coupon_with_given_code_expiration_date_and_usage_limits()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $promotions = $this->loadFixturesFromFile('resources/promotions.yml');
+        $promotion = $promotions['promotion2'];
+
+        $data =
+<<<EOT
+        {
+            "code": "1234",
+            "expiresAt": "2020-01-01",
+            "usageLimit": 10,
+            "perCustomerUsageLimit": 1
+        }
+EOT;
+
+        $this->client->request('POST', $this->getPromotionCouponsUrl($promotion), [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'promotion_coupon/create_advanced_response', Response::HTTP_CREATED);
+    }
+
+    /**
+     * @test
+     */
+    public function it_denies_getting_coupon_for_non_authenticated_user()
+    {
+        $promotions = $this->loadFixturesFromFile('resources/promotions.yml');
+        $promotion = $promotions['promotion2'];
+
+        $this->client->request('GET', sprintf('/api/v1/promotions/%s/coupons/-1', $promotion->getCode()));
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
+    }
+
+    /**
+     * @test
+     */
+    public function it_returns_not_found_response_when_requesting_details_of_a_coupon_which_does_not_exist()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $promotions = $this->loadFixturesFromFile('resources/promotions.yml');
+        $promotion = $promotions['promotion2'];
+
+        $this->client->request('GET', sprintf('/api/v1/promotions/%s/coupons/1', $promotion->getCode()), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
@@ -87,7 +177,7 @@ final class PromotionCouponApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_showing_promotion_coupon()
+    public function it_allows_to_get_a_coupon()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $promotions = $this->loadFixturesFromFile('resources/promotions.yml');
@@ -105,12 +195,12 @@ final class PromotionCouponApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    function it_does_not_allow_to_create_coupon_for_not_authenticated_users()
+    public function it_denies_coupon_full_update_for_not_authenticated_users()
     {
         $promotions = $this->loadFixturesFromFile('resources/promotions.yml');
         $promotion = $promotions['promotion2'];
 
-        $this->client->request('POST', $this->getPromotionCouponsUrl($promotion));
+        $this->client->request('PUT', sprintf('/api/v1/promotions/%s/coupons/1', $promotion->getCode()));
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
@@ -119,38 +209,104 @@ final class PromotionCouponApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    function it_does_not_allow_to_create_coupon_without_specifying_required_data()
+    public function it_returns_not_found_response_when_requesting_full_update_of_a_coupon_which_does_not_exist()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $promotions = $this->loadFixturesFromFile('resources/promotions.yml');
         $promotion = $promotions['promotion2'];
 
-        $this->client->request('POST', $this->getPromotionCouponsUrl($promotion), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('PUT', sprintf('/api/v1/promotions/%s/coupons/1', $promotion->getCode()), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'promotion_coupon/create_validation_fail_response', Response::HTTP_BAD_REQUEST);
+        $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
     }
 
     /**
      * @test
      */
-    function it_allows_to_create_coupon_with_given_code()
+    public function it_allows_to_fully_update_coupon()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $promotions = $this->loadFixturesFromFile('resources/promotions.yml');
+        $promotionCoupons = $this->loadFixturesFromFile('resources/promotion_coupons.yml');
+        $promotion = $promotions['promotion2'];
+        $promotionCoupon = $promotionCoupons['promotionCoupon2'];
+
+        $data =
+<<<EOT
+        {
+            "usageLimit": 30,
+            "perCustomerUsageLimit": 2
+        }
+EOT;
+
+        $this->client->request('PUT', $this->getPromotionCouponUrl($promotion, $promotionCoupon), [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $response = $this->client->getResponse();
+        $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
+
+        $this->client->request('GET', $this->getPromotionCouponUrl($promotion, $promotionCoupon), [], [], static::$authorizedHeaderWithAccept);
+        $response = $this->client->getResponse();
+
+        $this->assertResponse($response, 'promotion_coupon/update_response', Response::HTTP_OK);
+    }
+
+    /**
+     * @test
+     */
+    public function it_denies_coupon_partial_update_for_not_authenticated_users()
+    {
+        $promotions = $this->loadFixturesFromFile('resources/promotions.yml');
+        $promotion = $promotions['promotion2'];
+
+        $this->client->request('PATCH', sprintf('/api/v1/promotions/%s/coupons/1', $promotion->getCode()));
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
+    }
+
+    /**
+     * @test
+     */
+    public function it_returns_not_found_response_when_requesting_partial_update_of_a_coupon_which_does_not_exist()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $promotions = $this->loadFixturesFromFile('resources/promotions.yml');
         $promotion = $promotions['promotion2'];
 
+        $this->client->request('PATCH', sprintf('/api/v1/promotions/%s/coupons/1', $promotion->getCode()), [], [], static::$authorizedHeaderWithContentType);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_to_partially_update_coupon()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $promotions = $this->loadFixturesFromFile('resources/promotions.yml');
+        $promotionCoupons = $this->loadFixturesFromFile('resources/promotion_coupons.yml');
+        $promotion = $promotions['promotion2'];
+        $promotionCoupon = $promotionCoupons['promotionCoupon2'];
+
         $data =
 <<<EOT
         {
-            "code": "1234"
+            "usageLimit": 30
         }
 EOT;
 
-        $this->client->request('POST', $this->getPromotionCouponsUrl($promotion), [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('PATCH', $this->getPromotionCouponUrl($promotion, $promotionCoupon), [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'promotion_coupon/create_response', Response::HTTP_CREATED);
+        $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
+
+        $this->client->request('GET', $this->getPromotionCouponUrl($promotion, $promotionCoupon), [], [], static::$authorizedHeaderWithAccept);
+        $response = $this->client->getResponse();
+
+        $this->assertResponse($response, 'promotion_coupon/partial_update_response', Response::HTTP_OK);
     }
 
     /**

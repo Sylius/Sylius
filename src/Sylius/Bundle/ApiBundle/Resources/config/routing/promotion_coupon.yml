@@ -9,6 +9,7 @@ sylius_api_promotion_coupon_index:
         _sylius:
             serialization_version: $version
             serialization_groups: [Default]
+            section: api
             criteria:
                 promotion: $promotionCode
 
@@ -19,6 +20,7 @@ sylius_api_promotion_coupon_create:
         _controller: sylius.controller.promotion_coupon:createAction
         _sylius:
             serialization_version: $version
+            section: api
             factory:
                 method: createForPromotion
                 arguments:
@@ -29,6 +31,18 @@ sylius_api_promotion_coupon_create:
                 route: sylius_api_promotion_coupon_index
                 parameters: { promotionCode: $promotionCode }
 
+sylius_api_promotion_coupon_update:
+    path: /{code}
+    methods: [PUT, PATCH]
+    defaults:
+        _controller: sylius.controller.promotion_coupon:updateAction
+        _sylius:
+            serialization_version: $version
+            section: api
+            repository:
+                method: findOneByPromotionCodeAndCode
+                arguments: [$promotionCode, $code]
+
 sylius_api_promotion_coupon_show:
     path: /{code}
     methods: [GET]
@@ -37,3 +51,7 @@ sylius_api_promotion_coupon_show:
         _sylius:
             serialization_version: $version
             serialization_groups: [Default, Detailed]
+            section: api
+            repository:
+                method: findOneByPromotionCodeAndCode
+                arguments: [$promotionCode, $code]
