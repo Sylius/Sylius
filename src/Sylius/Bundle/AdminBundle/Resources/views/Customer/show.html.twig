@@ -15,5 +15,8 @@
 
     <div class="ui divider"></div>
     {% include '@SyliusAdmin/Customer/Show/_breadcrumb.html.twig' %}
+
+    {{ render(path('sylius_admin_customer_orders_statistics', {'customerId': customer.id})) }}
+
     {% include '@SyliusAdmin/Customer/Show/_content.html.twig' %}
 {% endblock %}

@@ -1,0 +1,19 @@
+<div class="ui fluid labeled four icon item menu">
+    <div class="item">
+        <i class="alternate share icon"></i>
+        {{ 'sylius.ui.channel'|trans }}
+    </div>
+    <a href="{{ path('sylius_admin_customer_order_index', {'id': customer.id}) }}" class="item">
+        <i class="shop icon"></i>
+        {{ 'sylius.ui.orders'|trans }}
+    </a>
+    <div class="item">
+        <i class="dollar icon"></i>
+        {{ 'sylius.ui.total_value_of_orders'|trans }}
+    </div>
+    <div class="item">
+        <i class="dollar icon"></i>
+        {{ 'sylius.ui.average_order_value'|trans }}
+    </div>
+</div>
+
