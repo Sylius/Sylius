@@ -2,7 +2,7 @@
     "id": @integer@,
     "code": "CAE14",
     "usageLimit": 30,
-    "used": 0,
+    "used": 3,
     "createdAt": "@string@.isDateTime()",
     "updatedAt": "@string@.isDateTime()",
     "perCustomerUsageLimit": 2,

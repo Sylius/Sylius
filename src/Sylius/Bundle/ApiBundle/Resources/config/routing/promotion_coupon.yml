@@ -55,3 +55,16 @@ sylius_api_promotion_coupon_show:
             repository:
                 method: findOneByPromotionCodeAndCode
                 arguments: [$promotionCode, $code]
+
+sylius_api_promotion_coupon_delete:
+    path: /{code}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.promotion_coupon:deleteAction
+        _sylius:
+            serialization_version: $version
+            section: api
+            csrf_protection: false
+            repository:
+                method: findOneByPromotionCodeAndCode
+                arguments: [$promotionCode, $code]

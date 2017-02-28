@@ -310,6 +310,57 @@ EOT;
     }
 
     /**
+     * @test
+     */
+    public function it_denies_coupon_delete_for_not_authenticated_users()
+    {
+        $promotions = $this->loadFixturesFromFile('resources/promotions.yml');
+        $promotion = $promotions['promotion2'];
+
+        $this->client->request('DELETE', sprintf('/api/v1/promotions/%s/coupons/1', $promotion->getCode()));
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
+    }
+
+    /**
+     * @test
+     */
+    public function it_returns_not_found_response_when_requesting_delete_of_a_coupon_which_does_not_exist()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $promotions = $this->loadFixturesFromFile('resources/promotions.yml');
+        $promotion = $promotions['promotion2'];
+
+        $this->client->request('DELETE', sprintf('/api/v1/promotions/%s/coupons/123123', $promotion->getCode()), [], [], static::$authorizedHeaderWithAccept);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_to_delete_a_coupon()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $promotions = $this->loadFixturesFromFile('resources/promotions.yml');
+        $promotionCoupons = $this->loadFixturesFromFile('resources/promotion_coupons.yml');
+        $promotion = $promotions['promotion2'];
+        $promotionCoupon = $promotionCoupons['promotionCoupon2'];
+
+        $this->client->request('DELETE', $this->getPromotionCouponUrl($promotion, $promotionCoupon), [], [], static::$authorizedHeaderWithAccept);
+
+        $response = $this->client->getResponse();
+        $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
+
+        $this->client->request('GET', $this->getPromotionCouponUrl($promotion, $promotionCoupon), [], [], static::$authorizedHeaderWithAccept);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
+    }
+
+    /**
      * @param PromotionInterface $promotion
      * @param PromotionCouponInterface|null $coupon
      *

@@ -32,9 +32,6 @@
                 "usageLimit": 4,
                 "used": 3,
                 "expiresAt": "@string@.isDateTime()",
-                "createdAt": "@string@.isDateTime()",
-                "updatedAt": "@string@.isDateTime()",
-                "perCustomerUsageLimit": 1,
                 "_links": {
                     "self": {
                         "href": "\/api\/v1\/promotions\/Holiday\/coupons\/CAE14"
