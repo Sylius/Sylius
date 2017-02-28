@@ -1,5 +1,6 @@
 imports:
     - { resource: "@SyliusCoreBundle/Resources/config/app/sylius/sylius_addressing.yml" }
+    - { resource: "@SyliusCoreBundle/Resources/config/app/sylius/sylius_attribute.yml" }
     - { resource: "@SyliusCoreBundle/Resources/config/app/sylius/sylius_channel.yml" }
     - { resource: "@SyliusCoreBundle/Resources/config/app/sylius/sylius_inventory.yml" }
     - { resource: "@SyliusCoreBundle/Resources/config/app/sylius/sylius_locale.yml" }
