@@ -24,6 +24,14 @@ final class PromotionCouponApiTest extends JsonApiTestCase
     /**
      * @var array
      */
+    private static $authorizedHeaderWithContentType = [
+        'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
+        'CONTENT_TYPE' => 'application/json',
+    ];
+
+    /**
+     * @var array
+     */
     private static $authorizedHeaderWithAccept = [
         'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
         'ACCEPT' => 'application/json',
@@ -92,6 +100,57 @@ final class PromotionCouponApiTest extends JsonApiTestCase
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'promotion_coupon/show_response', Response::HTTP_OK);
+    }
+
+    /**
+     * @test
+     */
+    function it_does_not_allow_to_create_coupon_for_not_authenticated_users()
+    {
+        $promotions = $this->loadFixturesFromFile('resources/promotions.yml');
+        $promotion = $promotions['promotion2'];
+
+        $this->client->request('POST', $this->getPromotionCouponsUrl($promotion));
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
+    }
+
+    /**
+     * @test
+     */
+    function it_does_not_allow_to_create_coupon_without_specifying_required_data()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $promotions = $this->loadFixturesFromFile('resources/promotions.yml');
+        $promotion = $promotions['promotion2'];
+
+        $this->client->request('POST', $this->getPromotionCouponsUrl($promotion), [], [], static::$authorizedHeaderWithAccept);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'promotion_coupon/create_validation_fail_response', Response::HTTP_BAD_REQUEST);
+    }
+
+    /**
+     * @test
+     */
+    function it_allows_to_create_coupon_with_given_code()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $promotions = $this->loadFixturesFromFile('resources/promotions.yml');
+        $promotion = $promotions['promotion2'];
+
+        $data =
+<<<EOT
+        {
+            "code": "1234"
+        }
+EOT;
+
+        $this->client->request('POST', $this->getPromotionCouponsUrl($promotion), [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'promotion_coupon/create_response', Response::HTTP_CREATED);
     }
 
     /**

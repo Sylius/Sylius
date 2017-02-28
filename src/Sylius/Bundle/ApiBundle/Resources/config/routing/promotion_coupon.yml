@@ -12,6 +12,23 @@ sylius_api_promotion_coupon_index:
             criteria:
                 promotion: $promotionCode
 
+sylius_api_promotion_coupon_create:
+    path: /
+    methods: [POST]
+    defaults:
+        _controller: sylius.controller.promotion_coupon:createAction
+        _sylius:
+            serialization_version: $version
+            factory:
+                method: createForPromotion
+                arguments:
+                  - expr:service('sylius.repository.promotion').findOneByCode($promotionCode)
+            criteria:
+                promotion: $promotionCode
+            redirect:
+                route: sylius_api_promotion_coupon_index
+                parameters: { promotionCode: $promotionCode }
+
 sylius_api_promotion_coupon_show:
     path: /{code}
     methods: [GET]
