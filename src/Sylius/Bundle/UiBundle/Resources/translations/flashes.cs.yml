@@ -11,8 +11,8 @@ sylius:
         add_address: 'Adresa byla úspěšně přidána.'
         impersonate: 'Zákazník %name% impersonován.'
         set_address_as_default: 'Adresa byla nastavena jako výchozí.'
-    product:
-        out_of_stock: 'K dispozici je pouze %quantity% tohoto produktu na skladě.'
     order:
         promotion_integrity: 'Bohužel už nemůžete využít akci %promotionName%.'
         total_integrity: 'Vaše objednávka byla změněna, prosím zkontrolujte ji ještě jednou.'
+    product:
+        out_of_stock: 'K dispozici je pouze %quantity% tohoto produktu na skladě.'

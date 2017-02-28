@@ -8,6 +8,12 @@ sylius:
         gateway_configuration:
             paypal:
                 password: Contraseña
+                signature: Firma
                 username: Nombre usuario
+            stripe:
+                publishable_key: Llave pública
+                secret_key: Llave secreta
     payum_gateway_factory:
         offline: Desconectado
+        paypal_express_checkout: Pago con Paypal Express
+        stripe_checkout: Pago con Stripe

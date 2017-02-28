@@ -21,7 +21,7 @@ sylius:
             select: Selecciona
             text: Texto
             textarea: Área de texto
-            title: Tipo de atributo
+            title: Tipo de atributos
             validation: Validación
         attribute_type_configuration:
             datetime:
@@ -29,7 +29,11 @@ sylius:
             date:
                 format: Formato
             select:
+                multiple: Varios ítems
                 values: Valores
+                choose: Elige una opción
+                min: Mínima
+                max: Máxima
             text:
                 min: Longitud mínima
                 max: Longitud máxima

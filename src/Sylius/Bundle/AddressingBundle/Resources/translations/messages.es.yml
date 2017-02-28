@@ -19,7 +19,7 @@ sylius:
             name: Nombre
             provinces: Provincias
             select: Selecciona
-            enabled: '¿Activado?'
+            enabled: Activado
         province:
             name: Nombre
             abbreviation: Abreviatura

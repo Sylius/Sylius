@@ -28,11 +28,13 @@ sylius:
             contact_email: Email de contacto
             currencies: Monedas
             currency_base: Moneda base
+            account_verification_required: '¿Se requiere verificación de cuenta?'
             hostname: Nombre del host
             locale_default: Configuración regional predeterminada
             locales: Idiomas
             payment_methods: Métodos de pago
             shipping_methods: Métodos de envío
+            skipping_shipping_step_allowed: '¿Omitir pregunta si sólo hay disponible un método de envío?'
             tax_calculation_strategy: Estrategia de cálculo de impuestos
             tax_zone_default: Zona de impuestos por defecto
             taxonomies: Taxonomías

@@ -28,11 +28,13 @@ sylius:
             contact_email: Контактный адрес электронной почты
             currencies: Валюты
             currency_base: Базовая валюта
+            account_verification_required: Требуется ли подтверждение аккаунта?
             hostname: Хост
             locale_default: Локаль по умолчанию
             locales: Языки
             payment_methods: Список методов оплаты
             shipping_methods: Список способов доставки
+            skipping_shipping_step_allowed: Пропустить шаг доставки, если доступен только один способ доставки?
             tax_calculation_strategy: Способ расчета налогов
             tax_zone_default: Налоговая зона по умолчанию
             taxonomies: Список каталогов
