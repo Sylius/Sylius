@@ -22,6 +22,7 @@ var paths = {
     shop: {
         js: [
             nodeModulesPath + 'jquery/dist/jquery.min.js',
+            nodeModulesPath + 'jquery.dirtyforms/jquery.dirtyforms.js',
             nodeModulesPath + 'semantic-ui-css/semantic.min.js',
             nodeModulesPath + 'lightbox2/dist/js/lightbox.js',
             vendorUiPath + 'Resources/private/js/**',

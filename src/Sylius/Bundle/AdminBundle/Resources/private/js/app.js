@@ -54,5 +54,7 @@
 
         $(document).productSlugGenerator();
         $(document).taxonSlugGenerator();
+
+        $('form:not(#filters)').dirtyForms();
     });
 })(jQuery);

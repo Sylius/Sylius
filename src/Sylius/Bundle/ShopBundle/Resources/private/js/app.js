@@ -55,5 +55,8 @@
         $('#sylius-billing-address').addressBook();
         $(document).provinceField();
         $(document).variantPrices();
+
+        $('form[name="sylius_customer_profile"]').dirtyForms();
+        $('form[name="sylius_address"]').dirtyForms();
     });
 })(jQuery);
