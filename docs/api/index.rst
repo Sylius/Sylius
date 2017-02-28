@@ -28,7 +28,6 @@ The REST API Reference
     tax_categories
     tax_rates
     taxons
-    users
     zones
 
 .. include:: /api/map.rst.inc
