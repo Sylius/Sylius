@@ -4,8 +4,6 @@
     "sourceCurrency": {
         "id": @integer@,
         "code": "EUR",
-        "createdAt": "@string@.isDateTime()",
-        "updatedAt": "@string@.isDateTime()",
         "_links": {
             "self": {
                 "href": "\/api\/v1\/currencies\/EUR"
@@ -15,8 +13,6 @@
     "targetCurrency": {
         "id": @integer@,
         "code": "GBP",
-        "createdAt": "@string@.isDateTime()",
-        "updatedAt": "@string@.isDateTime()",
         "_links": {
             "self": {
                 "href": "\/api\/v1\/currencies\/GBP"

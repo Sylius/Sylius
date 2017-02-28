@@ -1,8 +1,6 @@
 {
     "id": @integer@,
     "code": "USD",
-    "createdAt": "@string@.isDateTime()",
-    "updatedAt": "@string@.isDateTime()",
     "_links": {
         "self": {
             "href": "\/api\/v1\/currencies\/USD"

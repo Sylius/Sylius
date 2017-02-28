@@ -656,7 +656,7 @@ Exemplary Response
 
 .. code-block:: text
 
-    STATUS: 200 Ok
+    STATUS: 200 OK
 
     {
         "page":1,
