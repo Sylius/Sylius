@@ -1,4 +1,4 @@
-<span class="ui green ribbon label">
+<span class="ui green{% if attached is defined and attached == true %} top attached{% endif %} label">
     <i class="plane icon"></i>
     {{ value|trans }}
 </span>
