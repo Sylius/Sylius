@@ -5,16 +5,16 @@
     "total": 20,
     "_links": {
         "self": {
-            "href": "@string@"
+            "href": "\/api\/v1\/products\/MUG_SW\/variants\/?page=1&limit=10"
         },
         "first": {
-            "href": "@string@"
+            "href": "\/api\/v1\/products\/MUG_SW\/variants\/?page=1&limit=10"
         },
         "last": {
-            "href": "@string@"
+            "href": "\/api\/v1\/products\/MUG_SW\/variants\/?page=2&limit=10"
         },
         "next": {
-            "href": "@string@"
+            "href": "\/api\/v1\/products\/MUG_SW\/variants\/?page=2&limit=10"
         }
     },
     "_embedded": {
@@ -31,14 +31,12 @@
                         "name": "Mug 1"
                     }
                 },
+                "version": 1,
                 "tracked": false,
                 "channelPricings": [],
                 "_links": {
                     "self": {
-                        "href": "@string@"
-                    },
-                    "product": {
-                        "href": "@string@"
+                        "href": "\/api\/v1\/products\/MUG_SW\/variants\/MUG_1"
                     }
                 }
             },
@@ -54,14 +52,12 @@
                         "name": "Mug 2"
                     }
                 },
+                "version": 1,
                 "tracked": false,
                 "channelPricings": [],
                 "_links": {
                     "self": {
-                        "href": "@string@"
-                    },
-                    "product": {
-                        "href": "@string@"
+                        "href": "\/api\/v1\/products\/MUG_SW\/variants\/MUG_2"
                     }
                 }
             },
@@ -77,14 +73,12 @@
                         "name": "Mug 3"
                     }
                 },
+                "version": 1,
                 "tracked": false,
                 "channelPricings": [],
                 "_links": {
                     "self": {
-                        "href": "@string@"
-                    },
-                    "product": {
-                        "href": "@string@"
+                        "href": "\/api\/v1\/products\/MUG_SW\/variants\/MUG_3"
                     }
                 }
             },
@@ -100,14 +94,12 @@
                         "name": "Mug 4"
                     }
                 },
+                "version": 1,
                 "tracked": false,
                 "channelPricings": [],
                 "_links": {
                     "self": {
-                        "href": "@string@"
-                    },
-                    "product": {
-                        "href": "@string@"
+                        "href": "\/api\/v1\/products\/MUG_SW\/variants\/MUG_4"
                     }
                 }
             },
@@ -123,14 +115,12 @@
                         "name": "Mug 5"
                     }
                 },
+                "version": 1,
                 "tracked": false,
                 "channelPricings": [],
                 "_links": {
                     "self": {
-                        "href": "@string@"
-                    },
-                    "product": {
-                        "href": "@string@"
+                        "href": "\/api\/v1\/products\/MUG_SW\/variants\/MUG_5"
                     }
                 }
             },
@@ -146,14 +136,12 @@
                         "name": "Mug 6"
                     }
                 },
+                "version": 1,
                 "tracked": false,
                 "channelPricings": [],
                 "_links": {
                     "self": {
-                        "href": "@string@"
-                    },
-                    "product": {
-                        "href": "@string@"
+                        "href": "\/api\/v1\/products\/MUG_SW\/variants\/MUG_6"
                     }
                 }
             },
@@ -169,14 +157,12 @@
                         "name": "Mug 7"
                     }
                 },
+                "version": 1,
                 "tracked": false,
                 "channelPricings": [],
                 "_links": {
                     "self": {
-                        "href": "@string@"
-                    },
-                    "product": {
-                        "href": "@string@"
+                        "href": "\/api\/v1\/products\/MUG_SW\/variants\/MUG_7"
                     }
                 }
             },
@@ -192,14 +178,12 @@
                         "name": "Mug 8"
                     }
                 },
+                "version": 1,
                 "tracked": false,
                 "channelPricings": [],
                 "_links": {
                     "self": {
-                        "href": "@string@"
-                    },
-                    "product": {
-                        "href": "@string@"
+                        "href": "\/api\/v1\/products\/MUG_SW\/variants\/MUG_8"
                     }
                 }
             },
@@ -215,14 +199,12 @@
                         "name": "Mug 9"
                     }
                 },
+                "version": 1,
                 "tracked": false,
                 "channelPricings": [],
                 "_links": {
                     "self": {
-                        "href": "@string@"
-                    },
-                    "product": {
-                        "href": "@string@"
+                        "href": "\/api\/v1\/products\/MUG_SW\/variants\/MUG_9"
                     }
                 }
             },
@@ -238,14 +220,12 @@
                         "name": "Mug 10"
                     }
                 },
+                "version": 1,
                 "tracked": false,
                 "channelPricings": [],
                 "_links": {
                     "self": {
-                        "href": "@string@"
-                    },
-                    "product": {
-                        "href": "@string@"
+                        "href": "\/api\/v1\/products\/MUG_SW\/variants\/MUG_10"
                     }
                 }
             }

@@ -28,8 +28,8 @@ Sylius\Component\Taxation\Model\TaxCategory:
             type: DateTime
             groups: [Detailed]
     relations:
-        - rel: self
-          href:
+        -   rel: self
+            href:
                 route: sylius_api_tax_category_show
                 parameters:
                     code: expr(object.getCode())

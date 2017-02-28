@@ -1,7 +1,7 @@
 {
     "id": @integer@,
     "code": "EU",
-    "name": "European Union",
+    "name": "European Union +",
     "type": "country",
     "scope": "all",
     "members": [

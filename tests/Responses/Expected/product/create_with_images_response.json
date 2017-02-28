@@ -3,7 +3,6 @@
     "name": "Theme Mug",
     "code": "MUG_TH",
     "attributes": [],
-    "variants": [],
     "options": [],
     "associations": [],
     "translations": {
@@ -15,35 +14,27 @@
         }
     },
     "productTaxons": [],
+    "channels": [],
     "reviews": [],
     "averageRating": 0,
     "images": [
         {
             "id": @integer@,
             "type": "FORD_MUG",
-            "file": {
-                "test": true,
-                "originalName": "ford",
-                "mimeType": "application\/octet-stream",
-                "error": 0
-            },
             "path": "@string@"
         },
         {
             "id": @integer@,
             "type": "MUGS",
-            "file": {
-                "test": true,
-                "originalName": "mugs",
-                "mimeType": "application\/octet-stream",
-                "error": 0
-            },
             "path": "@string@"
         }
     ],
     "_links": {
         "self": {
-            "href": "@string@"
+            "href": "\/api\/v1\/products\/MUG_TH"
+        },
+        "variants": {
+            "href": "\/api\/v1\/products\/MUG_TH\/variants\/"
         }
     }
 }

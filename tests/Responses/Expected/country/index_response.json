@@ -21,7 +21,7 @@
                 "code": "NL",
                 "_links": {
                     "self": {
-                        "href": @string@
+                        "href": "\/api\/v1\/countries\/NL"
                     }
                 }
             },
@@ -30,7 +30,7 @@
                 "code": "BE",
                 "_links": {
                     "self": {
-                        "href": @string@
+                        "href": "\/api\/v1\/countries\/BE"
                     }
                 }
             },
@@ -39,7 +39,7 @@
                 "code": "PL",
                 "_links": {
                     "self": {
-                        "href": @string@
+                        "href": "\/api\/v1\/countries\/PL"
                     }
                 }
             }

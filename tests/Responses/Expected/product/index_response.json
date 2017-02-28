@@ -28,7 +28,7 @@
                 "images": [],
                 "_links": {
                     "self": {
-                        "href": "@string@"
+                        "href": "\/api\/v1\/products\/MUG_BB"
                     }
                 }
             },
@@ -41,7 +41,7 @@
                 "images": [],
                 "_links": {
                     "self": {
-                        "href": "@string@"
+                        "href": "\/api\/v1\/products\/MUG_LOTR"
                     }
                 }
             },
@@ -54,7 +54,7 @@
                 "images": [],
                 "_links": {
                     "self": {
-                        "href": "@string@"
+                        "href": "\/api\/v1\/products\/MUG_SW"
                     }
                 }
             },
@@ -67,7 +67,7 @@
                 "images": [],
                 "_links": {
                     "self": {
-                        "href": "@string@"
+                        "href": "\/api\/v1\/products\/PRODUCT_10"
                     }
                 }
             },
@@ -80,7 +80,7 @@
                 "images": [],
                 "_links": {
                     "self": {
-                        "href": "@string@"
+                        "href": "\/api\/v1\/products\/PRODUCT_11"
                     }
                 }
             },
@@ -93,7 +93,7 @@
                 "images": [],
                 "_links": {
                     "self": {
-                        "href": "@string@"
+                        "href": "\/api\/v1\/products\/PRODUCT_12"
                     }
                 }
             },
@@ -106,7 +106,7 @@
                 "images": [],
                 "_links": {
                     "self": {
-                        "href": "@string@"
+                        "href": "\/api\/v1\/products\/PRODUCT_13"
                     }
                 }
             },
@@ -119,7 +119,7 @@
                 "images": [],
                 "_links": {
                     "self": {
-                        "href": "@string@"
+                        "href": "\/api\/v1\/products\/PRODUCT_14"
                     }
                 }
             },
@@ -132,7 +132,7 @@
                 "images": [],
                 "_links": {
                     "self": {
-                        "href": "@string@"
+                        "href": "\/api\/v1\/products\/PRODUCT_15"
                     }
                 }
             },
@@ -145,7 +145,7 @@
                 "images": [],
                 "_links": {
                     "self": {
-                        "href": "@string@"
+                        "href": "\/api\/v1\/products\/PRODUCT_16"
                     }
                 }
             }

@@ -5,6 +5,3 @@ Sylius\Component\Core\Model\PaymentMethod:
         channels:
             expose: true
             groups: [Detailed]
-        gatewayConfig:
-            expose: true
-            groups: [Detailed]

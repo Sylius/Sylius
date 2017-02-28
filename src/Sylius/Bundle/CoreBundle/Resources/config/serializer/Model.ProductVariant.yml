@@ -14,6 +14,10 @@ Sylius\Component\Core\Model\ProductVariant:
             expose: true
             type: boolean
             groups: [Default, Detailed, DetailedCart]
+        version:
+            expose: true
+            type: integer
+            groups: [Default, Detailed]
         width:
             expose: true
             type: float

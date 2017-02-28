@@ -3,7 +3,6 @@
     "name": "Theme Mug",
     "code": "MUG_TH",
     "attributes": [],
-    "variants": [],
     "options": [
         {
             "id": @integer@,
@@ -30,13 +29,23 @@
                         }
                     }
                 }
-            ]
+            ],
+            "_links": {
+                "self": {
+                    "href": "\/api\/v1\/products\/MUG_SIZE"
+                }
+            }
         },
         {
             "id": @integer@,
             "code": "MUG_COLOR",
             "position": 1,
-            "values": []
+            "values": [],
+            "_links": {
+                "self": {
+                    "href": "\/api\/v1\/products\/MUG_COLOR"
+                }
+            }
         }
     ],
     "associations": [],
@@ -49,12 +58,16 @@
         }
     },
     "productTaxons": [],
+    "channels": [],
     "reviews": [],
     "averageRating": 0,
     "images": [],
     "_links": {
         "self": {
             "href": "\/api\/v1\/products\/MUG_TH"
+        },
+        "variants": {
+            "href": "\/api\/v1\/products\/MUG_TH\/variants\/"
         }
     }
 }

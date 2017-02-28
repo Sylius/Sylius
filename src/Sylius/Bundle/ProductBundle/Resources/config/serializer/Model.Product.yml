@@ -11,10 +11,6 @@ Sylius\Component\Product\Model\Product:
             expose: true
             type: string
             groups: [Default, Detailed]
-        channels:
-            expose: true
-            type: array
-            groups: [Default, Detailed]
         options:
             expose: true
             type: array
@@ -27,10 +23,6 @@ Sylius\Component\Product\Model\Product:
             expose: true
             type: array
             groups: [Detailed]
-        variants:
-            expose: true
-            type: array
-            groups: [Detailed]
         translations:
             expose: true
             type: array
@@ -39,11 +31,17 @@ Sylius\Component\Product\Model\Product:
         getName:
             serialized_name: name
     relations:
-        - rel: self
-          href:
-            route: sylius_api_product_show
-            parameters:
-                code: expr(object.getCode())
-                version: 1
+        -   rel: self
+            href:
+                route: sylius_api_product_show
+                parameters:
+                    code: expr(object.getCode())
+                    version: 1
+        -   rel: variants
+            href:
+                route: sylius_api_product_variant_index
+                parameters:
+                    productCode: expr(object.getCode())
+                    version: 1
             exclusion:
                 groups: [Detailed]

@@ -34,5 +34,3 @@ Sylius\Component\Shipping\Model\ShippingCategory:
             parameters:
                 code: expr(object.getCode())
                 version: 1
-            exclusion:
-                groups: [Detailed]

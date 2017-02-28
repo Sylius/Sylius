@@ -3,7 +3,6 @@
     "name": "Star Wars mug",
     "code": "MUG_SW",
     "attributes": [],
-    "variants": [],
     "options": [],
     "associations": [],
     "translations": {
@@ -23,12 +22,16 @@
         }
     },
     "productTaxons": [],
+    "channels": [],
     "reviews": [],
     "averageRating": 0,
     "images": [],
     "_links": {
         "self": {
-            "href": "@string@"
+            "href": "\/api\/v1\/products\/MUG_SW"
+        },
+        "variants": {
+            "href": "\/api\/v1\/products\/MUG_SW\/variants\/"
         }
     }
 }

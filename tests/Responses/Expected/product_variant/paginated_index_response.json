@@ -5,16 +5,16 @@
     "total": 20,
     "_links": {
         "self": {
-            "href": "@string@"
+            "href": "\/api\/v1\/products\/MUG_SW\/variants\/?page=2&limit=10"
         },
         "first": {
-            "href": "@string@"
+            "href": "\/api\/v1\/products\/MUG_SW\/variants\/?page=1&limit=10"
         },
         "last": {
-            "href": "@string@"
+            "href": "\/api\/v1\/products\/MUG_SW\/variants\/?page=2&limit=10"
         },
         "previous": {
-            "href": "@string@"
+            "href": "\/api\/v1\/products\/MUG_SW\/variants\/?page=1&limit=10"
         }
     },
     "_embedded": {
@@ -31,14 +31,12 @@
                         "name": "Mug 11"
                     }
                 },
+                "version": 1,
                 "tracked": false,
                 "channelPricings": [],
                 "_links": {
                     "self": {
-                        "href": "@string@"
-                    },
-                    "product": {
-                        "href": "@string@"
+                        "href": "\/api\/v1\/products\/MUG_SW\/variants\/MUG_11"
                     }
                 }
             },
@@ -54,14 +52,12 @@
                         "name": "Mug 12"
                     }
                 },
+                "version": 1,
                 "tracked": false,
                 "channelPricings": [],
                 "_links": {
                     "self": {
-                        "href": "@string@"
-                    },
-                    "product": {
-                        "href": "@string@"
+                        "href": "\/api\/v1\/products\/MUG_SW\/variants\/MUG_12"
                     }
                 }
             },
@@ -77,14 +73,12 @@
                         "name": "Mug 13"
                     }
                 },
+                "version": 1,
                 "tracked": false,
                 "channelPricings": [],
                 "_links": {
                     "self": {
-                        "href": "@string@"
-                    },
-                    "product": {
-                        "href": "@string@"
+                        "href": "\/api\/v1\/products\/MUG_SW\/variants\/MUG_13"
                     }
                 }
             },
@@ -100,14 +94,12 @@
                         "name": "Mug 14"
                     }
                 },
+                "version": 1,
                 "tracked": false,
                 "channelPricings": [],
                 "_links": {
                     "self": {
-                        "href": "@string@"
-                    },
-                    "product": {
-                        "href": "@string@"
+                        "href": "\/api\/v1\/products\/MUG_SW\/variants\/MUG_14"
                     }
                 }
             },
@@ -123,14 +115,12 @@
                         "name": "Mug 15"
                     }
                 },
+                "version": 1,
                 "tracked": false,
                 "channelPricings": [],
                 "_links": {
                     "self": {
-                        "href": "@string@"
-                    },
-                    "product": {
-                        "href": "@string@"
+                        "href": "\/api\/v1\/products\/MUG_SW\/variants\/MUG_15"
                     }
                 }
             },
@@ -146,14 +136,12 @@
                         "name": "Mug 16"
                     }
                 },
+                "version": 1,
                 "tracked": false,
                 "channelPricings": [],
                 "_links": {
                     "self": {
-                        "href": "@string@"
-                    },
-                    "product": {
-                        "href": "@string@"
+                        "href": "\/api\/v1\/products\/MUG_SW\/variants\/MUG_16"
                     }
                 }
             },
@@ -169,14 +157,12 @@
                         "name": "Mug 17"
                     }
                 },
+                "version": 1,
                 "tracked": false,
                 "channelPricings": [],
                 "_links": {
                     "self": {
-                        "href": "@string@"
-                    },
-                    "product": {
-                        "href": "@string@"
+                        "href": "\/api\/v1\/products\/MUG_SW\/variants\/MUG_17"
                     }
                 }
             },
@@ -192,14 +178,12 @@
                         "name": "Mug 18"
                     }
                 },
+                "version": 1,
                 "tracked": false,
                 "channelPricings": [],
                 "_links": {
                     "self": {
-                        "href": "@string@"
-                    },
-                    "product": {
-                        "href": "@string@"
+                        "href": "\/api\/v1\/products\/MUG_SW\/variants\/MUG_18"
                     }
                 }
             },
@@ -215,14 +199,12 @@
                         "name": "Mug 19"
                     }
                 },
+                "version": 1,
                 "tracked": false,
                 "channelPricings": [],
                 "_links": {
                     "self": {
-                        "href": "@string@"
-                    },
-                    "product": {
-                        "href": "@string@"
+                        "href": "\/api\/v1\/products\/MUG_SW\/variants\/MUG_19"
                     }
                 }
             },
@@ -238,14 +220,12 @@
                         "name": "Mug 20"
                     }
                 },
+                "version": 1,
                 "tracked": false,
                 "channelPricings": [],
                 "_links": {
                     "self": {
-                        "href": "@string@"
-                    },
-                    "product": {
-                        "href": "@string@"
+                        "href": "\/api\/v1\/products\/MUG_SW\/variants\/MUG_20"
                     }
                 }
             }

@@ -19,5 +19,6 @@ sylius_api_province_show:
         _controller: sylius.controller.province:showAction
         _sylius:
             serialization_version: $version
+            serialization_groups: [Detailed]
             criteria:
                 code: $code

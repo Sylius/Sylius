@@ -23,7 +23,7 @@
                 "type": "country",
                 "_links": {
                     "self": {
-                        "href": @string@
+                        "href": "\/api\/v1\/zones\/EU"
                     }
                 }
             }

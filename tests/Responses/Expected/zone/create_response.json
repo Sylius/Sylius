@@ -2,10 +2,21 @@
     "id": @integer@,
     "code": "EU",
     "name": "European Union",
+    "scope": "all",
     "type": "country",
+    "members": [
+        {
+            "id": @integer@,
+            "code": "NL"
+        },
+        {
+            "id": @integer@,
+            "code": "BE"
+        }
+    ],
     "_links": {
         "self": {
-            "href": @string@
+            "href": "\/api\/v1\/zones\/EU"
         }
     }
 }

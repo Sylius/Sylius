@@ -10,6 +10,7 @@
             "name": "Mug 2"
         }
     },
+    "version": 1,
     "onHold": 0,
     "onHand": 0,
     "tracked": false,

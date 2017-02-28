@@ -11,13 +11,29 @@ Sylius\Component\Payment\Model\PaymentMethod:
             expose: true
             type: string
             groups: [Default, Detailed]
-        name:
+        position:
             expose: true
-            type: string
+            type: integer
             groups: [Default, Detailed]
+        translations:
+            expose: true
+            type: array
+            groups: [Default, Detailed]
+        enabled:
+            expose: true
+            type: boolean
+            groups: [Detailed]
+        createdAt:
+            expose: true
+            type: DateTime
+            groups: [Detailed]
+        updatedAt:
+            expose: true
+            type: DateTime
+            groups: [Detailed]
     relations:
-        - rel: self
-          href:
+        -   rel: self
+            href:
                 route: sylius_api_payment_method_show
                 parameters:
                     code: expr(object.getCode())

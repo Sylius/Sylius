@@ -8,6 +8,7 @@ sylius_api_promotion_coupon_index:
         _controller: sylius.controller.promotion_coupon:indexAction
         _sylius:
             serialization_version: $version
+            serialization_groups: [Default]
             criteria:
                 promotion: $promotionCode
 
@@ -18,3 +19,4 @@ sylius_api_promotion_coupon_show:
         _controller: sylius.controller.promotion_coupon:showAction
         _sylius:
             serialization_version: $version
+            serialization_groups: [Default, Detailed]

@@ -1,0 +1,25 @@
+{
+    "id": @integer@,
+    "code": "BE",
+    "provinces": [
+        {
+            "id": @integer@,
+            "code": "BE-LM",
+            "name": "Limburg",
+            "_links": {
+                "self": {
+                    "href": "\/api\/v1\/countries\/BE\/provinces\/BE-LM"
+                },
+                "country": {
+                    "href": "\/api\/v1\/countries\/BE"
+                }
+            }
+        }
+    ],
+    "enabled": false,
+    "_links": {
+        "self": {
+            "href": "\/api\/v1\/countries\/BE"
+        }
+    }
+}
