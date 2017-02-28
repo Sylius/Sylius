@@ -23,4 +23,5 @@ Some of the features worth mentioning:
     filters
     custom_field_type
     custom_filter
+    custom_action
     configuration
