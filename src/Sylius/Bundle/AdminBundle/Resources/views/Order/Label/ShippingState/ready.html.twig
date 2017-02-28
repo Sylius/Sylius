@@ -1,4 +1,4 @@
-<span class="ui blue label">
+<span class="ui blue{% if attached is defined and attached == true %} top attached{% endif %} label">
     <i class="clock icon"></i>
     {{ value|trans }}
 </span>
