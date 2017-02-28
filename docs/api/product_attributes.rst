@@ -8,35 +8,41 @@ Product Attribute API response structure
 
 If you request a product attribute via API, you will receive an object with the following fields:
 
-+----------+----------------------------------------------------------------------+
-| Field    | Description                                                          |
-+==========+======================================================================+
-| id       | Id of the product attribute                                          |
-+----------+----------------------------------------------------------------------+
-| code     | Unique product attribute identifier                                  |
-+----------+----------------------------------------------------------------------+
-| position | The position of the product attribute among other product attributes |
-+----------+----------------------------------------------------------------------+
-| name     | Name of the product attribute                                        |
-+----------+----------------------------------------------------------------------+
++--------------+----------------------------------------------------------------------+
+| Field        | Description                                                          |
++==============+======================================================================+
+| id           | Id of the product attribute                                          |
++--------------+----------------------------------------------------------------------+
+| code         | Unique product attribute identifier                                  |
++--------------+----------------------------------------------------------------------+
+| position     | The position of the product attribute among other product attributes |
++--------------+----------------------------------------------------------------------+
+| type         | Type of the product attribute (for example text)                     |
++--------------+----------------------------------------------------------------------+
+| translations | Collection of translations (each contains name in given language)    |
++--------------+----------------------------------------------------------------------+
 
 If you request for more detailed data, you will receive an object with the following fields:
 
-+-----------+----------------------------------------------------------------------+
-| Field     | Description                                                          |
-+===========+======================================================================+
-| id        | Id of the product attribute                                          |
-+-----------+----------------------------------------------------------------------+
-| code      | Unique product attribute identifier                                  |
-+-----------+----------------------------------------------------------------------+
-| position  | The position of the product attribute among other product attributes |
-+-----------+----------------------------------------------------------------------+
-| name      | Name of the product attribute                                        |
-+-----------+----------------------------------------------------------------------+
-| updatedAt | Last update date of the product attribute                            |
-+-----------+----------------------------------------------------------------------+
-| createdAt | Creation date of the product attribute                               |
-+-----------+----------------------------------------------------------------------+
++--------------+----------------------------------------------------------------------+
+| Field        | Description                                                          |
++==============+======================================================================+
+| id           | Id of the product attribute                                          |
++--------------+----------------------------------------------------------------------+
+| code         | Unique product attribute identifier                                  |
++--------------+----------------------------------------------------------------------+
+| position     | The position of the product attribute among other product attributes |
++--------------+----------------------------------------------------------------------+
+| type         | Type of the product attribute (for example text)                     |
++--------------+----------------------------------------------------------------------+
+| translations | Collection of translations (each contains name in given language)    |
++--------------+----------------------------------------------------------------------+
+| updatedAt    | Last update date of the product attribute                            |
++--------------+----------------------------------------------------------------------+
+| createdAt    | Creation date of the product attribute                               |
++--------------+----------------------------------------------------------------------+
+| values       | Values of the product attribute                                      |
++--------------+----------------------------------------------------------------------+
 
 .. note::
 
@@ -75,7 +81,7 @@ To see the details of the product attribute with ``code = sticker_paper`` use th
 
 .. note::
 
-    The *sticker_paper* is just an example. Your value can be different.
+    The *sticker_paper* code is just an example. Your value can be different.
 
 Exemplary Response
 ^^^^^^^^^^^^^^^^^^
@@ -86,10 +92,127 @@ Exemplary Response
 
 .. code-block:: json
 
-   {
+    {
         "id": 2,
-        "createdAt": "2017-02-17T15:01:18+0100",
-        "updatedAt": "2017-02-20T12:46:12+0100",
+        "code": "sticker_paper",
+        "type": "text",
+        "values": [
+            {
+                "code": "sticker_paper",
+                "name": "Sticker paper",
+                "value": "Paper from tree Me-Gusta",
+                "type": "text",
+                "id": 16
+            },
+            {
+                "code": "sticker_paper",
+                "name": "Sticker paper",
+                "value": "Paper from tree Lemon-San",
+                "type": "text",
+                "id": 18
+            },
+            {
+                "code": "sticker_paper",
+                "name": "Sticker paper",
+                "value": "Paper from tree Wung",
+                "type": "text",
+                "id": 20
+            },
+            {
+                "code": "sticker_paper",
+                "name": "Sticker paper",
+                "value": "Paper from tree Tanajno",
+                "type": "text",
+                "id": 22
+            },
+            {
+                "code": "sticker_paper",
+                "name": "Sticker paper",
+                "value": "Paper from tree Tanajno",
+                "type": "text",
+                "id": 24
+            },
+            {
+                "code": "sticker_paper",
+                "name": "Sticker paper",
+                "value": "Paper from tree Wung",
+                "type": "text",
+                "id": 26
+            },
+            {
+                "code": "sticker_paper",
+                "name": "Sticker paper",
+                "value": "Paper from tree Wung",
+                "type": "text",
+                "id": 28
+            },
+            {
+                "code": "sticker_paper",
+                "name": "Sticker paper",
+                "value": "Paper from tree Wung",
+                "type": "text",
+                "id": 30
+            },
+            {
+                "code": "sticker_paper",
+                "name": "Sticker paper",
+                "value": "Paper from tree Me-Gusta",
+                "type": "text",
+                "id": 32
+            },
+            {
+                "code": "sticker_paper",
+                "name": "Sticker paper",
+                "value": "Paper from tree Wung",
+                "type": "text",
+                "id": 34
+            },
+            {
+                "code": "sticker_paper",
+                "name": "Sticker paper",
+                "value": "Paper from tree Wung",
+                "type": "text",
+                "id": 36
+            },
+            {
+                "code": "sticker_paper",
+                "name": "Sticker paper",
+                "value": "Paper from tree Tanajno",
+                "type": "text",
+                "id": 38
+            },
+            {
+                "code": "sticker_paper",
+                "name": "Sticker paper",
+                "value": "Paper from tree Lemon-San",
+                "type": "text",
+                "id": 40
+            },
+            {
+                "code": "sticker_paper",
+                "name": "Sticker paper",
+                "value": "Paper from tree Lemon-San",
+                "type": "text",
+                "id": 42
+            },
+            {
+                "code": "sticker_paper",
+                "name": "Sticker paper",
+                "value": "Paper from tree Me-Gusta",
+                "type": "text",
+                "id": 44
+            }
+        ],
+        "position": 1,
+        "createdAt": "2017-02-24T16:14:05+0100",
+        "updatedAt": "2017-02-24T16:14:05+0100",
+        "translations": {
+            "en_US": {
+                "locale": "en_US",
+                "id": 2,
+                "name": "Sticker paper"
+            }
+        },
         "_links": {
             "self": {
                 "href": "\/api\/v1\/product-attributes\/sticker_paper"
@@ -143,7 +266,7 @@ Exemplary Response
         "page": 1,
         "limit": 10,
         "pages": 1,
-        "total": 9,
+        "total": 10,
         "_links": {
             "self": {
                 "href": "\/api\/v1\/product-attributes\/?page=1&limit=10"
@@ -159,8 +282,16 @@ Exemplary Response
             "items": [
                 {
                     "id": 1,
-                    "createdAt": "2017-02-17T15:01:16+0100",
-                    "updatedAt": "2017-02-17T15:01:16+0100",
+                    "code": "mug_material",
+                    "type": "select",
+                    "position": 0,
+                    "translations": {
+                        "en_US": {
+                            "locale": "en_US",
+                            "id": 1,
+                            "name": "Mug material"
+                        }
+                    },
                     "_links": {
                         "self": {
                             "href": "\/api\/v1\/product-attributes\/mug_material"
@@ -169,8 +300,16 @@ Exemplary Response
                 },
                 {
                     "id": 2,
-                    "createdAt": "2017-02-17T15:01:18+0100",
-                    "updatedAt": "2017-02-20T12:46:12+0100",
+                    "code": "sticker_paper",
+                    "type": "text",
+                    "position": 1,
+                    "translations": {
+                        "en_US": {
+                            "locale": "en_US",
+                            "id": 2,
+                            "name": "Sticker paper"
+                        }
+                    },
                     "_links": {
                         "self": {
                             "href": "\/api\/v1\/product-attributes\/sticker_paper"
@@ -179,8 +318,16 @@ Exemplary Response
                 },
                 {
                     "id": 3,
-                    "createdAt": "2017-02-17T15:01:18+0100",
-                    "updatedAt": "2017-02-17T15:01:18+0100",
+                    "code": "sticker_resolution",
+                    "type": "text",
+                    "position": 2,
+                    "translations": {
+                        "en_US": {
+                            "locale": "en_US",
+                            "id": 3,
+                            "name": "Sticker resolution"
+                        }
+                    },
                     "_links": {
                         "self": {
                             "href": "\/api\/v1\/product-attributes\/sticker_resolution"
@@ -189,8 +336,16 @@ Exemplary Response
                 },
                 {
                     "id": 4,
-                    "createdAt": "2017-02-17T15:01:20+0100",
-                    "updatedAt": "2017-02-17T15:01:20+0100",
+                    "code": "book_author",
+                    "type": "text",
+                    "position": 3,
+                    "translations": {
+                        "en_US": {
+                            "locale": "en_US",
+                            "id": 4,
+                            "name": "Book author"
+                        }
+                    },
                     "_links": {
                         "self": {
                             "href": "\/api\/v1\/product-attributes\/book_author"
@@ -199,8 +354,16 @@ Exemplary Response
                 },
                 {
                     "id": 5,
-                    "createdAt": "2017-02-17T15:01:20+0100",
-                    "updatedAt": "2017-02-17T15:01:20+0100",
+                    "code": "book_isbn",
+                    "type": "text",
+                    "position": 4,
+                    "translations": {
+                        "en_US": {
+                            "locale": "en_US",
+                            "id": 5,
+                            "name": "Book ISBN"
+                        }
+                    },
                     "_links": {
                         "self": {
                             "href": "\/api\/v1\/product-attributes\/book_isbn"
@@ -209,8 +372,16 @@ Exemplary Response
                 },
                 {
                     "id": 6,
-                    "createdAt": "2017-02-17T15:01:20+0100",
-                    "updatedAt": "2017-02-17T15:01:20+0100",
+                    "code": "book_pages",
+                    "type": "integer",
+                    "position": 5,
+                    "translations": {
+                        "en_US": {
+                            "locale": "en_US",
+                            "id": 6,
+                            "name": "Book pages"
+                        }
+                    },
                     "_links": {
                         "self": {
                             "href": "\/api\/v1\/product-attributes\/book_pages"
@@ -219,8 +390,34 @@ Exemplary Response
                 },
                 {
                     "id": 7,
-                    "createdAt": "2017-02-17T15:01:22+0100",
-                    "updatedAt": "2017-02-17T15:01:22+0100",
+                    "code": "book_genre",
+                    "type": "select",
+                    "position": 6,
+                    "translations": {
+                        "en_US": {
+                            "locale": "en_US",
+                            "id": 7,
+                            "name": "Book genre"
+                        }
+                    },
+                    "_links": {
+                        "self": {
+                            "href": "\/api\/v1\/product-attributes\/book_genre"
+                        }
+                    }
+                },
+                {
+                    "id": 8,
+                    "code": "t_shirt_brand",
+                    "type": "text",
+                    "position": 7,
+                    "translations": {
+                        "en_US": {
+                            "locale": "en_US",
+                            "id": 8,
+                            "name": "T-Shirt brand"
+                        }
+                    },
                     "_links": {
                         "self": {
                             "href": "\/api\/v1\/product-attributes\/t_shirt_brand"
@@ -228,9 +425,17 @@ Exemplary Response
                     }
                 },
                 {
-                    "id": 8,
-                    "createdAt": "2017-02-17T15:01:22+0100",
-                    "updatedAt": "2017-02-17T15:01:22+0100",
+                    "id": 9,
+                    "code": "t_shirt_collection",
+                    "type": "text",
+                    "position": 8,
+                    "translations": {
+                        "en_US": {
+                            "locale": "en_US",
+                            "id": 9,
+                            "name": "T-Shirt collection"
+                        }
+                    },
                     "_links": {
                         "self": {
                             "href": "\/api\/v1\/product-attributes\/t_shirt_collection"
@@ -238,9 +443,17 @@ Exemplary Response
                     }
                 },
                 {
-                    "id": 9,
-                    "createdAt": "2017-02-17T15:01:22+0100",
-                    "updatedAt": "2017-02-17T15:01:22+0100",
+                    "id": 10,
+                    "code": "t_shirt_material",
+                    "type": "text",
+                    "position": 9,
+                    "translations": {
+                        "en_US": {
+                            "locale": "en_US",
+                            "id": 10,
+                            "name": "T-Shirt material"
+                        }
+                    },
                     "_links": {
                         "self": {
                             "href": "\/api\/v1\/product-attributes\/t_shirt_material"

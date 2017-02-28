@@ -146,6 +146,7 @@ Exemplary Response
                             "name":"Medium Mug"
                         }
                     },
+                    "version": 1,
                     "on_hold":0,
                     "on_hand":10,
                     "tracked":false,
@@ -442,6 +443,7 @@ Exemplary Response
                             "name":"Medium Mug"
                         }
                     },
+                    "version": 1,
                     "on_hold":0,
                     "on_hand":10,
                     "tracked":false,

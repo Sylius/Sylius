@@ -111,21 +111,22 @@ Exemplary Response
 .. code-block:: json
 
     {
-        "name": "Truck Simulator",
         "id": 61,
         "code": "TS3",
         "attributes": [],
-        "variants": [],
         "options": [],
         "associations": [],
-        "translations": [],
         "productTaxons": [],
+        "channels": [],
         "reviews": [],
         "averageRating": 0,
         "images": [],
         "_links": {
             "self": {
                 "href": "\/api\/v1\/products\/TS3"
+            },
+            "variants": {
+                "href": "\/api\/v1\/products\/TS3\/variants\/"
             }
         }
     }
@@ -258,14 +259,14 @@ Example
                     "mug_type"
                 ],
                  "associations": {
-                     "accessories": "f1fd2fab,f1fd2fab-c024"
+                     "similar_products": "SMM,BMM"
                  },
                 "translations": {
                     "en_US": {
                         "name": "Theme Mug",
                         "slug": "theme-mug"
                     },
-                    "pl_PL": {
+                    "pl": {
                         "name": "Kubek z motywem",
                         "slug": "kubek-z-motywem"
                     }
@@ -289,7 +290,7 @@ Exemplary Response
 
     {
         "name": "Theme Mug",
-        "id": 65,
+        "id": 69,
         "code": "MUG_TH",
         "attributes": [
             {
@@ -297,10 +298,9 @@ Exemplary Response
                 "name": "Mug material",
                 "value": "concrete",
                 "type": "text",
-                "id": 137
+                "id": 155
             }
         ],
-        "variants": [],
         "options": [
             {
                 "id": 1,
@@ -319,152 +319,108 @@ Exemplary Response
                         "name": "Mug type",
                         "code": "mug_type_monster"
                     }
-                ]
+                ],
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/products\/mug_type"
+                    }
+                }
             }
         ],
         "associations": [
             {
-                "id": 12,
+                "id": 13,
                 "type": {
-                    "id": 2,
-                    "code": "accessories",
-                    "createdAt": "2017-02-20T09:06:21+0100",
-                    "updatedAt": "2017-02-20T09:06:21+0100",
-                    "translations": [
-                        {
+                    "name": "Similar products",
+                    "id": 1,
+                    "code": "similar_products",
+                    "translations": {
+                        "en_US": {
                             "locale": "en_US",
-                            "id": 2,
-                            "name": "Accessories"
+                            "id": 1,
+                            "name": "Similar products"
                         }
-                    ],
-                    "current_locale": "en_US",
-                    "fallback_locale": "en_US"
+                    }
                 },
-                "associated_products": [
+                "associatedProducts": [
                     {
-                        "name": "Spoon",
-                        "id": 62,
-                        "code": "spoon",
-                        "attributes": [],
-                        "variants": [
-                            {
-                                "id": 331,
-                                "code": "spoon",
-                                "optionValues": [],
-                                "position": 0,
-                                "translations": {
-                                    "en_US": {
-                                        "locale": "en_US",
-                                        "id": 331
-                                    }
-                                },
-                                "on_hold": 0,
-                                "on_hand": 0,
-                                "tracked": false,
-                                "channelPricings": [],
-                                "_links": {
-                                    "self": {
-                                        "href": "\/api\/v1\/products\/spoon\/variants\/spoon"
-                                    },
-                                    "product": {
-                                        "href": "\/api\/v1\/products\/spoon"
-                                    }
-                                }
-                            }
-                        ],
-                        "options": [],
-                        "associations": [],
-                        "translations": {
-                            "en_US": {
-                                "locale": "en_US",
-                                "id": 62,
-                                "name": "Spoon",
-                                "slug": "spoon"
-                            }
-                        },
-                        "productTaxons": [],
-                        "reviews": [],
-                        "averageRating": 0,
-                        "images": [],
-                        "_links": {
-                            "self": {
-                                "href": "\/api\/v1\/products\/spoon"
-                            }
-                        }
-                    },
-                    {
-                        "name": "Coffee",
+                        "name": "Batman mug",
                         "id": 63,
-                        "code": "coffee",
+                        "code": "BMM",
                         "attributes": [],
-                        "variants": [
-                            {
-                                "id": 332,
-                                "code": "coffee",
-                                "optionValues": [],
-                                "position": 0,
-                                "translations": {
-                                    "en_US": {
-                                        "locale": "en_US",
-                                        "id": 332
-                                    }
-                                },
-                                "on_hold": 0,
-                                "on_hand": 0,
-                                "tracked": false,
-                                "channelPricings": [],
-                                "_links": {
-                                    "self": {
-                                        "href": "\/api\/v1\/products\/coffee\/variants\/coffee"
-                                    },
-                                    "product": {
-                                        "href": "\/api\/v1\/products\/coffee"
-                                    }
-                                }
-                            }
-                        ],
                         "options": [],
                         "associations": [],
                         "translations": {
                             "en_US": {
                                 "locale": "en_US",
                                 "id": 63,
-                                "name": "Coffee",
-                                "slug": "coffee"
+                                "name": "Batman mug",
+                                "slug": "batman-mug"
                             }
                         },
                         "productTaxons": [],
+                        "channels": [],
                         "reviews": [],
                         "averageRating": 0,
                         "images": [],
                         "_links": {
                             "self": {
-                                "href": "\/api\/v1\/products\/coffee"
+                                "href": "\/api\/v1\/products\/BMM"
+                            },
+                            "variants": {
+                                "href": "\/api\/v1\/products\/BMM\/variants\/"
+                            }
+                        }
+                    },
+                    {
+                        "name": "Spider-Man Mug",
+                        "id": 68,
+                        "code": "SMM",
+                        "attributes": [],
+                        "options": [],
+                        "associations": [],
+                        "translations": {
+                            "en_US": {
+                                "locale": "en_US",
+                                "id": 70,
+                                "name": "Spider-Man Mug",
+                                "slug": "spider-man-mug"
+                            }
+                        },
+                        "productTaxons": [],
+                        "channels": [],
+                        "reviews": [],
+                        "averageRating": 0,
+                        "images": [],
+                        "_links": {
+                            "self": {
+                                "href": "\/api\/v1\/products\/SMM"
+                            },
+                            "variants": {
+                                "href": "\/api\/v1\/products\/SMM\/variants\/"
                             }
                         }
                     }
-                ],
-                "createdAt": "2017-02-20T09:23:28+0100",
-                "updatedAt": "2017-02-20T09:23:28+0100"
+                ]
             }
         ],
         "translations": {
             "en_US": {
                 "locale": "en_US",
-                "id": 66,
+                "id": 71,
                 "name": "Theme Mug",
                 "slug": "theme-mug"
             },
             "pl": {
                 "locale": "pl",
-                "id": 67,
+                "id": 72,
                 "name": "Kubek z motywem",
                 "slug": "kubek-z-motywem"
             }
         },
         "productTaxons": [
             {
-                "id": 77,
+                "id": 78,
                 "taxon": {
                     "name": "Mugs",
                     "id": 2,
@@ -473,9 +429,27 @@ Exemplary Response
                         "name": "Category",
                         "id": 1,
                         "code": "category",
-                        "children": [],
+                        "children": {
+                            "1": {
+                                "name": "T-Shirts",
+                                "id": 5,
+                                "code": "t_shirts",
+                                "children": [],
+                                "left": 4,
+                                "right": 5,
+                                "level": 1,
+                                "position": 1,
+                                "translations": [],
+                                "images": [],
+                                "_links": {
+                                    "self": {
+                                        "href": "\/api\/v1\/taxons\/t_shirts"
+                                    }
+                                }
+                            }
+                        },
                         "left": 1,
-                        "right": 12,
+                        "right": 6,
                         "level": 0,
                         "position": 0,
                         "translations": {
@@ -484,7 +458,7 @@ Exemplary Response
                                 "id": 1,
                                 "name": "Category",
                                 "slug": "category",
-                                "description": "Cum explicabo deserunt temporibus beatae et est quis."
+                                "description": "Cupiditate ut esse perspiciatis. Aspernatur nihil ducimus maxime doloremque. Ut aut ad unde necessitatibus voluptatibus id in."
                             }
                         },
                         "images": [],
@@ -498,9 +472,27 @@ Exemplary Response
                         "name": "Category",
                         "id": 1,
                         "code": "category",
-                        "children": [],
+                        "children": {
+                            "1": {
+                                "name": "T-Shirts",
+                                "id": 5,
+                                "code": "t_shirts",
+                                "children": [],
+                                "left": 4,
+                                "right": 5,
+                                "level": 1,
+                                "position": 1,
+                                "translations": [],
+                                "images": [],
+                                "_links": {
+                                    "self": {
+                                        "href": "\/api\/v1\/taxons\/t_shirts"
+                                    }
+                                }
+                            }
+                        },
                         "left": 1,
-                        "right": 12,
+                        "right": 6,
                         "level": 0,
                         "position": 0,
                         "translations": {
@@ -509,7 +501,7 @@ Exemplary Response
                                 "id": 1,
                                 "name": "Category",
                                 "slug": "category",
-                                "description": "Cum explicabo deserunt temporibus beatae et est quis."
+                                "description": "Cupiditate ut esse perspiciatis. Aspernatur nihil ducimus maxime doloremque. Ut aut ad unde necessitatibus voluptatibus id in."
                             }
                         },
                         "images": [],
@@ -530,7 +522,7 @@ Exemplary Response
                             "id": 2,
                             "name": "Mugs",
                             "slug": "mugs",
-                            "description": "Placeat dolor aut dolorum minima."
+                            "description": "Non omnis vel impedit eaque necessitatibus et eveniet. Fugiat distinctio quos aut commodi ea minima. Et natus ratione sit aperiam a molestiae. Eligendi sed cumque deleniti unde magnam."
                         }
                     },
                     "images": [],
@@ -543,6 +535,24 @@ Exemplary Response
                 "position": 0
             }
         ],
+        "channels": [
+            {
+                "id": 1,
+                "code": "US_WEB",
+                "name": "US Web Store",
+                "hostname": "localhost",
+                "color": "DarkSeaGreen",
+                "createdAt": "2017-02-27T09:12:16+0100",
+                "updatedAt": "2017-02-27T09:12:16+0100",
+                "enabled": true,
+                "taxCalculationStrategy": "order_items_based",
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/channels\/US_WEB"
+                    }
+                }
+            }
+        ],
         "mainTaxon": {
             "name": "Mugs",
             "id": 2,
@@ -551,9 +561,27 @@ Exemplary Response
                 "name": "Category",
                 "id": 1,
                 "code": "category",
-                "children": [],
+                "children": {
+                    "1": {
+                        "name": "T-Shirts",
+                        "id": 5,
+                        "code": "t_shirts",
+                        "children": [],
+                        "left": 4,
+                        "right": 5,
+                        "level": 1,
+                        "position": 1,
+                        "translations": [],
+                        "images": [],
+                        "_links": {
+                            "self": {
+                                "href": "\/api\/v1\/taxons\/t_shirts"
+                            }
+                        }
+                    }
+                },
                 "left": 1,
-                "right": 12,
+                "right": 6,
                 "level": 0,
                 "position": 0,
                 "translations": {
@@ -562,7 +590,7 @@ Exemplary Response
                         "id": 1,
                         "name": "Category",
                         "slug": "category",
-                        "description": "Cum explicabo deserunt temporibus beatae et est quis."
+                        "description": "Cupiditate ut esse perspiciatis. Aspernatur nihil ducimus maxime doloremque. Ut aut ad unde necessitatibus voluptatibus id in."
                     }
                 },
                 "images": [],
@@ -576,9 +604,27 @@ Exemplary Response
                 "name": "Category",
                 "id": 1,
                 "code": "category",
-                "children": [],
+                "children": {
+                    "1": {
+                        "name": "T-Shirts",
+                        "id": 5,
+                        "code": "t_shirts",
+                        "children": [],
+                        "left": 4,
+                        "right": 5,
+                        "level": 1,
+                        "position": 1,
+                        "translations": [],
+                        "images": [],
+                        "_links": {
+                            "self": {
+                                "href": "\/api\/v1\/taxons\/t_shirts"
+                            }
+                        }
+                    }
+                },
                 "left": 1,
-                "right": 12,
+                "right": 6,
                 "level": 0,
                 "position": 0,
                 "translations": {
@@ -587,7 +633,7 @@ Exemplary Response
                         "id": 1,
                         "name": "Category",
                         "slug": "category",
-                        "description": "Cum explicabo deserunt temporibus beatae et est quis."
+                        "description": "Cupiditate ut esse perspiciatis. Aspernatur nihil ducimus maxime doloremque. Ut aut ad unde necessitatibus voluptatibus id in."
                     }
                 },
                 "images": [],
@@ -608,16 +654,10 @@ Exemplary Response
                     "id": 2,
                     "name": "Mugs",
                     "slug": "mugs",
-                    "description": "Placeat dolor aut dolorum minima."
+                    "description": "Non omnis vel impedit eaque necessitatibus et eveniet. Fugiat distinctio quos aut commodi ea minima. Et natus ratione sit aperiam a molestiae. Eligendi sed cumque deleniti unde magnam."
                 }
             },
-            "images": [
-                {
-                    "id": 1,
-                    "type": "ford",
-                    "path": "b9/65/01cec3d87aa2b819e195331843f6.jpeg"
-                }
-            ],
+            "images": [],
             "_links": {
                 "self": {
                     "href": "\/api\/v1\/taxons\/mugs"
@@ -626,10 +666,19 @@ Exemplary Response
         },
         "reviews": [],
         "averageRating": 0,
-        "images": [],
+        "images": [
+            {
+                "id": 121,
+                "type": "ford",
+                "path": "65\/f6\/1e3b25f3721768b535e5c37ac005.jpeg"
+            }
+        ],
         "_links": {
             "self": {
                 "href": "\/api\/v1\/products\/MUG_TH"
+            },
+            "variants": {
+                "href": "\/api\/v1\/products\/MUG_TH\/variants\/"
             }
         }
     }
@@ -662,17 +711,17 @@ Definition
 Example
 ^^^^^^^
 
-To see the details for the product with ``code = spoon`` use the below method:
+To see the details for the product with ``code = BMM`` use the below method:
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/products/spoon \
+    $ curl http://demo.sylius.org/api/v1/products/BMM \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
 .. note::
 
-    The *spoon* is an exemplary value. Your value can be different.
+    The *BMM* code is an exemplary value. Your value can be different.
     Check in the list of all products if you are not sure which code should be used.
 
 Exemplary Response
@@ -685,53 +734,31 @@ Exemplary Response
 .. code-block:: json
 
     {
-        "name": "Spoon",
-        "id": 62,
-        "code": "spoon",
+        "name": "Batman mug",
+        "id": 63,
+        "code": "BMM",
         "attributes": [],
-        "variants": [
-            {
-                "id": 331,
-                "code": "spoon",
-                "optionValues": [],
-                "position": 0,
-                "translations": {
-                    "en_US": {
-                        "locale": "en_US",
-                        "id": 331
-                    }
-                },
-                "on_hold": 0,
-                "on_hand": 0,
-                "tracked": false,
-                "channelPricings": [],
-                "_links": {
-                    "self": {
-                        "href": "\/api\/v1\/products\/spoon\/variants\/spoon"
-                    },
-                    "product": {
-                        "href": "\/api\/v1\/products\/spoon"
-                    }
-                }
-            }
-        ],
         "options": [],
         "associations": [],
         "translations": {
             "en_US": {
                 "locale": "en_US",
-                "id": 62,
-                "name": "Spoon",
-                "slug": "spoon"
+                "id": 63,
+                "name": "Batman mug",
+                "slug": "batman-mug"
             }
         },
         "productTaxons": [],
+        "channels": [],
         "reviews": [],
         "averageRating": 0,
         "images": [],
         "_links": {
             "self": {
-                "href": "\/api\/v1\/products\/spoon"
+                "href": "\/api\/v1\/products\/BMM"
+            },
+            "variants": {
+                "href": "\/api\/v1\/products\/BMM\/variants\/"
             }
         }
     }
@@ -799,45 +826,42 @@ Exemplary Response
         "_embedded": {
             "items": [
                 {
-                    "name": "Coffee",
+                    "name": "Batman mug",
                     "id": 63,
-                    "code": "coffee",
+                    "code": "BMM",
                     "options": [],
                     "averageRating": 0,
                     "images": [],
                     "_links": {
                         "self": {
-                            "href": "\/api\/v1\/products\/coffee"
+                            "href": "\/api\/v1\/products\/BMM"
                         }
                     }
                 },
                 {
                     "name": "Theme Mug",
-                    "id": 65,
+                    "id": 69,
                     "code": "MUG_TH",
                     "options": [
                         {
                             "id": 1,
                             "code": "mug_type",
                             "position": 0,
-                            "values": [
-                                {
-                                    "name": "Mug type",
-                                    "code": "mug_type_medium"
-                                },
-                                {
-                                    "name": "Mug type",
-                                    "code": "mug_type_double"
-                                },
-                                {
-                                    "name": "Mug type",
-                                    "code": "mug_type_monster"
+                            "_links": {
+                                "self": {
+                                    "href": "\/api\/v1\/products\/mug_type"
                                 }
-                            ]
+                            }
                         }
                     ],
                     "averageRating": 0,
-                    "images": [],
+                    "images": [
+                        {
+                            "id": 121,
+                            "type": "ford",
+                            "path": "65\/f6\/1e3b25f3721768b535e5c37ac005.jpeg"
+                        }
+                    ],
                     "_links": {
                         "self": {
                             "href": "\/api\/v1\/products\/MUG_TH"
@@ -845,20 +869,20 @@ Exemplary Response
                     }
                 },
                 {
-                    "name": "Spoon",
-                    "id": 62,
-                    "code": "spoon",
+                    "name": "Spider-Man Mug",
+                    "id": 68,
+                    "code": "SMM",
                     "options": [],
                     "averageRating": 0,
                     "images": [],
                     "_links": {
                         "self": {
-                            "href": "\/api\/v1\/products\/spoon"
+                            "href": "\/api\/v1\/products\/SMM"
                         }
                     }
                 },
                 {
-                    "name": "Truck Simulator",
+                    "name": "Truck simulator",
                     "id": 61,
                     "code": "TS3",
                     "options": [],
@@ -901,11 +925,11 @@ Definition
 Example
 ^^^^^^^
 
- To fully update the product with ``code = spoon`` use the below method:
+ To fully update the product with ``code = BMM`` use the below method:
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/products/spoon \
+    $ curl http://demo.sylius.org/api/v1/products/BMM \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PUT \
@@ -913,8 +937,8 @@ Example
             {
                 "translations": {
                     "en_US": {
-                        "name": "Small spoon",
-                        "slug": "small-spoon"
+                        "name": "Batman mug",
+                        "slug": "batman-mug"
                     }
                 }
             }
@@ -934,7 +958,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/products/spoon \
+    $ curl http://demo.sylius.org/api/v1/products/BMM \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X PUT
@@ -1016,19 +1040,19 @@ Definition
 Example
 ^^^^^^^
 
-To partially update the product with ``code = spoon`` use the below method:
+To partially update the product with ``code = BMM`` use the below method:
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/products/spoon \
+    $ curl http://demo.sylius.org/api/v1/products/BMM \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PATCH \
         --data '
             {
                 "translations": {
-                    "en__US": {
-                        "name": "Small spoon"
+                    "en_US": {
+                        "name": "Batman mug"
                     }
                 }
             }
@@ -1064,11 +1088,11 @@ Definition
 Example
 ^^^^^^^
 
-To delete the product with ``code = spoon`` use the below method:
+To delete the product with ``code = MUG_TH`` use the below method:
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/products/spoon \
+    $ curl http://demo.sylius.org/api/v1/products/MUG_TH \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X DELETE

@@ -8,25 +8,27 @@ Country API response structure
 
 If you request a country via API, you will receive an object with the following fields:
 
-+--------------+---------------------------+
-| Field        | Description               |
-+==============+===========================+
-| id           | Id of the country         |
-+--------------+---------------------------+
-| code         | Unique country identifier |
-+--------------+---------------------------+
++-------+---------------------------+
+| Field | Description               |
++=======+===========================+
+| id    | Id of the country         |
++-------+---------------------------+
+| code  | Unique country identifier |
++-------+---------------------------+
 
 If you request for more detailed data, you will receive an object with the following fields:
 
-+------------------------+-------------------------------------------------------------+
-| Field                  | Description                                                 |
-+========================+=============================================================+
-| id                     | Id of the country                                           |
-+------------------------+-------------------------------------------------------------+
-| code                   | Unique country identifier                                   |
-+------------------------+-------------------------------------------------------------+
-| enabled                | Information says if the country is enabled (default: false) |
-+------------------------+-------------------------------------------------------------+
++-----------+-------------------------------------------------------------+
+| Field     | Description                                                 |
++===========+=============================================================+
+| id        | Id of the country                                           |
++-----------+-------------------------------------------------------------+
+| code      | Unique country identifier                                   |
++-----------+-------------------------------------------------------------+
+| enabled   | Information says if the country is enabled (default: false) |
++-----------+-------------------------------------------------------------+
+| provinces | Collection of the country's provinces                       |
++-----------+-------------------------------------------------------------+
 
 .. note::
 
@@ -77,12 +79,13 @@ Exemplary Response
 .. code-block:: json
 
     {
-        "id": 4,
+        "id": 2,
         "code": "PL",
+        "provinces": [],
         "enabled": false,
         "_links": {
             "self": {
-                "href": "/api/v1/countries/PL"
+                "href": "\/api\/v1\/countries\/PL"
             }
         }
     }
@@ -135,6 +138,8 @@ You can also create a country with additional (not required) fields:
 +---------------+----------------+--------------------------------------------------------------------------+
 | enabled       | request        | *(optional)* Information says if the country is enabled (default: false) |
 +---------------+----------------+--------------------------------------------------------------------------+
+| provinces     | request        | *(optional)* Collection of the country's provinces                       |
++---------------+----------------+--------------------------------------------------------------------------+
 
 Example
 ^^^^^^^
@@ -149,6 +154,12 @@ Example
             {
                 "code":"PL",
                 "enabled": true
+                "provinces": [
+                    {
+                        "name": "mazowieckie",
+                        "code": "PL-MZ"
+                    }
+                ]
             }
         '
 
@@ -162,12 +173,27 @@ Exemplary Response
 .. code-block:: json
 
     {
-        "id": 6,
+        "id": 4,
         "code": "PL",
+        "provinces": [
+            {
+                "id": 1,
+                "code": "PL-MZ",
+                "name": "mazowieckie",
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/countries\/PL\/provinces\/PL-MZ"
+                    },
+                    "country": {
+                        "href": "\/api\/v1\/countries\/PL"
+                    }
+                }
+            }
+        ],
         "enabled": true,
         "_links": {
             "self": {
-                "href": "/api/v1/countries/PL"
+                "href": "\/api\/v1\/countries\/PL"
             }
         }
     }
@@ -219,6 +245,8 @@ Exemplary Response
     {
         "id": 1,
         "code": "US",
+        "provinces": [],
+        "enabled": true,
         "_links": {
             "self": {
                 "href": "\/api\/v1\/countries\/US"
@@ -274,24 +302,24 @@ Exemplary Response
         "pages": 1,
         "total": 2,
         "_links": {
-        "self": {
-          "href": "/api/v1/countries/?page=1&limit=10"
-        },
-        "first": {
-          "href": "/api/v1/countries/?page=1&limit=10"
-        },
-        "last": {
-          "href": "/api/v1/countries/?page=1&limit=10"
-        }
+            "self": {
+                "href": "\/api\/v1\/countries\/?page=1&limit=10"
+            },
+            "first": {
+                "href": "\/api\/v1\/countries\/?page=1&limit=10"
+            },
+            "last": {
+                "href": "\/api\/v1\/countries\/?page=1&limit=10"
+            }
         },
         "_embedded": {
             "items": [
                 {
-                    "id": 3,
+                    "id": 1,
                     "code": "US",
                     "_links": {
                         "self": {
-                            "href": "/api/v1/countries/US"
+                            "href": "\/api\/v1\/countries\/US"
                         }
                     }
                 },
@@ -300,7 +328,7 @@ Exemplary Response
                     "code": "PL",
                     "_links": {
                         "self": {
-                            "href": "/api/v1/countries/PL"
+                            "href": "\/api\/v1\/countries\/PL"
                         }
                     }
                 }

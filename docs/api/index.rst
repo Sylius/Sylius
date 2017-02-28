@@ -22,6 +22,7 @@ The REST API Reference
     products
     promotion_coupons
     promotions
+    provinces
     shipments
     shipping_categories
     shipping_methods

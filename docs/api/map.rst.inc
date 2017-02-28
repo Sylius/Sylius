@@ -16,6 +16,7 @@
 * :doc:`/api/products`
 * :doc:`/api/promotion_coupons`
 * :doc:`/api/promotions`
+* :doc:`/api/provinces`
 * :doc:`/api/shipments`
 * :doc:`/api/shipping_categories`
 * :doc:`/api/shipping_methods`
