@@ -13,8 +13,8 @@ sylius:
         add_address: 'Adresa bola úspešne pridaná.'
         impersonate: 'Úspešne zosobnený užívateľ %name%.'
         set_address_as_default: 'Adresa bola nastavená ako predvolená.'
-    product:
-        out_of_stock: 'Na sklade je už iba %quantity% produktov.'
     order:
         promotion_integrity: 'Akciu %promotionName% už nemôžete využiť.'
         total_integrity: 'Celková suma objednávky bola zmenená, skontrolujte objednávku a potrvďte ju znova.'
+    product:
+        out_of_stock: 'Na sklade je už iba %quantity% produktov.'

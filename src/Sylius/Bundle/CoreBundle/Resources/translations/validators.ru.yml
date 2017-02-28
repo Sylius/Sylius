@@ -35,6 +35,9 @@ sylius:
     order:
         currency_code:
             not_valid: Код валюты, что вы ввели, неверный.
+        payment_method_eligibility: 'Метод оплаты %paymentMethodName% был выключен. Пожалуйста выберете другой метод оплаты.'
+        product_eligibility: 'Продукт %productName% был выключен.'
+        shipping_method_eligibility: 'Продукт не соответствует требованиям способа доставки %shippingMethodName%. Пожалуйста выберете другой способ доставки.'
     locale:
         code:
             not_blank: Пожалуйста, введите код языка.

@@ -60,6 +60,6 @@ sylius:
             not_blank: Por favor introduzca el nombre de la zona.
     zone_member:
         code:
-            not_blank: Por favor, elija un miembro de la zona.
+            not_blank: Por favor, elija un miembro para la zona.
             regex: El código del miembro de zona solo puede contener letras, números, guiones y guiones bajos.
-        unique: El miembro de zona elegido ya está en la zona.
+        unique: El miembro elegido ya está en la zona.

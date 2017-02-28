@@ -61,5 +61,5 @@ sylius:
     zone_member:
         code:
             not_blank: Merci de choisir un membre de la zone.
-            regex: Le code de la zone membre peut uniquement être constitué de lettres, chiffres, tirets et traits de soulignement.
+            regex: Le code de la zone du membre peut uniquement être constitué de lettres, chiffres, tirets et de tirets bas.
         unique: Le membre choisi fait déjà partie de cette zone.
