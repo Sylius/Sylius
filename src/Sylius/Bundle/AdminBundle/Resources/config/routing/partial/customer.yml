@@ -1,3 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 sylius_admin_partial_customer_latest:
     path: /latest/{count}
     methods: [GET]
@@ -8,3 +11,12 @@ sylius_admin_partial_customer_latest:
                 method: findLatest
                 arguments: [$count]
             template: $template
+
+sylius_admin_partial_customer_show:
+    path: /{id}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.customer:showAction
+        _sylius:
+            template: $template
+            vars: $vars

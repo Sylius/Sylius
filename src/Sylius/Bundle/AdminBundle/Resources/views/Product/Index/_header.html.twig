@@ -1,0 +1,14 @@
+{% if app.request.attributes.get('taxonId') is not null %}
+    {{ render(url('sylius_admin_partial_taxon_show', {
+        'id': app.request.attributes.get('taxonId'),
+        'template': '@SyliusAdmin/Product/Index/_taxonHeader.html.twig',
+        'vars': configuration.vars
+    })) }}
+{% else %}
+    <div class="column">
+        {% set header = configuration.vars.header|default(metadata.applicationName~'.ui.'~metadata.pluralName) %}
+        {{ headers.default(header|trans, configuration.vars.icon|default('cube'), configuration.vars.subheader|default('sylius.ui.manage_your_product_catalog')|trans) }}
+
+        {% include configuration.vars.templates.breadcrumb|default('@SyliusAdmin/Product/Index/_breadcrumb.html.twig') %}
+    </div>
+{% endif %}
