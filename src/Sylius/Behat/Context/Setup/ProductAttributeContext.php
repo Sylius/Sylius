@@ -15,12 +15,12 @@ use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Attribute\Factory\AttributeFactoryInterface;
-use Sylius\Component\Attribute\Repository\AttributeRepositoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
@@ -33,7 +33,7 @@ final class ProductAttributeContext implements Context
     private $sharedStorage;
 
     /**
-     * @var AttributeRepositoryInterface
+     * @var RepositoryInterface
      */
     private $productAttributeRepository;
 
@@ -54,14 +54,14 @@ final class ProductAttributeContext implements Context
 
     /**
      * @param SharedStorageInterface $sharedStorage
-     * @param AttributeRepositoryInterface $productAttributeRepository
+     * @param RepositoryInterface $productAttributeRepository
      * @param AttributeFactoryInterface $productAttributeFactory
      * @param FactoryInterface $productAttributeValueFactory
      * @param ObjectManager $objectManager
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
-        AttributeRepositoryInterface $productAttributeRepository,
+        RepositoryInterface $productAttributeRepository,
         AttributeFactoryInterface $productAttributeFactory,
         FactoryInterface $productAttributeValueFactory,
         ObjectManager $objectManager

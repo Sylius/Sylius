@@ -13,12 +13,12 @@ namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping;
-use Sylius\Bundle\AttributeBundle\Doctrine\ORM\AttributeRepository as BaseAttributeRepository;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class AttributeRepository extends BaseAttributeRepository
+class AttributeRepository extends EntityRepository
 {
     /**
      * @var AssociationHydrator
