@@ -17,7 +17,7 @@ sylius_product:
                 repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductVariantRepository
         product_option:
             classes:
-                repository: Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductOptionRepository
+                repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductOptionRepository
         product_association_type:
             classes:
                 repository: Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductAssociationTypeRepository
