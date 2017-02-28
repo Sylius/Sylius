@@ -619,14 +619,6 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Then /^I should see that they have placed (\d+) orders? across all channels$/
-     */
-    public function iShouldSeeThatTheyHavePlacedOrdersAcrossAllChannels($orderCount)
-    {
-        Assert::same($this->showPage->getOverallOrdersCount(), (int) $orderCount);
-    }
-
-    /**
      * @Then /^I should see that they have placed (\d+) orders? in the "([^"]+)" channel$/
      */
     public function iShouldSeeThatTheyHavePlacedOrdersInTheChannel($ordersCount, $channelName)

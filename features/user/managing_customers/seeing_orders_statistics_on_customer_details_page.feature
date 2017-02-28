@@ -18,13 +18,6 @@ Feature: Seeing customer's orders' statistics
         Then I should see the customer has not placed any orders yet
 
     @ui
-    Scenario: Seeing customer's all placed orders count
-        Given customer "lirael.clayr@abhorsen.ok" has placed 5 orders on the "Web-US" channel in each buying 3 "Onion" products
-        And this customer has also placed 12 orders on the "Web-UK" channel in each buying 20 "Onion" products
-        When I view their details
-        Then I should see that they have placed 17 orders across all channels
-
-    @ui
     Scenario: Seeing how many orders the customer has placed in specific channel
         Given customer "lirael.clayr@abhorsen.ok" has placed 12 orders on the "Web-UK" channel in each buying 2 "Onion" products
         When I view their details

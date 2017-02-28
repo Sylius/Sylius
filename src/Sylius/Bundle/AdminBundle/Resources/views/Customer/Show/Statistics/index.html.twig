@@ -1,6 +1,6 @@
 {% import "@SyliusAdmin/Common/Macro/money.html.twig" as money %}
 
-<div class="ui segment">
+<div class="ui segment" id="statistics">
     {% if statistics.perChannelsStatistics is not empty %}
         <div class="ui center aligned stackable internally celled grid">
             {% for statistic in statistics.perChannelsStatistics %}

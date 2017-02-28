@@ -94,11 +94,6 @@ interface ShowPageInterface extends PageInterface
     public function hasCustomerPlacedAnyOrders();
 
     /**
-     * @return int
-     */
-    public function getOverallOrdersCount();
-
-    /**
      * @param string $channelName
      *
      * @return int
