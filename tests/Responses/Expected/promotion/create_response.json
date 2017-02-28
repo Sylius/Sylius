@@ -1,11 +1,11 @@
 {
     "id": @integer@,
-    "code": "Holiday",
-    "name": "Holiday promotion",
+    "code": "christmas-promotion",
+    "name": "Christmas Promotion",
     "priority": 0,
     "exclusive": false,
     "used": 0,
-    "couponBased": true,
+    "couponBased": false,
     "rules": [],
     "actions": [],
     "createdAt": "@string@.isDateTime()",
@@ -13,10 +13,7 @@
     "channels": [],
     "_links": {
         "self": {
-            "href": "\/api\/v1\/promotions\/Holiday"
-        },
-        "coupons": {
-            "href": "\/api\/v1\/promotions\/Holiday\/coupons\/"
+            "href": "\/api\/v1\/promotions\/christmas-promotion"
         }
     }
 }

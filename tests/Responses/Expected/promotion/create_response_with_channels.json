@@ -1,0 +1,54 @@
+{
+    "id": @integer@,
+    "code": "christmas-promotion",
+    "name": "Christmas Promotion",
+    "priority": 0,
+    "exclusive": false,
+    "used": 0,
+    "couponBased": false,
+    "rules": [],
+    "actions": [],
+    "createdAt": "@string@.isDateTime()",
+    "updatedAt": "@string@.isDateTime()",
+    "channels": [
+        {
+            "id": @integer@,
+            "code": "WEB",
+            "name": "Web Channel",
+            "description": "Lorem ipsum",
+            "hostname": "localhost",
+            "color": "black",
+            "createdAt": "@string@.isDateTime()",
+            "updatedAt": "@string@.isDateTime()",
+            "enabled": true,
+            "taxCalculationStrategy": "order_items_based",
+            "_links": {
+                "self": {
+                    "href": "\/api\/v1\/channels\/WEB"
+                }
+            }
+        },
+        {
+            "id": @integer@,
+            "code": "MOB",
+            "name": "Mobile Channel",
+            "description": "Lorem ipsum psore",
+            "hostname": "localhost",
+            "color": "yellow",
+            "createdAt": "@string@.isDateTime()",
+            "updatedAt": "@string@.isDateTime()",
+            "enabled": true,
+            "taxCalculationStrategy": "order_items_based",
+            "_links": {
+                "self": {
+                    "href": "\/api\/v1\/channels\/MOB"
+                }
+            }
+        }
+    ],
+    "_links": {
+        "self": {
+            "href": "\/api\/v1\/promotions\/christmas-promotion"
+        }
+    }
+}

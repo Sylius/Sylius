@@ -6,7 +6,7 @@ sylius_api_promotion:
         identifier: code
         alias: sylius.promotion
         section: api
-        only: ['show', 'index']
+        grid: sylius_api_promotion
         serialization_version: $version
         criteria:
             code: $code

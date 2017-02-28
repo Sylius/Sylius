@@ -1,0 +1,39 @@
+{
+    "id": @integer@,
+    "code": "christmas-promotion",
+    "name": "Christmas Promotion",
+    "priority": 0,
+    "exclusive": false,
+    "used": 0,
+    "couponBased": false,
+    "rules": [
+        {
+            "id": @integer@,
+            "type": "nth_order",
+            "configuration": {
+                "nth": 3
+            }
+        },
+        {
+            "id": @integer@,
+            "type": "item_total",
+            "configuration": {
+                "WEB": {
+                    "amount": 1200
+                },
+                "MOB": {
+                    "amount": 1500
+                }
+            }
+        }
+    ],
+    "actions": [],
+    "createdAt": "@string@.isDateTime()",
+    "updatedAt": "@string@.isDateTime()",
+    "channels": [],
+    "_links": {
+        "self": {
+            "href": "\/api\/v1\/promotions\/christmas-promotion"
+        }
+    }
+}
