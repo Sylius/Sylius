@@ -34,6 +34,14 @@ final class CheckoutThankYouContext implements Context
     }
 
     /**
+     * @Then I should see the thank you page in :localeCode
+     */
+    public function iShouldSeeTheThankYouPageInLocale($localeCode)
+    {
+        Assert::false($this->thankYouPage->isOpen(['_locale' => $localeCode]));
+    }
+
+    /**
      * @Then I should not see the thank you page
      */
     public function iShouldNotSeeTheThankYouPage()
