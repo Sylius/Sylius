@@ -3,7 +3,7 @@
     "code": "1234",
     "usageLimit": 10,
     "used": 0,
-    "expiresAt": "2020-01-01T00:00:00+0100",
+    "expiresAt": "@string@.isDateTime()",
     "createdAt": "@string@.isDateTime()",
     "updatedAt": "@string@.isDateTime()",
     "perCustomerUsageLimit": 1,
