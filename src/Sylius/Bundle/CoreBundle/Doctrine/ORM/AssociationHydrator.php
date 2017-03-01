@@ -81,6 +81,10 @@ final class AssociationHydrator
                 return array_merge($accumulator, $this->normalizeSubject($subject));
             }, []);
 
+            if ([] === $subjects) {
+                return;
+            }
+
             $classMetadata = $this->entityManager->getClassMetadata($classMetadata->getAssociationTargetClass($initialAssociation));
         }
 
