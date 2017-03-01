@@ -96,6 +96,9 @@ You can bring back previous configuration by overriding current routing with you
 
 * `AttributeValue::$localeCode` property was added to make it translatable. Now, every attribute value has a locale code to be displayed properly in different locales. All attribute values are migrated to the new concept with migration `Version20170109143010`. Look at [this PR](https://github.com/Sylius/Sylius/pull/7219) if you have any problems with upgrade.
 
+* `Sylius\Component\Attribute\Repository\AttributeRepositoryInterface` and its implementations were removed due to not being
+  used anymore. You can bring back missing `findByName` method by copying it from Git history to your codebase.
+
 ### Channel / ChannelBundle
 
 ### Core / CoreBundle
