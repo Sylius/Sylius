@@ -92,9 +92,9 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
     protected function createProgressBar(OutputInterface $output, $length = 10)
     {
         $progress = new ProgressBar($output);
-        $progress->setBarCharacter('<info>|</info>');
+        $progress->setBarCharacter('<info>░</info>');
         $progress->setEmptyBarCharacter(' ');
-        $progress->setProgressCharacter('|');
+        $progress->setProgressCharacter('<comment>░</comment>');
 
         $progress->start($length);
 

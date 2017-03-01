@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Command;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -39,12 +40,19 @@ EOT
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln(sprintf('Creating Sylius database for environment <info>%s</info>.', $this->getEnvironment()));
+        $outputStyle = new SymfonyStyle($input, $output);
+        $outputStyle->writeln(sprintf(
+            'Creating Sylius database for environment <info>%s</info>.',
+            $this->getEnvironment()
+        ));
 
-        $commands = $this->get('sylius.commands_provider.database_setup')->getCommands($input, $output, $this->getHelper('question'));
+        $commands = $this
+            ->get('sylius.commands_provider.database_setup')
+            ->getCommands($input, $output, $this->getHelper('question'))
+        ;
 
         $this->runCommands($commands, $output);
-        $output->writeln('');
+        $outputStyle->newLine();
 
         $this->commandExecutor->runCommand('sylius:install:sample-data', [], $output);
     }

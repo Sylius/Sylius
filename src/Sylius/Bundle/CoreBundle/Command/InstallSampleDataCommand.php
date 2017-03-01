@@ -16,6 +16,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -45,25 +46,27 @@ EOT
         /** @var QuestionHelper $questionHelper */
         $questionHelper = $this->getHelper('question');
 
-        $output->writeln(sprintf(
+        $outputStyle = new SymfonyStyle($input, $output);
+        $outputStyle->newLine();
+        $outputStyle->writeln(sprintf(
             '<error>Warning! This will erase your database.</error> Your current environment is <info>%s</info>.',
             $this->getEnvironment()
         ));
 
         if (!$questionHelper->ask($input, $output, new ConfirmationQuestion('Load sample data? (y/N) ', false))) {
-            $output->writeln('Cancelled loading sample data.');
+            $outputStyle->writeln('Cancelled loading sample data.');
 
             return 0;
         }
 
-        $output->writeln('Loading sample data...');
+        $outputStyle->writeln('Loading sample data...');
 
         try {
             $rootDir = $this->getContainer()->getParameter('kernel.root_dir') . '/../';
             $this->ensureDirectoryExistsAndIsWritable($rootDir . self::WEB_MEDIA_DIRECTORY, $output);
             $this->ensureDirectoryExistsAndIsWritable($rootDir . self::WEB_MEDIA_IMAGE_DIRECTORY, $output);
         } catch (\RuntimeException $exception) {
-            $output->writeln($exception->getMessage());
+            $outputStyle->writeln($exception->getMessage());
 
             return 1;
         }
@@ -73,5 +76,6 @@ EOT
         ];
 
         $this->runCommands($commands, $output);
+        $outputStyle->newLine(2);
     }
 }
