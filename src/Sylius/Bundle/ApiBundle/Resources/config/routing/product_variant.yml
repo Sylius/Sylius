@@ -1,19 +1,19 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-sylius_api_product_variant_index:
-    path: /
-    methods: [GET]
-    defaults:
-        _controller: sylius.controller.product_variant:indexAction
-        _sylius:
-            paginate: $limit
-            serialization_version: $version
-            grid: sylius_api_product_variant
-            section: api
-            serialization_groups: [Default]
-            criteria:
-                product: $productId
+sylius_api_product_variant:
+    resource: |
+        path: '/'
+        grid: sylius_api_product_variant
+        alias: sylius.product_variant
+        section: api
+        only: ['index']
+        serialization_version: $version
+        vars:
+            route:
+                parameters:
+                    productCode: $productCode
+    type: sylius.resource_api
 
 sylius_api_product_variant_create:
     path: /
@@ -40,8 +40,8 @@ sylius_api_product_variant_update:
             section: api
             form: Sylius\Bundle\ApiBundle\Form\Type\ProductVariantType
             repository:
-                method: findOneByCode
-                arguments: [$code]
+                method: findOneByProductCodeAndCode
+                arguments: [$productCode, $code]
 
 sylius_api_product_variant_delete:
     path: /{code}
@@ -52,8 +52,8 @@ sylius_api_product_variant_delete:
             serialization_version: $version
             section: api
             repository:
-                method: findOneByCode
-                arguments: [$code]
+                method: findOneByProductCodeAndCode
+                arguments: [$productCode, $code]
             csrf_protection: false
 
 sylius_api_product_variant_show:
@@ -66,5 +66,5 @@ sylius_api_product_variant_show:
             section: api
             serialization_groups: [Default, Detailed]
             repository:
-                method: findOneByCode
-                arguments: [$code]
+                method: findOneByProductCodeAndCode
+                arguments: [$productCode, $code]
