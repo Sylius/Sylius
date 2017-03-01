@@ -14,6 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Bundle\FixturesBundle\Fixture\FixtureInterface;
+use Sylius\Bundle\FixturesBundle\Suite\SuiteInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\OptionsResolver\Options;
@@ -56,7 +57,7 @@ abstract class AbstractResourceFixture implements FixtureInterface
                 ->setAllowedTypes('prototype', 'array')
                 ->setDefault('custom', [])
                 ->setAllowedTypes('custom', 'array')
-                ->setNormalizer('custom', function (Options $options, array $custom) {
+                ->setNormalizer('custom', function(Options $options, array $custom) {
                     if ($options['random'] <= 0) {
                         return $custom;
                     }
@@ -69,7 +70,7 @@ abstract class AbstractResourceFixture implements FixtureInterface
     /**
      * @param array $options
      */
-    final public function load(array $options)
+    final public function load(array $options, SuiteInterface $suite)
     {
         $options = $this->optionsResolver->resolve($options);
 
@@ -83,10 +84,16 @@ abstract class AbstractResourceFixture implements FixtureInterface
 
             if (0 === ($i % 10)) {
                 $this->objectManager->flush();
+                if ($suite->shouldClearObjectManager()) {
+                    $this->objectManager->clear();
+                }
             }
         }
 
         $this->objectManager->flush();
+        if ($suite->shouldClearObjectManager()) {
+            $this->objectManager->clear();
+        }
     }
 
     /**

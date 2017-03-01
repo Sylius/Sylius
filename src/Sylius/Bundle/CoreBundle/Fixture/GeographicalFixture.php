@@ -14,6 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Addressing\Factory\ZoneFactoryInterface;
 use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
+use Sylius\Bundle\FixturesBundle\Suite\SuiteInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
@@ -83,7 +84,7 @@ class GeographicalFixture extends AbstractFixture
     /**
      * {@inheritdoc}
      */
-    public function load(array $options)
+    public function load(array $options, SuiteInterface $suite)
     {
         $this->loadCountriesWithProvinces($options['countries'], $options['provinces']);
         $this->loadZones($options['zones'], $this->provideZoneValidator($options));

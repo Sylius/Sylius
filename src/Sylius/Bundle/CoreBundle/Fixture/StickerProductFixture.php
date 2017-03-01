@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Fixture;
 
 use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
+use Sylius\Bundle\FixturesBundle\Suite\SuiteInterface;
 use Sylius\Component\Attribute\AttributeType\TextAttributeType;
 use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
@@ -88,7 +89,7 @@ class StickerProductFixture extends AbstractFixture
     /**
      * {@inheritdoc}
      */
-    public function load(array $options)
+    public function load(array $options, SuiteInterface $suite)
     {
         $options = $this->optionsResolver->resolve($options);
 
@@ -101,12 +102,12 @@ class StickerProductFixture extends AbstractFixture
                     'name' => 'Stickers',
                 ]
             ]
-        ]]]);
+        ]]], $suite);
 
         $this->productAttributeFixture->load(['custom' => [
             ['name' => 'Sticker paper', 'code' => 'sticker_paper', 'type' => TextAttributeType::TYPE],
             ['name' => 'Sticker resolution', 'code' => 'sticker_resolution', 'type' => TextAttributeType::TYPE],
-        ]]);
+        ]], $suite);
 
         $this->productOptionFixture->load(['custom' => [
             [
@@ -118,7 +119,7 @@ class StickerProductFixture extends AbstractFixture
                     'sticker_size_7' => '7"',
                 ],
             ],
-        ]]);
+        ]], $suite);
 
         $products = [];
         $productsNames = $this->getUniqueNames($options['amount']);
@@ -135,13 +136,13 @@ class StickerProductFixture extends AbstractFixture
                 ],
                 'product_options' => ['sticker_size'],
                 'images' => [
-                    [sprintf('%s/../Resources/fixtures/%s', __DIR__, 'stickers.jpg'), 'main'],
-                    [sprintf('%s/../Resources/fixtures/%s', __DIR__, 'stickers.jpg'), 'thumbnail'],
+                    'main' => sprintf('%s/../Resources/fixtures/%s', __DIR__, 'stickers.jpg'),
+                    'thumbnail' => sprintf('%s/../Resources/fixtures/%s', __DIR__, 'stickers.jpg'),
                 ],
             ];
         }
 
-        $this->productFixture->load(['custom' => $products]);
+        $this->productFixture->load(['custom' => $products], $suite);
     }
 
     /**

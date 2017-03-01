@@ -34,4 +34,14 @@ interface SuiteInterface
      * @return \Traversable Listeners as keys, options as values
      */
     public function getListeners();
+
+    /**
+     * @return bool
+     */
+    public function shouldClearObjectManager();
+
+    /**
+     * @param bool $clear
+     */
+    public function setClearObjectManager($clear);
 }

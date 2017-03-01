@@ -13,7 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Fixture;
 
 use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
 use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
-use Sylius\Component\Attribute\AttributeType\TextAttributeType;
+use Sylius\Bundle\FixturesBundle\Suite\SuiteInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -88,7 +88,7 @@ class MugProductFixture extends AbstractFixture
     /**
      * {@inheritdoc}
      */
-    public function load(array $options)
+    public function load(array $options, SuiteInterface $suite)
     {
         $options = $this->optionsResolver->resolve($options);
 
@@ -101,7 +101,7 @@ class MugProductFixture extends AbstractFixture
                     'name' => 'Mugs',
                 ]
             ]
-        ]]]);
+        ]]], $suite);
 
         $mugMaterials = ['Invisible porcelain', 'Banana skin', 'Porcelain', 'Centipede'];
         $this->productAttributeFixture->load(['custom' => [
@@ -114,7 +114,7 @@ class MugProductFixture extends AbstractFixture
                     'choices' => $mugMaterials,
                 ]
             ],
-        ]]);
+        ]], $suite);
 
         $this->productOptionFixture->load(['custom' => [
             [
@@ -126,7 +126,7 @@ class MugProductFixture extends AbstractFixture
                     'mug_type_monster' => 'Monster mug',
                 ],
             ],
-        ]]);
+        ]], $suite);
 
         $products = [];
         $productsNames = $this->getUniqueNames($options['amount']);
@@ -141,13 +141,13 @@ class MugProductFixture extends AbstractFixture
                 ],
                 'product_options' => ['mug_type'],
                 'images' => [
-                    [sprintf('%s/../Resources/fixtures/%s', __DIR__, 'mugs.jpg'), 'main'],
-                    [sprintf('%s/../Resources/fixtures/%s', __DIR__, 'mugs.jpg'), 'thumbnail'],
+                    'main' => sprintf('%s/../Resources/fixtures/%s', __DIR__, 'mugs.jpg'),
+                    'thumbnail' => sprintf('%s/../Resources/fixtures/%s', __DIR__, 'mugs.jpg'),
                 ],
             ];
         }
 
-        $this->productFixture->load(['custom' => $products]);
+        $this->productFixture->load(['custom' => $products], $suite);
     }
 
     /**

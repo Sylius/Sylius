@@ -58,8 +58,10 @@ final class SuiteFactory implements SuiteFactoryInterface
     {
         Assert::keyExists($configuration, 'fixtures');
         Assert::keyExists($configuration, 'listeners');
+        Assert::keyExists($configuration, 'clear_object_manager');
 
         $suite = new Suite($name);
+        $suite->setClearObjectManager($configuration['clear_object_manager']);
 
         foreach ($configuration['fixtures'] as $fixtureAlias => $fixtureAttributes) {
             $this->addFixtureToSuite($suite, $fixtureAlias, $fixtureAttributes);

@@ -64,6 +64,8 @@ final class Configuration implements ConfigurationInterface
                 })
         ;
 
+        $suitesNode->children()->booleanNode('clear_object_manager')->defaultValue(true);
+
         $this->buildFixturesNode($suitesNode);
         $this->buildListenersNode($suitesNode);
     }

@@ -36,6 +36,11 @@ final class Suite implements SuiteInterface
     private $listeners;
 
     /**
+     * @var bool
+     */
+    private $clearObjectManager = true;
+
+    /**
      * @param string $name
      */
     public function __construct($name)
@@ -93,5 +98,21 @@ final class Suite implements SuiteInterface
         foreach ($listeners as $listener) {
             yield $listener['listener'] => $listener['options'];
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function shouldClearObjectManager()
+    {
+        return $this->clearObjectManager;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setClearObjectManager($clear)
+    {
+        $this->clearObjectManager = $clear;
     }
 }

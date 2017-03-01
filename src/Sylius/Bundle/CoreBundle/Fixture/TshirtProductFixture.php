@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Fixture;
 
 use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
+use Sylius\Bundle\FixturesBundle\Suite\SuiteInterface;
 use Sylius\Component\Attribute\AttributeType\TextAttributeType;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -87,7 +88,7 @@ class TshirtProductFixture extends AbstractFixture
     /**
      * {@inheritdoc}
      */
-    public function load(array $options)
+    public function load(array $options, SuiteInterface $suite)
     {
         $options = $this->optionsResolver->resolve($options);
 
@@ -113,13 +114,13 @@ class TshirtProductFixture extends AbstractFixture
                     ],
                 ],
             ],
-        ]]]);
+        ]]], $suite);
 
         $this->productAttributeFixture->load(['custom' => [
             ['name' => 'T-Shirt brand', 'code' => 't_shirt_brand', 'type' => TextAttributeType::TYPE],
             ['name' => 'T-Shirt collection', 'code' => 't_shirt_collection', 'type' => TextAttributeType::TYPE],
             ['name' => 'T-Shirt material', 'code' => 't_shirt_material', 'type' => TextAttributeType::TYPE],
-        ]]);
+        ]], $suite);
 
         $this->productOptionFixture->load(['custom' => [
             [
@@ -142,7 +143,7 @@ class TshirtProductFixture extends AbstractFixture
                     't_shirt_size_xxl' => 'XXL',
                 ],
             ],
-        ]]);
+        ]], $suite);
 
         $products = [];
         $productsNames = $this->getUniqueNames($options['amount']);
@@ -161,13 +162,13 @@ class TshirtProductFixture extends AbstractFixture
                 ],
                 'product_options' => ['t_shirt_color', 't_shirt_size'],
                 'images' => [
-                    [sprintf('%s/../Resources/fixtures/%s', __DIR__, 't-shirts.jpg'), 'main'],
-                    [sprintf('%s/../Resources/fixtures/%s', __DIR__, 't-shirts.jpg'), 'thumbnail'],
+                    'main' => sprintf('%s/../Resources/fixtures/%s', __DIR__, 't-shirts.jpg'),
+                    'thumbnail' => sprintf('%s/../Resources/fixtures/%s', __DIR__, 't-shirts.jpg'),
                 ],
             ];
         }
 
-        $this->productFixture->load(['custom' => $products]);
+        $this->productFixture->load(['custom' => $products], $suite);
     }
 
     /**

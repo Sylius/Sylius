@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Fixture;
 
 use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
+use Sylius\Bundle\FixturesBundle\Suite\SuiteInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
@@ -80,14 +81,14 @@ class SimilarProductAssociationFixture extends AbstractFixture
     /**
      * {@inheritdoc}
      */
-    public function load(array $options)
+    public function load(array $options, SuiteInterface $suite)
     {
         $options = $this->optionsResolver->resolve($options);
 
         $this->productAssociationTypeFixture->load(['custom' => [[
             'code' => 'similar_products',
             'name' => 'Similar products',
-        ]]]);
+        ]]], $suite);
 
         $products = $this->productRepository->findAll();
         $products = $this->faker->randomElements($products, $options['amount']);
@@ -102,7 +103,7 @@ class SimilarProductAssociationFixture extends AbstractFixture
             ];
         }
 
-        $this->productAssociationFixture->load(['custom' => $productAssociations]);
+        $this->productAssociationFixture->load(['custom' => $productAssociations], $suite);
     }
 
     /**

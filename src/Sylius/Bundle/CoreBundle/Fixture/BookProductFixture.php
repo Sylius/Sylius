@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Fixture;
 
 use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
+use Sylius\Bundle\FixturesBundle\Suite\SuiteInterface;
 use Sylius\Component\Attribute\AttributeType\IntegerAttributeType;
 use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
 use Sylius\Component\Attribute\AttributeType\TextAttributeType;
@@ -81,7 +82,7 @@ class BookProductFixture extends AbstractFixture
     /**
      * {@inheritdoc}
      */
-    public function load(array $options)
+    public function load(array $options, SuiteInterface $suite)
     {
         $options = $this->optionsResolver->resolve($options);
 
@@ -94,7 +95,7 @@ class BookProductFixture extends AbstractFixture
                     'name' => 'Books',
                 ]
             ]
-        ]]]);
+        ]]], $suite);
 
         $bookGenres = ['Fiction', 'Romance', 'Thriller', 'Sports'];
         $this->productAttributeFixture->load(['custom' => [
@@ -110,7 +111,7 @@ class BookProductFixture extends AbstractFixture
                     'choices' => $bookGenres,
                 ]
             ],
-        ]]);
+        ]], $suite);
 
         $products = [];
         $productsNames = $this->getUniqueNames($options['amount']);
@@ -135,7 +136,7 @@ class BookProductFixture extends AbstractFixture
             ];
         }
 
-        $this->productFixture->load(['custom' => $products]);
+        $this->productFixture->load(['custom' => $products], $suite);
     }
 
     /**
