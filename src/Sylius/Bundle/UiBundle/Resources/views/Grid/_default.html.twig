@@ -9,21 +9,28 @@
 {% set path = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
 
 {% if definition.filters|length > 0 %}
-    <div class="ui segment">
-        <form method="get" action="{{ path }}" id="filters" class="ui loadable form">
-            <div class="two fields">
-            {% for filter in definition.filters|sort_by('position') if filter.enabled %}
-                {{ sylius_grid_render_filter(grid, filter) }}
+    <div class="ui hidden divider"></div>
+    <div class="ui styled fluid accordion">
+        <div class="title active">
+            <i class="dropdown icon"></i>
+            Filters
+        </div>
+        <div class="content active">
+            <form method="get" action="{{ path }}" id="filters" class="ui loadable form">
+                <div class="two fields">
+                {% for filter in definition.filters|sort_by('position') if filter.enabled %}
+                    {{ sylius_grid_render_filter(grid, filter) }}
 
-                {% if loop.index0 % 2 %}
-                    </div>
-                    <div class="two fields">
-                {% endif %}
-            {% endfor %}
-            </div>
-            {{ buttons.filter() }}
-            {{ buttons.resetFilters(path) }}
-        </form>
+                    {% if loop.index0 % 2 %}
+                        </div>
+                        <div class="two fields">
+                    {% endif %}
+                {% endfor %}
+                </div>
+                {{ buttons.filter() }}
+                {{ buttons.resetFilters(path) }}
+            </form>
+        </div>
     </div>
 {% endif %}
 
