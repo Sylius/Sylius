@@ -48,7 +48,7 @@ class PromotionCouponRepository extends EntityRepository implements PromotionCou
     /**
      * {@inheritdoc}
      */
-    public function findOneByPromotionCodeAndCode($promotionCode, $code)
+    public function findOneByCodeAndPromotionCode($code, $promotionCode)
     {
         return $this->createQueryBuilder('o')
             ->leftJoin('o.promotion', 'promotion')

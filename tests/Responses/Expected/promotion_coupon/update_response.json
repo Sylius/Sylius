@@ -8,10 +8,10 @@
     "perCustomerUsageLimit": 2,
     "_links": {
         "self": {
-            "href": "\/api\/v1\/promotions\/Holliday\/coupons\/CAE14"
+            "href": "\/api\/v1\/promotions\/Holiday\/coupons\/CAE14"
         },
         "promotion": {
-            "href": "\/api\/v1\/promotions\/Holliday"
+            "href": "\/api\/v1\/promotions\/Holiday"
         }
     }
 }

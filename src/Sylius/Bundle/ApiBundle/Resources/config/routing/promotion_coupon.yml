@@ -27,9 +27,6 @@ sylius_api_promotion_coupon_create:
                   - expr:service('sylius.repository.promotion').findOneByCode($promotionCode)
             criteria:
                 promotion: $promotionCode
-            redirect:
-                route: sylius_api_promotion_coupon_index
-                parameters: { promotionCode: $promotionCode }
 
 sylius_api_promotion_coupon_update:
     path: /{code}
@@ -40,8 +37,8 @@ sylius_api_promotion_coupon_update:
             serialization_version: $version
             section: api
             repository:
-                method: findOneByPromotionCodeAndCode
-                arguments: [$promotionCode, $code]
+                method: findOneByCodeAndPromotionCode
+                arguments: [$code, $promotionCode]
 
 sylius_api_promotion_coupon_show:
     path: /{code}
@@ -53,8 +50,8 @@ sylius_api_promotion_coupon_show:
             serialization_groups: [Default, Detailed]
             section: api
             repository:
-                method: findOneByPromotionCodeAndCode
-                arguments: [$promotionCode, $code]
+                method: findOneByCodeAndPromotionCode
+                arguments: [$code, $promotionCode]
 
 sylius_api_promotion_coupon_delete:
     path: /{code}
@@ -66,5 +63,5 @@ sylius_api_promotion_coupon_delete:
             section: api
             csrf_protection: false
             repository:
-                method: findOneByPromotionCodeAndCode
-                arguments: [$promotionCode, $code]
+                method: findOneByCodeAndPromotionCode
+                arguments: [$code, $promotionCode]

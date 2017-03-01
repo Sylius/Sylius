@@ -60,20 +60,20 @@ Definition
 
     POST /api/v1/promotions/{promotionCode}/coupons/
 
-+---------------+----------------+----------------------------------------------------------+
-| Parameter     | Parameter type | Description                                              |
-+===============+================+==========================================================+
-| Authorization | header         | Token received during authentication                     |
-+---------------+----------------+----------------------------------------------------------+
-| promotionCode | url attribute  | Code of promotion for which the coupon should be created |
-+---------------+----------------+----------------------------------------------------------+
-| code          | request        | **(unique)** Promotion coupon identifier                 |
-+---------------+----------------+----------------------------------------------------------+
++---------------+----------------+--------------------------------------------------------------+
+| Parameter     | Parameter type | Description                                                  |
++===============+================+==============================================================+
+| Authorization | header         | Token received during authentication                         |
++---------------+----------------+--------------------------------------------------------------+
+| promotionCode | url attribute  | Code of the promotion for which the coupon should be created |
++---------------+----------------+--------------------------------------------------------------+
+| code          | request        | **(unique)** Promotion coupon identifier                     |
++---------------+----------------+--------------------------------------------------------------+
 
 Example
 ^^^^^^^
 
-To create new promotion coupon for the promotion with ``code = HOLIDAY-SALE`` use the below method.
+To create a new promotion coupon for the promotion with ``code = HOLIDAY-SALE`` use the below method.
 
 .. code-block:: bash
 
@@ -100,8 +100,8 @@ Exemplary Response
         "id": 300,
         "code": "1234",
         "used": 0,
-        "createdAt": "@string@.isDateTime()",
-        "updatedAt": "@string@.isDateTime()",
+        "createdAt": "2017-03-01T10:06:27+0100",
+        "updatedAt": "2017-03-01T10:06:27+0100",
         "_links": {
             "self": {
                 "href": "\/api\/v1\/promotions\/HOLIDAY-SALE\/coupons\/1234"
@@ -111,7 +111,6 @@ Exemplary Response
             }
         }
     }
-
 
 .. warning::
 
@@ -155,25 +154,21 @@ Exemplary Response
 
 You can also create a promotion coupon with additional (not required) fields:
 
-+-----------------------+----------------+------------------------------------------------------------------------+
-| Parameter             | Parameter type | Description                                                            |
-+=======================+================+========================================================================+
-| Authorization         | header         | Token received during authentication                                   |
-+-----------------------+----------------+------------------------------------------------------------------------+
-| promotionCode         | url attribute  | Code of promotion for which the coupon should be created               |
-+-----------------------+----------------+------------------------------------------------------------------------+
-| code                  | request        | **(unique)** Promotion coupon identifier                               |
-+-----------------------+----------------+------------------------------------------------------------------------+
-| usageLimit            | request        | The information how many times the coupon can be used                  |
-+---------------------- +----------------+------------------------------------------------------------------------+
-| perCustomerUsageLimit | request        | The information how many times the coupon can be used by one customer  |
-+-----------------------+----------------+------------------------------------------------------------------------+
-| expiresAt             | request        | The information when does the coupon expire                            |
-+-----------------------+----------------+------------------------------------------------------------------------+
-
-.. warning::
-
-    Channels must be created and enabled before the prices will be defined for they.
++-----------------------+----------------+-----------------------------------------------------------------------------------------+
+| Parameter             | Parameter type | Description                                                                             |
++=======================+================+=========================================================================================+
+| Authorization         | header         | Token received during authentication                                                    |
++-----------------------+----------------+-----------------------------------------------------------------------------------------+
+| promotionCode         | url attribute  | Code of the promotion for which the coupon should be created                            |
++-----------------------+----------------+-----------------------------------------------------------------------------------------+
+| code                  | request        | **(unique)** Promotion coupon identifier                                                |
++-----------------------+----------------+-----------------------------------------------------------------------------------------+
+| usageLimit            | request        | **(optional)** The information on how many times the coupon can be used                 |
++-----------------------+----------------+-----------------------------------------------------------------------------------------+
+| perCustomerUsageLimit | request        | **(optional)** The information on how many times the coupon can be used by one customer |
++-----------------------+----------------+-----------------------------------------------------------------------------------------+
+| expiresAt             | request        | **(optional)** The information on when the coupon expires                               |
++-----------------------+----------------+-----------------------------------------------------------------------------------------+
 
 Example
 ^^^^^^^
@@ -205,13 +200,13 @@ Exemplary Response
 .. code-block:: json
 
     {
-        "id": @integer@,
+        "id": 101,
         "code": "1234",
         "usageLimit": 10,
         "used": 0,
         "expiresAt": "2020-01-01T00:00:00+0100",
-        "createdAt": "@string@.isDateTime()",
-        "updatedAt": "@string@.isDateTime()",
+        "createdAt": "2017-01-01T00:00:00+0100",
+        "updatedAt": "2017-01-01T00:00:00+0100",
         "perCustomerUsageLimit": 1,
         "_links": {
             "self": {
@@ -404,21 +399,21 @@ Definition
 
     PUT /api/v1/promotions/{promotionCode}/coupons/{code}
 
-+-----------------------+----------------+-----------------------------------------------------------------------+
-| Parameter             | Parameter type | Description                                                           |
-+=======================+================+=======================================================================+
-| Authorization         | header         | Token received during authentication                                  |
-+-----------------------+----------------+-----------------------------------------------------------------------+
-| code                  | url attribute  | Promotion coupon identifier                                           |
-+-----------------------+----------------+-----------------------------------------------------------------------+
-| promotionCode         | url attribute  | Code of promotion to which the coupon is assigned                     |
-+-----------------------+----------------+-----------------------------------------------------------------------+
-| usageLimit            | request        | The information how many times the coupon can be used                 |
-+-----------------------+----------------+-----------------------------------------------------------------------+
-| perCustomerUsageLimit | request        | The information how many times the coupon can be used by one customer |
-+-----------------------+----------------+-----------------------------------------------------------------------+
-| expiresAt             | request        | The information when does the coupon expire                           |
-+-----------------------+----------------+-----------------------------------------------------------------------+
++-----------------------+----------------+--------------------------------------------------------------------------+
+| Parameter             | Parameter type | Description                                                              |
++=======================+================+==========================================================================+
+| Authorization         | header         | Token received during authentication                                     |
++-----------------------+----------------+--------------------------------------------------------------------------+
+| code                  | url attribute  | Promotion coupon identifier                                              |
++-----------------------+----------------+--------------------------------------------------------------------------+
+| promotionCode         | url attribute  | Code of the promotion to which the coupon is assigned                    |
++-----------------------+----------------+--------------------------------------------------------------------------+
+| usageLimit            | request        | The information on how many times the coupon can be used                 |
++-----------------------+----------------+--------------------------------------------------------------------------+
+| perCustomerUsageLimit | request        | The information on how many times the coupon can be used by one customer |
++-----------------------+----------------+--------------------------------------------------------------------------+
+| expiresAt             | request        | The information on when the coupon expires                               |
++-----------------------+----------------+--------------------------------------------------------------------------+
 
 Example
 ^^^^^^^

@@ -6,10 +6,10 @@
     "updatedAt": "@string@.isDateTime()",
     "_links": {
         "self": {
-            "href": "\/api\/v1\/promotions\/Holliday\/coupons\/1234"
+            "href": "\/api\/v1\/promotions\/Holiday\/coupons\/1234"
         },
         "promotion": {
-            "href": "\/api\/v1\/promotions\/Holliday"
+            "href": "\/api\/v1\/promotions\/Holiday"
         }
     }
 }
