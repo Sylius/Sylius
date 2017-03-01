@@ -17,6 +17,7 @@ use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -111,7 +112,11 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
      */
     private function setupDatabase(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper)
     {
-        $question = new ConfirmationQuestion('It appears that your database already exists. Would you like to reset it? (y/N) ', false);
+        $outputStyle = new SymfonyStyle($input, $output);
+        $outputStyle->writeln('It appears that your database already exists.');
+        $outputStyle->writeln('<error>Warning! This action will erase your database.</error>');
+
+        $question = new ConfirmationQuestion('Would you like to reset it? (y/N) ', false);
         if ($questionHelper->ask($input, $output, $question)) {
             return [
                 'doctrine:database:drop' => ['--force' => true],
@@ -124,7 +129,9 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
             return ['doctrine:schema:create'];
         }
 
-        $question = new ConfirmationQuestion('Seems like your database contains schema. Do you want to reset it? (y/N) ', false);
+        $outputStyle->writeln('Seems like your database contains schema.');
+        $outputStyle->writeln('<error>Warning! This action will erase your database.</error>');
+        $question = new ConfirmationQuestion('Do you want to reset it? (y/N) ', false);
         if ($questionHelper->ask($input, $output, $question)) {
             return [
                 'doctrine:schema:drop' => ['--force' => true],

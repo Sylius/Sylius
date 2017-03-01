@@ -49,17 +49,17 @@ EOT
         $outputStyle = new SymfonyStyle($input, $output);
         $outputStyle->newLine();
         $outputStyle->writeln(sprintf(
-            '<error>Warning! This will erase your database.</error> Your current environment is <info>%s</info>.',
+            'Loading sample data for environment <info>%s</info>.',
             $this->getEnvironment()
         ));
+        $outputStyle->writeln('<error>Warning! This action will erase your database.</error>');
 
-        if (!$questionHelper->ask($input, $output, new ConfirmationQuestion('Load sample data? (y/N) ', false))) {
+        if (!$questionHelper->ask($input, $output, new ConfirmationQuestion('Continue? (y/N) ', false))) {
             $outputStyle->writeln('Cancelled loading sample data.');
 
             return 0;
         }
 
-        $outputStyle->writeln('Loading sample data...');
 
         try {
             $rootDir = $this->getContainer()->getParameter('kernel.root_dir') . '/../';

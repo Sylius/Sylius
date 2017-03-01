@@ -7,5 +7,4 @@ Feature: Load sample data feature
     Scenario: Running install sample data command
         Given I run Sylius Install Load Sample Data command
         And I confirm loading sample data
-        Then I should see output "Loading sample data..."
-        And the command should finish successfully
+        Then the command should finish successfully
