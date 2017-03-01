@@ -62,6 +62,7 @@ EOT
     {
         $outputStyle = new SymfonyStyle($input, $output);
         $outputStyle->writeln('<info>Installing Sylius...</info>');
+        $outputStyle->writeln($this->getSyliusLogo());
 
         $this->ensureDirectoryExistsAndIsWritable($this->getContainer()->getParameter('kernel.cache_dir'), $output);
 
@@ -103,5 +104,31 @@ EOT
         }
 
         return 'Sylius has been successfully installed.';
+    }
+
+    /**
+     * @return string
+     */
+    private function getSyliusLogo()
+    {
+        return '                                                                  
+               <info>,</info>                                                       
+             <info>,;:,</info>                                                      
+           <info>`;;;.:`</info>                                                     
+          <info>`::;`  :`</info>                                                    
+           <info>:::`   `</info>          .\'++:           \'\'.   \'.                  
+           <info>`:::</info>             :+\',;+\'          :+;  `+.                  
+            <info>::::</info>            +\'   :\'          `+;                       
+            <info>`:::,</info>           \'+`     ++    :+.`+; `++. ;+\'    \'\'  ,++++.
+             <info>,:::`</info>          `++\'.   .+:  `+\' `+;  .+,  ;+    +\'  +;  \'\'
+              <info>::::`</info>           ,+++.  \'+` :+. `+;  `+,  ;+    +\'  \'+.   
+       <info>,.     .::::</info>             .++` `+: +\'  `+;  `+,  ;+    +\'  `;++; 
+    <info>`;;.:::`   :::::</info>             :+.  \'+,+.  `+;  `+,  ;+   `+\'     .++
+     <info>.;;;;;;::`.::::,</info>       +\'` `++   `++\'   `+;  `+:  :+. `++\'  \'.  ;+
+      <info>,;;;;;;;;;:::::</info>       .+++++`    ;+,    ++;  ++, `\'+++,\'+\' :++++,
+       <info>,;;;;;;;;;:::</info>`                  ;\'                              
+        <info>:;;;;;;;;;:,</info>                :.:+,                              
+         <info>;;;;;;;;;:</info>                 ;++,'
+        ;
     }
 }
