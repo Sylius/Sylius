@@ -2,7 +2,7 @@
 
 <div class="ui segment" id="statistics">
     {% if statistics.perChannelsStatistics is not empty %}
-        <div class="ui center aligned stackable internally celled grid">
+        <div class="ui accordion">
             {% for statistic in statistics.perChannelsStatistics %}
                 {% include '@SyliusAdmin/Customer/Show/Statistics/_perChannel.html.twig' %}
             {% endfor %}
