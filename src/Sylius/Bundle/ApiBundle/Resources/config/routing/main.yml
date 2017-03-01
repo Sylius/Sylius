@@ -78,7 +78,6 @@ sylius_api_payment_method:
 
 sylius_api_payment:
     resource: "@SyliusApiBundle/Resources/config/routing/payment.yml"
-    prefix: /payments
 
 sylius_api_exchange_rate:
     resource: "@SyliusApiBundle/Resources/config/routing/exchange_rate.yml"
