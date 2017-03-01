@@ -300,6 +300,9 @@ These services will be generated automatically based on subject name.
    
 ### Taxation / TaxationBundle
 
+* Signature of method `findChildren(string $parentCode)` in `Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface` 
+  was changed to `findChildren(string $parentCode, string $locale)`.
+
 ### Taxonomy / TaxonomyBundle
 
 ### ThemeBundle
@@ -351,6 +354,8 @@ From now on it won't compute every possible permutation of fallback locales from
 * `sylius_admin_dashboard_redirect` route was removed, use `sylius_admin_dashboard` instead.
 
 * All shop routes became prepended with locale code, see below for required routing and security changes.
+
+* Shop only shows products / taxons having translations in current language.
 
 ### Configuration
 

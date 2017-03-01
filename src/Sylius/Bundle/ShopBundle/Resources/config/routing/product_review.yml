@@ -12,8 +12,8 @@ sylius_shop_product_review_index:
                 method: findAcceptedByProductSlugAndChannel
                 arguments:
                     - $slug
-                    - '%locale%'
-                    - 'expr:service("sylius.context.channel").getChannel()'
+                    - "expr:service('sylius.context.locale').getLocaleCode()"
+                    - "expr:service('sylius.context.channel').getChannel()"
 
 sylius_shop_product_review_create:
     path: /new

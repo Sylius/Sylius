@@ -22,17 +22,18 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
     /**
      * {@inheritdoc}
      */
-    public function findChildren($parentCode)
+    public function findChildren($parentCode, $locale)
     {
         return $this->createQueryBuilder('o')
             ->addSelect('translation')
             ->addSelect('child')
             ->innerJoin('o.parent', 'parent')
-            ->leftJoin('o.translations', 'translation')
+            ->innerJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
             ->leftJoin('o.children', 'child')
             ->andWhere('parent.code = :parentCode')
             ->addOrderBy('o.position')
             ->setParameter('parentCode', $parentCode)
+            ->setParameter('locale', $locale)
             ->getQuery()
             ->getResult()
         ;

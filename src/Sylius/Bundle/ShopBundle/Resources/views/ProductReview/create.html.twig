@@ -18,7 +18,7 @@
                         {{ 'sylius.ui.you_are_reviewing'|trans }} <strong>{{ product.name }}</strong>.
                     </div>
                 </div>
-                {{ form_start(form, {'action': path('sylius_shop_product_review_create', {'slug': product.slug}), 'attr': {'class': 'ui loadable reply form', 'novalidate': 'novalidate'}}) }}
+                {{ form_start(form, {'action': path('sylius_shop_product_review_create', {'slug': product.slug, '_locale': product.translation.locale}), 'attr': {'class': 'ui loadable reply form', 'novalidate': 'novalidate'}}) }}
                     {% include '@SyliusShop/ProductReview/_form.html.twig' %}
                     {{ form_row(form._token) }}
                     <button type="submit" class="ui blue labeled large icon submit button">
