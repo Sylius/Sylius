@@ -3,7 +3,7 @@
 
 sylius_api_product_variant:
     resource: |
-        path: '/'
+        path: 'variants'
         grid: sylius_api_product_variant
         alias: sylius.product_variant
         section: api
@@ -16,7 +16,7 @@ sylius_api_product_variant:
     type: sylius.resource_api
 
 sylius_api_product_variant_create:
-    path: /
+    path: /variants/
     methods: [POST]
     defaults:
         _controller: sylius.controller.product_variant:createAction
@@ -31,7 +31,7 @@ sylius_api_product_variant_create:
                   - expr:notFoundOnNull(service('sylius.repository.product').findOneByCode($productCode))
 
 sylius_api_product_variant_update:
-    path: /{code}
+    path: /variants/{code}
     methods: [PUT, PATCH]
     defaults:
         _controller: sylius.controller.product_variant:updateAction
@@ -40,11 +40,11 @@ sylius_api_product_variant_update:
             section: api
             form: Sylius\Bundle\ApiBundle\Form\Type\ProductVariantType
             repository:
-                method: findOneByProductCodeAndCode
-                arguments: [$productCode, $code]
+                method: findOneByCodeAndProductCode
+                arguments: [$code, $productCode]
 
 sylius_api_product_variant_delete:
-    path: /{code}
+    path: /variants/{code}
     methods: [DELETE]
     defaults:
         _controller: sylius.controller.product_variant:deleteAction
@@ -52,12 +52,12 @@ sylius_api_product_variant_delete:
             serialization_version: $version
             section: api
             repository:
-                method: findOneByProductCodeAndCode
-                arguments: [$productCode, $code]
+                method: findOneByCodeAndProductCode
+                arguments: [$code, $productCode]
             csrf_protection: false
 
 sylius_api_product_variant_show:
-    path: /{code}
+    path: /variants/{code}
     methods: [GET]
     defaults:
         _controller: sylius.controller.product_variant:showAction
@@ -66,5 +66,5 @@ sylius_api_product_variant_show:
             section: api
             serialization_groups: [Default, Detailed]
             repository:
-                method: findOneByProductCodeAndCode
-                arguments: [$productCode, $code]
+                method: findOneByCodeAndProductCode
+                arguments: [$code, $productCode]

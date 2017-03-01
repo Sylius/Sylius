@@ -47,10 +47,18 @@ interface ProductVariantRepositoryInterface extends RepositoryInterface
     public function findByNameAndProduct($name, $locale, ProductInterface $product);
 
     /**
-     * @param string $productCode
      * @param string $code
+     * @param string $productCode
      *
      * @return ProductVariantInterface|null
      */
-    public function findOneByProductCodeAndCode($productCode, $code);
+    public function findOneByCodeAndProductCode($code, $productCode);
+
+    /**
+     * @param mixed $id
+     * @param mixed $productId
+     *
+     * @return ProductVariantInterface|null
+     */
+    public function findOneByIdAndProductId($id, $productId);
 }
