@@ -31,7 +31,7 @@
 
         <service id="sylius.resource_registry" class="Sylius\Component\Resource\Metadata\Registry" public="false" />
 
-        <service id="sylius.expression_language" class="Symfony\Component\DependencyInjection\ExpressionLanguage" public="false" />
+        <service id="sylius.expression_language" class="Sylius\Bundle\ResourceBundle\ExpressionLanguage\ExpressionLanguage" public="false" />
 
         <service id="sylius.form.extension.type.collection" class="Sylius\Bundle\ResourceBundle\Form\Extension\CollectionTypeExtension">
             <tag name="form.type_extension" extended-type="Symfony\Component\Form\Extension\Core\Type\CollectionType" />
