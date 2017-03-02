@@ -32,7 +32,7 @@ sylius_admin_taxon_create_for_parent:
             redirect: sylius_admin_taxon_update
             factory:
                 method: createForParent
-                arguments: ['expr:service("sylius.repository.taxon").find($id)']
+                arguments: ['expr:notFoundOnNull(service("sylius.repository.taxon").find($id))']
             vars:
                 subheader: sylius.ui.manage_categorization_of_your_product
                 templates:

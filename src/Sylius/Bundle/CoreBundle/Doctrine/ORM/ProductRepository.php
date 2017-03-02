@@ -65,7 +65,7 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
     /**
      * {@inheritdoc}
      */
-    public function createShopListQueryBuilder(ChannelInterface $channel, TaxonInterface $taxon, $locale, array $sorting)
+    public function createShopListQueryBuilder(ChannelInterface $channel, TaxonInterface $taxon, $locale, array $sorting = [])
     {
         $queryBuilder = $this->createQueryBuilder('o')
             ->addSelect('translation')

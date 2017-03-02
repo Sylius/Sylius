@@ -10,11 +10,11 @@ sylius_shop_ajax_cart_add_item:
         _sylius:
             factory:
                 method: createForProduct
-                arguments: [expr:service('sylius.repository.product').find($productId)]
+                arguments: [expr:notFoundOnNull(service('sylius.repository.product').find($productId))]
             form:
                 type: Sylius\Bundle\CoreBundle\Form\Type\Order\AddToCartType
                 options:
-                    product: expr:service('sylius.repository.product').find($productId)
+                    product: expr:notFoundOnNull(service('sylius.repository.product').find($productId))
             redirect:
                 route: sylius_shop_cart_summary
                 parameters: {}

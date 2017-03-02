@@ -28,7 +28,7 @@ sylius_shop_product_review_create:
             factory:
                 method: createForSubjectWithReviewer
                 arguments:
-                    - "expr:service('sylius.repository.product').findOneByChannelAndSlug(service('sylius.context.channel').getChannel(), service('sylius.context.locale').getLocaleCode(), $slug)"
+                    - "expr:notFoundOnNull(service('sylius.repository.product').findOneByChannelAndSlug(service('sylius.context.channel').getChannel(), service('sylius.context.locale').getLocaleCode(), $slug))"
                     - "expr:service('sylius.context.customer').getCustomer()"
             redirect:
                 route: sylius_shop_product_show

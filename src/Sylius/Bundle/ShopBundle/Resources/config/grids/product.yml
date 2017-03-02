@@ -12,7 +12,7 @@ sylius_grid:
                         method: createShopListQueryBuilder
                         arguments:
                             channel: "expr:service('sylius.context.channel').getChannel()"
-                            taxon: "expr:service('sylius.repository.taxon').findOneBySlug($slug, service('sylius.context.locale').getLocaleCode())"
+                            taxon: "expr:notFoundOnNull(service('sylius.repository.taxon').findOneBySlug($slug, service('sylius.context.locale').getLocaleCode()))"
                             locale: "expr:service('sylius.context.locale').getLocaleCode()"
                             sorting: "expr:service('request_stack').getCurrentRequest().get('sorting', [])"
             sorting:

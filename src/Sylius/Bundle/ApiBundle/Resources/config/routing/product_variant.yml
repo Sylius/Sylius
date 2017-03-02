@@ -28,7 +28,7 @@ sylius_api_product_variant_create:
             factory:
                 method: createForProduct
                 arguments:
-                  - expr:service('sylius.repository.product').findOneByCode($productCode)
+                  - expr:notFoundOnNull(service('sylius.repository.product').findOneByCode($productCode))
 
 sylius_api_product_variant_update:
     path: /{code}

@@ -19,5 +19,5 @@ sylius_admin_partial_order_latest_in_channel:
                 method: findLatestInChannel
                 arguments:
                     count: $count
-                    channel: expr:service('sylius.repository.channel').findOneByCode($channelCode)
+                    channel: expr:notFoundOnNull(service('sylius.repository.channel').findOneByCode($channelCode))
             template: $template
