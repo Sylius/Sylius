@@ -51,7 +51,7 @@ If you request for more detailed data, you will receive an object with the follo
 Getting a Single Promotion Coupon
 ---------------------------------
 
-To retrieve the details of a promotion coupon you will need to call the ``/api/v1/promotions/promotionCode/coupons/code`` endpoint with the ``GET`` method.
+To retrieve the details of a promotion coupon you will need to call the ``/api/v1/promotions/{promotionCode}/coupons/{code}`` endpoint with the ``GET`` method.
 
 Definition
 ^^^^^^^^^^

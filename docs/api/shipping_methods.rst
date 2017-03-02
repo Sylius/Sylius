@@ -37,7 +37,7 @@ If you request a shipping method via API, you will receive an object with the fo
 Getting a Single Shipping Method
 --------------------------------
 
-To retrieve the details of a shipping method you will need to call the ``/api/v1/shipping-methods/code`` endpoint with the ``GET`` method.
+To retrieve the details of a shipping method you will need to call the ``/api/v1/shipping-methods/{code}`` endpoint with the ``GET`` method.
 
 Definition
 ^^^^^^^^^^
@@ -67,7 +67,7 @@ To see the details of the shipping method with ``code = ups`` use the below meth
 
 .. note::
 
-    The *ups* is just an example. Your value can be different.
+    The *ups* code is just an example. Your value can be different.
 
 Exemplary Response
 ^^^^^^^^^^^^^^^^^^

@@ -201,7 +201,7 @@ Exemplary Response
 Getting a Single Country
 ------------------------
 
-To retrieve the details of a country you will need to call the ``/api/v1/countries/code`` endpoint with the ``GET`` method.
+To retrieve the details of a country you will need to call the ``/api/v1/countries/{code}`` endpoint with the ``GET`` method.
 
 Definition
 ^^^^^^^^^^
@@ -339,7 +339,7 @@ Exemplary Response
 Deleting a Country
 ------------------
 
-To delete a country you will need to call the ``/api/v1/countries/code`` endpoint with the ``DELETE`` method.
+To delete a country you will need to call the ``/api/v1/countries/{code}`` endpoint with the ``DELETE`` method.
 
 Definition
 ^^^^^^^^^^

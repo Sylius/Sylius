@@ -348,7 +348,7 @@ Exemplary Response
 Getting a Single Taxon
 ----------------------
 
-To retrieve the details of a taxon you will need to call the ``/api/v1/taxons/code`` endpoint with the ``GET`` method.
+To retrieve the details of a taxon you will need to call the ``/api/v1/taxons/{code}`` endpoint with the ``GET`` method.
 
 Definition
 ^^^^^^^^^^
@@ -786,7 +786,7 @@ Exemplary Response
 Updating Taxon
 --------------
 
-To fully update a taxon you will need to call the ``/api/v1/taxons/code`` endpoint with the ``PUT`` method.
+To fully update a taxon you will need to call the ``/api/v1/taxons/{code}`` endpoint with the ``PUT`` method.
 
 Definition
 ^^^^^^^^^^
@@ -842,7 +842,7 @@ Exemplary Response
 
     STATUS: 204 No Content
 
-To update a taxon partially you will need to call the ``/api/v1/taxons/code`` endpoint with the ``PATCH`` method.
+To update a taxon partially you will need to call the ``/api/v1/taxons/{code}`` endpoint with the ``PATCH`` method.
 
 Definition
 ^^^^^^^^^^
@@ -891,7 +891,7 @@ Exemplary Response
 Deleting a Taxon
 ----------------
 
-To delete a taxon you will need to call the ``/api/v1/taxons/code`` endpoint with the ``DELETE`` method.
+To delete a taxon you will need to call the ``/api/v1/taxons/{code}`` endpoint with the ``DELETE`` method.
 
 Definition
 ^^^^^^^^^^
@@ -936,7 +936,7 @@ Set position of product in a Taxon
 
 The products in Sylius can by grouped by taxon, therefore for every product there is a relation between the product and the assigned taxon.
 What is more, every product can have a specific position in the taxon to which it belongs. To put products in a specific order
-you will need to call the ``/api/v1/taxons/code/products`` endpoint wih the ``PUT`` method.
+you will need to call the ``/api/v1/taxons/{code}/products`` endpoint wih the ``PUT`` method.
 
 Definition
 ^^^^^^^^^^

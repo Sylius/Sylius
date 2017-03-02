@@ -713,7 +713,7 @@ After choosing the payment method we are ready to finalize the cart and make an 
 
 .. tip::
 
-    The same definition has been used over this chapter, to see the current state of the gorder.
+    The same definition has been used over this chapter, to see the current state of the order.
 
 Definition
 ^^^^^^^^^^

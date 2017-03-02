@@ -52,7 +52,7 @@ If you request for more detailed data, you will receive an object with the follo
 Creating a Zone
 ---------------
 
-To create a new zone you will need to call the ``/api/v1/zones/type`` endpoint with the ``POST`` method.
+To create a new zone you will need to call the ``/api/v1/zones/{type}`` endpoint with the ``POST`` method.
 
 Definition
 ^^^^^^^^^^
@@ -182,7 +182,7 @@ Exemplary Response
 Getting a Single Zone
 ---------------------
 
-To retrieve the details of a zone you will need to call the ``/api/v1/zone/code`` endpoint with the ``GET`` method.
+To retrieve the details of a zone you will need to call the ``/api/v1/zone/{code}`` endpoint with the ``GET`` method.
 
 Definition
 ^^^^^^^^^^
@@ -328,7 +328,7 @@ Exemplary Response
 Updating a Zone
 ---------------
 
-To fully update a zone you will need to call the ``/api/v1/zones/code`` endpoint with the ``PUT`` method.
+To fully update a zone you will need to call the ``/api/v1/zones/{code}`` endpoint with the ``PUT`` method.
 
 Definition
 ^^^^^^^^^^
@@ -427,7 +427,7 @@ Exemplary Response
         }
     }
 
-To update a zone partially you will need to call the ``/api/v1/zones/code`` endpoint with the ``PATCH`` method.
+To update a zone partially you will need to call the ``/api/v1/zones/{code}`` endpoint with the ``PATCH`` method.
 
 Definition
 ^^^^^^^^^^
@@ -473,7 +473,7 @@ Exemplary Response
 Deleting a Zone
 ---------------
 
-To delete a zone you will need to call the ``/api/v1/zones/code`` endpoint with the ``DELETE`` method.
+To delete a zone you will need to call the ``/api/v1/zones/{code}`` endpoint with the ``DELETE`` method.
 
 Definition
 ^^^^^^^^^^

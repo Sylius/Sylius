@@ -49,7 +49,7 @@ If you request for more detailed data, you will receive an object with the follo
 Getting a Single Channel
 ------------------------
 
-To retrieve the details of a specific channel you will need to call the ``/api/v1/channels/code`` endpoint with the ``GET`` method.
+To retrieve the details of a specific channel you will need to call the ``/api/v1/channels/{code}`` endpoint with the ``GET`` method.
 
 Definition
 ^^^^^^^^^^
@@ -79,7 +79,7 @@ To see the details of the channel with ``code = US_WEB`` use the below method:
 
 .. note::
 
-    The *US_WEB* is just an example. Your value can be different.
+    The *US_WEB* code is just an example. Your value can be different.
 
 Exemplary Response
 ^^^^^^^^^^^^^^^^^^
