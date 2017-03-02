@@ -1,6 +1,6 @@
 Sylius\Component\Core\Model\Taxon:
     mugs:
-        code: MUGS
+        code: "mugs"
 
 Sylius\Component\Core\Model\ProductTaxon:
     productTaxon1:

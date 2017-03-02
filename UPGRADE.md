@@ -79,16 +79,16 @@ You can bring back previous configuration by overriding current routing with you
 
 * Routing for the following resources has been removed and replaced with the auto generated routing:
 
-	* `Channels`, which are now resolved by code instead of id and only index and show endpoint are available.
-	* `Countries`, which are now resolved by code instead of id.
-	* `Locales`, which  are now resolved by code instead of id. 
-	* `Product Attributes`, which are now by code instead of id and only index and show endpoint are available.
-	* `Product Options`, which are now resolved by code instead of id and only index and show endpoint are available.
-	* `Promotions`, which are now resolved by code instead of id and only index and show endpoint are available.
-	* `Promotions Coupons`, which are now resolved by code instead of id and only index and show endpoint are available.
-	* `Tax Categories`, which are now resolved by code instead of id.
-	* `Tax Rates`, which have now only index and show endpoint available. 
-	* `Payment Methods`, which have now only show endpoint available. 
+    * `Channels`, which are now resolved by code instead of id and only index and show endpoint are available.
+    * `Countries`, which are now resolved by code instead of id.
+    * `Locales`, which  are now resolved by code instead of id. 
+    * `Product Attributes`, which are now by code instead of id and only index and show endpoint are available.
+    * `Product Options`, which are now resolved by code instead of id and only index and show endpoint are available.
+    * `Promotions`, which are now resolved by code instead of id.
+    * `Promotions Coupons`, which are now resolved by code instead of id and only index and show endpoint are available.
+    * `Tax Categories`, which are now resolved by code instead of id.
+    * `Tax Rates`, which have now only index and show endpoint available. 
+    * `Payment Methods`, which have now only show endpoint available. 
 
   You can bring back previous configuration by overriding current routing with your definition.
 

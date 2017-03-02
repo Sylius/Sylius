@@ -34,7 +34,7 @@ Sylius\Component\Promotion\Model\Promotion:
         priority:
             expose: true
             type: integer
-            groups: [Detailed]
+            groups: [Default, Detailed]
         couponBased:
             expose: true
             type: boolean
@@ -60,10 +60,10 @@ Sylius\Component\Promotion\Model\Promotion:
             type: DateTime
             groups: [Detailed]
     relations:
-        -    rel: self
-             href:
-                 route: sylius_api_promotion_show
-                 parameters:
+        -   rel: self
+            href:
+                route: sylius_api_promotion_show
+                parameters:
                     code: expr(object.getCode())
                     version: 1
         -   rel: coupons
@@ -72,4 +72,5 @@ Sylius\Component\Promotion\Model\Promotion:
                 parameters:
                     promotionCode: expr(object.getCode())
                     version: 1
-            exclude_if: expr(!object.isCouponBased() || !object.getCode())
+            exclusion:
+                exclude_if: expr(!object.isCouponBased() || !object.getCode())

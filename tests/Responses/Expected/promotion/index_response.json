@@ -20,25 +20,24 @@
                 "id": @integer@,
                 "code": "Sunday",
                 "name": "Sunday promotion",
+                "priority": 0,
                 "_links": {
                     "self": {
                         "href": "\/api\/v1\/promotions\/Sunday"
-                    },
-                    "coupons": {
-                        "href": "\/api\/v1\/promotions\/Sunday\/coupons\/"
                     }
                 }
             },
             {
                 "id": @integer@,
-                "code": "Holliday",
-                "name": "Holliday promotion",
+                "code": "Holiday",
+                "name": "Holiday promotion",
+                "priority": 0,
                 "_links": {
                     "self": {
-                        "href": "\/api\/v1\/promotions\/Holliday"
+                        "href": "\/api\/v1\/promotions\/Holiday"
                     },
                     "coupons": {
-                        "href": "\/api\/v1\/promotions\/Holliday\/coupons\/"
+                        "href": "\/api\/v1\/promotions\/Holiday\/coupons\/"
                     }
                 }
             }

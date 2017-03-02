@@ -1,0 +1,74 @@
+{
+    "page": 1,
+    "limit": 10,
+    "pages": 1,
+    "total": 4,
+    "_links": {
+        "self": {
+            "href": "\/api\/v1\/promotions\/?criteria%5Bsearch%5D=promo&page=1&limit=10"
+        },
+        "first": {
+            "href": "\/api\/v1\/promotions\/?criteria%5Bsearch%5D=promo&page=1&limit=10"
+        },
+        "last": {
+            "href": "\/api\/v1\/promotions\/?criteria%5Bsearch%5D=promo&page=1&limit=10"
+        }
+    },
+    "_embedded": {
+        "items": [
+            {
+                "id": @integer@,
+                "code": "AUTUMNAL_PROMO",
+                "name": "Autumnal special",
+                "priority": 7,
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/promotions\/AUTUMNAL_PROMO"
+                    },
+                    "coupons": {
+                        "href": "\/api\/v1\/promotions\/AUTUMNAL_PROMO\/coupons\/"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "code": "WEEKEND_PROMO",
+                "name": "Weekend special",
+                "priority": 6,
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/promotions\/WEEKEND_PROMO"
+                    },
+                    "coupons": {
+                        "href": "\/api\/v1\/promotions\/WEEKEND_PROMO\/coupons\/"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "code": "Sunday",
+                "name": "Sunday promotion",
+                "priority": 0,
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/promotions\/Sunday"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "code": "Holiday",
+                "name": "Holiday promotion",
+                "priority": 0,
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/promotions\/Holiday"
+                    },
+                    "coupons": {
+                        "href": "\/api\/v1\/promotions\/Holiday\/coupons\/"
+                    }
+                }
+            }
+        ]
+    }
+}
