@@ -22,7 +22,6 @@ var paths = {
     admin: {
         js: [
             nodeModulesPath + 'jquery/dist/jquery.min.js',
-            nodeModulesPath + 'jquery.dirtyforms/jquery.dirtyforms.js',
             nodeModulesPath + 'semantic-ui-css/semantic.min.js',
             vendorUiPath + 'Resources/private/js/**',
             vendorAdminPath + 'Resources/private/js/**'
