@@ -816,6 +816,7 @@ sylius:
         there_are_no_variants_to_display: 'There are no variants to display'
         there_are_no_zones_configured: 'There are no zones configured'
         there_is_no_main_taxon_for_this_product: 'There is no main taxon for this product'
+        this_customer_does_not_have_a_default_address: 'This customer does not have a default address'
         this_customer_has_not_placed_any_orders_yet: 'This customer has not placed any orders yet'
         this_months_statistics: 'This month''s statistics'
         this_product_has_no_attributes_defined: 'This product has no attributes defined'

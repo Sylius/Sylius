@@ -78,7 +78,7 @@ class CustomerStatisticsController
         $customerStatistics = $this->statisticsProvider->getCustomerStatistics($customer);
 
         return $this->templatingEngine->renderResponse(
-            '@SyliusAdmin/Customer/Show/Statistics/statistics.html.twig',
+            '@SyliusAdmin/Customer/Show/Statistics/index.html.twig',
             ['statistics' => $customerStatistics]
         );
     }

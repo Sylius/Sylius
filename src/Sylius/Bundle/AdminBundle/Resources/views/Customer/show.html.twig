@@ -15,5 +15,11 @@
 
     <div class="ui divider"></div>
     {% include '@SyliusAdmin/Customer/Show/_breadcrumb.html.twig' %}
-    {% include '@SyliusAdmin/Customer/Show/_content.html.twig' %}
+
+    {{ render(path('sylius_admin_customer_orders_statistics', {'customerId': customer.id})) }}
+
+    <div class="ui stackable grid">
+        {% include '@SyliusAdmin/Customer/Show/_content.html.twig' %}
+        {% include '@SyliusAdmin/Customer/Show/_address.html.twig' %}
+    </div>
 {% endblock %}

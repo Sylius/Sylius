@@ -50,6 +50,14 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
+    public function getCustomerPhoneNumber()
+    {
+        return $this->getElement('customer_phone_number')->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getCustomerName()
     {
         return $this->getElement('customer_name')->getText();
@@ -164,29 +172,13 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getOverallOrdersCount()
-    {
-        $overallOrders = $this
-            ->getElement('statistics')
-            ->find('css', '.sylius-orders-overall-count')
-            ->getText()
-        ;
-
-        return (int) preg_replace('/[^0-9]/', '',$overallOrders);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getOrdersCountInChannel($channelName)
     {
-        $ordersCountStatistic = $this
+        return (int) $this
             ->getStatisticsForChannel($channelName)
             ->find('css', '.sylius-orders-count')
             ->getText()
         ;
-
-        return (int) $this->getStatisticValue($ordersCountStatistic);
     }
 
     /**
@@ -194,13 +186,11 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
      */
     public function getOrdersTotalInChannel($channelName)
     {
-        $ordersCountStatistic = $this
+        return $this
             ->getStatisticsForChannel($channelName)
             ->find('css', '.sylius-orders-total')
             ->getText()
         ;
-
-        return $this->getStatisticValue($ordersCountStatistic);
     }
 
     /**
@@ -208,13 +198,11 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
      */
     public function getAverageTotalInChannel($channelName)
     {
-        $averageTotalStatistic = $this
+        return $this
             ->getStatisticsForChannel($channelName)
             ->find('css', '.sylius-order-average-total')
             ->getText()
         ;
-
-        return $this->getStatisticValue($averageTotalStatistic);
     }
 
     /**
@@ -241,7 +229,8 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return array_merge(parent::getDefinedElements(), [
             'customer_email' => '#info .content.extra > a',
             'customer_name' => '#info .content > a',
-            'default_address' => '#defaultAddress address',
+            'customer_phone_number' => '#phone-number',
+            'default_address' => '#default-address',
             'delete_account_button' => '#actions',
             'flash_message' => '.ui.icon.positive.message .content p',
             'group' => '.group',
@@ -263,7 +252,10 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
      */
     private function getStatisticsForChannel($channelName)
     {
-        $statisticsRibs = $this->getElement('statistics')->findAll('css', '.accordion > .title');
+        $statisticsRibs = $this
+            ->getElement('statistics')
+            ->findAll('css', '.row > .column > .statistic > .sylius-channel-name')
+        ;
 
         $statisticsRibs = array_filter($statisticsRibs, function (NodeElement $statistic) use ($channelName) {
             return $channelName === trim($statistic->getText());
@@ -280,19 +272,9 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             )
         );
 
-        $statisticsContents = $this->getElement('statistics')->findAll('css', '.accordion > .content');
+        $statisticsContents = $this->getElement('statistics')->findAll('css', '.row');
         $contentIndexes = array_keys($statisticsRibs);
 
         return $statisticsContents[reset($contentIndexes)];
-    }
-
-    /**
-     * @param string $statistic
-     *
-     * @return string
-     */
-    private function getStatisticValue($statistic)
-    {
-        return trim(substr($statistic, strpos($statistic, ':') + 1));
     }
 }

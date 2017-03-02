@@ -1,49 +1,41 @@
-<div class="ui stackable grid">
-    <div class="five wide column" id="info">
-        <div class="ui fluid card">
-            <div class="content">
-                <a href="{{ path('sylius_admin_customer_update', {'id': customer.id}) }}" class="header">
-                    {{ customer.fullName|default('sylius.ui.guest_customer'|trans) }}
-                </a>
-                <div class="meta">
-                    <span class="date">{{ 'sylius.ui.customer_since'|trans }} {{ customer.createdAt|date }}</span>
-                    <br />
-                   {% if customer.group is not null %}
-                       <span class="group">{{ 'sylius.ui.group_membership'|trans }}: {{ customer.group }}</span>
-                   {% endif %}
-                </div>
+<div class="eight wide column" id="info">
+    <div class="ui fluid card">
+        <div class="content">
+            <a href="{{ path('sylius_admin_customer_update', {'id': customer.id}) }}" class="header">
+                {{ customer.fullName|default('sylius.ui.guest_customer'|trans) }}
+            </a>
+            <div class="meta">
+                <span class="date">{{ 'sylius.ui.customer_since'|trans }} {{ customer.createdAt|date }}</span>
                 <br />
-                <div id="subscribed-to-newsletter">
-                    <i class="{{ customer.subscribedToNewsletter ? 'green checkmark' : 'red remove' }} icon"></i>
-                    {{ 'sylius.ui.subscribed_to_newsletter'|trans }}
-                </div>
-                {% if customer.user is not null %}
-                    {% set user = customer.user %}
-                    <div id="verified-email">
-                        <i class="{{ user.verified ? 'green checkmark' : 'red remove' }} icon"></i>
-                        {{ 'sylius.ui.email_verified'|trans }}
-                    </div>
-                    <br />
-                    {{ buttons.default(path('sylius_admin_impersonate_user', {'username': user.emailCanonical}), 'sylius.ui.impersonate', 'impersonate', 'unhide', 'blue') }}
+                {% if customer.group is not null %}
+                    <span class="group">{{ 'sylius.ui.group_membership'|trans }}: {{ customer.group }}</span>
                 {% endif %}
-                {% if customer.defaultAddress is not null %}
-                    <br />
-                    <div class="ui two column stackable grid">
-                        <div class="column" id="defaultAddress">
-                            <h4 class="ui dividing header">{{ 'sylius.ui.default_address'|trans }}</h4>
-                            {% include '@SyliusAdmin/Common/_address.html.twig' with {'address': customer.defaultAddress} %}
-                        </div>
-                    </div>
-                {% endif %}
-            </div>
-            <div class="extra content">
-                <a href="mailto:{{ customer.email }}">
-                    <i class="envelope icon"></i> {{ customer.email }}
-                </a>
             </div>
         </div>
-    </div>
-    <div class="six wide column" id="statistics">
-        {{ render(path('sylius_admin_customer_orders_statistics', {'customerId': customer.id})) }}
+        <div class="content">
+            <div id="subscribed-to-newsletter">
+                <i class="{{ customer.subscribedToNewsletter ? 'green checkmark' : 'red remove' }} icon"></i>
+                {{ 'sylius.ui.subscribed_to_newsletter'|trans }}
+            </div>
+            {% if customer.user is not null %}
+                {% set user = customer.user %}
+                <div id="verified-email">
+                    <i class="{{ user.verified ? 'green checkmark' : 'red remove' }} icon"></i>
+                    {{ 'sylius.ui.email_verified'|trans }}
+                </div>
+                <br />
+                {{ buttons.default(path('sylius_admin_impersonate_user', {'username': user.emailCanonical}), 'sylius.ui.impersonate', 'impersonate', 'unhide', 'blue') }}
+            {% endif %}
+        </div>
+        <div class="extra content">
+            <a href="mailto:{{ customer.email }}">
+                <i class="envelope icon"></i> {{ customer.email }}
+            </a>
+            {% if customer.phoneNumber is not null %}
+                <div id="phone-number">
+                    <i class="phone icon"></i> {{ customer.phoneNumber }}
+                </div>
+            {% endif %}
+        </div>
     </div>
 </div>

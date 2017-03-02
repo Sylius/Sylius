@@ -1,0 +1,13 @@
+{% import "@SyliusAdmin/Common/Macro/money.html.twig" as money %}
+
+<div class="ui segment" id="statistics">
+    {% if statistics.perChannelsStatistics is not empty %}
+        <div class="ui accordion">
+            {% for statistic in statistics.perChannelsStatistics %}
+                {% include '@SyliusAdmin/Customer/Show/Statistics/_perChannel.html.twig' %}
+            {% endfor %}
+        </div>
+    {% else %}
+        <h4>{{ 'sylius.ui.this_customer_has_not_placed_any_orders_yet'|trans }}</h4>
+    {% endif %}
+</div>

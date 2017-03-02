@@ -37,6 +37,11 @@ interface ShowPageInterface extends PageInterface
     /**
      * @return string
      */
+    public function getCustomerPhoneNumber();
+
+    /**
+     * @return string
+     */
     public function getCustomerName();
 
     /**
@@ -92,11 +97,6 @@ interface ShowPageInterface extends PageInterface
      * @return bool
      */
     public function hasCustomerPlacedAnyOrders();
-
-    /**
-     * @return int
-     */
-    public function getOverallOrdersCount();
 
     /**
      * @param string $channelName

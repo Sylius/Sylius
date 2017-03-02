@@ -104,11 +104,12 @@ final class CustomerContext implements Context
 
     /**
      * @Given the store has customer :email with name :fullName since :since
+     * @Given the store has customer :email with name :fullName and phone number :phoneNumber since :since
      */
-    public function theStoreHasCustomerWithNameAndRegistrationDate($email, $fullName, $since)
+    public function theStoreHasCustomerWithNameAndRegistrationDate($email, $fullName, $phoneNumber = null, $since)
     {
         $names = explode(' ', $fullName);
-        $customer = $this->createCustomer($email, $names[0], $names[1], new \DateTime($since));
+        $customer = $this->createCustomer($email, $names[0], $names[1], new \DateTime($since), $phoneNumber);
 
         $this->customerRepository->add($customer);
     }
@@ -199,17 +200,24 @@ final class CustomerContext implements Context
      * @param string|null $firstName
      * @param string|null $lastName
      * @param \DateTime|null $createdAt
+     * @param string|null $phoneNumber
      *
      * @return CustomerInterface
      */
-    private function createCustomer($email, $firstName = null, $lastName = null, \DateTime $createdAt = null)
-    {
+    private function createCustomer(
+        $email,
+        $firstName = null,
+        $lastName = null,
+        \DateTime $createdAt = null,
+        $phoneNumber = null
+    ) {
         /** @var CustomerInterface $customer */
         $customer = $this->customerFactory->createNew();
 
         $customer->setFirstName($firstName);
         $customer->setLastName($lastName);
         $customer->setEmail($email);
+        $customer->setPhoneNumber($phoneNumber);
         if (null !== $createdAt) {
             $customer->setCreatedAt($createdAt);
         }
