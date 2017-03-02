@@ -246,9 +246,12 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
         return false !== strpos($this->getElement('currency')->getText(), $currencyCode);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function confirmOrder()
     {
-        $this->getDocument()->pressButton('Place order');
+        $this->getElement('confirm_button')->press();
     }
 
     public function changeAddress()
@@ -320,13 +323,14 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'addressing_step_label' => '.steps a:contains("Address")',
+            'base_order_total' => '#base-total',
             'billing_address' => '#sylius-billing-address',
+            'confirm_button' => 'form button',
             'currency' => '#sylius-order-currency-code',
             'extra_notes' =>'#sylius_checkout_complete_notes',
             'items_table' => '#sylius-order',
             'locale' => '#sylius-order-locale-name',
             'order_total' => 'td:contains("Total")',
-            'base_order_total' => '#base-total',
             'payment_method' => '#sylius-payment-method',
             'payment_step_label' => '.steps a:contains("Payment")',
             'product_row' => 'tbody tr:contains("%name%")',

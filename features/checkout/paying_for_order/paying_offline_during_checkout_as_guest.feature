@@ -6,6 +6,7 @@ Feature: Paying offline during checkout as guest
 
     Background:
         Given the store operates on a single channel in "United States"
+        And that channel allows to shop using "English (United States)" and "French (France)" locales
         And the store has a product "PHP T-Shirt" priced at "$19.99"
         And the store ships everywhere for free
         And the store allows paying offline
@@ -19,3 +20,10 @@ Feature: Paying offline during checkout as guest
         And I choose "Offline" payment method
         And I confirm my order
         Then I should see the thank you page
+
+    @ui
+    Scenario: Successfully placing an order using custom locale
+        Given I have product "PHP T-Shirt" in the cart
+        When I proceed through checkout process in the "French (France)" locale
+        And I confirm my order
+        Then I should see the thank you page in "French (France)"

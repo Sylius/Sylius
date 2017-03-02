@@ -389,6 +389,13 @@ From now on it won't compute every possible permutation of fallback locales from
       translator: { fallbacks: ["%locale%", "en"] }
   ```
 
+* Payum routes were made independent of the current locale. Add the following code to `app/config/routing.yml`:
+
+  ```yaml
+  sylius_shop_payum:
+      resource: "@SyliusShopBundle/Resources/config/routing/payum.yml"
+  ```
+
 ### Security
 
 * Firewalls configuration was changed to provide better CSRF protection and turn on remember me feature, update your `app/config/security.yml`:
