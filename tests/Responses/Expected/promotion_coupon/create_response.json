@@ -1,0 +1,15 @@
+{
+    "id": @integer@,
+    "code": "1234",
+    "used": 0,
+    "createdAt": "@string@.isDateTime()",
+    "updatedAt": "@string@.isDateTime()",
+    "_links": {
+        "self": {
+            "href": "\/api\/v1\/promotions\/Holiday\/coupons\/1234"
+        },
+        "promotion": {
+            "href": "\/api\/v1\/promotions\/Holiday"
+        }
+    }
+}

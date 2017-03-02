@@ -43,7 +43,6 @@ sylius_api_product_variant_update:
                 method: findOneByCode
                 arguments: [$code]
 
-
 sylius_api_product_variant_delete:
     path: /{code}
     methods: [DELETE]
@@ -56,7 +55,6 @@ sylius_api_product_variant_delete:
                 method: findOneByCode
                 arguments: [$code]
             csrf_protection: false
-
 
 sylius_api_product_variant_show:
     path: /{code}

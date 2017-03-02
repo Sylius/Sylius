@@ -1,0 +1,18 @@
+{
+    "id": @integer@,
+    "code": "CAE14",
+    "usageLimit": 30,
+    "used": 3,
+    "expiresAt": "@string@.isDateTime()",
+    "createdAt": "@string@.isDateTime()",
+    "updatedAt": "@string@.isDateTime()",
+    "perCustomerUsageLimit": 1,
+    "_links": {
+        "self": {
+            "href": "\/api\/v1\/promotions\/Holiday\/coupons\/CAE14"
+        },
+        "promotion": {
+            "href": "\/api\/v1\/promotions\/Holiday"
+        }
+    }
+}

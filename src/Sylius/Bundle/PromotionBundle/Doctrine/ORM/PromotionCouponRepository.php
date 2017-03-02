@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\PromotionBundle\Doctrine\ORM;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Repository\PromotionCouponRepositoryInterface;
 
 /**
@@ -41,6 +42,22 @@ class PromotionCouponRepository extends EntityRepository implements PromotionCou
             ->setParameter('codeLength', $codeLength)
             ->getQuery()
             ->getSingleScalarResult()
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findOneByCodeAndPromotionCode($code, $promotionCode)
+    {
+        return $this->createQueryBuilder('o')
+            ->leftJoin('o.promotion', 'promotion')
+            ->where('promotion.code = :promotionCode')
+            ->andWhere('o.code = :code')
+            ->setParameter('promotionCode', $promotionCode)
+            ->setParameter('code', $code)
+            ->getQuery()
+            ->getOneOrNullResult()
         ;
     }
 }

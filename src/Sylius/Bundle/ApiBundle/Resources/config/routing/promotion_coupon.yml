@@ -9,8 +9,36 @@ sylius_api_promotion_coupon_index:
         _sylius:
             serialization_version: $version
             serialization_groups: [Default]
+            section: api
             criteria:
                 promotion: $promotionCode
+
+sylius_api_promotion_coupon_create:
+    path: /
+    methods: [POST]
+    defaults:
+        _controller: sylius.controller.promotion_coupon:createAction
+        _sylius:
+            serialization_version: $version
+            section: api
+            factory:
+                method: createForPromotion
+                arguments:
+                  - expr:service('sylius.repository.promotion').findOneByCode($promotionCode)
+            criteria:
+                promotion: $promotionCode
+
+sylius_api_promotion_coupon_update:
+    path: /{code}
+    methods: [PUT, PATCH]
+    defaults:
+        _controller: sylius.controller.promotion_coupon:updateAction
+        _sylius:
+            serialization_version: $version
+            section: api
+            repository:
+                method: findOneByCodeAndPromotionCode
+                arguments: [$code, $promotionCode]
 
 sylius_api_promotion_coupon_show:
     path: /{code}
@@ -20,3 +48,20 @@ sylius_api_promotion_coupon_show:
         _sylius:
             serialization_version: $version
             serialization_groups: [Default, Detailed]
+            section: api
+            repository:
+                method: findOneByCodeAndPromotionCode
+                arguments: [$code, $promotionCode]
+
+sylius_api_promotion_coupon_delete:
+    path: /{code}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.promotion_coupon:deleteAction
+        _sylius:
+            serialization_version: $version
+            section: api
+            csrf_protection: false
+            repository:
+                method: findOneByCodeAndPromotionCode
+                arguments: [$code, $promotionCode]
