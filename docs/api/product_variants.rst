@@ -248,11 +248,11 @@ Here is an example of creating a product variant with additional data for the pr
                             "name": "Double Theme Mug"
                     }
                 },
-                "channelPricings": [
-                    {
-                        "price": "1243"
+                "channelPricings": {
+                    "US_WEB": {
+                        "price": "1243",
                     }
-                ],
+                },
                 "tracked": true,
                 "onHand": 5,
                 "taxCategory": "other",
@@ -325,28 +325,12 @@ Exemplary Response
                     "href": "\/api\/v1\/shipping-categories\/default"
                 }
             }
-        },
-        "channelPricings": [
-            {
-                "channel": {
-                    "id": 1,
-                    "code": "US_WEB",
-                    "name": "US Web Store",
-                    "hostname": "localhost",
-                    "color": "DarkSeaGreen",
-                    "createdAt": "2017-02-27T09:12:16+0100",
-                    "updatedAt": "2017-02-27T09:12:16+0100",
-                    "enabled": true,
-                    "taxCalculationStrategy": "order_items_based",
-                    "_links": {
-                        "self": {
-                            "href": "\/api\/v1\/channels\/US_WEB"
-                        }
-                    }
-                },
+        "channelPricings": {
+            "US_WEB": {
+                "channelCode": "US_WEB",
                 "price": 124300
             }
-        ],
+        },
         "_links": {
             "self": {
                 "href": "\/api\/v1\/products\/MUG_TH\/variants\/double-theme-mug"
@@ -538,20 +522,13 @@ Exemplary Response
                             }
                         }
                     },
-                    "channelPricings": [
-                        {
-                            "channel": {
-                                "id": 1,
-                                "code": "US_WEB",
-                                "_links": {
-                                    "self": {
-                                        "href": "\/api\/v1\/channels\/US_WEB"
-                                    }
-                                }
-                            },
-                            "price": 124300
+                    "tracked": false,
+                    "channelPricings": {
+                        "US_WEB": {
+                            "channelCode": "US_WEB",
+                            "price": 1200
                         }
-                    ],
+                    },
                     "_links": {
                         "self": {
                             "href": "\/api\/v1\/products\/MUG_TH\/variants\/double-theme-mug"
@@ -626,12 +603,12 @@ To fully update the product variant with ``code = double-theme-mug`` for the pro
                         "name": "Monster mug"
                     }
                 },
-                "channelPricings": [
-                    {
-                        "price": 543
-                    }
-                ],
                 "version": 1,
+                "channelPricings": {
+                    "US_WEB": {
+                        "price": 54
+                    }
+                },
                 "tracked": true,
                 "onHand": 3,
                 "taxCategory": "other",

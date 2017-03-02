@@ -168,6 +168,8 @@ final class ProductVariantSpec extends ObjectBehavior
 
     function it_adds_and_removes_channel_pricings(ChannelPricingInterface $channelPricing)
     {
+        $channelPricing->getChannelCode()->willReturn('WEB');
+
         $channelPricing->setProductVariant($this)->shouldBeCalled();
         $this->addChannelPricing($channelPricing);
         $this->hasChannelPricing($channelPricing)->shouldReturn(true);
@@ -181,12 +183,16 @@ final class ProductVariantSpec extends ObjectBehavior
         ChannelPricingInterface $firstChannelPricing,
         ChannelPricingInterface $secondChannelPricing
     ) {
+        $firstChannelPricing->getChannelCode()->willReturn('WEB');
+        $secondChannelPricing->getChannelCode()->willReturn('MOB');
+
         $firstChannelPricing->setProductVariant($this)->shouldBeCalled();
         $secondChannelPricing->setProductVariant($this)->shouldBeCalled();
+
         $this->addChannelPricing($firstChannelPricing);
         $this->addChannelPricing($secondChannelPricing);
 
-        $this->getChannelPricings()->shouldBeSameAs(new ArrayCollection([$firstChannelPricing, $secondChannelPricing]));
+        $this->getChannelPricings()->shouldBeSameAs(new ArrayCollection(['WEB' => $firstChannelPricing, 'MOB' => $secondChannelPricing]));
     }
 
     function it_checks_if_contains_channel_pricing_for_given_channel(
@@ -194,10 +200,14 @@ final class ProductVariantSpec extends ObjectBehavior
         ChannelInterface $secondChannel,
         ChannelPricingInterface $firstChannelPricing
     ) {
+        $firstChannelPricing->getChannelCode()->willReturn('WEB');
+        $firstChannel->getCode()->willReturn('WEB');
+        $secondChannel->getCode()->willReturn('MOB');
+
         $firstChannelPricing->setProductVariant($this)->shouldBeCalled();
         $this->addChannelPricing($firstChannelPricing);
 
-        $firstChannelPricing->getChannel()->willReturn($firstChannel);
+        $firstChannelPricing->getChannelCode()->willReturn($firstChannel);
 
         $this->hasChannelPricingForChannel($firstChannel)->shouldReturn(true);
         $this->hasChannelPricingForChannel($secondChannel)->shouldReturn(false);
@@ -207,10 +217,13 @@ final class ProductVariantSpec extends ObjectBehavior
         ChannelInterface $channel,
         ChannelPricingInterface $channelPricing
     ) {
+        $channelPricing->getChannelCode()->willReturn('WEB');
+        $channel->getCode()->willReturn('WEB');
+
         $channelPricing->setProductVariant($this)->shouldBeCalled();
         $this->addChannelPricing($channelPricing);
 
-        $channelPricing->getChannel()->willReturn($channel);
+        $channelPricing->getChannelCode()->willReturn($channel);
 
         $this->getChannelPricingForChannel($channel)->shouldReturn($channelPricing);
     }
@@ -233,8 +246,8 @@ final class ProductVariantSpec extends ObjectBehavior
                 if (!$subject instanceof Collection || !$key instanceof Collection) {
                     return false;
                 }
-                for ($i = 0; $i < $subject->count(); $i++) {
-                    if ($subject->get($i) !== $key->get($i)->getWrappedObject()) {
+                foreach ($subject as $code => $value) {
+                    if ($value !== $key->get($code)->getWrappedObject()) {
                         return false;
                     }
                 }

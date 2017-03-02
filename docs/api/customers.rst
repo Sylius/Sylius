@@ -753,11 +753,12 @@ Exemplary Response
                                 "onHold":0,
                                 "onHand":6,
                                 "tracked":false,
-                                "channelPricings":[
+                                "channelPricings":{
                                     "US_WEB": {
+                                        "channelCode": "US_WEB",
                                         "price":101
                                     }
-                                ],
+                                },
                                 "_links":{
                                     "self":{
                                         "href":"\/api\/v1\/products\/MUG\/variants\/MEDIUM_MUG_CUP"
@@ -856,11 +857,12 @@ Exemplary Response
                                 "onHold":0,
                                 "onHand":5,
                                 "tracked":false,
-                                "channelPricings":[
+                                "channelPricings":{
                                     "US_WEB": {
+                                        "channelCode": "US_WEB",
                                         "price":840
                                     }
-                                ],
+                                },
                                 "_links":{
                                     "self":{
                                         "href":"\/api\/v1\/products\/cd843634-6c85-3be0-9c84-7ce7786a394d\/variants\/cd843634-6c85-3be0-9c84-7ce7786a394d-variant-0"
@@ -968,11 +970,12 @@ Exemplary Response
                                 "onHold":0,
                                 "onHand":7,
                                 "tracked":false,
-                                "channelPricings":[
+                                "channelPricings":{
                                     "US_WEB": {
+                                        "channelCode":"US_WEB"
                                         "price":660
                                     }
-                                ],
+                                },
                                 "_links":{
                                     "self":{
                                         "href":"\/api\/v1\/products\/c38fef5d-ddf9-31e2-8e05-71618605f381\/variants\/c38fef5d-ddf9-31e2-8e05-71618605f381-variant-2"
@@ -1044,11 +1047,12 @@ Exemplary Response
                                 "onHold":0,
                                 "onHand":2,
                                 "tracked":false,
-                                "channelPricings":[
+                                "channelPricings":{
                                     "US_WEB": {
+                                        "channelCode":"US_WEB",
                                         "price":430
                                     }
-                                ],
+                                },
                                 "_links":{
                                     "self":{
                                         "href":"\/api\/v1\/products\/4d4ba2e2-7138-3256-a88f-0caa5dc3bb81\/variants\/4d4ba2e2-7138-3256-a88f-0caa5dc3bb81-variant-1"
@@ -1147,11 +1151,12 @@ Exemplary Response
                                 "onHold":0,
                                 "onHand":7,
                                 "tracked":false,
-                                "channelPricings":[
+                                "channelPricings":{
                                     "US_WEB": {
+                                        "channelCode":"US_WEB",
                                         "price":665
                                     }
-                                ],
+                                },
                                 "_links":{
                                     "self":{
                                         "href":"\/api\/v1\/products\/6864f798-e0e5-339d-91c9-e6036befa414\/variants\/6864f798-e0e5-339d-91c9-e6036befa414-variant-0"

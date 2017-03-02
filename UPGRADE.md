@@ -173,6 +173,8 @@ You can bring back previous configuration by overriding current routing with you
   * `findCartForSelectingShipping($id): ?OrderInterface`
   * `findCartForSelectingPayment($id): ?OrderInterface`
 
+* `Channel` relation was removed from `ChannelPricing` model. `Channel::$code` should be used instead.
+
 ### Currency / CurrencyBundle
 
 * The following classes were removed due to being no longer used in current implementation:

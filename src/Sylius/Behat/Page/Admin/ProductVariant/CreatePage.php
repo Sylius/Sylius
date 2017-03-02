@@ -151,7 +151,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             'price_calculator' => '#sylius_product_variant_pricingCalculator',
             'shipping_category' => '#sylius_product_variant_shippingCategory',
             'prices_validation_message' => '#sylius_product_variant_channelPricings ~ .sylius-validation-error',
-            'first_price_validation_message' => '#sylius_product_variant_channelPricings_0 .sylius-validation-error',
+            'first_price_validation_message' => '#sylius_product_variant_channelPricings [data-form-collection="item"]:first-child .sylius-validation-error',
             'weight' => '#sylius_product_variant_weight',
             'width' => '#sylius_product_variant_width',
         ]);

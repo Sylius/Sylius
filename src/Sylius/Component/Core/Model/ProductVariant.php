@@ -341,10 +341,8 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
      */
     public function getChannelPricingForChannel(ChannelInterface $channel)
     {
-        foreach ($this->channelPricings as $channelPricing) {
-            if ($channel === $channelPricing->getChannel()) {
-                return $channelPricing;
-            }
+        if ($this->channelPricings->containsKey($channel->getCode())) {
+            return $this->channelPricings->get($channel->getCode());
         }
 
         return null;
@@ -373,7 +371,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     {
         if (!$this->hasChannelPricing($channelPricing)) {
             $channelPricing->setProductVariant($this);
-            $this->channelPricings->add($channelPricing);
+            $this->channelPricings->set($channelPricing->getChannelCode(), $channelPricing);
         }
     }
 
@@ -384,7 +382,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     {
         if ($this->hasChannelPricing($channelPricing)) {
             $channelPricing->setProductVariant(null);
-            $this->channelPricings->removeElement($channelPricing);
+            $this->channelPricings->remove($channelPricing->getChannelCode());
         }
     }
 

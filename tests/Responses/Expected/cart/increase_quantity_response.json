@@ -38,19 +38,12 @@
                     }
                 },
                 "tracked": false,
-                "channelPricings": [
-                    {
-                        "channel": {
-                            "code": "WEB",
-                            "_links": {
-                                "self": {
-                                    "href": "\/api\/v1\/channels\/WEB"
-                                }
-                            }
-                        },
+                "channelPricings": {
+                    "WEB": {
+                        "channelCode": "WEB",
                         "price": 20
                     }
-                ]
+                }
             },
             "_links": {
                 "order": {
@@ -91,19 +84,12 @@
                     }
                 },
                 "tracked": true,
-                "channelPricings": [
-                    {
-                        "channel": {
-                            "code": "WEB",
-                            "_links": {
-                                "self": {
-                                    "href": "\/api\/v1\/channels\/WEB"
-                                }
-                            }
-                        },
+                "channelPricings": {
+                    "WEB": {
+                        "channelCode": "WEB",
                         "price": 20
                     }
-                ]
+                }
             },
             "_links": {
                 "order": {

@@ -173,27 +173,12 @@ Exemplary Response
                     "on_hold":0,
                     "on_hand":10,
                     "tracked":false,
-                    "channelPricings":[
-                        {
-                            "channel":{
-                                "id":1,
-                                "code":"US_WEB",
-                                "name":"US Web Store",
-                                "hostname":"localhost",
-                                "color":"MediumPurple",
-                                "createdAt":"2017-02-14T11:10:02+0100",
-                                "updatedAt":"2017-02-14T11:10:02+0100",
-                                "enabled":true,
-                                "taxCalculationStrategy":"order_items_based",
-                                "_links":{
-                                    "self":{
-                                        "href":"\/api\/v1\/channels\/1"
-                                    }
-                                }
-                            },
+                    "channelPricings":{
+                        "US_WEB":{
+                            "channelCode": "US_WEB",
                             "price":100000
                         }
-                    ]
+                    }
                 },
                 "_links":{
                     "product":{
@@ -502,27 +487,12 @@ Exemplary Response
                     "on_hold":0,
                     "on_hand":10,
                     "tracked":false,
-                    "channelPricings":[
-                        {
-                            "channel":{
-                                "id":1,
-                                "code":"US_WEB",
-                                "name":"US Web Store",
-                                "hostname":"localhost",
-                                "color":"MediumPurple",
-                                "createdAt":"2017-02-14T11:10:02+0100",
-                                "updatedAt":"2017-02-14T11:10:02+0100",
-                                "enabled":true,
-                                "taxCalculationStrategy":"order_items_based",
-                                "_links":{
-                                    "self":{
-                                        "href":"\/api\/v1\/channels\/1"
-                                    }
-                                }
-                            },
+                    "channelPricings":{
+                        "US_WEB":{
+                            "channelCode": "US_WEB",
                             "price":100000
                         }
-                    ]
+                    }
                 },
                 "_links":{
                     "product":{
@@ -813,27 +783,12 @@ To check the fully constructed cart with `id = 21`, use the following command:
                     "on_hold":0,
                     "on_hand":10,
                     "tracked":false,
-                    "channelPricings":[
-                        {
-                            "channel":{
-                                "id":1,
-                                "code":"US_WEB",
-                                "name":"US Web Store",
-                                "hostname":"localhost",
-                                "color":"MediumPurple",
-                                "createdAt":"2017-02-14T11:10:02+0100",
-                                "updatedAt":"2017-02-14T11:10:02+0100",
-                                "enabled":true,
-                                "taxCalculationStrategy":"order_items_based",
-                                "_links":{
-                                    "self":{
-                                        "href":"\/api\/v1\/channels\/1"
-                                    }
-                                }
-                            },
+                    "channelPricings":{
+                        "US_WEB":{
+                            "channelCode":"US_WEB",
                             "price":100000
                         }
-                    ]
+                    }
                 },
                 "_links":{
                     "product":{
