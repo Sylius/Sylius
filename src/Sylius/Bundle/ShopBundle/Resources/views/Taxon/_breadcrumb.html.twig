@@ -7,7 +7,7 @@
         {% if parent.isRoot() %}
             <div class="section">{{ parent.name }}</div>
         {% else %}
-            <a href="{{ path('sylius_shop_product_index', {'slug': parent.slug}) }}" class="section">{{ parent.name }}</a>
+            <a href="{{ path('sylius_shop_product_index', {'slug': parent.slug, '_locale': parent.translation.locale}) }}" class="section">{{ parent.name }}</a>
         {% endif %}
     <div class="divider"> / </div>
     {% endfor %}

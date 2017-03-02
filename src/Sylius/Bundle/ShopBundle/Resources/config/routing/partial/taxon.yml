@@ -12,7 +12,7 @@ sylius_shop_partial_taxon_show_by_slug:
                 method: findOneBySlug
                 arguments:
                     - $slug
-                    - "expr:service('sylius.context.channel').getChannel().getDefaultLocale().getCode()"
+                    - "expr:service('sylius.context.locale').getLocaleCode()"
     requirements:
         slug: .+
 
@@ -27,3 +27,4 @@ sylius_shop_partial_taxon_index_by_code:
                 method: findChildren
                 arguments:
                     - $code
+                    - "expr:service('sylius.context.locale').getLocaleCode()"

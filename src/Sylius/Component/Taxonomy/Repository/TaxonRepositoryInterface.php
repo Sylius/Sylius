@@ -25,10 +25,11 @@ interface TaxonRepositoryInterface extends RepositoryInterface
 {
     /**
      * @param string $parentCode
+     * @param string $locale
      *
      * @return TaxonInterface[]
      */
-    public function findChildren($parentCode);
+    public function findChildren($parentCode, $locale);
 
     /**
      * @return TaxonInterface[]
