@@ -206,14 +206,14 @@ Exemplary Response
 Getting a Single Tax Category
 -----------------------------
 
-To retrieve the details of a tax category you will need to call the ``/api/v1/tax-categories/code`` endpoint with the ``GET`` method.
+To retrieve the details of a tax category you will need to call the ``/api/v1/tax-categories/{code}`` endpoint with the ``GET`` method.
 
 Definition
 ^^^^^^^^^^
 
 .. code-block:: text
 
-    GET /api/v1/tax-categories/code
+    GET /api/v1/tax-categories/{code}
 
 +---------------+----------------+--------------------------------------+
 | Parameter     | Parameter type | Description                          |
@@ -369,7 +369,7 @@ Exemplary Response
 Updating a Tax Category
 -----------------------
 
-To fully update a tax category you will need to call the ``/api/v1/tax-categories/code`` endpoint with the ``PUT`` method.
+To fully update a tax category you will need to call the ``/api/v1/tax-categories/{code}`` endpoint with the ``PUT`` method.
 
 Definition
 ^^^^^^^^^^
@@ -413,7 +413,7 @@ Exemplary Response
 
 .. code-block:: text
 
-	STATUS: 204 No Content
+    STATUS: 204 No Content
 
 If you try to perform a full tax category update without all the required fields specified, you will receive a ``400 Bad Request`` error.
 
@@ -453,7 +453,7 @@ Exemplary Response
     }
 
 
-To update a tax category partially you will need to call the ``/api/v1/tax-categories/code`` endpoint with the ``PATCH`` method.
+To update a tax category partially you will need to call the ``/api/v1/tax-categories/{code}`` endpoint with the ``PATCH`` method.
 
 Definition
 ^^^^^^^^^^
@@ -497,7 +497,7 @@ Exemplary Response
 Deleting a Tax Category
 -----------------------
 
-To delete a tax category you will need to call the ``/api/v1/tax-categories/code`` endpoint with the ``DELETE`` method.
+To delete a tax category you will need to call the ``/api/v1/tax-categories/{code}`` endpoint with the ``DELETE`` method.
 
 Definition
 ^^^^^^^^^^

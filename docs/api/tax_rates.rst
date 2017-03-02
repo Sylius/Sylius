@@ -38,7 +38,7 @@ If you request a tax rate via API, you will receive an object with the following
 Getting a Single Tax Rate
 --------------------------
 
-To retrieve the details of a tax rate you will need to call the ``/api/v1/tax-rates/code`` endpoint with the ``GET`` method.
+To retrieve the details of a tax rate you will need to call the ``/api/v1/tax-rates/{code}`` endpoint with the ``GET`` method.
 
 Definition
 ^^^^^^^^^^
@@ -68,7 +68,7 @@ To see the details of the tax rate with ``code = clothing_sales_tax_7`` use the 
 
 .. note::
 
-    The *clothing_sales_tax_7* is just an example. Your value can be different.
+    The *clothing_sales_tax_7* code is just an example. Your value can be different.
 
 Exemplary Response
 ^^^^^^^^^^^^^^^^^^

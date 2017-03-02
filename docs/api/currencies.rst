@@ -128,7 +128,7 @@ Exemplary Response
 Getting a Single Currency
 -------------------------
 
-To retrieve the details of a currency you will need to call the ``/api/v1/currencies/currencyCode`` endpoint with the ``GET`` method.
+To retrieve the details of a currency you will need to call the ``/api/v1/currencies/{code}`` endpoint with the ``GET`` method.
 
 Definition
 ^^^^^^^^^^
@@ -275,7 +275,7 @@ Exemplary Response
 Deleting a Currency
 -------------------
 
-To delete a currency you will need to call the ``/api/v1/currencies/currencyCode`` endpoint with the ``DELETE`` method.
+To delete a currency you will need to call the ``/api/v1/currencies/{code}`` endpoint with the ``DELETE`` method.
 
 Definition
 ^^^^^^^^^^

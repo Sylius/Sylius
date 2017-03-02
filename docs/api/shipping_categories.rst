@@ -31,9 +31,7 @@ If you request for a more detailed data, you will receive an object with followi
 
 .. note::
 
-    Read more about `Shipping Categories`__
-
-__ http://docs.sylius.org/en/latest/components/Shipping/models.html#shippingcategory
+    Read more about :doc:`Shipping Categories in the component docs</components/Shipping/models>`.
 
 Collection of Shipping Categories
 ---------------------------------

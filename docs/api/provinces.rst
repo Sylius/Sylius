@@ -38,19 +38,19 @@ If you request for more detailed data, you will receive an object with the follo
 
 .. note::
 
-    Read more about :doc:`Provinces </components/Addressing/models>`.
+    Read more about :doc:`Provinces in the component docs</components/Addressing/models>`.
 
 Getting a Single Province
 -------------------------
 
-To retrieve the details of a specific province you will need to call the ``/api/v1/countries/countryCode/provinces/code`` endpoint with the ``GET`` method.
+To retrieve the details of a specific province you will need to call the ``/api/v1/countries/{countryCode}/provinces/{code}`` endpoint with the ``GET`` method.
 
 Definition
 ^^^^^^^^^^
 
 .. code-block:: text
 
-    GET /api/v1/codes/{countryCode}/provinces/{code}
+    GET /api/v1/countries/{countryCode}/provinces/{code}
 
 +---------------+----------------+---------------------------------------------------+
 | Parameter     | Parameter type | Description                                       |
@@ -103,7 +103,7 @@ Exemplary Response
 Deleting a Province
 -------------------
 
-To delete a province you will need to call the ``/api/v1/countries/countryCode/provinces/code`` endpoint with the ``DELETE`` method.
+To delete a province you will need to call the ``/api/v1/countries/{countryCode}/provinces/{code}`` endpoint with the ``DELETE`` method.
 
 Definition
 ^^^^^^^^^^
