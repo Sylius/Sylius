@@ -25,3 +25,4 @@
 * :doc:`/api/tax_rates`
 * :doc:`/api/taxons`
 * :doc:`/api/zones`
+* :doc:`/api/sorting_and_filtration`
