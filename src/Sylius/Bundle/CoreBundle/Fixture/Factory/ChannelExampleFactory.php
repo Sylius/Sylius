@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
+use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Factory\ChannelFactoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -42,6 +43,11 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
     private $currencyRepository;
 
     /**
+     * @var RepositoryInterface
+     */
+    private $zoneRepository;
+
+    /**
      * @var \Faker\Generator
      */
     private $faker;
@@ -55,15 +61,18 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
      * @param ChannelFactoryInterface $channelFactory
      * @param RepositoryInterface $localeRepository
      * @param RepositoryInterface $currencyRepository
+     * @param RepositoryInterface $zoneRepository
      */
     public function __construct(
         ChannelFactoryInterface $channelFactory,
         RepositoryInterface $localeRepository,
-        RepositoryInterface $currencyRepository
+        RepositoryInterface $currencyRepository,
+        RepositoryInterface $zoneRepository
     ) {
         $this->channelFactory = $channelFactory;
         $this->localeRepository = $localeRepository;
         $this->currencyRepository= $currencyRepository;
+        $this->zoneRepository = $zoneRepository;
 
         $this->faker = \Faker\Factory::create();
         $this->optionsResolver = new OptionsResolver();
@@ -84,6 +93,7 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
         $channel->setHostname($options['hostname']);
         $channel->setEnabled($options['enabled']);
         $channel->setColor($options['color']);
+        $channel->setDefaultTaxZone($options['default_tax_zone']);
         $channel->setTaxCalculationStrategy($options['tax_calculation_strategy']);
         $channel->setThemeName($options['theme_name']);
         $channel->setContactEmail($options['contact_email']);
@@ -123,6 +133,9 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
                 return $this->faker->boolean(90);
             })
             ->setAllowedTypes('enabled', 'bool')
+            ->setDefault('default_tax_zone', LazyOption::randomOne($this->zoneRepository))
+            ->setAllowedTypes('default_tax_zone', ['null', 'string', ZoneInterface::class])
+            ->setNormalizer('default_tax_zone', LazyOption::findOneBy($this->zoneRepository, 'code'))
             ->setDefault('tax_calculation_strategy', 'order_items_based')
             ->setAllowedTypes('tax_calculation_strategy', 'string')
             ->setDefault('default_locale', function (Options $options) {
