@@ -36,12 +36,6 @@ final class FilesystemRequirements extends RequirementCollection
                 true,
                 $translator->trans('sylius.installer.filesystem.logs.help', ['%path%' => $logDir])
             ))
-            ->add(new Requirement(
-                $translator->trans('sylius.installer.filesystem.parameters.header', []),
-                is_writable($root.'/config/parameters.yml'),
-                true,
-                $translator->trans('sylius.installer.filesystem.parameters.help', ['%path%' => $root.'/config/parameters.yml'])
-            ))
         ;
     }
 }
