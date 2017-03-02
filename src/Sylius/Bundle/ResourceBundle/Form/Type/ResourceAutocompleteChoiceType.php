@@ -79,6 +79,13 @@ class ResourceAutocompleteChoiceType extends AbstractType
         $view->vars['choice_name'] = $options['choice_name'];
         $view->vars['choice_value'] = $options['choice_value'];
         $view->vars['placeholder'] = $options['placeholder'];
+        $view->vars['remote_route_parameters'] = $options['remote_route_parameters'];
+        $view->vars['remote_route'] = $options['remote_route'];
+        $view->vars['remote_criteria_name'] = $options['remote_criteria_name'];
+        $view->vars['remote_criteria_type'] = $options['remote_criteria_type'];
+        if (isset($options['remote_url'])) {
+            $view->vars['remote_url'] = $options['remote_url'];
+        }
     }
 
     /**
@@ -98,12 +105,22 @@ class ResourceAutocompleteChoiceType extends AbstractType
                 'repository' => function (Options $options) {
                     return $this->resourceRepositoryRegistry->get($options['resource']);
                 },
+                'remote_route' => '',
+                'remote_route_parameters' => [],
+                'remote_criteria_name' => 'name',
+                'remote_criteria_type' => 'contains',
             ])
+            ->setDefined('remote_url')
             ->setAllowedTypes('resource', ['string'])
             ->setAllowedTypes('multiple', ['bool'])
             ->setAllowedTypes('choice_name', ['string'])
             ->setAllowedTypes('choice_value', ['string'])
             ->setAllowedTypes('placeholder', ['string'])
+            ->setAllowedTypes('remote_route', ['string'])
+            ->setAllowedTypes('remote_route_parameters', ['array'])
+            ->setAllowedTypes('remote_url', ['string'])
+            ->setAllowedTypes('remote_criteria_name', ['string'])
+            ->setAllowedTypes('remote_criteria_type', ['string'])
         ;
     }
 
