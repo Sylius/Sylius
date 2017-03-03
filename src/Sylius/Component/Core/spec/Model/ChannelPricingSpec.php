@@ -81,4 +81,11 @@ final class ChannelPricingSpec extends ObjectBehavior
         $this->setOriginalPrice(2000);
         $this->isPriceReduced()->shouldReturn(false);
     }
+
+    function it_price_is_not_reduced_when_original_price_is_smaller_than_price()
+    {
+        $this->setPrice(2000);
+        $this->setOriginalPrice(1500);
+        $this->isPriceReduced()->shouldReturn(false);
+    }
 }
