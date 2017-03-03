@@ -78,6 +78,27 @@ In the example you can see how to create a simple Cart Quantity rule. It will ch
    **Rules** are just constraints that have to be fulfilled by an order to make the promotion **eligible**.
    To make something happen to the order you will need **Actions**.
 
+PromotionRules configuration reference
+''''''''''''''''''''''''''''''''''''''
+
+Each PromotionRule type has a very specific structure of its configuration array:
+
++-------------------------------+--------------------------------------------------------------------+
+| PromotionRule type            | Rule Configuration Array                                           |
++===============================+====================================================================+
+| ``cart_quantity``             | ``['count' => $count]``                                            |
++-------------------------------+--------------------------------------------------------------------+
+| ``item_total``                | ``[$channelCode => ['amount' => $amount]]``                        |
++-------------------------------+--------------------------------------------------------------------+
+| ``has_taxon``                 | ``['taxons' => $taxons]``                                          |
++-------------------------------+--------------------------------------------------------------------+
+| ``total_of_items_from_taxon`` | ``[$channelCode => ['taxon' => $taxonCode, 'amount' => $amount]]`` |
++-------------------------------+--------------------------------------------------------------------+
+| ``nth_order``                 | ``['nth' => $nth]``                                                |
++-------------------------------+--------------------------------------------------------------------+
+| ``contains_product``          | ``['product_code' => $productCode]``                               |
++-------------------------------+--------------------------------------------------------------------+
+
 Promotion Actions
 -----------------
 
@@ -121,6 +142,25 @@ And finally after you have an **PromotionAction** and a **PromotionRule** assign
 .. code-block:: php
 
    $this->container->get('sylius.repository.promotion')->add($promotion);
+
+PromotionActions configuration reference
+''''''''''''''''''''''''''''''''''''''''
+
+Each PromotionAction type has a very specific structure of its configuration array:
+
++----------------------------------+-----------------------------------------------------+
+| PromotionAction type             | Action Configuration Array                          |
++==================================+=====================================================+
+| ``order_fixed_discount``         | ``[$channelCode => ['amount' => $amount]]``         |
++----------------------------------+-----------------------------------------------------+
+| ``unit_fixed_discount``          | ``[$channelCode => ['amount' => $amount]]``         |
++----------------------------------+-----------------------------------------------------+
+| ``order_percentage_discount``    | ``['percentage' => $percentage]``                   |
++----------------------------------+-----------------------------------------------------+
+| ``unit_percentage_discount``     | ``[$channelCode => ['percentage' => $percentage]]`` |
++----------------------------------+-----------------------------------------------------+
+| ``shipping_percentage_discount`` | ``['percentage' => $percentage]``                   |
++----------------------------------+-----------------------------------------------------+
 
 Applying Promotions
 -------------------
