@@ -7,22 +7,28 @@
             "id": @integer@,
             "quantity": 1,
             "unitPrice": 2000,
-            "total": 2400,
+            "total": 2160,
             "units": [
                 {
                     "id": @integer@,
                     "adjustments": [
                         {
                             "id": @integer@,
+                            "type": "order_promotion",
+                            "label": "Holiday promotion",
+                            "amount": -200
+                        },
+                        {
+                            "id": @integer@,
                             "type": "tax",
                             "label": "EU Regular Tax 20% (20%)",
-                            "amount": 400
+                            "amount": 360
                         }
                     ],
-                    "adjustmentsTotal": 400
+                    "adjustmentsTotal": 160
                 }
             ],
-            "unitsTotal": 2400,
+            "unitsTotal": 2160,
             "adjustments": [],
             "adjustmentsTotal": 0,
             "variant": {
@@ -81,7 +87,7 @@
             }
         }
     ],
-    "itemsTotal": 2400,
+    "itemsTotal": 2160,
     "adjustments": [
         {
             "id": @integer@,
@@ -91,7 +97,7 @@
         }
     ],
     "adjustmentsTotal": 1000,
-    "total": 3400,
+    "total": 3160,
     "state": "new",
     "customer": {
         "id": @integer@,
@@ -111,7 +117,7 @@
         "id": @integer@,
         "code": "CHANNEL",
         "name": "Channel",
-        "description": "@string@",
+        "description": "Lorem ipsum",
         "hostname": "localhost",
         "color": "black",
         "createdAt": "@string@.isDateTime()",
@@ -165,7 +171,7 @@
                         "id": @integer@,
                         "code": "CHANNEL",
                         "name": "Channel",
-                        "description": "@string@",
+                        "description": "Lorem ipsum",
                         "hostname": "localhost",
                         "color": "black",
                         "createdAt": "@string@.isDateTime()",
@@ -185,8 +191,8 @@
                     }
                 }
             },
-            "amount": 3400,
-            "state": "completed",
+            "amount": 3160,
+            "state": "new",
             "_links": {
                 "self": {
                     "href": "@string@"

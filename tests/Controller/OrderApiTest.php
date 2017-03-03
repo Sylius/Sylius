@@ -81,6 +81,48 @@ final class OrderApiTest extends CheckoutApiTestCase
     /**
      * @test
      */
+    public function it_allows_to_get_an_order_with_promotion()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/checkout.yml');
+        $this->loadFixturesFromFile('resources/checkout_promotion.yml');
+
+        $orderId = $this->prepareOrder();
+
+        $this->client->request('GET', $this->getOrderUrl($orderId), [], [], static::$authorizedHeaderWithAccept);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'order/order_with_promotion_show_response', Response::HTTP_OK);
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_to_get_an_order_with_coupon_based_promotion()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/checkout.yml');
+        $this->loadFixturesFromFile('resources/checkout_coupon_based_promotion.yml');
+        $cartId = $this->createCart();
+
+        $this->addItemToCart($cartId);
+
+        $this->client->request('PATCH',  '/api/v1/carts/' . $cartId, [], [], static::$authorizedHeaderWithAccept, '{"promotionCoupon": "BANANAS"}');
+
+        $this->addressOrder($cartId);
+        $this->selectOrderShippingMethod($cartId);
+        $this->selectOrderPaymentMethod($cartId);
+        $this->completeOrder($cartId);
+
+        $this->client->request('GET', $this->getOrderUrl($cartId), [], [], static::$authorizedHeaderWithAccept);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'order/order_with_coupon_based_promotion_show_response', Response::HTTP_OK);
+    }
+
+    /**
+     * @test
+     */
     public function it_denies_canceling_an_order_for_non_authenticated_user()
     {
         $this->client->request('PUT', $this->getCancelUrl(-1));

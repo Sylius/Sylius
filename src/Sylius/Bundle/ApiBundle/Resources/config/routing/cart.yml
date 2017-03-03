@@ -21,6 +21,16 @@ sylius_api_cart_create:
             form: Sylius\Bundle\ApiBundle\Form\Type\OrderType
             serialization_groups: [DetailedCart]
 
+sylius_api_cart_update:
+    path: /{id}
+    methods: [PUT, PATCH]
+    defaults:
+        _controller: sylius.controller.order:updateAction
+        _sylius:
+            serialization_version: $version
+            form: Sylius\Bundle\ApiBundle\Form\Type\OrderPromotionCouponType
+            serialization_groups: [DetailedCart]
+
 sylius_api_cart_delete:
     path: /{id}
     methods: [DELETE]

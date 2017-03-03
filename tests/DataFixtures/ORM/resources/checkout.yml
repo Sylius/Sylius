@@ -13,36 +13,38 @@ Sylius\Component\Core\Model\Channel:
 
 Sylius\Component\Core\Model\Product:
     mug:
-        code: MUG
+        code: "MUG"
         channels: ["@channel"]
-        currentLocale: en_US
+        currentLocale: "en_US"
         currentTranslation: "@mug_translation"
 
 Sylius\Component\Core\Model\ProductTranslation:
     mug_translation:
-        slug: mug
-        locale: en_US
+        slug: "mug"
+        locale: "en_US"
         name: 'Mug'
         description: <paragraph(2)>
         translatable: "@mug"
 
 Sylius\Component\Core\Model\ProductVariant:
     mug_sw:
-        code: MUG_SW
+        code: "MUG_SW"
         product: "@mug"
-        currentLocale: en_US
+        currentLocale: "en_US"
         currentTranslation: "@sw_mug_translation"
         updatedAt: 2015-10-10
         channelPricings:
             CHANNEL: "@sw_mug_web_channel_pricing"
+        taxCategory: "@taxable_goods"
     hard_available_mug:
-        code: HARD_AVAILABLE_MUG
+        code: "HARD_AVAILABLE_MUG"
         product: "@mug"
-        currentLocale: en_US
+        currentLocale: "en_US"
         currentTranslation: "@hard_available_mug_translation"
         updatedAt: 2015-10-05
         channelPricings:
             CHANNEL: "@hard_available_mug_web_channel_pricing"
+        taxCategory: "@taxable_goods"
         tracked: true
         onHand: 2
 
@@ -59,30 +61,30 @@ Sylius\Component\Product\Model\ProductVariantTranslation:
 Sylius\Component\Core\Model\ChannelPricing:
     sw_mug_web_channel_pricing:
         channelCode: "CHANNEL"
-        price: 20
+        price: 2000
     hard_available_mug_web_channel_pricing:
         channelCode: "CHANNEL"
-        price: 20
+        price: 2000
 
 Sylius\Component\Core\Model\ShippingMethod:
     ups:
-        code: UPS
+        code: "UPS"
         enabled: true
         calculator: 'flat_rate'
         configuration:
             CHANNEL:
-                amount: 10
+                amount: 1000
         zone: "@zone_eu"
         currentLocale: en_US
         currentTranslation: "@upsTranslation1"
         channels: ['@channel']
     dhl:
-        code: DHL
+        code: "DHL"
         enabled: true
         calculator: 'flat_rate'
         configuration:
             CHANNEL:
-                amount: 20
+                amount: 2000
         zone: "@zone_eu"
         channel: ['@channel']
 
@@ -100,14 +102,14 @@ Sylius\Component\Shipping\Model\ShippingMethodTranslation:
 
 Sylius\Component\Core\Model\PaymentMethod:
     cash_on_delivery:
-        code: cod
+        code: "cod"
         enabled: true
         gatewayConfig: '@offline'
-        currentLocale: en_US
+        currentLocale: "en_US"
         currentTranslation: "@cash_on_delivery_translation1"
         channels: ['@channel']
     pay_by_check:
-        code: pbc
+        code: "pbc"
         enabled: true
         gatewayConfig: '@offline'
         channels: ['@channel']
@@ -136,13 +138,14 @@ Sylius\Component\Currency\Model\Currency:
 
 Sylius\Component\Locale\Model\Locale:
     locale:
-        code: en_US
+        code: "en_US"
 
 Sylius\Component\Addressing\Model\Zone:
     zone_eu:
-        code: EU
-        name: European Union
-        type: country
+        code: "EU"
+        name: "European Union"
+        type: "country"
+        scope: "all"
         members: ["@member_NL", "@member_BE"]
 
 Sylius\Component\Addressing\Model\ZoneMember:
@@ -151,8 +154,22 @@ Sylius\Component\Addressing\Model\ZoneMember:
 
 Sylius\Component\Core\Model\Customer:
     customer_oliver:
-        firstName: Oliver
-        lastName: Queen
-        email: oliver.queen@star-city.com
-        emailCanonical: oliver.queen@star-city.com
+        firstName: "Oliver"
+        lastName: "Queen"
+        email: "oliver.queen@star-city.com"
+        emailCanonical: "oliver.queen@star-city.com"
         birthday: <date()>
+
+Sylius\Component\Taxation\Model\TaxCategory:
+    taxable_goods:
+        code: "TAXABLE_GOODS"
+        name: "Taxable Goods"
+
+Sylius\Component\Core\Model\TaxRate:
+    eu_taxable_goods_rate:
+        code: "eu_taxable_goods_rate"
+        name: "EU Regular Tax 20%"
+        amount: 0.2
+        zone: "@zone_eu"
+        calculator: "default"
+        category: "@taxable_goods"
