@@ -51,7 +51,7 @@ sylius_grid:
                     create:
                         type: create
                 item:
-                    variants:
+                    coupons:
                         type: links
                         label: sylius.ui.manage_coupons
                         options:
