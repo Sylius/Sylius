@@ -88,11 +88,29 @@ class ProductVariantRepository extends EntityRepository implements ProductVarian
     /**
      * {@inheritdoc}
      */
-    public function findOneByCode($code)
+    public function findOneByCodeAndProductCode($code, $productCode)
     {
         return $this->createQueryBuilder('o')
-            ->where('o.code = :code')
+            ->innerJoin('o.product', 'product')
+            ->where('product.code = :productCode')
+            ->andWhere('o.code = :code')
+            ->setParameter('productCode', $productCode)
             ->setParameter('code', $code)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findOneByIdAndProductId($id, $productId)
+    {
+        return $this->createQueryBuilder('o')
+            ->where('o.product = :productId')
+            ->andWhere('o.id = :id')
+            ->setParameter('productId', $productId)
+            ->setParameter('id', $id)
             ->getQuery()
             ->getOneOrNullResult()
         ;

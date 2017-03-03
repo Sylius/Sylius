@@ -55,6 +55,11 @@ sylius_admin_product_variant_update:
                 route: sylius_admin_product_variant_index
                 parameters: { productId: $productId }
             permission: true
+            repository:
+                method: findOneByIdAndProductId
+                arguments:
+                    id: $id
+                    productId: $productId
             vars:
                 route:
                     parameters:
@@ -74,6 +79,11 @@ sylius_admin_product_variant_delete:
             section: admin
             redirect: referer
             permission: true
+            repository:
+                method: findOneByIdAndProductId
+                arguments:
+                    id: $id
+                    productId: $productId
 
 sylius_admin_product_variant_generate:
     path: /generate

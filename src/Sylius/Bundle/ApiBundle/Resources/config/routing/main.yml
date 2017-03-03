@@ -24,7 +24,7 @@ sylius_api_product_option:
 
 sylius_api_product_variant:
     resource: "@SyliusApiBundle/Resources/config/routing/product_variant.yml"
-    prefix: /products/{productCode}/variants
+    prefix: /products/{productCode}
 
 sylius_api_promotion:
     resource: "@SyliusApiBundle/Resources/config/routing/promotion.yml"
