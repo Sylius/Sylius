@@ -13,13 +13,13 @@ namespace spec\Sylius\Bundle\ApiBundle\EventListener;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ApiBundle\EventListener\AddToCartListener;
+use Sylius\Bundle\ApiBundle\EventListener\CartChangeListener;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
-final class AddToCartListenerSpec extends ObjectBehavior
+final class CartChangeListenerSpec extends ObjectBehavior
 {
     function let(OrderProcessorInterface $orderProcessor, ObjectManager $manager)
     {
@@ -28,10 +28,10 @@ final class AddToCartListenerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(AddToCartListener::class);
+        $this->shouldHaveType(CartChangeListener::class);
     }
 
-    function it_recalculates_cart(OrderProcessorInterface $orderProcessor, ObjectManager $manager, GenericEvent $event, OrderItemInterface $orderItem, OrderInterface $order)
+    function it_recalculates_cart_on_add(OrderProcessorInterface $orderProcessor, ObjectManager $manager, GenericEvent $event, OrderItemInterface $orderItem, OrderInterface $order)
     {
         $event->getSubject()->willReturn($orderItem);
         $orderItem->getOrder()->willReturn($order);
@@ -39,6 +39,17 @@ final class AddToCartListenerSpec extends ObjectBehavior
         $orderProcessor->process($order)->shouldBeCalled();
         $manager->persist($order)->shouldBeCalled();
 
-        $this->recalculateOrder($event);
+        $this->recalculateOrderOnAdd($event);
+    }
+
+    function it_recalculates_cart_and_remove_item_on_delete(OrderProcessorInterface $orderProcessor, ObjectManager $manager, GenericEvent $event, OrderItemInterface $orderItem, OrderInterface $order)
+    {
+        $event->getSubject()->willReturn($orderItem);
+        $orderItem->getOrder()->willReturn($order);
+
+        $order->removeItem($orderItem)->shouldBeCalled();
+        $orderProcessor->process($order)->shouldBeCalled();
+
+        $this->recalculateOrderOnDelete($event);
     }
 }

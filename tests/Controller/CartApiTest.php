@@ -413,12 +413,12 @@ EOT;
     public function it_does_not_allow_to_update_items_variant()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $fulfilledCart = $this->loadFixturesFromFile('resources/fulfilled_cart.yml');
+        $cartWithItems = $this->loadFixturesFromFile('resources/cart_with_items.yml');
 
         /** @var OrderInterface $cart */
-        $cart = $fulfilledCart['fulfilled_cart'];
+        $cart = $cartWithItems['cart_with_items'];
         /** @var OrderItemInterface $cartItem */
-        $cartItem = $fulfilledCart['sw_mug_item'];
+        $cartItem = $cartWithItems['sw_mug_item'];
 
         $data =
 <<<EOT
@@ -440,12 +440,12 @@ EOT;
     public function it_updates_item_quantity()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $fulfilledCart = $this->loadFixturesFromFile('resources/fulfilled_cart.yml');
+        $cartWithItems = $this->loadFixturesFromFile('resources/cart_with_items.yml');
 
         /** @var OrderInterface $cart */
-        $cart = $fulfilledCart['fulfilled_cart'];
+        $cart = $cartWithItems['cart_with_items'];
         /** @var OrderItemInterface $cartItem */
-        $cartItem = $fulfilledCart['sw_mug_item'];
+        $cartItem = $cartWithItems['sw_mug_item'];
 
         $data =
 <<<EOT
@@ -470,12 +470,12 @@ EOT;
     public function it_checks_if_requested_variant_is_available_during_quantity_update()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $fulfilledCart = $this->loadFixturesFromFile('resources/fulfilled_cart.yml');
+        $cartWithItems = $this->loadFixturesFromFile('resources/cart_with_items.yml');
 
         /** @var OrderInterface $cart */
-        $cart = $fulfilledCart['fulfilled_cart'];
+        $cart = $cartWithItems['cart_with_items'];
         /** @var OrderItemInterface $cartItem */
-        $cartItem = $fulfilledCart['hard_available_mug_item'];
+        $cartItem = $cartWithItems['hard_available_mug_item'];
 
         $data =
 <<<EOT
@@ -506,10 +506,10 @@ EOT;
     public function it_returns_not_found_response_when_trying_to_delete_cart_item_which_does_not_exist()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $fulfilledCart = $this->loadFixturesFromFile('resources/fulfilled_cart.yml');
+        $cartWithItems = $this->loadFixturesFromFile('resources/cart_with_items.yml');
 
         /** @var OrderInterface $cart */
-        $cart = $fulfilledCart['fulfilled_cart'];
+        $cart = $cartWithItems['cart_with_items'];
         $url = sprintf('/api/v1/carts/%s/items/-1', $cart->getId());
 
         $this->client->request('DELETE', $url, [], [], static::$authorizedHeaderWithContentType);
@@ -524,17 +524,41 @@ EOT;
     public function it_allows_to_delete_cart_item()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $fulfilledCart = $this->loadFixturesFromFile('resources/fulfilled_cart.yml');
+        $cartWithItems = $this->loadFixturesFromFile('resources/cart_with_items.yml');
 
         /** @var OrderInterface $cart */
-        $cart = $fulfilledCart['fulfilled_cart'];
+        $cart = $cartWithItems['cart_with_items'];
         /** @var OrderItemInterface $cartItem */
-        $cartItem = $fulfilledCart['hard_available_mug_item'];
+        $cartItem = $cartWithItems['hard_available_mug_item'];
 
         $this->client->request('DELETE', $this->getCartItemUrl($cart, $cartItem), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
+    }
+
+    /**
+     * @test
+     */
+    public function it_resets_totals_if_cart_item_was_removed()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $cartWithItems = $this->loadFixturesFromFile('resources/cart_with_items.yml');
+
+        /** @var OrderInterface $cart */
+        $cart = $cartWithItems['cart_with_items'];
+        /** @var OrderItemInterface $cartItem */
+        $cartItem = $cartWithItems['hard_available_mug_item'];
+
+        $this->client->request('DELETE', $this->getCartItemUrl($cart, $cartItem), [], [], static::$authorizedHeaderWithContentType);
+
+        $response = $this->client->getResponse();
+        $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
+
+        $this->client->request('GET', $this->getCartUrl($cart), [], [], static::$authorizedHeaderWithAccept);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'cart/recalculated_items_total_response', Response::HTTP_OK);
     }
 
     /**
