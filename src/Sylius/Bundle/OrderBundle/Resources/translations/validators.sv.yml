@@ -1,0 +1,7 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    order_item:
+        quantity:
+            min: Kvantiteten av en vara kan inte vara lägre än 1.

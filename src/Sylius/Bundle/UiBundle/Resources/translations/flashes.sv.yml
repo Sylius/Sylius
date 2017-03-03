@@ -8,5 +8,13 @@ sylius:
     customer:
         add_address: 'Adressen har lagts till.'
         set_address_as_default: 'Adressen har ställts in som standard.'
+    order:
+        promotion_integrity: 'Du är inte längre berättigad till denna kampanj %promotionName%.'
+        total_integrity: 'Din ordersumma har ändrats, kontrollera din orderinformation och bekräfta den igen.'
+        update_error: 'Ett oväntat problem uppstod vid uppdatering av en produkt. Var god försök uppdatera produkten igen.'
+    payment:
+        apply_state_machine_transition_error: 'Ett oväntat problem uppstod vid uppdatering av en betalning. Var god försök uppdatera betalningen igen.'
     product:
         out_of_stock: 'Det finns endast %quantity% exemplar av denna produkt i lager.'
+    product_variant:
+        update_error: 'Ett oväntat problem uppstod vid uppdatering av en produktvariant. Var god försök uppdatera produktvarianten igen.'
