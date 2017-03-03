@@ -13,6 +13,7 @@ namespace Sylius\Bundle\AdminBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
+use Sylius\Bundle\AdminBundle\Event\CustomerShowMenuBuilderEvent;
 use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -62,7 +63,10 @@ final class CustomerShowMenuBuilder
         $customer = $options['customer'];
         $this->addChildren($menu, $customer);
 
-        $this->eventDispatcher->dispatch(self::EVENT_NAME, new MenuBuilderEvent($this->factory, $menu));
+        $this->eventDispatcher->dispatch(
+            self::EVENT_NAME,
+            new CustomerShowMenuBuilderEvent($this->factory, $menu, $customer)
+        );
 
         return $menu;
     }
