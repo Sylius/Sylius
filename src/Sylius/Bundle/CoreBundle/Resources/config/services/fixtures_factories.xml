@@ -35,6 +35,7 @@
             <argument type="service" id="sylius.factory.channel" />
             <argument type="service" id="sylius.repository.locale" />
             <argument type="service" id="sylius.repository.currency" />
+            <argument type="service" id="sylius.repository.zone" />
         </service>
 
         <service id="sylius.fixture.example_factory.customer_group" class="Sylius\Bundle\CoreBundle\Fixture\Factory\CustomerGroupExampleFactory">
