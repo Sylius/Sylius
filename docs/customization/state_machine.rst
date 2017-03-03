@@ -21,7 +21,7 @@ How to customize a State Machine?
 How to add a new state?
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Let's assume that you would like to add a new **state** to the state machine of :doc:`Order </book/orders/orders>`.
+Let's assume that you would like to add a new **state** to the state machine of an :doc:`Order </book/orders/orders>`.
 You will need to add these few lines to the ``state_machine.yml``:
 
 .. code-block:: yaml
@@ -34,10 +34,15 @@ You will need to add these few lines to the ``state_machine.yml``:
 
 After that your new step will be available alongside other steps that already were defined in that state machine.
 
+.. tip::
+
+    Run ``$ php bin/console debug:winzou:state-machine sylius_order``
+    to check if the state machine has changed to your implementation.
+
 How to add a new transition?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Let's assume that you would like to add a new **transition** to the state machine of :doc:`Order </book/orders/orders>`,
+Let's assume that you would like to add a new **transition** to the state machine of an :doc:`Order </book/orders/orders>`,
 that will allow moving from the ``cancelled`` state backwards to ``new``. Let's call it "restoring".
 
 You will need to add these few lines to the ``state_machine.yml``:
@@ -54,6 +59,11 @@ You will need to add these few lines to the ``state_machine.yml``:
 
 After that your new transition will be available alongside other transitions that already were defined in that state machine.
 
+.. tip::
+
+    Run ``$ php bin/console debug:winzou:state-machine sylius_order``
+    to check if the state machine has changed to your implementation.
+
 How to remove a state and its transitions?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -65,7 +75,7 @@ How to remove a state and its transitions?
 How to add a new callback?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Let's assume that you would like to add a new **callback** to the state machine of :doc:`Order </book/orders/orders>`,
+Let's assume that you would like to add a new **callback** to the state machine of an :doc:`Order </book/orders/orders>`,
 that will do something on an already defined transition.
 
 You will need to add these few lines to the ``state_machine.yml``:
@@ -103,7 +113,7 @@ so that it does not count the average rating but does something else - you need 
                 after:
                     update_price:
                         on: "accept"
-                        # Here you can change the service and its method that is called for your own service
+                        # here you can change the service and its method that is called for your own service
                         do: ["@sylius.review.updater.your_service", update]
                         args: ["object"]
 
