@@ -15,8 +15,8 @@ use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\AdminBundle\Event\CustomerShowMenuBuilderEvent;
 use Sylius\Bundle\AdminBundle\Menu\CustomerShowMenuBuilder;
-use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -88,7 +88,7 @@ final class CustomerShowMenuBuilderSpec extends ObjectBehavior
         $menu->setLabel('sylius.ui.delete')->shouldBeCalled()->willReturn($menu);
 
         $eventDispatcher
-            ->dispatch('sylius.menu.admin.customer.show', Argument::type(MenuBuilderEvent::class))
+            ->dispatch('sylius.menu.admin.customer.show', Argument::type(CustomerShowMenuBuilderEvent::class))
             ->shouldBeCalled()
         ;
 
@@ -120,7 +120,7 @@ final class CustomerShowMenuBuilderSpec extends ObjectBehavior
         $menu->setLabel('sylius.ui.show_orders')->shouldBeCalled()->willReturn($menu);
 
         $eventDispatcher
-            ->dispatch('sylius.menu.admin.customer.show', Argument::type(MenuBuilderEvent::class))
+            ->dispatch('sylius.menu.admin.customer.show', Argument::type(CustomerShowMenuBuilderEvent::class))
             ->shouldBeCalled()
         ;
 
