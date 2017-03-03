@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Command;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 final class InstallAssetsCommand extends AbstractInstallCommand
 {
@@ -36,7 +37,10 @@ EOT
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln(sprintf('Installing Sylius assets for environment <info>%s</info>.', $this->getEnvironment()));
+        $output->writeln(sprintf(
+            'Installing Sylius assets for environment <info>%s</info>.',
+            $this->getEnvironment()
+        ));
 
         try {
             $rootDir = $this->getContainer()->getParameter('kernel.root_dir') . '/../';

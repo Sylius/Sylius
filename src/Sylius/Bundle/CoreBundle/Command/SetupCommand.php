@@ -20,6 +20,7 @@ use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
+use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -71,7 +72,8 @@ EOT
      */
     protected function setupAdministratorUser(InputInterface $input, OutputInterface $output, $localeCode)
     {
-        $output->writeln('Create your administrator account.');
+        $outputStyle = new SymfonyStyle($input, $output);
+        $outputStyle->writeln('Create your administrator account.');
 
         $userManager = $this->get('sylius.manager.admin_user');
         $userFactory = $this->get('sylius.factory.admin_user');
@@ -88,7 +90,8 @@ EOT
         $userManager->persist($user);
         $userManager->flush();
 
-        $output->writeln('Administrator account successfully registered.');
+        $outputStyle->writeln('<info>Administrator account successfully registered.</info>');
+        $outputStyle->newLine();
     }
 
     /**
