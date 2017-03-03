@@ -62,7 +62,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
      */
     public function specifyPrice($channelName, $price)
     {
-        $this->getElement('price', ['%channel%' => $channelName])->setValue($price);
+        $this->getElement('price', ['%channelName%' => $channelName])->setValue($price);
     }
 
     /**
@@ -70,7 +70,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
      */
     public function specifyOriginalPrice($channelName, $originalPrice)
     {
-        $this->getElement('original_price', ['%channel%' => $channelName])->setValue($originalPrice);
+        $this->getElement('original_price', ['%channelName%' => $channelName])->setValue($originalPrice);
     }
 
     /**
@@ -176,7 +176,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
      */
     public function checkChannel($channelName)
     {
-        $this->getElement('channel_checkbox', ['%channel%' => $channelName])->check();
+        $this->getElement('channel_checkbox', ['%channelName%' => $channelName])->check();
     }
 
     /**
@@ -243,7 +243,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
             'attribute_value' => '.tab[data-tab="%localeCode%"] .attribute .label:contains("%attributeName%") ~ input',
             'attributes_choice' => '#sylius_product_attribute_choice',
             'calculator' => '#sylius_calculator_container',
-            'channel_checkbox' => '.checkbox:contains("%channel%") input',
+            'channel_checkbox' => '.checkbox:contains("%channelName%") input',
             'channel_pricings' => '#sylius_product_variant_channelPricings',
             'code' => '#sylius_product_code',
             'form' => 'form[name="sylius_product"]',
@@ -251,8 +251,8 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
             'language_tab' => '[data-locale="%locale%"] .title',
             'locale_tab' => '#attributesContainer .menu [data-tab="%localeCode%"]',
             'name' => '#sylius_product_translations_%locale%_name',
-            'price' => '#sylius_product_variant_channelPricings [data-form-collection="item"]:contains("%channel%") input[name$="[price]"]',
-            'original_price' => '#sylius_product_variant_channelPricings [data-form-collection="item"]:contains("%channel%") input[name$="[originalPrice]"]',
+            'price' => '#sylius_product_variant_channelPricings [data-form-collection="item"]:contains("%channelName%") input[name$="[price]"]',
+            'original_price' => '#sylius_product_variant_channelPricings [data-form-collection="item"]:contains("%channelName%") input[name$="[originalPrice]"]',
             'price_calculator' => '#sylius_product_variant_pricingCalculator',
             'shipping_category' => '#sylius_product_variant_shippingCategory',
             'slug' => '#sylius_product_translations_%locale%_slug',

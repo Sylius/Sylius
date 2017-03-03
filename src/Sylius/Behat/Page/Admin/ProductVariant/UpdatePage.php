@@ -72,7 +72,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
      */
     public function getPriceForChannel($channelName)
     {
-        return $this->getElement('price', ['%channel%' => $channelName])->getValue();
+        return $this->getElement('price', ['%channelName%' => $channelName])->getValue();
     }
 
     /**
@@ -80,7 +80,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
      */
     public function getOriginalPriceForChannel($channelName)
     {
-        return $this->getElement('original_price', ['%channel%' => $channelName])->getValue();
+        return $this->getElement('original_price', ['%channelName%' => $channelName])->getValue();
     }
 
     /**
@@ -108,8 +108,8 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'code' => '#sylius_product_variant_code',
             'name' => '#sylius_product_variant_translations_%language%_name',
             'on_hand' => '#sylius_product_variant_onHand',
-            'original_price' => '#sylius_product_variant_channelPricings [data-form-collection="item"]:contains("%channel%") input[name$="[originalPrice]"]',
-            'price' => '#sylius_product_variant_channelPricings [data-form-collection="item"]:contains("%channel%") input[name$="[price]"]',
+            'original_price' => '#sylius_product_variant_channelPricings [data-form-collection="item"]:contains("%channelName%") input[name$="[originalPrice]"]',
+            'price' => '#sylius_product_variant_channelPricings [data-form-collection="item"]:contains("%channelName%") input[name$="[price]"]',
             'pricing_configuration' => '#sylius_calculator_container',
             'tracked' => '#sylius_product_variant_tracked',
         ]);
