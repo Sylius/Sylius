@@ -15,9 +15,12 @@ use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ChannelPricing;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -26,44 +29,31 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 final class ChannelPricingType extends AbstractResourceType
 {
     /**
-     * @var ChannelRepositoryInterface
-     */
-    private $channelRepository;
-
-    /**
-     * {@inheritdoc}
-     *
-     * @param ChannelRepositoryInterface $channelRepository
-     */
-    public function __construct(
-        $dataClass,
-        $validationGroups = [],
-        ChannelRepositoryInterface $channelRepository
-    ) {
-        parent::__construct($dataClass, $validationGroups);
-
-        $this->channelRepository = $channelRepository;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $channelRepository = $this->channelRepository;
-
         $builder
-            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($channelRepository, $options) {
-                /** @var ChannelInterface $channel */
-                $channel = isset($options['channel']) ? $options['channel'] : $channelRepository->findOneByCode($event->getData()->getChannelCode());
-                $form = $event->getForm();
-
-                $form->add('price', MoneyType::class, [
-                    'label' => $channel->getName(),
-                    'currency' => $channel->getBaseCurrency()->getCode(),
-                ]);
-            })
+            ->add('price', MoneyType::class, [
+                'label' => $options['channel']->getName(),
+                'currency' => $options['channel']->getBaseCurrency()->getCode(),
+            ])
         ;
+
+        $builder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) use ($options) {
+            $channelPricing = $event->getData();
+
+            if (!$channelPricing instanceof $this->dataClass) {
+                $event->setData(null);
+
+                return;
+            }
+
+            $channelPricing->setChannelCode($options['channel']->getCode());
+            $channelPricing->setProductVariant($options['product_variant']);
+
+            $event->setData($channelPricing);
+        });
     }
 
     /**
@@ -75,7 +65,9 @@ final class ChannelPricingType extends AbstractResourceType
 
         $resolver
             ->setRequired('channel')
-            ->setDefault('channel', null)
+            ->setAllowedTypes('channel', [ChannelInterface::class])
+            ->setDefined('product_variant')
+            ->setAllowedTypes('product_variant', ['null', ProductVariantInterface::class])
         ;
     }
 

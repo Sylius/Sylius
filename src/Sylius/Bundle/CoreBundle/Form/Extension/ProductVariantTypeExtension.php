@@ -11,7 +11,8 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
-use Sylius\Bundle\CoreBundle\Form\Type\ChannelPricing\ChannelPricingsType;
+use Sylius\Bundle\CoreBundle\Form\Type\ChannelCollectionType;
+use Sylius\Bundle\CoreBundle\Form\Type\Product\ChannelPricingType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType;
 use Sylius\Bundle\ShippingBundle\Form\Type\ShippingCategoryChoiceType;
 use Sylius\Bundle\TaxationBundle\Form\Type\TaxCategoryChoiceType;
@@ -21,6 +22,8 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -70,10 +73,18 @@ final class ProductVariantTypeExtension extends AbstractTypeExtension
                 'placeholder' => 'sylius.ui.no_requirement',
                 'label' => 'sylius.form.product_variant.shipping_category',
             ])
-            ->add('channelPricings', ChannelPricingsType::class, [
-                'label' => 'sylius.form.variant.price',
-            ])
         ;
+
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+            $event->getForm()->add('channelPricings', ChannelCollectionType::class, [
+                'entry_type' => ChannelPricingType::class,
+                'entry_options' => [
+                    'product_variant' => $event->getData(),
+                    'required' => false,
+                ],
+                'label' => 'sylius.form.variant.price',
+            ]);
+        });
     }
 
     /**
