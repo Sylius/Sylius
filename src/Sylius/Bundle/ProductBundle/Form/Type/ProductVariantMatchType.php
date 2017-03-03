@@ -35,6 +35,7 @@ final class ProductVariantMatchType extends AbstractType
                 'label' => $option->getName(),
                 'option' => $option,
                 'property_path' => '['.$i.']',
+                'block_name' => 'entry',
             ]);
         }
 
