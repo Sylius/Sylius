@@ -18,3 +18,4 @@
 * :doc:`/cookbook/cron-jobs`
 * :doc:`/cookbook/creating-extension`
 * :doc:`/cookbook/installation-commands`
+* :doc:`/cookbook/platform-sh`
