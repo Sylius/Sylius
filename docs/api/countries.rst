@@ -59,7 +59,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://sylius.dev/api/v1/countries/ \
+    $ curl http://demo.sylius.org/api/v1/countries/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST \
@@ -97,7 +97,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://sylius.dev/api/v1/countries/ \
+    $ curl http://demo.sylius.org/api/v1/countries/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X POST
@@ -146,14 +146,14 @@ Example
 
 .. code-block:: bash
 
-    curl http://demo.sylius.org/api/v1/taxons/ \
+    $ curl http://demo.sylius.org/api/v1/countries/ \
         -H "Authorization: Bearer SampleToken" \
-        -H "Accept: application/json" \
-        -X POST
+        -H "Content-Type: application/json" \
+        -X POST \
         --data '
             {
                 "code":"PL",
-                "enabled": true
+                "enabled": true,
                 "provinces": [
                     {
                         "name": "mazowieckie",
@@ -283,7 +283,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/counties/ \
+    $ curl http://demo.sylius.org/api/v1/countries/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
@@ -361,7 +361,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://sylius.dev/api/v1/countries/PL \
+    $ curl http://demo.sylius.org/api/v1/countries/PL \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X DELETE
