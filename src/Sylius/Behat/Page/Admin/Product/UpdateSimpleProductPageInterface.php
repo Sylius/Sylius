@@ -200,13 +200,4 @@ interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
      * @return string
      */
     public function getOriginalPriceForChannel($channelName);
-
-    /**
-     * @param int $position
-     *
-     * @return string
-     *
-     * @throws ElementNotFoundException
-     */
-    public function getValidationMessageForImageAtPosition($position);
 }
