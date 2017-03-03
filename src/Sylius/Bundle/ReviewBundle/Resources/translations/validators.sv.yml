@@ -1,0 +1,15 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    review:
+        author:
+            already_exists: Den här e-posten är redan registrerad, vänligen logga in eller använd glömt lösenord.
+        comment:
+            not_blank: Recensionskommentarer får inte vara tomma.
+        rating:
+            not_blank: Du måste kontrollera recensionsbetyget.
+        title:
+            not_blank: Recensionstiteln får inte vara tom.
+            min_length: Recensionstiteln måste ha minst 2 tecken.
+            max_length: Recensionstiteln får högst ha 255 tecken.

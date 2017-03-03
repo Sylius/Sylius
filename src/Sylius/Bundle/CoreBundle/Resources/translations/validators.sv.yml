@@ -2,19 +2,55 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    channel:
+        contact_email:
+            invalid: E-postadressen är ogiltig.
+            max: E-posten får inte vara längre än {{ limit }} tecken.
+            min: E-posten måste vara minst {{ limit }} tecken långt.
+    channel_pricing:
+        price:
+            min: Priset måste vara minst {{ limit }}.
+            not_blank: Var god ange priset.
     checkout:
         shipping_method:
             not_blank: Var god välj leveranssätt.
     contact:
         email:
+            invalid: E-postadressen är ogiltig.
             not_blank: Skriv din e-postadress.
+        message:
+            not_blank: Vänligen ange ditt meddelande.
+    cart_item:
+        not_available: '%itemName% har inte tillräckligt lager.'
+    order:
+        payment_method_eligibility: 'Den här betalningsmetoden %paymentMethodName% har inaktiverats. Vänligen välj en ny betalningsmetod.'
+        product_eligibility: 'Denna produkt %productName% har inaktiverats.'
+        shipping_method_eligibility: 'Produkten passar inte kraven för %shippingMethodName% leveransmetoden. Vänligen välj en ny leveransmetod.'
     locale:
         code:
             not_blank: Var god ange språkkod.
             unique: Detta språk finns redan.
+    product_attribute:
+        invalid: Positionen måste vara ett heltal.
+    product_image:
+        file:
+            max_size: Bilden är för stor - {{ size }}{{ suffix }}. Högsta tillåtna storlek är {{ limit }}{{ suffix }}.
+            upload_ini_size: Bilden är för stor. Högsta tillåtna storlek är {{ limit }}{{ suffix }}.
     product_variant:
         original_price:
             min: Ursprungliga priset får inte vara negativt.
     product_translation:
         short_description:
             max: En kort beskrivning kan inte vara längre än {{ limit }} tecken.
+    taxon_image:
+        file:
+            max_size: Bilden är för stor - {{ size }}{{ suffix }}. Högsta tillåtna storlek är {{ limit }}{{ suffix }}.
+            upload_ini_size: Bilden är för stor. Högsta tillåtna storlek är {{ limit }}{{ suffix }}.
+    user:
+        email:
+            unique: Den här e-posten används redan.
+        username:
+            unique: Detta användarnamn används redan.
+            not_blank: Vänligen uppge ett namn.
+        locale_code:
+            not_blank: Vänligen ange ett språk.

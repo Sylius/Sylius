@@ -29,11 +29,13 @@ sylius:
                 count: Antal
                 equal: Lika
             contains_product_configuration:
+                exclude: Exkludera
                 variants: Produkter
             item_total_configuration:
                 amount: Antal
             shipping_country_configuration:
                 country: Land
             taxonomy_configuration:
+                exclude: Exkludera
                 taxons: Taxa
             type: Typ

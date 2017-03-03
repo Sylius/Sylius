@@ -121,6 +121,7 @@ sylius:
             name: Namn
         promotion_filter:
             products: Produktfilter
+            taxons: Taxons filter
         promotion_rule:
             customer_group:
                 group: Kundgrupp
@@ -179,6 +180,7 @@ sylius:
             writable: skrivbar
         settings:
             header: PHP-version och inställningar
+            any: valfritt
             detect_unicode: detect_unicode
             magic_quotes_gpc: magic_quotes_gpc
             non_deprecated: inte utdaterad

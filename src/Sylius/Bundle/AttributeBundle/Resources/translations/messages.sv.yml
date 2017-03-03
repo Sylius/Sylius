@@ -29,7 +29,11 @@ sylius:
             date:
                 format: Format
             select:
+                multiple: Multipla
                 values: Värden
+                choose: Välj ett alternativ
+                min: Min poster
+                max: Max poster
             text:
                 min: Minimal längd
                 max: Maximal längd
