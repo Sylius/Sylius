@@ -48,6 +48,7 @@ final class ChannelBasedFlatRateConfigurationType extends AbstractType
                 ->add($channel->getCode(), FlatRateConfigurationType::class, [
                     'label' => $channel->getName(),
                     'currency' => $channel->getBaseCurrency()->getCode(),
+                    'block_name' => 'entry',
                 ])
             ;
         }

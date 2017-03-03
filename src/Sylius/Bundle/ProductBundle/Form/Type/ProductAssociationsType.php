@@ -56,6 +56,7 @@ final class ProductAssociationsType extends AbstractType
         foreach ($productAssociationTypes as $productAssociationType) {
             $builder->add($productAssociationType->getCode(), TextType::class, [
                 'label' => $productAssociationType->getName(),
+                'block_name' => 'entry',
             ]);
         }
 

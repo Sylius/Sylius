@@ -49,6 +49,7 @@ final class ProductOptionValueCollectionType extends AbstractType
                 'label' => $option->getName() ?: $option->getCode(),
                 'option' => $option,
                 'property_path' => '['.$i.']',
+                'block_name' => 'entry',
             ]);
         }
     }
