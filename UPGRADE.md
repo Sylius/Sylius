@@ -395,6 +395,13 @@ From now on it won't compute every possible permutation of fallback locales from
   sylius_shop_payum:
       resource: "@SyliusShopBundle/Resources/config/routing/payum.yml"
   ```
+  
+* Add exception config to `fos_rest` in `config.yml`:
+
+```yml
+fos_rest:
+    exception: ~
+```
 
 ### Security
 
