@@ -60,9 +60,9 @@ final class PromotionProcessor implements PromotionProcessorInterface
             $this->promotionApplicator->revert($subject, $promotion);
         }
 
-        $eligiblePromotions = [];
+        $preQualifiedPromotions = $this->preQualifiedPromotionsProvider->getPromotions($subject);
 
-        foreach ($this->preQualifiedPromotionsProvider->getPromotions($subject) as $promotion) {
+        foreach ($preQualifiedPromotions as $promotion) {
             if (!$this->promotionEligibilityChecker->isEligible($subject, $promotion)) {
                 continue;
             }
@@ -72,12 +72,12 @@ final class PromotionProcessor implements PromotionProcessorInterface
 
                 return;
             }
-
-            $eligiblePromotions[] = $promotion;
         }
 
-        foreach ($eligiblePromotions as $promotion) {
-            $this->promotionApplicator->apply($subject, $promotion);
+        foreach ($preQualifiedPromotions as $promotion) {
+            if($this->promotionEligibilityChecker->isEligible($subject, $promotion) && !$promotion->isExclusive()) {
+                $this->promotionApplicator->apply($subject, $promotion);
+            }
         }
     }
 }
