@@ -14,13 +14,11 @@ namespace spec\Sylius\Component\Core\Promotion\Action;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Distributor\ProportionalIntegerDistributorInterface;
-use Sylius\Component\Core\Model\AdjustmentInterface;
-use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
-use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Core\Promotion\Action\PercentageDiscountPromotionActionCommand;
-use Sylius\Component\Core\Promotion\Applicator\UnitsPromotionAdjustmentsApplicatorInterface;
+use Sylius\Component\Core\Promotion\Applicator\OrderPromotionAdjustmentsApplicatorInterface;
+use Sylius\Component\Core\Promotion\Reverser\OrderPromotionAdjustmentsReverserInterface;
 use Sylius\Component\Promotion\Action\PromotionActionCommandInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
@@ -29,14 +27,16 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Gorka Laucirica <gorka.lauzirika@gmail.com>
  */
 final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
 {
     function let(
         ProportionalIntegerDistributorInterface $distributor,
-        UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
+        OrderPromotionAdjustmentsApplicatorInterface $adjustmentApplicator,
+        OrderPromotionAdjustmentsReverserInterface $adjustmentsReverser
     ) {
-        $this->beConstructedWith($distributor, $unitsPromotionAdjustmentsApplicator);
+        $this->beConstructedWith($distributor, $adjustmentApplicator, $adjustmentsReverser);
     }
 
     function it_is_initializable()
@@ -55,7 +55,7 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
         OrderItemInterface $secondItem,
         PromotionInterface $promotion,
         ProportionalIntegerDistributorInterface $distributor,
-        UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
+        OrderPromotionAdjustmentsApplicatorInterface $adjustmentApplicator
     ) {
         $order->countItems()->willReturn(2);
         $order->getItems()->willReturn([$firstItem, $secondItem]);
@@ -66,7 +66,7 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
         $order->getPromotionSubjectTotal()->willReturn(10000);
 
         $distributor->distribute([200, 800], -1000)->willReturn([-200, -800]);
-        $unitsPromotionAdjustmentsApplicator->apply($order, $promotion, [-200, -800])->shouldBeCalled();
+        $adjustmentApplicator->apply($order, $promotion, [-200, -800])->shouldBeCalled();
 
         $this->execute($order, ['percentage' => 0.1], $promotion)->shouldReturn(true);
     }
@@ -113,30 +113,11 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
     }
 
     function it_reverts_order_units_order_promotion_adjustments(
-        AdjustmentInterface $firstAdjustment,
-        AdjustmentInterface $secondAdjustment,
+        OrderPromotionAdjustmentsReverserInterface $adjustmentsReverser,
         OrderInterface $order,
-        OrderItemInterface $item,
-        OrderItemUnitInterface $unit,
         PromotionInterface $promotion
     ) {
-        $order->countItems()->willReturn(1);
-        $order->getItems()->willReturn([$item]);
-
-        $item->getUnits()->willReturn([$unit]);
-
-        $unit
-            ->getAdjustments(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)
-            ->willReturn([$firstAdjustment, $secondAdjustment])
-        ;
-
-        $promotion->getCode()->willReturn('PROMOTION');
-
-        $firstAdjustment->getOriginCode()->willReturn('PROMOTION');
-        $secondAdjustment->getOriginCode()->willReturn('OTHER_PROMOTION');
-
-        $unit->removeAdjustment($firstAdjustment)->shouldBeCalled();
-        $unit->removeAdjustment($secondAdjustment)->shouldNotBeCalled();
+        $adjustmentsReverser->revert($order, $promotion)->shouldBeCalled();
 
         $this->revert($order, [], $promotion);
     }

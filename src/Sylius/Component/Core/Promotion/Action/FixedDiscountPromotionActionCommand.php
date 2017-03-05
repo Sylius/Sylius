@@ -13,10 +13,12 @@ namespace Sylius\Component\Core\Promotion\Action;
 
 use Sylius\Bundle\PromotionBundle\Form\Type\Action\FixedDiscountConfigurationType;
 use Sylius\Component\Core\Distributor\ProportionalIntegerDistributorInterface;
-use Sylius\Component\Core\Promotion\Applicator\UnitsPromotionAdjustmentsApplicatorInterface;
-use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Promotion\Applicator\OrderPromotionAdjustmentsApplicatorInterface;
+use Sylius\Component\Core\Promotion\Reverser\OrderPromotionAdjustmentsReverserInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Webmozart\Assert\Assert;
 
 /**
@@ -24,8 +26,9 @@ use Webmozart\Assert\Assert;
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
+ * @author Gorka Laucirica <gorka.lauzirika@gmail.com>
  */
-final class FixedDiscountPromotionActionCommand extends DiscountPromotionActionCommand implements ChannelBasedPromotionActionCommandInterface
+final class FixedDiscountPromotionActionCommand implements ChannelBasedPromotionActionCommandInterface
 {
     const TYPE = 'order_fixed_discount';
 
@@ -35,20 +38,28 @@ final class FixedDiscountPromotionActionCommand extends DiscountPromotionActionC
     private $proportionalDistributor;
 
     /**
-     * @var UnitsPromotionAdjustmentsApplicatorInterface
+     * @var OrderPromotionAdjustmentsApplicatorInterface
      */
-    private $unitsPromotionAdjustmentsApplicator;
+    private $adjustmentsApplicator;
 
     /**
-     * @param ProportionalIntegerDistributorInterface $proportionalIntegerDistributor
-     * @param UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
+     * @var OrderPromotionAdjustmentsReverserInterface
+     */
+    private $adjustmentsReverser;
+
+    /**
+     * @param ProportionalIntegerDistributorInterface      $proportionalIntegerDistributor
+     * @param OrderPromotionAdjustmentsApplicatorInterface $adjustmentsApplicator
+     * @param OrderPromotionAdjustmentsReverserInterface   $adjustmentsReverser
      */
     public function __construct(
         ProportionalIntegerDistributorInterface $proportionalIntegerDistributor,
-        UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
+        OrderPromotionAdjustmentsApplicatorInterface $adjustmentsApplicator,
+        OrderPromotionAdjustmentsReverserInterface $adjustmentsReverser
     ) {
         $this->proportionalDistributor = $proportionalIntegerDistributor;
-        $this->unitsPromotionAdjustmentsApplicator = $unitsPromotionAdjustmentsApplicator;
+        $this->adjustmentsApplicator = $adjustmentsApplicator;
+        $this->adjustmentsReverser = $adjustmentsReverser;
     }
 
     /**
@@ -56,7 +67,11 @@ final class FixedDiscountPromotionActionCommand extends DiscountPromotionActionC
      */
     public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
     {
-        if (!$this->isSubjectValid($subject)) {
+        if (!$subject instanceof OrderInterface) {
+            throw new UnexpectedTypeException($subject, OrderInterface::class);
+        }
+
+        if($subject->countItems() === 0) {
             return false;
         }
 
@@ -86,9 +101,25 @@ final class FixedDiscountPromotionActionCommand extends DiscountPromotionActionC
         }
 
         $splitPromotion = $this->proportionalDistributor->distribute($itemsTotals, $promotionAmount);
-        $this->unitsPromotionAdjustmentsApplicator->apply($subject, $promotion, $splitPromotion);
+        $this->adjustmentsApplicator->apply($subject, $promotion, $splitPromotion);
 
         return true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function revert(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
+    {
+        if (!$subject instanceof OrderInterface) {
+            throw new UnexpectedTypeException($subject, OrderInterface::class);
+        }
+
+        if($subject->countItems() === 0) {
+            return;
+        }
+
+        $this->adjustmentsReverser->revert($subject, $promotion);
     }
 
     /**

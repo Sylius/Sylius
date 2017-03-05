@@ -51,25 +51,27 @@
 
         <service id="sylius.promotion_action.fixed_discount" class="Sylius\Component\Core\Promotion\Action\FixedDiscountPromotionActionCommand">
             <argument type="service" id="sylius.proportional_integer_distributor" />
-            <argument type="service" id="sylius.promotion.units_promotion_adjustments_applicator" />
-            <argument type="service" id="sylius.currency_converter" />
+            <argument type="service" id="sylius.promotion.order_promotion_adjustments_applicator" />
+            <argument type="service" id="sylius.promotion.order_promotion_adjustments_reverser" />
             <tag name="sylius.promotion_action" type="order_fixed_discount" label="Order fixed discount" />
         </service>
         <service id="sylius.promotion_action.unit_fixed_discount" class="Sylius\Component\Core\Promotion\Action\UnitFixedDiscountPromotionActionCommand">
-            <argument type="service" id="sylius.factory.adjustment" />
+            <argument type="service" id="sylius.promotion.order_item_promotion_adjustments_applicator" />
+            <argument type="service" id="sylius.promotion.order_item_promotion_adjustments_reverser" />
             <argument type="service" id="sylius.promotion_filter.price_range" />
             <argument type="service" id="sylius.promotion_filter.taxon" />
             <argument type="service" id="sylius.promotion_filter.product" />
-            <argument type="service" id="sylius.currency_converter" />
             <tag name="sylius.promotion_action" type="unit_fixed_discount" label="Item fixed discount" />
         </service>
         <service id="sylius.promotion_action.percentage_discount" class="Sylius\Component\Core\Promotion\Action\PercentageDiscountPromotionActionCommand">
             <argument type="service" id="sylius.proportional_integer_distributor" />
-            <argument type="service" id="sylius.promotion.units_promotion_adjustments_applicator" />
+            <argument type="service" id="sylius.promotion.order_promotion_adjustments_applicator" />
+            <argument type="service" id="sylius.promotion.order_promotion_adjustments_reverser" />
             <tag name="sylius.promotion_action" type="order_percentage_discount" label="Order percentage discount" />
         </service>
         <service id="sylius.promotion_action.unit_percentage_discount" class="Sylius\Component\Core\Promotion\Action\UnitPercentageDiscountPromotionActionCommand">
-            <argument type="service" id="sylius.factory.adjustment" />
+            <argument type="service" id="sylius.promotion.order_item_promotion_adjustments_applicator" />
+            <argument type="service" id="sylius.promotion.order_item_promotion_adjustments_reverser" />
             <argument type="service" id="sylius.promotion_filter.price_range" />
             <argument type="service" id="sylius.promotion_filter.taxon" />
             <argument type="service" id="sylius.promotion_filter.product" />
@@ -93,10 +95,18 @@
             <argument type="service" id="sylius.calculator.product_variant_price" />
         </service>
 
-        <service id="sylius.promotion.units_promotion_adjustments_applicator" class="Sylius\Component\Core\Promotion\Applicator\UnitsPromotionAdjustmentsApplicator">
+        <service id="sylius.promotion.order_promotion_adjustments_applicator" class="Sylius\Component\Core\Promotion\Applicator\OrderPromotionAdjustmentsApplicator">
             <argument type="service" id="sylius.factory.adjustment" />
             <argument type="service" id="sylius.integer_distributor" />
         </service>
+
+        <service id="sylius.promotion.order_item_promotion_adjustments_applicator" class="Sylius\Component\Core\Promotion\Applicator\OrderItemPromotionAdjustmentsApplicator">
+            <argument type="service" id="sylius.factory.adjustment" />
+        </service>
+
+        <service id="sylius.promotion.order_promotion_adjustments_reverser" class="Sylius\Component\Core\Promotion\Reverser\OrderPromotionAdjustmentsReverser"/>
+
+        <service id="sylius.promotion.order_item_promotion_adjustments_reverser" class="Sylius\Component\Core\Promotion\Reverser\OrderItemPromotionAdjustmentsReverser"/>
 
         <service id="sylius.promotion_usage_modifier" class="Sylius\Component\Core\Promotion\Modifier\OrderPromotionsUsageModifier">
             <argument type="service" id="sylius.manager.promotion" />

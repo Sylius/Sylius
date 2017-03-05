@@ -12,17 +12,18 @@
 namespace Sylius\Component\Core\Promotion\Applicator;
 
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Gorka Laucirica <gorka.lauzirika@gmail.com>
  */
-interface UnitsPromotionAdjustmentsApplicatorInterface
+interface OrderItemPromotionAdjustmentsApplicatorInterface
 {
     /**
-     * @param OrderInterface $order
+     * @param OrderItemInterface $orderItem
      * @param PromotionInterface $promotion
-     * @param array $adjustmentsAmounts
+     * @param integer $amount
      */
-    public function apply(OrderInterface $order, PromotionInterface $promotion, array $adjustmentsAmounts);
+    public function apply(OrderItemInterface $orderItem, PromotionInterface $promotion, $amount);
 }

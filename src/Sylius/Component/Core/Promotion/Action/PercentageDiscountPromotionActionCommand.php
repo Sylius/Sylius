@@ -14,17 +14,20 @@ namespace Sylius\Component\Core\Promotion\Action;
 use Sylius\Bundle\PromotionBundle\Form\Type\Action\PercentageDiscountConfigurationType;
 use Sylius\Component\Core\Distributor\ProportionalIntegerDistributorInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Promotion\Applicator\UnitsPromotionAdjustmentsApplicatorInterface;
+use Sylius\Component\Core\Promotion\Applicator\OrderPromotionAdjustmentsApplicatorInterface;
+use Sylius\Component\Core\Promotion\Reverser\OrderPromotionAdjustmentsReverserInterface;
 use Sylius\Component\Promotion\Action\PromotionActionCommandInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Gorka Laucirica <gorka.lauzirika@gmail.com>
  */
-final class PercentageDiscountPromotionActionCommand extends DiscountPromotionActionCommand implements PromotionActionCommandInterface
+final class PercentageDiscountPromotionActionCommand implements PromotionActionCommandInterface
 {
     const TYPE = 'order_percentage_discount';
 
@@ -34,20 +37,29 @@ final class PercentageDiscountPromotionActionCommand extends DiscountPromotionAc
     private $distributor;
 
     /**
-     * @var UnitsPromotionAdjustmentsApplicatorInterface
+     * @var OrderPromotionAdjustmentsApplicatorInterface
      */
-    private $unitsPromotionAdjustmentsApplicator;
+    private $adjustmentsApplicator;
 
     /**
-     * @param ProportionalIntegerDistributorInterface $distributor
-     * @param UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
+     * @var OrderPromotionAdjustmentsReverserInterface
+     */
+    private $adjustmentsReverser;
+
+    /**
+     * @param ProportionalIntegerDistributorInterface      $distributor
+     * @param OrderPromotionAdjustmentsApplicatorInterface $adjustmentsApplicator
+     * @param OrderPromotionAdjustmentsReverserInterface   $adjustmentsReverser
      */
     public function __construct(
         ProportionalIntegerDistributorInterface $distributor,
-        UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
-    ) {
+        OrderPromotionAdjustmentsApplicatorInterface $adjustmentsApplicator,
+        OrderPromotionAdjustmentsReverserInterface $adjustmentsReverser
+    )
+    {
         $this->distributor = $distributor;
-        $this->unitsPromotionAdjustmentsApplicator = $unitsPromotionAdjustmentsApplicator;
+        $this->adjustmentsApplicator = $adjustmentsApplicator;
+        $this->adjustmentsReverser = $adjustmentsReverser;
     }
 
     /**
@@ -55,8 +67,11 @@ final class PercentageDiscountPromotionActionCommand extends DiscountPromotionAc
      */
     public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
     {
-        /** @var OrderInterface $subject */
-        if (!$this->isSubjectValid($subject)) {
+        if (!$subject instanceof OrderInterface) {
+            throw new UnexpectedTypeException($subject, OrderInterface::class);
+        }
+
+        if($subject->countItems() === 0) {
             return false;
         }
 
@@ -77,9 +92,25 @@ final class PercentageDiscountPromotionActionCommand extends DiscountPromotionAc
         }
 
         $splitPromotion = $this->distributor->distribute($itemsTotal, $promotionAmount);
-        $this->unitsPromotionAdjustmentsApplicator->apply($subject, $promotion, $splitPromotion);
+        $this->adjustmentsApplicator->apply($subject, $promotion, $splitPromotion);
 
         return true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function revert(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
+    {
+        if (!$subject instanceof OrderInterface) {
+            throw new UnexpectedTypeException($subject, OrderInterface::class);
+        }
+
+        if($subject->countItems() === 0) {
+            return false;
+        }
+
+        $this->adjustmentsReverser->revert($subject, $promotion);
     }
 
     /**
@@ -108,6 +139,6 @@ final class PercentageDiscountPromotionActionCommand extends DiscountPromotionAc
      */
     private function calculateAdjustmentAmount($promotionSubjectTotal, $percentage)
     {
-        return -1 * (int) round($promotionSubjectTotal * $percentage);
+        return -1 * (int)round($promotionSubjectTotal * $percentage);
     }
 }
