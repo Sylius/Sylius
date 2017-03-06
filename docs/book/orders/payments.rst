@@ -99,11 +99,40 @@ In order to have your new payment method available in the checkout remember to *
 Payment Gateway configuration
 -----------------------------
 
-In order to add a new gateway, you should register it's configuration form type with ``sylius.gateway_configuration_type`` tag. Then it will be available in the Admin panel in the gateway choice dropdown.
+Payment Gateways that already have a Sylius bridge
+''''''''''''''''''''''''''''''''''''''''''''''''''
+
+First you need to create the configuration form type for your gateway. Have a look at the configuration form types of
+`Paypal <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/PayumBundle/Form/Type/PaypalGatewayConfigurationType.php>`_
+and `Stripe <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/PayumBundle/Form/Type/StripeGatewayConfigurationType.php>`_.
+
+Then you should register its configuration form type with ``sylius.gateway_configuration_type`` tag.
+After that it will be available in the Admin panel in the gateway choice dropdown.
 
 .. tip::
 
     If you are not sure how your configuration form type should look like, head to `Payum`_ documentation.
+
+Other Payment Gateways
+''''''''''''''''''''''
+
+.. note::
+
+    Learn more about integrating payment gateways in `the Payum docs <https://github.com/Payum/Payum/blob/master/docs/index.md>`_.
+
+When the Payment Gateway you are trying to use does have a bridge available and you integrate them on your own,
+use our guide on :doc:`extension development </cookbook/creating-extension>`.
+
+.. tip::
+
+    You'll probably need also this kind of configuration in your ``app/config/config.yml`` for the gateway's factory:
+
+    .. code-block:: yaml
+
+        payum:
+            gateways:
+                yourgateway:
+                    factory: yourgateway
 
 Troubleshooting
 ---------------
@@ -133,7 +162,6 @@ There are two events that are triggered on the payment complete action:
 +-------------------------------------+
 | ``sylius.payment.post_complete``    |
 +-------------------------------------+
-
 
 Learn more
 ----------
