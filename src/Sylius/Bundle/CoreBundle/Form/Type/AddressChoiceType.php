@@ -47,7 +47,7 @@ final class AddressChoiceType extends AbstractType
                     return $this->addressRepository->findAll();
                 }
 
-                return $this->addressRepository->findBy(['customer' => $options['customer']]);
+                return $this->addressRepository->findByCustomer($options['customer']);
             },
             'choice_value' => 'id',
             'choice_translation_domain' => false,
