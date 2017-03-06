@@ -9,7 +9,6 @@
  * file that was distributed with this source code.
  */
 
-use PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Kernel;
 
@@ -28,7 +27,7 @@ class AppKernel extends Kernel
             new Symfony\Bundle\SecurityBundle\SecurityBundle(),
             new winzou\Bundle\StateMachineBundle\winzouStateMachineBundle(),
             new FOS\RestBundle\FOSRestBundle(),
-            new JMS\SerializerBundle\JMSSerializerBundle($this),
+            new JMS\SerializerBundle\JMSSerializerBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
@@ -45,18 +44,22 @@ class AppKernel extends Kernel
      */
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
-        $loader->load(__DIR__.'/config/config.yml');
+        $loader->load(__DIR__ . '/config/config.yml');
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function getContainerBaseClass()
+    public function getCacheDir()
     {
-        if ('test' === $this->environment) {
-            return MockerContainer::class;
-        }
+        return sys_get_temp_dir() . '/SyliusUserBundle/cache/' . $this->getEnvironment();
+    }
 
-        return parent::getContainerBaseClass();
+    /**
+     * {@inheritdoc}
+     */
+    public function getLogDir()
+    {
+        return sys_get_temp_dir() . '/SyliusUserBundle/logs';
     }
 }
