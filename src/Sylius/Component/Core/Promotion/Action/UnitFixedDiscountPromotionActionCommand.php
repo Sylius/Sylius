@@ -55,13 +55,11 @@ final class UnitFixedDiscountPromotionActionCommand implements ChannelBasedPromo
     private $productFilter;
 
     /**
-     * UnitFixedDiscountPromotionActionCommand constructor.
-     *
      * @param OrderItemPromotionAdjustmentsApplicatorInterface $adjustmentsApplicator
-     * @param OrderItemPromotionAdjustmentsReverserInterface   $adjustmentsReverser
-     * @param FilterInterface                              $priceRangeFilter
-     * @param FilterInterface                              $taxonFilter
-     * @param FilterInterface                              $productFilter
+     * @param OrderItemPromotionAdjustmentsReverserInterface  $adjustmentsReverser
+     * @param FilterInterface $priceRangeFilter
+     * @param FilterInterface $taxonFilter
+     * @param FilterInterface $productFilter
      */
     public function __construct(
         OrderItemPromotionAdjustmentsApplicatorInterface $adjustmentsApplicator,

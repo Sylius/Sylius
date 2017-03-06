@@ -139,6 +139,6 @@ final class PercentageDiscountPromotionActionCommand implements PromotionActionC
      */
     private function calculateAdjustmentAmount($promotionSubjectTotal, $percentage)
     {
-        return -1 * (int)round($promotionSubjectTotal * $percentage);
+        return -1 * (int) round($promotionSubjectTotal * $percentage);
     }
 }

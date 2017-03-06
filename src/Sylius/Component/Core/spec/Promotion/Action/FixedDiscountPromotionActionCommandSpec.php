@@ -37,8 +37,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         ProportionalIntegerDistributorInterface $proportionalIntegerDistributor,
         OrderPromotionAdjustmentsApplicatorInterface $adjustmentsApplicator,
         OrderPromotionAdjustmentsReverserInterface $adjustmentsReverser
-    )
-    {
+    ) {
         $this->beConstructedWith(
             $proportionalIntegerDistributor,
             $adjustmentsApplicator,
@@ -64,8 +63,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         PromotionInterface $promotion,
         ProportionalIntegerDistributorInterface $proportionalIntegerDistributor,
         OrderPromotionAdjustmentsApplicatorInterface $adjustmentsApplicator
-    )
-    {
+    ) {
         $order->getCurrencyCode()->willReturn('USD');
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
@@ -94,8 +92,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         PromotionInterface $promotion,
         ProportionalIntegerDistributorInterface $proportionalIntegerDistributor,
         OrderPromotionAdjustmentsApplicatorInterface $adjustmentsApplicator
-    )
-    {
+    ) {
         $order->getCurrencyCode()->willReturn('USD');
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
@@ -120,8 +117,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         ChannelInterface $channel,
         OrderInterface $order,
         PromotionInterface $promotion
-    )
-    {
+    ) {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
 
@@ -136,8 +132,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         OrderInterface $order,
         PromotionInterface $promotion,
         ProportionalIntegerDistributorInterface $proportionalIntegerDistributor
-    )
-    {
+    ) {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
 
@@ -153,8 +148,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         OrderInterface $order,
         PromotionInterface $promotion,
         ProportionalIntegerDistributorInterface $proportionalIntegerDistributor
-    )
-    {
+    ) {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
 
@@ -169,8 +163,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         ChannelInterface $channel,
         OrderInterface $order,
         PromotionInterface $promotion
-    )
-    {
+    ) {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
 
@@ -184,8 +177,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         ChannelInterface $channel,
         OrderInterface $order,
         PromotionInterface $promotion
-    )
-    {
+    ) {
         $order->getChannel()->willReturn($channel, $channel);
         $channel->getCode()->willReturn('WEB_US', 'WEB_US');
         $order->countItems()->willReturn(1, 1);
@@ -197,8 +189,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
     function it_throws_an_exception_if_subject_is_not_an_order(
         PromotionInterface $promotion,
         PromotionSubjectInterface $subject
-    )
-    {
+    ) {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
             ->during('execute', [$subject, [], $promotion]);
@@ -208,8 +199,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         OrderPromotionAdjustmentsReverserInterface $adjustmentsReverser,
         OrderInterface $order,
         PromotionInterface $promotion
-    )
-    {
+    ) {
         $adjustmentsReverser->revert($order, $promotion);
 
         $this->revert($order, [], $promotion);
@@ -219,8 +209,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         OrderPromotionAdjustmentsReverserInterface $adjustmentsReverser,
         OrderInterface $order,
         PromotionInterface $promotion
-    )
-    {
+    ) {
         $order->countItems()->willReturn(0);
         $adjustmentsReverser->revert($order, $promotion)->shouldNotBeCalled();
 
