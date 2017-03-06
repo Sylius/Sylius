@@ -1,5 +1,9 @@
 imports:
-    - { resource: "@SyliusTaxonomyBundle/test/app/config/parameters.yml" }
+    - { resource: "parameters.yml" }
+
+parameters:
+    locale: en_US
+    secret: "Three can keep a secret, if two of them are dead."
 
 framework:
     assets: false
@@ -26,7 +30,11 @@ twig:
 doctrine:
     dbal:
         driver: "%database_driver%"
-        path: "%database_path%"
+        host: "%database_host%"
+        port: "%database_port%"
+        dbname: "%database_name%"
+        user: "%database_user%"
+        password: "%database_password%"
         charset: UTF8
     orm:
         entity_managers:

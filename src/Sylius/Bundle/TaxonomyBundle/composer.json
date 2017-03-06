@@ -31,23 +31,20 @@
         "doctrine/orm": "^2.5",
         "phpspec/phpspec": "^3.2",
         "phpunit/phpunit": "^5.6",
-        "symfony/form": "^3.2",
-        "symfony/validator": "^3.2",
-        "symfony/browser-kit": "^3.2",
-        "incenteev/composer-parameter-handler": "~2.0",
-        "polishsymfonycommunity/symfony-mocker-container": "^1.0"
+        "incenteev/composer-parameter-handler": "^2.1"
     },
     "config": {
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-4": { "Sylius\\Bundle\\TaxonomyBundle\\": "" }
+        "psr-4": { "Sylius\\Bundle\\TaxonomyBundle\\": "" },
+        "exclude-from-classmap": ["/Tests/"]
     },
     "autoload-dev": {
         "psr-4": {
-            "Sylius\\Bundle\\TaxonomyBundle\\spec\\": "spec/",
-            "AppBundle\\": "test/src/AppBundle/"
-        }
+            "Sylius\\Bundle\\TaxonomyBundle\\Tests\\": "tests/"
+        },
+        "files": ["Tests/Functional/app/AppKernel.php"]
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -57,12 +54,27 @@
             "url": "../../*/*"
         }
     ],
+    "scripts": {
+        "post-install-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
+        ],
+        "post-update-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
+        ],
+        "test": [
+            "Tests/Functional/bin/console cache:clear --ansi --no-interaction",
+            "Tests/Functional/bin/console doctrine:database:create --if-not-exists --ansi --no-interaction",
+            "Tests/Functional/bin/console doctrine:schema:update --force --ansi --no-interaction",
+            "bin/phpunit --colors=always",
+            "bin/phpspec run --ansi --no-interaction"
+        ]
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "1.0-dev"
         },
         "incenteev-parameters": {
-            "file": "test/app/config/parameters.yml"
+            "file": "Tests/Functional/app/config/parameters.yml"
         }
     }
 }
