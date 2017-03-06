@@ -101,7 +101,7 @@ as a decorating service in the ``app/Resources/config/services.yml``.
             arguments: ['@app.factory.product.inner']
             public: false
 
-**3.** You can use the new method of factory in routing.
+**3.** You can use the new method of the factory in routing.
 
 After the ``sylius.factory.product`` has been decorated it has got the new ``createDisabled()`` method.
 You can for example override ``sylius_admin_product_create_simple`` route like below:

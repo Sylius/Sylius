@@ -21,7 +21,7 @@ How to customize a State Machine?
 How to add a new state?
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Let's assume that you would like to add a new **state** to the state machine of an :doc:`Order </book/orders/orders>`.
+Let's assume that you would like to add a new **state** to :doc:`the Order state machine </book/orders/orders>`.
 You will need to add these few lines to the ``state_machine.yml``:
 
 .. code-block:: yaml
@@ -42,7 +42,7 @@ After that your new step will be available alongside other steps that already we
 How to add a new transition?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Let's assume that you would like to add a new **transition** to the state machine of an :doc:`Order </book/orders/orders>`,
+Let's assume that you would like to add a new **transition** to :doc:`the Order state machine </book/orders/orders>`,
 that will allow moving from the ``cancelled`` state backwards to ``new``. Let's call it "restoring".
 
 You will need to add these few lines to the ``state_machine.yml``:
@@ -75,7 +75,7 @@ How to remove a state and its transitions?
 How to add a new callback?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Let's assume that you would like to add a new **callback** to the state machine of an :doc:`Order </book/orders/orders>`,
+Let's assume that you would like to add a new **callback** to :doc:`the Order state machine </book/orders/orders>`,
 that will do something on an already defined transition.
 
 You will need to add these few lines to the ``state_machine.yml``:

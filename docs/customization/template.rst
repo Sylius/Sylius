@@ -43,7 +43,7 @@ Copy the contents of the original template to make your work easier. And then mo
             {{ messages.error(last_error.messageKey|trans(last_error.messageData, 'security')) }}
         {% endif %}
 
-        {#You can add a headline for instance to see if you are changing things in the correct place.#}
+        {# You can add a headline for instance to see if you are changing things in the correct place. #}
         <h1>
             This Is My Headline
         </h1>
@@ -85,7 +85,7 @@ Copy the contents of the original template to make your work easier. And then mo
     </div>
     <div class="ui segment">
 
-        {#You can add a headline for instance to see if you are changing things in the correct place.#}
+        {# You can add a headline for instance to see if you are changing things in the correct place. #}
         <h1>My Custom Headline</h1>
 
         <h4 class="ui dividing header">{{ 'sylius.ui.provinces'|trans }}</h4>

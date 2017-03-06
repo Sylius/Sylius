@@ -31,9 +31,11 @@ How to customize grids?
     imports:
         - { resource: "grids.yml" }
 
+How to customize fields of a grid?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 How to remove a field from a grid?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+''''''''''''''''''''''''''''''''''
 
 If you would like to remove a field from an existing Sylius grid, you will need to disable it in the ``app/config/grids.yml``.
 
@@ -52,7 +54,7 @@ Let's imagine that we would like to hide the **title of product review** field o
 That's all. Now the ``title`` field will be disabled (invisible).
 
 How to modify a field of a grid?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+''''''''''''''''''''''''''''''''
 
 If you would like to modify for instance a label of any field from a grid, that's what you need to do:
 
@@ -66,8 +68,11 @@ If you would like to modify for instance a label of any field from a grid, that'
                     date:
                         label: "When was it added?"
 
-How to remove a filter from a grid?
+How to customize filters of a grid?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+How to remove a filter from a grid?
+'''''''''''''''''''''''''''''''''''
 
 If you would like to remove a filter from an existing Sylius grid, you will need to disable it in the ``app/config/grids.yml``.
 
@@ -85,8 +90,11 @@ Let's imagine that we would like to hide the **titles filter of product reviews*
 
 That's all. Now the ``title`` filter will be disabled.
 
+How to customize actions of a grid?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 How to remove an action from a grid?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+''''''''''''''''''''''''''''''''''''
 
 If you would like to disable some actions in any grid, you just need to set its ``enabled`` option to ``false`` like below:
 
@@ -103,7 +111,7 @@ If you would like to disable some actions in any grid, you just need to set its 
                             enabled: false
 
 How to modify an action of a grid?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+''''''''''''''''''''''''''''''''''
 
 If you would like to change the link to which an action button is redirecting, this is what you have to do:
 
