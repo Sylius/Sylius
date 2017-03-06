@@ -31,9 +31,11 @@ How to customize grids?
     imports:
         - { resource: "grids.yml" }
 
+How to customize fields of a grid?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 How to remove a field from a grid?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+''''''''''''''''''''''''''''''''''
 
 If you would like to remove a field from an existing Sylius grid, you will need to disable it in the ``app/config/grids.yml``.
 
@@ -52,7 +54,7 @@ Let's imagine that we would like to hide the **title of product review** field o
 That's all. Now the ``title`` field will be disabled (invisible).
 
 How to modify a field of a grid?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+''''''''''''''''''''''''''''''''
 
 If you would like to modify for instance a label of any field from a grid, that's what you need to do:
 
@@ -66,8 +68,11 @@ If you would like to modify for instance a label of any field from a grid, that'
                     date:
                         label: "When was it added?"
 
-How to remove a filter from a grid?
+How to customize filters of a grid?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+How to remove a filter from a grid?
+'''''''''''''''''''''''''''''''''''
 
 If you would like to remove a filter from an existing Sylius grid, you will need to disable it in the ``app/config/grids.yml``.
 
@@ -85,8 +90,11 @@ Let's imagine that we would like to hide the **titles filter of product reviews*
 
 That's all. Now the ``title`` filter will be disabled.
 
+How to customize actions of a grid?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 How to remove an action from a grid?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+''''''''''''''''''''''''''''''''''''
 
 If you would like to disable some actions in any grid, you just need to set its ``enabled`` option to ``false`` like below:
 
@@ -103,9 +111,14 @@ If you would like to disable some actions in any grid, you just need to set its 
                             enabled: false
 
 How to modify an action of a grid?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+''''''''''''''''''''''''''''''''''
 
 If you would like to change the link to which an action button is redirecting, this is what you have to do:
+
+.. warning::
+
+    The ``show`` button does not exist in the ``sylius_admin_product`` grid by default.
+    It is assumed that you already have it customized, and your grid has the ``show`` action.
 
 .. code-block:: yaml
 
@@ -124,7 +137,7 @@ If you would like to change the link to which an action button is redirecting, t
                                     parameters:
                                         slug: resource.slug
 
-The above grid modification will chane the redirect of the ``show`` action to redirect to the shop, instead of admin show.
+The above grid modification will change the redirect of the ``show`` action to redirect to the shop, instead of admin show.
 Also the label was changed here.
 
 How to modify positions of fields, filters and actions in a grid?
@@ -179,7 +192,7 @@ In the example below we are removing the ``images`` field from the ``sylius_admi
 
     namespace AppBundle\Grid;
 
-    use Sylius\Bundle\GridBundle\Event\GridDefinitionConverterEvent;
+    use Sylius\Component\Grid\Event\GridDefinitionConverterEvent;
 
     final class AdminProductsGridListener
     {
@@ -195,24 +208,16 @@ In the example below we are removing the ``images`` field from the ``sylius_admi
     }
 
 **2.** After creating your class with a proper method for the grid customizations you need, subscribe your
-listener to the ``sylius.grid.admin_product`` event in the ``app/config/services.yml``.
+listener to the ``sylius.grid.admin_product`` event in the ``AppBundle/Resources/config/services.yml``.
 
 .. code-block:: yaml
 
-    # app/config/services.yml
+    # AppBundle/Resources/config/services.yml
     services:
         app.listener.admin.products_grid:
             class: AppBundle\Grid\AdminProductsGridListener
             tags:
                 - { name: kernel.event_listener, event: sylius.grid.admin_product, method: removeImageField }
-
-Remember to import the ``app/config/services.yml`` into the ``app/config/config.yml``.
-
-.. code-block:: yaml
-
-    # app/config/config.yml
-    imports:
-        - { resource: "services.yml" }
 
 **3.** Result:
 

@@ -12,7 +12,7 @@ Your business needs may sometimes slightly differ from our internal assumptions.
 
 You can:
 
-* add completely **new fields**, if you need another phone number for your customers,
+* add completely **new fields**,
 * **modify** existing fields, make them required, change their HTML class, change labels etc.,
 * **remove** fields that are not used.
 
@@ -28,12 +28,12 @@ Assuming that you would like to (for example):
 
 These will be the steps that you will have to take to achieve that:
 
-1. If your are planning to add new fields remember that beforehand they need to be added on the model that the form type is based on.
+**1.** If your are planning to add new fields remember that beforehand they need to be added on the model that the form type is based on.
 
     In case of our example if you need to have the ``contactHours`` on the model and the entity mapping for the ``Customer`` resource.
     To get to know how to prepare that go :doc:`there </customization/model>`.
 
-2. Create a **Form Extension**.
+**2.** Create a **Form Extension**.
 
 Your form has to extend a proper base class. How can you check that?
 
@@ -87,7 +87,11 @@ As a result you will get the ``Sylius\Bundle\CustomerBundle\Form\Type\CustomerPr
         }
     }
 
-Register this extension as a service:
+.. note::
+    Of course remember that you need to define new labels for your fields
+    in the ``app\Resources\translations\messages.en.yml`` for english contents of your messages.
+
+**3.** After creating your class, register this extension as a service in the ``AppBundle/Resources/config/services.yml``:
 
 .. code-block:: yaml
 

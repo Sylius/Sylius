@@ -26,16 +26,16 @@ How to customize templates?
 
 * **Shop** templates: customizing Login Page template:
 
-The default login template is: ``SyliusShopBundle:Account:login.html.twig``.
-In order to override it you need to create your own: ``app/Resources/SyliusShopBundle/views/Account/login.html.twig``.
+The default login template is: ``SyliusShopBundle:login.html.twig``.
+In order to override it you need to create your own: ``app/Resources/SyliusShopBundle/views/login.html.twig``.
 
 Copy the contents of the original template to make your work easier. And then modify it to your needs.
 
 .. code-block:: php
 
-    {% extends 'SyliusShopBundle:Layout:main.html.twig' %}
+    {% extends '@SyliusShop/layout.html.twig' %}
 
-    {% import 'SyliusUiBundle:Macro:messages.html.twig' as messages %}
+    {% import '@SyliusUi/Macro/messages.html.twig' as messages %}
 
     {% block content %}
     <div class="ui column stackable center page grid">
@@ -43,7 +43,7 @@ Copy the contents of the original template to make your work easier. And then mo
             {{ messages.error(last_error.messageKey|trans(last_error.messageData, 'security')) }}
         {% endif %}
 
-        // You can add a headline for instance to see if you are changing things in the correct place.
+        {# You can add a headline for instance to see if you are changing things in the correct place. #}
         <h1>
             This Is My Headline
         </h1>
@@ -63,7 +63,11 @@ Copy the contents of the original template to make your work easier. And then mo
     </div>
     {% endblock %}
 
-Done! If you do not see any changes on the ``/shop/login`` url, clear your cache: ``$ php bin/console cache:clear``.
+Done! If you do not see any changes on the ``/shop/login`` url, clear your cache:
+
+.. code-block:: bash
+
+    $ php bin/console cache:clear
 
 * **Admin** templates: Customization of the Country form view.
 
@@ -81,14 +85,18 @@ Copy the contents of the original template to make your work easier. And then mo
     </div>
     <div class="ui segment">
 
-        // You can add a headline for instance to see if you are changing things in the correct place.
+        {# You can add a headline for instance to see if you are changing things in the correct place. #}
         <h1>My Custom Headline</h1>
 
         <h4 class="ui dividing header">{{ 'sylius.ui.provinces'|trans }}</h4>
         {{ form_row(form.provinces, {'label': false}) }}
     </div>
 
-Done! If you do not see any changes on the ``/admin/countries/new`` url, clear your cache: ``$ php bin/console cache:clear``.
+Done! If you do not see any changes on the ``/admin/countries/new`` url, clear your cache:
+
+.. code-block:: bash
+
+    $ php bin/console cache:clear
 
 Global Twig variables
 ---------------------

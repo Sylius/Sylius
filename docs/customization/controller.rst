@@ -7,9 +7,11 @@ by default, but some of them have already been extended in Bundles.
 If you want to override a controller action, check which controller you should be extending.
 
 .. note::
+
     There are two types of controllers we can define in Sylius:
 
     **Resource Controllers** - are based only on one Entity, so they return only the resources they have in their name. For instance a ``ProductController`` should return only products.
+
     **Standard Controllers** - non-resource; these may use many entities at once, they are useful on more general pages.
     We are defining these controllers only if the actions we want cannot be done through yaml configuration - like sending emails.
 
@@ -30,7 +32,7 @@ Having this method you may be rendering its result in a new action of the ``Prod
 
 See example below:
 
-1. Create a new Controller class under the ``AppBundle/Controller`` namespace.
+**1.** Create a new Controller class under the ``AppBundle/Controller`` namespace.
 
 Remember that it has to extend a proper base class. How can you check that?
 
@@ -40,7 +42,7 @@ For the ``ProductController`` run:
 
     $ php bin/console debug:container sylius.controller.product
 
-As a result you will get the ``Sylius\Bundle\CoreBundle\Controller\ProductController`` - this is the class that you need to extend.
+As a result you will get the ``Sylius\Bundle\ResourceBundle\Controller\ResourceController`` - this is the class that you need to extend.
 
 Now you have to create the controller that will have a generic action that is basically the ``showAction`` from the ``ResourceController`` extended by
 getting a list of recommended products from your external api.
@@ -52,12 +54,12 @@ getting a list of recommended products from your external api.
     namespace AppBundle\Controller;
 
     use FOS\RestBundle\View\View;
+    use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\Response;
-    use Sylius\Bundle\CoreBundle\Controller\ProductController as BaseProductController;
     use Sylius\Component\Resource\ResourceActions;
 
-    class ProductController extends BaseProductController
+    class ProductController extends ResourceController
     {
         /**
          * @param Request $request
@@ -97,7 +99,7 @@ getting a list of recommended products from your external api.
         }
     }
 
-2. In order to use your controller and its actions you need to configure it in the ``app/config/config.yml``.
+**2.** In order to use your controller and its actions you need to configure it in the ``app/config/config.yml``.
 
 .. code-block:: yaml
 
@@ -112,7 +114,7 @@ How to customize a Standard Controller:
 
 Let's assume that you would like to add some logic to the Homepage.
 
-1. Create a new Controller class under the ``AppBundle/Controller/Shop`` namespace.
+**1.** Create a new Controller class under the ``AppBundle/Controller/Shop`` namespace.
 
 If you still need the methods of the original HomepageController, then copy its body to the new class.
 
@@ -162,12 +164,23 @@ If you still need the methods of the original HomepageController, then copy its 
         }
     }
 
-2. The next thing you have to do is to override the ``sylius.controller.shop.homepage`` service definition in the ``app/config/services.yml``.
+**2.** The next thing you have to do is to override the ``sylius.controller.shop.homepage`` service definition in the ``app/config/services.yml``.
 
 .. code-block:: yaml
 
+    # app/config/services.yml
     services:
-        sylius.controller.shop.homepage: AppBundle\Controller\Shop\HomepageController
+        sylius.controller.shop.homepage:
+            class: AppBundle\Controller\Shop\HomepageController
+            arguments: ['@templating']
+
+Remember to import the ``app/config/services.yml`` into the ``app/config/config.yml``.
+
+.. code-block:: yaml
+
+    # app/config/config.yml
+    imports:
+        - { resource: "services.yml" }
 
 .. tip::
 
