@@ -113,7 +113,7 @@ class StickerProductFixture extends AbstractFixture
                 'name' => 'Sticker size',
                 'code' => 'sticker_size',
                 'values' => [
-                    'sticker_size-3' => '3"',
+                    'sticker_size_3' => '3"',
                     'sticker_size_5' => '5"',
                     'sticker_size_7' => '7"',
                 ],

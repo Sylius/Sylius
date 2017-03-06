@@ -11,6 +11,7 @@
     {% set path = original_path %}
 {% endif %}
 
+<div data-product-image="{{ path }}" data-product-link="{{ original_path }}"></div>
 <a href="{{ original_path }}" class="ui fluid image" data-lightbox="sylius-product-image">
     <img src="{{ path }}" id="main-image" alt="" />
 </a>
@@ -19,9 +20,14 @@
 <div class="ui small images">
     {% for image in product.images %}
     {% set path = image.path is not null ? image.path|imagine_filter('sylius_shop_product_small_thumbnail') : 'http://placehold.it/200x200' %}
-    <a href="{{ image.path|imagine_filter('sylius_shop_product_original') }}" class="ui image" data-lightbox="sylius-product-image">
-        <img src="{{ path }}" />
-    </a>
+    <div class="ui image">
+    {% if product.isConfigurable() and product.variants|length > 0 %}
+        {% include '@SyliusShop/Product/Show/_imageVariants.html.twig' %}
+    {% endif %}
+        <a href="{{ image.path|imagine_filter('sylius_shop_product_original') }}" data-lightbox="sylius-product-image">
+            <img src="{{ path }}" data-large-thumbnail="{{ image.path|imagine_filter('sylius_shop_product_large_thumbnail') }}" />
+        </a>
+    </div>
     {% endfor %}
 </div>
 {% endif %}

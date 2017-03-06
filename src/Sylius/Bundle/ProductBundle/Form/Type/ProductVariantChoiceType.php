@@ -14,7 +14,6 @@ namespace Sylius\Bundle\ProductBundle\Form\Type;
 use Sylius\Component\Product\Model\ProductInterface;
 use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\Options;
@@ -31,7 +30,7 @@ final class ProductVariantChoiceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         if ($options['multiple']) {
-            $builder->addViewTransformer(new CollectionToArrayTransformer());
+            $builder->addViewTransformer(new CollectionToArrayTransformer(), true);
         }
     }
 
@@ -46,7 +45,9 @@ final class ProductVariantChoiceType extends AbstractType
                     return $options['product']->getVariants();
                 },
                 'choice_value' => 'code',
-                'choice_label' => 'name',
+                'choice_label' => function ($variant) {
+                    return $variant;
+                },
                 'choice_translation_domain' => false,
                 'multiple' => false,
                 'expanded' => true,

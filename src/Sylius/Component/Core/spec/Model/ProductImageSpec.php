@@ -11,10 +11,13 @@
 
 namespace spec\Sylius\Component\Core\Model;
 
+use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\Image;
 use Sylius\Component\Core\Model\ImageAwareInterface;
 use Sylius\Component\Core\Model\ProductImage;
+use Sylius\Component\Core\Model\ProductImageInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
@@ -24,6 +27,11 @@ final class ProductImageSpec extends ObjectBehavior
     function it_is_initializable()
     {
         $this->shouldHaveType(ProductImage::class);
+    }
+
+    function it_implements_product_image_interface()
+    {
+        $this->shouldImplement(ProductImageInterface::class);
     }
 
     function it_extends_an_image()
@@ -75,5 +83,38 @@ final class ProductImageSpec extends ObjectBehavior
     {
         $this->setOwner($owner);
         $this->getOwner()->shouldReturn($owner);
+    }
+
+    function it_initializes_product_variants_collection_by_default()
+    {
+        $this->getProductVariants()->shouldHaveType(Collection::class);
+    }
+
+    function it_does_not_have_any_product_variants_by_default()
+    {
+        $this->hasProductVariants()->shouldReturn(false);
+    }
+
+    function it_adds_product_variants(ProductVariantInterface $firstVariant, ProductVariantInterface $secondVariant)
+    {
+        $this->addProductVariant($firstVariant);
+
+        $this->hasProductVariant($firstVariant)->shouldReturn(true);
+        $this->hasProductVariants()->shouldReturn(true);
+
+        $this->hasProductVariant($secondVariant)->shouldReturn(false);
+    }
+
+    function it_removes_product_variants(ProductVariantInterface $firstVariant, ProductVariantInterface $secondVariant)
+    {
+        $this->addProductVariant($firstVariant);
+        $this->addProductVariant($secondVariant);
+
+        $this->removeProductVariant($firstVariant);
+
+        $this->hasProductVariant($firstVariant)->shouldReturn(false);
+        $this->hasProductVariants()->shouldReturn(true);
+
+        $this->hasProductVariant($secondVariant)->shouldReturn(true);
     }
 }
