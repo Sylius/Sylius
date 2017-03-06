@@ -142,7 +142,7 @@ Example
 
     $ curl http://demo.sylius.org/api/v1/promotions/ \
         -H "Authorization: Bearer SampleToken" \
-        -H "Accept: application/json" \
+        -H "Content-Type: application/json" \
        -X POST
 
 Exemplary Response
@@ -200,35 +200,29 @@ Exemplary Response
 
 You can also create a promotion with additional (not required) fields:
 
-+---------------+----------------+----------------------------------------------------------------------------------------+
-| Parameter     | Parameter type | Description                                                                            |
-+===============+================+========================================================================================+
-| Authorization | header         | Token received during authentication                                                   |
-+---------------+----------------+----------------------------------------------------------------------------------------+
-| code          | request        |  **(required)** Unique promotion identifier                                            |
-+---------------+----------------+----------------------------------------------------------------------------------------+
-| name          | request        |  **(required)** The name of the promotion                                              |
-+---------------+----------------+----------------------------------------------------------------------------------------+
-| startsAt      | request        |  *(optional)* Object with date and time fields                                         |
-+---------------+----------------+----------------------------------------------------------------------------------------+
-| endsAt        | request        |  *(optional)* Object with date and time fields                                         |
-+---------------+----------------+----------------------------------------------------------------------------------------+
-| usageLimit    | request        |  *(optional)* Promotion's usage limit                                                  |
-+---------------+----------------+----------------------------------------------------------------------------------------+
-| used          | request        |  *(optional)* Number of times this promotion has been used                             |
-+---------------+----------------+----------------------------------------------------------------------------------------+
-| priority      | request        |  *(optional)* When exclusive, promotion with top priority will be applied              |
-+---------------+----------------+----------------------------------------------------------------------------------------+
-| couponBased   | request        |  *(optional)* Whether this promotion is triggered by a coupon                          |
-+---------------+----------------+----------------------------------------------------------------------------------------+
-| exclusive     | request        |  *(optional)* When true the promotion cannot be applied together with other promotions |
-+---------------+----------------+----------------------------------------------------------------------------------------+
-| rules         | request        |  *(optional)* Collection of rules which determines when the promotion will be applied  |
-+---------------+----------------+----------------------------------------------------------------------------------------+
-| actions       | request        |  *(optional)* Collections of actions which will be done when the promotion will be     |
-+---------------+----------------+----------------------------------------------------------------------------------------+
-| channels      | request        |  *(optional)* Collection of channels in which the promotion is available               |
-+---------------+----------------+----------------------------------------------------------------------------------------+
++---------------+----------------+--------------------------------------------------------------------------+
+| Parameter     | Parameter type | Description                                                              |
++===============+================+==========================================================================+
+| startsAt      | request        | Object with date and time fields                                         |
++---------------+----------------+--------------------------------------------------------------------------+
+| endsAt        | request        | Object with date and time fields                                         |
++---------------+----------------+--------------------------------------------------------------------------+
+| usageLimit    | request        | Promotion's usage limit                                                  |
++---------------+----------------+--------------------------------------------------------------------------+
+| used          | request        | Number of times this promotion has been used                             |
++---------------+----------------+--------------------------------------------------------------------------+
+| priority      | request        | When exclusive, promotion with top priority will be applied              |
++---------------+----------------+--------------------------------------------------------------------------+
+| couponBased   | request        | Whether this promotion is triggered by a coupon                          |
++---------------+----------------+--------------------------------------------------------------------------+
+| exclusive     | request        | When true the promotion cannot be applied together with other promotions |
++---------------+----------------+--------------------------------------------------------------------------+
+| rules         | request        | Collection of rules which determines when the promotion will be applied  |
++---------------+----------------+--------------------------------------------------------------------------+
+| actions       | request        | Collections of actions which will be done when the promotion will be     |
++---------------+----------------+--------------------------------------------------------------------------+
+| channels      | request        | Collection of channels in which the promotion is available               |
++---------------+----------------+--------------------------------------------------------------------------+
 
 Example
 ^^^^^^^
@@ -237,7 +231,7 @@ Example
 
     $ curl http://demo.sylius.org/api/v1/promotions/ \
         -H "Authorization: Bearer SampleToken" \
-        -H "Accept: application/json" \
+        -H "Content-Type: application/json" \
         -X POST \
         --data '
             {
@@ -247,8 +241,7 @@ Example
                 "priority": 0,
                 "couponBased": true,
                 "channels": [
-                    "US_WEB",
-                    "MOB"
+                    "US_WEB"
                 ],
                 "startsAt": {
                 "date": "2017-12-05",
@@ -272,9 +265,6 @@ Example
                         "configuration": {
                             "US_WEB": {
                                 "amount": 12
-                            },
-                            "MOB": {
-                                "amount": 15
                             }
                         }
                     }
@@ -312,48 +302,31 @@ Exemplary Response
         ],
         "actions": [
             {
-                "id": 5,
+                "id": 3,
                 "type": "order_fixed_discount",
                 "configuration": {
                     "US_WEB": {
                         "amount": 1200
-                    },
-                    "MOB": {
-                        "amount": 1500
                     }
                 }
             }
         ],
-        "createdAt": "2017-02-28T13:12:21+0100",
-        "updatedAt": "2017-02-28T13:12:22+0100",
+        "createdAt": "2017-03-06T11:40:38+0100",
+        "updatedAt": "2017-03-06T11:40:39+0100",
         "channels": [
             {
                 "id": 1,
                 "code": "US_WEB",
                 "name": "US Web Store",
                 "hostname": "localhost",
-                "color": "DarkSeaGreen",
-                "createdAt": "2017-02-27T09:12:16+0100",
-                "updatedAt": "2017-02-27T09:12:16+0100",
+                "color": "LawnGreen",
+                "createdAt": "2017-03-06T11:20:32+0100",
+                "updatedAt": "2017-03-06T11:24:37+0100",
                 "enabled": true,
                 "taxCalculationStrategy": "order_items_based",
                 "_links": {
                     "self": {
                         "href": "\/api\/v1\/channels\/US_WEB"
-                    }
-                }
-            },
-            {
-                "id": 2,
-                "code": "MOB",
-                "name": "MObile",
-                "createdAt": "2017-02-28T09:22:21+0100",
-                "updatedAt": "2017-02-28T09:22:22+0100",
-                "enabled": true,
-                "taxCalculationStrategy": "order_items_based",
-                "_links": {
-                    "self": {
-                        "href": "\/api\/v1\/channels\/MOB"
                     }
                 }
             }
@@ -554,7 +527,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/promotions/sd-promo \
+    $ curl http://demo.sylius.org/api/v1/promotions/christmas-promotion \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PUT \
@@ -578,9 +551,9 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/promotions/sd-promo \
+    $ curl http://demo.sylius.org/api/v1/promotions/christmas-promotion \
         -H "Authorization: Bearer SampleToken" \
-        -H "Accept: application/json" \
+        -H "Content-Type: application/json" \
         -X PUT
 
 Exemplary Response
@@ -652,11 +625,11 @@ Definition
 Example
 ^^^^^^^
 
-To partially update the promotion with ``code = sd-promo`` use the below method:
+To partially update the promotion with ``code = christmas-promotion`` use the below method:
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/promotions/sd-promo \
+    $ curl http://demo.sylius.org/api/v1/promotions/christmas-promotion \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PATCH \
@@ -697,11 +670,11 @@ Definition
 Example
 ^^^^^^^
 
-To delete the promotion with ``code = sd-promo`` use the below method:
+To delete the promotion with ``code = christmas-promotion`` use the below method:
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/promotions/sd-promo \
+    $ curl http://demo.sylius.org/api/v1/promotions/christmas-promotion \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X DELETE

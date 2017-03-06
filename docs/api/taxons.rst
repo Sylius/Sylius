@@ -136,7 +136,7 @@ Example
 
     $ curl http://demo.sylius.org/api/v1/taxons/ \
         -H "Authorization: Bearer SampleToken" \
-        -H "Accept: application/json" \
+        -H "Content-Type: application/json" \
         -X POST
 
 Exemplary Response
@@ -167,33 +167,29 @@ Exemplary Response
 
 You can also create a taxon with additional (not required) fields:
 
-+-------------------------------------------+----------------+-------------------------------------------------+
-| Parameter                                 | Parameter type | Description                                     |
-+===========================================+================+=================================================+
-| Authorization                             | header         | Token received during authentication            |
-+-------------------------------------------+----------------+-------------------------------------------------+
-| code                                      | request        | **(unique)** Taxon identifier                   |
-+-------------------------------------------+----------------+-------------------------------------------------+
-| translations['localeCode']['name']        | request        | *(optional)* Name of the taxon                  |
-+-------------------------------------------+----------------+-------------------------------------------------+
-| translations['localeCode']['slug']        | request        | *(optional)* **(unique)** Slug                  |
-+-------------------------------------------+----------------+-------------------------------------------------+
-| translations['localeCode']['description'] | request        | *(optional)* Description of the taxon           |
-+-------------------------------------------+----------------+-------------------------------------------------+
-| parent                                    | request        | *(optional)* The parent taxon's code            |
-+-------------------------------------------+----------------+-------------------------------------------------+
-| images                                    | request        | *(optional)* Images codes assigned to the taxon |
-+-------------------------------------------+----------------+-------------------------------------------------+
++-------------------------------------------+----------------+------------------------------------+
+| Parameter                                 | Parameter type | Description                        |
++===========================================+================+====================================+
+| translations['localeCode']['name']        | request        | Name of the taxon                  |
++-------------------------------------------+----------------+------------------------------------+
+| translations['localeCode']['slug']        | request        | **(unique)** Slug                  |
++-------------------------------------------+----------------+------------------------------------+
+| translations['localeCode']['description'] | request        | Description of the taxon           |
++-------------------------------------------+----------------+------------------------------------+
+| parent                                    | request        | The parent taxon's code            |
++-------------------------------------------+----------------+------------------------------------+
+| images                                    | request        | Images codes assigned to the taxon |
++-------------------------------------------+----------------+------------------------------------+
 
 Example
 ^^^^^^^
 
 .. code-block:: bash
 
-    curl http://demo.sylius.org/api/v1/taxons/ \
+    $ curl http://demo.sylius.org/api/v1/taxons/ \
         -H "Authorization: Bearer SampleToken" \
-        -H "Accept: application/json" \
-        -X POST
+        -H "Content-Type: application/json" \
+        -X POST \
         --data '
             {
                 "code":"toys",
@@ -874,8 +870,7 @@ To partially update the taxon with ``code = toys`` use the below method:
             {
                 "translations": {
                     "en_US": {
-                        "name": "Dolls",
-                        "slug": "dolls"
+                        "name": "Dolls"
                     }
                 }
             }
@@ -920,10 +915,6 @@ To delete the taxon with ``code = toys`` use the below method:
         -H "Accept: application/json" \
         -X DELETE
 
-.. note::
-
-    Remember the *toys* value comes from the previous example. Here we are deleting a previously updated taxon, so it is the same id.
-
 Exemplary Response
 ^^^^^^^^^^^^^^^^^^
 
@@ -961,8 +952,8 @@ To change the order of products with codes ``yellow_t_shirt`` and ``princess_t_s
 
     $ curl http://demo.sylius.org/api/v1/taxons/womens_t_shirts/products \
         -H "Authorization: Bearer SampleToken" \
-        -H "Accept: application/json" \
-        -X PUT
+        -H "Content-Type: application/json" \
+        -X PUT \
         --data '
             {
                 "productsPositions": [

@@ -99,7 +99,7 @@ Example
 
     $ curl http://demo.sylius.org/api/v1/currencies/ \
         -H "Authorization: Bearer SampleToken" \
-        -H "Accept: application/json" \
+        -H "Content-Type: application/json" \
         -X POST
 
 Exemplary Response

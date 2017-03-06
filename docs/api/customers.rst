@@ -153,7 +153,7 @@ Example
 
     $ curl http://demo.sylius.org/api/v1/customers/ \
         -H "Authorization: Bearer SampleToken" \
-        -H "Accept: application/json" \
+        -H "Content-Type: application/json" \
         -X POST
 
 Exemplary Response
@@ -475,7 +475,7 @@ Example
 
     $ curl http://demo.sylius.org/api/v1/customers/399 \
         -H "Authorization: Bearer SampleToken" \
-        -H "Accept: application/json" \
+        -H "Content-Type: application/json" \
         -X PUT
 
 Exemplary Response

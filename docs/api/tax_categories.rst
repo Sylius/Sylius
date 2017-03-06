@@ -117,7 +117,7 @@ Example
 
     $ curl http://demo.sylius.org/api/v1/tax-categories/ \
         -H "Authorization: Bearer SampleToken" \
-        -H "Accept: application/json" \
+        -H "Content-Type: application/json" \
         -X POST
 
 Exemplary Response
@@ -151,17 +151,11 @@ Exemplary Response
 
 You can also create a tax category with additional (not required) fields:
 
-+---------------+----------------+----------------------------------------------+
-| Parameter     | Parameter type | Description                                  |
-+===============+================+==============================================+
-| Authorization | header         | Token received during authentication         |
-+---------------+----------------+----------------------------------------------+
-| code          | request        | **(unique)** Tax category identifier         |
-+---------------+----------------+----------------------------------------------+
-| name          | request        | Name of the tax category                     |
-+---------------+----------------+----------------------------------------------+
-| description   | request        | *(optional)* Description of the tax category |
-+---------------+----------------+----------------------------------------------+
++---------------+----------------+---------------------------------+
+| Parameter     | Parameter type | Description                     |
++===============+================+=================================+
+| description   | request        | Description of the tax category |
++---------------+----------------+---------------------------------+
 
 Example
 ^^^^^^^
@@ -170,7 +164,7 @@ Example
 
     $ curl http://demo.sylius.org/api/v1/tax-categories/ \
         -H "Authorization: Bearer SampleToken" \
-        -H "Accept: application/json" \
+        -H "Content-Type: application/json" \
         -X POST \
         --data '
             {
@@ -300,7 +294,7 @@ Exemplary Response
 
 .. code-block:: text
 
-	STATUS: 200 OK
+    STATUS: 200 OK
 
 .. code-block:: json
 
@@ -422,9 +416,9 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/tax-categories/banana \
+    $ curl http://demo.sylius.org/api/v1/tax-categories/food \
         -H "Authorization: Bearer SampleToken" \
-        -H "Accept: application/json" \
+        -H "Content-Type: application/json" \
         -X PUT
 
 Exemplary Response

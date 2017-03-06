@@ -33,141 +33,10 @@ If you request for a more detailed data, you will receive an object with followi
 
     Read more about :doc:`Shipping Categories in the component docs</components/Shipping/models>`.
 
-Collection of Shipping Categories
----------------------------------
-
-You can retrieve the full shipment categories list by making the following request:
-
-Definition
-^^^^^^^^^^
-
-.. code-block:: text
-
-    GET /api/v1/shipping-categories/
-
-+---------------+----------------+-------------------------------------------------------------------+
-| Parameter     | Parameter type | Description                                                       |
-+===============+================+===================================================================+
-| Authorization | header         | Token received during authentication                              |
-+---------------+----------------+-------------------------------------------------------------------+
-| page          | query          | *(optional)* Number of the page, by default = 1                   |
-+---------------+----------------+-------------------------------------------------------------------+
-| limit         | query          | *(optional)* Number of items to display per page, by default = 10 |
-+---------------+----------------+-------------------------------------------------------------------+
-
-
-Example
-^^^^^^^
-
-.. code-block:: bash
-
-    $ curl http://demo.sylius.org/api/v1/shipping-categories/ \
-        -H "Authorization: Bearer SampleToken" \
-        -H "Accept: application/json"
-
-Exemplary Response
-^^^^^^^^^^^^^^^^^^
-
-.. code-block:: text
-
-    STATUS: 200 OK
-
-.. code-block:: json
-
-    {
-        "page": 1,
-        "limit": 10,
-        "pages": 1,
-        "total": 2,
-        "_links": {
-            "self": {
-                "href": "\/api\/shipping-categories\/?page=1&limit=10"
-            },
-            "first": {
-                "href": "\/api\/shipping-categories\/?page=1&limit=10"
-            },
-            "last": {
-                "href": "\/api\/shipping-categories\/?page=1&limit=10"
-            }
-        },
-        "_embedded": {
-            "items": [
-                {
-                    "id": 1,
-                    "code": "SC1",
-                    "name": "Regular",
-                    "_links": {
-                        "self": {
-                            "href": "\/api\/shipping-categories\/SC1"
-                        }
-                    }
-                },
-                {
-                    "id": 2,
-                    "code": "SC2",
-                    "name": "Heavy",
-                    "_links": {
-                        "self": {
-                            "href": "\/api\/shipping-categories\/SC2"
-                        }
-                    }
-                }
-            ]
-        }
-    }
-
-Getting a Single Shipping Category
-----------------------------------
-
-You can request detailed shipping category information by executing the following request:
-
-Definition
-^^^^^^^^^^
-
-.. code-block:: text
-
-    GET /api/v1/shipping-categories/{code}
-
-+---------------+----------------+-------------------------------------------------------------------+
-| Parameter     | Parameter type | Description                                                       |
-+===============+================+===================================================================+
-| Authorization | header         | Token received during authentication                              |
-+---------------+----------------+-------------------------------------------------------------------+
-| code          | url attribute  | Code of requested resource                                        |
-+---------------+----------------+-------------------------------------------------------------------+
-
-Example
-^^^^^^^
-
-.. code-block:: bash
-
-    $ curl http://demo.sylius.org/api/v1/shipping-categories/SC1 \
-        -H "Authorization: Bearer SampleToken" \
-        -H "Accept: application/json"
-
-Exemplary Response
-^^^^^^^^^^^^^^^^^^
-
-.. code-block:: text
-
-    STATUS: 200 OK
-
-.. code-block:: json
-
-    {
-        "id": 1,
-        "code": "SC1",
-        "name": "Regular",
-        "description": "Regular weight items",
-        "_links": {
-            "self": {
-                "href": "\/api\/shipping-categories\/SC1"
-            }
-        }
-    }
-
 Creating Shipping Category
 --------------------------
+
+To create a new shipping category you will need to call the ``/api/v1/shipping-categories/`` endpoint with the ``POST`` method.
 
 Definition
 ^^^^^^^^^^
@@ -190,6 +59,8 @@ Definition
 
 Example
 ^^^^^^^
+
+To create a new shipping category use the below method.
 
 .. code-block:: bash
 
@@ -226,7 +97,7 @@ Exemplary Response
         }
     }
 
-If you try to create a resource without name or code, you will receive a 400 error.
+If you try to create a resource without name or code, you will receive a ``400 Bad Request`` error.
 
 Example
 ^^^^^^^
@@ -235,7 +106,7 @@ Example
 
     $ curl http://demo.sylius.org/api/v1/shipping-categories/ \
         -H "Authorization: Bearer SampleToken" \
-        -H "Accept: application/json" \
+        -H "Content-Type: application/json" \
         -X POST
 
 Exemplary Response
@@ -267,10 +138,151 @@ Exemplary Response
         }
     }
 
+Getting a Single Shipping Category
+----------------------------------
+
+To retrieve the details of a shipping category you will need to call the ``/api/v1/shipping-categories/{code}`` endpoint with the ``GET`` method.
+
+Definition
+^^^^^^^^^^
+
+.. code-block:: text
+
+    GET /api/v1/shipping-categories/{code}
+
++---------------+----------------+--------------------------------------+
+| Parameter     | Parameter type | Description                          |
++===============+================+======================================+
+| Authorization | header         | Token received during authentication |
++---------------+----------------+--------------------------------------+
+| code          | url attribute  | Code of requested resource           |
++---------------+----------------+--------------------------------------+
+
+Example
+^^^^^^^
+
+To see the details of the shipping category with ``code = SC3`` use the below method:
+
+.. code-block:: bash
+
+    $ curl http://demo.sylius.org/api/v1/shipping-categories/SC3 \
+        -H "Authorization: Bearer SampleToken" \
+        -H "Accept: application/json"
+
+.. note::
+
+    The *SC3* code is just an example. Your value can be different.
+
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
+
+.. code-block:: text
+
+    STATUS: 200 OK
+
+.. code-block:: json
+
+    {
+        "id": 1,
+        "code": "SC3",
+        "name": "Light",
+        "createdAt": "2017-03-06T12:41:33+0100",
+        "updatedAt": "2017-03-06T12:44:01+0100",
+        "_links": {
+            "self": {
+                "href": "\/api\/v1\/shipping-categories\/SC3"
+            }
+        }
+    }
+
+Collection of Shipping Categories
+---------------------------------
+
+To retrieve a paginated list of shipping categories you will need to call the ``/api/v1/shipping-categories/`` endpoint with the ``GET`` method.
+
+Definition
+^^^^^^^^^^
+
+.. code-block:: text
+
+    GET /api/v1/shipping-categories/
+
++---------------+----------------+-------------------------------------------------------------------+
+| Parameter     | Parameter type | Description                                                       |
++===============+================+===================================================================+
+| Authorization | header         | Token received during authentication                              |
++---------------+----------------+-------------------------------------------------------------------+
+| page          | query          | *(optional)* Number of the page, by default = 1                   |
++---------------+----------------+-------------------------------------------------------------------+
+| limit         | query          | *(optional)* Number of items to display per page, by default = 10 |
++---------------+----------------+-------------------------------------------------------------------+
+
+To see the first page of all shipping categories assigned to the promotion with ``code = HOLIDAY-SALE`` use the below method:
+
+Example
+^^^^^^^
+
+.. code-block:: bash
+
+    $ curl http://demo.sylius.org/api/v1/shipping-categories/ \
+        -H "Authorization: Bearer SampleToken" \
+        -H "Accept: application/json"
+
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
+
+.. code-block:: text
+
+    STATUS: 200 OK
+
+.. code-block:: json
+
+    {
+        "page": 1,
+        "limit": 4,
+        "pages": 1,
+        "total": 2,
+        "_links": {
+            "self": {
+                "href": "\/api\/v1\/shipping-categories\/?sorting%5Bcode%5D=desc&page=1&limit=4"
+            },
+            "first": {
+                "href": "\/api\/v1\/shipping-categories\/?sorting%5Bcode%5D=desc&page=1&limit=4"
+            },
+            "last": {
+                "href": "\/api\/v1\/shipping-categories\/?sorting%5Bcode%5D=desc&page=1&limit=4"
+            }
+        },
+        "_embedded": {
+            "items": [
+                {
+                    "id": 1,
+                    "code": "SC3",
+                    "name": "Light",
+                    "_links": {
+                        "self": {
+                            "href": "\/api\/v1\/shipping-categories\/SC3"
+                        }
+                    }
+                },
+                {
+                    "id": 2,
+                    "code": "SC1",
+                    "name": "Regular",
+                    "_links": {
+                        "self": {
+                            "href": "\/api\/v1\/shipping-categories\/SC1"
+                        }
+                    }
+                }
+            ]
+        }
+    }
+
 Updating Shipping Category
 --------------------------
 
-You can request full or partial update of resource. For full shipping category update, you should use PUT method.
+To fully update a shipping category you will need to call the ``/api/v1/shipping-categories/{code}`` endpoint with the ``PUT`` method.
 
 Definition
 ^^^^^^^^^^
@@ -294,6 +306,8 @@ Definition
 Example
 ^^^^^^^
 
+To fully update the shipping category with ``code = SC3`` use the below method.
+
 .. code-block:: bash
 
     $ curl http://demo.sylius.org/api/v1/shipping-categories/SC3 \
@@ -314,7 +328,7 @@ Exemplary Response
 
     STATUS: 204 No Content
 
-If you try to perform full shipping category update without all the required fields specified, you will receive a 400 error.
+If you try to perform full shipping category update without all the required fields specified, you will receive a ``400 Bad Request`` error.
 
 Example
 ^^^^^^^
@@ -323,7 +337,7 @@ Example
 
     $ curl http://demo.sylius.org/api/v1/shipping-categories/SC3 \
         -H "Authorization: Bearer SampleToken" \
-        -H "Accept: application/json" \
+        -H "Content-Type: application/json" \
         -X PUT
 
 Exemplary Response
@@ -350,7 +364,7 @@ Exemplary Response
         }
     }
 
-In order to perform a partial update, you should use a PATCH method.
+To partially update a shipping category you will need to call the ``/api/v1/shipping-categories/{code}`` endpoint with the ``PATCH`` method.
 
 Definition
 ^^^^^^^^^^
@@ -374,13 +388,19 @@ Definition
 Example
 ^^^^^^^
 
+To partially update the shipping category with ``code = SC3`` use the below method.
+
 .. code-block:: bash
 
     $ curl http://demo.sylius.org/api/v1/shipping-categories/SC3 \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PATCH \
-        --data '{"name": "Light"}'
+        --data '
+            {
+                "name": "Light"
+            }
+        '
 
 Exemplary Response
 ^^^^^^^^^^^^^^^^^^
@@ -392,6 +412,9 @@ Exemplary Response
 Deleting Shipping Category
 --------------------------
 
+To delete a shipping category you will need to call the ``/api/v1/shipping-categories/{code}`` endpoint with the ``DELETE`` method.
+
+
 Definition
 ^^^^^^^^^^
 
@@ -399,16 +422,18 @@ Definition
 
     DELETE /api/v1/shipping-categories/{code}
 
-+---------------+----------------+-------------------------------------------+
-| Parameter     | Parameter type | Description                               |
-+===============+================+===========================================+
-| Authorization | header         | Token received during authentication      |
-+---------------+----------------+-------------------------------------------+
-| code          | url attribute  | Code of requested resource                |
-+---------------+----------------+-------------------------------------------+
++---------------+----------------+--------------------------------------+
+| Parameter     | Parameter type | Description                          |
++===============+================+======================================+
+| Authorization | header         | Token received during authentication |
++---------------+----------------+--------------------------------------+
+| code          | url attribute  | Code of requested resource           |
++---------------+----------------+--------------------------------------+
 
 Example
 ^^^^^^^
+
+To delete the shipping category with ``code = SC3`` use the below method.
 
 .. code-block:: bash
 

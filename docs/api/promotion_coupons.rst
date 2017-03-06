@@ -83,7 +83,7 @@ To create a new promotion coupon for the promotion with ``code = HOLIDAY-SALE`` 
         -X POST \
         --data '
             {
-                "code": "1234"
+                "code": "A3BCB"
             }
         '
 
@@ -97,14 +97,14 @@ Exemplary Response
 .. code-block:: json
 
     {
-        "id": 300,
-        "code": "1234",
+        "id": 5,
+        "code": "A3BCB",
         "used": 0,
-        "createdAt": "2017-03-01T10:06:27+0100",
-        "updatedAt": "2017-03-01T10:06:27+0100",
+        "createdAt": "2017-03-06T13:14:19+0100",
+        "updatedAt": "2017-03-06T13:14:19+0100",
         "_links": {
             "self": {
-                "href": "\/api\/v1\/promotions\/HOLIDAY-SALE\/coupons\/1234"
+                "href": "\/api\/v1\/promotions\/HOLIDAY-SALE\/coupons\/A3BCB"
             },
             "promotion": {
                 "href": "\/api\/v1\/promotions\/HOLIDAY-SALE"
@@ -123,7 +123,7 @@ Example
 
     $ curl http://demo.sylius.org/api/v1/promotions/HOLIDAY-SALE/coupons/ \
         -H "Authorization: Bearer SampleToken" \
-        -H "Accept: application/json" \
+        -H "Content-Type: application/json" \
         -X POST
 
 Exemplary Response
@@ -154,36 +154,30 @@ Exemplary Response
 
 You can also create a promotion coupon with additional (not required) fields:
 
-+-----------------------+----------------+-----------------------------------------------------------------------------------------+
-| Parameter             | Parameter type | Description                                                                             |
-+=======================+================+=========================================================================================+
-| Authorization         | header         | Token received during authentication                                                    |
-+-----------------------+----------------+-----------------------------------------------------------------------------------------+
-| promotionCode         | url attribute  | Code of the promotion for which the coupon should be created                            |
-+-----------------------+----------------+-----------------------------------------------------------------------------------------+
-| code                  | request        | **(unique)** Promotion coupon identifier                                                |
-+-----------------------+----------------+-----------------------------------------------------------------------------------------+
-| usageLimit            | request        | **(optional)** The information on how many times the coupon can be used                 |
-+-----------------------+----------------+-----------------------------------------------------------------------------------------+
-| perCustomerUsageLimit | request        | **(optional)** The information on how many times the coupon can be used by one customer |
-+-----------------------+----------------+-----------------------------------------------------------------------------------------+
-| expiresAt             | request        | **(optional)** The information on when the coupon expires                               |
-+-----------------------+----------------+-----------------------------------------------------------------------------------------+
++-----------------------+----------------+--------------------------------------------------------------------------+
+| Parameter             | Parameter type | Description                                                              |
++=======================+================+==========================================================================+
+| usageLimit            | request        | The information on how many times the coupon can be used                 |
++-----------------------+----------------+--------------------------------------------------------------------------+
+| perCustomerUsageLimit | request        | The information on how many times the coupon can be used by one customer |
++-----------------------+----------------+--------------------------------------------------------------------------+
+| expiresAt             | request        | The information on when the coupon expires                               |
++-----------------------+----------------+--------------------------------------------------------------------------+
 
 Example
 ^^^^^^^
 
-Here is an example of creating a promotion coupon with additional data for the promotion with ``code = MUG-TH``.
+Here is an example of creating a promotion coupon with additional data for the promotion with ``code = HOLIDAY-SALE``.
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/promotions/MUG-TH/coupons/ \
+    $ curl http://demo.sylius.org/api/v1/promotions/HOLIDAY-SALE/coupons/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST \
         --data '
              {
-                "code": "1234",
+                "code": "A8BAB",
                 "expiresAt": "2020-01-01",
                 "usageLimit": 10,
                 "perCustomerUsageLimit": 1
@@ -200,20 +194,20 @@ Exemplary Response
 .. code-block:: json
 
     {
-        "id": 101,
-        "code": "1234",
+        "id": 6,
+        "code": "A8BAB",
         "usageLimit": 10,
         "used": 0,
         "expiresAt": "2020-01-01T00:00:00+0100",
-        "createdAt": "2017-01-01T00:00:00+0100",
-        "updatedAt": "2017-01-01T00:00:00+0100",
+        "createdAt": "2017-03-06T13:15:27+0100",
+        "updatedAt": "2017-03-06T13:15:27+0100",
         "perCustomerUsageLimit": 1,
         "_links": {
             "self": {
-                "href": "\/api\/v1\/promotions\/Holliday\/coupons\/1234"
+                "href": "\/api\/v1\/promotions\/HOLIDAY-SALE\/coupons\/A8BAB"
             },
             "promotion": {
-                "href": "\/api\/v1\/promotions\/Holliday"
+                "href": "\/api\/v1\/promotions\/HOLIDAY-SALE"
             }
         }
     }
@@ -265,13 +259,11 @@ Exemplary Response
 .. code-block:: json
 
     {
-        "id": 6,
+        "id": 5,
         "code": "A3BCB",
-        "usageLimit": 5,
         "used": 0,
-        "expiresAt": "2017-11-12T00:00:00+0100",
-        "createdAt": "2017-02-21T11:11:59+0100",
-        "updatedAt": "2017-02-21T11:11:59+0100",
+        "createdAt": "2017-03-06T13:14:19+0100",
+        "updatedAt": "2017-03-06T13:14:19+0100",
         "_links": {
             "self": {
                 "href": "\/api\/v1\/promotions\/HOLIDAY-SALE\/coupons\/A3BCB"
@@ -313,7 +305,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/promotions/HOLIDAY-SALE/coupons \
+    $ curl http://demo.sylius.org/api/v1/promotions/HOLIDAY-SALE/coupons/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
@@ -328,58 +320,41 @@ Exemplary Response
 
     {
         "page": 1,
-        "limit": 10,
+        "limit": 4,
         "pages": 1,
-        "total": 3,
+        "total": 2,
         "_links": {
             "self": {
-                "href": "\/api\/v1\/promotions\/HOLIDAY-SALE\/coupons\/?page=1&limit=10"
+                "href": "\/api\/v1\/promotions\/HOLIDAY-SALE\/coupons\/?sorting%5Bcode%5D=desc&page=1&limit=4"
             },
             "first": {
-                "href": "\/api\/v1\/promotions\/HOLIDAY-SALE\/coupons\/?page=1&limit=10"
+                "href": "\/api\/v1\/promotions\/HOLIDAY-SALE\/coupons\/?sorting%5Bcode%5D=desc&page=1&limit=4"
             },
             "last": {
-                "href": "\/api\/v1\/promotions\/HOLIDAY-SALE\/coupons\/?page=1&limit=10"
+                "href": "\/api\/v1\/promotions\/HOLIDAY-SALE\/coupons\/?sorting%5Bcode%5D=desc&page=1&limit=4"
             }
         },
         "_embedded": {
             "items": [
                 {
-                    "id": 6,
+                    "id": 5,
                     "code": "A3BCB",
-                    "usageLimit": 5,
                     "used": 0,
-                    "expiresAt": "2017-11-12T00:00:00+0100",
                     "_links": {
                         "self": {
                             "href": "\/api\/v1\/promotions\/HOLIDAY-SALE\/coupons\/A3BCB"
-                        },
-                        "promotion": {
-                            "href": "\/api\/v1\/promotions\/HOLIDAY-SALE"
                         }
                     }
                 },
                 {
-                    "id": 7,
-                    "code": "C9596",
-                    "usageLimit": 5,
+                    "id": 6,
+                    "code": "A8BAB",
+                    "usageLimit": 10,
                     "used": 0,
-                    "expiresAt": "2017-11-12T00:00:00+0100",
+                    "expiresAt": "2020-01-01T00:00:00+0100",
                     "_links": {
                         "self": {
-                            "href": "\/api\/v1\/promotions\/HOLIDAY-SALE\/coupons\/C9596"
-                        }
-                    }
-                },
-                {
-                    "id": 8,
-                    "code": "53385",
-                    "usageLimit": 5,
-                    "used": 0,
-                    "expiresAt": "2017-11-12T00:00:00+0100",
-                    "_links": {
-                        "self": {
-                            "href": "\/api\/v1\/promotions\/HOLIDAY-SALE\/coupons\/53385"
+                            "href": "\/api\/v1\/promotions\/HOLIDAY-SALE\/coupons\/A8BAB"
                         }
                     }
                 }
@@ -418,17 +393,17 @@ Definition
 Example
 ^^^^^^^
 
-To fully update the promotion coupon with ``code = ABCD`` for the promotion with ``code = HOLIDAY-SALE`` use the below method.
+To fully update the promotion coupon with ``code = A3BCB`` for the promotion with ``code = HOLIDAY-SALE`` use the below method.
 
 .. code-block:: bash
 
-    curl http://demo.sylius.org/api/v1/promotions/HOLIDAY-SALE/coupons/ABCD \
+    $ curl http://demo.sylius.org/api/v1/promotions/HOLIDAY-SALE/coupons/A3BCB \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PUT \
         --data '
             {
-                "expiresAt": 2020-01-01,
+                "expiresAt": "2020-01-01",
                 "usageLimit": 30,
                 "perCustomerUsageLimit": 2
             }
@@ -465,11 +440,11 @@ Definition
 Example
 ^^^^^^^
 
-To partially update the promotion coupon with ``code = ABCD`` for the promotion with ``code = HOLIDAY-SALE`` use the below method.
+To partially update the promotion coupon with ``code = A3BCB`` for the promotion with ``code = HOLIDAY-SALE`` use the below method.
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/promotions/HOLIDAY-SALE/coupons/ABCD \
+    $ curl http://demo.sylius.org/api/v1/promotions/HOLIDAY-SALE/coupons/A3BCB \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PATCH \
@@ -489,7 +464,7 @@ Exemplary Response
 Deleting a Promotion coupon
 ---------------------------
 
-To delete a promotion copupon you will need to call the ``/api/v1/promotions/{promotionCode}/coupons/{code}`` endpoint with the ``DELETE`` method.
+To delete a promotion coupon you will need to call the ``/api/v1/promotions/{promotionCode}/coupons/{code}`` endpoint with the ``DELETE`` method.
 
 Definition
 ^^^^^^^^^^
@@ -511,11 +486,11 @@ Definition
 Example
 ^^^^^^^
 
-To delete the promotion coupon with ``code = ABCD`` from the promotion with ``code = HOLIDAY-SALE`` use the below method.
+To delete the promotion coupon with ``code = A3BCB`` from the promotion with ``code = HOLIDAY-SALE`` use the below method.
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/promotions/HOLIDAY-SALE/coupons/ABCD \
+    $ curl http://demo.sylius.org/api/v1/promotions/HOLIDAY-SALE/coupons/A3BCB \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X DELETE

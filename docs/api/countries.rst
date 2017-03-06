@@ -46,13 +46,13 @@ Definition
 
     POST /api/v1/countries/
 
-+------------------------------------+----------------+--------------------------------------+
-| Parameter                          | Parameter type | Description                          |
-+====================================+================+======================================+
-| Authorization                      | header         | Token received during authentication |
-+------------------------------------+----------------+--------------------------------------+
-| code                               | request        | **(unique)** Country identifier      |
-+------------------------------------+----------------+--------------------------------------+
++---------------+----------------+--------------------------------------+
+| Parameter     | Parameter type | Description                          |
++===============+================+======================================+
+| Authorization | header         | Token received during authentication |
++---------------+----------------+--------------------------------------+
+| code          | request        | **(unique)** Country identifier      |
++---------------+----------------+--------------------------------------+
 
 Example
 ^^^^^^^
@@ -99,7 +99,7 @@ Example
 
     $ curl http://demo.sylius.org/api/v1/countries/ \
         -H "Authorization: Bearer SampleToken" \
-        -H "Accept: application/json" \
+        -H "Content-Type: application/json" \
         -X POST
 
 Exemplary Response
@@ -129,17 +129,13 @@ Exemplary Response
 
 You can also create a country with additional (not required) fields:
 
-+---------------+----------------+--------------------------------------------------------------------------+
-| Parameter     | Parameter type | Description                                                              |
-+===============+================+==========================================================================+
-| Authorization | header         | Token received during authentication                                     |
-+---------------+----------------+--------------------------------------------------------------------------+
-| code          | request        | **(unique)** *(required)* Country identifier                             |
-+---------------+----------------+--------------------------------------------------------------------------+
-| enabled       | request        | *(optional)* Information says if the country is enabled (default: false) |
-+---------------+----------------+--------------------------------------------------------------------------+
-| provinces     | request        | *(optional)* Collection of the country's provinces                       |
-+---------------+----------------+--------------------------------------------------------------------------+
++---------------+----------------+-------------------------------------------------------------+
+| Parameter     | Parameter type | Description                                                 |
++===============+================+=============================================================+
+| enabled       | request        | Information says if the country is enabled (default: false) |
++---------------+----------------+-------------------------------------------------------------+
+| provinces     | request        | Collection of the country's provinces                       |
++---------------+----------------+-------------------------------------------------------------+
 
 Example
 ^^^^^^^

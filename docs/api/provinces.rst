@@ -75,7 +75,7 @@ To see the details of the province with ``code = PL-MZ`` which belongs to the co
 
 .. note::
 
-    The *PL* ans *PL-MZ* codes is just examples. Your value can be different.
+    The *PL* ans *PL-MZ* codes are just examples. Your value can be different.
 
 Exemplary Response
 ^^^^^^^^^^^^^^^^^^

@@ -136,9 +136,9 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/zones/ \
+    $ curl http://demo.sylius.org/api/v1/zones/country \
         -H "Authorization: Bearer SampleToken" \
-        -H "Accept: application/json" \
+        -H "Content-Type: application/json" \
         -X POST
 
 Exemplary Response
@@ -390,7 +390,7 @@ Example
 
     $ curl http://demo.sylius.org/api/v1/zones/EU \
         -H "Authorization: Bearer SampleToken" \
-        -H "Accept: application/json" \
+        -H "Content-Type: application/json" \
         -X PUT
 
 Exemplary Response
