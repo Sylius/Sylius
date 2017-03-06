@@ -2,7 +2,7 @@
     <form method="get" action="{{ path('sylius_shop_product_index', {'slug': app.request.attributes.get('slug')}) }}" class="ui loadable form">
         <div class="ui stackable grid">
             <div class="eleven wide column">
-                {% for filter in products.definition.filters %}
+                {% for filter in products.definition.enabledFilters %}
                     {{ sylius_grid_render_filter(products, filter) }}
                 {% endfor %}
             </div>
