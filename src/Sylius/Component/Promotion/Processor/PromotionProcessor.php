@@ -63,11 +63,7 @@ final class PromotionProcessor implements PromotionProcessorInterface
         $preQualifiedPromotions = $this->preQualifiedPromotionsProvider->getPromotions($subject);
 
         foreach ($preQualifiedPromotions as $promotion) {
-            if (!$this->promotionEligibilityChecker->isEligible($subject, $promotion)) {
-                continue;
-            }
-
-            if ($promotion->isExclusive()) {
+            if ($this->promotionEligibilityChecker->isEligible($subject, $promotion) && $promotion->isExclusive()) {
                 $this->promotionApplicator->apply($subject, $promotion);
 
                 return;
