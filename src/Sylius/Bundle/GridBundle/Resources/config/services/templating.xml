@@ -17,5 +17,8 @@
             <argument type="service" id="sylius.grid.renderer" />
             <tag name="templating.helper" alias="sylius_grid" />
         </service>
+        <service id="sylius.templating.helper.enabled_items" class="Sylius\Bundle\GridBundle\Templating\Helper\EnabledItemsHelper" lazy="true">
+            <tag name="templating.helper" alias="sylius_enabled_items" />
+        </service>
     </services>
 </container>

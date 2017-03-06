@@ -17,27 +17,21 @@
 
 {% macro row(grid, definition, row) %}
     <tr class="item">
-    {% for field in definition.fields|sort_by('position') %}
-        {% if field.enabled %}
-            <td>{{ sylius_grid_render_field(grid, field, row) }}</td>
-        {% endif %}
+    {% for field in definition.fields|sylius_enabled_items|sort_by('position') %}
+        <td>{{ sylius_grid_render_field(grid, field, row) }}</td>
     {% endfor %}
     {% if definition.actionGroups.item is defined and definition.getActions('item')|length > 0 %}
         <td>
             <div class="ui buttons">
-                {% for action in definition.getActions('item')|sort_by('position') %}
-                    {% if action.enabled %}
-                        {{ sylius_grid_render_action(grid, action, row) }}
-                    {% endif %}
+                {% for action in definition.getActions('item')|sylius_enabled_items|sort_by('position') %}
+                    {{ sylius_grid_render_action(grid, action, row) }}
                 {% endfor %}
             </div>
             {% if definition.actionGroups.subitem is defined and definition.getActions('subitem')|length > 0 %}
             <div class="ui divider"></div>
             <div class="ui buttons">
-                {% for action in definition.getActions('subitem')|sort_by('position') %}
-                    {% if action.enabled %}
-                        {{ sylius_grid_render_action(grid, action, row) }}
-                    {% endif %}
+                {% for action in definition.getActions('subitem')|sylius_enabled_items|sort_by('position') %}
+                    {{ sylius_grid_render_action(grid, action, row) }}
                 {% endfor %}
             </div>
             {% endif %}
