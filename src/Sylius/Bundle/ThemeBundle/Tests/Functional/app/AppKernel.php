@@ -9,83 +9,48 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ThemeBundle\Tests\Functional\app;
-
 use Symfony\Component\Config\Loader\LoaderInterface;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\Kernel;
 
 /**
- * App Test Kernel for functional tests.
- *
- * @author Johannes M. Schmitt <schmittjoh@gmail.com>
+ * @author Magdalena Banasiak <magdalena.banasiak@gmail.com>
  */
 class AppKernel extends Kernel
 {
-    private $testCase;
-    private $rootConfig;
-
-    public function __construct($testCase, $rootConfig, $environment, $debug)
-    {
-        if (!is_dir(__DIR__.'/'.$testCase)) {
-            throw new \InvalidArgumentException(sprintf('The test case "%s" does not exist.', $testCase));
-        }
-        $this->testCase = $testCase;
-
-        $fs = new Filesystem();
-        if (!$fs->isAbsolutePath($rootConfig) && !file_exists($rootConfig = __DIR__.'/'.$testCase.'/'.$rootConfig)) {
-            throw new \InvalidArgumentException(sprintf('The root config "%s" does not exist.', $rootConfig));
-        }
-        $this->rootConfig = $rootConfig;
-
-        parent::__construct($environment, $debug);
-    }
-
+    /**
+     * {@inheritdoc}
+     */
     public function registerBundles()
     {
-        if (!file_exists($filename = $this->getRootDir().'/'.$this->testCase.'/bundles.php')) {
-            throw new \RuntimeException(sprintf('The bundles file "%s" does not exist.', $filename));
-        }
-
-        return include $filename;
+        return [
+            new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
+            new Symfony\Bundle\TwigBundle\TwigBundle(),
+            new Sylius\Bundle\ThemeBundle\Tests\Functional\TestBundle\TestBundle(),
+            new Sylius\Bundle\ThemeBundle\SyliusThemeBundle(),
+        ];
     }
 
-    public function getRootDir()
-    {
-        return __DIR__;
-    }
-
-    public function getCacheDir()
-    {
-        return sys_get_temp_dir().'/'.Kernel::VERSION.'/'.$this->testCase.'/cache/'.$this->environment;
-    }
-
-    public function getLogDir()
-    {
-        return sys_get_temp_dir().'/'.Kernel::VERSION.'/'.$this->testCase.'/logs';
-    }
-
+    /**
+     * {@inheritdoc}
+     */
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
-        $loader->load($this->rootConfig);
+        $loader->load(__DIR__ . '/config/config.yml');
     }
 
-    public function serialize()
+    /**
+     * {@inheritdoc}
+     */
+    public function getCacheDir()
     {
-        return serialize([$this->testCase, $this->rootConfig, $this->getEnvironment(), $this->isDebug()]);
+        return sys_get_temp_dir() . '/SyliusThemeBundle/cache/' . $this->getEnvironment();
     }
 
-    public function unserialize($str)
+    /**
+     * {@inheritdoc}
+     */
+    public function getLogDir()
     {
-        $a = unserialize($str);
-        $this->__construct($a[0], $a[1], $a[2], $a[3]);
-    }
-
-    protected function getKernelParameters()
-    {
-        $parameters = parent::getKernelParameters();
-        $parameters['kernel.test_case'] = $this->testCase;
-
-        return $parameters;
+        return sys_get_temp_dir() . '/SyliusThemeBundle/logs';
     }
 }

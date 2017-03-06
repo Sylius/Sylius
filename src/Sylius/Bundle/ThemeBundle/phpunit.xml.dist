@@ -5,25 +5,15 @@
          xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/4.1/phpunit.xsd"
          backupGlobals="false"
          colors="true"
-         bootstrap="Tests/Functional/app/autoload.php"
+         bootstrap="vendor/autoload.php"
 >
     <php>
-        <server name="KERNEL_DIR" value="test/app/" />
+        <server name="KERNEL_DIR" value="Tests/Functional/app/" />
         <server name="IS_DOCTRINE_ORM_SUPPORTED" value="true" />
     </php>
     <testsuites>
-        <testsuite name="Sylius Test Suite">
-            <directory>./Tests</directory>
-        </testsuite>
-
         <testsuite name="SyliusThemeBundle Test Suite">
-            <directory>./test/</directory>
+            <directory>./Tests/</directory>
         </testsuite>
     </testsuites>
-
-    <filter>
-        <whitelist>
-            <directory>./Tests</directory>
-        </whitelist>
-    </filter>
 </phpunit>

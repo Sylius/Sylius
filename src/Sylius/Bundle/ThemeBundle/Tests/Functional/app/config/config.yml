@@ -1,12 +1,13 @@
-imports:
-    - { resource: "@SyliusThemeBundle/test/app/config/parameters.yml" }
+parameters:
+    locale: en
+    secret: "Three can keep a secret, if two of them are dead."
 
 framework:
-    assets: false
     translator: { fallbacks: ["%locale%"] }
     secret: "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
+    form: ~
     csrf_protection: true
     templating:
         engines: ['twig']
@@ -22,12 +23,8 @@ twig:
     debug: "%kernel.debug%"
     strict_variables: "%kernel.debug%"
 
-doctrine:
-    dbal:
-        driver: "%database_driver%"
-        path: "%database_path%"
-        charset: UTF8
-    orm:
-        entity_managers:
-            default:
-                auto_mapping: true
+sylius_theme:
+    sources:
+        filesystem:
+            directories:
+                - "%kernel.root_dir%/../../Fixtures/themes"

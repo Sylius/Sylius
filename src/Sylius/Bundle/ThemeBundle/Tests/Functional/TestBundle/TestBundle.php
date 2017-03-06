@@ -9,13 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ThemeBundle\Tests\Functional\Bundle\TestBundle;
+namespace Sylius\Bundle\ThemeBundle\Tests\Functional\TestBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class TestBundle extends Bundle
+final class TestBundle extends Bundle
 {
+
 }

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ThemeBundle\Tests\Functional\Bundle\TestBundle\Controller;
+namespace Sylius\Bundle\ThemeBundle\Tests\Functional\TestBundle\Controller;
 
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class TemplatingController implements ContainerAwareInterface
+final class TemplatingController implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
 

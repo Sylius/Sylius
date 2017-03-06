@@ -11,17 +11,19 @@
 
 namespace Sylius\Bundle\ThemeBundle\Tests\Functional;
 
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class TranslationTest extends ThemeBundleTestCase
+final class TranslationTest extends WebTestCase
 {
     /**
      * @test
      */
     public function it_respects_theming_logic_while_translating_messages()
     {
-        $client = $this->getClient();
+        $client = self::createClient();
 
         $crawler = $client->request('GET', '/template/:Translation:translationsTest.txt.twig');
 

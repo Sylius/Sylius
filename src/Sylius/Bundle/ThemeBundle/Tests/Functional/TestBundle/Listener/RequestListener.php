@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ThemeBundle\Tests\Functional\app\DefaultTestCase;
+namespace Sylius\Bundle\ThemeBundle\Tests\Functional\TestBundle\Listener;
 
 use Sylius\Bundle\ThemeBundle\Context\SettableThemeContext;
 use Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface;
