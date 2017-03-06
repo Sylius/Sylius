@@ -221,10 +221,9 @@
         <service id="sylius.form.type.channel_pricing" class="Sylius\Bundle\CoreBundle\Form\Type\Product\ChannelPricingType">
             <argument>%sylius.model.channel_pricing.class%</argument>
             <argument>%sylius.form.type.channel_pricing.validation_groups%</argument>
-            <argument type="service" id="sylius.repository.channel" />
             <tag name="form.type" />
         </service>
-        <service id="sylius.form.type.channel_pricings" class="Sylius\Bundle\CoreBundle\Form\Type\ChannelPricing\ChannelPricingsType">
+        <service id="sylius.form.type.channels_collection" class="Sylius\Bundle\CoreBundle\Form\Type\ChannelCollectionType">
             <argument type="service" id="sylius.repository.channel" />
             <tag name="form.type" />
         </service>
