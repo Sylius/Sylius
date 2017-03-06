@@ -37,6 +37,7 @@ class ChannelFixture extends AbstractResourceFixture
                 ->scalarNode('code')->cannotBeEmpty()->end()
                 ->scalarNode('hostname')->cannotBeEmpty()->end()
                 ->scalarNode('color')->cannotBeEmpty()->end()
+                ->scalarNode('default_tax_zone')->end()
                 ->scalarNode('tax_calculation_strategy')->end()
                 ->booleanNode('enabled')->end()
                 ->scalarNode('default_locale')->cannotBeEmpty()->end()
