@@ -113,6 +113,23 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
     /**
      * {@inheritdoc}
      */
+    public function searchByName($name, $locale)
+    {
+        return $this->createQueryBuilder('o')
+            ->addSelect('translation')
+            ->innerJoin('o.translations', 'translation')
+            ->andWhere('translation.name LIKE :name')
+            ->andWhere('translation.locale = :locale')
+            ->setParameter('name', '%'.$name.'%')
+            ->setParameter('locale', $locale)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function createListQueryBuilder()
     {
         return $this->createQueryBuilder('o')->leftJoin('o.translations', 'translation');
