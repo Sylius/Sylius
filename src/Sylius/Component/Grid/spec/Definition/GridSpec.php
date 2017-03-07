@@ -138,6 +138,28 @@ final class GridSpec extends ObjectBehavior
         $this->getField('enabled')->shouldReturn($secondField);
     }
 
+    function it_can_return_fields(Field $firstField, Field $secondField)
+    {
+        $firstField->getName()->willReturn('first');
+        $secondField->getName()->willReturn('second');
+        $this->addField($firstField);
+        $this->addField($secondField);
+
+        $this->getFields()->shouldHaveCount(2);
+    }
+
+    function it_can_return_only_enabled_fields(Field $firstField, Field $secondField)
+    {
+        $firstField->getName()->willReturn('first');
+        $firstField->isEnabled()->willReturn(true);
+        $secondField->getName()->willReturn('second');
+        $secondField->isEnabled()->willReturn(false);
+        $this->addField($firstField);
+        $this->addField($secondField);
+
+        $this->getEnabledFields()->shouldHaveCount(1);
+    }
+
     function it_does_not_have_any_action_groups_by_default()
     {
         $this->getActionGroups()->shouldReturn([]);
@@ -201,6 +223,20 @@ final class GridSpec extends ObjectBehavior
         $this->getActions('row')->shouldReturn([$action]);
     }
 
+    function it_returns_only_enabled_actions_for_given_group(
+        ActionGroup $actionGroup,
+        Action $firstAction,
+        Action $secondAction
+    ) {
+        $firstAction->isEnabled()->willReturn(true);
+        $secondAction->isEnabled()->willReturn(false);
+        $actionGroup->getName()->willReturn('row');
+        $actionGroup->getActions()->willReturn([$firstAction, $secondAction]);
+        $this->addActionGroup($actionGroup);
+
+        $this->getEnabledActions('row')->shouldReturn([$firstAction]);
+    }
+
     function it_does_not_have_any_filters_by_default()
     {
         $this->getFilters()->shouldReturn([]);
@@ -253,5 +289,27 @@ final class GridSpec extends ObjectBehavior
 
         $this->setFilter($secondFilter);
         $this->getFilter('enabled')->shouldReturn($secondFilter);
+    }
+
+    function it_can_return_filters(Filter $firstFilter, Filter $secondFilter)
+    {
+        $firstFilter->getName()->willReturn('first');
+        $secondFilter->getName()->willReturn('second');
+        $this->addFilter($firstFilter);
+        $this->addFilter($secondFilter);
+
+        $this->getFilters()->shouldHaveCount(2);
+    }
+
+    function it_can_return_only_enabled_filters(Filter $firstFilter, Filter $secondFilter)
+    {
+        $firstFilter->getName()->willReturn('first');
+        $firstFilter->isEnabled()->willReturn(true);
+        $secondFilter->getName()->willReturn('second');
+        $secondFilter->isEnabled()->willReturn(false);
+        $this->addFilter($firstFilter);
+        $this->addFilter($secondFilter);
+
+        $this->getEnabledFilters()->shouldHaveCount(1);
     }
 }

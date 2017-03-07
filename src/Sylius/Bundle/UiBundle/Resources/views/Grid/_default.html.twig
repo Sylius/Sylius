@@ -8,7 +8,7 @@
 
 {% set path = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
 
-{% if definition.filters|length > 0 %}
+{% if definition.enabledFilters|length > 0 %}
     <div class="ui hidden divider"></div>
     <div class="ui styled fluid accordion">
         <div class="title active">
@@ -18,7 +18,7 @@
         <div class="content active">
             <form method="get" action="{{ path }}" class="ui loadable form">
                 <div class="two fields">
-                {% for filter in definition.filters|sort_by('position') if filter.enabled %}
+                {% for filter in definition.enabledFilters|sort_by('position') if filter.enabled %}
                     {{ sylius_grid_render_filter(grid, filter) }}
 
                     {% if loop.index0 % 2 %}

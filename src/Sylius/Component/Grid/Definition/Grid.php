@@ -152,6 +152,14 @@ class Grid
     }
 
     /**
+     * @return array
+     */
+    public function getEnabledFields()
+    {
+        return $this->getEnabledItems($this->getFields());
+    }
+
+    /**
      * @param Field $field
      */
     public function addField(Field $field)
@@ -218,6 +226,14 @@ class Grid
     }
 
     /**
+     * @return array
+     */
+    public function getEnabledActionGroups()
+    {
+        return $this->getEnabledItems($this->getActionGroups());
+    }
+
+    /**
      * @param ActionGroup $actionGroup
      */
     public function addActionGroup(ActionGroup $actionGroup)
@@ -276,6 +292,14 @@ class Grid
     }
 
     /**
+     * @return array
+     */
+    public function getEnabledActions($groupName)
+    {
+        return $this->getEnabledItems($this->getActions($groupName));
+    }
+
+    /**
      * @param string $name
      *
      * @return bool
@@ -291,6 +315,14 @@ class Grid
     public function getFilters()
     {
         return $this->filters;
+    }
+
+    /**
+     * @return array
+     */
+    public function getEnabledFilters()
+    {
+        return $this->getEnabledItems($this->getFilters());
     }
 
     /**
@@ -347,5 +379,22 @@ class Grid
     public function hasFilter($name)
     {
         return array_key_exists($name, $this->filters);
+    }
+
+    /**
+     * @param array $items
+     *
+     * @return array
+     */
+    private function getEnabledItems(array $items)
+    {
+        $filteredItems = [];
+        foreach ($items as $item) {
+            if ($item->isEnabled()) {
+                $filteredItems[] = $item;
+            }
+        }
+
+        return $filteredItems;
     }
 }
