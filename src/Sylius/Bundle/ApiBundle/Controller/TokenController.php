@@ -11,13 +11,10 @@
 
 namespace Sylius\Bundle\ApiBundle\Controller;
 
-use FOS\RestBundle\Decoder\DecoderProviderInterface;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\ParameterBag;
 use OAuth2\OAuth2;
 use OAuth2\OAuth2ServerException;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 /**
  * @see \FOS\OAuthServerBundle\Controller\TokenController
@@ -33,18 +30,11 @@ final class TokenController
     private $server;
 
     /**
-     * @var DecoderProviderInterface
-     */
-    private $decoderProvider;
-
-    /**
      * @param OAuth2 $server
-     * @param DecoderProviderInterface $decoderProvider
      */
-    public function __construct(OAuth2 $server, DecoderProviderInterface $decoderProvider)
+    public function __construct(OAuth2 $server)
     {
         $this->server = $server;
-        $this->decoderProvider = $decoderProvider;
     }
 
     /**
@@ -54,40 +44,31 @@ final class TokenController
      */
     public function tokenAction(Request $request)
     {
-        $this->convertContentToRequestParameters($request);
-
         try {
             return $this->server->grantAccessToken($request);
-        } catch (OAuth2ServerException $e) {
-            return $e->getHttpResponse();
+        } catch (OAuth2ServerException $exception) {
+            return $this->normalizeExceptionResponse($exception);
         }
     }
 
     /**
-     * Additional action to keep default behaviour of FosRestBundle. Main aim is to turn off data normalization.
+     * @param OAuth2ServerException $exception
      *
-     * @param Request $request
+     * @return Response
      */
-    private function convertContentToRequestParameters(Request $request)
+    private function normalizeExceptionResponse(OAuth2ServerException $exception)
     {
-        $format = $request->getFormat($request->headers->get('Content-Type', '')) ?: $request->getRequestFormat();
-        $content = $request->getContent();
+        $body = [];
 
-        if (empty($content)) {
-            return;
-        }
+        $exceptionBody = json_decode($exception->getResponseBody());
+        $exceptionCode = $body['code'] = $exception->getHttpCode();
+        $body['message'] = $exceptionBody['error_description'];
+        $body['error'] = $exceptionBody['error'];
 
-        if (!$this->decoderProvider->supports($format)) {
-            return;
-        }
-
-        $decoder = $this->decoderProvider->getDecoder($format);
-        $data = $decoder->decode($content);
-
-        if (!is_array($data)) {
-            throw new BadRequestHttpException(sprintf('Invalid %s message received', $format));
-        }
-
-        $request->request = new ParameterBag($data);
+        return new Response(
+            json_encode($body),
+            $exceptionCode,
+            $exception->getResponseHeaders()
+        );
     }
 }
