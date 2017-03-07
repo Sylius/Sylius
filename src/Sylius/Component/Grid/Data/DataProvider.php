@@ -61,6 +61,6 @@ final class DataProvider implements DataProviderInterface
         $this->filtersApplicator->apply($dataSource, $grid, $parameters);
         $this->sorter->sort($dataSource, $grid, $parameters);
 
-        return $dataSource->getData($parameters);
+        return $dataSource->getData($parameters, $grid->getQueryHints());
     }
 }

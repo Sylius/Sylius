@@ -68,7 +68,7 @@ final class DataSource implements DataSourceInterface
     /**
      * {@inheritdoc}
      */
-    public function getData(Parameters $parameters)
+    public function getData(Parameters $parameters, $queryHints=[])
     {
         $countQueryBuilderModifier = function ($queryBuilder) {
             $queryBuilder
