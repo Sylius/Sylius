@@ -21,9 +21,9 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
 {
 
     /**
-     * @param int $priority
+     * @param int|null $priority
      */
-    public function setItsPriority($priority = null);
+    public function setItsPriority($priority);
 
     /**
      * @return int

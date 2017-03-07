@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\PromotionBundle\Form\Type;
 
+use Sylius\Bundle\PromotionBundle\Form\EventListener\SetPriorityFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;

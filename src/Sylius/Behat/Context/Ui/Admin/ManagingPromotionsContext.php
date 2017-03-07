@@ -120,9 +120,9 @@ final class ManagingPromotionsContext implements Context
     /**
      * @When I remove its priority
      */
-    public function iSetItsPriority()
+    public function iRemoveItsPriority()
     {
-        $this->updatePage->setItsPriority();
+        $this->updatePage->setItsPriority(null);
     }
 
     /**
