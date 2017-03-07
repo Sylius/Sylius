@@ -62,9 +62,9 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
-     * @When /^I want to get ("[^"]+" taxon) leafs$/
+     * @When /^I want to get children from (taxon "[^"]+")/
      */
-    public function iWantToGetTaxonLeafs(TaxonInterface $taxon)
+    public function iWantToGetChildrenFromTaxon(TaxonInterface $taxon)
     {
         $this->client->getCookieJar()->set(new Cookie($this->session->getName(), $this->session->getId()));
         $this->client->request('GET', '/admin/ajax/taxons/leafs', ['parentCode' => $taxon->getCode()], [], ['ACCEPT' => 'application/json']);
@@ -95,20 +95,13 @@ final class ManagingTaxonsContext implements Context
      * @Then I should see the taxon named :firstName, :secondName and :thirdName in the list
      * @Then I should see the taxon named :firstName, :secondName, :thirdName and :fourthName in the list
      */
-    public function iShouldSeeTheTaxonNamedAnd(... $taxonNames)
+    public function iShouldSeeTheTaxonNamedAnd(...$expectedTaxonNames)
     {
-        foreach ($taxonNames as $name) {
-            $response = json_decode($this->client->getResponse()->getContent(), true);
+        $response = json_decode($this->client->getResponse()->getContent(), true);
+        $taxonNames = array_map(function ($item) {
+            return $item['name'];
+        }, $response);
 
-            $taxonNames = array_map(function ($item) {
-                return $item['name'];
-            }, $response);
-
-            if (!in_array($name, $taxonNames)) {
-                throw new \InvalidArgumentException(
-                    sprintf('There should be taxon named "%s", but got only "%s"', $name, $this->client->getResponse()->getContent())
-                );
-            }
-        }
+        Assert::allOneOf($taxonNames, $expectedTaxonNames);
     }
 }
