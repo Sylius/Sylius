@@ -19,6 +19,17 @@ use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
  */
 interface UpdatePageInterface extends BaseUpdatePageInterface
 {
+
+    /**
+     * @param int $priority
+     */
+    public function setItsPriority($priority = null);
+
+    /**
+     * @return int
+     */
+    public function getItsPriority();
+
     /**
      * @param string $name
      */

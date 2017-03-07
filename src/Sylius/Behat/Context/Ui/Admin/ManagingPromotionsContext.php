@@ -118,6 +118,14 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
+     * @When I remove its priority
+     */
+    public function iSetItsPriority()
+    {
+        $this->updatePage->setItsPriority();
+    }
+
+    /**
      * @Then the :promotionName promotion should appear in the registry
      * @Then the :promotionName promotion should exist in the registry
      * @Then this promotion should still be named :promotionName
@@ -624,5 +632,15 @@ final class ManagingPromotionsContext implements Context
         $this->iWantToModifyAPromotion($promotion);
 
         Assert::true($this->updatePage->hasResourceValues([$field => 1]));
+    }
+
+    /**
+     * @Given the :promotion promotion should have priority :priority
+     */
+    public function thePromotionsShouldHavePriority($promotion, $priority)
+    {
+        $this->iWantToModifyAPromotion($promotion);
+
+        Assert::same($this->updatePage->getItsPriority(), $priority);
     }
 }
