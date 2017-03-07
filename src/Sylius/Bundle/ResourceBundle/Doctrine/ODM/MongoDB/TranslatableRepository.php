@@ -23,36 +23,6 @@ use Sylius\Component\Resource\Repository\TranslatableRepositoryInterface;
 class TranslatableRepository extends DocumentRepository implements TranslatableRepositoryInterface
 {
     /**
-     * @var TranslationLocaleProviderInterface
-     */
-    protected $localeProvider;
-
-    /**
-     * @var array
-     */
-    protected $translatableFields = [];
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setLocaleProvider(TranslationLocaleProviderInterface $localeProvider)
-    {
-        $this->localeProvider = $localeProvider;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setTranslatableFields(array $translatableFields)
-    {
-        $this->translatableFields = $translatableFields;
-
-        return $this;
-    }
-
-    /**
      * {@inheritdoc}
      */
     protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = null)
@@ -64,11 +34,11 @@ class TranslatableRepository extends DocumentRepository implements TranslatableR
         foreach ($criteria as $property => $value) {
             if (is_array($value)) {
                 $queryBuilder
-                    ->field($this->getPropertyName($property))->in($value)
+                    ->field($property)->in($value)
                 ;
             } elseif ('' !== $value) {
                 $queryBuilder
-                    ->field($this->getPropertyName($property))->equals($value)
+                    ->field($property)->equals($value)
                 ;
             }
         }
@@ -84,21 +54,7 @@ class TranslatableRepository extends DocumentRepository implements TranslatableR
         }
 
         foreach ($sorting as $property => $order) {
-            $queryBuilder->sort($this->getPropertyName($property), $order);
+            $queryBuilder->sort($property, $order);
         }
-    }
-
-    /**
-     * @param string $name
-     *
-     * @return string
-     */
-    protected function getPropertyName($name)
-    {
-        if (in_array($name, $this->translatableFields, true)) {
-            return 'translations.'.$this->localeProvider->getDefaultLocaleCode().'.'.$name;
-        }
-
-        return $name;
     }
 }
