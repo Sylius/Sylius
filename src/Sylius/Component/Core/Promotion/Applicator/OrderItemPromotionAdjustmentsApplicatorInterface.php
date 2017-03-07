@@ -23,7 +23,7 @@ interface OrderItemPromotionAdjustmentsApplicatorInterface
     /**
      * @param OrderItemInterface $orderItem
      * @param PromotionInterface $promotion
-     * @param integer $amount
+     * @param int $amount
      */
     public function apply(OrderItemInterface $orderItem, PromotionInterface $promotion, $amount);
 }

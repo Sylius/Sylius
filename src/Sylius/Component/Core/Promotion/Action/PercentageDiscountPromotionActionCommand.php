@@ -19,7 +19,7 @@ use Sylius\Component\Core\Promotion\Reverser\OrderPromotionAdjustmentsReverserIn
 use Sylius\Component\Promotion\Action\PromotionActionCommandInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -47,16 +47,15 @@ final class PercentageDiscountPromotionActionCommand implements PromotionActionC
     private $adjustmentsReverser;
 
     /**
-     * @param ProportionalIntegerDistributorInterface      $distributor
+     * @param ProportionalIntegerDistributorInterface $distributor
      * @param OrderPromotionAdjustmentsApplicatorInterface $adjustmentsApplicator
-     * @param OrderPromotionAdjustmentsReverserInterface   $adjustmentsReverser
+     * @param OrderPromotionAdjustmentsReverserInterface $adjustmentsReverser
      */
     public function __construct(
         ProportionalIntegerDistributorInterface $distributor,
         OrderPromotionAdjustmentsApplicatorInterface $adjustmentsApplicator,
         OrderPromotionAdjustmentsReverserInterface $adjustmentsReverser
-    )
-    {
+    ) {
         $this->distributor = $distributor;
         $this->adjustmentsApplicator = $adjustmentsApplicator;
         $this->adjustmentsReverser = $adjustmentsReverser;
@@ -67,9 +66,7 @@ final class PercentageDiscountPromotionActionCommand implements PromotionActionC
      */
     public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
     {
-        if (!$subject instanceof OrderInterface) {
-            throw new UnexpectedTypeException($subject, OrderInterface::class);
-        }
+        Assert::isInstanceOf($subject, OrderInterface::class);
 
         if($subject->countItems() === 0) {
             return false;
@@ -102,9 +99,7 @@ final class PercentageDiscountPromotionActionCommand implements PromotionActionC
      */
     public function revert(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
     {
-        if (!$subject instanceof OrderInterface) {
-            throw new UnexpectedTypeException($subject, OrderInterface::class);
-        }
+        Assert::isInstanceOf($subject, OrderInterface::class);
 
         if($subject->countItems() === 0) {
             return false;

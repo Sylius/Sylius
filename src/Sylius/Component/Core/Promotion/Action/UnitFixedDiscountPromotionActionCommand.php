@@ -18,7 +18,7 @@ use Sylius\Component\Core\Promotion\Filter\FilterInterface;
 use Sylius\Component\Core\Promotion\Reverser\OrderItemPromotionAdjustmentsReverserInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -56,7 +56,7 @@ final class UnitFixedDiscountPromotionActionCommand implements ChannelBasedPromo
 
     /**
      * @param OrderItemPromotionAdjustmentsApplicatorInterface $adjustmentsApplicator
-     * @param OrderItemPromotionAdjustmentsReverserInterface  $adjustmentsReverser
+     * @param OrderItemPromotionAdjustmentsReverserInterface $adjustmentsReverser
      * @param FilterInterface $priceRangeFilter
      * @param FilterInterface $taxonFilter
      * @param FilterInterface $productFilter
@@ -80,9 +80,7 @@ final class UnitFixedDiscountPromotionActionCommand implements ChannelBasedPromo
      */
     public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
     {
-        if (!$subject instanceof OrderInterface) {
-            throw new UnexpectedTypeException($subject, OrderInterface::class);
-        }
+        Assert::isInstanceOf($subject, OrderInterface::class);
 
         $channelCode = $subject->getChannel()->getCode();
         if (!isset($configuration[$channelCode])) {
@@ -117,9 +115,7 @@ final class UnitFixedDiscountPromotionActionCommand implements ChannelBasedPromo
      */
     public function revert(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
     {
-        if (!$subject instanceof OrderInterface) {
-            throw new UnexpectedTypeException($subject, OrderInterface::class);
-        }
+        Assert::isInstanceOf($subject, OrderInterface::class);
 
         $this->adjustmentsReverser->revert($subject, $promotion);
     }

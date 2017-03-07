@@ -23,7 +23,6 @@ use Sylius\Component\Core\Promotion\Applicator\OrderItemPromotionAdjustmentsAppl
 use Sylius\Component\Core\Promotion\Filter\FilterInterface;
 use Sylius\Component\Core\Promotion\Reverser\OrderItemPromotionAdjustmentsReverserInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
@@ -137,7 +136,7 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         PromotionInterface $promotion
     ) {
         $this
-            ->shouldThrow(UnexpectedTypeException::class)
+            ->shouldThrow(\InvalidArgumentException::class)
             ->during('execute', [$subject, ['percentage' => 0.2], $promotion])
         ;
     }
@@ -157,7 +156,7 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         PromotionInterface $promotion
     ) {
         $this
-            ->shouldThrow(UnexpectedTypeException::class)
+            ->shouldThrow(\InvalidArgumentException::class)
             ->during('revert', [$subject, ['percentage' => 0.2], $promotion])
         ;
     }

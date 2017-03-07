@@ -72,7 +72,8 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
 
         $order
             ->getItems()
-            ->willReturn(new \ArrayIterator([$firstItem->getWrappedObject(), $secondItem->getWrappedObject()]));
+            ->willReturn(new \ArrayIterator([$firstItem->getWrappedObject(), $secondItem->getWrappedObject()]))
+        ;
 
         $order->getPromotionSubjectTotal()->willReturn(10000);
         $firstItem->getTotal()->willReturn(6000);
@@ -205,7 +206,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $this->revert($order, [], $promotion);
     }
 
-    function it_does_not_revert_if_order_has_no_items(
+    function it_does_not_revert_any_promotion_if_order_has_no_items(
         OrderPromotionAdjustmentsReverserInterface $adjustmentsReverser,
         OrderInterface $order,
         PromotionInterface $promotion

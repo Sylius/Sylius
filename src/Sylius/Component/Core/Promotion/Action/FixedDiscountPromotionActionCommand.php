@@ -18,7 +18,6 @@ use Sylius\Component\Core\Promotion\Applicator\OrderPromotionAdjustmentsApplicat
 use Sylius\Component\Core\Promotion\Reverser\OrderPromotionAdjustmentsReverserInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Webmozart\Assert\Assert;
 
 /**
@@ -48,9 +47,9 @@ final class FixedDiscountPromotionActionCommand implements ChannelBasedPromotion
     private $adjustmentsReverser;
 
     /**
-     * @param ProportionalIntegerDistributorInterface      $proportionalIntegerDistributor
+     * @param ProportionalIntegerDistributorInterface $proportionalIntegerDistributor
      * @param OrderPromotionAdjustmentsApplicatorInterface $adjustmentsApplicator
-     * @param OrderPromotionAdjustmentsReverserInterface   $adjustmentsReverser
+     * @param OrderPromotionAdjustmentsReverserInterface $adjustmentsReverser
      */
     public function __construct(
         ProportionalIntegerDistributorInterface $proportionalIntegerDistributor,
@@ -67,9 +66,7 @@ final class FixedDiscountPromotionActionCommand implements ChannelBasedPromotion
      */
     public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
     {
-        if (!$subject instanceof OrderInterface) {
-            throw new UnexpectedTypeException($subject, OrderInterface::class);
-        }
+        Assert::isInstanceOf($subject, OrderInterface::class);
 
         if($subject->countItems() === 0) {
             return false;
@@ -111,11 +108,9 @@ final class FixedDiscountPromotionActionCommand implements ChannelBasedPromotion
      */
     public function revert(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
     {
-        if (!$subject instanceof OrderInterface) {
-            throw new UnexpectedTypeException($subject, OrderInterface::class);
-        }
+        Assert::isInstanceOf($subject, OrderInterface::class);
 
-        if($subject->countItems() === 0) {
+        if ($subject->countItems() === 0) {
             return;
         }
 

@@ -30,9 +30,7 @@ final class OrderItemPromotionAdjustmentsApplicator implements OrderItemPromotio
     /**
      * @param AdjustmentFactoryInterface $adjustmentFactory
      */
-    public function __construct(
-        AdjustmentFactoryInterface $adjustmentFactory
-    ) {
+    public function __construct(AdjustmentFactoryInterface $adjustmentFactory) {
         $this->adjustmentFactory = $adjustmentFactory;
     }
 
@@ -65,9 +63,7 @@ final class OrderItemPromotionAdjustmentsApplicator implements OrderItemPromotio
      *
      * @return AdjustmentInterface
      */
-    private function createAdjustment(
-        PromotionInterface $promotion
-    ) {
+    private function createAdjustment(PromotionInterface $promotion) {
         /** @var AdjustmentInterface $adjustment */
         $adjustment = $this->adjustmentFactory->createNew();
         $adjustment->setType(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT);

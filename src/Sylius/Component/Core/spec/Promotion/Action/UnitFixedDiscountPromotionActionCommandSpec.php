@@ -116,7 +116,7 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
 
-        $adjustmentsApplicator->apply(Argument::any(), Argument::any(), Argument::any())->shouldNotBeCalled();
+        $adjustmentsApplicator->apply(Argument::cetera())->shouldNotBeCalled();
 
         $this->execute($order, ['WEB_US' => ['amount' => 0]], $promotion)->shouldReturn(false);
     }
@@ -140,7 +140,7 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         PromotionInterface $promotion
     ) {
         $this
-            ->shouldThrow(UnexpectedTypeException::class)
+            ->shouldThrow(\InvalidArgumentException::class)
             ->during('execute', [$subject, ['amount' => 1000], $promotion])
         ;
     }
@@ -160,7 +160,7 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         PromotionInterface $promotion
     ) {
         $this
-            ->shouldThrow(UnexpectedTypeException::class)
+            ->shouldThrow(\InvalidArgumentException::class)
             ->during('revert', [$subject, ['amount' => 1000], $promotion])
         ;
     }

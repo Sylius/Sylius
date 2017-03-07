@@ -27,9 +27,7 @@ use Sylius\Component\Promotion\Model\PromotionInterface;
  */
 final class OrderItemPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
 {
-    function let(
-        AdjustmentFactoryInterface $adjustmentFactory
-    ) {
+    function let(AdjustmentFactoryInterface $adjustmentFactory) {
         $this->beConstructedWith($adjustmentFactory);
     }
 
@@ -38,15 +36,15 @@ final class OrderItemPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
         $this->shouldHaveType(OrderItemPromotionAdjustmentsApplicator::class);
     }
 
-    function it_implements_an_units_promotion_adjustments_applicator_interface()
+    function it_implements_order_item_promotion_adjustments_applicator_interface()
     {
         $this->shouldImplement(OrderItemPromotionAdjustmentsApplicatorInterface::class);
     }
 
     function it_applies_promotion_adjustments_on_all_units_of_given_order_item(
         OrderItemInterface $orderItem,
-        OrderItemUnitInterface $unit1,
-        OrderItemUnitInterface $unit2,
+        OrderItemUnitInterface $firstUnit,
+        OrderItemUnitInterface $secondUnit,
         PromotionInterface $promotion,
         AdjustmentFactoryInterface $adjustmentFactory,
         AdjustmentInterface $firstAdjustment,
@@ -56,7 +54,7 @@ final class OrderItemPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
         $promoCode = 'WINTER_GUNS_PROMOTION';
         $orderItem
             ->getUnits()
-            ->willReturn(new ArrayCollection([$unit1->getWrappedObject(), $unit2->getWrappedObject()]))
+            ->willReturn(new ArrayCollection([$firstUnit->getWrappedObject(), $secondUnit->getWrappedObject()]))
         ;
 
         $promotion->getName()->willReturn($promoName);
@@ -77,19 +75,18 @@ final class OrderItemPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
         $secondAdjustment->setOriginCode($promoCode)->shouldBeCalled();
         $secondAdjustment->setAmount(-1000)->shouldBeCalled();
 
-        $unit1->addAdjustment($firstAdjustment)->shouldBeCalled();
-        $unit1->getTotal()->shouldBeCalled()->willReturn(5000);
-        $unit2->addAdjustment($secondAdjustment)->shouldBeCalled();
-        $unit2->getTotal()->shouldBeCalled()->willReturn(5000);
+        $firstUnit->addAdjustment($firstAdjustment)->shouldBeCalled();
+        $firstUnit->getTotal()->willReturn(5000);
+        $secondUnit->addAdjustment($secondAdjustment)->shouldBeCalled();
+        $secondUnit->getTotal()->willReturn(5000);
 
         $this->apply($orderItem, $promotion, 1000);
     }
 
-
-    function it_prevents_appliying_an_adjustment_bigger_than_unit_total(
+    function it_prevents_applying_an_adjustment_bigger_than_unit_total(
         OrderItemInterface $orderItem,
-        OrderItemUnitInterface $unit1,
-        OrderItemUnitInterface $unit2,
+        OrderItemUnitInterface $firstUnit,
+        OrderItemUnitInterface $secondUnit,
         PromotionInterface $promotion,
         AdjustmentFactoryInterface $adjustmentFactory,
         AdjustmentInterface $firstAdjustment,
@@ -99,7 +96,7 @@ final class OrderItemPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
         $promoCode = 'WINTER_GUNS_PROMOTION';
         $orderItem
             ->getUnits()
-            ->willReturn(new ArrayCollection([$unit1->getWrappedObject(), $unit2->getWrappedObject()]))
+            ->willReturn(new ArrayCollection([$firstUnit->getWrappedObject(), $secondUnit->getWrappedObject()]))
         ;
 
         $promotion->getName()->willReturn($promoName);
@@ -120,10 +117,10 @@ final class OrderItemPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
         $secondAdjustment->setOriginCode($promoCode)->shouldBeCalled();
         $secondAdjustment->setAmount(-500)->shouldBeCalled();
 
-        $unit1->addAdjustment($firstAdjustment)->shouldBeCalled();
-        $unit1->getTotal()->shouldBeCalled()->willReturn(500);
-        $unit2->addAdjustment($secondAdjustment)->shouldBeCalled();
-        $unit2->getTotal()->shouldBeCalled()->willReturn(500);
+        $firstUnit->addAdjustment($firstAdjustment)->shouldBeCalled();
+        $firstUnit->getTotal()->shouldBeCalled()->willReturn(500);
+        $secondUnit->addAdjustment($secondAdjustment)->shouldBeCalled();
+        $secondUnit->getTotal()->shouldBeCalled()->willReturn(500);
 
         $this->apply($orderItem, $promotion, 1000);
     }

@@ -20,7 +20,7 @@ use Sylius\Component\Promotion\Model\PromotionInterface;
 interface OrderPromotionAdjustmentsReverserInterface
 {
     /**
-     * @param OrderInterface     $order
+     * @param OrderInterface $order
      * @param PromotionInterface $promotion
      */
     public function revert(OrderInterface $order, PromotionInterface $promotion);

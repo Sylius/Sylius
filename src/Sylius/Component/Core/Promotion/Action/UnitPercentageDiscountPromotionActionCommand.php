@@ -18,7 +18,7 @@ use Sylius\Component\Core\Promotion\Filter\FilterInterface;
 use Sylius\Component\Core\Promotion\Reverser\OrderItemPromotionAdjustmentsReverserInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -79,9 +79,7 @@ final class UnitPercentageDiscountPromotionActionCommand implements ChannelBased
      */
     public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
     {
-        if (!$subject instanceof OrderInterface) {
-            throw new UnexpectedTypeException($subject, OrderInterface::class);
-        }
+        Assert::isInstanceOf($subject, OrderInterface::class);
 
         $channelCode = $subject->getChannel()->getCode();
         if (!isset($configuration[$channelCode]) || !isset($configuration[$channelCode]['percentage'])) {
@@ -112,9 +110,7 @@ final class UnitPercentageDiscountPromotionActionCommand implements ChannelBased
      */
     public function revert(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
     {
-        if (!$subject instanceof OrderInterface) {
-            throw new UnexpectedTypeException($subject, OrderInterface::class);
-        }
+        Assert::isInstanceOf($subject, OrderInterface::class);
 
         $this->adjustmentsReverser->revert($subject, $promotion);
     }
