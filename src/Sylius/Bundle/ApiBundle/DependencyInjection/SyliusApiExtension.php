@@ -37,11 +37,6 @@ final class SyliusApiExtension extends AbstractResourceExtension implements Prep
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
         $loader->load('services.xml');
-
-        $container->setDefinition('fos_oauth_server.controller.token', new Definition(TokenController::class, [
-            new Reference('fos_oauth_server.server'),
-            new Reference('fos_rest.decoder_provider'),
-        ]));
     }
 
     /**
