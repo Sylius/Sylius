@@ -14,7 +14,13 @@ sylius:
         impersonate: 'Úspešne zosobnený užívateľ %name%.'
         set_address_as_default: 'Adresa bola nastavená ako predvolená.'
     order:
+        apply_state_machine_transition_error: 'Tam bol neočakávaný problém s aktualizáciou objednávku. Prosím, skúste znova aktualizovať objednávky.'
         promotion_integrity: 'Akciu %promotionName% už nemôžete využiť.'
         total_integrity: 'Celková suma objednávky bola zmenená, skontrolujte objednávku a potrvďte ju znova.'
+        update_error: 'Tam bol neočakávaný problém s aktualizáciou produktu. Prosím, skúste znova aktualizovať výrobku.'
+    payment:
+        apply_state_machine_transition_error: 'Tam bol neočakávaný problém s aktualizáciou platbu. Skúste aktualizovať platbu znova.'
     product:
         out_of_stock: 'Na sklade je už iba %quantity% produktov.'
+    product_variant:
+        update_error: 'Tam bol neočakávaný problém s aktualizáciou produkt variant. Prosím, skúste znova aktualizovať produkt variant.'

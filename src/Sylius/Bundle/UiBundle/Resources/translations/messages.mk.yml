@@ -2,20 +2,28 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    form:
+        login:
+            remember_me: 'Запамти ме'
     ui:
         add_value: 'Додај вредност'
         city: 'Град'
         company: 'Компанија'
+        confirmation: 'Потврда'
+        confirmation_title: 'Потврда'
         country: 'Држава'
+        current_password: 'Тековна лозинка'
         email: 'Е-пошта'
         exchange_rate: 'Курс на конверзија'
         members: 'Членови'
         message: 'Порака'
+        new_password: 'Нова лозинка'
         phone_number: 'Телефонски Број'
         postcode: 'Поштенски Број'
         presentation: 'Презентација'
         province: 'Регион'
         provinces: 'Региони'
+        remember_me: 'Запамти ме'
         scope: 'Опсег'
         street: 'Улица'
         topic: 'Тема'

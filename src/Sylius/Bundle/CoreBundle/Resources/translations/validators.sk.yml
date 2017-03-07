@@ -57,6 +57,7 @@ sylius:
         onHand:
             min: Počet položiek na sklade musí byť viac ako {{ limit }}.
             not_blank: Prosím zadajte počet položiek na sklade.
+            reserved: Na strane musí byť vyšší ako počet na držať jednotky
         original_price:
             min: Pôvodná cena nesmie byť záporná.
         weight:

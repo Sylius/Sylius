@@ -7,5 +7,6 @@ sylius:
             description: Popis
             name: Názov
             parent: Nadradená kategória
+            slug: Slug
         taxonomy:
             name: Názov

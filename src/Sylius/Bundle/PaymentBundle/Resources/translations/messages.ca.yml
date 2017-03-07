@@ -4,7 +4,7 @@
 sylius:
     form:
         credit_card:
-            cardholder_name: Nom del titular de la tarja
+            cardholder_name: Nom del titular de la targeta
             expiry_month: Mes de caducitat
             expiry_year: Any de venciment
             number: Número de la targeta
@@ -17,13 +17,18 @@ sylius:
                 header: Estat de pagament
                 checkout: Realitza la compra
                 completed: Completat
+                authorized: Autoritzat
                 failed: S'ha produït un error
                 new: Nou
                 pending: Pendent
                 processing: Processant
                 unknown: Desconegut
                 void: Buit
+                cancelled: Cancel·lat
+                refunded: Reemborsat
         payment_method:
             description: Descripció
             enabled: Activat?
+            instructions: Instruccions
             name: Nom
+            position: Posició

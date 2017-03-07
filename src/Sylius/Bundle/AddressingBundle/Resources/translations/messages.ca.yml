@@ -34,6 +34,8 @@ sylius:
                 province: Província
                 zone: Zona
             scope: Àmbit d'aplicació
+            scopes:
+                all: Totes
             select: Tria
             select_scope: Seleccioneu l'àmbit
         zone_member:
