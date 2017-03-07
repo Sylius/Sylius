@@ -30,7 +30,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      */
     public function specifyPrice($price, $channelName)
     {
-        $this->getDocument()->fillField(sprintf('Price for %s', $channelName), $price);
+        $this->getElement('price', ['%channelName%' => $channelName])->setValue($price);
     }
 
     /**
@@ -38,7 +38,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      */
     public function specifyOriginalPrice($originalPrice, $channelName)
     {
-        $this->getDocument()->fillField(sprintf('Original price for %s', $channelName), $originalPrice);
+        $this->getElement('original_price', ['%channelName%' => $channelName])->setValue($originalPrice);
     }
 
     /**
@@ -159,6 +159,8 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             'option_select' => '#sylius_product_variant_optionValues_%option-name%',
             'price_calculator' => '#sylius_product_variant_pricingCalculator',
             'shipping_category' => '#sylius_product_variant_shippingCategory',
+            'original_price' => '#sylius_product_variant_channelPricings > .field:contains("%channelName%") input[name$="[originalPrice]"]',
+            'price' => '#sylius_product_variant_channelPricings > .field:contains("%channelName%") input[name$="[price]"]',
             'prices_validation_message' => '#sylius_product_variant_channelPricings ~ .sylius-validation-error',
             'first_price_validation_message' => '#sylius_product_variant_channelPricings [data-form-collection="item"]:first-child .sylius-validation-error',
             'weight' => '#sylius_product_variant_weight',

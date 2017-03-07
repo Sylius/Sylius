@@ -79,10 +79,6 @@
 {% block collection_widget -%}
     {% from 'SyliusResourceBundle:Macros:notification.html.twig' import error %}
     {% set attr = attr|merge({'class': attr.class|default ~ ' controls collection-widget'}) %}
-    {% set allow_add = allow_add|default(false) %}
-    {% set allow_delete = allow_delete|default(false) %}
-    {% set button_add_label = button_add_label|default %}
-    {% set button_delete_label = button_delete_label|default %}
 
     {% spaceless %}
         <div data-form-type="collection" {{ block('widget_container_attributes') }}
