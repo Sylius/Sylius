@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\ResourceBundle\Form\DataTransformer;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Form\DataTransformer\RecursiveTransformer;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
@@ -35,6 +36,13 @@ final class RecursiveTransformerSpec extends ObjectBehavior
     function it_is_data_transformer()
     {
         $this->shouldImplement(DataTransformerInterface::class);
+    }
+
+    function it_returns_empty_array_collection_when_transforming_null(DataTransformerInterface $decoratedTransformer)
+    {
+        $this->transform(null)->shouldBeLike(new ArrayCollection());
+
+        $decoratedTransformer->transform(Argument::any())->shouldNotBeCalled();
     }
 
     function it_transforms_recursively_using_configured_transformer(DataTransformerInterface $decoratedTransformer)
