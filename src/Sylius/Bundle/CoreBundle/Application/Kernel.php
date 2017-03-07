@@ -76,6 +76,8 @@ class Kernel extends HttpKernel
             new \Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new \Symfony\Bundle\TwigBundle\TwigBundle(),
 
+            new \Sonata\CoreBundle\SonataCoreBundle(),
+            new \Sonata\BlockBundle\SonataBlockBundle(),
             new \Sonata\IntlBundle\SonataIntlBundle(),
             new \Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
             new \JMS\SerializerBundle\JMSSerializerBundle(),
