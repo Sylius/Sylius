@@ -13,6 +13,7 @@ sylius:
             postcode: Поштенски Број
             street: Улица
             province: Регион
+            zone: Зона
         country:
             name: Назив
             provinces: Региони

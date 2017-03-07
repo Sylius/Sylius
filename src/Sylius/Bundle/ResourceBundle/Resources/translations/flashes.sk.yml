@@ -13,3 +13,5 @@ sylius:
         enable: '%resource% bol úspešne aktivovaný.'
         disable: '%resource% bol úspešne deaktivovaný.'
         delete_error: 'Nie je možné odstrániť, %resource% sa používa.'
+        race_condition_error: 'Nemôžete aktualizovať, %resource% bol zmenený.'
+        something_went_wrong_error: 'Niečo sa pokazilo, skúste to prosím znova.'
