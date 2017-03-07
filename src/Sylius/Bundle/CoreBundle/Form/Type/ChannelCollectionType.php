@@ -78,6 +78,6 @@ final class ChannelCollectionType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'collection';
+        return 'sylius_channel_collection';
     }
 }
