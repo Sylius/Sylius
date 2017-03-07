@@ -182,4 +182,16 @@ final class TaxonSpec extends ObjectBehavior
         $this->setPosition(0);
         $this->getPosition()->shouldReturn(0);
     }
+
+    function it_has_not_children_by_default()
+    {
+        $this->hasChildren()->shouldReturn(false);
+    }
+
+    function it_has_children_when_you_have_added_child(TaxonInterface $taxon)
+    {
+        $this->addChild($taxon);
+
+        $this->hasChildren()->shouldReturn(true);
+    }
 }

@@ -60,6 +60,14 @@ interface TaxonRepositoryInterface extends RepositoryInterface
     public function findByName($name, $locale);
 
     /**
+     * @param string $phrase
+     * @param string $locale
+     *
+     * @return TaxonInterface[]
+     */
+    public function findByNamePart($phrase, $locale);
+
+    /**
      * @return QueryBuilder
      */
     public function createListQueryBuilder();

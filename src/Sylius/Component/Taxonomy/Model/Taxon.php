@@ -181,6 +181,14 @@ class Taxon implements TaxonInterface
     /**
      * {@inheritdoc}
      */
+    public function hasChildren()
+    {
+        return !$this->children->isEmpty();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function addChild(TaxonInterface $taxon)
     {
         if (!$this->hasChild($taxon)) {
