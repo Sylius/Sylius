@@ -45,6 +45,14 @@ Feature: Promotion validation
         And this promotion should still be named "Christmas sale"
 
     @ui
+    Scenario: Trying to remove name from existing promotion
+        Given there is a promotion "Christmas sale"
+        And I want to modify this promotion
+        When I remove its priority
+        And I try to save my changes
+        Then I should be notified that priority is required
+
+    @ui
     Scenario: Trying to add start later then end date for existing promotion
         Given there is a promotion "Christmas sale"
         And I want to modify this promotion

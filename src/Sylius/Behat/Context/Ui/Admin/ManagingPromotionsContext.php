@@ -118,6 +118,14 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
+     * @When I remove its priority
+     */
+    public function iSetItsPriority()
+    {
+        $this->updatePage->setItsPriority();
+    }
+
+    /**
      * @Then the :promotionName promotion should appear in the registry
      * @Then the :promotionName promotion should exist in the registry
      * @Then this promotion should still be named :promotionName
