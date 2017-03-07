@@ -47,7 +47,7 @@ Feature: Editing promotion
         And the "Christmas sale" promotion should be applicable for the "United States" channel
 
     @ui
-    Scenario: Adding a promotion with start and end date
+    Scenario: Editing a promotion with start and end date
         Given I want to modify a "Christmas sale" promotion
         When I make it available from "12.12.2017" to "24.12.2017"
         And I save my changes

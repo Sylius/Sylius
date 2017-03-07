@@ -1,8 +1,8 @@
 @managing_promotions
 Feature: Promotion unique code validation
-    In order to uniquely identify tax rates
+    In order to uniquely identify promotions
     As an Administrator
-    I want to be prevented from adding two tax rates with the same code
+    I want to be prevented from adding two promotions with the same code
 
     Background:
         Given the store operates on a single channel in "United States"
