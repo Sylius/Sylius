@@ -14,6 +14,7 @@ namespace spec\Sylius\Component\Core\Promotion\Reverser;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\Order;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Core\Promotion\Reverser\OrderPromotionAdjustmentsReverser;
@@ -30,21 +31,20 @@ final class OrderPromotionAdjustmentsReverserSpec extends ObjectBehavior
         $this->shouldHaveType(OrderPromotionAdjustmentsReverser::class);
     }
 
-    function it_implements_an_units_promotion_adjustments_reverser_interface()
+    function it_implements_order_promotion_adjustments_reverser_interface()
     {
         $this->shouldImplement(OrderPromotionAdjustmentsReverserInterface::class);
     }
 
     function it_reverts_promotion_adjustments_on_all_units_of_given_order(
-        Order $order,
+        OrderInterface $order,
         OrderItemInterface $orderItem,
         OrderItemUnitInterface $unit1,
         OrderItemUnitInterface $unit2,
         PromotionInterface $promotion,
         AdjustmentInterface $firstAdjustment,
         AdjustmentInterface $secondAdjustment
-    )
-    {
+    ) {
         $order->getItems()->shouldBeCalled()->willReturn([$orderItem]);
         $orderItem->getUnits()->shouldBeCalled()->willReturn([$unit1, $unit2]);
 

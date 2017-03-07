@@ -102,7 +102,8 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
 
         $order
             ->getItems()
-            ->willReturn(new \ArrayIterator([$firstItem->getWrappedObject(), $secondItem->getWrappedObject()]));
+            ->willReturn(new \ArrayIterator([$firstItem->getWrappedObject(), $secondItem->getWrappedObject()]))
+        ;
 
         $order->getPromotionSubjectTotal()->willReturn(10000);
         $firstItem->getTotal()->willReturn(6000);
