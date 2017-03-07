@@ -13,9 +13,11 @@ namespace spec\Sylius\Component\Core\Shipping\Calculator;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Sylius\Component\Core\Exception\ChannelNotDefinedException;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
+use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Shipping\Calculator\PerUnitRateCalculator;
 use Sylius\Component\Shipping\Calculator\CalculatorInterface;
 
@@ -52,5 +54,26 @@ final class PerUnitRateCalculatorSpec extends ObjectBehavior
         $shipment->getShippingUnitCount()->willReturn(10);
 
         $this->calculate($shipment, ['WEB' => ['amount' => 200]])->shouldReturn(2000);
+    }
+
+    function it_throws_a_channel_not_defined_exception_if_channel_code_key_does_not_exist(
+        ShipmentInterface $shipment,
+        OrderInterface $order,
+        ChannelInterface $channel,
+        ShippingMethodInterface $shippingMethod
+    ) {
+        $shipment->getOrder()->willReturn($order);
+        $shipment->getMethod()->willReturn($shippingMethod);
+
+        $order->getChannel()->willReturn($channel);
+        $channel->getCode()->willReturn('WEB');
+        $channel->getName()->willReturn('WEB');
+
+        $shippingMethod->getName()->willReturn('UPS');
+
+        $this
+            ->shouldThrow(ChannelNotDefinedException::class)
+            ->during('calculate', [$shipment, ['amount' => 200]])
+        ;
     }
 }

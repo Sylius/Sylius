@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Core\Shipping\Calculator;
 
+use Sylius\Component\Core\Exception\ChannelNotDefinedException;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Shipping\Calculator\CalculatorInterface;
 use Sylius\Component\Shipping\Model\ShipmentInterface as BaseShipmentInterface;
@@ -23,12 +24,22 @@ final class PerUnitRateCalculator implements CalculatorInterface
 {
     /**
      * {@inheritdoc}
+     *
+     * @throws ChannelNotDefinedException
      */
     public function calculate(BaseShipmentInterface $subject, array $configuration)
     {
         Assert::isInstanceOf($subject, ShipmentInterface::class);
 
         $channelCode = $subject->getOrder()->getChannel()->getCode();
+
+        if (!isset($configuration[$channelCode])) {
+            throw new ChannelNotDefinedException(sprintf(
+                'Channel %s has no amount defined for shipping method %s',
+                $subject->getOrder()->getChannel()->getName(),
+                $subject->getMethod()->getName()
+            ));
+        }
 
         return (int) ($configuration[$channelCode]['amount'] * $subject->getShippingUnitCount());
     }

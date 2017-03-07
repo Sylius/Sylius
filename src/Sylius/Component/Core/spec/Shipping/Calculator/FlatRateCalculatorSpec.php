@@ -12,9 +12,11 @@
 namespace spec\Sylius\Component\Core\Shipping\Calculator;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Core\Exception\ChannelNotDefinedException;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
+use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Shipping\Calculator\FlatRateCalculator;
 use Sylius\Component\Shipping\Calculator\CalculatorInterface;
 
@@ -50,5 +52,26 @@ final class FlatRateCalculatorSpec extends ObjectBehavior
         $channel->getCode()->willReturn('WEB');
 
         $this->calculate($shipment, ['WEB' => ['amount' => 1500]])->shouldReturn(1500);
+    }
+
+    function it_throws_a_channel_not_defined_exception_if_channel_code_key_does_not_exist(
+        ShipmentInterface $shipment,
+        OrderInterface $order,
+        ChannelInterface $channel,
+        ShippingMethodInterface $shippingMethod
+    ) {
+        $shipment->getOrder()->willReturn($order);
+        $shipment->getMethod()->willReturn($shippingMethod);
+
+        $order->getChannel()->willReturn($channel);
+        $channel->getCode()->willReturn('WEB');
+        $channel->getName()->willReturn('WEB');
+
+        $shippingMethod->getName()->willReturn('UPS');
+
+        $this
+            ->shouldThrow(ChannelNotDefinedException::class)
+            ->during('calculate', [$shipment, ['amount' => 1500]])
+        ;
     }
 }
