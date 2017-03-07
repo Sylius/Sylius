@@ -146,6 +146,17 @@ final class TaxonomyContext implements Context
     }
 
     /**
+     * @Given /^the ("[^"]+" taxon) has children taxon "([^"]+)" and "([^"]+)"$/
+     */
+    public function theTaxonHasChildrenTaxonAnd(TaxonInterface $taxon, $firstTaxonName, $secondTaxonName)
+    {
+        $taxon->addChild($this->createTaxon($firstTaxonName));
+        $taxon->addChild($this->createTaxon($secondTaxonName));
+
+        $this->objectManager->flush($taxon);
+    }
+
+    /**
      * @param string $name
      *
      * @return TaxonInterface

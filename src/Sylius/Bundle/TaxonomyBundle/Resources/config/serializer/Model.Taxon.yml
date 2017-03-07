@@ -6,11 +6,11 @@ Sylius\Component\Taxonomy\Model\Taxon:
             expose: true
             type: integer
             xml_attribute: true
-            groups: [Default, Detailed]
+            groups: [Default, Detailed, Autocomplete]
         code:
             expose: true
             type: string
-            groups: [Default, Detailed]
+            groups: [Default, Detailed, Autocomplete]
         children:
             expose: true
             type: array
@@ -18,11 +18,11 @@ Sylius\Component\Taxonomy\Model\Taxon:
         root:
             expose: true
             max_depth: 2
-            groups: [Default, Detailed]
+            groups: [Default, Detailed, Autocomplete]
         parent:
             expose: true
             max_depth: 2
-            groups: [Default, Detailed]
+            groups: [Default, Detailed, Autocomplete]
         left:
             expose: true
             type: integer
@@ -34,7 +34,7 @@ Sylius\Component\Taxonomy\Model\Taxon:
         level:
             expose: true
             type: integer
-            groups: [Detailed]
+            groups: [Detailed, Autocomplete]
         position:
             expose: true
             type: integer
@@ -46,6 +46,10 @@ Sylius\Component\Taxonomy\Model\Taxon:
     virtual_properties:
         getName:
             serialized_name: name
+            groups: [Default, Detailed, Autocomplete]
+        hasChildren:
+            serialized_name: hasChildren
+            groups: [Autocomplete]
     relations:
         -   rel: self
             href:
