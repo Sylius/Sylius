@@ -63,7 +63,7 @@ final class PromotionProcessor implements PromotionProcessorInterface
         $preQualifiedPromotions = $this->preQualifiedPromotionsProvider->getPromotions($subject);
 
         foreach ($preQualifiedPromotions as $promotion) {
-            if ($this->promotionEligibilityChecker->isEligible($subject, $promotion) && $promotion->isExclusive()) {
+            if ($promotion->isExclusive() && $this->promotionEligibilityChecker->isEligible($subject, $promotion)) {
                 $this->promotionApplicator->apply($subject, $promotion);
 
                 return;
@@ -71,7 +71,7 @@ final class PromotionProcessor implements PromotionProcessorInterface
         }
 
         foreach ($preQualifiedPromotions as $promotion) {
-            if($this->promotionEligibilityChecker->isEligible($subject, $promotion) && !$promotion->isExclusive()) {
+            if (!$promotion->isExclusive() && $this->promotionEligibilityChecker->isEligible($subject, $promotion)) {
                 $this->promotionApplicator->apply($subject, $promotion);
             }
         }
