@@ -20,11 +20,14 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Gorka Laucirica <gorka.lauzirika@gmail.com>
  */
 final class ChannelPricingType extends AbstractResourceType
 {
@@ -35,7 +38,11 @@ final class ChannelPricingType extends AbstractResourceType
     {
         $builder
             ->add('price', MoneyType::class, [
-                'label' => $options['channel']->getName(),
+                'label' => 'sylius.ui.price',
+                'currency' => $options['channel']->getBaseCurrency()->getCode(),
+            ])
+            ->add('originalPrice', MoneyType::class, [
+                'label' => 'sylius.ui.original_price',
                 'currency' => $options['channel']->getBaseCurrency()->getCode(),
             ])
         ;
@@ -66,8 +73,15 @@ final class ChannelPricingType extends AbstractResourceType
         $resolver
             ->setRequired('channel')
             ->setAllowedTypes('channel', [ChannelInterface::class])
+
             ->setDefined('product_variant')
             ->setAllowedTypes('product_variant', ['null', ProductVariantInterface::class])
+
+            ->setDefaults([
+                'label' => function (Options $options) {
+                    return $options['channel']->getName();
+                },
+            ])
         ;
     }
 

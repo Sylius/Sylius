@@ -30,7 +30,7 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
      */
     public function specifyPrice($nth, $price, $channelName)
     {
-        $this->getElement('price', ['%position%' => $nth, '%channel%' => $channelName])->setValue($price);
+        $this->getElement('price', ['%position%' => $nth, '%channelName%' => $channelName])->setValue($price);
     }
 
     /**
@@ -90,7 +90,7 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_product_generate_variants_variants_%position%_code',
-            'price' => '#sylius_product_generate_variants_variants_%position%_channelPricings [data-form-collection="item"]:contains("%channel%") input',
+            'price' => '#sylius_product_generate_variants_variants_%position%_channelPricings > .field:contains("%channelName%") input',
             'prices_validation_message' => '#sylius_product_generate_variants_variants_%position%_channelPricings ~ .sylius-validation-error',
         ]);
     }

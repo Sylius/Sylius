@@ -26,6 +26,7 @@
             <generator strategy="AUTO" />
         </id>
         <field name="price" column="price" type="integer"/>
+        <field name="originalPrice" column="original_price" type="integer" nullable="true"/>
         <field name="channelCode" column="channel_code" type="string"/>
 
         <many-to-one field="productVariant" target-entity="Sylius\Component\Product\Model\ProductVariantInterface" inversed-by="channelPricings">

@@ -19,6 +19,7 @@ use Sylius\Component\Currency\Model\CurrencyInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ * @author Gorka Laucirica <gorka.lauzirika@gmail.com>
  */
 class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
@@ -27,9 +28,17 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyPrice($price, $channel)
+    public function specifyPrice($price, $channelName)
     {
-        $this->getDocument()->fillField($channel, $price);
+        $this->getElement('price', ['%channelName%' => $channelName])->setValue($price);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function specifyOriginalPrice($originalPrice, $channelName)
+    {
+        $this->getElement('original_price', ['%channelName%' => $channelName])->setValue($originalPrice);
     }
 
     /**
@@ -130,14 +139,6 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function getFirstPriceValidationMessage()
-    {
-        return $this->getElement('first_price_validation_message')->getText();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
@@ -150,8 +151,9 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             'option_select' => '#sylius_product_variant_optionValues_%option-name%',
             'price_calculator' => '#sylius_product_variant_pricingCalculator',
             'shipping_category' => '#sylius_product_variant_shippingCategory',
-            'prices_validation_message' => '#sylius_product_variant_channelPricings ~ .sylius-validation-error',
-            'first_price_validation_message' => '#sylius_product_variant_channelPricings [data-form-collection="item"]:first-child .sylius-validation-error',
+            'original_price' => '#sylius_product_variant_channelPricings > .field:contains("%channelName%") input[name$="[originalPrice]"]',
+            'price' => '#sylius_product_variant_channelPricings > .field:contains("%channelName%") input[name$="[price]"]',
+            'prices_validation_message' => '#sylius_product_variant_channelPricings ~ .sylius-validation-error, #sylius_product_variant_channelPricings .sylius-validation-error',
             'weight' => '#sylius_product_variant_weight',
             'width' => '#sylius_product_variant_width',
         ]);

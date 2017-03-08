@@ -36,6 +36,7 @@ use Webmozart\Assert\Assert;
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ * @author Gorka Laucirica <gorka.lauzirika@gmail.com>
  */
 final class ManagingProductsContext implements Context
 {
@@ -197,6 +198,14 @@ final class ManagingProductsContext implements Context
     public function iSetItsPriceTo($price, $channelName)
     {
         $this->createSimpleProductPage->specifyPrice($channelName, $price);
+    }
+
+    /**
+     * @When /^I set its original price to "(?:€|£|\$)([^"]+)" for "([^"]+)" channel$/
+     */
+    public function iSetItsOriginalPriceTo($originalPrice, $channelName)
+    {
+        $this->createSimpleProductPage->specifyOriginalPrice($channelName, $originalPrice);
     }
 
     /**
@@ -444,6 +453,14 @@ final class ManagingProductsContext implements Context
     public function iChangeItsPriceTo($price, $channelName)
     {
         $this->updateSimpleProductPage->specifyPrice($channelName, $price);
+    }
+
+    /**
+     * @When /^I change its original price to "(?:€|£|\$)([^"]+)" for "([^"]+)" channel$/
+     */
+    public function iChangeItsOriginalPriceTo($price, $channelName)
+    {
+        $this->updateSimpleProductPage->specifyOriginalPrice($channelName, $price);
     }
 
     /**
@@ -839,6 +856,19 @@ final class ManagingProductsContext implements Context
         $this->updateSimpleProductPage->open(['id' => $product->getId()]);
 
         Assert::same($this->updateSimpleProductPage->getPriceForChannel($channelName), $price);
+    }
+
+    /**
+     * @Then /^(its|this products) original price should be "(?:€|£|\$)([^"]+)" for channel "([^"]+)"$/
+     */
+    public function itsOriginalPriceForChannel(ProductInterface $product, $originalPrice, $channelName)
+    {
+        $this->updateSimpleProductPage->open(['id' => $product->getId()]);
+
+        Assert::same(
+            $this->updateSimpleProductPage->getOriginalPriceForChannel($channelName),
+            $originalPrice
+        );
     }
 
     /**

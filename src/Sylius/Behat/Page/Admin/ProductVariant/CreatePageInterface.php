@@ -17,14 +17,21 @@ use Sylius\Component\Currency\Model\CurrencyInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ * @author Gorka Laucirica <gorka.lauzirika@gmail.com>
  */
 interface CreatePageInterface extends BaseCreatePageInterface
 {
     /**
      * @param int $price
-     * @param string $channel
+     * @param string $channelName
      */
-    public function specifyPrice($price, $channel);
+    public function specifyPrice($price, $channelName);
+
+    /**
+     * @param int $originalPrice
+     * @param string $channelName
+     */
+    public function specifyOriginalPrice($originalPrice, $channelName);
 
     /**
      * @param int $height
@@ -33,7 +40,7 @@ interface CreatePageInterface extends BaseCreatePageInterface
      * @param int $weight
      */
     public function specifyHeightWidthDepthAndWeight($height, $width, $depth, $weight);
-    
+
     /**
      * @param string $code
      */
@@ -82,9 +89,4 @@ interface CreatePageInterface extends BaseCreatePageInterface
      * @return string
      */
     public function getPricesValidationMessage();
-
-    /**
-     * @return string
-     */
-    public function getFirstPriceValidationMessage();
 }
