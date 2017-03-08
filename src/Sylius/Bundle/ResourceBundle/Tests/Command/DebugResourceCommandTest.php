@@ -40,9 +40,9 @@ final class DebugResourceCommandTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * It should list all resources if no argument is given.
+     * @test
      */
-    public function testListAll()
+    public function it_lists_all_resources_if_no_argument_is_given()
     {
         $this->registry->getAll()->willReturn([$this->createMetadata('one'), $this->createMetadata('two')]);
         $this->tester->execute([]);
@@ -61,9 +61,9 @@ EOT
     }
 
     /**
-     * It should display the metadata for a given resource alias.
+     * @test
      */
-    public function testDebugResource()
+    public function it_displays_the_metadata_for_given_resource_alias()
     {
         $this->registry->get('metadata.one')->willReturn($this->createMetadata('one'));
         $this->tester->execute([
