@@ -32,6 +32,8 @@ final class SyliusResourceBundle extends Bundle
      */
     public function build(ContainerBuilder $container)
     {
+        parent::build($container);
+
         $container->addCompilerPass(new RegisterResourcesPass());
         $container->addCompilerPass(new DoctrineTargetEntitiesResolverPass());
         $container->addCompilerPass(new RegisterResourceRepositoryPass());

@@ -309,6 +309,8 @@ After:
 
 * Removed `sylius_resource.resources.*.translation.fields` configuration key, it was not used at all - if causing issues,
   remove your configuration under it.
+  
+* Moved `Sylius\Bundle\ResourceBundle\Model\ResourceLogEntry` to `Sylius\Component\Resource\Model\ResourceLogEntry`.
 
 ### Review / ReviewBundle
 

@@ -29,12 +29,6 @@ doctrine:
         entity_managers:
             default:
                 auto_mapping: true
-                mappings:
-                    SyliusResourceBundle:
-                        type: annotation
-                        prefix: Sylius\Bundle\ResourceBundle\Model
-                        dir: Model
-                        is_bundle: true
 
 doctrine_cache:
     providers:
