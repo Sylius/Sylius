@@ -3,7 +3,6 @@
 
 imports:
     - { resource: "@SyliusCoreBundle/Resources/config/app/config.yml" }
-    - { resource: "@SyliusUiBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusShopBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusApiBundle/Resources/config/app/config.yml" }
