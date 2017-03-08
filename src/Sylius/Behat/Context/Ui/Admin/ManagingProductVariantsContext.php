@@ -419,7 +419,7 @@ final class ManagingProductVariantsContext implements Context
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
-        Assert::same($currentPage->getFirstPriceValidationMessage(), 'Price must be at least 0.01.');
+        Assert::contains($currentPage->getPricesValidationMessage(), 'Price must be at least 0.01.');
     }
 
     /**
@@ -471,7 +471,7 @@ final class ManagingProductVariantsContext implements Context
      */
     public function iShouldBeNotifiedThatPricesInAllChannelsMustBeDefined()
     {
-        Assert::same(
+        Assert::contains(
             $this->createPage->getPricesValidationMessage(),
             'You must define price for every channel.'
         );
