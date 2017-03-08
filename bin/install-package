@@ -60,10 +60,10 @@ restore_composer_lock_from_cache() {
 
 # Argument 1: Package path
 composer_install() {
-    local command="composer install --ansi --no-interaction --no-scripts --prefer-dist --quiet"
+    local command="composer install --ansi --no-interaction --prefer-dist --quiet"
 
     if [ "$(package_path_to_package_name "$1")" = "ResourceBundle" ]; then
-        command="$(echo "${command}" | sed "s/--no-scripts/--ignore-platform-reqs/g")"
+        command="${command} --ignore-platform-reqs"
     fi
 
     run_command "${command}"
