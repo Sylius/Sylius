@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_mailer:
+    emails:
+        shipment_confirmation:
+            subject: sylius.emails.shipment_confirmation.subject
+            template: "SyliusAdminBundle:Email:shipmentConfirmation.html.twig"

@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\AdminBundle\EventListener;
 
-use Sylius\Bundle\CoreBundle\EmailManager\ShipmentEmailManagerInterface;
+use Sylius\Bundle\AdminBundle\EmailManager\ShipmentEmailManagerInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Webmozart\Assert\Assert;

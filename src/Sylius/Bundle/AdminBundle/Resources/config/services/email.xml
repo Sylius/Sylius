@@ -12,17 +12,9 @@
 -->
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-    <imports>
-        <import resource="services/controller.xml" />
-        <import resource="services/email.xml" />
-        <import resource="services/listener.xml" />
-        <import resource="services/menu.xml" />
-    </imports>
-
     <services>
-        <service id="sylius.context.locale.admin_based" class="Sylius\Bundle\AdminBundle\Context\AdminBasedLocaleContext">
-            <argument type="service" id="security.token_storage" />
-            <tag name="sylius.context.locale" priority="128" />
+        <service id="sylius.email_manager.shipment" class="Sylius\Bundle\AdminBundle\EmailManager\ShipmentEmailManager">
+            <argument type="service" id="sylius.email_sender" />
         </service>
     </services>
 </container>
