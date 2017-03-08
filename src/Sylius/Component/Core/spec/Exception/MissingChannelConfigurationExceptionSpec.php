@@ -12,12 +12,12 @@
 namespace spec\Sylius\Component\Core\Exception;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Exception\ChannelNotDefinedException;
+use Sylius\Component\Core\Exception\MissingChannelConfigurationException;
 
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-final class ChannelNotDefinedExceptionSpec extends ObjectBehavior
+final class MissingChannelConfigurationExceptionSpec extends ObjectBehavior
 {
     function let()
     {
@@ -26,7 +26,7 @@ final class ChannelNotDefinedExceptionSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(ChannelNotDefinedException::class);
+        $this->shouldHaveType(MissingChannelConfigurationException::class);
     }
 
     function it_is_a_runtime_exception()

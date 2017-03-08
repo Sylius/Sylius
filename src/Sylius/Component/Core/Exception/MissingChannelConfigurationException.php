@@ -14,7 +14,7 @@ namespace Sylius\Component\Core\Exception;
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-class ChannelNotDefinedException extends \RuntimeException
+class MissingChannelConfigurationException extends \RuntimeException
 {
     /**
      * {@inheritdoc}

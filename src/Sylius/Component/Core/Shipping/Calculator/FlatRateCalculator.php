@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Core\Shipping\Calculator;
 
-use Sylius\Component\Core\Exception\ChannelNotDefinedException;
+use Sylius\Component\Core\Exception\MissingChannelConfigurationException;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Shipping\Calculator\CalculatorInterface;
 use Sylius\Component\Shipping\Model\ShipmentInterface  as BaseShipmentInterface;
@@ -25,7 +25,7 @@ final class FlatRateCalculator implements CalculatorInterface
     /**
      * {@inheritdoc}
      *
-     * @throws ChannelNotDefinedException
+     * @throws MissingChannelConfigurationException
      */
     public function calculate(BaseShipmentInterface $subject, array $configuration)
     {
@@ -34,7 +34,7 @@ final class FlatRateCalculator implements CalculatorInterface
         $channelCode = $subject->getOrder()->getChannel()->getCode();
 
         if (!isset($configuration[$channelCode])) {
-            throw new ChannelNotDefinedException(sprintf(
+            throw new MissingChannelConfigurationException(sprintf(
                 'Channel %s has no amount defined for shipping method %s',
                 $subject->getOrder()->getChannel()->getName(),
                 $subject->getMethod()->getName()

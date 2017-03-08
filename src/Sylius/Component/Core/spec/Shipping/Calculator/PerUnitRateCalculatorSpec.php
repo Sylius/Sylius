@@ -13,7 +13,7 @@ namespace spec\Sylius\Component\Core\Shipping\Calculator;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
-use Sylius\Component\Core\Exception\ChannelNotDefinedException;
+use Sylius\Component\Core\Exception\MissingChannelConfigurationException;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
@@ -72,7 +72,7 @@ final class PerUnitRateCalculatorSpec extends ObjectBehavior
         $shippingMethod->getName()->willReturn('UPS');
 
         $this
-            ->shouldThrow(ChannelNotDefinedException::class)
+            ->shouldThrow(MissingChannelConfigurationException::class)
             ->during('calculate', [$shipment, ['amount' => 200]])
         ;
     }
