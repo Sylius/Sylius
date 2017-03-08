@@ -4,8 +4,6 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../etc/bash/common.lib.sh"
 
 # Argument 1: Package path
 test_package() {
-    [[ "$(echo "$2" | grep -c "no-phpspec")" = "1" ]] && local phpspec_support=false
-    [[ "$(echo "$2" | grep -c "no-phpunit")" = "1" ]] && local phpunit_support=false
     local exit_code=0
 
     print_header "Testing" "$(package_path_to_package_name "$1")"
@@ -13,12 +11,11 @@ test_package() {
     cd "$1" 2>/dev/null
     exit_on_error "Cannot change current directory to $1"
 
-    if ${phpspec_support}; then
+    if [[ "$(composer run-script --list 2> /dev/null | awk '{ print $1 }' | grep -c ^test$)" = "0" ]]; then
         run_phpspec "$1" || exit_code=$?
-    fi
-
-    if ${phpunit_support}; then
         run_phpunit "$1" || exit_code=$?
+    else
+        run_command "composer test" || exit_code=$?
     fi
 
     return ${exit_code}
@@ -61,7 +58,7 @@ run_phpunit() {
 }
 
 display_help_message() {
-    print_error "Usage: $0 [--no-phpspec] [--no-phpunit] <package paths or names>"
+    print_error "Usage: $0 <package paths or names>"
 }
 
 main() {
@@ -69,12 +66,6 @@ main() {
 
     while [[ $# -gt 0 ]]; do
         case "$1" in
-            --no-phpspec)
-                options+=("no-phpspec")
-            ;;
-            --no-phpunit)
-                options+=("no-phpunit")
-            ;;
             --help)
                 display_help_message
                 exit 0
