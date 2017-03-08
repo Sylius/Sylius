@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\OrderBundle\Factory;
 
 use Sylius\Bundle\OrderBundle\Controller\AddToCartCommand;
-use Sylius\Component\Order\Factory\AddToCartCommandFactoryInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
 

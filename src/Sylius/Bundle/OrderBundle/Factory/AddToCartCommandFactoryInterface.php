@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Order\Factory;
+namespace Sylius\Bundle\OrderBundle\Factory;
 
 use Sylius\Bundle\OrderBundle\Controller\AddToCartCommandInterface;
 use Sylius\Component\Order\Model\OrderInterface;

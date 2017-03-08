@@ -275,6 +275,8 @@ After:
 * The `ExpiredCartsRemover` service has been moved from the component and into the bundle. In addition it dispatches the `sylius.carts.pre_remove` and `sylius.carts.post_remove` events, both of which hold the collection of carts to be, or already removed, depending on the event.
  Also, as of now, it depends on the `sylius.manager.order` to remove the carts instead of the repository in order to not flush every outdated `cart`, but the whole collection.
 
+* Moved `Sylius\Component\Order\Factory\AddToCartCommandFactoryInterface` to `Sylius\Bundle\OrderBundle\Factory\AddToCartCommandFactoryInterface`.
+
 ### Payment / PaymentBundle
 
 * Changed default ``Payment::$state`` from *new* to *cart*.
