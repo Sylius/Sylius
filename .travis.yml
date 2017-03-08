@@ -33,7 +33,6 @@ cache:
         - ~/.composer/cache/files
         - ~/.cache/pip
         - vendor
-        - bin
         - node_modules
         - $SYLIUS_CACHE_DIR
 
