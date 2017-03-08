@@ -17,7 +17,6 @@
         <import resource="services/checkout.xml" />
         <import resource="services/context.xml" />
         <import resource="services/dashboard.xml" />
-        <import resource="services/email.xml" />
         <import resource="services/fixtures.xml" />
         <import resource="services/fixtures_factories.xml" />
         <import resource="services/form.xml" />

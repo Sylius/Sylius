@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\EmailManager;
+namespace Sylius\Bundle\ShopBundle\EmailManager;
 
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
