@@ -680,8 +680,7 @@ final class PromotionContext implements Context
         PromotionInterface $promotion,
         $discount,
         $itemTotal
-    )
-    {
+    ) {
         $channelCode = $this->sharedStorage->get('channel')->getCode();
         $rule = $this->ruleFactory->createItemTotal($channelCode, $itemTotal);
         $action = $this->actionFactory->createShippingPercentageDiscount($discount);
