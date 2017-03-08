@@ -89,9 +89,4 @@ interface CreatePageInterface extends BaseCreatePageInterface
      * @return string
      */
     public function getPricesValidationMessage();
-
-    /**
-     * @return string
-     */
-    public function getFirstPriceValidationMessage();
 }
