@@ -59,6 +59,7 @@
     ],
     "scripts": {
         "test": [
+            "@composer validate --strict",
             "Tests/Functional/bin/console cache:clear --ansi --no-interaction",
             "bin/phpunit --colors=always",
             "bin/phpspec run --ansi --no-interaction"

@@ -49,6 +49,7 @@
     ],
     "scripts": {
         "test": [
+            "@composer validate --strict",
             "bin/phpspec run --ansi --no-interaction"
         ]
     },
