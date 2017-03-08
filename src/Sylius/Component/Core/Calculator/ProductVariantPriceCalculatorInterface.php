@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Core\Calculator;
 
+use Sylius\Component\Core\Exception\MissingChannelConfigurationException;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
 /**
@@ -24,7 +25,7 @@ interface ProductVariantPriceCalculatorInterface
      *
      * @return int
      *
-     * @throws \InvalidArgumentException when price for given channel does not exist
+     * @throws MissingChannelConfigurationException when price for given channel does not exist
      */
     public function calculate(ProductVariantInterface $productVariant, array $context);
 }

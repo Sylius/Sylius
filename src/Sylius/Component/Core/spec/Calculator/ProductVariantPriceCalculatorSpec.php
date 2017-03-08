@@ -14,6 +14,7 @@ namespace spec\Sylius\Component\Core\Calculator;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Calculator\ProductVariantPriceCalculator;
 use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
+use Sylius\Component\Core\Exception\MissingChannelConfigurationException;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
@@ -44,15 +45,18 @@ final class ProductVariantPriceCalculatorSpec extends ObjectBehavior
         $this->calculate($productVariant, ['channel' => $channel])->shouldReturn(1000);
     }
 
-    function it_throws_exception_if_there_is_no_variant_price_for_given_channel(
+    function it_throws_a_channel_not_defined_exception_if_there_is_no_variant_price_for_given_channel(
         ChannelInterface $channel,
         ProductVariantInterface $productVariant
     ) {
+        $channel->getName()->willReturn('WEB');
+
         $productVariant->getChannelPricingForChannel($channel)->willReturn(null);
+        $productVariant->getName()->willReturn('Red variant');
 
         $this
-            ->shouldThrow(\InvalidArgumentException::class)
-            ->during('calculate', [$productVariant, ['chanel' => $channel]])
+            ->shouldThrow(MissingChannelConfigurationException::class)
+            ->during('calculate', [$productVariant, ['channel' => $channel]])
         ;
     }
 
