@@ -1,0 +1,27 @@
+{
+    "code": 400,
+    "message": "Validation Failed",
+    "errors": {
+        "children": {
+            "username": {
+                "errors": [
+                    "Please enter your name."
+                ]
+            },
+            "email": {
+                "errors": [
+                    "Please enter your email."
+                ]
+            },
+            "plainPassword": {},
+            "enabled": {},
+            "firstName": {},
+            "lastName": {},
+            "localeCode": {
+                "errors": [
+                    "Please choose a locale."
+                ]
+            }
+        }
+    }
+}

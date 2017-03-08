@@ -1,0 +1,15 @@
+Sylius\Component\Core\Model\AdminUser:
+    admin1:
+        plainPassword: 12345
+        roles: [ROLE_ADMINISTRATION_ACCESS]
+        enabled: true
+        email: user@example.com
+        username: ExemplaryUser
+        localeCode: en_US
+    admin{2..3}:
+        plainPassword: <password()>
+        roles: [ROLE_ADMINISTRATION_ACCESS]
+        enabled: true
+        email: <email()>
+        username: <name()>
+        localeCode: en_US

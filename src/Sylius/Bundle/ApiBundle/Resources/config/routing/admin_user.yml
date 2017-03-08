@@ -1,0 +1,7 @@
+sylius_admin_api_user:
+    resource: |
+        alias: sylius.admin_user
+        section: api
+        path: users
+        serialization_version: $version
+    type: sylius.resource_api

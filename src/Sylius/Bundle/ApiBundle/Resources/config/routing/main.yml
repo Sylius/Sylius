@@ -1,0 +1,97 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_api_adjustment:
+    resource: "@SyliusApiBundle/Resources/config/routing/adjustment.yml"
+    prefix: /orders/{orderId}/adjustments
+
+sylius_api_admin_user:
+    resource: "@SyliusApiBundle/Resources/config/routing/admin_user.yml"
+
+sylius_api_cart:
+    resource: "@SyliusApiBundle/Resources/config/routing/cart.yml"
+    prefix: /carts
+
+sylius_api_cart_item:
+    resource: "@SyliusApiBundle/Resources/config/routing/cart_item.yml"
+    prefix: /carts/{cartId}
+
+sylius_api_channel:
+    resource: "@SyliusApiBundle/Resources/config/routing/channel.yml"
+
+sylius_api_checkout:
+    resource: "@SyliusApiBundle/Resources/config/routing/checkout.yml"
+    prefix: /checkouts
+
+sylius_api_country:
+    resource: "@SyliusApiBundle/Resources/config/routing/country.yml"
+
+sylius_api_currency:
+    resource: "@SyliusApiBundle/Resources/config/routing/currency.yml"
+
+sylius_api_customer:
+    resource: "@SyliusApiBundle/Resources/config/routing/customer.yml"
+    prefix: /customers
+
+sylius_api_exchange_rate:
+    resource: "@SyliusApiBundle/Resources/config/routing/exchange_rate.yml"
+
+sylius_api_locale:
+    resource: "@SyliusApiBundle/Resources/config/routing/locale.yml"
+
+sylius_api_order:
+    resource: "@SyliusApiBundle/Resources/config/routing/order.yml"
+
+sylius_api_payment_method:
+    resource: "@SyliusApiBundle/Resources/config/routing/payment_method.yml"
+
+sylius_api_payment:
+    resource: "@SyliusApiBundle/Resources/config/routing/payment.yml"
+
+sylius_api_product:
+    resource: "@SyliusApiBundle/Resources/config/routing/product.yml"
+
+sylius_api_product_attribute:
+    resource: "@SyliusApiBundle/Resources/config/routing/product_attribute.yml"
+
+sylius_api_product_option:
+    resource: "@SyliusApiBundle/Resources/config/routing/product_option.yml"
+
+sylius_api_product_taxon_position:
+    resource: "@SyliusApiBundle/Resources/config/routing/product_taxon_position.yml"
+
+sylius_api_product_variant:
+    resource: "@SyliusApiBundle/Resources/config/routing/product_variant.yml"
+    prefix: /products/{productCode}
+
+sylius_api_promotion:
+    resource: "@SyliusApiBundle/Resources/config/routing/promotion.yml"
+
+sylius_api_promotion_coupon:
+    resource: "@SyliusApiBundle/Resources/config/routing/promotion_coupon.yml"
+    prefix: /promotions/{promotionCode}/coupons
+
+sylius_api_province:
+    resource: "@SyliusApiBundle/Resources/config/routing/province.yml"
+    prefix: /countries/{countryCode}/provinces
+
+sylius_api_shipment:
+    resource: "@SyliusApiBundle/Resources/config/routing/shipment.yml"
+
+sylius_api_shipping_category:
+    resource: "@SyliusApiBundle/Resources/config/routing/shipping_category.yml"
+
+sylius_api_shipping_method:
+    resource: "@SyliusApiBundle/Resources/config/routing/shipping_method.yml"
+
+sylius_api_tax_category:
+    resource: "@SyliusApiBundle/Resources/config/routing/tax_category.yml"
+
+sylius_api_taxon:
+    resource: "@SyliusApiBundle/Resources/config/routing/taxon.yml"
+
+sylius_api_tax_rate:
+    resource: "@SyliusApiBundle/Resources/config/routing/tax_rate.yml"
+
+sylius_api_zone:
+    resource: "@SyliusApiBundle/Resources/config/routing/zone.yml"
