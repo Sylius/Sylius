@@ -13,6 +13,8 @@ namespace Sylius\Component\Core\Promotion\Reverser;
 
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 
 /**
@@ -26,12 +28,30 @@ final class OrderPromotionAdjustmentsReverser implements OrderPromotionAdjustmen
     public function revert(OrderInterface $order, PromotionInterface $promotion)
     {
         foreach ($order->getItems() as $item) {
-            foreach ($item->getUnits() as $unit) {
-                foreach ($unit->getAdjustments(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT) as $adjustment) {
-                    if ($promotion->getCode() === $adjustment->getOriginCode()) {
-                        $unit->removeAdjustment($adjustment);
-                    }
-                }
+            $this->revertItem($promotion, $item);
+        }
+    }
+
+    /**
+     * @param PromotionInterface $promotion
+     * @param OrderItemInterface $item
+     */
+    private function revertItem(PromotionInterface $promotion, OrderItemInterface $item)
+    {
+        foreach ($item->getUnits() as $unit) {
+            $this->revertUnit($promotion, $unit);
+        }
+    }
+
+    /**
+     * @param PromotionInterface $promotion
+     * @param OrderItemUnitInterface $unit
+     */
+    private function revertUnit(PromotionInterface $promotion, OrderItemUnitInterface $unit)
+    {
+        foreach ($unit->getAdjustments(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT) as $adjustment) {
+            if ($promotion->getCode() === $adjustment->getOriginCode()) {
+                $unit->removeAdjustment($adjustment);
             }
         }
     }
