@@ -1,12 +1,14 @@
 Filters
 =======
 
-Here you can find the supported filters. Keep in mind you can very easily define your own!
+**Filters** on grids are a kind of search prepared for each grid. Having a grid of objects you can filter out only those
+with a specified name, or value etc.
+Here you can find the supported filters. Keep in mind you can very easily define your own ones!
 
 String
 ------
 
-Simplest filter type. It can filter in one or multiple fields.
+Simplest filter type. It can filter by one or multiple fields.
 
 .. code-block:: yaml
 
@@ -35,7 +37,8 @@ The filter allows the user to select following search options:
 * in
 * not in
 
-If you don't want display to user matching possibilites, you can choose one in a configuration. Then only the value input will display. You can achieve it adding options.type parameter:
+If you don't want display all theses matching possibilities, you can choose just one of them.
+Then only the input field will be displayed. You can achieve it like that:
 
 .. code-block:: yaml
 
@@ -45,8 +48,10 @@ If you don't want display to user matching possibilites, you can choose one in a
                 filters:
                     username:
                         type: string
-                        options:
+                        form_options:
                             type: contains
+
+By configuring a filter like above you will have only an input field for filtering users objects that ``contain`` a given string in their username.
 
 Boolean
 -------
@@ -101,7 +106,7 @@ This type filters by a chosen entity.
 Money
 _____
 
-This filter checks if an amount is in range and in specific currency
+This filter checks if an amount is in range and in a specified currency
 
 .. code-block:: yaml
 
@@ -136,3 +141,10 @@ This filter checks if the specified field contains any value
                         type: exists
                         options:
                             field: completedAt
+
+Custom Filters
+--------------
+
+.. tip::
+
+    If you need to create a custom filter, :doc:`read the docs here </bundles/SyliusGridBundle/custom_filter>`.
