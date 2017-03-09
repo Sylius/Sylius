@@ -122,7 +122,7 @@ Example
 
     $ curl http://demo.sylius.org/api/v1/exchange-rates/ \
         -H "Authorization: Bearer SampleToken" \
-        -H "Accept: application/json" \
+        -H "Content-Type: application/json" \
         -X POST
 
 Exemplary Response
@@ -365,7 +365,12 @@ Example
     $ curl http://demo.sylius.org/api/v1/exchange-rates/EUR-GBP \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
-        -X PUT
+        -X PUT \
+        --data '
+            {
+                "ratio": "0,9515706"
+            }
+        '
 
 Exemplary Response
 ^^^^^^^^^^^^^^^^^^
@@ -381,10 +386,10 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/exchange-rates/ \
+    $ curl http://demo.sylius.org/api/v1/exchange-rates/EUR-GBP \
         -H "Authorization: Bearer SampleToken" \
-        -H "Accept: application/json" \
-        -X POST
+        -H "Content-Type: application/json" \
+        -X PUT
 
 Exemplary Response
 ^^^^^^^^^^^^^^^^^^

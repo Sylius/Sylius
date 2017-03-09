@@ -79,10 +79,6 @@ Definition
 +-----------------------------------+----------------+--------------------------------------+
 | code                              | request        | **(unique)** Product identifier      |
 +-----------------------------------+----------------+--------------------------------------+
-|translations['localeCode']['name'] | request        | Name of the product                  |
-+-----------------------------------+----------------+--------------------------------------+
-|translations['localeCode']['slug'] | request        | **(unique)** Slug                    |
-+-----------------------------------+----------------+--------------------------------------+
 
 Example
 ^^^^^^^
@@ -142,7 +138,7 @@ Example
 
     $ curl http://demo.sylius.org/api/v1/products/ \
         -H "Authorization: Bearer SampleToken" \
-        -H "Accept: application/json" \
+        -H "Content-Type: application/json" \
        -X POST
 
 Exemplary Response
@@ -160,39 +156,10 @@ Exemplary Response
         "errors": {
             "children": {
                 "enabled": {},
-                "translations": {
-                    "children": {
-                        "en_US": {
-                            "children": {
-                                "name": {
-                                    "errors": [
-                                        "Please enter product name."
-                                    ]
-                                },
-                                "slug": {
-                                    "errors": [
-                                        "Please enter product slug."
-                                    ]
-                                },
-                                "description": {},
-                                "metaKeywords": {},
-                                "metaDescription": {},
-                                "shortDescription": {}
-                            }
-                        }
-                    }
-                },
+                "translations": {},
                 "attributes": {},
-                "associations": {
-                    "children": {
-                        "similar_products": {}
-                    }
-                },
-                "channels": {
-                    "children": [
-                        {}
-                    ]
-                },
+                "associations": {},
+                "channels": {},
                 "mainTaxon": {},
                 "productTaxons": {},
                 "images": {},
@@ -208,28 +175,29 @@ Exemplary Response
 
 You can also create a product with additional (not required) fields:
 
-+------------------------------------+----------------+-----------------------------------------------------------------------------------+
-| Parameter                          | Parameter type | Description                                                                       |
-+====================================+================+===================================================================================+
-| channels                           | request        | Collection of channels codes, which we want to associate with created product     |
-+------------------------------------+----------------+-----------------------------------------------------------------------------------+
-| translations['localeCode']['name'] | request        | Collection of translations (each contains slug and name in given locale).         |
-| translations['localeCode']['slug'] |                | Only the translation for default locale is required, the rest are optional        |
-+------------------------------------+----------------+-----------------------------------------------------------------------------------+
-| options                            | request        | Collection of options codes, which we want to associate with created product      |
-+------------------------------------+----------------+-----------------------------------------------------------------------------------+
-| images                             | request        | Collection of images codes, which we want to associate with created product       |
-+------------------------------------+----------------+-----------------------------------------------------------------------------------+
-| attributes                         | request        | Array of attributes (each object has information about selected attribute's code, |
-|                                    |                | its value and locale in which it was defined)                                     |
-+------------------------------------+----------------+-----------------------------------------------------------------------------------+
-| associations                       | request        | Object with code of productAssociationType and string in which the codes of       |
-|                                    |                | associated products was written down.                                             |
-+------------------------------------+----------------+-----------------------------------------------------------------------------------+
-| productTaxons                      | request        | String in which the codes of taxons was written down (separated by comma)         |
-+------------------------------------+----------------+-----------------------------------------------------------------------------------+
-| mainTaxon                          | request        | The main taxon's code to whose product is assigned                                |
-+------------------------------------+----------------+-----------------------------------------------------------------------------------+
++------------------------------------+----------------+-------------------------------------------------------------------------------+
+| Parameter                          | Parameter type | Description                                                                   |
++====================================+================+===============================================================================+
+| channels                           | request        | Collection of channels codes, which we want to associate with created product |
++------------------------------------+----------------+-------------------------------------------------------------------------------+
+| translations['localeCode']['name'] | request        | Name of the product                                                           |
++------------------------------------+----------------+-------------------------------------------------------------------------------+
+| translations['localeCode']['slug'] | request        | **(unique)** Slug for the product                                             |
++------------------------------------+----------------+-------------------------------------------------------------------------------+
+| options                            | request        | Collection of options codes, which we want to associate with created product  |
++------------------------------------+----------------+-------------------------------------------------------------------------------+
+| images                             | request        | Collection of images types, which we want to associate with created product   |
++------------------------------------+----------------+-------------------------------------------------------------------------------+
+| attributes                         | request        | Array of attributes (each object has information about selected attribute's   |
+|                                    |                | code, its value and locale in which it was defined)                           |
++------------------------------------+----------------+-------------------------------------------------------------------------------+
+| associations                       | request        | Object with code of productAssociationType and string in which the codes      |
+|                                    |                | of associated products was written down.                                      |
++------------------------------------+----------------+-------------------------------------------------------------------------------+
+| productTaxons                      | request        | String in which the codes of taxons was written down (separated by comma)     |
++------------------------------------+----------------+-------------------------------------------------------------------------------+
+| mainTaxon                          | request        | The main taxon's code to whose product is assigned                            |
++------------------------------------+----------------+-------------------------------------------------------------------------------+
 
 Example
 ^^^^^^^
@@ -238,7 +206,7 @@ Example
 
     $ curl http://demo.sylius.org/api/v1/products/ \
         -H "Authorization: Bearer SampleToken" \
-        -H "Accept: application/json" \
+        -H "Content-Type: application/json" \
         -X POST \
         --data '
             {
@@ -250,9 +218,9 @@ Example
                 ],
                 "attributes": [
                      {
-                         "attribute": "mug_material",
+                         "attribute": "mug_color",
                          "localeCode": "en_US",
-                         "value": "concrete"
+                         "value": "yellow"
                      }
                  ],
                 "options": [
@@ -809,68 +777,28 @@ Exemplary Response
 
     {
         "page": 1,
-        "limit": 10,
-        "pages": 1,
-        "total": 4,
+        "limit": 4,
+        "pages": 16,
+        "total": 63,
         "_links": {
             "self": {
-                "href": "\/api\/v1\/products\/?page=1&limit=10"
+                "href": "\/api\/v1\/products\/?sorting%5Bcode%5D=desc&page=1&limit=4"
             },
             "first": {
-                "href": "\/api\/v1\/products\/?page=1&limit=10"
+                "href": "\/api\/v1\/products\/?sorting%5Bcode%5D=desc&page=1&limit=4"
             },
             "last": {
-                "href": "\/api\/v1\/products\/?page=1&limit=10"
+                "href": "\/api\/v1\/products\/?sorting%5Bcode%5D=desc&page=16&limit=4"
+            },
+            "next": {
+                "href": "\/api\/v1\/products\/?sorting%5Bcode%5D=desc&page=2&limit=4"
             }
         },
         "_embedded": {
             "items": [
                 {
-                    "name": "Batman mug",
-                    "id": 63,
-                    "code": "BMM",
-                    "options": [],
-                    "averageRating": 0,
-                    "images": [],
-                    "_links": {
-                        "self": {
-                            "href": "\/api\/v1\/products\/BMM"
-                        }
-                    }
-                },
-                {
-                    "name": "Theme Mug",
-                    "id": 69,
-                    "code": "MUG_TH",
-                    "options": [
-                        {
-                            "id": 1,
-                            "code": "mug_type",
-                            "position": 0,
-                            "_links": {
-                                "self": {
-                                    "href": "\/api\/v1\/products\/mug_type"
-                                }
-                            }
-                        }
-                    ],
-                    "averageRating": 0,
-                    "images": [
-                        {
-                            "id": 121,
-                            "type": "ford",
-                            "path": "65\/f6\/1e3b25f3721768b535e5c37ac005.jpeg"
-                        }
-                    ],
-                    "_links": {
-                        "self": {
-                            "href": "\/api\/v1\/products\/MUG_TH"
-                        }
-                    }
-                },
-                {
-                    "name": "Spider-Man Mug",
-                    "id": 68,
+                    "name": "Spiderman Mug",
+                    "id": 61,
                     "code": "SMM",
                     "options": [],
                     "averageRating": 0,
@@ -882,15 +810,250 @@ Exemplary Response
                     }
                 },
                 {
-                    "name": "Truck simulator",
-                    "id": 61,
-                    "code": "TS3",
-                    "options": [],
+                    "name": "Theme Mug",
+                    "id": 63,
+                    "code": "MUG_TH",
+                    "options": [
+                        {
+                            "id": 1,
+                            "code": "mug_type",
+                            "position": 0,
+                            "values": [
+                                {
+                                    "code": "mug_type_medium",
+                                    "translations": {
+                                        "en_US": {
+                                            "locale": "en_US",
+                                            "id": 1,
+                                            "value": "Medium mug"
+                                        }
+                                    }
+                                },
+                                {
+                                    "code": "mug_type_double",
+                                    "translations": {
+                                        "en_US": {
+                                            "locale": "en_US",
+                                            "id": 2,
+                                            "value": "Double mug"
+                                        }
+                                    }
+                                },
+                                {
+                                    "code": "mug_type_monster",
+                                    "translations": {
+                                        "en_US": {
+                                            "locale": "en_US",
+                                            "id": 3,
+                                            "value": "Monster mug"
+                                        }
+                                    }
+                                }
+                            ],
+                            "_links": {
+                                "self": {
+                                    "href": "\/api\/v1\/products\/mug_type"
+                                }
+                            }
+                        }
+                    ],
                     "averageRating": 0,
                     "images": [],
                     "_links": {
                         "self": {
-                            "href": "\/api\/v1\/products\/TS3"
+                            "href": "\/api\/v1\/products\/MUG_TH"
+                        }
+                    }
+                },
+                {
+                    "name": "Sticker \"quis\"",
+                    "id": 16,
+                    "code": "fe06f44e-2169-328f-8cd2-cd5495b4b6ad",
+                    "options": [
+                        {
+                            "id": 2,
+                            "code": "sticker_size",
+                            "position": 1,
+                            "values": [
+                                {
+                                    "code": "sticker_size-3",
+                                    "translations": {
+                                        "en_US": {
+                                            "locale": "en_US",
+                                            "id": 4,
+                                            "value": "3\""
+                                        }
+                                    }
+                                },
+                                {
+                                    "code": "sticker_size_5",
+                                    "translations": {
+                                        "en_US": {
+                                            "locale": "en_US",
+                                            "id": 5,
+                                            "value": "5\""
+                                        }
+                                    }
+                                },
+                                {
+                                    "code": "sticker_size_7",
+                                    "translations": {
+                                        "en_US": {
+                                            "locale": "en_US",
+                                            "id": 6,
+                                            "value": "7\""
+                                        }
+                                    }
+                                }
+                            ],
+                            "_links": {
+                                "self": {
+                                    "href": "\/api\/v1\/products\/sticker_size"
+                                }
+                            }
+                        }
+                    ],
+                    "averageRating": 0,
+                    "images": [
+                        {
+                            "id": 31,
+                            "type": "main"
+                        },
+                        {
+                            "id": 32,
+                            "type": "thumbnail"
+                        }
+                    ],
+                    "_links": {
+                        "self": {
+                            "href": "\/api\/v1\/products\/fe06f44e-2169-328f-8cd2-cd5495b4b6ad"
+                        }
+                    }
+                },
+                {
+                    "name": "T-Shirt \"vel\"",
+                    "id": 51,
+                    "code": "f6858e9c-2f48-3d59-9f54-e7ac9898c0bd",
+                    "options": [
+                        {
+                            "id": 3,
+                            "code": "t_shirt_color",
+                            "position": 2,
+                            "values": [
+                                {
+                                    "code": "t_shirt_color_red",
+                                    "translations": {
+                                        "en_US": {
+                                            "locale": "en_US",
+                                            "id": 7,
+                                            "value": "Red"
+                                        }
+                                    }
+                                },
+                                {
+                                    "code": "t_shirt_color_black",
+                                    "translations": {
+                                        "en_US": {
+                                            "locale": "en_US",
+                                            "id": 8,
+                                            "value": "Black"
+                                        }
+                                    }
+                                },
+                                {
+                                    "code": "t_shirt_color_white",
+                                    "translations": {
+                                        "en_US": {
+                                            "locale": "en_US",
+                                            "id": 9,
+                                            "value": "White"
+                                        }
+                                    }
+                                }
+                            ],
+                            "_links": {
+                                "self": {
+                                    "href": "\/api\/v1\/products\/t_shirt_color"
+                                }
+                            }
+                        },
+                        {
+                            "id": 4,
+                            "code": "t_shirt_size",
+                            "position": 3,
+                            "values": [
+                                {
+                                    "code": "t_shirt_size_s",
+                                    "translations": {
+                                        "en_US": {
+                                            "locale": "en_US",
+                                            "id": 10,
+                                            "value": "S"
+                                        }
+                                    }
+                                },
+                                {
+                                    "code": "t_shirt_size_m",
+                                    "translations": {
+                                        "en_US": {
+                                            "locale": "en_US",
+                                            "id": 11,
+                                            "value": "M"
+                                        }
+                                    }
+                                },
+                                {
+                                    "code": "t_shirt_size_l",
+                                    "translations": {
+                                        "en_US": {
+                                            "locale": "en_US",
+                                            "id": 12,
+                                            "value": "L"
+                                        }
+                                    }
+                                },
+                                {
+                                    "code": "t_shirt_size_xl",
+                                    "translations": {
+                                        "en_US": {
+                                            "locale": "en_US",
+                                            "id": 13,
+                                            "value": "XL"
+                                        }
+                                    }
+                                },
+                                {
+                                    "code": "t_shirt_size_xxl",
+                                    "translations": {
+                                        "en_US": {
+                                            "locale": "en_US",
+                                            "id": 14,
+                                            "value": "XXL"
+                                        }
+                                    }
+                                }
+                            ],
+                            "_links": {
+                                "self": {
+                                    "href": "\/api\/v1\/products\/t_shirt_size"
+                                }
+                            }
+                        }
+                    ],
+                    "averageRating": 0,
+                    "images": [
+                        {
+                            "id": 101,
+                            "type": "main"
+                        },
+                        {
+                            "id": 102,
+                            "type": "thumbnail"
+                        }
+                    ],
+                    "_links": {
+                        "self": {
+                            "href": "\/api\/v1\/products\/f6858e9c-2f48-3d59-9f54-e7ac9898c0bd"
                         }
                     }
                 }
@@ -950,75 +1113,6 @@ Exemplary Response
 .. code-block:: text
 
     STATUS: 204 No Content
-
-If you try to perform a full product update without all the required fields specified, you will receive a ``400 Bad Request`` error.
-
-Example
-^^^^^^^
-
-.. code-block:: bash
-
-    $ curl http://demo.sylius.org/api/v1/products/BMM \
-        -H "Authorization: Bearer SampleToken" \
-        -H "Accept: application/json" \
-        -X PUT
-
-Exemplary Response
-^^^^^^^^^^^^^^^^^^
-
-.. code-block:: text
-
-    STATUS: 400 Bad Request
-
-.. code-block:: json
-
-    {
-        "code": 400,
-        "message": "Validation Failed",
-        "errors": {
-            "children": {
-                "enabled": {},
-                "translations": {
-                    "children": {
-                        "en_US": {
-                            "children": {
-                                "name": {
-                                    "errors": [
-                                        "Please enter product name."
-                                    ]
-                                },
-                                "slug": {
-                                    "errors": [
-                                        "Please enter product slug."
-                                    ]
-                                },
-                                "description": {},
-                                "metaKeywords": {},
-                                "metaDescription": {},
-                                "shortDescription": {}
-                            }
-                        }
-                    }
-                },
-                "attributes": {},
-                "associations": {
-                    "children": {
-                        "similar_products": {}
-                    }
-                },
-                "channels": {
-                    "children": [
-                        {}
-                    ]
-                },
-                "mainTaxon": {},
-                "productTaxons": {},
-                "images": {},
-                "code": {},
-                "options": {}
-            }
-        }
-    }
 
 To update a product partially you will need to call the ``/api/v1/products/code`` endpoint with the ``PATCH`` method.
 

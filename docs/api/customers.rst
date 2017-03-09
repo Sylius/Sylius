@@ -60,6 +60,195 @@ If you request for a more detailed data, you will receive an object with followi
 
     Read more about :doc:`Customers and Users </components/User/models>`.
 
+Creating a Customer
+-------------------
+
+Definition
+^^^^^^^^^^
+
+.. code-block:: text
+
+    POST /api/v1/customers/
+
++--------------------------+----------------+------------------------------------------------------------------------------------------------------+
+| Parameter                | Parameter type | Description                                                                                          |
++==========================+================+======================================================================================================+
+| Authorization            | header         | Token received during authentication                                                                 |
++--------------------------+----------------+------------------------------------------------------------------------------------------------------+
+| email                    | request        | **(unique)** Customer's email                                                                        |
++--------------------------+----------------+------------------------------------------------------------------------------------------------------+
+| firstName                | request        | Customer's first name                                                                                |
++--------------------------+----------------+------------------------------------------------------------------------------------------------------+
+| lastName                 | request        | Customer's last name                                                                                 |
++--------------------------+----------------+------------------------------------------------------------------------------------------------------+
+| groups                   | request        | *(optional)* Array of groups customer belongs to                                                     |
++--------------------------+----------------+------------------------------------------------------------------------------------------------------+
+| gender                   | request        | Customer's gender                                                                                    |
++--------------------------+----------------+------------------------------------------------------------------------------------------------------+
+| birthday                 | request        | *(optional)* Customer's birthday                                                                     |
++--------------------------+----------------+------------------------------------------------------------------------------------------------------+
+| user[plainPassword]      | request        | *(optional)* Users plain password. Required if user account should be created together with customer |
++--------------------------+----------------+------------------------------------------------------------------------------------------------------+
+| user[authorizationRoles] | request        | *(optional)* Array of users roles                                                                    |
++--------------------------+----------------+------------------------------------------------------------------------------------------------------+
+| user[enabled]            | request        | *(optional)* Flag set if user is enabled                                                             |
++--------------------------+----------------+------------------------------------------------------------------------------------------------------+
+
+Example
+^^^^^^^
+
+.. code-block:: bash
+
+    $ curl http://demo.sylius.org/api/v1/customers/ \
+        -H "Authorization: Bearer SampleToken" \
+        -H "Content-Type: application/json" \
+        -X POST \
+        --data '
+            {
+                "firstName": "John",
+                "lastName": "Diggle",
+                "email": "john.diggle@yahoo.com",
+                "gender": "m",
+                "user": {
+                    "plainPassword" : "testPassword"
+                }
+            }
+        '
+
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
+
+.. code-block:: text
+
+    STATUS: 201 Created
+
+.. code-block:: json
+
+    {
+        "id":409,
+        "user":{
+            "id":405,
+            "username":"john.diggle@yahoo.com",
+            "roles":[
+                "ROLE_USER"
+            ],
+            "enabled":false
+        },
+        "email":"john.diggle@yahoo.com",
+        "emailCanonical":"john.diggle@yahoo.com",
+        "firstName":"John",
+        "lastName":"Diggle",
+        "gender":"m",
+        "group":[
+
+        ]
+    }
+
+If you try to create a customer without email or gender, you will receive a ``400 Bad Request`` error.
+
+Example
+^^^^^^^
+
+.. code-block:: bash
+
+    $ curl http://demo.sylius.org/api/v1/customers/ \
+        -H "Authorization: Bearer SampleToken" \
+        -H "Content-Type: application/json" \
+        -X POST
+
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
+
+.. code-block:: text
+
+    STATUS: 400 Bad Request
+
+.. code-block:: json
+
+    {
+        "code": 400,
+        "message": "Validation Failed",
+        "errors": {
+            "children": {
+                "firstName": {},
+                "lastName": {},
+                "email": {
+                    "errors": [
+                        "Please enter your email."
+                    ]
+                },
+                "birthday": {},
+                "gender": {
+                    "errors": [
+                        "Please choose your gender."
+                    ]
+                },
+                "phoneNumber": {},
+                "subscribedToNewsletter": {},
+                "group": {}
+            }
+        }
+    }
+
+Getting a Single Customer
+-------------------------
+
+You can request detailed customer information by executing the following request:
+
+Definition
+^^^^^^^^^^
+
+.. code-block:: text
+
+    GET /api/v1/customers/{id}
+
++---------------+----------------+-------------------------------------------------------------------+
+| Parameter     | Parameter type | Description                                                       |
++===============+================+===================================================================+
+| Authorization | header         | Token received during authentication                              |
++---------------+----------------+-------------------------------------------------------------------+
+| id            | url attribute  | Id of the requested resource                                      |
++---------------+----------------+-------------------------------------------------------------------+
+
+Example
+^^^^^^^
+
+.. code-block:: bash
+
+    $ curl http://demo.sylius.org/api/v1/customers/399 \
+        -H "Authorization: Bearer SampleToken" \
+        -H "Accept: application/json"
+
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
+
+.. code-block:: text
+
+    STATUS: 200 OK
+
+.. code-block:: json
+
+    {
+        "id":399,
+        "user":{
+            "id":398,
+            "username":"cgulgowski@example.com",
+            "usernameCanonical":"cgulgowski@example.com",
+            "roles":[
+                "ROLE_USER"
+            ],
+            "enabled":false
+        },
+        "email":"cgulgowski@example.com",
+        "emailCanonical":"cgulgowski@example.com",
+        "firstName":"Levi",
+        "lastName":"Friesen",
+        "gender":"u",
+        "group":[
+
+        ]
+    }
+
 Collection of Customers
 -----------------------
 
@@ -214,205 +403,6 @@ Exemplary Response
         }
     }
 
-Getting a Single Customer
--------------------------
-
-You can request detailed customer information by executing the following request:
-
-Definition
-^^^^^^^^^^
-
-.. code-block:: text
-
-    GET /api/v1/customers/{id}
-
-+---------------+----------------+-------------------------------------------------------------------+
-| Parameter     | Parameter type | Description                                                       |
-+===============+================+===================================================================+
-| Authorization | header         | Token received during authentication                              |
-+---------------+----------------+-------------------------------------------------------------------+
-| id            | url attribute  | Id of requested resource                                          |
-+---------------+----------------+-------------------------------------------------------------------+
-
-Example
-^^^^^^^
-
-.. code-block:: bash
-
-    $ curl http://demo.sylius.org/api/v1/customers/399 \
-        -H "Authorization: Bearer SampleToken" \
-        -H "Accept: application/json"
-
-Exemplary Response
-^^^^^^^^^^^^^^^^^^
-
-.. code-block:: text
-
-    STATUS: 200 OK
-
-.. code-block:: json
-
-    {
-        "id":399,
-        "user":{
-            "id":398,
-            "username":"cgulgowski@example.com",
-            "usernameCanonical":"cgulgowski@example.com",
-            "roles":[
-                "ROLE_USER"
-            ],
-            "enabled":false
-        },
-        "email":"cgulgowski@example.com",
-        "emailCanonical":"cgulgowski@example.com",
-        "firstName":"Levi",
-        "lastName":"Friesen",
-        "gender":"u",
-        "group":[
-
-        ]
-    }
-
-Creating a Customer
--------------------
-
-Definition
-^^^^^^^^^^
-
-.. code-block:: text
-
-    POST /api/v1/customers/
-
-+--------------------------+----------------+------------------------------------------------------------------------------------------------------+
-| Parameter                | Parameter type | Description                                                                                          |
-+==========================+================+======================================================================================================+
-| Authorization            | header         | Token received during authentication                                                                 |
-+--------------------------+----------------+------------------------------------------------------------------------------------------------------+
-| email                    | request        | **(unique)** Customers email                                                                         |
-+--------------------------+----------------+------------------------------------------------------------------------------------------------------+
-| firstName                | request        | Customers first name                                                                                 |
-+--------------------------+----------------+------------------------------------------------------------------------------------------------------+
-| lastName                 | request        | Customers last name                                                                                  |
-+--------------------------+----------------+------------------------------------------------------------------------------------------------------+
-| groups                   | request        | *(optional)* Array of groups customer belongs to                                                     |
-+--------------------------+----------------+------------------------------------------------------------------------------------------------------+
-| gender                   | request        | Customers gender                                                                                     |
-+--------------------------+----------------+------------------------------------------------------------------------------------------------------+
-| birthday                 | request        | *(optional)* Customers birthday                                                                      |
-+--------------------------+----------------+------------------------------------------------------------------------------------------------------+
-| user[plainPassword]      | request        | *(optional)* Users plain password. Required if user account should be created together with customer |
-+--------------------------+----------------+------------------------------------------------------------------------------------------------------+
-| user[authorizationRoles] | request        | *(optional)* Array of users roles                                                                    |
-+--------------------------+----------------+------------------------------------------------------------------------------------------------------+
-| user[enabled]            | request        | *(optional)* Flag set if user is enabled                                                             |
-+--------------------------+----------------+------------------------------------------------------------------------------------------------------+
-
-Example
-^^^^^^^
-
-.. code-block:: bash
-
-    $ curl http://demo.sylius.org/api/v1/customers/ \
-        -H "Authorization: Bearer SampleToken" \
-        -H "Content-Type: application/json" \
-        -X POST \
-        --data '
-            {
-                "firstName": "John",
-                "lastName": "Diggle",
-                "email": "john.diggle@yahoo.com",
-                "gender": "m",
-                "user": {
-                    "plainPassword" : "testPassword"
-                }
-            }
-        '
-
-Exemplary Response
-^^^^^^^^^^^^^^^^^^
-
-.. code-block:: text
-
-    STATUS: 201 Created
-
-.. code-block:: json
-
-    {
-        "id":409,
-        "user":{
-            "id":405,
-            "username":"john.diggle@yahoo.com",
-            "roles":[
-                "ROLE_USER"
-            ],
-            "enabled":false
-        },
-        "email":"john.diggle@yahoo.com",
-        "emailCanonical":"john.diggle@yahoo.com",
-        "firstName":"John",
-        "lastName":"Diggle",
-        "gender":"m",
-        "group":[
-
-        ]
-    }
-
-If you try to create a customer without email, first name, last name or gender, you will receive a 400 error.
-
-Example
-^^^^^^^
-
-.. code-block:: bash
-
-    $ curl http://demo.sylius.org/api/v1/customers/ \
-        -H "Authorization: Bearer SampleToken" \
-        -H "Accept: application/json" \
-        -X POST
-
-Exemplary Response
-^^^^^^^^^^^^^^^^^^
-
-.. code-block:: text
-
-    STATUS: 400 Bad Request
-
-.. code-block:: json
-
-    {
-        "code":400,
-        "message":"Validation Failed",
-        "errors":{
-            "children":{
-                "firstName":{
-                    "errors":[
-                        "Please enter your first name."
-                    ]
-                },
-                "lastName":{
-                    "errors":[
-                        "Please enter your last name."
-                    ]
-                },
-                "email":{
-                    "errors":[
-                        "Please enter your email."
-                    ]
-                },
-                "birthday":{
-
-                },
-                "gender":{
-                    "errors":[
-                        "Please choose your gender."
-                    ]
-                },
-                "group":{
-
-                }
-            }
-        }
-    }
-
 Updating a Customer
 -------------------
 
@@ -430,7 +420,7 @@ Definition
 +==========================+================+==============================================================================+
 | Authorization            | header         | Token received during authentication                                         |
 +--------------------------+----------------+------------------------------------------------------------------------------+
-| id                       | url attribute  | Id of requested resource                                                     |
+| id                       | url attribute  | Id of the requested resource                                                 |
 +--------------------------+----------------+------------------------------------------------------------------------------+
 | email                    | request        | **(unique)** Customers email                                                 |
 +--------------------------+----------------+------------------------------------------------------------------------------+
@@ -485,7 +475,7 @@ Example
 
     $ curl http://demo.sylius.org/api/v1/customers/399 \
         -H "Authorization: Bearer SampleToken" \
-        -H "Accept: application/json" \
+        -H "Content-Type: application/json" \
         -X PUT
 
 Exemplary Response
@@ -498,36 +488,26 @@ Exemplary Response
 .. code-block:: json
 
     {
-        "code":400,
-        "message":"Validation Failed",
-        "errors":{
-            "children":{
-                "firstName":{
-                    "errors":[
-                        "Please enter your first name."
-                    ]
-                },
-                "lastName":{
-                    "errors":[
-                        "Please enter your last name."
-                    ]
-                },
-                "email":{
-                    "errors":[
+        "code": 400,
+        "message": "Validation Failed",
+        "errors": {
+            "children": {
+                "firstName": {},
+                "lastName": {},
+                "email": {
+                    "errors": [
                         "Please enter your email."
                     ]
                 },
-                "birthday":{
-
-                },
-                "gender":{
-                    "errors":[
+                "birthday": {},
+                "gender": {
+                    "errors": [
                         "Please choose your gender."
                     ]
                 },
-                "group":{
-
-                }
+                "phoneNumber": {},
+                "subscribedToNewsletter": {},
+                "group": {}
             }
         }
     }
@@ -546,7 +526,7 @@ Definition
 +==========================+================+==================================================+
 | Authorization            | header         | Token received during authentication             |
 +--------------------------+----------------+--------------------------------------------------+
-| id                       | url attribute  | Id of requested resource                         |
+| id                       | url attribute  | Id of the requested resource                     |
 +--------------------------+----------------+--------------------------------------------------+
 | email                    | request        | *(optional)* **(unique)** Customers email        |
 +--------------------------+----------------+--------------------------------------------------+
@@ -600,7 +580,7 @@ Definition
 +===============+================+===========================================+
 | Authorization | header         | Token received during authentication      |
 +---------------+----------------+-------------------------------------------+
-| id            | url attribute  | Id of requested resource                  |
+| id            | url attribute  | Id of the requested resource              |
 +---------------+----------------+-------------------------------------------+
 
 Example

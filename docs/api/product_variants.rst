@@ -111,7 +111,7 @@ To create new product variant for the product with ``code = MUG-TH`` use the bel
         -X POST \
         --data '
             {
-                "code": "medium-mug-theme"
+                "code": "medium-theme-mug"
             }
         '
 
@@ -126,7 +126,7 @@ Exemplary Response
 
     {
         "id": 331,
-        "code": "medium-mug-theme",
+        "code": "medium-theme-mug",
         "optionValues": [],
         "position": 0,
         "translations": [],
@@ -137,7 +137,7 @@ Exemplary Response
         "channelPricings": [],
         "_links": {
             "self": {
-                "href": "\/api\/v1\/products\/MUG_TH\/variants\/medium-mug-theme"
+                "href": "\/api\/v1\/products\/MUG_TH\/variants\/medium-theme-mug"
             },
             "product": {
                 "href": "\/api\/v1\/products\/MUG_TH"
@@ -156,7 +156,7 @@ Example
 
     $ curl http://demo.sylius.org/api/v1/products/MUG-TH/variants/ \
         -H "Authorization: Bearer SampleToken" \
-        -H "Accept: application/json" \
+        -H "Content-Type: application/json" \
         -X POST
 
 Exemplary Response
@@ -191,39 +191,33 @@ Exemplary Response
 
 You can also create a product variant with additional (not required) fields:
 
-+------------------------------------+----------------+-------------------------------------------------------------------------------------------------------------+
-| Parameter                          | Parameter type | Description                                                                                                 |
-+====================================+================+=============================================================================================================+
-| Authorization                      | header         | Token received during authentication                                                                        |
-+------------------------------------+----------------+-------------------------------------------------------------------------------------------------------------+
-| productCode                        | url attribute  | Id of product for which the variants should be displayed                                                    |
-+------------------------------------+----------------+-------------------------------------------------------------------------------------------------------------+
-| code                               | request        | **(unique)** Product variant identifier                                                                     |
-+------------------------------------+----------------+-------------------------------------------------------------------------------------------------------------+
-| translations['localeCode']['name'] | request        | *(optional)* Name of the product variant                                                                    |
-+------------------------------------+----------------+-------------------------------------------------------------------------------------------------------------+
-| position                           | request        | *(optional)* Position of variant in product                                                                 |
-+------------------------------------+----------------+-------------------------------------------------------------------------------------------------------------+
-| tracked                            | request        | *(optional)* The information if the variant is tracked by inventory (true or false)                         |
-+------------------------------------+----------------+-------------------------------------------------------------------------------------------------------------+
-| channelPricings                    | request        | *(optional)* Collection of objects which contains prices for all enabled channels                           |
-+------------------------------------+----------------+-------------------------------------------------------------------------------------------------------------+
-| taxCategory                        | request        | *(optional)* Code of object which provides information about tax category to which variant is assigned      |
-+------------------------------------+----------------+-------------------------------------------------------------------------------------------------------------+
-| shippingCategory                   | request        | *(optional)* Code of object which provides information about shipping category to which variant is assigned |
-+------------------------------------+----------------+-------------------------------------------------------------------------------------------------------------+
-| optionValues                       | request        | *(optional)* Object with information about ProductOption (by code) and ProductOptionValue (by code)         |
-+------------------------------------+----------------+-------------------------------------------------------------------------------------------------------------+
-| onHand                             | request        | *(optional)* Information about the number of product in given variant currently available in shop           |
-+------------------------------------+----------------+-------------------------------------------------------------------------------------------------------------+
-| width                              | request        | *(optional)* The width of variant                                                                           |
-+------------------------------------+----------------+-------------------------------------------------------------------------------------------------------------+
-| height                             | request        | *(optional)* The height of variant                                                                          |
-+------------------------------------+----------------+-------------------------------------------------------------------------------------------------------------+
-| depth                              | request        | *(optional)* The depth of variant                                                                           |
-+------------------------------------+----------------+-------------------------------------------------------------------------------------------------------------+
-| weight                             | request        | *(optional)* The weight of variant                                                                          |
-+------------------------------------+----------------+-------------------------------------------------------------------------------------------------------------+
++------------------------------------+----------------+------------------------------------------------------------------------------------------------+
+| Parameter                          | Parameter type | Description                                                                                    |
++====================================+================+================================================================================================+
+| translations['localeCode']['name'] | request        | Name of the product variant                                                                    |
++------------------------------------+----------------+------------------------------------------------------------------------------------------------+
+| position                           | request        | Position of variant in product                                                                 |
++------------------------------------+----------------+------------------------------------------------------------------------------------------------+
+| tracked                            | request        | The information if the variant is tracked by inventory (true or false)                         |
++------------------------------------+----------------+------------------------------------------------------------------------------------------------+
+| channelPricings                    | request        | Collection of objects which contains prices for all enabled channels                           |
++------------------------------------+----------------+------------------------------------------------------------------------------------------------+
+| taxCategory                        | request        | Code of object which provides information about tax category to which variant is assigned      |
++------------------------------------+----------------+------------------------------------------------------------------------------------------------+
+| shippingCategory                   | request        | Code of object which provides information about shipping category to which variant is assigned |
++------------------------------------+----------------+------------------------------------------------------------------------------------------------+
+| optionValues                       | request        | Object with information about ProductOption (by code) and ProductOptionValue (by code)         |
++------------------------------------+----------------+------------------------------------------------------------------------------------------------+
+| onHand                             | request        | Information about the number of product in given variant currently available in shop           |
++------------------------------------+----------------+------------------------------------------------------------------------------------------------+
+| width                              | request        | The width of variant                                                                           |
++------------------------------------+----------------+------------------------------------------------------------------------------------------------+
+| height                             | request        | The height of variant                                                                          |
++------------------------------------+----------------+------------------------------------------------------------------------------------------------+
+| depth                              | request        | The depth of variant                                                                           |
++------------------------------------+----------------+------------------------------------------------------------------------------------------------+
+| weight                             | request        | The weight of variant                                                                          |
++------------------------------------+----------------+------------------------------------------------------------------------------------------------+
 
 .. warning::
 
@@ -250,7 +244,7 @@ Here is an example of creating a product variant with additional data for the pr
                 },
                 "channelPricings": {
                     "US_WEB": {
-                        "price": "1243",
+                        "price": "1243"
                     }
                 },
                 "tracked": true,
@@ -592,7 +586,7 @@ To fully update the product variant with ``code = double-theme-mug`` for the pro
 
 .. code-block:: bash
 
-    curl http://demo.sylius.org/api/v1/products/MUG-TH/variants/double-theme-mug \
+    $ curl http://demo.sylius.org/api/v1/products/MUG-TH/variants/double-theme-mug \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PUT \
