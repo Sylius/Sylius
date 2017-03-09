@@ -17,6 +17,6 @@ Feature: Browsing taxons tree
 
     @api
     Scenario: Getting taxon leafs
-        When I want to get "Watches" taxon leafs
+        When I want to get children from taxon "Watches"
         Then I should see 2 taxons on the list
         And I should see the taxon named "Digital" and "Analog" in the list
