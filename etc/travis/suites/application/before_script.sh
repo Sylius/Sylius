@@ -9,4 +9,5 @@ run_command "bin/console doctrine:migrations:migrate --no-interaction --env=test
 
 print_header "Setting the web assets up" "sylius"
 run_command "bin/console assets:install --env=test_cached --no-debug -vvv" || exit $?
-run_command "npm run gulp" || exit $?
+run_command "source ~/.nvm/nvm.sh" || exit $?
+run_command "yarn run gulp" || exit $?
