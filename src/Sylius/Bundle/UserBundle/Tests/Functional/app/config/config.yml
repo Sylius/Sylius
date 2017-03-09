@@ -35,6 +35,7 @@ doctrine:
         dbname: "%database_name%"
         user: "%database_user%"
         password: "%database_password%"
+        server_version: "%database_version%"
         charset: UTF8
     orm:
         entity_managers:
