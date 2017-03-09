@@ -1,5 +1,5 @@
 Sylius\Component\Core\Model\Order:
-    fulfilled_cart:
+    cart_with_items:
         channel: "@channel_web"
         addItem: ["@sw_mug_item", "@hard_available_mug_item"]
         currencyCode: USD
@@ -10,16 +10,14 @@ Sylius\Component\Core\Model\Order:
 Sylius\Component\Core\Model\OrderItem:
     sw_mug_item:
         quantity: 2
-        unitPrice: 2000
         addUnit: ["@sw_mug_item_unit1", "@sw_mug_item_unit2"]
         variant: "@mug_sw"
-        order: "@fulfilled_cart"
+        order: "@cart_with_items"
     hard_available_mug_item:
         quantity: 1
-        unitPrice: 2000
         addUnit: ["@hard_available_mug_item_unit"]
         variant: "@hard_available_mug"
-        order: "@fulfilled_cart"
+        order: "@cart_with_items"
 
 Sylius\Component\Core\Model\OrderItemUnit:
     sw_mug_item_unit1:

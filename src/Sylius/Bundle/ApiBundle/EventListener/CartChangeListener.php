@@ -13,6 +13,7 @@ namespace Sylius\Bundle\ApiBundle\EventListener;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Webmozart\Assert\Assert;
@@ -20,7 +21,7 @@ use Webmozart\Assert\Assert;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-final class AddToCartListener
+final class CartChangeListener
 {
     /**
      * @var OrderProcessorInterface
@@ -45,7 +46,7 @@ final class AddToCartListener
     /**
      * @param GenericEvent $event
      */
-    public function recalculateOrder(GenericEvent $event)
+    public function recalculateOrderOnAdd(GenericEvent $event)
     {
         $item = $event->getSubject();
         Assert::isInstanceOf($item, OrderItemInterface::class);
@@ -54,5 +55,20 @@ final class AddToCartListener
         $this->orderProcessor->process($order);
 
         $this->objectManager->persist($order);
+    }
+
+    /**
+     * @param GenericEvent $event
+     */
+    public function recalculateOrderOnDelete(GenericEvent $event)
+    {
+        $item = $event->getSubject();
+        Assert::isInstanceOf($item, OrderItemInterface::class);
+
+        /** @var OrderInterface $order */
+        $order = $item->getOrder();
+        $order->removeItem($item);
+
+        $this->orderProcessor->process($order);
     }
 }
