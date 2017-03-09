@@ -70,7 +70,8 @@ final class ResourceTranslationsType extends AbstractType implements EventSubscr
     public function preSetData(FormEvent $event)
     {
         $form = $event->getForm();
-        $type = $form->getConfig()->getOption('entry_type');
+        $entryType = $form->getConfig()->getOption('entry_type');
+        $entryOptions = $form->getConfig()->getOption('entry_options');
 
         foreach ($this->definedLocalesCodes as $localeCode) {
             if ($form->has($localeCode)) {
@@ -78,9 +79,10 @@ final class ResourceTranslationsType extends AbstractType implements EventSubscr
             }
 
             $required = $localeCode === $this->defaultLocaleCode;
-            $form->add($localeCode, $type, [
+            $form->add($localeCode, $entryType, array_replace($entryOptions, [
                 'required' => $required,
-            ]);
+                'block_name' => 'entry',
+            ]));
         }
     }
 
