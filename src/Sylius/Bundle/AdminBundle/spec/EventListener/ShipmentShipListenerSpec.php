@@ -12,8 +12,8 @@
 namespace spec\Sylius\Bundle\AdminBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\AdminBundle\EmailManager\ShipmentEmailManagerInterface;
 use Sylius\Bundle\AdminBundle\EventListener\ShipmentShipListener;
-use Sylius\Bundle\CoreBundle\EmailManager\ShipmentEmailManagerInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 

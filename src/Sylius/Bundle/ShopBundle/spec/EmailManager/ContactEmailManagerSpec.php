@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CoreBundle\EmailManager;
+namespace spec\Sylius\Bundle\ShopBundle\EmailManager;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\EmailManager\ContactEmailManager;
-use Sylius\Bundle\CoreBundle\EmailManager\ContactEmailManagerInterface;
+use Sylius\Bundle\ShopBundle\EmailManager\ContactEmailManager;
+use Sylius\Bundle\ShopBundle\EmailManager\ContactEmailManagerInterface;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 
 /**

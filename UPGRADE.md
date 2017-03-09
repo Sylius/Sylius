@@ -175,6 +175,31 @@ You can bring back previous configuration by overriding current routing with you
 
 * `Channel` relation was removed from `ChannelPricing` model. `Channel::$code` should be used instead.
 
+* The following classes were moved to `ShopBundle`:
+
+  * `Sylius\Bundle\CoreBundle\EmailManager\ContactEmailManager`
+  * `Sylius\Bundle\CoreBundle\EmailManager\ContactEmailManagerInterface`
+  * `Sylius\Bundle\CoreBundle\EmailManager\OrderEmailManagerInterface`
+  * `Sylius\Bundle\CoreBundle\EmailManager\OrderEmailManager`
+  * `Sylius\Bundle\CoreBundle\EventListener\UserMailerListener`
+
+* The following email templates were moved to `ShopBundle`:
+
+  * `SyliusShopBundle:Email:contactRequest.html.twig`
+  * `SyliusShopBundle:Email:orderConfirmation.html.twig`
+  * `SyliusShopBundle:Email:userRegistration.html.twig`
+  * `SyliusShopBundle:Email:passwordReset.html.twig`
+  * `SyliusShopBundle:Email:verification.html.twig`
+
+* The following classes were moved to `AdminBundle`:
+
+  * `Sylius\Bundle\CoreBundle\EmailManager\ShipmentEmailManager`
+  * `Sylius\Bundle\CoreBundle\EmailManager\ShipmentEmailManagerInterface`
+
+* The following email template was moved to `AdminBundle`:
+
+  * `SyliusShopBundle:Email:shipmentConfirmation.html.twig`
+
 ### Currency / CurrencyBundle
 
 * The following classes were removed due to being no longer used in current implementation:

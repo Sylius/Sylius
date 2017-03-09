@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\ShopBundle\Controller;
 
-use Sylius\Bundle\CoreBundle\EmailManager\ContactEmailManagerInterface;
 use Sylius\Bundle\CoreBundle\Form\Type\ContactType;
+use Sylius\Bundle\ShopBundle\EmailManager\ContactEmailManagerInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;

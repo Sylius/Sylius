@@ -5,29 +5,3 @@ sylius_mailer:
     sender:
         name: Example.com
         address: no-reply@example.com
-    emails:
-        contact_request:
-            subject: sylius.emails.contact_request.subject
-            template: "SyliusCoreBundle:Email:contactRequest.html.twig"
-        order_confirmation:
-            subject: sylius.emails.order_confirmation.subject
-            template: "SyliusCoreBundle:Email:orderConfirmation.html.twig"
-        shipment_confirmation:
-            subject: sylius.emails.shipment_confirmation.subject
-            template: "SyliusCoreBundle:Email:shipmentConfirmation.html.twig"
-        user_registration:
-            subject: sylius.emails.user_registration.subject
-            template: "SyliusCoreBundle:Email:userRegistration.html.twig"
-        password_reset:
-            subject: sylius.emails.user.password_reset.subject
-            template: "SyliusCoreBundle:Email:passwordReset.html.twig"
-        reset_password_token:
-            subject: sylius.emails.user.password_reset.subject
-            template: "SyliusCoreBundle:Email:passwordReset.html.twig"
-        reset_password_pin:
-            subject: sylius.emails.user.password_reset.subject
-            template: "SyliusCoreBundle:Email:passwordReset.html.twig"
-        verification_token:
-            subject: sylius.emails.user.verification_token.subject
-            template: "SyliusCoreBundle:Email:verification.html.twig"
-

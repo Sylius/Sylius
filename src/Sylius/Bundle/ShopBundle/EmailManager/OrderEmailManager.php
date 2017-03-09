@@ -9,15 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\EmailManager;
+namespace Sylius\Bundle\ShopBundle\EmailManager;
 
 use Sylius\Bundle\CoreBundle\Mailer\Emails;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 
 /**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
+ * @author Hussein Jafferjee <hussein@jafferjee.ca>
  */
-final class ContactEmailManager implements ContactEmailManagerInterface
+final class OrderEmailManager implements OrderEmailManagerInterface
 {
     /**
      * @var SenderInterface
@@ -35,8 +36,8 @@ final class ContactEmailManager implements ContactEmailManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function sendContactRequest(array $data, array $recipients)
+    public function sendConfirmationEmail(OrderInterface $order)
     {
-        $this->emailSender->send(Emails::CONTACT_REQUEST, $recipients, ['data' => $data]);
+        $this->emailSender->send(Emails::ORDER_CONFIRMATION, [$order->getCustomer()->getEmail()], ['order' => $order]);
     }
 }

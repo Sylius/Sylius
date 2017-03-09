@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\EmailManager;
+namespace Sylius\Bundle\ShopBundle\EmailManager;
 
 use Sylius\Component\Core\Model\OrderInterface;
 
