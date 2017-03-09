@@ -330,6 +330,20 @@ EOT;
     }
 
     /**
+     * @test
+     */
+    public function it_does_not_allow_to_delete_current_logged_admin_user()
+    {
+        $user = $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/admin_users.yml');
+
+        $this->client->request('DELETE', $this->getAdminUserUrl($user['admin']), [], [], static::$authorizedHeaderWithContentType);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'admin_user/deletion_fail_response',  Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
+
+    /**
      * @param AdminUserInterface $user
      *
      * @return string
