@@ -36,7 +36,8 @@ Here you will find all configuration options of ``sylius_grid``.
                         position: 100
                         options:
                             fields: { }
-                        form_options: { }
+                        form_options:
+                            type: contains # type of string filtering option, if you one to have just one
                         default_value: ~
                     enabled:
                         type: boolean # Type of filter
