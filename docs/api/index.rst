@@ -6,6 +6,7 @@ The REST API Reference
 
     introduction
     authorization
+    admin_users
     carts
     channels
     checkouts

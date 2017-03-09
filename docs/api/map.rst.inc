@@ -1,5 +1,6 @@
 * :doc:`/api/introduction`
 * :doc:`/api/authorization`
+* :doc:`/api/admin_users`
 * :doc:`/api/carts`
 * :doc:`/api/channels`
 * :doc:`/api/checkouts`
