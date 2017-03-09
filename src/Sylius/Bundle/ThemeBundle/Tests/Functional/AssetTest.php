@@ -26,11 +26,12 @@ final class AssetTest extends ThemeBundleTestCase
     }
 
     /**
+     * @test
      * @dataProvider getSymlinkMasks
      *
      * @param int $symlinkMask
      */
-    public function testAssets($symlinkMask)
+    public function it_dumps_assets($symlinkMask)
     {
         $webDirectory = $this->createWebDirectory();
 
@@ -45,11 +46,12 @@ final class AssetTest extends ThemeBundleTestCase
     }
 
     /**
+     * @test
      * @dataProvider getSymlinkMasks
      *
      * @param int $symlinkMask
      */
-    public function testAssetsWhenModifiedAndReinstalled($symlinkMask)
+    public function it_updates_dumped_assets_if_they_are_modified($symlinkMask)
     {
         $webDirectory = $this->createWebDirectory();
 
@@ -70,11 +72,12 @@ final class AssetTest extends ThemeBundleTestCase
     }
 
     /**
+     * @test
      * @dataProvider getSymlinkMasks
      *
      * @param int $symlinkMask
      */
-    public function testAssetsWhenReinstalled($symlinkMask)
+    public function it_dumps_assets_correctly_even_if_nothing_has_changed($symlinkMask)
     {
         $webDirectory = $this->createWebDirectory();
 

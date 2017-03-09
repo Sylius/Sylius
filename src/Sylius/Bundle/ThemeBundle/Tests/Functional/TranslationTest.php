@@ -16,7 +16,10 @@ namespace Sylius\Bundle\ThemeBundle\Tests\Functional;
  */
 final class TranslationTest extends ThemeBundleTestCase
 {
-    public function testTranslations()
+    /**
+     * @test
+     */
+    public function it_respects_theming_logic_while_translating_messages()
     {
         $client = $this->getClient();
 

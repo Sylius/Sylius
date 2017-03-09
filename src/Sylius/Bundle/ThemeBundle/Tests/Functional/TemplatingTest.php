@@ -17,12 +17,13 @@ namespace Sylius\Bundle\ThemeBundle\Tests\Functional;
 final class TemplatingTest extends ThemeBundleTestCase
 {
     /**
+     * @test
      * @dataProvider getBundleTemplates
      *
      * @param string $templateName
      * @param string $contents
      */
-    public function testRenderBundleTemplates($templateName, $contents)
+    public function it_renders_bundle_templates($templateName, $contents)
     {
         $client = $this->getClient();
 
@@ -45,12 +46,13 @@ final class TemplatingTest extends ThemeBundleTestCase
     }
 
     /**
+     * @test
      * @dataProvider getBundleTemplatesUsingNamespacedPaths
      *
      * @param string $templateName
      * @param string $contents
      */
-    public function testRenderBundleTemplatesUsingNamespacedPaths($templateName, $contents)
+    public function it_renders_bundle_templates_using_namespaced_paths($templateName, $contents)
     {
         $client = $this->getClient();
 
@@ -73,12 +75,13 @@ final class TemplatingTest extends ThemeBundleTestCase
     }
 
     /**
+     * @test
      * @dataProvider getAppTemplates
      *
      * @param string $templateName
      * @param string $contents
      */
-    public function testRenderAppTemplates($templateName, $contents)
+    public function it_renders_application_templates($templateName, $contents)
     {
         $client = $this->getClient();
 
@@ -99,12 +102,13 @@ final class TemplatingTest extends ThemeBundleTestCase
     }
 
     /**
+     * @test
      * @dataProvider getAppTemplatesUsingNamespacedPaths
      *
      * @param string $templateName
      * @param string $contents
      */
-    public function testRenderAppTemplatesUsingNamespacedPaths($templateName, $contents)
+    public function it_renders_application_templates_using_namespaced_paths($templateName, $contents)
     {
         $client = $this->getClient();
 
