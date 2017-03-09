@@ -59,13 +59,13 @@ Having Node.js installed go to your project directory and run:
 
 .. code-block:: bash
 
-    $ npm install
+    $ yarn install
 
 And now you can use gulp for installing views, by just running a simple command:
 
 .. code-block:: bash
 
-    $ npm run gulp
+    $ yarn run gulp
 
 Although if you have Gulp installed globally then run just:
 
