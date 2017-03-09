@@ -198,7 +198,7 @@ You can bring back previous configuration by overriding current routing with you
 
 * The following email template was moved to `AdminBundle`:
 
-  * `SyliusShopBundle:Email:shipmentConfirmation.html.twig`
+  * `SyliusAdminBundle:Email:shipmentConfirmation.html.twig`
 
 ### Currency / CurrencyBundle
 
