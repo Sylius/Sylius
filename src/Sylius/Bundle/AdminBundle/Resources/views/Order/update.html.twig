@@ -8,6 +8,8 @@
 {% form_theme form 'SyliusUiBundle:Form:theme.html.twig' %}
 
 {% block content %}
+{{ sonata_block_render_event('sylius.admin.order.update.before_header', { 'resource': resource }) }}
+
 <div class="ui stackable two column grid">
     <div class="twelve wide column">
         {% include '@SyliusAdmin/Order/Show/_header.html.twig' %}
@@ -17,7 +19,11 @@
     </div>
 </div>
 
+{{ sonata_block_render_event('sylius.admin.order.update.after_header', { 'resource': resource }) }}
+    
 {% include '@SyliusAdmin/Order/Update/_breadcrumb.html.twig' %}
+
+{{ sonata_block_render_event('sylius.admin.order.update.after_breadcrumb', { 'resource': resource }) }}
 
 {{ form_start(form, {'action': path('sylius_admin_order_update', {'id': order.id}), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
     <div class="ui segment">
@@ -33,8 +39,12 @@
             {% include '@SyliusAdmin/Common/Form/_address.html.twig' with {'form': form.billingAddress} %}
         </div>
 
+        {{ sonata_block_render_event('sylius.admin.order.update.form', { 'resource': resource }) }}
+
         {{ form_row(form._token) }}
         {% include '@SyliusUi/Form/Buttons/_update.html.twig' with {'paths': {'cancel': path('sylius_admin_order_index')}} %}
     </div>
 {{ form_end(form, {'render_rest': false}) }}
+
+{{ sonata_block_render_event('sylius.admin.order.update.after_content', { 'resource': resource }) }}
 {% endblock %}

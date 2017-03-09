@@ -2,6 +2,8 @@
     <div class="column">
         {% include configuration.vars.templates.header_title|default('@SyliusAdmin/Crud/Index/_headerTitle.html.twig') %}
         {% include configuration.vars.templates.breadcrumb|default('@SyliusAdmin/Crud/Index/_breadcrumb.html.twig') %}
+
+        {{ sonata_block_render_event(eventPrefix ~ '.header', { 'resources': resources }) }}
     </div>
 
     {% include '@SyliusAdmin/Crud/Index/_actions.html.twig' %}

@@ -4,12 +4,20 @@
 
 {% set definition = resources.definition %}
 {% set data = resources.data %}
+{% set eventPrefix = app.request.attributes.get('_route')|replace('_', '.') %}
 
 {% set header = configuration.vars.header|default(metadata.applicationName~'.ui.'~metadata.pluralName) %}
 
 {% block title %}{{ parent() }} {{ header|trans }}{% endblock %}
 
 {% block content %}
+{{ sonata_block_render_event(eventPrefix ~ '.before_header', { 'resources': resources }) }}
+
 {% include '@SyliusAdmin/Crud/Index/_header.html.twig' %}
+
+{{ sonata_block_render_event(eventPrefix ~ '.after_header', { 'resources': resources }) }}
+
 {% include '@SyliusAdmin/Crud/Index/_content.html.twig' %}
+
+{{ sonata_block_render_event(eventPrefix ~ '.after_content', { 'resources': resources }) }}
 {% endblock %}

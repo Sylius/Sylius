@@ -56,4 +56,6 @@
         </div>
     </div>
     {% endif %}
+
+    {{ sonata_block_render_event(app.request.attributes.get('_route')|replace('_', '.') ~ '.tab_details', { 'form': form }) }}
 </div>

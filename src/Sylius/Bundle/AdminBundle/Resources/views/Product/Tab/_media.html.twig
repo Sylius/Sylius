@@ -4,4 +4,6 @@
     <h3 class="ui dividing header">{{ 'sylius.ui.media'|trans }}</h3>
     <br>
     {{ form_row(form.images, {'label': false}) }}
+
+    {{ sonata_block_render_event(app.request.attributes.get('_route')|replace('_', '.') ~ '.tab_media', { 'form': form }) }}
 </div>

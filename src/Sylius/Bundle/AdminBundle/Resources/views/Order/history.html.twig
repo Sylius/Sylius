@@ -5,6 +5,8 @@
 {% block title %}{{ parent() }} {{ 'sylius.ui.order'|trans }} #{{ order.number }} - {{ 'sylius.ui.order_history'|trans }}{% endblock %}
 
 {% block content %}
+{{ sonata_block_render_event('sylius.admin.order.history.before_header', { 'resource': resource }) }}
+
 <div class="ui stackable two column grid">
     <div class="twelve wide column">
         {% include '@SyliusAdmin/Order/History/_header.html.twig' %}
@@ -13,10 +15,18 @@
         {% include '@SyliusAdmin/Order/History/_actions.html.twig' %}
     </div>
 </div>
+
+{{ sonata_block_render_event('sylius.admin.order.history.after_header', { 'resource': resource }) }}
+
 {% include '@SyliusAdmin/Order/History/_breadcrumb.html.twig' %}
+
+{{ sonata_block_render_event('sylius.admin.order.history.after_breadcrumb', { 'resource': resource }) }}
+
 <div class="ui one column grid">
     <div class="column">
         {% include '@SyliusAdmin/Order/History/_addresses.html.twig' %}
     </div>
 </div>
+
+{{ sonata_block_render_event('sylius.admin.order.history.after_content', { 'resource': resource }) }}
 {% endblock %}

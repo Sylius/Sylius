@@ -1,4 +1,6 @@
 <div class="eight wide column">
+    {{ sonata_block_render_event('sylius.admin.customer.show.before_address', { 'resource': resource }) }}
+
     <h4 class="ui top attached styled header">
         {{ 'sylius.ui.default_address'|trans }}
     </h4>
@@ -10,4 +12,6 @@
             {{ 'sylius.ui.this_customer_does_not_have_a_default_address'|trans }}
         {% endif %}
     </div>
+
+    {{ sonata_block_render_event('sylius.admin.customer.show.after_address', { 'resource': resource }) }}
 </div>

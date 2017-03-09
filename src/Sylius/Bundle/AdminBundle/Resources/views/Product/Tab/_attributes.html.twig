@@ -6,4 +6,6 @@
     <div id="attributesContainer" data-count="{{ form.attributes|length }}">
         {{ form_widget(form.attributes, {'attr': {'translations': form.translations} }) }}
     </div>
+
+    {{ sonata_block_render_event(app.request.attributes.get('_route')|replace('_', '.') ~ '.tab_attributes', { 'form': form }) }}
 </div>

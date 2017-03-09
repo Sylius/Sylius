@@ -3,5 +3,7 @@
 <div class="column">
     {{ headers.default(product.name, configuration.vars.icon|default('cubes'), configuration.vars.subheader|default('sylius.ui.manage_variants')|trans) }}
 
+    {{ sonata_block_render_event('sylius.admin.product_variant.index.header', { 'resource': resource }) }}
+
     {% include configuration.vars.templates.breadcrumb|default('@SyliusAdmin/ProductVariant/Index/_breadcrumb.html.twig') %}
 </div>

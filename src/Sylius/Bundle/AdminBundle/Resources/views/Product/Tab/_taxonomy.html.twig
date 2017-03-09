@@ -12,4 +12,6 @@
             <div class="ui loader"></div>
         </div>
     </div>
+
+    {{ sonata_block_render_event(app.request.attributes.get('_route')|replace('_', '.') ~ '.tab_taxonomy', { 'form': form }) }}
 </div>
