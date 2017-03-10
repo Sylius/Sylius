@@ -1,0 +1,8 @@
+parameters:
+    database_driver: pdo_mysql
+    database_host: 127.0.0.1
+    database_port: ~
+    database_name: sylius_user_test
+    database_user: root
+    database_password: ~
+    database_version: 5.5

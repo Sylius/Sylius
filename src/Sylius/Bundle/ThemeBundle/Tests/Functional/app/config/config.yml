@@ -1,0 +1,30 @@
+parameters:
+    locale: en
+    secret: "Three can keep a secret, if two of them are dead."
+
+framework:
+    translator: { fallbacks: ["%locale%"] }
+    secret: "%secret%"
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+    form: ~
+    csrf_protection: true
+    templating:
+        engines: ['twig']
+    default_locale: "%locale%"
+    session:
+        handler_id: ~
+    http_method_override: true
+    test: ~
+    session:
+        storage_id: session.storage.mock_file
+
+twig:
+    debug: "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
+
+sylius_theme:
+    sources:
+        filesystem:
+            directories:
+                - "%kernel.root_dir%/../../Fixtures/themes"

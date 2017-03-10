@@ -24,9 +24,15 @@ class AppKernel extends Kernel
     {
         return [
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
+            new winzou\Bundle\StateMachineBundle\winzouStateMachineBundle(),
+            new FOS\RestBundle\FOSRestBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle(),
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+            new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
+            new Sylius\Bundle\TaxonomyBundle\SyliusTaxonomyBundle(),
+            new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
+            new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Symfony\Bundle\TwigBundle\TwigBundle(),
-            new Sylius\Bundle\ThemeBundle\Tests\Functional\TestBundle\TestBundle(),
-            new Sylius\Bundle\ThemeBundle\SyliusThemeBundle(),
         ];
     }
 
@@ -43,7 +49,7 @@ class AppKernel extends Kernel
      */
     public function getCacheDir()
     {
-        return sys_get_temp_dir() . '/SyliusThemeBundle/cache/' . $this->getEnvironment();
+        return sys_get_temp_dir() . '/SyliusTaxonomyBundle/cache/' . $this->getEnvironment();
     }
 
     /**
@@ -51,6 +57,6 @@ class AppKernel extends Kernel
      */
     public function getLogDir()
     {
-        return sys_get_temp_dir() . '/SyliusThemeBundle/logs';
+        return sys_get_temp_dir() . '/SyliusTaxonomyBundle/logs';
     }
 }

@@ -1,0 +1,88 @@
+imports:
+    - { resource: "parameters.yml" }
+
+parameters:
+    locale: en_US
+    secret: "Three can keep a secret, if two of them are dead."
+
+framework:
+    assets: false
+    translator: { fallbacks: ["%locale%"] }
+    secret: "%secret%"
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+    form: ~
+    csrf_protection: true
+    templating:
+        engines: ['twig']
+    default_locale: "%locale%"
+    session:
+        handler_id: ~
+    http_method_override: true
+    test: ~
+    session:
+        storage_id: session.storage.mock_file
+
+twig:
+    debug: "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
+
+doctrine:
+    dbal:
+        driver: "%database_driver%"
+        host: "%database_host%"
+        port: "%database_port%"
+        dbname: "%database_name%"
+        user: "%database_user%"
+        password: "%database_password%"
+        server_version: "%database_version%"
+        charset: UTF8
+    orm:
+        entity_managers:
+            default:
+                auto_mapping: true
+
+fos_rest:
+    view:
+        formats:
+            json: true
+        empty_content: 204
+    format_listener:
+        rules:
+            - { path: '^/', priorities: ['json'], fallback_format: json, prefer_extension: true }
+
+security:
+    providers:
+        sylius_admin_user_provider:
+            memory:
+                users:
+                    foo:
+                        password: foo
+                        roles: ROLE_USER
+    encoders:
+        Sylius\Component\User\Model\UserInterface: sha512
+    firewalls:
+        admin:
+            switch_user: true
+            context: admin
+            pattern: /admin(?:/.*)?$
+            form_login:
+                provider: sylius_admin_user_provider
+                login_path: sylius_admin_login
+                check_path: sylius_admin_login_check
+                failure_path: sylius_admin_login
+                default_target_path: sylius_admin_dashboard
+                use_forward: false
+                use_referer: true
+            logout:
+                path: sylius_admin_logout
+                target: sylius_admin_login
+            anonymous: true
+
+        oauth_token:
+            pattern: ^/api/oauth/v2/token
+            security: false
+
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false

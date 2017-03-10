@@ -48,6 +48,12 @@
             "url": "../../*/*"
         }
     ],
+    "scripts": {
+        "test": [
+            "@composer validate --strict",
+            "bin/phpspec run --ansi --no-interaction"
+        ]
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "1.0-dev"
