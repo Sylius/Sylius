@@ -76,10 +76,8 @@ final class ProductTaxonPositionController
 
             $productTaxonFromBase->setPosition($positionData['position']);
 
-            $this->manager->persist($productTaxonFromBase);
+            $this->manager->flush();
         }
-
-        $this->manager->flush();
 
         return new JsonResponse(null, Response::HTTP_NO_CONTENT);
     }
