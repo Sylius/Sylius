@@ -78,16 +78,6 @@ Here you will find all configuration options of ``sylius_grid``.
                             enabled: true
                             icon: ~
                             position: 100
-                            options:
-                                links:
-                                    simple:
-                                        label: sylius.ui.simple_user
-                                        icon: plus
-                                        route: app_admin_user_create_simple
-                                    configurable:
-                                        label: sylius.ui.configurable_user
-                                        icon: plus
-                                        route: app_admin_user_create
                     item:
                         update:
                             type: update
@@ -122,3 +112,23 @@ Here you will find all configuration options of ``sylius_grid``.
                             position: 100
                             options:
                                 restore_label: sylius.ui.restore
+                    subitem:
+                        addresses:
+                            type: links
+                            label: sylius.ui.manage_addresses
+                            options:
+                                icon: cubes
+                                links:
+                                    index:
+                                        label: sylius.ui.list_addresses
+                                        icon: list
+                                        route: app_admin_user_address_index
+                                        visible: resource.hasAddress
+                                        parameters:
+                                            userId: resource.id
+                                    create:
+                                        label: sylius.ui.generate
+                                        icon: random
+                                        route: app_admin_user_address_create
+                                        parameters:
+                                            userId: resource.id
