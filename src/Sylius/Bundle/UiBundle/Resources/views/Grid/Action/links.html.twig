@@ -13,7 +13,11 @@
             <div class="divider"></div>
             {% endif %}
             {% for link in options.links %}
-                {% include '@SyliusUi/Grid/Action/_link.html.twig' %}
+                {% set is_link_visible = link.visible is defined ? link.visible : true %}
+
+                {% if is_link_visible %}
+                    {% include '@SyliusUi/Grid/Action/_link.html.twig' %}
+                {% endif %}
             {% endfor %}
         </div>
     </div>
