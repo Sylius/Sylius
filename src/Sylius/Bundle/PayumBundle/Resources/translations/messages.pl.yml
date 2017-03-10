@@ -8,6 +8,11 @@ sylius:
         gateway_configuration:
             paypal:
                 password: Hasło
+                signature: Podpis
                 username: Nazwa użytkownika
+            stripe:
+                publishable_key: Klucz jawny
+                secret_key: Klucz tajny
     payum_gateway_factory:
         offline: Tryb offline
+        paypal_express_checkout: Ekspresowa realizacja transakcji PayPal

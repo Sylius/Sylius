@@ -22,6 +22,8 @@ sylius:
         email:
             invalid: Deze e-mail is ongeldig.
             not_blank: Vul uw e-mailadres in.
+        message:
+            not_blank: Voer uw bericht in.
     currency:
         enabled:
             cannot_disable_base: De basisvaluta kan niet worden uitgeschakeld.
@@ -33,12 +35,18 @@ sylius:
     order:
         currency_code:
             not_valid: De valutacode die je hebt ingevoerd is ongeldig.
+        payment_method_eligibility: 'De betaalmethode %paymentMethodName% is uitgeschakeld. Kies alstublieft een andere betaalmethode.'
+        product_eligibility: 'Het product %productName% is uitgeschakeld.'
+        shipping_method_eligibility: 'Product past niet binnen de vereisten voor de verzendmethode %shippingMethodName%. Kies alstublieft een andere verzendmethode.'
     locale:
         code:
             not_blank: Voer een locatie code in.
             unique: Deze locatie bestaat al.
         enabled:
             cannot_disable_base: De basis landinstelling worden niet uitgeschakeld.
+    product:
+        variants:
+            all_prices_defined: U dient eerst de prijzen te bepalen van de product-varianten voor nieuw toegewezen kanalen.
     product_attribute:
         invalid: Positie moet een geheel getal zijn.
     product_image:
@@ -64,6 +72,8 @@ sylius:
         depth:
             min: Diepte kan niet negatief zijn.
             invalid: Diepte moet een getal zijn.
+        channel_pricing:
+            all_defined: 'U dient de prijs voor elk kanaal te definiëren.'
     product_translation:
         short_description:
             max: Korte omschrijving mag niet meer dan {{ limit }} tekens bevatten.

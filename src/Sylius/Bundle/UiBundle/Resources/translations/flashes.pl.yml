@@ -4,6 +4,8 @@
 sylius:
     channel:
         delete_error: 'Kanał nie może być usunięty, wymagane jest aby co najmniej jeden kanał był włączony.'
+    checkout:
+        complete_error: 'Wystąpił nieoczekiwany problem z realizacją zamówienia. Spróbuj ponownie złożyć zamówienie.'
     customer:
         add_address: 'Adres został pomyślnie dodany.'
         set_address_as_default: 'Adres został ustawiony jako domyślny.'

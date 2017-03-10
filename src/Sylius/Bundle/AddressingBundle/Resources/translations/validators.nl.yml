@@ -46,6 +46,8 @@ sylius:
             not_blank: Voer een provincie naam in.
             unique: De provincienaam moet uniek zijn.
     zone:
+        scope:
+            not_blank: Gelieve de scope in te vullen.
         code:
             not_blank: Gelieve een code in te geven voor deze zone.
             regex: Zone code kan alleen bestaan uit letters, cijfers, streepjes en liggende streepjes.

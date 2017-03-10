@@ -46,6 +46,8 @@ sylius:
             not_blank: Proszę podać nazwę województwa.
             unique: Nazwa województwa musi być unikalna.
     zone:
+        scope:
+            not_blank: Proszę wprowadzić zakres.
         code:
             not_blank: Proszę podać kod strefy.
             regex: Kod strefy może się składać wyłącznie z liter, cyfr, myślników i podkreśleń.
@@ -54,7 +56,7 @@ sylius:
             min_count: '{1} Proszę podać co najmniej 1 kraj.|{2,3,4} Proszę podać co najmniej {{ limit }} kraje.|[5,Inf[ Proszę podać co najmniej {{ limit }} krajów.'
         name:
             max_length: Nazwa strefy nie powinna przekraczać 255 znaków|Nazwa strefy nie powinna przekraczać 255 znaków.
-            min_length: Nazwa strefy musi mieć co najmniej 2 znaki|Nazwa strefy musi mieć co najmniej 2 znaki.
+            min_length: Nazwa strefy musi składać się z co najmniej 2 znaków|Nazwa strefy musi składać się z co najmniej 2 znaków.
             not_blank: Proszę podać nazwę strefy.
     zone_member:
         code:

@@ -30,6 +30,8 @@ sylius:
             code_length: Lengte van de code
             expires_at: Verloopt op
             usage_limit: Gebruikslimiet
+        promotion_filter:
+            price_range: Prijs bereik filter
         promotion_rule:
             cart_quantity_configuration:
                 count: Aantal

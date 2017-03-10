@@ -7,6 +7,7 @@ sylius:
             not_blank: Voer een belastingcategorie naam in.
         code:
             not_blank: Voer een belastingcategorie code in.
+            regex: Belastingcategorie kan alleen bestaan uit letters, cijfers, streepjes en liggende streepjes.
             unique: De belastingscategorie met gegeven code al bestaat.
     tax_rate:
         category:
@@ -21,4 +22,5 @@ sylius:
             not_blank: Selecteer de zone van de belasting.
         code:
             not_blank: Voer een zone voor het belastingtarief in.
+            regex: Belastingtarief code kan alleen bestaan uit letters, cijfers, streepjes en liggende streepjes.
             unique: Het belastingtarief met gegeven code al bestaat.

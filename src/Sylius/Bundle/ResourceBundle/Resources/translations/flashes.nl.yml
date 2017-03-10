@@ -13,3 +13,5 @@ sylius:
         enable: '%resource% is ingeschakeld.'
         disable: '%resource% is uitgeschakeld.'
         delete_error: 'Verwijderen niet mogelijk, %resource% is nog steeds in gebruik.'
+        race_condition_error: 'Kan niet geüpdate worden, de %resource% is eerder bewerkt.'
+        something_went_wrong_error: 'Er is een fout opgetreden, probeer het nogmaals.'

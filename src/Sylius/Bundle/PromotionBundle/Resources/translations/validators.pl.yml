@@ -5,6 +5,7 @@ sylius:
     promotion:
         code:
             unique: Promocja z podanym kodem już istnieje.
+            regex: Kod promocyjny może składać się wyłącznie z liter, cyfr, myślników i podkreśleń.
             not_blank: Proszę wprowadzić kod promocyjny.
         description:
             max_length: '{1} Opis promocji nie może być dłuższy niż 1 znak.|{2,3,4} Opis promocji nie może być dłuższy niż {{ limit }} znaki.|[5,Inf[ Opis promocji nie może być dłuższy niż {{ limit}} znaków.'

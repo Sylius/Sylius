@@ -6,4 +6,6 @@ sylius:
         cancelled: 'Płatność została anulowana.'
         completed: 'Płatność została zakończona.'
         failed: 'Płatność nie powiodła się.'
+        processing: 'Płatność jest w trakcie przetwarzania.'
         refunded: 'Płatność została zwrócona.'
+        unknown: 'Wystąpił nieznany problem z płatnością.'

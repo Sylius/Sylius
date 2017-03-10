@@ -28,11 +28,13 @@ sylius:
             contact_email: E-mail do kontaktu
             currencies: Waluty
             currency_base: Waluta podstawowa
+            account_verification_required: Czy weryfikacja konta jest wymagana?
             hostname: Nazwa hosta
             locale_default: Domyślne ustawienia regionalne
             locales: Ustawienia regionalne
             payment_methods: Metody płatności
             shipping_methods: Metody wysyłki
+            skipping_shipping_step_allowed: Czy pomijać krok wysyłki, jeżeli dostępna jest tylko jedna metoda wysyłki?
             tax_calculation_strategy: Strategia obliczania podatku
             tax_zone_default: Domyślna strefa podatkowa
             taxonomies: Kategorie

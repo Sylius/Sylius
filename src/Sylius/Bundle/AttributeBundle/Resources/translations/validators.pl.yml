@@ -9,6 +9,7 @@ sylius:
             max_length: Nazwa atrybutu nie może mieć więcej niż 1 znak.|Nazwa atrybutu nie może mieć więcej niż {{ limit }} znaków.
         code:
             not_blank: Proszę podać kod atrybutu.
+            regex: Kod atrybutu może składać się wyłącznie z liter, cyfr, myślników i podkreśleń.
             unique: Ten kod jest już w użyciu.
         presentation:
             not_blank: Proszę wprowadzić opis atrybutu.

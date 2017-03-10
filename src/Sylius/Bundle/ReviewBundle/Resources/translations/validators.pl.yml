@@ -11,3 +11,5 @@ sylius:
             not_blank: Nie może brakować oceny recenzji.
         title:
             not_blank: Tytuł recenzji nie może być pusty.
+            min_length: Tytuł recenzji musi składać się z co najmniej 2 znaków.
+            max_length: Tytuł opinii musi składać się z co najwyżej 255 znaków.

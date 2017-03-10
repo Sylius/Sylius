@@ -8,6 +8,7 @@ sylius:
             unique: Wartość SKU musi być unikatowa.
         code:
             not_blank: Proszę podać kod produktu.
+            regex: Kod produktu może składać się wyłącznie z liter, cyfr, myślników i podkreśleń.
             unique: Kod produktu musi być unikalny.
         name:
             not_blank: Proszę podać nazwę produktu.

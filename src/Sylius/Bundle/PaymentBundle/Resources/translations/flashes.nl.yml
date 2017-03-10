@@ -8,3 +8,4 @@ sylius:
         failed: 'Betaling is mislukt.'
         processing: 'Betaling wordt momenteel verwerkt.'
         refunded: 'Betaling is succesvol terugbetaald.'
+        unknown: 'Er is een onbekende fout met de betaling opgetreden.'
