@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Addressing\Model;
 
-use Sylius\Bundle\ResourceBundle\Model\ResourceLogEntry;
+use Sylius\Component\Resource\Model\ResourceLogEntry;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>

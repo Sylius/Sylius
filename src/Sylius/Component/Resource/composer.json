@@ -23,6 +23,7 @@
         "php": "^5.6|^7.0",
 
         "doctrine/common": "^2.6",
+        "gedmo/doctrine-extensions": "^2.4",
         "symfony/event-dispatcher": "^3.2",
         "symfony/property-access": "^3.2",
         "winzou/state-machine": "^0.3",

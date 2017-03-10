@@ -9,26 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ResourceBundle\Model;
+namespace Sylius\Component\Resource\Model;
 
 use Gedmo\Loggable\Entity\MappedSuperclass\AbstractLogEntry;
-use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 abstract class ResourceLogEntry extends AbstractLogEntry implements ResourceInterface
 {
-    /**
-     * @var string
-     */
-    protected $id;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 }
