@@ -175,30 +175,24 @@ You can bring back previous configuration by overriding current routing with you
 
 * `Channel` relation was removed from `ChannelPricing` model. `Channel::$code` should be used instead.
 
-* The following classes were moved to `ShopBundle`:
+* The following classes were moved:
 
-  * `Sylius\Bundle\CoreBundle\EmailManager\ContactEmailManager`
-  * `Sylius\Bundle\CoreBundle\EmailManager\ContactEmailManagerInterface`
-  * `Sylius\Bundle\CoreBundle\EmailManager\OrderEmailManagerInterface`
-  * `Sylius\Bundle\CoreBundle\EmailManager\OrderEmailManager`
-  * `Sylius\Bundle\CoreBundle\EventListener\UserMailerListener`
+  * from `Sylius\Bundle\CoreBundle\EmailManager\ShipmentEmailManager` to `Sylius\Bundle\AdminBundle\EmailManager\ShipmentEmailManager`
+  * from `Sylius\Bundle\CoreBundle\EmailManager\ShipmentEmailManagerInterface` to `Sylius\Bundle\AdminBundle\EmailManager\ShipmentEmailManagerInterface`
+  * from `Sylius\Bundle\CoreBundle\EmailManager\ContactEmailManager` to `Sylius\Bundle\ShopBundle\EmailManager\ContactEmailManager`
+  * from `Sylius\Bundle\CoreBundle\EmailManager\ContactEmailManagerInterface` to `Sylius\Bundle\ShopBundle\EmailManager\ContactEmailManagerInterface`
+  * from `Sylius\Bundle\CoreBundle\EmailManager\OrderEmailManager` to `Sylius\Bundle\ShopBundle\EmailManager\OrderEmailManager`
+  * from `Sylius\Bundle\CoreBundle\EmailManager\OrderEmailManagerInterface` to `Sylius\Bundle\ShopBundle\EmailManager\OrderEmailManagerInterface`
+  * from `Sylius\Bundle\CoreBundle\EventListener\UserMailerListener` to `Sylius\Bundle\ShopBundle\EventListener\UserMailerListener`
 
-* The following email templates were moved to `ShopBundle`:
+* The following email templates were moved:
 
-  * `SyliusShopBundle:Email:contactRequest.html.twig`
-  * `SyliusShopBundle:Email:orderConfirmation.html.twig`
-  * `SyliusShopBundle:Email:userRegistration.html.twig`
-  * `SyliusShopBundle:Email:passwordReset.html.twig`
-  * `SyliusShopBundle:Email:verification.html.twig`
-
-* The following classes were moved to `AdminBundle`:
-
-  * `Sylius\Bundle\CoreBundle\EmailManager\ShipmentEmailManager`
-  * `Sylius\Bundle\CoreBundle\EmailManager\ShipmentEmailManagerInterface`
-
-* The following email template was moved to `AdminBundle`:
-
-  * `SyliusShopBundle:Email:shipmentConfirmation.html.twig`
+  * from `SyliusCoreBundle:Email:shipmentConfirmation.html.twig` to `SyliusAdminBundle:Email:shipmentConfirmation.html.twig`
+  * from `SyliusCoreBundle:Email:contactRequest.html.twig` to `SyliusShopBundle:Email:contactRequest.html.twig`
+  * from `SyliusCoreBundle:Email:orderConfirmation.html.twig` to `SyliusShopBundle:Email:orderConfirmation.html.twig`
+  * from `SyliusCoreBundle:Email:userRegistration.html.twig` to `SyliusShopBundle:Email:userRegistration.html.twig`
+  * from `SyliusCoreBundle:Email:passwordReset.html.twig` to `SyliusShopBundle:Email:passwordReset.html.twig`
+  * from `SyliusCoreBundle:Email:verification.html.twig` to `SyliusShopBundle:Email:verification.html.twig`
 
 ### Currency / CurrencyBundle
 
