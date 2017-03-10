@@ -49,7 +49,8 @@ The ``imagine_filter('name')`` is a twig filter. This is how you would get an im
 
 .. note::
 
-    Sylius stores images on entities by saving a ``path`` to the file in the database.
+    Sylius stores images on entities by saving a ``path`` to the file in the database. 
+    The imagine_filter root path is ``/web/media/image``.
 
 How to add custom image resizing filters?
 -----------------------------------------
