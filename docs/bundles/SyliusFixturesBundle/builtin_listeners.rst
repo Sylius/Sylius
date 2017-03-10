@@ -43,6 +43,7 @@ Configuration options:
 
     - ``purge_mode`` - sets how database is purged, available values: ``delete`` (default), ``truncate``
     - ``managers`` - an array of entity managers' names used to purge the database, ``[null]`` by default
+    - ``exclude`` - an array of table/view names to be excluded from purge, ``[]`` by default
 
 Example configuration:
 
@@ -57,6 +58,8 @@ Example configuration:
                             purge_mode: truncate
                             managers:
                                 - custom_manager
+                            exclude:
+                                - custom_entity_table_name
 
 PHPCR / MongoDB Purger (``phpcr_purger`` / ``mongodb_purger``)
 --------------------------------------------------------------
