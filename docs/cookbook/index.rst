@@ -22,7 +22,6 @@ The Cookbook
     taxons-menu
     facebook-login
     cron-jobs
-    creating-extension
     installation-commands
     platform-sh
 
