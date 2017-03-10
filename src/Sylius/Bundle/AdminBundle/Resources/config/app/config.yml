@@ -62,3 +62,6 @@ liip_imagine:
         sylius_admin_product_thumbnail:
             filters:
                 thumbnail: { size: [50, 50], mode: outbound }
+
+sonata_block:
+    default_contexts: ~
