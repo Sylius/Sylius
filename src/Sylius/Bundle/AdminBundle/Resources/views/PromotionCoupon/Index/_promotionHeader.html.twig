@@ -1,0 +1,7 @@
+{% import 'SyliusUiBundle:Macro:headers.html.twig' as headers %}
+
+<div class="column">
+    {{ headers.default(promotion.name, configuration.vars.icon|default('tags'), configuration.vars.subheader|default('sylius.ui.manage_coupons')|trans) }}
+
+    {% include configuration.vars.templates.breadcrumb|default('@SyliusAdmin/PromotionCoupon/Index/_breadcrumb.html.twig') %}
+</div>

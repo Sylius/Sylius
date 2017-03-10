@@ -1,0 +1,5 @@
+{{ render(url('sylius_admin_partial_promotion_show', {
+    'id': app.request.attributes.get('promotionId'),
+    'template': '@SyliusAdmin/PromotionCoupon/Index/_promotionHeader.html.twig',
+    'vars': configuration.vars
+})) }}
