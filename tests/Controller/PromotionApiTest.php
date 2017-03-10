@@ -357,15 +357,10 @@ EOT;
                                     "max": 12000
                                 },
                                 "taxons_filter": {
-                                    "taxons": [
-                                        "mugs"
-                                    ]
+                                    "taxons": "mugs"
                                 },
                                 "products_filter": {
-                                    "products": [
-                                        "MUG_SW",
-                                        "MUG_LOTR"
-                                    ]
+                                    "products": "MUG_SW,MUG_LOTR"
                                 }
                             }
                         },
@@ -373,9 +368,7 @@ EOT;
                             "percentage": 20,
                             "filters": {
                                 "products_filter": {
-                                    "products": [
-                                        "MUG_SW"
-                                    ]
+                                    "products": "MUG_SW"
                                 }
                             }
                         }
@@ -395,12 +388,12 @@ EOT;
             ]
         }
 EOT;
+
         $this->client->request('POST', '/api/v1/promotions/', [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'promotion/create_response_with_actions', Response::HTTP_CREATED);
     }
-
 
     /**
      * @test
@@ -457,7 +450,8 @@ EOT;
         $data =
 <<<EOT
         {
-            "name": "Monday promotion"
+            "name": "Monday promotion",
+            "priority": 0
         }
 EOT;
         $this->client->request('PUT', $this->getPromotionUrl($promotion), [], [], static::$authorizedHeaderWithContentType, $data);
@@ -483,8 +477,7 @@ EOT;
         $data =
 <<<EOT
         {
-            "exclusive": true,
-            "priority": 0
+            "exclusive": true
         }
 EOT;
         $this->client->request('PATCH', $this->getPromotionUrl($promotion), [], [], static::$authorizedHeaderWithContentType, $data);

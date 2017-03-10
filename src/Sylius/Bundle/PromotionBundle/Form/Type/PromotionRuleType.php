@@ -11,11 +11,8 @@
 
 namespace Sylius\Bundle\PromotionBundle\Form\Type;
 
-use Sylius\Bundle\PromotionBundle\Form\EventListener\BuildPromotionRuleFormSubscriber;
-use Sylius\Bundle\PromotionBundle\Form\Type\Core\AbstractConfigurationType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Promotion\Checker\Rule\ItemTotalRuleChecker;
-use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -39,7 +36,6 @@ final class PromotionRuleType extends AbstractResourceType
     public function __construct(
         $dataClass,
         array $validationGroups,
-        ServiceRegistryInterface $registry,
         EventSubscriberInterface $buildRuleSubscriber
     ) {
         parent::__construct($dataClass, $validationGroups);

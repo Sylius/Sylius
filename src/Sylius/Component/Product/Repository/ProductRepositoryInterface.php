@@ -26,4 +26,12 @@ interface ProductRepositoryInterface extends RepositoryInterface
      * @return ProductInterface[]
      */
     public function findByName($name, $locale);
+
+    /**
+     * @param string $phrase
+     * @param string $locale
+     *
+     * @return ProductInterface[]
+     */
+    public function findByNamePart($phrase, $locale);
 }

@@ -6,11 +6,11 @@ Sylius\Component\Product\Model\Product:
             expose: true
             type: integer
             xml_attribute: true
-            groups: [Default, Detailed]
+            groups: [Default, Detailed, Autocomplete]
         code:
             expose: true
             type: string
-            groups: [Default, Detailed]
+            groups: [Default, Detailed, Autocomplete]
         options:
             expose: true
             type: array
@@ -30,6 +30,7 @@ Sylius\Component\Product\Model\Product:
     virtual_properties:
         getName:
             serialized_name: name
+            groups: [Default, Detailed, Autocomplete]
     relations:
         -   rel: self
             href:

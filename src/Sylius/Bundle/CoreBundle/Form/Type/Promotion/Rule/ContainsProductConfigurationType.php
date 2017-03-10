@@ -11,9 +11,12 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Promotion\Rule;
 
-use Sylius\Bundle\ProductBundle\Form\Type\ProductCodeChoiceType;
+use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ResourceToIdentifierTransformer;
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceAutocompleteChoiceType;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\ReversedTransformer;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
@@ -24,19 +27,37 @@ use Symfony\Component\Validator\Constraints\Type;
 final class ContainsProductConfigurationType extends AbstractType
 {
     /**
+     * @var RepositoryInterface
+     */
+    private $productRepository;
+
+    /**
+     * @param RepositoryInterface $productRepository
+     */
+    public function __construct(RepositoryInterface $productRepository)
+    {
+        $this->productRepository = $productRepository;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('product_code', ProductCodeChoiceType::class, [
+            ->add('product_code', ResourceAutocompleteChoiceType::class, [
                 'label' => 'sylius.form.promotion_action.add_product_configuration.product',
+                'resource' => 'sylius.product',
+                'choice_name' => 'name',
+                'choice_value' => 'code',
                 'constraints' => [
                     new NotBlank(['groups' => ['sylius']]),
                     new Type(['type' => 'string', 'groups' => ['sylius']]),
                 ],
             ])
         ;
+
+        $builder->get('product_code')->addModelTransformer(new ReversedTransformer(new ResourceToIdentifierTransformer($this->productRepository, 'code')));
     }
 
     /**

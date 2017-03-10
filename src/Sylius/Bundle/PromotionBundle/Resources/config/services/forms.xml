@@ -44,7 +44,6 @@
         <service id="sylius.form.type.promotion_rule" class="Sylius\Bundle\PromotionBundle\Form\Type\PromotionRuleType">
             <argument>%sylius.model.promotion_rule.class%</argument>
             <argument>%sylius.form.type.promotion_rule.validation_groups%</argument>
-            <argument type="service" id="sylius.registry_promotion_rule_checker" />
             <argument type="service" id="sylius.form.event_subscriber.build_promotion_rule" />
             <tag name="form.type" />
         </service>

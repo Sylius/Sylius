@@ -6,6 +6,7 @@ Sylius\Component\Core\Model\Channel:
         description: "Lorem ipsum"
         baseCurrency: "@currency1"
         defaultLocale: "@locale"
+        locales: ["@locale"]
         color: "black"
         enabled: true
         taxCalculationStrategy: "order_items_based"
@@ -16,6 +17,7 @@ Sylius\Component\Core\Model\Channel:
         description: "Lorem ipsum psore"
         baseCurrency: "@currency2"
         defaultLocale: "@locale"
+        locales: ["@locale"]
         color: "yellow"
         enabled: true
         taxCalculationStrategy: "order_items_based"

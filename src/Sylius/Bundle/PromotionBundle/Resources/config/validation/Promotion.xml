@@ -58,5 +58,8 @@
         <property name="actions">
             <constraint name="Valid" />
         </property>
+        <property name="rules">
+            <constraint name="Valid" />
+        </property>
     </class>
 </constraint-mapping>
