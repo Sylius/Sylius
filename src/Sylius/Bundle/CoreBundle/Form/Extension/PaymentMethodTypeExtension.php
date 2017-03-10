@@ -27,6 +27,33 @@ use Symfony\Component\Form\FormEvents;
 final class PaymentMethodTypeExtension extends AbstractTypeExtension
 {
     /**
+     * @var string
+     */
+    private $encryptingAlgorithm;
+
+    /**
+     * @var string
+     */
+    private $encryptingInitializationVector;
+
+    /**
+     * @var string
+     */
+    private $encryptingSecret;
+
+    /**
+     * @param string $encryptingAlgorithm
+     * @param string $encryptingInitializationVector
+     * @param string $encryptingSecret
+     */
+    public function __construct($encryptingAlgorithm, $encryptingInitializationVector, $encryptingSecret)
+    {
+        $this->encryptingAlgorithm = $encryptingAlgorithm;
+        $this->encryptingInitializationVector = $encryptingInitializationVector;
+        $this->encryptingSecret = $encryptingSecret;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -43,6 +70,30 @@ final class PaymentMethodTypeExtension extends AbstractTypeExtension
                 'label' => false,
                 'data' => $gatewayFactory,
             ])
+            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+                $paymentMethod = $event->getData();
+
+                if (!$paymentMethod instanceof PaymentMethodInterface) {
+                    return;
+                }
+
+                $gatewayConfig = $paymentMethod->getGatewayConfig();
+                $gatewayConfig->setConfig(array_map(function ($configuration) {
+                    $decryptedConfigurationValue = openssl_decrypt(
+                        base64_decode($configuration),
+                        $this->encryptingAlgorithm,
+                        $this->encryptingSecret,
+                        OPENSSL_RAW_DATA,
+                        $this->encryptingInitializationVector
+                    );
+
+                    if (false === $decryptedConfigurationValue) {
+                        throw new \RuntimeException(sprintf('Encrypting failed for value "%s"', $configuration));
+                    }
+
+                    return trim($decryptedConfigurationValue);
+                }, $gatewayConfig->getConfig()));
+            })
             ->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
                 $paymentMethod = $event->getData();
 
@@ -54,6 +105,22 @@ final class PaymentMethodTypeExtension extends AbstractTypeExtension
                 if (null === $gatewayConfig->getGatewayName()) {
                     $gatewayConfig->setGatewayName(StringInflector::nameToLowercaseCode($paymentMethod->getName()));
                 }
+
+                $gatewayConfig->setConfig(array_map(function ($configuration) {
+                    $encryptedConfigurationValue = base64_encode(openssl_encrypt(
+                        $configuration,
+                        $this->encryptingAlgorithm,
+                        $this->encryptingSecret,
+                        OPENSSL_RAW_DATA,
+                        $this->encryptingInitializationVector
+                    ));
+
+                    if (false === $encryptedConfigurationValue) {
+                        throw new \RuntimeException(sprintf('Encrypting failed for value "%s"', $configuration));
+                    }
+
+                    return trim($encryptedConfigurationValue);
+                }, $gatewayConfig->getConfig()));
             })
         ;
     }
