@@ -51,7 +51,7 @@ final class ORMPurgerListener extends AbstractListener implements BeforeSuiteLis
             /** @var EntityManagerInterface $manager */
             $manager = $this->managerRegistry->getManager($managerName);
 
-            $purger = new ORMPurger($manager);
+            $purger = new ORMPurger($manager, $options['exclude']);
             $purger->setPurgeMode(static::$purgeModes[$options['mode']]);
             $purger->purge();
         }
@@ -81,6 +81,12 @@ final class ORMPurgerListener extends AbstractListener implements BeforeSuiteLis
         $optionsNodeBuilder
             ->arrayNode('managers')
                 ->defaultValue([null])
+                ->prototype('scalar')
+        ;
+
+        $optionsNodeBuilder
+            ->arrayNode('exclude')
+                ->defaultValue([])
                 ->prototype('scalar')
         ;
     }
