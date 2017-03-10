@@ -251,26 +251,18 @@ you'll need to update its form type. Check how to do it :doc:`here </customizati
     In case of the ShippingMethod it would be the ``Sylius\Component\Shipping\Model\ShippingMethodTranslation``.
     Also the form on which you will add the new field should be the TranslationType.
 
+How to customize translatable fields of a translatable Model?
+-------------------------------------------------------------
 
-
-
-
-
-
-
-
-How to customize a translatable Model adding a translatable property ?
-----------------------------------------------------------------------
-
-Supose you want to add a translatable property to a translatable entities, for example, in Sylius to the Shipping Method. Let's try to extend it with a new field thats need to be translated. Shipping methods may include a message with the shipping method delivery conditions, let's save it on the ``deliveryConditions`` field.
+Suppose you want to add a translatable property to a translatable entity, for example to the Shipping Method. Let assume that you would like the Shipping method to include a message with the delivery conditions. Let's save it on the ``deliveryConditions`` field.
 
 Just like for regular models you can also check the class of translatable models like that:
 
 .. code-block:: bash
 
-    $ php bin/console debug:container --parameter=sylius.model.shipping_method.class
+    $ php bin/console debug:container --parameter=sylius.model.shipping_method_translation.class
 
-**1.** Appart from extending the ```ShippingMethod``` class as described before, you have to write your own class which will extend the base ``ShippingMethodTranslation`` class.
+**1.** In order to add a translatable property to your entity you need to define it on the ``AppBundle\Entity\ShippingMethodTranslation`` class of your bundle, that will extend the base ``Sylius\Component\Shipping\Model\ShippingMethodTranslation``.
 
 .. code-block:: php
 
@@ -318,7 +310,7 @@ The file should be placed in ``AppBundle/Resources/config/doctrine/ShippingMetho
                 type: string
                 nullable: true
 
-**3.** You'll need to provide access to the new fields in the ```ShippingMethod``` class and initialize the translations.
+**3.** You'll need to provide access to the new fields in the ```ShippingMethod``` class and initialize the translations collection in the constructor.
 
 .. code-block:: php
 
@@ -327,6 +319,7 @@ The file should be placed in ``AppBundle/Resources/config/doctrine/ShippingMetho
     namespace AppBundle\Entity;
 
     //[...]
+    use AppBundle\Entity\ShippingMethodTranslation;
     use Sylius\Component\Resource\Model\TranslatableTrait;
 
 
