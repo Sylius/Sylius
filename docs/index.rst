@@ -106,7 +106,7 @@ The Cookbook
 The Behat Guide
 ---------------
 
-In :doc:`the behat Guide </behat/index>` you will learn how to write clean and reusable features, contexts and pages.
+In :doc:`the Behat Guide </behat/index>` you will learn how to write clean and reusable features, contexts and pages.
 
 .. toctree::
    :hidden:
@@ -130,7 +130,7 @@ Bundles
 Components
 ----------
 
-:doc:`E-Commerce components for PHP documentation </components/index>`.
+:doc:`Documentation of the Sylius E-Commerce components for PHP </components/index>`.
 
 .. toctree::
    :hidden:
