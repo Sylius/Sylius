@@ -41,6 +41,7 @@ sylius_admin_product_variant_create:
                 templates:
                     form: "@SyliusAdmin/ProductVariant/_form.html.twig"
                     breadcrumb: "@SyliusAdmin/ProductVariant/Create/_breadcrumb.html.twig"
+                    header_title: "@SyliusAdmin/ProductVariant/Create/_headerTitle.html.twig"
 
 sylius_admin_product_variant_update:
     path: /{id}/edit
