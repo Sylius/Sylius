@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Core\Calculator;
 
+use Sylius\Component\Core\Exception\MissingChannelConfigurationException;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Webmozart\Assert\Assert;
 
@@ -27,7 +28,14 @@ final class ProductVariantPriceCalculator implements ProductVariantPriceCalculat
         Assert::keyExists($context, 'channel');
 
         $channelPricing = $productVariant->getChannelPricingForChannel($context['channel']);
-        Assert::notNull($channelPricing);
+
+        if (null === $channelPricing) {
+            throw new MissingChannelConfigurationException(sprintf(
+                'Channel %s has no price defined for product variant %s',
+                $context['channel']->getName(),
+                $productVariant->getName()
+            ));
+        }
 
         return $channelPricing->getPrice();
     }
