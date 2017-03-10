@@ -53,9 +53,10 @@ Example configuration:
             my_suite:
                 listeners:
                     orm_purger:
-                        purge_mode: truncate
-                        managers:
-                            - custom_manager
+                        options:
+                            purge_mode: truncate
+                            managers:
+                                - custom_manager
 
 PHPCR / MongoDB Purger (``phpcr_purger`` / ``mongodb_purger``)
 --------------------------------------------------------------
@@ -75,6 +76,7 @@ Example configuration:
             my_suite:
                 listeners:
                     phpcr_purger:
-                        managers:
-                            - custom_manager # Uses custom document manager
+                        options:
+                            managers:
+                                - custom_manager # Uses custom document manager
                     mongodb_purger: ~ # Uses default document manager
