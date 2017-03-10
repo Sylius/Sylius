@@ -6,10 +6,13 @@ sylius:
         code:
             exact_length: Kod waluty musi mieć dokładnie 3 znaki.
             not_blank: Wybierz kod waluty.
+            regex: Kod waluty może składać się wyłącznie z liter, cyfr, myślników i podkreśleń.
             unique: Kod waluty musi być unikalny.
         exchange_rate:
             not_blank: Wprowadź kurs wymiany.
     exchange_rate:
+        ratio:
+            not_blank: Proszę wprowadzić kurs wymiany waluty.
         source_currency:
             not_blank: Podaj walutę źródłową wymiany.
         target_currency:

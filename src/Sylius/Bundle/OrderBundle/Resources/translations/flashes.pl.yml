@@ -4,3 +4,5 @@
 sylius:
     cart:
         add_item: 'Element został dodany do koszyka'
+        remove_item: 'Element został usunięty z koszyka'
+        save: 'Koszyk został pomyślnie zaktualizowany'

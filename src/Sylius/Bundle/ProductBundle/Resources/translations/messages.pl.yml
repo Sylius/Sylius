@@ -24,6 +24,7 @@ sylius:
             name: Nazwa
         option:
             name: Nazwa
+            position: Pozycja
             values: Możliwe wartości
         option_value:
             add_value: Dodaj wartość

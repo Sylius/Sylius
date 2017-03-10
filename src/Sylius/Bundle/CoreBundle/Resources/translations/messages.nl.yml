@@ -25,13 +25,16 @@ sylius:
             name: Naam
             roles: Rollen
         channel:
+            contact_email: Contact e-mail
             currencies: Valuta's
             currency_base: Standaardvaluta
+            account_verification_required: Is account verificatie vereist?
             hostname: Hostnaam
             locale_default: Standaardlandinstelling
             locales: Talen/Regio's
             payment_methods: Betaalmethodes
             shipping_methods: Verzendmethodes
+            skipping_shipping_step_allowed: Verzending stap overslaan indien er slechts 1 verzendmethode beschikbaar is?
             tax_calculation_strategy: Belastingberekeningsstrategie
             tax_zone_default: Standaard belastingzone
             taxonomies: Taxonomieën

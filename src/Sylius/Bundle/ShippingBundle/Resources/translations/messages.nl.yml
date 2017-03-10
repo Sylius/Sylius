@@ -39,3 +39,4 @@ sylius:
             name: Naam
             tax_category: Belasting categorie
             translations: Vertalingen
+            position: Positie

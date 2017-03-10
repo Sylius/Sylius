@@ -41,4 +41,5 @@ sylius:
                 not_blank: Wprowadź wartość opłaty w procentach.
         code:
             not_blank: 'Proszę podać kod metody płatności.'
+            regex: 'Kod metody płatności może składać się tylko z liter, cyfr, myślników i podkreśleń.'
             unique: 'Metoda płatności z danym kodem już istnieje.'

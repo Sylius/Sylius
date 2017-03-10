@@ -22,6 +22,9 @@ sylius:
             unique: Ten e-mail jest już używany.
             registered: Ten e-mail jest już zarejestrowany, proszę się zalogować lub użyć opcji przypominania hasła.
     customer_group:
+        code:
+            regex: Kod grupy klientów może być złożony tylko z liter, cyfr, myślników i podkreśleń.
+            unique: Kod grupy klientów musi być unikatowy.
         name:
             max: Nazwa grupy klientów nie może być dłuższa niż {{ limit }} znaków.
             min: Nazwa grupy klientów musi mieć co najmniej {{ limit }} znaków.

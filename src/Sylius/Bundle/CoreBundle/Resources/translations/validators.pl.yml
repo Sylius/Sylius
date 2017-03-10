@@ -13,6 +13,7 @@ sylius:
             min: E-mail musi mieć co najmniej {{ limit }} znaków.
     channel_pricing:
         price:
+            min: Cena nie może być mniejsza niż {{ limit }}.
             not_blank: Proszę podać cenę.
     checkout:
         shipping_method:
