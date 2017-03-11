@@ -22,7 +22,7 @@
 
 <script>
     window['taxonChoiceRender'] = function (option, item) {
-        option.name = ('— '.repeat(item.level - 1)) + option.name;
+        option.name = ('— '.repeat(item.level)) + option.name;
         return option;
     };
 </script>
