@@ -250,3 +250,160 @@ you'll need to update its form type. Check how to do it :doc:`here </customizati
     If you want the new field of your entity to be translatable, you need to extend the Translation class of your entity.
     In case of the ShippingMethod it would be the ``Sylius\Component\Shipping\Model\ShippingMethodTranslation``.
     Also the form on which you will add the new field should be the TranslationType.
+
+How to customize translatable fields of a translatable Model?
+-------------------------------------------------------------
+
+Suppose you want to add a translatable property to a translatable entity, for example to the Shipping Method. Let assume that you would like the Shipping method to include a message with the delivery conditions. Let's save it on the ``deliveryConditions`` field.
+
+Just like for regular models you can also check the class of translatable models like that:
+
+.. code-block:: bash
+
+    $ php bin/console debug:container --parameter=sylius.model.shipping_method_translation.class
+
+**1.** In order to add a translatable property to your entity you need to define it on the ``AppBundle\Entity\ShippingMethodTranslation`` class of your bundle, that will extend the base ``Sylius\Component\Shipping\Model\ShippingMethodTranslation``.
+
+.. code-block:: php
+
+    <?php
+
+    namespace AppBundle\Entity;
+
+    use Sylius\Component\Shipping\Model\ShippingMethodTranslation as BaseShippingMethodTranslation;
+
+    class ShippingMethodTranslation extends BaseShippingMethodTranslation
+    {
+        /**
+         * @var string
+         */
+        private $deliveryConditions;
+
+        /**
+         * @return string
+         */
+        public function getDeliveryConditions()
+        {
+            return $this->deliveryConditions;
+        }
+
+        /**
+         * @param string $deliveryConditions
+         */
+        public function setDeliveryConditions($deliveryConditions)
+        {
+            $this->deliveryConditions = $deliveryConditions;
+        }
+    }
+
+**2.** Next define your entity's mapping.
+
+The file should be placed in ``AppBundle/Resources/config/doctrine/ShippingMethodTranslation.orm.yml``
+
+.. code-block:: yaml
+
+    AppBundle\Entity\ShippingMethodTranslation:
+        type: entity
+        table: sylius_shipping_method_translation
+        fields:
+            deliveryConditions:
+                type: string
+                nullable: true
+
+**3.** You'll need to provide access to the new fields in the ```ShippingMethod``` class and initialize the translations collection in the constructor.
+
+.. code-block:: php
+
+    <?php
+
+    namespace AppBundle\Entity;
+
+    //[...]
+    use AppBundle\Entity\ShippingMethodTranslation;
+    use Sylius\Component\Resource\Model\TranslatableTrait;
+
+
+    class ShippingMethod extends BaseShippingMethod
+    {
+        //[...]
+
+        use TranslatableTrait {
+            __construct as private initializeTranslationsCollection;
+        }
+        
+        public function __construct()
+        {
+            parent::__construct();
+            $this->initializeTranslationsCollection();
+        }
+
+        //[...]
+
+       /**
+         * Set delivery conditions
+         *
+         * @param string $deliveryConditions
+         */
+        public function setDeliveryConditions($deliveryConditions = null)
+        {
+            $this->getTranslation()->setDeliveryConditions($deliveryConditions);
+        }
+
+       /**
+         * Get delivery conditions
+         *
+         * @return string
+         */
+        public function getDeliveryConditions()
+        {
+            return $this->getTranslation()->getDeliveryConditions();
+        }
+
+       /**
+         * {@inheritdoc}
+         */
+        public static function getTranslationClass()
+        {
+            return ShippingMethodTranslation::class;
+        }
+    }
+
+**4.** Finally you'll need to override the model's class in the ``app/config/config.yml``.
+
+Under the ``sylius_*`` where ``*`` is the name of the bundle of the model you are customizing,
+in our case it will be the ``SyliusShippingBundle`` -> ``sylius_shipping``.
+
+.. code-block:: yaml
+
+    sylius_shipping:
+        resources:
+            shipping_method:
+                classes:
+                    model: AppBundle\Entity\ShippingMethod
+                translation:
+                    classes:
+                        model: AppBundle\Entity\ShippingMethodTranslation
+
+**5.** Update the database. There are two ways to do it.
+
+* via direct database schema update:
+
+.. code-block:: bash
+
+    $ php bin/console doctrine:schema:update --force
+
+* via migrations:
+
+Which we strongly recommend over updating the schema.
+
+.. code-block:: bash
+
+    $ php bin/console doctrine:migrations:diff
+    $ php bin/console doctrine:migrations:migrate
+
+.. tip::
+
+    Read more about the database modifications and migrations in the `Symfony documentation here <http://symfony.com/doc/current/book/doctrine.html#creating-the-database-tables-schema>`_.
+
+**6.** Additionally if you need  to add the ``deliveryConditions`` to any of your shipping methods in the admin panel,
+you'll need to update its form type. Check how to do it :doc:`here </customization/form>`.
