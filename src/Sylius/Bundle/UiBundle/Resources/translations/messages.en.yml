@@ -623,6 +623,7 @@ sylius:
         product_options: 'Product options'
         product_review: 'Product review'
         product_reviews: 'Product reviews'
+        product_taxon: 'Product taxon'
         product_variants: 'Product variants'
         products: 'Products'
         products_categorized_as_name: 'Products categorized as "%name%"'
