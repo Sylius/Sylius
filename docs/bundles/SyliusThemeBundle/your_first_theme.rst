@@ -112,7 +112,7 @@ Create an event listener and register it as listening for ``kernel.request`` eve
             }
 
             $this->themeContext->setTheme(
-                $this->themeRepository->findByLogicalName('sylius/cool-theme')
+                $this->themeRepository->findOneByName('sylius/cool-theme')
             );
         }
     }
