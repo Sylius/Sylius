@@ -13,16 +13,23 @@ namespace Sylius\Bundle\CoreBundle\Application;
 
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
-use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
+ * @mixin \Symfony\Component\HttpKernel\Bundle\Bundle
+ * @see \Symfony\Component\HttpKernel\Bundle\Bundle
+ *
  * Provides a common logic for Sylius Plugins.
- * Each of a plugins should be created with Plugin instead of Bundle suffix for the root class and inherit from this class.
+ * Each of a plugins should be created with Plugin instead of Bundle suffix for the root class.
  *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-abstract class Plugin extends Bundle
+trait SyliusPluginTrait
 {
+    /**
+     * @var ExtensionInterface|bool
+     */
+    private $containerExtension;
+
     /**
      * Returns the plugin's container extension.
      *
@@ -32,12 +39,12 @@ abstract class Plugin extends Bundle
      */
     public function getContainerExtension()
     {
-        if (null === $this->extension) {
+        if (null === $this->containerExtension) {
             $extension = $this->createContainerExtension();
 
             if (null !== $extension) {
                 if (!$extension instanceof ExtensionInterface) {
-                    throw new \LogicException(sprintf('Extension %s must implement Symfony\Component\DependencyInjection\Extension\ExtensionInterface.', get_class($extension)));
+                    throw new \LogicException(sprintf('Extension %s must implement %s.', get_class($extension), ExtensionInterface::class));
                 }
 
                 // check naming convention for Sylius Plugins
@@ -51,16 +58,37 @@ abstract class Plugin extends Bundle
                     ));
                 }
 
-                $this->extension = $extension;
+                $this->containerExtension = $extension;
             } else {
-                $this->extension = false;
+                $this->containerExtension = false;
             }
         }
 
-        if ($this->extension) {
-            return $this->extension;
+        if ($this->containerExtension) {
+            return $this->containerExtension;
         }
     }
+
+    /**
+     * Creates the bundle's container extension.
+     *
+     * @return ExtensionInterface|null
+     */
+    abstract protected function createContainerExtension();
+
+    /**
+     * Returns the bundle name (the class short name).
+     *
+     * @return string The Bundle name
+     */
+    abstract protected function getName();
+
+    /**
+     * Gets the Bundle namespace.
+     *
+     * @return string The Bundle namespace
+     */
+    abstract protected function getNamespace();
 
     /**
      * Returns the plugin's container extension class.
