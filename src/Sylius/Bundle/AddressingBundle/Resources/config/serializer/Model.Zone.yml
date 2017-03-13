@@ -38,7 +38,7 @@ Sylius\Component\Addressing\Model\Zone:
     relations:
         -   rel: self
             href:
-                route: sylius_api_zone_show
+                route: sylius_admin_api_zone_show
                 parameters:
                     code: expr(object.getCode())
                     version: 1

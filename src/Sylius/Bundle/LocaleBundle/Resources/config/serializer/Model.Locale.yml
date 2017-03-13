@@ -22,7 +22,7 @@ Sylius\Component\Locale\Model\Locale:
     relations:
         - rel: self
           href:
-                route: sylius_api_locale_show
+                route: sylius_admin_api_locale_show
                 parameters:
                     code: expr(object.getCode())
                     version: 1

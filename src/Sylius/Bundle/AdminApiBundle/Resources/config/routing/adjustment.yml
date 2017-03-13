@@ -1,0 +1,39 @@
+sylius_admin_api_adjustment_index:
+    path: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.adjustment:indexAction
+        _sylius:
+            serialization_version: $version
+            repository:
+                method: findByOrder
+                arguments: [$orderId]
+            paginate: false
+
+sylius_admin_api_adjustment_create:
+    path: /
+    methods: [POST]
+    defaults:
+        _controller: sylius.controller.adjustment:createAction
+        _sylius:
+            serialization_version: $version
+
+sylius_admin_api_adjustment_update:
+    path: /{id}
+    methods: [PUT, PATCH]
+    defaults:
+        _controller: sylius.controller.adjustment:updateAction
+        _sylius:
+            serialization_version: $version
+
+sylius_admin_api_adjustment_delete:
+    path: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.adjustment:deleteAction
+        _sylius:
+            serialization_version: $version
+            filterable: true
+            criteria:
+                order: $orderId
+            csrf_protection: false

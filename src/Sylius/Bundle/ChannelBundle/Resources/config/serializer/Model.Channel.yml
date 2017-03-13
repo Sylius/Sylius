@@ -42,7 +42,7 @@ Sylius\Component\Channel\Model\Channel:
     relations:
         - rel: self
           href:
-            route: sylius_api_channel_show
+            route: sylius_admin_api_channel_show
             parameters:
                 code: expr(object.getCode())
                 version: 1

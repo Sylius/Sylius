@@ -1,0 +1,26 @@
+sylius_grid:
+    grids:
+        sylius_admin_api_payment:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%sylius.model.payment.class%"
+                    repository:
+                        method: createListQueryBuilder
+            sorting:
+                createdAt: desc
+            fields:
+                amount:
+                    type: integer
+                    sortable: ~
+                state:
+                    type: string
+                createdAt:
+                    type: datetime
+                    sortable: ~
+                updatedAt:
+                    type: datetime
+                    sortable: ~
+            filters:
+                state:
+                    type: string

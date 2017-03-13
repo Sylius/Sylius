@@ -1,0 +1,16 @@
+sylius_grid:
+    grids:
+        sylius_admin_api_taxon:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%sylius.model.taxon.class%"
+                    repository:
+                        method: createListQueryBuilder
+            filters:
+                name:
+                    type: string
+                    options:
+                        fields: [translation.name]
+                code:
+                    type: string

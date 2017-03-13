@@ -1,0 +1,59 @@
+{
+    "name": "sylius/api-bundle",
+    "type": "symfony-bundle",
+    "description": "APIs management for Symfony2 projects.",
+    "keywords": ["api", "rest"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paweł Jędrzejewski",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name": "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name": "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php": "^5.6|^7.0",
+
+        "friendsofsymfony/oauth-server-bundle": "^1.5",
+        "sylius/core-bundle": "^1.0",
+        "symfony/form": "^3.2",
+        "symfony/framework-bundle": "^3.2",
+        "symfony/validator": "^3.2"
+    },
+    "require-dev": {
+        "doctrine/orm": "^2.5",
+        "phpspec/phpspec": "^3.2",
+        "phpunit/phpunit": "^5.6",
+        "twig/twig": "^1.28"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": { "Sylius\\Bundle\\AdminApiBundle\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Bundle\\AdminApiBundle\\spec\\": "spec/" }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../*/*"
+        }
+    ],
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}

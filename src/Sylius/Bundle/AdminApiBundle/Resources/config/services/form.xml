@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="sylius.form.type.api_client.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+        </parameter>
+        <parameter key="sylius.form.type.api_order.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+        </parameter>
+
+        <parameter key="sylius.form.type.api_customer.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+        </parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.form.type.api_client" class="Sylius\Bundle\AdminApiBundle\Form\Type\ClientType">
+            <argument>%sylius.model.api_client.class%</argument>
+            <argument>%sylius.form.type.api_client.validation_groups%</argument>
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius.form.type.api_order" class="Sylius\Bundle\AdminApiBundle\Form\Type\OrderType">
+            <argument>%sylius.model.order.class%</argument>
+            <argument>%sylius.form.type.api_order.validation_groups%</argument>
+            <argument type="service" id="sylius.repository.locale" />
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius.form.type.api_order_promotion_coupon" class="Sylius\Bundle\AdminApiBundle\Form\Type\OrderPromotionCouponType">
+            <argument>%sylius.model.order.class%</argument>
+            <argument>%sylius.form.type.api_order.validation_groups%</argument>
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius.form.type.api_customer" class="Sylius\Bundle\AdminApiBundle\Form\Type\CustomerProfileType">
+            <argument>%sylius.model.customer.class%</argument>
+            <argument>%sylius.form.type.api_customer.validation_groups%</argument>
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius.form.type.api_product" class="Sylius\Bundle\AdminApiBundle\Form\Type\ProductType">
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius.form.type.api_product_variant" class="Sylius\Bundle\AdminApiBundle\Form\Type\ProductVariantType">
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius.form.type.api_checkout_address" class="Sylius\Bundle\AdminApiBundle\Form\Type\AddressType">
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius.form.extension.type.api_order_item" class="Sylius\Bundle\AdminApiBundle\Form\Type\OrderItemType">
+            <argument type="service" id="sylius.repository.product_variant" />
+            <tag name="form.type" />
+        </service>
+        <service id="sylius.form.type.api_order_item" class="Sylius\Bundle\AdminApiBundle\Form\Type\OrderItemType">
+            <argument type="service" id="sylius.repository.product_variant" />
+            <tag name="form.type" />
+        </service>
+    </services>
+</container>

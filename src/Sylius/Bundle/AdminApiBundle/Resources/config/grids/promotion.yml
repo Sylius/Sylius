@@ -1,0 +1,30 @@
+sylius_grid:
+    grids:
+        sylius_admin_api_promotion:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%sylius.model.promotion.class%"
+            sorting:
+                priority: desc
+            fields:
+                priority:
+                    type: integer
+                    label: sylius.ui.priority
+                    sortable: ~
+                code:
+                    type: string
+                    label: sylius.ui.code
+                    sortable: ~
+                name:
+                    type: string
+                    label: sylius.ui.name
+                    path: .
+                    sortable: ~
+            filters:
+                search:
+                    type: string
+                    options:
+                        fields: [code, name]
+                couponBased:
+                    type: boolean

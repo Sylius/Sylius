@@ -26,8 +26,8 @@ class AppKernel extends Kernel
             new \Sylius\Bundle\AdminBundle\SyliusAdminBundle(),
             new \Sylius\Bundle\ShopBundle\SyliusShopBundle(),
 
-            new \FOS\OAuthServerBundle\FOSOAuthServerBundle(), // Required by SyliusApiBundle.
-            new \Sylius\Bundle\ApiBundle\SyliusApiBundle(),
+            new \FOS\OAuthServerBundle\FOSOAuthServerBundle(), // Required by SyliusAdminApiBundle.
+            new \Sylius\Bundle\AdminApiBundle\SyliusAdminApiBundle(),
         ];
 
         return array_merge(parent::registerBundles(), $bundles);

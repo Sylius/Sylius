@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <imports>
+        <import resource="services/controller.xml" />
+        <import resource="services/form.xml" />
+        <import resource="services/fixture.xml" />
+        <import resource="services/fixtures_factories.xml" />
+    </imports>
+    <services>
+        <service id="sylius.oauth_server.client_manager" class="Sylius\Bundle\AdminApiBundle\Model\ClientManager">
+            <argument type="service" id="fos_oauth_server.entity_manager" />
+            <argument>%fos_oauth_server.model.client.class%</argument>
+        </service>
+
+        <service id="sylius.listener.api.add_to_cart" class="Sylius\Bundle\AdminApiBundle\EventListener\CartChangeListener">
+            <argument type="service" id="sylius.order_processing.order_processor.composite" />
+            <argument type="service" id="sylius.manager.order" />
+            <tag name="kernel.event_listener" event="sylius.order_item.pre_create" method="recalculateOrderOnAdd" />
+            <tag name="kernel.event_listener" event="sylius.order_item.pre_update" method="recalculateOrderOnAdd" />
+            <tag name="kernel.event_listener" event="sylius.order_item.pre_delete" method="recalculateOrderOnDelete" />
+        </service>
+
+        <service id="jms_serializer.serialized_name_annotation_strategy" class="%jms_serializer.serialized_name_annotation_strategy.class%" public="false">
+            <argument type="service" id="jms_serializer.identical_property_naming_strategy" />
+        </service>
+        <service id="jms_serializer.identical_property_naming_strategy" class="JMS\Serializer\Naming\IdenticalPropertyNamingStrategy" public="false" />
+    </services>
+</container>

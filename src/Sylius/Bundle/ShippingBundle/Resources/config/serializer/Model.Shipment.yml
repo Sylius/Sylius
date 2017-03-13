@@ -22,7 +22,7 @@ Sylius\Component\Shipping\Model\Shipment:
           exclusion:
                 exclude_if: expr(!object.getId())
           href:
-                route: sylius_api_shipment_show
+                route: sylius_admin_api_shipment_show
                 parameters:
                     id: expr(object.getId())
                     version: 1
@@ -30,7 +30,7 @@ Sylius\Component\Shipping\Model\Shipment:
           exclusion:
                 exclude_if: expr(!object.getMethod())
           href:
-                route: sylius_api_shipping_method_show
+                route: sylius_admin_api_shipping_method_show
                 parameters:
                     code: expr(object.getMethod().getCode())
                     version: 1

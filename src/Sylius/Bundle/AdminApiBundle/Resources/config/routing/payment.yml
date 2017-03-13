@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_admin_api_payments:
+    resource: |
+        alias: sylius.payment
+        section: admin_api
+        only: ['show', 'index']
+        grid: sylius_admin_api_payment
+        serialization_version: $version
+    type: sylius.resource_api

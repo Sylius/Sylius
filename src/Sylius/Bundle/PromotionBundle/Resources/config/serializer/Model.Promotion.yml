@@ -62,13 +62,13 @@ Sylius\Component\Promotion\Model\Promotion:
     relations:
         -   rel: self
             href:
-                route: sylius_api_promotion_show
+                route: sylius_admin_api_promotion_show
                 parameters:
                     code: expr(object.getCode())
                     version: 1
         -   rel: coupons
             href:
-                route: sylius_api_promotion_coupon_index
+                route: sylius_admin_api_promotion_coupon_index
                 parameters:
                     promotionCode: expr(object.getCode())
                     version: 1

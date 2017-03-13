@@ -7,7 +7,7 @@ do it with sample resources.
 .. note::
 
     To find out by which fields the api resources can be sorted and how they can be filtered you should check the grid configuration of these
-    `here <https://github.com/Sylius/Sylius/tree/master/src/Sylius/Bundle/ApiBundle/Resources/config/grids>`_
+    `here <https://github.com/Sylius/Sylius/tree/master/src/Sylius/Bundle/AdminApiBundle/Resources/config/grids>`_
 
 How to sort resources?
 ----------------------

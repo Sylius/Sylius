@@ -1,0 +1,7 @@
+sylius_admin_api_taxon_products_update_position:
+    path: /taxons/{taxonCode}/products
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.update_product_taxon_position:updatePositionsAction
+        _sylius:
+            serialization_version: $version

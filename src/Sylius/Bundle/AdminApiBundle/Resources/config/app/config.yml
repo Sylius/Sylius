@@ -1,0 +1,19 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+imports:
+    - { resource: "@SyliusAdminApiBundle/Resources/config/app/fixtures.yml" }
+
+    - { resource: "@SyliusAdminApiBundle/Resources/config/grids/cart.yml" }
+    - { resource: "@SyliusAdminApiBundle/Resources/config/grids/payments.yml" }
+    - { resource: "@SyliusAdminApiBundle/Resources/config/grids/product.yml" }
+    - { resource: "@SyliusAdminApiBundle/Resources/config/grids/product_variant.yml" }
+    - { resource: "@SyliusAdminApiBundle/Resources/config/grids/promotion.yml" }
+    - { resource: "@SyliusAdminApiBundle/Resources/config/grids/shipments.yml" }
+    - { resource: "@SyliusAdminApiBundle/Resources/config/grids/taxon.yml" }
+
+sylius_admin_api:
+    resources:
+        api_user:
+            classes:
+                model: "%sylius.model.admin_user.class%"

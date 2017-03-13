@@ -27,7 +27,7 @@ Sylius\Component\Payment\Model\Payment:
           exclusion:
                 exclude_if: expr(!object.getId())
           href:
-                route: sylius_api_payment_show
+                route: sylius_admin_api_payment_show
                 parameters:
                     id: expr(object.getId())
                     version: 1
@@ -35,7 +35,7 @@ Sylius\Component\Payment\Model\Payment:
           exclusion:
                 exclude_if: expr(!object.getMethod())
           href:
-                route: sylius_api_payment_method_show
+                route: sylius_admin_api_payment_method_show
                 parameters:
                     code: expr(object.getMethod().getCode())
                     version: 1

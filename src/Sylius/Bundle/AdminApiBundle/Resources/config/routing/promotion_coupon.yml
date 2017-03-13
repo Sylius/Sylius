@@ -1,0 +1,67 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_admin_api_promotion_coupon_index:
+    path: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.promotion_coupon:indexAction
+        _sylius:
+            serialization_version: $version
+            serialization_groups: [Default]
+            section: admin_api
+            criteria:
+                promotion: $promotionCode
+
+sylius_admin_api_promotion_coupon_create:
+    path: /
+    methods: [POST]
+    defaults:
+        _controller: sylius.controller.promotion_coupon:createAction
+        _sylius:
+            serialization_version: $version
+            section: admin_api
+            factory:
+                method: createForPromotion
+                arguments:
+                  - expr:service('sylius.repository.promotion').findOneByCode($promotionCode)
+            criteria:
+                promotion: $promotionCode
+
+sylius_admin_api_promotion_coupon_update:
+    path: /{code}
+    methods: [PUT, PATCH]
+    defaults:
+        _controller: sylius.controller.promotion_coupon:updateAction
+        _sylius:
+            serialization_version: $version
+            section: admin_api
+            repository:
+                method: findOneByCodeAndPromotionCode
+                arguments: [$code, $promotionCode]
+
+sylius_admin_api_promotion_coupon_show:
+    path: /{code}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.promotion_coupon:showAction
+        _sylius:
+            serialization_version: $version
+            serialization_groups: [Default, Detailed]
+            section: admin_api
+            repository:
+                method: findOneByCodeAndPromotionCode
+                arguments: [$code, $promotionCode]
+
+sylius_admin_api_promotion_coupon_delete:
+    path: /{code}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.promotion_coupon:deleteAction
+        _sylius:
+            serialization_version: $version
+            section: admin_api
+            csrf_protection: false
+            repository:
+                method: findOneByCodeAndPromotionCode
+                arguments: [$code, $promotionCode]

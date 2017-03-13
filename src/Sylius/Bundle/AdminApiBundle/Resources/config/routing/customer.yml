@@ -1,0 +1,68 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_admin_api_customer_index:
+    path: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.customer:indexAction
+        _sylius:
+            serialization_version: $version
+            serialization_groups: [Default]
+            paginate: $limit
+            sortable: true
+            sorting:
+                id: desc
+
+sylius_admin_api_customer_show:
+    path: /{id}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.customer:showAction
+        _sylius:
+            serialization_version: $version
+            serialization_groups: [Detailed]
+
+sylius_admin_api_customer_create:
+    path: /
+    methods: [POST]
+    defaults:
+        _controller: sylius.controller.customer:createAction
+        _sylius:
+            serialization_version: $version
+            serialization_groups: [Detailed]
+            form:
+                type: Sylius\Bundle\AdminApiBundle\Form\Type\CustomerProfileType
+
+sylius_admin_api_customer_update:
+    path: /{id}
+    methods: [PUT, PATCH]
+    defaults:
+        _controller: sylius.controller.customer:updateAction
+        _sylius:
+            serialization_version: $version
+            form:
+                type: Sylius\Bundle\AdminApiBundle\Form\Type\CustomerProfileType
+
+sylius_admin_api_customer_delete:
+    path: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.customer:deleteAction
+        _sylius:
+            serialization_version: $version
+            csrf_protection: false
+
+sylius_admin_api_customer_order_index:
+    path: /{id}/orders/
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.order:indexAction
+        _sylius:
+            serialization_version: $version
+            paginate: $limit
+            filterable: true
+            criteria: { customer: $id }
+            sortable: true
+            sorting: { updatedAt: desc }
+            csrf_protection: false

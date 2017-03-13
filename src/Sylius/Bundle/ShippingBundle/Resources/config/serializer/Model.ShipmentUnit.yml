@@ -18,14 +18,14 @@ Sylius\Component\Shipping\Model\ShipmentUnit:
     relations:
         - rel: self
           href:
-                route: sylius_api_shipment_unit_show
+                route: sylius_admin_api_shipment_unit_show
                 parameters:
                     shipmentId: expr(object.getShipment().getId())
                     id: expr(object.getId())
                     version: 1
         - rel: shipment
           href:
-                route: sylius_api_shipment_show
+                route: sylius_admin_api_shipment_show
                 parameters:
                     id: expr(object.getShipment().getId())
                     version: 1
