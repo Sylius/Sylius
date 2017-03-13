@@ -14,14 +14,14 @@
 * Changed the way how payment methods are created. Now you choose desired gateway first and configure payment method with it. All parameters that were previously configured in `yml` configuration file
   are now managed for each payment method in the Admin panel.
 
-### ApiBundle
+### AdminApiBundle
 
-* Change the import path of your API routing from `src/Sylius/Bundle/ApiBundle/Resources/config/routing/main.yml` to `src/Sylius/Bundle/ApiBundle/Resources/config/routing.yml`. API became versioned, so you need to prefix them accordingly (e.g. `/api/customer` -> `/api/v1/customer`). 
+* Change the import path of your API routing from `src/Sylius/Bundle/ApiBundle/Resources/config/routing/main.yml` to `src/Sylius/Bundle/AdminApiBundle/Resources/config/routing.yml`. API became versioned, so you need to prefix them accordingly (e.g. `/api/customer` -> `/api/v1/customer`). 
 
 * Routing definition for Shipping Categories has been removed and replaced with auto generated resource routing. Also, Shipping Categories are resolved by code instead of id.
  One can either change the way, how the routes are handled on theirs app (send `code` instead of `id`) or replace previous routing import with following definition:
  ```yaml
-    sylius_api_shipping_category_index:
+    sylius_admin_api_shipping_category_index:
         path: /
         methods: [GET]
         defaults:
@@ -34,7 +34,7 @@
                 sorting:
                     name: desc
     
-    sylius_api_shipping_category_create:
+    sylius_admin_api_shipping_category_create:
         path: /
         methods: [POST]
         defaults:
@@ -42,7 +42,7 @@
             _sylius:
                 serialization_version: $version
     
-    sylius_api_shipping_category_update:
+    sylius_admin_api_shipping_category_update:
         path: /{id}
         methods: [PUT, PATCH]
         defaults:
@@ -50,7 +50,7 @@
             _sylius:
                 serialization_version: $version
     
-    sylius_api_shipping_category_delete:
+    sylius_admin_api_shipping_category_delete:
         path: /{id}
         methods: [DELETE]
         defaults:
@@ -59,7 +59,7 @@
                 serialization_version: $version
                 csrf_protection: false
     
-    sylius_api_shipping_category_show:
+    sylius_admin_api_shipping_category_show:
         path: /{id}
         methods: [GET]
         defaults:
@@ -389,7 +389,7 @@ From now on it won't compute every possible permutation of fallback locales from
 
 ### Configuration
 
-* Move `sylius_shop` routing below `sylius_admin` and `sylius_api` in `app/config/routing.yml` and replace it with the following one:
+* Move `sylius_shop` routing below `sylius_admin` and `sylius_admin_api` in `app/config/routing.yml` and replace it with the following one:
 
   ```yaml
   sylius_shop:

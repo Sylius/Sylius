@@ -22,7 +22,7 @@ Sylius\Component\Currency\Model\Currency:
     relations:
         - rel: self
           href:
-                route: sylius_api_currency_show
+                route: sylius_admin_api_currency_show
                 parameters:
                     code: expr(object.getCode())
                     version: 1

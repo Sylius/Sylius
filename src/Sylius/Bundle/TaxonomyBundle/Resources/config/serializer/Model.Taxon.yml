@@ -53,7 +53,7 @@ Sylius\Component\Taxonomy\Model\Taxon:
     relations:
         -   rel: self
             href:
-                route: sylius_api_taxon_show
+                route: sylius_admin_api_taxon_show
                 parameters:
                     code: expr(object.getCode())
                     version: 1

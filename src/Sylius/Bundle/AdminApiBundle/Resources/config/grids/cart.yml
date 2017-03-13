@@ -1,0 +1,55 @@
+sylius_grid:
+    grids:
+        sylius_admin_api_cart:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%sylius.model.order.class%"
+                    repository:
+                        method: createCartQueryBuilder
+            sorting:
+                number: desc
+            fields:
+                channel:
+                    type: string
+                    path: channel.code
+                    sortable: channel.code
+                number:
+                    type: string
+                    path: .
+                    sortable: ~
+                date:
+                    type: datetime
+                    path: checkoutCompletedAt
+                    sortable: checkoutCompletedAt
+                customer:
+                    type: string
+                    sortable: customer.email
+                    path: customer.email
+                total:
+                    type: integer
+                    sortable: total
+                currencyCode:
+                    type: string
+                    label: sylius.ui.currency
+                    sortable: ~
+            filters:
+                number:
+                    type: string
+                customer:
+                    type: string
+                    options:
+                        fields: [customer.email]
+                date:
+                    type: date
+                    label: sylius.ui.date
+                    options:
+                        field: checkoutCompletedAt
+                channel:
+                    type: string
+                    options:
+                        fields: [channel.code]
+                total:
+                    type: money
+                    options:
+                        currency_field: currencyCode

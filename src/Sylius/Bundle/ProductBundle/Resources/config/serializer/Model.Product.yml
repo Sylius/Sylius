@@ -33,13 +33,13 @@ Sylius\Component\Product\Model\Product:
     relations:
         -   rel: self
             href:
-                route: sylius_api_product_show
+                route: sylius_admin_api_product_show
                 parameters:
                     code: expr(object.getCode())
                     version: 1
         -   rel: variants
             href:
-                route: sylius_api_product_variant_index
+                route: sylius_admin_api_product_variant_index
                 parameters:
                     productCode: expr(object.getCode())
                     version: 1

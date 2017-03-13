@@ -1,0 +1,70 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_admin_api_product_variant:
+    resource: |
+        path: 'variants'
+        grid: sylius_admin_api_product_variant
+        alias: sylius.product_variant
+        section: admin_api
+        only: ['index']
+        serialization_version: $version
+        vars:
+            route:
+                parameters:
+                    productCode: $productCode
+    type: sylius.resource_api
+
+sylius_admin_api_product_variant_create:
+    path: /variants/
+    methods: [POST]
+    defaults:
+        _controller: sylius.controller.product_variant:createAction
+        _sylius:
+            serialization_groups: [Default, Detailed]
+            serialization_version: $version
+            section: admin_api
+            form: Sylius\Bundle\AdminApiBundle\Form\Type\ProductVariantType
+            factory:
+                method: createForProduct
+                arguments:
+                  - expr:notFoundOnNull(service('sylius.repository.product').findOneByCode($productCode))
+
+sylius_admin_api_product_variant_update:
+    path: /variants/{code}
+    methods: [PUT, PATCH]
+    defaults:
+        _controller: sylius.controller.product_variant:updateAction
+        _sylius:
+            serialization_version: $version
+            section: admin_api
+            form: Sylius\Bundle\AdminApiBundle\Form\Type\ProductVariantType
+            repository:
+                method: findOneByCodeAndProductCode
+                arguments: [$code, $productCode]
+
+sylius_admin_api_product_variant_delete:
+    path: /variants/{code}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.product_variant:deleteAction
+        _sylius:
+            serialization_version: $version
+            section: admin_api
+            repository:
+                method: findOneByCodeAndProductCode
+                arguments: [$code, $productCode]
+            csrf_protection: false
+
+sylius_admin_api_product_variant_show:
+    path: /variants/{code}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product_variant:showAction
+        _sylius:
+            serialization_version: $version
+            section: admin_api
+            serialization_groups: [Default, Detailed]
+            repository:
+                method: findOneByCodeAndProductCode
+                arguments: [$code, $productCode]

@@ -1,0 +1,46 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_admin_api_exchange_rate:
+    resource: |
+        alias: sylius.exchange_rate
+        section: admin_api
+        only: [index, create]
+        serialization_version: $version
+    type: sylius.resource_api
+
+sylius_admin_api_exchange_rate_update:
+    path: /exchange-rates/{sourceCurrencyCode}-{targetCurrencyCode}
+    methods: [PUT, PATCH]
+    defaults:
+        _controller: sylius.controller.exchange_rate:updateAction
+        _sylius:
+            serialization_version: $version
+            serialization_groups: [Default, Detailed]
+            repository:
+                method: findOneWithCurrencyPair
+                arguments: [$sourceCurrencyCode, $targetCurrencyCode]
+
+sylius_admin_api_exchange_rate_delete:
+    path: /exchange-rates/{sourceCurrencyCode}-{targetCurrencyCode}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.exchange_rate:deleteAction
+        _sylius:
+            serialization_version: $version
+            repository:
+                method: findOneWithCurrencyPair
+                arguments: [$sourceCurrencyCode, $targetCurrencyCode]
+            csrf_protection: false
+
+sylius_admin_api_exchange_rate_show:
+    path: /exchange-rates/{sourceCurrencyCode}-{targetCurrencyCode}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.exchange_rate:showAction
+        _sylius:
+            serialization_version: $version
+            serialization_groups: [Default, Detailed]
+            repository:
+                method: findOneWithCurrencyPair
+                arguments: [$sourceCurrencyCode, $targetCurrencyCode]

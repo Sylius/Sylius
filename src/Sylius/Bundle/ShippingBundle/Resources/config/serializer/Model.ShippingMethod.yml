@@ -21,7 +21,7 @@ Sylius\Component\Shipping\Model\ShippingMethod:
     relations:
         -   rel: self
             href:
-                route: sylius_api_shipping_method_show
+                route: sylius_admin_api_shipping_method_show
                 parameters:
                     code: expr(object.getCode())
                     version: 1

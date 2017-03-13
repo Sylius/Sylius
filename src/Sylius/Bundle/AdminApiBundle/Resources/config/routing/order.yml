@@ -1,0 +1,59 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_admin_api_order:
+    resource: |
+        alias: sylius.order
+        section: admin_api
+        only: [show]
+        grid: sylius_admin_order
+        serialization_version: $version
+    type: sylius.resource_api
+
+sylius_admin_api_order_cancel:
+    path: /orders/{id}/cancel
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.order:applyStateMachineTransitionAction
+        _sylius:
+            section: admin_api
+            state_machine:
+                graph: sylius_order
+                transition: cancel
+            return_content: false
+
+sylius_admin_api_order_shipment_ship:
+    path: /orders/{orderId}/shipments/{id}/ship
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.shipment:updateAction
+        _sylius:
+            event: ship
+            repository:
+                method: findOneByOrderId
+                arguments:
+                    id: $id
+                    orderId: $orderId
+            state_machine:
+                graph: sylius_shipment
+                transition: ship
+            section: admin_api
+            form: Sylius\Bundle\ShippingBundle\Form\Type\ShipmentShipType
+
+sylius_admin_api_order_payment_complete:
+    path: /orders/{orderId}/payments/{id}/complete
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.payment:applyStateMachineTransitionAction
+        _sylius:
+            event: complete
+            repository:
+                method: findOneByOrderId
+                arguments:
+                    id: $id
+                    orderId: $orderId
+            state_machine:
+                graph: sylius_payment
+                transition: complete
+            section: admin_api
+            return_content: false

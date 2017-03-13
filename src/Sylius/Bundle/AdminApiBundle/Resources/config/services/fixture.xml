@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="sylius.fixture.api_client" class="Sylius\Bundle\AdminApiBundle\Fixture\ApiClientFixture">
+            <argument type="service" id="sylius.manager.api_client" />
+            <argument type="service" id="sylius.fixture.example_factory.api_client" />
+            <tag name="sylius_fixtures.fixture" />
+        </service>
+
+        <service id="sylius.fixture.api_access_token" class="Sylius\Bundle\AdminApiBundle\Fixture\ApiAccessTokenFixture">
+            <argument type="service" id="sylius.manager.api_access_token" />
+            <argument type="service" id="sylius.fixture.example_factory.api_access_token" />
+            <tag name="sylius_fixtures.fixture" />
+        </service>
+    </services>
+</container>

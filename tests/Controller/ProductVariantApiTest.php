@@ -12,7 +12,7 @@
 namespace Sylius\Tests\Controller;
 
 use Lakion\ApiTestCase\JsonApiTestCase;
-use Sylius\Bundle\ApiBundle\Form\Type\ProductVariantType;
+use Sylius\Bundle\AdminApiBundle\Form\Type\ProductVariantType;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,7 +29,7 @@ final class ProductVariantApiTest extends JsonApiTestCase
         'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
         'CONTENT_TYPE' => 'application/json',
     ];
-    
+
     /**
      * @var array
      */
@@ -37,7 +37,7 @@ final class ProductVariantApiTest extends JsonApiTestCase
         'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
         'ACCEPT' => 'application/json',
     ];
-    
+
     /**
      * @test
      */
@@ -138,7 +138,7 @@ final class ProductVariantApiTest extends JsonApiTestCase
 
         $this->client->request('GET', $this->getVariantListUrl($product), ['sorting' => ['position' => 'desc']], [], static::$authorizedHeaderWithAccept);
         $response = $this->client->getResponse();
-        
+
         $this->assertResponse($response, 'product_variant/sorted_index_response');
     }
 
@@ -354,7 +354,7 @@ EOT;
 
         $this->assertResponse($response, 'product_variant/create_with_product_option_response', Response::HTTP_CREATED);
     }
-    
+
     /**
      * @test
      */

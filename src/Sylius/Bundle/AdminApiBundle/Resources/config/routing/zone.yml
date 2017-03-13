@@ -1,0 +1,25 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_admin_api_zone:
+    resource: |
+        identifier: code
+        alias: sylius.zone
+        section: admin_api
+        except: ['create']
+        serialization_version: $version
+        criteria:
+            code: $code
+    type: sylius.resource_api
+
+sylius_admin_api_zone_create:
+    path: /zones/{type}
+    methods: [POST]
+    defaults:
+        _controller: sylius.controller.zone:createAction
+        _sylius:
+            serialization_version: $version
+            factory:
+                method: createTyped
+                arguments:
+                    type: $type

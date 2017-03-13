@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="sylius.controller.show_available_payment_methods" class="Sylius\Bundle\AdminApiBundle\Controller\ShowAvailablePaymentMethodsController">
+            <argument type="service" id="sm.factory" />
+            <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="sylius.payment_methods_resolver" />
+            <argument type="service" id="fos_rest.view_handler" />
+        </service>
+        <service id="sylius.controller.update_product_taxon_position" class="Sylius\Bundle\AdminApiBundle\Controller\ProductTaxonPositionController">
+            <argument type="service" id="sylius.repository.product_taxon" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+        </service>
+        <service id="sylius.controller.show_available_shipping_methods" class="Sylius\Bundle\AdminApiBundle\Controller\ShowAvailableShippingMethodsController">
+            <argument type="service" id="sm.factory" />
+            <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="sylius.shipping_methods_resolver" />
+            <argument type="service" id="fos_rest.view_handler" />
+            <argument type="service" id="sylius.registry.shipping_calculator" />
+        </service>
+    </services>
+</container>

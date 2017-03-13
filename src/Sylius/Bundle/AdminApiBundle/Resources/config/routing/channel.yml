@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_admin_api_channel:
+    resource: |
+        identifier: code
+        alias: sylius.channel
+        section: admin_api
+        only: ['show', 'index']
+        serialization_version: $version
+        criteria:
+            code: $code
+    type: sylius.resource_api

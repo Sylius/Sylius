@@ -393,7 +393,7 @@ The response contains proposed shipments and for each of them, it has a list of 
 
     Because of the custom calculation logic, the regular rules of overriding do not apply for this endpoint.
     In order to have a different response, you have to provide a custom controller and build the message on your own.
-    Exemplary implementation can be found `here <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/ApiBundle/Controller/ShowAvailableShippingMethodsController.php>`__
+    Exemplary implementation can be found `here <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/AdminApiBundle/Controller/ShowAvailableShippingMethodsController.php>`__
 
 Next step is updating the order with the types of shipping methods that have been selected. A PUT request has to be send for each available shipment.
 
@@ -618,7 +618,7 @@ Definition
 
 .. warning::
 
-    Similar to the shipping step, this one has its own controller, which has to be replaced if you want to make some changes. Exemplary implementation can be found `here <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/ApiBundle/Controller/ShowAvailablePaymentMethodsController.php>`__
+    Similar to the shipping step, this one has its own controller, which has to be replaced if you want to make some changes. Exemplary implementation can be found `here <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/AdminApiBundle/Controller/ShowAvailablePaymentMethodsController.php>`__
 
 Example
 ^^^^^^^

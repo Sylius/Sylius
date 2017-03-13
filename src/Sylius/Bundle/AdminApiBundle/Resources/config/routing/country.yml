@@ -1,0 +1,14 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_admin_api_country:
+    resource: |
+        identifier: code
+        alias: sylius.country
+        section: admin_api
+        except: ['update']
+        serialization_version: $version
+        criteria:
+            code: $code
+    type: sylius.resource_api
+
