@@ -13,8 +13,23 @@ Sometimes even if you have decided to stay with the default layout provided by S
 business requirements**.
 You may just need to **add your logo anywhere**.
 
-How to customize templates?
----------------------------
+Methods of templates customizing
+--------------------------------
+
+.. warning::
+
+    There are two ways of customizing templates of Sylius:
+
+    The first one is simple **templates overriding** inside of the ``app/Resources`` directory of your project. Using
+    this method you can completely change the content of templates, it is a suggested way of integrating themes, custom
+    layouts.
+
+    The second method is **templates customization via events**. You are able to listen on these template events,
+    and by that add your own blocks without copying and pasting the whole templates. This feature is really useful
+    when :doc:`creating Sylius Extensions </extensions/creating-extension>`.
+
+How to customize templates by overriding?
+-----------------------------------------
 
 .. note::
 
@@ -97,6 +112,87 @@ Done! If you do not see any changes on the ``/admin/countries/new`` url, clear y
 .. code-block:: bash
 
     $ php bin/console cache:clear
+
+How to customize templates via events?
+--------------------------------------
+
+Sylius uses the Events mechanism provided by the `SonataBlockBundle <https://sonata-project.org/bundles/block/master/doc/reference/events.html>`_.
+
+How to locate template events?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The events naming convention uses the routing to the place where we are adding it, but instead of ``_`` we are using ``.``,
+followed by a slot name (like ``sylius_admin_customer_show`` route results in the ``sylius.admin.customer.show.slot_name`` events).
+The slot name describes where exactly in the template's structure should the event occur, it will be ``before`` or ``after`` certain elements.
+
+Although when the resource name is not just one word (like ``product_variant``) then the underscore stays in the event prefix string.
+Then ``sylius_admin_product_variant_create`` route will have the ``sylius.admin.product_variant.create.slot_name`` events.
+
+Let's see how the event is rendered in a default Sylius Admin template. This is the rendering of the event that occurs
+on the create action of Resources, at the bottom of the page (after the content of the create form):
+
+.. code-block:: twig
+
+    {# Fist we are setting the event_prefix based on route as it was mentioned before #}
+    {% set event_prefix = metadata.applicationName ~ '.admin.' ~ metadata.name ~ '.create' %}
+
+    {# And then the slot name is appended to the event_prefix #}
+    {{ sonata_block_render_event(event_prefix ~ '.after_content', {'resource': resource}) }}
+
+.. note::
+
+    Besides the events that are named basing on routing, Sylius has also some more general events. Thos that will appear
+    on every site of Sylius admin or shop. Examples: ``sylius.shop.layout.slot_name`` or ``sylius.admin.layout.slot_name``.
+    They are rendered in the ``layout.html.twig`` views for both Admin and Shop.
+
+.. tip::
+
+    In order to find events in Sylius templates you can simply search for the ``sonata_block_render_event`` phrase in your
+    project's directory.
+
+How to use template events for customizations?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+When you have found an event in the place where you want to add some content, here's what you have to do.
+
+Let's assume that you would like to add some content after the header in the Sylius shop views.
+You will need to look at the ``/SyliusShopBundle/Resources/views/layout.html.twig`` template,
+which is the basic layout of Sylius shop, and then in it find the appropriate event.
+
+For the space below the header it will be ``sylius.shop.layout.after_header``.
+
+* Create an ``.html.twig`` file that will contain what you want to add.
+
+.. code-block:: twig
+
+    {# AppBundle/Resources/views/block.html.twig #}
+
+    <h1> Test Block Title </h1>
+
+* And register a listener for the chosen event:
+
+.. warning::
+
+    The name of the event should be preceded by the ``sonata.block.event.`` string.
+
+.. code-block:: yaml
+
+    services:
+        app.block_event_listener.homepage.layout.after_header:
+            class: Sylius\Bundle\UiBundle\Block\BlockEventListener
+            arguments:
+                - '@@App/block.html.twig'
+            tags:
+                - { name: kernel.event_listener, event: sonata.block.event.sylius.shop.layout.after_header, method: onBlockEvent }
+
+.. tip::
+
+    While configuring it in ``yaml`` remember about having two ``@`` for the argument reference to your template,
+    just like above ``'@@App/block.html.twig'``, what escapes the second ``@`` and lets it not to be interpreted as a service.
+
+    In ``xml`` the double ``@`` is not required: it would be just ``<argument>@App/block.html.twig</argument>``
+
+That's it. Your new block should appear in the view.
 
 Global Twig variables
 ---------------------
