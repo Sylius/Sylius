@@ -18,7 +18,6 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Promotion\Checker\Rule\ChannelBasedRuleCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
-use Symfony\Component\Form\FormFactoryIntegrface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 

@@ -12,11 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
 use Sylius\Component\Core\Factory\PromotionActionFactoryInterface;
-use Sylius\Component\Core\Promotion\Action\FixedDiscountPromotionActionCommand;
-use Sylius\Component\Core\Promotion\Action\PercentageDiscountPromotionActionCommand;
-use Sylius\Component\Core\Promotion\Action\ShippingPercentageDiscountPromotionActionCommand;
-use Sylius\Component\Core\Promotion\Action\UnitFixedDiscountPromotionActionCommand;
-use Sylius\Component\Core\Promotion\Action\UnitPercentageDiscountPromotionActionCommand;
+use Sylius\Bundle\CoreBundle\Promotion\Action\PercentageDiscountPromotionActionCommand;
 use Sylius\Component\Promotion\Model\PromotionActionInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -24,7 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-class PromotionActionExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
+class PromotionActionExampleFactory extends AbstractExampleFactory
 {
     /**
      * @var PromotionActionFactoryInterface

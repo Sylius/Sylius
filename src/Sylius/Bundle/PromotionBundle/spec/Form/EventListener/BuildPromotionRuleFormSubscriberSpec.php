@@ -15,7 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\PromotionBundle\Form\EventListener\AbstractConfigurationSubscriber;
 use Sylius\Bundle\PromotionBundle\Form\EventListener\BuildPromotionRuleFormSubscriber;
-use Sylius\Component\Promotion\Checker\Rule\ItemTotalRuleChecker;
+use Sylius\Bundle\PromotionBundle\Checker\Rule\ItemTotalRuleChecker;
 use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
