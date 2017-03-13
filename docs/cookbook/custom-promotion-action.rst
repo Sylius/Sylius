@@ -20,6 +20,8 @@ This class needs also a ``isConfigurationValid()`` method which was omitted in t
 
     namespace AppBundle\Promotion\Action;
 
+    use AppBundle\Promotion\Action\CheapestProductDiscountPromotionActionCommand;
+
     class CheapestProductDiscountPromotionActionCommand extends DiscountPromotionActionCommand
     {
         const TYPE = 'cheapest_item_discount';
@@ -76,7 +78,7 @@ This class needs also a ``isConfigurationValid()`` method which was omitted in t
          */
         public function getConfigurationFormType()
         {
-            return 'app_promotion_action_cheapest_product_discount_configuration';
+            return CheapestProductDiscountPromotionActionCommand::class;
         }
     }
 
@@ -112,7 +114,7 @@ The new action needs a form type to be available in the admin panel, while creat
         /**
          * {@inheritdoc}
          */
-        public function getName()
+        public function getBlockPrefix()
         {
             return 'app_promotion_action_cheapest_product_discount_configuration';
         }
@@ -127,9 +129,9 @@ In the ``app/config/services.yml`` configure:
 
     # app/config/services.yml
     app.form.type.promotion_action.cheapest_product_discount_configuration:
-    class: AppBundle\Form\Type\Action\CheapestProductDiscountConfigurationType
-    tags:
-        - { name: form.type, alias: app_promotion_action_cheapest_product_discount_configuration }
+        class: AppBundle\Form\Type\Action\CheapestProductDiscountConfigurationType
+        tags:
+            - { name: form.type }
 
 Create a new promotion with your action
 ---------------------------------------

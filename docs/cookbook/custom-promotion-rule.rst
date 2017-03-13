@@ -18,6 +18,7 @@ The new Rule needs a RuleChecker class:
 
     use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
     use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
+    use AppBundle\Promotion\Checker\Rule\PremiumCustomerRuleChecker;
 
     class PremiumCustomerRuleChecker implements RuleCheckerInterface
     {
@@ -36,7 +37,7 @@ The new Rule needs a RuleChecker class:
          */
         public function getConfigurationFormType()
         {
-            return 'app_promotion_rule_premium_customer_configuration';
+            return PremiumCustomerRuleChecker::class;
         }
     }
 
@@ -70,7 +71,7 @@ Create the configuration form type class:
         /**
          * {@inheritdoc}
          */
-        public function getName()
+        public function getBlockPrefix()
         {
             return 'app_promotion_rule_premium_customer_configuration';
         }
@@ -84,7 +85,7 @@ And configure it in the ``app/config/services.yml``:
     app.form.type.promotion_rule.premium_customer_configuration:
         class: AppBundle\Form\Type\Rule\PremiumCustomerConfigurationType
         tags:
-            - { name: form.type, alias: app_promotion_rule_premium_customer_configuration }
+            - { name: form.type }
 
 That's all. You will now be able to choose the new rule while creating a new promotion.
 
