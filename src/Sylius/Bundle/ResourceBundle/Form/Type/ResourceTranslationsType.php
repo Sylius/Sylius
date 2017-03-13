@@ -71,16 +71,17 @@ final class ResourceTranslationsType extends AbstractType implements EventSubscr
     {
         $form = $event->getForm();
         $type = $form->getConfig()->getOption('entry_type');
-
+        $options = $form->getConfig()->getOption('options');
+        
         foreach ($this->definedLocalesCodes as $localeCode) {
             if ($form->has($localeCode)) {
                 continue;
             }
 
             $required = $localeCode === $this->defaultLocaleCode;
-            $form->add($localeCode, $type, [
+            $form->add($localeCode, $type, array_merge($options, [
                 'required' => $required,
-            ]);
+            ]));
         }
     }
 
