@@ -14,7 +14,7 @@
 * Changed the way how payment methods are created. Now you choose desired gateway first and configure payment method with it. All parameters that were previously configured in `yml` configuration file
   are now managed for each payment method in the Admin panel.
 
-### AdminApiBundle
+### AdminApiBundle (former ApiBundle)
 
 * Change the import path of your API routing from `src/Sylius/Bundle/ApiBundle/Resources/config/routing/main.yml` to `src/Sylius/Bundle/AdminApiBundle/Resources/config/routing.yml`. API became versioned, so you need to prefix them accordingly (e.g. `/api/customer` -> `/api/v1/customer`). 
 
@@ -91,6 +91,8 @@ You can bring back previous configuration by overriding current routing with you
     * `Payment Methods`, which have now only show endpoint available. 
 
   You can bring back previous configuration by overriding current routing with your definition.
+
+* Bundle was renamed from `ApiBundle` to `AdminApiBundle`. Routing and config was changed from `sylius_api` to `sylius_admin_api`.
 
 ### Attribute / AttributeBundle
 
