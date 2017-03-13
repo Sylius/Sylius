@@ -25,6 +25,14 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     use ChecksCodeImmutability;
 
     /**
+     * @param int $priority
+     */
+    public function setItsPriority($priority = null)
+    {
+        $this->getDocument()->fillField('Priority', $priority);
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function checkChannelsState($channelName)
@@ -116,6 +124,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     {
         return [
             'code' => '#sylius_promotion_code',
+            'priority' => '#sylius_promotion_priority',
             'coupon_based' => '#sylius_promotion_couponBased',
             'ends_at' => '#sylius_promotion_endsAt',
             'ends_at_date' => '#sylius_promotion_endsAt_date',
