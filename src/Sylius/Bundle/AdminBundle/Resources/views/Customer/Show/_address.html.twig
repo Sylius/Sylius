@@ -1,5 +1,5 @@
 <div class="eight wide column">
-    {{ sonata_block_render_event('sylius.admin.customer.show.before_address', { 'resource': resource }) }}
+    {{ sonata_block_render_event('sylius.admin.customer.show.before_address', {'resource': resource}) }}
 
     <h4 class="ui top attached styled header">
         {{ 'sylius.ui.default_address'|trans }}
@@ -13,5 +13,5 @@
         {% endif %}
     </div>
 
-    {{ sonata_block_render_event('sylius.admin.customer.show.after_address', { 'resource': resource }) }}
+    {{ sonata_block_render_event('sylius.admin.customer.show.after_address', {'resource': resource}) }}
 </div>

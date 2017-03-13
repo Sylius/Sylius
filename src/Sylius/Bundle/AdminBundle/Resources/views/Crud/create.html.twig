@@ -3,20 +3,20 @@
 {% import 'SyliusUiBundle:Macro:headers.html.twig' as headers %}
 
 {% set header = configuration.vars.header|default(metadata.applicationName~'.ui.new_'~metadata.name) %}
-{% set eventPrefix = app.request.attributes.get('_route')|replace('_', '.') %}
+{% set event_prefix = app.request.attributes.get('_route')|replace('_', '.') %}
 
 {% block title %}{{ parent() }} {{ header|trans }}{% endblock %}
 
 {% form_theme form '@SyliusAdmin/Form/theme.html.twig' %}
 
 {% block content %}
-{{ sonata_block_render_event(eventPrefix ~ '.before_header', { 'resource': resource }) }}
+{{ sonata_block_render_event(event_prefix ~ '.before_header', {'resource': resource}) }}
 
 {% include '@SyliusAdmin/Crud/Create/_header.html.twig' %}
 
-{{ sonata_block_render_event(eventPrefix ~ '.after_header', { 'resource': resource }) }}
+{{ sonata_block_render_event(event_prefix ~ '.after_header', {'resource': resource}) }}
 
 {% include '@SyliusAdmin/Crud/Create/_content.html.twig' %}
 
-{{ sonata_block_render_event(eventPrefix ~ '.after_content', { 'resource': resource }) }}
+{{ sonata_block_render_event(event_prefix ~ '.after_content', {'resource': resource}) }}
 {% endblock %}

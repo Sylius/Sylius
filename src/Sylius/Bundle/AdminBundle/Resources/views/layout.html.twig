@@ -1,6 +1,6 @@
 {% extends 'SyliusUiBundle:Layout:sidebar.html.twig' %}
 
-{% set eventPrefix = app.request.attributes.get('_route')|replace('_', '.') %}
+{% set event_prefix = app.request.attributes.get('_route')|replace('_', '.') %}
 
 {% block title %}Sylius | {% endblock %}
 
@@ -13,25 +13,25 @@
         <i class="sidebar icon"></i>
     </a>
 
-    {{ sonata_block_render_event(eventPrefix ~ '.topbar_left') }}
+    {{ sonata_block_render_event(event_prefix ~ '.topbar_left') }}
 
     {{ render(url('sylius_admin_partial_channel_index', {'template': '@SyliusAdmin/_channelLinks.html.twig'})) }}
     {% include '@SyliusAdmin/_search.html.twig' %}
 
-    {{ sonata_block_render_event(eventPrefix ~ '.topbar_middle') }}
+    {{ sonata_block_render_event(event_prefix ~ '.topbar_middle') }}
 
     {% include '@SyliusAdmin/_security.html.twig' %}
 
-    {{ sonata_block_render_event(eventPrefix ~ '.topbar_right') }}
+    {{ sonata_block_render_event(event_prefix ~ '.topbar_right') }}
 {% endblock %}
 
 {% block sidebar %}
-    {{ sonata_block_render_event(eventPrefix ~ '.sidebar_top') }}
+    {{ sonata_block_render_event(event_prefix ~ '.sidebar_top') }}
 
     <a class="item" href="{{ path('sylius_admin_dashboard') }}"><b>Sylius</b></a>
     {{ knp_menu_render('sylius.admin.main', {'template': 'SyliusUiBundle:Menu:sidebar.html.twig', 'currentClass': 'active'}) }}
 
-    {{ sonata_block_render_event(eventPrefix ~ '.sidebar_down') }}
+    {{ sonata_block_render_event(event_prefix ~ '.sidebar_down') }}
 {% endblock %}
 
 {% block footer %}
