@@ -65,13 +65,8 @@ final class TaxonsToCodesTransformer implements DataTransformerInterface
             return [];
         }
 
-        $taxonCodes = [];
-
-        /** @var TaxonInterface $taxon */
-        foreach ($taxons as $taxon) {
-            $taxonCodes[] = $taxon->getCode();
-        }
-
-        return $taxonCodes;
+        return array_map(function (TaxonInterface $taxon) {
+            return $taxon->getCode();
+        }, $taxons->toArray());
     }
 }

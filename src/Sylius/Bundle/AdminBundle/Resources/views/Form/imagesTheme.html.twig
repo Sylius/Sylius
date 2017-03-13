@@ -1,0 +1,23 @@
+{% extends '@SyliusUi/Form/imagesTheme.html.twig' %}
+
+{% block sylius_product_image_widget %}
+    {% spaceless %}
+        <div class="ui upload box segment">
+            {{ form_row(form.type) }}
+            <label for="{{ form.file.vars.id }}" class="ui icon labeled button"><i class="cloud upload icon"></i> {{ 'sylius.ui.choose_file'|trans }}</label>
+            {% if form.vars.value.path|default(null) is not null %}
+                <img class="ui small bordered image" src="{{ form.vars.value.path|imagine_filter('sylius_small') }}" alt="{{ form.vars.value.type }}" />
+            {% endif %}
+            <div class="ui hidden element">
+                {{ form_widget(form.file) }}
+            </div>
+            <div class="ui element">
+                {{- form_errors(form.file) -}}
+            </div>
+            {% if product.id is not null and 0 != product.variants|length and not product.simple %}
+                <br/>
+                {{ form_row(form.productVariants, {'remote_url': path('sylius_admin_ajax_product_variants_by_phrase', {'productCode': product.code}), 'remote_criteria_type': 'contains', 'remote_criteria_name': 'phrase', 'load_edit_url': path('sylius_admin_ajax_product_variants_by_code', {'productCode': product.code})}) }}
+            {% endif %}
+        </div>
+    {% endspaceless %}
+{% endblock %}

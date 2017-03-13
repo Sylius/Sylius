@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Form\Type\Product;
 
 use Sylius\Bundle\CoreBundle\Form\Type\ImageType;
-use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantChoiceType;
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceAutocompleteChoiceType;
 use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -33,12 +33,13 @@ final class ProductImageType extends ImageType
 
         if (isset($options['product']) && $options['product'] instanceof ProductInterface) {
             $builder
-                ->add('productVariants', ProductVariantChoiceType::class, [
+                ->add('productVariants', ResourceAutocompleteChoiceType::class, [
                     'label' => 'sylius.ui.product_variants',
                     'multiple' => true,
-                    'expanded' => false,
                     'required' => false,
-                    'product' => $options['product'],
+                    'choice_name' => 'descriptor',
+                    'choice_value' => 'code',
+                    'resource' => 'sylius.product_variant',
                 ])
             ;
         }
