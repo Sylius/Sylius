@@ -4,7 +4,7 @@ How to create an extension for Sylius?
 Sylius extension is nothing more but a regular Symfony bundle adding custom behaviour to the default Sylius application.
 
 The best way to create your own extension is to use `Sylius bundle skeleton <https://github.com/Sylius/BundleSkeleton>`_,
-which has built-in infrastructure for designing and testing using `Behat <http://behat.org/en/latest/>`_.
+which has built-in infrastructure for designing and testing using `Behat`_.
 
 1. Create project using Composer.
 ---------------------------------
@@ -38,14 +38,18 @@ more meaningful one. Keep in mind that these changes also need to be done in ``t
 4. Implement your awesome features.
 -----------------------------------
 
-Looking at existing Sylius extensions like `Lakion\SyliusCmsBundle`_ or `Lakion\SyliusElasticSearchBundle`_ is
+Looking at existing Sylius extensions like `Lakion\SyliusCmsBundle <https://github.com/Lakion/SyliusCmsBundle>`_
+or `Lakion\SyliusElasticSearchBundle <https://github.com/Lakion/SyliusElasticSearchBundle>`_ is
 a great way to start developing your own extensions.
 
-Feel free to use `BDD`_ with `Behat`_, `phpspec`_ and `PhpUnit`_ to ensure your extension's extraordinary quality.
+Feel free to use `BDD <https://www.agilealliance.org/glossary/bdd/>`_ with `Behat`_, `phpspec`_ and `PhpUnit`_
+to ensure your extension's extraordinary quality.
 
-.. _`Lakion\SyliusCmsBundle`: https://github.com/Lakion/SyliusCmsBundle
-.. _`Lakion\SyliusElasticSearchBundle`: https://github.com/Lakion/SyliusElasticSearchBundle
-.. _`BDD`: https://en.wikipedia.org/wiki/Behavior-driven_development
+.. tip::
+
+    For the extensions, the suggested way of modifying Sylius is using :doc:`the Customization Guide </customization/index>`.
+    There you will find a lot of help while trying to modify templates, state machines, controllers and many, many more.
+
 .. _`Behat`: http://behat.org/en/latest/
 .. _`phpspec`: http://www.phpspec.net/en/stable/
 .. _`PHPUnit`: https://phpunit.de/
