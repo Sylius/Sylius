@@ -87,5 +87,6 @@ sylius_grid:
                                     label: sylius.ui.generate
                                     icon: random
                                     route: sylius_admin_product_variant_generate
+                                    visible: resource.hasOptions
                                     parameters:
                                         productId: resource.id
