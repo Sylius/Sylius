@@ -13,6 +13,8 @@
                 </div>
             </h1>
 
+            {{ sonata_block_render_event('sylius.shop.order.thank.you.after_message', {'order': order}) }}
+
             {% if lastPayment != false %}
                 {%  if lastPayment.method.instructions is not null %}
                     <div id="sylius-payment-method-instructions" class="ui segment">

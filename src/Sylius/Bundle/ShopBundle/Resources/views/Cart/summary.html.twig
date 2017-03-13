@@ -12,15 +12,29 @@
 {% block content %}
     {% if not cart.empty %}
         {% include '@SyliusShop/Cart/Summary/_header.html.twig' %}
+
+        {{ sonata_block_render_event('sylius.shop.cart.summary.after_content_header', {'cart': cart}) }}
+
         <div class="ui stackable grid">
             <div class="eleven wide column">
+                {{ sonata_block_render_event('sylius.shop.cart.summary.before_items', {'cart': cart}) }}
+
                 {% include '@SyliusShop/Cart/Summary/_items.html.twig' %}
+
+                {{ sonata_block_render_event('sylius.shop.cart.summary.after_items', {'cart': cart}) }}
             </div>
             <div class="five wide column">
+                {{ sonata_block_render_event('sylius.shop.cart.summary.before_totals', {'cart': cart}) }}
+
                 {% include '@SyliusShop/Cart/Summary/_totals.html.twig' %}
+
+                {{ sonata_block_render_event('sylius.shop.cart.summary.after_totals', {'cart': cart}) }}
+
                 {% include '@SyliusShop/Cart/Summary/_checkout.html.twig' %}
             </div>
         </div>
+
+        {{ sonata_block_render_event('sylius.shop.cart.summary.before_suggestions', {'cart': cart}) }}
 
         {% include '@SyliusShop/Cart/Summary/_suggestions.html.twig' %}
     {% else %}

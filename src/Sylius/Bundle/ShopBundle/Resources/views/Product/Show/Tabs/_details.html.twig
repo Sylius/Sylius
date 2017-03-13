@@ -1,4 +1,6 @@
 <div class="ui bottom attached tab segment active" data-tab="details">
+    {{ sonata_block_render_event('sylius.shop.product.show.tab_details', {'product': product}) }}
+
     {% if product.description is not empty %}
         {{ product.description }}
     {% else %}

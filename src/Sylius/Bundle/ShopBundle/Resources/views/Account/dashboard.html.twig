@@ -13,6 +13,9 @@
         {{ 'sylius.ui.my_account'|trans }}
         <div class="sub header">{{ 'sylius.ui.manage_your_personal_information_and_preferences'|trans }}</div>
     </h1>
+
+    {{ sonata_block_render_event('sylius.shop.account.dashboard.after_content_header', {'customer': customer}) }}
+
     <div class="ui large list" id="customer-information">
         <div class="item">
             {{ customer.fullName }}
@@ -30,6 +33,9 @@
             {% endif %}
         </div>
     </div>
+
+    {{ sonata_block_render_event('sylius.shop.account.dashboard.after_information', {'customer': customer}) }}
+
     <div class="ui text menu">
         <a href="{{ path('sylius_shop_account_profile_update') }}" class="item"><i class="pencil icon"></i> {{ 'sylius.ui.edit'|trans }}</a>
         <a href="{{ path('sylius_shop_account_change_password') }}" class="item"><i class="lock icon"></i> {{ 'sylius.ui.change_password'|trans }}</a>

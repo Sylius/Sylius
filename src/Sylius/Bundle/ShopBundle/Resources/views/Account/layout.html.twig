@@ -6,11 +6,19 @@
 
     <div class="ui stackable grid">
         <div class="four wide column">
+            {{ sonata_block_render_event(event_prefix ~ '.before_menu') }}
+
             {{ knp_menu_render('sylius.shop.account', {'template': '@SyliusUi/Menu/simple.html.twig'}) }}
+
+            {{ sonata_block_render_event(event_prefix ~ '.after_menu') }}
         </div>
         <div class="twelve wide column">
+            {{ sonata_block_render_event(event_prefix ~ '.before_subcontent') }}
+
             {% block subcontent %}
             {% endblock %}
+
+            {{ sonata_block_render_event(event_prefix ~ '.after_subcontent') }}
         </div>
     </div>
 {% endblock %}

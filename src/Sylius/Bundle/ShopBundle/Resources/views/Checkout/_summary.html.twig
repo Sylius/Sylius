@@ -21,4 +21,6 @@
         {% endfor %}
         </tbody>
     </table>
+
+    {{ sonata_block_render_event(app.request.attributes.get('_route')|replace('_', '.') ~ '.summary', {'order': order}) }}
 </div>

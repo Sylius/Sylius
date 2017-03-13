@@ -1,5 +1,10 @@
 {% include '@SyliusShop/Common/Order/_addresses.html.twig' %}
+
+{{ sonata_block_render_event(event_prefix ~ 'before_addresses', {'order': order}) }}
+
 {% include '@SyliusShop/Common/Order/_table.html.twig' %}
+
+{{ sonata_block_render_event(event_prefix ~ 'after_addresses', {'order': order}) }}
 
 <div class="ui two column stackable grid">
     <div class="column" id="sylius-payments">

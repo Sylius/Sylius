@@ -1,6 +1,8 @@
 <footer id="footer" class="ui inverted vertical footer segment">
     <div class="ui container">
         <div class="ui inverted divided equal height stackable grid">
+            {{ sonata_block_render_event(event_prefix ~ '.before_footer') }}
+
             <div class="three wide column">
                 <h4 class="ui inverted header">{{ 'sylius.ui.your_store'|trans }}</h4>
                 <div class="ui inverted link list">
@@ -22,6 +24,8 @@
                 <h4 class="ui inverted header">&copy; {{ 'sylius.ui.your_store'|trans }}</h4>
                 <p>{{ 'sylius.ui.powered_by'|trans }} <a href="http://sylius.org" target="_blank" style="color: #1abb9c;">Sylius</a>.</p>
             </div>
+
+            {{ sonata_block_render_event(event_prefix ~ '.after_footer') }}
         </div>
     </div>
 </footer>

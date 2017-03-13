@@ -5,17 +5,30 @@
 {% block content %}
     {% include '@SyliusShop/Checkout/_steps.html.twig' with {'active': 'complete', 'orderTotal': order.total} %}
 
+    {{ sonata_block_render_event('sylius.shop.checkout.complete.after_steps', {'order': order}) }}
+
     <div class="ui padded segment">
         {% include '@SyliusShop/Checkout/Complete/_header.html.twig' %}
+
+        {{ sonata_block_render_event('sylius.shop.checkout.complete.after_content_header', {'order': order}) }}
+
         {% include 'SyliusUiBundle::_flashes.html.twig' %}
 
         {{ form_start(form, {'action': path('sylius_shop_checkout_complete'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
             {{ form_errors(form) }}
             <input type="hidden" name="_method" value="PUT" />
 
+            {{ sonata_block_render_event('sylius.shop.checkout.complete.before_summary', {'order': order, 'form': form}) }}
+
             {% include 'SyliusShopBundle:Common/Order:_summary.html.twig' %}
+
+            {{ sonata_block_render_event('sylius.shop.checkout.complete.after_summary', {'order': order}) }}
+
             <div class="ui hidden divider"></div>
             {% include '@SyliusShop/Checkout/Complete/_form.html.twig' %}
+
+            {{ sonata_block_render_event('sylius.shop.checkout.complete.before_navigation', {'order': order}) }}
+
             {% include '@SyliusShop/Checkout/Complete/_navigation.html.twig' %}
 
             {{ form_row(form._token) }}

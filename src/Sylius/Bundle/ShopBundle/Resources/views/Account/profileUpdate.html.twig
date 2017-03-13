@@ -19,21 +19,26 @@
             {{ 'sylius.ui.your_profile'|trans }}
             <div class="sub header">{{ 'sylius.ui.edit_your_personal_information'|trans }}</div>
         </h1>
-            <input type="hidden" name="_method" value="PUT" />
 
-            <div class="two fields">
-                <div class="field">{{ form_row(form.firstName) }}</div>
-                <div class="field">{{ form_row(form.lastName) }}</div>
-            </div>
-            {{ form_row(form.email) }}
-            <div class="two fields">
-                <div class="field">{{ form_row(form.birthday) }}</div>
-                <div class="field">{{ form_row(form.gender) }}</div>
-            </div>
-            {{ form_row(form.phoneNumber) }}
-            {{ form_row(form.subscribedToNewsletter) }}
+        {{ sonata_block_render_event('sylius.shop.account.profile.update.after_content_header', {'customer': customer, 'form': form}) }}
 
-            <button type="submit" class="ui large primary button">{{ 'sylius.ui.save_changes'|trans }}</button>
+        <input type="hidden" name="_method" value="PUT" />
+
+        <div class="two fields">
+            <div class="field">{{ form_row(form.firstName) }}</div>
+            <div class="field">{{ form_row(form.lastName) }}</div>
+        </div>
+        {{ form_row(form.email) }}
+        <div class="two fields">
+            <div class="field">{{ form_row(form.birthday) }}</div>
+            <div class="field">{{ form_row(form.gender) }}</div>
+        </div>
+        {{ form_row(form.phoneNumber) }}
+        {{ form_row(form.subscribedToNewsletter) }}
+
+        {{ sonata_block_render_event('sylius.shop.account.profile.update.form', {'customer': customer, 'form': form}) }}
+
+        <button type="submit" class="ui large primary button">{{ 'sylius.ui.save_changes'|trans }}</button>
         {{ form_row(form._token) }}
         {{ form_end(form, {'render_rest': false}) }}
     </div>

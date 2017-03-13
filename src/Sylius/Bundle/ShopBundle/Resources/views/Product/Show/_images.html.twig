@@ -17,6 +17,9 @@
 </a>
 {% if product.images|length > 1 %}
 <div class="ui divider"></div>
+
+{{ sonata_block_render_event('sylius.shop.product.show.before_thumbnails', {'product': product}) }}
+
 <div class="ui small images">
     {% for image in product.images %}
     {% set path = image.path is not null ? image.path|imagine_filter('sylius_shop_product_small_thumbnail') : 'http://placehold.it/200x200' %}

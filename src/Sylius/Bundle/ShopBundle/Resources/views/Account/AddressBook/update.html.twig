@@ -8,6 +8,9 @@
             {{ 'sylius.ui.address_book'|trans }}
             <div class="sub header">{{ 'sylius.ui.edit_my_address'|trans }}</div>
         </h1>
+
+        {{ sonata_block_render_event('sylius.shop.account.address.book.create.after_content_header', {'address': address}) }}
+
         {{ form_start(form, {'action': path('sylius_shop_account_address_book_update', {'id': address.id}), 'method': 'PUT', 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
 
         {% include '@SyliusShop/Common/Form/_address.html.twig' with {'form': form} %}
@@ -24,6 +27,9 @@
                 </button>
             </div>
         </div>
+
+        {{ sonata_block_render_event('sylius.shop.account.address.book.update.form', {'address': address}) }}
+
         {{ form_row(form._token) }}
         {{ form_end(form, {'render_rest': false}) }}
     </div>
