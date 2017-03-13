@@ -3,7 +3,7 @@ sylius_admin_payment_method:
         alias: sylius.payment_method
         section: admin
         templates: SyliusAdminBundle:Crud
-        except: ['show']
+        only: ['index', 'delete']
         redirect: update
         grid: sylius_admin_payment_method
         permission: true
@@ -33,10 +33,25 @@ sylius_admin_payment_method_create:
             vars:
                 subheader: sylius.ui.manage_payment_methods_available_to_your_customers
                 templates:
-                    form: SyliusAdminBundle:PaymentMethod:_form.html.twig
+                    form: SyliusAdminBundle:PaymentMethod:Create/_form.html.twig
                 route:
                     parameters:
                         factory: $factory
+
+sylius_admin_payment_method_update:
+    path: /payment-methods/{id}/edit
+    methods: [GET, PATCH]
+    defaults:
+        _controller: sylius.controller.payment_method:updateAction
+        _sylius:
+            section: admin
+            template: SyliusAdminBundle:PaymentMethod:update.html.twig
+            redirect: sylius_admin_payment_method_update
+            permission: true
+            vars:
+                subheader: sylius.ui.manage_payment_methods_available_to_your_customers
+                templates:
+                    form: SyliusAdminBundle:PaymentMethod:Update/_form.html.twig
 
 sylius_admin_get_payment_gateways:
     path: /payment-gateways
