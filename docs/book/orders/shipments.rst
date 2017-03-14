@@ -63,7 +63,7 @@ At the end add it to the system using a repository.
 
     $this->container->get('sylius.repository.shipping_method')->add($shippingMethod);
 
-In order to have you shipping method available in checkout add it to a desired channel.
+In order to have your shipping method available in checkout add it to a desired channel.
 
 .. code-block:: php
 
@@ -73,7 +73,7 @@ Shipping Zones
 --------------
 
 Sylius has an approach of **Zones** used also for shipping. As in each e-commerce you may be willing to ship only to certain countries for example.
-therefore while configuring your **ShippingMethods** pay special attention to the zones you are assigning to them.
+Therefore while configuring your **ShippingMethods** pay special attention to the zones you are assigning to them.
 You have to prepare methods for each zone, because the available methods are retrieved for the zone the customer has basing on his address.
 
 Shipping Cost Calculators
@@ -98,12 +98,11 @@ Basing on the **ShippingMethod** assigned on the Shipment it will get its calcul
 Built-in Calculators
 --------------------
 
-Shipping/Calculator
 The already defined calculators in Sylius are described as constants in the
 `Sylius\Component\Shipping\Calculator\DefaultCalculators <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Shipping/Calculator/DefaultCalculators.php>`_
 
 * **FlatRateCalculator** - just returns the ``amount`` from the ShippingMethod's configuration.
-* **FlexibleRateCalculator** - on the ShippingMethod's configuration it should have the ``first_unit_cost``, ``additional_unit_cost`` and ``additional_unit_limit`` configured - it is useful if you want to have different cost for teh fist item than for the rest.
+* **FlexibleRateCalculator** - on the ShippingMethod's configuration it should have the ``first_unit_cost``, ``additional_unit_cost`` and ``additional_unit_limit`` configured - it is useful if you want to have different cost for the first item than for the rest.
 * **PerUnitRateCalculator** - returns the ``amount`` from the ShippingMethod's configuration multiplied by the ``units`` count.
 * **VolumeRateCalculator** - returns the ``amount`` from the ShippingMethod's configuration multiplied by the ``units`` count divided by the configured ``division``.
 * **WeightRateCalculator** - returns the ``fixed`` from the ShippingMethod's configuration multiplied plus the ``variable`` multiplied by the ``weight`` of the shipment and divided by the ``division`` from the configuration.
