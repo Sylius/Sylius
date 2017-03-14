@@ -1,0 +1,11 @@
+{
+    "id": @integer@,
+    "username": "Barlog",
+    "usernameCanonical": "barlog",
+    "roles": [
+        "ROLE_ADMINISTRATION_ACCESS"
+    ],
+    "email": "teamEvil@middleearth.com",
+    "emailCanonical": "teamevil@middleearth.com",
+    "enabled": false
+}
