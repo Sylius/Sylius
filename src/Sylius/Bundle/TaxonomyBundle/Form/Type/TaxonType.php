@@ -41,11 +41,8 @@ final class TaxonType extends AbstractResourceType
                     return;
                 }
 
-                $event->getForm()->add('parent', ResourceAutocompleteChoiceType::class, [
+                $event->getForm()->add('parent', TaxonAutocompleteChoiceType::class, [
                     'label' => 'sylius.form.taxon.parent',
-                    'resource' => 'sylius.taxon',
-                    'choice_name' => 'name',
-                    'choice_value' => 'code',
                     'required' => false,
                 ]);
             })

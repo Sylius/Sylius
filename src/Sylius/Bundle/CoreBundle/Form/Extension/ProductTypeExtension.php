@@ -15,7 +15,7 @@ use Sylius\Bundle\ChannelBundle\Form\Type\ChannelChoiceType;
 use Sylius\Bundle\CoreBundle\Form\Type\Product\ProductImageType;
 use Sylius\Bundle\CoreBundle\Form\Type\Taxon\ProductTaxonAutocompleteChoiceType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductType;
-use Sylius\Bundle\ResourceBundle\Form\Type\ResourceAutocompleteChoiceType;
+use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonAutocompleteChoiceType;
 use Sylius\Component\Core\Model\Product;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -42,12 +42,8 @@ final class ProductTypeExtension extends AbstractTypeExtension
                 'expanded' => true,
                 'label' => 'sylius.form.product.channels',
             ])
-            ->add('mainTaxon', ResourceAutocompleteChoiceType::class, [
+            ->add('mainTaxon', TaxonAutocompleteChoiceType::class, [
                 'label' => 'sylius.form.product.main_taxon',
-                'resource' => 'sylius.taxon',
-                'choice_name' => 'name',
-                'choice_value' => 'code',
-                'multiple' => false,
             ])
             ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
                 $product = $event->getData();
