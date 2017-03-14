@@ -53,9 +53,9 @@ Installing assets
 
 In order to see a fully functional frontend you will need to install its assets.
 
-**Sylius** already has a ``gulpfile.js``, therefore you just need to get `Gulp`_ using `Node.js`_.
+**Sylius** already has a ``gulpfile.js``, therefore you just need to get `Gulp`_ using `Yarn`_.
 
-Having Node.js installed go to your project directory and run:
+Having Yarn installed go to your project directory and run:
 
 .. code-block:: bash
 
@@ -126,6 +126,6 @@ Contributing
     If you would like to contribute to Sylius - please go to the :doc:`Contribution Guide </contributing/index>`
 
 .. _Gulp: http://gulpjs.com/
-.. _Node.js: https://nodejs.org/en/download/
+.. _Yarn: https://yarnpkg.com/lang/en/
 .. _Composer: http://packagist.org
 .. _`Composer installed globally`: http://getcomposer.org/doc/00-intro.md#globally
