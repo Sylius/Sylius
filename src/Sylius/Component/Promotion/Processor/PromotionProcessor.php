@@ -60,24 +60,20 @@ final class PromotionProcessor implements PromotionProcessorInterface
             $this->promotionApplicator->revert($subject, $promotion);
         }
 
-        $eligiblePromotions = [];
+        $preQualifiedPromotions = $this->preQualifiedPromotionsProvider->getPromotions($subject);
 
-        foreach ($this->preQualifiedPromotionsProvider->getPromotions($subject) as $promotion) {
-            if (!$this->promotionEligibilityChecker->isEligible($subject, $promotion)) {
-                continue;
-            }
-
-            if ($promotion->isExclusive()) {
+        foreach ($preQualifiedPromotions as $promotion) {
+            if ($promotion->isExclusive() && $this->promotionEligibilityChecker->isEligible($subject, $promotion)) {
                 $this->promotionApplicator->apply($subject, $promotion);
 
                 return;
             }
-
-            $eligiblePromotions[] = $promotion;
         }
 
-        foreach ($eligiblePromotions as $promotion) {
-            $this->promotionApplicator->apply($subject, $promotion);
+        foreach ($preQualifiedPromotions as $promotion) {
+            if (!$promotion->isExclusive() && $this->promotionEligibilityChecker->isEligible($subject, $promotion)) {
+                $this->promotionApplicator->apply($subject, $promotion);
+            }
         }
     }
 }

@@ -674,6 +674,29 @@ final class PromotionContext implements Context
     }
 
     /**
+     * @Given /^([^"]+) gives ("[^"]+%") discount on shipping to every order over ("(?:€|£|\$)[^"]+")$/
+     */
+    public function itGivesDiscountOnShippingToEveryOrderOver(
+        PromotionInterface $promotion,
+        $discount,
+        $itemTotal
+    ) {
+        $channelCode = $this->sharedStorage->get('channel')->getCode();
+        $rule = $this->ruleFactory->createItemTotal($channelCode, $itemTotal);
+        $action = $this->actionFactory->createShippingPercentageDiscount($discount);
+
+        $this->persistPromotion($promotion, $action, [], $rule);
+    }
+
+    /**
+     * @Given /^([^"]+) gives free shipping to every order over ("(?:€|£|\$)[^"]+")$/
+     */
+    public function itGivesFreeShippingToEveryOrderOver(PromotionInterface $promotion, $itemTotal)
+    {
+        $this->itGivesDiscountOnShippingToEveryOrderOver($promotion, 1, $itemTotal);
+    }
+
+    /**
      * @param array $taxonCodes
      *
      * @return array
