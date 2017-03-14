@@ -482,6 +482,15 @@ fos_rest:
             - { path: "^/api", role: ROLE_API_ACCESS }
             - { path: "^/(?!admin|api)[^/]++/account", role: ROLE_USER }
   ```
+### Database Migrations
+
+Check if the Sylius migrations are in your `app/migrations` directory. If not, then add to this directory 
+the migrations from the `vendor/sylius/sylius/app/migrations/` directory. 
+
+If you've got your own migrations here, please run the migrations carefully. The doctrine migrations system is comparing dates of the migrations,
+then if some of your migrations have the same dates as migrations in Sylius, then they may corrupt the sequence of running Sylius migrations.
+
+In such situations we suggest running migrations one by one, instead of all at once.
 
 ### Behat
 
