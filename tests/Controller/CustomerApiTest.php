@@ -119,6 +119,7 @@ EOT;
             "email": "john.diggle@yahoo.com",
             "gender": "m",
             "user": {
+                "username": "john.diggle@yahoo.com",
                 "plainPassword" : "testPassword"
             }
         }
@@ -259,6 +260,7 @@ EOT;
             "firstName": "John",
             "lastName": "Diggle",
             "email": "john.diggle@example.com",
+            "username": "john.diggle@example.com",
             "gender": "m"
         }
 EOT;
