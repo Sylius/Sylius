@@ -13,9 +13,11 @@ namespace Sylius\Bundle\TaxonomyBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceAutocompleteChoiceType;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceTranslationsType;
-use Sylius\Bundle\TaxonomyBundle\Form\EventListener\BuildTaxonFormSubscriber;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -34,7 +36,19 @@ final class TaxonType extends AbstractResourceType
                 'label' => 'sylius.form.taxon.name',
             ])
             ->addEventSubscriber(new AddCodeFormSubscriber())
-            ->addEventSubscriber(new BuildTaxonFormSubscriber($builder->getFormFactory()))
+            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+                if (null === $event->getData()) {
+                    return;
+                }
+
+                $event->getForm()->add('parent', ResourceAutocompleteChoiceType::class, [
+                    'label' => 'sylius.form.taxon.parent',
+                    'resource' => 'sylius.taxon',
+                    'choice_name' => 'name',
+                    'choice_value' => 'code',
+                    'required' => false,
+                ]);
+            })
         ;
     }
 
