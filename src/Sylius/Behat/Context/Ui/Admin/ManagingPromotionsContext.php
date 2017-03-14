@@ -156,7 +156,7 @@ final class ManagingPromotionsContext implements Context
         $this->createPage->addRule('Has at least one from taxons');
 
         foreach ($taxons as $taxon) {
-            $this->createPage->selectRuleOption('Taxons', $taxon, true);
+            $this->createPage->selectAutocompleteRuleOption('Taxons', $taxon, true);
         }
     }
 
@@ -166,7 +166,7 @@ final class ManagingPromotionsContext implements Context
     public function iAddTheRuleConfiguredWith($taxonName, $amount, $channelName)
     {
         $this->createPage->addRule('Total price of items from taxon');
-        $this->createPage->selectRuleOption('Taxon', $taxonName);
+        $this->createPage->selectAutocompleteRuleOption('Taxon', $taxonName);
         $this->createPage->fillRuleOptionForChannel($channelName, 'Amount', $amount);
     }
 
@@ -231,7 +231,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iSpecifyThatThisActionShouldBeAppliedToItemsFromCategory($taxonName)
     {
-        $this->createPage->selectFilterOption('Taxons filter', $taxonName);
+        $this->createPage->selectAutoCompleteFilterOption('Taxons', $taxonName);
     }
 
     /**
@@ -556,7 +556,7 @@ final class ManagingPromotionsContext implements Context
     public function iAddTheRuleConfiguredWithTheProduct($productName)
     {
         $this->createPage->addRule('Contains product');
-        $this->createPage->selectRuleOption('Product', $productName);
+        $this->createPage->selectAutocompleteRuleOption('Product code', $productName);
     }
 
     /**
@@ -564,7 +564,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iSpecifyThatThisActionShouldBeAppliedToTheProduct($productName)
     {
-        $this->createPage->selectFilterOption('Products filter', $productName);
+        $this->createPage->selectAutoCompleteFilterOption('Products', $productName);
     }
 
     /**

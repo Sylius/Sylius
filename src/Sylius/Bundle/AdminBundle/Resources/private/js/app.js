@@ -8,13 +8,13 @@
  */
 
 (function($) {
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('#sylius_product_variant_pricingCalculator').handlePrototypes({
             'prototypePrefix': 'sylius_product_variant_pricingCalculator',
             'containerSelector': '#sylius_calculator_container'
         });
 
-        $('#sylius_customer_createUser').change(function(){
+        $('#sylius_customer_createUser').change(function () {
             $('#user-form').toggle();
         });
 
@@ -37,16 +37,23 @@
             'containerSelector': '.configuration'
         });
 
-        $('#actions a[data-form-collection="add"]').on('click', function(){
+        $('#actions a[data-form-collection="add"]').on('click', function () {
             setTimeout(function(){
                 $('select[name^="sylius_promotion[actions]"][name$="[type]"]').last().change();
             }, 50);
         });
-
-        $('#rules a[data-form-collection="add"]').on('click', function(){
+        $('#rules a[data-form-collection="add"]').on('click', function () {
             setTimeout(function(){
                 $('select[name^="sylius_promotion[rules]"][name$="[type]"]').last().change();
             }, 50);
+        });
+
+        $(document).on('collection-form-update', function () {
+            $.each($('.sylius-autocomplete'), function (index, element) {
+                if ($._data($(element).get(0), 'events') == undefined) {
+                    $(element).autoComplete();
+                }
+            });
         });
 
         $('.sylius-tabular-form').addTabErrors();

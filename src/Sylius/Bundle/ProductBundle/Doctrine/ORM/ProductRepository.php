@@ -26,10 +26,24 @@ class ProductRepository extends EntityRepository implements ProductRepositoryInt
     public function findByName($name, $locale)
     {
         return $this->createQueryBuilder('o')
-            ->innerJoin('o.translations', 'translation')
+            ->innerJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
             ->andWhere('translation.name = :name')
-            ->andWhere('translation.locale = :locale')
             ->setParameter('name', $name)
+            ->setParameter('locale', $locale)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findByNamePart($phrase, $locale)
+    {
+        return $this->createQueryBuilder('o')
+            ->innerJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
+            ->andWhere('translation.name LIKE :name')
+            ->setParameter('name', '%'.$phrase.'%')
             ->setParameter('locale', $locale)
             ->getQuery()
             ->getResult()

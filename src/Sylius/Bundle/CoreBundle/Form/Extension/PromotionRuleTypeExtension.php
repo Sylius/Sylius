@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
 use Sylius\Bundle\CoreBundle\Form\EventSubscriber\BuildChannelBasedPromotionRuleFormSubscriber;
-use Sylius\Bundle\PromotionBundle\Form\Type\Core\AbstractConfigurationType;
 use Sylius\Bundle\PromotionBundle\Form\Type\PromotionRuleChoiceType;
 use Sylius\Bundle\PromotionBundle\Form\Type\PromotionRuleType;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;

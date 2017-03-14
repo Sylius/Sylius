@@ -94,6 +94,7 @@ class ResourceAutocompleteChoiceType extends AbstractType
             ])
             ->setDefaults([
                 'multiple' => false,
+                'error_bubbling' => false,
                 'placeholder' => '',
                 'repository' => function (Options $options) {
                     return $this->resourceRepositoryRegistry->get($options['resource']);

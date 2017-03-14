@@ -129,7 +129,7 @@ abstract class AbstractConfigurationSubscriber implements EventSubscriberInterfa
     }
 
     /**
-     * @param PromotionDynamicTypeInterface|null $type
+     * @param PromotionDynamicTypeInterface|null $modelType
      * @param FormInterface $form
      *
      * @return null|string

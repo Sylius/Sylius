@@ -18,7 +18,6 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Promotion\Checker\Rule\ChannelBasedRuleCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
-use Symfony\Component\Form\FormFactoryIntegrface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 
@@ -68,6 +67,7 @@ final class BuildChannelBasedPromotionRuleFormSubscriber extends AbstractConfigu
         $configurationCollection = $this->factory->createNamed('configuration', PromotionConfigurationType::class, [], [
             'compound' => true,
             'auto_initialize' => false,
+            'error_bubbling' => false,
         ]);
 
         /** @var ChannelInterface $channel */
@@ -108,6 +108,9 @@ final class BuildChannelBasedPromotionRuleFormSubscriber extends AbstractConfigu
             'auto_initialize' => false,
             'label' => $channel->getName(),
             'currency' => $channel->getBaseCurrency()->getCode(),
+            'property_path' => '[' . $channel->getCode() . ']',
+            'block_name' => 'entry',
+            'error_bubbling' => false,
         ];
 
         $data = array_key_exists($channel->getCode(), $data) ? $data[$channel->getCode()] : [];

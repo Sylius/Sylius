@@ -67,6 +67,7 @@ final class BuildChannelBasedPromotionActionFormSubscriber extends AbstractConfi
         $configurationCollection = $this->factory->createNamed('configuration', PromotionConfigurationType::class, [], [
             'compound' => true,
             'auto_initialize' => false,
+            'error_bubbling' => false,
         ]);
 
         /** @var ChannelInterface $channel */
@@ -107,6 +108,9 @@ final class BuildChannelBasedPromotionActionFormSubscriber extends AbstractConfi
             'auto_initialize' => false,
             'label' => $channel->getName(),
             'currency' => $channel->getBaseCurrency()->getCode(),
+            'property_path' => '[' . $channel->getCode() . ']',
+            'block_name' => 'entry',
+            'error_bubbling' => false,
         ];
 
         $data = array_key_exists($channel->getCode(), $data) ? $data[$channel->getCode()] : [];
