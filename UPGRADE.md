@@ -340,6 +340,8 @@ These services will be generated automatically based on subject name.
 * Removed `Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonChoiceType` and `Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonCodeChoiceType` form types.
   Use `Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonAutocompleteChoiceType` instead.
 
+* Removed method `findNodesTreeSorted()` from `Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface` - provide your own implementation instead. 
+
 ### Taxonomy / TaxonomyBundle
 
 ### ThemeBundle

@@ -89,28 +89,6 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
     /**
      * {@inheritdoc}
      */
-    public function findNodesTreeSorted($rootCode = null)
-    {
-        $queryBuilder = $this->createQueryBuilder('o')
-            ->addOrderBy('o.root')
-            ->addOrderBy('o.left')
-            ->addOrderBy('o.position')
-        ;
-
-        if (null !== $rootCode) {
-            $queryBuilder
-                ->join('o.root', 'root')
-                ->andWhere('root.code = :rootCode')
-                ->setParameter('rootCode', $rootCode)
-            ;
-        }
-
-        return $queryBuilder->getQuery()->getResult();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function findByNamePart($phrase, $locale)
     {
         return $this->createQueryBuilder('o')
