@@ -33,7 +33,7 @@ sylius:
                 values: Valores
                 choose: Elige una opción
                 min: Mínima
-                max: Máxima
+                max: Máx. entradas
             text:
                 min: Longitud mínima
                 max: Longitud máxima
