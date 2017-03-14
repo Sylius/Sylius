@@ -27,6 +27,22 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function setPriority($priority)
+    {
+        $this->getDocument()->fillField('Priority', $priority);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPriority()
+    {
+        return $this->getElement('priority')->getValue();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function checkChannelsState($channelName)
     {
         $field = $this->getDocument()->findField($channelName);
@@ -116,6 +132,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     {
         return [
             'code' => '#sylius_promotion_code',
+            'priority' => '#sylius_promotion_priority',
             'coupon_based' => '#sylius_promotion_couponBased',
             'ends_at' => '#sylius_promotion_endsAt',
             'ends_at_date' => '#sylius_promotion_endsAt_date',

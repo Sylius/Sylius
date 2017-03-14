@@ -118,6 +118,14 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
+     * @When I remove its priority
+     */
+    public function iRemoveItsPriority()
+    {
+        $this->updatePage->setPriority(null);
+    }
+
+    /**
      * @Then the :promotionName promotion should appear in the registry
      * @Then the :promotionName promotion should exist in the registry
      * @Then this promotion should still be named :promotionName
@@ -601,6 +609,16 @@ final class ManagingPromotionsContext implements Context
             $value,
             sprintf('Expected last promotion\'s %s to be "%s", but it is "%s".', $field, $value, $actualValue)
         );
+    }
+
+    /**
+     * @Given the :promotion promotion should have priority :priority
+     */
+    public function thePromotionsShouldHavePriority(PromotionInterface $promotion, $priority)
+    {
+        $this->iWantToModifyAPromotion($promotion);
+
+        Assert::same($this->updatePage->getPriority(), $priority);
     }
 
     /**

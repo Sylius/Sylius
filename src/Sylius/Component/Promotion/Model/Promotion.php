@@ -174,7 +174,7 @@ class Promotion implements PromotionInterface
      */
     public function setPriority($priority)
     {
-        $this->priority = $priority;
+        $this->priority = null === $priority ? -1 : $priority;
     }
 
     /**
