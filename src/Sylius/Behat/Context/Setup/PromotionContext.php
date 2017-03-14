@@ -21,7 +21,7 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
-use Sylius\Component\Core\Promotion\Checker\Rule\CustomerGroupRuleChecker;
+use Sylius\Bundle\CoreBundle\Promotion\Checker\Rule\CustomerGroupRuleChecker;
 use Sylius\Component\Core\Test\Factory\TestPromotionFactoryInterface;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
 use Sylius\Component\Promotion\Factory\PromotionCouponFactoryInterface;

@@ -28,10 +28,10 @@
             <argument type="service" id="sylius.promotion_applicator" />
         </service>
 
-        <service id="sylius.promotion_rule_checker.item_total" class="Sylius\Component\Promotion\Checker\Rule\ItemTotalRuleChecker">
+        <service id="sylius.promotion_rule_checker.item_total" class="Sylius\Bundle\PromotionBundle\Checker\Rule\ItemTotalRuleChecker">
             <tag name="sylius.promotion_rule_checker" type="item_total" label="Item total" />
         </service>
-        <service id="sylius.promotion_rule_checker.cart_quantity" class="Sylius\Component\Promotion\Checker\Rule\CartQuantityRuleChecker">
+        <service id="sylius.promotion_rule_checker.cart_quantity" class="Sylius\Bundle\PromotionBundle\Checker\Rule\CartQuantityRuleChecker">
             <tag name="sylius.promotion_rule_checker" type="cart_quantity" label="Cart quantity" />
         </service>
 

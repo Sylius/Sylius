@@ -196,6 +196,10 @@ You can bring back previous configuration by overriding current routing with you
   * from `SyliusCoreBundle:Email:passwordReset.html.twig` to `SyliusShopBundle:Email:passwordReset.html.twig`
   * from `SyliusCoreBundle:Email:verification.html.twig` to `SyliusShopBundle:Email:verification.html.twig`
 
+* Promotion action and rules have been moved from `Sylius\Component\Core\Promotion\Checker\Rule` to `Sylius\Bundle\CoreBundle\Promotion\Checker\Rule` 
+and from `Sylius\Component\Core\Promotion\Action` to `Sylius\Bundle\CoreBundle\Promotion\Action`. Interfaces and abstract class have been left in the component.
+Change a FQCN of class if you have used one of them.
+
 ### Currency / CurrencyBundle
 
 * The following classes were removed due to being no longer used in current implementation:
@@ -300,6 +304,10 @@ After:
 * `->findOneByIdAndProductId($id, $productId)` has been added to `ProductVariantRepository`. 
 
 ### Promotion / PromotionBundle
+
+* Promotion action and rules have been moved from `Sylius\Component\Promotion\Checker\Rule` to `Sylius\Bundle\PromotionBundlPromotion\Checker\Rule` 
+and from `Sylius\Component\Promotion\Action` to `Sylius\Bundle\PromotionBundle\Action`. Interfaces and abstract class have been left in the component.
+Change a FQCN of class if you have used one of them.
 
 ### Registry / RegistryBundle
 

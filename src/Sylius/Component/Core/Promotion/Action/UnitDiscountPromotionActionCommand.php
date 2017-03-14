@@ -15,7 +15,6 @@ use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
-use Sylius\Component\Promotion\Action\PromotionActionCommandInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
