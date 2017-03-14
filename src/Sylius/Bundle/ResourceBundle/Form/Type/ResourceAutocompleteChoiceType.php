@@ -79,6 +79,10 @@ class ResourceAutocompleteChoiceType extends AbstractType
         $view->vars['choice_name'] = $options['choice_name'];
         $view->vars['choice_value'] = $options['choice_value'];
         $view->vars['placeholder'] = $options['placeholder'];
+        $view->vars['remote_criteria_type'] = $options['remote_criteria_type'];
+        $view->vars['remote_criteria_name'] = $options['remote_criteria_name'];
+        $view->vars['remote_route'] = $options['remote_route'];
+        $view->vars['remote_route_parameters'] = $options['remote_route_parameters'];
     }
 
     /**
@@ -98,12 +102,17 @@ class ResourceAutocompleteChoiceType extends AbstractType
                 'repository' => function (Options $options) {
                     return $this->resourceRepositoryRegistry->get($options['resource']);
                 },
+                'remote_criteria_type' => 'contains',
+                'remote_criteria_name' => 'name',
+                'remote_route' => null,
+                'remote_route_parameters' => []
             ])
             ->setAllowedTypes('resource', ['string'])
             ->setAllowedTypes('multiple', ['bool'])
             ->setAllowedTypes('choice_name', ['string'])
             ->setAllowedTypes('choice_value', ['string'])
             ->setAllowedTypes('placeholder', ['string'])
+            ->setAllowedTypes('remote_route_parameters', ['array'])
         ;
     }
 

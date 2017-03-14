@@ -60,4 +60,9 @@ final class RecursiveTransformerSpec extends ObjectBehavior
         $this->shouldThrow(TransformationFailedException::class)->during('transform', [new \stdClass()]);
         $this->shouldThrow(TransformationFailedException::class)->during('reverseTransform', [new \stdClass()]);
     }
+
+    function it_transforms_null_into_empty_array_collection()
+    {
+        $this->transform(null)->shouldBeLike(new ArrayCollection());
+    }
 }

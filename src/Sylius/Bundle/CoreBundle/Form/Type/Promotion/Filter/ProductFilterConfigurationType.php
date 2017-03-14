@@ -11,8 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Promotion\Filter;
 
-use Sylius\Bundle\ProductBundle\Form\Type\ProductChoiceType;
-use Sylius\Component\Core\Repository\ProductRepositoryInterface;
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceAutocompleteChoiceType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -41,14 +40,18 @@ final class ProductFilterConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('products', ProductChoiceType::class, [
+            ->add('products', ResourceAutocompleteChoiceType::class, [
                 'label' => 'sylius.form.promotion_filter.products',
                 'multiple' => true,
                 'required' => false,
+                'remote_route' => 'sylius_admin_ajax_product_index',
+                'remote_criteria_type' => 'contains',
+                'remote_criteria_name' => 'search',
+                'choice_value' => 'id',
+                'choice_name' => 'name',
+                'resource' => 'sylius.product',
             ])
         ;
-
-        $builder->get('products')->addModelTransformer($this->productsToCodesTransformer);
     }
 
     /**

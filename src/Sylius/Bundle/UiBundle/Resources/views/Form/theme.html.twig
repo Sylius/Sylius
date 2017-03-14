@@ -196,7 +196,11 @@
     {{- form_label(form) -}}
     <div
             class="sylius-autocomplete ui fluid search selection dropdown {% if multiple %}multiple{% endif %}"
-            data-url="{{ remote_url }}"
+            {% if remote_url is defined %}
+                data-url="{{ remote_url }}"
+            {% elseif remote_route is defined %}
+                data-url="{{ path(remote_route, remote_route_parameters) }}"
+            {% endif %}
             data-choice-name="{{ choice_name }}"
             data-choice-value="{{ choice_value }}"
             data-criteria-type="{{ remote_criteria_type }}"
