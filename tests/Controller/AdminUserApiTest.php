@@ -39,7 +39,7 @@ class AdminUserApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_denies_admin_user_creation_for_not_authenticated_users()
+    public function it_denies_an_admin_user_creation_for_not_authenticated_users()
     {
         $this->client->request('POST', '/api/v1/users/');
 
@@ -50,7 +50,7 @@ class AdminUserApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allow_to_create_admin_user_without_specifying_required_data()
+    public function it_does_not_allow_to_create_an_admin_user_without_specifying_required_data()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -63,7 +63,7 @@ class AdminUserApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_to_create_admin_user()
+    public function it_allows_to_create_an_admin_user()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/locales.yml');
@@ -87,7 +87,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_create_admin_user_with_not_required_fields()
+    public function it_allows_to_create_an_admin_user_with_not_required_fields()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/locales.yml');
@@ -114,7 +114,7 @@ EOT;
     /**
      * @test
      */
-    public function it_denies_access_to_users_list_for_not_authenticated_user()
+    public function it_denies_access_to_an_admin_users_list_for_not_authenticated_user()
     {
         $this->client->request('GET', '/api/v1/users/');
 
@@ -125,7 +125,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_get_users_list()
+    public function it_allows_to_get_an_admin_users_list()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/admin_users.yml');
@@ -139,7 +139,7 @@ EOT;
     /**
      * @test
      */
-    public function it_denies_access_to_admin_user_details_for_not_authenticated_users()
+    public function it_denies_access_to_an_admin_user_details_for_not_authenticated_users()
     {
         $this->client->request('GET', '/api/v1/users/1');
 
@@ -150,7 +150,7 @@ EOT;
     /**
      * @test
      */
-    public function it_returns_not_found_response_when_requesting_details_of_a_admin_user_which_does_not_exist()
+    public function it_returns_not_found_response_when_requesting_details_of_an_admin_user_which_does_not_exist()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -163,7 +163,7 @@ EOT;
     /**
      * @test
      */
-    public function it_shows_admin_user_details()
+    public function it_shows_an_admin_user_details()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $users = $this->loadFixturesFromFile('resources/admin_users.yml');
@@ -177,7 +177,7 @@ EOT;
     /**
      * @test
      */
-    public function it_denies_full_admin_user_update_for_not_authenticated_users()
+    public function it_denies_an_admin_user_full_update_for_not_authenticated_users()
     {
         $this->client->request('PUT', '/api/v1/users/1');
 
@@ -189,7 +189,7 @@ EOT;
     /**
      * @test
      */
-    public function it_returns_not_found_response_when_requesting_full_update_of_a_admin_user_which_does_not_exist()
+    public function it_returns_not_found_response_when_requesting_full_update_of_an_admin_user_which_does_not_exist()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -202,7 +202,7 @@ EOT;
     /**
      * @test
      */
-    public function it_does_not_allow_to_update_admin_user_fully_without_specifying_required_data()
+    public function it_does_not_allow_to_update_an_admin_user_fully_without_specifying_required_data()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $users = $this->loadFixturesFromFile('resources/admin_users.yml');
@@ -216,7 +216,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_update_admin_user_fully()
+    public function it_allows_to_update_an_admin_user_fully()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $users = $this->loadFixturesFromFile('resources/admin_users.yml');
@@ -249,7 +249,7 @@ EOT;
     /**
      * @test
      */
-    public function it_returns_not_found_response_when_requesting_partial_update_of_a_admin_user_which_does_not_exist()
+    public function it_returns_not_found_response_when_requesting_partial_update_of_an_admin_user_which_does_not_exist()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -262,7 +262,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_update_user_partially()
+    public function it_allows_to_update_an_admin_user_partially()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $users = $this->loadFixturesFromFile('resources/admin_users.yml');
@@ -289,7 +289,7 @@ EOT;
     /**
      * @test
      */
-    public function it_denies_admin_user_deletion_for_not_authenticated_users()
+    public function it_denies_an_admin_user_deletion_for_not_authenticated_users()
     {
         $this->client->request('DELETE', '/api/v1/users/1');
 
@@ -300,7 +300,7 @@ EOT;
     /**
      * @test
      */
-    public function it_returns_not_found_response_when_requesting_deletion_of_a_admin_user_which_does_not_exist()
+    public function it_returns_not_found_response_when_requesting_deletion_of_an_admin_user_which_does_not_exist()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -313,7 +313,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_delete_user()
+    public function it_allows_to_delete_an_admin_user()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $users = $this->loadFixturesFromFile('resources/admin_users.yml');
@@ -332,7 +332,7 @@ EOT;
     /**
      * @test
      */
-    public function it_does_not_allow_to_delete_current_logged_admin_user()
+    public function it_does_not_allow_to_delete_current_logged_an_admin_user()
     {
         $user = $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/admin_users.yml');

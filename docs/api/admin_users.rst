@@ -11,11 +11,11 @@ If you request an admin user via API, you will receive an object with the follow
 +----------+---------------------------------+
 | Field    | Description                     |
 +==========+=================================+
-| id       | Admin user is                   |
+| id       | Admin user's id                 |
 +----------+---------------------------------+
-| username | Admin user name                 |
+| username | Admin user's name               |
 +----------+---------------------------------+
-| email    | Admin user email                |
+| email    | Admin user's email              |
 +----------+---------------------------------+
 | enabled  | Flag set if the user is enabled |
 +----------+---------------------------------+
@@ -25,11 +25,11 @@ If you request for more detailed data, you will receive an object with the follo
 +-------------------+-------------------------------------------------------+
 | Field             | Description                                           |
 +===================+=======================================================+
-| id                | Admin user is                                         |
+| id                | Admin user's id                                       |
 +-------------------+-------------------------------------------------------+
-| username          | Admin user name                                       |
+| username          | Admin user's name                                     |
 +-------------------+-------------------------------------------------------+
-| email             | Admin user email                                      |
+| email             | Admin user's email                                    |
 +-------------------+-------------------------------------------------------+
 | enabled           | Flag set if the user is enabled                       |
 +-------------------+-------------------------------------------------------+
@@ -37,7 +37,7 @@ If you request for more detailed data, you will receive an object with the follo
 +-------------------+-------------------------------------------------------+
 | emailCanonical    | Email of the admin user in canonical form             |
 +-------------------+-------------------------------------------------------+
-| roles             | Roles of the admin users                              |
+| roles             | Roles of the admin user                               |
 +-------------------+-------------------------------------------------------+
 | firstName         | The admin user's first name                           |
 +-------------------+-------------------------------------------------------+
@@ -80,7 +80,7 @@ Definition
 Example
 ^^^^^^^
 
-To create an new admin user use the below method:
+To create a new admin user use the below method:
 
 .. code-block:: bash
 
@@ -90,7 +90,7 @@ To create an new admin user use the below method:
         -X POST \
         --data '
             {
-                "username": "Barlog",
+                "username": "Balrog",
                 "email": "teamEvil@middleearth.com",
                 "plainPassword": "youShallNotPass",
                 "localeCode": "en_US"
@@ -108,7 +108,7 @@ Exemplary Response
 
     {
         "id": 7,
-        "username": "Barlog",
+        "username": "Balrog",
         "usernameCanonical": "barlog",
         "roles": [
             "ROLE_ADMINISTRATION_ACCESS"
@@ -120,7 +120,8 @@ Exemplary Response
 
 .. warning::
 
-    If you try to create an admin user without username, email, password or locale's code , you will receive a ``400 Bad Request`` error, that will contain validation errors.
+    If you try to create an admin user without username, email, password or locale's code, you will receive a ``400 Bad Request`` error,
+    that will contain validation errors.
 
 Example
 ^^^^^^^
@@ -196,9 +197,9 @@ Example
         -X POST \
         --data '
             {
-                "firstName": "Barlog",
-                "lastName": "Barlog!",
-                "username": "Barlog",
+                "firstName": "Balrog",
+                "lastName": "of Morgoth",
+                "username": "Balrog",
                 "email": "teamEvil@middleearth.com",
                 "plainPassword": "youShallNotPass",
                 "localeCode": "en_US",
@@ -217,7 +218,7 @@ Exemplary Response
 
     {
         "id": 9,
-        "username": "Barlog",
+        "username": "Balrog",
         "usernameCanonical": "barlog",
         "roles": [
             "ROLE_ADMINISTRATION_ACCESS"
@@ -225,8 +226,8 @@ Exemplary Response
         "email": "teamEvil@middleearth.com",
         "emailCanonical": "teamevil@middleearth.com",
         "enabled": true,
-        "firstName": "Barlog",
-        "lastName": "Barlog!"
+        "firstName": "Balrog",
+        "lastName": "of Morgoth"
     }
 
 Getting a Single Admin User
@@ -276,7 +277,7 @@ Exemplary Response
 
     {
         "id": 9,
-        "username": "Barlog",
+        "username": "Balrog",
         "usernameCanonical": "barlog",
         "roles": [
             "ROLE_ADMINISTRATION_ACCESS"
@@ -284,8 +285,8 @@ Exemplary Response
         "email": "teamEvil@middleearth.com",
         "emailCanonical": "teamevil@middleearth.com",
         "enabled": true,
-        "firstName": "Barlog",
-        "lastName": "Barlog!"
+        "firstName": "Balrog",
+        "lastName": "of Morgoth"
     }
 
 Collection of Admin Users
@@ -361,7 +362,7 @@ Exemplary Response
                 },
                 {
                     "id": 9,
-                    "username": "Barlog",
+                    "username": "Balrog",
                     "email": "teamEvil@middleearth.com",
                     "enabled": true
                 }
@@ -557,7 +558,7 @@ Exemplary Response
 
 .. warning::
 
-    If you try to delete the admin user which is currently logged, you will receive a ``422 Unprocessable Entity`` error.
+    If you try to delete the admin user which is currently logged in, you will receive a ``422 Unprocessable Entity`` error.
 
 Example
 ^^^^^^^
