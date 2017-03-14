@@ -9,7 +9,7 @@
 {% form_theme form 'SyliusUiBundle:Form:theme.html.twig' %}
 
 {% block content %}
-{{ headers.default(header|trans, 'random', 'sylius.ui.manage_discounts_and_promotional_campaigns'|trans) }}
+{{ headers.default(promotion.name, 'random', configuration.vars.subheader|default(header)|trans) }}
 
 {% include '@SyliusAdmin/PromotionCoupon/Generate/_breadcrumb.html.twig' %}
 

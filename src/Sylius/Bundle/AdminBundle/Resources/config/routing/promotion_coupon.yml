@@ -4,7 +4,7 @@ sylius_admin_promotion_coupon_index:
     defaults:
         _controller: sylius.controller.promotion_coupon:indexAction
         _sylius:
-            template: "@SyliusAdmin/Crud/index.html.twig"
+            template: "@SyliusAdmin/PromotionCoupon/index.html.twig"
             grid: sylius_admin_promotion_coupon
             section: admin
             permission: true
@@ -15,7 +15,7 @@ sylius_admin_promotion_coupon_index:
                 templates:
                     breadcrumb: "@SyliusAdmin/PromotionCoupon/Index/_breadcrumb.html.twig"
                 icon: tags
-                subheader: sylius.ui.manage_discounts_and_promotional_campaigns
+                subheader: sylius.ui.manage_coupons
 
 sylius_admin_promotion_coupon_create:
     path: /new
@@ -41,7 +41,7 @@ sylius_admin_promotion_coupon_create:
                 templates:
                     form: "@SyliusAdmin/PromotionCoupon/_form.html.twig"
                     breadcrumb: "@SyliusAdmin/PromotionCoupon/Create/_breadcrumb.html.twig"
-                subheader: sylius.ui.manage_discounts_and_promotional_campaigns
+                    header_title: "@SyliusAdmin/PromotionCoupon/Create/_headerTitle.html.twig"
 
 sylius_admin_promotion_coupon_update:
     path: /{id}/edit
