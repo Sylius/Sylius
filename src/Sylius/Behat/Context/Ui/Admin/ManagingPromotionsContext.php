@@ -122,7 +122,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iRemoveItsPriority()
     {
-        $this->updatePage->setItsPriority(null);
+        $this->updatePage->setPriority(null);
     }
 
     /**
@@ -612,6 +612,16 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
+     * @Given the :promotion promotion should have priority :priority
+     */
+    public function thePromotionsShouldHavePriority(PromotionInterface $promotion, $priority)
+    {
+        $this->iWantToModifyAPromotion($promotion);
+
+        Assert::same($this->updatePage->getPriority(), $priority);
+    }
+
+    /**
      * @param string $element
      * @param string $expectedMessage
      */
@@ -632,15 +642,5 @@ final class ManagingPromotionsContext implements Context
         $this->iWantToModifyAPromotion($promotion);
 
         Assert::true($this->updatePage->hasResourceValues([$field => 1]));
-    }
-
-    /**
-     * @Given the :promotion promotion should have priority :priority
-     */
-    public function thePromotionsShouldHavePriority($promotion, $priority)
-    {
-        $this->iWantToModifyAPromotion($promotion);
-
-        Assert::same($this->updatePage->getItsPriority(), $priority);
     }
 }

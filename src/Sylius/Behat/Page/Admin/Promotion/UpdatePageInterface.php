@@ -23,12 +23,12 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     /**
      * @param int|null $priority
      */
-    public function setItsPriority($priority);
+    public function setPriority($priority);
 
     /**
      * @return int
      */
-    public function getItsPriority();
+    public function getPriority();
 
     /**
      * @param string $name

@@ -27,7 +27,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function setItsPriority($priority)
+    public function setPriority($priority)
     {
         $this->getDocument()->fillField('Priority', $priority);
     }
@@ -35,7 +35,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function getItsPriority()
+    public function getPriority()
     {
         return $this->getElement('priority')->getValue();
     }
