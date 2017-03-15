@@ -1,5 +1,3 @@
-{% set event_prefix = app.request.attributes.get('_route')|replace('_', '.') %}
-
 <!DOCTYPE html>
 
 <html lang="{{ app.request.locale|slice(0, 2) }}">
@@ -23,16 +21,16 @@
 <div class="pusher">
     {% block top %}
         <div id="menu" class="ui large sticky inverted stackable menu">
-            {{ sonata_block_render_event(event_prefix ~ '.before_currency_switcher') }}
+            {{ sonata_block_render_event('sylius.shop.layout.before_currency_switcher') }}
 
             {{ render(controller('sylius.controller.shop.currency_switch:renderAction')) }}
             {{ render(controller('sylius.controller.shop.locale_switch:renderAction')) }}
 
-            {{ sonata_block_render_event(event_prefix ~ '.before_security_widget') }}
+            {{ sonata_block_render_event('sylius.shop.layout.before_security_widget') }}
 
             {{ render(controller('sylius.controller.shop.security_widget:renderAction')) }}
 
-            {{ sonata_block_render_event(event_prefix ~ '.after_security_widget') }}
+            {{ sonata_block_render_event('sylius.shop.layout.after_security_widget') }}
         </div>
     {% endblock %}
 
@@ -41,7 +39,7 @@
             <header>
                 {% include '@SyliusShop/_header.html.twig' %}
 
-                {{ sonata_block_render_event(event_prefix ~ '.after_header') }}
+                {{ sonata_block_render_event('sylius.shop.layout.after_header') }}
 
                 {{ render(url('sylius_shop_partial_taxon_index_by_code', {'code': 'category', 'template': '@SyliusShop/Taxon/_horizontalMenu.html.twig'})) }}
             </header>
@@ -49,12 +47,12 @@
 
         {% include '@SyliusUi/_flashes.html.twig' %}
 
-        {{ sonata_block_render_event(event_prefix ~ '.before_content') }}
+        {{ sonata_block_render_event('sylius.shop.layout.before_content') }}
 
         {% block content %}
         {% endblock %}
 
-        {{ sonata_block_render_event(event_prefix ~ '.after_content') }}
+        {{ sonata_block_render_event('sylius.shop.layout.after_content') }}
     </div>
 
     {% block footer %}
