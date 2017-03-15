@@ -2,5 +2,5 @@
     <h3 class="ui dividing header">{{ 'sylius.ui.taxes'|trans }}</h3>
     {{ form_row(form.taxCategory) }}
 
-    {{ sonata_block_render_event(app.request.attributes.get('_route')|replace('_', '.') ~ '.tab_taxes', {'form': form}) }}
+    {{ sonata_block_render_event('sylius.admin.product_variant.' ~ action ~ '.tab_taxes', {'form': form}) }}
 </div>

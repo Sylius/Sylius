@@ -34,8 +34,6 @@
     </div>
 {% endif %}
 
-{{ sonata_block_render_event(app.request.attributes.get('_route')|replace('_', '.') ~ '.before_grid', { 'grid': grid }) }}
-
 <div class="ui segment">
     {% if definition.limits|length > 1 and data|length > min(definition.limits) %}
     <div class="ui two column fluid stackable grid">

@@ -1,5 +1,11 @@
 {% extends 'knp_menu.html.twig' %}
 
+{% if 'create' in app.request.attributes.get('_route') %}
+    {% set action = 'create' %}
+{% else %}
+    {% set action = 'update' %}
+{% endif %}
+
 {% block list %}
 {% set form = (options.form) %}
 <div class="ui stackable grid sylius-tabular-form">

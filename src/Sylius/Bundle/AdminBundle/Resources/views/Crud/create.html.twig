@@ -3,7 +3,7 @@
 {% import 'SyliusUiBundle:Macro:headers.html.twig' as headers %}
 
 {% set header = configuration.vars.header|default(metadata.applicationName~'.ui.new_'~metadata.name) %}
-{% set event_prefix = app.request.attributes.get('_route')|replace('_', '.') %}
+{% set event_prefix = metadata.applicationName ~ '.admin.' ~ metadata.name ~ '.create' %}
 
 {% block title %}{{ parent() }} {{ header|trans }}{% endblock %}
 

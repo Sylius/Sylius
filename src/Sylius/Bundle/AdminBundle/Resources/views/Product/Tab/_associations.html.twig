@@ -22,5 +22,5 @@
         </div>
     {% endfor %}
 
-    {{ sonata_block_render_event(app.request.attributes.get('_route')|replace('_', '.') ~ '.tab_associations', {'form': form}) }}
+    {{ sonata_block_render_event('sylius.admin.product.' ~ action ~ '.tab_associations', {'form': form}) }}
 </div>
