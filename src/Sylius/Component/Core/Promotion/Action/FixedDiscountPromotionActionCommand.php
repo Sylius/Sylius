@@ -11,10 +11,8 @@
 
 namespace Sylius\Component\Core\Promotion\Action;
 
-use Sylius\Bundle\PromotionBundle\Form\Type\Action\FixedDiscountConfigurationType;
 use Sylius\Component\Core\Distributor\ProportionalIntegerDistributorInterface;
 use Sylius\Component\Core\Promotion\Applicator\UnitsPromotionAdjustmentsApplicatorInterface;
-use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Webmozart\Assert\Assert;
@@ -89,14 +87,6 @@ final class FixedDiscountPromotionActionCommand extends DiscountPromotionActionC
         $this->unitsPromotionAdjustmentsApplicator->apply($subject, $promotion, $splitPromotion);
 
         return true;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getConfigurationFormType()
-    {
-        return FixedDiscountConfigurationType::class;
     }
 
     /**
