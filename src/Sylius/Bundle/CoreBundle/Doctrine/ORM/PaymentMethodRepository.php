@@ -23,6 +23,7 @@ class PaymentMethodRepository extends BasePaymentMethodRepository implements Pay
     public function createListQueryBuilder($locale)
     {
         return $this->createQueryBuilder('o')
+            ->leftJoin('o.gatewayConfig', 'gatewayConfig')
             ->leftJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
             ->setParameter('locale', $locale)
         ;

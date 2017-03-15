@@ -29,7 +29,7 @@ sylius_grid:
                     type: string
                     path: gatewayConfig.gatewayName
                     label: sylius.ui.gateway
-                    sortable: ~
+                    sortable: gatewayConfig.gatewayName
                 enabled:
                     type: twig
                     label: sylius.ui.enabled
