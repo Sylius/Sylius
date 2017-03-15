@@ -43,6 +43,8 @@
             <argument>Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface</argument>
             <argument>rule checker</argument>
         </service>
+        <service id="sylius.form_registry.promotion_rule_checker" class="Sylius\Bundle\ResourceBundle\Form\Registry\FormTypeRegistry" />
+
         <service id="sylius.registry_promotion_action" class="Sylius\Component\Registry\ServiceRegistry">
             <argument>Sylius\Component\Promotion\Action\PromotionActionCommandInterface</argument>
             <argument>promotion action</argument>

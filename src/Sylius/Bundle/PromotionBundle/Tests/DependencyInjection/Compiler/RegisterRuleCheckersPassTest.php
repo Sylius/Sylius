@@ -36,9 +36,10 @@ final class RegisterRuleCheckersPassTest extends AbstractCompilerPassTestCase
     public function it_registers_collected_rule_checkers_in_the_registry()
     {
         $this->setDefinition('sylius.registry_promotion_rule_checker', new Definition());
+        $this->setDefinition('sylius.form_registry.promotion_rule_checker', new Definition());
         $this->setDefinition(
             'custom_promotion_rule_checker',
-            (new Definition())->addTag('sylius.promotion_rule_checker', ['type' => 'custom', 'label' => 'Label'])
+            (new Definition())->addTag('sylius.promotion_rule_checker', ['type' => 'custom', 'label' => 'Label', 'form-type' => 'FQCN'])
         );
 
         $this->compile();
@@ -56,9 +57,10 @@ final class RegisterRuleCheckersPassTest extends AbstractCompilerPassTestCase
     public function it_creates_parameter_which_maps_rule_type_to_label()
     {
         $this->setDefinition('sylius.registry_promotion_rule_checker', new Definition());
+        $this->setDefinition('sylius.form_registry.promotion_rule_checker', new Definition());
         $this->setDefinition(
             'custom_promotion_rule_checker',
-            (new Definition())->addTag('sylius.promotion_rule_checker', ['type' => 'custom', 'label' => 'Label'])
+            (new Definition())->addTag('sylius.promotion_rule_checker', ['type' => 'custom', 'label' => 'Label', 'form-type' => 'FQCN'])
         );
 
         $this->compile();
@@ -66,6 +68,27 @@ final class RegisterRuleCheckersPassTest extends AbstractCompilerPassTestCase
         $this->assertContainerBuilderHasParameter(
             'sylius.promotion_rules',
             ['custom' => 'Label']
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function it_registers_collected_rule_checkers_form_types_in_the_registry()
+    {
+        $this->setDefinition('sylius.registry_promotion_rule_checker', new Definition());
+        $this->setDefinition('sylius.form_registry.promotion_rule_checker', new Definition());
+        $this->setDefinition(
+            'custom_promotion_rule_checker',
+            (new Definition())->addTag('sylius.promotion_rule_checker', ['type' => 'custom', 'label' => 'Label', 'form-type' => 'FQCN'])
+        );
+
+        $this->compile();
+
+        $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
+            'sylius.form_registry.promotion_rule_checker',
+            'add',
+            ['custom', 'default', 'FQCN']
         );
     }
 }
