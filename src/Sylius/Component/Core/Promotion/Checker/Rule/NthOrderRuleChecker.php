@@ -11,7 +11,6 @@
 
 namespace Sylius\Component\Core\Promotion\Checker\Rule;
 
-use Sylius\Bundle\CoreBundle\Form\Type\Promotion\Rule\NthOrderConfigurationType;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
@@ -63,13 +62,5 @@ final class NthOrderRuleChecker implements RuleCheckerInterface
         }
 
         return $this->orderRepository->countByCustomer($customer) === ($configuration['nth'] - 1);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getConfigurationFormType()
-    {
-        return NthOrderConfigurationType::class;
     }
 }

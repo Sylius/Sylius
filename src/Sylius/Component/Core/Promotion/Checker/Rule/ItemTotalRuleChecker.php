@@ -11,7 +11,6 @@
 
 namespace Sylius\Component\Core\Promotion\Checker\Rule;
 
-use Sylius\Bundle\PromotionBundle\Form\Type\Rule\ItemTotalConfigurationType;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
@@ -48,13 +47,5 @@ final class ItemTotalRuleChecker implements RuleCheckerInterface, ChannelBasedRu
         }
 
         return $this->itemTotalRuleChecker->isEligible($subject, $configuration[$channelCode]);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getConfigurationFormType()
-    {
-        return ItemTotalConfigurationType::class;
     }
 }

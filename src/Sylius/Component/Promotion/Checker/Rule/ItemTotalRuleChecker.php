@@ -11,7 +11,6 @@
 
 namespace Sylius\Component\Promotion\Checker\Rule;
 
-use Sylius\Bundle\PromotionBundle\Form\Type\Rule\ItemTotalConfigurationType;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 /**
@@ -27,13 +26,5 @@ final class ItemTotalRuleChecker implements RuleCheckerInterface
     public function isEligible(PromotionSubjectInterface $subject, array $configuration)
     {
         return $subject->getPromotionSubjectTotal() >= $configuration['amount'];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getConfigurationFormType()
-    {
-        return ItemTotalConfigurationType::class;
     }
 }

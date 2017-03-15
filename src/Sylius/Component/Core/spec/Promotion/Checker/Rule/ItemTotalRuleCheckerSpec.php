@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Core\Promotion\Checker\Rule;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\PromotionBundle\Form\Type\Rule\ItemTotalConfigurationType;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Promotion\Checker\Rule\ChannelBasedRuleCheckerInterface;
@@ -74,10 +73,5 @@ final class ItemTotalRuleCheckerSpec extends ObjectBehavior
             ->shouldThrow(\InvalidArgumentException::class)
             ->during('isEligible', [$promotionSubject, []])
         ;
-    }
-
-    function it_returns_a_total_configuration_form_type()
-    {
-        $this->getConfigurationFormType()->shouldReturn(ItemTotalConfigurationType::class);
     }
 }

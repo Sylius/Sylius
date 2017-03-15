@@ -11,7 +11,6 @@
 
 namespace Sylius\Component\Core\Promotion\Checker\Rule;
 
-use Sylius\Bundle\CoreBundle\Form\Type\Promotion\Rule\CustomerGroupConfigurationType;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
@@ -47,13 +46,5 @@ class CustomerGroupRuleChecker implements RuleCheckerInterface
         }
 
         return $configuration['group_code'] === $customer->getGroup()->getCode();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getConfigurationFormType()
-    {
-        return CustomerGroupConfigurationType::class;
     }
 }

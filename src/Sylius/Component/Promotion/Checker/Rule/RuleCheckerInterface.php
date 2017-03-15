@@ -25,9 +25,4 @@ interface RuleCheckerInterface
      * @return bool
      */
     public function isEligible(PromotionSubjectInterface $subject, array $configuration);
-
-    /**
-     * @return string
-     */
-    public function getConfigurationFormType();
 }
