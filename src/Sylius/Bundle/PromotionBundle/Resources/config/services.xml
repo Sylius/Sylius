@@ -47,6 +47,7 @@
             <argument>Sylius\Component\Promotion\Action\PromotionActionCommandInterface</argument>
             <argument>promotion action</argument>
         </service>
+        <service id="sylius.form_registry.promotion_action" class="Sylius\Bundle\ResourceBundle\Form\Registry\FormTypeRegistry" />
 
         <service id="sylius.active_promotions_provider" class="Sylius\Component\Promotion\Provider\ActivePromotionsProvider">
             <argument type="service" id="sylius.repository.promotion" />
