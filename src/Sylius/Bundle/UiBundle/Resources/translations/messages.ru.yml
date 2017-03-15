@@ -151,7 +151,7 @@ sylius:
         country_details: 'Информация о стране'
         coupon: 'Купон'
         coupon_based: 'Основана на купонах'
-        coupons: 'sylius.breadcrumb.promotion_coupon.index'
+        coupons: 'Купоны'
         create: 'Добавить'
         create_a_new_address: 'Добавить адрес'
         create_a_new_customer_account: 'Создание новой учетной записи клиента'
