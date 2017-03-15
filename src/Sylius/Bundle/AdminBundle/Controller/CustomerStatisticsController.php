@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\AdminBundle\Controller;
 
 use Sylius\Component\Core\Customer\Statistics\CustomerStatisticsProviderInterface;
-use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
