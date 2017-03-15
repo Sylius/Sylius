@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\ResourceBundle\Form\DataTransformer;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Form\DataTransformer\RecursiveTransformer;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
@@ -37,6 +38,20 @@ final class RecursiveTransformerSpec extends ObjectBehavior
         $this->shouldImplement(DataTransformerInterface::class);
     }
 
+    function it_returns_an_empty_array_collection_when_transforming_a_null(
+        DataTransformerInterface $decoratedTransformer
+    ) {
+        $this->transform(null)->shouldBeLike(new ArrayCollection());
+        $decoratedTransformer->transform(Argument::any())->shouldNotBeCalled();
+    }
+
+    function it_returns_an_empty_array_collection_when_reverse_transforming_a_null(
+        DataTransformerInterface $decoratedTransformer
+    ) {
+        $this->reverseTransform(null)->shouldBeLike(new ArrayCollection());
+        $decoratedTransformer->reverseTransform(Argument::any())->shouldNotBeCalled();
+    }
+
     function it_transforms_recursively_using_configured_transformer(DataTransformerInterface $decoratedTransformer)
     {
         $decoratedTransformer->transform('ABC')->willReturn('abc');
@@ -55,7 +70,7 @@ final class RecursiveTransformerSpec extends ObjectBehavior
         $this->reverseTransform(new ArrayCollection(['abc', 'cde', 'fgh']))->shouldBeLike(new ArrayCollection(['ABC', 'CDE', 'FGH']));
     }
 
-    function it_throws_transformation_failed_exception_if_transform_argument_is_not_collection()
+    function it_throws_transformation_failed_exception_if_transform_argument_is_not_collection_or_null()
     {
         $this->shouldThrow(TransformationFailedException::class)->during('transform', [new \stdClass()]);
         $this->shouldThrow(TransformationFailedException::class)->during('reverseTransform', [new \stdClass()]);

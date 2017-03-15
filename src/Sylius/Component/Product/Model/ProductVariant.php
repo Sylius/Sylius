@@ -113,6 +113,16 @@ class ProductVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
+    public function getDescriptor()
+    {
+        $name = empty($this->getName()) ? $this->getProduct()->getName() : $this->getName();
+
+        return trim(sprintf('%s (%s)', $name, $this->code));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getOptionValues()
     {
         return $this->optionValues;

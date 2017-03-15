@@ -2,7 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 imports:
-    - suites/api/taxon/managing_taxon.yml
+    - suites/api/taxon/managing_taxons.yml
+    - suites/api/product/managing_product_variants.yml
 
     - suites/cli/installer.yml
 

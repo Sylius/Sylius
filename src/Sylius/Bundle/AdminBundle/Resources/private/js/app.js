@@ -48,6 +48,13 @@
             }, 50);
         });
 
+        $(document).on('collection-form-add', function () {
+            $.each($('.sylius-autocomplete'), function (index, element) {
+                if ($._data($(element).get(0), 'events') == undefined) {
+                    $(element).autoComplete();
+                }
+            });
+        });
         $(document).on('collection-form-update', function () {
             $.each($('.sylius-autocomplete'), function (index, element) {
                 if ($._data($(element).get(0), 'events') == undefined) {

@@ -37,6 +37,11 @@ interface ProductVariantInterface extends
     public function setName($name);
 
     /**
+     * @return string
+     */
+    public function getDescriptor();
+
+    /**
      * @return Collection|ProductOptionValueInterface[]
      */
     public function getOptionValues();

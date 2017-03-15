@@ -335,6 +335,50 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Given /^the (product "[^"]+") has(?:| a| an) "([^"]+)" variant$/
+     * @Given /^(this product) has(?:| a| an) "([^"]+)" variant$/
+     * @Given /^(this product) has "([^"]+)", "([^"]+)" and "([^"]+)" variants$/
+     */
+    public function theProductHasVariants(ProductInterface $product, ...$variantNames)
+    {
+        $channel = $this->sharedStorage->get('channel');
+
+        foreach ($variantNames as $name) {
+            $this->createProductVariant(
+                $product,
+                $name,
+                0,
+                StringInflector::nameToUppercaseCode($name),
+                $channel
+            );
+        }
+    }
+
+    /**
+     * @Given /^the (product "[^"]+")(?:| also) has a nameless variant with code "([^"]+)"$/
+     * @Given /^(this product)(?:| also) has a nameless variant with code "([^"]+)"$/
+     * @Given /^(it)(?:| also) has a nameless variant with code "([^"]+)"$/
+     */
+    public function theProductHasNamelessVariantWithCode(ProductInterface $product, $variantCode)
+    {
+        $channel = $this->sharedStorage->get('channel');
+
+        $this->createProductVariant($product, null, 0, $variantCode, $channel);
+    }
+
+    /**
+     * @Given /^the (product "[^"]+")(?:| also) has(?:| a| an) "([^"]+)" variant with code "([^"]+)"$/
+     * @Given /^(this product)(?:| also) has(?:| a| an) "([^"]+)" variant with code "([^"]+)"$/
+     * @Given /^(it)(?:| also) has(?:| a| an) "([^"]+)" variant with code "([^"]+)"$/
+     */
+    public function theProductHasVariantWithCode(ProductInterface $product, $variantName, $variantCode)
+    {
+        $channel = $this->sharedStorage->get('channel');
+
+        $this->createProductVariant($product, $variantName, 0, $variantCode, $channel);
+    }
+
+    /**
      * @Given /^(this product) has "([^"]+)" variant priced at ("[^"]+") which does not require shipping$/
      */
     public function theProductHasVariantWhichDoesNotRequireShipping(
@@ -447,6 +491,8 @@ final class ProductContext implements Context
      */
     public function itComesInTheFollowingVariations(ProductInterface $product, TableNode $table)
     {
+        $channel = $this->sharedStorage->get('channel');
+
         foreach ($table->getHash() as $variantHash) {
             /** @var ProductVariantInterface $variant */
             $variant = $this->productVariantFactory->createNew();
@@ -455,8 +501,9 @@ final class ProductContext implements Context
             $variant->setCode(StringInflector::nameToUppercaseCode($variantHash['name']));
             $variant->addChannelPricing($this->createChannelPricingForChannel(
                 $this->getPriceFromString(str_replace(['$', '€', '£'], '', $variantHash['price'])),
-                $this->sharedStorage->get('channel')
+                $channel
             ));
+
             $variant->setProduct($product);
             $product->addVariant($variant);
         }

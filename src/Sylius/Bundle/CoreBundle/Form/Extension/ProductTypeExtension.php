@@ -70,6 +70,7 @@ final class ProductTypeExtension extends AbstractTypeExtension
                 'allow_delete' => true,
                 'by_reference' => false,
                 'label' => 'sylius.form.product.images',
+                'block_name' => 'entry',
             ])
         ;
     }

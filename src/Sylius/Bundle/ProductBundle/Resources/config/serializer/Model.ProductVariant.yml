@@ -6,11 +6,11 @@ Sylius\Component\Product\Model\ProductVariant:
             expose: true
             type: integer
             xml_attribute: true
-            groups: [Default, Detailed, DetailedCart]
+            groups: [Default, Detailed, DetailedCart, Autocomplete]
         code:
             expose: true 
             type: string 
-            groups: [Default, Detailed, DetailedCart] 
+            groups: [Default, Detailed, DetailedCart, Autocomplete] 
         position:
             expose: true 
             type: integer 
@@ -23,6 +23,10 @@ Sylius\Component\Product\Model\ProductVariant:
             expose: true 
             type: array 
             groups: [Default, Detailed, DetailedCart] 
+    virtual_properties:
+        getDescriptor:
+            serialized_name: descriptor
+            groups: [Autocomplete]
     relations:
         -   rel: self
             href:

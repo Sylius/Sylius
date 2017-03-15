@@ -86,7 +86,7 @@ final class ManagingTaxonsContext implements Context
     {
         $response = json_decode($this->client->getResponse()->getContent(), true);
 
-        Assert::eq($number, count($response));
+        Assert::eq(count($response), $number);
     }
 
     /**

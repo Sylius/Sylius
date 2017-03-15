@@ -12,9 +12,7 @@
 namespace Sylius\Bundle\ProductBundle\Doctrine\ORM;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use Sylius\Component\Core\Model\Product;
 use Sylius\Component\Product\Model\ProductInterface;
-use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Product\Repository\ProductVariantRepositoryInterface;
 
 /**
@@ -92,7 +90,7 @@ class ProductVariantRepository extends EntityRepository implements ProductVarian
     {
         return $this->createQueryBuilder('o')
             ->innerJoin('o.product', 'product')
-            ->where('product.code = :productCode')
+            ->andWhere('product.code = :productCode')
             ->andWhere('o.code = :code')
             ->setParameter('productCode', $productCode)
             ->setParameter('code', $code)
@@ -104,15 +102,54 @@ class ProductVariantRepository extends EntityRepository implements ProductVarian
     /**
      * {@inheritdoc}
      */
+    public function findByCodeAndProductCode($code, $productCode)
+    {
+        return $this->createQueryBuilder('o')
+            ->innerJoin('o.product', 'product')
+            ->andWhere('product.code = :productCode')
+            ->andWhere('o.code = :code')
+            ->setParameter('productCode', $productCode)
+            ->setParameter('code', $code)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function findOneByIdAndProductId($id, $productId)
     {
         return $this->createQueryBuilder('o')
-            ->where('o.product = :productId')
+            ->andWhere('o.product = :productId')
             ->andWhere('o.id = :id')
             ->setParameter('productId', $productId)
             ->setParameter('id', $id)
             ->getQuery()
             ->getOneOrNullResult()
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findByPhraseAndProductCode($phrase, $locale, $productCode)
+    {
+        $expr = $this->getEntityManager()->getExpressionBuilder();
+
+        return $this->createQueryBuilder('o')
+            ->innerJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
+            ->innerJoin('o.product', 'product')
+            ->andWhere('product.code = :productCode')
+            ->andWhere($expr->orX(
+                'translation.name LIKE :phrase',
+                'o.code LIKE :phrase'
+            ))
+            ->setParameter('phrase', '%'.$phrase.'%')
+            ->setParameter('locale', $locale)
+            ->setParameter('productCode', $productCode)
+            ->getQuery()
+            ->getResult()
         ;
     }
 }
