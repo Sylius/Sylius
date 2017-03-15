@@ -37,13 +37,6 @@ interface TaxonRepositoryInterface extends RepositoryInterface
     public function findRootNodes();
 
     /**
-     * @param string|null $rootCode
-     *
-     * @return TaxonInterface[]
-     */
-    public function findNodesTreeSorted($rootCode = null);
-
-    /**
      * @param string $slug
      * @param string $locale
      *

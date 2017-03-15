@@ -15,6 +15,7 @@ use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
+use Sylius\Behat\Service\AutocompleteHelper;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
@@ -116,35 +117,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
 
         $mainTaxonElement = $this->getElement('main_taxon')->getParent();
 
-        $isVisibleScript = sprintf(
-            '$(document.evaluate("%s", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue).dropdown("is visible")',
-            $mainTaxonElement->getXpath()
-        );
-        $isAnyAsyncActionInProgressScript = sprintf(
-            'jQuery.active'
-        );
-
-        $this->getDocument()->waitFor(5, function () use ($isAnyAsyncActionInProgressScript) {
-            return !(bool) $this->getDriver()->evaluateScript($isAnyAsyncActionInProgressScript);
-        });
-
-        $mainTaxonElement->click();
-
-        $this->getDocument()->waitFor(5, function () use ($isAnyAsyncActionInProgressScript) {
-            return !(bool) $this->getDriver()->evaluateScript($isAnyAsyncActionInProgressScript);
-        });
-
-        $this->getDocument()->waitFor(5, function () use ($isVisibleScript) {
-            return $this->getDriver()->evaluateScript($isVisibleScript);
-        });
-
-        $mainTaxonItemElement = $mainTaxonElement->find('css', sprintf('div.item:contains("%s")', $taxon->getName()));
-
-        $mainTaxonItemElement->click();
-
-        $this->getDocument()->waitFor(5, function () use ($isVisibleScript) {
-            return !$this->getDriver()->evaluateScript($isVisibleScript);
-        });
+        AutocompleteHelper::chooseValue($this->getSession(), $mainTaxonElement, $taxon->getName());
     }
 
     /**

@@ -14,6 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Form\Type\Promotion\Rule;
 use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
 use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ResourceToIdentifierTransformer;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceAutocompleteChoiceType;
+use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonAutocompleteChoiceType;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -44,12 +45,8 @@ final class TotalOfItemsFromTaxonConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('taxon', ResourceAutocompleteChoiceType::class, [
+            ->add('taxon', TaxonAutocompleteChoiceType::class, [
                 'label' => 'sylius.form.promotion_rule.total_of_items_from_taxon.taxon',
-                'resource' => 'sylius.taxon',
-                'multiple' => false,
-                'choice_name' => 'name',
-                'choice_value' => 'code',
             ])
             ->add('amount', MoneyType::class, [
                 'label' => 'sylius.form.promotion_rule.total_of_items_from_taxon.amount',

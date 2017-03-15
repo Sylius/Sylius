@@ -42,15 +42,5 @@
             <argument>%sylius.form.type.taxon_position.validation_groups%</argument>
             <tag name="form.type" />
         </service>
-
-        <service id="sylius.form.type.taxon_choice" class="Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonChoiceType">
-            <argument type="service" id="sylius.repository.taxon" />
-            <tag name="form.type" />
-        </service>
-
-        <service id="sylius.form.type.taxon_code_choice" class="Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonCodeChoiceType">
-            <argument type="service" id="sylius.repository.taxon" />
-            <tag name="form.type" />
-        </service>
     </services>
 </container>

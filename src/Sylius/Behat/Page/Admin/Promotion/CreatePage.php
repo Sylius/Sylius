@@ -17,6 +17,7 @@ use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Behaviour\NamesIt;
 use Sylius\Behat\Behaviour\SpecifiesItsCode;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
+use Sylius\Behat\Service\AutocompleteHelper;
 use Webmozart\Assert\Assert;
 
 /**
@@ -59,13 +60,13 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     {
         $option = strtolower(str_replace(' ', '_', $option));
 
-        $ruleAutoComplete = $this
+        $ruleAutocomplete = $this
             ->getLastCollectionItem('rules')
             ->find('css', sprintf('input[type="hidden"][name*="[%s]"]', $option))
             ->getParent()
         ;
 
-        $this->selectAutocompleteValue($ruleAutoComplete, $value);
+        AutocompleteHelper::chooseValue($this->getSession(), $ruleAutocomplete, $value);
     }
 
     /**
@@ -193,13 +194,13 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     {
         $option = strtolower(str_replace(' ', '_', $option));
 
-        $filterAutoComplete = $this
+        $filterAutocomplete = $this
             ->getLastCollectionItem('actions')
             ->find('css', sprintf('input[type="hidden"][name*="[%s_filter]"]', $option))
             ->getParent()
         ;
 
-        $this->selectAutocompleteValue($filterAutoComplete, $value);
+        AutocompleteHelper::chooseValue($this->getSession(), $filterAutocomplete, $value);
     }
 
     /**
@@ -271,42 +272,5 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         Assert::isArray($items);
 
         return $items;
-    }
-
-    /**
-     * @param NodeElement $autocomplete
-     * @param string $value
-     */
-    private function selectAutocompleteValue(NodeElement $autocomplete, $value)
-    {
-        Assert::isInstanceOf($this->getDriver(), Selenium2Driver::class);
-
-        $isAnyAsyncActionInProgressScript = 'jQuery.active';
-        $isVisibleScript = sprintf(
-            '$(document.evaluate("%s", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue).dropdown("is visible")',
-            $autocomplete->getXpath()
-        );
-
-        $this->getDocument()->waitFor(5, function () use ($isAnyAsyncActionInProgressScript) {
-            return !(bool) $this->getDriver()->evaluateScript($isAnyAsyncActionInProgressScript);
-        });
-
-        $autocomplete->click();
-
-        $this->getDocument()->waitFor(5, function () use ($isAnyAsyncActionInProgressScript) {
-            return !(bool) $this->getDriver()->evaluateScript($isAnyAsyncActionInProgressScript);
-        });
-
-        $this->getDocument()->waitFor(5, function () use ($isVisibleScript) {
-            return $this->getDriver()->evaluateScript($isVisibleScript);
-        });
-
-        $autocompleteItem = $autocomplete->find('css', sprintf('div.item:contains("%s")', $value));
-
-        $autocompleteItem->click();
-
-        $this->getDocument()->waitFor(5, function () use ($isVisibleScript) {
-            return !$this->getDriver()->evaluateScript($isVisibleScript);
-        });
     }
 }

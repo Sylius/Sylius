@@ -194,17 +194,17 @@
 
 {% block sylius_resource_autocomplete_choice_row %}
     <div class="{% if required %}required {% endif %}field{% if (not compound or force_error|default(false)) and not valid %} error{% endif %}">
-    {{- form_label(form) -}}
+        {{- form_label(form) -}}
         <div
-                class="sylius-autocomplete ui fluid search selection dropdown {% if multiple %}multiple{% endif %}"
-                data-url="{{ remote_url }}"
-                data-choice-name="{{ choice_name }}"
-                data-choice-value="{{ choice_value }}"
-                data-criteria-type="{{ remote_criteria_type }}"
-                data-criteria-name="{{ remote_criteria_name }}"
-                data-load-edit-url="{{ load_edit_url }}"
+            class="sylius-autocomplete ui fluid search selection dropdown {% if multiple %}multiple{% endif %}"
+            data-url="{{ remote_url }}"
+            data-choice-name="{{ choice_name }}"
+            data-choice-value="{{ choice_value }}"
+            data-criteria-type="{{ remote_criteria_type }}"
+            data-criteria-name="{{ remote_criteria_name }}"
+            data-load-edit-url="{{ load_edit_url }}"
         >
-            {{- form_row(form, {'attr': {'class' : 'autocomplete'}}) -}}
+            {{- form_widget(form, {'attr': {'class' : 'autocomplete'}}) -}}
             <i class="dropdown icon"></i>
             <div class="default text">{% if placeholder is defined %} {{ placeholder|trans }} {% endif %}</div>
             <div class="menu"></div>

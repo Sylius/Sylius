@@ -26,7 +26,7 @@ Feature: Editing a taxon
         Then I should be notified that it has been successfully edited
         And this taxon description should be "Main taxonomy for stickers"
 
-    @ui
+    @ui @javascript
     Scenario: Changing parent taxon
         Given I want to modify the "T-Shirts" taxon
         When I rename it to "Stickers" in "English (United States)"
