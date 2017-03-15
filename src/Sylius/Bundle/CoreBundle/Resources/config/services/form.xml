@@ -137,10 +137,6 @@
             <argument>%sylius.form.type.product_image.validation_groups%</argument>
             <tag name="form.type" />
         </service>
-        <service id="sylius.form.type.product_taxon_choice" class="Sylius\Bundle\CoreBundle\Form\Type\ProductTaxonChoiceType">
-            <argument type="service" id="sylius.factory.product_taxon" />
-            <tag name="form.type" />
-        </service>
         <service id="sylius.form.type.taxon_image" class="Sylius\Bundle\CoreBundle\Form\Type\Taxon\TaxonImageType">
             <argument>%sylius.model.taxon_image.class%</argument>
             <tag name="form.type" />

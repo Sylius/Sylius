@@ -195,6 +195,8 @@ You can bring back previous configuration by overriding current routing with you
   * from `SyliusCoreBundle:Email:userRegistration.html.twig` to `SyliusShopBundle:Email:userRegistration.html.twig`
   * from `SyliusCoreBundle:Email:passwordReset.html.twig` to `SyliusShopBundle:Email:passwordReset.html.twig`
   * from `SyliusCoreBundle:Email:verification.html.twig` to `SyliusShopBundle:Email:verification.html.twig`
+  
+* Removed class `Sylius\Bundle\CoreBundle\Form\Type\ProductTaxonChoiceType`, use `Sylius\Bundle\CoreBundle\Form\Type\Taxon\ProductTaxonAutocompleteChoiceType` instead.
 
 ### Currency / CurrencyBundle
 
