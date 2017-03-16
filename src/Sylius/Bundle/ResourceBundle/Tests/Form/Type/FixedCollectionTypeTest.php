@@ -1,0 +1,111 @@
+<?php
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Sylius\Bundle\ResourceBundle\Tests\Form\Type;
+
+use Sylius\Bundle\ResourceBundle\Form\Type\FixedCollectionType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Test\TypeTestCase;
+
+/**
+ * @author Kamil Kokot <kamil.kokot@lakion.com>
+ */
+final class FixedCollectionTypeTest extends TypeTestCase
+{
+    /**
+     * @test
+     */
+    public function it_builds_fixed_collection()
+    {
+        $form = $this->factory->create(FixedCollectionType::class, null, [
+            'entries' => ['first_name', 'last_name'],
+            'entry_type' => TextType::class,
+            'entry_name' => function ($entry) {
+                return strtoupper($entry);
+            },
+        ]);
+
+        $form->submit(['FIRST_NAME' => 'Elon', 'LAST_NAME' => 'Tusk']);
+
+        $this->assertEquals(['FIRST_NAME' => 'Elon', 'LAST_NAME' => 'Tusk'], $form->getData());
+    }
+
+    /**
+     * @test
+     */
+    public function it_builds_fixed_collection_using_callable_to_resolve_entry_type()
+    {
+        $form = $this->factory->create(FixedCollectionType::class, null, [
+            'entries' => ['first_name', 'last_name'],
+            'entry_type' => function ($entry) {
+                if (!in_array($entry, ['first_name', 'last_name'], true)) {
+                    throw new \Exception();
+                }
+
+                return TextType::class;
+            },
+            'entry_name' => function ($entry) {
+                return strtoupper($entry);
+            },
+        ]);
+
+        $form->submit(['FIRST_NAME' => 'Elon', 'LAST_NAME' => 'Tusk']);
+
+        $this->assertEquals(['FIRST_NAME' => 'Elon', 'LAST_NAME' => 'Tusk'], $form->getData());
+    }
+
+    /**
+     * @test
+     */
+    public function it_builds_fixed_collection_using_array_to_resolve_entry_options()
+    {
+        $form = $this->factory->create(FixedCollectionType::class, null, [
+            'entries' => ['first_name', 'last_name'],
+            'entry_type' => TextType::class,
+            'entry_name' => function ($entry) {
+                return strtoupper($entry);
+            },
+            'entry_options' => [
+                'empty_data' => 'Tusk',
+            ],
+        ]);
+
+        $form->submit(['FIRST_NAME' => 'Elon']);
+
+        $this->assertEquals(['FIRST_NAME' => 'Elon', 'LAST_NAME' => 'Tusk'], $form->getData());
+    }
+
+    /**
+     * @test
+     */
+    public function it_builds_fixed_collection_using_callable_to_resolve_entry_options()
+    {
+        $form = $this->factory->create(FixedCollectionType::class, null, [
+            'entries' => ['first_name', 'last_name'],
+            'entry_type' => TextType::class,
+            'entry_name' => function ($entry) {
+                return strtoupper($entry);
+            },
+            'entry_options' => function ($entry) {
+                $defaults = [
+                    'first_name' => 'Elon',
+                    'last_name' => 'Tusk',
+                ];
+
+                return ['empty_data' => $defaults[$entry]];
+            }
+        ]);
+
+        $form->submit([]);
+
+        $this->assertEquals(['FIRST_NAME' => 'Elon', 'LAST_NAME' => 'Tusk'], $form->getData());
+    }
+}
