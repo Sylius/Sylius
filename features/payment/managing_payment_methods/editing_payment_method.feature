@@ -5,7 +5,8 @@ Feature: Editing payment methods
     I want to be able to edit payment method
 
     Background:
-        Given the store has a payment method "Offline" with a code "offline"
+        Given the store operates on a single channel in "United States"
+        And the store has a payment method "Offline" with a code "offline"
         And I am logged in as an administrator
 
     @ui
