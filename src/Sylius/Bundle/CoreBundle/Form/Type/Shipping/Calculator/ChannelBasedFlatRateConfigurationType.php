@@ -11,11 +11,11 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Shipping\Calculator;
 
+use Sylius\Bundle\CoreBundle\Form\Type\ChannelCollectionType;
 use Sylius\Bundle\ShippingBundle\Form\Type\Calculator\FlatRateConfigurationType;
-use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
@@ -23,35 +23,27 @@ use Symfony\Component\Form\FormBuilderInterface;
 final class ChannelBasedFlatRateConfigurationType extends AbstractType
 {
     /**
-     * @var ChannelRepositoryInterface
+     * {@inheritdoc}
      */
-    private $channelRepository;
-
-    /**
-     * @param ChannelRepositoryInterface $channelRepository
-     */
-    public function __construct(ChannelRepositoryInterface $channelRepository)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        $this->channelRepository = $channelRepository;
+        $resolver->setDefaults([
+            'entry_type' => FlatRateConfigurationType::class,
+            'entry_options' => function (ChannelInterface $channel) {
+                return [
+                    'label' => $channel->getName(),
+                    'currency' => $channel->getBaseCurrency()->getCode(),
+                ];
+            },
+        ]);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function getParent()
     {
-        /**
-         * @var ChannelInterface $channel
-         */
-        foreach ($this->channelRepository->findAll() as $channel) {
-            $builder
-                ->add($channel->getCode(), FlatRateConfigurationType::class, [
-                    'label' => $channel->getName(),
-                    'currency' => $channel->getBaseCurrency()->getCode(),
-                    'block_name' => 'entry',
-                ])
-            ;
-        }
+        return ChannelCollectionType::class;
     }
 
     /**

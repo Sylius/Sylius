@@ -11,12 +11,14 @@
 
 namespace Sylius\Bundle\ProductBundle\Form\Type;
 
+use Sylius\Bundle\ResourceBundle\Form\Type\FixedCollectionType;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
@@ -50,17 +52,34 @@ final class ProductAssociationsType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $productAssociationTypes = $this->productAssociationTypeRepository->findAll();
-
-        /** @var ProductAssociationTypeInterface $productAssociationType */
-        foreach ($productAssociationTypes as $productAssociationType) {
-            $builder->add($productAssociationType->getCode(), TextType::class, [
-                'label' => $productAssociationType->getName(),
-                'block_name' => 'entry',
-            ]);
-        }
-
         $builder->addModelTransformer($this->productsToProductAssociationsTransformer);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults([
+            'entries' => $this->productAssociationTypeRepository->findAll(),
+            'entry_type' => TextType::class,
+            'entry_name' => function (ProductAssociationTypeInterface $productAssociationType) {
+                return $productAssociationType->getCode();
+            },
+            'entry_options' => function (ProductAssociationTypeInterface $productAssociationType) {
+                return [
+                    'label' => $productAssociationType->getName(),
+                ];
+            },
+        ]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getParent()
+    {
+        return FixedCollectionType::class;
     }
 
     /**

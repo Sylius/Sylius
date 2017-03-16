@@ -234,12 +234,10 @@
         </service>
 
         <service id="sylius.form.type.channel_based_shipping_calculator.flat_rate" class="Sylius\Bundle\CoreBundle\Form\Type\Shipping\Calculator\ChannelBasedFlatRateConfigurationType">
-            <argument type="service" id="sylius.repository.channel" />
             <tag name="form.type" />
         </service>
 
         <service id="sylius.form.type.channel_based_shipping_calculator.per_unit_rate" class="Sylius\Bundle\CoreBundle\Form\Type\Shipping\Calculator\ChannelBasedPerUnitRateConfigurationType">
-            <argument type="service" id="sylius.repository.channel" />
             <tag name="form.type" />
         </service>
 

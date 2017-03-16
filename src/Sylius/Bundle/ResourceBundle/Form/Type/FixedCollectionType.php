@@ -44,7 +44,7 @@ final class FixedCollectionType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired('entries');
-        $resolver->setAllowedTypes('entries', ['array']);
+        $resolver->setAllowedTypes('entries', ['array', \Traversable::class]);
 
         $resolver->setRequired('entry_type');
         $resolver->setAllowedTypes('entry_type', ['string', 'callable']);
