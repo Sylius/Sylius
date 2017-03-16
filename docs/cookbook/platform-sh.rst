@@ -136,7 +136,7 @@ This is how this file should look like for Sylius:
     # .platform/routes.yaml
     "http://{default}/":
         type: upstream
-        upstream: "sylius:php"
+        upstream: "sylius:http"
 
     "http://www.{default}/":
         type: redirect
