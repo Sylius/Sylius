@@ -17,8 +17,13 @@
                     var criteriaName = $(this).data('criteria-name');
                     var choiceName = $(this).data('choice-name');
                     var choiceValue = $(this).data('choice-value');
+                    var choiceRender = $(this).data('choice-render') || function (option, item) { return option;};
                     var autocompleteValue = $(this).find('input.autocomplete').val();
                     var loadForEditUrl = $(this).data('load-edit-url');
+
+                    if (window[choiceRender]) {
+                        choiceRender = window[choiceRender];
+                    }
 
                     element.dropdown({
                         delay: {
@@ -38,10 +43,10 @@
                                 var choiceValue = element.data('choice-value');
                                 var myResults = [];
                                 $.each(response, function (index, item) {
-                                    myResults.push({
+                                    myResults.push(choiceRender({
                                         name: item[choiceName],
                                         value: item[choiceValue]
-                                    });
+                                    }, item));
                                 });
 
                                 return {

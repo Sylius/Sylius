@@ -200,6 +200,7 @@
             data-url="{{ remote_url }}"
             data-choice-name="{{ choice_name }}"
             data-choice-value="{{ choice_value }}"
+            {% if choice_render is defined %} data-choice-render="{{ choice_render }}"{% endif %}
             data-criteria-type="{{ remote_criteria_type }}"
             data-criteria-name="{{ remote_criteria_name }}"
             data-load-edit-url="{{ load_edit_url }}"
