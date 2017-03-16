@@ -97,6 +97,7 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
         $channel->setTaxCalculationStrategy($options['tax_calculation_strategy']);
         $channel->setThemeName($options['theme_name']);
         $channel->setContactEmail($options['contact_email']);
+        $channel->setSkippingShippingStepAllowed($options['skipping_shipping_step_allowed']);
 
         $channel->setDefaultLocale($options['default_locale']);
         foreach ($options['locales'] as $locale) {
@@ -133,6 +134,8 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
                 return $this->faker->boolean(90);
             })
             ->setAllowedTypes('enabled', 'bool')
+            ->setDefault('skipping_shipping_step_allowed', false)
+            ->setAllowedTypes('skipping_shipping_step_allowed', 'bool')
             ->setDefault('default_tax_zone', LazyOption::randomOne($this->zoneRepository))
             ->setAllowedTypes('default_tax_zone', ['null', 'string', ZoneInterface::class])
             ->setNormalizer('default_tax_zone', LazyOption::findOneBy($this->zoneRepository, 'code'))
