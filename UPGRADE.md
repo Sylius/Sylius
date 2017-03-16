@@ -16,6 +16,8 @@
 
 ### AdminApiBundle (former ApiBundle)
 
+* Change the import path of your API config from `@SyliusApiBundle/Resources/config/app/config.yml` to `@SyliusAdminApiBundle/Resources/config/app/config.yml` (in file `app/config/config.yml`).
+
 * Change the import path of your API routing from `src/Sylius/Bundle/ApiBundle/Resources/config/routing/main.yml` to `src/Sylius/Bundle/AdminApiBundle/Resources/config/routing.yml`. API became versioned, so you need to prefix them accordingly (e.g. `/api/customer` -> `/api/v1/customer`). 
 
 * Routing definition for Shipping Categories has been removed and replaced with auto generated resource routing. Also, Shipping Categories are resolved by code instead of id.
