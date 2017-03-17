@@ -15,13 +15,13 @@ sylius:
             checkbox: Pole wyboru
             configuration: Konfiguracja
             date: Data
-            datetime: Data/godzina
+            datetime: Data i godzina
             integer: Liczba całkowita
             percent: Procent
             select: Wybierz
             text: Tekst
             textarea: Pole tekstowe
-            title: Typy atrybutu
+            title: Nazwa typu
             validation: Walidacja
         attribute_type_configuration:
             datetime:
@@ -29,7 +29,11 @@ sylius:
             date:
                 format: Format
             select:
+                multiple: Wiele
                 values: Wartości
+                choose: Wybierz opcję
+                min: Min
+                max: Max
             text:
                 min: Minimalna długość
                 max: Maksymalna długość
