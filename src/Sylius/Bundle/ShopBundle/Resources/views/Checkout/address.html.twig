@@ -5,14 +5,21 @@
 {% block content %}
     {% include '@SyliusShop/Checkout/_steps.html.twig' %}
 
+    {{ sonata_block_render_event('sylius.shop.checkout.address.after_steps', {'order': order}) }}
+
     <div class="ui stackable grid">
         <div class="eleven wide column">
             <div class="ui segment">
+                {{ sonata_block_render_event('sylius.shop.checkout.address.before_form', {'order': order}) }}
+
                 {{ form_start(form, {'action': path('sylius_shop_checkout_address'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
                     <input type="hidden" name="_method" value="PUT" />
 
                     {% include '@SyliusShop/Checkout/Address/_form.html.twig' %}
                     <div class="ui hidden divider"></div>
+
+                    {{ sonata_block_render_event('sylius.shop.checkout.address.before_navigation', {'order': order}) }}
+
                     {% include '@SyliusShop/Checkout/Address/_navigation.html.twig' %}
 
                     {{ form_row(form._token) }}
@@ -20,8 +27,15 @@
             </div>
         </div>
         <div class="five wide column">
+            {{ sonata_block_render_event('sylius.shop.checkout.address.before_summary', {'order': order}) }}
+
             {% include '@SyliusShop/Checkout/_summary.html.twig' with {'order': order} %}
+
+            {{ sonata_block_render_event('sylius.shop.checkout.address.before_support', {'order': order}) }}
+
             {% include '@SyliusShop/Checkout/_support.html.twig' %}
+
+            {{ sonata_block_render_event('sylius.shop.checkout.address.after_support', {'order': order}) }}
         </div>
     </div>
 {% endblock %}

@@ -6,5 +6,9 @@
 
 {% block header %}
     {# Override the normal page header with a custom one for all checkout steps. #}
+    {{ sonata_block_render_event('sylius.shop.checkout.address.before_header', {'order': order}) }}
+
     {% include '@SyliusShop/Checkout/_header.html.twig' %}
+
+    {{ sonata_block_render_event('sylius.shop.checkout.address.after_header', {'order': order}) }}
 {% endblock %}

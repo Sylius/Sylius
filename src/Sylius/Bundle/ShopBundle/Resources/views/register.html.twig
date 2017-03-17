@@ -5,9 +5,16 @@
 {% block content %}
     {% include '@SyliusShop/Register/_header.html.twig' %}
 
+    {{ sonata_block_render_event('sylius.shop.register.after_content_header') }}
+
     <div class="ui padded segment">
+        {{ sonata_block_render_event('sylius.shop.register.before_form') }}
+
         {{ form_start(form, {'action': path('sylius_shop_register'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
             {% include '@SyliusShop/Register/_form.html.twig' %}
+
+            {{ sonata_block_render_event('sylius.shop.register.form', {'form': form}) }}
+
             <button type="submit" class="ui large primary button">
                 {{ 'sylius.ui.create_an_account'|trans }}
             </button>

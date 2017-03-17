@@ -6,6 +6,8 @@
     {% endif %}
     {% include '@SyliusShop/Common/Form/_address.html.twig' with {'form': form.shippingAddress, 'order': order} %}
     {{ form_row(form.differentBillingAddress, {'attr': {'data-toggles': 'sylius-billing-address'}}) }}
+
+    {{ sonata_block_render_event('sylius.shop.checkout.address.shipping_address_form', {'order': order}) }}
 </div>
 
 <div id="sylius-billing-address">
@@ -13,4 +15,6 @@
     {% include '@SyliusShop/Checkout/Address/_addressBookSelect.html.twig' %}
     <h3 class="ui dividing header">{{ 'sylius.ui.billing_address'|trans }}</h3>
     {% include '@SyliusShop/Common/Form/_address.html.twig' with {'form': form.billingAddress, 'order': order} %}
+
+    {{ sonata_block_render_event('sylius.shop.checkout.address.billing_address_form', {'order': order}) }}
 </div>

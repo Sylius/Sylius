@@ -1,4 +1,6 @@
 <div class="ui bottom attached tab segment" data-tab="reviews" id="sylius-product-reviews">
+    {{ sonata_block_render_event('sylius.shop.product.show.tab_reviews', {'product': product}) }}
+
     {{ render(url('sylius_shop_partial_product_review_latest', {'productId': product.id, 'template': '@SyliusShop/ProductReview/_list.html.twig'})) }}
 
     <a href="{{ path('sylius_shop_product_review_index', {'slug': product.slug, '_locale': product.translation.locale}) }}">
