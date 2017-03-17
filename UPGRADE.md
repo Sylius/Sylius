@@ -200,6 +200,9 @@ You can bring back previous configuration by overriding current routing with you
   
 * Removed class `Sylius\Bundle\CoreBundle\Form\Type\ProductTaxonChoiceType`, use `Sylius\Bundle\CoreBundle\Form\Type\Taxon\ProductTaxonAutocompleteChoiceType` instead.
 
+* Removed `Sylius\Component\Core\Promotion\Action\ChannelBasedPromotionActionCommandInterface` and 
+  `Sylius\Component\Core\Promotion\Checker\Rule\ChannelBasedRuleCheckerInterface` interfaces as they are not needed anymore.
+
 ### Currency / CurrencyBundle
 
 * The following classes were removed due to being no longer used in current implementation:

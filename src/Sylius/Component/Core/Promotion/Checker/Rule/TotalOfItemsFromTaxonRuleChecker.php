@@ -21,7 +21,7 @@ use Webmozart\Assert\Assert;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class TotalOfItemsFromTaxonRuleChecker implements RuleCheckerInterface, ChannelBasedRuleCheckerInterface
+final class TotalOfItemsFromTaxonRuleChecker implements RuleCheckerInterface
 {
     const TYPE = 'total_of_items_from_taxon';
 

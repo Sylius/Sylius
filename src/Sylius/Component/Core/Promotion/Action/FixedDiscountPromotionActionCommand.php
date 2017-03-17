@@ -23,7 +23,7 @@ use Webmozart\Assert\Assert;
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-final class FixedDiscountPromotionActionCommand extends DiscountPromotionActionCommand implements ChannelBasedPromotionActionCommandInterface
+final class FixedDiscountPromotionActionCommand extends DiscountPromotionActionCommand
 {
     const TYPE = 'order_fixed_discount';
 

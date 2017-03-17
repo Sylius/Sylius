@@ -19,7 +19,7 @@ use Webmozart\Assert\Assert;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class ItemTotalRuleChecker implements RuleCheckerInterface, ChannelBasedRuleCheckerInterface
+final class ItemTotalRuleChecker implements RuleCheckerInterface
 {
     /**
      * @var RuleCheckerInterface

@@ -19,11 +19,9 @@ use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductTaxonInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
-use Sylius\Component\Core\Promotion\Checker\Rule\ChannelBasedRuleCheckerInterface;
 use Sylius\Component\Core\Promotion\Checker\Rule\TotalOfItemsFromTaxonRuleChecker;
 use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 
 /**
@@ -44,11 +42,6 @@ final class TotalOfItemsFromTaxonRuleCheckerSpec extends ObjectBehavior
     function it_implements_a_rule_checker_interface()
     {
         $this->shouldImplement(RuleCheckerInterface::class);
-    }
-
-    function it_implements_channel_aware_rule_checker_interface()
-    {
-        $this->shouldImplement(ChannelBasedRuleCheckerInterface::class);
     }
 
     function it_recognizes_a_subject_as_eligible_if_it_has_items_from_configured_taxon_which_has_required_total(
