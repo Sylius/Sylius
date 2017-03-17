@@ -222,7 +222,7 @@ sylius:
         dashboard: 'Panel'
         data: 'Dane'
         date: 'Data'
-        datetime: 'Data/godzina'
+        datetime: 'Data i godzina'
         default: 'Domyślny(a/e)'
         default_address: 'Domyślny adres'
         default_billing_address: 'Domyślny adres rozliczeniowy'

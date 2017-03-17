@@ -625,6 +625,7 @@ sylius:
         product_options: 'Productopties'
         product_review: 'Productbeoordeling'
         product_reviews: 'Productbeoordelingen'
+        product_taxon: 'Product Taxon'
         product_variants: 'Product varianten'
         products: 'Producten'
         products_categorized_as_name: 'Producten in "%name%"'
