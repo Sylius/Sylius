@@ -4,6 +4,8 @@
 
 <div class="ui middle aligned center aligned grid">
     <div class="column">
+        {{ sonata_block_render_event('sylius.admin.login.before_form', {'form': form}) }}
+
         {% if paths.logo is defined %}
         <img src="{{ asset(paths.logo) }}" class="ui fluid image" id="logo">
         {% endif %}
@@ -22,6 +24,9 @@
                 <input type="hidden" name="_csrf_admin_security_token" value="{{ csrf_token('admin_authenticate') }}">
                 <button type="submit" class="ui fluid large primary submit button">Login</button>
             </div>
+
+            {{ sonata_block_render_event('sylius.admin.login.form', {'form': form}) }}
+
         {{ form_end(form, {'render_rest': false}) }}
     </div>
 </div>

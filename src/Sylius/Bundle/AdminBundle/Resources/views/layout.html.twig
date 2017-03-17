@@ -10,14 +10,26 @@
     <a class="icon item" id="sidebar-toggle" title="{{ 'sylius.ui.toggle_sidebar'|trans }}">
         <i class="sidebar icon"></i>
     </a>
+
+    {{ sonata_block_render_event('sylius.admin.layout.topbar_left') }}
+
     {{ render(url('sylius_admin_partial_channel_index', {'template': '@SyliusAdmin/_channelLinks.html.twig'})) }}
     {% include '@SyliusAdmin/_search.html.twig' %}
+
+    {{ sonata_block_render_event('sylius.admin.layout.topbar_middle') }}
+
     {% include '@SyliusAdmin/_security.html.twig' %}
+
+    {{ sonata_block_render_event('sylius.admin.layout.topbar_right') }}
 {% endblock %}
 
 {% block sidebar %}
+    {{ sonata_block_render_event('sylius.admin.layout.sidebar_top') }}
+
     <a class="item" href="{{ path('sylius_admin_dashboard') }}"><b>Sylius</b></a>
     {{ knp_menu_render('sylius.admin.main', {'template': 'SyliusUiBundle:Menu:sidebar.html.twig', 'currentClass': 'active'}) }}
+
+    {{ sonata_block_render_event('sylius.admin.layout.sidebar_down') }}
 {% endblock %}
 
 {% block footer %}

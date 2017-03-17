@@ -56,4 +56,6 @@
         </div>
     </div>
     {% endif %}
+
+    {{ sonata_block_render_event('sylius.admin.product.' ~ action ~ '.tab_details', {'form': form}) }}
 </div>

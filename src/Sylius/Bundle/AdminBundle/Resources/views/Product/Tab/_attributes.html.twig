@@ -6,4 +6,6 @@
     <div id="attributesContainer" data-count="{{ form.attributes|length }}">
         {{ form_widget(form.attributes, {'attr': {'translations': form.translations} }) }}
     </div>
+
+    {{ sonata_block_render_event('sylius.admin.product.' ~ action ~ '.tab_attributes', {'form': form}) }}
 </div>

@@ -12,4 +12,6 @@
             <div class="ui loader"></div>
         </div>
     </div>
+
+    {{ sonata_block_render_event('sylius.admin.product.' ~ action ~ '.tab_taxonomy', {'form': form}) }}
 </div>
