@@ -38,9 +38,7 @@
             <argument>%sylius.form.type.shipping_method.validation_groups%</argument>
             <argument>Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodTranslationType</argument>
             <argument type="service" id="sylius.registry.shipping_calculator" />
-            <argument type="service" id="sylius.registry.shipping_rule_checker" />
             <argument type="service" id="sylius.form_registry.shipping_calculator" />
-            <argument type="service" id="sylius.form.event_subscriber.build_shipping_method" />
             <tag name="form.type" />
         </service>
 
@@ -83,12 +81,6 @@
         <service id="sylius.form.type.shipping_calculator_choice" class="Sylius\Bundle\ShippingBundle\Form\Type\CalculatorChoiceType">
             <argument>%sylius.shipping_calculators%</argument>
             <tag name="form.type" />
-        </service>
-
-        <service id="sylius.form.event_subscriber.build_shipping_method" class="Sylius\Bundle\ShippingBundle\Form\EventSubscriber\BuildShippingMethodFormSubscriber">
-            <argument type="service" id="sylius.registry.shipping_calculator"/>
-            <argument type="service" id="form.factory"/>
-            <argument type="service" id="sylius.form_registry.shipping_calculator" />
         </service>
     </services>
 </container>
