@@ -12,9 +12,7 @@
 namespace Sylius\Bundle\PromotionBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -22,26 +20,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 final class PromotionActionType extends AbstractResourceType
 {
-    /**
-     * @var EventSubscriberInterface
-     */
-    private $buildActionSubscriber;
-
-    /**
-     * {@inheritdoc}
-     *
-     * @param EventSubscriberInterface $buildActionSubscriber
-     */
-    public function __construct(
-        $dataClass,
-        array $validationGroups,
-        EventSubscriberInterface $buildActionSubscriber
-    ) {
-        parent::__construct($dataClass, $validationGroups);
-
-        $this->buildActionSubscriber = $buildActionSubscriber;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -54,20 +32,15 @@ final class PromotionActionType extends AbstractResourceType
                     'data-form-collection' => 'update',
                 ],
             ])
-            ->addEventSubscriber($this->buildActionSubscriber)
         ;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function getParent()
     {
-        parent::configureOptions($resolver);
-
-        $resolver->setDefaults([
-            'configuration_type' => null,
-        ]);
+        return ConfigurablePromotionElementType::class;
     }
 
     /**

@@ -16,32 +16,17 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-interface PromotionActionInterface extends ResourceInterface, PromotionDynamicTypeInterface
+interface PromotionActionInterface extends ResourceInterface, ConfigurablePromotionElementInterface
 {
-    /**
-     * @return string
-     */
-    public function getType();
-
     /**
      * @param string $type
      */
     public function setType($type);
 
     /**
-     * @return array
-     */
-    public function getConfiguration();
-
-    /**
      * @param array $configuration
      */
     public function setConfiguration(array $configuration);
-
-    /**
-     * @return PromotionInterface
-     */
-    public function getPromotion();
 
     /**
      * @param PromotionInterface $promotion
