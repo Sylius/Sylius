@@ -203,6 +203,8 @@ You can bring back previous configuration by overriding current routing with you
 * Removed `Sylius\Component\Core\Promotion\Action\ChannelBasedPromotionActionCommandInterface` and 
   `Sylius\Component\Core\Promotion\Checker\Rule\ChannelBasedRuleCheckerInterface` interfaces as they are not needed anymore.
 
+* Removed `Sylius\Bundle\CoreBundle\Form\Type\Promotion\PromotionConfigurationType` class as it has no behaviour and is not used.
+
 ### Currency / CurrencyBundle
 
 * The following classes were removed due to being no longer used in current implementation:
