@@ -13,9 +13,7 @@ namespace Sylius\Bundle\ResourceBundle\Form\Type;
 
 use Sylius\Component\Resource\Model\TranslationInterface;
 use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -24,7 +22,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-final class ResourceTranslationsType extends AbstractType implements EventSubscriberInterface
+final class ResourceTranslationsType extends AbstractType
 {
     /**
      * @var string[]
@@ -50,63 +48,42 @@ final class ResourceTranslationsType extends AbstractType implements EventSubscr
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->addEventSubscriber($this);
-    }
+        $builder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
+            /** @var TranslationInterface[] $translations */
+            $translations = $event->getData();
+            $translatable = $event->getForm()->getParent()->getData();
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function getSubscribedEvents()
-    {
-        return [
-            FormEvents::PRE_SET_DATA => 'preSetData',
-            FormEvents::SUBMIT => 'submit',
-        ];
-    }
+            foreach ($translations as $localeCode => $translation) {
+                if (null === $translation) {
+                    unset($translations[$localeCode]);
 
-    /**
-     * @param FormEvent $event
-     */
-    public function preSetData(FormEvent $event)
-    {
-        $form = $event->getForm();
-        $entryType = $form->getConfig()->getOption('entry_type');
-        $entryOptions = $form->getConfig()->getOption('entry_options');
-
-        foreach ($this->definedLocalesCodes as $localeCode) {
-            if ($form->has($localeCode)) {
-                continue;
-            }
-
-            $required = $localeCode === $this->defaultLocaleCode;
-            $form->add($localeCode, $entryType, array_replace($entryOptions, [
-                'required' => $required,
-                'block_name' => 'entry',
-            ]));
-        }
-    }
-
-    /**
-     * @param FormEvent $event
-     */
-    public function submit(FormEvent $event)
-    {
-        /** @var TranslationInterface[] $translations */
-        $translations = $event->getData();
-        $translatable = $event->getForm()->getParent()->getData();
-
-        foreach ($translations as $localeCode => $translation) {
-            if (null === $translation) {
-                unset($translations[$localeCode]);
-
-                continue;
-            }
+                    continue;
+                }
 
             $translation->setLocale($localeCode);
             $translation->setTranslatable($translatable);
         }
 
-        $event->setData($translations);
+            $event->setData($translations);
+        });
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults([
+            'entries' => $this->definedLocalesCodes,
+            'entry_name' => function ($localeCode) {
+                return $localeCode;
+            },
+            'entry_options' => function ($localeCode) {
+                return [
+                    'required' => $localeCode === $this->defaultLocaleCode,
+                ];
+            }
+        ]);
     }
 
     /**
@@ -114,7 +91,7 @@ final class ResourceTranslationsType extends AbstractType implements EventSubscr
      */
     public function getParent()
     {
-        return CollectionType::class;
+        return FixedCollectionType::class;
     }
 
     /**

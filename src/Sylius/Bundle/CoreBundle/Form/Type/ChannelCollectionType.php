@@ -11,12 +11,10 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type;
 
+use Sylius\Bundle\ResourceBundle\Form\Type\FixedCollectionType;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -40,37 +38,23 @@ final class ChannelCollectionType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($options) {
-            $form = $event->getForm();
-
-            /** @var ChannelInterface[] $channels */
-            $channels = $this->channelRepository->findAll();
-            foreach ($channels as $channel) {
-                $form->add($channel->getCode(), $options['entry_type'], array_replace([
-                    'property_path' => '[' . $channel->getCode() . ']',
-                ], $options['entry_options'], [
-                    'block_name' => 'entry',
-                    'channel' => $channel,
-                ]));
-            }
-        });
+        $resolver->setDefaults([
+            'entries' => $this->channelRepository->findAll(),
+            'entry_name' => function (ChannelInterface $channel) {
+                return $channel->getCode();
+            },
+            'error_bubbling' => false,
+        ]);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function getParent()
     {
-        $resolver->setRequired([
-            'entry_type',
-        ]);
-
-        $resolver->setDefaults([
-            'error_bubbling' => false,
-            'entry_options' => [],
-        ]);
+        return FixedCollectionType::class;
     }
 
     /**

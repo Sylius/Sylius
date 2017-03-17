@@ -16,6 +16,7 @@ use Sylius\Bundle\CoreBundle\Form\Type\Product\ChannelPricingType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType;
 use Sylius\Bundle\ShippingBundle\Form\Type\ShippingCategoryChoiceType;
 use Sylius\Bundle\TaxationBundle\Form\Type\TaxCategoryChoiceType;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -76,12 +77,17 @@ final class ProductVariantTypeExtension extends AbstractTypeExtension
         ;
 
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+            $productVariant = $event->getData();
+
             $event->getForm()->add('channelPricings', ChannelCollectionType::class, [
                 'entry_type' => ChannelPricingType::class,
-                'entry_options' => [
-                    'product_variant' => $event->getData(),
-                    'required' => false,
-                ],
+                'entry_options' => function (ChannelInterface $channel) use ($productVariant) {
+                    return [
+                        'channel' => $channel,
+                        'product_variant' => $productVariant,
+                        'required' => false,
+                    ];
+                },
                 'label' => 'sylius.form.variant.price',
             ]);
         });
