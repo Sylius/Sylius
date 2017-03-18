@@ -4,6 +4,8 @@
 
 {% block stylesheets %}
     {% include 'SyliusUiBundle::_stylesheets.html.twig' with {'path': 'assets/admin/css/style.css'} %}
+
+    {{ sonata_block_render_event('sylius.admin.layout.stylesheets') }}
 {% endblock %}
 
 {% block topbar %}
@@ -38,4 +40,6 @@
 
 {% block javascripts %}
     {% include 'SyliusUiBundle::_javascripts.html.twig' with {'path': 'assets/admin/js/app.js'} %}
+
+    {{ sonata_block_render_event('sylius.admin.layout.javascripts') }}
 {% endblock %}
