@@ -29,7 +29,7 @@ final class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->arrayNode('notification')
+                ->arrayNode('notifications')
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->booleanNode('enabled')

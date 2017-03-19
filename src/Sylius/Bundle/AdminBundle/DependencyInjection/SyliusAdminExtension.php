@@ -11,10 +11,8 @@
 
 namespace Sylius\Bundle\AdminBundle\DependencyInjection;
 
-use Sylius\Bundle\AdminBundle\Twig\NotificationExtension;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
@@ -31,24 +29,9 @@ final class SyliusAdminExtension extends Extension
         $config = $this->processConfiguration($this->getConfiguration([], $container), $config);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        $this->configureNotifications($config['notification'], $container);
+        $container->setParameter('sylius.admin.notification.enabled', $config['notifications']['enabled']);
+        $container->setParameter('sylius.admin.notification.frequency', $config['notifications']['frequency']);
 
         $loader->load('services.xml');
-    }
-
-    /**
-     * @param array $config
-     * @param ContainerBuilder $container
-     */
-    private function configureNotifications(array $config, ContainerBuilder $container)
-    {
-        $container->setParameter('sylius.admin.notification.enabled', $config['enabled']);
-
-        $notificationExtension = new Definition(NotificationExtension::class);
-        $notificationExtension->addArgument($config['enabled']);
-        $notificationExtension->addArgument($config['frequency'] ?: null);
-        $notificationExtension->addTag('twig.extension');
-
-        $container->setDefinition('sylius.notification.extension', $notificationExtension);
     }
 }

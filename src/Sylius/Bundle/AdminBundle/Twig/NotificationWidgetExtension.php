@@ -11,12 +11,10 @@
 
 namespace Sylius\Bundle\AdminBundle\Twig;
 
-use Sylius\Bundle\CoreBundle\Application\Kernel;
-
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-final class NotificationExtension extends \Twig_Extension implements \Twig_Extension_GlobalsInterface
+final class NotificationWidgetExtension extends \Twig_Extension
 {
     /**
      * @var bool
@@ -45,7 +43,7 @@ final class NotificationExtension extends \Twig_Extension implements \Twig_Exten
     {
         return [
             new \Twig_SimpleFunction(
-                'sylius_render_notification_widget',
+                'sylius_render_notifications_widget',
                 [$this, 'renderWidget'],
                 [
                     'needs_environment' => true,
@@ -56,25 +54,18 @@ final class NotificationExtension extends \Twig_Extension implements \Twig_Exten
     }
 
     /**
-     * @return array
-     */
-    public function getGlobals()
-    {
-        return [
-            'sylius_version_notification_enabled' => $this->areNotificationsEnabled,
-        ];
-    }
-
-    /**
      * @param \Twig_Environment $environment
      *
      * @return string
      */
     public function renderWidget(\Twig_Environment $environment)
     {
+        if (!$this->areNotificationsEnabled) {
+            return '';
+        }
+
         return $environment->render('@SyliusAdmin/_notification.html.twig', [
             'frequency' => $this->checkFrequency,
-            'version' => Kernel::VERSION,
         ]);
     }
 }

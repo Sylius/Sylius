@@ -12,10 +12,10 @@
 
     $.fn.extend({
         notification: function () {
-            const HUB_REQUEST_TIME = 'hub_request_time';
-            const LAST_HUB_SYLIUS_VERSION = 'last_sylius_version';
-            const SYLIUS_VERSION_DISMISSED = 'sylius_version_dismissed';
-            const MILISECONDS_MULTIPLIER = 1000;
+            var HUB_REQUEST_TIME = 'hub_request_time';
+            var LAST_HUB_SYLIUS_VERSION = 'last_sylius_version';
+            var SYLIUS_VERSION_DISMISSED = 'sylius_version_dismissed';
+            var MILISECONDS_MULTIPLIER = 1000;
 
             var notificationMenu = $('#sylius-version-notification');
             var askFrequency = notificationMenu.attr('data-frequency') * MILISECONDS_MULTIPLIER;
@@ -65,7 +65,7 @@
                 }
             }
 
-            function notify(/*boolean*/ bool) {
+            function notify(bool) {
                 var notificationMenu = $('#sylius-version-notification');
 
                 if (true === bool) {
@@ -83,10 +83,10 @@
                 return new Date().getTime() - parseInt(retrieve(HUB_REQUEST_TIME));
             }
 
-            function store(/* string */ key, /* string */ value) {
+            function store(key, value) {
                 localStorage.setItem(key, value);
             }
-            function retrieve(/* string */ key) {
+            function retrieve(key) {
                 return localStorage.getItem(key);
             }
         }
