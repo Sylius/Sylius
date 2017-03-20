@@ -14,13 +14,12 @@ namespace spec\Sylius\Component\Core\Promotion\Action;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Distributor\ProportionalIntegerDistributorInterface;
-use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
-use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Core\Promotion\Action\FixedDiscountPromotionActionCommand;
-use Sylius\Component\Core\Promotion\Applicator\UnitsPromotionAdjustmentsApplicatorInterface;
+use Sylius\Component\Core\Promotion\Applicator\OrderPromotionAdjustmentsApplicatorInterface;
+use Sylius\Component\Core\Promotion\Reverser\OrderPromotionAdjustmentsReverserInterface;
 use Sylius\Component\Promotion\Action\PromotionActionCommandInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
@@ -30,16 +29,19 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
+ * @author Gorka Laucirica <gorka.lauzirika@gmail.com>
  */
 final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
 {
     function let(
         ProportionalIntegerDistributorInterface $proportionalIntegerDistributor,
-        UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
+        OrderPromotionAdjustmentsApplicatorInterface $adjustmentsApplicator,
+        OrderPromotionAdjustmentsReverserInterface $adjustmentsReverser
     ) {
         $this->beConstructedWith(
             $proportionalIntegerDistributor,
-            $unitsPromotionAdjustmentsApplicator
+            $adjustmentsApplicator,
+            $adjustmentsReverser
         );
     }
 
@@ -60,7 +62,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         OrderItemInterface $secondItem,
         PromotionInterface $promotion,
         ProportionalIntegerDistributorInterface $proportionalIntegerDistributor,
-        UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
+        OrderPromotionAdjustmentsApplicatorInterface $adjustmentsApplicator
     ) {
         $order->getCurrencyCode()->willReturn('USD');
         $order->getChannel()->willReturn($channel);
@@ -78,7 +80,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $secondItem->getTotal()->willReturn(4000);
 
         $proportionalIntegerDistributor->distribute([6000, 4000], -1000)->willReturn([-600, -400]);
-        $unitsPromotionAdjustmentsApplicator->apply($order, $promotion, [-600, -400])->shouldBeCalled();
+        $adjustmentsApplicator->apply($order, $promotion, [-600, -400])->shouldBeCalled();
 
         $this->execute($order, ['WEB_US' => ['amount' => 1000]], $promotion)->shouldReturn(true);
     }
@@ -90,7 +92,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         OrderItemInterface $secondItem,
         PromotionInterface $promotion,
         ProportionalIntegerDistributorInterface $proportionalIntegerDistributor,
-        UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
+        OrderPromotionAdjustmentsApplicatorInterface $adjustmentsApplicator
     ) {
         $order->getCurrencyCode()->willReturn('USD');
         $order->getChannel()->willReturn($channel);
@@ -108,7 +110,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $secondItem->getTotal()->willReturn(4000);
 
         $proportionalIntegerDistributor->distribute([6000, 4000], -10000)->willReturn([-6000, -4000]);
-        $unitsPromotionAdjustmentsApplicator->apply($order, $promotion, [-6000, -4000])->shouldBeCalled();
+        $adjustmentsApplicator->apply($order, $promotion, [-6000, -4000])->shouldBeCalled();
 
         $this->execute($order, ['WEB_US' => ['amount' => 15000]], $promotion)->shouldReturn(true);
     }
@@ -192,43 +194,26 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
     ) {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('execute', [$subject, [], $promotion])
-        ;
+            ->during('execute', [$subject, [], $promotion]);
     }
 
     function it_reverts_an_order_units_order_promotion_adjustments(
-        AdjustmentInterface $firstAdjustment,
-        AdjustmentInterface $secondAdjustment,
+        OrderPromotionAdjustmentsReverserInterface $adjustmentsReverser,
         OrderInterface $order,
-        OrderItemInterface $item,
-        OrderItemUnitInterface $unit,
         PromotionInterface $promotion
     ) {
-        $order->countItems()->willReturn(1);
-        $order->getItems()->willReturn(new \ArrayIterator([$item->getWrappedObject()]));
-
-        $item->getUnits()->willReturn(new \ArrayIterator([$unit->getWrappedObject()]));
-
-        $unit
-            ->getAdjustments(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)
-            ->willReturn(new \ArrayIterator([$firstAdjustment->getWrappedObject(), $secondAdjustment->getWrappedObject()]))
-        ;
-
-        $firstAdjustment->getOriginCode()->willReturn('PROMOTION');
-        $secondAdjustment->getOriginCode()->willReturn('OTHER_PROMOTION');
-
-        $promotion->getCode()->willReturn('PROMOTION');
-
-        $unit->removeAdjustment($firstAdjustment)->shouldBeCalled();
-        $unit->removeAdjustment($secondAdjustment)->shouldNotBeCalled();
+        $adjustmentsReverser->revert($order, $promotion);
 
         $this->revert($order, [], $promotion);
     }
 
-    function it_does_not_revert_if_order_has_no_items(OrderInterface $order, PromotionInterface $promotion)
-    {
+    function it_does_not_revert_any_promotion_if_order_has_no_items(
+        OrderPromotionAdjustmentsReverserInterface $adjustmentsReverser,
+        OrderInterface $order,
+        PromotionInterface $promotion
+    ) {
         $order->countItems()->willReturn(0);
-        $order->getItems()->shouldNotBeCalled();
+        $adjustmentsReverser->revert($order, $promotion)->shouldNotBeCalled();
 
         $this->revert($order, [], $promotion);
     }

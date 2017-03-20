@@ -9,20 +9,19 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Core\Promotion\Applicator;
+namespace Sylius\Component\Core\Promotion\Reverser;
 
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Gorka Laucirica <gorka.lauzirika@gmail.com>
  */
-interface UnitsPromotionAdjustmentsApplicatorInterface
+interface OrderPromotionAdjustmentsReverserInterface
 {
     /**
      * @param OrderInterface $order
      * @param PromotionInterface $promotion
-     * @param array $adjustmentsAmounts
      */
-    public function apply(OrderInterface $order, PromotionInterface $promotion, array $adjustmentsAmounts);
+    public function revert(OrderInterface $order, PromotionInterface $promotion);
 }

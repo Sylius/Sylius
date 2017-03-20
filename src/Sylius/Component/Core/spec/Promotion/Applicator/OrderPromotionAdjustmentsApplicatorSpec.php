@@ -19,15 +19,16 @@ use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
-use Sylius\Component\Core\Promotion\Applicator\UnitsPromotionAdjustmentsApplicator;
-use Sylius\Component\Core\Promotion\Applicator\UnitsPromotionAdjustmentsApplicatorInterface;
+use Sylius\Component\Core\Promotion\Applicator\OrderPromotionAdjustmentsApplicator;
+use Sylius\Component\Core\Promotion\Applicator\OrderPromotionAdjustmentsApplicatorInterface;
 use Sylius\Component\Order\Factory\AdjustmentFactoryInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Gorka Laucirica <gorka.lauzirika@gmail.com>
  */
-final class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
+final class OrderPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
 {
     function let(
         AdjustmentFactoryInterface $adjustmentFactory,
@@ -38,12 +39,12 @@ final class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(UnitsPromotionAdjustmentsApplicator::class);
+        $this->shouldHaveType(OrderPromotionAdjustmentsApplicator::class);
     }
 
-    function it_implements_an_units_promotion_adjustments_applicator_interface()
+    function it_implements_an_order_promotion_adjustments_applicator_interface()
     {
-        $this->shouldImplement(UnitsPromotionAdjustmentsApplicatorInterface::class);
+        $this->shouldImplement(OrderPromotionAdjustmentsApplicatorInterface::class);
     }
 
     function it_applies_promotion_adjustments_on_all_units_of_given_order(

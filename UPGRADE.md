@@ -200,6 +200,14 @@ You can bring back previous configuration by overriding current routing with you
   
 * Removed class `Sylius\Bundle\CoreBundle\Form\Type\ProductTaxonChoiceType`, use `Sylius\Bundle\CoreBundle\Form\Type\Taxon\ProductTaxonAutocompleteChoiceType` instead.
 
+* `UnitDiscountPromotionActionCommand` and `DiscountPromotionActionCommand` were removed. Now, you need to inject 
+ applicator and reverser, to handle promotion adjustments.
+  
+  * For `order_promotion` adjustments use `OrderPromotionAdjustmentsApplicatorInterface` and 
+  `OrderPromotionAdjustmentsReverserInterface` implementations.
+  * For `order_unit_promotion` adjustments use `OrderItemPromotionAdjustmentsApplicatorInterface` and
+  `OrderItemPromotionAdjustmentsReverserInterface` implementations.
+  
 ### Currency / CurrencyBundle
 
 * The following classes were removed due to being no longer used in current implementation:

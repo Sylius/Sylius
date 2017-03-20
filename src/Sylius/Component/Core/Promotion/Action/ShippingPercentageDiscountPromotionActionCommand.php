@@ -20,6 +20,7 @@ use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -46,9 +47,7 @@ final class ShippingPercentageDiscountPromotionActionCommand implements Promotio
      */
     public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
     {
-        if (!$subject instanceof OrderInterface) {
-            throw new UnexpectedTypeException($subject, OrderInterface::class);
-        }
+        Assert::isInstanceOf($subject, OrderInterface::class);
 
         if (!isset($configuration['percentage'])) {
             return false;

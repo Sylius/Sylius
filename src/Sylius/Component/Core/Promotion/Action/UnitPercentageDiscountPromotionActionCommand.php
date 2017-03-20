@@ -13,19 +13,30 @@ namespace Sylius\Component\Core\Promotion\Action;
 
 use Sylius\Bundle\PromotionBundle\Form\Type\Action\UnitPercentageDiscountConfigurationType;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\Promotion\Applicator\OrderItemPromotionAdjustmentsApplicatorInterface;
 use Sylius\Component\Core\Promotion\Filter\FilterInterface;
+use Sylius\Component\Core\Promotion\Reverser\OrderItemPromotionAdjustmentsReverserInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Gorka Laucirica <gorka.lauzirika@gmail.com>
  */
-final class UnitPercentageDiscountPromotionActionCommand extends UnitDiscountPromotionActionCommand implements ChannelBasedPromotionActionCommandInterface
+final class UnitPercentageDiscountPromotionActionCommand implements ChannelBasedPromotionActionCommandInterface
 {
     const TYPE = 'unit_percentage_discount';
+
+    /**
+     * @var OrderItemPromotionAdjustmentsApplicatorInterface
+     */
+    private $adjustmentsApplicator;
+
+    /**
+     * @var OrderItemPromotionAdjustmentsReverserInterface
+     */
+    private $adjustmentsReverser;
 
     /**
      * @var FilterInterface
@@ -43,22 +54,24 @@ final class UnitPercentageDiscountPromotionActionCommand extends UnitDiscountPro
     private $productFilter;
 
     /**
-     * @param FactoryInterface $adjustmentFactory
+     * @param OrderItemPromotionAdjustmentsApplicatorInterface $adjustmentsApplicator
+     * @param OrderItemPromotionAdjustmentsReverserInterface $adjustmentsReverser
      * @param FilterInterface $priceRangeFilter
      * @param FilterInterface $taxonFilter
      * @param FilterInterface $productFilter
      */
     public function __construct(
-        FactoryInterface $adjustmentFactory,
+        OrderItemPromotionAdjustmentsApplicatorInterface $adjustmentsApplicator,
+        OrderItemPromotionAdjustmentsReverserInterface $adjustmentsReverser,
         FilterInterface $priceRangeFilter,
         FilterInterface $taxonFilter,
         FilterInterface $productFilter
     ) {
-        parent::__construct($adjustmentFactory);
-
         $this->priceRangeFilter = $priceRangeFilter;
         $this->taxonFilter = $taxonFilter;
         $this->productFilter = $productFilter;
+        $this->adjustmentsApplicator = $adjustmentsApplicator;
+        $this->adjustmentsReverser = $adjustmentsReverser;
     }
 
     /**
@@ -66,9 +79,7 @@ final class UnitPercentageDiscountPromotionActionCommand extends UnitDiscountPro
      */
     public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
     {
-        if (!$subject instanceof OrderInterface) {
-            throw new UnexpectedTypeException($subject, OrderInterface::class);
-        }
+        Assert::isInstanceOf($subject, OrderInterface::class);
 
         $channelCode = $subject->getChannel()->getCode();
         if (!isset($configuration[$channelCode]) || !isset($configuration[$channelCode]['percentage'])) {
@@ -88,7 +99,7 @@ final class UnitPercentageDiscountPromotionActionCommand extends UnitDiscountPro
 
         foreach ($filteredItems as $item) {
             $promotionAmount = (int) round($item->getUnitPrice() * $configuration[$channelCode]['percentage']);
-            $this->setUnitsAdjustments($item, $promotionAmount, $promotion);
+            $this->adjustmentsApplicator->apply($item, $promotion, $promotionAmount);
         }
 
         return true;
@@ -97,20 +108,18 @@ final class UnitPercentageDiscountPromotionActionCommand extends UnitDiscountPro
     /**
      * {@inheritdoc}
      */
-    public function getConfigurationFormType()
+    public function revert(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
     {
-        return UnitPercentageDiscountConfigurationType::class;
+        Assert::isInstanceOf($subject, OrderInterface::class);
+
+        $this->adjustmentsReverser->revert($subject, $promotion);
     }
 
     /**
-     * @param OrderItemInterface $item
-     * @param int $promotionAmount
-     * @param PromotionInterface $promotion
+     * {@inheritdoc}
      */
-    private function setUnitsAdjustments(OrderItemInterface $item, $promotionAmount, PromotionInterface $promotion)
+    public function getConfigurationFormType()
     {
-        foreach ($item->getUnits() as $unit) {
-            $this->addAdjustmentToUnit($unit, $promotionAmount, $promotion);
-        }
+        return UnitPercentageDiscountConfigurationType::class;
     }
 }

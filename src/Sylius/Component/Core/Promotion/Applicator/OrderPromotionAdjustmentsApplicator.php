@@ -22,8 +22,9 @@ use Webmozart\Assert\Assert;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Gorka Laucirica <gorka.lauzirika@gmail.com>
  */
-final class UnitsPromotionAdjustmentsApplicator implements UnitsPromotionAdjustmentsApplicatorInterface
+final class OrderPromotionAdjustmentsApplicator implements OrderPromotionAdjustmentsApplicatorInterface
 {
     /**
      * @var AdjustmentFactoryInterface
