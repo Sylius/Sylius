@@ -18,13 +18,15 @@ use Symfony\Component\Form\FormBuilderInterface;
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-final class PromotionRuleType extends AbstractResourceType
+final class PromotionRuleType extends AbstractConfigurablePromotionElementType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options = [])
     {
+        parent::buildForm($builder, $options);
+
         $builder
             ->add('type', PromotionRuleChoiceType::class, [
                 'label' => 'sylius.form.promotion_rule.type',
@@ -33,14 +35,6 @@ final class PromotionRuleType extends AbstractResourceType
                 ],
             ])
         ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getParent()
-    {
-        return ConfigurablePromotionElementType::class;
     }
 
     /**

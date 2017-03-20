@@ -11,20 +11,21 @@
 
 namespace Sylius\Bundle\PromotionBundle\Form\Type;
 
-use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-final class PromotionActionType extends AbstractResourceType
+final class PromotionActionType extends AbstractConfigurablePromotionElementType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options = [])
     {
+        parent::buildForm($builder, $options);
+
         $builder
             ->add('type', PromotionActionChoiceType::class, [
                 'label' => 'sylius.form.promotion_action.type',
@@ -33,14 +34,6 @@ final class PromotionActionType extends AbstractResourceType
                 ],
             ])
         ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getParent()
-    {
-        return ConfigurablePromotionElementType::class;
     }
 
     /**

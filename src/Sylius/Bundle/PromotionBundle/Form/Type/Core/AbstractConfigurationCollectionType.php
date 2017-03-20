@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\PromotionBundle\Form\Type\Core;
 
-use Sylius\Bundle\ResourceBundle\Form\Registry\FormTypeRegistryInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -31,18 +30,11 @@ abstract class AbstractConfigurationCollectionType extends AbstractType
     protected $registry;
 
     /**
-     * @var FormTypeRegistryInterface
-     */
-    protected $formTypeRegistry;
-
-    /**
      * @param ServiceRegistryInterface $registry
-     * @param FormTypeRegistryInterface $formTypeRegistry
      */
-    public function __construct(ServiceRegistryInterface $registry, FormTypeRegistryInterface $formTypeRegistry)
+    public function __construct(ServiceRegistryInterface $registry)
     {
         $this->registry = $registry;
-        $this->formTypeRegistry = $formTypeRegistry;
     }
 
     /**
@@ -57,7 +49,7 @@ abstract class AbstractConfigurationCollectionType extends AbstractType
                 $options['entry_type'],
                 array_replace(
                     $options['entry_options'],
-                    ['configuration_type' => $this->formTypeRegistry->get($type, 'default')]
+                    ['configuration_type' => $type]
                 )
             );
 
