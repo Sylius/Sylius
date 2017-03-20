@@ -36,9 +36,4 @@ interface PromotionActionCommandInterface
      * @return mixed
      */
     public function revert(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion);
-
-    /**
-     * @return string
-     */
-    public function getConfigurationFormType();
 }

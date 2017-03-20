@@ -11,19 +11,17 @@
 
 namespace Sylius\Component\Core\Promotion\Checker\Rule;
 
-use Sylius\Bundle\CoreBundle\Form\Type\Promotion\Rule\TotalOfItemsFromTaxonConfigurationType;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Webmozart\Assert\Assert;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class TotalOfItemsFromTaxonRuleChecker implements RuleCheckerInterface, ChannelBasedRuleCheckerInterface
+final class TotalOfItemsFromTaxonRuleChecker implements RuleCheckerInterface
 {
     const TYPE = 'total_of_items_from_taxon';
 
@@ -73,13 +71,5 @@ final class TotalOfItemsFromTaxonRuleChecker implements RuleCheckerInterface, Ch
         }
 
         return $itemsWithTaxonTotal >= $configuration['amount'];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getConfigurationFormType()
-    {
-        return TotalOfItemsFromTaxonConfigurationType::class;
     }
 }

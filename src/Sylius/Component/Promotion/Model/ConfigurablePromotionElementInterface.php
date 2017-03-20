@@ -16,7 +16,7 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-interface PromotionDynamicTypeInterface extends ResourceInterface
+interface ConfigurablePromotionElementInterface extends ResourceInterface
 {
     /**
      * @return string

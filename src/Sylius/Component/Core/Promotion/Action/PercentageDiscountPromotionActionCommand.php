@@ -11,7 +11,6 @@
 
 namespace Sylius\Component\Core\Promotion\Action;
 
-use Sylius\Bundle\PromotionBundle\Form\Type\Action\PercentageDiscountConfigurationType;
 use Sylius\Component\Core\Distributor\ProportionalIntegerDistributorInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Promotion\Applicator\UnitsPromotionAdjustmentsApplicatorInterface;
@@ -80,14 +79,6 @@ final class PercentageDiscountPromotionActionCommand extends DiscountPromotionAc
         $this->unitsPromotionAdjustmentsApplicator->apply($subject, $promotion, $splitPromotion);
 
         return true;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getConfigurationFormType()
-    {
-        return PercentageDiscountConfigurationType::class;
     }
 
     /**

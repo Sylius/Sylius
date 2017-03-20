@@ -229,7 +229,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     {
         return $this
             ->getLastCollectionItem('actions')
-            ->find('css', sprintf('[id*="sylius_promotion_actions"] .configuration .field:contains("%s")', $channelName))
+            ->find('css', sprintf('[id$="configuration"] .field:contains("%s")', $channelName))
         ;
     }
 
@@ -242,7 +242,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     {
         return $this
             ->getLastCollectionItem('rules')
-            ->find('css', sprintf('[id*="sylius_promotion_rules"] .configuration .field:contains("%s")', $channelName))
+            ->find('css', sprintf('[id$="configuration"] .field:contains("%s")', $channelName))
         ;
     }
 

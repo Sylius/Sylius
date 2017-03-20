@@ -11,11 +11,9 @@
 
 namespace Sylius\Component\Core\Promotion\Action;
 
-use Sylius\Bundle\PromotionBundle\Form\Type\Action\UnitFixedDiscountConfigurationType;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Promotion\Filter\FilterInterface;
-use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
@@ -25,7 +23,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-final class UnitFixedDiscountPromotionActionCommand extends UnitDiscountPromotionActionCommand implements ChannelBasedPromotionActionCommandInterface
+final class UnitFixedDiscountPromotionActionCommand extends UnitDiscountPromotionActionCommand
 {
     const TYPE = 'unit_fixed_discount';
 
@@ -98,14 +96,6 @@ final class UnitFixedDiscountPromotionActionCommand extends UnitDiscountPromotio
         }
 
         return true;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getConfigurationFormType()
-    {
-        return UnitFixedDiscountConfigurationType::class;
     }
 
     /**

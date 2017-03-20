@@ -11,7 +11,6 @@
 
 namespace Sylius\Component\Core\Promotion\Checker\Rule;
 
-use Sylius\Bundle\CoreBundle\Form\Type\Promotion\Rule\HasTaxonConfigurationType;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
@@ -48,13 +47,5 @@ final class HasTaxonRuleChecker implements RuleCheckerInterface
         }
 
         return false;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getConfigurationFormType()
-    {
-        return HasTaxonConfigurationType::class;
     }
 }

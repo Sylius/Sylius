@@ -53,12 +53,9 @@ final class UnitFixedDiscountConfigurationType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        parent::configureOptions($resolver);
-
         $resolver
-            ->setDefined(['currency'])
+            ->setRequired('currency')
             ->setAllowedTypes('currency', 'string')
-            ->setRequired(['currency'])
         ;
     }
 

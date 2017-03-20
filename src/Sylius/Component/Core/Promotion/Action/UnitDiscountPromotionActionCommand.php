@@ -24,7 +24,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-abstract class UnitDiscountPromotionActionCommand
+abstract class UnitDiscountPromotionActionCommand implements PromotionActionCommandInterface
 {
     /**
      * @var FactoryInterface

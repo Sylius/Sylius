@@ -49,9 +49,8 @@ final class PerUnitRateConfigurationType extends AbstractType
             ->setDefaults([
                 'data_class' => null,
             ])
-            ->setDefined(['currency'])
+            ->setRequired('currency')
             ->setAllowedTypes('currency', 'string')
-            ->setRequired(['currency'])
         ;
     }
 

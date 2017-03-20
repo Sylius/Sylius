@@ -11,7 +11,6 @@
 
 namespace Sylius\Component\Core\Promotion\Checker\Rule;
 
-use Sylius\Bundle\CoreBundle\Form\Type\Promotion\Rule\ShippingCountryConfigurationType;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
@@ -59,13 +58,5 @@ final class ShippingCountryRuleChecker implements RuleCheckerInterface
         }
 
         return $country->getCode() === $configuration['country'];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getConfigurationFormType()
-    {
-        return ShippingCountryConfigurationType::class;
     }
 }
