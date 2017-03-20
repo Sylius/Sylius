@@ -158,7 +158,7 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
 
     /**
      * @param ProductAssociationInterface $productAssociation
-     * @param string $productIds
+     * @param string $productCodes
      */
     private function setAssociatedProductsByProductCodes(ProductAssociationInterface $productAssociation, $productCodes)
     {
