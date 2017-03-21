@@ -32,6 +32,7 @@ default:
                 - sylius.behat.context.setup.product
                 - sylius.behat.context.setup.admin_security
 
+                - sylius.behat.context.ui.admin.browsing_product_variants
                 - sylius.behat.context.ui.admin.managing_product_variants
                 - sylius.behat.context.ui.admin.notification
             filters:
