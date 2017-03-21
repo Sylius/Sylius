@@ -47,16 +47,6 @@ class ProductVariant implements ProductVariantInterface
     protected $optionValues;
 
     /**
-     * @var \DateTime
-     */
-    protected $availableOn;
-
-    /**
-     * @var \DateTime
-     */
-    protected $availableUntil;
-
-    /**
      * @var int
      */
     protected $position;
@@ -67,7 +57,6 @@ class ProductVariant implements ProductVariantInterface
         $this->optionValues = new ArrayCollection();
 
         $this->createdAt = new \DateTime();
-        $this->availableOn = new \DateTime();
     }
 
     /**
@@ -170,46 +159,6 @@ class ProductVariant implements ProductVariantInterface
     public function setProduct(ProductInterface $product = null)
     {
         $this->product = $product;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isAvailable()
-    {
-        return (new DateRange($this->availableOn, $this->availableUntil))->isInRange();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAvailableOn()
-    {
-        return $this->availableOn;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setAvailableOn(\DateTime $availableOn = null)
-    {
-        $this->availableOn = $availableOn;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAvailableUntil()
-    {
-        return $this->availableUntil;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setAvailableUntil(\DateTime $availableUntil = null)
-    {
-        $this->availableUntil = $availableUntil;
     }
 
     /**

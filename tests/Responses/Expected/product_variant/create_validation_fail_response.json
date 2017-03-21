@@ -4,18 +4,6 @@
     "errors": {
         "children": {
             "translations": {},
-            "availableOn": {
-                "children": {
-                    "date": {},
-                    "time": {}
-                }
-            },
-            "availableUntil": {
-                "children": {
-                    "date": {},
-                    "time": {}
-                }
-            },
             "version": {},
             "tracked": {},
             "width": {},

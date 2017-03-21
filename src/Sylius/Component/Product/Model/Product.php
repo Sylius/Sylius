@@ -307,16 +307,6 @@ class Product implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function getAvailableVariants()
-    {
-        return $this->variants->filter(function (ProductVariantInterface $variant) {
-            return $variant->isAvailable();
-        });
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function addVariant(ProductVariantInterface $variant)
     {
         if (!$this->hasVariant($variant)) {

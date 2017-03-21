@@ -144,34 +144,24 @@ final class ProductSpec extends ObjectBehavior
     function it_initializes_variants_collection_by_default()
     {
         $this->getVariants()->shouldHaveType(Collection::class);
-        $this->getAvailableVariants()->shouldHaveType(Collection::class);
     }
 
     function it_does_not_include_unavailable_variants_in_available_variants(ProductVariantInterface $variant)
     {
-        $variant->isAvailable()->willReturn(false);
-
         $variant->setProduct($this)->shouldBeCalled();
 
         $this->addVariant($variant);
-        $this->getAvailableVariants()->shouldHaveCount(0);
     }
 
     function it_returns_available_variants(
         ProductVariantInterface $unavailableVariant,
         ProductVariantInterface $variant
     ) {
-        $unavailableVariant->isAvailable()->willReturn(false);
-        $variant->isAvailable()->willReturn(true);
-
         $unavailableVariant->setProduct($this)->shouldBeCalled();
         $variant->setProduct($this)->shouldBeCalled();
 
         $this->addVariant($unavailableVariant);
         $this->addVariant($variant);
-
-        $this->getAvailableVariants()->shouldHaveCount(1);
-        $this->getAvailableVariants()->first()->shouldReturn($variant);
     }
 
     function it_initializes_options_collection_by_default()
