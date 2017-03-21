@@ -83,6 +83,7 @@ final class AddressContext implements Context
 
     /**
      * @Given /^(this customer) has an (address "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+"(?:|, "[^"]+")) in their address book$/
+     * @Given /^(this customer) has an? ("[^"]+" based address) in their address book$/
      */
     public function thisCustomerHasAnAddressInAddressBook(CustomerInterface $customer, AddressInterface $address)
     {
