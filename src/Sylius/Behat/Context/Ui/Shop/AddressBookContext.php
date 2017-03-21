@@ -241,7 +241,7 @@ final class AddressBookContext implements Context
      */
     public function iShouldStillBeOnAddressAdditionPage()
     {
-        Assert::true($this->addressBookCreatePage->isOpen());
+        $this->addressBookCreatePage->verify();
     }
 
     /**

@@ -80,7 +80,7 @@ final class LoginContext implements Context
      */
     public function iShouldBeLoggedIn()
     {
-        Assert::true($this->dashboardPage->isOpen());
+        $this->dashboardPage->verify();
     }
 
     /**
@@ -106,7 +106,7 @@ final class LoginContext implements Context
     {
         $this->logInAgain($username, $password);
 
-        Assert::true($this->dashboardPage->isOpen());
+        $this->dashboardPage->verify();
     }
 
     /**

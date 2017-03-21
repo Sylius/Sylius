@@ -150,7 +150,7 @@ final class LoginContext implements Context
      */
     public function iShouldBeLoggedIn()
     {
-        Assert::true($this->homePage->isOpen());
+        $this->homePage->verify();
         Assert::true($this->homePage->hasLogoutButton());
     }
 

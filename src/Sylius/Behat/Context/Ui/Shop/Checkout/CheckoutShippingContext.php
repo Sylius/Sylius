@@ -128,7 +128,7 @@ final class CheckoutShippingContext implements Context
      */
     public function iShouldBeOnTheCheckoutShippingStep()
     {
-        Assert::true($this->selectShippingPage->isOpen());
+        $this->selectShippingPage->verify();
     }
 
     /**
@@ -146,7 +146,7 @@ final class CheckoutShippingContext implements Context
     {
         $this->selectShippingPage->nextStep();
 
-        Assert::true($this->completePage->isOpen());
+        $this->completePage->verify();
     }
 
     /**
@@ -156,7 +156,7 @@ final class CheckoutShippingContext implements Context
     {
         $this->selectShippingPage->nextStep();
 
-        Assert::true($this->selectPaymentPage->isOpen());
+        $this->selectPaymentPage->verify();
     }
 
     /**

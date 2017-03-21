@@ -287,7 +287,7 @@ final class CartContext implements Context
     {
         $this->summaryPage->waitForRedirect(3);
 
-        Assert::true($this->summaryPage->isOpen());
+        $this->summaryPage->verify();
     }
 
     /**

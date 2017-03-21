@@ -98,7 +98,7 @@ final class CheckoutCompleteContext implements Context
      */
     public function iShouldBeOnTheCheckoutCompleteStep()
     {
-        Assert::true($this->completePage->isOpen());
+        $this->completePage->verify();
     }
 
     /**
