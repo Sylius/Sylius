@@ -14,15 +14,15 @@ First step is to create a new tax category.
 
     public function configureAction()
     {
-        $repository = $this->container->get('sylius.repository.tax_category');
+        $factory = $this->container->get('sylius.factory.tax_category');
         $manager = $this->container->get('sylius.manager.tax_category');
 
-        $clothing = $repository
+        $clothing = $factory
             ->createNew()
             ->setName('Clothing')
             ->setDescription('T-Shirts and this kind of stuff.')
         ;
-        $food = $repository
+        $food = $factory
             ->createNew()
             ->setName('Food')
             ->setDescription('Yummy!')
@@ -75,15 +75,15 @@ Finally, you have to create appropriate tax rates for each of categories.
         $clothing = $taxCategoryRepository->findOneBy(array('name' => 'Clothing'));
         $food = $taxCategoryRepository->findOneBy(array('name' => 'Food'));
 
-        $repository = $this->container->get('sylius.repository.tax_rate');
+        $factory = $this->container->get('sylius.factory.tax_rate');
         $manager = $this->container->get('sylius.repository.tax_rate');
 
-        $clothingTax = $repository
+        $clothingTax = $factory
             ->createNew()
             ->setName('Clothing Tax')
             ->setAmount(0,08)
         ;
-        $foodTax = $repository
+        $foodTax = $factory
             ->createNew()
             ->setName('Food')
             ->setAmount(0,12)
