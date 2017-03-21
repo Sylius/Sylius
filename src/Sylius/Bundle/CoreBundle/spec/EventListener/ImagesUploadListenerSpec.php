@@ -12,8 +12,8 @@
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\EventListener\ImageUploadListener;
-use Sylius\Component\Core\Model\ImageAwareInterface;
+use Sylius\Bundle\CoreBundle\EventListener\ImagesUploadListener;
+use Sylius\Component\Core\Model\ImagesAwareInterface;
 use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -21,7 +21,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-final class ImageUploadListenerSpec extends ObjectBehavior
+final class ImagesUploadListenerSpec extends ObjectBehavior
 {
     function let(ImageUploaderInterface $uploader)
     {
@@ -30,12 +30,12 @@ final class ImageUploadListenerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(ImageUploadListener::class);
+        $this->shouldHaveType(ImagesUploadListener::class);
     }
 
     function it_uses_image_uploader_to_upload_images(
         GenericEvent $event,
-        ImageAwareInterface $subject,
+        ImagesAwareInterface $subject,
         ImageInterface $image,
         ImageUploaderInterface $uploader
     ) {
@@ -45,7 +45,7 @@ final class ImageUploadListenerSpec extends ObjectBehavior
         $image->getPath()->willReturn('some_path');
         $uploader->upload($image)->shouldBeCalled();
 
-        $this->uploadImage($event);
+        $this->uploadImages($event);
     }
 
     function it_throws_exception_if_event_subject_is_not_an_image_aware(
@@ -56,7 +56,7 @@ final class ImageUploadListenerSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->duringUploadImage($event)
+            ->duringUploadImages($event)
         ;
     }
 }

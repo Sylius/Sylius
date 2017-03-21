@@ -14,7 +14,7 @@ namespace spec\Sylius\Component\Core\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Model\ImageAwareInterface;
+use Sylius\Component\Core\Model\ImagesAwareInterface;
 use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Model\Product;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -48,7 +48,7 @@ final class ProductSpec extends ObjectBehavior
 
     function it_implements_an_image_aware_interface()
     {
-        $this->shouldImplement(ImageAwareInterface::class);
+        $this->shouldImplement(ImagesAwareInterface::class);
     }
 
     function it_extends_a_product_model()

@@ -13,7 +13,7 @@ namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\Image;
-use Sylius\Component\Core\Model\ImageAwareInterface;
+use Sylius\Component\Core\Model\ImagesAwareInterface;
 use Sylius\Component\Core\Model\TaxonImage;
 
 /**
@@ -71,7 +71,7 @@ final class TaxonImageSpec extends ObjectBehavior
         $this->getOwner()->shouldReturn(null);
     }
 
-    function its_owner_is_mutable(ImageAwareInterface $owner)
+    function its_owner_is_mutable(ImagesAwareInterface $owner)
     {
         $this->setOwner($owner);
         $this->getOwner()->shouldReturn($owner);

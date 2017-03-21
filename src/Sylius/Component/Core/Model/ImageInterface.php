@@ -55,12 +55,12 @@ interface ImageInterface extends ResourceInterface
     public function setPath($path);
 
     /**
-     * @return ImageAwareInterface
+     * @return ImagesAwareInterface
      */
     public function getOwner();
 
     /**
-     * @param ImageAwareInterface|null $owner
+     * @param ImagesAwareInterface|null $owner
      */
-    public function setOwner(ImageAwareInterface $owner = null);
+    public function setOwner(ImagesAwareInterface $owner = null);
 }

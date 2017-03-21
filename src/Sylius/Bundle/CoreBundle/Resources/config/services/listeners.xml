@@ -23,12 +23,12 @@
             <argument type="service" id="sylius.repository.channel" />
             <tag name="kernel.event_listener" event="sylius.channel.pre_delete" method="onChannelPreDelete" />
         </service>
-        <service id="sylius.listener.image_upload" class="Sylius\Bundle\CoreBundle\EventListener\ImageUploadListener">
+        <service id="sylius.listener.images_upload" class="Sylius\Bundle\CoreBundle\EventListener\ImagesUploadListener">
             <argument type="service" id="sylius.image_uploader" />
-            <tag name="kernel.event_listener" event="sylius.product.pre_create" method="uploadImage" />
-            <tag name="kernel.event_listener" event="sylius.product.pre_update" method="uploadImage" />
-            <tag name="kernel.event_listener" event="sylius.taxon.pre_create" method="uploadImage" />
-            <tag name="kernel.event_listener" event="sylius.taxon.pre_update" method="uploadImage" />
+            <tag name="kernel.event_listener" event="sylius.product.pre_create" method="uploadImages" />
+            <tag name="kernel.event_listener" event="sylius.product.pre_update" method="uploadImages" />
+            <tag name="kernel.event_listener" event="sylius.taxon.pre_create" method="uploadImages" />
+            <tag name="kernel.event_listener" event="sylius.taxon.pre_update" method="uploadImages" />
         </service>
         <service id="sylius.listener.order_recalculation" class="Sylius\Bundle\CoreBundle\EventListener\OrderRecalculationListener">
             <argument type="service" id="sylius.order_processing.order_processor" />
