@@ -94,7 +94,7 @@ final class CheckoutPaymentContext implements Context
      */
     public function iShouldBeOnTheCheckoutPaymentStep()
     {
-        Assert::true($this->selectPaymentPage->isOpen());
+        $this->selectPaymentPage->verify();
     }
 
     /**
@@ -118,7 +118,7 @@ final class CheckoutPaymentContext implements Context
      */
     public function iShouldBeRedirectedToThePaymentStep()
     {
-        Assert::true($this->selectPaymentPage->isOpen());
+        $this->selectPaymentPage->verify();
     }
 
     /**
@@ -128,7 +128,7 @@ final class CheckoutPaymentContext implements Context
     {
         $this->selectPaymentPage->nextStep();
 
-        Assert::true($this->completePage->isOpen());
+        $this->completePage->verify();
     }
 
     /**

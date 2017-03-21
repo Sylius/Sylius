@@ -564,7 +564,7 @@ final class ManagingCustomersContext implements Context
      */
     public function iShouldBeOnTheCustomerCreationPage()
     {
-        Assert::true($this->createPage->isOpen());
+        $this->createPage->verify();
     }
 
     /**

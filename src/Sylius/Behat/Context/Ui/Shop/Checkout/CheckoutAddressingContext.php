@@ -315,7 +315,7 @@ final class CheckoutAddressingContext implements Context
      */
     public function iShouldBeRedirectedToTheAddressingStep()
     {
-        Assert::true($this->addressPage->isOpen());
+        $this->addressPage->verify();
     }
 
     /**
@@ -325,7 +325,7 @@ final class CheckoutAddressingContext implements Context
     {
         $this->addressPage->nextStep();
 
-        Assert::true($this->selectShippingPage->isOpen());
+        $this->selectShippingPage->verify();
     }
 
     /**
