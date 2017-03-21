@@ -12,8 +12,8 @@ sylius:
         checkout:
             addressing:
                 different_billing_address: Použít jinou adresu pro fakturaci?
-            payment_method: Způsob Platby
-            shipping_method: Způsob Dopravy
+            payment_method: Způsob platby
+            shipping_method: Způsoby dopravy
         promotion:
             channels: Kanály
         promotion_action:
@@ -28,11 +28,13 @@ sylius:
             contact_email: Kontaktní e-mail
             currencies: Měny
             currency_base: Základní měna
+            account_verification_required: Je požadováno ověření účtu?
             hostname: Hostname
-            locale_default: Výchozí Jazyk
+            locale_default: Výchozí jazyk
             locales: Lokalizace
             payment_methods: Způsoby platby
             shipping_methods: Způsoby dopravy
+            skipping_shipping_step_allowed: Přeskočit výběr doručení pokud je k dispozici pouze jedna možnost?
             tax_calculation_strategy: Strategie výpočtu daně
             tax_zone_default: Výchozí sazba DPH
             taxonomies: Taxonomie
@@ -60,7 +62,7 @@ sylius:
             restricted_zone: Zóna s omezeným přístupem
             short_description: Stručný popis
             variant_selection_method: Metoda výběru varianty
-            main_taxon: Hlavní taxonu
+            main_taxon: Hlavní taxon
             channels: Kanály
             enabled: Povoleno
         product_filter:

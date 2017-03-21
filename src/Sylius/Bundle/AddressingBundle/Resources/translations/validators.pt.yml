@@ -6,10 +6,10 @@ sylius:
         city:
             max_length: A cidade não deve ter mais que 255 caracteres.
             min_length: A cidade deve conter pelo menos 2 caracteres.
-            not_blank: Por favor introduza a cidade.
+            not_blank: Por favor, insira a cidade.
         country:
-            not_blank: Por favor selecione um país.
-            disabled: O país escolhido está desactivado. Por favor, escolha um diferente.
+            not_blank: Por favor, selecione o país.
+            disabled: O país escolhido está desativado. Por favor, escolha um diferente.
         first_name:
             max_length: O primeiro nome não deve ter mais que 255 caracteres|O primeiro nome não deve ter mais que 255 caracteres.
             min_length: O primeiro nome deve ter pelo menos 2 caracteres|O primeiro nome deve ter pelo menos 2 caracteres.

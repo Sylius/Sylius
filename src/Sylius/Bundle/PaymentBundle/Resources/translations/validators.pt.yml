@@ -11,7 +11,7 @@ sylius:
             min_range: O mês de validade do cartão de crédito deve estar compreendido entre {{ min }} e {{ max }}.
             not_blank: Selecione o mês de validade.
         number:
-            not_blank: Introduza o número do cartão.
+            not_blank: Por favor, insira o número do cartão.
             luhn: O número de cartão de crédito inserido é inválido.
         security_code:
             not_blank: Por favor introduza o código de segurança.

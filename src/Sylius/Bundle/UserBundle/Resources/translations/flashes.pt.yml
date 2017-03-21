@@ -1,0 +1,7 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    user:
+        change_password: 'A sua palavra-passe foi alterada com sucesso!'
+        verify_verified_email: 'O seu e-mail já foi verificado.'

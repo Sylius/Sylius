@@ -28,6 +28,9 @@ sylius:
                 format: Formato
             date:
                 format: Formato
+            select:
+                values: Valores
+                choose: Escolha uma opção
             text:
                 min: Comprimento mínimo
                 max: Comprimento máximo

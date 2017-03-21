@@ -10,7 +10,7 @@ sylius:
                 label: Palavra-passe
                 confirmation: Verificação
             remember_me: Lembrar-me
-            shipping_address: Endereço de entrega
+            shipping_address: Morada de expedição
             username: Nome de utilizador
         user_filter:
             query: Pesquisar
