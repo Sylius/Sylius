@@ -37,7 +37,7 @@ abstract class Image implements ImageInterface
     protected $path;
 
     /**
-     * @var ImagesAwareInterface
+     * @var ImageOwnerInterface
      */
     protected $owner;
 
@@ -129,7 +129,7 @@ abstract class Image implements ImageInterface
     /**
      * {@inheritdoc}
      */
-    public function setOwner(ImagesAwareInterface $owner = null)
+    public function setOwner(ImageOwnerInterface $owner = null)
     {
         $this->owner = $owner;
     }

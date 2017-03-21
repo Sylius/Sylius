@@ -11,7 +11,6 @@
 
 namespace Sylius\Component\Core\Model;
 
-use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
@@ -55,12 +54,12 @@ interface ImageInterface extends ResourceInterface
     public function setPath($path);
 
     /**
-     * @return ImagesAwareInterface
+     * @return ImageOwnerInterface
      */
     public function getOwner();
 
     /**
-     * @param ImagesAwareInterface|null $owner
+     * @param ImageOwnerInterface|null $owner
      */
-    public function setOwner(ImagesAwareInterface $owner = null);
+    public function setOwner(ImageOwnerInterface $owner = null);
 }
