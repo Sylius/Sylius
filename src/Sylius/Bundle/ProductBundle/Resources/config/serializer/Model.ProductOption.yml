@@ -19,6 +19,10 @@ Sylius\Component\Product\Model\ProductOption:
             expose: true
             type: array
             groups: [Default, Detailed]
+        translations:
+            expose: true
+            type: array
+            groups: [Default, Detailed]
     relations:
         -   rel: self
             href:

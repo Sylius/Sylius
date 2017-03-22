@@ -1,0 +1,33 @@
+{
+    "page": 1,
+    "limit": 10,
+    "pages": 1,
+    "total": 1,
+    "_links": {
+        "self": {
+            "href": "\/api\/v1\/product-options\/?page=1&limit=10"
+        },
+        "first": {
+            "href": "\/api\/v1\/product-options\/?page=1&limit=10"
+        },
+        "last": {
+            "href": "\/api\/v1\/product-options\/?page=1&limit=10"
+        }
+    },
+    "_embedded": {
+        "items": [
+            {
+                "id": @integer@,
+                "code": "MUG_COLOR",
+                "position": 0,
+                "translations": {},
+                "values": [],
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/products\/MUG_COLOR"
+                    }
+                }
+            }
+        ]
+    }
+}

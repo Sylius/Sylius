@@ -30,6 +30,7 @@
                     }
                 }
             ],
+            "translations": {},
             "_links": {
                 "self": {
                     "href": "\/api\/v1\/products\/MUG_SIZE"
@@ -41,6 +42,7 @@
             "code": "MUG_COLOR",
             "position": 1,
             "values": [],
+            "translations": {},
             "_links": {
                 "self": {
                     "href": "\/api\/v1\/products\/MUG_COLOR"
