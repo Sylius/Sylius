@@ -12,8 +12,8 @@ ServiceRegistry
 To create a new **ServiceRegistry** you need to
 determine what kind of interface should be kept inside.
 
-For the sake of examples lets use the :ref:`component_payment_calculator_fee-calculator-interface`
-from the :doc:`Payment </components/Payment/index>` component.
+For the sake of examples lets use the :ref:`component_promotion_checker_promotion-rule-checker-interface`
+from the :doc:`Promotion </components/Promotion/index>` component.
 
 .. code-block:: php
 
@@ -21,7 +21,7 @@ from the :doc:`Payment </components/Payment/index>` component.
 
    use Sylius\Component\Registry\ServiceRegistry;
 
-   $registry = new ServiceRegistry('Sylius\Component\Payment\Calculator\FeeCalculatorInterface');
+   $registry = new ServiceRegistry('Sylius\Component\Promotion\Checker\RuleCheckerInterface');
 
 Once you've done that you can manage any object with the corresponding interface.
 
@@ -31,11 +31,11 @@ So for starters, lets add some services:
 
    <?php
 
-   use Sylius\Component\Payment\Calculator\FixedFeeCalculator;
-   use Sylius\Component\Payment\Calculator\PercentFeeCalculator;
+   use Sylius\Component\Promotion\Checker\Rule\ItemTotalRuleChecker;
+   use Sylius\Component\Promotion\Checker\Rule\CartQuantityRuleChecker;
 
-   $registry->register('fixed', new FixedFeeCalculator());
-   $registry->register('percent', new PercentFeeCalculator());
+   $registry->register('item_total', new ItemTotalRuleChecker());
+   $registry->register('cart_quantity', new CartQuantityRuleChecker());
 
 .. hint::
    The first parameter of ``register`` is incredibly important, as we will use it for all further operations.
@@ -47,11 +47,11 @@ After specifying the interface and inserting services, we can manage them:
 
    <?php
 
-   $registry->has('fixed'); // returns true
+   $registry->has('item_total'); // returns true
 
-   $registry->get('fixed'); // returns the FixedFeeCalculator we inserted earlier on
+   $registry->get('item_total'); // returns the ItemTotalRuleChecker we inserted earlier on
 
-   $registry->all(); // returns an array containing both calculators
+   $registry->all(); // returns an array containing both rule checkers
 
 Removing a service from the registry is as easy as adding:
 
@@ -59,9 +59,9 @@ Removing a service from the registry is as easy as adding:
 
    <?php
 
-   $registry->unregister('fixed');
+   $registry->unregister('item_total');
 
-   $registry->has('fixed'); // now returns false
+   $registry->has('item_total'); // now returns false
 
 .. note::
    This service implements the :ref:`component_registry_service-registry-interface`.

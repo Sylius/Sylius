@@ -13,10 +13,8 @@ It ships with default **Payment** and **PaymentMethod** models.
    :maxdepth: 2
 
    installation
-   basic_usage
    models
    interfaces
-   default_fee_calculators
    state_machine
 
 Learn more
