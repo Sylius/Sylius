@@ -23,14 +23,6 @@ use Symfony\Component\DependencyInjection\Reference;
 final class RegisterRuleCheckersPassTest extends AbstractCompilerPassTestCase
 {
     /**
-     * {@inheritdoc}
-     */
-    protected function registerCompilerPass(ContainerBuilder $container)
-    {
-        $container->addCompilerPass(new RegisterRuleCheckersPass());
-    }
-
-    /**
      * @test
      */
     public function it_registers_collected_rule_checkers_in_the_registry()
@@ -90,5 +82,13 @@ final class RegisterRuleCheckersPassTest extends AbstractCompilerPassTestCase
             'add',
             ['custom', 'default', 'FQCN']
         );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function registerCompilerPass(ContainerBuilder $container)
+    {
+        $container->addCompilerPass(new RegisterRuleCheckersPass());
     }
 }
