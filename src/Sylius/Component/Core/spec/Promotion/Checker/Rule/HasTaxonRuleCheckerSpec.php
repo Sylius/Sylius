@@ -43,14 +43,12 @@ final class HasTaxonRuleCheckerSpec extends ObjectBehavior
         OrderInterface $subject,
         OrderItemInterface $item,
         ProductInterface $bastardSword,
-        ProductTaxonInterface $bastardSwordProductTaxon,
         TaxonInterface $swords
     ) {
         $configuration = ['taxons' => ['swords']];
 
         $swords->getCode()->willReturn('swords');
-        $bastardSword->getProductTaxons()->willReturn([$bastardSwordProductTaxon]);
-        $bastardSwordProductTaxon->getTaxon()->willReturn($swords);
+        $bastardSword->getTaxons()->willReturn([$swords]);
         $item->getProduct()->willReturn($bastardSword);
         $subject->getItems()->willReturn([$item]);
 
@@ -67,8 +65,7 @@ final class HasTaxonRuleCheckerSpec extends ObjectBehavior
         $configuration = ['taxons' => ['swords', 'axes']];
 
         $swords->getCode()->willReturn('swords');
-        $bastardSword->getProductTaxons()->willReturn([$bastardSwordProductTaxon]);
-        $bastardSwordProductTaxon->getTaxon()->willReturn($swords);
+        $bastardSword->getTaxons()->willReturn([$swords]);
         $item->getProduct()->willReturn($bastardSword);
         $subject->getItems()->willReturn([$item]);
 
@@ -85,8 +82,7 @@ final class HasTaxonRuleCheckerSpec extends ObjectBehavior
         $configuration = ['taxons' => ['swords', 'axes']];
 
         $bows->getCode()->willReturn('bows');
-        $reflexBow->getProductTaxons()->willReturn([$reflexBowProductTaxon]);
-        $reflexBowProductTaxon->getTaxon()->willReturn($bows);
+        $reflexBow->getTaxons()->willReturn([$bows]);
         $item->getProduct()->willReturn($reflexBow);
         $subject->getItems()->willReturn([$item]);
 
