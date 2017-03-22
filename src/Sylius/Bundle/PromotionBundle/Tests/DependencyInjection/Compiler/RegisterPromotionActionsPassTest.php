@@ -23,14 +23,6 @@ use Symfony\Component\DependencyInjection\Reference;
 final class RegisterPromotionActionsPassTest extends AbstractCompilerPassTestCase
 {
     /**
-     * {@inheritdoc}
-     */
-    protected function registerCompilerPass(ContainerBuilder $container)
-    {
-        $container->addCompilerPass(new RegisterPromotionActionsPass());
-    }
-
-    /**
      * @test
      */
     public function it_registers_collected_promotion_actions_in_the_registry()
@@ -90,5 +82,13 @@ final class RegisterPromotionActionsPassTest extends AbstractCompilerPassTestCas
             'add',
             ['custom', 'default', 'FQCN']
         );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function registerCompilerPass(ContainerBuilder $container)
+    {
+        $container->addCompilerPass(new RegisterPromotionActionsPass());
     }
 }
