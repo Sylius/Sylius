@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Promotion\Rule;
 
+use Sylius\Bundle\ProductBundle\Form\Type\ProductAutocompleteChoiceType;
 use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ResourceToIdentifierTransformer;
-use Sylius\Bundle\ResourceBundle\Form\Type\ResourceAutocompleteChoiceType;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -45,11 +45,8 @@ final class ContainsProductConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('product_code', ResourceAutocompleteChoiceType::class, [
+            ->add('product_code', ProductAutocompleteChoiceType::class, [
                 'label' => 'sylius.form.promotion_action.add_product_configuration.product',
-                'resource' => 'sylius.product',
-                'choice_name' => 'name',
-                'choice_value' => 'code',
                 'constraints' => [
                     new NotBlank(['groups' => ['sylius']]),
                     new Type(['type' => 'string', 'groups' => ['sylius']]),
