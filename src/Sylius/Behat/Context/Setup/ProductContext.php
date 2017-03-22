@@ -464,6 +464,20 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Given /^(this product) only variant was renamed to "([^"]+)"$/
+     */
+    public function productOnlyVariantWasRenamed(ProductInterface $product, $variantName)
+    {
+        Assert::true($product->isSimple());
+
+        /** @var ProductVariantInterface $productVariant */
+        $productVariant = $product->getVariants()->first();
+        $productVariant->setName($variantName);
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @Given /^there is product "([^"]+)" available in ((?:this|that|"[^"]+") channel)$/
      * @Given /^the store has a product "([^"]+)" available in ("([^"]+)" channel)$/
      */

@@ -20,6 +20,9 @@
 
                 {# Nothing to see here. #}
                 <div class="ui hidden element">
+                    {% if product.simple %}
+                        {{ form_row(form.variant.translations) }}
+                    {% endif %}
                     {{ form_row(form.variantSelectionMethod) }}
                 </div>
             </div>

@@ -23,6 +23,15 @@ Feature: Editing a product
         And this product name should be "7 Wonders"
 
     @ui
+    Scenario: Renaming a simple product does not change its variant name
+        Given this product only variant was renamed to "Dice Brewing: The Game"
+        And I want to modify this product
+        When I rename it to "7 Wonders" in "English (United States)"
+        And I save my changes
+        And I want to view all variants of this product
+        Then the first variant in the list should have name "Dice Brewing: The Game"
+
+    @ui
     Scenario: Changing a simple product price
         Given I want to modify the "Dice Brewing" product
         When I change its price to $15.00 for "United States" channel
