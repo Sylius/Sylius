@@ -41,9 +41,14 @@ interface ProductTaxonsAwareInterface
     public function removeProductTaxon(ProductTaxonInterface $productTaxon);
 
     /**
+     * @return Collection|TaxonInterface[]
+     */
+    public function getTaxons();
+
+    /**
      * @param TaxonInterface $taxon
      *
-     * @return ProductTaxonInterface|null
+     * @return bool
      */
-    public function filterProductTaxonsByTaxon(TaxonInterface $taxon);
+    public function hasTaxon(TaxonInterface $taxon);
 }

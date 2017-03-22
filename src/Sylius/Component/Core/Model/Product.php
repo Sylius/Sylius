@@ -149,11 +149,19 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function filterProductTaxonsByTaxon(TaxonInterface $taxon)
+    public function getTaxons()
     {
-        return $this->productTaxons->filter(function ($productTaxon) use ($taxon) {
-            return $taxon === $productTaxon->getTaxon();
+        return $this->productTaxons->map(function (ProductTaxonInterface $productTaxon) {
+            return $productTaxon->getTaxon();
         });
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasTaxon(TaxonInterface $taxon)
+    {
+        return $this->getTaxons()->contains($taxon);
     }
 
     /**
