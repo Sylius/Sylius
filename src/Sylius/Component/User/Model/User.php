@@ -414,7 +414,13 @@ class User implements UserInterface
      */
     public function isPasswordRequestNonExpired(\DateInterval $ttl)
     {
-        return null !== $this->passwordRequestedAt && new \DateTime() <= $this->passwordRequestedAt->add($ttl);
+        if (null === $this->passwordRequestedAt) {
+            return false;
+        }
+        
+        $threshold = new \DateTime();
+        $threshold->sub($ttl);
+        return $threshold <= $this->passwordRequestedAt;
     }
 
     /**
