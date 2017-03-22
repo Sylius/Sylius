@@ -102,6 +102,14 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function isShippingRequired()
+    {
+        return $this->getElement('shipping_required')->isChecked();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
@@ -111,6 +119,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'original_price' => '#sylius_product_variant_channelPricings > .field:contains("%channelName%") input[name$="[originalPrice]"]',
             'price' => '#sylius_product_variant_channelPricings > .field:contains("%channelName%") input[name$="[price]"]',
             'pricing_configuration' => '#sylius_calculator_container',
+            'shipping_required' => '#sylius_product_variant_shippingRequired',
             'tracked' => '#sylius_product_variant_tracked',
         ]);
     }

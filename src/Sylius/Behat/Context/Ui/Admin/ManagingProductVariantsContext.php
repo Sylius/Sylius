@@ -216,6 +216,14 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
+     * @When I do not want to have shipping required for this product
+     */
+    public function iDoNotWantToHaveShippingRequiredForThisProduct()
+    {
+        $this->createPage->setShippingRequired(false);
+    }
+
+    /**
      * @Then /^the (variant with code "[^"]+") should be priced at (?:€|£|\$)([^"]+) for channel "([^"]+)"$/
      */
     public function theVariantWithCodeShouldBePricedAtForChannel(ProductVariantInterface $productVariant, $price, $channelName)
@@ -504,6 +512,16 @@ final class ManagingProductVariantsContext implements Context
     public function iChangeItsQuantityOfInventoryTo($amount)
     {
         $this->updatePage->specifyCurrentStock($amount);
+    }
+
+    /**
+     * @Then /^the (variant with code "[^"]+") should not have shipping required$/
+     */
+    public function theVariantWithCodeShouldNotHaveShippingRequired(ProductVariantInterface $productVariant)
+    {
+        $this->updatePage->open(['productId' => $productVariant->getProduct()->getId(),'id' => $productVariant->getId()]);
+
+        Assert::false($this->updatePage->isShippingRequired());
     }
 
     /**

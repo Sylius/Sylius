@@ -108,4 +108,9 @@ interface CreateSimpleProductPageInterface extends BaseCreatePageInterface
      * @param string $shippingCategoryName
      */
     public function selectShippingCategory($shippingCategoryName);
+
+    /**
+     * @param bool $isShippingRequired
+     */
+    public function setShippingRequired($isShippingRequired);
 }

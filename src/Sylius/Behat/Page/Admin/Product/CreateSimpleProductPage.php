@@ -217,6 +217,19 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         $this->getElement('shipping_category')->selectOption($shippingCategoryName);
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function setShippingRequired($isShippingRequired)
+    {
+        if ($isShippingRequired) {
+            $this->getElement('shipping_required')->check();
+
+            return;
+        }
+
+        $this->getElement('shipping_required')->uncheck();
+    }
 
     /**
      * {@inheritdoc}
@@ -255,6 +268,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
             'original_price' => '#sylius_product_variant_channelPricings > .field:contains("%channelName%") input[name$="[originalPrice]"]',
             'price_calculator' => '#sylius_product_variant_pricingCalculator',
             'shipping_category' => '#sylius_product_variant_shippingCategory',
+            'shipping_required' => '#sylius_product_variant_shippingRequired',
             'slug' => '#sylius_product_translations_%locale%_slug',
             'tab' => '.menu [data-tab="%name%"]',
             'toggle_slug_modification_button' => '.toggle-product-slug-modification',

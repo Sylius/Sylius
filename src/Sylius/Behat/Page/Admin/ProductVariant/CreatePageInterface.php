@@ -89,4 +89,9 @@ interface CreatePageInterface extends BaseCreatePageInterface
      * @return string
      */
     public function getPricesValidationMessage();
+
+    /**
+     * @param bool $isShippingRequired
+     */
+    public function setShippingRequired($isShippingRequired);
 }

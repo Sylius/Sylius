@@ -139,6 +139,20 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function setShippingRequired($isShippingRequired)
+    {
+        if ($isShippingRequired) {
+            $this->getElement('shipping_required')->check();
+
+            return;
+        }
+
+        $this->getElement('shipping_required')->uncheck();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
@@ -151,6 +165,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             'option_select' => '#sylius_product_variant_optionValues_%option-name%',
             'price_calculator' => '#sylius_product_variant_pricingCalculator',
             'shipping_category' => '#sylius_product_variant_shippingCategory',
+            'shipping_required' => '#sylius_product_variant_shippingRequired',
             'original_price' => '#sylius_product_variant_channelPricings > .field:contains("%channelName%") input[name$="[originalPrice]"]',
             'price' => '#sylius_product_variant_channelPricings > .field:contains("%channelName%") input[name$="[price]"]',
             'prices_validation_message' => '#sylius_product_variant_channelPricings ~ .sylius-validation-error, #sylius_product_variant_channelPricings .sylius-validation-error',
