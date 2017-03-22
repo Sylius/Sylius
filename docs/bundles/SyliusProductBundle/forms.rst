@@ -36,8 +36,6 @@ The default product form consists of following fields.
 +-----------------+----------+
 | description     | textarea |
 +-----------------+----------+
-| availableOn     | datetime |
-+-----------------+----------+
 | metaDescription | text     |
 +-----------------+----------+
 | metaKeywords    | text     |

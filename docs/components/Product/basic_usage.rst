@@ -90,12 +90,6 @@ Product variants management
 
    $product->getVariants(); // Returns an array containing $variant and $availableVariant.
 
-.. code-block:: php
-
-   $product->getAvailableVariants(); // Returns an array containing only $availableVariant.
-
-``getAvailableVariants`` returns only variants which ``availableOn`` property is set to a past time.
-
 .. note::
    Only instances of **Variant** from the :doc:`/components/Product/index` component
    can be used with the :ref:`component_product_model_product` model.

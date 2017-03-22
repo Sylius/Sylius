@@ -74,31 +74,6 @@ interface ProductVariantInterface extends
     public function setProduct(ProductInterface $product = null);
 
     /**
-     * @return bool
-     */
-    public function isAvailable();
-
-    /**
-     * @return \DateTime
-     */
-    public function getAvailableOn();
-
-    /**
-     * @param \DateTime|null $availableOn
-     */
-    public function setAvailableOn(\DateTime $availableOn = null);
-
-    /**
-     * @return \DateTime
-     */
-    public function getAvailableUntil();
-
-    /**
-     * @param \DateTime|null $availableUntil
-     */
-    public function setAvailableUntil(\DateTime $availableUntil = null);
-
-    /**
      * @return int
      */
     public function getPosition();

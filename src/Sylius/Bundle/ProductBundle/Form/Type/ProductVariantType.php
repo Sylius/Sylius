@@ -34,18 +34,6 @@ final class ProductVariantType extends AbstractResourceType
                 'entry_type' => ProductVariantTranslationType::class,
                 'label' => 'sylius.form.product_variant.translations',
             ])
-            ->add('availableOn', DateTimeType::class, [
-                'required' => false,
-                'date_widget' => 'single_text',
-                'time_widget' => 'single_text',
-                'label' => 'sylius.form.product_variant.available_on',
-            ])
-            ->add('availableUntil', DateTimeType::class, [
-                'required' => false,
-                'date_widget' => 'single_text',
-                'time_widget' => 'single_text',
-                'label' => 'sylius.form.product_variant.available_until',
-            ])
             ->addEventSubscriber(new AddCodeFormSubscriber())
         ;
 

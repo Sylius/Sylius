@@ -32,9 +32,6 @@
             <gedmo:timestampable on="update"/>
         </field>
 
-        <field name="availableOn" column="available_on" type="datetime" nullable="true" />
-        <field name="availableUntil" column="available_until" type="datetime" nullable="true" />
-
         <many-to-one target-entity="Sylius\Component\Product\Model\ProductInterface" field="product" inversed-by="variants">
             <join-column name="product_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
             <gedmo:sortable-group />
