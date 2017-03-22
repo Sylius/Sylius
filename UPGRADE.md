@@ -205,6 +205,9 @@ You can bring back previous configuration by overriding current routing with you
 
 * Removed `Sylius\Bundle\CoreBundle\Form\Type\Promotion\PromotionConfigurationType` class as it has no behaviour and is not used.
 
+* Removed `filterProductTaxonsByTaxon` method from `ProductTaxonAwareInterface`, added `getTaxons` and `hasTaxon` methods.
+  If you used the removed method to determine whether product belongs to a given taxon, use `hasTaxon` instead.
+
 ### Currency / CurrencyBundle
 
 * The following classes were removed due to being no longer used in current implementation:

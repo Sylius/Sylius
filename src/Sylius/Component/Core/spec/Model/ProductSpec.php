@@ -133,34 +133,15 @@ final class ProductSpec extends ObjectBehavior
         $this->getImagesByType('thumbnail')->shouldBeLike(new ArrayCollection([$image->getWrappedObject()]));
     }
 
-    function it_filters_product_taxons_by_taxon(
-        ProductTaxonInterface $firstProductTaxon,
-        ProductTaxonInterface $secondProductTaxon,
-        TaxonInterface $firstTaxon,
-        TaxonInterface $secondTaxon
-    ) {
-        $this->addProductTaxon($firstProductTaxon);
-        $this->addProductTaxon($secondProductTaxon);
+    function it_proxies_taxon_collection(ProductTaxonInterface $productTaxon, TaxonInterface $taxon, TaxonInterface $otherTaxon)
+    {
+        $productTaxon->getTaxon()->willReturn($taxon);
+        $productTaxon->setProduct($this)->willReturn();
 
-        $firstProductTaxon->getTaxon()->willReturn($firstTaxon);
-        $secondProductTaxon->getTaxon()->willReturn($secondTaxon);
+        $this->addProductTaxon($productTaxon);
 
-        $this->filterProductTaxonsByTaxon($firstTaxon)->shouldBeLike(new ArrayCollection([$firstProductTaxon->getWrappedObject()]));
-    }
-
-    function it_returns_null_if_no_product_taxon_has_taxon_during_filtering(
-        ProductTaxonInterface $firstProductTaxon,
-        ProductTaxonInterface $secondProductTaxon,
-        TaxonInterface $firstTaxon,
-        TaxonInterface $secondTaxon,
-        TaxonInterface $thirdTaxon
-    ) {
-        $this->addProductTaxon($firstProductTaxon);
-        $this->addProductTaxon($secondProductTaxon);
-
-        $firstProductTaxon->getTaxon()->willReturn($firstTaxon);
-        $secondProductTaxon->getTaxon()->willReturn($secondTaxon);
-
-        $this->filterProductTaxonsByTaxon($thirdTaxon)->shouldBeLike(new ArrayCollection());
+        $this->getTaxons()->toArray()->shouldReturn([$taxon]);
+        $this->hasTaxon($taxon)->shouldReturn(true);
+        $this->hasTaxon($otherTaxon)->shouldReturn(false);
     }
 }
