@@ -20,6 +20,7 @@
                 "id": @integer@,
                 "code": "MUG_SIZE",
                 "position": 0,
+                "translations": {},
                 "values": [
                     {
                         "code": "MUG_SIZE_S",
@@ -52,6 +53,7 @@
                 "id": @integer@,
                 "code": "MUG_COLOR",
                 "position": 1,
+                "translations": {},
                 "values": [],
                 "_links": {
                     "self": {

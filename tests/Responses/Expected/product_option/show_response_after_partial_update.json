@@ -1,0 +1,69 @@
+{
+    "id": @integer@,
+    "code": "MUG_SIZE",
+    "position": 0,
+    "translations": {
+        "en_US": {
+            "id": @integer@,
+            "locale": "en_US",
+            "name": "Mug size"
+        },
+        "de_CH": {
+            "id": @integer@,
+            "locale": "de_CH",
+            "name": "Bechergröße"
+        }
+    },
+    "values": [
+        {
+            "code": "MUG_SIZE_S",
+            "translations": {
+                "en_US": {
+                    "id": @integer@,
+                    "locale": "en_US",
+                    "value": "Small"
+                },
+                "de_CH": {
+                    "id": @integer@,
+                    "locale": "de_CH",
+                    "value": "Klein"
+                }
+            }
+        },
+        {
+            "code": "MUG_SIZE_L",
+            "translations": {
+                "en_US": {
+                    "id": @integer@,
+                    "locale": "en_US",
+                    "value": "Large"
+                },
+                "de_CH": {
+                    "id": @integer@,
+                    "locale": "de_CH",
+                    "value": "Groß"
+                }
+            }
+        },
+        {
+            "code": "MUG_SIZE_M",
+            "translations": {
+                "en_US": {
+                    "id": @integer@,
+                    "locale": "en_US",
+                    "value": "Medium"
+                },
+                "de_CH": {
+                    "id": @integer@,
+                    "locale": "de_CH",
+                    "value": "Mittel"
+                }
+            }
+        }
+    ],
+    "_links": {
+        "self": {
+            "href": "\/api\/v1\/products\/MUG_SIZE"
+        }
+    }
+}
