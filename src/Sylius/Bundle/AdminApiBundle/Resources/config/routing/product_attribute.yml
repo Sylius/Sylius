@@ -6,8 +6,20 @@ sylius_admin_api_product_attribute:
         identifier: code
         alias: sylius.product_attribute
         section: admin_api
-        only: ['index', 'show']
+        except: ['create']
         serialization_version: $version
         criteria:
             code: $code
     type: sylius.resource_api
+
+sylius_admin_api_product_attribute_create:
+    path: /product-attributes/{type}
+    methods: [POST]
+    defaults:
+        _controller: sylius.controller.product_attribute:createAction
+        _sylius:
+            serialization_version: $version
+            factory:
+                method: createTyped
+                arguments:
+                    type: $type
