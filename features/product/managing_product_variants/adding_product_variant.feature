@@ -67,3 +67,15 @@ Feature: Adding a new product variant
         And the "VODKA_WYBOROWA_EXQUISITE" variant of the "Wyborowa Vodka" product should appear in the store
         And the variant with code "VODKA_WYBOROWA_EXQUISITE" should be priced at $100.00 for channel "United States"
         And the variant with code "VODKA_WYBOROWA_EXQUISITE" should have an original price of $120.00 for channel "United States"
+
+    @ui
+    Scenario: Adding a new product variant without shipping required
+        Given I want to create a new variant of this product
+        When I specify its code as "VODKA_WYBOROWA_PREMIUM"
+        And I set its price to "$100.00" for "United States" channel
+        And I do not want to have shipping required for this product
+        And I add it
+        Then I should be notified that it has been successfully created
+        And the variant with code "VODKA_WYBOROWA_PREMIUM" should not have shipping required
+        And the "VODKA_WYBOROWA_PREMIUM" variant of the "Wyborowa Vodka" product should appear in the store
+        And the variant with code "VODKA_WYBOROWA_PREMIUM" should be priced at $100.00 for channel "United States"

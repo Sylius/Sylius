@@ -106,6 +106,7 @@ sylius:
             on_hand: Current stock
             price: Price
             sku: SKU
+            shipping_required: Is shipping required?
             weight: Weight
             width: Width
         attribute:

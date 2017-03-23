@@ -72,4 +72,9 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
      * @param int $amount
      */
     public function specifyCurrentStock($amount);
+
+    /**
+     * @return bool
+     */
+    public function isShippingRequired();
 }

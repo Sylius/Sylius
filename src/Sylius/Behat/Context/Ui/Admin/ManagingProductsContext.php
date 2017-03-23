@@ -498,6 +498,14 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @When I do not want to have shipping required for this product
+     */
+    public function iDoNotWantToHaveShippingRequiredForThisProduct()
+    {
+        $this->createSimpleProductPage->setShippingRequired(false);
+    }
+
+    /**
      * @Then attribute :attributeName of product :product should be :value
      * @Then attribute :attributeName of product :product should be :value in :language
      */
@@ -898,6 +906,16 @@ final class ManagingProductsContext implements Context
             $this->updateConfigurableProductPage->getValidationMessage('channels'),
             'You have to define product variants\' prices for newly assigned channels first.'
         );
+    }
+
+    /**
+     * @Then /^the (product "[^"]+") should not have shipping required$/
+     */
+    public function theProductWithCodeShouldNotHaveShippingRequired(ProductInterface $product)
+    {
+        $this->updateSimpleProductPage->open(['id' => $product->getId()]);
+
+        Assert::false($this->updateSimpleProductPage->isShippingRequired());
     }
 
     /**

@@ -200,4 +200,9 @@ interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
      * @return string
      */
     public function getOriginalPriceForChannel($channelName);
+
+    /**
+     * @return bool
+     */
+    public function isShippingRequired();
 }
