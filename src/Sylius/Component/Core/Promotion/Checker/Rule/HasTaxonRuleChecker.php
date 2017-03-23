@@ -13,6 +13,7 @@ namespace Sylius\Component\Core\Promotion\Checker\Rule;
 
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
 use Sylius\Component\Promotion\Exception\UnsupportedTypeException;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
@@ -39,10 +40,25 @@ final class HasTaxonRuleChecker implements RuleCheckerInterface
 
         /* @var $item OrderItemInterface */
         foreach ($subject->getItems() as $item) {
-            foreach ($item->getProduct()->getProductTaxons() as $productTaxon) {
-                if (in_array($productTaxon->getTaxon()->getCode(), $configuration['taxons'], true)) {
+            if ($this->hasProductValidTaxon($item->getProduct(), $configuration)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @param ProductInterface $product
+     * @param array $configuration
+     *
+     * @return bool
+     */
+    private function hasProductValidTaxon(ProductInterface $product, array $configuration)
+    {
+        foreach ($product->getTaxons() as $taxon) {
+            if (in_array($taxon->getCode(), $configuration['taxons'], true)) {
                     return true;
-                }
             }
         }
 
