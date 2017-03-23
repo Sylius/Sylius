@@ -34,11 +34,12 @@ final class CheckoutOrderDetailsContext implements Context
     }
 
     /**
-     * @When I change payment method to :paymentMethodName
+     * @When I try to pay with :paymentMethodName payment method
      */
     public function iChangePaymentMethodTo($paymentMethodName)
     {
         $this->orderDetails->choosePaymentMethod($paymentMethodName);
+        $this->orderDetails->pay();
     }
 
     /**
