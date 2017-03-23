@@ -64,6 +64,7 @@ final class AddressContext implements Context
     /**
      * @Transform /^to "([^"]+)"$/
      * @Transform /^"([^"]+)" based \w+ address$/
+     * @Transform /^"([^"]+)" based address$/
      */
     public function createNewAddress($countryName)
     {
