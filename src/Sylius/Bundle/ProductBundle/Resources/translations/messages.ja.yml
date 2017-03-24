@@ -7,5 +7,3 @@ sylius:
             options: sylius.breadcrumb.option.index
             meta_keywords: Metaタグ(keywords)
             meta_description: metaタグ(description)
-        product_variant:
-            available_on: 入荷日

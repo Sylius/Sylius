@@ -28,6 +28,12 @@ sylius:
                 format: Formát
             date:
                 format: Formát
+            select:
+                multiple: Více
+                values: Hodnoty
+                choose: Zvolte možnost
+                min: Min. položek
+                max: Max. položek
             text:
                 min: Min. délka
                 max: Max. délka

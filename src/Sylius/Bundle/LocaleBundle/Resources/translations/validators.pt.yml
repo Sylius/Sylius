@@ -5,4 +5,4 @@ sylius:
     locale:
         code:
             not_blank: Por favor escolha o código de localidade.
-            unique: O código da linguagem deve ser único.
+            unique: O código de localidade deve ser único.

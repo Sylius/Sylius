@@ -12,8 +12,6 @@ sylius:
             meta_description: Meta aprašymas
             taxons: Taksonai
         product_variant:
-            available_on: Prieinamas nuo
-            available_until: Prieinamas iki
             name: Pavadinimas
         association_type:
             name: Pavadinimas

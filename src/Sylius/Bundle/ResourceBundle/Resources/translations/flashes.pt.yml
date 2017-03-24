@@ -5,7 +5,7 @@ sylius:
     resource:
         create: '%resource% foi criado com sucesso.'
         update: '%resource% foi atualizado com sucesso.'
-        delete: '%resource% foi apagado com sucesso.'
+        delete: '%resource% foi eliminado com sucesso.'
         move: '%resource% foi movido com sucesso.'
         generate: '%resource%s foi/foram criado(s) com sucesso.'
         revert: '%resource% foi revertido com sucesso.'

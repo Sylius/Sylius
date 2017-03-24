@@ -11,8 +11,6 @@ sylius:
             meta_keywords: Słowa kluczowe w sekcji meta
             meta_description: Opis w sekcji meta
         product_variant:
-            available_on: Dostępny od
-            available_until: Dostępne do
             name: Nazwa
         association_type:
             name: Nazwa

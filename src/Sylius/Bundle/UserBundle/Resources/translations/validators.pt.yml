@@ -6,10 +6,10 @@ sylius:
         email:
             not_blank: Por favor insira o seu e-mail.
             invalid: Este endereço de e-mail é inválido.
-            not_registered: Não existe nenhum utilizador com este endereço de e-mail. Por favor registe-se primeiro.
+            not_registered: Utilizador com este e-mail não existe. Por favor, registe-se primeiro.
         plainPassword:
-            not_blank: Insira a sua palavra-passe, por favor.
-            mismatch: As palavras-passe inseridas não combinam
+            not_blank: Por favor, Insira a sua palavra-passe.
+            mismatch: As palavras-passe inseridas não correspondem
             wrong_current: A palavra-passe fornecida é diferente da atual.
         password:
             min: A palavra-passe deve ter, pelo menos, {{ limit }} caracteres.

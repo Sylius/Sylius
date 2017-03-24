@@ -5,11 +5,11 @@ sylius:
     promotion:
         code:
             unique: Já existe uma promoção com o código introduzido.
-            not_blank: Por favor insira o código promocional.
+            not_blank: Por favor, insira o código promocional.
         description:
             max_length: A descrição da promoção não deve ter mais que 1 caracter.|A descrição da promoção não deve ter mais que {{ limit }} caracteres.
             min_length: A descrição da promoção deve ter pelo menos 1 caracter.|A descrição da promoção deve ter pelo menos {{ limit }} caracteres.
-            not_blank: Introduza a descrição da promoção.
+            not_blank: Por favor, insira a descrição da promoção.
         end_date_cannot_be_set_prior_start_date: A data de término não pode ser anterior à data de início.
         name:
             max_length: O nome da promoção não deve ter mais que 1 caracter.|O nome da promoção não deve ter mais que {{ limit }} caracteres.

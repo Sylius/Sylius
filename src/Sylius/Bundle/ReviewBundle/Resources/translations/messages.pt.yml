@@ -6,8 +6,8 @@ sylius:
         review:
             author: Autor
             comment: Comentário
-            header: Avaliar
-            rating: Avaliação
+            header: Adicionar um comentário
+            rating: Classificação
             status:
                 approved: Aprovado
                 label: Estado

@@ -25,3 +25,6 @@ sylius:
     product_translation:
         short_description:
             max: Kratek opis ne sme biti daljši kot {{ limit }} znakov.
+    user:
+        email:
+            invalid: Ta e-pošta ni veljavna.

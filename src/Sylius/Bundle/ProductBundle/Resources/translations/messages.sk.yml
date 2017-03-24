@@ -13,8 +13,6 @@ sylius:
             slug: Slug
             taxons: Kategórie
         product_variant:
-            available_on: Dostupný od
-            available_until: Dostupný do
             name: Názov
         association_type:
             name: Názov

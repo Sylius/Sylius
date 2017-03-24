@@ -12,8 +12,6 @@ sylius:
             meta_description: توضیحات سئو
             taxons: دسته بندی ها
         product_variant:
-            available_on: تاریخ فعال شدن
-            available_until: در دسترس تا
             name: نام
         association_type:
             name: نام

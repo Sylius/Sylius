@@ -5,14 +5,14 @@ sylius:
     form:
         block:
             body: Corpo
-            id: Nº
+            id: Id.
             title: Título
         cart:
             coupon: Cupão
         checkout:
             addressing:
-                different_billing_address: Usar um endereço diferente para faturação?
-            payment_method: Método de pagamento
+                different_billing_address: Usar uma morada diferente para a faturação?
+            payment_method: Método de Pagamento
             shipping_method: Método de envio
         promotion:
             channels: Canais
@@ -23,8 +23,10 @@ sylius:
             name: Nome
             roles: Funções
         channel:
+            contact_email: E-mail de Contacto
             currencies: Moedas
             currency_base: Moeda base
+            account_verification_required: É necessária a verificação da conta?
             hostname: Nome do servidor
             locale_default: Localidade padrão
             locales: Linguagens
@@ -50,7 +52,7 @@ sylius:
             channel: Todos os canais
         page:
             body: Corpo
-            id: Nº
+            id: Id.
             title: Título
         product:
             images: Imagens
@@ -88,7 +90,7 @@ sylius:
             file: Selecionar imagem
         user:
             billing_address: Endereço de faturação
-            different_billing_address: Usar um endereço diferente para faturação?
+            different_billing_address: Usar uma morada diferente para a faturação?
             enabled: Ativado
             first_name: Nome próprio
             groups: Grupos
@@ -117,7 +119,11 @@ sylius:
             type: Tipo de associação
         product_association_type:
             name: Nome
+        promotion_filter:
+            products: Filtro de produtos
         promotion_rule:
+            customer_group:
+                group: Grupo de clientes
             product:
                 products: Produtos
             total_of_items_from_taxon:
@@ -127,6 +133,10 @@ sylius:
             channels: Canais
         product_attribute:
             position: Posição
+        zone:
+            scopes:
+                shipping: Expedição
+                tax: Imposto
     installer:
         extensions:
             header: extensões
@@ -136,6 +146,7 @@ sylius:
             apc: APC
             ctype: Ctype
             gd: GD
+            help: Instalar e ativar a extensão %extension%.
             exif: Exif
             icu: ICU
             json_encode: JSON

@@ -49,6 +49,7 @@ sylius:
     user:
         email:
             unique: Den här e-posten används redan.
+            invalid: E-postadressen är ogiltig.
         username:
             unique: Detta användarnamn används redan.
             not_blank: Vänligen uppge ett namn.

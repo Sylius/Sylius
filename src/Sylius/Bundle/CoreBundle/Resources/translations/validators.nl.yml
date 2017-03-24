@@ -84,6 +84,7 @@ sylius:
     user:
         email:
             unique: Dit e-mailadres is al in gebruik.
+            invalid: Deze e-mail is ongeldig.
         username:
             unique: Deze gebruikersnaam is al in gebruik.
             not_blank: Voer je naam in.

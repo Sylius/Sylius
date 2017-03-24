@@ -11,8 +11,6 @@ sylius:
             meta_keywords: Meta关键字：
             meta_description: META描述
         product_variant:
-            available_on: 可用
-            available_until: 有效期至
             name: 名称
         association_type:
             name: 名称

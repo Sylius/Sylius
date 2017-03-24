@@ -12,3 +12,5 @@ sylius:
         set_address_as_default: 'Endereço foi definido como padrão.'
     product:
         out_of_stock: 'Há apenas a %quantity% deste produto no estoque.'
+    product_variant:
+        update_error: 'Houve um problema inesperado ao atualizar uma variante de produto. Por favor, tente atualizar a variante de produto de novo.'

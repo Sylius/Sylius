@@ -11,7 +11,6 @@ sylius:
             meta_keywords: Meta anahtar kelimeleri
             meta_description: Meta açıklama
         product_variant:
-            available_on: Mevcut üzerine
             name: Ad
         association_type:
             name: Ad

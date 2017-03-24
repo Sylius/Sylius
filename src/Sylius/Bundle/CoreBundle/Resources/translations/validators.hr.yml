@@ -17,3 +17,6 @@ sylius:
         onHand:
             min: Stanje na skladištu mora biti veće od {{ limit }}.
             not_blank: Molim označite ako je moguća isporuka osobno.
+    user:
+        email:
+            invalid: Ovaj e-mail nije valjan.

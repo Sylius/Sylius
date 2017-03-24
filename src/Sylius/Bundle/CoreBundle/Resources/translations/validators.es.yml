@@ -84,6 +84,7 @@ sylius:
     user:
         email:
             unique: Este correo electrónico ya está en uso.
+            invalid: Este email no es válido.
         username:
             unique: Este nombre de usuario ya está en uso.
             not_blank: Por favor, introduzca su nombre.

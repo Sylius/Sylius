@@ -36,3 +36,4 @@ sylius:
     user:
         email:
             unique: Šis el. paštas jau naudojamas.
+            invalid: Šis adresas yra neteisingas.

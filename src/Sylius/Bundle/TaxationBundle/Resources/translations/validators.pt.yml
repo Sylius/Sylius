@@ -6,13 +6,13 @@ sylius:
         name:
             not_blank: Introduza o nome da categoria de imposto.
         code:
-            not_blank: Por favor digite o código de categoria de imposto.
-            unique: Já existe uma categoria de imposto com o código introduzido.
+            not_blank: Por favor, insira o código da categoria do imposto.
+            unique: Já existe uma categoria de imposto com o código indicado.
     tax_rate:
         category:
-            not_blank: Por favor selecione a categoria de imposto.
+            not_blank: Por favor, selecione a categoria do imposto.
         name:
-            not_blank: Introduza o nome da taxa de imposto.
+            not_blank: Por favor, insira nome da taxa de imposto.
         amount:
             not_blank: Por favor introduza o valor da taxa de imposto.
         calculator:
