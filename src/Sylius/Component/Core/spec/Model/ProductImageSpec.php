@@ -14,7 +14,6 @@ namespace spec\Sylius\Component\Core\Model;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\Image;
-use Sylius\Component\Core\Model\ImageOwnerInterface;
 use Sylius\Component\Core\Model\ProductImage;
 use Sylius\Component\Core\Model\ProductImageInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
@@ -79,8 +78,10 @@ final class ProductImageSpec extends ObjectBehavior
         $this->getOwner()->shouldReturn(null);
     }
 
-    function its_owner_is_mutable(ImageOwnerInterface $owner)
+    function its_owner_is_mutable()
     {
+        $owner = new \stdClass();
+
         $this->setOwner($owner);
         $this->getOwner()->shouldReturn($owner);
     }
