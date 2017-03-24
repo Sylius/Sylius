@@ -27,6 +27,7 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Product\Factory\ProductFactoryInterface;
+use Sylius\Component\Product\Generator\ProductVariantGeneratorInterface;
 use Sylius\Component\Product\Generator\SlugGeneratorInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
@@ -103,6 +104,11 @@ final class ProductContext implements Context
     private $objectManager;
 
     /**
+     * @var ProductVariantGeneratorInterface
+     */
+    private $productVariantGenerator;
+
+    /**
      * @var ProductVariantResolverInterface
      */
     private $defaultVariantResolver;
@@ -134,6 +140,7 @@ final class ProductContext implements Context
      * @param FactoryInterface $productOptionValueFactory
      * @param FactoryInterface $productImageFactory
      * @param ObjectManager $objectManager
+     * @param ProductVariantGeneratorInterface $productVariantGenerator
      * @param ProductVariantResolverInterface $defaultVariantResolver
      * @param ImageUploaderInterface $imageUploader
      * @param SlugGeneratorInterface $slugGenerator
@@ -151,6 +158,7 @@ final class ProductContext implements Context
         FactoryInterface $productOptionValueFactory,
         FactoryInterface $productImageFactory,
         ObjectManager $objectManager,
+        ProductVariantGeneratorInterface $productVariantGenerator,
         ProductVariantResolverInterface $defaultVariantResolver,
         ImageUploaderInterface $imageUploader,
         SlugGeneratorInterface $slugGenerator,
@@ -167,6 +175,7 @@ final class ProductContext implements Context
         $this->productOptionValueFactory = $productOptionValueFactory;
         $this->productImageFactory = $productImageFactory;
         $this->objectManager = $objectManager;
+        $this->productVariantGenerator = $productVariantGenerator;
         $this->defaultVariantResolver = $defaultVariantResolver;
         $this->imageUploader = $imageUploader;
         $this->slugGenerator = $slugGenerator;
@@ -655,6 +664,39 @@ final class ProductContext implements Context
     public function thisProductHasThisProductOption(ProductInterface $product, ProductOptionInterface $option)
     {
         $product->addOption($option);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^(this product) has all possible variants$/
+     */
+    public function thisProductHasAllPossibleVariants(ProductInterface $product)
+    {
+        try {
+            foreach ($product->getVariants() as $productVariant) {
+                $product->removeVariant($productVariant);
+            }
+
+            $this->productVariantGenerator->generate($product);
+        } catch (\InvalidArgumentException $exception) {
+            /** @var ProductVariantInterface $productVariant */
+            $productVariant = $this->productVariantFactory->createNew();
+
+            $product->addVariant($productVariant);
+        }
+
+        $i = 0;
+        /** @var ProductVariantInterface $productVariant */
+        foreach ($product->getVariants() as $productVariant) {
+            $productVariant->setCode(sprintf('%s-variant-%d', $product->getCode(), $i));
+
+            foreach ($product->getChannels() as $channel) {
+                $productVariant->addChannelPricing($this->createChannelPricingForChannel(1000, $channel));
+            }
+
+            ++$i;
+        }
 
         $this->objectManager->flush();
     }
