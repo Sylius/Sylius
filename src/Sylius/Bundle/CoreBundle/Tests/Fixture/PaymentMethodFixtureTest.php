@@ -75,6 +75,15 @@ final class PaymentMethodFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function payment_method_gateway_configuration_must_by_array()
+    {
+        $this->assertConfigurationIsValid([['custom' => [['gatewayConfig' => ['username' => 'USERNAME']]]]], 'custom.*.gatewayConfig');
+        $this->assertConfigurationIsInvalid([['custom' => [['gatewayConfig' => 'USERNAME']]]], 'Invalid type for path "payment_method.custom.0.gatewayConfig". Expected array, but got string');
+    }
+
+    /**
+     * @test
+     */
     public function payment_method_may_be_toggled()
     {
         $this->assertConfigurationIsValid([['custom' => [['enabled' => false]]]], 'custom.*.enabled');
