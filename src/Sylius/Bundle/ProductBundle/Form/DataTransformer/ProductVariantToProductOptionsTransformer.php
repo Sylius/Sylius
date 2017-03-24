@@ -49,7 +49,12 @@ final class ProductVariantToProductOptionsTransformer implements DataTransformer
             throw new UnexpectedTypeException($value, ProductVariantInterface::class);
         }
 
-        return $value->getOptionValues()->toArray();
+        return array_combine(
+            array_map(function (ProductOptionValueInterface $productOptionValue) {
+                return $productOptionValue->getOptionCode();
+            }, $value->getOptionValues()->toArray()),
+            $value->getOptionValues()->toArray()
+        );
     }
 
     /**
