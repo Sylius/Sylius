@@ -41,16 +41,6 @@ The new Rule needs a RuleChecker class:
         }
     }
 
-Register the new rule checker as a service in the ``app/config/services.yml``:
-
-.. code-block:: yaml
-
-    # apps/config/services.yml
-    app.promotion_rule_checker.premium_customer:
-        class: AppBundle\Promotion\Checker\Rule\PremiumCustomerRuleChecker
-        tags:
-            - { name: sylius.promotion_rule_checker, type: premium_customer, label: Premium customer }
-
 Prepare a configuration form type for your new rule
 ---------------------------------------------------
 
@@ -86,6 +76,18 @@ And configure it in the ``app/config/services.yml``:
         class: AppBundle\Form\Type\Rule\PremiumCustomerConfigurationType
         tags:
             - { name: form.type }
+
+
+Register the new rule checker as a service in the ``app/config/services.yml``:
+
+.. code-block:: yaml
+
+    # apps/config/services.yml
+    app.promotion_rule_checker.premium_customer:
+        class: AppBundle\Promotion\Checker\Rule\PremiumCustomerRuleChecker
+        tags:
+            - { name: sylius.promotion_rule_checker, type: premium_customer, form-type: AppBundle\Form\Type\Rule\PremiumCustomerConfigurationType, label: Premium customer }
+
 
 That's all. You will now be able to choose the new rule while creating a new promotion.
 
