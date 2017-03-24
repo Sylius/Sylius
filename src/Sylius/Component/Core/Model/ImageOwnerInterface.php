@@ -11,13 +11,9 @@
 
 namespace Sylius\Component\Core\Model;
 
-use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Taxonomy\Model\TaxonInterface as BaseTaxonInterface;
-
 /**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-interface TaxonInterface extends BaseTaxonInterface, ImagesAwareInterface
+interface ImageOwnerInterface
 {
-
 }

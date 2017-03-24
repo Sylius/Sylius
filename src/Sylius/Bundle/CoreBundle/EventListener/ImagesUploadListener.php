@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Sylius\Component\Core\Model\ImageAwareInterface;
+use Sylius\Component\Core\Model\ImagesAwareInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Webmozart\Assert\Assert;
@@ -19,7 +19,7 @@ use Webmozart\Assert\Assert;
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-final class ImageUploadListener
+final class ImagesUploadListener
 {
     /**
      * @var ImageUploaderInterface
@@ -37,18 +37,18 @@ final class ImageUploadListener
     /**
      * @param GenericEvent $event
      */
-    public function uploadImage(GenericEvent $event)
+    public function uploadImages(GenericEvent $event)
     {
         $subject = $event->getSubject();
-        Assert::isInstanceOf($subject, ImageAwareInterface::class);
+        Assert::isInstanceOf($subject, ImagesAwareInterface::class);
 
-        $this->uploadImages($subject);
+        $this->uploadSubjectImages($subject);
     }
 
     /**
-     * @param ImageAwareInterface $subject
+     * @param ImagesAwareInterface $subject
      */
-    private function uploadImages(ImageAwareInterface $subject)
+    private function uploadSubjectImages(ImagesAwareInterface $subject)
     {
         $images = $subject->getImages();
         foreach ($images as $image) {
