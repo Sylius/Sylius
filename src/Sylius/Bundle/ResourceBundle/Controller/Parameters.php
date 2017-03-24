@@ -21,7 +21,7 @@ class Parameters extends ParameterBag
     /**
      * {@inheritdoc}
      */
-    public function get($path, $default = null, $deep = false)
+    public function get($path, $default = null)
     {
         $result = parent::get($path, $default);
 
