@@ -25,3 +25,6 @@ sylius:
     product_translation:
         short_description:
             max: 简短描述不能超过 {{ limit }} 个字符。
+    user:
+        email:
+            invalid: 电子邮件无效。

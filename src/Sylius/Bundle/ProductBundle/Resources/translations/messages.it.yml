@@ -12,8 +12,6 @@ sylius:
             meta_description: Meta descrizione
             slug: Slug
         product_variant:
-            available_on: Disponibile
-            available_until: Disponibile fino al
             name: Nome
         association_type:
             name: Nome

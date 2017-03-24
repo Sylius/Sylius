@@ -13,8 +13,6 @@ sylius:
             slug: Permalänk
             taxons: Taxa
         product_variant:
-            available_on: Tillgänglig på
-            available_until: Tillgänglig till
             name: Namn
         association_type:
             name: Namn

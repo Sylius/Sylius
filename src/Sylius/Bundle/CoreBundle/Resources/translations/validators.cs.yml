@@ -84,6 +84,7 @@ sylius:
     user:
         email:
             unique: Tento e-mail je již používán.
+            invalid: Tento email je neplatný.
         username:
             unique: Toto uživatelské jméno je již použito.
             not_blank: Zadej své jméno.

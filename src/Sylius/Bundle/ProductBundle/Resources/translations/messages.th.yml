@@ -13,8 +13,6 @@ sylius:
             slug: Slug
             taxons: การจัดหมวดหมู่
         product_variant:
-            available_on: พร้อมจำหน่ายเมื่อ
-            available_until: สิ้นสุดการจำหน่าย
             name: ชื่อ
         association_type:
             name: ชื่อ

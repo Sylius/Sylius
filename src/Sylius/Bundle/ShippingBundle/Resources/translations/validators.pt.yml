@@ -5,10 +5,10 @@ sylius:
     shipping_category:
         name:
             max_length: 'O nome da categoria não deve ter mais que {{ limit }} caracteres.'
-            min_length: 'Nome da categoria deve ser pelo menos {{ limit }} caracteres.'
-            not_blank: 'Introduza o nome da categoria de transporte.'
+            min_length: 'O nome da categoria deve ter pelo menos {{ limit }} carateres.'
+            not_blank: 'Por favor, insira o nome da categoria de expedição.'
         code:
-            not_blank: 'Introduza o código da categoria de transporte.'
+            not_blank: 'Por favor, insira o código da categoria de expedição.'
             unique: 'Já existe uma categoria de transporte com o código introduzido.'
     shipping_method:
         calculator:

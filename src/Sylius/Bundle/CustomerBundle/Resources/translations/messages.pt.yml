@@ -12,7 +12,7 @@ sylius:
             gender: Género
             birthday: Data de nascimento
             billing_address: Endereço de faturação
-            different_billing_address: Usar um endereço diferente para faturação?
+            different_billing_address: Usar uma morada diferente para a faturação?
             only_customer_registration: Criar conta?
             subscribed_to_newsletter: Subscrever a newsletter
         customer_group:

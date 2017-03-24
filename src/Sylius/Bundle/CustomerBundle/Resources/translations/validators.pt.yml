@@ -5,11 +5,11 @@ sylius:
     customer:
         first_name:
             max: O nome não deve ter mais que {{ limit }} caracteres.
-            min: O primeiro nome deve ter pelo menos {{ limit }} caracteres.
-            not_blank: Por favor insira o seu primeiro nome.
+            min: O primeiro nome deve ter pelo menos {{ limit }} carateres.
+            not_blank: Por favor, insira o seu primeiro nome.
         last_name:
-            max: O apelido não deve ter mais que {{ limit }} caracteres.
-            min: O apelido deve ter pelo menos {{ limit }} caracteres.
+            max: O apelido não deve ter mais que {{ limit }} carateres.
+            min: O apelido deve ter pelo menos {{ limit }} carateres.
             not_blank: Por favor introduza o seu apelido.
         gender:
             not_blank: Por favor escolha o seu género.

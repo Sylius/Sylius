@@ -13,8 +13,6 @@ sylius:
             slug: Псевдоним
             taxons: Таксоны
         product_variant:
-            available_on: Доступен с
-            available_until: Доступно до
             name: Название
         association_type:
             name: Название

@@ -5,9 +5,9 @@ sylius:
     menu:
         shop:
             account:
-                address_book: 'Livros de endereços'
+                address_book: 'Livros de moradas'
                 change_password: 'Alterar palavra-passe'
-                dashboard: 'Painel de controle'
+                dashboard: 'Painel'
                 header: 'A sua conta'
                 order_history: 'Histórico de encomendas'
                 personal_information: 'Informação Pessoal'

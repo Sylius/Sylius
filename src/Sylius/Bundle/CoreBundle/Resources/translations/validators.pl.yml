@@ -49,6 +49,7 @@ sylius:
     user:
         email:
             unique: Ten e-mail jest już używany.
+            invalid: Ten e-mail jest nieprawidłowy.
         username:
             unique: Ta nazwa użytkownika jest już używana.
             not_blank: Wpisz swoje imię.

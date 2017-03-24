@@ -18,9 +18,11 @@ sylius:
                     channels: Canais
                     countries: Países
                     currencies: Moedas
+                    exchange_rates: Taxas de câmbio
                     header: Configuração
                     locales: Linguagens
                     payment_methods: Métodos de pagamento
+                    shipping_categories: Categorias de expedição
                     shipping_methods: Métodos de envio
                     tax_categories: Categorias de impostos
                     tax_rates: Impostos

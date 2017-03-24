@@ -25,3 +25,6 @@ sylius:
     product_translation:
         short_description:
             max: Përshkrimi i shkurtër nuk duhet të përmbajë më shumë se {{ limit }} karaktere.
+    user:
+        email:
+            invalid: Ky email nuk është i vlefshëm.

@@ -13,8 +13,6 @@ sylius:
             slug: Slug
             taxons: Taxons
         product_variant:
-            available_on: Disponible le
-            available_until: Disponible jusqu'au
             name: Nom
         association_type:
             name: Nom

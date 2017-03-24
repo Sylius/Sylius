@@ -11,7 +11,6 @@ sylius:
             meta_keywords: Meta cuvinte cheie
             meta_description: Meta descriere
         product_variant:
-            available_on: Disponibil din
             name: Nume
         association_type:
             name: Nume

@@ -8,6 +8,10 @@ sylius:
         gateway_configuration:
             paypal:
                 password: Palavra-passe
-                username: Login
+                signature: Assinatura
+                username: Nome de utilizador
+            stripe:
+                secret_key: Código secreto
     payum_gateway_factory:
         offline: Offline
+        paypal_express_checkout: Finalizar compra expressa com Paypal

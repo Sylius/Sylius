@@ -76,6 +76,7 @@ sylius:
     user:
         email:
             unique: อีเมลนี้ถูกใช้งานแล้ว
+            invalid: อีเมลนี้ไม่ถูกต้อง
         username:
             unique: ชื่อผู้ใช้นี้ถูกใช้ไปแล้ว
             not_blank: กรุณาระบุชื่อของคุณ

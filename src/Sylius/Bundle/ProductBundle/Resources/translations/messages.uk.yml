@@ -11,8 +11,6 @@ sylius:
             meta_keywords: Мета ключові слова
             meta_description: Мета-опис
         product_variant:
-            available_on: Доступно на
-            available_until: Доступно до
             name: Назва
         association_type:
             name: Назва

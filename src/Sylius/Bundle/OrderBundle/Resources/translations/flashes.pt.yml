@@ -2,6 +2,5 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        product_variant:
-            available_on: Доступно
+    cart:
+        add_item: 'O item foi adicionado ao carrinho'

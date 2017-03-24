@@ -11,8 +11,6 @@ sylius:
             meta_keywords: Meta kulcsszavak
             meta_description: Meta leírás
         product_variant:
-            available_on: A rendelkezésre álló
-            available_until: Elérhető amíg
             name: Név
         association_type:
             name: Név

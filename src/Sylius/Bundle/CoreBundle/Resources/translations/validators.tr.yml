@@ -20,3 +20,6 @@ sylius:
     product_translation:
         short_description:
             max: Kısa açıklama daha sonra {{ limit }} karakter olmalıdır.
+    user:
+        email:
+            invalid: Bu e-posta geçerli değil.

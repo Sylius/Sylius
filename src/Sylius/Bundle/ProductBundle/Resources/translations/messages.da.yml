@@ -10,7 +10,6 @@ sylius:
             meta_keywords: Meta søgeord
             meta_description: Meta beskrivelse
         product_variant:
-            available_on: Tilgængelig
             name: Navn
         association_type:
             name: Navn
