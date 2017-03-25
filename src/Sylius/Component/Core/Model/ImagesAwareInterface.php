@@ -16,7 +16,7 @@ use Doctrine\Common\Collections\Collection;
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-interface ImageAwareInterface
+interface ImagesAwareInterface
 {
     /**
      * @return Collection|ImageInterface[]
