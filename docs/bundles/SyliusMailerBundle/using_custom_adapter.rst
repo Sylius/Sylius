@@ -16,12 +16,13 @@ Create your adapter class and add your custom logic for sending:
 
     namespace App\Mailer\Adapter;
 
-    use Sylius\Component\Mailer\Sender\AdapterInterface;
-    use Sylius\Component\Mailer\Model\EmailInterface
+    use Sylius\Component\Mailer\Sender\Adapter\AbstractAdapter;
+    use Sylius\Component\Mailer\Model\EmailInterface;
+    use Sylius\Component\Mailer\Renderer\RenderedEmail;
 
-    class CustomAdapter implements AdapterInterface
+    class CustomAdapter extends AbstractAdapter
     {
-        public function send(EmailInterface $email, array $recipients, array $data = array())
+        public function send(array $recipients, $senderAddress, $senderName, RenderedEmail $renderedEmail, EmailInterface $email, array $data) 
         {
             // Your custom logic.
         }
@@ -36,6 +37,7 @@ In your ``services.yml`` file, simply add your adapter definition.
 
     services:
         app.email_sender.adapter.custom:
+            parent: sylius.email_sender.adapter.abstract
             class: App\Mailer\Adapter\CustomAdapter
 
 Configure The New Adapter
@@ -46,6 +48,6 @@ Now you just need to put service name under ``sylius_mailer`` configuration in `
 .. code-block:: yaml
 
     sylius_mailer:
-        adapter: app.email_sender.adapter.custom
+        sender_adapter: app.email_sender.adapter.custom
 
 That's it! Your new adapter will be used to send out e-mails. You can do whatever you want there!
