@@ -417,7 +417,7 @@ final class ManagingProductsContext implements Context
      */
     public function theSlugFieldShouldNotBeEditable($localeCode = 'en_US')
     {
-        Assert::true($this->updateSimpleProductPage->isSlugReadOnlyIn($localeCode));
+        Assert::true($this->updateSimpleProductPage->isSlugReadonlyIn($localeCode));
     }
 
     /**

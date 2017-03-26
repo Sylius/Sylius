@@ -15,6 +15,7 @@ use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Behaviour\SpecifiesItsCode;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
+use Sylius\Behat\Service\SlugGenerationHelper;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
@@ -44,7 +45,12 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         $this->activateLanguageTab($localeCode);
         $this->getElement('name', ['%locale%' => $localeCode])->setValue($name);
 
-        $this->waitForSlugGenerationIfNecessary($localeCode);
+        if ($this->getDriver() instanceof Selenium2Driver) {
+            SlugGenerationHelper::waitForSlugGeneration(
+                $this->getSession(),
+                $this->getElement('slug', ['%locale%' => $localeCode])
+            );
+        }
     }
 
     /**
@@ -341,17 +347,5 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         Assert::notEmpty($items);
 
         return end($items);
-    }
-
-    /**
-     * @param string $locale
-     */
-    private function waitForSlugGenerationIfNecessary($locale)
-    {
-        if ($this->getDriver() instanceof Selenium2Driver) {
-            $this->getDocument()->waitFor(10, function () use ($locale) {
-                return '' !== $this->getElement('slug', ['%locale%' => $locale])->getValue();
-            });
-        }
     }
 }

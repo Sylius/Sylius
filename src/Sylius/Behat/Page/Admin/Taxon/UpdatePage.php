@@ -17,6 +17,7 @@ use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 use Sylius\Behat\Service\AutocompleteHelper;
+use Sylius\Behat\Service\SlugGenerationHelper;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
@@ -51,7 +52,12 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         $this->activateLanguageTab($languageCode);
         $this->getDocument()->fillField(sprintf('sylius_taxon_translations_%s_name', $languageCode), $name);
 
-        $this->waitForSlugGenerationIfNecessary();
+        if ($this->getDriver() instanceof Selenium2Driver) {
+            SlugGenerationHelper::waitForSlugGeneration(
+                $this->getSession(),
+                $this->getElement('slug', ['%language%' => $languageCode])
+            );
+        }
     }
 
     /**
@@ -101,9 +107,12 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function isSlugReadOnly($languageCode = 'en_US')
+    public function isSlugReadonly($languageCode = 'en_US')
     {
-        return 'readonly' === $this->getElement('slug', ['%language%' => $languageCode])->getAttribute('readonly');
+        return SlugGenerationHelper::isSlugReadonly(
+            $this->getSession(),
+            $this->getElement('slug', ['%language%' => $languageCode])
+        );
     }
 
     /**
@@ -126,7 +135,10 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
      */
     public function enableSlugModification($languageCode = 'en_US')
     {
-        $this->getElement('toggle_taxon_slug_modification_button', ['%locale%' => $languageCode])->press();
+        SlugGenerationHelper::enableSlugModification(
+            $this->getSession(),
+            $this->getElement('toggle_taxon_slug_modification_button', ['%locale%' => $languageCode])
+        );
     }
 
     /**
@@ -312,25 +324,5 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         }
 
         return $typeInput->getParent()->getParent()->getParent();
-    }
-
-    /**
-     * @param string $languageCode
-     */
-    private function waitForSlugGenerationIfNecessary($languageCode = 'en_US')
-    {
-        if (!$this->getDriver() instanceof Selenium2Driver) {
-            return;
-        }
-
-        $slugElement = $this->getElement('slug', ['%language%' => $languageCode]);
-        if ($slugElement->hasAttribute('readonly')) {
-            return;
-        }
-
-        $value = $slugElement->getValue();
-        $this->getDocument()->waitFor(10, function () use ($slugElement, $value) {
-            return $value !== $slugElement->getValue();
-        });
     }
 }

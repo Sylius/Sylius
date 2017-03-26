@@ -66,7 +66,7 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
      *
      * @return bool
      */
-    public function isSlugReadOnly($languageCode = 'en_US');
+    public function isSlugReadonly($languageCode = 'en_US');
 
     /**
      * @param string $type

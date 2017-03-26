@@ -29,9 +29,11 @@ interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
     public function isCodeDisabled();
 
     /**
+     * @param string $locale
+     *
      * @return bool
      */
-    public function isSlugReadOnlyIn($locale);
+    public function isSlugReadonlyIn($locale);
 
     /**
      * @param string $channelName

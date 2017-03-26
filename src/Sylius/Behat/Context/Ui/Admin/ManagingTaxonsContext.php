@@ -138,7 +138,7 @@ final class ManagingTaxonsContext implements Context
      */
     public function theSlugFieldShouldNotBeEditable($language = 'en_US')
     {
-        Assert::true($this->updatePage->isSlugReadOnly($language));
+        Assert::true($this->updatePage->isSlugReadonly($language));
     }
 
     /**
