@@ -155,9 +155,7 @@ final class ManagingPromotionsContext implements Context
     {
         $this->createPage->addRule('Has at least one from taxons');
 
-        foreach ($taxons as $taxon) {
-            $this->createPage->selectAutocompleteRuleOption('Taxons', $taxon, true);
-        }
+        $this->createPage->selectAutocompleteRuleOption('Taxons', $taxons, true);
     }
 
     /**

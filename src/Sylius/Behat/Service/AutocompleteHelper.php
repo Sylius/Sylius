@@ -30,15 +30,44 @@ abstract class AutocompleteHelper
     {
         Assert::isInstanceOf($session->getDriver(), Selenium2Driver::class);
 
+        static::activateAutocompleteDropdown($session, $element);
+
+        $element->find('css', sprintf('div.item:contains("%s")', $value))->click();
+
+        static::waitForElementToBeVisible($session, $element);
+    }
+
+    /**
+     * @param Session $session
+     * @param NodeElement $element
+     * @param string[] $values
+     */
+    public static function chooseValues(Session $session, NodeElement $element, array $values)
+    {
+        Assert::isInstanceOf($session->getDriver(), Selenium2Driver::class);
+
+        static::activateAutocompleteDropdown($session, $element);
+
+        foreach ($values as $value) {
+            $element->find('css', sprintf('div.item:contains("%s")', $value))->click();
+
+            static::waitForAsynchronousActionsToFinish($session);
+        }
+
+        static::waitForElementToBeVisible($session, $element);
+    }
+
+    /**
+     * @param Session $session
+     * @param NodeElement $element
+     */
+    private static function activateAutocompleteDropdown(Session $session, NodeElement $element)
+    {
         static::waitForAsynchronousActionsToFinish($session);
 
         $element->click();
 
         static::waitForAsynchronousActionsToFinish($session);
-        static::waitForElementToBeVisible($session, $element);
-
-        $element->find('css', sprintf('div.item:contains("%s")', $value))->click();
-
         static::waitForElementToBeVisible($session, $element);
     }
 

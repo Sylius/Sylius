@@ -66,6 +66,12 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             ->getParent()
         ;
 
+        if ($multiple && is_array($value)) {
+            AutocompleteHelper::chooseValues($this->getSession(), $ruleAutocomplete, $value);
+
+            return;
+        }
+
         AutocompleteHelper::chooseValue($this->getSession(), $ruleAutocomplete, $value);
     }
 
@@ -199,6 +205,12 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             ->find('css', sprintf('input[type="hidden"][name*="[%s_filter]"]', $option))
             ->getParent()
         ;
+
+        if ($multiple && is_array($value)) {
+            AutocompleteHelper::chooseValues($this->getSession(), $filterAutocomplete, $value);
+
+            return;
+        }
 
         AutocompleteHelper::chooseValue($this->getSession(), $filterAutocomplete, $value);
     }
