@@ -56,6 +56,18 @@ final class StringFilterSpec extends ObjectBehavior
         $this->apply($dataSource, 'firstName', ['type' => StringFilter::TYPE_EQUAL, 'value' => 'John'], []);
     }
 
+    function it_filters_not_equal_strings(
+        DataSourceInterface $dataSource,
+        ExpressionBuilderInterface $expressionBuilder
+    ) {
+        $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
+
+        $expressionBuilder->notEquals('firstName', 'John')->willReturn('EXPR');
+        $dataSource->restrict('EXPR')->shouldBeCalled();
+
+        $this->apply($dataSource, 'firstName', ['type' => StringFilter::TYPE_NOT_EQUAL, 'value' => 'John'], []);
+    }
+
     function it_filters_data_containing_empty_strings(
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
@@ -203,6 +215,7 @@ final class StringFilterSpec extends ObjectBehavior
         $this->apply($dataSource, 'firstName', ['type' => StringFilter::TYPE_CONTAINS, 'value' => ''], []);
         $this->apply($dataSource, 'firstName', ['type' => StringFilter::TYPE_ENDS_WITH, 'value' => ''], []);
         $this->apply($dataSource, 'firstName', ['type' => StringFilter::TYPE_EQUAL, 'value' => ''], []);
+        $this->apply($dataSource, 'firstName', ['type' => StringFilter::TYPE_NOT_EQUAL, 'value' => ''], []);
         $this->apply($dataSource, 'firstName', ['type' => StringFilter::TYPE_IN, 'value' => ''], []);
         $this->apply($dataSource, 'firstName', ['type' => StringFilter::TYPE_NOT_CONTAINS, 'value' => ''], []);
         $this->apply($dataSource, 'firstName', ['type' => StringFilter::TYPE_NOT_IN, 'value' => ''], []);

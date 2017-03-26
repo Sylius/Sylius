@@ -542,6 +542,7 @@ sylius:
         not_available_in_your_country: 'Not available in your country'
         not_contains: 'Not contains'
         not_empty: 'Not empty'
+        not_equal: 'Not equal'
         not_in: 'Not in'
         not_verified: 'Not verified'
         not_tracked: 'Not tracked'
