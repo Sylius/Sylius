@@ -70,6 +70,18 @@ The events already used in Sylius are described in the Book alongside the concep
 
         $ php bin/console debug:event-dispatcher | grep sylius
 
+Customizations
+--------------
+
+.. note::
+
+    **Customizing logic via Events vs. State Machines**
+
+    The logic in which Sylius operates can be customized in two ways. First of them is using the state machines: what is
+    really useful when you need to modify business logic for instance modify the flow of the checkout,
+    and the second is listening on the kernel events related to the entities, which is helpful for modifying the HTTP responses
+    visible directly to the user, like displaying notifications, sending emails.
+
 Learn more
 ----------
 
