@@ -35,3 +35,7 @@ Sylius\Component\Attribute\Model\Attribute:
             expose: true
             type: array
             groups: [Default, Detailed]
+        configuration:
+            expose: true
+            type: array
+            groups: [Detailed]

@@ -391,7 +391,7 @@ EOT;
                 {
                     "attribute": "mug_collection",
                     "localeCode": "en_US",
-                    "value": "make live harder"
+                    "value": "make life harder"
                 }
             ],
             "translations": {
@@ -407,6 +407,44 @@ EOT;
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'product/create_with_attributes_response', Response::HTTP_CREATED);
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_creating_product_with_select_attribute()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/locales.yml');
+        $this->loadFixturesFromFile('resources/product_attributes.yml');
+
+        $data =
+<<<EOT
+        {
+            "code": "MUG_TH",
+            "attributes": [
+                {
+                    "attribute": "mug_color",
+                    "localeCode": "en_US",
+                    "value": [
+                        "green", 
+                        "yellow"
+                    ]
+                }
+            ],
+            "translations": {
+                "en_US": {
+                    "name": "Theme Mug",
+                    "slug": "theme-mug"
+                }
+            }
+        }
+EOT;
+
+        $this->client->request('POST', '/api/v1/products/', [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'product/create_with_select_attribute_response', Response::HTTP_CREATED);
     }
 
     /**

@@ -2,7 +2,7 @@
     "page": 1,
     "limit": 10,
     "pages": 1,
-    "total": 2,
+    "total": 3,
     "_links": {
         "self": {
             "href": "\/api\/v1\/product-attributes\/?page=1&limit=10"
@@ -59,6 +59,24 @@
                 "_links": {
                     "self": {
                         "href": "\/api\/v1\/product-attributes\/mug_collection"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "code": "mug_color",
+                "type": "select",
+                "position": 2,
+                "translations": {
+                    "en_US": {
+                        "id": @integer@,
+                        "locale": "en_US",
+                        "name": "Mug color"
+                    }
+                },
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/product-attributes\/mug_color"
                     }
                 }
             }

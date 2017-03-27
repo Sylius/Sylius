@@ -2,6 +2,7 @@
     "id": @integer@,
     "code": "mug_material",
     "type": "text",
+    "configuration": [],
     "values": [],
     "position": 0,
     "createdAt": "@string@.isDateTime()",
