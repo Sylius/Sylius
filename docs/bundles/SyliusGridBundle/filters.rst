@@ -30,6 +30,7 @@ The filter allows the user to select following search options:
 * contains
 * not contains
 * equal
+* not equal
 * starts with
 * ends with
 * empty

@@ -23,6 +23,7 @@ final class StringFilter implements FilterInterface
     const NAME = 'string';
 
     const TYPE_EQUAL = 'equal';
+    const TYPE_NOT_EQUAL = 'not_equal';
     const TYPE_EMPTY = 'empty';
     const TYPE_NOT_EMPTY = 'not_empty';
     const TYPE_CONTAINS = 'contains';
@@ -67,6 +68,12 @@ final class StringFilter implements FilterInterface
             $expressions[] = $this->getExpression($expressionBuilder, $type, $field, $value);
         }
 
+        if (self::TYPE_NOT_EQUAL === $type) {
+            $dataSource->restrict($expressionBuilder->andX(...$expressions));
+
+            return;
+        }
+
         $dataSource->restrict($expressionBuilder->orX(...$expressions));
     }
 
@@ -83,6 +90,8 @@ final class StringFilter implements FilterInterface
         switch ($type) {
             case self::TYPE_EQUAL:
                 return $expressionBuilder->equals($field, $value);
+            case self::TYPE_NOT_EQUAL:
+                return $expressionBuilder->notEquals($field, $value);
             case self::TYPE_EMPTY:
                 return $expressionBuilder->isNull($field);
             case self::TYPE_NOT_EMPTY:
