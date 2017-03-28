@@ -48,7 +48,10 @@ final class StringFilterType extends AbstractType
         }
 
         $builder
-            ->add('value', TextType::class, ['required' => false])
+            ->add('value', TextType::class, [
+                'required' => false,
+                'label' => 'sylius.ui.value',
+            ])
         ;
     }
 
