@@ -136,3 +136,4 @@ Learn more
 ----------
 
 * `Winzou StateMachine Bundle <https://github.com/winzou/StateMachineBundle>`_
+* :doc:`Customization guide: State machines </customization/state_machine>`
