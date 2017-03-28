@@ -50,11 +50,6 @@ class Attribute implements AttributeInterface
     protected $configuration = [];
 
     /**
-     * @var AttributeValueInterface[]|Collection
-     */
-    protected $values;
-
-    /**
      * @var string
      */
     protected $storageType;
@@ -68,7 +63,6 @@ class Attribute implements AttributeInterface
     {
         $this->initializeTranslationsCollection();
 
-        $this->values = new ArrayCollection();
         $this->createdAt = new \DateTime();
     }
 
@@ -150,14 +144,6 @@ class Attribute implements AttributeInterface
     public function setConfiguration(array $configuration)
     {
         $this->configuration = $configuration;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getValues()
-    {
-        return $this->values;
     }
 
     /**

@@ -47,11 +47,6 @@ interface AttributeInterface extends
     public function setConfiguration(array $configuration);
 
     /**
-     * @return AttributeValueInterface[]
-     */
-    public function getValues();
-
-    /**
      * @return string
      */
     public function getStorageType();
