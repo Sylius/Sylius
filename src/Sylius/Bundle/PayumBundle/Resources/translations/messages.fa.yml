@@ -8,6 +8,7 @@ sylius:
         gateway_configuration:
             paypal:
                 password: کلمه عبور
+                signature: امضا
                 username: نام کاربری
     payum_gateway_factory:
         offline: آفلاین

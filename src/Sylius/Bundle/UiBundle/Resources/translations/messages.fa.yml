@@ -10,6 +10,8 @@ sylius:
         option:
             name: 'نام'
         notes: 'یادداشت های اضافی'
+        variant:
+            tracked: 'رهگیری شده'
     ui:
         abandoned: 'سفارش ناتمام'
         about: 'درباره'
@@ -42,6 +44,7 @@ sylius:
         adding_new_locale: 'ایجاد زبان جدید'
         additional_information: 'اطلاعات بیشتر'
         address: 'آدرس'
+        address_book: 'دفترچه آدرس'
         addressing_step: 'اطلاعات کاربر'
         adjustments: 'هزینه های جانبی'
         administration: 'مدیریت'
@@ -543,6 +546,7 @@ sylius:
         shipments: 'ارسال محصول'
         shipped: 'ارسال شده'
         shipping_address: 'آدرس تحویل سفارش'
+        shipping_categories: 'انواع ارسال'
         shipping_category: 'نوع ارسال'
         shipping_charges: 'هزینه ارسال'
         shipping_method: 'شیوه ارسال'

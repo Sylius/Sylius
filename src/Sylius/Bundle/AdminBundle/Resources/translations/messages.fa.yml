@@ -18,9 +18,11 @@ sylius:
                     channels: کانال های فروش
                     countries: كشور‌ها
                     currencies: واحدهای پول
+                    exchange_rates: نرخ تبدیل ارز
                     header: تنظیمات
                     locales: زبان ها
                     payment_methods: روش‌های پرداخت
+                    shipping_categories: انواع ارسال
                     shipping_methods: روش‌های ارسال
                     tax_categories: رده های مالیات
                     tax_rates: نرخ های مالیات

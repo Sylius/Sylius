@@ -3,6 +3,8 @@
 
 sylius:
     channel:
+        base_currency:
+            not_blank: کانال ارز پایه را وارد کنید.
         default_locale:
             not_blank: لطفا زبان پایه برای کانال را وارد کنید.
         contact_email:
