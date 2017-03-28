@@ -11,9 +11,9 @@ The following payment states are available by default:
 +------------------+------------+---------------------------------------------------------+
 | Related constant | State      | Description                                             |
 +==================+============+=========================================================+
-| STATE_NEW        | new        | The newly created payment                               |
+| STATE_CART       | cart       | Initial; Before the subject of payment is completed     |
 +------------------+------------+---------------------------------------------------------+
-| STATE_PENDING    | pending    | Payment waiting to be processed                         |
+| STATE_NEW        | new        | After completion of the payment subject                 |
 +------------------+------------+---------------------------------------------------------+
 | STATE_PROCESSING | processing | Payment which is in process of verification             |
 +------------------+------------+---------------------------------------------------------+
@@ -25,9 +25,12 @@ The following payment states are available by default:
 +------------------+------------+---------------------------------------------------------+
 | STATE_REFUNDED   | refunded   | A completed payment which has been refunded             |
 +------------------+------------+---------------------------------------------------------+
+| STATE_UNKNOWN    | unknown    | Auxiliary state for handling external states            |
++------------------+------------+---------------------------------------------------------+
 
 .. note::
-   All of above states are constant fields in the :ref:`component_payment_model_payment-interface`.
+
+   All the above states are constant fields in the :ref:`component_payment_model_payment-interface`.
 
 .. _component_payment_payment-transitions:
 
