@@ -29,7 +29,11 @@ sylius:
             date:
                 format: فرمت تاریخ
             select:
+                multiple: چند
                 values: مقادیر
+                choose: یک گزینه را انتخاب کنید
+                min: حداقل موارد
+                max: حداکثر موارد
             text:
                 min: حداقل تعداد حروف
                 max: حداکثر تعداد حروف

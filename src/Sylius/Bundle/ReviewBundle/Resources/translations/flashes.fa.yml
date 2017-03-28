@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    review:
+        accept: 'نظر با موفقیت پذیرفته شده است.'
+        reject: 'نظر با موفقیت رد شده است.'
+        wait_for_the_acceptation: 'نظر شما در انتظار برای بررسی است.'

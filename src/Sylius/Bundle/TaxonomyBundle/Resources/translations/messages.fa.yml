@@ -7,5 +7,6 @@ sylius:
             description: شرح
             name: نام
             parent: رده پدر
+            slug: حلزون
         taxonomy:
             name: نام

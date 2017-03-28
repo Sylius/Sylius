@@ -10,6 +10,7 @@ sylius:
             options: آپشن ها
             meta_keywords: کلمات کلیدی
             meta_description: توضیحات سئو
+            slug: حلزون
             taxons: دسته بندی ها
         product_variant:
             name: نام
@@ -23,6 +24,7 @@ sylius:
             name: نام
         option:
             name: نام
+            position: موقعیت
             values: مقادیر قابل قبول
         option_value:
             add_value: افزودن مقدار

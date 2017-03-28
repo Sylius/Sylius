@@ -5,6 +5,7 @@ sylius:
     menu:
         shop:
             account:
+                address_book: 'دفترچه آدرس'
                 change_password: 'تغییر رمز عبور'
                 dashboard: 'داشبورد'
                 header: 'حساب کاربری شما'
