@@ -16,6 +16,7 @@ use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 use Sylius\Behat\Service\AutocompleteHelper;
+use Sylius\Behat\Service\SlugGenerationHelper;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
@@ -38,7 +39,12 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         $this->activateLanguageTab($localeCode);
         $this->getElement('name', ['%locale%' => $localeCode])->setValue($name);
 
-        $this->waitForSlugGenerationIfNecessary($localeCode);
+        if ($this->getDriver() instanceof Selenium2Driver) {
+            SlugGenerationHelper::waitForSlugGeneration(
+                $this->getSession(),
+                $this->getElement('slug', ['%locale%' => $localeCode])
+            );
+        }
     }
 
     /**
@@ -113,8 +119,6 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     {
         $this->openTaxonBookmarks();
 
-        Assert::isInstanceOf($this->getDriver(), Selenium2Driver::class);
-
         $mainTaxonElement = $this->getElement('main_taxon')->getParent();
 
         AutocompleteHelper::chooseValue($this->getSession(), $mainTaxonElement, $taxon->getName());
@@ -153,7 +157,10 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
      */
     public function enableSlugModification($locale)
     {
-        $this->getElement('toggle_slug_modification_button', ['%locale%' => $locale])->press();
+        SlugGenerationHelper::enableSlugModification(
+            $this->getSession(),
+            $this->getElement('toggle_slug_modification_button', ['%locale%' => $locale])
+        );
     }
 
     /**
@@ -248,9 +255,12 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     /**
      * {@inheritdoc}
      */
-    public function isSlugReadOnlyIn($locale)
+    public function isSlugReadonlyIn($locale)
     {
-        return 'readonly' === $this->getElement('slug', ['%locale%' => $locale])->getAttribute('readonly');
+        return SlugGenerationHelper::isSlugReadonly(
+            $this->getSession(),
+            $this->getElement('slug', ['%locale%' => $locale])
+        );
     }
 
     /**
@@ -515,26 +525,6 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         Assert::notEmpty($imageElements);
 
         return reset($imageElements);
-    }
-
-    /**
-     * @param string $locale
-     */
-    private function waitForSlugGenerationIfNecessary($locale)
-    {
-        if (!$this->getDriver() instanceof Selenium2Driver) {
-            return;
-        }
-
-        $slugElement = $this->getElement('slug', ['%locale%' => $locale]);
-        if ($slugElement->hasAttribute('readonly')) {
-            return;
-        }
-
-        $value = $slugElement->getValue();
-        $this->getDocument()->waitFor(10, function () use ($slugElement, $value) {
-            return $value !== $slugElement->getValue();
-        });
     }
 
     /**

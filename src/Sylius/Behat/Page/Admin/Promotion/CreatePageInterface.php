@@ -44,7 +44,7 @@ interface CreatePageInterface extends BaseCreatePageInterface
 
     /**
      * @param string $option
-     * @param string $value
+     * @param string|string[] $value
      * @param bool $multiple
      */
     public function selectAutocompleteRuleOption($option, $value, $multiple = false);
@@ -120,7 +120,7 @@ interface CreatePageInterface extends BaseCreatePageInterface
 
     /**
      * @param string $option
-     * @param string $value
+     * @param string|string[] $value
      * @param bool $multiple
      */
     public function selectAutoCompleteFilterOption($option, $value, $multiple = false);

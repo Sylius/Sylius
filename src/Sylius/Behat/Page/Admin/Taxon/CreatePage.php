@@ -16,6 +16,7 @@ use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Behaviour\SpecifiesItsCode;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
+use Sylius\Behat\Service\SlugGenerationHelper;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
@@ -91,7 +92,12 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         $this->activateLanguageTab($languageCode);
         $this->getElement('name', ['%language%' => $languageCode])->setValue($name);
 
-        $this->waitForSlugGenerationIfNecessary($languageCode);
+        if ($this->getDriver() instanceof Selenium2Driver) {
+            SlugGenerationHelper::waitForSlugGeneration(
+                $this->getSession(),
+                $this->getElement('slug', ['%language%' => $languageCode])
+            );
+        }
     }
 
     /**
@@ -193,17 +199,5 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         Assert::notEmpty($items);
 
         return end($items);
-    }
-
-    /**
-     * @param string $languageCode
-     */
-    private function waitForSlugGenerationIfNecessary($languageCode)
-    {
-        if ($this->getDriver() instanceof Selenium2Driver) {
-            $this->getDocument()->waitFor(10, function () use ($languageCode) {
-                return '' !== $this->getElement('slug', ['%language%' => $languageCode])->getValue();
-            });
-        }
     }
 }

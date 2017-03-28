@@ -3,7 +3,7 @@ Feature: Editing taxon's slug in multiple locales
     In order to manage access path to taxon page in many languages
     As an Administrator
     I want to be able to edit taxon's slug in multiple locales
-    
+
     Background:
         Given the store is available in "English (United States)"
         And the store is also available in "Polish (Poland)"
