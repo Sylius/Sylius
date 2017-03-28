@@ -128,6 +128,7 @@
             <argument type="service" id="__symfony__.sylius.factory.product_option_value" />
             <argument type="service" id="__symfony__.sylius.factory.product_image" />
             <argument type="service" id="__symfony__.doctrine.orm.entity_manager" />
+            <argument type="service" id="__symfony__.sylius.generator.product_variant" />
             <argument type="service" id="__symfony__.sylius.product_variant_resolver.default" />
             <argument type="service" id="__symfony__.sylius.image_uploader" />
             <argument type="service" id="__symfony__.sylius.generator.slug" />
