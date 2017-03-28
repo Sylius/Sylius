@@ -126,6 +126,7 @@ class OrderItemController extends ResourceController
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
         $this->isGrantedOr403($configuration, CartActions::REMOVE);
+        /** @var OrderItemInterface $orderItem */
         $orderItem = $this->findOr404($configuration);
 
         $event = $this->eventDispatcher->dispatchPreEvent(CartActions::REMOVE, $configuration, $orderItem);
@@ -144,6 +145,16 @@ class OrderItemController extends ResourceController
         }
 
         $cart = $this->getCurrentCart();
+        if ($cart !== $orderItem->getOrder()) {
+            $this->addFlash('error', $this->get('translator')->trans('sylius.cart.cannot_modify', [], 'flashes'));
+
+            if (!$configuration->isHtmlRequest()) {
+                return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
+            }
+
+            return $this->redirectHandler->redirectToIndex($configuration, $orderItem);
+        }
+
         $this->getOrderModifier()->removeFromOrder($cart, $orderItem);
 
         $this->repository->remove($orderItem);
