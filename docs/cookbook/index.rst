@@ -19,6 +19,7 @@ The Cookbook
     images-gridfs
     images-on-entity
     embedding-products
+    encrypting-gateway-config
     taxons-menu
     facebook-login
     cron-jobs
