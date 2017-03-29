@@ -26,7 +26,7 @@ Methods of templates customizing
 
     The second method is **templates customization via events**. You are able to listen on these template events,
     and by that add your own blocks without copying and pasting the whole templates. This feature is really useful
-    when :doc:`creating Sylius Extensions </extensions/creating-extension>`.
+    when :doc:`creating Sylius Extensions </plugins/creating-plugin>`.
 
 How to customize templates by overriding?
 -----------------------------------------
