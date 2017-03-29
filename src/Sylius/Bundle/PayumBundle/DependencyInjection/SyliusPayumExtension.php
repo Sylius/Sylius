@@ -11,8 +11,6 @@
 
 namespace Sylius\Bundle\PayumBundle\DependencyInjection;
 
-use Payum\Bundle\PayumBundle\DependencyInjection\MainConfiguration as PayumConfiguration;
-use Payum\Bundle\PayumBundle\DependencyInjection\PayumExtension;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

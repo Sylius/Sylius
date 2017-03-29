@@ -13,6 +13,7 @@
 * :doc:`/cookbook/images-gridfs`
 * :doc:`/cookbook/images-on-entity`
 * :doc:`/cookbook/embedding-products`
+* :doc:`/cookbook/encrypting-gateway-config`
 * :doc:`/cookbook/taxons-menu`
 * :doc:`/cookbook/facebook-login`
 * :doc:`/cookbook/cron-jobs`
