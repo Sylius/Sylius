@@ -12,6 +12,10 @@
 -->
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="sylius.admin.notification.uri">http://hub.sylius.com/version</parameter>
+    </parameters>
+
     <services>
         <service id="sylius.controller.admin.dashboard" class="Sylius\Bundle\AdminBundle\Controller\DashboardController">
             <argument type="service" id="sylius.dashboard.statistics_provider" />
@@ -32,6 +36,12 @@
             <argument type='service' id="sylius.customer_statistics_provider" />
             <argument type='service' id="sylius.repository.customer" />
             <argument type='service' id="templating" />
+        </service>
+
+        <service id="sylius.controller.admin.notification" class="Sylius\Bundle\AdminBundle\Controller\NotificationController">
+            <argument type="service" id="sylius.http_client" />
+            <argument type="service" id="sylius.http_message_factory" />
+            <argument type="string">%sylius.admin.notification.uri%</argument>
         </service>
     </services>
 </container>

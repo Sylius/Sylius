@@ -67,6 +67,7 @@
         $('.ui.accordion').addAccordionErrors();
         $('#sylius-product-taxonomy-tree').choiceTree('productTaxon', true, 1);
 
+        $(document).notification();
         $(document).productSlugGenerator();
         $(document).taxonSlugGenerator();
     });

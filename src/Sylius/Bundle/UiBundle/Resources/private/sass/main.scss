@@ -95,3 +95,18 @@ th {
   top: auto;
   left: auto;
 }
+
+.ui.floated.dividing.empty {
+  top: 100%;
+  bottom: auto;
+  padding: 0;
+  margin: 0;
+}
+.ui.left.floated.dividing.empty ~ .ui.dropdown > .menu {
+  right: auto;
+  left: 0;
+}
+.ui.right.floated.dividing.empty ~ .ui.dropdown > .menu {
+  right: 0;
+  left: auto;
+}
