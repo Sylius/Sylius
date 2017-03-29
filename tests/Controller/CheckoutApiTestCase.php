@@ -46,8 +46,7 @@ class CheckoutApiTestCase extends JsonApiTestCase
 <<<EOT
         {
             "customer": "oliver.queen@star-city.com",
-            "channel": "CHANNEL",
-            "localeCode": "en_US"
+            "channel": "CHANNEL"
         }
 EOT;
 
@@ -168,7 +167,7 @@ EOT;
      */
     protected function completeOrder($cartId)
     {
-        $this->client->request('PUT', sprintf('/api/v1/checkouts/complete/%d', $cartId), [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('PATCH', sprintf('/api/v1/checkouts/complete/%d', $cartId), [], [], static::$authorizedHeaderWithContentType);
     }
 
     /**

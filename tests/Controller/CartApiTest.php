@@ -129,8 +129,7 @@ final class CartApiTest extends JsonApiTestCase
 <<<EOT
         {
             "customer": "oliver.queen@star-city.com",
-            "channel": "WEB",
-            "localeCode": "en_US"
+            "channel": "WEB"
         }
 EOT;
 

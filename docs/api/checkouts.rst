@@ -899,7 +899,7 @@ Definition
 
 .. code-block:: text
 
-    PUT /api/v1/checkouts/complete/{id}
+    PUT/PATCH /api/v1/checkouts/complete/{id}
 
 +---------------+----------------+---------------------------------------------------------+
 | Parameter     | Parameter type | Description                                             |
@@ -921,7 +921,7 @@ To finalize the previously built order, execute the following command:
     $ curl http://demo.sylius.org/api/v1/checkouts/complete/21 \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
-        -X PUT
+        -X PATCH
 
 Exemplary Response
 ^^^^^^^^^^^^^^^^^^
@@ -944,7 +944,7 @@ To finalize  the previously built order (assuming that, the previous example has
     $ curl http://demo.sylius.org/api/v1/checkouts/complete/21 \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
-        -X PUT \
+        -X PATCH \
         --data '
             {
                 "notes": "Please, call me before delivery"
@@ -957,3 +957,33 @@ Exemplary Response
 .. code-block:: text
 
     STATUS: 204 No Content
+
+Last possible action during order completion is changing the order locale:
+
+Example
+^^^^^^^
+
+To finalize  the previously built order (assuming that, the previous example has not been executed), try the following command:
+
+.. code-block:: bash
+
+    $ curl http://demo.sylius.org/api/v1/checkouts/complete/21 \
+        -H "Authorization: Bearer SampleToken" \
+        -H "Content-Type: application/json" \
+        -X PATCH \
+        --data '
+            {
+                "localeCode": "de_DE"
+            }
+        '
+
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
+
+.. code-block:: text
+
+    STATUS: 204 No Content
+
+.. warning::
+
+    Remember that locale has to be available on channel to allow for such change.

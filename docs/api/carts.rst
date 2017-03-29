@@ -131,8 +131,6 @@ Definition
 +---------------+----------------+----------------------------------------------------------+
 | channel       | request        | Code of the related channel                              |
 +---------------+----------------+----------------------------------------------------------+
-| localeCode    | request        | Code of the locale in which the cart should be created   |
-+---------------+----------------+----------------------------------------------------------+
 
 Example
 ^^^^^^^
@@ -153,8 +151,7 @@ To create a new cart for the ``shop@example.com`` user in the ``US_WEB`` channel
         --data '
             {
                 "customer": "shop@example.com",
-                "channel": "US_WEB",
-                "localeCode": "en_US"
+                "channel": "US_WEB"
             }
         '
 
@@ -210,6 +207,7 @@ Exemplary Response
 .. note::
 
     A currency code will be added automatically based on the channel settings. Read more about channels :doc:`here </book/configuration/channels>`.
+    Same rule applies locale codes. Locale can be changed during complete request when finalizing a cart.
 
 .. warning::
 

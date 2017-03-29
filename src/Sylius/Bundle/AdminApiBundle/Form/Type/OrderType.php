@@ -31,34 +31,12 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 final class OrderType extends AbstractResourceType
 {
     /**
-     * @var RepositoryInterface
-     */
-    private $localeRepository;
-
-    /**
-     * {@inheritdoc}
-     *
-     * RepositoryInterface $localeRepository
-     */
-    public function __construct($dataClass, array $validationGroups = [], RepositoryInterface $localeRepository)
-    {
-        parent::__construct($dataClass, $validationGroups);
-
-        $this->localeRepository = $localeRepository;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('customer', CustomerChoiceType::class, [
-                'constraints' => [
-                    new NotBlank(['groups' => ['sylius']]),
-                ],
-            ])
-            ->add('localeCode', LocaleChoiceType::class, [
                 'constraints' => [
                     new NotBlank(['groups' => ['sylius']]),
                 ],
@@ -77,11 +55,16 @@ final class OrderType extends AbstractResourceType
                     $order->setCurrencyCode($channel->getBaseCurrency()->getCode());
                 }
             })
-        ;
+            ->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
+                /** @var OrderInterface $order */
+                $order = $event->getData();
 
-        $builder->get('localeCode')->addModelTransformer(
-            new ReversedTransformer(new ResourceToIdentifierTransformer($this->localeRepository, 'code'))
-        );
+                /** @var ChannelInterface $channel */
+                if (null !== $channel = $order->getChannel()) {
+                    $order->setLocaleCode($channel->getDefaultLocale()->getCode());
+                }
+            })
+        ;
     }
 
     /**

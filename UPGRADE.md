@@ -96,6 +96,9 @@ You can bring back previous configuration by overriding current routing with you
 
 * Bundle was renamed from `ApiBundle` to `AdminApiBundle`. Routing and config was changed from `sylius_api` to `sylius_admin_api`.
 
+* Don't send `localeCode` during cart creation. If default channel locale is not enough (it is assigned dynamically), send it with complete request.
+  Also, complete request should not be send with `PUT` method by default, as it will set null value on locale code, which will result in invalid argument exception. 
+
 ### Attribute / AttributeBundle
 
 * `AttributeValue::$localeCode` property was added to make it translatable. Now, every attribute value has a locale code to be displayed properly in different locales. All attribute values are migrated to the new concept with migration `Version20170109143010`. Look at [this PR](https://github.com/Sylius/Sylius/pull/7219) if you have any problems with upgrade.

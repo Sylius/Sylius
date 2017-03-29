@@ -139,6 +139,8 @@ Sylius\Component\Currency\Model\Currency:
 Sylius\Component\Locale\Model\Locale:
     locale:
         code: "en_US"
+    locale_de:
+        code: "de_DE"
 
 Sylius\Component\Addressing\Model\Zone:
     zone_eu:

@@ -58,7 +58,7 @@ final class CheckoutCompleteApiTest extends CheckoutApiTestCase
         $this->addressOrder($cartId);
         $this->selectOrderShippingMethod($cartId);
 
-        $this->client->request('PUT', $this->getCheckoutCompleteUrl($cartId), [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('PATCH', $this->getCheckoutCompleteUrl($cartId), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'checkout/complete_invalid_order_state', Response::HTTP_INTERNAL_SERVER_ERROR);
@@ -78,7 +78,7 @@ final class CheckoutCompleteApiTest extends CheckoutApiTestCase
         $this->selectOrderShippingMethod($cartId);
         $this->selectOrderPaymentMethod($cartId);
 
-        $this->client->request('PUT', $this->getCheckoutCompleteUrl($cartId), [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('PATCH', $this->getCheckoutCompleteUrl($cartId), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
@@ -110,7 +110,7 @@ final class CheckoutCompleteApiTest extends CheckoutApiTestCase
         }
 EOT;
 
-        $this->client->request('PUT', $this->getCheckoutCompleteUrl($cartId), [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('PATCH', $this->getCheckoutCompleteUrl($cartId), [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
@@ -119,6 +119,38 @@ EOT;
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'checkout/completed_order_response');
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_to_change_a_locale_when_completing()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/checkout.yml');
+
+        $cartId = $this->createCart();
+        $this->addItemToCart($cartId);
+        $this->addressOrder($cartId);
+        $this->selectOrderShippingMethod($cartId);
+        $this->selectOrderPaymentMethod($cartId);
+
+        $data =
+<<<EOT
+        {
+            "localeCode": "de_DE"
+        }
+EOT;
+
+        $this->client->request('PATCH', $this->getCheckoutCompleteUrl($cartId), [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $response = $this->client->getResponse();
+        $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
+
+        $this->client->request('GET', $this->getCheckoutSummaryUrl($cartId), [], [], static::$authorizedHeaderWithAccept);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'checkout/completed_with_different_language_order_response');
     }
 
     /**
