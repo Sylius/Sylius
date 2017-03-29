@@ -60,7 +60,11 @@ final class ResourcesCollectionProvider implements ResourcesCollectionProviderIn
         if ($paginator instanceof Pagerfanta) {
             $request = $requestConfiguration->getRequest();
 
-            $paginator->setMaxPerPage($request->query->get('limit', reset($paginationLimits) ?: $requestConfiguration->getPaginationMaxPerPage()));
+            $paginator->setMaxPerPage($this->resolveMaxPerPage(
+                $request->query->get('limit'),
+                $requestConfiguration->getPaginationMaxPerPage(),
+                $paginationLimits
+            ));
             $paginator->setCurrentPage($request->query->get('page', 1));
 
             // This prevents Pagerfanta from querying database from a template
@@ -74,5 +78,27 @@ final class ResourcesCollectionProvider implements ResourcesCollectionProviderIn
         }
 
         return $resources;
+    }
+
+    /**
+     * @param int $requestLimit
+     * @param int $configurationLimit
+     * @param int[] $gridLimits
+     *
+     * @return int
+     */
+    private function resolveMaxPerPage($requestLimit, $configurationLimit, array $gridLimits = [])
+    {
+        if (null === $requestLimit) {
+            return reset($gridLimits) ?: $configurationLimit;
+        }
+
+        if (!empty($gridLimits)) {
+            $maxGridLimit = max($gridLimits);
+
+            return $requestLimit > $maxGridLimit ? $maxGridLimit : $requestLimit;
+        }
+
+        return $requestLimit;
     }
 }

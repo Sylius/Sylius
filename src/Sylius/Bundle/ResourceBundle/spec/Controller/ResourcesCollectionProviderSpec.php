@@ -77,7 +77,7 @@ final class ResourcesCollectionProviderSpec extends ObjectBehavior
 
         $requestConfiguration->getRequest()->willReturn($request);
         $request->query = $queryParameters;
-        $queryParameters->get('limit', 5)->willReturn(5);
+        $queryParameters->get('limit')->willReturn(5);
         $queryParameters->get('page', 1)->willReturn(6);
 
         $paginator->setMaxPerPage(5)->shouldBeCalled();
@@ -85,6 +85,38 @@ final class ResourcesCollectionProviderSpec extends ObjectBehavior
         $paginator->getCurrentPageResults()->shouldBeCalled();
 
         $this->get($requestConfiguration, $repository)->shouldReturn($paginator);
+    }
+
+    function it_restricts_max_pagination_limit_based_on_grid_configuration(
+        ResourcesResolverInterface $resourcesResolver,
+        RequestConfiguration $requestConfiguration,
+        RepositoryInterface $repository,
+        ResourceGridView $gridView,
+        Grid $grid,
+        Pagerfanta $paginator,
+        Request $request,
+        ParameterBag $queryParameters
+    ) {
+        $requestConfiguration->isHtmlRequest()->willReturn(true);
+        $requestConfiguration->getPaginationMaxPerPage()->willReturn(1000);
+
+        $grid->getLimits()->willReturn([10, 20, 99]);
+
+        $gridView->getDefinition()->willReturn($grid);
+        $gridView->getData()->willReturn($paginator);
+
+        $resourcesResolver->getResources($requestConfiguration, $repository)->willReturn($gridView);
+
+        $requestConfiguration->getRequest()->willReturn($request);
+        $request->query = $queryParameters;
+        $queryParameters->get('limit')->willReturn(1000);
+        $queryParameters->get('page', 1)->willReturn(1);
+
+        $paginator->setMaxPerPage(99)->shouldBeCalled();
+        $paginator->setCurrentPage(1)->shouldBeCalled();
+        $paginator->getCurrentPageResults()->shouldBeCalled();
+
+        $this->get($requestConfiguration, $repository)->shouldReturn($gridView);
     }
 
     function it_creates_a_paginated_representation_for_pagerfanta_for_non_html_requests(
@@ -105,7 +137,7 @@ final class ResourcesCollectionProviderSpec extends ObjectBehavior
 
         $requestConfiguration->getRequest()->willReturn($request);
         $request->query = $queryParameters;
-        $queryParameters->get('limit', 8)->willReturn(8);
+        $queryParameters->get('limit')->willReturn(8);
         $queryParameters->get('page', 1)->willReturn(6);
         $queryParameters->all()->willReturn(['foo' => 2, 'bar' => 15]);
 
@@ -143,7 +175,7 @@ final class ResourcesCollectionProviderSpec extends ObjectBehavior
 
         $requestConfiguration->getRequest()->willReturn($request);
         $request->query = $queryParameters;
-        $queryParameters->get('limit', 10)->willReturn(5);
+        $queryParameters->get('limit')->willReturn(5);
         $queryParameters->get('page', 1)->willReturn(6);
 
         $paginator->setMaxPerPage(5)->shouldBeCalled();
