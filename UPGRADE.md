@@ -200,13 +200,19 @@ You can bring back previous configuration by overriding current routing with you
   
 * Removed class `Sylius\Bundle\CoreBundle\Form\Type\ProductTaxonChoiceType`, use `Sylius\Bundle\CoreBundle\Form\Type\Taxon\ProductTaxonAutocompleteChoiceType` instead.
 
-* Removed `Sylius\Component\Core\Promotion\Action\ChannelBasedPromotionActionCommandInterface` and 
-  `Sylius\Component\Core\Promotion\Checker\Rule\ChannelBasedRuleCheckerInterface` interfaces as they are not needed anymore.
-
 * Removed `Sylius\Bundle\CoreBundle\Form\Type\Promotion\PromotionConfigurationType` class as it has no behaviour and is not used.
 
 * Removed `filterProductTaxonsByTaxon` method from `ProductTaxonAwareInterface`, added `getTaxons` and `hasTaxon` methods.
   If you used the removed method to determine whether product belongs to a given taxon, use `hasTaxon` instead.
+  
+* Removed `Sylius\Component\Core\Promotion\Action\ChannelBasedPromotionActionCommandInterface` and 
+  `Sylius\Component\Core\Promotion\Checker\Rule\ChannelBasedRuleCheckerInterface` interfaces together with
+  `Sylius\Bundle\CoreBundle\Form\EventSubscriber\BuildChannelBasedPromotionActionFormSubscriber` and
+  `Sylius\Bundle\CoreBundle\Form\EventSubscriber\BuildChannelBasedPromotionRuleFormSubscriber` event subscribers,
+  which magically resolved channel-based configurations, look at `ChannelBased*Type` to implement your own channel-based configs.
+  
+* Services tagged with `sylius.promotion_action` and `sylius.promotion_rule_checker` must include `form-type` parameter
+  being the FQCN of configuration type.
 
 ### Currency / CurrencyBundle
 
@@ -314,6 +320,11 @@ After:
 * `->findOneByIdAndProductId($id, $productId)` has been added to `ProductVariantRepository`. 
 
 ### Promotion / PromotionBundle
+
+* Removed `Sylius\Bundle\PromotionBundle\Form\EventListener\AbstractConfigurationSubscriber`,
+  `Sylius\Bundle\PromotionBundle\Form\EventListener\BuildPromotionActionFormSubscriber` and
+  `Sylius\Bundle\PromotionBundle\Form\EventListener\BuildPromotionRuleFormSubscriber` event subscribers,
+  use `Sylius\Bundle\PromotionBundle\Form\Type\ConfigurablePromotionElementType` as parent type instead.
 
 ### Registry / RegistryBundle
 
