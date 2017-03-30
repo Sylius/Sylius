@@ -20,6 +20,8 @@ use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
 /**
+ * @internal
+ *
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
 final class ProductTaxonToTaxonTransformer implements DataTransformerInterface

@@ -19,6 +19,8 @@ use Symfony\Component\Validator\Constraints\Valid;
 use Webmozart\Assert\Assert;
 
 /**
+ * @internal
+ *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 final class AddUserFormSubscriber implements EventSubscriberInterface
