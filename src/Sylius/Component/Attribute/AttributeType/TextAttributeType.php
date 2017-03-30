@@ -12,7 +12,9 @@
 namespace Sylius\Component\Attribute\AttributeType;
 
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
+use Symfony\Component\Validator\Constraints\All;
 use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
@@ -44,7 +46,7 @@ final class TextAttributeType implements AttributeTypeInterface
      */
     public function validate(AttributeValueInterface $attributeValue, ExecutionContextInterface $context, array $configuration)
     {
-        if (!isset($configuration['min']) || !isset($configuration['max'])) {
+        if (!isset($configuration['required']) && (!isset($configuration['min']) || !isset($configuration['max']))) {
             return;
         }
 
@@ -69,13 +71,23 @@ final class TextAttributeType implements AttributeTypeInterface
     private function getValidationErrors(ExecutionContextInterface $context, $value, array $validationConfiguration)
     {
         $validator = $context->getValidator();
+        $constraints = [];
+
+        if (isset($validationConfiguration['required'])) {
+            $constraints = [new NotBlank([])];
+        }
+
+        if (isset($validationConfiguration['min']) && isset($validationConfiguration['max'])) {
+            $constraints[] = new Length(
+                [
+                    'min' => $validationConfiguration['min'],
+                    'max' => $validationConfiguration['max'],
+                ]
+            );
+        }
 
         return $validator->validate(
-            $value,
-            new Length([
-                'min' => $validationConfiguration['min'],
-                'max' => $validationConfiguration['max'],
-            ])
+            $value, $constraints
         );
     }
 }

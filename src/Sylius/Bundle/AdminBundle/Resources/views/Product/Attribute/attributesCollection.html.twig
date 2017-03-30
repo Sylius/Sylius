@@ -43,6 +43,7 @@
                     <i class="remove icon"></i> {{ 'sylius.ui.delete'|trans }}
                 </button>
             </div>
+            {{ form_errors(form.value) }}
         {% endif %}
         <input type="hidden" name="{{ form.attribute.vars.full_name }}" id="{{ form.attribute.vars.id }}" value="{{ form.vars.data.attribute.code }}"/>
         <input type="hidden" name="{{ form.localeCode.vars.full_name }}" id="{{ form.localeCode.vars.id }}" value="{{ form.localeCode.vars.value }}"/>

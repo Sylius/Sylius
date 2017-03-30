@@ -99,11 +99,30 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     /**
      * {@inheritdoc}
      */
+    public function getAttributeValidationErrors($attributeName, $localeCode)
+    {
+        $this->clickTabIfItsNotActive('attributes');
+        $this->clickLocaleTabIfItsNotActive($localeCode);
+
+        $validationError = $this->getElement('attribute')->find('css', '.sylius-validation-error');
+
+        return $validationError->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function removeAttribute($attributeName, $localeCode)
     {
         $this->clickTabIfItsNotActive('attributes');
 
         $this->getElement('attribute_delete_button', ['%attributeName%' => $attributeName, '%localeCode%' => $localeCode])->press();
+    }
+
+    public function checkAttributeErrors($attributeName, $localeCode)
+    {
+        $this->clickTabIfItsNotActive('attributes');
+        $this->clickLocaleTabIfItsNotActive($localeCode);
     }
 
     /**
@@ -258,6 +277,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
             'association_dropdown' => '.field > label:contains("%association%") ~ .product-select',
             'association_dropdown_item' => '.field > label:contains("%association%") ~ .product-select > div.menu > div.item:contains("%item%")',
             'association_dropdown_item_selected' => '.field > label:contains("%association%") ~ .product-select > a.label:contains("%item%")',
+            'attribute' => '.attribute',
             'attribute_delete_button' => '.tab[data-tab="%localeCode%"] .attribute .label:contains("%attributeName%") ~ button',
             'attribute_value' => '.tab[data-tab="%localeCode%"] .attribute .label:contains("%attributeName%") ~ input',
             'attributes_choice' => '#sylius_product_attribute_choice',

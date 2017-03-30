@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ProductBundle\Form\EventSubscriber;
 
+use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
 use Sylius\Component\Product\Model\ProductInterface;
@@ -55,6 +56,7 @@ final class BuildAttributesFormSubscriber implements EventSubscriberInterface
     {
         return [
             FormEvents::PRE_SET_DATA => 'preSetData',
+            FormEvents::POST_SUBMIT => 'postSubmit',
         ];
     }
 
@@ -80,6 +82,26 @@ final class BuildAttributesFormSubscriber implements EventSubscriberInterface
 
         foreach ($attributes as $attribute) {
             $this->resolveLocalizedAttributes($product, $attribute);
+        }
+    }
+
+    /**
+     * @param FormEvent $event
+     *
+     * @throws \InvalidArgumentException
+     */
+    public function postSubmit(FormEvent $event)
+    {
+        /** @var ProductInterface $product */
+        $product = $event->getData();
+
+        Assert::isInstanceOf($product, ProductInterface::class);
+
+        /** @var AttributeValueInterface $attribute */
+        foreach ($product->getAttributes() as $attribute) {
+            if (null === $attribute->getValue()) {
+                $product->removeAttribute($attribute);
+            }
         }
     }
 
