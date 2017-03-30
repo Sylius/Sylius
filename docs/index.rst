@@ -139,17 +139,17 @@ Components
 
 .. include:: /components/map.rst.inc
 
-Sylius Extensions
------------------
+Sylius Plugins
+--------------
 
-The collection of Sylius Extensions together with the guide on Extensions development.
+The collection of Sylius Plugins together with the guide on Plugins development.
 
 .. toctree::
    :hidden:
 
-   extensions/index
+   plugins/index
 
-.. include:: /extensions/map.rst.inc
+.. include:: /plugins/map.rst.inc
 
 The Contribution Guide
 ----------------------
