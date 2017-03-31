@@ -18,8 +18,9 @@ class Version20170217141621 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE sylius_exchange_rate ADD created_at DATETIME NOT NULL, ADD updated_at DATETIME DEFAULT NULL');
+        $this->addSql('ALTER TABLE sylius_exchange_rate ADD created_at DATETIME DEFAULT NULL, ADD updated_at DATETIME DEFAULT NULL');
         $this->addSql('UPDATE sylius_exchange_rate SET created_at = NOW()');
+        $this->addSql('ALTER TABLE sylius_exchange_rate MODIFY created_at DATETIME NOT NULL');
     }
 
     /**
