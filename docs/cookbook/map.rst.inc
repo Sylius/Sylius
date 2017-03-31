@@ -1,4 +1,5 @@
 * :doc:`/cookbook/custom-model`
+* :doc:`/cookbook/custom-translatable-model`
 * :doc:`/cookbook/custom-email`
 * :doc:`/cookbook/custom-promotion-rule`
 * :doc:`/cookbook/custom-promotion-action`

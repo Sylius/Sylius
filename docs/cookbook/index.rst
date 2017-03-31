@@ -5,6 +5,7 @@ The Cookbook
     :hidden:
 
     custom-model
+    custom-translatable-model
     custom-email
     custom-promotion-rule
     custom-promotion-action

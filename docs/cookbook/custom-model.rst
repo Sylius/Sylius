@@ -17,6 +17,10 @@ A Supplier needs three essential fields: ``name``, ``description`` and ``enabled
 Symfony, the framework Sylius uses, provides the `SensioGeneratorBundle <http://symfony.com/doc/current/bundles/SensioGeneratorBundle/index.html>`_,
 that simplifies the process of adding a model.
 
+.. warning::
+
+    Remember to have the ``SensioGeneratorBundle`` imported in the AppKernel, as it is not there by default.
+
 You need to use such a command in your project directory.
 
 .. code-block:: bash
@@ -131,7 +135,7 @@ To have templates for your Entity administration out of the box you can use Grid
                         type: twig
                         label: sylius.ui.enabled
                         options:
-                            template: SyliusAdminBundle:Grid/Field:enabled.html.twig
+                            template: "@SyliusUi/Grid/Field/enabled.html.twig"
                 actions:
                     main:
                         create:
