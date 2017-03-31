@@ -41,8 +41,6 @@ If you request for more detailed data, you will receive an object with the follo
 +--------------+----------------------------------------------------------------------+
 | createdAt    | Creation date of the product attribute                               |
 +--------------+----------------------------------------------------------------------+
-| values       | Values of the product attribute                                      |
-+--------------+----------------------------------------------------------------------+
 
 .. note::
 
@@ -100,10 +98,9 @@ Exemplary Response
         "id": 1,
         "code": "mug_material",
         "type": "text",
-        "values": [],
+        "configuration": [],
         "position": 0,
         "translations": {},
-        "values": [],
         "_links": {
             "self": {
                 "href": "\/api\/v1\/product-attributes\/mug_material"
@@ -164,6 +161,25 @@ You can also create a product attribute with additional (not required) fields:
 | translations['localeCode']['name'] | request        | Name of the product attribute                                              |
 +------------------------------------+----------------+----------------------------------------------------------------------------+
 
+Some of product attributes have also their own (optional) configuration:
+
++------------------------+----------------------------+---------------------------------------------------------------------------------+
+| Product attribute type | configuration construction | Description                                                                     |
++========================+============================+=================================================================================+
+| text                   | configuration['min']       | Both field must be defined together.                                            |
+|                        | configuration['max']       | They described minimal and maximal length of the text attribute.                |
++------------------------+----------------------------+---------------------------------------------------------------------------------+
+| select                 | configuration['multiple']  | The *multiple*, *min*, and *max* must be defined together. They allow to select |
+|                        | configuration['min']       | several values, limited by minimal and maximal amount of entries.               |
+|                        | configuration['max']       | The *choices* is an array of available options in the product attribute.        |
+|                        | configuration['choices']   |                                                                                 |
++------------------------+----------------------------+---------------------------------------------------------------------------------+
+
+.. note::
+
+    You can also see exemplary request about creating configured select product attribute
+    `here <https://github.com/Sylius/Sylius/blob/master/tests/Controller/ProductAttributeApiTest.php>`_.
+
 Example
 ^^^^^^^
 
@@ -200,7 +216,7 @@ Exemplary Response
         "id": 1,
         "code": "mug_material",
         "type": "text",
-        "values": [],
+        "configuration": [],
         "position": 0,
         "createdAt": "2017-02-24T16:14:05+0100",
         "updatedAt": "2017-02-24T16:14:05+0100",
@@ -271,116 +287,10 @@ Exemplary Response
         "id": 2,
         "code": "sticker_paper",
         "type": "text",
-        "values": [
-            {
-                "code": "sticker_paper",
-                "name": "Sticker paper",
-                "value": "Paper from tree Me-Gusta",
-                "type": "text",
-                "id": 16
-            },
-            {
-                "code": "sticker_paper",
-                "name": "Sticker paper",
-                "value": "Paper from tree Lemon-San",
-                "type": "text",
-                "id": 18
-            },
-            {
-                "code": "sticker_paper",
-                "name": "Sticker paper",
-                "value": "Paper from tree Wung",
-                "type": "text",
-                "id": 20
-            },
-            {
-                "code": "sticker_paper",
-                "name": "Sticker paper",
-                "value": "Paper from tree Tanajno",
-                "type": "text",
-                "id": 22
-            },
-            {
-                "code": "sticker_paper",
-                "name": "Sticker paper",
-                "value": "Paper from tree Tanajno",
-                "type": "text",
-                "id": 24
-            },
-            {
-                "code": "sticker_paper",
-                "name": "Sticker paper",
-                "value": "Paper from tree Wung",
-                "type": "text",
-                "id": 26
-            },
-            {
-                "code": "sticker_paper",
-                "name": "Sticker paper",
-                "value": "Paper from tree Wung",
-                "type": "text",
-                "id": 28
-            },
-            {
-                "code": "sticker_paper",
-                "name": "Sticker paper",
-                "value": "Paper from tree Wung",
-                "type": "text",
-                "id": 30
-            },
-            {
-                "code": "sticker_paper",
-                "name": "Sticker paper",
-                "value": "Paper from tree Me-Gusta",
-                "type": "text",
-                "id": 32
-            },
-            {
-                "code": "sticker_paper",
-                "name": "Sticker paper",
-                "value": "Paper from tree Wung",
-                "type": "text",
-                "id": 34
-            },
-            {
-                "code": "sticker_paper",
-                "name": "Sticker paper",
-                "value": "Paper from tree Wung",
-                "type": "text",
-                "id": 36
-            },
-            {
-                "code": "sticker_paper",
-                "name": "Sticker paper",
-                "value": "Paper from tree Tanajno",
-                "type": "text",
-                "id": 38
-            },
-            {
-                "code": "sticker_paper",
-                "name": "Sticker paper",
-                "value": "Paper from tree Lemon-San",
-                "type": "text",
-                "id": 40
-            },
-            {
-                "code": "sticker_paper",
-                "name": "Sticker paper",
-                "value": "Paper from tree Lemon-San",
-                "type": "text",
-                "id": 42
-            },
-            {
-                "code": "sticker_paper",
-                "name": "Sticker paper",
-                "value": "Paper from tree Me-Gusta",
-                "type": "text",
-                "id": 44
-            }
-        ],
+        "configuration": [],
         "position": 1,
-        "createdAt": "2017-02-24T16:14:05+0100",
-        "updatedAt": "2017-02-24T16:14:05+0100",
+        "createdAt": "2017-03-29T10:05:00+0200",
+        "updatedAt": "2017-03-31T09:48:37+0200",
         "translations": {
             "en_US": {
                 "locale": "en_US",
