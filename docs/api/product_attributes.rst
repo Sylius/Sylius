@@ -48,6 +48,181 @@ If you request for more detailed data, you will receive an object with the follo
 
     Read more about :doc:`Product Attributes in the component docs</components/Product/models>`.
 
+Creating a Product Attribute
+----------------------------
+
+To create a new product attribute you will need to call the ``/api/v1/products-attributes/{type}`` endpoint with the ``POST`` method.
+
+Definition
+^^^^^^^^^^
+
+.. code-block:: text
+
+    POST /api/v1/product-attributes/{type}
+
++---------------+----------------+--------------------------------------------------+
+| Parameter     | Parameter type | Description                                      |
++===============+================+==================================================+
+| Authorization | header         | Token received during authentication             |
++---------------+----------------+--------------------------------------------------+
+| type          | url attribute  | Type of the product attribute (for example text) |
++---------------+----------------+--------------------------------------------------+
+| code          | request        | **(unique)** Product attribute identifier        |
++---------------+----------------+--------------------------------------------------+
+
+Example
+^^^^^^^
+
+To create a new text product attribute use the below method:
+
+.. code-block:: bash
+
+    $ curl http://demo.sylius.org/api/v1/product-attributes/text \
+        -H "Authorization: Bearer SampleToken" \
+        -H "Content-Type: application/json" \
+        -X POST \
+        --data '
+            {
+                "code": "mug_material"
+            }
+        '
+
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
+
+.. code-block:: text
+
+    STATUS: 201 CREATED
+
+.. code-block:: json
+
+    {
+        "id": 1,
+        "code": "mug_material",
+        "type": "text",
+        "values": [],
+        "position": 0,
+        "translations": {},
+        "values": [],
+        "_links": {
+            "self": {
+                "href": "\/api\/v1\/product-attributes\/mug_material"
+            }
+        }
+    }
+
+.. warning::
+
+    If you try to create a product attribute without code you will receive a ``400 Bad Request`` error, that will contain validation errors.
+
+.. code-block:: bash
+
+    $ curl http://demo.sylius.org/api/v1/product-attributes/text \
+        -H "Authorization: Bearer SampleToken" \
+        -H "Content-Type: application/json" \
+        -X POST \
+
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
+
+.. code-block:: text
+
+    STATUS: 400 BAD REQUEST
+
+.. code-block:: json
+
+    {
+        "code": 400,
+        "message": "Validation Failed",
+        "errors": {
+            "children": {
+                "type": {},
+                "position": {},
+                "translations": {},
+                "code": {
+                    "errors": [
+                        "Please enter attribute code."
+                    ]
+                },
+                "configuration": {
+                    "children": {
+                        "min": {},
+                        "max": {}
+                    }
+                }
+            }
+        }
+    }
+
+You can also create a product attribute with additional (not required) fields:
+
++------------------------------------+----------------+----------------------------------------------------------------------------+
+| Parameter                          | Parameter type | Description                                                                |
++====================================+================+============================================================================+
+| position                           | request        | Position within sorted product attribute list of the new product attribute |
++------------------------------------+----------------+----------------------------------------------------------------------------+
+| translations['localeCode']['name'] | request        | Name of the product attribute                                              |
++------------------------------------+----------------+----------------------------------------------------------------------------+
+
+Example
+^^^^^^^
+
+.. code-block:: bash
+
+    $ curl http://demo.sylius.org/api/v1/product-attributes/text/ \
+        -H "Authorization: Bearer SampleToken" \
+        -H "Content-Type: application/json" \
+        -X POST \
+        --data '
+            {
+                "code": "mug_material",
+                "translations": {
+                    "de_CH": {
+                        "name": "Becher Material"
+                    },
+                    "en_US": {
+                        "name": "Mug material"
+                    }
+                }
+            }
+        '
+
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
+
+.. code-block:: text
+
+    STATUS: 201 CREATED
+
+.. code-block:: json
+
+    {
+        "id": 1,
+        "code": "mug_material",
+        "type": "text",
+        "values": [],
+        "position": 0,
+        "createdAt": "2017-02-24T16:14:05+0100",
+        "updatedAt": "2017-02-24T16:14:05+0100",
+        "translations": {
+            "de_CH": {
+                "id": 1,
+                "locale": "de_CH",
+                "name": "Becher Material"
+            },
+            "en_US": {
+                "id": 2,
+                "locale": "en_US",
+                "name": "Mug material"
+            }
+        },
+        "_links": {
+            "self": {
+                "href": "\/api\/v1\/product-attributes\/mug_material"
+            }
+        }
+    }
+
 Getting a Single Product Attribute
 ----------------------------------
 
@@ -463,3 +638,135 @@ Exemplary Response
             ]
         }
     }
+
+Updating a Product Attribute
+----------------------------
+
+To fully update a product attribute you will need to call the ``/api/v1/product-attributes/code`` endpoint with the ``PUT`` method.
+
+Definition
+^^^^^^^^^^
+
+.. code-block:: text
+
+    PUT /api/v1/product-attributes/{code}
+
++-----------------------------------+----------------+--------------------------------------+
+| Parameter                         | Parameter type | Description                          |
++===================================+================+======================================+
+| Authorization                     | header         | Token received during authentication |
++-----------------------------------+----------------+--------------------------------------+
+| code                              | url attribute  | Unique product attribute identifier  |
++-----------------------------------+----------------+--------------------------------------+
+
+Example
+^^^^^^^
+
+ To fully update the product attribute with ``code = mug_material`` use the below method:
+
+.. code-block:: bash
+
+    $ curl http://demo.sylius.org/api/v1/product-attributes/mug_material \
+        -H "Authorization: Bearer SampleToken" \
+        -H "Content-Type: application/json" \
+        -X PUT \
+        --data '
+            {
+                "translations": {
+                    "en_US": {
+                        "name": "Mug material"
+                    }
+                }
+            }
+        '
+
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
+
+.. code-block:: text
+
+    STATUS: 204 No Content
+
+To update a product attribute partially you will need to call the ``/api/v1/product-attributes/code`` endpoint with the ``PATCH`` method.
+
+Definition
+^^^^^^^^^^
+
+.. code-block:: text
+
+    PATCH /api/v1/product-attributes/{code}
+
++---------------+----------------+--------------------------------------+
+| Parameter     | Parameter type | Description                          |
++===============+================+======================================+
+| Authorization | header         | Token received during authentication |
++---------------+----------------+--------------------------------------+
+| code          | url attribute  | Unique product attribute identifier  |
++---------------+----------------+--------------------------------------+
+
+Example
+^^^^^^^
+
+To partially update the product attribute with ``code = mug_material`` use the below method:
+
+.. code-block:: bash
+
+    $ curl http://demo.sylius.org/api/v1/product-attributes/mug_material \
+        -H "Authorization: Bearer SampleToken" \
+        -H "Content-Type: application/json" \
+        -X PATCH \
+        --data '
+            {
+                "translations": {
+                    "en_US": {
+                        "name": "Mug material"
+                    }
+                }
+            }
+        '
+
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
+
+.. code-block:: text
+
+    STATUS: 204 No Content
+
+Deleting a Product Attribute
+----------------------------
+
+To delete a product attribute you will need to call the ``/api/v1/product-attributes/code`` endpoint with the ``DELETE`` method.
+
+Definition
+^^^^^^^^^^
+
+.. code-block:: text
+
+    DELETE /api/v1/product-attributes/{code}
+
++---------------+----------------+--------------------------------------+
+| Parameter     | Parameter type | Description                          |
++===============+================+======================================+
+| Authorization | header         | Token received during authentication |
++---------------+----------------+--------------------------------------+
+| code          | url attribute  | Unique product attribute identifier  |
++---------------+----------------+--------------------------------------+
+
+Example
+^^^^^^^
+
+To delete the product attribute with ``code = mug_material`` use the below method:
+
+.. code-block:: bash
+
+    $ curl http://demo.sylius.org/api/v1/product-attributes/mug_material \
+        -H "Authorization: Bearer SampleToken" \
+        -H "Accept: application/json" \
+        -X DELETE
+
+Exemplary Response
+^^^^^^^^^^^^^^^^^^
+
+.. code-block:: text
+
+    STATUS: 204 No Content

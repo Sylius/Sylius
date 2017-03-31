@@ -134,42 +134,43 @@ final class ProductOptionApiTest extends JsonApiTestCase
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/locales.yml');
 
-        $data = <<<EOT
-{
-    "code": "MUG_SIZE",
-    "translations": {
-        "de_CH": {
-            "name": "Bechergröße"
-        },
-        "en_US": {
-            "name": "Mug size"
-        }
-    },
-    "values": [
+        $data =
+<<<EOT
         {
-            "code": "MUG_SIZE_S",
+            "code": "MUG_SIZE",
             "translations": {
                 "de_CH": {
-                    "value": "Klein"
+                    "name": "Bechergröße"
                 },
                 "en_US": {
-                    "value": "Small"
+                    "name": "Mug size"
                 }
-            }
-        },
-        {
-            "code": "MUG_SIZE_L",
-            "translations": {
-                "de_CH": {
-                    "value": "Groß"
+            },
+            "values": [
+                {
+                    "code": "MUG_SIZE_S",
+                    "translations": {
+                        "de_CH": {
+                            "value": "Klein"
+                        },
+                        "en_US": {
+                            "value": "Small"
+                        }
+                    }
                 },
-                "en_US": {
-                    "value": "Large"
+                {
+                    "code": "MUG_SIZE_L",
+                    "translations": {
+                        "de_CH": {
+                            "value": "Groß"
+                        },
+                        "en_US": {
+                            "value": "Large"
+                        }
+                    }
                 }
-            }
+            ]
         }
-    ]
-}
 EOT;
 
         $this->client->request('POST', '/api/v1/product-options/', [], [], static::$authorizedHeaderWithContentType, $data);
@@ -201,54 +202,55 @@ EOT;
         $productOptions = $this->loadFixturesFromFile('resources/product_options.yml');
         $productOption = $productOptions['mug-size'];
 
-        $data = <<<EOT
-{
-    "code": "MUG_SIZE",
-    "position": 2,
-    "translations": {
-        "de_CH": {
-            "name": "Bechergröße"
-        },
-        "en_US": {
-            "name": "Mug size"
+        $data =
+<<<EOT
+        {
+            "code": "MUG_SIZE",
+            "position": 2,
+            "translations": {
+                "de_CH": {
+                    "name": "Bechergröße"
+                },
+                "en_US": {
+                    "name": "Mug size"
+                }
+            },
+            "values": [
+                {
+                    "code": "MUG_SIZE_S",
+                    "translations": {
+                        "de_CH": {
+                            "value": "Klein"
+                        },
+                        "en_US": {
+                            "value": "Small"
+                        }
+                    }
+                },
+                {
+                    "code": "MUG_SIZE_L",
+                    "translations": {
+                        "de_CH": {
+                            "value": "Groß"
+                        },
+                        "en_US": {
+                            "value": "Large"
+                        }
+                    }
+                },
+                {
+                    "code": "MUG_SIZE_M",
+                    "translations": {
+                        "de_CH": {
+                            "value": "Mittel"
+                        },
+                        "en_US": {
+                            "value": "Medium"
+                        }
+                    }
+                }
+            ]
         }
-    },
-    "values": [
-        {
-            "code": "MUG_SIZE_S",
-            "translations": {
-                "de_CH": {
-                    "value": "Klein"
-                },
-                "en_US": {
-                    "value": "Small"
-                }
-            }
-        },
-        {
-            "code": "MUG_SIZE_L",
-            "translations": {
-                "de_CH": {
-                    "value": "Groß"
-                },
-                "en_US": {
-                    "value": "Large"
-                }
-            }
-        },
-        {
-            "code": "MUG_SIZE_M",
-            "translations": {
-                "de_CH": {
-                    "value": "Mittel"
-                },
-                "en_US": {
-                    "value": "Medium"
-                }
-            }
-        }
-    ]
-}
 EOT;
 
         $this->client->request('PUT', $this->getProductOptionUrl($productOption), [], [], static::$authorizedHeaderWithContentType, $data);
@@ -272,53 +274,54 @@ EOT;
         $productOptions = $this->loadFixturesFromFile('resources/product_options.yml');
         $productOption = $productOptions['mug-size'];
 
-        $data = <<<EOT
-{
-    "code": "MUG_SIZE",
-    "translations": {
-        "de_CH": {
-            "name": "Bechergröße"
-        },
-        "en_US": {
-            "name": "Mug size"
+        $data =
+<<<EOT
+        {
+            "code": "MUG_SIZE",
+            "translations": {
+                "de_CH": {
+                    "name": "Bechergröße"
+                },
+                "en_US": {
+                    "name": "Mug size"
+                }
+            },
+            "values": [
+                {
+                    "code": "MUG_SIZE_S",
+                    "translations": {
+                        "de_CH": {
+                            "value": "Klein"
+                        },
+                        "en_US": {
+                            "value": "Small"
+                        }
+                    }
+                },
+                {
+                    "code": "MUG_SIZE_L",
+                    "translations": {
+                        "de_CH": {
+                            "value": "Groß"
+                        },
+                        "en_US": {
+                            "value": "Large"
+                        }
+                    }
+                },
+                {
+                    "code": "MUG_SIZE_M",
+                    "translations": {
+                        "de_CH": {
+                            "value": "Mittel"
+                        },
+                        "en_US": {
+                            "value": "Medium"
+                        }
+                    }
+                }
+            ]
         }
-    },
-    "values": [
-        {
-            "code": "MUG_SIZE_S",
-            "translations": {
-                "de_CH": {
-                    "value": "Klein"
-                },
-                "en_US": {
-                    "value": "Small"
-                }
-            }
-        },
-        {
-            "code": "MUG_SIZE_L",
-            "translations": {
-                "de_CH": {
-                    "value": "Groß"
-                },
-                "en_US": {
-                    "value": "Large"
-                }
-            }
-        },
-        {
-            "code": "MUG_SIZE_M",
-            "translations": {
-                "de_CH": {
-                    "value": "Mittel"
-                },
-                "en_US": {
-                    "value": "Medium"
-                }
-            }
-        }
-    ]
-}
 EOT;
 
         $this->client->request('PATCH', $this->getProductOptionUrl($productOption), [], [], static::$authorizedHeaderWithContentType, $data);

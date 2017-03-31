@@ -1,0 +1,22 @@
+{
+    "code": 400,
+    "message": "Validation Failed",
+    "errors": {
+        "children": {
+            "type": {},
+            "position": {},
+            "translations": {},
+            "code": {
+                "errors": [
+                    "Please enter attribute code."
+                ]
+            },
+            "configuration": {
+                "children": {
+                    "min": {},
+                    "max": {}
+                }
+            }
+        }
+    }
+}
