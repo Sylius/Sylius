@@ -280,6 +280,45 @@ EOT;
     }
 
     /**
+     * @test
+     */
+    public function it_allows_to_create_select_product_attribute()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/locales.yml');
+
+        $data =
+<<<EOT
+        {
+            "code": "mug_color",
+            "configuration": {
+                "choices": [
+                    "yellow",
+                    "green",
+                    "black"
+                ],
+                "multiple": true,
+                "min": 1,
+                "max": 2
+            },
+            "translations": {
+                "de_CH": {
+                    "name": "Becher Farbe"
+                },
+                "en_US": {
+                    "name": "Mug color"
+                }
+            }
+        }
+EOT;
+
+        $this->client->request('POST', '/api/v1/product-attributes/select', [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'product_attribute/create_select_response', Response::HTTP_CREATED);
+    }
+
+    /**
      * @param ProductAttributeInterface $productAttribute
      *
      * @return string
