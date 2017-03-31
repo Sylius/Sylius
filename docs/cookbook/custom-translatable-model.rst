@@ -63,7 +63,6 @@ Below the final ``SupplierTranslation`` class is presented, it implements the ``
          */
         private $description;
 
-
         /**
          * @return int
          */
@@ -337,26 +336,6 @@ Then let's prepare the entity type, that will include the translation type.
     class SupplierType extends AbstractResourceType
     {
         /**
-         * @var TranslationLocaleProviderInterface
-         */
-        private $localeProvider;
-
-        /**
-         * @param string $dataClass
-         * @param string[] $validationGroups
-         * @param TranslationLocaleProviderInterface $localeProvider
-         */
-        public function __construct(
-            $dataClass,
-            $validationGroups,
-            TranslationLocaleProviderInterface $localeProvider
-        ) {
-            parent::__construct($dataClass, $validationGroups);
-
-            $this->localeProvider = $localeProvider;
-        }
-
-        /**
          * {@inheritdoc}
          */
         public function buildForm(FormBuilderInterface $builder, array $options)
@@ -393,7 +372,7 @@ Before the newly created forms will be ready to use them, they need to be regist
             class: AppBundle\Form\Type\SupplierType
             tags:
                 - { name: form.type }
-            arguments: ['%app.model.supplier.class%', ['sylius'], '@sylius.translation_locale_provider']
+            arguments: ['%app.model.supplier.class%', ['sylius']]
         app.supplier_translation.form.type:
             class: AppBundle\Form\Type\SupplierTranslationType
             tags:
