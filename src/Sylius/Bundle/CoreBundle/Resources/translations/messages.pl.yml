@@ -109,6 +109,7 @@ sylius:
             on_hand: Dostępny
             price: Cena
             sku: SKU
+            shipping_required: Czy wymagana jest dostawa?
             weight: Waga
             width: Szerokość
         attribute:

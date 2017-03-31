@@ -10,6 +10,8 @@ sylius:
             options: Warianty
             meta_keywords: Słowa kluczowe w sekcji meta
             meta_description: Opis w sekcji meta
+            slug: Fragment URL
+            taxons: Kategorie
         product_variant:
             name: Nazwa
         association_type:

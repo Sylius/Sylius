@@ -16,3 +16,4 @@ sylius:
     payum_gateway_factory:
         offline: Tryb offline
         paypal_express_checkout: Ekspresowa realizacja transakcji PayPal
+        stripe_checkout: Kasa Stripe

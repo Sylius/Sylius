@@ -10,6 +10,9 @@ sylius:
         name:
             max_length: Nazwa taksonomii nie może być dłuższa niż 255 znaków.
             not_blank: Proszę podać nazwę taksonomii.
+        slug:
+            not_blank: Wprowadź fragment URL kategorii.
+            unique: Fragment URL kategorii musi być unikalny.
     taxonomy:
         name:
             max_length: Nazwa taksonomii nie może być dłuższa niż 255 znaków.

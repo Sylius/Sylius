@@ -6,5 +6,12 @@ sylius:
         paypal:
             password:
                 not_blank: Proszę wprowadzić hasło PayPal.
+            signature:
+                not_blank: Wprowadź sygnaturę PayPal.
             username:
                 not_blank: Proszę wprowadzić nazwę użytkownika PayPal.
+        stripe:
+            secret_key:
+                not_blank: Wprowadź prywatny klucz Stripe.
+            publishable_key:
+                not_blank: Wprowadź publiczny kod Stripe.
