@@ -13,6 +13,7 @@ namespace Sylius\Component\Attribute\AttributeType;
 
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Symfony\Component\Validator\Constraints\Count;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 use Symfony\Component\Validator\Constraints\All;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
@@ -46,7 +47,7 @@ class SelectAttributeType implements AttributeTypeInterface
      */
     public function validate(AttributeValueInterface $attributeValue, ExecutionContextInterface $context, array $configuration)
     {
-        if (!isset($configuration['multiple'])) {
+        if (!isset($configuration['required']) && !isset($configuration['multiple'])) {
             return;
         }
 
@@ -79,6 +80,10 @@ class SelectAttributeType implements AttributeTypeInterface
                 ])
             ]),
         ];
+
+        if (isset($validationConfiguration['required'])) {
+            $constraints[] = new NotBlank([]);
+        }
 
         if (isset($validationConfiguration['min']) && !empty($validationConfiguration['min'])) {
             $constraints[] = new Count([
