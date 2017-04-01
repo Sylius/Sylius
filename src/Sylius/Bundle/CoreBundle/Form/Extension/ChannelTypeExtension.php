@@ -73,6 +73,10 @@ final class ChannelTypeExtension extends AbstractTypeExtension
                 'label' => 'sylius.form.channel.skipping_shipping_step_allowed',
                 'required' => false,
             ])
+            ->add('skippingPaymentStepAllowed', CheckboxType::class, [
+                'label' => 'sylius.form.channel.skipping_payment_step_allowed',
+                'required' => false,
+            ])
             ->add('accountVerificationRequired', CheckboxType::class, [
                 'label' => 'sylius.form.channel.account_verification_required',
                 'required' => false,

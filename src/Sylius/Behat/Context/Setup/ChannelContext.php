@@ -174,6 +174,18 @@ final class ChannelContext implements Context
     }
 
     /**
+     * @Given /^on (this channel) payment step is skipped if only a single payment method is available$/
+     */
+    public function onThisChannelPaymentStepIsSkippedIfOnlyASinglePaymentMethodIsAvailable(
+        ChannelInterface $channel
+    )
+    {
+        $channel->setSkippingPaymentStepAllowed(true);
+
+        $this->channelManager->flush();
+    }
+
+    /**
      * @Given /^on (this channel) account verification is not required$/
      */
     public function onThisChannelAccountVerificationIsNotRequired(ChannelInterface $channel)

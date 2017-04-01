@@ -21,6 +21,7 @@
         <field name="taxCalculationStrategy" column="tax_calculation_strategy" type="string" />
         <field name="contactEmail" column="contact_email" type="string" nullable="true" />
         <field name="skippingShippingStepAllowed" column="skipping_shipping_step_allowed" type="boolean" />
+        <field name="skippingPaymentStepAllowed" column="skipping_payment_step_allowed" type="boolean" />
         <field name="accountVerificationRequired" column="account_verification_required" type="boolean" />
 
         <many-to-one field="defaultLocale" target-entity="Sylius\Component\Locale\Model\LocaleInterface">

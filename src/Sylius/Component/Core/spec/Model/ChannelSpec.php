@@ -150,6 +150,12 @@ final class ChannelSpec extends ObjectBehavior
         $this->isSkippingShippingStepAllowed()->shouldReturn(true);
     }
 
+    function it_can_allow_to_skip_payment_step_if_only_a_single_payment_method_is_resolved()
+    {
+        $this->setSkippingPaymentStepAllowed(true);
+        $this->isSkippingPaymentStepAllowed()->shouldReturn(true);
+    }
+
     function it_has_account_verification_required_by_default()
     {
         $this->isAccountVerificationRequired()->shouldReturn(true);

@@ -110,6 +110,11 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         $this->getDocument()->checkField('Skip shipping step if only one shipping method is available?');
     }
 
+    public function allowToSkipPaymentStep()
+    {
+        $this->getDocument()->checkField('Skip payment step if only one payment method is available?');
+    }
+
     /**
      * {@inheritdoc}
      */
