@@ -41,6 +41,7 @@ class ChannelFixture extends AbstractResourceFixture
                 ->scalarNode('tax_calculation_strategy')->end()
                 ->booleanNode('enabled')->end()
                 ->booleanNode('skipping_shipping_step_allowed')->end()
+                ->booleanNode('skipping_payment_step_allowed')->end()
                 ->scalarNode('default_locale')->cannotBeEmpty()->end()
                 ->arrayNode('locales')->prototype('scalar')->end()->end()
                 ->scalarNode('base_currency')->cannotBeEmpty()->end()

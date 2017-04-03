@@ -32,6 +32,7 @@ sylius:
             payment_methods: Payment Methods
             shipping_methods: Shipping Methods
             skipping_shipping_step_allowed: Skip shipping step if only one shipping method is available?
+            skipping_payment_step_allowed: Skip payment step if only one payment method is available?
             tax_calculation_strategy: Tax calculation strategy
             tax_zone_default: Default tax zone
             taxonomies: Taxonomies

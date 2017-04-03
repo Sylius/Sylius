@@ -12,6 +12,8 @@
 namespace Sylius\Component\Core\Checker;
 
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Payment\Resolver\PaymentMethodsResolverInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -19,10 +21,34 @@ use Sylius\Component\Core\Model\OrderInterface;
 final class OrderPaymentMethodSelectionRequirementChecker implements OrderPaymentMethodSelectionRequirementCheckerInterface
 {
     /**
+     * @var PaymentMethodsResolverInterface
+     */
+    private $paymentMethodsResolver;
+
+    public function __construct(PaymentMethodsResolverInterface $paymentMethodsResolver)
+    {
+        $this->paymentMethodsResolver = $paymentMethodsResolver;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function isPaymentMethodSelectionRequired(OrderInterface $order)
     {
-        return 0 < $order->getTotal();
+        if ($order->getTotal() <= 0) {
+            return false;
+        }
+
+        if (!$order->getChannel()->isSkippingPaymentStepAllowed()) {
+            return true;
+        }
+
+        foreach ($order->getPayments() as $payment) {
+            if (count($this->paymentMethodsResolver->getSupportedMethods($payment)) !== 1) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

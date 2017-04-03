@@ -99,6 +99,16 @@ interface ChannelInterface extends
     /**
      * @return bool
      */
+    public function isSkippingPaymentStepAllowed();
+
+    /**
+     * @param bool $skippingPaymentStepAllowed
+     */
+    public function setSkippingPaymentStepAllowed($skippingPaymentStepAllowed);
+
+    /**
+     * @return bool
+     */
     public function isAccountVerificationRequired();
 
     /**

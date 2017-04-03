@@ -98,6 +98,7 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
         $channel->setThemeName($options['theme_name']);
         $channel->setContactEmail($options['contact_email']);
         $channel->setSkippingShippingStepAllowed($options['skipping_shipping_step_allowed']);
+        $channel->setSkippingPaymentStepAllowed($options['skipping_payment_step_allowed']);
 
         $channel->setDefaultLocale($options['default_locale']);
         foreach ($options['locales'] as $locale) {
@@ -136,6 +137,8 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
             ->setAllowedTypes('enabled', 'bool')
             ->setDefault('skipping_shipping_step_allowed', false)
             ->setAllowedTypes('skipping_shipping_step_allowed', 'bool')
+            ->setDefault('skipping_payment_step_allowed', false)
+            ->setAllowedTypes('skipping_payment_step_allowed', 'bool')
             ->setDefault('default_tax_zone', LazyOption::randomOne($this->zoneRepository))
             ->setAllowedTypes('default_tax_zone', ['null', 'string', ZoneInterface::class])
             ->setNormalizer('default_tax_zone', LazyOption::findOneBy($this->zoneRepository, 'code'))

@@ -74,6 +74,7 @@ abstract class SymfonyPage extends Page implements SymfonyPageInterface
         $url = $this->getDriver()->getCurrentUrl();
         $path = parse_url($url)['path'];
 
+        $path = preg_replace('#^/app(_dev|_test|_test_cached)?\.php/#', '/', $path);
         $matchedRoute = $this->router->match($path);
 
         if (isset($matchedRoute['_locale'])) {

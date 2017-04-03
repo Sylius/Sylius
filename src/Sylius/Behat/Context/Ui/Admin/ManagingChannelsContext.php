@@ -128,6 +128,14 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
+     * @When I allow to skip payment step if only one payment method is available
+     */
+    public function iAllowToSkipPaymentStepIfOnlyOnePaymentMethodIsAvailable()
+    {
+        $this->createPage->allowToSkipPaymentStep();
+    }
+
+    /**
      * @When I add it
      * @When I try to add it
      */
