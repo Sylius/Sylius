@@ -105,6 +105,16 @@ final class ProductAttributeContext implements Context
     }
 
     /**
+     * @Given /^(this product attribute) has set min value as (\d+) and max value as (\d+)$/
+     */
+    public function thisAttributeHasSetMinValueAsAndMaxValueAs(ProductAttributeInterface $attribute, $min, $max)
+    {
+        $attribute->setConfiguration(['min' => $min, 'max' => $max]);
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @Given /^(this product) has (.+?) attribute "([^"]+)" with values "([^"]+)", "([^"]+)"$/
      */
     public function thisProductHasSelectAttributeWithValues(
@@ -149,7 +159,7 @@ final class ProductAttributeContext implements Context
     public function thisProductHasPercentAttributeWithValue(ProductInterface $product, $productAttributeName, $value)
     {
         $attribute = $this->provideProductAttribute('percent', $productAttributeName);
-        $attributeValue = $this->createProductAttributeValue($value/100, $attribute);
+        $attributeValue = $this->createProductAttributeValue($value / 100, $attribute);
         $product->addAttribute($attributeValue);
 
         $this->objectManager->flush();
@@ -158,8 +168,12 @@ final class ProductAttributeContext implements Context
     /**
      * @Given /^(this product) has ([^"]+) attribute "([^"]+)" set to "([^"]+)"$/
      */
-    public function thisProductHasCheckboxAttributeWithValue(ProductInterface $product, $productAttributeType, $productAttributeName, $value)
-    {
+    public function thisProductHasCheckboxAttributeWithValue(
+        ProductInterface $product,
+        $productAttributeType,
+        $productAttributeName,
+        $value
+    ) {
         $attribute = $this->provideProductAttribute($productAttributeType, $productAttributeName);
         $booleanValue = ('Yes' === $value);
         $attributeValue = $this->createProductAttributeValue($booleanValue, $attribute);
@@ -171,11 +185,14 @@ final class ProductAttributeContext implements Context
     /**
      * @Given /^(this product) has percent attribute "([^"]+)" at position (\d+)$/
      */
-    public function thisProductHasPercentAttributeWithValueAtPosition(ProductInterface $product, $productAttributeName, $position)
-    {
+    public function thisProductHasPercentAttributeWithValueAtPosition(
+        ProductInterface $product,
+        $productAttributeName,
+        $position
+    ) {
         $attribute = $this->provideProductAttribute('percent', $productAttributeName);
         $attribute->setPosition($position);
-        $attributeValue = $this->createProductAttributeValue(rand(1, 100)/100, $attribute);
+        $attributeValue = $this->createProductAttributeValue(rand(1, 100) / 100, $attribute);
 
         $product->addAttribute($attributeValue);
 
@@ -185,8 +202,12 @@ final class ProductAttributeContext implements Context
     /**
      * @Given /^(this product) has ([^"]+) attribute "([^"]+)" with date "([^"]+)"$/
      */
-    public function thisProductHasDateTimeAttributeWithDate(ProductInterface $product, $productAttributeType, $productAttributeName, $date)
-    {
+    public function thisProductHasDateTimeAttributeWithDate(
+        ProductInterface $product,
+        $productAttributeType,
+        $productAttributeName,
+        $date
+    ) {
         $attribute = $this->provideProductAttribute($productAttributeType, $productAttributeName);
         $attributeValue = $this->createProductAttributeValue(new \DateTime($date), $attribute);
 

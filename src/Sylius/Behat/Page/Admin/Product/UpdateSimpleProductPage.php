@@ -99,6 +99,19 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     /**
      * {@inheritdoc}
      */
+    public function getAttributeValidationErrors($attributeName, $localeCode)
+    {
+        $this->clickTabIfItsNotActive('attributes');
+        $this->clickLocaleTabIfItsNotActive($localeCode);
+
+        $validationError = $this->getElement('attribute_element')->find('css', '.sylius-validation-error');
+
+        return $validationError->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getNumberOfAttributes()
     {
         return count($this->getDocument()->findAll('css', '.attribute'));
@@ -421,6 +434,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
             'association_dropdown_item' => '.field > label:contains("%association%") ~ .product-select > div.menu > div.item:contains("%item%")',
             'association_dropdown_item_selected' => '.field > label:contains("%association%") ~ .product-select > a.label:contains("%item%")',
             'attribute' => '.tab[data-tab="%localeCode%"] .attribute .label:contains("%attributeName%") ~ input',
+            'attribute_element' => '.attribute',
             'attribute_delete_button' => '.tab[data-tab="%localeCode%"] .attribute .label:contains("%attributeName%") ~ button',
             'code' => '#sylius_product_code',
             'images' => '#sylius_product_images',

@@ -1,22 +1,17 @@
 {
-    "id": @integer@,
     "name": "Theme Mug",
+    "id": @integer@,
     "code": "MUG_TH",
     "attributes": [
         {
+            "code": "mug_color",
+            "name": "Mug color",
+            "value": [
+                "green",
+                "yellow"
+            ],
+            "type": "select",
             "id": @integer@,
-            "code": "mug_material",
-            "name": "Mug collection",
-            "value": "concrete",
-            "type": "text",
-            "localeCode": "en_US"
-        },
-        {
-            "id": @integer@,
-            "code": "mug_collection",
-            "name": "Mug material",
-            "value": "make life harder",
-            "type": "text",
             "localeCode": "en_US"
         }
     ],
@@ -24,8 +19,8 @@
     "associations": [],
     "translations": {
         "en_US": {
-            "id": @integer@,
             "locale": "en_US",
+            "id": @integer@,
             "name": "Theme Mug",
             "slug": "theme-mug"
         }

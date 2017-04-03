@@ -474,8 +474,9 @@ final class ManagingProductsContext implements Context
     /**
      * @When I set its :attribute attribute to :value
      * @When I set its :attribute attribute to :value in :language
+     * @When I do not set its :attribute attribute in :language
      */
-    public function iSetItsAttributeTo($attribute, $value, $language = 'en_US')
+    public function iSetItsAttributeTo($attribute, $value = null, $language = 'en_US')
     {
         $this->createSimpleProductPage->addAttribute($attribute, $value, $language);
     }
@@ -916,6 +917,29 @@ final class ManagingProductsContext implements Context
         $this->updateSimpleProductPage->open(['id' => $product->getId()]);
 
         Assert::false($this->updateSimpleProductPage->isShippingRequired());
+    }
+
+    /**
+     * @Then I should be notified that I have to define the :attribute attribute in :language
+     *
+     */
+    public function iShouldBeNotifiedThatIHaveToDefineTheAttributeIn($attribute, $language)
+    {
+        Assert::same(
+            $this->resolveCurrentPage()->getAttributeValidationErrors($attribute, $language),
+            'This value should not be blank.'
+        );
+    }
+
+    /**
+     * @Then I should be notified that the :attribute attribute in :language should be longer than :number
+     */
+    public function iShouldBeNotifiedThatTheAttributeInShouldBeLongerThan($attribute, $language, $number)
+    {
+        Assert::same(
+            $this->resolveCurrentPage()->getAttributeValidationErrors($attribute, $language),
+            sprintf('This value is too short. It should have %s characters or more.', $number)
+        );
     }
 
     /**

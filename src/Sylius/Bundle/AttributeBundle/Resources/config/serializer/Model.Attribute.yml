@@ -19,10 +19,6 @@ Sylius\Component\Attribute\Model\Attribute:
             expose: true
             type: string
             groups: [Default, Detailed]
-        values:
-            expose: true
-            type: array
-            groups: [Detailed]
         createdAt:
             expose: true
             type: DateTime
@@ -35,3 +31,7 @@ Sylius\Component\Attribute\Model\Attribute:
             expose: true
             type: array
             groups: [Default, Detailed]
+        configuration:
+            expose: true
+            type: array
+            groups: [Detailed]

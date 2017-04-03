@@ -39,7 +39,10 @@ final class BuildAttributesFormSubscriberSpec extends ObjectBehavior
 
     function it_subscribes_to_event()
     {
-        static::getSubscribedEvents()->shouldReturn([FormEvents::PRE_SET_DATA => 'preSetData']);
+        static::getSubscribedEvents()->shouldReturn([
+            FormEvents::PRE_SET_DATA => 'preSetData',
+            FormEvents::POST_SUBMIT => 'postSubmit'
+        ]);
     }
 
     function it_adds_attribute_values_in_different_locales_to_a_product(
@@ -73,6 +76,28 @@ final class BuildAttributesFormSubscriberSpec extends ObjectBehavior
         $this->preSetData($event);
     }
 
+    function it_removes_empty_attribute_values_in_different_locales(
+        FormEvent $event,
+        ProductInterface $product,
+        ProductAttributeInterface $attribute,
+        ProductAttributeValueInterface $attributeValue,
+        ProductAttributeValueInterface $attributeValue2
+    ) {
+        $event->getData()->willReturn($product);
+
+        $attributes = new ArrayCollection([$attributeValue->getWrappedObject(), $attributeValue2->getWrappedObject()]);
+        $product->getAttributes()->willReturn($attributes);
+
+        $attribute->getStorageType()->willReturn('text');
+
+        $attributeValue->getValue()->willReturn(null);
+        $attributeValue2->getValue()->willReturn('yellow');
+
+        $product->removeAttribute($attributeValue)->shouldBeCalled();
+
+        $this->postSubmit($event);
+    }
+
     function it_throws_an_invalid_argument_exception_if_data_is_not_a_product(FormEvent $event, \stdClass $stdObject)
     {
         $event->getData()->willReturn($stdObject);
@@ -80,6 +105,16 @@ final class BuildAttributesFormSubscriberSpec extends ObjectBehavior
         $this
             ->shouldThrow(\InvalidArgumentException::class)
             ->during('preSetData', [$event])
+        ;
+    }
+
+    function it_throws_an_invalid_argument_exception_if_data_is_not_a_product_during_submit(FormEvent $event, \stdClass $stdObject)
+    {
+        $event->getData()->willReturn($stdObject);
+
+        $this
+            ->shouldThrow(\InvalidArgumentException::class)
+            ->during('postSubmit', [$event])
         ;
     }
 }

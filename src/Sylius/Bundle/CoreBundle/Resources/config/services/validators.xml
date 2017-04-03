@@ -41,6 +41,11 @@
             <argument type="service" id="security.authorization_checker" />
             <tag name="validator.constraint_validator" alias="sylius_unique_reviewer_email_validator" />
         </service>
+        <service id="sylius.validator.locales_aware_valid_attribute_value" class="Sylius\Bundle\CoreBundle\Validator\Constraints\LocalesAwareValidAttributeValueValidator">
+            <argument type="service" id="sylius.registry.attribute_type" />
+            <argument type="service" id="sylius.translation_locale_provider" />
+            <tag name="validator.constraint_validator" alias="sylius_valid_attribute_value_validator" />
+        </service>
 
         <service id="sylius.validator.shipping_method_integrity" class="Sylius\Bundle\CoreBundle\Validator\Constraints\OrderShippingMethodEligibilityValidator">
             <argument type="service" id="sylius.shipping_eligibility_checker" />

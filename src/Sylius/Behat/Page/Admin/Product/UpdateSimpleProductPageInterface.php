@@ -70,6 +70,14 @@ interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
     public function getAttributeValue($attributeName, $localeCode);
 
     /**
+     * @param string $attributeName
+     * @param string $localeCode
+     *
+     * @return string
+     */
+    public function getAttributeValidationErrors($attributeName, $localeCode);
+
+    /**
      * @return int
      */
     public function getNumberOfAttributes();

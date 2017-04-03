@@ -2,8 +2,8 @@
     "id": @integer@,
     "code": "mug_material",
     "type": "text",
-    "values": [],
     "position": 0,
+    "configuration": [],
     "createdAt": "@string@.isDateTime()",
     "updatedAt": "@string@.isDateTime()",
     "translations": {

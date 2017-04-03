@@ -18,6 +18,7 @@ use Sylius\Component\Attribute\AttributeType\TextAttributeType;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\ConstraintViolationInterface;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
@@ -49,7 +50,7 @@ final class TextAttributeTypeSpec extends ObjectBehavior
         $this->getType()->shouldReturn('text');
     }
 
-    function it_checks_if_attribute_value_is_valid(
+    function it_checks_if_attribute_value_is_valid_according_to_min_and_max_constraint(
         AttributeInterface $attribute,
         AttributeValueInterface $attributeValue,
         ConstraintViolationBuilderInterface $constraintViolationBuilder,
@@ -63,7 +64,7 @@ final class TextAttributeTypeSpec extends ObjectBehavior
         $attributeValue->getValue()->willReturn('X');
 
         $context->getValidator()->willReturn($validator);
-        $validator->validate('X', Argument::type(Length::class))->willReturn($constraintViolationList);
+        $validator->validate('X', Argument::containing(Argument::type(Length::class)))->willReturn($constraintViolationList);
 
         $constraintViolationList->rewind()->shouldBeCalled();
         $constraintViolationList->valid()->willReturn(true, false);
@@ -77,5 +78,35 @@ final class TextAttributeTypeSpec extends ObjectBehavior
         $constraintViolationBuilder->addViolation()->shouldBeCalled();
 
         $this->validate($attributeValue, $context, ['min' => 2, 'max' => 255]);
+    }
+
+    function it_checks_if_attribute_value_is_valid_according_to_required_constraint(
+        AttributeInterface $attribute,
+        AttributeValueInterface $attributeValue,
+        ConstraintViolationBuilderInterface $constraintViolationBuilder,
+        ConstraintViolationInterface $constraintViolation,
+        ConstraintViolationListInterface $constraintViolationList,
+        ExecutionContextInterface $context,
+        ValidatorInterface $validator
+    ) {
+        $attributeValue->getAttribute()->willReturn($attribute);
+
+        $attributeValue->getValue()->willReturn(null);
+
+        $context->getValidator()->willReturn($validator);
+        $validator->validate(null, Argument::containing(Argument::type(NotBlank::class)))->willReturn($constraintViolationList);
+
+        $constraintViolationList->rewind()->shouldBeCalled();
+        $constraintViolationList->valid()->willReturn(true, false);
+        $constraintViolationList->current()->willReturn($constraintViolation);
+        $constraintViolationList->next()->shouldBeCalled();
+
+        $constraintViolation->getMessage()->willReturn('error message');
+
+        $context->buildViolation('error message')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->atPath('value')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->addViolation()->shouldBeCalled();
+
+        $this->validate($attributeValue, $context, ['required' => true]);
     }
 }

@@ -1,0 +1,35 @@
+{
+    "id": @integer@,
+    "code": "mug_color",
+    "type": "select",
+    "configuration": {
+        "choices": {
+            "yellow": "yellow",
+            "green": "green",
+            "black": "black"
+        },
+        "multiple": true,
+        "min": 1,
+        "max": 2
+    },
+    "position": 0,
+    "createdAt": "@string@.isDateTime()",
+    "updatedAt": "@string@.isDateTime()",
+    "translations": {
+        "en_US": {
+            "id": @integer@,
+            "locale": "en_US",
+            "name": "Mug color"
+        },
+        "de_CH": {
+            "id": @integer@,
+            "locale": "de_CH",
+            "name": "Becher Farbe"
+        }
+    },
+    "_links": {
+        "self": {
+            "href": "\/api\/v1\/product-attributes\/mug_color"
+        }
+    }
+}

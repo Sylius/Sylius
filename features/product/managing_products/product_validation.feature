@@ -5,14 +5,19 @@ Feature: Products validation
     I want to be prevented from adding it without specifying required fields
 
     Background:
-        Given the store operates on a single channel in "United States"
+        Given the store operates on a channel named "Web"
+        And that channel allows to shop using "English (United States)" and "Polish (Poland)" locales
+        And it uses the "English (United States)" locale by default
+        And the store has a product "Symfony Mug"
+        And the store has a text product attribute "Mug material"
+        And this product attribute has set min value as 3 and max value as 30
         And I am logged in as an administrator
 
     @ui
     Scenario: Adding a new simple product without specifying its code
         Given I want to create a new simple product
         When I name it "Dice Brewing" in "English (United States)"
-        And I set its price to "$10.00" for "United States" channel
+        And I set its price to "$10.00" for "Web" channel
         And I try to add it
         Then I should be notified that code is required
         And product with name "Dice Brewing" should not be added
@@ -23,7 +28,7 @@ Feature: Products validation
         And I want to create a new simple product
         When I specify its code as "AWESOME_GAME"
         And I name it "Dice Brewing" in "English (United States)"
-        And I set its price to "$10.00" for "United States" channel
+        And I set its price to "$10.00" for "Web" channel
         And I try to add it
         Then I should be notified that code has to be unique
         And product with name "Dice Brewing" should not be added
@@ -35,7 +40,7 @@ Feature: Products validation
         And I want to create a new simple product
         When I specify its code as "AWESOME_GAME"
         And I name it "Dice Brewing" in "English (United States)"
-        And I set its price to "$10.00" for "United States" channel
+        And I set its price to "$10.00" for "Web" channel
         And I try to add it
         Then I should be notified that simple product code has to be unique
         And product with name "Dice Brewing" should not be added
@@ -45,7 +50,7 @@ Feature: Products validation
         Given I want to create a new simple product
         When I specify its code as "BOARD_DICE_BREWING"
         And I name it "Dice Brewing" in "English (United States)"
-        And I set its price to "$10.00" for "United States" channel
+        And I set its price to "$10.00" for "Web" channel
         And I remove its slug
         And I try to add it
         Then I should be notified that slug is required
@@ -55,7 +60,7 @@ Feature: Products validation
     Scenario: Adding a new simple product without specifying its name
         Given I want to create a new simple product
         When I specify its code as "BOARD_DICE_BREWING"
-        And I set its price to "$10.00" for "United States" channel
+        And I set its price to "$10.00" for "Web" channel
         And I try to add it
         Then I should be notified that name is required
         And product with code "BOARD_DICE_BREWING" should not be added
@@ -65,9 +70,9 @@ Feature: Products validation
         Given the store operates on another channel named "Web-GB"
         When I want to create a new simple product
         And I specify its code as "BOARD_DICE_BREWING"
-        And I make it available in channel "United States"
+        And I make it available in channel "Web"
         And I make it available in channel "Web-GB"
-        And I set its price to "$10.00" for "United States" channel
+        And I set its price to "$10.00" for "Web" channel
         And I name it "Dice Brewing" in "English (United States)"
         And I try to add it
         Then I should be notified that price must be defined for every channel
@@ -137,3 +142,43 @@ Feature: Products validation
         And I add it
         Then I should be notified that slug has to be unique
         And product with code "7-WONDERS-BABEL" should not be added
+
+    @ui @javascript
+    Scenario: Trying to add a new product with a text attribute without specifying its value in default locale
+        When I want to create a new simple product
+        And I specify its code as "X-18-MUG"
+        And I name it "PHP Mug" in "English (United States)"
+        And I set its price to "$100.00" for "Web" channel
+        And I set its "Mug material" attribute to "Drewno" in "Polish (Poland)"
+        But I do not set its "Mug material" attribute in "English (United States)"
+        And I add it
+        Then I should be notified that I have to define the "Mug material" attribute in "English (United States)"
+        And product with code "X-18-MUG" should not be added
+
+    @ui @javascript
+    Scenario: Trying to add a new product with a text attribute without specifying its value in additional locale with proper length
+        When I want to create a new simple product
+        And I specify its code as "X-18-MUG"
+        And I name it "PHP Mug" in "English (United States)"
+        And I set its price to "$100.00" for "Web" channel
+        And I set its "Mug material" attribute to "Dr" in "Polish (Poland)"
+        And I set its "Mug material" attribute to "Wood" in "English (United States)"
+        And I add it
+        Then I should be notified that the "Mug material" attribute in "Polish (Poland)" should be longer than 3
+        And product with code "X-18-MUG" should not be added
+
+    @ui @javascript
+    Scenario: Trying to add a text attribute in different locales to an existing product without specifying its value in default locale
+        When I want to modify the "Symfony Mug" product
+        And I set its "Mug material" attribute to "Drewno" in "Polish (Poland)"
+        But I do not set its "Mug material" attribute in "English (United States)"
+        And I save my changes
+        Then I should be notified that I have to define the "Mug material" attribute in "English (United States)"
+
+    @ui @javascript
+    Scenario: Trying to add a text attribute in different locales to an existing product without specifying its value in additional locale with proper length
+        When I want to modify the "Symfony Mug" product
+        And I set its "Mug material" attribute to "Dr" in "Polish (Poland)"
+        And I set its "Mug material" attribute to "Wood" in "English (United States)"
+        And I save my changes
+        Then I should be notified that the "Mug material" attribute in "Polish (Poland)" should be longer than 3

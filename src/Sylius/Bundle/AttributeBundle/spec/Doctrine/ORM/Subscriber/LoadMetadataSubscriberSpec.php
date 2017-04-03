@@ -111,7 +111,6 @@ final class LoadMetadataSubscriberSpec extends ObjectBehavior
 
         $attributeMapping = [
             'fieldName' => 'attribute',
-            'inversedBy' => 'values',
             'targetEntity' => 'Some\App\Product\Entity\Attribute',
             'joinColumns' => [[
                 'name' => 'attribute_id',
@@ -140,29 +139,6 @@ final class LoadMetadataSubscriberSpec extends ObjectBehavior
         $metadata->getName()->willReturn('KeepMoving\ThisClass\DoesNot\Concern\You');
 
         $metadata->mapOneToMany(Argument::any())->shouldNotBeCalled();
-
-        $this->loadClassMetadata($eventArgs);
-    }
-
-    function it_maps_values_one_to_many_association_from_the_attribute_model_to_the_attribute_value_model(
-        LoadClassMetadataEventArgs $eventArgs,
-        ClassMetadataInfo $metadata,
-        EntityManager $entityManager,
-        ClassMetadataFactory $classMetadataFactory
-    ) {
-        $eventArgs->getEntityManager()->willReturn($entityManager);
-        $entityManager->getMetadataFactory()->willReturn($classMetadataFactory);
-
-        $eventArgs->getClassMetadata()->willReturn($metadata);
-        $metadata->getName()->willReturn('Some\App\Product\Entity\Attribute');
-
-        $valuesMapping = [
-            'fieldName' => 'values',
-            'targetEntity' => 'Some\App\Product\Entity\AttributeValue',
-            'mappedBy' => 'attribute',
-        ];
-
-        $metadata->mapOneToMany($valuesMapping)->shouldBeCalled();
 
         $this->loadClassMetadata($eventArgs);
     }

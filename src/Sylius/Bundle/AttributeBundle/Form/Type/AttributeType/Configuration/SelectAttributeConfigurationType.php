@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Configuration;
 
+use Sylius\Bundle\AttributeBundle\Form\EventSubscriber\ChangeStructureOfChoicesFormEventSubscriber;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -29,7 +30,7 @@ class SelectAttributeConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('choices', CollectionType::class, [
+            ->add('choices', SelectAttributeChoicesCollectionType::class, [
                 'entry_type' => TextType::class,
                 'label' => 'sylius.form.attribute_type_configuration.select.values',
                 'allow_add' => true,

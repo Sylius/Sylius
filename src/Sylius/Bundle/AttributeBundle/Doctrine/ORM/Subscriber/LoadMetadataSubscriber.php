@@ -58,10 +58,6 @@ final class LoadMetadataSubscriber implements EventSubscriber
                 $this->mapSubjectOnAttributeValue($subject, $class['subject'], $metadata, $metadataFactory);
                 $this->mapAttributeOnAttributeValue($class['attribute']['classes']['model'], $metadata, $metadataFactory);
             }
-
-            if ($class['attribute']['classes']['model'] === $metadata->getName()) {
-                $this->mapValuesOnAttribute($class['attribute_value']['classes']['model'], $metadata);
-            }
         }
     }
 
@@ -107,7 +103,6 @@ final class LoadMetadataSubscriber implements EventSubscriber
         $attributeMapping = [
             'fieldName' => 'attribute',
             'targetEntity' => $attributeClass,
-            'inversedBy' => 'values',
             'joinColumns' => [[
                 'name' => 'attribute_id',
                 'referencedColumnName' => $attributeMetadata->fieldMappings['id']['columnName'],
@@ -117,23 +112,6 @@ final class LoadMetadataSubscriber implements EventSubscriber
         ];
 
         $this->mapManyToOne($metadata, $attributeMapping);
-    }
-
-    /**
-     * @param string $attributeValueClass
-     * @param ClassMetadataInfo $metadata
-     */
-    private function mapValuesOnAttribute(
-        $attributeValueClass,
-        ClassMetadataInfo $metadata
-    ) {
-        $valuesMapping = [
-            'fieldName' => 'values',
-            'targetEntity' => $attributeValueClass,
-            'mappedBy' => 'attribute',
-        ];
-
-        $metadata->mapOneToMany($valuesMapping);
     }
 
     /**
