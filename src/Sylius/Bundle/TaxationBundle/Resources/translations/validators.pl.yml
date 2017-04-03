@@ -22,4 +22,5 @@ sylius:
             not_blank: Proszę wybrać strefę podatkową.
         code:
             not_blank: Proszę podać kod stawki podatkowej.
+            regex: Kod kategorii podatkowe może składać się wyłącznie z liter, cyfr, myślników i podkreśleń.
             unique: Stawka podatkowa z podanym kodem już istnieje.

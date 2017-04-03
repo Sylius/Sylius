@@ -12,9 +12,12 @@ sylius:
             not_blank: Wprowadź kurs wymiany.
     exchange_rate:
         ratio:
+            greater_than: Wskaźnik musi być większy niż 0.
+            invalid: Wskaźnik musi być liczbą.
             not_blank: Proszę wprowadzić kurs wymiany waluty.
         source_currency:
             not_blank: Podaj walutę źródłową wymiany.
         target_currency:
             not_blank: Podaj walutę docelową wymiany.
+        unique_currency_pair: Para walut musi być unikalna.
         different_source_target_currency: Waluty źródłowa i docelowa muszą być różne.

@@ -19,22 +19,33 @@ sylius:
         promotion_action:
             fixed_discount_configuration:
                 amount: Kwota
+            percentage_discount_configuration:
+                percentage: Procentowa
             type: Typ
         promotion_coupon:
             expires_at: Wygasa
             usage_limit: Limit użycia
         promotion_coupon_generator_instruction:
             amount: Kwota
+            code_length: Długość kodu
             expires_at: Wygasa
             usage_limit: Limit użycia
+        promotion_filter:
+            price_range: Zakres ceny
         promotion_rule:
             cart_quantity_configuration:
                 count: Ilość
                 equal: Równe
             contains_product_configuration:
+                exclude: Nie zawiera
                 variants: Produkty
             item_total_configuration:
                 amount: Kwota
+            nth_order_configuration:
+                nth: N-ty
             shipping_country_configuration:
                 country: Kraj
+            taxonomy_configuration:
+                exclude: Nie zawiera
+                taxons: Kategorie
             type: Typ
