@@ -1,5 +1,6 @@
 * :doc:`/cookbook/custom-model`
 * :doc:`/cookbook/custom-email`
+* :doc:`/cookbook/disabling-order-confirmation-email`
 * :doc:`/cookbook/custom-promotion-rule`
 * :doc:`/cookbook/custom-promotion-action`
 * :doc:`/cookbook/custom-redirect-after-cart-add-action`

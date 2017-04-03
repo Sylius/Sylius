@@ -6,6 +6,7 @@ The Cookbook
 
     custom-model
     custom-email
+    disabling-order-confirmation-email
     custom-promotion-rule
     custom-promotion-action
     custom-redirect-after-cart-add-action
