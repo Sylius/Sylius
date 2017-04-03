@@ -72,7 +72,7 @@ class UserLastLoginSubscriber implements EventSubscriberInterface
     /**
      * @param UserInterface $user
      */
-    protected function updateUserLastLogin(UserInterface $user)
+    protected function updateUserLastLogin($user)
     {
         if ($user instanceof $this->userClass) {
             $user->setLastLogin(new \DateTime());
