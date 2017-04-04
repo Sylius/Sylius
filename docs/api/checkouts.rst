@@ -170,8 +170,8 @@ Exemplary Response
                         "en_US":{
                         }
                     },
-                    "on_hold":0,
-                    "on_hand":10,
+                    "onHold":0,
+                    "onHand":10,
                     "tracked":false,
                     "channelPricings":{
                         "US_WEB":{
@@ -484,8 +484,8 @@ Exemplary Response
                         "en_US":{
                         }
                     },
-                    "on_hold":0,
-                    "on_hand":10,
+                    "onHold":0,
+                    "onHand":10,
                     "tracked":false,
                     "channelPricings":{
                         "US_WEB":{
@@ -780,8 +780,8 @@ To check the fully constructed cart with `id = 21`, use the following command:
                         "en_US":{
                         }
                     },
-                    "on_hold":0,
-                    "on_hand":10,
+                    "onHold":0,
+                    "onHand":10,
                     "tracked":false,
                     "channelPricings":{
                         "US_WEB":{
