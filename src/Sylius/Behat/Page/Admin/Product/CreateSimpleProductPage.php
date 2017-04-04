@@ -259,6 +259,16 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     /**
      * {@inheritdoc}
      */
+    public function getTranslatedLocaleName($localeCode)
+    {
+        $localeTab = $this->getElement('language_tab', ['%locale%' => $localeCode]);
+
+        return $localeTab->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getElement($name, array $parameters = [])
     {
         if (!isset($parameters['%locale%'])) {
