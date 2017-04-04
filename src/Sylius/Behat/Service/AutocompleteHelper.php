@@ -51,7 +51,7 @@ abstract class AutocompleteHelper
         foreach ($values as $value) {
             $element->find('css', sprintf('div.item:contains("%s")', $value))->click();
 
-            static::waitForAsynchronousActionsToFinish($session);
+            JQueryHelper::waitForAsynchronousActionsToFinish($session);
         }
 
         static::waitForElementToBeVisible($session, $element);
@@ -63,20 +63,12 @@ abstract class AutocompleteHelper
      */
     private static function activateAutocompleteDropdown(Session $session, NodeElement $element)
     {
-        static::waitForAsynchronousActionsToFinish($session);
+        JQueryHelper::waitForAsynchronousActionsToFinish($session);
 
         $element->click();
 
-        static::waitForAsynchronousActionsToFinish($session);
+        JQueryHelper::waitForAsynchronousActionsToFinish($session);
         static::waitForElementToBeVisible($session, $element);
-    }
-
-    /**
-     * @param Session $session
-     */
-    private static function waitForAsynchronousActionsToFinish(Session $session)
-    {
-        $session->wait(5000, '0 === jQuery.active');
     }
 
     /**
