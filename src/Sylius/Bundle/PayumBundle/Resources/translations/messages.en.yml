@@ -5,6 +5,7 @@ sylius:
         gateway_configuration:
             paypal:
                 password: Password
+                sandbox: Sandbox
                 signature: Signature
                 username: Username
             stripe:
