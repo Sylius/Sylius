@@ -74,7 +74,7 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
             ->andWhere('productTaxon.taxon = :taxon')
             ->andWhere(':channel MEMBER OF o.channels')
             ->andWhere('o.enabled = true')
-            ->addGroupBy('o.id')
+//            ->addGroupBy('o.id')
             ->setParameter('locale', $locale)
             ->setParameter('taxon', $taxon)
             ->setParameter('channel', $channel)
