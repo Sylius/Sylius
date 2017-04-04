@@ -2,6 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    checkout:
+        complete_error: 'Ett oväntat problem uppstod vid slutförandet av din order. Var god försök lägga din order igen.'
     contact:
         request_success: 'Din kontaktförfråga har blivit mottagen.'
         request_error: 'Ett problem uppstod när kontaktförfrågan skickades. Försök igen senare.'
@@ -9,6 +11,7 @@ sylius:
         add_address: 'Adressen har lagts till.'
         set_address_as_default: 'Adressen har ställts in som standard.'
     order:
+        apply_state_machine_transition_error: 'Ett oväntat problem uppstod vid uppdaterandet av din order. Var god försök uppdatera din order igen.'
         promotion_integrity: 'Du är inte längre berättigad till denna kampanj %promotionName%.'
         total_integrity: 'Din ordersumma har ändrats, kontrollera din orderinformation och bekräfta den igen.'
         update_error: 'Ett oväntat problem uppstod vid uppdatering av en produkt. Var god försök uppdatera produkten igen.'
