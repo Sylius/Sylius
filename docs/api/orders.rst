@@ -147,8 +147,8 @@ Exemplary Response
                         }
                     },
                     "version": 1,
-                    "on_hold":0,
-                    "on_hand":10,
+                    "onHold":0,
+                    "onHand":10,
                     "tracked":false,
                     "channelPricings":{
                         "US_WEB":{
