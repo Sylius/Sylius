@@ -96,7 +96,7 @@ class BookProductFixture extends AbstractFixture
             ]
         ]]]);
 
-        $bookGenres = ['Fiction', 'Romance', 'Thriller', 'Sports'];
+        $bookGenres = ['science_fiction' => 'Science Fiction', 'romance' => 'Romance', 'thriller' => 'Thriller', 'sports' => 'Sports'];
         $this->productAttributeFixture->load(['custom' => [
             ['name' => 'Book author', 'code' => 'book_author', 'type' => TextAttributeType::TYPE],
             ['name' => 'Book ISBN', 'code' => 'book_isbn', 'type' => TextAttributeType::TYPE],
@@ -126,7 +126,7 @@ class BookProductFixture extends AbstractFixture
                     'book_author' => $authorName,
                     'book_isbn' => $this->faker->isbn13,
                     'book_pages' => $this->faker->numberBetween(42, 1024),
-                    'book_genre' => array_keys($this->faker->randomElements($bookGenres, $this->faker->randomKey($bookGenres) + 1)),
+                    'book_genre' => $this->faker->randomElements(array_keys($bookGenres), $this->faker->numberBetween(1, count($bookGenres))),
                 ],
                 'images' => [
                     [sprintf('%s/../Resources/fixtures/%s', __DIR__, 'books.jpg'), 'main'],
