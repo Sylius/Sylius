@@ -23,6 +23,9 @@ final class SlugGenerator implements SlugGeneratorInterface
      */
     public function generate($name)
     {
+        // Manually replacing apostrophes since Transliterator started removing them at v1.2.
+        $name = str_replace('\'', '-', $name);
+
         return Transliterator::transliterate($name);
     }
 }
