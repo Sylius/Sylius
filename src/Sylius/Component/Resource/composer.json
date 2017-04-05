@@ -25,6 +25,7 @@
         "doctrine/common": "^2.6",
         "gedmo/doctrine-extensions": "^2.4",
         "symfony/event-dispatcher": "^3.2",
+        "symfony/polyfill-php70": "~1.0",
         "symfony/property-access": "^3.2",
         "winzou/state-machine": "^0.3",
         "pagerfanta/pagerfanta": "^1.0"
