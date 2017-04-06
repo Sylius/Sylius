@@ -55,6 +55,7 @@ class ProductAttributeFixture extends AbstractResourceFixture
                 ->scalarNode('name')->cannotBeEmpty()->end()
                 ->scalarNode('code')->cannotBeEmpty()->end()
                 ->enumNode('type')->values($this->attributeTypes)->cannotBeEmpty()->end()
+                ->variableNode('configuration')->end()
         ;
     }
 }
