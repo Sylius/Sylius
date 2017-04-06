@@ -29,9 +29,9 @@ abstract class SlugGenerationHelper
     {
         Assert::isInstanceOf($session->getDriver(), Selenium2Driver::class);
 
-        static::waitForAsynchronousActionsToFinish($session);
+        JQueryHelper::waitForAsynchronousActionsToFinish($session);
         static::isElementReadonly($session, $element);
-        static::waitForAsynchronousActionsToFinish($session);
+        JQueryHelper::waitForAsynchronousActionsToFinish($session);
     }
 
     /**
@@ -42,12 +42,12 @@ abstract class SlugGenerationHelper
     {
         Assert::isInstanceOf($session->getDriver(), Selenium2Driver::class);
 
-        static::waitForAsynchronousActionsToFinish($session);
+        JQueryHelper::waitForAsynchronousActionsToFinish($session);
         static::waitForElementToBeClickable($session, $element);
 
         $element->click();
 
-        static::waitForAsynchronousActionsToFinish($session);
+        JQueryHelper::waitForAsynchronousActionsToFinish($session);
     }
 
     /**
@@ -62,7 +62,7 @@ abstract class SlugGenerationHelper
             return $element->hasAttribute('readonly');
         }
 
-        static::waitForAsynchronousActionsToFinish($session);
+        JQueryHelper::waitForAsynchronousActionsToFinish($session);
 
         return static::isElementReadonly($session, $element);
     }
@@ -91,13 +91,5 @@ abstract class SlugGenerationHelper
             'undefined != $(document.evaluate("%s", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue).attr("readonly")',
             $element->getXpath()
         ));
-    }
-
-    /**
-     * @param Session $session
-     */
-    private static function waitForAsynchronousActionsToFinish(Session $session)
-    {
-        $session->wait(5000, '0 === jQuery.active');
     }
 }
