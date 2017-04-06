@@ -3,7 +3,8 @@ How to encrypt gateway config stored in the database?
 
 **1.** Add defuse/php-encryption to your project
 .. code-block:: 
-   composer require defuse/php-encryption
+
+    composer require defuse/php-encryption
 
 **2.** Generate your Defuse Secret Key by executing the following script:
 
