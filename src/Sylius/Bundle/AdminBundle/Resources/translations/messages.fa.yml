@@ -33,7 +33,7 @@ sylius:
                     promotions: فروش های ویژه
                 customers:
                     customers: مشتریان
-                    groups: گروه ها
+                    groups: گروه‌ها
                     header: مشتری
                 sales:
                     header: فروش‌ها

@@ -28,11 +28,13 @@ sylius:
             contact_email: Kontakt e-post
             currencies: Valutor
             currency_base: Basvaluta
+            account_verification_required: Krävs kontoverifiering?
             hostname: Värdnamn
             locale_default: Standardspråk
             locales: Språk
             payment_methods: Betalningsmetoder
             shipping_methods: Leveransmetoder
+            skipping_shipping_step_allowed: Hoppa över fraktsteget om endast en leveransmetod är tillgänglig?
             tax_calculation_strategy: Skatteberäkningsstrategi
             tax_zone_default: Standardmomszon
             taxonomies: Taxonomier
@@ -79,6 +81,7 @@ sylius:
             created_at_from: Från
             created_at_to: Till
             number: Beställningsnummer
+            billing_address: Namn på faktura
             channel: Alla kanaler
         shipping_method:
             zone: Zon
@@ -106,6 +109,7 @@ sylius:
             on_hand: I lager
             price: Pris
             sku: SKU
+            shipping_required: Krävs frakt?
             weight: Vikt
             width: Bredd
         attribute:
@@ -169,13 +173,16 @@ sylius:
             header: filsystem
             cache:
                 header: cache
+                help: 'För att ställa in rättigheter kör: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
             exists: tillgängligt
             logs:
                 header: loggar
+                help: 'För att ställa in rättigheter kör: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
             not_exists: ej tillgängligt
             not_writable: ej skrivbart
             parameters:
                 header: parameters.yml
+                help: 'För att ställa in rättigheter kör: sudo chmod a+w %path%'
             vendors: vendors
             writable: skrivbar
         settings:

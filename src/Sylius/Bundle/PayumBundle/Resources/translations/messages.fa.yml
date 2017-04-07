@@ -10,5 +10,8 @@ sylius:
                 password: کلمه عبور
                 signature: امضا
                 username: نام کاربری
+            stripe:
+                secret_key: کلید رمز
     payum_gateway_factory:
         offline: آفلاین
+        paypal_express_checkout: پرداخت با پی‌پال
