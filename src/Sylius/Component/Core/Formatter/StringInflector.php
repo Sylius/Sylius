@@ -45,8 +45,4 @@ final class StringInflector
     {
         return strtoupper(self::nameToCode($value));
     }
-
-    private function __construct()
-    {
-    }
 }
