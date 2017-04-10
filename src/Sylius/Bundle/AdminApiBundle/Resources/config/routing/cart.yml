@@ -19,7 +19,7 @@ sylius_admin_api_cart_create:
         _sylius:
             serialization_version: $version
             form: Sylius\Bundle\AdminApiBundle\Form\Type\OrderType
-            serialization_groups: [DetailedCart]
+            serialization_groups: [Default, DetailedCart]
 
 sylius_admin_api_cart_update:
     path: /{id}
@@ -29,7 +29,7 @@ sylius_admin_api_cart_update:
         _sylius:
             serialization_version: $version
             form: Sylius\Bundle\AdminApiBundle\Form\Type\OrderPromotionCouponType
-            serialization_groups: [DetailedCart]
+            serialization_groups: [Default, DetailedCart]
 
 sylius_admin_api_cart_delete:
     path: /{id}
@@ -54,4 +54,4 @@ sylius_admin_api_cart_show:
             repository:
                 method: findCartById
                 arguments: [$id]
-            serialization_groups: [DetailedCart]
+            serialization_groups: [Default, DetailedCart]

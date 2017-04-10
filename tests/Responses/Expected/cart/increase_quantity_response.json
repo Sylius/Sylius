@@ -33,15 +33,22 @@
                 "position": 0,
                 "translations": {
                     "en_US": {
+                        "locale": "en_US",
                         "id": @integer@,
                         "name": "Star wars mug"
                     }
                 },
+                "version": 1,
                 "tracked": false,
                 "channelPricings": {
                     "WEB": {
                         "channelCode": "WEB",
                         "price": 20
+                    }
+                },
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/products\/MUG\/variants\/MUG_SW"
                     }
                 }
             },
@@ -79,15 +86,22 @@
                 "position": 3,
                 "translations": {
                     "en_US": {
+                        "locale": "en_US",
                         "id": @integer@,
                         "name": "Breaking bad mug"
                     }
                 },
+                "version": 1,
                 "tracked": true,
                 "channelPricings": {
                     "WEB": {
                         "channelCode": "WEB",
                         "price": 20
+                    }
+                },
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/products\/MUG\/variants\/HARD_AVAILABLE_MUG"
                     }
                 }
             },
@@ -120,6 +134,7 @@
         }
     },
     "channel": {
+        "id": @integer@,
         "code": "WEB",
         "_links": {
             "self": {
