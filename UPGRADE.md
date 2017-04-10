@@ -165,6 +165,8 @@
 * Services tagged with `sylius.promotion_action` and `sylius.promotion_rule_checker` must include `form-type` parameter
   being the FQCN of configuration type.
 
+* Removed class `Sylius\Component\Core\TokenAssigner\UniqueTokenGenerator`, use `Sylius\Component\Resource\Generator\RandomnessGenerator` instead.
+
 ### Currency / CurrencyBundle
 
 * The following classes were removed due to being no longer used in current implementation:

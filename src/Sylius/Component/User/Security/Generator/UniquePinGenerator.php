@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\User\Security\Generator;
 
+use Sylius\Component\Resource\Generator\RandomnessGeneratorInterface;
 use Sylius\Component\User\Security\Checker\UniquenessCheckerInterface;
 use Webmozart\Assert\Assert;
 
@@ -22,6 +23,11 @@ use Webmozart\Assert\Assert;
 final class UniquePinGenerator implements GeneratorInterface
 {
     /**
+     * @var RandomnessGeneratorInterface
+     */
+    private $generator;
+
+    /**
      * @var UniquenessCheckerInterface
      */
     private $uniquenessChecker;
@@ -32,13 +38,17 @@ final class UniquePinGenerator implements GeneratorInterface
     private $pinLength;
 
     /**
+     * @param RandomnessGeneratorInterface $generator
      * @param UniquenessCheckerInterface $uniquenessChecker
      * @param int $pinLength
      *
      * @throws \InvalidArgumentException
      */
-    public function __construct(UniquenessCheckerInterface $uniquenessChecker, $pinLength)
-    {
+    public function __construct(
+        RandomnessGeneratorInterface $generator,
+        UniquenessCheckerInterface $uniquenessChecker,
+        $pinLength
+    ) {
         Assert::integer(
             $pinLength,
             'The value of pin length has to be an integer.'
@@ -49,6 +59,7 @@ final class UniquePinGenerator implements GeneratorInterface
             'The value of pin length has to be in range between 1 to 9.'
         );
 
+        $this->generator = $generator;
         $this->pinLength = $pinLength;
         $this->uniquenessChecker = $uniquenessChecker;
     }
@@ -59,19 +70,9 @@ final class UniquePinGenerator implements GeneratorInterface
     public function generate()
     {
         do {
-            $pin = $this->getRandomPin();
+            $pin = $this->generator->generateNumeric($this->pinLength);
         } while (!$this->uniquenessChecker->isUnique($pin));
 
         return $pin;
-    }
-
-    /**
-     * @return string
-     */
-    private function getRandomPin()
-    {
-        $max = pow(10, $this->pinLength) - 1;
-
-        return str_pad(((string) mt_rand(0, $max) - 1), $this->pinLength, '0', STR_PAD_LEFT);
     }
 }

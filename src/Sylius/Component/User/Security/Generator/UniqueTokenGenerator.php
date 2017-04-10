@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\User\Security\Generator;
 
+use Sylius\Component\Resource\Generator\RandomnessGeneratorInterface;
 use Sylius\Component\User\Security\Checker\UniquenessCheckerInterface;
 use Webmozart\Assert\Assert;
 
@@ -22,6 +23,11 @@ use Webmozart\Assert\Assert;
 final class UniqueTokenGenerator implements GeneratorInterface
 {
     /**
+     * @var RandomnessGeneratorInterface
+     */
+    private $generator;
+
+    /**
      * @var UniquenessCheckerInterface
      */
     private $uniquenessChecker;
@@ -32,13 +38,17 @@ final class UniqueTokenGenerator implements GeneratorInterface
     private $tokenLength;
 
     /**
+     * @param RandomnessGeneratorInterface $generator
      * @param UniquenessCheckerInterface $uniquenessChecker
      * @param int $tokenLength
      *
      * @throws \InvalidArgumentException
      */
-    public function __construct(UniquenessCheckerInterface $uniquenessChecker, $tokenLength)
-    {
+    public function __construct(
+        RandomnessGeneratorInterface $generator,
+        UniquenessCheckerInterface $uniquenessChecker,
+        $tokenLength
+    ) {
         Assert::integer(
             $tokenLength,
             'The value of token length has to be an integer.'
@@ -49,6 +59,7 @@ final class UniqueTokenGenerator implements GeneratorInterface
             'The value of token length has to be in range between 1 to 40.'
         );
 
+        $this->generator = $generator;
         $this->tokenLength = $tokenLength;
         $this->uniquenessChecker = $uniquenessChecker;
     }
@@ -59,20 +70,9 @@ final class UniqueTokenGenerator implements GeneratorInterface
     public function generate()
     {
         do {
-            $token = $this->getRandomToken();
+            $token = $this->generator->generateUriSafeString($this->tokenLength);
         } while (!$this->uniquenessChecker->isUnique($token));
 
         return $token;
-    }
-
-    /**
-     * @return string
-     */
-    private function getRandomToken()
-    {
-        $hash = sha1(microtime(true));
-        $startPosition = mt_rand(0, 40 - $this->tokenLength);
-
-        return substr($hash, $startPosition, $this->tokenLength);
     }
 }

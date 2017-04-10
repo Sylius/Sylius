@@ -12,6 +12,7 @@
 namespace Sylius\Component\Core\TokenAssigner;
 
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Resource\Generator\RandomnessGeneratorInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -19,13 +20,16 @@ use Sylius\Component\Core\Model\OrderInterface;
 final class UniqueIdBasedOrderTokenAssigner implements OrderTokenAssignerInterface
 {
     /**
-     * @var UniqueTokenGenerator
+     * @var RandomnessGeneratorInterface
      */
-    private $tokenGenerator;
+    private $generator;
 
-    public function __construct()
+    /**
+     * @param RandomnessGeneratorInterface $generator
+     */
+    public function __construct(RandomnessGeneratorInterface $generator)
     {
-        $this->tokenGenerator = new UniqueTokenGenerator();
+        $this->generator = $generator;
     }
 
     /**
@@ -33,6 +37,6 @@ final class UniqueIdBasedOrderTokenAssigner implements OrderTokenAssignerInterfa
      */
     public function assignTokenValue(OrderInterface $order)
     {
-        $order->setTokenValue($this->tokenGenerator->generate(10));
+        $order->setTokenValue($this->generator->generateUriSafeString(10));
     }
 }

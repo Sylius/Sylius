@@ -13,6 +13,7 @@ namespace spec\Sylius\Component\User\Security\Generator;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Component\Resource\Generator\RandomnessGeneratorInterface;
 use Sylius\Component\User\Security\Checker\UniquenessCheckerInterface;
 use Sylius\Component\User\Security\Generator\GeneratorInterface;
 use Sylius\Component\User\Security\Generator\UniquePinGenerator;
@@ -22,9 +23,9 @@ use Sylius\Component\User\Security\Generator\UniquePinGenerator;
  */
 final class UniquePinGeneratorSpec extends ObjectBehavior
 {
-    function let(UniquenessCheckerInterface $checker)
+    function let(RandomnessGeneratorInterface $generator, UniquenessCheckerInterface $checker)
     {
-        $this->beConstructedWith($checker, 6);
+        $this->beConstructedWith($generator, $checker, 6);
     }
 
     function it_is_initializable()
@@ -37,49 +38,67 @@ final class UniquePinGeneratorSpec extends ObjectBehavior
         $this->shouldImplement(GeneratorInterface::class);
     }
 
-    function it_throws_invalid_argument_exception_on_instantiation_with_non_integer_length(UniquenessCheckerInterface $checker)
-    {
-        $this->beConstructedWith($checker, 'a string');
+    function it_throws_invalid_argument_exception_on_instantiation_with_non_integer_length(
+        RandomnessGeneratorInterface $generator,
+        UniquenessCheckerInterface $checker
+    ) {
+        $this->beConstructedWith($generator, $checker, 'a string');
         $this->shouldThrow(\InvalidArgumentException::class)->duringInstantiation();
-        $this->beConstructedWith($checker, '8');
+        $this->beConstructedWith($generator, $checker, '8');
         $this->shouldThrow(\InvalidArgumentException::class)->duringInstantiation();
-        $this->beConstructedWith($checker, []);
+        $this->beConstructedWith($generator, $checker, []);
         $this->shouldThrow(\InvalidArgumentException::class)->duringInstantiation();
-        $this->beConstructedWith($checker, new \StdClass());
-        $this->shouldThrow(\InvalidArgumentException::class)->duringInstantiation();
-    }
-
-    function it_throws_invalid_argument_exception_on_instantiation_with_an_out_of_range_length(UniquenessCheckerInterface $checker)
-    {
-        $this->beConstructedWith($checker, -1);
-        $this->shouldThrow(\InvalidArgumentException::class)->duringInstantiation();
-        $this->beConstructedWith($checker, 0);
-        $this->shouldThrow(\InvalidArgumentException::class)->duringInstantiation();
-        $this->beConstructedWith($checker, 10);
+        $this->beConstructedWith($generator, $checker, new \StdClass());
         $this->shouldThrow(\InvalidArgumentException::class)->duringInstantiation();
     }
 
-    function it_generates_pins_with_length_stated_on_instantiation(UniquenessCheckerInterface $checker)
-    {
-        $checker->isUnique(Argument::any())->willReturn(true);
+    function it_throws_invalid_argument_exception_on_instantiation_with_an_out_of_range_length(
+        RandomnessGeneratorInterface $generator,
+        UniquenessCheckerInterface $checker
+    ) {
+        $this->beConstructedWith($generator, $checker, -1);
+        $this->shouldThrow(\InvalidArgumentException::class)->duringInstantiation();
+        $this->beConstructedWith($generator, $checker, 0);
+        $this->shouldThrow(\InvalidArgumentException::class)->duringInstantiation();
+        $this->beConstructedWith($generator, $checker, 10);
+        $this->shouldThrow(\InvalidArgumentException::class)->duringInstantiation();
+    }
+
+    function it_generates_pins_with_length_stated_on_instantiation(
+        RandomnessGeneratorInterface $generator,
+        UniquenessCheckerInterface $checker
+    ) {
+        $pin = '001100';
+
+        $generator->generateNumeric(6)->willReturn($pin);
+        $checker->isUnique($pin)->willReturn(true);
 
         $this->generate()->shouldHaveLength(6);
     }
 
-    function it_generates_string_pins(UniquenessCheckerInterface $checker)
+    function it_generates_string_pins(RandomnessGeneratorInterface $generator, UniquenessCheckerInterface $checker)
     {
-        $checker->isUnique(Argument::any())->willReturn(true);
+        $pin = '636363';
+
+        $generator->generateNumeric(6)->willReturn($pin);
+        $checker->isUnique($pin)->willReturn(true);
 
         $this->generate()->shouldBeString();
     }
 
-    function it_generates_numeric_pins(UniquenessCheckerInterface $checker)
+    function it_generates_numeric_pins(RandomnessGeneratorInterface $generator, UniquenessCheckerInterface $checker)
     {
-        $checker->isUnique(Argument::any())->willReturn(true);
+        $pin = '424242';
+
+        $generator->generateNumeric(6)->willReturn($pin);
+        $checker->isUnique($pin)->willReturn(true);
 
         $this->generate()->shouldBeNumeric();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getMatchers()
     {
         return [

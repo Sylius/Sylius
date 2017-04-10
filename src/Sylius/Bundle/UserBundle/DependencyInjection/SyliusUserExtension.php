@@ -105,6 +105,7 @@ final class SyliusUserExtension extends AbstractResourceExtension
             $this->createTokenGeneratorDefinition(
                 UniqueTokenGenerator::class,
                 [
+                    new Reference('sylius.random_generator'),
                     new Reference(sprintf('sylius.%s_user.token_uniqueness_checker.password_reset', $userType)),
                     $config['resetting']['token']['length']
                 ]
@@ -116,6 +117,7 @@ final class SyliusUserExtension extends AbstractResourceExtension
             $this->createTokenGeneratorDefinition(
                 UniquePinGenerator::class,
                 [
+                    new Reference('sylius.random_generator'),
                     new Reference(sprintf('sylius.%s_user.pin_uniqueness_checker.password_reset', $userType)),
                     $config['resetting']['pin']['length']
                 ]
@@ -127,6 +129,7 @@ final class SyliusUserExtension extends AbstractResourceExtension
             $this->createTokenGeneratorDefinition(
                 UniqueTokenGenerator::class,
                 [
+                    new Reference('sylius.random_generator'),
                     new Reference(sprintf('sylius.%s_user.token_uniqueness_checker.email_verification', $userType)),
                     $config['verification']['token']['length']
                 ]

@@ -41,6 +41,8 @@ final class TaxonSlugGenerator implements TaxonSlugGeneratorInterface
      */
     public function generate($name, $parentId = null)
     {
+        // Manually replacing apostrophes since Transliterator started removing them at v1.2.
+        $name = str_replace('\'', '-', $name);
         $taxonSlug = Transliterator::transliterate($name);
         if (null === $parentId) {
             return $taxonSlug;
