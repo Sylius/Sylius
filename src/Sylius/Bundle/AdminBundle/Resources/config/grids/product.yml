@@ -25,6 +25,11 @@ sylius_grid:
                     type: string
                     label: sylius.ui.name
                     sortable: translation.name
+                mainTaxon:
+                    type: twig
+                    label: sylius.ui.main_taxon
+                    options:
+                        template: "@SyliusAdmin/Product/Grid/Field/mainTaxon.html.twig"
                 enabled:
                     type: twig
                     label: sylius.ui.enabled
