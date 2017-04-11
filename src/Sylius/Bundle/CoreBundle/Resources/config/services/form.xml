@@ -72,6 +72,9 @@
             <tag name="form.type_extension" extended-type="Sylius\Bundle\OrderBundle\Form\Type\CartItemType" />
         </service>
         <service id="sylius.form.extension.type.payment_method" class="Sylius\Bundle\CoreBundle\Form\Extension\PaymentMethodTypeExtension">
+            <argument>%payum.storage.encrypting_algorithm%</argument>
+            <argument>%payum.storage.encrypting_initialization_vector%</argument>
+            <argument>%secret%</argument>
             <tag name="form.type_extension" extended-type="Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodType" />
         </service>
         <service id="sylius.form.extension.type.tax_rate" class="Sylius\Bundle\CoreBundle\Form\Extension\TaxRateTypeExtension">

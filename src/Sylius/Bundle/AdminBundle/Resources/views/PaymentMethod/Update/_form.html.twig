@@ -1,0 +1,35 @@
+{% import '@SyliusUi/Macro/flags.html.twig' as flags %}
+
+{{ form_errors(form) }}
+
+<div class="ui segment">
+    {{ form_errors(form) }}
+    <div class="two fields">
+        {{ form_row(form.code) }}
+        {{ form_row(form.position) }}
+    </div>
+    <div class="two fields">
+        {{ form_row(form.gatewayConfig.factoryName) }}
+    </div>
+    {{ form_row(form.enabled) }}
+    <h4 class="ui dividing header">{{ 'sylius.ui.availability'|trans }}</h4>
+    {{ form_row(form.channels) }}
+</div>
+<div class="ui styled fluid accordion">
+    {% for locale, translationForm in form.translations %}
+        <div class="title{% if 0 == loop.index0 %} active{% endif %}">
+            <i class="dropdown icon"></i>
+            {{ flags.fromLocaleCode(locale) }} {{ locale|sylius_locale_name }}
+        </div>
+        <div class="content{% if 0 == loop.index0 %} active{% endif %}">
+            {{ form_row(translationForm.name) }}
+            {{ form_row(translationForm.description) }}
+            <div class="ui compact message">
+                <p>
+                    <i class="icon info circle"></i> {{ 'sylius.ui.the_instructions_below_will_be_displayed_to_the_customer'|trans }}.
+                </p>
+            </div>
+            {{ form_row(translationForm.instructions) }}
+        </div>
+    {% endfor %}
+</div>

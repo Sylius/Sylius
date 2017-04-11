@@ -1,0 +1,24 @@
+{% extends 'SyliusAdminBundle::layout.html.twig' %}
+
+{% import 'SyliusUiBundle:Macro:headers.html.twig' as headers %}
+{% import 'SyliusUiBundle:Macro:buttons.html.twig' as buttons %}
+
+{% set header = configuration.vars.header|default(metadata.applicationName~'.ui.edit_'~metadata.name) %}
+
+{% block title %}{{ parent() }} {{ header|trans }}{% endblock %}
+
+{% form_theme form 'SyliusUiBundle:Form:theme.html.twig' %}
+
+{% block content %}
+    {% include '@SyliusAdmin/Crud/Update/_header.html.twig' %}
+    {{ form_start(form, {'action': path('sylius_admin_payment_method_update', {'id': resource.id}), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
+        <input type="hidden" name="_method" value="PATCH" />
+        {% if configuration.vars.templates.form is defined %}
+            {% include configuration.vars.templates.form %}
+        {% else %}
+            {{ form_widget(form) }}
+        {% endif %}
+        {% include '@SyliusUi/Form/Buttons/_update.html.twig' with {'paths': {'cancel': path(configuration.getRouteName('index'), configuration.vars.route.parameters|default({}))}} %}
+        {{ form_row(form._token) }}
+    {{ form_end(form, {'render_rest': false}) }}
+{% endblock %}

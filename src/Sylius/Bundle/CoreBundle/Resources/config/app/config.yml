@@ -80,6 +80,8 @@ payum:
         config_storage:
             Sylius\Bundle\PayumBundle\Model\GatewayConfig: { doctrine: orm }
 
+    storage_encrypting: { algorithm: 'AES-128-CBC', secret: %secret%, initialization_vector: 'initialization16' }
+
     gateways:
         offline:
             factory: offline
