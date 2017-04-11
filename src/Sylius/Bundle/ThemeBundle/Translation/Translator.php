@@ -119,7 +119,7 @@ final class Translator extends BaseTranslator implements WarmableInterface
         array_unshift($computedFallbackLocales, $localeWithoutModifier);
 
         $fallbackLocales = [];
-        foreach(array_diff($computedFallbackLocales, [$locale]) as $computedFallback) {
+        foreach (array_diff($computedFallbackLocales, [$locale]) as $computedFallback) {
             $fallback = $computedFallback . $themeModifier;
             if (null !== $themeModifier && $locale !== $fallback) {
                 $fallbackLocales[] = $fallback;

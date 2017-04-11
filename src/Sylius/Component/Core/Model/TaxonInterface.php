@@ -19,5 +19,4 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface as BaseTaxonInterface;
  */
 interface TaxonInterface extends BaseTaxonInterface, ImagesAwareInterface
 {
-
 }

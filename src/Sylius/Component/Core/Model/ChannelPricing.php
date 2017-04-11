@@ -45,7 +45,7 @@ class ChannelPricing implements ChannelPricingInterface
     /**
      * {@inheritdoc}
      */
-    function __toString()
+    public function __toString()
     {
         return (string) $this->getPrice();
     }

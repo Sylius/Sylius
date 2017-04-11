@@ -34,6 +34,6 @@ sylius_admin_taxon_create_for_parent:
                 method: createForParent
                 arguments: ['expr:notFoundOnNull(service("sylius.repository.taxon").find($id))']
             vars:
-                subheader: sylius.ui.manage_categorization_of_your_product
+                subheader: sylius.ui.manage_categorization_of_your_products
                 templates:
                     form: "@SyliusAdmin/Taxon/_form.html.twig"

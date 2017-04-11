@@ -58,7 +58,7 @@ class SwiftMailerAdapter extends AbstractAdapter
 
         $message->setBody($renderedEmail->getBody(), 'text/html');
 
-        foreach($attachments as $attachment) {
+        foreach ($attachments as $attachment) {
             $file = \Swift_Attachment::fromPath($attachment);
 
             $message->attach($file);

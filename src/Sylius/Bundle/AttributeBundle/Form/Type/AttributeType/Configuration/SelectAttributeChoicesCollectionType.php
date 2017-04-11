@@ -41,7 +41,6 @@ class SelectAttributeChoicesCollectionType extends AbstractType
                         $form->offsetUnset($key);
                         $form->offsetSet(null, $newKey);
                     }
-
                 }
 
                 $event->setData($fixedArray);

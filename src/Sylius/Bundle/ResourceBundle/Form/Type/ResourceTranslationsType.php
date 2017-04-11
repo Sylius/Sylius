@@ -60,9 +60,9 @@ final class ResourceTranslationsType extends AbstractType
                     continue;
                 }
 
-            $translation->setLocale($localeCode);
-            $translation->setTranslatable($translatable);
-        }
+                $translation->setLocale($localeCode);
+                $translation->setTranslatable($translatable);
+            }
 
             $event->setData($translations);
         });

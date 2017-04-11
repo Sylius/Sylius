@@ -294,7 +294,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
                 $isOpen = false;
                 sleep(1);
             }
-        } while(!$isOpen && microtime(true) < $end);
+        } while (!$isOpen && microtime(true) < $end);
 
         if (!$isOpen) {
             throw new UnexpectedPageException();

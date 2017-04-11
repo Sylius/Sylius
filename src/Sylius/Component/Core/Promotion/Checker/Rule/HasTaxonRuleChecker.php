@@ -58,7 +58,7 @@ final class HasTaxonRuleChecker implements RuleCheckerInterface
     {
         foreach ($product->getTaxons() as $taxon) {
             if (in_array($taxon->getCode(), $configuration['taxons'], true)) {
-                    return true;
+                return true;
             }
         }
 

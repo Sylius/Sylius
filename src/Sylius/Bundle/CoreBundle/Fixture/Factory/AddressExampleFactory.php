@@ -223,7 +223,7 @@ class AddressExampleFactory extends AbstractExampleFactory
             return;
         }
 
-        if (null !== $options['province_name']){
+        if (null !== $options['province_name']) {
             $this->provideProvince($options, $address);
         }
     }

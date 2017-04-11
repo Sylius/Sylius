@@ -60,7 +60,7 @@ final class UpdatePaymentStateExtension implements ExtensionInterface
         
         if ($previousStackSize > 1) {
             return;
-        } 
+        }
         
         if ($previousStackSize === 1) {
             $previousActionClassName = get_class($previousStack[0]->getAction());

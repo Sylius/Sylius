@@ -262,7 +262,8 @@ final class OrderContext implements Context
     /**
      * @Given /^the customer chose ("[^"]+" shipping method)$/
      */
-    public function theCustomerChoseShippingMethod(ShippingMethodInterface $shippingMethod) {
+    public function theCustomerChoseShippingMethod(ShippingMethodInterface $shippingMethod)
+    {
         /** @var OrderInterface $order */
         $order = $this->sharedStorage->get('order');
 

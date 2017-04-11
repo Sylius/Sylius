@@ -18,5 +18,4 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  */
 final class TestBundle extends Bundle
 {
-
 }

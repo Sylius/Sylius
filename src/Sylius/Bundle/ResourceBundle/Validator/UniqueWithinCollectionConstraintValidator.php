@@ -47,7 +47,6 @@ final class UniqueWithinCollectionConstraintValidator extends ConstraintValidato
                 ->addViolation();
 
             if (false !== $collectionOfEntitiesCodes[$checkingAttribute]) {
-
                 $this->context
                     ->buildViolation($constraint->message)
                     ->atPath(sprintf('[%d].%s', $collectionOfEntitiesCodes[$checkingAttribute], $constraint->attributePath))

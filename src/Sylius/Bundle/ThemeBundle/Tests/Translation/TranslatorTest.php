@@ -331,7 +331,8 @@ final class TranslatorTest extends \PHPUnit_Framework_TestCase
     /**
      * @return array
      */
-    public function getValidOptionsTests(){
+    public function getValidOptionsTests()
+    {
         return [
             [['cache_dir' => null, 'debug' => false]],
             [['cache_dir' => 'someDirectory', 'debug' => false]],
@@ -344,7 +345,8 @@ final class TranslatorTest extends \PHPUnit_Framework_TestCase
     /**
      * @return array
      */
-    public function getInvalidOptionsTests(){
+    public function getInvalidOptionsTests()
+    {
         return [
             [['heron' => '']],
             [['cache_dir' => null, 'pugs' => 'yes']],

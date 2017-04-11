@@ -174,7 +174,7 @@ interface CompletePageInterface extends SymfonyPageInterface
 
     /**
      * @param string $promotionName
-     * 
+     *
      * @return string
      */
     public function getShippingPromotionDiscount($promotionName);

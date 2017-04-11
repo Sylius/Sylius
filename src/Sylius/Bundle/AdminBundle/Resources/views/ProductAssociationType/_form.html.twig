@@ -1,8 +1,5 @@
 {% from '@SyliusAdmin/Macro/translationForm.html.twig' import translationForm %}
 
-<div class="ui segment">
-    {{ form_errors(form) }}
-    {{ form_row(form.code) }}
-</div>
-
+{{ form_errors(form) }}
+{{ form_row(form.code) }}
 {{ translationForm(form.translations) }}

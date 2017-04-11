@@ -40,14 +40,14 @@ final class SelectAttributeType extends AbstractType
             && isset($options['configuration']['multiple'])
             && !$options['configuration']['multiple']) {
             $builder->addModelTransformer(new CallbackTransformer(
-                function($array) {
+                function ($array) {
                     if (count($array) > 0) {
                         return $array[0];
                     }
 
                     return null;
                 },
-                function($string) {
+                function ($string) {
                     if (!is_null($string)) {
                         return [$string];
                     }
@@ -66,7 +66,7 @@ final class SelectAttributeType extends AbstractType
         $resolver
             ->setRequired('configuration')
             ->setDefault('placeholder', 'sylius.form.attribute_type_configuration.select.choose')
-            ->setNormalizer('choices', function(Options $options){
+            ->setNormalizer('choices', function (Options $options) {
                 if (is_array($options['configuration'])
                     && isset($options['configuration']['choices'])
                     && is_array($options['configuration']['choices'])) {
@@ -78,7 +78,7 @@ final class SelectAttributeType extends AbstractType
 
                 return [];
             })
-            ->setNormalizer('multiple', function(Options $options){
+            ->setNormalizer('multiple', function (Options $options) {
                 if (is_array($options['configuration']) && isset($options['configuration']['multiple'])) {
                     return $options['configuration']['multiple'];
                 }

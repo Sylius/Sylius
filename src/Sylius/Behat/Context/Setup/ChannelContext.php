@@ -178,8 +178,7 @@ final class ChannelContext implements Context
      */
     public function onThisChannelPaymentStepIsSkippedIfOnlyASinglePaymentMethodIsAvailable(
         ChannelInterface $channel
-    )
-    {
+    ) {
         $channel->setSkippingPaymentStepAllowed(true);
 
         $this->channelManager->flush();

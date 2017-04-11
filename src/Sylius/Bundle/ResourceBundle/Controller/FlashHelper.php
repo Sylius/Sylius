@@ -162,6 +162,6 @@ final class FlashHelper implements FlashHelperInterface
             return $defaultCatalogue->has($message, 'flashes');
         }
 
-        return $message !== $this->translator->trans($message, $parameters,'flashes');
+        return $message !== $this->translator->trans($message, $parameters, 'flashes');
     }
 }

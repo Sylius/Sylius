@@ -308,7 +308,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
             do {
                 parent::tryToOpen($urlParameters);
                 sleep(3);
-            } while(!$this->isOpen() && microtime(true) < $end);
+            } while (!$this->isOpen() && microtime(true) < $end);
 
             return;
         }

@@ -7,6 +7,7 @@ sylius:
                 password: Password
                 signature: Signature
                 username: Username
+                sandbox: Sandbox
             stripe:
                 publishable_key: Publishable key
                 secret_key: Secret key
