@@ -4,7 +4,7 @@
 sylius:
     form:
         block:
-            body: متن
+            body: بدنه
             id: شناسه
             title: عنوان
         cart:
@@ -25,8 +25,10 @@ sylius:
             name: نام
             roles: نقش ها
         channel:
+            contact_email: ایمیل مخاطب
             currencies: واحدهای پول
             currency_base: ارز پایه
+            account_verification_required: تأیید صحت حساب، ضروری است؟
             hostname: نام میزبان
             locale_default: زبان پیش فرض
             locales: زبان ها
@@ -51,7 +53,7 @@ sylius:
             payment_state: وضعیت پرداخت
             channel: تمام کانال های فروش
         page:
-            body: متن
+            body: بدنه
             id: شناسه
             title: عنوان
         product:
@@ -93,7 +95,7 @@ sylius:
             different_billing_address: آدرس گیرنده با خریدار متفاوت است؟
             enabled: فعال
             first_name: نام
-            groups: گروه ها
+            groups: گروه‌ها
             roles: نقش ها
             last_name: نام خانوادگی
             password: کلمه عبور
@@ -119,7 +121,12 @@ sylius:
             type: نوع ارتباط
         product_association_type:
             name: نام
+        promotion_filter:
+            products: فیلتر محصول‌ها
+            taxons: فیلتر دسته‌بندی‌ها
         promotion_rule:
+            customer_group:
+                group: گروه مشتری
             has_taxon:
                 taxons: دسته بندی ها
             product:
@@ -129,6 +136,12 @@ sylius:
                 amount: مقدار
         payment_method:
             channels: کانال های فروش
+        product_attribute:
+            position: جایگاه
+        zone:
+            scopes:
+                shipping: حمل
+                tax: مالیات
     installer:
         extensions:
             header: افزونه ها

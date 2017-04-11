@@ -15,15 +15,21 @@ sylius:
             priority: Prioritet
             rules: Regler
             starts_at: Startar vid
+            usage_limit: Användningsbegränsning
         promotion_action:
             fixed_discount_configuration:
                 amount: Antal
+            percentage_discount_configuration:
+                percentage: Procentandel
             type: Typ
         promotion_coupon:
             expires_at: Förfaller den
+            usage_limit: Användningsbegränsning
         promotion_coupon_generator_instruction:
             amount: Antal
+            code_length: Kodlängd
             expires_at: Förfaller den
+            usage_limit: Användningsbegränsning
         promotion_rule:
             cart_quantity_configuration:
                 count: Antal
