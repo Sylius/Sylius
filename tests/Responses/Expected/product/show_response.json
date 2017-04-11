@@ -25,7 +25,13 @@
     "channels": [],
     "reviews": [],
     "averageRating": 0,
-    "images": [],
+    "images": [
+        {
+            "id": @integer@,
+            "type": "thumbnail",
+            "path": "\/uo\/product.jpg"
+        }
+    ],
     "_links": {
         "self": {
             "href": "\/api\/v1\/products\/MUG_SW"

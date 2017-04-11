@@ -23,6 +23,7 @@ Sylius\Component\Core\Model\Product:
         fallbackLocale: 'en_US'
         currentLocale: 'en_US'
         code: 'MUG_SW'
+        images: ["@product_thumbnail"]
         translations:
             - "@productTranslation1"
             - "@productTranslation2"
@@ -42,3 +43,8 @@ Sylius\Component\Core\Model\Product:
         slug: 'mug-breaking-bad'
         name: 'Breaking bad mug'
         description: <paragraph(2)>
+
+Sylius\Component\Core\Model\ProductImage:
+    product_thumbnail:
+        type: "thumbnail"
+        path: "/uo/product.jpg"

@@ -14,7 +14,7 @@ Sylius\Component\Core\Model\Image:
         path:
             expose: true
             type: string
-            groups: [Detailed]
+            groups: [Default, Detailed]
         owner:
             expose: true
             groups: [Detailed]
