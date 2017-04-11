@@ -21,6 +21,7 @@
                 "code": "MUG_SIZE_S",
                 "translations": {
                     "en_US": {
+                        "locale": "en_US",
                         "id": @integer@,
                         "value": "Size S"
                     }
@@ -30,15 +31,22 @@
         "position": 0,
         "translations": {
             "en_US": {
+                "locale": "en_US",
                 "id": @integer@,
                 "name": "Star wars mug"
             }
         },
+        "version": 1,
         "tracked": false,
         "channelPricings": {
             "WEB": {
                 "channelCode": "WEB",
                 "price": 20
+            }
+        },
+        "_links": {
+            "self": {
+                "href": "\/api\/v1\/products\/MUG\/variants\/MUG_SW"
             }
         }
     },

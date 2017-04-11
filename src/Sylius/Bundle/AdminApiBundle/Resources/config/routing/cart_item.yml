@@ -13,7 +13,7 @@ sylius_admin_api_cart_item_create:
                 method: createForCart
                 arguments:
                   - "expr:notFoundOnNull(service('sylius.repository.order').findCartById($cartId))"
-            serialization_groups: [DetailedCart]
+            serialization_groups: [Default, DetailedCart]
 
 sylius_admin_api_cart_item:
     resource: |

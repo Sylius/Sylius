@@ -21,6 +21,7 @@
                 "code": "MUG_SIZE_L",
                 "translations": {
                     "en_US": {
+                        "locale": "en_US",
                         "id": @integer@,
                         "value": "Size L"
                     }
@@ -30,15 +31,22 @@
         "position": 1,
         "translations": {
             "en_US": {
+                "locale": "en_US",
                 "id": @integer@,
                 "name": "Breaking bad mug"
             }
         },
+        "version": 1,
         "tracked": true,
         "channelPricings": {
             "WEB": {
                 "channelCode": "WEB",
                 "price": 20
+            }
+        },
+        "_links": {
+            "self": {
+                "href": "\/api\/v1\/products\/MUG\/variants\/HARD_AVAILABLE_MUG"
             }
         }
     },
