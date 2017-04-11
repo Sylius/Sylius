@@ -15,6 +15,8 @@ sylius:
     ui:
         abandoned: 'سفارش ناتمام'
         about: 'درباره'
+        accept: 'پذیرش'
+        accepted: 'پذیرفته شده'
         access_token: 'توکن دسترسی'
         access_your_store_account_or_create_a_new_one: 'دسترسی به حساب کاربری و یا ایجاد حساب جدید'
         account_credentials: 'اطلاعات کاربری حساب'
@@ -79,7 +81,7 @@ sylius:
         bill_to: 'پرداخت کننده'
         billing_address: 'مشخصات پرداخت کننده'
         blocks: 'بلاک ها'
-        body: 'متن'
+        body: 'بدنه'
         browse_products: 'نمایش محصولات'
         browse_your_orders_from_the_past: 'مرور سفارش های گذشته'
         build: 'ایجاد'

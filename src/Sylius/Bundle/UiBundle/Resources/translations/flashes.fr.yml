@@ -4,6 +4,8 @@
 sylius:
     channel:
         delete_error: 'Le canal ne peut pas être supprimé, il faut au moins un canal activé.'
+    checkout:
+        complete_error: 'Un problème inattendu est survenu au cours de la commande. Veuillez essayer de nouveau.'
     contact:
         request_success: 'Votre demande de contact a été soumise avec succès.'
         request_error: 'Un problème est survenu lors de l’envoi de la demande de contact. Veuillez réessayer ultérieurement.'

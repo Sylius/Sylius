@@ -9,3 +9,8 @@ sylius:
             unique: کد واحد پولی باید منحصر به فرد باشد.
         exchange_rate:
             not_blank: لطفا نرخ تبدیل ارز را وارد کنید.
+    exchange_rate:
+        ratio:
+            greater_than: نسبت باید بزرگتر از ۰ باشد.
+            invalid: نسبت باید یک عدد باشد.
+            not_blank: لطفا نسبت تبدیل نرخ ارز را وارد نمایید.

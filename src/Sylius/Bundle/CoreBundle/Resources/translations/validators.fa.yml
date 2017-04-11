@@ -11,6 +11,9 @@ sylius:
             invalid: ایمیل وارد شده نامعتبر است.
             max: ایمیل نباید بیش از {{ limit }} حرف باشد.
             min: ایمیل باید حداقل {{ limit }} حرف داشته باشد.
+    channel_pricing:
+        price:
+            not_blank: لطفا قیمت را وارد کنید.
     checkout:
         shipping_method:
             not_blank: لطفا شیوه ارسال را انتخاب کنید.
