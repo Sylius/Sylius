@@ -103,7 +103,7 @@ class MugProductFixture extends AbstractFixture
             ]
         ]]]);
 
-        $mugMaterials = ['Invisible porcelain', 'Banana skin', 'Porcelain', 'Centipede'];
+        $mugMaterials = ['invisible_porcelain' => 'Invisible porcelain', 'banana_skin' => 'Banana skin', 'porcelain' => 'Porcelain', 'centipede' => 'Centipede'];
         $this->productAttributeFixture->load(['custom' => [
             [
                 'name' => 'Mug material',

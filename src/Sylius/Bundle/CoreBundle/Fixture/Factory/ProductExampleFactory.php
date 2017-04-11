@@ -423,10 +423,10 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
             case ProductAttributeValueInterface::STORAGE_JSON:
                 if ($productAttribute->getType() == SelectAttributeType::TYPE) {
                     if ($productAttribute->getConfiguration()['multiple']) {
-                        return array_keys($this->faker->randomElements(
-                            $productAttribute->getConfiguration()['choices'],
-                            $this->faker->randomKey($productAttribute->getConfiguration()['choices']) + 1
-                        ));
+                        return $this->faker->randomElements(
+                            array_keys($productAttribute->getConfiguration()['choices']),
+                            $this->faker->numberBetween(1, count($productAttribute->getConfiguration()['choices']))
+                        );
                     }
 
                     return [$this->faker->randomKey($productAttribute->getConfiguration()['choices'])];
