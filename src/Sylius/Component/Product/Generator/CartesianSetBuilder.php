@@ -80,7 +80,7 @@ final class CartesianSetBuilder
      */
     private function validateTuples(array $setTuples, $countTuples)
     {
-        Assert::notEq(0, $countTuples, 'The set builder requires a single array of one or more array sets.1');
+        Assert::notEq(0, $countTuples, 'The set builder requires a single array of one or more array sets.');
 
         foreach ($setTuples as $tuple) {
             Assert::isArray($tuple, 'The set builder requires a single array of one or more array sets.');
