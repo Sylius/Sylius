@@ -110,6 +110,17 @@ final class ParametersParserSpec extends ObjectBehavior
         ;
     }
 
+    function it_parses_expressions_with_nested_scalar_parameters()
+    {
+        $request = new Request();
+        $request->request->set('number', ['sixth' => 6]);
+
+        $this
+            ->parseRequestValues(['expression' => 'expr:$number.sixth === 6'], $request)
+            ->shouldReturn(['expression' => true])
+        ;
+    }
+
     function it_throws_an_exception_if_array_parameter_is_injected_into_expression()
     {
         $request = new Request();
@@ -128,7 +139,7 @@ final class ParametersParserSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('parseRequestValues', [['expression' => 'expr:$object.callMethod()'], $request])
+            ->during('parseRequestValues', [['expression' => 'expr:$object'], $request])
         ;
     }
 }
