@@ -86,7 +86,7 @@ final class ParametersParser implements ParametersParserInterface
         $value = $request->get($parameters[0]);
 
         if (null === $value) {
-            return $value;
+            return;
         }
 
         foreach ($parameters as $i => $parameter) {
@@ -94,8 +94,8 @@ final class ParametersParser implements ParametersParserInterface
                 continue;
             }
 
-            if (null === $value) {
-                return $value;
+            if (null === $value || !array_key_exists($parameter, $value)) {
+                return;
             }
 
             $value = $value[$parameter];
