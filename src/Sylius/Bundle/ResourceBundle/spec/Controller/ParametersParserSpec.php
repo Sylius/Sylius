@@ -67,6 +67,17 @@ final class ParametersParserSpec extends ObjectBehavior
         ;
     }
 
+    function it_parses_nested_parameters()
+    {
+        $request = new Request();
+        $request->request->set('array', ['foo' => 'bar']);
+
+        $this
+            ->parseRequestValues(['nested' => ['value' => '$array.foo']], $request)
+            ->shouldReturn(['nested' => ['value' => 'bar']])
+        ;
+    }
+
     function it_parses_expressions()
     {
         $request = new Request();

@@ -64,7 +64,7 @@ final class ParametersParser implements ParametersParserInterface
     private function parseRequestValue($parameter, Request $request)
     {
         if (0 === strpos($parameter, '$')) {
-            return $request->get(substr($parameter, 1));
+            return $this->getRequestValue(substr($parameter, 1), $request);
         }
 
         if (0 === strpos($parameter, 'expr:')) {
@@ -72,6 +72,36 @@ final class ParametersParser implements ParametersParserInterface
         }
 
         return $parameter;
+    }
+
+    /**
+     * @param string $parameter
+     * @param Request $request
+     *
+     * @return mixed
+     */
+    private function getRequestValue($parameter, Request $request)
+    {
+        $parameters = explode('.', $parameter);
+        $value = $request->get($parameters[0]);
+
+        if (null === $value) {
+            return $value;
+        }
+
+        foreach ($parameters as $i => $parameter) {
+            if (0 === $i) {
+                continue;
+            }
+
+            if (null === $value) {
+                return $value;
+            }
+
+            $value = $value[$parameter];
+        }
+
+        return $value;
     }
 
     /**
