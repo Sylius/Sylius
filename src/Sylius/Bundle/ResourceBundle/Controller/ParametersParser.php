@@ -112,8 +112,8 @@ final class ParametersParser implements ParametersParserInterface
      */
     private function parseRequestValueExpression($expression, Request $request)
     {
-        $expression = preg_replace_callback('/(\$\w+)/', function ($matches) use ($request) {
-            $variable = $request->get(substr($matches[1], 1));
+        $expression = preg_replace_callback('/(\$(:?\S+)?\w+)/', function ($matches) use ($request) {
+            $variable = $this->getRequestValue($matches[2], $request);
 
             if (is_array($variable) || is_object($variable)) {
                 throw new \InvalidArgumentException(sprintf(
