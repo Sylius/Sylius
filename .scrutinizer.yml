@@ -1,0 +1,4 @@
+inherit: true
+
+filter:
+  excluded_paths: ["features/*", "*/spec/*", "*/Tests/*"]
