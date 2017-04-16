@@ -140,6 +140,13 @@ class AttributeValue implements AttributeValueInterface
         if (null === $this->attribute) {
             return null;
         }
+        
+        if ($this->attribute && AttributeTypes::CHOICE === $this->attribute->getType()) {
+            $configuration = $this->getConfiguration();
+            if (isset($configuration['choices'][$this->value])) {
+                return $configuration['choices'][$this->value];
+            }
+        }
 
         $getter = 'get' . $this->attribute->getStorageType();
 
