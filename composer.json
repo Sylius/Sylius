@@ -141,6 +141,9 @@
         "ext-intl": "For better performance than using Symfony Polyfill Component",
         "ext-mbstring": "For better performance than using Symfony Polyfill Component"
     },
+    "provide": {
+        "phpcr/phpcr-implementation": "2.1.0"
+    },
     "scripts": {
         "travis-build": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
