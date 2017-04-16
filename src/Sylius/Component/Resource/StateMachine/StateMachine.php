@@ -40,7 +40,7 @@ final class StateMachine extends BaseStateMachine implements StateMachineInterfa
     {
         foreach ($this->getPossibleTransitions() as $transition) {
             $config = $this->config['transitions'][$transition];
-            if ($toState === $config['to']) {
+            if ($toState === $config['to'] && $this->can($transition)) {
                 return $transition;
             }
         }
