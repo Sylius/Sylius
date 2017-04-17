@@ -68,6 +68,8 @@ final class ShippingMethodChoiceType extends AbstractType
     {
         if ($options['multiple']) {
             $builder->addModelTransformer(new CollectionToArrayTransformer());
+        } else {
+            $builder->addModelTransformer(new ObjectToIdentifierTransformer($this->repository));
         }
     }
 
