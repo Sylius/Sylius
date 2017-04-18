@@ -18,7 +18,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class ThemeConfiguration implements ConfigurationInterface
+class ThemeConfiguration implements ConfigurationInterface
 {
     /**
      * {@inheritdoc}
