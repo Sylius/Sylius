@@ -125,4 +125,9 @@ interface ProductVariantInterface extends
      * @param bool $shippingRequired
      */
     public function setShippingRequired($shippingRequired);
+
+    /**
+     * @return ProductImageInterface[]
+     */
+    public function getImages();
 }
