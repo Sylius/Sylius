@@ -130,6 +130,7 @@ final class ORMTranslatableListener implements EventSubscriber
             'mappedBy' => 'translatable',
             'fetch' => ClassMetadataInfo::FETCH_EXTRA_LAZY,
             'indexBy' => 'locale',
+            'orderBy' => ['id' => 'ASC'],
             'cascade' => ['persist', 'merge', 'remove'],
             'orphanRemoval' => true,
         ]);
