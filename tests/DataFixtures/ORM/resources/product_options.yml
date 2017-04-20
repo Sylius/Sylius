@@ -6,15 +6,15 @@ Sylius\Component\Product\Model\ProductOption:
 
 Sylius\Component\Product\Model\ProductOptionValue:
     mug-size-s:
-        currentLocale: 'en_US'
-        fallbackLocale: 'en_US'
+        currentLocale: "en_US"
+        fallbackLocale: "en_US"
         code: "MUG_SIZE_S"
         option: "@mug-size"
         translations:
             - "@mug-size-s-translations"
     mug-size-l:
-        currentLocale: 'en_US'
-        fallbackLocale: 'en_US'
+        currentLocale: "en_US"
+        fallbackLocale: "en_US"
         code: "MUG_SIZE_L"
         option: "@mug-size"
         translations:
@@ -22,10 +22,10 @@ Sylius\Component\Product\Model\ProductOptionValue:
 
 Sylius\Component\Product\Model\ProductOptionValueTranslation:
     mug-size-s-translations:
-        locale: 'en_US'
-        value: 'Size S'
+        locale: "en_US"
+        value: "Size S"
         translatable: "@mug-size-s"
     mug-size-l-translations:
-        locale: 'en_US'
-        value: 'Size L'
+        locale: "en_US"
+        value: "Size L"
         translatable: "@mug-size-l"
