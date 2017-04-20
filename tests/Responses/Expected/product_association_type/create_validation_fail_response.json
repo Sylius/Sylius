@@ -1,0 +1,14 @@
+{
+    "code": 400,
+    "message": "Validation Failed",
+    "errors": {
+        "children": {
+            "translations": {},
+            "code": {
+                "errors": [
+                    "Please enter association type code."
+                ]
+            }
+        }
+    }
+}
