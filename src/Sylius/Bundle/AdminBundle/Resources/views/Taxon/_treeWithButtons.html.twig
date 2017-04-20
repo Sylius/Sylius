@@ -15,7 +15,7 @@
                     </a>
                     <br>
                     <div class="ui mini buttons" style="margin-top: 5px;">
-                        {{ buttons.create(path('sylius_admin_taxon_create_for_parent', { 'id': taxon.id }), 'sylius.ui.add'|trans) }}
+                        {{ buttons.create(path('sylius_admin_taxon_create_for_parent', { 'id': taxon.id }), 'sylius.ui.add') }}
                         {{ buttons.edit(path('sylius_admin_taxon_update', { 'id': taxon.id }), null, null, false) }}
                         {{ buttons.delete(path('sylius_admin_taxon_delete', { 'id': taxon.id }), null, false, taxon.id) }}
                         <a class="ui icon button sylius-taxon-move-up" data-url="{{ path('sylius_admin_ajax_taxon_move', { id: taxon.id }) }}" data-id="{{ taxon.id }}" data-position="{{ taxon.position }}">
