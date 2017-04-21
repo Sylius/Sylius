@@ -74,18 +74,6 @@ This interface needs to be implemented by any custom payment source.
 
 .. _Sylius API PaymentSourceInterface: http://api.sylius.org/Sylius/Component/Payment/Model/PaymentSourceInterface.html
 
-.. _component_payment_model_payment-subject-interface:
-
-PaymentSubjectInterface
-~~~~~~~~~~~~~~~~~~~~~~~
-
-Only a class implementing this interface can be a used for fee calculation.
-
-.. note::
-   For more detailed information go to `Sylius API PaymentSubjectInterface`_.
-
-.. _Sylius API PaymentSubjectInterface: http://api.sylius.org/Sylius/Component/Payment/Model/PaymentSubjectInterface.html
-
 .. _component_payment_model_payments-subject-interface:
 
 PaymentsSubjectInterface
@@ -100,32 +88,6 @@ Any container which manages multiple payments should implement this interface.
 
 Service Interfaces
 ------------------
-
-.. _component_payment_calculator_fee-calculator-interface:
-
-FeeCalculatorInterface
-~~~~~~~~~~~~~~~~~~~~~~
-
-This interface should be implemented by any service
-designed to calculate the fee of a payment.
-
-.. note::
-   For more detailed information go to `Sylius API FeeCalculatorInterface`_.
-
-.. _Sylius API FeeCalculatorInterface: http://api.sylius.org/Sylius/Component/Payment/Calculator/FeeCalculatorInterface.html
-
-.. _component_payment_calculator_delegating-fee-calculator-interface:
-
-DelegatingFeeCalculatorInterface
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-This interface should be implemented by any service which doesn't calculate the fee by itself,
-but instead chooses another calculator (from a registry etc.) to do the calculation, and then returns the result.
-
-.. note::
-   For more detailed information go to `Sylius API DelegatingFeeCalculatorInterface`_.
-
-.. _Sylius API DelegatingFeeCalculatorInterface: http://api.sylius.org/Sylius/Component/Payment/Calculator/DelegatingFeeCalculatorInterface.html
 
 .. _component_payment_repository_payment-method-repository-interface:
 
