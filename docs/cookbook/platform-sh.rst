@@ -95,6 +95,7 @@ This is how this file should look like for Sylius:
           - \.ttf$
           - \.eot$
           - \.woff$
+          - \.woff2$
           - \.otf$
 
           - /robots\.txt$
