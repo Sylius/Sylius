@@ -35,3 +35,6 @@
 /behat.yml
 /phpunit.xml
 /phpspec.yml
+
+#PhpStorm
+.idea
