@@ -1,5 +1,5 @@
 Sylius\Component\Core\Model\ShopUser:
-    user_{Oliver, Roy, Thea}:
+    user_{Joe, Barry, Thea, Roy, Oliver}:
         plainPassword: '123pa$$word'
         roles: [ROLE_USER]
         enabled: true

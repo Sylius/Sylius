@@ -18,6 +18,11 @@
         "items": [
             {
                 "id": @integer@,
+                "user": {
+                    "id": @integer@,
+                    "username": "Joe@doe.com",
+                    "enabled": true
+                },
                 "email": "Joe@doe.com",
                 "firstName": "Joe",
                 "lastName": "Doe",
@@ -29,6 +34,11 @@
             },
             {
                 "id": @integer@,
+                "user": {
+                    "id": @integer@,
+                    "username": "Barry@doe.com",
+                    "enabled": true
+                },
                 "email": "Barry@doe.com",
                 "firstName": "Barry",
                 "lastName": "Doe",

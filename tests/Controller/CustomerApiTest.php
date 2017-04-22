@@ -187,10 +187,10 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $customers = $this->loadFixturesFromFile('resources/customers.yml');
 
-        $this->client->request('GET', '/api/v1/customers/'.$customers['customer_Barry']->getId(), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', '/api/v1/customers/'.$customers['customer_Roy']->getId(), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'customer/show_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'customer/show_with_user_response', Response::HTTP_OK);
     }
 
     /**
