@@ -11,6 +11,7 @@ The Cookbook
     custom-promotion-rule
     custom-promotion-action
     custom-redirect-after-cart-add-action
+    disabling-guest-checkout
     checkout
     paypal
     stripe
