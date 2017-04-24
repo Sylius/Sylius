@@ -17,12 +17,26 @@ use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Model\Payment as PayumPayment;
 use Payum\Core\Request\Capture;
 use Payum\Core\Request\Convert;
+use Sylius\Bundle\PayumBundle\Provider\PaymentDescriptionProviderInterface;
 use Sylius\Bundle\PayumBundle\Request\GetStatus;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface as SyliusPaymentInterface;
 
 final class CapturePaymentAction extends GatewayAwareAction
 {
+    /**
+     * @var PaymentDescriptionProviderInterface
+     */
+    private $paymentDescriptionProvider;
+
+    /**
+     * @param PaymentDescriptionProviderInterface $paymentDescriptionProvider
+     */
+    public function __construct(PaymentDescriptionProviderInterface $paymentDescriptionProvider)
+    {
+        $this->paymentDescriptionProvider = $paymentDescriptionProvider;
+    }
+
     /**
      * {@inheritdoc}
      *
@@ -51,11 +65,7 @@ final class CapturePaymentAction extends GatewayAwareAction
                 $payumPayment->setCurrencyCode($order->getCurrencyCode());
                 $payumPayment->setClientEmail($order->getCustomer()->getEmail());
                 $payumPayment->setClientId($order->getCustomer()->getId());
-                $payumPayment->setDescription(sprintf(
-                    'Payment contains %d items for a total of %01.2f',
-                    $order->getItems()->count(),
-                    round($totalAmount / 100, 2)
-                ));
+                $payumPayment->setDescription($this->paymentDescriptionProvider->getPaymentDescription($payment));
                 $payumPayment->setDetails($payment->getDetails());
 
                 $this->gateway->execute($convert = new Convert($payumPayment, 'array', $request->getToken()));

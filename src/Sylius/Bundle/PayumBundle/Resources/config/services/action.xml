@@ -7,6 +7,7 @@
     <services>
         <!-- Generic -->
         <service id="sylius.payum_action.capture_payment" class="Sylius\Bundle\PayumBundle\Action\CapturePaymentAction">
+            <argument type="service" id="sylius.payment_description_provider" />
             <tag name="payum.action" all="true" alias="sylius.capture_payment" />
         </service>
         <service id="sylius.payum_action.execute_same_request_with_payment_details" class="Sylius\Bundle\PayumBundle\Action\ExecuteSameRequestWithPaymentDetailsAction">
