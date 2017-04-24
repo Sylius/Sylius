@@ -1,0 +1,23 @@
+{
+    "id": @integer@,
+    "code": "cross_sell",
+    "translations": {
+        "en_US": {
+            "id": @integer@,
+            "locale": "en_US",
+            "name": "Cross sell"
+        },
+        "nl_NL": {
+            "id": @integer@,
+            "locale": "nl_NL",
+            "name": "Cross sell (nl_NL)"
+        }
+    },
+    "createdAt": "@string@.isDateTime()",
+    "updatedAt": "@string@.isDateTime()",
+    "_links": {
+        "self": {
+            "href": "\/api\/v1\/product-association-types\/cross_sell"
+        }
+    }
+}

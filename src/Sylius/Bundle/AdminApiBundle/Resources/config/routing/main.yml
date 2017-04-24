@@ -54,6 +54,9 @@ sylius_api_product:
 sylius_api_product_attribute:
     resource: "@SyliusAdminApiBundle/Resources/config/routing/product_attribute.yml"
 
+sylius_api_product_association_type:
+    resource: "@SyliusAdminApiBundle/Resources/config/routing/product_association_type.yml"
+
 sylius_api_product_option:
     resource: "@SyliusAdminApiBundle/Resources/config/routing/product_option.yml"
 
