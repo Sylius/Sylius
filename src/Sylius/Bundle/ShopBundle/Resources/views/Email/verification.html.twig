@@ -1,10 +1,14 @@
 {% block subject %}
-    Email address verification
+    {{ 'sylius.emails.user.verification_token.subject'|trans }}
 {% endblock %}
 
 {% block body %}
     {% set url = channel.hostname is not null ? 'http://' ~ channel.hostname ~ path('sylius_shop_user_verification', { 'token': user.emailVerificationToken}) : url('sylius_shop_user_verification', { 'token': user.emailVerificationToken}) %}
     {% autoescape %}
-        To verify your email address - please visit {{ url|raw }}
+        {{ 'sylius.emails.user.verification_token.body.hello_message'|trans({'%username%': user.username})|raw }}
+        <br/><br/>
+        {{ 'sylius.emails.user.verification_token.body.verify_link'|trans({'%url%': url})|raw }}
+        <br/><br/>
+        {{ 'sylius.emails.user.verification_token.body.regards_message'|trans|raw }}
     {% endautoescape %}
 {% endblock %}
