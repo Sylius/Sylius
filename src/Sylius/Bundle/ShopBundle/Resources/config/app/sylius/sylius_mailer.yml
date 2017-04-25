@@ -7,10 +7,10 @@ sylius_mailer:
             subject: sylius.emails.contact_request.subject
             template: "SyliusShopBundle:Email:contactRequest.html.twig"
         order_confirmation:
-            subject: sylius.emails.order_confirmation.subject
+            subject: sylius.emails.order.confirmation.subject
             template: "SyliusShopBundle:Email:orderConfirmation.html.twig"
         user_registration:
-            subject: sylius.emails.user_registration.subject
+            subject: sylius.emails.user.registration.subject
             template: "SyliusShopBundle:Email:userRegistration.html.twig"
         password_reset:
             subject: sylius.emails.user.password_reset.subject
