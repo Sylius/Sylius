@@ -164,12 +164,12 @@ class UserController extends ResourceController
             return $this->redirectToRoute($redirectRoute);
         }
 
-        $eventDispatcher = $this->container->get('event_dispatcher');
-        $eventDispatcher->dispatch(UserEvents::PRE_EMAIL_VERIFICATION, new GenericEvent($user));
-
         $user->setVerifiedAt(new \DateTime());
         $user->setEmailVerificationToken(null);
         $user->enable();
+
+        $eventDispatcher = $this->container->get('event_dispatcher');
+        $eventDispatcher->dispatch(UserEvents::PRE_EMAIL_VERIFICATION, new GenericEvent($user));
 
         $this->manager->flush();
 
