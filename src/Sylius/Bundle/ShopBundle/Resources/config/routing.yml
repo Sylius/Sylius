@@ -59,6 +59,3 @@ sylius_shop_switch_locale:
     methods: [GET]
     defaults:
         _controller: sylius.controller.shop.locale_switch:switchAction
-
-_liip_imagine:
-    resource: "@LiipImagineBundle/Resources/config/routing.xml"
