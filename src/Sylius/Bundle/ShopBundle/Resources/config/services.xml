@@ -18,4 +18,12 @@
         <import resource="services/listeners.xml" />
         <import resource="services/menu.xml" />
     </imports>
+    <services>
+        <service id="sylius.handler.shop_user_logout" class="Sylius\Bundle\ShopBundle\EventListener\ShopUserLogoutHandler">
+            <argument type="service" id="security.http_utils" />
+            <argument>/</argument>
+            <argument type="service" id="session" />
+            <argument type="service" id="sylius.context.channel" />
+        </service>
+    </services>
 </container>

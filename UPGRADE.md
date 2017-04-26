@@ -234,6 +234,10 @@
   * `UserInterface::setExpiresAt`
   * `UserInterface::setLastLogin`
 
+### Core / CoreBundle
+
+* `SessionCartSubscriber` and `ShopUserLogoutHandler` has been moved to ShopBundle. If you used them, you need to add ShopBundle to your Kernel or define this services by your own.
+
 # UPGRADE FROM 1.0.0-beta.2 to 1.0.0-beta.3
 
 ## Packages:
