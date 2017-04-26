@@ -49,6 +49,20 @@ final class ThemeSpec extends ObjectBehavior
         $this->getName()->shouldReturn('theme/name');
     }
 
+    function its_name_might_contain_numbers()
+    {
+        $this->beConstructedWith('1e/e7', '/theme/path');
+
+        $this->getName()->shouldReturn('1e/e7');
+    }
+
+    function its_name_might_contain_uppercase_characters()
+    {
+        $this->beConstructedWith('AbC/DeF', '/theme/path');
+
+        $this->getName()->shouldReturn('AbC/DeF');
+    }
+
     function it_has_immutable_path()
     {
         $this->getPath()->shouldReturn('/theme/path');
