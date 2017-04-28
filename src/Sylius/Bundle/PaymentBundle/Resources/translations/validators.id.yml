@@ -1,0 +1,42 @@
+sylius:
+    credit_card:
+        cardholder_name:
+            min_length: Panjang Nama pemegang kartu setidaknya harus {{ limit }} karakter.
+            not_blank: Mohon masukan nama pemegang kartu.
+        expiry_month:
+            max_range: Bulan kadaluarsa kartu harus diantara {{ min }} dan {{ max }}.
+            min_range: Bulan kadaluarsa kartu harus diantara {{ min }} and {{ max }}.
+            not_blank: Mohon isi bulan kadaluarsa.
+        number:
+            not_blank: Mohon masukan nomor kartu kredit.
+            luhn: Nomor kartu kredit yang anda masukan tidak valid.
+        security_code:
+            not_blank: Mohon masukan kode pengaman CVV.
+            max_length: Panjang kode CVV setidaknya harus {{ limit }} digit.
+            min_length: Maksimal panjang kode CVV adalah {{ limit }} digit.
+        expiry_year:
+            not_blank: Mohon pilih tahun kadaluarsa.
+    payment:
+        currency_code:
+            not_valid: Kode mata uang yang anda masukan tidak valid.
+        method:
+            not_blank: 'Mohon pilih metode pembayaran'
+    payment_method:
+        gateway:
+            not_blank: Monoh pilih metode pembayaran gateway.
+        name:
+            max_length: Panjang nama metode pembayaran tidak boleh lebih dari {{ limit }} karakter.
+            min_length: Nama metode pembayaran setidaknya harus {{ limit }} karakter.
+            not_blank: Mohon masukan nama metode pembayaran.
+        fee_calculator_configuration:
+            amount:
+                greater_than_or_equal: Biaya tidak boleh lebih kecil dari {{ compared_value }}.
+                not_blank: Mohon masukan jumlah biaya.
+            percent:
+                max_range: Presen biaya tidak boleh lebih besar dari {{ limit }}.
+                min_range: Persen biaya tidak boleh lebih kecil dari {{ limit }}.
+                not_blank: Mohon masukan persen.
+        code:
+            not_blank: 'Mohon masukan kode metode pembayaran'
+            regex: 'Kode pembayaran hanya boleh berisi kombinasi letters, numbers, dashes and underscores.'
+            unique: 'Kode pembayaran sudah ada sebelumnya.'

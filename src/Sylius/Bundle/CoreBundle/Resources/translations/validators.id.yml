@@ -2,10 +2,93 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    channel:
+        base_currency:
+            not_blank: Mohon masukan mata uang utama.
+        default_locale:
+            not_blank: Mohon masukan default lokal saluran.
+        contact_email:
+            invalid: Email tidak valid.
+            max: Panjang email tidak boleh lebih dari {{ limit }} karakter.
+            min: Email setidaknya harus berisi {{ limit }} karakter.
+    channel_pricing:
+        price:
+            min: Harga setidaknya harus lebih dari {{ limit }}.
+            not_blank: Mohon masukan harga.
+    checkout:
+        shipping_method:
+            not_blank: Mohon masukan metode pengiriman.
     contact:
         email:
-            not_blank: Masukkan email Anda.
+            invalid: Email tidak valid.
+            not_blank: Mohon masukan email.
+        message:
+            not_blank: Mohon masukan pesan anda.
+    currency:
+        enabled:
+            cannot_disable_base: Mata uang utama tidak bisa dinonaktifkan.
+    customer:
+        currency_code:
+            not_valid: Kode mata uang yang dimasukan tidak valid.
+    cart_item:
+        not_available: '%itemName% tidak mempunyai persediaan yang cukup.'
+    order:
+        currency_code:
+            not_valid: Kode mata uang yang anda masukan tidak valid.
+        payment_method_eligibility: 'Meode pembayaran %paymentMethodName% telah dinonaktifkan. Mohon pilih metode pembayaran anda.'
+        product_eligibility: 'Produk %productName% teleh dinonaktifkan'
+        shipping_method_eligibility: 'Produk tidak mencukupi syarat metode pengiriman %shippingMethodName%. Mohon pilih meode pengiriman anda.'
     locale:
         code:
-            not_blank: Masukkan kode lokal.
-            unique: Lokal ini sudah ada.
+            not_blank: Mohon masukan kode lokal.
+            unique: Lokal telah ada sebelumnya.
+        enabled:
+            cannot_disable_base: Lokal utama tidak bisa dinonaktifkan.
+    product:
+        variants:
+            all_prices_defined: Anda harus memberikan harga variasi produk untuk penetapan saluran baru.
+    product_attribute:
+        invalid: Posisi harus berupa nomor.
+    product_image:
+        file:
+            max_size: Gambar telalu besar - {{ size }}{{ suffix }}. Ukuran yang diizinkan adalah {{ limit }}{{ suffix }}.
+            upload_ini_size: Gambar telalu besar. Ukuran yang diizinkan adalah {{ limit }}{{ suffix }}.
+    product_variant:
+        onHand:
+            min: Stok harus lebih besar dari {{ limit }}.
+            not_blank: Mohon masukan stok.
+            reserved: Stok harus lebih besar dari jumlah unit yang ditahan #im not sure about it
+        original_price:
+            min: Harga asli tidak boleh negatif.
+        weight:
+            min: Berat tidak boleh negatif.
+            invalid: Berat harus berupa nomor.
+        width:
+            min: Panjang tidak boleh negatif.
+            invalid: Panjang harus berupa nomor.
+        height:
+            min: Tinggi tidak boleh negatif.
+            invalid: Tinggi harus berupa nomor.
+        depth:
+            min: Lebar tidak boleh negatif.
+            invalid: Lebar harus berupa nomor.
+        channel_pricing:
+            all_defined: 'Anda harus menyertakan harga untuk setiap saluran'
+    product_translation:
+        short_description:
+            max: Deskripsi pendek tidak boleh lebih banyak dari {{ limit }} karakter.
+    taxon_image:
+        file:
+            max_size: Gambar telalu besar - {{ size }}{{ suffix }}. Ukuran yang diizinkan adalah {{ limit }}{{ suffix }}.
+            upload_ini_size: Gambar telalu besar. Ukuran yang diizinkan adalah {{ limit }}{{ suffix }}.
+    user:
+        email:
+            unique: Email ini sudah digunakan sebelumnya.
+            max: Panjang email tidak boleh lebih dari {{ limit }} karakter.
+            min: Email setidaknya harus berisi {{ limit }} karakter.
+            invalid: Email tidak valid.
+        username:
+            unique: Nama user ini sudah digunakan sebelumnya.
+            not_blank: Mohon masukan nama anda.
+        locale_code:
+            not_blank: Mohon pilih lokal.

@@ -4,14 +4,28 @@
 sylius:
     form:
         product:
-            name: Nama
-            meta_keywords: Meta Kata Kunci
-            meta_description: Meta Deskripsi
+            name: Name
+            description: Deskripsi
+            attributes: Atribut
+            options: Opsi
+            meta_keywords: Meta keywords
+            meta_description: Meta description
+            slug: Slug
+            taxons: Takson
         product_variant:
             name: Nama
         association_type:
             name: Nama
+            translations: Penerjemah
+        association:
+            type: Tipe asosiasi
+            product: Asosiai produk
         variant:
             name: Nama
         option:
             name: Nama
+            position: Posisi
+            values: Nilai
+        option_value:
+            add_value: Tambah nilai
+            value: Nilai

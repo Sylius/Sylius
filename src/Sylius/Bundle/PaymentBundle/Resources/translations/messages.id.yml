@@ -3,5 +3,32 @@
 
 sylius:
     form:
+        credit_card:
+            cardholder_name: Nama pemegang kartu
+            expiry_month: Bulan kadaluarsa
+            expiry_year: Tahun kadaluarsa
+            number: Nomor kartu
+            security_code: Kode pengaman (CVV)
+            type: Tipe Kartu
+        payment:
+            amount: Jumlah pembayaran
+            method: Metode pembayaran
+            state:
+                header: Status pembayaran
+                checkout: Pemeriksaan
+                completed: Selesai
+                authorized: Otorisasi
+                failed: Gagal
+                new: Baru
+                pending: Ditunda
+                processing: Diproses
+                unknown: Tidak diketahui
+                void: Kosong
+                cancelled: Dibatalkan
+                refunded: Dikembalikan
         payment_method:
+            description: Deskrisi
+            enabled: Diaktifkan?
+            instructions: Petunjuk
             name: Nama
+            position: Posisi

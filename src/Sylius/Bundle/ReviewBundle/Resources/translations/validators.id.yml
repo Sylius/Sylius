@@ -1,0 +1,12 @@
+sylius:
+    review:
+        author:
+            already_exists: Email ini sudah terdaftar, Mohon login, atau lupa password.
+        comment:
+            not_blank: Komen ulasan tidak boleh kosong.
+        rating:
+            not_blank: Mohon berikan rating.
+        title:
+            not_blank: Judul ulasan tidak boleh kosong.
+            min_length: Judul ulasan minimal 2 karakter.
+            max_length: Judul ulasan tidak boleh lebih dari 255 karakter.

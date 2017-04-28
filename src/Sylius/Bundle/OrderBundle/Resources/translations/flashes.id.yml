@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    cart:
+        add_item: 'Item telah dimasukan ke keranjang'
+        cannot_modify: 'Pesanan anda telah dikirim, untuk keranjang yang ingin Anda ubah.'
+        remove_item: 'Item teleh dihapus dari keranjang'
+        save: 'Keranjang telah berhasil disimpan'

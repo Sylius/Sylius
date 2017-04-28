@@ -4,8 +4,28 @@
 sylius:
     customer:
         first_name:
-            not_blank: Masukkan nama depan Anda.
+            max: Panjang nama depan tidak boleh lebih dari {{ limit }} karakter.
+            min: Nama depan setidaknya harus berisi {{ limit }} karakter.
+            not_blank: Mohon masukan nama depan anda.
         last_name:
-            not_blank: Masukkan nama belakang.
+            max: Panjang nama belakang tidak boleh lebih dari {{ limit }} karakter.
+            min: Nama belakang setidaknya harus berisi {{ limit }} karakter.
+            not_blank: Mohon masukan nama belakang anda.
+        gender:
+            not_blank: Mohon pilih jenis kelamin anda.
         email:
-            not_blank: Masukkan email Anda.
+            already_used: Email ini sudah digunakan.
+            max: Panjang Email tidak boleh lebih dari {{ limit }} karakter.
+            min: Email setidaknya harus berisi {{ limit }} karakter.
+            not_blank: Mohon masukan email anda.
+            invalid: Email ini tidak valid.
+            unique: Email ini telah digunakan.
+            registered: Email ini telah terdaftar, mohon login atau reset pasword jika anda lupa.
+    customer_group:
+        code:
+            regex: Kode grup pelanggan hanya boleh berisi kombinasi letters, numbers, dashes and underscores.
+            unique: Kode group pelanggan harus unik.
+        name:
+            max: Panjang nama grup pelanggan tidak boleh lebih dari {{ limit }} karakter.
+            min: Nama grup pelanggan setidaknya harus berisi {{ limit }} karakter.
+            not_blank: Mohon masukan nama grup pelanggan.
