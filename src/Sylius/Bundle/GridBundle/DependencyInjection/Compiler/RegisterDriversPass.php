@@ -36,6 +36,19 @@ final class RegisterDriversPass implements CompilerPassInterface
                 throw new \InvalidArgumentException('Tagged grid drivers needs to have `alias` attribute.');
             }
 
+            // if the driver has an unavailable dependency, remove it.
+            $definition = $container->getDefinition($id);
+            foreach ($definition->getArguments() as $argument) {
+                if (false === $argument instanceof Reference) {
+                    continue;
+                }
+
+                if (!$container->has((string) $argument)) {
+                    $container->removeDefinition($id);
+                    continue 2;
+                }
+            }
+
             $registry->addMethodCall('register', [$attributes[0]['alias'], new Reference($id)]);
         }
     }
