@@ -15,6 +15,7 @@ sylius_fixtures:
                         currencies: ['USD']
 
                 geographical:
+                    priority: 100
                     options:
                         countries:
                             - "US"
