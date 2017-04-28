@@ -34,7 +34,7 @@ final class RandomnessGenerator implements RandomnessGeneratorInterface
             implode(range(0, 9))
             .implode(range('a', 'z'))
             .implode(range('A', 'Z'))
-            .implode(['-', '_', '~', '.'])
+            .implode(['-', '_', '~'])
         ;
     }
 
