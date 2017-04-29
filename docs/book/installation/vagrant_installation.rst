@@ -25,28 +25,17 @@ will help you to quickly have full application running on your machine.
 How to install Sylius using Vagrant?
 ------------------------------------
 
-1. Create a new `Sylius-Standard <https://github.com/Sylius/Sylius-Standard>`_ project using composer in **no interaction mode** (``-n`` flag):
+2. Clone the `Sylius/Vagrant <https://github.com/Sylius/Vagrant>`_ repository into the ``/sylius/`` directory:
 
 .. code-block:: bash
 
-    $ composer create-project -s beta -n sylius/sylius-standard acme
+    $ git clone git@github.com:Sylius/Vagrant.git sylius
 
-.. note::
-
-    The no interaction mode results in having null database password, what lets Vagrant put its own password(``vagrant``) into that parameter.
-    It is not mandatory. You can change the database password in the ``parameters.yml`` to ``vagrant`` also later on.
-
-2. Inside your new project directory clone the `Sylius/Vagrant <https://github.com/Sylius/Vagrant>`_ repository into the ``/vagrant/`` directory:
+3. Move to the ``/sylius/`` directory and build Vagrant:
 
 .. code-block:: bash
 
-    $ git clone git@github.com:Sylius/Vagrant.git vagrant
-
-3. Move to the ``/vagrant/`` directory and build Vagrant:
-
-.. code-block:: bash
-
-    $ cd vagrant
+    $ cd sylius
     $ vagrant up
 
 4. Add an entry for sylius.dev to the ``etc/hosts`` file:
