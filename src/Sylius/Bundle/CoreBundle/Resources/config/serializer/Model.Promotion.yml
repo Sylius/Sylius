@@ -1,6 +1,6 @@
 Sylius\Component\Core\Model\Promotion:
     exclusion_policy: ALL
-    xml_root_name: product
+    xml_root_name: promotion
     properties:
         channels:
             expose: true
