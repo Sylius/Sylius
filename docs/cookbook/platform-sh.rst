@@ -145,7 +145,7 @@ This is how this file should look like for Sylius:
 
 * Add ``.platform/services.yaml`` file:
 
-This file will load ``myslq`` and ``redis`` on your Platform.sh server.
+This file will load ``mysql`` and ``redis`` on your Platform.sh server.
 
 .. code-block:: yaml
 
