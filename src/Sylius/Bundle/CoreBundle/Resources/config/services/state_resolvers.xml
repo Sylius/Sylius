@@ -23,9 +23,11 @@
         </service>
         <service id="sylius.state_resolver.order_payment" class="Sylius\Component\Core\StateResolver\OrderPaymentStateResolver">
             <argument type="service" id="sm.factory" />
+            <argument type="service" id="sylius.target_transition_resolver.payment" />
         </service>
         <service id="sylius.state_resolver.order_shipping" class="Sylius\Component\Core\StateResolver\OrderShippingStateResolver">
             <argument type="service" id="sm.factory" />
         </service>
+        <service id="sylius.target_transition_resolver.payment" class="Sylius\Component\Core\StateResolver\PaymentTargetTransitionResolver" />
     </services>
 </container>

@@ -11,16 +11,14 @@
 
 namespace spec\Sylius\Component\Core\StateResolver;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use SM\Factory\FactoryInterface;
 use SM\StateMachine\StateMachineInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\PaymentInterface;
-use Sylius\Component\Core\OrderPaymentStates;
 use Sylius\Component\Core\OrderPaymentTransitions;
 use Sylius\Component\Core\StateResolver\OrderPaymentStateResolver;
 use Sylius\Component\Order\StateResolver\StateResolverInterface;
+use Sylius\Component\Order\StateResolver\TargetTransitionResolverInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -28,9 +26,9 @@ use Sylius\Component\Order\StateResolver\StateResolverInterface;
  */
 final class OrderPaymentStateResolverSpec extends ObjectBehavior
 {
-    function let(FactoryInterface $stateMachineFactory)
+    function let(FactoryInterface $stateMachineFactory, TargetTransitionResolverInterface $transitionResolver)
     {
-        $this->beConstructedWith($stateMachineFactory);
+        $this->beConstructedWith($stateMachineFactory, $transitionResolver);
     }
 
     function it_is_initializable()
@@ -43,172 +41,17 @@ final class OrderPaymentStateResolverSpec extends ObjectBehavior
         $this->shouldImplement(StateResolverInterface::class);
     }
 
-    function it_marks_an_order_as_refunded_if_all_its_payments_are_refunded(
+    function it_changes_the_state_of_order_according_to_target_transition_resolver(
         FactoryInterface $stateMachineFactory,
         StateMachineInterface $stateMachine,
-        OrderInterface $order,
-        PaymentInterface $firstPayment,
-        PaymentInterface $secondPayment
+        TargetTransitionResolverInterface $transitionResolver,
+        OrderInterface $order
     ) {
-        $firstPayment->getAmount()->willReturn(6000);
-        $firstPayment->getState()->willReturn(PaymentInterface::STATE_REFUNDED);
-        $secondPayment->getAmount()->willReturn(4000);
-        $secondPayment->getState()->willReturn(PaymentInterface::STATE_REFUNDED);
-
-        $order
-            ->getPayments()
-            ->willReturn(new ArrayCollection([$firstPayment->getWrappedObject(), $secondPayment->getWrappedObject()]))
-        ;
-        $order->getTotal()->willReturn(10000);
+        $transitionResolver->resolve($order)->willReturn(OrderPaymentTransitions::TRANSITION_REFUND);
 
         $stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH)->willReturn($stateMachine);
         $stateMachine->can(OrderPaymentTransitions::TRANSITION_REFUND)->willReturn(true);
         $stateMachine->apply(OrderPaymentTransitions::TRANSITION_REFUND)->shouldBeCalled();
-
-        $this->resolve($order);
-    }
-
-    function it_marks_an_order_as_refunded_if_its_payments_are_refunded_or_failed_but_at_least_one_is_refunded(
-        FactoryInterface $stateMachineFactory,
-        StateMachineInterface $stateMachine,
-        OrderInterface $order,
-        PaymentInterface $firstPayment,
-        PaymentInterface $secondPayment
-    ) {
-        $firstPayment->getAmount()->willReturn(10000);
-        $firstPayment->getState()->willReturn(PaymentInterface::STATE_FAILED);
-        $secondPayment->getAmount()->willReturn(10000);
-        $secondPayment->getState()->willReturn(PaymentInterface::STATE_REFUNDED);
-
-        $order
-            ->getPayments()
-            ->willReturn(new ArrayCollection([$firstPayment->getWrappedObject(), $secondPayment->getWrappedObject()]))
-        ;
-        $order->getTotal()->willReturn(10000);
-
-        $stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH)->willReturn($stateMachine);
-        $stateMachine->can(OrderPaymentTransitions::TRANSITION_REFUND)->willReturn(true);
-        $stateMachine->apply(OrderPaymentTransitions::TRANSITION_REFUND)->shouldBeCalled();
-
-        $this->resolve($order);
-    }
-
-    function it_marks_an_order_as_paid_if_fully_paid(
-        FactoryInterface $stateMachineFactory,
-        StateMachineInterface $stateMachine,
-        OrderInterface $order,
-        PaymentInterface $payment
-    ) {
-        $payment->getAmount()->willReturn(10000);
-        $payment->getState()->willReturn(PaymentInterface::STATE_COMPLETED);
-
-        $payments = new ArrayCollection([$payment->getWrappedObject()]);
-
-        $order->getPayments()->willReturn($payments);
-        $order->getTotal()->willReturn(10000);
-
-        $stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH)->willReturn($stateMachine);
-        $stateMachine->can(OrderPaymentTransitions::TRANSITION_PAY)->willReturn(true);
-        $stateMachine->apply(OrderPaymentTransitions::TRANSITION_PAY)->shouldBeCalled();
-
-        $this->resolve($order);
-    }
-
-    function it_marks_an_order_as_paid_if_fully_paid_even_if_previous_payment_was_failed(
-        FactoryInterface $stateMachineFactory,
-        StateMachineInterface $stateMachine,
-        OrderInterface $order,
-        PaymentInterface $firstPayment,
-        PaymentInterface $secondPayment
-    ) {
-        $firstPayment->getAmount()->willReturn(10000);
-        $firstPayment->getState()->willReturn(PaymentInterface::STATE_FAILED);
-        $secondPayment->getAmount()->willReturn(10000);
-        $secondPayment->getState()->willReturn(PaymentInterface::STATE_COMPLETED);
-
-        $payments = new ArrayCollection([$firstPayment->getWrappedObject(), $secondPayment->getWrappedObject()]);
-
-        $order->getPayments()->willReturn($payments);
-        $order->getTotal()->willReturn(10000);
-
-        $stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH)->willReturn($stateMachine);
-        $stateMachine->can(OrderPaymentTransitions::TRANSITION_PAY)->willReturn(true);
-        $stateMachine->apply(OrderPaymentTransitions::TRANSITION_PAY)->shouldBeCalled();
-
-        $this->resolve($order);
-    }
-
-    function it_marks_an_order_as_partially_refunded_if_one_of_the_payment_is_completed(
-        FactoryInterface $stateMachineFactory,
-        StateMachineInterface $stateMachine,
-        OrderInterface $order,
-        PaymentInterface $firstPayment,
-        PaymentInterface $secondPayment
-    ) {
-        $firstPayment->getAmount()->willReturn(6000);
-        $firstPayment->getState()->willReturn(PaymentInterface::STATE_COMPLETED);
-        $secondPayment->getAmount()->willReturn(4000);
-        $secondPayment->getState()->willReturn(PaymentInterface::STATE_REFUNDED);
-
-        $order
-            ->getPayments()
-            ->willReturn(new ArrayCollection([$firstPayment->getWrappedObject(), $secondPayment->getWrappedObject()]))
-        ;
-        $order->getTotal()->willReturn(10000);
-
-        $stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH)->willReturn($stateMachine);
-        $stateMachine->can(OrderPaymentTransitions::TRANSITION_PARTIALLY_REFUND)->willReturn(true);
-        $stateMachine->apply(OrderPaymentTransitions::TRANSITION_PARTIALLY_REFUND)->shouldBeCalled();
-
-        $this->resolve($order);
-    }
-
-    function it_marks_an_order_as_completed_if_fully_paid_multiple_payments(
-        FactoryInterface $stateMachineFactory,
-        StateMachineInterface $stateMachine,
-        OrderInterface $order,
-        PaymentInterface $firstPayment,
-        PaymentInterface $secondPayment
-    ) {
-        $firstPayment->getAmount()->willReturn(6000);
-        $firstPayment->getState()->willReturn(PaymentInterface::STATE_COMPLETED);
-        $secondPayment->getAmount()->willReturn(4000);
-        $secondPayment->getState()->willReturn(PaymentInterface::STATE_COMPLETED);
-
-        $order
-            ->getPayments()
-            ->willReturn(new ArrayCollection([$firstPayment->getWrappedObject(), $secondPayment->getWrappedObject()]))
-        ;
-        $order->getTotal()->willReturn(10000);
-
-        $stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH)->willReturn($stateMachine);
-        $stateMachine->can(OrderPaymentTransitions::TRANSITION_PAY)->willReturn(true);
-        $stateMachine->apply(OrderPaymentTransitions::TRANSITION_PAY)->shouldBeCalled();
-
-        $this->resolve($order);
-    }
-
-    function it_marks_an_order_as_partially_paid_if_one_of_the_payment_is_processing(
-        FactoryInterface $stateMachineFactory,
-        StateMachineInterface $stateMachine,
-        OrderInterface $order,
-        PaymentInterface $firstPayment,
-        PaymentInterface $secondPayment
-    ) {
-        $firstPayment->getAmount()->willReturn(6000);
-        $firstPayment->getState()->willReturn(PaymentInterface::STATE_PROCESSING);
-        $secondPayment->getAmount()->willReturn(4000);
-        $secondPayment->getState()->willReturn(PaymentInterface::STATE_COMPLETED);
-
-        $order
-            ->getPayments()
-            ->willReturn(new ArrayCollection([$firstPayment->getWrappedObject(), $secondPayment->getWrappedObject()]))
-        ;
-        $order->getTotal()->willReturn(10000);
-
-        $stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH)->willReturn($stateMachine);
-        $stateMachine->can(OrderPaymentTransitions::TRANSITION_PARTIALLY_PAY)->willReturn(true);
-        $stateMachine->apply(OrderPaymentTransitions::TRANSITION_PARTIALLY_PAY)->shouldBeCalled();
 
         $this->resolve($order);
     }
