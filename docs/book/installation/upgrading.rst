@@ -54,3 +54,17 @@ If this does not help, it is a matter of debugging the conflicting versions and 
     of this directory with the migrations from the ``vendor/sylius/sylius/app/migrations/`` directory.
 
 After fixing the project according to the upgrade and having run the migrations you are done!
+
+.. warning::
+
+    If you are using a Sylius-Standard edition, remember that Migration provided by us are placed in your vendor folder.
+
+To make your work simpler, we have provided you a configuration file for migration, so you can run Sylius migration without copy-pasting them to your app.
+
+.. code-block:: bash
+
+    $ bin/console doctrine:migrations:migrate --configuration app/config/sylius_migration.yml
+
+.. note::
+
+    Remember that it is the only moment you should use this `--configuration app/config/sylius_migration.yml` option.
