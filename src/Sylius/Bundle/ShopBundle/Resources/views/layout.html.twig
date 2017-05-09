@@ -2,6 +2,8 @@
 
 <html lang="{{ app.request.locale|slice(0, 2) }}">
 <head>
+    {{ sonata_block_render_event('sylius.shop.layout.before_head') }}
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
@@ -17,9 +19,12 @@
 
         {{ sonata_block_render_event('sylius.shop.layout.stylesheets') }}
     {% endblock %}
+
+    {{ sonata_block_render_event('sylius.shop.layout.after_head') }}
 </head>
 
 <body class="pushable">
+{{ sonata_block_render_event('sylius.shop.layout.before_body') }}
 <div class="pusher">
     {% block top %}
         <div id="menu" class="ui large sticky inverted stackable menu">
@@ -69,5 +74,6 @@
 {% endblock %}
 
 {% include '@SyliusUi/Modal/_confirmation.html.twig' %}
+{{ sonata_block_render_event('sylius.shop.layout.after_body') }}
 </body>
 </html>
