@@ -31,12 +31,16 @@ Changed loading order (priority descending):
 Assets
 ------
 
-Theme assets are installed by ``sylius:theme:assets:install`` command, which is supplementary for and should be used after ``assets:install``.
+Theme assets are installed by ``sylius:theme:assets:install`` command, which is supplementary for and replaces ``assets:install``.
 
 The command run with ``--symlink`` or ``--relative`` parameters creates symlinks for every installed asset file,
-not for entire asset directory (eg. if ``AcmeBundle/Resources/public/asset.js`` exists, it creates symlink ``web/bundles/acme/asset.js`` 
-leading to ``AcmeBundle/Resources/public/asset.js`` instead of symlink ``web/bundles/acme/`` leading to ``AcmeBundle/Resources/public/``). 
+not for entire asset directory (eg. if ``AcmeBundle/Resources/public/asset.js`` exists, it creates symlink ``web/bundles/acme/asset.js``
+leading to ``AcmeBundle/Resources/public/asset.js`` instead of symlink ``web/bundles/acme/`` leading to ``AcmeBundle/Resources/public/``).
 When you create a new asset or delete an existing one, it is required to rerun this command to apply changes (just as the hard copy option works).
+
+When using themes, you can also trigger this command as a Composer script. In your ``composer.json`` file, replace
+the calls for ``"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets"`` in the ``post-install-cmd``
+and ``post-update-cmd`` script sections with ``"Sylius\\Bundle\\ThemeBundle\\Composer\\ScriptHandler::installThemeAssets"``.
 
 Assetic
 -------
