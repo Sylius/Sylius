@@ -40,7 +40,7 @@ The routing for contact can be found in the ``Sylius/Bundle/ShopBundle/Resources
 By overriding that routing you will be able to customize **redirect url, error flash, success flash, form and its template**.
 
 You can also change the template of the email that is being sent by simply overriding it
-in your project in the ``app/Resources/SyliusCoreBundle/views/Email/contactRequest.html.twig`` file.
+in your project in the ``app/Resources/SyliusShopBundle/views/Email/contactRequest.html.twig`` file.
 
 Learn more
 ----------
