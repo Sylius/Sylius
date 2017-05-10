@@ -30,7 +30,7 @@
         <!-- Overridden services -->
         <service id="assets.path_package" class="Sylius\Bundle\ThemeBundle\Asset\Package\PathPackage" abstract="true">
             <argument /> <!-- base path -->
-            <argument type="service" /> <!-- version strategy -->
+            <argument /> <!-- version strategy -->
             <argument type="service" id="sylius.context.theme" />
             <argument type="service" id="sylius.theme.asset.path_resolver" />
             <argument type="service" id="assets.context" />
