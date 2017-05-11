@@ -122,7 +122,7 @@ Sylius\Bundle\PayumBundle\Model\GatewayConfig:
 
 Sylius\Component\Payment\Model\PaymentMethodTranslation:
     cash_on_delivery_translation1:
-        name: 'Cach on delivery'
+        name: 'Cash on delivery'
         locale: 'en_US'
         description: <paragraph(2)>
         translatable: "@cash_on_delivery"

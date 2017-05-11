@@ -5,7 +5,7 @@
                 {
                     "id": @integer@,
                     "code": "cod",
-                    "name": "Cach on delivery",
+                    "name": "Cash on delivery",
                     "description": "@string@"
                 },
                 {
