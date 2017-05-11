@@ -1,3 +1,11 @@
+# UPGRADE FROM 1.0.0-beta.2 to 1.0.0
+
+## Packages:
+
+### PayumBundle
+
+* Constructor of `CapturePaymentAction` now takes a `PaymentDescriptionProviderInterface` as first argument. This allows granular customisation of the payment description.
+
 # UPGRADE FROM 1.0.0-beta.1 to 1.0.0-beta.2
 
 * Bundles, container extensions and bundles configurations were made final and can't be extended anymore, follow Symfony
