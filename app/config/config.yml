@@ -21,7 +21,6 @@ framework:
     validation: { enable_annotations: true }
     templating: { engines: ["twig"] }
     default_locale: "%locale%"
-    trusted_proxies: ~
     session:
         handler_id: ~
 
