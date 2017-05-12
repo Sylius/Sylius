@@ -184,15 +184,15 @@ Just like for regular models you can also check the class of translatable models
         /**
          * {@inheritdoc}
          */
-        public static function getTranslationClass()
+        protected function createTranslation()
         {
-            return ShippingMethodTranslation::class;
+            return new ShippingMethodTranslation();
         }
     }
 
 .. note::
 
-    Remember to set the translation class properly, just like above in the ``getTranslationClass()`` method.
+    Remember to set the translation class properly, just like above in the ``createTranslation()`` method.
 
 **2.** Next define your entity's mapping.
 
@@ -359,12 +359,12 @@ The file should be placed in ``AppBundle/Resources/config/doctrine/ShippingMetho
             return $this->getTranslation()->getDeliveryConditions();
         }
 
-       /**
+        /**
          * {@inheritdoc}
          */
-        public static function getTranslationClass()
+        protected function createTranslation()
         {
-            return ShippingMethodTranslation::class;
+            return new ShippingMethodTranslation();
         }
     }
 
