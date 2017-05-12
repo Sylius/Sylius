@@ -109,10 +109,10 @@ That's it. SyliusResourceBundle allows to generate a default CRUD interface incl
 This will generate the following paths:
 
  * */admin/suppliers/* - [``GET``] - Your grid.
- * */admin/suppliers/new* - [``GET/POST``] - Creating new tournament.
- * */admin/suppliers/{id}/edit* - [``GET/PUT``] - Editing an existing tournament.
- * */admin/suppliers/{id}* - [``DELETE``] - Deleting specific tournament.
- * */admin/suppliers/{id}* - [``GET``] - Displaying specific tournament.
+ * */admin/suppliers/new* - [``GET/POST``] - Creating new supplier.
+ * */admin/suppliers/{id}/edit* - [``GET/PUT``] - Editing an existing supplier.
+ * */admin/suppliers/{id}* - [``DELETE``] - Deleting specific supplier.
+ * */admin/suppliers/{id}* - [``GET``] - Displaying specific supplier.
 
 .. tip::
 
