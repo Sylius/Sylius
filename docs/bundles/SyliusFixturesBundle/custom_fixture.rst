@@ -89,7 +89,8 @@ the countries in the another one? You don't need to create multiple fixtures, a 
 
         protected function configureOptionsNode(ArrayNodeDefinition $optionsNode)
         {
-            $optionsNodeBuilder
+            $optionsNode
+                ->children()
                 ->arrayNode('countries')
                     ->performNoDeepMerging()
                     ->defaultValue(array_keys(\Intl::getRegionBundle()->getCountryNames()))
