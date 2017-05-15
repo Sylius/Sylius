@@ -307,15 +307,15 @@ In order to handle the image upload you need to attach the image upload listener
     # services.yml
     services:
         sylius.listener.image_upload:
-            class: Sylius\Bundle\CoreBundle\EventListener\ImageUploadListener
+            class: Sylius\Bundle\CoreBundle\EventListener\ImagesUploadListener
             arguments: ['@sylius.image_uploader']
             tags:
-                - { name: kernel.event_listener, event: "sylius.product.pre_create", method: "uploadImage" }
-                - { name: kernel.event_listener, event: "sylius.product.pre_update", method: "uploadImage" }
-                - { name: kernel.event_listener, event: "sylius.taxon.pre_create", method: "uploadImage" }
-                - { name: kernel.event_listener, event: "sylius.taxon.pre_update", method: "uploadImage" }
-                - { name: kernel.event_listener, event: "sylius.shipping_method.pre_create", method: "uploadImage" }
-                - { name: kernel.event_listener, event: "sylius.shipping_method.pre_update", method: "uploadImage" }
+                - { name: kernel.event_listener, event: "sylius.product.pre_create", method: "uploadImages" }
+                - { name: kernel.event_listener, event: "sylius.product.pre_update", method: "uploadImages" }
+                - { name: kernel.event_listener, event: "sylius.taxon.pre_create", method: "uploadImages" }
+                - { name: kernel.event_listener, event: "sylius.taxon.pre_update", method: "uploadImages" }
+                - { name: kernel.event_listener, event: "sylius.shipping_method.pre_create", method: "uploadImages" }
+                - { name: kernel.event_listener, event: "sylius.shipping_method.pre_update", method: "uploadImages" }
 
 12. Render the images field in the form view
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
