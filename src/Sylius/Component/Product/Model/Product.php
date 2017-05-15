@@ -222,7 +222,7 @@ class Product implements ProductInterface
         );
 
         if (!$this->hasAttribute($attribute)) {
-            $attribute->setProduct($this);
+            $attribute->setSubject($this);
             $this->attributes->add($attribute);
         }
     }
@@ -240,7 +240,7 @@ class Product implements ProductInterface
 
         if ($this->hasAttribute($attribute)) {
             $this->attributes->removeElement($attribute);
-            $attribute->setProduct(null);
+            $attribute->setSubject(null);
         }
     }
 
