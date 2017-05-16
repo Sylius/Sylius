@@ -25,6 +25,34 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
     /**
      * {@inheritdoc}
      */
+    public function findAllChildren($parentCode, $locale = null)
+    {
+        // Get the root node first
+        /** @var \Sylius\Component\Taxonomy\Model\TaxonInterface $rootNode */
+        $rootNode = $this->createQueryBuilder('o')
+            ->where('o.code = :code')
+            ->setParameter('code', $parentCode)
+            ->getQuery()
+            ->getSingleResult();
+
+        return $this->createTranslationBasedQueryBuilder($locale)
+            ->addSelect('child')
+            ->innerJoin('o.parent', 'parent')
+            ->leftJoin('o.children', 'child')
+            ->andWhere('o.left > :treeLeft')
+            ->andWhere('o.right < :treeRight')
+            ->addOrderBy('o.level', 'ASC')
+            ->addOrderBy('o.position', 'ASC')
+            ->setParameter('treeLeft', $rootNode->getLeft())
+            ->setParameter('treeRight', $rootNode->getRight())
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function findChildren($parentCode, $locale = null)
     {
         return $this->createTranslationBasedQueryBuilder($locale)
