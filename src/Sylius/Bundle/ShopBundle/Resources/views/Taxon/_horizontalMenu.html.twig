@@ -21,7 +21,7 @@
 {% if taxons|length > 0 %}
 <div class="ui large stackable menu">
     {% for taxon in taxons %}
-        {% if taxon.level == 1 %}
+        {% if taxon.parent.code == app.request.get('code') %}
             {{ macros.item(taxon) }}
         {% endif %}
     {% endfor %}
