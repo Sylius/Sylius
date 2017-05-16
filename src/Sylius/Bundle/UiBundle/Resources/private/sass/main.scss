@@ -110,6 +110,9 @@ th {
   right: 0;
   left: auto;
 }
+div.coupon.field {
+  width: 75% !important;
+}
 
 .ui.table tr[class*="grand total"] {
   font-size: 2em;
@@ -119,6 +122,10 @@ th {
 }
 
 @media only screen and (max-width: 1200px) {
+  div.coupon.field {
+    width: 100% !important;
+  }
+
   .ui.table [class*="single line"], .ui.table[class*="single line"] {
     white-space: normal;
   }
