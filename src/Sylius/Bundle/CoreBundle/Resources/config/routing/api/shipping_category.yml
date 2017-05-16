@@ -1,0 +1,34 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_api_shipping_category_index:
+    pattern: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.shipping_category:indexAction
+        _format: xml
+        _sylius:
+            sortable: true
+            sorting:
+                name: desc
+
+sylius_api_shipping_category_create:
+    pattern: /
+    methods: [POST]
+    defaults:
+        _controller: sylius.controller.shipping_category:createAction
+        _format: xml
+
+sylius_api_shipping_category_update:
+    pattern: /{id}
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.shipping_category:updateAction
+        _format: xml
+
+sylius_api_shipping_category_delete:
+    pattern: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.shipping_category:deleteAction
+        _format: xml

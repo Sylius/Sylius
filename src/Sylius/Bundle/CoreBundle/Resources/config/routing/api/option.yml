@@ -1,0 +1,30 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_api_option_index:
+    pattern: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.option:indexAction
+        _format: xml
+
+sylius_api_option_create:
+    pattern: /
+    methods: [POST]
+    defaults:
+        _controller: sylius.controller.option:createAction
+        _format: xml
+
+sylius_api_option_update:
+    pattern: /{id}
+    methods: [GET, PUT]
+    defaults:
+        _controller: sylius.controller.option:updateAction
+        _format: xml
+
+sylius_api_option_delete:
+    pattern: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.option:deleteAction
+        _format: xml

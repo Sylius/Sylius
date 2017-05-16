@@ -1,0 +1,23 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+#
+sylius_api_taxon_create:
+    pattern: /
+    methods: [POST]
+    defaults:
+        _controller: sylius.controller.taxon:createAction
+        _format: xml
+
+sylius_api_taxon_update:
+    pattern: /{id}
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.taxon:updateAction
+        _format: xml
+
+sylius_api_taxon_delete:
+    pattern: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.taxon:deleteAction
+        _format: xml

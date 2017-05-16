@@ -1,0 +1,42 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_api_product_index:
+    pattern: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product:indexAction
+        _format: xml
+        _sylius:
+            method: createFilterPaginator
+            arguments: [$criteria, $sorting]
+        criteria: {}
+        sorting: { createdAt: desc }
+
+sylius_api_product_create:
+    pattern: /
+    methods: [POST]
+    defaults:
+        _format: xml
+        _controller: sylius.controller.product:createAction
+
+sylius_api_product_update:
+    pattern: /{id}
+    methods: [PUT]
+    defaults:
+        _format: xml
+        _controller: sylius.controller.product:updateAction
+
+sylius_api_product_delete:
+    pattern: /{id}
+    methods: [DELETE]
+    defaults:
+        _format: xml
+        _controller: sylius.controller.product:deleteAction
+
+sylius_api_product_show:
+    pattern: /{id}
+    methods: [GET]
+    defaults:
+        _format: xml
+        _controller: sylius.controller.product:showAction
