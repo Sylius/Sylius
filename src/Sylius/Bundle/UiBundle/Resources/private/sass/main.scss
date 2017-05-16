@@ -110,3 +110,22 @@ th {
   right: 0;
   left: auto;
 }
+
+.ui.table tr[class*="grand total"] {
+  font-size: 2em;
+}
+.ui.table td[class*="grand total"] {
+  font-size: 1.5em;
+}
+
+@media only screen and (max-width: 1200px) {
+  .ui.table [class*="single line"], .ui.table[class*="single line"] {
+    white-space: normal;
+  }
+}
+@media only screen and (min-width: 767px) and (max-width: 1200px) {
+  .ui.table tr[class*="grand total"], .ui.table td[class*="grand total"] {
+    font-size: 1em;
+    font-weight: bold;
+  }
+}
