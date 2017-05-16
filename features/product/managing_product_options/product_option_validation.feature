@@ -38,23 +38,3 @@ Feature: Product option validation
         And I try to save my changes
         Then I should be notified that name is required
         And this product option should still be named "T-Shirt color"
-
-    @ui
-    Scenario: Trying to add a new product option without any option values
-        Given I want to create a new product option
-        When I name it "T-Shirt size" in "English (United States)"
-        And I specify its code as "t_shirt_size"
-        But I do not add an option value
-        And I try to add it
-        Then I should be notified that at least two option values are required
-        And the product option with name "T-Shirt size" should not be added
-
-    @ui @javascript
-    Scenario: Trying to add a new product option with one option value
-        Given I want to create a new product option
-        When I name it "T-Shirt size" in "English (United States)"
-        And I specify its code as "t_shirt_size"
-        And I add the "S" option value identified by "OV1"
-        And I try to add it
-        Then I should be notified that at least two option values are required
-        And the product option with name "T-Shirt size" should not be added

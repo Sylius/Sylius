@@ -31,11 +31,6 @@
         </property>
         <property name="values">
             <constraint name="Valid" />
-            <constraint name="Count">
-                <option name="min">2</option>
-                <option name="minMessage">sylius.option.values.min_count</option>
-                <option name="groups">sylius</option>
-            </constraint>
         </property>
         <property name="translations">
             <constraint name="Valid" />
