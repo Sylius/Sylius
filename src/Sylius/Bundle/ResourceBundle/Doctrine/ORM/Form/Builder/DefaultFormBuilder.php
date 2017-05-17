@@ -69,7 +69,7 @@ class DefaultFormBuilder implements DefaultFormBuilderInterface
 
         foreach ($classMetadata->getAssociationMappings() as $fieldName => $associationMapping) {
             if (ClassMetadataInfo::ONE_TO_MANY !== $associationMapping['type']) {
-                $formBuilder->add($fieldName, null, ['property' => 'id']);
+                $formBuilder->add($fieldName, null, ['choice_label' => 'id']);
             }
         }
     }
