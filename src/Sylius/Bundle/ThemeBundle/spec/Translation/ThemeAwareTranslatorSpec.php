@@ -21,7 +21,7 @@ use Symfony\Component\Translation\TranslatorBagInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class ThemeAwareTranslatorSpec extends ObjectBehavior
 {

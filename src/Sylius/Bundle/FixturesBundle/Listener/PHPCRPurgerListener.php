@@ -17,7 +17,7 @@ use Doctrine\ODM\PHPCR\DocumentManagerInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class PHPCRPurgerListener extends AbstractListener implements BeforeSuiteListenerInterface
 {

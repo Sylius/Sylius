@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 interface ExampleFactoryInterface
 {

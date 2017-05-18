@@ -17,7 +17,7 @@ use Doctrine\ODM\MongoDB\DocumentManager;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class MongoDBPurgerListener extends AbstractListener implements BeforeSuiteListenerInterface
 {

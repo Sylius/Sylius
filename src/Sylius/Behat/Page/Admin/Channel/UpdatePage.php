@@ -16,7 +16,7 @@ use Sylius\Behat\Behaviour\Toggles;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class UpdatePage extends BaseUpdatePage implements UpdatePageInterface

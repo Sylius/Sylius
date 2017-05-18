@@ -21,7 +21,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class LocaleSwitchController
 {

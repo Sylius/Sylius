@@ -18,7 +18,7 @@ use Sylius\Bundle\ThemeBundle\Configuration\Filesystem\FilesystemConfigurationPr
 use Sylius\Bundle\ThemeBundle\Locator\FileLocatorInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class FilesystemConfigurationProviderSpec extends ObjectBehavior
 {

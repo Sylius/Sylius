@@ -12,7 +12,7 @@
 namespace Sylius\Behat\Page;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class UnexpectedPageException extends \Exception
 {

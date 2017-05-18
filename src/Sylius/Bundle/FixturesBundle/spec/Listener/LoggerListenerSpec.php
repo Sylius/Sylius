@@ -15,7 +15,7 @@ use Sylius\Bundle\FixturesBundle\Listener\SuiteEvent;
 use Sylius\Bundle\FixturesBundle\Suite\SuiteInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class LoggerListenerSpec extends ObjectBehavior
 {

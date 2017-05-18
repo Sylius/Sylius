@@ -18,7 +18,7 @@ use Sylius\Behat\Behaviour\Toggles;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 class CreatePage extends BaseCreatePage implements CreatePageInterface
 {

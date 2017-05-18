@@ -14,7 +14,7 @@ namespace Sylius\Behat\Page\Admin\Channel;
 use Sylius\Behat\Page\Admin\Crud\IndexPage as BaseIndexPage;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 class IndexPage extends BaseIndexPage implements IndexPageInterface
 {

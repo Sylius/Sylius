@@ -14,7 +14,7 @@ namespace Sylius\Bundle\ThemeBundle\HierarchyProvider;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class ThemeHierarchyProvider implements ThemeHierarchyProviderInterface
 {

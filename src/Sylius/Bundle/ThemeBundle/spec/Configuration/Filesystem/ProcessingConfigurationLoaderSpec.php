@@ -17,7 +17,7 @@ use Sylius\Bundle\ThemeBundle\Configuration\Filesystem\ConfigurationLoaderInterf
 use Sylius\Bundle\ThemeBundle\Configuration\Filesystem\ProcessingConfigurationLoader;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class ProcessingConfigurationLoaderSpec extends ObjectBehavior
 {

@@ -17,7 +17,7 @@ use Sylius\Bundle\ThemeBundle\Configuration\Filesystem\JsonFileConfigurationLoad
 use Sylius\Bundle\ThemeBundle\Filesystem\FilesystemInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class JsonFileConfigurationLoaderSpec extends ObjectBehavior
 {

@@ -15,7 +15,7 @@ use Sylius\Bundle\ThemeBundle\Loader\ThemeLoaderInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class InMemoryThemeRepository implements ThemeRepositoryInterface
 {

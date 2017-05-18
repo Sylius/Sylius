@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\ThemeBundle\Model;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 class Theme implements ThemeInterface
 {

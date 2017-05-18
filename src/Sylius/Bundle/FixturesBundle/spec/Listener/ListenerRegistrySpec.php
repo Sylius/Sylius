@@ -19,7 +19,7 @@ use Sylius\Bundle\FixturesBundle\Listener\ListenerRegistry;
 use Sylius\Bundle\FixturesBundle\Listener\ListenerRegistryInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class ListenerRegistrySpec extends ObjectBehavior
 {

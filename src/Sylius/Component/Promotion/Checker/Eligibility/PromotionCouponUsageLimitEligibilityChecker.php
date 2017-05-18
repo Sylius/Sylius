@@ -15,7 +15,7 @@ use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class PromotionCouponUsageLimitEligibilityChecker implements PromotionCouponEligibilityCheckerInterface
 {

@@ -17,7 +17,7 @@ use Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class SettableThemeContextSpec extends ObjectBehavior
 {

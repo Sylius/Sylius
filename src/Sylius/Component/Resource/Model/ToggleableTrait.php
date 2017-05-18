@@ -12,7 +12,7 @@
 namespace Sylius\Component\Resource\Model;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 trait ToggleableTrait
 {

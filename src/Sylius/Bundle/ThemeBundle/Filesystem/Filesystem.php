@@ -14,7 +14,7 @@ namespace Sylius\Bundle\ThemeBundle\Filesystem;
 use Symfony\Component\Filesystem\Filesystem as BaseFilesystem;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class Filesystem extends BaseFilesystem implements FilesystemInterface
 {

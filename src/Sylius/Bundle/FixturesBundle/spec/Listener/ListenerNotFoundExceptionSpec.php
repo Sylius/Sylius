@@ -16,7 +16,7 @@ use Prophecy\Argument;
 use Sylius\Bundle\FixturesBundle\Listener\ListenerNotFoundException;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class ListenerNotFoundExceptionSpec extends ObjectBehavior
 {

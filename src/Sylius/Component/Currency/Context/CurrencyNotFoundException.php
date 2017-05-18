@@ -12,7 +12,7 @@
 namespace Sylius\Component\Currency\Context;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class CurrencyNotFoundException extends \RuntimeException
 {

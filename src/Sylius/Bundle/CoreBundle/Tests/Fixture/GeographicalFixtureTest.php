@@ -19,7 +19,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\Intl\Intl;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class GeographicalFixtureTest extends \PHPUnit_Framework_TestCase
 {

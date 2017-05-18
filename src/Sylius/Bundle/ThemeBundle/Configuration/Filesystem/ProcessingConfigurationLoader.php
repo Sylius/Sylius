@@ -14,7 +14,7 @@ namespace Sylius\Bundle\ThemeBundle\Configuration\Filesystem;
 use Sylius\Bundle\ThemeBundle\Configuration\ConfigurationProcessorInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class ProcessingConfigurationLoader implements ConfigurationLoaderInterface
 {

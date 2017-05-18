@@ -16,7 +16,7 @@ use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
 use Sylius\Bundle\FixturesBundle\Listener\PHPCRPurgerListener;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class PHPCRPurgerListenerTest extends \PHPUnit_Framework_TestCase
 {

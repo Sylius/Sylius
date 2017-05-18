@@ -18,7 +18,7 @@ use Sylius\Component\Currency\Context\CurrencyNotFoundException;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class ChannelAwareCurrencyContext implements CurrencyContextInterface
 {

@@ -18,7 +18,7 @@ use Symfony\Component\Asset\PathPackage as BasePathPackage;
 use Symfony\Component\Asset\VersionStrategy\VersionStrategyInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 class PathPackage extends BasePathPackage
 {

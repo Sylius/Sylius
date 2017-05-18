@@ -16,7 +16,7 @@ use Doctrine\ORM\Mapping;
 use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductOptionRepository as BaseProductOptionRepository;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 class ProductOptionRepository extends BaseProductOptionRepository
 {

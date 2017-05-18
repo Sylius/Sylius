@@ -17,7 +17,7 @@ use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Bundle\CoreBundle\Fixture\TaxCategoryFixture;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class TaxCategoryFixtureTest extends \PHPUnit_Framework_TestCase
 {

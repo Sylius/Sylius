@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\ThemeBundle\Context;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class EmptyThemeContext implements ThemeContextInterface
 {

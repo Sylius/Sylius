@@ -14,7 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Fixture;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 class TaxCategoryFixture extends AbstractResourceFixture
 {

@@ -14,7 +14,7 @@ namespace Sylius\Bundle\ProductBundle\Form\Type;
 use Sylius\Bundle\AttributeBundle\Form\Type\AttributeChoiceType;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class ProductAttributeChoiceType extends AttributeChoiceType
 {

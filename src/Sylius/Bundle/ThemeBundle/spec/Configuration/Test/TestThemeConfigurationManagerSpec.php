@@ -19,7 +19,7 @@ use Sylius\Bundle\ThemeBundle\Configuration\Test\TestThemeConfigurationManager;
 use Sylius\Bundle\ThemeBundle\Configuration\Test\TestThemeConfigurationManagerInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class TestThemeConfigurationManagerSpec extends ObjectBehavior
 {

@@ -16,7 +16,7 @@ use Sylius\Component\Resource\Translation\Provider\ImmutableTranslationLocalePro
 use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class ImmutableTranslationLocaleProviderSpec extends ObjectBehavior
 {

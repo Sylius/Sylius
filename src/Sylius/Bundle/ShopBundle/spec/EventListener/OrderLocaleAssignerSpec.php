@@ -17,7 +17,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class OrderLocaleAssignerSpec extends ObjectBehavior
 {

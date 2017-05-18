@@ -17,7 +17,7 @@ use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Webmozart\Assert\Assert;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class LocaleContext implements Context
 {

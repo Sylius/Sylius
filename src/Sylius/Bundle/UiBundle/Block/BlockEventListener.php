@@ -15,7 +15,7 @@ use Sonata\BlockBundle\Event\BlockEvent;
 use Sonata\BlockBundle\Model\Block;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class BlockEventListener
 {

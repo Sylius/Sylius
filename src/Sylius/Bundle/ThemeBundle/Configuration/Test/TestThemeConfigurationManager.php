@@ -15,7 +15,7 @@ use Sylius\Bundle\ThemeBundle\Configuration\ConfigurationProcessorInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class TestThemeConfigurationManager implements TestThemeConfigurationManagerInterface
 {

@@ -18,7 +18,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\ReversedTransformer;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class CustomerGroupCodeChoiceType extends AbstractType
 {

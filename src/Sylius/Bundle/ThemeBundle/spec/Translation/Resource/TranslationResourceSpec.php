@@ -16,7 +16,7 @@ use Sylius\Bundle\ThemeBundle\Translation\Resource\TranslationResource;
 use Sylius\Bundle\ThemeBundle\Translation\Resource\TranslationResourceInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class TranslationResourceSpec extends ObjectBehavior
 {
