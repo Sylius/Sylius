@@ -30,8 +30,8 @@ class Version20170313125424 extends AbstractMigration
         $this->addSql('CREATE INDEX IDX_2AA4915D19EB6921 ON sylius_admin_api_access_token (client_id)');
         $this->addSql('DROP INDEX idx_7d83aa7fa76ed395 ON sylius_admin_api_access_token');
         $this->addSql('CREATE INDEX IDX_2AA4915DA76ED395 ON sylius_admin_api_access_token (user_id)');
-        $this->addSql('ALTER TABLE sylius_admin_api_access_token ADD CONSTRAINT FK_7D83AA7F19EB6921 FOREIGN KEY (client_id) REFERENCES sylius_admin_api_client (id)');
-        $this->addSql('ALTER TABLE sylius_admin_api_access_token ADD CONSTRAINT FK_7D83AA7FA76ED395 FOREIGN KEY (user_id) REFERENCES sylius_admin_user (id)');
+        $this->addSql('ALTER TABLE sylius_admin_api_access_token ADD CONSTRAINT FK_2AA4915D19EB6921 FOREIGN KEY (client_id) REFERENCES sylius_admin_api_client (id)');
+        $this->addSql('ALTER TABLE sylius_admin_api_access_token ADD CONSTRAINT FK_2AA4915DA76ED395 FOREIGN KEY (user_id) REFERENCES sylius_admin_user (id)');
         $this->addSql('ALTER TABLE sylius_admin_api_auth_code DROP FOREIGN KEY FK_C840417919EB6921');
         $this->addSql('ALTER TABLE sylius_admin_api_auth_code DROP FOREIGN KEY FK_C8404179A76ED395');
         $this->addSql('DROP INDEX uniq_c84041795f37a13b ON sylius_admin_api_auth_code');
@@ -40,8 +40,8 @@ class Version20170313125424 extends AbstractMigration
         $this->addSql('CREATE INDEX IDX_E366D84819EB6921 ON sylius_admin_api_auth_code (client_id)');
         $this->addSql('DROP INDEX idx_c8404179a76ed395 ON sylius_admin_api_auth_code');
         $this->addSql('CREATE INDEX IDX_E366D848A76ED395 ON sylius_admin_api_auth_code (user_id)');
-        $this->addSql('ALTER TABLE sylius_admin_api_auth_code ADD CONSTRAINT FK_C840417919EB6921 FOREIGN KEY (client_id) REFERENCES sylius_admin_api_client (id)');
-        $this->addSql('ALTER TABLE sylius_admin_api_auth_code ADD CONSTRAINT FK_C8404179A76ED395 FOREIGN KEY (user_id) REFERENCES sylius_admin_user (id)');
+        $this->addSql('ALTER TABLE sylius_admin_api_auth_code ADD CONSTRAINT FK_E366D84819EB6921 FOREIGN KEY (client_id) REFERENCES sylius_admin_api_client (id)');
+        $this->addSql('ALTER TABLE sylius_admin_api_auth_code ADD CONSTRAINT FK_E366D848A76ED395 FOREIGN KEY (user_id) REFERENCES sylius_admin_user (id)');
         $this->addSql('ALTER TABLE sylius_admin_api_refresh_token DROP FOREIGN KEY FK_4457852519EB6921');
         $this->addSql('ALTER TABLE sylius_admin_api_refresh_token DROP FOREIGN KEY FK_44578525A76ED395');
         $this->addSql('DROP INDEX uniq_445785255f37a13b ON sylius_admin_api_refresh_token');
@@ -50,8 +50,8 @@ class Version20170313125424 extends AbstractMigration
         $this->addSql('CREATE INDEX IDX_9160E3FA19EB6921 ON sylius_admin_api_refresh_token (client_id)');
         $this->addSql('DROP INDEX idx_44578525a76ed395 ON sylius_admin_api_refresh_token');
         $this->addSql('CREATE INDEX IDX_9160E3FAA76ED395 ON sylius_admin_api_refresh_token (user_id)');
-        $this->addSql('ALTER TABLE sylius_admin_api_refresh_token ADD CONSTRAINT FK_4457852519EB6921 FOREIGN KEY (client_id) REFERENCES sylius_admin_api_client (id)');
-        $this->addSql('ALTER TABLE sylius_admin_api_refresh_token ADD CONSTRAINT FK_44578525A76ED395 FOREIGN KEY (user_id) REFERENCES sylius_admin_user (id)');
+        $this->addSql('ALTER TABLE sylius_admin_api_refresh_token ADD CONSTRAINT FK_9160E3FA19EB6921 FOREIGN KEY (client_id) REFERENCES sylius_admin_api_client (id)');
+        $this->addSql('ALTER TABLE sylius_admin_api_refresh_token ADD CONSTRAINT FK_9160E3FAA76ED395 FOREIGN KEY (user_id) REFERENCES sylius_admin_user (id)');
     }
 
     /**
@@ -70,8 +70,8 @@ class Version20170313125424 extends AbstractMigration
         $this->addSql('CREATE INDEX IDX_7D83AA7F19EB6921 ON sylius_admin_api_access_token (client_id)');
         $this->addSql('DROP INDEX idx_2aa4915da76ed395 ON sylius_admin_api_access_token');
         $this->addSql('CREATE INDEX IDX_7D83AA7FA76ED395 ON sylius_admin_api_access_token (user_id)');
-        $this->addSql('ALTER TABLE sylius_admin_api_access_token ADD CONSTRAINT FK_2AA4915D19EB6921 FOREIGN KEY (client_id) REFERENCES sylius_admin_api_client (id)');
-        $this->addSql('ALTER TABLE sylius_admin_api_access_token ADD CONSTRAINT FK_2AA4915DA76ED395 FOREIGN KEY (user_id) REFERENCES sylius_admin_user (id)');
+        $this->addSql('ALTER TABLE sylius_admin_api_access_token ADD CONSTRAINT FK_7D83AA7F19EB6921 FOREIGN KEY (client_id) REFERENCES sylius_admin_api_client (id)');
+        $this->addSql('ALTER TABLE sylius_admin_api_access_token ADD CONSTRAINT FK_7D83AA7FA76ED395 FOREIGN KEY (user_id) REFERENCES sylius_admin_user (id)');
         $this->addSql('ALTER TABLE sylius_admin_api_auth_code DROP FOREIGN KEY FK_E366D84819EB6921');
         $this->addSql('ALTER TABLE sylius_admin_api_auth_code DROP FOREIGN KEY FK_E366D848A76ED395');
         $this->addSql('DROP INDEX uniq_e366d8485f37a13b ON sylius_admin_api_auth_code');
@@ -80,8 +80,8 @@ class Version20170313125424 extends AbstractMigration
         $this->addSql('CREATE INDEX IDX_C840417919EB6921 ON sylius_admin_api_auth_code (client_id)');
         $this->addSql('DROP INDEX idx_e366d848a76ed395 ON sylius_admin_api_auth_code');
         $this->addSql('CREATE INDEX IDX_C8404179A76ED395 ON sylius_admin_api_auth_code (user_id)');
-        $this->addSql('ALTER TABLE sylius_admin_api_auth_code ADD CONSTRAINT FK_E366D84819EB6921 FOREIGN KEY (client_id) REFERENCES sylius_admin_api_client (id)');
-        $this->addSql('ALTER TABLE sylius_admin_api_auth_code ADD CONSTRAINT FK_E366D848A76ED395 FOREIGN KEY (user_id) REFERENCES sylius_admin_user (id)');
+        $this->addSql('ALTER TABLE sylius_admin_api_auth_code ADD CONSTRAINT FK_C840417919EB6921 FOREIGN KEY (client_id) REFERENCES sylius_admin_api_client (id)');
+        $this->addSql('ALTER TABLE sylius_admin_api_auth_code ADD CONSTRAINT FK_C8404179A76ED395 FOREIGN KEY (user_id) REFERENCES sylius_admin_user (id)');
         $this->addSql('ALTER TABLE sylius_admin_api_refresh_token DROP FOREIGN KEY FK_9160E3FA19EB6921');
         $this->addSql('ALTER TABLE sylius_admin_api_refresh_token DROP FOREIGN KEY FK_9160E3FAA76ED395');
         $this->addSql('DROP INDEX uniq_9160e3fa5f37a13b ON sylius_admin_api_refresh_token');
@@ -90,8 +90,8 @@ class Version20170313125424 extends AbstractMigration
         $this->addSql('CREATE INDEX IDX_4457852519EB6921 ON sylius_admin_api_refresh_token (client_id)');
         $this->addSql('DROP INDEX idx_9160e3faa76ed395 ON sylius_admin_api_refresh_token');
         $this->addSql('CREATE INDEX IDX_44578525A76ED395 ON sylius_admin_api_refresh_token (user_id)');
-        $this->addSql('ALTER TABLE sylius_admin_api_refresh_token ADD CONSTRAINT FK_9160E3FA19EB6921 FOREIGN KEY (client_id) REFERENCES sylius_admin_api_client (id)');
-        $this->addSql('ALTER TABLE sylius_admin_api_refresh_token ADD CONSTRAINT FK_9160E3FAA76ED395 FOREIGN KEY (user_id) REFERENCES sylius_admin_user (id)');
+        $this->addSql('ALTER TABLE sylius_admin_api_refresh_token ADD CONSTRAINT FK_4457852519EB6921 FOREIGN KEY (client_id) REFERENCES sylius_admin_api_client (id)');
+        $this->addSql('ALTER TABLE sylius_admin_api_refresh_token ADD CONSTRAINT FK_44578525A76ED395 FOREIGN KEY (user_id) REFERENCES sylius_admin_user (id)');
         $this->addSql('ALTER TABLE sylius_admin_api_access_token RENAME sylius_api_access_token');
         $this->addSql('ALTER TABLE sylius_admin_api_auth_code RENAME sylius_api_auth_code');
         $this->addSql('ALTER TABLE sylius_admin_api_client RENAME sylius_api_client');
