@@ -7,7 +7,7 @@ In this cookbook we will present how to **add image to the Shipping Method entit
 Instructions:
 -------------
 
-1. Extend the ShippingMethod class with the ImageAwareInterface
+1. Extend the ShippingMethod class with the ImagesAwareInterface
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 In order to override the ``ShippingMethod`` that lives inside of the SyliusCoreBundle,
@@ -21,11 +21,11 @@ you have to create your own ShippingMethod class that will extend it:
 
     use Doctrine\Common\Collections\ArrayCollection;
     use Doctrine\Common\Collections\Collection;
-    use Sylius\Component\Core\Model\ImageAwareInterface;
+    use Sylius\Component\Core\Model\ImagesAwareInterface;
     use Sylius\Component\Core\Model\ImageInterface;
     use Sylius\Component\Core\Model\ShippingMethod as BaseShippingMethod;
 
-    class ShippingMethod extends BaseShippingMethod implements ImageAwareInterface
+    class ShippingMethod extends BaseShippingMethod implements ImagesAwareInterface
     {
         /**
          * @var Collection|ImageInterface[]
