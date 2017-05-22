@@ -255,7 +255,7 @@ set the ``allow_add`` option to ``true``.
 
     namespace AppBundle\Form\Extension;
 
-    use AppBundle\Form\Type\ShippingMethod\ShippingMethodImageType;
+    use AppBundle\Form\Type\ShippingMethodImageType;
     use Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType;
     use Symfony\Component\Form\AbstractTypeExtension;
     use Symfony\Component\Form\Extension\Core\Type\CollectionType;
