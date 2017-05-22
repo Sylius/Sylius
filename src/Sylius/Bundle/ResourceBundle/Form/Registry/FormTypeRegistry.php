@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\ResourceBundle\Form\Registry;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class FormTypeRegistry implements FormTypeRegistryInterface
 {

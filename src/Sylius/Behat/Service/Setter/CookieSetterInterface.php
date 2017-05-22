@@ -12,7 +12,7 @@
 namespace Sylius\Behat\Service\Setter;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 interface CookieSetterInterface
 {

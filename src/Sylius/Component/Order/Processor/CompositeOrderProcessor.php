@@ -15,7 +15,7 @@ use Sylius\Component\Order\Model\OrderInterface;
 use Zend\Stdlib\PriorityQueue;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class CompositeOrderProcessor implements OrderProcessorInterface
 {

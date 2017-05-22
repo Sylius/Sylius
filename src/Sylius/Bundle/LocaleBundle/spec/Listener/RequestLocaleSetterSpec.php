@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class RequestLocaleSetterSpec extends ObjectBehavior
 {

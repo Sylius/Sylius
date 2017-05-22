@@ -17,7 +17,7 @@ use Sylius\Bundle\ResourceBundle\Validator\EnabledValidator;
 use Symfony\Component\Validator\Constraint;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class EnabledSpec extends ObjectBehavior
 {

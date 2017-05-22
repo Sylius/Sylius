@@ -34,7 +34,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Webmozart\Assert\Assert;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 class ProductExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {

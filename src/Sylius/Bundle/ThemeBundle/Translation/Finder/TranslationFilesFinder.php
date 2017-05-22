@@ -14,7 +14,7 @@ namespace Sylius\Bundle\ThemeBundle\Translation\Finder;
 use Sylius\Bundle\ThemeBundle\Factory\FinderFactoryInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class TranslationFilesFinder implements TranslationFilesFinderInterface
 {

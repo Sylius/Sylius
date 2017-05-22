@@ -33,7 +33,7 @@ use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Webmozart\Assert\Assert;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  * @author Gorka Laucirica <gorka.lauzirika@gmail.com>

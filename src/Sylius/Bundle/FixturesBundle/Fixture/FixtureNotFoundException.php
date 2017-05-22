@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\FixturesBundle\Fixture;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class FixtureNotFoundException extends \InvalidArgumentException
 {

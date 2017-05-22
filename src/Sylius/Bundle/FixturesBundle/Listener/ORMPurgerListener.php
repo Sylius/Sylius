@@ -17,7 +17,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class ORMPurgerListener extends AbstractListener implements BeforeSuiteListenerInterface
 {
@@ -71,7 +71,7 @@ final class ORMPurgerListener extends AbstractListener implements BeforeSuiteLis
     protected function configureOptionsNode(ArrayNodeDefinition $optionsNode)
     {
         $optionsNodeBuilder = $optionsNode->children();
-        
+
         $optionsNodeBuilder
             ->enumNode('mode')
                 ->values(['delete', 'truncate'])

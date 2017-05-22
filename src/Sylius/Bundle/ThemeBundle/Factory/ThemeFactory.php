@@ -14,7 +14,7 @@ namespace Sylius\Bundle\ThemeBundle\Factory;
 use Sylius\Bundle\ThemeBundle\Model\Theme;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class ThemeFactory implements ThemeFactoryInterface
 {

@@ -18,7 +18,7 @@ use Symfony\Component\Translation\MessageSelector;
 use Symfony\Component\Translation\Translator as BaseTranslator;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class Translator extends BaseTranslator implements WarmableInterface
 {

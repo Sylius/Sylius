@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\ThemeBundle\Translation\Provider\Loader;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 interface TranslatorLoaderProviderInterface
 {

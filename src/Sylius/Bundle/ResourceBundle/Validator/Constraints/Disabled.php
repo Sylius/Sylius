@@ -15,7 +15,7 @@ use Sylius\Bundle\ResourceBundle\Validator\DisabledValidator;
 use Symfony\Component\Validator\Constraint;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class Disabled extends Constraint
 {

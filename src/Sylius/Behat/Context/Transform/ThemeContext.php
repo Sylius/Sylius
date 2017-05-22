@@ -15,7 +15,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class ThemeContext implements Context
 {

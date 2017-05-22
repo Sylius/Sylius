@@ -9,7 +9,7 @@ use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Sylius\Component\Resource\Storage\StorageInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class LocaleStorageSpec extends ObjectBehavior
 {

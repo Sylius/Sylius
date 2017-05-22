@@ -14,7 +14,7 @@ namespace Sylius\Component\Channel\Context;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class SingleChannelContext implements ChannelContextInterface
 {

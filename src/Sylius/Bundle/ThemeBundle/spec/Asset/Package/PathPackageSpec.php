@@ -20,7 +20,7 @@ use Symfony\Component\Asset\PackageInterface;
 use Symfony\Component\Asset\VersionStrategy\VersionStrategyInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class PathPackageSpec extends ObjectBehavior
 {

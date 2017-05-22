@@ -15,7 +15,7 @@ use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
 use Sylius\Bundle\ThemeBundle\Configuration\ThemeConfiguration;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class ThemeConfigurationTest extends \PHPUnit_Framework_TestCase
 {

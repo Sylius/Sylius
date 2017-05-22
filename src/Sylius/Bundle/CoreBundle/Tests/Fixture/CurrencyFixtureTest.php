@@ -17,7 +17,7 @@ use Sylius\Bundle\CoreBundle\Fixture\CurrencyFixture;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class CurrencyFixtureTest extends \PHPUnit_Framework_TestCase
 {

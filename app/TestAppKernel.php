@@ -15,7 +15,7 @@ use PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 class TestAppKernel extends AppKernel
 {

@@ -16,7 +16,7 @@ use Doctrine\ORM\Mapping;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 class AttributeRepository extends EntityRepository
 {

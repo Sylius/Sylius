@@ -20,7 +20,7 @@ use Behat\Mink\Selector\SelectorsHandler;
 use Behat\Mink\Session;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 abstract class Page implements PageInterface
 {

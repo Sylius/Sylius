@@ -18,7 +18,7 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeScreenshot;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class ThemeSpec extends ObjectBehavior
 {

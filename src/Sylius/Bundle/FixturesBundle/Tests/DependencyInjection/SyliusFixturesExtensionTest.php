@@ -15,7 +15,7 @@ use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Sylius\Bundle\FixturesBundle\DependencyInjection\SyliusFixturesExtension;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class SyliusFixturesExtensionTest extends AbstractExtensionTestCase
 {

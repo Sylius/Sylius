@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\ThemeBundle\Configuration;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 interface ConfigurationProviderInterface
 {

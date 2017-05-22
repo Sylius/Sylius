@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\ThemeBundle\Loader;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class ThemeLoadingFailedException extends \DomainException
 {

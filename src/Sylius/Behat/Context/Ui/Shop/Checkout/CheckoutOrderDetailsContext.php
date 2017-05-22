@@ -8,7 +8,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Webmozart\Assert\Assert;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class CheckoutOrderDetailsContext implements Context
 {

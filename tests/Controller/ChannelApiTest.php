@@ -16,7 +16,7 @@ use Sylius\Component\Channel\Model\ChannelInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class ChannelApiTest extends JsonApiTestCase
 {

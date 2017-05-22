@@ -16,7 +16,7 @@ use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
 use Sylius\Bundle\FixturesBundle\Listener\ORMPurgerListener;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class ORMPurgerListenerTest extends \PHPUnit_Framework_TestCase
 {

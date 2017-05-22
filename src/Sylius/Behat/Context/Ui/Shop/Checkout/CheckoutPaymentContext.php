@@ -8,7 +8,7 @@ use Sylius\Behat\Page\Shop\Checkout\SelectPaymentPageInterface;
 use Webmozart\Assert\Assert;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class CheckoutPaymentContext implements Context
 {

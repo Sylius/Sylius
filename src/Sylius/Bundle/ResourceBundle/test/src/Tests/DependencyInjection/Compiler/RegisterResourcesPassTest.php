@@ -19,7 +19,7 @@ use Symfony\Component\DependencyInjection\Definition;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 class RegisterResourcesPassTest extends AbstractCompilerPassTestCase
 {

@@ -16,7 +16,7 @@ use Sylius\Bundle\FixturesBundle\Listener\ListenerInterface;
 use Zend\Stdlib\SplPriorityQueue;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class Suite implements SuiteInterface
 {

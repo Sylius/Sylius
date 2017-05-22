@@ -17,7 +17,7 @@ use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Bundle\CoreBundle\Fixture\ProductFixture;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class ProductFixtureTest extends \PHPUnit_Framework_TestCase
 {

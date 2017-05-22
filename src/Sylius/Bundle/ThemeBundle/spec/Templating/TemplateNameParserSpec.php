@@ -10,7 +10,7 @@ use Symfony\Component\Templating\TemplateNameParserInterface;
 use Symfony\Component\Templating\TemplateReferenceInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class TemplateNameParserSpec extends ObjectBehavior
 {

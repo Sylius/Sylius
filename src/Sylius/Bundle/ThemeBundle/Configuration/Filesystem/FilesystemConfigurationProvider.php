@@ -15,7 +15,7 @@ use Sylius\Bundle\ThemeBundle\Configuration\ConfigurationProviderInterface;
 use Sylius\Bundle\ThemeBundle\Locator\FileLocatorInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class FilesystemConfigurationProvider implements ConfigurationProviderInterface
 {
