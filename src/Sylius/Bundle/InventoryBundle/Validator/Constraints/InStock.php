@@ -21,7 +21,7 @@ final class InStock extends Constraint
     /**
      * @var string
      */
-    public $message = '%stockable% does not have sufficient stock.';
+    public $message = 'sylius.cart_item.not_available';
 
     /**
      * @var string
