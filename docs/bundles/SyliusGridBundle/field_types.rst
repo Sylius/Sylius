@@ -8,7 +8,7 @@ String
 
 Simplest column type, which basically renders the value at given path as a string.
 
-By default is uses the name of the field, but your can specify the path alternatively. For example:
+By default it uses the name of the field, but you can specify the path alternatively. For example:
 
 .. code-block:: yaml
 
