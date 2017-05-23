@@ -8,7 +8,7 @@ Instructions:
 -------------
 
 1. Extend the ShippingMethod class with the ImagesAwareInterface
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 In order to override the ``ShippingMethod`` that lives inside of the SyliusCoreBundle,
 you have to create your own ShippingMethod class that will extend it:
