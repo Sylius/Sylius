@@ -67,9 +67,9 @@ final class ProductVariantGeneratorSpec extends ObjectBehavior
 
         $colorOption->getValues()->willReturn([$blackColor, $whiteColor, $redColor]);
 
-        $blackColor->getId()->willReturn('black1');
-        $whiteColor->getId()->willReturn('white2');
-        $redColor->getId()->willReturn('red3');
+        $blackColor->getCode()->willReturn('black1');
+        $whiteColor->getCode()->willReturn('white2');
+        $redColor->getCode()->willReturn('red3');
 
         $variantsParityChecker->checkParity($permutationVariant, $productVariable)->willReturn(false);
 
@@ -97,9 +97,9 @@ final class ProductVariantGeneratorSpec extends ObjectBehavior
 
         $colorOption->getValues()->willReturn([$blackColor, $whiteColor, $redColor]);
 
-        $blackColor->getId()->willReturn('black1');
-        $whiteColor->getId()->willReturn('white2');
-        $redColor->getId()->willReturn('red3');
+        $blackColor->getCode()->willReturn('black1');
+        $whiteColor->getCode()->willReturn('white2');
+        $redColor->getCode()->willReturn('red3');
 
         $variantsParityChecker->checkParity($permutationVariant, $productVariable)->willReturn(true);
 
@@ -132,12 +132,12 @@ final class ProductVariantGeneratorSpec extends ObjectBehavior
         $colorOption->getValues()->willReturn([$blackColor, $whiteColor, $redColor]);
         $sizeOption->getValues()->willReturn([$smallSize, $mediumSize, $largeSize]);
 
-        $blackColor->getId()->willReturn('black1');
-        $whiteColor->getId()->willReturn('white2');
-        $redColor->getId()->willReturn('red3');
-        $smallSize->getId()->willReturn('small4');
-        $mediumSize->getId()->willReturn('medium5');
-        $largeSize->getId()->willReturn('large6');
+        $blackColor->getCode()->willReturn('black1');
+        $whiteColor->getCode()->willReturn('white2');
+        $redColor->getCode()->willReturn('red3');
+        $smallSize->getCode()->willReturn('small4');
+        $mediumSize->getCode()->willReturn('medium5');
+        $largeSize->getCode()->willReturn('large6');
 
         $variantsParityChecker->checkParity($permutationVariant, $productVariable)->willReturn(false);
 
