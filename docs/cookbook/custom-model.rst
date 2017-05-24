@@ -129,7 +129,7 @@ To have templates for your Entity administration out of the box you can use Grid
                         type: string
                         label: sylius.ui.name
                     description:
-                        type: text
+                        type: string
                         label: sylius.ui.description
                     enabled:
                         type: twig
