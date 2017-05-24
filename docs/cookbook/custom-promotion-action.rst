@@ -118,7 +118,7 @@ In the ``app/config/services.yml`` configure:
         class: AppBundle\Promotion\Action\CheapestProductDiscountPromotionActionCommand
         arguments: ['@sylius.proportional_integer_distributor', '@sylius.promotion.units_promotion_adjustments_applicator']
         tags:
-            - { name: sylius.promotion_action, type: cheapest_product_discount, form-type: AppBundle\Form\Type\Action\CheapestProductDiscountConfigurationType, label: Cheapest product discount }
+            - { name: sylius.promotion_action, type: cheapest_product_discount, form_type: AppBundle\Form\Type\Action\CheapestProductDiscountConfigurationType, label: Cheapest product discount }
 
 
 Register the form type as a service

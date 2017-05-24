@@ -1,5 +1,11 @@
 # UPGRADE FROM 1.0.0-beta.2 to 1.0.0
 
+* The following tag attributes were renamed in order to keep consistency:
+
+  * from `form-type` to `form_type`.
+  * from `attribute-type` to `attribute_type`.
+  * from `configuration-form-type` to `configuration_form_type`.
+
 ## Packages:
 
 ### PayumBundle
