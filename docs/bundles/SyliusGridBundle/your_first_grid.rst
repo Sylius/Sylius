@@ -54,7 +54,7 @@ Now we can configure our first grid:
                         type: twig
                         label: sylius.ui.enabled
                         options:
-                            template: SyliusAdminBundle:Grid/Field:enabled.html.twig # This will be a checkbox field
+                            template: SyliusUiBundle:Grid/Field:enabled.html.twig # This will be a checkbox field
 
 Remember to import your grid in the ``app/config/grids/grids.yml`` file which has to be imported in the ``app/config/config.yml``.
 
