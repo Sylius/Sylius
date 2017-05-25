@@ -96,7 +96,7 @@ Now you can use your new filter type in the grid configuration!
                 filters:
                     stats:
                         type: suppliers_statistics
-                        options:
+                        form_options:
                             range: [0, 100]
         templates:
             filter:
