@@ -43,5 +43,11 @@
                 <cascade-all/>
             </cascade>
         </one-to-many>
+        <many-to-many
+            field="images"
+            target-entity="Sylius\Component\Core\Model\ProductImageInterface"
+            mapped-by="productVariants"
+        >
+        </many-to-many>
     </mapped-superclass>
 </doctrine-mapping>
