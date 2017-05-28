@@ -48,6 +48,9 @@
             target-entity="Sylius\Component\Core\Model\ProductImageInterface"
             mapped-by="productVariants"
         >
+            <cascade>
+                <cascade-all/>
+            </cascade>
         </many-to-many>
     </mapped-superclass>
 </doctrine-mapping>
