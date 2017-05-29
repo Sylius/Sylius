@@ -32,7 +32,7 @@
         }
     ],
     "require": {
-        "php": "^5.6|^7.0",
+        "php": "^7.1",
 
         "doctrine/orm": "^2.5",
         "sylius/customer": "^1.0",
