@@ -95,4 +95,22 @@ final class ServiceRegistrySpec extends ObjectBehavior
             ->duringGet('foo')
         ;
     }
+
+    function it_allows_registration_via_ArrayAccess()
+    {
+        $theFooService = new \stdClass();
+
+        $this['foo'] = $theFooService;
+        $this['foo']->shouldBe($theFooService);
+    }
+
+    function it_allows_unregistration_via_ArrayAccess()
+    {
+        $aService = new \stdClass();
+
+        $this['foo'] = $aService;
+        unset($this['foo']);
+
+        $this->offsetExists('foo')->shouldBe(false);
+    }
 }

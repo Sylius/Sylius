@@ -15,8 +15,9 @@ namespace Sylius\Component\Registry;
  * Cannot be final, because it is proxied
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Adam Elsodaney <adam.elso@gmail.com>
  */
-class ServiceRegistry implements ServiceRegistryInterface
+class ServiceRegistry implements ServiceRegistryInterface, \ArrayAccess, \Countable
 {
     /**
      * @var array
@@ -60,7 +61,7 @@ class ServiceRegistry implements ServiceRegistryInterface
      */
     public function register($identifier, $service)
     {
-        if ($this->has($identifier)) {
+        if ($this->offsetExists($identifier)) {
             throw new ExistingServiceException($this->context, $identifier);
         }
 
@@ -74,7 +75,7 @@ class ServiceRegistry implements ServiceRegistryInterface
             );
         }
 
-        $this->services[$identifier] = $service;
+        $this->offsetSet($identifier, $service);
     }
 
     /**
@@ -82,11 +83,11 @@ class ServiceRegistry implements ServiceRegistryInterface
      */
     public function unregister($identifier)
     {
-        if (!$this->has($identifier)) {
+        if (!$this->offsetExists($identifier)) {
             throw new NonExistingServiceException($this->context, $identifier, array_keys($this->services));
         }
 
-        unset($this->services[$identifier]);
+        $this->offsetUnset($identifier);
     }
 
     /**
@@ -94,7 +95,7 @@ class ServiceRegistry implements ServiceRegistryInterface
      */
     public function has($identifier)
     {
-        return isset($this->services[$identifier]);
+        return $this->offsetExists($identifier);
     }
 
     /**
@@ -102,10 +103,50 @@ class ServiceRegistry implements ServiceRegistryInterface
      */
     public function get($identifier)
     {
-        if (!$this->has($identifier)) {
+        if (! $this->offsetExists($identifier)) {
             throw new NonExistingServiceException($this->context, $identifier, array_keys($this->services));
         }
 
+        return $this->offsetGet($identifier);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function offsetExists($identifier)
+    {
+        return isset($this->services[$identifier]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function offsetGet($identifier)
+    {
         return $this->services[$identifier];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function offsetSet($identifier, $service)
+    {
+        $this->services[$identifier] = $service;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function offsetUnset($identifier)
+    {
+        unset($this->services[$identifier]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function count()
+    {
+        return count($this->services);
     }
 }
