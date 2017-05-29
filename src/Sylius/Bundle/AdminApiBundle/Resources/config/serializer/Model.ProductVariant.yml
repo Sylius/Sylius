@@ -44,3 +44,19 @@ Sylius\Component\Core\Model\ProductVariant:
             expose: true
             type: array
             groups: [Default, Detailed, DetailedCart]
+    relations:
+        -   rel: self
+            href:
+                route: sylius_admin_api_product_variant_show
+                parameters:
+                    code: expr(object.getCode())
+                    productCode: expr(object.getProduct().getCode())
+                    version: 1
+        -   rel: product
+            href:
+                route: sylius_admin_api_product_show
+                parameters:
+                    code: expr(object.getProduct().getCode())
+                    version: 1
+            exclusion:
+                groups: [Detailed]
