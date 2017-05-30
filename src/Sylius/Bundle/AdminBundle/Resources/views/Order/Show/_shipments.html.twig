@@ -1,11 +1,15 @@
-{% import '@SyliusUi/Macro/labels.html.twig' as label %}
+{% if order.hasShipments %}
 
-<div class="ui segment">
-    {% include '@SyliusAdmin/Order/Label/ShippingState/' ~ order.shippingState ~ '.html.twig' with { 'value': 'sylius.ui.' ~ order.shippingState, 'attached': true } %}
-    <h3 class="ui dividing header" id="shipping-state">{{ 'sylius.ui.shipments'|trans }}</h3>
-    <div class="ui relaxed divided list" id="sylius-shipments">
-        {% for shipment in order.shipments %}
-            {% include '@SyliusAdmin/Order/Show/_shipment.html.twig' %}
-        {% endfor %}
+    {% import '@SyliusUi/Macro/labels.html.twig' as label %}
+
+    <div class="ui segment">
+        {% include '@SyliusAdmin/Order/Label/ShippingState/' ~ order.shippingState ~ '.html.twig' with { 'value': 'sylius.ui.' ~ order.shippingState, 'attached': true } %}
+        <h3 class="ui dividing header" id="shipping-state">{{ 'sylius.ui.shipments'|trans }}</h3>
+        <div class="ui relaxed divided list" id="sylius-shipments">
+            {% for shipment in order.shipments %}
+                {% include '@SyliusAdmin/Order/Show/_shipment.html.twig' %}
+            {% endfor %}
+        </div>
     </div>
-</div>
+
+{% endif %}
