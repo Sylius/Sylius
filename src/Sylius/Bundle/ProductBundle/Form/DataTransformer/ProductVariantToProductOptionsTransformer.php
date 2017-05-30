@@ -19,6 +19,8 @@ use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
 /**
+ * @internal
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class ProductVariantToProductOptionsTransformer implements DataTransformerInterface

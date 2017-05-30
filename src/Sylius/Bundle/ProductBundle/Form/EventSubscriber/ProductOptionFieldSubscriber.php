@@ -20,6 +20,8 @@ use Symfony\Component\Form\FormEvents;
 use Webmozart\Assert\Assert;
 
 /**
+ * @internal
+ *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 final class ProductOptionFieldSubscriber implements EventSubscriberInterface

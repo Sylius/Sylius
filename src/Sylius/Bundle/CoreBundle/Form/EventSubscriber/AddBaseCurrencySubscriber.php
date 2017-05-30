@@ -19,6 +19,8 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
 /**
+ * @internal
+ *
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
 final class AddBaseCurrencySubscriber implements EventSubscriberInterface

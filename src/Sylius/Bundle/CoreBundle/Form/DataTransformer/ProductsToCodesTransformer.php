@@ -19,6 +19,8 @@ use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Symfony\Component\Form\DataTransformerInterface;
 
 /**
+ * @internal
+ *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 final class ProductsToCodesTransformer implements DataTransformerInterface

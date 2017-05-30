@@ -23,6 +23,8 @@ use Symfony\Component\Form\FormEvents;
 use Webmozart\Assert\Assert;
 
 /**
+ * @internal
+ *
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 final class BuildAttributesFormSubscriber implements EventSubscriberInterface

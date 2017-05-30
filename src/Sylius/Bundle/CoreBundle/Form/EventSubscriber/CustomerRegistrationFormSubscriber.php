@@ -19,6 +19,8 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
 /**
+ * @internal
+ *
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
 final class CustomerRegistrationFormSubscriber implements EventSubscriberInterface

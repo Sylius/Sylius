@@ -16,6 +16,8 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
 /**
+ * @internal
+ *
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 final class ChannelFormSubscriber implements EventSubscriberInterface
