@@ -10,7 +10,6 @@ Sylius\Component\Core\Model\ShippingMethod:
                     version: 1
                 exclusion:
                     groups: [Detailed]
-    relations:
         -   rel: self
             href:
                 route: sylius_admin_api_shipping_method_show

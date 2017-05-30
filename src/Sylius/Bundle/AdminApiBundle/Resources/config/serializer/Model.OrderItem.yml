@@ -6,6 +6,14 @@ Sylius\Component\Core\Model\OrderItem:
             expose: true
             groups: [Default, Detailed, DetailedCart]
     relations:
+        - rel: order
+          exclusion:
+            groups: [Default, Detailed, DetailedCart]
+          href:
+                route: sylius_admin_api_order_show
+                parameters:
+                    id: expr(object.getOrder().getId())
+                    version: 1
         - rel: product
           exclusion:
             exclude_if: expr(!object.getVariant())

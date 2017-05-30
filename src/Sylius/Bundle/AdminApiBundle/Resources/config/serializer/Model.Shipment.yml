@@ -10,7 +10,6 @@ Sylius\Component\Core\Model\Shipment:
                 parameters:
                     id: expr(object.getOrder().getId())
                     version: 1
-    relations:
         - rel: self
           exclusion:
                 exclude_if: expr(!object.getId())
