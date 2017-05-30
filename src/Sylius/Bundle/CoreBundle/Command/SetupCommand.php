@@ -106,7 +106,7 @@ EOT
         $userRepository = $this->get('sylius.repository.admin_user');
 
         if ($input->getOption('no-interaction')) {
-            Assert::notNull($userRepository->findOneByEmail('sylius@example.com'));
+            Assert::null($userRepository->findOneByEmail('sylius@example.com'));
 
             $user->setEmail('sylius@example.com');
             $user->setPlainPassword('sylius');
