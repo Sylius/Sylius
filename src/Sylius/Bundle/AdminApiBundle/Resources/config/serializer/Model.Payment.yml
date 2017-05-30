@@ -10,3 +10,19 @@ Sylius\Component\Core\Model\Payment:
                 parameters:
                     id: expr(object.getOrder().getId())
                     version: 1
+        - rel: self
+          exclusion:
+                exclude_if: expr(!object.getId())
+          href:
+                route: sylius_admin_api_payment_show
+                parameters:
+                    id: expr(object.getId())
+                    version: 1
+        - rel: payment-method
+          exclusion:
+                exclude_if: expr(!object.getMethod())
+          href:
+                route: sylius_admin_api_payment_method_show
+                parameters:
+                    code: expr(object.getMethod().getCode())
+                    version: 1

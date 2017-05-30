@@ -5,3 +5,10 @@ Sylius\Component\Core\Model\PaymentMethod:
         channels:
             expose: true
             groups: [Detailed]
+    relations:
+        -   rel: self
+            href:
+                route: sylius_admin_api_payment_method_show
+                parameters:
+                    code: expr(object.getCode())
+                    version: 1

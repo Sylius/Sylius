@@ -6,3 +6,10 @@ Sylius\Component\Core\Model\Taxon:
             expose: true
             type: array
             groups: [Default, Detailed]
+    relations:
+        -   rel: self
+            href:
+                route: sylius_admin_api_taxon_show
+                parameters:
+                    code: expr(object.getCode())
+                    version: 1
