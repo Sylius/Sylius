@@ -289,10 +289,9 @@ It needs to have the images field as a CollectionType.
 
     In case you need only a single image upload, this can be done in 2 very easy steps.
     
-    First, in the code for the form provided above set ``allow_add`` to ``false``. You may want to set ``allow_delete`` to ``false`` too because if user deletes the image, there is no way to add a new one until the form is saved and page is reloaded.
+    First, in the code for the form provided above set ``allow_add`` and ``allow_delete`` to ``false``
     
-    Second, in the ``ShippingMethod`` entity you defined earlier in the ``__construct`` method add the following:  
-    
+    Second, in the ``__construct`` method of the ``ShippingMethod`` entity you defined earlier add the following:
     
     .. code-block:: php
     
