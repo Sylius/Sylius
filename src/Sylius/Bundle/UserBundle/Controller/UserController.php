@@ -239,7 +239,7 @@ class UserController extends ResourceController
         $formType = $this->getSyliusAttribute($request, 'form', UserRequestPasswordResetType::class);
         $form = $this->createResourceForm($configuration, $formType, $passwordReset);
         $template = $this->getSyliusAttribute($request, 'template', null);
-        if (!$configuration->isHtmlRequest()) {
+        if ($configuration->isHtmlRequest()) {
             Assert::notNull($template, 'Template is not configured.');
         }
 
