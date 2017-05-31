@@ -165,7 +165,6 @@
     },
     "autoload": {
         "psr-4": {
-            "Sylius\\Behat\\": "src/Sylius/Behat/",
             "Sylius\\Bundle\\": "src/Sylius/Bundle/",
             "Sylius\\Component\\": "src/Sylius/Component/"
         },
@@ -175,6 +174,7 @@
     },
     "autoload-dev": {
         "psr-4": {
+            "Sylius\\Behat\\": "src/Sylius/Behat/",
             "Sylius\\Tests\\": "tests/"
         },
         "classmap": ["app/AppKernel.php", "app/AppCache.php"]
