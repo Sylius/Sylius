@@ -401,4 +401,22 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     {
         $this->shippingRequired = $shippingRequired;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getImages()
+    {
+        $images = [];
+
+        foreach ($this->product->getImages() as $image) {
+            foreach ($image->getProductVariants() as $productVariant) {
+                if ($this === $productVariant){
+                    $images[] = $image;
+                }
+            }
+        }
+
+        return $images;
+    }
 }

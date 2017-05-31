@@ -15,6 +15,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
+use Sylius\Component\Core\Model\ProductImageInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariant;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Product\Model\ProductVariant as BaseProductVariant;
@@ -239,5 +241,22 @@ final class ProductVariantSpec extends ObjectBehavior
     {
         $this->setShippingRequired(false);
         $this->isShippingRequired()->shouldReturn(false);
+    }
+
+    function it_returns_variant_images(
+        ProductImageInterface $firstVariantImage,
+        ProductImageInterface $secondVariantImage,
+        ProductImageInterface $differentImage,
+        ProductInterface $product
+    ) {
+        $product->getImages()->willReturn([$firstVariantImage, $secondVariantImage, $differentImage]);
+
+        $firstVariantImage->getProductVariants()->willReturn([$this]);
+        $secondVariantImage->getProductVariants()->willReturn([$this]);
+        $differentImage->getProductVariants()->willReturn([]);
+
+        $this->setProduct($product);
+
+        $this->getImages()->shouldReturn([$firstVariantImage, $secondVariantImage]);
     }
 }
