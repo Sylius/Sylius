@@ -269,13 +269,15 @@ final class ProductVariantSpec extends ObjectBehavior
         $this->hasImage($image)->shouldReturn(false);
     }
 
-    function it_returns_images_by_type(ProductImageInterface $image,Product $product)
+    function it_returns_images_by_type(ProductImageInterface $image, Product $product)
     {
-        $this->setProduct($product);
-        $this->addImage($image);
         $image->getType()->willReturn('thumbnail');
+
         $image->setOwner($this->getProduct())->shouldBeCalled();
         $image->addProductVariant($this)->shouldBeCalled();
+
+        $this->setProduct($product);
+        $this->addImage($image);
         $this->getImagesByType('thumbnail')->shouldBeLike(new ArrayCollection([$image->getWrappedObject()]));
     }
 }

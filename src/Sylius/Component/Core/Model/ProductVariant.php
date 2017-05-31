@@ -408,7 +408,6 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
         $this->shippingRequired = $shippingRequired;
     }
 
-
     /**
      * {@inheritdoc}
      */
@@ -462,5 +461,4 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
             $this->images->removeElement($image);
         }
     }
-
 }
