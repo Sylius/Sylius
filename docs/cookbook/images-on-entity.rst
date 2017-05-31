@@ -246,8 +246,7 @@ What is more the new form type needs to be configured as the resource form of th
 
 **Create the form extension class** for the ``Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType``:
 
-It needs to have the images field as a CollectionType. If you want to give the possibility to add more than one image to the entity
-set the ``allow_add`` option to ``true``.
+It needs to have the images field as a CollectionType.
 
 .. code-block:: php
 
@@ -270,7 +269,7 @@ set the ``allow_add`` option to ``true``.
         {
             $builder->add('images', CollectionType::class, [
                 'entry_type' => ShippingMethodImageType::class,
-                'allow_add' => false,
+                'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
                 'label' => 'sylius.form.shipping_method.images',
@@ -285,6 +284,23 @@ set the ``allow_add`` option to ``true``.
             return ShippingMethodType::class;
         }
     }
+
+.. tip::
+
+    In case you need only a single image upload, this can be done in 2 very easy steps.
+    
+    First, in the code for the form provided above set ``allow_add`` and ``allow_delete`` to ``false``
+    
+    Second, in the ``__construct`` method of the ``ShippingMethod`` entity you defined earlier add the following:
+    
+    .. code-block:: php
+    
+        public function __construct()
+        {
+            parent::__construct();
+            $this->images = new ArrayCollection();
+            $this->addImage(new ShippingMethodImage());
+        }
 
 Register the form extension as a service:
 
