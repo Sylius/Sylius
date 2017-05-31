@@ -48,6 +48,10 @@ final class TranslatorResourceProviderPass implements CompilerPassInterface
     private function extractResourcesFilesFromSymfonyTranslator(Definition $symfonyTranslator)
     {
         $options = $symfonyTranslator->getArgument(3);
+        // Symfony 3.3+ compatibility
+        if (!isset($options['resource_files'])) {
+            $options = $symfonyTranslator->getArgument(4);
+        }
         $languagesFiles = isset($options['resource_files']) ? $options['resource_files'] : [];
 
         $resourceFiles = [];
