@@ -6,6 +6,67 @@
 
 * Constructor of `CapturePaymentAction` now takes a `PaymentDescriptionProviderInterface` as first argument. This allows granular customisation of the payment description.
 
+### Core / CoreBundle
+
+* The following serialization configuration was moved from CoreBundle/Resources/config/app/config.yml to AdminApiBundle/Resources/config/app/config.yml
+
+  ```yaml
+      jms_serializer:
+         metadata:
+             directories:
+                 sylius-core:
+                     namespace_prefix: "Sylius\\Component\\Core"
+                     path: "@SyliusCoreBundle/Resources/config/serializer"
+  ```
+  to
+  ```yaml
+      jms_serializer:
+         metadata:
+             directories:
+                 sylius-core:
+                     namespace_prefix: "Sylius\\Component\\Core"
+                     path: "@SyliusAdminApiBundle/Resources/config/serializer"
+  ```
+* Relations in serializations files were moved from Sylius bundles to SyliusAdminApiBundle
+
+  Example of relation for SyliusOrderBundle/Resources/config/serializer/Model.OrderItem.yml
+  ```yaml
+      relations:
+        -   rel: order
+            href:
+                route: sylius_admin_api_order_show
+                parameters:
+                    id: expr(object.getOrder().getId())
+                    version: 1
+            exclusion:
+                groups: [Default, Detailed, DetailedCart]
+  ```
+
+* The following serialization configurations files were moved:
+
+  * from `SyliusCoreBundle/Resources/config/serializer/Model.AdminUser.yml` to `SyliusAdminApiBundle/Resources/config/serializer/Model.AdminUser.yml`
+  * from `SyliusCoreBundle/Resources/config/serializer/Model.Channel.yml` to `SyliusAdminApiBundle/Resources/config/serializer/Model.Channel.yml`
+  * from `SyliusCoreBundle/Resources/config/serializer/Model.ChannelPricing.yml` to `SyliusAdminApiBundle/Resources/config/serializer/Model.ChannelPricing.yml`
+  * from `SyliusCoreBundle/Resources/config/serializer/Model.Customer.yml` to `SyliusAdminApiBundle/Resources/config/serializer/Model.Customer.yml`
+  * from `SyliusCoreBundle/Resources/config/serializer/Model.Image.yml` to `SyliusAdminApiBundle/Resources/config/serializer/Model.Image.yml`
+  * from `SyliusCoreBundle/Resources/config/serializer/Model.Order.yml` to `SyliusAdminApiBundle/Resources/config/serializer/Model.Order.yml`
+  * from `SyliusCoreBundle/Resources/config/serializer/Model.OrderItem.yml` to `SyliusAdminApiBundle/Resources/config/serializer/Model.OrderItem.yml`
+  * from `SyliusCoreBundle/Resources/config/serializer/Model.OrderItemUnit.yml` to `SyliusAdminApiBundle/Resources/config/serializer/Model.OrderItemUnit.yml`
+  * from `SyliusCoreBundle/Resources/config/serializer/Model.Payment.yml` to `SyliusAdminApiBundle/Resources/config/serializer/Model.Payment.yml`
+  * from `SyliusCoreBundle/Resources/config/serializer/Model.PaymentMethod.yml` to `SyliusAdminApiBundle/Resources/config/serializer/Model.PaymentMethod.yml`
+  * from `SyliusCoreBundle/Resources/config/serializer/Model.Product.yml` to `SyliusAdminApiBundle/Resources/config/serializer/Model.Product.yml`
+  * from `SyliusCoreBundle/Resources/config/serializer/Model.ProductImage.yml` to `SyliusAdminApiBundle/Resources/config/serializer/Model.ProductImage.yml`
+  * from `SyliusCoreBundle/Resources/config/serializer/Model.ProductTaxon.yml` to `SyliusAdminApiBundle/Resources/config/serializer/Model.ProductTaxon.yml`
+  * from `SyliusCoreBundle/Resources/config/serializer/Model.ProductVariant.yml` to `SyliusAdminApiBundle/Resources/config/serializer/Model.ProductVariant.yml`
+  * from `SyliusCoreBundle/Resources/config/serializer/Model.Promotion.yml` to `SyliusAdminApiBundle/Resources/config/serializer/Model.Promotion.yml`
+  * from `SyliusCoreBundle/Resources/config/serializer/Model.PromotionCoupon.yml` to `SyliusAdminApiBundle/Resources/config/serializer/Model.PromotionCoupon.yml`
+  * from `SyliusCoreBundle/Resources/config/serializer/Model.Property.yml` to `SyliusAdminApiBundle/Resources/config/serializer/Model.Property.yml`
+  * from `SyliusCoreBundle/Resources/config/serializer/Model.Shipment.yml` to `SyliusAdminApiBundle/Resources/config/serializer/Model.Shipment.yml`
+  * from `SyliusCoreBundle/Resources/config/serializer/Model.ShippingMethod.yml` to `SyliusAdminApiBundle/Resources/config/serializer/Model.ShippingMethod.yml`
+  * from `SyliusCoreBundle/Resources/config/serializer/Model.ShopUser.yml` to `SyliusAdminApiBundle/Resources/config/serializer/Model.ShopUser.yml`
+  * from `SyliusCoreBundle/Resources/config/serializer/Model.TaxRate.yml` to `SyliusAdminApiBundle/Resources/config/serializer/Model.TaxRate.yml`
+  * from `SyliusCoreBundle/Resources/config/serializer/Model.Taxon.yml` to `SyliusAdminApiBundle/Resources/config/serializer/Model.Taxon.yml`
+
 # UPGRADE FROM 1.0.0-beta.1 to 1.0.0-beta.2
 
 * Bundles, container extensions and bundles configurations were made final and can't be extended anymore, follow Symfony
@@ -156,65 +217,6 @@
   * from `SyliusCoreBundle:Email:userRegistration.html.twig` to `SyliusShopBundle:Email:userRegistration.html.twig`
   * from `SyliusCoreBundle:Email:passwordReset.html.twig` to `SyliusShopBundle:Email:passwordReset.html.twig`
   * from `SyliusCoreBundle:Email:verification.html.twig` to `SyliusShopBundle:Email:verification.html.twig`
-
-* The following serialization configuration was moved from CoreBundle/Resources/config/app/config.yml to AdminApiBundle/Resources/config/app/config.yml
-
-  ```yaml
-      jms_serializer:
-         metadata:
-             directories:
-                 sylius-core:
-                     namespace_prefix: "Sylius\\Component\\Core"
-                     path: "@SyliusCoreBundle/Resources/config/serializer"
-  ```
-  to
-  ```yaml
-      jms_serializer:
-         metadata:
-             directories:
-                 sylius-core:
-                     namespace_prefix: "Sylius\\Component\\Core"
-                     path: "@SyliusAdminApiBundle/Resources/config/serializer"
-  ```
-* Relations in serializations files were moved from Sylius bundles to SyliusAdminApiBundle
-
-  Example of relation for SyliusOrderBundle/Resources/config/serializer/Model.OrderItem.yml
-  ```yaml
-      relations:
-        -   rel: order
-            href:
-                route: sylius_admin_api_order_show
-                parameters:
-                    id: expr(object.getOrder().getId())
-                    version: 1
-            exclusion:
-                groups: [Default, Detailed, DetailedCart]
-  ```
-
-* The following serialization configurations files were moved:
-
-  * from `SyliusCoreBundle/Resources/config/serializer/Model.AdminUser.yml` to `SyliusAdminApiBundle/Resources/config/serializer/Model.AdminUser.yml`
-  * from `SyliusCoreBundle/Resources/config/serializer/Model.Channel.yml` to `SyliusAdminApiBundle/Resources/config/serializer/Model.Channel.yml`
-  * from `SyliusCoreBundle/Resources/config/serializer/Model.ChannelPricing.yml` to `SyliusAdminApiBundle/Resources/config/serializer/Model.ChannelPricing.yml`
-  * from `SyliusCoreBundle/Resources/config/serializer/Model.Customer.yml` to `SyliusAdminApiBundle/Resources/config/serializer/Model.Customer.yml`
-  * from `SyliusCoreBundle/Resources/config/serializer/Model.Image.yml` to `SyliusAdminApiBundle/Resources/config/serializer/Model.Image.yml`
-  * from `SyliusCoreBundle/Resources/config/serializer/Model.Order.yml` to `SyliusAdminApiBundle/Resources/config/serializer/Model.Order.yml`
-  * from `SyliusCoreBundle/Resources/config/serializer/Model.OrderItem.yml` to `SyliusAdminApiBundle/Resources/config/serializer/Model.OrderItem.yml`
-  * from `SyliusCoreBundle/Resources/config/serializer/Model.OrderItemUnit.yml` to `SyliusAdminApiBundle/Resources/config/serializer/Model.OrderItemUnit.yml`
-  * from `SyliusCoreBundle/Resources/config/serializer/Model.Payment.yml` to `SyliusAdminApiBundle/Resources/config/serializer/Model.Payment.yml`
-  * from `SyliusCoreBundle/Resources/config/serializer/Model.PaymentMethod.yml` to `SyliusAdminApiBundle/Resources/config/serializer/Model.PaymentMethod.yml`
-  * from `SyliusCoreBundle/Resources/config/serializer/Model.Product.yml` to `SyliusAdminApiBundle/Resources/config/serializer/Model.Product.yml`
-  * from `SyliusCoreBundle/Resources/config/serializer/Model.ProductImage.yml` to `SyliusAdminApiBundle/Resources/config/serializer/Model.ProductImage.yml`
-  * from `SyliusCoreBundle/Resources/config/serializer/Model.ProductTaxon.yml` to `SyliusAdminApiBundle/Resources/config/serializer/Model.ProductTaxon.yml`
-  * from `SyliusCoreBundle/Resources/config/serializer/Model.ProductVariant.yml` to `SyliusAdminApiBundle/Resources/config/serializer/Model.ProductVariant.yml`
-  * from `SyliusCoreBundle/Resources/config/serializer/Model.Promotion.yml` to `SyliusAdminApiBundle/Resources/config/serializer/Model.Promotion.yml`
-  * from `SyliusCoreBundle/Resources/config/serializer/Model.PromotionCoupon.yml` to `SyliusAdminApiBundle/Resources/config/serializer/Model.PromotionCoupon.yml`
-  * from `SyliusCoreBundle/Resources/config/serializer/Model.Property.yml` to `SyliusAdminApiBundle/Resources/config/serializer/Model.Property.yml`
-  * from `SyliusCoreBundle/Resources/config/serializer/Model.Shipment.yml` to `SyliusAdminApiBundle/Resources/config/serializer/Model.Shipment.yml`
-  * from `SyliusCoreBundle/Resources/config/serializer/Model.ShippingMethod.yml` to `SyliusAdminApiBundle/Resources/config/serializer/Model.ShippingMethod.yml`
-  * from `SyliusCoreBundle/Resources/config/serializer/Model.ShopUser.yml` to `SyliusAdminApiBundle/Resources/config/serializer/Model.ShopUser.yml`
-  * from `SyliusCoreBundle/Resources/config/serializer/Model.TaxRate.yml` to `SyliusAdminApiBundle/Resources/config/serializer/Model.TaxRate.yml`
-  * from `SyliusCoreBundle/Resources/config/serializer/Model.Taxon.yml` to `SyliusAdminApiBundle/Resources/config/serializer/Model.Taxon.yml`
 
 * Removed class `Sylius\Bundle\CoreBundle\Form\Type\ProductTaxonChoiceType`, use `Sylius\Bundle\CoreBundle\Form\Type\Taxon\ProductTaxonAutocompleteChoiceType` instead.
 
