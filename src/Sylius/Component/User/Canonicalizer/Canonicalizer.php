@@ -18,6 +18,10 @@ final class Canonicalizer implements CanonicalizerInterface
 {
     public function canonicalize($string)
     {
+        if (!extension_loaded('mbstring')) {
+            return strtolower($string);
+        }
+
         return null === $string ? null : mb_convert_case($string, MB_CASE_LOWER, mb_detect_encoding($string));
     }
 }
