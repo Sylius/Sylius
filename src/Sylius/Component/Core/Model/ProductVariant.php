@@ -447,6 +447,9 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
      */
     public function addImage(ProductImageInterface $image)
     {
+        if ($this->hasImage($image)) {
+            return;
+        }
         $image->setOwner($this->getProduct());
         $image->addProductVariant($this);
         $this->images->add($image);
