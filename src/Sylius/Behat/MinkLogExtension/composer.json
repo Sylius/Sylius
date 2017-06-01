@@ -1,0 +1,50 @@
+{
+    "name": "sylius/behat-log-extension",
+    "type": "behat-extension",
+    "description": "Log extension for Behat",
+    "keywords": ["web", "test", "log", "browser", "gui", "mink"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name":     "Kamil Kokot",
+            "homepage": "http://kamil.kokot.me"
+        },
+        {
+            "name":     "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name":     "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php":                  ">=5.5.9",
+        "behat/behat":          "^3.0.5,>=3.0.5",
+        "behat/mink-extension": "^2.0.1",
+        "symfony/config":       "~2.2"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "~2.3"
+    },
+    "suggests": {
+        "behat/mink-browserkit-driver": "To get request debug information included in log file",
+        "behat/mink-selenium2-driver": "To get screenshots"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": { "Sylius\\Behat\\MinkLogExtension\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Behat\\MinkLogExtension\\spec\\": "spec/" }
+    },
+    "minimum-stability": "dev",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.16-dev"
+        }
+    }
+}
