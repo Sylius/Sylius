@@ -42,7 +42,7 @@
             <gedmo:timestampable on="update"/>
         </field>
 
-        <one-to-many field="oauthAccounts" target-entity="Sylius\Component\User\Model\UserOAuthInterface" mapped-by="user">
+        <one-to-many field="oauthAccounts" target-entity="Sylius\Component\User\Model\UserOAuthInterface" mapped-by="user" orphan-removal="true">
             <cascade>
                 <cascade-all />
             </cascade>
