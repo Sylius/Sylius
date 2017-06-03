@@ -273,7 +273,7 @@ final class ProductVariantSpec extends ObjectBehavior
     {
         $image->getType()->willReturn('thumbnail');
 
-        $image->setOwner($this->getProduct())->shouldBeCalled();
+        $image->setOwner($product)->shouldBeCalled();
         $image->addProductVariant($this)->shouldBeCalled();
 
         $this->setProduct($product);
