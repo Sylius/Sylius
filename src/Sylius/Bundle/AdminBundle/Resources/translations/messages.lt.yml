@@ -31,7 +31,7 @@ sylius:
                 customers:
                     customers: Klientai
                     groups: Grupės
-                    header: Klienta
+                    header: Klientai
                 sales:
                     header: Pardavimai
                     orders: Užsakymai
