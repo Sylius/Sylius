@@ -1,0 +1,16 @@
+Sylius\Component\Core\Model\Customer:
+    exclusion_policy: ALL
+    xml_root_name: sylius_customer
+    properties:
+        user:
+            expose: true
+            groups: [Default, Detailed, DetailedCart]
+    relations:
+        - rel: self
+          href:
+            route: sylius_admin_api_customer_show
+            parameters:
+                id: expr(object.getId())
+                version: 1
+          exclusion:
+            groups: [Default, Detailed, DetailedCart]

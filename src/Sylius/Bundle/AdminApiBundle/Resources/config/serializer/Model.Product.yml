@@ -28,3 +28,18 @@ Sylius\Component\Core\Model\Product:
         mainTaxon:
             expose: true
             groups: [Detailed]
+    relations:
+        -   rel: self
+            href:
+                route: sylius_admin_api_product_show
+                parameters:
+                    code: expr(object.getCode())
+                    version: 1
+        -   rel: variants
+            href:
+                route: sylius_admin_api_product_variant_index
+                parameters:
+                    productCode: expr(object.getCode())
+                    version: 1
+            exclusion:
+                groups: [Detailed]

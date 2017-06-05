@@ -10,3 +10,9 @@ Sylius\Component\Core\Model\ShippingMethod:
                     version: 1
                 exclusion:
                     groups: [Detailed]
+        -   rel: self
+            href:
+                route: sylius_admin_api_shipping_method_show
+                parameters:
+                    code: expr(object.getCode())
+                    version: 1

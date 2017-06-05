@@ -50,10 +50,3 @@ Sylius\Component\Taxonomy\Model\Taxon:
         hasChildren:
             serialized_name: hasChildren
             groups: [Autocomplete]
-    relations:
-        -   rel: self
-            href:
-                route: sylius_admin_api_taxon_show
-                parameters:
-                    code: expr(object.getCode())
-                    version: 1

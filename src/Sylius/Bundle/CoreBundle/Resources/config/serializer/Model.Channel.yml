@@ -1,8 +1,0 @@
-Sylius\Component\Core\Model\Channel:
-    exclusion_policy: ALL
-    xml_root_name: channel
-    properties:
-        taxCalculationStrategy:
-            expose: true
-            type: string
-            groups: [Detailed]
