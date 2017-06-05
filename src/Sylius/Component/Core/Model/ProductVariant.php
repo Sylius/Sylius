@@ -83,11 +83,17 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
      */
     protected $shippingRequired = true;
 
+    /**
+     * @var Collection|ProductImageInterface[]
+     */
+    protected $images;
+
     public function __construct()
     {
         parent::__construct();
 
         $this->channelPricings = new ArrayCollection();
+        $this->images = new ArrayCollection();
     }
 
     /**
@@ -400,5 +406,62 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     public function setShippingRequired($shippingRequired)
     {
         $this->shippingRequired = $shippingRequired;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getImages()
+    {
+        return $this->images;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getImagesByType($type)
+    {
+        return $this->images->filter(function (ProductImageInterface $image) use ($type) {
+            return $type === $image->getType();
+        });
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasImages()
+    {
+        return !$this->images->isEmpty();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasImage(ProductImageInterface $image)
+    {
+        return $this->images->contains($image);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addImage(ProductImageInterface $image)
+    {
+        if ($this->hasImage($image)) {
+            return;
+        }
+        $image->setOwner($this->getProduct());
+        $image->addProductVariant($this);
+        $this->images->add($image);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeImage(ProductImageInterface $image)
+    {
+        if ($this->hasImage($image)) {
+            $this->images->removeElement($image);
+        }
     }
 }

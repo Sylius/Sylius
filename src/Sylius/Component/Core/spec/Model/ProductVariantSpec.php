@@ -12,7 +12,11 @@
 namespace spec\Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Core\Model\Product;
+use Sylius\Component\Core\Model\ProductImagesAwareInterface;
+use Sylius\Component\Core\Model\ProductImageInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductVariant;
@@ -57,6 +61,11 @@ final class ProductVariantSpec extends ObjectBehavior
     function it_implements_versioned_interface()
     {
         $this->shouldImplement(VersionedInterface::class);
+    }
+
+    function it_implements_a_product_image_aware_interface()
+    {
+        $this->shouldImplement(ProductImagesAwareInterface::class);
     }
 
     function it_has_version_1_by_default()
@@ -239,5 +248,36 @@ final class ProductVariantSpec extends ObjectBehavior
     {
         $this->setShippingRequired(false);
         $this->isShippingRequired()->shouldReturn(false);
+    }
+
+    function it_initializes_image_collection_by_default()
+    {
+        $this->getImages()->shouldHaveType(Collection::class);
+    }
+
+    function it_adds_an_image(ProductImageInterface $image)
+    {
+        $this->addImage($image);
+        $this->hasImages()->shouldReturn(true);
+        $this->hasImage($image)->shouldReturn(true);
+    }
+
+    function it_removes_an_image(ProductImageInterface $image)
+    {
+        $this->addImage($image);
+        $this->removeImage($image);
+        $this->hasImage($image)->shouldReturn(false);
+    }
+
+    function it_returns_images_by_type(ProductImageInterface $image, Product $product)
+    {
+        $image->getType()->willReturn('thumbnail');
+
+        $image->setOwner($product)->shouldBeCalled();
+        $image->addProductVariant($this)->shouldBeCalled();
+
+        $this->setProduct($product);
+        $this->addImage($image);
+        $this->getImagesByType('thumbnail')->shouldBeLike(new ArrayCollection([$image->getWrappedObject()]));
     }
 }

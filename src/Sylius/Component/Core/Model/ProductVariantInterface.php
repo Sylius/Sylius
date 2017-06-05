@@ -28,7 +28,8 @@ interface ProductVariantInterface extends
     ShippableInterface,
     StockableInterface,
     TaxableInterface,
-    VersionedInterface
+    VersionedInterface,
+    ProductImagesAwareInterface
 {
     /**
      * @return float
