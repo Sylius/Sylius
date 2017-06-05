@@ -30,7 +30,13 @@
         <div id="content">
             {% include '@SyliusUi/_flashes.html.twig' %}
 
+            {% block pre_content %}
+            {% endblock %}
+
             {% block content %}
+            {% endblock %}
+
+            {% block post_content %}
             {% endblock %}
         </div>
     </div>
