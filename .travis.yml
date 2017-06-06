@@ -13,6 +13,12 @@ matrix:
             env:
                 - SYLIUS_SUITE="application"
                 - TRAVIS_NODE_VERSION="7.5"
+            addons:
+                apt:
+                    sources:
+                        - google-chrome
+                    packages:
+                        - google-chrome-stable
             services:
                 - memcached
         -
@@ -29,6 +35,12 @@ matrix:
             env:
                 - SYLIUS_SUITE="application"
                 - TRAVIS_NODE_VERSION="7.5"
+            addons:
+                apt:
+                    sources:
+                        - google-chrome
+                    packages:
+                        - google-chrome-stable
             services:
                 - memcached
 
