@@ -1,0 +1,8 @@
+sylius:
+    channel:
+        code:
+            not_blank: Mohon masukan kode saluran.
+            regex: Kode saluran hanya berisi numbers, dashes and underscores.
+            unique: Kode saluran harus unik.
+        name:
+            not_blank: Mohon masukan nama saluran.

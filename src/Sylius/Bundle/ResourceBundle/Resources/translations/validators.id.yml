@@ -1,0 +1,4 @@
+sylius:
+    resource:
+        not_enabled: "resource tidak aktif"
+        not_disabled: "resource aktif"

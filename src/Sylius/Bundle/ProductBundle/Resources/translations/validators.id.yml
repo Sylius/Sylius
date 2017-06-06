@@ -1,0 +1,55 @@
+sylius:
+    product:
+        sku:
+            not_blank: Mohon masukan SKU produk.
+            unique: SKU produk harus unik.
+        slug:
+            not_blank: Mohon masukan slug produk.
+            unique: Slug produk harus unik.
+        code:
+            not_blank: Mohon masukan kode produk.
+            regex: Kode produk hanya boleh kombinasi letters, numbers, dashes and underscores.
+            unique: Kode produk harus unik.
+        name:
+            not_blank: Mohon masukan nama produk.
+            min_length: Panjang nama produk harus lebih besar dari 1 karakter.|Panjang nama produk setidaknya harus {{ limit }} karakter.
+            max_length: Panjang nama produk jangan lebih dari 1 karakter.|Nama produk tidak boleh lebih panjang dari {{ limit }} karakter.
+        slug:
+            not_blank: Mohon masukan slug.
+    product_variant:
+        combination: Varian dengan set opsi ini sudah ada.
+        code:
+            not_blank: Mohon masukan kode.
+            regex: Kode varian produk hanya boleh kombinasi dari letters, numbers, dashes and underscores.
+            unique: Kode varian produk harus unik.
+            within_product_unique: Kode varian ini harus unik dalam produk ini.
+    simple_product:
+        code:
+            unique: Kode produk sederhana harus unik di antara semua produk dan varian produk.
+    option:
+        code:
+            not_blank: Mohon masukan kode opsi.
+            regex: Kode opsi hanya boleh kombinasi dari letters, numbers, dashes and underscores.
+            unique: Kode opsi sudah ada sebelumnya.
+        name:
+            not_blank: Mohon masukan nama opsi.
+            min_length: Panjang nama opsi harus lebih besar dari 1 karakter.|Panjang nama opsi setidaknya harus {{ limit }} karakter.
+            max_length: Panjang nama opsi jangan lebih dari 1 karakter.|Nama opsi tidak boleh lebih panjang dari {{ limit }} karakter.
+        values:
+            min_count: Mohon tambahkan setidaknya {{ limit }} nilai opsi.|Mohon masukan setidaknya {{ limit }} nilai opsi.
+    option_value:
+        code:
+            not_blank: Mohon masukan kode nilai opsi.
+            regex: Kode nilai opsi hanya boleh kombinasi dari of letters, numbers, dashes and underscores.
+            unique: Kode nilai opsi sudah ada sebelumnya.
+        value:
+            not_blank: Mohon masukan nilai opsi.
+    association_type:
+        name:
+            not_blank: Mohon masukan nama tipe asosiasi.
+            min_length: Panjang nama tipe asosiasi harus lebih besar dari 1 karakter.|Panjang nama tipe asosiasi setidaknya harus {{ limit }} karakter.
+            max_length: Panjang nama tipe asosiasi jangan lebih dari 1 karakter.|Nama tipe asosiasi tidak boleh lebih panjang dari {{ limit }} karakter.
+        code:
+            not_blank: Mohon masukan kode tipe asosiasi.
+            regex: Kode tipe asosiasi hanya boleh kombinasi dari letters, numbers, dashes and underscores.
+            unique: Kode tipe asosiasi sudah ada sebelumnya.

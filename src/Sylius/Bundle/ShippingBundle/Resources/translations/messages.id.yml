@@ -3,10 +3,40 @@
 
 sylius:
     form:
+        rule:
+            unit_count_configuration:
+                count: Jumlah
+                equal: Sama dengan
+            type: Tipe aturan
+        shipment:
+            state: status
+            states:
+                checkout:   Checkout
+                pending:    Pending
+                ready:      Ready
+                shipped:    Shipped
+                returned:   Returned
+                cancelled:  Cancelled
+            tracking_code: Kode tracking
+        shipping_calculator:
+            flat_rate_configuration:
+                label: Flat rate per shipment
+                amount: Jumlah
+            per_unit_rate_configuration:
+                label: Flat rate per unit
+                amount: Jumlah
         shipping_category:
+            description: Deskrispi
             name: Nama
         shipping_method:
+            calculator: Kalkulator
+            category: Kategori
+            category_requirement: Kebutuhan kategori
             channels: Saluran
+            configuration: Konfigurasi
+            description: Deskrispi
             enabled: Diaktifkan
             name: Nama
-            tax_category: Kategori Pajak
+            tax_category: Kategori pajak
+            translations: Penerjemah
+            position: Posisi

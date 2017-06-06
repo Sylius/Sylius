@@ -1,0 +1,20 @@
+sylius:
+    currency:
+        code:
+            exact_length: Kode mata uang harus 3 karakter.
+            not_blank: Mohon pilih kode mata uang.
+            regex: Kode mata uang hanya boleh berisi letters, numbers, dashes and underscores.
+            unique: Kode mata uang harus unik.
+        exchange_rate:
+            not_blank: Mohon masukan kurs.
+    exchange_rate:
+        ratio:
+            greater_than: Rasio harus lebih besar 0.
+            invalid: Rasio harus berupa nomor.
+            not_blank: Mohom masukan kurs.
+        source_currency:
+            not_blank: Harap masukkan dari mata uang mana nilai tukar seharusnya diturunkan.
+        target_currency:
+            not_blank: Harap masukkan ke mata uang mana nilai tukar yang harus ditetapkan.
+        unique_currency_pair: Pasangan mata uang harus unik.
+        different_source_target_currency: Mata uang sumber dan target harus berbeda.

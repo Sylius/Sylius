@@ -1,16 +1,53 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
 sylius:
     form:
         promotion:
+            actions: Aksi
+            add_action: Tambah aksi
+            add_rule: Tambah aturan
+            coupon_based: Berbasis kupon
+            description: Deskripsi
+            ends_at: Berakhir sampai
+            exclusive: Exclusive
             name: Nama
+            priority: Prioritas
             rules: Aturan
+            starts_at: Mulai dari
+            usage_limit: Batas penggunaan
         promotion_action:
-            type: Jenis
+            fixed_discount_configuration:
+                amount: Jumlah
+            percentage_discount_configuration:
+                percentage: Presentasi
+            type: Tipe
+        promotion_coupon:
+            expires_at: Kadaluarsa
+            usage_limit: Batas penggunaan
+        promotion_coupon_generator_instruction:
+            amount: Jumlah
+            code_length: Panjang kode
+            expires_at: Kadaluarsa
+            usage_limit: Batas penggunaan
+        promotion_filter:
+            price_range: Filter rentang harga
         promotion_rule:
+            cart_quantity_configuration:
+                count: Jumlah
+                equal: Sama dengan
             contains_product_configuration:
+                exclude: Tidak termasuk
                 variants: Produk
+            item_total_configuration:
+                amount: Jumlah
+            nth_order_configuration:
+                nth: Nth
             shipping_country_configuration:
                 country: Negara
-            type: Jenis
+            taxonomy_configuration:
+                exclude: Tidak termasuk
+                taxons: Takson
+            type: Tipe

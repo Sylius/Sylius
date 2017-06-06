@@ -1,0 +1,14 @@
+sylius:
+    gateway_config:
+        paypal:
+            password:
+                not_blank: Mohon masukan kata sandi paypal.
+            signature:
+                not_blank: Mohon masukan tanda tangan paypal.
+            username:
+                not_blank: Mohon masukan nama user paypal.
+        stripe:
+            secret_key:
+                not_blank: Please enter stripe secret key.
+            publishable_key:
+                not_blank: Please enter stripe publishable key.

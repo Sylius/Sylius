@@ -4,4 +4,14 @@
 sylius:
     form:
         review:
+            author: Pemilik
+            comment: Komen
+            header: Tambah Ulasan
+            rating: Rating
+            status:
+                approved: Disetujui
+                label: Status
+                new: Baru
+                rejected: Ditolak
+            submit: Kirim
             title: Judul

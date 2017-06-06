@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    review:
+        accept: 'Ulasan telah berhasil diterima'
+        reject: 'Ulasan telah berhasil ditolak'
+        wait_for_the_acceptation: 'Ulasan anda menunggu penerimaan'

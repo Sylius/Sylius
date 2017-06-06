@@ -4,12 +4,21 @@
 sylius:
     form:
         customer:
-            first_name: Nama Depan
+            first_name: Nama depan
+            group: Kelompok
             last_name: Nama belakang
             email: Email
             phone_number: Nomor telepon
-            billing_address: Alamat Penagihan
-            different_billing_address: Menggunakan alamat berbeda untuk penagihan?
+            gender: Jenis kelamin
+            birthday: Tanggal lahir
+            billing_address: Alamat tagihan
+            different_billing_address: Gunakan alamat berbeda untuk tagihan?
+            only_customer_registration: Buat akun?
+            subscribed_to_newsletter: Berlangganan berita
         customer_group:
             name: Nama
             roles: Peran
+    gender:
+        unknown: Tidak diketahui
+        male: Pria
+        female: Wanita

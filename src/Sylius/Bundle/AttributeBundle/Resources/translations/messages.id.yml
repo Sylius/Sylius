@@ -4,8 +4,12 @@
 sylius:
     form:
         attribute:
+            add: Tambah
+            add_attributes: Tambah atribut
+            choices: Pilihan
             code: Kode
             name: Nama
+            translations: Terjemahan
             type: Jenis
         attribute_type:
-            select: Pilih
+            configuration: Konfigurasi
