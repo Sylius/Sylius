@@ -25,7 +25,7 @@ prepare_for_behat_with_js() {
     run_command "bin/console server:run 127.0.0.1:8080 --env=test_cached --router=app/config/router_test_cached.php --no-debug --quiet > /dev/null 2>&1 &"
 
     # Run headless Chrome
-    run_command "google-chrome --disable-gpu --headless --remote-debugging-address=0.0.0.0 --remote-debugging-port=9222"
+    run_command "google-chrome --disable-gpu --headless --remote-debugging-address=0.0.0.0 --remote-debugging-port=9222  > /dev/null 2>&1 &"
 }
 
 run_behat() {
