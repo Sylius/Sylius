@@ -1,4 +1,4 @@
-@shopping_cart
+@shopping_cart @todo
 Feature: Removing cart item from cart
     In order to delete some unnecessary cart items
     As a Visitor
@@ -9,14 +9,14 @@ Feature: Removing cart item from cart
         And the store has a product "T-shirt banana" priced at "$12.54"
         And I added product "T-shirt banana" to the cart
 
-    @ui @javascript
+    @ui @javascript @skip
     Scenario: Removing cart item
         When I see the summary of my cart
         And I remove product "T-shirt banana" from the cart
         Then my cart should be empty
         And my cart's total should be "$0.00"
 
-    @ui @javascript
+    @ui @javascript @skip
     Scenario: Removing cart item when the store has defined default shipping method
         Given the store has "UPS" shipping method with "$20.00" fee
         When I remove product "T-shirt banana" from the cart

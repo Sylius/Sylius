@@ -23,17 +23,8 @@ default:
                 symfony:
                     symfony: ~
                 chrome:
-                    selenium2:
-                        browser: chrome
-                        capabilities:
-                            browserName: chrome
-                            browser: chrome
-                            version: ""
-                            chrome:
-                                switches:
-                                    - "start-fullscreen"
-                                    - "start-maximized"
-                                    - "no-sandbox"
+                    chrome:
+                        api_url: "http://localhost:9222"
                 firefox:
                     selenium2:
                         browser: firefox
@@ -53,6 +44,8 @@ default:
         FriendsOfBehat\PerformanceExtension: ~
 
         FriendsOfBehat\VariadicExtension: ~
+
+        DMore\ChromeExtension\Behat\ServiceContainer\ChromeExtension: ~
 
     gherkin:
         filters:
