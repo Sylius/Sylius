@@ -65,7 +65,7 @@
         "winzou/state-machine-bundle": "^0.3",
         "zendframework/zend-hydrator": "^2.2",
         "zendframework/zend-stdlib": "^3.1",
-        "dmore/behat-chrome-extension": "^1.0"
+        "dmore/behat-chrome-extension": "dev-master@dev"
     },
     "require-dev": {
         "akeneo/phpspec-skip-example-extension": "^2.0",
