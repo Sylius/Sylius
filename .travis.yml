@@ -9,10 +9,18 @@ matrix:
     include:
         -
             sudo: required
+            dist: trusty
+
             php: 7.1.0 # PHP 7.1.2 breaks our test suite because of https://bugs.php.net/bug.php?id=74157
             env:
                 - SYLIUS_SUITE="application"
                 - TRAVIS_NODE_VERSION="7.5"
+            addons:
+                apt:
+                    sources:
+                        - google-chrome-stable
+                    packages:
+                        - google-chrome-stable
             services:
                 - memcached
         -
@@ -25,10 +33,18 @@ matrix:
                         - parallel
         -
             sudo: required
+            dist: trusty
+
             php: 5.6
             env:
                 - SYLIUS_SUITE="application"
                 - TRAVIS_NODE_VERSION="7.5"
+            addons:
+                apt:
+                    sources:
+                        - google-chrome-stable
+                    packages:
+                        - google-chrome-stable
             services:
                 - memcached
 
