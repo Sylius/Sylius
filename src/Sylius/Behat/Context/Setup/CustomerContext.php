@@ -52,24 +52,32 @@ final class CustomerContext implements Context
     private $userFactory;
 
     /**
+     * @var FactoryInterface
+     */
+    private $addressFactory;
+
+    /**
      * @param SharedStorageInterface $sharedStorage
      * @param CustomerRepositoryInterface $customerRepository
      * @param ObjectManager $customerManager
      * @param FactoryInterface $customerFactory
      * @param FactoryInterface $userFactory
+     * @param FactoryInterface $addressFactory
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         CustomerRepositoryInterface $customerRepository,
         ObjectManager $customerManager,
         FactoryInterface $customerFactory,
-        FactoryInterface $userFactory
+        FactoryInterface $userFactory,
+        FactoryInterface $addressFactory
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->customerRepository = $customerRepository;
         $this->customerManager = $customerManager;
         $this->customerFactory = $customerFactory;
         $this->userFactory = $userFactory;
+        $this->addressFactory = $addressFactory;
     }
 
     /**
@@ -183,7 +191,7 @@ final class CustomerContext implements Context
     public function thereIsUserIdentifiedByWithAsShippingCountry($email, CountryInterface $country)
     {
         $customer = $this->createCustomerWithUserAccount($email, 'password123', true, 'John', 'Doe');
-        $address = new Address();
+        $address = $this->addressFactory->createNew();
         $address->setCountryCode($country->getCode());
         $address->setCity('Berlin');
         $address->setFirstName($customer->getFirstName());
