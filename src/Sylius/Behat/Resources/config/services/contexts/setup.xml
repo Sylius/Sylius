@@ -50,6 +50,7 @@
             <argument type="service" id="__symfony__.sylius.manager.customer" />
             <argument type="service" id="__symfony__.sylius.factory.customer" />
             <argument type="service" id="__symfony__.sylius.factory.shop_user" />
+            <argument type="service" id="__symfony__.sylius.factory.address" />
             <tag name="fob.context_service" />
         </service>
 
