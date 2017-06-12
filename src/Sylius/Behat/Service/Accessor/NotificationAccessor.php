@@ -21,8 +21,6 @@ use Sylius\Behat\NotificationType;
  */
 final class NotificationAccessor implements NotificationAccessorInterface
 {
-    const NOTIFICATION_ELEMENT_CSS = '#sylius-flash-messages';
-
     /**
      * @var Session
      */
@@ -67,10 +65,10 @@ final class NotificationAccessor implements NotificationAccessorInterface
      */
     private function getMessageElement()
     {
-        $messageElement = $this->session->getPage()->find('css', self::NOTIFICATION_ELEMENT_CSS);
+        $messageElement = $this->session->getPage()->find('css', '.sylius-flash-message');
 
         if (null === $messageElement) {
-            throw new ElementNotFoundException($this->session->getDriver(), 'message element', 'css', self::NOTIFICATION_ELEMENT_CSS);
+            throw new ElementNotFoundException($this->session->getDriver(), 'message element', 'css', '.sylius-flash-message');
         }
 
         return $messageElement;
