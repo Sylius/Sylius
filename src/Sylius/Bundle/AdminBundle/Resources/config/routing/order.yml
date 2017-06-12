@@ -5,6 +5,7 @@ sylius_admin_order:
         templates: SyliusAdminBundle:Crud
         only: ['index']
         grid: sylius_admin_order
+        permission: true
         vars:
           all:
               subheader: sylius.ui.process_your_orders
@@ -19,6 +20,7 @@ sylius_admin_order_show:
         _controller: sylius.controller.order:showAction
         _sylius:
             section: admin
+            permission: true
             template: SyliusAdminBundle:Order:show.html.twig
 
 sylius_admin_order_history:
@@ -28,6 +30,7 @@ sylius_admin_order_history:
         _controller: sylius.controller.order:showAction
         _sylius:
             section: admin
+            permission: true
             template: SyliusAdminBundle:Order:history.html.twig
 
 sylius_admin_order_update:
@@ -37,6 +40,7 @@ sylius_admin_order_update:
         _controller: sylius.controller.order:updateAction
         _sylius:
             section: admin
+            permission: true
             template: SyliusAdminBundle:Order:update.html.twig
             form:
                 options:
@@ -49,6 +53,7 @@ sylius_admin_order_cancel:
     defaults:
         _controller: sylius.controller.order:applyStateMachineTransitionAction
         _sylius:
+            permission: true
             state_machine:
                 graph: sylius_order
                 transition: cancel
@@ -61,6 +66,7 @@ sylius_admin_order_payment_complete:
         _controller: sylius.controller.payment:applyStateMachineTransitionAction
         _sylius:
             event: complete
+            permission: true
             repository:
                 method: findOneByOrderId
                 arguments:
@@ -77,6 +83,7 @@ sylius_admin_order_payment_refund:
     defaults:
         _controller: sylius.controller.payment:applyStateMachineTransitionAction
         _sylius:
+            permission: true
             repository:
                 method: findOneByOrderId
                 arguments:
@@ -105,6 +112,7 @@ sylius_admin_order_shipment_ship:
                 transition: ship
             redirect: referer
             section: admin
+            permission: true
             form: Sylius\Bundle\ShippingBundle\Form\Type\ShipmentShipType
             vars:
                 route:

@@ -3,6 +3,8 @@ sylius_admin_ajax_product_variants_update_position:
     methods: [PUT]
     defaults:
         _controller: sylius.controller.product_variant:updatePositionsAction
+        _sylius:
+            permission: true
 
 sylius_admin_ajax_product_variants_by_phrase:
     path: /search
@@ -11,6 +13,7 @@ sylius_admin_ajax_product_variants_by_phrase:
         _controller: sylius.controller.product_variant:indexAction
         _sylius:
             serialization_groups: [Autocomplete]
+            permission: true
             repository:
                 method: findByPhraseAndProductCode
                 arguments:
@@ -25,6 +28,7 @@ sylius_admin_ajax_product_variants_by_code:
         _controller: sylius.controller.product_variant:indexAction
         _sylius:
             serialization_groups: [Autocomplete]
+            permission: true
             repository:
                 method: findByCodeAndProductCode
                 arguments:

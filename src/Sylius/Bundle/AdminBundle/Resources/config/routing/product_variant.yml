@@ -93,6 +93,7 @@ sylius_admin_product_variant_generate:
         _sylius:
             template: "@SyliusAdmin/ProductVariant/generate.html.twig"
             section: admin
+            permission: true
             redirect:
                 route: sylius_admin_product_variant_index
                 parameters: { productId: $productId }
