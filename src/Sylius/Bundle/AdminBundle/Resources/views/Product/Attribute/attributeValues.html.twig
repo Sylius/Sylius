@@ -9,12 +9,12 @@
                 {{ _self.textField(form, count, id, subject, metadata.applicationName) }}
             {% endif %}
             <input type="hidden"
-                   name="sylius_product[attributes][{{ count }}][attribute]"
-                   id="sylius_product_attributes_{{ count }}_attribute"
+                   name="sylius_{{ subject }}[attributes][{{ count }}][attribute]"
+                   id="sylius_{{ subject }}_attributes_{{ count }}_attribute"
                    value="{{ code }}"/>
             <input type="hidden"
-                   name="sylius_product[attributes][{{ count }}][localeCode]"
-                   id="sylius_product_attributes_{{ count }}_localeCode"
+                   name="sylius_{{ subject }}[attributes][{{ count }}][localeCode]"
+                   id="sylius_{{ subject }}_attributes_{{ count }}_localeCode"
                    value="{{ localeCode }}"/>
             {% set count = count + 1 %}
         </div>
