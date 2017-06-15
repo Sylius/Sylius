@@ -99,6 +99,53 @@ final class TranslatorResourceProviderPassTest extends AbstractCompilerPassTestC
     }
 
     /**
+     * @test
+     */
+    public function it_copies_resource_files_from_symfony_translator_33_to_sylius_resource_provider()
+    {
+        $symfonyTranslatorDefinition = new Definition(null, [
+            null,
+            null,
+            [],
+            [],
+            ['resource_files' => [
+                'en' => ['/resources/messages.en.yml', '/resources/alerts.en.yml'],
+                'es' => ['/resources/messages.es.yml'],
+            ]],
+        ]);
+        $this->setDefinition('translator.default', $symfonyTranslatorDefinition);
+
+        $this->setDefinition('sylius.theme.translation.resource_provider.default', new Definition(null, [[]]));
+
+        $this->compile();
+
+        $this->assertContainerBuilderHasServiceDefinitionWithArgument(
+            'sylius.theme.translation.resource_provider.default',
+            0,
+            ['/resources/messages.en.yml', '/resources/alerts.en.yml', '/resources/messages.es.yml']
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function it_does_not_crash_if_definition_does_not_have_resource_files_at_all()
+    {
+        $symfonyTranslatorDefinition = new Definition(null, [null, null]);
+        $this->setDefinition('translator.default', $symfonyTranslatorDefinition);
+
+        $this->setDefinition('sylius.theme.translation.resource_provider.default', new Definition(null, [[]]));
+
+        $this->compile();
+
+        $this->assertContainerBuilderHasServiceDefinitionWithArgument(
+            'sylius.theme.translation.resource_provider.default',
+            0,
+            []
+        );
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function registerCompilerPass(ContainerBuilder $container)
