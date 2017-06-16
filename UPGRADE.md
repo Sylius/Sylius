@@ -549,7 +549,7 @@ fos_rest:
             - { path: "^/(?!admin|api)[^/]++/verify", role: IS_AUTHENTICATED_ANONYMOUSLY }
 
             - { path: "^/admin", role: ROLE_ADMINISTRATION_ACCESS }
-            - { path: "^/api", role: ROLE_API_ACCESS }
+            - { path: "^/api/.*", role: ROLE_API_ACCESS }
             - { path: "^/(?!admin|api)[^/]++/account", role: ROLE_USER }
   ```
 ### Database Migrations
@@ -565,4 +565,3 @@ fos_rest:
 ### Behat
 
 * `Sylius\Behat\Page\Admin\Crud\IndexPage`, `Sylius\Behat\Page\Admin\Crud\CreatePage`, `Sylius\Behat\Page\Admin\Crud\UpdatePage` now accepts route name instead of resource name.
-
