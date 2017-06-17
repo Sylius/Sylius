@@ -1,0 +1,10 @@
+Sylius\Component\Addressing\Model\Country:
+    exclusion_policy: ALL
+    xml_root_name: country
+    relations:
+        -   rel: self
+            href:
+                route: sylius_admin_api_country_show
+                parameters:
+                    code: expr(object.getCode())
+                    version: 1

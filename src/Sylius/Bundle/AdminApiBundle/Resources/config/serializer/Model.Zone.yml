@@ -1,0 +1,10 @@
+Sylius\Component\Addressing\Model\Zone:
+    exclusion_policy: ALL
+    xml_root_name: zone
+    relations:
+        -   rel: self
+            href:
+                route: sylius_admin_api_zone_show
+                parameters:
+                    code: expr(object.getCode())
+                    version: 1

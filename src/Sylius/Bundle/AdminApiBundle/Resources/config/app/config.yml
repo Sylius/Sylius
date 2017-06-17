@@ -24,3 +24,12 @@ jms_serializer:
             sylius-core:
                 namespace_prefix: "Sylius\\Component\\Core"
                 path: "@SyliusAdminApiBundle/Resources/config/serializer"
+            sylius-addressing:
+                namespace_prefix: "Sylius\\Component\\Addressing"
+                path: "@SyliusAdminApiBundle/Resources/config/serializer"
+            sylius-currency:
+                namespace_prefix: "Sylius\\Component\\Currency"
+                path: "@SyliusAdminApiBundle/Resources/config/serializer"
+            sylius-locale:
+                namespace_prefix: "Sylius\\Component\\Locale"
+                path: "@SyliusAdminApiBundle/Resources/config/serializer"

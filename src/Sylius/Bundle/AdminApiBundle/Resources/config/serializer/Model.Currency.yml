@@ -1,0 +1,10 @@
+Sylius\Component\Currency\Model\Currency:
+    exclusion_policy: ALL
+    xml_root_name: currency
+    relations:
+        - rel: self
+          href:
+                route: sylius_admin_api_currency_show
+                parameters:
+                    code: expr(object.getCode())
+                    version: 1
