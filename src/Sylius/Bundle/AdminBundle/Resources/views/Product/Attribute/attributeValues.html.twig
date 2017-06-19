@@ -4,7 +4,7 @@
 {% for code, localeCodes in forms %}
     {% for localeCode, form in localeCodes %}
         <div class="attribute" data-id="{{ code }}">
-            {% set id = form.vars.label|replace(' ', '_')|lower %}
+            {% set id = form.vars.label|replace({' ': '_'})|lower %}
             {% if 'type_checkbox' in form.vars.cache_key %}
                 {{ self.checkboxField(form, count, id, subject, metadata.applicationName) }}
             {% else %}
