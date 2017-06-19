@@ -2,6 +2,7 @@
 
 {% block collection_widget -%}
     {% import '@SyliusUi/Macro/flags.html.twig' as flags %}
+    {% import _self as self %}
 
     <div class="ui top attached tabular menu">
         {% for localeCode, translationForm in attr.translations %}
@@ -16,7 +17,7 @@
             {% spaceless %}
                 {% for child in form %}
                     {% if localeCode == child.localeCode.vars.value %}
-                        {{ _self.collection_item(child, allow_delete, button_delete_label, loop.index0) }}
+                        {{ self.collection_item(child, allow_delete, button_delete_label, loop.index0) }}
                     {% endif %}
                 {% endfor %}
             {% endspaceless %}

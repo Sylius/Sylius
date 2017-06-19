@@ -1,8 +1,5 @@
 {% extends 'SyliusAdminBundle::layout.html.twig' %}
 
-{% import 'SyliusUiBundle:Macro:headers.html.twig' as headers %}
-{% import 'SyliusUiBundle:Macro:buttons.html.twig' as buttons %}
-
 {% set header = configuration.vars.header|default(metadata.applicationName~'.ui.edit_'~metadata.name) %}
 {% set event_prefix = metadata.applicationName ~ '.admin.' ~ metadata.name ~ '.update' %}
 
