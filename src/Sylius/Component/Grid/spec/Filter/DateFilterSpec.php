@@ -60,6 +60,34 @@ final class DateFilterSpec extends ObjectBehavior
         );
     }
 
+    function it_filters_date_from_not_inclusive(
+        DataSourceInterface $dataSource,
+        ExpressionBuilderInterface $expressionBuilder
+    ) {
+        $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
+
+        $expressionBuilder
+            ->greaterThan('checkoutCompletedAt', '2016-12-05 08:00')
+            ->shouldBeCalled()
+        ;
+
+        $this->apply(
+            $dataSource,
+            'checkoutCompletedAt',
+            [
+                'from' => [
+                    'date' => '2016-12-05',
+                    'time' => '08:00',
+                ],
+                'to' => [
+                    'date' => '',
+                    'time' => '',
+                ]
+            ],
+            ['inclusive_from' => false]
+        );
+    }
+
     function it_filters_date_from_without_time(
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
@@ -113,6 +141,34 @@ final class DateFilterSpec extends ObjectBehavior
                 ]
             ],
             []
+        );
+    }
+
+    function it_filters_date_to_inclusive(
+        DataSourceInterface $dataSource,
+        ExpressionBuilderInterface $expressionBuilder
+    ) {
+        $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
+
+        $expressionBuilder
+            ->lessThanOrEqual('checkoutCompletedAt', '2016-12-06 08:00')
+            ->shouldBeCalled()
+        ;
+
+        $this->apply(
+            $dataSource,
+            'checkoutCompletedAt',
+            [
+                'from' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'to' => [
+                    'date' => '2016-12-06',
+                    'time' => '08:00',
+                ]
+            ],
+            ['inclusive_to' => true]
         );
     }
 
