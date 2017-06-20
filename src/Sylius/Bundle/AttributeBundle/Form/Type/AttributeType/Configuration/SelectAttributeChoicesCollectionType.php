@@ -34,7 +34,7 @@ class SelectAttributeChoicesCollectionType extends AbstractType
             if (null !== $data) {
                 $fixedArray = [];
                 foreach ($data as $key => $value) {
-                    $newKey = strtolower(str_replace(' ', '_', $value));
+                    $newKey = $this->getValidFormKey($value);
                     $fixedArray[$newKey] = $value;
 
                     if ($form->offsetExists($key)) {
@@ -62,5 +62,19 @@ class SelectAttributeChoicesCollectionType extends AbstractType
     public function getBlockPrefix()
     {
         return 'sylius_select_attribute_choices_collection';
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return string
+     */
+    private function getValidFormKey($value)
+    {
+        $newKey = strtolower(str_replace(' ', '_', $value));
+        $newKey = preg_replace('/[^a-zA-Z0-9\-_:]/', '', $newKey);
+        $newKey = preg_replace('/^[^a-zA-Z0-9_]++/', '', $newKey);
+
+        return $newKey;
     }
 }

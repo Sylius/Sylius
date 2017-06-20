@@ -13,7 +13,7 @@ Feature: Adding a new select product attribute
         Given I want to create a new select product attribute
         When I specify its code as "mug_material"
         And I name it "Mug material" in "English (United States)"
-        And I add material "Banana Skin"
+        And I add material "-100% Banana Skin"
         And I add it
         Then I should be notified that it has been successfully created
         And the select attribute "Mug material" should appear in the store
