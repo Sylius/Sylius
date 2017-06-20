@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Configuration;
 
+use Sylius\Component\Core\Formatter\FormAllowedCharacters;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -34,7 +35,7 @@ class SelectAttributeChoicesCollectionType extends AbstractType
             if (null !== $data) {
                 $fixedArray = [];
                 foreach ($data as $key => $value) {
-                    $newKey = strtolower(str_replace(' ', '_', $value));
+                    $newKey = FormAllowedCharacters::nameToAllowedCharacters($value);
                     $fixedArray[$newKey] = $value;
 
                     if ($form->offsetExists($key)) {
