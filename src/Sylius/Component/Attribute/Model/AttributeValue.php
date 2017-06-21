@@ -11,6 +11,8 @@
 
 namespace Sylius\Component\Attribute\Model;
 
+use Sylius\Component\Attribute\AttributeType\DateAttributeType;
+use Sylius\Component\Attribute\AttributeType\DatetimeAttributeType;
 use Webmozart\Assert\Assert;
 
 /**
@@ -154,6 +156,9 @@ class AttributeValue implements AttributeValueInterface
         $this->assertAttributeIsSet();
 
         $setter = 'set' . $this->attribute->getStorageType();
+        if(($this->attribute->getStorageType() == DatetimeAttributeType::TYPE or $this->attribute->getStorageType() == DateAttributeType::TYPE) and $value === null){
+            $value = new \DateTime();
+        }
 
         $this->$setter($value);
     }
