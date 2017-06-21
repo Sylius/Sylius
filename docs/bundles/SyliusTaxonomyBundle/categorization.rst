@@ -56,7 +56,7 @@ Your product entity mapping should live inside ``Resources/config/doctrine/Produ
 
             <!-- Your other mappings. -->
 
-            <many-to-many field="taxons" target-entity="Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface">
+            <many-to-many field="taxons" target-entity="Sylius\Component\Taxonomy\Model\TaxonInterface">
                 <join-table name="sylius_product_taxon">
                     <join-columns>
                         <join-column name="product_id" referenced-column-name="id" nullable="false" />
