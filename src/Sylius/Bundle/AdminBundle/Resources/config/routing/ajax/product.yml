@@ -11,6 +11,7 @@ sylius_admin_ajax_product_by_name_phrase:
         _controller: sylius.controller.product:indexAction
         _sylius:
             serialization_groups: [Autocomplete]
+            permission: true
             repository:
                 method: findByNamePart
                 arguments:
@@ -24,6 +25,7 @@ sylius_admin_ajax_product_by_code:
         _controller: sylius.controller.product:indexAction
         _sylius:
             serialization_groups: [Autocomplete]
+            permission: true
             repository:
                 method: findBy
                 arguments: [code: $code]
@@ -34,4 +36,5 @@ sylius_admin_ajax_product_index:
     defaults:
         _controller: sylius.controller.product:indexAction
         _sylius:
+            permission: true
             grid: sylius_admin_product
