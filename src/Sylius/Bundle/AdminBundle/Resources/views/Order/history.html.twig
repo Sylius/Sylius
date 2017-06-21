@@ -2,7 +2,7 @@
 
 {% import '@SyliusUi/Macro/labels.html.twig' as label %}
 
-{% block title %}{{ parent() }} {{ 'sylius.ui.order'|trans }} #{{ order.number }} - {{ 'sylius.ui.order_history'|trans }}{% endblock %}
+{% block title %}{{ 'sylius.ui.order'|trans }} #{{ order.number }} - {{ 'sylius.ui.order_history'|trans }} {{ parent() }}{% endblock %}
 
 {% block content %}
 {{ sonata_block_render_event('sylius.admin.order.history.before_header', {'resource': resource}) }}
