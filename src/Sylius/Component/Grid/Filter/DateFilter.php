@@ -32,7 +32,7 @@ final class DateFilter implements FilterInterface
 
         $field = $this->getOption($options, 'field', $name);
 
-        $from = $this->getDateTime($data['from']);
+        $from = isset($data['from']) ? $this->getDateTime($data['from']) : null;
         if (null !== $from) {
             $inclusive = (bool)$this->getOption($options, 'inclusive_from', self::DEFAULT_INCLUSIVE_FROM);
             if (true === $inclusive) {
@@ -42,7 +42,7 @@ final class DateFilter implements FilterInterface
             }
         }
 
-        $to = $this->getDateTime($data['to']);
+        $to = isset($data['to']) ? $this->getDateTime($data['to']) : null;
         if (null !== $to) {
             $inclusive = (bool)$this->getOption($options, 'inclusive_to', self::DEFAULT_INCLUSIVE_TO);
             if (true === $inclusive) {
