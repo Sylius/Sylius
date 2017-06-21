@@ -203,9 +203,6 @@ you will also have to set up an event listener and then remove the field:
         }
     }
 
-Here we additionally redefine the labeling of the code field, which is first added in the basic ``ProductVariantType`` class.
-
-
 Overriding forms completely
 ---------------------------
 
