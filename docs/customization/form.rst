@@ -123,7 +123,7 @@ Need more information?
 
     Some of the forms already have extensions in Sylius. Learn more about Extensions `here <http://symfony.com/doc/current/bundles/extension.html>`_.
 
-F.i. the ``ProductVariant`` admin form is defined under ``Sylius/Bundle/ProductBundle/Form/Type/ProductVariantType.php`` and later extended in
+For instance the ``ProductVariant`` admin form is defined under ``Sylius/Bundle/ProductBundle/Form/Type/ProductVariantType.php`` and later extended in
 ``Sylius/Bundle/CoreBundle/Form/Extension/ProductVariantTypeExtension.php``. If you again extend the base type form like this:
 
 .. code-block:: yaml
@@ -137,7 +137,7 @@ F.i. the ``ProductVariant`` admin form is defined under ``Sylius/Bundle/ProductB
 your form extension will also be executed. Whether before or after the other extensions depends on priority tag set.
 
 Having a look at the extensions and possible additionally defined event handlers can also be useful when form elements are embedded dynamically,
-as it is done in the ``ProductVariantTypeExtension`` by the ``CoreBundle``:
+as is done in the ``ProductVariantTypeExtension`` by the ``CoreBundle``:
 
 .. code-block:: php
 
