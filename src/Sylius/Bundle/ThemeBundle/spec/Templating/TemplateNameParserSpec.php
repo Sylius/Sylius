@@ -63,11 +63,16 @@ final class TemplateNameParserSpec extends ObjectBehavior
         $this->parse('@Acme/Nested/Directory/app.html.twig')->shouldBeLike(new TemplateReference('AcmeBundle', 'Nested/Directory', 'app', 'html', 'twig'));
     }
 
-    function it_throws_an_exception_if_namespaced_path_references_not_existing_bundle(KernelInterface $kernel)
-    {
-        $kernel->getBundle('AcmeBundle')->willThrow(\Exception::class);
+    function it_delegates_custom_namespace_to_decorated_parser(
+        KernelInterface $kernel,
+        TemplateNameParserInterface $decoratedParser,
+        TemplateReferenceInterface $templateReference
+    ) {
+        $kernel->getBundle('myBundle')->willThrow(\Exception::class);
 
-        $this->shouldThrow(\InvalidArgumentException::class)->during('parse', ['@Acme/app.html.twig']);
+        $decoratedParser->parse('@my/custom/namespace.html.twig')->willReturn($templateReference);
+
+        $this->parse('@my/custom/namespace.html.twig')->shouldReturn($templateReference);
     }
 
     function it_generates_template_references_from_root_namespaced_paths()

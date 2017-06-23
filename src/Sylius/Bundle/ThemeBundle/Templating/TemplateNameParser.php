@@ -76,7 +76,7 @@ final class TemplateNameParser implements TemplateNameParserInterface
             try {
                 $this->kernel->getBundle($template->get('bundle'));
             } catch (\Exception $e) {
-                throw new \InvalidArgumentException(sprintf('Template name "%s" is not valid.', $name), 0, $e);
+                return $this->decoratedParser->parse($name);
             }
         }
 
