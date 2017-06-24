@@ -62,6 +62,12 @@ In the ``:Grid/Column:_prettyName.html.twig`` template, you just need to render 
 
 .. code-block:: twig
 
+    <strong>{{ data }}</strong>
+
+If you wish to render more complex grid fields just redefine the path of the field to root – ``path: .`` in the yaml and you can access all attributes of the object instance:
+
+.. code-block:: twig
+
     <strong>{{ data.name }}</strong>
     <p>{{ data.description|markdown }}</p>
 
