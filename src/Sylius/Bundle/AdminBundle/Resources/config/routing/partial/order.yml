@@ -8,6 +8,7 @@ sylius_admin_partial_order_latest:
                 method: findLatest
                 arguments: [$count]
             template: $template
+            permission: true
 
 sylius_admin_partial_order_latest_in_channel:
     path: /latest/{channelCode}/{count}
@@ -21,3 +22,4 @@ sylius_admin_partial_order_latest_in_channel:
                     count: $count
                     channel: expr:notFoundOnNull(service('sylius.repository.channel').findOneByCode($channelCode))
             template: $template
+            permission: true

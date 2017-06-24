@@ -50,10 +50,6 @@ final class DateFilterSpec extends ObjectBehavior
                 'from' => [
                     'date' => '2016-12-05',
                     'time' => '08:00',
-                ],
-                'to' => [
-                    'date' => '',
-                    'time' => '',
                 ]
             ],
             []
@@ -131,10 +127,6 @@ final class DateFilterSpec extends ObjectBehavior
             $dataSource,
             'checkoutCompletedAt',
             [
-                'from' => [
-                    'date' => '',
-                    'time' => '',
-                ],
                 'to' => [
                     'date' => '2016-12-06',
                     'time' => '08:00',
@@ -187,10 +179,6 @@ final class DateFilterSpec extends ObjectBehavior
             $dataSource,
             'checkoutCompletedAt',
             [
-                'from' => [
-                    'date' => '',
-                    'time' => '',
-                ],
                 'to' => [
                     'date' => '2016-12-06',
                     'time' => '',

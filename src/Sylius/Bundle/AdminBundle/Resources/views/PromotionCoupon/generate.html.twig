@@ -4,7 +4,7 @@
 
 {% set header = 'sylius.ui.generate_coupons' %}
 
-{% block title %}{{ parent() }} {{ header|trans }}{% endblock %}
+{% block title %}{{ header|trans }} {{ parent() }}{% endblock %}
 
 {% form_theme form 'SyliusUiBundle:Form:theme.html.twig' %}
 

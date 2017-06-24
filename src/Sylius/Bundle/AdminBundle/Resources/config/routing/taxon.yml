@@ -28,6 +28,7 @@ sylius_admin_taxon_create_for_parent:
         _controller: sylius.controller.taxon:createAction
         _sylius:
             section: admin
+            permission: true
             template: 'SyliusAdminBundle:Taxon:create.html.twig'
             redirect: sylius_admin_taxon_update
             factory:
