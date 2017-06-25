@@ -224,7 +224,7 @@ final class AddressBookContext implements Context
     {
         $fullName = $this->sharedStorage->get('full_name');
 
-        $this->addressBookIndexPage->addressOfContains($fullName, $value);
+        Assert::true($this->addressBookIndexPage->addressOfContains($fullName, $value));
     }
 
     /**
