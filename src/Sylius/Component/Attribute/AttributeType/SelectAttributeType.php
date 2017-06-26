@@ -12,6 +12,7 @@
 namespace Sylius\Component\Attribute\AttributeType;
 
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
+use Symfony\Component\Validator\Constraints\Choice;
 use Symfony\Component\Validator\Constraints\Count;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
@@ -75,9 +76,12 @@ class SelectAttributeType implements AttributeTypeInterface
 
         $constraints = [
             new All([
+                new Choice([
+                    'choices' => array_keys($validationConfiguration['choices']),
+                ]),
                 new Type([
                     'type' => 'string',
-                ])
+                ]),
             ]),
         ];
 
