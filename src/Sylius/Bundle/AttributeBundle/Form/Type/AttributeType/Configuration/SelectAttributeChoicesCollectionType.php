@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Configuration;
 
 use Ramsey\Uuid\Uuid;
+use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -26,6 +27,19 @@ use Symfony\Component\Form\FormEvents;
 class SelectAttributeChoicesCollectionType extends AbstractType
 {
     /**
+     * @var string
+     */
+    private $defaultLocaleCode;
+
+    /**
+     * @param TranslationLocaleProviderInterface $localeProvider
+     */
+    public function __construct(TranslationLocaleProviderInterface $localeProvider)
+    {
+        $this->defaultLocaleCode = $localeProvider->getDefaultLocaleCode();
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -36,17 +50,24 @@ class SelectAttributeChoicesCollectionType extends AbstractType
 
             if (null !== $data) {
                 $fixedArray = [];
-                foreach ($data as $key => $value) {
+                foreach ($data as $key => &$values) {
                     if (!is_int($key)) {
-                        $fixedArray[$key] = $value;
+                        $fixedArray[$key] = $values;
 
                         continue;
                     }
 
-                    $newKey = $this->getUniqueKey();
-                    $fixedArray[$newKey] = $value;
+                    $newKey = null;
+                    foreach ($values as $locale => &$value) {
+                        if ($locale === $this->defaultLocaleCode) {
+                            $newKey = $this->getUniqueKey();
+                            $fixedArray[$newKey] = $values;
 
-                    if ($form->offsetExists($key)) {
+                            break;
+                        }
+                    }
+
+                    if (!is_null($newKey) && $form->offsetExists($key)) {
                         $form->offsetUnset($key);
                         $form->offsetSet(null, $newKey);
                     }

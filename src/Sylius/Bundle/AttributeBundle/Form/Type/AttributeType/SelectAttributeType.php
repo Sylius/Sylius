@@ -26,6 +26,19 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 final class SelectAttributeType extends AbstractType
 {
     /**
+     * @var string $defaultLocale
+     */
+    protected $defaultLocale;
+
+    /**
+     * @param string $defaultLocale
+     */
+    public function __construct($defaultLocale)
+    {
+        $this->defaultLocale = $defaultLocale;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getParent(): string
@@ -72,7 +85,12 @@ final class SelectAttributeType extends AbstractType
                 if (is_array($options['configuration'])
                     && isset($options['configuration']['choices'])
                     && is_array($options['configuration']['choices'])) {
-                    $choices = array_flip($options['configuration']['choices']);
+                    $choices = [];
+
+                    foreach ($options['configuration']['choices'] as $key => $choice) {
+                        $choices[$key] = $choice[$this->defaultLocale];
+                    }
+                    $choices = array_flip($choices);
                     ksort($choices);
 
                     return $choices;
