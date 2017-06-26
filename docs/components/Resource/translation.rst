@@ -200,7 +200,7 @@ class such as the exemplary `BookTranslation` it goes:
 
    $bookTranslation->setLocale($provider->getCurrentLocale());
 
-   $translation->getLocale(); // returns 'de'
+   $bookTranslation->getLocale(); // returns 'de'
 
 .. note::
    This service implements the :ref:`component_resource_provider_locale-provider-interface`.
