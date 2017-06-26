@@ -65,7 +65,7 @@ Now the following class will be actually capable of translating the **title**:
         */
        public function getTitle()
        {
-           return $this->getTranslation()->getTitle();
+           return $this->getTranslations()->getTitle();
        }
 
        /**
@@ -73,7 +73,7 @@ Now the following class will be actually capable of translating the **title**:
         */
        public function setTitle($title)
        {
-           $this->getTranslation()->setTitle($title);
+           $this->getTranslations()->setTitle($title);
        }
    }
 
@@ -135,21 +135,21 @@ When we already have our translations, we can work with the **Book**:
                              // as the translation for chosen locale is unavailable,
                              // instead the translation for fallback locale is used
 
-You can always use the ``getTranslation`` method by itself, but the same principal is in play:
+You can always use the ``translate`` method by itself, but the same principal is in play:
 
 .. code-block:: php
 
    <?php
 
-   $harryPotter->getTranslation('de');  // returns $germanBook
+   $harryPotter->translate('de');  // returns $germanBook
    // but
-   $harryPotter->getTranslation();
+   $harryPotter->translate();
    // and
-   $harryPotter->getTranslation('hi');
+   $harryPotter->translate('hi');
    // both return $englishBook
 
 .. caution::
-   The ``getTranslation`` method throws `\\RuntimeException`_ in two cases:
+   The ``translate`` method throws `\\RuntimeException`_ in two cases:
 
    * No locale has been specified in the parameter and the current locale is undefined
    * No fallback locale has been set
@@ -200,7 +200,7 @@ class such as the exemplary `BookTranslation` it goes:
 
    $bookTranslation->setLocale($provider->getCurrentLocale());
 
-   $translation->getLocale(); // returns 'de'
+   $bookTranslation->getLocale(); // returns 'de'
 
 .. note::
    This service implements the :ref:`component_resource_provider_locale-provider-interface`.
