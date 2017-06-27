@@ -137,6 +137,8 @@ final class BuildAddressFormSubscriber implements EventSubscriberInterface
         return $this->formFactory->createNamed('provinceCode', ProvinceCodeChoiceType::class, $provinceCode, [
             'country' => $country,
             'auto_initialize' => false,
+            'label' => 'sylius.form.address.province',
+            'placeholder' => 'sylius.form.province.select',
         ]);
     }
 
@@ -150,6 +152,7 @@ final class BuildAddressFormSubscriber implements EventSubscriberInterface
         return $this->formFactory->createNamed('provinceName', TextType::class, $provinceName, [
             'required' => false,
             'auto_initialize' => false,
+            'label' => 'sylius.form.address.province',
         ]);
     }
 }
