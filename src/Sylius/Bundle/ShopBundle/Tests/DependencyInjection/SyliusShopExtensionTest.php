@@ -117,6 +117,16 @@ final class SyliusShopExtensionTest extends AbstractExtensionTestCase
     }
 
     /**
+     * @test
+     */
+    public function it_configures_firewall_context_for_user_registration_listener()
+    {
+        $this->load([]);
+
+        $this->assertContainerBuilderHasServiceDefinitionWithArgument('sylius.listener.user_registration', 5, 'shop');
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function getContainerExtensions()

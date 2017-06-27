@@ -66,6 +66,18 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function it_has_default_configuration_for_firewall_context_name_node()
+    {
+        $this->assertProcessedConfigurationEquals(
+            [[]],
+            ['firewall_context_name' => 'shop'],
+            'firewall_context_name'
+        );
+    }
+
+    /**
+     * @test
+     */
     public function it_has_default_configuration_for_checkout_resolver_node()
     {
         $this->assertProcessedConfigurationEquals(
