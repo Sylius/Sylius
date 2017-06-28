@@ -4,7 +4,7 @@
 parameters:
     sylius.security.admin_regex: "^/admin"
     sylius.security.api_regex: "^/api"
-    sylius.security.shop_regex: "^/(?!admin|api)[^/]++"
+    sylius.security.shop_regex: "^/(?!admin|api/.*|api$)[^/]++"
 
 security:
     providers:
@@ -46,7 +46,7 @@ security:
             security: false
 
         api:
-            pattern: "%sylius.security.api_regex%"
+            pattern: "%sylius.security.api_regex%/.*"
             fos_oauth:  true
             stateless:  true
             anonymous:  true
@@ -98,5 +98,5 @@ security:
         - { path: "%sylius.security.shop_regex%/verify", role: IS_AUTHENTICATED_ANONYMOUSLY }
 
         - { path: "%sylius.security.admin_regex%", role: ROLE_ADMINISTRATION_ACCESS }
-        - { path: "%sylius.security.api_regex%", role: ROLE_API_ACCESS }
+        - { path: "%sylius.security.api_regex%/.*", role: ROLE_API_ACCESS }
         - { path: "%sylius.security.shop_regex%/account", role: ROLE_USER }
