@@ -39,7 +39,7 @@ final class TaxonSlugGenerator implements TaxonSlugGeneratorInterface
     /**
      * {@inheritdoc}
      */
-    public function generate($name, $parentId = null)
+    public function generate($name, $parentId = null, $parentLocale = null)
     {
         // Manually replacing apostrophes since Transliterator started removing them at v1.2.
         $name = str_replace('\'', '-', $name);
@@ -51,6 +51,10 @@ final class TaxonSlugGenerator implements TaxonSlugGeneratorInterface
         /** @var TaxonInterface $parent */
         $parent = $this->taxonRepository->find($parentId);
         Assert::notNull($parent, sprintf('There is no parent taxon with id %d.', $parentId));
+
+        if ($parentLocale) {
+            $parent->setCurrentLocale($parentLocale);
+        }
 
         return $parent->getSlug().self::SLUG_SEPARATOR.$taxonSlug;
     }

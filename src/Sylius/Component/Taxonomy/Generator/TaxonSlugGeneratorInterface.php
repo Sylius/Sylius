@@ -19,8 +19,9 @@ interface TaxonSlugGeneratorInterface
     /**
      * @param string $name
      * @param int|null $parentId
+     * @param string|null $parentLocale
      *
      * @return string
      */
-    public function generate($name, $parentId = null);
+    public function generate($name, $parentId = null, $parentLocale = null);
 }
