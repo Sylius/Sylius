@@ -34,6 +34,8 @@ sylius:
                 province: Eyalet
                 zone: Bölge
             scope: Kapsam
+            scopes:
+                all: Tümü
             select: Ülke seçin
             select_scope: Ölçek seçiniz
         zone_member:

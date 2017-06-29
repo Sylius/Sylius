@@ -9,6 +9,7 @@ sylius:
                     inventory: Инвентар
                     options: Опцйи
                 configuration:
+                    admin_users: Администратори
                     countries: Страни
                     locales: Езикови променливи
                     payment_methods: Начин на плащане

@@ -7,9 +7,10 @@ sylius:
             type: Tipo
         gateway_configuration:
             paypal:
-                password: Contraseña
+                password: Contraseña de API
                 signature: Firma
-                username: Nombre usuario
+                username: Nombre de usuario de API
+                sandbox: Sandbox
             stripe:
                 publishable_key: Llave pública
                 secret_key: Llave secreta

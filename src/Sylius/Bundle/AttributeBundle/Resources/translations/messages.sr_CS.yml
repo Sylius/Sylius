@@ -28,6 +28,9 @@ sylius:
                 format: Format
             date:
                 format: Format
+            select:
+                values: Vrednosti
+                min: Minumum unosa
             text:
                 min: Min. dužina
                 max: Maks. dužina

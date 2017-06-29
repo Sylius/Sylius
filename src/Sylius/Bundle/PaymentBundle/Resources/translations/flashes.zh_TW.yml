@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    payment:
+        cancelled: '已取消付款。'
+        completed: '已完成付款。'
+        failed: '付款失敗。'
+        processing: '正在處理付款。'
+        refunded: '款項已成功退還。'
+        unknown: '付款發生未知問題。'

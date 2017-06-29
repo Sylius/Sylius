@@ -21,6 +21,7 @@ sylius:
             name: Ime
         option:
             name: Ime
+            position: Pozicija
             values: Moguće vrednosti
         option_value:
             add_value: Dodaj vrednost

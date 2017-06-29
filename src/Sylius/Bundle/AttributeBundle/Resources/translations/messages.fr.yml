@@ -29,7 +29,11 @@ sylius:
             date:
                 format: Format
             select:
+                multiple: Multiple
                 values: Valeurs
+                choose: Sélectionnez une option
+                min: Nombre minimum d'entrées
+                max: Nombre maximum d'entrées
             text:
                 min: Longueur minimum
                 max: Longueur maximum

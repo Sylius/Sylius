@@ -5,6 +5,7 @@ sylius:
     menu:
         shop:
             account:
+                address_book: 'Catálogo de endereços'
                 change_password: 'Alterar senha'
                 dashboard: 'Painel'
                 header: 'Sua conta'

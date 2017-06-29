@@ -13,7 +13,10 @@ sylius:
             name: Ονομασία
         association_type:
             name: Ονομασία
+            translations: Μεταφράσεις
         variant:
             name: Ονομασία
         option:
             name: Ονομασία
+        option_value:
+            value: Αξία

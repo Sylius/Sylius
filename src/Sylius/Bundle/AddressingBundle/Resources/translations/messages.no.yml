@@ -22,6 +22,7 @@ sylius:
             enabled: Aktivert
         province:
             name: Navn
+            abbreviation: Forkortelse
             select: Velg
         zone:
             add_member: Legg til medlem
@@ -33,6 +34,8 @@ sylius:
                 province: Fylke
                 zone: Sone
             scope: Omfang
+            scopes:
+                all: Alle
             select: Velg
             select_scope: Velg omfang
         zone_member:

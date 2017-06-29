@@ -46,8 +46,11 @@ sylius:
             not_blank: 请输入省名。
             unique: 省名称必须是唯一的。
     zone:
+        scope:
+            not_blank: 请输入范围。
         code:
             not_blank: 请输入区号。
+            regex: 区域代码仅可以由字母、数字、破折号和下划线组成
             unique: 区域编码必须唯一。
         members:
             min_count: 请至少添加{{ limit }} 地区会员。
@@ -58,4 +61,5 @@ sylius:
     zone_member:
         code:
             not_blank: 请选择一个区成员。
+            regex: 区域成员代码只能由字母、数字、破折号和下面组成。
         unique: 该区成员已被使用。

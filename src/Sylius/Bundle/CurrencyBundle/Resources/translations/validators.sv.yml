@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    currency:
+        code:
+            exact_length: Valutakoden måste vara exakt 3 tecken lång.
+            not_blank: Var god välj en valutakod.

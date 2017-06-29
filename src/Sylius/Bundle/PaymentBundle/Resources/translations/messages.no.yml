@@ -29,3 +29,4 @@ sylius:
             description: Beskrivelse
             enabled: Aktivert?
             name: Navn
+            position: Plassering

@@ -4,9 +4,9 @@
 sylius:
     promotion:
         code:
-            unique: La promoción con este código ya existe.
+            unique: Ya existe una promoción con este código.
             regex: El código de promoción solo puede contener letras, números, guiones y guiones bajos.
-            not_blank: Por favor, introduzca el código promocional.
+            not_blank: Por favor, introduzca el código de promoción.
         description:
             max_length: La descripción de la promoción no debe tener más de 1 carácter.|La descripción de la promoción no debe tener más de {{ limit }} caracteres.
             min_length: La descripción de la promoción debe tener al menos 1 carácter.|La descripción de la promoción debe tener al menos {{ limit }} caracteres.

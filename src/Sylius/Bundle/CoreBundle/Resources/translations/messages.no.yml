@@ -14,18 +14,32 @@ sylius:
                 different_billing_address: Bruk annen adresse for fakturering?
             payment_method: Betalingsmetode
             shipping_method: Fraktalternativ
+        promotion:
+            channels: Kanaler
         promotion_action:
             add_product_configuration:
                 product: Produkt
+        promotion_coupon:
+            per_customer_usage_limit: Bruksgrense for hver kunde
         group:
             name: Navn
             roles: Roller
         channel:
+            contact_email: Kontakt e-post
+            currencies: Valutaer
+            currency_base: Standardvaluta
+            account_verification_required: Er kontobekreftelse påkrevet?
+            hostname: Vertsnavn
+            locale_default: Standard nasjonal innstilling
             locales: Nasjonale innstillinger
             payment_methods: Betalingsmetoder
             shipping_methods: Fraktalternativ
+            skipping_shipping_step_allowed: Hoppe over trinnet hvis bare én fraktmetode er tilgjengelig?
+            skipping_payment_step_allowed: Hoppe over trinnet hvis bare én betalingsmåte er tilgjengelig?
+            tax_calculation_strategy: Merverdi beregnings strategi
             tax_zone_default: Standard skattesone
             taxonomies: Kategorisering
+            theme: Tema
         image:
             type: Type
             file: Bilde
@@ -39,6 +53,7 @@ sylius:
             total_from: Fra
             total_to: Til
             payment_state: Betalingsstatus
+            channel: Alle kanaler
         page:
             body: Kropp
             id: ID
@@ -48,6 +63,8 @@ sylius:
             restricted_zone: Begrenset sone
             short_description: Kort beskrivelse
             variant_selection_method: Metode for valg av variant
+            main_taxon: Hoved taksonomi
+            channels: Kanaler
             enabled: Aktivert
         product_filter:
             name: Navn
@@ -60,10 +77,13 @@ sylius:
             created_at_to: Til
             number: Ordrenummer
             shipping_address: Leveringsadresse
+            channel: Alle kanaler
         payment_filter:
             created_at_from: Fra
             created_at_to: Til
             number: Ordrenummer
+            billing_address: Faktura adresse
+            channel: Alle kanaler
         shipping_method:
             zone: Sone
         taxon:
@@ -90,25 +110,54 @@ sylius:
             on_hand: På lager
             price: Pris
             sku: Strekkode
+            shipping_required: Er frakt påkrevd?
             weight: Vekt
             width: Bredde
         attribute:
             product_attribute_value:
+                attribute: Egenskap
                 value: Verdi
         guest:
             email: E-post
+        product_association:
+            product: Relatert produkt
+            type: Relasjonstype
         product_association_type:
             name: Navn
+        promotion_filter:
+            products: Produktfilter
+            taxons: Taksonomi filter
+        promotion_rule:
+            customer_group:
+                group: Kundegruppe
+            has_taxon:
+                taxons: Taksonomier
+            product:
+                products: Produkter
+            total_of_items_from_taxon:
+                taxon: Taksonomi
+                amount: Antall
+        payment_method:
+            channels: Kanaler
+        product_attribute:
+            position: Plassering
+        zone:
+            scopes:
+                shipping: Frakt
+                tax: Mva
     installer:
         extensions:
             header: Utvidelser
             accelerator:
                 header: Akselerator
+                help: Aktiver Zend OpCache (anbefales).
             apc: APC
             ctype: Ctype
             gd: GD
             help: Installere og aktivere %extension% utvidelsen.
             iconv: Iconv
+            exif: Exif
+            fileinfo: Filinformasjon
             icu: ICU
             intl: Intl
             json_encode: JSON
@@ -125,13 +174,16 @@ sylius:
             header: filsystem
             cache:
                 header: mellomlagring/cache
+                help: 'For å sette rettighetene kjør kommandoen: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
             exists: finnes
             logs:
                 header: logger
+                help: 'For å sette rettighetene kjør kommandoen: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
             not_exists: finnes ikke
             not_writable: ikke skrivbar
             parameters:
                 header: parameters.yml
+                help: 'For å sette rettighetene kjør kommandoen: sudo chmod a+w %path%'
             vendors: leverandører
             writable: skrivbar
         settings:
@@ -151,3 +203,10 @@ sylius:
                 header: Utgått tidssone
                 help: 'Tidssonen %timezone% er avskrevet. Du må redigere din php.ini-fil (liste over avskrevene tidssoner http://php.net/manual/en/timezones.others.php).'
             version: PHP-versjon
+            version_recommended: Anbefalt PHP-versjon
+    payum_gateway:
+        cash_on_delivery: Kontant ved levering
+        offline: Offline
+        paypal_express_checkout: Paypal Express utsjekking
+    shipping_method_resolver:
+        by_zones_and_channel: Soner og kanal

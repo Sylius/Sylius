@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    review:
+        accept: '评价已经成功接受.'
+        reject: '评价被拒绝。'
+        wait_for_the_acceptation: '您的评价正在等待确认。'

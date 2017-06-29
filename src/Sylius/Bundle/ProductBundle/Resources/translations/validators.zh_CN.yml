@@ -6,6 +6,10 @@ sylius:
         sku:
             not_blank: 请输入产品的 SKU。
             unique: 产品的 SKU 必须是唯一的。
+        slug:
+            not_blank: 请输入产品标识。
+        code:
+            not_blank: 请输入产品代码。
         name:
             not_blank: 请输入产品名称。
             min_length: 产品名称必须是至少 1 个字符长。 |产品名称必须至少 {{ limit }} 个字符长。

@@ -31,3 +31,4 @@ sylius:
             enabled: Įjungtas?
             instructions: Instrukcijos
             name: Pavadinimas
+            position: Pozicija

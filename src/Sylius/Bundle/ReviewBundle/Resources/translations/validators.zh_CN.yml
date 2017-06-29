@@ -5,7 +5,10 @@ sylius:
     review:
         author:
             already_exists: 此电子邮件已被注册，请登录或找回密码。
+        comment:
+            not_blank: 评价不应为空。
         rating:
             not_blank: 请检查评论的评分。
         title:
             not_blank: 评论标题不应为空。
+            min_length: 评论标题必须有至少 2 个字符

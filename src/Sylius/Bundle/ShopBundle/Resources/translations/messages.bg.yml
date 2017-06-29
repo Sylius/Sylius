@@ -5,4 +5,9 @@ sylius:
     menu:
         shop:
             account:
+                address_book: 'Книга с контакти'
+                change_password: 'Смени парола'
                 dashboard: 'Табло'
+                header: 'Профил'
+                order_history: 'История на поръчки'
+                personal_information: 'Лична информация'

@@ -10,6 +10,7 @@ sylius:
                 password: Wachtwoord
                 signature: Handtekening
                 username: Gebruikersnaam
+                sandbox: Zandbak
             stripe:
                 publishable_key: Publiceerbare sleutel
                 secret_key: Secret key

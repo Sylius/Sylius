@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    review:
+        author:
+            already_exists: Denne e-postadressen er allerede registrert, vennligst logg inn eller bruk glemt passord.
+        comment:
+            not_blank: Anmeldelsen kan ikke være tom.
+        title:
+            not_blank: Tittelen kan ikke være tom.
+            min_length: Tittelen må bestå av minst 2 tegn.
+            max_length: Tittelen kan ha maksimalt 255 tegn.

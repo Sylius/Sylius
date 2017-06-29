@@ -1,0 +1,7 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    cart:
+        add_item: 'Ürün alışveriş spetinize eklendi'
+        cannot_modify: 'Sipariş zaten değiştirmek istediğiniz sepeti için gönderildi.'

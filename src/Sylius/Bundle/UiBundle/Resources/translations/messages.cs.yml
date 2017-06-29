@@ -714,7 +714,7 @@ sylius:
         translations: 'Překlady'
         type: 'Typ'
         unavailable: 'Nedostupné'
-        unit_price: 'Jednotná cena'
+        unit_price: 'Jednotková cena'
         unknown: 'Neznámý'
         unlock: 'Odemknout'
         updating_tax_rate: 'Aktualizace daňové sazby'
