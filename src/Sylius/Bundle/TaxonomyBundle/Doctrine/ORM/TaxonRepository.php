@@ -17,6 +17,7 @@ use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 
 /**
  * @author Aram Alipoor <aram.alipoor@gmail.com>
+ * @author Mikołaj Król <mikolaj.krol@bitbag.pl>
  */
 class TaxonRepository extends EntityRepository implements TaxonRepositoryInterface
 {
@@ -54,7 +55,7 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
             ->setParameter('locale', $locale)
             ->getQuery()
             ->getOneOrNullResult()
-        ;
+            ;
     }
 
     /**
@@ -71,7 +72,7 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
             ->setParameter('locale', $locale)
             ->getQuery()
             ->getResult()
-        ;
+            ;
     }
 
     /**
@@ -84,7 +85,7 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
             ->addOrderBy('o.position')
             ->getQuery()
             ->getResult()
-        ;
+            ;
     }
 
     /**
