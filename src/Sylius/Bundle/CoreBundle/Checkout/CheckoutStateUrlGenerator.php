@@ -64,6 +64,17 @@ final class CheckoutStateUrlGenerator implements CheckoutStateUrlGeneratorInterf
     /**
      * {@inheritdoc}
      */
+    public function generateForCart($parameters = [], $referenceType = self::ABSOLUTE_PATH)
+    {
+        if (!isset($this->routeCollection['empty_order']['route'])) {
+            throw new RouteNotFoundException();
+        }
+
+        return $this->router->generate($this->routeCollection['empty_order']['route'], $parameters, $referenceType);    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function setContext(RequestContext $context)
     {
         $this->router->setContext($context);

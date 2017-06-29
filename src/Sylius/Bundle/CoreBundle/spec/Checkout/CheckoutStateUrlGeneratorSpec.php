@@ -31,6 +31,9 @@ final class CheckoutStateUrlGeneratorSpec extends ObjectBehavior
             'addressed' => [
                 'route' => 'sylius_shop_checkout_select_shipping',
             ],
+            'empty_order' => [
+                'route' => 'sylius_shop_cart_summary'
+            ],
         ];
 
         $this->beConstructedWith($router, $routeCollection);
@@ -77,5 +80,12 @@ final class CheckoutStateUrlGeneratorSpec extends ObjectBehavior
         $router->generate(Argument::any())->shouldNotBeCalled();
 
         $this->shouldThrow(RouteNotFoundException::class)->during('generateForOrderCheckoutState', [$order]);
+    }
+
+    function it_generates_cart_url(RouterInterface $router)
+    {
+        $router->generate('sylius_shop_cart_summary', [], UrlGeneratorInterface::ABSOLUTE_PATH)->willReturn('/cart');
+
+        $this->generateForCart()->shouldReturn('/cart');
     }
 }
