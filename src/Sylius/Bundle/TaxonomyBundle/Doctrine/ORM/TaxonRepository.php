@@ -112,22 +112,23 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
     }
 
     /**
-     * @param QueryBuilder $qb
-     * @param null $locale
+     * @param QueryBuilder $queryBuilder
+     * @param null|string $locale
+     *
      * @return QueryBuilder
      */
-    private function createTranslationQueryBuilderPart(QueryBuilder $qb, $locale = null)
+    private function createTranslationQueryBuilderPart(QueryBuilder $queryBuilder, $locale = null)
     {
         if ($locale !== null) {
-            $qb
+            $queryBuilder
                 ->innerJoin('o.translations', 'translation')
                 ->andWhere('translation.locale = :locale')
                 ->setParameter('locale', $locale)
             ;
 
-            return $qb;
+            return $queryBuilder;
         }
 
-        return $qb->innerJoin('o.translations', 'translation');
+        return $queryBuilder->innerJoin('o.translations', 'translation');
     }
 }
