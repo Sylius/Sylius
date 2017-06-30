@@ -25,7 +25,7 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
      */
     public function findChildren($parentCode, $locale = null)
     {
-        $qb = $this->createQueryBuilder('o')
+        $queryBuilder = $this->createQueryBuilder('o')
             ->addSelect('translation')
             ->addSelect('child')
             ->innerJoin('o.parent', 'parent')
@@ -35,9 +35,9 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
             ->setParameter('parentCode', $parentCode)
         ;
 
-        $qb = $this->createTranslationQueryBuilderPart($qb, $locale);
+        $queryBuilder = $this->createTranslationQueryBuilderPart($queryBuilder, $locale);
 
-        return $qb->getQuery()->getResult();
+        return $queryBuilder->getQuery()->getResult();
     }
 
     /**
@@ -92,15 +92,15 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
      */
     public function findByNamePart($phrase, $locale = null)
     {
-        $qb = $this->createQueryBuilder('o')
+        $queryBuilder = $this->createQueryBuilder('o')
             ->addSelect('translation')
             ->andWhere('translation.name LIKE :name')
             ->setParameter('name', '%'.$phrase.'%')
         ;
 
-        $qb = $this->createTranslationQueryBuilderPart($qb, $locale);
+        $queryBuilder = $this->createTranslationQueryBuilderPart($queryBuilder, $locale);
 
-        return $qb->getQuery()->getResult();
+        return $queryBuilder->getQuery()->getResult();
     }
 
     /**
