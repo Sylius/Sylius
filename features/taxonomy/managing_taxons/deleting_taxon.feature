@@ -16,8 +16,10 @@ Feature: Deleting a taxon
     @ui
     Scenario: Deleting a taxon with a child does not delete any other taxons
         Given the store classifies its products as "Main catalog"
-        Given the "Main catalog" taxon has children taxon "Shoes" and "Shovels"
+        And the "Main catalog" taxon has children taxon "Shoes" and "Shovels"
         And the "Shoes" taxon has children taxon "Men" and "Women"
         When I delete taxon named "Shoes"
         Then the taxon named "Shoes" should no longer exist in the registry
-        And the "Shovels" taxon should appear in the registry
+        And the taxon named "Men" should no longer exist in the registry
+        And the taxon named "Women" should no longer exist in the registry
+        But the "Shovels" taxon should appear in the registry
