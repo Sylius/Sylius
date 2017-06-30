@@ -3,8 +3,26 @@
 
 sylius:
     form:
+        credit_card:
+            cardholder_name: Ime vlasnika kartice
+            expiry_month: Mesec isteka
+            expiry_year: Godina isteka
+            number: Broj kartice
+            type: Tip Kartice
         payment:
+            method: Metod plaćanja
             state:
                 header: Stanje plaćanja
+                completed: Završeno
+                authorized: Autorizovano
+                failed: Nеuspеšno
+                pending: Na čekanju
+                processing: Obrađivanje
+                unknown: Nеpoznato
+                void: Otkazano
+                cancelled: Otkazano
         payment_method:
+            enabled: Omogućeno?
+            instructions: Instrunkcije
             name: Ime
+            position: Pozicija

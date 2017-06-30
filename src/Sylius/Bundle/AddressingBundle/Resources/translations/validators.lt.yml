@@ -32,6 +32,7 @@ sylius:
     country:
         code:
             not_blank: Įveskite šalies ISO kodą.
+            regex: Šalies kodas gali būti sudarytas tik iš raidžių, skaičių, brūkšnelių ir pabraukimų.
             unique: Šalies ISO kodas turi būti unikalus.
     province:
         code:
@@ -45,8 +46,11 @@ sylius:
             not_blank: Įveskite provincijos pavadinimą.
             unique: Provincijos pavadinimas turi būti unikalus.
     zone:
+        scope:
+            not_blank: Prašome įvesti sritį.
         code:
             not_blank: Prašome įvesti zonos kodą.
+            regex: Šalies kodas gali būti sudarytas tik iš raidžių, skaičių, brūkšnelių ir pabraukimų.
             unique: Zonos kodas turi būti unikalus.
         members:
             min_count: Pridėkite bent {{ limit }} zonos valstybes.
@@ -57,4 +61,5 @@ sylius:
     zone_member:
         code:
             not_blank: Prašome pasirinkti zonos narį.
+            regex: Šalies kodas gali būti sudarytas tik iš raidžių, skaičių, brūkšnelių ir pabraukimų.
         unique: Pasirinktas zonos narys jau yra šioje zonoje.

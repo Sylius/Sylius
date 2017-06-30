@@ -24,6 +24,7 @@ sylius:
             roles: Roller
         channel:
             currencies: Para birimi
+            currency_base: Ana Para Birimi
             locales: Diller
             payment_methods: Ödeme Yöntemleri
             shipping_methods: Kargolama Yöntemleri
@@ -109,6 +110,8 @@ sylius:
         product_association_type:
             name: Ad
         promotion_rule:
+            product:
+                products: Ürünler
             total_of_items_from_taxon:
                 amount: Miktar
         payment_method:

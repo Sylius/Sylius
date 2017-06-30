@@ -35,6 +35,7 @@ sylius:
             payment_methods: Список методов оплаты
             shipping_methods: Список способов доставки
             skipping_shipping_step_allowed: Пропустить шаг доставки, если доступен только один способ доставки?
+            skipping_payment_step_allowed: Пропустить шаг оплаты, если только один способ оплаты доступен?
             tax_calculation_strategy: Способ расчета налогов
             tax_zone_default: Налоговая зона по умолчанию
             taxonomies: Список каталогов
@@ -109,6 +110,7 @@ sylius:
             on_hand: Количество на складе
             price: Цена
             sku: Идентификатор товарной позиции
+            shipping_required: Требуется ли доставка?
             weight: Вес
             width: Ширина
         attribute:

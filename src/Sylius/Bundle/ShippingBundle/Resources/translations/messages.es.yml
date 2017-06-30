@@ -16,7 +16,7 @@ sylius:
                 ready: Listo
                 shipped: Enviado
                 returned: Devuelto
-                cancelled: Cancelado/a
+                cancelled: Cancelado
             tracking_code: Código de seguimiento
         shipping_calculator:
             flat_rate_configuration:

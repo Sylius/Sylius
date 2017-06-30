@@ -28,6 +28,8 @@ sylius:
         promotion_rule:
             cart_quantity_configuration:
                 count: Sayısı
+            contains_product_configuration:
+                variants: Ürünler
             item_total_configuration:
                 amount: Miktar
             shipping_country_configuration:

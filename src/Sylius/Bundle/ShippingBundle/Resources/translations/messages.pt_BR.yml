@@ -21,8 +21,10 @@ sylius:
         shipping_calculator:
             flat_rate_configuration:
                 label: Taxa plana por remessa
+                amount: Total
             per_unit_rate_configuration:
                 label: Taxa fixa por unidade
+                amount: Total
         shipping_category:
             description: Descrição
             name: Nome
@@ -37,3 +39,4 @@ sylius:
             name: Nome
             tax_category: Categoria de imposto
             translations: Traduções
+            position: Posição

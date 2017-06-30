@@ -14,7 +14,13 @@ sylius:
         impersonate: 'Rechte von %name% erfolgreich übernommen.'
         set_address_as_default: 'Adresse wurde als Standard gesetzt.'
     order:
+        apply_state_machine_transition_error: 'Es trat ein unerwartetes Problem beim verarbeiten der Bestellung auf. Bitte versuchen Sie es noch einmal.'
         promotion_integrity: 'Sie sind nicht mehr berechtigt an dieser Aktion teilzunehmen %promotionName%.'
         total_integrity: 'Der Gesamtbetrag Ihrer Bestellung hat sich geändert. Prüfen Sie die Bestelldetails und bestätigen Sie Ihre Bestellung erneut.'
+        update_error: 'Es trat ein unerwartetes Problem bei der Aktualisierung eines Produkts auf. Bitte versuchen Sie es noch einmal.'
+    payment:
+        apply_state_machine_transition_error: 'Es trat ein unerwartetes Problem beim verarbeiten einer Zahlung auf. Bitte versuchen Sie es noch einmal.'
     product:
         out_of_stock: 'Es sind nur %quantity% dieses Produktes verfügbar.'
+    product_variant:
+        update_error: 'Es trat ein unerwartetes Problem bei der Aktualisierung einer Produktvariante auf. Bitte versuchen Sie es noch einmal.'

@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    channel:
+        code:
+            not_blank: Si us plau, introdueixi codi de canal.
+            regex: El codi de canal només pot estar format de lletres, números, guions i guions baixos.
+            unique: El codi de canal ha de ser únic.
+        name:
+            not_blank: Escriu el nom del canal.

@@ -14,11 +14,32 @@ sylius:
                 different_billing_address: Utilitzar diferent adreça de facturació?
             payment_method: Mètode de pagament
             shipping_method: Mètode d'enviament
+        promotion:
+            channels: Canals
+        promotion_action:
+            add_product_configuration:
+                product: Producte
+        promotion_coupon:
+            per_customer_usage_limit: Límit d'ús per client
         group:
             name: Nom
             roles: Rols
         channel:
+            contact_email: Correu de contacte
+            currencies: Monedes
+            currency_base: Moneda base
+            account_verification_required: Es requereix verificació del compte?
+            hostname: Nom del servidor
+            locale_default: Idioma per defecte
+            locales: Locals
+            payment_methods: Mètodes de pagament
+            shipping_methods: Mètode d'enviament
+            skipping_shipping_step_allowed: Saltar el pas d'enviament si només hi ha un mètode d'enviament?
+            skipping_payment_step_allowed: Saltar el pas de pagament si només hi ha un mètode de pagament disponible?
+            tax_calculation_strategy: Estratègia de càlcul d'impostos
             tax_zone_default: Zona d'impostos per defecte
+            taxonomies: Taxonomies
+            theme: Tema
         image:
             type: Tipus
             file: Imatge
@@ -26,10 +47,13 @@ sylius:
             code: Codi
             enabled: Activat
         order_filter:
+            created_at_from: Creat després
+            created_at_to: Creat abans
             number: Nombre
             total_from: Des de
             total_to: A
             payment_state: Estat de pagament
+            channel: Tots els canals
         page:
             body: Cos
             id: ID
@@ -39,6 +63,7 @@ sylius:
             restricted_zone: Àrea restringida
             short_description: Descripció breu
             variant_selection_method: Mètode de selecció de variant
+            channels: Canals
             enabled: Activat
         product_filter:
             name: Nom
@@ -51,10 +76,12 @@ sylius:
             created_at_to: A
             number: Número de comanda
             shipping_address: Enviar al nom
+            channel: Tots els canals
         payment_filter:
             created_at_from: Des de
             created_at_to: A
             number: Número de comanda
+            channel: Tots els canals
         shipping_method:
             zone: Zona
         taxon:
@@ -83,12 +110,38 @@ sylius:
             sku: SKU
             weight: Pes
             width: Amplada
+        attribute:
+            product_attribute_value:
+                attribute: Propietats
+                value: Valor
         guest:
             email: Correu electrònic
+        product_association:
+            product: Producte associat
+            type: Tipus d'Associació
         product_association_type:
             name: Nom
+        promotion_filter:
+            products: Filtre de producte
+        promotion_rule:
+            product:
+                products: Productes
+            total_of_items_from_taxon:
+                amount: Total
+        payment_method:
+            channels: Canals
+        product_attribute:
+            position: Posició
+        zone:
+            scopes:
+                shipping: Lliurament
+                tax: Impostos
     installer:
         extensions:
+            header: extensions
+            accelerator:
+                header: Accelerador
+                help: Permetre Zend OpCache (altament recomanat).
             apc: APC
             ctype: Ctype
             gd: GD
@@ -107,9 +160,15 @@ sylius:
             simplexml_import_dom: SimpleXML
             token_get_all: Tokenizer
         filesystem:
+            cache:
+                header: cache
             exists: existeix
+            logs:
+                header: registres
             not_exists: no existeix
             not_writable: Sense permís d`escriptura
+            parameters:
+                header: parameters.yml
             vendors: vendors
             writable: que es pugui escriure
         settings:

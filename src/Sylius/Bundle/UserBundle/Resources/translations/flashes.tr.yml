@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    user:
+        expire_password_reset_token: 'Parola sıfırlama belirtecinin süresi sona erdi.'
+        change_password: 'Şifreniz başarıyla değiştirildi!'
+        reset_password: 'Şifreniz başarı ile sıfırlandı!'

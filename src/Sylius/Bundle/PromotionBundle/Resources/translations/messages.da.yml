@@ -18,6 +18,10 @@ sylius:
         promotion_rule:
             cart_quantity_configuration:
                 count: Antal
+            contains_product_configuration:
+                variants: Produkter
             shipping_country_configuration:
                 country: Land
+            taxonomy_configuration:
+                taxons: Kategorier
             type: Type

@@ -16,3 +16,6 @@ sylius:
             max_length: 'Fraktmetodenavn kan ikke være lengre enn {{ limit }} tegn.'
             min_length: 'Fraktmetodenavn må være minst {{ limit }} tegn.'
             not_blank: 'Vennligst skriv inn fraktmetodenavn.'
+    shipment:
+        shipping_method:
+            not_blank: 'Vennligst velg fraktmetode.'

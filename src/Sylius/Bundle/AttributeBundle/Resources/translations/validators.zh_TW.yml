@@ -1,0 +1,18 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    attribute:
+        name:
+            not_blank: 請輸入屬性名稱。
+            min_length: 屬性名稱必須是至少 1 個字元長。|屬性名稱必須至少 {{ limit }} 個字元長。
+            max_length: 屬性名稱必須不能超過 1 個字元。|屬性名稱不能超過 {{ limit }} 個字元。
+        code:
+            not_blank: 請輸入屬性代碼。
+            regex: 屬性代碼僅可以字母、 數位、 破折號和底線組成。
+            unique: 此代碼已被使用。
+    attribute_value:
+        attribute:
+            not_blank: 請選擇屬性。
+        value:
+            not_blank: 請輸入屬性值。

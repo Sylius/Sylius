@@ -1,0 +1,7 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    shipment:
+        shipping_method:
+            not_blank: 'Si us plau seleccioneu el mètode d''enviament.'

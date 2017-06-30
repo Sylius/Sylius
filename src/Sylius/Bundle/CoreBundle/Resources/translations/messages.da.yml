@@ -14,6 +14,8 @@ sylius:
                 different_billing_address: Brug anden faktureringsadresse?
             payment_method: Betalingsmåde
             shipping_method: Fragtmetoder
+        promotion:
+            channels: Kanaler
         promotion_action:
             add_product_configuration:
                 product: Produkt
@@ -48,6 +50,7 @@ sylius:
             restricted_zone: Begrænset zone
             short_description: Kort beskrivelse
             variant_selection_method: Variant udvælgelsesmetode
+            channels: Kanaler
             enabled: Aktiveret
         product_filter:
             name: Navn
@@ -96,6 +99,13 @@ sylius:
             email: Email
         product_association_type:
             name: Navn
+        promotion_rule:
+            has_taxon:
+                taxons: Kategorier
+            product:
+                products: Produkter
+        payment_method:
+            channels: Kanaler
     installer:
         extensions:
             apc: APC

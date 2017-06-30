@@ -8,3 +8,5 @@ sylius:
             code: 名称
             enabled: 已启用
             exchange_rate: 汇率
+        exchange_rate:
+            source_currency: 源货币

@@ -16,8 +16,8 @@ sylius:
             invalid: El ratio debe ser un número.
             not_blank: Por favor, introduce el ratio de la tasa de cambio.
         source_currency:
-            not_blank: Por favor, introduce de qué moneda se debería deducir el tipo de cambio.
+            not_blank: Por favor, introduce de qué moneda se debería deducir la tasa de cambio.
         target_currency:
-            not_blank: Por favor, introduce a qué moneda se debe establecer el tipo de cambio.
-        unique_currency_pair: El par de divisas debe ser única.
+            not_blank: Por favor, introduce a qué moneda se debe establecer la tasa de cambio.
+        unique_currency_pair: El par de divisas debe ser único.
         different_source_target_currency: La moneda origen y destino deben ser diferentes.

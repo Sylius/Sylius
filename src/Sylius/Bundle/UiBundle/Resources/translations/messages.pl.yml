@@ -724,7 +724,7 @@ sylius:
         shipping_charges: 'Koszty przesyłki'
         shipping_method: 'Metoda wysyłki'
         shipping_method_details: 'Szczegóły metody wysyłki'
-        shipping_methods: 'Sposób wysyłki'
+        shipping_methods: 'Metody wysyłki'
         shipping_state: 'Status wysyłki'
         shipping_total: 'Koszt wysyłki'
         shop_by: 'Przeglądaj'

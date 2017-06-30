@@ -3,6 +3,10 @@
 
 sylius:
     promotion:
+        code:
+            unique: Girilen promosyon kodu zaten var.
+            regex: Promosyon kodu yalnızca harf, sayı, tire ve alt çizgi oluşur.
+            not_blank: Promosyon kodunu giriniz.
         description:
             max_length: Promosyon açıklaması 1 karakterden uzun olmamalıdır. |Promosyon açıklamasının {{ limit }} karakterden uzun olmaması gerekir.
             min_length: Promosyon açıklaması en az 1 karakter uzunluğunda olmalıdır.|Promosyon açıklaması en az {{ limit }} karakter uzunluğunda olmalıdır.

@@ -6,6 +6,8 @@ sylius:
         sku:
             not_blank: Lütfen ürün stok birimini girin.
             unique: Ürün stok birimi benzersiz olmalıdır.
+        slug:
+            not_blank: Lütfen ürün bilgisi girin.
         name:
             not_blank: Lütfen ürün adı girin.
             min_length: Ürün adı en az 1 karakter uzunluğunda olmalıdır.|Ürün adı en az {{ limit }} karakter uzunluğunda olmalıdır.

@@ -9,6 +9,7 @@ sylius:
             not_blank: Venligst indtast by.
         country:
             not_blank: Vælg venligst et land.
+            disabled: Det valgte land er deaktiveret. Venligst vælg et andet.
         first_name:
             max_length: Fornavn må ikke være længere end 255 tegn|Fornavn må ikke være længere end 255 tegn.
             min_length: Fornavn skal være mindst 2 tegn|Fornavn skal være mindst 2 tegn.
@@ -28,7 +29,14 @@ sylius:
             min_length: Gade skal være mindst 2 tegn|Gade skal være mindst 2 tegn.
             not_blank: Venligst indtast gade.
         not_shippable: Denne adresse er ikke en gyldig leveringsadresse.
+    country:
+        code:
+            not_blank: Venligst indtast ISO-landekoden.
+            regex: Landekoden kan kun bestå af bogstaver, tal, bindestreger og understregninger.
+            unique: ISO-landekoden skal være unik.
     province:
+        code:
+            min_length: Provins-koden skal være på minimum 5 tegn | Provins-koden skal være på minimum 5 tegn.
         name:
             max_length: Provins navn må ikke være længere end 255 tegn|Provins navn må ikke være længere end 255 tegn.
             min_length: Provins navn skal være mindst 2 tegn|Provins navn skal være mindst 2 tegn.

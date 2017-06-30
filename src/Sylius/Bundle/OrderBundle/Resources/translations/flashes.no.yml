@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    cart:
+        add_item: 'Varen ble lagt i handlevognen'
+        cannot_modify: 'Bestilling har allerede blitt gjort på handlekurven du forsøker å endre.'
+        remove_item: 'Varen ble fjernet fra handlevognen'
+        save: 'Handlevognen ble oppdatert'

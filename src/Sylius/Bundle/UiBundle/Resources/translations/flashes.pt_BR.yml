@@ -4,12 +4,22 @@
 sylius:
     channel:
         delete_error: 'O canal não pode ser excluído. É obrigatório pelo menos um canal ativo.'
+    checkout:
+        complete_error: 'Houve um problema inesperado ao finalizar seu pedido. Por favor, tente completar o pedido novamente.'
     contact:
         request_success: 'Seu pedido de contato foi enviado com sucesso.'
         request_error: 'Ocorreu um problema ao enviar a solicitação de contato. Por favor, tente novamente mais tarde.'
     customer:
         add_address: 'Endereço foi adicionado com sucesso.'
+        impersonate: '%name% representado com êxito.'
         set_address_as_default: 'Endereço foi definido como padrão.'
+    order:
+        apply_state_machine_transition_error: 'Houve um problema inesperado ao atualizar seu pedido. Por favor, tente atualizar o pedido novamente.'
+        promotion_integrity: 'Você já não é mais elegível para esta promoção %promotionName%.'
+        total_integrity: 'O total do pedido foi alterado, verifique suas informações do pedido e confirme novamente.'
+        update_error: 'Houve um problema inesperado ao atualizar o produto. Por favor, tente atualizar o produto novamente.'
+    payment:
+        apply_state_machine_transition_error: 'Houve um problema inesperado ao atualizar o pagamento. Por favor, tente atualizar o pagamento novamente.'
     product:
         out_of_stock: 'Há apenas a %quantity% deste produto no estoque.'
     product_variant:

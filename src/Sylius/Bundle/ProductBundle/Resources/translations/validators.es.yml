@@ -52,4 +52,4 @@ sylius:
         code:
             not_blank: Por favor, introduzca el código del tipo de asociación.
             regex: El código de tipo de asociación solo puede contener letras, números, guiones y guiones bajos.
-            unique: El tipo de asociación con el código dado ya existe.
+            unique: Ya existe un tipo de asociación con ese código.

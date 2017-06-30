@@ -13,5 +13,5 @@ sylius:
                 label: Statut
                 new: Nouveau
                 rejected: Rejeté
-            submit: Envoyer
+            submit: Valider
             title: Titre

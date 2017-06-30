@@ -1,0 +1,31 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        product:
+            name: 名稱
+            description: 説明
+            attributes: 屬性
+            options: 選項
+            meta_keywords: Meta 關鍵字
+            meta_description: Meta 描述
+            slug: Slug
+            taxons: 分類
+        product_variant:
+            name: 名稱
+        association_type:
+            name: 名稱
+            translations: 翻譯
+        association:
+            type: 關聯類型
+            product: 關連產品
+        variant:
+            name: 名稱
+        option:
+            name: 名稱
+            position: 位置
+            values: 可能值
+        option_value:
+            add_value: 添加值
+            value: 數值

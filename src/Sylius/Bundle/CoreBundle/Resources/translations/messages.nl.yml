@@ -35,6 +35,7 @@ sylius:
             payment_methods: Betaalmethodes
             shipping_methods: Verzendmethodes
             skipping_shipping_step_allowed: Verzending stap overslaan indien er slechts 1 verzendmethode beschikbaar is?
+            skipping_payment_step_allowed: Sla betaalstap over als er maar een enkele betaalmethode is?
             tax_calculation_strategy: Belastingberekeningsstrategie
             tax_zone_default: Standaard belastingzone
             taxonomies: Taxonomieën
@@ -109,6 +110,7 @@ sylius:
             on_hand: Huidige voorraad
             price: Prijs
             sku: SKU
+            shipping_required: Verzendbaar?
             weight: Gewicht
             width: Breedte
         attribute:

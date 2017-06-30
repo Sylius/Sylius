@@ -9,6 +9,7 @@ sylius:
             not_blank: 'Por favor, digite o nome de categoria transporte.'
         code:
             not_blank: 'Por favor digite o código de categoria de transporte.'
+            regex: 'Código da Categoria de Postagem somente pode ser composto por letras, números, hifens e traços.'
             unique: 'A categoria de envio com esse código já existe.'
     shipping_method:
         calculator:
@@ -21,6 +22,7 @@ sylius:
             not_blank: 'Por favor, digite o método de expedição.'
         code:
             not_blank: 'Digite o código do método de envio.'
+            regex: 'Código do Método de Postagem somente pode ser composto por letras, números, hifens e traços.'
             unique: 'O método de envio com determinado código já existe.'
         zone:
             not_blank: 'Por favor, selecione a zona de método de envio.'

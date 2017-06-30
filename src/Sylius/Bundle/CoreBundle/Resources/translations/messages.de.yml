@@ -28,12 +28,14 @@ sylius:
             contact_email: Kontakt E-Mail
             currencies: Währungen
             currency_base: Basis-Währung
+            account_verification_required: Ist eine Konto Bestätigung erforderlich?
             hostname: Server-Name
             locale_default: Standard Lokalisierung
             locales: Gebietsschemata
             payment_methods: Zahlungsmethoden
             shipping_methods: Versandmethoden
             skipping_shipping_step_allowed: Versandart überspringen, wenn nur eine Versandart verfügbar ist?
+            skipping_payment_step_allowed: Überspringen des Zahlungsschritt, wenn nur eine Zahlungsmethode verfügbar ist?
             tax_calculation_strategy: Steuerberechnungsgrundlage
             tax_zone_default: Standard Steuerzone
             taxonomies: Klassifizierungen
@@ -108,6 +110,7 @@ sylius:
             on_hand: Auf Lager
             price: Preis
             sku: Bestandseinheit
+            shipping_required: Ist ein Versand erforderlich?
             weight: Gewicht
             width: Breite
         attribute:
