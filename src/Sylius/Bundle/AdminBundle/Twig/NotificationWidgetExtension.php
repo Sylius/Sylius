@@ -11,6 +11,8 @@
 
 namespace Sylius\Bundle\AdminBundle\Twig;
 
+use Sylius\Bundle\CoreBundle\Application\Kernel;
+
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
@@ -66,6 +68,7 @@ final class NotificationWidgetExtension extends \Twig_Extension
 
         return $environment->render('@SyliusAdmin/_notification.html.twig', [
             'frequency' => $this->checkFrequency,
+            'currentVersion' => Kernel::VERSION,
         ]);
     }
 }

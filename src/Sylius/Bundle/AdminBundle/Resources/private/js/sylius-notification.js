@@ -52,7 +52,7 @@
 
             function initializeWidget() {
                 if (undefined == retrieve(LAST_HUB_SYLIUS_VERSION)) {
-                    store(LAST_HUB_SYLIUS_VERSION, '0');
+                    store(LAST_HUB_SYLIUS_VERSION, notificationMenu.data('current-version'));
                 }
                 if (undefined == retrieve(SYLIUS_VERSION_DISMISSED)) {
                     store(SYLIUS_VERSION_DISMISSED, '0');
