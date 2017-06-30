@@ -12,9 +12,7 @@
 namespace Sylius\Tests\Controller;
 
 use Lakion\ApiTestCase\JsonApiTestCase;
-use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\PaymentMethodInterface;
-use Sylius\Component\Core\Model\ShippingMethodInterface;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -54,6 +52,7 @@ EOT;
         $this->client->request('POST', '/api/v1/carts/', [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
+        $this->assertResponseCode($response, Response::HTTP_CREATED);
         $rawResponse = json_decode($response->getContent(), true);
 
         return $rawResponse['id'];
@@ -75,6 +74,7 @@ EOT;
 EOT;
 
         $this->client->request('POST', $url, [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_CREATED);
     }
 
     /**
@@ -109,6 +109,7 @@ EOT;
 
         $url = sprintf('/api/v1/checkouts/addressing/%d', $cartId);
         $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
     }
 
     /**
@@ -135,6 +136,7 @@ EOT;
 EOT;
 
         $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
     }
 
     /**
@@ -161,6 +163,7 @@ EOT;
 EOT;
 
         $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
     }
 
     /**
@@ -169,6 +172,7 @@ EOT;
     protected function completeOrder($cartId)
     {
         $this->client->request('PUT', sprintf('/api/v1/checkouts/complete/%d', $cartId), [], [], static::$authorizedHeaderWithContentType);
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
     }
 
     /**
