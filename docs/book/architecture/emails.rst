@@ -77,8 +77,8 @@ How to send an Email programmatically?
 --------------------------------------
 
 For sending emails **Sylius** is using a dedicated service - **Sender**. Additionally we have **EmailManagers**
-for Order Confirmation(`OrderEmailManager <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/CoreBundle/EmailManager/OrderEmailManager.php>`_)
-and for Shipment Confirmation(`ShipmentEmailManager <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/CoreBundle/EmailManager/ShipmentEmailManager.php>`_).
+for Order Confirmation(`OrderEmailManager <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/ShopBundle/EmailManager/OrderEmailManager.php>`_)
+and for Shipment Confirmation(`ShipmentEmailManager <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/AdminBundle/EmailManager/ShipmentEmailManager.php>`_).
 
 .. tip::
 
