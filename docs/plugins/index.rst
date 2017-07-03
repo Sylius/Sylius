@@ -25,7 +25,7 @@ Since Sylius is an open-source platform, there is a certain flow in order for th
 
 **1.** Develop the plugin using :doc:`the official Plugin Development guide </plugins/creating-plugin>`.
 
-**2.** Send it to the project maintainers. It can be via email to any member of the Sylius Core team, or `the official Sylius Slack <https://slackinvite.me/to/sylius-devs>`_.
+**2.** Send it to the project maintainers. It can be via email to any member of the Sylius Core team, or `the official Sylius Slack <http://sylius.org/slack>`_.
 
 **3.** Wait for your Plugin to be featured in :doc:`the list of plugins </plugins/list>` here in the docs and on the Sylius website.
 
