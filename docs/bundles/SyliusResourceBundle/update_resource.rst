@@ -84,7 +84,8 @@ Below you can see how to specify custom options, in this case, ``validation_grou
             _sylius:
                 form:
                     type: app_book_custom
-                    validation_groups: [sylius, my_custom_group]
+                    options:
+                        validation_groups: [sylius, my_custom_group]
 
 Overriding the Criteria
 -----------------------
