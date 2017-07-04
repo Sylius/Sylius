@@ -33,12 +33,12 @@ final class RegisterFiltersPass implements CompilerPassInterface
         $formTypeRegistry = $container->getDefinition('sylius.form_registry.grid_filter');
 
         foreach ($container->findTaggedServiceIds('sylius.grid_filter') as $id => $attributes) {
-            if (!isset($attributes[0]['type'], $attributes[0]['form-type'])) {
-                throw new \InvalidArgumentException('Tagged grid filters needs to have `type` and `form-type` attribute.');
+            if (!isset($attributes[0]['type'], $attributes[0]['form_type'])) {
+                throw new \InvalidArgumentException('Tagged grid filters needs to have `type` and `form_type` attributes.');
             }
 
             $registry->addMethodCall('register', [$attributes[0]['type'], new Reference($id)]);
-            $formTypeRegistry->addMethodCall('add', [$attributes[0]['type'], 'default', $attributes[0]['form-type']]);
+            $formTypeRegistry->addMethodCall('add', [$attributes[0]['type'], 'default', $attributes[0]['form_type']]);
         }
     }
 }

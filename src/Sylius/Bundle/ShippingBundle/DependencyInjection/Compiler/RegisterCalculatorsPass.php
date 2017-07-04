@@ -43,8 +43,8 @@ final class RegisterCalculatorsPass implements CompilerPassInterface
 
             $registry->addMethodCall('register', [$name, new Reference($id)]);
 
-            if (isset($attributes[0]['form-type'])) {
-                $formTypeRegistry->addMethodCall('add', [$name, 'default', $attributes[0]['form-type']]);
+            if (isset($attributes[0]['form_type'])) {
+                $formTypeRegistry->addMethodCall('add', [$name, 'default', $attributes[0]['form_type']]);
             }
         }
 

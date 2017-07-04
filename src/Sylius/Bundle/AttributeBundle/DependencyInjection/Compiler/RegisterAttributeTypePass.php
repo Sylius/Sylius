@@ -35,18 +35,18 @@ final class RegisterAttributeTypePass implements CompilerPassInterface
         $attributeTypes = [];
         foreach ($container->findTaggedServiceIds('sylius.attribute.type') as $id => $attributesTypes) {
             $attributeType = $attributesTypes[0];
-            if (!isset($attributeType['attribute-type'], $attributeType['label'], $attributeType['form-type'])) {
-                throw new \InvalidArgumentException('Tagged attribute type needs to have `attribute-type`, `label` and `form-type` attributes.');
+            if (!isset($attributeType['attribute_type'], $attributeType['label'], $attributeType['form_type'])) {
+                throw new \InvalidArgumentException('Tagged attribute type needs to have `attribute_type`, `label` and `form_type` attributes.');
             }
 
-            $registry->addMethodCall('register', [$attributeType['attribute-type'], new Reference($id)]);
-            $formRegistry->addMethodCall('add', [$attributeType['attribute-type'], 'default', $attributeType['form-type']]);
+            $registry->addMethodCall('register', [$attributeType['attribute_type'], new Reference($id)]);
+            $formRegistry->addMethodCall('add', [$attributeType['attribute_type'], 'default', $attributeType['form_type']]);
 
-            if (isset($attributeType['configuration-form-type'])) {
-                $formRegistry->addMethodCall('add', [$attributeType['attribute-type'], 'configuration', $attributeType['configuration-form-type']]);
+            if (isset($attributeType['configuration_form_type'])) {
+                $formRegistry->addMethodCall('add', [$attributeType['attribute_type'], 'configuration', $attributeType['configuration_form_type']]);
             }
 
-            $attributeTypes[$attributeType['attribute-type']] = $attributeType['label'];
+            $attributeTypes[$attributeType['attribute_type']] = $attributeType['label'];
         }
 
         $container->setParameter('sylius.attribute.attribute_types', $attributeTypes);
