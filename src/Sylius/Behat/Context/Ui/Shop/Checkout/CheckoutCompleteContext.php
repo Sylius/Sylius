@@ -235,11 +235,11 @@ final class CheckoutCompleteContext implements Context
     }
 
     /**
-     * @Then my order's locale should be :localeName
+     * @Then my order's locale should be :locale
      */
-    public function myOrderLocaleShouldBe($localeName)
+    public function myOrderLocaleShouldBe($locale)
     {
-        Assert::true($this->completePage->hasLocale($localeName));
+        Assert::true($this->completePage->hasLocale($locale));
     }
 
     /**

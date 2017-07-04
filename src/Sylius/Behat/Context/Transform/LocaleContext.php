@@ -40,11 +40,7 @@ final class LocaleContext implements Context
      */
     public function castToLocaleCode($localeName)
     {
-        try {
-            return $this->localeNameConverter->convertNameToCode($localeName);
-        } catch (\InvalidArgumentException $exception) {
-            return $localeName;
-        }
+        return $this->localeNameConverter->convertNameToCode($localeName);
     }
 
     /**
@@ -52,10 +48,6 @@ final class LocaleContext implements Context
      */
     public function castToLocaleName($localeCode)
     {
-        try {
-            return $this->localeNameConverter->convertCodeToName($localeCode);
-        } catch (\InvalidArgumentException $exception) {
-            return $localeCode;
-        }
+        return $this->localeNameConverter->convertCodeToName($localeCode);
     }
 }

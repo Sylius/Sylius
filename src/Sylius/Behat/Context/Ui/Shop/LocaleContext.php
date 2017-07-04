@@ -35,41 +35,41 @@ final class LocaleContext implements Context
     }
 
     /**
-     * @Given I switched the shop's locale to :localName
-     * @When I switch to the :localeName locale
-     * @When I change my locale to :localeName
+     * @Given I switched the shop's locale to :locale
+     * @When I switch to the :locale locale
+     * @When I change my locale to :locale
      */
-    public function iSwitchTheLocaleToTheLocale($localeName)
+    public function iSwitchTheLocaleToTheLocale($locale)
     {
         $this->homePage->open();
-        $this->homePage->switchLocale($localeName);
+        $this->homePage->switchLocale($locale);
     }
 
     /**
-     * @Then I should shop using the :localeName locale
-     * @Then I should still shop using the :localeName locale
+     * @Then I should shop using the :locale locale
+     * @Then I should still shop using the :locale locale
      */
-    public function iShouldShopUsingTheLocale($localeName)
+    public function iShouldShopUsingTheLocale($locale)
     {
-        Assert::same($this->homePage->getActiveLocale(), $localeName);
+        Assert::same($this->homePage->getActiveLocale(), $locale);
     }
 
     /**
-     * @Then I should be able to shop using the :localeName locale
-     * @Then the store should be available in the :localName locale
+     * @Then I should be able to shop using the :locale locale
+     * @Then the store should be available in the :locale locale
      */
-    public function iShouldBeAbleToShopUsingTheLocale($localeName)
+    public function iShouldBeAbleToShopUsingTheLocale($locale)
     {
-        Assert::oneOf($localeName, $this->homePage->getAvailableLocales());
+        Assert::oneOf($locale, $this->homePage->getAvailableLocales());
     }
 
     /**
-     * @Then I should not be able to shop using the :localeName locale
-     * @Then the store should not be available in the :localName locale
+     * @Then I should not be able to shop using the :locale locale
+     * @Then the store should not be available in the :locale locale
      */
-    public function iShouldNotBeAbleToShopUsingTheLocale($localeName)
+    public function iShouldNotBeAbleToShopUsingTheLocale($locale)
     {
-        if (in_array($localeName, $this->homePage->getAvailableLocales(), true)) {
+        if (in_array($locale, $this->homePage->getAvailableLocales(), true)) {
             throw new \InvalidArgumentException(sprintf(
                 'Expected "%s" not to be in "%s"',
                 $localeName,
