@@ -11,7 +11,6 @@ sylius:
             last_name: Nachname
             phone_number: Telefonnummer
             postcode: PLZ
-            street: Straße
             province: Bundesland
             zone: Versandgebiet
         country:

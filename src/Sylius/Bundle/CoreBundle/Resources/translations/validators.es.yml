@@ -76,7 +76,7 @@ sylius:
             all_defined: 'Debes definir el precio para cada canal.'
     product_translation:
         short_description:
-            max: Breve descripción. No debe superar los {{ limit }} caracteres.
+            max: La descripción corta no debe superar los {{ limit }} caracteres.
     taxon_image:
         file:
             max_size: La imagen es demasiado grande - {{ size }}{{ suffix }}. El tamaño máximo permitido es {{ limit }}{{ suffix }}.

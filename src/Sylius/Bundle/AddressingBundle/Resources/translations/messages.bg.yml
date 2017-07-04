@@ -11,7 +11,6 @@ sylius:
             last_name: Фамилно име
             phone_number: Телефонен номер
             postcode: Пощенски код
-            street: Улица
             province: Област
         country:
             add_province: Добавяне на провинция

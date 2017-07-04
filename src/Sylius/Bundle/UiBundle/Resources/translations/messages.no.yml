@@ -314,8 +314,6 @@ sylius:
         promotions: 'Kampanjer'
         province: 'Fylke'
         provinces: 'Fylker'
-        qty: 'Antall'
-        quantity: 'Antall'
         rating: 'Rangering'
         ready: 'Klar'
         recent_orders: 'Siste ordrer'
