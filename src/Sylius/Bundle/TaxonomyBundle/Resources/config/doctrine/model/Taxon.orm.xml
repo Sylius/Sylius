@@ -34,7 +34,7 @@
 
         <one-to-many field="children" target-entity="Sylius\Component\Taxonomy\Model\TaxonInterface" mapped-by="parent">
             <cascade>
-                <cascade-all />
+                <cascade-persist />
             </cascade>
             <order-by>
                 <order-by-field name="position" direction="ASC" />
