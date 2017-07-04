@@ -30,7 +30,7 @@ final class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->scalarNode('alias')->isRequired()->cannotBeEmpty()->end()
-                ->scalarNode('path')->cannotBeEmpty()->end()
+                ->scalarNode('path')->defaultValue(null)->end()
                 ->scalarNode('identifier')->defaultValue('id')->end()
                 ->arrayNode('criteria')
                     ->useAttributeAsKey('identifier')
