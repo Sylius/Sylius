@@ -11,7 +11,6 @@ sylius:
             last_name: Cognoms
             phone_number: Telèfon
             postcode: Codi postal
-            street: Carrer
             province: Província
             zone: Zona
         country:

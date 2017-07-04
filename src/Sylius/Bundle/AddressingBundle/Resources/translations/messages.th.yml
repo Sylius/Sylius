@@ -11,7 +11,6 @@ sylius:
             last_name: นามสกุล
             phone_number: หมายเลขโทรศัพท์
             postcode: รหัสไปรษณีย์
-            street: ที่อยู่
             province: จังหวัด
             zone: โซน
         country:

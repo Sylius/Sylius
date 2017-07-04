@@ -11,7 +11,6 @@ sylius:
             last_name: Sukunimi
             phone_number: Puhelinnumero
             postcode: Postinumero
-            street: Katuosoite
             province: Lääni
         country:
             add_province: Lisää maakunta
