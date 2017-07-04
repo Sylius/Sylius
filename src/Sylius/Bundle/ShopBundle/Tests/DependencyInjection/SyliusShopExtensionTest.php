@@ -119,11 +119,21 @@ final class SyliusShopExtensionTest extends AbstractExtensionTestCase
     /**
      * @test
      */
-    public function it_configures_firewall_context_for_user_registration_listener()
+    public function it_configures_default_firewall_context_parameter_for_user_registration_listener()
     {
         $this->load([]);
 
-        $this->assertContainerBuilderHasServiceDefinitionWithArgument('sylius.listener.user_registration', 5, 'shop');
+        $this->assertContainerBuilderHasParameter('sylius_shop.firewall_context_name', 'shop');
+    }
+
+    /**
+     * @test
+     */
+    public function it_configures_firewall_context_parameter_for_user_registration_listener_depending_on_custom_configuration()
+    {
+        $this->load(['firewall_context_name' => 'myshopfirewall']);
+
+        $this->assertContainerBuilderHasParameter('sylius_shop.firewall_context_name', 'myshopfirewall');
     }
 
     /**

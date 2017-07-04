@@ -38,8 +38,8 @@ final class SyliusShopExtension extends Extension
         $loader->load('services.xml');
         $loader->load(sprintf('services/integrations/locale/%s.xml', $config['locale_switcher']));
 
+        $container->setParameter('sylius_shop.firewall_context_name', $config['firewall_context_name']);
         $this->configureCheckoutResolverIfNeeded($config['checkout_resolver'], $container);
-        $this->configureFirewallContextName($config['firewall_context_name'], $container);
     }
 
     /**
@@ -73,15 +73,6 @@ final class SyliusShopExtension extends Extension
         $container->setDefinition('sylius.resolver.checkout', $checkoutResolverDefinition);
         $container->setDefinition('sylius.listener.checkout_redirect', $this->registerCheckoutRedirectListener($config));
         $container->setDefinition('sylius.router.checkout_state', $checkoutStateUrlGeneratorDefinition);
-    }
-
-    private function configureFirewallContextName($firewallContextName, ContainerBuilder $container)
-    {
-        $userRegistrationListenerDefinition = $container->getDefinition('sylius.listener.user_registration');
-        $constructorArguments = $userRegistrationListenerDefinition->getArguments();
-        $constructorArguments[5] = $firewallContextName;
-
-        $userRegistrationListenerDefinition->setArguments($constructorArguments);
     }
 
     /**
