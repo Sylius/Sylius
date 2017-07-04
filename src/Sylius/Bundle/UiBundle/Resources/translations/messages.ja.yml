@@ -194,8 +194,6 @@ sylius:
         promotions: 'プロモーション管理'
         province: '都道府県'
         provinces: '都道府県'
-        qty: '数量'
-        quantity: '数量'
         recent_orders: '最近の注文'
         recent_users: '新着の顧客'
         register: 'お客様登録'

@@ -11,7 +11,6 @@ sylius:
             last_name: 姓
             phone_number: 电话
             postcode: 邮编
-            street: 街道
             province: 省/直辖市/自治区
             zone: 区域
         country:

@@ -61,7 +61,7 @@ sylius:
         product:
             images: Imágenes
             restricted_zone: Zona restringida
-            short_description: Descripción breve
+            short_description: Descripción corta
             variant_selection_method: Método de selección variante
             main_taxon: Taxón principal
             channels: Canales
@@ -105,7 +105,7 @@ sylius:
         user_filter:
             query: Búsqueda
         variant:
-            depth: Alto
+            depth: Profundidad
             height: Alto
             on_hand: Existencias actuales
             price: Precio
