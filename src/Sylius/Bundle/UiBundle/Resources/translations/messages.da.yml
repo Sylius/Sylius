@@ -246,8 +246,6 @@ sylius:
         promotions: 'Kampagner'
         province: 'Provins'
         provinces: 'Provinser'
-        qty: 'Antal'
-        quantity: 'Antal'
         ready: 'Klar'
         recent_orders: 'De seneste ordrer'
         recent_users: 'De seneste brugere'

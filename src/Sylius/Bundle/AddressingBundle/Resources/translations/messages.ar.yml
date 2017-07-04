@@ -11,7 +11,6 @@ sylius:
             last_name: إسم العائلة
             phone_number: رقم الهاتف
             postcode: الرقم البريدي
-            street: الشارع
             province: مقاطعة
         country:
             add_province: اضافة جهة/مقاطعة

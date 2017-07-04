@@ -11,7 +11,6 @@ sylius:
             last_name: Pavardė
             phone_number: Telefono numeris
             postcode: Pašto kodas
-            street: Gatvė
             province: Provincija
             zone: Zona
         country:

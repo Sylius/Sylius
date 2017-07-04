@@ -265,8 +265,6 @@ sylius:
         promotions: 'Promoţii'
         province: 'Județ'
         provinces: 'Județe'
-        qty: 'Cantitate'
-        quantity: 'Cantitate'
         ready: 'Gata'
         recent_orders: 'Comenzi recente'
         recent_users: 'Utilizatori recenți'

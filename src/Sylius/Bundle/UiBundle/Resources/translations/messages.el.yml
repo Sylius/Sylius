@@ -144,8 +144,6 @@ sylius:
         promotions: 'Προσφορές'
         province: 'Επαρχία'
         provinces: 'Επαρχίες'
-        qty: 'Ποσότητα'
-        quantity: 'Ποσότητα'
         ready: 'Έτοιμα'
         remember_me: 'Να με θυμάσαι'
         retail_price: 'Τιμή'

@@ -245,8 +245,6 @@ sylius:
         promotions: 'Прамоцыі'
         province: 'Вобласць'
         provinces: 'Вобласці'
-        qty: 'Колькасць'
-        quantity: 'Колькасць'
         ready: 'Гатова'
         recent_orders: 'Нядаўнія замовы'
         recent_users: 'Нядаўнія карыстальнікі'

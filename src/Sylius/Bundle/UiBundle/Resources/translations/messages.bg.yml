@@ -216,8 +216,6 @@ sylius:
         promotions: 'Промоции'
         province: 'Област'
         provinces: 'Области'
-        qty: 'Количество'
-        quantity: 'Количество'
         recent_orders: 'Последни поръчки'
         recent_users: 'Последните потребители'
         register: 'Регистриране'

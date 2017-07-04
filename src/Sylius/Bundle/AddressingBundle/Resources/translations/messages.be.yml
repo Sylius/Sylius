@@ -11,7 +11,6 @@ sylius:
             last_name: Прозвішча
             phone_number: Нумар тэлефону
             postcode: Індэкс
-            street: Вуліца
             province: Вобласць
             zone: Зона
         country:

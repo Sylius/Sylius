@@ -68,8 +68,6 @@ sylius:
         promotions: 'Chương trình khuyến mãi'
         province: 'Tỉnh'
         provinces: 'Tỉnh'
-        qty: 'Số lượng'
-        quantity: 'Số lượng'
         register: 'Đăng ký'
         register_button: 'Đăng ký'
         reports: 'Báo cáo'
