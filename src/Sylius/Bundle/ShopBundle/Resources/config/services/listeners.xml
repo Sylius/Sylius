@@ -30,7 +30,7 @@
             <argument type="service" id="event_dispatcher" />
             <argument type="service" id="sylius.context.channel" />
             <argument type="service" id="sylius.security.user_login" />
-            <argument type="string">shop</argument>
+            <argument>%sylius_shop.firewall_context_name%</argument>
             <tag name="kernel.event_listener" event="sylius.customer.post_register" method="handleUserVerification" />
         </service>
 
