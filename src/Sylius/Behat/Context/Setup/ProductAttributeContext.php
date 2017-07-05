@@ -146,8 +146,11 @@ final class ProductAttributeContext implements Context
         $value,
         $language = 'en_US'
     ) {
+        $values = [$value];
+        
         $attribute = $this->provideProductAttribute($productAttributeType, $productAttributeName);
-        $attributeValue = $this->createProductAttributeValue($value, $attribute, $language);
+        $attribute->setConfiguration(['multiple' => false, 'choices' => $values, 'min' => null, 'max' => null]);
+        $attributeValue = $this->createProductAttributeValue(array_keys($values), $attribute, $language);
         $product->addAttribute($attributeValue);
 
         $this->objectManager->flush();
