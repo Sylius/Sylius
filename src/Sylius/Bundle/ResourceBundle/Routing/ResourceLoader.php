@@ -75,7 +75,7 @@ final class ResourceLoader implements LoaderInterface
         $metadata = $this->resourceRegistry->get($configuration['alias']);
         $routes = $this->routeFactory->createRouteCollection();
 
-        $rootPath = sprintf('/%s/', isset($configuration['path']) ? $configuration['path'] : Urlizer::urlize($metadata->getPluralName()));
+        $rootPath = sprintf('/%s/', null !== $configuration['path'] ? $configuration['path'] : Urlizer::urlize($metadata->getPluralName()));
         $identifier = sprintf('{%s}', $configuration['identifier']);
 
         if (in_array('index', $routesToGenerate)) {
