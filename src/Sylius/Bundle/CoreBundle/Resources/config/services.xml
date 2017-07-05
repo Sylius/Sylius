@@ -128,7 +128,7 @@
 
         <service id="sylius.security.user_impersonator" class="Sylius\Bundle\CoreBundle\Security\UserImpersonator" public="false">
             <argument type="service" id="session" />
-            <argument type="string">shop</argument>
+            <argument type="string">%sylius_shop.firewall_context_name%</argument>
         </service>
 
         <service id="sylius.calculator.product_variant_price" class="Sylius\Component\Core\Calculator\ProductVariantPriceCalculator" />
