@@ -38,7 +38,7 @@ class ImageUploader implements ImageUploaderInterface
             return;
         }
 
-        if (null !== $image->getPath()) {
+        if (null !== $image->getPath() && $this->has($image->getPath())) {
             $this->remove($image->getPath());
         }
 
@@ -76,5 +76,15 @@ class ImageUploader implements ImageUploaderInterface
             substr($path, 2, 2),
             substr($path, 4)
         );
+    }
+
+    /**
+     * @param string $path
+     *
+     * @return bool
+     */
+    private function has($path)
+    {
+        return $this->filesystem->has($path);
     }
 }
