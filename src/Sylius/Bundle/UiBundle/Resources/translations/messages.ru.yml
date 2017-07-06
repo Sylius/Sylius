@@ -647,6 +647,7 @@ sylius:
         purchased_from: 'Приобретенные'
         qty_max: 'Макс. кол-во'
         qty_min: 'Мин. кол-во'
+        quantity: 'Количество'
         rating: 'Рейтинг'
         ratio: 'По рейтингу'
         ready: 'Готов'

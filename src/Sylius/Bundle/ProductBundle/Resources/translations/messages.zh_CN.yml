@@ -10,6 +10,7 @@ sylius:
             options: 选项
             meta_keywords: Meta关键字：
             meta_description: META描述
+            taxons: 分类
         product_variant:
             name: 名称
         association_type:
@@ -22,6 +23,7 @@ sylius:
             name: 名称
         option:
             name: 名称
+            position: 位置
             values: 可能的值
         option_value:
             add_value: 添加值

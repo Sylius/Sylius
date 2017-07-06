@@ -25,6 +25,7 @@ sylius:
             name: 名称
             roles: 角色
         channel:
+            contact_email: 联系邮件
             currencies: 货币
             currency_base: 基础货币
             hostname: 主机名

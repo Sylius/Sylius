@@ -29,7 +29,11 @@ sylius:
             date:
                 format: 格式
             select:
+                multiple: 多功能
                 values: 值
+                choose: 选取一个选项
+                min: 最小入口
+                max: 最大入口
             text:
                 min: 最小长度
                 max: 最大长度
