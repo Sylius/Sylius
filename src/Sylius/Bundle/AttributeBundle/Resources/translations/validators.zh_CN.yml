@@ -9,6 +9,7 @@ sylius:
             max_length: 属性名称必须不能超过 1 个字符。 |属性名称不能长于 {{limit}} 字符。
         code:
             not_blank: 请输入属性的编码。
+            regex: 货币代码仅由字母、数字、破折号和下划线组成
             unique: 此编码已被使用。
         presentation:
             not_blank: 请输入属性介绍。
