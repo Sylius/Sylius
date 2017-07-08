@@ -50,7 +50,7 @@ class SwiftMailerAdapter extends AbstractAdapter
         array $data,
         array $attachments = []
     ) {
-        $message = \Swift_Message::newInstance()
+        $message = (new \Swift_Message())
             ->setSubject($renderedEmail->getSubject())
             ->setFrom([$senderAddress => $senderName])
             ->setTo($recipients)
