@@ -9,7 +9,7 @@
                 {% set result = 'info' %}
                 {% set icon = 'info' %}
             {% endif %}
-            <div class="ui icon {{ result|default('positive') }} message" id="sylius-flash-messages">
+            <div class="ui icon {{ result|default('positive') }} message sylius-flash-message">
                 <i class="close icon"></i>
                 <i class="{{ icon|default('checkmark') }} icon"></i>
                 <div class="content">
