@@ -46,10 +46,33 @@ final class ImageUploaderSpec extends ObjectBehavior
         $image->hasFile()->willReturn(true);
         $image->getPath()->willReturn('foo.jpg');
 
-        $filesystem->delete(Argument::any())->shouldBeCalled();
-        $filesystem->write(Argument::any(), Argument::any())->shouldBeCalled();
+        $filesystem->has('foo.jpg')->willReturn(false);
 
-        $image->setPath(Argument::any())->shouldBeCalled();
+        $filesystem->delete(Argument::any())->shouldNotBeCalled();
+
+        $image->setPath(Argument::type('string'))->will(function ($args) use ($image, $filesystem) {
+            $image->getPath()->willReturn($args[0]);
+
+            $filesystem->write($args[0], Argument::any())->shouldBeCalled();
+        })->shouldBeCalled();
+
+        $this->upload($image);
+    }
+
+    function it_replaces_an_image($filesystem, $image)
+    {
+        $image->hasFile()->willReturn(true);
+        $image->getPath()->willReturn('foo.jpg');
+
+        $filesystem->has('foo.jpg')->willReturn(true);
+
+        $filesystem->delete('foo.jpg')->shouldBeCalled();
+
+        $image->setPath(Argument::type('string'))->will(function ($args) use ($image, $filesystem) {
+            $image->getPath()->willReturn($args[0]);
+
+            $filesystem->write($args[0], Argument::any())->shouldBeCalled();
+        })->shouldBeCalled();
 
         $this->upload($image);
     }
