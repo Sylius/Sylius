@@ -59,7 +59,7 @@ final class TaxonSlugGeneratorSpec extends ObjectBehavior
         $parent->getTranslation('pl_PL')->willReturn($taxonTranslation);
         $taxonTranslation->getSlug()->willReturn('bronie-sredniowieczne');
 
-        $this->generate('Silniki oblężnicze', 1, 'pl_PL')->shouldReturn('bronie-sredniowieczne/silniki-obleznicze');
+        $this->generate('Machiny oblężnicze', 1, 'pl_PL')->shouldReturn('bronie-sredniowieczne/machiny-obleznicze');
     }
 
     function it_generates_slug_based_on_new_taxon_name_if_this_taxon_has_no_parent()

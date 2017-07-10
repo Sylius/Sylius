@@ -37,10 +37,10 @@ Feature: Editing taxon's slug in multiple locales
         And I want to create a new taxon for "Medieval weapons"
         When I specify its code as "SIEGE_ENGINES"
         And I name it "Siege engines" in "English (United States)"
-        And I name it "Silniki oblężnicze" in "Polish (Poland)"
+        And I name it "Machiny oblężnicze" in "Polish (Poland)"
         And I add it
         Then this taxon should have slug "medieval-weapons/siege-engines" in "English (United States)"
-        And this taxon should have slug "bronie-sredniowieczne/silniki-obleznicze" in "Polish (Poland)"
+        And this taxon should have slug "bronie-sredniowieczne/machiny-obleznicze" in "Polish (Poland)"
 
     @ui
     Scenario: Seeing disabled slug field when editing a taxon

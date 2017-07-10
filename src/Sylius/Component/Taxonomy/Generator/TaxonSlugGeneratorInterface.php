@@ -19,7 +19,7 @@ interface TaxonSlugGeneratorInterface
     /**
      * @param string      $name
      * @param int|null    $parentId
-     * @param string|null $locale
+     * @param null|string $locale
      *
      * @return string
      */
