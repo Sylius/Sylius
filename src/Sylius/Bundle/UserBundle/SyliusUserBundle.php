@@ -13,6 +13,8 @@ namespace Sylius\Bundle\UserBundle;
 
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Bundle\UserBundle\DependencyInjection\Compiler\SymfonyCompatibilityPass;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -27,6 +29,16 @@ final class SyliusUserBundle extends AbstractResourceBundle
         return [
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
         ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function build(ContainerBuilder $container)
+    {
+        parent::build($container);
+
+        $container->addCompilerPass(new SymfonyCompatibilityPass());
     }
 
     /**
