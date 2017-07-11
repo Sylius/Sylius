@@ -126,11 +126,6 @@
 
         <service id="sylius.customer_ip_assigner" class="Sylius\Bundle\CoreBundle\Assigner\CustomerIpAssigner" />
 
-        <service id="sylius.security.user_impersonator" class="Sylius\Bundle\CoreBundle\Security\UserImpersonator" public="false">
-            <argument type="service" id="session" />
-            <argument type="string">%sylius_shop.firewall_context_name%</argument>
-        </service>
-
         <service id="sylius.calculator.product_variant_price" class="Sylius\Component\Core\Calculator\ProductVariantPriceCalculator" />
 
         <service id="sylius.translation_locale_provider.admin" class="Sylius\Component\Core\Provider\TranslationLocaleProvider">
