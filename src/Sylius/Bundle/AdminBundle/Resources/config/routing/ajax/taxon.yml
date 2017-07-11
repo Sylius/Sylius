@@ -21,7 +21,6 @@ sylius_admin_ajax_taxon_leafs:
                 method: findChildren
                 arguments:
                     parentCode: $parentCode
-                    locale: expr:service('sylius.context.locale').getLocaleCode()
 
 sylius_admin_ajax_taxon_by_code:
     path: /leaf
@@ -47,7 +46,6 @@ sylius_admin_ajax_taxon_by_name_phrase:
                 method: findByNamePart
                 arguments:
                     phrase: $phrase
-                    locale: expr:service('sylius.context.locale').getLocaleCode()
 
 sylius_admin_ajax_generate_taxon_slug:
     path: /generate-slug/

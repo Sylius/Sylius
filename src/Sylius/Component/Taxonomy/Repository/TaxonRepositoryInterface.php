@@ -25,11 +25,11 @@ interface TaxonRepositoryInterface extends RepositoryInterface
 {
     /**
      * @param string $parentCode
-     * @param string $locale
+     * @param string|null $locale
      *
      * @return TaxonInterface[]
      */
-    public function findChildren($parentCode, $locale);
+    public function findChildren($parentCode, $locale = null);
 
     /**
      * @return TaxonInterface[]
@@ -54,11 +54,11 @@ interface TaxonRepositoryInterface extends RepositoryInterface
 
     /**
      * @param string $phrase
-     * @param string $locale
+     * @param string|null $locale
      *
      * @return TaxonInterface[]
      */
-    public function findByNamePart($phrase, $locale);
+    public function findByNamePart($phrase, $locale = null);
 
     /**
      * @return QueryBuilder
