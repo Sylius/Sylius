@@ -28,28 +28,35 @@ final class NotificationController
     /**
      * @var ClientInterface
      */
-    protected $client;
+    private $client;
 
     /**
      * @var MessageFactory
      */
-    protected $messageFactory;
+    private $messageFactory;
 
     /**
      * @var UriInterface
      */
-    protected $hubUri;
+    private $hubUri;
+
+    /**
+     * @var string
+     */
+    private $environment;
 
     /**
      * @param ClientInterface $client
      * @param MessageFactory $messageFactory
      * @param string $hubUri
+     * @param string $environment
      */
-    public function __construct(ClientInterface $client, MessageFactory $messageFactory, $hubUri)
+    public function __construct(ClientInterface $client, MessageFactory $messageFactory, $hubUri, $environment)
     {
         $this->client = $client;
         $this->messageFactory = $messageFactory;
         $this->hubUri = new Uri($hubUri);
+        $this->environment = $environment;
     }
 
     /**
@@ -64,6 +71,7 @@ final class NotificationController
             'hostname' => $request->getHost(),
             'locale' => $request->getLocale(),
             'user_agent' => $request->headers->get('User-Agent'),
+            'environment' => $this->environment,
         ];
 
         $headers = ['Content-Type' => 'application/json'];
