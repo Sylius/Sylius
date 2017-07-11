@@ -8,6 +8,16 @@ sylius:
         gateway_configuration:
             paypal:
                 password: Пароль
+                signature: Підпис
                 username: Ім'я користувача
+                sandbox: Пісочниця
+            stripe:
+                publishable_key: Ключ для публікації
+                secret_key: Секретний ключ
     payum_gateway_factory:
         offline: Автономний
+        paypal_express_checkout: PayPal Express Checkout
+        stripe_checkout: Stripe Checkout
+    payum_action:
+        payment:
+            description: Платіж містить %items% елемент на загальну суму %total%|Платіж містить %items% елемент на загальну суму %total%

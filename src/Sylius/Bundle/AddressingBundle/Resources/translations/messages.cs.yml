@@ -11,6 +11,7 @@ sylius:
             last_name: Příjmení
             phone_number: Telefonní číslo
             postcode: PSČ
+            street: Ulice
             province: Provincie
             zone: Oblast
         country:

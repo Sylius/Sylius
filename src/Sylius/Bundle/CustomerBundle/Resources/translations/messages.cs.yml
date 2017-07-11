@@ -4,15 +4,21 @@
 sylius:
     form:
         customer:
-            first_name: Křestní Jméno
+            first_name: Křestní jméno
+            group: Skupina
             last_name: Příjmení
             email: Email
             phone_number: Telefonní číslo
+            gender: Pohlaví
+            birthday: Narozeniny
             billing_address: Fakturační adresa
             different_billing_address: Použít jinou adresu pro fakturaci?
+            only_customer_registration: Vytvořit účet?
+            subscribed_to_newsletter: Přihlášeni k odběru novinek
         customer_group:
             name: Jméno
             roles: Role
     gender:
         unknown: Neznámý
+        male: Muž
         female: Žena
