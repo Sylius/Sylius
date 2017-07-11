@@ -11,6 +11,7 @@ sylius:
             last_name: Efternavn
             phone_number: Telefonnummer
             postcode: Postnummer
+            street: Gade-/vejnavn
             province: Provins
             zone: Zone
         country:
