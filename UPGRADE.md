@@ -89,6 +89,8 @@
 
 * Route `sylius_admin_address_log_entry_index` was renamed to `sylius_admin_partial_log_entry_index`.
 
+* Class `Sylius\Bundle\AdminBundle\Controller\NotificationController` has been made final and can't be extended anymore, follow Symfony best practices and do not extend it.
+
 ### AdminApiBundle (former ApiBundle)
 
 * Bundle was renamed from `ApiBundle` to `AdminApiBundle`. Routing and config was changed from `sylius_api` to `sylius_admin_api`.

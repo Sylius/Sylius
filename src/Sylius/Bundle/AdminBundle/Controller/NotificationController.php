@@ -23,7 +23,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class NotificationController
+final class NotificationController
 {
     /**
      * @var ClientInterface
@@ -81,6 +81,8 @@ class NotificationController
             return JsonResponse::create('', JsonResponse::HTTP_NO_CONTENT);
         }
 
-        return JsonResponse::fromJsonString($hubResponse->getBody()->getContents());
+        $hubResponse = json_decode($hubResponse->getBody()->getContents(), true);
+
+        return new JsonResponse($hubResponse);
     }
 }
