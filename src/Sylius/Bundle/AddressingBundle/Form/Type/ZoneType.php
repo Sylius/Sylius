@@ -75,12 +75,20 @@ final class ZoneType extends AbstractResourceType
             /** @var ZoneInterface $zone */
             $zone = $event->getData();
 
+            $entryOptions = [
+                'entry_type' => $this->getZoneMemberEntryType($zone->getType()),
+                'entry_options' => $this->getZoneMemberEntryOptions($zone->getType()),
+            ];
+
+            if ($zone->getType() === ZoneInterface::TYPE_ZONE) {
+                $entryOptions['entry_options']['choice_filter'] = function(ZoneInterface $subZone) use ($zone){
+                    return $zone->getId() !== $subZone->getId();
+                };
+            }
+
             $event->getForm()->add('members', CollectionType::class, [
                 'entry_type' => ZoneMemberType::class,
-                'entry_options' => [
-                    'entry_type' => $this->getZoneMemberEntryType($zone->getType()),
-                    'entry_options' => $this->getZoneMemberEntryOptions($zone->getType()),
-                ],
+                'entry_options' => $entryOptions,
                 'button_add_label' => 'sylius.form.zone.add_member',
                 'allow_add' => true,
                 'allow_delete' => true,
