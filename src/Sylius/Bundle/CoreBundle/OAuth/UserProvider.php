@@ -20,6 +20,7 @@ use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
 use Sylius\Bundle\UserBundle\Provider\UsernameOrEmailProvider as BaseUserProvider;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface as SyliusUserInterface;
+use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
@@ -62,6 +63,11 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
     private $userManager;
 
     /**
+     * @var CustomerRepositoryInterface
+     */
+    private $customerRepository;
+
+    /**
      * @param string $supportedUserClass
      * @param FactoryInterface $customerFactory
      * @param FactoryInterface $userFactory
@@ -70,6 +76,7 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
      * @param RepositoryInterface $oauthRepository
      * @param ObjectManager $userManager
      * @param CanonicalizerInterface $canonicalizer
+     * @param CustomerRepositoryInterface $customerRepository
      */
     public function __construct(
         string $supportedUserClass,
@@ -79,7 +86,8 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
         FactoryInterface $oauthFactory,
         RepositoryInterface $oauthRepository,
         ObjectManager $userManager,
-        CanonicalizerInterface $canonicalizer
+        CanonicalizerInterface $canonicalizer,
+        CustomerRepositoryInterface $customerRepository
     ) {
         parent::__construct($supportedUserClass, $userRepository, $canonicalizer);
 
@@ -88,6 +96,7 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
         $this->oauthRepository = $oauthRepository;
         $this->userFactory = $userFactory;
         $this->userManager = $userManager;
+        $this->customerRepository = $customerRepository;
     }
 
     /**
@@ -133,8 +142,14 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
     {
         /** @var SyliusUserInterface $user */
         $user = $this->userFactory->createNew();
-        /** @var CustomerInterface $customer */
-        $customer = $this->customerFactory->createNew();
+
+        $customer = $this->customerRepository->findOneBy(['emailCanonical' => $response->getEmail()]);
+
+        if (null === $customer) {
+            /** @var CustomerInterface $customer */
+            $customer = $this->customerFactory->createNew();
+        }
+
         $user->setCustomer($customer);
 
         // set default values taken from OAuth sign-in provider account
@@ -142,12 +157,19 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
             $customer->setEmail($email);
         }
 
-        if (null !== $realName = $response->getRealName()) {
-            $customer->setFirstName($realName);
+        if (null !== $name = $response->getFirstName()) {
+            $customer->setFirstName($name);
+        } else {
+            if (null !== $realName = $response->getRealName()) {
+                $customer->setFirstName($realName);
+            }
         }
-
-        if (!$user->getUsername()) {
-            $user->setUsername($response->getEmail() ?: $response->getNickname());
+        if (null !== $lastName = $response->getLastName()) {
+            $customer->setLastName($lastName);
+        } else {
+            if (!$user->getUsername()) {
+                $user->setUsername($response->getEmail() ?: $response->getNickname());
+            }
         }
 
         // set random password to prevent issue with not nullable field & potential security hole
