@@ -42,7 +42,7 @@ final class ThemeScreenshotFactorySpec extends ObjectBehavior
     /**
      * {@inheritdoc}
      */
-    public function getMatchers()
+    public function getMatchers(): array
     {
         return [
             'beScreenshotWithTheFollowingProperties' => function (ThemeScreenshot $subject, array $properties) {

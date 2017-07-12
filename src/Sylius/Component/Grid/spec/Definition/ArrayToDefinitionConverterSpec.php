@@ -123,15 +123,6 @@ final class ArrayToDefinitionConverterSpec extends ObjectBehavior
             ]
         ];
 
-        $this->convert('sylius_admin_tax_category', $definitionArray)->shouldBeSameGridAs($grid);
-    }
-
-    public function getMatchers()
-    {
-        return [
-            'beSameGridAs' => function ($subject, $key) {
-                return serialize($subject) === serialize($key);
-            },
-        ];
+        $this->convert('sylius_admin_tax_category', $definitionArray)->shouldBeLike($grid);
     }
 }

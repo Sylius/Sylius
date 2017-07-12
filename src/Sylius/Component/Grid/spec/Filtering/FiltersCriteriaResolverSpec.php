@@ -75,7 +75,7 @@ final class FiltersCriteriaResolverSpec extends ObjectBehavior
 
         $grid->getFilters()->willReturn(['favourite' => $firstFilter, 'date' => $secondFilter]);
 
-        $this->getCriteria($grid, new Parameters())->shouldBeSameAs([
+        $this->getCriteria($grid, new Parameters())->shouldIterateAs([
             'favourite' => 'Pug',
             'date' => ['start' => $startDate, 'end' => $endDate],
         ]);
@@ -98,7 +98,7 @@ final class FiltersCriteriaResolverSpec extends ObjectBehavior
             ]
         ]);
 
-        $this->getCriteria($grid, $parameters)->shouldBeSameAs([
+        $this->getCriteria($grid, $parameters)->shouldIterateAs([
             'favourite' => 'Pug',
             'date' => ['start' => $startDate, 'end' => $endDate],
         ]);
@@ -123,39 +123,9 @@ final class FiltersCriteriaResolverSpec extends ObjectBehavior
             ]
         ]);
 
-        $this->getCriteria($grid, $parameters)->shouldBeSameAs([
+        $this->getCriteria($grid, $parameters)->shouldIterateAs([
             'favourite' => 'Pug',
             'date' => ['now' => $parametersDate],
         ]);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getMatchers()
-    {
-        return [
-            'beSameAs' => function ($subject, $key) {
-                if (!is_array($subject) || !is_array($key)) {
-                    return false;
-                }
-
-                if (count($subject) !== count($key)) {
-                    return false;
-                }
-
-                if (0 !== count(array_diff_key($key, $subject))) {
-                    return false;
-                }
-
-                foreach (array_keys($key) as $arrayKey) {
-                    if ($key[$arrayKey] !== $subject[$arrayKey]) {
-                        return false;
-                    }
-                }
-
-                return true;
-            },
-        ];
     }
 }
