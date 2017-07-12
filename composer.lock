@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "48650195e08443f8409607f5c75f4f8b",
+    "content-hash": "d0b9da0061f03f9e3d32ff56adb2dcdb",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -5923,25 +5923,26 @@
     "packages-dev": [
         {
             "name": "akeneo/phpspec-skip-example-extension",
-            "version": "v2.0.0",
+            "version": "v3.0.0-alpha1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/akeneo/PhpSpecSkipExampleExtension.git",
-                "reference": "b378baaa372020f81f9cc1492acdc495a185b96f"
+                "reference": "4aab9c7ac66caf4c488a9008981f0b62627edad6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/akeneo/PhpSpecSkipExampleExtension/zipball/b378baaa372020f81f9cc1492acdc495a185b96f",
-                "reference": "b378baaa372020f81f9cc1492acdc495a185b96f",
+                "url": "https://api.github.com/repos/akeneo/PhpSpecSkipExampleExtension/zipball/4aab9c7ac66caf4c488a9008981f0b62627edad6",
+                "reference": "4aab9c7ac66caf4c488a9008981f0b62627edad6",
                 "shasum": ""
             },
             "require": {
-                "phpspec/phpspec": "^3.0"
+                "phpspec/phpspec": "^4.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0.x-dev",
+                    "dev-master": "3.0.x-dev",
+                    "dev-2.0": "2.0.x-dev",
                     "dev-1.2": "1.2.x-dev",
                     "dev-1.1": "1.1.x-dev",
                     "dev-1.0": "1.0.x-dev"
@@ -5964,10 +5965,14 @@
                 {
                     "name": "Nicolas Dupont",
                     "email": "nicolas@akeneo.com"
+                },
+                {
+                    "name": "Kamil Kokot",
+                    "email": "kamil@kokot.me"
                 }
             ],
             "description": "Skip your PhpSpec examples through annotations",
-            "time": "2016-07-21T08:04:58+00:00"
+            "time": "2017-07-10T13:11:28+00:00"
         },
         {
             "name": "behat/behat",
@@ -7783,36 +7788,35 @@
         },
         {
             "name": "phpspec/phpspec",
-            "version": "3.2.3",
+            "version": "4.0.0-rc1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/phpspec.git",
-                "reference": "97246d90708cf98983d95d609bbe6f4b039b8600"
+                "reference": "f78d6d6d878a0eb95f13d6a2cffc6be05c1e1329"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/97246d90708cf98983d95d609bbe6f4b039b8600",
-                "reference": "97246d90708cf98983d95d609bbe6f4b039b8600",
+                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/f78d6d6d878a0eb95f13d6a2cffc6be05c1e1329",
+                "reference": "f78d6d6d878a0eb95f13d6a2cffc6be05c1e1329",
                 "shasum": ""
             },
             "require": {
-                "doctrine/instantiator": "^1.0.1",
+                "doctrine/instantiator": "^1.0.5",
                 "ext-tokenizer": "*",
-                "php": "^5.6 || ^7.0",
+                "php": "^7.0,<7.2",
                 "phpspec/php-diff": "^1.0.0",
                 "phpspec/prophecy": "^1.5",
-                "sebastian/exporter": "^1.0 || ^2.0",
-                "symfony/console": "^2.7 || ^3.0",
-                "symfony/event-dispatcher": "^2.7 || ^3.0",
-                "symfony/finder": "^2.7 || ^3.0",
-                "symfony/process": "^2.7 || ^3.0",
-                "symfony/yaml": "^2.7 || ^3.0"
+                "sebastian/exporter": "^1.0 || ^2.0 || ^3.0",
+                "symfony/console": "^3.2",
+                "symfony/event-dispatcher": "^3.2",
+                "symfony/finder": "^3.2",
+                "symfony/process": "^3.2",
+                "symfony/yaml": "^3.2"
             },
             "require-dev": {
-                "behat/behat": "^3.1",
-                "ciaranmcnulty/versionbasedtestskipper": "^0.2.1",
-                "phpunit/phpunit": "^5.4",
-                "symfony/filesystem": "^3.0"
+                "behat/behat": "^3.3",
+                "phpunit/phpunit": "^5.7|^6.0",
+                "symfony/filesystem": "^3.2"
             },
             "suggest": {
                 "phpspec/nyan-formatters": "Adds Nyan formatters"
@@ -7823,7 +7827,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0.x-dev"
+                    "dev-master": "4.0.x-dev"
                 }
             },
             "autoload": {
@@ -7861,7 +7865,7 @@
                 "testing",
                 "tests"
             ],
-            "time": "2017-01-29T12:28:48+00:00"
+            "time": "2017-06-19T11:18:32+00:00"
         },
         {
             "name": "phpspec/prophecy",
@@ -8921,7 +8925,10 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "akeneo/phpspec-skip-example-extension": 15,
+        "phpspec/phpspec": 5
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

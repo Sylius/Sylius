@@ -30,7 +30,7 @@
     },
     "require-dev": {
         "doctrine/orm": "^2.5",
-        "phpspec/phpspec": "^3.2",
+        "phpspec/phpspec": "^4.0@rc",
         "phpunit/phpunit": "^5.6",
         "twig/twig": "^1.28",
         "sylius/currency-bundle": "^1.0",
