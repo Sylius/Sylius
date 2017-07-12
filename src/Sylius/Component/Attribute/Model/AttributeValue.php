@@ -189,7 +189,7 @@ class AttributeValue implements AttributeValueInterface
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
     protected function getBoolean()
     {
@@ -197,7 +197,7 @@ class AttributeValue implements AttributeValueInterface
     }
 
     /**
-     * @param bool $boolean
+     * @param bool|null $boolean
      */
     protected function setBoolean($boolean)
     {
@@ -205,7 +205,7 @@ class AttributeValue implements AttributeValueInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     protected function getText()
     {
@@ -213,7 +213,7 @@ class AttributeValue implements AttributeValueInterface
     }
 
     /**
-     * @param string $text
+     * @param string|null $text
      */
     protected function setText($text)
     {
@@ -221,7 +221,7 @@ class AttributeValue implements AttributeValueInterface
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     protected function getInteger()
     {
@@ -229,7 +229,7 @@ class AttributeValue implements AttributeValueInterface
     }
 
     /**
-     * @param int $integer
+     * @param int|null $integer
      */
     protected function setInteger($integer)
     {
@@ -237,7 +237,7 @@ class AttributeValue implements AttributeValueInterface
     }
 
     /**
-     * @return float
+     * @return float|null
      */
     protected function getFloat()
     {
@@ -245,7 +245,7 @@ class AttributeValue implements AttributeValueInterface
     }
 
     /**
-     * @param float $float
+     * @param float|null $float
      */
     protected function setFloat($float)
     {
@@ -253,7 +253,7 @@ class AttributeValue implements AttributeValueInterface
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTime|null
      */
     protected function getDatetime()
     {
@@ -261,15 +261,15 @@ class AttributeValue implements AttributeValueInterface
     }
 
     /**
-     * @param \DateTime $datetime
+     * @param \DateTime|null $datetime
      */
-    protected function setDatetime(\DateTime $datetime)
+    protected function setDatetime(\DateTime $datetime = null)
     {
         $this->datetime = $datetime;
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTime|null
      */
     protected function getDate()
     {
@@ -277,15 +277,15 @@ class AttributeValue implements AttributeValueInterface
     }
 
     /**
-     * @param \DateTime $date
+     * @param \DateTime|null $date
      */
-    protected function setDate(\DateTime $date)
+    protected function setDate(\DateTime $date = null)
     {
         $this->date = $date;
     }
 
     /**
-     * @return array
+     * @return array|null
      */
     public function getJson()
     {
@@ -293,9 +293,9 @@ class AttributeValue implements AttributeValueInterface
     }
 
     /**
-     * @param array $json
+     * @param array|null $json
      */
-    public function setJson(array $json)
+    public function setJson(array $json = null)
     {
         $this->json = $json;
     }
