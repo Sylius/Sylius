@@ -143,7 +143,7 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
         /** @var SyliusUserInterface $user */
         $user = $this->userFactory->createNew();
 
-        $customer = $this->customerRepository->findOneBy(['emailCanonical' => $response->getEmail()]);
+        $customer = $this->customerRepository->findOneBy(['emailCanonical' => strtolower($response->getEmail())]);
 
         if (null === $customer) {
             /** @var CustomerInterface $customer */
@@ -159,17 +159,16 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
 
         if (null !== $name = $response->getFirstName()) {
             $customer->setFirstName($name);
-        } else {
-            if (null !== $realName = $response->getRealName()) {
+        } elseif (null !== $realName = $response->getRealName()) {
                 $customer->setFirstName($realName);
-            }
         }
+
         if (null !== $lastName = $response->getLastName()) {
             $customer->setLastName($lastName);
-        } else {
-            if (!$user->getUsername()) {
-                $user->setUsername($response->getEmail() ?: $response->getNickname());
-            }
+        }
+
+        if (!$user->getUsername()) {
+            $user->setUsername($response->getEmail() ?: $response->getNickname());
         }
 
         // set random password to prevent issue with not nullable field & potential security hole
