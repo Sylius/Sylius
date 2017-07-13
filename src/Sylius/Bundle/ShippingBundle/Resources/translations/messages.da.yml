@@ -28,3 +28,4 @@ sylius:
             enabled: Aktiveret
             name: Navn
             tax_category: Momskategori
+            translations: Oversættelser

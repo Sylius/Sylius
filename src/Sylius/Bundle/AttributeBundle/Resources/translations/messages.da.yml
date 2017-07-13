@@ -4,10 +4,36 @@
 sylius:
     form:
         attribute:
-            choices: Valgmuligheder
+            add: Tilføj
+            add_attributes: Tilføj egenskaber
+            choices: Valg
             code: Kode
             name: Navn
+            translations: Oversættelser
             type: Type
         attribute_type:
-            configuration: Konfiguration
+            checkbox: Markeringsfelt
+            configuration: Opsætning
+            date: Dato
+            datetime: Datotid
+            integer: Heltal
+            percent: Procent
             select: Vælg
+            text: Tekst
+            textarea: Tekstområde
+            title: Attributtype
+            validation: Validering
+        attribute_type_configuration:
+            datetime:
+                format: Format
+            date:
+                format: Format
+            select:
+                multiple: Flere
+                values: Værdier
+                choose: Vælg en mulighed
+                min: Min. poster
+                max: Max. poster
+            text:
+                min: Min. længde
+                max: Maks. længde
