@@ -57,6 +57,8 @@ class PathPackage extends BasePathPackage
      */
     public function getUrl($path)
     {
+        $path = $this->getVersionStrategy()->applyVersion($path);
+
         if ($this->isAbsoluteUrl($path)) {
             return $path;
         }
@@ -66,6 +68,6 @@ class PathPackage extends BasePathPackage
             $path = $this->pathResolver->resolve($path, $theme);
         }
 
-        return $this->getBasePath().ltrim($this->getVersionStrategy()->applyVersion($path), '/');
+        return $this->getBasePath().ltrim($path, '/');
     }
 }
