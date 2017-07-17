@@ -207,7 +207,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
             ->andWhere('o.payment_state NOT IN (:payment_states)')
             ->setParameter('channel', $channel)
             ->setParameter('states', [OrderInterface::STATE_CART, OrderInterface::STATE_CANCELLED])
-	        ->setParameter('payment_states', [OrderPaymentStates::STATE_AWAITING_PAYMENT])
+            ->setParameter('payment_states', [OrderPaymentStates::STATE_AWAITING_PAYMENT])
             ->getQuery()
             ->getSingleScalarResult()
         ;
@@ -225,7 +225,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
 	        ->andWhere('o.payment_state NOT IN (:payment_states)')
             ->setParameter('channel', $channel)
             ->setParameter('states', [OrderInterface::STATE_CART, OrderInterface::STATE_CANCELLED])
-	        ->setParameter('payment_states', [OrderPaymentStates::STATE_AWAITING_PAYMENT])
+            ->setParameter('payment_states', [OrderPaymentStates::STATE_AWAITING_PAYMENT])
             ->getQuery()
             ->getSingleScalarResult()
         ;
