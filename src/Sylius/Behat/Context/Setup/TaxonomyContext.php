@@ -167,7 +167,7 @@ final class TaxonomyContext implements Context
         $taxon = $this->taxonFactory->createNew();
         $taxon->setName($name);
         $taxon->setCode(StringInflector::nameToCode($name));
-        $taxon->setSlug($this->taxonSlugGenerator->generate($name));
+        $taxon->setSlug($this->taxonSlugGenerator->generate($taxon));
 
         return $taxon;
     }
@@ -187,9 +187,10 @@ final class TaxonomyContext implements Context
             $taxonTranslation = $this->taxonTranslationFactory->createNew();
             $taxonTranslation->setLocale($locale);
             $taxonTranslation->setName($name);
-            $taxonTranslation->setSlug($this->taxonSlugGenerator->generate($name));
 
             $taxon->addTranslation($taxonTranslation);
+
+            $taxonTranslation->setSlug($this->taxonSlugGenerator->generate($taxon, $locale));
         }
 
         return $taxon;

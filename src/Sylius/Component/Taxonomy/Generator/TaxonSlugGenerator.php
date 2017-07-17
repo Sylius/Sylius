@@ -20,7 +20,7 @@ final class TaxonSlugGenerator implements TaxonSlugGeneratorInterface
     /**
      * {@inheritdoc}
      */
-    public function generate(TaxonInterface $taxon, $locale)
+    public function generate(TaxonInterface $taxon, $locale = null)
     {
         $name = $taxon->getTranslation($locale)->getName();
 
