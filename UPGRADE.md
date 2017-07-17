@@ -1,3 +1,5 @@
+# UPGRADE FROM 1.0.0-beta.3 to 1.0.0
+
 # UPGRADE FROM 1.0.0-beta.2 to 1.0.0-beta.3
 
 ## Packages:
