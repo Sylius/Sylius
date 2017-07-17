@@ -43,7 +43,7 @@ final class DashboardStatisticsProviderSpec extends ObjectBehavior
         $expectedStats = new DashboardStatistics(450, 2, 6);
 
         $orderRepository->getTotalSalesForChannel($channel)->willReturn(450);
-        $orderRepository->countByChannel($channel)->willReturn(2);
+        $orderRepository->countFulfilledByChannel($channel)->willReturn(2);
         $customerRepository->count()->willReturn(6);
 
         $this->getStatisticsForChannel($channel)->shouldBeLike($expectedStats);

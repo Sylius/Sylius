@@ -18,10 +18,10 @@ Feature: Statistics dashboard per channel
         Given 3 customers have placed 4 orders for total of "$8566.00" mostly "Onion" product
         And then 2 more customers have placed 2 orders for total of "$459.00" mostly "Banana" product
         When I open administration dashboard
-        Then I should see 4 new orders
+        Then I should see 0 new orders
         And I should see 5 new customers
-        And there should be total sales of "$8,566.00"
-        And the average order value should be "$2,141.50"
+        And there should be total sales of "$0.00"
+        And the average order value should be "$0.00"
 
     @ui
     Scenario: Changing viewing channel in administration dashboard
@@ -29,10 +29,10 @@ Feature: Statistics dashboard per channel
         And then 2 more customers have placed 2 orders for total of "$459.00" mostly "Banana" product
         When I open administration dashboard
         And I choose "United States" channel
-        Then I should see 2 new orders
+        Then I should see 0 new orders
         And I should see 6 new customers
-        And there should be total sales of "$459.00"
-        And the average order value should be "$229.50"
+        And there should be total sales of "$0.00"
+        And the average order value should be "$0.00"
 
     @ui
     Scenario: Seeing recent orders in a specific channel

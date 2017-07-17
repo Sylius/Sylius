@@ -219,6 +219,9 @@
   * `UserInterface::setExpiresAt`
   * `UserInterface::setLastLogin`
 
+* In statistics to be correct data with orders informations 
+  `OrderRepositoryInterface::countByChannel()` signature was changed to `OrderRepositoryInterface::countFulfilledByChannel()`.
+
 # UPGRADE FROM 1.0.0-beta.2 to 1.0.0-beta.3
 
 ## Packages:
