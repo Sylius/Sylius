@@ -18,6 +18,8 @@ use Symfony\Component\Asset\PathPackage as BasePathPackage;
 use Symfony\Component\Asset\VersionStrategy\VersionStrategyInterface;
 
 /**
+ * @see BasePathPackage
+ *
  * @author Kamil Kokot <kamil@kokot.me>
  */
 class PathPackage extends BasePathPackage
@@ -66,6 +68,13 @@ class PathPackage extends BasePathPackage
             $path = $this->pathResolver->resolve($path, $theme);
         }
 
-        return $this->getBasePath().ltrim($this->getVersionStrategy()->applyVersion($path), '/');
+        $versionedPath = $this->getVersionStrategy()->applyVersion($path);
+
+        // if absolute or begins with /, we're done
+        if ($this->isAbsoluteUrl($versionedPath) || ($versionedPath && '/' === $versionedPath[0])) {
+            return $versionedPath;
+        }
+
+        return $this->getBasePath() . ltrim($versionedPath, '/');
     }
 }
