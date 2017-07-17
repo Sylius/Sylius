@@ -102,7 +102,7 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
 
             $taxon->setName($options['name']);
             $taxon->setDescription($options['description']);
-            $taxon->setSlug($options['slug']);
+            $taxon->setSlug($options['slug'] ?: $this->taxonSlugGenerator->generate($taxon, $localeCode));
         }
 
         foreach ($options['children'] as $childOptions) {
@@ -124,9 +124,7 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
             ->setDefault('code', function (Options $options) {
                 return StringInflector::nameToCode($options['name']);
             })
-            ->setDefault('slug', function (Options $options) {
-                return $this->taxonSlugGenerator->generate($options['name']);
-            })
+            ->setDefault('slug', null)
             ->setDefault('description', function (Options $options) {
                 return $this->faker->paragraph;
             })

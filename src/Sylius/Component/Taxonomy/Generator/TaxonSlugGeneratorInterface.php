@@ -11,16 +11,15 @@
 
 namespace Sylius\Component\Taxonomy\Generator;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
+
 interface TaxonSlugGeneratorInterface
 {
     /**
-     * @param string $name
-     * @param int|null $parentId
+     * @param TaxonInterface $taxon
+     * @param string|null $locale
      *
      * @return string
      */
-    public function generate($name, $parentId = null);
+    public function generate(TaxonInterface $taxon, $locale = null);
 }
