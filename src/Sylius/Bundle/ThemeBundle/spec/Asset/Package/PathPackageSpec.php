@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\ThemeBundle\Asset\Package;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ThemeBundle\Asset\Package\PathPackage;
 use Sylius\Bundle\ThemeBundle\Asset\PathResolverInterface;
 use Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
@@ -32,40 +31,78 @@ final class PathPackageSpec extends ObjectBehavior
         $this->beConstructedWith('/', $versionStrategy, $themeContext, $pathResolver);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(PathPackage::class);
-    }
-
     function it_implements_package_interface_interface()
     {
         $this->shouldImplement(PackageInterface::class);
     }
 
-    function it_returns_vanilla_url_if_there_are_no_active_themes(ThemeContextInterface $themeContext, VersionStrategyInterface $versionStrategy)
-    {
+    function it_returns_vanilla_path_if_there_are_no_active_themes(
+        ThemeContextInterface $themeContext,
+        VersionStrategyInterface $versionStrategy
+    ) {
         $path = 'bundles/sample/asset.js';
+        $versionedPath = 'bundles/sample/asset.js?v=42';
 
         $themeContext->getTheme()->shouldBeCalled()->willReturn(null);
-        $versionStrategy->applyVersion($path)->shouldBeCalled()->willReturn($path);
+        $versionStrategy->applyVersion($path)->shouldBeCalled()->willReturn($versionedPath);
 
-        $this->getUrl($path)->shouldReturn('/'.$path);
+        $this->getUrl($path)->shouldReturn('/' . $versionedPath);
     }
 
-    function it_returns_modified_url_if_there_is_active_theme(
+    function it_returns_modified_path_if_there_is_active_theme(
         ThemeContextInterface $themeContext,
         VersionStrategyInterface $versionStrategy,
         PathResolverInterface $pathResolver,
         ThemeInterface $theme
     ) {
         $path = 'bundles/sample/asset.js';
-
-        $themeAssetPath = 'bundles/theme/foo/bar/sample/asset.js';
+        $themedPath = 'bundles/theme/foo/bar/sample/asset.js';
+        $versionedThemedPath = 'bundles/theme/foo/bar/sample/asset.js?v=42';
 
         $themeContext->getTheme()->shouldBeCalled()->willReturn($theme);
-        $pathResolver->resolve($path, $theme)->shouldBeCalled()->willReturn($themeAssetPath);
-        $versionStrategy->applyVersion($themeAssetPath)->shouldBeCalled()->willReturn($themeAssetPath);
+        $pathResolver->resolve($path, $theme)->shouldBeCalled()->willReturn($themedPath);
+        $versionStrategy->applyVersion($themedPath)->shouldBeCalled()->willReturn($versionedThemedPath);
 
-        $this->getUrl($path)->shouldReturn('/'.$themeAssetPath);
+        $this->getUrl($path)->shouldReturn('/' . $versionedThemedPath);
+    }
+
+    function it_returns_path_without_changes_if_it_is_absolute()
+    {
+        $this->getUrl('//localhost/asset.js')->shouldReturn('//localhost/asset.js');
+        $this->getUrl('https://localhost/asset.js')->shouldReturn('https://localhost/asset.js');
+    }
+
+    function it_does_not_prepend_it_with_base_path_if_modified_path_is_an_absolute_one(
+        ThemeContextInterface $themeContext,
+        VersionStrategyInterface $versionStrategy,
+        PathResolverInterface $pathResolver,
+        ThemeInterface $theme
+    ) {
+        $path = 'bundles/sample/asset.js';
+        $themedPath = 'bundles/theme/foo/bar/sample/asset.js';
+        $versionedThemedPath = '/bundles/theme/foo/bar/sample/asset.js?v=42';
+
+        $themeContext->getTheme()->shouldBeCalled()->willReturn($theme);
+        $pathResolver->resolve($path, $theme)->shouldBeCalled()->willReturn($themedPath);
+        $versionStrategy->applyVersion($themedPath)->shouldBeCalled()->willReturn($versionedThemedPath);
+
+        $this->getUrl($path)->shouldReturn($versionedThemedPath);
+    }
+
+    function it_does_not_prepend_it_with_base_path_if_modified_path_is_an_absolute_url(
+        ThemeContextInterface $themeContext,
+        VersionStrategyInterface $versionStrategy,
+        PathResolverInterface $pathResolver,
+        ThemeInterface $theme
+    ) {
+        $path = 'bundles/sample/asset.js';
+        $themedPath = 'bundles/theme/foo/bar/sample/asset.js';
+        $versionedThemedPath = 'https://bundles/theme/foo/bar/sample/asset.js?v=42';
+
+        $themeContext->getTheme()->shouldBeCalled()->willReturn($theme);
+        $pathResolver->resolve($path, $theme)->shouldBeCalled()->willReturn($themedPath);
+        $versionStrategy->applyVersion($themedPath)->shouldBeCalled()->willReturn($versionedThemedPath);
+
+        $this->getUrl($path)->shouldReturn($versionedThemedPath);
     }
 }
