@@ -13,6 +13,12 @@
 
 * Constructor of `CapturePaymentAction` now takes a `PaymentDescriptionProviderInterface` as first argument. This allows granular customisation of the payment description.
 
+### Taxonomy / TaxonomyBundle
+
+* `Sylius\Bundle\TaxonomyBundle\Controller\TaxonSlugController` has been made final, decorate it or copy instead of extending it.
+
+* `Sylius\Component\Taxonomy\Generator\TaxonSlugGeneratorInterface::generate` signature has changed from `generate(string $name, ?mixed $parentId = null): string` to `generate(TaxonInterface $taxon, ?string $locale = null): string`.
+
 ### Core / CoreBundle
 
 * The following serialization configuration was moved from CoreBundle/Resources/config/app/config.yml to AdminApiBundle/Resources/config/app/config.yml
