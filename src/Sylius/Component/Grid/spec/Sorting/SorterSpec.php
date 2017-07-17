@@ -38,6 +38,7 @@ final class SorterSpec extends ObjectBehavior
     function it_sorts_the_data_source_via_expression_builder_based_on_the_grid_definition(
         Grid $grid,
         Field $nameField,
+        Field $nonSortableField,
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
     ) {
@@ -45,13 +46,20 @@ final class SorterSpec extends ObjectBehavior
 
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
 
-        $grid->getSorting()->willReturn(['name' => 'desc']);
+        $grid->getSorting()->willReturn(['name' => 'desc', 'non_sortable_field' => 'asc']);
+
         $grid->hasField('name')->willReturn(true);
         $grid->getField('name')->willReturn($nameField);
         $nameField->isSortable()->willReturn(true);
         $nameField->getSortable()->willReturn('translation.name');
 
+        $grid->hasField('non_sortable_field')->willReturn(true);
+        $grid->getField('non_sortable_field')->willReturn($nonSortableField);
+        $nonSortableField->isSortable()->willReturn(false);
+        $nonSortableField->getSortable()->willReturn(null);
+
         $expressionBuilder->addOrderBy('translation.name', 'desc')->shouldBeCalled();
+        $expressionBuilder->addOrderBy(null, 'asc')->shouldNotBeCalled();
 
         $this->sort($dataSource, $grid, $parameters);
     }
@@ -59,10 +67,11 @@ final class SorterSpec extends ObjectBehavior
     function it_sorts_the_data_source_via_expression_builder_based_on_sorting_parameter(
         Grid $grid,
         Field $nameField,
+        Field $nonSortableField,
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
     ) {
-        $parameters = new Parameters(['sorting' => ['name' => 'asc']]);
+        $parameters = new Parameters(['sorting' => ['name' => 'asc', 'non_sortable_field' => 'asc']]);
 
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
 
@@ -73,7 +82,13 @@ final class SorterSpec extends ObjectBehavior
         $nameField->isSortable()->willReturn(true);
         $nameField->getSortable()->willReturn('translation.name');
 
+        $grid->hasField('non_sortable_field')->willReturn(true);
+        $grid->getField('non_sortable_field')->willReturn($nonSortableField);
+        $nonSortableField->isSortable()->willReturn(false);
+        $nonSortableField->getSortable()->willReturn(null);
+
         $expressionBuilder->addOrderBy('translation.name', 'asc')->shouldBeCalled();
+        $expressionBuilder->addOrderBy(null, 'asc')->shouldNotBeCalled();
 
         $this->sort($dataSource, $grid, $parameters);
     }
