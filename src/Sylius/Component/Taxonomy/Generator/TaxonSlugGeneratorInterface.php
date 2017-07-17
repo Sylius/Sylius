@@ -17,10 +17,11 @@ namespace Sylius\Component\Taxonomy\Generator;
 interface TaxonSlugGeneratorInterface
 {
     /**
-     * @param string $name
-     * @param int|null $parentId
+     * @param string      $name
+     * @param int|null    $parentId
+     * @param null|string $locale
      *
      * @return string
      */
-    public function generate($name, $parentId = null);
+    public function generate($name, $parentId = null, $locale = null);
 }

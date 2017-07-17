@@ -15,6 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Taxonomy\Generator\TaxonSlugGenerator;
 use Sylius\Component\Taxonomy\Generator\TaxonSlugGeneratorInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Sylius\Component\Taxonomy\Model\TaxonTranslationInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 
 /**
@@ -39,12 +40,26 @@ final class TaxonSlugGeneratorSpec extends ObjectBehavior
 
     function it_generates_slug_based_on_new_taxon_name_and_parent_taxon_slug(
         TaxonInterface $parent,
+        TaxonTranslationInterface $taxonTranslation,
         TaxonRepositoryInterface $taxonRepository
     ) {
         $taxonRepository->find(1)->willReturn($parent);
-        $parent->getSlug()->willReturn('board-games');
+        $parent->getTranslation(null)->willReturn($taxonTranslation);
+        $taxonTranslation->getSlug()->willReturn('board-games');
 
-        $this->generate('Battle games', 1)->shouldReturn('board-games/battle-games');;
+        $this->generate('Battle games', 1)->shouldReturn('board-games/battle-games');
+    }
+
+    function it_generates_slug_based_on_new_taxon_name_and_parent_taxon_slug_for_polish_locale(
+        TaxonInterface $parent,
+        TaxonTranslationInterface $taxonTranslation,
+        TaxonRepositoryInterface $taxonRepository
+    ) {
+        $taxonRepository->find(1)->willReturn($parent);
+        $parent->getTranslation('pl_PL')->willReturn($taxonTranslation);
+        $taxonTranslation->getSlug()->willReturn('bronie-sredniowieczne');
+
+        $this->generate('Machiny oblężnicze', 1, 'pl_PL')->shouldReturn('bronie-sredniowieczne/machiny-obleznicze');
     }
 
     function it_generates_slug_based_on_new_taxon_name_if_this_taxon_has_no_parent()
