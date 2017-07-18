@@ -209,7 +209,7 @@ final class CustomerContext implements Context
      * @param string $email
      * @param string|null $firstName
      * @param string|null $lastName
-     * @param \DateTime|null $createdAt
+     * @param \DateTimeInterface|null $createdAt
      * @param string|null $phoneNumber
      *
      * @return CustomerInterface
@@ -218,7 +218,7 @@ final class CustomerContext implements Context
         $email,
         $firstName = null,
         $lastName = null,
-        \DateTime $createdAt = null,
+        \DateTimeInterface $createdAt = null,
         $phoneNumber = null
     ) {
         /** @var CustomerInterface $customer */

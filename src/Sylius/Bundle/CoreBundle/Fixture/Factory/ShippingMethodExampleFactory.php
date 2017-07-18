@@ -169,7 +169,7 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
             ->setAllowedTypes('channels', 'array')
             ->setNormalizer('channels', LazyOption::findBy($this->channelRepository, 'code'))
             ->setDefault('archived_at', null)
-            ->setAllowedTypes('archived_at', ['null', \DateTime::class])
+            ->setAllowedTypes('archived_at', ['null', \DateTimeInterface::class])
         ;
     }
 

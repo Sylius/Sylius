@@ -51,7 +51,7 @@ final class UnpaidOrdersStateUpdaterSpec extends ObjectBehavior
         StateMachineInterface $firstOrderStateMachine,
         StateMachineInterface $secondOrderStateMachine
     ) {
-        $orderRepository->findOrdersUnpaidSince(Argument::type(\DateTime::class))->willReturn([
+        $orderRepository->findOrdersUnpaidSince(Argument::type(\DateTimeInterface::class))->willReturn([
            $firstOrder,
            $secondOrder
         ]);

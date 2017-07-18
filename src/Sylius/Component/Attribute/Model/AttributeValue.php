@@ -62,12 +62,12 @@ class AttributeValue implements AttributeValueInterface
     private $float;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     private $datetime;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     private $date;
 
@@ -255,7 +255,7 @@ class AttributeValue implements AttributeValueInterface
     }
 
     /**
-     * @return \DateTime|null
+     * @return \DateTimeInterface|null
      */
     protected function getDatetime()
     {
@@ -263,15 +263,15 @@ class AttributeValue implements AttributeValueInterface
     }
 
     /**
-     * @param \DateTime|null $datetime
+     * @param \DateTimeInterface|null $datetime
      */
-    protected function setDatetime(\DateTime $datetime = null)
+    protected function setDatetime(\DateTimeInterface $datetime = null)
     {
         $this->datetime = $datetime;
     }
 
     /**
-     * @return \DateTime|null
+     * @return \DateTimeInterface|null
      */
     protected function getDate()
     {
@@ -279,9 +279,9 @@ class AttributeValue implements AttributeValueInterface
     }
 
     /**
-     * @param \DateTime|null $date
+     * @param \DateTimeInterface|null $date
      */
-    protected function setDate(\DateTime $date = null)
+    protected function setDate(\DateTimeInterface $date = null)
     {
         $this->date = $date;
     }

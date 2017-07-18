@@ -48,7 +48,7 @@ class PromotionCoupon implements PromotionCouponInterface
     protected $promotion;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $expiresAt;
 
@@ -145,7 +145,7 @@ class PromotionCoupon implements PromotionCouponInterface
     /**
      * {@inheritdoc}
      */
-    public function setExpiresAt(\DateTime $expiresAt = null)
+    public function setExpiresAt(\DateTimeInterface $expiresAt = null)
     {
         $this->expiresAt = $expiresAt;
     }

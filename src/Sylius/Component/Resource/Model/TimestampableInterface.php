@@ -19,22 +19,22 @@ namespace Sylius\Component\Resource\Model;
 interface TimestampableInterface
 {
     /**
-     * @return \DateTime
+     * @return \DateTimeInterface
      */
     public function getCreatedAt();
 
     /**
-     * @param \DateTime $createdAt
+     * @param \DateTimeInterface $createdAt
      */
-    public function setCreatedAt(\DateTime $createdAt);
+    public function setCreatedAt(\DateTimeInterface $createdAt);
 
     /**
-     * @return \DateTime
+     * @return \DateTimeInterface
      */
     public function getUpdatedAt();
 
     /**
-     * @param \DateTime $updatedAt
+     * @param \DateTimeInterface $updatedAt
      */
-    public function setUpdatedAt(\DateTime $updatedAt);
+    public function setUpdatedAt(\DateTimeInterface $updatedAt);
 }

@@ -99,14 +99,14 @@ interface UserInterface extends
     public function setPasswordResetToken($passwordResetToken);
 
     /**
-     * @return \DateTime|null
+     * @return \DateTimeInterface|null
      */
     public function getPasswordRequestedAt();
 
     /**
-     * @param \DateTime|null $date
+     * @param \DateTimeInterface|null $date
      */
-    public function setPasswordRequestedAt(\DateTime $date = null);
+    public function setPasswordRequestedAt(\DateTimeInterface $date = null);
 
     /**
      * @param \DateInterval $ttl
@@ -121,29 +121,29 @@ interface UserInterface extends
     public function isVerified();
 
     /**
-     * @return \DateTime|null
+     * @return \DateTimeInterface|null
      */
     public function getVerifiedAt();
 
     /**
-     * @param \DateTime|null $verifiedAt
+     * @param \DateTimeInterface|null $verifiedAt
      */
-    public function setVerifiedAt(\DateTime $verifiedAt = null);
+    public function setVerifiedAt(\DateTimeInterface $verifiedAt = null);
 
     /**
-     * @param \DateTime|null $date
+     * @param \DateTimeInterface|null $date
      */
-    public function setCredentialsExpireAt(\DateTime $date = null);
+    public function setCredentialsExpireAt(\DateTimeInterface $date = null);
 
     /**
-     * @return \DateTime|null
+     * @return \DateTimeInterface|null
      */
     public function getLastLogin();
 
     /**
-     * @param \DateTime|null $time
+     * @param \DateTimeInterface|null $time
      */
-    public function setLastLogin(\DateTime $time = null);
+    public function setLastLogin(\DateTimeInterface $time = null);
 
     /**
      * Never use this to check if this user has access to anything!

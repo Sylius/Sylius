@@ -161,7 +161,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function setStartsAt(\DateTime $dateTime)
+    public function setStartsAt(\DateTimeInterface $dateTime)
     {
         $timestamp = $dateTime->getTimestamp();
 
@@ -172,7 +172,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function setEndsAt(\DateTime $dateTime)
+    public function setEndsAt(\DateTimeInterface $dateTime)
     {
         $timestamp = $dateTime->getTimestamp();
 

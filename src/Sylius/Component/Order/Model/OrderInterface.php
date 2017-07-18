@@ -28,14 +28,14 @@ interface OrderInterface extends AdjustableInterface, ResourceInterface, Timesta
     const STATE_FULFILLED = 'fulfilled';
 
     /**
-     * @return \DateTime
+     * @return \DateTimeInterface
      */
     public function getCheckoutCompletedAt();
 
     /**
-     * @param null|\DateTime $checkoutCompletedAt
+     * @param null|\DateTimeInterface $checkoutCompletedAt
      */
-    public function setCheckoutCompletedAt(\DateTime $checkoutCompletedAt = null);
+    public function setCheckoutCompletedAt(\DateTimeInterface $checkoutCompletedAt = null);
 
     /**
      * @return bool

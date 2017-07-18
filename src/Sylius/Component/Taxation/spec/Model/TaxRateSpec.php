@@ -117,7 +117,7 @@ final class TaxRateSpec extends ObjectBehavior
 
     function it_should_initialize_creation_date_by_default()
     {
-        $this->getCreatedAt()->shouldHaveType(\DateTime::class);
+        $this->getCreatedAt()->shouldHaveType(\DateTimeInterface::class);
     }
 
     function it_should_not_have_last_update_date_by_default()

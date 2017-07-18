@@ -28,7 +28,7 @@ final class PromotionCouponGeneratorInstruction implements PromotionCouponGenera
     private $codeLength = 6;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     private $expiresAt;
 
@@ -80,7 +80,7 @@ final class PromotionCouponGeneratorInstruction implements PromotionCouponGenera
     /**
      * {@inheritdoc}
      */
-    public function setExpiresAt(\DateTime $expiresAt = null)
+    public function setExpiresAt(\DateTimeInterface $expiresAt = null)
     {
         $this->expiresAt = $expiresAt;
     }

@@ -236,7 +236,7 @@ final class AdjustmentSpec extends ObjectBehavior
 
     function it_initializes_creation_date_by_default()
     {
-        $this->getCreatedAt()->shouldHaveType(\DateTime::class);
+        $this->getCreatedAt()->shouldHaveType(\DateTimeInterface::class);
     }
 
     function it_has_no_last_update_date_by_default()

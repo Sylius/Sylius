@@ -48,7 +48,7 @@ class Customer implements CustomerInterface
     protected $lastName;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $birthday;
 
@@ -176,7 +176,7 @@ class Customer implements CustomerInterface
     /**
      * {@inheritdoc}
      */
-    public function setBirthday(\DateTime $birthday = null)
+    public function setBirthday(\DateTimeInterface $birthday = null)
     {
         $this->birthday = $birthday;
     }

@@ -55,11 +55,11 @@ interface OrderRepositoryInterface extends RepositoryInterface
     public function findCartById($id);
 
     /**
-     * @param \DateTime $terminalDate
+     * @param \DateTimeInterface $terminalDate
      *
      * @return OrderInterface[]
      */
-    public function findCartsNotModifiedSince(\DateTime $terminalDate);
+    public function findCartsNotModifiedSince(\DateTimeInterface $terminalDate);
 
     /**
      * @return \Doctrine\ORM\QueryBuilder
