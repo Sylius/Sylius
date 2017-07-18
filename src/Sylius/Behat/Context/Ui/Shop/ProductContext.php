@@ -146,6 +146,17 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Then I should (also) see the product attribute :attributeName with date :expectedAttribute
+     */
+    public function iShouldSeeTheProductAttributeWithDate($attributeName, $expectedAttribute)
+    {
+        Assert::eq(
+            new \DateTime($this->showPage->getAttributeByName($attributeName)),
+            new \DateTime($expectedAttribute)
+        );
+    }
+
+    /**
      * @Then I should see :count attributes
      */
     public function iShouldSeeAttributes($count)
