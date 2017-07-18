@@ -53,7 +53,7 @@ Sylius\Component\Core\Model\Customer:
         lastName: "Queen"
         email: "oliver.queen@star-city.com"
         emailCanonical: "oliver.queen@star-city.com"
-        birthday: "<date()>"
+        birthday: "<(new \\DateTime())>"
 
 Sylius\Component\Core\Model\Product:
     mug:
@@ -76,7 +76,7 @@ Sylius\Component\Core\Model\ProductVariant:
         product: "@mug"
         currentLocale: "en_US"
         currentTranslation: "@sw_mug_translation"
-        updatedAt: 2015-10-10
+        updatedAt: "<(new \\DateTime('2015-10-10'))>"
         channelPricings:
             WEB: "@sw_mug_web_channel_pricing"
     mug_lotr:
@@ -84,7 +84,7 @@ Sylius\Component\Core\Model\ProductVariant:
         product: "@mug"
         currentLocale: "en_US"
         currentTranslation: "@lotr_mug_translation"
-        updatedAt: 2015-10-04
+        updatedAt: "<(new \\DateTime('2015-10-04'))>"
         channelPricings:
             WEB: "@lotr_mug_web_channel_pricing"
     mug_bb:
@@ -92,7 +92,7 @@ Sylius\Component\Core\Model\ProductVariant:
         product: "@mug"
         currentLocale: "en_US"
         currentTranslation: "@bb_mug_translation"
-        updatedAt: 2015-10-05
+        updatedAt: "<(new \\DateTime('2015-10-05'))>"
         channelPricings:
             WEB: "@bb_mug_web_channel_pricing"
     hard_available_mug:
@@ -100,7 +100,7 @@ Sylius\Component\Core\Model\ProductVariant:
         product: "@mug"
         currentLocale: "en_US"
         currentTranslation: "@hard_available_mug_translation"
-        updatedAt: 2015-10-05
+        updatedAt: "<(new \\DateTime('2015-10-05'))>"
         channelPricings:
             WEB: "@hard_available_mug_web_channel_pricing"
         tracked: true
