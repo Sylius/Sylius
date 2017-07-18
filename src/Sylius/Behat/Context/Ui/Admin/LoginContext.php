@@ -134,7 +134,9 @@ final class LoginContext implements Context
      */
     private function logInAgain($username, $password)
     {
+        $this->dashboardPage->open();
         $this->dashboardPage->logOut();
+
         $this->loginPage->open();
         $this->loginPage->specifyUsername($username);
         $this->loginPage->specifyPassword($password);
