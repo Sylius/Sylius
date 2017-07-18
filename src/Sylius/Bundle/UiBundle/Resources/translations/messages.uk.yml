@@ -361,7 +361,7 @@ sylius:
         group_membership: 'Членство в групі'
         guest: 'Гість'
         guest_customer: 'Гостьовий клієнт'
-        have_an_account_already: 'Наразі вже маєте обліковку?'
+        have_an_account_already: 'Вже маєте акаунт?'
         hello: 'Вітаємо'
         hello_name: 'Вітаємо, <b>%name%</b>'
         hide_deleted: 'Приховати видалений'
