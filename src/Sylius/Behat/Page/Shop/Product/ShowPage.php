@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Product;
 
-use Behat\Mink\Driver\Selenium2Driver;
 use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Behat\Page\UnexpectedPageException;
+use Sylius\Behat\Service\DriverHelper;
 use Sylius\Behat\Service\JQueryHelper;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
@@ -42,7 +42,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     {
         $this->getDocument()->pressButton('Add to cart');
 
-        if ($this->getDriver() instanceof Selenium2Driver) {
+        if (DriverHelper::supportsJavascript($this->getDriver())) {
             JQueryHelper::waitForAsynchronousActionsToFinish($this->getSession());
         }
     }
@@ -55,7 +55,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         $this->getDocument()->fillField('Quantity', $quantity);
         $this->getDocument()->pressButton('Add to cart');
 
-        if ($this->getDriver() instanceof Selenium2Driver) {
+        if (DriverHelper::supportsJavascript($this->getDriver())) {
             JQueryHelper::waitForAsynchronousActionsToFinish($this->getSession());
         }
     }
@@ -69,7 +69,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
         $this->getDocument()->pressButton('Add to cart');
 
-        if ($this->getDriver() instanceof Selenium2Driver) {
+        if (DriverHelper::supportsJavascript($this->getDriver())) {
             JQueryHelper::waitForAsynchronousActionsToFinish($this->getSession());
         }
     }
@@ -215,8 +215,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     {
         $variantRadio = $this->getElement('variant_radio', ['%variant-name%' => $variantName]);
 
-        $driver = $this->getDriver();
-        if ($driver instanceof Selenium2Driver) {
+        if (DriverHelper::supportsJavascript($this->getDriver())) {
             $variantRadio->click();
 
             return;

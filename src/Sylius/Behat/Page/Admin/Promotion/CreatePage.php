@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Promotion;
 
-use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Behaviour\NamesIt;

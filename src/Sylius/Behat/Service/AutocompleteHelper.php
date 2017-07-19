@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Service;
 
-use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
 use Webmozart\Assert\Assert;
@@ -30,7 +29,7 @@ abstract class AutocompleteHelper
      */
     public static function chooseValue(Session $session, NodeElement $element, $value)
     {
-        Assert::isInstanceOf($session->getDriver(), Selenium2Driver::class);
+        Assert::true(DriverHelper::supportsJavascript($session->getDriver()), 'Browser does not support Javascript.');
 
         static::activateAutocompleteDropdown($session, $element);
 
@@ -46,7 +45,7 @@ abstract class AutocompleteHelper
      */
     public static function chooseValues(Session $session, NodeElement $element, array $values)
     {
-        Assert::isInstanceOf($session->getDriver(), Selenium2Driver::class);
+        Assert::true(DriverHelper::supportsJavascript($session->getDriver()), 'Browser does not support Javascript.');
 
         static::activateAutocompleteDropdown($session, $element);
 

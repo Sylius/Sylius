@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Product;
 
-use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 use Sylius\Behat\Service\AutocompleteHelper;
+use Sylius\Behat\Service\DriverHelper;
 use Sylius\Behat\Service\SlugGenerationHelper;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
@@ -41,7 +41,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         $this->activateLanguageTab($localeCode);
         $this->getElement('name', ['%locale%' => $localeCode])->setValue($name);
 
-        if ($this->getDriver() instanceof Selenium2Driver) {
+        if (DriverHelper::supportsJavascript($this->getDriver())) {
             SlugGenerationHelper::waitForSlugGeneration(
                 $this->getSession(),
                 $this->getElement('slug', ['%locale%' => $localeCode])
@@ -285,7 +285,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     {
         $this->clickTab('associations');
 
-        Assert::isInstanceOf($this->getDriver(), Selenium2Driver::class);
+        Assert::true(DriverHelper::supportsJavascript($this->getDriver()), 'Browser does not support Javascript.');
 
         $dropdown = $this->getElement('association_dropdown', [
             '%association%' => $productAssociationType->getName()
@@ -375,7 +375,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
      */
     public function activateLanguageTab($locale)
     {
-        if (!$this->getDriver() instanceof Selenium2Driver) {
+        if (!DriverHelper::supportsJavascript($this->getDriver())) {
             return;
         }
 

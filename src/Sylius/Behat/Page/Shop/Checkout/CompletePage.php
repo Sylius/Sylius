@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Checkout;
 
-use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
 use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
+use Sylius\Behat\Service\DriverHelper;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
@@ -304,7 +304,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
      */
     public function tryToOpen(array $urlParameters = [])
     {
-        if ($this->getDriver() instanceof Selenium2Driver) {
+        if (DriverHelper::supportsJavascript($this->getDriver())) {
             $start = microtime(true);
             $end = $start + 15;
             do {
