@@ -57,6 +57,13 @@ abstract class Page implements PageInterface
     public function open(array $urlParameters = [])
     {
         $this->tryToOpen($urlParameters);
+
+        // Retry if it hasn't worked correctly for the first time (headless Chrome bug?)
+        if (!$this->isOpen($urlParameters)) {
+            $this->tryToOpen($urlParameters);
+        }
+
+
         $this->verify($urlParameters);
     }
 
