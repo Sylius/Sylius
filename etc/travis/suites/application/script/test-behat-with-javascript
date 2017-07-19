@@ -11,7 +11,7 @@ prepare_for_behat_with_js() {
     run_command "export DISPLAY=:99"
 
     # Run headless Google Chrome
-    run_command "google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &"
+    run_command "google-chrome-stable --headless --disable-gpu --no-sandbox --window-size='1680,1050' --remote-debugging-port=9222 http://localhost &"
 
     # Run webserver
     run_command "bin/console server:run 127.0.0.1:8080 --env=test_cached --router=app/config/router_test_cached.php --no-debug --quiet > /dev/null 2>&1 &"
