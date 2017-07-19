@@ -61,7 +61,7 @@ final class IndexPage extends BaseIndexPage implements IndexPageInterface
         $this->getElement('save_configuration_button')->press();
 
         $this->getDocument()->waitFor(5, function () {
-            return false === $this->getElement('save_configuration_button')->hasClass('loading');
+            return null === $this->getElement('save_configuration_button')->find('css', '.loading');
         });
     }
 
