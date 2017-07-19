@@ -74,6 +74,7 @@
         "behat/mink-browserkit-driver": "^1.3",
         "behat/mink-extension": "^2.2",
         "behat/mink-selenium2-driver": "^1.3",
+        "dmore/behat-chrome-extension": "^1.0",
         "friends-of-behat/context-service-extension": "^1.0",
         "friends-of-behat/cross-container-extension": "^1.0",
         "friends-of-behat/service-container-extension": "^1.0",
