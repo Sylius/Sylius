@@ -12,8 +12,7 @@ prepare_for_behat_with_js() {
 
     # Download and configure ChromeDriver
     if [ ! -f $SYLIUS_CACHE_DIR/chromedriver ]; then
-        # Using ChromeDriver 2.12 which supports Chrome 36-40, we're using Chromium 37
-        run_command "curl http://chromedriver.storage.googleapis.com/2.12/chromedriver_linux64.zip > chromedriver.zip"
+        run_command "curl http://chromedriver.storage.googleapis.com/2.30/chromedriver_linux64.zip > chromedriver.zip"
         run_command "unzip chromedriver.zip"
         run_command "mv chromedriver $SYLIUS_CACHE_DIR"
     fi
