@@ -3,6 +3,40 @@
 
 sylius:
     form:
+        rule:
+            unit_count_configuration:
+                count: Брой
+                equal: Равно на
+            type: Тип правило
+        shipment:
+            state: Състояние
+            states:
+                checkout: Плащане
+                pending: Изчакване
+                ready: Готов
+                shipped: Изпратено
+                returned: Върната
+                cancelled: Отказано
+            tracking_code: Проследяващ код
+        shipping_calculator:
+            flat_rate_configuration:
+                label: Фиксирана такса за пратка
+                amount: Сума
+            per_unit_rate_configuration:
+                label: Фиксирана сума за единица
+                amount: Сума
+        shipping_category:
+            description: Описание
+            name: Име
         shipping_method:
+            calculator: Калкулатор
+            category: Категория
+            category_requirement: Категория изискване
+            channels: Канали
+            configuration: Конфигурация
+            description: Описание
+            enabled: Активирано
+            name: Име
             tax_category: Данъчна категория
             translations: Преводи
+            position: Позиция
