@@ -3,8 +3,15 @@
 
 sylius:
     ui:
+        add_member: 'Tambah ahli'
+        add_province: 'Tambah Daerah'
         city: 'Bandar'
         company: 'Syarikat'
         country: 'Negara'
+        members: 'Ahli'
+        phone_number: 'Nombor Telefon'
         postcode: 'Poskod'
+        province: 'Daerah'
+        provinces: 'Daerah-Daerah'
+        scope: 'Skop'
         type: 'Jenis'
