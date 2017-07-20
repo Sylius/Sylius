@@ -39,14 +39,13 @@ final class AttributeFactorySpec extends ObjectBehavior
         $this->shouldImplement(AttributeFactoryInterface::class);
     }
 
-    function it_does_not_allow_to_create_new_attribute()
-    {
-        $this
-            ->shouldThrow(new \BadMethodCallException(
-                'Method "createNew()" is not supported for attribute factory. Use "createTyped($type)" instead.'
-            ))
-            ->during('createNew')
-        ;
+    function it_creates_untyped_attribute(
+        FactoryInterface $factory,
+        Attribute $untypedAttribute
+    ) {
+        $factory->createNew()->willReturn($untypedAttribute);
+
+        $this->createNew()->shouldReturn($untypedAttribute);
     }
 
     function it_creates_typed_attribute(
