@@ -41,13 +41,14 @@ final class UniqueIdBasedOrderTokenAssignerSpec extends ObjectBehavior
         $order->setTokenValue('yahboiiiii')->shouldBeCalled();
 
         $this->assignTokenValue($order);
+        $this->assignTokenValueIfNotSet($order);
     }
 
     function it_does_nothing_if_token_is_already_assigned(RandomnessGeneratorInterface $generator, OrderInterface $order)
     {
         $order->getTokenValue()->willReturn('yahboiiiii');
-        $order->setTokenValue(Argument::type('string'))->shouldNotBeCalled();
+        $order->setTokenValue(Argument::any())->shouldNotBeCalled();
 
-        $this->assignTokenValue($order);
+        $this->assignTokenValueIfNotSet($order);
     }
 }
