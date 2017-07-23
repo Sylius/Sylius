@@ -53,7 +53,7 @@ final class RequestConfigurationFactorySpec extends ObjectBehavior
         $request->headers = $headersBag;
         $request->attributes = $attributesBag;
 
-        $headersBag->get('Accept')->willReturn(null);
+        $headersBag->get('Accept', null, false)->willReturn([]);
 
         $attributesBag->get('_sylius', [])->willReturn(['template' => ':Product:show.html.twig']);
         $parametersParser
@@ -74,9 +74,97 @@ final class RequestConfigurationFactorySpec extends ObjectBehavior
         $request->headers = $headersBag;
         $request->attributes = $attributesBag;
 
+        $headersBag->get('Accept', null, false)->willReturn([]);
+
         $attributesBag->get('_sylius', [])->willReturn(['template' => ':Product:list.html.twig']);
         $parametersParser
             ->parseRequestValues(['template' => ':Product:list.html.twig'], $request)
+            ->willReturn(['template' => ':Product:list.html.twig'])
+        ;
+
+        $this->create($metadata, $request)->isSortable()->shouldReturn(false);
+    }
+
+    function it_creates_configuration_for_serialization_group_from_single_header(
+        ParametersParserInterface $parametersParser,
+        MetadataInterface $metadata,
+        Request $request,
+        ParameterBag $headersBag,
+        ParameterBag $attributesBag
+    ) {
+        $request->headers = $headersBag;
+        $request->attributes = $attributesBag;
+
+        $headersBag->get('Accept', null, false)->willReturn(['groups=Default,Detailed']);
+
+        $attributesBag->get('_sylius', [])->willReturn([]);
+        $parametersParser
+            ->parseRequestValues(['serialization_groups' => ['Default', 'Detailed']], $request)
+            ->willReturn(['template' => ':Product:list.html.twig'])
+        ;
+
+        $this->create($metadata, $request)->isSortable()->shouldReturn(false);
+    }
+
+    function it_creates_configuration_for_serialization_group_from_multiple_headers(
+        ParametersParserInterface $parametersParser,
+        MetadataInterface $metadata,
+        Request $request,
+        ParameterBag $headersBag,
+        ParameterBag $attributesBag
+    ) {
+        $request->headers = $headersBag;
+        $request->attributes = $attributesBag;
+
+        $headersBag->get('Accept', null, false)->willReturn(['application/json', 'groups=Default,Detailed']);
+
+        $attributesBag->get('_sylius', [])->willReturn([]);
+        $parametersParser
+            ->parseRequestValues(['serialization_groups' => ['Default', 'Detailed']], $request)
+            ->willReturn(['template' => ':Product:list.html.twig'])
+        ;
+
+        $this->create($metadata, $request)->isSortable()->shouldReturn(false);
+    }
+
+    function it_creates_configuration_for_serialization_version_from_single_header(
+        ParametersParserInterface $parametersParser,
+        MetadataInterface $metadata,
+        Request $request,
+        ParameterBag $headersBag,
+        ParameterBag $attributesBag
+    ) {
+        $request->headers = $headersBag;
+        $request->attributes = $attributesBag;
+
+        $headersBag->get('Accept', null, false)->willReturn(['version=1.0.0']);
+
+        $attributesBag->get('_sylius', [])->willReturn([]);
+
+        $parametersParser
+            ->parseRequestValues(['serialization_version' => '1.0.0'], $request)
+            ->willReturn(['template' => ':Product:list.html.twig'])
+        ;
+
+        $this->create($metadata, $request)->isSortable()->shouldReturn(false);
+    }
+
+    function it_creates_configuration_for_serialization_version_from_multiple_headers(
+        ParametersParserInterface $parametersParser,
+        MetadataInterface $metadata,
+        Request $request,
+        ParameterBag $headersBag,
+        ParameterBag $attributesBag
+    ) {
+        $request->headers = $headersBag;
+        $request->attributes = $attributesBag;
+
+        $headersBag->get('Accept', null, false)->willReturn(['application/xml', 'version=1.0.0']);
+
+        $attributesBag->get('_sylius', [])->willReturn([]);
+
+        $parametersParser
+            ->parseRequestValues(['serialization_version' => '1.0.0'], $request)
             ->willReturn(['template' => ':Product:list.html.twig'])
         ;
 
@@ -94,6 +182,8 @@ final class RequestConfigurationFactorySpec extends ObjectBehavior
 
         $request->headers = $headersBag;
         $request->attributes = $attributesBag;
+
+        $headersBag->get('Accept', null, false)->willReturn([]);
 
         $attributesBag->get('_sylius', [])->willReturn(['template' => ':Product:list.html.twig']);
 
