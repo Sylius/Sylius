@@ -22,7 +22,7 @@ use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
 use Webmozart\Assert\Assert;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 class ZoneAndChannelBasedShippingMethodsResolver implements ShippingMethodsResolverInterface
 {

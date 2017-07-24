@@ -26,7 +26,7 @@ use Sylius\Component\Taxonomy\Model\TaxonTranslationInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 final class TaxonomyContext implements Context
 {

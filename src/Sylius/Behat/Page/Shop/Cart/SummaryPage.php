@@ -16,7 +16,7 @@ use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Component\Core\Model\ProductInterface;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
 class SummaryPage extends SymfonyPage implements SummaryPageInterface

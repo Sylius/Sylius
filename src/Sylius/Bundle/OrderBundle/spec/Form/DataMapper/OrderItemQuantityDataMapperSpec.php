@@ -19,7 +19,7 @@ use Symfony\Component\Form\DataMapperInterface;
 use Symfony\Component\Form\FormInterface;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 final class OrderItemQuantityDataMapperSpec extends ObjectBehavior
 {

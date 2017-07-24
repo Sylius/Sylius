@@ -19,7 +19,7 @@ use Sylius\Component\Attribute\Model\AttributeValueInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 final class AttributeValueSpec extends ObjectBehavior
 {

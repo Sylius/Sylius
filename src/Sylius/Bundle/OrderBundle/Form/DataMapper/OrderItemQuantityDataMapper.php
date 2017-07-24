@@ -17,7 +17,7 @@ use Symfony\Component\Form\DataMapperInterface;
 /**
  * @internal
  *
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 class OrderItemQuantityDataMapper implements DataMapperInterface
 {

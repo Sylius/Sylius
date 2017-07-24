@@ -21,8 +21,8 @@ use Sylius\Behat\Service\AutocompleteHelper;
 use Webmozart\Assert\Assert;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- * @author Łuksaz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
+ * @author Łuksaz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 class CreatePage extends BaseCreatePage implements CreatePageInterface
 {

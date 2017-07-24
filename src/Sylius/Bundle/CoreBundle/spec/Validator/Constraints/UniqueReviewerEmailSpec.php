@@ -16,7 +16,7 @@ use Sylius\Bundle\CoreBundle\Validator\Constraints\UniqueReviewerEmail;
 use Symfony\Component\Validator\Constraint;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 final class UniqueReviewerEmailSpec extends ObjectBehavior

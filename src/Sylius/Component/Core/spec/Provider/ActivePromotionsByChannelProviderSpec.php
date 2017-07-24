@@ -22,7 +22,7 @@ use Sylius\Component\Promotion\Provider\PreQualifiedPromotionsProviderInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 final class ActivePromotionsByChannelProviderSpec extends ObjectBehavior
 {

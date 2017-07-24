@@ -14,7 +14,7 @@ namespace Sylius\Component\Mailer\Factory;
 use Sylius\Component\Mailer\Model\Email;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 class EmailFactory implements EmailFactoryInterface
 {

@@ -19,7 +19,7 @@ use Sylius\Component\Core\Provider\ProductVariantsPricesProviderInterface;
 use Symfony\Component\Templating\Helper\Helper;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 final class ProductVariantsPricesHelperSpec extends ObjectBehavior
 {

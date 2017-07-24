@@ -14,7 +14,7 @@ namespace Sylius\Behat\Page\Admin\Order;
 use Sylius\Behat\Page\SymfonyPageInterface;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 interface HistoryPageInterface extends SymfonyPageInterface
 {

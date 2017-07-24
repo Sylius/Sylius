@@ -19,7 +19,7 @@ use Sylius\Component\Shipping\Resolver\CompositeMethodsResolver;
 use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 final class CompositeMethodsResolverSpec extends ObjectBehavior
 {

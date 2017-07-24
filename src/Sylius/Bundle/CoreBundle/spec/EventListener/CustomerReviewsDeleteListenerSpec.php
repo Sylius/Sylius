@@ -19,7 +19,7 @@ use Sylius\Component\Review\Model\ReviewerInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 final class CustomerReviewsDeleteListenerSpec extends ObjectBehavior

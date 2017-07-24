@@ -23,7 +23,7 @@ use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 final class CheckoutStateResolver implements StateResolverInterface
 {

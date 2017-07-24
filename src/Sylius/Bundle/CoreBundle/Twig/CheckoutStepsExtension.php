@@ -14,7 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Twig;
 use Sylius\Bundle\CoreBundle\Templating\Helper\CheckoutStepsHelper;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 final class CheckoutStepsExtension extends \Twig_Extension
 {

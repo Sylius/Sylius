@@ -15,7 +15,7 @@ use Sylius\Component\Order\Factory\OrderItemUnitFactoryInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 class OrderItemQuantityModifier implements OrderItemQuantityModifierInterface
 {

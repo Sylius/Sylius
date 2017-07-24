@@ -18,7 +18,7 @@ use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 final class PromotionRulesEligibilityChecker implements PromotionEligibilityCheckerInterface
 {

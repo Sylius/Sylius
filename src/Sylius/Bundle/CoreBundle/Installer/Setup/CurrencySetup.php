@@ -21,7 +21,7 @@ use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Intl\Intl;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 final class CurrencySetup implements CurrencySetupInterface
 {

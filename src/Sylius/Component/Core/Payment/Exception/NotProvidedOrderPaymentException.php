@@ -12,7 +12,7 @@
 namespace Sylius\Component\Core\Payment\Exception;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 final class NotProvidedOrderPaymentException extends \Exception
 {

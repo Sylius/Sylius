@@ -18,7 +18,7 @@ use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 interface CompletePageInterface extends SymfonyPageInterface
 {

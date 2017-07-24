@@ -22,7 +22,7 @@ use Sylius\Component\Payment\Model\PaymentMethod as BasePaymentMethod;
 use Sylius\Component\Resource\Exception\UnsupportedMethodException;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 final class PaymentMethodSpec extends ObjectBehavior
 {

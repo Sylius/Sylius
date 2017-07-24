@@ -12,7 +12,7 @@
 namespace Sylius\Component\Order\Remover;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 interface ExpiredCartsRemoverInterface
 {

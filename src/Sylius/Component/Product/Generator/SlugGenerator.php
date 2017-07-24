@@ -14,7 +14,7 @@ namespace Sylius\Component\Product\Generator;
 use Behat\Transliterator\Transliterator;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 final class SlugGenerator implements SlugGeneratorInterface
 {

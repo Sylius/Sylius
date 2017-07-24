@@ -14,7 +14,7 @@ namespace Sylius\Bundle\OrderBundle\Twig;
 use Sylius\Bundle\OrderBundle\Templating\Helper\AdjustmentsHelper;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 final class AggregateAdjustmentsExtension extends \Twig_Extension
 {

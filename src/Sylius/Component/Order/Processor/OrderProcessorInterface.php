@@ -14,7 +14,7 @@ namespace Sylius\Component\Order\Processor;
 use Sylius\Component\Order\Model\OrderInterface;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 interface OrderProcessorInterface
 {

@@ -15,7 +15,7 @@ use Sylius\Component\Registry\PrioritizedServiceRegistryInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 final class CompositeMethodsResolver implements ShippingMethodsResolverInterface
 {

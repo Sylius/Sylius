@@ -17,7 +17,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 final class HasAllPricesDefinedValidator extends ConstraintValidator
 {

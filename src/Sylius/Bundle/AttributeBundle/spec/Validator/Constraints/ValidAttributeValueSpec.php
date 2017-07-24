@@ -16,7 +16,7 @@ use Sylius\Bundle\AttributeBundle\Validator\Constraints\ValidAttributeValue;
 use Symfony\Component\Validator\Constraint;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 final class ValidAttributeValueSpec extends ObjectBehavior
 {

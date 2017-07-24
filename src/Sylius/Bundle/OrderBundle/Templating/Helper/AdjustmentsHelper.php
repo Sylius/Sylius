@@ -15,7 +15,7 @@ use Sylius\Component\Order\Aggregator\AdjustmentsAggregatorInterface;
 use Symfony\Component\Templating\Helper\Helper;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 class AdjustmentsHelper extends Helper
 {

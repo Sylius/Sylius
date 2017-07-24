@@ -12,7 +12,7 @@
 namespace Sylius\Behat\Page\Admin\Taxon;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 interface CreateForParentPageInterface extends CreatePageInterface
 {

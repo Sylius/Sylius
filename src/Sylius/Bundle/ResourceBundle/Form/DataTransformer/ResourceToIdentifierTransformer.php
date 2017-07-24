@@ -19,7 +19,7 @@ use Webmozart\Assert\Assert;
 
 /**
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 final class ResourceToIdentifierTransformer implements DataTransformerInterface
 {

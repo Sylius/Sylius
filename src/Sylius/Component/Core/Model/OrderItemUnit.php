@@ -16,7 +16,7 @@ use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Shipping\Model\ShipmentInterface as BaseShipmentInterface;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 class OrderItemUnit extends BaseOrderItemUnit implements OrderItemUnitInterface
 {

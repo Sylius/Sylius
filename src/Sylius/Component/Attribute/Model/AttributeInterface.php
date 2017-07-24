@@ -18,7 +18,7 @@ use Sylius\Component\Resource\Model\TranslatableInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 interface AttributeInterface extends
     CodeAwareInterface,

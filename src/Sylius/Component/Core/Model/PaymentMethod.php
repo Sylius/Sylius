@@ -20,7 +20,7 @@ use Sylius\Component\Payment\Model\PaymentMethodTranslation;
 use Sylius\Component\Resource\Exception\UnsupportedMethodException;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 class PaymentMethod extends BasePaymentMethod implements PaymentMethodInterface
 {

@@ -25,7 +25,7 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 /**
  * @author Joseph Bielawski <stloyd@gmail.com>
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 final class HasTaxonRuleCheckerSpec extends ObjectBehavior
 {

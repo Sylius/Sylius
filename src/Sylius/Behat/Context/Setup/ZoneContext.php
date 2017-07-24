@@ -27,7 +27,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Intl\Intl;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 final class ZoneContext implements Context
 {

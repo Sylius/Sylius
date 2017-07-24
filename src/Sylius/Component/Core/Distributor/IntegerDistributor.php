@@ -12,7 +12,7 @@
 namespace Sylius\Component\Core\Distributor;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 class IntegerDistributor implements IntegerDistributorInterface
 {

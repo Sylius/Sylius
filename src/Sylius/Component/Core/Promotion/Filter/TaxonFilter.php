@@ -14,7 +14,7 @@ namespace Sylius\Component\Core\Promotion\Filter;
 use Sylius\Component\Core\Model\ProductInterface;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 final class TaxonFilter implements FilterInterface
 {
