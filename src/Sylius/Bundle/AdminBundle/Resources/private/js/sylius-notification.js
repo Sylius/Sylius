@@ -20,19 +20,53 @@
             var notificationMenu = $('#sylius-version-notification');
             var askFrequency = notificationMenu.attr('data-frequency') * MILISECONDS_MULTIPLIER;
 
-            initializeWidget();
-
-            if (retrieve(HUB_REQUEST_TIME) === undefined || milisecondsSinceLastRequest() > askFrequency) {
-                askVersion();
-            }
-
             $(notificationMenu).find('i[data-dismiss]').on('click', function () {
-                store(SYLIUS_VERSION_DISMISSED, retrieve(LAST_SYLIUS_VERSION));
+                store(SYLIUS_VERSION_DISMISSED, getLatestSyliusVersion());
 
-                notify(false);
+                updateNotification();
             });
 
-            function askVersion() {
+            updateNotification();
+
+            function updateNotification() {
+                if (isLatest() || isDismissed()) {
+                    hideNotification();
+
+                    return;
+                }
+
+                showNotification();
+            }
+
+            function showNotification()
+            {
+                var notificationMenu = $('#sylius-version-notification');
+
+                $('#notifications').css('display', 'block');
+                $('#no-notifications').css('display', 'none');
+                notificationMenu.find('.bell.icon').removeClass('outline').addClass('yellow');
+            }
+
+            function hideNotification()
+            {
+                var notificationMenu = $('#sylius-version-notification');
+
+                $('#notifications').css('display', 'none');
+                $('#no-notifications').css('display', 'block');
+                notificationMenu.find('.bell.icon').removeClass('yellow').addClass('outline');
+            }
+
+            function getCurrentSyliusVersion()
+            {
+                return notificationMenu.data('current-version');
+            }
+
+            function getLatestSyliusVersion()
+            {
+                if (retrieve(HUB_REQUEST_TIME) !== undefined && milisecondsSinceLastRequest() < askFrequency) {
+                    return retrieve(LAST_SYLIUS_VERSION);
+                }
+
                 $.ajax({
                     type: "GET",
                     url: notificationMenu.attr('data-url'),
@@ -40,43 +74,29 @@
                     success: function (data) {
                         if (undefined !== data && data.version !== retrieve(LAST_SYLIUS_VERSION)) {
                             store(LAST_SYLIUS_VERSION, data.version.toString());
-
-                            initializeWidget();
                         }
                     },
                     complete: function () {
                         store(HUB_REQUEST_TIME, new Date().getTime().toString());
                     }
                 });
+
+                return retrieve(LAST_SYLIUS_VERSION);
             }
 
-            function initializeWidget() {
-                if (undefined === retrieve(LAST_SYLIUS_VERSION)) {
-                    store(LAST_SYLIUS_VERSION, notificationMenu.data('current-version'));
-                }
-                if (undefined === retrieve(SYLIUS_VERSION_DISMISSED)) {
-                    store(SYLIUS_VERSION_DISMISSED, '0');
-                }
-
-                if (retrieve(LAST_SYLIUS_VERSION) === notificationMenu.data('current-version') || retrieve(LAST_SYLIUS_VERSION) === retrieve(SYLIUS_VERSION_DISMISSED)) {
-                    notify(false);
-                } else {
-                    notify(true);
-                }
+            function getDismissedSyliusVersion()
+            {
+                return retrieve(SYLIUS_VERSION_DISMISSED);
             }
 
-            function notify(bool) {
-                var notificationMenu = $('#sylius-version-notification');
+            function isLatest()
+            {
+                return getCurrentSyliusVersion() === getLatestSyliusVersion();
+            }
 
-                if (true === bool) {
-                    $('#notifications').css('display', 'block');
-                    $('#no-notifications').css('display', 'none');
-                    notificationMenu.find('.bell.icon').removeClass('outline').addClass('yellow');
-                } else {
-                    $('#notifications').css('display', 'none');
-                    $('#no-notifications').css('display', 'block');
-                    notificationMenu.find('.bell.icon').removeClass('yellow').addClass('outline');
-                }
+            function isDismissed()
+            {
+                return getLatestSyliusVersion() === getDismissedSyliusVersion();
             }
 
             function milisecondsSinceLastRequest() {
@@ -86,6 +106,7 @@
             function store(key, value) {
                 localStorage.setItem(key, value);
             }
+
             function retrieve(key) {
                 return localStorage.getItem(key);
             }
