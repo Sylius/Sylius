@@ -60,7 +60,7 @@ To test the documentation before a commit:
 
 .. code-block:: bash
 
-    $ pip install -r requirements.txt
+    $ pip install -r docs/requirements.txt
     # This makes sure that the version of Sphinx you'll get is >=1.4.2!
 
 * Install `Sphinx`_,
