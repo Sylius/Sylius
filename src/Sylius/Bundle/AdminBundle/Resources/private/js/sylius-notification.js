@@ -13,7 +13,7 @@
     $.fn.extend({
         notification: function () {
             var HUB_REQUEST_TIME = 'hub_request_time';
-            var LAST_HUB_SYLIUS_VERSION = 'last_sylius_version';
+            var LAST_SYLIUS_VERSION = 'last_sylius_version';
             var SYLIUS_VERSION_DISMISSED = 'sylius_version_dismissed';
             var MILISECONDS_MULTIPLIER = 1000;
 
@@ -22,12 +22,12 @@
 
             initializeWidget();
 
-            if (retrieve(HUB_REQUEST_TIME) == undefined || milisecondsSinceLastRequest() > askFrequency) {
+            if (retrieve(HUB_REQUEST_TIME) === undefined || milisecondsSinceLastRequest() > askFrequency) {
                 askVersion();
             }
 
             $(notificationMenu).find('i[data-dismiss]').on('click', function () {
-                store(SYLIUS_VERSION_DISMISSED, retrieve(LAST_HUB_SYLIUS_VERSION));
+                store(SYLIUS_VERSION_DISMISSED, retrieve(LAST_SYLIUS_VERSION));
 
                 notify(false);
             });
@@ -38,10 +38,10 @@
                     url: notificationMenu.attr('data-url'),
                     accept: "application/json",
                     success: function (data) {
-                        if (undefined != data && data.version != retrieve(LAST_HUB_SYLIUS_VERSION)) {
-                            store(LAST_HUB_SYLIUS_VERSION, data.version.toString());
+                        if (undefined !== data && data.version !== retrieve(LAST_SYLIUS_VERSION)) {
+                            store(LAST_SYLIUS_VERSION, data.version.toString());
 
-                            notify(true);
+                            initializeWidget();
                         }
                     },
                     complete: function () {
@@ -51,14 +51,14 @@
             }
 
             function initializeWidget() {
-                if (undefined == retrieve(LAST_HUB_SYLIUS_VERSION)) {
-                    store(LAST_HUB_SYLIUS_VERSION, notificationMenu.data('current-version'));
+                if (undefined === retrieve(LAST_SYLIUS_VERSION)) {
+                    store(LAST_SYLIUS_VERSION, notificationMenu.data('current-version'));
                 }
-                if (undefined == retrieve(SYLIUS_VERSION_DISMISSED)) {
+                if (undefined === retrieve(SYLIUS_VERSION_DISMISSED)) {
                     store(SYLIUS_VERSION_DISMISSED, '0');
                 }
 
-                if (retrieve(LAST_HUB_SYLIUS_VERSION) == retrieve(SYLIUS_VERSION_DISMISSED)) {
+                if (retrieve(LAST_SYLIUS_VERSION) === notificationMenu.data('current-version') || retrieve(LAST_SYLIUS_VERSION) === retrieve(SYLIUS_VERSION_DISMISSED)) {
                     notify(false);
                 } else {
                     notify(true);
