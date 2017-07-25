@@ -140,7 +140,7 @@ final class Translator extends BaseTranslator implements WarmableInterface
      */
     private function getLocaleModifier($locale)
     {
-        $modifier = strrchr($locale, '@');
+        $modifier = strrchr((string) $locale, '@');
 
         return $modifier ?: '';
     }
