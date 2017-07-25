@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Resolver;
 
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -44,7 +46,7 @@ class DefaultShippingMethodResolver implements DefaultShippingMethodResolverInte
     {
         /** @var CoreShipmentInterface $shipment */
         Assert::isInstanceOf($shipment, CoreShipmentInterface::class);
-        
+
         /** @var ChannelInterface $channel */
         $channel = $shipment->getOrder()->getChannel();
 
@@ -52,7 +54,7 @@ class DefaultShippingMethodResolver implements DefaultShippingMethodResolverInte
         if (empty($shippingMethods)) {
             throw new UnresolvedDefaultShippingMethodException();
         }
-        
+
         return $shippingMethods[0];
     }
 }

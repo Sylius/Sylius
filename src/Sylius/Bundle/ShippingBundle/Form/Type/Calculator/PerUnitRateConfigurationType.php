@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ShippingBundle\Form\Type\Calculator;
 
 use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;

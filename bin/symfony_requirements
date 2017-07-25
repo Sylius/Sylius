@@ -1,6 +1,8 @@
 #!/usr/bin/env php
 <?php
 
+declare(strict_types=1);
+
 require_once dirname(__FILE__).'/../var/SymfonyRequirements.php';
 
 $lineSize = 70;

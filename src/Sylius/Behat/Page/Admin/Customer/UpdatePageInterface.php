@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Page\Admin\Customer;
 
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
@@ -25,7 +27,7 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
      * @return string
      */
     public function getFullName();
-    
+
     /**
      * @param string $firstName
      */

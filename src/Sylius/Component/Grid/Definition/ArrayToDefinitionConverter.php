@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Grid\Definition;
 
 use Sylius\Component\Grid\Event\GridDefinitionConverterEvent;

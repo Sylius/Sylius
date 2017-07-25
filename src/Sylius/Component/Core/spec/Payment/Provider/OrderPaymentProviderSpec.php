@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Core\Payment\Provider;
 
 use PhpSpec\ObjectBehavior;
@@ -170,7 +172,7 @@ final class OrderPaymentProviderSpec extends ObjectBehavior
 
         $this->provideOrderPayment($order, PaymentInterface::STATE_NEW)->shouldReturn($newPayment);
     }
-    
+
     function it_throws_exception_if_payment_method_cannot_be_resolved_for_provided_payment(
         OrderInterface $order,
         PaymentFactoryInterface $paymentFactory,

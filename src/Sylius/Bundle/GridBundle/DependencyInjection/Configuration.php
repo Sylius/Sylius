@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\GridBundle\DependencyInjection;
 
 use Sylius\Bundle\GridBundle\Doctrine\ORM\Driver as DoctrineORMDriver;

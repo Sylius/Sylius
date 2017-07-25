@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\CoreBundle\Form\EventSubscriber;
 
 use PhpSpec\ObjectBehavior;
@@ -52,7 +54,7 @@ final class AddUserFormSubscriberSpec extends ObjectBehavior
 
         $this->preSetData($event);
     }
-    
+
     function it_replaces_user_form_by_new_user_form_when_create_user_check_is_not_checked(
         FormEvent $event,
         Form $form,
@@ -103,7 +105,7 @@ final class AddUserFormSubscriberSpec extends ObjectBehavior
         $event->getForm()->willReturn($form);
         $form->get('createUser')->willReturn($createUserCheckForm);
         $createUserCheckForm->getViewData()->willReturn(null);
-        
+
         $this->shouldThrow(\InvalidArgumentException::class)->during('submit', [$event]);
     }
 }

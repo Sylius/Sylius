@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Translation;
 
 use Sylius\Component\Locale\Context\LocaleContextInterface;
