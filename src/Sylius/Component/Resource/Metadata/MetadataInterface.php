@@ -49,7 +49,7 @@ interface MetadataInterface
     public function getDriver();
 
     /**
-     * @return string
+     * @return ?string
      */
     public function getTemplatesNamespace();
 

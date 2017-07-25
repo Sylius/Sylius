@@ -266,7 +266,9 @@ final class CustomerContext implements Context
         $user->setUsername($email);
         $user->setPlainPassword($password);
         $user->setEnabled($enabled);
-        $user->addRole($role);
+        if (null !== $role) {
+            $user->addRole($role);
+        }
 
         $customer->setUser($user);
 

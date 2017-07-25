@@ -137,8 +137,8 @@ final class CheckoutAddressingContext implements Context
     {
         $key = sprintf(
             'shipping_address_%s_%s',
-            strtolower($address->getFirstName()),
-            strtolower($address->getLastName())
+            strtolower((string) $address->getFirstName()),
+            strtolower((string) $address->getLastName())
         );
         $this->sharedStorage->set($key, $address);
 
@@ -172,8 +172,8 @@ final class CheckoutAddressingContext implements Context
 
         $key = sprintf(
             'billing_address_%s_%s',
-            strtolower($address->getFirstName()),
-            strtolower($address->getLastName())
+            strtolower((string) $address->getFirstName()),
+            strtolower((string) $address->getLastName())
         );
         $this->sharedStorage->set($key, $address);
 
@@ -192,7 +192,7 @@ final class CheckoutAddressingContext implements Context
         $this->addressPage->open();
         $this->iSpecifyTheShippingAddressAs($address);
 
-        $key = sprintf('billing_address_%s_%s', strtolower($address->getFirstName()), strtolower($address->getLastName()));
+        $key = sprintf('billing_address_%s_%s', strtolower((string) $address->getFirstName()), strtolower((string) $address->getLastName()));
         $this->sharedStorage->set($key, $address);
 
         $this->iCompleteTheAddressingStep();

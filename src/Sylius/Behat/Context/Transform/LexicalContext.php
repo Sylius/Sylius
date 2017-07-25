@@ -49,7 +49,7 @@ final class LexicalContext implements Context
      */
     private function validatePriceString($price)
     {
-        if (strlen(substr(strrchr($price, '.'), 1)) > 2) {
+        if (!(bool) preg_match('/^\d+(?:\.\d{1,2})?$/', $price)) {
             throw new \InvalidArgumentException('Price string should not have more than 2 decimal digits.');
         }
     }
