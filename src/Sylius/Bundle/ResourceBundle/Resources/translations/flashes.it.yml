@@ -13,3 +13,5 @@ sylius:
         enable: '%resource% è stato attivato con successo.'
         disable: '%resource% è stato disattivato con successo.'
         delete_error: 'Non è possibile eliminare, il %resource% è in uso.'
+        race_condition_error: 'Non è possibile aggiornare, il %resource% è stato modificato in precedenza.'
+        something_went_wrong_error: 'Qualcosa è andato storto. Ti preghiamo di riprovare.'
