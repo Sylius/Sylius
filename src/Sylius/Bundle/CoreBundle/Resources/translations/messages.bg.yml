@@ -37,12 +37,12 @@ sylius:
             skipping_shipping_step_allowed: Пропусни стъпка за доставка, ако само един метод на доставка е налична?
             skipping_payment_step_allowed: Пропусни стъпка за плащане, ако само един метод на плащане е налична?
             tax_calculation_strategy: Стратегия за изчисляване на таксите
-            tax_zone_default: Данъчната зона по подразбиране
+            tax_zone_default: Данъчна зона по подразбиране
             taxonomies: Категоризация
             theme: Тема
         image:
             type: Тип
-            file: Снимка
+            file: Изображение
         locale:
             code: Код
             enabled: Активирано
@@ -125,7 +125,7 @@ sylius:
         product_association_type:
             name: Име
         promotion_filter:
-            products: Продуктов филтър
+            products: Филтър по продукти
             taxons: Филтър по категории
         promotion_rule:
             customer_group:

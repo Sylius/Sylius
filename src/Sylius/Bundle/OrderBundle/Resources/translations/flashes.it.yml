@@ -4,5 +4,6 @@
 sylius:
     cart:
         add_item: 'L''articolo è stato aggiunto al carrello'
+        cannot_modify: 'Un ordine è già stato inviato per il carrello che si stava tentando di modificare.'
         remove_item: 'L''articolo è stato rimosso dal carrello'
         save: 'Il carrello è stato correttamente aggiornato'

@@ -19,7 +19,7 @@ sylius:
             name: Име
             provinces: Области
             select: Изберете
-            enabled: Активирано
+            enabled: Активно
         province:
             name: Име
             abbreviation: Съкращение

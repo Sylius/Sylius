@@ -39,3 +39,4 @@ sylius:
             name: Nome
             tax_category: Categoria fiscale
             translations: Traduzioni
+            position: Posizione
