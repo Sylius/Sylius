@@ -82,7 +82,7 @@
         ],
         "test": [
             "@composer validate --strict",
-            "Tests/Functional/bin/console cache:clear --ansi --no-interaction",
+            "Tests/Functional/bin/console cache:clear --no-warmup --ansi --no-interaction",
             "Tests/Functional/bin/console doctrine:database:create --if-not-exists --ansi --no-interaction",
             "Tests/Functional/bin/console doctrine:schema:update --force --ansi --no-interaction",
             "bin/phpunit --colors=always",
