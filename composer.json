@@ -89,8 +89,7 @@
         "phpspec/phpspec": "^4.0@rc",
         "phpunit/phpunit": "^5.6",
         "se/selenium-server-standalone": "^2.52",
-        "stripe/stripe-php": "^4.1",
-        "dama/doctrine-test-bundle": "^1.0"
+        "stripe/stripe-php": "^4.1"
     },
     "replace": {
         "sylius/addressing": "self.version",
