@@ -133,7 +133,7 @@ class User implements UserInterface
 
     public function __construct()
     {
-        $this->salt = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
+        $this->salt = base_convert(sha1(uniqid((string) mt_rand(), true)), 16, 36);
         $this->oauthAccounts = new ArrayCollection();
         $this->createdAt = new \DateTime();
 
@@ -419,7 +419,7 @@ class User implements UserInterface
         if (null === $this->passwordRequestedAt) {
             return false;
         }
-        
+
         $threshold = new \DateTime();
         $threshold->sub($ttl);
         return $threshold <= $this->passwordRequestedAt;

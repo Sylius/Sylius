@@ -128,7 +128,7 @@ class InMemoryRepository implements RepositoryInterface
             $results = $this->applyOrder($results, $orderBy);
         }
 
-        $results = array_slice($results, $offset, $limit);
+        $results = array_slice($results, $offset ?? 0, $limit);
 
         return $results;
     }

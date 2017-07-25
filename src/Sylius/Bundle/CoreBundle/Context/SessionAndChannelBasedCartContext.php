@@ -72,7 +72,7 @@ final class SessionAndChannelBasedCartContext implements CartContextInterface
         try {
             $channel = $this->channelContext->getChannel();
         } catch (ChannelNotFoundException $exception) {
-            throw new CartNotFoundException($exception);
+            throw new CartNotFoundException(null, $exception);
         }
 
         if (!$this->session->has(sprintf('%s.%s', $this->sessionKeyName, $channel->getCode()))) {

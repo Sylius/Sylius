@@ -53,8 +53,8 @@ class SortByExtension extends \Twig_Extension
         usort($array, function ($firstElement, $secondElement) use ($field, $order) {
             $accessor = PropertyAccess::createPropertyAccessor();
 
-            $firstProperty = $accessor->getValue($firstElement, $field);
-            $secondProperty = $accessor->getValue($secondElement, $field);
+            $firstProperty = (string) $accessor->getValue($firstElement, $field);
+            $secondProperty = (string) $accessor->getValue($secondElement, $field);
 
             $result = strcasecmp($firstProperty, $secondProperty);
             if ('DESC' === $order) {

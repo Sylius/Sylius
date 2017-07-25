@@ -76,11 +76,11 @@ final class RequestConfigurationFactory implements RequestConfigurationFactoryIn
     {
         $parameters = [];
 
-        if (preg_match(self::API_VERSION_REGEXP, $request->headers->get(self::API_VERSION_HEADER), $matches)) {
+        if (preg_match(self::API_VERSION_REGEXP, (string) $request->headers->get(self::API_VERSION_HEADER), $matches)) {
             $parameters['serialization_version'] = $matches['version'];
         }
 
-        if (preg_match(self::API_GROUPS_REGEXP, $request->headers->get(self::API_GROUPS_HEADER), $matches)) {
+        if (preg_match(self::API_GROUPS_REGEXP, (string) $request->headers->get(self::API_GROUPS_HEADER), $matches)) {
             $parameters['serialization_groups'] = array_map('trim', explode(',', $matches['groups']));
         }
 

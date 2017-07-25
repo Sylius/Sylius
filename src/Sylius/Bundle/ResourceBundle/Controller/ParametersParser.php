@@ -65,6 +65,10 @@ final class ParametersParser implements ParametersParserInterface
      */
     private function parseRequestValue($parameter, Request $request)
     {
+        if (!is_string($parameter)) {
+            return $parameter;
+        }
+
         if (0 === strpos($parameter, '$')) {
             return $request->get(substr($parameter, 1));
         }
