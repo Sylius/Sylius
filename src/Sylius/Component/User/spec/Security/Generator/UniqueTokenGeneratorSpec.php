@@ -88,7 +88,7 @@ final class UniqueTokenGeneratorSpec extends ObjectBehavior
     /**
      * {@inheritdoc}
      */
-    public function getMatchers()
+    public function getMatchers(): array
     {
         return [
             'haveLength' => function ($subject, $key) {

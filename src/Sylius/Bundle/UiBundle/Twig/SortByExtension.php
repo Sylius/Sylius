@@ -48,8 +48,7 @@ class SortByExtension extends \Twig_Extension
             return $array;
         }
 
-        /** "@usort" so it won't explode on php 5.6 */
-        @usort($array, function ($firstElement, $secondElement) use ($field, $order) {
+        usort($array, function ($firstElement, $secondElement) use ($field, $order) {
             $accessor = PropertyAccess::createPropertyAccessor();
 
             $firstProperty = $accessor->getValue($firstElement, $field);

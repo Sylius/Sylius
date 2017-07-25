@@ -47,9 +47,7 @@ final class ProductsToCodesTransformerSpec extends ObjectBehavior
     ) {
         $productRepository->findBy(['code' => ['bow', 'sword']])->willReturn([$bow, $sword]);
 
-        $products = new ArrayCollection([$bow->getWrappedObject(), $sword->getWrappedObject()]);
-
-        $this->transform(['bow', 'sword'])->shouldBeCollection($products);
+        $this->transform(['bow', 'sword'])->shouldIterateAs([$bow, $sword]);
     }
 
     function it_transforms_only_existing_products(
@@ -58,14 +56,12 @@ final class ProductsToCodesTransformerSpec extends ObjectBehavior
     ) {
         $productRepository->findBy(['code' => ['bow', 'sword']])->willReturn([$bow]);
 
-        $products = new ArrayCollection([$bow->getWrappedObject()]);
-
-        $this->transform(['bow', 'sword'])->shouldBeCollection($products);
+        $this->transform(['bow', 'sword'])->shouldIterateAs([$bow]);
     }
 
     function it_transforms_empty_array_into_empty_collection()
     {
-        $this->transform([])->shouldBeCollection(new ArrayCollection([]));
+        $this->transform([])->shouldIterateAs([]);
     }
 
     function it_throws_exception_if_value_to_transform_is_not_array()
@@ -100,31 +96,5 @@ final class ProductsToCodesTransformerSpec extends ObjectBehavior
     function it_returns_empty_array_if_passed_collection_is_empty()
     {
         $this->reverseTransform(new ArrayCollection())->shouldReturn([]);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getMatchers()
-    {
-        return [
-            'beCollection' => function ($subject, $key) {
-                if (!$subject instanceof Collection || !$key instanceof Collection) {
-                    return false;
-                }
-
-                if ($subject->count() !== $key->count()) {
-                    return false;
-                }
-
-                foreach ($subject as $subjectElement) {
-                    if (!$key->contains($subjectElement)) {
-                        return false;
-                    }
-                }
-
-                return true;
-            },
-        ];
     }
 }

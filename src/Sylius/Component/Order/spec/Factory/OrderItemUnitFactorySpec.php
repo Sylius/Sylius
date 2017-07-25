@@ -53,7 +53,7 @@ final class OrderItemUnitFactorySpec extends ObjectBehavior
         $this->createForItem($orderItem)->shouldBeSameAs($orderItemUnit);
     }
 
-    public function getMatchers()
+    public function getMatchers(): array
     {
         return [
             'beSameAs' => function ($subject, $key) {

@@ -36,13 +36,11 @@ final class ThemeFactorySpec extends ObjectBehavior
         $this->create('example/theme', '/theme/path')->shouldHaveNameAndPath('example/theme', '/theme/path');
     }
 
-    public function getMatchers()
+    public function getMatchers(): array
     {
         return [
             'haveNameAndPath' => function (ThemeInterface $theme, $expectedName, $expectedPath) {
-                return $expectedName === $theme->getName()
-                    && $expectedPath === $theme->getPath()
-                ;
+                return $expectedName === $theme->getName() && $expectedPath === $theme->getPath();
             },
         ];
     }

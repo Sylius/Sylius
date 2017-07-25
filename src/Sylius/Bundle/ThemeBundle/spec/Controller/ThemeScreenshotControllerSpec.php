@@ -108,7 +108,7 @@ final class ThemeScreenshotControllerSpec extends ObjectBehavior
     /**
      * {@inheritdoc}
      */
-    public function getMatchers()
+    public function getMatchers(): array
     {
         return [
             'beBinaryFileResponseStreamingFile' => function (BinaryFileResponse $response, $file) {
