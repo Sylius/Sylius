@@ -37,6 +37,7 @@ final class Configuration implements ConfigurationInterface
                     ->prototype('scalar')
                     ->end()
                 ->end()
+                ->booleanNode('filterable')->end()
                 ->variableNode('form')->cannotBeEmpty()->end()
                 ->scalarNode('serialization_version')->cannotBeEmpty()->end()
                 ->scalarNode('section')->cannotBeEmpty()->end()
