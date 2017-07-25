@@ -30,7 +30,7 @@
     "require-dev": {
         "akeneo/phpspec-skip-example-extension": "^3.0@alpha",
         "doctrine/doctrine-bundle": "~1.3",
-        "doctrine/orm": "^2.5",
+        "doctrine/orm": "~2.5.0",
         "doctrine/phpcr-odm": "^1.3.0",
         "incenteev/composer-parameter-handler": "~2.0",
         "jackalope/jackalope-doctrine-dbal": "^1.2",

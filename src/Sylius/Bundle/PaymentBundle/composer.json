@@ -27,7 +27,7 @@
         "symfony/framework-bundle": "^3.2"
     },
     "require-dev": {
-        "doctrine/orm": "^2.5",
+        "doctrine/orm": "~2.5.0",
         "phpspec/phpspec": "^4.0@rc",
         "sylius/locale-bundle": "^1.0",
         "phpunit/phpunit": "^5.6",

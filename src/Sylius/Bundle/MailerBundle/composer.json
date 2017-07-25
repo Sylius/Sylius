@@ -27,7 +27,7 @@
     },
     "require-dev": {
         "doctrine/doctrine-bundle": "~1.3",
-        "doctrine/orm": "^2.5",
+        "doctrine/orm": "~2.5.0",
         "incenteev/composer-parameter-handler": "~2.0",
         "ocramius/proxy-manager": "^1.0",
         "phpspec/phpspec": "^4.0@rc",

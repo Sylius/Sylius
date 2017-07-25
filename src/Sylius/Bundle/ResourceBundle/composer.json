@@ -44,7 +44,7 @@
     "require-dev": {
         "akeneo/phpspec-skip-example-extension": "^3.0@alpha",
         "doctrine/mongodb-odm": "^1.0",
-        "doctrine/orm": "^2.5",
+        "doctrine/orm": "~2.5.0",
         "doctrine/phpcr-odm": "^1.4",
         "incenteev/composer-parameter-handler": "^2.1",
         "jackalope/jackalope-doctrine-dbal": "^1.2",
@@ -58,7 +58,7 @@
         "twig/twig": "^1.28"
     },
     "suggest": {
-        "doctrine/orm": "^2.5",
+        "doctrine/orm": "~2.5.0",
         "sylius/locale": "^1.0"
     },
     "scripts": {
