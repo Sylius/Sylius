@@ -2,6 +2,10 @@
 
 ## Packages:
 
+### Addressing / AddressingBundle
+
+* `ZoneMatcher` has been made final, use decoration instead of extending it.
+
 ### Order / OrderBundle
 
 * In order to be compatibile with Doctrine ORM 2.6+ and be more consistent 

@@ -35,7 +35,7 @@ class Country implements CountryInterface
     /**
      * Country code ISO 3166-1 alpha-2.
      *
-     * @var string
+     * @var string|null
      */
     protected $code;
 
@@ -52,9 +52,9 @@ class Country implements CountryInterface
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
-        return $this->getName() ?: $this->getCode();
+        return (string) ($this->getName() ?? $this->getCode());
     }
 
     /**
@@ -68,7 +68,7 @@ class Country implements CountryInterface
     /**
      * {@inheritdoc}
      */
-    public function getCode()
+    public function getCode(): ?string
     {
         return $this->code;
     }
@@ -76,7 +76,7 @@ class Country implements CountryInterface
     /**
      * {@inheritdoc}
      */
-    public function setCode($code)
+    public function setCode(?string $code): void
     {
         $this->code = $code;
     }
@@ -84,7 +84,7 @@ class Country implements CountryInterface
     /**
      * {@inheritdoc}
      */
-    public function getName($locale = null)
+    public function getName(?string $locale = null): ?string
     {
         return Intl::getRegionBundle()->getCountryName($this->code, $locale);
     }
@@ -92,7 +92,7 @@ class Country implements CountryInterface
     /**
      * {@inheritdoc}
      */
-    public function getProvinces()
+    public function getProvinces(): Collection
     {
         return $this->provinces;
     }
@@ -100,7 +100,7 @@ class Country implements CountryInterface
     /**
      * {@inheritdoc}
      */
-    public function hasProvinces()
+    public function hasProvinces(): bool
     {
         return !$this->provinces->isEmpty();
     }
@@ -108,7 +108,7 @@ class Country implements CountryInterface
     /**
      * {@inheritdoc}
      */
-    public function addProvince(ProvinceInterface $province)
+    public function addProvince(ProvinceInterface $province): void
     {
         if (!$this->hasProvince($province)) {
             $this->provinces->add($province);
@@ -119,7 +119,7 @@ class Country implements CountryInterface
     /**
      * {@inheritdoc}
      */
-    public function removeProvince(ProvinceInterface $province)
+    public function removeProvince(ProvinceInterface $province): void
     {
         if ($this->hasProvince($province)) {
             $this->provinces->removeElement($province);
@@ -130,7 +130,7 @@ class Country implements CountryInterface
     /**
      * {@inheritdoc}
      */
-    public function hasProvince(ProvinceInterface $province)
+    public function hasProvince(ProvinceInterface $province): bool
     {
         return $this->provinces->contains($province);
     }

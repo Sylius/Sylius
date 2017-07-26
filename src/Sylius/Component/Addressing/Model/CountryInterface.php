@@ -30,32 +30,32 @@ interface CountryInterface extends ToggleableInterface, ResourceInterface, CodeA
      *
      * @return string|null
      */
-    public function getName($locale = null);
+    public function getName(?string $locale = null): ?string;
 
     /**
      * @return Collection|ProvinceInterface[]
      */
-    public function getProvinces();
+    public function getProvinces(): Collection;
 
     /**
      * @return bool
      */
-    public function hasProvinces();
+    public function hasProvinces(): bool;
 
     /**
      * @param ProvinceInterface $province
      */
-    public function addProvince(ProvinceInterface $province);
+    public function addProvince(ProvinceInterface $province): void;
 
     /**
      * @param ProvinceInterface $province
      */
-    public function removeProvince(ProvinceInterface $province);
+    public function removeProvince(ProvinceInterface $province): void;
 
     /**
      * @param ProvinceInterface $province
      *
      * @return bool
      */
-    public function hasProvince(ProvinceInterface $province);
+    public function hasProvince(ProvinceInterface $province): bool;
 }

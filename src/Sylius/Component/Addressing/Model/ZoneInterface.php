@@ -30,62 +30,62 @@ interface ZoneInterface extends ResourceInterface, CodeAwareInterface
     /**
      * @return string[]
      */
-    public static function getTypes();
+    public static function getTypes(): array;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getName();
+    public function getName(): ?string;
 
     /**
-     * @param string $name
+     * @param string|null $name
      */
-    public function setName($name);
+    public function setName(?string $name): void;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getType();
+    public function getType(): ?string;
 
     /**
-     * @param string $type
+     * @param string|null $type
      */
-    public function setType($type);
+    public function setType(?string $type): void;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getScope();
+    public function getScope(): ?string;
 
     /**
-     * @param string $scope
+     * @param string|null $scope
      */
-    public function setScope($scope);
+    public function setScope(?string $scope): void;
 
     /**
      * @return Collection|ZoneMemberInterface[]
      */
-    public function getMembers();
+    public function getMembers(): Collection;
 
     /**
      * @return bool
      */
-    public function hasMembers();
+    public function hasMembers(): bool;
 
     /**
      * @param ZoneMemberInterface $member
      */
-    public function addMember(ZoneMemberInterface $member);
+    public function addMember(ZoneMemberInterface $member): void;
 
     /**
      * @param ZoneMemberInterface $member
      */
-    public function removeMember(ZoneMemberInterface $member);
+    public function removeMember(ZoneMemberInterface $member): void;
 
     /**
      * @param ZoneMemberInterface $member
      *
      * @return bool
      */
-    public function hasMember(ZoneMemberInterface $member);
+    public function hasMember(ZoneMemberInterface $member): bool;
 }
