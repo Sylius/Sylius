@@ -69,7 +69,7 @@ class ZoneMember implements ZoneMemberInterface
     /**
      * {@inheritdoc}
      */
-    public function setBelongsTo(?ZoneInterface $belongsTo = null): void
+    public function setBelongsTo(?ZoneInterface $belongsTo): void
     {
         $this->belongsTo = $belongsTo;
     }

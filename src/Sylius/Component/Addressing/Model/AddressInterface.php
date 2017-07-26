@@ -74,7 +74,7 @@ interface AddressInterface extends TimestampableInterface, ResourceInterface
     /**
      * @param string|null $countryCode
      */
-    public function setCountryCode(?string $countryCode = null): void;
+    public function setCountryCode(?string $countryCode): void;
 
     /**
      * @return string|null
@@ -84,7 +84,7 @@ interface AddressInterface extends TimestampableInterface, ResourceInterface
     /**
      * @param string|null $provinceCode
      */
-    public function setProvinceCode(?string $provinceCode = null): void;
+    public function setProvinceCode(?string $provinceCode): void;
 
     /**
      * @return string|null
@@ -94,7 +94,7 @@ interface AddressInterface extends TimestampableInterface, ResourceInterface
     /**
      * @param string|null $provinceName
      */
-    public function setProvinceName(?string $provinceName = null): void;
+    public function setProvinceName(?string $provinceName): void;
 
     /**
      * @return string|null

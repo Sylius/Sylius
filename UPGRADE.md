@@ -6,6 +6,14 @@
 
 * `ZoneMatcher` has been made final, use decoration instead of extending it.
 
+* The following methods does not longer have a default null argument and requires one to be explicitly passed:
+  
+  * `AddressInterface::setCountryCode`
+  * `AddressInterface::setProviceCode`
+  * `AddressInterface::setProviceName`
+  * `ProvinceInterface::setCountry`
+  * `ZoneMemberInterface::setBelongsTo`
+
 ### Order / OrderBundle
 
 * In order to be compatibile with Doctrine ORM 2.6+ and be more consistent 

@@ -118,7 +118,7 @@ class Province implements ProvinceInterface
     /**
      * {@inheritdoc}
      */
-    public function setCountry(?CountryInterface $country = null): void
+    public function setCountry(?CountryInterface $country): void
     {
         $this->country = $country;
     }

@@ -173,7 +173,7 @@ class Address implements AddressInterface
     /**
      * {@inheritdoc}
      */
-    public function setCountryCode(?string $countryCode = null): void
+    public function setCountryCode(?string $countryCode): void
     {
         if (null === $countryCode) {
             $this->provinceCode = null;
@@ -193,7 +193,7 @@ class Address implements AddressInterface
     /**
      * {@inheritdoc}
      */
-    public function setProvinceCode(?string $provinceCode = null): void
+    public function setProvinceCode(?string $provinceCode): void
     {
         if (null === $this->countryCode) {
             return;
@@ -213,7 +213,7 @@ class Address implements AddressInterface
     /**
      * {@inheritdoc}
      */
-    public function setProvinceName(?string $provinceName = null): void
+    public function setProvinceName(?string $provinceName): void
     {
         $this->provinceName = $provinceName;
     }

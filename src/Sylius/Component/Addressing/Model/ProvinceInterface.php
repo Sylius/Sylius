@@ -49,5 +49,5 @@ interface ProvinceInterface extends ResourceInterface, CodeAwareInterface
     /**
      * @param CountryInterface $country
      */
-    public function setCountry(?CountryInterface $country = null): void;
+    public function setCountry(?CountryInterface $country): void;
 }
