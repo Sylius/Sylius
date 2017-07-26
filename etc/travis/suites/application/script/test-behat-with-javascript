@@ -28,7 +28,7 @@ prepare_for_behat_with_js() {
     fi
 
     # Run Selenium
-    run_command "java -jar $SYLIUS_CACHE_DIR/selenium.jar > /dev/null 2>&1 &"
+    run_command "java -Dwebdriver.chrome.driver=$SYLIUS_CACHE_DIR/chromedriver -jar $SYLIUS_CACHE_DIR/selenium.jar > /dev/null 2>&1 &"
 
     # Run webserver
     run_command "bin/console server:run 127.0.0.1:8080 --env=test_cached --router=app/config/router_test_cached.php --no-debug --quiet > /dev/null 2>&1 &"
