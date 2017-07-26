@@ -76,12 +76,18 @@ final class RequestConfigurationFactory implements RequestConfigurationFactoryIn
     {
         $parameters = [];
 
-        if (preg_match(self::API_VERSION_REGEXP, (string) $request->headers->get(self::API_VERSION_HEADER), $matches)) {
-            $parameters['serialization_version'] = $matches['version'];
+        $apiVersionHeaders = $request->headers->get(self::API_VERSION_HEADER, null, false);
+        foreach ($apiVersionHeaders as $apiVersionHeader) {
+            if (preg_match(self::API_VERSION_REGEXP, $apiVersionHeader, $matches)) {
+                $parameters['serialization_version'] = $matches['version'];
+            }
         }
 
-        if (preg_match(self::API_GROUPS_REGEXP, (string) $request->headers->get(self::API_GROUPS_HEADER), $matches)) {
-            $parameters['serialization_groups'] = array_map('trim', explode(',', $matches['groups']));
+        $apiGroupsHeaders = $request->headers->get(self::API_GROUPS_HEADER, null, false);
+        foreach ($apiGroupsHeaders as $apiGroupsHeader) {
+            if (preg_match(self::API_GROUPS_REGEXP, $apiGroupsHeader, $matches)) {
+                $parameters['serialization_groups'] = array_map('trim', explode(',', $matches['groups']));
+            }
         }
 
         return array_merge($request->attributes->get('_sylius', []), $parameters);
