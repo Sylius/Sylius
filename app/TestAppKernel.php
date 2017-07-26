@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 require_once __DIR__.'/AppKernel.php';
 
+use ProxyManager\Proxy\VirtualProxyInterface;
 use PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -59,6 +60,10 @@ class TestAppKernel extends AppKernel
             }
 
             $serviceReflection = new \ReflectionObject($service);
+
+            if ($serviceReflection->implementsInterface(VirtualProxyInterface::class)) {
+                continue;
+            }
 
             $servicePropertiesReflections = $serviceReflection->getProperties();
             $servicePropertiesDefaultValues = $serviceReflection->getDefaultProperties();
