@@ -1,14 +1,14 @@
 Sylius\Component\Core\Model\ProductTranslation:
     productTranslation1:
-        locale: 'en_US'
-        name: 'Star Wars mug'
-        slug: 'star-wars-mug'
+        locale: "en_US"
+        name: "Star Wars mug"
+        slug: "star-wars-mug"
         description: <paragraph(2)>
         translatable: "@product1"
     productTranslation2:
-        locale: 'nl_NL'
-        name: 'Mok van het thema'
-        slug: 'mok-van-het-thema'
+        locale: "nl_NL"
+        name: "Mok van het thema"
+        slug: "mok-van-het-thema"
         description: <paragraph(2)>
         translatable: "@product1"
 
@@ -20,28 +20,28 @@ Sylius\Component\Core\Model\ProductVariant:
 
 Sylius\Component\Core\Model\Product:
     product1:
-        fallbackLocale: 'en_US'
-        currentLocale: 'en_US'
-        code: 'MUG_SW'
+        fallbackLocale: "en_US"
+        currentLocale: "en_US"
+        code: "MUG_SW"
         images: ["@product_thumbnail"]
         translations:
             - "@productTranslation1"
             - "@productTranslation2"
     product2:
-        currentLocale: 'en_US'
-        fallbackLocale: 'en_US'
-        code: 'MUG_LOTR'
-        slug: 'mug-lotr'
-        name: 'Lotr mug'
+        currentLocale: "en_US"
+        fallbackLocale: "en_US"
+        code: "MUG_LOTR"
+        slug: "mug-lotr"
+        name: "Lotr mug"
         description: <paragraph(2)>
         variants:
             - "@productVariant"
     product3:
-        currentLocale: 'en_US'
-        fallbackLocale: 'en_US'
-        code: 'MUG_BB'
-        slug: 'mug-breaking-bad'
-        name: 'Breaking bad mug'
+        currentLocale: "en_US"
+        fallbackLocale: "en_US"
+        code: "MUG_BB"
+        slug: "mug-breaking-bad"
+        name: "Breaking bad mug"
         description: <paragraph(2)>
 
 Sylius\Component\Core\Model\ProductImage:
