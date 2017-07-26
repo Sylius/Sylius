@@ -19,12 +19,12 @@ namespace Sylius\Component\Resource\Model;
 interface CodeAwareInterface
 {
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCode();
+    public function getCode(): ?string;
 
     /**
-     * @param string $code
+     * @param string|null $code
      */
-    public function setCode($code);
+    public function setCode(?string $code): void;
 }
