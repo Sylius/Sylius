@@ -21,17 +21,17 @@ use Sylius\Bundle\AddressingBundle\Validator\Constraints\ProvinceAddressConstrai
  */
 final class ProvinceAddressConstraintSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    function it_is_initializable(): void
     {
         $this->shouldHaveType(ProvinceAddressConstraint::class);
     }
 
-    function it_has_targets()
+    function it_has_targets(): void
     {
         $this->getTargets()->shouldReturn('class');
     }
 
-    function it_is_validated_by()
+    function it_is_validated_by(): void
     {
         $this->validatedBy()->shouldReturn('sylius_province_address_validator');
     }

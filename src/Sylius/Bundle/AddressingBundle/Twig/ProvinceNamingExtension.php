@@ -37,7 +37,7 @@ class ProvinceNamingExtension extends \Twig_Extension
     /**
      * {@inheritdoc}
      */
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
             new \Twig_SimpleFilter('sylius_province_name', [$this->provinceNamingProvider, 'getName']),
