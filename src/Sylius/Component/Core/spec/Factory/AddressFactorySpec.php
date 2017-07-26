@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Core\Factory;
 
 use PhpSpec\ObjectBehavior;
@@ -27,36 +29,36 @@ final class AddressFactorySpec extends ObjectBehavior
     {
         $this->beConstructedWith($decoratedFactory);
     }
-    
+
     function it_is_initializable()
     {
         $this->shouldHaveType(AddressFactory::class);
     }
-    
+
     function it_implements_address_factory_interface()
     {
         $this->shouldImplement(AddressFactoryInterface::class);
     }
-    
+
     function it_is_a_resource_factory()
     {
         $this->shouldImplement(FactoryInterface::class);
     }
-    
+
     function it_creates_a_new_address(FactoryInterface $decoratedFactory, AddressInterface $address)
     {
         $decoratedFactory->createNew()->willReturn($address);
-        
+
         $this->createNew()->shouldReturn($address);
     }
-    
+
     function it_creates_a_new_address_with_customer(
-        FactoryInterface $decoratedFactory, 
-        AddressInterface $address, 
+        FactoryInterface $decoratedFactory,
+        AddressInterface $address,
         CustomerInterface $customer
     ) {
         $decoratedFactory->createNew()->willReturn($address);
-        
+
         $address->setCustomer($customer)->shouldBeCalled();
 
         $this->createForCustomer($customer)->shouldReturn($address);

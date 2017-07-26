@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Page\Admin\ShippingCategory;
 
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
@@ -29,7 +31,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     {
         return $this->getElement('code');
     }
-    
+
     /**
      * {@inheritdoc}
      */

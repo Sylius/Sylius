@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Addressing\Comparator;
 
 use Sylius\Component\Addressing\Model\AddressInterface;
@@ -34,7 +36,7 @@ final class AddressComparator implements AddressComparatorInterface
     private function normalizeAddress(AddressInterface $address)
     {
         return array_map(function ($value) {
-            return trim(strtolower($value));
+            return strtolower(trim((string) $value));
         }, [
             $address->getCity(),
             $address->getCompany(),

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\UiBundle\Twig;
 
 use Doctrine\Common\Collections\Collection;
@@ -51,8 +53,8 @@ class SortByExtension extends \Twig_Extension
         usort($array, function ($firstElement, $secondElement) use ($field, $order) {
             $accessor = PropertyAccess::createPropertyAccessor();
 
-            $firstProperty = $accessor->getValue($firstElement, $field);
-            $secondProperty = $accessor->getValue($secondElement, $field);
+            $firstProperty = (string) $accessor->getValue($firstElement, $field);
+            $secondProperty = (string) $accessor->getValue($secondElement, $field);
 
             $result = strcasecmp($firstProperty, $secondProperty);
             if ('DESC' === $order) {

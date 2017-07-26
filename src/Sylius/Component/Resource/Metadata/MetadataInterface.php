@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Resource\Metadata;
 
 /**
@@ -47,7 +49,7 @@ interface MetadataInterface
     public function getDriver();
 
     /**
-     * @return string
+     * @return ?string
      */
     public function getTemplatesNamespace();
 

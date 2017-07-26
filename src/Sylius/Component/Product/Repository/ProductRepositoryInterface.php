@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Product\Repository;
 
 use Sylius\Component\Product\Model\ProductInterface;

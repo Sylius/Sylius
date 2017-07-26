@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Translation\Finder;
 
 use Sylius\Bundle\ThemeBundle\Factory\FinderFactoryInterface;
@@ -40,11 +42,13 @@ final class TranslationFilesFinder implements TranslationFilesFinderInterface
 
         $translationsFiles = [];
         foreach ($themeFiles as $themeFile) {
-            if (!$this->isTranslationFile($themeFile)) {
+            $themeFilepath = (string) $themeFile;
+
+            if (!$this->isTranslationFile($themeFilepath)) {
                 continue;
             }
 
-            $translationsFiles[] = (string) $themeFile;
+            $translationsFiles[] = $themeFilepath;
         }
 
         return $translationsFiles;
@@ -53,7 +57,7 @@ final class TranslationFilesFinder implements TranslationFilesFinderInterface
     /**
      * @param string $path
      *
-     * @return array
+     * @return \Iterator|SplFileInfo[]
      */
     private function getFiles($path)
     {

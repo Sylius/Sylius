@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Installer\Provider;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
@@ -71,7 +73,7 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
 
         try {
             $schemaManager = $this->getSchemaManager();
-            
+
             return in_array($databaseName, $schemaManager->listDatabases());
         } catch (\Exception $exception) {
             $message = $exception->getMessage();

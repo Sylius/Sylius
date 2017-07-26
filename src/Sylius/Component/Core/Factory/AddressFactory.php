@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Factory;
 
 use Sylius\Component\Core\Model\AddressInterface;
@@ -49,7 +51,7 @@ class AddressFactory implements AddressFactoryInterface
         /** @var  AddressInterface $address*/
         $address = $this->decoratedFactory->createNew();
         $address->setCustomer($customer);
-        
+
         return $address;
     }
 }

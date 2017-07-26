@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Service\Resolver;
 
 use Behat\Mink\Session;
@@ -49,7 +51,7 @@ final class CurrentPageResolver implements CurrentPageResolverInterface
     public function getCurrentPageWithForm(array $pages)
     {
         $routeParameters = $this->urlMatcher->match(parse_url($this->session->getCurrentUrl(), PHP_URL_PATH));
-        
+
         Assert::allIsInstanceOf($pages, SymfonyPageInterface::class);
 
         foreach ($pages as $page) {

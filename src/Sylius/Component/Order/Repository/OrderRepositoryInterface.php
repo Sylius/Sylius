@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Order\Repository;
 
 use Sylius\Component\Order\Model\OrderInterface;

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\OrderProcessing;
 
 use Sylius\Component\Core\Model\OrderInterface;
@@ -59,7 +61,7 @@ final class OrderPaymentProcessor implements OrderProcessorInterface
         if (OrderInterface::STATE_CANCELLED === $order->getState()) {
             return;
         }
-        
+
         if (0 === $order->getTotal()) {
             return;
         }

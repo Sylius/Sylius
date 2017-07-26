@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Service\Accessor;
 
 use Behat\Mink\Element\NodeElement;

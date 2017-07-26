@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
@@ -264,7 +266,9 @@ final class CustomerContext implements Context
         $user->setUsername($email);
         $user->setPlainPassword($password);
         $user->setEnabled($enabled);
-        $user->addRole($role);
+        if (null !== $role) {
+            $user->addRole($role);
+        }
 
         $customer->setUser($user);
 

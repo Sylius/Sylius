@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ResourceBundle\Doctrine\ORM\Form\Builder;
 
 use Doctrine\DBAL\Types\Type;
