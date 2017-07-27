@@ -222,7 +222,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
             ->select('COUNT(o.id)')
             ->andWhere('o.channel = :channel')
             ->andWhere('o.state NOT IN (:states)')
-	        ->andWhere('o.paymentState NOT IN (:payment_states)')
+            ->andWhere('o.paymentState NOT IN (:payment_states)')
             ->setParameter('channel', $channel)
             ->setParameter('states', [OrderInterface::STATE_CART, OrderInterface::STATE_CANCELLED])
             ->setParameter('payment_states', [OrderPaymentStates::STATE_AWAITING_PAYMENT])
