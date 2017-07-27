@@ -53,7 +53,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
         if (DriverHelper::supportsJavascript($this->getDriver())) {
             JQueryHelper::waitForAsynchronousActionsToFinish($this->getSession());
 
-            sleep(1);
+            usleep(250000); // TODO: Remove hardcoded sleep from tests
         }
     }
 
