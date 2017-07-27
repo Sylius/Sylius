@@ -30,7 +30,7 @@
         "symfony/templating": "^3.2"
     },
     "require-dev": {
-        "doctrine/orm": "~2.5.0",
+        "doctrine/orm": "^2.5",
         "phpspec/phpspec": "^4.0@rc",
         "phpunit/phpunit": "^5.6",
         "symfony/browser-kit": "^3.2",

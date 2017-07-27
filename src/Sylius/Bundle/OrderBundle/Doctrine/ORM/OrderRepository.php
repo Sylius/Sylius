@@ -25,7 +25,7 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
     /**
      * {@inheritdoc}
      */
-    public function count()
+    public function countPlacedOrders()
     {
         return (int) $this->createQueryBuilder('o')
             ->select('COUNT(o.id)')
