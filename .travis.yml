@@ -1,5 +1,7 @@
 language: php
 
+dist: precise
+
 env:
     global:
         - SYLIUS_CACHE_DIR=$HOME/.sylius-cache
