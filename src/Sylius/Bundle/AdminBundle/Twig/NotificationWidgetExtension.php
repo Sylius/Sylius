@@ -46,7 +46,7 @@ final class NotificationWidgetExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction(
+            new \Twig_Function(
                 'sylius_render_notifications_widget',
                 [$this, 'renderWidget'],
                 [

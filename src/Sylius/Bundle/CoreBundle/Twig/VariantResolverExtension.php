@@ -39,7 +39,7 @@ final class VariantResolverExtension extends \Twig_Extension
     public function getFilters()
     {
         return [
-            new \Twig_SimpleFilter('sylius_resolve_variant', [$this->helper, 'resolveVariant']),
+            new \Twig_Filter('sylius_resolve_variant', [$this->helper, 'resolveVariant']),
         ];
     }
 }

@@ -40,7 +40,7 @@ final class LocaleExtension extends \Twig_Extension
     public function getFilters()
     {
         return [
-            new \Twig_SimpleFilter('sylius_locale_name', [$this->localeHelper, 'convertCodeToName']),
+            new \Twig_Filter('sylius_locale_name', [$this->localeHelper, 'convertCodeToName']),
         ];
     }
 }

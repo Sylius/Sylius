@@ -39,10 +39,10 @@ final class GridExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('sylius_grid_render', [$this->gridHelper, 'renderGrid'], ['is_safe' => ['html']]),
-            new \Twig_SimpleFunction('sylius_grid_render_field', [$this->gridHelper, 'renderField'], ['is_safe' => ['html']]),
-            new \Twig_SimpleFunction('sylius_grid_render_action', [$this->gridHelper, 'renderAction'], ['is_safe' => ['html']]),
-            new \Twig_SimpleFunction('sylius_grid_render_filter', [$this->gridHelper, 'renderFilter'], ['is_safe' => ['html']]),
+            new \Twig_Function('sylius_grid_render', [$this->gridHelper, 'renderGrid'], ['is_safe' => ['html']]),
+            new \Twig_Function('sylius_grid_render_field', [$this->gridHelper, 'renderField'], ['is_safe' => ['html']]),
+            new \Twig_Function('sylius_grid_render_action', [$this->gridHelper, 'renderAction'], ['is_safe' => ['html']]),
+            new \Twig_Function('sylius_grid_render_filter', [$this->gridHelper, 'renderFilter'], ['is_safe' => ['html']]),
         ];
     }
 }

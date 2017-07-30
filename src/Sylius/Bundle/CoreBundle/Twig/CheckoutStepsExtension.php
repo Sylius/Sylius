@@ -39,8 +39,8 @@ final class CheckoutStepsExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('sylius_is_shipping_required', [$this->checkoutStepsHelper, 'isShippingRequired']),
-            new \Twig_SimpleFunction('sylius_is_payment_required', [$this->checkoutStepsHelper, 'isPaymentRequired']),
+            new \Twig_Function('sylius_is_shipping_required', [$this->checkoutStepsHelper, 'isShippingRequired']),
+            new \Twig_Function('sylius_is_payment_required', [$this->checkoutStepsHelper, 'isPaymentRequired']),
         ];
     }
 }

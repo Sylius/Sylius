@@ -39,8 +39,8 @@ final class InventoryExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-             new \Twig_SimpleFunction('sylius_inventory_is_available', [$this->helper, 'isStockAvailable']),
-             new \Twig_SimpleFunction('sylius_inventory_is_sufficient', [$this->helper, 'isStockSufficient']),
+             new \Twig_Function('sylius_inventory_is_available', [$this->helper, 'isStockAvailable']),
+             new \Twig_Function('sylius_inventory_is_sufficient', [$this->helper, 'isStockSufficient']),
         ];
     }
 }
