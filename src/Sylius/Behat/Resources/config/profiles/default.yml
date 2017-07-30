@@ -43,6 +43,7 @@ default:
             kernel:
                 class: TestAppKernel
                 path: app/TestAppKernel.php
+                bootstrap: vendor/autoload.php
 
         FriendsOfBehat\ContextServiceExtension:
             imports:
