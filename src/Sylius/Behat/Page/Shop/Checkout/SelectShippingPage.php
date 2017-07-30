@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Checkout;
 
-use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Behat\Service\DriverHelper;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -35,7 +35,7 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
      */
     public function selectShippingMethod($shippingMethod)
     {
-        if ($this->getDriver() instanceof Selenium2Driver) {
+        if (DriverHelper::supportsJavascript($this->getDriver())) {
             $this->getElement('shipping_method_select', ['%shipping_method%' => $shippingMethod])->click();
 
             return;

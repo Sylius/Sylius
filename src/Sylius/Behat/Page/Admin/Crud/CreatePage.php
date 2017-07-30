@@ -16,6 +16,8 @@ namespace Sylius\Behat\Page\Admin\Crud;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
 use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Behat\Service\DriverHelper;
+use Sylius\Behat\Service\JQueryHelper;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
@@ -47,6 +49,12 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     public function create()
     {
         $this->getDocument()->pressButton('Create');
+
+        if (DriverHelper::supportsJavascript($this->getDriver())) {
+            JQueryHelper::waitForAsynchronousActionsToFinish($this->getSession());
+
+            usleep(250000); // TODO: Remove hardcoded sleep from tests
+        }
     }
 
     /**

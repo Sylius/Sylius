@@ -14,15 +14,20 @@ default:
             clean_start: false
             screenshot: true
 
+        DMore\ChromeExtension\Behat\ServiceContainer\ChromeExtension: ~
+
         Behat\MinkExtension:
             files_path: "%paths.base%/src/Sylius/Behat/Resources/fixtures/"
             base_url: "http://localhost:8080/"
             default_session: symfony
-            javascript_session: chrome
+            javascript_session: chrome_headless
             sessions:
                 symfony:
                     symfony: ~
-                chrome:
+                chrome_headless:
+                    chrome:
+                        api_url: "http://localhost:9222"
+                chrome_selenium:
                     selenium2:
                         browser: chrome
                         capabilities:
@@ -34,7 +39,7 @@ default:
                                     - "start-fullscreen"
                                     - "start-maximized"
                                     - "no-sandbox"
-                firefox:
+                firefox_selenium:
                     selenium2:
                         browser: firefox
             show_auto: false

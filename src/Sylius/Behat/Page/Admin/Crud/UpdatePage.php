@@ -16,6 +16,8 @@ namespace Sylius\Behat\Page\Admin\Crud;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
 use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Behat\Service\DriverHelper;
+use Sylius\Behat\Service\JQueryHelper;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -48,6 +50,12 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
     public function saveChanges()
     {
         $this->getDocument()->pressButton('sylius_save_changes_button');
+
+        if (DriverHelper::supportsJavascript($this->getDriver())) {
+            JQueryHelper::waitForAsynchronousActionsToFinish($this->getSession());
+
+            usleep(250000); // TODO: Remove hardcoded sleep from tests
+        }
     }
 
     /**

@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Service;
 
-use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
 use Webmozart\Assert\Assert;
@@ -30,7 +29,7 @@ abstract class AutocompleteHelper
      */
     public static function chooseValue(Session $session, NodeElement $element, $value)
     {
-        Assert::isInstanceOf($session->getDriver(), Selenium2Driver::class);
+        Assert::true(DriverHelper::supportsJavascript($session->getDriver()), 'Browser does not support Javascript.');
 
         static::activateAutocompleteDropdown($session, $element);
 
@@ -46,7 +45,7 @@ abstract class AutocompleteHelper
      */
     public static function chooseValues(Session $session, NodeElement $element, array $values)
     {
-        Assert::isInstanceOf($session->getDriver(), Selenium2Driver::class);
+        Assert::true(DriverHelper::supportsJavascript($session->getDriver()), 'Browser does not support Javascript.');
 
         static::activateAutocompleteDropdown($session, $element);
 
@@ -67,9 +66,10 @@ abstract class AutocompleteHelper
     {
         JQueryHelper::waitForAsynchronousActionsToFinish($session);
 
-        $element->click();
+        $element->find('xpath', 'i')->click();
 
         JQueryHelper::waitForAsynchronousActionsToFinish($session);
+
         static::waitForElementToBeVisible($session, $element);
     }
 
@@ -80,8 +80,8 @@ abstract class AutocompleteHelper
     private static function waitForElementToBeVisible(Session $session, NodeElement $element)
     {
         $session->wait(5000, sprintf(
-            '$(document.evaluate("%s", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue).dropdown("is visible")',
-            $element->getXpath()
+            '$(document.evaluate(%s, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue).dropdown("is visible")',
+            json_encode($element->getXpath())
         ));
     }
 }
