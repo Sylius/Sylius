@@ -1319,6 +1319,7 @@ final class ResourceControllerSpec extends ObjectBehavior
 
         $eventDispatcher->dispatchPreEvent(ResourceActions::DELETE, $configuration, $resource)->willReturn($event);
         $event->isStopped()->willReturn(true);
+        $event->hasResponse()->willReturn(false);
 
         $repository->remove($resource)->shouldNotBeCalled();
         $eventDispatcher->dispatchPostEvent(ResourceActions::DELETE, $configuration, $resource)->shouldNotBeCalled();
@@ -1326,6 +1327,59 @@ final class ResourceControllerSpec extends ObjectBehavior
 
         $flashHelper->addFlashFromEvent($configuration, $event)->shouldBeCalled();
         $redirectHandler->redirectToIndex($configuration, $resource)->willReturn($redirectResponse);
+
+        $this->deleteAction($request)->shouldReturn($redirectResponse);
+    }
+
+    function it_does_not_delete_a_resource_and_uses_response_from_event_if_defined(
+        MetadataInterface $metadata,
+        RequestConfigurationFactoryInterface $requestConfigurationFactory,
+        RequestConfiguration $configuration,
+        AuthorizationCheckerInterface $authorizationChecker,
+        RepositoryInterface $repository,
+        SingleResourceProviderInterface $singleResourceProvider,
+        ResourceInterface $resource,
+        RedirectHandlerInterface $redirectHandler,
+        FlashHelperInterface $flashHelper,
+        EventDispatcherInterface $eventDispatcher,
+        CsrfTokenManagerInterface $csrfTokenManager,
+        ContainerInterface $container,
+        ResourceControllerEvent $event,
+        Request $request,
+        Response $redirectResponse
+    ) {
+        $metadata->getApplicationName()->willReturn('sylius');
+        $metadata->getName()->willReturn('product');
+
+        $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->hasPermission()->willReturn(true);
+        $configuration->getPermission(ResourceActions::DELETE)->willReturn('sylius.product.delete');
+        $request->request = new ParameterBag(['_csrf_token' => 'xyz']);
+
+        $container->has('security.csrf.token_manager')->willReturn(true);
+        $container->get('security.csrf.token_manager')->willReturn($csrfTokenManager);
+        $csrfTokenManager->isTokenValid(new CsrfToken(1, 'xyz'))->willReturn(true);
+
+        $authorizationChecker->isGranted($configuration, 'sylius.product.delete')->willReturn(true);
+        $singleResourceProvider->get($configuration, $repository)->willReturn($resource);
+        $resource->getId()->willReturn(1);
+
+        $configuration->isHtmlRequest()->willReturn(true);
+        $configuration->isCsrfProtectionEnabled()->willReturn(true);
+
+        $eventDispatcher->dispatchPreEvent(ResourceActions::DELETE, $configuration, $resource)->willReturn($event);
+        $event->isStopped()->willReturn(true);
+
+        $flashHelper->addFlashFromEvent($configuration, $event)->shouldBeCalled();
+
+        $event->hasResponse()->willReturn(true);
+        $event->getResponse()->willReturn($redirectResponse);
+
+        $repository->remove($resource)->shouldNotBeCalled();
+        $eventDispatcher->dispatchPostEvent(ResourceActions::DELETE, $configuration, $resource)->shouldNotBeCalled();
+        $flashHelper->addSuccessFlash($configuration, ResourceActions::DELETE, $resource)->shouldNotBeCalled();
+
+        $redirectHandler->redirectToIndex($configuration, $resource)->shouldNotBeCalled();
 
         $this->deleteAction($request)->shouldReturn($redirectResponse);
     }
