@@ -1,5 +1,10 @@
 # UPGRADE FROM 1.0.0-beta.3 to 1.0.0
 
+## Application:
+
+* `\DateTimeInterface` is used for typehints instead of `\DateTime` to allow for compatibility with `\DateTimeImmutable`.
+  Do not rely on mutable behaviour and set changes directly on the model.
+
 ## Packages:
 
 ### Order / OrderBundle
