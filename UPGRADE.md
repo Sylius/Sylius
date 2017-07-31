@@ -7,6 +7,9 @@
 * In order to be compatibile with Doctrine ORM 2.6+ and be more consistent 
   `OrderRepositoryInterface::count()` signature was changed to `OrderRepositoryInterface::countPlacedOrders()`.
 
+* In statistics to be correct data with orders informations 
+  `OrderRepositoryInterface::countByChannel()` signature was changed to `OrderRepositoryInterface::countFulfilledByChannel()`.
+
 # UPGRADE FROM 1.0.0-beta.2 to 1.0.0-beta.3
 
 ## Packages:

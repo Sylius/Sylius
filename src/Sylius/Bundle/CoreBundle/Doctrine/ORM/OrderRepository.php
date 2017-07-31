@@ -203,9 +203,9 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         return (int) $this->createQueryBuilder('o')
             ->select('SUM(o.total)')
             ->andWhere('o.channel = :channel')
-            ->andWhere('o.state IN (:states)')
+            ->andWhere('o.state = :state')
             ->setParameter('channel', $channel)
-            ->setParameter('states', [OrderInterface::STATE_FULFILLED])
+            ->setParameter('state', OrderInterface::STATE_FULFILLED)
             ->getQuery()
             ->getSingleScalarResult()
         ;
@@ -219,9 +219,9 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         return (int) $this->createQueryBuilder('o')
             ->select('COUNT(o.id)')
             ->andWhere('o.channel = :channel')
-            ->andWhere('o.state IN (:states)')
+            ->andWhere('o.state = :state')
             ->setParameter('channel', $channel)
-            ->setParameter('states', [OrderInterface::STATE_FULFILLED])
+            ->setParameter('state', OrderInterface::STATE_FULFILLED)
             ->getQuery()
             ->getSingleScalarResult()
         ;
