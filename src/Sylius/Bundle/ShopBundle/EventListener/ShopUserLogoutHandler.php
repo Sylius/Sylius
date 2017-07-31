@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ShopBundle\EventListener;
 
+use Sylius\Bundle\ShopBundle\ShopSession;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -59,7 +60,7 @@ final class ShopUserLogoutHandler extends DefaultLogoutSuccessHandler
     public function onLogoutSuccess(Request $request): Response
     {
         $channel = $this->channelContext->getChannel();
-        $this->session->remove('_sylius.cart.'.$channel->getCode());
+        $this->session->remove('_sylius.cart.' . $channel->getCode());
 
         return parent::onLogoutSuccess($request);
     }
