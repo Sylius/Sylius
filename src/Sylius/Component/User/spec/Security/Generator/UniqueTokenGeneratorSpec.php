@@ -29,11 +29,6 @@ final class UniqueTokenGeneratorSpec extends ObjectBehavior
         $this->beConstructedWith($generator, $checker, 12);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(UniqueTokenGenerator::class);
-    }
-
     function it_implements_generator_interface()
     {
         $this->shouldImplement(GeneratorInterface::class);
@@ -60,8 +55,6 @@ final class UniqueTokenGeneratorSpec extends ObjectBehavior
         $this->beConstructedWith($generator, $checker, -1);
         $this->shouldThrow(\InvalidArgumentException::class)->duringInstantiation();
         $this->beConstructedWith($generator, $checker, 0);
-        $this->shouldThrow(\InvalidArgumentException::class)->duringInstantiation();
-        $this->beConstructedWith($generator, $checker, 41);
         $this->shouldThrow(\InvalidArgumentException::class)->duringInstantiation();
     }
 
