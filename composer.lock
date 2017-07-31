@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "6d1ef44d6d42f145b7b25c3bccb7ea4d",
+    "content-hash": "ec06964f359cf72f544233d76e84ae5d",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -7916,16 +7916,16 @@
         },
         {
             "name": "phpspec/phpspec",
-            "version": "4.0.0-rc1",
+            "version": "4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/phpspec.git",
-                "reference": "f78d6d6d878a0eb95f13d6a2cffc6be05c1e1329"
+                "reference": "f6b26bd9cb2b69894a818cf570feeabc7c8f5655"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/f78d6d6d878a0eb95f13d6a2cffc6be05c1e1329",
-                "reference": "f78d6d6d878a0eb95f13d6a2cffc6be05c1e1329",
+                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/f6b26bd9cb2b69894a818cf570feeabc7c8f5655",
+                "reference": "f6b26bd9cb2b69894a818cf570feeabc7c8f5655",
                 "shasum": ""
             },
             "require": {
@@ -7993,7 +7993,7 @@
                 "testing",
                 "tests"
             ],
-            "time": "2017-06-19T11:18:32+00:00"
+            "time": "2017-07-29T17:27:35+00:00"
         },
         {
             "name": "phpspec/prophecy",
@@ -9059,8 +9059,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "akeneo/phpspec-skip-example-extension": 15,
-        "phpspec/phpspec": 5
+        "akeneo/phpspec-skip-example-extension": 15
     },
     "prefer-stable": false,
     "prefer-lowest": false,

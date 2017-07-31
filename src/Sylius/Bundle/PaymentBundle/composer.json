@@ -28,7 +28,7 @@
     },
     "require-dev": {
         "doctrine/orm": "~2.5.0",
-        "phpspec/phpspec": "^4.0@rc",
+        "phpspec/phpspec": "^4.0",
         "sylius/locale-bundle": "^1.0",
         "phpunit/phpunit": "^5.6",
         "symfony/browser-kit": "^3.2",
