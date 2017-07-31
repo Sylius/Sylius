@@ -73,14 +73,14 @@ interface CustomerInterface extends TimestampableInterface, ResourceInterface
     public function setLastName($lastName);
 
     /**
-     * @return \DateTime
+     * @return \DateTimeInterface
      */
     public function getBirthday();
 
     /**
-     * @param  \DateTime $birthday
+     * @param  \DateTimeInterface $birthday
      */
-    public function setBirthday(\DateTime $birthday = null);
+    public function setBirthday(\DateTimeInterface $birthday = null);
 
     /**
      * @return string

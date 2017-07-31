@@ -69,7 +69,7 @@ final class ValidAttributeValueValidatorSpec extends ObjectBehavior
         ValidAttributeValue $attributeValueConstraint
     ) {
         $this
-            ->shouldThrow(new UnexpectedTypeException('\DateTime', AttributeValueInterface::class))
+            ->shouldThrow(new UnexpectedTypeException('\DateTimeInterface', AttributeValueInterface::class))
             ->during('validate', [$badObject, $attributeValueConstraint])
         ;
     }

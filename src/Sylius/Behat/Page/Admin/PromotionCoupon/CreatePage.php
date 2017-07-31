@@ -34,7 +34,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function setExpiresAt(\DateTime $date)
+    public function setExpiresAt(\DateTimeInterface $date)
     {
         $timestamp = $date->getTimestamp();
 

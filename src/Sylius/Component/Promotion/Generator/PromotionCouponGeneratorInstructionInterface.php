@@ -39,14 +39,14 @@ interface PromotionCouponGeneratorInstructionInterface
     public function setCodeLength($codeLength);
 
     /**
-     * @return \DateTime
+     * @return \DateTimeInterface
      */
     public function getExpiresAt();
 
     /**
-     * @param \DateTime $expiresAt
+     * @param \DateTimeInterface $expiresAt
      */
-    public function setExpiresAt(\DateTime $expiresAt = null);
+    public function setExpiresAt(\DateTimeInterface $expiresAt = null);
 
     /**
      * @return int

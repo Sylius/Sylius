@@ -23,7 +23,7 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyFilterDateFrom(\DateTime $dateTime)
+    public function specifyFilterDateFrom(\DateTimeInterface $dateTime)
     {
         $timestamp = $dateTime->getTimestamp();
 
@@ -34,7 +34,7 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyFilterDateTo(\DateTime $dateTime)
+    public function specifyFilterDateTo(\DateTimeInterface $dateTime)
     {
         $timestamp = $dateTime->getTimestamp();
 

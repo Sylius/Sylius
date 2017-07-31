@@ -21,14 +21,14 @@ use Sylius\Behat\Page\Admin\Crud\IndexPageInterface as BaseIndexPageInterface;
 interface IndexPageInterface extends BaseIndexPageInterface
 {
     /**
-     * @param \DateTime $dateTime
+     * @param \DateTimeInterface $dateTime
      */
-    public function specifyFilterDateFrom(\DateTime $dateTime);
+    public function specifyFilterDateFrom(\DateTimeInterface $dateTime);
 
     /**
-     * @param \DateTime $dateTime
+     * @param \DateTimeInterface $dateTime
      */
-    public function specifyFilterDateTo(\DateTime $dateTime);
+    public function specifyFilterDateTo(\DateTimeInterface $dateTime);
 
     /**
      * @param string $channelName

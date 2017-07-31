@@ -117,11 +117,11 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
     public function findLatestInChannel($count, ChannelInterface $channel);
 
     /**
-     * @param \DateTime $terminalDate
+     * @param \DateTimeInterface $terminalDate
      *
      * @return OrderInterface[]
      */
-    public function findOrdersUnpaidSince(\DateTime $terminalDate);
+    public function findOrdersUnpaidSince(\DateTimeInterface $terminalDate);
 
     /**
      * @return OrderInterface|null

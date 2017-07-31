@@ -247,7 +247,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
     /**
      * {@inheritdoc}
      */
-    public function findOrdersUnpaidSince(\DateTime $terminalDate)
+    public function findOrdersUnpaidSince(\DateTimeInterface $terminalDate)
     {
         return $this->createQueryBuilder('o')
             ->where('o.checkoutState = :checkoutState')

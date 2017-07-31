@@ -31,9 +31,9 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function setCustomerUsageLimit($limit);
 
     /**
-     * @param \DateTime $date
+     * @param \DateTimeInterface $date
      */
-    public function setExpiresAt(\DateTime $date);
+    public function setExpiresAt(\DateTimeInterface $date);
 
     /**
      * @param int $limit

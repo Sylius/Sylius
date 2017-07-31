@@ -81,7 +81,7 @@ final class LocaleSpec extends ObjectBehavior
 
     function it_initializes_creation_date_by_default()
     {
-        $this->getCreatedAt()->shouldHaveType(\DateTime::class);
+        $this->getCreatedAt()->shouldHaveType(\DateTimeInterface::class);
     }
 
     function it_does_not_have_last_update_date_by_default()

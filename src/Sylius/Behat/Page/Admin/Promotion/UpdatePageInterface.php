@@ -64,22 +64,22 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function checkChannel($name);
 
     /**
-     * @param \DateTime $dateTime
+     * @param \DateTimeInterface $dateTime
      */
-    public function setStartsAt(\DateTime $dateTime);
+    public function setStartsAt(\DateTimeInterface $dateTime);
 
     /**
-     * @param \DateTime $dateTime
+     * @param \DateTimeInterface $dateTime
      */
-    public function setEndsAt(\DateTime $dateTime);
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasStartsAt(\DateTime $dateTime);
+    public function setEndsAt(\DateTimeInterface $dateTime);
 
     /**
      * {@inheritdoc}
      */
-    public function hasEndsAt(\DateTime $dateTime);
+    public function hasStartsAt(\DateTimeInterface $dateTime);
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasEndsAt(\DateTimeInterface $dateTime);
 }

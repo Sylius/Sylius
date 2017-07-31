@@ -186,7 +186,7 @@ final class AddressSpec extends ObjectBehavior
 
     function its_creation_time_is_initialized_by_default()
     {
-        $this->getCreatedAt()->shouldHaveType(\DateTime::class);
+        $this->getCreatedAt()->shouldHaveType(\DateTimeInterface::class);
     }
 
     function its_last_update_time_is_undefined_by_default()

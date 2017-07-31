@@ -104,14 +104,14 @@ interface CreatePageInterface extends BaseCreatePageInterface
     public function checkChannel($name);
 
     /**
-     * @param \DateTime $dateTime
+     * @param \DateTimeInterface $dateTime
      */
-    public function setStartsAt(\DateTime $dateTime);
+    public function setStartsAt(\DateTimeInterface $dateTime);
 
     /**
-     * @param \DateTime $dateTime
+     * @param \DateTimeInterface $dateTime
      */
-    public function setEndsAt(\DateTime $dateTime);
+    public function setEndsAt(\DateTimeInterface $dateTime);
 
     /**
      * @return string

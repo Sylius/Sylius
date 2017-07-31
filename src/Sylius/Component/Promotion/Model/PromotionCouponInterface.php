@@ -57,14 +57,14 @@ interface PromotionCouponInterface extends CodeAwareInterface, TimestampableInte
     public function setPromotion(PromotionInterface $promotion = null);
 
     /**
-     * @return \DateTime
+     * @return \DateTimeInterface
      */
     public function getExpiresAt();
 
     /**
-     * @param \DateTime $expiresAt
+     * @param \DateTimeInterface $expiresAt
      */
-    public function setExpiresAt(\DateTime $expiresAt = null);
+    public function setExpiresAt(\DateTimeInterface $expiresAt = null);
 
     /**
      * @return bool
