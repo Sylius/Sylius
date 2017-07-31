@@ -18,11 +18,11 @@ namespace Sylius\Component\Shipping;
  */
 final class ShipmentTransitions
 {
-    const GRAPH = 'sylius_shipment';
+    public const GRAPH = 'sylius_shipment';
 
-    const TRANSITION_CREATE = 'create';
-    const TRANSITION_SHIP = 'ship';
-    const TRANSITION_CANCEL = 'cancel';
+    public const TRANSITION_CREATE = 'create';
+    public const TRANSITION_SHIP = 'ship';
+    public const TRANSITION_CANCEL = 'cancel';
 
     private function __construct()
     {

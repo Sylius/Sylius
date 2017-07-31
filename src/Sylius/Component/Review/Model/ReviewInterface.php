@@ -22,9 +22,9 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  */
 interface ReviewInterface extends TimestampableInterface, ResourceInterface
 {
-    const STATUS_NEW = 'new';
-    const STATUS_ACCEPTED = 'accepted';
-    const STATUS_REJECTED = 'rejected';
+    public const STATUS_NEW = 'new';
+    public const STATUS_ACCEPTED = 'accepted';
+    public const STATUS_REJECTED = 'rejected';
 
     /**
      * @return string

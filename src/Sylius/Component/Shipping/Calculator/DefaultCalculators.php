@@ -21,12 +21,12 @@ final class DefaultCalculators
     /**
      * Flat rate per shipment calculator.
      */
-    const FLAT_RATE = 'flat_rate';
+    public const FLAT_RATE = 'flat_rate';
 
     /**
      * Fixed price per unit calculator.
      */
-    const PER_UNIT_RATE = 'per_unit_rate';
+    public const PER_UNIT_RATE = 'per_unit_rate';
 
     private function __construct()
     {

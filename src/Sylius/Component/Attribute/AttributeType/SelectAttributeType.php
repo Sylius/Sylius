@@ -26,7 +26,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
  */
 class SelectAttributeType implements AttributeTypeInterface
 {
-    const TYPE = 'select';
+    public const TYPE = 'select';
 
     /**
      * {@inheritdoc}

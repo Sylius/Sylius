@@ -18,8 +18,8 @@ namespace Sylius\Component\Core;
  */
 class ProductReviewTransitions
 {
-    const GRAPH = 'sylius_product_review';
+    public const GRAPH = 'sylius_product_review';
 
-    const TRANSITION_ACCEPT = 'accept';
-    const TRANSITION_REJECT = 'reject';
+    public const TRANSITION_ACCEPT = 'accept';
+    public const TRANSITION_REJECT = 'reject';
 }

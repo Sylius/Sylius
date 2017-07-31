@@ -23,7 +23,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
  */
 final class TextareaAttributeType implements AttributeTypeInterface
 {
-    const TYPE = 'textarea';
+    public const TYPE = 'textarea';
 
     /**
      * {@inheritdoc}

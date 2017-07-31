@@ -25,7 +25,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
  */
 final class TextAttributeType implements AttributeTypeInterface
 {
-    const TYPE = 'text';
+    public const TYPE = 'text';
 
     /**
      * {@inheritdoc}

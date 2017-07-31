@@ -15,9 +15,9 @@ namespace Sylius\Component\Shipping;
 
 class ShipmentUnitTransitions
 {
-    const GRAPH = 'sylius_shipment_unit';
+    public const GRAPH = 'sylius_shipment_unit';
 
-    const SYLIUS_CREATE = 'create';
-    const SYLIUS_SHIP = 'ship';
-    const SYLIUS_CANCEL = 'cancel';
+    public const SYLIUS_CREATE = 'create';
+    public const SYLIUS_SHIP = 'ship';
+    public const SYLIUS_CANCEL = 'cancel';
 }

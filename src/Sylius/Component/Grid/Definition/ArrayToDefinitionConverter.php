@@ -21,7 +21,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 final class ArrayToDefinitionConverter implements ArrayToDefinitionConverterInterface
 {
-    const EVENT_NAME = 'sylius.grid.%s';
+    public const EVENT_NAME = 'sylius.grid.%s';
 
     /**
      * @var EventDispatcherInterface

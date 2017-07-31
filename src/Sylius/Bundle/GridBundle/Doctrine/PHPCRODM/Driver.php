@@ -22,12 +22,12 @@ final class Driver implements DriverInterface
     /**
      * Driver name
      */
-    const NAME = 'doctrine/phpcr-odm';
+    public const NAME = 'doctrine/phpcr-odm';
 
     /**
      * Alias to use to reference fields from the data source class.
      */
-    const QB_SOURCE_ALIAS = 'o';
+    public const QB_SOURCE_ALIAS = 'o';
 
     /**
      * @var DocumentManagerInterface

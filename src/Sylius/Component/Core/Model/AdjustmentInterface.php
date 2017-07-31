@@ -17,10 +17,10 @@ use Sylius\Component\Order\Model\AdjustmentInterface as BaseAdjustmentInterface;
 
 interface AdjustmentInterface extends BaseAdjustmentInterface
 {
-    const ORDER_ITEM_PROMOTION_ADJUSTMENT = 'order_item_promotion';
-    const ORDER_PROMOTION_ADJUSTMENT = 'order_promotion';
-    const ORDER_SHIPPING_PROMOTION_ADJUSTMENT = 'order_shipping_promotion';
-    const ORDER_UNIT_PROMOTION_ADJUSTMENT = 'order_unit_promotion';
-    const SHIPPING_ADJUSTMENT = 'shipping';
-    const TAX_ADJUSTMENT = 'tax';
+    public const ORDER_ITEM_PROMOTION_ADJUSTMENT = 'order_item_promotion';
+    public const ORDER_PROMOTION_ADJUSTMENT = 'order_promotion';
+    public const ORDER_SHIPPING_PROMOTION_ADJUSTMENT = 'order_shipping_promotion';
+    public const ORDER_UNIT_PROMOTION_ADJUSTMENT = 'order_unit_promotion';
+    public const SHIPPING_ADJUSTMENT = 'shipping';
+    public const TAX_ADJUSTMENT = 'tax';
 }

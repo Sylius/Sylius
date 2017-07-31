@@ -25,7 +25,7 @@ use Webmozart\Assert\Assert;
  */
 final class TotalOfItemsFromTaxonRuleChecker implements RuleCheckerInterface
 {
-    const TYPE = 'total_of_items_from_taxon';
+    public const TYPE = 'total_of_items_from_taxon';
 
     /**
      * @var TaxonRepositoryInterface

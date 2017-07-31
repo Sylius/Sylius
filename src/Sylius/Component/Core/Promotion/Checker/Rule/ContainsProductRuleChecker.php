@@ -26,7 +26,7 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
  */
 final class ContainsProductRuleChecker implements RuleCheckerInterface
 {
-    const TYPE = 'contains_product';
+    public const TYPE = 'contains_product';
 
     /**
      * {@inheritdoc}
