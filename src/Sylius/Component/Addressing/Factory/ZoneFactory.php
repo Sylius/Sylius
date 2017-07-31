@@ -44,7 +44,7 @@ final class ZoneFactory implements ZoneFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createNew()
+    public function createNew(): ZoneInterface
     {
         return $this->factory->createNew();
     }
@@ -52,7 +52,7 @@ final class ZoneFactory implements ZoneFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createTyped($type)
+    public function createTyped(string $type): ZoneInterface
     {
         /* @var ZoneInterface $zone */
         $zone = $this->createNew();
@@ -64,7 +64,7 @@ final class ZoneFactory implements ZoneFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createWithMembers(array $membersCodes)
+    public function createWithMembers(array $membersCodes): ZoneInterface
     {
         /* @var ZoneInterface $zone */
         $zone = $this->createNew();

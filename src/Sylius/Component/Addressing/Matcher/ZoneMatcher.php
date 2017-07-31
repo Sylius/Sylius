@@ -24,17 +24,17 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class ZoneMatcher implements ZoneMatcherInterface
+final class ZoneMatcher implements ZoneMatcherInterface
 {
     /**
      * @var RepositoryInterface
      */
-    protected $zoneRepository;
+    private $zoneRepository;
 
     /**
      * @var array
      */
-    protected $priorities = [
+    private const PRIORITIES = [
         ZoneInterface::TYPE_PROVINCE,
         ZoneInterface::TYPE_COUNTRY,
         ZoneInterface::TYPE_ZONE,
@@ -51,7 +51,7 @@ class ZoneMatcher implements ZoneMatcherInterface
     /**
      * {@inheritdoc}
      */
-    public function match(AddressInterface $address, $scope = null)
+    public function match(AddressInterface $address, ?string $scope = null): ?ZoneInterface
     {
         $zones = [];
 
@@ -62,7 +62,7 @@ class ZoneMatcher implements ZoneMatcherInterface
             }
         }
 
-        foreach ($this->priorities as $priority) {
+        foreach (static::PRIORITIES as $priority) {
             if (isset($zones[$priority])) {
                 return $zones[$priority];
             }
@@ -74,7 +74,7 @@ class ZoneMatcher implements ZoneMatcherInterface
     /**
      * {@inheritdoc}
      */
-    public function matchAll(AddressInterface $address, $scope = null)
+    public function matchAll(AddressInterface $address, ?string $scope = null): array
     {
         $zones = [];
 
@@ -93,7 +93,7 @@ class ZoneMatcher implements ZoneMatcherInterface
      *
      * @return bool
      */
-    protected function addressBelongsToZone(AddressInterface $address, ZoneInterface $zone)
+    private function addressBelongsToZone(AddressInterface $address, ZoneInterface $zone): bool
     {
         foreach ($zone->getMembers() as $member) {
             if ($this->addressBelongsToZoneMember($address, $member)) {
@@ -112,7 +112,7 @@ class ZoneMatcher implements ZoneMatcherInterface
      *
      * @throws \InvalidArgumentException
      */
-    protected function addressBelongsToZoneMember(AddressInterface $address, ZoneMemberInterface $member)
+    private function addressBelongsToZoneMember(AddressInterface $address, ZoneMemberInterface $member): bool
     {
         switch ($type = $member->getBelongsTo()->getType()) {
             case ZoneInterface::TYPE_PROVINCE:
@@ -124,7 +124,7 @@ class ZoneMatcher implements ZoneMatcherInterface
             case ZoneInterface::TYPE_ZONE:
                 $zone = $this->getZoneByCode($member->getCode());
 
-                return $this->addressBelongsToZone($address, $zone);
+                return null !== $zone && $this->addressBelongsToZone($address, $zone);
 
             default:
                 throw new \InvalidArgumentException(sprintf('Unexpected zone type "%s".', $type));
@@ -136,7 +136,7 @@ class ZoneMatcher implements ZoneMatcherInterface
      *
      * @return array
      */
-    protected function getZones($scope = null)
+    private function getZones(?string $scope = null): array
     {
         if (null === $scope) {
             return $this->zoneRepository->findAll();
@@ -148,9 +148,9 @@ class ZoneMatcher implements ZoneMatcherInterface
     /**
      * @param string $code
      *
-     * @return ZoneInterface
+     * @return ZoneInterface|null
      */
-    protected function getZoneByCode($code)
+    private function getZoneByCode(string $code): ?ZoneInterface
     {
         return $this->zoneRepository->findOneBy(['code' => $code]);
     }

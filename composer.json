@@ -42,7 +42,7 @@
         "knplabs/knp-gaufrette-bundle": "^0.3",
         "knplabs/knp-menu-bundle": "^2.1",
         "liip/imagine-bundle": "^1.6",
-        "ocramius/proxy-manager": "^1.0",
+        "ocramius/proxy-manager": "^2.1",
         "payum/payum": "^1.4",
         "payum/payum-bundle": "^2.2",
         "php-http/guzzle6-adapter": "^1.1",

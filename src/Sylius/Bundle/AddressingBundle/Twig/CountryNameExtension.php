@@ -24,7 +24,7 @@ class CountryNameExtension extends \Twig_Extension
     /**
      * {@inheritdoc}
      */
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
             new \Twig_SimpleFilter('sylius_country_name', [$this, 'translateCountryIsoCode']),
@@ -33,11 +33,11 @@ class CountryNameExtension extends \Twig_Extension
 
     /**
      * @param mixed  $country
-     * @param string $locale
+     * @param string|null $locale
      *
      * @return string
      */
-    public function translateCountryIsoCode($country, $locale = null)
+    public function translateCountryIsoCode($country, ?string $locale = null): string
     {
         if ($country instanceof CountryInterface) {
             return Intl::getRegionBundle()->getCountryName($country->getCode(), $locale);
