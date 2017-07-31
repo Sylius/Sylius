@@ -203,11 +203,9 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         return (int) $this->createQueryBuilder('o')
             ->select('SUM(o.total)')
             ->andWhere('o.channel = :channel')
-            ->andWhere('o.state NOT IN (:states)')
-            ->andWhere('o.paymentState NOT IN (:payment_states)')
+            ->andWhere('o.state IN (:states)')
             ->setParameter('channel', $channel)
-            ->setParameter('states', [OrderInterface::STATE_CART, OrderInterface::STATE_CANCELLED])
-            ->setParameter('payment_states', [OrderPaymentStates::STATE_AWAITING_PAYMENT])
+            ->setParameter('states', [OrderInterface::STATE_FULFILLED])
             ->getQuery()
             ->getSingleScalarResult()
         ;
@@ -216,16 +214,14 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
     /**
      * {@inheritdoc}
      */
-    public function countByChannel(ChannelInterface $channel)
+    public function countFulfilledByChannel(ChannelInterface $channel)
     {
         return (int) $this->createQueryBuilder('o')
             ->select('COUNT(o.id)')
             ->andWhere('o.channel = :channel')
-            ->andWhere('o.state NOT IN (:states)')
-            ->andWhere('o.paymentState NOT IN (:payment_states)')
+            ->andWhere('o.state IN (:states)')
             ->setParameter('channel', $channel)
-            ->setParameter('states', [OrderInterface::STATE_CART, OrderInterface::STATE_CANCELLED])
-            ->setParameter('payment_states', [OrderPaymentStates::STATE_AWAITING_PAYMENT])
+            ->setParameter('states', [OrderInterface::STATE_FULFILLED])
             ->getQuery()
             ->getSingleScalarResult()
         ;

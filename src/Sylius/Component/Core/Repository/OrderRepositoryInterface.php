@@ -106,7 +106,7 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
      *
      * @return int
      */
-    public function countByChannel(ChannelInterface $channel);
+    public function countFulfilledByChannel(ChannelInterface $channel);
 
     /**
      * @param int $count

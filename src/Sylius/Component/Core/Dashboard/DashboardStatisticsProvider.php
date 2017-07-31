@@ -51,7 +51,7 @@ class DashboardStatisticsProvider implements DashboardStatisticsProviderInterfac
     {
         return new DashboardStatistics(
             $this->orderRepository->getTotalSalesForChannel($channel),
-            $this->orderRepository->countByChannel($channel),
+            $this->orderRepository->countFulfilledByChannel($channel),
             $this->customerRepository->count()
         );
     }
