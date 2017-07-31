@@ -27,7 +27,7 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
  */
 final class PercentageDiscountPromotionActionCommand extends DiscountPromotionActionCommand implements PromotionActionCommandInterface
 {
-    const TYPE = 'order_percentage_discount';
+    public const TYPE = 'order_percentage_discount';
 
     /**
      * @var ProportionalIntegerDistributorInterface

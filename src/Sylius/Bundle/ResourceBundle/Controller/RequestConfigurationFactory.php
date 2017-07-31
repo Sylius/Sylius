@@ -21,11 +21,11 @@ use Symfony\Component\HttpFoundation\Request;
  */
 final class RequestConfigurationFactory implements RequestConfigurationFactoryInterface
 {
-    const API_VERSION_HEADER = 'Accept';
-    const API_GROUPS_HEADER = 'Accept';
+    public const API_VERSION_HEADER = 'Accept';
+    public const API_GROUPS_HEADER = 'Accept';
 
-    const API_VERSION_REGEXP = '/(v|version)=(?P<version>[0-9\.]+)/i';
-    const API_GROUPS_REGEXP = '/(g|groups)=(?P<groups>[a-z,_\s]+)/i';
+    public const API_VERSION_REGEXP = '/(v|version)=(?P<version>[0-9\.]+)/i';
+    public const API_GROUPS_REGEXP = '/(g|groups)=(?P<groups>[a-z,_\s]+)/i';
 
     /**
      * @var ParametersParserInterface

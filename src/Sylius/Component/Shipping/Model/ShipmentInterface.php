@@ -22,10 +22,10 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  */
 interface ShipmentInterface extends ResourceInterface, ShippingSubjectInterface, TimestampableInterface
 {
-    const STATE_CART = 'cart';
-    const STATE_READY = 'ready';
-    const STATE_SHIPPED = 'shipped';
-    const STATE_CANCELLED = 'cancelled';
+    public const STATE_CART = 'cart';
+    public const STATE_READY = 'ready';
+    public const STATE_SHIPPED = 'shipped';
+    public const STATE_CANCELLED = 'cancelled';
 
     /**
      * @return string

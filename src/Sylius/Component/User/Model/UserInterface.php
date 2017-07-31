@@ -32,7 +32,7 @@ interface UserInterface extends
     TimestampableInterface,
     ToggleableInterface
 {
-    const DEFAULT_ROLE = 'ROLE_USER';
+    public const DEFAULT_ROLE = 'ROLE_USER';
 
     /**
      * @return string

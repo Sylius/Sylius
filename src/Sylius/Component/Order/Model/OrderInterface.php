@@ -22,10 +22,10 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  */
 interface OrderInterface extends AdjustableInterface, ResourceInterface, TimestampableInterface
 {
-    const STATE_CART = 'cart';
-    const STATE_NEW = 'new';
-    const STATE_CANCELLED = 'cancelled';
-    const STATE_FULFILLED = 'fulfilled';
+    public const STATE_CART = 'cart';
+    public const STATE_NEW = 'new';
+    public const STATE_CANCELLED = 'cancelled';
+    public const STATE_FULFILLED = 'fulfilled';
 
     /**
      * @return \DateTime

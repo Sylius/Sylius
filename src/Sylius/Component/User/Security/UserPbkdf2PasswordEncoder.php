@@ -32,7 +32,7 @@ use Webmozart\Assert\Assert;
  */
 final class UserPbkdf2PasswordEncoder implements UserPasswordEncoderInterface
 {
-    const MAX_PASSWORD_LENGTH = 4096;
+    public const MAX_PASSWORD_LENGTH = 4096;
 
     /**
      * @var string

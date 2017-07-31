@@ -24,8 +24,8 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  */
 final class SyliusGridBundle extends Bundle
 {
-    const DRIVER_DOCTRINE_ORM = 'doctrine/orm';
-    const DRIVER_DOCTRINE_PHPCR_ODM = 'doctrine/phpcr-odm';
+    public const DRIVER_DOCTRINE_ORM = 'doctrine/orm';
+    public const DRIVER_DOCTRINE_PHPCR_ODM = 'doctrine/phpcr-odm';
 
     /**
      * {@inheritdoc}

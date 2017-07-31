@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
  */
 final class DatetimeAttributeType implements AttributeTypeInterface
 {
-    const TYPE = 'datetime';
+    public const TYPE = 'datetime';
 
     /**
      * {@inheritdoc}

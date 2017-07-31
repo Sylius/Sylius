@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
  */
 final class CheckboxAttributeType implements AttributeTypeInterface
 {
-    const TYPE = 'checkbox';
+    public const TYPE = 'checkbox';
 
     /**
      * {@inheritdoc}

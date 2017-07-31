@@ -23,7 +23,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
  */
 final class PercentAttributeType implements AttributeTypeInterface
 {
-    const TYPE = 'percent';
+    public const TYPE = 'percent';
 
     /**
      * {@inheritdoc}

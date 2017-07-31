@@ -26,7 +26,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
  */
 final class UnitPercentageDiscountPromotionActionCommand extends UnitDiscountPromotionActionCommand
 {
-    const TYPE = 'unit_percentage_discount';
+    public const TYPE = 'unit_percentage_discount';
 
     /**
      * @var FilterInterface

@@ -23,7 +23,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 final class MainMenuBuilder
 {
-    const EVENT_NAME = 'sylius.menu.admin.main';
+    public const EVENT_NAME = 'sylius.menu.admin.main';
 
     /**
      * @var FactoryInterface

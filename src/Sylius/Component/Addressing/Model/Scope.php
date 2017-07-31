@@ -18,7 +18,7 @@ namespace Sylius\Component\Addressing\Model;
  */
 final class Scope
 {
-    const ALL = 'all';
+    public const ALL = 'all';
 
     private function __construct()
     {

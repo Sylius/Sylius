@@ -23,7 +23,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
  */
 final class IntegerAttributeType implements AttributeTypeInterface
 {
-    const TYPE = 'integer';
+    public const TYPE = 'integer';
 
     /**
      * {@inheritdoc}

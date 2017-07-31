@@ -18,11 +18,11 @@ namespace Sylius\Component\Core;
  */
 final class OrderShippingStates
 {
-    const STATE_CART = 'cart';
-    const STATE_READY = 'ready';
-    const STATE_CANCELLED = 'cancelled';
-    const STATE_PARTIALLY_SHIPPED = 'partially_shipped';
-    const STATE_SHIPPED = 'shipped';
+    public const STATE_CART = 'cart';
+    public const STATE_READY = 'ready';
+    public const STATE_CANCELLED = 'cancelled';
+    public const STATE_PARTIALLY_SHIPPED = 'partially_shipped';
+    public const STATE_SHIPPED = 'shipped';
 
     private function __construct()
     {

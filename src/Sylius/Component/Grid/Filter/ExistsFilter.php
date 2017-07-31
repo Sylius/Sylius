@@ -21,8 +21,8 @@ use Sylius\Component\Grid\Filtering\FilterInterface;
  */
 final class ExistsFilter implements FilterInterface
 {
-    const TRUE = true;
-    const FALSE = false;
+    public const TRUE = true;
+    public const FALSE = false;
 
     /**
      * {@inheritdoc}

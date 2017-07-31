@@ -18,12 +18,12 @@ namespace Sylius\Component\Core;
  */
 final class OrderShippingTransitions
 {
-    const GRAPH = 'sylius_order_shipping';
+    public const GRAPH = 'sylius_order_shipping';
 
-    const TRANSITION_REQUEST_SHIPPING = 'request_shipping';
-    const TRANSITION_PARTIALLY_SHIP = 'partially_ship';
-    const TRANSITION_SHIP = 'ship';
-    const TRANSITION_CANCEL = 'cancel';
+    public const TRANSITION_REQUEST_SHIPPING = 'request_shipping';
+    public const TRANSITION_PARTIALLY_SHIP = 'partially_ship';
+    public const TRANSITION_SHIP = 'ship';
+    public const TRANSITION_CANCEL = 'cancel';
 
     private function __construct()
     {

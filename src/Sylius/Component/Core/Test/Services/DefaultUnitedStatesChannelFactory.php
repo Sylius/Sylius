@@ -28,12 +28,12 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryInterface
 {
-    const DEFAULT_CHANNEL_CODE = 'WEB-US';
-    const DEFAULT_COUNTRY_CODE = 'US';
-    const DEFAULT_ZONE_CODE = 'US';
-    const DEFAULT_CURRENCY_CODE = 'USD';
-    const DEFAULT_ZONE_NAME = 'United States';
-    const DEFAULT_CHANNEL_NAME = 'United States';
+    public const DEFAULT_CHANNEL_CODE = 'WEB-US';
+    public const DEFAULT_COUNTRY_CODE = 'US';
+    public const DEFAULT_ZONE_CODE = 'US';
+    public const DEFAULT_CURRENCY_CODE = 'USD';
+    public const DEFAULT_ZONE_NAME = 'United States';
+    public const DEFAULT_CHANNEL_NAME = 'United States';
 
     /**
      * @var RepositoryInterface
