@@ -30,7 +30,7 @@
         "doctrine/orm": "~2.5.0",
         "incenteev/composer-parameter-handler": "~2.0",
         "ocramius/proxy-manager": "^1.0",
-        "phpspec/phpspec": "^4.0@rc",
+        "phpspec/phpspec": "^4.0",
         "phpunit/phpunit": "^5.6",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0",
         "swiftmailer/swiftmailer": "^5.4",

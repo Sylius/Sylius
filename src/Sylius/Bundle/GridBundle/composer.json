@@ -38,7 +38,7 @@
         "matthiasnoback/symfony-dependency-injection-test": "^1.0",
         "ocramius/proxy-manager": "^1.0",
         "pagerfanta/pagerfanta": "^1.0",
-        "phpspec/phpspec": "^4.0@rc",
+        "phpspec/phpspec": "^4.0",
         "phpunit/phpunit": "^5.6",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0",
         "symfony/browser-kit": "^3.2",

@@ -43,7 +43,7 @@
         "symfony/framework-bundle": "^3.2"
     },
     "require-dev": {
-        "phpspec/phpspec": "^4.0@rc",
+        "phpspec/phpspec": "^4.0",
         "phpunit/phpunit": "^5.6",
         "symfony/form": "^3.2",
         "symfony/validator": "^3.2",

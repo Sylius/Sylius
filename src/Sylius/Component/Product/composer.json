@@ -29,7 +29,7 @@
         "webmozart/assert": "^1.0"
     },
     "require-dev": {
-        "phpspec/phpspec": "^4.0@rc"
+        "phpspec/phpspec": "^4.0"
     },
     "suggest": {
         "ext-iconv": "For better performance than using Symfony Polyfill Component"

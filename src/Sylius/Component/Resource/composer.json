@@ -31,7 +31,7 @@
         "pagerfanta/pagerfanta": "^1.0"
     },
     "require-dev": {
-        "phpspec/phpspec": "^4.0@rc",
+        "phpspec/phpspec": "^4.0",
         "sylius/locale": "^1.0"
     },
     "suggest": {
