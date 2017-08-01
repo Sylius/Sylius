@@ -11,6 +11,7 @@ sylius:
             last_name: Nama belakang
             phone_number: Nomor telepon
             postcode: Kode pos
+            street: Alamat
             province: Provinsi
             zone: Zona
         country:
@@ -33,6 +34,8 @@ sylius:
                 province: Provinsi
                 zone: Zona
             scope: Lingkup
+            scopes:
+                all: Semua
             select: Pilih
             select_scope: Pilih lingkup
         zone_member:

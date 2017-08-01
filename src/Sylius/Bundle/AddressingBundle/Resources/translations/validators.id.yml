@@ -32,6 +32,7 @@ sylius:
     country:
         code:
             not_blank: Silahkan masukkan kode ISO negara.
+            regex: Kode negara hanya boleh terdiri dari huruf, angka, tanda strip, dan garis bawah.
             unique: Kode ISO negara harus unik.
     province:
         code:
@@ -45,8 +46,11 @@ sylius:
             not_blank: Masukkan nama provinsi.
             unique: Nama provinsi harus unik.
     zone:
+        scope:
+            not_blank: Harap masukan cakupan.
         code:
             not_blank: Silahkan masukkan kode zona.
+            regex: Kode zona hanya boleh terdiri dari huruf, angka, tanda strip, dan garis bawah.
             unique: Kode zona harus unik.
         members:
             min_count: Harap tambahkan setidaknya {{ limit }} anggota zona.
@@ -57,4 +61,5 @@ sylius:
     zone_member:
         code:
             not_blank: Silahkan pilih anggota zona.
+            regex: Kode zona member hanya boleh terdiri dari huruf, angka, tanda strip, dan garis bawah.
         unique: Anggota zona yang dipilih sudah dalam zona ini.

@@ -4,8 +4,36 @@
 sylius:
     form:
         attribute:
+            add: Tambah
+            add_attributes: Tambah Atribut
+            choices: Pilihan
             code: Kode
             name: Nama
+            translations: Terjemahan
             type: Jenis
         attribute_type:
+            checkbox: Checkbox
+            configuration: Konfigurasi
+            date: Tanggal
+            datetime: Waktu dan tanggal
+            integer: Bilangan bulat
+            percent: Persen
             select: Pilih
+            text: Teks
+            textarea: Textarea
+            title: Jenis atribut
+            validation: Validasi
+        attribute_type_configuration:
+            datetime:
+                format: Format
+            date:
+                format: Format
+            select:
+                multiple: Banyak
+                values: Nilai
+                choose: Pilih salah satu
+                min: Minimal jumlah inputan
+                max: Maksimal jumlah inputan
+            text:
+                min: Panjang minimal
+                max: Panjang Maksimal

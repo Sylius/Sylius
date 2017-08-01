@@ -10,3 +10,4 @@ sylius:
             enabled: Diaktifkan
             name: Nama
             tax_category: Kategori Pajak
+            translations: Terjemahan

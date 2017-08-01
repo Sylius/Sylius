@@ -8,6 +8,7 @@ sylius:
             unique: Die Bestandseinheit muss eindeutig sein.
         slug:
             not_blank: Bitte eine Produkt SEO-URL angeben.
+            unique: Der Produktcode muss eindeutig sein.
         code:
             not_blank: Bitte geben Sie einen Produktcode ein.
             regex: Produktkürzel darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
