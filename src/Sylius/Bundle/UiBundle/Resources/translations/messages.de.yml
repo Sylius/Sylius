@@ -521,6 +521,7 @@ sylius:
         newest_first: 'Neueste zuerst'
         next: 'Weiter'
         no_label: 'Nein'
+        no_account: 'Noch kein Account erstellt?'
         no_addresses: 'Keine Adressen zum anzeigen vorhanden'
         no_association_types_to_display: 'Es sind keine Verbindungen definiert'
         no_comment: 'Kein Kommentar'

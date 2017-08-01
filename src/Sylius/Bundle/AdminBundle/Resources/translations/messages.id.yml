@@ -6,9 +6,13 @@ sylius:
         admin:
             main:
                 catalog:
+                    association_types: Tipe Kategory
                     attributes: Atribut
                     header: Katalog
+                    inventory: Persediaan
+                    options: Pilihan
                     products: Produk
+                    taxons: Taksonomi
                 configuration:
                     admin_users: Administrator
                     channels: Saluran
@@ -20,5 +24,17 @@ sylius:
                     payment_methods: Metode Pembayaran
                     shipping_categories: Kategori Pengiriman
                     shipping_methods: Metode Pengiriman
+                    tax_categories: Kategori Pajak
+                    tax_rates: Tarif Pajak
+                    zones: Wilayah
+                marketing:
+                    header: Pemasaran
+                    product_reviews: Review produk
+                    promotions: Promosi
                 customers:
+                    customers: Pelanggan
                     groups: Kelompok
+                    header: Pelanggan
+                sales:
+                    header: Penjualan
+                    orders: Pemesanan
