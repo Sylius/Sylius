@@ -18,7 +18,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
-use Sylius\Component\Core\Model\ProductVariant;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\Core\OrderProcessing\OrderShipmentProcessor;
@@ -57,9 +57,7 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
         ShipmentInterface $shipment,
         ShippingMethodInterface $defaultShippingMethod,
         OrderItemInterface $orderItem,
-        ProductVariant $productVariant,
-        Collection $orderItems,
-        \Iterator $iterator
+        ProductVariantInterface $productVariant
     ) {
         $defaultShippingMethodResolver->getDefaultShippingMethod($shipment)->willReturn($defaultShippingMethod);
 
@@ -69,13 +67,7 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
 
         $productVariant->isShippingRequired()->willReturn(true);
 
-        $orderItems->getIterator()->willReturn($iterator);
-
-        $iterator->rewind()->shouldBeCalled();
-        $iterator->valid()->willReturn(true);
-        $iterator->current()->willReturn($orderItem);
-
-        $order->getItems()->willReturn($orderItems);
+        $order->getItems()->willReturn([$orderItem]);
         $order->isEmpty()->willReturn(false);
         $order->hasShipments()->willReturn(false);
         $order->getItemUnits()->willReturn([$itemUnit1, $itemUnit2]);
@@ -99,9 +91,7 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
         ShipmentInterface $shipment,
         ShippingMethodInterface $defaultShippingMethod,
         OrderItemInterface $orderItem,
-        ProductVariant $productVariant,
-        Collection $orderItems,
-        \Iterator $iterator
+        ProductVariantInterface $productVariant
     ) {
         $defaultShippingMethodResolver->getDefaultShippingMethod($shipment)->willReturn($defaultShippingMethod);
 
@@ -111,14 +101,7 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
 
         $productVariant->isShippingRequired()->willReturn(false);
 
-        $orderItems->getIterator()->willReturn($iterator);
-
-        $iterator->rewind()->shouldBeCalled();
-        $iterator->valid()->willReturn(true);
-        $iterator->current()->willReturn($orderItem);
-        $iterator->valid()->willReturn(false);
-
-        $order->getItems()->willReturn($orderItems);
+        $order->getItems()->willReturn([$orderItem]);
 
         $order->removeShipments()->shouldBeCalled();
 
@@ -134,22 +117,15 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
         OrderItemUnitInterface $itemUnit,
         OrderItemUnitInterface $itemUnitWithoutShipment,
         OrderItemInterface $orderItem,
-        ProductVariant $productVariant,
-        Collection $orderItems,
-        \Iterator $iterator
+        ProductVariantInterface $productVariant
     ) {
         $shipments->first()->willReturn($shipment);
 
         $orderItem->getVariant()->willReturn($productVariant);
 
         $productVariant->isShippingRequired()->willReturn(true);
-        $orderItems->getIterator()->willReturn($iterator);
 
-        $iterator->rewind()->shouldBeCalled();
-        $iterator->valid()->willReturn(true);
-        $iterator->current()->willReturn($orderItem);
-
-        $order->getItems()->willReturn($orderItems);
+        $order->getItems()->willReturn([$orderItem]);
 
         $order->isEmpty()->willReturn(false);
         $order->hasShipments()->willReturn(true);
@@ -170,7 +146,9 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
         ShipmentInterface $shipment,
         Collection $shipments,
         OrderItemUnitInterface $itemUnit,
-        OrderItemUnitInterface $itemUnitWithoutShipment
+        OrderItemUnitInterface $itemUnitWithoutShipment,
+        OrderItemInterface $orderItem,
+        ProductVariantInterface $productVariant
     ) {
         $shipments->first()->willReturn($shipment);
 
@@ -178,6 +156,12 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
         $order->hasShipments()->willReturn(true);
         $order->getItemUnits()->willReturn([$itemUnit, $itemUnitWithoutShipment]);
         $order->getShipments()->willReturn($shipments);
+
+        $productVariant->isShippingRequired()->willReturn(true);
+
+        $orderItem->getVariant()->willReturn($productVariant);
+
+        $order->getItems()->willReturn([$orderItem]);
 
         $itemUnit->getShipment()->willReturn($shipment);
 
