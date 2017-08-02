@@ -9,17 +9,38 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\TaxonomyBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Taxonomy\Generator\TaxonSlugGeneratorInterface;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
-class TaxonSlugController extends Controller
+final class TaxonSlugController
 {
+    /** @var TaxonSlugGeneratorInterface */
+    private $taxonSlugGenerator;
+
+    /** @var RepositoryInterface */
+    private $taxonRepository;
+
+    /** @var FactoryInterface */
+    private $taxonFactory;
+
+    public function __construct(
+        TaxonSlugGeneratorInterface $taxonSlugGenerator,
+        RepositoryInterface $taxonRepository,
+        FactoryInterface $taxonFactory
+    ) {
+        $this->taxonSlugGenerator = $taxonSlugGenerator;
+        $this->taxonRepository = $taxonRepository;
+        $this->taxonFactory = $taxonFactory;
+    }
+
     /**
      * @param Request $request
      *
@@ -28,10 +49,21 @@ class TaxonSlugController extends Controller
     public function generateAction(Request $request)
     {
         $name = $request->query->get('name');
+        $locale = $request->query->get('locale');
         $parentId = $request->query->get('parentId');
 
+        /** @var TaxonInterface $taxon */
+        $taxon = $this->taxonFactory->createNew();
+        $taxon->setCurrentLocale($locale);
+        $taxon->setFallbackLocale($locale);
+        $taxon->setName($name);
+
+        if (null !== $parentId) {
+            $taxon->setParent($this->taxonRepository->find($parentId));
+        }
+
         return new JsonResponse([
-            'slug' => $this->get('sylius.generator.taxon_slug')->generate($name, $parentId),
+            'slug' => $this->taxonSlugGenerator->generate($taxon, $locale),
         ]);
     }
 }

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Command;
 
 use Sylius\Bundle\CoreBundle\Installer\Executor\CommandExecutor;
@@ -20,10 +22,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 abstract class AbstractInstallCommand extends ContainerAwareCommand
 {
-    const WEB_ASSETS_DIRECTORY = 'web/assets/';
-    const WEB_BUNDLES_DIRECTORY = 'web/bundles/';
-    const WEB_MEDIA_DIRECTORY = 'web/media/';
-    const WEB_MEDIA_IMAGE_DIRECTORY = 'web/media/image/';
+    public const WEB_ASSETS_DIRECTORY = 'web/assets/';
+    public const WEB_BUNDLES_DIRECTORY = 'web/bundles/';
+    public const WEB_MEDIA_DIRECTORY = 'web/media/';
+    public const WEB_MEDIA_IMAGE_DIRECTORY = 'web/media/image/';
 
     /**
      * @var CommandExecutor

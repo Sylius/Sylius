@@ -9,17 +9,22 @@ sylius:
             country: 國家
             first_name: 名
             last_name: 姓
+            phone_number: 電話號碼
             postcode: 郵編
-            street: 街道
             province: 省
+            zone: 區域
         country:
+            add_province: 添加省份
             name: 名稱
             provinces: 省份
             select: 請選擇
+            enabled: 啓用
         province:
             name: 名稱
+            abbreviation: 縮寫
             select: 請選擇
         zone:
+            add_member: 新增
             members: 會員
             name: 名稱
             type: 類型
@@ -28,6 +33,9 @@ sylius:
                 province: 省
                 zone: 區域
             scope: 範圍
+            scopes:
+                all: 全部
             select: 請選擇
+            select_scope: 選擇範圍
         zone_member:
             select: 請選擇

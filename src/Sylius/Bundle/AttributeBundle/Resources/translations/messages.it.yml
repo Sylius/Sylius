@@ -29,7 +29,9 @@ sylius:
             date:
                 format: Formato
             select:
+                multiple: Multiplo
                 values: Valori
+                choose: Seleziona un'opzione
             text:
                 min: Minima Lunghezza
                 max: Massima Lunghezza

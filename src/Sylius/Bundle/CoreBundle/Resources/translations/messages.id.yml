@@ -16,11 +16,30 @@ sylius:
             shipping_method: Metode pengiriman
         promotion:
             channels: Saluran
+        promotion_action:
+            add_product_configuration:
+                product: Produk
+        promotion_coupon:
+            per_customer_usage_limit: Batas penggunaan per pelanggan
         group:
             name: Nama
             roles: Peran
         channel:
+            contact_email: Kontak email
+            currencies: Mata Uang
+            currency_base: Mata uang utama
+            account_verification_required: Apakah diperlukan verifikasi akun?
+            hostname: Nama host
+            locale_default: Default Bahasa
+            locales: Pilihan Bahasa
+            payment_methods: Metode Pembayaran
+            shipping_methods: Metode pengiriman
+            skipping_shipping_step_allowed: Lewati langkah pengiriman jika hanya salah satu metode pengiriman tersedia?
+            skipping_payment_step_allowed: Lewati langkah pembayaran jika hanya salah satu metode pembayaran tersedia?
+            tax_calculation_strategy: Metode perhitungan pajak
             tax_zone_default: Standar Zona Pajak
+            taxonomies: Taksonomi
+            theme: Tema
         image:
             type: Jenis
             file: Gambar
@@ -28,9 +47,13 @@ sylius:
             code: Kode
             enabled: Diaktifkan
         order_filter:
+            created_at_from: Dibuat setelah
+            created_at_to: Dibuat sebelum
             number: Nomor
             total_from: Dari
             total_to: Untuk
+            payment_state: Tahap pembayaran
+            channel: Semua saluran
         page:
             body: Body
             id: ID
@@ -40,6 +63,7 @@ sylius:
             restricted_zone: Zona Terbatas
             short_description: Deskripsi singkat
             variant_selection_method: Metode Pilih Varian
+            main_taxon: Takson utama
             channels: Saluran
             enabled: Diaktifkan
         product_filter:
@@ -53,10 +77,13 @@ sylius:
             created_at_to: Untuk
             number: Nomor Order
             shipping_address: Kirim ke Nama
+            channel: Semua saluran
         payment_filter:
             created_at_from: Dari
             created_at_to: Untuk
             number: Nomor Order
+            billing_address: Tagihan untuk nama
+            channel: Semua saluran
         shipping_method:
             zone: Zona
         taxon:
@@ -83,10 +110,17 @@ sylius:
             on_hand: Stok
             price: Harga
             sku: SKU
+            shipping_required: Apakah biaya pengiriman diperlukan?
             weight: Berat
             width: Lebar
+        attribute:
+            product_attribute_value:
+                attribute: Atribut
+                value: Isi
         guest:
             email: Email
+        product_association:
+            product: Produk terkait
         product_association_type:
             name: Nama
         promotion_rule:

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Taxonomy\Repository;
 
 use Doctrine\ORM\QueryBuilder;
@@ -25,11 +27,11 @@ interface TaxonRepositoryInterface extends RepositoryInterface
 {
     /**
      * @param string $parentCode
-     * @param string $locale
+     * @param string|null $locale
      *
      * @return TaxonInterface[]
      */
-    public function findChildren($parentCode, $locale);
+    public function findChildren($parentCode, $locale = null);
 
     /**
      * @return TaxonInterface[]
@@ -54,11 +56,11 @@ interface TaxonRepositoryInterface extends RepositoryInterface
 
     /**
      * @param string $phrase
-     * @param string $locale
+     * @param string|null $locale
      *
      * @return TaxonInterface[]
      */
-    public function findByNamePart($phrase, $locale);
+    public function findByNamePart($phrase, $locale = null);
 
     /**
      * @return QueryBuilder

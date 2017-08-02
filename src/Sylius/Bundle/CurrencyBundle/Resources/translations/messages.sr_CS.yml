@@ -4,4 +4,9 @@
 sylius:
     form:
         currency:
+            base: Osnovna valuta
             code: Ime
+            enabled: Omogućeno
+        exchange_rate:
+            source_currency: Izvorna valuta
+            ratio: Odnos

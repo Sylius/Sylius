@@ -3,6 +3,10 @@
 
 sylius:
     channel:
+        base_currency:
+            not_blank: Lütfen kanal para birimi girin.
+        default_locale:
+            not_blank: Lütfen kanal için varsayılan dili girin.
         contact_email:
             invalid: Bu e-posta geçerli değil.
     contact:

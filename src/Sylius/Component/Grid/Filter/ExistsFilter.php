@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Grid\Filter;
 
 use Sylius\Component\Grid\Data\DataSourceInterface;
@@ -19,8 +21,8 @@ use Sylius\Component\Grid\Filtering\FilterInterface;
  */
 final class ExistsFilter implements FilterInterface
 {
-    const TRUE = true;
-    const FALSE = false;
+    public const TRUE = true;
+    public const FALSE = false;
 
     /**
      * {@inheritdoc}

@@ -6,5 +6,9 @@ sylius:
         currency:
             base: Основна валута
             code: Име
-            enabled: Включено
+            enabled: Активирано
             exchange_rate: Обменен курс
+        exchange_rate:
+            source_currency: Валута източник
+            target_currency: Целева валута
+            ratio: Съотношение

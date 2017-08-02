@@ -1,0 +1,14 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    address:
+        city:
+            max_length: Nama bandar tidak boleh melebihi 255 aksara|Nama bandar tidak boleh melebihi 255 aksara.
+            min_length: Nama bandar mestilah mepunyai sekurang-kurangnya 2 aksara|Nama bandar mestilah mepunyai sekurang-kurangnya 2 aksara.
+            not_blank: Sila masukkan bandar.
+        country:
+            not_blank: Sila pilih negara.
+            disabled: Negara yang dipilih telah dilumpuhkan. Sila pilih negara lain.
+        first_name:
+            max_length: Nama pertama tidak boleh melebihi 255 aksara|Nama pertama tidak boleh melebihi 255 aksara.

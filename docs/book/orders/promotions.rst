@@ -134,7 +134,7 @@ In the example below you can how to create a simple Fixed Discount action, that 
 .. note::
 
    All **Actions** are assigned to a Promotion and are executed while the Promotion is applied.
-   This happens via the `CompositeOrderProcessor <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Core/OrderProcessing/CompositeOrderProcessor.php>`_ service.
+   This happens via the `CompositeOrderProcessor <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Order/Processor/CompositeOrderProcessor.php>`_ service.
    See details of **applying Promotions** below.
 
 And finally after you have an **PromotionAction** and a **PromotionRule** assigned to the **Promotion** add it to the repository.

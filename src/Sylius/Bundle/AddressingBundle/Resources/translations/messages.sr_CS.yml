@@ -11,8 +11,8 @@ sylius:
             last_name: Prezime
             phone_number: Broj telefona
             postcode: Poštanski broj
-            street: Ulica
             province: Pokrajina
+            zone: Zona
         country:
             add_province: Dodaj provinciju
             name: Ime
@@ -33,6 +33,8 @@ sylius:
                 province: Pokrajina
                 zone: Zona
             scope: Adresa isporuke
+            scopes:
+                all: Sve
             select: Izaberite
             select_scope: Izaberite adresu isporuke
         zone_member:

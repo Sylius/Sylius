@@ -1,10 +1,49 @@
-# UPGRADE FROM 1.0.0-beta.2 to 1.0.0
+# UPGRADE FROM 1.0.0-beta.3 to 1.0.0
+
+## Application:
+
+* `\DateTimeInterface` is used for typehints instead of `\DateTime` to allow for compatibility with `\DateTimeImmutable`.
+  Do not rely on mutable behaviour and set changes directly on the model.
 
 ## Packages:
+
+### Addressing / AddressingBundle
+
+* `ZoneMatcher` has been made final, use decoration instead of extending it.
+
+* The following methods does not longer have a default null argument and requires one to be explicitly passed:
+  
+  * `AddressInterface::setCountryCode`
+  * `AddressInterface::setProviceCode`
+  * `AddressInterface::setProviceName`
+  * `ProvinceInterface::setCountry`
+  * `ZoneMemberInterface::setBelongsTo`
+
+### Order / OrderBundle
+
+* In order to be compatibile with Doctrine ORM 2.6+ and be more consistent 
+  `OrderRepositoryInterface::count()` signature was changed to `OrderRepositoryInterface::countPlacedOrders()`.
+
+# UPGRADE FROM 1.0.0-beta.2 to 1.0.0-beta.3
+
+## Packages:
+
+* The following tag attributes were renamed in order to keep consistency with Symfony
+  (changes not needed if using XML for service definitions):
+
+  * from `form-type` to `form_type`
+  * from `attribute-type` to `attribute_type`
+  * from `configuration-form-type` to `configuration_form_type`
 
 ### PayumBundle
 
 * Constructor of `CapturePaymentAction` now takes a `PaymentDescriptionProviderInterface` as first argument. This allows granular customisation of the payment description.
+
+### Taxonomy / TaxonomyBundle
+
+* `Sylius\Bundle\TaxonomyBundle\Controller\TaxonSlugController` has been made final, decorate it or copy instead of extending it.
+
+* `Sylius\Component\Taxonomy\Generator\TaxonSlugGeneratorInterface::generate` signature has changed from `generate(string $name, ?mixed $parentId = null): string` to `generate(TaxonInterface $taxon, ?string $locale = null): string`.
 
 ### Core / CoreBundle
 
@@ -81,6 +120,8 @@
 * Route `sylius_admin_order_shipment_ship` has been added to have specific endpoint only for updating via HTTP PUT method and `sylius_admin_partial_shipment_ship` route is only for rendering the form.
 
 * Route `sylius_admin_address_log_entry_index` was renamed to `sylius_admin_partial_log_entry_index`.
+
+* Class `Sylius\Bundle\AdminBundle\Controller\NotificationController` has been made final and can't be extended anymore, follow Symfony best practices and do not extend it.
 
 ### AdminApiBundle (former ApiBundle)
 
@@ -549,7 +590,7 @@ fos_rest:
             - { path: "^/(?!admin|api)[^/]++/verify", role: IS_AUTHENTICATED_ANONYMOUSLY }
 
             - { path: "^/admin", role: ROLE_ADMINISTRATION_ACCESS }
-            - { path: "^/api", role: ROLE_API_ACCESS }
+            - { path: "^/api/.*", role: ROLE_API_ACCESS }
             - { path: "^/(?!admin|api)[^/]++/account", role: ROLE_USER }
   ```
 ### Database Migrations
@@ -565,4 +606,3 @@ fos_rest:
 ### Behat
 
 * `Sylius\Behat\Page\Admin\Crud\IndexPage`, `Sylius\Behat\Page\Admin\Crud\CreatePage`, `Sylius\Behat\Page\Admin\Crud\UpdatePage` now accepts route name instead of resource name.
-

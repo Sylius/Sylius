@@ -1,23 +1,23 @@
 Sylius\Component\Product\Model\ProductAttributeTranslation:
     attributeTranslation1:
         locale: de
-        name: 'Becher Sammlung'
+        name: "Becher Sammlung"
         translatable: "@productAttribute1"
     attributeTranslation2:
         locale: de
-        name: 'Becher Material'
+        name: "Becher Material"
         translatable: "@productAttribute2"
     attributeTranslation3:
         locale: en_US
-        name: 'Mug collection'
+        name: "Mug collection"
         translatable: "@productAttribute1"
     attributeTranslation4:
         locale: en_US
-        name: 'Mug material'
+        name: "Mug material"
         translatable: "@productAttribute2"
     attributeTranslation5:
         locale: en_US
-        name: 'Mug color'
+        name: "Mug color"
         translatable: "@productAttributeSelect"
 
 Sylius\Component\Product\Model\ProductAttribute:

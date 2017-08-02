@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ShopBundle\DependencyInjection;
 
 use Sylius\Bundle\CoreBundle\Checkout\CheckoutRedirectListener;
@@ -38,6 +40,7 @@ final class SyliusShopExtension extends Extension
         $loader->load('services.xml');
         $loader->load(sprintf('services/integrations/locale/%s.xml', $config['locale_switcher']));
 
+        $container->setParameter('sylius_shop.firewall_context_name', $config['firewall_context_name']);
         $this->configureCheckoutResolverIfNeeded($config['checkout_resolver'], $container);
     }
 

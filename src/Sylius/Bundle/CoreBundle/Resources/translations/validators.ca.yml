@@ -2,7 +2,42 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    channel:
+        contact_email:
+            invalid: Aquest correu electrònic no és vàlid.
+    channel_pricing:
+        price:
+            not_blank: Si us plau introdueix el preu.
+    checkout:
+        shipping_method:
+            not_blank: Si us plau seleccioneu el mètode d'enviament.
+    contact:
+        email:
+            invalid: Aquest correu electrònic no és vàlid.
+            not_blank: Escriu el teu correu electrònic.
+        message:
+            not_blank: Escriviu el vostre missatge.
+    currency:
+        enabled:
+            cannot_disable_base: No es pot desactivar la moneda base.
     locale:
         code:
             not_blank: Introduïu un codi local.
             unique: Aquest codi local ja existeix.
+    product_attribute:
+        invalid: Posició ha de ser un nombre sencer.
+    product_variant:
+        onHand:
+            not_blank: Si us plau introdueix la disponibilitat.
+        width:
+            min: L'amplada no pot ser negativa.
+            invalid: L'amplada ha de ser un nombre.
+        depth:
+            min: La profunditat no pot ser negativa.
+            invalid: La profunditat ha de ser un nombre.
+    user:
+        email:
+            unique: Aquest correu electrònic ja té un compte associat.
+            invalid: Aquest correu electrònic no és vàlid.
+        username:
+            unique: Aquest nom d'usuari ja està en ús.

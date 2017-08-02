@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Grid\Definition;
 
 use Sylius\Component\Grid\Event\GridDefinitionConverterEvent;
@@ -19,7 +21,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 final class ArrayToDefinitionConverter implements ArrayToDefinitionConverterInterface
 {
-    const EVENT_NAME = 'sylius.grid.%s';
+    public const EVENT_NAME = 'sylius.grid.%s';
 
     /**
      * @var EventDispatcherInterface

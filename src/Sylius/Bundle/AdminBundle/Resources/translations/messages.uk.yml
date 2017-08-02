@@ -18,9 +18,11 @@ sylius:
                     channels: Канали
                     countries: Країни
                     currencies: Валюти
+                    exchange_rates: Обмінний курс
                     header: Конфігурація
                     locales: Локалі
                     payment_methods: Методи оплати
+                    shipping_categories: Категорії доставки
                     shipping_methods: Методи доставки
                     tax_categories: Категорії оподаткування
                     tax_rates: Податкові ставки

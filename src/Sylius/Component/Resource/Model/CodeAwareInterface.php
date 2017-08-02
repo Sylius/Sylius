@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Resource\Model;
 
 /**
@@ -17,12 +19,12 @@ namespace Sylius\Component\Resource\Model;
 interface CodeAwareInterface
 {
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCode();
+    public function getCode(): ?string;
 
     /**
-     * @param string $code
+     * @param string|null $code
      */
-    public function setCode($code);
+    public function setCode(?string $code): void;
 }

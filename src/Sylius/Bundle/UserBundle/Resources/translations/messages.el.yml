@@ -8,7 +8,16 @@ sylius:
             enabled: Ενεργοποιημένο
             password:
                 label: Κωδικός πρόσβασης
+                confirmation: Επαλήθευση
+            remember_me: Να με θυμάσαι
             shipping_address: Διεύθυνση αποστολής
             username: Όνομα χρήστη
         user_filter:
             query: Αναζήτηση
+        user_change_password:
+            confirmation: Επιβεβαίωση
+            current: Τρέχον κωδικός πρόσβασης
+            new: Νέος κωδικός πρόσβασης
+        user_reset_password:
+            confirmation: Επιβεβαίωση
+            new: Νέος κωδικός πρόσβασης

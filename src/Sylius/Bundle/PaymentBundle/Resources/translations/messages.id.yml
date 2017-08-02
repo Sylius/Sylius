@@ -3,5 +3,8 @@
 
 sylius:
     form:
+        payment:
+            state:
+                header: Tahap pembayaran
         payment_method:
             name: Nama

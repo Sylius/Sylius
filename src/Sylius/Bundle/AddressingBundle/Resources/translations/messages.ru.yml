@@ -31,7 +31,7 @@ sylius:
             type: Тип
             types:
                 country: Страна
-                province: Район
+                province: Область
                 zone: Зона
             scope: Область
             scopes:

@@ -20,8 +20,10 @@ sylius:
             name: Ονομασία
         shipping_method:
             category: Κατηγορία
+            channels: Κανάλια
             configuration: Παραμετροποίηση
             description: Περιγραφή
             enabled: Ενεργοποιημένο
             name: Ονομασία
             tax_category: Φορολογική κατηγορία
+            translations: Μεταφράσεις

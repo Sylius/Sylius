@@ -21,8 +21,10 @@ sylius:
         shipping_calculator:
             flat_rate_configuration:
                 label: Фіксована ставка за доставку
+                amount: Сума
             per_unit_rate_configuration:
                 label: Фіксована ставка за одиницю
+                amount: Сума
         shipping_category:
             description: Опис
             name: Назва
@@ -37,3 +39,4 @@ sylius:
             name: Назва
             tax_category: Категорія податку
             translations: Переклади
+            position: Позиція

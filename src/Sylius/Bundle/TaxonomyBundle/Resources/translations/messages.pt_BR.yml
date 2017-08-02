@@ -7,5 +7,6 @@ sylius:
             description: Descrição
             name: Nome
             parent: Pai
+            slug: Slug
         taxonomy:
             name: Nome

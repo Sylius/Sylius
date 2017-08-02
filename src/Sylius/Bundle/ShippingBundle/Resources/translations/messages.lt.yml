@@ -6,6 +6,7 @@ sylius:
         rule:
             unit_count_configuration:
                 count: Kiekis
+                equal: Lygus
             type: Taisyklės tipas
         shipment:
             state: Būsena
@@ -19,8 +20,10 @@ sylius:
             tracking_code: Sekimo kodas
         shipping_calculator:
             flat_rate_configuration:
+                label: Vienodas tarifas siuntimui
                 amount: Suma
             per_unit_rate_configuration:
+                label: Vienodas tarifas vienetui
                 amount: Suma
         shipping_category:
             description: Aprašymas
@@ -36,3 +39,4 @@ sylius:
             name: Pavadinimas
             tax_category: Mokesčių kategorija
             translations: Vertimai
+            position: Pozicija

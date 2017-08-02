@@ -9,12 +9,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\OrderBundle;
 
 final class SyliusExpiredCartsEvents
 {
-    const PRE_REMOVE = 'sylius.carts.pre_remove';
-    const POST_REMOVE = 'sylius.carts.post_remove';
+    public const PRE_REMOVE = 'sylius.carts.pre_remove';
+    public const POST_REMOVE = 'sylius.carts.post_remove';
 
     private function __construct()
     {

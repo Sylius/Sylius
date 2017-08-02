@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Promotion\Model;
 
 use Sylius\Component\Resource\Model\TimestampableTrait;
@@ -46,7 +48,7 @@ class PromotionCoupon implements PromotionCouponInterface
     protected $promotion;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $expiresAt;
 
@@ -61,7 +63,7 @@ class PromotionCoupon implements PromotionCouponInterface
     /**
      * {@inheritdoc}
      */
-    public function getCode()
+    public function getCode(): ?string
     {
         return $this->code;
     }
@@ -69,7 +71,7 @@ class PromotionCoupon implements PromotionCouponInterface
     /**
      * {@inheritdoc}
      */
-    public function setCode($code)
+    public function setCode(?string $code): void
     {
         $this->code = $code;
     }
@@ -143,7 +145,7 @@ class PromotionCoupon implements PromotionCouponInterface
     /**
      * {@inheritdoc}
      */
-    public function setExpiresAt(\DateTime $expiresAt = null)
+    public function setExpiresAt(\DateTimeInterface $expiresAt = null)
     {
         $this->expiresAt = $expiresAt;
     }

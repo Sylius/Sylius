@@ -9,9 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Zone\CreatePageInterface;
@@ -353,5 +356,17 @@ final class ManagingZonesContext implements Context
         );
 
         Assert::true($this->updatePage->hasMember($zoneMember));
+    }
+
+    /**
+     * @Then /^I can not add a(?: country| province| zone) "([^"]+)"$/
+     */
+    public function iCanNotAddAZoneMember($name)
+    {
+        $member = null;
+        try {
+            $member = $this->createPage->chooseMember($name);
+        } catch (ElementNotFoundException $exception) {}
+        Assert::isEmpty($member);
     }
 }

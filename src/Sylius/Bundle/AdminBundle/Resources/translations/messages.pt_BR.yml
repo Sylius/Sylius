@@ -18,7 +18,7 @@ sylius:
                     channels: Canais
                     countries: Países
                     currencies: Moedas
-                    exchange_rates: Taxa de câmbio
+                    exchange_rates: Taxas de câmbio
                     header: Configuração
                     locales: Localidades
                     payment_methods: Meios de pagamentos

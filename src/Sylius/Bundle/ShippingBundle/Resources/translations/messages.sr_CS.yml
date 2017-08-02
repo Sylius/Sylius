@@ -3,10 +3,32 @@
 
 sylius:
     form:
+        rule:
+            unit_count_configuration:
+                count: Broj
+                equal: Jednako
+        shipment:
+            states:
+                checkout: Plaćanje
+                pending: Na čekanju
+                ready: Spremno
+                shipped: Isporučeno
+                cancelled: Otkazano
+            tracking_code: Kod Praćenja
+        shipping_calculator:
+            per_unit_rate_configuration:
+                amount: Količina
         shipping_category:
+            description: Opis
             name: Ime
         shipping_method:
+            calculator: Kalkulator
+            category: Kategorija
             channels: Kanali
+            configuration: Konfiguracija
+            description: Opis
+            enabled: Omogućeno
             name: Ime
             tax_category: Kategorija proizvoda
             translations: Prevodi
+            position: Pozicija

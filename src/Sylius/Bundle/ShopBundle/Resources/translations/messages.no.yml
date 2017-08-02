@@ -5,4 +5,9 @@ sylius:
     menu:
         shop:
             account:
-                dashboard: 'Panel'
+                address_book: 'Adressebok'
+                change_password: 'Endre passord'
+                dashboard: 'Kontrollpanel'
+                header: 'Din konto'
+                order_history: 'Ordrehistorikk'
+                personal_information: 'Personlig informasjon'

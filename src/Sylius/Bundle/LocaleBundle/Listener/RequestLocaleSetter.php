@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\LocaleBundle\Listener;
 
 use Sylius\Component\Locale\Context\LocaleContextInterface;

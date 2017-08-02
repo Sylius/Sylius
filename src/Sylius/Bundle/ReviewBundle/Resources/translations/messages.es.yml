@@ -11,7 +11,7 @@ sylius:
             status:
                 approved: Aprobado
                 label: Estado
-                new: Nuevo
-                rejected: Rechazado
+                new: Nueva
+                rejected: Rechazada
             submit: Guardar
             title: Título

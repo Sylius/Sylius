@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Page\Admin\Promotion;
 
 use Behat\Mink\Driver\Selenium2Driver;
@@ -159,7 +161,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function setStartsAt(\DateTime $dateTime)
+    public function setStartsAt(\DateTimeInterface $dateTime)
     {
         $timestamp = $dateTime->getTimestamp();
 
@@ -170,7 +172,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function setEndsAt(\DateTime $dateTime)
+    public function setEndsAt(\DateTimeInterface $dateTime)
     {
         $timestamp = $dateTime->getTimestamp();
 

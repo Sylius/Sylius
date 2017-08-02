@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Templating;
 
 use Symfony\Bundle\FrameworkBundle\Templating\TemplateReference;
@@ -76,7 +78,7 @@ final class TemplateNameParser implements TemplateNameParserInterface
             try {
                 $this->kernel->getBundle($template->get('bundle'));
             } catch (\Exception $e) {
-                throw new \InvalidArgumentException(sprintf('Template name "%s" is not valid.', $name), 0, $e);
+                return $this->decoratedParser->parse($name);
             }
         }
 

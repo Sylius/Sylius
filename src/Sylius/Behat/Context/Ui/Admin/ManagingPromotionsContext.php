@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
@@ -471,7 +473,7 @@ final class ManagingPromotionsContext implements Context
     /**
      * @When I make it available from :startsDate to :endsDate
      */
-    public function iMakeItAvailableFromTo(\DateTime $startsDate, \DateTime $endsDate)
+    public function iMakeItAvailableFromTo(\DateTimeInterface $startsDate, \DateTimeInterface $endsDate)
     {
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
@@ -482,7 +484,7 @@ final class ManagingPromotionsContext implements Context
     /**
      * @Then the :promotion promotion should be available from :startsDate to :endsDate
      */
-    public function thePromotionShouldBeAvailableFromTo(PromotionInterface $promotion, \DateTime $startsDate, \DateTime $endsDate)
+    public function thePromotionShouldBeAvailableFromTo(PromotionInterface $promotion, \DateTimeInterface $startsDate, \DateTimeInterface $endsDate)
     {
         $this->iWantToModifyAPromotion($promotion);
 

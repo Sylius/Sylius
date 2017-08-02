@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\AdminApiBundle\Fixture\Factory;
 
 use FOS\OAuthServerBundle\Model\ClientManagerInterface;
@@ -112,7 +114,7 @@ class ApiAccessTokenExampleFactory extends AbstractExampleFactory
             ->setAllowedTypes('client', ['string', ClientInterface::class, 'null'])
             ->setNormalizer('client', LazyOption::findOneBy($this->clientRepository, 'randomId'))
             ->setDefault('expires_at', null)
-            ->setAllowedTypes('expires_at', ['null', \DateTime::class])
+            ->setAllowedTypes('expires_at', ['null', \DateTimeInterface::class])
         ;
     }
 }

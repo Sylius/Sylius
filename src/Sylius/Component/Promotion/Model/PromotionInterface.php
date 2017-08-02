@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Promotion\Model;
 
 use Doctrine\Common\Collections\Collection;
@@ -86,24 +88,24 @@ interface PromotionInterface extends CodeAwareInterface, TimestampableInterface,
     public function decrementUsed();
 
     /**
-     * @return \DateTime
+     * @return \DateTimeInterface
      */
     public function getStartsAt();
 
     /**
-     * @param \DateTime $startsAt
+     * @param \DateTimeInterface $startsAt
      */
-    public function setStartsAt(\DateTime $startsAt = null);
+    public function setStartsAt(\DateTimeInterface $startsAt = null);
 
     /**
-     * @return \DateTime
+     * @return \DateTimeInterface
      */
     public function getEndsAt();
 
     /**
-     * @param \DateTime $endsAt
+     * @param \DateTimeInterface $endsAt
      */
-    public function setEndsAt(\DateTime $endsAt = null);
+    public function setEndsAt(\DateTimeInterface $endsAt = null);
 
     /**
      * @return bool

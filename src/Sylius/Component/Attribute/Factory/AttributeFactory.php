@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Attribute\Factory;
 
 use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
@@ -42,14 +44,10 @@ class AttributeFactory implements AttributeFactoryInterface
 
     /**
      * {@inheritdoc}
-     *
-     * @throws \BadMethodCallException
      */
     public function createNew()
     {
-        throw new \BadMethodCallException(
-            'Method "createNew()" is not supported for attribute factory. Use "createTyped($type)" instead.'
-        );
+        return $this->factory->createNew();
     }
 
     /**

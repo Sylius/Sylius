@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Customer\Model;
 
 use Sylius\Component\Resource\Model\TimestampableTrait;
@@ -46,7 +48,7 @@ class Customer implements CustomerInterface
     protected $lastName;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $birthday;
 
@@ -174,7 +176,7 @@ class Customer implements CustomerInterface
     /**
      * {@inheritdoc}
      */
-    public function setBirthday(\DateTime $birthday = null)
+    public function setBirthday(\DateTimeInterface $birthday = null)
     {
         $this->birthday = $birthday;
     }

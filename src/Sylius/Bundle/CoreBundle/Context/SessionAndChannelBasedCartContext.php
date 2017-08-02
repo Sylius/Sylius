@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Context;
 
 use Sylius\Component\Channel\Context\ChannelContextInterface;
@@ -70,7 +72,7 @@ final class SessionAndChannelBasedCartContext implements CartContextInterface
         try {
             $channel = $this->channelContext->getChannel();
         } catch (ChannelNotFoundException $exception) {
-            throw new CartNotFoundException($exception);
+            throw new CartNotFoundException(null, $exception);
         }
 
         if (!$this->session->has(sprintf('%s.%s', $this->sessionKeyName, $channel->getCode()))) {

@@ -1,0 +1,16 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    user:
+        email:
+            not_blank: Моля, въведете имейла си.
+            invalid: Този имейл е невалиден.
+            not_registered: Потребителят с този имейл не съществува. Моля, първо се регистрирайте.
+        plainPassword:
+            not_blank: Моля, въведете паролата си.
+            mismatch: Въведените пароли не съвпадат
+            wrong_current: Предоставената парола е различен от текущата.
+        password:
+            min: Паролата трябва да бъде поне {{ limit }} знака.
+            max: Парола не трябва да надвишава {{ limit }} знака.

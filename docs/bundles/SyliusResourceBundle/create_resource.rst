@@ -88,7 +88,8 @@ Below you can see the usage for specifying custom options, in this case, ``valid
             _sylius:
                 form:
                     type: app_book_custom
-                    validation_groups: [sylius, my_custom_group]
+                    options:
+                        validation_groups: [sylius, my_custom_group]
 
 Using Custom Factory Method
 ---------------------------

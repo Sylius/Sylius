@@ -54,7 +54,7 @@ PHP required modules and configuration
 
 .. warning::
 
-    Use your local timezone, for example America/Los_Angeles or Europe/Berlin. See http://www.php.net/timezones for the list of all available timezones.
+    Use your local timezone, for example America/Los_Angeles or Europe/Berlin. See http://php.net/manual/en/timezones.php for the list of all available timezones.
 
 Database
 --------
@@ -78,7 +78,7 @@ Most of the application folders and files require only read access, but a few fo
 * var/logs
 * web/media
 
-You can read how to set these permissions in the `Symfony - setting up permissions <http://symfony.com/doc/current/book/installation.html#book-installation-permissions>`_ section.
+You can read how to set these permissions in the `Symfony - setting up permissions <http://symfony.com/doc/current/setup/file_permissions.html>`_ section.
 
 .. _`gd`: http://php.net/manual/en/book.fileinfo.php
 .. _`exif`: http://php.net/manual/en/book.exif.php

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ThemeBundle\Factory;
 
 use PhpSpec\ObjectBehavior;
@@ -42,7 +44,7 @@ final class ThemeScreenshotFactorySpec extends ObjectBehavior
     /**
      * {@inheritdoc}
      */
-    public function getMatchers()
+    public function getMatchers(): array
     {
         return [
             'beScreenshotWithTheFollowingProperties' => function (ThemeScreenshot $subject, array $properties) {

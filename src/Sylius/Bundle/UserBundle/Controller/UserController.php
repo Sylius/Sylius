@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\UserBundle\Controller;
 
 use FOS\RestBundle\View\View;
@@ -239,7 +241,7 @@ class UserController extends ResourceController
         $formType = $this->getSyliusAttribute($request, 'form', UserRequestPasswordResetType::class);
         $form = $this->createResourceForm($configuration, $formType, $passwordReset);
         $template = $this->getSyliusAttribute($request, 'template', null);
-        if (!$configuration->isHtmlRequest()) {
+        if ($configuration->isHtmlRequest()) {
             Assert::notNull($template, 'Template is not configured.');
         }
 

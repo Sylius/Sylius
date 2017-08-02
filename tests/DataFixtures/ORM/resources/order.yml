@@ -32,4 +32,4 @@ Sylius\Component\Core\Model\Customer:
         lastName: Queen
         email: oliver.queen@star-city.com
         emailCanonical: oliver.queen@star-city.com
-        birthday: <date()>
+        birthday: <(new \DateTime())>

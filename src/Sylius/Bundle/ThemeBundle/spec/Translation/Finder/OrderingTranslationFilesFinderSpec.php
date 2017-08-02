@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ThemeBundle\Translation\Finder;
 
 use PhpSpec\ObjectBehavior;
@@ -44,23 +46,6 @@ final class OrderingTranslationFilesFinderSpec extends ObjectBehavior
             '/some/path/to/theme/YcmeBundle/messages.en.yml',
         ]);
 
-        $this->findTranslationFiles('/some/path/to/theme')->shouldHaveFirstElement('/some/path/to/theme/translations/messages.en.yml');
-    }
-
-    public function getMatchers()
-    {
-        return [
-            'haveFirstElement' => function ($subject, $element) {
-                if ($element !== reset($subject)) {
-                    throw new \InvalidArgumentException(sprintf(
-                        'Expected "%s" as the first element, actual value was "%s".',
-                        $element,
-                        reset($subject)
-                    ));
-                }
-
-                return true;
-            },
-        ];
+        $this->findTranslationFiles('/some/path/to/theme')->shouldStartIteratingAs(['/some/path/to/theme/translations/messages.en.yml']);
     }
 }

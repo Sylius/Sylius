@@ -9,6 +9,8 @@ sylius:
         promotion_action:
             type: Tipus
         promotion_rule:
+            contains_product_configuration:
+                variants: Productes
             shipping_country_configuration:
                 country: País
             type: Tipus

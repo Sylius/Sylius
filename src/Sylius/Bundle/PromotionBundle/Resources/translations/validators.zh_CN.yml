@@ -5,6 +5,7 @@ sylius:
     promotion:
         code:
             unique: 促销编号已存在。
+            regex: 促销代码仅可以由字母、 数字、 破折号和下划线组成。
             not_blank: 请输入促销代码。
         description:
             max_length: 促销描述必须不会超过 1 个字符。 |促销描述不能超过 {{ limit }} 个字符。

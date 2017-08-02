@@ -7,6 +7,7 @@ sylius:
             not_blank: Por favor, digite o nome da categoria de imposto.
         code:
             not_blank: Por favor, digite o código da categoria de imposto.
+            regex: Código da Categoria da Taxa somente pode ser composto por letras, números, hifens e traços.
             unique: A categoria de imposto com determinado código já existe.
     tax_rate:
         category:
@@ -21,4 +22,5 @@ sylius:
             not_blank: Por favor, selecione a zona fiscal.
         code:
             not_blank: Por favor digite o código de taxa de imposto.
+            regex: Código do Valor da Taxa somente pode ser composto por letras, números, hifens e traços.
             unique: A taxa de imposto com determinado código já existe.

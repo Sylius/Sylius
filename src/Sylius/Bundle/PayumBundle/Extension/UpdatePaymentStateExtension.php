@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\PayumBundle\Extension;
 
 use Payum\Core\Extension\Context;
@@ -57,11 +59,11 @@ final class UpdatePaymentStateExtension implements ExtensionInterface
     {
         $previousStack = $context->getPrevious();
         $previousStackSize = count($previousStack);
-        
+
         if ($previousStackSize > 1) {
             return;
         }
-        
+
         if ($previousStackSize === 1) {
             $previousActionClassName = get_class($previousStack[0]->getAction());
             if (false === stripos($previousActionClassName, 'NotifyNullAction')) {

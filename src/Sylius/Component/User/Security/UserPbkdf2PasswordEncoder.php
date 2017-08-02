@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\User\Security;
 
 use Sylius\Component\User\Model\CredentialsHolderInterface;
@@ -30,7 +32,7 @@ use Webmozart\Assert\Assert;
  */
 final class UserPbkdf2PasswordEncoder implements UserPasswordEncoderInterface
 {
-    const MAX_PASSWORD_LENGTH = 4096;
+    public const MAX_PASSWORD_LENGTH = 4096;
 
     /**
      * @var string

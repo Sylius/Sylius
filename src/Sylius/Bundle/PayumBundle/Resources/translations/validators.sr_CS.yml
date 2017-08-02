@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    gateway_config:
+        paypal:
+            password:
+                not_blank: Uneisite vašu paypal lozinku.

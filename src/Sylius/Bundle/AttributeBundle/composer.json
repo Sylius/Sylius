@@ -20,7 +20,7 @@
         }
     ],
     "require": {
-        "php": "^5.6|^7.0",
+        "php": "^7.1",
 
         "sonata-project/intl-bundle": "^2.2",
         "stof/doctrine-extensions-bundle": "^1.2",
@@ -29,8 +29,8 @@
         "symfony/framework-bundle": "^3.2"
     },
     "require-dev": {
-        "doctrine/orm": "^2.5",
-        "phpspec/phpspec": "^3.2",
+        "doctrine/orm": "~2.5.0",
+        "phpspec/phpspec": "^4.0",
         "phpunit/phpunit": "^5.6",
         "symfony/form": "^3.2",
         "symfony/browser-kit": "^3.2",

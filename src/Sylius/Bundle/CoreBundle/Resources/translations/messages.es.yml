@@ -30,11 +30,12 @@ sylius:
             currency_base: Moneda base
             account_verification_required: '¿Se requiere verificación de cuenta?'
             hostname: Nombre del host
-            locale_default: Configuración regional predeterminada
+            locale_default: Idioma predeterminado
             locales: Idiomas
             payment_methods: Métodos de pago
             shipping_methods: Métodos de envío
-            skipping_shipping_step_allowed: '¿Omitir pregunta si sólo hay disponible un método de envío?'
+            skipping_shipping_step_allowed: '¿Omitir formulario de envío si sólo hay un método de envío?'
+            skipping_payment_step_allowed: '¿Omitir formulario de pago si solo hay un método de pago disponible?'
             tax_calculation_strategy: Estrategia de cálculo de impuestos
             tax_zone_default: Zona de impuestos por defecto
             taxonomies: Taxonomías
@@ -60,7 +61,7 @@ sylius:
         product:
             images: Imágenes
             restricted_zone: Zona restringida
-            short_description: Descripción breve
+            short_description: Descripción corta
             variant_selection_method: Método de selección variante
             main_taxon: Taxón principal
             channels: Canales
@@ -156,7 +157,7 @@ sylius:
             help: Instala y activa la extensión %extension%.
             iconv: Iconv
             exif: Exif
-            fileinfo: Información del archivo
+            fileinfo: Fileinfo
             icu: ICU
             intl: Intl
             json_encode: JSON
@@ -172,25 +173,25 @@ sylius:
         filesystem:
             header: sistema de archivos
             cache:
-                header: caché
+                header: cache
                 help: 'Para ajustar los permisos ejecuta: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
             exists: existe
             logs:
                 header: registros
                 help: 'Para ajustar los permisos ejecuta: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
-            not_exists: No existe
-            not_writable: Sin permisos de escritura
+            not_exists: no existe
+            not_writable: no escribible
             parameters:
-                header: parametros.yml
+                header: parameters.yml
                 help: 'Para ajustar los permisos ejecuta: sudo chmod a+w %path%'
-            vendors: Vendors
-            writable: Con permisos de escritura
+            vendors: vendors
+            writable: escribible
         settings:
             header: Versión de PHP y configuración
-            any: Cualquiera
+            any: cualquiera
             detect_unicode: detect_unicode
             magic_quotes_gpc: magic_quotes_gpc
-            non_deprecated: No obsoleto
+            non_deprecated: no obsoleto
             "off": false
             "on": true
             register_globals: register_globals
@@ -200,7 +201,7 @@ sylius:
             timezone: timezone
             timezone_deprecated:
                 header: Zona horaria obsoleta
-                help: 'La zona horaria %timezone% está obsoleta. Arregla tu fichero php.ini (Lista de zonas horarias obsoletas http://php.net/manual/en/timezones.others.php).'
+                help: 'La zona horaria %timezone% está obsoleta. Arregla tu fichero php.ini (lista de zonas horarias obsoletas http://php.net/manual/en/timezones.others.php).'
             version: Versión de PHP
             version_recommended: Versión de PHP recomendada
     payum_gateway:

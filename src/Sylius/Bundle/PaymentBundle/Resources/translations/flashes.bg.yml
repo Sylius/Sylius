@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    payment:
+        cancelled: 'Плащането беше отказано.'
+        completed: 'Плащането е завършено.'
+        failed: 'Плащането е неуспешно.'
+        processing: 'Плащането се обработва.'
+        refunded: 'Плащането бе успешно възстановено.'
+        unknown: 'Възникна неизвестен проблем с плащането.'

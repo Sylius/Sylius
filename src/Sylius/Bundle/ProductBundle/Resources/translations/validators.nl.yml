@@ -9,7 +9,7 @@ sylius:
         slug:
             not_blank: Voer alstublieft een product slug in.
         code:
-            not_blank: Voer een productcode in.
+            not_blank: Voer een product code in.
             regex: Product code kan alleen bestaan uit letters, cijfers, streepjes en liggende streepjes.
             unique: Product code moet uniek zijn.
         name:
@@ -19,13 +19,13 @@ sylius:
     product_variant:
         combination: Er bestaat al een variant met deze set opties.
         code:
-            not_blank: Gelieve de code in te vullen.
+            not_blank: Gelieve een code in te vullen.
             regex: Product variant code kan alleen bestaan uit letters, cijfers, streepjes en liggende streepjes.
             unique: Product variant code moet uniek zijn.
             within_product_unique: Deze code moet uniek zijn binnen dit product.
     simple_product:
         code:
-            unique: Eenvoudige productcode moet uniek zijn binnen alle producten en product-varianten.
+            unique: Eenvoudige product code moet uniek zijn binnen alle producten en product varianten.
     option:
         code:
             not_blank: Voer een optiecode in.

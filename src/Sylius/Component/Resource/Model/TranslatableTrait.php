@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Resource\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -76,11 +78,17 @@ trait TranslatableTrait
             return $translation;
         }
 
-        $fallbackTranslation = $this->translations->get($this->fallbackLocale);
-        if (null !== $fallbackTranslation) {
-            $this->translationsCache[$this->fallbackLocale] = $fallbackTranslation;
+        if ($locale !== $this->fallbackLocale) {
+            if (isset($this->translationsCache[$this->fallbackLocale])) {
+                return $this->translationsCache[$this->fallbackLocale];
+            }
 
-            return $fallbackTranslation;
+            $fallbackTranslation = $this->translations->get($this->fallbackLocale);
+            if (null !== $fallbackTranslation) {
+                $this->translationsCache[$this->fallbackLocale] = $fallbackTranslation;
+
+                return $fallbackTranslation;
+            }
         }
 
         $translation = $this->createTranslation();

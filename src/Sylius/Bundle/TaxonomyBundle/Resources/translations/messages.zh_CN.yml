@@ -7,5 +7,6 @@ sylius:
             description: 描述
             name: 名称
             parent: 上一级
+            slug: 标语
         taxonomy:
             name: 名称

@@ -11,7 +11,6 @@ sylius:
             last_name: 姓
             phone_number: 電話番号
             postcode: 郵便番号
-            street: それ以降の住所
             province: 都道府県
             zone: 対象の地域
         country:

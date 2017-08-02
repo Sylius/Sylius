@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Order\Model;
 
 use Doctrine\Common\Collections\Collection;
@@ -454,7 +456,7 @@ final class OrderSpec extends ObjectBehavior
 
     function it_initializes_creation_date_by_default()
     {
-        $this->getCreatedAt()->shouldHaveType(\DateTime::class);
+        $this->getCreatedAt()->shouldHaveType(\DateTimeInterface::class);
     }
 
     function it_has_no_last_update_date_by_default()

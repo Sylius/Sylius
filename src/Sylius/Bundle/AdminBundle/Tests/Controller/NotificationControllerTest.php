@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\AdminBundle\Tests\Controller;
 
 use GuzzleHttp\ClientInterface;
@@ -100,7 +102,8 @@ final class NotificationControllerTest extends \PHPUnit_Framework_TestCase
         $this->controller = new NotificationController(
             $this->client->reveal(),
             $this->messageFactory->reveal(),
-            self::$hubUri
+            self::$hubUri,
+            'environment'
         );
 
         parent::setUp();

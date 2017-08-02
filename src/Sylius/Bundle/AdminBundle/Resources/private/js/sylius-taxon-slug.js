@@ -40,11 +40,11 @@
 
                 var data;
                 if ('' != slugInput.attr('data-parent') && undefined != slugInput.attr('data-parent')) {
-                    data = { name: element.val(), parentId: slugInput.attr('data-parent') };
+                    data = { name: element.val(), locale: element.closest('[data-locale]').data('locale'), parentId: slugInput.attr('data-parent') };
                 } else if ($('#sylius_taxon_parent').length > 0 && $('#sylius_taxon_parent').is(':visible') && '' != $('#sylius_taxon_parent').val()) {
-                    data = { name: element.val(), parentId: $('#sylius_taxon_parent').val() };
+                    data = { name: element.val(), locale: element.closest('[data-locale]').data('locale'), parentId: $('#sylius_taxon_parent').val() };
                 } else {
-                    data = { name: element.val() };
+                    data = { name: element.val(), locale: element.closest('[data-locale]').data('locale') };
                 }
 
                 $.ajax({

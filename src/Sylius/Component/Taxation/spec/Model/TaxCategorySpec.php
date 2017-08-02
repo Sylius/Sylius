@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Taxation\Model;
 
 use PhpSpec\ObjectBehavior;
@@ -64,7 +66,7 @@ final class TaxCategorySpec extends ObjectBehavior
 
     function it_should_initialize_creation_date_by_default()
     {
-        $this->getCreatedAt()->shouldHaveType(\DateTime::class);
+        $this->getCreatedAt()->shouldHaveType(\DateTimeInterface::class);
     }
 
     function it_should_not_have_last_update_date_by_default()

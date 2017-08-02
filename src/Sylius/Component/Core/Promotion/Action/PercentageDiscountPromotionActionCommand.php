@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Promotion\Action;
 
 use Sylius\Component\Core\Distributor\ProportionalIntegerDistributorInterface;
@@ -25,7 +27,7 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
  */
 final class PercentageDiscountPromotionActionCommand extends DiscountPromotionActionCommand implements PromotionActionCommandInterface
 {
-    const TYPE = 'order_percentage_discount';
+    public const TYPE = 'order_percentage_discount';
 
     /**
      * @var ProportionalIntegerDistributorInterface

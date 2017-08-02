@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    channel:
+        delete_error: 'Kanal silinemez, en az bir etkin kanal gereklidir.'
+    checkout:
+        complete_error: 'Siparişinizi tamamlarken beklenmeyen bir sorun oluştu, lütfen siparişinizi yeniden oluşturmayı deneyin.'

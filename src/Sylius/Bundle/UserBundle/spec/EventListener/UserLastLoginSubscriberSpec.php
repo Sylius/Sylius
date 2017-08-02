@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\UserBundle\EventListener;
 
 use Doctrine\Common\Persistence\ObjectManager;
@@ -57,7 +59,7 @@ final class UserLastLoginSubscriberSpec extends ObjectBehavior
         $event->getAuthenticationToken()->willReturn($token);
         $token->getUser()->willReturn($user);
 
-        $user->setLastLogin(Argument::type(\DateTime::class))->shouldBeCalled();
+        $user->setLastLogin(Argument::type(\DateTimeInterface::class))->shouldBeCalled();
 
         $userManager->persist($user)->shouldBeCalled();
         $userManager->flush()->shouldBeCalled();
@@ -72,7 +74,7 @@ final class UserLastLoginSubscriberSpec extends ObjectBehavior
     ) {
         $event->getUser()->willReturn($user);
 
-        $user->setLastLogin(Argument::type(\DateTime::class))->shouldBeCalled();
+        $user->setLastLogin(Argument::type(\DateTimeInterface::class))->shouldBeCalled();
 
         $userManager->persist($user)->shouldBeCalled();
         $userManager->flush()->shouldBeCalled();

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Promotion\Generator;
 
 /**
@@ -37,14 +39,14 @@ interface PromotionCouponGeneratorInstructionInterface
     public function setCodeLength($codeLength);
 
     /**
-     * @return \DateTime
+     * @return \DateTimeInterface
      */
     public function getExpiresAt();
 
     /**
-     * @param \DateTime $expiresAt
+     * @param \DateTimeInterface $expiresAt
      */
-    public function setExpiresAt(\DateTime $expiresAt = null);
+    public function setExpiresAt(\DateTimeInterface $expiresAt = null);
 
     /**
      * @return int

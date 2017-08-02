@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Order\Repository;
 
 use Sylius\Component\Order\Model\OrderInterface;
@@ -22,7 +24,7 @@ interface OrderRepositoryInterface extends RepositoryInterface
     /**
      * @return int
      */
-    public function count();
+    public function countPlacedOrders();
 
     /**
      * @param int $count
@@ -53,11 +55,11 @@ interface OrderRepositoryInterface extends RepositoryInterface
     public function findCartById($id);
 
     /**
-     * @param \DateTime $terminalDate
+     * @param \DateTimeInterface $terminalDate
      *
      * @return OrderInterface[]
      */
-    public function findCartsNotModifiedSince(\DateTime $terminalDate);
+    public function findCartsNotModifiedSince(\DateTimeInterface $terminalDate);
 
     /**
      * @return \Doctrine\ORM\QueryBuilder

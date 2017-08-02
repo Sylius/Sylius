@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Core\Locale;
 
 use PhpSpec\ObjectBehavior;

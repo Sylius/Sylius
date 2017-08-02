@@ -11,7 +11,10 @@ sylius:
             name: Nama
         association_type:
             name: Nama
+            translations: Terjemahan
         variant:
             name: Nama
         option:
             name: Nama
+        option_value:
+            value: Isi

@@ -6,6 +6,11 @@ sylius:
         email:
             not_blank: Prosím vložte Váš email.
             invalid: Tento email je neplatný.
+            not_registered: Neexistuje uživatel s tímto e-mailem. Nejprve se zaregistrujte.
         plainPassword:
             not_blank: Prosím, zadejte své heslo.
             mismatch: Zadaná hesla nejsou shodná
+            wrong_current: Zadané heslo se liší od stávajícího.
+        password:
+            min: Heslo musí být alespoň {{ limit }} znaků dlouhé.
+            max: Heslo nesmí být delší než {{ limit }} znaků.

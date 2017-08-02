@@ -61,3 +61,9 @@ Feature: Editing a zone
         Given the store has a zone "European Union" with code "EU"
         When I want to modify the zone named "European Union"
         Then the code field should be disabled
+
+    @ui
+    Scenario: Not seeing zone itself in member select when editing a zone of type zone
+        Given the store has a zone "European Union" with code "EU"
+        When I want to modify the zone named "European Union"
+        Then I can not add a zone "European Union"

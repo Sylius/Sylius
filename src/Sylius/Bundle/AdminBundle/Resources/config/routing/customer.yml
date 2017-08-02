@@ -32,6 +32,7 @@ sylius_admin_customer_order_index:
         _controller: sylius.controller.order:indexAction
         _sylius:
             section: admin
+            permission: true
             template: "@SyliusAdmin/Crud/index.html.twig"
             grid: sylius_admin_customer_order
             vars:
@@ -51,3 +52,4 @@ sylius_admin_customer_orders_statistics:
         _controller: sylius.controller.customer_statistics:renderAction
         _sylius:
             section: admin
+            permission: true

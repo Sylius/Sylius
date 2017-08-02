@@ -5,6 +5,7 @@ sylius:
     menu:
         shop:
             account:
+                address_book: 'Адресна книга'
                 change_password: 'Змінити пароль'
                 dashboard: 'Приладова дошка'
                 header: 'Ваша обліковка'

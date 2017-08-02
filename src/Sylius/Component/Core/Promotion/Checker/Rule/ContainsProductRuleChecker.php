@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Promotion\Checker\Rule;
 
 use Sylius\Component\Core\Model\OrderInterface;
@@ -24,7 +26,7 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
  */
 final class ContainsProductRuleChecker implements RuleCheckerInterface
 {
-    const TYPE = 'contains_product';
+    public const TYPE = 'contains_product';
 
     /**
      * {@inheritdoc}

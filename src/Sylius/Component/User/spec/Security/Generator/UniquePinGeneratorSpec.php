@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\User\Security\Generator;
 
 use PhpSpec\ObjectBehavior;
@@ -26,11 +28,6 @@ final class UniquePinGeneratorSpec extends ObjectBehavior
     function let(RandomnessGeneratorInterface $generator, UniquenessCheckerInterface $checker)
     {
         $this->beConstructedWith($generator, $checker, 6);
-    }
-
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(UniquePinGenerator::class);
     }
 
     function it_implements_generator_interface()
@@ -59,8 +56,6 @@ final class UniquePinGeneratorSpec extends ObjectBehavior
         $this->beConstructedWith($generator, $checker, -1);
         $this->shouldThrow(\InvalidArgumentException::class)->duringInstantiation();
         $this->beConstructedWith($generator, $checker, 0);
-        $this->shouldThrow(\InvalidArgumentException::class)->duringInstantiation();
-        $this->beConstructedWith($generator, $checker, 10);
         $this->shouldThrow(\InvalidArgumentException::class)->duringInstantiation();
     }
 
@@ -99,7 +94,7 @@ final class UniquePinGeneratorSpec extends ObjectBehavior
     /**
      * {@inheritdoc}
      */
-    public function getMatchers()
+    public function getMatchers(): array
     {
         return [
             'haveLength' => function ($subject, $key) {

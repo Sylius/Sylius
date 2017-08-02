@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Promotion\Action;
 
 use Sylius\Component\Core\Model\OrderInterface;
@@ -25,7 +27,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
  */
 final class UnitFixedDiscountPromotionActionCommand extends UnitDiscountPromotionActionCommand
 {
-    const TYPE = 'unit_fixed_discount';
+    public const TYPE = 'unit_fixed_discount';
 
     /**
      * @var FilterInterface

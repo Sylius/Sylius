@@ -46,6 +46,8 @@ sylius:
             not_blank: Lütfen şehir adını yazınız.
             unique: İl adı benzersiz olmalıdır.
     zone:
+        scope:
+            not_blank: Kapsamı giriniz.
         code:
             not_blank: Bölge kodunu yazın.
             regex: Alan kodu sadece harflerden, sayılardan, tire ve alt çizgi karakterlerinden oluşur.
@@ -54,4 +56,10 @@ sylius:
             min_count: Lütfen en az {{ limit }} bölge üyesi ekleyiniz.
         name:
             max_length: Bölge adı 255 karakterden uzun olmamalıdır | Bölge adı 255 karakterden uzun olmamalıdır.
+            min_length: Bölge adı en az 2 karakter uzunluğunda olmalı | Bölge adı en az 2 karakter uzunluğunda olmalıdır.
             not_blank: Lütfen bölge adını yazınız.
+    zone_member:
+        code:
+            not_blank: Lütfen bölge üyeyi seçin.
+            regex: Alan üye kodu yalnızca harf, sayı, tire ve alt çizgi oluşur.
+        unique: Seçilen bölge zaten bu bölgede üyesidir.

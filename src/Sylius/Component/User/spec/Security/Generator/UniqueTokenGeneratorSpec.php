@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\User\Security\Generator;
 
 use PhpSpec\ObjectBehavior;
@@ -25,11 +27,6 @@ final class UniqueTokenGeneratorSpec extends ObjectBehavior
     function let(RandomnessGeneratorInterface $generator, UniquenessCheckerInterface $checker)
     {
         $this->beConstructedWith($generator, $checker, 12);
-    }
-
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(UniqueTokenGenerator::class);
     }
 
     function it_implements_generator_interface()
@@ -59,8 +56,6 @@ final class UniqueTokenGeneratorSpec extends ObjectBehavior
         $this->shouldThrow(\InvalidArgumentException::class)->duringInstantiation();
         $this->beConstructedWith($generator, $checker, 0);
         $this->shouldThrow(\InvalidArgumentException::class)->duringInstantiation();
-        $this->beConstructedWith($generator, $checker, 41);
-        $this->shouldThrow(\InvalidArgumentException::class)->duringInstantiation();
     }
 
     function it_generates_tokens_with_length_stated_on_instantiation(
@@ -88,7 +83,7 @@ final class UniqueTokenGeneratorSpec extends ObjectBehavior
     /**
      * {@inheritdoc}
      */
-    public function getMatchers()
+    public function getMatchers(): array
     {
         return [
             'haveLength' => function ($subject, $key) {

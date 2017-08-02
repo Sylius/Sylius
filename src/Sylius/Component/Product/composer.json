@@ -20,7 +20,7 @@
         }
     ],
     "require": {
-        "php": "^5.6|^7.0",
+        "php": "^7.1",
 
         "behat/transliterator": "^1.1",
         "sylius/attribute": "^1.0",
@@ -29,7 +29,7 @@
         "webmozart/assert": "^1.0"
     },
     "require-dev": {
-        "phpspec/phpspec": "^3.2"
+        "phpspec/phpspec": "^4.0"
     },
     "suggest": {
         "ext-iconv": "For better performance than using Symfony Polyfill Component"

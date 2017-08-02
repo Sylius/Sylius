@@ -6,8 +6,10 @@ sylius:
         admin:
             main:
                 catalog:
+                    association_types: Tipovi asocijacija
                     attributes: Atributi
                     header: Katalog
+                    inventory: Inventar
                     options: Opcije
                     products: Proizvodi
                 configuration:
@@ -15,9 +17,11 @@ sylius:
                     channels: Kanali
                     countries: Zemlje
                     currencies: Valute
+                    exchange_rates: Kursna lista
                     header: Konfiguracija
                     locales: Lokalizacije
                     payment_methods: Načini plaćanja
+                    shipping_categories: Kategorije slanja
                     shipping_methods: Načini dostave
                     tax_categories: Poreske kategorije
                     tax_rates: Poreske stope

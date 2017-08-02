@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Promotion\Checker\Rule;
 
 use Sylius\Component\Addressing\Model\CountryInterface;
@@ -23,7 +25,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 final class ShippingCountryRuleChecker implements RuleCheckerInterface
 {
-    const TYPE = 'shipping_country';
+    public const TYPE = 'shipping_country';
 
     /**
      * @var RepositoryInterface

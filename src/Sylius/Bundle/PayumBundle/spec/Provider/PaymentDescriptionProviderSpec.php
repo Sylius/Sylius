@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\PayumBundle\Provider;
 
 use Doctrine\Common\Collections\ArrayCollection;

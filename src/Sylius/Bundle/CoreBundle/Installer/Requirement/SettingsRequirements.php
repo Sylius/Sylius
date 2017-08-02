@@ -9,13 +9,15 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Installer\Requirement;
 
 use Symfony\Component\Translation\TranslatorInterface;
 
 final class SettingsRequirements extends RequirementCollection
 {
-    const RECOMMENDED_PHP_VERSION = '7.0';
+    public const RECOMMENDED_PHP_VERSION = '7.0';
 
     /**
      * @param TranslatorInterface $translator

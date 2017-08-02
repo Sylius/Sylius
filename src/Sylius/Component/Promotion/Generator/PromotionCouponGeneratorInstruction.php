@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Promotion\Generator;
 
 /**
@@ -26,7 +28,7 @@ final class PromotionCouponGeneratorInstruction implements PromotionCouponGenera
     private $codeLength = 6;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     private $expiresAt;
 
@@ -78,7 +80,7 @@ final class PromotionCouponGeneratorInstruction implements PromotionCouponGenera
     /**
      * {@inheritdoc}
      */
-    public function setExpiresAt(\DateTime $expiresAt = null)
+    public function setExpiresAt(\DateTimeInterface $expiresAt = null)
     {
         $this->expiresAt = $expiresAt;
     }

@@ -4,8 +4,19 @@
 sylius:
     form:
         user:
+            email: E-pošta
+            enabled: Omogućeno
+            password:
+                label: Lozinka
+            remember_me: Zapamti me
+            shipping_address: Adresa dostave
             username: Krosnicko ime
+        user_filter:
+            query: Pretraga
         user_change_password:
             confirmation: Potvrda
+            current: Trenutna lozinka
+            new: Nova lozinka
         user_reset_password:
             confirmation: Potvrda
+            new: Nova lozinka

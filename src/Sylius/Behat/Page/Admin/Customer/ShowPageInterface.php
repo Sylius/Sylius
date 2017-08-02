@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Page\Admin\Customer;
 
 use Behat\Mink\Exception\ElementNotFoundException;
@@ -45,7 +47,7 @@ interface ShowPageInterface extends PageInterface
     public function getCustomerName();
 
     /**
-     * @return \DateTime
+     * @return \DateTimeInterface
      */
     public function getRegistrationDate();
 

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Channel\Model\ChannelsAwareInterface;
@@ -35,8 +37,8 @@ interface ProductInterface extends
      * 2) Match  - Each product option is displayed as select field.
      *             User selects the values and we match them to variant.
      */
-    const VARIANT_SELECTION_CHOICE = 'choice';
-    const VARIANT_SELECTION_MATCH = 'match';
+    public const VARIANT_SELECTION_CHOICE = 'choice';
+    public const VARIANT_SELECTION_MATCH = 'match';
 
     /**
      * @return string

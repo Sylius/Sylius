@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ShopBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
@@ -21,7 +23,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 final class AccountMenuBuilder
 {
-    const EVENT_NAME = 'sylius.menu.shop.account';
+    public const EVENT_NAME = 'sylius.menu.shop.account';
 
     /**
      * @var FactoryInterface

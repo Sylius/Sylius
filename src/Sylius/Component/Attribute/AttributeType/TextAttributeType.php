@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Attribute\AttributeType;
 
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
@@ -23,7 +25,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
  */
 final class TextAttributeType implements AttributeTypeInterface
 {
-    const TYPE = 'text';
+    public const TYPE = 'text';
 
     /**
      * {@inheritdoc}

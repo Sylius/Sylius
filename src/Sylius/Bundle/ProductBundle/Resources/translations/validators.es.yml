@@ -8,6 +8,7 @@ sylius:
             unique: El SKU del producto debe ser único.
         slug:
             not_blank: Por favor, introduzca un slug de producto.
+            unique: El slug del producto debe ser único.
         code:
             not_blank: Por favor introduzca el código de producto.
             regex: El código de producto solo puede contener letras, números, guiones y guiones bajos.
@@ -52,4 +53,4 @@ sylius:
         code:
             not_blank: Por favor, introduzca el código del tipo de asociación.
             regex: El código de tipo de asociación solo puede contener letras, números, guiones y guiones bajos.
-            unique: El tipo de asociación con el código dado ya existe.
+            unique: Ya existe un tipo de asociación con ese código.

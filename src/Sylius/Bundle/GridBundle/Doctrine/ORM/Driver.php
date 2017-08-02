@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\GridBundle\Doctrine\ORM;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
@@ -20,7 +22,7 @@ use Sylius\Component\Grid\Parameters;
  */
 final class Driver implements DriverInterface
 {
-    const NAME = 'doctrine/orm';
+    public const NAME = 'doctrine/orm';
 
     /**
      * @var ManagerRegistry

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Order\Factory;
 
 use PhpSpec\ObjectBehavior;
@@ -53,7 +55,7 @@ final class OrderItemUnitFactorySpec extends ObjectBehavior
         $this->createForItem($orderItem)->shouldBeSameAs($orderItemUnit);
     }
 
-    public function getMatchers()
+    public function getMatchers(): array
     {
         return [
             'beSameAs' => function ($subject, $key) {

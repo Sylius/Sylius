@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Model;
 
 /**
@@ -20,7 +22,7 @@ class ProductTaxon implements ProductTaxonInterface
      * @var mixed
      */
     protected $id;
-    
+
     /**
      * @var ProductInterface
      */
@@ -35,7 +37,7 @@ class ProductTaxon implements ProductTaxonInterface
      * @var int
      */
     protected $position;
- 
+
     /**
      * {@inheritdoc}
      */
@@ -43,7 +45,7 @@ class ProductTaxon implements ProductTaxonInterface
     {
         return $this->id;
     }
-    
+
     /**
      * {@inheritdoc}
      */

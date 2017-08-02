@@ -11,7 +11,6 @@ sylius:
             last_name: Презиме
             phone_number: Број телефона
             postcode: Поштански број
-            street: Улица
             province: Провинција
         country:
             add_province: Додај провинцију

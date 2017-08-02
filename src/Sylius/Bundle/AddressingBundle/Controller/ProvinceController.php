@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\AddressingBundle\Controller;
 
 use FOS\RestBundle\View\View;
@@ -19,6 +21,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
@@ -30,12 +33,12 @@ class ProvinceController extends ResourceController
     /**
      * @param Request $request
      *
-     * @return JsonResponse
+     * @return Response
      *
      * @throws AccessDeniedException
      * @throws NotFoundHttpException
      */
-    public function choiceOrTextFieldFormAction(Request $request)
+    public function choiceOrTextFieldFormAction(Request $request): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
@@ -84,7 +87,7 @@ class ProvinceController extends ResourceController
      *
      * @return FormInterface
      */
-    protected function createProvinceChoiceForm(CountryInterface $country)
+    protected function createProvinceChoiceForm(CountryInterface $country): FormInterface
     {
         return $this->get('form.factory')->createNamed('sylius_address_province', ProvinceCodeChoiceType::class, null, [
             'country' => $country,
@@ -96,7 +99,7 @@ class ProvinceController extends ResourceController
     /**
      * @return FormInterface
      */
-    protected function createProvinceTextForm()
+    protected function createProvinceTextForm(): FormInterface
     {
         return $this->get('form.factory')->createNamed('sylius_address_province', TextType::class, null, [
             'required' => false,

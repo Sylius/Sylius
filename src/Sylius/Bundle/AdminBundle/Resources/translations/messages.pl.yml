@@ -7,10 +7,10 @@ sylius:
             main:
                 catalog:
                     association_types: Typy powiązań
-                    attributes: Cechy
+                    attributes: Atrybuty
                     header: Katalog
                     inventory: Zapasy
-                    options: Warianty
+                    options: Opcje
                     products: Produkty
                     taxons: Taksonomie
                 configuration:
@@ -18,12 +18,12 @@ sylius:
                     channels: Kanały
                     countries: Kraje
                     currencies: Waluty
-                    exchange_rates: Kursy wymiany walut
+                    exchange_rates: Kursy walut
                     header: Konfiguracja
                     locales: Ustawienia regionalne
                     payment_methods: Metody płatności
                     shipping_categories: Kategorie wysyłki
-                    shipping_methods: Sposób wysyłki
+                    shipping_methods: Metody wysyłki
                     tax_categories: Kategorie podatkowe
                     tax_rates: Stawki podatkowe
                     zones: Strefy

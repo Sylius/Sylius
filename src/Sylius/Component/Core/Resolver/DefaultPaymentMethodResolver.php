@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Resolver;
 
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -47,12 +49,12 @@ class DefaultPaymentMethodResolver implements DefaultPaymentMethodResolverInterf
 
         /** @var ChannelInterface $channel */
         $channel = $subject->getOrder()->getChannel();
-        
+
         $paymentMethods = $this->paymentMethodRepository->findEnabledForChannel($channel);
         if (empty($paymentMethods)) {
             throw new UnresolvedDefaultPaymentMethodException();
         }
-        
+
         return $paymentMethods[0];
     }
 }

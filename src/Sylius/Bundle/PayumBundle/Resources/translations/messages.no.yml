@@ -8,4 +8,13 @@ sylius:
         gateway_configuration:
             paypal:
                 password: Passord
+                signature: Signatur
                 username: Brukernavn
+                sandbox: Sandkasse
+            stripe:
+                publishable_key: Offentlig nøkkel
+                secret_key: Hemmelig nøkkel
+    payum_gateway_factory:
+        offline: Offline
+        paypal_express_checkout: Paypal express
+        stripe_checkout: Stripe

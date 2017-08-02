@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Page\Admin\Promotion;
 
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
@@ -76,7 +78,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function setStartsAt(\DateTime $dateTime)
+    public function setStartsAt(\DateTimeInterface $dateTime)
     {
         $timestamp = $dateTime->getTimestamp();
 
@@ -87,7 +89,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function setEndsAt(\DateTime $dateTime)
+    public function setEndsAt(\DateTimeInterface $dateTime)
     {
         $timestamp = $dateTime->getTimestamp();
 
@@ -98,7 +100,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasStartsAt(\DateTime $dateTime)
+    public function hasStartsAt(\DateTimeInterface $dateTime)
     {
         $timestamp = $dateTime->getTimestamp();
 
@@ -109,7 +111,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasEndsAt(\DateTime $dateTime)
+    public function hasEndsAt(\DateTimeInterface $dateTime)
     {
         $timestamp = $dateTime->getTimestamp();
 

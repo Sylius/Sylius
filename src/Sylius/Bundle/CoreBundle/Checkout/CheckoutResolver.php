@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Checkout;
 
 use SM\Factory\FactoryInterface;
@@ -82,7 +84,7 @@ final class CheckoutResolver implements EventSubscriberInterface
         /** @var OrderInterface $order */
         $order = $this->cartContext->getCart();
         if ($order->isEmpty()) {
-            $event->setResponse(new RedirectResponse($this->urlGenerator->generate('sylius_shop_cart_summary')));
+            $event->setResponse(new RedirectResponse($this->urlGenerator->generateForCart()));
         }
 
         $stateMachine = $this->stateMachineFactory->get($order, $this->getRequestedGraph($request));

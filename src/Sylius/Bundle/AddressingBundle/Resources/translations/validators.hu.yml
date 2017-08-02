@@ -46,6 +46,8 @@ sylius:
             not_blank: Kérjük, írja be a tartomány/megye nevét.
             unique: A megye nevének egyedinek kell lennie.
     zone:
+        scope:
+            not_blank: Kérjük írja be az értéket.
         code:
             not_blank: Kérlek add meg a zóna kódot.
             regex: Övezet tagja kód csak álló betűket, számokat, kötőjelek és aláhúzásjelek tartalmazhat.

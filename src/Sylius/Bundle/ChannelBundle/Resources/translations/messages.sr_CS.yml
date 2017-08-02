@@ -4,4 +4,7 @@
 sylius:
     form:
         channel:
+            color: Boja
+            description: Opis
+            enabled: Omogućeno
             name: Ime

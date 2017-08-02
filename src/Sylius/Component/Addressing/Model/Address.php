@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Addressing\Model;
 
 use Sylius\Component\Resource\Model\TimestampableTrait;
@@ -26,52 +28,52 @@ class Address implements AddressInterface
     protected $id;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $firstName;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $lastName;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $phoneNumber;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $company;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $countryCode;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $provinceCode;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $provinceName;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $street;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $city;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $postcode;
 
@@ -91,7 +93,7 @@ class Address implements AddressInterface
     /**
      * {@inheritdoc}
      */
-    public function getFirstName()
+    public function getFirstName(): ?string
     {
         return $this->firstName;
     }
@@ -99,7 +101,7 @@ class Address implements AddressInterface
     /**
      * {@inheritdoc}
      */
-    public function setFirstName($firstName)
+    public function setFirstName(?string $firstName): void
     {
         $this->firstName = $firstName;
     }
@@ -107,7 +109,7 @@ class Address implements AddressInterface
     /**
      * {@inheritdoc}
      */
-    public function getLastName()
+    public function getLastName(): ?string
     {
         return $this->lastName;
     }
@@ -115,7 +117,7 @@ class Address implements AddressInterface
     /**
      * {@inheritdoc}
      */
-    public function setLastName($lastName)
+    public function setLastName(?string $lastName): void
     {
         $this->lastName = $lastName;
     }
@@ -123,7 +125,7 @@ class Address implements AddressInterface
     /**
      * {@inheritdoc}
      */
-    public function getFullName()
+    public function getFullName(): string
     {
         return trim(sprintf('%s %s', $this->firstName, $this->lastName));
     }
@@ -131,7 +133,7 @@ class Address implements AddressInterface
     /**
      * {@inheritdoc}
      */
-    public function getPhoneNumber()
+    public function getPhoneNumber(): ?string
     {
         return $this->phoneNumber;
     }
@@ -139,7 +141,7 @@ class Address implements AddressInterface
     /**
      * {@inheritdoc}
      */
-    public function setPhoneNumber($phoneNumber)
+    public function setPhoneNumber(?string $phoneNumber): void
     {
         $this->phoneNumber = $phoneNumber;
     }
@@ -147,7 +149,7 @@ class Address implements AddressInterface
     /**
      * {@inheritdoc}
      */
-    public function getCompany()
+    public function getCompany(): ?string
     {
         return $this->company;
     }
@@ -155,7 +157,7 @@ class Address implements AddressInterface
     /**
      * {@inheritdoc}
      */
-    public function setCompany($company)
+    public function setCompany(?string $company): void
     {
         $this->company = $company;
     }
@@ -163,7 +165,7 @@ class Address implements AddressInterface
     /**
      * {@inheritdoc}
      */
-    public function getCountryCode()
+    public function getCountryCode(): ?string
     {
         return $this->countryCode;
     }
@@ -171,7 +173,7 @@ class Address implements AddressInterface
     /**
      * {@inheritdoc}
      */
-    public function setCountryCode($countryCode = null)
+    public function setCountryCode(?string $countryCode): void
     {
         if (null === $countryCode) {
             $this->provinceCode = null;
@@ -183,7 +185,7 @@ class Address implements AddressInterface
     /**
      * {@inheritdoc}
      */
-    public function getProvinceCode()
+    public function getProvinceCode(): ?string
     {
         return $this->provinceCode;
     }
@@ -191,7 +193,7 @@ class Address implements AddressInterface
     /**
      * {@inheritdoc}
      */
-    public function setProvinceCode($provinceCode = null)
+    public function setProvinceCode(?string $provinceCode): void
     {
         if (null === $this->countryCode) {
             return;
@@ -203,7 +205,7 @@ class Address implements AddressInterface
     /**
      * {@inheritdoc}
      */
-    public function getProvinceName()
+    public function getProvinceName(): ?string
     {
         return $this->provinceName;
     }
@@ -211,7 +213,7 @@ class Address implements AddressInterface
     /**
      * {@inheritdoc}
      */
-    public function setProvinceName($provinceName = null)
+    public function setProvinceName(?string $provinceName): void
     {
         $this->provinceName = $provinceName;
     }
@@ -219,7 +221,7 @@ class Address implements AddressInterface
     /**
      * {@inheritdoc}
      */
-    public function getStreet()
+    public function getStreet(): ?string
     {
         return $this->street;
     }
@@ -227,7 +229,7 @@ class Address implements AddressInterface
     /**
      * {@inheritdoc}
      */
-    public function setStreet($street)
+    public function setStreet(?string $street): void
     {
         $this->street = $street;
     }
@@ -235,7 +237,7 @@ class Address implements AddressInterface
     /**
      * {@inheritdoc}
      */
-    public function getCity()
+    public function getCity(): ?string
     {
         return $this->city;
     }
@@ -243,7 +245,7 @@ class Address implements AddressInterface
     /**
      * {@inheritdoc}
      */
-    public function setCity($city)
+    public function setCity(?string $city): void
     {
         $this->city = $city;
     }
@@ -251,7 +253,7 @@ class Address implements AddressInterface
     /**
      * {@inheritdoc}
      */
-    public function getPostcode()
+    public function getPostcode(): ?string
     {
         return $this->postcode;
     }
@@ -259,7 +261,7 @@ class Address implements AddressInterface
     /**
      * {@inheritdoc}
      */
-    public function setPostcode($postcode)
+    public function setPostcode(?string $postcode): void
     {
         $this->postcode = $postcode;
     }

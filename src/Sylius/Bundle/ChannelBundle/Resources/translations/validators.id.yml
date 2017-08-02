@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    channel:
+        code:
+            not_blank: Silakan masukkan kode cabang.
+            regex: Kode cabang hanya boleh terdiri dari huruf, angka, tanda strip, dan garis bawah.
+            unique: Kode cabang harus unik.
+        name:
+            not_blank: Silakan masukkan nama cabang.

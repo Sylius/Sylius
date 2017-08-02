@@ -1,10 +1,10 @@
 Sylius\Component\Currency\Model\Currency:
     USD:
-        code: USD
+        code: "USD"
     EUR:
-        code: EUR
+        code: "EUR"
     GBP:
-        code: GBP
+        code: "GBP"
 
 Sylius\Component\Currency\Model\ExchangeRate:
     eur_gbp_exchange_rate:

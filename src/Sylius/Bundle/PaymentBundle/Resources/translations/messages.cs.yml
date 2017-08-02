@@ -29,4 +29,6 @@ sylius:
         payment_method:
             description: Popis
             enabled: Povoleno?
+            instructions: Instrukce
             name: Jméno
+            position: Pozice

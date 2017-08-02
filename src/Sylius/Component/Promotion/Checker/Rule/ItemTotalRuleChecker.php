@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Promotion\Checker\Rule;
 
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
@@ -18,7 +20,7 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
  */
 final class ItemTotalRuleChecker implements RuleCheckerInterface
 {
-    const TYPE = 'item_total';
+    public const TYPE = 'item_total';
 
     /**
      * {@inheritdoc}

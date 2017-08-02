@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ShopBundle\Tests\DependencyInjection;
 
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
@@ -61,6 +63,18 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
         $this->assertConfigurationIsInvalid([[
             'locale_switcher' => 12,
         ]]);
+    }
+
+    /**
+     * @test
+     */
+    public function it_has_default_configuration_for_firewall_context_name_node()
+    {
+        $this->assertProcessedConfigurationEquals(
+            [[]],
+            ['firewall_context_name' => 'shop'],
+            'firewall_context_name'
+        );
     }
 
     /**
