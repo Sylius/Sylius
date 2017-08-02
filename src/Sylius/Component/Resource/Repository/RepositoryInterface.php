@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Resource\Repository;
 
 use Doctrine\Common\Persistence\ObjectRepository;
@@ -20,8 +22,8 @@ use Sylius\Component\Resource\Model\ResourceInterface;
  */
 interface RepositoryInterface extends ObjectRepository
 {
-    const ORDER_ASCENDING = 'ASC';
-    const ORDER_DESCENDING = 'DESC';
+    public const ORDER_ASCENDING = 'ASC';
+    public const ORDER_DESCENDING = 'DESC';
 
     /**
      * @param array $criteria

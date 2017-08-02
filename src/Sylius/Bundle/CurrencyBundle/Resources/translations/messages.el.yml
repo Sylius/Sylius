@@ -4,5 +4,11 @@
 sylius:
     form:
         currency:
+            base: Βασικό νόμισμα
             code: Ονομασία
             enabled: Ενεργοποιημένο
+            exchange_rate: Ισοτιμία συναλλάγματος
+        exchange_rate:
+            source_currency: Νόμισμα προέλευσης
+            target_currency: Νόμισμα προορισμού
+            ratio: Αναλογία

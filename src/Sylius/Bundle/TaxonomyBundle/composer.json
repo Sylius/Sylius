@@ -20,7 +20,7 @@
         }
     ],
     "require": {
-        "php": "^5.6|^7.0",
+        "php": "^7.1",
 
         "stof/doctrine-extensions-bundle": "^1.2",
         "sylius/resource-bundle": "^1.0",
@@ -28,8 +28,8 @@
         "symfony/framework-bundle": "^3.2"
     },
     "require-dev": {
-        "doctrine/orm": "^2.5",
-        "phpspec/phpspec": "^3.2",
+        "doctrine/orm": "~2.5.0",
+        "phpspec/phpspec": "^4.0",
         "phpunit/phpunit": "^5.6",
         "incenteev/composer-parameter-handler": "^2.1"
     },
@@ -63,7 +63,7 @@
         ],
         "test": [
             "@composer validate --strict",
-            "Tests/Functional/bin/console cache:clear --ansi --no-interaction",
+            "Tests/Functional/bin/console cache:clear --no-warmup --ansi --no-interaction",
             "Tests/Functional/bin/console doctrine:database:create --if-not-exists --ansi --no-interaction",
             "Tests/Functional/bin/console doctrine:schema:update --force --ansi --no-interaction",
             "bin/phpunit --colors=always",

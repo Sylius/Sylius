@@ -1,0 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    customer:
+        register: 'Kayıt için teşekkür ederiz, hesabınızı doğrulamak için e-postanızı kontrol edin.'

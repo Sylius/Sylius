@@ -4,11 +4,28 @@
 sylius:
     form:
         product:
+            name: Име
+            description: Описание
+            attributes: Атрибути
             options: Опцйи
+            meta_keywords: Мета ключови думи
+            meta_description: Мета описание
+            slug: Слъг
+            taxons: Категории
+        product_variant:
+            name: Име
         association_type:
+            name: Име
             translations: Преводи
+        association:
+            type: Свързан тип
+            product: Свързан продукт
+        variant:
+            name: Име
         option:
+            name: Име
+            position: Позиция
             values: Възможни стойности
         option_value:
-            add_value: Добавяне на стойност
+            add_value: Добави стойност
             value: Стойност

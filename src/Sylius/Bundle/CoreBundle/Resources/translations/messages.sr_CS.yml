@@ -4,7 +4,13 @@
 sylius:
     form:
         block:
+            body: Sadržaj
             id: ID
+            title: Naslov
+        cart:
+            coupon: Kupon
+        checkout:
+            payment_method: Način plaćanja
         promotion:
             channels: Kanali
         promotion_action:
@@ -12,18 +18,77 @@ sylius:
                 product: Proizvod
         group:
             name: Ime
+            roles: Uloge
+        channel:
+            currency_base: Osnovna valuta
+            hostname: Hostname
+            locale_default: Podrazumevana vrednost
+            tax_zone_default: Podrazumevana poreska zona
+            taxonomies: Kategorizacija
+            theme: Tema
         image:
             type: Tip
         order_filter:
+            number: Broj
+            total_from: Od
+            total_to: Za
             payment_state: Stanje plaćanja
         page:
+            body: Sadržaj
             id: ID
+            title: Naslov
         product:
+            images: Slike
+            short_description: Kratak opis
+            variant_selection_method: Metod izbora varijante proizvoda
             channels: Kanali
+            enabled: Omogućeno
         product_filter:
             name: Ime
         product_variant:
             tax_category: Kategorija proizvoda
+        shipment_filter:
+            created_at_from: Od
+            created_at_to: Za
+        payment_filter:
+            created_at_from: Od
+            created_at_to: Za
+        shipping_method:
+            zone: Zona
+        taxon:
+            code: Kod
+            file: Izabеritе sliku
+            images: Slike
+        taxonomy:
+            file: Izabеritе sliku
+        user:
+            billing_address: Adresa za naplatu
+            enabled: Omogućeno
+            first_name: Ime
+            groups: Grupe
+            roles: Uloge
+            last_name: Prezime
+            password: Lozinka
+            shipping_address: Adresa dostave
+        user_filter:
+            query: Pretraga
+        variant:
+            depth: Dubina
+            height: Visina
+            on_hand: Zalihe
+            price: Cena
+            sku: SKU
+            weight: Težina
+            width: Širina
+        attribute:
+            product_attribute_value:
+                attribute: Atribut
+                value: Vrednost
+        guest:
+            email: E-mail
+        product_association:
+            product: Povezani proizvodi
+            type: Tipovi asocijacija
         product_association_type:
             name: Ime
         promotion_rule:
@@ -31,10 +96,17 @@ sylius:
                 products: Proizvodi
         payment_method:
             channels: Kanali
+        product_attribute:
+            position: Pozicija
     installer:
         extensions:
+            icu: ICU
+            json_encode: JSON
             "off": false
             "on": true
+            session_start: Sеsija
         settings:
+            any: bilo koji
             "off": false
             "on": true
+            timezone: vremenska zona

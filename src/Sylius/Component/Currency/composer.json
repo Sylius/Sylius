@@ -20,14 +20,14 @@
         }
     ],
     "require": {
-        "php": "^5.6|^7.0",
+        "php": "^7.1",
 
         "sylius/resource": "^1.0",
         "symfony/intl": "^3.2",
         "zendframework/zend-stdlib": "^3.1"
     },
     "require-dev": {
-        "phpspec/phpspec": "^3.2"
+        "phpspec/phpspec": "^4.0"
     },
     "config": {
         "bin-dir": "bin"

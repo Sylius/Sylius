@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ResourceBundle\Routing;
 
 use PhpSpec\ObjectBehavior;
@@ -237,6 +239,7 @@ alias: sylius.product_option
 identifier: code
 criteria: 
     code: \$code
+filterable: true
 EOT;
 
         $showDefaults = [
@@ -246,6 +249,7 @@ EOT;
                 'criteria' => [
                     'code' => '$code',
                 ],
+                'filterable' => true,
             ],
         ];
         $routeFactory->createRoute('/product-options/{code}', $showDefaults, [], [], '', [], ['GET'])->willReturn($showRoute);
@@ -257,7 +261,8 @@ EOT;
                 'permission' => false,
                 'criteria' => [
                     'code' => '$code',
-                ]
+                ],
+                'filterable' => true,
             ],
         ];
         $routeFactory->createRoute('/product-options/', $indexDefaults, [], [], '', [], ['GET'])->willReturn($indexRoute);
@@ -269,7 +274,8 @@ EOT;
                 'permission' => false,
                 'criteria' => [
                     'code' => '$code',
-                ]
+                ],
+                'filterable' => true,
             ],
         ];
         $routeFactory->createRoute('/product-options/new', $createDefaults, [], [], '', [], ['GET', 'POST'])->willReturn($createRoute);
@@ -282,6 +288,7 @@ EOT;
                 'criteria' => [
                     'code' => '$code',
                 ],
+                'filterable' => true,
             ],
         ];
         $routeFactory->createRoute('/product-options/{code}/edit', $updateDefaults, [], [], '', [], ['GET', 'PUT', 'PATCH'])->willReturn($updateRoute);
@@ -294,6 +301,7 @@ EOT;
                 'criteria' => [
                     'code' => '$code',
                 ],
+                'filterable' => true,
             ],
         ];
         $routeFactory->createRoute('/product-options/{code}', $deleteDefaults, [], [], '', [], ['DELETE'])->willReturn($deleteRoute);

@@ -2,14 +2,92 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    channel:
+        base_currency:
+            not_blank: Vennligst oppgi kanalens standardvaluta.
+        default_locale:
+            not_blank: Vennligst oppgi kanalens standard språk.
+        contact_email:
+            invalid: Ugyldig epostadresse.
+            max: E-post må ikke være lengre enn {{ limit }} tegn.
+            min: E-post må være minst {{ limit }} tegn.
+    channel_pricing:
+        price:
+            min: Pris må være minst {{ limit }}.
+            not_blank: Vennligst skriv inn prisen.
+    checkout:
+        shipping_method:
+            not_blank: Vennligst velg fraktmetode.
     contact:
         email:
+            invalid: Ugyldig epostadresse.
             not_blank: Skriv inn din e-post.
+        message:
+            not_blank: Vennligst skriv inn melding.
+    currency:
+        enabled:
+            cannot_disable_base: Standardvalutaen kan ikke deaktiveres.
+    customer:
+        currency_code:
+            not_valid: Valutakoden du oppga er ugyldig.
+    cart_item:
+        not_available: '%itemName% har ikke tilstrekkelig lagerbeholdning.'
+    order:
+        currency_code:
+            not_valid: Valutakoden du oppga er ugyldig.
+        payment_method_eligibility: 'Betalingsmåten %paymentMethodName% er deaktivert. Vennligst velg en annen betalingsmåte.'
+        product_eligibility: 'Produktet %productName% er deaktivert.'
+        shipping_method_eligibility: 'Produktet passer ikke krav til %shippingMethodName% forsendelsesmåte. Vennligst velg en annen fraktmetode.'
     locale:
         code:
             not_blank: Angi språkskode.
             unique: Dette språket finnes allerede.
+        enabled:
+            cannot_disable_base: Standardspråk kan ikke deaktiveres.
+    product:
+        variants:
+            all_prices_defined: Du må definere produkt-variantenes priser for nylig tildelte kanaler først.
+    product_attribute:
+        invalid: Posisjon må være et heltall.
+    product_image:
+        file:
+            max_size: Bildet er for stort - {{ size }}{{ suffix }}. Maksimal tillatt størrelse er {{ limit }}{{ suffix }}.
+            upload_ini_size: Bildet er for stort. Maksimal tillatt størrelse er {{ limit }}{{ suffix }}.
     product_variant:
         onHand:
             min: Du må inneha mer enn {{ limit }}.
             not_blank: Vennlist angi din beholdning.
+        original_price:
+            min: Opprinnelig pris kan ikke være mindre enn null.
+        weight:
+            min: Vekten kan ikke være negativ.
+            invalid: Vekten må være et tall.
+        width:
+            min: Bredden kan ikke være negativ.
+            invalid: Bredden må være et tall.
+        height:
+            min: Høyden kan ikke være negativ.
+            invalid: Høyden må være et tall.
+        depth:
+            min: Dybde kan ikke være negativ.
+            invalid: Dybde må være et tall.
+        channel_pricing:
+            all_defined: 'Du må definere pris for hver kanal.'
+    product_translation:
+        short_description:
+            max: Kort beskrivelse må ikke være lenger enn {{ limit }} tegn.
+    taxon_image:
+        file:
+            max_size: Bildet er for stort - {{ size }}{{ suffix }}. Maksimal tillatt størrelse er {{ limit }}{{ suffix }}.
+            upload_ini_size: Bildet er for stort. Maksimal tillatt størrelse er {{ limit }}{{ suffix }}.
+    user:
+        email:
+            unique: Denne e-postadressen er allerede i bruk.
+            min: E-post må være minst {{ min }} tegn.
+            max: E-post må være maks {{ max }} tegn.
+            invalid: Ugyldig epostadresse.
+        username:
+            unique: Dette brukernavnet er allerede i bruk.
+            not_blank: Vennligst skriv inn ditt navn.
+        locale_code:
+            not_blank: Vennligst velg et språk.

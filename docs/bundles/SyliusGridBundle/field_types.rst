@@ -8,7 +8,7 @@ String
 
 Simplest column type, which basically renders the value at given path as a string.
 
-By default is uses the name of the field, but your can specify the path alternatively. For example:
+By default it uses the name of the field, but you can specify the path alternatively. For example:
 
 .. code-block:: yaml
 
@@ -59,6 +59,12 @@ You just have to specify the template and it will be rendered with the ``data`` 
                             template: :Grid/Column:_prettyName.html.twig
 
 In the ``:Grid/Column:_prettyName.html.twig`` template, you just need to render the value for example as you see below:
+
+.. code-block:: twig
+
+    <strong>{{ data }}</strong>
+
+If you wish to render more complex grid fields just redefine the path of the field to root – ``path: .`` in the yaml and you can access all attributes of the object instance:
 
 .. code-block:: twig
 

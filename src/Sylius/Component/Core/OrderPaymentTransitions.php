@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core;
 
 /**
@@ -16,14 +18,14 @@ namespace Sylius\Component\Core;
  */
 final class OrderPaymentTransitions
 {
-    const GRAPH = 'sylius_order_payment';
+    public const GRAPH = 'sylius_order_payment';
 
-    const TRANSITION_REQUEST_PAYMENT = 'request_payment';
-    const TRANSITION_PARTIALLY_PAY = 'partially_pay';
-    const TRANSITION_CANCEL = 'cancel';
-    const TRANSITION_PAY = 'pay';
-    const TRANSITION_PARTIALLY_REFUND = 'partially_refund';
-    const TRANSITION_REFUND = 'refund';
+    public const TRANSITION_REQUEST_PAYMENT = 'request_payment';
+    public const TRANSITION_PARTIALLY_PAY = 'partially_pay';
+    public const TRANSITION_CANCEL = 'cancel';
+    public const TRANSITION_PAY = 'pay';
+    public const TRANSITION_PARTIALLY_REFUND = 'partially_refund';
+    public const TRANSITION_REFUND = 'refund';
 
     private function __construct()
     {

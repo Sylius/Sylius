@@ -73,7 +73,7 @@ This interface can be applied to every code aware model and will ask you to impl
 SlugAwareInterface
 ------------------
 
-This interface is used by `sluggable Doctrine2 extension <https://github.com/Atlantic18/DoctrineExtensions/blob/master/doc/sluggable.md>`
+This interface is used by `sluggable Doctrine2 extension <https://github.com/Atlantic18/DoctrineExtensions/blob/master/doc/sluggable.md>`_
 and will ask you to implement the following methods to your model:
 
 +------------------------------------+------------------------------------------+-------------------+

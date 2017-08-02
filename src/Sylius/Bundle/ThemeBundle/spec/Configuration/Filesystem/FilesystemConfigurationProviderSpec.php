@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ThemeBundle\Configuration\Filesystem;
 
 use PhpSpec\ObjectBehavior;
@@ -18,7 +20,7 @@ use Sylius\Bundle\ThemeBundle\Configuration\Filesystem\FilesystemConfigurationPr
 use Sylius\Bundle\ThemeBundle\Locator\FileLocatorInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class FilesystemConfigurationProviderSpec extends ObjectBehavior
 {

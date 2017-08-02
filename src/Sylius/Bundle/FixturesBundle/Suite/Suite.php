@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\FixturesBundle\Suite;
 
 use Sylius\Bundle\FixturesBundle\Fixture\FixtureInterface;
@@ -16,7 +18,7 @@ use Sylius\Bundle\FixturesBundle\Listener\ListenerInterface;
 use Zend\Stdlib\SplPriorityQueue;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class Suite implements SuiteInterface
 {

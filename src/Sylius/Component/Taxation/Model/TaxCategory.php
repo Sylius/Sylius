@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Taxation\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -71,7 +73,7 @@ class TaxCategory implements TaxCategoryInterface
     /**
      * {@inheritdoc}
      */
-    public function getCode()
+    public function getCode(): ?string
     {
         return $this->code;
     }
@@ -79,7 +81,7 @@ class TaxCategory implements TaxCategoryInterface
     /**
      * {@inheritdoc}
      */
-    public function setCode($code)
+    public function setCode(?string $code): void
     {
         $this->code = $code;
     }

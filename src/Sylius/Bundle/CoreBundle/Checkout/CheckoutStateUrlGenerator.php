@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Checkout;
 
 use Sylius\Component\Core\Model\OrderInterface;
@@ -60,6 +62,17 @@ final class CheckoutStateUrlGenerator implements CheckoutStateUrlGeneratorInterf
 
         return $this->router->generate($this->routeCollection[$order->getCheckoutState()]['route'], $parameters, $referenceType);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function generateForCart($parameters = [], $referenceType = self::ABSOLUTE_PATH)
+    {
+        if (!isset($this->routeCollection['empty_order']['route'])) {
+            throw new RouteNotFoundException();
+        }
+
+        return $this->router->generate($this->routeCollection['empty_order']['route'], $parameters, $referenceType);    }
 
     /**
      * {@inheritdoc}

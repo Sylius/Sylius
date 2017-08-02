@@ -11,7 +11,7 @@ sylius:
             last_name: Efternavn
             phone_number: Telefonnummer
             postcode: Postnummer
-            street: Gade
+            street: Gade-/vejnavn
             province: Provins
             zone: Zone
         country:
@@ -22,6 +22,7 @@ sylius:
             enabled: Aktiveret
         province:
             name: Navn
+            abbreviation: Forkortelse
             select: Vælg
         zone:
             add_member: Tilføj medlem
@@ -33,6 +34,8 @@ sylius:
                 province: Provins
                 zone: Zone
             scope: Omfang
+            scopes:
+                all: Alle
             select: Vælg
             select_scope: Vælg omfang
         zone_member:

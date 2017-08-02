@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ThemeBundle\Controller;
 
 use PhpSpec\ObjectBehavior;
@@ -19,7 +21,7 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class ThemeScreenshotControllerSpec extends ObjectBehavior
 {
@@ -108,7 +110,7 @@ final class ThemeScreenshotControllerSpec extends ObjectBehavior
     /**
      * {@inheritdoc}
      */
-    public function getMatchers()
+    public function getMatchers(): array
     {
         return [
             'beBinaryFileResponseStreamingFile' => function (BinaryFileResponse $response, $file) {

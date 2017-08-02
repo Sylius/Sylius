@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Application;
 
 use PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer;
@@ -31,12 +33,12 @@ use Symfony\Component\HttpKernel\Kernel as HttpKernel;
  */
 class Kernel extends HttpKernel
 {
-    const VERSION = '1.0.0-beta.2';
-    const VERSION_ID = '10000';
-    const MAJOR_VERSION = '1';
-    const MINOR_VERSION = '0';
-    const RELEASE_VERSION = '0';
-    const EXTRA_VERSION = 'beta.2';
+    public const VERSION = '1.0.0-beta.3';
+    public const VERSION_ID = '10000';
+    public const MAJOR_VERSION = '1';
+    public const MINOR_VERSION = '0';
+    public const RELEASE_VERSION = '0';
+    public const EXTRA_VERSION = 'beta.3';
 
     /**
      * {@inheritdoc}
@@ -96,6 +98,11 @@ class Kernel extends HttpKernel
             new \Sylius\Bundle\PayumBundle\SyliusPayumBundle(), // must be added after PayumBundle.
             new \Sylius\Bundle\ThemeBundle\SyliusThemeBundle(), // must be added after FrameworkBundle
         ];
+
+        // Symfony 3.3 moved server:* commands to another bundle
+        if (class_exists(\Symfony\Bundle\WebServerBundle\WebServerBundle::class)) {
+            $bundles[] = new \Symfony\Bundle\WebServerBundle\WebServerBundle();
+        }
 
         if (in_array($this->getEnvironment(), ['dev', 'test', 'test_cached'], true)) {
             $bundles[] = new \Symfony\Bundle\DebugBundle\DebugBundle();

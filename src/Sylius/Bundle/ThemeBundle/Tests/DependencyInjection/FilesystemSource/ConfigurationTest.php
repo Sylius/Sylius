@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Tests\DependencyInjection\FilesystemSource;
 
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
@@ -16,7 +18,7 @@ use Sylius\Bundle\ThemeBundle\Configuration\Filesystem\FilesystemConfigurationSo
 use Sylius\Bundle\ThemeBundle\DependencyInjection\Configuration;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class ConfigurationTest extends \PHPUnit_Framework_TestCase
 {

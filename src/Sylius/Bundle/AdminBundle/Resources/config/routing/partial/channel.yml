@@ -7,3 +7,4 @@ sylius_admin_partial_channel_index:
             repository:
                 method: findAll
             template: $template
+            permission: true

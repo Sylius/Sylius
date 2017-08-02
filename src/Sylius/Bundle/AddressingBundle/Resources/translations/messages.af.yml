@@ -10,7 +10,6 @@ sylius:
             first_name: Naam
             last_name: Van
             postcode: Poskode
-            street: Straat
             province: Provinsie
         country:
             name: Naam

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
@@ -57,7 +59,7 @@ final class ProductTaxonContext implements Context
 
         $this->objectManager->flush($product);
     }
-    
+
     /**
      * @param TaxonInterface $taxon
      * @param ProductInterface $product

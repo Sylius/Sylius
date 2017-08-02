@@ -3,6 +3,10 @@
 
 sylius:
     taxon:
+        code:
+            not_blank: Angi taksonomikode.
+            regex: Taxonomikoden kan kun bestå av bokstaver, tall, bindestrek og understrek.
+            unique: Taxonomi med angitt kode finnes allerede.
         name:
             max_length: Taksonominavn kan ikke være lengre enn 255 tegn.
             not_blank: Angi taksonominavn.

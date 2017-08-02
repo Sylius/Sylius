@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Currency\Model;
 
 use Sylius\Component\Resource\Model\TimestampableTrait;
@@ -63,7 +65,7 @@ class Currency implements CurrencyInterface
     /**
      * {@inheritdoc}
      */
-    public function getCode()
+    public function getCode(): ?string
     {
         return $this->code;
     }
@@ -71,7 +73,7 @@ class Currency implements CurrencyInterface
     /**
      * {@inheritdoc}
      */
-    public function setCode($code)
+    public function setCode(?string $code): void
     {
         $this->code = $code;
     }

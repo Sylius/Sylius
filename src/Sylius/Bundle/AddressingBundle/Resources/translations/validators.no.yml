@@ -9,6 +9,7 @@ sylius:
             not_blank: Vennligst oppgi bynavn.
         country:
             not_blank: Vennligst velg land.
+            disabled: Valgt land er deaktivert. Vennligst velg et annet.
         first_name:
             max_length: Fornavn må ikke inneholde mer enn 255 tegn|Fornavn må ikke inneholde mer enn 255 tegn.
             min_length: Fornavn må inneholde minst to tegn|Fornavn må inneholde minst to tegn.

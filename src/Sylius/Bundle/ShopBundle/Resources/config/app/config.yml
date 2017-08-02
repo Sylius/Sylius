@@ -18,6 +18,8 @@ sylius_shop:
     checkout_resolver:
         pattern: /checkout/.+
         route_map:
+            empty_order:
+                route: sylius_shop_cart_summary
             cart:
                 route: sylius_shop_checkout_address
             addressed:

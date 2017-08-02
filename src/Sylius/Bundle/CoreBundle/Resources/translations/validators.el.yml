@@ -1,0 +1,94 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    channel:
+        base_currency:
+            not_blank: Παρακαλώ εισάγετε το βασικό νόμισμα του καναλιού.
+        default_locale:
+            not_blank: Παρακαλώ εισάγετε τις προεπιλεγμένες τοπικές ρυθμίσεις του καναλιού.
+        contact_email:
+            invalid: Αυτό το email δεν είναι έγκυρο.
+            max: Το email δεν μπορεί να έχει μεγαλύτερο μήκος από {{ limit }} χαρακτήρες.
+            min: Το email πρέπει να έχει μήκος τουλάχιστον {{ limit }} χαρακτήρες.
+    channel_pricing:
+        price:
+            min: Η τιμή πρέπει να έχει μήκος τουλάχιστον {{ limit }} χαρακτήρες.
+            not_blank: Παρακαλώ εισάγετε την τιμή.
+    checkout:
+        shipping_method:
+            not_blank: Παρακαλώ επιλέξτε μέθοδο αποστολής.
+    contact:
+        email:
+            invalid: Αυτό το email δεν είναι έγκυρο.
+            not_blank: Παρακαλώ εισάγετε το email σας.
+        message:
+            not_blank: Παρακαλώ εισάγετε το μήνυμά σας.
+    currency:
+        enabled:
+            cannot_disable_base: Το βασικό νόμισμα δεν μπορεί να απενεργοποιηθεί.
+    customer:
+        currency_code:
+            not_valid: Ο κωδικός νομίσματος που εισάγατε δεν είναι έγκυρος.
+    cart_item:
+        not_available: '%itemName% δεν έχει επαρκές απόθεμα.'
+    order:
+        currency_code:
+            not_valid: Ο κωδικός νομίσματος που εισάγατε δεν είναι έγκυρος.
+        payment_method_eligibility: 'Η %paymentMethodName% μέθοδος πληρωμής έχει απενεργοποιηθεί. Παρακαλώ επιλέξτε ξανά τη μέθοδο πληρωμής σας.'
+        product_eligibility: 'Αυτό το προϊόν %productName% έχει απενεργοποιηθεί.'
+        shipping_method_eligibility: 'Το προϊόν δεν ανταποκρίνεται στις απαιτήσεις για την μέθοδο αποστολής %shippingMethodName%. Παρακαλώ επιλέξτε ξανά τη μέθοδο αποστολής σας.'
+    locale:
+        code:
+            not_blank: Εισάγετε τον κωδικό περιοχής.
+            unique: Αυτές οι τοπικές ρυθμίσεις υπάρχουν ήδη.
+        enabled:
+            cannot_disable_base: Οι βασικές τοπικές ρυθμίσεις δεν μπορούν να απενεργοποιηθούν.
+    product:
+        variants:
+            all_prices_defined: Πρέπει πρώτα να ορίσετε τιμές για τις παραλλαγές του προϊόντος για τα νέα κανάλια.
+    product_attribute:
+        invalid: Η θέση πρέπει να είναι ακέραιος αριθμός.
+    product_image:
+        file:
+            max_size: Η εικόνα είναι πολύ μεγάλη - {{ size }}{{ suffix }}. Το μέγιστο επιτρεπόμενο μέγεθος είναι {{ limit }}{{ suffix }}.
+            upload_ini_size: Η εικόνα είναι πολύ μεγάλη. Το μέγιστο επιτρεπόμενο μέγεθος είναι {{ limit }}{{ suffix }}.
+    product_variant:
+        onHand:
+            min: Το απόθεμα πρέπει να είναι μεγαλύτερο από {{ limit }}.
+            not_blank: Παρακαλώ εισάγετε το απόθεμα.
+            reserved: Το απόθεμα θα πρέπει να είναι μεγαλύτερο από τα είδη σε κράτηση
+        original_price:
+            min: Η αρχική τιμή δεν πρέπει να είναι αρνητική.
+        weight:
+            min: Το βάρος δεν μπορεί να είναι αρνητικό.
+            invalid: Το βάρος πρέπει να είναι αριθμός.
+        width:
+            min: Το πλάτος δεν μπορεί να είναι αρνητικό.
+            invalid: Το πλάτος πρέπει να είναι αριθμός.
+        height:
+            min: Το ύψος δεν μπορεί να είναι αρνητικό.
+            invalid: Το ύψος πρέπει να είναι αριθμός.
+        depth:
+            min: Το βάθος δεν μπορεί να είναι αρνητικό.
+            invalid: Το βάθος πρέπει να είναι αριθμός.
+        channel_pricing:
+            all_defined: 'Πρέπει να καθορίσετε τιμή για κάθε κανάλι.'
+    product_translation:
+        short_description:
+            max: Η σύντομη περιγραφή δεν πρέπει να είναι μεγαλύτερη από {{ limit }} χαρακτήρες.
+    taxon_image:
+        file:
+            max_size: Η εικόνα είναι πολύ μεγάλη - {{ size }}{{ suffix }}. Το μέγιστο επιτρεπόμενο μέγεθος είναι {{ limit }}{{ suffix }}.
+            upload_ini_size: Η εικόνα είναι πολύ μεγάλη. Το μέγιστο επιτρεπόμενο μέγεθος είναι {{ limit }}{{ suffix }}.
+    user:
+        email:
+            unique: Αυτό το email χρησιμοποιείται ήδη.
+            min: Το email πρέπει να έχει μήκος τουλάχιστον {{ min }} χαρακτήρες.
+            max: Το email πρέπει να έχει μήκος το μεγαλύτερο {{ max }} χαρακτήρες.
+            invalid: Αυτό το email δεν είναι έγκυρο.
+        username:
+            unique: Αυτό το όνομα χρήστη χρησιμοποιείται ήδη.
+            not_blank: Παρακαλώ εισάγετε το όνομά σας.
+        locale_code:
+            not_blank: Παρακαλώ επιλέξτε τις τοπικές ρυθμίσεις.

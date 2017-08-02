@@ -1,0 +1,17 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    resource:
+        create: '%resource% е създаден успешно.'
+        update: '%resource% е актуализиран успешно.'
+        delete: '%resource% е изтрит успешно.'
+        move: '%resource% е преместен успешно.'
+        generate: '%resource% е успешно генериран.'
+        revert: '%resource% е върнат успешно.'
+        restore_deleted: '%resource% е възстановен успешно.'
+        enable: '%resource% е включен успешно.'
+        disable: '%resource% е изключен успешно.'
+        delete_error: 'Не може да изтриете, %resource% той се използва.'
+        race_condition_error: 'Не може да се актуализира, %resource% е бил променен преди това.'
+        something_went_wrong_error: 'Нещо се обърка, моля, опитайте отново.'

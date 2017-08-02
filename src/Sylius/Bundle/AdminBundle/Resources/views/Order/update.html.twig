@@ -3,7 +3,7 @@
 {% import 'SyliusUiBundle:Macro:headers.html.twig' as headers %}
 {% import 'SyliusUiBundle:Macro:buttons.html.twig' as buttons %}
 
-{% block title %}{{ parent() }} {{ 'sylius.ui.edit_order'|trans ~' #'~ order.number }}{% endblock %}
+{% block title %}{{ 'sylius.ui.edit_order'|trans ~' #'~ order.number }} {{ parent() }}{% endblock %}
 
 {% form_theme form 'SyliusUiBundle:Form:theme.html.twig' %}
 

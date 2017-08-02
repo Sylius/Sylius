@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Registry;
 
 require_once __DIR__.'/Fixture/SampleServiceInterface.php';

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Configuration\Test;
 
 use Sylius\Bundle\ThemeBundle\Configuration\ConfigurationSourceFactoryInterface;
@@ -19,7 +21,7 @@ use Symfony\Component\DependencyInjection\Parameter;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class TestConfigurationSourceFactory implements ConfigurationSourceFactoryInterface
 {

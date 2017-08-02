@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\AddressingBundle\Validator\Constraints;
 
 use Sylius\Component\Addressing\Model\AddressInterface;
@@ -44,7 +46,7 @@ class ProvinceAddressConstraintValidator extends ConstraintValidator
     /**
      * {@inheritdoc}
      */
-    public function validate($value, Constraint $constraint)
+    public function validate($value, Constraint $constraint): void
     {
         if (!$value instanceof AddressInterface) {
             throw new \InvalidArgumentException(
@@ -70,7 +72,7 @@ class ProvinceAddressConstraintValidator extends ConstraintValidator
      *
      * @return bool
      */
-    protected function isProvinceValid(AddressInterface $address)
+    protected function isProvinceValid(AddressInterface $address): bool
     {
         $countryCode = $address->getCountryCode();
         if (null === $country = $this->countryRepository->findOneBy(['code' => $countryCode])) {

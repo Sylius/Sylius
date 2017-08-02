@@ -28,11 +28,14 @@ sylius:
             contact_email: Email de contact
             currencies: Devises
             currency_base: Devise de référence
+            account_verification_required: La vérification des comptes est-elle requise ?
             hostname: Nom d'hôte
             locale_default: Paramètres régionaux par défaut
             locales: Locales
             payment_methods: Moyens de paiement
             shipping_methods: Modes de livraison
+            skipping_shipping_step_allowed: Ignorez l’étape expédition si un seul mode de livraison est disponible ?
+            skipping_payment_step_allowed: Ignorez l’étape paiement si un seul mode de paiement est disponible ?
             tax_calculation_strategy: Stratégie de calcul de la TVA
             tax_zone_default: Zone de taxe par défaut
             taxonomies: Taxonomies
@@ -107,6 +110,7 @@ sylius:
             on_hand: Stock actuel
             price: Prix
             sku: Référence
+            shipping_required: Expédition requise ?
             weight: Poids
             width: Largeur
         attribute:

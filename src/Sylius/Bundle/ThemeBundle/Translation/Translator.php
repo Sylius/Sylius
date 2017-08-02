@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Translation;
 
 use Sylius\Bundle\ThemeBundle\Translation\Provider\Loader\TranslatorLoaderProviderInterface;
@@ -18,7 +20,7 @@ use Symfony\Component\Translation\MessageSelector;
 use Symfony\Component\Translation\Translator as BaseTranslator;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class Translator extends BaseTranslator implements WarmableInterface
 {
@@ -138,7 +140,7 @@ final class Translator extends BaseTranslator implements WarmableInterface
      */
     private function getLocaleModifier($locale)
     {
-        $modifier = strrchr($locale, '@');
+        $modifier = strrchr((string) $locale, '@');
 
         return $modifier ?: '';
     }

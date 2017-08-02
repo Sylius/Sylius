@@ -4,12 +4,16 @@
 sylius:
     taxon:
         code:
-            not_blank: Por favor digite o código da taxa.
-            unique: Taxa com determinado código já existe.
+            not_blank: Por favor digite o código da Categoria.
+            regex: O código da Categoria só pode conter letras, números, hifens e sublinhados.
+            unique: Categoria com determinado código já existe.
         name:
             max_length: Nome da taxonomia não deve ser maior que 255 caracteres.
-            not_blank: Por favor, digite o nome das taxas.
+            not_blank: Por favor, digite o nome da Categoria.
+        slug:
+            not_blank: Por favor, digite o slug da Categoria.
+            unique: Slug da Categoria deve ser único.
     taxonomy:
         name:
-            max_length: Nome da taxonomia não deve ser maior que 255 caracteres.
-            not_blank: Por favor, digite o nome de taxonomia.
+            max_length: Nome da Categoria não deve ser maior que 255 caracteres.
+            not_blank: Por favor, digite o nome de Categoria.

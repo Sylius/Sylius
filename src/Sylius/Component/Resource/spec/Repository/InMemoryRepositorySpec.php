@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Resource\Repository;
 
 use Pagerfanta\Pagerfanta;
@@ -86,9 +88,17 @@ final class InMemoryRepositorySpec extends ObjectBehavior
         $this->findOneBy(['id' => 5])->shouldReturn(null);
     }
 
-    function it_throws_unsupported_method_exception_while_using_find()
+    function it_finds_object_by_id(SampleBookResourceInterface $monocle)
     {
-        $this->shouldThrow(UnsupportedMethodException::class)->during('find', []);
+        $monocle->getId()->willReturn(2);
+
+        $this->add($monocle);
+        $this->find(2)->shouldReturn($monocle);
+    }
+
+    function it_returns_null_if_cannot_find_object_by_id()
+    {
+        $this->find(2)->shouldReturn(null);
     }
 
     function it_returns_all_objects_when_finding_by_an_empty_parameter_array(

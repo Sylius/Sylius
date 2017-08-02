@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
 use Sylius\Bundle\LocaleBundle\Form\Type\LocaleType;
@@ -22,7 +24,7 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Intl\Intl;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class LocaleTypeExtension extends AbstractTypeExtension
 {

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Page;
 
 use Behat\Mink\Driver\DriverInterface;
@@ -20,7 +22,7 @@ use Behat\Mink\Selector\SelectorsHandler;
 use Behat\Mink\Session;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 abstract class Page implements PageInterface
 {

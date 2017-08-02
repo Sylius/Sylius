@@ -1,0 +1,42 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        rule:
+            unit_count_configuration:
+                count: 總計
+                equal: 等於
+            type: 規則類形
+        shipment:
+            state: 狀態
+            states:
+                checkout: 結帳
+                pending: 待處理
+                ready: 就緒
+                shipped: 已出貨
+                returned: 已退還
+                cancelled: 已取消
+            tracking_code: 追蹤代碼
+        shipping_calculator:
+            flat_rate_configuration:
+                label: 按次固定費率
+                amount: 金額
+            per_unit_rate_configuration:
+                label: 按件固定費率
+                amount: 金額
+        shipping_category:
+            description: 説明
+            name: 名稱
+        shipping_method:
+            calculator: 計算機
+            category: 類別
+            category_requirement: 類別需求
+            channels: 頻道
+            configuration: 配置
+            description: 説明
+            enabled: 啓用
+            name: 名稱
+            tax_category: 税别
+            translations: 翻譯
+            position: 位置

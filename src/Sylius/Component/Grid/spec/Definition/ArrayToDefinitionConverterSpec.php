@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Grid\Definition;
 
 use PhpSpec\ObjectBehavior;
@@ -123,15 +125,6 @@ final class ArrayToDefinitionConverterSpec extends ObjectBehavior
             ]
         ];
 
-        $this->convert('sylius_admin_tax_category', $definitionArray)->shouldBeSameGridAs($grid);
-    }
-
-    public function getMatchers()
-    {
-        return [
-            'beSameGridAs' => function ($subject, $key) {
-                return serialize($subject) === serialize($key);
-            },
-        ];
+        $this->convert('sylius_admin_tax_category', $definitionArray)->shouldBeLike($grid);
     }
 }

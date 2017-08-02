@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\FixturesBundle\Tests\Listener;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
@@ -16,7 +18,7 @@ use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
 use Sylius\Bundle\FixturesBundle\Listener\MongoDBPurgerListener;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class MongoDBPurgerListenerTest extends \PHPUnit_Framework_TestCase
 {

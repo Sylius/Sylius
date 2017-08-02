@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
 use Doctrine\Common\Persistence\ObjectManager;
@@ -402,6 +404,10 @@ class ResourceController extends Controller
         }
         if ($event->isStopped()) {
             $this->flashHelper->addFlashFromEvent($configuration, $event);
+
+            if ($event->hasResponse()) {
+                return $event->getResponse();
+            }
 
             return $this->redirectHandler->redirectToIndex($configuration, $resource);
         }

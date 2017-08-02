@@ -1,0 +1,46 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    address:
+        city:
+            max_length: 城市不能超過 255 個字元 |城市不能超過 255 個字元。
+            min_length: 城市必須至少 2 個字元長 |城市必須至少 2 個字元長。
+            not_blank: 請輸入城市。
+        country:
+            not_blank: 請選擇國家/地區。
+            disabled: 所選的國家目前不可用。請重新選擇。
+        first_name:
+            max_length: 名稱不得超過 255 個字元 |名稱不得超過 255 個字元。
+            min_length: 名稱必須至少 2 個字元長|名稱必須是至少 2 個字元長。
+            not_blank: 請輸入名字。
+        last_name:
+            max_length: 姓氏不得超過 255 個字元 |姓氏不得超過 255 個字元。
+            min_length: 姓氏必須至少 2 個字元長|姓氏必須是至少 2 個字元長。
+            not_blank: 請輸入姓氏。
+        postcode:
+            max_length: 郵遞區號必須少於 255 個字元 |郵遞區號不得超過 255 個字元。
+            min_length: 郵編必須至少 2 個字元長 |郵編必須至少 2 個字元長。
+            not_blank: 請輸入郵遞區號。
+        province:
+            valid: 請選擇正確的省份。
+        street:
+            max_length: 街道名稱不得超過 255 個字元 |街道名稱不得超過 255 個字元。
+            not_blank: 請輸入所在街道。
+        not_shippable: 此位址並非有效的送貨目的地。
+    country:
+        code:
+            not_blank: 請輸入國家/地區的 ISO 代碼。
+            unique: 國家 ISO 代碼必須是唯一的。
+    province:
+        name:
+            not_blank: 請輸入省份。
+    zone:
+        scope:
+            not_blank: 請輸入範圍。
+        code:
+            not_blank: 請輸入區號。
+        name:
+            not_blank: 請輸入區域名稱。
+    zone_member:
+        unique: 所選擇的區已在此一區域中。

@@ -9,12 +9,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Resource\Translation\Provider;
 
 use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class ImmutableTranslationLocaleProvider implements TranslationLocaleProviderInterface
 {

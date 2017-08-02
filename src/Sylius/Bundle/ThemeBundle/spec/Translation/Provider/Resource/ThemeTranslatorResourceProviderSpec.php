@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ThemeBundle\Translation\Provider;
 
 use PhpSpec\ObjectBehavior;
@@ -21,7 +23,7 @@ use Sylius\Bundle\ThemeBundle\Translation\Provider\Resource\TranslatorResourcePr
 use Sylius\Bundle\ThemeBundle\Translation\Resource\ThemeTranslationResource;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class ThemeTranslatorResourceProviderSpec extends ObjectBehavior
 {

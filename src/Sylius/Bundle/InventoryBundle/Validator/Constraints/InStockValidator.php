@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\InventoryBundle\Validator\Constraints;
 
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
@@ -63,7 +65,7 @@ final class InStockValidator extends ConstraintValidator
         if (!$this->availabilityChecker->isStockSufficient($stockable, $quantity)) {
             $this->context->addViolation(
                 $constraint->message,
-                ['%stockable%' => $stockable->getInventoryName()]
+                ['%itemName%' => $stockable->getInventoryName()]
             );
         }
     }

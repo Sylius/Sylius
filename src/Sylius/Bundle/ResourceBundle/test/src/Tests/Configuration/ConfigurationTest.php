@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\Tests;
 
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
@@ -16,7 +18,7 @@ use Sylius\Bundle\ResourceBundle\DependencyInjection\Configuration;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 class ConfigurationTest extends \PHPUnit_Framework_TestCase
 {

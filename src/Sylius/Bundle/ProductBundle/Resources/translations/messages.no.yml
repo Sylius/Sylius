@@ -6,17 +6,25 @@ sylius:
         product:
             name: Navn
             description: Beskrivelse
+            attributes: Egenskaper
             options: Instillinger
             meta_keywords: Meta nøkkelord
             meta_description: Metabeskrivelse
+            slug: Slug
+            taxons: Taksonomier
         product_variant:
             name: Navn
         association_type:
             name: Navn
+            translations: Oversettelser
+        association:
+            type: Relasjonstype
+            product: Relatert produkt
         variant:
             name: Navn
         option:
             name: Navn
+            position: Plassering
             values: Mulige verdier
         option_value:
             add_value: Legg til verdi

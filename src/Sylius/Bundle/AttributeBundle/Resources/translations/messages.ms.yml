@@ -5,3 +5,5 @@ sylius:
     form:
         attribute:
             type: Jenis
+        attribute_type:
+            select: Pilih

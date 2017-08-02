@@ -20,6 +20,8 @@ sylius:
         promotion_rule:
             cart_quantity_configuration:
                 count: Πλήθος
+            contains_product_configuration:
+                variants: Προϊόντα
             shipping_country_configuration:
                 country: Χώρα
             type: Τύπος

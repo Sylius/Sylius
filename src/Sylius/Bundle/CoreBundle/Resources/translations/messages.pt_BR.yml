@@ -28,11 +28,14 @@ sylius:
             contact_email: Email de contato
             currencies: Moedas
             currency_base: Moeda base
+            account_verification_required: A verificação da conta é requerida?
             hostname: Nome do host
             locale_default: Localidade padrão
             locales: Localidades
             payment_methods: Meios de pagamentos
             shipping_methods: Métodos de envio
+            skipping_shipping_step_allowed: Pular a etapa de seleção da forma de entrega se apenas uma forma de entrega está disponível?
+            skipping_payment_step_allowed: Pular a etapa de seleção do meio de pagamento se apenas um meio de pagamento está disponível?
             tax_calculation_strategy: Estratégia de cálculo de impostos
             tax_zone_default: Zona de imposto do padrão
             taxonomies: Taxonomias
@@ -107,6 +110,7 @@ sylius:
             on_hand: Estoque atual
             price: Preço
             sku: SKU
+            shipping_required: O envio é obrigatório?
             weight: Peso
             width: Largura
         attribute:
@@ -122,6 +126,7 @@ sylius:
             name: Nome
         promotion_filter:
             products: Filtro de Produtos
+            taxons: Filtro de taxonomias
         promotion_rule:
             customer_group:
                 group: Grupo de Cliente

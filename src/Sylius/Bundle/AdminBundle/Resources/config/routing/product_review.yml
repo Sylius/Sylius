@@ -2,6 +2,7 @@ sylius_admin_product_review:
     resource: |
         alias: sylius.product_review
         section: admin
+        permission: true
         templates: SyliusAdminBundle:Crud
         except: ['show', 'create']
         redirect: update
@@ -21,6 +22,7 @@ sylius_admin_product_review_accept:
     defaults:
         _controller: sylius.controller.product_review:applyStateMachineTransitionAction
         _sylius:
+            permission: true
             state_machine:
                 graph: sylius_product_review
                 transition: accept
@@ -33,6 +35,7 @@ sylius_admin_product_review_reject:
     defaults:
         _controller: sylius.controller.product_review:applyStateMachineTransitionAction
         _sylius:
+            permission: true
             state_machine:
                 graph: sylius_product_review
                 transition: reject

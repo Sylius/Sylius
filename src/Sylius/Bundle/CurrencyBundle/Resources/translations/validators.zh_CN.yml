@@ -6,6 +6,7 @@ sylius:
         code:
             exact_length: 币种代码必须正好 3 个字符长。
             not_blank: 请选择币种代码。
+            regex: 货币代码仅可以由字母、 数字、 破折号和下划线组成。
             unique: 币种代码必须是唯一的。
         exchange_rate:
             not_blank: 请输入汇率。

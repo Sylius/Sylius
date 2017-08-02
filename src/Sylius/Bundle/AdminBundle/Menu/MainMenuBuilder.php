@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\AdminBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
@@ -21,7 +23,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 final class MainMenuBuilder
 {
-    const EVENT_NAME = 'sylius.menu.admin.main';
+    public const EVENT_NAME = 'sylius.menu.admin.main';
 
     /**
      * @var FactoryInterface

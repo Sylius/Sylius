@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Resource\Generator;
 
 use PhpSpec\ObjectBehavior;
@@ -59,7 +61,7 @@ final class RandomnessGeneratorSpec extends ObjectBehavior
     /**
      * {@inheritdoc}
      */
-    public function getMatchers()
+    public function getMatchers(): array
     {
         return [
             'haveLength' => function($subject, $length) {

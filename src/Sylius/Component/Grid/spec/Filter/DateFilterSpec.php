@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Grid\Filter;
 
 use PhpSpec\ObjectBehavior;
@@ -50,13 +52,37 @@ final class DateFilterSpec extends ObjectBehavior
                 'from' => [
                     'date' => '2016-12-05',
                     'time' => '08:00',
+                ]
+            ],
+            []
+        );
+    }
+
+    function it_filters_date_from_not_inclusive(
+        DataSourceInterface $dataSource,
+        ExpressionBuilderInterface $expressionBuilder
+    ) {
+        $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
+
+        $expressionBuilder
+            ->greaterThan('checkoutCompletedAt', '2016-12-05 08:00')
+            ->shouldBeCalled()
+        ;
+
+        $this->apply(
+            $dataSource,
+            'checkoutCompletedAt',
+            [
+                'from' => [
+                    'date' => '2016-12-05',
+                    'time' => '08:00',
                 ],
                 'to' => [
                     'date' => '',
                     'time' => '',
                 ]
             ],
-            []
+            ['inclusive_from' => false]
         );
     }
 
@@ -103,6 +129,30 @@ final class DateFilterSpec extends ObjectBehavior
             $dataSource,
             'checkoutCompletedAt',
             [
+                'to' => [
+                    'date' => '2016-12-06',
+                    'time' => '08:00',
+                ]
+            ],
+            []
+        );
+    }
+
+    function it_filters_date_to_inclusive(
+        DataSourceInterface $dataSource,
+        ExpressionBuilderInterface $expressionBuilder
+    ) {
+        $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
+
+        $expressionBuilder
+            ->lessThanOrEqual('checkoutCompletedAt', '2016-12-06 08:00')
+            ->shouldBeCalled()
+        ;
+
+        $this->apply(
+            $dataSource,
+            'checkoutCompletedAt',
+            [
                 'from' => [
                     'date' => '',
                     'time' => '',
@@ -112,7 +162,7 @@ final class DateFilterSpec extends ObjectBehavior
                     'time' => '08:00',
                 ]
             ],
-            []
+            ['inclusive_to' => true]
         );
     }
 
@@ -131,10 +181,6 @@ final class DateFilterSpec extends ObjectBehavior
             $dataSource,
             'checkoutCompletedAt',
             [
-                'from' => [
-                    'date' => '',
-                    'time' => '',
-                ],
                 'to' => [
                     'date' => '2016-12-06',
                     'time' => '',

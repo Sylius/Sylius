@@ -5,7 +5,15 @@ sylius:
     form:
         user:
             email: Имейл
+            enabled: Активно
+            password:
+                label: Парола
+                confirmation: Проверка
+            remember_me: Запомни ме
+            shipping_address: Адрес за доставка
             username: Потребителско име
+        user_filter:
+            query: Търсене
         user_change_password:
             confirmation: Потвърждение
             current: Текуща парола

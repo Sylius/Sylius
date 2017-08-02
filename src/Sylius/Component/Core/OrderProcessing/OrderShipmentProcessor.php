@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\OrderProcessing;
 
 use Sylius\Component\Core\Model\OrderInterface;
@@ -66,6 +68,10 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
 
         if (null === $shipment) {
             return;
+        }
+
+        foreach ($shipment->getUnits() as $unit) {
+            $shipment->removeUnit($unit);
         }
 
         foreach ($order->getItemUnits() as $itemUnit) {

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Core\OrderProcessing;
 
 use Doctrine\Common\Collections\Collection;
@@ -80,6 +82,8 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
 
         $shipment->setOrder($order)->shouldBeCalled();
         $shipment->setMethod($defaultShippingMethod)->shouldBeCalled();
+
+        $shipment->getUnits()->willReturn([]);
         $shipment->addUnit($itemUnit1)->shouldBeCalled();
         $shipment->addUnit($itemUnit2)->shouldBeCalled();
 
@@ -153,6 +157,32 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
         $order->getShipments()->willReturn($shipments);
 
         $itemUnit->getShipment()->willReturn($shipment);
+
+        $shipment->getUnits()->willReturn([]);
+        $shipment->addUnit($itemUnitWithoutShipment)->shouldBeCalled();
+        $shipment->addUnit($itemUnit)->shouldNotBeCalled();
+
+        $this->process($order);
+    }
+
+    function it_removes_units_before_adding_new_ones(
+        OrderInterface $order,
+        ShipmentInterface $shipment,
+        Collection $shipments,
+        OrderItemUnitInterface $itemUnit,
+        OrderItemUnitInterface $itemUnitWithoutShipment
+    ) {
+        $shipments->first()->willReturn($shipment);
+
+        $order->isEmpty()->willReturn(false);
+        $order->hasShipments()->willReturn(true);
+        $order->getItemUnits()->willReturn([$itemUnit, $itemUnitWithoutShipment]);
+        $order->getShipments()->willReturn($shipments);
+
+        $itemUnit->getShipment()->willReturn($shipment);
+
+        $shipment->getUnits()->willReturn([$itemUnit]);
+        $shipment->removeUnit($itemUnit)->shouldBeCalled();
 
         $shipment->addUnit($itemUnitWithoutShipment)->shouldBeCalled();
         $shipment->addUnit($itemUnit)->shouldNotBeCalled();

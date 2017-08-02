@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    payment:
+        cancelled: 'Betalningen har avbrutits.'
+        completed: 'Betalningen har genomförts.'
+        failed: 'Betalningen har misslyckats.'
+        processing: 'Betalningen bearbetas.'
+        refunded: 'Betalningen har framgångsrikt återbetalats.'
+        unknown: 'Ett okänt problem uppstod med betalningen.'

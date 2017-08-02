@@ -8,4 +8,13 @@ sylius:
         gateway_configuration:
             paypal:
                 password: Slaptažodis
+                signature: Parašas
                 username: Vartotojo vardas
+                sandbox: Sandbox
+            stripe:
+                publishable_key: Viešas raktas
+                secret_key: Slaptas raktas
+    payum_gateway_factory:
+        offline: Neprisijungęs
+        paypal_express_checkout: PayPal greitas atsiskaitymas
+        stripe_checkout: Stripe atsiskaitymas

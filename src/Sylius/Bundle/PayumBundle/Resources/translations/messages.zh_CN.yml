@@ -8,6 +8,7 @@ sylius:
         gateway_configuration:
             paypal:
                 password: 密码
+                signature: 签名
                 username: 用户名
     payum_gateway_factory:
         offline: 现金支付

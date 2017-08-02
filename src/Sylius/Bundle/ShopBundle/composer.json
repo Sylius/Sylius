@@ -20,7 +20,7 @@
         }
     ],
     "require": {
-        "php": "^5.5.9|^7.0",
+        "php": "^7.1",
 
         "sonata-project/intl-bundle": "^2.2",
         "sylius/core-bundle": "^1.0",
@@ -31,7 +31,7 @@
         "matthiasnoback/symfony-config-test": "^2.0",
         "matthiasnoback/symfony-dependency-injection-test": "^1.0",
         "phpunit/phpunit": "^5.6",
-        "phpspec/phpspec": "^3.2"
+        "phpspec/phpspec": "^4.0"
     },
     "config": {
         "bin-dir": "bin"

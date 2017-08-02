@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\FixturesBundle\Listener;
 
 use PhpSpec\ObjectBehavior;
@@ -19,7 +21,7 @@ use Sylius\Bundle\FixturesBundle\Listener\ListenerRegistry;
 use Sylius\Bundle\FixturesBundle\Listener\ListenerRegistryInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class ListenerRegistrySpec extends ObjectBehavior
 {

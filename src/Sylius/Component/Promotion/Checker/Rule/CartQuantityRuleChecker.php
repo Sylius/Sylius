@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Promotion\Checker\Rule;
 
 use Sylius\Component\Promotion\Model\CountablePromotionSubjectInterface;
@@ -19,7 +21,7 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
  */
 final class CartQuantityRuleChecker implements RuleCheckerInterface
 {
-    const TYPE = 'cart_quantity';
+    public const TYPE = 'cart_quantity';
 
     /**
      * {@inheritdoc}

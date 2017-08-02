@@ -21,6 +21,3 @@ The **ChannelContext** allows you to manage the currently used sale channel.
    $channelContext->setChannel($channel);
 
    $channelContext->getChannel(); // will return the $channel object
-
-.. note::
-   This service implements :ref:`component_channel_context_channel-context-interface`.

@@ -7,5 +7,6 @@ sylius:
             description: Опис
             name: Назва
             parent: Батьківський об'єкт
+            slug: Слаґ
         taxonomy:
             name: Назва

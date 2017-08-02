@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\FixturesBundle\Listener;
 
 use Doctrine\Common\DataFixtures\Purger\MongoDBPurger;
@@ -17,7 +19,7 @@ use Doctrine\ODM\MongoDB\DocumentManager;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class MongoDBPurgerListener extends AbstractListener implements BeforeSuiteListenerInterface
 {

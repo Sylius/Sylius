@@ -3,8 +3,14 @@
 
 sylius:
     channel:
+        base_currency:
+            not_blank: 请输入销售渠道的基础货币。
+        default_locale:
+            not_blank: 请输入销售渠道默认区域设置。
         contact_email:
             invalid: 电子邮件无效。
+            max: 电子邮件必须不能超过 {{ limit }} 个字符。
+            min: 电子邮件至少{{limit}}个字符
     checkout:
         shipping_method:
             not_blank: 请选择配送方式。
@@ -27,4 +33,5 @@ sylius:
             max: 简短描述不能超过 {{ limit }} 个字符。
     user:
         email:
+            unique: 该电子邮件已被使用
             invalid: 电子邮件无效。

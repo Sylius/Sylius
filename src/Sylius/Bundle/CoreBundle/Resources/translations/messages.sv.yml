@@ -35,6 +35,7 @@ sylius:
             payment_methods: Betalningsmetoder
             shipping_methods: Leveransmetoder
             skipping_shipping_step_allowed: Hoppa över fraktsteget om endast en leveransmetod är tillgänglig?
+            skipping_payment_step_allowed: Hoppa över betalningssteget om endast en betalningsmetod är tillgänglig?
             tax_calculation_strategy: Skatteberäkningsstrategi
             tax_zone_default: Standardmomszon
             taxonomies: Taxonomier

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
 use Sylius\Component\Resource\Metadata\MetadataInterface;
@@ -96,7 +98,7 @@ class RequestConfiguration
      */
     public function getDefaultTemplate($name)
     {
-        $templatesNamespace = $this->metadata->getTemplatesNamespace();
+        $templatesNamespace = (string) $this->metadata->getTemplatesNamespace();
 
         if (false !== strpos($templatesNamespace, ':')) {
             return sprintf('%s:%s.%s', $templatesNamespace ?: ':', $name, 'twig');

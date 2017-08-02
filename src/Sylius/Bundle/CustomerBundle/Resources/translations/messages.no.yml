@@ -5,13 +5,20 @@ sylius:
     form:
         customer:
             first_name: Fornavn
+            group: Gruppe
             last_name: Etternavn
             email: E-post
             phone_number: Telefonnummer
+            gender: Kjønn
+            birthday: Fødselsdato
             billing_address: Fakturaadresse
             different_billing_address: Bruk annen adresse for fakturering?
+            only_customer_registration: Opprette konto?
+            subscribed_to_newsletter: Meld deg på nyhetsbrevet
         customer_group:
             name: Navn
             roles: Roller
     gender:
         unknown: Ukjent
+        male: Mann
+        female: Kvinne

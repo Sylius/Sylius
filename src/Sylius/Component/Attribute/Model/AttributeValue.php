@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Attribute\Model;
 
 use Webmozart\Assert\Assert;
@@ -60,12 +62,12 @@ class AttributeValue implements AttributeValueInterface
     private $float;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     private $datetime;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     private $date;
 
@@ -189,7 +191,7 @@ class AttributeValue implements AttributeValueInterface
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
     protected function getBoolean()
     {
@@ -197,7 +199,7 @@ class AttributeValue implements AttributeValueInterface
     }
 
     /**
-     * @param bool $boolean
+     * @param bool|null $boolean
      */
     protected function setBoolean($boolean)
     {
@@ -205,7 +207,7 @@ class AttributeValue implements AttributeValueInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     protected function getText()
     {
@@ -213,7 +215,7 @@ class AttributeValue implements AttributeValueInterface
     }
 
     /**
-     * @param string $text
+     * @param string|null $text
      */
     protected function setText($text)
     {
@@ -221,7 +223,7 @@ class AttributeValue implements AttributeValueInterface
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     protected function getInteger()
     {
@@ -229,7 +231,7 @@ class AttributeValue implements AttributeValueInterface
     }
 
     /**
-     * @param int $integer
+     * @param int|null $integer
      */
     protected function setInteger($integer)
     {
@@ -237,7 +239,7 @@ class AttributeValue implements AttributeValueInterface
     }
 
     /**
-     * @return float
+     * @return float|null
      */
     protected function getFloat()
     {
@@ -245,7 +247,7 @@ class AttributeValue implements AttributeValueInterface
     }
 
     /**
-     * @param float $float
+     * @param float|null $float
      */
     protected function setFloat($float)
     {
@@ -253,7 +255,7 @@ class AttributeValue implements AttributeValueInterface
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTimeInterface|null
      */
     protected function getDatetime()
     {
@@ -261,15 +263,15 @@ class AttributeValue implements AttributeValueInterface
     }
 
     /**
-     * @param \DateTime $datetime
+     * @param \DateTimeInterface|null $datetime
      */
-    protected function setDatetime(\DateTime $datetime)
+    protected function setDatetime(\DateTimeInterface $datetime = null)
     {
         $this->datetime = $datetime;
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTimeInterface|null
      */
     protected function getDate()
     {
@@ -277,15 +279,15 @@ class AttributeValue implements AttributeValueInterface
     }
 
     /**
-     * @param \DateTime $date
+     * @param \DateTimeInterface|null $date
      */
-    protected function setDate(\DateTime $date)
+    protected function setDate(\DateTimeInterface $date = null)
     {
         $this->date = $date;
     }
 
     /**
-     * @return array
+     * @return array|null
      */
     public function getJson()
     {
@@ -293,9 +295,9 @@ class AttributeValue implements AttributeValueInterface
     }
 
     /**
-     * @param array $json
+     * @param array|null $json
      */
-    public function setJson(array $json)
+    public function setJson(array $json = null)
     {
         $this->json = $json;
     }

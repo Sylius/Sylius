@@ -16,8 +16,8 @@
     {% endblock %}
 </head>
 
-<body>
-<div class="ui sidebar vertical inverted menu" id="sidebar">
+<body class="pushable">
+<div class="ui sidebar vertical inverted menu visible left" id="sidebar">
     {% block sidebar %}
     {% endblock %}
 </div>
@@ -30,7 +30,13 @@
         <div id="content">
             {% include '@SyliusUi/_flashes.html.twig' %}
 
+            {% block pre_content %}
+            {% endblock %}
+
             {% block content %}
+            {% endblock %}
+
+            {% block post_content %}
             {% endblock %}
         </div>
     </div>

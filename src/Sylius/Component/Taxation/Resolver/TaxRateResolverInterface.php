@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Taxation\Resolver;
 
 use Sylius\Component\Taxation\Model\TaxableInterface;

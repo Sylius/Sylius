@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Page\Admin\Order;
 
 use Behat\Mink\Element\NodeElement;
@@ -21,8 +23,8 @@ use Sylius\Component\Addressing\Model\AddressInterface;
  */
 class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 {
-    const TYPE_BILLING = 'billing';
-    const TYPE_SHIPPING = 'shipping';
+    public const TYPE_BILLING = 'billing';
+    public const TYPE_SHIPPING = 'shipping';
 
     /**
      * {@inheritdoc}

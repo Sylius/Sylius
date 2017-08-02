@@ -35,6 +35,9 @@ sylius:
     order:
         currency_code:
             not_valid: O código de moeda que você inseriu é inválido.
+        payment_method_eligibility: 'O meio de pagamento %paymentMethodName% foi desabilitado. Por favor selecione novamente sua forma de pagamento.'
+        product_eligibility: 'O produto %productName% foi desabilitado.'
+        shipping_method_eligibility: 'O produto não satizfaz os requisitos do meio de pagamento %shippingMethodName%. Por favor selecione novamente seu meio de pagamento.'
     locale:
         code:
             not_blank: Por favor, digite o código do locale.
@@ -54,6 +57,7 @@ sylius:
         onHand:
             min: O campo em mãos deve ser maior que {{limit}}.
             not_blank: Por favor digite o campo em mãos.
+            reserved: Na mão deve ser maior que o número de unidades reservadas
         original_price:
             min: Preço original não deve ser negativo.
         weight:
@@ -80,6 +84,8 @@ sylius:
     user:
         email:
             unique: Este e-mail já está sendo usado.
+            min: O e-mail deve conter no mínimo {{ min }} caractéres.
+            max: O e-mail deve conter no máximo {{ max }} caratéres.
             invalid: Este email é inválido.
         username:
             unique: Este nome de utilizador já foi utilizado.

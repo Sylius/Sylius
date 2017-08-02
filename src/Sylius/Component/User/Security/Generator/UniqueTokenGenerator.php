@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\User\Security\Generator;
 
 use Sylius\Component\Resource\Generator\RandomnessGeneratorInterface;
@@ -53,11 +55,7 @@ final class UniqueTokenGenerator implements GeneratorInterface
             $tokenLength,
             'The value of token length has to be an integer.'
         );
-        Assert::range(
-            $tokenLength,
-            1, 40,
-            'The value of token length has to be in range between 1 to 40.'
-        );
+        Assert::greaterThanEq($tokenLength, 1, 'The value of token length has to be at least 1.');
 
         $this->generator = $generator;
         $this->tokenLength = $tokenLength;

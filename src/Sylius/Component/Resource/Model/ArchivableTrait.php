@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Resource\Model;
 
 /**
@@ -19,12 +21,12 @@ namespace Sylius\Component\Resource\Model;
 trait ArchivableTrait
 {
     /**
-     * @var \DateTime|null
+     * @var \DateTimeInterface|null
      */
     protected $archivedAt;
 
     /**
-     * @return \DateTime|null
+     * @return \DateTimeInterface|null
      */
     public function getArchivedAt()
     {
@@ -32,9 +34,9 @@ trait ArchivableTrait
     }
 
     /**
-     * @param \DateTime|null $archivedAt
+     * @param \DateTimeInterface|null $archivedAt
      */
-    public function setArchivedAt(\DateTime $archivedAt = null)
+    public function setArchivedAt(\DateTimeInterface $archivedAt = null)
     {
         $this->archivedAt = $archivedAt;
     }

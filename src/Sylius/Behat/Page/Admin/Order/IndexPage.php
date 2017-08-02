@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Page\Admin\Order;
 
 use Sylius\Behat\Page\Admin\Crud\IndexPage as BaseIndexPage;
@@ -21,7 +23,7 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyFilterDateFrom(\DateTime $dateTime)
+    public function specifyFilterDateFrom(\DateTimeInterface $dateTime)
     {
         $timestamp = $dateTime->getTimestamp();
 
@@ -32,7 +34,7 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyFilterDateTo(\DateTime $dateTime)
+    public function specifyFilterDateTo(\DateTimeInterface $dateTime)
     {
         $timestamp = $dateTime->getTimestamp();
 

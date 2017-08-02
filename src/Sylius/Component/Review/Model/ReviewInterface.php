@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Review\Model;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
@@ -20,9 +22,9 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  */
 interface ReviewInterface extends TimestampableInterface, ResourceInterface
 {
-    const STATUS_NEW = 'new';
-    const STATUS_ACCEPTED = 'accepted';
-    const STATUS_REJECTED = 'rejected';
+    public const STATUS_NEW = 'new';
+    public const STATUS_ACCEPTED = 'accepted';
+    public const STATUS_REJECTED = 'rejected';
 
     /**
      * @return string

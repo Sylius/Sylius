@@ -3,12 +3,18 @@
 
 sylius:
     channel:
+        base_currency:
+            not_blank: Будь ласка, введіть основну валюту каналу.
         default_locale:
             not_blank: Будь ласка, введіть типову локаль каналу.
         contact_email:
             invalid: Ця адреса електронної пошти невірна.
             max: Адреса електронної пошти не має бути довшою за {{ limit }} символ(-и,-ів).
             min: Адреса електронної пошти має бути щонайменше {{ limit }} символ(-и,-ів).
+    channel_pricing:
+        price:
+            min: Ціна повинна бути не менша {{ limit }}.
+            not_blank: Будь ласка, введіть ціну.
     checkout:
         shipping_method:
             not_blank: Будь ласка, виберіть спосіб доставки.
@@ -16,30 +22,70 @@ sylius:
         email:
             invalid: Ця адреса електронної пошти невірна.
             not_blank: Будь ласка, введіть свою адресу електронної пошти.
+        message:
+            not_blank: Будь ласка, введіть ваше повідомлення.
+    currency:
+        enabled:
+            cannot_disable_base: Базова валюта не може бути відключена.
     customer:
         currency_code:
             not_valid: Код валюти, що ви ввели, не є вірним.
+    cart_item:
+        not_available: '%itemName% не має достатнього запасу.'
     order:
         currency_code:
             not_valid: Код валюти, що ви ввели, не є вірним.
+        payment_method_eligibility: 'Цей спосіб оплати %paymentMethodName% відключений. Будь ласка, повторно виберіть спосіб оплати.'
+        product_eligibility: 'Цей продукт %productName% був відключений.'
+        shipping_method_eligibility: 'Продукт не відповідає вимогам для %shippingMethodName% способу доставки. Будь ласка, повторно виберіть метод доставки.'
     locale:
         code:
             not_blank: Будь ласка, введіть код локалі.
             unique: Ця локаль вже існує.
         enabled:
             cannot_disable_base: Базова локаль не може бути недоступною.
+    product:
+        variants:
+            all_prices_defined: Потрібно спочатку визначити ціни варіантів продуктів для нових призначених каналів.
+    product_attribute:
+        invalid: Позиція має бути цілим числом.
+    product_image:
+        file:
+            max_size: Зображення є занадто великим - {{ size }}{{ suffix }}. Максимально дозволений розмір становить {{ limit }}{{ suffix }}.
+            upload_ini_size: Зображення є занадто великим. Максимально дозволений розмір становить {{ limit }}{{ suffix }}.
     product_variant:
         onHand:
             min: Кількість товару під рукою має бути більшою за {{ limit }}.
             not_blank: Будь ласка, вкажіть кількість товару під рукою.
+            reserved: Кількість замовлених товарів не повинна перевищувати кількість товарів в наявності
         original_price:
             min: Початкова ціна не має бути негативною.
+        weight:
+            min: Вага не може бути від'ємною.
+            invalid: Вага повинна бути числом.
+        width:
+            min: Ширина не може бути від'ємною.
+            invalid: Ширина має бути числом.
+        height:
+            min: Висота не може бути від'ємною.
+            invalid: Висота має бути числом.
+        depth:
+            min: Глибина не може бути від'ємною.
+            invalid: Глибина має бути числом.
+        channel_pricing:
+            all_defined: 'Ви повинні визначити ціну для кожного каналу.'
     product_translation:
         short_description:
             max: Стислий опис має містити не більше {{ limit }} символів.
+    taxon_image:
+        file:
+            max_size: Зображення є занадто великим - {{ size }}{{ suffix }}. Максимально дозволений розмір становить {{ limit }}{{ suffix }}.
+            upload_ini_size: Зображення є занадто великим. Максимально дозволений розмір становить {{ limit }}{{ suffix }}.
     user:
         email:
             unique: Ця адреса електронної пошти вже використовується.
+            min: Електронна пошта повинна мати принаймні {{ min }} символів.
+            max: Електронна пошта повинна мати не більше {{ max }} символів.
             invalid: Ця адреса електронної пошти невірна.
         username:
             unique: Це ім'я користувача вже використовується.

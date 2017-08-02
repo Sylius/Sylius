@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Grid\FieldTypes;
 
 use Sylius\Component\Grid\DataExtractor\DataExtractorInterface;
@@ -44,7 +46,7 @@ final class DatetimeFieldType implements FieldTypeInterface
             return null;
         }
 
-        Assert::isInstanceOf($value, \DateTime::class);
+        Assert::isInstanceOf($value, \DateTimeInterface::class);
 
         return $value->format($options['format']);
     }

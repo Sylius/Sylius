@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\PromotionBundle\Tests\DependencyInjection\Compiler;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase;
@@ -18,7 +20,7 @@ use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class RegisterPromotionActionsPassTest extends AbstractCompilerPassTestCase
 {
@@ -31,7 +33,7 @@ final class RegisterPromotionActionsPassTest extends AbstractCompilerPassTestCas
         $this->setDefinition('sylius.form_registry.promotion_action', new Definition());
         $this->setDefinition(
             'custom_promotion_action_command',
-            (new Definition())->addTag('sylius.promotion_action', ['type' => 'custom', 'label' => 'Label', 'form-type' => 'FQCN'])
+            (new Definition())->addTag('sylius.promotion_action', ['type' => 'custom', 'label' => 'Label', 'form_type' => 'FQCN'])
         );
 
         $this->compile();
@@ -52,7 +54,7 @@ final class RegisterPromotionActionsPassTest extends AbstractCompilerPassTestCas
         $this->setDefinition('sylius.form_registry.promotion_action', new Definition());
         $this->setDefinition(
             'custom_promotion_action_command',
-            (new Definition())->addTag('sylius.promotion_action', ['type' => 'custom', 'label' => 'Label', 'form-type' => 'FQCN'])
+            (new Definition())->addTag('sylius.promotion_action', ['type' => 'custom', 'label' => 'Label', 'form_type' => 'FQCN'])
         );
 
         $this->compile();
@@ -72,7 +74,7 @@ final class RegisterPromotionActionsPassTest extends AbstractCompilerPassTestCas
         $this->setDefinition('sylius.form_registry.promotion_action', new Definition());
         $this->setDefinition(
             'custom_promotion_action_command',
-            (new Definition())->addTag('sylius.promotion_action', ['type' => 'custom', 'label' => 'Label', 'form-type' => 'FQCN'])
+            (new Definition())->addTag('sylius.promotion_action', ['type' => 'custom', 'label' => 'Label', 'form_type' => 'FQCN'])
         );
 
         $this->compile();

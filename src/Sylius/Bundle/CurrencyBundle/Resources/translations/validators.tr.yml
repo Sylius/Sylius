@@ -4,6 +4,7 @@
 sylius:
     currency:
         code:
+            exact_length: Para birimi kodu tam olarak 3 karakter uzunluğunda olmalıdır.
             not_blank: Lütfen para birimi kodunu seçiniz.
             unique: Param birimi kodu tekil olmalıdır.
         exchange_rate:

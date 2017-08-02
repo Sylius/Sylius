@@ -4,7 +4,7 @@
 sylius_admin_api_carts:
     resource: |
         alias: sylius.order
-        path: '/'
+        path: ''
         only: [index]
         grid: sylius_admin_api_cart
         section: admin_api

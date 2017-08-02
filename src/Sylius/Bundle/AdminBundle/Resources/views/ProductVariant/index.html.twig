@@ -7,7 +7,7 @@
 
 {% set header = configuration.vars.header|default(metadata.applicationName~'.ui.'~metadata.pluralName) %}
 
-{% block title %}{{ parent() }} {{ header|trans }}{% endblock %}
+{% block title %}{{ header|trans }} {{ parent() }}{% endblock %}
 
 {% block content %}
     {{ sonata_block_render_event('sylius.admin.product_variant.index.before_header', {'resources': resources}) }}

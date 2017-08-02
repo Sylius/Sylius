@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Templating;
 
 use Symfony\Bundle\FrameworkBundle\Templating\TemplateReference;
@@ -20,7 +22,7 @@ use Symfony\Component\Templating\TemplateReferenceInterface;
  * TemplateNameParser converts template names from the short notation
  * "@Bundle/Section/template.format.engine" to TemplateReferenceInterface instances.
  *
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class TemplateNameParser implements TemplateNameParserInterface
 {
@@ -76,7 +78,7 @@ final class TemplateNameParser implements TemplateNameParserInterface
             try {
                 $this->kernel->getBundle($template->get('bundle'));
             } catch (\Exception $e) {
-                throw new \InvalidArgumentException(sprintf('Template name "%s" is not valid.', $name), 0, $e);
+                return $this->decoratedParser->parse($name);
             }
         }
 

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\OrderBundle\Remover;
 
 use Doctrine\Common\Persistence\ObjectManager;
@@ -48,7 +50,7 @@ final class ExpiredCartsRemoverSpec extends ObjectBehavior
         OrderInterface $firstCart,
         OrderInterface $secondCart
     ) {
-        $orderRepository->findCartsNotModifiedSince(Argument::type('\DateTime'))->willReturn([
+        $orderRepository->findCartsNotModifiedSince(Argument::type('\DateTimeInterface'))->willReturn([
             $firstCart,
             $secondCart
         ]);

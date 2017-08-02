@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use Doctrine\Common\Persistence\ObjectManager;
@@ -28,7 +30,7 @@ use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class CartBlamerListenerSpec extends ObjectBehavior
 {

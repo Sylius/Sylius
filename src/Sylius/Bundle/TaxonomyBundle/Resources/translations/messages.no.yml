@@ -7,5 +7,6 @@ sylius:
             description: Beskrivelse
             name: Navn
             parent: Forelder
+            slug: Slug
         taxonomy:
             name: Navn

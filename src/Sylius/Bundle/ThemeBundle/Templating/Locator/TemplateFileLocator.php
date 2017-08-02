@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Templating\Locator;
 
 use Sylius\Bundle\ThemeBundle\Context\EmptyThemeContext;
@@ -22,7 +24,7 @@ use Symfony\Component\Templating\TemplateReferenceInterface;
 /**
  * {@inheritdoc}
  *
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class TemplateFileLocator implements FileLocatorInterface, \Serializable
 {

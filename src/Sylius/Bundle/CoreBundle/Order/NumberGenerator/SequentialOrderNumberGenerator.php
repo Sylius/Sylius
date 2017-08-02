@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Order\NumberGenerator;
 
 use Doctrine\DBAL\LockMode;
@@ -78,10 +80,10 @@ final class SequentialOrderNumberGenerator implements OrderNumberGeneratorInterf
         $sequence = $this->getSequence();
 
         $this->sequenceManager->lock($sequence, LockMode::OPTIMISTIC, $sequence->getVersion());
-        
+
         $number = $this->generateNumber($sequence->getIndex());
         $sequence->incrementIndex();
-        
+
         return $number;
     }
 
@@ -94,7 +96,7 @@ final class SequentialOrderNumberGenerator implements OrderNumberGeneratorInterf
     {
         $number = $this->startNumber + $index;
 
-        return str_pad($number, $this->numberLength, 0, STR_PAD_LEFT);
+        return str_pad((string) $number, $this->numberLength, '0', STR_PAD_LEFT);
     }
 
     /**

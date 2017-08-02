@@ -7,3 +7,4 @@ sylius_admin_partial_address_log_entry_index:
             template: "@SyliusUi/Grid/_history.html.twig"
             grid: sylius_admin_address_log_entry
             section: admin
+            permission: true

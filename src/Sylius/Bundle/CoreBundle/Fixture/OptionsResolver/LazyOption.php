@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Fixture\OptionsResolver;
 
 use Doctrine\Common\Collections\Collection;
@@ -32,7 +34,7 @@ use Webmozart\Assert\Assert;
  *     - random one if user skipped that option ([])
  *     - specific one if user defined that option (['option' => 'CODE'])
  *
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class LazyOption
 {

@@ -20,7 +20,7 @@
         }
     ],
     "require": {
-        "php": "^5.6|^7.0",
+        "php": "^7.1",
 
         "stof/doctrine-extensions-bundle": "^1.2",
         "sylius/money-bundle": "^1.0",
@@ -30,9 +30,9 @@
         "symfony/framework-bundle": "^3.2"
     },
     "require-dev": {
-        "doctrine/orm": "^2.5",
+        "doctrine/orm": "~2.5.0",
         "matthiasnoback/symfony-dependency-injection-test": "^1.0",
-        "phpspec/phpspec": "^3.2",
+        "phpspec/phpspec": "^4.0",
         "phpunit/phpunit": "^5.6",
         "symfony/form": "^3.2",
         "symfony/validator": "^3.2",

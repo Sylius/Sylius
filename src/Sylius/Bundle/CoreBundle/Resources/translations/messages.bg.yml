@@ -3,46 +3,210 @@
 
 sylius:
     form:
+        block:
+            body: Тяло
+            id: ИД
+            title: Заглавие
+        cart:
+            coupon: Ваучер
+        checkout:
+            addressing:
+                different_billing_address: Използвайте различен адрес за фактуриране?
+            payment_method: Начин на плащане
+            shipping_method: Начин на доставка
+        promotion:
+            channels: Канали
         promotion_action:
             add_product_configuration:
                 product: Продукт
+        promotion_coupon:
+            per_customer_usage_limit: Лимит за потребление на потребител
+        group:
+            name: Име
+            roles: Роли
         channel:
+            contact_email: Имейл за контакт
+            currencies: Валути
             currency_base: Основна валута
+            account_verification_required: Изисква се проверка на профила?
+            hostname: Име на хост
+            locale_default: Място по подразбиране
             locales: Езикови променливи
             payment_methods: Методи на плащане
             shipping_methods: Начин на доставка
+            skipping_shipping_step_allowed: Пропусни стъпка за доставка, ако само един метод на доставка е налична?
+            skipping_payment_step_allowed: Пропусни стъпка за плащане, ако само един метод на плащане е налична?
+            tax_calculation_strategy: Стратегия за изчисляване на таксите
+            tax_zone_default: Данъчна зона по подразбиране
             taxonomies: Категоризация
+            theme: Тема
         image:
             type: Тип
+            file: Изображение
+        locale:
+            code: Код
+            enabled: Активирано
         order_filter:
+            created_at_from: Създадена след
+            created_at_to: Създаден преди
+            number: Номер
+            total_from: Oт
+            total_to: До
             payment_state: Състояние на плащане
+            channel: Всички канали
+        page:
+            body: Тяло
+            id: ИД
+            title: Заглавие
+        product:
+            images: Изображения
+            restricted_zone: Ограничена зона
+            short_description: Кратко описание
+            variant_selection_method: Метод на избор на вариант
+            main_taxon: Основна категория
+            channels: Канали
+            enabled: Активирано
+        product_filter:
+            name: Име
+            code: Код
         product_variant:
             tax_category: Данъчна категория
+            shipping_category: Категория за доставки
+        shipment_filter:
+            created_at_from: Oт
+            created_at_to: До
+            number: Номер на поръчка
+            shipping_address: Достави до
+            channel: Всички канали
+        payment_filter:
+            created_at_from: Oт
+            created_at_to: До
+            number: Номер на поръчка
+            billing_address: Адрес за фактуриране
+            channel: Всички канали
+        shipping_method:
+            zone: Зона
+        taxon:
+            code: Код
+            file: Избери изображение
+            images: Изображения
+        taxonomy:
+            file: Избери изображение
+        user:
+            billing_address: Адрес на плащане
+            different_billing_address: Използвайте различен адрес за фактуриране?
+            enabled: Активирано
+            first_name: Собствено име
+            groups: Групи
+            roles: Роли
+            last_name: Фамилно име
+            password: Парола
+            shipping_address: Адрес за доставка
+        user_filter:
+            query: Търсене
+        variant:
+            depth: Дълбочина
+            height: Височина
+            on_hand: Текуща наличност
+            price: Цена
+            sku: Код
+            shipping_required: Изисква ли се доставка?
+            weight: Тегло
+            width: Ширина
         attribute:
             product_attribute_value:
+                attribute: Атрибут
                 value: Стойност
         guest:
             email: Имейл
+        product_association:
+            product: Свързан продукт
+            type: Свързан тип
+        product_association_type:
+            name: Име
+        promotion_filter:
+            products: Филтър по продукти
+            taxons: Филтър по категории
+        promotion_rule:
+            customer_group:
+                group: Клиентска група
+            has_taxon:
+                taxons: Категории
+            product:
+                products: Продукти
+            total_of_items_from_taxon:
+                taxon: Категория
+                amount: Сума
+        payment_method:
+            channels: Канали
+        product_attribute:
+            position: Позиция
+        zone:
+            scopes:
+                shipping: Доставка
+                tax: Данък
     installer:
         extensions:
             header: разширения
             accelerator:
                 header: Ускорител
+                help: Разреши Zend OpCache (силно препоръчително).
+            apc: APC
+            ctype: Ctype
+            gd: GD
+            help: Инсталирайте и активирайте на %extension% разширението.
+            iconv: Iconv
+            exif: Exif
             fileinfo: Инфо за файл
+            icu: ICU
+            intl: Intl
+            json_encode: JSON
+            mbstring: Многобайтов низ
             "off": false
             "on": true
+            pcre: PCRE
+            pdo: PDO
+            php_xml: PHP-XML
             session_start: Сесия
+            simplexml_import_dom: SimpleXML
+            token_get_all: Tokenizer
         filesystem:
             header: файлова система
             cache:
                 header: кеш
+                help: 'За да зададете разрешения стартирайте: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
             exists: съществува
+            logs:
+                header: логове
+                help: 'За да зададете разрешения стартирайте: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
             not_exists: не съществува
             not_writable: не е записваемо
+            parameters:
+                header: parameters.yml
+                help: 'За да зададете разрешения стартирайте: sudo chmod a+w %path%'
+            vendors: vendors
             writable: записваемо
         settings:
             header: Настройки и версия на PHP
+            any: всеки
+            detect_unicode: detect_unicode
+            magic_quotes_gpc: magic_quotes_gpc
+            non_deprecated: не е отхвърлен
             "off": false
             "on": true
+            register_globals: register_globals
+            session:
+                auto_start: session.auto_start
+            short_open_tag: short_open_tag
             timezone: часова зона
+            timezone_deprecated:
+                header: Непрепоръчителена часова зона
+                help: 'Часовата зона %timezone% е непрепоръчителена. Коригирате вашия php.ini файл (списък на остарелите часови зони http://php.net/manual/en/timezones.others.php).'
             version: Версия на PHP
+            version_recommended: Препоръчителни PHP версия
+    payum_gateway:
+        cash_on_delivery: Плащане при доставка
+        offline: Офлайн
+        paypal_express_checkout: Плащане чрез PayPal Express
+    shipping_method_resolver:
+        by_zones_and_channel: По зони и канал

@@ -158,8 +158,8 @@ Once we have our class we can characterize it with attributes.
 Or you can just add all attributes needed using a class implementing
 Doctrine's `Collection`_ interface, e.g. the `ArrayCollection`_ class.
 
-.. _Collection: http://www.doctrine-project.org/api/common/2.2/class-Doctrine.Common.Collections.Collection.html
-.. _ArrayCollection: http://www.doctrine-project.org/api/common/2.2/class-Doctrine.Common.Collections.ArrayCollection.html
+.. _Collection: http://www.doctrine-project.org/api/common/2.3/class-Doctrine.Common.Collections.Collection.html
+.. _ArrayCollection: http://www.doctrine-project.org/api/common/2.3/class-Doctrine.Common.Collections.ArrayCollection.html
 
 .. warning::
    Beware! It's really important to set proper attribute storage type, which should reflect value type that is set in `AttributeValue`.

@@ -116,7 +116,7 @@ and of course flush your order after that via the manager.
 
 **What happens during the transition?**
 
-The method ``process($order)`` of the `CompositeOrderProcessor <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Core/OrderProcessing/CompositeOrderProcessor.php>`_ is run.
+The method ``process($order)`` of the `CompositeOrderProcessor <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Order/Processor/CompositeOrderProcessor.php>`_ is run.
 
 Selecting shipping
 ~~~~~~~~~~~~~~~~~~
@@ -163,7 +163,7 @@ and apply a proper transition and flush the order via the manager.
 
 **What happens during the transition?**
 
-The method ``process($order)`` of the `CompositeOrderProcessor <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Core/OrderProcessing/CompositeOrderProcessor.php>`_ is run.
+The method ``process($order)`` of the `CompositeOrderProcessor <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Order/Processor/CompositeOrderProcessor.php>`_ is run.
 Here this method is responsible for: controlling the **shipping charges** which depend on the chosen ShippingMethod,
 controlling the **promotions** that depend on the shipping method.
 
@@ -224,11 +224,8 @@ and apply a proper transition and flush the order via the manager.
 **What happens during the transition?**
 
 The method ``process($order)`` of the
-`CompositeOrderProcessor <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Core/OrderProcessing/CompositeOrderProcessor.php>`_
+`CompositeOrderProcessor <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Order/Processor/CompositeOrderProcessor.php>`_
 is run and checks all the adjustments on the order.
-The method ``update($order)`` of the
-`OrderExchangeRateAndCurrencyUpdater <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Core/OrderProcessing/OrderExchangeRateAndCurrencyUpdater.php>`_ is run.
-Here this method is responsible for controlling the **exchangeRate** of the order's currency.
 
 Finalizing
 ~~~~~~~~~~

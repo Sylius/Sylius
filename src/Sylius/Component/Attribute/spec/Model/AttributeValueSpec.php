@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Attribute\Model;
 
 use PhpSpec\ObjectBehavior;
@@ -87,11 +89,44 @@ final class AttributeValueSpec extends ObjectBehavior
 
     function its_value_is_mutable_based_on_attribute_storage_type(AttributeInterface $attribute)
     {
-        $attribute->getStorageType()->willReturn('text');
-        $this->setAttribute($attribute);
+        $storageTypeToExampleData = [
+            'boolean' => false,
+            'text' => 'Lorem ipsum',
+            'integer' => 42,
+            'float' => 6.66,
+            'datetime' => new \DateTime(),
+            'date' => new \DateTime(),
+            'json' => ['foo' => 'bar'],
+        ];
 
-        $this->setValue('XXL');
-        $this->getValue()->shouldReturn('XXL');
+        foreach ($storageTypeToExampleData as $storageType => $exampleData) {
+            $attribute->getStorageType()->willReturn($storageType);
+            $this->setAttribute($attribute);
+
+            $this->setValue($exampleData);
+            $this->getValue()->shouldReturn($exampleData);
+        }
+    }
+
+    function its_value_can_be_set_to_null(AttributeInterface $attribute)
+    {
+        $storageTypes = [
+            'boolean',
+            'text',
+            'integer',
+            'float',
+            'datetime',
+            'date',
+            'json',
+        ];
+
+        foreach ($storageTypes as $storageType) {
+            $attribute->getStorageType()->willReturn($storageType);
+            $this->setAttribute($attribute);
+
+            $this->setValue(null);
+            $this->getValue()->shouldReturn(null);
+        }
     }
 
     function it_throws_exception_when_trying_to_get_code_without_attribute_defined()

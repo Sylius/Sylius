@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ShopBundle\Controller;
 
 use Sylius\Bundle\ShopBundle\Locale\LocaleSwitcherInterface;
@@ -21,7 +23,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class LocaleSwitchController
 {

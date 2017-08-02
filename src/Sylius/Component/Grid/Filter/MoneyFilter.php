@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Grid\Filter;
 
 use Sylius\Component\Grid\Data\DataSourceInterface;
@@ -19,7 +21,7 @@ use Sylius\Component\Grid\Filtering\FilterInterface;
  */
 final class MoneyFilter implements FilterInterface
 {
-    const DEFAULT_SCALE = 2;
+    public const DEFAULT_SCALE = 2;
 
     /**
      * {@inheritdoc}

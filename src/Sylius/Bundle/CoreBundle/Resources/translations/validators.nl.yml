@@ -46,7 +46,7 @@ sylius:
             cannot_disable_base: De basis landinstelling worden niet uitgeschakeld.
     product:
         variants:
-            all_prices_defined: U dient eerst de prijzen te bepalen van de product-varianten voor nieuw toegewezen kanalen.
+            all_prices_defined: U dient eerst de prijzen te bepalen van de productvarianten voor nieuw toegewezen kanalen.
     product_attribute:
         invalid: Positie moet een geheel getal zijn.
     product_image:
@@ -84,6 +84,8 @@ sylius:
     user:
         email:
             unique: Dit e-mailadres is al in gebruik.
+            min: E-mail moet ten minste {{ min }} tekens.
+            max: E moet bij de meeste {{ max }} tekens bestaan.
             invalid: Deze e-mail is ongeldig.
         username:
             unique: Deze gebruikersnaam is al in gebruik.

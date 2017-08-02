@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ThemeBundle\Templating\Cache\Clearer;
 
 use Doctrine\Common\Cache\Cache;
@@ -18,7 +20,7 @@ use Sylius\Bundle\ThemeBundle\Templating\Cache\Clearer\TemplatePathsCacheClearer
 use Symfony\Component\HttpKernel\CacheClearer\CacheClearerInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class TemplatePathsCacheClearerSpec extends ObjectBehavior
 {

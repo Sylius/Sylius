@@ -22,6 +22,7 @@ Product attributes management
    <?php
 
    use Sylius\Component\Product\Model\Attribute;
+   use Sylius\Component\Product\Model\AttributeValue;
    use Doctrine\Common\Collections\ArrayCollection;
 
    $attribute = new Attribute();
@@ -67,7 +68,7 @@ Product variants management
 
    <?php
 
-   use Sylius\Component\Product\Model\ProductVariant;
+   use Sylius\Component\Product\Model\Variant;
 
    $variant = new Variant();
    $availableVariant = new Variant();

@@ -4,9 +4,36 @@
 sylius:
     form:
         attribute:
+            add: Προσθήκη
+            add_attributes: Προσθήκη χαρακτηριστικού
+            choices: Επιλογές
             code: Κώδικος
             name: Ονομασία
+            translations: Μεταφράσεις
             type: Τύπος
         attribute_type:
+            checkbox: Κουτί επιλογής
             configuration: Παραμετροποίηση
+            date: Ημερομηνία
+            datetime: Ημερομηνία και ώρα
+            integer: Ακέραιος αριθμός
+            percent: Ποσοστό
             select: Επιλέξτε
+            text: Κείμενο
+            textarea: Περιοχή κειμένου
+            title: Τύποι χαρακτηριστικών
+            validation: Επικύρωση
+        attribute_type_configuration:
+            datetime:
+                format: Μορφή
+            date:
+                format: Μορφή
+            select:
+                multiple: Πολλαπλό
+                values: Τιμές
+                choose: Επιλέξτε μια επιλογή
+                min: Ελάχιστες καταχωρήσεις
+                max: Μέγιστες καταχωρήσεις
+            text:
+                min: Ελάχιστο μήκος
+                max: Μέγιστο μήκος

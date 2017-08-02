@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Core\Currency;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -10,7 +12,7 @@ use Sylius\Component\Currency\Model\Currency;
 use Sylius\Component\Resource\Storage\StorageInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class CurrencyStorageSpec extends ObjectBehavior
 {

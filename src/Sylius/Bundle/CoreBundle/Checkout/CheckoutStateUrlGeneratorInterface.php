@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Checkout;
 
 use Sylius\Component\Core\Model\OrderInterface;
@@ -27,4 +29,12 @@ interface CheckoutStateUrlGeneratorInterface extends UrlGeneratorInterface
      * @return string
      */
     public function generateForOrderCheckoutState(OrderInterface $order, $parameters = [], $referenceType = self::ABSOLUTE_PATH);
+
+    /**
+     * @param array $parameters
+     * @param int $referenceType
+     *
+     * @return string
+     */
+    public function generateForCart($parameters = [], $referenceType = self::ABSOLUTE_PATH);
 }

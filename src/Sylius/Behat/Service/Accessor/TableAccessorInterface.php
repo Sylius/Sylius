@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Service\Accessor;
 
 use Behat\Mink\Element\NodeElement;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 interface TableAccessorInterface
 {

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
 use Doctrine\ORM\EntityManager;
@@ -245,7 +247,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
     /**
      * {@inheritdoc}
      */
-    public function findOrdersUnpaidSince(\DateTime $terminalDate)
+    public function findOrdersUnpaidSince(\DateTimeInterface $terminalDate)
     {
         return $this->createQueryBuilder('o')
             ->where('o.checkoutState = :checkoutState')

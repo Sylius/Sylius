@@ -7,3 +7,6 @@ sylius:
             not_blank: Παρακαλώ εισάγετε το όνομά σας.
         last_name:
             not_blank: Παρακαλούμε εισάγετε το επώνυμό σας.
+        email:
+            not_blank: Παρακαλώ εισάγετε το email σας.
+            invalid: Αυτό το email δεν είναι έγκυρο.

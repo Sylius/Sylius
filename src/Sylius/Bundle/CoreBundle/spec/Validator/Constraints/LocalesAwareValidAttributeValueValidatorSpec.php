@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use PhpSpec\ObjectBehavior;
@@ -93,7 +95,7 @@ class LocalesAwareValidAttributeValueValidatorSpec extends ObjectBehavior
         ValidAttributeValue $attributeValueConstraint
     ) {
         $this
-            ->shouldThrow(new UnexpectedTypeException('\DateTime', AttributeValueInterface::class))
+            ->shouldThrow(new UnexpectedTypeException('\DateTimeInterface', AttributeValueInterface::class))
             ->during('validate', [$badObject, $attributeValueConstraint])
         ;
     }

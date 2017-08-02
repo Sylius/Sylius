@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\Doctrine\ORM\Form\Builder;
 
 use Doctrine\DBAL\Types\Type;
@@ -69,7 +71,7 @@ class DefaultFormBuilder implements DefaultFormBuilderInterface
 
         foreach ($classMetadata->getAssociationMappings() as $fieldName => $associationMapping) {
             if (ClassMetadataInfo::ONE_TO_MANY !== $associationMapping['type']) {
-                $formBuilder->add($fieldName, null, ['property' => 'id']);
+                $formBuilder->add($fieldName, null, ['choice_label' => 'id']);
             }
         }
     }

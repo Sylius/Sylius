@@ -5,6 +5,7 @@ sylius:
     form:
         customer:
             first_name: Ad
+            group: Grup
             last_name: Soyad
             email: E-posta
             phone_number: Telefon numarası

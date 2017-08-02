@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Currency\Context;
 
 use PhpSpec\ObjectBehavior;
@@ -17,7 +19,7 @@ use Sylius\Component\Currency\Context\CurrencyNotFoundException;
 use Sylius\Component\Currency\Context\CompositeCurrencyContext;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class CompositeCurrencyContextSpec extends ObjectBehavior
 {

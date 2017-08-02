@@ -18,20 +18,23 @@ sylius:
                     channels: Kanalai
                     countries: Šalys
                     currencies: Valiutos
+                    exchange_rates: Valiutų kursai
                     header: Konfigūracija
                     locales: Lokalės
                     payment_methods: Apmokėjimo būdai
+                    shipping_categories: Pristatymo kategorijos
                     shipping_methods: Pristatymo būdai
                     tax_categories: Mokesčių kategorijos
                     tax_rates: Mokesčių tarifai
                     zones: Zonos
                 marketing:
                     header: Marketingas
+                    product_reviews: Produktų atsiliepimai
                     promotions: Akcijos
                 customers:
                     customers: Klientai
                     groups: Grupės
-                    header: Klienta
+                    header: Klientai
                 sales:
                     header: Pardavimai
                     orders: Užsakymai

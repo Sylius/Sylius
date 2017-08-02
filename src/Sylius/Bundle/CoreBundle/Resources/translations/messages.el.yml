@@ -4,6 +4,7 @@
 sylius:
     form:
         block:
+            body: Κυρίως άρθρο
             id: ID
             title: Τίτλος
         cart:
@@ -13,14 +14,32 @@ sylius:
                 different_billing_address: Να γίνει χρήση διαφορετικής διεύθυνσης για τιμολόγηση;
             payment_method: Τρόπος Πληρωμής
             shipping_method: Τρόπος Αποστολης
+        promotion:
+            channels: Κανάλια
         promotion_action:
             add_product_configuration:
                 product: Προϊόν
+        promotion_coupon:
+            per_customer_usage_limit: Όριο χρήσης ανά πελάτη
         group:
             name: Ονομασία
             roles: Ρόλοι
         channel:
+            contact_email: Email επικοινωνίας
+            currencies: Νομίσματα
+            currency_base: Βασικό νόμισμα
+            account_verification_required: Απαιτείται η επαλήθευση του λογαριασμού;
+            hostname: Όνομα κεντρικού υπολογιστή
+            locale_default: Προεπιλεγμένες τοπικές ρυθμίσεις
+            locales: Τοπικές ρυθμίσεις
+            payment_methods: Τρόποι πληρωμής
+            shipping_methods: Τρόπος Αποστολης
+            skipping_shipping_step_allowed: Παράλειψη της αποστολής εάν μόνο μία μέθοδος αποστολής είναι διαθέσιμη;
+            skipping_payment_step_allowed: Παράλειψη της πληρωμής εάν μόνο μία μέθοδος πληρωμής είναι διαθέσιμη;
+            tax_calculation_strategy: Στρατηγική υπολογισμού φόρου
             tax_zone_default: Προεπιλεγμένη φορολογική ζώνη
+            taxonomies: Ταξινομία
+            theme: Θέμα
         image:
             type: Τύπος
             file: Εικόνα
@@ -28,11 +47,15 @@ sylius:
             code: Κώδικος
             enabled: Ενεργοποιημένο
         order_filter:
+            created_at_from: Δημιουργήθηκε μετά από
+            created_at_to: Δημιουργήθηκε πριν από
             number: Αριθμός
             total_from: Από
             total_to: Προς
             payment_state: Κατάσταση πληρωμής
+            channel: Όλα τα κανάλια
         page:
+            body: Κυρίως άρθρο
             id: ID
             title: Τίτλος
         product:
@@ -40,10 +63,12 @@ sylius:
             restricted_zone: Απαγορευμένη ζώνη
             short_description: Σύντομη περιγραφή
             variant_selection_method: Μέθοδος επιλογής παραλλαγής
+            main_taxon: Κύρια ταξινομική μονάδα
+            channels: Κανάλια
             enabled: Ενεργοποιημένο
         product_filter:
             name: Ονομασία
-            code: Κώδικος
+            code: Κωδικός
         product_variant:
             tax_category: Φορολογική κατηγορία
             shipping_category: Κατηγορία αποστολής
@@ -52,10 +77,13 @@ sylius:
             created_at_to: Προς
             number: Αριθμός Παραγγελίας
             shipping_address: Αποστολή στο όνομα
+            channel: Όλα τα κανάλια
         payment_filter:
             created_at_from: Από
             created_at_to: Προς
             number: Αριθμός Παραγγελίας
+            billing_address: Όνομα χρέωσης
+            channel: Όλα τα κανάλια
         shipping_method:
             zone: Ζώνη
         taxon:
@@ -82,18 +110,58 @@ sylius:
             on_hand: Τρέχων απόθεμα
             price: Τιμή
             sku: ΚΩΔΙΚΟΣ ΠΡΟΪΟΝΤΟΣ
+            shipping_required: Η αποστολή απαιτείται;
             weight: Βάρος
             width: Πλάτος
+        attribute:
+            product_attribute_value:
+                attribute: Χαρακτηριστικό
+                value: Αξία
         guest:
             email: Ηλεκτρονικό ταχυδρομείο
+        product_association:
+            product: Συσχετισμένο προϊόν
+            type: Τύπος συσχετισμού
         product_association_type:
             name: Ονομασία
+        promotion_filter:
+            products: Φίλτρο προϊόντων
+            taxons: Φίλτρο ταξινομικής μονάδας
+        promotion_rule:
+            customer_group:
+                group: Ομάδα πελατών
+            has_taxon:
+                taxons: Ταξινομικές μονάδες
+            product:
+                products: Προϊόντα
+            total_of_items_from_taxon:
+                taxon: Ταξινομική μονάδα
+                amount: Ποσό
+        payment_method:
+            channels: Κανάλια
+        product_attribute:
+            position: Θέση
+        zone:
+            scopes:
+                shipping: Αποστολή
+                tax: Φόρος
     installer:
         extensions:
+            header: επεκτάσεις
+            accelerator:
+                header: Επιταχυντής
+                help: Ενεργοποιήσετε το Zend OpCache (συνιστάται ιδιαίτερα).
             apc: APC
             ctype: Ctype
             gd: GD
+            help: Εγκαταστήστε και ενεργοποιήστε την επέκταση %extension%.
+            iconv: Iconv
+            exif: Exif
+            fileinfo: Fileinfo
+            icu: ICU
+            intl: Intl
             json_encode: JSON
+            mbstring: Συμβολοσειρά χαρακτήρων πολλών byte
             "off": false
             "on": true
             pcre: PCRE
@@ -101,12 +169,26 @@ sylius:
             php_xml: PHP-XML
             session_start: Συνεδρία
             simplexml_import_dom: SimpleXML
+            token_get_all: Δημιουργός διακριτικών
         filesystem:
+            header: σύστημα αρχείων
+            cache:
+                header: προσωρινή Μνήμη
+                help: 'Για να ορίσεις τα δικαιώματα εκτέλεσε το παρακάτω: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
             exists: υπάρχει
+            logs:
+                header: αρχεία καταγραφής
+                help: 'Για να ορίσεις τα δικαιώματα εκτέλεσε το παρακάτω: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
             not_exists: δεν υπάρχει
             not_writable: χωρίς δυνατότητα εγγραφής
+            parameters:
+                header: parameters.yml
+                help: 'Για να ορίσεις τα δικαιώματα εκτέλεσε το παρακάτω: sudo chmod a + w %path%'
+            vendors: προμηθευτές
             writable: εγγράψιμο
         settings:
+            header: Έκδοση PHP και ρυθμίσεις
+            any: οποιαδήποτε
             detect_unicode: detect_unicode
             magic_quotes_gpc: magic_quotes_gpc
             non_deprecated: μη παρωχημένο
@@ -118,5 +200,13 @@ sylius:
             short_open_tag: short_open_tag
             timezone: ζώνη ώρας
             timezone_deprecated:
+                header: Μη χρησιμοποιούμενη ζώνη ώρας
                 help: 'Η Ζώνη ώρας %timezone% δεν χρησιμοποιείται. Διορθώσετε το αρχείο php.ini σας (λίστα με μη χρησιμοποιούμενες ζώνες ώρας εδώ http://php.net/manual/en/timezones.others.php).'
             version: Έκδοση PHP
+            version_recommended: Προτεινόμενη έκδοση PHP
+    payum_gateway:
+        cash_on_delivery: Αντικαταβολή
+        offline: Εκτός σύνδεσης
+        paypal_express_checkout: Paypal Express Checkout
+    shipping_method_resolver:
+        by_zones_and_channel: Με ζώνες και κανάλι

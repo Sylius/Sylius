@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Promotion\Checker\Rule;
 
 use Sylius\Component\Core\Model\OrderInterface;
@@ -23,7 +25,7 @@ use Webmozart\Assert\Assert;
  */
 final class TotalOfItemsFromTaxonRuleChecker implements RuleCheckerInterface
 {
-    const TYPE = 'total_of_items_from_taxon';
+    public const TYPE = 'total_of_items_from_taxon';
 
     /**
      * @var TaxonRepositoryInterface

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Addressing\Model;
 
 /**
@@ -16,7 +18,7 @@ namespace Sylius\Component\Addressing\Model;
  */
 final class Scope
 {
-    const ALL = 'all';
+    public const ALL = 'all';
 
     private function __construct()
     {

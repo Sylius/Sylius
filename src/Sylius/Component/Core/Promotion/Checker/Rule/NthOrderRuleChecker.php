@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Promotion\Checker\Rule;
 
 use Sylius\Component\Core\Model\OrderInterface;
@@ -23,7 +25,7 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
  */
 final class NthOrderRuleChecker implements RuleCheckerInterface
 {
-    const TYPE = 'nth_order';
+    public const TYPE = 'nth_order';
 
     /**
      * @var OrderRepositoryInterface

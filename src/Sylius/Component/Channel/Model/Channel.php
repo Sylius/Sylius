@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Channel\Model;
 
 use Sylius\Component\Resource\Model\TimestampableTrait;
@@ -75,7 +77,7 @@ class Channel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function getCode()
+    public function getCode(): ?string
     {
         return $this->code;
     }
@@ -83,7 +85,7 @@ class Channel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function setCode($code)
+    public function setCode(?string $code): void
     {
         $this->code = $code;
     }

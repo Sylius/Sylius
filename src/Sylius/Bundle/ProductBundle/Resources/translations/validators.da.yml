@@ -6,6 +6,11 @@ sylius:
         sku:
             not_blank: Angiv produkt SKU.
             unique: Produkt SKU skal være unik.
+        slug:
+            not_blank: Venligst angiv produkt slug.
+        code:
+            not_blank: Venligst angiv varenummer.
+            regex: Varenummeret kan kun bestå af bogstaver, tal, bindestreger og understregninger.
         name:
             not_blank: Indtast produktnavn.
             min_length: Produktnavnet skal være mindst ét tegn langt. |Produktnavnet skal være mindst {{ limit }} tegn langt.

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ResourceBundle\Doctrine\ORM\Form\Builder;
 
 use Doctrine\DBAL\Types\Type;
@@ -180,7 +182,7 @@ final class DefaultFormBuilderSpec extends ObjectBehavior
         $formBuilder->add('description', null, [])->shouldBeCalled();
         $formBuilder->add('enabled', null, [])->shouldBeCalled();
         $formBuilder->add('publishedAt', null, ['widget' => 'single_text'])->shouldBeCalled();
-        $formBuilder->add('category', null, ['property' => 'id'])->shouldBeCalled();
+        $formBuilder->add('category', null, ['choice_label' => 'id'])->shouldBeCalled();
         $formBuilder->add('users', Argument::cetera())->shouldNotBeCalled();
 
         $this->build($metadata, $formBuilder, []);

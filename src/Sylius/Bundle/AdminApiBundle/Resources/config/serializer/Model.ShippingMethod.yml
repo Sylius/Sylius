@@ -1,0 +1,18 @@
+Sylius\Component\Core\Model\ShippingMethod:
+    exclusion_policy: ALL
+    xml_root_name: shipping-method
+    relations:
+        - rel: zone
+          href:
+                route: sylius_admin_api_zone_show
+                parameters:
+                    code: expr(object.getZone().getCode())
+                    version: 1
+                exclusion:
+                    groups: [Detailed]
+        -   rel: self
+            href:
+                route: sylius_admin_api_shipping_method_show
+                parameters:
+                    code: expr(object.getCode())
+                    version: 1

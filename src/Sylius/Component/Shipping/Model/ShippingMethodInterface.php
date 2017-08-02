@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Shipping\Model;
 
 use Sylius\Component\Resource\Model\ArchivableInterface;
@@ -29,9 +31,9 @@ interface ShippingMethodInterface extends
     ToggleableInterface,
     TranslatableInterface
 {
-    const CATEGORY_REQUIREMENT_MATCH_NONE = 0;
-    const CATEGORY_REQUIREMENT_MATCH_ANY = 1;
-    const CATEGORY_REQUIREMENT_MATCH_ALL = 2;
+    public const CATEGORY_REQUIREMENT_MATCH_NONE = 0;
+    public const CATEGORY_REQUIREMENT_MATCH_ANY = 1;
+    public const CATEGORY_REQUIREMENT_MATCH_ALL = 2;
 
     /**
      * @return int

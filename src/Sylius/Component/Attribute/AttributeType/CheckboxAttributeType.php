@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Attribute\AttributeType;
 
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
@@ -19,7 +21,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
  */
 final class CheckboxAttributeType implements AttributeTypeInterface
 {
-    const TYPE = 'checkbox';
+    public const TYPE = 'checkbox';
 
     /**
      * {@inheritdoc}

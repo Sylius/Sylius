@@ -22,6 +22,8 @@ sylius:
     payment:
         currency_code:
             not_valid: Il codice valuta inserito non è valido.
+        method:
+            not_blank: 'Si prega di selezionare un metodo di pagamento'
     payment_method:
         gateway:
             not_blank: Si prega di selezionare il gateway per il metodo di pagamento.
@@ -39,4 +41,5 @@ sylius:
                 not_blank: Inserisci la percentuale della tassa.
         code:
             not_blank: 'Inserisci il codice del metodo di pagamento.'
+            regex: 'Il codice del metodo di pagamento può contenere solo lettere, numeri, trattini e underscore.'
             unique: 'Il metodo di pagamento con dato codice esiste già.'

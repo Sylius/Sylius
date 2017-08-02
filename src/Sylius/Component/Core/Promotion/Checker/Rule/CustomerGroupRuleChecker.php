@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Promotion\Checker\Rule;
 
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -22,7 +24,7 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
  */
 class CustomerGroupRuleChecker implements RuleCheckerInterface
 {
-    const TYPE = 'customer_group';
+    public const TYPE = 'customer_group';
 
     /**
      * {@inheritdoc}

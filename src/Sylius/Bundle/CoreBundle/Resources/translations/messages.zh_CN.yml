@@ -25,6 +25,7 @@ sylius:
             name: 名称
             roles: 角色
         channel:
+            contact_email: 联系邮件
             currencies: 货币
             currency_base: 基础货币
             hostname: 主机名
@@ -106,6 +107,7 @@ sylius:
             on_hand: 当前货架
             price: 价格
             sku: SKU
+            shipping_required: 是否需要配送?
             weight: 重量
             width: 宽度
         attribute:

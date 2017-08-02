@@ -25,11 +25,17 @@ sylius:
             name: Pavadinimas
             roles: Rolės
         channel:
+            contact_email: Kontaktinis el. pašto adresas
             currencies: Valiutos
+            currency_base: Bazinė valiuta
+            account_verification_required: Ar reikalingas sąskaitos patikrinimas?
+            hostname: Pagrindinio kompiuterio vardas
             locale_default: Numatytoji lokalė
             locales: Lokalės
             payment_methods: Mokėjimo būdai
             shipping_methods: Pristatymo būdai
+            skipping_shipping_step_allowed: Ar praleisti pristatymo pasirinkimo žingsnį, jei yra galimas tik vienas pristatymo būdas?
+            skipping_payment_step_allowed: Ar praleisti mokėjimo pasirinkimo žingsnį, jei yra galimas tik vienas mokėjimo būdas?
             tax_calculation_strategy: Mokesčių skaičiavimo strategija
             tax_zone_default: Numatyta mokesčių zona
             taxonomies: Taksonomijos
@@ -57,6 +63,7 @@ sylius:
             restricted_zone: Apribota zona
             short_description: Trumpas aprašymas
             variant_selection_method: Varianto pasirinkimo būdas
+            main_taxon: Pagrindinis taksonas
             channels: Kanalai
             enabled: Įjungta
         product_filter:
@@ -103,6 +110,7 @@ sylius:
             on_hand: Dabartinės atsargos
             price: Kaina
             sku: Kodas
+            shipping_required: Ar pristatymas privalomas?
             weight: Svoris
             width: Plotis
         attribute:
@@ -116,15 +124,27 @@ sylius:
             type: Sąryšio tipas
         product_association_type:
             name: Pavadinimas
+        promotion_filter:
+            products: Produktų filtras
+            taxons: Taksonų filtras
         promotion_rule:
+            customer_group:
+                group: Klientų grupė
             has_taxon:
                 taxons: Taksonai
             product:
                 products: Prekės
             total_of_items_from_taxon:
+                taxon: Taksonas
                 amount: Suma
         payment_method:
             channels: Kanalai
+        product_attribute:
+            position: Pozicija
+        zone:
+            scopes:
+                shipping: Pristatymas
+                tax: Mokesčiai
     installer:
         extensions:
             header: plėtiniai
@@ -186,6 +206,7 @@ sylius:
             version_recommended: Rekomenduojama PHP versija
     payum_gateway:
         cash_on_delivery: Grynaisiais pristatymo metu
+        offline: Neprisijungęs
         paypal_express_checkout: PayPal Express Checkout
     shipping_method_resolver:
         by_zones_and_channel: Pagal zonas ir kanalus

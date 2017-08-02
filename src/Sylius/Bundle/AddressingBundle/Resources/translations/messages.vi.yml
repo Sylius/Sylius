@@ -11,7 +11,6 @@ sylius:
             last_name: Họ
             phone_number: Số điện thoại
             postcode: Mã bưu chính
-            street: Đường Phố
             province: Tỉnh
         country:
             add_province: Thêm tỉnh

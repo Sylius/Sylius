@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
@@ -214,7 +216,7 @@ final class ProductContext implements Context
      * @Given the store( also) has a product :productName with code :code
      * @Given the store( also) has a product :productName with code :code, created at :date
      */
-    public function storeHasProductWithCode($productName, $code, $date = null)
+    public function storeHasProductWithCode($productName, $code, $date = 'now')
     {
         $product = $this->createProduct($productName);
         $product->setCreatedAt(new \DateTime($date));
