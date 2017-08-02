@@ -69,6 +69,10 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
             return;
         }
 
+        foreach ($shipment->getUnits() as $unit) {
+            $shipment->removeUnit($unit);
+        }
+
         foreach ($order->getItemUnits() as $itemUnit) {
             if (null === $itemUnit->getShipment()) {
                 $shipment->addUnit($itemUnit);

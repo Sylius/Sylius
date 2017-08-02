@@ -276,18 +276,26 @@ final class ShippingContext implements Context
     }
 
     /**
+     * @Given /^the store has "([^"]+)" shipping method with ("[^"]+") fee per unit for ("[^"]+" channel)$/
      * @Given /^the store has "([^"]+)" shipping method with ("[^"]+") fee per unit for ("[^"]+" channel) and ("[^"]+") for ("[^"]+" channel)$/
      */
     public function storeHasShippingMethodWithFeePerUnitForChannels(
         $shippingMethodName,
         $firstFee,
         ChannelInterface $firstChannel,
-        $secondFee,
-        ChannelInterface $secondChannel
+        $secondFee = null,
+        ChannelInterface $secondChannel = null
     ) {
         $configuration = [];
+        $channels = [];
+
         $configuration[$firstChannel->getCode()] = ['amount' => $firstFee];
-        $configuration[$secondChannel->getCode()] = ['amount' => $secondFee];
+        $channels[] = $firstChannel;
+
+        if (null !== $secondFee) {
+            $configuration[$secondChannel->getCode()] = ['amount' => $secondFee];
+            $channels[] = $secondChannel;
+        }
 
         $this->saveShippingMethod($this->shippingMethodExampleFactory->create([
             'name' => $shippingMethodName,
@@ -297,7 +305,7 @@ final class ShippingContext implements Context
                 'type' => DefaultCalculators::PER_UNIT_RATE,
                 'configuration' => $configuration,
             ],
-            'channels' => [$firstChannel, $secondChannel],
+            'channels' => $channels,
         ]));
     }
 

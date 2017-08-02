@@ -7,12 +7,13 @@ default:
             contexts_services:
                 - sylius.behat.context.hook.doctrine_orm
 
+                - sylius.behat.context.transform.channel
                 - sylius.behat.context.transform.country
-                - sylius.behat.context.transform.zone
                 - sylius.behat.context.transform.lexical
                 - sylius.behat.context.transform.product
-                - sylius.behat.context.transform.tax_category
                 - sylius.behat.context.transform.shipping_method
+                - sylius.behat.context.transform.tax_category
+                - sylius.behat.context.transform.zone
 
                 - sylius.behat.context.transform.shared_storage
 
