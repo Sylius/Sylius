@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "f9420f8790d779aba4d7db63d4e8707a",
+    "content-hash": "91738e6eb7d2f3f007f8aaea869ef38a",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -2534,7 +2534,7 @@
                     "email": "stof@notk.org"
                 },
                 {
-                    "name": "KnpLabs",
+                    "name": "Knplabs",
                     "homepage": "http://knplabs.com"
                 },
                 {
@@ -3346,16 +3346,16 @@
         },
         {
             "name": "payum/payum-bundle",
-            "version": "2.2.0",
+            "version": "2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Payum/PayumBundle.git",
-                "reference": "f016ab43c850414e5eaa23d74e7527c92d706ac9"
+                "reference": "fd930cb9516c8a5f19b4eeae35c8e37eea77ce11"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Payum/PayumBundle/zipball/f016ab43c850414e5eaa23d74e7527c92d706ac9",
-                "reference": "f016ab43c850414e5eaa23d74e7527c92d706ac9",
+                "url": "https://api.github.com/repos/Payum/PayumBundle/zipball/fd930cb9516c8a5f19b4eeae35c8e37eea77ce11",
+                "reference": "fd930cb9516c8a5f19b4eeae35c8e37eea77ce11",
                 "shasum": ""
             },
             "require": {
@@ -3444,7 +3444,7 @@
                 "stripe.js",
                 "symfony"
             ],
-            "time": "2017-03-28T11:02:38+00:00"
+            "time": "2017-08-02T07:32:51+00:00"
         },
         {
             "name": "php-http/guzzle6-adapter",
@@ -4227,16 +4227,16 @@
         },
         {
             "name": "sensiolabs/security-checker",
-            "version": "v4.0.5",
+            "version": "v4.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/security-checker.git",
-                "reference": "6a3b0c3b42e41c777b1ad75032d8177863fdc5e1"
+                "reference": "9c7bfbc7be32781d39f8e262744f7fb0c410df67"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/security-checker/zipball/6a3b0c3b42e41c777b1ad75032d8177863fdc5e1",
-                "reference": "6a3b0c3b42e41c777b1ad75032d8177863fdc5e1",
+                "url": "https://api.github.com/repos/sensiolabs/security-checker/zipball/9c7bfbc7be32781d39f8e262744f7fb0c410df67",
+                "reference": "9c7bfbc7be32781d39f8e262744f7fb0c410df67",
                 "shasum": ""
             },
             "require": {
@@ -4249,7 +4249,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.0-dev"
+                    "dev-master": "4.1-dev"
                 }
             },
             "autoload": {
@@ -4268,7 +4268,7 @@
                 }
             ],
             "description": "A security checker for your composer.lock",
-            "time": "2017-07-24T11:42:56+00:00"
+            "time": "2017-08-02T07:52:06+00:00"
         },
         {
             "name": "sonata-project/block-bundle",
@@ -5407,20 +5407,21 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.34.4",
+            "version": "v2.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "f878bab48edb66ad9c6ed626bf817f60c6c096ee"
+                "reference": "eab7c3288ae6603d7d6f92b531626af2b162d1f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/f878bab48edb66ad9c6ed626bf817f60c6c096ee",
-                "reference": "f878bab48edb66ad9c6ed626bf817f60c6c096ee",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/eab7c3288ae6603d7d6f92b531626af2b162d1f2",
+                "reference": "eab7c3288ae6603d7d6f92b531626af2b162d1f2",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.3"
+                "php": "^7.0",
+                "symfony/polyfill-mbstring": "~1.0"
             },
             "require-dev": {
                 "psr/container": "^1.0",
@@ -5430,7 +5431,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.34-dev"
+                    "dev-master": "2.4-dev"
                 }
             },
             "autoload": {
@@ -5468,7 +5469,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2017-07-04T13:19:31+00:00"
+            "time": "2017-06-07T18:47:58+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -6671,60 +6672,6 @@
             "time": "2017-02-14T19:40:03+00:00"
         },
         {
-            "name": "dama/doctrine-test-bundle",
-            "version": "v1.0.13",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/dmaicher/doctrine-test-bundle.git",
-                "reference": "3faa4f23b27b031f5416b3ecc2d6330a752fe32f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/dmaicher/doctrine-test-bundle/zipball/3faa4f23b27b031f5416b3ecc2d6330a752fe32f",
-                "reference": "3faa4f23b27b031f5416b3ecc2d6330a752fe32f",
-                "shasum": ""
-            },
-            "require": {
-                "doctrine/dbal": "~2.5",
-                "doctrine/doctrine-bundle": "~1.4",
-                "php": ">=5.5.0",
-                "phpunit/phpunit": "~4.1|~5.0",
-                "symfony/symfony": "~2.3|~3.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "DAMA\\DoctrineTestBundle\\": "src/DAMA/DoctrineTestBundle"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "David Maicher",
-                    "email": "mail@dmaicher.de"
-                }
-            ],
-            "description": "Symfony 2/3 bundle to isolate doctrine database tests and improve test performance",
-            "keywords": [
-                "Symfony 3",
-                "doctrine",
-                "isolation",
-                "performance",
-                "symfony",
-                "symfony 2",
-                "tests"
-            ],
-            "time": "2017-05-09T12:12:32+00:00"
-        },
-        {
             "name": "friends-of-behat/context-service-extension",
             "version": "v1.0.0",
             "source": {
@@ -6820,47 +6767,6 @@
             ],
             "description": "Makes possible to inject services and parameters from other containers.",
             "time": "2017-07-10T21:28:32+00:00"
-        },
-        {
-            "name": "friends-of-behat/performance-extension",
-            "version": "v1.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/FriendsOfBehat/PerformanceExtension.git",
-                "reference": "f772fec1544fcb887e85ce9c1e546f1e3361b375"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfBehat/PerformanceExtension/zipball/f772fec1544fcb887e85ce9c1e546f1e3361b375",
-                "reference": "f772fec1544fcb887e85ce9c1e546f1e3361b375",
-                "shasum": ""
-            },
-            "require": {
-                "behat/behat": "^3.1",
-                "php": "^7.0"
-            },
-            "require-dev": {
-                "friends-of-behat/test-context": "^0.3"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "FriendsOfBehat\\PerformanceExtension\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Kamil Kokot",
-                    "email": "kamil@kokot.me",
-                    "homepage": "http://kamil.kokot.me"
-                }
-            ],
-            "description": "Accelerates Behat using features available only for newer PHP versions.",
-            "time": "2017-07-10T20:23:25+00:00"
         },
         {
             "name": "friends-of-behat/service-container-extension",
@@ -7546,16 +7452,16 @@
         },
         {
             "name": "mikey179/vfsStream",
-            "version": "v1.6.4",
+            "version": "v1.6.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mikey179/vfsStream.git",
-                "reference": "0247f57b2245e8ad2e689d7cee754b45fbabd592"
+                "reference": "d5fec95f541d4d71c4823bb5e30cf9b9e5b96145"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mikey179/vfsStream/zipball/0247f57b2245e8ad2e689d7cee754b45fbabd592",
-                "reference": "0247f57b2245e8ad2e689d7cee754b45fbabd592",
+                "url": "https://api.github.com/repos/mikey179/vfsStream/zipball/d5fec95f541d4d71c4823bb5e30cf9b9e5b96145",
+                "reference": "d5fec95f541d4d71c4823bb5e30cf9b9e5b96145",
                 "shasum": ""
             },
             "require": {
@@ -7588,7 +7494,7 @@
             ],
             "description": "Virtual file system to mock the real file system in unit tests.",
             "homepage": "http://vfs.bovigo.org/",
-            "time": "2016-07-18T14:02:57+00:00"
+            "time": "2017-08-01T08:02:14+00:00"
         },
         {
             "name": "myclabs/deep-copy",
