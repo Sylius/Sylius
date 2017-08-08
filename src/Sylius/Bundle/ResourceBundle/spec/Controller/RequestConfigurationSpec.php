@@ -193,6 +193,9 @@ final class RequestConfigurationSpec extends ObjectBehavior
 
     function it_returns_array_as_redirect_parameters(Parameters $parameters)
     {
+        $parameters->get('vars', [])->willReturn([]);
+        $this->getVars()->shouldReturn([]);
+
         $parameters->get('redirect')->willReturn(null);
         $this->getRedirectParameters()->shouldReturn([]);
 
@@ -206,8 +209,19 @@ final class RequestConfigurationSpec extends ObjectBehavior
         $this->getRedirectParameters()->shouldReturn(['myParameter']);
 
         $parameters->get('redirect')->willReturn(['parameters' => ['myParameter']]);
-
         $this->getRedirectParameters('resource')->shouldReturn(['myParameter']);
+
+        $invalidExtraParameters = ['redirect' => ['parameters' => 'myValue']];
+        $parameters->get('vars', [])->willReturn($invalidExtraParameters);
+        $this->getVars()->shouldReturn($invalidExtraParameters);
+        $parameters->get('redirect')->willReturn(['parameters' => ['myParameter']]);
+        $this->getRedirectParameters('resource')->shouldReturn(['myParameter']);
+
+        $validExtraParameters = ['redirect' => ['parameters' => ['myExtraParameter']]];
+        $parameters->get('vars', [])->willReturn($validExtraParameters);
+        $this->getVars()->shouldReturn($validExtraParameters);
+        $parameters->get('redirect')->willReturn(['parameters' => ['myParameter']]);
+        $this->getRedirectParameters('resource')->shouldReturn(['myParameter', 'myExtraParameter']);
     }
 
     function it_checks_if_limit_is_enabled(Parameters $parameters)
