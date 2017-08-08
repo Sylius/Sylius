@@ -4,5 +4,11 @@
 sylius:
     form:
         currency:
+            base: Mata uang utama
             code: Nama
             enabled: Diaktifkan
+            exchange_rate: Nilai tukar
+        exchange_rate:
+            source_currency: Sumber mata uang
+            target_currency: Target mata uang
+            ratio: Rasio

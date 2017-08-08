@@ -31,6 +31,7 @@ sylius:
             expires_at: Utløper
             usage_limit: Bruksgrense
         promotion_rule:
+            customer_group: Kundegruppe
             cart_quantity_configuration:
                 count: Antall
                 equal: Lik

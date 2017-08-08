@@ -33,6 +33,8 @@ sylius:
         promotion_filter:
             price_range: Kainos diapazono filtras
         promotion_rule:
+            customer_group: Klientų grupė
+            taxonomy: Taksonomijos
             cart_quantity_configuration:
                 count: Kiekis
                 equal: Lygus

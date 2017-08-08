@@ -33,6 +33,8 @@ sylius:
         promotion_filter:
             price_range: Prijs bereik filter
         promotion_rule:
+            customer_group: Klantengroep
+            taxonomy: Taxonomie
             cart_quantity_configuration:
                 count: Aantal
                 equal: Gelijk

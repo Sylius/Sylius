@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    payment:
+        cancelled: 'Pembayaran telah dibatalkan.'
+        completed: 'Pembayaran telah selesai.'
+        failed: 'Pembayaran gagal.'
+        processing: 'Pembayaran sedang diproses.'
+        refunded: 'Pembayaran telah berhasil dikembalikan.'
+        unknown: 'Ada masalah yang tidak diketahui dengan proses pembayaran.'

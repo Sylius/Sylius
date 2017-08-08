@@ -121,17 +121,92 @@ sylius:
             email: Email
         product_association:
             product: Produk terkait
+            type: Tipe Asosiasi
         product_association_type:
             name: Nama
+        promotion_filter:
+            products: Filter produk
+            taxons: Filter taksonomi
         promotion_rule:
+            customer_group:
+                group: Kelompok pelanggan
+            has_taxon:
+                taxons: Taksonomi
             product:
                 products: Produk
+            total_of_items_from_taxon:
+                taxon: Taksonomi
+                amount: Jumlah
         payment_method:
             channels: Saluran
+        product_attribute:
+            position: Posisi
+        zone:
+            scopes:
+                shipping: Pengiriman
+                tax: Pajak
     installer:
         extensions:
+            header: ekstensi
+            accelerator:
+                header: Percepatan
+                help: Aktifkan Zend OpCache (sangat direkomendasikan).
+            apc: APC
+            ctype: C-tipe
+            gd: GD
+            help: Instal dan aktifkan %extension% ekstensi.
+            iconv: Incov
+            exif: Exif
+            fileinfo: Infofile
+            icu: ICU
+            intl: Intl
+            json_encode: JSON
+            mbstring: Multibyte String
             "off": false
             "on": true
+            pcre: PCRE
+            pdo: PDO
+            php_xml: PHP-XML
+            session_start: Session
+            simplexml_import_dom: SimpleXML
+            token_get_all: Tokenizer
+        filesystem:
+            header: sistem file
+            cache:
+                header: cache
+                help: 'Untuk menyeting permissions jalankan: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+            exists: ada
+            logs:
+                header: log
+                help: 'Untuk menyeting permissions jalankan: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+            not_exists: tidak ada
+            not_writable: tidak writable
+            parameters:
+                header: parameters.yml
+                help: 'Untuk menyeting permissions jalankan: sudo chmod a+w %path%'
+            vendors: vendors
+            writable: writable
         settings:
+            header: Versi PHP dan pengaturan
+            any: semuanya
+            detect_unicode: detect_unicode
+            magic_quotes_gpc: magic_quotes_gpc
+            non_deprecated: tidak ketergantungan
             "off": false
             "on": true
+            register_globals: register_globals
+            session:
+                auto_start: session.auto_start
+            short_open_tag: short_open_tag
+            timezone: zona waktu
+            timezone_deprecated:
+                header: Zona waktu kadaluarsa
+                help: 'Zona waktu %timezone% kadaluwarsa. Perbaiki php.ini anda (daftar zona waktu yang kadaluwarsa http://php.net/manual/en/timezones.others.php).'
+            version: Versi PHP
+            version_recommended: Versi PHP yang direkomendasikan
+    payum_gateway:
+        cash_on_delivery: Bayar Ditempat
+        offline: Tidak aktif
+        paypal_express_checkout: PayPal Express Checkout
+    shipping_method_resolver:
+        by_zones_and_channel: Berdasarkan zona dan channel
