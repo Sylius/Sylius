@@ -15,7 +15,7 @@ sylius:
                 publishable_key: Chiave pubblicabile
                 secret_key: Chiave segreta
     payum_gateway_factory:
-        offline: Disconnesso
+        offline: Offline
         paypal_express_checkout: PayPal Express Checkout
         stripe_checkout: Checkout Stripe
     payum_action:

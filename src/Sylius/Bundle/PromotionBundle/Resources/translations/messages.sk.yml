@@ -33,6 +33,8 @@ sylius:
         promotion_filter:
             price_range: Filter cenového rozsahu
         promotion_rule:
+            customer_group: Skupina zákazníkov
+            taxonomy: Kategorizácia
             cart_quantity_configuration:
                 count: Počet
                 equal: Rovná sa

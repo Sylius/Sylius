@@ -31,6 +31,8 @@ sylius:
             expires_at: Förfaller den
             usage_limit: Användningsbegränsning
         promotion_rule:
+            customer_group: Kundgrupp
+            taxonomy: Taxonomi
             cart_quantity_configuration:
                 count: Antal
                 equal: Lika

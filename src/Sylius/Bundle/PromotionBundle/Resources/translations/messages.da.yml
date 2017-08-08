@@ -16,6 +16,7 @@ sylius:
         promotion_action:
             type: Type
         promotion_rule:
+            customer_group: Kundegruppe
             cart_quantity_configuration:
                 count: Antal
             contains_product_configuration:

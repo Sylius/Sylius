@@ -57,6 +57,7 @@ sylius:
         onHand:
             min: La scorta di magazzino deve essere maggiore di {{ limit }}.
             not_blank: Per favore inserisci la scorta di magazzino.
+            reserved: La scorta di magazzino deve essere maggiore del numero di unità in attesa
         original_price:
             min: Il prezzo originale non deve essere negativo.
         weight:

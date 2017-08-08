@@ -46,6 +46,8 @@ sylius:
             not_blank: Inserisci il nome della provincia.
             unique: Il nome della provincia deve essere unico.
     zone:
+        scope:
+            not_blank: Si prega di inserire il campo di applicazione.
         code:
             not_blank: Inserisci il codice della zona.
             regex: Il codice di zona può essere composto solo da lettere, numeri, trattini e underscore.

@@ -33,6 +33,8 @@ sylius:
         promotion_filter:
             price_range: Filtre de gamme de prix
         promotion_rule:
+            customer_group: Groupe de clients
+            taxonomy: Taxinomie
             cart_quantity_configuration:
                 count: Nombre
                 equal: Egal
