@@ -13,7 +13,6 @@ sylius:
         email:
             already_used: This email is already used, please login or use forgotten password.
             max: Email must not be longer than {{ limit }} characters.
-            min: Email must be at least {{ limit }} characters long.
             not_blank: Please enter your email.
             invalid: This email is invalid.
             unique: This email is already used.
