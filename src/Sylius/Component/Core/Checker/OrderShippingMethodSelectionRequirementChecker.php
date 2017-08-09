@@ -41,7 +41,7 @@ final class OrderShippingMethodSelectionRequirementChecker implements OrderShipp
      */
     public function isShippingMethodSelectionRequired(OrderInterface $order)
     {
-        if (!$this->ifItemsRequireShipping($order)) {
+        if (!$order->requiresShipping()) {
             return false;
         }
 
@@ -56,23 +56,6 @@ final class OrderShippingMethodSelectionRequirementChecker implements OrderShipp
         /** @var ShipmentInterface $shipment */
         foreach ($order->getShipments() as $shipment) {
             if (1 !== count($this->shippingMethodsResolver->getSupportedMethods($shipment))) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * @param OrderInterface $order
-     *
-     * @return bool
-     */
-    private function ifItemsRequireShipping(OrderInterface $order)
-    {
-        /** @var OrderItemInterface $orderItem */
-        foreach ($order->getItems() as $orderItem) {
-            if ($orderItem->getVariant()->isShippingRequired()) {
                 return true;
             }
         }

@@ -92,6 +92,11 @@ interface OrderInterface extends
     public function getItemUnitsByVariant(ProductVariantInterface $variant);
 
     /**
+     * @return bool
+     */
+    public function requiresShipping();
+
+    /**
      * @return Collection|ShipmentInterface[]
      */
     public function getShipments();

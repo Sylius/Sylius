@@ -57,7 +57,7 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
         /** @var OrderInterface $order */
         Assert::isInstanceOf($order, OrderInterface::class);
 
-        if ($order->isEmpty() || !$this->ifItemsRequireShipping($order)) {
+        if ($order->isEmpty() || !$order->requiresShipping()) {
             $order->removeShipments();
 
             return;
@@ -103,21 +103,5 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
         } catch (UnresolvedDefaultShippingMethodException $exception) {
             return null;
         }
-    }
-
-    /**
-     * @param OrderInterface $order
-     *
-     * @return bool
-     */
-    private function ifItemsRequireShipping(OrderInterface $order)
-    {
-        foreach ($order->getItems() as $orderItem) {
-            if ($orderItem->getVariant()->isShippingRequired()) {
-                return true;
-            }
-        }
-
-        return false;
     }
 }

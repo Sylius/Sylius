@@ -45,21 +45,9 @@ final class OrderShippingMethodSelectionRequirementCheckerSpec extends ObjectBeh
     }
 
     function it_says_that_shipping_method_do_not_have_to_be_selected_if_none_of_variants_from_order_requires_shipping(
-        OrderInterface $order,
-        OrderItemInterface $firstItem,
-        OrderItemInterface $secondItem,
-        ProductVariantInterface $firstProductVariant,
-        ProductVariantInterface $secondProductVariant
+        OrderInterface $order
     ) {
-        $order->getItems()->willReturn([$firstItem, $secondItem]);
-
-        $firstItem->getVariant()->willReturn($firstProductVariant);
-        $secondItem->getVariant()->willReturn($secondProductVariant);
-
-        $firstProductVariant->isShippingRequired()->willReturn(false);
-        $secondProductVariant->isShippingRequired()->willReturn(false);
-
-        $order->hasShipments()->willReturn(false);
+        $order->requiresShipping()->willReturn(false);
 
         $this->isShippingMethodSelectionRequired($order)->shouldReturn(false);
     }
@@ -67,23 +55,13 @@ final class OrderShippingMethodSelectionRequirementCheckerSpec extends ObjectBeh
     function it_says_that_shipping_method_do_not_have_to_be_selected_if_order_variants_require_shipping_but_there_is_only_one_shipping_method_available(
         ChannelInterface $channel,
         OrderInterface $order,
-        OrderItemInterface $firstItem,
-        OrderItemInterface $secondItem,
-        ProductVariantInterface $firstProductVariant,
-        ProductVariantInterface $secondProductVariant,
         ShipmentInterface $shipment,
         ShippingMethodInterface $shippingMethod,
         ShippingMethodsResolverInterface $shippingMethodsResolver
     ) {
-        $order->getItems()->willReturn([$firstItem, $secondItem]);
-
-        $firstItem->getVariant()->willReturn($firstProductVariant);
-        $secondItem->getVariant()->willReturn($secondProductVariant);
-
-        $firstProductVariant->isShippingRequired()->willReturn(false);
-        $secondProductVariant->isShippingRequired()->willReturn(true);
-
         $order->hasShipments()->willReturn(true);
+
+        $order->requiresShipping()->willReturn(true);
 
         $order->getChannel()->willReturn($channel);
         $channel->isSkippingShippingStepAllowed()->willReturn(true);
@@ -92,23 +70,14 @@ final class OrderShippingMethodSelectionRequirementCheckerSpec extends ObjectBeh
 
         $shippingMethodsResolver->getSupportedMethods($shipment)->willReturn([$shippingMethod]);
 
+
         $this->isShippingMethodSelectionRequired($order)->shouldReturn(false);
     }
 
     function it_says_that_shipping_method_have_to_be_selected_if_order_variants_require_shipping_and_order_has_not_shipments_yet(
-        OrderInterface $order,
-        OrderItemInterface $firstItem,
-        OrderItemInterface $secondItem,
-        ProductVariantInterface $firstProductVariant,
-        ProductVariantInterface $secondProductVariant
+        OrderInterface $order
     ) {
-        $order->getItems()->willReturn([$firstItem, $secondItem]);
-
-        $firstItem->getVariant()->willReturn($firstProductVariant);
-        $secondItem->getVariant()->willReturn($secondProductVariant);
-
-        $firstProductVariant->isShippingRequired()->willReturn(false);
-        $secondProductVariant->isShippingRequired()->willReturn(true);
+        $order->requiresShipping()->willReturn(true);
 
         $order->hasShipments()->willReturn(false);
 
@@ -117,19 +86,9 @@ final class OrderShippingMethodSelectionRequirementCheckerSpec extends ObjectBeh
 
     function it_says_that_shipping_method_have_to_be_selected_if_order_variants_require_shipping_and_channel_does_not_allow_to_skip_shipping_step(
         ChannelInterface $channel,
-        OrderInterface $order,
-        OrderItemInterface $firstItem,
-        OrderItemInterface $secondItem,
-        ProductVariantInterface $firstProductVariant,
-        ProductVariantInterface $secondProductVariant
+        OrderInterface $order
     ) {
-        $order->getItems()->willReturn([$firstItem, $secondItem]);
-
-        $firstItem->getVariant()->willReturn($firstProductVariant);
-        $secondItem->getVariant()->willReturn($secondProductVariant);
-
-        $firstProductVariant->isShippingRequired()->willReturn(false);
-        $secondProductVariant->isShippingRequired()->willReturn(true);
+        $order->requiresShipping()->willReturn(true);
 
         $order->hasShipments()->willReturn(true);
 
@@ -142,22 +101,12 @@ final class OrderShippingMethodSelectionRequirementCheckerSpec extends ObjectBeh
     function it_says_that_shipping_method_have_to_be_selected_if_order_variants_require_shipping_and_there_is_more_than_one_shipping_method_available(
         ChannelInterface $channel,
         OrderInterface $order,
-        OrderItemInterface $firstItem,
-        OrderItemInterface $secondItem,
-        ProductVariantInterface $firstProductVariant,
-        ProductVariantInterface $secondProductVariant,
         ShipmentInterface $shipment,
         ShippingMethodInterface $firstShippingMethod,
         ShippingMethodInterface $secondShippingMethod,
         ShippingMethodsResolverInterface $shippingMethodsResolver
     ) {
-        $order->getItems()->willReturn([$firstItem, $secondItem]);
-
-        $firstItem->getVariant()->willReturn($firstProductVariant);
-        $secondItem->getVariant()->willReturn($secondProductVariant);
-
-        $firstProductVariant->isShippingRequired()->willReturn(false);
-        $secondProductVariant->isShippingRequired()->willReturn(true);
+        $order->requiresShipping()->willReturn(true);
 
         $order->hasShipments()->willReturn(true);
 
