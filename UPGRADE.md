@@ -24,8 +24,6 @@
 * In order to be compatibile with Doctrine ORM 2.6+ and be more consistent 
   `OrderRepositoryInterface::count()` signature was changed to `OrderRepositoryInterface::countPlacedOrders()`.
 
-## Packages:
-
 ### ShopBundle
 
 * The following template events have been completely removed and replaced by more general events. You can listen to the event and analyze the current request to know on which page you are.
