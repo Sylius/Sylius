@@ -320,7 +320,7 @@ class Order extends BaseOrder implements OrderInterface
     /**
      * @return bool
      */
-    public function requiresShipping()
+    public function isShippingRequired()
     {
         foreach ($this->getItems() as $orderItem) {
             if ($orderItem->getVariant()->isShippingRequired()) {
