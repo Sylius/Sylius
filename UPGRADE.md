@@ -1,6 +1,11 @@
 # UPGRADE FROM 1.0.0-beta.3 to 1.0.0
 
+## Packages:
+
+### ShopBundle
+
 * The following template events have been completely removed and replaced by more general events. You can listen to the event and analyze the current request to know on which page you are.
+  
   * `sylius.shop.checkout.address.before_header`  *(use sylius.shop.checkout.before_header` instead)*
   * `sylius.shop.checkout.address.after_step` *(use sylius.shop.checkout.after_step` instead)*
   * `sylius.shop.checkout.complete.after_step` *(use sylius.shop.checkout.after_step` instead)*
