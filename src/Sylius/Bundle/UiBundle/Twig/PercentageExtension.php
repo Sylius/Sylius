@@ -24,7 +24,7 @@ class PercentageExtension extends \Twig_Extension
     public function getFilters()
     {
         return [
-            new \Twig_SimpleFilter('sylius_percentage', [$this, 'getPercentage']),
+            new \Twig_Filter('sylius_percentage', [$this, 'getPercentage']),
         ];
     }
 

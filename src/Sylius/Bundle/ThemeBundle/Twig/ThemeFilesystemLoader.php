@@ -20,7 +20,7 @@ use Symfony\Component\Templating\TemplateReferenceInterface;
 /**
  * @author Kamil Kokot <kamil@kokot.me>
  */
-final class ThemeFilesystemLoader implements \Twig_LoaderInterface, \Twig_ExistsLoaderInterface, \Twig_SourceContextLoaderInterface
+final class ThemeFilesystemLoader implements \Twig_LoaderInterface
 {
     /**
      * @var \Twig_LoaderInterface
@@ -59,20 +59,6 @@ final class ThemeFilesystemLoader implements \Twig_LoaderInterface, \Twig_Exists
 
     /**
      * {@inheritdoc}
-     *
-     * @deprecated To be removed when Twig 1.x compatibility is dropped
-     */
-    public function getSource($name)
-    {
-        try {
-            return file_get_contents($this->findTemplate($name));
-        } catch (\Exception $exception) {
-            return $this->decoratedLoader->getSource($name);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
      */
     public function getSourceContext($name)
     {
@@ -81,12 +67,7 @@ final class ThemeFilesystemLoader implements \Twig_LoaderInterface, \Twig_Exists
 
             return new \Twig_Source(file_get_contents($path), $name, $path);
         } catch (\Exception $exception) {
-            // In Twig 2.0, getSourceContext is part of \Twig_LoaderInterface
-            if ($this->decoratedLoader instanceof \Twig_SourceContextLoaderInterface || method_exists('\\Twig_LoaderInterface', 'getSourceContext')) {
-                return $this->decoratedLoader->getSourceContext($name);
-            }
-
-            throw new \Twig_Error_Loader($exception->getMessage(), -1, null, $exception);
+            return $this->decoratedLoader->getSourceContext($name);
         }
     }
 
@@ -122,12 +103,7 @@ final class ThemeFilesystemLoader implements \Twig_LoaderInterface, \Twig_Exists
         try {
             return stat($this->findTemplate($name)) !== false;
         } catch (\Exception $exception) {
-            // In Twig 2.0, exists is part of \Twig_LoaderInterface
-            if ($this->decoratedLoader instanceof \Twig_ExistsLoaderInterface || method_exists('\\Twig_LoaderInterface', 'exists')) {
-                return $this->decoratedLoader->exists($name);
-            }
-
-            return false;
+            return $this->decoratedLoader->exists($name);
         }
     }
 

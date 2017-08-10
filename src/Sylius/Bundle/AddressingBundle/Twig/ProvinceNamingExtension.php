@@ -40,8 +40,8 @@ class ProvinceNamingExtension extends \Twig_Extension
     public function getFilters(): array
     {
         return [
-            new \Twig_SimpleFilter('sylius_province_name', [$this->provinceNamingProvider, 'getName']),
-            new \Twig_SimpleFilter('sylius_province_abbreviation', [$this->provinceNamingProvider, 'getAbbreviation']),
+            new \Twig_Filter('sylius_province_name', [$this->provinceNamingProvider, 'getName']),
+            new \Twig_Filter('sylius_province_abbreviation', [$this->provinceNamingProvider, 'getAbbreviation']),
         ];
     }
 }

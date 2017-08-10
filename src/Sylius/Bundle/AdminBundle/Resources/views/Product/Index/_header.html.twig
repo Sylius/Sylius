@@ -1,3 +1,5 @@
+{% import '@SyliusUi/Macro/headers.html.twig' as headers %}
+
 {% if app.request.attributes.get('taxonId') is not null %}
     {{ render(url('sylius_admin_partial_taxon_show', {
         'id': app.request.attributes.get('taxonId'),

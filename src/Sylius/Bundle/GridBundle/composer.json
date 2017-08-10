@@ -46,7 +46,7 @@
         "symfony/security-csrf": "^3.2",
         "symfony/twig-bundle": "^3.2",
         "symfony/validator": "^3.2",
-        "twig/twig": "^1.28"
+        "twig/twig": "^2.0"
     },
     "config": {
         "bin-dir": "bin"

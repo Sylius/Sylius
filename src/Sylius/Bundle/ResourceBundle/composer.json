@@ -55,7 +55,7 @@
         "sensio/generator-bundle": "^3.1",
         "sylius/grid-bundle": "^1.0",
         "sylius/locale": "^1.0",
-        "twig/twig": "^1.28"
+        "twig/twig": "^2.0"
     },
     "suggest": {
         "doctrine/orm": "~2.5.0",

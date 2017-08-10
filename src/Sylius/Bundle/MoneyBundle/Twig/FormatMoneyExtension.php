@@ -39,7 +39,7 @@ final class FormatMoneyExtension extends \Twig_Extension
     public function getFilters()
     {
         return [
-            new \Twig_SimpleFilter('sylius_format_money', [$this->helper, 'formatAmount']),
+            new \Twig_Filter('sylius_format_money', [$this->helper, 'formatAmount']),
         ];
     }
 }

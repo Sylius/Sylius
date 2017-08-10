@@ -1,7 +1,5 @@
 {% extends 'SyliusAdminBundle::layout.html.twig' %}
 
-{% import '@SyliusUi/Macro/labels.html.twig' as label %}
-
 {% block title %}{{ 'sylius.ui.order'|trans ~' #'~ order.number }} {{ parent() }}{% endblock %}
 
 {% set customer = order.customer %}
