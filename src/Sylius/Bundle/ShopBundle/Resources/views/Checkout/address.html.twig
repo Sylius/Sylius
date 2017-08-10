@@ -31,11 +31,7 @@
 
             {% include '@SyliusShop/Checkout/_summary.html.twig' with {'order': order} %}
 
-            {{ sonata_block_render_event('sylius.shop.checkout.address.before_support', {'order': order}) }}
-
-            {% include '@SyliusShop/Checkout/_support.html.twig' %}
-
-            {{ sonata_block_render_event('sylius.shop.checkout.address.after_support', {'order': order}) }}
+            {{ sonata_block_render_event('sylius.shop.checkout.address.after_summary', {'order': order}) }}
         </div>
     </div>
 {% endblock %}
