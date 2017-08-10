@@ -18,8 +18,6 @@
     {% set steps_count = 'three' %}
 {% endif %}
 
-{{ sonata_block_render_event('sylius.shop.checkout.before_steps', {'order': order}) }}
-
 <div class="ui {{ steps_count }} steps">
     <a class="{{ steps['address'] }} step" href="{{ path('sylius_shop_checkout_address') }}">
         <i class="map icon"></i>
@@ -54,5 +52,3 @@
         </div>
     </div>
 </div>
-
-{{ sonata_block_render_event('sylius.shop.checkout.after_steps', {'order': order}) }}

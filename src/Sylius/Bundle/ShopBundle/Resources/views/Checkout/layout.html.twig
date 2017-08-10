@@ -14,9 +14,14 @@
 {% endblock %}
 
 {% block content %}
+
+    {{ sonata_block_render_event('sylius.shop.checkout.before_steps', {'order': order}) }}
+
     {% block steps %}
         {% include '@SyliusShop/Checkout/_steps.html.twig' %}
     {% endblock %}
+
+    {{ sonata_block_render_event('sylius.shop.checkout.after_steps', {'order': order}) }}
 
     <div class="ui stackable grid">
         <div class="eleven wide column">
