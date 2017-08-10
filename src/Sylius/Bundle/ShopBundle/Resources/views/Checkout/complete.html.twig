@@ -2,12 +2,10 @@
 
 {% form_theme form '@SyliusUi/Form/theme.html.twig' %}
 
-{% block steps %}
-    {% include '@SyliusShop/Checkout/_steps.html.twig' with {'active': 'complete', 'orderTotal': order.total} %}
-{% endblock %}
-
 {% block content %}
-    {{ parent() }}
+    {% block steps %}
+        {% include '@SyliusShop/Checkout/_steps.html.twig' with {'active': 'complete', 'orderTotal': order.total} %}
+    {% endblock %}
 
     <div class="ui padded segment">
         {% include '@SyliusShop/Checkout/Complete/_header.html.twig' %}
