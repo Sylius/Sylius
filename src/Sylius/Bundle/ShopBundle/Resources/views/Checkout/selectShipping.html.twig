@@ -24,11 +24,3 @@
         {{ form_end(form, {'render_rest': false}) }}
     </div>
 {% endblock %}
-
-{% block aside %}
-    {{ sonata_block_render_event('sylius.shop.checkout.select_shipping.before_summary', {'order': order}) }}
-
-    {% include '@SyliusShop/Checkout/_summary.html.twig' with {'order': order} %}
-
-    {{ sonata_block_render_event('sylius.shop.checkout.select_shipping.after_summary', {'order': order}) }}
-{% endblock %}

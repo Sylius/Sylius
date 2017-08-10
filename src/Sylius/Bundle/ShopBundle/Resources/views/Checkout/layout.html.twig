@@ -25,6 +25,11 @@
         </div>
         <div class="five wide column">
             {% block aside %}
+                {{ sonata_block_render_event('sylius.shop.checkout.before_aside', {'order': order}) }}
+
+                {% include '@SyliusShop/Checkout/_summary.html.twig' with {'order': order} %}
+
+                {{ sonata_block_render_event('sylius.shop.checkout.after_aside', {'order': order}) }}
             {% endblock %}
         </div>
     </div>

@@ -1,5 +1,18 @@
 # UPGRADE FROM 1.0.0-beta.3 to 1.0.0
 
+* The following template events have been completely removed and replaced by more general events. You can listen to the event and analyze the current request to know on which page you are.
+  * `sylius.shop.checkout.address.before_header`  *(use sylius.shop.checkout.before_header` instead)*
+  * `sylius.shop.checkout.address.after_step` *(use sylius.shop.checkout.after_step` instead)*
+  * `sylius.shop.checkout.complete.after_step` *(use sylius.shop.checkout.after_step` instead)*
+  * `sylius.shop.checkout.select_payment.before_support` *(use sylius.shop.checkout.before_aside` instead)*
+  * `sylius.shop.checkout.select_payment.after_support` *(use sylius.shop.checkout.after_saside instead)*
+  * `sylius.shop.checkout.address.before_summary` *(use sylius.shop.checkout.before_aside` instead)*
+  * `sylius.shop.checkout.address.after_summary` *(use sylius.shop.checkout.after_aside` instead)*
+  * `sylius.shop.checkout.select_payment.before_summary` *(use sylius.shop.checkout.before_aside` instead)*
+  * `sylius.shop.checkout.select_payment.after_summary` *(use sylius.shop.checkout.after_aside` instead)*
+  * `sylius.shop.checkout.select_shipping.before_summary` *(use sylius.shop.checkout.before_aside` instead)*
+  * `sylius.shop.checkout.select_shipping.after_summary` *(use sylius.shop.checkout.after_aside` instead)*
+
 # UPGRADE FROM 1.0.0-beta.2 to 1.0.0-beta.3
 
 ## Packages:

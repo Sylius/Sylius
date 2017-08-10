@@ -1,5 +1,7 @@
 {% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
 
+{{ sonata_block_render_event('sylius.shop.checkout.before_summary', {'order': order}) }}
+
 <div class="ui segment">
     <table class="ui very basic table" id="sylius-checkout-subtotal">
         <thead>
