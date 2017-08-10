@@ -12,3 +12,9 @@
 
     {{ sonata_block_render_event('sylius.shop.checkout.address.after_header', {'order': order}) }}
 {% endblock %}
+
+{% block content %}
+    {% block steps %}
+        {% include '@SyliusShop/Checkout/_steps.html.twig' %}
+    {% endblock %}
+{% endblock %}
