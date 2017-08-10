@@ -8,7 +8,6 @@
 
 {% block content %}
     {{ parent() }}
-    {{ sonata_block_render_event('sylius.shop.checkout.select_payment.after_steps', {'order': order}) }}
 
     <div class="ui stackable grid">
         <div class="eleven wide column">
