@@ -70,7 +70,7 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
     /**
      * {@inheritdoc}
      */
-    public function setExpiresAt(\DateTime $date)
+    public function setExpiresAt(\DateTimeInterface $date)
     {
         $timestamp = $date->getTimestamp();
 

@@ -29,7 +29,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class PaymentMethodExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    const DEFAULT_LOCALE = 'en_US';
+    public const DEFAULT_LOCALE = 'en_US';
 
     /**
      * @var PaymentMethodFactoryInterface

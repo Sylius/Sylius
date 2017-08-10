@@ -205,8 +205,8 @@ sylius:
             version: Versione PHP
             version_recommended: Versione PHP raccomandata
     payum_gateway:
-        cash_on_delivery: Contanti alla cosegna
-        offline: Disconnesso
+        cash_on_delivery: Contanti alla consegna
+        offline: Offline
         paypal_express_checkout: PayPal Express Checkout
     shipping_method_resolver:
         by_zones_and_channel: A seconda della zona e modalità

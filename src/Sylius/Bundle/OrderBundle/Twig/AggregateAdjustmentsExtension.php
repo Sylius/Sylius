@@ -39,7 +39,7 @@ final class AggregateAdjustmentsExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('sylius_aggregate_adjustments', [$this->adjustmentsHelper, 'getAggregatedAdjustments']),
+            new \Twig_Function('sylius_aggregate_adjustments', [$this->adjustmentsHelper, 'getAggregatedAdjustments']),
         ];
     }
 }

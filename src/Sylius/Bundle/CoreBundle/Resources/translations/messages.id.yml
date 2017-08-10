@@ -16,11 +16,30 @@ sylius:
             shipping_method: Metode pengiriman
         promotion:
             channels: Saluran
+        promotion_action:
+            add_product_configuration:
+                product: Produk
+        promotion_coupon:
+            per_customer_usage_limit: Batas penggunaan per pelanggan
         group:
             name: Nama
             roles: Peran
         channel:
+            contact_email: Kontak email
+            currencies: Mata Uang
+            currency_base: Mata uang utama
+            account_verification_required: Apakah diperlukan verifikasi akun?
+            hostname: Nama host
+            locale_default: Default Bahasa
+            locales: Pilihan Bahasa
+            payment_methods: Metode Pembayaran
+            shipping_methods: Metode pengiriman
+            skipping_shipping_step_allowed: Lewati langkah pengiriman jika hanya salah satu metode pengiriman tersedia?
+            skipping_payment_step_allowed: Lewati langkah pembayaran jika hanya salah satu metode pembayaran tersedia?
+            tax_calculation_strategy: Metode perhitungan pajak
             tax_zone_default: Standar Zona Pajak
+            taxonomies: Taksonomi
+            theme: Tema
         image:
             type: Jenis
             file: Gambar
@@ -28,9 +47,13 @@ sylius:
             code: Kode
             enabled: Diaktifkan
         order_filter:
+            created_at_from: Dibuat setelah
+            created_at_to: Dibuat sebelum
             number: Nomor
             total_from: Dari
             total_to: Untuk
+            payment_state: Tahap pembayaran
+            channel: Semua saluran
         page:
             body: Body
             id: ID
@@ -40,6 +63,7 @@ sylius:
             restricted_zone: Zona Terbatas
             short_description: Deskripsi singkat
             variant_selection_method: Metode Pilih Varian
+            main_taxon: Takson utama
             channels: Saluran
             enabled: Diaktifkan
         product_filter:
@@ -53,10 +77,13 @@ sylius:
             created_at_to: Untuk
             number: Nomor Order
             shipping_address: Kirim ke Nama
+            channel: Semua saluran
         payment_filter:
             created_at_from: Dari
             created_at_to: Untuk
             number: Nomor Order
+            billing_address: Tagihan untuk nama
+            channel: Semua saluran
         shipping_method:
             zone: Zona
         taxon:
@@ -83,21 +110,103 @@ sylius:
             on_hand: Stok
             price: Harga
             sku: SKU
+            shipping_required: Apakah biaya pengiriman diperlukan?
             weight: Berat
             width: Lebar
+        attribute:
+            product_attribute_value:
+                attribute: Atribut
+                value: Isi
         guest:
             email: Email
+        product_association:
+            product: Produk terkait
+            type: Tipe Asosiasi
         product_association_type:
             name: Nama
+        promotion_filter:
+            products: Filter produk
+            taxons: Filter taksonomi
         promotion_rule:
+            customer_group:
+                group: Kelompok pelanggan
+            has_taxon:
+                taxons: Taksonomi
             product:
                 products: Produk
+            total_of_items_from_taxon:
+                taxon: Taksonomi
+                amount: Jumlah
         payment_method:
             channels: Saluran
+        product_attribute:
+            position: Posisi
+        zone:
+            scopes:
+                shipping: Pengiriman
+                tax: Pajak
     installer:
         extensions:
+            header: ekstensi
+            accelerator:
+                header: Percepatan
+                help: Aktifkan Zend OpCache (sangat direkomendasikan).
+            apc: APC
+            ctype: C-tipe
+            gd: GD
+            help: Instal dan aktifkan %extension% ekstensi.
+            iconv: Incov
+            exif: Exif
+            fileinfo: Infofile
+            icu: ICU
+            intl: Intl
+            json_encode: JSON
+            mbstring: Multibyte String
             "off": false
             "on": true
+            pcre: PCRE
+            pdo: PDO
+            php_xml: PHP-XML
+            session_start: Session
+            simplexml_import_dom: SimpleXML
+            token_get_all: Tokenizer
+        filesystem:
+            header: sistem file
+            cache:
+                header: cache
+                help: 'Untuk menyeting permissions jalankan: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+            exists: ada
+            logs:
+                header: log
+                help: 'Untuk menyeting permissions jalankan: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+            not_exists: tidak ada
+            not_writable: tidak writable
+            parameters:
+                header: parameters.yml
+                help: 'Untuk menyeting permissions jalankan: sudo chmod a+w %path%'
+            vendors: vendors
+            writable: writable
         settings:
+            header: Versi PHP dan pengaturan
+            any: semuanya
+            detect_unicode: detect_unicode
+            magic_quotes_gpc: magic_quotes_gpc
+            non_deprecated: tidak ketergantungan
             "off": false
             "on": true
+            register_globals: register_globals
+            session:
+                auto_start: session.auto_start
+            short_open_tag: short_open_tag
+            timezone: zona waktu
+            timezone_deprecated:
+                header: Zona waktu kadaluarsa
+                help: 'Zona waktu %timezone% kadaluwarsa. Perbaiki php.ini anda (daftar zona waktu yang kadaluwarsa http://php.net/manual/en/timezones.others.php).'
+            version: Versi PHP
+            version_recommended: Versi PHP yang direkomendasikan
+    payum_gateway:
+        cash_on_delivery: Bayar Ditempat
+        offline: Tidak aktif
+        paypal_express_checkout: PayPal Express Checkout
+    shipping_method_resolver:
+        by_zones_and_channel: Berdasarkan zona dan channel

@@ -25,9 +25,9 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 final class DefaultChannelFactory implements DefaultChannelFactoryInterface
 {
-    const DEFAULT_CHANNEL_NAME = 'Default';
-    const DEFAULT_CHANNEL_CODE = 'DEFAULT';
-    const DEFAULT_CHANNEL_CURRENCY = 'USD';
+    public const DEFAULT_CHANNEL_NAME = 'Default';
+    public const DEFAULT_CHANNEL_CODE = 'DEFAULT';
+    public const DEFAULT_CHANNEL_CURRENCY = 'USD';
 
     /**
      * @var ChannelFactoryInterface

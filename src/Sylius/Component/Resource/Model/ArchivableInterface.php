@@ -19,12 +19,12 @@ namespace Sylius\Component\Resource\Model;
 interface ArchivableInterface
 {
     /**
-     * @return \DateTime
+     * @return \DateTimeInterface
      */
     public function getArchivedAt();
 
     /**
-     * @param \DateTime $archivedAt
+     * @param \DateTimeInterface $archivedAt
      */
-    public function setArchivedAt(\DateTime $archivedAt = null);
+    public function setArchivedAt(\DateTimeInterface $archivedAt = null);
 }

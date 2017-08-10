@@ -23,7 +23,7 @@ final class AddressComparator implements AddressComparatorInterface
     /**
      * {@inheritdoc}
      */
-    public function equal(AddressInterface $firstAddress, AddressInterface $secondAddress)
+    public function equal(AddressInterface $firstAddress, AddressInterface $secondAddress): bool
     {
         return $this->normalizeAddress($firstAddress) === $this->normalizeAddress($secondAddress);
     }
@@ -33,7 +33,7 @@ final class AddressComparator implements AddressComparatorInterface
      *
      * @return array
      */
-    private function normalizeAddress(AddressInterface $address)
+    private function normalizeAddress(AddressInterface $address): array
     {
         return array_map(function ($value) {
             return strtolower(trim((string) $value));

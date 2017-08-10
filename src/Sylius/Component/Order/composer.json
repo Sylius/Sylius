@@ -27,7 +27,7 @@
         "zendframework/zend-stdlib": "^3.1"
     },
     "require-dev": {
-        "phpspec/phpspec": "^4.0@rc"
+        "phpspec/phpspec": "^4.0"
     },
     "config": {
         "bin-dir": "bin"

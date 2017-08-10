@@ -1,5 +1,29 @@
 # UPGRADE FROM 1.0.0-beta.3 to 1.0.0
 
+## Application:
+
+* `\DateTimeInterface` is used for typehints instead of `\DateTime` to allow for compatibility with `\DateTimeImmutable`.
+  Do not rely on mutable behaviour and set changes directly on the model.
+
+## Packages:
+
+### Addressing / AddressingBundle
+
+* `ZoneMatcher` has been made final, use decoration instead of extending it.
+
+* The following methods does not longer have a default null argument and requires one to be explicitly passed:
+  
+  * `AddressInterface::setCountryCode`
+  * `AddressInterface::setProviceCode`
+  * `AddressInterface::setProviceName`
+  * `ProvinceInterface::setCountry`
+  * `ZoneMemberInterface::setBelongsTo`
+
+### Order / OrderBundle
+
+* In order to be compatibile with Doctrine ORM 2.6+ and be more consistent 
+  `OrderRepositoryInterface::count()` signature was changed to `OrderRepositoryInterface::countPlacedOrders()`.
+
 ## Packages:
 
 ### ShopBundle

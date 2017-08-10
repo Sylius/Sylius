@@ -28,7 +28,7 @@ class SortByExtension extends \Twig_Extension
     public function getFilters()
     {
         return [
-            new \Twig_SimpleFilter('sort_by', [$this, 'sortBy']),
+            new \Twig_Filter('sort_by', [$this, 'sortBy']),
         ];
     }
 

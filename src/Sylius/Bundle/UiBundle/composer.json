@@ -30,9 +30,9 @@
         "symfony/templating": "^3.2"
     },
     "require-dev": {
-        "phpspec/phpspec": "^4.0@rc",
+        "phpspec/phpspec": "^4.0",
         "symfony/form": "^3.2",
-        "twig/twig": "^1.28"
+        "twig/twig": "^2.0"
     },
     "config": {
         "bin-dir": "bin"

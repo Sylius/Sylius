@@ -21,11 +21,11 @@ use Symfony\Component\HttpFoundation\Request;
  */
 final class RequestConfigurationFactory implements RequestConfigurationFactoryInterface
 {
-    const API_VERSION_HEADER = 'Accept';
-    const API_GROUPS_HEADER = 'Accept';
+    public const API_VERSION_HEADER = 'Accept';
+    public const API_GROUPS_HEADER = 'Accept';
 
-    const API_VERSION_REGEXP = '/(v|version)=(?P<version>[0-9\.]+)/i';
-    const API_GROUPS_REGEXP = '/(g|groups)=(?P<groups>[a-z,_\s]+)/i';
+    public const API_VERSION_REGEXP = '/(v|version)=(?P<version>[0-9\.]+)/i';
+    public const API_GROUPS_REGEXP = '/(g|groups)=(?P<groups>[a-z,_\s]+)/i';
 
     /**
      * @var ParametersParserInterface
@@ -76,12 +76,18 @@ final class RequestConfigurationFactory implements RequestConfigurationFactoryIn
     {
         $parameters = [];
 
-        if (preg_match(self::API_VERSION_REGEXP, (string) $request->headers->get(self::API_VERSION_HEADER), $matches)) {
-            $parameters['serialization_version'] = $matches['version'];
+        $apiVersionHeaders = $request->headers->get(self::API_VERSION_HEADER, null, false);
+        foreach ($apiVersionHeaders as $apiVersionHeader) {
+            if (preg_match(self::API_VERSION_REGEXP, $apiVersionHeader, $matches)) {
+                $parameters['serialization_version'] = $matches['version'];
+            }
         }
 
-        if (preg_match(self::API_GROUPS_REGEXP, (string) $request->headers->get(self::API_GROUPS_HEADER), $matches)) {
-            $parameters['serialization_groups'] = array_map('trim', explode(',', $matches['groups']));
+        $apiGroupsHeaders = $request->headers->get(self::API_GROUPS_HEADER, null, false);
+        foreach ($apiGroupsHeaders as $apiGroupsHeader) {
+            if (preg_match(self::API_GROUPS_REGEXP, $apiGroupsHeader, $matches)) {
+                $parameters['serialization_groups'] = array_map('trim', explode(',', $matches['groups']));
+            }
         }
 
         return array_merge($request->attributes->get('_sylius', []), $parameters);

@@ -33,6 +33,8 @@ sylius:
         promotion_filter:
             price_range: กรองช่วงราคา
         promotion_rule:
+            customer_group: กลุ่มลูกค้า
+            taxonomy: การจัดประเภท
             cart_quantity_configuration:
                 count: จำนวน
                 equal: เท่ากับ

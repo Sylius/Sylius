@@ -18,8 +18,8 @@ namespace Sylius\Component\Core\Model;
  */
 final class Scope
 {
-    const SHIPPING = 'shipping';
-    const TAX = 'tax';
+    public const SHIPPING = 'shipping';
+    public const TAX = 'tax';
 
     private function __construct()
     {

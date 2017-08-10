@@ -21,9 +21,9 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  */
 interface CustomerInterface extends TimestampableInterface, ResourceInterface
 {
-    const UNKNOWN_GENDER = 'u';
-    const MALE_GENDER = 'm';
-    const FEMALE_GENDER = 'f';
+    public const UNKNOWN_GENDER = 'u';
+    public const MALE_GENDER = 'm';
+    public const FEMALE_GENDER = 'f';
 
     /**
      * @return string
@@ -73,14 +73,14 @@ interface CustomerInterface extends TimestampableInterface, ResourceInterface
     public function setLastName($lastName);
 
     /**
-     * @return \DateTime
+     * @return \DateTimeInterface
      */
     public function getBirthday();
 
     /**
-     * @param  \DateTime $birthday
+     * @param  \DateTimeInterface $birthday
      */
-    public function setBirthday(\DateTime $birthday = null);
+    public function setBirthday(\DateTimeInterface $birthday = null);
 
     /**
      * @return string

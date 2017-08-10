@@ -22,7 +22,7 @@ use Sylius\Component\Grid\Parameters;
  */
 final class Driver implements DriverInterface
 {
-    const NAME = 'doctrine/dbal';
+    public const NAME = 'doctrine/dbal';
 
     /**
      * @var Connection

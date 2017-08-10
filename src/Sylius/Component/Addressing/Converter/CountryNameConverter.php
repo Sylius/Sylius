@@ -23,7 +23,7 @@ final class CountryNameConverter implements CountryNameConverterInterface
     /**
      * {@inheritdoc}
      */
-    public function convertToCode($name, $locale = 'en')
+    public function convertToCode(string $name, string $locale = 'en'): string
     {
         $names = Intl::getRegionBundle()->getCountryNames($locale);
         $countryCode = array_search($name, $names, true);

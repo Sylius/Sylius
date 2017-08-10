@@ -24,7 +24,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 final class ProductVariantFormMenuBuilder
 {
-    const EVENT_NAME = 'sylius.menu.admin.product_variant.form';
+    public const EVENT_NAME = 'sylius.menu.admin.product_variant.form';
 
     /**
      * @var FactoryInterface

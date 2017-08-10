@@ -201,7 +201,13 @@ Remember to have it imported in the config:
 
     # app/config/config.yml
     imports:
+        # - { resource: parameters.yml } <- Has to be placed before our new file
         - { resource: parameters_platform.php }
+
+.. warning::
+
+    It is important to place newly created file after importing regular parameters.yml file. Otherwise your database connection will not work.
+    Also this will be the file where you should set your required parameters. Its value will be fetched from environmental variables.
 
 3. Add Platform.sh as a remote to your repository:
 --------------------------------------------------
@@ -242,7 +248,12 @@ When you get connected please run:
 
 .. code-block:: bash
 
-    $ php bin/console sylius:install
+    $ php bin/console sylius:install --env prod
+
+.. warning::
+
+    By default platform.sh creates only one instance of a database with the `main` name.
+    Platform.sh works with the concept of an environment per branch if activated. The idea is to mimic production settings per each branch.
 
 Learn more
 ----------

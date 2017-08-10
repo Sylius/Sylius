@@ -30,7 +30,7 @@ class Order implements OrderInterface
     protected $id;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $checkoutCompletedAt;
 
@@ -102,7 +102,7 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setCheckoutCompletedAt(\DateTime $checkoutCompletedAt = null)
+    public function setCheckoutCompletedAt(\DateTimeInterface $checkoutCompletedAt = null)
     {
         $this->checkoutCompletedAt = $checkoutCompletedAt;
     }

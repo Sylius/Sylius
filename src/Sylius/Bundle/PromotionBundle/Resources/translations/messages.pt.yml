@@ -31,6 +31,8 @@ sylius:
             expires_at: Expira às
             usage_limit: Limite de utilização
         promotion_rule:
+            customer_group: Grupo de clientes
+            taxonomy: Taxonomia
             cart_quantity_configuration:
                 count: Quantidade
                 equal: Igual

@@ -25,7 +25,7 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
  */
 final class HasTaxonRuleChecker implements RuleCheckerInterface
 {
-    const TYPE = 'has_taxon';
+    public const TYPE = 'has_taxon';
 
     /**
      * {@inheritdoc}

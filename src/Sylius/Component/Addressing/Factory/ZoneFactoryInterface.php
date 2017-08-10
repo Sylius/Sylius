@@ -26,12 +26,12 @@ interface ZoneFactoryInterface extends FactoryInterface
      *
      * @return ZoneInterface
      */
-    public function createTyped($type);
+    public function createTyped(string $type): ZoneInterface;
 
     /**
      * @param array $membersCodes
      *
      * @return ZoneInterface
      */
-    public function createWithMembers(array $membersCodes);
+    public function createWithMembers(array $membersCodes): ZoneInterface;
 }

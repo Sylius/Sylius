@@ -1,7 +1,5 @@
 {% extends 'SyliusAdminBundle::layout.html.twig' %}
 
-{% import 'SyliusUiBundle:Macro:headers.html.twig' as headers %}
-
 {% set header = configuration.vars.header|default(metadata.applicationName~'.ui.new_'~metadata.name) %}
 {% set event_prefix = metadata.applicationName ~ '.admin.' ~ metadata.name ~ '.create' %}
 

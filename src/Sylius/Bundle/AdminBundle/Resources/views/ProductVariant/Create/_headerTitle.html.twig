@@ -1,1 +1,3 @@
+{% import '@SyliusUi/Macro/headers.html.twig' as headers %}
+
 {{ headers.default(resource.product.name, configuration.vars.icon|default('plus'), configuration.vars.subheader|default(header)|trans) }}

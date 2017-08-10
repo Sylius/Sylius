@@ -92,7 +92,7 @@ class Product implements ProductInterface
     /**
      * @return string
      */
-    public function getCode()
+    public function getCode(): ?string
     {
         return $this->code;
     }
@@ -100,7 +100,7 @@ class Product implements ProductInterface
     /**
      * @param string $code
      */
-    public function setCode($code)
+    public function setCode(?string $code): void
     {
         $this->code = $code;
     }

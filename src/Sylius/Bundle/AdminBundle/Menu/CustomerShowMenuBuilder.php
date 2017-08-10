@@ -25,7 +25,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 final class CustomerShowMenuBuilder
 {
-    const EVENT_NAME = 'sylius.menu.admin.customer.show';
+    public const EVENT_NAME = 'sylius.menu.admin.customer.show';
 
     /**
      * @var FactoryInterface

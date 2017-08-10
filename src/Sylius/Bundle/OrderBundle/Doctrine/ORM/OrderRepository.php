@@ -25,7 +25,7 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
     /**
      * {@inheritdoc}
      */
-    public function count()
+    public function countPlacedOrders()
     {
         return (int) $this->createQueryBuilder('o')
             ->select('COUNT(o.id)')
@@ -114,7 +114,7 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
     /**
      * {@inheritdoc}
      */
-    public function findCartsNotModifiedSince(\DateTime $terminalDate)
+    public function findCartsNotModifiedSince(\DateTimeInterface $terminalDate)
     {
         return $this->createQueryBuilder('o')
             ->andWhere('o.state = :state')

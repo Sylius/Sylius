@@ -30,7 +30,7 @@ class ProvinceAddressConstraint extends Constraint
     /**
      * {@inheritdoc}
      */
-    public function getTargets()
+    public function getTargets(): string
     {
         return self::CLASS_CONSTRAINT;
     }
@@ -38,7 +38,7 @@ class ProvinceAddressConstraint extends Constraint
     /**
      * {@inheritdoc}
      */
-    public function validatedBy()
+    public function validatedBy(): string
     {
         return 'sylius_province_address_validator';
     }

@@ -57,7 +57,7 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
         /** @var OrderInterface $order */
         Assert::isInstanceOf($order, OrderInterface::class);
 
-        if ($order->isEmpty()) {
+        if ($order->isEmpty() || !$order->requiresShipping()) {
             $order->removeShipments();
 
             return;
@@ -69,6 +69,10 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
             return;
         }
 
+        foreach ($shipment->getUnits() as $unit) {
+            $shipment->removeUnit($unit);
+        }
+
         foreach ($order->getItemUnits() as $itemUnit) {
             if (null === $itemUnit->getShipment()) {
                 $shipment->addUnit($itemUnit);
@@ -77,11 +81,11 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
     }
 
     /**
-     * @param BaseOrderInterface $order
+     * @param OrderInterface $order
      *
      * @return ShipmentInterface
      */
-    private function getOrderShipment(BaseOrderInterface $order)
+    private function getOrderShipment(OrderInterface $order)
     {
         if ($order->hasShipments()) {
             return $order->getShipments()->first();

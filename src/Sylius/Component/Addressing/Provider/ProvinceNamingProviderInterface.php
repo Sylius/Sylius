@@ -26,12 +26,12 @@ interface ProvinceNamingProviderInterface
      *
      * @return string
      */
-    public function getName(AddressInterface $address);
+    public function getName(AddressInterface $address): string;
 
     /**
      * @param AddressInterface $address
      *
      * @return string
      */
-    public function getAbbreviation(AddressInterface $address);
+    public function getAbbreviation(AddressInterface $address): string;
 }

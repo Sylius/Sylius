@@ -28,7 +28,7 @@ final class CountryType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->addEventSubscriber(new AddCodeFormSubscriber(\Symfony\Component\Form\Extension\Core\Type\CountryType::class))
@@ -45,7 +45,7 @@ final class CountryType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_country';
     }

@@ -21,10 +21,10 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class ResourceControllerEvent extends GenericEvent
 {
-    const TYPE_ERROR = 'error';
-    const TYPE_WARNING = 'warning';
-    const TYPE_INFO = 'info';
-    const TYPE_SUCCESS = 'success';
+    public const TYPE_ERROR = 'error';
+    public const TYPE_WARNING = 'warning';
+    public const TYPE_INFO = 'info';
+    public const TYPE_SUCCESS = 'success';
 
     /**
      * @var string

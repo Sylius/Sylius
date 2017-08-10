@@ -32,6 +32,8 @@ sylius:
                 multiple: Multiplo
                 values: Valori
                 choose: Seleziona un'opzione
+                min: Min voci
+                max: Max voci
             text:
                 min: Minima Lunghezza
                 max: Massima Lunghezza

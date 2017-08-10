@@ -3,10 +3,18 @@
 
 sylius:
     form:
+        shipment:
+            states:
+                checkout: Checkout
+                pending: Tertunda
+                cancelled: Dibatalkan
         shipping_category:
+            description: Keterangan
             name: Nama
         shipping_method:
             channels: Saluran
+            description: Keterangan
             enabled: Diaktifkan
             name: Nama
             tax_category: Kategori Pajak
+            translations: Terjemahan

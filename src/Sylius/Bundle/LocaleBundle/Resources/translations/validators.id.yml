@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    locale:
+        code:
+            not_blank: Mohon masukkan kode bahasa.
+            regex: Kode bahasa hanya boleh terdiri dari huruf, angka, tanda strip, dan garis bawah.
+            unique: Kode bahasa harus unik.

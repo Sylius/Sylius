@@ -78,11 +78,17 @@ trait TranslatableTrait
             return $translation;
         }
 
-        $fallbackTranslation = $this->translations->get($this->fallbackLocale);
-        if (null !== $fallbackTranslation) {
-            $this->translationsCache[$this->fallbackLocale] = $fallbackTranslation;
+        if ($locale !== $this->fallbackLocale) {
+            if (isset($this->translationsCache[$this->fallbackLocale])) {
+                return $this->translationsCache[$this->fallbackLocale];
+            }
 
-            return $fallbackTranslation;
+            $fallbackTranslation = $this->translations->get($this->fallbackLocale);
+            if (null !== $fallbackTranslation) {
+                $this->translationsCache[$this->fallbackLocale] = $fallbackTranslation;
+
+                return $fallbackTranslation;
+            }
         }
 
         $translation = $this->createTranslation();

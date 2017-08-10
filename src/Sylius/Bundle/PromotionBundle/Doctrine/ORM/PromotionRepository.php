@@ -44,11 +44,11 @@ class PromotionRepository extends EntityRepository implements PromotionRepositor
 
     /**
      * @param QueryBuilder $queryBuilder
-     * @param \DateTime|null $date
+     * @param \DateTimeInterface|null $date
      *
      * @return QueryBuilder
      */
-    protected function filterByActive(QueryBuilder $queryBuilder, \DateTime $date = null)
+    protected function filterByActive(QueryBuilder $queryBuilder, \DateTimeInterface $date = null)
     {
         return $queryBuilder
             ->andWhere('o.startsAt IS NULL OR o.startsAt < :date')

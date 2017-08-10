@@ -22,18 +22,18 @@ use Sylius\Component\Grid\Filtering\FilterInterface;
  */
 final class StringFilter implements FilterInterface
 {
-    const NAME = 'string';
+    public const NAME = 'string';
 
-    const TYPE_EQUAL = 'equal';
-    const TYPE_NOT_EQUAL = 'not_equal';
-    const TYPE_EMPTY = 'empty';
-    const TYPE_NOT_EMPTY = 'not_empty';
-    const TYPE_CONTAINS = 'contains';
-    const TYPE_NOT_CONTAINS = 'not_contains';
-    const TYPE_STARTS_WITH = 'starts_with';
-    const TYPE_ENDS_WITH = 'ends_with';
-    const TYPE_IN = 'in';
-    const TYPE_NOT_IN = 'not_in';
+    public const TYPE_EQUAL = 'equal';
+    public const TYPE_NOT_EQUAL = 'not_equal';
+    public const TYPE_EMPTY = 'empty';
+    public const TYPE_NOT_EMPTY = 'not_empty';
+    public const TYPE_CONTAINS = 'contains';
+    public const TYPE_NOT_CONTAINS = 'not_contains';
+    public const TYPE_STARTS_WITH = 'starts_with';
+    public const TYPE_ENDS_WITH = 'ends_with';
+    public const TYPE_IN = 'in';
+    public const TYPE_NOT_IN = 'not_in';
 
     /**
      * {@inheritdoc}

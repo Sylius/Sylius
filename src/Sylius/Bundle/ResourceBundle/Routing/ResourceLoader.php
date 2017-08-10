@@ -171,6 +171,9 @@ final class ResourceLoader implements LoaderInterface
         if (!empty($configuration['criteria'])) {
             $defaults['_sylius']['criteria'] = $configuration['criteria'];
         }
+        if (array_key_exists('filterable', $configuration)) {
+            $defaults['_sylius']['filterable'] = $configuration['filterable'];
+        }
         if (isset($configuration['templates']) && in_array($actionName, ['show', 'index', 'create', 'update'], true)) {
             $defaults['_sylius']['template'] = sprintf('%s:%s.html.twig', $configuration['templates'], $actionName);
         }

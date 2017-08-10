@@ -26,5 +26,5 @@ interface CountryNameConverterInterface
      *
      * @throws \InvalidArgumentException
      */
-    public function convertToCode($name, $locale = 'en');
+    public function convertToCode(string $name, string $locale = 'en'): string;
 }

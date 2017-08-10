@@ -22,20 +22,20 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  */
 interface OrderInterface extends AdjustableInterface, ResourceInterface, TimestampableInterface
 {
-    const STATE_CART = 'cart';
-    const STATE_NEW = 'new';
-    const STATE_CANCELLED = 'cancelled';
-    const STATE_FULFILLED = 'fulfilled';
+    public const STATE_CART = 'cart';
+    public const STATE_NEW = 'new';
+    public const STATE_CANCELLED = 'cancelled';
+    public const STATE_FULFILLED = 'fulfilled';
 
     /**
-     * @return \DateTime
+     * @return \DateTimeInterface
      */
     public function getCheckoutCompletedAt();
 
     /**
-     * @param null|\DateTime $checkoutCompletedAt
+     * @param null|\DateTimeInterface $checkoutCompletedAt
      */
-    public function setCheckoutCompletedAt(\DateTime $checkoutCompletedAt = null);
+    public function setCheckoutCompletedAt(\DateTimeInterface $checkoutCompletedAt = null);
 
     /**
      * @return bool

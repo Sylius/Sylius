@@ -22,7 +22,7 @@ Sylius\Component\Core\Model\ProductTranslation:
     mug_translation:
         slug: "mug"
         locale: "en_US"
-        name: 'Mug'
+        name: "Mug"
         description: <paragraph(2)>
         translatable: "@mug"
 
@@ -32,7 +32,7 @@ Sylius\Component\Core\Model\ProductVariant:
         product: "@mug"
         currentLocale: "en_US"
         currentTranslation: "@sw_mug_translation"
-        updatedAt: 2015-10-10
+        updatedAt: <(new DateTime('2015-10-10'))>
         channelPricings:
             CHANNEL: "@sw_mug_web_channel_pricing"
         taxCategory: "@taxable_goods"
@@ -41,7 +41,7 @@ Sylius\Component\Core\Model\ProductVariant:
         product: "@mug"
         currentLocale: "en_US"
         currentTranslation: "@hard_available_mug_translation"
-        updatedAt: 2015-10-05
+        updatedAt: <(new DateTime('2015-10-05'))>
         channelPricings:
             CHANNEL: "@hard_available_mug_web_channel_pricing"
         taxCategory: "@taxable_goods"
@@ -50,12 +50,12 @@ Sylius\Component\Core\Model\ProductVariant:
 
 Sylius\Component\Product\Model\ProductVariantTranslation:
     sw_mug_translation:
-        locale: en_US
-        name: 'Star wars mug'
+        locale: "en_US"
+        name: "Star wars mug"
         translatable: "@mug_sw"
     hard_available_mug_translation:
-        locale: en_US
-        name: 'Breaking bad mug'
+        locale: "en_US"
+        name: "Breaking bad mug"
         translatable: "@hard_available_mug"
 
 Sylius\Component\Core\Model\ChannelPricing:
@@ -70,33 +70,36 @@ Sylius\Component\Core\Model\ShippingMethod:
     ups:
         code: "UPS"
         enabled: true
-        calculator: 'flat_rate'
+        calculator: "flat_rate"
         configuration:
             CHANNEL:
                 amount: 1000
         zone: "@zone_eu"
-        currentLocale: en_US
-        currentTranslation: "@upsTranslation1"
-        channels: ['@channel']
+        currentLocale: "en_US"
+        currentTranslation: "@ups_translation"
+        channels: ["@channel"]
     dhl:
         code: "DHL"
         enabled: true
-        calculator: 'flat_rate'
+        calculator: "flat_rate"
         configuration:
             CHANNEL:
                 amount: 2000
         zone: "@zone_eu"
-        channel: ['@channel']
+        channel: ["@channel"]
+        currentLocale: "en_US"
+        currentTranslation: "@dhl_translation"
+        channels: ["@channel"]
 
 Sylius\Component\Shipping\Model\ShippingMethodTranslation:
-    upsTranslation1:
-        name: 'UPS'
-        locale: 'en_US'
+    ups_translation:
+        name: "UPS"
+        locale: "en_US"
         description: <paragraph(2)>
         translatable: "@ups"
-    dhlTranslation1:
-        name: 'DHL'
-        locale: 'en_US'
+    dhl_translation:
+        name: "DHL"
+        locale: "en_US"
         translatable: "@dhl"
         description: <paragraph(2)>
 
@@ -104,31 +107,31 @@ Sylius\Component\Core\Model\PaymentMethod:
     cash_on_delivery:
         code: "cod"
         enabled: true
-        gatewayConfig: '@offline'
+        gatewayConfig: "@offline"
         currentLocale: "en_US"
         currentTranslation: "@cash_on_delivery_translation1"
-        channels: ['@channel']
+        channels: ["@channel"]
     pay_by_check:
         code: "pbc"
         enabled: true
-        gatewayConfig: '@offline'
-        channels: ['@channel']
+        gatewayConfig: "@offline"
+        channels: ["@channel"]
 
 Sylius\Bundle\PayumBundle\Model\GatewayConfig:
     offline:
-        gatewayName: 'Offline'
-        factoryName: 'offline'
+        gatewayName: "Offline"
+        factoryName: "offline"
         config: []
 
 Sylius\Component\Payment\Model\PaymentMethodTranslation:
     cash_on_delivery_translation1:
-        name: 'Cash on delivery'
-        locale: 'en_US'
+        name: "Cash on delivery"
+        locale: "en_US"
         description: <paragraph(2)>
         translatable: "@cash_on_delivery"
     pay_by_check_translation1:
-        name: 'Pay by check'
-        locale: 'en_US'
+        name: "Pay by check"
+        locale: "en_US"
         description: <paragraph(2)>
         translatable: "@pay_by_check"
 
@@ -158,7 +161,7 @@ Sylius\Component\Core\Model\Customer:
         lastName: "Queen"
         email: "oliver.queen@star-city.com"
         emailCanonical: "oliver.queen@star-city.com"
-        birthday: <date()>
+        birthday: <(new \DateTime())>
 
 Sylius\Component\Taxation\Model\TaxCategory:
     taxable_goods:

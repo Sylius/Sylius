@@ -7,13 +7,13 @@
 
 {% set criteria = app.request.query.get('criteria', {}) %}
 
-{% set default_path = path(route, {'criteria': criteria}|merge(route_parameters)) %}
-{% set from_a_to_z_path = path(route, {'sorting': {'name': 'asc'}, 'criteria': criteria}|merge(route_parameters)) %}
-{% set from_z_to_a_path = path(route, {'sorting': {'name': 'desc'}, 'criteria': criteria}|merge(route_parameters)) %}
-{% set oldest_first_path = path(route, {'sorting': {'createdAt': 'asc'}, 'criteria': criteria}|merge(route_parameters)) %}
-{% set newest_first_path = path(route, {'sorting': {'createdAt': 'desc'}, 'criteria': criteria}|merge(route_parameters)) %}
-{% set cheapest_first_path = path(route, {'sorting': {'price': 'asc'}, 'criteria': criteria}|merge(route_parameters)) %}
-{% set most_expensive_first_path = path(route, {'sorting': {'price': 'desc'}, 'criteria': criteria}|merge(route_parameters)) %}
+{% set default_path = path(route, route_parameters|merge({'criteria': criteria})) %}
+{% set from_a_to_z_path = path(route, route_parameters|merge({'sorting': {'name': 'asc'}, 'criteria': criteria})) %}
+{% set from_z_to_a_path = path(route, route_parameters|merge({'sorting': {'name': 'desc'}, 'criteria': criteria})) %}
+{% set oldest_first_path = path(route, route_parameters|merge({'sorting': {'createdAt': 'asc'}, 'criteria': criteria})) %}
+{% set newest_first_path = path(route, route_parameters|merge({'sorting': {'createdAt': 'desc'}, 'criteria': criteria})) %}
+{% set cheapest_first_path = path(route, route_parameters|merge({'sorting': {'price': 'asc'}, 'criteria': criteria})) %}
+{% set most_expensive_first_path = path(route, route_parameters|merge({'sorting': {'price': 'desc'}, 'criteria': criteria})) %}
 
 {% if app.request.query.get('sorting') is empty %}
     {% set current_sorting_label = 'sylius.ui.by_position'|trans|lower %}
@@ -33,7 +33,7 @@
 
 <div class="ui right floated small header">
     <div class="content">
-        {{ 'sylius.ui.display'|trans }}
+        {{ 'sylius.ui.sort'|trans }}
         <div class="ui inline dropdown">
             <div class="text">{{ current_sorting_label }}</div>
             <i class="dropdown icon"></i>

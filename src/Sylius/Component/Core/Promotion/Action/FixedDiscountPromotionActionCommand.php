@@ -27,7 +27,7 @@ use Webmozart\Assert\Assert;
  */
 final class FixedDiscountPromotionActionCommand extends DiscountPromotionActionCommand
 {
-    const TYPE = 'order_fixed_discount';
+    public const TYPE = 'order_fixed_discount';
 
     /**
      * @var ProportionalIntegerDistributorInterface

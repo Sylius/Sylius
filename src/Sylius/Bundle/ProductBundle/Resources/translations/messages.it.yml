@@ -11,6 +11,7 @@ sylius:
             meta_keywords: Meta keywords
             meta_description: Meta descrizione
             slug: Slug
+            taxons: Generi
         product_variant:
             name: Nome
         association_type:

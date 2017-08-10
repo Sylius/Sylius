@@ -18,6 +18,6 @@ use Sylius\Component\Resource\Model\ResourceLogEntry;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class AddressLogEntry extends ResourceLogEntry
+class AddressLogEntry extends ResourceLogEntry
 {
 }

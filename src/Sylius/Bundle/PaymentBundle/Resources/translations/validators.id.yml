@@ -1,0 +1,45 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    credit_card:
+        cardholder_name:
+            min_length: Nama pemegang kartu setidaknya terdiri dari {{ limit }} karakter.
+            not_blank: Mohon masukkan nama pemegang kartu.
+        expiry_month:
+            max_range: Bulan kadaluarsa kartu kredit harus antara {{ min }} dan {{ max }}.
+            min_range: Bulan kadaluarsa kartu kredit harus antara {{ min }} dan {{ max }}.
+            not_blank: Silakan pilih bulan kadaluarsa.
+        number:
+            not_blank: Harap masukkan nomor kartu.
+            luhn: Nomor kartu kredit yang anda masukkan tidak valid.
+        security_code:
+            not_blank: Mohon masukan kode kemanan.
+            max_length: Kode CVV kartu kredit minimal harus sepanjang {{ limit }} digit.
+            min_length: Kode CVV kartu kredit harus sepanjang {{ limit }} digit.
+        expiry_year:
+            not_blank: Silakan pilih tahun kadaluarsa.
+    payment:
+        currency_code:
+            not_valid: Kode mata uang yang anda masukkan tidak valid.
+        method:
+            not_blank: 'Silahkan pilih metode pembayaran.'
+    payment_method:
+        gateway:
+            not_blank: Silahkan pilih gatway metode pembayaran.
+        name:
+            max_length: Nama metode pembayaran harus sepanjang {{ limit }} karakter atau kurang.
+            min_length: Nama metode pembayaran setidaknya terdiri dari {{ limit }} karakter.
+            not_blank: Mohon masukan nama metode pembayaran.
+        fee_calculator_configuration:
+            amount:
+                greater_than_or_equal: Biaya tidak boleh lebih rendah dari {{ compared_value }}.
+                not_blank: Mohon masukan jumlah biaya.
+            percent:
+                max_range: Presentase biaya tidak boleh lebih dari {{ limit }}.
+                min_range: Presentase biaya tidak boleh kurang dari {{ limit }}.
+                not_blank: Mohon masukan presentase biaya.
+        code:
+            not_blank: 'Mohon masukan kode metode pembayaran.'
+            regex: 'Kode pembayaran hanya boleh terdiri dari huruf, angka, tanda strip, dan garis bawah.'
+            unique: 'Kode metode pembayaran tersebut sudah ada.'

@@ -33,9 +33,9 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     }
 
     /**
-     * @param \DateTime $date
+     * @param \DateTimeInterface $date
      */
-    public function setExpiresAt(\DateTime $date)
+    public function setExpiresAt(\DateTimeInterface $date)
     {
         $timestamp = $date->getTimestamp();
 

@@ -23,7 +23,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 final class AccountMenuBuilder
 {
-    const EVENT_NAME = 'sylius.menu.shop.account';
+    public const EVENT_NAME = 'sylius.menu.shop.account';
 
     /**
      * @var FactoryInterface

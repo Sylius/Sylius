@@ -50,7 +50,7 @@ final class ExpiredCartsRemoverSpec extends ObjectBehavior
         OrderInterface $firstCart,
         OrderInterface $secondCart
     ) {
-        $orderRepository->findCartsNotModifiedSince(Argument::type('\DateTime'))->willReturn([
+        $orderRepository->findCartsNotModifiedSince(Argument::type('\DateTimeInterface'))->willReturn([
             $firstCart,
             $secondCart
         ]);

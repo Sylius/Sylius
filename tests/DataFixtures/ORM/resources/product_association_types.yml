@@ -1,19 +1,19 @@
 Sylius\Component\Product\Model\ProductAssociationTypeTranslation:
     associationTypeTranslation1nl:
         locale: nl_NL
-        name: 'Cross sell (nl_NL)'
+        name: "Cross sell (nl_NL)"
         translatable: "@productAssociationType1"
     associationTypeTranslation1en:
         locale: en_US
-        name: 'Cross sell'
+        name: "Cross sell"
         translatable: "@productAssociationType1"
     associationTypeTranslation2nl:
         locale: nl_NL
-        name: 'Up sell (nl_NL)'
+        name: "Up sell (nl_NL)"
         translatable: "@productAssociationType2"
     associationTypeTranslation2en:
         locale: en_US
-        name: 'Up sell'
+        name: "Up sell"
         translatable: "@productAssociationType2"
 
 Sylius\Component\Product\Model\ProductAssociationType:

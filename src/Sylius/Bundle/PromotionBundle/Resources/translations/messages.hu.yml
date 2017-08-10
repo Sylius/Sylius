@@ -23,6 +23,7 @@ sylius:
         promotion_coupon_generator_instruction:
             usage_limit: Felhasználhatóság korlátozása
         promotion_rule:
+            taxonomy: Taxonómia
             cart_quantity_configuration:
                 count: Mennyiség
                 equal: Egyenlő

@@ -24,10 +24,10 @@ Sylius\Component\Core\Model\Channel:
 
 Sylius\Component\Currency\Model\Currency:
     currency1:
-        code: EUR
+        code: "EUR"
     currency2:
-        code: USD
+        code: "USD"
 
 Sylius\Component\Locale\Model\Locale:
     locale:
-        code: en_US
+        code: "en_US"

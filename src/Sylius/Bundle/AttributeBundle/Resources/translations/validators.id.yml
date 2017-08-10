@@ -7,6 +7,10 @@ sylius:
             not_blank: Silahkan masukkan nama atribut.
             min_length: Nama atribut setidaknya 1 karakter . |Nama atribut harus setidaknya {{ limit }} karakter.
             max_length: Nama atribut tidak boleh lebih dari 1 karakter. |Nama atribut tidak boleh lebih dari {{ limit }} karakter.
+        code:
+            not_blank: Silahkan masukkan kode atribut.
+            regex: Atribut Kode hanya boleh terdiri dari huruf, angka, tanda strip, dan garis bawah.
+            unique: Kode ini telah digunakan.
         presentation:
             not_blank: Masukkan atribut presentasi.
             min_length: Presentasi atribut harus setidaknya 1 karakter . |Atribut presentasi setidaknya harus {{ limit }} karakter.

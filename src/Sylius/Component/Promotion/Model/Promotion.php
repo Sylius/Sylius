@@ -69,12 +69,12 @@ class Promotion implements PromotionInterface
     protected $used = 0;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $startsAt;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $endsAt;
 
@@ -118,7 +118,7 @@ class Promotion implements PromotionInterface
     /**
      * {@inheritdoc}
      */
-    public function getCode()
+    public function getCode(): ?string
     {
         return $this->code;
     }
@@ -126,7 +126,7 @@ class Promotion implements PromotionInterface
     /**
      * {@inheritdoc}
      */
-    public function setCode($code)
+    public function setCode(?string $code): void
     {
         $this->code = $code;
     }
@@ -248,7 +248,7 @@ class Promotion implements PromotionInterface
     /**
      * {@inheritdoc}
      */
-    public function setStartsAt(\DateTime $startsAt = null)
+    public function setStartsAt(\DateTimeInterface $startsAt = null)
     {
         $this->startsAt = $startsAt;
     }
@@ -264,7 +264,7 @@ class Promotion implements PromotionInterface
     /**
      * {@inheritdoc}
      */
-    public function setEndsAt(\DateTime $endsAt = null)
+    public function setEndsAt(\DateTimeInterface $endsAt = null)
     {
         $this->endsAt = $endsAt;
     }

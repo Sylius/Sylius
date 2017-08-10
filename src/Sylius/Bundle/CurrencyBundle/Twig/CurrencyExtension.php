@@ -39,7 +39,7 @@ final class CurrencyExtension extends \Twig_Extension
     public function getFilters()
     {
         return [
-            new \Twig_SimpleFilter('sylius_currency_symbol', [$this->helper, 'convertCurrencyCodeToSymbol']),
+            new \Twig_Filter('sylius_currency_symbol', [$this->helper, 'convertCurrencyCodeToSymbol']),
         ];
     }
 }

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
+use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -40,19 +41,19 @@ final class CountryChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
             ->setDefaults([
-                'choices' => function (Options $options) {
+                'choices' => function (Options $options): iterable {
                     if (null === $options['enabled']) {
                         $countries = $this->countryRepository->findAll();
                     } else {
                         $countries = $this->countryRepository->findBy(['enabled' => $options['enabled']]);
                     }
 
-                    usort($countries, function ($a, $b) {
-                        return $a->getName() < $b->getName() ? -1 : 1;
+                    usort($countries, function (CountryInterface $a, CountryInterface $b): int {
+                        return $a->getName() <=> $b->getName();
                     });
 
                     return $countries;
@@ -70,7 +71,7 @@ final class CountryChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getParent()
+    public function getParent(): string
     {
         return ChoiceType::class;
     }
@@ -78,7 +79,7 @@ final class CountryChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_country_choice';
     }

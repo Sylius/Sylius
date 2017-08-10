@@ -21,14 +21,14 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  */
 interface PaymentInterface extends TimestampableInterface, ResourceInterface
 {
-    const STATE_CART = 'cart';
-    const STATE_NEW = 'new';
-    const STATE_PROCESSING = 'processing';
-    const STATE_COMPLETED = 'completed';
-    const STATE_FAILED = 'failed';
-    const STATE_CANCELLED = 'cancelled';
-    const STATE_REFUNDED = 'refunded';
-    const STATE_UNKNOWN = 'unknown';
+    public const STATE_CART = 'cart';
+    public const STATE_NEW = 'new';
+    public const STATE_PROCESSING = 'processing';
+    public const STATE_COMPLETED = 'completed';
+    public const STATE_FAILED = 'failed';
+    public const STATE_CANCELLED = 'cancelled';
+    public const STATE_REFUNDED = 'refunded';
+    public const STATE_UNKNOWN = 'unknown';
 
     /**
      * @return PaymentMethodInterface

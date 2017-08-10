@@ -46,8 +46,8 @@ final class TestPromotionFactorySpec extends ObjectBehavior
         $promotionFactory->createNew()->willReturn($promotion);
         $promotion->setName('Super promotion')->shouldBeCalled();
         $promotion->setCode('super_promotion')->shouldBeCalled();
-        $promotion->setStartsAt(Argument::type('\DateTime'))->shouldBeCalled();
-        $promotion->setEndsAt(Argument::type('\DateTime'))->shouldBeCalled();
+        $promotion->setStartsAt(Argument::type('\DateTimeInterface'))->shouldBeCalled();
+        $promotion->setEndsAt(Argument::type('\DateTimeInterface'))->shouldBeCalled();
 
         $this->create('Super promotion')->shouldReturn($promotion);
     }
@@ -60,8 +60,8 @@ final class TestPromotionFactorySpec extends ObjectBehavior
         $promotionFactory->createNew()->willReturn($promotion);
         $promotion->setName('Super promotion')->shouldBeCalled();
         $promotion->setCode('super_promotion')->shouldBeCalled();
-        $promotion->setStartsAt(Argument::type('\DateTime'))->shouldBeCalled();
-        $promotion->setEndsAt(Argument::type('\DateTime'))->shouldBeCalled();
+        $promotion->setStartsAt(Argument::type('\DateTimeInterface'))->shouldBeCalled();
+        $promotion->setEndsAt(Argument::type('\DateTimeInterface'))->shouldBeCalled();
         $promotion->addChannel($channel)->shouldBeCalled();
 
         $this->createForChannel('Super promotion', $channel)->shouldReturn($promotion);

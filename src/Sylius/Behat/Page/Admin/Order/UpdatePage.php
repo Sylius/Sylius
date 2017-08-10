@@ -23,8 +23,8 @@ use Sylius\Component\Addressing\Model\AddressInterface;
  */
 class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 {
-    const TYPE_BILLING = 'billing';
-    const TYPE_SHIPPING = 'shipping';
+    public const TYPE_BILLING = 'billing';
+    public const TYPE_SHIPPING = 'shipping';
 
     /**
      * {@inheritdoc}

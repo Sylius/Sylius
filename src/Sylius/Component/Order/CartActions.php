@@ -18,8 +18,8 @@ namespace Sylius\Component\Order;
  */
 final class CartActions
 {
-    const ADD = 'add';
-    const REMOVE = 'remove';
+    public const ADD = 'add';
+    public const REMOVE = 'remove';
 
     private function __construct()
     {
