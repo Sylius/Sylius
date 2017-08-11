@@ -1,18 +1,18 @@
 {% import '@SyliusUi/Macro/messages.html.twig' as messages %}
 {% import '@SyliusUi/Macro/pagination.html.twig' as pagination %}
 
-{{ sonata_block_render_event('sylius.shop.product.index.before_search', {'products': products}) }}
+{{ sonata_block_render_event('sylius.shop.product.index.before_search', {'products': resources.data}) }}
 
 {% include '@SyliusShop/Product/Index/_search.html.twig' %}
 
-{{ sonata_block_render_event('sylius.shop.product.index.after_search', {'products': products}) }}
+{{ sonata_block_render_event('sylius.shop.product.index.after_search', {'products': resources.data}) }}
 
 {% include '@SyliusShop/Product/Index/_pagination.html.twig' %}
 {% include '@SyliusShop/Product/Index/_sorting.html.twig' %}
 
 <div class="ui clearing hidden divider"></div>
 
-{{ sonata_block_render_event('sylius.shop.product.index.before_list', {'products': products}) }}
+{{ sonata_block_render_event('sylius.shop.product.index.before_list', {'products': resources.data}) }}
 
 {% if resources.data|length > 0 %}
     <div class="ui three column stackable grid" id="products">
@@ -24,7 +24,7 @@
     </div>
     <div class="ui hidden divider"></div>
 
-    {{ sonata_block_render_event('sylius.shop.product.index.before_pagination', {'products': products}) }}
+    {{ sonata_block_render_event('sylius.shop.product.index.before_pagination', {'products': resources.data}) }}
 
     {{ pagination.simple(resources.data) }}
 {% else %}
