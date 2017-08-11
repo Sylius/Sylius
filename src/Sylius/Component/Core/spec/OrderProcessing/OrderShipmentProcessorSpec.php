@@ -62,7 +62,7 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
 
         $shipmentFactory->createNew()->willReturn($shipment);
 
-        $order->requiresShipping()->willReturn(true);
+        $order->isShippingRequired()->willReturn(true);
 
         $order->getItems()->willReturn([$orderItem]);
         $order->isEmpty()->willReturn(false);
@@ -94,7 +94,7 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
 
         $shipmentFactory->createNew()->willReturn($shipment);
 
-        $order->requiresShipping()->willReturn(false);
+        $order->isShippingRequired()->willReturn(false);
 
         $productVariant->isShippingRequired()->willReturn(false);
 
@@ -120,7 +120,7 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
 
         $orderItem->getVariant()->willReturn($productVariant);
 
-        $order->requiresShipping()->willReturn(true);
+        $order->isShippingRequired()->willReturn(true);
 
         $order->getItems()->willReturn([$orderItem]);
 
@@ -147,7 +147,7 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
     ) {
         $shipments->first()->willReturn($shipment);
 
-        $order->requiresShipping()->willReturn(true);
+        $order->isShippingRequired()->willReturn(true);
 
         $order->isEmpty()->willReturn(false);
         $order->hasShipments()->willReturn(true);

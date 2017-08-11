@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\Checker;
 
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
 
@@ -41,7 +40,7 @@ final class OrderShippingMethodSelectionRequirementChecker implements OrderShipp
      */
     public function isShippingMethodSelectionRequired(OrderInterface $order)
     {
-        if (!$order->requiresShipping()) {
+        if (!$order->isShippingRequired()) {
             return false;
         }
 

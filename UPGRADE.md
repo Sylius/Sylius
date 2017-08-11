@@ -19,6 +19,10 @@
   * `ProvinceInterface::setCountry`
   * `ZoneMemberInterface::setBelongsTo`
 
+### Core / CoreBundle
+
+* Method `OrderInterface::isShippingRequired` added, used in place of similar methods in `OrderShippingMethodSelectionRequirementChecker` and `OrderShipmentProcessor`
+
 ### Order / OrderBundle
 
 * In order to be compatibile with Doctrine ORM 2.6+ and be more consistent 

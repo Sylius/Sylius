@@ -47,7 +47,7 @@ final class OrderShippingMethodSelectionRequirementCheckerSpec extends ObjectBeh
     function it_says_that_shipping_method_do_not_have_to_be_selected_if_none_of_variants_from_order_requires_shipping(
         OrderInterface $order
     ) {
-        $order->requiresShipping()->willReturn(false);
+        $order->isShippingRequired()->willReturn(false);
 
         $this->isShippingMethodSelectionRequired($order)->shouldReturn(false);
     }
@@ -61,7 +61,7 @@ final class OrderShippingMethodSelectionRequirementCheckerSpec extends ObjectBeh
     ) {
         $order->hasShipments()->willReturn(true);
 
-        $order->requiresShipping()->willReturn(true);
+        $order->isShippingRequired()->willReturn(true);
 
         $order->getChannel()->willReturn($channel);
         $channel->isSkippingShippingStepAllowed()->willReturn(true);
@@ -70,14 +70,13 @@ final class OrderShippingMethodSelectionRequirementCheckerSpec extends ObjectBeh
 
         $shippingMethodsResolver->getSupportedMethods($shipment)->willReturn([$shippingMethod]);
 
-
         $this->isShippingMethodSelectionRequired($order)->shouldReturn(false);
     }
 
     function it_says_that_shipping_method_have_to_be_selected_if_order_variants_require_shipping_and_order_has_not_shipments_yet(
         OrderInterface $order
     ) {
-        $order->requiresShipping()->willReturn(true);
+        $order->isShippingRequired()->willReturn(true);
 
         $order->hasShipments()->willReturn(false);
 
@@ -88,7 +87,7 @@ final class OrderShippingMethodSelectionRequirementCheckerSpec extends ObjectBeh
         ChannelInterface $channel,
         OrderInterface $order
     ) {
-        $order->requiresShipping()->willReturn(true);
+        $order->isShippingRequired()->willReturn(true);
 
         $order->hasShipments()->willReturn(true);
 
@@ -106,7 +105,7 @@ final class OrderShippingMethodSelectionRequirementCheckerSpec extends ObjectBeh
         ShippingMethodInterface $secondShippingMethod,
         ShippingMethodsResolverInterface $shippingMethodsResolver
     ) {
-        $order->requiresShipping()->willReturn(true);
+        $order->isShippingRequired()->willReturn(true);
 
         $order->hasShipments()->willReturn(true);
 
