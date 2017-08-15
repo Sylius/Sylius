@@ -16,7 +16,6 @@ sylius:
         email:
             already_used: 该电子邮件已被使用，请登录或选择忘记密码
             max: 电子邮件不允许超过{{limit}}个字符
-            min: 电子邮件至少{{limit}}个字符
             not_blank: 请输入您的电子邮件。
             invalid: 电子邮件无效。
             unique: 该电子邮件已被使用

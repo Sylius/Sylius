@@ -11,6 +11,7 @@ sylius:
             last_name: Achternaam
             phone_number: Telefoonnummer
             postcode: Postcode
+            street: Straat
             province: Provincie
             zone: Zone
         country:
