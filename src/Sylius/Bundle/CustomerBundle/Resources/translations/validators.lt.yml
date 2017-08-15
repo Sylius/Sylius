@@ -16,7 +16,6 @@ sylius:
         email:
             already_used: Šis adresas jau naudojamas, prašome prisijungti arba naudoti „pamiršau slaptažodį“.
             max: El. paštas turi būti ilgesnis nei {{ limit }} simbolių.
-            min: El. paštas turi būti ilgesnis nei {{ limit }} simboliai.
             not_blank: Įveskite savo elektroninio pašto adresą.
             invalid: Šis adresas yra neteisingas.
             unique: Šis el. paštas jau naudojamas.
