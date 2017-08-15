@@ -44,7 +44,6 @@ class ProductFixture extends AbstractResourceFixture
                 ->arrayNode('taxons')->prototype('scalar')->end()->end()
                 ->arrayNode('channels')->prototype('scalar')->end()->end()
                 ->arrayNode('product_attributes')->prototype('scalar')->end()->end()
-                ->arrayNode('product_reviews')->prototype('scalar')->end()->end()
                 ->arrayNode('product_options')->prototype('scalar')->end()->end()
                 ->arrayNode('images')->prototype('scalar')->end()->end()
                 ->booleanNode('shipping_required')->end()
