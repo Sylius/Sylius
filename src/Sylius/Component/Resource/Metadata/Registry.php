@@ -24,6 +24,11 @@ final class Registry implements RegistryInterface
     private $metadata = [];
 
     /**
+     * @var array
+     */
+    private $metadataByClass = [];
+
+    /**
      * {@inheritdoc}
      */
     public function getAll()
@@ -36,7 +41,7 @@ final class Registry implements RegistryInterface
      */
     public function get($alias)
     {
-        if (!array_key_exists($alias, $this->metadata)) {
+        if (!isset($this->metadata[$alias])) {
             throw new \InvalidArgumentException(sprintf('Resource "%s" does not exist.', $alias));
         }
 
@@ -46,15 +51,29 @@ final class Registry implements RegistryInterface
     /**
      * {@inheritdoc}
      */
+    public function has($alias)
+    {
+        return isset($this->metadata[$alias]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getByClass($className)
     {
-        foreach ($this->metadata as $metadata) {
-            if ($className === $metadata->getClass('model')) {
-                return $metadata;
-            }
+        if (!isset($this->metadataByClass[$className])) {
+            throw new \InvalidArgumentException(sprintf('Resource with model class "%s" does not exist.', $className));
         }
 
-        throw new \InvalidArgumentException(sprintf('Resource with model class "%s" does not exist.', $className));
+        return $this->metadataByClass[$className];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasByClass($className)
+    {
+        return isset($this->metadataByClass[$className]);
     }
 
     /**
@@ -63,6 +82,7 @@ final class Registry implements RegistryInterface
     public function add(MetadataInterface $metadata)
     {
         $this->metadata[$metadata->getAlias()] = $metadata;
+        $this->metadataByClass[$metadata->getClass('model')] = $metadata;
     }
 
     /**

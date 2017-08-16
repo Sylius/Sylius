@@ -33,11 +33,25 @@ interface RegistryInterface
     public function get($alias);
 
     /**
+     * @param string $alias
+     *
+     * @return bool
+     */
+    public function has($alias);
+
+    /**
      * @param string $className
      *
      * @return MetadataInterface
      */
     public function getByClass($className);
+
+    /**
+     * @param string $className
+     * 
+     * @return bool
+     */
+    public function hasByClass($className);
 
     /**
      * @param MetadataInterface $metadata
