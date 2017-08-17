@@ -146,10 +146,12 @@ final class TableAccessor implements TableAccessorInterface
                 $searchedValue = substr($searchedValue, 1, -2);
             }
 
-            return $this->containsSearchedValue($columns[$index]->getText(), $searchedValue);
+            if (!$this->containsSearchedValue($columns[$index]->getText(), $searchedValue)) {
+                return false;
+            }
         }
 
-        return false;
+        return true;
     }
 
     /**
