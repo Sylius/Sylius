@@ -4,7 +4,7 @@
 sylius:
     form:
         block:
-            body: Krop
+            body: Indhold
             id: ID
             title: Titel
         cart:
@@ -132,6 +132,8 @@ sylius:
                 taxons: Kategorier
             product:
                 products: Produkter
+            total_of_items_from_taxon:
+                amount: Beløb
         payment_method:
             channels: Kanaler
         product_attribute:
@@ -197,3 +199,10 @@ sylius:
             timezone_deprecated:
                 header: Uddateret tidszone
             version: PHP version
+            version_recommended: Anbefalet PHP version
+    payum_gateway:
+        cash_on_delivery: Betaling pr. efterkrav
+        offline: Offline
+        paypal_express_checkout: PayPal Express Checkout
+    shipping_method_resolver:
+        by_zones_and_channel: Af zoner og kanal

@@ -27,6 +27,8 @@ sylius:
         promotion_rule:
             cart_quantity_configuration:
                 count: Brojač
+            contains_product_configuration:
+                variants: Proizvodi
             item_total_configuration:
                 amount: Iznos
             shipping_country_configuration:

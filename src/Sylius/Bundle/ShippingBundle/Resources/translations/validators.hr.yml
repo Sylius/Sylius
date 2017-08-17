@@ -16,3 +16,6 @@ sylius:
             max_length: 'Naziv tipa dostave ne smije biti dulji od {{ limit }} znakova.'
             min_length: 'Naziv tipa dostave mora imati najmanje {{ limit }} znakova.'
             not_blank: 'Unesite naziv tipa dostave.'
+    shipment:
+        shipping_method:
+            not_blank: 'Molimo odaberite metodu dostave.'

@@ -35,7 +35,7 @@ sylius:
         balance_due: 'Restbeløb'
         billing_address: 'Faktureringsadresse'
         blocks: 'Blokke'
-        body: 'Krop'
+        body: 'Indhold'
         browse_products: 'Gennemse produkter'
         build: 'Byg'
         calculator: 'Beregner'

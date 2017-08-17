@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    cart:
+        add_item: 'Artikal je dodan u vašu košaricu'
+        cannot_modify: 'Narudžba je već poslana za košaricu koju pokušavate izmijeniti.'
+        remove_item: 'Artikal je uklonjen iz vaše košarice'
+        save: 'Uspješno ste izmijenili košaricu'
