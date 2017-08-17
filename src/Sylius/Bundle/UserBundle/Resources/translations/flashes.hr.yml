@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    user:
+        expire_password_reset_token: 'Kod za promjenu lozinke je istekao.'
+        change_password: 'Uspješno ste promijenili svoju lozinku!'
+        reset_password: 'Uspješno ste postavili novu lozinku!'
+        reset_password_request: 'Ako email adresa koju ste unjeli postoji u našem sustavu, poslali smo vam upute kako postaviti novu lozinku.'
+        verify_email: 'Uspješno ste potvrdili svoju email adresu.'
+        verify_email_by_invalid_token: 'Kod za potvrdu email adrese je netočan.'
+        verify_email_request: 'Poslalan vam je email koji sadrži link sa kodom za potvrdu vašeg računa.'
+        verify_verified_email: 'Vaša email adresa je već potvrđena.'
