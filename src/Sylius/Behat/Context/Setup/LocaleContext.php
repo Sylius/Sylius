@@ -117,7 +117,7 @@ final class LocaleContext implements Context
         }
 
         foreach ($localesNames as $localeName) {
-            $channel->addLocale($this->provideLocale($this->localeConverter->convertNameToCode($localeName)));
+            $channel->addLocale($this->provideLocale($this->localeConverter->convertNameToCode($localeName, 'en_US')));
         }
 
         $this->channelManager->flush();

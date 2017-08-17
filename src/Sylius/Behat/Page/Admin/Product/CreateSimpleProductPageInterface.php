@@ -123,4 +123,11 @@ interface CreateSimpleProductPageInterface extends BaseCreatePageInterface
      * @param bool $isShippingRequired
      */
     public function setShippingRequired($isShippingRequired);
+
+    /**
+     * @param string $localeCode
+     *
+     * @return string
+     */
+    public function getTranslatedLocaleName($localeCode);
 }

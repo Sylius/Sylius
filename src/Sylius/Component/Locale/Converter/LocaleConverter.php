@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Locale\Converter;
 
+use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Symfony\Component\Intl\Intl;
 use Webmozart\Assert\Assert;
 
@@ -22,10 +23,27 @@ use Webmozart\Assert\Assert;
 final class LocaleConverter implements LocaleConverterInterface
 {
     /**
+     * @var LocaleContextInterface
+     */
+    private $localeContext;
+
+    /**
+     * @param LocaleContextInterface $localeContext
+     */
+    public function __construct(LocaleContextInterface $localeContext)
+    {
+        $this->localeContext = $localeContext;
+    }
+
+    /**
      * {@inheritdoc}
      */
-    public function convertNameToCode($name, $locale = 'en')
+    public function convertNameToCode($name, $locale = null)
     {
+        if (null === $locale) {
+            $locale = $this->localeContext->getLocaleCode();
+        }
+
         $names = Intl::getLocaleBundle()->getLocaleNames($locale);
         $code = array_search($name, $names, true);
 
@@ -37,8 +55,12 @@ final class LocaleConverter implements LocaleConverterInterface
     /**
      * {@inheritdoc}
      */
-    public function convertCodeToName($code, $locale = 'en')
+    public function convertCodeToName($code, $locale = null)
     {
+        if (null === $locale) {
+            $locale = $this->localeContext->getLocaleCode();
+        }
+
         $name = Intl::getLocaleBundle()->getLocaleName($code, $locale);
 
         Assert::notNull($name, sprintf('Cannot find name for "%s" locale code', $code));

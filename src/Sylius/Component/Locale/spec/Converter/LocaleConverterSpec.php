@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\Locale\Converter;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Converter\LocaleConverter;
 use Sylius\Component\Locale\Converter\LocaleConverterInterface;
 
@@ -22,6 +23,11 @@ use Sylius\Component\Locale\Converter\LocaleConverterInterface;
  */
 final class LocaleConverterSpec extends ObjectBehavior
 {
+    function let(LocaleContextInterface $localeContext)
+    {
+        $this->beConstructedWith($localeContext);
+    }
+
     function it_is_initializable()
     {
         $this->shouldHaveType(LocaleConverter::class);
@@ -32,18 +38,40 @@ final class LocaleConverterSpec extends ObjectBehavior
         $this->shouldImplement(LocaleConverterInterface::class);
     }
 
-    function it_converts_locale_name_to_locale_code()
+    function it_converts_locale_name_to_locale_code(LocaleContextInterface $localeContext)
     {
+        $localeContext->getLocaleCode()->willReturn('en_US');
+
         $this->convertNameToCode('German')->shouldReturn('de');
         $this->convertNameToCode('Norwegian')->shouldReturn('no');
         $this->convertNameToCode('Polish')->shouldReturn('pl');
     }
 
-    function it_converts_locale_code_to_locale_name()
+    function it_converts_locale_code_to_locale_name(LocaleContextInterface $localeContext)
     {
+        $localeContext->getLocaleCode()->willReturn('en_US');
+
         $this->convertCodeToName('de')->shouldReturn('German');
         $this->convertCodeToName('no')->shouldReturn('Norwegian');
         $this->convertCodeToName('pl')->shouldReturn('Polish');
+    }
+
+    function it_converts_locale_name_to_locale_code_in_passed_locale(LocaleContextInterface $localeContext)
+    {
+        $localeContext->getLocaleCode()->shouldNotBeCalled();
+
+        $this->convertNameToCode('niemiecki', 'pl')->shouldReturn('de');
+        $this->convertNameToCode('norweski', 'pl')->shouldReturn('no');
+        $this->convertNameToCode('polski', 'pl')->shouldReturn('pl');
+    }
+
+    function it_converts_locale_code_to_locale_name_in_passed_locale(LocaleContextInterface $localeContext)
+    {
+        $localeContext->getLocaleCode()->shouldNotBeCalled();
+
+        $this->convertCodeToName('de', 'pl')->shouldReturn('niemiecki');
+        $this->convertCodeToName('no', 'pl')->shouldReturn('norweski');
+        $this->convertCodeToName('pl', 'pl')->shouldReturn('polski');
     }
 
     function it_throws_invalid_argument_exception_if_cannot_convert_name_to_code()

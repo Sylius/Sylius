@@ -945,6 +945,17 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @Then I should see the :localeCode name section translated as :translatedLocaleName
+     */
+    public function iShouldSeeTheLocaleTranslatedAs($localeCode, $translatedLocaleName)
+    {
+        Assert::same(
+            $this->createSimpleProductPage->getTranslatedLocaleName($localeCode),
+            $translatedLocaleName
+        );
+    }
+
+    /**
      * @param string $element
      * @param string $value
      */
