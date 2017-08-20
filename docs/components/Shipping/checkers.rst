@@ -68,7 +68,7 @@ This class checks if shipping method rules are capable of shipping given subject
     $ruleCheckerRegistry = new ServiceRegistry(RuleCheckerInterface::class);
     $ruleCheckerRegistry->register(RuleInterface::TYPE_ITEM_COUNT, $ruleChecker);
 
-    $methodEligibilityChecker = new shippingMethodEligibilityChecker($ruleCheckerRegistry);
+    $methodEligibilityChecker = new ShippingMethodEligibilityChecker($ruleCheckerRegistry);
 
     ///returns true, because quantity of shipping item in shipment is equal as count in rule's configuration
     $methodEligibilityChecker->isEligible($shipment, $shippingMethod);
