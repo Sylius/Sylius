@@ -42,11 +42,6 @@ In all examples is used an exemplary class implementing **ShippableInterface**, 
         /**
          * @var int
          */
-        private $width;
-
-        /**
-         * @var int
-         */
         private $depth;
 
         /**
