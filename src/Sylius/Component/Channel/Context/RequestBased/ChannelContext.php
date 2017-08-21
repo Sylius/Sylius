@@ -47,7 +47,7 @@ final class ChannelContext implements ChannelContextInterface
     /**
      * {@inheritdoc}
      */
-    public function getChannel()
+    public function getChannel(): ChannelInterface
     {
         try {
             return $this->getChannelForRequest($this->getMasterRequest());
@@ -61,7 +61,7 @@ final class ChannelContext implements ChannelContextInterface
      *
      * @return ChannelInterface
      */
-    private function getChannelForRequest(Request $request)
+    private function getChannelForRequest(Request $request): ChannelInterface
     {
         $channel = $this->requestResolver->findChannel($request);
 
@@ -73,7 +73,7 @@ final class ChannelContext implements ChannelContextInterface
     /**
      * @return Request
      */
-    private function getMasterRequest()
+    private function getMasterRequest(): Request
     {
         $masterRequest = $this->requestStack->getMasterRequest();
         if (null === $masterRequest) {
@@ -86,7 +86,7 @@ final class ChannelContext implements ChannelContextInterface
     /**
      * @param ChannelInterface|null $channel
      */
-    private function assertChannelWasFound(ChannelInterface $channel = null)
+    private function assertChannelWasFound(?ChannelInterface $channel): void
     {
         if (null === $channel) {
             throw new \UnexpectedValueException('Channel was not found for given request');

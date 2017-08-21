@@ -21,7 +21,7 @@ class ChannelNotFoundException extends \RuntimeException
     /**
      * {@inheritdoc}
      */
-    public function __construct(\Exception $previousException = null)
+    public function __construct(?\Exception $previousException = null)
     {
         parent::__construct('Channel could not be found!', 0, $previousException);
     }

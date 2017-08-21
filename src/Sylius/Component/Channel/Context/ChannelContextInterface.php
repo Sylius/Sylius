@@ -25,5 +25,5 @@ interface ChannelContextInterface
      *
      * @throws ChannelNotFoundException
      */
-    public function getChannel();
+    public function getChannel(): ChannelInterface;
 }
