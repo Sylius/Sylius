@@ -38,7 +38,7 @@ class Promotion extends BasePromotion implements PromotionInterface
     /**
      * {@inheritdoc}
      */
-    public function getChannels()
+    public function getChannels(): Collection
     {
         return $this->channels;
     }
@@ -46,7 +46,7 @@ class Promotion extends BasePromotion implements PromotionInterface
     /**
      * {@inheritdoc}
      */
-    public function addChannel(BaseChannelInterface $channel)
+    public function addChannel(BaseChannelInterface $channel): void
     {
         if (!$this->hasChannel($channel)) {
             $this->channels->add($channel);
@@ -56,7 +56,7 @@ class Promotion extends BasePromotion implements PromotionInterface
     /**
      * {@inheritdoc}
      */
-    public function removeChannel(BaseChannelInterface $channel)
+    public function removeChannel(BaseChannelInterface $channel): void
     {
         if ($this->hasChannel($channel)) {
             $this->channels->removeElement($channel);
@@ -66,7 +66,7 @@ class Promotion extends BasePromotion implements PromotionInterface
     /**
      * {@inheritdoc}
      */
-    public function hasChannel(BaseChannelInterface $channel)
+    public function hasChannel(BaseChannelInterface $channel): bool
     {
         return $this->channels->contains($channel);
     }
