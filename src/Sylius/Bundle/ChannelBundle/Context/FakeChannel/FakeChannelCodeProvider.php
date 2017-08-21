@@ -23,7 +23,7 @@ final class FakeChannelCodeProvider implements FakeChannelCodeProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function getCode(Request $request)
+    public function getCode(Request $request): ?string
     {
         return $request->query->get('_channel_code') ?: $request->cookies->get('_channel_code');
     }

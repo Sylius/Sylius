@@ -25,5 +25,5 @@ interface FakeChannelCodeProviderInterface
      *
      * @return string|null
      */
-    public function getCode(Request $request);
+    public function getCode(Request $request): ?string;
 }
