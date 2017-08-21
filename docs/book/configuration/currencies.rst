@@ -71,7 +71,7 @@ the ``Sylius\Component\Core\Currency\CurrencyStorageInterface`` with methods
 
     $container->get('sylius.storage.currency')->set($channel, 'PLN');
 
-Displaying Currencies in a templates
+Displaying Currencies in the templates
 ------------------------------------
 
 There are some useful helpers for rendering money values in the front end.
