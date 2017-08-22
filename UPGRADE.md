@@ -29,6 +29,14 @@
 
 * Method `OrderInterface::isShippingRequired` added, used in place of similar methods in `OrderShippingMethodSelectionRequirementChecker` and `OrderShipmentProcessor`
 
+### Customer / CustomerBundle
+
+* The following methods does not longer have a default null argument and requires one to be explicitly passed:
+  
+  * `CustomerInterface::setBirthday`
+  * `CustomerInterface::setGroup`
+  * `CustomerAwareInterface::setCustomer`
+
 ### Mailer / MailerBundle
 
 * `Email` has been made final, use decoration instead of extending it.
