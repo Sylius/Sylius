@@ -29,7 +29,6 @@
 
 * Method `OrderInterface::isShippingRequired` added, used in place of similar methods in `OrderShippingMethodSelectionRequirementChecker` and `OrderShipmentProcessor`
 
-
 ### Mailer / MailerBundle
 
 * `Email` has been made final, use decoration instead of extending it.
@@ -38,6 +37,10 @@
 
 * In order to be compatibile with Doctrine ORM 2.6+ and be more consistent 
   `OrderRepositoryInterface::count()` signature was changed to `OrderRepositoryInterface::countPlacedOrders()`.
+
+### Registry
+
+* `PrioritizedServiceRegistryInterface::all` method return type changed from Zend's `PriorityQueue` to `iterable`.
 
 # UPGRADE FROM 1.0.0-beta.2 to 1.0.0-beta.3
 
