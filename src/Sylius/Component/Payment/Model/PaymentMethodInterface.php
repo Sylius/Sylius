@@ -29,34 +29,34 @@ interface PaymentMethodInterface extends
     TranslatableInterface
 {
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getName(): ?string;
 
     /**
-     * @param string $name
+     * {@inheritdoc}
      */
-    public function setName(string $name): void;
+    public function setName(?string $name): void;
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getDescription(): ?string;
 
     /**
-     * @param string $description
+     * {@inheritdoc}
      */
-    public function setDescription(string $description): void;
+    public function setDescription(?string $description): void;
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getInstructions(): ?string;
 
     /**
-     * @param string $instructions
+     * {@inheritdoc}
      */
-    public function setInstructions(string $instructions): void;
+    public function setInstructions(?string $instructions): void;
 
     /**
      * @return string

@@ -97,7 +97,7 @@ class PaymentMethod implements PaymentMethodInterface
     /**
      * {@inheritdoc}
      */
-    public function setName(string $name): void
+    public function setName(?string $name): void
     {
         $this->getTranslation()->setName($name);
     }
@@ -113,7 +113,7 @@ class PaymentMethod implements PaymentMethodInterface
     /**
      * {@inheritdoc}
      */
-    public function setDescription(string $description): void
+    public function setDescription(?string $description): void
     {
         $this->getTranslation()->setDescription($description);
     }
@@ -129,7 +129,7 @@ class PaymentMethod implements PaymentMethodInterface
     /**
      * {@inheritdoc}
      */
-    public function setInstructions(string $instructions): void
+    public function setInstructions(?string $instructions): void
     {
         $this->getTranslation()->setInstructions($instructions);
     }

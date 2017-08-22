@@ -18,32 +18,32 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 interface PaymentMethodTranslationInterface extends ResourceInterface
 {
     /**
-     * @return string
+     * @return string|null
      */
     public function getName(): ?string;
 
     /**
-     * @param string $name
+     * @param string|null $name
      */
-    public function setName(string $name): void;
+    public function setName(?string $name): void;
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getDescription(): ?string;
 
     /**
-     * @param string $description
+     * @param string|null $description
      */
-    public function setDescription(string $description): void;
+    public function setDescription(?string $description): void;
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getInstructions(): ?string;
 
     /**
-     * @param string $instructions
+     * @param string|null $instructions
      */
-    public function setInstructions(string $instructions): void;
+    public function setInstructions(?string $instructions): void;
 }
