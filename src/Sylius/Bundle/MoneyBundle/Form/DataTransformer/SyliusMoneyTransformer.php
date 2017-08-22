@@ -23,7 +23,7 @@ final class SyliusMoneyTransformer extends MoneyToLocalizedStringTransformer
     /**
      * {@inheritdoc}
      */
-    public function reverseTransform($value)
+    public function reverseTransform($value): ?int
     {
         $value = parent::reverseTransform($value);
 

@@ -34,7 +34,7 @@ class FormatMoneyHelper extends Helper implements FormatMoneyHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function formatAmount($amount, $currencyCode, $localeCode)
+    public function formatAmount(int $amount, string $currencyCode, string $localeCode): string
     {
         return $this->moneyFormatter->format($amount, $currencyCode, $localeCode);
     }
@@ -42,7 +42,7 @@ class FormatMoneyHelper extends Helper implements FormatMoneyHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'sylius_format_money';
     }

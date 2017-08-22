@@ -27,5 +27,5 @@ interface FormatMoneyHelperInterface
      *
      * @throws \InvalidArgumentException
      */
-    public function formatAmount($amount, $currencyCode, $localeCode);
+    public function formatAmount(int $amount, string $currencyCode, string $localeCode): string;
 }

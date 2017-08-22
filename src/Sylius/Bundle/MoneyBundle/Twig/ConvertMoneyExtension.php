@@ -36,7 +36,7 @@ final class ConvertMoneyExtension extends \Twig_Extension
     /**
      * {@inheritdoc}
      */
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
             new \Twig_Filter('sylius_convert_money', [$this->helper, 'convertAmount']),

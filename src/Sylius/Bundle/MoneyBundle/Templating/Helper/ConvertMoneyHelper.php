@@ -34,15 +34,15 @@ class ConvertMoneyHelper extends Helper implements ConvertMoneyHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function convertAmount($amount, $sourceCurrencyCode, $targetCurrencyCode)
+    public function convertAmount(int $amount, ?string $sourceCurrencyCode, ?string $targetCurrencyCode): string
     {
-        return $this->currencyConverter->convert($amount, $sourceCurrencyCode, $targetCurrencyCode);
+        return (string) $this->currencyConverter->convert($amount, $sourceCurrencyCode, $targetCurrencyCode);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'sylius_money_converter';
     }
