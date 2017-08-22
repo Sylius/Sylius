@@ -37,7 +37,7 @@ final class LocaleExtension extends \Twig_Extension
     /**
      * {@inheritdoc}
      */
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
             new \Twig_Filter('sylius_locale_name', [$this->localeHelper, 'convertCodeToName']),

@@ -27,22 +27,17 @@ use Symfony\Component\HttpFoundation\RequestStack;
  */
 final class RequestBasedLocaleContextSpec extends ObjectBehavior
 {
-    function let(RequestStack $requestStack, LocaleProviderInterface $localeProvider)
+    function let(RequestStack $requestStack, LocaleProviderInterface $localeProvider): void
     {
         $this->beConstructedWith($requestStack, $localeProvider);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(RequestBasedLocaleContext::class);
-    }
-
-    function it_is_a_locale_context()
+    function it_is_a_locale_context(): void
     {
         $this->shouldImplement(LocaleContextInterface::class);
     }
 
-    function it_throws_locale_not_found_exception_if_master_request_is_not_found(RequestStack $requestStack)
+    function it_throws_locale_not_found_exception_if_master_request_is_not_found(RequestStack $requestStack): void
     {
         $requestStack->getMasterRequest()->willReturn(null);
 
@@ -52,7 +47,7 @@ final class RequestBasedLocaleContextSpec extends ObjectBehavior
     function it_throws_locale_not_found_exception_if_master_request_does_not_have_locale_attribute(
         RequestStack $requestStack,
         Request $request
-    ) {
+    ): void {
         $requestStack->getMasterRequest()->willReturn($request);
 
         $request->attributes = new ParameterBag();
@@ -64,7 +59,7 @@ final class RequestBasedLocaleContextSpec extends ObjectBehavior
         RequestStack $requestStack,
         LocaleProviderInterface $localeProvider,
         Request $request
-    ) {
+    ): void {
         $requestStack->getMasterRequest()->willReturn($request);
 
         $request->attributes = new ParameterBag(['_locale' => 'en_US']);
@@ -78,7 +73,7 @@ final class RequestBasedLocaleContextSpec extends ObjectBehavior
         RequestStack $requestStack,
         LocaleProviderInterface $localeProvider,
         Request $request
-    ) {
+    ): void {
         $requestStack->getMasterRequest()->willReturn($request);
 
         $request->attributes = new ParameterBag(['_locale' => 'pl_PL']);
