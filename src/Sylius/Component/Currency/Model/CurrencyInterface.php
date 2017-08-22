@@ -26,7 +26,7 @@ interface CurrencyInterface extends
     ResourceInterface
 {
     /**
-     * @return string
+     * @return string|null
      */
-    public function getName();
+    public function getName(): ?string;
 }

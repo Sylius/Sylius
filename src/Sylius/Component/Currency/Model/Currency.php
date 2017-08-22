@@ -29,7 +29,7 @@ class Currency implements CurrencyInterface
     protected $id;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $code;
 
@@ -41,9 +41,9 @@ class Currency implements CurrencyInterface
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
-        return $this->getCode();
+        return (string) $this->getCode();
     }
 
     /**
@@ -57,7 +57,7 @@ class Currency implements CurrencyInterface
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): ?string
     {
         return Intl::getCurrencyBundle()->getCurrencyName($this->getCode());
     }

@@ -23,9 +23,9 @@ class CurrencyNameConverter implements CurrencyNameConverterInterface
     /**
      * {@inheritdoc}
      */
-    public function convertToCode($name, $locale = 'en')
+    public function convertToCode(string $name, ?string $locale = null): string
     {
-        $names = Intl::getCurrencyBundle()->getCurrencyNames($locale);
+        $names = Intl::getCurrencyBundle()->getCurrencyNames($locale ?? 'en');
         $currencyCode = array_search($name, $names, true);
 
         if (false === $currencyCode) {

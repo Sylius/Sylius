@@ -25,5 +25,5 @@ interface CurrencyConverterInterface
      *
      * @return int
      */
-    public function convert($value, $sourceCurrencyCode, $targetCurrencyCode);
+    public function convert(int $value, string $sourceCurrencyCode, string $targetCurrencyCode): int;
 }
