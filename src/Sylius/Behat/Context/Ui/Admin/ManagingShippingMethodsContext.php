@@ -521,7 +521,7 @@ final class ManagingShippingMethodsContext implements Context
 
         Assert::true($this->indexPage->isSingleResourceOnPage([
             'name' => $shippingMethod->getName(),
-            'enabled' => $state,
+            'enabled' => $state ? 'Enabled' : 'Disabled',
         ]));
     }
 }
