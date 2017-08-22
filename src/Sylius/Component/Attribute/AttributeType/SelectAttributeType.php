@@ -76,7 +76,7 @@ final class SelectAttributeType implements AttributeTypeInterface
      */
     private function getValidationErrors(
         ExecutionContextInterface $context,
-        ?string $value,
+        ?array $value,
         array $validationConfiguration
     ): ConstraintViolationListInterface {
         $validator = $context->getValidator();

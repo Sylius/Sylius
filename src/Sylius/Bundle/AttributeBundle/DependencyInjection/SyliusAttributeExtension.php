@@ -23,10 +23,7 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
  */
 final class SyliusAttributeExtension extends AbstractResourceExtension
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function load(array $config, ContainerBuilder $container)
+    public function load(array $config, ContainerBuilder $container): void
     {
         $config = $this->processConfiguration($this->getConfiguration([], $container), $config);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
@@ -36,13 +33,7 @@ final class SyliusAttributeExtension extends AbstractResourceExtension
         $this->registerResources('sylius', $config['driver'], $this->resolveResources($config['resources'], $container), $container);
     }
 
-    /**
-     * @param array $resources
-     * @param ContainerBuilder $container
-     *
-     * @return array
-     */
-    private function resolveResources(array $resources, ContainerBuilder $container)
+    private function resolveResources(array $resources, ContainerBuilder $container): array
     {
         $container->setParameter('sylius.attribute.subjects', $resources);
 

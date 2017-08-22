@@ -27,7 +27,7 @@ class SelectAttributeChoicesCollectionType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) {
             $data = $event->getData();
@@ -53,7 +53,7 @@ class SelectAttributeChoicesCollectionType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getParent()
+    public function getParent(): string
     {
         return CollectionType::class;
     }
@@ -61,7 +61,7 @@ class SelectAttributeChoicesCollectionType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_select_attribute_choices_collection';
     }
@@ -71,7 +71,7 @@ class SelectAttributeChoicesCollectionType extends AbstractType
      *
      * @return string
      */
-    private function getValidFormKey($value)
+    private function getValidFormKey(string $value): string
     {
         $newKey = strtolower(str_replace(' ', '_', $value));
         $newKey = preg_replace('/[^a-zA-Z0-9\-_:]/', '', $newKey);
