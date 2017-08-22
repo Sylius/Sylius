@@ -75,7 +75,7 @@ use Sylius\Component\Customer\Context\CustomerContextInterface;
     /**
      * {@inheritdoc}
      */
-    public function getCurrencyCode()
+    public function getCurrencyCode(): string
     {
         return $this->currencyContext->getCurrencyCode();
     }

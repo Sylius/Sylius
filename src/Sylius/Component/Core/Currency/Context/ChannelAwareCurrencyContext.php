@@ -47,7 +47,7 @@ final class ChannelAwareCurrencyContext implements CurrencyContextInterface
     /**
      * {@inheritdoc}
      */
-    public function getCurrencyCode()
+    public function getCurrencyCode(): string
     {
         /** @var ChannelInterface $channel */
         $channel = $this->channelContext->getChannel();
@@ -71,7 +71,7 @@ final class ChannelAwareCurrencyContext implements CurrencyContextInterface
      *
      * @return bool
      */
-    private function isAvailableCurrency($currencyCode, ChannelInterface $channel)
+    private function isAvailableCurrency(string $currencyCode, ChannelInterface $channel): bool
     {
         $availableCurrencies = array_map(
             function (CurrencyInterface $currency) {
