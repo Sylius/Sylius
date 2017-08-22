@@ -40,7 +40,7 @@ class PaymentMethodTranslation extends AbstractTranslation implements PaymentMet
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getName();
     }
@@ -56,7 +56,7 @@ class PaymentMethodTranslation extends AbstractTranslation implements PaymentMet
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -64,7 +64,7 @@ class PaymentMethodTranslation extends AbstractTranslation implements PaymentMet
     /**
      * {@inheritdoc}
      */
-    public function setName($name)
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
@@ -72,7 +72,7 @@ class PaymentMethodTranslation extends AbstractTranslation implements PaymentMet
     /**
      * {@inheritdoc}
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -80,7 +80,7 @@ class PaymentMethodTranslation extends AbstractTranslation implements PaymentMet
     /**
      * {@inheritdoc}
      */
-    public function setDescription($description)
+    public function setDescription(string $description): void
     {
         $this->description = $description;
     }
@@ -88,7 +88,7 @@ class PaymentMethodTranslation extends AbstractTranslation implements PaymentMet
     /**
      * {@inheritdoc}
      */
-    public function getInstructions()
+    public function getInstructions(): ?string
     {
         return $this->instructions;
     }
@@ -96,7 +96,7 @@ class PaymentMethodTranslation extends AbstractTranslation implements PaymentMet
     /**
      * {@inheritdoc}
      */
-    public function setInstructions($instructions)
+    public function setInstructions(string $instructions): void
     {
         $this->instructions = $instructions;
     }

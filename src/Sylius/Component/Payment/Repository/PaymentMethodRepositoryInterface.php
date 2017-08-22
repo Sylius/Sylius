@@ -28,5 +28,5 @@ interface PaymentMethodRepositoryInterface extends RepositoryInterface
      *
      * @return PaymentMethodInterface[]
      */
-    public function findByName($name, $locale);
+    public function findByName(string $name, string $locale): array;
 }

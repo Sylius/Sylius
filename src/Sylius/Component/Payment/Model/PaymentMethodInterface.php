@@ -31,50 +31,50 @@ interface PaymentMethodInterface extends
     /**
      * @return string
      */
-    public function getName();
+    public function getName(): ?string;
 
     /**
      * @param string $name
      */
-    public function setName($name);
+    public function setName(string $name): void;
 
     /**
      * @return string
      */
-    public function getDescription();
+    public function getDescription(): ?string;
 
     /**
      * @param string $description
      */
-    public function setDescription($description);
+    public function setDescription(string $description): void;
 
     /**
      * @return string
      */
-    public function getInstructions();
+    public function getInstructions(): ?string;
 
     /**
      * @param string $instructions
      */
-    public function setInstructions($instructions);
+    public function setInstructions(string $instructions): void;
 
     /**
      * @return string
      */
-    public function getEnvironment();
+    public function getEnvironment(): ?string;
 
     /**
      * @param string $environment
      */
-    public function setEnvironment($environment);
+    public function setEnvironment(string $environment): void;
 
     /**
      * @return int
      */
-    public function getPosition();
+    public function getPosition(): ?int;
 
     /**
      * @param int $position
      */
-    public function setPosition($position);
+    public function setPosition(int $position): void;
 }

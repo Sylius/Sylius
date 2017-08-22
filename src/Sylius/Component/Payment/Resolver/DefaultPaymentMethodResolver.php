@@ -15,6 +15,7 @@ namespace Sylius\Component\Payment\Resolver;
 
 use Sylius\Component\Payment\Exception\UnresolvedDefaultPaymentMethodException;
 use Sylius\Component\Payment\Model\PaymentInterface;
+use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Repository\PaymentMethodRepositoryInterface;
 
 /**
@@ -37,8 +38,10 @@ final class DefaultPaymentMethodResolver implements DefaultPaymentMethodResolver
 
     /**
      * {@inheritdoc}
+     *
+     * @throws UnresolvedDefaultPaymentMethodException
      */
-    public function getDefaultPaymentMethod(PaymentInterface $payment)
+    public function getDefaultPaymentMethod(PaymentInterface $payment): PaymentMethodInterface
     {
         $paymentMethods = $this->paymentMethodRepository->findBy(['enabled' => true]);
         if (empty($paymentMethods)) {

@@ -26,12 +26,12 @@ interface PaymentMethodsResolverInterface
      *
      * @return PaymentMethodInterface[]
      */
-    public function getSupportedMethods(PaymentInterface $subject);
+    public function getSupportedMethods(PaymentInterface $subject): array;
 
     /**
      * @param PaymentInterface $subject
      *
      * @return bool
      */
-    public function supports(PaymentInterface $subject);
+    public function supports(PaymentInterface $subject): bool;
 }

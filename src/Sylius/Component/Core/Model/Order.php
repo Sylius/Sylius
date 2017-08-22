@@ -254,7 +254,7 @@ class Order extends BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getPayments()
+    public function getPayments(): Collection
     {
         return $this->payments;
     }
@@ -262,7 +262,7 @@ class Order extends BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function hasPayments()
+    public function hasPayments(): bool
     {
         return !$this->payments->isEmpty();
     }
@@ -270,7 +270,7 @@ class Order extends BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function addPayment(BasePaymentInterface $payment)
+    public function addPayment(BasePaymentInterface $payment): void
     {
         /** @var $payment PaymentInterface */
         if (!$this->hasPayment($payment)) {
@@ -282,7 +282,7 @@ class Order extends BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function removePayment(BasePaymentInterface $payment)
+    public function removePayment(BasePaymentInterface $payment): void
     {
         /** @var $payment PaymentInterface */
         if ($this->hasPayment($payment)) {
@@ -294,7 +294,7 @@ class Order extends BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function hasPayment(BasePaymentInterface $payment)
+    public function hasPayment(BasePaymentInterface $payment): bool
     {
         return $this->payments->contains($payment);
     }

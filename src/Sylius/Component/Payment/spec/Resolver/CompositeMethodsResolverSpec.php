@@ -16,7 +16,6 @@ namespace spec\Sylius\Component\Payment\Resolver;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
-use Sylius\Component\Payment\Resolver\CompositeMethodsResolver;
 use Sylius\Component\Payment\Resolver\PaymentMethodsResolverInterface;
 use Sylius\Component\Registry\PrioritizedServiceRegistryInterface;
 
@@ -25,17 +24,12 @@ use Sylius\Component\Registry\PrioritizedServiceRegistryInterface;
  */
 final class CompositeMethodsResolverSpec extends ObjectBehavior
 {
-    function let(PrioritizedServiceRegistryInterface $resolversRegistry)
+    function let(PrioritizedServiceRegistryInterface $resolversRegistry): void
     {
         $this->beConstructedWith($resolversRegistry);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(CompositeMethodsResolver::class);
-    }
-
-    function it_implements_Sylius_payment_methods_resolver_interface()
+    function it_implements_Sylius_payment_methods_resolver_interface(): void
     {
         $this->shouldImplement(PaymentMethodsResolverInterface::class);
     }
@@ -46,7 +40,7 @@ final class CompositeMethodsResolverSpec extends ObjectBehavior
         PrioritizedServiceRegistryInterface $resolversRegistry,
         PaymentMethodInterface $paymentMethod,
         PaymentInterface $payment
-    ) {
+    ): void {
         $resolversRegistry->all()->willReturn([$firstMethodsResolver, $secondMethodsResolver]);
 
         $firstMethodsResolver->supports($payment)->willReturn(false);
@@ -62,7 +56,7 @@ final class CompositeMethodsResolverSpec extends ObjectBehavior
         PaymentMethodsResolverInterface $secondMethodsResolver,
         PrioritizedServiceRegistryInterface $resolversRegistry,
         PaymentInterface $payment
-    ) {
+    ): void {
         $resolversRegistry->all()->willReturn([$firstMethodsResolver, $secondMethodsResolver]);
 
         $firstMethodsResolver->supports($payment)->willReturn(false);
@@ -76,7 +70,7 @@ final class CompositeMethodsResolverSpec extends ObjectBehavior
         PaymentMethodsResolverInterface $secondMethodsResolver,
         PrioritizedServiceRegistryInterface $resolversRegistry,
         PaymentInterface $payment
-    ) {
+    ): void {
         $resolversRegistry->all()->willReturn([$firstMethodsResolver, $secondMethodsResolver]);
 
         $firstMethodsResolver->supports($payment)->willReturn(false);
@@ -90,7 +84,7 @@ final class CompositeMethodsResolverSpec extends ObjectBehavior
         PaymentMethodsResolverInterface $secondMethodsResolver,
         PrioritizedServiceRegistryInterface $resolversRegistry,
         PaymentInterface $payment
-    ) {
+    ): void {
         $resolversRegistry->all()->willReturn([$firstMethodsResolver, $secondMethodsResolver]);
 
         $firstMethodsResolver->supports($payment)->willReturn(false);

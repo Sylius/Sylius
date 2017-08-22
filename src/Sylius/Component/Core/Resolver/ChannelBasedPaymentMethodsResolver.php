@@ -40,7 +40,7 @@ final class ChannelBasedPaymentMethodsResolver implements PaymentMethodsResolver
     /**
      * {@inheritdoc}
      */
-    public function getSupportedMethods(BasePaymentInterface $payment)
+    public function getSupportedMethods(BasePaymentInterface $payment): array
     {
         Assert::true($this->supports($payment), 'This payment method is not support by resolver');
 
@@ -50,7 +50,7 @@ final class ChannelBasedPaymentMethodsResolver implements PaymentMethodsResolver
     /**
      * {@inheritdoc}
      */
-    public function supports(BasePaymentInterface $payment)
+    public function supports(BasePaymentInterface $payment): bool
     {
         return $payment instanceof PaymentInterface &&
             null !== $payment->getOrder() &&

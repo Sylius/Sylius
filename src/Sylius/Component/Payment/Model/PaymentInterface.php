@@ -33,50 +33,50 @@ interface PaymentInterface extends TimestampableInterface, ResourceInterface
     /**
      * @return PaymentMethodInterface
      */
-    public function getMethod();
+    public function getMethod(): ?PaymentMethodInterface;
 
     /**
-     * @param null|PaymentMethodInterface $method
+     * @param PaymentMethodInterface|null $method
      */
-    public function setMethod(PaymentMethodInterface $method = null);
+    public function setMethod(?PaymentMethodInterface $method): void;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getState();
+    public function getState(): ?string;
 
     /**
      * @param string $state
      */
-    public function setState($state);
+    public function setState(string $state): void;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCurrencyCode();
+    public function getCurrencyCode(): ?string;
 
     /**
      * @param string
      */
-    public function setCurrencyCode($currencyCode);
+    public function setCurrencyCode(string $currencyCode): void;
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getAmount();
+    public function getAmount(): ?int;
 
     /**
      * @param int $amount
      */
-    public function setAmount($amount);
+    public function setAmount(int $amount): void;
 
     /**
-     * @return array
+     * @return array|null
      */
-    public function getDetails();
+    public function getDetails(): ?array;
 
     /**
-     * @param array|\Traversable $details
+     * @param array $details
      */
-    public function setDetails($details);
+    public function setDetails(array $details): void;
 }

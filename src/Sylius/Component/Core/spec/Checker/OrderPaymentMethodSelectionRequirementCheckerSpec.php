@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Component\Core\Checker;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Checker\OrderPaymentMethodSelectionRequirementChecker;
 use Sylius\Component\Core\Checker\OrderPaymentMethodSelectionRequirementCheckerInterface;
@@ -81,7 +82,7 @@ final class OrderPaymentMethodSelectionRequirementCheckerSpec extends ObjectBeha
     ) {
         $order->getTotal()->willReturn(1000);
         $order->getChannel()->willReturn($channel);
-        $order->getPayments()->willReturn([$payment]);
+        $order->getPayments()->willReturn(new ArrayCollection([$payment->getWrappedObject()]));
 
         $paymentMethodsResolver->getSupportedMethods($payment)->willReturn([$paymentMethod]);
         $channel->isSkippingPaymentStepAllowed()->willReturn(true);
@@ -99,7 +100,7 @@ final class OrderPaymentMethodSelectionRequirementCheckerSpec extends ObjectBeha
     ) {
         $order->getTotal()->willReturn(1000);
         $order->getChannel()->willReturn($channel);
-        $order->getPayments()->willReturn([$payment]);
+        $order->getPayments()->willReturn(new ArrayCollection([$payment->getWrappedObject()]));
 
         $paymentMethodsResolver->getSupportedMethods($payment)->willReturn([$paymentMethod1, $paymentMethod2]);
         $channel->isSkippingPaymentStepAllowed()->willReturn(true);
