@@ -17,6 +17,7 @@ sylius:
             starts_at: Старт
             usage_limit: Предел использования
         promotion_action:
+            item_fixed_discount: Фиксированная скидка
             fixed_discount_configuration:
                 amount: Сумма
             percentage_discount_configuration:
