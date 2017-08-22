@@ -32,9 +32,10 @@ final class PercentageGenerationPolicy implements GenerationPolicyInterface
     private $ratio;
 
     /**
-     * {@inheritdoc}
+     * @param PromotionCouponRepositoryInterface $couponRepository
+     * @param float $ratio
      */
-    public function __construct(PromotionCouponRepositoryInterface $couponRepository, $ratio = 0.5)
+    public function __construct(PromotionCouponRepositoryInterface $couponRepository, float $ratio = 0.5)
     {
         $this->couponRepository = $couponRepository;
         $this->ratio = $ratio;
@@ -43,7 +44,7 @@ final class PercentageGenerationPolicy implements GenerationPolicyInterface
     /**
      * {@inheritdoc}
      */
-    public function isGenerationPossible(PromotionCouponGeneratorInstructionInterface $instruction)
+    public function isGenerationPossible(PromotionCouponGeneratorInstructionInterface $instruction): bool
     {
         $expectedGenerationAmount = $instruction->getAmount();
         $possibleGenerationAmount = $this->calculatePossibleGenerationAmount($instruction);
@@ -54,7 +55,7 @@ final class PercentageGenerationPolicy implements GenerationPolicyInterface
     /**
      * {@inheritdoc}
      */
-    public function getPossibleGenerationAmount(PromotionCouponGeneratorInstructionInterface $instruction)
+    public function getPossibleGenerationAmount(PromotionCouponGeneratorInstructionInterface $instruction): int
     {
         return $this->calculatePossibleGenerationAmount($instruction);
     }
@@ -66,7 +67,7 @@ final class PercentageGenerationPolicy implements GenerationPolicyInterface
      *
      * @throws \InvalidArgumentException
      */
-    private function calculatePossibleGenerationAmount(PromotionCouponGeneratorInstructionInterface $instruction)
+    private function calculatePossibleGenerationAmount(PromotionCouponGeneratorInstructionInterface $instruction): int
     {
         $expectedAmount = $instruction->getAmount();
         $expectedCodeLength = $instruction->getCodeLength();
@@ -78,6 +79,6 @@ final class PercentageGenerationPolicy implements GenerationPolicyInterface
 
         $generatedAmount = $this->couponRepository->countByCodeLength($expectedCodeLength);
 
-        return floor(pow(16, $expectedCodeLength) * $this->ratio - $generatedAmount);
+        return (int) floor(pow(16, $expectedCodeLength) * $this->ratio - $generatedAmount);
     }
 }

@@ -21,17 +21,17 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 interface PromotionRuleInterface extends ResourceInterface, ConfigurablePromotionElementInterface
 {
     /**
-     * @param string $type
+     * @param string|null $type
      */
-    public function setType($type);
+    public function setType(?string $type): void;
 
     /**
-     * @param array $configuration
+     * @param array|null $configuration
      */
-    public function setConfiguration(array $configuration);
+    public function setConfiguration(?array $configuration): void;
 
     /**
-     * @param PromotionInterface $promotion
+     * @param PromotionInterface|null $promotion
      */
-    public function setPromotion(PromotionInterface $promotion = null);
+    public function setPromotion(?PromotionInterface $promotion): void;
 }

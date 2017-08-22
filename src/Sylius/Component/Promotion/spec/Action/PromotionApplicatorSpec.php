@@ -15,7 +15,6 @@ namespace spec\Sylius\Component\Promotion\Action;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Promotion\Action\PromotionActionCommandInterface;
-use Sylius\Component\Promotion\Action\PromotionApplicator;
 use Sylius\Component\Promotion\Action\PromotionApplicatorInterface;
 use Sylius\Component\Promotion\Model\PromotionActionInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
@@ -27,17 +26,12 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
  */
 final class PromotionApplicatorSpec extends ObjectBehavior
 {
-    function let(ServiceRegistryInterface $registry)
+    function let(ServiceRegistryInterface $registry): void
     {
         $this->beConstructedWith($registry);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(PromotionApplicator::class);
-    }
-
-    function it_should_be_a_promotion_applicator()
+    function it_should_be_a_promotion_applicator(): void
     {
         $this->shouldImplement(PromotionApplicatorInterface::class);
     }
@@ -48,7 +42,7 @@ final class PromotionApplicatorSpec extends ObjectBehavior
         PromotionSubjectInterface $subject,
         PromotionInterface $promotion,
         PromotionActionInterface $action
-    ) {
+    ): void {
         $configuration = [];
 
         $registry->get('test_action')->willReturn($actionCommand);
@@ -71,7 +65,7 @@ final class PromotionApplicatorSpec extends ObjectBehavior
         PromotionInterface $promotion,
         PromotionActionInterface $firstAction,
         PromotionActionInterface $secondAction
-    ) {
+    ): void {
         $promotion->getActions()->willReturn([$firstAction, $secondAction]);
 
         $firstAction->getType()->willReturn('first_action');
@@ -99,7 +93,7 @@ final class PromotionApplicatorSpec extends ObjectBehavior
         PromotionInterface $promotion,
         PromotionActionInterface $firstAction,
         PromotionActionInterface $secondAction
-    ) {
+    ): void {
         $promotion->getActions()->willReturn([$firstAction, $secondAction]);
 
         $firstAction->getType()->willReturn('first_action');
@@ -127,7 +121,7 @@ final class PromotionApplicatorSpec extends ObjectBehavior
         PromotionInterface $promotion,
         PromotionActionInterface $firstAction,
         PromotionActionInterface $secondAction
-    ) {
+    ): void {
         $promotion->getActions()->willReturn([$firstAction, $secondAction]);
 
         $firstAction->getType()->willReturn('first_action');
@@ -153,7 +147,7 @@ final class PromotionApplicatorSpec extends ObjectBehavior
         PromotionSubjectInterface $subject,
         PromotionInterface $promotion,
         PromotionActionInterface $action
-    ) {
+    ): void {
         $configuration = [];
 
         $registry->get('test_action')->willReturn($actionCommand);

@@ -19,42 +19,42 @@ namespace Sylius\Component\Promotion\Generator;
 interface PromotionCouponGeneratorInstructionInterface
 {
     /**
-     * @return int
+     * @return int|null
      */
-    public function getAmount();
+    public function getAmount(): ?int;
 
     /**
      * @param int $amount
      */
-    public function setAmount($amount);
+    public function setAmount(int $amount): void;
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getCodeLength();
+    public function getCodeLength(): ?int;
 
     /**
      * @param int $codeLength
      */
-    public function setCodeLength($codeLength);
+    public function setCodeLength(int $codeLength): void;
 
     /**
-     * @return \DateTimeInterface
+     * @return \DateTimeInterface|null
      */
-    public function getExpiresAt();
+    public function getExpiresAt(): ?\DateTimeInterface;
 
     /**
      * @param \DateTimeInterface $expiresAt
      */
-    public function setExpiresAt(\DateTimeInterface $expiresAt = null);
+    public function setExpiresAt(\DateTimeInterface $expiresAt): void;
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getUsageLimit();
+    public function getUsageLimit(): ?int;
 
     /**
      * @param int $usageLimit
      */
-    public function setUsageLimit($usageLimit);
+    public function setUsageLimit(int $usageLimit): void;
 }

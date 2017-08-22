@@ -16,7 +16,6 @@ namespace spec\Sylius\Component\Promotion\Generator;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Promotion\Generator\GenerationPolicyInterface;
 use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionInterface;
-use Sylius\Component\Promotion\Generator\PercentageGenerationPolicy;
 use Sylius\Component\Promotion\Repository\PromotionCouponRepositoryInterface;
 
 /**
@@ -24,17 +23,12 @@ use Sylius\Component\Promotion\Repository\PromotionCouponRepositoryInterface;
  */
 final class PercentageGenerationPolicySpec extends ObjectBehavior
 {
-    function let(PromotionCouponRepositoryInterface $couponRepository)
+    function let(PromotionCouponRepositoryInterface $couponRepository): void
     {
         $this->beConstructedWith($couponRepository, 0.5);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(PercentageGenerationPolicy::class);
-    }
-
-    function it_implements_a_generator_validator_interface()
+    function it_implements_a_generator_validator_interface(): void
     {
         $this->shouldImplement(GenerationPolicyInterface::class);
     }
@@ -42,7 +36,7 @@ final class PercentageGenerationPolicySpec extends ObjectBehavior
     function it_examine_possibility_of_coupon_generation(
         PromotionCouponGeneratorInstructionInterface $instruction,
         PromotionCouponRepositoryInterface $couponRepository
-    ) {
+    ): void {
         $instruction->getAmount()->willReturn(17);
         $instruction->getCodeLength()->willReturn(1);
         $couponRepository->countByCodeLength(1)->shouldBeCalled();
@@ -53,7 +47,7 @@ final class PercentageGenerationPolicySpec extends ObjectBehavior
     function it_returns_possible_generation_amount(
         PromotionCouponGeneratorInstructionInterface $instruction,
         PromotionCouponRepositoryInterface $couponRepository
-    ) {
+    ): void {
         $instruction->getAmount()->willReturn(17);
         $instruction->getCodeLength()->willReturn(1);
         $couponRepository->countByCodeLength(1)->willReturn(1);
@@ -64,7 +58,7 @@ final class PercentageGenerationPolicySpec extends ObjectBehavior
 
     function it_throws_an_invalid_argument_exception_when_expected_amount_is_null(
         PromotionCouponGeneratorInstructionInterface $instruction
-    ) {
+    ): void {
         $instruction->getAmount()->willReturn(null);
         $instruction->getCodeLength()->willReturn(1);
 
@@ -74,7 +68,7 @@ final class PercentageGenerationPolicySpec extends ObjectBehavior
 
     function it_throws_an_invalid_argument_exception_when_expecte_code_length_is_null(
         PromotionCouponGeneratorInstructionInterface $instruction
-    ) {
+    ): void {
         $instruction->getAmount()->willReturn(18);
         $instruction->getCodeLength()->willReturn(null);
 

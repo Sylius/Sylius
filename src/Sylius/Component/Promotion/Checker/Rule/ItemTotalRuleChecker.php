@@ -25,7 +25,7 @@ final class ItemTotalRuleChecker implements RuleCheckerInterface
     /**
      * {@inheritdoc}
      */
-    public function isEligible(PromotionSubjectInterface $subject, array $configuration)
+    public function isEligible(PromotionSubjectInterface $subject, array $configuration): bool
     {
         return $subject->getPromotionSubjectTotal() >= $configuration['amount'];
     }

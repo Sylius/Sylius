@@ -25,12 +25,12 @@ interface PromotionRepositoryInterface extends RepositoryInterface
     /**
      * @return Collection|PromotionInterface[]
      */
-    public function findActive();
+    public function findActive(): Collection;
 
     /**
      * @param string $name
      *
      * @return PromotionInterface[]
      */
-    public function findByName($name);
+    public function findByName(string $name): array;
 }

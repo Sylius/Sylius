@@ -23,5 +23,5 @@ interface PromotionProcessorInterface
     /**
      * @param PromotionSubjectInterface $subject
      */
-    public function process(PromotionSubjectInterface $subject);
+    public function process(PromotionSubjectInterface $subject): void;
 }

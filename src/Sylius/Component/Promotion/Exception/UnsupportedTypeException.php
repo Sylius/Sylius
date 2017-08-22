@@ -15,6 +15,6 @@ namespace Sylius\Component\Promotion\Exception;
 
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
-class UnsupportedTypeException extends UnexpectedTypeException
+final class UnsupportedTypeException extends UnexpectedTypeException
 {
 }

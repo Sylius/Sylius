@@ -50,6 +50,17 @@
 
 * In `PaymentInterface::setMethod` method the default value of `PaymentMethodInterface $method` parameter has been removed.
 
+### Promotion / PromotionBundle
+
+* `ActivePromotionsProvider` has been made final, use decoration instead of extending it.
+* The following methods does not longer have a default null argument and requires one to be explicitly passed:  
+    * `PromotionCouponGeneratorInstructionInterface::setExpiresAt`
+    * `PromotionCouponInterface::setPromotion`
+    * `PromotionCouponInterface::setExpiresAt`
+    * `PromotionInterface::setStartsAt`
+    * `PromotionInterface::setEndsAt`
+    * `PromotionRuleInterface::setPromotion`
+
 ### Registry
 
 * `PrioritizedServiceRegistryInterface::all` method return type changed from Zend's `PriorityQueue` to `iterable`.

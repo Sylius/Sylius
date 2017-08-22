@@ -41,7 +41,7 @@ final class CompositePromotionCouponEligibilityChecker implements PromotionCoupo
     /**
      * {@inheritdoc}
      */
-    public function isEligible(PromotionSubjectInterface $promotionSubject, PromotionCouponInterface $promotionCoupon)
+    public function isEligible(PromotionSubjectInterface $promotionSubject, PromotionCouponInterface $promotionCoupon): bool
     {
         foreach ($this->promotionCouponEligibilityCheckers as $promotionCouponEligibilityChecker) {
             if (!$promotionCouponEligibilityChecker->isEligible($promotionSubject, $promotionCoupon)) {

@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\Promotion\Exception;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Promotion\Exception\FailedGenerationException;
 use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionInterface;
 
 /**
@@ -25,23 +24,18 @@ final class FailedGenerationExceptionSpec extends ObjectBehavior
     function let(
         PromotionCouponGeneratorInstructionInterface $instruction,
         \InvalidArgumentException $previousException
-    ) {
+    ): void {
         $instruction->getAmount()->willReturn(17);
         $instruction->getCodeLength()->willReturn(1);
         $this->beConstructedWith($instruction, 0, $previousException);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(FailedGenerationException::class);
-    }
-
-    function it_is_an_exception()
+    function it_is_an_exception(): void
     {
         $this->shouldHaveType(\InvalidArgumentException::class);
     }
 
-    function it_has_a_proper_message()
+    function it_has_a_proper_message(): void
     {
         $this
             ->getMessage()
@@ -49,7 +43,7 @@ final class FailedGenerationExceptionSpec extends ObjectBehavior
         ;
     }
 
-    function it_has_a_proper_previous_exception(\InvalidArgumentException $previousException)
+    function it_has_a_proper_previous_exception(\InvalidArgumentException $previousException): void
     {
         $this->getPrevious()->shouldReturn($previousException);
     }

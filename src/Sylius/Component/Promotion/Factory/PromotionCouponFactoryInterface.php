@@ -29,5 +29,5 @@ interface PromotionCouponFactoryInterface extends FactoryInterface
      *
      * @throws \InvalidArgumentException
      */
-    public function createForPromotion(PromotionInterface $promotionId);
+    public function createForPromotion(PromotionInterface $promotionId): PromotionCouponInterface;
 }

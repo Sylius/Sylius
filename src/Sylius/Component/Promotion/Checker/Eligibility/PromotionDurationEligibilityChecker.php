@@ -24,7 +24,7 @@ final class PromotionDurationEligibilityChecker implements PromotionEligibilityC
     /**
      * {@inheritdoc}
      */
-    public function isEligible(PromotionSubjectInterface $promotionSubject, PromotionInterface $promotion)
+    public function isEligible(PromotionSubjectInterface $promotionSubject, PromotionInterface $promotion): bool
     {
         $now = new \DateTime();
 

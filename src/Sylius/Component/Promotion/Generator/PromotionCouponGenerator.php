@@ -66,7 +66,7 @@ final class PromotionCouponGenerator implements PromotionCouponGeneratorInterfac
     /**
      * {@inheritdoc}
      */
-    public function generate(PromotionInterface $promotion, PromotionCouponGeneratorInstructionInterface $instruction)
+    public function generate(PromotionInterface $promotion, PromotionCouponGeneratorInstructionInterface $instruction): array
     {
         $generatedCoupons = [];
 
@@ -97,7 +97,7 @@ final class PromotionCouponGenerator implements PromotionCouponGeneratorInterfac
      *
      * @throws \InvalidArgumentException
      */
-    private function generateUniqueCode($codeLength, array $generatedCoupons)
+    private function generateUniqueCode(int $codeLength, array $generatedCoupons): string
     {
         Assert::nullOrRange($codeLength, 1, 40, 'Invalid %d code length should be between %d and %d');
 
@@ -115,7 +115,7 @@ final class PromotionCouponGenerator implements PromotionCouponGeneratorInterfac
      *
      * @return bool
      */
-    private function isUsedCode($code, array $generatedCoupons)
+    private function isUsedCode(string $code, array $generatedCoupons): bool
     {
         if (isset($generatedCoupons[$code])) {
             return true;

@@ -27,14 +27,14 @@ interface PromotionCouponRepositoryInterface extends RepositoryInterface
      *
      * @return QueryBuilder
      */
-    public function createQueryBuilderByPromotionId($promotionId);
+    public function createQueryBuilderByPromotionId($promotionId): QueryBuilder;
 
     /**
      * @param int $codeLength
      *
      * @return int
      */
-    public function countByCodeLength($codeLength);
+    public function countByCodeLength(int $codeLength): int;
 
     /**
      * @param string $code
@@ -42,5 +42,5 @@ interface PromotionCouponRepositoryInterface extends RepositoryInterface
      *
      * @return PromotionInterface
      */
-    public function findOneByCodeAndPromotionCode($code, $promotionCode);
+    public function findOneByCodeAndPromotionCode(string $code, string $promotionCode): PromotionInterface;
 }

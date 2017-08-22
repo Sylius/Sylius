@@ -15,11 +15,10 @@ namespace spec\Sylius\Component\Promotion\Checker\Eligibility;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Promotion\Checker\Eligibility\PromotionEligibilityCheckerInterface;
-use Sylius\Component\Promotion\Checker\Eligibility\PromotionRulesEligibilityChecker;
 use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
-use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Promotion\Model\PromotionRuleInterface;
+use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 
 /**
@@ -27,17 +26,12 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
  */
 final class PromotionRulesEligibilityCheckerSpec extends ObjectBehavior
 {
-    function let(ServiceRegistryInterface $rulesRegistry)
+    function let(ServiceRegistryInterface $rulesRegistry): void
     {
         $this->beConstructedWith($rulesRegistry);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(PromotionRulesEligibilityChecker::class);
-    }
-
-    function it_implements_a_promotion_eligibility_checker_interface()
+    function it_implements_a_promotion_eligibility_checker_interface(): void
     {
         $this->shouldImplement(PromotionEligibilityCheckerInterface::class);
     }
@@ -45,7 +39,7 @@ final class PromotionRulesEligibilityCheckerSpec extends ObjectBehavior
     function it_recognizes_a_subject_as_eligible_if_a_promotion_has_no_rules(
         PromotionInterface $promotion,
         PromotionSubjectInterface $subject
-    ) {
+    ): void {
         $promotion->hasRules()->willReturn(false);
 
         $this->isEligible($subject, $promotion)->shouldReturn(true);
@@ -59,7 +53,7 @@ final class PromotionRulesEligibilityCheckerSpec extends ObjectBehavior
         PromotionRuleInterface $secondRule,
         PromotionInterface $promotion,
         PromotionSubjectInterface $subject
-    ) {
+    ): void {
         $promotion->hasRules()->willReturn(true);
         $promotion->getRules()->willReturn([$firstRule, $secondRule]);
 
@@ -86,7 +80,7 @@ final class PromotionRulesEligibilityCheckerSpec extends ObjectBehavior
         PromotionRuleInterface $secondRule,
         PromotionInterface $promotion,
         PromotionSubjectInterface $subject
-    ) {
+    ): void {
         $promotion->hasRules()->willReturn(true);
         $promotion->getRules()->willReturn([$firstRule, $secondRule]);
 
@@ -113,7 +107,7 @@ final class PromotionRulesEligibilityCheckerSpec extends ObjectBehavior
         PromotionRuleInterface $secondRule,
         PromotionInterface $promotion,
         PromotionSubjectInterface $subject
-    ) {
+    ): void {
         $promotion->hasRules()->willReturn(true);
         $promotion->getRules()->willReturn([$firstRule, $secondRule]);
 

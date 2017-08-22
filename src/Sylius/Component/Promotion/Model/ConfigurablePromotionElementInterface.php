@@ -21,17 +21,17 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 interface ConfigurablePromotionElementInterface extends ResourceInterface
 {
     /**
-     * @return string
+     * @return string|null
      */
-    public function getType();
+    public function getType(): ?string;
 
     /**
-     * @return array
+     * @return array|null
      */
-    public function getConfiguration();
+    public function getConfiguration(): ?array;
 
     /**
-     * @return PromotionInterface
+     * @return PromotionInterface|null
      */
-    public function getPromotion();
+    public function getPromotion(): ?PromotionInterface;
 }
