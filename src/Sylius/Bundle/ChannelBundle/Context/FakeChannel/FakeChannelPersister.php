@@ -38,7 +38,7 @@ final class FakeChannelPersister
     /**
      * @param FilterResponseEvent $filterResponseEvent
      */
-    public function onKernelResponse(FilterResponseEvent $filterResponseEvent)
+    public function onKernelResponse(FilterResponseEvent $filterResponseEvent): void
     {
         if (HttpKernelInterface::SUB_REQUEST === $filterResponseEvent->getRequestType()) {
             return;

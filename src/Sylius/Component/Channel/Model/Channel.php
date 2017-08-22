@@ -24,32 +24,32 @@ class Channel implements ChannelInterface
     use TimestampableTrait, ToggleableTrait;
 
     /**
-     * @var mixed
+     * @var mixed|null
      */
     protected $id;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $code;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $name;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $description;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $hostname;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $color;
 
@@ -61,9 +61,9 @@ class Channel implements ChannelInterface
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
-        return $this->name;
+        return (string) $this->name;
     }
 
     /**
@@ -93,7 +93,7 @@ class Channel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -101,7 +101,7 @@ class Channel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function setName($name)
+    public function setName(?string $name): void
     {
         $this->name = $name;
     }
@@ -109,7 +109,7 @@ class Channel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -117,7 +117,7 @@ class Channel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function setDescription($description)
+    public function setDescription(?string $description): void
     {
         $this->description = $description;
     }
@@ -125,7 +125,7 @@ class Channel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function getHostname()
+    public function getHostname(): ?string
     {
         return $this->hostname;
     }
@@ -133,7 +133,7 @@ class Channel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function setHostname($hostname)
+    public function setHostname(?string $hostname): void
     {
         $this->hostname = $hostname;
     }
@@ -141,7 +141,7 @@ class Channel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function getColor()
+    public function getColor(): ?string
     {
         return $this->color;
     }
@@ -149,7 +149,7 @@ class Channel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function setColor($color)
+    public function setColor(?string $color): void
     {
         $this->color = $color;
     }

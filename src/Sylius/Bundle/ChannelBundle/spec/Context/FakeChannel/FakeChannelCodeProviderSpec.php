@@ -24,17 +24,12 @@ use Symfony\Component\HttpFoundation\Request;
  */
 final class FakeChannelCodeProviderSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(FakeChannelCodeProvider::class);
-    }
-
-    function it_implements_a_channel_code_provider_interface()
+    function it_implements_a_channel_code_provider_interface(): void
     {
         $this->shouldImplement(FakeChannelCodeProviderInterface::class);
     }
 
-    function it_returns_fake_channel_code_from_query_string(Request $request, ParameterBag $queryBag)
+    function it_returns_fake_channel_code_from_query_string(Request $request, ParameterBag $queryBag): void
     {
         $queryBag->get('_channel_code')->willReturn('channel_code_form_get');
         $request->query = $queryBag;
@@ -46,7 +41,7 @@ final class FakeChannelCodeProviderSpec extends ObjectBehavior
         Request $request,
         ParameterBag $queryBag,
         ParameterBag $cookiesBag
-    ) {
+    ): void {
         $queryBag->get('_channel_code')->willReturn(null);
         $request->query = $queryBag;
 
@@ -60,7 +55,7 @@ final class FakeChannelCodeProviderSpec extends ObjectBehavior
         Request $request,
         ParameterBag $queryBag,
         ParameterBag $cookiesBag
-    ) {
+    ): void {
         $queryBag->get('_channel_code')->willReturn(null);
         $request->query = $queryBag;
 

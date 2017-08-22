@@ -19,6 +19,12 @@
   * `ProvinceInterface::setCountry`
   * `ZoneMemberInterface::setBelongsTo`
 
+### Channel / ChannelBundle
+
+* `ChannelFactory` has been made final, use decoration instead of extending it.
+
+* `ChannelAwareInterface::setChannel` does not longer have a default null argument and requires one to be explicitly passed.
+
 ### Core / CoreBundle
 
 * Method `OrderInterface::isShippingRequired` added, used in place of similar methods in `OrderShippingMethodSelectionRequirementChecker` and `OrderShipmentProcessor`
