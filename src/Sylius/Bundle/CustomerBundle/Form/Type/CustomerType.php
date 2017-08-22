@@ -24,7 +24,7 @@ final class CustomerType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('group', CustomerGroupChoiceType::class, [
@@ -33,7 +33,7 @@ final class CustomerType extends AbstractResourceType
         ;
     }
 
-    public function getParent()
+    public function getParent(): string
     {
         return CustomerProfileType::class;
     }
@@ -41,7 +41,7 @@ final class CustomerType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_customer';
     }

@@ -27,7 +27,7 @@ final class CustomerGroupType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options = [])
+    public function buildForm(FormBuilderInterface $builder, array $options = []): void
     {
         $builder
             ->addEventSubscriber(new AddCodeFormSubscriber())
@@ -40,7 +40,7 @@ final class CustomerGroupType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_customer_group';
     }
