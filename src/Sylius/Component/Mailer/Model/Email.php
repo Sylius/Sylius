@@ -69,7 +69,7 @@ final class Email implements EmailInterface
     /**
      * {@inheritdoc}
      */
-    public function getCode(): string
+    public function getCode(): ?string
     {
         return $this->code;
     }
@@ -111,7 +111,7 @@ final class Email implements EmailInterface
     /**
      * {@inheritdoc}
      */
-    public function getSubject(): string
+    public function getSubject(): ?string
     {
         return $this->subject;
     }
@@ -127,7 +127,7 @@ final class Email implements EmailInterface
     /**
      * {@inheritdoc}
      */
-    public function getContent(): string
+    public function getContent(): ?string
     {
         return $this->content;
     }
@@ -143,7 +143,7 @@ final class Email implements EmailInterface
     /**
      * {@inheritdoc}
      */
-    public function getTemplate(): string
+    public function getTemplate(): ?string
     {
         return $this->template;
     }
@@ -159,7 +159,7 @@ final class Email implements EmailInterface
     /**
      * {@inheritdoc}
      */
-    public function getSenderName(): string
+    public function getSenderName(): ?string
     {
         return $this->senderName;
     }
@@ -175,7 +175,7 @@ final class Email implements EmailInterface
     /**
      * {@inheritdoc}
      */
-    public function getSenderAddress(): string
+    public function getSenderAddress(): ?string
     {
         return $this->senderAddress;
     }

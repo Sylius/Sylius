@@ -19,9 +19,9 @@ namespace Sylius\Component\Mailer\Model;
 interface EmailInterface
 {
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCode(): string;
+    public function getCode(): ?string;
 
     /**
      * @param string $code
@@ -45,7 +45,7 @@ interface EmailInterface
     /**
      * @return string
      */
-    public function getSubject(): string;
+    public function getSubject(): ?string;
 
     /**
      * @param string $subject
@@ -55,7 +55,7 @@ interface EmailInterface
     /**
      * @return string
      */
-    public function getContent(): string;
+    public function getContent(): ?string;
 
     /**
      * @param string $content
@@ -63,9 +63,9 @@ interface EmailInterface
     public function setContent(string $content);
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getTemplate(): string;
+    public function getTemplate(): ?string;
 
     /**
      * @param string $template
@@ -73,9 +73,9 @@ interface EmailInterface
     public function setTemplate(string $template): void;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getSenderName(): string;
+    public function getSenderName(): ?string;
 
     /**
      * @param string $senderName
@@ -83,9 +83,9 @@ interface EmailInterface
     public function setSenderName(string $senderName): void;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getSenderAddress(): string ;
+    public function getSenderAddress(): ?string;
 
     /**
      * @param string $senderAddress

@@ -44,13 +44,13 @@ final class SenderSpec extends ObjectBehavior
     ): void {
         $provider->getEmail('bar')->willReturn($email);
         $email->isEnabled()->willReturn(true);
-        $email->getSenderAddress()->shouldBeCalled();
-        $email->getSenderName()->shouldBeCalled();
+        $email->getSenderAddress()->willReturn('sender@example.com');
+        $email->getSenderName()->willReturn('Sender');
 
         $data = ['foo' => 2];
 
         $rendererAdapter->render($email, ['foo' => 2])->willReturn($renderedEmail);
-        $senderAdapter->send(['john@example.com'], null, null, $renderedEmail, $email, $data, [])->shouldBeCalled();
+        $senderAdapter->send(['john@example.com'], 'sender@example.com', 'Sender', $renderedEmail, $email, $data, [])->shouldBeCalled();
 
         $this->send('bar', ['john@example.com'], $data, []);
     }
