@@ -20,11 +20,11 @@ interface MoneyFormatterInterface
     /**
      * @param int $amount
      * @param string $currencyCode
-     * @param string $locale
+     * @param string|null $locale
      *
      * @return string
      *
      * @throws \InvalidArgumentException
      */
-    public function format($amount, $currencyCode, $locale = 'en');
+    public function format(int $amount, string $currencyCode, ?string $locale = null): string;
 }

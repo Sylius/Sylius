@@ -36,7 +36,7 @@ final class FormatMoneyExtension extends \Twig_Extension
     /**
      * {@inheritdoc}
      */
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
             new \Twig_Filter('sylius_format_money', [$this->helper, 'formatAmount']),
