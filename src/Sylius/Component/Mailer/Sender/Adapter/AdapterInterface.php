@@ -34,11 +34,11 @@ interface AdapterInterface
      */
     public function send(
         array $recipients,
-        $senderAddress,
-        $senderName,
+        string $senderAddress,
+        string $senderName,
         RenderedEmail $renderedEmail,
         EmailInterface $email,
         array $data,
         array $attachments = []
-    );
+    ): void;
 }

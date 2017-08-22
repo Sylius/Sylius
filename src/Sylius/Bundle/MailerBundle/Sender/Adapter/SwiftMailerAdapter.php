@@ -45,13 +45,13 @@ class SwiftMailerAdapter extends AbstractAdapter
      */
     public function send(
         array $recipients,
-        $senderAddress,
-        $senderName,
+        string $senderAddress,
+        string $senderName,
         RenderedEmail $renderedEmail,
         EmailInterface $email,
         array $data,
         array $attachments = []
-    ) {
+    ): void {
         $message = (new \Swift_Message())
             ->setSubject($renderedEmail->getSubject())
             ->setFrom([$senderAddress => $senderName])

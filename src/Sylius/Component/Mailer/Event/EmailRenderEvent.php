@@ -44,27 +44,23 @@ class EmailRenderEvent extends Event
     /**
      * @return RenderedEmail
      */
-    public function getRenderedEmail()
+    public function getRenderedEmail(): RenderedEmail
     {
         return $this->renderedEmail;
     }
 
     /**
      * @param RenderedEmail $renderedEmail
-     *
-     * @return $this
      */
-    public function setRenderedEmail(RenderedEmail $renderedEmail)
+    public function setRenderedEmail(RenderedEmail $renderedEmail): void
     {
         $this->renderedEmail = $renderedEmail;
-
-        return $this;
     }
 
     /**
      * @return array
      */
-    public function getRecipients()
+    public function getRecipients(): array
     {
         return $this->recipients;
     }
@@ -72,7 +68,7 @@ class EmailRenderEvent extends Event
     /**
      * @param array $recipients
      */
-    public function setRecipients(array $recipients)
+    public function setRecipients(array $recipients): void
     {
         $this->recipients = $recipients;
     }

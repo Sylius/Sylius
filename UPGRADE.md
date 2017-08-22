@@ -29,6 +29,11 @@
 
 * Method `OrderInterface::isShippingRequired` added, used in place of similar methods in `OrderShippingMethodSelectionRequirementChecker` and `OrderShipmentProcessor`
 
+
+### Mailer / MailerBundle
+
+* `Email` has been made final, use decoration instead of extending it.
+
 ### Order / OrderBundle
 
 * In order to be compatibile with Doctrine ORM 2.6+ and be more consistent 

@@ -27,5 +27,5 @@ interface AdapterInterface
      *
      * @return RenderedEmail
      */
-    public function render(EmailInterface $email, array $data = []);
+    public function render(EmailInterface $email, array $data = []): RenderedEmail;
 }
