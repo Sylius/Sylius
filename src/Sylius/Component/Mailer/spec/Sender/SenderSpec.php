@@ -20,7 +20,6 @@ use Sylius\Component\Mailer\Provider\EmailProviderInterface;
 use Sylius\Component\Mailer\Renderer\Adapter\AdapterInterface as RendererAdapterInterface;
 use Sylius\Component\Mailer\Renderer\RenderedEmail;
 use Sylius\Component\Mailer\Sender\Adapter\AdapterInterface as SenderAdapterInterface;
-use Sylius\Component\Mailer\Sender\Sender;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -32,13 +31,8 @@ final class SenderSpec extends ObjectBehavior
         SenderAdapterInterface $senderAdapter,
         EmailProviderInterface $provider,
         DefaultSettingsProviderInterface $defaultSettingsProvider
-    ) {
+    ): void {
         $this->beConstructedWith($rendererAdapter, $senderAdapter, $provider, $defaultSettingsProvider);
-    }
-
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(Sender::class);
     }
 
     function it_sends_an_email_through_the_adapter(
@@ -47,7 +41,7 @@ final class SenderSpec extends ObjectBehavior
         RenderedEmail $renderedEmail,
         RendererAdapterInterface $rendererAdapter,
         SenderAdapterInterface $senderAdapter
-    ) {
+    ): void {
         $provider->getEmail('bar')->willReturn($email);
         $email->isEnabled()->willReturn(true);
         $email->getSenderAddress()->shouldBeCalled();
@@ -66,7 +60,7 @@ final class SenderSpec extends ObjectBehavior
         EmailProviderInterface $provider,
         RendererAdapterInterface $rendererAdapter,
         SenderAdapterInterface $senderAdapter
-    ) {
+    ): void {
         $provider->getEmail('bar')->willReturn($email);
         $email->isEnabled()->willReturn(false);
 

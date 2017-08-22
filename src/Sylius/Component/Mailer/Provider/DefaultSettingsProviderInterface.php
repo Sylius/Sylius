@@ -21,10 +21,10 @@ interface DefaultSettingsProviderInterface
     /**
      * @return string
      */
-    public function getSenderName();
+    public function getSenderName(): string;
 
     /**
      * @return string
      */
-    public function getSenderAddress();
+    public function getSenderAddress(): string;
 }

@@ -32,7 +32,7 @@ final class DefaultSettingsProvider implements DefaultSettingsProviderInterface
      * @param string $senderName
      * @param string $senderAddress
      */
-    public function __construct($senderName, $senderAddress)
+    public function __construct(string $senderName, string $senderAddress)
     {
         $this->senderName = $senderName;
         $this->senderAddress = $senderAddress;
@@ -41,7 +41,7 @@ final class DefaultSettingsProvider implements DefaultSettingsProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function getSenderName()
+    public function getSenderName(): string
     {
         return $this->senderName;
     }
@@ -49,7 +49,7 @@ final class DefaultSettingsProvider implements DefaultSettingsProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function getSenderAddress()
+    public function getSenderAddress(): string
     {
         return $this->senderAddress;
     }

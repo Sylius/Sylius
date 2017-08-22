@@ -23,5 +23,5 @@ interface EmailFactoryInterface
     /**
      * @return EmailInterface
      */
-    public function createNew();
+    public function createNew(): EmailInterface;
 }

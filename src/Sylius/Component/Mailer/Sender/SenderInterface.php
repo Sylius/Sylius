@@ -24,5 +24,5 @@ interface SenderInterface
      * @param array $data
      * @param array $attachments
      */
-    public function send($code, array $recipients, array $data = [], array $attachments = []);
+    public function send(string $code, array $recipients, array $data = [], array $attachments = []): void;
 }

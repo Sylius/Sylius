@@ -25,5 +25,5 @@ interface EmailProviderInterface
      *
      * @return EmailInterface
      */
-    public function getEmail($code);
+    public function getEmail(string $code): EmailInterface;
 }

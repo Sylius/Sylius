@@ -21,74 +21,74 @@ interface EmailInterface
     /**
      * @return string
      */
-    public function getCode();
+    public function getCode(): string;
 
     /**
      * @param string $code
      */
-    public function setCode($code);
+    public function setCode(string $code): void;
 
     /**
      * @return bool
      */
-    public function isEnabled();
+    public function isEnabled(): bool;
 
     /**
      * @param bool $enabled
      */
-    public function setEnabled($enabled);
+    public function setEnabled(bool $enabled): void;
 
-    public function enable();
+    public function enable(): void;
 
-    public function disable();
+    public function disable(): void;
 
     /**
      * @return string
      */
-    public function getSubject();
+    public function getSubject(): string;
 
     /**
      * @param string $subject
      */
-    public function setSubject($subject);
+    public function setSubject(string $subject): void;
 
     /**
      * @return string
      */
-    public function getContent();
+    public function getContent(): string;
 
     /**
      * @param string $content
      */
-    public function setContent($content);
+    public function setContent(string $content);
 
     /**
      * @return string
      */
-    public function getTemplate();
+    public function getTemplate(): string;
 
     /**
      * @param string $template
      */
-    public function setTemplate($template);
+    public function setTemplate(string $template): void;
 
     /**
      * @return string
      */
-    public function getSenderName();
+    public function getSenderName(): string;
 
     /**
      * @param string $senderName
      */
-    public function setSenderName($senderName);
+    public function setSenderName(string $senderName): void;
 
     /**
      * @return string
      */
-    public function getSenderAddress();
+    public function getSenderAddress(): string ;
 
     /**
      * @param string $senderAddress
      */
-    public function setSenderAddress($senderAddress);
+    public function setSenderAddress(string $senderAddress): void;
 }
