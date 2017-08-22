@@ -22,22 +22,17 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
  */
 final class FactorySpec extends ObjectBehavior
 {
-    function let()
+    function let(): void
     {
         $this->beConstructedWith(\stdClass::class);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(Factory::class);
-    }
-
-    function it_implements_factory_interface()
+    function it_implements_factory_interface(): void
     {
         $this->shouldHaveType(FactoryInterface::class);
     }
 
-    function it_creates_a_new_instance_of_a_resource()
+    function it_creates_a_new_instance_of_a_resource(): void
     {
         $this->createNew()->shouldHaveType(\stdClass::class);
     }

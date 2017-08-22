@@ -22,7 +22,7 @@ use Sylius\Component\Resource\Metadata\MetadataInterface;
  */
 final class MetadataSpec extends ObjectBehavior
 {
-    function let()
+    function let(): void
     {
         $this->beConstructedThrough('fromAliasAndConfiguration', [
             'app.product',
@@ -41,70 +41,65 @@ final class MetadataSpec extends ObjectBehavior
         ]);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(Metadata::class);
-    }
-
-    function it_implements_metadata_interface()
+    function it_implements_metadata_interface(): void
     {
         $this->shouldImplement(MetadataInterface::class);
     }
 
-    function it_has_alias()
+    function it_has_alias(): void
     {
         $this->getAlias()->shouldReturn('app.product');
     }
 
-    function it_has_application_name()
+    function it_has_application_name(): void
     {
         $this->getApplicationName()->shouldReturn('app');
     }
 
-    function it_has_resource_name()
+    function it_has_resource_name(): void
     {
         $this->getName()->shouldReturn('product');
     }
 
-    function it_humanizes_simple_names()
+    function it_humanizes_simple_names(): void
     {
         $this->getHumanizedName()->shouldReturn('product');
     }
 
-    function it_humanizes_more_complex_names()
+    function it_humanizes_more_complex_names(): void
     {
         $this->beConstructedThrough('fromAliasAndConfiguration', ['app.product_option', ['driver' => 'doctrine/orm']]);
 
         $this->getHumanizedName()->shouldReturn('product option');
     }
 
-    function it_has_plural_resource_name()
+    function it_has_plural_resource_name(): void
     {
         $this->getPluralName()->shouldReturn('products');
     }
 
-    function it_has_driver()
+    function it_has_driver(): void
     {
         $this->getDriver()->shouldReturn('doctrine/orm');
     }
 
-    function it_has_templates_namespace()
+    function it_has_templates_namespace(): void
     {
         $this->getTemplatesNamespace()->shouldReturn('AppBundle:Resource');
     }
 
-    function it_has_access_to_specific_config_parameter()
+    function it_has_access_to_specific_config_parameter(): void
     {
         $this->getParameter('driver')->shouldReturn('doctrine/orm');
     }
 
-    function it_checks_if_specific_parameter_exists()
+    function it_checks_if_specific_parameter_exists(): void
     {
         $this->hasParameter('foo')->shouldReturn(false);
         $this->hasParameter('driver')->shouldReturn(true);
     }
 
-    function it_throws_an_exception_when_parameter_does_not_exist()
+    function it_throws_an_exception_when_parameter_does_not_exist(): void
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
@@ -112,12 +107,12 @@ final class MetadataSpec extends ObjectBehavior
         ;
     }
 
-    function it_has_access_to_specific_classes()
+    function it_has_access_to_specific_classes(): void
     {
         $this->getClass('model')->shouldReturn('AppBundle\Model\Resource');
     }
 
-    function it_throws_an_exception_when_class_does_not_exist()
+    function it_throws_an_exception_when_class_does_not_exist(): void
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
@@ -125,20 +120,20 @@ final class MetadataSpec extends ObjectBehavior
         ;
     }
 
-    function it_checks_if_specific_class_exists()
+    function it_checks_if_specific_class_exists(): void
     {
         $this->hasClass('bar')->shouldReturn(false);
         $this->hasClass('model')->shouldReturn(true);
     }
 
-    function it_generates_service_id()
+    function it_generates_service_id(): void
     {
         $this->getServiceId('factory')->shouldReturn('app.factory.product');
         $this->getServiceId('repository')->shouldReturn('app.repository.product');
         $this->getServiceId('form.type')->shouldReturn('app.form.type.product');
     }
 
-    function it_generates_permission_code()
+    function it_generates_permission_code(): void
     {
         $this->getPermissionCode('show')->shouldReturn('app.product.show');
         $this->getPermissionCode('create')->shouldReturn('app.product.create');

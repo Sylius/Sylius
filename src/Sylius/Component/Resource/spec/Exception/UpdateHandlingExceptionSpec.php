@@ -21,27 +21,22 @@ use Sylius\Component\Resource\Exception\UpdateHandlingException;
  */
 final class UpdateHandlingExceptionSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(UpdateHandlingException::class);
-    }
-
-    function it_extends_an_exception()
+    function it_extends_an_exception(): void
     {
         $this->shouldHaveType(\Exception::class);
     }
 
-    function it_has_a_message()
+    function it_has_a_message(): void
     {
         $this->getMessage()->shouldReturn('Ups, something went wrong, please try again.');
     }
 
-    function it_has_a_flash()
+    function it_has_a_flash(): void
     {
         $this->getFlash()->shouldReturn('something_went_wrong_error');
     }
 
-    function it_has_an_api_response_code()
+    function it_has_an_api_response_code(): void
     {
         $this->getApiResponseCode()->shouldReturn(400);
     }

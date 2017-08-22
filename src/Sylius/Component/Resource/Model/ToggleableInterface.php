@@ -21,14 +21,14 @@ interface ToggleableInterface
     /**
      * @return bool
      */
-    public function isEnabled();
+    public function isEnabled(): bool;
 
     /**
      * @param bool $enabled
      */
-    public function setEnabled($enabled);
+    public function setEnabled(?bool $enabled): void;
 
-    public function enable();
+    public function enable(): void;
 
-    public function disable();
+    public function disable(): void;
 }

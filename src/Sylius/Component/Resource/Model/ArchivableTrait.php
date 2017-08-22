@@ -28,7 +28,7 @@ trait ArchivableTrait
     /**
      * @return \DateTimeInterface|null
      */
-    public function getArchivedAt()
+    public function getArchivedAt(): ?\DateTimeInterface
     {
         return $this->archivedAt;
     }
@@ -36,7 +36,7 @@ trait ArchivableTrait
     /**
      * @param \DateTimeInterface|null $archivedAt
      */
-    public function setArchivedAt(\DateTimeInterface $archivedAt = null)
+    public function setArchivedAt(?\DateTimeInterface $archivedAt): void
     {
         $this->archivedAt = $archivedAt;
     }

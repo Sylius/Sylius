@@ -21,17 +21,12 @@ use Sylius\Component\Resource\Repository\Exception\ExistingResourceException;
  */
 final class ExistingResourceExceptionSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ExistingResourceException::class);
-    }
-
-    function it_extends_exception()
+    function it_extends_exception(): void
     {
         $this->shouldHaveType(\Exception::class);
     }
 
-    function it_has_a_message()
+    function it_has_a_message(): void
     {
         $this->getMessage()->shouldReturn('Given resource already exists in the repository.');
     }

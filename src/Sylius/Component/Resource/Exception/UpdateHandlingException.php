@@ -33,14 +33,14 @@ class UpdateHandlingException extends \Exception
      * @param string $flash
      * @param int $apiResponseCode
      * @param int $code
-     * @param \Exception $previous
+     * @param \Exception|null $previous
      */
     public function __construct(
-        $message = 'Ups, something went wrong, please try again.',
-        $flash = 'something_went_wrong_error',
-        $apiResponseCode = 400,
-        $code = 0,
-        \Exception $previous = null
+        string $message = 'Ups, something went wrong, please try again.',
+        string $flash = 'something_went_wrong_error',
+        int $apiResponseCode = 400,
+        int $code = 0,
+        ?\Exception $previous = null
     ) {
         parent::__construct($message, $code, $previous);
 
@@ -51,7 +51,7 @@ class UpdateHandlingException extends \Exception
     /**
      * @return string
      */
-    public function getFlash()
+    public function getFlash(): string
     {
         return $this->flash;
     }
@@ -59,7 +59,7 @@ class UpdateHandlingException extends \Exception
     /**
      * @return int
      */
-    public function getApiResponseCode()
+    public function getApiResponseCode(): int
     {
         return $this->apiResponseCode;
     }
