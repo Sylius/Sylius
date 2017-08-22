@@ -39,7 +39,7 @@ final class AdminBasedLocaleContext implements LocaleContextInterface
     /**
      * {@inheritdoc}
      */
-    public function getLocaleCode()
+    public function getLocaleCode(): string
     {
         $token = $this->tokenStorage->getToken();
         if (null === $token) {
