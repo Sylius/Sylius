@@ -37,7 +37,7 @@ Feature: Shipping method validation
         Then I should be notified that zone has to be selected
         And shipping method with name "Food and Beverage Tax Rates" should not be added
 
-    @ui
+    @ui @todo
     Scenario: Trying to remove name from existing shipping method
         Given the store allows shipping with "UPS Ground"
         And I want to modify this shipping method
