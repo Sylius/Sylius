@@ -15,6 +15,7 @@ namespace Sylius\Component\Product\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Attribute\Model\AttributeInterface;
 use Webmozart\Assert\Assert;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Resource\Model\TimestampableTrait;
@@ -185,18 +186,12 @@ class Product implements ProductInterface
         $this->getTranslation()->setMetaDescription($metaDescription);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getAttributes()
+    public function getAttributes(): ?Collection
     {
         return $this->attributes;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getAttributesByLocale($localeCode, $fallbackLocaleCode)
+    public function getAttributesByLocale(string $localeCode, string $fallbackLocaleCode): ?Collection
     {
         $attributes = $this->attributes->filter(
             function (ProductAttributeValueInterface $attribute) use ($fallbackLocaleCode) {
@@ -212,10 +207,7 @@ class Product implements ProductInterface
         return $attributesWithFallback;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function addAttribute(AttributeValueInterface $attribute)
+    public function addAttribute(?AttributeValueInterface $attribute): void
     {
         Assert::isInstanceOf(
             $attribute,
@@ -229,10 +221,7 @@ class Product implements ProductInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function removeAttribute(AttributeValueInterface $attribute)
+    public function removeAttribute(?AttributeValueInterface $attribute): void
     {
         Assert::isInstanceOf(
             $attribute,
@@ -246,18 +235,12 @@ class Product implements ProductInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasAttribute(AttributeValueInterface $attribute)
+    public function hasAttribute(?AttributeValueInterface $attribute): bool
     {
         return $this->attributes->contains($attribute);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasAttributeByCodeAndLocale($attributeCode, $localeCode = null)
+    public function hasAttributeByCodeAndLocale(string $attributeCode, string $localeCode = null): bool
     {
         $localeCode = $localeCode ?: $this->getTranslation()->getLocale();
 
@@ -271,10 +254,7 @@ class Product implements ProductInterface
         return false;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getAttributeByCodeAndLocale($attributeCode, $localeCode = null)
+    public function getAttributeByCodeAndLocale(string $attributeCode, string $localeCode = null): AttributeInterface
     {
         if (null === $localeCode) {
             $localeCode = $this->getTranslation()->getLocale();

@@ -26,7 +26,7 @@ final class DatetimeAttributeType implements AttributeTypeInterface
     /**
      * {@inheritdoc}
      */
-    public function getStorageType()
+    public function getStorageType(): string
     {
         return AttributeValueInterface::STORAGE_DATETIME;
     }
@@ -34,7 +34,7 @@ final class DatetimeAttributeType implements AttributeTypeInterface
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType(): string
     {
         return static::TYPE;
     }
@@ -42,7 +42,10 @@ final class DatetimeAttributeType implements AttributeTypeInterface
     /**
      * {@inheritdoc}
      */
-    public function validate(AttributeValueInterface $attributeValue, ExecutionContextInterface $context, array $configuration)
-    {
+    public function validate(
+        AttributeValueInterface $attributeValue,
+        ExecutionContextInterface $context,
+        array $configuration
+    ): void {
     }
 }

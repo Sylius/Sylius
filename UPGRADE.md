@@ -18,6 +18,11 @@
   * `AddressInterface::setProviceName`
   * `ProvinceInterface::setCountry`
   * `ZoneMemberInterface::setBelongsTo`
+  
+### Attribute / AttributeBundle
+
+* `SelectAttributeType` has been made final, use decoration instead of extending it.
+* `AttributeFactory` has been made final, use decoration instead of extending it.
 
 ### AdminBundle
 

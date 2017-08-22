@@ -23,7 +23,7 @@ interface AttributeSubjectInterface
     /**
      * @return Collection|AttributeValueInterface[]
      */
-    public function getAttributes();
+    public function getAttributes(): ?Collection;
 
     /**
      * @param string $localeCode
@@ -31,24 +31,24 @@ interface AttributeSubjectInterface
      *
      * @return Collection|AttributeValueInterface[]
      */
-    public function getAttributesByLocale($localeCode, $fallbackLocaleCode);
+    public function getAttributesByLocale(string $localeCode, string $fallbackLocaleCode): ?Collection;
 
     /**
-     * @param AttributeValueInterface $attribute
+     * @param AttributeValueInterface|null $attribute
      */
-    public function addAttribute(AttributeValueInterface $attribute);
+    public function addAttribute(?AttributeValueInterface $attribute): void;
 
     /**
-     * @param AttributeValueInterface $attribute
+     * @param AttributeValueInterface|null $attribute
      */
-    public function removeAttribute(AttributeValueInterface $attribute);
+    public function removeAttribute(?AttributeValueInterface $attribute): void;
 
     /**
-     * @param AttributeValueInterface $attribute
+     * @param AttributeValueInterface|null $attribute
      *
      * @return bool
      */
-    public function hasAttribute(AttributeValueInterface $attribute);
+    public function hasAttribute(?AttributeValueInterface $attribute): bool;
 
     /**
      * @param string $attributeCode
@@ -56,13 +56,13 @@ interface AttributeSubjectInterface
      *
      * @return bool
      */
-    public function hasAttributeByCodeAndLocale($attributeCode, $localeCode = null);
+    public function hasAttributeByCodeAndLocale(string $attributeCode, ?string $localeCode): bool;
 
     /**
      * @param string $attributeCode
      * @param string|null $localeCode
      *
-     * @return AttributeValueInterface
+     * @return AttributeInterface
      */
-    public function getAttributeByCodeAndLocale($attributeCode, $localeCode = null);
+    public function getAttributeByCodeAndLocale(string $attributeCode, ?string $localeCode): AttributeInterface;
 }

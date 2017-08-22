@@ -29,24 +29,25 @@ interface AttributeValueInterface extends ResourceInterface
     public const STORAGE_TEXT = 'text';
 
     /**
-     * @return AttributeSubjectInterface
+     * @return AttributeSubjectInterface|null
      */
-    public function getSubject();
+    public function getSubject(): ?AttributeSubjectInterface;
 
     /**
      * @param AttributeSubjectInterface|null $subject
      */
-    public function setSubject(AttributeSubjectInterface $subject = null);
+    public function setSubject(?AttributeSubjectInterface $subject = null): void;
 
     /**
-     * @return AttributeInterface
+     *
+     * @return AttributeInterface|null
      */
-    public function getAttribute();
+    public function getAttribute(): ?AttributeInterface;
 
     /**
-     * @param AttributeInterface $attribute
+     * @param AttributeInterface|null $attribute
      */
-    public function setAttribute(AttributeInterface $attribute);
+    public function setAttribute(?AttributeInterface $attribute): void;
 
     /**
      * @return mixed
@@ -56,32 +57,32 @@ interface AttributeValueInterface extends ResourceInterface
     /**
      * @param mixed $value
      */
-    public function setValue($value);
+    public function setValue($value): void;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCode();
+    public function getCode(): ?string;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getName();
+    public function getName(): ?string;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getType();
+    public function getType(): ?string;
 
     /**
-     * @return string
+     * @return string|null
      *
      * @throws \InvalidArgumentException
      */
-    public function getLocaleCode();
+    public function getLocaleCode(): ?string;
 
     /**
-     * @param string
+     * @param string|null $localeCode
      */
-    public function setLocaleCode($localeCode);
+    public function setLocaleCode(?string $localeCode): void;
 }

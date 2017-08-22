@@ -28,7 +28,7 @@ final class IntegerAttributeType implements AttributeTypeInterface
     /**
      * {@inheritdoc}
      */
-    public function getStorageType()
+    public function getStorageType(): string
     {
         return AttributeValueInterface::STORAGE_INTEGER;
     }
@@ -36,7 +36,7 @@ final class IntegerAttributeType implements AttributeTypeInterface
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType(): string
     {
         return static::TYPE;
     }
@@ -44,8 +44,11 @@ final class IntegerAttributeType implements AttributeTypeInterface
     /**
      * {@inheritdoc}
      */
-    public function validate(AttributeValueInterface $attributeValue, ExecutionContextInterface $context, array $configuration)
-    {
+    public function validate(
+        AttributeValueInterface $attributeValue,
+        ExecutionContextInterface $context,
+        array $configuration
+    ): void {
         if (!isset($configuration['required'])) {
             return;
         }
@@ -63,12 +66,14 @@ final class IntegerAttributeType implements AttributeTypeInterface
 
     /**
      * @param ExecutionContextInterface $context
-     * @param string $value
+     * @param string|null $value
      *
      * @return ConstraintViolationListInterface
      */
-    private function getValidationErrors(ExecutionContextInterface $context, $value)
-    {
+    private function getValidationErrors(
+        ExecutionContextInterface $context,
+        ?string $value
+    ): ConstraintViolationListInterface {
         $validator = $context->getValidator();
 
         return $validator->validate(

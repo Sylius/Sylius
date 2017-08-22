@@ -87,7 +87,7 @@ class AttributeValue implements AttributeValueInterface
     /**
      * {@inheritdoc}
      */
-    public function getSubject()
+    public function getSubject(): ?AttributeSubjectInterface
     {
         return $this->subject;
     }
@@ -95,7 +95,7 @@ class AttributeValue implements AttributeValueInterface
     /**
      * {@inheritdoc}
      */
-    public function setSubject(AttributeSubjectInterface $subject = null)
+    public function setSubject(?AttributeSubjectInterface $subject = null): void
     {
         $this->subject = $subject;
     }
@@ -103,7 +103,7 @@ class AttributeValue implements AttributeValueInterface
     /**
      * {@inheritdoc}
      */
-    public function getAttribute()
+    public function getAttribute(): ?AttributeInterface
     {
         return $this->attribute;
     }
@@ -111,7 +111,7 @@ class AttributeValue implements AttributeValueInterface
     /**
      * {@inheritdoc}
      */
-    public function setAttribute(AttributeInterface $attribute)
+    public function setAttribute(?AttributeInterface $attribute): void
     {
         $this->attribute = $attribute;
     }
@@ -119,7 +119,7 @@ class AttributeValue implements AttributeValueInterface
     /**
      * {@inheritdoc}
      */
-    public function getLocaleCode()
+    public function getLocaleCode(): ?string
     {
         return $this->localeCode;
     }
@@ -127,7 +127,7 @@ class AttributeValue implements AttributeValueInterface
     /**
      * {@inheritdoc}
      */
-    public function setLocaleCode($localeCode)
+    public function setLocaleCode(?string $localeCode): void
     {
         Assert::string($localeCode);
 
@@ -151,7 +151,7 @@ class AttributeValue implements AttributeValueInterface
     /**
      * {@inheritdoc}
      */
-    public function setValue($value)
+    public function setValue($value): void
     {
         $this->assertAttributeIsSet();
 
@@ -163,7 +163,7 @@ class AttributeValue implements AttributeValueInterface
     /**
      * {@inheritdoc}
      */
-    public function getCode()
+    public function getCode(): ?string
     {
         $this->assertAttributeIsSet();
 
@@ -173,7 +173,7 @@ class AttributeValue implements AttributeValueInterface
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): ?string
     {
         $this->assertAttributeIsSet();
 
@@ -183,7 +183,7 @@ class AttributeValue implements AttributeValueInterface
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType(): ?string
     {
         $this->assertAttributeIsSet();
 
@@ -193,7 +193,7 @@ class AttributeValue implements AttributeValueInterface
     /**
      * @return bool|null
      */
-    protected function getBoolean()
+    protected function getBoolean(): ?bool
     {
         return $this->boolean;
     }
@@ -201,7 +201,7 @@ class AttributeValue implements AttributeValueInterface
     /**
      * @param bool|null $boolean
      */
-    protected function setBoolean($boolean)
+    protected function setBoolean(?bool $boolean): void
     {
         $this->boolean = $boolean;
     }
@@ -209,7 +209,7 @@ class AttributeValue implements AttributeValueInterface
     /**
      * @return string|null
      */
-    protected function getText()
+    protected function getText(): ?string
     {
         return $this->text;
     }
@@ -217,7 +217,7 @@ class AttributeValue implements AttributeValueInterface
     /**
      * @param string|null $text
      */
-    protected function setText($text)
+    protected function setText(?string $text): void
     {
         $this->text = $text;
     }
@@ -225,7 +225,7 @@ class AttributeValue implements AttributeValueInterface
     /**
      * @return int|null
      */
-    protected function getInteger()
+    protected function getInteger(): ?int
     {
         return $this->integer;
     }
@@ -233,7 +233,7 @@ class AttributeValue implements AttributeValueInterface
     /**
      * @param int|null $integer
      */
-    protected function setInteger($integer)
+    protected function setInteger(?int $integer): void
     {
         $this->integer = $integer;
     }
@@ -241,7 +241,7 @@ class AttributeValue implements AttributeValueInterface
     /**
      * @return float|null
      */
-    protected function getFloat()
+    protected function getFloat(): ?float
     {
         return $this->float;
     }
@@ -249,7 +249,7 @@ class AttributeValue implements AttributeValueInterface
     /**
      * @param float|null $float
      */
-    protected function setFloat($float)
+    protected function setFloat(?float $float): void
     {
         $this->float = $float;
     }
@@ -257,7 +257,7 @@ class AttributeValue implements AttributeValueInterface
     /**
      * @return \DateTimeInterface|null
      */
-    protected function getDatetime()
+    protected function getDatetime(): ?\DateTimeInterface
     {
         return $this->datetime;
     }
@@ -265,7 +265,7 @@ class AttributeValue implements AttributeValueInterface
     /**
      * @param \DateTimeInterface|null $datetime
      */
-    protected function setDatetime(\DateTimeInterface $datetime = null)
+    protected function setDatetime(?\DateTimeInterface $datetime = null): void
     {
         $this->datetime = $datetime;
     }
@@ -273,7 +273,7 @@ class AttributeValue implements AttributeValueInterface
     /**
      * @return \DateTimeInterface|null
      */
-    protected function getDate()
+    protected function getDate(): ?\DateTimeInterface
     {
         return $this->date;
     }
@@ -281,7 +281,7 @@ class AttributeValue implements AttributeValueInterface
     /**
      * @param \DateTimeInterface|null $date
      */
-    protected function setDate(\DateTimeInterface $date = null)
+    protected function setDate(?\DateTimeInterface $date = null): void
     {
         $this->date = $date;
     }
@@ -289,7 +289,7 @@ class AttributeValue implements AttributeValueInterface
     /**
      * @return array|null
      */
-    public function getJson()
+    protected function getJson(): ?array
     {
         return $this->json;
     }
@@ -297,7 +297,7 @@ class AttributeValue implements AttributeValueInterface
     /**
      * @param array|null $json
      */
-    public function setJson(array $json = null)
+    protected function setJson(?array $json): void
     {
         $this->json = $json;
     }
