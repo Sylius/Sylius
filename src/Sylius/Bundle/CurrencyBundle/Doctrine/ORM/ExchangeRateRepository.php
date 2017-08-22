@@ -14,9 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CurrencyBundle\Doctrine\ORM;
 
 use Doctrine\ORM\NonUniqueResultException;
-use Doctrine\ORM\Query\Expr\Orx;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Currency\Model\ExchangeRateInterface;
 use Sylius\Component\Currency\Repository\ExchangeRateRepositoryInterface;
 
@@ -30,7 +28,7 @@ class ExchangeRateRepository extends EntityRepository implements ExchangeRateRep
      *
      * @throws NonUniqueResultException
      */
-    public function findOneWithCurrencyPair($firstCurrencyCode, $secondCurrencyCode)
+    public function findOneWithCurrencyPair(string $firstCurrencyCode, string $secondCurrencyCode): ?ExchangeRateInterface
     {
         $expr = $this->getEntityManager()->getExpressionBuilder();
 
