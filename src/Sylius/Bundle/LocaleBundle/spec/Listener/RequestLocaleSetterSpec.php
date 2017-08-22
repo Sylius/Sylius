@@ -18,14 +18,9 @@ use Symfony\Component\HttpKernel\Event\GetResponseEvent;
  */
 final class RequestLocaleSetterSpec extends ObjectBehavior
 {
-    function let(LocaleContextInterface $localeContext, LocaleProviderInterface $localeProvider)
+    function let(LocaleContextInterface $localeContext, LocaleProviderInterface $localeProvider): void
     {
         $this->beConstructedWith($localeContext, $localeProvider);
-    }
-
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(RequestLocaleSetter::class);
     }
 
     function it_sets_locale_and_default_locale_on_request(
@@ -33,7 +28,7 @@ final class RequestLocaleSetterSpec extends ObjectBehavior
         LocaleProviderInterface $localeProvider,
         GetResponseEvent $event,
         Request $request
-    ) {
+    ): void {
         $event->getRequest()->willReturn($request);
 
         $localeContext->getLocaleCode()->willReturn('pl_PL');

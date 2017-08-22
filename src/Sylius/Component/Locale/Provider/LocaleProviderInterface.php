@@ -21,10 +21,10 @@ interface LocaleProviderInterface
     /**
      * @return string[]
      */
-    public function getAvailableLocalesCodes();
+    public function getAvailableLocalesCodes(): array;
 
     /**
      * @return string
      */
-    public function getDefaultLocaleCode();
+    public function getDefaultLocaleCode(): string;
 }

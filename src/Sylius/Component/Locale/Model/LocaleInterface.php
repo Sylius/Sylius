@@ -25,7 +25,7 @@ interface LocaleInterface extends ResourceInterface, CodeAwareInterface, Timesta
     /**
      * @param string|null $locale
      *
-     * @return string
+     * @return string|null
      */
-    public function getName($locale = null);
+    public function getName(?string $locale = null): ?string;
 }

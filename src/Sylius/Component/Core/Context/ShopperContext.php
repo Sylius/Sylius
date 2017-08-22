@@ -83,7 +83,7 @@ use Sylius\Component\Customer\Context\CustomerContextInterface;
     /**
      * {@inheritdoc}
      */
-    public function getLocaleCode()
+    public function getLocaleCode(): string
     {
         return $this->localeContext->getLocaleCode();
     }

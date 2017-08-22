@@ -37,7 +37,7 @@ final class LocaleProvider implements LocaleProviderInterface
      * @param RepositoryInterface $localeRepository
      * @param string $defaultLocaleCode
      */
-    public function __construct(RepositoryInterface $localeRepository, $defaultLocaleCode)
+    public function __construct(RepositoryInterface $localeRepository, string $defaultLocaleCode)
     {
         $this->localeRepository = $localeRepository;
         $this->defaultLocaleCode = $defaultLocaleCode;
@@ -46,7 +46,7 @@ final class LocaleProvider implements LocaleProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function getAvailableLocalesCodes()
+    public function getAvailableLocalesCodes(): array
     {
         $locales = $this->localeRepository->findAll();
 
@@ -61,7 +61,7 @@ final class LocaleProvider implements LocaleProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function getDefaultLocaleCode()
+    public function getDefaultLocaleCode(): string
     {
         return $this->defaultLocaleCode;
     }

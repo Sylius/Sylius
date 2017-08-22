@@ -29,7 +29,7 @@ class Locale implements LocaleInterface
     protected $id;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $code;
 
@@ -41,9 +41,9 @@ class Locale implements LocaleInterface
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
-        return $this->getName();
+        return (string) $this->getName();
     }
 
     /**
@@ -73,7 +73,7 @@ class Locale implements LocaleInterface
     /**
      * {@inheritdoc}
      */
-    public function getName($locale = null)
+    public function getName(?string $locale = null): ?string
     {
         return Intl::getLocaleBundle()->getLocaleName($this->getCode(), $locale);
     }

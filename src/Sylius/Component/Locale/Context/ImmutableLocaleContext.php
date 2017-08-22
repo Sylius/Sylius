@@ -26,7 +26,7 @@ final class ImmutableLocaleContext implements LocaleContextInterface
     /**
      * @param string $localeCode
      */
-    public function __construct($localeCode)
+    public function __construct(string $localeCode)
     {
         $this->localeCode = $localeCode;
     }
@@ -34,7 +34,7 @@ final class ImmutableLocaleContext implements LocaleContextInterface
     /**
      * {@inheritdoc}
      */
-    public function getLocaleCode()
+    public function getLocaleCode(): string
     {
         return $this->localeCode;
     }

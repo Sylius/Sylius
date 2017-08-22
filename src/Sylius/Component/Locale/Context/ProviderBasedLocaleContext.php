@@ -36,7 +36,7 @@ final class ProviderBasedLocaleContext implements LocaleContextInterface
     /**
      * {@inheritdoc}
      */
-    public function getLocaleCode()
+    public function getLocaleCode(): string
     {
         $availableLocalesCodes = $this->localeProvider->getAvailableLocalesCodes();
         $localeCode = $this->localeProvider->getDefaultLocaleCode();

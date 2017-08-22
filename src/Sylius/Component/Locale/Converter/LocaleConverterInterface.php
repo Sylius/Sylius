@@ -20,21 +20,21 @@ interface LocaleConverterInterface
 {
     /**
      * @param string $name
-     * @param string $locale
+     * @param string|null $locale
      *
      * @return string
      *
      * @throws \InvalidArgumentException
      */
-    public function convertNameToCode($name, $locale = 'en');
+    public function convertNameToCode(string $name, ?string $locale = null): string;
 
     /**
      * @param string $code
-     * @param string $locale
+     * @param string|null $locale
      *
      * @return string
      *
      * @throws \InvalidArgumentException
      */
-    public function convertCodeToName($code, $locale = 'en');
+    public function convertCodeToName(string $code, ?string $locale = null): string;
 }
