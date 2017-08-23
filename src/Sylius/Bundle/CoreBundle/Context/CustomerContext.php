@@ -16,6 +16,7 @@ namespace Sylius\Bundle\CoreBundle\Context;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
+use Sylius\Component\Customer\Model\CustomerInterface as BaseCustomerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
@@ -45,11 +46,9 @@ final class CustomerContext implements CustomerContextInterface
     }
 
     /**
-     * Gets customer based on currently logged user.
-     *
-     * @return CustomerInterface|null
+     * {@inheritdoc}
      */
-    public function getCustomer()
+    public function getCustomer(): ?BaseCustomerInterface
     {
         if (null === $token = $this->tokenStorage->getToken()) {
             return null;

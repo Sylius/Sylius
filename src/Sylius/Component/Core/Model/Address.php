@@ -22,14 +22,14 @@ use Sylius\Component\Customer\Model\CustomerInterface as BaseCustomerInterface;
 class Address extends BaseAddress implements AddressInterface
 {
     /**
-     * @var CustomerInterface
+     * @var CustomerInterface|null
      */
     protected $customer;
 
     /**
      * {@inheritdoc}
      */
-    public function getCustomer()
+    public function getCustomer(): ?BaseCustomerInterface
     {
         return $this->customer;
     }
@@ -37,7 +37,7 @@ class Address extends BaseAddress implements AddressInterface
     /**
      * {@inheritdoc}
      */
-    public function setCustomer(BaseCustomerInterface $customer = null)
+    public function setCustomer(?BaseCustomerInterface $customer): void
     {
         $this->customer = $customer;
     }
