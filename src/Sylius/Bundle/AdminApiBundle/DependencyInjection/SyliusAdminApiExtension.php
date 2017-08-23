@@ -31,7 +31,7 @@ final class SyliusAdminApiExtension extends AbstractResourceExtension implements
     /**
      * {@inheritdoc}
      */
-    public function load(array $config, ContainerBuilder $container)
+    public function load(array $config, ContainerBuilder $container): void
     {
         $config = $this->processConfiguration($this->getConfiguration([], $container), $config);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
@@ -46,7 +46,7 @@ final class SyliusAdminApiExtension extends AbstractResourceExtension implements
      *
      * @throws ServiceNotFoundException
      */
-    public function prepend(ContainerBuilder $container)
+    public function prepend(ContainerBuilder $container): void
     {
         if (!$container->hasExtension('fos_oauth_server')) {
             throw new ServiceNotFoundException('FOSOAuthServerBundle must be registered in kernel.');

@@ -23,12 +23,12 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Arnaud Langlade <arn0d.dev@gmali.com>
  */
-class CreateClientCommand extends ContainerAwareCommand
+final class CreateClientCommand extends ContainerAwareCommand
 {
     /**
      * {@inheritdoc}
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('sylius:oauth-server:create-client')
@@ -55,7 +55,7 @@ EOT
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): void
     {
         $clientManager = $this->getClientManager();
 
@@ -77,7 +77,7 @@ EOT
     /**
      * @return ClientManagerInterface
      */
-    private function getClientManager()
+    private function getClientManager(): ClientManagerInterface
     {
         return $this->getContainer()->get('fos_oauth_server.client_manager.default');
     }

@@ -74,7 +74,7 @@ final class ShowAvailablePaymentMethodsController
      *
      * @return Response
      */
-    public function showAction(Request $request)
+    public function showAction(Request $request): Response
     {
         /** @var OrderInterface $cart */
         $cart = $this->getCartOr404($request->attributes->get('orderId'));
@@ -98,8 +98,10 @@ final class ShowAvailablePaymentMethodsController
      * @param mixed $cartId
      *
      * @return OrderInterface
+     *
+     * @throws NotFoundHttpException
      */
-    private function getCartOr404($cartId)
+    private function getCartOr404($cartId): OrderInterface
     {
         $cart = $this->orderRepository->findCartById($cartId);
 
@@ -116,7 +118,7 @@ final class ShowAvailablePaymentMethodsController
      *
      * @return bool
      */
-    private function isCheckoutTransitionPossible(OrderInterface $cart, $transition)
+    private function isCheckoutTransitionPossible(OrderInterface $cart, string $transition): bool
     {
         return $this->stateMachineFactory->get($cart, OrderCheckoutTransitions::GRAPH)->can($transition);
     }
@@ -127,7 +129,7 @@ final class ShowAvailablePaymentMethodsController
      *
      * @return array
      */
-    private function getPaymentMethods(PaymentInterface $payment, $locale)
+    private function getPaymentMethods(PaymentInterface $payment, string $locale): array
     {
         $paymentMethods =  $this->paymentMethodResolver->getSupportedMethods($payment);
 

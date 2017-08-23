@@ -52,9 +52,9 @@ final class ProductTaxonPositionController
     /**
      * @param Request $request
      *
-     * @return Response
+     * @return JsonResponse
      */
-    public function updatePositionsAction(Request $request)
+    public function updatePositionsAction(Request $request): JsonResponse
     {
         $productsPositions = $request->request->get('productsPositions');
 
