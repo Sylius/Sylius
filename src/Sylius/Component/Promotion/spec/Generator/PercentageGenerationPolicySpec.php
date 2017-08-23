@@ -53,7 +53,7 @@ final class PercentageGenerationPolicySpec extends ObjectBehavior
         $couponRepository->countByCodeLength(1)->willReturn(1);
 
         $this->isGenerationPossible($instruction)->shouldReturn(false);
-        $this->getPossibleGenerationAmount($instruction)->shouldReturn(7.0);
+        $this->getPossibleGenerationAmount($instruction)->shouldReturn(7);
     }
 
     function it_throws_an_invalid_argument_exception_when_expected_amount_is_null(

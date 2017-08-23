@@ -121,7 +121,7 @@ class PromotionCoupon implements PromotionCouponInterface
     /**
      * {@inheritdoc}
      */
-    public function getPromotion(): PromotionInterface
+    public function getPromotion(): ?PromotionInterface
     {
         return $this->promotion;
     }

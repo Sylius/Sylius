@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Component\Promotion\Checker\Eligibility;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Promotion\Checker\Eligibility\PromotionEligibilityCheckerInterface;
 use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
@@ -55,7 +56,9 @@ final class PromotionRulesEligibilityCheckerSpec extends ObjectBehavior
         PromotionSubjectInterface $subject
     ): void {
         $promotion->hasRules()->willReturn(true);
-        $promotion->getRules()->willReturn([$firstRule, $secondRule]);
+        $promotion->getRules()->willReturn(
+            new ArrayCollection([$firstRule->getWrappedObject(), $secondRule->getWrappedObject()])
+        );
 
         $firstRule->getType()->willReturn('first_rule');
         $firstRule->getConfiguration()->willReturn([]);
@@ -82,7 +85,9 @@ final class PromotionRulesEligibilityCheckerSpec extends ObjectBehavior
         PromotionSubjectInterface $subject
     ): void {
         $promotion->hasRules()->willReturn(true);
-        $promotion->getRules()->willReturn([$firstRule, $secondRule]);
+        $promotion->getRules()->willReturn(
+            new ArrayCollection([$firstRule->getWrappedObject(), $secondRule->getWrappedObject()])
+        );
 
         $firstRule->getType()->willReturn('first_rule');
         $firstRule->getConfiguration()->willReturn([]);
@@ -109,7 +114,9 @@ final class PromotionRulesEligibilityCheckerSpec extends ObjectBehavior
         PromotionSubjectInterface $subject
     ): void {
         $promotion->hasRules()->willReturn(true);
-        $promotion->getRules()->willReturn([$firstRule, $secondRule]);
+        $promotion->getRules()->willReturn(
+            new ArrayCollection([$firstRule->getWrappedObject(), $secondRule->getWrappedObject()])
+        );
 
         $firstRule->getType()->willReturn('first_rule');
         $firstRule->getConfiguration()->willReturn([]);

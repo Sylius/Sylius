@@ -95,11 +95,11 @@ final class PercentageDiscountPromotionActionCommand extends DiscountPromotionAc
 
     /**
      * @param int $promotionSubjectTotal
-     * @param int $percentage
+     * @param float $percentage
      *
      * @return int
      */
-    private function calculateAdjustmentAmount(int $promotionSubjectTotal, int $percentage): int
+    private function calculateAdjustmentAmount(int $promotionSubjectTotal, float $percentage): int
     {
         return -1 * (int) round($promotionSubjectTotal * $percentage);
     }

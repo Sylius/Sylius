@@ -174,7 +174,7 @@ class Promotion implements PromotionInterface
     /**
      * {@inheritdoc}
      */
-    public function setPriority(int $priority): void
+    public function setPriority(?int $priority): void
     {
         $this->priority = null === $priority ? -1 : $priority;
     }

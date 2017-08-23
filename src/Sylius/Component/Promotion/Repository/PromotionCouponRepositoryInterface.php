@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Component\Promotion\Repository;
 
 use Doctrine\ORM\QueryBuilder;
-use Sylius\Component\Promotion\Model\PromotionInterface;
+use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -40,7 +40,7 @@ interface PromotionCouponRepositoryInterface extends RepositoryInterface
      * @param string $code
      * @param string $promotionCode
      *
-     * @return PromotionInterface
+     * @return PromotionCouponInterface|null
      */
-    public function findOneByCodeAndPromotionCode(string $code, string $promotionCode): PromotionInterface;
+    public function findOneByCodeAndPromotionCode(string $code, string $promotionCode): ?PromotionCouponInterface;
 }

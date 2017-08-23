@@ -49,7 +49,7 @@ final class PromotionCouponGeneratorInstruction implements PromotionCouponGenera
     /**
      * {@inheritdoc}
      */
-    public function setAmount(int $amount): void
+    public function setAmount(?int $amount): void
     {
         $this->amount = $amount;
     }
@@ -65,7 +65,7 @@ final class PromotionCouponGeneratorInstruction implements PromotionCouponGenera
     /**
      * {@inheritdoc}
      */
-    public function setCodeLength(int $codeLength): void
+    public function setCodeLength(?int $codeLength): void
     {
         $this->codeLength = $codeLength;
     }

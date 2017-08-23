@@ -68,7 +68,7 @@ final class PromotionCouponToCodeType extends AbstractType implements DataTransf
     /**
      * {@inheritdoc}
      */
-    public function reverseTransform($code): PromotionCouponInterface
+    public function reverseTransform($code): ?PromotionCouponInterface
     {
         if (null === $code || '' === $code) {
             return null;

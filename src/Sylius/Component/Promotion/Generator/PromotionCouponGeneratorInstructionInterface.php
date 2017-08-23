@@ -24,9 +24,9 @@ interface PromotionCouponGeneratorInstructionInterface
     public function getAmount(): ?int;
 
     /**
-     * @param int $amount
+     * @param int|null $amount
      */
-    public function setAmount(int $amount): void;
+    public function setAmount(?int $amount): void;
 
     /**
      * @return int|null
@@ -34,9 +34,9 @@ interface PromotionCouponGeneratorInstructionInterface
     public function getCodeLength(): ?int;
 
     /**
-     * @param int $codeLength
+     * @param int|null $codeLength
      */
-    public function setCodeLength(int $codeLength): void;
+    public function setCodeLength(?int $codeLength): void;
 
     /**
      * @return \DateTimeInterface|null

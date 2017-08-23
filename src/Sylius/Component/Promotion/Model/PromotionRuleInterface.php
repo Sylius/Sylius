@@ -26,9 +26,9 @@ interface PromotionRuleInterface extends ResourceInterface, ConfigurablePromotio
     public function setType(?string $type): void;
 
     /**
-     * @param array|null $configuration
+     * @param array $configuration
      */
-    public function setConfiguration(?array $configuration): void;
+    public function setConfiguration(array $configuration): void;
 
     /**
      * @param PromotionInterface|null $promotion

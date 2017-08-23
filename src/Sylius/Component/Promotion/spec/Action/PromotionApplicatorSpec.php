@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Component\Promotion\Action;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Promotion\Action\PromotionActionCommandInterface;
 use Sylius\Component\Promotion\Action\PromotionApplicatorInterface;
@@ -46,7 +47,7 @@ final class PromotionApplicatorSpec extends ObjectBehavior
         $configuration = [];
 
         $registry->get('test_action')->willReturn($actionCommand);
-        $promotion->getActions()->willReturn([$action]);
+        $promotion->getActions()->willReturn(new ArrayCollection([$action->getWrappedObject()]));
         $action->getType()->willReturn('test_action');
         $action->getConfiguration()->willReturn($configuration);
 
@@ -66,7 +67,9 @@ final class PromotionApplicatorSpec extends ObjectBehavior
         PromotionActionInterface $firstAction,
         PromotionActionInterface $secondAction
     ): void {
-        $promotion->getActions()->willReturn([$firstAction, $secondAction]);
+        $promotion->getActions()->willReturn(
+            new ArrayCollection([$firstAction->getWrappedObject(), $secondAction->getWrappedObject()])
+        );
 
         $firstAction->getType()->willReturn('first_action');
         $firstAction->getConfiguration()->willReturn([]);
@@ -94,7 +97,9 @@ final class PromotionApplicatorSpec extends ObjectBehavior
         PromotionActionInterface $firstAction,
         PromotionActionInterface $secondAction
     ): void {
-        $promotion->getActions()->willReturn([$firstAction, $secondAction]);
+        $promotion->getActions()->willReturn(
+            new ArrayCollection([$firstAction->getWrappedObject(), $secondAction->getWrappedObject()])
+        );
 
         $firstAction->getType()->willReturn('first_action');
         $firstAction->getConfiguration()->willReturn([]);
@@ -122,7 +127,9 @@ final class PromotionApplicatorSpec extends ObjectBehavior
         PromotionActionInterface $firstAction,
         PromotionActionInterface $secondAction
     ): void {
-        $promotion->getActions()->willReturn([$firstAction, $secondAction]);
+        $promotion->getActions()->willReturn(
+            new ArrayCollection([$firstAction->getWrappedObject(), $secondAction->getWrappedObject()])
+        );
 
         $firstAction->getType()->willReturn('first_action');
         $firstAction->getConfiguration()->willReturn([]);
@@ -151,7 +158,7 @@ final class PromotionApplicatorSpec extends ObjectBehavior
         $configuration = [];
 
         $registry->get('test_action')->willReturn($actionCommand);
-        $promotion->getActions()->willReturn([$action]);
+        $promotion->getActions()->willReturn(new ArrayCollection([$action->getWrappedObject()]));
         $action->getType()->willReturn('test_action');
         $action->getConfiguration()->willReturn($configuration);
 

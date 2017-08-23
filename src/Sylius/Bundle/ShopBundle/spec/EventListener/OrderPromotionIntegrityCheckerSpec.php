@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ShopBundle\EventListener;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
@@ -50,7 +51,7 @@ final class OrderPromotionIntegrityCheckerSpec extends ObjectBehavior
         ResourceControllerEvent $event
     ) {
         $event->getSubject()->willReturn($order);
-        $order->getPromotions()->willReturn([$promotion]);
+        $order->getPromotions()->willReturn(new ArrayCollection([$promotion->getWrappedObject()]));
         $promotionEligibilityChecker->isEligible($order, $promotion)->willReturn(true);
         $event->stop(Argument::any())->shouldNotBeCalled();
         $event->setResponse(Argument::any())->shouldNotBeCalled();
@@ -70,7 +71,7 @@ final class OrderPromotionIntegrityCheckerSpec extends ObjectBehavior
 
         $promotion->getName()->willReturn('Christmas');
         $event->getSubject()->willReturn($order);
-        $order->getPromotions()->willReturn([$promotion]);
+        $order->getPromotions()->willReturn(new ArrayCollection([$promotion->getWrappedObject()]));
         $promotionEligibilityChecker->isEligible($order, $promotion)->willReturn(false);
 
         $event->stop(

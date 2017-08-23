@@ -26,9 +26,9 @@ interface ConfigurablePromotionElementInterface extends ResourceInterface
     public function getType(): ?string;
 
     /**
-     * @return array|null
+     * @return array
      */
-    public function getConfiguration(): ?array;
+    public function getConfiguration(): array;
 
     /**
      * @return PromotionInterface|null

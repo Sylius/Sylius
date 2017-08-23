@@ -15,7 +15,7 @@ namespace Sylius\Bundle\PromotionBundle\Doctrine\ORM;
 
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use Sylius\Component\Promotion\Model\PromotionInterface;
+use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Repository\PromotionCouponRepositoryInterface;
 
 /**
@@ -51,7 +51,7 @@ class PromotionCouponRepository extends EntityRepository implements PromotionCou
     /**
      * {@inheritdoc}
      */
-    public function findOneByCodeAndPromotionCode(string $code, string $promotionCode): PromotionInterface
+    public function findOneByCodeAndPromotionCode(string $code, string $promotionCode): ?PromotionCouponInterface
     {
         return $this->createQueryBuilder('o')
             ->leftJoin('o.promotion', 'promotion')

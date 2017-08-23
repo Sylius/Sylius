@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Component\Core\Promotion\Modifier;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
@@ -40,7 +41,9 @@ final class OrderPromotionsUsageModifierSpec extends ObjectBehavior
         PromotionInterface $firstPromotion,
         PromotionInterface $secondPromotion
     ) {
-        $order->getPromotions()->willReturn([$firstPromotion, $secondPromotion]);
+        $order->getPromotions()->willReturn(
+            new ArrayCollection([$firstPromotion->getWrappedObject(), $secondPromotion->getWrappedObject()])
+        );
         $order->getPromotionCoupon()->willReturn(null);
 
         $firstPromotion->incrementUsed()->shouldBeCalled();
@@ -54,7 +57,9 @@ final class OrderPromotionsUsageModifierSpec extends ObjectBehavior
         PromotionInterface $firstPromotion,
         PromotionInterface $secondPromotion
     ) {
-        $order->getPromotions()->willReturn([$firstPromotion, $secondPromotion]);
+        $order->getPromotions()->willReturn(
+            new ArrayCollection([$firstPromotion->getWrappedObject(), $secondPromotion->getWrappedObject()])
+        );
         $order->getPromotionCoupon()->willReturn(null);
 
         $firstPromotion->decrementUsed()->shouldBeCalled();
@@ -69,7 +74,9 @@ final class OrderPromotionsUsageModifierSpec extends ObjectBehavior
         PromotionInterface $secondPromotion,
         PromotionCouponInterface $promotionCoupon
     ) {
-        $order->getPromotions()->willReturn([$firstPromotion, $secondPromotion]);
+        $order->getPromotions()->willReturn(
+            new ArrayCollection([$firstPromotion->getWrappedObject(), $secondPromotion->getWrappedObject()])
+        );
         $order->getPromotionCoupon()->willReturn($promotionCoupon);
 
         $firstPromotion->incrementUsed()->shouldBeCalled();
@@ -86,7 +93,9 @@ final class OrderPromotionsUsageModifierSpec extends ObjectBehavior
         PromotionInterface $secondPromotion,
         PromotionCouponInterface $promotionCoupon
     ) {
-        $order->getPromotions()->willReturn([$firstPromotion, $secondPromotion]);
+        $order->getPromotions()->willReturn(
+            new ArrayCollection([$firstPromotion->getWrappedObject(), $secondPromotion->getWrappedObject()])
+        );
         $order->getPromotionCoupon()->willReturn($promotionCoupon);
 
         $firstPromotion->decrementUsed()->shouldBeCalled();

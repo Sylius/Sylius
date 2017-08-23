@@ -49,9 +49,9 @@ interface PromotionInterface extends CodeAwareInterface, TimestampableInterface,
     public function getPriority(): int;
 
     /**
-     * @param int $priority
+     * @param int|null $priority
      */
-    public function setPriority(int $priority): void;
+    public function setPriority(?int $priority): void;
 
     /**
      * @return bool
@@ -105,7 +105,7 @@ interface PromotionInterface extends CodeAwareInterface, TimestampableInterface,
     /**
      * @param \DateTimeInterface|null $endsAt
      */
-    public function setEndsAt(\DateTimeInterface $endsAt): void;
+    public function setEndsAt(?\DateTimeInterface $endsAt): void;
 
     /**
      * @return bool

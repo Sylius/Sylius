@@ -388,7 +388,7 @@ class Order extends BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getPromotionCoupon(): BaseCouponInterface
+    public function getPromotionCoupon(): ?BaseCouponInterface
     {
         return $this->promotionCoupon;
     }

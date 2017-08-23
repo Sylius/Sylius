@@ -65,7 +65,7 @@ class PromotionAction implements PromotionActionInterface
     /**
      * {@inheritdoc}
      */
-    public function getConfiguration(): ?array
+    public function getConfiguration(): array
     {
         return $this->configuration;
     }
@@ -73,7 +73,7 @@ class PromotionAction implements PromotionActionInterface
     /**
      * {@inheritdoc}
      */
-    public function setConfiguration(?array $configuration): void
+    public function setConfiguration(array $configuration): void
     {
         $this->configuration = $configuration;
     }
