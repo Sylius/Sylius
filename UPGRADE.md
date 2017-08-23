@@ -46,6 +46,10 @@
 * In order to be compatibile with Doctrine ORM 2.6+ and be more consistent 
   `OrderRepositoryInterface::count()` signature was changed to `OrderRepositoryInterface::countPlacedOrders()`.
 
+### Payment / PaymentBundle
+
+* In `PaymentInterface::setMethod` method the default value of `PaymentMethodInterface $method` parameter has been removed.
+
 ### Registry
 
 * `PrioritizedServiceRegistryInterface::all` method return type changed from Zend's `PriorityQueue` to `iterable`.

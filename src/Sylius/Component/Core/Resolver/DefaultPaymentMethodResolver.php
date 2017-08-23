@@ -18,6 +18,7 @@ use Sylius\Component\Core\Model\PaymentInterface as CorePaymentInterface;
 use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
 use Sylius\Component\Payment\Exception\UnresolvedDefaultPaymentMethodException;
 use Sylius\Component\Payment\Model\PaymentInterface;
+use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Resolver\DefaultPaymentMethodResolverInterface;
 use Webmozart\Assert\Assert;
 
@@ -41,8 +42,10 @@ class DefaultPaymentMethodResolver implements DefaultPaymentMethodResolverInterf
 
     /**
      * {@inheritdoc}
+     *
+     * @throws UnresolvedDefaultPaymentMethodException
      */
-    public function getDefaultPaymentMethod(PaymentInterface $subject)
+    public function getDefaultPaymentMethod(PaymentInterface $subject): PaymentMethodInterface
     {
         /** @var CorePaymentInterface $subject */
         Assert::isInstanceOf($subject, CorePaymentInterface::class);

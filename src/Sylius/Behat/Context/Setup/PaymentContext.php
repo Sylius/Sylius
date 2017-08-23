@@ -208,7 +208,7 @@ final class PaymentContext implements Context
         ]);
 
         if (null !== $position) {
-            $paymentMethod->setPosition($position);
+            $paymentMethod->setPosition((int) $position);
         }
 
         $this->sharedStorage->set('payment_method', $paymentMethod);
