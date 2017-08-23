@@ -59,7 +59,7 @@ class PaymentMethod implements PaymentMethodInterface
      */
     public function __toString(): string
     {
-        return $this->getName();
+        return (string) $this->getName();
     }
 
     /**
@@ -145,7 +145,7 @@ class PaymentMethod implements PaymentMethodInterface
     /**
      * {@inheritdoc}
      */
-    public function setEnvironment(string $environment): void
+    public function setEnvironment(?string $environment): void
     {
         $this->environment = $environment;
     }
@@ -161,7 +161,7 @@ class PaymentMethod implements PaymentMethodInterface
     /**
      * {@inheritdoc}
      */
-    public function setPosition(int $position): void
+    public function setPosition(?int $position): void
     {
         $this->position = $position;
     }

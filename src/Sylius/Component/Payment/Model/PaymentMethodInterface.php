@@ -59,22 +59,22 @@ interface PaymentMethodInterface extends
     public function setInstructions(?string $instructions): void;
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getEnvironment(): ?string;
 
     /**
-     * @param string $environment
+     * @param string|null $environment
      */
-    public function setEnvironment(string $environment): void;
+    public function setEnvironment(?string $environment): void;
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getPosition(): ?int;
 
     /**
-     * @param int $position
+     * @param int|null $position
      */
-    public function setPosition(int $position): void;
+    public function setPosition(?int $position): void;
 }

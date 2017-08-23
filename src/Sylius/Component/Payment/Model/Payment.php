@@ -136,7 +136,7 @@ class Payment implements PaymentInterface
     /**
      * {@inheritdoc}
      */
-    public function getDetails(): ?array
+    public function getDetails(): array
     {
         return $this->details;
     }

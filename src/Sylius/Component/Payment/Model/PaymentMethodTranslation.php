@@ -42,7 +42,7 @@ class PaymentMethodTranslation extends AbstractTranslation implements PaymentMet
      */
     public function __toString(): string
     {
-        return $this->getName();
+        return (string) $this->getName();
     }
 
     /**
