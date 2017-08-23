@@ -16,7 +16,6 @@ sylius:
         email:
             already_used: Email ini telah digunakan, silahkan login atau gunakan lupa kata sandi.
             max: Email tidak boleh lebih dari {{ limit }} karakter.
-            min: Email setidaknya terdiri dari {{ limit }} karakter.
             not_blank: Masukkan email Anda.
             invalid: Email ini tidak valid.
             unique: Email ini telah digunakan.

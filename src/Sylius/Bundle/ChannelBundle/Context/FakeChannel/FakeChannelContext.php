@@ -58,13 +58,19 @@ final class FakeChannelContext implements ChannelContextInterface
     /**
      * {@inheritdoc}
      */
-    public function getChannel()
+    public function getChannel(): ChannelInterface
     {
         $fakeChannelCode = $this->fakeChannelCodeProvider->getCode($this->getMasterRequest());
 
+        if (null === $fakeChannelCode) {
+            throw new ChannelNotFoundException();
+        }
+
         $channel = $this->channelRepository->findOneByCode($fakeChannelCode);
 
-        $this->assertChannelWasFound($channel);
+        if (null === $channel) {
+            throw new ChannelNotFoundException();
+        }
 
         return $channel;
     }
@@ -74,7 +80,7 @@ final class FakeChannelContext implements ChannelContextInterface
      *
      * @throws ChannelNotFoundException
      */
-    private function getMasterRequest()
+    private function getMasterRequest(): Request
     {
         $masterRequest = $this->requestStack->getMasterRequest();
         if (null === $masterRequest) {
@@ -82,17 +88,5 @@ final class FakeChannelContext implements ChannelContextInterface
         }
 
         return $masterRequest;
-    }
-
-    /**
-     * @param ChannelInterface|null $channel
-     *
-     * @throws ChannelNotFoundException
-     */
-    private function assertChannelWasFound(ChannelInterface $channel = null)
-    {
-        if (null === $channel) {
-            throw new ChannelNotFoundException();
-        }
     }
 }

@@ -16,7 +16,6 @@ sylius:
         email:
             already_used: Este email ya está registrado, por favor inicie sesión o utilice la opción de recuperación de contraseña.
             max: El correo electrónico no debe tener más de {{ limit }} caracteres.
-            min: El correo electrónico debe tener al menos {{ limit }} caracteres.
             not_blank: Por favor, introduzca su dirección de correo electrónico.
             invalid: Este email no es válido.
             unique: Este correo electrónico ya está en uso.

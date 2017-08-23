@@ -26,5 +26,5 @@ interface RequestResolverInterface
      *
      * @return ChannelInterface|null
      */
-    public function findChannel(Request $request);
+    public function findChannel(Request $request): ?ChannelInterface;
 }

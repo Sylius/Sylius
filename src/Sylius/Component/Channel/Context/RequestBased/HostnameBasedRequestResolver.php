@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Channel\Context\RequestBased;
 
+use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -37,7 +38,7 @@ final class HostnameBasedRequestResolver implements RequestResolverInterface
     /**
      * {@inheritdoc}
      */
-    public function findChannel(Request $request)
+    public function findChannel(Request $request): ?ChannelInterface
     {
         return $this->channelRepository->findOneByHostname($request->getHost());
     }

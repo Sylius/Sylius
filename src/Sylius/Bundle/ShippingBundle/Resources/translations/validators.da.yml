@@ -11,3 +11,6 @@ sylius:
         name:
             max_length: 'Forsendelsesmetode navn må ikke være længere end {{ limit }} tegn.'
             not_blank: 'Angiv forsendelses metode navn.'
+    shipment:
+        shipping_method:
+            not_blank: 'Vælg venligst forsendelsesmetode.'

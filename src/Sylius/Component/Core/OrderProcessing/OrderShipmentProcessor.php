@@ -57,7 +57,7 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
         /** @var OrderInterface $order */
         Assert::isInstanceOf($order, OrderInterface::class);
 
-        if ($order->isEmpty() || !$order->requiresShipping()) {
+        if ($order->isEmpty() || !$order->isShippingRequired()) {
             $order->removeShipments();
 
             return;

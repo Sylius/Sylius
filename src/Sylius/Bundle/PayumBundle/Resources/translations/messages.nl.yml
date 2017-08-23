@@ -18,3 +18,6 @@ sylius:
         offline: Offline
         paypal_express_checkout: Paypal Express Checkout
         stripe_checkout: Stripe checkout
+    payum_action:
+        payment:
+            description: Betaling omvat %items% stuk met een totaal van %total%|Betaling omvat %items% stuks met een totaal van %total%

@@ -94,7 +94,7 @@ interface OrderInterface extends
     /**
      * @return bool
      */
-    public function requiresShipping();
+    public function isShippingRequired();
 
     /**
      * @return Collection|ShipmentInterface[]

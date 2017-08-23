@@ -82,9 +82,13 @@ final class CustomerAndChannelBasedCartContextSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_exception_if_there_is_no_logged_in_customer(CustomerContextInterface $customerContext)
-    {
+    function it_throws_exception_if_there_is_no_logged_in_customer(
+        CustomerContextInterface $customerContext,
+        ChannelContextInterface $channelContext,
+        ChannelInterface $channel
+    ) {
         $customerContext->getCustomer()->willReturn(null);
+        $channelContext->getChannel()->willReturn($channel);
 
         $this
             ->shouldThrow(new CartNotFoundException('Sylius was not able to find the cart, as there is no logged in user.'))

@@ -20,7 +20,7 @@ use Symfony\Component\Templating\TemplateReferenceInterface;
 /**
  * @author Kamil Kokot <kamil@kokot.me>
  */
-final class ThemeFilesystemLoader implements \Twig_LoaderInterface
+final class ThemeFilesystemLoader implements \Twig_LoaderInterface, \Twig_ExistsLoaderInterface
 {
     /**
      * @var \Twig_LoaderInterface

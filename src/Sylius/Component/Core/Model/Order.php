@@ -135,7 +135,7 @@ class Order extends BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getChannel()
+    public function getChannel(): ?BaseChannelInterface
     {
         return $this->channel;
     }
@@ -143,7 +143,7 @@ class Order extends BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setChannel(BaseChannelInterface $channel = null)
+    public function setChannel(?BaseChannelInterface $channel): void
     {
         $this->channel = $channel;
     }
@@ -320,7 +320,7 @@ class Order extends BaseOrder implements OrderInterface
     /**
      * @return bool
      */
-    public function requiresShipping()
+    public function isShippingRequired()
     {
         foreach ($this->getItems() as $orderItem) {
             if ($orderItem->getVariant()->isShippingRequired()) {

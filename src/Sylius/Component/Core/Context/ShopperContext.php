@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\Context;
 
 use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
@@ -66,7 +67,7 @@ use Sylius\Component\Customer\Context\CustomerContextInterface;
     /**
      * {@inheritdoc}
      */
-    public function getChannel()
+    public function getChannel(): ChannelInterface
     {
         return $this->channelContext->getChannel();
     }

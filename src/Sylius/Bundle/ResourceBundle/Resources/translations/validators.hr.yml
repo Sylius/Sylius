@@ -1,0 +1,7 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    resource:
+        not_enabled: "Resurs nije omogućen"
+        not_disabled: "Resurs je omogućen"

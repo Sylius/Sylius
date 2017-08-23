@@ -19,6 +19,16 @@
   * `ProvinceInterface::setCountry`
   * `ZoneMemberInterface::setBelongsTo`
 
+### Channel / ChannelBundle
+
+* `ChannelFactory` has been made final, use decoration instead of extending it.
+
+* `ChannelAwareInterface::setChannel` does not longer have a default null argument and requires one to be explicitly passed.
+
+### Core / CoreBundle
+
+* Method `OrderInterface::isShippingRequired` added, used in place of similar methods in `OrderShippingMethodSelectionRequirementChecker` and `OrderShipmentProcessor`
+
 ### Order / OrderBundle
 
 * In order to be compatibile with Doctrine ORM 2.6+ and be more consistent 
