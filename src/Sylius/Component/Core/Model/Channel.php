@@ -155,7 +155,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function getCurrencies()
+    public function getCurrencies(): Collection
     {
         return $this->currencies;
     }
@@ -163,7 +163,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function addCurrency(CurrencyInterface $currency)
+    public function addCurrency(CurrencyInterface $currency): void
     {
         if (!$this->hasCurrency($currency)) {
             $this->currencies->add($currency);
@@ -173,7 +173,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function removeCurrency(CurrencyInterface $currency)
+    public function removeCurrency(CurrencyInterface $currency): void
     {
         if ($this->hasCurrency($currency)) {
             $this->currencies->removeElement($currency);
@@ -183,7 +183,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function hasCurrency(CurrencyInterface $currency)
+    public function hasCurrency(CurrencyInterface $currency): bool
     {
         return $this->currencies->contains($currency);
     }

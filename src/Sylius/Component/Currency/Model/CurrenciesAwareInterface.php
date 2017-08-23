@@ -23,22 +23,22 @@ interface CurrenciesAwareInterface
     /**
      * @return Collection|CurrencyInterface[]
      */
-    public function getCurrencies();
+    public function getCurrencies(): Collection;
 
     /**
      * @param CurrencyInterface $currency
      *
      * @return bool
      */
-    public function hasCurrency(CurrencyInterface $currency);
+    public function hasCurrency(CurrencyInterface $currency): bool;
 
     /**
      * @param CurrencyInterface $currency
      */
-    public function addCurrency(CurrencyInterface $currency);
+    public function addCurrency(CurrencyInterface $currency): void;
 
     /**
      * @param CurrencyInterface $currency
      */
-    public function removeCurrency(CurrencyInterface $currency);
+    public function removeCurrency(CurrencyInterface $currency): void;
 }

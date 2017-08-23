@@ -23,5 +23,5 @@ interface CurrencyContextInterface
      *
      * @throws CurrencyNotFoundException
      */
-    public function getCurrencyCode();
+    public function getCurrencyCode(): string;
 }

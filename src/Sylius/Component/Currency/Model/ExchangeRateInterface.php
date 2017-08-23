@@ -21,32 +21,32 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 interface ExchangeRateInterface extends ResourceInterface
 {
     /**
-     * @return float
+     * @return float|null
      */
-    public function getRatio();
+    public function getRatio(): ?float;
 
     /**
-     * @param float $ratio
+     * @param float|null $ratio
      */
-    public function setRatio($ratio);
+    public function setRatio(?float $ratio);
 
     /**
-     * @return CurrencyInterface
+     * @return CurrencyInterface|null
      */
-    public function getSourceCurrency();
-
-    /**
-     * @param CurrencyInterface $currency
-     */
-    public function setSourceCurrency(CurrencyInterface $currency);
-
-    /**
-     * @return CurrencyInterface
-     */
-    public function getTargetCurrency();
+    public function getSourceCurrency(): ?CurrencyInterface;
 
     /**
      * @param CurrencyInterface $currency
      */
-    public function setTargetCurrency(CurrencyInterface $currency);
+    public function setSourceCurrency(CurrencyInterface $currency): void;
+
+    /**
+     * @return CurrencyInterface|null
+     */
+    public function getTargetCurrency(): ?CurrencyInterface;
+
+    /**
+     * @param CurrencyInterface $currency
+     */
+    public function setTargetCurrency(CurrencyInterface $currency): void;
 }

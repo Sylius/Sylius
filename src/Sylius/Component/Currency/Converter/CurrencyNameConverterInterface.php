@@ -20,11 +20,11 @@ interface CurrencyNameConverterInterface
 {
     /**
      * @param string $name
-     * @param string $locale
+     * @param string|null $locale
      *
      * @return string
      *
      * @throws \InvalidArgumentException
      */
-    public function convertToCode($name, $locale);
+    public function convertToCode(string $name, ?string $locale = null): string;
 }

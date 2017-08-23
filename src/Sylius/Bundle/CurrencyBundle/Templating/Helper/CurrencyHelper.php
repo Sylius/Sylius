@@ -24,7 +24,7 @@ class CurrencyHelper extends Helper implements CurrencyHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function convertCurrencyCodeToSymbol($code)
+    public function convertCurrencyCodeToSymbol(string $code): string
     {
         return Intl::getCurrencyBundle()->getCurrencySymbol($code);
     }
@@ -32,7 +32,7 @@ class CurrencyHelper extends Helper implements CurrencyHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'sylius_currency';
     }

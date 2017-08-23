@@ -30,7 +30,7 @@ final class ExchangeRateType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('ratio', NumberType::class, [
@@ -42,7 +42,7 @@ final class ExchangeRateType extends AbstractResourceType
             ])
         ;
 
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event): void {
             /** @var ExchangeRateInterface $exchangeRate */
             $exchangeRate = $event->getData();
             $form = $event->getForm();
