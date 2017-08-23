@@ -26,7 +26,7 @@ final class Enabled extends Constraint
     /**
      * {@inheritdoc}
      */
-    public function getTargets()
+    public function getTargets(): array
     {
         return [self::PROPERTY_CONSTRAINT, self::CLASS_CONSTRAINT];
     }
@@ -34,7 +34,7 @@ final class Enabled extends Constraint
     /**
      * {@inheritdoc}
      */
-    public function validatedBy()
+    public function validatedBy(): string
     {
         return EnabledValidator::class;
     }

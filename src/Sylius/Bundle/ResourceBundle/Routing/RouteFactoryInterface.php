@@ -32,11 +32,20 @@ interface RouteFactoryInterface
      * @param array $requirements An array of requirements for parameters (regexes)
      * @param array $options An array of options
      * @param string $host The host pattern to match
-     * @param string|array $schemes A required URI scheme or an array of restricted schemes
-     * @param string|array $methods A required HTTP method or an array of restricted methods
+     * @param array $schemes A required URI scheme or an array of restricted schemes
+     * @param array $methods A required HTTP method or an array of restricted methods
      * @param string $condition A condition that should evaluate to true for the route to match
      *
      * @return Route
      */
-    public function createRoute($path, array $defaults = [], array $requirements = [], array $options = [], $host = '', $schemes = [], $methods = [], $condition = '');
+    public function createRoute(
+        string $path,
+        array $defaults = [],
+        array $requirements = [],
+        array $options = [],
+        string $host = '',
+        array $schemes = [],
+        array $methods = [],
+        string $condition = ''
+    ): Route;
 }

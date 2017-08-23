@@ -34,7 +34,7 @@ final class UniqueWithinCollectionConstraint extends Constraint
     /**
      * {@inheritdoc}
      */
-    public function validatedBy()
+    public function validatedBy(): string
     {
         return UniqueWithinCollectionConstraintValidator::class;
     }

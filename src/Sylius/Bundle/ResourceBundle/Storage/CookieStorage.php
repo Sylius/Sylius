@@ -45,7 +45,7 @@ final class CookieStorage implements StorageInterface, EventSubscriberInterface
     /**
      * {@inheritdoc}
      */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             KernelEvents::REQUEST => [['onKernelRequest', 1024]],
@@ -56,7 +56,7 @@ final class CookieStorage implements StorageInterface, EventSubscriberInterface
     /**
      * @param GetResponseEvent $event
      */
-    public function onKernelRequest(GetResponseEvent $event)
+    public function onKernelRequest(GetResponseEvent $event): void
     {
         if (!$event->isMasterRequest()) {
             return;
@@ -69,7 +69,7 @@ final class CookieStorage implements StorageInterface, EventSubscriberInterface
     /**
      * @param FilterResponseEvent $event
      */
-    public function onKernelResponse(FilterResponseEvent $event)
+    public function onKernelResponse(FilterResponseEvent $event): void
     {
         if (!$event->isMasterRequest()) {
             return;
@@ -87,7 +87,7 @@ final class CookieStorage implements StorageInterface, EventSubscriberInterface
     /**
      * {@inheritdoc}
      */
-    public function has($name)
+    public function has(string $name): bool
     {
         return !in_array($this->get($name), ['', null], true);
     }
@@ -95,7 +95,7 @@ final class CookieStorage implements StorageInterface, EventSubscriberInterface
     /**
      * {@inheritdoc}
      */
-    public function get($name, $default = null)
+    public function get(string $name, $default = null)
     {
         return $this->responseCookies->get($name, $this->requestCookies->get($name, $default));
     }
@@ -103,7 +103,7 @@ final class CookieStorage implements StorageInterface, EventSubscriberInterface
     /**
      * {@inheritdoc}
      */
-    public function set($name, $value)
+    public function set(string $name, $value): void
     {
         $this->responseCookies->set($name, $value);
     }
@@ -111,7 +111,7 @@ final class CookieStorage implements StorageInterface, EventSubscriberInterface
     /**
      * {@inheritdoc}
      */
-    public function remove($name)
+    public function remove(string $name): void
     {
         $this->set($name, null);
     }
@@ -119,7 +119,7 @@ final class CookieStorage implements StorageInterface, EventSubscriberInterface
     /**
      * {@inheritdoc}
      */
-    public function all()
+    public function all(): array
     {
         return array_merge($this->responseCookies->all(), $this->requestCookies->all());
     }

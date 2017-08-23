@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -25,40 +25,40 @@ interface RedirectHandlerInterface
      * @param RequestConfiguration $configuration
      * @param ResourceInterface $resource
      *
-     * @return RedirectResponse
+     * @return Response
      */
-    public function redirectToResource(RequestConfiguration $configuration, ResourceInterface $resource);
+    public function redirectToResource(RequestConfiguration $configuration, ResourceInterface $resource): Response;
 
     /**
      * @param RequestConfiguration $configuration
      * @param null|ResourceInterface $resource
      *
-     * @return RedirectResponse
+     * @return Response
      */
-    public function redirectToIndex(RequestConfiguration $configuration, ResourceInterface $resource = null);
+    public function redirectToIndex(RequestConfiguration $configuration, ?ResourceInterface $resource = null): Response;
 
     /**
      * @param RequestConfiguration $configuration
      * @param string               $route
      * @param array                $parameters
      *
-     * @return RedirectResponse
+     * @return Response
      */
-    public function redirectToRoute(RequestConfiguration $configuration, $route, array $parameters = []);
+    public function redirectToRoute(RequestConfiguration $configuration, string $route, array $parameters = []): Response;
 
     /**
      * @param RequestConfiguration $configuration
-     * @param $url
+     * @param string $url
      * @param int $status
      *
-     * @return RedirectResponse
+     * @return Response
      */
-    public function redirect(RequestConfiguration $configuration, $url, $status = 302);
+    public function redirect(RequestConfiguration $configuration, string $url, int $status = 302): Response;
 
     /**
      * @param RequestConfiguration $configuration
      *
-     * @return RedirectResponse
+     * @return Response
      */
-    public function redirectToReferer(RequestConfiguration $configuration);
+    public function redirectToReferer(RequestConfiguration $configuration): Response;
 }

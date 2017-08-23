@@ -28,7 +28,7 @@ use Sylius\Component\Resource\Metadata\RegistryInterface;
  */
 final class ORMRepositoryClassSubscriberSpec extends ObjectBehavior
 {
-    function let(RegistryInterface $registry, LoadClassMetadataEventArgs $event, ClassMetadata $classMetadata)
+    function let(RegistryInterface $registry, LoadClassMetadataEventArgs $event, ClassMetadata $classMetadata): void
     {
         $classMetadata->getName()->willReturn('Foo');
         $event->getClassMetadata()->willReturn($classMetadata);
@@ -36,22 +36,17 @@ final class ORMRepositoryClassSubscriberSpec extends ObjectBehavior
         $this->beConstructedWith($registry);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ORMRepositoryClassSubscriber::class);
-    }
-
-    function it_implements_event_subscriber_interface()
+    function it_implements_event_subscriber_interface(): void
     {
         $this->shouldImplement(EventSubscriber::class);
     }
 
-    function it_is_subscribed_to_load_class_metadata_doctrine_orm_event()
+    function it_is_subscribed_to_load_class_metadata_doctrine_orm_event(): void
     {
         $this->getSubscribedEvents()->shouldReturn([Events::loadClassMetadata]);
     }
 
-    function it_sets_custom_repository_class(LoadClassMetadataEventArgs $event, RegistryInterface $registry, ClassMetadata $classMetadata, MetadataInterface $metadata)
+    function it_sets_custom_repository_class(LoadClassMetadataEventArgs $event, RegistryInterface $registry, ClassMetadata $classMetadata, MetadataInterface $metadata): void
     {
         $registry->getByClass('Foo')->willReturn($metadata);
         $metadata->hasClass('repository')->willReturn(true);
@@ -62,7 +57,7 @@ final class ORMRepositoryClassSubscriberSpec extends ObjectBehavior
         $this->loadClassMetadata($event);
     }
 
-    function it_does_not_set_custom_repository_class_if_not_configured(LoadClassMetadataEventArgs $event, RegistryInterface $registry, ClassMetadata $classMetadata, MetadataInterface $metadata)
+    function it_does_not_set_custom_repository_class_if_not_configured(LoadClassMetadataEventArgs $event, RegistryInterface $registry, ClassMetadata $classMetadata, MetadataInterface $metadata): void
     {
         $registry->getByClass('Foo')->willReturn($metadata);
         $metadata->hasClass('repository')->willReturn(false);
@@ -72,7 +67,7 @@ final class ORMRepositoryClassSubscriberSpec extends ObjectBehavior
         $this->loadClassMetadata($event);
     }
 
-    function it_does_not_set_custom_repository_class_if_registry_does_not_have_class(LoadClassMetadataEventArgs $event, RegistryInterface $registry, ClassMetadata $classMetadata)
+    function it_does_not_set_custom_repository_class_if_registry_does_not_have_class(LoadClassMetadataEventArgs $event, RegistryInterface $registry, ClassMetadata $classMetadata): void
     {
         $registry->getByClass('Foo')->willThrow(\InvalidArgumentException::class);
 

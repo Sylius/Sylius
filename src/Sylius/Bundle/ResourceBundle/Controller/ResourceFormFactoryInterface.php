@@ -27,5 +27,5 @@ interface ResourceFormFactoryInterface
      *
      * @return FormInterface
      */
-    public function create(RequestConfiguration $requestConfiguration, ResourceInterface $resource);
+    public function create(RequestConfiguration $requestConfiguration, ResourceInterface $resource): FormInterface;
 }

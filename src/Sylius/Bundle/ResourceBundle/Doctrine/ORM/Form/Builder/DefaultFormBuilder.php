@@ -41,7 +41,7 @@ class DefaultFormBuilder implements DefaultFormBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function build(MetadataInterface $metadata, FormBuilderInterface $formBuilder, array $options)
+    public function build(MetadataInterface $metadata, FormBuilderInterface $formBuilder, array $options): void
     {
         $classMetadata = $this->entityManager->getClassMetadata($metadata->getClass('model'));
 
@@ -58,7 +58,7 @@ class DefaultFormBuilder implements DefaultFormBuilderInterface
         foreach ($fields as $fieldName) {
             $options = [];
 
-            if (in_array($fieldName, ['createdAt', 'updatedAt'])) {
+            if (in_array($fieldName, ['createdAt', 'updatedAt'], true)) {
                 continue;
             }
 

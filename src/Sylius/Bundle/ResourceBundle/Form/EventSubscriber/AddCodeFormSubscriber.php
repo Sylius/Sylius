@@ -39,16 +39,16 @@ final class AddCodeFormSubscriber implements EventSubscriberInterface
      * @param string $type
      * @param array $options
      */
-    public function __construct($type = TextType::class, array $options = [])
+    public function __construct(?string $type = null, array $options = [])
     {
-        $this->type = $type;
+        $this->type = $type ?? TextType::class;
         $this->options = $options;
     }
 
     /**
      * {@inheritdoc}
      */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             FormEvents::PRE_SET_DATA => 'preSetData',
@@ -58,7 +58,7 @@ final class AddCodeFormSubscriber implements EventSubscriberInterface
     /**
      * @param FormEvent $event
      */
-    public function preSetData(FormEvent $event)
+    public function preSetData(FormEvent $event): void
     {
         $resource = $event->getData();
         $disabled = false;

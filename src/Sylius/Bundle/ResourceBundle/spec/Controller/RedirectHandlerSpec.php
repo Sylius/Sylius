@@ -30,17 +30,12 @@ use Symfony\Component\Routing\RouterInterface;
  */
 final class RedirectHandlerSpec extends ObjectBehavior
 {
-    function let(RouterInterface $router)
+    function let(RouterInterface $router): void
     {
         $this->beConstructedWith($router);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(RedirectHandler::class);
-    }
-
-    function it_implements_redirect_handler_interface()
+    function it_implements_redirect_handler_interface(): void
     {
         $this->shouldImplement(RedirectHandlerInterface::class);
     }
@@ -49,7 +44,7 @@ final class RedirectHandlerSpec extends ObjectBehavior
         RouterInterface $router,
         RequestConfiguration $configuration,
         ResourceInterface $resource
-    ) {
+    ): void {
         $configuration->getRedirectParameters($resource)->willReturn([]);
         $configuration->getRedirectRoute('show')->willReturn('my_route');
 
@@ -65,7 +60,7 @@ final class RedirectHandlerSpec extends ObjectBehavior
         RouterInterface $router,
         RequestConfiguration $configuration,
         ResourceInterface $resource
-    ) {
+    ): void {
         $configuration->getRedirectParameters($resource)->willReturn([]);
         $configuration->getRedirectRoute('show')->willReturn('app_resource_show');
         $configuration->getRedirectRoute('index')->willReturn('app_resource_index');
@@ -83,7 +78,7 @@ final class RedirectHandlerSpec extends ObjectBehavior
         RouterInterface $router,
         RequestConfiguration $configuration,
         ResourceInterface $resource
-    ) {
+    ): void {
         $configuration->getRedirectRoute('index')->willReturn('my_route');
         $configuration->getRedirectParameters($resource)->willReturn([]);
 
@@ -95,7 +90,7 @@ final class RedirectHandlerSpec extends ObjectBehavior
         $this->redirectToIndex($configuration, $resource)->shouldHaveType(RedirectResponse::class);
     }
 
-    function it_redirects_to_route(RouterInterface $router, RequestConfiguration $configuration)
+    function it_redirects_to_route(RouterInterface $router, RequestConfiguration $configuration): void
     {
         $router->generate('route', ['parameter' => 'value'])->willReturn('http://myurl.com');
 
@@ -105,7 +100,7 @@ final class RedirectHandlerSpec extends ObjectBehavior
         ;
     }
 
-    function it_redirects(RequestConfiguration $configuration)
+    function it_redirects(RequestConfiguration $configuration): void
     {
         $configuration->getRedirectHash()->willReturn(null);
         $configuration->isHeaderRedirection()->willReturn(false);
@@ -113,7 +108,7 @@ final class RedirectHandlerSpec extends ObjectBehavior
         $this->redirect($configuration, 'http://myurl.com')->shouldHaveType(RedirectResponse::class);
     }
 
-    function it_redirect_to_referer(RequestConfiguration $configuration, Request $request, ParameterBag $bag)
+    function it_redirect_to_referer(RequestConfiguration $configuration, Request $request, ParameterBag $bag): void
     {
         $request->headers = $bag;
 
@@ -127,7 +122,7 @@ final class RedirectHandlerSpec extends ObjectBehavior
         $this->redirectToReferer($configuration)->shouldHaveType(RedirectResponse::class);
     }
 
-    function it_redirects_with_header(RequestConfiguration $configuration)
+    function it_redirects_with_header(RequestConfiguration $configuration): void
     {
         $configuration->getRedirectHash()->willReturn(null);
         $configuration->isHeaderRedirection()->willReturn(true);

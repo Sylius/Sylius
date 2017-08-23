@@ -48,8 +48,12 @@ final class ResourceGridViewFactory implements ResourceGridViewFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function create(Grid $grid, Parameters $parameters, MetadataInterface $metadata, RequestConfiguration $requestConfiguration)
-    {
+    public function create(
+        Grid $grid,
+        Parameters $parameters,
+        MetadataInterface $metadata,
+        RequestConfiguration $requestConfiguration
+    ): ResourceGridView {
         $driverConfiguration = $grid->getDriverConfiguration();
         $request = $requestConfiguration->getRequest();
 

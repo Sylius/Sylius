@@ -33,17 +33,12 @@ use Symfony\Component\Translation\TranslatorInterface;
  */
 final class FlashHelperSpec extends ObjectBehavior
 {
-    function let(SessionInterface $session, TranslatorInterface $translator)
+    function let(SessionInterface $session, TranslatorInterface $translator): void
     {
         $this->beConstructedWith($session, $translator, 'en');
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(FlashHelper::class);
-    }
-
-    function it_implements_flash_helper_interface()
+    function it_implements_flash_helper_interface(): void
     {
         $this->shouldImplement(FlashHelperInterface::class);
     }
@@ -56,7 +51,7 @@ final class FlashHelperSpec extends ObjectBehavior
         MetadataInterface $metadata,
         RequestConfiguration $requestConfiguration,
         ResourceInterface $resource
-    ) {
+    ): void {
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getHumanizedName()->willReturn('product');
 
@@ -64,6 +59,7 @@ final class FlashHelperSpec extends ObjectBehavior
         $requestConfiguration->getFlashMessage(ResourceActions::CREATE)->willReturn('sylius.product.create');
 
         $translator->getCatalogue('en')->willReturn($messageCatalogue);
+        $messageCatalogue->has('sylius.product.create', 'flashes')->willReturn(false);
 
         $session->getBag('flashes')->willReturn($flashBag);
         $flashBag->add(
@@ -84,7 +80,7 @@ final class FlashHelperSpec extends ObjectBehavior
         MetadataInterface $metadata,
         RequestConfiguration $requestConfiguration,
         ResourceInterface $resource
-    ) {
+    ): void {
         $parameters = ['%resource%' => 'Product'];
 
         $metadata->getApplicationName()->willReturn('sylius');
@@ -114,7 +110,7 @@ final class FlashHelperSpec extends ObjectBehavior
         MetadataInterface $metadata,
         RequestConfiguration $requestConfiguration,
         ResourceInterface $resource
-    ) {
+    ): void {
         $parameters = ['%resource%' => 'Spoon'];
 
         $metadata->getApplicationName()->willReturn('app');
@@ -149,7 +145,7 @@ final class FlashHelperSpec extends ObjectBehavior
         MetadataInterface $metadata,
         RequestConfiguration $requestConfiguration,
         ResourceInterface $resource
-    ) {
+    ): void {
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getHumanizedName()->willReturn('product');
 
@@ -180,7 +176,7 @@ final class FlashHelperSpec extends ObjectBehavior
         MetadataInterface $metadata,
         RequestConfiguration $requestConfiguration,
         ResourceInterface $resource
-    ) {
+    ): void {
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getHumanizedName()->willReturn('product');
 
@@ -205,7 +201,7 @@ final class FlashHelperSpec extends ObjectBehavior
         MetadataInterface $metadata,
         RequestConfiguration $requestConfiguration,
         ResourceInterface $resource
-    ) {
+    ): void {
         $metadata->getApplicationName()->willReturn('app');
         $metadata->getHumanizedName()->willReturn('book');
 
@@ -227,7 +223,7 @@ final class FlashHelperSpec extends ObjectBehavior
         FlashBagInterface $flashBag,
         RequestConfiguration $requestConfiguration,
         ResourceControllerEvent $event
-    ) {
+    ): void {
         $event->getMessage()->willReturn('sylius.channel.cannot_be_deleted');
         $event->getMessageType()->willReturn(ResourceControllerEvent::TYPE_WARNING);
         $event->getMessageParameters()->willReturn(['%name%' => 'Germany Sylius Webshop']);

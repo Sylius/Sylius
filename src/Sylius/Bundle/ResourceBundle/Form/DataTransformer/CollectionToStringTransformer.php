@@ -31,7 +31,7 @@ final class CollectionToStringTransformer implements DataTransformerInterface
     /**
      * @param string $delimiter
      */
-    public function __construct($delimiter)
+    public function __construct(string $delimiter)
     {
         $this->delimiter = $delimiter;
     }
@@ -39,14 +39,13 @@ final class CollectionToStringTransformer implements DataTransformerInterface
     /**
      * {@inheritdoc}
      */
-    public function transform($values)
+    public function transform($values): string
     {
-        $expectedType = Collection::class;
-        if (!($values instanceof $expectedType)) {
+        if (!($values instanceof Collection)) {
             throw new TransformationFailedException(
                 sprintf(
                     'Expected "%s", but got "%s"',
-                    $expectedType,
+                    Collection::class,
                     is_object($values) ? get_class($values) : gettype($values)
                 )
             );
@@ -62,7 +61,7 @@ final class CollectionToStringTransformer implements DataTransformerInterface
     /**
      * {@inheritdoc}
      */
-    public function reverseTransform($value)
+    public function reverseTransform($value): Collection
     {
         if (!is_string($value)) {
             throw new TransformationFailedException(

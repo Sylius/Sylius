@@ -28,7 +28,11 @@ interface EventDispatcherInterface
      *
      * @return ResourceControllerEvent
      */
-    public function dispatch($eventName, RequestConfiguration $requestConfiguration, ResourceInterface $resource);
+    public function dispatch(
+        string $eventName,
+        RequestConfiguration $requestConfiguration,
+        ResourceInterface $resource
+    ): ResourceControllerEvent;
 
     /**
      * @param string $eventName
@@ -37,7 +41,11 @@ interface EventDispatcherInterface
      *
      * @return ResourceControllerEvent
      */
-    public function dispatchPreEvent($eventName, RequestConfiguration $requestConfiguration, ResourceInterface $resource);
+    public function dispatchPreEvent(
+        string $eventName,
+        RequestConfiguration $requestConfiguration,
+        ResourceInterface $resource
+    ): ResourceControllerEvent;
 
     /**
      * @param string $eventName
@@ -46,7 +54,11 @@ interface EventDispatcherInterface
      *
      * @return ResourceControllerEvent
      */
-    public function dispatchPostEvent($eventName, RequestConfiguration $requestConfiguration, ResourceInterface $resource);
+    public function dispatchPostEvent(
+        string $eventName,
+        RequestConfiguration $requestConfiguration,
+        ResourceInterface $resource
+    ): ResourceControllerEvent;
 
     /**
      * @param string $eventName
@@ -56,8 +68,8 @@ interface EventDispatcherInterface
      * @return ResourceControllerEvent
      */
     public function dispatchInitializeEvent(
-        $eventName,
+        string $eventName,
         RequestConfiguration $requestConfiguration,
         ResourceInterface $resource
-    );
+    ): ResourceControllerEvent;
 }

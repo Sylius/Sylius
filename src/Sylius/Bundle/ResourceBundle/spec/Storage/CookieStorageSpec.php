@@ -21,18 +21,18 @@ use Sylius\Component\Resource\Storage\StorageInterface;
  */
 final class CookieStorageSpec extends ObjectBehavior
 {
-    function it_is_a_storage()
+    function it_is_a_storage(): void
     {
         $this->shouldImplement(StorageInterface::class);
     }
 
-    function it_does_not_have_a_named_value_if_it_was_not_set_previously()
+    function it_does_not_have_a_named_value_if_it_was_not_set_previously(): void
     {
         $this->get('name')->shouldReturn(null);
         $this->has('name')->shouldReturn(false);
     }
 
-    function it_stores_a_named_value()
+    function it_stores_a_named_value(): void
     {
         $this->set('name', 'value');
 
@@ -40,7 +40,7 @@ final class CookieStorageSpec extends ObjectBehavior
         $this->has('name')->shouldReturn(true);
     }
 
-    function it_removes_a_stored_named_value()
+    function it_removes_a_stored_named_value(): void
     {
         $this->set('name', 'value');
         $this->remove('name');
@@ -49,12 +49,12 @@ final class CookieStorageSpec extends ObjectBehavior
         $this->has('name')->shouldReturn(false);
     }
 
-    function it_returns_default_value_if_none_found()
+    function it_returns_default_value_if_none_found(): void
     {
         $this->get('name', 'default')->shouldReturn('default');
     }
 
-    function it_returns_all_values()
+    function it_returns_all_values(): void
     {
         $this->set('foo', 'bar');
         $this->set('buzz', 'lightyear');

@@ -21,11 +21,11 @@ use Symfony\Component\HttpFoundation\Request;
  */
 final class RequestConfigurationFactory implements RequestConfigurationFactoryInterface
 {
-    public const API_VERSION_HEADER = 'Accept';
-    public const API_GROUPS_HEADER = 'Accept';
+    private const API_VERSION_HEADER = 'Accept';
+    private const API_GROUPS_HEADER = 'Accept';
 
-    public const API_VERSION_REGEXP = '/(v|version)=(?P<version>[0-9\.]+)/i';
-    public const API_GROUPS_REGEXP = '/(g|groups)=(?P<groups>[a-z,_\s]+)/i';
+    private const API_VERSION_REGEXP = '/(v|version)=(?P<version>[0-9\.]+)/i';
+    private const API_GROUPS_REGEXP = '/(g|groups)=(?P<groups>[a-z,_\s]+)/i';
 
     /**
      * @var ParametersParserInterface
@@ -47,7 +47,7 @@ final class RequestConfigurationFactory implements RequestConfigurationFactoryIn
      * @param string $configurationClass
      * @param array $defaultParameters
      */
-    public function __construct(ParametersParserInterface $parametersParser, $configurationClass, array $defaultParameters = [])
+    public function __construct(ParametersParserInterface $parametersParser, string $configurationClass, array $defaultParameters = [])
     {
         $this->parametersParser = $parametersParser;
         $this->configurationClass = $configurationClass;
@@ -57,7 +57,7 @@ final class RequestConfigurationFactory implements RequestConfigurationFactoryIn
     /**
      * {@inheritdoc}
      */
-    public function create(MetadataInterface $metadata, Request $request)
+    public function create(MetadataInterface $metadata, Request $request): RequestConfiguration
     {
         $parameters = array_merge($this->defaultParameters, $this->parseApiParameters($request));
         $parameters = $this->parametersParser->parseRequestValues($parameters, $request);
@@ -72,7 +72,7 @@ final class RequestConfigurationFactory implements RequestConfigurationFactoryIn
      *
      * @throws \InvalidArgumentException
      */
-    private function parseApiParameters(Request $request)
+    private function parseApiParameters(Request $request): array
     {
         $parameters = [];
 

@@ -89,7 +89,7 @@ final class ResourcesCollectionProvider implements ResourcesCollectionProviderIn
      *
      * @return int
      */
-    private function resolveMaxPerPage($requestLimit, $configurationLimit, array $gridLimits = [])
+    private function resolveMaxPerPage(int $requestLimit, int $configurationLimit, array $gridLimits = []): int
     {
         if (null === $requestLimit) {
             return reset($gridLimits) ?: $configurationLimit;

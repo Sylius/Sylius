@@ -21,17 +21,12 @@ use Sylius\Bundle\ResourceBundle\Controller\Parameters;
  */
 final class ParametersSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(Parameters::class);
-    }
-
-    function it_has_mutable_parameters()
+    function it_has_mutable_parameters(): void
     {
         $this->replace([]);
     }
 
-    function it_has_parameters()
+    function it_has_parameters(): void
     {
         $this->replace([
             'criteria' => 'criteria',
@@ -44,7 +39,7 @@ final class ParametersSpec extends ObjectBehavior
         ]);
     }
 
-    function it_gets_a_single_parameter_and_supports_default_value()
+    function it_gets_a_single_parameter_and_supports_default_value(): void
     {
         $this->replace([
             'criteria' => 'criteria',

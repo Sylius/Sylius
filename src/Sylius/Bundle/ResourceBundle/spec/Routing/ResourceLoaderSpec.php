@@ -28,22 +28,17 @@ use Symfony\Component\Routing\RouteCollection;
  */
 final class ResourceLoaderSpec extends ObjectBehavior
 {
-    function let(RegistryInterface $resourceRegistry, RouteFactoryInterface $routeFactory)
+    function let(RegistryInterface $resourceRegistry, RouteFactoryInterface $routeFactory): void
     {
         $this->beConstructedWith($resourceRegistry, $routeFactory);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ResourceLoader::class);
-    }
-
-    function it_is_a_Symfony_routing_loader()
+    function it_is_a_Symfony_routing_loader(): void
     {
         $this->shouldImplement(LoaderInterface::class);
     }
 
-    function it_processes_configuration_and_throws_exception_if_invalid()
+    function it_processes_configuration_and_throws_exception_if_invalid(): void
     {
         $configuration =
 <<<EOT
@@ -56,7 +51,7 @@ EOT;
             ->during('load', [$configuration, 'sylius.resource']);
     }
 
-    function it_throws_an_exception_if_invalid_resource_configured(RegistryInterface $resourceRegistry)
+    function it_throws_an_exception_if_invalid_resource_configured(RegistryInterface $resourceRegistry): void
     {
         $resourceRegistry->get('sylius.foo')->willThrow(new \InvalidArgumentException());
 
@@ -80,7 +75,7 @@ EOT;
         Route $createRoute,
         Route $updateRoute,
         Route $deleteRoute
-    ) {
+    ): void {
         $resourceRegistry->get('sylius.product')->willReturn($metadata);
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
@@ -152,7 +147,7 @@ EOT;
         Route $createRoute,
         Route $updateRoute,
         Route $deleteRoute
-    ) {
+    ): void {
         $resourceRegistry->get('sylius.product_option')->willReturn($metadata);
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product_option');
@@ -224,7 +219,7 @@ EOT;
         Route $createRoute,
         Route $updateRoute,
         Route $deleteRoute
-    ) {
+    ): void {
         $resourceRegistry->get('sylius.product_option')->willReturn($metadata);
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product_option');
@@ -320,7 +315,7 @@ EOT;
         Route $createRoute,
         Route $updateRoute,
         Route $deleteRoute
-    ) {
+    ): void {
         $resourceRegistry->get('sylius.product')->willReturn($metadata);
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
@@ -393,7 +388,7 @@ EOT;
         Route $createRoute,
         Route $updateRoute,
         Route $deleteRoute
-    ) {
+    ): void {
         $resourceRegistry->get('sylius.product')->willReturn($metadata);
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
@@ -468,7 +463,7 @@ EOT;
         Route $createRoute,
         Route $updateRoute,
         Route $deleteRoute
-    ) {
+    ): void {
         $resourceRegistry->get('sylius.product')->willReturn($metadata);
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
@@ -546,7 +541,7 @@ EOT;
         Route $createRoute,
         Route $updateRoute,
         Route $deleteRoute
-    ) {
+    ): void {
         $resourceRegistry->get('sylius.product')->willReturn($metadata);
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
@@ -621,7 +616,7 @@ EOT;
         Route $indexRoute,
         Route $createRoute,
         Route $updateRoute
-    ) {
+    ): void {
         $resourceRegistry->get('sylius.product')->willReturn($metadata);
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
@@ -673,7 +668,7 @@ EOT;
         RouteCollection $routeCollection,
         Route $indexRoute,
         Route $createRoute
-    ) {
+    ): void {
         $resourceRegistry->get('sylius.product')->willReturn($metadata);
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
@@ -709,7 +704,7 @@ EOT;
         $this->load($configuration, 'sylius.resource')->shouldReturn($routeCollection);
     }
 
-    function it_throws_an_exception_if_both_excluded_and_includes_routes_configured()
+    function it_throws_an_exception_if_both_excluded_and_includes_routes_configured(): void
     {
         $configuration =
 <<<EOT
@@ -733,7 +728,7 @@ EOT;
         Route $createRoute,
         Route $updateRoute,
         Route $deleteRoute
-    ) {
+    ): void {
         $resourceRegistry->get('sylius.product')->willReturn($metadata);
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
@@ -808,7 +803,7 @@ EOT;
         Route $createRoute,
         Route $updateRoute,
         Route $deleteRoute
-    ) {
+    ): void {
         $resourceRegistry->get('sylius.product')->willReturn($metadata);
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
@@ -882,7 +877,7 @@ EOT;
         RouteCollection $routeCollection,
         Route $indexRoute,
         Route $createRoute
-    ) {
+    ): void {
         $resourceRegistry->get('sylius.product')->willReturn($metadata);
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
@@ -930,7 +925,7 @@ EOT;
         Route $createRoute,
         Route $updateRoute,
         Route $deleteRoute
-    ) {
+    ): void {
         $resourceRegistry->get('sylius.product')->willReturn($metadata);
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
@@ -1026,7 +1021,7 @@ EOT;
         Route $createRoute,
         Route $updateRoute,
         Route $deleteRoute
-    ) {
+    ): void {
         $resourceRegistry->get('sylius.product')->willReturn($metadata);
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
@@ -1092,7 +1087,7 @@ EOT;
         $this->load($configuration, 'sylius.resource')->shouldReturn($routeCollection);
     }
 
-    function it_supports_sylius_resource_type()
+    function it_supports_sylius_resource_type(): void
     {
         $this->supports('sylius.product', 'sylius.resource')->shouldReturn(true);
         $this->supports('sylius.product', 'sylius.resource_api')->shouldReturn(true);

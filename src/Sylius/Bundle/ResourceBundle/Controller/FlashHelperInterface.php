@@ -26,17 +26,21 @@ interface FlashHelperInterface
      * @param string $actionName
      * @param ResourceInterface|null $resource
      */
-    public function addSuccessFlash(RequestConfiguration $requestConfiguration, $actionName, ResourceInterface $resource = null);
+    public function addSuccessFlash(
+        RequestConfiguration $requestConfiguration,
+        string $actionName,
+        ?ResourceInterface $resource = null
+    ): void;
 
     /**
      * @param RequestConfiguration $requestConfiguration
      * @param string $actionName
      */
-    public function addErrorFlash(RequestConfiguration $requestConfiguration, $actionName);
+    public function addErrorFlash(RequestConfiguration $requestConfiguration, string $actionName): void;
 
     /**
      * @param RequestConfiguration $requestConfiguration
      * @param ResourceControllerEvent $event
      */
-    public function addFlashFromEvent(RequestConfiguration $requestConfiguration, ResourceControllerEvent $event);
+    public function addFlashFromEvent(RequestConfiguration $requestConfiguration, ResourceControllerEvent $event): void;
 }

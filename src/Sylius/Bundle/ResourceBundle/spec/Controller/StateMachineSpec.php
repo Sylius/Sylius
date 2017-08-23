@@ -26,22 +26,17 @@ use Sylius\Component\Resource\Model\ResourceInterface;
  */
 final class StateMachineSpec extends ObjectBehavior
 {
-    function let(FactoryInterface $stateMachineFactory)
+    function let(FactoryInterface $stateMachineFactory): void
     {
         $this->beConstructedWith($stateMachineFactory);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(StateMachine::class);
-    }
-
-    function it_implements_state_machine_interface()
+    function it_implements_state_machine_interface(): void
     {
         $this->shouldImplement(ResourceStateMachineInterface::class);
     }
 
-    function it_throws_an_exception_if_transition_is_not_defined_during_can(RequestConfiguration $requestConfiguration, ResourceInterface $resource)
+    function it_throws_an_exception_if_transition_is_not_defined_during_can(RequestConfiguration $requestConfiguration, ResourceInterface $resource): void
     {
         $requestConfiguration->hasStateMachine()->willReturn(false);
 
@@ -51,7 +46,7 @@ final class StateMachineSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_an_exception_if_transition_is_not_defined_during_apply(RequestConfiguration $requestConfiguration, ResourceInterface $resource)
+    function it_throws_an_exception_if_transition_is_not_defined_during_apply(RequestConfiguration $requestConfiguration, ResourceInterface $resource): void
     {
         $requestConfiguration->hasStateMachine()->willReturn(false);
 
@@ -66,7 +61,7 @@ final class StateMachineSpec extends ObjectBehavior
         ResourceInterface $resource,
         FactoryInterface $stateMachineFactory,
         StateMachineInterface $stateMachine
-    ) {
+    ): void {
         $requestConfiguration->hasStateMachine()->willReturn(true);
         $requestConfiguration->getStateMachineGraph()->willReturn('sylius_product_review_state');
         $requestConfiguration->getStateMachineTransition()->willReturn('reject');
@@ -82,7 +77,7 @@ final class StateMachineSpec extends ObjectBehavior
         ResourceInterface $resource,
         FactoryInterface $stateMachineFactory,
         StateMachineInterface $stateMachine
-    ) {
+    ): void {
         $requestConfiguration->hasStateMachine()->willReturn(true);
         $requestConfiguration->getStateMachineGraph()->willReturn('sylius_product_review_state');
         $requestConfiguration->getStateMachineTransition()->willReturn('reject');

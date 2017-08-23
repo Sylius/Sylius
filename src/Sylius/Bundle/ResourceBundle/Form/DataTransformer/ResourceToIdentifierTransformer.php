@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ResourceBundle\Form\DataTransformer;
 
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
@@ -39,10 +40,10 @@ final class ResourceToIdentifierTransformer implements DataTransformerInterface
      * @param RepositoryInterface $repository
      * @param string $identifier
      */
-    public function __construct(RepositoryInterface $repository, $identifier = 'id')
+    public function __construct(RepositoryInterface $repository, ?string $identifier = null)
     {
         $this->repository = $repository;
-        $this->identifier = $identifier;
+        $this->identifier = $identifier ?? 'id';
     }
 
     /**

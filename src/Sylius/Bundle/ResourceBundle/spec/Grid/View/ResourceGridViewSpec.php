@@ -30,26 +30,21 @@ final class ResourceGridViewSpec extends ObjectBehavior
         Grid $gridDefinition,
         MetadataInterface $resourceMetadata,
         RequestConfiguration $requestConfiguration
-    ) {
+    ): void {
         $this->beConstructedWith(['foo', 'bar'], $gridDefinition, new Parameters(), $resourceMetadata, $requestConfiguration);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ResourceGridView::class);
-    }
-
-    function it_extends_default_GridView()
+    function it_extends_default_GridView(): void
     {
         $this->shouldHaveType(GridView::class);
     }
 
-    function it_has_resource_metadata(MetadataInterface $resourceMetadata)
+    function it_has_resource_metadata(MetadataInterface $resourceMetadata): void
     {
         $this->getMetadata()->shouldReturn($resourceMetadata);
     }
 
-    function it_has_request_configuration(RequestConfiguration $requestConfiguration)
+    function it_has_request_configuration(RequestConfiguration $requestConfiguration): void
     {
         $this->getRequestConfiguration()->shouldReturn($requestConfiguration);
     }

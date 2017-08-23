@@ -26,7 +26,7 @@ final class RegisterResourcesPass implements CompilerPassInterface
     /**
      * {@inheritdoc}
      */
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         try {
             $resources = $container->getParameter('sylius.resources');
@@ -44,7 +44,7 @@ final class RegisterResourcesPass implements CompilerPassInterface
     /**
      * @param string $class
      */
-    private function validateSyliusResource($class)
+    private function validateSyliusResource(string $class): void
     {
         if (!in_array(ResourceInterface::class, class_implements($class), true)) {
             throw new InvalidArgumentException(sprintf(
