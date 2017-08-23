@@ -39,6 +39,6 @@ final class ContactEmailManager implements ContactEmailManagerInterface
      */
     public function sendContactRequest(array $data, array $recipients)
     {
-        $this->emailSender->send(Emails::CONTACT_REQUEST, $recipients, ['data' => $data]);
+        $this->emailSender->send(Emails::CONTACT_REQUEST, $recipients, ['data' => $data], [], [$data['email']]);
     }
 }
