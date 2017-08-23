@@ -179,7 +179,7 @@ final class ShippingContext implements Context
             'zone' => $this->getShippingZone(),
         ]);
 
-        $shippingMethod->setPosition($position);
+        $shippingMethod->setPosition((int) $position);
 
         $this->saveShippingMethod($shippingMethod);
     }

@@ -25,7 +25,7 @@ final class RegisterShippingMethodsResolversPass implements CompilerPassInterfac
     /**
      * {@inheritdoc}
      */
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         if (!$container->hasDefinition('sylius.registry.shipping_methods_resolver')) {
             return;

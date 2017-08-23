@@ -25,7 +25,7 @@ final class RegisterCalculatorsPass implements CompilerPassInterface
     /**
      * {@inheritdoc}
      */
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         if (!$container->hasDefinition('sylius.registry.shipping_calculator') || !$container->hasDefinition('sylius.form_registry.shipping_calculator')) {
             return;

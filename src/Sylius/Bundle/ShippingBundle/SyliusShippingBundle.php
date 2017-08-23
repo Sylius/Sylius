@@ -20,11 +20,6 @@ use Sylius\Bundle\ShippingBundle\DependencyInjection\Compiler\RegisterShippingMe
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
- * Shipping component for Symfony2 applications.
- * It is used as a base for shipments management system inside Sylius.
- *
- * It is fully decoupled, so you can integrate it into your existing project.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
