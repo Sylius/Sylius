@@ -344,7 +344,7 @@
             <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.ui.theme" class="Sylius\Behat\Context\Ui\Shop\ThemeContext">
+        <service id="sylius.behat.context.ui.shop.theme" class="Sylius\Behat\Context\Ui\Shop\ThemeContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.page.admin.channel.index" />
             <argument type="service" id="sylius.behat.page.admin.channel.update" />
@@ -352,7 +352,7 @@
             <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.ui.user" class="Sylius\Behat\Context\Ui\Shop\UserContext">
+        <service id="sylius.behat.context.ui.shop.user" class="Sylius\Behat\Context\Ui\Shop\UserContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="__symfony__.sylius.repository.shop_user" />
             <argument type="service" id="sylius.behat.page.admin.customer.show" />
