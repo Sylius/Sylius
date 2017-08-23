@@ -28,7 +28,7 @@ final class CouponPossibleGenerationAmount extends Constraint
     /**
      * {@inheritdoc}
      */
-    public function getTargets()
+    public function getTargets(): string
     {
         return self::CLASS_CONSTRAINT;
     }
@@ -36,7 +36,7 @@ final class CouponPossibleGenerationAmount extends Constraint
     /**
      * {@inheritdoc}
      */
-    public function validatedBy()
+    public function validatedBy(): string
     {
         return 'sylius_coupon_generation_amount_validator';
     }

@@ -65,7 +65,7 @@ final class UnitPercentageDiscountPromotionActionCommand extends UnitDiscountPro
     /**
      * {@inheritdoc}
      */
-    public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
+    public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion): bool
     {
         if (!$subject instanceof OrderInterface) {
             throw new UnexpectedTypeException($subject, OrderInterface::class);
@@ -100,8 +100,11 @@ final class UnitPercentageDiscountPromotionActionCommand extends UnitDiscountPro
      * @param int $promotionAmount
      * @param PromotionInterface $promotion
      */
-    private function setUnitsAdjustments(OrderItemInterface $item, $promotionAmount, PromotionInterface $promotion)
-    {
+    private function setUnitsAdjustments(
+        OrderItemInterface $item,
+        int $promotionAmount,
+        PromotionInterface $promotion
+    ): void {
         foreach ($item->getUnits() as $unit) {
             $this->addAdjustmentToUnit($unit, $promotionAmount, $promotion);
         }

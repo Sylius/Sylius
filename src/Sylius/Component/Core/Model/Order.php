@@ -388,7 +388,7 @@ class Order extends BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getPromotionCoupon()
+    public function getPromotionCoupon(): BaseCouponInterface
     {
         return $this->promotionCoupon;
     }
@@ -404,7 +404,7 @@ class Order extends BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getPromotionSubjectTotal()
+    public function getPromotionSubjectTotal(): int
     {
         return $this->getItemsTotal();
     }
@@ -412,7 +412,7 @@ class Order extends BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getPromotionSubjectCount()
+    public function getPromotionSubjectCount(): int
     {
         return $this->getTotalQuantity();
     }
@@ -472,7 +472,7 @@ class Order extends BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function hasPromotion(BasePromotionInterface $promotion)
+    public function hasPromotion(BasePromotionInterface $promotion): bool
     {
         return $this->promotions->contains($promotion);
     }
@@ -480,7 +480,7 @@ class Order extends BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function addPromotion(BasePromotionInterface $promotion)
+    public function addPromotion(BasePromotionInterface $promotion): void
     {
         if (!$this->hasPromotion($promotion)) {
             $this->promotions->add($promotion);
@@ -490,7 +490,7 @@ class Order extends BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function removePromotion(BasePromotionInterface $promotion)
+    public function removePromotion(BasePromotionInterface $promotion): void
     {
         if ($this->hasPromotion($promotion)) {
             $this->promotions->removeElement($promotion);
@@ -500,7 +500,7 @@ class Order extends BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getPromotions()
+    public function getPromotions(): Collection
     {
         return $this->promotions;
     }

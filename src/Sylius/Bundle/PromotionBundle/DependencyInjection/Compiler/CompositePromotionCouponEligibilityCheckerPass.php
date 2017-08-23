@@ -25,7 +25,7 @@ final class CompositePromotionCouponEligibilityCheckerPass implements CompilerPa
     /**
      * {@inheritdoc}
      */
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         if (!$container->has('sylius.promotion_coupon_eligibility_checker')) {
             return;

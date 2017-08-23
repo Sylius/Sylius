@@ -41,7 +41,7 @@ final class PromotionCouponPerCustomerUsageLimitEligibilityChecker implements Pr
     /**
      * {@inheritdoc}
      */
-    public function isEligible(PromotionSubjectInterface $promotionSubject, PromotionCouponInterface $promotionCoupon)
+    public function isEligible(PromotionSubjectInterface $promotionSubject, PromotionCouponInterface $promotionCoupon): bool
     {
         if (!$promotionSubject instanceof OrderInterface) {
             return true;

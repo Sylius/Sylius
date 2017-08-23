@@ -45,7 +45,7 @@ final class ShippingPercentageDiscountPromotionActionCommand implements Promotio
     /**
      * {@inheritdoc}
      */
-    public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
+    public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion): bool
     {
         if (!$subject instanceof OrderInterface) {
             throw new UnexpectedTypeException($subject, OrderInterface::class);
@@ -70,8 +70,10 @@ final class ShippingPercentageDiscountPromotionActionCommand implements Promotio
 
     /**
      * {@inheritdoc}
+     *
+     * @throws UnexpectedTypeException
      */
-    public function revert(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
+    public function revert(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion): void
     {
         if (!$subject instanceof OrderInterface && !$subject instanceof OrderItemInterface) {
             throw new UnexpectedTypeException(
@@ -95,8 +97,8 @@ final class ShippingPercentageDiscountPromotionActionCommand implements Promotio
      */
     protected function createAdjustment(
         PromotionInterface $promotion,
-        $type = AdjustmentInterface::ORDER_SHIPPING_PROMOTION_ADJUSTMENT
-    ) {
+        string $type = AdjustmentInterface::ORDER_SHIPPING_PROMOTION_ADJUSTMENT
+    ): AdjustmentInterface {
         /** @var AdjustmentInterface $adjustment */
         $adjustment = $this->adjustmentFactory->createNew();
         $adjustment->setType($type);

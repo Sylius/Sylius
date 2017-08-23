@@ -42,8 +42,10 @@ final class ShippingCountryRuleChecker implements RuleCheckerInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @throws UnsupportedTypeException
      */
-    public function isEligible(PromotionSubjectInterface $subject, array $configuration)
+    public function isEligible(PromotionSubjectInterface $subject, array $configuration): bool
     {
         if (!$subject instanceof OrderInterface) {
             throw new UnsupportedTypeException($subject, OrderInterface::class);

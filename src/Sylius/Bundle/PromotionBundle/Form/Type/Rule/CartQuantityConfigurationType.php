@@ -27,7 +27,7 @@ final class CartQuantityConfigurationType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('count', IntegerType::class, [
@@ -43,7 +43,7 @@ final class CartQuantityConfigurationType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_promotion_rule_cart_quantity_configuration';
     }

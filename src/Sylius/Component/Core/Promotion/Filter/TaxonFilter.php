@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\Promotion\Filter;
 
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -23,7 +24,7 @@ final class TaxonFilter implements FilterInterface
     /**
      * {@inheritdoc}
      */
-    public function filter(array $items, array $configuration)
+    public function filter(array $items, array $configuration): array
     {
         if (empty($configuration['filters']['taxons_filter']['taxons'])) {
             return $items;
@@ -41,11 +42,11 @@ final class TaxonFilter implements FilterInterface
 
     /**
      * @param ProductInterface $product
-     * @param array $taxons
+     * @param TaxonInterface[] $taxons
      *
      * @return bool
      */
-    private function hasProductValidTaxon(ProductInterface $product, array $taxons)
+    private function hasProductValidTaxon(ProductInterface $product, array $taxons): bool
     {
         foreach ($product->getTaxons() as $taxon) {
             if (in_array($taxon->getCode(), $taxons, true)) {

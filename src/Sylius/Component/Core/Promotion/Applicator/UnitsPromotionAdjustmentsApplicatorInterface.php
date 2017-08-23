@@ -24,7 +24,7 @@ interface UnitsPromotionAdjustmentsApplicatorInterface
     /**
      * @param OrderInterface $order
      * @param PromotionInterface $promotion
-     * @param array $adjustmentsAmounts
+     * @param array|int[] $adjustmentsAmounts
      */
-    public function apply(OrderInterface $order, PromotionInterface $promotion, array $adjustmentsAmounts);
+    public function apply(OrderInterface $order, PromotionInterface $promotion, array $adjustmentsAmounts): void;
 }

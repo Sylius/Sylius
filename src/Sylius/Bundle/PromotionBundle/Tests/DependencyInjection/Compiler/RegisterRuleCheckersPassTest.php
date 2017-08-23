@@ -27,7 +27,7 @@ final class RegisterRuleCheckersPassTest extends AbstractCompilerPassTestCase
     /**
      * @test
      */
-    public function it_registers_collected_rule_checkers_in_the_registry()
+    public function it_registers_collected_rule_checkers_in_the_registry(): void
     {
         $this->setDefinition('sylius.registry_promotion_rule_checker', new Definition());
         $this->setDefinition('sylius.form_registry.promotion_rule_checker', new Definition());
@@ -48,7 +48,7 @@ final class RegisterRuleCheckersPassTest extends AbstractCompilerPassTestCase
     /**
      * @test
      */
-    public function it_creates_parameter_which_maps_rule_type_to_label()
+    public function it_creates_parameter_which_maps_rule_type_to_label(): void
     {
         $this->setDefinition('sylius.registry_promotion_rule_checker', new Definition());
         $this->setDefinition('sylius.form_registry.promotion_rule_checker', new Definition());
@@ -68,7 +68,7 @@ final class RegisterRuleCheckersPassTest extends AbstractCompilerPassTestCase
     /**
      * @test
      */
-    public function it_registers_collected_rule_checkers_form_types_in_the_registry()
+    public function it_registers_collected_rule_checkers_form_types_in_the_registry(): void
     {
         $this->setDefinition('sylius.registry_promotion_rule_checker', new Definition());
         $this->setDefinition('sylius.form_registry.promotion_rule_checker', new Definition());
@@ -89,7 +89,7 @@ final class RegisterRuleCheckersPassTest extends AbstractCompilerPassTestCase
     /**
      * {@inheritdoc}
      */
-    protected function registerCompilerPass(ContainerBuilder $container)
+    protected function registerCompilerPass(ContainerBuilder $container): void
     {
         $container->addCompilerPass(new RegisterRuleCheckersPass());
     }

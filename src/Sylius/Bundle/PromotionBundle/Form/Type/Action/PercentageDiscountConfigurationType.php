@@ -30,7 +30,7 @@ final class PercentageDiscountConfigurationType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('percentage', PercentType::class, [
@@ -53,7 +53,7 @@ final class PercentageDiscountConfigurationType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_promotion_action_percentage_discount_configuration';
     }

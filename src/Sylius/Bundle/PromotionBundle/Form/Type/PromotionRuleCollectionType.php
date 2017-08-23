@@ -21,7 +21,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 final class PromotionRuleCollectionType extends AbstractConfigurationCollectionType
 {
-    public function configureOptions(OptionsResolver $resolver)
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver): void
     {
         parent::configureOptions($resolver);
 
@@ -31,7 +34,7 @@ final class PromotionRuleCollectionType extends AbstractConfigurationCollectionT
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_promotion_rule_collection';
     }

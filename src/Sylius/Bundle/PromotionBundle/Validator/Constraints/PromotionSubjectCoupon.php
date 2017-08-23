@@ -28,15 +28,15 @@ final class PromotionSubjectCoupon extends Constraint
     /**
      * {@inheritdoc}
      */
-    public function getTargets()
+    public function getTargets(): string
     {
-        return [self::CLASS_CONSTRAINT];
+        return self::CLASS_CONSTRAINT;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function validatedBy()
+    public function validatedBy(): string
     {
         return 'sylius_promotion_subject_validator';
     }

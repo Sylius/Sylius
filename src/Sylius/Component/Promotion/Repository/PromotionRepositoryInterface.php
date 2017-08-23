@@ -23,9 +23,9 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 interface PromotionRepositoryInterface extends RepositoryInterface
 {
     /**
-     * @return Collection|PromotionInterface[]
+     * @return PromotionInterface[]
      */
-    public function findActive(): Collection;
+    public function findActive(): array;
 
     /**
      * @param string $name

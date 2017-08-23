@@ -29,13 +29,15 @@ abstract class DiscountPromotionActionCommand implements PromotionActionCommandI
 {
     /**
      * @param array $configuration
+     *
+     * @throws \InvalidArgumentException
      */
-    abstract protected function isConfigurationValid(array $configuration);
+    abstract protected function isConfigurationValid(array $configuration): void;
 
     /**
      * {@inheritdoc}
      */
-    public function revert(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
+    public function revert(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion): void
     {
         if (!$this->isSubjectValid($subject)) {
             return;
@@ -55,7 +57,7 @@ abstract class DiscountPromotionActionCommand implements PromotionActionCommandI
      *
      * @throws \InvalidArgumentException
      */
-    protected function isSubjectValid(PromotionSubjectInterface $subject)
+    protected function isSubjectValid(PromotionSubjectInterface $subject): bool
     {
         Assert::implementsInterface($subject, OrderInterface::class);
 
@@ -69,7 +71,7 @@ abstract class DiscountPromotionActionCommand implements PromotionActionCommandI
     private function removeUnitOrderPromotionAdjustmentsByOrigin(
         OrderItemUnitInterface $unit,
         PromotionInterface $promotion
-    ) {
+    ): void {
         foreach ($unit->getAdjustments(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT) as $adjustment) {
             if ($promotion->getCode() === $adjustment->getOriginCode()) {
                 $unit->removeAdjustment($adjustment);

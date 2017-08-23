@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PromotionBundle\Doctrine\ORM;
 
+use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Repository\PromotionCouponRepositoryInterface;
@@ -25,7 +26,7 @@ class PromotionCouponRepository extends EntityRepository implements PromotionCou
     /**
      * {@inheritdoc}
      */
-    public function createQueryBuilderByPromotionId($promotionId)
+    public function createQueryBuilderByPromotionId($promotionId): QueryBuilder
     {
         return $this->createQueryBuilder('o')
             ->andWhere('o.promotion = :promotionId')
@@ -36,7 +37,7 @@ class PromotionCouponRepository extends EntityRepository implements PromotionCou
     /**
      * {@inheritdoc}
      */
-    public function countByCodeLength($codeLength)
+    public function countByCodeLength(int $codeLength): int
     {
         return (int) $this->createQueryBuilder('o')
             ->select('COUNT(o.id)')
@@ -50,7 +51,7 @@ class PromotionCouponRepository extends EntityRepository implements PromotionCou
     /**
      * {@inheritdoc}
      */
-    public function findOneByCodeAndPromotionCode($code, $promotionCode)
+    public function findOneByCodeAndPromotionCode(string $code, string $promotionCode): PromotionInterface
     {
         return $this->createQueryBuilder('o')
             ->leftJoin('o.promotion', 'promotion')

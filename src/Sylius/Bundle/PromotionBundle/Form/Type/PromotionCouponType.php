@@ -27,7 +27,7 @@ final class PromotionCouponType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('usageLimit', IntegerType::class, [
@@ -47,7 +47,7 @@ final class PromotionCouponType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_promotion_coupon';
     }

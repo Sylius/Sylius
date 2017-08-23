@@ -43,8 +43,10 @@ abstract class UnitDiscountPromotionActionCommand implements PromotionActionComm
 
     /**
      * {@inheritdoc}
+     *
+     * @throws UnexpectedTypeException
      */
-    public function revert(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
+    public function revert(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion): void
     {
         if (!$subject instanceof OrderInterface) {
             throw new UnexpectedTypeException($subject, OrderInterface::class);
@@ -59,7 +61,7 @@ abstract class UnitDiscountPromotionActionCommand implements PromotionActionComm
      * @param OrderItemInterface $item
      * @param PromotionInterface $promotion
      */
-    protected function removeUnitsAdjustment(OrderItemInterface $item, PromotionInterface $promotion)
+    protected function removeUnitsAdjustment(OrderItemInterface $item, PromotionInterface $promotion): void
     {
         foreach ($item->getUnits() as $unit) {
             $this->removeUnitOrderItemAdjustments($unit, $promotion);
@@ -70,7 +72,7 @@ abstract class UnitDiscountPromotionActionCommand implements PromotionActionComm
      * @param OrderItemUnitInterface $unit
      * @param PromotionInterface $promotion
      */
-    protected function removeUnitOrderItemAdjustments(OrderItemUnitInterface $unit, PromotionInterface $promotion)
+    protected function removeUnitOrderItemAdjustments(OrderItemUnitInterface $unit, PromotionInterface $promotion): void
     {
         foreach ($unit->getAdjustments(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT) as $adjustment) {
             if ($promotion->getCode() === $adjustment->getOriginCode()) {
@@ -84,7 +86,7 @@ abstract class UnitDiscountPromotionActionCommand implements PromotionActionComm
      * @param int $amount
      * @param PromotionInterface $promotion
      */
-    protected function addAdjustmentToUnit(OrderItemUnitInterface $unit, $amount, PromotionInterface $promotion)
+    protected function addAdjustmentToUnit(OrderItemUnitInterface $unit, int $amount, PromotionInterface $promotion): void
     {
         $adjustment = $this->createAdjustment($promotion, AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT);
         $adjustment->setAmount(-$amount);
@@ -100,8 +102,8 @@ abstract class UnitDiscountPromotionActionCommand implements PromotionActionComm
      */
     protected function createAdjustment(
         PromotionInterface $promotion,
-        $type = AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT
-    ) {
+        string $type = AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT
+    ): AdjustmentInterface {
         /** @var AdjustmentInterface $adjustment */
         $adjustment = $this->adjustmentFactory->createNew();
         $adjustment->setType($type);

@@ -25,7 +25,7 @@ final class RegisterPromotionActionsPass implements CompilerPassInterface
     /**
      * {@inheritdoc}
      */
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         if (!$container->has('sylius.registry_promotion_action') || !$container->has('sylius.form_registry.promotion_action')) {
             return;

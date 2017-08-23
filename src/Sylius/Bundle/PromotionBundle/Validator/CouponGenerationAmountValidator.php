@@ -41,7 +41,7 @@ final class CouponGenerationAmountValidator extends ConstraintValidator
     /**
      * {@inheritdoc}
      */
-    public function validate($instruction, Constraint $constraint)
+    public function validate($instruction, Constraint $constraint): void
     {
         if (null === $instruction->getCodeLength() || null === $instruction->getAmount()) {
             return;

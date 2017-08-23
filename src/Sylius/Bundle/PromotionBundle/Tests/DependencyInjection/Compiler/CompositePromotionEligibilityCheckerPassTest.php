@@ -27,7 +27,7 @@ final class CompositePromotionEligibilityCheckerPassTest extends AbstractCompile
     /**
      * @test
      */
-    public function it_collects_tagged_promotion_eligibility_checkers()
+    public function it_collects_tagged_promotion_eligibility_checkers(): void
     {
         $this->setDefinition('sylius.promotion_eligibility_checker', new Definition());
         $this->setDefinition(
@@ -47,7 +47,7 @@ final class CompositePromotionEligibilityCheckerPassTest extends AbstractCompile
     /**
      * {@inheritdoc}
      */
-    protected function registerCompilerPass(ContainerBuilder $container)
+    protected function registerCompilerPass(ContainerBuilder $container): void
     {
         $container->addCompilerPass(new CompositePromotionEligibilityCheckerPass());
     }
