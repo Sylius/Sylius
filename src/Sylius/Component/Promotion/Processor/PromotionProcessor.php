@@ -56,7 +56,7 @@ final class PromotionProcessor implements PromotionProcessorInterface
     /**
      * {@inheritdoc}
      */
-    public function process(PromotionSubjectInterface $subject)
+    public function process(PromotionSubjectInterface $subject): void
     {
         foreach ($subject->getPromotions() as $promotion) {
             $this->promotionApplicator->revert($subject, $promotion);

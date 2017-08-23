@@ -38,7 +38,7 @@ final class PromotionSubjectCouponEligibilityChecker implements PromotionEligibi
     /**
      * {@inheritdoc}
      */
-    public function isEligible(PromotionSubjectInterface $promotionSubject, PromotionInterface $promotion)
+    public function isEligible(PromotionSubjectInterface $promotionSubject, PromotionInterface $promotion): bool
     {
         if (!$promotion->isCouponBased()) {
             return true;

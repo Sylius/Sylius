@@ -19,7 +19,7 @@ use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ActivePromotionsProvider implements PreQualifiedPromotionsProviderInterface
+final class ActivePromotionsProvider implements PreQualifiedPromotionsProviderInterface
 {
     /**
      * @var PromotionRepositoryInterface
@@ -37,7 +37,7 @@ class ActivePromotionsProvider implements PreQualifiedPromotionsProviderInterfac
     /**
      * {@inheritdoc}
      */
-    public function getPromotions(PromotionSubjectInterface $subject)
+    public function getPromotions(PromotionSubjectInterface $subject): array
     {
         return $this->promotionRepository->findActive();
     }

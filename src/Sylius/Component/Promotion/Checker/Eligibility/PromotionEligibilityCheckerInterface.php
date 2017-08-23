@@ -27,5 +27,5 @@ interface PromotionEligibilityCheckerInterface
      *
      * @return bool
      */
-    public function isEligible(PromotionSubjectInterface $promotionSubject, PromotionInterface $promotion);
+    public function isEligible(PromotionSubjectInterface $promotionSubject, PromotionInterface $promotion): bool;
 }

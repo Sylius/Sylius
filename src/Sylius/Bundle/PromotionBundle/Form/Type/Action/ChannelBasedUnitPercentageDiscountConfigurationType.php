@@ -26,7 +26,7 @@ final class ChannelBasedUnitPercentageDiscountConfigurationType extends Abstract
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'entry_type' => UnitPercentageDiscountConfigurationType::class,
@@ -42,7 +42,7 @@ final class ChannelBasedUnitPercentageDiscountConfigurationType extends Abstract
     /**
      * {@inheritdoc}
      */
-    public function getParent()
+    public function getParent(): string
     {
         return ChannelCollectionType::class;
     }

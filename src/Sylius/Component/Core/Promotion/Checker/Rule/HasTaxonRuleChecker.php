@@ -29,11 +29,13 @@ final class HasTaxonRuleChecker implements RuleCheckerInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @throws UnsupportedTypeException
      */
-    public function isEligible(PromotionSubjectInterface $subject, array $configuration)
+    public function isEligible(PromotionSubjectInterface $subject, array $configuration): bool
     {
         if (!isset($configuration['taxons'])) {
-            return;
+            return false;
         }
 
         if (!$subject instanceof OrderInterface) {

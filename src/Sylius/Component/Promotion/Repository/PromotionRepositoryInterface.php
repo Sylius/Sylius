@@ -23,14 +23,14 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 interface PromotionRepositoryInterface extends RepositoryInterface
 {
     /**
-     * @return Collection|PromotionInterface[]
+     * @return PromotionInterface[]
      */
-    public function findActive();
+    public function findActive(): array;
 
     /**
      * @param string $name
      *
      * @return PromotionInterface[]
      */
-    public function findByName($name);
+    public function findByName(string $name): array;
 }

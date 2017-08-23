@@ -35,7 +35,7 @@ abstract class AbstractConfigurablePromotionElementType extends AbstractResource
     /**
      * {@inheritdoc}
      */
-    public function __construct($dataClass, array $validationGroups = [], FormTypeRegistryInterface $formTypeRegistry)
+    public function __construct(string $dataClass, array $validationGroups = [], FormTypeRegistryInterface $formTypeRegistry)
     {
         parent::__construct($dataClass, $validationGroups);
 
@@ -45,7 +45,7 @@ abstract class AbstractConfigurablePromotionElementType extends AbstractResource
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         parent::buildForm($builder, $options);
 
@@ -81,7 +81,7 @@ abstract class AbstractConfigurablePromotionElementType extends AbstractResource
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         parent::configureOptions($resolver);
 
@@ -95,7 +95,7 @@ abstract class AbstractConfigurablePromotionElementType extends AbstractResource
      * @param FormInterface $form
      * @param string $configurationType
      */
-    protected function addConfigurationFields(FormInterface $form, $configurationType)
+    protected function addConfigurationFields(FormInterface $form, string $configurationType):  void
     {
         $form->add('configuration', $configurationType, [
             'label' => false,
@@ -108,7 +108,7 @@ abstract class AbstractConfigurablePromotionElementType extends AbstractResource
      *
      * @return string|null
      */
-    protected function getRegistryIdentifier(FormInterface $form, $data = null)
+    protected function getRegistryIdentifier(FormInterface $form, $data = null): ?string
     {
         if ($data instanceof ConfigurablePromotionElementInterface && null !== $data->getType()) {
             return $data->getType();

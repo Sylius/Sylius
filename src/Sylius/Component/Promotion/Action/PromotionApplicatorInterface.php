@@ -25,11 +25,11 @@ interface PromotionApplicatorInterface
      * @param PromotionSubjectInterface $subject
      * @param PromotionInterface $promotion
      */
-    public function apply(PromotionSubjectInterface $subject, PromotionInterface $promotion);
+    public function apply(PromotionSubjectInterface $subject, PromotionInterface $promotion): void;
 
     /**
      * @param PromotionSubjectInterface $subject
      * @param PromotionInterface $promotion
      */
-    public function revert(PromotionSubjectInterface $subject, PromotionInterface $promotion);
+    public function revert(PromotionSubjectInterface $subject, PromotionInterface $promotion): void;
 }

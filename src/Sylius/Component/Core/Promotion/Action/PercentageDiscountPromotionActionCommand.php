@@ -54,7 +54,7 @@ final class PercentageDiscountPromotionActionCommand extends DiscountPromotionAc
     /**
      * {@inheritdoc}
      */
-    public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
+    public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion): bool
     {
         /** @var OrderInterface $subject */
         if (!$this->isSubjectValid($subject)) {
@@ -86,7 +86,7 @@ final class PercentageDiscountPromotionActionCommand extends DiscountPromotionAc
     /**
      * {@inheritdoc}
      */
-    protected function isConfigurationValid(array $configuration)
+    protected function isConfigurationValid(array $configuration): void
     {
         if (!isset($configuration['percentage']) || !is_float($configuration['percentage'])) {
             throw new \InvalidArgumentException('"percentage" must be set and must be a float.');
@@ -95,11 +95,11 @@ final class PercentageDiscountPromotionActionCommand extends DiscountPromotionAc
 
     /**
      * @param int $promotionSubjectTotal
-     * @param int $percentage
+     * @param float $percentage
      *
      * @return int
      */
-    private function calculateAdjustmentAmount($promotionSubjectTotal, $percentage)
+    private function calculateAdjustmentAmount(int $promotionSubjectTotal, float $percentage): int
     {
         return -1 * (int) round($promotionSubjectTotal * $percentage);
     }

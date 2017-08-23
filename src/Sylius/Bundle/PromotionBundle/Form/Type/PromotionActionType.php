@@ -24,7 +24,7 @@ final class PromotionActionType extends AbstractConfigurablePromotionElementType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options = [])
+    public function buildForm(FormBuilderInterface $builder, array $options = []): void
     {
         parent::buildForm($builder, $options);
 
@@ -41,7 +41,7 @@ final class PromotionActionType extends AbstractConfigurablePromotionElementType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_promotion_action';
     }

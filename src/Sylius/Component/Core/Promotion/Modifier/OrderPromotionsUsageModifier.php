@@ -23,7 +23,7 @@ final class OrderPromotionsUsageModifier implements OrderPromotionsUsageModifier
     /**
      * {@inheritdoc}
      */
-    public function increment(OrderInterface $order)
+    public function increment(OrderInterface $order): void
     {
         foreach ($order->getPromotions() as $promotion) {
             $promotion->incrementUsed();
@@ -38,7 +38,7 @@ final class OrderPromotionsUsageModifier implements OrderPromotionsUsageModifier
     /**
      * {@inheritdoc}
      */
-    public function decrement(OrderInterface $order)
+    public function decrement(OrderInterface $order): void
     {
         foreach ($order->getPromotions() as $promotion) {
             $promotion->decrementUsed();

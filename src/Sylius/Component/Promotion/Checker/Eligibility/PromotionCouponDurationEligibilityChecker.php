@@ -24,7 +24,7 @@ final class PromotionCouponDurationEligibilityChecker implements PromotionCoupon
     /**
      * {@inheritdoc}
      */
-    public function isEligible(PromotionSubjectInterface $promotionSubject, PromotionCouponInterface $promotionCoupon)
+    public function isEligible(PromotionSubjectInterface $promotionSubject, PromotionCouponInterface $promotionCoupon): bool
     {
         $endsAt = $promotionCoupon->getExpiresAt();
 

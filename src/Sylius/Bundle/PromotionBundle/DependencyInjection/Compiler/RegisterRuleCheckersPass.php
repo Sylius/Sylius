@@ -25,7 +25,7 @@ final class RegisterRuleCheckersPass implements CompilerPassInterface
     /**
      * {@inheritdoc}
      */
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         if (!$container->has('sylius.registry_promotion_rule_checker') || !$container->has('sylius.form_registry.promotion_rule_checker')) {
             return;

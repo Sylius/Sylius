@@ -26,7 +26,7 @@ final class CartQuantityRuleChecker implements RuleCheckerInterface
     /**
      * {@inheritdoc}
      */
-    public function isEligible(PromotionSubjectInterface $subject, array $configuration)
+    public function isEligible(PromotionSubjectInterface $subject, array $configuration): bool
     {
         if (!$subject instanceof CountablePromotionSubjectInterface) {
             return false;

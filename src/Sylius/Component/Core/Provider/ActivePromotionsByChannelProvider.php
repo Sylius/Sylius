@@ -40,7 +40,7 @@ final class ActivePromotionsByChannelProvider implements PreQualifiedPromotionsP
     /**
      * {@inheritdoc}
      */
-    public function getPromotions(PromotionSubjectInterface $subject)
+    public function getPromotions(PromotionSubjectInterface $subject): array
     {
         if (!$subject instanceof OrderInterface) {
             throw new UnexpectedTypeException($subject, OrderInterface::class);

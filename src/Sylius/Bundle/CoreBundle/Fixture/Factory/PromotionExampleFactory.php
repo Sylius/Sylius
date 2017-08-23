@@ -96,7 +96,7 @@ class PromotionExampleFactory extends AbstractExampleFactory implements ExampleF
         $promotion->setCouponBased($options['coupon_based']);
         $promotion->setUsageLimit($options['usage_limit']);
         $promotion->setExclusive($options['exclusive']);
-        $promotion->setPriority($options['priority']);
+        $promotion->setPriority((int) $options['priority']);
 
         if (isset($options['starts_at'])) {
             $promotion->setStartsAt(new \DateTime($options['starts_at']));

@@ -32,14 +32,20 @@ final class PromotionRuleChoiceType extends AbstractType
         $this->rules = $rules;
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'choices' => array_flip($this->rules),
         ]);
     }
 
-    public function getParent()
+    /**
+     * {@inheritdoc}
+     */
+    public function getParent(): string
     {
         return ChoiceType::class;
     }
@@ -47,7 +53,7 @@ final class PromotionRuleChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_promotion_rule_choice';
     }

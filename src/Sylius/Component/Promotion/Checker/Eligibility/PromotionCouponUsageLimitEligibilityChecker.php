@@ -24,7 +24,7 @@ final class PromotionCouponUsageLimitEligibilityChecker implements PromotionCoup
     /**
      * {@inheritdoc}
      */
-    public function isEligible(PromotionSubjectInterface $promotionSubject, PromotionCouponInterface $promotionCoupon)
+    public function isEligible(PromotionSubjectInterface $promotionSubject, PromotionCouponInterface $promotionCoupon): bool
     {
         $usageLimit = $promotionCoupon->getUsageLimit();
 

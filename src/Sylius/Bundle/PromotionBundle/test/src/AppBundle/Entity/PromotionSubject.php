@@ -31,7 +31,10 @@ class PromotionSubject implements ResourceInterface, PromotionSubjectInterface
      */
     protected $promotions;
 
-    public function getId()
+    /**
+     * {@inheritdoc}
+     */
+    public function getId(): int
     {
         return $this->id;
     }
@@ -39,7 +42,7 @@ class PromotionSubject implements ResourceInterface, PromotionSubjectInterface
     /**
      * {@inheritdoc}
      */
-    public function hasPromotion(PromotionInterface $promotion)
+    public function hasPromotion(PromotionInterface $promotion): bool
     {
         return $this->promotions->contains($promotion);
     }
@@ -47,7 +50,7 @@ class PromotionSubject implements ResourceInterface, PromotionSubjectInterface
     /**
      * {@inheritdoc}
      */
-    public function addPromotion(PromotionInterface $promotion)
+    public function addPromotion(PromotionInterface $promotion): void
     {
         if (!$this->hasPromotion($promotion)) {
             $this->promotions->add($promotion);
@@ -57,7 +60,7 @@ class PromotionSubject implements ResourceInterface, PromotionSubjectInterface
     /**
      * {@inheritdoc}
      */
-    public function removePromotion(PromotionInterface $promotion)
+    public function removePromotion(PromotionInterface $promotion): void
     {
         if ($this->hasPromotion($promotion)) {
             $this->promotions->removeElement($promotion);
@@ -67,7 +70,7 @@ class PromotionSubject implements ResourceInterface, PromotionSubjectInterface
     /**
      * {@inheritdoc}
      */
-    public function getPromotions()
+    public function getPromotions(): Collection
     {
         return $this->promotions;
     }
@@ -75,7 +78,8 @@ class PromotionSubject implements ResourceInterface, PromotionSubjectInterface
     /**
      * {@inheritdoc}
      */
-    public function getPromotionSubjectTotal()
+    public function getPromotionSubjectTotal(): int
     {
+        return 0;
     }
 }

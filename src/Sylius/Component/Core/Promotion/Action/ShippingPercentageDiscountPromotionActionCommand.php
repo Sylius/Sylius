@@ -16,6 +16,7 @@ namespace Sylius\Component\Core\Promotion\Action;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Order\Model\AdjustmentInterface as OrderAdjustmentInterface;
 use Sylius\Component\Promotion\Action\PromotionActionCommandInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
@@ -45,7 +46,7 @@ final class ShippingPercentageDiscountPromotionActionCommand implements Promotio
     /**
      * {@inheritdoc}
      */
-    public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
+    public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion): bool
     {
         if (!$subject instanceof OrderInterface) {
             throw new UnexpectedTypeException($subject, OrderInterface::class);
@@ -70,8 +71,10 @@ final class ShippingPercentageDiscountPromotionActionCommand implements Promotio
 
     /**
      * {@inheritdoc}
+     *
+     * @throws UnexpectedTypeException
      */
-    public function revert(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
+    public function revert(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion): void
     {
         if (!$subject instanceof OrderInterface && !$subject instanceof OrderItemInterface) {
             throw new UnexpectedTypeException(
@@ -91,13 +94,13 @@ final class ShippingPercentageDiscountPromotionActionCommand implements Promotio
      * @param PromotionInterface $promotion
      * @param string $type
      *
-     * @return AdjustmentInterface
+     * @return OrderAdjustmentInterface
      */
     protected function createAdjustment(
         PromotionInterface $promotion,
-        $type = AdjustmentInterface::ORDER_SHIPPING_PROMOTION_ADJUSTMENT
-    ) {
-        /** @var AdjustmentInterface $adjustment */
+        string $type = AdjustmentInterface::ORDER_SHIPPING_PROMOTION_ADJUSTMENT
+    ): OrderAdjustmentInterface {
+        /** @var OrderAdjustmentInterface $adjustment */
         $adjustment = $this->adjustmentFactory->createNew();
         $adjustment->setType($type);
         $adjustment->setLabel($promotion->getName());

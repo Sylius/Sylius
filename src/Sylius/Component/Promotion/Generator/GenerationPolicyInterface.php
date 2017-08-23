@@ -23,12 +23,12 @@ interface GenerationPolicyInterface
      *
      * @return bool
      */
-    public function isGenerationPossible(PromotionCouponGeneratorInstructionInterface $instruction);
+    public function isGenerationPossible(PromotionCouponGeneratorInstructionInterface $instruction): bool;
 
     /**
      * @param PromotionCouponGeneratorInstructionInterface $instruction
      *
      * @return int
      */
-    public function getPossibleGenerationAmount(PromotionCouponGeneratorInstructionInterface $instruction);
+    public function getPossibleGenerationAmount(PromotionCouponGeneratorInstructionInterface $instruction): int;
 }

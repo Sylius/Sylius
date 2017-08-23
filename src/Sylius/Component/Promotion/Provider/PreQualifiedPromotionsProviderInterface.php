@@ -26,5 +26,5 @@ interface PreQualifiedPromotionsProviderInterface
      *
      * @return PromotionInterface[]
      */
-    public function getPromotions(PromotionSubjectInterface $subject);
+    public function getPromotions(PromotionSubjectInterface $subject): array;
 }

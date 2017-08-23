@@ -31,7 +31,7 @@ final class UnitFixedDiscountConfigurationType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('amount', MoneyType::class, [
@@ -53,7 +53,7 @@ final class UnitFixedDiscountConfigurationType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
             ->setRequired('currency')
@@ -64,7 +64,7 @@ final class UnitFixedDiscountConfigurationType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_promotion_action_unit_fixed_discount_configuration';
     }
