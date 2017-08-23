@@ -26,6 +26,9 @@
 
 ### ShopBundle
 
+* Renamed block ```main``` to ```content``` in ```src/Sylius/Bundle/ShopBundle/Resources/views/Checkout/address.html.twig```. The ```main``` block
+does exist in ```Checkout/layout.html.twig``` but now overwrites the sidebar, too, so using the new block ```content``` is suggested for overwriting the primary content of the checkout page.
+
 * The following template events have been completely removed and replaced by more general events. You can listen to the event and analyze the current request to know on which page you are.
   
   * `sylius.shop.checkout.address.before_header`  *(use sylius.shop.checkout.before_header` instead)*
