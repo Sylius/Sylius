@@ -81,7 +81,7 @@ abstract class AbstractConfigurablePromotionElementType extends AbstractResource
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         parent::configureOptions($resolver);
 

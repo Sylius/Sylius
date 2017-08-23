@@ -121,7 +121,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function getVersion()
+    public function getVersion(): ?int
     {
         return $this->version;
     }
@@ -129,7 +129,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function setVersion($version)
+    public function setVersion(?int $version): void
     {
         $this->version = $version;
     }

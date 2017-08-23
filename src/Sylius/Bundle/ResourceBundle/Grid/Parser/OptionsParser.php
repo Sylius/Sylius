@@ -99,9 +99,9 @@ final class OptionsParser implements OptionsParserInterface
      * @param string $expression
      * @param Request $request
      *
-     * @return string
+     * @return mixed
      */
-    private function parseOptionExpression(string $expression, Request $request): string
+    private function parseOptionExpression(string $expression, Request $request)
     {
         $expression = preg_replace_callback('/\$(\w+)/', function (array $matches) use ($request) {
             $variable = $request->get($matches[1]);

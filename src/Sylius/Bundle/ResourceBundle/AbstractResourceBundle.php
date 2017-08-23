@@ -115,7 +115,7 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
      *
      * @throws UnknownDriverException
      */
-    protected function getMappingCompilerPassInfo($driverType): array
+    protected function getMappingCompilerPassInfo(string $driverType): array
     {
         switch ($driverType) {
             case SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM:

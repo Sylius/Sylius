@@ -19,9 +19,11 @@ namespace Sylius\Component\Resource\Model;
 interface ToggleableInterface
 {
     /**
+     * Missing scalar typehint because it conflicts with AdvancedUserInterface.
+     *
      * @return bool
      */
-    public function isEnabled(): bool;
+    public function isEnabled();
 
     /**
      * @param bool $enabled

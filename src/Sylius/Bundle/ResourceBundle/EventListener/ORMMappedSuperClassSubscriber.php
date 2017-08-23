@@ -128,11 +128,11 @@ final class ORMMappedSuperClassSubscriber extends AbstractDoctrineSubscriber
     }
 
     /**
-     * @param string $type
+     * @param int $type
      *
      * @return bool
      */
-    private function isRelation(string $type): bool
+    private function isRelation(int $type): bool
     {
         return in_array(
             $type,

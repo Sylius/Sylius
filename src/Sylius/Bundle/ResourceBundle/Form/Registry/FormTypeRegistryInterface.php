@@ -29,9 +29,9 @@ interface FormTypeRegistryInterface
      * @param string $identifier
      * @param string $typeIdentifier
      *
-     * @return string
+     * @return string|null
      */
-    public function get(string $identifier, string $typeIdentifier): string;
+    public function get(string $identifier, string $typeIdentifier): ?string;
 
     /**
      * @param string $identifier

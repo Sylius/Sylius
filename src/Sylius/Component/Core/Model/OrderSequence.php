@@ -28,7 +28,7 @@ class OrderSequence extends BaseOrderSequence implements OrderSequenceInterface
     /**
      * {@inheritdoc}
      */
-    public function getVersion()
+    public function getVersion(): ?int
     {
         return $this->version;
     }
@@ -36,7 +36,7 @@ class OrderSequence extends BaseOrderSequence implements OrderSequenceInterface
     /**
      * {@inheritdoc}
      */
-    public function setVersion($version)
+    public function setVersion(?int $version): void
     {
         $this->version = $version;
     }

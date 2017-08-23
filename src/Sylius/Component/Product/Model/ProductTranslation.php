@@ -77,7 +77,7 @@ class ProductTranslation extends AbstractTranslation implements ProductTranslati
     /**
      * {@inheritdoc}
      */
-    public function getSlug()
+    public function getSlug(): ?string
     {
         return $this->slug;
     }
@@ -85,7 +85,7 @@ class ProductTranslation extends AbstractTranslation implements ProductTranslati
     /**
      * {@inheritdoc}
      */
-    public function setSlug($slug = null)
+    public function setSlug(?string $slug): void
     {
         $this->slug = $slug;
     }

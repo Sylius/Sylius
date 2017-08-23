@@ -32,8 +32,8 @@ interface RouteFactoryInterface
      * @param array $requirements An array of requirements for parameters (regexes)
      * @param array $options An array of options
      * @param string $host The host pattern to match
-     * @param array $schemes A required URI scheme or an array of restricted schemes
-     * @param array $methods A required HTTP method or an array of restricted methods
+     * @param array $schemes An array of restricted URI schemes
+     * @param array $methods An array of restricted HTTP methods
      * @param string $condition A condition that should evaluate to true for the route to match
      *
      * @return Route
