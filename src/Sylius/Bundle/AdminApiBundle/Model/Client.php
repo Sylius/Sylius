@@ -23,7 +23,7 @@ class Client extends BaseClient implements ClientInterface
     /**
      * {@inheritdoc}
      */
-    public function getPublicId()
+    public function getPublicId(): string
     {
         return $this->getRandomId();
     }

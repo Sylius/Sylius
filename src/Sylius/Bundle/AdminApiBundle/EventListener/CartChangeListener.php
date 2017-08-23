@@ -48,7 +48,7 @@ final class CartChangeListener
     /**
      * @param GenericEvent $event
      */
-    public function recalculateOrderOnAdd(GenericEvent $event)
+    public function recalculateOrderOnAdd(GenericEvent $event): void
     {
         $item = $event->getSubject();
         Assert::isInstanceOf($item, OrderItemInterface::class);
@@ -62,7 +62,7 @@ final class CartChangeListener
     /**
      * @param GenericEvent $event
      */
-    public function recalculateOrderOnDelete(GenericEvent $event)
+    public function recalculateOrderOnDelete(GenericEvent $event): void
     {
         $item = $event->getSubject();
         Assert::isInstanceOf($item, OrderItemInterface::class);

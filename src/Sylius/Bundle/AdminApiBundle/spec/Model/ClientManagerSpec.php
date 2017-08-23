@@ -19,32 +19,26 @@ use FOS\OAuthServerBundle\Entity\ClientManager as FOSClientManager;
 use FOS\OAuthServerBundle\Model\ClientInterface;
 use FOS\OAuthServerBundle\Model\ClientManagerInterface;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\AdminApiBundle\Model\ClientManager;
 
 final class ClientManagerSpec extends ObjectBehavior
 {
-    function let(EntityManager $em, EntityRepository $repository, $clientClass = 'Client/Class/String')
+    function let(EntityManager $em, EntityRepository $repository, $clientClass = 'Client/Class/String'): void
     {
         $em->getRepository($clientClass)->shouldBeCalled()->willReturn($repository);
         $this->beConstructedWith($em, $clientClass);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ClientManager::class);
-    }
-
-    function it_extends_fos_oauth_server_client_manager()
+    function it_extends_fos_oauth_server_client_manager(): void
     {
         $this->shouldHaveType(FOSClientManager::class);
     }
 
-    function it_implements_fos_oauth_server_client_manager_interface()
+    function it_implements_fos_oauth_server_client_manager_interface(): void
     {
         $this->shouldImplement(ClientManagerInterface::class);
     }
 
-    function it_finds_client_by_public_id(ClientInterface $client, $repository)
+    function it_finds_client_by_public_id(ClientInterface $client, $repository): void
     {
         $repository->findOneBy(['randomId' => 'random_string'])->willReturn($client);
 

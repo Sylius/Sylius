@@ -19,6 +19,10 @@
   * `ProvinceInterface::setCountry`
   * `ZoneMemberInterface::setBelongsTo`
 
+### AdminApiBundle
+
+* `CreateClienCommand` has been made final, use decoration instead of extending it.
+
 ### Channel / ChannelBundle
 
 * `ChannelFactory` has been made final, use decoration instead of extending it.

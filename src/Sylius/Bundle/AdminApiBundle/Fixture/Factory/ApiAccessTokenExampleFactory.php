@@ -78,7 +78,7 @@ class ApiAccessTokenExampleFactory extends AbstractExampleFactory
     /**
      * {@inheritdoc}
      */
-    public function create(array $options = [])
+    public function create(array $options = []): AccessTokenInterface
     {
         $options = $this->optionsResolver->resolve($options);
 
@@ -99,7 +99,7 @@ class ApiAccessTokenExampleFactory extends AbstractExampleFactory
     /**
      * {@inheritdoc}
      */
-    protected function configureOptions(OptionsResolver $resolver)
+    protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
             ->setDefault('user', LazyOption::randomOne($this->userRepository))

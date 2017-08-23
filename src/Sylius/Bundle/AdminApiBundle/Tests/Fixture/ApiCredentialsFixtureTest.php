@@ -28,7 +28,7 @@ class OAuthCredentialsFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function oauth_credentials_can_be_generated_randomly()
+    public function oauth_credentials_can_be_generated_randomly(): void
     {
         $this->assertConfigurationIsValid([['random' => 4]], 'random');
     }
@@ -36,7 +36,7 @@ class OAuthCredentialsFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function oauth_credentials_can_be_created_with_custom_random_id()
+    public function oauth_credentials_can_be_created_with_custom_random_id(): void
     {
         $this->assertConfigurationIsValid([['custom' => [[
             'random_id' => 'totally_random',
@@ -46,7 +46,7 @@ class OAuthCredentialsFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function oauth_credentials_can_be_created_with_custom_secret()
+    public function oauth_credentials_can_be_created_with_custom_secret(): void
     {
         $this->assertConfigurationIsValid([['custom' => [[
             'secret' => 'threeCanKeepSecretIfTwoAreDead',
@@ -56,7 +56,7 @@ class OAuthCredentialsFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function oauth_credentials_can_be_created_with_grant_type()
+    public function oauth_credentials_can_be_created_with_grant_type(): void
     {
         $this->assertConfigurationIsValid([['custom' => [[
             'allowed_grant_types' => [
@@ -68,7 +68,7 @@ class OAuthCredentialsFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * {@inheritdoc}
      */
-    protected function getConfiguration()
+    protected function getConfiguration(): ApiClientFixture
     {
         return new ApiClientFixture(
             $this->getMockBuilder(ObjectManager::class)->getMock(),
