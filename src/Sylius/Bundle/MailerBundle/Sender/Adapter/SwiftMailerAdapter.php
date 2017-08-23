@@ -50,12 +50,14 @@ class SwiftMailerAdapter extends AbstractAdapter
         RenderedEmail $renderedEmail,
         EmailInterface $email,
         array $data,
-        array $attachments = []
+        array $attachments = [],
+        array $replyTo = []
     ): void {
         $message = (new \Swift_Message())
             ->setSubject($renderedEmail->getSubject())
             ->setFrom([$senderAddress => $senderName])
             ->setTo($recipients)
+            ->setReplyTo($replyTo);
         ;
 
         $message->setBody($renderedEmail->getBody(), 'text/html');
@@ -66,7 +68,7 @@ class SwiftMailerAdapter extends AbstractAdapter
             $message->attach($file);
         }
 
-        $emailSendEvent = new EmailSendEvent($message, $email, $data, $recipients);
+        $emailSendEvent = new EmailSendEvent($message, $email, $data, $recipients, $replyTo);
 
         $this->dispatcher->dispatch(SyliusMailerEvents::EMAIL_PRE_SEND, $emailSendEvent);
 
