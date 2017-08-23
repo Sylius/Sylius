@@ -37,7 +37,7 @@ final class CompositeMethodsResolver implements ShippingMethodsResolverInterface
     /**
      * {@inheritdoc}
      */
-    public function getSupportedMethods(ShippingSubjectInterface $shippingSubject)
+    public function getSupportedMethods(ShippingSubjectInterface $shippingSubject): array
     {
         /** @var ShippingMethodsResolverInterface $resolver */
         foreach ($this->resolversRegistry->all() as $resolver) {
@@ -52,7 +52,7 @@ final class CompositeMethodsResolver implements ShippingMethodsResolverInterface
     /**
      * {@inheritdoc}
      */
-    public function supports(ShippingSubjectInterface $subject)
+    public function supports(ShippingSubjectInterface $subject): bool
     {
         /** @var ShippingMethodsResolverInterface $resolver */
         foreach ($this->resolversRegistry->all() as $resolver) {

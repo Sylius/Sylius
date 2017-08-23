@@ -27,5 +27,5 @@ interface ShippingMethodRepositoryInterface extends RepositoryInterface
      *
      * @return ShippingMethodInterface[]
      */
-    public function findByName($name, $locale);
+    public function findByName(string $name, string $locale): array;
 }

@@ -23,9 +23,9 @@ interface ShippingMethodEligibilityCheckerInterface
 {
     /**
      * @param ShippingSubjectInterface $subject
-     * @param ShippingMethodInterface  $method
+     * @param ShippingMethodInterface $method
      *
      * @return bool
      */
-    public function isEligible(ShippingSubjectInterface $subject, ShippingMethodInterface $method);
+    public function isEligible(ShippingSubjectInterface $subject, ShippingMethodInterface $method): bool;
 }

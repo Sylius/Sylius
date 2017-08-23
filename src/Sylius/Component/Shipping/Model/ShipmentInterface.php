@@ -28,59 +28,59 @@ interface ShipmentInterface extends ResourceInterface, ShippingSubjectInterface,
     public const STATE_CANCELLED = 'cancelled';
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getState();
+    public function getState(): ?string;
 
     /**
-     * @param string $state
+     * @param string|null $state
      */
-    public function setState($state);
+    public function setState(?string $state): void;
 
     /**
-     * @return ShippingMethodInterface
+     * @return ShippingMethodInterface|null
      */
-    public function getMethod();
+    public function getMethod(): ?ShippingMethodInterface;
 
     /**
-     * @param ShippingMethodInterface $method
+     * @param ShippingMethodInterface|null $method
      */
-    public function setMethod(ShippingMethodInterface $method = null);
+    public function setMethod(?ShippingMethodInterface $method): void;
 
     /**
      * @return Collection|ShipmentUnitInterface[]
      */
-    public function getUnits();
+    public function getUnits(): Collection;
 
     /**
      * @param ShipmentUnitInterface $unit
      */
-    public function addUnit(ShipmentUnitInterface $unit);
+    public function addUnit(ShipmentUnitInterface $unit): void;
 
     /**
      * @param ShipmentUnitInterface $unit
      */
-    public function removeUnit(ShipmentUnitInterface $unit);
+    public function removeUnit(ShipmentUnitInterface $unit): void;
 
     /**
      * @param ShipmentUnitInterface $unit
      *
      * @return bool
      */
-    public function hasUnit(ShipmentUnitInterface $unit);
+    public function hasUnit(ShipmentUnitInterface $unit): bool;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getTracking();
+    public function getTracking(): ?string;
 
     /**
-     * @param string $tracking
+     * @param string|null $tracking
      */
-    public function setTracking($tracking);
+    public function setTracking(?string $tracking): void;
 
     /**
      * @return bool
      */
-    public function isTracked();
+    public function isTracked(): bool;
 }

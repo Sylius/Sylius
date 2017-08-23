@@ -61,7 +61,7 @@ class ShipmentUnit implements ShipmentUnitInterface
     /**
      * {@inheritdoc}
      */
-    public function getShipment()
+    public function getShipment(): ?ShipmentInterface
     {
         return $this->shipment;
     }
@@ -69,7 +69,7 @@ class ShipmentUnit implements ShipmentUnitInterface
     /**
      * {@inheritdoc}
      */
-    public function setShipment(ShipmentInterface $shipment = null)
+    public function setShipment(?ShipmentInterface $shipment): void
     {
         $this->shipment = $shipment;
     }
@@ -77,15 +77,15 @@ class ShipmentUnit implements ShipmentUnitInterface
     /**
      * {@inheritdoc}
      */
-    public function getShippable()
+    public function getShippable(): ?ShippableInterface
     {
         return $this->shippable;
     }
 
     /**
-     * {@inheritdoc}
+     * @param ShippableInterface|null $shippable
      */
-    public function setShippable(ShippableInterface $shippable)
+    public function setShippable(?ShippableInterface $shippable): void
     {
         $this->shippable = $shippable;
     }

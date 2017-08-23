@@ -37,7 +37,7 @@ final class DelegatingCalculator implements DelegatingCalculatorInterface
     /**
      * {@inheritdoc}
      */
-    public function calculate(ShipmentInterface $subject)
+    public function calculate(ShipmentInterface $subject): int
     {
         if (null === $method = $subject->getMethod()) {
             throw new UndefinedShippingMethodException('Cannot calculate charge for shipment without a defined shipping method.');

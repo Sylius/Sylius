@@ -18,7 +18,6 @@ use Sylius\Component\Shipping\Exception\UnresolvedDefaultShippingMethodException
 use Sylius\Component\Shipping\Model\ShipmentInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Repository\ShippingMethodRepositoryInterface;
-use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolver;
 use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface;
 
 /**
@@ -26,17 +25,12 @@ use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface;
  */
 final class DefaultShippingMethodResolverSpec extends ObjectBehavior
 {
-    function let(ShippingMethodRepositoryInterface $shippingMethodRepository)
+    function let(ShippingMethodRepositoryInterface $shippingMethodRepository): void
     {
         $this->beConstructedWith($shippingMethodRepository);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(DefaultShippingMethodResolver::class);
-    }
-
-    function it_implements_default_shipping_method_resolver_interface()
+    function it_implements_default_shipping_method_resolver_interface(): void
     {
         $this->shouldImplement(DefaultShippingMethodResolverInterface::class);
     }
@@ -46,7 +40,7 @@ final class DefaultShippingMethodResolverSpec extends ObjectBehavior
         ShippingMethodInterface $secondShippingMethod,
         ShippingMethodRepositoryInterface $shippingMethodRepository,
         ShipmentInterface $shipment
-    ) {
+    ): void {
         $shippingMethodRepository->findBy(['enabled' => true])->willReturn([$firstShippingMethod, $secondShippingMethod]);
 
         $this->getDefaultShippingMethod($shipment)->shouldReturn($firstShippingMethod);
@@ -55,7 +49,7 @@ final class DefaultShippingMethodResolverSpec extends ObjectBehavior
     function it_throws_exception_if_there_is_no_enabled_shipping_methods(
         ShippingMethodRepositoryInterface $shippingMethodRepository,
         ShipmentInterface $shipment
-    ) {
+    ): void {
         $shippingMethodRepository->findBy(['enabled' => true])->willReturn([]);
 
         $this
