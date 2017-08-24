@@ -39,7 +39,7 @@ final class ReviewChangeListener
     /**
      * @param GenericEvent $event
      */
-    public function recalculateSubjectRating(GenericEvent $event)
+    public function recalculateSubjectRating(GenericEvent $event): void
     {
         $subject = $event->getSubject();
         if (!$subject instanceof ReviewInterface) {
