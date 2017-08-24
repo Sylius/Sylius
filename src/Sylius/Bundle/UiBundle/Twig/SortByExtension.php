@@ -25,7 +25,7 @@ class SortByExtension extends \Twig_Extension
     /**
      * {@inheritdoc}
      */
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
             new \Twig_Filter('sort_by', [$this, 'sortBy']),
@@ -33,7 +33,7 @@ class SortByExtension extends \Twig_Extension
     }
 
     /**
-     * @param array|Collection $array
+     * @param iterable $iterable
      * @param string $field
      * @param string $order
      *
@@ -41,14 +41,9 @@ class SortByExtension extends \Twig_Extension
      *
      * @throws NoSuchPropertyException
      */
-    public function sortBy($array, $field, $order = 'ASC')
+    public function sortBy(iterable $iterable, string $field, string $order = 'ASC'): array
     {
-        if ($array instanceof Collection) {
-            $array = $array->toArray();
-        }
-        if (1 >= count($array)) {
-            return $array;
-        }
+        $array = $this->transformIterableToArray($iterable);
 
         usort($array, function ($firstElement, $secondElement) use ($field, $order) {
             $accessor = PropertyAccess::createPropertyAccessor();
@@ -65,5 +60,23 @@ class SortByExtension extends \Twig_Extension
         });
 
         return $array;
+    }
+
+    /**
+     * @param iterable $iterable
+     *
+     * @return array
+     */
+    private function transformIterableToArray(iterable $iterable): array
+    {
+        if (is_array($iterable)) {
+            return $iterable;
+        }
+
+        if ($iterable instanceof \Traversable) {
+            return iterator_to_array($iterable);
+        }
+
+        throw new \RuntimeException('Cannot transform an iterable to an array.');
     }
 }

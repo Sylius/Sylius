@@ -21,7 +21,7 @@ class PercentageExtension extends \Twig_Extension
     /**
      * {@inheritdoc}
      */
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
             new \Twig_Filter('sylius_percentage', [$this, 'getPercentage']),
@@ -33,7 +33,7 @@ class PercentageExtension extends \Twig_Extension
      *
      * @return string
      */
-    public function getPercentage($number)
+    public function getPercentage(float $number): string
     {
         $percentage = $number * 100;
 

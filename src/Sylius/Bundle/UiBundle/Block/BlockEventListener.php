@@ -29,7 +29,7 @@ final class BlockEventListener
     /**
      * @param string $template
      */
-    public function __construct($template)
+    public function __construct(string $template)
     {
         $this->template = $template;
     }
@@ -37,7 +37,7 @@ final class BlockEventListener
     /**
      * @param BlockEvent $event
      */
-    public function onBlockEvent(BlockEvent $event)
+    public function onBlockEvent(BlockEvent $event): void
     {
         $block = new Block();
         $block->setId(uniqid('', true));
