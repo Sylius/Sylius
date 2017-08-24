@@ -27,7 +27,7 @@ final class ResolveNextRouteAction implements ActionInterface
      *
      * @param ResolveNextRoute $request
      */
-    public function execute($request)
+    public function execute($request): void
     {
         $request->setRouteName('sylius_shop_order_thank_you');
     }
@@ -35,7 +35,7 @@ final class ResolveNextRouteAction implements ActionInterface
     /**
      * {@inheritdoc}
      */
-    public function supports($request)
+    public function supports($request): bool
     {
         return
             $request instanceof ResolveNextRoute &&

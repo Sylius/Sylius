@@ -20,7 +20,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -38,7 +37,7 @@ final class GatewayConfigType extends AbstractResourceType
      * @param FormTypeRegistryInterface $gatewayConfigurationTypeRegistry
      */
     public function __construct(
-        $dataClass,
+        string $dataClass,
         array $validationGroups = [],
         FormTypeRegistryInterface $gatewayConfigurationTypeRegistry
     ) {
@@ -50,7 +49,7 @@ final class GatewayConfigType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $factoryName = $options['data']->getFactoryName();
 
@@ -83,7 +82,7 @@ final class GatewayConfigType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_payum_gateway_config';
     }

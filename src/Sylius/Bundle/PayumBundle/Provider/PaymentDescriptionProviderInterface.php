@@ -25,5 +25,5 @@ interface PaymentDescriptionProviderInterface
      *
      * @return string
      */
-    public function getPaymentDescription(PaymentInterface $payment);
+    public function getPaymentDescription(PaymentInterface $payment): string;
 }

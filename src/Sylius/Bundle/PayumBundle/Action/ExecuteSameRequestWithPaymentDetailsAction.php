@@ -24,9 +24,9 @@ final class ExecuteSameRequestWithPaymentDetailsAction extends GatewayAwareActio
     /**
      * {@inheritdoc}
      *
-     * @param $request Generic
+     * @param Generic $request
      */
-    public function execute($request)
+    public function execute($request): void
     {
         RequestNotSupportedException::assertSupports($this, $request);
 
@@ -46,7 +46,7 @@ final class ExecuteSameRequestWithPaymentDetailsAction extends GatewayAwareActio
     /**
      * {@inheritdoc}
      */
-    public function supports($request)
+    public function supports($request): bool
     {
         return
             $request instanceof Generic &&

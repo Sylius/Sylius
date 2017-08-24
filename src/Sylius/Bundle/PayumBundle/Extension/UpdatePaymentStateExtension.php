@@ -41,21 +41,21 @@ final class UpdatePaymentStateExtension implements ExtensionInterface
     /**
      * {@inheritdoc}
      */
-    public function onPreExecute(Context $context)
+    public function onPreExecute(Context $context): void
     {
     }
 
     /**
      * {@inheritdoc}
      */
-    public function onExecute(Context $context)
+    public function onExecute(Context $context): void
     {
     }
 
     /**
      * {@inheritdoc}
      */
-    public function onPostExecute(Context $context)
+    public function onPostExecute(Context $context): void
     {
         $previousStack = $context->getPrevious();
         $previousStackSize = count($previousStack);
@@ -98,7 +98,7 @@ final class UpdatePaymentStateExtension implements ExtensionInterface
      * @param PaymentInterface $payment
      * @param string $nextState
      */
-    protected function updatePaymentState(PaymentInterface $payment, $nextState)
+    protected function updatePaymentState(PaymentInterface $payment, string $nextState): void
     {
         $stateMachine = $this->factory->get($payment, PaymentTransitions::GRAPH);
 

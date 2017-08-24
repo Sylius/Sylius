@@ -31,9 +31,8 @@ final class ConvertPaymentAction implements ActionInterface
     /**
      * @param InvoiceNumberGeneratorInterface $invoiceNumberGenerator
      */
-    public function __construct(
-        InvoiceNumberGeneratorInterface $invoiceNumberGenerator
-    ) {
+    public function __construct(InvoiceNumberGeneratorInterface $invoiceNumberGenerator)
+    {
         $this->invoiceNumberGenerator = $invoiceNumberGenerator;
     }
 
@@ -42,7 +41,7 @@ final class ConvertPaymentAction implements ActionInterface
      *
      * @param Convert $request
      */
-    public function execute($request)
+    public function execute($request): void
     {
         RequestNotSupportedException::assertSupports($this, $request);
 
@@ -94,7 +93,7 @@ final class ConvertPaymentAction implements ActionInterface
     /**
      * {@inheritdoc}
      */
-    public function supports($request)
+    public function supports($request): bool
     {
         return
             $request instanceof Convert &&
@@ -105,11 +104,10 @@ final class ConvertPaymentAction implements ActionInterface
 
     /**
      * @param int $price
-     * @param string $currencyCode
      *
      * @return float
      */
-    private function formatPrice($price)
+    private function formatPrice(int $price): float
     {
         return round($price / 100, 2);
     }
