@@ -21,7 +21,7 @@
 
 ### AdminApiBundle
 
-* `CreateClienCommand` has been made final, use decoration instead of extending it.
+* `CreateClientCommand` has been made final, use decoration instead of extending it.
 
 ### Channel / ChannelBundle
 
