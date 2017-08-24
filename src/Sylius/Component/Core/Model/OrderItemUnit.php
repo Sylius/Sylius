@@ -59,7 +59,7 @@ class OrderItemUnit extends BaseOrderItemUnit implements OrderItemUnitInterface
     /**
      * {@inheritdoc}
      */
-    public function getStockable(): StockableInterface
+    public function getStockable(): ?StockableInterface
     {
         return $this->orderItem->getVariant();
     }

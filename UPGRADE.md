@@ -41,6 +41,10 @@
   * `CustomerInterface::setGroup`
   * `CustomerAwareInterface::setCustomer`
 
+### Inventory / InventoryBundle
+
+* `InventoryHelper` has been made final, use decoration instead of extending it.
+
 ### Mailer / MailerBundle
 
 * `Email` has been made final, use decoration instead of extending it.
