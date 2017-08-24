@@ -30,7 +30,7 @@ final class TaxonType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('translations', ResourceTranslationsType::class, [
@@ -38,7 +38,7 @@ final class TaxonType extends AbstractResourceType
                 'label' => 'sylius.form.taxon.name',
             ])
             ->addEventSubscriber(new AddCodeFormSubscriber())
-            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event): void {
                 if (null === $event->getData()) {
                     return;
                 }
@@ -54,7 +54,7 @@ final class TaxonType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_taxon';
     }
