@@ -28,7 +28,7 @@ interface ReviewFactoryInterface extends FactoryInterface
      *
      * @return ReviewInterface
      */
-    public function createForSubject(ReviewableInterface $subject);
+    public function createForSubject(ReviewableInterface $subject): ReviewInterface;
 
     /**
      * @param ReviewableInterface $subject
@@ -36,5 +36,5 @@ interface ReviewFactoryInterface extends FactoryInterface
      *
      * @return ReviewInterface
      */
-    public function createForSubjectWithReviewer(ReviewableInterface $subject, ReviewerInterface $reviewer = null);
+    public function createForSubjectWithReviewer(ReviewableInterface $subject, ?ReviewerInterface $reviewer = null): ReviewInterface;
 }

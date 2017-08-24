@@ -81,6 +81,12 @@
   * `Archivable::setArchivedAt`
   * `SlugAwareInterface::setSlug`
 
+### Review / ReviewBundle
+
+* The following methods does not longer have a default null argument and requires one to be explicitly passed:
+  
+  * `ReviewInterface::setAuthor`
+
 ### Shipping / ShippingBundle
 
 * `UnresolvedDefaultShippingMethodException` has been made final, use decoration instead of extending it.

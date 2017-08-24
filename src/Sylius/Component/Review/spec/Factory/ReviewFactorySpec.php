@@ -15,7 +15,6 @@ namespace spec\Sylius\Component\Review\Factory;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Review\Factory\ReviewFactory;
 use Sylius\Component\Review\Factory\ReviewFactoryInterface;
 use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewerInterface;
@@ -26,27 +25,22 @@ use Sylius\Component\Review\Model\ReviewInterface;
  */
 final class ReviewFactorySpec extends ObjectBehavior
 {
-    function let(FactoryInterface $factory)
+    function let(FactoryInterface $factory): void
     {
         $this->beConstructedWith($factory);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ReviewFactory::class);
-    }
-
-    function it_is_a_resource_factory()
+    function it_is_a_resource_factory(): void
     {
         $this->shouldImplement(FactoryInterface::class);
     }
 
-    function it_implements_review_factory_interface()
+    function it_implements_review_factory_interface(): void
     {
         $this->shouldImplement(ReviewFactoryInterface::class);
     }
 
-    function it_creates_a_new_review(FactoryInterface $factory, ReviewInterface $review)
+    function it_creates_a_new_review(FactoryInterface $factory, ReviewInterface $review): void
     {
         $factory->createNew()->willReturn($review);
 
@@ -57,7 +51,7 @@ final class ReviewFactorySpec extends ObjectBehavior
         FactoryInterface $factory,
         ReviewableInterface $subject,
         ReviewInterface $review
-    ) {
+    ): void {
         $factory->createNew()->willReturn($review);
         $review->setReviewSubject($subject)->shouldBeCalled();
 
@@ -69,7 +63,7 @@ final class ReviewFactorySpec extends ObjectBehavior
         ReviewableInterface $subject,
         ReviewInterface $review,
         ReviewerInterface $reviewer
-    ) {
+    ): void {
         $factory->createNew()->willReturn($review);
         $review->setReviewSubject($subject)->shouldBeCalled();
         $review->setAuthor($reviewer)->shouldBeCalled();

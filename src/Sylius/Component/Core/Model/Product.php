@@ -248,7 +248,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function getReviews()
+    public function getReviews(): Collection
     {
         return $this->reviews;
     }
@@ -268,7 +268,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function addReview(ReviewInterface $review)
+    public function addReview(ReviewInterface $review): void
     {
         $this->reviews->add($review);
     }
@@ -276,7 +276,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function removeReview(ReviewInterface $review)
+    public function removeReview(ReviewInterface $review): void
     {
         $this->reviews->remove($review);
     }
@@ -284,7 +284,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function getAverageRating()
+    public function getAverageRating(): float
     {
         return $this->averageRating;
     }
@@ -292,7 +292,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function setAverageRating($averageRating)
+    public function setAverageRating(float $averageRating): void
     {
         $this->averageRating = $averageRating;
     }
