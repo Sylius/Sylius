@@ -40,6 +40,7 @@
 ### Mailer / MailerBundle
 
 * `Email` has been made final, use decoration instead of extending it.
+$ `SenderInterface::send` method has changed to add `reply-to` argument
 
 ### Order / OrderBundle
 
