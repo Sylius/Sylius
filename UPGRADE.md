@@ -86,17 +86,13 @@
   * `TranslationInterface::setTranslatable`
   * `Archivable::setArchivedAt`
   * `SlugAwareInterface::setSlug`
-
+  
 ### Review / ReviewBundle
 
 * The `ReviewInterface::setAuthor` method does not longer have a default null argument and requires one to be explicitly passed.
 * The `ReviewFactoryInterface::createForSubjectWithReviewer` method does not longer have a default null value for `$reviewer` argument and requires one to be explicitly passed.
 * Default null value of `ReviewFactoryInterface::createForSubjectWithReviewer` was removed. To create a review without reviewer use `createForSubject` method from the same interface instead. 
   
-### Taxonomy / TaxonomyBundle
-
-* `TaxonInterface::getParents` method was renamed to `TaxonInterface::getAncestors`.
-
 ### ShopBundle
 
 * `ContactController` has been made final, use decoration instead of extending it.
@@ -110,6 +106,14 @@
     * `ShipmentInterface::setMethod`
     * `ShipmentUnitInterface::setShipment`
     * `ShipmentMethodInterface::setCategory`
+
+### Taxonomy / TaxonomyBundle
+
+* `TaxonInterface::getParents` method was renamed to `TaxonInterface::getAncestors`.
+
+### ThemeBundle
+
+* `ThemeHierarchyProviderInterface::getThemeHierarchy` does not longer accepts null as the passed argument.
 
 # UPGRADE FROM 1.0.0-beta.2 to 1.0.0-beta.3
 

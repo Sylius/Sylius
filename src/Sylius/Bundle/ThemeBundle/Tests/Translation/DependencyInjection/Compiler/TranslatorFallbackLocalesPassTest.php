@@ -26,7 +26,7 @@ final class TranslatorFallbackLocalesPassTest extends AbstractCompilerPassTestCa
     /**
      * @test
      */
-    public function it_copies_method_call_that_sets_fallback_locales_to_theme_translator()
+    public function it_copies_method_call_that_sets_fallback_locales_to_theme_translator(): void
     {
         $symfonyTranslatorDefinition = new Definition();
         $symfonyTranslatorDefinition->addMethodCall('setFallbackLocales', ['pl_PL']);
@@ -46,7 +46,7 @@ final class TranslatorFallbackLocalesPassTest extends AbstractCompilerPassTestCa
     /**
      * @test
      */
-    public function it_filters_out_other_method_calls_to_symfony_translator()
+    public function it_filters_out_other_method_calls_to_symfony_translator(): void
     {
         $symfonyTranslatorDefinition = new Definition();
         $symfonyTranslatorDefinition->addMethodCall('doFooAndBar', ['argument1', 'argument2']);
@@ -68,7 +68,7 @@ final class TranslatorFallbackLocalesPassTest extends AbstractCompilerPassTestCa
     /**
      * @test
      */
-    public function it_copies_method_calls_that_set_fallback_locales_to_theme_translator()
+    public function it_copies_method_calls_that_set_fallback_locales_to_theme_translator(): void
     {
         $symfonyTranslatorDefinition = new Definition();
         $symfonyTranslatorDefinition->addMethodCall('setFallbackLocales', ['pl_PL']);
@@ -95,7 +95,7 @@ final class TranslatorFallbackLocalesPassTest extends AbstractCompilerPassTestCa
     /**
      * @test
      */
-    public function it_does_not_force_symfony_translator_to_have_any_method_calls()
+    public function it_does_not_force_symfony_translator_to_have_any_method_calls(): void
     {
         $this->setDefinition('translator.default', new Definition());
         $this->setDefinition('sylius.theme.translation.translator', new Definition());

@@ -44,7 +44,7 @@ final class SymfonyConfigurationProcessor implements ConfigurationProcessorInter
     /**
      * {@inheritdoc}
      */
-    public function process(array $configs)
+    public function process(array $configs): array
     {
         return $this->processor->processConfiguration($this->configuration, $configs);
     }

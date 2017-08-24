@@ -38,7 +38,7 @@ final class TemplateLocator implements TemplateLocatorInterface
     /**
      * {@inheritdoc}
      */
-    public function locateTemplate(TemplateReferenceInterface $template, ThemeInterface $theme)
+    public function locateTemplate(TemplateReferenceInterface $template, ThemeInterface $theme): string
     {
         return $this->resourceLocator->locateResource($template->getPath(), $theme);
     }

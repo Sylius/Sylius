@@ -23,7 +23,7 @@ final class CircularDependencyChecker implements CircularDependencyCheckerInterf
     /**
      * {@inheritdoc}
      */
-    public function check(ThemeInterface $theme, array $previousThemes = [])
+    public function check(ThemeInterface $theme, array $previousThemes = []): void
     {
         if (0 === count($theme->getParents())) {
             return;

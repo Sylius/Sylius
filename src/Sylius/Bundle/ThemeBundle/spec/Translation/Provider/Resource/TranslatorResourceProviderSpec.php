@@ -23,17 +23,12 @@ use Sylius\Bundle\ThemeBundle\Translation\Resource\TranslationResource;
  */
 final class TranslatorResourceProviderSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(TranslatorResourceProvider::class);
-    }
-
-    function it_implements_translation_resource_provider_interface()
+    function it_implements_translation_resource_provider_interface(): void
     {
         $this->shouldImplement(TranslatorResourceProviderInterface::class);
     }
 
-    function it_transforms_previously_received_paths_into_translation_resources()
+    function it_transforms_previously_received_paths_into_translation_resources(): void
     {
         $this->beConstructedWith([
             'messages.en.yml',
@@ -46,7 +41,7 @@ final class TranslatorResourceProviderSpec extends ObjectBehavior
         ]);
     }
 
-    function it_extracts_unique_locales_from_received_paths()
+    function it_extracts_unique_locales_from_received_paths(): void
     {
         $this->beConstructedWith([
             'messages.en.yml',

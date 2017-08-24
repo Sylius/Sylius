@@ -21,20 +21,20 @@ interface TranslationResourceInterface
     /**
      * @return string
      */
-    public function getName();
+    public function getName(): string;
 
     /**
      * @return string
      */
-    public function getLocale();
+    public function getLocale(): string;
 
     /**
      * @return string
      */
-    public function getFormat();
+    public function getFormat(): string;
 
     /**
      * @return string
      */
-    public function getDomain();
+    public function getDomain(): string;
 }

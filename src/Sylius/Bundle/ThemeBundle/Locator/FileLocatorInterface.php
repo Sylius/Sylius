@@ -25,7 +25,7 @@ interface FileLocatorInterface
      *
      * @throws \InvalidArgumentException If name is not valid or file was not found
      */
-    public function locateFileNamed($name);
+    public function locateFileNamed(string $name): string;
 
     /**
      * @param string $name
@@ -34,5 +34,5 @@ interface FileLocatorInterface
      *
      * @throws \InvalidArgumentException If name is not valid or files were not found
      */
-    public function locateFilesNamed($name);
+    public function locateFilesNamed(string $name): array;
 }

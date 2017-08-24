@@ -47,7 +47,7 @@ final class BundleResourceLocator implements ResourceLocatorInterface
      *
      * @param string $resourcePath Eg. "@AcmeBundle/Resources/views/template.html.twig"
      */
-    public function locateResource($resourcePath, ThemeInterface $theme)
+    public function locateResource(string $resourcePath, ThemeInterface $theme): string
     {
         $this->assertResourcePathIsValid($resourcePath);
 
@@ -69,9 +69,9 @@ final class BundleResourceLocator implements ResourceLocatorInterface
     /**
      * @param string $resourcePath
      */
-    private function assertResourcePathIsValid($resourcePath)
+    private function assertResourcePathIsValid(string $resourcePath): void
     {
-        if ('@' !== substr($resourcePath, 0, 1)) {
+        if (0 !== strpos($resourcePath, '@')) {
             throw new \InvalidArgumentException(sprintf('Bundle resource path (given "%s") should start with an "@".', $resourcePath));
         }
 
@@ -89,7 +89,7 @@ final class BundleResourceLocator implements ResourceLocatorInterface
      *
      * @return string
      */
-    private function getBundleNameFromResourcePath($resourcePath)
+    private function getBundleNameFromResourcePath(string $resourcePath): string
     {
         return substr($resourcePath, 1, strpos($resourcePath, '/') - 1);
     }
@@ -99,7 +99,7 @@ final class BundleResourceLocator implements ResourceLocatorInterface
      *
      * @return string
      */
-    private function getResourceNameFromResourcePath($resourcePath)
+    private function getResourceNameFromResourcePath(string $resourcePath): string
     {
         return substr($resourcePath, strpos($resourcePath, 'Resources/') + strlen('Resources/'));
     }

@@ -24,7 +24,7 @@ final class TranslatorFallbackLocalesPass implements CompilerPassInterface
     /**
      * {@inheritdoc}
      */
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         try {
             $symfonyTranslator = $container->findDefinition('translator.default');
@@ -33,7 +33,7 @@ final class TranslatorFallbackLocalesPass implements CompilerPassInterface
             return;
         }
 
-        $methodCalls = array_filter($symfonyTranslator->getMethodCalls(), function (array $methodCall) {
+        $methodCalls = array_filter($symfonyTranslator->getMethodCalls(), function (array $methodCall): bool {
             return 'setFallbackLocales' === $methodCall[0];
         });
 

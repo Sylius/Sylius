@@ -37,7 +37,7 @@ final class TemplateNameParser implements TemplateNameParserInterface
     private $kernel;
 
     /**
-     * @var TemplateReferenceInterface[]
+     * @var array|TemplateReferenceInterface[]
      */
     private $cache = [];
 
@@ -54,11 +54,13 @@ final class TemplateNameParser implements TemplateNameParserInterface
     /**
      * {@inheritdoc}
      */
-    public function parse($name)
+    public function parse($name): TemplateReferenceInterface
     {
         if ($name instanceof TemplateReferenceInterface) {
             return $name;
-        } elseif (isset($this->cache[$name])) {
+        }
+
+        if (isset($this->cache[$name])) {
             return $this->cache[$name];
         }
 

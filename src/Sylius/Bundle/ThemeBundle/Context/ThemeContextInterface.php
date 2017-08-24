@@ -25,5 +25,5 @@ interface ThemeContextInterface
      *
      * @return ThemeInterface|null
      */
-    public function getTheme();
+    public function getTheme(): ?ThemeInterface;
 }

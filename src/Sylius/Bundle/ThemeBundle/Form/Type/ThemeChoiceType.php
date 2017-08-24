@@ -41,13 +41,13 @@ final class ThemeChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'choices' => function (Options $options) {
+            'choices' => function (Options $options): array {
                 return $this->themeRepository->findAll();
             },
-            'choice_label' => function (ThemeInterface $theme) {
+            'choice_label' => function (ThemeInterface $theme): string {
                 return (string) $theme;
             },
         ]);
@@ -56,7 +56,7 @@ final class ThemeChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getParent()
+    public function getParent(): string
     {
         return ChoiceType::class;
     }
@@ -64,7 +64,7 @@ final class ThemeChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_theme_choice';
     }

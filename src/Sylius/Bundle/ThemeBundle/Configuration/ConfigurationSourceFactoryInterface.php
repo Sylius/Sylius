@@ -26,7 +26,7 @@ interface ConfigurationSourceFactoryInterface
     /**
      * @param ArrayNodeDefinition $node
      */
-    public function buildConfiguration(ArrayNodeDefinition $node);
+    public function buildConfiguration(ArrayNodeDefinition $node): void;
 
     /**
      * @see ConfigurationProviderInterface
@@ -41,5 +41,5 @@ interface ConfigurationSourceFactoryInterface
     /**
      * @return string
      */
-    public function getName();
+    public function getName(): string;
 }

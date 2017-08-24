@@ -78,7 +78,7 @@ final class AssetsInstaller implements AssetsInstallerInterface
     /**
      * {@inheritdoc}
      */
-    public function installAssets($targetDir, $symlinkMask)
+    public function installAssets(string $targetDir, int $symlinkMask): int
     {
         // Create the bundles directory otherwise symlink will fail.
         $targetDir = rtrim($targetDir, '/').'/bundles/';
@@ -95,7 +95,7 @@ final class AssetsInstaller implements AssetsInstallerInterface
     /**
      * {@inheritdoc}
      */
-    public function installBundleAssets(BundleInterface $bundle, $targetDir, $symlinkMask)
+    public function installBundleAssets(BundleInterface $bundle, string $targetDir, int $symlinkMask): int
     {
         $targetDir .= preg_replace('/bundle$/', '', strtolower($bundle->getName()));
 
@@ -131,7 +131,7 @@ final class AssetsInstaller implements AssetsInstallerInterface
      *
      * @return int
      */
-    private function installThemedBundleAssets(ThemeInterface $theme, $originDir, $targetDir, $symlinkMask)
+    private function installThemedBundleAssets(ThemeInterface $theme, string $originDir, string $targetDir, int $symlinkMask): int
     {
         $effectiveSymlinkMask = $symlinkMask;
 
@@ -165,7 +165,7 @@ final class AssetsInstaller implements AssetsInstallerInterface
      *
      * @return int
      */
-    private function installVanillaBundleAssets($originDir, $targetDir, $symlinkMask)
+    private function installVanillaBundleAssets(string $originDir, string $targetDir, int $symlinkMask): int
     {
         return $this->installAsset($originDir, $targetDir, $symlinkMask);
     }
@@ -177,7 +177,7 @@ final class AssetsInstaller implements AssetsInstallerInterface
      *
      * @return int
      */
-    private function installAsset($origin, $target, $symlinkMask)
+    private function installAsset(string $origin, string $target, int $symlinkMask): int
     {
         if (AssetsInstallerInterface::RELATIVE_SYMLINK === $symlinkMask) {
             try {
@@ -214,7 +214,7 @@ final class AssetsInstaller implements AssetsInstallerInterface
      *
      * @throws IOException When failed to make symbolic link, if requested.
      */
-    private function doInstallAsset($origin, $target, $symlink)
+    private function doInstallAsset(string $origin, string $target, bool $symlink): void
     {
         if ($symlink) {
             $this->doSymlinkAsset($origin, $target);
@@ -227,11 +227,11 @@ final class AssetsInstaller implements AssetsInstallerInterface
 
     /**
      * @param BundleInterface $bundle
-     * @param ThemeInterface[] $themes
+     * @param array|ThemeInterface[] $themes
      *
      * @return array
      */
-    private function findAssetsPaths(BundleInterface $bundle, array $themes = [])
+    private function findAssetsPaths(BundleInterface $bundle, array $themes = []): array
     {
         $sources = [];
 
@@ -256,7 +256,7 @@ final class AssetsInstaller implements AssetsInstallerInterface
      *
      * @throws IOException If symbolic link is broken
      */
-    private function doSymlinkAsset($origin, $target)
+    private function doSymlinkAsset(string $origin, string $target): void
     {
         $this->filesystem->symlink($origin, $target);
 
@@ -269,7 +269,7 @@ final class AssetsInstaller implements AssetsInstallerInterface
      * @param string $origin
      * @param string $target
      */
-    private function doCopyAsset($origin, $target)
+    private function doCopyAsset(string $origin, string $target): void
     {
         if (is_dir($origin)) {
             $this->filesystem->mkdir($target, 0777);

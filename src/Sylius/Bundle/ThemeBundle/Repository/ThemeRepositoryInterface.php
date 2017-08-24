@@ -21,21 +21,21 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 interface ThemeRepositoryInterface
 {
     /**
-     * @return ThemeInterface[]
+     * @return array|ThemeInterface[]
      */
-    public function findAll();
+    public function findAll(): array;
 
     /**
      * @param string $name
      *
      * @return ThemeInterface|null
      */
-    public function findOneByName($name);
+    public function findOneByName(string $name): ?ThemeInterface;
 
     /**
      * @param string $title
      *
      * @return ThemeInterface|null
      */
-    public function findOneByTitle($title);
+    public function findOneByTitle(string $title): ?ThemeInterface;
 }
