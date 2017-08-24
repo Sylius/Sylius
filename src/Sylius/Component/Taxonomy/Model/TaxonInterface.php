@@ -27,112 +27,107 @@ interface TaxonInterface extends CodeAwareInterface, TranslatableInterface, Reso
     /**
      * @return bool
      */
-    public function isRoot();
+    public function isRoot(): bool;
 
     /**
-     * @return TaxonInterface
+     * @return TaxonInterface|null
      */
-    public function getRoot();
+    public function getRoot(): ?TaxonInterface;
 
     /**
-     * @return TaxonInterface
+     * @return TaxonInterface|null
      */
-    public function getParent();
+    public function getParent(): ?TaxonInterface;
 
     /**
-     * @param null|TaxonInterface $taxon
+     * @param TaxonInterface|null $taxon
      */
-    public function setParent(TaxonInterface $taxon = null);
-
-    /**
-     * @return TaxonInterface[]
-     */
-    public function getParents();
+    public function setParent(?TaxonInterface $taxon): void;
 
     /**
      * @return Collection|TaxonInterface[]
      */
-    public function getChildren();
+    public function getChildren(): Collection;
 
     /**
      * @param TaxonInterface $taxon
      *
      * @return bool
      */
-    public function hasChild(TaxonInterface $taxon);
+    public function hasChild(TaxonInterface $taxon): bool;
 
     /**
      * @return bool
      */
-    public function hasChildren();
+    public function hasChildren(): bool;
 
     /**
      * @param TaxonInterface $taxon
      */
-    public function addChild(TaxonInterface $taxon);
+    public function addChild(TaxonInterface $taxon): void;
 
     /**
      * @param TaxonInterface $taxon
      */
-    public function removeChild(TaxonInterface $taxon);
+    public function removeChild(TaxonInterface $taxon): void;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getName();
+    public function getName(): ?string;
 
     /**
-     * @param string $name
+     * @param string|null $name
      */
-    public function setName($name);
+    public function setName(?string $name): void;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getDescription();
+    public function getDescription(): ?string;
 
     /**
-     * @param string $description
+     * @param string|null $description
      */
-    public function setDescription($description);
+    public function setDescription(?string $description): void;
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getLeft();
+    public function getLeft(): ?int;
 
     /**
-     * @param int $left
+     * @param int|null $left
      */
-    public function setLeft($left);
+    public function setLeft(?int $left): void;
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getRight();
+    public function getRight(): ?int;
 
     /**
-     * @param int $right
+     * @param int|null $right
      */
-    public function setRight($right);
+    public function setRight(?int $right): void;
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getLevel();
+    public function getLevel(): ?int;
 
     /**
-     * @param int $level
+     * @param int|null $level
      */
-    public function setLevel($level);
+    public function setLevel(?int $level): void;
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getPosition();
+    public function getPosition(): ?int;
 
     /**
-     * @param int $position
+     * @param int|null $position
      */
-    public function setPosition($position);
+    public function setPosition(?int $position): void;
 }

@@ -26,5 +26,5 @@ interface TaxonFactoryInterface extends FactoryInterface
      *
      * @return TaxonInterface
      */
-    public function createForParent(TaxonInterface $parent);
+    public function createForParent(TaxonInterface $parent): TaxonInterface;
 }
