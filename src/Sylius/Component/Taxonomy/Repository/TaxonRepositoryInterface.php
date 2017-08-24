@@ -29,14 +29,14 @@ interface TaxonRepositoryInterface extends RepositoryInterface
      * @param string $parentCode
      * @param string|null $locale
      *
-     * @return TaxonInterface[]
+     * @return array|TaxonInterface[]
      */
-    public function findChildren($parentCode, $locale = null);
+    public function findChildren(string $parentCode, ?string $locale = null): array;
 
     /**
-     * @return TaxonInterface[]
+     * @return array|TaxonInterface[]
      */
-    public function findRootNodes();
+    public function findRootNodes(): array;
 
     /**
      * @param string $slug
@@ -44,26 +44,26 @@ interface TaxonRepositoryInterface extends RepositoryInterface
      *
      * @return TaxonInterface|null
      */
-    public function findOneBySlug($slug, $locale);
+    public function findOneBySlug(string $slug, string $locale): ?TaxonInterface;
 
     /**
      * @param string $name
      * @param string $locale
      *
-     * @return TaxonInterface[]
+     * @return array|TaxonInterface[]
      */
-    public function findByName($name, $locale);
+    public function findByName(string $name, string $locale): array;
 
     /**
      * @param string $phrase
      * @param string|null $locale
      *
-     * @return TaxonInterface[]
+     * @return array|TaxonInterface[]
      */
-    public function findByNamePart($phrase, $locale = null);
+    public function findByNamePart(string $phrase, ?string $locale = null): array;
 
     /**
      * @return QueryBuilder
      */
-    public function createListQueryBuilder();
+    public function createListQueryBuilder(): QueryBuilder;
 }

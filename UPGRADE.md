@@ -80,6 +80,10 @@
   * `TranslationInterface::setTranslatable`
   * `Archivable::setArchivedAt`
   * `SlugAwareInterface::setSlug`
+  
+### Taxonomy / TaxonomyBundle
+
+* `TaxonInterface::getParents` method was removed (taxon has at most one parent).
 
 ### Shipping / ShippingBundle
 

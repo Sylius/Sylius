@@ -19,6 +19,7 @@ use Sylius\Component\Taxonomy\Generator\TaxonSlugGeneratorInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 final class TaxonSlugController
 {
@@ -44,9 +45,9 @@ final class TaxonSlugController
     /**
      * @param Request $request
      *
-     * @return JsonResponse
+     * @return Response
      */
-    public function generateAction(Request $request)
+    public function generateAction(Request $request): Response
     {
         $name = $request->query->get('name');
         $locale = $request->query->get('locale');
