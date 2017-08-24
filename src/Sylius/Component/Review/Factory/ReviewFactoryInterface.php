@@ -36,5 +36,5 @@ interface ReviewFactoryInterface extends FactoryInterface
      *
      * @return ReviewInterface
      */
-    public function createForSubjectWithReviewer(ReviewableInterface $subject, ?ReviewerInterface $reviewer = null): ReviewInterface;
+    public function createForSubjectWithReviewer(ReviewableInterface $subject, ?ReviewerInterface $reviewer): ReviewInterface;
 }

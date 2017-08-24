@@ -59,7 +59,7 @@ final class ReviewFactory implements ReviewFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createForSubjectWithReviewer(ReviewableInterface $subject, ?ReviewerInterface $reviewer = null): ReviewInterface
+    public function createForSubjectWithReviewer(ReviewableInterface $subject, ?ReviewerInterface $reviewer): ReviewInterface
     {
         /** @var ReviewInterface $review */
         $review = $this->createForSubject($subject);

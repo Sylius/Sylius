@@ -41,9 +41,9 @@ interface ReviewableInterface
     public function removeReview(ReviewInterface $review): void;
 
     /**
-     * @return float
+     * @return float|null
      */
-    public function getAverageRating(): float;
+    public function getAverageRating(): ?float;
 
     /**
      * @param float $averageRating

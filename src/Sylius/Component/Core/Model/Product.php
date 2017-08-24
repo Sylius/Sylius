@@ -284,7 +284,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function getAverageRating(): float
+    public function getAverageRating(): ?float
     {
         return $this->averageRating;
     }
