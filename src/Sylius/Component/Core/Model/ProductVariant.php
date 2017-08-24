@@ -137,7 +137,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function isInStock()
+    public function isInStock(): bool
     {
         return 0 < $this->onHand;
     }
@@ -145,7 +145,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function getOnHold()
+    public function getOnHold(): ?int
     {
         return $this->onHold;
     }
@@ -153,7 +153,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function setOnHold($onHold)
+    public function setOnHold(?int $onHold): void
     {
         $this->onHold = $onHold;
     }
@@ -161,7 +161,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function getOnHand()
+    public function getOnHand(): ?int
     {
         return $this->onHand;
     }
@@ -169,7 +169,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function setOnHand($onHand)
+    public function setOnHand(?int $onHand): void
     {
         $this->onHand = (0 > $onHand) ? 0 : $onHand;
     }
@@ -177,7 +177,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function isTracked()
+    public function isTracked(): bool
     {
         return $this->tracked;
     }
@@ -185,17 +185,15 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function setTracked($tracked)
+    public function setTracked(bool $tracked): void
     {
-        Assert::boolean($tracked);
-
         $this->tracked = $tracked;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getInventoryName()
+    public function getInventoryName(): ?string
     {
         return $this->getProduct()->getName();
     }
