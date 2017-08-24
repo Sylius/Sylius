@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\PayumBundle\Provider;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Sylius\Bundle\PayumBundle\Provider\PaymentDescriptionProvider;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItem;
 use Sylius\Component\Core\Model\PaymentInterface;
@@ -18,7 +16,7 @@ use Symfony\Component\Translation\TranslatorInterface;
  */
 final class PaymentDescriptionProviderSpec extends ObjectBehavior
 {
-    function let(TranslatorInterface $translator)
+    function let(TranslatorInterface $translator): void
     {
         $translator->transChoice('sylius.payum_action.payment.description', 2, [
             '%items%' => 2,
@@ -28,12 +26,7 @@ final class PaymentDescriptionProviderSpec extends ObjectBehavior
         $this->beConstructedWith($translator);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(PaymentDescriptionProvider::class);
-    }
-
-    function it_should_generate_a_description_string(PaymentInterface $payment, OrderInterface $order)
+    function it_should_generate_a_description_string(PaymentInterface $payment, OrderInterface $order): void
     {
         $order->getItems()->willReturn(new ArrayCollection([new OrderItem(), new OrderItem()]));
         $order->getTotal()->willReturn(10000);

@@ -19,7 +19,6 @@ use Payum\Core\Request\Capture;
 use Payum\Core\Request\Convert;
 use Payum\Offline\Constants;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\PayumBundle\Action\Offline\ConvertPaymentAction;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 
 /**
@@ -27,17 +26,12 @@ use Sylius\Component\Payment\Model\PaymentMethodInterface;
  */
 final class ConvertPaymentActionSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ConvertPaymentAction::class);
-    }
-
-    function it_is_payum_action()
+    function it_is_payum_action(): void
     {
         $this->shouldImplement(ActionInterface::class);
     }
 
-    function it_converts_payment_to_offline_action(Convert $request, PaymentInterface $payment)
+    function it_converts_payment_to_offline_action(Convert $request, PaymentInterface $payment): void
     {
         $request->getTo()->willReturn('array');
         $request->getSource()->willReturn($payment);
@@ -53,7 +47,7 @@ final class ConvertPaymentActionSpec extends ObjectBehavior
         Convert $convertRequest,
         Capture $captureRequest,
         PaymentInterface $payment
-    ) {
+    ): void {
         $convertRequest->getTo()->willReturn('array');
         $convertRequest->getSource()->willReturn($payment);
 
@@ -66,7 +60,7 @@ final class ConvertPaymentActionSpec extends ObjectBehavior
         Convert $fromPaymentToArrayRequest,
         PaymentInterface $payment,
         PaymentMethodInterface $method
-    ) {
+    ): void {
         $fromPaymentToArrayRequest->getTo()->willReturn('array');
         $fromPaymentToArrayRequest->getSource()->willReturn($payment);
 

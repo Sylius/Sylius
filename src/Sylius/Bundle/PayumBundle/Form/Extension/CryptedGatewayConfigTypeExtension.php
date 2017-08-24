@@ -34,7 +34,7 @@ final class CryptedGatewayConfigTypeExtension extends AbstractTypeExtension
     /**
      * @param CypherInterface|null $cypher
      */
-    public function __construct(CypherInterface $cypher = null)
+    public function __construct(?CypherInterface $cypher = null)
     {
         $this->cypher = $cypher;
     }
@@ -42,7 +42,7 @@ final class CryptedGatewayConfigTypeExtension extends AbstractTypeExtension
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         if (null === $this->cypher) {
             return;
@@ -77,7 +77,7 @@ final class CryptedGatewayConfigTypeExtension extends AbstractTypeExtension
     /**
      * {@inheritdoc}
      */
-    public function getExtendedType()
+    public function getExtendedType(): string
     {
         return GatewayConfigType::class;
     }

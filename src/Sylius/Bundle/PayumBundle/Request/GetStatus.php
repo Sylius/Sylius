@@ -21,7 +21,7 @@ class GetStatus extends BaseGetStatus
     /**
      * {@inheritdoc}
      */
-    public function markNew()
+    public function markNew(): void
     {
         $this->status = PaymentInterface::STATE_NEW;
     }
@@ -29,7 +29,7 @@ class GetStatus extends BaseGetStatus
     /**
      * {@inheritdoc}
      */
-    public function isNew()
+    public function isNew(): bool
     {
         return $this->status === PaymentInterface::STATE_NEW;
     }

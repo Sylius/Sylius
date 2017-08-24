@@ -38,7 +38,7 @@ final class PaymentDescriptionProvider implements PaymentDescriptionProviderInte
     /**
      * {@inheritdoc}
      */
-    public function getPaymentDescription(PaymentInterface $payment)
+    public function getPaymentDescription(PaymentInterface $payment): string
     {
         /** @var OrderInterface $order */
         $order = $payment->getOrder();

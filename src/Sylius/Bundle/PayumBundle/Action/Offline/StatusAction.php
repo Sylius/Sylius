@@ -27,7 +27,7 @@ final class StatusAction implements ActionInterface
     /**
      * {@inheritdoc}
      */
-    public function execute($request)
+    public function execute($request): void
     {
         /** @var $request GetStatusInterface */
         RequestNotSupportedException::assertSupports($this, $request);
@@ -70,7 +70,7 @@ final class StatusAction implements ActionInterface
     /**
      * {@inheritdoc}
      */
-    public function supports($request)
+    public function supports($request): bool
     {
         return
             $request instanceof GetStatusInterface &&
