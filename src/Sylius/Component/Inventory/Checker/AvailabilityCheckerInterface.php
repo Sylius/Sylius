@@ -25,7 +25,7 @@ interface AvailabilityCheckerInterface
      *
      * @return bool
      */
-    public function isStockAvailable(StockableInterface $stockable);
+    public function isStockAvailable(StockableInterface $stockable): bool;
 
     /**
      * @param StockableInterface $stockable
@@ -33,5 +33,5 @@ interface AvailabilityCheckerInterface
      *
      * @return bool
      */
-    public function isStockSufficient(StockableInterface $stockable, $quantity);
+    public function isStockSufficient(StockableInterface $stockable, int $quantity): bool;
 }

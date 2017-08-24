@@ -40,7 +40,7 @@ class InventoryUnit implements InventoryUnitInterface
     /**
      * {@inheritdoc}
      */
-    public function getStockable()
+    public function getStockable(): ?StockableInterface
     {
         return $this->stockable;
     }
@@ -48,7 +48,7 @@ class InventoryUnit implements InventoryUnitInterface
     /**
      * @param StockableInterface $stockable
      */
-    public function setStockable(StockableInterface $stockable)
+    public function setStockable(StockableInterface $stockable): void
     {
         $this->stockable = $stockable;
     }
