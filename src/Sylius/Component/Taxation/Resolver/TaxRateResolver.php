@@ -15,6 +15,7 @@ namespace Sylius\Component\Taxation\Resolver;
 
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxation\Model\TaxableInterface;
+use Sylius\Component\Taxation\Model\TaxRateInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -37,7 +38,7 @@ class TaxRateResolver implements TaxRateResolverInterface
     /**
      * {@inheritdoc}
      */
-    public function resolve(TaxableInterface $taxable, array $criteria = [])
+    public function resolve(TaxableInterface $taxable, array $criteria = []): ?TaxRateInterface
     {
         if (null === $category = $taxable->getTaxCategory()) {
             return null;

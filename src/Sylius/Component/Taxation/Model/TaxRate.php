@@ -45,7 +45,7 @@ class TaxRate implements TaxRateInterface
     /**
      * @var float
      */
-    protected $amount = 0;
+    protected $amount = 0.0;
 
     /**
      * @var bool
@@ -89,7 +89,7 @@ class TaxRate implements TaxRateInterface
     /**
      * {@inheritdoc}
      */
-    public function getCategory()
+    public function getCategory(): ?TaxCategoryInterface
     {
         return $this->category;
     }
@@ -97,7 +97,7 @@ class TaxRate implements TaxRateInterface
     /**
      * {@inheritdoc}
      */
-    public function setCategory(TaxCategoryInterface $category = null)
+    public function setCategory(?TaxCategoryInterface $category): void
     {
         $this->category = $category;
     }
@@ -105,7 +105,7 @@ class TaxRate implements TaxRateInterface
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -113,7 +113,7 @@ class TaxRate implements TaxRateInterface
     /**
      * {@inheritdoc}
      */
-    public function setName($name)
+    public function setName(?string $name): void
     {
         $this->name = $name;
     }
@@ -121,7 +121,7 @@ class TaxRate implements TaxRateInterface
     /**
      * {@inheritdoc}
      */
-    public function getAmount()
+    public function getAmount(): float
     {
         return $this->amount;
     }
@@ -129,7 +129,7 @@ class TaxRate implements TaxRateInterface
     /**
      * {@inheritdoc}
      */
-    public function getAmountAsPercentage()
+    public function getAmountAsPercentage(): float
     {
         return $this->amount * 100;
     }
@@ -137,7 +137,7 @@ class TaxRate implements TaxRateInterface
     /**
      * {@inheritdoc}
      */
-    public function setAmount($amount)
+    public function setAmount(?float $amount): void
     {
         $this->amount = $amount;
     }
@@ -145,7 +145,7 @@ class TaxRate implements TaxRateInterface
     /**
      * {@inheritdoc}
      */
-    public function isIncludedInPrice()
+    public function isIncludedInPrice(): bool
     {
         return $this->includedInPrice;
     }
@@ -153,15 +153,15 @@ class TaxRate implements TaxRateInterface
     /**
      * {@inheritdoc}
      */
-    public function setIncludedInPrice($includedInPrice)
+    public function setIncludedInPrice(?bool $includedInPrice): void
     {
-        $this->includedInPrice = (bool) $includedInPrice;
+        $this->includedInPrice = $includedInPrice;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getCalculator()
+    public function getCalculator(): ?string
     {
         return $this->calculator;
     }
@@ -169,15 +169,15 @@ class TaxRate implements TaxRateInterface
     /**
      * {@inheritdoc}
      */
-    public function setCalculator($calculator)
+    public function setCalculator(?string $calculator): void
     {
         $this->calculator = $calculator;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getLabel()
+    public function getLabel(): string
     {
         return sprintf('%s (%s%%)', $this->name, (float) $this->getAmountAsPercentage());
     }

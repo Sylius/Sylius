@@ -24,7 +24,7 @@ interface TaxCategoryRepositoryInterface extends RepositoryInterface
     /**
      * @param string $name
      *
-     * @return TaxCategoryInterface[]
+     * @return array|TaxCategoryInterface[]
      */
-    public function findByName($name);
+    public function findByName(string $name): array;
 }

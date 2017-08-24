@@ -74,7 +74,7 @@ class OrderShipmentTaxesApplicator implements OrderTaxesApplicatorInterface
         }
 
         $taxAmount = $this->calculator->calculate($shippingTotal, $taxRate);
-        if (0 === $taxAmount) {
+        if (0.00 === $taxAmount) {
             return;
         }
 
