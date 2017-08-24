@@ -45,7 +45,7 @@ class MenuBuilderEvent extends Event
     /**
      * @return FactoryInterface
      */
-    public function getFactory()
+    public function getFactory(): FactoryInterface
     {
         return $this->factory;
     }
@@ -53,7 +53,7 @@ class MenuBuilderEvent extends Event
     /**
      * @return ItemInterface
      */
-    public function getMenu()
+    public function getMenu(): ItemInterface
     {
         return $this->menu;
     }

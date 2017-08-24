@@ -21,12 +21,12 @@ use Sylius\Bundle\UiBundle\Twig\PercentageExtension;
  */
 final class PercentageExtensionSpec extends ObjectBehavior
 {
-    function it_is_twig_extension()
+    function it_is_twig_extension(): void
     {
         $this->shouldHaveType(\Twig_Extension::class);
     }
 
-    function it_returns_float_number_as_percentage()
+    function it_returns_float_number_as_percentage(): void
     {
         $this->getPercentage(0.112)->shouldReturn('11.2 %');
     }
