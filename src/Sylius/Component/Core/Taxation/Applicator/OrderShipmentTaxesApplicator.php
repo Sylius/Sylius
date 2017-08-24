@@ -78,7 +78,7 @@ class OrderShipmentTaxesApplicator implements OrderTaxesApplicatorInterface
             return;
         }
 
-        $this->addAdjustment($order, $taxAmount, $taxRate->getLabel(), $taxRate->isIncludedInPrice());
+        $this->addAdjustment($order, (int) $taxAmount, $taxRate->getLabel(), $taxRate->isIncludedInPrice());
     }
 
     /**

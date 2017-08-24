@@ -31,7 +31,7 @@ interface TaxCategoryInterface extends CodeAwareInterface, TimestampableInterfac
     /**
      * @param string|null $name
      */
-    public function setName(string $name): void;
+    public function setName(?string $name): void;
 
     /**
      * @return string|null

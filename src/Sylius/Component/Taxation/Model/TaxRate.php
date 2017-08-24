@@ -123,7 +123,7 @@ class TaxRate implements TaxRateInterface
      */
     public function getAmount(): float
     {
-        return $this->amount;
+        return (float) $this->amount;
     }
 
     /**
@@ -177,7 +177,7 @@ class TaxRate implements TaxRateInterface
     /**
      * @return string|null
      */
-    public function getLabel(): string
+    public function getLabel(): ?string
     {
         return sprintf('%s (%s%%)', $this->name, (float) $this->getAmountAsPercentage());
     }
