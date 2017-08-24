@@ -21,27 +21,27 @@ use Doctrine\Common\Collections\Collection;
 interface ShippingSubjectInterface
 {
     /**
-     * @return int
+     * @return float
      */
-    public function getShippingWeight();
+    public function getShippingWeight(): float;
+
+    /**
+     * @return float
+     */
+    public function getShippingVolume(): float;
 
     /**
      * @return int
      */
-    public function getShippingVolume();
+    public function getShippingUnitCount(): int;
 
     /**
      * @return int
      */
-    public function getShippingUnitCount();
-
-    /**
-     * @return int
-     */
-    public function getShippingUnitTotal();
+    public function getShippingUnitTotal(): int;
 
     /**
      * @return Collection|ShippableInterface[]
      */
-    public function getShippables();
+    public function getShippables(): Collection;
 }

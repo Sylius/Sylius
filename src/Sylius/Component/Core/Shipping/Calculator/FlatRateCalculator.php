@@ -29,7 +29,7 @@ final class FlatRateCalculator implements CalculatorInterface
      *
      * @throws MissingChannelConfigurationException
      */
-    public function calculate(BaseShipmentInterface $subject, array $configuration)
+    public function calculate(BaseShipmentInterface $subject, array $configuration): int
     {
         Assert::isInstanceOf($subject, ShipmentInterface::class);
 
@@ -49,7 +49,7 @@ final class FlatRateCalculator implements CalculatorInterface
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType(): string
     {
         return 'flat_rate';
     }

@@ -26,10 +26,10 @@ interface CalculatorInterface
      *
      * @return int
      */
-    public function calculate(ShipmentInterface $subject, array $configuration);
+    public function calculate(ShipmentInterface $subject, array $configuration): int;
 
     /**
      * @return string
      */
-    public function getType();
+    public function getType(): string;
 }

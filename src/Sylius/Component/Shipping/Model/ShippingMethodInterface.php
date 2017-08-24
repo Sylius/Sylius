@@ -36,24 +36,24 @@ interface ShippingMethodInterface extends
     public const CATEGORY_REQUIREMENT_MATCH_ALL = 2;
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getPosition();
+    public function getPosition(): ?int;
 
     /**
-     * @param int $position
+     * @param int|null $position
      */
-    public function setPosition($position);
+    public function setPosition(?int $position): void;
 
     /**
-     * @return null|ShippingCategoryInterface
+     * @return ShippingCategoryInterface|null
      */
-    public function getCategory();
+    public function getCategory(): ?ShippingCategoryInterface;
 
     /**
-     * @param null|ShippingCategoryInterface $category
+     * @param ShippingCategoryInterface|null $category
      */
-    public function setCategory(ShippingCategoryInterface $category = null);
+    public function setCategory(?ShippingCategoryInterface $category);
 
     /**
      * Get the one of matching requirements.
@@ -63,37 +63,37 @@ interface ShippingMethodInterface extends
      * 2) At least one of shippables matches the category.
      * 3) All shippables have to match the method category.
      *
-     * @return int
+     * @return int|null
      */
-    public function getCategoryRequirement();
+    public function getCategoryRequirement(): ?int;
 
     /**
-     * @param int $categoryRequirement
+     * @param int|null $categoryRequirement
      */
-    public function setCategoryRequirement($categoryRequirement);
-
-    /**
-     * @return string
-     */
-    public function getCategoryRequirementLabel();
+    public function setCategoryRequirement(?int $categoryRequirement): void;
 
     /**
      * @return string
      */
-    public function getCalculator();
+    public function getCategoryRequirementLabel(): string;
+
+    /**
+     * @return string
+     */
+    public function getCalculator(): ?string;
 
     /**
      * @param string $calculator
      */
-    public function setCalculator($calculator);
+    public function setCalculator(?string $calculator): void;
 
     /**
      * @return array
      */
-    public function getConfiguration();
+    public function getConfiguration(): array;
 
     /**
      * @param array $configuration
      */
-    public function setConfiguration(array $configuration);
+    public function setConfiguration(array $configuration): void;
 }

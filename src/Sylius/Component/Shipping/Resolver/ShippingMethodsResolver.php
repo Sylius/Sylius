@@ -47,7 +47,7 @@ final class ShippingMethodsResolver implements ShippingMethodsResolverInterface
     /**
      * {@inheritdoc}
      */
-    public function getSupportedMethods(ShippingSubjectInterface $subject)
+    public function getSupportedMethods(ShippingSubjectInterface $subject): array
     {
         $methods = [];
 
@@ -63,7 +63,7 @@ final class ShippingMethodsResolver implements ShippingMethodsResolverInterface
     /**
      * {@inheritdoc}
      */
-    public function supports(ShippingSubjectInterface $subject)
+    public function supports(ShippingSubjectInterface $subject): bool
     {
         return true;
     }

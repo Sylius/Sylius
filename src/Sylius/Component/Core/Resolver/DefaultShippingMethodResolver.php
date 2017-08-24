@@ -14,10 +14,11 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\Resolver;
 
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ShipmentInterface as CoreShipmentInterface;
 use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
 use Sylius\Component\Shipping\Exception\UnresolvedDefaultShippingMethodException;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
-use Sylius\Component\Core\Model\ShipmentInterface as CoreShipmentInterface;
+use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface;
 use Webmozart\Assert\Assert;
 
@@ -42,7 +43,7 @@ class DefaultShippingMethodResolver implements DefaultShippingMethodResolverInte
     /**
      * {@inheritdoc}
      */
-    public function getDefaultShippingMethod(ShipmentInterface $shipment)
+    public function getDefaultShippingMethod(ShipmentInterface $shipment): ShippingMethodInterface
     {
         /** @var CoreShipmentInterface $shipment */
         Assert::isInstanceOf($shipment, CoreShipmentInterface::class);

@@ -50,9 +50,9 @@ class ShippingCategory implements ShippingCategoryInterface
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
-        return $this->getName();
+        return (string) $this->getName();
     }
 
     /**
@@ -82,7 +82,7 @@ class ShippingCategory implements ShippingCategoryInterface
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -90,7 +90,7 @@ class ShippingCategory implements ShippingCategoryInterface
     /**
      * {@inheritdoc}
      */
-    public function setName($name)
+    public function setName(?string $name): void
     {
         $this->name = $name;
     }
@@ -98,7 +98,7 @@ class ShippingCategory implements ShippingCategoryInterface
     /**
      * {@inheritdoc}
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -106,7 +106,7 @@ class ShippingCategory implements ShippingCategoryInterface
     /**
      * {@inheritdoc}
      */
-    public function setDescription($description)
+    public function setDescription(?string $description): void
     {
         $this->description = $description;
     }

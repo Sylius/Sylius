@@ -16,7 +16,7 @@ namespace Sylius\Component\Shipping\Exception;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class UnresolvedDefaultShippingMethodException extends \Exception
+final class UnresolvedDefaultShippingMethodException extends \Exception
 {
     public function __construct()
     {

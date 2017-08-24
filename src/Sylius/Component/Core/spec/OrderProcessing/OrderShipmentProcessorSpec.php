@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Component\Core\OrderProcessing;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -72,7 +73,7 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
         $shipment->setOrder($order)->shouldBeCalled();
         $shipment->setMethod($defaultShippingMethod)->shouldBeCalled();
 
-        $shipment->getUnits()->willReturn([]);
+        $shipment->getUnits()->willReturn(new ArrayCollection([]));
         $shipment->addUnit($itemUnit1)->shouldBeCalled();
         $shipment->addUnit($itemUnit2)->shouldBeCalled();
 
@@ -131,7 +132,7 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
 
         $itemUnit->getShipment()->willReturn($shipment);
 
-        $shipment->getUnits()->willReturn([]);
+        $shipment->getUnits()->willReturn(new ArrayCollection([]));
         $shipment->addUnit($itemUnitWithoutShipment)->shouldBeCalled();
         $shipment->addUnit($itemUnit)->shouldNotBeCalled();
 
@@ -156,7 +157,7 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
 
         $itemUnit->getShipment()->willReturn($shipment);
 
-        $shipment->getUnits()->willReturn([$itemUnit]);
+        $shipment->getUnits()->willReturn(new ArrayCollection([$itemUnit->getWrappedObject()]));
         $shipment->removeUnit($itemUnit)->shouldBeCalled();
 
         $shipment->addUnit($itemUnitWithoutShipment)->shouldBeCalled();

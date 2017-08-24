@@ -23,7 +23,7 @@ final class PerUnitRateCalculator implements CalculatorInterface
     /**
      * {@inheritdoc}
      */
-    public function calculate(ShipmentInterface $subject, array $configuration)
+    public function calculate(ShipmentInterface $subject, array $configuration): int
     {
         return (int) ($configuration['amount'] * $subject->getShippingUnitCount());
     }
@@ -31,7 +31,7 @@ final class PerUnitRateCalculator implements CalculatorInterface
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType(): string
     {
         return 'per_unit_rate';
     }

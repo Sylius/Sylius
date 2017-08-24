@@ -77,6 +77,16 @@
   * `Archivable::setArchivedAt`
   * `SlugAwareInterface::setSlug`
 
+### Shipping / ShippingBundle
+
+* `UnresolvedDefaultShippingMethodException` has been made final, use decoration instead of extending it.
+* `setShippable(?ShippableInterface $shippable)` has been added to `ShipmentUnitInterface`.
+* The following methods does not longer have a default null argument and requires one to be explicitly passed:
+
+    * `ShipmentInterface::setMethod`
+    * `ShipmentUnitInterface::setShipment`
+    * `ShipmentMethodInterface::setCategory`
+
 # UPGRADE FROM 1.0.0-beta.2 to 1.0.0-beta.3
 
 ## Packages:

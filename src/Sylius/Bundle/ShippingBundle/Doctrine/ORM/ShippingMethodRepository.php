@@ -24,7 +24,7 @@ class ShippingMethodRepository extends EntityRepository implements ShippingMetho
     /**
      * {@inheritdoc}
      */
-    public function findByName($name, $locale)
+    public function findByName(string $name, string $locale): array
     {
         return $this->createQueryBuilder('o')
             ->innerJoin('o.translations', 'translation')

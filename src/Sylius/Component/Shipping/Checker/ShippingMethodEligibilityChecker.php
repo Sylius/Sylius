@@ -24,7 +24,7 @@ final class ShippingMethodEligibilityChecker implements ShippingMethodEligibilit
     /**
      * {@inheritdoc}
      */
-    public function isEligible(ShippingSubjectInterface $subject, ShippingMethodInterface $method)
+    public function isEligible(ShippingSubjectInterface $subject, ShippingMethodInterface $method): bool
     {
         if (!$category = $method->getCategory()) {
             return true;

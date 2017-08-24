@@ -26,12 +26,12 @@ interface ShippingMethodsResolverInterface
      *
      * @return ShippingMethodInterface[]
      */
-    public function getSupportedMethods(ShippingSubjectInterface $subject);
+    public function getSupportedMethods(ShippingSubjectInterface $subject): array;
 
     /**
      * @param ShippingSubjectInterface $subject
      *
      * @return bool
      */
-    public function supports(ShippingSubjectInterface $subject);
+    public function supports(ShippingSubjectInterface $subject): bool;
 }
