@@ -319,7 +319,6 @@ final class TranslatorTest extends \PHPUnit_Framework_TestCase
     {
         return [
             [''],
-            [null],
             ['fr'],
             ['francais'],
             ['FR'],
