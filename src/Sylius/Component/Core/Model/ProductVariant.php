@@ -203,7 +203,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function getShippingCategory(): ? ShippingCategoryInterface
+    public function getShippingCategory(): ?ShippingCategoryInterface
     {
         return $this->shippingCategory;
     }

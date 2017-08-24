@@ -185,7 +185,7 @@ class Shipment implements ShipmentInterface
     /**
      * {@inheritdoc}
      */
-    public function getShippingWeight(): int
+    public function getShippingWeight(): float
     {
         $weight = 0;
 
@@ -199,7 +199,7 @@ class Shipment implements ShipmentInterface
     /**
      * {@inheritdoc}
      */
-    public function getShippingVolume(): int
+    public function getShippingVolume(): float
     {
         $volume = 0;
 

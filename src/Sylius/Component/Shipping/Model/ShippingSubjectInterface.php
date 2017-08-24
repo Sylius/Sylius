@@ -21,14 +21,14 @@ use Doctrine\Common\Collections\Collection;
 interface ShippingSubjectInterface
 {
     /**
-     * @return int
+     * @return float
      */
-    public function getShippingWeight(): int;
+    public function getShippingWeight(): float;
 
     /**
-     * @return int
+     * @return float
      */
-    public function getShippingVolume(): int;
+    public function getShippingVolume(): float;
 
     /**
      * @return int
