@@ -75,7 +75,7 @@ class TaxonTranslation extends AbstractTranslation implements TaxonTranslationIn
     /**
      * {@inheritdoc}
      */
-    public function getSlug()
+    public function getSlug(): ?string
     {
         return $this->slug;
     }
@@ -83,7 +83,7 @@ class TaxonTranslation extends AbstractTranslation implements TaxonTranslationIn
     /**
      * {@inheritdoc}
      */
-    public function setSlug($slug = null)
+    public function setSlug(?string $slug): void
     {
         $this->slug = $slug;
     }

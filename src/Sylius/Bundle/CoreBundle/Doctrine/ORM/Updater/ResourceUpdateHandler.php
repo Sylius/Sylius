@@ -47,7 +47,7 @@ final class ResourceUpdateHandler implements ResourceUpdateHandlerInterface
         ResourceInterface $resource,
         RequestConfiguration $configuration,
         ObjectManager $manager
-    ) {
+    ): void {
         try {
             $this->decoratedHandler->handle($resource, $configuration, $manager);
         } catch (OptimisticLockException $exception) {

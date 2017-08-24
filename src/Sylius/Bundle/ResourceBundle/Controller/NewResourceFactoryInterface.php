@@ -27,5 +27,5 @@ interface NewResourceFactoryInterface
      *
      * @return ResourceInterface
      */
-    public function create(RequestConfiguration $requestConfiguration, FactoryInterface $factory);
+    public function create(RequestConfiguration $requestConfiguration, FactoryInterface $factory): ResourceInterface;
 }

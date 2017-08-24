@@ -41,7 +41,7 @@ final class ResourceUpdateHandler implements ResourceUpdateHandlerInterface
         ResourceInterface $resource,
         RequestConfiguration $configuration,
         ObjectManager $manager
-    ) {
+    ): void {
         if ($configuration->hasStateMachine()) {
             $this->stateMachine->apply($configuration, $resource);
         }

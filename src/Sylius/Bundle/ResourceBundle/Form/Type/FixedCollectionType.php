@@ -26,7 +26,7 @@ final class FixedCollectionType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         foreach ($options['entries'] as $entry) {
             $entryType = $options['entry_type']($entry);
@@ -43,7 +43,7 @@ final class FixedCollectionType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setRequired('entries');
         $resolver->setAllowedTypes('entries', ['array', \Traversable::class]);
@@ -65,7 +65,7 @@ final class FixedCollectionType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_fixed_collection';
     }
@@ -73,7 +73,7 @@ final class FixedCollectionType extends AbstractType
     /**
      * @return callable
      */
-    private function optionalCallableNormalizer()
+    private function optionalCallableNormalizer(): callable
     {
         return function (Options $options, $value) {
             if (is_callable($value)) {

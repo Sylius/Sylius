@@ -31,7 +31,7 @@ final class SyliusResourceExtension extends Extension
     /**
      * {@inheritdoc}
      */
-    public function load(array $config, ContainerBuilder $container)
+    public function load(array $config, ContainerBuilder $container): void
     {
         $config = $this->processConfiguration($this->getConfiguration([], $container), $config);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
@@ -56,7 +56,7 @@ final class SyliusResourceExtension extends Extension
         $this->loadResources($config['resources'], $container);
     }
 
-    private function loadPersistence(array $drivers, array $resources, LoaderInterface $loader)
+    private function loadPersistence(array $drivers, array $resources, LoaderInterface $loader): void
     {
         foreach ($resources as $alias => $resource) {
             if (!in_array($resource['driver'], $drivers, true)) {
@@ -73,7 +73,7 @@ final class SyliusResourceExtension extends Extension
         }
     }
 
-    private function loadResources(array $resources, ContainerBuilder $container)
+    private function loadResources(array $resources, ContainerBuilder $container): void
     {
         foreach ($resources as $alias => $resourceConfig) {
             $metadata = Metadata::fromAliasAndConfiguration($alias, $resourceConfig);

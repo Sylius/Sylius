@@ -24,7 +24,7 @@ final class RouteFactory implements RouteFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createRouteCollection()
+    public function createRouteCollection(): RouteCollection
     {
         return new RouteCollection();
     }
@@ -32,8 +32,16 @@ final class RouteFactory implements RouteFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createRoute($path, array $defaults = [], array $requirements = [], array $options = [], $host = '', $schemes = [], $methods = [], $condition = '')
-    {
+    public function createRoute(
+        string $path,
+        array $defaults = [],
+        array $requirements = [],
+        array $options = [],
+        string $host = '',
+        array $schemes = [],
+        array $methods = [],
+        string $condition = ''
+    ): Route {
         return new Route($path, $defaults, $requirements, $options, $host, $schemes, $methods, $condition);
     }
 }

@@ -29,7 +29,7 @@ final class Configuration implements ConfigurationInterface
     /**
      * {@inheritdoc}
      */
-    public function getConfigTreeBuilder()
+    public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('sylius_resource');
@@ -54,7 +54,7 @@ final class Configuration implements ConfigurationInterface
     /**
      * @param ArrayNodeDefinition $node
      */
-    private function addResourcesSection(ArrayNodeDefinition $node)
+    private function addResourcesSection(ArrayNodeDefinition $node): void
     {
         $node
             ->children()
@@ -104,7 +104,7 @@ final class Configuration implements ConfigurationInterface
     /**
      * @param ArrayNodeDefinition $node
      */
-    private function addSettingsSection(ArrayNodeDefinition $node)
+    private function addSettingsSection(ArrayNodeDefinition $node): void
     {
         $node
             ->children()
@@ -131,7 +131,7 @@ final class Configuration implements ConfigurationInterface
     /**
      * @param ArrayNodeDefinition $node
      */
-    private function addTranslationsSection(ArrayNodeDefinition $node)
+    private function addTranslationsSection(ArrayNodeDefinition $node): void
     {
         $node
             ->children()
@@ -147,7 +147,7 @@ final class Configuration implements ConfigurationInterface
     /**
      * @param ArrayNodeDefinition $node
      */
-    private function addDriversSection(ArrayNodeDefinition $node)
+    private function addDriversSection(ArrayNodeDefinition $node): void
     {
         $node
             ->children()

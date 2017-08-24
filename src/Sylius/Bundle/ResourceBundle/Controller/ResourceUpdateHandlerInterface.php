@@ -30,5 +30,5 @@ interface ResourceUpdateHandlerInterface
         ResourceInterface $resource,
         RequestConfiguration $requestConfiguration,
         ObjectManager $manager
-    );
+    ): void;
 }

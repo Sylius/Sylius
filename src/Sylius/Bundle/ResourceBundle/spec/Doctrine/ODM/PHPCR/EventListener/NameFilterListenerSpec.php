@@ -26,21 +26,16 @@ use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
  */
 final class NameFilterListenerSpec extends ObjectBehavior
 {
-    function let(DocumentManagerInterface $documentManager)
+    function let(DocumentManagerInterface $documentManager): void
     {
         $this->beConstructedWith($documentManager);
-    }
-
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(NameFilterListener::class);
     }
 
     function it_throws_an_exception_if_nodename_is_not_mapped(
         ResourceControllerEvent $event,
         DocumentManagerInterface $documentManager,
         ClassMetadata $metadata
-    ) {
+    ): void {
         $document = new \stdClass();
         $event->getSubject()->willReturn($document);
         $documentManager->getClassMetadata('stdClass')->willReturn($metadata);
@@ -53,7 +48,7 @@ final class NameFilterListenerSpec extends ObjectBehavior
         ResourceControllerEvent $event,
         DocumentManagerInterface $documentManager,
         ClassMetadata $metadata
-    ) {
+    ): void {
         $document = new \stdClass();
         $event->getSubject()->willReturn($document);
         $documentManager->getClassMetadata('stdClass')->willReturn($metadata);
@@ -68,7 +63,7 @@ final class NameFilterListenerSpec extends ObjectBehavior
         ResourceControllerEvent $event,
         DocumentManagerInterface $documentManager,
         ClassMetadata $metadata
-    ) {
+    ): void {
         $this->beConstructedWith($documentManager, '_');
 
         $document = new \stdClass();

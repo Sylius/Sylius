@@ -26,11 +26,11 @@ interface StateMachineInterface
      *
      * @return bool
      */
-    public function can(RequestConfiguration $configuration, ResourceInterface $resource);
+    public function can(RequestConfiguration $configuration, ResourceInterface $resource): bool;
 
     /**
      * @param RequestConfiguration $configuration
      * @param ResourceInterface $resource
      */
-    public function apply(RequestConfiguration $configuration, ResourceInterface $resource);
+    public function apply(RequestConfiguration $configuration, ResourceInterface $resource): void;
 }

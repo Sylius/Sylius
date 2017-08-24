@@ -15,11 +15,12 @@ namespace Sylius\Component\Taxonomy\Model;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\SlugAwareInterface;
+use Sylius\Component\Resource\Model\TranslationInterface;
 
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-interface TaxonTranslationInterface extends SlugAwareInterface, ResourceInterface
+interface TaxonTranslationInterface extends SlugAwareInterface, ResourceInterface, TranslationInterface
 {
     /**
      * @return string

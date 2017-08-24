@@ -45,7 +45,7 @@ final class TranslationLocaleProvider implements TranslationLocaleProviderInterf
     /**
      * {@inheritdoc}
      */
-    public function getDefinedLocalesCodes()
+    public function getDefinedLocalesCodes(): array
     {
         $locales = $this->localeRepository->findAll();
 
@@ -60,7 +60,7 @@ final class TranslationLocaleProvider implements TranslationLocaleProviderInterf
     /**
      * {@inheritdoc}
      */
-    public function getDefaultLocaleCode()
+    public function getDefaultLocaleCode(): string
     {
         return $this->defaultLocaleCode;
     }

@@ -28,17 +28,12 @@ use Symfony\Component\Form\FormInterface;
  */
 final class ResourceFormFactorySpec extends ObjectBehavior
 {
-    function let(FormFactoryInterface $formFactory)
+    function let(FormFactoryInterface $formFactory): void
     {
         $this->beConstructedWith($formFactory);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ResourceFormFactory::class);
-    }
-
-    function it_implements_resource_form_factory_interface()
+    function it_implements_resource_form_factory_interface(): void
     {
         $this->shouldImplement(ResourceFormFactoryInterface::class);
     }
@@ -48,7 +43,7 @@ final class ResourceFormFactorySpec extends ObjectBehavior
         ResourceInterface $resource,
         FormFactoryInterface $formFactory,
         FormInterface $form
-    ) {
+    ): void {
         $requestConfiguration->isHtmlRequest()->willReturn(true);
         $requestConfiguration->getFormType()->willReturn('sylius_product_pricing');
         $requestConfiguration->getFormOptions()->willReturn([]);
@@ -62,7 +57,7 @@ final class ResourceFormFactorySpec extends ObjectBehavior
         ResourceInterface $resource,
         FormFactoryInterface $formFactory,
         FormInterface $form
-    ) {
+    ): void {
         $requestConfiguration->isHtmlRequest()->willReturn(false);
         $requestConfiguration->getFormType()->willReturn('sylius_product_api');
         $requestConfiguration->getFormOptions()->willReturn([]);

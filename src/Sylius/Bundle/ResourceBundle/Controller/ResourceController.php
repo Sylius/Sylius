@@ -19,6 +19,7 @@ use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Resource\Exception\UpdateHandlingException;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Resource\ResourceActions;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -175,7 +176,7 @@ class ResourceController extends Controller
      *
      * @return Response
      */
-    public function showAction(Request $request)
+    public function showAction(Request $request): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
@@ -207,7 +208,7 @@ class ResourceController extends Controller
      *
      * @return Response
      */
-    public function indexAction(Request $request)
+    public function indexAction(Request $request): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
@@ -237,7 +238,7 @@ class ResourceController extends Controller
      *
      * @return Response
      */
-    public function createAction(Request $request)
+    public function createAction(Request $request): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
@@ -301,7 +302,7 @@ class ResourceController extends Controller
      *
      * @return Response
      */
-    public function updateAction(Request $request)
+    public function updateAction(Request $request): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
@@ -386,7 +387,7 @@ class ResourceController extends Controller
      *
      * @return Response
      */
-    public function deleteAction(Request $request)
+    public function deleteAction(Request $request): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
@@ -427,9 +428,9 @@ class ResourceController extends Controller
     /**
      * @param Request $request
      *
-     * @return RedirectResponse
+     * @return Response
      */
-    public function applyStateMachineTransitionAction(Request $request)
+    public function applyStateMachineTransitionAction(Request $request): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
@@ -485,7 +486,7 @@ class ResourceController extends Controller
      *
      * @throws AccessDeniedException
      */
-    protected function isGrantedOr403(RequestConfiguration $configuration, $permission)
+    protected function isGrantedOr403(RequestConfiguration $configuration, string $permission): void
     {
         if (!$configuration->hasPermission()) {
             return;
@@ -501,11 +502,11 @@ class ResourceController extends Controller
     /**
      * @param RequestConfiguration $configuration
      *
-     * @return \Sylius\Component\Resource\Model\ResourceInterface
+     * @return ResourceInterface
      *
      * @throws NotFoundHttpException
      */
-    protected function findOr404(RequestConfiguration $configuration)
+    protected function findOr404(RequestConfiguration $configuration): ResourceInterface
     {
         if (null === $resource = $this->singleResourceProvider->get($configuration, $this->repository)) {
             throw new NotFoundHttpException(sprintf('The "%s" has not been found', $this->metadata->getHumanizedName()));

@@ -19,12 +19,12 @@ namespace Sylius\Component\Resource\Model;
 interface SlugAwareInterface
 {
     /**
-     * @return string
+     * @return string|null
      */
-    public function getSlug();
+    public function getSlug(): ?string;
 
     /**
-     * @param string $slug
+     * @param string|null $slug
      */
-    public function setSlug($slug = null);
+    public function setSlug(?string $slug): void;
 }

@@ -26,5 +26,5 @@ interface DefaultFormBuilderInterface
      * @param FormBuilderInterface $formBuilder
      * @param array $options
      */
-    public function build(MetadataInterface $metadata, FormBuilderInterface $formBuilder, array $options);
+    public function build(MetadataInterface $metadata, FormBuilderInterface $formBuilder, array $options): void;
 }

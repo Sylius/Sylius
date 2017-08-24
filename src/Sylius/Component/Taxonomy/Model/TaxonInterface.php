@@ -15,13 +15,14 @@ namespace Sylius\Component\Taxonomy\Model;
 
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TranslatableInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-interface TaxonInterface extends CodeAwareInterface, TaxonTranslationInterface, TranslatableInterface
+interface TaxonInterface extends CodeAwareInterface, TranslatableInterface, ResourceInterface
 {
     /**
      * @return bool
@@ -74,6 +75,26 @@ interface TaxonInterface extends CodeAwareInterface, TaxonTranslationInterface, 
      * @param TaxonInterface $taxon
      */
     public function removeChild(TaxonInterface $taxon);
+
+    /**
+     * @return string
+     */
+    public function getName();
+
+    /**
+     * @param string $name
+     */
+    public function setName($name);
+
+    /**
+     * @return string
+     */
+    public function getDescription();
+
+    /**
+     * @param string $description
+     */
+    public function setDescription($description);
 
     /**
      * @return int

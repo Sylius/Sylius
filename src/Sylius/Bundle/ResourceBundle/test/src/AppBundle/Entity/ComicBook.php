@@ -16,7 +16,7 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-final class ComicBook implements ResourceInterface
+class ComicBook implements ResourceInterface
 {
     /**
      * @var int

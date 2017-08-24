@@ -46,7 +46,7 @@ final class ParametersParser implements ParametersParserInterface
     /**
      * {@inheritdoc}
      */
-    public function parseRequestValues(array $parameters, Request $request)
+    public function parseRequestValues(array $parameters, Request $request): array
     {
         return array_map(function ($parameter) use ($request) {
             if (is_array($parameter)) {
@@ -86,7 +86,7 @@ final class ParametersParser implements ParametersParserInterface
      *
      * @return string
      */
-    private function parseRequestValueExpression($expression, Request $request)
+    private function parseRequestValueExpression(string $expression, Request $request)
     {
         $expression = preg_replace_callback('/(\$\w+)/', function ($matches) use ($request) {
             $variable = $request->get(substr($matches[1], 1));

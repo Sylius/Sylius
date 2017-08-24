@@ -31,7 +31,7 @@ abstract class AbstractDriver implements DriverInterface
     /**
      * {@inheritdoc}
      */
-    public function load(ContainerBuilder $container, MetadataInterface $metadata)
+    public function load(ContainerBuilder $container, MetadataInterface $metadata): void
     {
         $this->setClassesParameters($container, $metadata);
 
@@ -51,7 +51,7 @@ abstract class AbstractDriver implements DriverInterface
      * @param ContainerBuilder $container
      * @param MetadataInterface $metadata
      */
-    protected function setClassesParameters(ContainerBuilder $container, MetadataInterface $metadata)
+    protected function setClassesParameters(ContainerBuilder $container, MetadataInterface $metadata): void
     {
         if ($metadata->hasClass('model')) {
             $container->setParameter(sprintf('%s.model.%s.class', $metadata->getApplicationName(), $metadata->getName()), $metadata->getClass('model'));
@@ -71,7 +71,7 @@ abstract class AbstractDriver implements DriverInterface
      * @param ContainerBuilder $container
      * @param MetadataInterface $metadata
      */
-    protected function addController(ContainerBuilder $container, MetadataInterface $metadata)
+    protected function addController(ContainerBuilder $container, MetadataInterface $metadata): void
     {
         $definition = new Definition($metadata->getClass('controller'));
         $definition
@@ -103,7 +103,7 @@ abstract class AbstractDriver implements DriverInterface
      * @param ContainerBuilder $container
      * @param MetadataInterface $metadata
      */
-    protected function addFactory(ContainerBuilder $container, MetadataInterface $metadata)
+    protected function addFactory(ContainerBuilder $container, MetadataInterface $metadata): void
     {
         $factoryClass = $metadata->getClass('factory');
         $modelClass = $metadata->getClass('model');
@@ -111,7 +111,7 @@ abstract class AbstractDriver implements DriverInterface
         $definition = new Definition($factoryClass);
 
         $definitionArgs = [$modelClass];
-        if (in_array(TranslatableFactoryInterface::class, class_implements($factoryClass))) {
+        if (in_array(TranslatableFactoryInterface::class, class_implements($factoryClass), true)) {
             $decoratedDefinition = new Definition(Factory::class);
             $decoratedDefinition->setArguments($definitionArgs);
 
@@ -128,7 +128,7 @@ abstract class AbstractDriver implements DriverInterface
      *
      * @return Definition
      */
-    protected function getMetadataDefinition(MetadataInterface $metadata)
+    protected function getMetadataDefinition(MetadataInterface $metadata): Definition
     {
         $definition = new Definition(Metadata::class);
         $definition
@@ -143,11 +143,11 @@ abstract class AbstractDriver implements DriverInterface
      * @param ContainerBuilder $container
      * @param MetadataInterface $metadata
      */
-    abstract protected function addManager(ContainerBuilder $container, MetadataInterface $metadata);
+    abstract protected function addManager(ContainerBuilder $container, MetadataInterface $metadata): void;
 
     /**
      * @param ContainerBuilder $container
      * @param MetadataInterface $metadata
      */
-    abstract protected function addRepository(ContainerBuilder $container, MetadataInterface $metadata);
+    abstract protected function addRepository(ContainerBuilder $container, MetadataInterface $metadata): void;
 }

@@ -27,32 +27,27 @@ use Symfony\Component\HttpFoundation\Request;
  */
 final class RequestConfigurationSpec extends ObjectBehavior
 {
-    function let(MetadataInterface $metadata, Request $request, Parameters $parameters)
+    function let(MetadataInterface $metadata, Request $request, Parameters $parameters): void
     {
         $this->beConstructedWith($metadata, $request, $parameters);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(RequestConfiguration::class);
-    }
-
-    function it_has_request(Request $request)
+    function it_has_request(Request $request): void
     {
         $this->getRequest()->shouldReturn($request);
     }
 
-    function it_has_metadata(MetadataInterface $metadata)
+    function it_has_metadata(MetadataInterface $metadata): void
     {
         $this->getMetadata()->shouldReturn($metadata);
     }
 
-    function it_has_parameters(Parameters $parameters)
+    function it_has_parameters(Parameters $parameters): void
     {
         $this->getParameters()->shouldReturn($parameters);
     }
 
-    function it_checks_if_its_a_html_request(Request $request)
+    function it_checks_if_its_a_html_request(Request $request): void
     {
         $request->getRequestFormat()->willReturn('html');
         $this->isHtmlRequest()->shouldReturn(true);
@@ -61,7 +56,7 @@ final class RequestConfigurationSpec extends ObjectBehavior
         $this->isHtmlRequest()->shouldReturn(false);
     }
 
-    function it_returns_default_template_names(MetadataInterface $metadata)
+    function it_returns_default_template_names(MetadataInterface $metadata): void
     {
         $metadata->getTemplatesNamespace()->willReturn('SyliusAdminBundle:Product');
 
@@ -72,7 +67,7 @@ final class RequestConfigurationSpec extends ObjectBehavior
         $this->getDefaultTemplate('custom.html')->shouldReturn('SyliusAdminBundle:Product:custom.html.twig');
     }
 
-    function it_returns_default_template_names_for_a_directory_based_templates(MetadataInterface $metadata)
+    function it_returns_default_template_names_for_a_directory_based_templates(MetadataInterface $metadata): void
     {
         $metadata->getTemplatesNamespace()->willReturn('book/Backend');
 
@@ -83,7 +78,7 @@ final class RequestConfigurationSpec extends ObjectBehavior
         $this->getDefaultTemplate('custom.html')->shouldReturn('book/Backend/custom.html.twig');
     }
 
-    function it_takes_the_custom_template_if_specified(MetadataInterface $metadata, Parameters $parameters)
+    function it_takes_the_custom_template_if_specified(MetadataInterface $metadata, Parameters $parameters): void
     {
         $metadata->getTemplatesNamespace()->willReturn('SyliusAdminBundle:Product');
         $parameters->get('template', 'SyliusAdminBundle:Product:foo.html.twig')->willReturn('AppBundle:Product:show.html.twig');
@@ -91,7 +86,7 @@ final class RequestConfigurationSpec extends ObjectBehavior
         $this->getTemplate('foo.html')->shouldReturn('AppBundle:Product:show.html.twig');
     }
 
-    function it_gets_form_type_and_its_options(MetadataInterface $metadata, Parameters $parameters)
+    function it_gets_form_type_and_its_options(MetadataInterface $metadata, Parameters $parameters): void
     {
         $parameters->get('form')->willReturn(['type' => 'sylius_custom_resource']);
         $this->getFormType()->shouldReturn('sylius_custom_resource');
@@ -114,16 +109,9 @@ final class RequestConfigurationSpec extends ObjectBehavior
         $parameters->get('form')->willReturn(['options' => ['key' => 'value']]);
         $this->getFormType()->shouldReturn('\Fully\Qualified\ClassName');
         $this->getFormOptions()->shouldReturn(['key' => 'value']);
-
-        $metadata->getClass('form')->willReturn(['default' => 'sylius_custom_resource', 'choice' => 'sylius_resource_choice']);
-        $metadata->getApplicationName()->willReturn('sylius');
-        $metadata->getName()->willReturn('resource');
-        $parameters->get('form')->willReturn(['options' => ['key' => 'value']]);
-        $this->getFormType()->shouldReturn('sylius_resource');
-        $this->getFormOptions()->shouldReturn(['key' => 'value']);
     }
 
-    function it_generates_form_type_with_array_configuration(MetadataInterface $metadata, Parameters $parameters)
+    function it_generates_form_type_with_array_configuration(MetadataInterface $metadata, Parameters $parameters): void
     {
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
@@ -133,7 +121,7 @@ final class RequestConfigurationSpec extends ObjectBehavior
         $this->getFormOptions()->shouldReturn(['validation_groups' => ['sylius']]);
     }
 
-    function it_generates_route_names(MetadataInterface $metadata, Parameters $parameters)
+    function it_generates_route_names(MetadataInterface $metadata, Parameters $parameters): void
     {
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
@@ -149,7 +137,7 @@ final class RequestConfigurationSpec extends ObjectBehavior
         $this->getRouteName('custom')->shouldReturn('sylius_admin_product_custom');
     }
 
-    function it_generates_redirect_referer(Parameters $parameters, Request $request, ParameterBag $bag)
+    function it_generates_redirect_referer(Parameters $parameters, Request $request, ParameterBag $bag): void
     {
         $request->headers = $bag;
         $bag->get('referer')->willReturn('http://myurl.com');
@@ -159,7 +147,7 @@ final class RequestConfigurationSpec extends ObjectBehavior
         $this->getRedirectReferer()->shouldReturn('http://myurl.com');
     }
 
-    function it_generates_redirect_route(MetadataInterface $metadata, Parameters $parameters)
+    function it_generates_redirect_route(MetadataInterface $metadata, Parameters $parameters): void
     {
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
@@ -175,7 +163,7 @@ final class RequestConfigurationSpec extends ObjectBehavior
         $this->getRedirectRoute('custom')->shouldReturn('myRoute');
     }
 
-    function it_takes_section_into_account_when_generating_redirect_route(MetadataInterface $metadata, Parameters $parameters)
+    function it_takes_section_into_account_when_generating_redirect_route(MetadataInterface $metadata, Parameters $parameters): void
     {
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
@@ -191,7 +179,7 @@ final class RequestConfigurationSpec extends ObjectBehavior
         $this->getRedirectRoute('custom')->shouldReturn('myRoute');
     }
 
-    function it_returns_array_as_redirect_parameters(Parameters $parameters)
+    function it_returns_array_as_redirect_parameters(Parameters $parameters): void
     {
         $parameters->get('vars', [])->willReturn([]);
         $this->getVars()->shouldReturn([]);
@@ -224,7 +212,7 @@ final class RequestConfigurationSpec extends ObjectBehavior
         $this->getRedirectParameters('resource')->shouldReturn(['myParameter', 'myExtraParameter']);
     }
 
-    function it_checks_if_limit_is_enabled(Parameters $parameters)
+    function it_checks_if_limit_is_enabled(Parameters $parameters): void
     {
         $parameters->get('limit', Argument::any())->willReturn(10);
         $this->isLimited()->shouldReturn(true);
@@ -233,7 +221,7 @@ final class RequestConfigurationSpec extends ObjectBehavior
         $this->isLimited()->shouldReturn(false);
     }
 
-    function it_gets_limit(Parameters $parameters)
+    function it_gets_limit(Parameters $parameters): void
     {
         $parameters->get('limit', false)->willReturn(true);
         $parameters->get('limit', 10)->willReturn(10);
@@ -244,7 +232,7 @@ final class RequestConfigurationSpec extends ObjectBehavior
         $this->getLimit()->shouldReturn(null);
     }
 
-    function it_checks_if_pagination_is_enabled(Parameters $parameters)
+    function it_checks_if_pagination_is_enabled(Parameters $parameters): void
     {
         $parameters->get('paginate', Argument::any())->willReturn(10);
         $this->isPaginated()->shouldReturn(true);
@@ -253,7 +241,7 @@ final class RequestConfigurationSpec extends ObjectBehavior
         $this->isPaginated()->shouldReturn(false);
     }
 
-    function it_gets_pagination_max_per_page(Parameters $parameters)
+    function it_gets_pagination_max_per_page(Parameters $parameters): void
     {
         $parameters->get('paginate', 10)->willReturn(20);
         $this->getPaginationMaxPerPage()->shouldReturn(20);
@@ -262,7 +250,7 @@ final class RequestConfigurationSpec extends ObjectBehavior
         $this->getPaginationMaxPerPage()->shouldReturn(10);
     }
 
-    function it_checks_if_the_resource_is_filterable(Parameters $parameters)
+    function it_checks_if_the_resource_is_filterable(Parameters $parameters): void
     {
         $parameters->get('filterable', Argument::any())->willReturn(true);
         $this->isFilterable()->shouldReturn(true);
@@ -271,7 +259,7 @@ final class RequestConfigurationSpec extends ObjectBehavior
         $this->isFilterable()->shouldReturn(false);
     }
 
-    function it_has_no_filterable_parameter(Parameters $parameters)
+    function it_has_no_filterable_parameter(Parameters $parameters): void
     {
         $defaultCriteria = ['property' => 'myValue'];
 
@@ -282,7 +270,7 @@ final class RequestConfigurationSpec extends ObjectBehavior
         $this->getCriteria($defaultCriteria)->shouldHaveCount(1);
     }
 
-    function it_has_criteria_parameter(Parameters $parameters, Request $request)
+    function it_has_criteria_parameter(Parameters $parameters, Request $request): void
     {
         $criteria = ['property' => 'myNewValue'];
 
@@ -292,7 +280,7 @@ final class RequestConfigurationSpec extends ObjectBehavior
         $this->getCriteria()->shouldReturn($criteria);
     }
 
-    function it_allows_to_override_criteria_parameter_in_route(Parameters $parameters, Request $request)
+    function it_allows_to_override_criteria_parameter_in_route(Parameters $parameters, Request $request): void
     {
         $criteria = ['property' => 'myValue'];
         $overriddenCriteria = ['other_property' => 'myNewValue'];
@@ -320,7 +308,7 @@ final class RequestConfigurationSpec extends ObjectBehavior
         $this->getCriteria(['filter' => 'default'])->shouldReturn(['filter' => 'request']);
     }
 
-    function it_checks_if_the_resource_is_sortable(Parameters $parameters)
+    function it_checks_if_the_resource_is_sortable(Parameters $parameters): void
     {
         $parameters->get('sortable', Argument::any())->willReturn(true);
         $this->isSortable()->shouldReturn(true);
@@ -329,7 +317,7 @@ final class RequestConfigurationSpec extends ObjectBehavior
         $this->isSortable()->shouldReturn(false);
     }
 
-    function it_has_sorting_parameter(Parameters $parameters, Request $request)
+    function it_has_sorting_parameter(Parameters $parameters, Request $request): void
     {
         $sorting = ['property' => 'asc'];
 
@@ -340,7 +328,7 @@ final class RequestConfigurationSpec extends ObjectBehavior
         $this->getSorting()->shouldReturn($sorting);
     }
 
-    function it_has_no_sortable_parameter(Parameters $parameters)
+    function it_has_no_sortable_parameter(Parameters $parameters): void
     {
         $defaultSorting = ['property' => 'desc'];
 
@@ -351,7 +339,7 @@ final class RequestConfigurationSpec extends ObjectBehavior
         $this->getSorting($defaultSorting)->shouldHaveCount(1);
     }
 
-    function it_allows_to_override_sorting_parameter_in_route(Parameters $parameters, Request $request)
+    function it_allows_to_override_sorting_parameter_in_route(Parameters $parameters, Request $request): void
     {
         $sorting = ['property' => 'desc'];
         $overriddenSorting = ['other_property' => 'asc'];
@@ -379,7 +367,7 @@ final class RequestConfigurationSpec extends ObjectBehavior
         $this->getSorting(['sort' => 'default'])->shouldReturn(['sort' => 'request']);
     }
 
-    function it_has_repository_method_parameter(Parameters $parameters)
+    function it_has_repository_method_parameter(Parameters $parameters): void
     {
         $parameters->has('repository')->willReturn(false);
         $this->getRepositoryMethod()->shouldReturn(null);
@@ -390,7 +378,7 @@ final class RequestConfigurationSpec extends ObjectBehavior
         $this->getRepositoryMethod()->shouldReturn('findAllEnabled');
     }
 
-    function it_has_repository_arguments_parameter(Parameters $parameters)
+    function it_has_repository_arguments_parameter(Parameters $parameters): void
     {
         $parameters->has('repository')->willReturn(false);
         $this->getRepositoryArguments()->shouldReturn([]);
@@ -408,7 +396,7 @@ final class RequestConfigurationSpec extends ObjectBehavior
         $this->getRepositoryArguments()->shouldReturn(['foo, bar']);
     }
 
-    function it_has_factory_method_parameter(Parameters $parameters)
+    function it_has_factory_method_parameter(Parameters $parameters): void
     {
         $parameters->has('factory')->willReturn(false);
         $this->getFactoryMethod()->shouldReturn(null);
@@ -419,7 +407,7 @@ final class RequestConfigurationSpec extends ObjectBehavior
         $this->getFactoryMethod()->shouldReturn('createForPromotion');
     }
 
-    function it_has_factory_arguments_parameter(Parameters $parameters)
+    function it_has_factory_arguments_parameter(Parameters $parameters): void
     {
         $parameters->has('factory')->willReturn(false);
         $this->getFactoryArguments()->shouldReturn([]);
@@ -437,7 +425,7 @@ final class RequestConfigurationSpec extends ObjectBehavior
         $this->getFactoryArguments()->shouldReturn(['foo, bar']);
     }
 
-    function it_has_flash_message_parameter(MetadataInterface $metadata, Parameters $parameters)
+    function it_has_flash_message_parameter(MetadataInterface $metadata, Parameters $parameters): void
     {
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
@@ -449,7 +437,7 @@ final class RequestConfigurationSpec extends ObjectBehavior
         $this->getFlashMessage('flash')->shouldReturn('sylius.product.myMessage');
     }
 
-    function it_has_sortable_position_parameter(Parameters $parameters)
+    function it_has_sortable_position_parameter(Parameters $parameters): void
     {
         $parameters->get('sortable_position', 'position')->willReturn('position');
         $this->getSortablePosition()->shouldReturn('position');
@@ -458,7 +446,7 @@ final class RequestConfigurationSpec extends ObjectBehavior
         $this->getSortablePosition()->shouldReturn('myPosition');
     }
 
-    function it_has_permission_unless_defined_as_false_in_parameters(Parameters $parameters)
+    function it_has_permission_unless_defined_as_false_in_parameters(Parameters $parameters): void
     {
         $parameters->get('permission', false)->willReturn(false);
         $this->shouldNotHavePermission();
@@ -470,7 +458,7 @@ final class RequestConfigurationSpec extends ObjectBehavior
         $this->shouldNotHavePermission();
     }
 
-    function it_generates_permission_name(MetadataInterface $metadata, Parameters $parameters)
+    function it_generates_permission_name(MetadataInterface $metadata, Parameters $parameters): void
     {
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
@@ -480,14 +468,14 @@ final class RequestConfigurationSpec extends ObjectBehavior
         $this->getPermission('index')->shouldReturn('sylius.product.index');
     }
 
-    function it_takes_permission_name_from_parameters_if_provided(Parameters $parameters)
+    function it_takes_permission_name_from_parameters_if_provided(Parameters $parameters): void
     {
         $parameters->get('permission')->willReturn('app.sales_order.view_pricing');
 
         $this->getPermission('index')->shouldReturn('app.sales_order.view_pricing');
     }
 
-    function it_throws_an_exception_when_permission_is_set_as_false_in_parameters_but_still_trying_to_get_it(Parameters $parameters)
+    function it_throws_an_exception_when_permission_is_set_as_false_in_parameters_but_still_trying_to_get_it(Parameters $parameters): void
     {
         $parameters->get('permission')->willReturn(null);
 
@@ -497,13 +485,13 @@ final class RequestConfigurationSpec extends ObjectBehavior
         ;
     }
 
-    function it_has_event_name(Parameters $parameters)
+    function it_has_event_name(Parameters $parameters): void
     {
         $parameters->get('event')->willReturn('foo');
         $this->getEvent()->shouldReturn('foo');
     }
 
-    function it_has_section(Parameters $parameters)
+    function it_has_section(Parameters $parameters): void
     {
         $parameters->get('section')->willReturn(null);
         $this->getSection()->shouldReturn(null);
@@ -512,13 +500,13 @@ final class RequestConfigurationSpec extends ObjectBehavior
         $this->getSection()->shouldReturn('admin');
     }
 
-    function it_has_vars(Parameters $parameters)
+    function it_has_vars(Parameters $parameters): void
     {
         $parameters->get('vars', [])->willReturn(['foo' => 'bar']);
         $this->getVars()->shouldReturn(['foo' => 'bar']);
     }
 
-    function it_does_not_have_grid_unless_defined_as_in_parameters(Parameters $parameters)
+    function it_does_not_have_grid_unless_defined_as_in_parameters(Parameters $parameters): void
     {
         $parameters->has('grid')->willReturn(false);
         $this->shouldNotHaveGrid();
@@ -532,7 +520,7 @@ final class RequestConfigurationSpec extends ObjectBehavior
         $this->getGrid()->shouldReturn('sylius_admin_tax_category');
     }
 
-    function it_throws_an_exception_when_trying_to_retrieve_undefined_grid(Parameters $parameters)
+    function it_throws_an_exception_when_trying_to_retrieve_undefined_grid(Parameters $parameters): void
     {
         $parameters->has('grid')->willReturn(false);
 
@@ -542,7 +530,7 @@ final class RequestConfigurationSpec extends ObjectBehavior
         ;
     }
 
-    function it_can_have_state_machine_transition(Parameters $parameters)
+    function it_can_have_state_machine_transition(Parameters $parameters): void
     {
         $parameters->has('state_machine')->willReturn(false);
         $this->hasStateMachine()->shouldReturn(false);

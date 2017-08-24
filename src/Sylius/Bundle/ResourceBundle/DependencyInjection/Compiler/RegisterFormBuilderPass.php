@@ -25,7 +25,7 @@ final class RegisterFormBuilderPass implements CompilerPassInterface
     /**
      * {@inheritdoc}
      */
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         if (!$container->hasDefinition('sylius.registry.form_builder')) {
             return;

@@ -18,7 +18,7 @@ namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\Exception;
  */
 class InvalidDriverException extends \Exception
 {
-    public function __construct($driver, $className)
+    public function __construct(string $driver, string $className)
     {
         parent::__construct(sprintf(
             'Driver "%s" is not supported by %s.',

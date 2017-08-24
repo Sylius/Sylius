@@ -20,6 +20,7 @@ use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Config\Loader\LoaderResolverInterface;
 use Symfony\Component\Routing\Route;
+use Symfony\Component\Routing\RouteCollection;
 use Symfony\Component\Yaml\Yaml;
 
 /**
@@ -50,7 +51,7 @@ final class ResourceLoader implements LoaderInterface
     /**
      * {@inheritdoc}
      */
-    public function load($resource, $type = null)
+    public function load($resource, $type = null): RouteCollection
     {
         $processor = new Processor();
         $configurationDefinition = new Configuration();
@@ -77,30 +78,30 @@ final class ResourceLoader implements LoaderInterface
         $metadata = $this->resourceRegistry->get($configuration['alias']);
         $routes = $this->routeFactory->createRouteCollection();
 
-        $rootPath = sprintf('/%s/', null !== $configuration['path'] ? $configuration['path'] : Urlizer::urlize($metadata->getPluralName()));
+        $rootPath = sprintf('/%s/', $configuration['path'] ?? Urlizer::urlize($metadata->getPluralName()));
         $identifier = sprintf('{%s}', $configuration['identifier']);
 
-        if (in_array('index', $routesToGenerate)) {
+        if (in_array('index', $routesToGenerate, true)) {
             $indexRoute = $this->createRoute($metadata, $configuration, $rootPath, 'index', ['GET'], $isApi);
             $routes->add($this->getRouteName($metadata, $configuration, 'index'), $indexRoute);
         }
 
-        if (in_array('create', $routesToGenerate)) {
+        if (in_array('create', $routesToGenerate, true)) {
             $createRoute = $this->createRoute($metadata, $configuration, $isApi ? $rootPath : $rootPath . 'new', 'create', $isApi ? ['POST'] : ['GET', 'POST'], $isApi);
             $routes->add($this->getRouteName($metadata, $configuration, 'create'), $createRoute);
         }
 
-        if (in_array('update', $routesToGenerate)) {
+        if (in_array('update', $routesToGenerate, true)) {
             $updateRoute = $this->createRoute($metadata, $configuration, $isApi ? $rootPath . $identifier : $rootPath . $identifier . '/edit', 'update', $isApi ? ['PUT', 'PATCH'] : ['GET', 'PUT', 'PATCH'], $isApi);
             $routes->add($this->getRouteName($metadata, $configuration, 'update'), $updateRoute);
         }
 
-        if (in_array('show', $routesToGenerate)) {
+        if (in_array('show', $routesToGenerate, true)) {
             $showRoute = $this->createRoute($metadata, $configuration, $rootPath . $identifier, 'show', ['GET'], $isApi);
             $routes->add($this->getRouteName($metadata, $configuration, 'show'), $showRoute);
         }
 
-        if (in_array('delete', $routesToGenerate)) {
+        if (in_array('delete', $routesToGenerate, true)) {
             $deleteRoute = $this->createRoute($metadata, $configuration, $rootPath . $identifier, 'delete', ['DELETE'], $isApi);
             $routes->add($this->getRouteName($metadata, $configuration, 'delete'), $deleteRoute);
         }
@@ -111,7 +112,7 @@ final class ResourceLoader implements LoaderInterface
     /**
      * {@inheritdoc}
      */
-    public function supports($resource, $type = null)
+    public function supports($resource, $type = null): bool
     {
         return 'sylius.resource' === $type || 'sylius.resource_api' === $type;
     }
@@ -119,7 +120,7 @@ final class ResourceLoader implements LoaderInterface
     /**
      * {@inheritdoc}
      */
-    public function getResolver()
+    public function getResolver(): void
     {
         // Intentionally left blank.
     }
@@ -127,7 +128,7 @@ final class ResourceLoader implements LoaderInterface
     /**
      * {@inheritdoc}
      */
-    public function setResolver(LoaderResolverInterface $resolver)
+    public function setResolver(LoaderResolverInterface $resolver): void
     {
         // Intentionally left blank.
     }
@@ -138,11 +139,18 @@ final class ResourceLoader implements LoaderInterface
      * @param string $path
      * @param string $actionName
      * @param array $methods
+     * @param bool $isApi
      *
      * @return Route
      */
-    private function createRoute(MetadataInterface $metadata, array $configuration, $path, $actionName, array $methods, $isApi = false)
-    {
+    private function createRoute(
+        MetadataInterface $metadata,
+        array $configuration,
+        string $path,
+        string $actionName,
+        array $methods,
+        bool $isApi = false
+    ): Route {
         $defaults = [
             '_controller' => $metadata->getServiceId('controller').sprintf(':%sAction', $actionName),
         ];
@@ -187,7 +195,7 @@ final class ResourceLoader implements LoaderInterface
             $defaults['_sylius']['vars'] = $configuration['vars']['all'];
         }
         if (isset($configuration['vars'][$actionName])) {
-            $vars = isset($configuration['vars']['all']) ? $configuration['vars']['all'] : [];
+            $vars = $configuration['vars']['all'] ?? [];
             $defaults['_sylius']['vars'] = array_merge($vars, $configuration['vars'][$actionName]);
         }
 
@@ -201,7 +209,7 @@ final class ResourceLoader implements LoaderInterface
      *
      * @return string
      */
-    private function getRouteName(MetadataInterface $metadata, array $configuration, $actionName)
+    private function getRouteName(MetadataInterface $metadata, array $configuration, string $actionName): string
     {
         $sectionPrefix = isset($configuration['section']) ? $configuration['section'].'_' : '';
 

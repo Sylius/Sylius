@@ -44,7 +44,7 @@ final class EnabledValidator extends ConstraintValidator
     /**
      * @param mixed $value
      */
-    private function ensureValueImplementsToggleableInterface($value)
+    private function ensureValueImplementsToggleableInterface($value): void
     {
         if (!($value instanceof ToggleableInterface)) {
             throw new \InvalidArgumentException(sprintf(

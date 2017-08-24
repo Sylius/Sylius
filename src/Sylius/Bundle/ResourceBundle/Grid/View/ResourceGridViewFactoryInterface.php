@@ -31,5 +31,10 @@ interface ResourceGridViewFactoryInterface
      *
      * @return ResourceGridView
      */
-    public function create(Grid $grid, Parameters $parameters, MetadataInterface $metadata, RequestConfiguration $requestConfiguration);
+    public function create(
+        Grid $grid,
+        Parameters $parameters,
+        MetadataInterface $metadata,
+        RequestConfiguration $requestConfiguration
+    ): ResourceGridView;
 }

@@ -21,22 +21,17 @@ use Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\Exception\InvalidDri
  */
 final class InvalidDriverExceptionSpec extends ObjectBehavior
 {
-    function let()
+    function let(): void
     {
         $this->beConstructedWith('driver', 'className');
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(InvalidDriverException::class);
-    }
-
-    function it_extends_exception()
+    function it_extends_exception(): void
     {
         $this->shouldHaveType(\Exception::class);
     }
 
-    function it_has_a_message()
+    function it_has_a_message(): void
     {
         $this->getMessage()->shouldReturn('Driver "driver" is not supported by className.');
     }

@@ -41,7 +41,7 @@ class PaymentMethodRepository extends EntityRepository implements PaymentMethodR
     /**
      * {@inheritdoc}
      */
-    public function createPaginator(array $criteria = [], array $sorting = []): Pagerfanta
+    public function createPaginator(array $criteria = [], array $sorting = []): iterable
     {
         $queryBuilder = $this->createQueryBuilder('o')
             ->leftJoin('o.translations', 'translation')

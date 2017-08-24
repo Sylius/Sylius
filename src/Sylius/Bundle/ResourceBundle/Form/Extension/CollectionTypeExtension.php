@@ -27,7 +27,7 @@ final class CollectionTypeExtension extends AbstractTypeExtension
     /**
      * {@inheritdoc}
      */
-    public function buildView(FormView $view, FormInterface $form, array $options)
+    public function buildView(FormView $view, FormInterface $form, array $options): void
     {
         $view->vars['button_add_label'] = $options['button_add_label'];
         $view->vars['button_delete_label'] = $options['button_delete_label'];
@@ -36,7 +36,7 @@ final class CollectionTypeExtension extends AbstractTypeExtension
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'button_add_label' => 'sylius.form.collection.add',
@@ -47,7 +47,7 @@ final class CollectionTypeExtension extends AbstractTypeExtension
     /**
      * {@inheritdoc}
      */
-    public function getExtendedType()
+    public function getExtendedType(): string
     {
         return CollectionType::class;
     }

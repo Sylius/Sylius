@@ -73,13 +73,13 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
 
     /**
      * @param array $criteria
-     * @param array $sorting
-     * @param int   $limit
-     * @param int   $offset
+     * @param array|null $sorting
+     * @param int $limit
+     * @param int $offset
      *
      * @return array
      */
-    public function findBy(array $criteria, array $sorting = [], $limit = null, $offset = null)
+    public function findBy(array $criteria, ?array $sorting = null, $limit = null, $offset = null)
     {
         $queryBuilder = $this->getCollectionQueryBuilder();
 
