@@ -86,16 +86,20 @@
   * `TranslationInterface::setTranslatable`
   * `Archivable::setArchivedAt`
   * `SlugAwareInterface::setSlug`
-  
-### Taxonomy / TaxonomyBundle
-
-* `TaxonInterface::getParents` method was renamed to `TaxonInterface::getAncestors`.
 
 ### Review / ReviewBundle
 
 * The `ReviewInterface::setAuthor` method does not longer have a default null argument and requires one to be explicitly passed.
 * The `ReviewFactoryInterface::createForSubjectWithReviewer` method does not longer have a default null value for `$reviewer` argument and requires one to be explicitly passed.
 * Default null value of `ReviewFactoryInterface::createForSubjectWithReviewer` was removed. To create a review without reviewer use `createForSubject` method from the same interface instead. 
+  
+### Taxonomy / TaxonomyBundle
+
+* `TaxonInterface::getParents` method was renamed to `TaxonInterface::getAncestors`.
+
+### ShopBundle
+
+* `ContactController` has been made final, use decoration instead of extending it.
 
 ### Shipping / ShippingBundle
 

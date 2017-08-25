@@ -68,7 +68,7 @@ final class LocaleSwitchController
     /**
      * @return Response
      */
-    public function renderAction()
+    public function renderAction(): Response
     {
         return $this->templatingEngine->renderResponse('@SyliusShop/Menu/_localeSwitch.html.twig', [
             'active' => $this->localeContext->getLocaleCode(),
@@ -78,11 +78,11 @@ final class LocaleSwitchController
 
     /**
      * @param Request $request
-     * @param string $code
+     * @param string|null $code
      *
      * @return Response
      */
-    public function switchAction(Request $request, $code = null)
+    public function switchAction(Request $request, ?string $code = null): Response
     {
         if (null === $code) {
             $code = $this->localeProvider->getDefaultLocaleCode();

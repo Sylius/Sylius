@@ -23,5 +23,5 @@ interface OrderEmailManagerInterface
     /**
      * @param OrderInterface $order
      */
-    public function sendConfirmationEmail(OrderInterface $order);
+    public function sendConfirmationEmail(OrderInterface $order): void;
 }

@@ -38,7 +38,7 @@ final class UrlBasedLocaleSwitcher implements LocaleSwitcherInterface
     /**
      * {@inheritdoc}
      */
-    public function handle(Request $request, $localeCode)
+    public function handle(Request $request, string $localeCode): RedirectResponse
     {
         return new RedirectResponse($this->urlGenerator->generate('sylius_shop_homepage', ['_locale' => $localeCode]));
     }

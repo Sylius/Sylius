@@ -87,7 +87,7 @@ final class UserRegistrationListener
     /**
      * @param GenericEvent $event
      */
-    public function handleUserVerification(GenericEvent $event)
+    public function handleUserVerification(GenericEvent $event): void
     {
         $customer = $event->getSubject();
         Assert::isInstanceOf($customer, CustomerInterface::class);
@@ -107,7 +107,7 @@ final class UserRegistrationListener
     /**
      * @param ShopUserInterface $user
      */
-    private function sendVerificationEmail(ShopUserInterface $user)
+    private function sendVerificationEmail(ShopUserInterface $user): void
     {
         $token = $this->tokenGenerator->generate();
         $user->setEmailVerificationToken($token);
@@ -121,7 +121,7 @@ final class UserRegistrationListener
     /**
      * @param ShopUserInterface $user
      */
-    private function enableAndLogin(ShopUserInterface $user)
+    private function enableAndLogin(ShopUserInterface $user): void
     {
         $user->setEnabled(true);
 

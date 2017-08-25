@@ -37,7 +37,7 @@ final class SecurityWidgetController
     /**
      * @return Response
      */
-    public function renderAction()
+    public function renderAction(): Response
     {
         return $this->templatingEngine->renderResponse('@SyliusShop/Menu/_security.html.twig');
     }

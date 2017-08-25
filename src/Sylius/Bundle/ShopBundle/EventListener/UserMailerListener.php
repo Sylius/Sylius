@@ -51,7 +51,7 @@ final class UserMailerListener extends MailerListener
      *
      * @throws UnexpectedTypeException
      */
-    public function sendUserRegistrationEmail(GenericEvent $event)
+    public function sendUserRegistrationEmail(GenericEvent $event): void
     {
         $customer = $event->getSubject();
 
