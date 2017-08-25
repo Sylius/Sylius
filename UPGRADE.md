@@ -122,6 +122,16 @@
 
 * `ThemeHierarchyProviderInterface::getThemeHierarchy` does not longer accepts null as the passed argument.
 
+### User / UserBundle
+
+* The following methods does not longer have a default null argument and requires one to be explicitly passed:
+
+  * `UserAwareInterface::setUser`
+  * `UserInterface::setPasswordRequestedAt`
+  * `UserInterface::setVerifiedAt`
+  * `UserInterface::setExpiresAt`
+  * `UserInterface::setLastLogin`
+
 # UPGRADE FROM 1.0.0-beta.2 to 1.0.0-beta.3
 
 ## Packages:

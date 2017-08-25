@@ -25,12 +25,12 @@ use Sylius\Component\User\Security\Generator\UniquePinGenerator;
  */
 final class UniquePinGeneratorSpec extends ObjectBehavior
 {
-    function let(RandomnessGeneratorInterface $generator, UniquenessCheckerInterface $checker)
+    function let(RandomnessGeneratorInterface $generator, UniquenessCheckerInterface $checker): void
     {
         $this->beConstructedWith($generator, $checker, 6);
     }
 
-    function it_implements_generator_interface()
+    function it_implements_generator_interface(): void
     {
         $this->shouldImplement(GeneratorInterface::class);
     }
@@ -38,7 +38,7 @@ final class UniquePinGeneratorSpec extends ObjectBehavior
     function it_throws_invalid_argument_exception_on_instantiation_with_non_integer_length(
         RandomnessGeneratorInterface $generator,
         UniquenessCheckerInterface $checker
-    ) {
+    ): void {
         $this->beConstructedWith($generator, $checker, 'a string');
         $this->shouldThrow(\InvalidArgumentException::class)->duringInstantiation();
         $this->beConstructedWith($generator, $checker, '8');
@@ -52,7 +52,7 @@ final class UniquePinGeneratorSpec extends ObjectBehavior
     function it_throws_invalid_argument_exception_on_instantiation_with_an_out_of_range_length(
         RandomnessGeneratorInterface $generator,
         UniquenessCheckerInterface $checker
-    ) {
+    ): void {
         $this->beConstructedWith($generator, $checker, -1);
         $this->shouldThrow(\InvalidArgumentException::class)->duringInstantiation();
         $this->beConstructedWith($generator, $checker, 0);
@@ -62,7 +62,7 @@ final class UniquePinGeneratorSpec extends ObjectBehavior
     function it_generates_pins_with_length_stated_on_instantiation(
         RandomnessGeneratorInterface $generator,
         UniquenessCheckerInterface $checker
-    ) {
+    ): void {
         $pin = '001100';
 
         $generator->generateNumeric(6)->willReturn($pin);
@@ -71,7 +71,7 @@ final class UniquePinGeneratorSpec extends ObjectBehavior
         $this->generate()->shouldHaveLength(6);
     }
 
-    function it_generates_string_pins(RandomnessGeneratorInterface $generator, UniquenessCheckerInterface $checker)
+    function it_generates_string_pins(RandomnessGeneratorInterface $generator, UniquenessCheckerInterface $checker): void
     {
         $pin = '636363';
 
@@ -81,7 +81,7 @@ final class UniquePinGeneratorSpec extends ObjectBehavior
         $this->generate()->shouldBeString();
     }
 
-    function it_generates_numeric_pins(RandomnessGeneratorInterface $generator, UniquenessCheckerInterface $checker)
+    function it_generates_numeric_pins(RandomnessGeneratorInterface $generator, UniquenessCheckerInterface $checker): void
     {
         $pin = '424242';
 

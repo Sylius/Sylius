@@ -20,5 +20,5 @@ use Sylius\Component\User\Model\CredentialsHolderInterface;
  */
 interface PasswordUpdaterInterface
 {
-    public function updatePassword(CredentialsHolderInterface $user);
+    public function updatePassword(CredentialsHolderInterface $user): void;
 }

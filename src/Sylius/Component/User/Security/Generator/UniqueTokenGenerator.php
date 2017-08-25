@@ -49,12 +49,8 @@ final class UniqueTokenGenerator implements GeneratorInterface
     public function __construct(
         RandomnessGeneratorInterface $generator,
         UniquenessCheckerInterface $uniquenessChecker,
-        $tokenLength
+        int $tokenLength
     ) {
-        Assert::integer(
-            $tokenLength,
-            'The value of token length has to be an integer.'
-        );
         Assert::greaterThanEq($tokenLength, 1, 'The value of token length has to be at least 1.');
 
         $this->generator = $generator;
@@ -65,7 +61,7 @@ final class UniqueTokenGenerator implements GeneratorInterface
     /**
      * {@inheritdoc}
      */
-    public function generate()
+    public function generate(): string
     {
         do {
             $token = $this->generator->generateUriSafeString($this->tokenLength);
