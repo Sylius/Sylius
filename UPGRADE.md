@@ -19,6 +19,12 @@
   * `ProvinceInterface::setCountry`
   * `ZoneMemberInterface::setBelongsTo`
 
+### AdminBundle
+
+* `CustomerStatisticsController` has been made final, use decoration instead of extending it.
+* `DashboardController` has been made final, use decoration instead of extending it.
+* `ImpersonateUserController` has been made final, use decoration instead of extending it.
+
 ### AdminApiBundle
 
 * `CreateClientCommand` has been made final, use decoration instead of extending it.

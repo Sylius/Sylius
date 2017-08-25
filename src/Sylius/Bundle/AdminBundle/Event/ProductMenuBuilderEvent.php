@@ -43,7 +43,7 @@ class ProductMenuBuilderEvent extends MenuBuilderEvent
     /**
      * @return ProductInterface
      */
-    public function getProduct()
+    public function getProduct(): ProductInterface
     {
         return $this->product;
     }

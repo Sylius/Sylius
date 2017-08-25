@@ -43,7 +43,7 @@ class ProductVariantMenuBuilderEvent extends MenuBuilderEvent
     /**
      * @return ProductVariantInterface
      */
-    public function getProductVariant()
+    public function getProductVariant(): ProductVariantInterface
     {
         return $this->productVariant;
     }

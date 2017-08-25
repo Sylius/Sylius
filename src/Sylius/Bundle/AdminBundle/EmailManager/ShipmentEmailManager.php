@@ -39,7 +39,7 @@ final class ShipmentEmailManager implements ShipmentEmailManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function sendConfirmationEmail(ShipmentInterface $shipment)
+    public function sendConfirmationEmail(ShipmentInterface $shipment): void
     {
         /** @var OrderInterface $order */
         $order = $shipment->getOrder();

@@ -26,7 +26,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class ImpersonateUserController
+final class ImpersonateUserController
 {
     /**
      * @var UserImpersonatorInterface
@@ -65,7 +65,7 @@ class ImpersonateUserController
         AuthorizationCheckerInterface $authorizationChecker,
         UserProviderInterface $userProvider,
         RouterInterface $router,
-        $authorizationRole
+        string $authorizationRole
     ) {
         $this->impersonator = $impersonator;
         $this->authorizationChecker = $authorizationChecker;
@@ -80,7 +80,7 @@ class ImpersonateUserController
      *
      * @return Response
      */
-    public function impersonateAction(Request $request, $username)
+    public function impersonateAction(Request $request, string $username): Response
     {
         if (!$this->authorizationChecker->isGranted($this->authorizationRole)) {
             throw new HttpException(Response::HTTP_UNAUTHORIZED);
@@ -102,7 +102,7 @@ class ImpersonateUserController
      * @param Request $request
      * @param string $username
      */
-    private function addFlash(Request $request, $username)
+    private function addFlash(Request $request, string $username): void
     {
         /** @var Session $session */
         $session = $request->getSession();
