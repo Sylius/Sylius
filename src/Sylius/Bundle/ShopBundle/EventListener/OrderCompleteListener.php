@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ShopBundle\EventListener;
 
 use Sylius\Bundle\ShopBundle\EmailManager\OrderEmailManagerInterface;
@@ -37,7 +39,7 @@ final class OrderCompleteListener
     /**
      * @param GenericEvent $event
      */
-    public function sendConfirmationEmail(GenericEvent $event)
+    public function sendConfirmationEmail(GenericEvent $event): void
     {
         $order = $event->getSubject();
         Assert::isInstanceOf($order, OrderInterface::class);

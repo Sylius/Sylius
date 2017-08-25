@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Taxation\Calculator;
 
 use Sylius\Component\Registry\ServiceRegistryInterface;
@@ -35,7 +37,7 @@ final class DelegatingCalculator implements CalculatorInterface
     /**
      * {@inheritdoc}
      */
-    public function calculate($base, TaxRateInterface $rate)
+    public function calculate(float $base, TaxRateInterface $rate): float
     {
         /** @var CalculatorInterface $calculator */
         $calculator = $this->calculatorsRegistry->get($rate->getCalculator());

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Review\Factory;
 
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -26,7 +28,7 @@ interface ReviewFactoryInterface extends FactoryInterface
      *
      * @return ReviewInterface
      */
-    public function createForSubject(ReviewableInterface $subject);
+    public function createForSubject(ReviewableInterface $subject): ReviewInterface;
 
     /**
      * @param ReviewableInterface $subject
@@ -34,5 +36,5 @@ interface ReviewFactoryInterface extends FactoryInterface
      *
      * @return ReviewInterface
      */
-    public function createForSubjectWithReviewer(ReviewableInterface $subject, ReviewerInterface $reviewer = null);
+    public function createForSubjectWithReviewer(ReviewableInterface $subject, ?ReviewerInterface $reviewer): ReviewInterface;
 }

@@ -1,0 +1,24 @@
+Sylius\Component\Core\Model\PromotionCoupon:
+    exclusion_policy: ALL
+    xml_root_name: promotion-coupon
+    properties:
+        perCustomerUsageLimit:
+            expose: true
+            type: integer
+            groups: [Detailed]
+    relations:
+        -   rel: self
+            href:
+                route: sylius_admin_api_promotion_coupon_show
+                parameters:
+                    promotionCode: expr(object.getPromotion().getCode())
+                    code: expr(object.getCode())
+                    version: 1
+        -   rel: promotion
+            href:
+                route: sylius_admin_api_promotion_show
+                parameters:
+                    code: expr(object.getPromotion().getCode())
+                    version: 1
+            exclusion:
+                groups: [Detailed]

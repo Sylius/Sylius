@@ -9,12 +9,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Translation\Resource;
 
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class ThemeTranslationResource implements TranslationResourceInterface
 {
@@ -42,7 +44,7 @@ final class ThemeTranslationResource implements TranslationResourceInterface
      * @param ThemeInterface $theme
      * @param string $filepath
      */
-    public function __construct(ThemeInterface $theme, $filepath)
+    public function __construct(ThemeInterface $theme, string $filepath)
     {
         $this->name = $filepath;
 
@@ -62,7 +64,7 @@ final class ThemeTranslationResource implements TranslationResourceInterface
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -70,7 +72,7 @@ final class ThemeTranslationResource implements TranslationResourceInterface
     /**
      * {@inheritdoc}
      */
-    public function getLocale()
+    public function getLocale(): string
     {
         return $this->locale;
     }
@@ -78,7 +80,7 @@ final class ThemeTranslationResource implements TranslationResourceInterface
     /**
      * {@inheritdoc}
      */
-    public function getFormat()
+    public function getFormat(): string
     {
         return $this->format;
     }
@@ -86,7 +88,7 @@ final class ThemeTranslationResource implements TranslationResourceInterface
     /**
      * {@inheritdoc}
      */
-    public function getDomain()
+    public function getDomain(): string
     {
         return $this->domain;
     }

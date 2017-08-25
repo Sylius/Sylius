@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Filesystem;
 
 use Symfony\Component\Filesystem\Exception\FileNotFoundException;
@@ -16,7 +18,7 @@ use Symfony\Component\Filesystem\Exception\IOException;
 
 /**
  * @author Fabien Potencier <fabien@symfony.com>
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 interface FilesystemInterface
 {
@@ -172,5 +174,5 @@ interface FilesystemInterface
      *
      * @return string
      */
-    public function getFileContents($file);
+    public function getFileContents(string $file): string;
 }

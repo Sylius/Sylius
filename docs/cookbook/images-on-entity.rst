@@ -7,8 +7,8 @@ In this cookbook we will present how to **add image to the Shipping Method entit
 Instructions:
 -------------
 
-1. Extend the ShippingMethod class with the ImageAwareInterface
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+1. Extend the ShippingMethod class with the ImagesAwareInterface
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 In order to override the ``ShippingMethod`` that lives inside of the SyliusCoreBundle,
 you have to create your own ShippingMethod class that will extend it:
@@ -21,11 +21,11 @@ you have to create your own ShippingMethod class that will extend it:
 
     use Doctrine\Common\Collections\ArrayCollection;
     use Doctrine\Common\Collections\Collection;
-    use Sylius\Component\Core\Model\ImageAwareInterface;
+    use Sylius\Component\Core\Model\ImagesAwareInterface;
     use Sylius\Component\Core\Model\ImageInterface;
     use Sylius\Component\Core\Model\ShippingMethod as BaseShippingMethod;
 
-    class ShippingMethod extends BaseShippingMethod implements ImageAwareInterface
+    class ShippingMethod extends BaseShippingMethod implements ImagesAwareInterface
     {
         /**
          * @var Collection|ImageInterface[]
@@ -246,8 +246,7 @@ What is more the new form type needs to be configured as the resource form of th
 
 **Create the form extension class** for the ``Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType``:
 
-It needs to have the images field as a CollectionType. If you want to give the possibility to add more than one image to the entity
-set the ``allow_add`` option to ``true``.
+It needs to have the images field as a CollectionType.
 
 .. code-block:: php
 
@@ -255,7 +254,7 @@ set the ``allow_add`` option to ``true``.
 
     namespace AppBundle\Form\Extension;
 
-    use AppBundle\Form\Type\ShippingMethod\ShippingMethodImageType;
+    use AppBundle\Form\Type\ShippingMethodImageType;
     use Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType;
     use Symfony\Component\Form\AbstractTypeExtension;
     use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -270,7 +269,7 @@ set the ``allow_add`` option to ``true``.
         {
             $builder->add('images', CollectionType::class, [
                 'entry_type' => ShippingMethodImageType::class,
-                'allow_add' => false,
+                'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
                 'label' => 'sylius.form.shipping_method.images',
@@ -285,6 +284,23 @@ set the ``allow_add`` option to ``true``.
             return ShippingMethodType::class;
         }
     }
+
+.. tip::
+
+    In case you need only a single image upload, this can be done in 2 very easy steps.
+    
+    First, in the code for the form provided above set ``allow_add`` and ``allow_delete`` to ``false``
+    
+    Second, in the ``__construct`` method of the ``ShippingMethod`` entity you defined earlier add the following:
+    
+    .. code-block:: php
+    
+        public function __construct()
+        {
+            parent::__construct();
+            $this->images = new ArrayCollection();
+            $this->addImage(new ShippingMethodImage());
+        }
 
 Register the form extension as a service:
 
@@ -307,15 +323,15 @@ In order to handle the image upload you need to attach the image upload listener
     # services.yml
     services:
         sylius.listener.image_upload:
-            class: Sylius\Bundle\CoreBundle\EventListener\ImageUploadListener
+            class: Sylius\Bundle\CoreBundle\EventListener\ImagesUploadListener
             arguments: ['@sylius.image_uploader']
             tags:
-                - { name: kernel.event_listener, event: "sylius.product.pre_create", method: "uploadImage" }
-                - { name: kernel.event_listener, event: "sylius.product.pre_update", method: "uploadImage" }
-                - { name: kernel.event_listener, event: "sylius.taxon.pre_create", method: "uploadImage" }
-                - { name: kernel.event_listener, event: "sylius.taxon.pre_update", method: "uploadImage" }
-                - { name: kernel.event_listener, event: "sylius.shipping_method.pre_create", method: "uploadImage" }
-                - { name: kernel.event_listener, event: "sylius.shipping_method.pre_update", method: "uploadImage" }
+                - { name: kernel.event_listener, event: "sylius.product.pre_create", method: "uploadImages" }
+                - { name: kernel.event_listener, event: "sylius.product.pre_update", method: "uploadImages" }
+                - { name: kernel.event_listener, event: "sylius.taxon.pre_create", method: "uploadImages" }
+                - { name: kernel.event_listener, event: "sylius.taxon.pre_update", method: "uploadImages" }
+                - { name: kernel.event_listener, event: "sylius.shipping_method.pre_create", method: "uploadImages" }
+                - { name: kernel.event_listener, event: "sylius.shipping_method.pre_update", method: "uploadImages" }
 
 12. Render the images field in the form view
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

@@ -10,4 +10,4 @@ sylius:
         verify_email: 'Votre adresse email a été vérifiée avec succès.'
         verify_email_by_invalid_token: 'Le jeton de vérification est invalide.'
         verify_email_request: 'Un email contenant le lien de vérification a été envoyé à votre adresse email.'
-        verify_verified_email: 'Votre compte est déjà vérifié.'
+        verify_verified_email: 'Votre email est déjà vérifié.'

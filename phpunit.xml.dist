@@ -4,7 +4,7 @@
          xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/5.6/phpunit.xsd"
          backupGlobals="false"
          colors="true"
-         bootstrap="app/autoload.php">
+         bootstrap="vendor/autoload.php">
     <testsuites>
         <testsuite name="Sylius Test Suite">
             <directory>tests</directory>
@@ -15,8 +15,4 @@
         <server name="KERNEL_CLASS_PATH" value="/app/TestAppKernel.php" />
         <server name="IS_DOCTRINE_ORM_SUPPORTED" value="true" />
     </php>
-
-    <listeners>
-        <listener class="\DAMA\DoctrineTestBundle\PHPUnit\PHPUnitStaticDbConnectionListener" />
-    </listeners>
 </phpunit>

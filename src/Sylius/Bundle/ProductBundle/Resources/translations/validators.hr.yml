@@ -6,6 +6,8 @@ sylius:
         sku:
             not_blank: Unesite kod proizvoda.
             unique: Kod proizvoda mora biti jedinstven.
+        slug:
+            not_blank: Molimo unesite kratki identifikator proizvoda.
         name:
             not_blank: Unesite naziv proizvoda.
             min_length: Naziv proizvoda mora imati najmanje jedan znak.|Naziv proizvoda mora imati najmanje {{ limit }} znakova.

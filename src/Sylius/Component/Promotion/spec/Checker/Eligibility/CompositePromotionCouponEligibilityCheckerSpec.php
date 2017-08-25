@@ -9,30 +9,26 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Promotion\Checker\Eligibility;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Promotion\Checker\Eligibility\CompositePromotionCouponEligibilityChecker;
 use Sylius\Component\Promotion\Checker\Eligibility\PromotionCouponEligibilityCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class CompositePromotionCouponEligibilityCheckerSpec extends ObjectBehavior
 {
-    function let(PromotionCouponEligibilityCheckerInterface $promotionCouponEligibilityChecker)
+    function let(PromotionCouponEligibilityCheckerInterface $promotionCouponEligibilityChecker): void
     {
         $this->beConstructedWith([$promotionCouponEligibilityChecker]);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(CompositePromotionCouponEligibilityChecker::class);
-    }
-
-    function it_is_a_promotion_eligibility_checker()
+    function it_is_a_promotion_eligibility_checker(): void
     {
         $this->shouldImplement(PromotionCouponEligibilityCheckerInterface::class);
     }
@@ -42,7 +38,7 @@ final class CompositePromotionCouponEligibilityCheckerSpec extends ObjectBehavio
         PromotionCouponEligibilityCheckerInterface $secondPromotionCouponEligibilityChecker,
         PromotionSubjectInterface $promotionSubject,
         PromotionCouponInterface $promotionCoupon
-    ) {
+    ): void {
         $this->beConstructedWith([
             $firstPromotionCouponEligibilityChecker,
             $secondPromotionCouponEligibilityChecker,
@@ -59,7 +55,7 @@ final class CompositePromotionCouponEligibilityCheckerSpec extends ObjectBehavio
         PromotionCouponEligibilityCheckerInterface $secondPromotionCouponEligibilityChecker,
         PromotionSubjectInterface $promotionSubject,
         PromotionCouponInterface $promotionCoupon
-    ) {
+    ): void {
         $this->beConstructedWith([
             $firstPromotionCouponEligibilityChecker,
             $secondPromotionCouponEligibilityChecker,
@@ -76,7 +72,7 @@ final class CompositePromotionCouponEligibilityCheckerSpec extends ObjectBehavio
         PromotionCouponEligibilityCheckerInterface $secondPromotionCouponEligibilityChecker,
         PromotionSubjectInterface $promotionSubject,
         PromotionCouponInterface $promotionCoupon
-    ) {
+    ): void {
         $this->beConstructedWith([
             $firstPromotionCouponEligibilityChecker,
             $secondPromotionCouponEligibilityChecker,
@@ -88,14 +84,14 @@ final class CompositePromotionCouponEligibilityCheckerSpec extends ObjectBehavio
         $this->isEligible($promotionSubject, $promotionCoupon)->shouldReturn(false);
     }
 
-    function it_throws_an_exception_if_no_eligibility_checkers_are_passed()
+    function it_throws_an_exception_if_no_eligibility_checkers_are_passed(): void
     {
         $this->beConstructedWith([]);
 
         $this->shouldThrow(\InvalidArgumentException::class)->duringInstantiation();
     }
 
-    function it_throws_an_exception_if_passed_array_has_not_only_eligibility_checkers()
+    function it_throws_an_exception_if_passed_array_has_not_only_eligibility_checkers(): void
     {
         $this->beConstructedWith([new \stdClass()]);
 

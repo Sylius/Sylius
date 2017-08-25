@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\UserBundle\Controller;
 
 use FOS\RestBundle\View\View;
@@ -164,12 +166,12 @@ class UserController extends ResourceController
             return $this->redirectToRoute($redirectRoute);
         }
 
-        $eventDispatcher = $this->container->get('event_dispatcher');
-        $eventDispatcher->dispatch(UserEvents::PRE_EMAIL_VERIFICATION, new GenericEvent($user));
-
         $user->setVerifiedAt(new \DateTime());
         $user->setEmailVerificationToken(null);
         $user->enable();
+
+        $eventDispatcher = $this->container->get('event_dispatcher');
+        $eventDispatcher->dispatch(UserEvents::PRE_EMAIL_VERIFICATION, new GenericEvent($user));
 
         $this->manager->flush();
 
@@ -239,7 +241,7 @@ class UserController extends ResourceController
         $formType = $this->getSyliusAttribute($request, 'form', UserRequestPasswordResetType::class);
         $form = $this->createResourceForm($configuration, $formType, $passwordReset);
         $template = $this->getSyliusAttribute($request, 'template', null);
-        if (!$configuration->isHtmlRequest()) {
+        if ($configuration->isHtmlRequest()) {
             Assert::notNull($template, 'Template is not configured.');
         }
 

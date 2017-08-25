@@ -9,8 +9,11 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
+use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -18,7 +21,7 @@ use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class CountryChoiceType extends AbstractType
 {
@@ -38,23 +41,19 @@ final class CountryChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
             ->setDefaults([
-                'choices' => function (Options $options) {
+                'choices' => function (Options $options): iterable {
                     if (null === $options['enabled']) {
                         $countries = $this->countryRepository->findAll();
                     } else {
                         $countries = $this->countryRepository->findBy(['enabled' => $options['enabled']]);
                     }
 
-                    /*
-                     * PHP 5.* bug, fixed in PHP 7: https://bugs.php.net/bug.php?id=50688
-                     * "usort(): Array was modified by the user comparison function"
-                     */
-                    @usort($countries, function ($a, $b) {
-                        return $a->getName() < $b->getName() ? -1 : 1;
+                    usort($countries, function (CountryInterface $a, CountryInterface $b): int {
+                        return $a->getName() <=> $b->getName();
                     });
 
                     return $countries;
@@ -72,7 +71,7 @@ final class CountryChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getParent()
+    public function getParent(): string
     {
         return ChoiceType::class;
     }
@@ -80,7 +79,7 @@ final class CountryChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_country_choice';
     }

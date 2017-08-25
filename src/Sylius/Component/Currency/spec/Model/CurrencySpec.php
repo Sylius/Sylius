@@ -9,58 +9,53 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Currency\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Currency\Model\Currency;
 use Sylius\Component\Currency\Model\CurrencyInterface;
-use Sylius\Component\Resource\Model\ToggleableInterface;
 
 final class CurrencySpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(Currency::class);
-    }
-
-    function it_implements_a_currency_interface()
+    function it_implements_a_currency_interface(): void
     {
         $this->shouldImplement(CurrencyInterface::class);
     }
 
-    function it_has_no_id_by_default()
+    function it_has_no_id_by_default(): void
     {
         $this->getId()->shouldReturn(null);
     }
 
-    function it_has_no_code_by_default()
+    function it_has_no_code_by_default(): void
     {
         $this->getCode()->shouldReturn(null);
     }
 
-    function its_code_is_mutable()
+    function its_code_is_mutable(): void
     {
         $this->setCode('RSD');
         $this->getCode()->shouldReturn('RSD');
     }
 
-    function it_initializes_creation_date_by_default()
+    function it_initializes_creation_date_by_default(): void
     {
-        $this->getCreatedAt()->shouldHaveType(\DateTime::class);
+        $this->getCreatedAt()->shouldHaveType(\DateTimeInterface::class);
     }
 
-    function its_creation_date_is_mutable(\DateTime $date)
+    function its_creation_date_is_mutable(\DateTime $date): void
     {
         $this->setCreatedAt($date);
         $this->getCreatedAt()->shouldReturn($date);
     }
 
-    function it_has_no_last_update_date_by_default()
+    function it_has_no_last_update_date_by_default(): void
     {
         $this->getUpdatedAt()->shouldReturn(null);
     }
 
-    function its_last_update_date_is_mutable(\DateTime $date)
+    function its_last_update_date_is_mutable(\DateTime $date): void
     {
         $this->setUpdatedAt($date);
         $this->getUpdatedAt()->shouldReturn($date);

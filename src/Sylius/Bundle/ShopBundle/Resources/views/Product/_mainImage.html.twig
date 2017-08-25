@@ -3,7 +3,7 @@
 {% elseif product.images.first %}
     {% set path = product.images.first.path|imagine_filter(filter|default('sylius_shop_product_thumbnail')) %}
 {% else %}
-    {% set path = 'http://placehold.it/200x200' %}
+    {% set path = '//placehold.it/200x200' %}
 {% endif %}
 
-<img src="{{ path }}" alt="" class="ui bordered image" />
+<img src="{{ path }}" alt="{{ product.name }}" class="ui bordered image" />

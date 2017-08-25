@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\InventoryBundle\Twig;
 
 use Sylius\Bundle\InventoryBundle\Templating\Helper\InventoryHelper;
@@ -34,11 +36,11 @@ final class InventoryExtension extends \Twig_Extension
     /**
      * {@inheritdoc}
      */
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [
-             new \Twig_SimpleFunction('sylius_inventory_is_available', [$this->helper, 'isStockAvailable']),
-             new \Twig_SimpleFunction('sylius_inventory_is_sufficient', [$this->helper, 'isStockSufficient']),
+             new \Twig_Function('sylius_inventory_is_available', [$this->helper, 'isStockAvailable']),
+             new \Twig_Function('sylius_inventory_is_sufficient', [$this->helper, 'isStockSufficient']),
         ];
     }
 }

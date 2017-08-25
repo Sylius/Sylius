@@ -9,31 +9,27 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Channel\Context\RequestBased;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Channel\Context\RequestBased\HostnameBasedRequestResolver;
 use Sylius\Component\Channel\Context\RequestBased\RequestResolverInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class HostnameBasedRequestResolverSpec extends ObjectBehavior
 {
-    function let(ChannelRepositoryInterface $channelRepository)
+    function let(ChannelRepositoryInterface $channelRepository): void
     {
         $this->beConstructedWith($channelRepository);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(HostnameBasedRequestResolver::class);
-    }
-
-    function it_implements_request_resolver_interface()
+    function it_implements_request_resolver_interface(): void
     {
         $this->shouldImplement(RequestResolverInterface::class);
     }
@@ -42,7 +38,7 @@ final class HostnameBasedRequestResolverSpec extends ObjectBehavior
         ChannelRepositoryInterface $channelRepository,
         Request $request,
         ChannelInterface $channel
-    ) {
+    ): void {
         $request->getHost()->willReturn('example.org');
 
         $channelRepository->findOneByHostname('example.org')->willReturn($channel);
@@ -53,7 +49,7 @@ final class HostnameBasedRequestResolverSpec extends ObjectBehavior
     function it_returns_null_if_channel_was_not_found(
         ChannelRepositoryInterface $channelRepository,
         Request $request
-    ) {
+    ): void {
         $request->getHost()->willReturn('example.org');
 
         $channelRepository->findOneByHostname('example.org')->willReturn(null);

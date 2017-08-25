@@ -3,8 +3,100 @@
 
 sylius:
     form:
+        block:
+            body: 内文
+            id: ID
+            title: 標題
+        cart:
+            coupon: 折價券
+        checkout:
+            addressing:
+                different_billing_address: 使用其他地址作為賬單地址嗎？
+            payment_method: 付款方式
+            shipping_method: 配送方式
+        promotion:
+            channels: 頻道
+        promotion_action:
+            add_product_configuration:
+                product: 産品
+        group:
+            name: 名稱
+            roles: 角色
+        channel:
+            contact_email: 聯繫郵箱
+            currencies: 貨幣
+            currency_base: 基準幣別
+            account_verification_required: 是否需要帳戸驗証？
+            hostname: 主機名稱
+            locale_default: 預設地域設置
+            locales: 地區設定
+            payment_methods: 付款方式
+            shipping_methods: 配送方式
+            skipping_shipping_step_allowed: 如果只有一種航運方法可用，直接跳過航運選項嗎？
+            skipping_payment_step_allowed: 如果只有一種付款方式可用，直接跳過付款選項嗎？
+            tax_calculation_strategy: 税率計算政策
+            tax_zone_default: 預設税區
+            taxonomies: 分類
+            theme: 主題
         image:
             type: 類型
+            file: 圖像
+        locale:
+            code: 代碼
+            enabled: 啓用
+        order_filter:
+            created_at_from: 在之後創建
+            created_at_to: 在之前創建
+            number: 數字
+            total_from: 從
+            total_to: 至
+            payment_state: 付款狀態
+            channel: 所有頻道
+        page:
+            body: 内文
+            id: ID
+            title: 標題
+        product:
+            images: 圖像
+            restricted_zone: 限制區域
+            short_description: 簡介
+            variant_selection_method: 變數選擇方法
+            main_taxon: 主要分類
+            channels: 頻道
+            enabled: 啓用
+        product_filter:
+            name: 名稱
+            code: 代碼
+        product_variant:
+            tax_category: 税别
+            shipping_category: 付運類別
+        shipment_filter:
+            created_at_from: 從
+            created_at_to: 至
+            channel: 所有頻道
+        payment_filter:
+            created_at_from: 從
+            created_at_to: 至
+            channel: 所有頻道
+        taxon:
+            code: 代碼
+        user:
+            different_billing_address: 使用其他地址作為賬單地址嗎？
+            enabled: 啓用
+            roles: 角色
+        product_association_type:
+            name: 名稱
+        promotion_rule:
+            has_taxon:
+                taxons: 分類
+            product:
+                products: 産品
+            total_of_items_from_taxon:
+                amount: 金額
+        payment_method:
+            channels: 頻道
+        product_attribute:
+            position: 位置
     installer:
         extensions:
             "off": false

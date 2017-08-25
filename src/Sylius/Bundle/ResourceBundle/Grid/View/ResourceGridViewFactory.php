@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\Grid\View;
 
 use Sylius\Bundle\ResourceBundle\Controller\ParametersParserInterface;
@@ -46,8 +48,12 @@ final class ResourceGridViewFactory implements ResourceGridViewFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function create(Grid $grid, Parameters $parameters, MetadataInterface $metadata, RequestConfiguration $requestConfiguration)
-    {
+    public function create(
+        Grid $grid,
+        Parameters $parameters,
+        MetadataInterface $metadata,
+        RequestConfiguration $requestConfiguration
+    ): ResourceGridView {
         $driverConfiguration = $grid->getDriverConfiguration();
         $request = $requestConfiguration->getRequest();
 

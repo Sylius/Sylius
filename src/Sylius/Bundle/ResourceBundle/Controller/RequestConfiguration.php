@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
 use Sylius\Component\Resource\Metadata\MetadataInterface;
@@ -96,7 +98,7 @@ class RequestConfiguration
      */
     public function getDefaultTemplate($name)
     {
-        $templatesNamespace = $this->metadata->getTemplatesNamespace();
+        $templatesNamespace = (string) $this->metadata->getTemplatesNamespace();
 
         if (false !== strpos($templatesNamespace, ':')) {
             return sprintf('%s:%s.%s', $templatesNamespace ?: ':', $name, 'twig');
@@ -248,9 +250,31 @@ class RequestConfiguration
         }
 
         $parameters = isset($redirect['parameters']) ? $redirect['parameters'] : [];
+        $parameters = $this->addExtraRedirectParameters($parameters);
 
         if (null !== $resource) {
             $parameters = $this->parseResourceValues($parameters, $resource);
+        }
+
+        return $parameters;
+    }
+
+    /**
+     * @param array $parameters
+     *
+     * @return array
+     */
+    private function addExtraRedirectParameters($parameters)
+    {
+        $vars = $this->getVars();
+        $accessor = PropertyAccess::createPropertyAccessor();
+
+        if ($accessor->isReadable($vars, '[redirect][parameters]')) {
+            $extraParameters = $accessor->getValue($vars, '[redirect][parameters]');
+
+            if (is_array($extraParameters)) {
+                $parameters = array_merge($parameters, $extraParameters);
+            }
         }
 
         return $parameters;

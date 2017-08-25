@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Tests\DependencyInjection\FilesystemSource;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
@@ -16,14 +18,14 @@ use Sylius\Bundle\ThemeBundle\Configuration\Filesystem\FilesystemConfigurationSo
 use Sylius\Bundle\ThemeBundle\DependencyInjection\SyliusThemeExtension;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class SyliusThemeExtensionTest extends AbstractExtensionTestCase
 {
     /**
      * @test
      */
-    public function it_does_not_register_a_provider_while_it_is_disabled()
+    public function it_does_not_register_a_provider_while_it_is_disabled(): void
     {
         $this->load(['sources' => ['filesystem' => false]]);
 
@@ -37,7 +39,7 @@ final class SyliusThemeExtensionTest extends AbstractExtensionTestCase
     /**
      * {@inheritdoc}
      */
-    protected function getContainerExtensions()
+    protected function getContainerExtensions(): array
     {
         $themeExtension = new SyliusThemeExtension();
         $themeExtension->addConfigurationSourceFactory(new FilesystemConfigurationSourceFactory());

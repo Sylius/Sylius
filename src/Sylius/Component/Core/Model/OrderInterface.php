@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\Collection;
@@ -88,6 +90,11 @@ interface OrderInterface extends
      * @return Collection|OrderItemUnitInterface[]
      */
     public function getItemUnitsByVariant(ProductVariantInterface $variant);
+
+    /**
+     * @return bool
+     */
+    public function isShippingRequired();
 
     /**
      * @return Collection|ShipmentInterface[]

@@ -9,13 +9,15 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Locator;
 
 use Sylius\Bundle\ThemeBundle\Factory\FinderFactoryInterface;
 use Symfony\Component\Finder\SplFileInfo;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class RecursiveFileLocator implements FileLocatorInterface
 {
@@ -31,7 +33,7 @@ final class RecursiveFileLocator implements FileLocatorInterface
 
     /**
      * @param FinderFactoryInterface $finderFactory
-     * @param array $paths An array of paths where to look for resources
+     * @param array|string[] $paths An array of paths where to look for resources
      */
     public function __construct(FinderFactoryInterface $finderFactory, array $paths)
     {
@@ -42,7 +44,7 @@ final class RecursiveFileLocator implements FileLocatorInterface
     /**
      * {@inheritdoc}
      */
-    public function locateFileNamed($name)
+    public function locateFileNamed(string $name): string
     {
         return $this->doLocateFilesNamed($name)->current();
     }
@@ -50,7 +52,7 @@ final class RecursiveFileLocator implements FileLocatorInterface
     /**
      * {@inheritdoc}
      */
-    public function locateFilesNamed($name)
+    public function locateFilesNamed(string $name): array
     {
         return iterator_to_array($this->doLocateFilesNamed($name));
     }
@@ -60,7 +62,7 @@ final class RecursiveFileLocator implements FileLocatorInterface
      *
      * @return \Generator
      */
-    private function doLocateFilesNamed($name)
+    private function doLocateFilesNamed(string $name): \Generator
     {
         $this->assertNameIsNotEmpty($name);
 
@@ -96,7 +98,7 @@ final class RecursiveFileLocator implements FileLocatorInterface
     /**
      * @param string $name
      */
-    private function assertNameIsNotEmpty($name)
+    private function assertNameIsNotEmpty(string $name): void
     {
         if (null === $name || '' === $name) {
             throw new \InvalidArgumentException(

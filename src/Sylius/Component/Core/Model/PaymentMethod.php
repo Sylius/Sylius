@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -44,7 +46,7 @@ class PaymentMethod extends BasePaymentMethod implements PaymentMethodInterface
     /**
      * {@inheritdoc}
      */
-    public function getChannels()
+    public function getChannels(): Collection
     {
         return $this->channels;
     }
@@ -52,7 +54,7 @@ class PaymentMethod extends BasePaymentMethod implements PaymentMethodInterface
     /**
      * {@inheritdoc}
      */
-    public function hasChannel(BaseChannelInterface $channel)
+    public function hasChannel(BaseChannelInterface $channel): bool
     {
         return $this->channels->contains($channel);
     }
@@ -60,7 +62,7 @@ class PaymentMethod extends BasePaymentMethod implements PaymentMethodInterface
     /**
      * {@inheritdoc}
      */
-    public function addChannel(BaseChannelInterface $channel)
+    public function addChannel(BaseChannelInterface $channel): void
     {
         if (!$this->hasChannel($channel)) {
             $this->channels->add($channel);
@@ -70,7 +72,7 @@ class PaymentMethod extends BasePaymentMethod implements PaymentMethodInterface
     /**
      * {@inheritdoc}
      */
-    public function removeChannel(BaseChannelInterface $channel)
+    public function removeChannel(BaseChannelInterface $channel): void
     {
         if ($this->hasChannel($channel)) {
             $this->channels->removeElement($channel);

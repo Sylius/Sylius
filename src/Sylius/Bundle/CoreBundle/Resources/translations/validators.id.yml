@@ -2,10 +2,93 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    channel:
+        base_currency:
+            not_blank: Mohon masukan mata uang utama channel.
+        default_locale:
+            not_blank: Mohon masukan default bahasa channel.
+        contact_email:
+            invalid: Email ini tidak valid.
+            max: Email tidak boleh lebih dari {{ limit }} karakter.
+            min: Email setidaknya harus sepanjang {{ limit }} karakter.
+    channel_pricing:
+        price:
+            min: Harga sedikitnya {{ limit }}.
+            not_blank: Mohon masukan harga.
+    checkout:
+        shipping_method:
+            not_blank: Mohon pilih metode pengiriman.
     contact:
         email:
+            invalid: Email ini tidak valid.
             not_blank: Masukkan email Anda.
+        message:
+            not_blank: Masukkan pesan Anda.
+    currency:
+        enabled:
+            cannot_disable_base: Mata uang utama tidak dapat dinonaktifkan.
+    customer:
+        currency_code:
+            not_valid: Kode mata uang yang anda masukkan tidak valid.
+    cart_item:
+        not_available: '%itemName% tidak memiliki stok yang cukup.'
+    order:
+        currency_code:
+            not_valid: Kode mata uang yang anda masukkan tidak valid.
+        payment_method_eligibility: 'Metode pembayaran %paymentMethodName% ini telah dinonaktifkan. Silahkan pilih ulang metode pembayaran Anda.'
+        product_eligibility: 'Produk %productName% ini telah dinonaktifkan.'
+        shipping_method_eligibility: 'Produk tidak memenuhi persyaratan untuk pengiriman metode %shippingMethodName%. Silahkan memilih ulang metode pengiriman Anda.'
     locale:
         code:
             not_blank: Masukkan kode lokal.
             unique: Lokal ini sudah ada.
+        enabled:
+            cannot_disable_base: Bahasa utama tidak dapat dinonaktifkan.
+    product:
+        variants:
+            all_prices_defined: Anda harus menentukan harga Varian produk terlebih dahulu untuk channel yang baru.
+    product_attribute:
+        invalid: Posisi haruslah sebuah angka bulat.
+    product_image:
+        file:
+            max_size: Gambar terlalu besar - {{ size }}{{ suffix }}. Ukuran maksimal yang diperbolehkan berukuran {{ limit }}{{ suffix }}.
+            upload_ini_size: Gambar terlalu besar. Ukuran maksimal yang diperbolehkan {{ limit }}{{ suffix }}.
+    product_variant:
+        onHand:
+            min: Yang dimiliki harus lebih besar dari {{ limit }}.
+            not_blank: Masukkan yang dimiliki.
+            reserved: Yang tersedia harus lebih besar dari jumlah yang ada di unit
+        original_price:
+            min: Harga asli tidak boleh negatif.
+        weight:
+            min: Berat tidak boleh negatif.
+            invalid: Berat harus berupa angka.
+        width:
+            min: Lebar tidak boleh negatif.
+            invalid: Lebar harus berupa angka.
+        height:
+            min: Tinggi tidak boleh negatif.
+            invalid: Tinggi harus berupa angka.
+        depth:
+            min: Kedalaman tidak boleh negatif.
+            invalid: Kedalaman harus berupa angka.
+        channel_pricing:
+            all_defined: 'Anda harus menentukan harga untuk masing-masing channel.'
+    product_translation:
+        short_description:
+            max: Deskripsi singkat tidak boleh lebih dari {{ limit }} karakter.
+    taxon_image:
+        file:
+            max_size: Gambar terlalu besar - {{ size }}{{ suffix }}. Ukuran maksimal yang diperbolehkan berukuran {{ limit }}{{ suffix }}.
+            upload_ini_size: Gambar terlalu besar. Ukuran maksimal yang diperbolehkan {{ limit }}{{ suffix }}.
+    user:
+        email:
+            unique: Email ini telah digunakan.
+            min: Email harus mengandung minimal {{ min }} karakter.
+            max: Email maksimal hanya terdiri dari {{ max }} karakter.
+            invalid: Email ini tidak valid.
+        username:
+            unique: Username ini telah digunakan.
+            not_blank: Mohon masukkan nama Anda.
+        locale_code:
+            not_blank: Mohon pilih bahasa.

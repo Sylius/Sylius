@@ -20,7 +20,7 @@
         }
     ],
     "require": {
-        "php": "^5.6|^7.0",
+        "php": "^7.1",
 
         "sylius/resource-bundle": "^1.0",
         "symfony/framework-bundle": "^3.2",
@@ -29,10 +29,10 @@
         "webmozart/assert": "^1.0"
     },
     "require-dev": {
-        "doctrine/orm": "^2.5",
-        "phpspec/phpspec": "^3.2",
+        "doctrine/orm": "~2.5.0",
+        "phpspec/phpspec": "^4.0",
         "phpunit/phpunit": "^5.6",
-        "twig/twig": "^1.28",
+        "twig/twig": "^2.0",
         "sylius/currency-bundle": "^1.0",
         "symfony/form": "^3.2",
         "symfony/browser-kit": "^3.2",

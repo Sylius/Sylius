@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Configuration;
 
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
@@ -16,14 +18,14 @@ use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class ThemeConfiguration implements ConfigurationInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function getConfigTreeBuilder()
+    public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder();
         $rootNodeDefinition = $treeBuilder->root('sylius_theme');
@@ -44,7 +46,7 @@ final class ThemeConfiguration implements ConfigurationInterface
     /**
      * @param ArrayNodeDefinition $rootNodeDefinition
      */
-    private function addRequiredNameField(ArrayNodeDefinition $rootNodeDefinition)
+    private function addRequiredNameField(ArrayNodeDefinition $rootNodeDefinition): void
     {
         $rootNodeDefinition->children()->scalarNode('name')->isRequired()->cannotBeEmpty();
     }
@@ -52,7 +54,7 @@ final class ThemeConfiguration implements ConfigurationInterface
     /**
      * @param ArrayNodeDefinition $rootNodeDefinition
      */
-    private function addOptionalTitleField(ArrayNodeDefinition $rootNodeDefinition)
+    private function addOptionalTitleField(ArrayNodeDefinition $rootNodeDefinition): void
     {
         $rootNodeDefinition->children()->scalarNode('title')->cannotBeEmpty();
     }
@@ -60,7 +62,7 @@ final class ThemeConfiguration implements ConfigurationInterface
     /**
      * @param ArrayNodeDefinition $rootNodeDefinition
      */
-    private function addOptionalDescriptionField(ArrayNodeDefinition $rootNodeDefinition)
+    private function addOptionalDescriptionField(ArrayNodeDefinition $rootNodeDefinition): void
     {
         $rootNodeDefinition->children()->scalarNode('description')->cannotBeEmpty();
     }
@@ -68,7 +70,7 @@ final class ThemeConfiguration implements ConfigurationInterface
     /**
      * @param ArrayNodeDefinition $rootNodeDefinition
      */
-    private function addOptionalPathField(ArrayNodeDefinition $rootNodeDefinition)
+    private function addOptionalPathField(ArrayNodeDefinition $rootNodeDefinition): void
     {
         $rootNodeDefinition->children()->scalarNode('path')->cannotBeEmpty();
     }
@@ -76,7 +78,7 @@ final class ThemeConfiguration implements ConfigurationInterface
     /**
      * @param ArrayNodeDefinition $rootNodeDefinition
      */
-    private function addOptionalParentsList(ArrayNodeDefinition $rootNodeDefinition)
+    private function addOptionalParentsList(ArrayNodeDefinition $rootNodeDefinition): void
     {
         $parentsNodeDefinition = $rootNodeDefinition->children()->arrayNode('parents');
         $parentsNodeDefinition
@@ -90,7 +92,7 @@ final class ThemeConfiguration implements ConfigurationInterface
     /**
      * @param ArrayNodeDefinition $rootNodeDefinition
      */
-    private function addOptionalScreenshotsList(ArrayNodeDefinition $rootNodeDefinition)
+    private function addOptionalScreenshotsList(ArrayNodeDefinition $rootNodeDefinition): void
     {
         $screenshotsNodeDefinition = $rootNodeDefinition->children()->arrayNode('screenshots');
         $screenshotsNodeDefinition
@@ -125,7 +127,7 @@ final class ThemeConfiguration implements ConfigurationInterface
     /**
      * @param ArrayNodeDefinition $rootNodeDefinition
      */
-    private function addOptionalAuthorsList(ArrayNodeDefinition $rootNodeDefinition)
+    private function addOptionalAuthorsList(ArrayNodeDefinition $rootNodeDefinition): void
     {
         $authorsNodeDefinition = $rootNodeDefinition->children()->arrayNode('authors');
         $authorsNodeDefinition

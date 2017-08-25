@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ThemeBundle\Translation\Finder;
 
 use PhpSpec\ObjectBehavior;
@@ -16,51 +18,29 @@ use Sylius\Bundle\ThemeBundle\Translation\Finder\OrderingTranslationFilesFinder;
 use Sylius\Bundle\ThemeBundle\Translation\Finder\TranslationFilesFinderInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class OrderingTranslationFilesFinderSpec extends ObjectBehavior
 {
-    function let(TranslationFilesFinderInterface $translationFilesFinder)
+    function let(TranslationFilesFinderInterface $translationFilesFinder): void
     {
         $this->beConstructedWith($translationFilesFinder);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(OrderingTranslationFilesFinder::class);
-    }
-
-    function it_implements_Translation_Files_Finder_interface()
+    function it_implements_Translation_Files_Finder_interface(): void
     {
         $this->shouldImplement(TranslationFilesFinderInterface::class);
     }
 
     function it_puts_application_translations_files_before_bundle_translations_files(
         TranslationFilesFinderInterface $translationFilesFinder
-    ) {
+    ): void {
         $translationFilesFinder->findTranslationFiles('/some/path/to/theme')->willReturn([
             '/some/path/to/theme/AcmeBundle/messages.en.yml',
             '/some/path/to/theme/translations/messages.en.yml',
             '/some/path/to/theme/YcmeBundle/messages.en.yml',
         ]);
 
-        $this->findTranslationFiles('/some/path/to/theme')->shouldHaveFirstElement('/some/path/to/theme/translations/messages.en.yml');
-    }
-
-    public function getMatchers()
-    {
-        return [
-            'haveFirstElement' => function ($subject, $element) {
-                if ($element !== reset($subject)) {
-                    throw new \InvalidArgumentException(sprintf(
-                        'Expected "%s" as the first element, actual value was "%s".',
-                        $element,
-                        reset($subject)
-                    ));
-                }
-
-                return true;
-            },
-        ];
+        $this->findTranslationFiles('/some/path/to/theme')->shouldStartIteratingAs(['/some/path/to/theme/translations/messages.en.yml']);
     }
 }

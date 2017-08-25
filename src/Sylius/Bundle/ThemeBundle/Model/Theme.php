@@ -9,10 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Model;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 class Theme implements ThemeInterface
 {
@@ -37,17 +39,17 @@ class Theme implements ThemeInterface
     protected $description;
 
     /**
-     * @var ThemeAuthor[]
+     * @var array|ThemeAuthor[]
      */
     protected $authors = [];
 
     /**
-     * @var ThemeInterface[]
+     * @var array|ThemeInterface[]
      */
     protected $parents = [];
 
     /**
-     * @var ThemeScreenshot[]
+     * @var array|ThemeScreenshot[]
      */
     protected $screenshots = [];
 
@@ -55,7 +57,7 @@ class Theme implements ThemeInterface
      * @param string $name
      * @param string $path
      */
-    public function __construct($name, $path)
+    public function __construct(string $name, string $path)
     {
         $this->assertNameIsValid($name);
 
@@ -66,7 +68,7 @@ class Theme implements ThemeInterface
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->title ?: $this->name;
     }
@@ -74,7 +76,7 @@ class Theme implements ThemeInterface
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -82,7 +84,7 @@ class Theme implements ThemeInterface
     /**
      * {@inheritdoc}
      */
-    public function getPath()
+    public function getPath(): string
     {
         return $this->path;
     }
@@ -90,7 +92,7 @@ class Theme implements ThemeInterface
     /**
      * {@inheritdoc}
      */
-    public function getTitle()
+    public function getTitle(): ?string
     {
         return $this->title;
     }
@@ -98,7 +100,7 @@ class Theme implements ThemeInterface
     /**
      * {@inheritdoc}
      */
-    public function setTitle($title)
+    public function setTitle(?string $title): void
     {
         $this->title = $title;
     }
@@ -106,7 +108,7 @@ class Theme implements ThemeInterface
     /**
      * {@inheritdoc}
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -114,7 +116,7 @@ class Theme implements ThemeInterface
     /**
      * {@inheritdoc}
      */
-    public function setDescription($description)
+    public function setDescription(?string $description): void
     {
         $this->description = $description;
     }
@@ -122,7 +124,7 @@ class Theme implements ThemeInterface
     /**
      * {@inheritdoc}
      */
-    public function getAuthors()
+    public function getAuthors(): array
     {
         return $this->authors;
     }
@@ -130,7 +132,7 @@ class Theme implements ThemeInterface
     /**
      * {@inheritdoc}
      */
-    public function addAuthor(ThemeAuthor $author)
+    public function addAuthor(ThemeAuthor $author): void
     {
         $this->authors[] = $author;
     }
@@ -138,7 +140,7 @@ class Theme implements ThemeInterface
     /**
      * {@inheritdoc}
      */
-    public function removeAuthor(ThemeAuthor $author)
+    public function removeAuthor(ThemeAuthor $author): void
     {
         $this->authors = array_filter($this->authors, function ($currentAuthor) use ($author) {
             return $currentAuthor !== $author;
@@ -148,7 +150,7 @@ class Theme implements ThemeInterface
     /**
      * {@inheritdoc}
      */
-    public function getParents()
+    public function getParents(): array
     {
         return $this->parents;
     }
@@ -156,7 +158,7 @@ class Theme implements ThemeInterface
     /**
      * {@inheritdoc}
      */
-    public function addParent(ThemeInterface $theme)
+    public function addParent(ThemeInterface $theme): void
     {
         $this->parents[] = $theme;
     }
@@ -164,7 +166,7 @@ class Theme implements ThemeInterface
     /**
      * {@inheritdoc}
      */
-    public function removeParent(ThemeInterface $theme)
+    public function removeParent(ThemeInterface $theme): void
     {
         $this->parents = array_filter($this->parents, function ($currentTheme) use ($theme) {
             return $currentTheme !== $theme;
@@ -174,7 +176,7 @@ class Theme implements ThemeInterface
     /**
      * {@inheritdoc}
      */
-    public function getScreenshots()
+    public function getScreenshots(): array
     {
         return $this->screenshots;
     }
@@ -182,7 +184,7 @@ class Theme implements ThemeInterface
     /**
      * {@inheritdoc}
      */
-    public function addScreenshot(ThemeScreenshot $screenshot)
+    public function addScreenshot(ThemeScreenshot $screenshot): void
     {
         $this->screenshots[] = $screenshot;
     }
@@ -190,7 +192,7 @@ class Theme implements ThemeInterface
     /**
      * {@inheritdoc}
      */
-    public function removeScreenshot(ThemeScreenshot $screenshot)
+    public function removeScreenshot(ThemeScreenshot $screenshot): void
     {
         $this->screenshots = array_filter($this->screenshots, function ($currentScreenshot) use ($screenshot) {
             return $currentScreenshot !== $screenshot;
@@ -200,9 +202,9 @@ class Theme implements ThemeInterface
     /**
      * @param string $name
      */
-    private function assertNameIsValid($name)
+    private function assertNameIsValid(string $name): void
     {
-        $pattern = '/^[a-z\-]+\/[a-z\-]+$/i';
+        $pattern = '/^[a-zA-Z0-9\-]+\/[a-zA-Z0-9\-]+$/';
         if (false === (bool) preg_match($pattern, $name)) {
             throw new \InvalidArgumentException(sprintf(
                 'Given name "%s" does not match regular expression "%s".',

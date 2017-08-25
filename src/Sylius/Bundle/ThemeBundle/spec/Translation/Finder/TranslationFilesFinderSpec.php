@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ThemeBundle\Translation\Finder;
 
 use PhpSpec\ObjectBehavior;
@@ -18,21 +20,16 @@ use Sylius\Bundle\ThemeBundle\Translation\Finder\TranslationFilesFinderInterface
 use Symfony\Component\Finder\Finder;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class TranslationFilesFinderSpec extends ObjectBehavior
 {
-    function let(FinderFactoryInterface $finderFactory)
+    function let(FinderFactoryInterface $finderFactory): void
     {
         $this->beConstructedWith($finderFactory);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(TranslationFilesFinder::class);
-    }
-
-    function it_implements_translation_resource_finder_interface()
+    function it_implements_translation_resource_finder_interface(): void
     {
         $this->shouldImplement(TranslationFilesFinderInterface::class);
     }
@@ -40,7 +37,7 @@ final class TranslationFilesFinderSpec extends ObjectBehavior
     function it_returns_an_array_of_translation_resources_paths(
         FinderFactoryInterface $finderFactory,
         Finder $finder
-    ) {
+    ): void {
         $finderFactory->create()->willReturn($finder);
 
         $finder->in('/theme')->shouldBeCalled()->willReturn($finder);

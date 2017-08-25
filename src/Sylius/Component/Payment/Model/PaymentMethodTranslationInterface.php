@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Payment\Model;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
@@ -16,32 +18,32 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 interface PaymentMethodTranslationInterface extends ResourceInterface
 {
     /**
-     * @return string
+     * @return string|null
      */
-    public function getName();
+    public function getName(): ?string;
 
     /**
-     * @param string $name
+     * @param string|null $name
      */
-    public function setName($name);
+    public function setName(?string $name): void;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getDescription();
+    public function getDescription(): ?string;
 
     /**
-     * @param string $description
+     * @param string|null $description
      */
-    public function setDescription($description);
+    public function setDescription(?string $description): void;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getInstructions();
+    public function getInstructions(): ?string;
 
     /**
-     * @param string $instructions
+     * @param string|null $instructions
      */
-    public function setInstructions($instructions);
+    public function setInstructions(?string $instructions): void;
 }

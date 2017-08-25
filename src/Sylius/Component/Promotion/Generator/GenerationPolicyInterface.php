@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Promotion\Generator;
 
 /**
@@ -21,12 +23,12 @@ interface GenerationPolicyInterface
      *
      * @return bool
      */
-    public function isGenerationPossible(PromotionCouponGeneratorInstructionInterface $instruction);
+    public function isGenerationPossible(PromotionCouponGeneratorInstructionInterface $instruction): bool;
 
     /**
      * @param PromotionCouponGeneratorInstructionInterface $instruction
      *
      * @return int
      */
-    public function getPossibleGenerationAmount(PromotionCouponGeneratorInstructionInterface $instruction);
+    public function getPossibleGenerationAmount(PromotionCouponGeneratorInstructionInterface $instruction): int;
 }

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
@@ -106,7 +108,7 @@ final class TaxationContext implements Context
         $taxRate->setName($taxRateName);
         $taxRate->setCode($taxRateCode);
         $taxRate->setZone($zone);
-        $taxRate->setAmount($this->getAmountFromString($taxRateAmount));
+        $taxRate->setAmount((float) $this->getAmountFromString($taxRateAmount));
         $taxRate->setCategory($taxCategory);
         $taxRate->setCalculator('default');
         $taxRate->setIncludedInPrice($includedInPrice);
@@ -153,7 +155,7 @@ final class TaxationContext implements Context
      */
     public function theTaxRateIsOfAmount(TaxRateInterface $taxRate, $amount)
     {
-        $taxRate->setAmount($this->getAmountFromString($amount));
+        $taxRate->setAmount((float) $this->getAmountFromString($amount));
 
         $this->objectManager->flush();
     }

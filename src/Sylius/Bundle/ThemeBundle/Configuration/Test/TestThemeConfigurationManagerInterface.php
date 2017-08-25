@@ -9,30 +9,32 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Configuration\Test;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 interface TestThemeConfigurationManagerInterface
 {
     /**
      * @return array
      */
-    public function findAll();
+    public function findAll(): array;
 
     /**
      * @param array $configuration
      */
-    public function add(array $configuration);
+    public function add(array $configuration): void;
 
     /**
      * @param string $themeName
      */
-    public function remove($themeName);
+    public function remove(string $themeName): void;
 
     /**
      * Clear currently used configurations storage.
      */
-    public function clear();
+    public function clear(): void;
 }

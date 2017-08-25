@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Resolver;
 
 use Sylius\Component\Core\Model\PaymentInterface;
@@ -38,7 +40,7 @@ final class ChannelBasedPaymentMethodsResolver implements PaymentMethodsResolver
     /**
      * {@inheritdoc}
      */
-    public function getSupportedMethods(BasePaymentInterface $payment)
+    public function getSupportedMethods(BasePaymentInterface $payment): array
     {
         Assert::true($this->supports($payment), 'This payment method is not support by resolver');
 
@@ -48,7 +50,7 @@ final class ChannelBasedPaymentMethodsResolver implements PaymentMethodsResolver
     /**
      * {@inheritdoc}
      */
-    public function supports(BasePaymentInterface $payment)
+    public function supports(BasePaymentInterface $payment): bool
     {
         return $payment instanceof PaymentInterface &&
             null !== $payment->getOrder() &&

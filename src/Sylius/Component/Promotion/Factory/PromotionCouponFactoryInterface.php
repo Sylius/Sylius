@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Promotion\Factory;
 
 use Sylius\Component\Promotion\Model\PromotionCouponInterface;
@@ -27,5 +29,5 @@ interface PromotionCouponFactoryInterface extends FactoryInterface
      *
      * @throws \InvalidArgumentException
      */
-    public function createForPromotion(PromotionInterface $promotionId);
+    public function createForPromotion(PromotionInterface $promotionId): PromotionCouponInterface;
 }

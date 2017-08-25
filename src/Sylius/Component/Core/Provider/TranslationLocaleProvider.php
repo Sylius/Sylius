@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Provider;
 
 use Sylius\Component\Locale\Model\LocaleInterface;
@@ -43,7 +45,7 @@ final class TranslationLocaleProvider implements TranslationLocaleProviderInterf
     /**
      * {@inheritdoc}
      */
-    public function getDefinedLocalesCodes()
+    public function getDefinedLocalesCodes(): array
     {
         $locales = $this->localeRepository->findAll();
 
@@ -58,7 +60,7 @@ final class TranslationLocaleProvider implements TranslationLocaleProviderInterf
     /**
      * {@inheritdoc}
      */
-    public function getDefaultLocaleCode()
+    public function getDefaultLocaleCode(): string
     {
         return $this->defaultLocaleCode;
     }

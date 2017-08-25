@@ -9,17 +9,19 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Channel\Context;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 class ChannelNotFoundException extends \RuntimeException
 {
     /**
      * {@inheritdoc}
      */
-    public function __construct(\Exception $previousException = null)
+    public function __construct(?\Exception $previousException = null)
     {
         parent::__construct('Channel could not be found!', 0, $previousException);
     }

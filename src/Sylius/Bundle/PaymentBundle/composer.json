@@ -20,15 +20,15 @@
         }
     ],
     "require": {
-        "php": "^5.6|^7.0",
+        "php": "^7.1",
 
         "sylius/payment": "^1.0",
         "sylius/resource-bundle": "^1.0",
         "symfony/framework-bundle": "^3.2"
     },
     "require-dev": {
-        "doctrine/orm": "^2.5",
-        "phpspec/phpspec": "^3.2",
+        "doctrine/orm": "~2.5.0",
+        "phpspec/phpspec": "^4.0",
         "sylius/locale-bundle": "^1.0",
         "phpunit/phpunit": "^5.6",
         "symfony/browser-kit": "^3.2",

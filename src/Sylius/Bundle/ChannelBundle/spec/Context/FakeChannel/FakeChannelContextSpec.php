@@ -9,9 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ChannelBundle\Context\FakeChannel;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Bundle\ChannelBundle\Context\FakeChannel\FakeChannelCodeProviderInterface;
 use Sylius\Bundle\ChannelBundle\Context\FakeChannel\FakeChannelContext;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
@@ -22,7 +25,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class FakeChannelContextSpec extends ObjectBehavior
 {
@@ -30,16 +33,11 @@ final class FakeChannelContextSpec extends ObjectBehavior
         FakeChannelCodeProviderInterface $fakeChannelCodeProvider,
         ChannelRepositoryInterface $channelRepository,
         RequestStack $requestStack
-    ) {
+    ): void {
         $this->beConstructedWith($fakeChannelCodeProvider, $channelRepository, $requestStack);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(FakeChannelContext::class);
-    }
-
-    function it_implements_channel_context_interface()
+    function it_implements_channel_context_interface(): void
     {
         $this->shouldImplement(ChannelContextInterface::class);
     }
@@ -50,7 +48,7 @@ final class FakeChannelContextSpec extends ObjectBehavior
         RequestStack $requestStack,
         Request $request,
         ChannelInterface $channel
-    ) {
+    ): void {
         $requestStack->getMasterRequest()->willReturn($request);
 
         $fakeChannelCodeProvider->getCode($request)->willReturn('CHANNEL_CODE');
@@ -60,9 +58,24 @@ final class FakeChannelContextSpec extends ObjectBehavior
         $this->getChannel()->shouldReturn($channel);
     }
 
-    function it_throws_a_channel_not_found_exception_if_there_is_no_master_request(RequestStack $requestStack)
+    function it_throws_a_channel_not_found_exception_if_there_is_no_master_request(RequestStack $requestStack): void
     {
         $requestStack->getMasterRequest()->willReturn(null);
+
+        $this->shouldThrow(ChannelNotFoundException::class)->during('getChannel');
+    }
+
+    function it_throws_a_channel_not_found_exception_if_provided_code_was_null(
+        FakeChannelCodeProviderInterface $fakeChannelCodeProvider,
+        ChannelRepositoryInterface $channelRepository,
+        RequestStack $requestStack,
+        Request $request
+    ): void {
+        $requestStack->getMasterRequest()->willReturn($request);
+
+        $fakeChannelCodeProvider->getCode($request)->willReturn(null);
+
+        $channelRepository->findOneByCode(Argument::any())->shouldNotBeCalled();
 
         $this->shouldThrow(ChannelNotFoundException::class)->during('getChannel');
     }
@@ -72,7 +85,7 @@ final class FakeChannelContextSpec extends ObjectBehavior
         ChannelRepositoryInterface $channelRepository,
         RequestStack $requestStack,
         Request $request
-    ) {
+    ): void {
         $requestStack->getMasterRequest()->willReturn($request);
 
         $fakeChannelCodeProvider->getCode($request)->willReturn('CHANNEL_CODE');

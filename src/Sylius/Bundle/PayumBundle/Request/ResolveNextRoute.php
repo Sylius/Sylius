@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\PayumBundle\Request;
 
 use Payum\Core\Request\Generic;
@@ -29,9 +31,9 @@ class ResolveNextRoute extends Generic
     private $routeParameters = [];
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getRouteName()
+    public function getRouteName(): ?string
     {
         return $this->routeName;
     }
@@ -39,15 +41,15 @@ class ResolveNextRoute extends Generic
     /**
      * @param string $routeName
      */
-    public function setRouteName($routeName)
+    public function setRouteName(string $routeName): void
     {
         $this->routeName = $routeName;
     }
 
     /**
-     * @return mixed
+     * @return array
      */
-    public function getRouteParameters()
+    public function getRouteParameters(): array
     {
         return $this->routeParameters;
     }

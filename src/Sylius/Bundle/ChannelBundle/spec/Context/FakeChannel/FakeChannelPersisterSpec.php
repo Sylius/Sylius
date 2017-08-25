@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ChannelBundle\Context\FakeChannel;
 
 use PhpSpec\ObjectBehavior;
@@ -23,21 +25,16 @@ use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class FakeChannelPersisterSpec extends ObjectBehavior
 {
-    function let(FakeChannelCodeProviderInterface $fakeHostnameProvider)
+    function let(FakeChannelCodeProviderInterface $fakeHostnameProvider): void
     {
         $this->beConstructedWith($fakeHostnameProvider);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(FakeChannelPersister::class);
-    }
-
-    function it_applies_only_to_master_requests(FilterResponseEvent $filterResponseEvent)
+    function it_applies_only_to_master_requests(FilterResponseEvent $filterResponseEvent): void
     {
         $filterResponseEvent->getRequestType()->willReturn(HttpKernelInterface::SUB_REQUEST);
 
@@ -51,7 +48,7 @@ final class FakeChannelPersisterSpec extends ObjectBehavior
         FakeChannelCodeProviderInterface $fakeHostnameProvider,
         FilterResponseEvent $filterResponseEvent,
         Request $request
-    ) {
+    ): void {
         $filterResponseEvent->getRequestType()->willReturn(HttpKernelInterface::MASTER_REQUEST);
         $filterResponseEvent->getRequest()->willReturn($request);
 
@@ -68,7 +65,7 @@ final class FakeChannelPersisterSpec extends ObjectBehavior
         Request $request,
         Response $response,
         ResponseHeaderBag $responseHeaderBag
-    ) {
+    ): void {
         $filterResponseEvent->getRequestType()->willReturn(HttpKernelInterface::MASTER_REQUEST);
         $filterResponseEvent->getRequest()->willReturn($request);
 

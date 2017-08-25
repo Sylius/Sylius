@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -46,7 +48,7 @@ final class PaymentMethodSpec extends ObjectBehavior
         $this->addChannel($firstChannel);
         $this->addChannel($secondChannel);
 
-        $this->getChannels()->shouldBeSameAs(new ArrayCollection([$firstChannel, $secondChannel]));
+        $this->getChannels()->shouldIterateAs([$firstChannel, $secondChannel]);
     }
 
     function it_can_add_and_remove_channels(ChannelInterface $channel)
@@ -62,24 +64,5 @@ final class PaymentMethodSpec extends ObjectBehavior
     {
         $this->setGatewayConfig($gatewayConfig);
         $this->getGatewayConfig()->shouldReturn($gatewayConfig);
-    }
-
-    public function getMatchers()
-    {
-        return [
-            'beSameAs' => function ($subject, $key) {
-                if (!$subject instanceof Collection || !$key instanceof Collection) {
-                    return false;
-                }
-
-                for ($i = 0; $i < $subject->count(); $i++) {
-                    if ($subject->get($i) !== $key->get($i)->getWrappedObject()) {
-                        return false;
-                    }
-                }
-
-                return true;
-            },
-        ];
     }
 }

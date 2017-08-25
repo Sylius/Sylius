@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Addressing\Converter;
 
 use Symfony\Component\Intl\Intl;
@@ -21,7 +23,7 @@ final class CountryNameConverter implements CountryNameConverterInterface
     /**
      * {@inheritdoc}
      */
-    public function convertToCode($name, $locale = 'en')
+    public function convertToCode(string $name, string $locale = 'en'): string
     {
         $names = Intl::getRegionBundle()->getCountryNames($locale);
         $countryCode = array_search($name, $names, true);

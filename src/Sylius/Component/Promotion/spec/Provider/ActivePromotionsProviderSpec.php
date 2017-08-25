@@ -9,12 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Promotion\Provider;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
-use Sylius\Component\Promotion\Provider\ActivePromotionsProvider;
 use Sylius\Component\Promotion\Provider\PreQualifiedPromotionsProviderInterface;
 use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
 
@@ -23,17 +24,12 @@ use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
  */
 final class ActivePromotionsProviderSpec extends ObjectBehavior
 {
-    function let(PromotionRepositoryInterface $promotionRepository)
+    function let(PromotionRepositoryInterface $promotionRepository): void
     {
         $this->beConstructedWith($promotionRepository);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ActivePromotionsProvider::class);
-    }
-
-    function it_implements_active_promotions_provider_interface()
+    function it_implements_active_promotions_provider_interface(): void
     {
         $this->shouldImplement(PreQualifiedPromotionsProviderInterface::class);
     }
@@ -43,7 +39,7 @@ final class ActivePromotionsProviderSpec extends ObjectBehavior
         PromotionInterface $promotion1,
         PromotionInterface $promotion2,
         PromotionSubjectInterface $subject
-    ) {
+    ): void {
         $promotionRepository->findActive()->willReturn([$promotion1, $promotion2]);
 
         $this->getPromotions($subject)->shouldReturn([$promotion1, $promotion2]);

@@ -49,7 +49,7 @@ Feature: Making changes in existing addresses
         And I save my changed address
         Then I should be notified that the address has been successfully updated
         And I should still have a single address in my address book
-        And it should contain "Australia"
+        And it should contain "AUSTRALIA"
         And it should contain "Queensland"
 
     @ui @javascript

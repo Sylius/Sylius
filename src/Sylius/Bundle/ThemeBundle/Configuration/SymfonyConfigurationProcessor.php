@@ -9,13 +9,15 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Configuration;
 
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Processor;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class SymfonyConfigurationProcessor implements ConfigurationProcessorInterface
 {
@@ -42,7 +44,7 @@ final class SymfonyConfigurationProcessor implements ConfigurationProcessorInter
     /**
      * {@inheritdoc}
      */
-    public function process(array $configs)
+    public function process(array $configs): array
     {
         return $this->processor->processConfiguration($this->configuration, $configs);
     }

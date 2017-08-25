@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\Command;
 
 use Sylius\Component\Resource\Metadata\MetadataInterface;
@@ -35,6 +37,7 @@ final class DebugResourceCommand extends Command
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct();
+        
         $this->registry = $registry;
     }
 

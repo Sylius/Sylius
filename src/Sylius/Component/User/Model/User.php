@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\User\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -64,7 +66,7 @@ class User implements UserInterface
     protected $plainPassword;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $lastLogin;
 
@@ -83,12 +85,12 @@ class User implements UserInterface
     protected $passwordResetToken;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $passwordRequestedAt;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $verifiedAt;
 
@@ -98,12 +100,12 @@ class User implements UserInterface
     protected $locked = false;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $expiresAt;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $credentialsExpireAt;
 
@@ -131,7 +133,7 @@ class User implements UserInterface
 
     public function __construct()
     {
-        $this->salt = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
+        $this->salt = base_convert(sha1(uniqid((string) mt_rand(), true)), 16, 36);
         $this->oauthAccounts = new ArrayCollection();
         $this->createdAt = new \DateTime();
 
@@ -268,9 +270,9 @@ class User implements UserInterface
     }
 
     /**
-     * @param \DateTime $date
+     * @param \DateTimeInterface $date
      */
-    public function setExpiresAt(\DateTime $date = null)
+    public function setExpiresAt(\DateTimeInterface $date = null)
     {
         $this->expiresAt = $date;
     }
@@ -286,7 +288,7 @@ class User implements UserInterface
     /**
      * {@inheritdoc}
      */
-    public function setCredentialsExpireAt(\DateTime $date = null)
+    public function setCredentialsExpireAt(\DateTimeInterface $date = null)
     {
         $this->credentialsExpireAt = $date;
     }
@@ -302,7 +304,7 @@ class User implements UserInterface
     /**
      * {@inheritdoc}
      */
-    public function setLastLogin(\DateTime $time = null)
+    public function setLastLogin(\DateTimeInterface $time = null)
     {
         $this->lastLogin = $time;
     }
@@ -417,7 +419,7 @@ class User implements UserInterface
         if (null === $this->passwordRequestedAt) {
             return false;
         }
-        
+
         $threshold = new \DateTime();
         $threshold->sub($ttl);
         return $threshold <= $this->passwordRequestedAt;
@@ -434,7 +436,7 @@ class User implements UserInterface
     /**
      * {@inheritdoc}
      */
-    public function setPasswordRequestedAt(\DateTime $date = null)
+    public function setPasswordRequestedAt(\DateTimeInterface $date = null)
     {
         $this->passwordRequestedAt = $date;
     }
@@ -458,7 +460,7 @@ class User implements UserInterface
     /**
      * {@inheritdoc}
      */
-    public function setVerifiedAt(\DateTime $verifiedAt = null)
+    public function setVerifiedAt(\DateTimeInterface $verifiedAt = null)
     {
         $this->verifiedAt = $verifiedAt;
     }
@@ -550,11 +552,11 @@ class User implements UserInterface
     }
 
     /**
-     * @param \DateTime $date
+     * @param \DateTimeInterface $date
      *
      * @return bool
      */
-    protected function hasExpired(\DateTime $date = null)
+    protected function hasExpired(\DateTimeInterface $date = null)
     {
         return null !== $date && new \DateTime() >= $date;
     }

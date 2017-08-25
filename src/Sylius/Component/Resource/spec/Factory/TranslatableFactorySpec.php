@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Resource\Factory;
 
 use PhpSpec\ObjectBehavior;
@@ -24,22 +26,17 @@ use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInte
  */
 final class TranslatableFactorySpec extends ObjectBehavior
 {
-    function let(FactoryInterface $factory, TranslationLocaleProviderInterface $localeProvider)
+    function let(FactoryInterface $factory, TranslationLocaleProviderInterface $localeProvider): void
     {
         $this->beConstructedWith($factory, $localeProvider);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(TranslatableFactory::class);
-    }
-
-    function it_implements_translatable_factory_interface()
+    function it_implements_translatable_factory_interface(): void
     {
         $this->shouldImplement(TranslatableFactoryInterface::class);
     }
 
-    function it_throws_an_exception_if_resource_is_not_translatable(FactoryInterface $factory, \stdClass $resource)
+    function it_throws_an_exception_if_resource_is_not_translatable(FactoryInterface $factory, \stdClass $resource): void
     {
         $factory->createNew()->willReturn($resource);
 
@@ -53,7 +50,7 @@ final class TranslatableFactorySpec extends ObjectBehavior
         FactoryInterface $factory,
         TranslationLocaleProviderInterface $localeProvider,
         TranslatableInterface $resource
-    ) {
+    ): void {
         $localeProvider->getDefaultLocaleCode()->willReturn('pl_PL');
 
         $factory->createNew()->willReturn($resource);

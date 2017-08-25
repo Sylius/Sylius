@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\AdminBundle\Event;
 
 use Knp\Menu\FactoryInterface;
@@ -41,7 +43,7 @@ class ProductVariantMenuBuilderEvent extends MenuBuilderEvent
     /**
      * @return ProductVariantInterface
      */
-    public function getProductVariant()
+    public function getProductVariant(): ProductVariantInterface
     {
         return $this->productVariant;
     }

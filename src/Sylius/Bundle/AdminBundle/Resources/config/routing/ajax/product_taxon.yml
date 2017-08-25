@@ -3,3 +3,5 @@ sylius_admin_ajax_product_taxons_update_position:
     methods: [PUT]
     defaults:
         _controller: sylius.controller.product_taxon:updatePositionsAction
+        _sylius:
+            permission: true

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ShopBundle\EmailManager;
 
 use Sylius\Component\Core\Model\OrderInterface;
@@ -21,5 +23,5 @@ interface OrderEmailManagerInterface
     /**
      * @param OrderInterface $order
      */
-    public function sendConfirmationEmail(OrderInterface $order);
+    public function sendConfirmationEmail(OrderInterface $order): void;
 }

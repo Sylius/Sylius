@@ -9,3 +9,4 @@ sylius_admin_partial_product_show:
         _sylius:
             template: $template
             vars: $vars
+            permission: true

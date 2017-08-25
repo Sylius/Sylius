@@ -9,36 +9,32 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Locale\Context;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
-use Sylius\Component\Locale\Context\CompositeLocaleContext;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 class CompositeLocaleContextSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(CompositeLocaleContext::class);
-    }
-
-    function it_implements_locale_context_interface()
+    function it_implements_locale_context_interface(): void
     {
         $this->shouldImplement(LocaleContextInterface::class);
     }
 
-    function it_throws_a_locale_not_found_exception_if_there_are_no_nested_locale_contexts_defined()
+    function it_throws_a_locale_not_found_exception_if_there_are_no_nested_locale_contexts_defined(): void
     {
         $this->shouldThrow(LocaleNotFoundException::class)->during('getLocaleCode');
     }
 
     function it_throws_a_locale_not_found_exception_if_none_of_nested_locale_contexts_returned_a_locale(
         LocaleContextInterface $localeContext
-    ) {
+    ): void {
         $localeContext->getLocaleCode()->willThrow(LocaleNotFoundException::class);
 
         $this->addContext($localeContext);
@@ -50,7 +46,7 @@ class CompositeLocaleContextSpec extends ObjectBehavior
         LocaleContextInterface $firstLocaleContext,
         LocaleContextInterface $secondLocaleContext,
         LocaleContextInterface $thirdLocaleContext
-    ) {
+    ): void {
         $firstLocaleContext->getLocaleCode()->willThrow(LocaleNotFoundException::class);
         $secondLocaleContext->getLocaleCode()->willReturn('en_US');
         $thirdLocaleContext->getLocaleCode()->shouldNotBeCalled();
@@ -66,7 +62,7 @@ class CompositeLocaleContextSpec extends ObjectBehavior
         LocaleContextInterface $firstLocaleContext,
         LocaleContextInterface $secondLocaleContext,
         LocaleContextInterface $thirdLocaleContext
-    ) {
+    ): void {
         $firstLocaleContext->getLocaleCode()->shouldNotBeCalled();
         $secondLocaleContext->getLocaleCode()->willReturn('pl_PL');
         $thirdLocaleContext->getLocaleCode()->willThrow(LocaleNotFoundException::class);

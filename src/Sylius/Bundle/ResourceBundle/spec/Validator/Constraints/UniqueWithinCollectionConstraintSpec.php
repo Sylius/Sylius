@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ResourceBundle\Validator\Constraints;
 
 use PhpSpec\ObjectBehavior;
@@ -21,17 +23,12 @@ use Symfony\Component\Validator\Constraint;
  */
 final class UniqueWithinCollectionConstraintSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(UniqueWithinCollectionConstraint::class);
-    }
-
-    function it_extends_symfony_constraint_class()
+    function it_extends_symfony_constraint_class(): void
     {
         $this->shouldHaveType(Constraint::class);
     }
 
-    function it_is_validate_by_unique_field_during_creation_validator()
+    function it_is_validate_by_unique_field_during_creation_validator(): void
     {
         $this->validatedBy()->shouldReturn(UniqueWithinCollectionConstraintValidator::class);
     }

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\AdminBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
@@ -16,7 +18,6 @@ use Knp\Menu\ItemInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\AdminBundle\Event\CustomerShowMenuBuilderEvent;
-use Sylius\Bundle\AdminBundle\Menu\CustomerShowMenuBuilder;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -29,13 +30,8 @@ final class CustomerShowMenuBuilderSpec extends ObjectBehavior
     function let(
         FactoryInterface $factory,
         EventDispatcherInterface $eventDispatcher
-    ) {
+    ): void {
         $this->beConstructedWith($factory, $eventDispatcher);
-    }
-
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(CustomerShowMenuBuilder::class);
     }
 
     function it_creates_a_customer_show_menu_for_customer_with_user(
@@ -44,7 +40,7 @@ final class CustomerShowMenuBuilderSpec extends ObjectBehavior
         ItemInterface $menu,
         CustomerInterface $customer,
         UserInterface $user
-    ) {
+    ): void {
         $factory->createItem('root')->willReturn($menu);
 
         $customer->getId()->willReturn(7);
@@ -100,7 +96,7 @@ final class CustomerShowMenuBuilderSpec extends ObjectBehavior
         EventDispatcherInterface $eventDispatcher,
         ItemInterface $menu,
         CustomerInterface $customer
-    ) {
+    ): void {
         $factory->createItem('root')->willReturn($menu);
 
         $customer->getId()->willReturn(7);
@@ -130,7 +126,7 @@ final class CustomerShowMenuBuilderSpec extends ObjectBehavior
     function it_returns_an_empty_customer_show_menu_when_there_is_no_customer_in_options(
         FactoryInterface $factory,
         ItemInterface $menu
-    ) {
+    ): void {
 
         $factory->createItem('root')->willReturn($menu);
 

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ShopBundle\Locale;
 
 use Sylius\Component\Channel\Context\ChannelContextInterface;
@@ -17,7 +19,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class StorageBasedLocaleSwitcher implements LocaleSwitcherInterface
 {
@@ -44,7 +46,7 @@ final class StorageBasedLocaleSwitcher implements LocaleSwitcherInterface
     /**
      * {@inheritdoc}
      */
-    public function handle(Request $request, $localeCode)
+    public function handle(Request $request, string $localeCode): RedirectResponse
     {
         $this->localeStorage->set($this->channelContext->getChannel(), $localeCode);
 

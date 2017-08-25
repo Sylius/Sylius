@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -83,11 +85,17 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
      */
     protected $shippingRequired = true;
 
+    /**
+     * @var Collection|ProductImageInterface[]
+     */
+    protected $images;
+
     public function __construct()
     {
         parent::__construct();
 
         $this->channelPricings = new ArrayCollection();
+        $this->images = new ArrayCollection();
     }
 
     /**
@@ -113,7 +121,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function getVersion()
+    public function getVersion(): ?int
     {
         return $this->version;
     }
@@ -121,7 +129,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function setVersion($version)
+    public function setVersion(?int $version): void
     {
         $this->version = $version;
     }
@@ -129,7 +137,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function isInStock()
+    public function isInStock(): bool
     {
         return 0 < $this->onHand;
     }
@@ -137,7 +145,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function getOnHold()
+    public function getOnHold(): ?int
     {
         return $this->onHold;
     }
@@ -145,7 +153,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function setOnHold($onHold)
+    public function setOnHold(?int $onHold): void
     {
         $this->onHold = $onHold;
     }
@@ -153,7 +161,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function getOnHand()
+    public function getOnHand(): ?int
     {
         return $this->onHand;
     }
@@ -161,7 +169,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function setOnHand($onHand)
+    public function setOnHand(?int $onHand): void
     {
         $this->onHand = (0 > $onHand) ? 0 : $onHand;
     }
@@ -169,7 +177,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function isTracked()
+    public function isTracked(): bool
     {
         return $this->tracked;
     }
@@ -177,17 +185,15 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function setTracked($tracked)
+    public function setTracked(bool $tracked): void
     {
-        Assert::boolean($tracked);
-
         $this->tracked = $tracked;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getInventoryName()
+    public function getInventoryName(): ?string
     {
         return $this->getProduct()->getName();
     }
@@ -195,7 +201,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function getShippingCategory()
+    public function getShippingCategory(): ?ShippingCategoryInterface
     {
         return $this->shippingCategory;
     }
@@ -275,7 +281,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function getShippingWeight()
+    public function getShippingWeight(): ?float
     {
         return $this->getWeight();
     }
@@ -283,7 +289,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function getShippingWidth()
+    public function getShippingWidth(): ?float
     {
         return $this->getWidth();
     }
@@ -291,7 +297,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function getShippingHeight()
+    public function getShippingHeight(): ?float
     {
         return $this->getHeight();
     }
@@ -299,7 +305,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function getShippingDepth()
+    public function getShippingDepth(): ?float
     {
         return $this->getDepth();
     }
@@ -307,7 +313,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function getShippingVolume()
+    public function getShippingVolume(): ?float
     {
         return $this->depth * $this->height * $this->width;
     }
@@ -315,7 +321,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function getTaxCategory()
+    public function getTaxCategory(): ?TaxCategoryInterface
     {
         return $this->taxCategory;
     }
@@ -400,5 +406,62 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     public function setShippingRequired($shippingRequired)
     {
         $this->shippingRequired = $shippingRequired;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getImages()
+    {
+        return $this->images;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getImagesByType($type)
+    {
+        return $this->images->filter(function (ProductImageInterface $image) use ($type) {
+            return $type === $image->getType();
+        });
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasImages()
+    {
+        return !$this->images->isEmpty();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasImage(ProductImageInterface $image)
+    {
+        return $this->images->contains($image);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addImage(ProductImageInterface $image)
+    {
+        if ($this->hasImage($image)) {
+            return;
+        }
+        $image->setOwner($this->getProduct());
+        $image->addProductVariant($this);
+        $this->images->add($image);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeImage(ProductImageInterface $image)
+    {
+        if ($this->hasImage($image)) {
+            $this->images->removeElement($image);
+        }
     }
 }

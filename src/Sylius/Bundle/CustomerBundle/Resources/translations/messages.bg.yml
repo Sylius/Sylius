@@ -5,12 +5,20 @@ sylius:
     form:
         customer:
             first_name: Собствено име
+            group: Група
             last_name: Фамилно име
             email: Имейл
             phone_number: Телефонен номер
             gender: Пол
             birthday: Рожден ден
+            billing_address: Адрес за фактуриране
+            different_billing_address: Използвайте различен адрес за фактуриране?
+            only_customer_registration: Създаване на профил?
+            subscribed_to_newsletter: Абонирайте се за бюлетин
+        customer_group:
+            name: Име
+            roles: Роли
     gender:
-        unknown: Неизвестно
+        unknown: Неизвестен
         male: Мъжки
         female: Женски

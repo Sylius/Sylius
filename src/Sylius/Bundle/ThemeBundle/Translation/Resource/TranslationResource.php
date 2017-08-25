@@ -9,10 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Translation\Resource;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class TranslationResource implements TranslationResourceInterface
 {
@@ -39,7 +41,7 @@ final class TranslationResource implements TranslationResourceInterface
     /**
      * @param string $filepath
      */
-    public function __construct($filepath)
+    public function __construct(string $filepath)
     {
         $this->name = $filepath;
 
@@ -59,7 +61,7 @@ final class TranslationResource implements TranslationResourceInterface
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -67,7 +69,7 @@ final class TranslationResource implements TranslationResourceInterface
     /**
      * {@inheritdoc}
      */
-    public function getLocale()
+    public function getLocale(): string
     {
         return $this->locale;
     }
@@ -75,7 +77,7 @@ final class TranslationResource implements TranslationResourceInterface
     /**
      * {@inheritdoc}
      */
-    public function getFormat()
+    public function getFormat(): string
     {
         return $this->format;
     }
@@ -83,7 +85,7 @@ final class TranslationResource implements TranslationResourceInterface
     /**
      * {@inheritdoc}
      */
-    public function getDomain()
+    public function getDomain(): string
     {
         return $this->domain;
     }

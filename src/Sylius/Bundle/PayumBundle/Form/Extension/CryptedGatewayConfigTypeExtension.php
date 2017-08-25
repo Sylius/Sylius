@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\PayumBundle\Form\Extension;
 
 use Payum\Core\Security\CryptedInterface;
@@ -20,7 +22,7 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class CryptedGatewayConfigTypeExtension extends AbstractTypeExtension
 {
@@ -32,7 +34,7 @@ final class CryptedGatewayConfigTypeExtension extends AbstractTypeExtension
     /**
      * @param CypherInterface|null $cypher
      */
-    public function __construct(CypherInterface $cypher = null)
+    public function __construct(?CypherInterface $cypher = null)
     {
         $this->cypher = $cypher;
     }
@@ -40,7 +42,7 @@ final class CryptedGatewayConfigTypeExtension extends AbstractTypeExtension
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         if (null === $this->cypher) {
             return;
@@ -75,7 +77,7 @@ final class CryptedGatewayConfigTypeExtension extends AbstractTypeExtension
     /**
      * {@inheritdoc}
      */
-    public function getExtendedType()
+    public function getExtendedType(): string
     {
         return GatewayConfigType::class;
     }

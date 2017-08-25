@@ -9,20 +9,22 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Translation\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class TranslatorFallbackLocalesPass implements CompilerPassInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         try {
             $symfonyTranslator = $container->findDefinition('translator.default');
@@ -31,7 +33,7 @@ final class TranslatorFallbackLocalesPass implements CompilerPassInterface
             return;
         }
 
-        $methodCalls = array_filter($symfonyTranslator->getMethodCalls(), function (array $methodCall) {
+        $methodCalls = array_filter($symfonyTranslator->getMethodCalls(), function (array $methodCall): bool {
             return 'setFallbackLocales' === $methodCall[0];
         });
 

@@ -156,7 +156,7 @@
                     "en_US": {
                         "locale": "en_US",
                         "id": @integer@,
-                        "name": "Cach on delivery",
+                        "name": "Cash on delivery",
                         "description": "@string@"
                     }
                 },

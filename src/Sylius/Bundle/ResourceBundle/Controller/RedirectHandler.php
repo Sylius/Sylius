@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
@@ -39,7 +41,7 @@ final class RedirectHandler implements RedirectHandlerInterface
     /**
      * {@inheritdoc}
      */
-    public function redirectToResource(RequestConfiguration $configuration, ResourceInterface $resource)
+    public function redirectToResource(RequestConfiguration $configuration, ResourceInterface $resource): Response
     {
         try {
             return $this->redirectToRoute(
@@ -59,7 +61,7 @@ final class RedirectHandler implements RedirectHandlerInterface
     /**
      * {@inheritdoc}
      */
-    public function redirectToIndex(RequestConfiguration $configuration, ResourceInterface $resource = null)
+    public function redirectToIndex(RequestConfiguration $configuration, ?ResourceInterface $resource = null): Response
     {
         return $this->redirectToRoute(
             $configuration,
@@ -71,7 +73,7 @@ final class RedirectHandler implements RedirectHandlerInterface
     /**
      * {@inheritdoc}
      */
-    public function redirectToRoute(RequestConfiguration $configuration, $route, array $parameters = [])
+    public function redirectToRoute(RequestConfiguration $configuration, string $route, array $parameters = []): Response
     {
         if ('referer' === $route) {
             return $this->redirectToReferer($configuration);
@@ -83,7 +85,7 @@ final class RedirectHandler implements RedirectHandlerInterface
     /**
      * {@inheritdoc}
      */
-    public function redirect(RequestConfiguration $configuration, $url, $status = 302)
+    public function redirect(RequestConfiguration $configuration, string $url, int $status = 302): Response
     {
         if ($configuration->isHeaderRedirection()) {
             return new Response('', 200, [
@@ -97,7 +99,7 @@ final class RedirectHandler implements RedirectHandlerInterface
     /**
      * {@inheritdoc}
      */
-    public function redirectToReferer(RequestConfiguration $configuration)
+    public function redirectToReferer(RequestConfiguration $configuration): Response
     {
         return $this->redirect($configuration, $configuration->getRedirectReferer());
     }

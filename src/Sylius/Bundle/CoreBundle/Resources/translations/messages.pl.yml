@@ -35,6 +35,7 @@ sylius:
             payment_methods: Metody płatności
             shipping_methods: Metody wysyłki
             skipping_shipping_step_allowed: Czy pomijać krok wysyłki, jeżeli dostępna jest tylko jedna metoda wysyłki?
+            skipping_payment_step_allowed: Pominąć krok wyboru płatności, jeżeli tylko jedna metoda płatności jest dostępna?
             tax_calculation_strategy: Strategia obliczania podatku
             tax_zone_default: Domyślna strefa podatkowa
             taxonomies: Kategorie

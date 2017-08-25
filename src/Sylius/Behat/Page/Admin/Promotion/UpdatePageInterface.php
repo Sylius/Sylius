@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Page\Admin\Promotion;
 
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
@@ -62,22 +64,22 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function checkChannel($name);
 
     /**
-     * @param \DateTime $dateTime
+     * @param \DateTimeInterface $dateTime
      */
-    public function setStartsAt(\DateTime $dateTime);
+    public function setStartsAt(\DateTimeInterface $dateTime);
 
     /**
-     * @param \DateTime $dateTime
+     * @param \DateTimeInterface $dateTime
      */
-    public function setEndsAt(\DateTime $dateTime);
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasStartsAt(\DateTime $dateTime);
+    public function setEndsAt(\DateTimeInterface $dateTime);
 
     /**
      * {@inheritdoc}
      */
-    public function hasEndsAt(\DateTime $dateTime);
+    public function hasStartsAt(\DateTimeInterface $dateTime);
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasEndsAt(\DateTimeInterface $dateTime);
 }

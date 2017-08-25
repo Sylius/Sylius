@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ThemeBundle\HierarchyProvider;
 
 use PhpSpec\ObjectBehavior;
@@ -17,21 +19,16 @@ use Sylius\Bundle\ThemeBundle\HierarchyProvider\ThemeHierarchyProviderInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class ThemeHierarchyProviderSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ThemeHierarchyProvider::class);
-    }
-
-    function it_implements_theme_hierarchy_provider_interface()
+    function it_implements_theme_hierarchy_provider_interface(): void
     {
         $this->shouldImplement(ThemeHierarchyProviderInterface::class);
     }
 
-    function it_returns_theme_list_in_hierarchized_order(ThemeInterface $firstTheme, ThemeInterface $secondTheme)
+    function it_returns_theme_list_in_hierarchized_order(ThemeInterface $firstTheme, ThemeInterface $secondTheme): void
     {
         $firstTheme->getParents()->willReturn([$secondTheme]);
         $secondTheme->getParents()->willReturn([]);

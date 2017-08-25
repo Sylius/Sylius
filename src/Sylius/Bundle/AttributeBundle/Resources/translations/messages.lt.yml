@@ -28,6 +28,12 @@ sylius:
                 format: Formatas
             date:
                 format: Formatas
+            select:
+                multiple: Keli
+                values: Reikšmės
+                choose: Pasirinkti
+                min: Min įrašų
+                max: Max įrašų
             text:
                 min: Minimalus ilgis
                 max: Maksimalus ilgis

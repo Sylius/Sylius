@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\PayumBundle\Model;
 
 use Payum\Core\Model\GatewayConfig as BaseGatewayConfig;
@@ -24,7 +26,7 @@ class GatewayConfig extends BaseGatewayConfig implements ResourceInterface
     /**
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Product\Generator;
 
 use Sylius\Component\Product\Checker\ProductVariantsParityCheckerInterface;
@@ -63,8 +65,8 @@ final class ProductVariantGenerator implements ProductVariantGeneratorInterface
 
         foreach ($product->getOptions() as $key => $option) {
             foreach ($option->getValues() as $value) {
-                $optionSet[$key][] = $value->getId();
-                $optionMap[$value->getId()] = $value;
+                $optionSet[$key][] = $value->getCode();
+                $optionMap[$value->getCode()] = $value;
             }
         }
 
@@ -108,8 +110,8 @@ final class ProductVariantGenerator implements ProductVariantGeneratorInterface
             return;
         }
 
-        foreach ($permutation as $id) {
-            $variant->addOptionValue($optionMap[$id]);
+        foreach ($permutation as $code) {
+            $variant->addOptionValue($optionMap[$code]);
         }
     }
 }

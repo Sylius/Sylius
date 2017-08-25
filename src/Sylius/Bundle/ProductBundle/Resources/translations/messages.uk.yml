@@ -10,6 +10,8 @@ sylius:
             options: Опції
             meta_keywords: Мета ключові слова
             meta_description: Мета-опис
+            slug: Слаґ
+            taxons: Таксони
         product_variant:
             name: Назва
         association_type:
@@ -22,6 +24,7 @@ sylius:
             name: Назва
         option:
             name: Назва
+            position: Позиція
             values: Можливі значення
         option_value:
             add_value: Додати значення

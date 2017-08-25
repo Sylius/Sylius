@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\AdminBundle\Context;
 
 use PhpSpec\ObjectBehavior;
@@ -24,17 +26,17 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
  */
 final class AdminBasedLocaleContextSpec extends ObjectBehavior
 {
-    function let(TokenStorageInterface $tokenStorage)
+    function let(TokenStorageInterface $tokenStorage): void
     {
         $this->beConstructedWith($tokenStorage);
     }
 
-    function it_implements_locale_context_interface()
+    function it_implements_locale_context_interface(): void
     {
         $this->shouldImplement(LocaleContextInterface::class);
     }
 
-    function it_throws_locale_not_found_exception_when_there_is_no_token(TokenStorageInterface $tokenStorage)
+    function it_throws_locale_not_found_exception_when_there_is_no_token(TokenStorageInterface $tokenStorage): void
     {
         $tokenStorage->getToken()->willReturn(null);
 
@@ -44,7 +46,7 @@ final class AdminBasedLocaleContextSpec extends ObjectBehavior
     function it_throws_locale_not_found_exception_when_there_is_no_user_in_the_token(
         TokenStorageInterface $tokenStorage,
         TokenInterface $token
-    ) {
+    ): void {
         $token->getUser()->willReturn(null);
         $tokenStorage->getToken()->willReturn($token);
 
@@ -55,7 +57,7 @@ final class AdminBasedLocaleContextSpec extends ObjectBehavior
         TokenStorageInterface $tokenStorage,
         TokenInterface $token,
         UserInterface $user
-    ) {
+    ): void {
         $token->getUser()->willReturn($user);
         $tokenStorage->getToken()->willReturn($token);
 
@@ -66,7 +68,7 @@ final class AdminBasedLocaleContextSpec extends ObjectBehavior
         TokenStorageInterface $tokenStorage,
         TokenInterface $token,
         AdminUserInterface $admin
-    ) {
+    ): void {
         $admin->getLocaleCode()->willReturn('en_US');
         $token->getUser()->willreturn($admin);
         $tokenStorage->getToken()->willReturn($token);

@@ -24,7 +24,7 @@
         }
     ],
     "require": {
-        "php": "^5.6|^7.0",
+        "php": "^7.1",
 
         "payum/payum": "^1.4",
         "payum/payum-bundle": "^2.2",
@@ -36,7 +36,7 @@
         "sylius/resource-bundle": "^1.0"
     },
     "require-dev": {
-        "phpspec/phpspec": "^3.2"
+        "phpspec/phpspec": "^4.0"
     },
     "config": {
         "bin-dir": "bin"

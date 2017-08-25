@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -167,7 +169,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function getChannels()
+    public function getChannels(): Collection
     {
         return $this->channels;
     }
@@ -175,7 +177,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function addChannel(BaseChannelInterface $channel)
+    public function addChannel(BaseChannelInterface $channel): void
     {
         if (!$this->hasChannel($channel)) {
             $this->channels->add($channel);
@@ -185,7 +187,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function removeChannel(BaseChannelInterface $channel)
+    public function removeChannel(BaseChannelInterface $channel): void
     {
         if ($this->hasChannel($channel)) {
             $this->channels->removeElement($channel);
@@ -195,7 +197,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function hasChannel(BaseChannelInterface $channel)
+    public function hasChannel(BaseChannelInterface $channel): bool
     {
         return $this->channels->contains($channel);
     }
@@ -246,7 +248,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function getReviews()
+    public function getReviews(): Collection
     {
         return $this->reviews;
     }
@@ -266,7 +268,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function addReview(ReviewInterface $review)
+    public function addReview(ReviewInterface $review): void
     {
         $this->reviews->add($review);
     }
@@ -274,7 +276,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function removeReview(ReviewInterface $review)
+    public function removeReview(ReviewInterface $review): void
     {
         $this->reviews->remove($review);
     }
@@ -282,7 +284,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function getAverageRating()
+    public function getAverageRating(): ?float
     {
         return $this->averageRating;
     }
@@ -290,7 +292,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function setAverageRating($averageRating)
+    public function setAverageRating(float $averageRating): void
     {
         $this->averageRating = $averageRating;
     }

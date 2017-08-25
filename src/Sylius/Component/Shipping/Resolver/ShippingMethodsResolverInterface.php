@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Shipping\Resolver;
 
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
@@ -24,12 +26,12 @@ interface ShippingMethodsResolverInterface
      *
      * @return ShippingMethodInterface[]
      */
-    public function getSupportedMethods(ShippingSubjectInterface $subject);
+    public function getSupportedMethods(ShippingSubjectInterface $subject): array;
 
     /**
      * @param ShippingSubjectInterface $subject
      *
      * @return bool
      */
-    public function supports(ShippingSubjectInterface $subject);
+    public function supports(ShippingSubjectInterface $subject): bool;
 }

@@ -82,7 +82,7 @@ That is all. Now let's register your new filter type as service.
                 -
                     name: sylius.grid_filter
                     type: suppliers_statistics
-                    form-type: AppBundle\Form\Type\Filter\SuppliersStatisticsFilterType
+                    form_type: AppBundle\Form\Type\Filter\SuppliersStatisticsFilterType
 
 Now you can use your new filter type in the grid configuration!
 
@@ -96,7 +96,7 @@ Now you can use your new filter type in the grid configuration!
                 filters:
                     stats:
                         type: suppliers_statistics
-                        options:
+                        form_options:
                             range: [0, 100]
         templates:
             filter:

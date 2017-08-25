@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Inventory\Operator;
 
 use Sylius\Component\Core\Model\OrderInterface;
@@ -24,7 +26,7 @@ interface OrderInventoryOperatorInterface
      * @throws \InvalidArgumentException
      */
     public function cancel(OrderInterface $order);
-    
+
     /**
      * @param OrderInterface $order
      */

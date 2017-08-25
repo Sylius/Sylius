@@ -5,7 +5,7 @@ sylius:
     product:
         sku:
             not_blank: Angi produktkode (SKU).
-            unique: Produktets strekkode (SKU) må være unike.
+            unique: Produktets strekkode (SKU) må være unikt.
         name:
             not_blank: Vennligst skriv inn produktnavnet.
             min_length: Produktnavn må være minst ett tegn. |Produktnavn må være minst {{ limit }} tegn.

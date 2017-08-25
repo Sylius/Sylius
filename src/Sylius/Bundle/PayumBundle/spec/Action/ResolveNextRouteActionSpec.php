@@ -9,11 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\PayumBundle\Action;
 
 use Payum\Core\Action\ActionInterface;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\PayumBundle\Action\ResolveNextRouteAction;
 use Sylius\Bundle\PayumBundle\Request\ResolveNextRoute;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
@@ -23,12 +24,7 @@ use Sylius\Component\Core\Model\PaymentInterface;
  */
 final class ResolveNextRouteActionSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ResolveNextRouteAction::class);
-    }
-
-    function it_is_a_payum_action()
+    function it_is_a_payum_action(): void
     {
         $this->shouldImplement(ActionInterface::class);
     }
@@ -36,7 +32,7 @@ final class ResolveNextRouteActionSpec extends ObjectBehavior
     function it_resolves_next_route_for_completed_payment(
         ResolveNextRoute $resolveNextRouteRequest,
         PaymentInterface $payment
-    ) {
+    ): void {
         $resolveNextRouteRequest->getFirstModel()->willReturn($payment);
         $payment->getState()->willReturn(PaymentInterface::STATE_COMPLETED);
 
@@ -49,7 +45,7 @@ final class ResolveNextRouteActionSpec extends ObjectBehavior
         ResolveNextRoute $resolveNextRouteRequest,
         PaymentInterface $payment,
         OrderInterface $order
-    ) {
+    ): void {
         $resolveNextRouteRequest->getFirstModel()->willReturn($payment);
         $payment->getState()->willReturn(PaymentInterface::STATE_CANCELLED);
         $payment->getOrder()->willReturn($order);
@@ -65,7 +61,7 @@ final class ResolveNextRouteActionSpec extends ObjectBehavior
         ResolveNextRoute $resolveNextRouteRequest,
         PaymentInterface $payment,
         OrderInterface $order
-    ) {
+    ): void {
         $resolveNextRouteRequest->getFirstModel()->willReturn($payment);
         $payment->getState()->willReturn(PaymentInterface::STATE_CART);
         $payment->getOrder()->willReturn($order);
@@ -81,7 +77,7 @@ final class ResolveNextRouteActionSpec extends ObjectBehavior
         ResolveNextRoute $resolveNextRouteRequest,
         PaymentInterface $payment,
         OrderInterface $order
-    ) {
+    ): void {
         $resolveNextRouteRequest->getFirstModel()->willReturn($payment);
         $payment->getState()->willReturn(PaymentInterface::STATE_FAILED);
         $payment->getOrder()->willReturn($order);
@@ -97,7 +93,7 @@ final class ResolveNextRouteActionSpec extends ObjectBehavior
         ResolveNextRoute $resolveNextRouteRequest,
         PaymentInterface $payment,
         OrderInterface $order
-    ) {
+    ): void {
         $resolveNextRouteRequest->getFirstModel()->willReturn($payment);
         $payment->getState()->willReturn(PaymentInterface::STATE_PROCESSING);
         $payment->getOrder()->willReturn($order);

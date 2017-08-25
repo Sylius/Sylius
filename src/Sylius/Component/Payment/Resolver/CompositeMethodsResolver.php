@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Payment\Resolver;
 
 use Sylius\Component\Payment\Model\PaymentInterface;
@@ -35,7 +37,7 @@ final class CompositeMethodsResolver implements PaymentMethodsResolverInterface
     /**
      * {@inheritdoc}
      */
-    public function getSupportedMethods(PaymentInterface $payment)
+    public function getSupportedMethods(PaymentInterface $payment): array
     {
         /** @var PaymentMethodsResolverInterface $resolver */
         foreach ($this->resolversRegistry->all() as $resolver) {
@@ -50,7 +52,7 @@ final class CompositeMethodsResolver implements PaymentMethodsResolverInterface
     /**
      * {@inheritdoc}
      */
-    public function supports(PaymentInterface $payment)
+    public function supports(PaymentInterface $payment): bool
     {
         /** @var PaymentMethodsResolverInterface $resolver */
         foreach ($this->resolversRegistry->all() as $resolver) {

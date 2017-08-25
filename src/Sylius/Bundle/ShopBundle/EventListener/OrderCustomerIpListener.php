@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ShopBundle\EventListener;
 
 use Sylius\Bundle\CoreBundle\Assigner\IpAssignerInterface;
@@ -45,7 +47,7 @@ final class OrderCustomerIpListener
     /**
      * @param GenericEvent $event
      */
-    public function assignCustomerIpToOrder(GenericEvent $event)
+    public function assignCustomerIpToOrder(GenericEvent $event): void
     {
         $subject = $event->getSubject();
         Assert::isInstanceOf($subject, OrderInterface::class);

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Customer\Model\CustomerInterface as BaseCustomerInterface;
@@ -28,7 +30,7 @@ class ShopUser extends BaseUser implements ShopUserInterface
     /**
      * {@inheritdoc}
      */
-    public function getCustomer()
+    public function getCustomer(): ?BaseCustomerInterface
     {
         return $this->customer;
     }
@@ -36,7 +38,7 @@ class ShopUser extends BaseUser implements ShopUserInterface
     /**
      * {@inheritdoc}
      */
-    public function setCustomer(BaseCustomerInterface $customer = null)
+    public function setCustomer(?BaseCustomerInterface $customer): void
     {
         if ($this->customer !== $customer) {
             $this->customer = $customer;

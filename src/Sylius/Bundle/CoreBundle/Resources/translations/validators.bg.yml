@@ -3,9 +3,92 @@
 
 sylius:
     channel:
+        base_currency:
+            not_blank: Моля въведете основната валута за този канал.
+        default_locale:
+            not_blank: Моля въведете език по подразбиране за този канал.
         contact_email:
-            max: Електронната поща не трябва да надвишава {{ limit }} знака.
+            invalid: Невалиден имайл адрес.
+            max: Имейлът не трябва да надвишава {{ limit }} знака.
             min: Имейлът трябва да бъде поне {{ limit }} знака.
+    channel_pricing:
+        price:
+            min: Цена трябва да бъде поне {{ limit }}.
+            not_blank: Моля въведете цена.
+    checkout:
+        shipping_method:
+            not_blank: Моля, изберете метод на доставка.
+    contact:
+        email:
+            invalid: Невалиден имайл адрес.
+            not_blank: Моля, въведете вашия имейл.
+        message:
+            not_blank: Моля, въведете вашето съобщение.
+    currency:
+        enabled:
+            cannot_disable_base: Основната валута не може да бъде изключена.
+    customer:
+        currency_code:
+            not_valid: Кода на валутата, която въведохте е невалиден.
+    cart_item:
+        not_available: '%itemName% не разполага с достатъчна наличност.'
+    order:
+        currency_code:
+            not_valid: Кода на валутата, която въведохте е невалиден.
+        payment_method_eligibility: 'Този метод на плащане %paymentMethodName% не е активен. Моля изберете друг метод на плащане.'
+        product_eligibility: 'Този продукт %productName% не е активен.'
+        shipping_method_eligibility: 'Продукт не покрива изисквания за метод на доставка %shippingMethodName%. Моля изберете друг метод на доставка.'
+    locale:
+        code:
+            not_blank: Моля, въведете код на езика.
+            unique: Този езиков код вече съществува.
+        enabled:
+            cannot_disable_base: Базовия езиков код не може да бъде забранен.
+    product:
+        variants:
+            all_prices_defined: Трябва първо да въведете цените на продуктовите варианти за новосъздадените канали.
+    product_attribute:
+        invalid: Позицията трябва да бъде цяло число.
+    product_image:
+        file:
+            max_size: Изображението е твърде голям - {{ size }}{{ suffix }}. Максимално допустима размер е {{ limit }}{{ suffix }}.
+            upload_ini_size: Изображението е твърде голям. Максимално допустима размер е {{ limit }}{{ suffix }}.
+    product_variant:
+        onHand:
+            min: На инвентара трябва да бъде по-голямо от {{ limit }}.
+            not_blank: Моля въведете на инвентара.
+            reserved: На инвентара трябва да бъде по-голям от броя на на задържаните единици
+        original_price:
+            min: Оригиналната цена не трябва да бъде отрицателна.
+        weight:
+            min: Теглото не може да бъде отрицателно.
+            invalid: Теглото трябва да бъде число.
+        width:
+            min: Ширината не може да бъде отрицателна.
+            invalid: Ширината трябва да бъде число.
+        height:
+            min: Теглото не може да бъде отрицателно.
+            invalid: Теглото трябва да бъде число.
+        depth:
+            min: Дълбочината не може да бъде отрицателна.
+            invalid: Дълбочината трябва да е число.
+        channel_pricing:
+            all_defined: 'Трябва да зададете цена за всеки канал.'
+    product_translation:
+        short_description:
+            max: Кратко описание трябва да бъде по-дълго от {{ limit }} знака.
+    taxon_image:
+        file:
+            max_size: Изображението е твърде голям - {{ size }}{{ suffix }}. Максимално допустима размер е {{ limit }}{{ suffix }}.
+            upload_ini_size: Изображението е твърде голям. Максимално допустима размер е {{ limit }}{{ suffix }}.
     user:
         email:
-            unique: Този имейл вече е използван.
+            unique: Този имейл е вече използван.
+            min: Имейл трябва да имате поне {{ min }} знака.
+            max: Имейл трябва да има най-много {{ max }} знака.
+            invalid: Имейлът е невалиден.
+        username:
+            unique: Потребителското име вече е заето.
+            not_blank: Моля въведете вашето име.
+        locale_code:
+            not_blank: Моля изберете език.

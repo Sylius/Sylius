@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Locale\Provider;
 
 /**
@@ -19,10 +21,10 @@ interface LocaleProviderInterface
     /**
      * @return string[]
      */
-    public function getAvailableLocalesCodes();
+    public function getAvailableLocalesCodes(): array;
 
     /**
      * @return string
      */
-    public function getDefaultLocaleCode();
+    public function getDefaultLocaleCode(): string;
 }

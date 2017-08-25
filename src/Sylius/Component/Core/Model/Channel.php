@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -153,7 +155,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function getCurrencies()
+    public function getCurrencies(): Collection
     {
         return $this->currencies;
     }
@@ -161,7 +163,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function addCurrency(CurrencyInterface $currency)
+    public function addCurrency(CurrencyInterface $currency): void
     {
         if (!$this->hasCurrency($currency)) {
             $this->currencies->add($currency);
@@ -171,7 +173,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function removeCurrency(CurrencyInterface $currency)
+    public function removeCurrency(CurrencyInterface $currency): void
     {
         if ($this->hasCurrency($currency)) {
             $this->currencies->removeElement($currency);
@@ -181,7 +183,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function hasCurrency(CurrencyInterface $currency)
+    public function hasCurrency(CurrencyInterface $currency): bool
     {
         return $this->currencies->contains($currency);
     }
@@ -189,7 +191,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function getLocales()
+    public function getLocales(): Collection
     {
         return $this->locales;
     }
@@ -197,7 +199,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function addLocale(LocaleInterface $locale)
+    public function addLocale(LocaleInterface $locale): void
     {
         if (!$this->hasLocale($locale)) {
             $this->locales->add($locale);
@@ -207,7 +209,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function removeLocale(LocaleInterface $locale)
+    public function removeLocale(LocaleInterface $locale): void
     {
         if ($this->hasLocale($locale)) {
             $this->locales->removeElement($locale);
@@ -217,7 +219,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function hasLocale(LocaleInterface $locale)
+    public function hasLocale(LocaleInterface $locale): bool
     {
         return $this->locales->contains($locale);
     }

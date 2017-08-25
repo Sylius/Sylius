@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ThemeBundle\Templating;
 
 use PhpSpec\ObjectBehavior;
@@ -10,26 +12,21 @@ use Symfony\Component\Templating\TemplateNameParserInterface;
 use Symfony\Component\Templating\TemplateReferenceInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class TemplateNameParserSpec extends ObjectBehavior
 {
-    function let(TemplateNameParserInterface $decoratedParser, KernelInterface $kernel)
+    function let(TemplateNameParserInterface $decoratedParser, KernelInterface $kernel): void
     {
         $this->beConstructedWith($decoratedParser, $kernel);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(TemplateNameParser::class);
-    }
-
-    function it_is_a_template_name_parser()
+    function it_is_a_template_name_parser(): void
     {
         $this->shouldImplement(TemplateNameParserInterface::class);
     }
 
-    function it_returns_template_reference_if_passed_as_name(TemplateReferenceInterface $templateReference)
+    function it_returns_template_reference_if_passed_as_name(TemplateReferenceInterface $templateReference): void
     {
         $this->parse($templateReference)->shouldReturn($templateReference);
     }
@@ -37,7 +34,7 @@ final class TemplateNameParserSpec extends ObjectBehavior
     function it_delegates_logical_paths_to_decorated_parser(
         TemplateNameParserInterface $decoratedParser,
         TemplateReferenceInterface $templateReference
-    ) {
+    ): void {
         $decoratedParser->parse('Bundle:Not:namespaced.html.twig')->willReturn($templateReference);
 
         $this->parse('Bundle:Not:namespaced.html.twig')->shouldReturn($templateReference);
@@ -46,13 +43,13 @@ final class TemplateNameParserSpec extends ObjectBehavior
     function it_delegates_unknown_paths_to_decorated_parser(
         TemplateNameParserInterface $decoratedParser,
         TemplateReferenceInterface $templateReference
-    ) {
+    ): void {
         $decoratedParser->parse('Bundle/Not/namespaced.html.twig')->willReturn($templateReference);
 
         $this->parse('Bundle/Not/namespaced.html.twig')->shouldReturn($templateReference);
     }
 
-    function it_generates_template_references_from_namespaced_paths(KernelInterface $kernel)
+    function it_generates_template_references_from_namespaced_paths(KernelInterface $kernel): void
     {
         $kernel->getBundle('AcmeBundle')->willReturn(null); // just do not throw an exception
 
@@ -63,14 +60,19 @@ final class TemplateNameParserSpec extends ObjectBehavior
         $this->parse('@Acme/Nested/Directory/app.html.twig')->shouldBeLike(new TemplateReference('AcmeBundle', 'Nested/Directory', 'app', 'html', 'twig'));
     }
 
-    function it_throws_an_exception_if_namespaced_path_references_not_existing_bundle(KernelInterface $kernel)
-    {
-        $kernel->getBundle('AcmeBundle')->willThrow(\Exception::class);
+    function it_delegates_custom_namespace_to_decorated_parser(
+        KernelInterface $kernel,
+        TemplateNameParserInterface $decoratedParser,
+        TemplateReferenceInterface $templateReference
+    ): void {
+        $kernel->getBundle('myBundle')->willThrow(\Exception::class);
 
-        $this->shouldThrow(\InvalidArgumentException::class)->during('parse', ['@Acme/app.html.twig']);
+        $decoratedParser->parse('@my/custom/namespace.html.twig')->willReturn($templateReference);
+
+        $this->parse('@my/custom/namespace.html.twig')->shouldReturn($templateReference);
     }
 
-    function it_generates_template_references_from_root_namespaced_paths()
+    function it_generates_template_references_from_root_namespaced_paths(): void
     {
         $this->parse('/app.html.twig')->shouldBeLike(new TemplateReference('', '', 'app', 'html', 'twig'));
         $this->parse('/Directory/app.html.twig')->shouldBeLike(new TemplateReference('', 'Directory', 'app', 'html', 'twig'));

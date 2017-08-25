@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Review\Calculator;
 
 use Sylius\Component\Review\Model\ReviewableInterface;
@@ -22,7 +24,7 @@ class AverageRatingCalculator implements ReviewableRatingCalculatorInterface
     /**
      * {@inheritdoc}
      */
-    public function calculate(ReviewableInterface $reviewable)
+    public function calculate(ReviewableInterface $reviewable): float
     {
         $sum = 0;
         $reviewsNumber = 0;

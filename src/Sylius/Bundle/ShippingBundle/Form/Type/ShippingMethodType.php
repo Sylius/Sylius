@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ShippingBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
@@ -59,9 +61,9 @@ final class ShippingMethodType extends AbstractResourceType
      * @param FormTypeRegistryInterface $formTypeRegistry
      */
     public function __construct(
-        $dataClass,
+        string $dataClass,
         array $validationGroups,
-        $shippingMethodTranslationType,
+        string $shippingMethodTranslationType,
         ServiceRegistryInterface $calculatorRegistry,
         FormTypeRegistryInterface $formTypeRegistry
     ) {
@@ -75,7 +77,7 @@ final class ShippingMethodType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->addEventSubscriber(new AddCodeFormSubscriber())
@@ -144,7 +146,7 @@ final class ShippingMethodType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function buildView(FormView $view, FormInterface $form, array $options)
+    public function buildView(FormView $view, FormInterface $form, array $options): void
     {
         $view->vars['prototypes'] = [];
         foreach ($form->getConfig()->getAttribute('prototypes') as $group => $prototypes) {
@@ -157,7 +159,7 @@ final class ShippingMethodType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_shipping_method';
     }
@@ -166,7 +168,7 @@ final class ShippingMethodType extends AbstractResourceType
      * @param FormInterface $form
      * @param string $calculatorName
      */
-    private function addConfigurationField(FormInterface $form, $calculatorName)
+    private function addConfigurationField(FormInterface $form, string $calculatorName): void
     {
         /** @var CalculatorInterface $calculator */
         $calculator = $this->calculatorRegistry->get($calculatorName);

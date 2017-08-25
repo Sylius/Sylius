@@ -16,7 +16,7 @@
         <many-to-one field="owner" target-entity="Sylius\Component\Product\Model\ProductInterface" inversed-by="images">
             <join-column name="owner_id" referenced-column-name="id" nullable="false" on-delete="CASCADE"/>
         </many-to-one>
-        <many-to-many field="productVariants" target-entity="Sylius\Component\Product\Model\ProductVariantInterface" orphan-removal="true">
+        <many-to-many field="productVariants" target-entity="Sylius\Component\Product\Model\ProductVariantInterface" inversed-by="images" orphan-removal="true">
             <join-table name="sylius_product_image_product_variants">
                 <join-columns>
                     <join-column name="image_id" referenced-column-name="id" on-delete="CASCADE" />

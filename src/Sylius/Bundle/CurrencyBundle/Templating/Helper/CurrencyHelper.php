@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CurrencyBundle\Templating\Helper;
 
 use Symfony\Component\Intl\Intl;
@@ -22,7 +24,7 @@ class CurrencyHelper extends Helper implements CurrencyHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function convertCurrencyCodeToSymbol($code)
+    public function convertCurrencyCodeToSymbol(string $code): string
     {
         return Intl::getCurrencyBundle()->getCurrencySymbol($code);
     }
@@ -30,7 +32,7 @@ class CurrencyHelper extends Helper implements CurrencyHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'sylius_currency';
     }

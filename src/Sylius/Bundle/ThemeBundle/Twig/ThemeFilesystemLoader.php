@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Twig;
 
 use Symfony\Component\Config\FileLocatorInterface;
@@ -16,9 +18,9 @@ use Symfony\Component\Templating\TemplateNameParserInterface;
 use Symfony\Component\Templating\TemplateReferenceInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
-final class ThemeFilesystemLoader implements \Twig_LoaderInterface, \Twig_ExistsLoaderInterface, \Twig_SourceContextLoaderInterface
+final class ThemeFilesystemLoader implements \Twig_LoaderInterface, \Twig_ExistsLoaderInterface
 {
     /**
      * @var \Twig_LoaderInterface
@@ -57,94 +59,68 @@ final class ThemeFilesystemLoader implements \Twig_LoaderInterface, \Twig_Exists
 
     /**
      * {@inheritdoc}
-     *
-     * @deprecated To be removed when Twig 1.x compatibility is dropped
      */
-    public function getSource($name)
+    public function getSourceContext($name): \Twig_Source
     {
         try {
-            return file_get_contents($this->findTemplate($name));
-        } catch (\Exception $exception) {
-            return $this->decoratedLoader->getSource($name);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getSourceContext($name)
-    {
-        try {
-            $path = $this->findTemplate($name);
+            $path = $this->findTemplate((string) $name);
 
             return new \Twig_Source(file_get_contents($path), $name, $path);
         } catch (\Exception $exception) {
-            // In Twig 2.0, getSourceContext is part of \Twig_LoaderInterface
-            if ($this->decoratedLoader instanceof \Twig_SourceContextLoaderInterface || method_exists('\\Twig_LoaderInterface', 'getSourceContext')) {
-                return $this->decoratedLoader->getSourceContext($name);
-            }
-
-            throw new \Twig_Error_Loader($exception->getMessage(), -1, null, $exception);
+            return $this->decoratedLoader->getSourceContext((string) $name);
         }
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getCacheKey($name)
+    public function getCacheKey($name): string
     {
         try {
-            return $this->findTemplate($name);
+            return $this->findTemplate((string) $name);
         } catch (\Exception $exception) {
-            return $this->decoratedLoader->getCacheKey($name);
+            return $this->decoratedLoader->getCacheKey((string) $name);
         }
     }
 
     /**
      * {@inheritdoc}
      */
-    public function isFresh($name, $time)
+    public function isFresh($name, $time): bool
     {
         try {
-            return filemtime($this->findTemplate($name)) <= $time;
+            return filemtime($this->findTemplate((string) $name)) <= $time;
         } catch (\Exception $exception) {
-            return $this->decoratedLoader->isFresh($name, $time);
+            return $this->decoratedLoader->isFresh((string) $name, $time);
         }
     }
 
     /**
      * {@inheritdoc}
      */
-    public function exists($name)
+    public function exists($name): bool
     {
         try {
-            return stat($this->findTemplate($name)) !== false;
+            return stat($this->findTemplate((string) $name)) !== false;
         } catch (\Exception $exception) {
-            // In Twig 2.0, exists is part of \Twig_LoaderInterface
-            if ($this->decoratedLoader instanceof \Twig_ExistsLoaderInterface || method_exists('\\Twig_LoaderInterface', 'exists')) {
-                return $this->decoratedLoader->exists($name);
-            }
-
-            return false;
+            return $this->decoratedLoader->exists((string) $name);
         }
     }
 
     /**
-     * @param TemplateReferenceInterface|string $template
+     * @param string $logicalName
      *
      * @return string
      */
-    private function findTemplate($template)
+    private function findTemplate(string $logicalName): string
     {
-        $logicalName = (string) $template;
-
         if (isset($this->cache[$logicalName])) {
-            return $this->cache[$logicalName];
+            return (string) $this->cache[$logicalName];
         }
 
-        $template = $this->templateNameParser->parse($template);
+        $template = $this->templateNameParser->parse($logicalName);
         $file = $this->templateLocator->locate($template);
 
-        return $this->cache[$logicalName] = $file;
+        return (string) $this->cache[$logicalName] = $file;
     }
 }

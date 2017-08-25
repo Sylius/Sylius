@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
@@ -182,7 +184,7 @@ final class ManagingExchangeRatesContext implements Context
     {
         $this->indexPage->open();
 
-        $this->assertExchangeRateWithRatioIsOnTheList($ratio, $sourceCurrency, $targetCurrency);
+        $this->assertExchangeRateWithRatioIsOnTheList((float) $ratio, $sourceCurrency, $targetCurrency);
     }
 
     /**
@@ -298,7 +300,7 @@ final class ManagingExchangeRatesContext implements Context
     {
         Assert::true(
             $this->indexPage->isSingleResourceOnPage([
-                'ratio' => $ratio,
+                'ratio' => (string) $ratio,
                 'sourceCurrency' => $sourceCurrencyName,
                 'targetCurrency' => $targetCurrencyName,
             ]),

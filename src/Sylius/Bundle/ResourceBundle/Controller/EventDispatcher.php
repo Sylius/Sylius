@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
@@ -36,8 +38,11 @@ final class EventDispatcher implements EventDispatcherInterface
     /**
      * {@inheritdoc}
      */
-    public function dispatch($eventName, RequestConfiguration $requestConfiguration, ResourceInterface $resource)
-    {
+    public function dispatch(
+        string $eventName,
+        RequestConfiguration $requestConfiguration,
+        ResourceInterface $resource
+    ):  ResourceControllerEvent {
         $eventName = $requestConfiguration->getEvent() ?: $eventName;
         $metadata = $requestConfiguration->getMetadata();
         $event = $this->getEvent($resource);
@@ -50,8 +55,11 @@ final class EventDispatcher implements EventDispatcherInterface
     /**
      * {@inheritdoc}
      */
-    public function dispatchPreEvent($eventName, RequestConfiguration $requestConfiguration, ResourceInterface $resource)
-    {
+    public function dispatchPreEvent(
+        string $eventName,
+        RequestConfiguration $requestConfiguration,
+        ResourceInterface $resource
+    ): ResourceControllerEvent {
         $eventName = $requestConfiguration->getEvent() ?: $eventName;
         $metadata = $requestConfiguration->getMetadata();
         $event = $this->getEvent($resource);
@@ -64,8 +72,11 @@ final class EventDispatcher implements EventDispatcherInterface
     /**
      * {@inheritdoc}
      */
-    public function dispatchPostEvent($eventName, RequestConfiguration $requestConfiguration, ResourceInterface $resource)
-    {
+    public function dispatchPostEvent(
+        string $eventName,
+        RequestConfiguration $requestConfiguration,
+        ResourceInterface $resource
+    ): ResourceControllerEvent {
         $eventName = $requestConfiguration->getEvent() ?: $eventName;
         $metadata = $requestConfiguration->getMetadata();
         $event = $this->getEvent($resource);
@@ -79,10 +90,10 @@ final class EventDispatcher implements EventDispatcherInterface
      * {@inheritdoc}
      */
     public function dispatchInitializeEvent(
-        $eventName,
+        string $eventName,
         RequestConfiguration $requestConfiguration,
         ResourceInterface $resource
-    ) {
+    ): ResourceControllerEvent {
         $eventName = $requestConfiguration->getEvent() ?: $eventName;
         $metadata = $requestConfiguration->getMetadata();
         $event = $this->getEvent($resource);
@@ -100,7 +111,7 @@ final class EventDispatcher implements EventDispatcherInterface
      *
      * @return ResourceControllerEvent
      */
-    private function getEvent(ResourceInterface $resource)
+    private function getEvent(ResourceInterface $resource): ResourceControllerEvent
     {
         return new ResourceControllerEvent($resource);
     }

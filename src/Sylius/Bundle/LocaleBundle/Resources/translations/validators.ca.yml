@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    locale:
+        code:
+            not_blank: Trieu la configuració regional del codi.
+            regex: El codi de l'idïoma només pot estar format per lletres, números, guions i guions baixos.
+            unique: El codi de l'idïoma ha de ser únic.

@@ -9,10 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Translation\Finder;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class OrderingTranslationFilesFinder implements TranslationFilesFinderInterface
 {
@@ -29,15 +31,11 @@ final class OrderingTranslationFilesFinder implements TranslationFilesFinderInte
         $this->translationFilesFinder = $translationFilesFinder;
     }
 
-    public function findTranslationFiles($path)
+    public function findTranslationFiles(string $path): array
     {
         $files = $this->translationFilesFinder->findTranslationFiles($path);
 
-        /*
-         * PHP 5.* bug, fixed in PHP 7: https://bugs.php.net/bug.php?id=50688
-         * "usort(): Array was modified by the user comparison function"
-         */
-        @usort($files, function ($firstFile, $secondFile) use ($path) {
+        usort($files, function (string $firstFile, string $secondFile) use ($path): int {
             $firstFile = str_replace($path, '', $firstFile);
             $secondFile = str_replace($path, '', $secondFile);
 

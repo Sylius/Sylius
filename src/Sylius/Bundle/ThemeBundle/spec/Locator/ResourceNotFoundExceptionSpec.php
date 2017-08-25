@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ThemeBundle\Locator;
 
 use PhpSpec\ObjectBehavior;
@@ -16,28 +18,23 @@ use Sylius\Bundle\ThemeBundle\Locator\ResourceNotFoundException;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class ResourceNotFoundExceptionSpec extends ObjectBehavior
 {
-    function let(ThemeInterface $theme)
+    function let(ThemeInterface $theme): void
     {
         $theme->getName()->willReturn('theme/name');
 
         $this->beConstructedWith('resource name', $theme);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ResourceNotFoundException::class);
-    }
-
-    function it_is_a_runtime_exception()
+    function it_is_a_runtime_exception(): void
     {
         $this->shouldHaveType(\RuntimeException::class);
     }
 
-    function it_has_custom_message()
+    function it_has_custom_message(): void
     {
         $this->getMessage()->shouldReturn('Could not find resource "resource name" using theme "theme/name".');
     }

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ShopBundle\EventListener;
 
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
@@ -17,7 +19,7 @@ use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Webmozart\Assert\Assert;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class OrderLocaleAssigner
 {
@@ -37,7 +39,7 @@ final class OrderLocaleAssigner
     /**
      * @param ResourceControllerEvent $event
      */
-    public function assignLocale(ResourceControllerEvent $event)
+    public function assignLocale(ResourceControllerEvent $event): void
     {
         /** @var OrderInterface $order */
         $order = $event->getSubject();

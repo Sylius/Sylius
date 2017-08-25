@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Resource\Generator;
 
 /**
@@ -21,14 +23,14 @@ interface RandomnessGeneratorInterface
      *
      * @return string
      */
-    public function generateUriSafeString($length);
+    public function generateUriSafeString(int $length): string;
 
     /**
      * @param int $length
      *
      * @return string
      */
-    public function generateNumeric($length);
+    public function generateNumeric(int $length): string;
 
     /**
      * @param int $min
@@ -36,5 +38,5 @@ interface RandomnessGeneratorInterface
      *
      * @return int
      */
-    public function generateInt($min, $max);
+    public function generateInt(int $min, int $max): int;
 }

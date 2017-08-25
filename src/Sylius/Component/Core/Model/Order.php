@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -117,7 +119,7 @@ class Order extends BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getCustomer()
+    public function getCustomer(): ?BaseCustomerInterface
     {
         return $this->customer;
     }
@@ -125,7 +127,7 @@ class Order extends BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setCustomer(BaseCustomerInterface $customer = null)
+    public function setCustomer(?BaseCustomerInterface $customer): void
     {
         $this->customer = $customer;
     }
@@ -133,7 +135,7 @@ class Order extends BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getChannel()
+    public function getChannel(): ?BaseChannelInterface
     {
         return $this->channel;
     }
@@ -141,7 +143,7 @@ class Order extends BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setChannel(BaseChannelInterface $channel = null)
+    public function setChannel(?BaseChannelInterface $channel): void
     {
         $this->channel = $channel;
     }
@@ -252,7 +254,7 @@ class Order extends BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getPayments()
+    public function getPayments(): Collection
     {
         return $this->payments;
     }
@@ -260,7 +262,7 @@ class Order extends BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function hasPayments()
+    public function hasPayments(): bool
     {
         return !$this->payments->isEmpty();
     }
@@ -268,7 +270,7 @@ class Order extends BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function addPayment(BasePaymentInterface $payment)
+    public function addPayment(BasePaymentInterface $payment): void
     {
         /** @var $payment PaymentInterface */
         if (!$this->hasPayment($payment)) {
@@ -280,7 +282,7 @@ class Order extends BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function removePayment(BasePaymentInterface $payment)
+    public function removePayment(BasePaymentInterface $payment): void
     {
         /** @var $payment PaymentInterface */
         if ($this->hasPayment($payment)) {
@@ -292,7 +294,7 @@ class Order extends BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function hasPayment(BasePaymentInterface $payment)
+    public function hasPayment(BasePaymentInterface $payment): bool
     {
         return $this->payments->contains($payment);
     }
@@ -313,6 +315,20 @@ class Order extends BaseOrder implements OrderInterface
         })->last();
 
         return $payment !== false ? $payment : null;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isShippingRequired()
+    {
+        foreach ($this->getItems() as $orderItem) {
+            if ($orderItem->getVariant()->isShippingRequired()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -372,7 +388,7 @@ class Order extends BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getPromotionCoupon()
+    public function getPromotionCoupon(): ?BaseCouponInterface
     {
         return $this->promotionCoupon;
     }
@@ -388,7 +404,7 @@ class Order extends BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getPromotionSubjectTotal()
+    public function getPromotionSubjectTotal(): int
     {
         return $this->getItemsTotal();
     }
@@ -396,7 +412,7 @@ class Order extends BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getPromotionSubjectCount()
+    public function getPromotionSubjectCount(): int
     {
         return $this->getTotalQuantity();
     }
@@ -456,7 +472,7 @@ class Order extends BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function hasPromotion(BasePromotionInterface $promotion)
+    public function hasPromotion(BasePromotionInterface $promotion): bool
     {
         return $this->promotions->contains($promotion);
     }
@@ -464,7 +480,7 @@ class Order extends BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function addPromotion(BasePromotionInterface $promotion)
+    public function addPromotion(BasePromotionInterface $promotion): void
     {
         if (!$this->hasPromotion($promotion)) {
             $this->promotions->add($promotion);
@@ -474,7 +490,7 @@ class Order extends BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function removePromotion(BasePromotionInterface $promotion)
+    public function removePromotion(BasePromotionInterface $promotion): void
     {
         if ($this->hasPromotion($promotion)) {
             $this->promotions->removeElement($promotion);
@@ -484,7 +500,7 @@ class Order extends BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getPromotions()
+    public function getPromotions(): Collection
     {
         return $this->promotions;
     }

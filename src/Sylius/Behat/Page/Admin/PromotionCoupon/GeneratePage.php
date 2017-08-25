@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Page\Admin\PromotionCoupon;
 
 use Behat\Mink\Element\NodeElement;
@@ -68,7 +70,7 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
     /**
      * {@inheritdoc}
      */
-    public function setExpiresAt(\DateTime $date)
+    public function setExpiresAt(\DateTimeInterface $date)
     {
         $timestamp = $date->getTimestamp();
 

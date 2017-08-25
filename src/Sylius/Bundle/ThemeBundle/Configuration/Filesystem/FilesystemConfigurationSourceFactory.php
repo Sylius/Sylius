@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Configuration\Filesystem;
 
 use Sylius\Bundle\ThemeBundle\Configuration\ConfigurationSourceFactoryInterface;
@@ -19,14 +21,14 @@ use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class FilesystemConfigurationSourceFactory implements ConfigurationSourceFactoryInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function buildConfiguration(ArrayNodeDefinition $node)
+    public function buildConfiguration(ArrayNodeDefinition $node): void
     {
         $node
             ->fixXmlConfig('directory', 'directories')
@@ -44,7 +46,7 @@ final class FilesystemConfigurationSourceFactory implements ConfigurationSourceF
     /**
      * {@inheritdoc}
      */
-    public function initializeSource(ContainerBuilder $container, array $config)
+    public function initializeSource(ContainerBuilder $container, array $config): Definition
     {
         $recursiveFileLocator = new Definition(RecursiveFileLocator::class, [
             new Reference('sylius.theme.finder_factory'),
@@ -70,7 +72,7 @@ final class FilesystemConfigurationSourceFactory implements ConfigurationSourceF
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'filesystem';
     }

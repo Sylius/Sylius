@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\AdminApiBundle\Form\Type;
 
 use Sylius\Bundle\AddressingBundle\Form\Type\AddressType as SyliusAddressType;
@@ -27,7 +29,7 @@ final class AddressType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('shippingAddress', SyliusAddressType::class, [
@@ -57,7 +59,7 @@ final class AddressType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_admin_api_checkout_address';
     }

@@ -17,19 +17,37 @@ sylius:
             starts_at: Початок дії
             usage_limit: Обмеження використання
         promotion_action:
+            fixed_discount_configuration:
+                amount: Сума
+            percentage_discount_configuration:
+                percentage: Відсоток
             type: Тип
         promotion_coupon:
             expires_at: Дійсний до
             usage_limit: Обмеження використання
         promotion_coupon_generator_instruction:
+            amount: Сума
+            code_length: Довжина коду
             expires_at: Дійсний до
             usage_limit: Обмеження використання
+        promotion_filter:
+            price_range: Фільтр цінових діапазонів
         promotion_rule:
+            customer_group: Група клієнтів
+            taxonomy: Таксономія
             cart_quantity_configuration:
                 count: Кількість
                 equal: Дорівнює
             contains_product_configuration:
+                exclude: Виключити
                 variants: Продукція
+            item_total_configuration:
+                amount: Сума
+            nth_order_configuration:
+                nth: Кількість
             shipping_country_configuration:
                 country: Країна
+            taxonomy_configuration:
+                exclude: Виключити
+                taxons: Таксони
             type: Тип

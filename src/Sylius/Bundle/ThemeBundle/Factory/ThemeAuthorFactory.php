@@ -9,27 +9,29 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Factory;
 
 use Sylius\Bundle\ThemeBundle\Model\ThemeAuthor;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class ThemeAuthorFactory implements ThemeAuthorFactoryInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function createFromArray(array $data)
+    public function createFromArray(array $data): ThemeAuthor
     {
         /** @var ThemeAuthor $author */
         $author = new ThemeAuthor();
 
-        $author->setName(isset($data['name']) ? $data['name'] : null);
-        $author->setEmail(isset($data['email']) ? $data['email'] : null);
-        $author->setHomepage(isset($data['homepage']) ? $data['homepage'] : null);
-        $author->setRole(isset($data['role']) ? $data['role'] : null);
+        $author->setName($data['name'] ?? null);
+        $author->setEmail($data['email'] ?? null);
+        $author->setHomepage($data['homepage'] ?? null);
+        $author->setRole($data['role'] ?? null);
 
         return $author;
     }

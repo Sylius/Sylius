@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ReviewBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
@@ -29,7 +31,7 @@ final class SyliusReviewExtension extends AbstractResourceExtension
     /**
      * {@inheritdoc}
      */
-    public function load(array $config, ContainerBuilder $container)
+    public function load(array $config, ContainerBuilder $container): void
     {
         $config = $this->processConfiguration($this->getConfiguration([], $container), $config);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
@@ -42,9 +44,12 @@ final class SyliusReviewExtension extends AbstractResourceExtension
     }
 
     /**
-     * {@inheritdoc}
+     * @param array $resources
+     * @param ContainerBuilder $container
+     *
+     * @return array
      */
-    private function resolveResources(array $resources, ContainerBuilder $container)
+    private function resolveResources(array $resources, ContainerBuilder $container): array
     {
         $container->setParameter('sylius.review.subjects', $resources);
 
@@ -66,7 +71,7 @@ final class SyliusReviewExtension extends AbstractResourceExtension
      * @param array $reviewSubjects
      * @param ContainerBuilder $container
      */
-    private function createReviewListeners(array $reviewSubjects, ContainerBuilder $container)
+    private function createReviewListeners(array $reviewSubjects, ContainerBuilder $container): void
     {
         foreach ($reviewSubjects as $reviewSubject) {
             $reviewChangeListener = new Definition(ReviewChangeListener::class, [

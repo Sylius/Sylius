@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\DependencyInjection;
 
 use Sylius\Bundle\ThemeBundle\Configuration\ConfigurationSourceFactoryInterface;
@@ -22,7 +24,7 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class SyliusThemeExtension extends Extension implements PrependExtensionInterface
 {
@@ -36,7 +38,7 @@ final class SyliusThemeExtension extends Extension implements PrependExtensionIn
      *
      * {@inheritdoc}
      */
-    public function load(array $config, ContainerBuilder $container)
+    public function load(array $config, ContainerBuilder $container): void
     {
         $config = $this->processConfiguration($this->getConfiguration([], $container), $config);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
@@ -64,7 +66,7 @@ final class SyliusThemeExtension extends Extension implements PrependExtensionIn
      *
      * {@inheritdoc}
      */
-    public function prepend(ContainerBuilder $container)
+    public function prepend(ContainerBuilder $container): void
     {
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
@@ -76,7 +78,7 @@ final class SyliusThemeExtension extends Extension implements PrependExtensionIn
      *
      * @param ConfigurationSourceFactoryInterface $configurationSourceFactory
      */
-    public function addConfigurationSourceFactory(ConfigurationSourceFactoryInterface $configurationSourceFactory)
+    public function addConfigurationSourceFactory(ConfigurationSourceFactoryInterface $configurationSourceFactory): void
     {
         $this->configurationSourceFactories[$configurationSourceFactory->getName()] = $configurationSourceFactory;
     }
@@ -84,7 +86,7 @@ final class SyliusThemeExtension extends Extension implements PrependExtensionIn
     /**
      * {@inheritdoc}
      */
-    public function getConfiguration(array $config, ContainerBuilder $container)
+    public function getConfiguration(array $config, ContainerBuilder $container): Configuration
     {
         $configuration = new Configuration($this->configurationSourceFactories);
 
@@ -97,7 +99,7 @@ final class SyliusThemeExtension extends Extension implements PrependExtensionIn
      * @param ContainerBuilder $container
      * @param LoaderInterface $loader
      */
-    private function prependTwig(ContainerBuilder $container, LoaderInterface $loader)
+    private function prependTwig(ContainerBuilder $container, LoaderInterface $loader): void
     {
         if (!$container->hasExtension('twig')) {
             return;
@@ -109,10 +111,8 @@ final class SyliusThemeExtension extends Extension implements PrependExtensionIn
     /**
      * @param ContainerBuilder $container
      * @param array $config
-     *
-     * @return mixed
      */
-    private function resolveConfigurationSources(ContainerBuilder $container, array $config)
+    private function resolveConfigurationSources(ContainerBuilder $container, array $config): void
     {
         $configurationProviders = [];
         foreach ($this->configurationSourceFactories as $configurationSourceFactory) {

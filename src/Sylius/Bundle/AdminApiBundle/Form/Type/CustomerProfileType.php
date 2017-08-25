@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\AdminApiBundle\Form\Type;
 
 use Sylius\Bundle\AdminApiBundle\Form\EventSubscriber\AddUserFormSubscriber;
@@ -26,7 +28,7 @@ final class CustomerProfileType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         parent::buildForm($builder, $options);
 

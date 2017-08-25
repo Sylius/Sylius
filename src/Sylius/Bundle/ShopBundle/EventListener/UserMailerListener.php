@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ShopBundle\EventListener;
 
 use Sylius\Bundle\CoreBundle\Mailer\Emails;
@@ -49,7 +51,7 @@ final class UserMailerListener extends MailerListener
      *
      * @throws UnexpectedTypeException
      */
-    public function sendUserRegistrationEmail(GenericEvent $event)
+    public function sendUserRegistrationEmail(GenericEvent $event): void
     {
         $customer = $event->getSubject();
 

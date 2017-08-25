@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Grid\Data;
 
 use Sylius\Component\Grid\Parameters;
@@ -18,8 +20,8 @@ use Sylius\Component\Grid\Parameters;
  */
 interface DataSourceInterface
 {
-    const CONDITION_AND = 'and';
-    const CONDITION_OR  = 'or';
+    public const CONDITION_AND = 'and';
+    public const CONDITION_OR  = 'or';
 
     /**
      * @param mixed $expression

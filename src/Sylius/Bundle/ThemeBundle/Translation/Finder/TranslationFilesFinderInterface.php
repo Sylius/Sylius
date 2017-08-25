@@ -9,10 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Translation\Finder;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 interface TranslationFilesFinderInterface
 {
@@ -21,5 +23,5 @@ interface TranslationFilesFinderInterface
      *
      * @return array Paths to translation files
      */
-    public function findTranslationFiles($path);
+    public function findTranslationFiles(string $path): array;
 }

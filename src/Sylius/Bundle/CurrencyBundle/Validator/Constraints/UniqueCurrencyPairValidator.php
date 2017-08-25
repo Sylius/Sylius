@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CurrencyBundle\Validator\Constraints;
 
 use Sylius\Component\Currency\Model\CurrencyInterface;
@@ -64,7 +66,7 @@ class UniqueCurrencyPairValidator extends ConstraintValidator
      *
      * @return bool
      */
-    private function isCurrencyPairUnique(CurrencyInterface $baseCurrency, CurrencyInterface $targetCurrency)
+    private function isCurrencyPairUnique(CurrencyInterface $baseCurrency, CurrencyInterface $targetCurrency): bool
     {
         $exchangeRate = $this->exchangeRateRepository->findOneWithCurrencyPair($baseCurrency->getCode(), $targetCurrency->getCode());
 

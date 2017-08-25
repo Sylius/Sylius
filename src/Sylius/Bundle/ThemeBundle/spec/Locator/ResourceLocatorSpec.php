@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ThemeBundle\Locator;
 
 use PhpSpec\ObjectBehavior;
@@ -18,23 +20,18 @@ use Sylius\Bundle\ThemeBundle\Locator\ResourceLocatorInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class ResourceLocatorSpec extends ObjectBehavior
 {
     function let(
         ResourceLocatorInterface $applicationResourceLocator,
         ResourceLocatorInterface $bundleResourceLocator
-    ) {
+    ): void {
         $this->beConstructedWith($applicationResourceLocator, $bundleResourceLocator);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ResourceLocator::class);
-    }
-
-    function it_implements_resource_locator_interface()
+    function it_implements_resource_locator_interface(): void
     {
         $this->shouldImplement(ResourceLocatorInterface::class);
     }
@@ -43,7 +40,7 @@ final class ResourceLocatorSpec extends ObjectBehavior
         ResourceLocatorInterface $applicationResourceLocator,
         ResourceLocatorInterface $bundleResourceLocator,
         ThemeInterface $theme
-    ) {
+    ): void {
         $applicationResourceLocator->locateResource(Argument::cetera())->shouldNotBeCalled();
 
         $bundleResourceLocator->locateResource('@AcmeBundle/Resources/resource', $theme)->shouldBeCalled();
@@ -55,7 +52,7 @@ final class ResourceLocatorSpec extends ObjectBehavior
         ResourceLocatorInterface $applicationResourceLocator,
         ResourceLocatorInterface $bundleResourceLocator,
         ThemeInterface $theme
-    ) {
+    ): void {
         $bundleResourceLocator->locateResource(Argument::cetera())->shouldNotBeCalled();
 
         $applicationResourceLocator->locateResource('AcmeBundle/resource', $theme)->shouldBeCalled();

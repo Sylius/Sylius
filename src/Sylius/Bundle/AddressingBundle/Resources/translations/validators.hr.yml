@@ -32,6 +32,7 @@ sylius:
     country:
         code:
             not_blank: Unesite ISO kod (oznaku) države.
+            regex: Pozivni broj za zemlju se može sastojati samo od slova, brojeva, povlaka i podvlaka.
             unique: ISO kod (oznaka) države mora biti jedinstvena.
     province:
         code:
@@ -45,6 +46,8 @@ sylius:
             not_blank: Unesite naziv pokrajine.
             unique: Naziv pokrajine mora biti jedinstven.
     zone:
+        scope:
+            not_blank: Molimo unesite sve što je obuhvaćeno.
         code:
             not_blank: Unesite kod područja (zone).
             unique: Kod područja (zone) mora biti jedinstven.

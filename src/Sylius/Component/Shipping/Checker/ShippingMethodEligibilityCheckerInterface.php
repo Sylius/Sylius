@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Shipping\Checker;
 
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
@@ -21,9 +23,9 @@ interface ShippingMethodEligibilityCheckerInterface
 {
     /**
      * @param ShippingSubjectInterface $subject
-     * @param ShippingMethodInterface  $method
+     * @param ShippingMethodInterface $method
      *
      * @return bool
      */
-    public function isEligible(ShippingSubjectInterface $subject, ShippingMethodInterface $method);
+    public function isEligible(ShippingSubjectInterface $subject, ShippingMethodInterface $method): bool;
 }

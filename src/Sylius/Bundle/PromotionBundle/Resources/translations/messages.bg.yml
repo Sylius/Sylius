@@ -4,11 +4,50 @@
 sylius:
     form:
         promotion:
+            actions: Действия
             add_action: Добавяне на действие
             add_rule: Добавяне на правило
+            coupon_based: Базирано на промоционални талони
+            description: Описание
+            ends_at: Завършва на
+            exclusive: Изключително
+            name: Име
+            priority: Приоритет
+            rules: Правила
+            starts_at: Започва на
+            usage_limit: Лимит на използване
         promotion_action:
+            fixed_discount_configuration:
+                amount: Сума
+            percentage_discount_configuration:
+                percentage: Процент
             type: Тип
+        promotion_coupon:
+            expires_at: Изтича на
+            usage_limit: Лимит на използване
+        promotion_coupon_generator_instruction:
+            amount: Сума
+            code_length: Дължина на кода
+            expires_at: Изтича на
+            usage_limit: Лимит на използване
+        promotion_filter:
+            price_range: Филтър за ценови диапазон
         promotion_rule:
+            customer_group: Клиентска група
+            taxonomy: Класификации
+            cart_quantity_configuration:
+                count: Брой
+                equal: Равно
+            contains_product_configuration:
+                exclude: Изключи
+                variants: Продукти
+            item_total_configuration:
+                amount: Сума
+            nth_order_configuration:
+                nth: N-ти
             shipping_country_configuration:
                 country: Държава
+            taxonomy_configuration:
+                exclude: Изключи
+                taxons: Категории
             type: Тип

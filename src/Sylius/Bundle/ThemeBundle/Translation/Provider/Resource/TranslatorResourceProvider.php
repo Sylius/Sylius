@@ -9,13 +9,15 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Translation\Provider\Resource;
 
 use Sylius\Bundle\ThemeBundle\Translation\Resource\TranslationResource;
 use Sylius\Bundle\ThemeBundle\Translation\Resource\TranslationResourceInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class TranslatorResourceProvider implements TranslatorResourceProviderInterface
 {
@@ -45,7 +47,7 @@ final class TranslatorResourceProvider implements TranslatorResourceProviderInte
     /**
      * {@inheritdoc}
      */
-    public function getResources()
+    public function getResources(): array
     {
         $this->initializeIfNeeded();
 
@@ -55,14 +57,14 @@ final class TranslatorResourceProvider implements TranslatorResourceProviderInte
     /**
      * {@inheritdoc}
      */
-    public function getResourcesLocales()
+    public function getResourcesLocales(): array
     {
         $this->initializeIfNeeded();
 
         return $this->resourcesLocales;
     }
 
-    private function initializeIfNeeded()
+    private function initializeIfNeeded(): void
     {
         foreach ($this->filepaths as $key => $filepath) {
             $resource = new TranslationResource($filepath);

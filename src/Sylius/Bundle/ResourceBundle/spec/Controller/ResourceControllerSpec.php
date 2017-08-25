@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
 use Doctrine\Common\Persistence\ObjectManager;
@@ -74,7 +76,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         StateMachineInterface $stateMachine,
         ResourceUpdateHandlerInterface $resourceUpdateHandler,
         ContainerInterface $container
-    ) {
+    ): void {
         $this->beConstructedWith(
             $metadata,
             $requestConfigurationFactory,
@@ -97,12 +99,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $this->setContainer($container);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ResourceController::class);
-    }
-
-    function it_extends_base_Symfony_controller()
+    function it_extends_base_Symfony_controller(): void
     {
         $this->shouldHaveType(Controller::class);
     }
@@ -113,7 +110,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         RequestConfiguration $configuration,
         Request $request,
         AuthorizationCheckerInterface $authorizationChecker
-    ) {
+    ): void {
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
         $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::SHOW)->willReturn('sylius.product.show');
@@ -134,7 +131,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         AuthorizationCheckerInterface $authorizationChecker,
         RepositoryInterface $repository,
         SingleResourceProviderInterface $singleResourceProvider
-    ) {
+    ): void {
         $metadata->getHumanizedName()->willReturn('product');
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
         $configuration->hasPermission()->willReturn(true);
@@ -161,7 +158,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         EventDispatcherInterface $eventDispatcher,
         Request $request,
         Response $response
-    ) {
+    ): void {
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
 
@@ -205,7 +202,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         EventDispatcherInterface $eventDispatcher,
         Request $request,
         Response $response
-    ) {
+    ): void {
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
 
@@ -233,7 +230,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         RequestConfiguration $configuration,
         Request $request,
         AuthorizationCheckerInterface $authorizationChecker
-    ) {
+    ): void {
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
         $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::INDEX)->willReturn('sylius.product.index');
@@ -258,7 +255,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         ViewHandlerInterface $viewHandler,
         Request $request,
         Response $response
-    ) {
+    ): void {
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
         $metadata->getPluralName()->willReturn('products');
@@ -295,7 +292,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         RequestConfiguration $configuration,
         Request $request,
         AuthorizationCheckerInterface $authorizationChecker
-    ) {
+    ): void {
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
         $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::CREATE)->willReturn('sylius.product.create');
@@ -318,11 +315,13 @@ final class ResourceControllerSpec extends ObjectBehavior
         NewResourceFactoryInterface $newResourceFactory,
         ResourceInterface $newResource,
         ResourceFormFactoryInterface $resourceFormFactory,
+        EventDispatcherInterface $eventDispatcher,
+        ResourceControllerEvent $event,
         Form $form,
         FormView $formView,
         Request $request,
         Response $response
-    ) {
+    ): void {
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
 
@@ -337,6 +336,8 @@ final class ResourceControllerSpec extends ObjectBehavior
 
         $newResourceFactory->create($configuration, $factory)->willReturn($newResource);
         $resourceFormFactory->create($configuration, $newResource)->willReturn($form);
+
+        $eventDispatcher->dispatchInitializeEvent(ResourceActions::CREATE, $configuration, $newResource)->willReturn($event);
 
         $request->isMethod('POST')->willReturn(false);
         $form->createView()->willReturn($formView);
@@ -367,11 +368,13 @@ final class ResourceControllerSpec extends ObjectBehavior
         NewResourceFactoryInterface $newResourceFactory,
         ResourceInterface $newResource,
         ResourceFormFactoryInterface $resourceFormFactory,
+        EventDispatcherInterface $eventDispatcher,
+        ResourceControllerEvent $event,
         Form $form,
         FormView $formView,
         Request $request,
         Response $response
-    ) {
+    ): void {
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
 
@@ -386,6 +389,8 @@ final class ResourceControllerSpec extends ObjectBehavior
 
         $newResourceFactory->create($configuration, $factory)->willReturn($newResource);
         $resourceFormFactory->create($configuration, $newResource)->willReturn($form);
+
+        $eventDispatcher->dispatchInitializeEvent(ResourceActions::CREATE, $configuration, $newResource)->willReturn($event);
 
         $request->isMethod('POST')->willReturn(true);
         $form->handleRequest($request)->willReturn($form);
@@ -421,7 +426,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         Form $form,
         Request $request,
         Response $response
-    ) {
+    ): void {
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
 
@@ -466,7 +471,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         ResourceControllerEvent $event,
         Request $request,
         Response $redirectResponse
-    ) {
+    ): void {
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
 
@@ -520,7 +525,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         ResourceControllerEvent $event,
         Request $request,
         Response $redirectResponse
-    ) {
+    ): void {
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
 
@@ -574,7 +579,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         Form $form,
         Request $request,
         Response $response
-    ) {
+    ): void {
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
 
@@ -628,7 +633,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         Form $form,
         Request $request,
         ResourceControllerEvent $event
-    ) {
+    ): void {
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
 
@@ -670,7 +675,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         RequestConfiguration $configuration,
         Request $request,
         AuthorizationCheckerInterface $authorizationChecker
-    ) {
+    ): void {
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
         $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::UPDATE)->willReturn('sylius.product.update');
@@ -691,7 +696,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         AuthorizationCheckerInterface $authorizationChecker,
         RepositoryInterface $repository,
         SingleResourceProviderInterface $singleResourceProvider
-    ) {
+    ): void {
         $metadata->getHumanizedName()->willReturn('product');
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
         $configuration->hasPermission()->willReturn(true);
@@ -716,11 +721,13 @@ final class ResourceControllerSpec extends ObjectBehavior
         SingleResourceProviderInterface $singleResourceProvider,
         ResourceInterface $resource,
         ResourceFormFactoryInterface $resourceFormFactory,
+        EventDispatcherInterface $eventDispatcher,
+        ResourceControllerEvent $event,
         Form $form,
         FormView $formView,
         Request $request,
         Response $response
-    ) {
+    ): void {
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
 
@@ -736,6 +743,8 @@ final class ResourceControllerSpec extends ObjectBehavior
 
         $singleResourceProvider->get($configuration, $repository)->willReturn($resource);
         $resourceFormFactory->create($configuration, $resource)->willReturn($form);
+
+        $eventDispatcher->dispatchInitializeEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($event);
 
         $request->isMethod('PATCH')->willReturn(false);
         $request->getMethod()->willReturn('GET');
@@ -769,11 +778,13 @@ final class ResourceControllerSpec extends ObjectBehavior
         SingleResourceProviderInterface $singleResourceProvider,
         ResourceInterface $resource,
         ResourceFormFactoryInterface $resourceFormFactory,
+        EventDispatcherInterface $eventDispatcher,
+        ResourceControllerEvent $event,
         Form $form,
         FormView $formView,
         Request $request,
         Response $response
-    ) {
+    ): void {
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
 
@@ -788,6 +799,8 @@ final class ResourceControllerSpec extends ObjectBehavior
 
         $singleResourceProvider->get($configuration, $repository)->willReturn($resource);
         $resourceFormFactory->create($configuration, $resource)->willReturn($form);
+
+        $eventDispatcher->dispatchInitializeEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($event);
 
         $request->isMethod('PATCH')->willReturn(false);
         $request->getMethod()->willReturn('PUT');
@@ -826,7 +839,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         Form $form,
         Request $request,
         Response $response
-    ) {
+    ): void {
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
 
@@ -869,7 +882,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         ResourceControllerEvent $event,
         Request $request,
         Response $redirectResponse
-    ) {
+    ): void {
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
 
@@ -926,7 +939,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         ResourceControllerEvent $postEvent,
         Request $request,
         Response $redirectResponse
-    ) {
+    ): void {
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
 
@@ -985,7 +998,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         ResourceControllerEvent $postEvent,
         Request $request,
         Response $redirectResponse
-    ) {
+    ): void {
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
 
@@ -1044,7 +1057,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         Form $form,
         Request $request,
         Response $response
-    ) {
+    ): void {
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
 
@@ -1095,7 +1108,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         ResourceControllerEvent $event,
         Form $form,
         Request $request
-    ) {
+    ): void {
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
 
@@ -1149,7 +1162,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         ResourceControllerEvent $postEvent,
         Request $request,
         Response $redirectResponse
-    ) {
+    ): void {
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
 
@@ -1195,7 +1208,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         RequestConfiguration $configuration,
         Request $request,
         AuthorizationCheckerInterface $authorizationChecker
-    ) {
+    ): void {
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
         $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::DELETE)->willReturn('sylius.product.delete');
@@ -1216,7 +1229,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         AuthorizationCheckerInterface $authorizationChecker,
         RepositoryInterface $repository,
         SingleResourceProviderInterface $singleResourceProvider
-    ) {
+    ): void {
         $metadata->getHumanizedName()->willReturn('product');
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
         $configuration->hasPermission()->willReturn(true);
@@ -1247,7 +1260,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         ResourceControllerEvent $event,
         Request $request,
         Response $redirectResponse
-    ) {
+    ): void {
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
 
@@ -1295,7 +1308,57 @@ final class ResourceControllerSpec extends ObjectBehavior
         ResourceControllerEvent $event,
         Request $request,
         Response $redirectResponse
-    ) {
+    ): void {
+        $metadata->getApplicationName()->willReturn('sylius');
+        $metadata->getName()->willReturn('product');
+
+        $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->hasPermission()->willReturn(true);
+        $configuration->getPermission(ResourceActions::DELETE)->willReturn('sylius.product.delete');
+        $request->request = new ParameterBag(['_csrf_token' => 'xyz']);
+
+        $container->has('security.csrf.token_manager')->willReturn(true);
+        $container->get('security.csrf.token_manager')->willReturn($csrfTokenManager);
+        $csrfTokenManager->isTokenValid(new CsrfToken(1, 'xyz'))->willReturn(true);
+
+        $authorizationChecker->isGranted($configuration, 'sylius.product.delete')->willReturn(true);
+        $singleResourceProvider->get($configuration, $repository)->willReturn($resource);
+        $resource->getId()->willReturn(1);
+
+        $configuration->isHtmlRequest()->willReturn(true);
+        $configuration->isCsrfProtectionEnabled()->willReturn(true);
+
+        $eventDispatcher->dispatchPreEvent(ResourceActions::DELETE, $configuration, $resource)->willReturn($event);
+        $event->isStopped()->willReturn(true);
+        $event->hasResponse()->willReturn(false);
+
+        $repository->remove($resource)->shouldNotBeCalled();
+        $eventDispatcher->dispatchPostEvent(ResourceActions::DELETE, $configuration, $resource)->shouldNotBeCalled();
+        $flashHelper->addSuccessFlash($configuration, ResourceActions::DELETE, $resource)->shouldNotBeCalled();
+
+        $flashHelper->addFlashFromEvent($configuration, $event)->shouldBeCalled();
+        $redirectHandler->redirectToIndex($configuration, $resource)->willReturn($redirectResponse);
+
+        $this->deleteAction($request)->shouldReturn($redirectResponse);
+    }
+
+    function it_does_not_delete_a_resource_and_uses_response_from_event_if_defined(
+        MetadataInterface $metadata,
+        RequestConfigurationFactoryInterface $requestConfigurationFactory,
+        RequestConfiguration $configuration,
+        AuthorizationCheckerInterface $authorizationChecker,
+        RepositoryInterface $repository,
+        SingleResourceProviderInterface $singleResourceProvider,
+        ResourceInterface $resource,
+        RedirectHandlerInterface $redirectHandler,
+        FlashHelperInterface $flashHelper,
+        EventDispatcherInterface $eventDispatcher,
+        CsrfTokenManagerInterface $csrfTokenManager,
+        ContainerInterface $container,
+        ResourceControllerEvent $event,
+        Request $request,
+        Response $redirectResponse
+    ): void {
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
 
@@ -1318,12 +1381,16 @@ final class ResourceControllerSpec extends ObjectBehavior
         $eventDispatcher->dispatchPreEvent(ResourceActions::DELETE, $configuration, $resource)->willReturn($event);
         $event->isStopped()->willReturn(true);
 
+        $flashHelper->addFlashFromEvent($configuration, $event)->shouldBeCalled();
+
+        $event->hasResponse()->willReturn(true);
+        $event->getResponse()->willReturn($redirectResponse);
+
         $repository->remove($resource)->shouldNotBeCalled();
         $eventDispatcher->dispatchPostEvent(ResourceActions::DELETE, $configuration, $resource)->shouldNotBeCalled();
         $flashHelper->addSuccessFlash($configuration, ResourceActions::DELETE, $resource)->shouldNotBeCalled();
 
-        $flashHelper->addFlashFromEvent($configuration, $event)->shouldBeCalled();
-        $redirectHandler->redirectToIndex($configuration, $resource)->willReturn($redirectResponse);
+        $redirectHandler->redirectToIndex($configuration, $resource)->shouldNotBeCalled();
 
         $this->deleteAction($request)->shouldReturn($redirectResponse);
     }
@@ -1343,7 +1410,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         ResourceControllerEvent $event,
         Request $request,
         Response $response
-    ) {
+    ): void {
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
 
@@ -1390,7 +1457,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         ContainerInterface $container,
         ResourceControllerEvent $event,
         Request $request
-    ) {
+    ): void {
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
 
@@ -1441,7 +1508,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         ContainerInterface $container,
         ResourceControllerEvent $event,
         Request $request
-    ) {
+    ): void {
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
 
@@ -1482,7 +1549,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         RequestConfiguration $configuration,
         Request $request,
         AuthorizationCheckerInterface $authorizationChecker
-    ) {
+    ): void {
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
         $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::UPDATE)->willReturn('sylius.product.update');
@@ -1503,7 +1570,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         AuthorizationCheckerInterface $authorizationChecker,
         RepositoryInterface $repository,
         SingleResourceProviderInterface $singleResourceProvider
-    ) {
+    ): void {
         $metadata->getHumanizedName()->willReturn('product');
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
         $configuration->hasPermission()->willReturn(true);
@@ -1532,7 +1599,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         EventDispatcherInterface $eventDispatcher,
         ResourceControllerEvent $event,
         Request $request
-    ) {
+    ): void {
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
 
@@ -1580,7 +1647,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         ResourceControllerEvent $event,
         Request $request,
         Response $redirectResponse
-    ) {
+    ): void {
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
 
@@ -1623,7 +1690,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         ResourceControllerEvent $event,
         Request $request,
         Response $redirectResponse
-    ) {
+    ): void {
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
 
@@ -1668,7 +1735,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         ResourceControllerEvent $event,
         Request $request,
         Response $response
-    ) {
+    ): void {
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
 
@@ -1716,7 +1783,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         ResourceControllerEvent $event,
         Request $request,
         Response $response
-    ) {
+    ): void {
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
 
@@ -1761,7 +1828,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         EventDispatcherInterface $eventDispatcher,
         ResourceControllerEvent $event,
         Request $request
-    ) {
+    ): void {
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
 

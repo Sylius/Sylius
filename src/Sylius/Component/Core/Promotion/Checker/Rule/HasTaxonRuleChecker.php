@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Promotion\Checker\Rule;
 
 use Sylius\Component\Core\Model\OrderInterface;
@@ -23,15 +25,17 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
  */
 final class HasTaxonRuleChecker implements RuleCheckerInterface
 {
-    const TYPE = 'has_taxon';
+    public const TYPE = 'has_taxon';
 
     /**
      * {@inheritdoc}
+     *
+     * @throws UnsupportedTypeException
      */
-    public function isEligible(PromotionSubjectInterface $subject, array $configuration)
+    public function isEligible(PromotionSubjectInterface $subject, array $configuration): bool
     {
         if (!isset($configuration['taxons'])) {
-            return;
+            return false;
         }
 
         if (!$subject instanceof OrderInterface) {

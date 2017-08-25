@@ -5,11 +5,11 @@ sylius:
     gateway_config:
         paypal:
             password:
-                not_blank: Por favor, introduzca su contraseña PayPal.
+                not_blank: Por favor, introduzca su contraseña de API de PayPal.
             signature:
                 not_blank: Por favor, introduzca su firma PayPal.
             username:
-                not_blank: Por favor, introduzca su nombre de usuario de PayPal.
+                not_blank: Por favor, introduzca su nombre de usuario de API de PayPal.
         stripe:
             secret_key:
                 not_blank: Por favor, introduzca la llave secreta de Stripe.

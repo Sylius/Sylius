@@ -21,7 +21,7 @@ class AppKernel extends Kernel
     /**
      * {@inheritdoc}
      */
-    public function registerBundles()
+    public function registerBundles(): array
     {
         return [
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
@@ -49,7 +49,7 @@ class AppKernel extends Kernel
     /**
      * {@inheritdoc}
      */
-    protected function getContainerBaseClass()
+    protected function getContainerBaseClass(): string
     {
         if ('test' === $this->environment) {
             return MockerContainer::class;

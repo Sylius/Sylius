@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Mailer\Event;
 
 use Sylius\Component\Mailer\Model\EmailInterface;
@@ -56,7 +58,7 @@ final class EmailSendEvent extends Event
     /**
      * @return array
      */
-    public function getRecipients()
+    public function getRecipients(): array
     {
         return $this->recipients;
     }
@@ -64,7 +66,7 @@ final class EmailSendEvent extends Event
     /**
      * @return EmailInterface
      */
-    public function getEmail()
+    public function getEmail(): EmailInterface
     {
         return $this->email;
     }
@@ -80,7 +82,7 @@ final class EmailSendEvent extends Event
     /**
      * @return array
      */
-    public function getData()
+    public function getData(): array
     {
         return $this->data;
     }

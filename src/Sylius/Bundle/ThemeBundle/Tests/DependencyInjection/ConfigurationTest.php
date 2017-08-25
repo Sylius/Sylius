@@ -9,13 +9,16 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Tests\DependencyInjection;
 
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
 use Sylius\Bundle\ThemeBundle\DependencyInjection\Configuration;
+use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class ConfigurationTest extends \PHPUnit_Framework_TestCase
 {
@@ -24,7 +27,7 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function it_has_default_context_service_set()
+    public function it_has_default_context_service_set(): void
     {
         $this->assertProcessedConfigurationEquals(
             [
@@ -38,7 +41,7 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function its_context_cannot_be_empty()
+    public function its_context_cannot_be_empty(): void
     {
         $this->assertPartialConfigurationIsInvalid(
             [
@@ -51,7 +54,7 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function its_context_can_be_overridden()
+    public function its_context_can_be_overridden(): void
     {
         $this->assertProcessedConfigurationEquals(
             [
@@ -128,7 +131,7 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * {@inheritdoc}
      */
-    protected function getConfiguration()
+    protected function getConfiguration(): ConfigurationInterface
     {
         return new Configuration();
     }

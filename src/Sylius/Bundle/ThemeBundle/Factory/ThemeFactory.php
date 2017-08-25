@@ -9,19 +9,22 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Factory;
 
 use Sylius\Bundle\ThemeBundle\Model\Theme;
+use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class ThemeFactory implements ThemeFactoryInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function create($name, $path)
+    public function create(string $name, string $path): ThemeInterface
     {
         return new Theme($name, $path);
     }

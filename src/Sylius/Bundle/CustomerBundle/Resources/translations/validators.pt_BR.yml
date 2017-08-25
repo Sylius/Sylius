@@ -16,7 +16,6 @@ sylius:
         email:
             already_used: Este email já está registrado, por favor realize o Login ou esqueceu sua senha.
             max: Sobrenome não pode ser maior que {{ limit }} caracteres.
-            min: Email deve ter ao menos {{ limit }} caracteres.
             not_blank: Por favor, insira seu email.
             invalid: Este email é inválido.
             unique: Este e-mail já está sendo usado.

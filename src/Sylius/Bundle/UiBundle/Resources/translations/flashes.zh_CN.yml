@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    channel:
+        delete_error: '不能删除销售渠道，至少需要一个启用的销售渠道.'
+    checkout:
+        complete_error: '完成订单时产生一个未知问题. 请重新下单.'
+    contact:
+        request_success: '您的联系请求已成功提交。'
+        request_error: '发送联系请求时发生问题。请稍后再试。'
+    customer:
+        add_address: '已成功添加地址。'

@@ -9,12 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\AdminBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 use Sylius\Bundle\AdminBundle\Event\CustomerShowMenuBuilderEvent;
-use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -23,7 +24,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 final class CustomerShowMenuBuilder
 {
-    const EVENT_NAME = 'sylius.menu.admin.customer.show';
+    public const EVENT_NAME = 'sylius.menu.admin.customer.show';
 
     /**
      * @var FactoryInterface
@@ -52,7 +53,7 @@ final class CustomerShowMenuBuilder
      *
      * @return ItemInterface
      */
-    public function createMenu(array $options)
+    public function createMenu(array $options): ItemInterface
     {
         $menu = $this->factory->createItem('root');
 
@@ -74,7 +75,7 @@ final class CustomerShowMenuBuilder
     /**
      * @param ItemInterface $menu
      */
-    private function addChildren(ItemInterface $menu, CustomerInterface $customer)
+    private function addChildren(ItemInterface $menu, CustomerInterface $customer): void
     {
         if (null !== $customer->getUser()) {
             $menu->setExtra('column_id', 'actions');

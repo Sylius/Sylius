@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Mailer\Sender\Adapter;
 
 use Sylius\Component\Mailer\Model\EmailInterface;
@@ -32,11 +34,11 @@ interface AdapterInterface
      */
     public function send(
         array $recipients,
-        $senderAddress,
-        $senderName,
+        string $senderAddress,
+        string $senderName,
         RenderedEmail $renderedEmail,
         EmailInterface $email,
         array $data,
         array $attachments = []
-    );
+    ): void;
 }

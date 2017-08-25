@@ -9,25 +9,21 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Promotion\Checker\Eligibility;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Promotion\Checker\Eligibility\PromotionCouponDurationEligibilityChecker;
 use Sylius\Component\Promotion\Checker\Eligibility\PromotionCouponEligibilityCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class PromotionCouponDurationEligibilityCheckerSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(PromotionCouponDurationEligibilityChecker::class);
-    }
-
-    function it_is_a_promotion_coupon_eligibility_checker()
+    function it_is_a_promotion_coupon_eligibility_checker(): void
     {
         $this->shouldImplement(PromotionCouponEligibilityCheckerInterface::class);
     }
@@ -35,7 +31,7 @@ final class PromotionCouponDurationEligibilityCheckerSpec extends ObjectBehavior
     function it_returns_true_if_promotion_coupon_does_not_expire(
         PromotionSubjectInterface $promotionSubject,
         PromotionCouponInterface $promotionCoupon
-    ) {
+    ): void {
         $promotionCoupon->getExpiresAt()->willReturn(null);
 
         $this->isEligible($promotionSubject, $promotionCoupon)->shouldReturn(true);
@@ -44,7 +40,7 @@ final class PromotionCouponDurationEligibilityCheckerSpec extends ObjectBehavior
     function it_returns_true_if_promotion_coupon_has_not_expired_yet(
         PromotionSubjectInterface $promotionSubject,
         PromotionCouponInterface $promotionCoupon
-    ) {
+    ): void {
         $promotionCoupon->getExpiresAt()->willReturn(new \DateTime('tomorrow'));
 
         $this->isEligible($promotionSubject, $promotionCoupon)->shouldReturn(true);
@@ -53,7 +49,7 @@ final class PromotionCouponDurationEligibilityCheckerSpec extends ObjectBehavior
     function it_returns_false_if_promotion_coupon_has_already_expired(
         PromotionSubjectInterface $promotionSubject,
         PromotionCouponInterface $promotionCoupon
-    ) {
+    ): void {
         $promotionCoupon->getExpiresAt()->willReturn(new \DateTime('yesterday'));
 
         $this->isEligible($promotionSubject, $promotionCoupon)->shouldReturn(false);

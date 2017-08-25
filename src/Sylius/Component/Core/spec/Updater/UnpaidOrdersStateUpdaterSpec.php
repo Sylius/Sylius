@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Core\Updater;
 
 use PhpSpec\ObjectBehavior;
@@ -49,7 +51,7 @@ final class UnpaidOrdersStateUpdaterSpec extends ObjectBehavior
         StateMachineInterface $firstOrderStateMachine,
         StateMachineInterface $secondOrderStateMachine
     ) {
-        $orderRepository->findOrdersUnpaidSince(Argument::type(\DateTime::class))->willReturn([
+        $orderRepository->findOrdersUnpaidSince(Argument::type(\DateTimeInterface::class))->willReturn([
            $firstOrder,
            $secondOrder
         ]);

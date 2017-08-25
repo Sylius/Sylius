@@ -18,17 +18,15 @@
 
     <services>
         <service id="sylius.controller.taxon_slug" class="Sylius\Bundle\TaxonomyBundle\Controller\TaxonSlugController">
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
+            <argument type="service" id="sylius.generator.taxon_slug" />
+            <argument type="service" id="sylius.repository.taxon" />
+            <argument type="service" id="sylius.factory.taxon" />
         </service>
 
         <service id="sylius.custom_factory.taxon" class="Sylius\Component\Taxonomy\Factory\TaxonFactory" decorates="sylius.factory.taxon" decoration-priority="256" public="false">
             <argument type="service" id="sylius.custom_factory.taxon.inner" />
         </service>
 
-        <service id="sylius.generator.taxon_slug" class="Sylius\Component\Taxonomy\Generator\TaxonSlugGenerator">
-            <argument type="service" id="sylius.repository.taxon" />
-        </service>
+        <service id="sylius.generator.taxon_slug" class="Sylius\Component\Taxonomy\Generator\TaxonSlugGenerator" />
     </services>
 </container>

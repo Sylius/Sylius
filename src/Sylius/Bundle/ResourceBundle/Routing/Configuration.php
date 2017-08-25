@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\Routing;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
@@ -22,7 +24,7 @@ final class Configuration implements ConfigurationInterface
     /**
      * {@inheritdoc}
      */
-    public function getConfigTreeBuilder()
+    public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('routing');
@@ -30,13 +32,14 @@ final class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->scalarNode('alias')->isRequired()->cannotBeEmpty()->end()
-                ->scalarNode('path')->cannotBeEmpty()->end()
+                ->scalarNode('path')->defaultValue(null)->end()
                 ->scalarNode('identifier')->defaultValue('id')->end()
                 ->arrayNode('criteria')
                     ->useAttributeAsKey('identifier')
                     ->prototype('scalar')
                     ->end()
                 ->end()
+                ->booleanNode('filterable')->end()
                 ->variableNode('form')->cannotBeEmpty()->end()
                 ->scalarNode('serialization_version')->cannotBeEmpty()->end()
                 ->scalarNode('section')->cannotBeEmpty()->end()

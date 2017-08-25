@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    credit_card:
+        cardholder_name:
+            min_length: Ime vlasnika kartice mora imati najmanje {{ limit }} karaktera.
+            not_blank: Unesite ime vlasnika kartice.

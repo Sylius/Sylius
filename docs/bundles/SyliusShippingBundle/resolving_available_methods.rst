@@ -52,7 +52,7 @@ It supports two special options, required ``subject`` and optional ``criteria``.
         {
             $shipment = $this->get('sylius.repository.shipment')->find(5);
 
-            $form = $this->get('form.factory')->create('sylius_shipping_method_choice', array('subject' => $shipment));
+            $form = $this->get('form.factory')->create(ShippingMethodChoiceType::class, null, array('subject' => $shipment));
         }
     }
 

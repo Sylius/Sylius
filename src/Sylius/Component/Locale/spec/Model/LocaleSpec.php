@@ -9,55 +9,51 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Locale\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Locale\Model\Locale;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class LocaleSpec extends ObjectBehavior
 {
-    function let()
+    function let(): void
     {
         \Locale::setDefault('en');
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(Locale::class);
-    }
-
-    function it_implements_a_locale_interface()
+    function it_implements_a_locale_interface(): void
     {
         $this->shouldImplement(LocaleInterface::class);
     }
 
-    function it_is_timestampable()
+    function it_is_timestampable(): void
     {
         $this->shouldImplement(TimestampableInterface::class);
     }
 
-    function it_does_not_have_id_by_default()
+    function it_does_not_have_id_by_default(): void
     {
         $this->getId()->shouldReturn(null);
     }
 
-    function it_has_no_code_by_default()
+    function it_has_no_code_by_default(): void
     {
         $this->getCode()->shouldReturn(null);
     }
 
-    function its_code_is_mutable()
+    function its_code_is_mutable(): void
     {
         $this->setCode('de_DE');
         $this->getCode()->shouldReturn('de_DE');
     }
 
-    function it_has_a_name()
+    function it_has_a_name(): void
     {
         $this->setCode('pl_PL');
         $this->getName()->shouldReturn('Polish (Poland)');
@@ -68,7 +64,7 @@ final class LocaleSpec extends ObjectBehavior
         $this->getName('es')->shouldReturn('polaco');
     }
 
-    function it_returns_name_when_converted_to_string()
+    function it_returns_name_when_converted_to_string(): void
     {
         $this->setCode('pl_PL');
         $this->__toString()->shouldReturn('Polish (Poland)');
@@ -77,12 +73,12 @@ final class LocaleSpec extends ObjectBehavior
         $this->__toString()->shouldReturn('Polish');
     }
 
-    function it_initializes_creation_date_by_default()
+    function it_initializes_creation_date_by_default(): void
     {
-        $this->getCreatedAt()->shouldHaveType(\DateTime::class);
+        $this->getCreatedAt()->shouldHaveType(\DateTimeInterface::class);
     }
 
-    function it_does_not_have_last_update_date_by_default()
+    function it_does_not_have_last_update_date_by_default(): void
     {
         $this->getUpdatedAt()->shouldReturn(null);
     }

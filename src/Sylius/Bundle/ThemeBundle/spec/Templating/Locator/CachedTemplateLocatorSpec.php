@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ThemeBundle\Templating\Locator;
 
 use Doctrine\Common\Cache\Cache;
@@ -21,21 +23,16 @@ use Sylius\Bundle\ThemeBundle\Templating\Locator\TemplateLocatorInterface;
 use Symfony\Component\Templating\TemplateReferenceInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class CachedTemplateLocatorSpec extends ObjectBehavior
 {
-    function let(TemplateLocatorInterface $decoratedTemplateLocator, Cache $cache)
+    function let(TemplateLocatorInterface $decoratedTemplateLocator, Cache $cache): void
     {
         $this->beConstructedWith($decoratedTemplateLocator, $cache);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(CachedTemplateLocator::class);
-    }
-
-    function it_implements_template_locator_interface()
+    function it_implements_template_locator_interface(): void
     {
         $this->shouldImplement(TemplateLocatorInterface::class);
     }
@@ -45,7 +42,7 @@ final class CachedTemplateLocatorSpec extends ObjectBehavior
         Cache $cache,
         TemplateReferenceInterface $template,
         ThemeInterface $theme
-    ) {
+    ): void {
         $template->getLogicalName()->willReturn('Logical:Name');
         $theme->getName()->willReturn('theme/name');
 
@@ -62,7 +59,7 @@ final class CachedTemplateLocatorSpec extends ObjectBehavior
         Cache $cache,
         TemplateReferenceInterface $template,
         ThemeInterface $theme
-    ) {
+    ): void {
         $template->getLogicalName()->willReturn('Logical:Name');
         $theme->getName()->willReturn('theme/name');
 
@@ -79,7 +76,7 @@ final class CachedTemplateLocatorSpec extends ObjectBehavior
         Cache $cache,
         TemplateReferenceInterface $template,
         ThemeInterface $theme
-    ) {
+    ): void {
         $template->getLogicalName()->willReturn('Logical:Name');
         $template->getPath()->willReturn('@Acme/template.html.twig');
         $theme->getName()->willReturn('theme/name');

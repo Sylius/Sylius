@@ -33,11 +33,13 @@ sylius:
         promotion_filter:
             price_range: 价格区间过滤
         promotion_rule:
+            taxonomy: 分类
             cart_quantity_configuration:
                 count: 计数
                 equal: 等于
             contains_product_configuration:
                 exclude: 不包括：
+                variants: 商品
             item_total_configuration:
                 amount: 金额
             nth_order_configuration:

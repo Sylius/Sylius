@@ -20,7 +20,7 @@
         }
     ],
     "require": {
-        "php": "^5.6|^7.0",
+        "php": "^7.1",
 
         "fzaninotto/faker": "^1.0",
         "jms/serializer-bundle": "^1.1",
@@ -55,7 +55,7 @@
         "hwi/oauth-bundle": "^0.5",
         "matthiasnoback/symfony-config-test": "^2.0",
         "matthiasnoback/symfony-dependency-injection-test": "^1.0",
-        "phpspec/phpspec": "^3.2",
+        "phpspec/phpspec": "^4.0",
         "phpunit/phpunit": "^5.6"
     },
     "config": {

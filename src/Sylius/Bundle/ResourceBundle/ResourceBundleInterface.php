@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle;
 
 /**
@@ -16,9 +18,9 @@ namespace Sylius\Bundle\ResourceBundle;
  */
 interface ResourceBundleInterface
 {
-    const MAPPING_XML = 'xml';
-    const MAPPING_YAML = 'yaml';
-    const MAPPING_ANNOTATION = 'annotation';
+    public const MAPPING_XML = 'xml';
+    public const MAPPING_YAML = 'yaml';
+    public const MAPPING_ANNOTATION = 'annotation';
 
     /**
      * Returns a vector of supported drivers.
@@ -29,5 +31,5 @@ interface ResourceBundleInterface
      *
      * @return array
      */
-    public function getSupportedDrivers();
+    public function getSupportedDrivers(): array;
 }

@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    promotion:
+        code:
+            unique: Promocija sa izabranim kodom već postoji.
+        name:
+            not_blank: Unesite ime promocije.
+    promotion_coupon:
+        code:
+            not_blank: Unesite kupon.
+        is_invalid: Kupon nije validan.

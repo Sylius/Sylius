@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ThemeBundle\Configuration\Test;
 
 use PhpSpec\ObjectBehavior;
@@ -17,26 +19,21 @@ use Sylius\Bundle\ThemeBundle\Configuration\Test\TestConfigurationProvider;
 use Sylius\Bundle\ThemeBundle\Configuration\Test\TestThemeConfigurationManagerInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class TestConfigurationProviderSpec extends ObjectBehavior
 {
-    function let(TestThemeConfigurationManagerInterface $testThemeConfigurationManager)
+    function let(TestThemeConfigurationManagerInterface $testThemeConfigurationManager): void
     {
         $this->beConstructedWith($testThemeConfigurationManager);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(TestConfigurationProvider::class);
-    }
-
-    function it_implements_configuration_provider_interface()
+    function it_implements_configuration_provider_interface(): void
     {
         $this->shouldImplement(ConfigurationProviderInterface::class);
     }
 
-    function it_provides_configuration_based_on_test_configuration_manager(TestThemeConfigurationManagerInterface $testThemeConfigurationManager)
+    function it_provides_configuration_based_on_test_configuration_manager(TestThemeConfigurationManagerInterface $testThemeConfigurationManager): void
     {
         $testThemeConfigurationManager->findAll()->willReturn([
             ['name' => 'theme/name'],

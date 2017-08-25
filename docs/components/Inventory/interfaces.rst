@@ -61,13 +61,3 @@ This interface is implemented by services responsible for creating collection of
 .. _Sylius API InventoryUnitFactoryInterface: http://api.sylius.org/Sylius/Component/Inventory/Factory/InventoryUnitFactoryInterface.html
 
 .. _component_inventory_operator_inventory-operator-interface:
-
-InventoryOperatorInterface
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-This interface is implemented by services responsible for managing inventory units.
-
-.. note::
-    For more detailed information go to `Sylius API InventoryOperatorInterface`_.
-
-.. _Sylius API InventoryOperatorInterface: http://api.sylius.org/Sylius/Component/Inventory/Operator/AvailabilityCheckerInterface.html

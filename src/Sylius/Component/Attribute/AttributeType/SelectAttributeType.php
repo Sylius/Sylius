@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Attribute\AttributeType;
 
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
@@ -24,7 +26,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
  */
 class SelectAttributeType implements AttributeTypeInterface
 {
-    const TYPE = 'select';
+    public const TYPE = 'select';
 
     /**
      * {@inheritdoc}

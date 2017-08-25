@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM\Updater;
 
 use Doctrine\Common\Persistence\ObjectManager;
@@ -45,7 +47,7 @@ final class ResourceUpdateHandler implements ResourceUpdateHandlerInterface
         ResourceInterface $resource,
         RequestConfiguration $configuration,
         ObjectManager $manager
-    ) {
+    ): void {
         try {
             $this->decoratedHandler->handle($resource, $configuration, $manager);
         } catch (OptimisticLockException $exception) {

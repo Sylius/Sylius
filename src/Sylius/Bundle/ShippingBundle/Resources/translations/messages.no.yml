@@ -6,6 +6,7 @@ sylius:
         rule:
             unit_count_configuration:
                 count: Antall
+                equal: Lik
         shipment:
             state: Tilstand
             states:
@@ -16,6 +17,11 @@ sylius:
                 returned: Returnert
                 cancelled: Avbrutt
             tracking_code: Sporingskode
+        shipping_calculator:
+            flat_rate_configuration:
+                amount: Antall
+            per_unit_rate_configuration:
+                amount: Antall
         shipping_category:
             description: Beskrivelse
             name: Navn
@@ -23,8 +29,11 @@ sylius:
             calculator: Kalkulator
             category: Kategori
             category_requirement: Kategorikrav
+            channels: Kanaler
             configuration: Konfigurasjon
             description: Beskrivelse
             enabled: Aktivert
             name: Navn
             tax_category: Skattekategori
+            translations: Oversettelser
+            position: Plassering

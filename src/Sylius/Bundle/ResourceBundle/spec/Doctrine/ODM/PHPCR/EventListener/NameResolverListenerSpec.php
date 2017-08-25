@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener;
 
 use Doctrine\ODM\PHPCR\DocumentManagerInterface;
@@ -25,21 +27,16 @@ use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
  */
 final class NameResolverListenerSpec extends ObjectBehavior
 {
-    function let(DocumentManagerInterface $documentManager)
+    function let(DocumentManagerInterface $documentManager): void
     {
         $this->beConstructedWith($documentManager);
-    }
-
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(NameResolverListener::class);
     }
 
     function it_throws_an_exception_when_the_generator_type_is_not_parent(
         DocumentManagerInterface $documentManager,
         ResourceControllerEvent $event,
         ClassMetadata $metadata
-    ) {
+    ): void {
         $document = new \stdClass();
         $event->getSubject()->willReturn($document);
         $documentManager->getClassMetadata('stdClass')->willReturn($metadata);
@@ -55,7 +52,7 @@ final class NameResolverListenerSpec extends ObjectBehavior
         ResourceControllerEvent $event,
         ClassMetadata $metadata,
         NodeInterface $node
-    ) {
+    ): void {
         $document = new \stdClass();
         $parentDocument = new \stdClass();
         $event->getSubject()->willReturn($document);
@@ -80,7 +77,7 @@ final class NameResolverListenerSpec extends ObjectBehavior
         ResourceControllerEvent $event,
         ClassMetadata $metadata,
         NodeInterface $node
-    ) {
+    ): void {
         $document = new \stdClass();
         $parentDocument = new \stdClass();
         $existingDocument = new \stdClass();

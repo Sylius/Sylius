@@ -9,11 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Order;
 
 final class SyliusCartEvents
 {
-    const CART_CHANGE = 'sylius.cart_change';
+    public const CART_CHANGE = 'sylius.cart_change';
 
     private function __construct()
     {

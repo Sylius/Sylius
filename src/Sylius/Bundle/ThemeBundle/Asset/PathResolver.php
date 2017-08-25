@@ -9,19 +9,21 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Asset;
 
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class PathResolver implements PathResolverInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function resolve($path, ThemeInterface $theme)
+    public function resolve(string $path, ThemeInterface $theme): string
     {
         return str_replace('bundles/', 'bundles/_themes/' . $theme->getName() . '/', $path);
     }

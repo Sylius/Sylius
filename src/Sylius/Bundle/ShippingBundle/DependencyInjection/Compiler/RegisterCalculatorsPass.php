@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ShippingBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
@@ -23,7 +25,7 @@ final class RegisterCalculatorsPass implements CompilerPassInterface
     /**
      * {@inheritdoc}
      */
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         if (!$container->hasDefinition('sylius.registry.shipping_calculator') || !$container->hasDefinition('sylius.form_registry.shipping_calculator')) {
             return;
@@ -43,8 +45,8 @@ final class RegisterCalculatorsPass implements CompilerPassInterface
 
             $registry->addMethodCall('register', [$name, new Reference($id)]);
 
-            if (isset($attributes[0]['form-type'])) {
-                $formTypeRegistry->addMethodCall('add', [$name, 'default', $attributes[0]['form-type']]);
+            if (isset($attributes[0]['form_type'])) {
+                $formTypeRegistry->addMethodCall('add', [$name, 'default', $attributes[0]['form_type']]);
             }
         }
 

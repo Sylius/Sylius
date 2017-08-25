@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\Tests\Form\Type;
 
 use Prophecy\Prophecy\ObjectProphecy;
@@ -19,7 +21,7 @@ use Symfony\Component\Form\PreloadedExtension;
 use Symfony\Component\Form\Test\TypeTestCase;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class ResourceTranslationsTypeTest extends TypeTestCase
 {
@@ -27,7 +29,7 @@ final class ResourceTranslationsTypeTest extends TypeTestCase
     /**
      * {@inheritdoc}
      */
-    protected function getExtensions()
+    protected function getExtensions(): array
     {
         /** @var TranslationLocaleProviderInterface|ObjectProphecy $translationLocaleProvider */
         $translationLocaleProvider = $this->prophesize(TranslationLocaleProviderInterface::class);
@@ -44,7 +46,7 @@ final class ResourceTranslationsTypeTest extends TypeTestCase
     /**
      * @test
      */
-    public function it_respects_entry_options()
+    public function it_respects_entry_options(): void
     {
         $form = $this->factory->create(
             ResourceTranslationsType::class,

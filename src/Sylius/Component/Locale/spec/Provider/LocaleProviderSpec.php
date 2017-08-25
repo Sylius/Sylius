@@ -9,35 +9,31 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Locale\Provider;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Locale\Model\LocaleInterface;
-use Sylius\Component\Locale\Provider\LocaleProvider;
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class LocaleProviderSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $localeRepository)
+    function let(RepositoryInterface $localeRepository): void
     {
         $this->beConstructedWith($localeRepository, 'pl_PL');
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(LocaleProvider::class);
-    }
-
-    function it_is_a_locale_provider_interface()
+    function it_is_a_locale_provider_interface(): void
     {
         $this->shouldImplement(LocaleProviderInterface::class);
     }
 
-    function it_returns_all_enabled_locales(RepositoryInterface $localeRepository, LocaleInterface $locale)
+    function it_returns_all_enabled_locales(RepositoryInterface $localeRepository, LocaleInterface $locale): void
     {
         $localeRepository->findAll()->willReturn([$locale]);
         $locale->getCode()->willReturn('en_US');
@@ -45,7 +41,7 @@ final class LocaleProviderSpec extends ObjectBehavior
         $this->getAvailableLocalesCodes()->shouldReturn(['en_US']);
     }
 
-    function it_returns_the_default_locale()
+    function it_returns_the_default_locale(): void
     {
         $this->getDefaultLocaleCode()->shouldReturn('pl_PL');
     }

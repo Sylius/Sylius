@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Promotion\Filter;
 
 use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
@@ -36,7 +38,7 @@ final class PriceRangeFilter implements FilterInterface
     /**
      * {@inheritdoc}
      */
-    public function filter(array $items, array $configuration)
+    public function filter(array $items, array $configuration): array
     {
         if (!$this->isConfigured($configuration)) {
             return $items;
@@ -60,7 +62,7 @@ final class PriceRangeFilter implements FilterInterface
      *
      * @return bool
      */
-    private function isItemVariantInPriceRange(ProductVariantInterface $variant, array $configuration)
+    private function isItemVariantInPriceRange(ProductVariantInterface $variant, array $configuration): bool
     {
         $price = $this->productVariantPriceCalculator->calculate($variant, ['channel' => $configuration['channel']]);
 
@@ -77,7 +79,7 @@ final class PriceRangeFilter implements FilterInterface
      *
      * @return bool
      */
-    private function isConfigured(array $configuration)
+    private function isConfigured(array $configuration): bool
     {
         return isset($configuration['filters']['price_range_filter']['min']);
     }

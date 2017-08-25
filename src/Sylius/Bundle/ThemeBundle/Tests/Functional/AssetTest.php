@@ -9,13 +9,15 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Tests\Functional;
 
 use Sylius\Bundle\ThemeBundle\Asset\Installer\AssetsInstallerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class AssetTest extends WebTestCase
 {
@@ -32,7 +34,7 @@ final class AssetTest extends WebTestCase
      *
      * @param int $symlinkMask
      */
-    public function it_dumps_assets($symlinkMask)
+    public function it_dumps_assets($symlinkMask): void
     {
         $client = self::createClient();
 
@@ -52,7 +54,7 @@ final class AssetTest extends WebTestCase
      *
      * @param int $symlinkMask
      */
-    public function it_updates_dumped_assets_if_they_are_modified($symlinkMask)
+    public function it_updates_dumped_assets_if_they_are_modified($symlinkMask): void
     {
         $client = self::createClient();
 
@@ -78,7 +80,7 @@ final class AssetTest extends WebTestCase
      *
      * @param int $symlinkMask
      */
-    public function it_dumps_assets_correctly_even_if_nothing_has_changed($symlinkMask)
+    public function it_dumps_assets_correctly_even_if_nothing_has_changed($symlinkMask): void
     {
         $client = self::createClient();
 

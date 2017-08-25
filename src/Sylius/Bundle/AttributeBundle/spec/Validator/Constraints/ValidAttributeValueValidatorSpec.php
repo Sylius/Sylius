@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\AttributeBundle\Validator\Constraints;
 
 use PhpSpec\ObjectBehavior;
@@ -67,7 +69,7 @@ final class ValidAttributeValueValidatorSpec extends ObjectBehavior
         ValidAttributeValue $attributeValueConstraint
     ) {
         $this
-            ->shouldThrow(new UnexpectedTypeException('\DateTime', AttributeValueInterface::class))
+            ->shouldThrow(new UnexpectedTypeException('\DateTimeInterface', AttributeValueInterface::class))
             ->during('validate', [$badObject, $attributeValueConstraint])
         ;
     }

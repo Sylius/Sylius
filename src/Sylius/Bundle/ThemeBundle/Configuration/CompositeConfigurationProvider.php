@@ -9,10 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Configuration;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class CompositeConfigurationProvider implements ConfigurationProviderInterface
 {
@@ -32,7 +34,7 @@ final class CompositeConfigurationProvider implements ConfigurationProviderInter
     /**
      * {@inheritdoc}
      */
-    public function getConfigurations()
+    public function getConfigurations(): array
     {
         $configurations = [];
         foreach ($this->configurationProviders as $configurationProvider) {

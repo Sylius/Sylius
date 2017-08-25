@@ -9,17 +9,19 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Currency\Context;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class CurrencyNotFoundException extends \RuntimeException
 {
     /**
      * {@inheritdoc}
      */
-    public function __construct($message = null, \Exception $previousException = null)
+    public function __construct(?string $message = null, ?\Exception $previousException = null)
     {
         parent::__construct($message ?: 'Currency could not be found!', 0, $previousException);
     }
@@ -29,7 +31,7 @@ final class CurrencyNotFoundException extends \RuntimeException
      *
      * @return self
      */
-    public static function notFound($currencyCode)
+    public static function notFound(string $currencyCode): self
     {
         return new self(sprintf('Currency "%s" cannot be found!', $currencyCode));
     }
@@ -39,18 +41,18 @@ final class CurrencyNotFoundException extends \RuntimeException
      *
      * @return self
      */
-    public static function disabled($currencyCode)
+    public static function disabled(string $currencyCode): self
     {
         return new self(sprintf('Currency "%s" is disabled!', $currencyCode));
     }
 
     /**
      * @param string $currencyCode
-     * @param array $availableCurrenciesCodes
+     * @param array|string[] $availableCurrenciesCodes
      *
      * @return self
      */
-    public static function notAvailable($currencyCode, array $availableCurrenciesCodes)
+    public static function notAvailable(string $currencyCode, array $availableCurrenciesCodes): self
     {
         return new self(sprintf(
             'Currency "%s" is not available! The available ones are: "%s".',

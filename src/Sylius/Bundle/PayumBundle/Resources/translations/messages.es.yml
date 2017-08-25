@@ -7,9 +7,10 @@ sylius:
             type: Tipo
         gateway_configuration:
             paypal:
-                password: Contraseña
+                password: Contraseña de API
                 signature: Firma
-                username: Nombre usuario
+                username: Nombre de usuario de API
+                sandbox: Sandbox
             stripe:
                 publishable_key: Llave pública
                 secret_key: Llave secreta
@@ -17,3 +18,6 @@ sylius:
         offline: Desconectado
         paypal_express_checkout: Pago con Paypal Express
         stripe_checkout: Pago con Stripe
+    payum_action:
+        payment:
+            description: El pago contiene el artículo %items% para un total de %total% | El pago contiene los artículos %items% para un total de %total%

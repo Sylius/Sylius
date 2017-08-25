@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use Sylius\Bundle\UserBundle\Doctrine\ORM\UserRepository;
@@ -62,7 +64,7 @@ class UniqueReviewerEmailValidator extends ConstraintValidator
      */
     public function validate($review, Constraint $constraint)
     {
-        /* @var $customer ReviewerInterface */
+        /* @var ReviewerInterface $customer */
         $customer = $review->getAuthor();
 
         $token = $this->tokenStorage->getToken();
@@ -88,6 +90,6 @@ class UniqueReviewerEmailValidator extends ConstraintValidator
             null !== $token &&
             $this->authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') &&
             $token->getUser() instanceof UserInterface
-            ;
+        ;
     }
 }

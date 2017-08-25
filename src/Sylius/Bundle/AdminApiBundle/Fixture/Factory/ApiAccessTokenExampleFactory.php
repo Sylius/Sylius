@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\AdminApiBundle\Fixture\Factory;
 
 use FOS\OAuthServerBundle\Model\ClientManagerInterface;
@@ -76,7 +78,7 @@ class ApiAccessTokenExampleFactory extends AbstractExampleFactory
     /**
      * {@inheritdoc}
      */
-    public function create(array $options = [])
+    public function create(array $options = []): AccessTokenInterface
     {
         $options = $this->optionsResolver->resolve($options);
 
@@ -97,7 +99,7 @@ class ApiAccessTokenExampleFactory extends AbstractExampleFactory
     /**
      * {@inheritdoc}
      */
-    protected function configureOptions(OptionsResolver $resolver)
+    protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
             ->setDefault('user', LazyOption::randomOne($this->userRepository))
@@ -112,7 +114,7 @@ class ApiAccessTokenExampleFactory extends AbstractExampleFactory
             ->setAllowedTypes('client', ['string', ClientInterface::class, 'null'])
             ->setNormalizer('client', LazyOption::findOneBy($this->clientRepository, 'randomId'))
             ->setDefault('expires_at', null)
-            ->setAllowedTypes('expires_at', ['null', \DateTime::class])
+            ->setAllowedTypes('expires_at', ['null', \DateTimeInterface::class])
         ;
     }
 }

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\AddressingBundle\Validator\Constraints;
 
 use PhpSpec\ObjectBehavior;
@@ -28,17 +30,17 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
  */
 final class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $countryRepository, RepositoryInterface $provinceRepository)
+    function let(RepositoryInterface $countryRepository, RepositoryInterface $provinceRepository): void
     {
         $this->beConstructedWith($countryRepository, $provinceRepository);
     }
 
-    function it_is_initializable()
+    function it_is_initializable(): void
     {
         $this->shouldHaveType(ProvinceAddressConstraintValidator::class);
     }
 
-    function it_throws_exception_if_the_value_is_not_an_address(Constraint $constraint)
+    function it_throws_exception_if_the_value_is_not_an_address(Constraint $constraint): void
     {
         $this->shouldThrow(\InvalidArgumentException::class)->during('validate', [
             '',
@@ -50,7 +52,7 @@ final class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
         AddressInterface $address,
         ProvinceAddressConstraint $constraint,
         ExecutionContextInterface $context
-    ) {
+    ): void {
         $this->initialize($context);
 
         $context->getPropertyPath()->willReturn('property_path');
@@ -69,7 +71,7 @@ final class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
         ProvinceAddressConstraint $constraint,
         ExecutionContextInterface $context,
         RepositoryInterface $countryRepository
-    ) {
+    ): void {
         $country->getCode()->willReturn('IE');
         $address->getCountryCode()->willReturn('IE');
         $countryRepository->findOneBy(['code' => 'IE'])->willReturn($country);
@@ -96,7 +98,7 @@ final class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
         ExecutionContextInterface $context,
         RepositoryInterface $countryRepository,
         RepositoryInterface $provinceRepository
-    ) {
+    ): void {
         $country->getCode()->willReturn('US');
         $address->getCountryCode()->willReturn('US');
         $countryRepository->findOneBy(['code' => 'US'])->willReturn($country);
@@ -128,7 +130,7 @@ final class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
         ExecutionContextInterface $context,
         RepositoryInterface $countryRepository,
         RepositoryInterface $provinceRepository
-    ) {
+    ): void {
         $country->getCode()->willReturn('US');
         $address->getCountryCode()->willReturn('US');
         $countryRepository->findOneBy(['code' => 'US'])->willReturn($country);

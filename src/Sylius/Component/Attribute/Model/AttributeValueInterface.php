@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Attribute\Model;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
@@ -18,13 +20,13 @@ use Sylius\Component\Resource\Model\ResourceInterface;
  */
 interface AttributeValueInterface extends ResourceInterface
 {
-    const STORAGE_BOOLEAN = 'boolean';
-    const STORAGE_DATE = 'date';
-    const STORAGE_DATETIME = 'datetime';
-    const STORAGE_FLOAT = 'float';
-    const STORAGE_INTEGER = 'integer';
-    const STORAGE_JSON = 'json';
-    const STORAGE_TEXT = 'text';
+    public const STORAGE_BOOLEAN = 'boolean';
+    public const STORAGE_DATE = 'date';
+    public const STORAGE_DATETIME = 'datetime';
+    public const STORAGE_FLOAT = 'float';
+    public const STORAGE_INTEGER = 'integer';
+    public const STORAGE_JSON = 'json';
+    public const STORAGE_TEXT = 'text';
 
     /**
      * @return AttributeSubjectInterface

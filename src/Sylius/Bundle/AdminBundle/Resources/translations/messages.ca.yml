@@ -5,5 +5,35 @@ sylius:
     menu:
         admin:
             main:
+                catalog:
+                    association_types: Tipus d'Associació
+                    attributes: Atributs
+                    header: Catàleg
+                    inventory: Inventari
+                    options: Opcions
+                    products: Productes
+                configuration:
+                    admin_users: Administradors
+                    channels: Canals
+                    countries: Països
+                    currencies: Monedes
+                    exchange_rates: Tipus de canvi
+                    header: Configuració
+                    locales: Locals
+                    payment_methods: Forma de pagament
+                    shipping_categories: Categories d'enviament
+                    shipping_methods: Mètodes d'enviament
+                    tax_categories: Categories fiscals
+                    tax_rates: Impostos
+                    zones: Zones
+                marketing:
+                    header: Màrqueting
+                    product_reviews: Ressenyes de productes
+                    promotions: Promocions
                 customers:
+                    customers: Clients
                     groups: Grups
+                    header: Client
+                sales:
+                    header: Vendes
+                    orders: Comandes

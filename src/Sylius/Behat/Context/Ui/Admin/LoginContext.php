@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
@@ -134,7 +136,9 @@ final class LoginContext implements Context
      */
     private function logInAgain($username, $password)
     {
+        $this->dashboardPage->open();
         $this->dashboardPage->logOut();
+
         $this->loginPage->open();
         $this->loginPage->specifyUsername($username);
         $this->loginPage->specifyPassword($password);

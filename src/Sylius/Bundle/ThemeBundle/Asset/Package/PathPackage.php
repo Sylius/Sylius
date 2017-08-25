@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Asset\Package;
 
 use Sylius\Bundle\ThemeBundle\Asset\PathResolverInterface;
@@ -18,7 +20,9 @@ use Symfony\Component\Asset\PathPackage as BasePathPackage;
 use Symfony\Component\Asset\VersionStrategy\VersionStrategyInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @see BasePathPackage
+ *
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 class PathPackage extends BasePathPackage
 {
@@ -40,11 +44,11 @@ class PathPackage extends BasePathPackage
      * @param ContextInterface|null $context
      */
     public function __construct(
-        $basePath,
+        string $basePath,
         VersionStrategyInterface $versionStrategy,
         ThemeContextInterface $themeContext,
         PathResolverInterface $pathResolver,
-        ContextInterface $context = null
+        ?ContextInterface $context = null
     ) {
         parent::__construct($basePath, $versionStrategy, $context);
 
@@ -55,7 +59,7 @@ class PathPackage extends BasePathPackage
     /**
      * {@inheritdoc}
      */
-    public function getUrl($path)
+    public function getUrl($path): string
     {
         if ($this->isAbsoluteUrl($path)) {
             return $path;
@@ -66,6 +70,13 @@ class PathPackage extends BasePathPackage
             $path = $this->pathResolver->resolve($path, $theme);
         }
 
-        return $this->getBasePath().ltrim($this->getVersionStrategy()->applyVersion($path), '/');
+        $versionedPath = $this->getVersionStrategy()->applyVersion($path);
+
+        // if absolute or begins with /, we're done
+        if ($this->isAbsoluteUrl($versionedPath) || ($versionedPath && '/' === $versionedPath[0])) {
+            return $versionedPath;
+        }
+
+        return $this->getBasePath() . ltrim($versionedPath, '/');
     }
 }

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core;
 
 /**
@@ -16,14 +18,14 @@ namespace Sylius\Component\Core;
  */
 final class OrderCheckoutTransitions
 {
-    const GRAPH = 'sylius_order_checkout';
+    public const GRAPH = 'sylius_order_checkout';
 
-    const TRANSITION_ADDRESS = 'address';
-    const TRANSITION_COMPLETE = 'complete';
-    const TRANSITION_SELECT_PAYMENT = 'select_payment';
-    const TRANSITION_SELECT_SHIPPING = 'select_shipping';
-    const TRANSITION_SKIP_PAYMENT = 'skip_payment';
-    const TRANSITION_SKIP_SHIPPING = 'skip_shipping';
+    public const TRANSITION_ADDRESS = 'address';
+    public const TRANSITION_COMPLETE = 'complete';
+    public const TRANSITION_SELECT_PAYMENT = 'select_payment';
+    public const TRANSITION_SELECT_SHIPPING = 'select_shipping';
+    public const TRANSITION_SKIP_PAYMENT = 'skip_payment';
+    public const TRANSITION_SKIP_SHIPPING = 'skip_shipping';
 
     private function __construct()
     {

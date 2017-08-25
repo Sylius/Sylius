@@ -25,6 +25,8 @@ sylius:
             expires_at: Vyprší za
             usage_limit: Omezení použití
         promotion_rule:
+            customer_group: Skupina zákazníků
+            taxonomy: Taxy DPH
             cart_quantity_configuration:
                 count: Počet
                 equal: Rovno

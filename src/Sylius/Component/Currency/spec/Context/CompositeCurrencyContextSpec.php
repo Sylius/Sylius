@@ -9,36 +9,32 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Currency\Context;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Currency\Context\CurrencyNotFoundException;
-use Sylius\Component\Currency\Context\CompositeCurrencyContext;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class CompositeCurrencyContextSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(CompositeCurrencyContext::class);
-    }
-
-    function it_implements_currency_context_interface()
+    function it_implements_currency_context_interface(): void
     {
         $this->shouldImplement(CurrencyContextInterface::class);
     }
 
-    function it_throws_a_currency_not_found_exception_if_there_are_no_nested_currency_contexts_defined()
+    function it_throws_a_currency_not_found_exception_if_there_are_no_nested_currency_contexts_defined(): void
     {
         $this->shouldThrow(CurrencyNotFoundException::class)->during('getCurrencyCode');
     }
 
     function it_throws_a_currency_not_found_exception_if_none_of_nested_currency_contexts_returned_a_currency(
         CurrencyContextInterface $currencyContext
-    ) {
+    ): void {
         $currencyContext->getCurrencyCode()->willThrow(CurrencyNotFoundException::class);
 
         $this->addContext($currencyContext);
@@ -50,7 +46,7 @@ final class CompositeCurrencyContextSpec extends ObjectBehavior
         CurrencyContextInterface $firstCurrencyContext,
         CurrencyContextInterface $secondCurrencyContext,
         CurrencyContextInterface $thirdCurrencyContext
-    ) {
+    ): void {
         $firstCurrencyContext->getCurrencyCode()->willThrow(CurrencyNotFoundException::class);
         $secondCurrencyContext->getCurrencyCode()->willReturn('BTC');
         $thirdCurrencyContext->getCurrencyCode()->shouldNotBeCalled();
@@ -66,7 +62,7 @@ final class CompositeCurrencyContextSpec extends ObjectBehavior
         CurrencyContextInterface $firstCurrencyContext,
         CurrencyContextInterface $secondCurrencyContext,
         CurrencyContextInterface $thirdCurrencyContext
-    ) {
+    ): void {
         $firstCurrencyContext->getCurrencyCode()->shouldNotBeCalled();
         $secondCurrencyContext->getCurrencyCode()->willReturn('BTC');
         $thirdCurrencyContext->getCurrencyCode()->willThrow(CurrencyNotFoundException::class);

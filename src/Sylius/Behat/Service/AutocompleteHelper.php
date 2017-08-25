@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Service;
 
 use Behat\Mink\Driver\Selenium2Driver;
@@ -17,7 +19,7 @@ use Behat\Mink\Session;
 use Webmozart\Assert\Assert;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 abstract class AutocompleteHelper
 {

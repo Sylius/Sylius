@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Page\Admin\PromotionCoupon;
 
 use Behat\Mink\Element\NodeElement;
@@ -31,9 +33,9 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     }
 
     /**
-     * @param \DateTime $date
+     * @param \DateTimeInterface $date
      */
-    public function setExpiresAt(\DateTime $date)
+    public function setExpiresAt(\DateTimeInterface $date)
     {
         $timestamp = $date->getTimestamp();
 

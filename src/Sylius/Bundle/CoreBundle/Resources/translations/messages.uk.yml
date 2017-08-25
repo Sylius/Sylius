@@ -19,17 +19,23 @@ sylius:
         promotion_action:
             add_product_configuration:
                 product: Товар
+        promotion_coupon:
+            per_customer_usage_limit: Ліміт використання на клієнта
         group:
             name: Назва
             roles: Ролі
         channel:
+            contact_email: Контактна електронна пошта
             currencies: Валюти
             currency_base: Основна валюта
+            account_verification_required: Потрібна перевірка акаунту?
             hostname: Ім'я хоста
             locale_default: Типова локаль
             locales: Локалі
             payment_methods: Способи оплати
             shipping_methods: Методи доставки
+            skipping_shipping_step_allowed: Пропустити крок доставки, якщо доступний лише один метод доставки?
+            skipping_payment_step_allowed: Пропустити крок доставки, якщо доступний лише один метод доставки?
             tax_calculation_strategy: Стратегія податкового розрахунку
             tax_zone_default: Податкова зона за замовчуванням
             taxonomies: Таксономії
@@ -104,6 +110,7 @@ sylius:
             on_hand: Поточний запас
             price: Ціна
             sku: Артикул
+            shipping_required: Доставка потрібна?
             weight: Вага
             width: Ширина
         attribute:
@@ -117,7 +124,14 @@ sylius:
             type: Тип асоціювання
         product_association_type:
             name: Назва
+        promotion_filter:
+            products: Фільтр товарів
+            taxons: Фільтр таксонів
         promotion_rule:
+            customer_group:
+                group: Група клієнтів
+            has_taxon:
+                taxons: Таксони
             product:
                 products: Продукція
             total_of_items_from_taxon:
@@ -125,6 +139,12 @@ sylius:
                 amount: Обсяг
         payment_method:
             channels: Канали
+        product_attribute:
+            position: Позиція
+        zone:
+            scopes:
+                shipping: Спосіб доставки
+                tax: Податок
     installer:
         extensions:
             header: розширення
@@ -154,13 +174,16 @@ sylius:
             header: файлова система
             cache:
                 header: кеш
+                help: 'Щоб встановити дозволи, запустіть: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
             exists: існує
             logs:
                 header: журнали
+                help: 'Щоб встановити дозволи, запустіть: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
             not_exists: не існує
             not_writable: відсутня можливість запису
             parameters:
                 header: parameters.yml
+                help: 'Щоб встановити дозволи, запустіть: sudo chmod a+w %path%'
             vendors: постачальники
             writable: наявна можливість запису
         settings:

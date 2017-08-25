@@ -9,13 +9,15 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Channel\Context\RequestBased;
 
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 interface RequestResolverInterface
 {
@@ -24,5 +26,5 @@ interface RequestResolverInterface
      *
      * @return ChannelInterface|null
      */
-    public function findChannel(Request $request);
+    public function findChannel(Request $request): ?ChannelInterface;
 }

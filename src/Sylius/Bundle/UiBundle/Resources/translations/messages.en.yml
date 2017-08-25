@@ -742,6 +742,7 @@ sylius:
         sku: 'SKU'
         slideshow: 'Slideshow'
         slideshow_blocks: 'Slideshow blocks'
+        sort: 'Sort'
         sort_by_date: 'Sort by date'
         source_currency: 'Source currency'
         start_date: 'Start Date'

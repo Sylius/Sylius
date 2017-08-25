@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\AdminBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
@@ -22,7 +24,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 final class ProductVariantFormMenuBuilder
 {
-    const EVENT_NAME = 'sylius.menu.admin.product_variant.form';
+    public const EVENT_NAME = 'sylius.menu.admin.product_variant.form';
 
     /**
      * @var FactoryInterface
@@ -49,7 +51,7 @@ final class ProductVariantFormMenuBuilder
      *
      * @return ItemInterface
      */
-    public function createMenu(array $options = [])
+    public function createMenu(array $options = []): ItemInterface
     {
         $menu = $this->factory->createItem('root');
 

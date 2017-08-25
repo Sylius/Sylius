@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\LocaleBundle\Context;
 
 use Sylius\Component\Locale\Context\LocaleContextInterface;
@@ -17,7 +19,7 @@ use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class RequestBasedLocaleContext implements LocaleContextInterface
 {
@@ -44,7 +46,7 @@ final class RequestBasedLocaleContext implements LocaleContextInterface
     /**
      * {@inheritdoc}
      */
-    public function getLocaleCode()
+    public function getLocaleCode(): string
     {
         $request = $this->requestStack->getMasterRequest();
         if (null === $request) {

@@ -1,0 +1,17 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    gateway_config:
+        paypal:
+            password:
+                not_blank: 請輸入 PayPal 密碼。
+            signature:
+                not_blank: 請輸入 PayPal 簽章。
+            username:
+                not_blank: 請輸入 PayPal 使用者名稱。
+        stripe:
+            secret_key:
+                not_blank: 請輸入 Stripe 秘密金鑰。
+            publishable_key:
+                not_blank: 請輸入 Stripe 公鑰。

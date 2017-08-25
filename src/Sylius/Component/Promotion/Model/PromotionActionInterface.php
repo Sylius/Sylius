@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Promotion\Model;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
@@ -19,17 +21,17 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 interface PromotionActionInterface extends ResourceInterface, ConfigurablePromotionElementInterface
 {
     /**
-     * @param string $type
+     * @param string|null $type
      */
-    public function setType($type);
+    public function setType(?string $type): void;
 
     /**
      * @param array $configuration
      */
-    public function setConfiguration(array $configuration);
+    public function setConfiguration(array $configuration): void;
 
     /**
-     * @param PromotionInterface $promotion
+     * @param PromotionInterface|null $promotion
      */
-    public function setPromotion(PromotionInterface $promotion = null);
+    public function setPromotion(?PromotionInterface $promotion): void;
 }

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\AdminApiBundle\Controller;
 
 use FOS\RestBundle\View\View;
@@ -81,7 +83,7 @@ final class ShowAvailableShippingMethodsController
      *
      * @return Response
      */
-    public function showAction(Request $request)
+    public function showAction(Request $request): Response
     {
         /** @var OrderInterface $cart */
         $cart = $this->getCartOr404($request->attributes->get('orderId'));
@@ -105,8 +107,10 @@ final class ShowAvailableShippingMethodsController
      * @param mixed $cartId
      *
      * @return OrderInterface
+     *
+     * @throws NotFoundHttpException
      */
-    private function getCartOr404($cartId)
+    private function getCartOr404($cartId): OrderInterface
     {
         $cart = $this->orderRepository->findCartById($cartId);
 
@@ -123,7 +127,7 @@ final class ShowAvailableShippingMethodsController
      *
      * @return bool
      */
-    private function isCheckoutTransitionPossible(OrderInterface $cart, $transition)
+    private function isCheckoutTransitionPossible(OrderInterface $cart, string $transition): bool
     {
         return $this->stateMachineFactory->get($cart, OrderCheckoutTransitions::GRAPH)->can($transition);
     }
@@ -134,7 +138,7 @@ final class ShowAvailableShippingMethodsController
      *
      * @return array
      */
-    private function getCalculatedShippingMethods(ShipmentInterface $shipment, $locale)
+    private function getCalculatedShippingMethods(ShipmentInterface $shipment, string $locale): array
     {
         $shippingMethods =  $this->shippingMethodsResolver->getSupportedMethods($shipment);
 

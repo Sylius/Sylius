@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -44,7 +46,7 @@ final class ParametersParser implements ParametersParserInterface
     /**
      * {@inheritdoc}
      */
-    public function parseRequestValues(array $parameters, Request $request)
+    public function parseRequestValues(array $parameters, Request $request): array
     {
         return array_map(function ($parameter) use ($request) {
             if (is_array($parameter)) {
@@ -63,6 +65,10 @@ final class ParametersParser implements ParametersParserInterface
      */
     private function parseRequestValue($parameter, Request $request)
     {
+        if (!is_string($parameter)) {
+            return $parameter;
+        }
+
         if (0 === strpos($parameter, '$')) {
             return $request->get(substr($parameter, 1));
         }
@@ -80,7 +86,7 @@ final class ParametersParser implements ParametersParserInterface
      *
      * @return string
      */
-    private function parseRequestValueExpression($expression, Request $request)
+    private function parseRequestValueExpression(string $expression, Request $request)
     {
         $expression = preg_replace_callback('/(\$\w+)/', function ($matches) use ($request) {
             $variable = $request->get(substr($matches[1], 1));

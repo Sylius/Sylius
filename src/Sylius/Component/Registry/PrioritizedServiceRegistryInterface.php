@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Registry;
+declare(strict_types=1);
 
-use Zend\Stdlib\PriorityQueue;
+namespace Sylius\Component\Registry;
 
 /**
  * @author Mark McKelvie <mark.mckelvie@reiss.com>
@@ -19,9 +19,9 @@ use Zend\Stdlib\PriorityQueue;
 interface PrioritizedServiceRegistryInterface
 {
     /**
-     * @return PriorityQueue
+     * @return iterable
      */
-    public function all();
+    public function all(): iterable;
 
     /**
      * @param object $service
@@ -30,19 +30,19 @@ interface PrioritizedServiceRegistryInterface
      * @throws ExistingServiceException
      * @throws \InvalidArgumentException
      */
-    public function register($service, $priority = 0);
+    public function register($service, int $priority = 0): void;
 
     /**
      * @param object $service
      *
      * @throws NonExistingServiceException
      */
-    public function unregister($service);
+    public function unregister($service): void;
 
     /**
      * @param object $service
      *
      * @return bool
      */
-    public function has($service);
+    public function has($service): bool;
 }

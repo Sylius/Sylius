@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\MailerBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
@@ -24,7 +26,7 @@ final class Configuration implements ConfigurationInterface
     /**
      * {@inheritdoc}
      */
-    public function getConfigTreeBuilder()
+    public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('sylius_mailer');
@@ -43,10 +45,8 @@ final class Configuration implements ConfigurationInterface
 
     /**
      * @param ArrayNodeDefinition $node
-     *
-     * @return ArrayNodeDefinition
      */
-    protected function addEmailsSection(ArrayNodeDefinition $node)
+    protected function addEmailsSection(ArrayNodeDefinition $node): void
     {
         $node
             ->children()

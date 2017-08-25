@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Shipping\Model;
 
 use Sylius\Component\Resource\Model\CodeAwareInterface;
@@ -21,27 +23,22 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
 interface ShippingCategoryInterface extends CodeAwareInterface, TimestampableInterface, ResourceInterface
 {
     /**
-     * @return mixed
+     * @return string|null
      */
-    public function getId();
+    public function getName(): ?string;
 
     /**
-     * @return string
+     * @param string|null $name
      */
-    public function getName();
+    public function setName(?string $name): void;
 
     /**
-     * @param string $name
+     * @return string|null
      */
-    public function setName($name);
+    public function getDescription(): ?string;
 
     /**
-     * @return string
+     * @param string|null $description
      */
-    public function getDescription();
-
-    /**
-     * @param string $description
-     */
-    public function setDescription($description);
+    public function setDescription(?string $description): void;
 }

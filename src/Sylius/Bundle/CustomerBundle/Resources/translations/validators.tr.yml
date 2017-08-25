@@ -4,6 +4,8 @@
 sylius:
     customer:
         first_name:
+            max: İsim {{ limit }} karakterden uzun olamaz.
+            min: Soyadı en az {{ limit }} karakter olmalıdır.
             not_blank: Lütfen adınızı giriniz.
         last_name:
             not_blank: Lütfen soyadınızı giriniz.

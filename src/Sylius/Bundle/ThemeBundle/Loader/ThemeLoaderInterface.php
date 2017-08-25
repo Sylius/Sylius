@@ -9,19 +9,21 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Loader;
 
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 interface ThemeLoaderInterface
 {
     /**
-     * @return ThemeInterface[]
+     * @return array|ThemeInterface[]
      *
      * @throws ThemeLoadingFailedException
      */
-    public function load();
+    public function load(): array;
 }

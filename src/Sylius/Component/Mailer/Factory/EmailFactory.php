@@ -9,9 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Mailer\Factory;
 
 use Sylius\Component\Mailer\Model\Email;
+use Sylius\Component\Mailer\Model\EmailInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -21,7 +24,7 @@ class EmailFactory implements EmailFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createNew()
+    public function createNew(): EmailInterface
     {
         return new Email();
     }

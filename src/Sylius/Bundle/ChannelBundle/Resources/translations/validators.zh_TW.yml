@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    channel:
+        code:
+            not_blank: 請輸入通道編碼。
+            regex: 通道代碼僅可以字母、 數位、 破折號和底線組成。
+            unique: 通道編碼必須是唯一的。
+        name:
+            not_blank: 請輸入通道名稱。

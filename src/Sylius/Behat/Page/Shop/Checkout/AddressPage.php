@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Page\Shop\Checkout;
 
 use Behat\Mink\Driver\Selenium2Driver;
@@ -26,8 +28,8 @@ use Webmozart\Assert\Assert;
  */
 class AddressPage extends SymfonyPage implements AddressPageInterface
 {
-    const TYPE_BILLING = 'billing';
-    const TYPE_SHIPPING = 'shipping';
+    public const TYPE_BILLING = 'billing';
+    public const TYPE_SHIPPING = 'shipping';
 
     /**
      * @var AddressFactoryInterface

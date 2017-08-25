@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Core\Model;
 
 use Sylius\Component\Core\Model\ProductInterface;
@@ -27,12 +29,12 @@ final class ProductTaxonSpec extends ObjectBehavior
     {
         $this->shouldHaveType(ProductTaxon::class);
     }
-    
+
     function it_implements_product_taxon_interface()
     {
         $this->shouldImplement(ProductTaxonInterface::class);
     }
-    
+
     function it_has_mutable_product_field(ProductInterface $product)
     {
         $this->setProduct($product);

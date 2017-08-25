@@ -9,13 +9,15 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\UiBundle\Block;
 
 use Sonata\BlockBundle\Event\BlockEvent;
 use Sonata\BlockBundle\Model\Block;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class BlockEventListener
 {
@@ -27,7 +29,7 @@ final class BlockEventListener
     /**
      * @param string $template
      */
-    public function __construct($template)
+    public function __construct(string $template)
     {
         $this->template = $template;
     }
@@ -35,7 +37,7 @@ final class BlockEventListener
     /**
      * @param BlockEvent $event
      */
-    public function onBlockEvent(BlockEvent $event)
+    public function onBlockEvent(BlockEvent $event): void
     {
         $block = new Block();
         $block->setId(uniqid('', true));

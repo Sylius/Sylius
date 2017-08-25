@@ -9,10 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Shipping\Resolver;
 
 use Sylius\Component\Shipping\Exception\UnresolvedDefaultShippingMethodException;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
+use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Repository\ShippingMethodRepositoryInterface;
 
 /**
@@ -36,7 +39,7 @@ final class DefaultShippingMethodResolver implements DefaultShippingMethodResolv
     /**
      * {@inheritdoc}
      */
-    public function getDefaultShippingMethod(ShipmentInterface $shipment)
+    public function getDefaultShippingMethod(ShipmentInterface $shipment): ShippingMethodInterface
     {
         $shippingMethods = $this->shippingMethodRepository->findBy(['enabled' => true]);
         if (empty($shippingMethods)) {

@@ -4,13 +4,17 @@
 sylius:
     form:
         promotion:
+            description: Keterangan
             name: Nama
             rules: Aturan
         promotion_action:
             type: Jenis
         promotion_rule:
+            customer_group: Kelompok pelanggan
             contains_product_configuration:
                 variants: Produk
             shipping_country_configuration:
                 country: Negara
+            taxonomy_configuration:
+                taxons: Taksonomi
             type: Jenis

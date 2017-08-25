@@ -40,21 +40,26 @@
 {% endmacro %}
 
 {% macro danger(text) %}
-    {{ _self.alert(text, 'danger') }}
+    {% from _self import alert %}
+    {{ alert(text, 'danger') }}
 {% endmacro %}
 
 {% macro error(text) %}
-    {{ _self.danger(text) }}
+    {% from _self import danger %}
+    {{ danger(text) }}
 {% endmacro %}
 
 {% macro warning(text) %}
-    {{ _self.alert(text, 'warning') }}
+    {% from _self import alert %}
+    {{ alert(text, 'warning') }}
 {% endmacro %}
 
 {% macro success(text) %}
-    {{ _self.alert(text, 'success') }}
+    {% from _self import alert %}
+    {{ alert(text, 'success') }}
 {% endmacro %}
 
 {% macro info(text) %}
-    {{ _self.alert(text, 'info') }}
+    {% from _self import alert %}
+    {{ alert(text, 'info') }}
 {% endmacro %}

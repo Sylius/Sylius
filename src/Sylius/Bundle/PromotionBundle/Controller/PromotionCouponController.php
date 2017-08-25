@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\PromotionBundle\Controller;
 
 use FOS\RestBundle\View\View;
@@ -31,7 +33,7 @@ class PromotionCouponController extends ResourceController
      *
      * @throws NotFoundHttpException
      */
-    public function generateAction(Request $request)
+    public function generateAction(Request $request): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
@@ -72,7 +74,7 @@ class PromotionCouponController extends ResourceController
     /**
      * @return PromotionCouponGeneratorInterface
      */
-    protected function getGenerator()
+    protected function getGenerator(): PromotionCouponGeneratorInterface
     {
         return $this->container->get('sylius.promotion_coupon_generator');
     }

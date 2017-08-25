@@ -2,9 +2,6 @@
     "code": 400,
     "message": "Validation Failed",
     "errors": {
-        "errors": [
-            "Please add at least 2 option values."
-        ],
         "children": {
             "position": {},
             "translations": {},

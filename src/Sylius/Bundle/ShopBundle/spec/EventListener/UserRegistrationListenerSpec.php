@@ -9,12 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ShopBundle\EventListener;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ShopBundle\EventListener\UserRegistrationListener;
 use Sylius\Bundle\UserBundle\Security\UserLoginInterface;
 use Sylius\Bundle\UserBundle\UserEvents;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
@@ -36,7 +37,7 @@ final class UserRegistrationListenerSpec extends ObjectBehavior
         EventDispatcherInterface $eventDispatcher,
         ChannelContextInterface $channelContext,
         UserLoginInterface $userLogin
-    ) {
+    ): void {
         $this->beConstructedWith(
             $userManager,
             $tokenGenerator,
@@ -45,11 +46,6 @@ final class UserRegistrationListenerSpec extends ObjectBehavior
             $userLogin,
             'shop'
         );
-    }
-
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(UserRegistrationListener::class);
     }
 
     function it_sends_an_user_verification_email(
@@ -61,7 +57,7 @@ final class UserRegistrationListenerSpec extends ObjectBehavior
         CustomerInterface $customer,
         ShopUserInterface $user,
         ChannelInterface $channel
-    ) {
+    ): void {
         $event->getSubject()->willReturn($customer);
         $customer->getUser()->willReturn($user);
 
@@ -92,7 +88,7 @@ final class UserRegistrationListenerSpec extends ObjectBehavior
         CustomerInterface $customer,
         ShopUserInterface $user,
         ChannelInterface $channel
-    ) {
+    ): void {
         $event->getSubject()->willReturn($customer);
         $customer->getUser()->willReturn($user);
 
@@ -119,7 +115,7 @@ final class UserRegistrationListenerSpec extends ObjectBehavior
     function it_throws_an_invalid_argument_exception_if_event_subject_is_not_customer_type(
         GenericEvent $event,
         \stdClass $customer
-    ) {
+    ): void {
         $event->getSubject()->willReturn($customer);
 
         $this->shouldThrow(\InvalidArgumentException::class)->during('handleUserVerification', [$event]);
@@ -128,7 +124,7 @@ final class UserRegistrationListenerSpec extends ObjectBehavior
     function it_throws_an_invalid_argument_exception_if_user_is_null(
         GenericEvent $event,
         CustomerInterface $customer
-    ) {
+    ): void {
         $event->getSubject()->willReturn($customer);
         $customer->getUser()->willReturn(null);
 

@@ -31,3 +31,4 @@ sylius:
             enabled: Увімкнено?
             instructions: Інструкції
             name: Назва
+            position: Позиція

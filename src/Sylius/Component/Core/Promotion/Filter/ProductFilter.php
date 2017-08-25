@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Promotion\Filter;
 
 /**
@@ -19,7 +21,7 @@ final class ProductFilter implements FilterInterface
     /**
      * {@inheritdoc}
      */
-    public function filter(array $items, array $configuration)
+    public function filter(array $items, array $configuration): array
     {
         if (empty($configuration['filters']['products_filter']['products'])) {
             return $items;

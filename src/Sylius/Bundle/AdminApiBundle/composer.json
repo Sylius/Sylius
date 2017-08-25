@@ -20,7 +20,7 @@
         }
     ],
     "require": {
-        "php": "^5.6|^7.0",
+        "php": "^7.1",
 
         "friendsofsymfony/oauth-server-bundle": "^1.5",
         "sylius/core-bundle": "^1.0",
@@ -29,10 +29,10 @@
         "symfony/validator": "^3.2"
     },
     "require-dev": {
-        "doctrine/orm": "^2.5",
-        "phpspec/phpspec": "^3.2",
+        "doctrine/orm": "~2.5.0",
+        "phpspec/phpspec": "^4.0",
         "phpunit/phpunit": "^5.6",
-        "twig/twig": "^1.28"
+        "twig/twig": "^2.0"
     },
     "config": {
         "bin-dir": "bin"

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Page\Admin\Order;
 
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface as BaseIndexPageInterface;
@@ -19,14 +21,14 @@ use Sylius\Behat\Page\Admin\Crud\IndexPageInterface as BaseIndexPageInterface;
 interface IndexPageInterface extends BaseIndexPageInterface
 {
     /**
-     * @param \DateTime $dateTime
+     * @param \DateTimeInterface $dateTime
      */
-    public function specifyFilterDateFrom(\DateTime $dateTime);
+    public function specifyFilterDateFrom(\DateTimeInterface $dateTime);
 
     /**
-     * @param \DateTime $dateTime
+     * @param \DateTimeInterface $dateTime
      */
-    public function specifyFilterDateTo(\DateTime $dateTime);
+    public function specifyFilterDateTo(\DateTimeInterface $dateTime);
 
     /**
      * @param string $channelName

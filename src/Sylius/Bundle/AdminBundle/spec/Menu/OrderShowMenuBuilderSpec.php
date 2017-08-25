@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\AdminBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
@@ -17,7 +19,6 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use SM\StateMachine\StateMachineInterface;
-use Sylius\Bundle\AdminBundle\Menu\OrderShowMenuBuilder;
 use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\OrderTransitions;
@@ -32,13 +33,8 @@ final class OrderShowMenuBuilderSpec extends ObjectBehavior
         FactoryInterface $factory,
         EventDispatcherInterface $eventDispatcher,
         StateMachineFactoryInterface $stateMachineFactory
-    ) {
+    ): void {
         $this->beConstructedWith($factory, $eventDispatcher, $stateMachineFactory);
-    }
-
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(OrderShowMenuBuilder::class);
     }
 
     function it_creates_an_order_show_menu(
@@ -48,7 +44,7 @@ final class OrderShowMenuBuilderSpec extends ObjectBehavior
         ItemInterface $menu,
         StateMachineInterface $stateMachine,
         OrderInterface $order
-    ) {
+    ): void {
         $factory->createItem('root')->willReturn($menu);
 
         $order->getId()->willReturn(7);
@@ -96,7 +92,7 @@ final class OrderShowMenuBuilderSpec extends ObjectBehavior
         ItemInterface $menu,
         StateMachineInterface $stateMachine,
         OrderInterface $order
-    ) {
+    ): void {
         $factory->createItem('root')->willReturn($menu);
 
         $order->getId()->willReturn(7);
@@ -127,7 +123,7 @@ final class OrderShowMenuBuilderSpec extends ObjectBehavior
     function it_returns_an_empty_order_show_menu_when_there_is_no_order_in_options(
         FactoryInterface $factory,
         ItemInterface $menu
-    ) {
+    ): void {
 
         $factory->createItem('root')->willReturn($menu);
 

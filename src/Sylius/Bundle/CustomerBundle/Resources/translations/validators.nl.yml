@@ -16,7 +16,6 @@ sylius:
         email:
             already_used: Dit e-mailadres is al in gebruik, gelieve in te loggen of wachtwoord vergeten gebruiken.
             max: E-mail mag niet meer dan {{ limit }} karakters zijn.
-            min: E-mail moet ten minste {{ limit }} karakters lang zijn.
             not_blank: Vul uw e-mailadres in.
             invalid: Deze e-mail is ongeldig.
             unique: Dit e-mailadres is al in gebruik.

@@ -9,10 +9,16 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Core\Model\Product;
+use Sylius\Component\Core\Model\ProductImagesAwareInterface;
+use Sylius\Component\Core\Model\ProductImageInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductVariant;
@@ -59,6 +65,11 @@ final class ProductVariantSpec extends ObjectBehavior
         $this->shouldImplement(VersionedInterface::class);
     }
 
+    function it_implements_a_product_image_aware_interface()
+    {
+        $this->shouldImplement(ProductImagesAwareInterface::class);
+    }
+
     function it_has_version_1_by_default()
     {
         $this->getVersion()->shouldReturn(1);
@@ -99,28 +110,28 @@ final class ProductVariantSpec extends ObjectBehavior
 
     function it_returns_correct_shipping_weight()
     {
-        $this->setWeight(140);
-        $this->getShippingWeight()->shouldReturn(140);
+        $this->setWeight(140.00);
+        $this->getShippingWeight()->shouldReturn(140.00);
     }
 
     function it_returns_correct_shipping_volume()
     {
-        $this->setWidth(10);
-        $this->setHeight(20);
-        $this->setDepth(10);
-        $this->getShippingVolume()->shouldReturn(2000);
+        $this->setWidth(10.00);
+        $this->setHeight(20.00);
+        $this->setDepth(10.00);
+        $this->getShippingVolume()->shouldReturn(2000.00);
     }
 
     function it_returns_correct_shipping_width()
     {
-        $this->setWidth(100);
-        $this->getShippingWidth()->shouldReturn(100);
+        $this->setWidth(100.00);
+        $this->getShippingWidth()->shouldReturn(100.00);
     }
 
     function it_returns_correct_shipping_height()
     {
-        $this->setHeight(110);
-        $this->getShippingHeight()->shouldReturn(110);
+        $this->setHeight(110.00);
+        $this->getShippingHeight()->shouldReturn(110.00);
     }
 
     function it_has_no_code_by_default()
@@ -239,5 +250,36 @@ final class ProductVariantSpec extends ObjectBehavior
     {
         $this->setShippingRequired(false);
         $this->isShippingRequired()->shouldReturn(false);
+    }
+
+    function it_initializes_image_collection_by_default()
+    {
+        $this->getImages()->shouldHaveType(Collection::class);
+    }
+
+    function it_adds_an_image(ProductImageInterface $image)
+    {
+        $this->addImage($image);
+        $this->hasImages()->shouldReturn(true);
+        $this->hasImage($image)->shouldReturn(true);
+    }
+
+    function it_removes_an_image(ProductImageInterface $image)
+    {
+        $this->addImage($image);
+        $this->removeImage($image);
+        $this->hasImage($image)->shouldReturn(false);
+    }
+
+    function it_returns_images_by_type(ProductImageInterface $image, Product $product)
+    {
+        $image->getType()->willReturn('thumbnail');
+
+        $image->setOwner($product)->shouldBeCalled();
+        $image->addProductVariant($this)->shouldBeCalled();
+
+        $this->setProduct($product);
+        $this->addImage($image);
+        $this->getImagesByType('thumbnail')->shouldBeLike(new ArrayCollection([$image->getWrappedObject()]));
     }
 }

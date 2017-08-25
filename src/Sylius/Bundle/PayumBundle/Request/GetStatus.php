@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\PayumBundle\Request;
 
 use Payum\Core\Request\BaseGetStatus;
@@ -19,7 +21,7 @@ class GetStatus extends BaseGetStatus
     /**
      * {@inheritdoc}
      */
-    public function markNew()
+    public function markNew(): void
     {
         $this->status = PaymentInterface::STATE_NEW;
     }
@@ -27,7 +29,7 @@ class GetStatus extends BaseGetStatus
     /**
      * {@inheritdoc}
      */
-    public function isNew()
+    public function isNew(): bool
     {
         return $this->status === PaymentInterface::STATE_NEW;
     }

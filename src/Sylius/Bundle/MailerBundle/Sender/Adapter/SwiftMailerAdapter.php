@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\MailerBundle\Sender\Adapter;
 
 use Sylius\Component\Mailer\Event\EmailSendEvent;
@@ -43,14 +45,14 @@ class SwiftMailerAdapter extends AbstractAdapter
      */
     public function send(
         array $recipients,
-        $senderAddress,
-        $senderName,
+        string $senderAddress,
+        string $senderName,
         RenderedEmail $renderedEmail,
         EmailInterface $email,
         array $data,
         array $attachments = []
-    ) {
-        $message = \Swift_Message::newInstance()
+    ): void {
+        $message = (new \Swift_Message())
             ->setSubject($renderedEmail->getSubject())
             ->setFrom([$senderAddress => $senderName])
             ->setTo($recipients)

@@ -9,12 +9,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Promotion\Checker\Eligibility;
 
 use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
-use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Promotion\Model\PromotionRuleInterface;
+use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 
 /**
@@ -38,7 +40,7 @@ final class PromotionRulesEligibilityChecker implements PromotionEligibilityChec
     /**
      * {@inheritdoc}
      */
-    public function isEligible(PromotionSubjectInterface $promotionSubject, PromotionInterface $promotion)
+    public function isEligible(PromotionSubjectInterface $promotionSubject, PromotionInterface $promotion): bool
     {
         if (!$promotion->hasRules()) {
             return true;
@@ -59,7 +61,7 @@ final class PromotionRulesEligibilityChecker implements PromotionEligibilityChec
      *
      * @return bool
      */
-    protected function isEligibleToRule(PromotionSubjectInterface $subject, PromotionRuleInterface $rule)
+    protected function isEligibleToRule(PromotionSubjectInterface $subject, PromotionRuleInterface $rule): bool
     {
         /** @var RuleCheckerInterface $checker */
         $checker = $this->ruleRegistry->get($rule->getType());

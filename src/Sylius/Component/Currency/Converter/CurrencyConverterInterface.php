@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Currency\Converter;
 
 /**
@@ -23,5 +25,5 @@ interface CurrencyConverterInterface
      *
      * @return int
      */
-    public function convert($value, $sourceCurrencyCode, $targetCurrencyCode);
+    public function convert(int $value, string $sourceCurrencyCode, string $targetCurrencyCode): int;
 }

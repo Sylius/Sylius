@@ -1,0 +1,14 @@
+Sylius\Component\Core\Model\PaymentMethod:
+    exclusion_policy: ALL
+    xml_root_name: payment-method
+    properties:
+        channels:
+            expose: true
+            groups: [Detailed]
+    relations:
+        -   rel: self
+            href:
+                route: sylius_admin_api_payment_method_show
+                parameters:
+                    code: expr(object.getCode())
+                    version: 1

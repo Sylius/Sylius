@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ResourceBundle\Grid\Parser;
 
 use PhpSpec\ObjectBehavior;
@@ -29,21 +31,16 @@ final class OptionsParserSpec extends ObjectBehavior
         ContainerInterface $container,
         ExpressionLanguage $expression,
         PropertyAccessorInterface $propertyAccessor
-    ) {
+    ): void {
         $this->beConstructedWith($container, $expression, $propertyAccessor);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(OptionsParser::class);
-    }
-
-    function it_is_an_options_parser()
+    function it_is_an_options_parser(): void
     {
         $this->shouldImplement(OptionsParserInterface::class);
     }
 
-    function it_parses_options(Request $request)
+    function it_parses_options(Request $request): void
     {
         $request->get('id')->willReturn(7);
 
@@ -57,7 +54,7 @@ final class OptionsParserSpec extends ObjectBehavior
         ContainerInterface $container,
         ExpressionLanguage $expression,
         Request $request
-    ) {
+    ): void {
         $expression->evaluate('service("demo_service")', ['container' => $container])->willReturn('demo_object');
 
         $this
@@ -88,7 +85,7 @@ final class OptionsParserSpec extends ObjectBehavior
         PropertyAccessorInterface $propertyAccessor,
         Request $request,
         ResourceInterface $data
-    ) {
+    ): void {
         $propertyAccessor->getValue($data, 'id')->willReturn(21);
 
         $this

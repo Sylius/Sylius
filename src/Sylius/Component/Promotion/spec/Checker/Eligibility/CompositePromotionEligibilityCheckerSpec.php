@@ -1,29 +1,25 @@
 <?php
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Promotion\Checker\Eligibility;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Promotion\Checker\Eligibility\CompositePromotionEligibilityChecker;
 use Sylius\Component\Promotion\Checker\Eligibility\PromotionEligibilityCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class CompositePromotionEligibilityCheckerSpec extends ObjectBehavior
 {
-    function let(PromotionEligibilityCheckerInterface $promotionEligibilityChecker)
+    function let(PromotionEligibilityCheckerInterface $promotionEligibilityChecker): void
     {
         $this->beConstructedWith([$promotionEligibilityChecker]);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(CompositePromotionEligibilityChecker::class);
-    }
-
-    function it_is_a_promotion_eligibility_checker()
+    function it_is_a_promotion_eligibility_checker(): void
     {
         $this->shouldImplement(PromotionEligibilityCheckerInterface::class);
     }
@@ -33,7 +29,7 @@ final class CompositePromotionEligibilityCheckerSpec extends ObjectBehavior
         PromotionEligibilityCheckerInterface $secondPromotionEligibilityChecker,
         PromotionSubjectInterface $promotionSubject,
         PromotionInterface $promotion
-    ) {
+    ): void {
         $this->beConstructedWith([
             $firstPromotionEligibilityChecker,
             $secondPromotionEligibilityChecker,
@@ -50,7 +46,7 @@ final class CompositePromotionEligibilityCheckerSpec extends ObjectBehavior
         PromotionEligibilityCheckerInterface $secondPromotionEligibilityChecker,
         PromotionSubjectInterface $promotionSubject,
         PromotionInterface $promotion
-    ) {
+    ): void {
         $this->beConstructedWith([
             $firstPromotionEligibilityChecker,
             $secondPromotionEligibilityChecker,
@@ -67,7 +63,7 @@ final class CompositePromotionEligibilityCheckerSpec extends ObjectBehavior
         PromotionEligibilityCheckerInterface $secondPromotionEligibilityChecker,
         PromotionSubjectInterface $promotionSubject,
         PromotionInterface $promotion
-    ) {
+    ): void {
         $this->beConstructedWith([
             $firstPromotionEligibilityChecker,
             $secondPromotionEligibilityChecker,
@@ -79,14 +75,14 @@ final class CompositePromotionEligibilityCheckerSpec extends ObjectBehavior
         $this->isEligible($promotionSubject, $promotion)->shouldReturn(false);
     }
 
-    function it_throws_an_exception_if_no_eligibility_checkers_are_passed()
+    function it_throws_an_exception_if_no_eligibility_checkers_are_passed(): void
     {
         $this->beConstructedWith([]);
 
         $this->shouldThrow(\InvalidArgumentException::class)->duringInstantiation();
     }
 
-    function it_throws_an_exception_if_passed_array_has_not_only_eligibility_checkers()
+    function it_throws_an_exception_if_passed_array_has_not_only_eligibility_checkers(): void
     {
         $this->beConstructedWith([new \stdClass()]);
 

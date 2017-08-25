@@ -5,7 +5,11 @@ sylius:
     review:
         author:
             already_exists: Este email já está registrado, por favor realize o Login ou esqueceu sua senha.
+        comment:
+            not_blank: O comentário não deve estar vazio.
         rating:
             not_blank: Você deve verificar a revisão de classificação.
         title:
             not_blank: Título de revisão não deve ser em branco.
+            min_length: Titulo da resenha precisa ter no mínimo 2 caracteres.
+            max_length: O titulo da resenha precisa ter 255 caracteres.

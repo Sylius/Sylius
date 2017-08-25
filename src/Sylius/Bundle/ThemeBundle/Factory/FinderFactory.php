@@ -9,19 +9,21 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Factory;
 
 use Symfony\Component\Finder\Finder;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class FinderFactory implements FinderFactoryInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function create()
+    public function create(): Finder
     {
         return Finder::create();
     }

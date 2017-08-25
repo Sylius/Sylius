@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Uploader;
 
 use Gaufrette\Filesystem;
@@ -38,12 +40,12 @@ class ImageUploader implements ImageUploaderInterface
             return;
         }
 
-        if (null !== $image->getPath()) {
+        if (null !== $image->getPath() && $this->has($image->getPath())) {
             $this->remove($image->getPath());
         }
 
         do {
-            $hash = md5(uniqid(mt_rand(), true));
+            $hash = md5(uniqid((string) mt_rand(), true));
             $path = $this->expandPath($hash.'.'.$image->getFile()->guessExtension());
         } while ($this->filesystem->has($path));
 
@@ -76,5 +78,15 @@ class ImageUploader implements ImageUploaderInterface
             substr($path, 2, 2),
             substr($path, 4)
         );
+    }
+
+    /**
+     * @param string $path
+     *
+     * @return bool
+     */
+    private function has($path)
+    {
+        return $this->filesystem->has($path);
     }
 }

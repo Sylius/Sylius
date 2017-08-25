@@ -21,7 +21,6 @@ framework:
     validation: { enable_annotations: true }
     templating: { engines: ["twig"] }
     default_locale: "%locale%"
-    trusted_proxies: ~
     session:
         handler_id: ~
 
@@ -48,6 +47,11 @@ swiftmailer:
     username: "%mailer_user%"
     password: "%mailer_password%"
 
+# Temporary fix to disable aliasing @serializer service to JMS variant
+# TODO: Remove when upgrading to JMS Serializer Bundle 2.0
+jms_serializer:
+    enable_short_alias: false
+
 fos_rest:
     exception: ~
     view:
@@ -57,5 +61,5 @@ fos_rest:
         empty_content: 204
     format_listener:
         rules:
-            - { path: '^/api', priorities: ['json', 'xml'], fallback_format: json, prefer_extension: true }
+            - { path: '^/api/.*', priorities: ['json', 'xml'], fallback_format: json, prefer_extension: true }
             - { path: '^/', stop: true }

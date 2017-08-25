@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Shipping\Checker;
 
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
@@ -22,7 +24,7 @@ final class ShippingMethodEligibilityChecker implements ShippingMethodEligibilit
     /**
      * {@inheritdoc}
      */
-    public function isEligible(ShippingSubjectInterface $subject, ShippingMethodInterface $method)
+    public function isEligible(ShippingSubjectInterface $subject, ShippingMethodInterface $method): bool
     {
         if (!$category = $method->getCategory()) {
             return true;

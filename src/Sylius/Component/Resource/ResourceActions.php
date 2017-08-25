@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Resource;
 
 /**
@@ -16,11 +18,11 @@ namespace Sylius\Component\Resource;
  */
 final class ResourceActions
 {
-    const SHOW = 'show';
-    const INDEX = 'index';
-    const CREATE = 'create';
-    const UPDATE = 'update';
-    const DELETE = 'delete';
+    public const SHOW = 'show';
+    public const INDEX = 'index';
+    public const CREATE = 'create';
+    public const UPDATE = 'update';
+    public const DELETE = 'delete';
 
     private function __construct()
     {

@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    payment:
+        cancelled: 'Uplata je prekinuta.'
+        completed: 'Plaćanje je uspješno dovršeno.'
+        failed: 'Plaćanje nije uspjelo.'
+        processing: 'Plaćanje je trenutno u obradi.'
+        refunded: 'Uplata je uspješno vraćena.'
+        unknown: 'Došlo je do nepoznatog problema pri uplati.'

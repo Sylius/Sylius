@@ -9,13 +9,16 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 require_once __DIR__.'/AppKernel.php';
 
+use ProxyManager\Proxy\VirtualProxyInterface;
 use PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 class TestAppKernel extends AppKernel
 {
@@ -58,6 +61,10 @@ class TestAppKernel extends AppKernel
 
             $serviceReflection = new \ReflectionObject($service);
 
+            if ($serviceReflection->implementsInterface(VirtualProxyInterface::class)) {
+                continue;
+            }
+
             $servicePropertiesReflections = $serviceReflection->getProperties();
             $servicePropertiesDefaultValues = $serviceReflection->getDefaultProperties();
             foreach ($servicePropertiesReflections as $servicePropertyReflection) {
@@ -77,13 +84,5 @@ class TestAppKernel extends AppKernel
     protected function getContainerBaseClass()
     {
         return MockerContainer::class;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function registerBundles()
-    {
-        return array_merge(parent::registerBundles(), [new DAMA\DoctrineTestBundle\DAMADoctrineTestBundle()]);
     }
 }

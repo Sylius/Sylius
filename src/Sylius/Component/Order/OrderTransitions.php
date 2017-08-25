@@ -9,15 +9,17 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Order;
 
 final class OrderTransitions
 {
-    const GRAPH = 'sylius_order';
+    public const GRAPH = 'sylius_order';
 
-    const TRANSITION_CREATE = 'create';
-    const TRANSITION_CANCEL = 'cancel';
-    const TRANSITION_FULFILL = 'fulfill';
+    public const TRANSITION_CREATE = 'create';
+    public const TRANSITION_CANCEL = 'cancel';
+    public const TRANSITION_FULFILL = 'fulfill';
 
     private function __construct()
     {

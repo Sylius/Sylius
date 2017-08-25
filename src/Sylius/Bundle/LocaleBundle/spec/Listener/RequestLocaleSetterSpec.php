@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\LocaleBundle\Listener;
 
 use PhpSpec\ObjectBehavior;
@@ -12,18 +14,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class RequestLocaleSetterSpec extends ObjectBehavior
 {
-    function let(LocaleContextInterface $localeContext, LocaleProviderInterface $localeProvider)
+    function let(LocaleContextInterface $localeContext, LocaleProviderInterface $localeProvider): void
     {
         $this->beConstructedWith($localeContext, $localeProvider);
-    }
-
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(RequestLocaleSetter::class);
     }
 
     function it_sets_locale_and_default_locale_on_request(
@@ -31,7 +28,7 @@ final class RequestLocaleSetterSpec extends ObjectBehavior
         LocaleProviderInterface $localeProvider,
         GetResponseEvent $event,
         Request $request
-    ) {
+    ): void {
         $event->getRequest()->willReturn($request);
 
         $localeContext->getLocaleCode()->willReturn('pl_PL');

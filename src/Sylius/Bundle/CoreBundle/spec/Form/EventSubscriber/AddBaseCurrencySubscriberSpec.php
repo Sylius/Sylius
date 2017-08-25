@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\CoreBundle\Form\EventSubscriber;
 
 use PhpSpec\ObjectBehavior;
@@ -40,10 +42,10 @@ class AddBaseCurrencySubscriberSpec extends ObjectBehavior
     {
         $this::getSubscribedEvents()->shouldReturn([FormEvents::PRE_SET_DATA => 'preSetData']);
     }
-    
+
     function it_sets_base_currency_as_disabled_when_channel_is_not_new(
-        FormEvent $event, 
-        ChannelInterface $channel, 
+        FormEvent $event,
+        ChannelInterface $channel,
         FormInterface $form
     ) {
         $event->getData()->willReturn($channel);
@@ -76,7 +78,7 @@ class AddBaseCurrencySubscriberSpec extends ObjectBehavior
 
         $this->preSetData($event);
     }
-    
+
     function it_throws_unexpected_type_exception_when_resource_does_not_implements_channel_interface(
         FormEvent $event,
         $resource

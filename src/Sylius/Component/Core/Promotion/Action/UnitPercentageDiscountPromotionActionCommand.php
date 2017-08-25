@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Promotion\Action;
 
 use Sylius\Component\Core\Model\OrderInterface;
@@ -24,7 +26,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
  */
 final class UnitPercentageDiscountPromotionActionCommand extends UnitDiscountPromotionActionCommand
 {
-    const TYPE = 'unit_percentage_discount';
+    public const TYPE = 'unit_percentage_discount';
 
     /**
      * @var FilterInterface
@@ -63,7 +65,7 @@ final class UnitPercentageDiscountPromotionActionCommand extends UnitDiscountPro
     /**
      * {@inheritdoc}
      */
-    public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
+    public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion): bool
     {
         if (!$subject instanceof OrderInterface) {
             throw new UnexpectedTypeException($subject, OrderInterface::class);
@@ -98,8 +100,11 @@ final class UnitPercentageDiscountPromotionActionCommand extends UnitDiscountPro
      * @param int $promotionAmount
      * @param PromotionInterface $promotion
      */
-    private function setUnitsAdjustments(OrderItemInterface $item, $promotionAmount, PromotionInterface $promotion)
-    {
+    private function setUnitsAdjustments(
+        OrderItemInterface $item,
+        int $promotionAmount,
+        PromotionInterface $promotion
+    ): void {
         foreach ($item->getUnits() as $unit) {
             $this->addAdjustmentToUnit($unit, $promotionAmount, $promotion);
         }

@@ -9,13 +9,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\AdminApiBundle\Command;
 
 use FOS\OAuthServerBundle\Model\ClientManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\AdminApiBundle\Model\Client;
-use Sylius\Bundle\AdminApiBundle\Command\CreateClientCommand;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -23,11 +24,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 final class CreateClientCommandSpec extends ObjectBehavior
 {
-    public function it_is_initializable()
-    {
-        $this->shouldHaveType(CreateClientCommand::class);
-    }
-
     public function it_is_a_container_aware_command()
     {
         $this->shouldHaveType(ContainerAwareCommand::class);

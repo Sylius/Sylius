@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
 use PhpSpec\ObjectBehavior;
@@ -25,12 +27,7 @@ use Symfony\Component\HttpFoundation\Request;
  */
 final class SingleResourceProviderSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(SingleResourceProvider::class);
-    }
-
-    function it_implements_single_resource_provider_interface()
+    function it_implements_single_resource_provider_interface(): void
     {
         $this->shouldImplement(SingleResourceProviderInterface::class);
     }
@@ -40,7 +37,7 @@ final class SingleResourceProviderSpec extends ObjectBehavior
         Request $request,
         ParameterBag $requestAttributes,
         RepositoryInterface $repository
-    ) {
+    ): void {
         $requestConfiguration->getCriteria()->willReturn([]);
         $requestConfiguration->getRepositoryMethod()->willReturn(null);
         $requestConfiguration->getRequest()->willReturn($request);
@@ -60,7 +57,7 @@ final class SingleResourceProviderSpec extends ObjectBehavior
         ParameterBag $requestAttributes,
         RepositoryInterface $repository,
         ResourceInterface $resource
-    ) {
+    ): void {
         $requestConfiguration->getCriteria()->willReturn([]);
         $requestConfiguration->getRepositoryMethod()->willReturn(null);
         $requestConfiguration->getRequest()->willReturn($request);
@@ -80,7 +77,7 @@ final class SingleResourceProviderSpec extends ObjectBehavior
         ParameterBag $requestAttributes,
         RepositoryInterface $repository,
         ResourceInterface $resource
-    ) {
+    ): void {
         $requestConfiguration->getCriteria()->willReturn([]);
         $requestConfiguration->getRepositoryMethod()->willReturn(null);
         $requestConfiguration->getRequest()->willReturn($request);
@@ -100,7 +97,7 @@ final class SingleResourceProviderSpec extends ObjectBehavior
         ParameterBag $requestAttributes,
         RepositoryInterface $repository,
         ResourceInterface $resource
-    ) {
+    ): void {
         $requestConfiguration->getCriteria()->willReturn(['request-configuration-criteria' => '1']);
         $requestConfiguration->getRepositoryMethod()->willReturn(null);
         $requestConfiguration->getRequest()->willReturn($request);
@@ -119,7 +116,7 @@ final class SingleResourceProviderSpec extends ObjectBehavior
         ParameterBag $requestAttributes,
         RepositoryInterface $repository,
         ResourceInterface $resource
-    ) {
+    ): void {
         $requestConfiguration->getCriteria()->willReturn(['request-configuration-criteria' => '1']);
         $requestConfiguration->getRepositoryMethod()->willReturn(null);
         $requestConfiguration->getRequest()->willReturn($request);
@@ -140,7 +137,7 @@ final class SingleResourceProviderSpec extends ObjectBehavior
         ParameterBag $requestAttributes,
         RepositoryInterface $repository,
         ResourceInterface $resource
-    ) {
+    ): void {
         $requestConfiguration->getCriteria()->willReturn(['id' => 5]);
         $requestConfiguration->getRepositoryMethod()->willReturn(null);
         $requestConfiguration->getRequest()->willReturn($request);
@@ -157,7 +154,7 @@ final class SingleResourceProviderSpec extends ObjectBehavior
         RequestConfiguration $requestConfiguration,
         RepositoryInterface $repository,
         ResourceInterface $resource
-    ) {
+    ): void {
         $requestConfiguration->getRepositoryMethod()->willReturn('findAll');
         $requestConfiguration->getRepositoryArguments()->willReturn(['foo']);
 

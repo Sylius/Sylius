@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ChannelBundle\Tests\DependencyInjection\Compiler;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase;
@@ -19,14 +21,14 @@ use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 class CompositeChannelContextPassTest extends AbstractCompilerPassTestCase
 {
     /**
      * @test
      */
-    public function it_collects_tagged_channel_contexts()
+    public function it_collects_tagged_channel_contexts(): void
     {
         $this->setDefinition('sylius.context.channel.composite', new Definition());
         $this->setDefinition(
@@ -47,7 +49,7 @@ class CompositeChannelContextPassTest extends AbstractCompilerPassTestCase
     /**
      * @test
      */
-    public function it_collects_tagged_channel_contexts_with_priority()
+    public function it_collects_tagged_channel_contexts_with_priority(): void
     {
         $this->setDefinition('sylius.context.channel.composite', new Definition());
         $this->setDefinition(
@@ -68,7 +70,7 @@ class CompositeChannelContextPassTest extends AbstractCompilerPassTestCase
     /**
      * @test
      */
-    public function it_does_not_add_method_calls_to_the_overriding_service_if_the_composite_service_is_overridden()
+    public function it_does_not_add_method_calls_to_the_overriding_service_if_the_composite_service_is_overridden(): void
     {
         $this->setDefinition('sylius.context.channel', new Definition());
         $this->setDefinition('sylius.context.channel.composite', new Definition());
@@ -89,7 +91,7 @@ class CompositeChannelContextPassTest extends AbstractCompilerPassTestCase
     /**
      * @test
      */
-    public function it_still_adds_method_calls_to_composite_context_even_if_it_was_overridden()
+    public function it_still_adds_method_calls_to_composite_context_even_if_it_was_overridden(): void
     {
         $this->setDefinition('sylius.context.channel', new Definition());
         $this->setDefinition('sylius.context.channel.composite', new Definition());
@@ -110,7 +112,7 @@ class CompositeChannelContextPassTest extends AbstractCompilerPassTestCase
     /**
      * {@inheritdoc}
      */
-    protected function registerCompilerPass(ContainerBuilder $container)
+    protected function registerCompilerPass(ContainerBuilder $container): void
     {
         $container->addCompilerPass(new CompositeChannelContextPass());
     }
@@ -120,8 +122,11 @@ class CompositeChannelContextPassTest extends AbstractCompilerPassTestCase
      * @param string $method
      * @param array $arguments
      */
-    private function assertContainerBuilderNotHasServiceDefinitionWithMethodCall($serviceId, $method, $arguments)
-    {
+    private function assertContainerBuilderNotHasServiceDefinitionWithMethodCall(
+        string $serviceId,
+        string $method,
+        array $arguments
+    ): void {
         $definition = $this->container->findDefinition($serviceId);
 
         self::assertThat(

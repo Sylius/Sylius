@@ -9,37 +9,33 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Channel\Context;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
-use Sylius\Component\Channel\Context\CompositeChannelContext;
 use Sylius\Component\Channel\Model\ChannelInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class CompositeChannelContextSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(CompositeChannelContext::class);
-    }
-
-    function it_implements_channel_context_interface()
+    function it_implements_channel_context_interface(): void
     {
         $this->shouldImplement(ChannelContextInterface::class);
     }
 
-    function it_throws_a_channel_not_found_exception_if_there_are_no_nested_channel_contexts_defined()
+    function it_throws_a_channel_not_found_exception_if_there_are_no_nested_channel_contexts_defined(): void
     {
         $this->shouldThrow(ChannelNotFoundException::class)->during('getChannel');
     }
 
     function it_throws_a_channel_not_found_exception_if_none_of_nested_channel_contexts_returned_a_channel(
         ChannelContextInterface $channelContext
-    ) {
+    ): void {
         $channelContext->getChannel()->willThrow(ChannelNotFoundException::class);
 
         $this->addContext($channelContext);
@@ -52,7 +48,7 @@ final class CompositeChannelContextSpec extends ObjectBehavior
         ChannelContextInterface $secondChannelContext,
         ChannelContextInterface $thirdChannelContext,
         ChannelInterface $channel
-    ) {
+    ): void {
         $firstChannelContext->getChannel()->willThrow(ChannelNotFoundException::class);
         $secondChannelContext->getChannel()->willReturn($channel);
         $thirdChannelContext->getChannel()->shouldNotBeCalled();
@@ -69,7 +65,7 @@ final class CompositeChannelContextSpec extends ObjectBehavior
         ChannelContextInterface $secondChannelContext,
         ChannelContextInterface $thirdChannelContext,
         ChannelInterface $channel
-    ) {
+    ): void {
         $firstChannelContext->getChannel()->shouldNotBeCalled();
         $secondChannelContext->getChannel()->willReturn($channel);
         $thirdChannelContext->getChannel()->willThrow(ChannelNotFoundException::class);

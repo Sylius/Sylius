@@ -6,6 +6,7 @@ sylius:
         rule:
             unit_count_configuration:
                 count: Sayısı
+                equal: Eşittir
             type: Kural türü
         shipment:
             state: Durum
@@ -36,3 +37,4 @@ sylius:
             enabled: Etkin
             name: Ad
             tax_category: Vergi kategorisi
+            translations: Çeviriler

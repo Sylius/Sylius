@@ -1,9 +1,6 @@
 {% extends 'SyliusAdminBundle::layout.html.twig' %}
 
-{% import '@SyliusUi/Macro/labels.html.twig' as label %}
-{% import '@SyliusUi/Macro/buttons.html.twig' as buttons %}
-
-{% block title %}{{ parent() }} {{ 'sylius.ui.customer'|trans ~' '~ customer.email }}{% endblock %}
+{% block title %}{{ 'sylius.ui.customer'|trans ~' '~ customer.email }} {{ parent() }}{% endblock %}
 
 {% block content %}
     {{ sonata_block_render_event('sylius.admin.customer.show.before_header', {'resource': resource}) }}

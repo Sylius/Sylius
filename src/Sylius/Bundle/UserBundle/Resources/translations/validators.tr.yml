@@ -6,6 +6,7 @@ sylius:
         email:
             not_blank: Lütfen e-posta adresinizi girin.
             invalid: Bu e-posta geçerli değil.
+            not_registered: Bu e-posta ile kullanıcı yok. Lütfen kayıt olun.
         plainPassword:
             not_blank: Lütfen parolanızı girin.
             mismatch: Girilen parolalar uyuşmuyor

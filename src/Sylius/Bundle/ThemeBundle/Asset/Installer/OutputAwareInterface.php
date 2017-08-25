@@ -9,17 +9,19 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Asset\Installer;
 
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 interface OutputAwareInterface
 {
     /**
      * @param OutputInterface $output
      */
-    public function setOutput(OutputInterface $output);
+    public function setOutput(OutputInterface $output): void;
 }

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Resolver;
 
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
@@ -58,8 +60,10 @@ class ZoneAndChannelBasedShippingMethodsResolver implements ShippingMethodsResol
 
     /**
      * {@inheritdoc}
+     *
+     * @throws \InvalidArgumentException
      */
-    public function getSupportedMethods(ShippingSubjectInterface $subject)
+    public function getSupportedMethods(ShippingSubjectInterface $subject): array
     {
         /** @var ShipmentInterface $subject */
         Assert::true($this->supports($subject));
@@ -86,7 +90,7 @@ class ZoneAndChannelBasedShippingMethodsResolver implements ShippingMethodsResol
     /**
      * {@inheritdoc}
      */
-    public function supports(ShippingSubjectInterface $subject)
+    public function supports(ShippingSubjectInterface $subject): bool
     {
         return $subject instanceof ShipmentInterface &&
             null !== $subject->getOrder() &&

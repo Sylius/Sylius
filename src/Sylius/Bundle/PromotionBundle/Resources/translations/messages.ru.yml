@@ -17,6 +17,7 @@ sylius:
             starts_at: Старт
             usage_limit: Предел использования
         promotion_action:
+            item_fixed_discount: Фиксированная скидка
             fixed_discount_configuration:
                 amount: Сумма
             percentage_discount_configuration:
@@ -33,6 +34,8 @@ sylius:
         promotion_filter:
             price_range: Фильтр диапазона цен
         promotion_rule:
+            customer_group: Группа клиента
+            taxonomy: Тип товара
             cart_quantity_configuration:
                 count: Кол-во
                 equal: Равно

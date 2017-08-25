@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../../../../bash/common.lib.sh"
+
+print_header "Validating (Twig templates)" "Sylius"
+run_command "bin/console lint:twig src --env=test_cached --no-debug"

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Core\Taxation\Applicator;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -97,7 +99,7 @@ final class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
 
         $order->getShippingTotal()->willReturn(1000);
 
-        $calculator->calculate(1000, $taxRate)->willReturn(0);
+        $calculator->calculate(1000, $taxRate)->willReturn(0.00);
 
         $adjustmentsFactory->createWithData(Argument::cetera())->shouldNotBeCalled();
         $order->addAdjustment(Argument::any())->shouldNotBeCalled();

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ThemeBundle\Translation\Provider;
 
 use PhpSpec\ObjectBehavior;
@@ -17,16 +19,11 @@ use Sylius\Bundle\ThemeBundle\Translation\Provider\Loader\TranslatorLoaderProvid
 use Symfony\Component\Translation\Loader\LoaderInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class TranslatorLoaderProviderSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(TranslatorLoaderProvider::class);
-    }
-
-    function it_implements_translation_loader_provider_interface()
+    function it_implements_translation_loader_provider_interface(): void
     {
         $this->shouldImplement(TranslatorLoaderProviderInterface::class);
     }
@@ -34,7 +31,7 @@ final class TranslatorLoaderProviderSpec extends ObjectBehavior
     function it_returns_previously_received_loaders(
         LoaderInterface $firstLoader,
         LoaderInterface $secondLoader
-    ) {
+    ): void {
         $this->beConstructedWith(['first' => $firstLoader, 'second' => $secondLoader]);
 
         $this->getLoaders()->shouldReturn(['first' => $firstLoader, 'second' => $secondLoader]);

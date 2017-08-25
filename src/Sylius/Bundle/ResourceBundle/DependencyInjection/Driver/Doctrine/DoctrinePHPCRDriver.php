@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\Doctrine;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener\DefaultParentListener;
@@ -34,7 +36,7 @@ final class DoctrinePHPCRDriver extends AbstractDoctrineDriver
     /**
      * {@inheritdoc}
      */
-    public function load(ContainerBuilder $container, MetadataInterface $metadata)
+    public function load(ContainerBuilder $container, MetadataInterface $metadata): void
     {
         parent::load($container, $metadata);
         $this->addResourceListeners($container, $metadata);
@@ -44,7 +46,7 @@ final class DoctrinePHPCRDriver extends AbstractDoctrineDriver
      * @param ContainerBuilder $container
      * @param MetadataInterface $metadata
      */
-    protected function addResourceListeners(ContainerBuilder $container, MetadataInterface $metadata)
+    protected function addResourceListeners(ContainerBuilder $container, MetadataInterface $metadata): void
     {
         $defaultOptions = [
                 // if no parent is given default to the parent path given here.
@@ -155,7 +157,7 @@ final class DoctrinePHPCRDriver extends AbstractDoctrineDriver
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType(): string
     {
         return SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM;
     }
@@ -163,7 +165,7 @@ final class DoctrinePHPCRDriver extends AbstractDoctrineDriver
     /**
      * {@inheritdoc}
      */
-    protected function addRepository(ContainerBuilder $container, MetadataInterface $metadata)
+    protected function addRepository(ContainerBuilder $container, MetadataInterface $metadata): void
     {
         $repositoryClass = new Parameter('sylius.phpcr_odm.repository.class');
 
@@ -183,7 +185,7 @@ final class DoctrinePHPCRDriver extends AbstractDoctrineDriver
     /**
      * {@inheritdoc}
      */
-    protected function getManagerServiceId(MetadataInterface $metadata)
+    protected function getManagerServiceId(MetadataInterface $metadata): string
     {
         if ($objectManagerName = $this->getObjectManagerName($metadata)) {
             return sprintf('doctrine_phpcr.odm.%s_document_manager', $objectManagerName);
@@ -195,7 +197,7 @@ final class DoctrinePHPCRDriver extends AbstractDoctrineDriver
     /**
      * {@inheritdoc}
      */
-    protected function getClassMetadataClassname()
+    protected function getClassMetadataClassname(): string
     {
         return 'Doctrine\\ODM\\PHPCR\\Mapping\\ClassMetadata';
     }

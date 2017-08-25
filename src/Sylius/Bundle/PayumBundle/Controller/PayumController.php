@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\PayumBundle\Controller;
 
 use FOS\RestBundle\View\View;
@@ -103,7 +105,7 @@ final class PayumController
      *
      * @return Response
      */
-    public function prepareCaptureAction(Request $request, $tokenValue)
+    public function prepareCaptureAction(Request $request, $tokenValue): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->orderMetadata, $request);
 
@@ -141,7 +143,7 @@ final class PayumController
      *
      * @return Response
      */
-    public function afterCaptureAction(Request $request)
+    public function afterCaptureAction(Request $request): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->orderMetadata, $request);
 
@@ -167,7 +169,7 @@ final class PayumController
     /**
      * @return GenericTokenFactoryInterface
      */
-    private function getTokenFactory()
+    private function getTokenFactory(): GenericTokenFactoryInterface
     {
         return $this->payum->getTokenFactory();
     }
@@ -175,7 +177,7 @@ final class PayumController
     /**
      * @return HttpRequestVerifierInterface
      */
-    private function getHttpRequestVerifier()
+    private function getHttpRequestVerifier(): HttpRequestVerifierInterface
     {
         return $this->payum->getHttpRequestVerifier();
     }

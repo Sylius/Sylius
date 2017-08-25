@@ -4,10 +4,19 @@
 sylius:
     customer:
         first_name:
+            max: Křestní jméno nesmí být delší než {{ limit }} znaků.
+            min: Křestní jméno musí být alespoň {{ limit }} znaků dlouhý.
             not_blank: Zadejte své křestní jméno.
         last_name:
+            max: Příjmení nesmí být delší než {{ limit }} znaků.
+            min: Příjmení musí být alespoň {{ limit }} znaků dlouhé.
             not_blank: Prosím vložte Vaše příjmení.
+        gender:
+            not_blank: Vyberte prosím pohlaví.
         email:
+            already_used: Tento e-mail je již použit, prosím přihlašte se nebo obnovte své heslo.
+            max: E-mail nesmí být delší než {{ limit }} znaků.
             not_blank: Prosím vložte Váš email.
             invalid: Tento email je neplatný.
+            unique: Tento e-mail je již používán.
             registered: Tento e-mail je již registrován, prosím přihlašte se nebo obnovte své heslo.

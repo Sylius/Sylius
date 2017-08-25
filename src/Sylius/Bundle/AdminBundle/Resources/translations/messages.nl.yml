@@ -8,7 +8,7 @@ sylius:
                 catalog:
                     association_types: Relatietypes
                     attributes: Attributen
-                    header: Cataloog
+                    header: Catalogus
                     inventory: Locaties
                     options: Opties
                     products: Producten

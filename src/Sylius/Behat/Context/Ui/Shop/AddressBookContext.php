@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
@@ -224,7 +226,7 @@ final class AddressBookContext implements Context
     {
         $fullName = $this->sharedStorage->get('full_name');
 
-        $this->addressBookIndexPage->addressOfContains($fullName, $value);
+        Assert::true($this->addressBookIndexPage->addressOfContains($fullName, $value));
     }
 
     /**

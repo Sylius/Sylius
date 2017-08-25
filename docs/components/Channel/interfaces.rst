@@ -47,27 +47,3 @@ Service Interfaces
 ------------------
 
 .. _component_channel_context_channel-context-interface:
-
-ChannelContextInterface
-~~~~~~~~~~~~~~~~~~~~~~~
-
-This interface should be implemented by a service
-responsible for managing the currently used :ref:`component_channel_model_channel`.
-
-.. note::
-   For more detailed information go to `Sylius API ChannelContextInterface`_.
-
-.. _Sylius API ChannelContextInterface: http://api.sylius.org/Sylius/Component/Channel/Model/ChannelContextInterface.html
-
-.. _component_channel_repository_channel-repository-interface:
-
-ChannelRepositoryInterface
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-This interface should be implemented by repositories responsible
-for storing the :ref:`component_channel_model_channel` objects.
-
-.. note::
-   For more detailed information go to `Sylius API ChannelRepositoryInterface`_.
-
-.. _Sylius API ChannelRepositoryInterface: http://api.sylius.org/Sylius/Component/Channel/Model/ChannelRepositoryInterface.html

@@ -6,6 +6,7 @@ sylius:
         review:
             author: Hazırlayan
             comment: Yorum
+            header: Bir gözden ekle
             status:
                 new: Yeni
             title: Başlık

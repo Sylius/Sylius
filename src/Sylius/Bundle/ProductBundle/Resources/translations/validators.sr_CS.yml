@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    product:
+        sku:
+            not_blank: Unesite SKU proizvoda.
+            unique: SKU proizvoda mora biti jedinstven.
+    option:
+        code:
+            unique: Promocija sa izabranim kodom već postoji.

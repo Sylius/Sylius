@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Registry;
 
 /**
@@ -41,7 +43,7 @@ class ServiceRegistry implements ServiceRegistryInterface
      * @param string $interface
      * @param string $context
      */
-    public function __construct($interface, $context = 'service')
+    public function __construct(string $interface, string $context = 'service')
     {
         $this->interface = $interface;
         $this->context = $context;
@@ -50,7 +52,7 @@ class ServiceRegistry implements ServiceRegistryInterface
     /**
      * {@inheritdoc}
      */
-    public function all()
+    public function all(): array
     {
         return $this->services;
     }
@@ -58,7 +60,7 @@ class ServiceRegistry implements ServiceRegistryInterface
     /**
      * {@inheritdoc}
      */
-    public function register($identifier, $service)
+    public function register(string $identifier, $service): void
     {
         if ($this->has($identifier)) {
             throw new ExistingServiceException($this->context, $identifier);
@@ -80,7 +82,7 @@ class ServiceRegistry implements ServiceRegistryInterface
     /**
      * {@inheritdoc}
      */
-    public function unregister($identifier)
+    public function unregister(string $identifier): void
     {
         if (!$this->has($identifier)) {
             throw new NonExistingServiceException($this->context, $identifier, array_keys($this->services));
@@ -92,7 +94,7 @@ class ServiceRegistry implements ServiceRegistryInterface
     /**
      * {@inheritdoc}
      */
-    public function has($identifier)
+    public function has(string $identifier): bool
     {
         return isset($this->services[$identifier]);
     }
@@ -100,7 +102,7 @@ class ServiceRegistry implements ServiceRegistryInterface
     /**
      * {@inheritdoc}
      */
-    public function get($identifier)
+    public function get(string $identifier)
     {
         if (!$this->has($identifier)) {
             throw new NonExistingServiceException($this->context, $identifier, array_keys($this->services));

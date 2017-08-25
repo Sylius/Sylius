@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\CoreBundle\Form\DataTransformer;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -47,9 +49,7 @@ final class TaxonsToCodesTransformerSpec extends ObjectBehavior
     ) {
         $taxonRepository->findBy(['code' => ['bows', 'swords']])->willReturn([$bows, $swords]);
 
-        $taxons = new ArrayCollection([$bows->getWrappedObject(), $swords->getWrappedObject()]);
-
-        $this->transform(['bows', 'swords'])->shouldBeCollection($taxons);
+        $this->transform(['bows', 'swords'])->shouldIterateAs([$bows, $swords]);
     }
 
     function it_transforms_only_existing_taxons(
@@ -58,14 +58,12 @@ final class TaxonsToCodesTransformerSpec extends ObjectBehavior
     ) {
         $taxonRepository->findBy(['code' => ['bows', 'swords']])->willReturn([$bows]);
 
-        $taxons = new ArrayCollection([$bows->getWrappedObject()]);
-
-        $this->transform(['bows', 'swords'])->shouldBeCollection($taxons);
+        $this->transform(['bows', 'swords'])->shouldIterateAs([$bows]);
     }
 
     function it_transforms_empty_array_into_empty_collection()
     {
-        $this->transform([])->shouldBeCollection(new ArrayCollection([]));
+        $this->transform([])->shouldIterateAs([]);
     }
 
     function it_throws_exception_if_value_to_transform_is_not_array()
@@ -85,7 +83,7 @@ final class TaxonsToCodesTransformerSpec extends ObjectBehavior
 
         $this
             ->reverseTransform(new ArrayCollection([$axes->getWrappedObject(), $shields->getWrappedObject()]))
-            ->shouldReturn(['axes', 'shields'])
+            ->shouldIterateAs(['axes', 'shields'])
         ;
     }
 
@@ -100,31 +98,5 @@ final class TaxonsToCodesTransformerSpec extends ObjectBehavior
     function it_returns_empty_array_if_passed_collection_is_empty()
     {
         $this->reverseTransform(new ArrayCollection())->shouldReturn([]);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getMatchers()
-    {
-        return [
-            'beCollection' => function ($subject, $key) {
-                if (!$subject instanceof Collection || !$key instanceof Collection) {
-                    return false;
-                }
-
-                if ($subject->count() !== $key->count()) {
-                    return false;
-                }
-
-                foreach ($subject as $subjectElement) {
-                    if (!$key->contains($subjectElement)) {
-                        return false;
-                    }
-                }
-
-                return true;
-            },
-        ];
     }
 }

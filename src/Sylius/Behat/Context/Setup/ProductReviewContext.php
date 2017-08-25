@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
@@ -175,7 +177,7 @@ final class ProductReviewContext implements Context
         /** @var ReviewInterface $review */
         $review = $this->productReviewFactory->createNew();
         $review->setTitle($title);
-        $review->setRating($rating);
+        $review->setRating((int) $rating);
         $review->setComment($comment);
         $review->setReviewSubject($product);
         $review->setAuthor($customer);

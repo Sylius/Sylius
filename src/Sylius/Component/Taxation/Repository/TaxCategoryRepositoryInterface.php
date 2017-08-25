@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Taxation\Repository;
 
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -22,7 +24,7 @@ interface TaxCategoryRepositoryInterface extends RepositoryInterface
     /**
      * @param string $name
      *
-     * @return TaxCategoryInterface[]
+     * @return array|TaxCategoryInterface[]
      */
-    public function findByName($name);
+    public function findByName(string $name): array;
 }

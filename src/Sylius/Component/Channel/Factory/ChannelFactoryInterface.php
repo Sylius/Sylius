@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Channel\Factory;
 
 use Sylius\Component\Channel\Model\ChannelInterface;
@@ -24,5 +26,5 @@ interface ChannelFactoryInterface extends FactoryInterface
      *
      * @return ChannelInterface
      */
-    public function createNamed($name);
+    public function createNamed(string $name): ChannelInterface;
 }

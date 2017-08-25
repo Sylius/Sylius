@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
@@ -206,7 +208,7 @@ final class PaymentContext implements Context
         ]);
 
         if (null !== $position) {
-            $paymentMethod->setPosition($position);
+            $paymentMethod->setPosition((int) $position);
         }
 
         $this->sharedStorage->set('payment_method', $paymentMethod);

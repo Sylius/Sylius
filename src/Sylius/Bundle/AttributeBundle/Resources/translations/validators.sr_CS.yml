@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    attribute:
+        name:
+            not_blank: Unesite ime atributa.
+            min_length: Ime atributa mora imati najmanje 1 karakter.|Ime atributa mora imati najmanje {{ limit }} karaktera.

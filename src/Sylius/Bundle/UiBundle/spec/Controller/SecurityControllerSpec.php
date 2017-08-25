@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\UiBundle\Controller;
 
 use PhpSpec\ObjectBehavior;
@@ -27,14 +29,9 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
  */
 final class SecurityControllerSpec extends ObjectBehavior
 {
-    function let(AuthenticationUtils $authenticationUtils, FormFactoryInterface $formFactory, EngineInterface $templatingEngine)
+    function let(AuthenticationUtils $authenticationUtils, FormFactoryInterface $formFactory, EngineInterface $templatingEngine): void
     {
         $this->beConstructedWith($authenticationUtils, $formFactory, $templatingEngine);
-    }
-
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(SecurityController::class);
     }
 
     function it_renders_login_form(
@@ -46,7 +43,7 @@ final class SecurityControllerSpec extends ObjectBehavior
         FormView $formView,
         EngineInterface $templatingEngine,
         Response $response
-    ) {
+    ): void {
         $authenticationUtils->getLastAuthenticationError()->willReturn('Bad credentials.');
         $authenticationUtils->getLastUsername()->willReturn('john.doe');
 
@@ -71,14 +68,14 @@ final class SecurityControllerSpec extends ObjectBehavior
         $this->loginAction($request)->shouldReturn($response);
     }
 
-    function it_throws_an_exception_when_check_action_is_accessed(Request $request)
+    function it_throws_an_exception_when_check_action_is_accessed(Request $request): void
     {
         $this
             ->shouldThrow(new \RuntimeException('You must configure the check path to be handled by the firewall.'))
             ->during('checkAction', [$request]);
     }
 
-    function it_throws_an_exception_when_logout_action_is_accessed(Request $request)
+    function it_throws_an_exception_when_logout_action_is_accessed(Request $request): void
     {
         $this
             ->shouldThrow(new \RuntimeException('You must configure the logout path to be handled by the firewall.'))

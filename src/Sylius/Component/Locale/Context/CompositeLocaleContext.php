@@ -8,12 +8,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Locale\Context;
 
 use Zend\Stdlib\PriorityQueue;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class CompositeLocaleContext implements LocaleContextInterface
 {
@@ -31,7 +33,7 @@ final class CompositeLocaleContext implements LocaleContextInterface
      * @param LocaleContextInterface $localeContext
      * @param int $priority
      */
-    public function addContext(LocaleContextInterface $localeContext, $priority = 0)
+    public function addContext(LocaleContextInterface $localeContext, int $priority = 0): void
     {
         $this->localeContexts->insert($localeContext, $priority);
     }
@@ -39,7 +41,7 @@ final class CompositeLocaleContext implements LocaleContextInterface
     /**
      * {@inheritdoc}
      */
-    public function getLocaleCode()
+    public function getLocaleCode(): string
     {
         $lastException = null;
 

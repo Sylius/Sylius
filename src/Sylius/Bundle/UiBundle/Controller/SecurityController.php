@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\UiBundle\Controller;
 
 use Sylius\Bundle\UiBundle\Form\Type\SecurityLoginType;
@@ -58,15 +60,15 @@ final class SecurityController
      *
      * @return Response
      */
-    public function loginAction(Request $request)
+    public function loginAction(Request $request): Response
     {
         $lastError = $this->authenticationUtils->getLastAuthenticationError();
         $lastUsername = $this->authenticationUtils->getLastUsername();
 
         $options = $request->attributes->get('_sylius');
 
-        $template = isset($options['template']) ? $options['template'] : '@SyliusUi/Security/login.html.twig';
-        $formType = isset($options['form']) ? $options['form'] : SecurityLoginType::class;
+        $template = $options['template'] ?? '@SyliusUi/Security/login.html.twig';
+        $formType = $options['form'] ?? SecurityLoginType::class;
         $form = $this->formFactory->createNamed('', $formType);
 
         return $this->templatingEngine->renderResponse($template, [
@@ -79,7 +81,7 @@ final class SecurityController
     /**
      * @param Request $request
      */
-    public function checkAction(Request $request)
+    public function checkAction(Request $request): void
     {
         throw new \RuntimeException('You must configure the check path to be handled by the firewall.');
     }
@@ -87,7 +89,7 @@ final class SecurityController
     /**
      * @param Request $request
      */
-    public function logoutAction(Request $request)
+    public function logoutAction(Request $request): void
     {
         throw new \RuntimeException('You must configure the logout path to be handled by the firewall.');
     }

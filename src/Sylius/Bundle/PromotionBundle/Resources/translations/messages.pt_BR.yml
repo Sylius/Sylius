@@ -17,19 +17,46 @@ sylius:
             starts_at: Começa em
             usage_limit: Limite de utilização
         promotion_action:
+            item_fixed_discount: Desconto fixo
+            item_percentage_discount: Desconto de porcentagem de item
+            order_fixed_discount: Desconto fixo do pedido
+            order_percentage_discount: Percentual de desconto do pedido
+            shipping_percentage_discount: Porcentagem de desconto do envio
+            fixed_discount_configuration:
+                amount: Total
+            percentage_discount_configuration:
+                percentage: Porcentagem
             type: Tipo
         promotion_coupon:
             expires_at: Expira em
             usage_limit: Limite de utilização
         promotion_coupon_generator_instruction:
+            amount: Total
+            code_length: Comprimento do código
             expires_at: Expira em
             usage_limit: Limite de utilização
+        promotion_filter:
+            price_range: Filtro de intervalo de preço
         promotion_rule:
+            cart_quantity: Quantidade no carrinho
+            contains_product: Contém o produto
+            customer_group: Grupo de Cliente
+            item_total: Total do item
+            shipping_country: País de Envio
+            taxonomy: Categorias
             cart_quantity_configuration:
                 count: Contagem
                 equal: Igual
             contains_product_configuration:
+                exclude: Excluir
                 variants: Produtos
+            item_total_configuration:
+                amount: Total
+            nth_order_configuration:
+                nth: N-ésimo
             shipping_country_configuration:
                 country: País
+            taxonomy_configuration:
+                exclude: Excluir
+                taxons: Categorias
             type: Tipo

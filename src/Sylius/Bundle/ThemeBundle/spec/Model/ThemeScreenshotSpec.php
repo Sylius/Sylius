@@ -9,34 +9,31 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ThemeBundle\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ThemeBundle\Model\ThemeScreenshot;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class ThemeScreenshotSpec extends ObjectBehavior
 {
-    function let()
+    function let(): void
     {
         $this->beConstructedWith('/screenshot/path.jpg');
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ThemeScreenshot::class);
-    }
-
-    function it_has_path()
+    function it_has_path(): void
     {
         $this->beConstructedWith('/my/screenshot.jpg');
 
         $this->getPath()->shouldReturn('/my/screenshot.jpg');
     }
 
-    function it_has_title()
+    function it_has_title(): void
     {
         $this->getTitle()->shouldReturn(null);
 
@@ -44,7 +41,7 @@ final class ThemeScreenshotSpec extends ObjectBehavior
         $this->getTitle()->shouldReturn('Candy shop');
     }
 
-    function it_has_description()
+    function it_has_description(): void
     {
         $this->getDescription()->shouldReturn(null);
 

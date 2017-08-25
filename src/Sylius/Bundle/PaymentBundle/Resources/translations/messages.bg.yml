@@ -3,6 +3,32 @@
 
 sylius:
     form:
+        credit_card:
+            cardholder_name: Име на притежателя на картата
+            expiry_month: Месец на изтичане
+            expiry_year: Година на изтичане
+            number: Номер на картата
+            security_code: Код за сигурност (CVV)
+            type: Тип карта
         payment:
+            amount: Сума за плащане
+            method: Начин на плащане
             state:
-                header: Състояние на плащане
+                header: Състояние на плащането
+                checkout: Плащане
+                completed: Завършено
+                authorized: Оторизирано
+                failed: Неуспешно
+                new: Ново
+                pending: Изчакване
+                processing: Обработване
+                unknown: Неизвестно
+                void: Невалидно
+                cancelled: Отказано
+                refunded: Връщане
+        payment_method:
+            description: Описание
+            enabled: Активирано?
+            instructions: Инструкции
+            name: Име
+            position: Позиция

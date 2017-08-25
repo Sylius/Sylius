@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\Form\Builder;
 
 use Doctrine\ODM\PHPCR\DocumentManagerInterface;
@@ -40,7 +42,7 @@ class DefaultFormBuilder implements DefaultFormBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function build(MetadataInterface $metadata, FormBuilderInterface $formBuilder, array $options)
+    public function build(MetadataInterface $metadata, FormBuilderInterface $formBuilder, array $options): void
     {
         $classMetadata = $this->documentManager->getClassMetadata($metadata->getClass('model'));
 

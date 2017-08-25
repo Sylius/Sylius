@@ -22,8 +22,10 @@ sylius:
             calculator: Beregner
             category: Kategori
             category_requirement: Kategori krav
+            channels: Kanaler
             configuration: Konfiguration
             description: Beskrivelse
             enabled: Aktiveret
             name: Navn
             tax_category: Momskategori
+            translations: Oversættelser

@@ -4,6 +4,7 @@
 sylius:
     form:
         currency:
+            base: Ana Para Birimi
             code: Ad
             enabled: Etkin
             exchange_rate: Döviz Kuru

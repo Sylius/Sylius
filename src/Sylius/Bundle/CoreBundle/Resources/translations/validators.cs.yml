@@ -84,6 +84,8 @@ sylius:
     user:
         email:
             unique: Tento e-mail je již používán.
+            min: E-mail musí mít alespoň {{ min }} znaků.
+            max: E-mail může mít maximálně {{ max }} znaků.
             invalid: Tento email je neplatný.
         username:
             unique: Toto uživatelské jméno je již použito.

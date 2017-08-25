@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Order;
 
 /**
@@ -16,8 +18,8 @@ namespace Sylius\Component\Order;
  */
 final class CartActions
 {
-    const ADD = 'add';
-    const REMOVE = 'remove';
+    public const ADD = 'add';
+    public const REMOVE = 'remove';
 
     private function __construct()
     {

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\Exception;
 
 /**
@@ -16,7 +18,7 @@ namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\Exception;
  */
 class UnknownDriverException extends \Exception
 {
-    public function __construct($driver)
+    public function __construct(string $driver)
     {
         parent::__construct(sprintf(
             'Unknown driver "%s".',

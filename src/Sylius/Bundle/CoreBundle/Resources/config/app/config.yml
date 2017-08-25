@@ -34,13 +34,6 @@ doctrine_cache:
     providers:
         sylius_rbac: "%sylius.cache%"
 
-jms_serializer:
-    metadata:
-        directories:
-            sylius-core:
-                namespace_prefix: "Sylius\\Component\\Core"
-                path: "@SyliusCoreBundle/Resources/config/serializer"
-
 knp_gaufrette:
     adapters:
         sylius_image:

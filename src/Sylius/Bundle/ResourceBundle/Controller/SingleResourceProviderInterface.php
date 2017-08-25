@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
@@ -25,5 +27,5 @@ interface SingleResourceProviderInterface
      *
      * @return ResourceInterface|null
      */
-    public function get(RequestConfiguration $requestConfiguration, RepositoryInterface $repository);
+    public function get(RequestConfiguration $requestConfiguration, RepositoryInterface $repository): ?ResourceInterface;
 }

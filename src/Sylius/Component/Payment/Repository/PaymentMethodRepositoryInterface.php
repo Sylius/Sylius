@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Payment\Repository;
 
 use Doctrine\ORM\QueryBuilder;
@@ -26,5 +28,5 @@ interface PaymentMethodRepositoryInterface extends RepositoryInterface
      *
      * @return PaymentMethodInterface[]
      */
-    public function findByName($name, $locale);
+    public function findByName(string $name, string $locale): array;
 }

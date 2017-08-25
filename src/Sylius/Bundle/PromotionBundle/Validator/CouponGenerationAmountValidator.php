@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\PromotionBundle\Validator;
 
 use Sylius\Bundle\PromotionBundle\Validator\Constraints\CouponPossibleGenerationAmount;
@@ -39,7 +41,7 @@ final class CouponGenerationAmountValidator extends ConstraintValidator
     /**
      * {@inheritdoc}
      */
-    public function validate($instruction, Constraint $constraint)
+    public function validate($instruction, Constraint $constraint): void
     {
         if (null === $instruction->getCodeLength() || null === $instruction->getAmount()) {
             return;

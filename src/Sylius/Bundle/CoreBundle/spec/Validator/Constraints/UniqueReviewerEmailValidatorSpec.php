@@ -9,14 +9,16 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Validator\Constraints\UniqueReviewerEmail;
 use Sylius\Bundle\CoreBundle\Validator\Constraints\UniqueReviewerEmailValidator;
 use Sylius\Bundle\UserBundle\Doctrine\ORM\UserRepository;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
-use Sylius\Component\Customer\Model\CustomerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;

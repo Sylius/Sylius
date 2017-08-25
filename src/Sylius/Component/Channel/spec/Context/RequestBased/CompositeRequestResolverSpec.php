@@ -9,30 +9,26 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Channel\Context\RequestBased;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Channel\Context\RequestBased\CompositeRequestResolver;
 use Sylius\Component\Channel\Context\RequestBased\RequestResolverInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class CompositeRequestResolverSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(CompositeRequestResolver::class);
-    }
-
-    function it_implements_request_resolver_interface()
+    function it_implements_request_resolver_interface(): void
     {
         $this->shouldImplement(RequestResolverInterface::class);
     }
 
-    function it_returns_null_if_there_are_no_nested_request_resolvers_added(Request $request)
+    function it_returns_null_if_there_are_no_nested_request_resolvers_added(Request $request): void
     {
         $this->findChannel($request)->shouldReturn(null);
     }
@@ -40,7 +36,7 @@ final class CompositeRequestResolverSpec extends ObjectBehavior
     function it_returns_null_if_none_of_nested_request_resolvers_returned_channel(
         Request $request,
         RequestResolverInterface $requestResolver
-    ) {
+    ): void {
         $requestResolver->findChannel($request)->willReturn(null);
 
         $this->addResolver($requestResolver);
@@ -54,7 +50,7 @@ final class CompositeRequestResolverSpec extends ObjectBehavior
         RequestResolverInterface $secondRequestResolver,
         RequestResolverInterface $thirdRequestResolver,
         ChannelInterface $channel
-    ) {
+    ): void {
         $firstRequestResolver->findChannel($request)->willReturn(null);
         $secondRequestResolver->findChannel($request)->willReturn($channel);
         $thirdRequestResolver->findChannel($request)->shouldNotBeCalled();
@@ -72,7 +68,7 @@ final class CompositeRequestResolverSpec extends ObjectBehavior
         RequestResolverInterface $secondRequestResolver,
         RequestResolverInterface $thirdRequestResolver,
         ChannelInterface $channel
-    ) {
+    ): void {
         $firstRequestResolver->findChannel($request)->shouldNotBeCalled();
         $secondRequestResolver->findChannel($request)->willReturn($channel);
         $thirdRequestResolver->findChannel($request)->willReturn(null);

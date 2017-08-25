@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Resource\Model;
 
 /**
@@ -17,12 +19,12 @@ namespace Sylius\Component\Resource\Model;
 interface ArchivableInterface
 {
     /**
-     * @return \DateTime
+     * @return \DateTimeInterface|null
      */
-    public function getArchivedAt();
+    public function getArchivedAt(): ?\DateTimeInterface;
 
     /**
-     * @param \DateTime $archivedAt
+     * @param \DateTimeInterface|null $archivedAt
      */
-    public function setArchivedAt(\DateTime $archivedAt = null);
+    public function setArchivedAt(?\DateTimeInterface $archivedAt): void;
 }

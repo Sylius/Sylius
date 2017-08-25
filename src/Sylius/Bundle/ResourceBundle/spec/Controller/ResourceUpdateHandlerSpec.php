@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
 use Doctrine\Common\Persistence\ObjectManager;
@@ -24,17 +26,12 @@ use Sylius\Component\Resource\Model\ResourceInterface;
  */
 final class ResourceUpdateHandlerSpec extends ObjectBehavior
 {
-    function let(StateMachineInterface $stateMachine)
+    function let(StateMachineInterface $stateMachine): void
     {
         $this->beConstructedWith($stateMachine);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ResourceUpdateHandler::class);
-    }
-
-    function it_implements_a_resource_update_handler_interface()
+    function it_implements_a_resource_update_handler_interface(): void
     {
         $this->shouldImplement(ResourceUpdateHandlerInterface::class);
     }
@@ -44,7 +41,7 @@ final class ResourceUpdateHandlerSpec extends ObjectBehavior
         ResourceInterface $resource,
         RequestConfiguration $configuration,
         ObjectManager $manager
-    ) {
+    ): void {
         $configuration->hasStateMachine()->willReturn(true);
         $stateMachine->apply($configuration, $resource)->shouldBeCalled();
 
@@ -58,7 +55,7 @@ final class ResourceUpdateHandlerSpec extends ObjectBehavior
         ResourceInterface $resource,
         RequestConfiguration $configuration,
         ObjectManager $manager
-    ) {
+    ): void {
         $configuration->hasStateMachine()->willReturn(false);
         $stateMachine->apply($configuration, $resource)->shouldNotBeCalled();
 

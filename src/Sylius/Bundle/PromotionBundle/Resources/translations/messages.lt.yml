@@ -19,21 +19,35 @@ sylius:
         promotion_action:
             fixed_discount_configuration:
                 amount: Suma
+            percentage_discount_configuration:
+                percentage: Procentas
             type: Tipas
         promotion_coupon:
+            expires_at: Baigiasi
             usage_limit: Naudojimo limitas
         promotion_coupon_generator_instruction:
             amount: Suma
+            code_length: Kodo ilgis
+            expires_at: Baigiasi
             usage_limit: Naudojimo limitas
+        promotion_filter:
+            price_range: Kainos diapazono filtras
         promotion_rule:
+            customer_group: Klientų grupė
+            taxonomy: Taksonomijos
             cart_quantity_configuration:
                 count: Kiekis
+                equal: Lygus
             contains_product_configuration:
+                exclude: Neįtraukti
                 variants: Prekės
             item_total_configuration:
                 amount: Suma
+            nth_order_configuration:
+                nth: N-tasis
             shipping_country_configuration:
                 country: Šalis
             taxonomy_configuration:
+                exclude: Neįtraukti
                 taxons: Taksonai
             type: Tipas

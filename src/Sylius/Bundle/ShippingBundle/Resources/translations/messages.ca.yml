@@ -12,6 +12,7 @@ sylius:
             description: Descripció
             name: Nom
         shipping_method:
+            channels: Canals
             description: Descripció
             enabled: Activat
             name: Nom

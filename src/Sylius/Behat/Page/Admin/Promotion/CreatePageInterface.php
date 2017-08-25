@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Page\Admin\Promotion;
 
 use Behat\Mink\Exception\ElementNotFoundException;
@@ -102,14 +104,14 @@ interface CreatePageInterface extends BaseCreatePageInterface
     public function checkChannel($name);
 
     /**
-     * @param \DateTime $dateTime
+     * @param \DateTimeInterface $dateTime
      */
-    public function setStartsAt(\DateTime $dateTime);
+    public function setStartsAt(\DateTimeInterface $dateTime);
 
     /**
-     * @param \DateTime $dateTime
+     * @param \DateTimeInterface $dateTime
      */
-    public function setEndsAt(\DateTime $dateTime);
+    public function setEndsAt(\DateTimeInterface $dateTime);
 
     /**
      * @return string

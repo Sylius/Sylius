@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
@@ -123,7 +125,7 @@ final class PromotionContext implements Context
             ->createForChannel($promotionName, $this->sharedStorage->get('channel'))
         ;
 
-        $promotion->setPriority($priority);
+        $promotion->setPriority((int) $priority);
 
         $this->promotionRepository->add($promotion);
         $this->sharedStorage->set('promotion', $promotion);
@@ -139,7 +141,7 @@ final class PromotionContext implements Context
         ;
 
         $promotion->setExclusive(true);
-        $promotion->setPriority($priority);
+        $promotion->setPriority((int) $priority);
 
         $this->promotionRepository->add($promotion);
         $this->sharedStorage->set('promotion', $promotion);
@@ -152,7 +154,7 @@ final class PromotionContext implements Context
     {
         $promotion = $this->testPromotionFactory->createForChannel($promotionName, $this->sharedStorage->get('channel'));
 
-        $promotion->setUsageLimit($usageLimit);
+        $promotion->setUsageLimit((int) $usageLimit);
 
         $this->promotionRepository->add($promotion);
         $this->sharedStorage->set('promotion', $promotion);
@@ -167,7 +169,7 @@ final class PromotionContext implements Context
         /** @var PromotionCouponInterface $coupon */
         $coupon = $this->couponFactory->createNew();
         $coupon->setCode($couponCode);
-        $coupon->setUsageLimit($usageLimit);
+        $coupon->setUsageLimit((null === $usageLimit) ? null : (int) $usageLimit);
 
         $promotion = $this->testPromotionFactory
             ->createForChannel($promotionName, $this->sharedStorage->get('channel'))
@@ -257,7 +259,7 @@ final class PromotionContext implements Context
      */
     public function thisCouponCanBeUsedNTimes(PromotionCouponInterface $coupon, $usageLimit)
     {
-        $coupon->setUsageLimit($usageLimit);
+        $coupon->setUsageLimit((int) $usageLimit);
 
         $this->objectManager->flush();
     }

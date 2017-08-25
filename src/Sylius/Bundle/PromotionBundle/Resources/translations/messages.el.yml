@@ -18,8 +18,11 @@ sylius:
         promotion_coupon_generator_instruction:
             usage_limit: Όριο χρήσης
         promotion_rule:
+            customer_group: Ομάδα πελατών
             cart_quantity_configuration:
                 count: Πλήθος
+            contains_product_configuration:
+                variants: Προϊόντα
             shipping_country_configuration:
                 country: Χώρα
             type: Τύπος

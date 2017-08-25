@@ -55,7 +55,7 @@ sylius:
         members:
             min_count: Por favor, adicione pelo menos {{ limit }} membro da região.
         name:
-            max_length: O campo zona não pode ter mais que 255 caracteres|O campo zona não pode ter mais que 255 caracteres.
+            max_length: O nome da região não pode ter mais que 255 caracteres|O nome da região não pode ter mais que 255 caracteres.
             min_length: O sobrenome deve ter no mínimo 2 caracteres|O sobrenome deve ter no mínimo 2 caracteres.
             not_blank: Por favor, digite o nome da região.
     zone_member:

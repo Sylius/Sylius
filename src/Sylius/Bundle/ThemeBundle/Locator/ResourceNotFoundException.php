@@ -9,12 +9,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Locator;
 
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class ResourceNotFoundException extends \RuntimeException
 {
@@ -22,7 +24,7 @@ final class ResourceNotFoundException extends \RuntimeException
      * @param string $resourceName
      * @param ThemeInterface $theme
      */
-    public function __construct($resourceName, ThemeInterface $theme)
+    public function __construct(string $resourceName, ThemeInterface $theme)
     {
         parent::__construct(sprintf(
             'Could not find resource "%s" using theme "%s".',

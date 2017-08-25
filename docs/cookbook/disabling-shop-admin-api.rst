@@ -189,7 +189,7 @@ Here you've got the line that should disappear from imports:
 
 .. code-block:: yaml
 
-    # sylius_shop:
+    # sylius_api:
     #    resource: "@SyliusAdminApiBundle/Resources/config/routing.yml" # remove or leave these lines commented
 
 **4.** Remove security configuration from ``app/config/security.yml``.

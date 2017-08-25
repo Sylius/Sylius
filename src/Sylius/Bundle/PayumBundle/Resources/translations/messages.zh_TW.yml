@@ -5,3 +5,16 @@ sylius:
     form:
         gateway_config:
             type: 類型
+        gateway_configuration:
+            paypal:
+                password: 密碼
+                signature: 簽章
+                username: 使用者名稱
+                sandbox: 沙盒模式
+            stripe:
+                publishable_key: 可公開金鑰
+                secret_key: 私密金鑰
+    payum_gateway_factory:
+        offline: 離線
+        paypal_express_checkout: PayPal 快速結帳
+        stripe_checkout: Stripe 結帳

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Twig;
 
 use Sylius\Bundle\CoreBundle\Templating\Helper\ProductVariantsPricesHelper;
@@ -37,7 +39,7 @@ final class ProductVariantsPricesExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('sylius_product_variant_prices', [$this->productVariantsPricesHelper, 'getPrices']),
+            new \Twig_Function('sylius_product_variant_prices', [$this->productVariantsPricesHelper, 'getPrices']),
         ];
     }
 }

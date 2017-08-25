@@ -9,17 +9,20 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ThemeBundle\Controller;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ThemeBundle\Controller\ThemeScreenshotController;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
+use Sylius\Bundle\ThemeBundle\Model\ThemeScreenshot;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class ThemeScreenshotControllerSpec extends ObjectBehavior
 {
@@ -28,25 +31,20 @@ final class ThemeScreenshotControllerSpec extends ObjectBehavior
      */
     private $fixturesPath;
 
-    function let(ThemeRepositoryInterface $themeRepository)
+    function let(ThemeRepositoryInterface $themeRepository): void
     {
         $this->beConstructedWith($themeRepository);
 
         $this->fixturesPath = realpath(__DIR__ . '/../Fixtures');
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ThemeScreenshotController::class);
-    }
-
-    function it_streams_screenshot_as_a_response(ThemeRepositoryInterface $themeRepository, ThemeInterface $theme)
+    function it_streams_screenshot_as_a_response(ThemeRepositoryInterface $themeRepository, ThemeInterface $theme): void
     {
         $themeRepository->findOneByName('theme/name')->willReturn($theme);
 
         $theme->getScreenshots()->willReturn([
-            'screenshot/0-amazing.jpg', // exists
-            'screenshot/1-awesome.jpg', // does not exist
+            new ThemeScreenshot('screenshot/0-amazing.jpg'), // exists
+            new ThemeScreenshot('screenshot/1-awesome.jpg'), // does not exist
         ]);
         $theme->getPath()->willReturn($this->fixturesPath);
 
@@ -59,12 +57,12 @@ final class ThemeScreenshotControllerSpec extends ObjectBehavior
     function it_throws_not_found_http_exception_if_screenshot_cannot_be_found(
         ThemeRepositoryInterface $themeRepository,
         ThemeInterface $theme
-    ) {
+    ): void {
         $themeRepository->findOneByName('theme/name')->willReturn($theme);
 
         $theme->getScreenshots()->willReturn([
-            'screenshot/0-amazing.jpg', // exists
-            'screenshot/1-awesome.jpg', // does not exists
+            new ThemeScreenshot('screenshot/0-amazing.jpg'), // exists
+            new ThemeScreenshot('screenshot/1-awesome.jpg'), // does not exists
         ]);
         $theme->getPath()->willReturn($this->fixturesPath);
 
@@ -80,12 +78,12 @@ final class ThemeScreenshotControllerSpec extends ObjectBehavior
     function it_throws_not_found_http_exception_if_screenshot_number_exceeds_the_number_of_theme_screenshots(
         ThemeRepositoryInterface $themeRepository,
         ThemeInterface $theme
-    ) {
+    ): void {
         $themeRepository->findOneByName('theme/name')->willReturn($theme);
 
         $theme->getScreenshots()->willReturn([
-            'screenshot/0-amazing.jpg',
-            'screenshot/1-awesome.jpg',
+            new ThemeScreenshot('screenshot/0-amazing.jpg'),
+            new ThemeScreenshot('screenshot/1-awesome.jpg'),
         ]);
         $theme->getTitle()->willReturn('Candy shop');
 
@@ -95,7 +93,7 @@ final class ThemeScreenshotControllerSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_not_found_http_exception_if_theme_with_given_id_cannot_be_found(ThemeRepositoryInterface $themeRepository)
+    function it_throws_not_found_http_exception_if_theme_with_given_id_cannot_be_found(ThemeRepositoryInterface $themeRepository): void
     {
         $themeRepository->findOneByName('theme/name')->willReturn(null);
 
@@ -108,7 +106,7 @@ final class ThemeScreenshotControllerSpec extends ObjectBehavior
     /**
      * {@inheritdoc}
      */
-    public function getMatchers()
+    public function getMatchers(): array
     {
         return [
             'beBinaryFileResponseStreamingFile' => function (BinaryFileResponse $response, $file) {

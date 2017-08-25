@@ -20,7 +20,7 @@
         }
     ],
     "require": {
-        "php": "^5.6|^7.0",
+        "php": "^7.1",
 
         "sylius/channel": "^1.0",
         "sylius/resource-bundle": "^1.0",
@@ -28,10 +28,10 @@
     },
     "require-dev": {
         "matthiasnoback/symfony-dependency-injection-test": "^1.0",
-        "phpspec/phpspec": "^3.2",
+        "phpspec/phpspec": "^4.0",
         "phpunit/phpunit": "^5.6",
-        "twig/twig": "^1.28",
-        "doctrine/orm": "^2.5",
+        "twig/twig": "^2.0",
+        "doctrine/orm": "~2.5.0",
         "symfony/form": "^3.2",
         "symfony/browser-kit": "^3.2",
         "incenteev/composer-parameter-handler": "~2.0",

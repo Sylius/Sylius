@@ -1,0 +1,15 @@
+Sylius\Component\Core\Model\Taxon:
+    exclusion_policy: ALL
+    xml_root_name: taxon
+    properties:
+        images:
+            expose: true
+            type: array
+            groups: [Default, Detailed]
+    relations:
+        -   rel: self
+            href:
+                route: sylius_admin_api_taxon_show
+                parameters:
+                    code: expr(object.getCode())
+                    version: 1

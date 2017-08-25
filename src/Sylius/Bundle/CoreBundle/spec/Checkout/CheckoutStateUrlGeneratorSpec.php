@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\CoreBundle\Checkout;
 
 use PhpSpec\ObjectBehavior;
@@ -30,6 +32,9 @@ final class CheckoutStateUrlGeneratorSpec extends ObjectBehavior
         $routeCollection = [
             'addressed' => [
                 'route' => 'sylius_shop_checkout_select_shipping',
+            ],
+            'empty_order' => [
+                'route' => 'sylius_shop_cart_summary'
             ],
         ];
 
@@ -77,5 +82,12 @@ final class CheckoutStateUrlGeneratorSpec extends ObjectBehavior
         $router->generate(Argument::any())->shouldNotBeCalled();
 
         $this->shouldThrow(RouteNotFoundException::class)->during('generateForOrderCheckoutState', [$order]);
+    }
+
+    function it_generates_cart_url(RouterInterface $router)
+    {
+        $router->generate('sylius_shop_cart_summary', [], UrlGeneratorInterface::ABSOLUTE_PATH)->willReturn('/cart');
+
+        $this->generateForCart()->shouldReturn('/cart');
     }
 }

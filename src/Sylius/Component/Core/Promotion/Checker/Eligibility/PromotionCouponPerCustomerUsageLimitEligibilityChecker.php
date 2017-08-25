@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Promotion\Checker\Eligibility;
 
 use Sylius\Component\Core\Model\OrderInterface;
@@ -39,7 +41,7 @@ final class PromotionCouponPerCustomerUsageLimitEligibilityChecker implements Pr
     /**
      * {@inheritdoc}
      */
-    public function isEligible(PromotionSubjectInterface $promotionSubject, PromotionCouponInterface $promotionCoupon)
+    public function isEligible(PromotionSubjectInterface $promotionSubject, PromotionCouponInterface $promotionCoupon): bool
     {
         if (!$promotionSubject instanceof OrderInterface) {
             return true;

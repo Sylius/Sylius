@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ThemeBundle\Configuration\Filesystem;
 
 use PhpSpec\ObjectBehavior;
@@ -17,26 +19,21 @@ use Sylius\Bundle\ThemeBundle\Configuration\Filesystem\JsonFileConfigurationLoad
 use Sylius\Bundle\ThemeBundle\Filesystem\FilesystemInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class JsonFileConfigurationLoaderSpec extends ObjectBehavior
 {
-    function let(FilesystemInterface $filesystem)
+    function let(FilesystemInterface $filesystem): void
     {
         $this->beConstructedWith($filesystem);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(JsonFileConfigurationLoader::class);
-    }
-
-    function it_implements_configuration_loader_interface()
+    function it_implements_configuration_loader_interface(): void
     {
         $this->shouldImplement(ConfigurationLoaderInterface::class);
     }
 
-    function it_loads_json_file(FilesystemInterface $filesystem)
+    function it_loads_json_file(FilesystemInterface $filesystem): void
     {
         $filesystem->exists('/directory/composer.json')->willReturn(true);
 
@@ -48,7 +45,7 @@ final class JsonFileConfigurationLoaderSpec extends ObjectBehavior
         ]);
     }
 
-    function it_throws_an_exception_if_file_does_not_exist(FilesystemInterface $filesystem)
+    function it_throws_an_exception_if_file_does_not_exist(FilesystemInterface $filesystem): void
     {
         $filesystem->exists('composer.json')->willReturn(false);
 

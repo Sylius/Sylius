@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Templating\Cache\Warmer;
 
 use Doctrine\Common\Cache\Cache;
@@ -21,7 +23,7 @@ use Symfony\Component\HttpKernel\CacheWarmer\CacheWarmerInterface;
 use Symfony\Component\Templating\TemplateReferenceInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Kamil Kokot <kamil@kokot.me>
  */
 final class TemplatePathsCacheWarmer implements CacheWarmerInterface
 {
@@ -66,7 +68,7 @@ final class TemplatePathsCacheWarmer implements CacheWarmerInterface
     /**
      * {@inheritdoc}
      */
-    public function warmUp($cacheDir)
+    public function warmUp($cacheDir): void
     {
         $templates = $this->templateFinder->findAllTemplates();
 
@@ -79,7 +81,7 @@ final class TemplatePathsCacheWarmer implements CacheWarmerInterface
     /**
      * {@inheritdoc}
      */
-    public function isOptional()
+    public function isOptional(): bool
     {
         return true;
     }
@@ -87,7 +89,7 @@ final class TemplatePathsCacheWarmer implements CacheWarmerInterface
     /**
      * @param TemplateReferenceInterface $template
      */
-    private function warmUpTemplate(TemplateReferenceInterface $template)
+    private function warmUpTemplate(TemplateReferenceInterface $template): void
     {
         /** @var ThemeInterface $theme */
         foreach ($this->themeRepository->findAll() as $theme) {
@@ -99,7 +101,7 @@ final class TemplatePathsCacheWarmer implements CacheWarmerInterface
      * @param TemplateReferenceInterface $template
      * @param ThemeInterface $theme
      */
-    private function warmUpThemeTemplate(TemplateReferenceInterface $template, ThemeInterface $theme)
+    private function warmUpThemeTemplate(TemplateReferenceInterface $template, ThemeInterface $theme): void
     {
         try {
             $location = $this->templateLocator->locateTemplate($template, $theme);
@@ -116,7 +118,7 @@ final class TemplatePathsCacheWarmer implements CacheWarmerInterface
      *
      * @return string
      */
-    private function getCacheKey(TemplateReferenceInterface $template, ThemeInterface $theme)
+    private function getCacheKey(TemplateReferenceInterface $template, ThemeInterface $theme): string
     {
         return $template->getLogicalName().'|'.$theme->getName();
     }
