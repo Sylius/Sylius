@@ -56,7 +56,7 @@ final class ProductVariantGenerator implements ProductVariantGeneratorInterface
     /**
      * {@inheritdoc}
      */
-    public function generate(ProductInterface $product)
+    public function generate(ProductInterface $product): void
     {
         Assert::true($product->hasOptions(), 'Cannot generate variants for an object without options.');
 
@@ -88,7 +88,7 @@ final class ProductVariantGenerator implements ProductVariantGeneratorInterface
      *
      * @return ProductVariantInterface
      */
-    protected function createVariant(ProductInterface $product, array $optionMap, $permutation)
+    protected function createVariant(ProductInterface $product, array $optionMap, $permutation): ProductVariantInterface
     {
         /** @var ProductVariantInterface $variant */
         $variant = $this->productVariantFactory->createForProduct($product);
@@ -102,7 +102,7 @@ final class ProductVariantGenerator implements ProductVariantGeneratorInterface
      * @param array $optionMap
      * @param mixed $permutation
      */
-    private function addOptionValue(ProductVariantInterface $variant, array $optionMap, $permutation)
+    private function addOptionValue(ProductVariantInterface $variant, array $optionMap, $permutation): void
     {
         if (!is_array($permutation)) {
             $variant->addOptionValue($optionMap[$permutation]);

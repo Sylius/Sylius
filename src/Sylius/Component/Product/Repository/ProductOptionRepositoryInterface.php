@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Product\Repository;
 
+use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 
@@ -26,13 +27,13 @@ interface ProductOptionRepositoryInterface extends RepositoryInterface
      *
      * @return QueryBuilder
      */
-    public function createListQueryBuilder($locale);
+    public function createListQueryBuilder(string $locale): QueryBuilder;
 
     /**
      * @param string $name
      * @param string $locale
      *
-     * @return ProductOptionInterface[]
+     * @return array|ProductOptionInterface[]
      */
-    public function findByName($name, $locale);
+    public function findByName(string $name, string $locale): array;
 }

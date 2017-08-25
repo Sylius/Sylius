@@ -64,6 +64,15 @@
 
 * In `PaymentInterface::setMethod` method the default value of `PaymentMethodInterface $method` parameter has been removed.
 
+### Product / ProductBundle
+
+* The following methods does not longer have a default null argument and requires one to be explicitly passed:
+  
+  * `ProductAssociationInterface::setOwner`
+  * `ProductAttributeValueInterface::setProduct`
+  * `ProductOptionValueInterface::setOption`
+  * `ProductVariantInterface::setProduct`
+
 ### Promotion / PromotionBundle
 
 * `ActivePromotionsProvider` has been made final, use decoration instead of extending it.

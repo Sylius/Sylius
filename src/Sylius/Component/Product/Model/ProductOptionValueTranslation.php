@@ -41,7 +41,7 @@ class ProductOptionValueTranslation extends AbstractTranslation implements Produ
     /**
      * {@inheritdoc}
      */
-    public function getValue()
+    public function getValue(): ?string
     {
         return $this->value;
     }
@@ -49,7 +49,7 @@ class ProductOptionValueTranslation extends AbstractTranslation implements Produ
     /**
      * {@inheritdoc}
      */
-    public function setValue($value)
+    public function setValue(?string $value): void
     {
         $this->value = $value;
     }
