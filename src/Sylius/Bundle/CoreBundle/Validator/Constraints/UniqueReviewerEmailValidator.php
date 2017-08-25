@@ -64,12 +64,16 @@ class UniqueReviewerEmailValidator extends ConstraintValidator
      */
     public function validate($review, Constraint $constraint)
     {
-        /* @var ReviewerInterface $customer */
+        /* @var ReviewerInterface|null $customer */
         $customer = $review->getAuthor();
 
         $token = $this->tokenStorage->getToken();
-        if ($this->checkIfUserIsAuthenticated($token)) {
-            if (null !== $customer && $token->getUser()->getCustomer()->getEmail() === $customer->getEmail()) {
+        if (null !== $customer) {
+            if ($customer->getEmail() === null) {
+                return;
+            }
+
+            if ($customer->getEmail() === $this->getAuthenticatedUserEmail($token)) {
                 return;
             }
         }
@@ -82,14 +86,24 @@ class UniqueReviewerEmailValidator extends ConstraintValidator
     /**
      * @param TokenInterface $token
      *
-     * @return bool
+     * @return string|null
      */
-    private function checkIfUserIsAuthenticated(TokenInterface $token)
+    private function getAuthenticatedUserEmail(TokenInterface $token): ?string
     {
-        return
-            null !== $token &&
-            $this->authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') &&
-            $token->getUser() instanceof UserInterface
-        ;
+        if (null === $token) {
+            return null;
+        }
+
+        if (!$this->authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            return null;
+        }
+
+        $user = $token->getUser();
+        if (!$user instanceof UserInterface) {
+            return null;
+        }
+
+        return $user->getEmail();
+
     }
 }

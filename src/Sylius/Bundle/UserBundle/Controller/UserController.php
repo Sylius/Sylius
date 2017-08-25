@@ -284,10 +284,9 @@ class UserController extends ResourceController
     }
 
     /**
-     * @param string $type
-     * @param string $message
+     * {@inheritdoc}
      */
-    protected function addFlash(string $type, string $message): void
+    protected function addFlash($type, $message): void
     {
         $translator = $this->container->get('translator');
         $this->container->get('session')->getFlashBag()->add($type, $translator->trans($message, [], 'flashes'));
@@ -296,20 +295,20 @@ class UserController extends ResourceController
     /**
      * @param RequestConfiguration $configuration
      * @param string $type
-     * @param ResourceInterface|null $resource
+     * @param object $object
      *
      * @return FormInterface
      */
     protected function createResourceForm(
         RequestConfiguration $configuration,
         string $type,
-        ?ResourceInterface $resource
+        $object
     ): FormInterface {
         if (!$configuration->isHtmlRequest()) {
-            return $this->container->get('form.factory')->createNamed('', $type, $resource, ['csrf_protection' => false]);
+            return $this->container->get('form.factory')->createNamed('', $type, $object, ['csrf_protection' => false]);
         }
 
-        return $this->container->get('form.factory')->create($type, $resource);
+        return $this->container->get('form.factory')->create($type, $object);
     }
 
     /**

@@ -61,16 +61,6 @@ interface CustomerInterface extends BaseCustomerInterface, UserAwareInterface, P
     public function getAddresses();
 
     /**
-     * @return BaseUserInterface
-     */
-    public function getUser();
-
-    /**
-     * @param BaseUserInterface|null $user
-     */
-    public function setUser(BaseUserInterface $user = null);
-
-    /**
      * @return bool
      */
     public function hasUser();

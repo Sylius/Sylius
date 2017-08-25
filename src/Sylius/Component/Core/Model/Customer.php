@@ -118,7 +118,7 @@ class Customer extends BaseCustomer implements CustomerInterface
     /**
      * {@inheritdoc}
      */
-    public function getUser()
+    public function getUser(): ?BaseUserInterface
     {
         return $this->user;
     }
@@ -126,7 +126,7 @@ class Customer extends BaseCustomer implements CustomerInterface
     /**
      * {@inheritdoc}
      */
-    public function setUser(BaseUserInterface $user = null)
+    public function setUser(?BaseUserInterface $user): void
     {
         if ($this->user !== $user) {
             $this->user = $user;

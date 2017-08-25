@@ -16,7 +16,6 @@ namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\EventListener\PasswordUpdaterListener;
 use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Security\PasswordUpdaterInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -57,7 +56,7 @@ final class PasswordUpdaterListenerSpec extends ObjectBehavior
     ) {
         $event->getSubject()->willReturn($user);
 
-        $this->shouldThrow(UnexpectedTypeException::class)->during('customerUpdateEvent', [$event]);
+        $this->shouldThrow(\InvalidArgumentException::class)->during('customerUpdateEvent', [$event]);
     }
 
     function it_does_not_update_password_if_customer_does_not_have_user(
