@@ -23,7 +23,7 @@ final class TranslationTest extends WebTestCase
     /**
      * @test
      */
-    public function it_respects_theming_logic_while_translating_messages()
+    public function it_respects_theming_logic_while_translating_messages(): void
     {
         $client = self::createClient();
 

@@ -34,7 +34,7 @@ final class CompositeTranslatorResourceProvider implements TranslatorResourcePro
     /**
      * {@inheritdoc}
      */
-    public function getResources()
+    public function getResources(): array
     {
         $resources = [];
 
@@ -48,7 +48,7 @@ final class CompositeTranslatorResourceProvider implements TranslatorResourcePro
     /**
      * {@inheritdoc}
      */
-    public function getResourcesLocales()
+    public function getResourcesLocales(): array
     {
         $resourcesLocales = [];
 

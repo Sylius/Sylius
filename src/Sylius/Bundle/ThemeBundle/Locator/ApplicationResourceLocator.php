@@ -37,7 +37,7 @@ final class ApplicationResourceLocator implements ResourceLocatorInterface
     /**
      * {@inheritdoc}
      */
-    public function locateResource($resourceName, ThemeInterface $theme)
+    public function locateResource(string $resourceName, ThemeInterface $theme): string
     {
         $path = sprintf('%s/%s', $theme->getPath(), $resourceName);
         if (!$this->filesystem->exists($path)) {

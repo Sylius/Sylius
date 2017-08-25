@@ -21,12 +21,12 @@ use Sylius\Bundle\ThemeBundle\Translation\Resource\TranslationResourceInterface;
 interface TranslatorResourceProviderInterface
 {
     /**
-     * @return TranslationResourceInterface[]
+     * @return array|TranslationResourceInterface[]
      */
-    public function getResources();
+    public function getResources(): array;
 
     /**
-     * @return array
+     * @return array|string[]
      */
-    public function getResourcesLocales();
+    public function getResourcesLocales(): array;
 }

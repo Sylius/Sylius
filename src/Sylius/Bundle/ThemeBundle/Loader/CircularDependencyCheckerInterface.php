@@ -25,5 +25,5 @@ interface CircularDependencyCheckerInterface
      *
      * @throws CircularDependencyFoundException
      */
-    public function check(ThemeInterface $theme);
+    public function check(ThemeInterface $theme): void;
 }

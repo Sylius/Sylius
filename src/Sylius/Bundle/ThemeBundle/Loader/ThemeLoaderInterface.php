@@ -21,9 +21,9 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 interface ThemeLoaderInterface
 {
     /**
-     * @return ThemeInterface[]
+     * @return array|ThemeInterface[]
      *
      * @throws ThemeLoadingFailedException
      */
-    public function load();
+    public function load(): array;
 }

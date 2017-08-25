@@ -24,22 +24,17 @@ use Sylius\Bundle\ThemeBundle\Locator\FileLocatorInterface;
  */
 final class FilesystemConfigurationProviderSpec extends ObjectBehavior
 {
-    function let(FileLocatorInterface $fileLocator, ConfigurationLoaderInterface $loader)
+    function let(FileLocatorInterface $fileLocator, ConfigurationLoaderInterface $loader): void
     {
         $this->beConstructedWith($fileLocator, $loader, 'configurationfile.json');
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(FilesystemConfigurationProvider::class);
-    }
-
-    function it_implements_configuration_provider_interface()
+    function it_implements_configuration_provider_interface(): void
     {
         $this->shouldImplement(ConfigurationProviderInterface::class);
     }
 
-    function it_provides_loaded_configuration_files(FileLocatorInterface $fileLocator, ConfigurationLoaderInterface $loader)
+    function it_provides_loaded_configuration_files(FileLocatorInterface $fileLocator, ConfigurationLoaderInterface $loader): void
     {
         $fileLocator->locateFilesNamed('configurationfile.json')->willReturn([
             '/cristopher/configurationfile.json',
@@ -55,7 +50,7 @@ final class FilesystemConfigurationProviderSpec extends ObjectBehavior
         ]);
     }
 
-    function it_provides_an_empty_array_if_there_were_no_themes_found(FileLocatorInterface $fileLocator)
+    function it_provides_an_empty_array_if_there_were_no_themes_found(FileLocatorInterface $fileLocator): void
     {
         $fileLocator->locateFilesNamed('configurationfile.json')->willThrow(\InvalidArgumentException::class);
 

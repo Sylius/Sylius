@@ -21,20 +21,20 @@ interface TestThemeConfigurationManagerInterface
     /**
      * @return array
      */
-    public function findAll();
+    public function findAll(): array;
 
     /**
      * @param array $configuration
      */
-    public function add(array $configuration);
+    public function add(array $configuration): void;
 
     /**
      * @param string $themeName
      */
-    public function remove($themeName);
+    public function remove(string $themeName): void;
 
     /**
      * Clear currently used configurations storage.
      */
-    public function clear();
+    public function clear(): void;
 }

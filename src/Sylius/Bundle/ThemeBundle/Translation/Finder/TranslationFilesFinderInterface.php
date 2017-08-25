@@ -23,5 +23,5 @@ interface TranslationFilesFinderInterface
      *
      * @return array Paths to translation files
      */
-    public function findTranslationFiles($path);
+    public function findTranslationFiles(string $path): array;
 }

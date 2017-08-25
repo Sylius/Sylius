@@ -23,5 +23,5 @@ interface OutputAwareInterface
     /**
      * @param OutputInterface $output
      */
-    public function setOutput(OutputInterface $output);
+    public function setOutput(OutputInterface $output): void;
 }

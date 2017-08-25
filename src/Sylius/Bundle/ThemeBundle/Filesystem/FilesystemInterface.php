@@ -174,5 +174,5 @@ interface FilesystemInterface
      *
      * @return string
      */
-    public function getFileContents($file);
+    public function getFileContents(string $file): string;
 }

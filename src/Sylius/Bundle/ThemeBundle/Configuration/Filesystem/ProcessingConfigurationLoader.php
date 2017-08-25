@@ -43,7 +43,7 @@ final class ProcessingConfigurationLoader implements ConfigurationLoaderInterfac
     /**
      * {@inheritdoc}
      */
-    public function load($identifier)
+    public function load(string $identifier): array
     {
         $rawConfiguration = $this->decoratedLoader->load($identifier);
 

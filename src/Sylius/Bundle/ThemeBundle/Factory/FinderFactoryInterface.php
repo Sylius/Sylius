@@ -23,5 +23,5 @@ interface FinderFactoryInterface
     /**
      * @return Finder
      */
-    public function create();
+    public function create(): Finder;
 }

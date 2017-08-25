@@ -23,9 +23,9 @@ interface ThemeHierarchyProviderInterface
     /**
      * @param ThemeInterface|null $theme
      *
-     * @return ThemeInterface[]
+     * @return array|ThemeInterface[]
      *
      * @throws \InvalidArgumentException If dependencies could not be resolved.
      */
-    public function getThemeHierarchy(ThemeInterface $theme = null);
+    public function getThemeHierarchy(ThemeInterface $theme): array;
 }

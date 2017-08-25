@@ -21,5 +21,5 @@ interface TranslatorLoaderProviderInterface
     /**
      * @return array Format => Loader
      */
-    public function getLoaders();
+    public function getLoaders(): array;
 }

@@ -58,7 +58,7 @@ final class Translator extends BaseTranslator implements WarmableInterface
         TranslatorLoaderProviderInterface $loaderProvider,
         TranslatorResourceProviderInterface $resourceProvider,
         MessageSelector $messageSelector,
-        $locale,
+        string $locale,
         array $options = []
     ) {
         $this->assertOptionsAreKnown($options);
@@ -77,7 +77,7 @@ final class Translator extends BaseTranslator implements WarmableInterface
     /**
      * {@inheritdoc}
      */
-    public function warmUp($cacheDir)
+    public function warmUp($cacheDir): void
     {
         // skip warmUp when translator doesn't use cache
         if (null === $this->options['cache_dir']) {
@@ -102,7 +102,7 @@ final class Translator extends BaseTranslator implements WarmableInterface
     /**
      * {@inheritdoc}
      */
-    protected function initializeCatalogue($locale)
+    protected function initializeCatalogue($locale): void
     {
         $this->initialize();
 
@@ -112,7 +112,7 @@ final class Translator extends BaseTranslator implements WarmableInterface
     /**
      * {@inheritdoc}
      */
-    protected function computeFallbackLocales($locale)
+    protected function computeFallbackLocales($locale): array
     {
         $themeModifier = $this->getLocaleModifier($locale);
         $localeWithoutModifier = $this->getLocaleWithoutModifier($locale, $themeModifier);
@@ -138,9 +138,9 @@ final class Translator extends BaseTranslator implements WarmableInterface
      *
      * @return string
      */
-    private function getLocaleModifier($locale)
+    private function getLocaleModifier(string $locale): string
     {
-        $modifier = strrchr((string) $locale, '@');
+        $modifier = strrchr($locale, '@');
 
         return $modifier ?: '';
     }
@@ -151,18 +151,18 @@ final class Translator extends BaseTranslator implements WarmableInterface
      *
      * @return string
      */
-    private function getLocaleWithoutModifier($locale, $modifier)
+    private function getLocaleWithoutModifier(string $locale, string $modifier): string
     {
         return str_replace($modifier, '', $locale);
     }
 
-    private function initialize()
+    private function initialize(): void
     {
         $this->addResources();
         $this->addLoaders();
     }
 
-    private function addResources()
+    private function addResources(): void
     {
         if ($this->resourcesLoaded) {
             return;
@@ -181,7 +181,7 @@ final class Translator extends BaseTranslator implements WarmableInterface
         $this->resourcesLoaded = true;
     }
 
-    private function addLoaders()
+    private function addLoaders(): void
     {
         $loaders = $this->loaderProvider->getLoaders();
         foreach ($loaders as $alias => $loader) {
@@ -192,7 +192,7 @@ final class Translator extends BaseTranslator implements WarmableInterface
     /**
      * @param array $options
      */
-    private function assertOptionsAreKnown(array $options)
+    private function assertOptionsAreKnown(array $options): void
     {
         if ($diff = array_diff(array_keys($options), array_keys($this->options))) {
             throw new \InvalidArgumentException(sprintf('The Translator does not support the following options: \'%s\'.', implode('\', \'', $diff)));

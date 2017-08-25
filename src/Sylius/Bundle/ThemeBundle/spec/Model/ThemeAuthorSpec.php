@@ -21,17 +21,12 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeAuthor;
  */
 final class ThemeAuthorSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ThemeAuthor::class);
-    }
-
-    function it_implements_theme_author_interface()
+    function it_implements_theme_author_interface(): void
     {
         $this->shouldImplement(ThemeAuthor::class);
     }
 
-    function it_has_name()
+    function it_has_name(): void
     {
         $this->getName()->shouldReturn(null);
 
@@ -39,7 +34,7 @@ final class ThemeAuthorSpec extends ObjectBehavior
         $this->getName()->shouldReturn('Krzysztof Krawczyk');
     }
 
-    function it_has_email()
+    function it_has_email(): void
     {
         $this->getEmail()->shouldReturn(null);
 
@@ -47,7 +42,7 @@ final class ThemeAuthorSpec extends ObjectBehavior
         $this->getEmail()->shouldReturn('cristopher@example.com');
     }
 
-    function it_has_homepage()
+    function it_has_homepage(): void
     {
         $this->getHomepage()->shouldReturn(null);
 
@@ -55,7 +50,7 @@ final class ThemeAuthorSpec extends ObjectBehavior
         $this->getHomepage()->shouldReturn('http://example.com');
     }
 
-    function it_has_role()
+    function it_has_role(): void
     {
         $this->getRole()->shouldReturn(null);
 

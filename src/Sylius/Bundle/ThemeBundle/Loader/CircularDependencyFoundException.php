@@ -24,7 +24,7 @@ final class CircularDependencyFoundException extends \DomainException
      * @param ThemeInterface[] $themes
      * @param \Exception $previous
      */
-    public function __construct(array $themes, \Exception $previous = null)
+    public function __construct(array $themes, ?\Exception $previous = null)
     {
         $cycle = $this->getCycleFromArray($themes);
 
@@ -42,7 +42,7 @@ final class CircularDependencyFoundException extends \DomainException
      *
      * @return array
      */
-    private function getCycleFromArray(array $themes)
+    private function getCycleFromArray(array $themes): array
     {
         while (reset($themes) !== end($themes) || 1 === count($themes)) {
             array_shift($themes);
@@ -60,7 +60,7 @@ final class CircularDependencyFoundException extends \DomainException
      *
      * @return string
      */
-    private function formatCycleToString(array $themes)
+    private function formatCycleToString(array $themes): string
     {
         $themesNames = array_map(function (ThemeInterface $theme) {
             return $theme->getName();

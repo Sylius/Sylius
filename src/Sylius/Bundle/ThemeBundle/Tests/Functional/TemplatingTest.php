@@ -27,7 +27,7 @@ final class TemplatingTest extends WebTestCase
      * @param string $templateName
      * @param string $contents
      */
-    public function it_renders_bundle_templates($templateName, $contents)
+    public function it_renders_bundle_templates($templateName, $contents): void
     {
         $client = self::createClient();
 
@@ -56,7 +56,7 @@ final class TemplatingTest extends WebTestCase
      * @param string $templateName
      * @param string $contents
      */
-    public function it_renders_bundle_templates_using_namespaced_paths($templateName, $contents)
+    public function it_renders_bundle_templates_using_namespaced_paths($templateName, $contents): void
     {
         $client = self::createClient();
 
@@ -85,7 +85,7 @@ final class TemplatingTest extends WebTestCase
      * @param string $templateName
      * @param string $contents
      */
-    public function it_renders_application_templates($templateName, $contents)
+    public function it_renders_application_templates($templateName, $contents): void
     {
         $client = self::createClient();
 
@@ -112,7 +112,7 @@ final class TemplatingTest extends WebTestCase
      * @param string $templateName
      * @param string $contents
      */
-    public function it_renders_application_templates_using_namespaced_paths($templateName, $contents)
+    public function it_renders_application_templates_using_namespaced_paths($templateName, $contents): void
     {
         $client = self::createClient();
 

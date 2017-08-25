@@ -34,7 +34,7 @@ final class AssetTest extends WebTestCase
      *
      * @param int $symlinkMask
      */
-    public function it_dumps_assets($symlinkMask)
+    public function it_dumps_assets($symlinkMask): void
     {
         $client = self::createClient();
 
@@ -54,7 +54,7 @@ final class AssetTest extends WebTestCase
      *
      * @param int $symlinkMask
      */
-    public function it_updates_dumped_assets_if_they_are_modified($symlinkMask)
+    public function it_updates_dumped_assets_if_they_are_modified($symlinkMask): void
     {
         $client = self::createClient();
 
@@ -80,7 +80,7 @@ final class AssetTest extends WebTestCase
      *
      * @param int $symlinkMask
      */
-    public function it_dumps_assets_correctly_even_if_nothing_has_changed($symlinkMask)
+    public function it_dumps_assets_correctly_even_if_nothing_has_changed($symlinkMask): void
     {
         $client = self::createClient();
 

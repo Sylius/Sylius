@@ -60,69 +60,67 @@ final class ThemeFilesystemLoader implements \Twig_LoaderInterface, \Twig_Exists
     /**
      * {@inheritdoc}
      */
-    public function getSourceContext($name)
+    public function getSourceContext($name): \Twig_Source
     {
         try {
-            $path = $this->findTemplate($name);
+            $path = $this->findTemplate((string) $name);
 
             return new \Twig_Source(file_get_contents($path), $name, $path);
         } catch (\Exception $exception) {
-            return $this->decoratedLoader->getSourceContext($name);
+            return $this->decoratedLoader->getSourceContext((string) $name);
         }
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getCacheKey($name)
+    public function getCacheKey($name): string
     {
         try {
-            return $this->findTemplate($name);
+            return $this->findTemplate((string) $name);
         } catch (\Exception $exception) {
-            return $this->decoratedLoader->getCacheKey($name);
+            return $this->decoratedLoader->getCacheKey((string) $name);
         }
     }
 
     /**
      * {@inheritdoc}
      */
-    public function isFresh($name, $time)
+    public function isFresh($name, $time): bool
     {
         try {
-            return filemtime($this->findTemplate($name)) <= $time;
+            return filemtime($this->findTemplate((string) $name)) <= $time;
         } catch (\Exception $exception) {
-            return $this->decoratedLoader->isFresh($name, $time);
+            return $this->decoratedLoader->isFresh((string) $name, $time);
         }
     }
 
     /**
      * {@inheritdoc}
      */
-    public function exists($name)
+    public function exists($name): bool
     {
         try {
-            return stat($this->findTemplate($name)) !== false;
+            return stat($this->findTemplate((string) $name)) !== false;
         } catch (\Exception $exception) {
-            return $this->decoratedLoader->exists($name);
+            return $this->decoratedLoader->exists((string) $name);
         }
     }
 
     /**
-     * @param TemplateReferenceInterface|string $template
+     * @param string $logicalName
      *
      * @return string
      */
-    private function findTemplate($template)
+    private function findTemplate(string $logicalName): string
     {
-        $logicalName = (string) $template;
-
         if (isset($this->cache[$logicalName])) {
-            return $this->cache[$logicalName];
+            return (string) $this->cache[$logicalName];
         }
 
-        $template = $this->templateNameParser->parse($template);
+        $template = $this->templateNameParser->parse($logicalName);
         $file = $this->templateLocator->locate($template);
 
-        return $this->cache[$logicalName] = $file;
+        return (string) $this->cache[$logicalName] = $file;
     }
 }

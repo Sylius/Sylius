@@ -69,13 +69,14 @@ final class TemplateFileLocator implements FileLocatorInterface, \Serializable
     /**
      * {@inheritdoc}
      */
-    public function locate($template, $currentPath = null, $first = true)
+    public function locate($template, $currentPath = null, $first = true): string
     {
         if (!$template instanceof TemplateReferenceInterface) {
             throw new \InvalidArgumentException('The template must be an instance of TemplateReferenceInterface.');
         }
 
-        $themes = $this->themeHierarchyProvider->getThemeHierarchy($this->themeContext->getTheme());
+        $theme = $this->themeContext->getTheme();
+        $themes = $theme !== null ? $this->themeHierarchyProvider->getThemeHierarchy($theme) : [];
         foreach ($themes as $theme) {
             try {
                 return $this->templateLocator->locateTemplate($template, $theme);
@@ -90,7 +91,7 @@ final class TemplateFileLocator implements FileLocatorInterface, \Serializable
     /**
      * {@inheritdoc}
      */
-    public function serialize()
+    public function serialize(): string
     {
         return serialize($this->decoratedFileLocator);
     }
@@ -98,7 +99,7 @@ final class TemplateFileLocator implements FileLocatorInterface, \Serializable
     /**
      * {@inheritdoc}
      */
-    public function unserialize($serialized)
+    public function unserialize($serialized): void
     {
         $this->decoratedFileLocator = unserialize($serialized);
 

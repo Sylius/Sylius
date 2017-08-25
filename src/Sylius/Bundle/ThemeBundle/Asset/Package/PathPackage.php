@@ -44,11 +44,11 @@ class PathPackage extends BasePathPackage
      * @param ContextInterface|null $context
      */
     public function __construct(
-        $basePath,
+        string $basePath,
         VersionStrategyInterface $versionStrategy,
         ThemeContextInterface $themeContext,
         PathResolverInterface $pathResolver,
-        ContextInterface $context = null
+        ?ContextInterface $context = null
     ) {
         parent::__construct($basePath, $versionStrategy, $context);
 
@@ -59,7 +59,7 @@ class PathPackage extends BasePathPackage
     /**
      * {@inheritdoc}
      */
-    public function getUrl($path)
+    public function getUrl($path): string
     {
         if ($this->isAbsoluteUrl($path)) {
             return $path;
