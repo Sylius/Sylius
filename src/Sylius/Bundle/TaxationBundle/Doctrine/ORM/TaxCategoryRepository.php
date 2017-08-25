@@ -24,7 +24,7 @@ class TaxCategoryRepository extends EntityRepository implements TaxCategoryRepos
     /**
      * {@inheritdoc}
      */
-    public function findByName($name)
+    public function findByName(string $name): array
     {
         return $this->findBy(['name' => $name]);
     }

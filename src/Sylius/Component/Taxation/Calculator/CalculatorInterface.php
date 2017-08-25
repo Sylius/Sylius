@@ -26,5 +26,5 @@ interface CalculatorInterface
      *
      * @return float
      */
-    public function calculate($base, TaxRateInterface $rate);
+    public function calculate(float $base, TaxRateInterface $rate): float;
 }

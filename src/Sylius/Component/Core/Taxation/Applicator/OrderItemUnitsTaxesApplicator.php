@@ -69,11 +69,11 @@ class OrderItemUnitsTaxesApplicator implements OrderTaxesApplicatorInterface
 
             foreach ($item->getUnits() as $unit) {
                 $taxAmount = $this->calculator->calculate($unit->getTotal(), $taxRate);
-                if (0 === $taxAmount) {
+                if (0.00 === $taxAmount) {
                     continue;
                 }
 
-                $this->addTaxAdjustment($unit, $taxAmount, $taxRate->getLabel(), $taxRate->isIncludedInPrice());
+                $this->addTaxAdjustment($unit, (int) $taxAmount, $taxRate->getLabel(), $taxRate->isIncludedInPrice());
             }
         }
     }

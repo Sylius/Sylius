@@ -321,7 +321,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function getTaxCategory()
+    public function getTaxCategory(): ?TaxCategoryInterface
     {
         return $this->taxCategory;
     }

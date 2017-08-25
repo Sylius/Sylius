@@ -57,9 +57,9 @@ class TaxCategory implements TaxCategoryInterface
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
-        return $this->getName();
+        return (string) $this->getName();
     }
 
     /**
@@ -89,7 +89,7 @@ class TaxCategory implements TaxCategoryInterface
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -97,7 +97,7 @@ class TaxCategory implements TaxCategoryInterface
     /**
      * {@inheritdoc}
      */
-    public function setName($name)
+    public function setName(?string $name): void
     {
         $this->name = $name;
     }
@@ -105,7 +105,7 @@ class TaxCategory implements TaxCategoryInterface
     /**
      * {@inheritdoc}
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -113,7 +113,7 @@ class TaxCategory implements TaxCategoryInterface
     /**
      * {@inheritdoc}
      */
-    public function setDescription($description)
+    public function setDescription(?string $description): void
     {
         $this->description = $description;
     }
@@ -121,7 +121,7 @@ class TaxCategory implements TaxCategoryInterface
     /**
      * {@inheritdoc}
      */
-    public function getRates()
+    public function getRates(): Collection
     {
         return $this->rates;
     }
@@ -129,7 +129,7 @@ class TaxCategory implements TaxCategoryInterface
     /**
      * {@inheritdoc}
      */
-    public function addRate(TaxRateInterface $rate)
+    public function addRate(TaxRateInterface $rate): void
     {
         if (!$this->hasRate($rate)) {
             $rate->setCategory($this);
@@ -140,7 +140,7 @@ class TaxCategory implements TaxCategoryInterface
     /**
      * {@inheritdoc}
      */
-    public function removeRate(TaxRateInterface $rate)
+    public function removeRate(TaxRateInterface $rate): void
     {
         if ($this->hasRate($rate)) {
             $rate->setCategory(null);
@@ -151,7 +151,7 @@ class TaxCategory implements TaxCategoryInterface
     /**
      * {@inheritdoc}
      */
-    public function hasRate(TaxRateInterface $rate)
+    public function hasRate(TaxRateInterface $rate): bool
     {
         return $this->rates->contains($rate);
     }

@@ -19,7 +19,7 @@ namespace Sylius\Component\Taxation\Model;
 interface TaxableInterface
 {
     /**
-     * @return TaxCategoryInterface
+     * @return TaxCategoryInterface|null
      */
-    public function getTaxCategory();
+    public function getTaxCategory(): ?TaxCategoryInterface;
 }

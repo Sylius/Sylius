@@ -19,8 +19,6 @@ use Sylius\Bundle\TaxationBundle\DependencyInjection\Compiler\RegisterCalculator
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
- * Taxation system for ecommerce Symfony2 applications.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class SyliusTaxationBundle extends AbstractResourceBundle

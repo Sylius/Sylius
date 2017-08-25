@@ -68,7 +68,7 @@ class ShippingMethod extends BaseShippingMethod implements ShippingMethodInterfa
     /**
      * {@inheritdoc}
      */
-    public function getTaxCategory()
+    public function getTaxCategory(): ?TaxCategoryInterface
     {
         return $this->taxCategory;
     }
