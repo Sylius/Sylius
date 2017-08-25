@@ -39,7 +39,7 @@ final class OrderLocaleAssigner
     /**
      * @param ResourceControllerEvent $event
      */
-    public function assignLocale(ResourceControllerEvent $event)
+    public function assignLocale(ResourceControllerEvent $event): void
     {
         /** @var OrderInterface $order */
         $order = $event->getSubject();

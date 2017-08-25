@@ -32,7 +32,7 @@ final class SyliusShopExtension extends Extension
     /**
      * {@inheritdoc}
      */
-    public function load(array $config, ContainerBuilder $container)
+    public function load(array $config, ContainerBuilder $container): void
     {
         $config = $this->processConfiguration($this->getConfiguration([], $container), $config);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
@@ -48,7 +48,7 @@ final class SyliusShopExtension extends Extension
      * @param array $config
      * @param ContainerBuilder $container
      */
-    private function configureCheckoutResolverIfNeeded(array $config, ContainerBuilder $container)
+    private function configureCheckoutResolverIfNeeded(array $config, ContainerBuilder $container): void
     {
         if (!$config['enabled']) {
             return;
@@ -82,7 +82,7 @@ final class SyliusShopExtension extends Extension
      *
      * @return Definition
      */
-    private function registerCheckoutRedirectListener(array $config)
+    private function registerCheckoutRedirectListener(array $config): Definition
     {
         $checkoutRedirectListener = new Definition(CheckoutRedirectListener::class, [
             new Reference('request_stack'),

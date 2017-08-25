@@ -59,7 +59,7 @@ final class OrderTotalIntegrityChecker
     /**
      * @param ResourceControllerEvent $event
      */
-    public function check(ResourceControllerEvent $event)
+    public function check(ResourceControllerEvent $event): void
     {
         /** @var OrderInterface $order */
         $order = $event->getSubject();

@@ -39,7 +39,7 @@ final class OrderCompleteListener
     /**
      * @param GenericEvent $event
      */
-    public function sendConfirmationEmail(GenericEvent $event)
+    public function sendConfirmationEmail(GenericEvent $event): void
     {
         $order = $event->getSubject();
         Assert::isInstanceOf($order, OrderInterface::class);

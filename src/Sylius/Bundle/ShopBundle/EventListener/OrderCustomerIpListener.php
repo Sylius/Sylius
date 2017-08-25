@@ -47,7 +47,7 @@ final class OrderCustomerIpListener
     /**
      * @param GenericEvent $event
      */
-    public function assignCustomerIpToOrder(GenericEvent $event)
+    public function assignCustomerIpToOrder(GenericEvent $event): void
     {
         $subject = $event->getSubject();
         Assert::isInstanceOf($subject, OrderInterface::class);

@@ -15,7 +15,6 @@ namespace spec\Sylius\Bundle\ShopBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ShopBundle\EventListener\NonChannelLocaleListener;
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 use Symfony\Bundle\SecurityBundle\Security\FirewallConfig;
 use Symfony\Bundle\SecurityBundle\Security\FirewallMap;
@@ -23,12 +22,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-/**
+/**§
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
 final class NonChannelLocaleListenerSpec extends ObjectBehavior
 {
-    function let(LocaleProviderInterface $localeProvider, FirewallMap $firewallMap)
+    function let(LocaleProviderInterface $localeProvider, FirewallMap $firewallMap): void
     {
         $this->beConstructedWith($localeProvider, $firewallMap, ['shop']);
     }
@@ -36,7 +35,7 @@ final class NonChannelLocaleListenerSpec extends ObjectBehavior
     function it_throws_exception_on_instantiation_with_no_firewall_names(
         LocaleProviderInterface $localeProvider,
         FirewallMap $firewallMap
-    ) {
+    ): void {
         $this->beConstructedWith($localeProvider, $firewallMap, []);
 
         $this
@@ -48,7 +47,7 @@ final class NonChannelLocaleListenerSpec extends ObjectBehavior
     function it_throws_exception_on_instantiation_with_non_string_firewall_names(
         LocaleProviderInterface $localeProvider,
         FirewallMap $firewallMap
-    ) {
+    ): void {
         $this->beConstructedWith($localeProvider, $firewallMap, [new \DateTime(), 1, 5.0]);
 
         $this
@@ -57,16 +56,11 @@ final class NonChannelLocaleListenerSpec extends ObjectBehavior
         ;
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(NonChannelLocaleListener::class);
-    }
-
     function it_does_nothing_if_its_not_a_master_request(
         LocaleProviderInterface $localeProvider,
         FirewallMap $firewallMap,
         GetResponseEvent $event
-    ) {
+    ): void {
         $event->isMasterRequest()->willReturn(false);
 
         $event->getRequest()->shouldNotBeCalled();
@@ -84,7 +78,7 @@ final class NonChannelLocaleListenerSpec extends ObjectBehavior
         FirewallMap $firewallMap,
         Request $request,
         GetResponseEvent $event
-    ) {
+    ): void {
         $event->isMasterRequest()->willReturn(true);
         $event->getRequest()->willReturn($request);
         $firewallMap->getFirewallConfig($request)->willReturn(null);
@@ -102,7 +96,7 @@ final class NonChannelLocaleListenerSpec extends ObjectBehavior
         FirewallMap $firewallMap,
         Request $request,
         GetResponseEvent $event
-    ) {
+    ): void {
         $event->isMasterRequest()->willReturn(true);
         $event->getRequest()->willReturn($request);
         $firewallMap->getFirewallConfig($request)->willReturn(
@@ -122,7 +116,7 @@ final class NonChannelLocaleListenerSpec extends ObjectBehavior
         FirewallMap $firewallMap,
         Request $request,
         GetResponseEvent $event
-    ) {
+    ): void {
         $event->isMasterRequest()->willReturn(true);
         $event->getRequest()->willReturn($request);
         $firewallMap->getFirewallConfig($request)->willReturn(
@@ -144,7 +138,7 @@ final class NonChannelLocaleListenerSpec extends ObjectBehavior
         FirewallMap $firewallMap,
         Request $request,
         GetResponseEvent $event
-    ) {
+    ): void {
         $event->isMasterRequest()->willReturn(true);
         $event->getRequest()->willReturn($request);
         $firewallMap->getFirewallConfig($request)->willReturn(

@@ -69,7 +69,7 @@ final class CurrencySwitchController
     /**
      * @return Response
      */
-    public function renderAction()
+    public function renderAction(): Response
     {
         /** @var ChannelInterface $channel */
         $channel = $this->channelContext->getChannel();
@@ -93,7 +93,7 @@ final class CurrencySwitchController
      *
      * @return Response
      */
-    public function switchAction(Request $request, $code)
+    public function switchAction(Request $request, string $code): Response
     {
         /** @var ChannelInterface $channel */
         $channel = $this->channelContext->getChannel();

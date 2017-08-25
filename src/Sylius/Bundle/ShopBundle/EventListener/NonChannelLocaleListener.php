@@ -63,7 +63,7 @@ final class NonChannelLocaleListener
      *
      * @throws NotFoundHttpException
      */
-    public function restrictRequestLocale(GetResponseEvent $event)
+    public function restrictRequestLocale(GetResponseEvent $event): void
     {
         if (!$event->isMasterRequest()) {
             return;
@@ -88,7 +88,7 @@ final class NonChannelLocaleListener
      *
      * @return bool
      */
-    private function isFirewallSupported(FirewallConfig $firewall = null)
+    private function isFirewallSupported(?FirewallConfig $firewall = null): bool
     {
         return
             null !== $firewall &&

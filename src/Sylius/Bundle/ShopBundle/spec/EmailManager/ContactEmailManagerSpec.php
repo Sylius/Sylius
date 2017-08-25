@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ShopBundle\EmailManager;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ShopBundle\EmailManager\ContactEmailManager;
 use Sylius\Bundle\ShopBundle\EmailManager\ContactEmailManagerInterface;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 
@@ -23,22 +22,17 @@ use Sylius\Component\Mailer\Sender\SenderInterface;
  */
 final class ContactEmailManagerSpec extends ObjectBehavior
 {
-    function let(SenderInterface $sender)
+    function let(SenderInterface $sender): void
     {
         $this->beConstructedWith($sender);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ContactEmailManager::class);
-    }
-
-    function it_implements_a_contact_email_manager_interface()
+    function it_implements_a_contact_email_manager_interface(): void
     {
         $this->shouldImplement(ContactEmailManagerInterface::class);
     }
 
-    function it_sends_a_contact_request_email(SenderInterface $sender)
+    function it_sends_a_contact_request_email(SenderInterface $sender): void
     {
         $sender
             ->send(
