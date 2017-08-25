@@ -21,18 +21,13 @@ use Sylius\Bundle\UserBundle\Form\Model\ChangePassword;
  */
 final class ChangePasswordSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ChangePassword::class);
-    }
-
-    function it_has_current_password()
+    function it_has_current_password(): void
     {
         $this->setCurrentPassword('testPassword');
         $this->getCurrentPassword()->shouldReturn('testPassword');
     }
 
-    function it_has_new_password()
+    function it_has_new_password(): void
     {
         $this->setNewPassword('testPassword');
         $this->getNewPassword()->shouldReturn('testPassword');

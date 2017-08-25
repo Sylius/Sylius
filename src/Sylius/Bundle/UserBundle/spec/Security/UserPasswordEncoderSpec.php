@@ -25,17 +25,12 @@ use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
  */
 final class UserPasswordEncoderSpec extends ObjectBehavior
 {
-    function let(EncoderFactoryInterface $encoderFactory)
+    function let(EncoderFactoryInterface $encoderFactory): void
     {
         $this->beConstructedWith($encoderFactory);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(UserPasswordEncoder::class);
-    }
-
-    function it_implements_password_updater_interface()
+    function it_implements_password_updater_interface(): void
     {
         $this->shouldImplement(UserPasswordEncoderInterface::class);
     }
@@ -44,7 +39,7 @@ final class UserPasswordEncoderSpec extends ObjectBehavior
         EncoderFactoryInterface $encoderFactory,
         PasswordEncoderInterface $passwordEncoder,
         CredentialsHolderInterface $user
-    ) {
+    ): void {
         $user->getPlainPassword()->willReturn('topSecretPlainPassword');
         $user->getSalt()->willReturn('typicalSalt');
         $encoderFactory->getEncoder(get_class($user->getWrappedObject()))->willReturn($passwordEncoder);

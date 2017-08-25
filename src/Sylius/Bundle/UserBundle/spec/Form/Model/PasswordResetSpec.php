@@ -21,12 +21,7 @@ use Sylius\Bundle\UserBundle\Form\Model\PasswordReset;
  */
 final class PasswordResetSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(PasswordReset::class);
-    }
-
-    function it_has_new_password()
+    function it_has_new_password(): void
     {
         $this->setPassword('testPassword');
         $this->getPassword()->shouldReturn('testPassword');

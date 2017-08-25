@@ -31,15 +31,10 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
  */
 final class UserDeleteListenerSpec extends ObjectBehavior
 {
-    function let(TokenStorageInterface $tokenStorage, SessionInterface $session, FlashBagInterface $flashBag)
+    function let(TokenStorageInterface $tokenStorage, SessionInterface $session, FlashBagInterface $flashBag): void
     {
         $this->beConstructedWith($tokenStorage, $session);
         $session->getBag('flashes')->willReturn($flashBag);
-    }
-
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(UserDeleteListener::class);
     }
 
     function it_deletes_user_if_it_is_different_than_currently_logged_one(
@@ -49,7 +44,7 @@ final class UserDeleteListenerSpec extends ObjectBehavior
         UserInterface $userToBeDeleted,
         UserInterface $currentlyLoggedUser,
         TokenInterface $tokenInterface
-    ) {
+    ): void {
         $event->getSubject()->willReturn($userToBeDeleted);
         $userToBeDeleted->getId()->willReturn(11);
 
@@ -69,7 +64,7 @@ final class UserDeleteListenerSpec extends ObjectBehavior
         ResourceControllerEvent $event,
         UserInterface $userToBeDeleted,
         TokenInterface $tokenInterface
-    ) {
+    ): void {
         $event->getSubject()->willReturn($userToBeDeleted);
         $userToBeDeleted->getId()->willReturn(11);
 
@@ -89,7 +84,7 @@ final class UserDeleteListenerSpec extends ObjectBehavior
         FlashBagInterface $flashBag,
         ResourceControllerEvent $event,
         UserInterface $userToBeDeleted
-    ) {
+    ): void {
         $event->getSubject()->willReturn($userToBeDeleted);
         $userToBeDeleted->getId()->willReturn(11);
 
@@ -103,7 +98,7 @@ final class UserDeleteListenerSpec extends ObjectBehavior
         $this->deleteUser($event);
     }
 
-    function it_does_not_allow_to_delete_currently_logged_user(ResourceControllerEvent $event, UserInterface $userToBeDeleted, UserInterface $currentlyLoggedInUser, $tokenStorage, $flashBag, TokenInterface $token)
+    function it_does_not_allow_to_delete_currently_logged_user(ResourceControllerEvent $event, UserInterface $userToBeDeleted, UserInterface $currentlyLoggedInUser, $tokenStorage, $flashBag, TokenInterface $token): void
     {
         $event->getSubject()->willReturn($userToBeDeleted);
         $userToBeDeleted->getId()->willReturn(1);

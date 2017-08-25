@@ -27,21 +27,16 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  */
 final class PasswordUpdaterListenerSpec extends ObjectBehavior
 {
-    function let(PasswordUpdaterInterface $passwordUpdater)
+    function let(PasswordUpdaterInterface $passwordUpdater): void
     {
         $this->beConstructedWith($passwordUpdater);
-    }
-
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(PasswordUpdaterListener::class);
     }
 
     function it_updates_password_for_generic_event(
         PasswordUpdaterInterface $passwordUpdater,
         GenericEvent $event,
         UserInterface $user
-    ) {
+    ): void {
         $event->getSubject()->willReturn($user);
 
         $user->getPlainPassword()->willReturn('testPassword');
@@ -51,12 +46,12 @@ final class PasswordUpdaterListenerSpec extends ObjectBehavior
         $this->genericEventUpdater($event);
     }
 
-    function it_allows_to_update_password_for_generic_event_for_user_interface_implementation_only(GenericEvent $event)
+    function it_allows_to_update_password_for_generic_event_for_user_interface_implementation_only(GenericEvent $event): void
     {
         $event->getSubject()->willReturn('user');
 
         $this
-            ->shouldThrow(new UnexpectedTypeException('user', UserInterface::class))
+            ->shouldThrow(\TypeError::class)
             ->during('genericEventUpdater', [$event])
         ;
     }
@@ -65,7 +60,7 @@ final class PasswordUpdaterListenerSpec extends ObjectBehavior
         PasswordUpdaterInterface $passwordUpdater,
         LifecycleEventArgs $event,
         UserInterface $user
-    ) {
+    ): void {
         $event->getEntity()->willReturn($user);
 
         $user->getPlainPassword()->willReturn('testPassword');
@@ -79,7 +74,7 @@ final class PasswordUpdaterListenerSpec extends ObjectBehavior
         PasswordUpdaterInterface $passwordUpdater,
         LifecycleEventArgs $event,
         UserInterface $user
-    ) {
+    ): void {
         $event->getEntity()->willReturn($user);
 
         $user->getPlainPassword()->willReturn('testPassword');
@@ -91,7 +86,7 @@ final class PasswordUpdaterListenerSpec extends ObjectBehavior
 
     function it_updates_password_on_pre_persist_doctrine_event_for_user_interface_implementation_only(
         PasswordUpdaterInterface $passwordUpdater,
-        LifecycleEventArgs $event)
+        LifecycleEventArgs $event): void
     {
         $event->getEntity()->willReturn('user');
         $passwordUpdater->updatePassword(Argument::any())->shouldNotBeCalled();
@@ -102,7 +97,7 @@ final class PasswordUpdaterListenerSpec extends ObjectBehavior
     function it_updates_password_on_pre_update_doctrine_event_for_user_interface_implementation_only(
         PasswordUpdaterInterface $passwordUpdater,
         LifecycleEventArgs $event
-    ) {
+    ): void {
         $event->getEntity()->willReturn('user');
         $passwordUpdater->updatePassword(Argument::any())->shouldNotBeCalled();
 

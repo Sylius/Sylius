@@ -27,7 +27,7 @@ class DemoteUserCommand extends AbstractRoleCommand
     /**
      * {@inheritdoc}
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('sylius:user:demote')
@@ -49,7 +49,7 @@ EOT
     /**
      * {@inheritdoc}
      */
-    protected function executeRoleCommand(InputInterface $input, OutputInterface $output, UserInterface $user, array $securityRoles)
+    protected function executeRoleCommand(InputInterface $input, OutputInterface $output, UserInterface $user, array $securityRoles): void
     {
         $error = false;
 
