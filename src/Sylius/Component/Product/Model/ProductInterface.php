@@ -36,9 +36,9 @@ interface ProductInterface extends
     TranslatableInterface
 {
     /**
-     * @return string
+     * @return string|null
      */
-    public function getName();
+    public function getName(): ?string;
 
     /**
      * @param string $name

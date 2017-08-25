@@ -108,7 +108,7 @@ class Product implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->getTranslation()->getName();
     }

@@ -85,6 +85,12 @@
 
 * `TaxonInterface::getParents` method was removed (taxon has at most one parent).
 
+### Review / ReviewBundle
+
+* The `ReviewInterface::setAuthor` method does not longer have a default null argument and requires one to be explicitly passed.
+* The `ReviewFactoryInterface::createForSubjectWithReviewer` method does not longer have a default null value for `$reviewer` argument and requires one to be explicitly passed.
+* Default null value of `ReviewFactoryInterface::createForSubjectWithReviewer` was removed. To create a review without reviewer use `createForSubject` method from the same interface instead. 
+
 ### Shipping / ShippingBundle
 
 * `UnresolvedDefaultShippingMethodException` has been made final, use decoration instead of extending it.

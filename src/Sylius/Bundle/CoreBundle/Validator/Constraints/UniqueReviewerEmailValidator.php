@@ -64,7 +64,7 @@ class UniqueReviewerEmailValidator extends ConstraintValidator
      */
     public function validate($review, Constraint $constraint)
     {
-        /* @var $customer ReviewerInterface */
+        /* @var ReviewerInterface $customer */
         $customer = $review->getAuthor();
 
         $token = $this->tokenStorage->getToken();
@@ -90,6 +90,6 @@ class UniqueReviewerEmailValidator extends ConstraintValidator
             null !== $token &&
             $this->authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') &&
             $token->getUser() instanceof UserInterface
-            ;
+        ;
     }
 }

@@ -39,7 +39,7 @@ final class LoadMetadataSubscriber implements EventSubscriber
     /**
      * {@inheritdoc}
      */
-    public function getSubscribedEvents()
+    public function getSubscribedEvents(): array
     {
         return [
             'loadClassMetadata',
@@ -49,7 +49,7 @@ final class LoadMetadataSubscriber implements EventSubscriber
     /**
      * @param LoadClassMetadataEventArgs $eventArguments
      */
-    public function loadClassMetadata(LoadClassMetadataEventArgs $eventArguments)
+    public function loadClassMetadata(LoadClassMetadataEventArgs $eventArguments): void
     {
         $metadata = $eventArguments->getClassMetadata();
         $metadataFactory = $eventArguments->getEntityManager()->getMetadataFactory();
@@ -80,8 +80,11 @@ final class LoadMetadataSubscriber implements EventSubscriber
      *
      * @return array
      */
-    private function createSubjectMapping($reviewableEntity, $subject, ClassMetadata $reviewableEntityMetadata)
-    {
+    private function createSubjectMapping(
+        string $reviewableEntity,
+        string $subject,
+        ClassMetadata $reviewableEntityMetadata
+    ): array {
         return [
             'fieldName' => 'reviewSubject',
             'targetEntity' => $reviewableEntity,
@@ -101,7 +104,7 @@ final class LoadMetadataSubscriber implements EventSubscriber
      *
      * @return array
      */
-    private function createReviewerMapping($reviewerEntity, ClassMetadata $reviewerEntityMetadata)
+    private function createReviewerMapping(string $reviewerEntity, ClassMetadata $reviewerEntityMetadata): array
     {
         return [
             'fieldName' => 'author',
@@ -121,7 +124,7 @@ final class LoadMetadataSubscriber implements EventSubscriber
      *
      * @return array
      */
-    private function createReviewsMapping($reviewEntity)
+    private function createReviewsMapping(string $reviewEntity): array
     {
         return [
             'fieldName' => 'reviews',

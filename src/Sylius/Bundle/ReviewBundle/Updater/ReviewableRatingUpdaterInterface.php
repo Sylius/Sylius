@@ -25,10 +25,10 @@ interface ReviewableRatingUpdaterInterface
     /**
      * @param ReviewableInterface $reviewSubject
      */
-    public function update(ReviewableInterface $reviewSubject);
+    public function update(ReviewableInterface $reviewSubject): void;
 
     /**
      * @param ReviewInterface $review
      */
-    public function updateFromReview(ReviewInterface $review);
+    public function updateFromReview(ReviewInterface $review): void;
 }
