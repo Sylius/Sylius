@@ -47,7 +47,7 @@ class CurrencyFixture extends AbstractFixture
     /**
      * {@inheritdoc}
      */
-    public function load(array $options)
+    public function load(array $options): void
     {
         foreach ($options['currencies'] as $currencyCode) {
             /** @var CurrencyInterface $currency */
@@ -64,7 +64,7 @@ class CurrencyFixture extends AbstractFixture
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'currency';
     }
@@ -72,7 +72,7 @@ class CurrencyFixture extends AbstractFixture
     /**
      * {@inheritdoc}
      */
-    protected function configureOptionsNode(ArrayNodeDefinition $optionsNode)
+    protected function configureOptionsNode(ArrayNodeDefinition $optionsNode): void
     {
         $optionsNode
             ->children()
