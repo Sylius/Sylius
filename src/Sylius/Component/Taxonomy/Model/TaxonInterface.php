@@ -47,6 +47,11 @@ interface TaxonInterface extends CodeAwareInterface, TranslatableInterface, Reso
     /**
      * @return Collection|TaxonInterface[]
      */
+    public function getAncestors(): Collection;
+
+    /**
+     * @return Collection|TaxonInterface[]
+     */
     public function getChildren(): Collection;
 
     /**

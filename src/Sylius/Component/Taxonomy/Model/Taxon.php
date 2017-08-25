@@ -149,6 +149,20 @@ class Taxon implements TaxonInterface
     /**
      * {@inheritdoc}
      */
+    public function getAncestors(): Collection
+    {
+        $ancestors = [];
+
+        for ($ancestor = $this->getParent(); null !== $ancestor; $ancestor = $ancestor->getParent()) {
+            $ancestors[] = $ancestor;
+        }
+
+        return new ArrayCollection($ancestors);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getChildren(): Collection
     {
         return $this->children;

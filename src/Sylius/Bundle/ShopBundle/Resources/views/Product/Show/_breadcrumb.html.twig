@@ -3,13 +3,13 @@
     <div class="divider"> / </div>
     {% if product.mainTaxon is not null %}
         {% set taxon = product.mainTaxon %}
-        {% set parents = taxon.parents|reverse %}
+        {% set ancestors = taxon.ancestors|reverse %}
 
-        {% for parent in parents %}
-            {% if parent.isRoot() %}
-                <div class="section">{{ parent.name }}</div>
+        {% for ancestor in ancestors %}
+            {% if ancestor.root %}
+                <div class="section">{{ ancestor.name }}</div>
             {% else %}
-                <a href="{{ path('sylius_shop_product_index', {'slug': parent.slug, '_locale': parent.translation.locale}) }}" class="section">{{ parent.name }}</a>
+                <a href="{{ path('sylius_shop_product_index', {'slug': ancestor.slug, '_locale': ancestor.translation.locale}) }}" class="section">{{ ancestor.name }}</a>
             {% endif %}
             <div class="divider"> / </div>
         {% endfor %}
