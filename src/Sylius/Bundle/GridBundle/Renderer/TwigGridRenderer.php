@@ -79,7 +79,7 @@ final class TwigGridRenderer implements GridRendererInterface
         ServiceRegistryInterface $fieldsRegistry,
         FormFactoryInterface $formFactory,
         FormTypeRegistryInterface $formTypeRegistry,
-        $defaultTemplate,
+        string $defaultTemplate,
         array $actionTemplates = [],
         array $filterTemplates = []
     ) {
@@ -95,7 +95,7 @@ final class TwigGridRenderer implements GridRendererInterface
     /**
      * {@inheritdoc}
      */
-    public function render(GridViewInterface $gridView, $template = null)
+    public function render(GridViewInterface $gridView, ?string $template = null)
     {
         return $this->twig->render($template ?: $this->defaultTemplate, ['grid' => $gridView]);
     }
@@ -166,7 +166,7 @@ final class TwigGridRenderer implements GridRendererInterface
      *
      * @throws \InvalidArgumentException
      */
-    private function getFilterTemplate(Filter $filter)
+    private function getFilterTemplate(Filter $filter): string
     {
         $template = $filter->getTemplate();
         if (null !== $template) {

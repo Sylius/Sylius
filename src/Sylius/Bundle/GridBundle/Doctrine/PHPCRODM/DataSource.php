@@ -17,6 +17,7 @@ use Doctrine\ODM\PHPCR\Query\Builder\QueryBuilder;
 use Pagerfanta\Adapter\DoctrineODMPhpcrAdapter;
 use Pagerfanta\Pagerfanta;
 use Sylius\Component\Grid\Data\DataSourceInterface;
+use Sylius\Component\Grid\Data\ExpressionBuilderInterface;
 use Sylius\Component\Grid\Parameters;
 
 final class DataSource implements DataSourceInterface
@@ -44,7 +45,7 @@ final class DataSource implements DataSourceInterface
     /**
      * {@inheritdoc}
      */
-    public function restrict($expression, $condition = DataSourceInterface::CONDITION_AND)
+    public function restrict($expression, string $condition = DataSourceInterface::CONDITION_AND): void
     {
         switch ($condition) {
             case DataSourceInterface::CONDITION_AND:
@@ -67,7 +68,7 @@ final class DataSource implements DataSourceInterface
     /**
      * {@inheritdoc}
      */
-    public function getExpressionBuilder()
+    public function getExpressionBuilder(): ExpressionBuilderInterface
     {
         return $this->expressionBuilder;
     }

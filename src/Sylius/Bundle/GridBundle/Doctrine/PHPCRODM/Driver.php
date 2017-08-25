@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\GridBundle\Doctrine\PHPCRODM;
 
 use Doctrine\ODM\PHPCR\DocumentManagerInterface;
+use Sylius\Component\Grid\Data\DataSourceInterface;
 use Sylius\Component\Grid\Data\DriverInterface;
 use Sylius\Component\Grid\Parameters;
 
@@ -45,7 +46,7 @@ final class Driver implements DriverInterface
     /**
      * {@inheritdoc}
      */
-    public function getDataSource(array $configuration, Parameters $parameters)
+    public function getDataSource(array $configuration, Parameters $parameters): DataSourceInterface
     {
         if (!array_key_exists('class', $configuration)) {
             throw new \InvalidArgumentException('"class" must be configured.');

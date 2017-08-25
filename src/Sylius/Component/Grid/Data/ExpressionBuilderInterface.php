@@ -21,133 +21,133 @@ interface ExpressionBuilderInterface
     /**
      * @param mixed ...$expressions
      *
-     * @return self
+     * @return mixed
      */
-    public function andX(...$expressions): self;
+    public function andX(...$expressions);
 
     /**
      * @param mixed ...$expressions
      *
-     * @return self
+     * @return mixed
      */
-    public function orX(...$expressions): self;
+    public function orX(...$expressions);
 
     /**
      * @param string $field
      * @param string $operator
      * @param mixed $value
      *
-     * @return self
+     * @return mixed
      */
-    public function comparison(string $field, string $operator, $value): self;
+    public function comparison(string $field, string $operator, $value);
 
     /**
      * @param string $field
      * @param mixed $value
      *
-     * @return self
+     * @return mixed
      */
-    public function equals(string $field, $value): self;
+    public function equals(string $field, $value);
 
     /**
      * @param string $field
      * @param mixed $value
      *
-     * @return self
+     * @return mixed
      */
-    public function notEquals(string $field, $value): self;
+    public function notEquals(string $field, $value);
 
     /**
      * @param string $field
      * @param mixed $value
      *
-     * @return self
+     * @return mixed
      */
-    public function lessThan(string $field, $value): self;
+    public function lessThan(string $field, $value);
 
     /**
      * @param string $field
      * @param mixed $value
      *
-     * @return self
+     * @return mixed
      */
-    public function lessThanOrEqual(string $field, $value): self;
+    public function lessThanOrEqual(string $field, $value);
 
     /**
      * @param string $field
      * @param mixed $value
      *
-     * @return self
+     * @return mixed
      */
-    public function greaterThan(string $field, $value): self;
+    public function greaterThan(string $field, $value);
 
     /**
      * @param string $field
      * @param mixed $value
      *
-     * @return self
+     * @return mixed
      */
-    public function greaterThanOrEqual(string $field, $value): self;
+    public function greaterThanOrEqual(string $field, $value);
 
     /**
      * @param string $field
      * @param array $values
      *
-     * @return self
+     * @return mixed
      */
-    public function in(string $field, array $values): self;
+    public function in(string $field, array $values);
 
     /**
      * @param string $field
      * @param array $values
      *
-     * @return self
+     * @return mixed
      */
-    public function notIn(string $field, array $values): self;
+    public function notIn(string $field, array $values);
 
     /**
      * @param string $field
      *
-     * @return self
+     * @return mixed
      */
-    public function isNull(string $field): self;
+    public function isNull(string $field);
 
     /**
      * @param string $field
      *
-     * @return self
+     * @return mixed
      */
-    public function isNotNull(string $field): self;
-
-    /**
-     * @param string $field
-     * @param string $pattern
-     *
-     * @return self
-     */
-    public function like(string $field, string $pattern): self;
+    public function isNotNull(string $field);
 
     /**
      * @param string $field
      * @param string $pattern
      *
-     * @return self
+     * @return mixed
      */
-    public function notLike(string $field, string $pattern): self;
+    public function like(string $field, string $pattern);
+
+    /**
+     * @param string $field
+     * @param string $pattern
+     *
+     * @return mixed
+     */
+    public function notLike(string $field, string $pattern);
 
     /**
      * @param string $field
      * @param string $direction
      *
-     * @return self
+     * @return mixed
      */
-    public function orderBy(string $field, string $direction): self;
+    public function orderBy(string $field, string $direction);
 
     /**
      * @param string $field
      * @param string $direction
      *
-     * @return self
+     * @return mixed
      */
-    public function addOrderBy(string $field, string $direction): self;
+    public function addOrderBy(string $field, string $direction);
 }
