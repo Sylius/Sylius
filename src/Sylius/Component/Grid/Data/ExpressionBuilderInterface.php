@@ -23,14 +23,14 @@ interface ExpressionBuilderInterface
      *
      * @return self
      */
-    public function andX(...$expressions);
+    public function andX(...$expressions): self;
 
     /**
      * @param mixed ...$expressions
      *
      * @return self
      */
-    public function orX(...$expressions);
+    public function orX(...$expressions): self;
 
     /**
      * @param string $field
@@ -39,7 +39,7 @@ interface ExpressionBuilderInterface
      *
      * @return self
      */
-    public function comparison($field, $operator, $value);
+    public function comparison(string $field, string $operator, $value): self;
 
     /**
      * @param string $field
@@ -47,7 +47,7 @@ interface ExpressionBuilderInterface
      *
      * @return self
      */
-    public function equals($field, $value);
+    public function equals(string $field, $value): self;
 
     /**
      * @param string $field
@@ -55,7 +55,7 @@ interface ExpressionBuilderInterface
      *
      * @return self
      */
-    public function notEquals($field, $value);
+    public function notEquals(string $field, $value): self;
 
     /**
      * @param string $field
@@ -63,7 +63,7 @@ interface ExpressionBuilderInterface
      *
      * @return self
      */
-    public function lessThan($field, $value);
+    public function lessThan(string $field, $value): self;
 
     /**
      * @param string $field
@@ -71,7 +71,7 @@ interface ExpressionBuilderInterface
      *
      * @return self
      */
-    public function lessThanOrEqual($field, $value);
+    public function lessThanOrEqual(string $field, $value): self;
 
     /**
      * @param string $field
@@ -79,7 +79,7 @@ interface ExpressionBuilderInterface
      *
      * @return self
      */
-    public function greaterThan($field, $value);
+    public function greaterThan(string $field, $value): self;
 
     /**
      * @param string $field
@@ -87,7 +87,7 @@ interface ExpressionBuilderInterface
      *
      * @return self
      */
-    public function greaterThanOrEqual($field, $value);
+    public function greaterThanOrEqual(string $field, $value): self;
 
     /**
      * @param string $field
@@ -95,7 +95,7 @@ interface ExpressionBuilderInterface
      *
      * @return self
      */
-    public function in($field, array $values);
+    public function in(string $field, array $values): self;
 
     /**
      * @param string $field
@@ -103,29 +103,21 @@ interface ExpressionBuilderInterface
      *
      * @return self
      */
-    public function notIn($field, array $values);
+    public function notIn(string $field, array $values): self;
 
     /**
      * @param string $field
      *
      * @return self
      */
-    public function isNull($field);
+    public function isNull(string $field): self;
 
     /**
      * @param string $field
      *
      * @return self
      */
-    public function isNotNull($field);
-
-    /**
-     * @param string $field
-     * @param string $pattern
-     *
-     * @return self
-     */
-    public function like($field, $pattern);
+    public function isNotNull(string $field): self;
 
     /**
      * @param string $field
@@ -133,7 +125,15 @@ interface ExpressionBuilderInterface
      *
      * @return self
      */
-    public function notLike($field, $pattern);
+    public function like(string $field, string $pattern): self;
+
+    /**
+     * @param string $field
+     * @param string $pattern
+     *
+     * @return self
+     */
+    public function notLike(string $field, string $pattern): self;
 
     /**
      * @param string $field
@@ -141,7 +141,7 @@ interface ExpressionBuilderInterface
      *
      * @return self
      */
-    public function orderBy($field, $direction);
+    public function orderBy(string $field, string $direction): self;
 
     /**
      * @param string $field
@@ -149,5 +149,5 @@ interface ExpressionBuilderInterface
      *
      * @return self
      */
-    public function addOrderBy($field, $direction);
+    public function addOrderBy(string $field, string $direction): self;
 }

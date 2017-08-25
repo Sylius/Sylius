@@ -24,5 +24,5 @@ interface ArrayToDefinitionConverterInterface
      *
      * @return Grid
      */
-    public function convert($code, array $configuration);
+    public function convert(string $code, array $configuration): Grid;
 }

@@ -25,7 +25,7 @@ interface GridViewFactoryInterface
      * @param Grid $grid
      * @param Parameters $parameters
      *
-     * @return GridView
+     * @return GridViewInterface
      */
-    public function create(Grid $grid, Parameters $parameters);
+    public function create(Grid $grid, Parameters $parameters): GridViewInterface;
 }

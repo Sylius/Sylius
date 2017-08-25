@@ -15,6 +15,7 @@ namespace Sylius\Component\Grid\Provider;
 
 use Sylius\Component\Grid\Definition\ArrayToDefinitionConverterInterface;
 use Sylius\Component\Grid\Definition\Grid;
+use Sylius\Component\Grid\Exception\UndefinedGridException;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -44,7 +45,7 @@ final class ArrayGridProvider implements GridProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function get($code)
+    public function get(string $code): Grid
     {
         if (!array_key_exists($code, $this->grids)) {
             throw new UndefinedGridException($code);
@@ -54,7 +55,13 @@ final class ArrayGridProvider implements GridProviderInterface
         return clone $this->grids[$code];
     }
 
-    private function extend(array $gridConfiguration, array $parentGridConfiguration)
+    /**
+     * @param array $gridConfiguration
+     * @param array $parentGridConfiguration
+     *
+     * @return array
+     */
+    private function extend(array $gridConfiguration, array $parentGridConfiguration): array
     {
         unset($parentGridConfiguration['sorting']); // Do not inherit sorting.
 

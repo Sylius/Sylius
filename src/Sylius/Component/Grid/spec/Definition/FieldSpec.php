@@ -14,34 +14,28 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\Grid\Definition;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Grid\Definition\Field;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class FieldSpec extends ObjectBehavior
 {
-    function let()
+    function let(): void
     {
         $this->beConstructedThrough('fromNameAndType', ['enabled', 'boolean']);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(Field::class);
-    }
-
-    function it_has_name()
+    function it_has_name(): void
     {
         $this->getName()->shouldReturn('enabled');
     }
 
-    function it_has_type()
+    function it_has_type(): void
     {
         $this->getType()->shouldReturn('boolean');
     }
 
-    function it_has_path_which_defaults_to_name()
+    function it_has_path_which_defaults_to_name(): void
     {
         $this->getPath()->shouldReturn('enabled');
 
@@ -49,7 +43,7 @@ final class FieldSpec extends ObjectBehavior
         $this->getPath()->shouldReturn('method.enabled');
     }
 
-    function it_has_label_which_defaults_to_name()
+    function it_has_label_which_defaults_to_name(): void
     {
         $this->getLabel()->shouldReturn('enabled');
 
@@ -57,7 +51,7 @@ final class FieldSpec extends ObjectBehavior
         $this->getLabel()->shouldReturn('Is enabled?');
     }
 
-    function it_is_toggleable()
+    function it_is_toggleable(): void
     {
         $this->isEnabled()->shouldReturn(true);
 
@@ -67,7 +61,7 @@ final class FieldSpec extends ObjectBehavior
         $this->isEnabled()->shouldReturn(true);
     }
 
-    function it_knows_by_which_property_it_can_be_sorted()
+    function it_knows_by_which_property_it_can_be_sorted(): void
     {
         $this->getSortable()->shouldReturn(null);
 
@@ -75,7 +69,7 @@ final class FieldSpec extends ObjectBehavior
         $this->getSortable()->shouldReturn('method.enabled');
     }
 
-    function its_sorted_by_name_when_sortable_is_not_set()
+    function its_sorted_by_name_when_sortable_is_not_set(): void
     {
         $this->getSortable()->shouldReturn(null);
 
@@ -83,23 +77,23 @@ final class FieldSpec extends ObjectBehavior
         $this->getSortable()->shouldReturn('enabled');
     }
 
-    function it_has_no_options_by_default()
+    function it_has_no_options_by_default(): void
     {
         $this->getOptions()->shouldReturn([]);
     }
 
-    function it_can_have_options()
+    function it_can_have_options(): void
     {
         $this->setOptions(['template' => 'SyliusUiBundle:Grid/Field:_status.html.twig']);
         $this->getOptions()->shouldReturn(['template' => 'SyliusUiBundle:Grid/Field:_status.html.twig']);
     }
 
-    function it_has_last_position_by_default()
+    function it_has_last_position_by_default(): void
     {
         $this->getPosition()->shouldReturn(100);
     }
 
-    function its_position_is_mutable()
+    function its_position_is_mutable(): void
     {
         $this->setPosition(1);
         $this->getPosition()->shouldReturn(1);

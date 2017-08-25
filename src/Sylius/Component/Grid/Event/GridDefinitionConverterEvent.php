@@ -37,7 +37,7 @@ final class GridDefinitionConverterEvent extends Event
     /**
      * @return Grid
      */
-    public function getGrid()
+    public function getGrid(): Grid
     {
         return $this->grid;
     }

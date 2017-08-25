@@ -16,26 +16,19 @@ namespace spec\Sylius\Component\Grid\FieldTypes;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Grid\DataExtractor\DataExtractorInterface;
 use Sylius\Component\Grid\Definition\Field;
-use Sylius\Component\Grid\FieldTypes\DatetimeFieldType;
 use Sylius\Component\Grid\FieldTypes\FieldTypeInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class DatetimeFieldTypeSpec extends ObjectBehavior
 {
-    function let(DataExtractorInterface $dataExtractor)
+    function let(DataExtractorInterface $dataExtractor): void
     {
         $this->beConstructedWith($dataExtractor);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(DatetimeFieldType::class);
-    }
-
-    function it_is_a_grid_field_type()
+    function it_is_a_grid_field_type(): void
     {
         $this->shouldImplement(FieldTypeInterface::class);
     }
@@ -44,7 +37,7 @@ final class DatetimeFieldTypeSpec extends ObjectBehavior
         DataExtractorInterface $dataExtractor,
         \DateTime $dateTime,
         Field $field
-    ) {
+    ): void {
         $dataExtractor->get($field, ['foo' => 'bar'])->willReturn($dateTime);
 
         $dateTime->format('Y-m-d')->willReturn('2001-10-10');
@@ -54,7 +47,7 @@ final class DatetimeFieldTypeSpec extends ObjectBehavior
         ])->shouldReturn('2001-10-10');
     }
 
-    function it_returns_null_if_property_accessor_returns_null(DataExtractorInterface $dataExtractor, Field $field)
+    function it_returns_null_if_property_accessor_returns_null(DataExtractorInterface $dataExtractor, Field $field): void
     {
         $dataExtractor->get($field, ['foo' => 'bar'])->willReturn(null);
 
@@ -63,7 +56,7 @@ final class DatetimeFieldTypeSpec extends ObjectBehavior
         ])->shouldReturn(null);
     }
 
-    function it_throws_exception_if_returned_value_is_not_datetime(DataExtractorInterface $dataExtractor, Field $field)
+    function it_throws_exception_if_returned_value_is_not_datetime(DataExtractorInterface $dataExtractor, Field $field): void
     {
         $dataExtractor->get($field, ['foo' => 'bar'])->willReturn('badObject');
 

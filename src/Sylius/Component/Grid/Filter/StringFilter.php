@@ -38,7 +38,7 @@ final class StringFilter implements FilterInterface
     /**
      * {@inheritdoc}
      */
-    public function apply(DataSourceInterface $dataSource, $name, $data, array $options)
+    public function apply(DataSourceInterface $dataSource, string $name, $data, array $options): void
     {
         $expressionBuilder = $dataSource->getExpressionBuilder();
 
@@ -86,9 +86,15 @@ final class StringFilter implements FilterInterface
      * @param mixed $value
      *
      * @return ExpressionBuilderInterface
+     *
+     * @throws \InvalidArgumentException
      */
-    private function getExpression(ExpressionBuilderInterface $expressionBuilder, $type, $field, $value)
-    {
+    private function getExpression(
+        ExpressionBuilderInterface $expressionBuilder,
+        string $type,
+        string $field,
+        $value
+    ): ExpressionBuilderInterface {
         switch ($type) {
             case self::TYPE_EQUAL:
                 return $expressionBuilder->equals($field, $value);

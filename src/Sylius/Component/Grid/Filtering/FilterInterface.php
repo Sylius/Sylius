@@ -26,5 +26,5 @@ interface FilterInterface
      * @param mixed $data
      * @param array $options
      */
-    public function apply(DataSourceInterface $dataSource, $name, $data, array $options);
+    public function apply(DataSourceInterface $dataSource, string $name, $data, array $options): void;
 }

@@ -29,24 +29,24 @@ interface GridViewInterface
     /**
      * @return Grid
      */
-    public function getDefinition();
+    public function getDefinition(): Grid;
 
     /**
      * @return Parameters
      */
-    public function getParameters();
+    public function getParameters(): Parameters;
 
     /**
      * @param string $fieldName
      *
-     * @return string
+     * @return string|null
      */
-    public function getSortingOrder($fieldName);
+    public function getSortingOrder(string $fieldName): ?string;
 
     /**
      * @param string $fieldName
      *
      * @return bool
      */
-    public function isSortedBy($fieldName);
+    public function isSortedBy(string $fieldName): bool;
 }

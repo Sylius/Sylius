@@ -15,34 +15,28 @@ namespace spec\Sylius\Component\Grid\Definition;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Grid\Definition\Action;
-use Sylius\Component\Grid\Definition\ActionGroup;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class ActionGroupSpec extends ObjectBehavior
 {
-    function let()
+    function let(): void
     {
         $this->beConstructedThrough('named', ['row']);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ActionGroup::class);
-    }
-
-    function it_has_code()
+    function it_has_code(): void
     {
         $this->getName()->shouldReturn('row');
     }
 
-    function it_does_not_have_any_actions_by_default()
+    function it_does_not_have_any_actions_by_default(): void
     {
         $this->getActions()->shouldReturn([]);
     }
 
-    function it_can_have_action_definitions(Action $action)
+    function it_can_have_action_definitions(Action $action): void
     {
         $action->getName()->willReturn('display_summary');
 
@@ -51,7 +45,7 @@ final class ActionGroupSpec extends ObjectBehavior
         $this->getActions()->shouldReturn(['display_summary' => $action]);
     }
 
-    function it_cannot_have_two_actions_with_the_same_name(Action $firstAction, Action $secondAction)
+    function it_cannot_have_two_actions_with_the_same_name(Action $firstAction, Action $secondAction): void
     {
         $firstAction->getName()->willReturn('read_book');
         $secondAction->getName()->willReturn('read_book');
@@ -64,7 +58,7 @@ final class ActionGroupSpec extends ObjectBehavior
         ;
     }
 
-    function it_knows_if_action_with_given_name_already_exists(Action $action)
+    function it_knows_if_action_with_given_name_already_exists(Action $action): void
     {
         $action->getName()->willReturn('read_book');
         $this->addAction($action);

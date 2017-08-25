@@ -27,7 +27,7 @@ final class BooleanFilter implements FilterInterface
     /**
      * {@inheritdoc}
      */
-    public function apply(DataSourceInterface $dataSource, $name, $data, array $options)
+    public function apply(DataSourceInterface $dataSource, string $name, $data, array $options): void
     {
         if (empty($data)) {
             return;
@@ -38,13 +38,5 @@ final class BooleanFilter implements FilterInterface
         $data = self::TRUE === $data;
 
         $dataSource->restrict($dataSource->getExpressionBuilder()->equals($field, $data));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getType()
-    {
-        return 'boolean';
     }
 }

@@ -19,7 +19,6 @@ use Sylius\Component\Grid\Data\DataSourceInterface;
 use Sylius\Component\Grid\Definition\Filter;
 use Sylius\Component\Grid\Definition\Grid;
 use Sylius\Component\Grid\Filtering\FilterInterface;
-use Sylius\Component\Grid\Filtering\FiltersApplicator;
 use Sylius\Component\Grid\Filtering\FiltersApplicatorInterface;
 use Sylius\Component\Grid\Filtering\FiltersCriteriaResolverInterface;
 use Sylius\Component\Grid\Parameters;
@@ -30,17 +29,12 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
  */
 final class FiltersApplicatorSpec extends ObjectBehavior
 {
-    function let(ServiceRegistryInterface $filtersRegistry, FiltersCriteriaResolverInterface $criteriaResolver)
+    function let(ServiceRegistryInterface $filtersRegistry, FiltersCriteriaResolverInterface $criteriaResolver): void
     {
         $this->beConstructedWith($filtersRegistry, $criteriaResolver);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(FiltersApplicator::class);
-    }
-
-    function it_implements_filters_applicator_interface()
+    function it_implements_filters_applicator_interface(): void
     {
         $this->shouldImplement(FiltersApplicatorInterface::class);
     }
@@ -51,7 +45,7 @@ final class FiltersApplicatorSpec extends ObjectBehavior
         Grid $grid,
         Filter $filter,
         DataSourceInterface $dataSource
-    ) {
+    ): void {
         $parameters = new Parameters();
 
         $grid->getFilters()->willReturn(['keywords' => $filter]);
@@ -70,7 +64,7 @@ final class FiltersApplicatorSpec extends ObjectBehavior
         Grid $grid,
         Filter $filter,
         DataSourceInterface $dataSource
-    ) {
+    ): void {
         $parameters = new Parameters();
 
         $grid->getFilters()->willReturn(['keywords' => $filter]);
@@ -98,7 +92,7 @@ final class FiltersApplicatorSpec extends ObjectBehavior
         Grid $grid,
         Filter $filter,
         DataSourceInterface $dataSource
-    ) {
+    ): void {
         $parameters = new Parameters(['criteria' => ['keywords' => 'Banana', 'enabled' => true]]);
 
         $grid->getFilters()->willReturn(['keywords' => $filter]);
