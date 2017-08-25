@@ -28,7 +28,7 @@ final class ListenerRegistry implements ListenerRegistryInterface
     /**
      * @param ListenerInterface $listener
      */
-    public function addListener(ListenerInterface $listener)
+    public function addListener(ListenerInterface $listener): void
     {
         Assert::keyNotExists($this->listeners, $listener->getName(), 'Listener with name "%s" is already registered.');
 
@@ -38,7 +38,7 @@ final class ListenerRegistry implements ListenerRegistryInterface
     /**
      * {@inheritdoc}
      */
-    public function getListener($name)
+    public function getListener(string $name): ListenerInterface
     {
         if (!isset($this->listeners[$name])) {
             throw new ListenerNotFoundException($name);
@@ -50,7 +50,7 @@ final class ListenerRegistry implements ListenerRegistryInterface
     /**
      * {@inheritdoc}
      */
-    public function getListeners()
+    public function getListeners(): array
     {
         return $this->listeners;
     }

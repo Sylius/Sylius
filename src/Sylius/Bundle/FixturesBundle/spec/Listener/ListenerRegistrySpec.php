@@ -25,17 +25,12 @@ use Sylius\Bundle\FixturesBundle\Listener\ListenerRegistryInterface;
  */
 final class ListenerRegistrySpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType('Sylius\Bundle\FixturesBundle\Listener\ListenerRegistry');
-    }
-
-    function it_implements_listener_registry_interface()
+    function it_implements_listener_registry_interface(): void
     {
         $this->shouldImplement(ListenerRegistryInterface::class);
     }
 
-    function it_has_a_listener(ListenerInterface $listener)
+    function it_has_a_listener(ListenerInterface $listener): void
     {
         $listener->getName()->willReturn('listener_name');
 
@@ -48,7 +43,7 @@ final class ListenerRegistrySpec extends ObjectBehavior
     function it_throws_an_exception_if_trying_to_another_listener_with_the_same_name(
         ListenerInterface $listener,
         ListenerInterface $anotherListener
-    ) {
+    ): void {
         $listener->getName()->willReturn('listener_name');
         $anotherListener->getName()->willReturn('listener_name');
 
@@ -57,12 +52,12 @@ final class ListenerRegistrySpec extends ObjectBehavior
         $this->shouldThrow(\InvalidArgumentException::class)->during('addListener', [$anotherListener]);
     }
 
-    function it_returns_an_empty_listeners_list_if_it_does_not_have_any_listeners()
+    function it_returns_an_empty_listeners_list_if_it_does_not_have_any_listeners(): void
     {
         $this->getListeners()->shouldReturn([]);
     }
 
-    function it_throws_an_exception_if_trying_to_get_unexisting_listener_by_name()
+    function it_throws_an_exception_if_trying_to_get_unexisting_listener_by_name(): void
     {
         $this->shouldThrow(ListenerNotFoundException::class)->during('getListener', ['listener_name']);
     }

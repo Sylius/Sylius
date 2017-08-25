@@ -22,22 +22,17 @@ use Sylius\Bundle\FixturesBundle\Fixture\FixtureNotFoundException;
  */
 final class FixtureNotFoundExceptionSpec extends ObjectBehavior
 {
-    function let()
+    function let(): void
     {
         $this->beConstructedWith('fixture_name');
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType('Sylius\Bundle\FixturesBundle\Fixture\FixtureNotFoundException');
-    }
-
-    function it_is_an_invalid_argument_exception()
+    function it_is_an_invalid_argument_exception(): void
     {
         $this->shouldHaveType(\InvalidArgumentException::class);
     }
 
-    function it_has_preformatted_message()
+    function it_has_preformatted_message(): void
     {
         $this->getMessage()->shouldReturn('Fixture with name "fixture_name" could not be found!');
     }

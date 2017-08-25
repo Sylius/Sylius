@@ -39,7 +39,7 @@ final class PHPCRPurgerListener extends AbstractListener implements BeforeSuiteL
     /**
      * {@inheritdoc}
      */
-    public function beforeSuite(SuiteEvent $suiteEvent, array $options)
+    public function beforeSuite(SuiteEvent $suiteEvent, array $options): void
     {
         foreach ($options['managers'] as $managerName) {
             /** @var DocumentManagerInterface $manager */
@@ -53,7 +53,7 @@ final class PHPCRPurgerListener extends AbstractListener implements BeforeSuiteL
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'phpcr_purger';
     }
@@ -61,7 +61,7 @@ final class PHPCRPurgerListener extends AbstractListener implements BeforeSuiteL
     /**
      * {@inheritdoc}
      */
-    protected function configureOptionsNode(ArrayNodeDefinition $optionsNode)
+    protected function configureOptionsNode(ArrayNodeDefinition $optionsNode): void
     {
         $optionsNode
             ->children()

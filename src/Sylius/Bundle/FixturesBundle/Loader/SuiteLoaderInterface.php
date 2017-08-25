@@ -23,5 +23,5 @@ interface SuiteLoaderInterface
     /**
      * @param SuiteInterface $suite
      */
-    public function load(SuiteInterface $suite);
+    public function load(SuiteInterface $suite): void;
 }

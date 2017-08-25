@@ -29,22 +29,17 @@ use Symfony\Component\Config\Definition\Processor;
  */
 final class SuiteFactorySpec extends ObjectBehavior
 {
-    function let(FixtureRegistryInterface $fixtureRegistry, ListenerRegistryInterface $listenerRegistry, Processor $optionsProcessor)
+    function let(FixtureRegistryInterface $fixtureRegistry, ListenerRegistryInterface $listenerRegistry, Processor $optionsProcessor): void
     {
         $this->beConstructedWith($fixtureRegistry, $listenerRegistry, $optionsProcessor);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(SuiteFactory::class);
-    }
-
-    function it_implements_suite_factory_interface()
+    function it_implements_suite_factory_interface(): void
     {
         $this->shouldImplement(SuiteFactoryInterface::class);
     }
 
-    function it_creates_a_new_empty_suite()
+    function it_creates_a_new_empty_suite(): void
     {
         $suite = $this->createSuite('suite_name', ['listeners' => [], 'fixtures' => []]);
 
@@ -57,7 +52,7 @@ final class SuiteFactorySpec extends ObjectBehavior
         Processor $optionsProcessor,
         FixtureInterface $firstFixture,
         FixtureInterface $secondFixture
-    ) {
+    ): void {
         $fixtureRegistry->getFixture('first_fixture')->willReturn($firstFixture);
         $fixtureRegistry->getFixture('second_fixture')->willReturn($secondFixture);
 
@@ -77,7 +72,7 @@ final class SuiteFactorySpec extends ObjectBehavior
         FixtureRegistryInterface $fixtureRegistry,
         Processor $optionsProcessor,
         FixtureInterface $fixture
-    ) {
+    ): void {
         $fixtureRegistry->getFixture('fixture_name')->shouldBeCalled()->willReturn($fixture);
         $fixtureRegistry->getFixture('fixture_alias')->shouldNotBeCalled();
 
@@ -96,7 +91,7 @@ final class SuiteFactorySpec extends ObjectBehavior
         Processor $optionsProcessor,
         FixtureInterface $fixture,
         FixtureInterface $higherPriorityFixture
-    ) {
+    ): void {
         $fixtureRegistry->getFixture('fixture')->willReturn($fixture);
         $fixtureRegistry->getFixture('higher_priority_fixture')->willReturn($higherPriorityFixture);
 
@@ -116,7 +111,7 @@ final class SuiteFactorySpec extends ObjectBehavior
         FixtureRegistryInterface $fixtureRegistry,
         Processor $optionsProcessor,
         FixtureInterface $fixture
-    ) {
+    ): void {
         $fixtureRegistry->getFixture('fixture')->willReturn($fixture);
 
         $optionsProcessor->processConfiguration($fixture, [['fixture_option' => 'fixture_value']])->willReturn(['fixture_option' => 'fixture_value']);
@@ -134,7 +129,7 @@ final class SuiteFactorySpec extends ObjectBehavior
         Processor $optionsProcessor,
         ListenerInterface $firstListener,
         ListenerInterface $secondListener
-    ) {
+    ): void {
         $listenerRegistry->getListener('first_listener')->willReturn($firstListener);
         $listenerRegistry->getListener('second_listener')->willReturn($secondListener);
 
@@ -155,7 +150,7 @@ final class SuiteFactorySpec extends ObjectBehavior
         Processor $optionsProcessor,
         ListenerInterface $listener,
         ListenerInterface $higherPriorityListener
-    ) {
+    ): void {
         $listenerRegistry->getListener('listener')->willReturn($listener);
         $listenerRegistry->getListener('higher_priority_listener')->willReturn($higherPriorityListener);
 
@@ -175,7 +170,7 @@ final class SuiteFactorySpec extends ObjectBehavior
         ListenerRegistryInterface $listenerRegistry,
         Processor $optionsProcessor,
         ListenerInterface $listener
-    ) {
+    ): void {
         $listenerRegistry->getListener('listener')->willReturn($listener);
 
         $optionsProcessor->processConfiguration($listener, [['listener_option' => 'listener_value']])->willReturn(['listener_option' => 'listener_value']);
@@ -188,31 +183,31 @@ final class SuiteFactorySpec extends ObjectBehavior
         $suite->getListeners()->shouldHaveKeyWithValue($listener, ['listener_option' => 'listener_value']);
     }
 
-    function it_throws_an_exception_if_suite_options_does_not_have_fixtures()
+    function it_throws_an_exception_if_suite_options_does_not_have_fixtures(): void
     {
         $this->shouldThrow(\InvalidArgumentException::class)->during('createSuite', ['suite_name', ['listeners' => []]]);
     }
 
-    function it_throws_an_exception_if_suite_options_does_not_have_listeners()
+    function it_throws_an_exception_if_suite_options_does_not_have_listeners(): void
     {
         $this->shouldThrow(\InvalidArgumentException::class)->during('createSuite', ['suite_name', ['fixtures' => []]]);
     }
 
-    function it_throws_an_exception_if_fixture_does_not_have_options_defined()
+    function it_throws_an_exception_if_fixture_does_not_have_options_defined(): void
     {
         $this->shouldThrow(\InvalidArgumentException::class)->during('createSuite', ['suite_name', ['listeners' => [], 'fixtures' => [
             'fixture' => ['name' => 'fixture'],
         ]]]);
     }
 
-    function it_throws_an_exception_if_fixture_does_not_have_name_defined()
+    function it_throws_an_exception_if_fixture_does_not_have_name_defined(): void
     {
         $this->shouldThrow(\InvalidArgumentException::class)->during('createSuite', ['suite_name', ['listeners' => [], 'fixtures' => [
             'fixture' => ['options' => []],
         ]]]);
     }
 
-    function it_throws_an_exception_if_listener_does_not_have_options_defined()
+    function it_throws_an_exception_if_listener_does_not_have_options_defined(): void
     {
         $this->shouldThrow(\InvalidArgumentException::class)->during('createSuite', ['suite_name', ['fixtures' => [], 'listeners' => [
             'listener' => [],

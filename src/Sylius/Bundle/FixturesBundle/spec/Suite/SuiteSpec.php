@@ -25,46 +25,41 @@ use Sylius\Bundle\FixturesBundle\Suite\SuiteInterface;
  */
 final class SuiteSpec extends ObjectBehavior
 {
-    function let()
+    function let(): void
     {
         $this->beConstructedWith('suite_name');
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(Suite::class);
-    }
-
-    function it_implements_suite_interface()
+    function it_implements_suite_interface(): void
     {
         $this->shouldImplement(SuiteInterface::class);
     }
 
-    function it_has_name()
+    function it_has_name(): void
     {
         $this->getName()->shouldReturn('suite_name');
     }
 
-    function it_has_no_fixtures_by_default()
+    function it_has_no_fixtures_by_default(): void
     {
         $this->getFixtures()->shouldIterateAs([]);
     }
 
-    function it_allows_for_adding_a_fixture(FixtureInterface $fixture)
+    function it_allows_for_adding_a_fixture(FixtureInterface $fixture): void
     {
         $this->addFixture($fixture, []);
 
         $this->getFixtures()->shouldHaveKey($fixture);
     }
 
-    function it_stores_a_fixture_with_its_options(FixtureInterface $fixture)
+    function it_stores_a_fixture_with_its_options(FixtureInterface $fixture): void
     {
         $this->addFixture($fixture, ['fixture_option' => 'fixture_name']);
 
         $this->getFixtures()->shouldHaveKeyWithValue($fixture, ['fixture_option' => 'fixture_name']);
     }
 
-    function it_stores_multiple_fixtures_as_queue(FixtureInterface $firstFixture, FixtureInterface $secondFixture)
+    function it_stores_multiple_fixtures_as_queue(FixtureInterface $firstFixture, FixtureInterface $secondFixture): void
     {
         $this->addFixture($firstFixture, []);
         $this->addFixture($secondFixture, []);
@@ -76,7 +71,7 @@ final class SuiteSpec extends ObjectBehavior
         FixtureInterface $regularFixture,
         FixtureInterface $higherPriorityFixture,
         FixtureInterface $lowerPriorityFixture
-    ) {
+    ): void {
         $this->addFixture($regularFixture, []);
         $this->addFixture($higherPriorityFixture, [], 10);
         $this->addFixture($lowerPriorityFixture, [], -10);
