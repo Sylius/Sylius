@@ -15,7 +15,6 @@ namespace Sylius\Bundle\GridBundle\Doctrine\PHPCRODM;
 
 use Doctrine\Common\Collections\Expr\Comparison;
 use Doctrine\Common\Collections\ExpressionBuilder as CollectionsExpressionBuilder;
-use Sylius\Component\Grid\Data\ExpressionBuilderInterface;
 
 /**
  * Creates an object graph (using Doctrine\Commons\Collections\Expr\*) which we

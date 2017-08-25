@@ -106,17 +106,17 @@ class Filter
     }
 
     /**
-     * @return string
+     * @return mixed
      */
-    public function getLabel(): string
+    public function getLabel()
     {
         return $this->label;
     }
 
     /**
-     * @param string $label
+     * @param mixed $label
      */
-    public function setLabel(string $label): void
+    public function setLabel($label): void
     {
         $this->label = $label;
     }
@@ -138,9 +138,9 @@ class Filter
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getTemplate(): string
+    public function getTemplate(): ?string
     {
         return $this->template;
     }

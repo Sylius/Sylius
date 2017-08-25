@@ -24,7 +24,7 @@ use Doctrine\ODM\PHPCR\Query\Query;
 use Pagerfanta\Pagerfanta;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\GridBundle\Doctrine\PHPCRODM\ExpressionBuilder;
+use Sylius\Bundle\GridBundle\Doctrine\PHPCRODM\ExpressionBuilderInterface;
 use Sylius\Component\Grid\Data\DataSourceInterface;
 use Sylius\Component\Grid\Parameters;
 
@@ -33,7 +33,7 @@ use Sylius\Component\Grid\Parameters;
  */
 final class DataSourceSpec extends ObjectBehavior
 {
-    function let(QueryBuilder $queryBuilder, ExpressionBuilder $expressionBuilder): void
+    function let(QueryBuilder $queryBuilder, ExpressionBuilderInterface $expressionBuilder): void
     {
         $this->beConstructedWith($queryBuilder, $expressionBuilder);
     }
@@ -73,14 +73,14 @@ final class DataSourceSpec extends ObjectBehavior
     }
 
     function it_should_return_the_expression_builder(
-        ExpressionBuilder $expressionBuilder
+        ExpressionBuilderInterface $expressionBuilder
     ): void {
         $this->getExpressionBuilder()->shouldReturn($expressionBuilder);
     }
 
     function it_should_get_the_data(
         QueryBuilder $queryBuilder,
-        ExpressionBuilder $expressionBuilder,
+        ExpressionBuilderInterface $expressionBuilder,
         Query $query
     ): void {
         $expressionBuilder->getOrderBys()->willReturn([]);
@@ -96,7 +96,7 @@ final class DataSourceSpec extends ObjectBehavior
 
     function it_should_set_the_order_on_the_query_builder(
         QueryBuilder $queryBuilder,
-        ExpressionBuilder $expressionBuilder,
+        ExpressionBuilderInterface $expressionBuilder,
         Query $query,
         OrderBy $orderBy,
         Ordering $ordering
@@ -121,7 +121,7 @@ final class DataSourceSpec extends ObjectBehavior
 
     function it_should_set_the_order_on_the_query_builder_as_fields_only(
         QueryBuilder $queryBuilder,
-        ExpressionBuilder $expressionBuilder,
+        ExpressionBuilderInterface $expressionBuilder,
         Query $query,
         OrderBy $orderBy,
         Ordering $ordering

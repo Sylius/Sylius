@@ -31,12 +31,12 @@ final class GridHelperSpec extends ObjectBehavior
         $this->beConstructedWith($gridRenderer);
     }
 
-    function it_is_a_Symfony_Templating_helper(): void
+    function it_is_a_templating_helper(): void
     {
         $this->shouldImplement(HelperInterface::class);
     }
 
-    function it_extends_base_Symfony_Templating_helper(): void
+    function it_extends_base_templating_helper(): void
     {
         $this->shouldHaveType(Helper::class);
     }

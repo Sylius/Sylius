@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\Grid\Data;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Grid\Data\DataSourceInterface;
 use Sylius\Component\Grid\Data\DataSourceProviderInterface;
 use Sylius\Component\Grid\Data\DriverInterface;
 use Sylius\Component\Grid\Data\UnsupportedDriverException;
@@ -38,6 +39,7 @@ final class DataSourceProviderSpec extends ObjectBehavior
 
     function it_uses_a_correct_driver_to_get_the_data_for_a_grid(
         ServiceRegistryInterface $driversRegistry,
+        DataSourceInterface $dataSource,
         DriverInterface $driver,
         Grid $grid
     ): void {
@@ -48,9 +50,9 @@ final class DataSourceProviderSpec extends ObjectBehavior
 
         $driversRegistry->has('doctrine/orm')->willReturn(true);
         $driversRegistry->get('doctrine/orm')->willReturn($driver);
-        $driver->getDataSource(['resource' => 'sylius.tax_category'], $parameters)->willReturn(['foo', 'bar']);
+        $driver->getDataSource(['resource' => 'sylius.tax_category'], $parameters)->willReturn($dataSource);
 
-        $this->getDataSource($grid, $parameters)->shouldReturn(['foo', 'bar']);
+        $this->getDataSource($grid, $parameters)->shouldReturn($dataSource);
     }
 
     function it_throws_an_exception_if_driver_is_not_supported(Grid $grid, ServiceRegistryInterface $driversRegistry): void

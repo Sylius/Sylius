@@ -85,7 +85,7 @@ final class StringFilter implements FilterInterface
      * @param string $field
      * @param mixed $value
      *
-     * @return ExpressionBuilderInterface
+     * @return mixed
      *
      * @throws \InvalidArgumentException
      */
@@ -94,7 +94,7 @@ final class StringFilter implements FilterInterface
         string $type,
         string $field,
         $value
-    ): ExpressionBuilderInterface {
+    ) {
         switch ($type) {
             case self::TYPE_EQUAL:
                 return $expressionBuilder->equals($field, $value);
