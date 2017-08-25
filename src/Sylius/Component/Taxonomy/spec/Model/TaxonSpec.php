@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Component\Taxonomy\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Taxonomy\Model\Taxon;
@@ -77,6 +78,32 @@ final class TaxonSpec extends ObjectBehavior
         $this->setParent(null);
 
         $this->shouldBeRoot();
+    }
+
+    function it_returns_a_list_of_ancestors(
+        TaxonInterface $categoryTaxon,
+        TaxonInterface $tshirtsTaxon
+    ): void {
+        $tshirtsTaxon->getParent()->willReturn($categoryTaxon);
+
+        $tshirtsTaxon->addChild($this)->shouldBeCalled();
+        $this->setParent($tshirtsTaxon);
+
+        $this->getAncestors()->shouldIterateAs([$tshirtsTaxon->getWrappedObject(), $categoryTaxon->getWrappedObject()]);
+    }
+
+    function it_returns_a_list_with_single_ancestor(TaxonInterface $parentTaxon): void
+    {
+        $parentTaxon->getParent()->willReturn(null);
+        $parentTaxon->addChild($this)->shouldBeCalled();
+        $this->setParent($parentTaxon);
+
+        $this->getAncestors()->shouldIterateAs([$parentTaxon->getWrappedObject()]);
+    }
+
+    function it_returns_an_empty_list_of_ancestors_if_called_on_root_taxon(): void
+    {
+        $this->getAncestors()->shouldIterateAs([]);
     }
 
     function it_is_unnamed_by_default(): void

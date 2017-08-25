@@ -83,7 +83,7 @@
   
 ### Taxonomy / TaxonomyBundle
 
-* `TaxonInterface::getParents` method was removed (taxon has at most one parent).
+* `TaxonInterface::getParents` method was renamed to `TaxonInterface::getAncestors`.
 
 ### Review / ReviewBundle
 
