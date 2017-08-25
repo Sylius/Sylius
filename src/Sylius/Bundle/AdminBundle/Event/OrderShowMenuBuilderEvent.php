@@ -55,7 +55,7 @@ class OrderShowMenuBuilderEvent extends MenuBuilderEvent
     /**
      * @return OrderInterface
      */
-    public function getOrder()
+    public function getOrder(): OrderInterface
     {
         return $this->order;
     }
@@ -63,7 +63,7 @@ class OrderShowMenuBuilderEvent extends MenuBuilderEvent
     /**
      * @return StateMachineInterface
      */
-    public function getStateMachine()
+    public function getStateMachine(): StateMachineInterface
     {
         return $this->stateMachine;
     }

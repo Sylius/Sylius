@@ -39,7 +39,7 @@ final class ShipmentShipListener
     /**
      * @param GenericEvent $event
      */
-    public function sendConfirmationEmail(GenericEvent $event)
+    public function sendConfirmationEmail(GenericEvent $event): void
     {
         $shipment = $event->getSubject();
         Assert::isInstanceOf($shipment, ShipmentInterface::class);

@@ -50,7 +50,7 @@ final class MainMenuBuilder
      *
      * @return ItemInterface
      */
-    public function createMenu(array $options)
+    public function createMenu(array $options): ItemInterface
     {
         $menu = $this->factory->createItem('root');
 
@@ -68,7 +68,7 @@ final class MainMenuBuilder
     /**
      * @param ItemInterface $menu
      */
-    private function addCatalogSubMenu(ItemInterface $menu)
+    private function addCatalogSubMenu(ItemInterface $menu): void
     {
         $catalog = $menu
             ->addChild('catalog')
@@ -115,7 +115,7 @@ final class MainMenuBuilder
     /**
      * @param ItemInterface $menu
      */
-    private function addCustomersSubMenu(ItemInterface $menu)
+    private function addCustomersSubMenu(ItemInterface $menu): void
     {
         $customers = $menu
             ->addChild('customers')
@@ -138,7 +138,7 @@ final class MainMenuBuilder
     /**
      * @param ItemInterface $menu
      */
-    private function addMarketingSubMenu(ItemInterface $menu)
+    private function addMarketingSubMenu(ItemInterface $menu): void
     {
         $marketing = $menu
             ->addChild('marketing')
@@ -161,7 +161,7 @@ final class MainMenuBuilder
     /**
      * @param ItemInterface $menu
      */
-    private function addSalesSubMenu(ItemInterface $menu)
+    private function addSalesSubMenu(ItemInterface $menu): void
     {
         $sales = $menu
             ->addChild('sales')
@@ -178,7 +178,7 @@ final class MainMenuBuilder
     /**
      * @param ItemInterface $menu
      */
-    private function addConfigurationSubMenu(ItemInterface $menu)
+    private function addConfigurationSubMenu(ItemInterface $menu): void
     {
         $configuration = $menu
             ->addChild('configuration')
