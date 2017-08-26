@@ -24,12 +24,13 @@ Before we learn how to create products that can be sold, let's see how to create
      /** @var ProductInterface $product */
      $product = $productFactory->createNew();
 
-Creating an empty product is not enough to save it in the database. It needs to have a ``name`` and ``code``.
+Creating an empty product is not enough to save it in the database. It needs to have a ``name``, a ``code`` and a ``slug``.
 
 .. code-block:: php
 
      $product->setName('T-Shirt');
      $product->setCode('00001');
+     $product->setSlug('t-shirt');
 
      /** @var RepositoryInterface $productRepository */
      $productRepository = $this->get('sylius.repository.product');
