@@ -68,11 +68,13 @@ And then using the ProductVariantFactory create a variant for your product.
      /** @var ProductVariantInterface $product */
      $variant = $productVariantFactory->createNew();
 
-Having Variant created give it a desired name and attach it to your Product.
+Having created a Variant, provide it with the required attributes and attach it to your Product.
 
 .. code-block:: php
 
      $variant->setName('Hardcover');
+     $variant->setCode('1001');
+     $variant->setPosition(1);
      $variant->setProduct($product);
 
 Finally save your Variant in the database using a repository.
