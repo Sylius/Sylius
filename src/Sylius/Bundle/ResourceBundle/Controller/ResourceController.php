@@ -16,6 +16,7 @@ namespace Sylius\Bundle\ResourceBundle\Controller;
 use Doctrine\Common\Persistence\ObjectManager;
 use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
+use Sylius\Component\Resource\Exception\DeleteHandlingException;
 use Sylius\Component\Resource\Exception\UpdateHandlingException;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
@@ -418,7 +419,23 @@ class ResourceController extends Controller
             return $this->redirectHandler->redirectToIndex($configuration, $resource);
         }
 
-        $this->repository->remove($resource);
+        try {
+            $this->repository->remove($resource);
+        } catch (\Exception $exception) {
+            $exception = new DeleteHandlingException('Ups, something went wrong, please try again.', 'something_went_wrong_error', 500, 0, $exception);
+
+            if (!$configuration->isHtmlRequest()) {
+                return $this->viewHandler->handle(
+                    $configuration,
+                    View::create(null, $exception->getApiResponseCode())
+                );
+            }
+
+            $this->flashHelper->addErrorFlash($configuration, $exception->getFlash());
+
+            return $this->redirectHandler->redirectToReferer($configuration);
+        }
+
         $postEvent = $this->eventDispatcher->dispatchPostEvent(ResourceActions::DELETE, $configuration, $resource);
 
         if (!$configuration->isHtmlRequest()) {
