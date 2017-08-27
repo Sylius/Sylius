@@ -25,10 +25,10 @@ interface SuiteRegistryInterface
      *
      * @throws SuiteNotFoundException
      */
-    public function getSuite($name);
+    public function getSuite(string $name): SuiteInterface;
 
     /**
-     * @return SuiteInterface[]
+     * @return array|SuiteInterface[]
      */
-    public function getSuites();
+    public function getSuites(): array;
 }

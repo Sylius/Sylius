@@ -37,7 +37,7 @@ final class SuiteLoader implements SuiteLoaderInterface
     /**
      * {@inheritdoc}
      */
-    public function load(SuiteInterface $suite)
+    public function load(SuiteInterface $suite): void
     {
         /**
          * @var FixtureInterface $fixture

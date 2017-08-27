@@ -40,7 +40,7 @@ final class HookableFixtureLoader implements FixtureLoaderInterface
     /**
      * {@inheritdoc}
      */
-    public function load(SuiteInterface $suite, FixtureInterface $fixture, array $options)
+    public function load(SuiteInterface $suite, FixtureInterface $fixture, array $options): void
     {
         $fixtureEvent = new FixtureEvent($suite, $fixture, $options);
 
@@ -70,7 +70,7 @@ final class HookableFixtureLoader implements FixtureLoaderInterface
      * @param SuiteInterface $suite
      * @param FixtureEvent $fixtureEvent
      */
-    private function executeAfterFixtureListeners(SuiteInterface $suite, FixtureEvent $fixtureEvent)
+    private function executeAfterFixtureListeners(SuiteInterface $suite, FixtureEvent $fixtureEvent): void
     {
         foreach ($suite->getListeners() as $listener => $listenerOptions) {
             if (!$listener instanceof AfterFixtureListenerInterface) {

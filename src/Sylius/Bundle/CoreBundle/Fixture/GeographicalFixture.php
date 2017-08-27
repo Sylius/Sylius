@@ -85,7 +85,7 @@ class GeographicalFixture extends AbstractFixture
     /**
      * {@inheritdoc}
      */
-    public function load(array $options)
+    public function load(array $options): void
     {
         $this->loadCountriesWithProvinces($options['countries'], $options['provinces']);
         $this->loadZones($options['zones'], $this->provideZoneValidator($options));
@@ -98,7 +98,7 @@ class GeographicalFixture extends AbstractFixture
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'geographical';
     }
@@ -106,7 +106,7 @@ class GeographicalFixture extends AbstractFixture
     /**
      * {@inheritdoc}
      */
-    protected function configureOptionsNode(ArrayNodeDefinition $optionsNode)
+    protected function configureOptionsNode(ArrayNodeDefinition $optionsNode): void
     {
         $optionsNodeBuilder = $optionsNode->children();
 

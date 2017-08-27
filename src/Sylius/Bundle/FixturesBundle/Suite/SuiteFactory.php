@@ -56,7 +56,7 @@ final class SuiteFactory implements SuiteFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createSuite($name, array $configuration)
+    public function createSuite(string $name, array $configuration): SuiteInterface
     {
         Assert::keyExists($configuration, 'fixtures');
         Assert::keyExists($configuration, 'listeners');
@@ -79,14 +79,14 @@ final class SuiteFactory implements SuiteFactoryInterface
      * @param string $fixtureAlias
      * @param array $fixtureAttributes
      */
-    private function addFixtureToSuite(Suite $suite, $fixtureAlias, array $fixtureAttributes)
+    private function addFixtureToSuite(Suite $suite, string $fixtureAlias, array $fixtureAttributes): void
     {
         Assert::keyExists($fixtureAttributes, 'name');
         Assert::keyExists($fixtureAttributes, 'options');
 
         $fixture = $this->fixtureRegistry->getFixture($fixtureAttributes['name']);
         $fixtureOptions = $this->optionsProcessor->processConfiguration($fixture, $fixtureAttributes['options']);
-        $fixturePriority = isset($fixtureAttributes['priority']) ? $fixtureAttributes['priority'] : 0;
+        $fixturePriority = $fixtureAttributes['priority'] ?? 0;
 
         $suite->addFixture($fixture, $fixtureOptions, $fixturePriority);
     }
@@ -96,13 +96,13 @@ final class SuiteFactory implements SuiteFactoryInterface
      * @param string $listenerName
      * @param array $listenerAttributes
      */
-    private function addListenerToSuite(Suite $suite, $listenerName, array $listenerAttributes)
+    private function addListenerToSuite(Suite $suite, string $listenerName, array $listenerAttributes): void
     {
         Assert::keyExists($listenerAttributes, 'options');
 
         $listener = $this->listenerRegistry->getListener($listenerName);
         $listenerOptions = $this->optionsProcessor->processConfiguration($listener, $listenerAttributes['options']);
-        $listenerPriority = isset($listenerAttributes['priority']) ? $listenerAttributes['priority'] : 0;
+        $listenerPriority = $listenerAttributes['priority'] ?? 0;
 
         $suite->addListener($listener, $listenerOptions, $listenerPriority);
     }

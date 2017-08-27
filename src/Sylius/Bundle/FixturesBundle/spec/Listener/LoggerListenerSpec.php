@@ -21,32 +21,27 @@ use Sylius\Bundle\FixturesBundle\Suite\SuiteInterface;
  */
 final class LoggerListenerSpec extends ObjectBehavior
 {
-    function let(LoggerInterface $logger)
+    function let(LoggerInterface $logger): void
     {
         $this->beConstructedWith($logger);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType('Sylius\Bundle\FixturesBundle\Listener\LoggerListener');
-    }
-
-    function it_implements_listener_interface()
+    function it_implements_listener_interface(): void
     {
         $this->shouldImplement(ListenerInterface::class);
     }
 
-    function it_listens_for_before_suite_events()
+    function it_listens_for_before_suite_events(): void
     {
         $this->shouldImplement(BeforeSuiteListenerInterface::class);
     }
 
-    function it_listens_for_before_fixture_events()
+    function it_listens_for_before_fixture_events(): void
     {
         $this->shouldImplement(BeforeFixtureListenerInterface::class);
     }
 
-    function it_logs_suite_name_on_before_suite_event(LoggerInterface $logger, SuiteInterface $suite)
+    function it_logs_suite_name_on_before_suite_event(LoggerInterface $logger, SuiteInterface $suite): void
     {
         $suite->getName()->willReturn('uber_suite');
 
@@ -57,7 +52,7 @@ final class LoggerListenerSpec extends ObjectBehavior
         $this->beforeSuite(new SuiteEvent($suite->getWrappedObject()), []);
     }
 
-    function it_logs_fixture_name_on_before_fixture_event(LoggerInterface $logger, SuiteInterface $suite, FixtureInterface $fixture)
+    function it_logs_fixture_name_on_before_fixture_event(LoggerInterface $logger, SuiteInterface $suite, FixtureInterface $fixture): void
     {
         $fixture->getName()->willReturn('uber_fixture');
 

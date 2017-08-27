@@ -23,7 +23,7 @@ class ProductAssociationTypeFixture extends AbstractResourceFixture
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'product_association_type';
     }
@@ -31,7 +31,7 @@ class ProductAssociationTypeFixture extends AbstractResourceFixture
     /**
      * {@inheritdoc}
      */
-    protected function configureResourceNode(ArrayNodeDefinition $resourceNode)
+    protected function configureResourceNode(ArrayNodeDefinition $resourceNode): void
     {
         $resourceNode
             ->children()

@@ -74,7 +74,7 @@ class SimilarProductAssociationFixture extends AbstractFixture
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'similar_product_association';
     }
@@ -82,7 +82,7 @@ class SimilarProductAssociationFixture extends AbstractFixture
     /**
      * {@inheritdoc}
      */
-    public function load(array $options)
+    public function load(array $options): void
     {
         $options = $this->optionsResolver->resolve($options);
 
@@ -110,7 +110,7 @@ class SimilarProductAssociationFixture extends AbstractFixture
     /**
      * {@inheritdoc}
      */
-    protected function configureOptionsNode(ArrayNodeDefinition $optionsNode)
+    protected function configureOptionsNode(ArrayNodeDefinition $optionsNode): void
     {
         $optionsNode
             ->children()

@@ -36,7 +36,7 @@ final class SuiteEvent
     /**
      * @return SuiteInterface
      */
-    public function suite()
+    public function suite(): SuiteInterface
     {
         return $this->suite;
     }

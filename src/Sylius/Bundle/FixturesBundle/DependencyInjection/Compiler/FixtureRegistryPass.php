@@ -26,7 +26,7 @@ final class FixtureRegistryPass implements CompilerPassInterface
     /**
      * {@inheritdoc}
      */
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         if (!$container->has('sylius_fixtures.fixture_registry')) {
             return;

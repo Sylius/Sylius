@@ -22,5 +22,5 @@ interface BeforeFixtureListenerInterface extends ListenerInterface
      * @param FixtureEvent $fixtureEvent
      * @param array $options
      */
-    public function beforeFixture(FixtureEvent $fixtureEvent, array $options);
+    public function beforeFixture(FixtureEvent $fixtureEvent, array $options): void;
 }

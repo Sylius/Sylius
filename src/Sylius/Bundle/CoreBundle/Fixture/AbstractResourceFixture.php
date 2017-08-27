@@ -71,7 +71,7 @@ abstract class AbstractResourceFixture implements FixtureInterface
     /**
      * @param array $options
      */
-    final public function load(array $options)
+    final public function load(array $options): void
     {
         $options = $this->optionsResolver->resolve($options);
 
@@ -116,7 +116,7 @@ abstract class AbstractResourceFixture implements FixtureInterface
     /**
      * @param ArrayNodeDefinition $resourceNode
      */
-    protected function configureResourceNode(ArrayNodeDefinition $resourceNode)
+    protected function configureResourceNode(ArrayNodeDefinition $resourceNode): void
     {
         // empty
     }

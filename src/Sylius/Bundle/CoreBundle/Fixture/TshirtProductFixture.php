@@ -81,7 +81,7 @@ class TshirtProductFixture extends AbstractFixture
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'tshirt_product';
     }
@@ -89,7 +89,7 @@ class TshirtProductFixture extends AbstractFixture
     /**
      * {@inheritdoc}
      */
-    public function load(array $options)
+    public function load(array $options): void
     {
         $options = $this->optionsResolver->resolve($options);
 
@@ -175,7 +175,7 @@ class TshirtProductFixture extends AbstractFixture
     /**
      * {@inheritdoc}
      */
-    protected function configureOptionsNode(ArrayNodeDefinition $optionsNode)
+    protected function configureOptionsNode(ArrayNodeDefinition $optionsNode): void
     {
         $optionsNode
             ->children()
