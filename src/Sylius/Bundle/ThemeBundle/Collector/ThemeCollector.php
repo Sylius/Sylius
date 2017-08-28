@@ -91,8 +91,10 @@ final class ThemeCollector extends DataCollector
      */
     public function collect(Request $request, Response $response, ?\Exception $exception = null): void
     {
-        $this->data['used_theme'] = $this->themeContext->getTheme();
-        $this->data['used_themes'] = $this->themeHierarchyProvider->getThemeHierarchy($this->themeContext->getTheme());
+        $usedTheme = $this->themeContext->getTheme();
+
+        $this->data['used_theme'] = $usedTheme;
+        $this->data['used_themes'] = null !== $usedTheme ? $this->themeHierarchyProvider->getThemeHierarchy($usedTheme) : [];
         $this->data['themes'] = $this->themeRepository->findAll();
     }
 
