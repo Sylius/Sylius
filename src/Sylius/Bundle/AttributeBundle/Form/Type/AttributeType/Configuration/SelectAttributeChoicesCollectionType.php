@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Configuration;
 
+use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -25,6 +26,19 @@ use Symfony\Component\Form\FormEvents;
 class SelectAttributeChoicesCollectionType extends AbstractType
 {
     /**
+     * @var string
+     */
+    private $defaultLocaleCode;
+
+    /**
+     * @param TranslationLocaleProviderInterface $localeProvider
+     */
+    public function __construct(TranslationLocaleProviderInterface $localeProvider)
+    {
+        $this->defaultLocaleCode = $localeProvider->getDefaultLocaleCode();
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -34,18 +48,25 @@ class SelectAttributeChoicesCollectionType extends AbstractType
             $form = $event->getForm();
 
             if (null !== $data) {
-                $fixedArray = [];
-                foreach ($data as $key => $value) {
-                    $newKey = $this->getValidFormKey($value);
-                    $fixedArray[$newKey] = $value;
+                foreach ($data as $key => &$values) {
+                    $newKey = null;
+                    foreach ($values as $locale => &$value) {
+                        if ($locale === $this->defaultLocaleCode) {
+                            $newKey = $this->getValidFormKey($value);
+                            $data[$newKey] = $values;
+                            if ($key !== $newKey) {
+                                unset($data[$key]);
+                            }
+                        }
+                    }
 
-                    if ($form->offsetExists($key)) {
+                    if (!is_null($newKey) && $form->offsetExists($key)) {
                         $form->offsetUnset($key);
                         $form->offsetSet(null, $newKey);
                     }
                 }
 
-                $event->setData($fixedArray);
+                $event->setData($data);
             }
         });
     }
