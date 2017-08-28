@@ -2,7 +2,7 @@
     "page": 1,
     "limit": 10,
     "pages": 1,
-    "total": 7,
+    "total": 8,
     "_links": {
         "self": {
             "href": "\/api\/v1\/promotions\/?sorting%5Bcode%5D=asc&page=1&limit=10"
@@ -27,6 +27,20 @@
                     },
                     "coupons": {
                         "href": "\/api\/v1\/promotions\/AUTUMNAL_PROMO\/coupons\/"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "code": "Friday",
+                "name": "Friday promotion",
+                "priority": 0,
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/promotions\/Friday"
+                    },
+                    "coupons": {
+                        "href": "\/api\/v1\/promotions\/Friday\/coupons\/"
                     }
                 }
             },

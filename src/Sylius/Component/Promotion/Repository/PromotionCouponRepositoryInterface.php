@@ -43,4 +43,11 @@ interface PromotionCouponRepositoryInterface extends RepositoryInterface
      * @return PromotionCouponInterface|null
      */
     public function findOneByCodeAndPromotionCode(string $code, string $promotionCode): ?PromotionCouponInterface;
+
+    /**
+     * @param string $promotionCode
+     *
+     * @return iterable
+     */
+    public function findByPromotionCode(string $promotionCode): iterable;
 }
