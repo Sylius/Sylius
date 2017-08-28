@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Component\Core\Promotion\Action;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Distributor\ProportionalIntegerDistributorInterface;
@@ -59,7 +60,7 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
         UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
     ) {
         $order->countItems()->willReturn(2);
-        $order->getItems()->willReturn([$firstItem, $secondItem]);
+        $order->getItems()->willReturn(new ArrayCollection([$firstItem->getWrappedObject(), $secondItem->getWrappedObject()]));
 
         $firstItem->getTotal()->willReturn(200);
         $secondItem->getTotal()->willReturn(800);
@@ -122,13 +123,13 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
         PromotionInterface $promotion
     ) {
         $order->countItems()->willReturn(1);
-        $order->getItems()->willReturn([$item]);
+        $order->getItems()->willReturn(new ArrayCollection([$item->getWrappedObject()]));
 
-        $item->getUnits()->willReturn([$unit]);
+        $item->getUnits()->willReturn(new ArrayCollection([$unit->getWrappedObject()]));
 
         $unit
             ->getAdjustments(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)
-            ->willReturn([$firstAdjustment, $secondAdjustment])
+            ->willReturn(new ArrayCollection([$firstAdjustment->getWrappedObject(), $secondAdjustment->getWrappedObject()]))
         ;
 
         $promotion->getCode()->willReturn('PROMOTION');

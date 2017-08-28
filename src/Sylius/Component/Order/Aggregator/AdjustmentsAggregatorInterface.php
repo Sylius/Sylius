@@ -21,11 +21,11 @@ use Sylius\Component\Order\Model\AdjustmentInterface;
 interface AdjustmentsAggregatorInterface
 {
     /**
-     * @param array|AdjustmentInterface[] $adjustments
+     * @param iterable|AdjustmentInterface[] $adjustments
      *
      * @return array
      *
      * @throws \InvalidArgumentException
      */
-    public function aggregate(array $adjustments): array;
+    public function aggregate(iterable $adjustments): array;
 }

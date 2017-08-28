@@ -434,7 +434,7 @@ final class OrderContext implements Context
                 $order,
                 $channel,
                 $this->variantResolver->getVariant($product),
-                $productCount
+                (int) $productCount
             );
 
             $order->setState(OrderInterface::STATE_NEW);
@@ -640,7 +640,7 @@ final class OrderContext implements Context
             $order,
             $this->sharedStorage->get('channel'),
             $productVariant,
-            $quantity
+            (int) $quantity
         );
 
         return $order;
@@ -656,7 +656,7 @@ final class OrderContext implements Context
         OrderInterface $order,
         ChannelInterface $channel,
         ProductVariantInterface $productVariant,
-        $quantity = 1
+        int $quantity = 1
     ) {
         /** @var OrderItemInterface $item */
         $item = $this->orderItemFactory->createNew();

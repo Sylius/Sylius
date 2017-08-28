@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Component\Core\Promotion\Checker\Rule;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -52,7 +53,7 @@ final class HasTaxonRuleCheckerSpec extends ObjectBehavior
         $swords->getCode()->willReturn('swords');
         $bastardSword->getTaxons()->willReturn([$swords]);
         $item->getProduct()->willReturn($bastardSword);
-        $subject->getItems()->willReturn([$item]);
+        $subject->getItems()->willReturn(new ArrayCollection([$item->getWrappedObject()]));
 
         $this->isEligible($subject, $configuration)->shouldReturn(true);
     }
@@ -69,7 +70,7 @@ final class HasTaxonRuleCheckerSpec extends ObjectBehavior
         $swords->getCode()->willReturn('swords');
         $bastardSword->getTaxons()->willReturn([$swords]);
         $item->getProduct()->willReturn($bastardSword);
-        $subject->getItems()->willReturn([$item]);
+        $subject->getItems()->willReturn(new ArrayCollection([$item->getWrappedObject()]));
 
         $this->isEligible($subject, $configuration)->shouldReturn(true);
     }
@@ -86,7 +87,7 @@ final class HasTaxonRuleCheckerSpec extends ObjectBehavior
         $bows->getCode()->willReturn('bows');
         $reflexBow->getTaxons()->willReturn([$bows]);
         $item->getProduct()->willReturn($reflexBow);
-        $subject->getItems()->willReturn([$item]);
+        $subject->getItems()->willReturn(new ArrayCollection([$item->getWrappedObject()]));
 
         $this->isEligible($subject, $configuration)->shouldReturn(false);
     }

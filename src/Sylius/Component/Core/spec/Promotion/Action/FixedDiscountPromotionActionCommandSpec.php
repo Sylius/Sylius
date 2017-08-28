@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Component\Core\Promotion\Action;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Distributor\ProportionalIntegerDistributorInterface;
@@ -72,7 +73,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
 
         $order
             ->getItems()
-            ->willReturn(new \ArrayIterator([$firstItem->getWrappedObject(), $secondItem->getWrappedObject()]))
+            ->willReturn(new ArrayCollection([$firstItem->getWrappedObject(), $secondItem->getWrappedObject()]))
         ;
 
         $order->getPromotionSubjectTotal()->willReturn(10000);
@@ -102,7 +103,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
 
         $order
             ->getItems()
-            ->willReturn(new \ArrayIterator([$firstItem->getWrappedObject(), $secondItem->getWrappedObject()]))
+            ->willReturn(new ArrayCollection([$firstItem->getWrappedObject(), $secondItem->getWrappedObject()]))
         ;
 
         $order->getPromotionSubjectTotal()->willReturn(10000);
@@ -207,13 +208,13 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         PromotionInterface $promotion
     ) {
         $order->countItems()->willReturn(1);
-        $order->getItems()->willReturn(new \ArrayIterator([$item->getWrappedObject()]));
+        $order->getItems()->willReturn(new ArrayCollection([$item->getWrappedObject()]));
 
-        $item->getUnits()->willReturn(new \ArrayIterator([$unit->getWrappedObject()]));
+        $item->getUnits()->willReturn(new ArrayCollection([$unit->getWrappedObject()]));
 
         $unit
             ->getAdjustments(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)
-            ->willReturn(new \ArrayIterator([$firstAdjustment->getWrappedObject(), $secondAdjustment->getWrappedObject()]))
+            ->willReturn(new ArrayCollection([$firstAdjustment->getWrappedObject(), $secondAdjustment->getWrappedObject()]))
         ;
 
         $firstAdjustment->getOriginCode()->willReturn('PROMOTION');

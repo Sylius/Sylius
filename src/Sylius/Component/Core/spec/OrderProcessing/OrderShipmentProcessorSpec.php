@@ -65,7 +65,7 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
 
         $order->isShippingRequired()->willReturn(true);
 
-        $order->getItems()->willReturn([$orderItem]);
+        $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
         $order->isEmpty()->willReturn(false);
         $order->hasShipments()->willReturn(false);
         $order->getItemUnits()->willReturn([$itemUnit1, $itemUnit2]);
@@ -99,7 +99,7 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
 
         $productVariant->isShippingRequired()->willReturn(false);
 
-        $order->getItems()->willReturn([$orderItem]);
+        $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
 
         $order->removeShipments()->shouldBeCalled();
 
@@ -123,7 +123,7 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
 
         $order->isShippingRequired()->willReturn(true);
 
-        $order->getItems()->willReturn([$orderItem]);
+        $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
 
         $order->isEmpty()->willReturn(false);
         $order->hasShipments()->willReturn(true);

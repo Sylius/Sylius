@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\PayumBundle\Action\Paypal\ExpressCheckout;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Payum\Core\Action\ActionInterface;
 use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Request\Convert;
@@ -57,7 +58,7 @@ final class ConvertPaymentActionSpec extends ObjectBehavior
         $order->getId()->willReturn(92);
         $order->getCurrencyCode()->willReturn('PLN');
         $order->getTotal()->willReturn(88000);
-        $order->getItems()->willReturn([$orderItem]);
+        $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
         $order->getAdjustmentsTotalRecursively(AdjustmentInterface::TAX_ADJUSTMENT)->willReturn(0);
         $order->getOrderPromotionTotal()->willReturn(0);
         $order->getShippingTotal()->willReturn(8000);

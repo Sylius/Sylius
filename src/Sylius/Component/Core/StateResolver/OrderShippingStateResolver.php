@@ -44,7 +44,7 @@ final class OrderShippingStateResolver implements StateResolverInterface
     /**
      * {@inheritdoc}
      */
-    public function resolve(OrderInterface $order)
+    public function resolve(OrderInterface $order): void
     {
         if (OrderShippingStates::STATE_SHIPPED === $order->getShippingState()) {
             return;

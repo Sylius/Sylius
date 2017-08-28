@@ -36,7 +36,7 @@ final class OrderAdjustmentsClearer implements OrderProcessorInterface
     /**
      * {@inheritdoc}
      */
-    public function process(OrderInterface $order)
+    public function process(OrderInterface $order): void
     {
         foreach (self::$adjustmentsToRemove as $type) {
             $order->removeAdjustmentsRecursively($type);

@@ -15,6 +15,7 @@ namespace Sylius\Bundle\OrderBundle\Doctrine\ORM;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Order\Model\OrderInterface;
+use Sylius\Component\Order\Model\OrderItemInterface;
 use Sylius\Component\Order\Repository\OrderItemRepositoryInterface;
 
 /**
@@ -25,7 +26,7 @@ class OrderItemRepository extends EntityRepository implements OrderItemRepositor
     /**
      * {@inheritdoc}
      */
-    public function findOneByIdAndCartId($id, $cartId): OrderInterface
+    public function findOneByIdAndCartId($id, $cartId): ?OrderItemInterface
     {
         return $this->createQueryBuilder('o')
             ->innerJoin('o.order', 'cart')

@@ -62,7 +62,7 @@ class OrderItemQuantityDataMapper implements DataMapperInterface
         foreach ($forms as $key => $form) {
             if ('quantity' === $form->getName()) {
                 $targetQuantity = $form->getData();
-                $this->orderItemQuantityModifier->modify($data, $targetQuantity);
+                $this->orderItemQuantityModifier->modify($data, (int) $targetQuantity);
 
                 continue;
             }
