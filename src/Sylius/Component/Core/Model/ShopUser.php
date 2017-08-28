@@ -49,14 +49,14 @@ class ShopUser extends BaseUser implements ShopUserInterface
     /**
      * {@inheritdoc}
      */
-    public function getEmail()
+    public function getEmail(): ?string
     {
         return $this->customer->getEmail();
     }
     /**
      * {@inheritdoc}
      */
-    public function setEmail($email)
+    public function setEmail(?string $email): void
     {
         $this->customer->setEmail($email);
     }
@@ -64,7 +64,7 @@ class ShopUser extends BaseUser implements ShopUserInterface
     /**
      * {@inheritdoc}
      */
-    public function getEmailCanonical()
+    public function getEmailCanonical(): ?string
     {
         return $this->customer->getEmailCanonical();
     }
@@ -72,7 +72,7 @@ class ShopUser extends BaseUser implements ShopUserInterface
     /**
      * {@inheritdoc}
      */
-    public function setEmailCanonical($emailCanonical)
+    public function setEmailCanonical(?string $emailCanonical): void
     {
         $this->customer->setEmailCanonical($emailCanonical);
     }

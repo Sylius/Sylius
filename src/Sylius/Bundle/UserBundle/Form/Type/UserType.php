@@ -31,7 +31,7 @@ abstract class UserType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('username', TextType::class, [
@@ -57,7 +57,7 @@ abstract class UserType extends AbstractResourceType
         $resolver
             ->setDefaults([
                 'data_class' => $this->dataClass,
-                'validation_groups' => function (FormInterface $form) {
+                'validation_groups' => function (FormInterface $form): array {
                     $data = $form->getData();
                     if ($data && !$data->getId()) {
                         $this->validationGroups[] = 'sylius_user_create';

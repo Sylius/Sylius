@@ -57,44 +57,29 @@ final class UserMailerListener extends MailerListener
 
         Assert::isInstanceOf($customer, CustomerInterface::class);
 
-        if (null === ($user = $customer->getUser())) {
+        $user = $customer->getUser();
+        if (null === $user) {
             return;
         }
 
-        if (null === ($email = $customer->getEmail()) || empty($email)) {
+        $email = $customer->getEmail();
+        if (empty($email)) {
             return;
         }
 
-        /** @var ShopUserInterface $user */
         Assert::isInstanceOf($user, ShopUserInterface::class);
 
-        $this->emailSender->send(
-            Emails::USER_REGISTRATION,
-            [
-                $user->getEmail(),
-            ],
-            [
-                'user' => $user,
-            ]
-        );
+        $this->sendEmail($user, Emails::USER_REGISTRATION);
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function sendEmail($user, $emailCode)
+    protected function sendEmail(UserInterface $user, string $emailCode): void
     {
-        Assert::isInstanceOf($user, UserInterface::class);
-
-        $this->emailSender->send(
-            $emailCode,
-            [
-                $user->getEmail(),
-            ],
-            [
-                'user' => $user,
-                'channel' => $this->channelContext->getChannel(),
-            ]
-        );
+        $this->emailSender->send($emailCode, [$user->getEmail()], [
+            'user' => $user,
+            'channel' => $this->channelContext->getChannel(),
+        ]);
     }
 }

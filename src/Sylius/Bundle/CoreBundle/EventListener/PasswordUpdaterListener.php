@@ -17,6 +17,7 @@ use Sylius\Bundle\UserBundle\EventListener\PasswordUpdaterListener as BasePasswo
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\GenericEvent;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -29,17 +30,14 @@ final class PasswordUpdaterListener extends BasePasswordUpdaterListener
      */
     public function customerUpdateEvent(GenericEvent $event)
     {
+        /** @var CustomerInterface $customer */
         $customer = $event->getSubject();
 
-        if (!$customer instanceof CustomerInterface) {
-            throw new UnexpectedTypeException(
-                $customer,
-                CustomerInterface::class
-            );
-        }
+        Assert::isInstanceOf($customer, CustomerInterface::class);
 
-        if (null !== $user = $customer->getUser()) {
-            $this->updateUserPassword($user);
+        $user = $customer->getUser();
+        if (null !== $user) {
+            $this->updatePassword($user);
         }
     }
 }

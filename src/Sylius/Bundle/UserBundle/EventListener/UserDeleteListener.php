@@ -25,17 +25,17 @@ use Webmozart\Assert\Assert;
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class UserDeleteListener
+final class UserDeleteListener
 {
     /**
      * @var TokenStorageInterface
      */
-    protected $tokenStorage;
+    private $tokenStorage;
 
     /**
      * @var SessionInterface
      */
-    protected $session;
+    private $session;
 
     /**
      * @param TokenStorageInterface $tokenStorage
@@ -52,9 +52,10 @@ class UserDeleteListener
      *
      * @throws \InvalidArgumentException
      */
-    public function deleteUser(ResourceControllerEvent $event)
+    public function deleteUser(ResourceControllerEvent $event): void
     {
         $user = $event->getSubject();
+
         Assert::isInstanceOf($user, UserInterface::class);
 
         $token = $this->tokenStorage->getToken();

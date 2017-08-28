@@ -57,7 +57,7 @@ final class UserMailerListenerSpec extends ObjectBehavior
         $event->getSubject()->willReturn($customer);
         $customer->getUser()->willReturn(null);
 
-        $emailSender->send(Argument::any(), Argument::any(), Argument::any())->shouldNotBeCalled();
+        $emailSender->send(Argument::cetera())->shouldNotBeCalled();
 
         $this->sendUserRegistrationEmail($event);
     }
@@ -72,7 +72,7 @@ final class UserMailerListenerSpec extends ObjectBehavior
         $customer->getUser()->willReturn($user);
         $customer->getEmail()->willReturn(null);
 
-        $emailSender->send(Argument::any(), Argument::any(), Argument::any())->shouldNotBeCalled();
+        $emailSender->send(Argument::cetera())->shouldNotBeCalled();
 
         $this->sendUserRegistrationEmail($event);
     }
@@ -93,18 +93,10 @@ final class UserMailerListenerSpec extends ObjectBehavior
 
         $channelContext->getChannel()->willReturn($channel);
 
-        $emailSender
-            ->send(
-                Emails::USER_REGISTRATION,
-                [
-                    'fulanito@sylius.com',
-                ],
-                [
-                    'user' => $user,
-                ]
-            )
-            ->shouldBeCalled()
-        ;
+        $emailSender->send(Emails::USER_REGISTRATION, ['fulanito@sylius.com'], [
+            'user' => $user,
+            'channel' => $channel
+        ])->shouldBeCalled();
 
         $this->sendUserRegistrationEmail($event);
     }

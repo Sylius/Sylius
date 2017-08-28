@@ -61,8 +61,10 @@ class UserLogin implements UserLoginInterface
     /**
      * {@inheritdoc}
      */
-    public function login(UserInterface $user, $firewallName = 'main')
+    public function login(UserInterface $user, ?string $firewallName = null): void
     {
+        $firewallName = $firewallName ?? 'main';
+
         $this->userChecker->checkPreAuth($user);
         $this->userChecker->checkPostAuth($user);
 
@@ -81,7 +83,7 @@ class UserLogin implements UserLoginInterface
      *
      * @return UsernamePasswordToken
      */
-    protected function createToken(UserInterface $user, $firewallName)
+    protected function createToken(UserInterface $user, string $firewallName): UsernamePasswordToken
     {
         return new UsernamePasswordToken($user, null, $firewallName, $user->getRoles());
     }

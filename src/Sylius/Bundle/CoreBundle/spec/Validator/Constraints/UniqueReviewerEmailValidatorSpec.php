@@ -16,9 +16,10 @@ namespace spec\Sylius\Bundle\CoreBundle\Validator\Constraints;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Validator\Constraints\UniqueReviewerEmail;
 use Sylius\Bundle\CoreBundle\Validator\Constraints\UniqueReviewerEmailValidator;
-use Sylius\Bundle\UserBundle\Doctrine\ORM\UserRepository;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
+use Sylius\Component\User\Model\UserInterface;
+use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
@@ -33,7 +34,7 @@ use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 final class UniqueReviewerEmailValidatorSpec extends ObjectBehavior
 {
     function let(
-        UserRepository $userRepository,
+        UserRepositoryInterface $userRepository,
         TokenStorageInterface $tokenStorage,
         AuthorizationCheckerInterface $authorizationChecker,
         ExecutionContextInterface $executionContextInterface
@@ -53,7 +54,7 @@ final class UniqueReviewerEmailValidatorSpec extends ObjectBehavior
     }
 
     function it_validates_if_user_with_given_email_is_already_registered(
-        UserRepository $userRepository,
+        UserRepositoryInterface $userRepository,
         TokenStorageInterface $tokenStorage,
         AuthorizationCheckerInterface $authorizationChecker,
         ExecutionContextInterface $executionContextInterface,
@@ -61,7 +62,7 @@ final class UniqueReviewerEmailValidatorSpec extends ObjectBehavior
         TokenInterface $token,
         ReviewInterface $review,
         CustomerInterface $customer,
-        CustomerInterface $existingUser
+        UserInterface $existingUser
     ) {
         $constraint = new UniqueReviewerEmail();
 

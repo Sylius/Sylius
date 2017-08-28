@@ -16,7 +16,7 @@ namespace Sylius\Bundle\UserBundle\Mailer;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class Emails
+final class Emails
 {
     public const RESET_PASSWORD_TOKEN = 'reset_password_token';
     public const RESET_PASSWORD_PIN = 'reset_password_pin';

@@ -40,7 +40,7 @@ final class SyliusUserExtension extends AbstractResourceExtension
     /**
      * {@inheritdoc}
      */
-    public function load(array $config, ContainerBuilder $container)
+    public function load(array $config, ContainerBuilder $container): void
     {
         $config = $this->processConfiguration($this->getConfiguration([], $container), $config);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
@@ -60,7 +60,7 @@ final class SyliusUserExtension extends AbstractResourceExtension
      *
      * @return array
      */
-    private function resolveResources(array $resources, ContainerBuilder $container)
+    private function resolveResources(array $resources, ContainerBuilder $container): array
     {
         $container->setParameter('sylius.user.users', $resources);
 
@@ -80,7 +80,7 @@ final class SyliusUserExtension extends AbstractResourceExtension
      * @param array $resources
      * @param ContainerBuilder $container
      */
-    private function createServices(array $resources, ContainerBuilder $container)
+    private function createServices(array $resources, ContainerBuilder $container): void
     {
         foreach ($resources as $userType => $config) {
             $userClass = $config['user']['classes']['model'];
@@ -98,7 +98,7 @@ final class SyliusUserExtension extends AbstractResourceExtension
      * @param array $config
      * @param ContainerBuilder $container
      */
-    private function createTokenGenerators($userType, array $config, ContainerBuilder $container)
+    private function createTokenGenerators(string $userType, array $config, ContainerBuilder $container): void
     {
         $this->createUniquenessCheckers($userType, $config, $container);
 
@@ -145,7 +145,7 @@ final class SyliusUserExtension extends AbstractResourceExtension
      *
      * @return Definition
      */
-    private function createTokenGeneratorDefinition($generatorClass, array $arguments)
+    private function createTokenGeneratorDefinition(string $generatorClass, array $arguments): Definition
     {
         $generatorDefinition = new Definition($generatorClass);
         $generatorDefinition->setArguments($arguments);
@@ -158,7 +158,7 @@ final class SyliusUserExtension extends AbstractResourceExtension
      * @param array $config
      * @param ContainerBuilder $container
      */
-    private function createUniquenessCheckers($userType, array $config, ContainerBuilder $container)
+    private function createUniquenessCheckers(string $userType, array $config, ContainerBuilder $container): void
     {
         $repositoryServiceId = sprintf('sylius.repository.%s_user', $userType);
 
@@ -191,7 +191,7 @@ final class SyliusUserExtension extends AbstractResourceExtension
      * @param string $userType
      * @param ContainerBuilder $container
      */
-    private function createReloaders($userType, ContainerBuilder $container)
+    private function createReloaders(string $userType, ContainerBuilder $container): void
     {
         $managerServiceId = sprintf('sylius.manager.%s_user', $userType);
         $reloaderServiceId = sprintf('sylius.%s_user.reloader', $userType);
@@ -213,7 +213,7 @@ final class SyliusUserExtension extends AbstractResourceExtension
      * @param string $userClass
      * @param ContainerBuilder $container
      */
-    private function createLastLoginListeners($userType, $userClass, ContainerBuilder $container)
+    private function createLastLoginListeners(string $userType, string $userClass, ContainerBuilder $container): void
     {
         $managerServiceId = sprintf('sylius.manager.%s_user', $userType);
         $lastLoginListenerServiceId = sprintf('sylius.listener.%s_user_last_login', $userType);
@@ -228,7 +228,7 @@ final class SyliusUserExtension extends AbstractResourceExtension
      * @param string $userType
      * @param ContainerBuilder $container
      */
-    public function createUserDeleteListeners($userType, ContainerBuilder $container)
+    public function createUserDeleteListeners(string $userType, ContainerBuilder $container): void
     {
         $userDeleteListenerServiceId = sprintf('sylius.listener.%s_user_delete', $userType);
         $userPreDeleteEventName = sprintf('sylius.%s_user.pre_delete', $userType);
@@ -245,7 +245,7 @@ final class SyliusUserExtension extends AbstractResourceExtension
      * @param string $userModel
      * @param ContainerBuilder $container
      */
-    private function createProviders($userType, $userModel, ContainerBuilder $container)
+    private function createProviders(string $userType, string $userModel, ContainerBuilder $container): void
     {
         $repositoryServiceId = sprintf('sylius.repository.%s_user', $userType);
         $abstractProviderServiceId = sprintf('sylius.%s_user_provider', $userType);

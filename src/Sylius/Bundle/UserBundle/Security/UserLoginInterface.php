@@ -22,7 +22,7 @@ interface UserLoginInterface
 {
     /**
      * @param UserInterface $user
-     * @param string $firewallName
+     * @param string|null $firewallName
      */
-    public function login(UserInterface $user, $firewallName = 'main');
+    public function login(UserInterface $user, ?string $firewallName = null);
 }

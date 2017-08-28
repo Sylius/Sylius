@@ -19,22 +19,22 @@ namespace Sylius\Bundle\UserBundle\Form\Model;
 class PasswordResetRequest
 {
     /**
-     * @var string
+     * @var string|null
      */
     private $email;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getEmail()
+    public function getEmail(): ?string
     {
         return $this->email;
     }
 
     /**
-     * @param string $email
+     * @param string|null $email
      */
-    public function setEmail($email)
+    public function setEmail(?string $email): void
     {
         $this->email = $email;
     }

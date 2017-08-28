@@ -20,7 +20,7 @@ namespace Sylius\Component\User\Security\Generator;
 interface GeneratorInterface
 {
     /**
-     * @return mixed
+     * @return string
      */
-    public function generate();
+    public function generate(): string;
 }

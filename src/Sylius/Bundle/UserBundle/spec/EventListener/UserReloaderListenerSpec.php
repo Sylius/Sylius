@@ -26,17 +26,12 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  */
 final class UserReloaderListenerSpec extends ObjectBehavior
 {
-    function let(UserReloaderInterface $userReloader)
+    function let(UserReloaderInterface $userReloader): void
     {
         $this->beConstructedWith($userReloader);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(UserReloaderListener::class);
-    }
-
-    function it_reloads_user(UserReloaderInterface $userReloader, GenericEvent $event, UserInterface $user)
+    function it_reloads_user(UserReloaderInterface $userReloader, GenericEvent $event, UserInterface $user): void
     {
         $event->getSubject()->willReturn($user);
 
@@ -48,13 +43,13 @@ final class UserReloaderListenerSpec extends ObjectBehavior
     function it_throws_exception_when_reloading_not_a_user_interface(
         UserReloaderInterface $userReloader,
         GenericEvent $event
-    ) {
+    ): void {
         $event->getSubject()->willReturn('user');
 
         $userReloader->reloadUser(Argument::any())->shouldNotBeCalled();
 
         $this
-            ->shouldThrow(new UnexpectedTypeException('user', UserInterface::class))
+            ->shouldThrow(\InvalidArgumentException::class)
             ->during('reloadUser', [$event])
         ;
     }

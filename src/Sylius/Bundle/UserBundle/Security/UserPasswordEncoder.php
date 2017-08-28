@@ -38,7 +38,7 @@ class UserPasswordEncoder implements UserPasswordEncoderInterface
     /**
      * {@inheritdoc}
      */
-    public function encode(CredentialsHolderInterface $user)
+    public function encode(CredentialsHolderInterface $user): string
     {
         $encoder = $this->encoderFactory->getEncoder(get_class($user));
 
