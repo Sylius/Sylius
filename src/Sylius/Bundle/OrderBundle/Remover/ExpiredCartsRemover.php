@@ -55,7 +55,7 @@ final class ExpiredCartsRemover implements ExpiredCartsRemoverInterface
         OrderRepositoryInterface $orderRepository,
         ObjectManager $orderManager,
         EventDispatcherInterface $eventDispatcher,
-        $expirationPeriod
+        string $expirationPeriod
     ) {
         $this->orderRepository = $orderRepository;
         $this->orderManager = $orderManager;
@@ -63,7 +63,7 @@ final class ExpiredCartsRemover implements ExpiredCartsRemoverInterface
         $this->expirationPeriod = $expirationPeriod;
     }
 
-    public function remove()
+    public function remove(): void
     {
         $expiredCarts = $this->orderRepository->findCartsNotModifiedSince(new \DateTime('-'.$this->expirationPeriod));
 

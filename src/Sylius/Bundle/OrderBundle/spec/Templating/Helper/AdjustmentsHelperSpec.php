@@ -24,17 +24,12 @@ use Symfony\Component\Templating\Helper\Helper;
  */
 final class AdjustmentsHelperSpec extends ObjectBehavior
 {
-    function let(AdjustmentsAggregatorInterface $adjustmentsAggregator)
+    function let(AdjustmentsAggregatorInterface $adjustmentsAggregator): void
     {
         $this->beConstructedWith($adjustmentsAggregator);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(AdjustmentsHelper::class);
-    }
-
-    function it_is_a_helper()
+    function it_is_a_helper(): void
     {
         $this->shouldHaveType(Helper::class);
     }
@@ -44,7 +39,7 @@ final class AdjustmentsHelperSpec extends ObjectBehavior
         AdjustmentInterface $adjustment1,
         AdjustmentInterface $adjustment2,
         AdjustmentInterface $adjustment3
-    ) {
+    ): void {
         $adjustmentsAggregator
             ->aggregate([$adjustment1, $adjustment2, $adjustment3])
             ->willReturn(['tax 1' => 1000, 'tax2' => 500])
@@ -56,7 +51,7 @@ final class AdjustmentsHelperSpec extends ObjectBehavior
         ;
     }
 
-    function it_has_a_name()
+    function it_has_a_name(): void
     {
         $this->getName()->shouldReturn('sylius_adjustments');
     }

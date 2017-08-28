@@ -23,5 +23,5 @@ interface OrderNumberAssignerInterface
     /**
      * @param OrderInterface $order
      */
-    public function assignNumber(OrderInterface $order);
+    public function assignNumber(OrderInterface $order): void;
 }

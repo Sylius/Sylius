@@ -52,8 +52,8 @@ final class SequentialOrderNumberGenerator implements OrderNumberGeneratorInterf
     public function __construct(
         RepositoryInterface $sequenceRepository,
         FactoryInterface $sequenceFactory,
-        $startNumber = 1,
-        $numberLength = 9
+        int $startNumber = 1,
+        int $numberLength = 9
     ) {
         $this->sequenceRepository = $sequenceRepository;
         $this->sequenceFactory = $sequenceFactory;
@@ -64,7 +64,7 @@ final class SequentialOrderNumberGenerator implements OrderNumberGeneratorInterf
     /**
      * {@inheritdoc}
      */
-    public function generate(OrderInterface $order)
+    public function generate(OrderInterface $order): string
     {
         $sequence = $this->getSequence();
 
@@ -79,7 +79,7 @@ final class SequentialOrderNumberGenerator implements OrderNumberGeneratorInterf
      *
      * @return string
      */
-    private function generateNumber($index)
+    private function generateNumber(int $index): string
     {
         $number = $this->startNumber + $index;
 
@@ -89,7 +89,7 @@ final class SequentialOrderNumberGenerator implements OrderNumberGeneratorInterf
     /**
      * @return OrderSequenceInterface
      */
-    private function getSequence()
+    private function getSequence(): OrderSequenceInterface
     {
         /** @var OrderSequenceInterface $sequence */
         $sequence = $this->sequenceRepository->findOneBy([]);

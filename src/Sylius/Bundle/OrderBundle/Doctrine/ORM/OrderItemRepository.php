@@ -25,7 +25,7 @@ class OrderItemRepository extends EntityRepository implements OrderItemRepositor
     /**
      * {@inheritdoc}
      */
-    public function findOneByIdAndCartId($id, $cartId)
+    public function findOneByIdAndCartId($id, $cartId): OrderInterface
     {
         return $this->createQueryBuilder('o')
             ->innerJoin('o.order', 'cart')

@@ -39,7 +39,7 @@ class AdjustmentsHelper extends Helper
      *
      * @return array
      */
-    public function getAggregatedAdjustments(array $adjustments)
+    public function getAggregatedAdjustments(array $adjustments): array
     {
         return $this->adjustmentsAggregator->aggregate($adjustments);
     }
@@ -47,7 +47,7 @@ class AdjustmentsHelper extends Helper
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'sylius_adjustments';
     }
