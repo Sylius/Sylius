@@ -23,7 +23,7 @@ interface AttributeSubjectInterface
     /**
      * @return Collection|AttributeValueInterface[]
      */
-    public function getAttributes(): ?Collection;
+    public function getAttributes(): Collection;
 
     /**
      * @param string $localeCode
@@ -31,24 +31,24 @@ interface AttributeSubjectInterface
      *
      * @return Collection|AttributeValueInterface[]
      */
-    public function getAttributesByLocale(string $localeCode, string $fallbackLocaleCode): ?Collection;
+    public function getAttributesByLocale(string $localeCode, string $fallbackLocaleCode): Collection;
 
     /**
-     * @param AttributeValueInterface|null $attribute
+     * @param AttributeValueInterface $attribute
      */
-    public function addAttribute(?AttributeValueInterface $attribute): void;
+    public function addAttribute(AttributeValueInterface $attribute): void;
 
     /**
-     * @param AttributeValueInterface|null $attribute
+     * @param AttributeValueInterface $attribute
      */
-    public function removeAttribute(?AttributeValueInterface $attribute): void;
+    public function removeAttribute(AttributeValueInterface $attribute): void;
 
     /**
-     * @param AttributeValueInterface|null $attribute
+     * @param AttributeValueInterface $attribute
      *
      * @return bool
      */
-    public function hasAttribute(?AttributeValueInterface $attribute): bool;
+    public function hasAttribute(AttributeValueInterface $attribute): bool;
 
     /**
      * @param string $attributeCode
@@ -56,13 +56,13 @@ interface AttributeSubjectInterface
      *
      * @return bool
      */
-    public function hasAttributeByCodeAndLocale(string $attributeCode, ?string $localeCode): bool;
+    public function hasAttributeByCodeAndLocale(string $attributeCode, ?string $localeCode = null): bool;
 
     /**
      * @param string $attributeCode
      * @param string|null $localeCode
      *
-     * @return AttributeInterface
+     * @return AttributeValueInterface|null
      */
-    public function getAttributeByCodeAndLocale(string $attributeCode, ?string $localeCode): AttributeInterface;
+    public function getAttributeByCodeAndLocale(string $attributeCode, ?string $localeCode = null): ?AttributeValueInterface;
 }

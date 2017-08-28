@@ -95,7 +95,7 @@ class AttributeValue implements AttributeValueInterface
     /**
      * {@inheritdoc}
      */
-    public function setSubject(?AttributeSubjectInterface $subject = null): void
+    public function setSubject(?AttributeSubjectInterface $subject): void
     {
         $this->subject = $subject;
     }
@@ -263,9 +263,9 @@ class AttributeValue implements AttributeValueInterface
     }
 
     /**
-     * @param \DateTimeInterface|null $datetime
+     * @param \DateTimeInterface $datetime
      */
-    protected function setDatetime(?\DateTimeInterface $datetime = null): void
+    protected function setDatetime(?\DateTimeInterface $datetime): void
     {
         $this->datetime = $datetime;
     }
@@ -281,7 +281,7 @@ class AttributeValue implements AttributeValueInterface
     /**
      * @param \DateTimeInterface|null $date
      */
-    protected function setDate(?\DateTimeInterface $date = null): void
+    protected function setDate(?\DateTimeInterface $date): void
     {
         $this->date = $date;
     }

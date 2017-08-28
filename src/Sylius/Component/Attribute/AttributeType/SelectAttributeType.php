@@ -69,7 +69,7 @@ final class SelectAttributeType implements AttributeTypeInterface
 
     /**
      * @param ExecutionContextInterface $context
-     * @param string|null $value
+     * @param array|null $value
      * @param array $validationConfiguration
      *
      * @return ConstraintViolationListInterface

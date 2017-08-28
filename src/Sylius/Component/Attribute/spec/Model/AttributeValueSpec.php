@@ -51,15 +51,6 @@ final class AttributeValueSpec extends ObjectBehavior
         $this->getSubject()->shouldReturn($subject);
     }
 
-    function it_allows_detaching_itself_from_a_subject(AttributeSubjectInterface $subject): void
-    {
-        $this->setSubject($subject);
-        $this->getSubject()->shouldReturn($subject);
-
-        $this->setSubject(null);
-        $this->getSubject()->shouldReturn(null);
-    }
-
     function it_has_no_attribute_defined_by_default(): void
     {
         $this->getAttribute()->shouldReturn(null);

@@ -186,12 +186,15 @@ class Product implements ProductInterface
         $this->getTranslation()->setMetaDescription($metaDescription);
     }
 
-    public function getAttributes(): ?Collection
+    public function getAttributes(): Collection
     {
         return $this->attributes;
     }
 
-    public function getAttributesByLocale(string $localeCode, string $fallbackLocaleCode): ?Collection
+    /**
+     * {@inheritdoc}
+     */
+    public function getAttributesByLocale(string $localeCode, string $fallbackLocaleCode): Collection
     {
         $attributes = $this->attributes->filter(
             function (ProductAttributeValueInterface $attribute) use ($fallbackLocaleCode) {
@@ -204,9 +207,12 @@ class Product implements ProductInterface
             $attributesWithFallback[] = $this->getAttributeInDifferentLocale($attribute, $localeCode);
         }
 
-        return $attributesWithFallback;
+        return new ArrayCollection($attributesWithFallback);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function addAttribute(?AttributeValueInterface $attribute): void
     {
         Assert::isInstanceOf(
@@ -221,6 +227,9 @@ class Product implements ProductInterface
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function removeAttribute(?AttributeValueInterface $attribute): void
     {
         Assert::isInstanceOf(
@@ -235,12 +244,18 @@ class Product implements ProductInterface
         }
     }
 
-    public function hasAttribute(?AttributeValueInterface $attribute): bool
+    /**
+     * {@inheritdoc}
+     */
+    public function hasAttribute(AttributeValueInterface $attribute): bool
     {
         return $this->attributes->contains($attribute);
     }
 
-    public function hasAttributeByCodeAndLocale(string $attributeCode, string $localeCode = null): bool
+    /**
+     * {@inheritdoc}
+     */
+    public function hasAttributeByCodeAndLocale(string $attributeCode, ?string $localeCode = null): bool
     {
         $localeCode = $localeCode ?: $this->getTranslation()->getLocale();
 
@@ -254,7 +269,10 @@ class Product implements ProductInterface
         return false;
     }
 
-    public function getAttributeByCodeAndLocale(string $attributeCode, string $localeCode = null): AttributeInterface
+    /**
+     * {@inheritdoc}
+     */
+    public function getAttributeByCodeAndLocale(string $attributeCode, ?string $localeCode = null): ?AttributeValueInterface
     {
         if (null === $localeCode) {
             $localeCode = $this->getTranslation()->getLocale();
