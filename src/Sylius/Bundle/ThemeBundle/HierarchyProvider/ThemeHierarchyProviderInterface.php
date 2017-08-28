@@ -21,7 +21,7 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 interface ThemeHierarchyProviderInterface
 {
     /**
-     * @param ThemeInterface|null $theme
+     * @param ThemeInterface $theme
      *
      * @return array|ThemeInterface[]
      *
