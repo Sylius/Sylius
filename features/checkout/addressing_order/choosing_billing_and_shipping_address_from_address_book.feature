@@ -1,8 +1,8 @@
 @checkout
 Feature: Choosing an address from address book
-    In order to address an order by choosing it from my address book
-    As a Customer
     In order to quickly fill in my address information during checkout
+    As a Customer
+    I want to be able to choose it from my address book
 
     Background:
         Given the store operates on a single channel in "United States"
