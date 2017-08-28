@@ -16,7 +16,6 @@ namespace spec\Sylius\Bundle\ProductBundle\Validator;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ProductBundle\Validator\Constraint\UniqueSimpleProductCode;
-use Sylius\Bundle\ProductBundle\Validator\UniqueSimpleProductCodeValidator;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Product\Repository\ProductVariantRepositoryInterface;
@@ -29,11 +28,6 @@ final class UniqueSimpleProductCodeValidatorSpec extends ObjectBehavior
     function let(ExecutionContextInterface $context, ProductVariantRepositoryInterface $productVariantRepository): void {
         $this->beConstructedWith($productVariantRepository);
         $this->initialize($context);
-    }
-
-    function it_is_initializable(): void
-    {
-        $this->shouldHaveType(UniqueSimpleProductCodeValidator::class);
     }
 
     function it_is_a_constraint_validator(): void

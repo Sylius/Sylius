@@ -206,7 +206,7 @@ final class ManagingProductVariantsContext implements Context
      */
     public function iSetThePositionOfTo($name, $position)
     {
-        $this->indexPage->setPosition($name, (int) $position);
+        $this->indexPage->setPosition($name, $position);
     }
 
     /**

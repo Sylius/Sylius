@@ -34,13 +34,11 @@ final class ProductOptionValueCollectionType extends AbstractType
      * {@inheritdoc}
      *
      * @throws \InvalidArgumentException
+     * @throws InvalidConfigurationException
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        Assert::false(
-            $this->areOptionsValid($options),
-            'array or (\Traversable and \ArrayAccess) of "Sylius\Component\Variation\Model\OptionInterface" must be passed to collection'
-        );
+        $this->assertOptionsAreValid($options);
 
         foreach ($options['options'] as $i => $option) {
             if (!$option instanceof ProductOptionInterface) {
@@ -79,14 +77,15 @@ final class ProductOptionValueCollectionType extends AbstractType
     /**
      * @param mixed $options
      *
-     * @return bool
+     * @throws \InvalidArgumentException
      */
-    private function areOptionsValid($options): bool
+    private function assertOptionsAreValid($options)
     {
-        return
+        Assert::false((
             !isset($options['options']) ||
             !is_array($options['options']) &&
-            !($options['options'] instanceof \Traversable && $options['options'] instanceof \ArrayAccess)
-        ;
+            !($options['options'] instanceof \Traversable && $options['options'] instanceof \ArrayAccess)),
+            'array or (\Traversable and \ArrayAccess) of "Sylius\Component\Variation\Model\OptionInterface" must be passed to collection'
+        );
     }
 }

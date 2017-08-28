@@ -16,6 +16,7 @@ namespace Sylius\Bundle\ProductBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -25,9 +26,9 @@ class ProductSlugController extends Controller
     /**
      * @param Request $request
      *
-     * @return JsonResponse
+     * @return Response
      */
-    public function generateAction(Request $request): JsonResponse
+    public function generateAction(Request $request): Response
     {
         $name = $request->query->get('name');
 

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Component\Core\Provider;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -55,17 +56,25 @@ final class ProductVariantsPricesProviderSpec extends ObjectBehavior
         ProductVariantInterface $whiteSmallTShirt,
         ProductVariantPriceCalculatorInterface $productVariantPriceCalculator
     ) {
-        $tShirt->getVariants()->willReturn([
-            $blackSmallTShirt,
-            $whiteSmallTShirt,
-            $blackLargeTShirt,
-            $whiteLargeTShirt
-        ]);
+        $tShirt->getVariants()->willReturn(new ArrayCollection([
+            $blackSmallTShirt->getWrappedObject(),
+            $whiteSmallTShirt->getWrappedObject(),
+            $blackLargeTShirt->getWrappedObject(),
+            $whiteLargeTShirt->getWrappedObject()
+        ]));
 
-        $blackSmallTShirt->getOptionValues()->willReturn([$black, $small]);
-        $whiteSmallTShirt->getOptionValues()->willReturn([$white, $small]);
-        $blackLargeTShirt->getOptionValues()->willReturn([$black, $large]);
-        $whiteLargeTShirt->getOptionValues()->willReturn([$white, $large]);
+        $blackSmallTShirt->getOptionValues()->willReturn(
+            new ArrayCollection([$black->getWrappedObject(), $small->getWrappedObject()])
+        );
+        $whiteSmallTShirt->getOptionValues()->willReturn(
+            new ArrayCollection([$white->getWrappedObject(), $small->getWrappedObject()])
+        );
+        $blackLargeTShirt->getOptionValues()->willReturn(
+            new ArrayCollection([$black->getWrappedObject(), $large->getWrappedObject()])
+        );
+        $whiteLargeTShirt->getOptionValues()->willReturn(
+            new ArrayCollection([$white->getWrappedObject(), $large->getWrappedObject()])
+        );
 
         $productVariantPriceCalculator->calculate($blackSmallTShirt, ['channel' => $channel])->willReturn(1000);
         $productVariantPriceCalculator->calculate($whiteSmallTShirt, ['channel' => $channel])->willReturn(1500);

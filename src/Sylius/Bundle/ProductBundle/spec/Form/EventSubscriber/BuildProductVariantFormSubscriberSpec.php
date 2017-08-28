@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ProductBundle\Form\EventSubscriber;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductOptionValueCollectionType;
 use Sylius\Component\Product\Model\ProductInterface;
@@ -52,16 +53,16 @@ final class BuildProductVariantFormSubscriberSpec extends ObjectBehavior
         $event->getData()->willReturn($variant);
 
         $variant->getProduct()->willReturn($variable);
-        $variant->getOptionValues()->willReturn([$optionValue]);
-        $variable->getOptions()->willReturn([$options]);
+        $variant->getOptionValues()->willReturn(new ArrayCollection([$optionValue->getWrappedObject()]));
+        $variable->getOptions()->willReturn(new ArrayCollection([$options->getWrappedObject()]));
         $variable->hasOptions()->willReturn(true);
 
         $factory->createNamed(
             'optionValues',
             ProductOptionValueCollectionType::class,
-            [$optionValue],
+            new ArrayCollection([$optionValue->getWrappedObject()]),
             [
-                'options' => [$options],
+                'options' => new ArrayCollection([$options->getWrappedObject()]),
                 'auto_initialize' => false,
                 'disabled' => false,
             ]
@@ -88,16 +89,16 @@ final class BuildProductVariantFormSubscriberSpec extends ObjectBehavior
         $event->getData()->willReturn($variant);
 
         $variant->getProduct()->willReturn($variable);
-        $variant->getOptionValues()->willReturn([$optionValue]);
-        $variable->getOptions()->willReturn([$options]);
+        $variant->getOptionValues()->willReturn(new ArrayCollection([$optionValue->getWrappedObject()]));
+        $variable->getOptions()->willReturn(new ArrayCollection([$options->getWrappedObject()]));
         $variable->hasOptions()->willReturn(true);
 
         $factory->createNamed(
             'optionValues',
             ProductOptionValueCollectionType::class,
-            [$optionValue],
+            new ArrayCollection([$optionValue->getWrappedObject()]),
             [
-                'options' => [$options],
+                'options' => new ArrayCollection([$options->getWrappedObject()]),
                 'auto_initialize' => false,
                 'disabled' => true,
             ]

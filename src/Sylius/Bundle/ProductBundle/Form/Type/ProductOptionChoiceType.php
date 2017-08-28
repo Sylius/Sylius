@@ -55,7 +55,7 @@ final class ProductOptionChoiceType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'choices' => function (Options $options) {
+            'choices' => function (Options $options): array {
                 return $this->productOptionRepository->findAll();
             },
             'choice_value' => 'code',

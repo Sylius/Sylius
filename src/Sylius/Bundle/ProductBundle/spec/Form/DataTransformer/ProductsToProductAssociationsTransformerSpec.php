@@ -69,7 +69,7 @@ final class ProductsToProductAssociationsTransformerSpec extends ObjectBehavior
 
         $productAssociationType->getCode()->willReturn('accessories');
 
-        $this->transform([$productAssociation])->shouldReturn([
+        $this->transform(new ArrayCollection([$productAssociation->getWrappedObject()]))->shouldReturn([
             'accessories' => 'FIRST,SECOND',
         ]);
     }

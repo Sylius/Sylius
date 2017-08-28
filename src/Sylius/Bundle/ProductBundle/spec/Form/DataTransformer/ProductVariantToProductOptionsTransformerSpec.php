@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ProductBundle\Form\DataTransformer;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Product\Model\ProductInterface;
@@ -74,7 +75,7 @@ final class ProductVariantToProductOptionsTransformerSpec extends ObjectBehavior
         ProductInterface $variable,
         ProductOptionValueInterface $optionValue
     ): void {
-        $variable->getVariants()->willReturn([]);
+        $variable->getVariants()->willReturn(new ArrayCollection([]));
         $variable->getCode()->willReturn('example');
 
         $this
@@ -87,7 +88,7 @@ final class ProductVariantToProductOptionsTransformerSpec extends ObjectBehavior
         ProductVariantInterface $variant,
         ProductOptionValueInterface $optionValue
     ): void {
-        $variable->getVariants()->willReturn([$variant]);
+        $variable->getVariants()->willReturn(new ArrayCollection([$variant->getWrappedObject()]));
 
         $variant->hasOptionValue($optionValue)->willReturn(true);
 
@@ -99,7 +100,7 @@ final class ProductVariantToProductOptionsTransformerSpec extends ObjectBehavior
         ProductVariantInterface $variant,
         ProductOptionValueInterface $optionValue
     ): void {
-        $variable->getVariants()->willReturn([$variant]);
+        $variable->getVariants()->willReturn(new ArrayCollection([$variant->getWrappedObject()]));
         $variable->getCode()->willReturn('example');
 
         $variant->hasOptionValue($optionValue)->willReturn(false);
@@ -113,7 +114,7 @@ final class ProductVariantToProductOptionsTransformerSpec extends ObjectBehavior
         ProductInterface $variable,
         ProductVariantInterface $variant
     ): void {
-        $variable->getVariants()->willReturn([$variant]);
+        $variable->getVariants()->willReturn(new ArrayCollection([$variant->getWrappedObject()]));
         $variable->getCode()->willReturn('example');
 
         $this

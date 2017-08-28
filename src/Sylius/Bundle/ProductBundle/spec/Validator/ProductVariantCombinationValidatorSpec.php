@@ -16,9 +16,7 @@ namespace spec\Sylius\Bundle\ProductBundle\Validator;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ProductBundle\Validator\Constraint\ProductVariantCombination;
-use Sylius\Bundle\ProductBundle\Validator\ProductVariantCombinationValidator;
 use Sylius\Component\Product\Checker\ProductVariantsParityCheckerInterface;
-use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -30,11 +28,6 @@ final class ProductVariantCombinationValidatorSpec extends ObjectBehavior
     {
         $this->beConstructedWith($variantsParityChecker);
         $this->initialize($context);
-    }
-
-    function it_is_initializable(): void
-    {
-        $this->shouldHaveType(ProductVariantCombinationValidator::class);
     }
 
     function it_is_a_constraint_validator(): void
