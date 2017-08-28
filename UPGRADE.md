@@ -18,6 +18,12 @@
   * `AddressInterface::setProviceName`
   * `ProvinceInterface::setCountry`
   * `ZoneMemberInterface::setBelongsTo`
+  
+### Attribute / AttributeBundle
+
+* `SelectAttributeType` has been made final, use decoration instead of extending it.
+* `AttributeFactory` has been made final, use decoration instead of extending it.
+* `ProductAttributeValueInterface::setProduct` method does not longer have a default null argument and requires one to be explicitly passed.
 
 ### AdminBundle
 

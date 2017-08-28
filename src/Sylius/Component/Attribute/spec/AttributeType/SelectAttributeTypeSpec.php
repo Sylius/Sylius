@@ -31,22 +31,22 @@ use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
  */
 final class SelectAttributeTypeSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    function it_is_initializable(): void
     {
         $this->shouldHaveType(SelectAttributeType::class);
     }
 
-    function it_implements_attribute_type_interface()
+    function it_implements_attribute_type_interface(): void
     {
         $this->shouldImplement(AttributeTypeInterface::class);
     }
 
-    function its_storage_type_is_text()
+    function its_storage_type_is_text(): void
     {
         $this->getStorageType()->shouldReturn('json');
     }
 
-    function its_type_is_text()
+    function its_type_is_text(): void
     {
         $this->getType()->shouldReturn('select');
     }
@@ -59,7 +59,7 @@ final class SelectAttributeTypeSpec extends ObjectBehavior
         ConstraintViolationListInterface $constraintViolationList,
         ExecutionContextInterface $context,
         ValidatorInterface $validator
-    ) {
+    ): void {
         $attributeValue->getAttribute()->willReturn($attribute);
 
         $attributeValue->getValue()->willReturn(null);

@@ -25,7 +25,7 @@ use Symfony\Component\DependencyInjection\Definition;
  */
 final class RegisterAttributeFactoryPassSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    function it_is_initializable(): void
     {
         $this->shouldHaveType(RegisterAttributeFactoryPass::class);
     }
@@ -40,7 +40,7 @@ final class RegisterAttributeFactoryPassSpec extends ObjectBehavior
         Definition $attributeTypeRegistryDefinition,
         Definition $oldAttributeFactoryDefinition,
         Definition $newAttributeFactoryDefinition
-    ) {
+    ): void {
         $container->hasDefinition('sylius.registry.attribute_type')->willReturn(true);
         $container->getDefinition('sylius.registry.attribute_type')->willReturn($attributeTypeRegistryDefinition);
 
@@ -61,7 +61,7 @@ final class RegisterAttributeFactoryPassSpec extends ObjectBehavior
         $this->process($container);
     }
 
-    function it_does_not_process_if_container_has_not_proper_definition(ContainerBuilder $container)
+    function it_does_not_process_if_container_has_not_proper_definition(ContainerBuilder $container): void
     {
         $container->hasDefinition('sylius.registry.attribute_type')->willReturn(false);
         $container->getDefinition('sylius.registry.attribute_type')->shouldNotBeCalled();

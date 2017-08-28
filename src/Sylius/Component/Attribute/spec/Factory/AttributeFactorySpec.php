@@ -26,17 +26,17 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
  */
 final class AttributeFactorySpec extends ObjectBehavior
 {
-    function let(FactoryInterface $factory, ServiceRegistryInterface $attributeTypesRegistry)
+    function let(FactoryInterface $factory, ServiceRegistryInterface $attributeTypesRegistry): void
     {
         $this->beConstructedWith($factory, $attributeTypesRegistry);
     }
 
-    function it_is_initializable()
+    function it_is_initializable(): void
     {
         $this->shouldHaveType(AttributeFactory::class);
     }
 
-    function it_implements_attribute_factory_interface()
+    function it_implements_attribute_factory_interface(): void
     {
         $this->shouldImplement(AttributeFactoryInterface::class);
     }
@@ -44,7 +44,7 @@ final class AttributeFactorySpec extends ObjectBehavior
     function it_creates_untyped_attribute(
         FactoryInterface $factory,
         Attribute $untypedAttribute
-    ) {
+    ): void {
         $factory->createNew()->willReturn($untypedAttribute);
 
         $this->createNew()->shouldReturn($untypedAttribute);
@@ -55,7 +55,7 @@ final class AttributeFactorySpec extends ObjectBehavior
         AttributeTypeInterface $attributeType,
         FactoryInterface $factory,
         ServiceRegistryInterface $attributeTypesRegistry
-    ) {
+    ): void {
         $factory->createNew()->willReturn($typedAttribute);
 
         $attributeType->getStorageType()->willReturn('datetime');

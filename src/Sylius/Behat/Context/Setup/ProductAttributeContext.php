@@ -91,7 +91,7 @@ final class ProductAttributeContext implements Context
     public function theStoreHasAProductAttributeWithPosition($type, $name, $position)
     {
         $productAttribute = $this->createProductAttribute($type, $name);
-        $productAttribute->setPosition($position);
+        $productAttribute->setPosition((int) $position);
 
         $this->saveProductAttribute($productAttribute);
     }
@@ -193,7 +193,7 @@ final class ProductAttributeContext implements Context
         $position
     ) {
         $attribute = $this->provideProductAttribute('percent', $productAttributeName);
-        $attribute->setPosition($position);
+        $attribute->setPosition((int) $position);
         $attributeValue = $this->createProductAttributeValue(rand(1, 100) / 100, $attribute);
 
         $product->addAttribute($attributeValue);

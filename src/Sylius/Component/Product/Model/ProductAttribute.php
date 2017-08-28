@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Component\Product\Model;
 
 use Sylius\Component\Attribute\Model\Attribute as BaseAttribute;
+use Sylius\Component\Attribute\Model\AttributeTranslationInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -24,7 +25,7 @@ class ProductAttribute extends BaseAttribute implements ProductAttributeInterfac
     /**
      * {@inheritdoc}
      */
-    protected function createTranslation(): ProductAttributeTranslationInterface
+    protected function createTranslation(): AttributeTranslationInterface
     {
         return new ProductAttributeTranslation();
     }
