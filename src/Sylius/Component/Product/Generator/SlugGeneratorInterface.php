@@ -23,5 +23,5 @@ interface SlugGeneratorInterface
      *
      * @return string
      */
-    public function generate($name);
+    public function generate(string $name): string;
 }

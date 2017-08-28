@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ProductBundle\Doctrine\ORM;
 
+use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Product\Repository\ProductOptionRepositoryInterface;
 
@@ -24,7 +25,7 @@ class ProductOptionRepository extends EntityRepository implements ProductOptionR
     /**
      * {@inheritdoc}
      */
-    public function createListQueryBuilder($locale)
+    public function createListQueryBuilder(string $locale): QueryBuilder
     {
         return $this->createQueryBuilder('o')
             ->innerJoin('o.translations', 'translation')
@@ -36,7 +37,7 @@ class ProductOptionRepository extends EntityRepository implements ProductOptionR
     /**
      * {@inheritdoc}
      */
-    public function findByName($name, $locale)
+    public function findByName(string $name, string $locale): array
     {
         return $this->createQueryBuilder('o')
             ->innerJoin('o.translations', 'translation')

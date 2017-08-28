@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ProductBundle\Validator\Constraint;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ProductBundle\Validator\Constraint\ProductVariantCombination;
 use Symfony\Component\Validator\Constraint;
 
 /**
@@ -22,17 +21,12 @@ use Symfony\Component\Validator\Constraint;
  */
 final class ProductVariantCombinationSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ProductVariantCombination::class);
-    }
-
-    function it_is_a_validation_constraint()
+    function it_is_a_validation_constraint(): void
     {
         $this->shouldHaveType(Constraint::class);
     }
 
-    function it_is_class_constraint()
+    function it_is_class_constraint(): void
     {
         $this->getTargets()->shouldReturn(Constraint::CLASS_CONSTRAINT);
     }

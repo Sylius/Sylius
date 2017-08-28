@@ -27,5 +27,5 @@ interface ProductVariantsParityCheckerInterface
      *
      * @return bool
      */
-    public function checkParity(ProductVariantInterface $variant, ProductInterface $product);
+    public function checkParity(ProductVariantInterface $variant, ProductInterface $product): bool;
 }

@@ -27,13 +27,13 @@ interface ProductAssociationTypeRepositoryInterface extends RepositoryInterface
      *
      * @return QueryBuilder
      */
-    public function createListQueryBuilder($locale);
+    public function createListQueryBuilder(string $locale): QueryBuilder;
 
     /**
      * @param string $name
      * @param string $locale
      *
-     * @return ProductAssociationTypeInterface[]
+     * @return array|ProductAssociationTypeInterface[]
      */
-    public function findByName($name, $locale);
+    public function findByName(string $name, string $locale): array;
 }

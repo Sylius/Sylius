@@ -53,9 +53,9 @@ class ProductAssociationType implements ProductAssociationTypeInterface
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
-        return $this->getName();
+        return (string) $this->getName();
     }
 
     /**
@@ -85,7 +85,7 @@ class ProductAssociationType implements ProductAssociationTypeInterface
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->getTranslation()->getName();
     }
@@ -93,7 +93,7 @@ class ProductAssociationType implements ProductAssociationTypeInterface
     /**
      * {@inheritdoc}
      */
-    public function setName($name)
+    public function setName(?string $name): void
     {
         $this->getTranslation()->setName($name);
     }
@@ -101,7 +101,7 @@ class ProductAssociationType implements ProductAssociationTypeInterface
     /**
      * {@inheritdoc}
      */
-    protected function createTranslation()
+    protected function createTranslation(): ProductAssociationTypeTranslationInterface
     {
         return new ProductAssociationTypeTranslation();
     }

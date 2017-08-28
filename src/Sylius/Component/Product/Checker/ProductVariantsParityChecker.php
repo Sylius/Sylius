@@ -25,7 +25,7 @@ final class ProductVariantsParityChecker implements ProductVariantsParityChecker
     /**
      * {@inheritdoc}
      */
-    public function checkParity(ProductVariantInterface $variant, ProductInterface $product)
+    public function checkParity(ProductVariantInterface $variant, ProductInterface $product): bool
     {
         foreach ($product->getVariants() as $existingVariant) {
             // This check is require, because this function has to look for any other different variant with same option values set
@@ -47,7 +47,7 @@ final class ProductVariantsParityChecker implements ProductVariantsParityChecker
      *
      * @return bool
      */
-    private function matchOptions(ProductVariantInterface $variant, ProductVariantInterface $existingVariant)
+    private function matchOptions(ProductVariantInterface $variant, ProductVariantInterface $existingVariant): bool
     {
         foreach ($variant->getOptionValues() as $option) {
             if (!$existingVariant->hasOptionValue($option)) {

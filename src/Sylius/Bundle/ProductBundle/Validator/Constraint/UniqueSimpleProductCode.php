@@ -28,7 +28,7 @@ final class UniqueSimpleProductCode extends Constraint
     /**
      * {@inheritdoc}
      */
-    public function validatedBy()
+    public function validatedBy(): string
     {
         return 'sylius.validator.unique_simple_product_code';
     }
@@ -36,7 +36,7 @@ final class UniqueSimpleProductCode extends Constraint
     /**
      * {@inheritdoc}
      */
-    public function getTargets()
+    public function getTargets(): string
     {
         return self::CLASS_CONSTRAINT;
     }

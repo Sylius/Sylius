@@ -25,7 +25,7 @@ class ProductRepository extends EntityRepository implements ProductRepositoryInt
     /**
      * {@inheritdoc}
      */
-    public function findByName($name, $locale)
+    public function findByName(string $name, string $locale): array
     {
         return $this->createQueryBuilder('o')
             ->innerJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
@@ -40,7 +40,7 @@ class ProductRepository extends EntityRepository implements ProductRepositoryInt
     /**
      * {@inheritdoc}
      */
-    public function findByNamePart($phrase, $locale)
+    public function findByNamePart(string $phrase, string $locale): array
     {
         return $this->createQueryBuilder('o')
             ->innerJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')

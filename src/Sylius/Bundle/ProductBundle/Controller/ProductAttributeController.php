@@ -26,7 +26,7 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ProductAttributeController extends ResourceController
+final class ProductAttributeController extends ResourceController
 {
     /**
      * @param Request $request
@@ -34,7 +34,7 @@ class ProductAttributeController extends ResourceController
      *
      * @return Response
      */
-    public function getAttributeTypesAction(Request $request, $template)
+    public function getAttributeTypesAction(Request $request, string $template): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
@@ -53,7 +53,7 @@ class ProductAttributeController extends ResourceController
     /**
      * @return Response
      */
-    public function renderAttributesAction(Request $request)
+    public function renderAttributesAction(Request $request): Response
     {
         $template = $request->attributes->get('template', 'SyliusAttributeBundle::attributeChoice.html.twig');
 
@@ -69,7 +69,7 @@ class ProductAttributeController extends ResourceController
      *
      * @return Response
      */
-    public function renderAttributeValueFormsAction(Request $request)
+    public function renderAttributeValueFormsAction(Request $request): Response
     {
         $template = $request->attributes->get('template', 'SyliusAttributeBundle::attributeValueForms.html.twig');
 
@@ -98,11 +98,11 @@ class ProductAttributeController extends ResourceController
 
     /**
      * @param AttributeInterface $attribute
-     * @param string[] $localeCodes
+     * @param array|string[] $localeCodes
      *
-     * @return FormView[]
+     * @return array|FormView[]
      */
-    protected function getAttributeFormsInAllLocales(AttributeInterface $attribute, array $localeCodes)
+    protected function getAttributeFormsInAllLocales(AttributeInterface $attribute, array $localeCodes): array
     {
         $attributeForm = $this->get('sylius.form_registry.attribute_type')->get($attribute->getType(), 'default');
 

@@ -25,7 +25,7 @@ final class ProductAttributeType extends AttributeType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         parent::buildForm($builder, $options);
 
@@ -41,7 +41,7 @@ final class ProductAttributeType extends AttributeType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_product_attribute';
     }

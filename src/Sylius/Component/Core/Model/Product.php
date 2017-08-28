@@ -18,6 +18,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
 use Sylius\Component\Channel\Model\ChannelInterface as BaseChannelInterface;
 use Sylius\Component\Product\Model\Product as BaseProduct;
+use Sylius\Component\Product\Model\ProductTranslationInterface as BaseProductTranslationInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface as BaseTaxonInterface;
 
@@ -354,7 +355,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    protected function createTranslation()
+    protected function createTranslation(): BaseProductTranslationInterface
     {
         return new ProductTranslation();
     }

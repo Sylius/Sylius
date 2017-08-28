@@ -25,15 +25,15 @@ interface ProductRepositoryInterface extends RepositoryInterface
      * @param string $name
      * @param string $locale
      *
-     * @return ProductInterface[]
+     * @return array|ProductInterface[]
      */
-    public function findByName($name, $locale);
+    public function findByName(string $name, string $locale): array;
 
     /**
      * @param string $phrase
      * @param string $locale
      *
-     * @return ProductInterface[]
+     * @return array|ProductInterface[]
      */
-    public function findByNamePart($phrase, $locale);
+    public function findByNamePart(string $phrase, string $locale): array;
 }

@@ -41,7 +41,7 @@ class ProductOptionTranslation extends AbstractTranslation implements ProductOpt
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -49,7 +49,7 @@ class ProductOptionTranslation extends AbstractTranslation implements ProductOpt
     /**
      * {@inheritdoc}
      */
-    public function setName($name)
+    public function setName(?string $name): void
     {
         $this->name = $name;
     }

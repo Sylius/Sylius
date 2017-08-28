@@ -24,7 +24,7 @@ class ProductAttribute extends BaseAttribute implements ProductAttributeInterfac
     /**
      * {@inheritdoc}
      */
-    protected function createTranslation()
+    protected function createTranslation(): ProductAttributeTranslationInterface
     {
         return new ProductAttributeTranslation();
     }

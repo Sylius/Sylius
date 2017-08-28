@@ -23,7 +23,7 @@ class ProductAttributeValue extends BaseAttributeValue implements ProductAttribu
     /**
      * {@inheritdoc}
      */
-    public function getProduct()
+    public function getProduct(): ?ProductInterface
     {
         return parent::getSubject();
     }
@@ -31,7 +31,7 @@ class ProductAttributeValue extends BaseAttributeValue implements ProductAttribu
     /**
      * {@inheritdoc}
      */
-    public function setProduct(ProductInterface $product = null)
+    public function setProduct(?ProductInterface $product): void
     {
         parent::setSubject($product);
     }

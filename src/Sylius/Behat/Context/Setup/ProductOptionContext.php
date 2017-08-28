@@ -117,7 +117,7 @@ final class ProductOptionContext implements Context
         $productOption = $this->productOptionFactory->createNew();
         $productOption->setName($name);
         $productOption->setCode($code ?: StringInflector::nameToCode($name));
-        $productOption->setPosition($position);
+        $productOption->setPosition((null === $position) ? null : (int) $position);
 
         $this->sharedStorage->set('product_option', $productOption);
         $this->productOptionRepository->add($productOption);
