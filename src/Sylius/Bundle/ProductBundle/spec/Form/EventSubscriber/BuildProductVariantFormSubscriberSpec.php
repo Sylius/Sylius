@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ProductBundle\Form\EventSubscriber;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ProductBundle\Form\EventSubscriber\BuildProductVariantFormSubscriber;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductOptionValueCollectionType;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
@@ -27,17 +26,12 @@ use Symfony\Component\Form\FormInterface;
 
 final class BuildProductVariantFormSubscriberSpec extends ObjectBehavior
 {
-    function let(FormFactoryInterface $factory)
+    function let(FormFactoryInterface $factory): void
     {
         $this->beConstructedWith($factory);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(BuildProductVariantFormSubscriber::class);
-    }
-
-    function it_subscribes_to_event()
+    function it_subscribes_to_event(): void
     {
         static::getSubscribedEvents()->shouldReturn(
             [FormEvents::PRE_SET_DATA => 'preSetData']
@@ -53,7 +47,7 @@ final class BuildProductVariantFormSubscriberSpec extends ObjectBehavior
         ProductOptionInterface $options,
         ProductOptionValueInterface $optionValue,
         ProductVariantInterface $variant
-    ) {
+    ): void {
         $event->getForm()->willReturn($form);
         $event->getData()->willReturn($variant);
 
@@ -87,7 +81,7 @@ final class BuildProductVariantFormSubscriberSpec extends ObjectBehavior
         ProductOptionInterface $options,
         ProductOptionValueInterface $optionValue,
         ProductVariantInterface $variant
-    ) {
+    ): void {
         $this->beConstructedWith($factory, true);
 
         $event->getForm()->willReturn($form);

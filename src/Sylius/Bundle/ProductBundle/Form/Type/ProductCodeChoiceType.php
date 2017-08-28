@@ -40,15 +40,17 @@ final class ProductCodeChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->addModelTransformer(new ReversedTransformer(new ResourceToIdentifierTransformer($this->productRepository, 'code')));
+        $builder->addModelTransformer(
+            new ReversedTransformer(new ResourceToIdentifierTransformer($this->productRepository, 'code'))
+        );
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getParent()
+    public function getParent(): string
     {
         return ProductChoiceType::class;
     }
@@ -56,7 +58,7 @@ final class ProductCodeChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_product_code_choice';
     }

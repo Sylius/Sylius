@@ -40,7 +40,7 @@ final class UniqueSimpleProductCodeValidator extends ConstraintValidator
     /**
      * {@inheritdoc}
      */
-    public function validate($value, Constraint $constraint)
+    public function validate($value, Constraint $constraint): void
     {
         if (!$value instanceof ProductInterface) {
             throw new UnexpectedTypeException($value, ProductInterface::class);

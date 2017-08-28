@@ -23,7 +23,7 @@ final class ProductAttributeTranslationType extends AttributeTranslationType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_product_attribute_translation';
     }

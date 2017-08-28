@@ -27,7 +27,7 @@ class ProductSlugController extends Controller
      *
      * @return JsonResponse
      */
-    public function generateAction(Request $request)
+    public function generateAction(Request $request): JsonResponse
     {
         $name = $request->query->get('name');
 

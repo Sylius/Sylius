@@ -37,7 +37,7 @@ final class SyliusProductExtension extends AbstractResourceExtension implements 
     /**
      * {@inheritdoc}
      */
-    public function load(array $config, ContainerBuilder $container)
+    public function load(array $config, ContainerBuilder $container): void
     {
         $config = $this->processConfiguration($this->getConfiguration([], $container), $config);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
@@ -52,7 +52,7 @@ final class SyliusProductExtension extends AbstractResourceExtension implements 
     /**
      * {@inheritdoc}
      */
-    public function prepend(ContainerBuilder $container)
+    public function prepend(ContainerBuilder $container): void
     {
         $config = $this->processConfiguration(new Configuration(), $container->getExtensionConfig($this->getAlias()));
 
@@ -63,7 +63,7 @@ final class SyliusProductExtension extends AbstractResourceExtension implements 
      * @param ContainerBuilder $container
      * @param array $config
      */
-    private function prependAttribute(ContainerBuilder $container, array $config)
+    private function prependAttribute(ContainerBuilder $container, array $config): void
     {
         if (!$container->hasExtension('sylius_attribute')) {
             return;

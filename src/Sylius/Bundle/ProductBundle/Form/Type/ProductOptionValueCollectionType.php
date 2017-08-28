@@ -18,6 +18,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Exception\InvalidConfigurationException;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Webmozart\Assert\Assert;
 
 /**
  * This is special collection type, inspired by original 'collection' type
@@ -31,14 +32,15 @@ final class ProductOptionValueCollectionType extends AbstractType
 {
     /**
      * {@inheritdoc}
+     *
+     * @throws \InvalidArgumentException
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        if ($this->areOptionsValid($options)) {
-            throw new InvalidConfigurationException(
-                'array or (\Traversable and \ArrayAccess) of "Sylius\Component\Variation\Model\OptionInterface" must be passed to collection'
-            );
-        }
+        Assert::false(
+            $this->areOptionsValid($options),
+            'array or (\Traversable and \ArrayAccess) of "Sylius\Component\Variation\Model\OptionInterface" must be passed to collection'
+        );
 
         foreach ($options['options'] as $i => $option) {
             if (!$option instanceof ProductOptionInterface) {
@@ -58,7 +60,7 @@ final class ProductOptionValueCollectionType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
             ->setDefaults([
@@ -69,7 +71,7 @@ final class ProductOptionValueCollectionType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_product_option_value_collection';
     }
@@ -79,7 +81,7 @@ final class ProductOptionValueCollectionType extends AbstractType
      *
      * @return bool
      */
-    private function areOptionsValid($options)
+    private function areOptionsValid($options): bool
     {
         return
             !isset($options['options']) ||

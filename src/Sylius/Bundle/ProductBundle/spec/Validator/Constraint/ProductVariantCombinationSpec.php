@@ -22,17 +22,17 @@ use Symfony\Component\Validator\Constraint;
  */
 final class ProductVariantCombinationSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    function it_is_initializable(): void
     {
         $this->shouldHaveType(ProductVariantCombination::class);
     }
 
-    function it_is_a_validation_constraint()
+    function it_is_a_validation_constraint(): void
     {
         $this->shouldHaveType(Constraint::class);
     }
 
-    function it_is_class_constraint()
+    function it_is_class_constraint(): void
     {
         $this->getTargets()->shouldReturn(Constraint::CLASS_CONSTRAINT);
     }

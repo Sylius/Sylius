@@ -32,6 +32,14 @@ interface ProductVariantRepositoryInterface extends RepositoryInterface
     public function createQueryBuilderByProductId(string $locale, $productId): QueryBuilder;
 
     /**
+     * @param string $locale
+     * @param string $productCode
+     *
+     * @return QueryBuilder
+     */
+    public function createQueryBuilderByProductCode(string $locale, string $productCode): QueryBuilder;
+
+    /**
      * @param string $name
      * @param string $locale
      *

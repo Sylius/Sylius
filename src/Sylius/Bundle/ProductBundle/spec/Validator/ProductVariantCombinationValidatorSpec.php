@@ -26,18 +26,18 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 final class ProductVariantCombinationValidatorSpec extends ObjectBehavior
 {
-    function let(ExecutionContextInterface $context, ProductVariantsParityCheckerInterface $variantsParityChecker)
+    function let(ExecutionContextInterface $context, ProductVariantsParityCheckerInterface $variantsParityChecker): void
     {
         $this->beConstructedWith($variantsParityChecker);
         $this->initialize($context);
     }
 
-    function it_is_initializable()
+    function it_is_initializable(): void
     {
         $this->shouldHaveType(ProductVariantCombinationValidator::class);
     }
 
-    function it_is_a_constraint_validator()
+    function it_is_a_constraint_validator(): void
     {
         $this->shouldImplement(ConstraintValidator::class);
     }
@@ -47,7 +47,7 @@ final class ProductVariantCombinationValidatorSpec extends ObjectBehavior
         ProductInterface $product,
         ProductVariantInterface $variant,
         ProductVariantsParityCheckerInterface $variantsParityChecker
-    ) {
+    ): void {
         $constraint = new ProductVariantCombination([
             'message' => 'Variant with given options already exists',
         ]);
@@ -69,7 +69,7 @@ final class ProductVariantCombinationValidatorSpec extends ObjectBehavior
         ProductInterface $product,
         ProductVariantInterface $variant,
         ProductVariantsParityCheckerInterface $variantsParityChecker
-    ) {
+    ): void {
         $constraint = new ProductVariantCombination([
             'message' => 'Variant with given options already exists',
         ]);
@@ -91,7 +91,7 @@ final class ProductVariantCombinationValidatorSpec extends ObjectBehavior
         ProductInterface $product,
         ProductVariantInterface $variant,
         ProductVariantsParityCheckerInterface $variantsParityChecker
-    ) {
+    ): void {
         $constraint = new ProductVariantCombination([
             'message' => 'Variant with given options already exists',
         ]);
