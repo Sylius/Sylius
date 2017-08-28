@@ -25,14 +25,13 @@
             <tag name="sylius.context.locale" priority="128" />
         </service>
 
-        <service id="sylius.security.shop_user_impersonator" class="Sylius\Bundle\CoreBundle\Security\UserImpersonator" public="false">
-            <argument type="service" id="session" />
-            <argument type="string">%sylius_shop.firewall_context_name%</argument>
-        </service>
-
         <service id="sylius.twig.extension.widget.admin_notification" class="Sylius\Bundle\AdminBundle\Twig\NotificationWidgetExtension">
             <argument>%sylius.admin.notification.enabled%</argument>
             <argument>%sylius.admin.notification.frequency%</argument>
+            <tag name="twig.extension" />
+        </service>
+        <service id="sylius.twig.extension.impersonate_customer" class="Sylius\Bundle\AdminBundle\Twig\ImpersonateCustomerExtension">
+            <argument>%sylius.admin.shop_enabled%</argument>
             <tag name="twig.extension" />
         </service>
 
