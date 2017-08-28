@@ -69,7 +69,7 @@ class UniqueReviewerEmailValidator extends ConstraintValidator
 
         $token = $this->tokenStorage->getToken();
         if (null !== $customer) {
-            if ($customer->getEmail() === null) {
+            if (null === $customer->getEmail()) {
                 return;
             }
 

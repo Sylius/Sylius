@@ -124,6 +124,12 @@
 
 ### User / UserBundle
 
+* The following classes have been made final, use decoration instead of extending them:
+
+  * `UserDeleteListener`
+  * `UserLastLoginSubscriber`
+  * `UserReloaderListener`
+
 * The following methods does not longer have a default null argument and requires one to be explicitly passed:
 
   * `UserAwareInterface::setUser`
