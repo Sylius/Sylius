@@ -127,7 +127,7 @@ To achieve that you will need to:
                     continue;
                 }
                 foreach($admins as $admin) {
-                    $this->emailSender->send('out_of_stock', $admin->getEmail(), ['variant' => $variant]);
+                    $this->emailSender->send('out_of_stock', [$admin->getEmail()], ['variant' => $variant]);
                 }
             }
         }
