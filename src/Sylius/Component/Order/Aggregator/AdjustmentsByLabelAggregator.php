@@ -24,7 +24,7 @@ final class AdjustmentsByLabelAggregator implements AdjustmentsAggregatorInterfa
     /**
      * {@inheritdoc}
      */
-    public function aggregate(array $adjustments)
+    public function aggregate(array $adjustments): array
     {
         $aggregatedAdjustments = [];
         foreach ($adjustments as $adjustment) {

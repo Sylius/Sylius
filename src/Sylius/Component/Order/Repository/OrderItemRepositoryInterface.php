@@ -25,7 +25,7 @@ interface OrderItemRepositoryInterface extends RepositoryInterface
      * @param mixed $id
      * @param mixed $cartId
      *
-     * @return OrderItemInterface
+     * @return OrderItemInterface|null
      */
-    public function findOneByIdAndCartId($id, $cartId);
+    public function findOneByIdAndCartId($id, $cartId): ?OrderItemInterface;
 }
