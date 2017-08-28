@@ -15,24 +15,18 @@ namespace spec\Sylius\Component\Grid\Event;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Grid\Definition\Grid;
-use Sylius\Component\Grid\Event\GridDefinitionConverterEvent;
 
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 final class GridDefinitionConverterEventSpec extends ObjectBehavior
 {
-    function let(Grid $grid)
+    function let(Grid $grid): void
     {
         $this->beConstructedWith($grid);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(GridDefinitionConverterEvent::class);
-    }
-
-    function it_has_a_grid(Grid $grid)
+    function it_has_a_grid(Grid $grid): void
     {
         $this->getGrid()->shouldReturn($grid);
     }

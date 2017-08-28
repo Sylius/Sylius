@@ -27,5 +27,5 @@ interface DataSourceProviderInterface
      *
      * @return DataSourceInterface
      */
-    public function getDataSource(Grid $grid, Parameters $parameters);
+    public function getDataSource(Grid $grid, Parameters $parameters): DataSourceInterface;
 }

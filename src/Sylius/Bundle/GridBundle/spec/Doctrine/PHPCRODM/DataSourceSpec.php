@@ -24,8 +24,7 @@ use Doctrine\ODM\PHPCR\Query\Query;
 use Pagerfanta\Pagerfanta;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\GridBundle\Doctrine\PHPCRODM\DataSource;
-use Sylius\Bundle\GridBundle\Doctrine\PHPCRODM\ExpressionBuilder;
+use Sylius\Bundle\GridBundle\Doctrine\PHPCRODM\ExpressionBuilderInterface;
 use Sylius\Component\Grid\Data\DataSourceInterface;
 use Sylius\Component\Grid\Parameters;
 
@@ -34,17 +33,12 @@ use Sylius\Component\Grid\Parameters;
  */
 final class DataSourceSpec extends ObjectBehavior
 {
-    function let(QueryBuilder $queryBuilder, ExpressionBuilder $expressionBuilder)
+    function let(QueryBuilder $queryBuilder, ExpressionBuilderInterface $expressionBuilder): void
     {
         $this->beConstructedWith($queryBuilder, $expressionBuilder);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(DataSource::class);
-    }
-
-    function it_implements_data_source()
+    function it_implements_data_source(): void
     {
         $this->shouldImplement(DataSourceInterface::class);
     }
@@ -55,7 +49,7 @@ final class DataSourceSpec extends ObjectBehavior
         QueryBuilder $queryBuilder,
         ConstraintOrx $constraint,
         ConstraintComparison $comparisonConstraint
-    ) {
+    ): void {
         $queryBuilder->orWhere()->willReturn($constraint);
         $value->getValue()->willReturn('value');
         $comparison->getValue()->willReturn($value);
@@ -72,23 +66,23 @@ final class DataSourceSpec extends ObjectBehavior
 
     function it_should_throw_an_exception_if_an_unknown_condition_is_passed(
         Comparison $comparison
-    ) {
+    ): void {
         $this->shouldThrow(
             new \RuntimeException('Unknown restrict condition "foo"')
         )->during('restrict', [ $comparison, 'foo' ]);
     }
 
     function it_should_return_the_expression_builder(
-        ExpressionBuilder $expressionBuilder
-    ) {
+        ExpressionBuilderInterface $expressionBuilder
+    ): void {
         $this->getExpressionBuilder()->shouldReturn($expressionBuilder);
     }
 
     function it_should_get_the_data(
         QueryBuilder $queryBuilder,
-        ExpressionBuilder $expressionBuilder,
+        ExpressionBuilderInterface $expressionBuilder,
         Query $query
-    ) {
+    ): void {
         $expressionBuilder->getOrderBys()->willReturn([]);
 
         $queryBuilder->orderBy()->willReturn(null);
@@ -102,11 +96,11 @@ final class DataSourceSpec extends ObjectBehavior
 
     function it_should_set_the_order_on_the_query_builder(
         QueryBuilder $queryBuilder,
-        ExpressionBuilder $expressionBuilder,
+        ExpressionBuilderInterface $expressionBuilder,
         Query $query,
         OrderBy $orderBy,
         Ordering $ordering
-    ) {
+    ): void {
         $expressionBuilder->getOrderBys()->willReturn([
             'foo' => 'asc',
             'bar' => 'desc'
@@ -127,11 +121,11 @@ final class DataSourceSpec extends ObjectBehavior
 
     function it_should_set_the_order_on_the_query_builder_as_fields_only(
         QueryBuilder $queryBuilder,
-        ExpressionBuilder $expressionBuilder,
+        ExpressionBuilderInterface $expressionBuilder,
         Query $query,
         OrderBy $orderBy,
         Ordering $ordering
-    ) {
+    ): void {
         $expressionBuilder->getOrderBys()->willReturn([
             'foo',
             'bar',

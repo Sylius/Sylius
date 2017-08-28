@@ -20,7 +20,7 @@ use Sylius\Component\Grid\Data\ExpressionBuilderInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ExpressionBuilder implements ExpressionBuilderInterface
+final class ExpressionBuilder implements ExpressionBuilderInterface
 {
     /**
      * @var QueryBuilder
@@ -54,7 +54,7 @@ class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function comparison($field, $operator, $value)
+    public function comparison(string $field, string $operator, $value)
     {
         return new Comparison($field, $operator, $value);
     }
@@ -62,7 +62,7 @@ class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function equals($field, $value)
+    public function equals(string $field, $value)
     {
         $parameterName = $this->getParameterName($field);
         $this->queryBuilder->setParameter($parameterName, $value);
@@ -73,7 +73,7 @@ class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function notEquals($field, $value)
+    public function notEquals(string $field, $value)
     {
         $parameterName = $this->getParameterName($field);
         $this->queryBuilder->setParameter($parameterName, $value);
@@ -84,7 +84,7 @@ class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function lessThan($field, $value)
+    public function lessThan(string $field, $value)
     {
         $parameterName = $this->getParameterName($field);
         $this->queryBuilder->setParameter($parameterName, $value);
@@ -95,7 +95,7 @@ class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function lessThanOrEqual($field, $value)
+    public function lessThanOrEqual(string $field, $value)
     {
         $parameterName = $this->getParameterName($field);
         $this->queryBuilder->setParameter($parameterName, $value);
@@ -106,7 +106,7 @@ class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function greaterThan($field, $value)
+    public function greaterThan(string $field, $value)
     {
         $parameterName = $this->getParameterName($field);
         $this->queryBuilder->setParameter($parameterName, $value);
@@ -117,7 +117,7 @@ class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function greaterThanOrEqual($field, $value)
+    public function greaterThanOrEqual(string $field, $value)
     {
         $parameterName = $this->getParameterName($field);
         $this->queryBuilder->setParameter($parameterName, $value);
@@ -128,7 +128,7 @@ class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function in($field, array $values)
+    public function in(string $field, array $values)
     {
         return $this->queryBuilder->expr()->in($this->getFieldName($field), $values);
     }
@@ -136,7 +136,7 @@ class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function notIn($field, array $values)
+    public function notIn(string $field, array $values)
     {
         return $this->queryBuilder->expr()->notIn($this->getFieldName($field), $values);
     }
@@ -144,7 +144,7 @@ class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function isNull($field)
+    public function isNull(string $field)
     {
         return $this->queryBuilder->expr()->isNull($this->getFieldName($field));
     }
@@ -152,7 +152,7 @@ class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function isNotNull($field)
+    public function isNotNull(string $field)
     {
         return $this->queryBuilder->expr()->isNotNull($this->getFieldName($field));
     }
@@ -160,7 +160,7 @@ class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function like($field, $pattern)
+    public function like(string $field, string $pattern)
     {
         return $this->queryBuilder->expr()->like($this->getFieldName($field), $this->queryBuilder->expr()->literal($pattern));
     }
@@ -168,7 +168,7 @@ class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function notLike($field, $pattern)
+    public function notLike(string $field, string $pattern)
     {
         return $this->queryBuilder->expr()->notLike($this->getFieldName($field), $this->queryBuilder->expr()->literal($pattern));
     }
@@ -176,7 +176,7 @@ class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function orderBy($field, $direction)
+    public function orderBy(string $field, string $direction)
     {
         return $this->queryBuilder->orderBy($this->getFieldName($field), $direction);
     }
@@ -184,15 +184,17 @@ class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function addOrderBy($field, $direction)
+    public function addOrderBy(string $field, string $direction)
     {
         return $this->queryBuilder->addOrderBy($this->getFieldName($field), $direction);
     }
 
     /**
-     * {@inheritdoc}
+     * @param string $field
+     *
+     * @return string
      */
-    private function getFieldName($field)
+    private function getFieldName(string $field): string
     {
         if (false === strpos($field, '.')) {
             return $this->queryBuilder->getRootAlias().'.'.$field;
@@ -206,7 +208,7 @@ class ExpressionBuilder implements ExpressionBuilderInterface
      *
      * @return string
      */
-    private function getParameterName($field)
+    private function getParameterName(string $field): string
     {
         $parameterName = str_replace('.', '_', $field);
 
@@ -223,7 +225,7 @@ class ExpressionBuilder implements ExpressionBuilderInterface
      *
      * @return bool
      */
-    private function hasParameterName($parameterName)
+    private function hasParameterName(string $parameterName): bool
     {
         return null !== $this->queryBuilder->getParameter($parameterName);
     }

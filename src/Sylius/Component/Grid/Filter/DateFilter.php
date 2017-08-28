@@ -28,11 +28,11 @@ final class DateFilter implements FilterInterface
     /**
      * {@inheritdoc}
      */
-    public function apply(DataSourceInterface $dataSource, $name, $data, array $options)
+    public function apply(DataSourceInterface $dataSource, string $name, $data, array $options): void
     {
         $expressionBuilder = $dataSource->getExpressionBuilder();
 
-        $field = $this->getOption($options, 'field', $name);
+        $field = (string) $this->getOption($options, 'field', $name);
 
         $from = isset($data['from']) ? $this->getDateTime($data['from']) : null;
         if (null !== $from) {
@@ -59,11 +59,11 @@ final class DateFilter implements FilterInterface
     /**
      * @param array $options
      * @param string $name
-     * @param null|mixed $default
+     * @param mixed $default
      *
-     * @return null|mixed
+     * @return mixed
      */
-    private function getOption(array $options, $name, $default = null)
+    private function getOption(array $options, string $name, $default)
     {
         return isset($options[$name]) ? $options[$name] : $default;
     }
@@ -71,9 +71,9 @@ final class DateFilter implements FilterInterface
     /**
      * @param string[] $data
      *
-     * @return null|string
+     * @return string|null
      */
-    private function getDateTime(array $data)
+    private function getDateTime(array $data): ?string
     {
         if (empty($data['date'])) {
             return null;

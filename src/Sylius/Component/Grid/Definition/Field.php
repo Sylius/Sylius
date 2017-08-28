@@ -39,7 +39,7 @@ class Field
     private $label;
 
     /**
-     * @var boolean
+     * @var bool
      */
     private $enabled = true;
 
@@ -65,7 +65,7 @@ class Field
      * @param string $name
      * @param string $type
      */
-    private function __construct($name, $type)
+    private function __construct(string $name, string $type)
     {
         $this->name = $name;
         $this->type = $type;
@@ -80,7 +80,7 @@ class Field
      *
      * @return self
      */
-    public static function fromNameAndType($name, $type)
+    public static function fromNameAndType(string $name, string $type): self
     {
         return new self($name, $type);
     }
@@ -88,7 +88,7 @@ class Field
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -96,7 +96,7 @@ class Field
     /**
      * @return string
      */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
@@ -104,7 +104,7 @@ class Field
     /**
      * @return string
      */
-    public function getPath()
+    public function getPath(): string
     {
         return $this->path;
     }
@@ -112,7 +112,7 @@ class Field
     /**
      * @param string $path
      */
-    public function setPath($path)
+    public function setPath(string $path): void
     {
         $this->path = $path;
     }
@@ -120,7 +120,7 @@ class Field
     /**
      * @return string
      */
-    public function getLabel()
+    public function getLabel(): string
     {
         return $this->label;
     }
@@ -128,23 +128,23 @@ class Field
     /**
      * @param string $label
      */
-    public function setLabel($label)
+    public function setLabel(string $label): void
     {
         $this->label = $label;
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
-    public function isEnabled()
+    public function isEnabled(): bool
     {
         return $this->enabled;
     }
 
     /**
-     * @param boolean $enabled
+     * @param bool $enabled
      */
-    public function setEnabled($enabled)
+    public function setEnabled(bool $enabled): void
     {
         $this->enabled = $enabled;
     }
@@ -152,7 +152,7 @@ class Field
     /**
      * @param string|null $sortable
      */
-    public function setSortable($sortable)
+    public function setSortable(?string $sortable): void
     {
         $this->sortable = $sortable ?: $this->name;
     }
@@ -160,7 +160,7 @@ class Field
     /**
      * @return string|null
      */
-    public function getSortable()
+    public function getSortable(): ?string
     {
         return $this->sortable;
     }
@@ -168,7 +168,7 @@ class Field
     /**
      * @return bool
      */
-    public function isSortable()
+    public function isSortable(): bool
     {
         return null !== $this->sortable;
     }
@@ -176,7 +176,7 @@ class Field
     /**
      * @return array
      */
-    public function getOptions()
+    public function getOptions(): array
     {
         return $this->options;
     }
@@ -184,7 +184,7 @@ class Field
     /**
      * @param array $options
      */
-    public function setOptions(array $options)
+    public function setOptions(array $options): void
     {
         $this->options = $options;
     }
@@ -192,7 +192,7 @@ class Field
     /**
      * @return int
      */
-    public function getPosition()
+    public function getPosition(): int
     {
         return $this->position;
     }
@@ -200,7 +200,7 @@ class Field
     /**
      * @param int $position
      */
-    public function setPosition($position)
+    public function setPosition(int $position): void
     {
         $this->position = $position;
     }

@@ -16,16 +16,15 @@ namespace spec\Sylius\Component\Grid\Provider;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Grid\Definition\ArrayToDefinitionConverterInterface;
 use Sylius\Component\Grid\Definition\Grid;
-use Sylius\Component\Grid\Provider\ArrayGridProvider;
+use Sylius\Component\Grid\Exception\UndefinedGridException;
 use Sylius\Component\Grid\Provider\GridProviderInterface;
-use Sylius\Component\Grid\Provider\UndefinedGridException;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class ArrayGridProviderSpec extends ObjectBehavior
 {
-    function let(ArrayToDefinitionConverterInterface $converter, Grid $firstGrid, Grid $secondGrid, Grid $thirdGrid, Grid $fourthGrid)
+    function let(ArrayToDefinitionConverterInterface $converter, Grid $firstGrid, Grid $secondGrid, Grid $thirdGrid, Grid $fourthGrid): void
     {
         $converter->convert('sylius_admin_tax_category', ['configuration1'])->willReturn($firstGrid);
         $converter->convert('sylius_admin_product', ['configuration2' => 'foo'])->willReturn($secondGrid);
@@ -40,29 +39,24 @@ final class ArrayGridProviderSpec extends ObjectBehavior
         ]);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ArrayGridProvider::class);
-    }
-
-    function it_implements_grid_provider_interface()
+    function it_implements_grid_provider_interface(): void
     {
         $this->shouldImplement(GridProviderInterface::class);
     }
 
-    function it_returns_cloned_grid_definition_by_name(Grid $firstGrid, Grid $secondGrid, Grid $thirdGrid)
+    function it_returns_cloned_grid_definition_by_name(Grid $firstGrid, Grid $secondGrid, Grid $thirdGrid): void
     {
         $this->get('sylius_admin_tax_category')->shouldBeLike($firstGrid);
         $this->get('sylius_admin_product')->shouldBeLike($secondGrid);
         $this->get('sylius_admin_order')->shouldBeLike($thirdGrid);
     }
 
-    function it_supports_grid_inheritance(Grid $fourthGrid)
+    function it_supports_grid_inheritance(Grid $fourthGrid): void
     {
         $this->get('sylius_admin_product_from_taxon')->shouldBeLike($fourthGrid);
     }
 
-    function it_throws_an_exception_if_grid_does_not_exist()
+    function it_throws_an_exception_if_grid_does_not_exist(): void
     {
         $this
             ->shouldThrow(new UndefinedGridException('sylius_admin_order_item'))

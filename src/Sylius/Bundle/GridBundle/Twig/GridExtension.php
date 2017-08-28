@@ -36,7 +36,7 @@ final class GridExtension extends \Twig_Extension
     /**
      * {@inheritdoc}
      */
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [
             new \Twig_Function('sylius_grid_render', [$this->gridHelper, 'renderGrid'], ['is_safe' => ['html']]),

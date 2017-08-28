@@ -27,7 +27,7 @@ final class Configuration implements ConfigurationInterface
     /**
      * {@inheritdoc}
      */
-    public function getConfigTreeBuilder()
+    public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('sylius_grid');
@@ -42,7 +42,7 @@ final class Configuration implements ConfigurationInterface
     /**
      * @param ArrayNodeDefinition $node
      */
-    private function addDriversSection(ArrayNodeDefinition $node)
+    private function addDriversSection(ArrayNodeDefinition $node): void
     {
         $node
             ->children()
@@ -57,7 +57,7 @@ final class Configuration implements ConfigurationInterface
     /**
      * @param ArrayNodeDefinition $node
      */
-    private function addTemplatesSection(ArrayNodeDefinition $node)
+    private function addTemplatesSection(ArrayNodeDefinition $node): void
     {
         $node
             ->children()
@@ -81,7 +81,7 @@ final class Configuration implements ConfigurationInterface
     /**
      * @param ArrayNodeDefinition $node
      */
-    private function addGridsSection(ArrayNodeDefinition $node)
+    private function addGridsSection(ArrayNodeDefinition $node): void
     {
         $node
             ->children()

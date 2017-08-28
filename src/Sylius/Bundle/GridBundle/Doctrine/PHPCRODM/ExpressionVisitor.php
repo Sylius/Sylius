@@ -23,7 +23,7 @@ use Doctrine\ODM\PHPCR\Query\Builder\QueryBuilder;
  * Walks a Doctrine\Commons\Expr object graph and builds up a PHPCR-ODM
  * query using the (fluent) PHPCR-ODM query builder.
  */
-class ExpressionVisitor
+final class ExpressionVisitor
 {
     private $queryBuilder;
 
@@ -36,7 +36,12 @@ class ExpressionVisitor
     }
 
     /**
-     * {@inheritdoc}
+     * @param Comparison $comparison
+     * @param AbstractNode $parentNode
+     *
+     * @return mixed
+     *
+     * @throws \RuntimeException
      */
     public function walkComparison(Comparison $comparison, AbstractNode $parentNode)
     {
@@ -87,7 +92,12 @@ class ExpressionVisitor
     }
 
     /**
-     * {@inheritdoc}
+     * @param CompositeExpression $expr
+     * @param AbstractNode $parentNode
+     *
+     * @return mixed
+     *
+     * @throws \RuntimeException
      */
     public function walkCompositeExpression(CompositeExpression $expr, AbstractNode $parentNode)
     {
@@ -134,8 +144,12 @@ class ExpressionVisitor
      *
      * @param Expression $expr
      * @param AbstractNode|null $parentNode
+     *
+     * @return mixed
+     *
+     * @throws \RuntimeException
      */
-    public function dispatch(Expression $expr, AbstractNode $parentNode = null)
+    public function dispatch(Expression $expr, ?AbstractNode $parentNode = null)
     {
         if ($parentNode === null) {
             $parentNode = $this->queryBuilder->where();
@@ -157,7 +171,7 @@ class ExpressionVisitor
      *
      * @return string
      */
-    private function getField($field)
+    private function getField(string $field): string
     {
         return Driver::QB_SOURCE_ALIAS . '.' . $field;
     }
@@ -167,7 +181,7 @@ class ExpressionVisitor
      * @param string $field
      * @param array $values
      */
-    private function getInConstraint(AbstractNode $parentNode, $field, array $values)
+    private function getInConstraint(AbstractNode $parentNode, string $field, array $values): void
     {
         $orNode = $parentNode->orx();
 
