@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Twig;
 
-final class ImpersonateCustomerExtension extends \Twig_Extension
+final class ShopExtension extends \Twig_Extension
 {
     /**
      * @var bool
@@ -20,7 +20,7 @@ final class ImpersonateCustomerExtension extends \Twig_Extension
     }
 
     /**
-     * @return array|\Twig_Function
+     * @return array|\Twig_Function[]
      */
     public function getFunctions(): array
     {

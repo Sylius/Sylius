@@ -37,7 +37,7 @@ final class SyliusAdminExtension extends Extension
 
         $bundles = $container->getParameter('kernel.bundles');
         if (array_key_exists('SyliusShopBundle', $bundles)) {
-            $loader->load('services/shop.xml');
+            $loader->load('services/integrations/shop.xml');
             $container->setParameter('sylius.admin.shop_enabled', true);
         }
 
