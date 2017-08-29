@@ -9,7 +9,6 @@ Some of the features worth mentioning:
 * Supports different data sources: Doctrine ORM/ODM, native SQL query.
 * Rich filter functionality, easy to define your own filter type with flexible form
 * Each column type is configurable and you can create your own
-* Bulk actions
 * Automatic sorting
 
 .. toctree::
