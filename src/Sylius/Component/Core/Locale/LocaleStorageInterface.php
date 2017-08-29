@@ -25,14 +25,14 @@ interface LocaleStorageInterface
      * @param ChannelInterface $channel
      * @param string $localeCode
      */
-    public function set(ChannelInterface $channel, $localeCode);
+    public function set(ChannelInterface $channel, string $localeCode): void;
 
     /**
      * @param ChannelInterface $channel
      *
-     * @return string Locale code
+     * @return string
      *
      * @throws ChannelNotFoundException
      */
-    public function get(ChannelInterface $channel);
+    public function get(ChannelInterface $channel): string;
 }

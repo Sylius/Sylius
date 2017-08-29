@@ -38,7 +38,7 @@ final class LocaleStorage implements LocaleStorageInterface
     /**
      * {@inheritdoc}
      */
-    public function set(ChannelInterface $channel, $localeCode)
+    public function set(ChannelInterface $channel, string $localeCode): void
     {
         $this->storage->set($this->provideKey($channel), $localeCode);
     }
@@ -46,7 +46,7 @@ final class LocaleStorage implements LocaleStorageInterface
     /**
      * {@inheritdoc}
      */
-    public function get(ChannelInterface $channel)
+    public function get(ChannelInterface $channel): string
     {
         $localeCode = $this->storage->get($this->provideKey($channel));
         if (null === $localeCode) {
@@ -59,7 +59,7 @@ final class LocaleStorage implements LocaleStorageInterface
     /**
      * {@inheritdoc}
      */
-    private function provideKey(ChannelInterface $channel)
+    private function provideKey(ChannelInterface $channel): string
     {
         return '_locale_' . $channel->getCode();
     }

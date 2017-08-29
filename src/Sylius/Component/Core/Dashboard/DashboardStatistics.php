@@ -42,7 +42,7 @@ class DashboardStatistics
      *
      * @throws \InvalidArgumentException
      */
-    public function __construct($totalSales, $numberOfNewOrders, $numberOfNewCustomers)
+    public function __construct(int $totalSales, int $numberOfNewOrders, int $numberOfNewCustomers)
     {
         Assert::allInteger([$totalSales, $numberOfNewCustomers, $numberOfNewOrders]);
 
@@ -54,7 +54,7 @@ class DashboardStatistics
     /**
      * @return int
      */
-    public function getTotalSales()
+    public function getTotalSales(): int
     {
         return $this->totalSales;
     }
@@ -62,7 +62,7 @@ class DashboardStatistics
     /**
      * @return int
      */
-    public function getNumberOfNewOrders()
+    public function getNumberOfNewOrders(): int
     {
         return $this->numberOfNewOrders;
     }
@@ -70,7 +70,7 @@ class DashboardStatistics
     /**
      * @return int
      */
-    public function getNumberOfNewCustomers()
+    public function getNumberOfNewCustomers(): int
     {
         return $this->numberOfNewCustomers;
     }
@@ -78,7 +78,7 @@ class DashboardStatistics
     /**
      * @return int
      */
-    public function getAverageOrderValue()
+    public function getAverageOrderValue(): int
     {
         if (0 === $this->numberOfNewOrders) {
             return 0;

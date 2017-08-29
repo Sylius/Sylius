@@ -44,7 +44,7 @@ final class OrderPaymentProcessor implements OrderProcessorInterface
      */
     public function __construct(
         OrderPaymentProviderInterface $orderPaymentProvider,
-        $targetState = PaymentInterface::STATE_CART
+        string $targetState = PaymentInterface::STATE_CART
     ) {
         $this->orderPaymentProvider = $orderPaymentProvider;
         $this->targetState = $targetState;

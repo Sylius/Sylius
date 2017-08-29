@@ -53,7 +53,7 @@ final class UnpaidOrdersStateUpdater implements UnpaidOrdersStateUpdaterInterfac
         $this->expirationPeriod = $expirationPeriod;
     }
 
-    public function cancel()
+    public function cancel(): void
     {
         $expiredUnpaidOrders = $this->orderRepository->findOrdersUnpaidSince(new \DateTime('-'.$this->expirationPeriod));
         foreach ($expiredUnpaidOrders as $expiredUnpaidOrder) {
@@ -64,7 +64,7 @@ final class UnpaidOrdersStateUpdater implements UnpaidOrdersStateUpdaterInterfac
     /**
      * @param OrderInterface $expiredUnpaidOrder
      */
-    private function cancelOrder(OrderInterface $expiredUnpaidOrder)
+    private function cancelOrder(OrderInterface $expiredUnpaidOrder): void
     {
         $stateMachine = $this->stateMachineFactory->get($expiredUnpaidOrder, OrderTransitions::GRAPH);
         $stateMachine->apply(OrderTransitions::TRANSITION_CANCEL);

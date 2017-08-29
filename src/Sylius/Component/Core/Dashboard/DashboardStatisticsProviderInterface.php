@@ -25,5 +25,5 @@ interface DashboardStatisticsProviderInterface
      *
      * @return DashboardStatistics
      */
-    public function getStatisticsForChannel(ChannelInterface $channel);
+    public function getStatisticsForChannel(ChannelInterface $channel): DashboardStatistics;
 }

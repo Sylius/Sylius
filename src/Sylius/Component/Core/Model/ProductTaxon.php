@@ -49,7 +49,7 @@ class ProductTaxon implements ProductTaxonInterface
     /**
      * {@inheritdoc}
      */
-    public function getProduct()
+    public function getProduct(): ?ProductInterface
     {
         return $this->product;
     }
@@ -57,7 +57,7 @@ class ProductTaxon implements ProductTaxonInterface
     /**
      * {@inheritdoc}
      */
-    public function setProduct(ProductInterface $product)
+    public function setProduct(?ProductInterface $product): void
     {
         $this->product = $product;
     }
@@ -65,7 +65,7 @@ class ProductTaxon implements ProductTaxonInterface
     /**
      * {@inheritdoc}
      */
-    public function getTaxon()
+    public function getTaxon(): ?TaxonInterface
     {
         return $this->taxon;
     }
@@ -73,7 +73,7 @@ class ProductTaxon implements ProductTaxonInterface
     /**
      * {@inheritdoc}
      */
-    public function setTaxon(TaxonInterface $taxon)
+    public function setTaxon(?TaxonInterface $taxon): void
     {
         $this->taxon = $taxon;
     }
@@ -81,7 +81,7 @@ class ProductTaxon implements ProductTaxonInterface
     /**
      * {@inheritdoc}
      */
-    public function getPosition()
+    public function getPosition(): ?int
     {
         return $this->position;
     }
@@ -89,7 +89,7 @@ class ProductTaxon implements ProductTaxonInterface
     /**
      * {@inheritdoc}
      */
-    public function setPosition($position)
+    public function setPosition(?int $position): void
     {
         $this->position = $position;
     }

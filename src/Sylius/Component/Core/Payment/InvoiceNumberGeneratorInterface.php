@@ -27,5 +27,5 @@ interface InvoiceNumberGeneratorInterface
      *
      * @return string
      */
-    public function generate(OrderInterface $order, PaymentInterface $payment);
+    public function generate(OrderInterface $order, PaymentInterface $payment): string;
 }

@@ -67,7 +67,7 @@ final class OrderShippingStateResolver implements StateResolverInterface
      *
      * @return int
      */
-    private function countOrderShipmentsInState(OrderInterface $order, $shipmentState)
+    private function countOrderShipmentsInState(OrderInterface $order, string $shipmentState): int
     {
         $shipments = $order->getShipments();
 
@@ -88,9 +88,9 @@ final class OrderShippingStateResolver implements StateResolverInterface
      */
     private function allShipmentsInStateButOrderStateNotUpdated(
         OrderInterface $order,
-        $shipmentState,
-        $orderShippingState
-    ) {
+        string $shipmentState,
+        string $orderShippingState
+    ): bool {
         $shipmentInStateAmount = $this->countOrderShipmentsInState($order, $shipmentState);
         $shipmentAmount = $order->getShipments()->count();
 
@@ -102,7 +102,7 @@ final class OrderShippingStateResolver implements StateResolverInterface
      *
      * @return bool
      */
-    private function isPartiallyShippedButOrderStateNotUpdated(OrderInterface $order)
+    private function isPartiallyShippedButOrderStateNotUpdated(OrderInterface $order): bool
     {
         $shipmentInShippedStateAmount = $this->countOrderShipmentsInState($order, ShipmentInterface::STATE_SHIPPED);
         $shipmentAmount = $order->getShipments()->count();

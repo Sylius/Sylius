@@ -36,7 +36,7 @@ class ProductImage extends Image implements ProductImageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasProductVariants()
+    public function hasProductVariants(): bool
     {
         return !$this->productVariants->isEmpty();
     }
@@ -44,7 +44,7 @@ class ProductImage extends Image implements ProductImageInterface
     /**
      * {@inheritdoc}
      */
-    public function getProductVariants()
+    public function getProductVariants(): Collection
     {
         return $this->productVariants;
     }
@@ -52,7 +52,7 @@ class ProductImage extends Image implements ProductImageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasProductVariant(ProductVariantInterface $productVariant)
+    public function hasProductVariant(ProductVariantInterface $productVariant): bool
     {
         return $this->productVariants->contains($productVariant);
     }
@@ -60,7 +60,7 @@ class ProductImage extends Image implements ProductImageInterface
     /**
      * {@inheritdoc}
      */
-    public function addProductVariant(ProductVariantInterface $productVariant)
+    public function addProductVariant(ProductVariantInterface $productVariant): void
     {
         $this->productVariants->add($productVariant);
     }
@@ -68,7 +68,7 @@ class ProductImage extends Image implements ProductImageInterface
     /**
      * {@inheritdoc}
      */
-    public function removeProductVariant(ProductVariantInterface $productVariant)
+    public function removeProductVariant(ProductVariantInterface $productVariant): void
     {
         if ($this->hasProductVariant($productVariant)) {
             $this->productVariants->removeElement($productVariant);

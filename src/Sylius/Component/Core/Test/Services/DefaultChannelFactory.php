@@ -80,7 +80,7 @@ final class DefaultChannelFactory implements DefaultChannelFactoryInterface
         RepositoryInterface $channelRepository,
         RepositoryInterface $currencyRepository,
         RepositoryInterface $localeRepository,
-        $defaultLocaleCode
+        string $defaultLocaleCode
     ) {
         $this->channelFactory = $channelFactory;
         $this->currencyFactory = $currencyFactory;
@@ -94,7 +94,7 @@ final class DefaultChannelFactory implements DefaultChannelFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function create($code = null, $name = null, $currencyCode = null)
+    public function create(?string $code = null, ?string $name = null, ?string $currencyCode = null): array
     {
         $currency = $this->provideCurrency($currencyCode);
         $locale = $this->provideLocale();
@@ -124,9 +124,9 @@ final class DefaultChannelFactory implements DefaultChannelFactoryInterface
      *
      * @return CurrencyInterface
      */
-    private function provideCurrency($currencyCode = null)
+    private function provideCurrency(?string $currencyCode): CurrencyInterface
     {
-        $currencyCode = (null === $currencyCode) ? self::DEFAULT_CHANNEL_CURRENCY : $currencyCode;
+        $currencyCode = (null === $currencyCode) ?? $currencyCode;
 
         /** @var CurrencyInterface $currency */
         $currency = $this->currencyRepository->findOneBy(['code' => $currencyCode]);
@@ -144,7 +144,7 @@ final class DefaultChannelFactory implements DefaultChannelFactoryInterface
     /**
      * @return LocaleInterface
      */
-    private function provideLocale()
+    private function provideLocale(): LocaleInterface
     {
         /** @var LocaleInterface $locale */
         $locale = $this->localeRepository->findOneBy(['code' => $this->defaultLocaleCode]);

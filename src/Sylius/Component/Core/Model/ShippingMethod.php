@@ -52,7 +52,7 @@ class ShippingMethod extends BaseShippingMethod implements ShippingMethodInterfa
     /**
      * {@inheritdoc}
      */
-    public function getZone()
+    public function getZone(): ?ZoneInterface
     {
         return $this->zone;
     }
@@ -60,7 +60,7 @@ class ShippingMethod extends BaseShippingMethod implements ShippingMethodInterfa
     /**
      * {@inheritdoc}
      */
-    public function setZone(ZoneInterface $zone = null)
+    public function setZone(?ZoneInterface $zone): void
     {
         $this->zone = $zone;
     }
@@ -76,7 +76,7 @@ class ShippingMethod extends BaseShippingMethod implements ShippingMethodInterfa
     /**
      * {@inheritdoc}
      */
-    public function setTaxCategory(TaxCategoryInterface $category = null)
+    public function setTaxCategory(?TaxCategoryInterface $category): void
     {
         $this->taxCategory = $category;
     }
@@ -120,7 +120,7 @@ class ShippingMethod extends BaseShippingMethod implements ShippingMethodInterfa
     /**
      * {@inheritdoc}
      */
-    public static function getTranslationClass()
+    public static function getTranslationClass(): string
     {
         return ShippingMethodTranslation::class;
     }

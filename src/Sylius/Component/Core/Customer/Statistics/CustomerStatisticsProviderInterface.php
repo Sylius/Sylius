@@ -25,5 +25,5 @@ interface CustomerStatisticsProviderInterface
      *
      * @return CustomerStatistics
      */
-    public function getCustomerStatistics(CustomerInterface $customer);
+    public function getCustomerStatistics(CustomerInterface $customer): CustomerStatistics;
 }

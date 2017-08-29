@@ -25,7 +25,7 @@ interface PaymentRepositoryInterface extends RepositoryInterface
     /**
      * @return QueryBuilder
      */
-    public function createListQueryBuilder();
+    public function createListQueryBuilder(): QueryBuilder;
 
     /**
      * @param mixed $paymentId
@@ -33,5 +33,5 @@ interface PaymentRepositoryInterface extends RepositoryInterface
      *
      * @return PaymentInterface|null
      */
-    public function findOneByOrderId($paymentId, $orderId);
+    public function findOneByOrderId($paymentId, $orderId): ?PaymentInterface;
 }

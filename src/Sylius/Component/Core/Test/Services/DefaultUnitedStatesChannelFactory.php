@@ -114,7 +114,7 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
         FactoryInterface $currencyFactory,
         FactoryInterface $localeFactory,
         ZoneFactoryInterface $zoneFactory,
-        $defaultLocaleCode
+        string $defaultLocaleCode
     ) {
         $this->channelRepository = $channelRepository;
         $this->countryRepository = $countryRepository;
@@ -132,12 +132,12 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
     /**
      * {@inheritdoc}
      */
-    public function create($code = null, $name = null, $currencyCode = null)
+    public function create(?string $code = null, ?string $name = null, ?string $currencyCode = null): array
     {
         $currency = $this->provideCurrency($currencyCode);
         $locale = $this->provideLocale();
 
-        $channel = $this->createChannel($code ?: self::DEFAULT_CHANNEL_CODE, $name ?: self::DEFAULT_CHANNEL_NAME);
+        $channel = $this->createChannel($code ?? self::DEFAULT_CHANNEL_CODE, $name ?? self::DEFAULT_CHANNEL_NAME);
         $channel->addCurrency($currency);
         $channel->setBaseCurrency($currency);
         $channel->addLocale($locale);
@@ -160,8 +160,9 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
     /**
      * @return ChannelInterface
      */
-    private function createChannel($code, $name)
+    private function createChannel(string $code, string $name): ChannelInterface
     {
+        /** @var ChannelInterface $channel */
         $channel = $this->channelFactory->createNamed($name);
         $channel->setCode($code);
 
@@ -171,7 +172,7 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
     /**
      * @return CountryInterface
      */
-    private function createCountry()
+    private function createCountry(): CountryInterface
     {
         /** @var CountryInterface $country */
         $country = $this->countryFactory->createNew();
@@ -181,11 +182,13 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
     }
 
     /**
+     * @param string|null $currencyCode
+     *
      * @return CurrencyInterface
      */
-    private function provideCurrency($currencyCode = null)
+    private function provideCurrency(?string $currencyCode = null): CurrencyInterface
     {
-        $currencyCode = $currencyCode ?: self::DEFAULT_CURRENCY_CODE;
+        $currencyCode = $currencyCode ?? self::DEFAULT_CURRENCY_CODE;
 
         /** @var CurrencyInterface $currency */
         $currency = $this->currencyRepository->findOneBy(['code' => $currencyCode]);
@@ -203,7 +206,7 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
     /**
      * @return LocaleInterface
      */
-    private function provideLocale()
+    private function provideLocale(): LocaleInterface
     {
         /** @var LocaleInterface $locale */
         $locale = $this->localeRepository->findOneBy(['code' => $this->defaultLocaleCode]);
@@ -221,7 +224,7 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
     /**
      * @return ZoneInterface
      */
-    private function createZone()
+    private function createZone(): ZoneInterface
     {
         /** @var ZoneInterface $zone */
         $zone = $this->zoneFactory->createWithMembers([self::DEFAULT_ZONE_CODE]);

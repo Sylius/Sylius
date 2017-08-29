@@ -23,47 +23,47 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 interface ChannelPricingInterface extends ResourceInterface
 {
     /**
-     * @return ProductVariantInterface
+     * @return ProductVariantInterface|null
      */
-    public function getProductVariant();
+    public function getProductVariant(): ?ProductVariantInterface;
 
     /**
      * @param ProductVariantInterface|null $productVariant
      */
-    public function setProductVariant(ProductVariantInterface $productVariant = null);
+    public function setProductVariant(ProductVariantInterface $productVariant): void;
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getPrice();
+    public function getPrice(): ?int;
 
     /**
-     * @param int $price
+     * @param int|null $price
      */
-    public function setPrice($price);
+    public function setPrice(?int $price): void;
 
     /**
      * @return string
      */
-    public function getChannelCode();
+    public function getChannelCode(): ?string;
 
     /**
-     * @param string $channelCode
+     * @param string|null $channelCode
      */
-    public function setChannelCode($channelCode);
+    public function setChannelCode(?string $channelCode): void;
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getOriginalPrice();
+    public function getOriginalPrice(): ?int;
 
     /**
-     * @param int $originalPrice
+     * @param int|null $originalPrice
      */
-    public function setOriginalPrice($originalPrice);
+    public function setOriginalPrice(?int $originalPrice): void;
 
     /**
      * @return bool
      */
-    public function isPriceReduced();
+    public function isPriceReduced(): bool;
 }

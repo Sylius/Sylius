@@ -23,5 +23,5 @@ interface OrderTokenAssignerInterface
     /**
      * @param OrderInterface $order
      */
-    public function assignTokenValue(OrderInterface $order);
+    public function assignTokenValue(OrderInterface $order): void;
 }

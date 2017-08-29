@@ -25,17 +25,17 @@ use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 interface ShippingMethodInterface extends BaseShippingMethodInterface, TaxableInterface, ChannelsAwareInterface
 {
     /**
-     * @return ZoneInterface
+     * @return ZoneInterface|null
      */
-    public function getZone();
+    public function getZone(): ?ZoneInterface;
 
     /**
      * @param ZoneInterface|null $zone
      */
-    public function setZone(ZoneInterface $zone = null);
+    public function setZone(?ZoneInterface $zone): void;
 
     /**
      * @param TaxCategoryInterface|null $category
      */
-    public function setTaxCategory(TaxCategoryInterface $category = null);
+    public function setTaxCategory(?TaxCategoryInterface $category): void;
 }

@@ -26,7 +26,7 @@ interface PromotionRuleFactoryInterface extends FactoryInterface
      *
      * @return PromotionRuleInterface
      */
-    public function createCartQuantity($count);
+    public function createCartQuantity(int $count): PromotionRuleInterface;
 
     /**
      * @param string $channelCode
@@ -34,14 +34,14 @@ interface PromotionRuleFactoryInterface extends FactoryInterface
      *
      * @return PromotionRuleInterface
      */
-    public function createItemTotal($channelCode, $amount);
+    public function createItemTotal(string $channelCode, int $amount): PromotionRuleInterface;
 
     /**
      * @param array $taxons
      *
      * @return PromotionRuleInterface
      */
-    public function createHasTaxon(array $taxons);
+    public function createHasTaxon(array $taxons): PromotionRuleInterface;
 
     /**
      * @param string $channelCode
@@ -50,19 +50,19 @@ interface PromotionRuleFactoryInterface extends FactoryInterface
      *
      * @return PromotionRuleInterface
      */
-    public function createItemsFromTaxonTotal($channelCode, $taxonCode, $amount);
+    public function createItemsFromTaxonTotal(string $channelCode, string $taxonCode, int $amount): PromotionRuleInterface;
 
     /**
      * @param int $nth
      *
      * @return PromotionRuleInterface
      */
-    public function createNthOrder($nth);
+    public function createNthOrder(int $nth): PromotionRuleInterface;
 
     /**
      * @param string $productCode
      *
      * @return PromotionRuleInterface
      */
-    public function createContainsProduct($productCode);
+    public function createContainsProduct(string $productCode): PromotionRuleInterface;
 }

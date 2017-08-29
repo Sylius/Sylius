@@ -38,7 +38,7 @@ final class CurrencyStorage implements CurrencyStorageInterface
     /**
      * {@inheritdoc}
      */
-    public function set(ChannelInterface $channel, $currencyCode)
+    public function set(ChannelInterface $channel, string $currencyCode): void
     {
         if ($this->isBaseCurrency($currencyCode, $channel) || !$this->isAvailableCurrency($currencyCode, $channel)) {
             $this->storage->remove($this->provideKey($channel));
@@ -52,7 +52,7 @@ final class CurrencyStorage implements CurrencyStorageInterface
     /**
      * {@inheritdoc}
      */
-    public function get(ChannelInterface $channel)
+    public function get(ChannelInterface $channel): string
     {
         return $this->storage->get($this->provideKey($channel));
     }
@@ -60,18 +60,18 @@ final class CurrencyStorage implements CurrencyStorageInterface
     /**
      * {@inheritdoc}
      */
-    private function provideKey(ChannelInterface $channel)
+    private function provideKey(ChannelInterface $channel): string
     {
         return '_currency_' . $channel->getCode();
     }
 
     /**
-     * @param string$currencyCode
+     * @param string $currencyCode
      * @param ChannelInterface $channel
      *
      * @return bool
      */
-    private function isBaseCurrency($currencyCode, ChannelInterface $channel)
+    private function isBaseCurrency(string $currencyCode, ChannelInterface $channel): bool
     {
         return $currencyCode === $channel->getBaseCurrency()->getCode();
     }
@@ -82,7 +82,7 @@ final class CurrencyStorage implements CurrencyStorageInterface
      *
      * @return bool
      */
-    private function isAvailableCurrency($currencyCode, ChannelInterface $channel)
+    private function isAvailableCurrency(string $currencyCode, ChannelInterface $channel): bool
     {
         $availableCurrencies = array_map(
             function (CurrencyInterface $currency) {

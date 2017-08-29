@@ -23,10 +23,9 @@ final class ProportionalIntegerDistributor implements ProportionalIntegerDistrib
     /**
      * {@inheritdoc}
      */
-    public function distribute(array $integers, $amount)
+    public function distribute(array $integers, int $amount): array
     {
         Assert::allInteger($integers);
-        Assert::integer($amount);
 
         $total = array_sum($integers);
         $distributedAmounts = [];

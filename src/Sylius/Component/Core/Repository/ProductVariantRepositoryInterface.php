@@ -26,5 +26,5 @@ interface ProductVariantRepositoryInterface extends BaseProductVariantRepository
      *
      * @return QueryBuilder
      */
-    public function createInventoryListQueryBuilder($locale);
+    public function createInventoryListQueryBuilder(string $locale): QueryBuilder;
 }

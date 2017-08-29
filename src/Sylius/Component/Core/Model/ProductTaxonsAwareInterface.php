@@ -23,34 +23,34 @@ interface ProductTaxonsAwareInterface
     /**
      * @return Collection|ProductTaxonInterface[]
      */
-    public function getProductTaxons();
+    public function getProductTaxons(): Collection;
 
     /**
      * @param ProductTaxonInterface $productTaxon
      *
      * @return bool
      */
-    public function hasProductTaxon(ProductTaxonInterface $productTaxon);
+    public function hasProductTaxon(ProductTaxonInterface $productTaxon): bool;
 
     /**
      * @param ProductTaxonInterface $productTaxon
      */
-    public function addProductTaxon(ProductTaxonInterface $productTaxon);
+    public function addProductTaxon(ProductTaxonInterface $productTaxon): void;
 
     /**
      * @param ProductTaxonInterface $productTaxon
      */
-    public function removeProductTaxon(ProductTaxonInterface $productTaxon);
+    public function removeProductTaxon(ProductTaxonInterface $productTaxon): void;
 
     /**
      * @return Collection|TaxonInterface[]
      */
-    public function getTaxons();
+    public function getTaxons(): Collection;
 
     /**
      * @param TaxonInterface $taxon
      *
      * @return bool
      */
-    public function hasTaxon(TaxonInterface $taxon);
+    public function hasTaxon(TaxonInterface $taxon): bool;
 }

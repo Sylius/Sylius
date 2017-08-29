@@ -61,7 +61,7 @@ class OrderShipmentTaxesApplicator implements OrderTaxesApplicatorInterface
     /**
      * {@inheritdoc}
      */
-    public function apply(OrderInterface $order, ZoneInterface $zone)
+    public function apply(OrderInterface $order, ZoneInterface $zone): void
     {
         $shippingTotal = $order->getShippingTotal();
         if (0 === $shippingTotal) {
@@ -87,7 +87,7 @@ class OrderShipmentTaxesApplicator implements OrderTaxesApplicatorInterface
      * @param string $label
      * @param bool $included
      */
-    private function addAdjustment(OrderInterface $order, $taxAmount, $label, $included)
+    private function addAdjustment(OrderInterface $order, int $taxAmount, string $label, bool $included)
     {
         /** @var AdjustmentInterface $shippingTaxAdjustment */
         $shippingTaxAdjustment = $this->adjustmentFactory
@@ -100,8 +100,10 @@ class OrderShipmentTaxesApplicator implements OrderTaxesApplicatorInterface
      * @param OrderInterface $order
      *
      * @return ShippingMethodInterface
+     *
+     * @throws \LogicException
      */
-    private function getShippingMethod(OrderInterface $order)
+    private function getShippingMethod(OrderInterface $order): ShippingMethodInterface
     {
         /** @var ShipmentInterface $shipment */
         $shipment = $order->getShipments()->first();

@@ -27,5 +27,5 @@ interface ProductVariantsPricesProviderInterface
      *
      * @return array
      */
-    public function provideVariantsPrices(ProductInterface $product, ChannelInterface $channel);
+    public function provideVariantsPrices(ProductInterface $product, ChannelInterface $channel): array;
 }

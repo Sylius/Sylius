@@ -25,7 +25,7 @@ interface ProductTaxonRepositoryInterface extends RepositoryInterface
      * @param string $productCode
      * @param string $taxonCode
      *
-     * @return ProductTaxonInterface
+     * @return ProductTaxonInterface|null
      */
-    public function findOneByProductCodeAndTaxonCode($productCode, $taxonCode);
+    public function findOneByProductCodeAndTaxonCode(string $productCode, string $taxonCode): ?ProductTaxonInterface;
 }

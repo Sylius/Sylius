@@ -24,12 +24,12 @@ interface CustomerRepositoryInterface extends RepositoryInterface
     /**
      * @return int
      */
-    public function count();
+    public function count(): int;
 
     /**
      * @param int $count
      *
-     * @return CustomerInterface[]
+     * @return array|CustomerInterface[]
      */
-    public function findLatest($count);
+    public function findLatest(int $count): array;
 }

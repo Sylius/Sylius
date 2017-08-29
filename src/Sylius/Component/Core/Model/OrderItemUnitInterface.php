@@ -25,5 +25,5 @@ interface OrderItemUnitInterface extends BaseOrderItemUnitInterface, InventoryUn
     /**
      * @return int
      */
-    public function getTaxTotal();
+    public function getTaxTotal(): int;
 }

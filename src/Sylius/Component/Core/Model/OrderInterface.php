@@ -35,174 +35,170 @@ interface OrderInterface extends
     ChannelAwareInterface
 {
     /**
-     * @return null|UserInterface
+     * @return UserInterface|null
      */
-    public function getUser();
+    public function getUser(): ?UserInterface;
 
     /**
-     * @return AddressInterface
+     * @return AddressInterface|null
      */
-    public function getShippingAddress();
+    public function getShippingAddress(): ?AddressInterface;
 
     /**
-     * @param AddressInterface $address
+     * @param AddressInterface|null $address
      */
-    public function setShippingAddress(AddressInterface $address);
+    public function setShippingAddress(?AddressInterface $address): void;
 
     /**
-     * @return AddressInterface
+     * @return AddressInterface|null
      */
-    public function getBillingAddress();
+    public function getBillingAddress(): ?AddressInterface;
 
     /**
-     * @param AddressInterface $address
+     * @param AddressInterface|null $address
      */
-    public function setBillingAddress(AddressInterface $address);
+    public function setBillingAddress(?AddressInterface $address): void;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCheckoutState();
+    public function getCheckoutState(): ?string;
 
     /**
-     * @param string $checkoutState
+     * @param string|null $checkoutState
      */
-    public function setCheckoutState($checkoutState);
+    public function setCheckoutState(?string $checkoutState): void;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getPaymentState();
+    public function getPaymentState(): ?string;
 
     /**
-     * @param string $paymentState
+     * @param string|null $paymentState
      */
-    public function setPaymentState($paymentState);
+    public function setPaymentState(?string $paymentState): void;
 
     /**
      * @return Collection|OrderItemUnitInterface[]
      */
-    public function getItemUnits();
+    public function getItemUnits(): Collection;
 
     /**
      * @param ProductVariantInterface $variant
      *
      * @return Collection|OrderItemUnitInterface[]
      */
-    public function getItemUnitsByVariant(ProductVariantInterface $variant);
+    public function getItemUnitsByVariant(ProductVariantInterface $variant): Collection;
 
     /**
      * @return bool
      */
-    public function isShippingRequired();
+    public function isShippingRequired(): bool;
 
     /**
      * @return Collection|ShipmentInterface[]
      */
-    public function getShipments();
+    public function getShipments(): Collection;
 
     /**
      * @return bool
      */
-    public function hasShipments();
+    public function hasShipments(): bool;
 
     /**
      * @param ShipmentInterface $shipment
      */
-    public function addShipment(ShipmentInterface $shipment);
+    public function addShipment(ShipmentInterface $shipment): void;
 
     /**
      * @param ShipmentInterface $shipment
      */
-    public function removeShipment(ShipmentInterface $shipment);
+    public function removeShipment(ShipmentInterface $shipment): void;
 
-    public function removeShipments();
+    public function removeShipments(): void;
 
     /**
      * @param ShipmentInterface $shipment
      *
      * @return bool
      */
-    public function hasShipment(ShipmentInterface $shipment);
+    public function hasShipment(ShipmentInterface $shipment): bool;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCurrencyCode();
+    public function getCurrencyCode(): ?string;
 
     /**
-     * @param string
-     *
-     * @throws \InvalidArgumentException
+     * @param string|null $currencyCode
      */
-    public function setCurrencyCode($currencyCode);
+    public function setCurrencyCode(?string $currencyCode): void;
 
     /**
-     * @return string
-     *
-     * @throws \InvalidArgumentException
+     * @return string|null
      */
-    public function getLocaleCode();
+    public function getLocaleCode(): ?string;
 
     /**
-     * @param string
+     * @param string|null
      */
-    public function setLocaleCode($localeCode);
+    public function setLocaleCode(?string $localeCode): void;
 
     /**
-     * @param BaseCouponInterface $coupon
+     * @param BaseCouponInterface|null $coupon
      */
-    public function setPromotionCoupon(BaseCouponInterface $coupon = null);
+    public function setPromotionCoupon(?BaseCouponInterface $coupon): void;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShippingState();
+    public function getShippingState(): ?string;
 
     /**
-     * @param string $state
+     * @param string|null $state
      */
-    public function setShippingState($state);
+    public function setShippingState(?string $state): void;
 
     /**
      * @param string|null $state
      *
      * @return PaymentInterface|null
      */
-    public function getLastPayment($state = null);
+    public function getLastPayment(?string $state = null): ?PaymentInterface;
 
     /**
      * @return int
      */
-    public function getTaxTotal();
+    public function getTaxTotal(): int;
 
     /**
      * @return int
      */
-    public function getShippingTotal();
+    public function getShippingTotal(): int;
 
     /**
      * @return int
      */
-    public function getOrderPromotionTotal();
+    public function getOrderPromotionTotal(): int;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getTokenValue();
+    public function getTokenValue(): ?string;
 
     /**
-     * @param string $tokenValue
+     * @param string|null $tokenValue
      */
-    public function setTokenValue($tokenValue);
+    public function setTokenValue(?string $tokenValue): void;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCustomerIp();
+    public function getCustomerIp(): ?string;
 
     /**
-     * @param string $customerIp
+     * @param string|null $customerIp
      */
-    public function setCustomerIp($customerIp);
+    public function setCustomerIp(?string $customerIp): void;
 }

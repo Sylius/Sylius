@@ -38,7 +38,7 @@ final class CustomerUniqueAddressAdder implements CustomerAddressAdderInterface
     /**
      * {@inheritdoc}
      */
-    public function add(CustomerInterface $customer, AddressInterface $address)
+    public function add(CustomerInterface $customer, AddressInterface $address): void
     {
         foreach ($customer->getAddresses() as $customerAddress) {
             if ($this->addressComparator->equal($customerAddress, $address)) {

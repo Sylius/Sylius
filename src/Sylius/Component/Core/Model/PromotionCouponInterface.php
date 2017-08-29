@@ -23,10 +23,10 @@ interface PromotionCouponInterface extends BasePromotionCouponInterface
     /**
      * @return int|null
      */
-    public function getPerCustomerUsageLimit();
+    public function getPerCustomerUsageLimit(): ?int;
 
     /**
      * @param int|null $perCustomerUsageLimit
      */
-    public function setPerCustomerUsageLimit($perCustomerUsageLimit);
+    public function setPerCustomerUsageLimit(?int $perCustomerUsageLimit): void;
 }

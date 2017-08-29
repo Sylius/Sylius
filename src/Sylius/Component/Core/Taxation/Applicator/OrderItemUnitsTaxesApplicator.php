@@ -59,7 +59,7 @@ class OrderItemUnitsTaxesApplicator implements OrderTaxesApplicatorInterface
     /**
      * {@inheritdoc}
      */
-    public function apply(OrderInterface $order, ZoneInterface $zone)
+    public function apply(OrderInterface $order, ZoneInterface $zone): void
     {
         foreach ($order->getItems() as $item) {
             $taxRate = $this->taxRateResolver->resolve($item->getVariant(), ['zone' => $zone]);
@@ -84,7 +84,7 @@ class OrderItemUnitsTaxesApplicator implements OrderTaxesApplicatorInterface
      * @param string $label
      * @param bool $included
      */
-    private function addTaxAdjustment(OrderItemUnitInterface $unit, $taxAmount, $label, $included)
+    private function addTaxAdjustment(OrderItemUnitInterface $unit, int $taxAmount, string $label, bool $included)
     {
         $unitTaxAdjustment = $this->adjustmentFactory
             ->createWithData(AdjustmentInterface::TAX_ADJUSTMENT, $label, $taxAmount, $included)

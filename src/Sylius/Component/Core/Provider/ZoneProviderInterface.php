@@ -26,5 +26,5 @@ interface ZoneProviderInterface
      *
      * @return ZoneInterface|null
      */
-    public function getZone(OrderInterface $order);
+    public function getZone(OrderInterface $order): ?ZoneInterface;
 }

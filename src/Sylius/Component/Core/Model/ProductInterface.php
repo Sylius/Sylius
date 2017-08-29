@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Model;
 
+use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Channel\Model\ChannelsAwareInterface;
 use Sylius\Component\Product\Model\ProductInterface as BaseProductInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
@@ -43,47 +44,47 @@ interface ProductInterface extends
     /**
      * @return string
      */
-    public function getVariantSelectionMethod();
+    public function getVariantSelectionMethod(): string;
 
     /**
-     * @param string $variantSelectionMethod
+     * @param string|null $variantSelectionMethod
      *
      * @throws \InvalidArgumentException
      */
-    public function setVariantSelectionMethod($variantSelectionMethod);
+    public function setVariantSelectionMethod(?string $variantSelectionMethod): void;
 
     /**
      * @return bool
      */
-    public function isVariantSelectionMethodChoice();
+    public function isVariantSelectionMethodChoice(): bool;
 
     /**
      * @return string
      */
-    public function getVariantSelectionMethodLabel();
+    public function getVariantSelectionMethodLabel(): string;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShortDescription();
+    public function getShortDescription(): ?string;
 
     /**
-     * @param string $shortDescription
+     * @param string|null $shortDescription
      */
-    public function setShortDescription($shortDescription);
+    public function setShortDescription(?string $shortDescription): void;
 
     /**
-     * @return TaxonInterface
+     * @return TaxonInterface|null
      */
-    public function getMainTaxon();
+    public function getMainTaxon(): ?TaxonInterface;
 
     /**
-     * @param TaxonInterface $mainTaxon
+     * @param TaxonInterface|null $mainTaxon
      */
-    public function setMainTaxon(TaxonInterface $mainTaxon = null);
+    public function setMainTaxon(?TaxonInterface $mainTaxon): void;
 
     /**
-     * @return ReviewInterface[]
+     * @return Collection|ReviewInterface[]
      */
-    public function getAcceptedReviews();
+    public function getAcceptedReviews(): Collection;
 }

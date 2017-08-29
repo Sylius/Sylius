@@ -21,6 +21,7 @@ use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Order\Factory\AdjustmentFactoryInterface;
 use Sylius\Component\Taxation\Calculator\CalculatorInterface;
 use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -68,14 +69,14 @@ class OrderItemsTaxesApplicator implements OrderTaxesApplicatorInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @throws \InvalidArgumentException
      */
-    public function apply(OrderInterface $order, ZoneInterface $zone)
+    public function apply(OrderInterface $order, ZoneInterface $zone): void
     {
         foreach ($order->getItems() as $item) {
             $quantity = $item->getQuantity();
-            if (0 === $quantity) {
-                throw new \InvalidArgumentException('Cannot apply tax to order item with 0 quantity.');
-            }
+            Assert::notSame($quantity, 0, 'Cannot apply tax to order item with 0 quantity.');
 
             $taxRate = $this->taxRateResolver->resolve($item->getVariant(), ['zone' => $zone]);
 
@@ -104,7 +105,7 @@ class OrderItemsTaxesApplicator implements OrderTaxesApplicatorInterface
      * @param string $label
      * @param bool $included
      */
-    private function addAdjustment(OrderItemUnitInterface $unit, $taxAmount, $label, $included)
+    private function addAdjustment(OrderItemUnitInterface $unit, int $taxAmount, string $label, bool $included): void
     {
         $unitTaxAdjustment = $this->adjustmentFactory
             ->createWithData(AdjustmentInterface::TAX_ADJUSTMENT, $label, $taxAmount, $included)

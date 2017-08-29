@@ -35,7 +35,7 @@ final class OrderPaymentMethodSelectionRequirementChecker implements OrderPaymen
     /**
      * {@inheritdoc}
      */
-    public function isPaymentMethodSelectionRequired(OrderInterface $order)
+    public function isPaymentMethodSelectionRequired(OrderInterface $order): bool
     {
         if ($order->getTotal() <= 0) {
             return false;

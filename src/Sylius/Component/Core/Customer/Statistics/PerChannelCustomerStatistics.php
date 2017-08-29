@@ -43,7 +43,7 @@ final class PerChannelCustomerStatistics
      *
      * @throws \InvalidArgumentException
      */
-    public function __construct($ordersCount, $ordersValue, ChannelInterface $channel)
+    public function __construct(int $ordersCount, int $ordersValue, ChannelInterface $channel)
     {
         Assert::allInteger([$ordersCount, $ordersValue]);
 
@@ -55,7 +55,7 @@ final class PerChannelCustomerStatistics
     /**
      * @return int
      */
-    public function getOrdersCount()
+    public function getOrdersCount(): int
     {
         return $this->ordersCount;
     }
@@ -63,7 +63,7 @@ final class PerChannelCustomerStatistics
     /**
      * @return int
      */
-    public function getOrdersValue()
+    public function getOrdersValue(): int
     {
         return $this->ordersValue;
     }
@@ -71,7 +71,7 @@ final class PerChannelCustomerStatistics
     /**
      * @return ChannelInterface
      */
-    public function getChannel()
+    public function getChannel(): ChannelInterface
     {
         return $this->channel;
     }
@@ -79,7 +79,7 @@ final class PerChannelCustomerStatistics
     /**
      * @return int
      */
-    public function getAverageOrderValue()
+    public function getAverageOrderValue(): int
     {
         return (int) round($this->ordersValue / $this->ordersCount);
     }
