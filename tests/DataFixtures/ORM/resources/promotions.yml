@@ -7,3 +7,7 @@ Sylius\Component\Core\Model\Promotion:
         code: Holiday
         name: Holiday promotion
         couponBased: true
+    promotion3:
+        code: Friday
+        name: Friday promotion
+        couponBased: true

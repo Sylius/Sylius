@@ -9,3 +9,6 @@ Sylius\Component\Core\Model\PromotionCoupon:
         usageLimit: 4
         perCustomerUsageLimit: 1
         expiresAt: <(new \DateTime())>
+    promotionCoupon3:
+        code: CAE15
+        promotion: "@promotion3"

@@ -2,7 +2,7 @@
     "page": 1,
     "limit": 10,
     "pages": 1,
-    "total": 3,
+    "total": 4,
     "_links": {
         "self": {
             "href": "\/api\/v1\/promotions\/?criteria%5BcouponBased%5D=true&page=1&limit=10"
@@ -55,6 +55,20 @@
                     },
                     "coupons": {
                         "href": "\/api\/v1\/promotions\/Holiday\/coupons\/"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "code": "Friday",
+                "name": "Friday promotion",
+                "priority": 0,
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/promotions\/Friday"
+                    },
+                    "coupons": {
+                        "href": "\/api\/v1\/promotions\/Friday\/coupons\/"
                     }
                 }
             }
