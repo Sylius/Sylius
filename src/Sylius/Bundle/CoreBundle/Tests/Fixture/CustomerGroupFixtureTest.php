@@ -28,7 +28,7 @@ final class CustomerGroupFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function customer_groups_are_optional()
+    public function customer_groups_are_optional(): void
     {
         $this->assertConfigurationIsValid([[]], 'custom');
     }
@@ -36,7 +36,7 @@ final class CustomerGroupFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function customer_groups_can_be_generated_randomly()
+    public function customer_groups_can_be_generated_randomly(): void
     {
         $this->assertConfigurationIsValid([['random' => 4]], 'random');
         $this->assertPartialConfigurationIsInvalid([['random' => -1]], 'random');
@@ -45,7 +45,7 @@ final class CustomerGroupFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function customer_group_code_is_optional()
+    public function customer_group_code_is_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['code' => 'code']]]], 'custom.*.code');
     }
@@ -53,7 +53,7 @@ final class CustomerGroupFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function customer_group_name_is_optional()
+    public function customer_group_name_is_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['name' => 'name']]]], 'custom.*.name');
     }
@@ -61,7 +61,7 @@ final class CustomerGroupFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * {@inheritdoc}
      */
-    protected function getConfiguration()
+    protected function getConfiguration(): CustomerGroupFixture
     {
         return new CustomerGroupFixture(
             $this->getMockBuilder(ObjectManager::class)->getMock(),

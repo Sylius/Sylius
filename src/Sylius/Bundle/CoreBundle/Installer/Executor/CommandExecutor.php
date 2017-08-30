@@ -56,13 +56,13 @@ final class CommandExecutor
     /**
      * @param string $command
      * @param array $parameters
-     * @param OutputInterface $output
+     * @param OutputInterface|null $output
      *
-     * @return $this
+     * @return self
      *
      * @throws \Exception
      */
-    public function runCommand($command, $parameters = [], OutputInterface $output = null)
+    public function runCommand(string $command, array $parameters = [], ?OutputInterface $output = null): self
     {
         $parameters = array_merge(
             ['command' => $command],
@@ -92,7 +92,7 @@ final class CommandExecutor
     /**
      * @return array
      */
-    protected function getDefaultParameters()
+    protected function getDefaultParameters(): array
     {
         $defaultParameters = ['--no-debug' => true];
 

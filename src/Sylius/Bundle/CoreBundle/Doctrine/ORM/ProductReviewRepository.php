@@ -26,7 +26,7 @@ class ProductReviewRepository extends EntityRepository implements ProductReviewR
     /**
      * {@inheritdoc}
      */
-    public function findLatestByProductId($productId, $count)
+    public function findLatestByProductId(int $productId, int $count): array
     {
         return $this->createQueryBuilder('o')
             ->andWhere('o.reviewSubject = :productId')
@@ -43,7 +43,7 @@ class ProductReviewRepository extends EntityRepository implements ProductReviewR
     /**
      * {@inheritdoc}
      */
-    public function findAcceptedByProductSlugAndChannel($slug, $locale, ChannelInterface $channel)
+    public function findAcceptedByProductSlugAndChannel(string $slug, string $locale, ChannelInterface $channel): array
     {
         return $this->createQueryBuilder('o')
             ->innerJoin('o.reviewSubject', 'product')

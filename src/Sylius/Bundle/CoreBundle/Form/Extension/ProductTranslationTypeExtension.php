@@ -26,7 +26,7 @@ final class ProductTranslationTypeExtension extends AbstractTypeExtension
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('shortDescription', TextareaType::class, [
@@ -39,7 +39,7 @@ final class ProductTranslationTypeExtension extends AbstractTypeExtension
     /**
      * {@inheritdoc}
      */
-    public function getExtendedType()
+    public function getExtendedType(): string
     {
         return ProductTranslationType::class;
     }

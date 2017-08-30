@@ -41,7 +41,7 @@ final class SyliusCollector extends DataCollector
     public function __construct(
         ShopperContextInterface $shopperContext,
         array $bundles,
-        $defaultLocaleCode
+        string $defaultLocaleCode
     ) {
         $this->shopperContext = $shopperContext;
 
@@ -68,7 +68,7 @@ final class SyliusCollector extends DataCollector
     /**
      * @return string
      */
-    public function getVersion()
+    public function getVersion(): string
     {
         return $this->data['version'];
     }
@@ -76,7 +76,7 @@ final class SyliusCollector extends DataCollector
     /**
      * @return array
      */
-    public function getExtensions()
+    public function getExtensions(): array
     {
         return $this->data['extensions'];
     }
@@ -84,7 +84,7 @@ final class SyliusCollector extends DataCollector
     /**
      * @return string
      */
-    public function getCurrencyCode()
+    public function getCurrencyCode(): string
     {
         return $this->data['currency_code'];
     }
@@ -92,7 +92,7 @@ final class SyliusCollector extends DataCollector
     /**
      * @return string
      */
-    public function getLocaleCode()
+    public function getLocaleCode(): string
     {
         return $this->data['locale_code'];
     }
@@ -100,7 +100,7 @@ final class SyliusCollector extends DataCollector
     /**
      * @return string
      */
-    public function getDefaultCurrencyCode()
+    public function getDefaultCurrencyCode(): string
     {
         return $this->data['base_currency_code'];
     }
@@ -108,7 +108,7 @@ final class SyliusCollector extends DataCollector
     /**
      * @return string
      */
-    public function getDefaultLocaleCode()
+    public function getDefaultLocaleCode(): string
     {
         return $this->data['default_locale_code'];
     }
@@ -116,7 +116,7 @@ final class SyliusCollector extends DataCollector
     /**
      * {@inheritdoc}
      */
-    public function collect(Request $request, Response $response, \Exception $exception = null)
+    public function collect(Request $request, Response $response, \Exception $exception = null): void
     {
         try {
             /** @var ChannelInterface $channel */
@@ -137,7 +137,7 @@ final class SyliusCollector extends DataCollector
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'sylius_core';
     }

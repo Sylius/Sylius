@@ -28,7 +28,7 @@ final class InstallSampleDataCommand extends AbstractInstallCommand
     /**
      * {@inheritdoc}
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('sylius:install:sample-data')
@@ -43,7 +43,7 @@ EOT
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): void
     {
         /** @var QuestionHelper $questionHelper */
         $questionHelper = $this->getHelper('question');

@@ -55,7 +55,7 @@ class ShippingCategoryExampleFactory extends AbstractExampleFactory implements E
     /**
      * {@inheritdoc}
      */
-    public function create(array $options = [])
+    public function create(array $options = []): ShippingCategoryInterface
     {
         $options = $this->optionsResolver->resolve($options);
 
@@ -72,16 +72,16 @@ class ShippingCategoryExampleFactory extends AbstractExampleFactory implements E
     /**
      * {@inheritdoc}
      */
-    protected function configureOptions(OptionsResolver $resolver)
+    protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
-            ->setDefault('name', function (Options $options) {
+            ->setDefault('name', function (Options $options): string {
                 return $this->faker->words(3, true);
             })
-            ->setDefault('code', function (Options $options) {
+            ->setDefault('code', function (Options $options): string {
                 return StringInflector::nameToCode($options['name']);
             })
-            ->setDefault('description', function (Options $options) {
+            ->setDefault('description', function (Options $options): string {
                 return $this->faker->paragraph;
             })
         ;

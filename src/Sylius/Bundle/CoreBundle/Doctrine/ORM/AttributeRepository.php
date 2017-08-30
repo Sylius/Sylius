@@ -40,7 +40,7 @@ class AttributeRepository extends EntityRepository
     /**
      * {@inheritdoc}
      */
-    public function findAll()
+    public function findAll(): array
     {
         $attributes = parent::findAll();
 

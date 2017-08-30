@@ -31,7 +31,7 @@ final class PaymentMethodTypeExtension extends AbstractTypeExtension
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $gatewayFactory = $options['data']->getGatewayConfig();
 
@@ -45,7 +45,7 @@ final class PaymentMethodTypeExtension extends AbstractTypeExtension
                 'label' => false,
                 'data' => $gatewayFactory,
             ])
-            ->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
+            ->addEventListener(FormEvents::SUBMIT, function (FormEvent $event): void {
                 $paymentMethod = $event->getData();
 
                 if (!$paymentMethod instanceof PaymentMethodInterface) {
@@ -63,7 +63,7 @@ final class PaymentMethodTypeExtension extends AbstractTypeExtension
     /**
      * {@inheritdoc}
      */
-    public function getExtendedType()
+    public function getExtendedType(): string
     {
         return PaymentMethodType::class;
     }

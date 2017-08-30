@@ -40,7 +40,7 @@ final class LockingListener
     /**
      * @param GenericEvent $event
      */
-    public function lock(GenericEvent $event)
+    public function lock(GenericEvent $event): void
     {
         $subject = $event->getSubject();
 

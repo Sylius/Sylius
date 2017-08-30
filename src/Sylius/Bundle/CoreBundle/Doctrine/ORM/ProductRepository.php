@@ -15,8 +15,10 @@ namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping;
+use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 
@@ -45,7 +47,7 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
     /**
      * {@inheritdoc}
      */
-    public function createListQueryBuilder($locale, $taxonId = null)
+    public function createListQueryBuilder(string $locale, $taxonId = null): QueryBuilder
     {
         $queryBuilder = $this->createQueryBuilder('o')
             ->addSelect('translation')
@@ -67,8 +69,12 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
     /**
      * {@inheritdoc}
      */
-    public function createShopListQueryBuilder(ChannelInterface $channel, TaxonInterface $taxon, $locale, array $sorting = [])
-    {
+    public function createShopListQueryBuilder(
+        ChannelInterface $channel,
+        TaxonInterface $taxon,
+        string $locale,
+        array $sorting = []
+    ): QueryBuilder {
         $queryBuilder = $this->createQueryBuilder('o')
             ->addSelect('translation')
             ->innerJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
@@ -98,7 +104,7 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
     /**
      * {@inheritdoc}
      */
-    public function findLatestByChannel(ChannelInterface $channel, $locale, $count)
+    public function findLatestByChannel(ChannelInterface $channel, string $locale, int $count): array
     {
         return $this->createQueryBuilder('o')
             ->addSelect('translation')
@@ -117,7 +123,7 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
     /**
      * {@inheritdoc}
      */
-    public function findOneByChannelAndSlug(ChannelInterface $channel, $locale, $slug)
+    public function findOneByChannelAndSlug(ChannelInterface $channel, string $locale, string $slug): ?ProductInterface
     {
         $product = $this->createQueryBuilder('o')
             ->addSelect('translation')
@@ -148,7 +154,7 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
     /**
      * {@inheritdoc}
      */
-    public function findOneByCode($code)
+    public function findOneByCode(string $code): ?ProductInterface
     {
         return $this->createQueryBuilder('o')
             ->where('o.code = :code')

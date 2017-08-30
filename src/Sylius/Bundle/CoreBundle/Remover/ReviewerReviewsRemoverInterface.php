@@ -23,5 +23,5 @@ interface ReviewerReviewsRemoverInterface
     /**
      * @param ReviewerInterface $author
      */
-    public function removeReviewerReviews(ReviewerInterface $author);
+    public function removeReviewerReviews(ReviewerInterface $author): void;
 }

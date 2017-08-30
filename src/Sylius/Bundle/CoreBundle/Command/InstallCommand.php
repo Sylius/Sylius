@@ -45,7 +45,7 @@ final class InstallCommand extends AbstractInstallCommand
     /**
      * {@inheritdoc}
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('sylius:install')
@@ -60,7 +60,7 @@ EOT
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): void
     {
         $outputStyle = new SymfonyStyle($input, $output);
         $outputStyle->writeln('<info>Installing Sylius...</info>');
@@ -99,7 +99,7 @@ EOT
      *
      * @return string
      */
-    private function getProperFinalMessage($errored)
+    private function getProperFinalMessage(bool $errored): string
     {
         if ($errored) {
             return 'Sylius has been installed, but some error occurred.';
@@ -111,7 +111,7 @@ EOT
     /**
      * @return string
      */
-    private function getSyliusLogo()
+    private function getSyliusLogo(): string
     {
         return '                                                                  
            <info>,</info>                                                       

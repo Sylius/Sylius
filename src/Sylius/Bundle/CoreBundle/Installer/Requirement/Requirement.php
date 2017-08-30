@@ -38,21 +38,21 @@ final class Requirement
     /**
      * @param string $label
      * @param bool $fulfilled
-     * @param bool $required
+     * @param bool|null $required
      * @param string|null $help
      */
-    public function __construct($label, $fulfilled, $required = true, $help = null)
+    public function __construct(string $label, bool $fulfilled, ?bool $required, ?string $help = null)
     {
         $this->label = $label;
-        $this->fulfilled = (boolean) $fulfilled;
-        $this->required = (boolean) $required;
+        $this->fulfilled = $fulfilled;
+        $this->required = $required ?? true;
         $this->help = $help;
     }
 
     /**
      * @return string
      */
-    public function getLabel()
+    public function getLabel(): string
     {
         return $this->label;
     }
@@ -60,7 +60,7 @@ final class Requirement
     /**
      * @return bool
      */
-    public function isFulfilled()
+    public function isFulfilled(): bool
     {
         return $this->fulfilled;
     }
@@ -68,7 +68,7 @@ final class Requirement
     /**
      * @return bool
      */
-    public function isRequired()
+    public function isRequired(): bool
     {
         return $this->required;
     }
@@ -76,7 +76,7 @@ final class Requirement
     /**
      * @return string|null
      */
-    public function getHelp()
+    public function getHelp(): ?string
     {
         return $this->help;
     }

@@ -25,11 +25,11 @@ use Webmozart\Assert\Assert;
 final class OrderProductEligibilityValidator extends ConstraintValidator
 {
     /**
-     * @param OrderInterface $value
-     *
      * {@inheritdoc}
+     *
+     * @throws \InvalidArgumentException
      */
-    public function validate($order, Constraint $constraint)
+    public function validate($order, Constraint $constraint): void
     {
         Assert::isInstanceOf($order, OrderInterface::class);
 

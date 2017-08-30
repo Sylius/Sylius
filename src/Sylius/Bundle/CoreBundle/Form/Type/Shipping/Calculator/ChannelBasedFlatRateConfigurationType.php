@@ -27,11 +27,11 @@ final class ChannelBasedFlatRateConfigurationType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'entry_type' => FlatRateConfigurationType::class,
-            'entry_options' => function (ChannelInterface $channel) {
+            'entry_options' => function (ChannelInterface $channel): array {
                 return [
                     'label' => $channel->getName(),
                     'currency' => $channel->getBaseCurrency()->getCode(),
@@ -43,7 +43,7 @@ final class ChannelBasedFlatRateConfigurationType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getParent()
+    public function getParent(): string
     {
         return ChannelCollectionType::class;
     }
@@ -51,7 +51,7 @@ final class ChannelBasedFlatRateConfigurationType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_channel_based_shipping_calculator_flat_rate';
     }

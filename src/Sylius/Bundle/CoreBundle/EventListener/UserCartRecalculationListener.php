@@ -17,8 +17,8 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Context\CartNotFoundException;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\Event;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -48,9 +48,9 @@ final class UserCartRecalculationListener
     /**
      * @param Event $event
      *
-     * @throws UnexpectedTypeException
+     * @throws \InvalidArgumentException
      */
-    public function recalculateCartWhileLogin(Event $event)
+    public function recalculateCartWhileLogin(Event $event): void
     {
         try {
             $cart = $this->cartContext->getCart();
@@ -58,9 +58,7 @@ final class UserCartRecalculationListener
             return;
         }
 
-        if (!$cart instanceof OrderInterface) {
-            throw new UnexpectedTypeException($cart, OrderInterface::class);
-        }
+        Assert::isInstanceOf($cart, OrderInterface::class);
 
         $this->orderProcessor->process($cart);
     }

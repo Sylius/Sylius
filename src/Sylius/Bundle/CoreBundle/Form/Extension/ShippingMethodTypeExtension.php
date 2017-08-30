@@ -30,11 +30,13 @@ final class ShippingMethodTypeExtension extends AbstractTypeExtension
     /**
      * @var ServiceRegistryInterface
      */
+
     private $checkerRegistry;
     /**
      * @var ServiceRegistryInterface
      */
     private $calculatorRegistry;
+
     /**
      * @var FormTypeRegistryInterface
      */
@@ -58,7 +60,7 @@ final class ShippingMethodTypeExtension extends AbstractTypeExtension
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('zone', ZoneChoiceType::class, [
@@ -80,7 +82,7 @@ final class ShippingMethodTypeExtension extends AbstractTypeExtension
     /**
      * {@inheritdoc}
      */
-    public function getExtendedType()
+    public function getExtendedType(): string
     {
         return ShippingMethodType::class;
     }

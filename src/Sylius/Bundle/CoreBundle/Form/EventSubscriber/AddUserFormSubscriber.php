@@ -43,7 +43,7 @@ final class AddUserFormSubscriber implements EventSubscriberInterface
     /**
      * @return array
      */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             FormEvents::PRE_SET_DATA => 'preSetData',
@@ -54,7 +54,7 @@ final class AddUserFormSubscriber implements EventSubscriberInterface
     /**
      * @param FormEvent $event
      */
-    public function preSetData(FormEvent $event)
+    public function preSetData(FormEvent $event): void
     {
         $form = $event->getForm();
         $form->add('user', $this->entryType, ['constraints' => [new Valid()]]);
@@ -68,7 +68,7 @@ final class AddUserFormSubscriber implements EventSubscriberInterface
     /**
      * @param FormEvent $event
      */
-    public function submit(FormEvent $event)
+    public function submit(FormEvent $event): void
     {
         $data = $event->getData();
         $form = $event->getForm();

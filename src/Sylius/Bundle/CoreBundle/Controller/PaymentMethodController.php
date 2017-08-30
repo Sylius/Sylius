@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class PaymentMethodController extends ResourceController
+final class PaymentMethodController extends ResourceController
 {
     /**
      * @param Request $request
@@ -29,7 +29,7 @@ class PaymentMethodController extends ResourceController
      *
      * @return Response
      */
-    public function getPaymentGatewaysAction(Request $request, $template)
+    public function getPaymentGatewaysAction(Request $request, string $template): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 

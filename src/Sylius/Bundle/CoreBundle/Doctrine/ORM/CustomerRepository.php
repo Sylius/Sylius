@@ -24,7 +24,7 @@ class CustomerRepository extends EntityRepository implements CustomerRepositoryI
     /**
      * {@inheritdoc}
      */
-    public function count()
+    public function count(): int
     {
         return (int) $this->createQueryBuilder('o')
             ->select('COUNT(o.id)')
@@ -36,7 +36,7 @@ class CustomerRepository extends EntityRepository implements CustomerRepositoryI
     /**
      * {@inheritdoc}
      */
-    public function findLatest($count)
+    public function findLatest(int $count): array
     {
         return $this->createQueryBuilder('o')
             ->addOrderBy('o.createdAt', 'DESC')

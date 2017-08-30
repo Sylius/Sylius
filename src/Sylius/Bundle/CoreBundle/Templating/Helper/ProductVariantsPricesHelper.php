@@ -21,7 +21,7 @@ use Symfony\Component\Templating\Helper\Helper;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ProductVariantsPricesHelper extends Helper
+final class ProductVariantsPricesHelper extends Helper
 {
     /**
      * @var ProductVariantsPricesProviderInterface
@@ -42,7 +42,7 @@ class ProductVariantsPricesHelper extends Helper
      *
      * @return array
      */
-    public function getPrices(ProductInterface $product, ChannelInterface $channel)
+    public function getPrices(ProductInterface $product, ChannelInterface $channel): array
     {
         return $this->productVariantsPricesProvider->provideVariantsPrices($product, $channel);
     }
@@ -50,7 +50,7 @@ class ProductVariantsPricesHelper extends Helper
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'sylius_product_variants_prices';
     }

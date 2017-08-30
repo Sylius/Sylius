@@ -28,7 +28,7 @@ final class HasAllPricesDefined extends Constraint
     /**
      * {@inheritdoc}
      */
-    public function validatedBy()
+    public function validatedBy(): string
     {
         return 'sylius_has_all_prices_defined';
     }
@@ -36,7 +36,7 @@ final class HasAllPricesDefined extends Constraint
     /**
      * {@inheritdoc}
      */
-    public function getTargets()
+    public function getTargets(): string
     {
         return Constraint::CLASS_CONSTRAINT;
     }

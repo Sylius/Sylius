@@ -39,7 +39,7 @@ final class CustomerGuestType extends AbstractResourceType
      * @param RepositoryInterface $customerRepository
      */
     public function __construct(
-        $dataClass,
+        string $dataClass,
         array $validationGroups,
         RepositoryInterface $customerRepository
     ) {
@@ -51,13 +51,13 @@ final class CustomerGuestType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options = [])
+    public function buildForm(FormBuilderInterface $builder, array $options = []): void
     {
         $builder
             ->add('email', EmailType::class, [
                 'label' => 'sylius.form.customer.email',
             ])
-            ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) {
+            ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event): void {
                 $data = $event->getData();
 
                 if (!isset($data['email'])) {
@@ -79,7 +79,7 @@ final class CustomerGuestType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_customer_guest';
     }

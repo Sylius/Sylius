@@ -31,12 +31,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class CartItemTypeExtension extends AbstractTypeExtension
+final class CartItemTypeExtension extends AbstractTypeExtension
 {
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('quantity', IntegerType::class, [
             'attr' => ['min' => 1],
@@ -63,7 +63,7 @@ class CartItemTypeExtension extends AbstractTypeExtension
      *
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
             ->setDefined([
@@ -76,7 +76,7 @@ class CartItemTypeExtension extends AbstractTypeExtension
     /**
      * {@inheritdoc}
      */
-    public function getExtendedType()
+    public function getExtendedType(): string
     {
         return CartItemType::class;
     }

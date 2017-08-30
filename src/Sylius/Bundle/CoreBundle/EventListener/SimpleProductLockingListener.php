@@ -48,8 +48,10 @@ final class SimpleProductLockingListener
 
     /**
      * @param GenericEvent $event
+     *
+     * @throws \InvalidArgumentException
      */
-    public function lock(GenericEvent $event)
+    public function lock(GenericEvent $event): void
     {
         $product = $event->getSubject();
 

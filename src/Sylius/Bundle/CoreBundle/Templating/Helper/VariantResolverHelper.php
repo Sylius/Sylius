@@ -21,7 +21,7 @@ use Symfony\Component\Templating\Helper\Helper;
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class VariantResolverHelper extends Helper
+final class VariantResolverHelper extends Helper
 {
     /**
      * @var ProductVariantResolverInterface
@@ -41,7 +41,7 @@ class VariantResolverHelper extends Helper
      *
      * @return ProductVariantInterface
      */
-    public function resolveVariant(ProductInterface $product)
+    public function resolveVariant(ProductInterface $product): ProductVariantInterface
     {
         return $this->productVariantResolver->getVariant($product);
     }
@@ -49,7 +49,7 @@ class VariantResolverHelper extends Helper
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'sylius_resolve_variant';
     }

@@ -221,7 +221,7 @@ class OrderFixture extends AbstractFixture
     /**
      * @param OrderInterface $order
      */
-    private function generateItems(OrderInterface $order)
+    private function generateItems(OrderInterface $order): void
     {
         $numberOfItems = rand(1, 5);
         $products = $this->productRepository->findAll();
@@ -243,7 +243,7 @@ class OrderFixture extends AbstractFixture
      * @param OrderInterface $order
      * @param string $countryCode
      */
-    private function address(OrderInterface $order, $countryCode)
+    private function address(OrderInterface $order, string $countryCode): void
     {
         /** @var AddressInterface $address */
         $address = $this->addressFactory->createNew();
@@ -263,7 +263,7 @@ class OrderFixture extends AbstractFixture
     /**
      * @param OrderInterface $order
      */
-    private function selectShipping(OrderInterface $order)
+    private function selectShipping(OrderInterface $order): void
     {
         $shippingMethod = $this
             ->faker
@@ -283,7 +283,7 @@ class OrderFixture extends AbstractFixture
     /**
      * @param OrderInterface $order
      */
-    private function selectPayment(OrderInterface $order)
+    private function selectPayment(OrderInterface $order): void
     {
         $paymentMethod = $this
             ->faker
@@ -303,7 +303,7 @@ class OrderFixture extends AbstractFixture
     /**
      * @param OrderInterface $order
      */
-    private function completeCheckout(OrderInterface $order)
+    private function completeCheckout(OrderInterface $order): void
     {
         if ($this->faker->boolean(25)) {
             $order->setNotes($this->faker->sentence);
@@ -316,7 +316,7 @@ class OrderFixture extends AbstractFixture
      * @param OrderInterface $order
      * @param string $transition
      */
-    private function applyCheckoutStateTransition(OrderInterface $order, $transition)
+    private function applyCheckoutStateTransition(OrderInterface $order, string $transition): void
     {
         $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->apply($transition);
     }

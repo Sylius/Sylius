@@ -26,7 +26,7 @@ class CancelUnpaidOrdersCommand extends ContainerAwareCommand
     /**
      * {@inheritdoc}
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('sylius:cancel-unpaid-orders')
@@ -38,7 +38,7 @@ class CancelUnpaidOrdersCommand extends ContainerAwareCommand
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): void
     {
         $expirationTime = $this->getContainer()->getParameter('sylius_order.order_expiration_period');
 

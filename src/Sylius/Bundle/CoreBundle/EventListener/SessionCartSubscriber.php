@@ -39,7 +39,7 @@ final class SessionCartSubscriber implements EventSubscriberInterface
      * @param CartContextInterface $cartContext
      * @param string $sessionKeyName
      */
-    public function __construct(CartContextInterface $cartContext, $sessionKeyName)
+    public function __construct(CartContextInterface $cartContext, string $sessionKeyName)
     {
         $this->cartContext = $cartContext;
         $this->sessionKeyName = $sessionKeyName;
@@ -48,7 +48,7 @@ final class SessionCartSubscriber implements EventSubscriberInterface
     /**
      * {@inheritdoc}
      */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             KernelEvents::RESPONSE => ['onKernelResponse'],
@@ -58,7 +58,7 @@ final class SessionCartSubscriber implements EventSubscriberInterface
     /**
      * @param FilterResponseEvent $event
      */
-    public function onKernelResponse(FilterResponseEvent $event)
+    public function onKernelResponse(FilterResponseEvent $event): void
     {
         if (!$event->isMasterRequest()) {
             return;

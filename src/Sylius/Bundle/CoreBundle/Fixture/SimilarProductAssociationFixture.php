@@ -121,9 +121,9 @@ class SimilarProductAssociationFixture extends AbstractFixture
     /**
      * @param ProductInterface $owner
      *
-     * @return string[]
+     * @return array|string[]
      */
-    private function getAssociatedProductsAsArray(ProductInterface $owner)
+    private function getAssociatedProductsAsArray(ProductInterface $owner): array
     {
         $products = $this->productRepository->findBy(['mainTaxon' => $owner->getMainTaxon()]);
         $products = $this->faker->randomElements($products, 3);

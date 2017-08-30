@@ -41,7 +41,7 @@ final class ChannelDeletionListener
      *
      * @param ResourceControllerEvent $event
      */
-    public function onChannelPreDelete(ResourceControllerEvent $event)
+    public function onChannelPreDelete(ResourceControllerEvent $event): void
     {
         $channel = $event->getSubject();
 

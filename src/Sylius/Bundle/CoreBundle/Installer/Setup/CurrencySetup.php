@@ -50,10 +50,11 @@ final class CurrencySetup implements CurrencySetupInterface
     /**
      * {@inheritdoc}
      */
-    public function setup(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper)
+    public function setup(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper): CurrencyInterface
     {
         $code = $this->getCurrencyCodeFromUser($input, $output, $questionHelper);
 
+        /** @var CurrencyInterface $existingCurrency */
         $existingCurrency = $this->currencyRepository->findOneBy(['code' => $code]);
         if (null !== $existingCurrency) {
             return $existingCurrency;
@@ -75,7 +76,7 @@ final class CurrencySetup implements CurrencySetupInterface
      *
      * @return string
      */
-    private function getCurrencyCodeFromUser(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper)
+    private function getCurrencyCodeFromUser(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper): string
     {
         $code = $this->getNewCurrencyCode($input, $output, $questionHelper);
         $name = $this->getCurrencyName($code);
@@ -101,7 +102,7 @@ final class CurrencySetup implements CurrencySetupInterface
      *
      * @return string
      */
-    private function getNewCurrencyCode(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper)
+    private function getNewCurrencyCode(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper): string
     {
         $question = new Question('Currency (press enter to use USD): ', 'USD');
 
@@ -113,7 +114,7 @@ final class CurrencySetup implements CurrencySetupInterface
      *
      * @return string|null
      */
-    private function getCurrencyName($code)
+    private function getCurrencyName(string $code): ?string
     {
         return Intl::getCurrencyBundle()->getCurrencyName($code);
     }

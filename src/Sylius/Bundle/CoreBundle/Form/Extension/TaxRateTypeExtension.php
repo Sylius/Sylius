@@ -26,7 +26,7 @@ final class TaxRateTypeExtension extends AbstractTypeExtension
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('zone', ZoneChoiceType::class);
     }
@@ -34,7 +34,7 @@ final class TaxRateTypeExtension extends AbstractTypeExtension
     /**
      * {@inheritdoc}
      */
-    public function getExtendedType()
+    public function getExtendedType(): string
     {
         return TaxRateType::class;
     }

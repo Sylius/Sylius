@@ -17,7 +17,6 @@ use Sylius\Component\Attribute\Factory\AttributeFactoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
-use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -75,7 +74,7 @@ class ProductAttributeExampleFactory extends AbstractExampleFactory implements E
     /**
      * {@inheritdoc}
      */
-    public function create(array $options = [])
+    public function create(array $options = []): ProductAttributeInterface
     {
         $options = $this->optionsResolver->resolve($options);
 
@@ -98,19 +97,19 @@ class ProductAttributeExampleFactory extends AbstractExampleFactory implements E
     /**
      * {@inheritdoc}
      */
-    protected function configureOptions(OptionsResolver $resolver)
+    protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
-            ->setDefault('name', function (Options $options) {
+            ->setDefault('name', function (Options $options): string {
                 return $this->faker->words(3, true);
             })
-            ->setDefault('code', function (Options $options) {
+            ->setDefault('code', function (Options $options): string {
                 return StringInflector::nameToCode($options['name']);
             })
-            ->setDefault('type', function (Options $options) {
+            ->setDefault('type', function (Options $options): string {
                 return $this->faker->randomElement(array_keys($this->attributeTypes));
             })
-            ->setDefault('configuration', function (Options $options) {
+            ->setDefault('configuration', function (Options $options): array {
                 return [];
             })
             ->setAllowedValues('type', array_keys($this->attributeTypes))
@@ -118,9 +117,9 @@ class ProductAttributeExampleFactory extends AbstractExampleFactory implements E
     }
 
     /**
-     * @return array
+     * @return \Generator
      */
-    private function getLocales()
+    private function getLocales(): \Generator
     {
         /** @var LocaleInterface[] $locales */
         $locales = $this->localeRepository->findAll();

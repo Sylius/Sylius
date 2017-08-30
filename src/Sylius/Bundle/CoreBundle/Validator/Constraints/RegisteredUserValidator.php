@@ -39,7 +39,7 @@ final class RegisteredUserValidator extends ConstraintValidator
     /**
      * {@inheritdoc}
      */
-    public function validate($customer, Constraint $constraint)
+    public function validate($customer, Constraint $constraint): void
     {
         $existingCustomer = $this->customerRepository->findOneBy(['email' => $customer->getEmail()]);
         if (null !== $existingCustomer && null !== $existingCustomer->getUser()) {

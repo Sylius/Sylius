@@ -25,7 +25,7 @@ final class SelectShippingType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('shipments', CollectionType::class, [
             'entry_type' => ShipmentType::class,
@@ -36,7 +36,7 @@ final class SelectShippingType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_checkout_select_shipping';
     }

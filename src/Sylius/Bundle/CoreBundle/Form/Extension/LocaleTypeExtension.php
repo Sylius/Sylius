@@ -17,7 +17,6 @@ use Sylius\Bundle\LocaleBundle\Form\Type\LocaleType;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -44,7 +43,7 @@ final class LocaleTypeExtension extends AbstractTypeExtension
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
             $options = [
@@ -69,25 +68,25 @@ final class LocaleTypeExtension extends AbstractTypeExtension
     /**
      * {@inheritdoc}
      */
-    public function getExtendedType()
+    public function getExtendedType(): string
     {
         return LocaleType::class;
     }
 
     /**
-     * @param $code
+     * @param string $code
      *
-     * @return null|string
+     * @return string|null
      */
-    private function getLocaleName($code)
+    private function getLocaleName(string $code): ?string
     {
         return Intl::getLocaleBundle()->getLocaleName($code);
     }
 
     /**
-     * @return array
+     * @return array|LocaleInterface[]
      */
-    private function getAvailableLocales()
+    private function getAvailableLocales(): array
     {
         $availableLocales = Intl::getLocaleBundle()->getLocaleNames();
 

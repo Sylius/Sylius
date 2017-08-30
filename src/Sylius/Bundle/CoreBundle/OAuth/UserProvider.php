@@ -72,7 +72,7 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
      * @param CanonicalizerInterface $canonicalizer
      */
     public function __construct(
-        $supportedUserClass,
+        string $supportedUserClass,
         FactoryInterface $customerFactory,
         FactoryInterface $userFactory,
         UserRepositoryInterface $userRepository,
@@ -93,7 +93,7 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
     /**
      * {@inheritdoc}
      */
-    public function loadUserByOAuthUserResponse(UserResponseInterface $response)
+    public function loadUserByOAuthUserResponse(UserResponseInterface $response): UserInterface
     {
         $oauth = $this->oauthRepository->findOneBy([
             'provider' => $response->getResourceOwner()->getName(),
@@ -117,9 +117,8 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
     /**
      * {@inheritdoc}
      */
-    public function connect(UserInterface $user, UserResponseInterface $response)
+    public function connect(UserInterface $user, UserResponseInterface $response): void
     {
-        /* @var $user SyliusUserInterface */
         $this->updateUserByOAuthUserResponse($user, $response);
     }
 
@@ -130,7 +129,7 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
      *
      * @return SyliusUserInterface
      */
-    private function createUserByOAuthUserResponse(UserResponseInterface $response)
+    private function createUserByOAuthUserResponse(UserResponseInterface $response): SyliusUserInterface
     {
         /** @var SyliusUserInterface $user */
         $user = $this->userFactory->createNew();
@@ -162,12 +161,12 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
     /**
      * Attach OAuth sign-in provider account to existing user.
      *
-     * @param UserInterface         $user
+     * @param UserInterface $user
      * @param UserResponseInterface $response
      *
      * @return UserInterface
      */
-    private function updateUserByOAuthUserResponse(UserInterface $user, UserResponseInterface $response)
+    private function updateUserByOAuthUserResponse(UserInterface $user, UserResponseInterface $response): UserInterface
     {
         $oauth = $this->oauthFactory->createNew();
         $oauth->setIdentifier($response->getUsername());

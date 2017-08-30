@@ -28,7 +28,7 @@ final class ProductFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function products_are_optional()
+    public function products_are_optional(): void
     {
         $this->assertConfigurationIsValid([[]], 'custom');
     }
@@ -36,7 +36,7 @@ final class ProductFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function products_can_be_generated_randomly()
+    public function products_can_be_generated_randomly(): void
     {
         $this->assertConfigurationIsValid([['random' => 4]], 'random');
         $this->assertPartialConfigurationIsInvalid([['random' => -1]], 'random');
@@ -45,7 +45,7 @@ final class ProductFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function product_code_is_optional()
+    public function product_code_is_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['code' => 'CUSTOM']]]], 'custom.*.code');
     }
@@ -53,7 +53,7 @@ final class ProductFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function product_may_be_toggled()
+    public function product_may_be_toggled(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['enabled' => false]]]], 'custom.*.enabled');
     }
@@ -61,7 +61,7 @@ final class ProductFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function product_description_is_optional()
+    public function product_description_is_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['description' => 'Foo bar baz']]]], 'custom.*.description');
     }
@@ -69,7 +69,7 @@ final class ProductFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function product_short_description_is_optional()
+    public function product_short_description_is_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['short_description' => 'Foo bar']]]], 'custom.*.short_description');
     }
@@ -77,7 +77,7 @@ final class ProductFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function product_main_taxon_is_optional()
+    public function product_main_taxon_is_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['main_taxon' => 'TXN-0']]]], 'custom.*.main_taxon');
     }
@@ -85,7 +85,7 @@ final class ProductFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function product_taxons_are_optional()
+    public function product_taxons_are_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['taxons' => ['TXN-1', 'TXN-2']]]]], 'custom.*.taxons');
     }
@@ -93,7 +93,7 @@ final class ProductFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function product_channels_are_optional()
+    public function product_channels_are_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['channels' => ['CHN-1', 'CHN-2']]]]], 'custom.*.channels');
     }
@@ -101,7 +101,7 @@ final class ProductFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function product_product_options_are_optional()
+    public function product_product_options_are_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['product_options' => ['OPT-1', 'OPT-2']]]]], 'custom.*.product_options');
     }
@@ -109,7 +109,7 @@ final class ProductFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function product_product_attributes_are_optional()
+    public function product_product_attributes_are_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['product_attributes' => ['ATTR-1', 'ATTR-2']]]]], 'custom.*.product_attributes');
     }
@@ -117,7 +117,7 @@ final class ProductFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function product_images_are_optional()
+    public function product_images_are_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['images' => ['../image/path1.jpg', '../image/path2.jpg']]]]], 'custom.*.images');
     }
@@ -125,7 +125,7 @@ final class ProductFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function product_can_require_shipping()
+    public function product_can_require_shipping(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['shipping_required' => false]]]], 'custom.*.shipping_required');
     }
@@ -133,7 +133,7 @@ final class ProductFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * {@inheritdoc}
      */
-    protected function getConfiguration()
+    protected function getConfiguration(): ProductFixture
     {
         return new ProductFixture(
             $this->getMockBuilder(ObjectManager::class)->getMock(),

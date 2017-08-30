@@ -39,7 +39,7 @@ final class CanonicalizerListener
     /**
      * @param LifecycleEventArgs $event
      */
-    public function canonicalize(LifecycleEventArgs $event)
+    public function canonicalize(LifecycleEventArgs $event): void
     {
         $item = $event->getEntity();
 
@@ -54,7 +54,7 @@ final class CanonicalizerListener
     /**
      * @param LifecycleEventArgs $event
      */
-    public function prePersist(LifecycleEventArgs $event)
+    public function prePersist(LifecycleEventArgs $event): void
     {
         $this->canonicalize($event);
     }
@@ -62,7 +62,7 @@ final class CanonicalizerListener
     /**
      * @param LifecycleEventArgs $event
      */
-    public function preUpdate(LifecycleEventArgs $event)
+    public function preUpdate(LifecycleEventArgs $event): void
     {
         $this->canonicalize($event);
     }

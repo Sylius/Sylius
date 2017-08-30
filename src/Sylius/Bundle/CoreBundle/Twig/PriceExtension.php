@@ -36,7 +36,7 @@ final class PriceExtension extends \Twig_Extension
     /**
      * {@inheritdoc}
      */
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
             new \Twig_Filter('sylius_calculate_price', [$this->helper, 'getPrice']),

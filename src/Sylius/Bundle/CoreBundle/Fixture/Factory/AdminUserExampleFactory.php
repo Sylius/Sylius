@@ -47,7 +47,7 @@ class AdminUserExampleFactory extends AbstractExampleFactory implements ExampleF
      * @param FactoryInterface $userFactory
      * @param string $localeCode
      */
-    public function __construct(FactoryInterface $userFactory, $localeCode)
+    public function __construct(FactoryInterface $userFactory, string $localeCode)
     {
         $this->userFactory = $userFactory;
         $this->localeCode = $localeCode;
@@ -61,7 +61,7 @@ class AdminUserExampleFactory extends AbstractExampleFactory implements ExampleF
     /**
      * {@inheritdoc}
      */
-    public function create(array $options = [])
+    public function create(array $options = []): AdminUserInterface
     {
         $options = $this->optionsResolver->resolve($options);
 
@@ -91,13 +91,13 @@ class AdminUserExampleFactory extends AbstractExampleFactory implements ExampleF
     /**
      * {@inheritdoc}
      */
-    protected function configureOptions(OptionsResolver $resolver)
+    protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
-            ->setDefault('email', function (Options $options) {
+            ->setDefault('email', function (Options $options): string {
                 return $this->faker->email;
             })
-            ->setDefault('username', function (Options $options) {
+            ->setDefault('username', function (Options $options): string {
                 return $this->faker->firstName.' '.$this->faker->lastName;
             })
             ->setDefault('enabled', true)

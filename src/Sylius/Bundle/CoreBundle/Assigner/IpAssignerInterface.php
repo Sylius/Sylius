@@ -25,5 +25,5 @@ interface IpAssignerInterface
      * @param OrderInterface $order
      * @param Request $request
      */
-    public function assign(OrderInterface $order, Request $request);
+    public function assign(OrderInterface $order, Request $request): void;
 }

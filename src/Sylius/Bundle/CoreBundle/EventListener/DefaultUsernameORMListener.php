@@ -41,8 +41,9 @@ final class DefaultUsernameORMListener
     /**
      * @param array $entities
      * @param EntityManagerInterface $entityManager
+     * @param UnitOfWork $unitOfWork
      */
-    private function processEntities($entities, EntityManagerInterface $entityManager, UnitOfWork $unitOfWork)
+    private function processEntities(array $entities, EntityManagerInterface $entityManager, UnitOfWork $unitOfWork): void
     {
         foreach ($entities as $customer) {
             if (!$customer instanceof CustomerInterface) {

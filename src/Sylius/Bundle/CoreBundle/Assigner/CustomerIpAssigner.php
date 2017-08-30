@@ -24,7 +24,7 @@ final class CustomerIpAssigner implements IpAssignerInterface
     /**
      * {@inheritdoc}
      */
-    public function assign(OrderInterface $order, Request $request)
+    public function assign(OrderInterface $order, Request $request): void
     {
         $order->setCustomerIp($request->getClientIp());
     }

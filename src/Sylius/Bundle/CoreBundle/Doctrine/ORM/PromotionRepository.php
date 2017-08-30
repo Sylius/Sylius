@@ -25,7 +25,7 @@ class PromotionRepository extends BasePromotionRepository implements PromotionRe
     /**
      * {@inheritdoc}
      */
-    public function findActiveByChannel(ChannelInterface $channel)
+    public function findActiveByChannel(ChannelInterface $channel): array
     {
         return $this->filterByActive($this->createQueryBuilder('o'))
             ->andWhere(':channel MEMBER OF o.channels')

@@ -26,7 +26,7 @@ final class HasAllPricesDefinedValidator extends ConstraintValidator
     /**
      * {@inheritdoc}
      */
-    public function validate($productVariant, Constraint $constraint)
+    public function validate($productVariant, Constraint $constraint): void
     {
         Assert::isInstanceOf($constraint, HasAllPricesDefined::class);
 

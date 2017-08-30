@@ -23,7 +23,7 @@ use Sylius\Component\Review\Model\ReviewInterface;
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-class ReviewerReviewsRemover implements ReviewerReviewsRemoverInterface
+final class ReviewerReviewsRemover implements ReviewerReviewsRemoverInterface
 {
     /**
      * @var EntityRepository
@@ -58,7 +58,7 @@ class ReviewerReviewsRemover implements ReviewerReviewsRemoverInterface
     /**
      * {@inheritdoc}
      */
-    public function removeReviewerReviews(ReviewerInterface $author)
+    public function removeReviewerReviews(ReviewerInterface $author): void
     {
         $reviewSubjectsToRecalculate = [];
 
@@ -74,11 +74,11 @@ class ReviewerReviewsRemover implements ReviewerReviewsRemoverInterface
 
     /**
      * @param ReviewInterface $review
-     * @param ReviewableInterface[] $reviewSubjectsToRecalculate
+     * @param array|ReviewableInterface[] $reviewSubjectsToRecalculate
      *
-     * @return array
+     * @return array|ReviewableInterface[]
      */
-    private function removeReviewsAndExtractSubject(ReviewInterface $review, array $reviewSubjectsToRecalculate)
+    private function removeReviewsAndExtractSubject(ReviewInterface $review, array $reviewSubjectsToRecalculate): array
     {
         $reviewSubject = $review->getReviewSubject();
 

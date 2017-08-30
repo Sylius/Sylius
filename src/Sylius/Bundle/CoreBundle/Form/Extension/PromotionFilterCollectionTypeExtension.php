@@ -27,7 +27,7 @@ final class PromotionFilterCollectionTypeExtension extends AbstractTypeExtension
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('taxons_filter', TaxonFilterConfigurationType::class, [
             'label' => false,
@@ -42,7 +42,7 @@ final class PromotionFilterCollectionTypeExtension extends AbstractTypeExtension
     /**
      * {@inheritdoc}
      */
-    public function getExtendedType()
+    public function getExtendedType(): string
     {
         return PromotionFilterCollectionType::class;
     }

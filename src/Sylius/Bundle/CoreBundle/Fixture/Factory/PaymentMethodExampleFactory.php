@@ -19,7 +19,6 @@ use Sylius\Component\Core\Factory\PaymentMethodFactoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -78,7 +77,7 @@ class PaymentMethodExampleFactory extends AbstractExampleFactory implements Exam
     /**
      * {@inheritdoc}
      */
-    public function create(array $options = [])
+    public function create(array $options = []): PaymentMethodInterface
     {
         $options = $this->optionsResolver->resolve($options);
 
@@ -108,22 +107,22 @@ class PaymentMethodExampleFactory extends AbstractExampleFactory implements Exam
     /**
      * {@inheritdoc}
      */
-    protected function configureOptions(OptionsResolver $resolver)
+    protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
-            ->setDefault('name', function (Options $options) {
+            ->setDefault('name', function (Options $options): string {
                 return $this->faker->words(3, true);
             })
-            ->setDefault('code', function (Options $options) {
+            ->setDefault('code', function (Options $options): string {
                 return StringInflector::nameToCode($options['name']);
             })
-            ->setDefault('description', function (Options $options) {
+            ->setDefault('description', function (Options $options): string {
                 return $this->faker->sentence();
             })
             ->setDefault('gatewayName', 'Offline')
             ->setDefault('gatewayFactory', 'offline')
             ->setDefault('gatewayConfig', [])
-            ->setDefault('enabled', function (Options $options) {
+            ->setDefault('enabled', function (Options $options): bool {
                 return $this->faker->boolean(90);
             })
             ->setDefault('channels', LazyOption::all($this->channelRepository))
@@ -134,9 +133,9 @@ class PaymentMethodExampleFactory extends AbstractExampleFactory implements Exam
     }
 
     /**
-     * @return array
+     * @return \Generator
      */
-    private function getLocales()
+    private function getLocales(): \Generator
     {
         /** @var LocaleInterface[] $locales */
         $locales = $this->localeRepository->findAll();

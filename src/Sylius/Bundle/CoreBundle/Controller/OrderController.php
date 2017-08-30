@@ -19,14 +19,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
-class OrderController extends BaseOrderController
+final class OrderController extends BaseOrderController
 {
     /**
      * @param Request $request
      *
      * @return Response
      */
-    public function thankYouAction(Request $request)
+    public function thankYouAction(Request $request): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 

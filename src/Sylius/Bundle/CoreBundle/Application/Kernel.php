@@ -43,7 +43,7 @@ class Kernel extends HttpKernel
     /**
      * {@inheritdoc}
      */
-    public function registerBundles()
+    public function registerBundles(): array
     {
         $bundles = [
             new \Sylius\Bundle\OrderBundle\SyliusOrderBundle(),
@@ -116,7 +116,7 @@ class Kernel extends HttpKernel
     /**
      * {@inheritdoc}
      */
-    protected function getContainerBaseClass()
+    protected function getContainerBaseClass(): string
     {
         if (in_array($this->getEnvironment(), ['test', 'test_cached'], true)) {
             return MockerContainer::class;
@@ -128,7 +128,7 @@ class Kernel extends HttpKernel
     /**
      * {@inheritdoc}
      */
-    protected function getContainerLoader(ContainerInterface $container)
+    protected function getContainerLoader(ContainerInterface $container): LoaderInterface
     {
         $locator = new FileLocator($this, $this->getRootDir() . '/Resources');
         $resolver = new LoaderResolver([
@@ -146,7 +146,7 @@ class Kernel extends HttpKernel
     /**
      * {@inheritdoc}
      */
-    public function registerContainerConfiguration(LoaderInterface $loader)
+    public function registerContainerConfiguration(LoaderInterface $loader): void
     {
         $loader->load($this->getRootDir() . '/config/config_' . $this->getEnvironment() . '.yml');
 
@@ -159,7 +159,7 @@ class Kernel extends HttpKernel
     /**
      * {@inheritdoc}
      */
-    public function getCacheDir()
+    public function getCacheDir(): string
     {
         if ($this->isVagrantEnvironment()) {
             return '/dev/shm/sylius/cache/' . $this->getEnvironment();
@@ -171,7 +171,7 @@ class Kernel extends HttpKernel
     /**
      * {@inheritdoc}
      */
-    public function getLogDir()
+    public function getLogDir(): string
     {
         if ($this->isVagrantEnvironment()) {
             return '/dev/shm/sylius/logs';
@@ -183,7 +183,7 @@ class Kernel extends HttpKernel
     /**
      * @return bool
      */
-    protected function isVagrantEnvironment()
+    protected function isVagrantEnvironment(): bool
     {
         return (getenv('HOME') === '/home/vagrant' || getenv('VAGRANT') === 'VAGRANT') && is_dir('/dev/shm');
     }

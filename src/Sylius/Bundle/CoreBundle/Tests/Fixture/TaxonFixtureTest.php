@@ -28,7 +28,7 @@ final class TaxonFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function taxons_are_optional()
+    public function taxons_are_optional(): void
     {
         $this->assertConfigurationIsValid([[]], 'custom');
     }
@@ -36,7 +36,7 @@ final class TaxonFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function taxons_can_be_generated_randomly()
+    public function taxons_can_be_generated_randomly(): void
     {
         $this->assertConfigurationIsValid([['random' => 4]], 'random');
         $this->assertPartialConfigurationIsInvalid([['random' => -1]], 'random');
@@ -45,7 +45,7 @@ final class TaxonFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function taxon_code_is_optional()
+    public function taxon_code_is_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['code' => 'CUSTOM']]]], 'custom.*.code');
     }
@@ -53,7 +53,7 @@ final class TaxonFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function taxon_slug_is_optional()
+    public function taxon_slug_is_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['slug' => 'custom']]]], 'custom.*.slug');
     }
@@ -61,7 +61,7 @@ final class TaxonFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function taxon_children_are_optional()
+    public function taxon_children_are_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['children' => [['name' => 'foo']]]]]], 'custom.*.children');
     }
@@ -69,7 +69,7 @@ final class TaxonFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function taxon_children_may_contain_nested_array()
+    public function taxon_children_may_contain_nested_array(): void
     {
         $this->assertProcessedConfigurationEquals(
             [['custom' => [['children' => [['nested' => ['key' => 'value']]]]]]],
@@ -81,7 +81,7 @@ final class TaxonFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * {@inheritdoc}
      */
-    protected function getConfiguration()
+    protected function getConfiguration(): TaxonFixture
     {
         return new TaxonFixture(
             $this->getMockBuilder(ObjectManager::class)->getMock(),

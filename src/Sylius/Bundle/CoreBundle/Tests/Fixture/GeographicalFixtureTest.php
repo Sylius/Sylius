@@ -30,7 +30,7 @@ final class GeographicalFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function fixture_does_not_need_to_be_configured()
+    public function fixture_does_not_need_to_be_configured(): void
     {
         $this->assertConfigurationIsValid([[]]);
     }
@@ -38,7 +38,7 @@ final class GeographicalFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function countries_are_set_to_all_known_countries_by_default()
+    public function countries_are_set_to_all_known_countries_by_default(): void
     {
         $this->assertProcessedConfigurationEquals(
             [[]],
@@ -50,7 +50,7 @@ final class GeographicalFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function countries_can_be_replaced_with_custom_ones()
+    public function countries_can_be_replaced_with_custom_ones(): void
     {
         $this->assertConfigurationIsValid(
             [['countries' => ['PL', 'DE', 'FR']]],
@@ -61,7 +61,7 @@ final class GeographicalFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function provinces_are_empty_by_default()
+    public function provinces_are_empty_by_default(): void
     {
         $this->assertProcessedConfigurationEquals(
             [[]],
@@ -73,7 +73,7 @@ final class GeographicalFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function provinces_can_be_set()
+    public function provinces_can_be_set(): void
     {
         $this->assertConfigurationIsValid(
             [['provinces' => ['US' => ['AL' => 'Alabama']]]],
@@ -84,7 +84,7 @@ final class GeographicalFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function zones_are_empty_by_default()
+    public function zones_are_empty_by_default(): void
     {
         $this->assertProcessedConfigurationEquals(
             [[]],
@@ -96,7 +96,7 @@ final class GeographicalFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function zones_can_be_defined_as_country_based()
+    public function zones_can_be_defined_as_country_based(): void
     {
         $this->assertConfigurationIsValid(
             [['zones' => ['EU' => ['name' => 'Some EU countries', 'countries' => ['PL', 'DE', 'FR']]]]],
@@ -107,7 +107,7 @@ final class GeographicalFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function zones_can_have_scopes_based()
+    public function zones_can_have_scopes_based(): void
     {
         $this->assertConfigurationIsValid(
             [['zones' => ['EU' => ['name' => 'Some EU countries', 'countries' => ['PL', 'DE', 'FR'], 'scope' => 'tax']]]],
@@ -118,7 +118,7 @@ final class GeographicalFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function zones_can_be_defined_as_province_based()
+    public function zones_can_be_defined_as_province_based(): void
     {
         $this->assertConfigurationIsValid(
             [['zones' => ['WEST-COAST' => ['name' => 'West Coast', 'provinces' => ['US-CA', 'US-OR', 'US-WA']]]]],
@@ -129,7 +129,7 @@ final class GeographicalFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function zones_can_be_defined_as_zone_based()
+    public function zones_can_be_defined_as_zone_based(): void
     {
         $this->assertConfigurationIsValid(
             [['zones' => ['AMERICA' => ['name' => 'America', 'zones' => ['NORTH-AMERICA', 'SOUTH-AMERICA']]]]],
@@ -140,7 +140,7 @@ final class GeographicalFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function zone_can_be_defined_with_exactly_one_kind_of_members()
+    public function zone_can_be_defined_with_exactly_one_kind_of_members(): void
     {
         $this->assertPartialConfigurationIsInvalid(
             [['zones' => ['ZONE' => ['name' => 'zone']]]],
@@ -170,7 +170,7 @@ final class GeographicalFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * {@inheritdoc}
      */
-    protected function getConfiguration()
+    protected function getConfiguration(): GeographicalFixture
     {
         return new GeographicalFixture(
             $this->getMockBuilder(FactoryInterface::class)->getMock(),

@@ -45,7 +45,7 @@ final class LocaleSetup implements LocaleSetupInterface
      * @param FactoryInterface $localeFactory
      * @param string $locale
      */
-    public function __construct(RepositoryInterface $localeRepository, FactoryInterface $localeFactory, $locale)
+    public function __construct(RepositoryInterface $localeRepository, FactoryInterface $localeFactory, string $locale)
     {
         $this->localeRepository = $localeRepository;
         $this->localeFactory = $localeFactory;
@@ -55,12 +55,13 @@ final class LocaleSetup implements LocaleSetupInterface
     /**
      * {@inheritdoc}
      */
-    public function setup(InputInterface $input, OutputInterface $output)
+    public function setup(InputInterface $input, OutputInterface $output): LocaleInterface
     {
         $name = $this->getLanguageName($this->locale);
 
         $output->writeln(sprintf('Adding <info>%s</info> locale.', $name));
 
+        /** @var LocaleInterface $existingLocale */
         $existingLocale = $this->localeRepository->findOneBy(['code' => $this->locale]);
         if (null !== $existingLocale) {
             return $existingLocale;
@@ -80,7 +81,7 @@ final class LocaleSetup implements LocaleSetupInterface
      *
      * @return string|null
      */
-    private function getLanguageName($code)
+    private function getLanguageName(string $code): ?string
     {
         return Intl::getLanguageBundle()->getLanguageName($code);
     }

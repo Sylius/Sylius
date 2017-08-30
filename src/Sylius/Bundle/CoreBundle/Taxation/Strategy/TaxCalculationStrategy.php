@@ -31,15 +31,15 @@ final class TaxCalculationStrategy implements TaxCalculationStrategyInterface
     private $type;
 
     /**
-     * @var OrderTaxesApplicatorInterface[]
+     * @var array|OrderTaxesApplicatorInterface[]
      */
     private $applicators;
 
     /**
      * @param string $type
-     * @param OrderTaxesApplicatorInterface[] $applicators
+     * @param array|OrderTaxesApplicatorInterface[] $applicators
      */
-    public function __construct($type, array $applicators)
+    public function __construct(string $type, array $applicators)
     {
         $this->assertApplicatorsHaveCorrectType($applicators);
 
@@ -50,7 +50,7 @@ final class TaxCalculationStrategy implements TaxCalculationStrategyInterface
     /**
      * {@inheritdoc}
      */
-    public function applyTaxes(OrderInterface $order, ZoneInterface $zone)
+    public function applyTaxes(OrderInterface $order, ZoneInterface $zone):  void
     {
         foreach ($this->applicators as $applicator) {
             $applicator->apply($order, $zone);
@@ -59,8 +59,10 @@ final class TaxCalculationStrategy implements TaxCalculationStrategyInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @throws \InvalidArgumentException
      */
-    public function supports(OrderInterface $order, ZoneInterface $zone)
+    public function supports(OrderInterface $order, ZoneInterface $zone): bool
     {
         $channel = $order->getChannel();
 
@@ -73,15 +75,17 @@ final class TaxCalculationStrategy implements TaxCalculationStrategyInterface
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
 
     /**
-     * @param OrderTaxesApplicatorInterface[] $applicators
+     * @param array|OrderTaxesApplicatorInterface[] $applicators
+     *
+     * @throws \InvalidArgumentException
      */
-    private function assertApplicatorsHaveCorrectType(array $applicators)
+    private function assertApplicatorsHaveCorrectType(array $applicators): void
     {
         Assert::allIsInstanceOf(
             $applicators,

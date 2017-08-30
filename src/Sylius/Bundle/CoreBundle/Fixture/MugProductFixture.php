@@ -166,9 +166,9 @@ class MugProductFixture extends AbstractFixture
     /**
      * @param int $amount
      *
-     * @return string
+     * @return array
      */
-    private function getUniqueNames($amount)
+    private function getUniqueNames(int $amount): array
     {
         $productsNames = [];
 

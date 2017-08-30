@@ -21,7 +21,7 @@ use Symfony\Component\Templating\Helper\Helper;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class CheckoutStepsHelper extends Helper
+final class CheckoutStepsHelper extends Helper
 {
     /**
      * @var OrderPaymentMethodSelectionRequirementCheckerInterface
@@ -50,7 +50,7 @@ class CheckoutStepsHelper extends Helper
      *
      * @return bool
      */
-    public function isShippingRequired(OrderInterface $order)
+    public function isShippingRequired(OrderInterface $order): bool
     {
         return $this->orderShippingMethodSelectionRequirementChecker->isShippingMethodSelectionRequired($order);
     }
@@ -60,7 +60,7 @@ class CheckoutStepsHelper extends Helper
      *
      * @return bool
      */
-    public function isPaymentRequired(OrderInterface $order)
+    public function isPaymentRequired(OrderInterface $order): bool
     {
         return $this->orderPaymentMethodSelectionRequirementChecker->isPaymentMethodSelectionRequired($order);
     }
@@ -68,7 +68,7 @@ class CheckoutStepsHelper extends Helper
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'sylius_checkout_steps';
     }

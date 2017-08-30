@@ -85,7 +85,7 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
     /**
      * {@inheritdoc}
      */
-    public function create(array $options = [])
+    public function create(array $options = []): ChannelInterface
     {
         $options = $this->optionsResolver->resolve($options);
 
@@ -118,22 +118,22 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
     /**
      * {@inheritdoc}
      */
-    protected function configureOptions(OptionsResolver $resolver)
+    protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
-            ->setDefault('name', function (Options $options) {
+            ->setDefault('name', function (Options $options): string {
                 return $this->faker->words(3, true);
             })
-            ->setDefault('code', function (Options $options) {
+            ->setDefault('code', function (Options $options): string {
                 return StringInflector::nameToCode($options['name']);
             })
-            ->setDefault('hostname', function (Options $options) {
+            ->setDefault('hostname', function (Options $options): string {
                 return $options['code'] . '.localhost';
             })
-            ->setDefault('color', function (Options $options) {
+            ->setDefault('color', function (Options $options): string {
                 return $this->faker->colorName;
             })
-            ->setDefault('enabled', function (Options $options) {
+            ->setDefault('enabled', function (Options $options): bool {
                 return $this->faker->boolean(90);
             })
             ->setAllowedTypes('enabled', 'bool')
@@ -146,7 +146,7 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
             ->setNormalizer('default_tax_zone', LazyOption::findOneBy($this->zoneRepository, 'code'))
             ->setDefault('tax_calculation_strategy', 'order_items_based')
             ->setAllowedTypes('tax_calculation_strategy', 'string')
-            ->setDefault('default_locale', function (Options $options) {
+            ->setDefault('default_locale', function (Options $options): string {
                 return $this->faker->randomElement($options['locales']);
             })
             ->setAllowedTypes('default_locale', ['string', LocaleInterface::class])
@@ -154,7 +154,7 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
             ->setDefault('locales', LazyOption::all($this->localeRepository))
             ->setAllowedTypes('locales', 'array')
             ->setNormalizer('locales', LazyOption::findBy($this->localeRepository, 'code'))
-            ->setDefault('base_currency', function (Options $options) {
+            ->setDefault('base_currency', function (Options $options): string {
                 return $this->faker->randomElement($options['currencies']);
             })
             ->setAllowedTypes('base_currency', ['string', CurrencyInterface::class])

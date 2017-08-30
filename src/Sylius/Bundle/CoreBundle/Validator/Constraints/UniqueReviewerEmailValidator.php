@@ -62,7 +62,7 @@ class UniqueReviewerEmailValidator extends ConstraintValidator
     /**
      * {@inheritdoc}
      */
-    public function validate($review, Constraint $constraint)
+    public function validate($review, Constraint $constraint): void
     {
         /* @var ReviewerInterface|null $customer */
         $customer = $review->getAuthor();

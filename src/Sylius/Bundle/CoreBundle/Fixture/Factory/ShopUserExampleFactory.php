@@ -75,7 +75,7 @@ class ShopUserExampleFactory extends AbstractExampleFactory implements ExampleFa
     /**
      * {@inheritdoc}
      */
-    public function create(array $options = [])
+    public function create(array $options = []): ShopUserInterface
     {
         $options = $this->optionsResolver->resolve($options);
 
@@ -99,16 +99,16 @@ class ShopUserExampleFactory extends AbstractExampleFactory implements ExampleFa
     /**
      * {@inheritdoc}
      */
-    protected function configureOptions(OptionsResolver $resolver)
+    protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
-            ->setDefault('email', function (Options $options) {
+            ->setDefault('email', function (Options $options): string {
                 return $this->faker->email;
             })
-            ->setDefault('first_name', function (Options $options) {
+            ->setDefault('first_name', function (Options $options): string {
                 return $this->faker->firstName;
             })
-            ->setDefault('last_name', function (Options $options) {
+            ->setDefault('last_name', function (Options $options): string {
                 return $this->faker->lastName;
             })
             ->setDefault('enabled', true)

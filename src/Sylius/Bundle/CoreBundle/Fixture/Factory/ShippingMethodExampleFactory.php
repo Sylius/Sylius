@@ -96,7 +96,7 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
     /**
      * {@inheritdoc}
      */
-    public function create(array $options = [])
+    public function create(array $options = []): ShippingMethodInterface
     {
         $options = $this->optionsResolver->resolve($options);
 
@@ -131,19 +131,19 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
     /**
      * {@inheritdoc}
      */
-    protected function configureOptions(OptionsResolver $resolver)
+    protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
-            ->setDefault('code', function (Options $options) {
+            ->setDefault('code', function (Options $options): string {
                 return StringInflector::nameToCode($options['name']);
             })
-            ->setDefault('name', function (Options $options) {
+            ->setDefault('name', function (Options $options): string {
                 return $this->faker->words(3, true);
             })
-            ->setDefault('description', function (Options $options) {
+            ->setDefault('description', function (Options $options): string {
                 return $this->faker->sentence();
             })
-            ->setDefault('enabled', function (Options $options) {
+            ->setDefault('enabled', function (Options $options): bool {
                 return $this->faker->boolean(90);
             })
             ->setAllowedTypes('enabled', 'bool')
@@ -153,7 +153,7 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
             ->setDefined('shipping_category')
             ->setAllowedTypes('shipping_category', ['null', 'string', ShippingCategoryInterface::class])
             ->setNormalizer('shipping_category', LazyOption::findOneBy($this->shippingCategoryRepository, 'code'))
-            ->setDefault('calculator', function (Options $options) {
+            ->setDefault('calculator', function (Options $options): array {
                 $configuration = [];
                 /** @var ChannelInterface $channel */
                 foreach ($options['channels'] as $channel) {
@@ -174,9 +174,9 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
     }
 
     /**
-     * @return array
+     * @return \Generator
      */
-    private function getLocales()
+    private function getLocales(): \Generator
     {
         /** @var LocaleInterface[] $locales */
         $locales = $this->localeRepository->findAll();

@@ -54,7 +54,7 @@ final class SessionAndChannelBasedCartContext implements CartContextInterface
      */
     public function __construct(
         SessionInterface $session,
-        $sessionKeyName,
+        string $sessionKeyName,
         ChannelContextInterface $channelContext,
         OrderRepositoryInterface $orderRepository
     ) {

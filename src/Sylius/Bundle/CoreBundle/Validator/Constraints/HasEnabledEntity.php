@@ -48,7 +48,7 @@ final class HasEnabledEntity extends Constraint
     /**
      * {@inheritdoc}
      */
-    public function getTargets()
+    public function getTargets(): string
     {
         return self::CLASS_CONSTRAINT;
     }
@@ -56,7 +56,7 @@ final class HasEnabledEntity extends Constraint
     /**
      * {@inheritdoc}
      */
-    public function validatedBy()
+    public function validatedBy(): string
     {
         return 'sylius_has_enabled_entity';
     }

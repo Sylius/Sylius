@@ -36,7 +36,7 @@ final class ChannelPricingType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('price', MoneyType::class, [
@@ -49,7 +49,7 @@ final class ChannelPricingType extends AbstractResourceType
             ])
         ;
 
-        $builder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) use ($options) {
+        $builder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) use ($options): void {
             $channelPricing = $event->getData();
 
             if (!$channelPricing instanceof $this->dataClass) {
@@ -80,7 +80,7 @@ final class ChannelPricingType extends AbstractResourceType
             ->setAllowedTypes('product_variant', ['null', ProductVariantInterface::class])
 
             ->setDefaults([
-                'label' => function (Options $options) {
+                'label' => function (Options $options): string {
                     return $options['channel']->getName();
                 },
             ])
@@ -90,7 +90,7 @@ final class ChannelPricingType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_channel_pricing';
     }
