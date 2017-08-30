@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\Core\Payment;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Payment\IdBasedInvoiceNumberGenerator;
 use Sylius\Component\Core\Payment\InvoiceNumberGeneratorInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
@@ -24,17 +23,12 @@ use Sylius\Component\Payment\Model\PaymentInterface;
  */
 final class IdBasedInvoiceNumberGeneratorSpec extends ObjectBehavior
 {
-    public function it_is_initializable()
-    {
-        $this->shouldHaveType(IdBasedInvoiceNumberGenerator::class);
-    }
-
-    public function it_is_an_invoice_number_generator()
+    function it_is_an_invoice_number_generator(): void
     {
         $this->shouldImplement(InvoiceNumberGeneratorInterface::class);
     }
 
-    public function it_generates_an_invoice_number_based_on(OrderInterface $order, PaymentInterface $payment)
+    function it_generates_an_invoice_number_based_on(OrderInterface $order, PaymentInterface $payment): void
     {
         $order->getId()->willReturn('001');
         $payment->getId()->willReturn('1');

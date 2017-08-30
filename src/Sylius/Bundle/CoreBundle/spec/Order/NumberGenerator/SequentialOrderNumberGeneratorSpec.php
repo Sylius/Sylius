@@ -16,7 +16,6 @@ namespace spec\Sylius\Bundle\CoreBundle\Order\NumberGenerator;
 use Doctrine\DBAL\LockMode;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Order\NumberGenerator\SequentialOrderNumberGenerator;
 use Sylius\Bundle\OrderBundle\NumberGenerator\OrderNumberGeneratorInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -32,16 +31,11 @@ final class SequentialOrderNumberGeneratorSpec extends ObjectBehavior
         EntityRepository $sequenceRepository,
         FactoryInterface $sequenceFactory,
         EntityManagerInterface $sequenceManager
-    ) {
+    ): void {
         $this->beConstructedWith($sequenceRepository, $sequenceFactory, $sequenceManager);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(SequentialOrderNumberGenerator::class);
-    }
-
-    function it_implements_an_order_number_generator_interface()
+    function it_implements_an_order_number_generator_interface(): void
     {
         $this->shouldImplement(OrderNumberGeneratorInterface::class);
     }
@@ -51,7 +45,7 @@ final class SequentialOrderNumberGeneratorSpec extends ObjectBehavior
         EntityManagerInterface $sequenceManager,
         OrderSequenceInterface $sequence,
         OrderInterface $order
-    ) {
+    ): void {
         $sequence->getIndex()->willReturn(6);
         $sequence->getVersion()->willReturn(7);
 
@@ -69,7 +63,7 @@ final class SequentialOrderNumberGeneratorSpec extends ObjectBehavior
         EntityManagerInterface $sequenceManager,
         OrderSequenceInterface $sequence,
         OrderInterface $order
-    ) {
+    ): void {
         $sequence->getIndex()->willReturn(0);
         $sequence->getVersion()->willReturn(1);
 

@@ -25,27 +25,22 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
  */
 final class AddressFactorySpec extends ObjectBehavior
 {
-    function let(FactoryInterface $decoratedFactory)
+    function let(FactoryInterface $decoratedFactory): void
     {
         $this->beConstructedWith($decoratedFactory);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(AddressFactory::class);
-    }
-
-    function it_implements_address_factory_interface()
+    function it_implements_address_factory_interface(): void
     {
         $this->shouldImplement(AddressFactoryInterface::class);
     }
 
-    function it_is_a_resource_factory()
+    function it_is_a_resource_factory(): void
     {
         $this->shouldImplement(FactoryInterface::class);
     }
 
-    function it_creates_a_new_address(FactoryInterface $decoratedFactory, AddressInterface $address)
+    function it_creates_a_new_address(FactoryInterface $decoratedFactory, AddressInterface $address): void
     {
         $decoratedFactory->createNew()->willReturn($address);
 
@@ -56,7 +51,7 @@ final class AddressFactorySpec extends ObjectBehavior
         FactoryInterface $decoratedFactory,
         AddressInterface $address,
         CustomerInterface $customer
-    ) {
+    ): void {
         $decoratedFactory->createNew()->willReturn($address);
 
         $address->setCustomer($customer)->shouldBeCalled();

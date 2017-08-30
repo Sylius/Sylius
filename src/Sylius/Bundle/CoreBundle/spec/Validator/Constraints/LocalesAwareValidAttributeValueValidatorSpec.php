@@ -16,7 +16,6 @@ namespace spec\Sylius\Bundle\CoreBundle\Validator\Constraints;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\AttributeBundle\Validator\Constraints\ValidAttributeValue;
-use Sylius\Bundle\CoreBundle\Validator\Constraints\LocalesAwareValidAttributeValueValidator;
 use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
 use Sylius\Component\Attribute\AttributeType\TextAttributeType;
 use Sylius\Component\Attribute\Model\AttributeInterface;
@@ -32,18 +31,13 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
  */
 class LocalesAwareValidAttributeValueValidatorSpec extends ObjectBehavior
 {
-    function let(ServiceRegistryInterface $attributeTypesRegistry, ExecutionContextInterface $context, TranslationLocaleProviderInterface $localeProvider)
+    function let(ServiceRegistryInterface $attributeTypesRegistry, ExecutionContextInterface $context, TranslationLocaleProviderInterface $localeProvider): void
     {
         $this->beConstructedWith($attributeTypesRegistry, $localeProvider);
         $this->initialize($context);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(LocalesAwareValidAttributeValueValidator::class);
-    }
-
-    function it_is_constraint_validator()
+    function it_is_constraint_validator(): void
     {
         $this->shouldHaveType(ConstraintValidator::class);
     }
@@ -55,7 +49,7 @@ class LocalesAwareValidAttributeValueValidatorSpec extends ObjectBehavior
         ServiceRegistryInterface $attributeTypesRegistry,
         ValidAttributeValue $attributeValueConstraint,
         TranslationLocaleProviderInterface $localeProvider
-    ) {
+    ): void {
         $attributeValue->getType()->willReturn(TextAttributeType::TYPE);
         $attributeTypesRegistry->get('text')->willReturn($attributeType);
         $attributeValue->getAttribute()->willReturn($attribute);
@@ -76,7 +70,7 @@ class LocalesAwareValidAttributeValueValidatorSpec extends ObjectBehavior
         ServiceRegistryInterface $attributeTypesRegistry,
         ValidAttributeValue $attributeValueConstraint,
         TranslationLocaleProviderInterface $localeProvider
-    ) {
+    ): void {
         $attributeValue->getType()->willReturn(TextAttributeType::TYPE);
         $attributeTypesRegistry->get('text')->willReturn($attributeType);
         $attributeValue->getAttribute()->willReturn($attribute);
@@ -93,7 +87,7 @@ class LocalesAwareValidAttributeValueValidatorSpec extends ObjectBehavior
     function it_throws_exception_if_validated_value_is_not_attribute_value(
         \DateTime $badObject,
         ValidAttributeValue $attributeValueConstraint
-    ) {
+    ): void {
         $this
             ->shouldThrow(new UnexpectedTypeException('\DateTimeInterface', AttributeValueInterface::class))
             ->during('validate', [$badObject, $attributeValueConstraint])

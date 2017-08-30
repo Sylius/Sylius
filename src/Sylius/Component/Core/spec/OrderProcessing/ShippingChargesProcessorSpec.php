@@ -18,7 +18,6 @@ use Prophecy\Argument;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
-use Sylius\Component\Core\OrderProcessing\ShippingChargesProcessor;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Shipping\Calculator\DelegatingCalculatorInterface;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
@@ -29,22 +28,17 @@ use Sylius\Component\Shipping\Model\ShippingMethodInterface;
  */
 final class ShippingChargesProcessorSpec extends ObjectBehavior
 {
-    function let(FactoryInterface $adjustmentFactory, DelegatingCalculatorInterface $calculator)
+    function let(FactoryInterface $adjustmentFactory, DelegatingCalculatorInterface $calculator): void
     {
         $this->beConstructedWith($adjustmentFactory, $calculator);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ShippingChargesProcessor::class);
-    }
-
-    function it_is_an_order_processor()
+    function it_is_an_order_processor(): void
     {
         $this->shouldImplement(OrderProcessorInterface::class);
     }
 
-    function it_removes_existing_shipping_adjustments(OrderInterface $order)
+    function it_removes_existing_shipping_adjustments(OrderInterface $order): void
     {
         $order->getShipments()->willReturn([]);
         $order->removeAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->shouldBeCalled();
@@ -52,7 +46,7 @@ final class ShippingChargesProcessorSpec extends ObjectBehavior
         $this->process($order);
     }
 
-    function it_does_not_apply_any_shipping_charge_if_order_has_no_shipments(OrderInterface $order)
+    function it_does_not_apply_any_shipping_charge_if_order_has_no_shipments(OrderInterface $order): void
     {
         $order->removeAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->shouldBeCalled();
         $order->getShipments()->willReturn([]);
@@ -68,7 +62,7 @@ final class ShippingChargesProcessorSpec extends ObjectBehavior
         OrderInterface $order,
         ShipmentInterface $shipment,
         ShippingMethodInterface $shippingMethod
-    ) {
+    ): void {
         $adjustmentFactory->createNew()->willReturn($adjustment);
         $order->getShipments()->willReturn([$shipment]);
 

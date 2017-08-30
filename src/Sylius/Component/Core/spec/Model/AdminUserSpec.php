@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Model\AdminUser;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\User\Model\User;
 use Sylius\Component\User\Model\UserInterface;
@@ -24,27 +23,22 @@ use Sylius\Component\User\Model\UserInterface;
  */
 class AdminUserSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(AdminUser::class);
-    }
-
-    function it_extends_a_base_user_model()
+    function it_extends_a_base_user_model(): void
     {
         $this->shouldHaveType(User::class);
     }
 
-    function it_implements_an_admin_user_interface()
+    function it_implements_an_admin_user_interface(): void
     {
         $this->shouldImplement(AdminUserInterface::class);
     }
 
-    function it_implements_a_user_interface()
+    function it_implements_a_user_interface(): void
     {
         $this->shouldImplement(UserInterface::class);
     }
 
-    function it_has_first_name_and_last_name()
+    function it_has_first_name_and_last_name(): void
     {
         $this->setFirstName('John');
         $this->getFirstName()->shouldReturn('John');
@@ -53,7 +47,7 @@ class AdminUserSpec extends ObjectBehavior
         $this->getLastName()->shouldReturn('Doe');
     }
 
-    function it_has_mutable_locale_code()
+    function it_has_mutable_locale_code(): void
     {
         $this->getLocaleCode()->shouldReturn(null);
         $this->setLocaleCode('en_US');

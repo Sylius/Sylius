@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\CoreBundle\Installer\Executor;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Installer\Executor\CommandExecutor;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
@@ -23,17 +22,12 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class CommandExecutorSpec extends ObjectBehavior
 {
-    function let(InputInterface $input, OutputInterface $output, Application $application)
+    function let(InputInterface $input, OutputInterface $output, Application $application): void
     {
         $this->beConstructedWith($input, $output, $application);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(CommandExecutor::class);
-    }
-
-    function it_should_preserve_the_current_value_of_interactive_option(InputInterface $input, Application $application)
+    function it_should_preserve_the_current_value_of_interactive_option(InputInterface $input, Application $application): void
     {
         $input
             ->hasOption('no-interaction')
@@ -75,7 +69,7 @@ final class CommandExecutorSpec extends ObjectBehavior
         $this->runCommand('command', []);
     }
 
-    function it_should_use_passed_options_rather_than_default_params(InputInterface $input, Application $application)
+    function it_should_use_passed_options_rather_than_default_params(InputInterface $input, Application $application): void
     {
         $input
             ->hasOption('no-interaction')

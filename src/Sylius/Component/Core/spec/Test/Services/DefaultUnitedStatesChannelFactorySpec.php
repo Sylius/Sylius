@@ -16,12 +16,10 @@ namespace spec\Sylius\Component\Core\Test\Services;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Factory\ZoneFactoryInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
-use Sylius\Component\Addressing\Model\Scope;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Factory\ChannelFactoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Test\Services\DefaultChannelFactoryInterface;
-use Sylius\Component\Core\Test\Services\DefaultUnitedStatesChannelFactory;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -43,7 +41,7 @@ final class DefaultUnitedStatesChannelFactorySpec extends ObjectBehavior
         FactoryInterface $currencyFactory,
         FactoryInterface $localeFactory,
         ZoneFactoryInterface $zoneFactory
-    ) {
+    ): void {
         $this->beConstructedWith(
             $channelRepository,
             $countryRepository,
@@ -59,12 +57,7 @@ final class DefaultUnitedStatesChannelFactorySpec extends ObjectBehavior
         );
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(DefaultUnitedStatesChannelFactory::class);
-    }
-
-    function it_implements_a_default_channel_factory_interface()
+    function it_implements_a_default_channel_factory_interface(): void
     {
         $this->shouldImplement(DefaultChannelFactoryInterface::class);
     }
@@ -85,7 +78,7 @@ final class DefaultUnitedStatesChannelFactorySpec extends ObjectBehavior
         CountryInterface $unitedStates,
         CurrencyInterface $currency,
         LocaleInterface $locale
-    ) {
+    ): void {
         $channel->getName()->willReturn('United States');
         $channelFactory->createNamed('United States')->willReturn($channel);
 

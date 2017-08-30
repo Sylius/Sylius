@@ -16,7 +16,6 @@ namespace spec\Sylius\Component\Core\Customer;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Customer\CustomerAddressAdderInterface;
-use Sylius\Component\Core\Customer\CustomerOrderAddressesSaver;
 use Sylius\Component\Core\Customer\OrderAddressesSaverInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -28,17 +27,12 @@ use Sylius\Component\Core\Model\ShopUserInterface;
  */
 final class CustomerOrderAddressesSaverSpec extends ObjectBehavior
 {
-    function let(CustomerAddressAdderInterface $addressAdder)
+    function let(CustomerAddressAdderInterface $addressAdder): void
     {
         $this->beConstructedWith($addressAdder);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(CustomerOrderAddressesSaver::class);
-    }
-
-    function it_implements_order_addresses_saver_interface()
+    function it_implements_order_addresses_saver_interface(): void
     {
         $this->shouldImplement(OrderAddressesSaverInterface::class);
     }
@@ -50,7 +44,7 @@ final class CustomerOrderAddressesSaverSpec extends ObjectBehavior
         ShopUserInterface $user,
         AddressInterface $shippingAddress,
         AddressInterface $billingAddress
-    ) {
+    ): void {
         $order->getCustomer()->willReturn($customer);
         $customer->getUser()->willReturn($user);
 
@@ -67,7 +61,7 @@ final class CustomerOrderAddressesSaverSpec extends ObjectBehavior
         CustomerAddressAdderInterface $addressAdder,
         OrderInterface $order,
         CustomerInterface $customer
-    ) {
+    ): void {
         $order->getCustomer()->willReturn($customer);
         $customer->getUser()->willReturn(null);
 

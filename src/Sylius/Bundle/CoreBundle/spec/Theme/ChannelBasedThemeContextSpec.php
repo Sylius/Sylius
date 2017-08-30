@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\CoreBundle\Theme;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Theme\ChannelBasedThemeContext;
 use Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
@@ -27,17 +26,12 @@ use Sylius\Component\Core\Model\ChannelInterface;
  */
 final class ChannelBasedThemeContextSpec extends ObjectBehavior
 {
-    function let(ChannelContextInterface $channelContext, ThemeRepositoryInterface $themeRepository)
+    function let(ChannelContextInterface $channelContext, ThemeRepositoryInterface $themeRepository): void
     {
         $this->beConstructedWith($channelContext, $themeRepository);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ChannelBasedThemeContext::class);
-    }
-
-    function it_implements_theme_context_interface()
+    function it_implements_theme_context_interface(): void
     {
         $this->shouldImplement(ThemeContextInterface::class);
     }
@@ -47,7 +41,7 @@ final class ChannelBasedThemeContextSpec extends ObjectBehavior
         ThemeRepositoryInterface $themeRepository,
         ChannelInterface $channel,
         ThemeInterface $theme
-    ) {
+    ): void {
         $channelContext->getChannel()->willReturn($channel);
         $channel->getThemeName()->willReturn('theme/name');
         $themeRepository->findOneByName('theme/name')->willReturn($theme);
@@ -59,7 +53,7 @@ final class ChannelBasedThemeContextSpec extends ObjectBehavior
         ChannelContextInterface $channelContext,
         ThemeRepositoryInterface $themeRepository,
         ChannelInterface $channel
-    ) {
+    ): void {
         $channelContext->getChannel()->willReturn($channel);
         $channel->getThemeName()->willReturn(null);
         $themeRepository->findOneByName(null)->willReturn(null);
@@ -69,7 +63,7 @@ final class ChannelBasedThemeContextSpec extends ObjectBehavior
 
     function it_returns_null_if_there_is_no_channel(
         ChannelContextInterface $channelContext
-    ) {
+    ): void {
         $channelContext->getChannel()->willThrow(ChannelNotFoundException::class);
 
         $this->getTheme()->shouldReturn(null);
@@ -77,7 +71,7 @@ final class ChannelBasedThemeContextSpec extends ObjectBehavior
 
     function it_returns_null_if_any_exception_is_thrown_during_getting_the_channel(
         ChannelContextInterface $channelContext
-    ) {
+    ): void {
         $channelContext->getChannel()->willThrow(\Exception::class);
 
         $this->getTheme()->shouldReturn(null);

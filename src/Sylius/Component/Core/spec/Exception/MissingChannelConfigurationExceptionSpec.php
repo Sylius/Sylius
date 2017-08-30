@@ -14,24 +14,18 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\Core\Exception;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Exception\MissingChannelConfigurationException;
 
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 final class MissingChannelConfigurationExceptionSpec extends ObjectBehavior
 {
-    function let()
+    function let(): void
     {
         $this->beConstructedWith('Message');
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(MissingChannelConfigurationException::class);
-    }
-
-    function it_is_a_runtime_exception()
+    function it_is_a_runtime_exception(): void
     {
         $this->shouldHaveType(\RuntimeException::class);
     }

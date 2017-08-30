@@ -21,7 +21,6 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\OrderShippingStates;
 use Sylius\Component\Core\OrderShippingTransitions;
-use Sylius\Component\Core\StateResolver\OrderShippingStateResolver;
 use Sylius\Component\Order\StateResolver\StateResolverInterface;
 
 /**
@@ -30,17 +29,12 @@ use Sylius\Component\Order\StateResolver\StateResolverInterface;
  */
 final class OrderShippingStateResolverSpec extends ObjectBehavior
 {
-    function let(FactoryInterface $stateMachineFactory)
+    function let(FactoryInterface $stateMachineFactory): void
     {
         $this->beConstructedWith($stateMachineFactory);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(OrderShippingStateResolver::class);
-    }
-
-    function it_implements_an_order_state_resolver_interface()
+    function it_implements_an_order_state_resolver_interface(): void
     {
         $this->shouldImplement(StateResolverInterface::class);
     }
@@ -51,7 +45,7 @@ final class OrderShippingStateResolverSpec extends ObjectBehavior
         ShipmentInterface $shipment1,
         ShipmentInterface $shipment2,
         StateMachineInterface $orderStateMachine
-    ) {
+    ): void {
         $shipments = new ArrayCollection();
         $shipments->add($shipment1->getWrappedObject());
         $shipments->add($shipment2->getWrappedObject());
@@ -74,7 +68,7 @@ final class OrderShippingStateResolverSpec extends ObjectBehavior
         ShipmentInterface $shipment1,
         ShipmentInterface $shipment2,
         StateMachineInterface $orderStateMachine
-    ) {
+    ): void {
         $shipments = new ArrayCollection();
         $shipments->add($shipment1->getWrappedObject());
         $shipments->add($shipment2->getWrappedObject());
@@ -97,7 +91,7 @@ final class OrderShippingStateResolverSpec extends ObjectBehavior
         ShipmentInterface $shipment1,
         ShipmentInterface $shipment2,
         StateMachineInterface $orderStateMachine
-    ) {
+    ): void {
         $shipments = new ArrayCollection();
         $shipments->add($shipment1->getWrappedObject());
         $shipments->add($shipment2->getWrappedObject());

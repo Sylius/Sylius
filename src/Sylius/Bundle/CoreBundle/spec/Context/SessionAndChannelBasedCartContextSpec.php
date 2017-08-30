@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\CoreBundle\Context;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Context\SessionAndChannelBasedCartContext;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -29,17 +28,12 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
  */
 final class SessionAndChannelBasedCartContextSpec extends ObjectBehavior
 {
-    function let(SessionInterface $session, OrderRepositoryInterface $orderRepository, ChannelContextInterface $channelContext)
+    function let(SessionInterface $session, OrderRepositoryInterface $orderRepository, ChannelContextInterface $channelContext): void
     {
         $this->beConstructedWith($session, 'session_key_name', $channelContext, $orderRepository);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(SessionAndChannelBasedCartContext::class);
-    }
-
-    function it_implements_cart_context_interface()
+    function it_implements_cart_context_interface(): void
     {
         $this->shouldImplement(CartContextInterface::class);
     }
@@ -50,7 +44,7 @@ final class SessionAndChannelBasedCartContextSpec extends ObjectBehavior
         ChannelContextInterface $channelContext,
         ChannelInterface $channel,
         OrderInterface $cart
-    ) {
+    ): void {
 
         $channelContext->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('Poland');
@@ -66,7 +60,7 @@ final class SessionAndChannelBasedCartContextSpec extends ObjectBehavior
         SessionInterface $session,
         ChannelContextInterface $channelContext,
         ChannelInterface $channel
-    ) {
+    ): void {
         $channelContext->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('Poland');
         $session->has('session_key_name.Poland')->willReturn(false);
@@ -79,7 +73,7 @@ final class SessionAndChannelBasedCartContextSpec extends ObjectBehavior
         OrderRepositoryInterface $orderRepository,
         ChannelContextInterface $channelContext,
         ChannelInterface $channel
-    ) {
+    ): void {
         $channelContext->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('Poland');
         $session->has('session_key_name.Poland')->willReturn(true);
@@ -92,7 +86,7 @@ final class SessionAndChannelBasedCartContextSpec extends ObjectBehavior
         $this->shouldThrow(CartNotFoundException::class)->during('getCart');
     }
 
-    function it_throws_cart_not_found_exception_if_channel_was_not_found(ChannelContextInterface $channelContext)
+    function it_throws_cart_not_found_exception_if_channel_was_not_found(ChannelContextInterface $channelContext): void
     {
         $channelContext->getChannel()->willThrow(ChannelNotFoundException::class);
 

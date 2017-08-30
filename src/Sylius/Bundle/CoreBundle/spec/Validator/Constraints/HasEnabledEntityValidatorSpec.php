@@ -15,7 +15,6 @@ namespace spec\Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Validator\Constraints\HasEnabledEntityValidator;
 use Symfony\Component\Validator\ConstraintValidator;
 
 /**
@@ -26,11 +25,6 @@ final class HasEnabledEntityValidatorSpec extends ObjectBehavior
     public function let(ManagerRegistry $registry)
     {
         $this->beConstructedWith($registry);
-    }
-
-    public function it_is_initializable()
-    {
-        $this->shouldHaveType(HasEnabledEntityValidator::class);
     }
 
     public function it_is_a_constraint_validator()

@@ -15,7 +15,6 @@ namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\CoreBundle\EventListener\UserCartRecalculationListener;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Context\CartNotFoundException;
@@ -27,14 +26,9 @@ use Symfony\Component\EventDispatcher\Event;
  */
 final class UserCartRecalculationListenerSpec extends ObjectBehavior
 {
-    function let(CartContextInterface $cartContext, OrderProcessorInterface $orderProcessor)
+    function let(CartContextInterface $cartContext, OrderProcessorInterface $orderProcessor): void
     {
         $this->beConstructedWith($cartContext, $orderProcessor);
-    }
-
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(UserCartRecalculationListener::class);
     }
 
     function it_recalculates_cart_for_logged_in_user(
@@ -42,7 +36,7 @@ final class UserCartRecalculationListenerSpec extends ObjectBehavior
         OrderProcessorInterface $orderProcessor,
         Event $event,
         OrderInterface $order
-    ) {
+    ): void {
         $cartContext->getCart()->willReturn($order);
         $orderProcessor->process($order)->shouldBeCalled();
 
@@ -53,7 +47,7 @@ final class UserCartRecalculationListenerSpec extends ObjectBehavior
         CartContextInterface $cartContext,
         OrderProcessorInterface $orderProcessor,
         Event $event
-    ) {
+    ): void {
         $cartContext->getCart()->willThrow(CartNotFoundException::class);
         $orderProcessor->process(Argument::any())->shouldNotBeCalled();
 

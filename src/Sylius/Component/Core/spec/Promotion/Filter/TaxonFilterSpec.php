@@ -16,22 +16,15 @@ namespace spec\Sylius\Component\Core\Promotion\Filter;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\Model\ProductTaxonInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Promotion\Filter\FilterInterface;
-use Sylius\Component\Core\Promotion\Filter\TaxonFilter;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class TaxonFilterSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(TaxonFilter::class);
-    }
-
-    function it_implements_a_filter_interface()
+    function it_implements_a_filter_interface(): void
     {
         $this->shouldImplement(FilterInterface::class);
     }
@@ -43,7 +36,7 @@ final class TaxonFilterSpec extends ObjectBehavior
         ProductInterface $product2,
         TaxonInterface $taxon1,
         TaxonInterface $taxon2
-    ) {
+    ): void {
         $item1->getProduct()->willReturn($product1);
         $product1->getTaxons()->willReturn([$taxon1]);
         $taxon1->getCode()->willReturn('taxon1');
@@ -55,12 +48,12 @@ final class TaxonFilterSpec extends ObjectBehavior
         $this->filter([$item1, $item2], ['filters' => ['taxons_filter' => ['taxons' => ['taxon1']]]])->shouldReturn([$item1]);
     }
 
-    function it_returns_all_items_if_configuration_is_invalid(OrderItemInterface $item)
+    function it_returns_all_items_if_configuration_is_invalid(OrderItemInterface $item): void
     {
         $this->filter([$item], [])->shouldReturn([$item]);
     }
 
-    function it_returns_all_items_if_configuration_is_empty(OrderItemInterface $item)
+    function it_returns_all_items_if_configuration_is_empty(OrderItemInterface $item): void
     {
         $this->filter([$item], ['filters' => ['taxons_filter' => ['taxons' => []]]])->shouldReturn([$item]);
     }

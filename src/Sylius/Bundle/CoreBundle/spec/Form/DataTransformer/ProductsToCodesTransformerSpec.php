@@ -16,10 +16,9 @@ namespace spec\Sylius\Bundle\CoreBundle\Form\DataTransformer;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Form\DataTransformer\ProductsToCodesTransformer;
 use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\Form\DataTransformerInterface;
 
 /**
@@ -27,17 +26,12 @@ use Symfony\Component\Form\DataTransformerInterface;
  */
 final class ProductsToCodesTransformerSpec extends ObjectBehavior
 {
-    function let(ProductRepositoryInterface $productRepository)
+    function let(ProductRepositoryInterface $productRepository): void
     {
         $this->beConstructedWith($productRepository);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ProductsToCodesTransformer::class);
-    }
-
-    function it_implements_data_transformer_interface()
+    function it_implements_data_transformer_interface(): void
     {
         $this->shouldImplement(DataTransformerInterface::class);
     }
@@ -46,7 +40,7 @@ final class ProductsToCodesTransformerSpec extends ObjectBehavior
         ProductRepositoryInterface $productRepository,
         ProductInterface $bow,
         ProductInterface $sword
-    ) {
+    ): void {
         $productRepository->findBy(['code' => ['bow', 'sword']])->willReturn([$bow, $sword]);
 
         $this->transform(['bow', 'sword'])->shouldIterateAs([$bow, $sword]);
@@ -55,18 +49,18 @@ final class ProductsToCodesTransformerSpec extends ObjectBehavior
     function it_transforms_only_existing_products(
         ProductRepositoryInterface $productRepository,
         ProductInterface $bow
-    ) {
+    ): void {
         $productRepository->findBy(['code' => ['bow', 'sword']])->willReturn([$bow]);
 
         $this->transform(['bow', 'sword'])->shouldIterateAs([$bow]);
     }
 
-    function it_transforms_empty_array_into_empty_collection()
+    function it_transforms_empty_array_into_empty_collection(): void
     {
         $this->transform([])->shouldIterateAs([]);
     }
 
-    function it_throws_exception_if_value_to_transform_is_not_array()
+    function it_throws_exception_if_value_to_transform_is_not_array(): void
     {
         $this
             ->shouldThrow(new UnexpectedTypeException('badObject', 'array'))
@@ -77,7 +71,7 @@ final class ProductsToCodesTransformerSpec extends ObjectBehavior
     function it_reverse_transforms_into_array_of_products_codes(
         ProductInterface $axes,
         ProductInterface $shields
-    ) {
+    ): void {
         $axes->getCode()->willReturn('axes');
         $shields->getCode()->willReturn('shields');
 
@@ -87,7 +81,7 @@ final class ProductsToCodesTransformerSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_exception_if_reverse_transformed_object_is_not_collection()
+    function it_throws_exception_if_reverse_transformed_object_is_not_collection(): void
     {
         $this
             ->shouldThrow(new UnexpectedTypeException('badObject', Collection::class))
@@ -95,7 +89,7 @@ final class ProductsToCodesTransformerSpec extends ObjectBehavior
         ;
     }
 
-    function it_returns_empty_array_if_passed_collection_is_empty()
+    function it_returns_empty_array_if_passed_collection_is_empty(): void
     {
         $this->reverseTransform(new ArrayCollection())->shouldReturn([]);
     }

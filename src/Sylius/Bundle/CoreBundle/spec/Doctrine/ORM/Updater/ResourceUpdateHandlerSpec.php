@@ -16,7 +16,6 @@ namespace spec\Sylius\Bundle\CoreBundle\Doctrine\ORM\Updater;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\OptimisticLockException;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Doctrine\ORM\Updater\ResourceUpdateHandler;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceUpdateHandlerInterface;
 use Sylius\Component\Resource\Exception\RaceConditionException;
@@ -27,17 +26,12 @@ use Sylius\Component\Resource\Model\ResourceInterface;
  */
 final class ResourceUpdateHandlerSpec extends ObjectBehavior
 {
-    function let(ResourceUpdateHandlerInterface $decoratedUpdater)
+    function let(ResourceUpdateHandlerInterface $decoratedUpdater): void
     {
         $this->beConstructedWith($decoratedUpdater);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ResourceUpdateHandler::class);
-    }
-
-    function it_implements_a_resource_update_handler_interface()
+    function it_implements_a_resource_update_handler_interface(): void
     {
         $this->shouldImplement(ResourceUpdateHandlerInterface::class);
     }
@@ -47,7 +41,7 @@ final class ResourceUpdateHandlerSpec extends ObjectBehavior
         ResourceInterface $resource,
         RequestConfiguration $configuration,
         ObjectManager $manager
-    ) {
+    ): void {
         $decoratedUpdater->handle($resource, $configuration, $manager);
 
         $this->handle($resource, $configuration, $manager);
@@ -58,7 +52,7 @@ final class ResourceUpdateHandlerSpec extends ObjectBehavior
         ResourceInterface $resource,
         RequestConfiguration $configuration,
         ObjectManager $manager
-    ) {
+    ): void {
         $decoratedUpdater
             ->handle($resource, $configuration, $manager)
             ->willThrow(OptimisticLockException::class)

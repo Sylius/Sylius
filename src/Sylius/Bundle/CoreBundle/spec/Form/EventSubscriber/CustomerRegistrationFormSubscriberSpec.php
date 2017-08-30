@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\CoreBundle\Form\EventSubscriber;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Form\EventSubscriber\CustomerRegistrationFormSubscriber;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -29,22 +28,17 @@ use Symfony\Component\Form\FormInterface;
  */
 final class CustomerRegistrationFormSubscriberSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $customerRepository)
+    function let(RepositoryInterface $customerRepository): void
     {
         $this->beConstructedWith($customerRepository);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(CustomerRegistrationFormSubscriber::class);
-    }
-
-    function it_is_event_subscriber_instance()
+    function it_is_event_subscriber_instance(): void
     {
         $this->shouldImplement(EventSubscriberInterface::class);
     }
 
-    function it_listens_on_pre_submit_data_event()
+    function it_listens_on_pre_submit_data_event(): void
     {
         $this->getSubscribedEvents()->shouldReturn([FormEvents::PRE_SUBMIT => 'preSubmit',]);
     }
@@ -56,7 +50,7 @@ final class CustomerRegistrationFormSubscriberSpec extends ObjectBehavior
         RepositoryInterface $customerRepository,
         CustomerInterface $existingCustomer,
         ShopUserInterface $user
-    ) {
+    ): void {
         $event->getForm()->willReturn($form);
         $form->getData()->willReturn($customer);
         $event->getData()->willReturn(['email' => 'sylius@example.com']);
@@ -76,7 +70,7 @@ final class CustomerRegistrationFormSubscriberSpec extends ObjectBehavior
         FormEvent $event,
         FormInterface $form,
         ShopUserInterface $user
-    ) {
+    ): void {
         $event->getForm()->willReturn($form);
         $form->getData()->willReturn($user);
         $event->getData()->willReturn(['email' => 'sylius@example.com']);
@@ -91,7 +85,7 @@ final class CustomerRegistrationFormSubscriberSpec extends ObjectBehavior
         RepositoryInterface $customerRepository,
         CustomerInterface $existingCustomer,
         ShopUserInterface $user
-    ) {
+    ): void {
         $event->getForm()->willReturn($form);
         $form->getData()->willReturn($customer);
         $event->getData()->willReturn(['email' => 'sylius@example.com']);

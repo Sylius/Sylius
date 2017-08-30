@@ -19,7 +19,6 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
-use Sylius\Component\Core\Resolver\DefaultShippingMethodResolver;
 use Sylius\Component\Shipping\Exception\UnresolvedDefaultShippingMethodException;
 use Sylius\Component\Shipping\Model\ShipmentInterface as BaseShipmentInterface;
 use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface;
@@ -29,17 +28,12 @@ use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface;
  */
 final class DefaultShippingMethodResolverSpec extends ObjectBehavior
 {
-    function let(ShippingMethodRepositoryInterface $shippingMethodRepository)
+    function let(ShippingMethodRepositoryInterface $shippingMethodRepository): void
     {
         $this->beConstructedWith($shippingMethodRepository);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(DefaultShippingMethodResolver::class);
-    }
-
-    function it_implements_a_default_shipping_method_resolver_interface()
+    function it_implements_a_default_shipping_method_resolver_interface(): void
     {
         $this->shouldImplement(DefaultShippingMethodResolverInterface::class);
     }
@@ -51,7 +45,7 @@ final class DefaultShippingMethodResolverSpec extends ObjectBehavior
         ShippingMethodInterface $firstShippingMethod,
         ShippingMethodInterface $secondShippingMethod,
         ShippingMethodRepositoryInterface $shippingMethodRepository
-    ) {
+    ): void {
         $shipment->getOrder()->willReturn($order);
         $order->getChannel()->willReturn($channel);
 
@@ -69,7 +63,7 @@ final class DefaultShippingMethodResolverSpec extends ObjectBehavior
         ShipmentInterface $shipment,
         ChannelInterface $channel,
         OrderInterface $order
-    ) {
+    ): void {
 
         $shipment->getOrder()->willReturn($order);
         $order->getChannel()->willReturn($channel);
@@ -83,7 +77,7 @@ final class DefaultShippingMethodResolverSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_an_exception_if_passed_shipment_is_not_core_shipment_object(BaseShipmentInterface $shipment)
+    function it_throws_an_exception_if_passed_shipment_is_not_core_shipment_object(BaseShipmentInterface $shipment): void
     {
         $this->shouldThrow(\InvalidArgumentException::class)->during('getDefaultShippingMethod', [$shipment]);
     }

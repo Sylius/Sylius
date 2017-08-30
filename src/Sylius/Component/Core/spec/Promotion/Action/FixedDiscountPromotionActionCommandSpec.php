@@ -22,7 +22,6 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
-use Sylius\Component\Core\Promotion\Action\FixedDiscountPromotionActionCommand;
 use Sylius\Component\Core\Promotion\Applicator\UnitsPromotionAdjustmentsApplicatorInterface;
 use Sylius\Component\Promotion\Action\PromotionActionCommandInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
@@ -39,19 +38,14 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
     function let(
         ProportionalIntegerDistributorInterface $proportionalIntegerDistributor,
         UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
-    ) {
+    ): void {
         $this->beConstructedWith(
             $proportionalIntegerDistributor,
             $unitsPromotionAdjustmentsApplicator
         );
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(FixedDiscountPromotionActionCommand::class);
-    }
-
-    function it_implements_promotion_action_interface()
+    function it_implements_promotion_action_interface(): void
     {
         $this->shouldImplement(PromotionActionCommandInterface::class);
     }
@@ -64,7 +58,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         PromotionInterface $promotion,
         ProportionalIntegerDistributorInterface $proportionalIntegerDistributor,
         UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
-    ) {
+    ): void {
         $order->getCurrencyCode()->willReturn('USD');
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
@@ -94,7 +88,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         PromotionInterface $promotion,
         ProportionalIntegerDistributorInterface $proportionalIntegerDistributor,
         UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
-    ) {
+    ): void {
         $order->getCurrencyCode()->willReturn('USD');
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
@@ -120,7 +114,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         ChannelInterface $channel,
         OrderInterface $order,
         PromotionInterface $promotion
-    ) {
+    ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
 
@@ -135,7 +129,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         OrderInterface $order,
         PromotionInterface $promotion,
         ProportionalIntegerDistributorInterface $proportionalIntegerDistributor
-    ) {
+    ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
 
@@ -151,7 +145,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         OrderInterface $order,
         PromotionInterface $promotion,
         ProportionalIntegerDistributorInterface $proportionalIntegerDistributor
-    ) {
+    ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
 
@@ -166,7 +160,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         ChannelInterface $channel,
         OrderInterface $order,
         PromotionInterface $promotion
-    ) {
+    ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
 
@@ -180,7 +174,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         ChannelInterface $channel,
         OrderInterface $order,
         PromotionInterface $promotion
-    ) {
+    ): void {
         $order->getChannel()->willReturn($channel, $channel);
         $channel->getCode()->willReturn('WEB_US', 'WEB_US');
         $order->countItems()->willReturn(1, 1);
@@ -192,7 +186,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
     function it_throws_an_exception_if_subject_is_not_an_order(
         PromotionInterface $promotion,
         PromotionSubjectInterface $subject
-    ) {
+    ): void {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
             ->during('execute', [$subject, [], $promotion])
@@ -206,7 +200,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         OrderItemInterface $item,
         OrderItemUnitInterface $unit,
         PromotionInterface $promotion
-    ) {
+    ): void {
         $order->countItems()->willReturn(1);
         $order->getItems()->willReturn(new ArrayCollection([$item->getWrappedObject()]));
 
@@ -228,7 +222,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $this->revert($order, [], $promotion);
     }
 
-    function it_does_not_revert_if_order_has_no_items(OrderInterface $order, PromotionInterface $promotion)
+    function it_does_not_revert_if_order_has_no_items(OrderInterface $order, PromotionInterface $promotion): void
     {
         $order->countItems()->willReturn(0);
         $order->getItems()->shouldNotBeCalled();
@@ -239,7 +233,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
     function it_throws_an_exception_while_reverting_subject_which_is_not_order(
         PromotionInterface $promotion,
         PromotionSubjectInterface $subject
-    ) {
+    ): void {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
             ->during('revert', [$subject, [], $promotion])

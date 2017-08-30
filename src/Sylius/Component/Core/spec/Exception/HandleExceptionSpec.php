@@ -21,22 +21,17 @@ use Sylius\Component\Core\Exception\HandleException;
  */
 final class HandleExceptionSpec extends ObjectBehavior
 {
-    function let()
+    function let(): void
     {
         $this->beConstructedWith(HandleException::class, 'request does not have locale code');
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(HandleException::class);
-    }
-
-    function it_is_a_runtime_exception()
+    function it_is_a_runtime_exception(): void
     {
         $this->shouldHaveType(\RuntimeException::class);
     }
 
-    function it_has_a_message()
+    function it_has_a_message(): void
     {
         $this->getMessage()->shouldReturn(
             sprintf(

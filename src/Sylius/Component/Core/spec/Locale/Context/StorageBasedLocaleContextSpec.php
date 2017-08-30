@@ -16,11 +16,10 @@ namespace spec\Sylius\Component\Core\Context;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
-use Sylius\Component\Core\Locale\Context\StorageBasedLocaleContext;
 use Sylius\Component\Core\Locale\LocaleStorageInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
-use Sylius\Component\Resource\Provider\LocaleProviderInterface;
+use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 
 /**
  * @author Kamil Kokot <kamil@kokot.me>
@@ -31,16 +30,11 @@ final class StorageBasedLocaleContextSpec extends ObjectBehavior
         ChannelContextInterface $channelContext,
         LocaleStorageInterface $localeStorage,
         LocaleProviderInterface $localeProvider
-    ) {
+    ): void {
         $this->beConstructedWith($channelContext, $localeStorage, $localeProvider);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(StorageBasedLocaleContext::class);
-    }
-
-    function it_is_a_locale_context()
+    function it_is_a_locale_context(): void
     {
         $this->shouldImplement(LocaleContextInterface::class);
     }
@@ -50,7 +44,7 @@ final class StorageBasedLocaleContextSpec extends ObjectBehavior
         LocaleStorageInterface $localeStorage,
         LocaleProviderInterface $localeProvider,
         ChannelInterface $channel
-    ) {
+    ): void {
         $channelContext->getChannel()->willReturn($channel);
 
         $localeStorage->get($channel)->willReturn('pl_PL');
@@ -65,7 +59,7 @@ final class StorageBasedLocaleContextSpec extends ObjectBehavior
         LocaleStorageInterface $localeStorage,
         LocaleProviderInterface $localeProvider,
         ChannelInterface $channel
-    ) {
+    ): void {
         $channelContext->getChannel()->willReturn($channel);
 
         $localeStorage->get($channel)->willReturn('pl_PL');

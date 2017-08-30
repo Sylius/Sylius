@@ -15,7 +15,6 @@ namespace spec\Sylius\Component\Core\Customer\Statistics;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Customer\Statistics\PerChannelCustomerStatistics;
-use Sylius\Component\Core\Customer\Statistics\CustomerStatistics;
 use Sylius\Component\Core\Model\ChannelInterface;
 
 /**
@@ -23,17 +22,12 @@ use Sylius\Component\Core\Model\ChannelInterface;
  */
 final class CustomerStatisticsSpec extends ObjectBehavior
 {
-    function let()
+    function let(): void
     {
         $this->beConstructedWith([]);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(CustomerStatistics::class);
-    }
-
-    function it_throws_an_exception_when_array_does_not_contain_only_per_channel_statistics()
+    function it_throws_an_exception_when_array_does_not_contain_only_per_channel_statistics(): void
     {
         $this->beConstructedWith([new \DateTime()]);
 
@@ -43,12 +37,12 @@ final class CustomerStatisticsSpec extends ObjectBehavior
         ;
     }
 
-    function it_returns_zero_if_there_are_no_per_channel_statistics()
+    function it_returns_zero_if_there_are_no_per_channel_statistics(): void
     {
         $this->getAllOrdersCount()->shouldReturn(0);
     }
 
-    function it_has_number_of_all_orders(ChannelInterface $channel) {
+    function it_has_number_of_all_orders(ChannelInterface $channel): void {
         $firstStatistics = new PerChannelCustomerStatistics(110, 120, $channel->getWrappedObject());
         $secondStatistics = new PerChannelCustomerStatistics(13, 120, $channel->getWrappedObject());
 
@@ -57,7 +51,7 @@ final class CustomerStatisticsSpec extends ObjectBehavior
         $this->getAllOrdersCount()->shouldReturn(123);
     }
 
-    function it_has_an_array_of_statistics_per_channel(ChannelInterface $channel) {
+    function it_has_an_array_of_statistics_per_channel(ChannelInterface $channel): void {
         $firstStatistics = new PerChannelCustomerStatistics(110, 120, $channel->getWrappedObject());
         $secondStatistics = new PerChannelCustomerStatistics(13, 120, $channel->getWrappedObject());
 

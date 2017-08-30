@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\Core\Distributor;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Distributor\IntegerDistributor;
 use Sylius\Component\Core\Distributor\IntegerDistributorInterface;
 
 /**
@@ -22,30 +21,25 @@ use Sylius\Component\Core\Distributor\IntegerDistributorInterface;
  */
 final class IntegerDistributorSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(IntegerDistributor::class);
-    }
-
-    function it_implements_an_integer_distributor_interface()
+    function it_implements_an_integer_distributor_interface(): void
     {
         $this->shouldImplement(IntegerDistributorInterface::class);
     }
 
-    function it_distributes_simple_integers()
+    function it_distributes_simple_integers(): void
     {
         $this->distribute(0, 4)->shouldReturn([0, 0, 0, 0]);
         $this->distribute(1000, 4)->shouldReturn([250, 250, 250, 250]);
         $this->distribute(-1000, 4)->shouldReturn([-250, -250, -250, -250]);
     }
 
-    function it_distributes_integers_that_cannot_be_split_equally()
+    function it_distributes_integers_that_cannot_be_split_equally(): void
     {
         $this->distribute(1000, 3)->shouldReturn([334, 333, 333]);
         $this->distribute(-1000, 3)->shouldReturn([-334, -333, -333]);
     }
 
-    function it_throws_an_exception_if_number_of_targets_is_not_integer_or_below_1()
+    function it_throws_an_exception_if_number_of_targets_is_not_integer_or_below_1(): void
     {
         $this
             ->shouldThrow(new \InvalidArgumentException('Number of targets must be an integer, bigger than 0.'))

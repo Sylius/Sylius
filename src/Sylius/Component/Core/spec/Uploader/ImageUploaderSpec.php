@@ -17,13 +17,12 @@ use Gaufrette\Filesystem;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Model\ImageInterface;
-use Sylius\Component\Core\Uploader\ImageUploader;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Symfony\Component\HttpFoundation\File\File;
 
 final class ImageUploaderSpec extends ObjectBehavior
 {
-    function let(Filesystem $filesystem, ImageInterface $image)
+    function let(Filesystem $filesystem, ImageInterface $image): void
     {
         $filesystem->has(Argument::any())->willReturn(false);
 
@@ -33,17 +32,12 @@ final class ImageUploaderSpec extends ObjectBehavior
         $this->beConstructedWith($filesystem);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ImageUploader::class);
-    }
-
-    function it_is_an_image_uploader()
+    function it_is_an_image_uploader(): void
     {
         $this->shouldImplement(ImageUploaderInterface::class);
     }
 
-    function it_uploads_an_image($filesystem, $image)
+    function it_uploads_an_image($filesystem, $image): void
     {
         $image->hasFile()->willReturn(true);
         $image->getPath()->willReturn('foo.jpg');
@@ -61,7 +55,7 @@ final class ImageUploaderSpec extends ObjectBehavior
         $this->upload($image);
     }
 
-    function it_replaces_an_image($filesystem, $image)
+    function it_replaces_an_image($filesystem, $image): void
     {
         $image->hasFile()->willReturn(true);
         $image->getPath()->willReturn('foo.jpg');

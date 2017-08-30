@@ -15,7 +15,6 @@ namespace spec\Sylius\Component\Core\Checker;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Checker\OrderPaymentMethodSelectionRequirementChecker;
 use Sylius\Component\Core\Checker\OrderPaymentMethodSelectionRequirementCheckerInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -28,17 +27,12 @@ use Sylius\Component\Payment\Resolver\PaymentMethodsResolverInterface;
  */
 final class OrderPaymentMethodSelectionRequirementCheckerSpec extends ObjectBehavior
 {
-    function let(PaymentMethodsResolverInterface $paymentMethodsResolver)
+    function let(PaymentMethodsResolverInterface $paymentMethodsResolver): void
     {
         $this->beConstructedWith($paymentMethodsResolver);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(OrderPaymentMethodSelectionRequirementChecker::class);
-    }
-
-    function it_implements_order_payment_necessity_checker_interface()
+    function it_implements_order_payment_necessity_checker_interface(): void
     {
         $this->shouldImplement(OrderPaymentMethodSelectionRequirementCheckerInterface::class);
     }
@@ -46,7 +40,7 @@ final class OrderPaymentMethodSelectionRequirementCheckerSpec extends ObjectBeha
     function it_says_that_payment_method_has_to_be_selected_if_order_total_is_bigger_than_0(
         OrderInterface $order,
         ChannelInterface $channel
-    ) {
+    ): void {
         $order->getTotal()->willReturn(1000);
         $order->getChannel()->willReturn($channel);
         $channel->isSkippingPaymentStepAllowed()->willReturn(false);
@@ -54,7 +48,7 @@ final class OrderPaymentMethodSelectionRequirementCheckerSpec extends ObjectBeha
         $this->isPaymentMethodSelectionRequired($order)->shouldReturn(true);
     }
 
-    function it_says_that_payment_method_does_not_have_to_be_selected_if_order_total_is_0(OrderInterface $order)
+    function it_says_that_payment_method_does_not_have_to_be_selected_if_order_total_is_0(OrderInterface $order): void
     {
         $order->getTotal()->willReturn(0);
 
@@ -64,7 +58,7 @@ final class OrderPaymentMethodSelectionRequirementCheckerSpec extends ObjectBeha
     function it_says_that_payment_method_has_to_be_selected_if_skipping_payment_step_is_disabled(
         OrderInterface $order,
         ChannelInterface $channel
-    ) {
+    ): void {
         $order->getTotal()->willReturn(1000);
         $order->getChannel()->willReturn($channel);
 
@@ -79,7 +73,7 @@ final class OrderPaymentMethodSelectionRequirementCheckerSpec extends ObjectBeha
         PaymentInterface $payment,
         PaymentMethodInterface $paymentMethod,
         PaymentMethodsResolverInterface $paymentMethodsResolver
-    ) {
+    ): void {
         $order->getTotal()->willReturn(1000);
         $order->getChannel()->willReturn($channel);
         $order->getPayments()->willReturn(new ArrayCollection([$payment->getWrappedObject()]));
@@ -97,7 +91,7 @@ final class OrderPaymentMethodSelectionRequirementCheckerSpec extends ObjectBeha
         PaymentMethodInterface $paymentMethod1,
         PaymentMethodInterface $paymentMethod2,
         PaymentMethodsResolverInterface $paymentMethodsResolver
-    ) {
+    ): void {
         $order->getTotal()->willReturn(1000);
         $order->getChannel()->willReturn($channel);
         $order->getPayments()->willReturn(new ArrayCollection([$payment->getWrappedObject()]));

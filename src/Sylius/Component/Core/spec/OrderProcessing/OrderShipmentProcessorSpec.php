@@ -22,7 +22,6 @@ use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
-use Sylius\Component\Core\OrderProcessing\OrderShipmentProcessor;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface;
@@ -35,16 +34,11 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
     function let(
         DefaultShippingMethodResolverInterface $defaultShippingMethodResolver,
         FactoryInterface $shipmentFactory
-    ) {
+    ): void {
         $this->beConstructedWith($defaultShippingMethodResolver, $shipmentFactory);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(OrderShipmentProcessor::class);
-    }
-
-    function it_is_an_order_processor()
+    function it_is_an_order_processor(): void
     {
         $this->shouldImplement(OrderProcessorInterface::class);
     }
@@ -58,7 +52,7 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
         ShipmentInterface $shipment,
         ShippingMethodInterface $defaultShippingMethod,
         OrderItemInterface $orderItem
-    ) {
+    ): void {
         $defaultShippingMethodResolver->getDefaultShippingMethod($shipment)->willReturn($defaultShippingMethod);
 
         $shipmentFactory->createNew()->willReturn($shipment);
@@ -90,7 +84,7 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
         ShippingMethodInterface $defaultShippingMethod,
         OrderItemInterface $orderItem,
         ProductVariantInterface $productVariant
-    ) {
+    ): void {
         $defaultShippingMethodResolver->getDefaultShippingMethod($shipment)->willReturn($defaultShippingMethod);
 
         $shipmentFactory->createNew()->willReturn($shipment);
@@ -116,7 +110,7 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
         OrderItemUnitInterface $itemUnitWithoutShipment,
         OrderItemInterface $orderItem,
         ProductVariantInterface $productVariant
-    ) {
+    ): void {
         $shipments->first()->willReturn($shipment);
 
         $orderItem->getVariant()->willReturn($productVariant);
@@ -145,7 +139,7 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
         Collection $shipments,
         OrderItemUnitInterface $itemUnit,
         OrderItemUnitInterface $itemUnitWithoutShipment
-    ) {
+    ): void {
         $shipments->first()->willReturn($shipment);
 
         $order->isShippingRequired()->willReturn(true);

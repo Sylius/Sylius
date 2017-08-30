@@ -15,28 +15,22 @@ namespace spec\Sylius\Component\Core\Dashboard;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Dashboard\DashboardStatistics;
-use Sylius\Component\Core\Dashboard\DashboardStatisticsProvider;
 use Sylius\Component\Core\Dashboard\DashboardStatisticsProviderInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class DashboardStatisticsProviderSpec extends ObjectBehavior
 {
-    function let(OrderRepositoryInterface $orderRepository, CustomerRepositoryInterface $customerRepository)
+    function let(OrderRepositoryInterface $orderRepository, CustomerRepositoryInterface $customerRepository): void
     {
         $this->beConstructedWith($orderRepository, $customerRepository);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(DashboardStatisticsProvider::class);
-    }
-
-    function it_implements_a_dashboard_statistics_provider_interface()
+    function it_implements_a_dashboard_statistics_provider_interface(): void
     {
         $this->shouldImplement(DashboardStatisticsProviderInterface::class);
     }
@@ -45,7 +39,7 @@ final class DashboardStatisticsProviderSpec extends ObjectBehavior
         OrderRepositoryInterface $orderRepository,
         CustomerRepositoryInterface $customerRepository,
         ChannelInterface $channel
-    ) {
+    ): void {
         $expectedStats = new DashboardStatistics(450, 2, 6);
 
         $orderRepository->getTotalSalesForChannel($channel)->willReturn(450);

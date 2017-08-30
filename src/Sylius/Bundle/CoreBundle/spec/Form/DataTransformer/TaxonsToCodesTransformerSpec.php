@@ -16,7 +16,6 @@ namespace spec\Sylius\Bundle\CoreBundle\Form\DataTransformer;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Form\DataTransformer\TaxonsToCodesTransformer;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
@@ -27,17 +26,12 @@ use Symfony\Component\Form\DataTransformerInterface;
  */
 final class TaxonsToCodesTransformerSpec extends ObjectBehavior
 {
-    function let(TaxonRepositoryInterface $taxonRepository)
+    function let(TaxonRepositoryInterface $taxonRepository): void
     {
         $this->beConstructedWith($taxonRepository);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(TaxonsToCodesTransformer::class);
-    }
-
-    function it_implements_data_transformer_interface()
+    function it_implements_data_transformer_interface(): void
     {
         $this->shouldImplement(DataTransformerInterface::class);
     }
@@ -46,7 +40,7 @@ final class TaxonsToCodesTransformerSpec extends ObjectBehavior
         TaxonRepositoryInterface $taxonRepository,
         TaxonInterface $bows,
         TaxonInterface $swords
-    ) {
+    ): void {
         $taxonRepository->findBy(['code' => ['bows', 'swords']])->willReturn([$bows, $swords]);
 
         $this->transform(['bows', 'swords'])->shouldIterateAs([$bows, $swords]);
@@ -55,18 +49,18 @@ final class TaxonsToCodesTransformerSpec extends ObjectBehavior
     function it_transforms_only_existing_taxons(
         TaxonRepositoryInterface $taxonRepository,
         TaxonInterface $bows
-    ) {
+    ): void {
         $taxonRepository->findBy(['code' => ['bows', 'swords']])->willReturn([$bows]);
 
         $this->transform(['bows', 'swords'])->shouldIterateAs([$bows]);
     }
 
-    function it_transforms_empty_array_into_empty_collection()
+    function it_transforms_empty_array_into_empty_collection(): void
     {
         $this->transform([])->shouldIterateAs([]);
     }
 
-    function it_throws_exception_if_value_to_transform_is_not_array()
+    function it_throws_exception_if_value_to_transform_is_not_array(): void
     {
         $this
             ->shouldThrow(new UnexpectedTypeException('badObject', 'array'))
@@ -77,7 +71,7 @@ final class TaxonsToCodesTransformerSpec extends ObjectBehavior
     function it_reverse_transforms_into_array_of_taxons_codes(
         TaxonInterface $axes,
         TaxonInterface $shields
-    ) {
+    ): void {
         $axes->getCode()->willReturn('axes');
         $shields->getCode()->willReturn('shields');
 
@@ -87,7 +81,7 @@ final class TaxonsToCodesTransformerSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_exception_if_reverse_transformed_object_is_not_collection()
+    function it_throws_exception_if_reverse_transformed_object_is_not_collection(): void
     {
         $this
             ->shouldThrow(new UnexpectedTypeException('badObject', Collection::class))
@@ -95,7 +89,7 @@ final class TaxonsToCodesTransformerSpec extends ObjectBehavior
         ;
     }
 
-    function it_returns_empty_array_if_passed_collection_is_empty()
+    function it_returns_empty_array_if_passed_collection_is_empty(): void
     {
         $this->reverseTransform(new ArrayCollection())->shouldReturn([]);
     }

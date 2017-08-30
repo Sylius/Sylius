@@ -18,7 +18,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
-use Sylius\Component\Core\Promotion\Modifier\OrderPromotionsUsageModifier;
 use Sylius\Component\Core\Promotion\Modifier\OrderPromotionsUsageModifierInterface;
 
 /**
@@ -26,12 +25,7 @@ use Sylius\Component\Core\Promotion\Modifier\OrderPromotionsUsageModifierInterfa
  */
 final class OrderPromotionsUsageModifierSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(OrderPromotionsUsageModifier::class);
-    }
-
-    function it_implements_an_order_promotions_usage_modifier_interface()
+    function it_implements_an_order_promotions_usage_modifier_interface(): void
     {
         $this->shouldImplement(OrderPromotionsUsageModifierInterface::class);
     }
@@ -40,7 +34,7 @@ final class OrderPromotionsUsageModifierSpec extends ObjectBehavior
         OrderInterface $order,
         PromotionInterface $firstPromotion,
         PromotionInterface $secondPromotion
-    ) {
+    ): void {
         $order->getPromotions()->willReturn(
             new ArrayCollection([$firstPromotion->getWrappedObject(), $secondPromotion->getWrappedObject()])
         );
@@ -56,7 +50,7 @@ final class OrderPromotionsUsageModifierSpec extends ObjectBehavior
         OrderInterface $order,
         PromotionInterface $firstPromotion,
         PromotionInterface $secondPromotion
-    ) {
+    ): void {
         $order->getPromotions()->willReturn(
             new ArrayCollection([$firstPromotion->getWrappedObject(), $secondPromotion->getWrappedObject()])
         );
@@ -73,7 +67,7 @@ final class OrderPromotionsUsageModifierSpec extends ObjectBehavior
         PromotionInterface $firstPromotion,
         PromotionInterface $secondPromotion,
         PromotionCouponInterface $promotionCoupon
-    ) {
+    ): void {
         $order->getPromotions()->willReturn(
             new ArrayCollection([$firstPromotion->getWrappedObject(), $secondPromotion->getWrappedObject()])
         );
@@ -92,7 +86,7 @@ final class OrderPromotionsUsageModifierSpec extends ObjectBehavior
         PromotionInterface $firstPromotion,
         PromotionInterface $secondPromotion,
         PromotionCouponInterface $promotionCoupon
-    ) {
+    ): void {
         $order->getPromotions()->willReturn(
             new ArrayCollection([$firstPromotion->getWrappedObject(), $secondPromotion->getWrappedObject()])
         );
