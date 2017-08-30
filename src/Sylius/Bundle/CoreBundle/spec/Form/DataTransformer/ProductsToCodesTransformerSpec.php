@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\CoreBundle\Form\DataTransformer;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
@@ -63,7 +62,7 @@ final class ProductsToCodesTransformerSpec extends ObjectBehavior
     function it_throws_exception_if_value_to_transform_is_not_array(): void
     {
         $this
-            ->shouldThrow(new UnexpectedTypeException('badObject', 'array'))
+            ->shouldThrow(UnexpectedTypeException::class)
             ->during('transform', ['badObject'])
         ;
     }
@@ -84,7 +83,7 @@ final class ProductsToCodesTransformerSpec extends ObjectBehavior
     function it_throws_exception_if_reverse_transformed_object_is_not_collection(): void
     {
         $this
-            ->shouldThrow(new UnexpectedTypeException('badObject', Collection::class))
+            ->shouldThrow(\InvalidArgumentException::class)
             ->during('reverseTransform', ['badObject'])
         ;
     }

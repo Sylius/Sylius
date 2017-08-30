@@ -13,4 +13,4 @@ sylius_shop_partial_product_review_latest:
                 arguments:
                     - $productId
                     - $count
-        count: 3
+        count: "3"

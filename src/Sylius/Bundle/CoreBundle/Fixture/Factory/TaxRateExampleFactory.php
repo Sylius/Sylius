@@ -110,7 +110,7 @@ class TaxRateExampleFactory extends AbstractExampleFactory implements ExampleFac
                 return $this->faker->randomFloat(2, 0, 0.4);
             })
             ->setAllowedTypes('amount', 'float')
-            ->setDefault('included_in_price', function (Options $options): float {
+            ->setDefault('included_in_price', function (Options $options): bool {
                 return $this->faker->boolean();
             })
             ->setAllowedTypes('included_in_price', 'bool')

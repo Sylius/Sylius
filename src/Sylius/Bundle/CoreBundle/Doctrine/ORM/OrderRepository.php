@@ -60,12 +60,12 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
     /**
      * {@inheritdoc}
      */
-    public function createByCustomerIdQueryBuilder(int $customerId): QueryBuilder
+    public function createByCustomerIdQueryBuilder($customerId): QueryBuilder
     {
         return $this->createQueryBuilder('o')
             ->andWhere('o.customer = :customerId')
             ->andWhere('o.state != :state')
-            ->setParameter('customerId', $customerId)
+            ->setParameter('customerId', (int) $customerId)
             ->setParameter('state', OrderInterface::STATE_CART)
         ;
     }
@@ -231,7 +231,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
     /**
      * {@inheritdoc}
      */
-    public function findLatestInChannel(int $count, ChannelInterface $channel): array
+    public function findLatestInChannel(string $count, ChannelInterface $channel): array
     {
         return $this->createQueryBuilder('o')
             ->andWhere('o.channel = :channel')
@@ -239,7 +239,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
             ->addOrderBy('o.checkoutCompletedAt', 'DESC')
             ->setParameter('channel', $channel)
             ->setParameter('state', OrderInterface::STATE_CART)
-            ->setMaxResults($count)
+            ->setMaxResults((int) $count)
             ->getQuery()
             ->getResult()
         ;

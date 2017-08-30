@@ -81,7 +81,7 @@
     * `ProductVariantsPricesHelper`
     * `VariantResolverHelper`
     
-* The following methods does not longer have a default null argument and requires one to be explicitly passed:
+* The following methods no longer have a default null argument and requires one to be explicitly passed:
   
     * `ChannelPricingInterface::setProductVariant`
     * `CustomerInterface::setDefaultAddress`

@@ -14,8 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Remover\ReviewerReviewsRemover;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
+use Sylius\Bundle\CoreBundle\Remover\ReviewerReviewsRemoverInterface;
 use Sylius\Component\Review\Model\ReviewerInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
@@ -25,13 +24,13 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  */
 final class CustomerReviewsDeleteListenerSpec extends ObjectBehavior
 {
-    function let(ReviewerReviewsRemover $reviewerReviewsRemover): void
+    function let(ReviewerReviewsRemoverInterface $reviewerReviewsRemover): void
     {
         $this->beConstructedWith($reviewerReviewsRemover);
     }
 
     function it_removes_soft_deleted_customer_reviews_and_recalculates_their_product_ratings(
-        ReviewerReviewsRemover $reviewerReviewsRemover,
+        ReviewerReviewsRemoverInterface $reviewerReviewsRemover,
         GenericEvent $event,
         ReviewerInterface $author
     ): void {
@@ -45,6 +44,6 @@ final class CustomerReviewsDeleteListenerSpec extends ObjectBehavior
     {
         $event->getSubject()->willReturn('badObject')->shouldBeCalled();
 
-        $this->shouldThrow(new UnexpectedTypeException('badObject', ReviewerInterface::class))->during('removeCustomerReviews', [$event]);
+        $this->shouldThrow(\InvalidArgumentException::class)->during('removeCustomerReviews', [$event]);
     }
 }

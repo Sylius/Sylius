@@ -74,10 +74,10 @@ final class ChannelSpec extends ObjectBehavior
         $this->getTaxCalculationStrategy()->shouldReturn(null);
     }
 
-    function its_tax_calculation_strategy_is_mutable($taxCalculationStrategy): void
+    function its_tax_calculation_strategy_is_mutable(): void
     {
-        $this->setTaxCalculationStrategy($taxCalculationStrategy);
-        $this->getTaxCalculationStrategy()->shouldReturn($taxCalculationStrategy);
+        $this->setTaxCalculationStrategy('tax_calculation_strategy');
+        $this->getTaxCalculationStrategy()->shouldReturn('tax_calculation_strategy');
     }
 
     function it_has_an_empty_collection_of_currencies_by_default(): void
@@ -123,10 +123,10 @@ final class ChannelSpec extends ObjectBehavior
         $this->getThemeName()->shouldReturn(null);
     }
 
-    function its_theme_name_is_mutable($themeName): void
+    function its_theme_name_is_mutable(): void
     {
-        $this->setThemeName($themeName);
-        $this->getThemeName()->shouldReturn($themeName);
+        $this->setThemeName('theme_name');
+        $this->getThemeName()->shouldReturn('theme_name');
     }
 
     function it_has_no_contact_email_by_default(): void
@@ -134,10 +134,10 @@ final class ChannelSpec extends ObjectBehavior
         $this->getContactEmail()->shouldReturn(null);
     }
 
-    function its_contact_email_is_mutable($contactEmail): void
+    function its_contact_email_is_mutable(): void
     {
-        $this->setContactEmail($contactEmail);
-        $this->getContactEmail()->shouldReturn($contactEmail);
+        $this->setContactEmail('contact@example.com');
+        $this->getContactEmail()->shouldReturn('contact@example.com');
     }
 
     function it_can_allow_to_skip_shipping_step_if_only_a_single_shipping_method_is_resolved(): void

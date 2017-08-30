@@ -16,7 +16,6 @@ namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
@@ -50,7 +49,7 @@ final class ReviewCreateListenerSpec extends ObjectBehavior
         $event->getSubject()->willReturn('badObject')->shouldBeCalled();
 
         $this
-            ->shouldThrow(new UnexpectedTypeException('badObject', ReviewInterface::class))
+            ->shouldThrow(\InvalidArgumentException::class)
             ->during('ensureReviewHasAuthor', [$event])
         ;
     }

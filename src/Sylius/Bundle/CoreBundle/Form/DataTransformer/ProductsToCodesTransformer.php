@@ -17,6 +17,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\Form\DataTransformerInterface;
 use Webmozart\Assert\Assert;
 
@@ -41,11 +42,13 @@ final class ProductsToCodesTransformer implements DataTransformerInterface
     /**
      * {@inheritdoc}
      *
-     * @throws \InvalidArgumentException
+     * @throws UnexpectedTypeException
      */
     public function transform($value): Collection
     {
-        Assert::allTrue([is_array($value), is_null($value)]);
+        if (!is_array($value) && !is_null($value)) {
+            throw new UnexpectedTypeException($value, 'array');
+        }
 
         if (empty($value)) {
             return new ArrayCollection();

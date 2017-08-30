@@ -21,7 +21,7 @@ use Symfony\Component\Templating\Helper\Helper;
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-final class VariantResolverHelper extends Helper
+class VariantResolverHelper extends Helper
 {
     /**
      * @var ProductVariantResolverInterface

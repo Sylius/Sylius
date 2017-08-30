@@ -94,12 +94,12 @@ final class ProductTaxonToTaxonTransformer implements DataTransformerInterface
     }
 
     /**
-     * @param string $value
+     * @param object $value
      * @param string $expectedType
      *
      * @throws TransformationFailedException
      */
-    private function assertTransformationValueType(string $value, string $expectedType): void
+    private function assertTransformationValueType($value, string $expectedType): void
     {
         if (!($value instanceof $expectedType)) {
             throw new TransformationFailedException(

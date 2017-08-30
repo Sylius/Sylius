@@ -16,6 +16,7 @@ namespace Sylius\Bundle\CoreBundle\Form\DataTransformer;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Core\Model\TaxonInterface;
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Symfony\Component\Form\DataTransformerInterface;
 use Webmozart\Assert\Assert;
@@ -41,11 +42,13 @@ final class TaxonsToCodesTransformer implements DataTransformerInterface
     /**
      * {@inheritdoc}
      *
-     * @throws \InvalidArgumentException
+     * @throws UnexpectedTypeException
      */
     public function transform($value): Collection
     {
-        Assert::allTrue([is_array($value), is_null($value)]);
+        if (!is_array($value) && !is_null($value)) {
+            throw new UnexpectedTypeException($value, 'array');
+        }
 
         if (empty($value)) {
             return new ArrayCollection();

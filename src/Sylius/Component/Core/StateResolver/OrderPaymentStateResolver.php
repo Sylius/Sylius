@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\StateResolver;
 
+use Doctrine\Common\Collections\Collection;
 use SM\Factory\FactoryInterface;
 use SM\StateMachine\StateMachineInterface;
 use Sylius\Component\Order\Model\OrderInterface;
@@ -108,9 +109,9 @@ final class OrderPaymentStateResolver implements StateResolverInterface
      * @param OrderInterface $order
      * @param string $state
      *
-     * @return array|PaymentInterface[]
+     * @return Collection|PaymentInterface[]
      */
-    private function getPaymentsWithState(OrderInterface $order, string $state): array
+    private function getPaymentsWithState(OrderInterface $order, string $state): Collection
     {
         return $order->getPayments()->filter(function (PaymentInterface $payment) use ($state) {
             return $state === $payment->getState();

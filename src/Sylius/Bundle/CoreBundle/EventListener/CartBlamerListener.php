@@ -89,11 +89,11 @@ final class CartBlamerListener
     }
 
     /**
-     * @return OrderInterface
+     * @return OrderInterface|null
      *
      * @throws UnexpectedTypeException
      */
-    private function getCart(): OrderInterface
+    private function getCart(): ?OrderInterface
     {
         try {
             $cart = $this->cartContext->getCart();

@@ -62,7 +62,7 @@ final class ImageUploaderSpec extends ObjectBehavior
 
         $filesystem->has('foo.jpg')->willReturn(true);
 
-        $filesystem->delete('foo.jpg')->shouldBeCalled();
+        $filesystem->delete('foo.jpg')->willReturn(true);
 
         $image->setPath(Argument::type('string'))->will(function ($args) use ($image, $filesystem) {
             $image->getPath()->willReturn($args[0]);

@@ -26,16 +26,6 @@ final class PerChannelCustomerStatisticsSpec extends ObjectBehavior
         $this->beConstructedWith(10, 20000, $channel);
     }
 
-    function it_throws_an_exception_if_any_of_values_besides_channel_is_not_an_int(ChannelInterface $channel): void
-    {
-        $this->beConstructedWith(new \Datetime(), [], $channel);
-
-        $this
-            ->shouldThrow(\InvalidArgumentException::class)
-            ->duringInstantiation()
-        ;
-    }
-
     function it_has_number_of_orders(): void
     {
         $this->getOrdersCount()->shouldReturn(10);

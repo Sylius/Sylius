@@ -76,8 +76,8 @@ final class ProductVariantSpec extends ObjectBehavior
 
     function its_weight_is_mutable(): void
     {
-        $this->setWeight(120);
-        $this->getWeight()->shouldReturn(120);
+        $this->setWeight(120.00);
+        $this->getWeight()->shouldReturn(120.00);
     }
 
     function it_has_no_width_by_default(): void
@@ -87,8 +87,8 @@ final class ProductVariantSpec extends ObjectBehavior
 
     function its_width_is_mutable(): void
     {
-        $this->setWidth(15);
-        $this->getWidth()->shouldReturn(15);
+        $this->setWidth(15.00);
+        $this->getWidth()->shouldReturn(15.00);
     }
 
     function it_has_no_height_by_default(): void
@@ -98,8 +98,8 @@ final class ProductVariantSpec extends ObjectBehavior
 
     function its_height_is_mutable(): void
     {
-        $this->setHeight(40);
-        $this->getHeight()->shouldReturn(40);
+        $this->setHeight(40.00);
+        $this->getHeight()->shouldReturn(40.00);
     }
 
     function it_returns_correct_shipping_weight(): void

@@ -24,7 +24,7 @@ final class IntegerDistributor implements IntegerDistributorInterface
      */
     public function distribute(float $amount, int $numberOfTargets): array
     {
-        Assert::true((1 <= $numberOfTargets), 'Number of targets must be an integer, bigger than 0.');
+        Assert::true((1 <= $numberOfTargets), 'Number of targets must be bigger than 0.');
 
         $sign = $amount < 0 ? -1 : 1;
         $amount = abs($amount);

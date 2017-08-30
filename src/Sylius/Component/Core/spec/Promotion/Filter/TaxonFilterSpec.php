@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Component\Core\Promotion\Filter;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -38,11 +39,11 @@ final class TaxonFilterSpec extends ObjectBehavior
         TaxonInterface $taxon2
     ): void {
         $item1->getProduct()->willReturn($product1);
-        $product1->getTaxons()->willReturn([$taxon1]);
+        $product1->getTaxons()->willReturn(new ArrayCollection([$taxon1->getWrappedObject()]));
         $taxon1->getCode()->willReturn('taxon1');
 
         $item2->getProduct()->willReturn($product2);
-        $product2->getTaxons()->willReturn([$taxon2]);
+        $product2->getTaxons()->willReturn(new ArrayCollection([$taxon2]));
         $taxon2->getCode()->willReturn('taxon2');
 
         $this->filter([$item1, $item2], ['filters' => ['taxons_filter' => ['taxons' => ['taxon1']]]])->shouldReturn([$item1]);

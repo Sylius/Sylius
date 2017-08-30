@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Component\Core\OrderProcessing;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Model\AdjustmentInterface;
@@ -40,7 +41,7 @@ final class ShippingChargesProcessorSpec extends ObjectBehavior
 
     function it_removes_existing_shipping_adjustments(OrderInterface $order): void
     {
-        $order->getShipments()->willReturn([]);
+        $order->getShipments()->willReturn(new ArrayCollection([]));
         $order->removeAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->shouldBeCalled();
 
         $this->process($order);
@@ -49,7 +50,7 @@ final class ShippingChargesProcessorSpec extends ObjectBehavior
     function it_does_not_apply_any_shipping_charge_if_order_has_no_shipments(OrderInterface $order): void
     {
         $order->removeAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->shouldBeCalled();
-        $order->getShipments()->willReturn([]);
+        $order->getShipments()->willReturn(new ArrayCollection([]));
         $order->addAdjustment(Argument::any())->shouldNotBeCalled();
 
         $this->process($order);
@@ -64,7 +65,7 @@ final class ShippingChargesProcessorSpec extends ObjectBehavior
         ShippingMethodInterface $shippingMethod
     ): void {
         $adjustmentFactory->createNew()->willReturn($adjustment);
-        $order->getShipments()->willReturn([$shipment]);
+        $order->getShipments()->willReturn(new ArrayCollection([$shipment->getWrappedObject()]));
 
         $calculator->calculate($shipment)->willReturn(450);
 

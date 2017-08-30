@@ -25,16 +25,6 @@ final class DashboardStatisticsSpec extends ObjectBehavior
         $this->beConstructedWith(2564, 24, 10);
     }
 
-    function it_throws_an_exception_if_any_of_values_if_not_an_int(): void
-    {
-        $this->beConstructedWith('string', 2.5, 'foo');
-
-        $this
-            ->shouldThrow(\InvalidArgumentException::class)
-            ->duringInstantiation()
-        ;
-    }
-
     function it_has_total_sales_stat(): void
     {
         $this->getTotalSales()->shouldReturn(2564);

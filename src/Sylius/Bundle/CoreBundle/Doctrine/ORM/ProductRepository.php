@@ -104,7 +104,7 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
     /**
      * {@inheritdoc}
      */
-    public function findLatestByChannel(ChannelInterface $channel, string $locale, int $count): array
+    public function findLatestByChannel(ChannelInterface $channel, string $locale, string $count): array
     {
         return $this->createQueryBuilder('o')
             ->addSelect('translation')
@@ -114,7 +114,7 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
             ->addOrderBy('o.createdAt', 'DESC')
             ->setParameter('channel', $channel)
             ->setParameter('locale', $locale)
-            ->setMaxResults($count)
+            ->setMaxResults((int) $count)
             ->getQuery()
             ->getResult()
         ;

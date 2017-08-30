@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Dashboard;
 
-use Webmozart\Assert\Assert;
-
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
@@ -44,8 +42,6 @@ class DashboardStatistics
      */
     public function __construct(int $totalSales, int $numberOfNewOrders, int $numberOfNewCustomers)
     {
-        Assert::allInteger([$totalSales, $numberOfNewCustomers, $numberOfNewOrders]);
-
         $this->totalSales = $totalSales;
         $this->numberOfNewOrders = $numberOfNewOrders;
         $this->numberOfNewCustomers = $numberOfNewCustomers;

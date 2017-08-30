@@ -51,14 +51,6 @@ final class ProportionalIntegerDistributorSpec extends ObjectBehavior
         $this->distribute([4300, 1400, 2300], -299)->shouldReturn([-161, -52, -86]);
     }
 
-    function it_throws_an_exception_if_amount_is_not_integer(): void
-    {
-        $this
-            ->shouldThrow(\InvalidArgumentException::class)
-            ->during('distribute', [[4300, 1400, 2300], 'string'])
-        ;
-    }
-
     function it_throws_an_exception_if_any_of_integers_array_element_is_not_integer(): void
     {
         $this

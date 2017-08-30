@@ -19,7 +19,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\Model\ProductTaxonInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
 use Sylius\Component\Promotion\Exception\UnsupportedTypeException;
@@ -45,7 +44,7 @@ final class HasTaxonRuleCheckerSpec extends ObjectBehavior
         $configuration = ['taxons' => ['swords']];
 
         $swords->getCode()->willReturn('swords');
-        $bastardSword->getTaxons()->willReturn([$swords]);
+        $bastardSword->getTaxons()->willReturn(new ArrayCollection([$swords->getWrappedObject()]));
         $item->getProduct()->willReturn($bastardSword);
         $subject->getItems()->willReturn(new ArrayCollection([$item->getWrappedObject()]));
 
@@ -56,13 +55,12 @@ final class HasTaxonRuleCheckerSpec extends ObjectBehavior
         OrderInterface $subject,
         OrderItemInterface $item,
         ProductInterface $bastardSword,
-        ProductTaxonInterface $bastardSwordProductTaxon,
         TaxonInterface $swords
     ): void {
         $configuration = ['taxons' => ['swords', 'axes']];
 
         $swords->getCode()->willReturn('swords');
-        $bastardSword->getTaxons()->willReturn([$swords]);
+        $bastardSword->getTaxons()->willReturn(new ArrayCollection([$swords->getWrappedObject()]));
         $item->getProduct()->willReturn($bastardSword);
         $subject->getItems()->willReturn(new ArrayCollection([$item->getWrappedObject()]));
 
@@ -73,13 +71,12 @@ final class HasTaxonRuleCheckerSpec extends ObjectBehavior
         OrderInterface $subject,
         OrderItemInterface $item,
         ProductInterface $reflexBow,
-        ProductTaxonInterface $reflexBowProductTaxon,
         TaxonInterface $bows
     ): void {
         $configuration = ['taxons' => ['swords', 'axes']];
 
         $bows->getCode()->willReturn('bows');
-        $reflexBow->getTaxons()->willReturn([$bows]);
+        $reflexBow->getTaxons()->willReturn(new ArrayCollection([$bows->getWrappedObject()]));
         $item->getProduct()->willReturn($reflexBow);
         $subject->getItems()->willReturn(new ArrayCollection([$item->getWrappedObject()]));
 

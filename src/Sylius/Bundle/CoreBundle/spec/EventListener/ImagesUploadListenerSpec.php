@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Model\ImagesAwareInterface;
@@ -36,7 +37,7 @@ final class ImagesUploadListenerSpec extends ObjectBehavior
         ImageUploaderInterface $uploader
     ): void {
         $event->getSubject()->willReturn($subject);
-        $subject->getImages()->willReturn([$image]);
+        $subject->getImages()->willReturn(new ArrayCollection([$image->getWrappedObject()]));
         $image->hasFile()->willReturn(true);
         $image->getPath()->willReturn('some_path');
         $uploader->upload($image)->shouldBeCalled();

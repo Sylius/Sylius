@@ -30,7 +30,7 @@ interface ChannelPricingInterface extends ResourceInterface
     /**
      * @param ProductVariantInterface|null $productVariant
      */
-    public function setProductVariant(ProductVariantInterface $productVariant): void;
+    public function setProductVariant(?ProductVariantInterface $productVariant): void;
 
     /**
      * @return int|null

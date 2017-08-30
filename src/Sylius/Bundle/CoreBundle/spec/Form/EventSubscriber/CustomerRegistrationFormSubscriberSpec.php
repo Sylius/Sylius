@@ -18,7 +18,6 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
@@ -75,7 +74,7 @@ final class CustomerRegistrationFormSubscriberSpec extends ObjectBehavior
         $form->getData()->willReturn($user);
         $event->getData()->willReturn(['email' => 'sylius@example.com']);
 
-        $this->shouldThrow(UnexpectedTypeException::class)->during('preSubmit', [$event]);
+        $this->shouldThrow(\InvalidArgumentException::class)->during('preSubmit', [$event]);
     }
 
     function it_does_not_set_user_if_customer_with_given_email_has_set_user(

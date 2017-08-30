@@ -39,14 +39,10 @@ final class IntegerDistributorSpec extends ObjectBehavior
         $this->distribute(-1000, 3)->shouldReturn([-334, -333, -333]);
     }
 
-    function it_throws_an_exception_if_number_of_targets_is_not_integer_or_below_1(): void
+    function it_throws_an_exception_if_number_of_targets_is_below_1(): void
     {
         $this
-            ->shouldThrow(new \InvalidArgumentException('Number of targets must be an integer, bigger than 0.'))
-            ->during('distribute', [1000, 'test'])
-        ;
-        $this
-            ->shouldThrow(new \InvalidArgumentException('Number of targets must be an integer, bigger than 0.'))
+            ->shouldThrow(new \InvalidArgumentException('Number of targets must be bigger than 0.'))
             ->during('distribute', [1000, 0])
         ;
     }

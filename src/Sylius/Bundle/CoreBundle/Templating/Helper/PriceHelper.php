@@ -21,7 +21,7 @@ use Webmozart\Assert\Assert;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class PriceHelper extends Helper
+class PriceHelper extends Helper
 {
     /**
      * @var ProductVariantPriceCalculatorInterface

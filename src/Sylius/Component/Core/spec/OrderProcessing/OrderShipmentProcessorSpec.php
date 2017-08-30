@@ -62,7 +62,7 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
         $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
         $order->isEmpty()->willReturn(false);
         $order->hasShipments()->willReturn(false);
-        $order->getItemUnits()->willReturn([$itemUnit1, $itemUnit2]);
+        $order->getItemUnits()->willReturn(new ArrayCollection([$itemUnit1->getWrappedObject(), $itemUnit2->getWrappedObject()]));
 
         $shipment->setOrder($order)->shouldBeCalled();
         $shipment->setMethod($defaultShippingMethod)->shouldBeCalled();
@@ -121,7 +121,7 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
 
         $order->isEmpty()->willReturn(false);
         $order->hasShipments()->willReturn(true);
-        $order->getItemUnits()->willReturn([$itemUnit, $itemUnitWithoutShipment]);
+        $order->getItemUnits()->willReturn(new ArrayCollection([$itemUnit->getWrappedObject(), $itemUnitWithoutShipment->getWrappedObject()]));
         $order->getShipments()->willReturn($shipments);
 
         $itemUnit->getShipment()->willReturn($shipment);
@@ -146,7 +146,7 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
 
         $order->isEmpty()->willReturn(false);
         $order->hasShipments()->willReturn(true);
-        $order->getItemUnits()->willReturn([$itemUnit, $itemUnitWithoutShipment]);
+        $order->getItemUnits()->willReturn(new ArrayCollection([$itemUnit->getWrappedObject(), $itemUnitWithoutShipment->getWrappedObject()]));
         $order->getShipments()->willReturn($shipments);
 
         $itemUnit->getShipment()->willReturn($shipment);

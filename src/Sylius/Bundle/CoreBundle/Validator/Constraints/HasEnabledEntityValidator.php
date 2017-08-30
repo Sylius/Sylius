@@ -106,12 +106,12 @@ final class HasEnabledEntityValidator extends ConstraintValidator
     }
 
     /**
-     * @param string $manager
+     * @param string|null $manager
      * @param object $entity
      *
      * @return ObjectManager|null
      */
-    private function getProperObjectManager(string $manager, $entity): ?ObjectManager
+    private function getProperObjectManager(?string $manager, $entity): ?ObjectManager
     {
         if ($manager) {
             $objectManager = $this->registry->getManager($manager);

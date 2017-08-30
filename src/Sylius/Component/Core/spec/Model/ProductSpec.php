@@ -133,7 +133,7 @@ final class ProductSpec extends ObjectBehavior
     function it_proxies_taxon_collection(ProductTaxonInterface $productTaxon, TaxonInterface $taxon, TaxonInterface $otherTaxon): void
     {
         $productTaxon->getTaxon()->willReturn($taxon);
-        $productTaxon->setProduct($this)->willReturn();
+        $productTaxon->setProduct($this)->shouldBeCalled();
 
         $this->addProductTaxon($productTaxon);
 

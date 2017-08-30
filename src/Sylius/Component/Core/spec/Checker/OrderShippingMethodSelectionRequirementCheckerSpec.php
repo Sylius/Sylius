@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Component\Core\Checker;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Checker\OrderShippingMethodSelectionRequirementCheckerInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -58,7 +59,7 @@ final class OrderShippingMethodSelectionRequirementCheckerSpec extends ObjectBeh
         $order->getChannel()->willReturn($channel);
         $channel->isSkippingShippingStepAllowed()->willReturn(true);
 
-        $order->getShipments()->willReturn([$shipment]);
+        $order->getShipments()->willReturn(new ArrayCollection([$shipment->getWrappedObject()]));
 
         $shippingMethodsResolver->getSupportedMethods($shipment)->willReturn([$shippingMethod]);
 
@@ -104,7 +105,7 @@ final class OrderShippingMethodSelectionRequirementCheckerSpec extends ObjectBeh
         $order->getChannel()->willReturn($channel);
         $channel->isSkippingShippingStepAllowed()->willReturn(true);
 
-        $order->getShipments()->willReturn([$shipment]);
+        $order->getShipments()->willReturn(new ArrayCollection([$shipment->getWrappedObject()]));
 
         $shippingMethodsResolver->getSupportedMethods($shipment)->willReturn([$firstShippingMethod, $secondShippingMethod]);
 

@@ -69,10 +69,8 @@ EOT
      * @param InputInterface $input
      * @param OutputInterface $output
      * @param string $localeCode
-     *
-     * @return int
      */
-    protected function setupAdministratorUser(InputInterface $input, OutputInterface $output, string $localeCode): int
+    protected function setupAdministratorUser(InputInterface $input, OutputInterface $output, string $localeCode): void
     {
         $outputStyle = new SymfonyStyle($input, $output);
         $outputStyle->writeln('Create your administrator account.');
@@ -83,7 +81,7 @@ EOT
         try {
             $user = $this->configureNewUser($userFactory->createNew(), $input, $output);
         } catch (\InvalidArgumentException $exception) {
-            return 0;
+            return;
         }
 
         $user->setEnabled(true);

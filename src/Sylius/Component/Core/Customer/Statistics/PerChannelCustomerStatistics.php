@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\Customer\Statistics;
 
 use Sylius\Component\Core\Model\ChannelInterface;
-use Webmozart\Assert\Assert;
 
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
@@ -45,8 +44,6 @@ final class PerChannelCustomerStatistics
      */
     public function __construct(int $ordersCount, int $ordersValue, ChannelInterface $channel)
     {
-        Assert::allInteger([$ordersCount, $ordersValue]);
-
         $this->ordersCount = $ordersCount;
         $this->ordersValue = $ordersValue;
         $this->channel = $channel;

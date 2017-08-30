@@ -21,7 +21,7 @@ use Symfony\Component\Templating\Helper\Helper;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class ProductVariantsPricesHelper extends Helper
+class ProductVariantsPricesHelper extends Helper
 {
     /**
      * @var ProductVariantsPricesProviderInterface

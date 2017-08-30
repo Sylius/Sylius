@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Component\Core\Promotion\Checker\Rule;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;

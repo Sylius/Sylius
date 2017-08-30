@@ -23,12 +23,12 @@ use Sylius\Component\Review\Model\ReviewInterface;
 interface ProductReviewRepositoryInterface extends RepositoryInterface
 {
     /**
-     * @param int $productId
-     * @param int $count
+     * @param string $productId
+     * @param string $count
      *
      * @return array|ReviewInterface[]
      */
-    public function findLatestByProductId(int $productId, int $count): array;
+    public function findLatestByProductId(string $productId, string $count): array;
 
     /**
      * @param string $slug

@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\Core\Promotion\Checker\Rule;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
+use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;

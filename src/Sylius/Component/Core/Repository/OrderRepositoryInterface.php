@@ -28,11 +28,11 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
     public function createListQueryBuilder(): QueryBuilder;
 
     /**
-     * @param int $customerId
+     * @param mixed $customerId
      *
      * @return QueryBuilder
      */
-    public function createByCustomerIdQueryBuilder(int $customerId): QueryBuilder;
+    public function createByCustomerIdQueryBuilder($customerId): QueryBuilder;
 
     /**
      * @param CustomerInterface $customer
@@ -109,12 +109,12 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
     public function countByChannel(ChannelInterface $channel): int;
 
     /**
-     * @param int $count
+     * @param string $count
      * @param ChannelInterface $channel
      *
      * @return array|OrderInterface[]
      */
-    public function findLatestInChannel(int $count, ChannelInterface $channel): array;
+    public function findLatestInChannel(string $count, ChannelInterface $channel): array;
 
     /**
      * @param \DateTimeInterface $terminalDate

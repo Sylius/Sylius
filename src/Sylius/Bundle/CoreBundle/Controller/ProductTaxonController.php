@@ -54,7 +54,7 @@ final class ProductTaxonController extends ResourceController
                 }
 
                 $productTaxonFromBase = $this->repository->findOneBy(['id' => $productTaxon['id']]);
-                $productTaxonFromBase->setPosition($productTaxon['position']);
+                $productTaxonFromBase->setPosition((int) $productTaxon['position']);
 
                 $this->manager->flush();
             }

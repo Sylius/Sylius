@@ -43,7 +43,7 @@ EOT
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): ?int
     {
         /** @var QuestionHelper $questionHelper */
         $questionHelper = $this->getHelper('question');
@@ -79,5 +79,7 @@ EOT
 
         $this->runCommands($commands, $output);
         $outputStyle->newLine(2);
+
+        return null;
     }
 }

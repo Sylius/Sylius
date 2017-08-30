@@ -37,7 +37,7 @@ EOT
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): ?int
     {
         $output->writeln(sprintf(
             'Installing Sylius assets for environment <info>%s</info>.',
@@ -59,5 +59,7 @@ EOT
         ];
 
         $this->runCommands($commands, $output);
+
+        return null;
     }
 }

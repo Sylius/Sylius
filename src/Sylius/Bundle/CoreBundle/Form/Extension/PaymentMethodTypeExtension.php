@@ -54,7 +54,9 @@ final class PaymentMethodTypeExtension extends AbstractTypeExtension
 
                 $gatewayConfig = $paymentMethod->getGatewayConfig();
                 if (null === $gatewayConfig->getGatewayName()) {
-                    $gatewayConfig->setGatewayName(StringInflector::nameToLowercaseCode($paymentMethod->getName()));
+                    $gatewayConfig->setGatewayName(StringInflector::nameToLowercaseCode(
+                        $paymentMethod->getName() ?? $paymentMethod->getCode())
+                    );
                 }
             })
         ;

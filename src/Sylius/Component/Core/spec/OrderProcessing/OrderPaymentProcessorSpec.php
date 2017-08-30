@@ -16,11 +16,11 @@ namespace spec\Sylius\Component\Core\OrderProcessing;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Payment\Exception\NotProvidedOrderPaymentException;
 use Sylius\Component\Core\Payment\Provider\OrderPaymentProviderInterface;
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
-use Sylius\Component\Payment\Model\PaymentInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>

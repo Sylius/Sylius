@@ -21,7 +21,7 @@ use Symfony\Component\Templating\Helper\Helper;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class CheckoutStepsHelper extends Helper
+class CheckoutStepsHelper extends Helper
 {
     /**
      * @var OrderPaymentMethodSelectionRequirementCheckerInterface

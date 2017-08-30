@@ -52,7 +52,7 @@ final class CurrencyStorage implements CurrencyStorageInterface
     /**
      * {@inheritdoc}
      */
-    public function get(ChannelInterface $channel): string
+    public function get(ChannelInterface $channel): ?string
     {
         return $this->storage->get($this->provideKey($channel));
     }

@@ -21,7 +21,6 @@ use Sylius\Component\Attribute\AttributeType\TextAttributeType;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
@@ -89,7 +88,7 @@ class LocalesAwareValidAttributeValueValidatorSpec extends ObjectBehavior
         ValidAttributeValue $attributeValueConstraint
     ): void {
         $this
-            ->shouldThrow(new UnexpectedTypeException('\DateTimeInterface', AttributeValueInterface::class))
+            ->shouldThrow(\InvalidArgumentException::class)
             ->during('validate', [$badObject, $attributeValueConstraint])
         ;
     }

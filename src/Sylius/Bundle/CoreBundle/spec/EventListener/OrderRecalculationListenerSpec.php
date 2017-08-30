@@ -16,7 +16,6 @@ namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
@@ -45,7 +44,7 @@ final class OrderRecalculationListenerSpec extends ObjectBehavior
         $event->getSubject()->willReturn(new \stdClass());
 
         $this
-            ->shouldThrow(UnexpectedTypeException::class)
+            ->shouldThrow(\InvalidArgumentException::class)
             ->during('recalculateOrder', [$event])
         ;
     }
