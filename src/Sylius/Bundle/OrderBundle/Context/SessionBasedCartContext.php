@@ -15,6 +15,7 @@ namespace Sylius\Bundle\OrderBundle\Context;
 
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Context\CartNotFoundException;
+use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
@@ -43,7 +44,7 @@ final class SessionBasedCartContext implements CartContextInterface
      * @param string $sessionKeyName
      * @param OrderRepositoryInterface $orderRepository
      */
-    public function __construct(SessionInterface $session, $sessionKeyName, OrderRepositoryInterface $orderRepository)
+    public function __construct(SessionInterface $session, string $sessionKeyName, OrderRepositoryInterface $orderRepository)
     {
         $this->session = $session;
         $this->sessionKeyName = $sessionKeyName;
@@ -53,7 +54,7 @@ final class SessionBasedCartContext implements CartContextInterface
     /**
      * {@inheritdoc}
      */
-    public function getCart()
+    public function getCart(): OrderInterface
     {
         if (!$this->session->has($this->sessionKeyName)) {
             throw new CartNotFoundException('Sylius was not able to find the cart in session');

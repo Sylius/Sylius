@@ -23,7 +23,7 @@ interface OrderSequenceInterface extends ResourceInterface
     /**
      * @return int
      */
-    public function getIndex();
+    public function getIndex(): int;
 
-    public function incrementIndex();
+    public function incrementIndex(): void;
 }

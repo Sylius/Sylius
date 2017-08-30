@@ -64,7 +64,7 @@ class OrderItemUnit implements OrderItemUnitInterface
     /**
      * {@inheritdoc}
      */
-    public function getTotal()
+    public function getTotal(): int
     {
         $total = $this->orderItem->getUnitPrice() + $this->adjustmentsTotal;
 
@@ -78,7 +78,7 @@ class OrderItemUnit implements OrderItemUnitInterface
     /**
      * {@inheritdoc}
      */
-    public function getOrderItem()
+    public function getOrderItem(): OrderItemInterface
     {
         return $this->orderItem;
     }
@@ -86,13 +86,13 @@ class OrderItemUnit implements OrderItemUnitInterface
     /**
      * {@inheritdoc}
      */
-    public function getAdjustments($type = null)
+    public function getAdjustments(?string $type = null): Collection
     {
         if (null === $type) {
             return $this->adjustments;
         }
 
-        return $this->adjustments->filter(function (AdjustmentInterface $adjustment) use ($type) {
+        return $this->adjustments->filter(function (AdjustmentInterface $adjustment) use ($type): bool {
             return $type === $adjustment->getType();
         });
     }
@@ -100,7 +100,7 @@ class OrderItemUnit implements OrderItemUnitInterface
     /**
      * {@inheritdoc}
      */
-    public function addAdjustment(AdjustmentInterface $adjustment)
+    public function addAdjustment(AdjustmentInterface $adjustment): void
     {
         if ($this->hasAdjustment($adjustment)) {
             return;
@@ -115,7 +115,7 @@ class OrderItemUnit implements OrderItemUnitInterface
     /**
      * {@inheritdoc}
      */
-    public function removeAdjustment(AdjustmentInterface $adjustment)
+    public function removeAdjustment(AdjustmentInterface $adjustment): void
     {
         if ($adjustment->isLocked() || !$this->hasAdjustment($adjustment)) {
             return;
@@ -130,7 +130,7 @@ class OrderItemUnit implements OrderItemUnitInterface
     /**
      * {@inheritdoc}
      */
-    public function hasAdjustment(AdjustmentInterface $adjustment)
+    public function hasAdjustment(AdjustmentInterface $adjustment): bool
     {
         return $this->adjustments->contains($adjustment);
     }
@@ -138,7 +138,7 @@ class OrderItemUnit implements OrderItemUnitInterface
     /**
      * {@inheritdoc}
      */
-    public function getAdjustmentsTotal($type = null)
+    public function getAdjustmentsTotal(?string $type = null): int
     {
         if (null === $type) {
             return $this->adjustmentsTotal;
@@ -157,7 +157,7 @@ class OrderItemUnit implements OrderItemUnitInterface
     /**
      * {@inheritdoc}
      */
-    public function removeAdjustments($type)
+    public function removeAdjustments(?string $type = null): void
     {
         foreach ($this->getAdjustments($type) as $adjustment) {
             $this->removeAdjustment($adjustment);
@@ -167,7 +167,7 @@ class OrderItemUnit implements OrderItemUnitInterface
     /**
      * {@inheritdoc}
      */
-    public function recalculateAdjustmentsTotal()
+    public function recalculateAdjustmentsTotal(): void
     {
         $this->adjustmentsTotal = 0;
 
@@ -181,7 +181,7 @@ class OrderItemUnit implements OrderItemUnitInterface
     /**
      * @param AdjustmentInterface $adjustment
      */
-    protected function addToAdjustmentsTotal(AdjustmentInterface $adjustment)
+    protected function addToAdjustmentsTotal(AdjustmentInterface $adjustment): void
     {
         if (!$adjustment->isNeutral()) {
             $this->adjustmentsTotal += $adjustment->getAmount();
@@ -191,7 +191,7 @@ class OrderItemUnit implements OrderItemUnitInterface
     /**
      * @param AdjustmentInterface $adjustment
      */
-    protected function subtractFromAdjustmentsTotal(AdjustmentInterface $adjustment)
+    protected function subtractFromAdjustmentsTotal(AdjustmentInterface $adjustment): void
     {
         if (!$adjustment->isNeutral()) {
             $this->adjustmentsTotal -= $adjustment->getAmount();

@@ -59,7 +59,7 @@ final class CustomerAndChannelBasedCartContext implements CartContextInterface
     /**
      * {@inheritdoc}
      */
-    public function getCart()
+    public function getCart(): OrderInterface
     {
         try {
             $channel = $this->channelContext->getChannel();

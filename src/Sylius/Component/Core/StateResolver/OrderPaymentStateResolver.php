@@ -43,7 +43,7 @@ final class OrderPaymentStateResolver implements StateResolverInterface
     /**
      * {@inheritdoc}
      */
-    public function resolve(OrderInterface $order)
+    public function resolve(OrderInterface $order): void
     {
         $stateMachine = $this->stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH);
         $targetTransition = $this->getTargetTransition($order);

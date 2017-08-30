@@ -24,10 +24,10 @@ interface AdjustmentFactoryInterface extends FactoryInterface
     /**
      * @param string $type
      * @param string $label
-     * @param string $amount
+     * @param int $amount
      * @param bool $neutral
      *
      * @return AdjustmentInterface
      */
-    public function createWithData($type, $label, $amount, $neutral = false);
+    public function createWithData(string $type, string $label, int $amount, bool $neutral = false): AdjustmentInterface;
 }

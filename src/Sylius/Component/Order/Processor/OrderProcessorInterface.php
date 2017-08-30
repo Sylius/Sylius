@@ -23,5 +23,5 @@ interface OrderProcessorInterface
     /**
      * @param OrderInterface $order
      */
-    public function process(OrderInterface $order);
+    public function process(OrderInterface $order): void;
 }

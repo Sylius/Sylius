@@ -61,7 +61,11 @@ final class TotalOfItemsFromTaxonRuleCheckerSpec extends ObjectBehavior
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
 
-        $order->getItems()->willReturn([$compositeBowItem, $longswordItem, $reflexBowItem]);
+        $order->getItems()->willReturn(new ArrayCollection([
+            $compositeBowItem->getWrappedObject(),
+            $longswordItem->getWrappedObject(),
+            $reflexBowItem->getWrappedObject(),
+        ]));
 
         $taxonRepository->findOneBy(['code' => 'bows'])->willReturn($bows);
 
@@ -93,7 +97,7 @@ final class TotalOfItemsFromTaxonRuleCheckerSpec extends ObjectBehavior
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
 
-        $order->getItems()->willReturn([$compositeBowItem, $reflexBowItem]);
+        $order->getItems()->willReturn(new ArrayCollection([$compositeBowItem->getWrappedObject(), $reflexBowItem->getWrappedObject()]));
 
         $taxonRepository->findOneBy(['code' => 'bows'])->willReturn($bows);
 
@@ -121,7 +125,7 @@ final class TotalOfItemsFromTaxonRuleCheckerSpec extends ObjectBehavior
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
 
-        $order->getItems()->willReturn([$compositeBowItem, $longswordItem]);
+        $order->getItems()->willReturn(new ArrayCollection([$compositeBowItem->getWrappedObject(), $longswordItem->getWrappedObject()]));
 
         $taxonRepository->findOneBy(['code' => 'bows'])->willReturn($bows);
 

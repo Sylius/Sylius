@@ -37,7 +37,7 @@ final class OrderNumberAssigner implements OrderNumberAssignerInterface
     /**
      * {@inheritdoc}
      */
-    public function assignNumber(OrderInterface $order)
+    public function assignNumber(OrderInterface $order): void
     {
         if (null !== $order->getNumber()) {
             return;

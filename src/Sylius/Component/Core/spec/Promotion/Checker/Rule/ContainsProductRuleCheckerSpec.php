@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Component\Core\Promotion\Checker\Rule;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItem;
@@ -57,7 +58,7 @@ final class ContainsProductRuleCheckerSpec extends ObjectBehavior
         ProductInterface $shaft,
         ProductInterface $head
     ) {
-        $subject->getItems()->willReturn([$firstOrderItem, $secondOrderItem]);
+        $subject->getItems()->willReturn(new ArrayCollection([$firstOrderItem->getWrappedObject(), $secondOrderItem->getWrappedObject()]));
         $firstOrderItem->getProduct()->willReturn($head);
         $secondOrderItem->getProduct()->willReturn($shaft);
         $head->getCode()->willReturn('LACROSSE_HEAD');
@@ -73,7 +74,7 @@ final class ContainsProductRuleCheckerSpec extends ObjectBehavior
         ProductInterface $shaft,
         ProductInterface $head
     ) {
-        $subject->getItems()->willReturn([$firstOrderItem, $secondOrderItem]);
+        $subject->getItems()->willReturn(new ArrayCollection([$firstOrderItem->getWrappedObject(), $secondOrderItem->getWrappedObject()]));
         $firstOrderItem->getProduct()->willReturn($head);
         $secondOrderItem->getProduct()->willReturn($shaft);
         $head->getCode()->willReturn('LACROSSE_HEAD');

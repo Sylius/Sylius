@@ -62,7 +62,7 @@ final class CheckoutStateResolver implements StateResolverInterface
     /**
      * {@inheritdoc}
      */
-    public function resolve(OrderInterface $order)
+    public function resolve(OrderInterface $order): void
     {
         $stateMachine = $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH);
 

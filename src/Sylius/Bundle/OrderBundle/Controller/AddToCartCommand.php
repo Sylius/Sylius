@@ -44,7 +44,7 @@ final class AddToCartCommand implements AddToCartCommandInterface
     /**
      * @return OrderInterface
      */
-    public function getCart()
+    public function getCart(): OrderInterface
     {
         return $this->cart;
     }
@@ -52,7 +52,7 @@ final class AddToCartCommand implements AddToCartCommandInterface
     /**
      * @return OrderItemInterface
      */
-    public function getCartItem()
+    public function getCartItem(): OrderItemInterface
     {
         return $this->cartItem;
     }

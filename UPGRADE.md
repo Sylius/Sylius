@@ -65,6 +65,15 @@
 
 * In order to be compatibile with Doctrine ORM 2.6+ and be more consistent 
   `OrderRepositoryInterface::count()` signature was changed to `OrderRepositoryInterface::countPlacedOrders()`.
+  
+* The following methods does not longer have a default null argument and requires one to be explicitly passed:
+
+  * `AdjustableInterface::getAdjustments`
+  * `AdjustmentInterface::setAdjustable`
+  * `OrderAwareInterace::setOrder`
+  * `OrderInterface::setCheckoutCompletedAt`
+  
+* `OrderInterface::getAdjustmentsRecursively` and `OrderItemInterface::getAdjustmentsRecursively` return type changed from `array` to `Collection`.
 
 ### Payment / PaymentBundle
 
