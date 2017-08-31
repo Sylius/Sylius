@@ -51,7 +51,7 @@ final class FilesystemConfigurationProvider implements ConfigurationProviderInte
     /**
      * {@inheritdoc}
      */
-    public function getConfigurations()
+    public function getConfigurations(): array
     {
         try {
             return array_map(

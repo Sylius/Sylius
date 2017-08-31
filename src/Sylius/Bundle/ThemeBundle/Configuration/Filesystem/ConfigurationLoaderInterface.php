@@ -25,5 +25,5 @@ interface ConfigurationLoaderInterface
      *
      * @return array
      */
-    public function load($identifier);
+    public function load(string $identifier): array;
 }

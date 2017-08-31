@@ -23,5 +23,5 @@ interface ShipmentEmailManagerInterface
     /**
      * @param ShipmentInterface $shipment
      */
-    public function sendConfirmationEmail(ShipmentInterface $shipment);
+    public function sendConfirmationEmail(ShipmentInterface $shipment): void;
 }

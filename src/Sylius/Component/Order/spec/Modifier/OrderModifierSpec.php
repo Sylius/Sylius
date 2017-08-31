@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Component\Order\Modifier;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Prophecy\Argument;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Order\Model\OrderItemInterface;
@@ -30,16 +31,11 @@ final class OrderModifierSpec extends ObjectBehavior
     function let(
         OrderProcessorInterface $orderProcessor,
         OrderItemQuantityModifierInterface $orderItemQuantityModifier
-    ) {
+    ): void {
         $this->beConstructedWith($orderProcessor, $orderItemQuantityModifier);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(OrderModifier::class);
-    }
-
-    function it_implements_an_order_modifier_interface()
+    function it_implements_an_order_modifier_interface(): void
     {
         $this->shouldImplement(OrderModifierInterface::class);
     }
@@ -48,8 +44,8 @@ final class OrderModifierSpec extends ObjectBehavior
         OrderInterface $order,
         OrderItemInterface $orderItem,
         OrderProcessorInterface $orderProcessor
-    ) {
-        $order->getItems()->willReturn([]);
+    ): void {
+        $order->getItems()->willReturn(new ArrayCollection([]));
 
         $order->addItem($orderItem)->shouldBeCalled();
         $orderProcessor->process($order)->shouldBeCalled();
@@ -63,8 +59,8 @@ final class OrderModifierSpec extends ObjectBehavior
         OrderItemInterface $newItem,
         OrderItemQuantityModifierInterface $orderItemQuantityModifier,
         OrderProcessorInterface $orderProcessor
-    ) {
-        $order->getItems()->willReturn([$existingItem]);
+    ): void {
+        $order->getItems()->willReturn(new ArrayCollection([$existingItem->getWrappedObject()]));
 
         $newItem->equals($existingItem)->willReturn(false);
 
@@ -82,8 +78,8 @@ final class OrderModifierSpec extends ObjectBehavior
         OrderItemInterface $newItem,
         OrderItemQuantityModifierInterface $orderItemQuantityModifier,
         OrderProcessorInterface $orderProcessor
-    ) {
-        $order->getItems()->willReturn([$existingItem]);
+    ): void {
+        $order->getItems()->willReturn(new ArrayCollection([$existingItem->getWrappedObject()]));
 
         $newItem->equals($existingItem)->willReturn(true);
         $existingItem->getQuantity()->willReturn(2);
@@ -101,7 +97,7 @@ final class OrderModifierSpec extends ObjectBehavior
         OrderInterface $order,
         OrderItemInterface $orderItem,
         OrderProcessorInterface $orderProcessor
-    ) {
+    ): void {
         $order->removeItem($orderItem)->shouldBeCalled();
         $orderProcessor->process($order)->shouldBeCalled();
 

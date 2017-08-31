@@ -23,10 +23,10 @@ interface FixtureInterface extends ConfigurationInterface
     /**
      * @param array $options
      */
-    public function load(array $options);
+    public function load(array $options): void;
 
     /**
      * @return string
      */
-    public function getName();
+    public function getName(): string;
 }

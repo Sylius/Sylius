@@ -22,17 +22,12 @@ use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
  */
 final class CanonicalizerSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(Canonicalizer::class);
-    }
-
-    function it_implements_canonicalizer_interface()
+    function it_implements_canonicalizer_interface(): void
     {
         $this->shouldImplement(CanonicalizerInterface::class);
     }
 
-    function it_converts_strings_to_lower_case()
+    function it_converts_strings_to_lower_case(): void
     {
         $testString = 'tEsTsTrInG';
         $this->canonicalize($testString)->shouldReturn('teststring');

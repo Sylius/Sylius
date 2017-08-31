@@ -40,7 +40,7 @@ final class HomepageController
      *
      * @return Response
      */
-    public function indexAction(Request $request)
+    public function indexAction(Request $request): Response
     {
         return $this->templatingEngine->renderResponse('@SyliusShop/Homepage/index.html.twig');
     }

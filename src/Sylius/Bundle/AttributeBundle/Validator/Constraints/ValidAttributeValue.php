@@ -23,7 +23,7 @@ class ValidAttributeValue extends Constraint
     /**
      * {@inheritdoc}
      */
-    public function getTargets()
+    public function getTargets(): string
     {
         return self::CLASS_CONSTRAINT;
     }
@@ -31,7 +31,7 @@ class ValidAttributeValue extends Constraint
     /**
      * {@inheritdoc}
      */
-    public function validatedBy()
+    public function validatedBy(): string
     {
         return 'sylius_valid_attribute_value_validator';
     }

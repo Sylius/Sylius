@@ -25,7 +25,7 @@ class RemoveExpiredCartsCommand extends ContainerAwareCommand
     /**
      * {@inheritdoc}
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('sylius:remove-expired-carts')
@@ -36,7 +36,7 @@ class RemoveExpiredCartsCommand extends ContainerAwareCommand
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): void
     {
         $expirationTime = $this->getContainer()->getParameter('sylius_order.cart_expiration_period');
         $output->writeln(

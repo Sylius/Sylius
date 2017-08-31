@@ -29,11 +29,11 @@ final class PathPackageSpec extends ObjectBehavior
         VersionStrategyInterface $versionStrategy,
         ThemeContextInterface $themeContext,
         PathResolverInterface $pathResolver
-    ) {
+    ): void {
         $this->beConstructedWith('/', $versionStrategy, $themeContext, $pathResolver);
     }
 
-    function it_implements_package_interface_interface()
+    function it_implements_package_interface_interface(): void
     {
         $this->shouldImplement(PackageInterface::class);
     }
@@ -41,7 +41,7 @@ final class PathPackageSpec extends ObjectBehavior
     function it_returns_vanilla_path_if_there_are_no_active_themes(
         ThemeContextInterface $themeContext,
         VersionStrategyInterface $versionStrategy
-    ) {
+    ): void {
         $path = 'bundles/sample/asset.js';
         $versionedPath = 'bundles/sample/asset.js?v=42';
 
@@ -56,7 +56,7 @@ final class PathPackageSpec extends ObjectBehavior
         VersionStrategyInterface $versionStrategy,
         PathResolverInterface $pathResolver,
         ThemeInterface $theme
-    ) {
+    ): void {
         $path = 'bundles/sample/asset.js';
         $themedPath = 'bundles/theme/foo/bar/sample/asset.js';
         $versionedThemedPath = 'bundles/theme/foo/bar/sample/asset.js?v=42';
@@ -68,7 +68,7 @@ final class PathPackageSpec extends ObjectBehavior
         $this->getUrl($path)->shouldReturn('/' . $versionedThemedPath);
     }
 
-    function it_returns_path_without_changes_if_it_is_absolute()
+    function it_returns_path_without_changes_if_it_is_absolute(): void
     {
         $this->getUrl('//localhost/asset.js')->shouldReturn('//localhost/asset.js');
         $this->getUrl('https://localhost/asset.js')->shouldReturn('https://localhost/asset.js');
@@ -79,7 +79,7 @@ final class PathPackageSpec extends ObjectBehavior
         VersionStrategyInterface $versionStrategy,
         PathResolverInterface $pathResolver,
         ThemeInterface $theme
-    ) {
+    ): void {
         $path = 'bundles/sample/asset.js';
         $themedPath = 'bundles/theme/foo/bar/sample/asset.js';
         $versionedThemedPath = '/bundles/theme/foo/bar/sample/asset.js?v=42';
@@ -96,7 +96,7 @@ final class PathPackageSpec extends ObjectBehavior
         VersionStrategyInterface $versionStrategy,
         PathResolverInterface $pathResolver,
         ThemeInterface $theme
-    ) {
+    ): void {
         $path = 'bundles/sample/asset.js';
         $themedPath = 'bundles/theme/foo/bar/sample/asset.js';
         $versionedThemedPath = 'https://bundles/theme/foo/bar/sample/asset.js?v=42';

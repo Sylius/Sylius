@@ -22,7 +22,7 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ProductVariantCombinationValidator extends ConstraintValidator
+final class ProductVariantCombinationValidator extends ConstraintValidator
 {
     /**
      * @var ProductVariantsParityCheckerInterface
@@ -40,7 +40,7 @@ class ProductVariantCombinationValidator extends ConstraintValidator
     /**
      * {@inheritdoc}
      */
-    public function validate($value, Constraint $constraint)
+    public function validate($value, Constraint $constraint): void
     {
         if (!$value instanceof ProductVariantInterface) {
             throw new UnexpectedTypeException($value, ProductVariantInterface::class);

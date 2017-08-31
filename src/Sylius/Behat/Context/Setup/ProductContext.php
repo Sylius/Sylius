@@ -902,7 +902,7 @@ final class ProductContext implements Context
         $variant->setCode($code);
         $variant->setProduct($product);
         $variant->addChannelPricing($this->createChannelPricingForChannel($price, $channel));
-        $variant->setPosition($position);
+        $variant->setPosition((null === $position) ? null : (int) $position);
         $variant->setShippingRequired($shippingRequired);
 
         $product->addVariant($variant);

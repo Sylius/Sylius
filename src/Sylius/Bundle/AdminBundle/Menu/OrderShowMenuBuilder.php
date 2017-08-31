@@ -62,7 +62,7 @@ final class OrderShowMenuBuilder
      *
      * @return ItemInterface
      */
-    public function createMenu(array $options)
+    public function createMenu(array $options): ItemInterface
     {
         $menu = $this->factory->createItem('root');
 

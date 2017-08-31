@@ -63,4 +63,18 @@ class PromotionCouponRepository extends EntityRepository implements PromotionCou
             ->getOneOrNullResult()
         ;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findByPromotionCode(string $promotionCode): iterable
+    {
+        $queryBuilder = $this->createQueryBuilder('o')
+            ->leftJoin('o.promotion', 'promotion')
+            ->where('promotion.code = :promotionCode')
+            ->setParameter('promotionCode', $promotionCode)
+        ;
+
+        return $this->getPaginator($queryBuilder);
+    }
 }

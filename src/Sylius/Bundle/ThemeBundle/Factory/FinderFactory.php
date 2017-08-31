@@ -23,7 +23,7 @@ final class FinderFactory implements FinderFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function create()
+    public function create(): Finder
     {
         return Finder::create();
     }

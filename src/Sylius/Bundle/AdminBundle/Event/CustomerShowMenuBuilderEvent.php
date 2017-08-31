@@ -43,7 +43,7 @@ class CustomerShowMenuBuilderEvent extends MenuBuilderEvent
     /**
      * @return CustomerInterface
      */
-    public function getCustomer()
+    public function getCustomer(): CustomerInterface
     {
         return $this->customer;
     }

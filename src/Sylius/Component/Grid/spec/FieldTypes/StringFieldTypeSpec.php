@@ -17,41 +17,35 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Grid\DataExtractor\DataExtractorInterface;
 use Sylius\Component\Grid\Definition\Field;
 use Sylius\Component\Grid\FieldTypes\FieldTypeInterface;
-use Sylius\Component\Grid\FieldTypes\StringFieldType;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class StringFieldTypeSpec extends ObjectBehavior
 {
-    function let(DataExtractorInterface $dataExtractor)
+    function let(DataExtractorInterface $dataExtractor): void
     {
         $this->beConstructedWith($dataExtractor);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(StringFieldType::class);
-    }
-
-    function it_is_a_grid_field_type()
+    function it_is_a_grid_field_type(): void
     {
         $this->shouldImplement(FieldTypeInterface::class);
     }
 
-    function it_uses_data_extractor_to_obtain_data_and_renders_it(DataExtractorInterface $dataExtractor, Field $field)
+    function it_uses_data_extractor_to_obtain_data_and_renders_it(DataExtractorInterface $dataExtractor, Field $field): void
     {
         $dataExtractor->get($field, ['foo' => 'bar'])->willReturn('Value');
         $this->render($field, ['foo' => 'bar'], [])->shouldReturn('Value');
     }
 
-    function it_escapes_string_values(DataExtractorInterface $dataExtractor, Field $field)
+    function it_escapes_string_values(DataExtractorInterface $dataExtractor, Field $field): void
     {
         $dataExtractor->get($field, ['foo' => 'bar'])->willReturn('<i class="book icon"></i>');
         $this->render($field, ['foo' => 'bar'], [])->shouldReturn('&lt;i class=&quot;book icon&quot;&gt;&lt;/i&gt;');
     }
 
-    function it_does_not_escape_non_string_values(DataExtractorInterface $dataExtractor, Field $field)
+    function it_does_not_escape_non_string_values(DataExtractorInterface $dataExtractor, Field $field): void
     {
         $data = new \stdClass();
 

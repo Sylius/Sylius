@@ -55,7 +55,7 @@ final class OrderSpec extends ObjectBehavior
         $this->getCustomer()->shouldReturn(null);
     }
 
-    function itx_allows_defining_customer(CustomerInterface $customer)
+    function its_allows_defining_customer(CustomerInterface $customer)
     {
         $this->setCustomer($customer);
         $this->getCustomer()->shouldReturn($customer);
@@ -363,10 +363,16 @@ final class OrderSpec extends ObjectBehavior
 
     function it_counts_promotions_subjects(OrderItemInterface $item1, OrderItemInterface $item2)
     {
-        $this->addItem($item1);
         $item1->getQuantity()->willReturn(4);
-        $this->addItem($item2);
+        $item1->getTotal()->willReturn(420);
+        $item1->setOrder($this)->will(function () {});
+
         $item2->getQuantity()->willReturn(3);
+        $item2->getTotal()->willReturn(666);
+        $item2->setOrder($this)->will(function () {});
+
+        $this->addItem($item1);
+        $this->addItem($item2);
 
         $this->getPromotionSubjectCount()->shouldReturn(7);
     }

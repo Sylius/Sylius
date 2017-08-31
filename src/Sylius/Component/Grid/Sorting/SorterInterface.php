@@ -27,5 +27,5 @@ interface SorterInterface
      * @param Grid $grid
      * @param Parameters $parameters
      */
-    public function sort(DataSourceInterface $dataSource, Grid $grid, Parameters $parameters);
+    public function sort(DataSourceInterface $dataSource, Grid $grid, Parameters $parameters): void;
 }

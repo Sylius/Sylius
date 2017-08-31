@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Component\Core\OrderProcessing;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Sylius\Component\Addressing\Model\AddressInterface;
@@ -62,7 +63,7 @@ final class OrderTaxesProcessorSpec extends ObjectBehavior
         TaxCalculationStrategyInterface $strategyOne,
         TaxCalculationStrategyInterface $strategyTwo
     ) {
-        $order->getItems()->willReturn([$orderItem]);
+        $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
         $order->isEmpty()->willReturn(false);
         $order->getShippingAddress()->willReturn($address);
 
@@ -90,7 +91,7 @@ final class OrderTaxesProcessorSpec extends ObjectBehavior
         ZoneInterface $zone,
         TaxCalculationStrategyInterface $strategy
     ) {
-        $order->getItems()->willReturn([$orderItem]);
+        $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
         $order->isEmpty()->willReturn(false);
         $order->getShippingAddress()->willReturn($address);
 
@@ -110,7 +111,7 @@ final class OrderTaxesProcessorSpec extends ObjectBehavior
     function it_does_not_process_taxes_if_there_is_no_order_item(OrderInterface $order)
     {
         $order->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
-        $order->getItems()->willReturn([]);
+        $order->getItems()->willReturn(new ArrayCollection([]));
         $order->isEmpty()->willReturn(true);
 
         $order->getShippingAddress()->shouldNotBeCalled();
@@ -126,7 +127,7 @@ final class OrderTaxesProcessorSpec extends ObjectBehavior
         OrderItemInterface $orderItem,
         AddressInterface $address
     ) {
-        $order->getItems()->willReturn([$orderItem]);
+        $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
         $order->isEmpty()->willReturn(false);
 
         $order->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();

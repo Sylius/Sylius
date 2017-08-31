@@ -15,7 +15,6 @@ namespace spec\Sylius\Component\Grid\DataExtractor;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Grid\DataExtractor\DataExtractorInterface;
-use Sylius\Component\Grid\DataExtractor\PropertyAccessDataExtractor;
 use Sylius\Component\Grid\Definition\Field;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 
@@ -24,22 +23,17 @@ use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
  */
 final class PropertyAccessDataExtractorSpec extends ObjectBehavior
 {
-    function let(PropertyAccessorInterface $propertyAccessor)
+    function let(PropertyAccessorInterface $propertyAccessor): void
     {
         $this->beConstructedWith($propertyAccessor);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(PropertyAccessDataExtractor::class);
-    }
-
-    function it_is_a_data_extractor()
+    function it_is_a_data_extractor(): void
     {
         $this->shouldImplement(DataExtractorInterface::class);
     }
 
-    function it_uses_property_accessor_to_extract_the_data(PropertyAccessorInterface $propertyAccessor, Field $field)
+    function it_uses_property_accessor_to_extract_the_data(PropertyAccessorInterface $propertyAccessor, Field $field): void
     {
         $field->getPath()->willReturn('foo');
         $propertyAccessor->getValue(['foo' => 'bar'], 'foo')->willReturn('Value');

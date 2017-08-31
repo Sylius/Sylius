@@ -23,12 +23,7 @@ use Sylius\Bundle\ThemeBundle\Translation\Resource\TranslationResourceInterface;
  */
 final class CompositeTranslatorResourceProviderSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(CompositeTranslatorResourceProvider::class);
-    }
-
-    function it_implements_translator_resource_provider_interface()
+    function it_implements_translator_resource_provider_interface(): void
     {
         $this->shouldImplement(TranslatorResourceProviderInterface::class);
     }
@@ -38,7 +33,7 @@ final class CompositeTranslatorResourceProviderSpec extends ObjectBehavior
         TranslatorResourceProviderInterface $secondResourceProvider,
         TranslationResourceInterface $firstResource,
         TranslationResourceInterface $secondResource
-    ) {
+    ): void {
         $this->beConstructedWith([$firstResourceProvider, $secondResourceProvider]);
 
         $firstResourceProvider->getResources()->willReturn([$firstResource]);
@@ -50,7 +45,7 @@ final class CompositeTranslatorResourceProviderSpec extends ObjectBehavior
     function it_aggregates_the_resources_locales(
         TranslatorResourceProviderInterface $firstResourceProvider,
         TranslatorResourceProviderInterface $secondResourceProvider
-    ) {
+    ): void {
         $this->beConstructedWith([$firstResourceProvider, $secondResourceProvider]);
 
         $firstResourceProvider->getResourcesLocales()->willReturn(['first-locale']);
@@ -62,7 +57,7 @@ final class CompositeTranslatorResourceProviderSpec extends ObjectBehavior
     function it_aggregates_the_unique_resources_locales(
         TranslatorResourceProviderInterface $firstResourceProvider,
         TranslatorResourceProviderInterface $secondResourceProvider
-    ) {
+    ): void {
         $this->beConstructedWith([$firstResourceProvider, $secondResourceProvider]);
 
         $firstResourceProvider->getResourcesLocales()->willReturn(['first-locale']);

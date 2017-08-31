@@ -29,5 +29,5 @@ interface PathResolverInterface
      *
      * @return string
      */
-    public function resolve($path, ThemeInterface $theme);
+    public function resolve(string $path, ThemeInterface $theme): string;
 }

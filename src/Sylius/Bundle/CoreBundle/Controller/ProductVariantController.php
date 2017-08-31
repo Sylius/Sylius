@@ -54,7 +54,7 @@ class ProductVariantController extends ResourceController
 
                 /** @var ProductVariantInterface $productVariant */
                 $productVariant = $this->repository->findOneBy(['id' => $productVariantToUpdate['id']]);
-                $productVariant->setPosition($productVariantToUpdate['position']);
+                $productVariant->setPosition((int) $productVariantToUpdate['position']);
                 $this->manager->flush();
             }
         }

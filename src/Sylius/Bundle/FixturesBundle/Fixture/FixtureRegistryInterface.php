@@ -25,10 +25,10 @@ interface FixtureRegistryInterface
      *
      * @throws FixtureNotFoundException
      */
-    public function getFixture($name);
+    public function getFixture(string $name): FixtureInterface;
 
     /**
-     * @return FixtureInterface[] Name indexed
+     * @return array|FixtureInterface[] Name indexed
      */
-    public function getFixtures();
+    public function getFixtures(): array;
 }

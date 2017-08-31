@@ -11,14 +11,6 @@ Sylius\Component\Attribute\Model\AttributeValue:
             expose: true
             type: string
             groups: [Default, Detailed]
-        createdAt:
-            expose: true
-            type: DateTime
-            groups: [Detailed]
-        updatedAt:
-            expose: true
-            type: DateTime
-            groups: [Detailed]
     virtual_properties:
         getCode:
             serialized_name: code

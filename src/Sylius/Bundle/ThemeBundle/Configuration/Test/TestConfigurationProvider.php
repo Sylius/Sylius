@@ -36,7 +36,7 @@ final class TestConfigurationProvider implements ConfigurationProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function getConfigurations()
+    public function getConfigurations(): array
     {
         return $this->testThemeConfigurationManager->findAll();
     }

@@ -24,12 +24,13 @@ Before we learn how to create products that can be sold, let's see how to create
      /** @var ProductInterface $product */
      $product = $productFactory->createNew();
 
-Creating an empty product is not enough to save it in the database. It needs to have a ``name`` and ``code``.
+Creating an empty product is not enough to save it in the database. It needs to have a ``name``, a ``code`` and a ``slug``.
 
 .. code-block:: php
 
      $product->setName('T-Shirt');
      $product->setCode('00001');
+     $product->setSlug('t-shirt');
 
      /** @var RepositoryInterface $productRepository */
      $productRepository = $this->get('sylius.repository.product');
@@ -68,11 +69,13 @@ And then using the ProductVariantFactory create a variant for your product.
      /** @var ProductVariantInterface $product */
      $variant = $productVariantFactory->createNew();
 
-Having Variant created give it a desired name and attach it to your Product.
+Having created a Variant, provide it with the required attributes and attach it to your Product.
 
 .. code-block:: php
 
      $variant->setName('Hardcover');
+     $variant->setCode('1001');
+     $variant->setPosition(1);
      $variant->setProduct($product);
 
 Finally save your Variant in the database using a repository.

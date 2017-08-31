@@ -31,6 +31,7 @@ interface AdapterInterface
      * @param EmailInterface $email
      * @param array $data
      * @param array $attachments
+     * @param array $replyTo
      */
     public function send(
         array $recipients,
@@ -39,6 +40,7 @@ interface AdapterInterface
         RenderedEmail $renderedEmail,
         EmailInterface $email,
         array $data,
-        array $attachments = []
+        array $attachments = [],
+        array $replyTo = []
     ): void;
 }

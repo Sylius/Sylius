@@ -38,6 +38,8 @@ final class DatetimeFieldType implements FieldTypeInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @throws \InvalidArgumentException
      */
     public function render(Field $field, $data, array $options)
     {
@@ -54,7 +56,7 @@ final class DatetimeFieldType implements FieldTypeInterface
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefault('format', 'Y:m:d H:i:s');
         $resolver->setAllowedTypes('format', 'string');

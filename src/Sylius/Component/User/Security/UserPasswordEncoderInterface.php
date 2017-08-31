@@ -25,5 +25,5 @@ interface UserPasswordEncoderInterface
      *
      * @return string
      */
-    public function encode(CredentialsHolderInterface $user);
+    public function encode(CredentialsHolderInterface $user): string;
 }

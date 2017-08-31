@@ -15,7 +15,6 @@ namespace spec\Sylius\Bundle\ProductBundle\Form\EventSubscriber;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ProductBundle\Form\EventSubscriber\BuildAttributesFormSubscriber;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
 use Sylius\Component\Product\Model\ProductInterface;
@@ -29,17 +28,12 @@ use Symfony\Component\Form\FormEvents;
  */
 final class BuildAttributesFormSubscriberSpec extends ObjectBehavior
 {
-    function let(FactoryInterface $attributeValueFactory, TranslationLocaleProviderInterface $localeProvider)
+    function let(FactoryInterface $attributeValueFactory, TranslationLocaleProviderInterface $localeProvider): void
     {
         $this->beConstructedWith($attributeValueFactory, $localeProvider);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(BuildAttributesFormSubscriber::class);
-    }
-
-    function it_subscribes_to_event()
+    function it_subscribes_to_event(): void
     {
         static::getSubscribedEvents()->shouldReturn([
             FormEvents::PRE_SET_DATA => 'preSetData',
@@ -55,7 +49,7 @@ final class BuildAttributesFormSubscriberSpec extends ObjectBehavior
         ProductAttributeInterface $attribute,
         ProductAttributeValueInterface $attributeValue,
         ProductAttributeValueInterface $newAttributeValue
-    ) {
+    ): void {
         $event->getData()->willReturn($product);
 
         $localeProvider->getDefinedLocalesCodes()->willReturn(['en_US', 'pl_PL']);
@@ -84,7 +78,7 @@ final class BuildAttributesFormSubscriberSpec extends ObjectBehavior
         ProductAttributeInterface $attribute,
         ProductAttributeValueInterface $attributeValue,
         ProductAttributeValueInterface $attributeValue2
-    ) {
+    ): void {
         $event->getData()->willReturn($product);
 
         $attributes = new ArrayCollection([$attributeValue->getWrappedObject(), $attributeValue2->getWrappedObject()]);
@@ -100,7 +94,7 @@ final class BuildAttributesFormSubscriberSpec extends ObjectBehavior
         $this->postSubmit($event);
     }
 
-    function it_throws_an_invalid_argument_exception_if_data_is_not_a_product(FormEvent $event, \stdClass $stdObject)
+    function it_throws_an_invalid_argument_exception_if_data_is_not_a_product(FormEvent $event, \stdClass $stdObject): void
     {
         $event->getData()->willReturn($stdObject);
 
@@ -110,7 +104,7 @@ final class BuildAttributesFormSubscriberSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_an_invalid_argument_exception_if_data_is_not_a_product_during_submit(FormEvent $event, \stdClass $stdObject)
+    function it_throws_an_invalid_argument_exception_if_data_is_not_a_product_during_submit(FormEvent $event, \stdClass $stdObject): void
     {
         $event->getData()->willReturn($stdObject);
 

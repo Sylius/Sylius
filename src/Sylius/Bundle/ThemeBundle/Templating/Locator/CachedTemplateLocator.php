@@ -46,7 +46,7 @@ final class CachedTemplateLocator implements TemplateLocatorInterface
     /**
      * {@inheritdoc}
      */
-    public function locateTemplate(TemplateReferenceInterface $template, ThemeInterface $theme)
+    public function locateTemplate(TemplateReferenceInterface $template, ThemeInterface $theme): string
     {
         $cacheKey = $this->getCacheKey($template, $theme);
         if ($this->cache->contains($cacheKey)) {
@@ -68,7 +68,7 @@ final class CachedTemplateLocator implements TemplateLocatorInterface
      *
      * @return string
      */
-    private function getCacheKey(TemplateReferenceInterface $template, ThemeInterface $theme)
+    private function getCacheKey(TemplateReferenceInterface $template, ThemeInterface $theme): string
     {
         return $template->getLogicalName().'|'.$theme->getName();
     }

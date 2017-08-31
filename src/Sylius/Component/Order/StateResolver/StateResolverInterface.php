@@ -23,5 +23,5 @@ interface StateResolverInterface
     /**
      * @param OrderInterface $order
      */
-    public function resolve(OrderInterface $order);
+    public function resolve(OrderInterface $order): void;
 }

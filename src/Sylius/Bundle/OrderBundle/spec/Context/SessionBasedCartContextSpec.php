@@ -26,17 +26,12 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
  */
 final class SessionBasedCartContextSpec extends ObjectBehavior
 {
-    function let(SessionInterface $session, OrderRepositoryInterface $orderRepository)
+    function let(SessionInterface $session, OrderRepositoryInterface $orderRepository): void
     {
         $this->beConstructedWith($session, 'session_key_name', $orderRepository);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(SessionBasedCartContext::class);
-    }
-
-    function it_implements_a_cart_context_interface()
+    function it_implements_a_cart_context_interface(): void
     {
         $this->shouldImplement(CartContextInterface::class);
     }
@@ -45,7 +40,7 @@ final class SessionBasedCartContextSpec extends ObjectBehavior
         SessionInterface $session,
         OrderRepositoryInterface $orderRepository,
         OrderInterface $cart
-    )  {
+    ): void  {
         $session->has('session_key_name')->willReturn(true);
         $session->get('session_key_name')->willReturn(12345);
         $orderRepository->findCartById(12345)->willReturn($cart);
@@ -53,7 +48,7 @@ final class SessionBasedCartContextSpec extends ObjectBehavior
         $this->getCart()->shouldReturn($cart);
     }
 
-    function it_throws_a_cart_not_found_exception_if_session_key_does_not_exist(SessionInterface $session)
+    function it_throws_a_cart_not_found_exception_if_session_key_does_not_exist(SessionInterface $session): void
     {
         $session->has('session_key_name')->willReturn(false);
 
@@ -63,7 +58,7 @@ final class SessionBasedCartContextSpec extends ObjectBehavior
     function it_throws_a_cart_not_found_exception_and_removes_id_from_session_when_cart_is_not_found(
         SessionInterface $session,
         OrderRepositoryInterface $orderRepository
-    ) {
+    ): void {
         $session->has('session_key_name')->willReturn(true);
         $session->get('session_key_name')->willReturn(12345);
         $orderRepository->findCartById(12345)->willReturn(null);

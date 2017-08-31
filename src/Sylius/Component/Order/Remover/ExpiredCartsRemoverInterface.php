@@ -18,5 +18,5 @@ namespace Sylius\Component\Order\Remover;
  */
 interface ExpiredCartsRemoverInterface
 {
-    public function remove();
+    public function remove(): void;
 }

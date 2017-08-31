@@ -34,16 +34,11 @@ final class TemplatePathsCacheWarmerSpec extends ObjectBehavior
         TemplateLocatorInterface $templateLocator,
         ThemeRepositoryInterface $themeRepository,
         Cache $cache
-    ) {
+    ): void {
         $this->beConstructedWith($templateFinder, $templateLocator, $themeRepository, $cache);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(TemplatePathsCacheWarmer::class);
-    }
-
-    function it_implements_cache_warmer_interface()
+    function it_implements_cache_warmer_interface(): void
     {
         $this->shouldImplement(CacheWarmerInterface::class);
     }
@@ -56,7 +51,7 @@ final class TemplatePathsCacheWarmerSpec extends ObjectBehavior
         ThemeInterface $theme,
         TemplateReferenceInterface $firstTemplate,
         TemplateReferenceInterface $secondTemplate
-    ) {
+    ): void {
         $templateFinder->findAllTemplates()->willReturn([$firstTemplate, $secondTemplate]);
 
         $themeRepository->findAll()->willReturn([$theme]);

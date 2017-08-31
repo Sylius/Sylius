@@ -18,5 +18,5 @@ namespace Sylius\Component\User\Canonicalizer;
  */
 interface CanonicalizerInterface
 {
-    public function canonicalize($string);
+    public function canonicalize(?string $string): ?string;
 }

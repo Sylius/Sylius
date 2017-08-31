@@ -28,5 +28,5 @@ interface AddToCartCommandFactoryInterface
      *
      * @return AddToCartCommandInterface
      */
-    public function createWithCartAndCartItem(OrderInterface $cart, OrderItemInterface $cartItem);
+    public function createWithCartAndCartItem(OrderInterface $cart, OrderItemInterface $cartItem): AddToCartCommandInterface;
 }

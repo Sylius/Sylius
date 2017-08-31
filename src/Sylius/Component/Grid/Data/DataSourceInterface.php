@@ -26,15 +26,13 @@ interface DataSourceInterface
     /**
      * @param mixed $expression
      * @param string $condition
-     *
-     * @return mixed
      */
-    public function restrict($expression, $condition = self::CONDITION_AND);
+    public function restrict($expression, string $condition = self::CONDITION_AND): void;
 
     /**
      * @return ExpressionBuilderInterface
      */
-    public function getExpressionBuilder();
+    public function getExpressionBuilder(): ExpressionBuilderInterface;
 
     /**
      * @param Parameters $parameters

@@ -16,7 +16,6 @@ namespace spec\Sylius\Component\Grid\Filtering;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Grid\Definition\Filter;
 use Sylius\Component\Grid\Definition\Grid;
-use Sylius\Component\Grid\Filtering\FiltersCriteriaResolver;
 use Sylius\Component\Grid\Filtering\FiltersCriteriaResolverInterface;
 use Sylius\Component\Grid\Parameters;
 
@@ -25,17 +24,12 @@ use Sylius\Component\Grid\Parameters;
  */
 final class FiltersCriteriaResolverSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(FiltersCriteriaResolver::class);
-    }
-
-    function it_implements_filters_criteria_resolver_interface()
+    function it_implements_filters_criteria_resolver_interface(): void
     {
         $this->shouldImplement(FiltersCriteriaResolverInterface::class);
     }
 
-    function it_checks_whether_any_criteria_are_available(Grid $grid, Filter $filter)
+    function it_checks_whether_any_criteria_are_available(Grid $grid, Filter $filter): void
     {
         $emptyParameters = new Parameters();
         $criteriaParameters = new Parameters(['criteria' => ['czapla']]);
@@ -67,7 +61,7 @@ final class FiltersCriteriaResolverSpec extends ObjectBehavior
         $this->hasCriteria($grid, $criteriaParameters)->shouldReturn(true);
     }
 
-    function it_gets_default_criteria_from_grid_filters(Grid $grid, Filter $firstFilter, Filter $secondFilter)
+    function it_gets_default_criteria_from_grid_filters(Grid $grid, Filter $firstFilter, Filter $secondFilter): void
     {
         $startDate = new \DateTime();
         $endDate = new \DateTime();
@@ -83,7 +77,7 @@ final class FiltersCriteriaResolverSpec extends ObjectBehavior
         ]);
     }
 
-    function it_gets_criteria_from_parameters(Grid $grid, Filter $firstFilter, Filter $secondFilter)
+    function it_gets_criteria_from_parameters(Grid $grid, Filter $firstFilter, Filter $secondFilter): void
     {
         $startDate = new \DateTime();
         $endDate = new \DateTime();
@@ -110,7 +104,7 @@ final class FiltersCriteriaResolverSpec extends ObjectBehavior
         Grid $grid,
         Filter $firstFilter,
         Filter $secondFilter
-    ) {
+    ): void {
         $parametersDate = new \DateTime();
 
         $firstFilter->getCriteria()->willReturn('Rum');

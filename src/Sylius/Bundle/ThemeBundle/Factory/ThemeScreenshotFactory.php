@@ -23,21 +23,15 @@ final class ThemeScreenshotFactory implements ThemeScreenshotFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createFromArray(array $data)
+    public function createFromArray(array $data): ThemeScreenshot
     {
         if (!array_key_exists('path', $data)) {
             throw new \InvalidArgumentException('Screenshot path is required.');
         }
 
         $themeScreenshot = new ThemeScreenshot($data['path']);
-
-        if (isset($data['title'])) {
-            $themeScreenshot->setTitle($data['title']);
-        }
-
-        if (isset($data['description'])) {
-            $themeScreenshot->setDescription($data['description']);
-        }
+        $themeScreenshot->setTitle($data['title'] ?? null);
+        $themeScreenshot->setDescription($data['description'] ?? null);
 
         return $themeScreenshot;
     }

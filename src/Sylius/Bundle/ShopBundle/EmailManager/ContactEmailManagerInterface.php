@@ -22,5 +22,5 @@ interface ContactEmailManagerInterface
      * @param array $data
      * @param array $recipients
      */
-    public function sendContactRequest(array $data, array $recipients);
+    public function sendContactRequest(array $data, array $recipients): void;
 }

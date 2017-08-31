@@ -26,13 +26,20 @@ final class SyliusAdminExtension extends Extension
     /**
      * {@inheritdoc}
      */
-    public function load(array $config, ContainerBuilder $container)
+    public function load(array $config, ContainerBuilder $container): void
     {
         $config = $this->processConfiguration($this->getConfiguration([], $container), $config);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
         $container->setParameter('sylius.admin.notification.enabled', $config['notifications']['enabled']);
         $container->setParameter('sylius.admin.notification.frequency', $config['notifications']['frequency']);
+        $container->setParameter('sylius.admin.shop_enabled', false);
+
+        $bundles = $container->getParameter('kernel.bundles');
+        if (array_key_exists('SyliusShopBundle', $bundles)) {
+            $loader->load('services/integrations/shop.xml');
+            $container->setParameter('sylius.admin.shop_enabled', true);
+        }
 
         $loader->load('services.xml');
     }

@@ -23,5 +23,5 @@ interface UserReloaderInterface
     /**
      * @param UserInterface $user
      */
-    public function reloadUser(UserInterface $user);
+    public function reloadUser(UserInterface $user): void;
 }

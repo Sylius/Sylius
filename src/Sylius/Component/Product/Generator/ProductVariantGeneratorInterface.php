@@ -25,5 +25,5 @@ interface ProductVariantGeneratorInterface
      *
      * @throws \InvalidArgumentException
      */
-    public function generate(ProductInterface $product);
+    public function generate(ProductInterface $product): void;
 }

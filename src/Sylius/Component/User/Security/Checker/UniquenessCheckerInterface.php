@@ -23,5 +23,5 @@ interface UniquenessCheckerInterface
      *
      * @return bool
      */
-    public function isUnique($token);
+    public function isUnique(string $token): bool;
 }

@@ -28,7 +28,9 @@
                     {{ 'sylius.ui.email_verified'|trans }}
                 </div>
                 <br />
-                {{ buttons.default(path('sylius_admin_impersonate_user', {'username': user.emailCanonical}), 'sylius.ui.impersonate', 'impersonate', 'unhide', 'blue') }}
+                {% if is_shop_enabled() %}
+                    {{ buttons.default(path('sylius_admin_impersonate_user', {'username': user.emailCanonical}), 'sylius.ui.impersonate', 'impersonate', 'unhide', 'blue') }}
+                {% endif %}
             {% endif %}
         </div>
         <div class="extra content">

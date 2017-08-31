@@ -75,7 +75,7 @@ final class SequentialOrderNumberGenerator implements OrderNumberGeneratorInterf
     /**
      * {@inheritdoc}
      */
-    public function generate(OrderInterface $order)
+    public function generate(OrderInterface $order): string
     {
         $sequence = $this->getSequence();
 

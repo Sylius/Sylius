@@ -26,17 +26,12 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
  */
 final class SequentialOrderNumberGeneratorSpec extends ObjectBehavior
 {
-    function let(EntityRepository $sequenceRepository, FactoryInterface $sequenceFactory)
+    function let(EntityRepository $sequenceRepository, FactoryInterface $sequenceFactory): void
     {
         $this->beConstructedWith($sequenceRepository, $sequenceFactory);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(SequentialOrderNumberGenerator::class);
-    }
-
-    function it_implements_an_order_number_generator_interface()
+    function it_implements_an_order_number_generator_interface(): void
     {
         $this->shouldImplement(OrderNumberGeneratorInterface::class);
     }
@@ -45,7 +40,7 @@ final class SequentialOrderNumberGeneratorSpec extends ObjectBehavior
         EntityRepository $sequenceRepository,
         OrderSequenceInterface $sequence,
         OrderInterface $order
-    ) {
+    ): void {
         $sequence->getIndex()->willReturn(6);
         $sequenceRepository->findOneBy([])->willReturn($sequence);
 
@@ -59,7 +54,7 @@ final class SequentialOrderNumberGeneratorSpec extends ObjectBehavior
         FactoryInterface $sequenceFactory,
         OrderSequenceInterface $sequence,
         OrderInterface $order
-    ) {
+    ): void {
         $sequence->getIndex()->willReturn(0);
 
         $sequenceRepository->findOneBy([])->willReturn(null);

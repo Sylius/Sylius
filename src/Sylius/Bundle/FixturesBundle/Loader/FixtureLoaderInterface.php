@@ -26,5 +26,5 @@ interface FixtureLoaderInterface
      * @param FixtureInterface $fixture
      * @param array $options
      */
-    public function load(SuiteInterface $suite, FixtureInterface $fixture, array $options);
+    public function load(SuiteInterface $suite, FixtureInterface $fixture, array $options): void;
 }

@@ -177,7 +177,7 @@ final class ProductReviewContext implements Context
         /** @var ReviewInterface $review */
         $review = $this->productReviewFactory->createNew();
         $review->setTitle($title);
-        $review->setRating($rating);
+        $review->setRating((int) $rating);
         $review->setComment($comment);
         $review->setReviewSubject($product);
         $review->setAuthor($customer);

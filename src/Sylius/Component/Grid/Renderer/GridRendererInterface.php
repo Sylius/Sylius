@@ -29,7 +29,7 @@ interface GridRendererInterface
      *
      * @return mixed
      */
-    public function render(GridViewInterface $gridView, $template = null);
+    public function render(GridViewInterface $gridView, ?string $template = null);
 
     /**
      * @param GridViewInterface $gridView

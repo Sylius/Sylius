@@ -26,7 +26,7 @@ final class TranslatorResourceProviderPass implements CompilerPassInterface
     /**
      * {@inheritdoc}
      */
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         try {
             $symfonyTranslator = $container->findDefinition('translator.default');
@@ -48,7 +48,7 @@ final class TranslatorResourceProviderPass implements CompilerPassInterface
      *
      * @return array
      */
-    private function extractResourcesFilesFromSymfonyTranslator(Definition $symfonyTranslator)
+    private function extractResourcesFilesFromSymfonyTranslator(Definition $symfonyTranslator): array
     {
         try {
             $options = $symfonyTranslator->getArgument(3);
@@ -60,7 +60,7 @@ final class TranslatorResourceProviderPass implements CompilerPassInterface
             $options = [];
         }
 
-        $languagesFiles = isset($options['resource_files']) ? $options['resource_files'] : [];
+        $languagesFiles = $options['resource_files'] ?? [];
 
         $resourceFiles = [];
         foreach ($languagesFiles as $language => $files) {

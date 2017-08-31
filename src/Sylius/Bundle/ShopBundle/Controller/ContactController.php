@@ -27,7 +27,7 @@ use Symfony\Component\Routing\RouterInterface;
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-class ContactController
+final class ContactController
 {
     /**
      * @var RouterInterface
@@ -88,7 +88,7 @@ class ContactController
      *
      * @return Response
      */
-    public function requestAction(Request $request)
+    public function requestAction(Request $request): Response
     {
         $formType = $this->getSyliusAttribute($request, 'form', ContactType::class);
         $form = $this->formFactory->create($formType, null, $this->getFormOptions());
@@ -135,7 +135,7 @@ class ContactController
      *
      * @return string|null
      */
-    private function getSyliusAttribute(Request $request, $attributeName, $default = null)
+    private function getSyliusAttribute(Request $request, string $attributeName, ?string $default): ?string
     {
         $attributes = $request->attributes->get('_sylius');
 
@@ -145,7 +145,7 @@ class ContactController
     /**
      * @return array
      */
-    private function getFormOptions()
+    private function getFormOptions(): array
     {
         $customer = $this->customerContext->getCustomer();
 

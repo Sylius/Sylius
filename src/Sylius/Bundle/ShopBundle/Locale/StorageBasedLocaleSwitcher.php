@@ -46,7 +46,7 @@ final class StorageBasedLocaleSwitcher implements LocaleSwitcherInterface
     /**
      * {@inheritdoc}
      */
-    public function handle(Request $request, $localeCode)
+    public function handle(Request $request, string $localeCode): RedirectResponse
     {
         $this->localeStorage->set($this->channelContext->getChannel(), $localeCode);
 

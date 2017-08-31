@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Component\Core\OrderProcessing;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -56,7 +57,7 @@ final class OrderPricesRecalculatorSpec extends ObjectBehavior
     ) {
         $order->getCustomer()->willReturn($customer);
         $order->getChannel()->willReturn(null);
-        $order->getItems()->willReturn([$item]);
+        $order->getItems()->willReturn(new ArrayCollection([$item->getWrappedObject()]));
         $order->getCurrencyCode()->willReturn(null);
 
         $customer->getGroup()->willReturn($group);

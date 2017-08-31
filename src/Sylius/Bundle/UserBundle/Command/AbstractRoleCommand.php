@@ -30,9 +30,8 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
     /**
      * {@inheritdoc}
      */
-    protected function interact(InputInterface $input, OutputInterface $output)
+    protected function interact(InputInterface $input, OutputInterface $output): void
     {
-
         // User types configured in the Bundle
         $availableUserTypes = $this->getAvailableUserTypes();
         if (empty($availableUserTypes)) {
@@ -83,7 +82,7 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): void
     {
         $email = $input->getArgument('email');
         $securityRoles = $input->getArgument('roles');
@@ -102,12 +101,13 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
 
     /**
      * @param string $email
-     * @param        $userType
+     * @param string $userType
      *
      * @return UserInterface
+     *
      * @throws \InvalidArgumentException
      */
-    protected function findUserByEmail($email, $userType)
+    protected function findUserByEmail(string $email, string $userType): UserInterface
     {
         /** @var UserInterface $user */
         $user = $this->getUserRepository($userType)->findOneByEmail($email);
@@ -120,34 +120,38 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
     }
 
     /**
-     * @param $userType
+     * @param string $userType
+     *
      * @return ObjectManager
      */
-    protected function getEntityManager($userType)
+    protected function getEntityManager(string $userType): ObjectManager
     {
         $class = $this->getUserModelClass($userType);
+
         return $this->getContainer()->get('doctrine')->getManagerForClass($class);
     }
 
     /**
-     * @param $userType
+     * @param string $userType
+     *
      * @return UserRepositoryInterface
      */
-    protected function getUserRepository($userType)
+    protected function getUserRepository(string $userType): UserRepositoryInterface
     {
         $class = $this->getUserModelClass($userType);
+
         return $this->getEntityManager($userType)->getRepository($class);
     }
 
     /**
      * @return array
      */
-    protected function getAvailableUserTypes()
+    protected function getAvailableUserTypes(): array
     {
         $config = $this->getContainer()->getParameter('sylius.user.users');
 
         // Keep only users types which implement \Sylius\Component\User\Model\UserInterface
-        $userTypes = array_filter($config, function ($userTypeConfig) {
+        $userTypes = array_filter($config, function (array $userTypeConfig): bool {
             return isset($userTypeConfig['user']['classes']['model']) && is_a($userTypeConfig['user']['classes']['model'], UserInterface::class, true);
         });
 
@@ -155,11 +159,13 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
     }
 
     /**
-     * @param $userType
+     * @param string $userType
+     *
      * @return string
+     *
      * @throws \InvalidArgumentException
      */
-    protected function getUserModelClass($userType)
+    protected function getUserModelClass(string $userType): string
     {
         $config = $this->getContainer()->getParameter('sylius.user.users');
         if (empty($config[$userType]['user']['classes']['model'])) {
@@ -169,9 +175,10 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
     }
 
     /**
+     * @param InputInterface $input
      * @param OutputInterface $output
      * @param UserInterface $user
      * @param array $securityRoles
      */
-    abstract protected function executeRoleCommand(InputInterface $input, OutputInterface $output, UserInterface $user, array $securityRoles);
+    abstract protected function executeRoleCommand(InputInterface $input, OutputInterface $output, UserInterface $user, array $securityRoles): void;
 }

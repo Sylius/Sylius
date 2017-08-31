@@ -25,7 +25,7 @@ final class Sorter implements SorterInterface
     /**
      * {@inheritdoc}
      */
-    public function sort(DataSourceInterface $dataSource, Grid $grid, Parameters $parameters)
+    public function sort(DataSourceInterface $dataSource, Grid $grid, Parameters $parameters): void
     {
         $expressionBuilder = $dataSource->getExpressionBuilder();
 

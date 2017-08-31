@@ -162,7 +162,7 @@ class OrderFixture extends AbstractFixture
     /**
      * {@inheritdoc}
      */
-    public function load(array $options)
+    public function load(array $options): void
     {
         $channels = $this->channelRepository->findAll();
         $customers = $this->customerRepository->findAll();
@@ -202,7 +202,7 @@ class OrderFixture extends AbstractFixture
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'order';
     }
@@ -210,7 +210,7 @@ class OrderFixture extends AbstractFixture
     /**
      * {@inheritdoc}
      */
-    protected function configureOptionsNode(ArrayNodeDefinition $optionsNode)
+    protected function configureOptionsNode(ArrayNodeDefinition $optionsNode): void
     {
         $optionsNode
             ->children()

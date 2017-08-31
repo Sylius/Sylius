@@ -29,7 +29,7 @@ class Shipment extends BaseShipment implements ShipmentInterface
     /**
      * {@inheritdoc}
      */
-    public function getOrder()
+    public function getOrder(): ?BaseOrderInterface
     {
         return $this->order;
     }
@@ -37,7 +37,7 @@ class Shipment extends BaseShipment implements ShipmentInterface
     /**
      * {@inheritdoc}
      */
-    public function setOrder(BaseOrderInterface $order = null)
+    public function setOrder(?BaseOrderInterface $order): void
     {
         $this->order = $order;
     }

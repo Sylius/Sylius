@@ -36,7 +36,7 @@ final class TranslatorLoaderProvider implements TranslatorLoaderProviderInterfac
     /**
      * {@inheritdoc}
      */
-    public function getLoaders()
+    public function getLoaders(): array
     {
         return $this->loaders;
     }

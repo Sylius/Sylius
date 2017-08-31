@@ -41,7 +41,7 @@ final class ValidAttributeValueValidator extends ConstraintValidator
     /**
      * {@inheritdoc}
      */
-    public function validate($value, Constraint $constraint)
+    public function validate($value, Constraint $constraint): void
     {
         if (!$value instanceof AttributeValueInterface) {
             throw new UnexpectedTypeException(get_class($value), AttributeValueInterface::class);

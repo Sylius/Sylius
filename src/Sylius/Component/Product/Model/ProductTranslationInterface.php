@@ -22,42 +22,42 @@ use Sylius\Component\Resource\Model\SlugAwareInterface;
 interface ProductTranslationInterface extends SlugAwareInterface, ResourceInterface
 {
     /**
-     * @return string
+     * @return string|null
      */
-    public function getName();
+    public function getName(): ?string;
 
     /**
-     * @param string $name
+     * @param string|null $name
      */
-    public function setName($name);
+    public function setName(?string $name): void;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getDescription();
+    public function getDescription(): ?string;
 
     /**
-     * @param string $description
+     * @param string|null $description
      */
-    public function setDescription($description);
+    public function setDescription(?string $description): void;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getMetaKeywords();
+    public function getMetaKeywords(): ?string;
 
     /**
-     * @param string $metaKeywords
+     * @param string|null $metaKeywords
      */
-    public function setMetaKeywords($metaKeywords);
+    public function setMetaKeywords(?string $metaKeywords): void;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getMetaDescription();
+    public function getMetaDescription(): ?string;
 
     /**
-     * @param string $metaDescription
+     * @param string|null $metaDescription
      */
-    public function setMetaDescription($metaDescription);
+    public function setMetaDescription(?string $metaDescription): void;
 }

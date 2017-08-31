@@ -30,10 +30,10 @@ final class ProductGenerateVariantsType extends AbstractResourceType
 
     /**
      * @param string $dataClass
-     * @param string[] $validationGroups
+     * @param array|string[] $validationGroups
      * @param EventSubscriberInterface $generateProductVariants
      */
-    public function __construct($dataClass, $validationGroups, EventSubscriberInterface $generateProductVariants)
+    public function __construct(string $dataClass, array $validationGroups, EventSubscriberInterface $generateProductVariants)
     {
         parent::__construct($dataClass, $validationGroups);
 
@@ -43,7 +43,7 @@ final class ProductGenerateVariantsType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('variants', CollectionType::class, [
@@ -59,7 +59,7 @@ final class ProductGenerateVariantsType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_product_generate_variants';
     }

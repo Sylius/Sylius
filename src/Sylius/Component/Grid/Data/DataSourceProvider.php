@@ -38,7 +38,7 @@ final class DataSourceProvider implements DataSourceProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function getDataSource(Grid $grid, Parameters $parameters)
+    public function getDataSource(Grid $grid, Parameters $parameters): DataSourceInterface
     {
         $driverName = $grid->getDriver();
 

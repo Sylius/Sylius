@@ -44,7 +44,7 @@ final class LimitingOrderItemQuantityModifier implements OrderItemQuantityModifi
     /**
      * {@inheritdoc}
      */
-    public function modify(OrderItemInterface $orderItem, $targetQuantity)
+    public function modify(OrderItemInterface $orderItem, int $targetQuantity): void
     {
         $targetQuantity = min($targetQuantity, $this->limit);
 

@@ -24,5 +24,5 @@ interface ProductFactoryInterface extends TranslatableFactoryInterface
     /**
      * @return ProductInterface
      */
-    public function createWithVariant();
+    public function createWithVariant(): ProductInterface;
 }

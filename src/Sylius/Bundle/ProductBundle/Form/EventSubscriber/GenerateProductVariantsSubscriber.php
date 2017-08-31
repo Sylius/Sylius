@@ -41,7 +41,7 @@ final class GenerateProductVariantsSubscriber implements EventSubscriberInterfac
     /**
      * {@inheritdoc}
      */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             FormEvents::PRE_SET_DATA => 'preSetData',
@@ -51,7 +51,7 @@ final class GenerateProductVariantsSubscriber implements EventSubscriberInterfac
     /**
      * @param FormEvent $event
      */
-    public function preSetData(FormEvent $event)
+    public function preSetData(FormEvent $event): void
     {
         /** @var ProductInterface $product */
         $product = $event->getData();

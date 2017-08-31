@@ -29,42 +29,42 @@ interface AttributeInterface extends
     TranslatableInterface
 {
     /**
-     * @return string
+     * @return string|null
      */
-    public function getType();
+    public function getType(): ?string;
 
     /**
-     * @param string $type
+     * @param string|null $type
      */
-    public function setType($type);
+    public function setType(?string $type): void;
 
     /**
      * @return array
      */
-    public function getConfiguration();
+    public function getConfiguration(): array;
 
     /**
      * @param array $configuration
      */
-    public function setConfiguration(array $configuration);
+    public function setConfiguration(array $configuration): void;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getStorageType();
+    public function getStorageType(): ?string;
 
     /**
      * @param string $storageType
      */
-    public function setStorageType($storageType);
+    public function setStorageType(string $storageType): void;
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getPosition();
+    public function getPosition(): ?int;
 
     /**
-     * @param int $position
+     * @param int|null $position
      */
-    public function setPosition($position);
+    public function setPosition(?int $position): void;
 }

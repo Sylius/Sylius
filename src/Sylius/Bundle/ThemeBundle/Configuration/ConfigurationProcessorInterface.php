@@ -23,5 +23,5 @@ interface ConfigurationProcessorInterface
      *
      * @return array The processed configuration array
      */
-    public function process(array $configs);
+    public function process(array $configs): array;
 }

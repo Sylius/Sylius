@@ -24,7 +24,7 @@ final class SyliusGridExtensionTest extends AbstractExtensionTestCase
     /**
      * @test
      */
-    public function it_sets_configured_grids_as_parameter()
+    public function it_sets_configured_grids_as_parameter(): void
     {
         $this->load([
             'grids' => [
@@ -59,7 +59,7 @@ final class SyliusGridExtensionTest extends AbstractExtensionTestCase
     /**
      * @test
      */
-    public function it_aliases_default_services()
+    public function it_aliases_default_services(): void
     {
         $this->load([]);
 
@@ -70,7 +70,7 @@ final class SyliusGridExtensionTest extends AbstractExtensionTestCase
     /**
      * @test
      */
-    public function it_always_defines_template_parameters()
+    public function it_always_defines_template_parameters(): void
     {
         $this->load([]);
 
@@ -81,7 +81,7 @@ final class SyliusGridExtensionTest extends AbstractExtensionTestCase
     /**
      * @test
      */
-    public function it_sets_filter_templates_as_parameters()
+    public function it_sets_filter_templates_as_parameters(): void
     {
         $this->load([
             'templates' => [
@@ -101,7 +101,7 @@ final class SyliusGridExtensionTest extends AbstractExtensionTestCase
     /**
      * @test
      */
-    public function it_sets_action_templates_as_parameters()
+    public function it_sets_action_templates_as_parameters(): void
     {
         $this->load([
             'templates' => [
@@ -121,7 +121,7 @@ final class SyliusGridExtensionTest extends AbstractExtensionTestCase
     /**
      * {@inheritdoc}
      */
-    protected function getContainerExtensions()
+    protected function getContainerExtensions(): array
     {
         return [
             new SyliusGridExtension(),

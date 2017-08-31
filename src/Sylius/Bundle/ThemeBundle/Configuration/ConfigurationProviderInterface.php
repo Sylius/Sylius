@@ -21,5 +21,5 @@ interface ConfigurationProviderInterface
     /**
      * @return array
      */
-    public function getConfigurations();
+    public function getConfigurations(): array;
 }

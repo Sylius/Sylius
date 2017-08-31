@@ -31,7 +31,7 @@ abstract class ReviewType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('rating', ChoiceType::class, [
@@ -67,7 +67,7 @@ abstract class ReviewType extends AbstractResourceType
      *
      * @return array
      */
-    private function createRatingList($maxRate)
+    private function createRatingList(int $maxRate): array
     {
         $ratings = [];
         for ($i = 1; $i <= $maxRate; ++$i) {

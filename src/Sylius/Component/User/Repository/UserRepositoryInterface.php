@@ -28,5 +28,5 @@ interface UserRepositoryInterface extends RepositoryInterface
      *
      * @return UserInterface|null
      */
-    public function findOneByEmail($email);
+    public function findOneByEmail(string $email): ?UserInterface;
 }

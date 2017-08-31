@@ -26,5 +26,5 @@ interface DriverInterface
      *
      * @return DataSourceInterface
      */
-    public function getDataSource(array $configuration, Parameters $parameters);
+    public function getDataSource(array $configuration, Parameters $parameters): DataSourceInterface;
 }

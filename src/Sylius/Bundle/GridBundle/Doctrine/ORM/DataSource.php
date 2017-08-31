@@ -47,7 +47,7 @@ final class DataSource implements DataSourceInterface
     /**
      * {@inheritdoc}
      */
-    public function restrict($expression, $condition = DataSourceInterface::CONDITION_AND)
+    public function restrict($expression, string $condition = DataSourceInterface::CONDITION_AND): void
     {
         switch ($condition) {
             case DataSourceInterface::CONDITION_AND:
@@ -62,7 +62,7 @@ final class DataSource implements DataSourceInterface
     /**
      * {@inheritdoc}
      */
-    public function getExpressionBuilder()
+    public function getExpressionBuilder(): ExpressionBuilderInterface
     {
         return $this->expressionBuilder;
     }

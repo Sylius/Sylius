@@ -17,6 +17,7 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -41,9 +42,9 @@ final class ThemeScreenshotController
      * @param string $themeName
      * @param int $screenshotNumber
      *
-     * @return BinaryFileResponse
+     * @return Response
      */
-    public function streamScreenshotAction($themeName, $screenshotNumber)
+    public function streamScreenshotAction(string $themeName, int $screenshotNumber): Response
     {
         $screenshotPath = $this->getScreenshotPath($this->getTheme($themeName), $screenshotNumber);
 
@@ -60,7 +61,7 @@ final class ThemeScreenshotController
      *
      * @return string
      */
-    private function getScreenshotPath(ThemeInterface $theme, $screenshotNumber)
+    private function getScreenshotPath(ThemeInterface $theme, int $screenshotNumber): string
     {
         $screenshots = $theme->getScreenshots();
 
@@ -68,7 +69,7 @@ final class ThemeScreenshotController
             throw new NotFoundHttpException(sprintf('Theme "%s" does not have screenshot #%d', $theme->getTitle(), $screenshotNumber));
         }
 
-        $screenshotRelativePath = $screenshots[$screenshotNumber];
+        $screenshotRelativePath = $screenshots[$screenshotNumber]->getPath();
 
         return rtrim($theme->getPath(), \DIRECTORY_SEPARATOR) . \DIRECTORY_SEPARATOR . $screenshotRelativePath;
     }
@@ -78,7 +79,7 @@ final class ThemeScreenshotController
      *
      * @return ThemeInterface
      */
-    private function getTheme($themeName)
+    private function getTheme(string $themeName): ThemeInterface
     {
         $theme = $this->themeRepository->findOneByName($themeName);
         if (null === $theme) {

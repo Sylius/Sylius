@@ -60,7 +60,7 @@ class GridView implements GridViewInterface
     /**
      * {@inheritdoc}
      */
-    public function getDefinition()
+    public function getDefinition(): Grid
     {
         return $this->definition;
     }
@@ -68,7 +68,7 @@ class GridView implements GridViewInterface
     /**
      * {@inheritdoc}
      */
-    public function getParameters()
+    public function getParameters(): Parameters
     {
         return $this->parameters;
     }
@@ -76,7 +76,7 @@ class GridView implements GridViewInterface
     /**
      * {@inheritdoc}
      */
-    public function getSortingOrder($fieldName)
+    public function getSortingOrder(string $fieldName): ?string
     {
         $this->assertFieldIsSortable($fieldName);
 
@@ -94,7 +94,7 @@ class GridView implements GridViewInterface
     /**
      * {@inheritdoc}
      */
-    public function isSortedBy($fieldName)
+    public function isSortedBy(string $fieldName): bool
     {
         $this->assertFieldIsSortable($fieldName);
 
@@ -109,9 +109,9 @@ class GridView implements GridViewInterface
     }
 
     /**
-     * @return array|mixed
+     * @return array
      */
-    private function getCurrentlySortedBy()
+    private function getCurrentlySortedBy(): array
     {
         return $this->parameters->has('sorting')
             ? array_merge($this->definition->getSorting(), $this->parameters->get('sorting'))
@@ -124,7 +124,7 @@ class GridView implements GridViewInterface
      *
      * @throws \InvalidArgumentException
      */
-    private function assertFieldIsSortable($fieldName)
+    private function assertFieldIsSortable(string $fieldName): void
     {
         Assert::true($this->definition->hasField($fieldName), sprintf('Field "%s" does not exist.', $fieldName));
         Assert::true(

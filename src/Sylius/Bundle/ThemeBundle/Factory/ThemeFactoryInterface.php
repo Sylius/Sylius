@@ -26,5 +26,5 @@ interface ThemeFactoryInterface
      *
      * @return ThemeInterface
      */
-    public function create($name, $path);
+    public function create(string $name, string $path): ThemeInterface;
 }

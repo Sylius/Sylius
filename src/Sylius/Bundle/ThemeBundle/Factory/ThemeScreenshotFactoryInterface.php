@@ -25,5 +25,5 @@ interface ThemeScreenshotFactoryInterface
      *
      * @return ThemeScreenshot
      */
-    public function createFromArray(array $data);
+    public function createFromArray(array $data): ThemeScreenshot;
 }

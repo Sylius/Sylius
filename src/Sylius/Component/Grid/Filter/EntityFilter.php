@@ -24,7 +24,7 @@ final class EntityFilter implements FilterInterface
     /**
      * {@inheritdoc}
      */
-    public function apply(DataSourceInterface $dataSource, $name, $data, array $options)
+    public function apply(DataSourceInterface $dataSource, string $name, $data, array $options): void
     {
         if (empty($data)) {
             return;
@@ -40,13 +40,5 @@ final class EntityFilter implements FilterInterface
         }
 
         $dataSource->restrict($expressionBuilder->orX(...$expressions));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getType()
-    {
-        return 'entity';
     }
 }

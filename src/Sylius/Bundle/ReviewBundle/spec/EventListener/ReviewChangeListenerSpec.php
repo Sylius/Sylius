@@ -15,7 +15,6 @@ namespace spec\Sylius\Bundle\ReviewBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ReviewBundle\EventListener\ReviewChangeListener;
 use Sylius\Bundle\ReviewBundle\Updater\ReviewableRatingUpdaterInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Review\Model\ReviewableInterface;
@@ -27,14 +26,9 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  */
 final class ReviewChangeListenerSpec extends ObjectBehavior
 {
-    function let(ReviewableRatingUpdaterInterface $averageRatingUpdater)
+    function let(ReviewableRatingUpdaterInterface $averageRatingUpdater): void
     {
         $this->beConstructedWith($averageRatingUpdater);
-    }
-
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ReviewChangeListener::class);
     }
 
     function it_recalculates_subject_rating_on_accepted_review_deletion(
@@ -42,7 +36,7 @@ final class ReviewChangeListenerSpec extends ObjectBehavior
         GenericEvent $event,
         ReviewInterface $review,
         ReviewableInterface $reviewSubject
-    ) {
+    ): void {
         $event->getSubject()->willReturn($review);
         $review->getStatus()->willReturn(ReviewInterface::STATUS_ACCEPTED);
         $review->getReviewSubject()->willReturn($reviewSubject);
@@ -52,7 +46,7 @@ final class ReviewChangeListenerSpec extends ObjectBehavior
         $this->recalculateSubjectRating($event);
     }
 
-    function it_does_nothing_if_review_was_new($averageRatingUpdater, GenericEvent $event, ReviewInterface $review)
+    function it_does_nothing_if_review_was_new($averageRatingUpdater, GenericEvent $event, ReviewInterface $review): void
     {
         $event->getSubject()->willReturn($review);
         $review->getStatus()->willReturn(ReviewInterface::STATUS_NEW);
@@ -62,7 +56,7 @@ final class ReviewChangeListenerSpec extends ObjectBehavior
         $this->recalculateSubjectRating($event);
     }
 
-    function it_does_nothing_if_review_was_rejected($averageRatingUpdater, GenericEvent $event, ReviewInterface $review)
+    function it_does_nothing_if_review_was_rejected($averageRatingUpdater, GenericEvent $event, ReviewInterface $review): void
     {
         $event->getSubject()->willReturn($review);
         $review->getStatus()->willReturn(ReviewInterface::STATUS_REJECTED);
@@ -72,7 +66,7 @@ final class ReviewChangeListenerSpec extends ObjectBehavior
         $this->recalculateSubjectRating($event);
     }
 
-    function it_throws_exception_if_event_subject_is_not_review_object(GenericEvent $event)
+    function it_throws_exception_if_event_subject_is_not_review_object(GenericEvent $event): void
     {
         $event->getSubject()->willReturn('badObject');
 

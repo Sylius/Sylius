@@ -30,5 +30,5 @@ interface TemplateLocatorInterface
      *
      * @throws ResourceNotFoundException
      */
-    public function locateTemplate(TemplateReferenceInterface $template, ThemeInterface $theme);
+    public function locateTemplate(TemplateReferenceInterface $template, ThemeInterface $theme): string;
 }

@@ -28,7 +28,7 @@ final class FilesystemConfigurationSourceFactory implements ConfigurationSourceF
     /**
      * {@inheritdoc}
      */
-    public function buildConfiguration(ArrayNodeDefinition $node)
+    public function buildConfiguration(ArrayNodeDefinition $node): void
     {
         $node
             ->fixXmlConfig('directory', 'directories')
@@ -46,7 +46,7 @@ final class FilesystemConfigurationSourceFactory implements ConfigurationSourceF
     /**
      * {@inheritdoc}
      */
-    public function initializeSource(ContainerBuilder $container, array $config)
+    public function initializeSource(ContainerBuilder $container, array $config): Definition
     {
         $recursiveFileLocator = new Definition(RecursiveFileLocator::class, [
             new Reference('sylius.theme.finder_factory'),
@@ -72,7 +72,7 @@ final class FilesystemConfigurationSourceFactory implements ConfigurationSourceF
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'filesystem';
     }

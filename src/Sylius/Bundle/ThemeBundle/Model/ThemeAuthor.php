@@ -19,29 +19,29 @@ namespace Sylius\Bundle\ThemeBundle\Model;
 final class ThemeAuthor
 {
     /**
-     * @var string
+     * @var string|null
      */
     private $name;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $email;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $homepage;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $role;
 
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -49,7 +49,7 @@ final class ThemeAuthor
     /**
      * {@inheritdoc}
      */
-    public function setName($name)
+    public function setName(?string $name): void
     {
         $this->name = $name;
     }
@@ -57,7 +57,7 @@ final class ThemeAuthor
     /**
      * {@inheritdoc}
      */
-    public function getEmail()
+    public function getEmail(): ?string
     {
         return $this->email;
     }
@@ -65,7 +65,7 @@ final class ThemeAuthor
     /**
      * {@inheritdoc}
      */
-    public function setEmail($email)
+    public function setEmail(?string $email): void
     {
         $this->email = $email;
     }
@@ -73,7 +73,7 @@ final class ThemeAuthor
     /**
      * {@inheritdoc}
      */
-    public function getHomepage()
+    public function getHomepage(): ?string
     {
         return $this->homepage;
     }
@@ -81,7 +81,7 @@ final class ThemeAuthor
     /**
      * {@inheritdoc}
      */
-    public function setHomepage($homepage)
+    public function setHomepage(?string $homepage): void
     {
         $this->homepage = $homepage;
     }
@@ -89,7 +89,7 @@ final class ThemeAuthor
     /**
      * {@inheritdoc}
      */
-    public function getRole()
+    public function getRole(): ?string
     {
         return $this->role;
     }
@@ -97,7 +97,7 @@ final class ThemeAuthor
     /**
      * {@inheritdoc}
      */
-    public function setRole($role)
+    public function setRole(?string $role): void
     {
         $this->role = $role;
     }

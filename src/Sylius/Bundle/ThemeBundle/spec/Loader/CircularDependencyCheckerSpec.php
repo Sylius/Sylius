@@ -24,19 +24,14 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
  */
 final class CircularDependencyCheckerSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(CircularDependencyChecker::class);
-    }
-
-    function it_implements_circular_dependency_checker_interface()
+    function it_implements_circular_dependency_checker_interface(): void
     {
         $this->shouldImplement(CircularDependencyCheckerInterface::class);
     }
 
     function it_does_not_find_circular_dependency_if_checking_a_theme_without_any_parents(
         ThemeInterface $theme
-    ) {
+    ): void {
         $theme->getParents()->willReturn([]);
 
         $this->check($theme);
@@ -47,7 +42,7 @@ final class CircularDependencyCheckerSpec extends ObjectBehavior
         ThemeInterface $secondTheme,
         ThemeInterface $thirdTheme,
         ThemeInterface $fourthTheme
-    ) {
+    ): void {
         $firstTheme->getParents()->willReturn([$secondTheme, $thirdTheme]);
         $secondTheme->getParents()->willReturn([$thirdTheme, $fourthTheme]);
         $thirdTheme->getParents()->willReturn([$fourthTheme]);
@@ -61,7 +56,7 @@ final class CircularDependencyCheckerSpec extends ObjectBehavior
         ThemeInterface $secondTheme,
         ThemeInterface $thirdTheme,
         ThemeInterface $fourthTheme
-    ) {
+    ): void {
         $firstTheme->getParents()->willReturn([$secondTheme, $thirdTheme]);
         $secondTheme->getParents()->willReturn([$thirdTheme]);
         $thirdTheme->getParents()->willReturn([$fourthTheme]);

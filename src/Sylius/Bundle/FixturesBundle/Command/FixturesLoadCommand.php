@@ -32,7 +32,7 @@ final class FixturesLoadCommand extends ContainerAwareCommand
     /**
      * {@inheritdoc}
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('sylius:fixtures:load')
@@ -44,7 +44,7 @@ final class FixturesLoadCommand extends ContainerAwareCommand
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): void
     {
         if ($input->isInteractive()) {
             /** @var QuestionHelper $questionHelper */
@@ -66,7 +66,7 @@ final class FixturesLoadCommand extends ContainerAwareCommand
     /**
      * @param InputInterface $input
      */
-    private function loadSuites(InputInterface $input)
+    private function loadSuites(InputInterface $input): void
     {
         $suiteName = $input->getArgument('suite');
         $suite = $this->getSuiteRegistry()->getSuite($suiteName);
@@ -77,7 +77,7 @@ final class FixturesLoadCommand extends ContainerAwareCommand
     /**
      * @return SuiteRegistryInterface
      */
-    private function getSuiteRegistry()
+    private function getSuiteRegistry(): SuiteRegistryInterface
     {
         return $this->getContainer()->get('sylius_fixtures.suite_registry');
     }
@@ -85,7 +85,7 @@ final class FixturesLoadCommand extends ContainerAwareCommand
     /**
      * @return SuiteLoaderInterface
      */
-    private function getSuiteLoader()
+    private function getSuiteLoader(): SuiteLoaderInterface
     {
         return $this->getContainer()->get('sylius_fixtures.suite_loader');
     }

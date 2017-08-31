@@ -180,10 +180,10 @@ final class OrderItemUnitsTaxesApplicatorSpec extends ObjectBehavior
         $units->getIterator()->willReturn(new \ArrayIterator([$unit1->getWrappedObject(), $unit2->getWrappedObject()]));
 
         $unit1->getTotal()->willReturn(1000);
-        $calculator->calculate(1000, $taxRate)->willReturn(0);
+        $calculator->calculate(1000, $taxRate)->willReturn(0.00);
 
         $unit2->getTotal()->willReturn(900);
-        $calculator->calculate(900, $taxRate)->willReturn(0);
+        $calculator->calculate(900, $taxRate)->willReturn(0.00);
 
         $adjustmentsFactory->createWithData(AdjustmentInterface::TAX_ADJUSTMENT, Argument::cetera())->shouldNotBeCalled();
         $unit1->addAdjustment(Argument::any())->shouldNotBeCalled();

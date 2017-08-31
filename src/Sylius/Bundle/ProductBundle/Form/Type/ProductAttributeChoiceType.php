@@ -23,7 +23,7 @@ final class ProductAttributeChoiceType extends AttributeChoiceType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_product_attribute_choice';
     }

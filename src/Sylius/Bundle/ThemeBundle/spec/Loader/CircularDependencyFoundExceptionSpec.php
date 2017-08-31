@@ -22,22 +22,17 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
  */
 final class CircularDependencyFoundExceptionSpec extends ObjectBehavior
 {
-    function let()
+    function let(): void
     {
         $this->beConstructedWith([]);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(CircularDependencyFoundException::class);
-    }
-
-    function it_is_a_domain_exception()
+    function it_is_a_domain_exception(): void
     {
         $this->shouldHaveType(\DomainException::class);
     }
 
-    function it_is_a_logic_exception()
+    function it_is_a_logic_exception(): void
     {
         $this->shouldHaveType(\LogicException::class);
     }
@@ -47,7 +42,7 @@ final class CircularDependencyFoundExceptionSpec extends ObjectBehavior
         ThemeInterface $secondTheme,
         ThemeInterface $thirdTheme,
         ThemeInterface $fourthTheme
-    ) {
+    ): void {
         $this->beConstructedWith([$firstTheme, $secondTheme, $thirdTheme, $fourthTheme, $thirdTheme]);
 
         $firstTheme->getName()->willReturn('first/theme');
@@ -63,7 +58,7 @@ final class CircularDependencyFoundExceptionSpec extends ObjectBehavior
         ThemeInterface $secondTheme,
         ThemeInterface $thirdTheme,
         ThemeInterface $fourthTheme
-    ) {
+    ): void {
         $this->beConstructedWith([$firstTheme, $secondTheme, $thirdTheme, $fourthTheme]);
 
         $this->shouldThrow(new \InvalidArgumentException('There is no cycle within given themes.'))->duringInstantiation();

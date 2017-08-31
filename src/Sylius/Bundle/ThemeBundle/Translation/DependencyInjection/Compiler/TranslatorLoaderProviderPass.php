@@ -26,7 +26,7 @@ final class TranslatorLoaderProviderPass implements CompilerPassInterface
     /**
      * {@inheritdoc}
      */
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         try {
             $loaderProvider = $container->findDefinition('sylius.theme.translation.loader_provider');

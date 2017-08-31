@@ -16,8 +16,6 @@ namespace Sylius\Bundle\AdminBundle;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * This bundle contains default Sylius administration panel.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class SyliusAdminBundle extends Bundle

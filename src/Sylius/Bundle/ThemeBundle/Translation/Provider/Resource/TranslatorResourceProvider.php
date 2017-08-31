@@ -47,7 +47,7 @@ final class TranslatorResourceProvider implements TranslatorResourceProviderInte
     /**
      * {@inheritdoc}
      */
-    public function getResources()
+    public function getResources(): array
     {
         $this->initializeIfNeeded();
 
@@ -57,14 +57,14 @@ final class TranslatorResourceProvider implements TranslatorResourceProviderInte
     /**
      * {@inheritdoc}
      */
-    public function getResourcesLocales()
+    public function getResourcesLocales(): array
     {
         $this->initializeIfNeeded();
 
         return $this->resourcesLocales;
     }
 
-    private function initializeIfNeeded()
+    private function initializeIfNeeded(): void
     {
         foreach ($this->filepaths as $key => $filepath) {
             $resource = new TranslationResource($filepath);

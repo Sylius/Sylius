@@ -27,5 +27,5 @@ interface ProductVariantFactoryInterface extends FactoryInterface
      *
      * @return ProductVariantInterface
      */
-    public function createForProduct(ProductInterface $product);
+    public function createForProduct(ProductInterface $product): ProductVariantInterface;
 }

@@ -18,6 +18,18 @@
   * `AddressInterface::setProviceName`
   * `ProvinceInterface::setCountry`
   * `ZoneMemberInterface::setBelongsTo`
+  
+### Attribute / AttributeBundle
+
+* `SelectAttributeType` has been made final, use decoration instead of extending it.
+* `AttributeFactory` has been made final, use decoration instead of extending it.
+* `ProductAttributeValueInterface::setProduct` method does not longer have a default null argument and requires one to be explicitly passed.
+
+### AdminBundle
+
+* `CustomerStatisticsController` has been made final, use decoration instead of extending it.
+* `DashboardController` has been made final, use decoration instead of extending it.
+* `ImpersonateUserController` has been made final, use decoration instead of extending it.
 
 ### AdminApiBundle
 
@@ -48,15 +60,37 @@
 ### Mailer / MailerBundle
 
 * `Email` has been made final, use decoration instead of extending it.
+* `SenderInterface::send` method has changed to add `replyTo` argument
 
 ### Order / OrderBundle
 
 * In order to be compatibile with Doctrine ORM 2.6+ and be more consistent 
   `OrderRepositoryInterface::count()` signature was changed to `OrderRepositoryInterface::countPlacedOrders()`.
+  
+* The following methods does not longer have a default null argument and requires one to be explicitly passed:
+
+  * `AdjustableInterface::getAdjustments`
+  * `AdjustmentInterface::setAdjustable`
+  * `OrderAwareInterace::setOrder`
+  * `OrderInterface::setCheckoutCompletedAt`
+  
+* `OrderInterface::getAdjustmentsRecursively` and `OrderItemInterface::getAdjustmentsRecursively` return type changed from `array` to `Collection`.
 
 ### Payment / PaymentBundle
 
 * In `PaymentInterface::setMethod` method the default value of `PaymentMethodInterface $method` parameter has been removed.
+
+### Product / ProductBundle
+
+* `ProductAttributeController` has been made final, use decoration instead of extending it.
+* `ProductVariantCombination` has been made final, use decoration instead of extending it.
+* `ProductVariantCombinationValidator` has been made final, use decoration instead of extending it.
+* The following methods does not longer have a default null argument and requires one to be explicitly passed:
+  
+  * `ProductAssociationInterface::setOwner`
+  * `ProductAttributeValueInterface::setProduct`
+  * `ProductOptionValueInterface::setOption`
+  * `ProductVariantInterface::setProduct`
 
 ### Promotion / PromotionBundle
 
@@ -81,9 +115,15 @@
   * `Archivable::setArchivedAt`
   * `SlugAwareInterface::setSlug`
   
-### Taxonomy / TaxonomyBundle
+### Review / ReviewBundle
 
-* `TaxonInterface::getParents` method was removed (taxon has at most one parent).
+* The `ReviewInterface::setAuthor` method does not longer have a default null argument and requires one to be explicitly passed.
+* The `ReviewFactoryInterface::createForSubjectWithReviewer` method does not longer have a default null value for `$reviewer` argument and requires one to be explicitly passed.
+* Default null value of `ReviewFactoryInterface::createForSubjectWithReviewer` was removed. To create a review without reviewer use `createForSubject` method from the same interface instead. 
+  
+### ShopBundle
+
+* `ContactController` has been made final, use decoration instead of extending it.
 
 ### Shipping / ShippingBundle
 
@@ -94,6 +134,37 @@
     * `ShipmentInterface::setMethod`
     * `ShipmentUnitInterface::setShipment`
     * `ShipmentMethodInterface::setCategory`
+    
+### Taxation / TaxationBundle
+
+* The following methods does not longer have a default null argument and requires one to be explicitly passed:
+
+  * `TaxRateInterface::setTranslatable`
+  * `TaxRateInterface::setCategory`
+
+### Taxonomy / TaxonomyBundle
+
+* `TaxonInterface::getParents` method was renamed to `TaxonInterface::getAncestors`.
+
+### ThemeBundle
+
+* `ThemeHierarchyProviderInterface::getThemeHierarchy` does not longer accepts null as the passed argument.
+
+### User / UserBundle
+
+* The following classes have been made final, use decoration instead of extending them:
+
+  * `UserDeleteListener`
+  * `UserLastLoginSubscriber`
+  * `UserReloaderListener`
+
+* The following methods does not longer have a default null argument and requires one to be explicitly passed:
+
+  * `UserAwareInterface::setUser`
+  * `UserInterface::setPasswordRequestedAt`
+  * `UserInterface::setVerifiedAt`
+  * `UserInterface::setExpiresAt`
+  * `UserInterface::setLastLogin`
 
 # UPGRADE FROM 1.0.0-beta.2 to 1.0.0-beta.3
 

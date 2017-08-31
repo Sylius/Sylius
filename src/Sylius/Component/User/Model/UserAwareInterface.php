@@ -19,12 +19,12 @@ namespace Sylius\Component\User\Model;
 interface UserAwareInterface
 {
     /**
-     * @return UserInterface
+     * @return UserInterface|null
      */
-    public function getUser();
+    public function getUser(): ?UserInterface;
 
     /**
-     * @param UserInterface $user
+     * @param UserInterface|null $user
      */
-    public function setUser(UserInterface $user = null);
+    public function setUser(?UserInterface $user);
 }

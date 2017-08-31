@@ -36,7 +36,7 @@
         "jackalope/jackalope-doctrine-dbal": "^1.2",
         "matthiasnoback/symfony-config-test": "^2.0",
         "matthiasnoback/symfony-dependency-injection-test": "^1.0",
-        "ocramius/proxy-manager": "^1.0",
+        "ocramius/proxy-manager": "^2.1",
         "pagerfanta/pagerfanta": "^1.0",
         "phpspec/phpspec": "^4.0",
         "phpunit/phpunit": "^5.6",

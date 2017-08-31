@@ -24,12 +24,7 @@ use Sylius\Component\Grid\Filtering\FilterInterface;
  */
 final class StringFilterSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(StringFilter::class);
-    }
-
-    function it_implements_filter_interface()
+    function it_implements_filter_interface(): void
     {
         $this->shouldImplement(FilterInterface::class);
     }
@@ -37,7 +32,7 @@ final class StringFilterSpec extends ObjectBehavior
     function it_filters_with_like_by_default(
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
-    ) {
+    ): void {
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
 
         $expressionBuilder->like('firstName', '%John%')->willReturn('EXPR');
@@ -49,7 +44,7 @@ final class StringFilterSpec extends ObjectBehavior
     function it_filters_equal_strings(
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
-    ) {
+    ): void {
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
 
         $expressionBuilder->equals('firstName', 'John')->willReturn('EXPR');
@@ -61,7 +56,7 @@ final class StringFilterSpec extends ObjectBehavior
     function it_filters_not_equal_strings(
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
-    ) {
+    ): void {
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
 
         $expressionBuilder->notEquals('firstName', 'John')->willReturn('EXPR');
@@ -73,7 +68,7 @@ final class StringFilterSpec extends ObjectBehavior
     function it_filters_data_containing_empty_strings(
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
-    ) {
+    ): void {
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
 
         $expressionBuilder->isNull('firstName')->willReturn('EXPR');
@@ -85,7 +80,7 @@ final class StringFilterSpec extends ObjectBehavior
     function it_filters_data_containing_not_empty_strings(
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
-    ) {
+    ): void {
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
 
         $expressionBuilder->isNotNull('firstName')->willReturn('EXPR');
@@ -97,7 +92,7 @@ final class StringFilterSpec extends ObjectBehavior
     function it_filters_data_containing_a_string(
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
-    ) {
+    ): void {
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
 
         $expressionBuilder->like('firstName', '%John%')->willReturn('EXPR');
@@ -109,7 +104,7 @@ final class StringFilterSpec extends ObjectBehavior
     function it_filters_data_not_containing_a_string(
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
-    ) {
+    ): void {
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
 
         $expressionBuilder->notLike('firstName', '%John%')->willReturn('EXPR');
@@ -121,7 +116,7 @@ final class StringFilterSpec extends ObjectBehavior
     function it_filters_data_starting_with_a_string(
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
-    ) {
+    ): void {
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
 
         $expressionBuilder->like('firstName', 'John%')->willReturn('EXPR');
@@ -133,7 +128,7 @@ final class StringFilterSpec extends ObjectBehavior
     function it_filters_data_ending_with_a_string(
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
-    ) {
+    ): void {
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
 
         $expressionBuilder->like('firstName', '%John')->willReturn('EXPR');
@@ -145,7 +140,7 @@ final class StringFilterSpec extends ObjectBehavior
     function it_filters_data_containing_one_of_strings(
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
-    ) {
+    ): void {
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
 
         $expressionBuilder->in('firstName', ['John', 'Paul', 'Rick'])->willReturn('EXPR');
@@ -157,7 +152,7 @@ final class StringFilterSpec extends ObjectBehavior
     function it_filters_data_containing_none_of_strings(
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
-    ) {
+    ): void {
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
 
         $expressionBuilder->notIn('firstName', ['John', 'Paul', 'Rick'])->willReturn('EXPR');
@@ -169,7 +164,7 @@ final class StringFilterSpec extends ObjectBehavior
     function it_filters_in_multiple_fields(
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
-    ) {
+    ): void {
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
 
         $expressionBuilder->like('firstName', '%John%')->willReturn('EXPR1');
@@ -184,7 +179,7 @@ final class StringFilterSpec extends ObjectBehavior
     function it_filters_translation_fields(
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
-    ) {
+    ): void {
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
 
         $expressionBuilder->like('translation.name', '%John%')->willReturn('EXPR');
@@ -197,7 +192,7 @@ final class StringFilterSpec extends ObjectBehavior
     function it_throws_an_exception_if_type_is_unknown(
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
-    ) {
+    ): void {
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
 
         $this->shouldThrow(\InvalidArgumentException::class)->during('apply', [
@@ -211,7 +206,7 @@ final class StringFilterSpec extends ObjectBehavior
     function it_ignores_filter_if_its_value_is_empty_and_the_filter_depends_on_it(
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
-    ) {
+    ): void {
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
 
         $this->apply($dataSource, 'firstName', ['type' => StringFilter::TYPE_CONTAINS, 'value' => ''], []);
@@ -227,7 +222,7 @@ final class StringFilterSpec extends ObjectBehavior
     function it_does_not_ignore_filter_if_its_value_is_zero(
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
-    ) {
+    ): void {
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
 
         $expressionBuilder->like('firstName', '%0%')->willReturn('EXPR');

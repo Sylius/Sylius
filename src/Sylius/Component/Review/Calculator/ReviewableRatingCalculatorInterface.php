@@ -26,5 +26,5 @@ interface ReviewableRatingCalculatorInterface
      *
      * @return float
      */
-    public function calculate(ReviewableInterface $reviewable);
+    public function calculate(ReviewableInterface $reviewable): float;
 }

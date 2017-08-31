@@ -31,18 +31,18 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
  */
 final class ValidAttributeValueValidatorSpec extends ObjectBehavior
 {
-    function let(ServiceRegistryInterface $attributeTypesRegistry, ExecutionContextInterface $context)
+    function let(ServiceRegistryInterface $attributeTypesRegistry, ExecutionContextInterface $context): void
     {
         $this->beConstructedWith($attributeTypesRegistry);
         $this->initialize($context);
     }
 
-    function it_is_initializable()
+    function it_is_initializable(): void
     {
         $this->shouldHaveType(ValidAttributeValueValidator::class);
     }
 
-    function it_is_constraint_validator()
+    function it_is_constraint_validator(): void
     {
         $this->shouldHaveType(ConstraintValidator::class);
     }
@@ -53,7 +53,7 @@ final class ValidAttributeValueValidatorSpec extends ObjectBehavior
         AttributeValueInterface $attributeValue,
         ServiceRegistryInterface $attributeTypesRegistry,
         ValidAttributeValue $attributeValueConstraint
-    ) {
+    ): void {
         $attributeValue->getType()->willReturn(TextAttributeType::TYPE);
         $attributeTypesRegistry->get('text')->willReturn($attributeType);
         $attributeValue->getAttribute()->willReturn($attribute);
@@ -67,7 +67,7 @@ final class ValidAttributeValueValidatorSpec extends ObjectBehavior
     function it_throws_exception_if_validated_value_is_not_attribute_value(
         \DateTime $badObject,
         ValidAttributeValue $attributeValueConstraint
-    ) {
+    ): void {
         $this
             ->shouldThrow(new UnexpectedTypeException('\DateTimeInterface', AttributeValueInterface::class))
             ->during('validate', [$badObject, $attributeValueConstraint])

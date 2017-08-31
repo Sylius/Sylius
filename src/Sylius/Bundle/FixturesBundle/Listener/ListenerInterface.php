@@ -23,5 +23,5 @@ interface ListenerInterface extends ConfigurationInterface
     /**
      * @return string
      */
-    public function getName();
+    public function getName(): string;
 }

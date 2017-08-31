@@ -24,7 +24,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class CustomerStatisticsController
+final class CustomerStatisticsController
 {
     /**
      * @var CustomerStatisticsProviderInterface
@@ -63,7 +63,7 @@ class CustomerStatisticsController
      *
      * @throws HttpException
      */
-    public function renderAction(Request $request)
+    public function renderAction(Request $request): Response
     {
         $customerId = $request->query->get('customerId');
 

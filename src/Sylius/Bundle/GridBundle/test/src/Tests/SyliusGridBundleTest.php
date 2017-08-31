@@ -19,12 +19,12 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * @author Magdalena Banasiak <magdalena.banasiak@gmail.com>
  */
-class SyliusGridBundleTest extends WebTestCase
+final class SyliusGridBundleTest extends WebTestCase
 {
     /**
      * @test
      */
-    public function its_services_are_initializable()
+    public function its_services_are_initializable(): void
     {
         /** @var ContainerInterface $container */
         $container = self::createClient()->getContainer();

@@ -53,7 +53,7 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
     /**
      * {@inheritdoc}
      */
-    public function equals(BaseOrderItemInterface $item)
+    public function equals(BaseOrderItemInterface $item): bool
     {
         return parent::equals($item) || ($item instanceof static && $item->getVariant() === $this->variant);
     }

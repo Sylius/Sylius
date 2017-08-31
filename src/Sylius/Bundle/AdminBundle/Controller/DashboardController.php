@@ -26,7 +26,7 @@ use Webmozart\Assert\Assert;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class DashboardController
+final class DashboardController
 {
     /**
      * @var DashboardStatisticsProviderInterface
@@ -71,7 +71,7 @@ class DashboardController
      *
      * @return Response
      */
-    public function indexAction(Request $request)
+    public function indexAction(Request $request): Response
     {
         $channelCode = $request->query->get('channel');
 
@@ -91,11 +91,11 @@ class DashboardController
     }
 
     /**
-     * @param string $channelCode
+     * @param string|null $channelCode
      *
      * @return ChannelInterface|null
      */
-    private function findChannelByCodeOrFindFirst($channelCode)
+    private function findChannelByCodeOrFindFirst(?string $channelCode): ?ChannelInterface
     {
         $channel = null;
         if (null !== $channelCode) {

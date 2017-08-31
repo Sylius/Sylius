@@ -40,7 +40,7 @@ final class TestThemeConfigurationManager implements TestThemeConfigurationManag
      * @param ConfigurationProcessorInterface $configurationProcessor
      * @param string $cacheDir
      */
-    public function __construct(ConfigurationProcessorInterface $configurationProcessor, $cacheDir)
+    public function __construct(ConfigurationProcessorInterface $configurationProcessor, string $cacheDir)
     {
         $this->configurationProcessor = $configurationProcessor;
         $this->filesystem = new Filesystem();
@@ -50,7 +50,7 @@ final class TestThemeConfigurationManager implements TestThemeConfigurationManag
     /**
      * {@inheritdoc}
      */
-    public function findAll()
+    public function findAll(): array
     {
         $this->initializeIfNeeded();
 
@@ -60,7 +60,7 @@ final class TestThemeConfigurationManager implements TestThemeConfigurationManag
     /**
      * {@inheritdoc}
      */
-    public function add(array $configuration)
+    public function add(array $configuration): void
     {
         $this->initializeIfNeeded();
 
@@ -77,7 +77,7 @@ final class TestThemeConfigurationManager implements TestThemeConfigurationManag
     /**
      * {@inheritdoc}
      */
-    public function remove($themeName)
+    public function remove(string $themeName): void
     {
         $this->initializeIfNeeded();
 
@@ -93,7 +93,7 @@ final class TestThemeConfigurationManager implements TestThemeConfigurationManag
     /**
      * {@inheritdoc}
      */
-    public function clear()
+    public function clear(): void
     {
         $configurationsDirectory = dirname($this->configurationsFile);
 
@@ -105,7 +105,7 @@ final class TestThemeConfigurationManager implements TestThemeConfigurationManag
     /**
      * @return array
      */
-    private function load()
+    private function load(): array
     {
         return unserialize(file_get_contents($this->configurationsFile));
     }
@@ -113,12 +113,12 @@ final class TestThemeConfigurationManager implements TestThemeConfigurationManag
     /**
      * @param array $configurations
      */
-    private function save(array $configurations)
+    private function save(array $configurations): void
     {
         file_put_contents($this->configurationsFile, serialize($configurations));
     }
 
-    private function initializeIfNeeded()
+    private function initializeIfNeeded(): void
     {
         if ($this->filesystem->exists($this->configurationsFile)) {
             return;
@@ -127,7 +127,7 @@ final class TestThemeConfigurationManager implements TestThemeConfigurationManag
         $this->initialize();
     }
 
-    private function initialize()
+    private function initialize(): void
     {
         $configurationsDirectory = dirname($this->configurationsFile);
 
@@ -139,7 +139,7 @@ final class TestThemeConfigurationManager implements TestThemeConfigurationManag
     /**
      * @param string $themeName
      */
-    private function initializeTheme($themeName)
+    private function initializeTheme(string $themeName): void
     {
         $themeDirectory = $this->getThemeDirectory($themeName);
 
@@ -149,7 +149,7 @@ final class TestThemeConfigurationManager implements TestThemeConfigurationManag
     /**
      * @param string $themeName
      */
-    private function clearTheme($themeName)
+    private function clearTheme(string $themeName): void
     {
         $themeDirectory = $this->getThemeDirectory($themeName);
 
@@ -165,7 +165,7 @@ final class TestThemeConfigurationManager implements TestThemeConfigurationManag
      *
      * @return string
      */
-    private function getThemeDirectory($themeName)
+    private function getThemeDirectory(string $themeName): string
     {
         return rtrim(dirname($this->configurationsFile), '/') . '/' . $themeName;
     }

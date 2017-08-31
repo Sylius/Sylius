@@ -60,9 +60,9 @@ class ProductOption implements ProductOptionInterface
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
-        return $this->getName();
+        return (string) $this->getName();
     }
 
     /**
@@ -92,7 +92,7 @@ class ProductOption implements ProductOptionInterface
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->getTranslation()->getName();
     }
@@ -100,7 +100,7 @@ class ProductOption implements ProductOptionInterface
     /**
      * {@inheritdoc}
      */
-    public function setName($name)
+    public function setName(?string $name): void
     {
         $this->getTranslation()->setName($name);
     }
@@ -108,7 +108,7 @@ class ProductOption implements ProductOptionInterface
     /**
      * {@inheritdoc}
      */
-    public function getPosition()
+    public function getPosition(): ?int
     {
         return $this->position;
     }
@@ -116,7 +116,7 @@ class ProductOption implements ProductOptionInterface
     /**
      * {@inheritdoc}
      */
-    public function setPosition($position)
+    public function setPosition(?int $position): void
     {
         $this->position = $position;
     }
@@ -124,7 +124,7 @@ class ProductOption implements ProductOptionInterface
     /**
      * {@inheritdoc}
      */
-    public function getValues()
+    public function getValues(): Collection
     {
         return $this->values;
     }
@@ -132,7 +132,7 @@ class ProductOption implements ProductOptionInterface
     /**
      * {@inheritdoc}
      */
-    public function addValue(ProductOptionValueInterface $value)
+    public function addValue(ProductOptionValueInterface $value): void
     {
         if (!$this->hasValue($value)) {
             $value->setOption($this);
@@ -143,7 +143,7 @@ class ProductOption implements ProductOptionInterface
     /**
      * {@inheritdoc}
      */
-    public function removeValue(ProductOptionValueInterface $value)
+    public function removeValue(ProductOptionValueInterface $value): void
     {
         if ($this->hasValue($value)) {
             $this->values->removeElement($value);
@@ -154,7 +154,7 @@ class ProductOption implements ProductOptionInterface
     /**
      * {@inheritdoc}
      */
-    public function hasValue(ProductOptionValueInterface $value)
+    public function hasValue(ProductOptionValueInterface $value): bool
     {
         return $this->values->contains($value);
     }
@@ -162,7 +162,7 @@ class ProductOption implements ProductOptionInterface
     /**
      * {@inheritdoc}
      */
-    protected function createTranslation()
+    protected function createTranslation(): ProductOptionTranslationInterface
     {
         return new ProductOptionTranslation();
     }

@@ -23,7 +23,7 @@ final class Filesystem extends BaseFilesystem implements FilesystemInterface
     /**
      * {@inheritdoc}
      */
-    public function getFileContents($file)
+    public function getFileContents(string $file): string
     {
         return file_get_contents($file);
     }

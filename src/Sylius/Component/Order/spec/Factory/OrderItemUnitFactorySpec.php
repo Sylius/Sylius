@@ -26,22 +26,17 @@ use Sylius\Component\Resource\Exception\UnsupportedMethodException;
  */
 final class OrderItemUnitFactorySpec extends ObjectBehavior
 {
-    function let()
+    function let(): void
     {
         $this->beConstructedWith(OrderItemUnit::class);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(OrderItemUnitFactory::class);
-    }
-
-    function it_implements_a_factory_interface()
+    function it_implements_a_factory_interface(): void
     {
         $this->shouldImplement(OrderItemUnitFactoryInterface::class);
     }
 
-    function it_throws_an_exception_while_trying_create_order_item_unit_without_order_item()
+    function it_throws_an_exception_while_trying_create_order_item_unit_without_order_item(): void
     {
         $this->shouldThrow(UnsupportedMethodException::class)->during('createNew');
     }
@@ -49,7 +44,7 @@ final class OrderItemUnitFactorySpec extends ObjectBehavior
     function it_creates_a_new_order_item_unit_with_given_order_item(
         OrderItemInterface $orderItem,
         OrderItemUnitInterface $orderItemUnit
-    ) {
+    ): void {
         $orderItemUnit->getOrderItem()->willReturn($orderItem);
 
         $this->createForItem($orderItem)->shouldBeSameAs($orderItemUnit);

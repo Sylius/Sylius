@@ -39,12 +39,12 @@ class OrderSequence implements OrderSequenceInterface
     /**
      * {@inheritdoc}
      */
-    public function getIndex()
+    public function getIndex():int
     {
         return $this->index;
     }
 
-    public function incrementIndex()
+    public function incrementIndex(): void
     {
         ++$this->index;
     }

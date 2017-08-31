@@ -17,7 +17,6 @@ use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
-use Sylius\Component\Product\Resolver\DefaultProductVariantResolver;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 
 /**
@@ -25,12 +24,7 @@ use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
  */
 final class DefaultProductVariantResolverSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(DefaultProductVariantResolver::class);
-    }
-
-    function it_implements_variant_resolver_interface()
+    function it_implements_variant_resolver_interface(): void
     {
         $this->shouldImplement(ProductVariantResolverInterface::class);
     }
@@ -39,7 +33,7 @@ final class DefaultProductVariantResolverSpec extends ObjectBehavior
         ProductInterface $product,
         ProductVariantInterface $variant,
         Collection $variants
-    ) {
+    ): void {
         $product->getVariants()->willReturn($variants);
         $variants->isEmpty()->willReturn(false);
         $variants->first()->willReturn($variant);
@@ -47,7 +41,7 @@ final class DefaultProductVariantResolverSpec extends ObjectBehavior
         $this->getVariant($product)->shouldReturn($variant);
     }
 
-    function it_returns_null_if_first_variant_is_not_defined(Collection $variants, ProductInterface $product)
+    function it_returns_null_if_first_variant_is_not_defined(Collection $variants, ProductInterface $product): void
     {
         $product->getVariants()->willReturn($variants);
         $variants->isEmpty()->willReturn(true);

@@ -24,7 +24,7 @@ interface ProductVariantResolverInterface
     /**
      * @param ProductInterface $subject
      *
-     * @return ProductVariantInterface
+     * @return ProductVariantInterface|null
      */
-    public function getVariant(ProductInterface $subject);
+    public function getVariant(ProductInterface $subject): ?ProductVariantInterface;
 }

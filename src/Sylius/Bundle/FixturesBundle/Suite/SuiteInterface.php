@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\FixturesBundle\Suite;
 
+use Sylius\Bundle\FixturesBundle\Fixture\FixtureInterface;
+use Sylius\Bundle\FixturesBundle\Listener\ListenerInterface;
+
 /**
  * @author Kamil Kokot <kamil@kokot.me>
  */
@@ -21,19 +24,17 @@ interface SuiteInterface
     /**
      * @return string
      */
-    public function getName();
+    public function getName(): string;
 
     /**
-     * @see \Sylius\Bundle\FixturesBundle\Fixture\FixtureInterface
-     *
-     * @return \Traversable Fixtures as keys, options as values
+     * @return iterable|FixtureInterface[] Fixtures as keys, options as values
      */
-    public function getFixtures();
+    public function getFixtures(): iterable;
 
     /**
      * @see \Sylius\Bundle\FixturesBundle\Listener\ListenerInterface
      *
-     * @return \Traversable Listeners as keys, options as values
+     * @return iterable|ListenerInterface[] Listeners as keys, options as values
      */
-    public function getListeners();
+    public function getListeners(): iterable;
 }
