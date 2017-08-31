@@ -126,15 +126,17 @@ final class ORMTranslatableListener implements EventSubscriber
         /** @var MetadataInterface $translationResourceMetadata */
         $translationResourceMetadata = $this->resourceMetadataRegistry->get($resourceMetadata->getAlias().'_translation');
 
-        $metadata->mapOneToMany([
-            'fieldName' => 'translations',
-            'targetEntity' => $translationResourceMetadata->getClass('model'),
-            'mappedBy' => 'translatable',
-            'fetch' => ClassMetadataInfo::FETCH_EXTRA_LAZY,
-            'indexBy' => 'locale',
-            'cascade' => ['persist', 'merge', 'remove'],
-            'orphanRemoval' => true,
-        ]);
+        if (!$metadata->hasAssociation('translations')) {
+            $metadata->mapOneToMany([
+                'fieldName' => 'translations',
+                'targetEntity' => $translationResourceMetadata->getClass('model'),
+                'mappedBy' => 'translatable',
+                'fetch' => ClassMetadataInfo::FETCH_EXTRA_LAZY,
+                'indexBy' => 'locale',
+                'cascade' => ['persist', 'merge', 'remove'],
+                'orphanRemoval' => true,
+            ]);
+        }
     }
 
     /**
@@ -155,17 +157,19 @@ final class ORMTranslatableListener implements EventSubscriber
         /** @var MetadataInterface $translatableResourceMetadata */
         $translatableResourceMetadata = $this->resourceMetadataRegistry->get(str_replace('_translation', '', $resourceMetadata->getAlias()));
 
-        $metadata->mapManyToOne([
-            'fieldName' => 'translatable',
-            'targetEntity' => $translatableResourceMetadata->getClass('model'),
-            'inversedBy' => 'translations',
-            'joinColumns' => [[
-                'name' => 'translatable_id',
-                'referencedColumnName' => 'id',
-                'onDelete' => 'CASCADE',
-                'nullable' => false,
-            ]],
-        ]);
+        if (!$metadata->hasAssociation('translatable')) {
+            $metadata->mapManyToOne([
+                'fieldName' => 'translatable',
+                'targetEntity' => $translatableResourceMetadata->getClass('model'),
+                'inversedBy' => 'translations',
+                'joinColumns' => [[
+                    'name' => 'translatable_id',
+                    'referencedColumnName' => 'id',
+                    'onDelete' => 'CASCADE',
+                    'nullable' => false,
+                ]],
+            ]);
+        }
 
         if (!$metadata->hasField('locale')) {
             $metadata->mapField([
