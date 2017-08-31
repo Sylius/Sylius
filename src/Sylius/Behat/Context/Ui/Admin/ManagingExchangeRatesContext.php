@@ -185,7 +185,7 @@ final class ManagingExchangeRatesContext implements Context
     {
         $this->indexPage->open();
 
-        $this->assertExchangeRateWithRatioIsOnTheList((float)$ratio, $sourceCurrency->getName(), $targetCurrency->getName());
+        $this->assertExchangeRateWithRatioIsOnTheList((float) $ratio, $sourceCurrency->getName(), $targetCurrency->getName());
     }
 
     /**
