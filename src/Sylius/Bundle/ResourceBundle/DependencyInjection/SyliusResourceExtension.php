@@ -85,7 +85,7 @@ final class SyliusResourceExtension extends Extension
             DriverProvider::get($metadata)->load($container, $metadata);
 
             if ($metadata->hasParameter('translation')) {
-                $alias = $alias.'_translation';
+                $alias .= '_translation';
                 $resourceConfig = array_merge(['driver' => $resourceConfig['driver']], $resourceConfig['translation']);
 
                 $resources = $container->hasParameter('sylius.resources') ? $container->getParameter('sylius.resources') : [];
