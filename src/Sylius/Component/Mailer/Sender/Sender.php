@@ -66,7 +66,7 @@ final class Sender implements SenderInterface
     /**
      * {@inheritdoc}
      */
-    public function send(string $code, array $recipients, array $data = [], array $attachments = []): void
+    public function send(string $code, array $recipients, array $data = [], array $attachments = [], array $replyTo = []): void
     {
         $email = $this->provider->getEmail($code);
 
@@ -86,7 +86,8 @@ final class Sender implements SenderInterface
             $renderedEmail,
             $email,
             $data,
-            $attachments
+            $attachments,
+            $replyTo
         );
     }
 }

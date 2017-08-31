@@ -43,7 +43,9 @@ final class ContactEmailManagerSpec extends ObjectBehavior
                         'email' => 'customer@example.com',
                         'message' => 'Hello!',
                     ],
-                ]
+                ],
+                [],
+                ['customer@example.com']
             )
             ->shouldBeCalled()
         ;

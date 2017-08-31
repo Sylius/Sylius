@@ -42,17 +42,23 @@ final class EmailSendEvent extends Event
     protected $data;
 
     /**
+     * @var string[]
+     */
+    protected $replyTo;
+
+    /**
      * @param mixed $message
      * @param array $recipients
      * @param EmailInterface $email
      * @param array $data
      */
-    public function __construct($message, EmailInterface $email, array $data, array $recipients = [])
+    public function __construct($message, EmailInterface $email, array $data, array $recipients = [], array $replyTo = [])
     {
         $this->message = $message;
         $this->email = $email;
         $this->data = $data;
         $this->recipients = $recipients;
+        $this->replyTo = $replyTo;
     }
 
     /**
@@ -85,5 +91,13 @@ final class EmailSendEvent extends Event
     public function getData(): array
     {
         return $this->data;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getReplyTo(): array
+    {
+        return $this->replyTo;
     }
 }
