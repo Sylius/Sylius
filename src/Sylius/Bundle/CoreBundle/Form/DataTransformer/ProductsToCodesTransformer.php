@@ -43,7 +43,7 @@ final class ProductsToCodesTransformer implements DataTransformerInterface
      */
     public function transform($value)
     {
-        if (!is_array($value) && !is_null($value)) {
+        if (!is_array($value) && null !== $value) {
             throw new UnexpectedTypeException($value, 'array');
         }
 

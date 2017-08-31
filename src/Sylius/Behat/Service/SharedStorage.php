@@ -63,7 +63,7 @@ class SharedStorage implements SharedStorageInterface
     public function getLatestResource()
     {
         if (!isset($this->clipboard[$this->latestKey])) {
-            throw new \InvalidArgumentException(sprintf('There is no latest resource!', $this->latestKey));
+            throw new \InvalidArgumentException(sprintf('There is no "%s" latest resource!', $this->latestKey));
         }
 
         return $this->clipboard[$this->latestKey];

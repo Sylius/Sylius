@@ -98,7 +98,7 @@ class ProductReviewExampleFactory extends AbstractExampleFactory implements Exam
         $productReview->setRating($options['rating']);
         $options['product']->addReview($productReview);
 
-        $this->applyReviewTransition($productReview, $options['status'] ? $options['status'] : $this->getRandomStatus());
+        $this->applyReviewTransition($productReview, $options['status'] ?: $this->getRandomStatus());
 
         return $productReview;
     }

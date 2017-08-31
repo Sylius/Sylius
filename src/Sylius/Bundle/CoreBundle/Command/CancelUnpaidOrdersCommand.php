@@ -33,7 +33,6 @@ class CancelUnpaidOrdersCommand extends ContainerAwareCommand
             ->setDescription(
                 'Removes order that have been unpaid for a configured period. Configuration parameter - sylius_order.order_expiration_period.'
             );
-        ;
     }
 
     /**

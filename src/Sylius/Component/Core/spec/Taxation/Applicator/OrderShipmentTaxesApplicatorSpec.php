@@ -114,7 +114,7 @@ final class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
         $order->getShippingTotal()->willReturn(10);
         $order->getShipments()->willReturn(new ArrayCollection([]));
 
-        $this->shouldThrow(\LogicException::class)->during('apply', [$order, $zone]);;
+        $this->shouldThrow(\LogicException::class)->during('apply', [$order, $zone]);
     }
 
     function it_does_nothing_if_tax_rate_cannot_be_resolved(
