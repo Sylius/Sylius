@@ -88,9 +88,10 @@ abstract class SymfonyPage extends Page implements SymfonyPageInterface
 
     /**
      * @param array $requiredUrlParameters
+     *
      * @throws UnexpectedPageException
      */
-    protected function verifyRoute(array $requiredUrlParameters = [])
+    public function verifyRoute(array $requiredUrlParameters = [])
     {
         $url = $this->getDriver()->getCurrentUrl();
         $path = parse_url($url)['path'];
@@ -106,6 +107,7 @@ abstract class SymfonyPage extends Page implements SymfonyPageInterface
     /**
      * @param array $matchedRoute
      * @param string $url
+     *
      * @throws UnexpectedPageException
      */
     private function verifyRouteName(array $matchedRoute, string $url)
@@ -125,12 +127,13 @@ abstract class SymfonyPage extends Page implements SymfonyPageInterface
     /**
      * @param array $requiredUrlParameters
      * @param array $matchedRoute
+     *
      * @throws UnexpectedPageException
      */
     private function verifyRouteParameters(array $requiredUrlParameters, array $matchedRoute)
     {
         foreach ($requiredUrlParameters as $key => $value) {
-            if (!isset($matchedRoute[$key]) || $matchedRoute[$key] != $value) {
+            if (!isset($matchedRoute[$key]) || $matchedRoute[$key] !== $value) {
                 throw new UnexpectedPageException(
                     sprintf(
                         "Matched route does not match the expected parameter '%s'='%s' (%s found)",

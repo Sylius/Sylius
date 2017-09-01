@@ -22,4 +22,11 @@ interface SymfonyPageInterface extends PageInterface
      * @return string
      */
     public function getRouteName();
+
+    /**
+     * @param array $requiredUrlParameters
+     *
+     * @throws UnexpectedPageException
+     */
+    public function verifyRoute(array $requiredUrlParameters = []);
 }
