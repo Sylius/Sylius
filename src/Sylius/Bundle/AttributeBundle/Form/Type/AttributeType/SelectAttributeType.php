@@ -50,7 +50,7 @@ final class SelectAttributeType extends AbstractType
                     return null;
                 },
                 function ($string) {
-                    if (!is_null($string)) {
+                    if (null !== $string) {
                         return [$string];
                     }
 

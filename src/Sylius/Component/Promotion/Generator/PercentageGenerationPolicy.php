@@ -79,6 +79,6 @@ final class PercentageGenerationPolicy implements GenerationPolicyInterface
 
         $generatedAmount = $this->couponRepository->countByCodeLength($expectedCodeLength);
 
-        return (int) floor(pow(16, $expectedCodeLength) * $this->ratio - $generatedAmount);
+        return (int) floor((16 ** $expectedCodeLength) * $this->ratio - $generatedAmount);
     }
 }

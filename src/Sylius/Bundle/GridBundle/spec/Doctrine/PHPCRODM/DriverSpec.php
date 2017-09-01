@@ -41,7 +41,6 @@ final class DriverSpec extends ObjectBehavior
         $this
             ->shouldThrow(\InvalidArgumentException::class)
             ->during('getDataSource', [[], new Parameters()]);
-        ;
     }
 
     function it_creates_data_source_via_doctrine_phpcrodm_query_builder(

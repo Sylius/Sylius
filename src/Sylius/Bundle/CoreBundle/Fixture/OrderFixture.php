@@ -247,8 +247,8 @@ class OrderFixture extends AbstractFixture
     {
         /** @var AddressInterface $address */
         $address = $this->addressFactory->createNew();
-        $address->setFirstname($this->faker->firstName);
-        $address->setLastname($this->faker->lastName);
+        $address->setFirstName($this->faker->firstName);
+        $address->setLastName($this->faker->lastName);
         $address->setStreet($this->faker->streetName);
         $address->setCountryCode($countryCode);
         $address->setCity($this->faker->city);

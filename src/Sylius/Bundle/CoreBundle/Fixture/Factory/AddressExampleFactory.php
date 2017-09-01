@@ -171,7 +171,7 @@ class AddressExampleFactory extends AbstractExampleFactory
                 return;
             }
         }
-        throw new \InvalidArgumentException('Provided province code is not valid for "%s"', $country->getName());
+        throw new \InvalidArgumentException(sprintf('Provided province code is not valid for "%s"', $country->getName()));
     }
 
     /**

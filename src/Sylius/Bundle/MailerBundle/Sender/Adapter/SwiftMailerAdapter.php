@@ -58,7 +58,6 @@ class SwiftMailerAdapter extends AbstractAdapter
             ->setFrom([$senderAddress => $senderName])
             ->setTo($recipients)
             ->setReplyTo($replyTo);
-        ;
 
         $message->setBody($renderedEmail->getBody(), 'text/html');
 

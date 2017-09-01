@@ -164,9 +164,9 @@ final class LazyOption
 
             if (is_object($previousValue)) {
                 return $previousValue;
-            } else {
-                return $repository->findOneBy([$field => $previousValue]);
             }
+
+            return $repository->findOneBy([$field => $previousValue]);
         };
     }
 }

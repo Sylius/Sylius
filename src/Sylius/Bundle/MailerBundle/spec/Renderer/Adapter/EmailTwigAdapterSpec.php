@@ -49,8 +49,8 @@ final class EmailTwigAdapterSpec extends ObjectBehavior
         $email->getTemplate()->shouldBeCalled()->willReturn('MyTemplate');
         $twig->loadTemplate('MyTemplate')->shouldBeCalled()->willReturn($template);
 
-        $template->renderBlock('subject', [])->willReturn('template');;
-        $template->renderBlock('body', [])->willReturn('body');;
+        $template->renderBlock('subject', [])->willReturn('template');
+        $template->renderBlock('body', [])->willReturn('body');
 
         $dispatcher->dispatch(
             SyliusMailerEvents::EMAIL_PRE_RENDER,

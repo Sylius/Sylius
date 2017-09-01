@@ -152,7 +152,7 @@ final class InstallerContext implements Context
      */
     protected function getInputStream($input)
     {
-        $stream = fopen('php://memory', 'r+', false);
+        $stream = fopen('php://memory', 'rb+', false);
         fwrite($stream, $input);
         rewind($stream);
 

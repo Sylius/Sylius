@@ -95,7 +95,7 @@ final class Email implements EmailInterface
      */
     public function setEnabled(bool $enabled): void
     {
-        $this->enabled = (bool) $enabled;
+        $this->enabled = $enabled;
     }
 
     public function enable(): void
