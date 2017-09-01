@@ -4,6 +4,22 @@
 
 * `\DateTimeInterface` is used for typehints instead of `\DateTime` to allow for compatibility with `\DateTimeImmutable`.
   Do not rely on mutable behaviour and set changes directly on the model.
+  
+* `WebServerBundle` which is used to run PHP's internal web server is no longer loaded in the production environment.
+   You can re-add the bundle if you need to by adding the following code to your AppKernel.php:
+  ```php
+  public function registerBundles()
+  {
+        // Other registrered bundles
+    
+	    if (in_array($this->getEnvironment(), ['prod']))
+        {
+            $bundles[] = new \Symfony\Bundle\WebServerBundle\WebServerBundle();
+        }
+
+        return array_merge(parent::registerBundles(), $bundles);
+  }
+  ```
 
 ## Packages:
 
