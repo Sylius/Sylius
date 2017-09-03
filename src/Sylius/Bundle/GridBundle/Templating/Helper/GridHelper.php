@@ -72,6 +72,18 @@ class GridHelper extends Helper
 
     /**
      * @param GridView $gridView
+     * @param Action $action
+     * @param mixed|null $data
+     *
+     * @return mixed
+     */
+    public function renderMassAction(GridView $gridView, Action $action, $data = null)
+    {
+        return $this->gridRenderer->renderMassAction($gridView, $action, $data);
+    }
+
+    /**
+     * @param GridView $gridView
      * @param Filter $filter
      *
      * @return mixed

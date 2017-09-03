@@ -21,6 +21,7 @@
             <argument>SyliusGridBundle::_grid.html.twig</argument>
             <argument>%sylius.grid.templates.action%</argument>
             <argument>%sylius.grid.templates.filter%</argument>
+            <argument>%sylius.grid.templates.mass_action%</argument>
         </service>
         <service id="sylius.twig.extension.grid" class="Sylius\Bundle\GridBundle\Twig\GridExtension" public="false">
             <argument type="service" id="sylius.templating.helper.grid" />

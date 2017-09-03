@@ -48,6 +48,15 @@ interface GridRendererInterface
 
     /**
      * @param GridViewInterface $gridView
+     * @param Action $action
+     * @param mixed|null $data
+     *
+     * @return mixed
+     */
+    public function renderMassAction(GridViewInterface $gridView, Action $action, $data = null);
+
+    /**
+     * @param GridViewInterface $gridView
      * @param Filter $filter
      *
      * @return mixed

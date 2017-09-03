@@ -244,6 +244,48 @@ class ResourceController extends Controller
      *
      * @return Response
      */
+    public function massDeleteAction(Request $request): Response
+    {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+
+        $this->isGrantedOr403($configuration, ResourceActions::MASS_DELETE);
+        /** @var array $resources */
+        $resources = $this->resourcesCollectionProvider->get($configuration, $this->repository);
+
+        foreach($resources as $resource) {
+            $event = $this->eventDispatcher->dispatchPreEvent(ResourceActions::DELETE, $configuration, $resource);
+
+            if ($event->isStopped() && !$configuration->isHtmlRequest()) {
+                throw new HttpException($event->getErrorCode(), $event->getMessage());
+            }
+            if ($event->isStopped()) {
+                $this->flashHelper->addFlashFromEvent($configuration, $event);
+
+                if ($event->hasResponse()) {
+                    return $event->getResponse();
+                }
+
+                return $this->redirectHandler->redirectToIndex($configuration, $resource);
+            }
+
+            $this->repository->remove($resource);
+            $this->eventDispatcher->dispatchPostEvent(ResourceActions::DELETE, $configuration, $resource);
+        }
+
+        if (!$configuration->isHtmlRequest()) {
+            return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
+        }
+
+        $this->flashHelper->addSuccessFlash($configuration, ResourceActions::MASS_DELETE);
+
+        return $this->redirectHandler->redirectToIndex($configuration);
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     */
     public function createAction(Request $request): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);

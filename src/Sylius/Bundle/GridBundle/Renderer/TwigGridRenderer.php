@@ -63,6 +63,11 @@ final class TwigGridRenderer implements GridRendererInterface
     private $filterTemplates;
 
     /**
+     * @var array
+     */
+    private $massActionTemplates;
+
+    /**
      * @param \Twig_Environment $twig
      * @param ServiceRegistryInterface $fieldsRegistry
      * @param FormFactoryInterface $formFactory
@@ -70,6 +75,7 @@ final class TwigGridRenderer implements GridRendererInterface
      * @param string $defaultTemplate
      * @param array $actionTemplates
      * @param array $filterTemplates
+     * @param array $massActionTemplates
      */
     public function __construct(
         \Twig_Environment $twig,
@@ -78,7 +84,8 @@ final class TwigGridRenderer implements GridRendererInterface
         FormTypeRegistryInterface $formTypeRegistry,
         string $defaultTemplate,
         array $actionTemplates = [],
-        array $filterTemplates = []
+        array $filterTemplates = [],
+        array $massActionTemplates = []
     ) {
         $this->twig = $twig;
         $this->fieldsRegistry = $fieldsRegistry;
@@ -86,6 +93,7 @@ final class TwigGridRenderer implements GridRendererInterface
         $this->formTypeRegistry = $formTypeRegistry;
         $this->defaultTemplate = $defaultTemplate;
         $this->actionTemplates = $actionTemplates;
+        $this->massActionTemplates = $massActionTemplates;
         $this->filterTemplates = $filterTemplates;
     }
 
@@ -122,6 +130,23 @@ final class TwigGridRenderer implements GridRendererInterface
         }
 
         return $this->twig->render($this->actionTemplates[$type], [
+            'grid' => $gridView,
+            'action' => $action,
+            'data' => $data,
+        ]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function renderMassAction(GridViewInterface $gridView, Action $action, $data = null)
+    {
+        $type = $action->getType();
+        if (!isset($this->massActionTemplates[$type])) {
+            throw new \InvalidArgumentException(sprintf('Missing template for action type "%s".', $type));
+        }
+
+        return $this->twig->render($this->massActionTemplates[$type], [
             'grid' => $gridView,
             'action' => $action,
             'data' => $data,

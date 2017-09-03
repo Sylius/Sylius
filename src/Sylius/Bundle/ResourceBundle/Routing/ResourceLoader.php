@@ -60,7 +60,7 @@ final class ResourceLoader implements LoaderInterface
             throw new \InvalidArgumentException('You can configure only one of "except" & "only" options.');
         }
 
-        $routesToGenerate = ['show', 'index', 'create', 'update', 'delete'];
+        $routesToGenerate = ['show', 'index', 'create', 'update', 'delete', 'massDelete'];
 
         if (!empty($configuration['only'])) {
             $routesToGenerate = $configuration['only'];
@@ -86,6 +86,11 @@ final class ResourceLoader implements LoaderInterface
         if (in_array('create', $routesToGenerate, true)) {
             $createRoute = $this->createRoute($metadata, $configuration, $isApi ? $rootPath : $rootPath . 'new', 'create', $isApi ? ['POST'] : ['GET', 'POST'], $isApi);
             $routes->add($this->getRouteName($metadata, $configuration, 'create'), $createRoute);
+        }
+
+        if (!$isApi && in_array('massDelete', $routesToGenerate, true)) {
+            $massDeleteRoute = $this->createRoute($metadata, $configuration, $rootPath . 'mass-delete', 'massDelete', ['GET'], $isApi);
+            $routes->add($this->getRouteName($metadata, $configuration, 'mass_delete'), $massDeleteRoute);
         }
 
         if (in_array('update', $routesToGenerate, true)) {
@@ -191,9 +196,19 @@ final class ResourceLoader implements LoaderInterface
         if (isset($configuration['vars']['all'])) {
             $defaults['_sylius']['vars'] = $configuration['vars']['all'];
         }
+
         if (isset($configuration['vars'][$actionName])) {
             $vars = $configuration['vars']['all'] ?? [];
             $defaults['_sylius']['vars'] = array_merge($vars, $configuration['vars'][$actionName]);
+        }
+
+        if ($actionName === 'massDelete') {
+            $defaults['_sylius']['paginate'] = false;
+
+            $defaults['_sylius']['repository'] = [
+                'method' => 'findById',
+                'arguments' => ['ids' => '$ids']
+            ];
         }
 
         return $this->routeFactory->createRoute($path, $defaults, [], [], '', [], $methods);

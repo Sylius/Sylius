@@ -45,6 +45,9 @@ sylius_grid:
                     type: boolean
                     label: sylius.ui.enabled
             actions:
+                mass:
+                    delete:
+                        type: delete
                 main:
                     create:
                         type: links

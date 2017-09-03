@@ -467,6 +467,7 @@ sylius:
         manage_your_saved_addresses: 'Manage your saved addresses'
         manage_zones: 'Manage zones'
         marketing: 'Marketing'
+        mass_actions: 'Mass actions'
         media: 'Media'
         members: 'Members'
         menu_nodes: 'Menu nodes'

@@ -43,21 +43,29 @@ final class TwigGridRenderer implements GridRendererInterface
     private $actionTemplates;
 
     /**
+     * @var array
+     */
+    private $massActionTemplates;
+
+    /**
      * @param GridRendererInterface $gridRenderer
      * @param \Twig_Environment $twig
      * @param OptionsParserInterface $optionsParser
      * @param array $actionTemplates
+     * @param array $massActionTemplates
      */
     public function __construct(
         GridRendererInterface $gridRenderer,
         \Twig_Environment $twig,
         OptionsParserInterface $optionsParser,
-        array $actionTemplates = []
+        array $actionTemplates = [],
+        array $massActionTemplates = []
     ) {
         $this->gridRenderer = $gridRenderer;
         $this->twig = $twig;
         $this->optionsParser = $optionsParser;
         $this->actionTemplates = $actionTemplates;
+        $this->massActionTemplates = $massActionTemplates;
     }
 
     /**
@@ -93,6 +101,30 @@ final class TwigGridRenderer implements GridRendererInterface
         );
 
         return (string) $this->twig->render($this->actionTemplates[$type], [
+            'grid' => $gridView,
+            'action' => $action,
+            'data' => $data,
+            'options' => $options,
+        ]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function renderMassAction(GridViewInterface $gridView, Action $action, $data = null): string
+    {
+        $type = $action->getType();
+        if (!isset($this->massActionTemplates[$type])) {
+            throw new \InvalidArgumentException(sprintf('Missing template for action type "%s".', $type));
+        }
+
+        $options = $this->optionsParser->parseOptions(
+            $action->getOptions(),
+            $gridView->getRequestConfiguration()->getRequest(),
+            $data
+        );
+
+        return (string) $this->twig->render($this->massActionTemplates[$type], [
             'grid' => $gridView,
             'action' => $action,
             'data' => $data,
