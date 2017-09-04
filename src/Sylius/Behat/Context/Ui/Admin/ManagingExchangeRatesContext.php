@@ -17,6 +17,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\ExchangeRate\CreatePageInterface;
 use Sylius\Behat\Page\Admin\ExchangeRate\IndexPageInterface;
 use Sylius\Behat\Page\Admin\ExchangeRate\UpdatePageInterface;
+use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Currency\Model\ExchangeRateInterface;
 use Webmozart\Assert\Assert;
 
@@ -180,11 +181,11 @@ final class ManagingExchangeRatesContext implements Context
     /**
      * @Then the exchange rate with ratio :ratio between :sourceCurrency and :targetCurrency should appear in the store
      */
-    public function theExchangeRateBetweenAndShouldAppearInTheStore($ratio, $sourceCurrency, $targetCurrency)
+    public function theExchangeRateBetweenAndShouldAppearInTheStore($ratio, CurrencyInterface $sourceCurrency, CurrencyInterface $targetCurrency)
     {
         $this->indexPage->open();
 
-        $this->assertExchangeRateWithRatioIsOnTheList((float) $ratio, $sourceCurrency, $targetCurrency);
+        $this->assertExchangeRateWithRatioIsOnTheList((float) $ratio, $sourceCurrency->getName(), $targetCurrency->getName());
     }
 
     /**

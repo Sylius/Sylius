@@ -140,16 +140,19 @@ final class TableAccessor implements TableAccessorInterface
                 return false;
             }
 
+            $searchedValue = (string)$searchedValue;
             $searchedValue = trim($searchedValue);
 
             if (0 === strpos($searchedValue, '%') && (strlen($searchedValue) - 1) === strrpos($searchedValue, '%')) {
                 $searchedValue = substr($searchedValue, 1, -2);
             }
 
-            return $this->containsSearchedValue($columns[$index]->getText(), $searchedValue);
+            if (!$this->containsSearchedValue($columns[$index]->getText(), $searchedValue)) {
+                return false;
+            }
         }
 
-        return false;
+        return true;
     }
 
     /**

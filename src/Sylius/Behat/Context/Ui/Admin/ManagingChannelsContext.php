@@ -485,7 +485,7 @@ final class ManagingChannelsContext implements Context
 
         Assert::true($this->indexPage->isSingleResourceOnPage([
             'nameAndDescription' => $channel->getName(),
-            'enabled' => $state,
+            'enabled' => $state ? 'Enabled' : 'Disabled',
         ]));
     }
 }
