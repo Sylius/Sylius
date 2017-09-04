@@ -45,11 +45,16 @@ final class CountryChoiceType extends AbstractType
     {
         $resolver
             ->setDefaults([
+                'choice_filter' => null,
                 'choices' => function (Options $options): iterable {
                     if (null === $options['enabled']) {
                         $countries = $this->countryRepository->findAll();
                     } else {
                         $countries = $this->countryRepository->findBy(['enabled' => $options['enabled']]);
+                    }
+
+                    if ($options['choice_filter']) {
+                        $countries = array_filter($countries, $options['choice_filter']);
                     }
 
                     usort($countries, function (CountryInterface $a, CountryInterface $b): int {
