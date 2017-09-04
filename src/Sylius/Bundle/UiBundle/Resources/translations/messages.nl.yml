@@ -488,7 +488,7 @@ sylius:
         new_admin_user: 'Nieuwe beheerder'
         new_channel: 'Nieuw kanaal'
         new_comment_posted_on_order: 'Nieuwe commentaar gepost op bestelling'
-        new_country: 'NIeuw land toevoegen'
+        new_country: 'Nieuw land toevoegen'
         new_coupon: 'Nieuwe coupon'
         new_currency: 'Nieuwe valuta'
         new_customer: 'Nieuwe klant'
