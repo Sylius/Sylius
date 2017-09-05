@@ -67,7 +67,7 @@ class PromotionCouponRepository extends EntityRepository implements PromotionCou
     /**
      * {@inheritdoc}
      */
-    public function findByPromotionCode(string $promotionCode): iterable
+    public function createPaginatorForPromotion(string $promotionCode): iterable
     {
         $queryBuilder = $this->createQueryBuilder('o')
             ->leftJoin('o.promotion', 'promotion')
