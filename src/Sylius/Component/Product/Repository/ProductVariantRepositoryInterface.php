@@ -65,12 +65,12 @@ interface ProductVariantRepositoryInterface extends RepositoryInterface
     public function findOneByCodeAndProductCode(string $code, string $productCode): ?ProductVariantInterface;
 
     /**
-     * @param string $code
+     * @param array $codes
      * @param string $productCode
      *
      * @return array|ProductVariantInterface[]
      */
-    public function findByCodeAndProductCode(string $code, string $productCode): array;
+    public function findByCodesAndProductCode(array $codes, string $productCode): array;
 
     /**
      * @param mixed $id
