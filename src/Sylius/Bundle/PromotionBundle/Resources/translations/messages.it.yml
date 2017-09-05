@@ -48,7 +48,7 @@ sylius:
             taxonomy: Tassonomia
             total_price_of_items_from_taxon: Prezzo totale degli articoli da taxon
             cart_quantity_configuration:
-                count: Conta
+                count: Quantità
                 equal: Uguale
             contains_product_configuration:
                 exclude: Escludi

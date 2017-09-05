@@ -8,7 +8,7 @@ sylius:
         delete: '%resource% è stato eliminato correttamente.'
         move: '%resource% è stato spostato correttamente.'
         generate: '% resource%s sono stati generati correttamente.'
-        revert: '%resource% è stato eliminato correttamente.'
+        revert: '%resource% è stato resettato correttamente.'
         restore_deleted: '%resource% è stato ripristinato con successo.'
         enable: '%resource% è stato attivato con successo.'
         disable: '%resource% è stato disattivato con successo.'

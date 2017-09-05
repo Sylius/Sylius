@@ -5,8 +5,8 @@ sylius:
     form:
         taxon:
             description: Descrizione
-            name: Nome
+            name: "Nome\n"
             parent: Genitore
-            slug: Slug
+            slug: SEO URL Categoria
         taxonomy:
             name: Nome
