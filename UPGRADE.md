@@ -118,6 +118,7 @@
     * `PromotionInterface::setStartsAt`
     * `PromotionInterface::setEndsAt`
     * `PromotionRuleInterface::setPromotion`
+* `createPaginatorForPromotion(string $promotionCode)` added to `PromotionCouponRepositoryInterface`
 
 ### Registry
 

@@ -49,5 +49,5 @@ interface PromotionCouponRepositoryInterface extends RepositoryInterface
      *
      * @return iterable
      */
-    public function findByPromotionCode(string $promotionCode): iterable;
+    public function createPaginatorForPromotion(string $promotionCode): iterable;
 }
