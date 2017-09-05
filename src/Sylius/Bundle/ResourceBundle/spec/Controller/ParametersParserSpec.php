@@ -69,6 +69,50 @@ final class ParametersParserSpec extends ObjectBehavior
         ;
     }
 
+    function it_parser_string_parameter_and_change_its_type_to_int(): void
+    {
+        $request = new Request();
+        $request->request->set('int', '5');
+
+        $this
+            ->parseRequestValues(['nested' => ['int' => '!!int $int']], $request)
+            ->shouldReturn(['nested' => ['int' => 5]])
+        ;
+    }
+
+    function it_parser_string_parameter_and_change_its_type_to_float(): void
+    {
+        $request = new Request();
+        $request->request->set('float', '5.4');
+
+        $this
+            ->parseRequestValues(['nested' => ['float' => '!!float $float']], $request)
+            ->shouldReturn(['nested' => ['float' => 5.4]])
+        ;
+    }
+
+    function it_parser_string_parameter_and_change_its_type_to_double(): void
+    {
+        $request = new Request();
+        $request->request->set('double', '5.4');
+
+        $this
+            ->parseRequestValues(['nested' => ['double' => '!!double $double']], $request)
+            ->shouldReturn(['nested' => ['double' => 5.4]])
+        ;
+    }
+
+    function it_throws_exception_if_string_parameter_is_going_to_be_parsed_to_invalid_type()
+    {
+        $request = new Request();
+        $request->request->set('int', 5);
+
+        $this
+            ->shouldThrow(\InvalidArgumentException::class)
+            ->during('parseRequestValues', [['nested' => ['int' => '!!invalid $int']], $request])
+        ;
+    }
+
     function it_parses_expressions(): void
     {
         $request = new Request();
