@@ -103,17 +103,17 @@ The Cookbook
 
 .. include:: /cookbook/map.rst.inc
 
-The Behat Guide
----------------
+The BDD Guide
+-------------
 
-In :doc:`the Behat Guide </behat/index>` you will learn how to write clean and reusable features, contexts and pages.
+In :doc:`the BDD Guide </bdd/index>` you will learn how to write clean and reusable features, contexts and pages using Behat.
 
 .. toctree::
    :hidden:
 
-   behat/index
+   bdd/index
 
-.. include:: /behat/map.rst.inc
+.. include:: /bdd/map.rst.inc
 
 Bundles
 -------

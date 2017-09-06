@@ -7,8 +7,12 @@ Now let us show you the flow.
 
 Describing features
 -------------------
-Let's start with writing our feature file, which will contain answers to the most important questions: Why (benefit), who (actor using the feature) and what (the feature itself). It should also include scenarios, which serve as examples of how things supposed to work.
-``features/addressing/managing_countries/adding_country.feature``
+
+Let's start with writing our feature file, which will contain answers to the most important questions:
+Why (benefit), who (actor using the feature) and what (the feature itself).
+It should also include scenarios, which serve as examples of how things supposed to work.
+Let's have a look at the ``features/addressing/managing_countries/adding_country.feature`` file.
+
 Scenario::
 
     @managing_countries
@@ -28,12 +32,18 @@ Scenario::
             Then I should be notified that it has been successfully created
             And the country "France" should appear in the store
 
-Pay attention to the form of these sentences. From the developer point of view they are hiding the details of the feature's implementation. Instead of describing "When I click on the select box And I choose France from the dropdown Then I should see the France country in the table" - we are using sentences that are less connected with the implementation, but more focused on the effects of our actions.
-A side effect of such approach is that it results in steps being really generic, therefore if we want to add another way of testing this feature for instance in the domain or api context, it will be extremely easy to apply. We just need to add a different tag (in this case "@domain") and of course implement the proper steps in the domain context of our system.
-To be more descriptive let's imagine that we want to check if a country is added properly in two ways. First we are checking if the adding works via frontend, so we are implementing steps that are clicking, opening pages, filling fields on forms and similar, but also we want to check this action regardlessly of the frontend, for that we need the domain, which allows us to perform actions only on objects.
+Pay attention to the form of these sentences. From the developer point of view they are hiding the details of the feature's implementation.
+Instead of describing "When I click on the select box And I choose France from the dropdown Then I should see the France country in the table"
+- we are using sentences that are less connected with the implementation, but more focused on the effects of our actions.
+A side effect of such approach is that it results in steps being really generic, therefore if we want to add another way of testing this feature for instance in the domain or api context,
+it will be extremely easy to apply. We just need to add a different tag (in this case "@domain") and of course implement the proper steps in the domain context of our system.
+To be more descriptive let's imagine that we want to check if a country is added properly in two ways.
+First we are checking if the adding works via frontend, so we are implementing steps that are clicking, opening pages,
+filling fields on forms and similar, but also we want to check this action regardlessly of the frontend, for that we need the domain, which allows us to perform actions only on objects.
 
 Choosing a correct suite
 ------------------------
+
 After we are done with a feature file, we have to create a new suite for it. At the beginning we have decided that it will be a frontend/user interface feature, that is why we are placing it in "etc/behat/suites/ui/addressing/managing_countries.yml".
 
 .. code-block:: yaml
@@ -91,6 +101,7 @@ Now we need to register our first Behat context as a service, but beforehand we 
 
 Registering Pages
 -----------------
+
 The page object approach allows us to hide all the detailed interaction with ui (html, javascript, css) inside.
 
 We have three kinds of pages:
@@ -268,6 +279,7 @@ And the country "France" should appear in the store".
 
 Registering contexts
 --------------------
+
 As it was shown in the previous section we have registered a lot of contexts, so we will show you only some of the steps implementation.
 
 Scenario::
@@ -551,6 +563,7 @@ Transformer contexts
 
 Setup contexts
 ~~~~~~~~~~~~~~
+
 For setup context we need different scenario with more background steps and all preparing scene steps.
 Editing scenario will be great for this example:
 

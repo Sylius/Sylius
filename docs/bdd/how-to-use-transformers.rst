@@ -73,7 +73,7 @@ This style gives an opportunity to write simple steps with transformers, without
     Transformer definition does not have to be implemented in the same context, where it is used. It allows to share them between many different contexts.
 
 Transformers implemented in Sylius
-------------------------------------------
+----------------------------------
 
 Specified
 #########
