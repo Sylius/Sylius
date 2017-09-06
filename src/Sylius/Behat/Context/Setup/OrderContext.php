@@ -427,22 +427,20 @@ final class OrderContext implements Context
         $productCount,
         ProductInterface $product
     ) {
-        for ($i = 0; $i < $orderCount; $i++) {
-            $order = $this->createOrder($customer, uniqid('#'), $channel);
+        $this->createOrdersForCustomer($customer, $orderCount, $channel, $productCount, $product);
+    }
 
-            $this->addProductVariantsToOrderWithChannelPrice(
-                $order,
-                $channel,
-                $this->variantResolver->getVariant($product),
-                (int) $productCount
-            );
-
-            $order->setState(OrderInterface::STATE_NEW);
-
-            $this->objectManager->persist($order);
-        }
-
-        $this->objectManager->flush();
+    /**
+     * @Given /^(customer "[^"]+"|this customer) has(?:| also) fulfilled (\d+) orders placed on the ("[^"]+" channel) in each buying (\d+) ("[^"]+" products?)$/
+     */
+    public function thisCustomerFulfilledOrdersPlacedOnChannelBuyingProducts(
+        CustomerInterface $customer,
+        $orderCount,
+        ChannelInterface $channel,
+        $productCount,
+        ProductInterface $product
+    ) {
+        $this->createOrdersForCustomer($customer, $orderCount, $channel, $productCount, $product, true);
     }
 
     /**
@@ -470,56 +468,48 @@ final class OrderContext implements Context
     }
 
     /**
+     * @Given a single customer has placed an order for total of :total
      * @Given :numberOfCustomers customers have placed :numberOfOrders orders for total of :total
      * @Given then :numberOfCustomers more customers have placed :numberOfOrders orders for total of :total
      */
-    public function customersHavePlacedOrdersForTotalOf($numberOfCustomers, $numberOfOrders, $total)
+    public function customersHavePlacedOrdersForTotalOf($numberOfCustomers = 1, $numberOfOrders = 1, $total)
     {
-        $customers = $this->generateCustomers($numberOfCustomers);
-        $sampleProductVariant = $this->sharedStorage->get('variant');
-        $total = $this->getPriceFromString($total);
+        $this->createOrders($numberOfCustomers, $numberOfOrders, $total);
+    }
 
-        for ($i = 0; $i < $numberOfOrders; $i++) {
-            $order = $this->createOrder($customers[rand(0, $numberOfCustomers - 1)], '#'.uniqid());
-            $order->setState(OrderInterface::STATE_NEW); // Temporary, we should use checkout to place these orders.
-            $this->applyPaymentTransitionOnOrder($order, PaymentTransitions::TRANSITION_COMPLETE);
-
-            $price = $i === ($numberOfOrders - 1) ? $total : rand(1, $total);
-            $total -= $price;
-
-            $this->addVariantWithPriceToOrder($order, $sampleProductVariant, $price);
-
-            $this->objectManager->persist($order);
-            $this->sharedStorage->set('order', $order);
-        }
-
-        $this->objectManager->flush();
+    /**
+     * @Given :numberOfCustomers customers have fulfilled :numberOfOrders orders placed for total of :total
+     * @Given then :numberOfCustomers more customers have fulfilled :numberOfOrders orders placed for total of :total
+     */
+    public function customersHaveFulfilledOrdersPlacedForTotalOf($numberOfCustomers, $numberOfOrders, $total)
+    {
+        $this->createOrders($numberOfCustomers, $numberOfOrders, $total, true);
     }
 
     /**
      * @Given :numberOfCustomers customers have placed :numberOfOrders orders for total of :total mostly :product product
      * @Given then :numberOfCustomers more customers have placed :numberOfOrders orders for total of :total mostly :product product
      */
-    public function customersHavePlacedOrdersForTotalOfMostlyProduct($numberOfCustomers, $numberOfOrders, $total, ProductInterface $product)
-    {
-        $customers = $this->generateCustomers($numberOfCustomers);
-        $sampleProductVariant = $product->getVariants()->first();
-        $total = $this->getPriceFromString($total);
+    public function customersHavePlacedOrdersForTotalOfMostlyProduct(
+        $numberOfCustomers,
+        $numberOfOrders,
+        $total,
+        ProductInterface $product
+    ) {
+        $this->createOrdersWithProduct($numberOfCustomers, $numberOfOrders, $total, $product);
+    }
 
-        for ($i = 0; $i < $numberOfOrders; $i++) {
-            $order = $this->createOrder($customers[rand(0, $numberOfCustomers - 1)], '#'.uniqid(), $product->getChannels()->first());
-            $order->setState(OrderInterface::STATE_NEW);
-            $this->applyPaymentTransitionOnOrder($order, PaymentTransitions::TRANSITION_COMPLETE);
-
-            $price = $i === ($numberOfOrders - 1) ? $total : rand(1, $total);
-            $total -= $price;
-
-            $this->addVariantWithPriceToOrder($order, $sampleProductVariant, $price);
-
-            $this->objectManager->persist($order);
-        }
-
-        $this->objectManager->flush();
+    /**
+     * @Given :numberOfCustomers customers have fulfilled :numberOfOrders orders placed for total of :total mostly :product product
+     * @Given then :numberOfCustomers more customers have fulfilled :numberOfOrders orders placed for total of :total mostly :product product
+     */
+    public function customersHaveFulfilledOrdersPlacedForTotalOfMostlyProduct(
+        $numberOfCustomers,
+        $numberOfOrders,
+        $total,
+        ProductInterface $product
+    ) {
+        $this->createOrdersWithProduct($numberOfCustomers, $numberOfOrders, $total, $product, true);
     }
 
     /**
@@ -624,6 +614,15 @@ final class OrderContext implements Context
     private function applyTransitionOnOrderCheckout(OrderInterface $order, $transition)
     {
         $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->apply($transition);
+    }
+
+    /**
+     * @param OrderInterface $order
+     * @param string $transition
+     */
+    private function applyTransitionOnOrder(OrderInterface $order, string $transition)
+    {
+        $this->stateMachineFactory->get($order, OrderTransitions::GRAPH)->apply($transition);
     }
 
     /**
@@ -805,5 +804,109 @@ final class OrderContext implements Context
         $this->itemQuantityModifier->modify($item, 1);
 
         $order->addItem($item);
+    }
+
+    /**
+     * @param $numberOfCustomers
+     * @param $numberOfOrders
+     * @param $total
+     * @param $isFulfilled
+     */
+    private function createOrders($numberOfCustomers, $numberOfOrders, $total, $isFulfilled = false)
+    {
+        $customers = $this->generateCustomers($numberOfCustomers);
+        $sampleProductVariant = $this->sharedStorage->get('variant');
+        $total = $this->getPriceFromString($total);
+
+        for ($i = 0; $i < $numberOfOrders; $i++) {
+            $order = $this->createOrder($customers[rand(0, $numberOfCustomers - 1)], '#'.uniqid());
+            $order->setState(OrderInterface::STATE_NEW); // Temporary, we should use checkout to place these orders.
+            $this->applyPaymentTransitionOnOrder($order, PaymentTransitions::TRANSITION_COMPLETE);
+
+            $price = $i === ($numberOfOrders - 1) ? $total : rand(1, $total);
+            $total -= $price;
+
+            $this->addVariantWithPriceToOrder($order, $sampleProductVariant, $price);
+
+            if ($isFulfilled) {
+                $this->applyTransitionOnOrder($order, OrderTransitions::TRANSITION_FULFILL);
+            }
+
+            $this->objectManager->persist($order);
+            $this->sharedStorage->set('order', $order);
+        }
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @param $numberOfCustomers
+     * @param $numberOfOrders
+     * @param $total
+     * @param $isFulfilled
+     */
+    private function createOrdersWithProduct(
+        $numberOfCustomers,
+        $numberOfOrders,
+        $total,
+        ProductInterface $product,
+        $isFulfilled = false
+    ) {
+        $customers = $this->generateCustomers($numberOfCustomers);
+        $sampleProductVariant = $product->getVariants()->first();
+        $total = $this->getPriceFromString($total);
+
+        for ($i = 0; $i < $numberOfOrders; $i++) {
+            $order = $this->createOrder($customers[rand(0, $numberOfCustomers - 1)], '#'.uniqid(), $product->getChannels()->first());
+            $order->setState(OrderInterface::STATE_NEW);
+            $this->applyPaymentTransitionOnOrder($order, PaymentTransitions::TRANSITION_COMPLETE);
+
+            $price = $i === ($numberOfOrders - 1) ? $total : rand(1, $total);
+            $total -= $price;
+
+            $this->addVariantWithPriceToOrder($order, $sampleProductVariant, $price);
+
+            if ($isFulfilled) {
+                $this->applyTransitionOnOrder($order, OrderTransitions::TRANSITION_FULFILL);
+            }
+
+            $this->objectManager->persist($order);
+        }
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @param CustomerInterface $customer
+     * @param $orderCount
+     * @param ChannelInterface $channel
+     * @param $productCount
+     * @param ProductInterface $product
+     * @param $isFulfilled
+     */
+    private function createOrdersForCustomer(
+        CustomerInterface $customer,
+        $orderCount,
+        ChannelInterface $channel,
+        $productCount,
+        ProductInterface $product,
+        $isFulfilled = false
+    ) {
+        for ($i = 0; $i < $orderCount; $i++) {
+            $order = $this->createOrder($customer, uniqid('#'), $channel);
+
+            $this->addProductVariantsToOrderWithChannelPrice(
+                $order,
+                $channel,
+                $this->variantResolver->getVariant($product),
+                (int) $productCount
+            );
+
+            $order->setState($isFulfilled ? OrderInterface::STATE_FULFILLED : OrderInterface::STATE_NEW);
+
+            $this->objectManager->persist($order);
+        }
+
+        $this->objectManager->flush();
     }
 }

@@ -88,7 +88,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
     {
         return $this->createByCustomerIdQueryBuilder($customer->getId())
             ->andWhere('o.state NOT IN (:states)')
-            ->setParameter('states', [OrderInterface::STATE_CART, OrderInterface::STATE_CANCELLED])
+            ->setParameter('states', [OrderInterface::STATE_NEW, OrderInterface::STATE_CANCELLED])
             ->getQuery()
             ->getResult()
         ;
