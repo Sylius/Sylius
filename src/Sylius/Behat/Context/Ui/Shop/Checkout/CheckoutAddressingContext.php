@@ -208,6 +208,14 @@ final class CheckoutAddressingContext implements Context
     }
 
     /**
+     * @When I specify the first and last name as :fullName for shipping address
+     */
+    public function iSpecifyTheStreetAsForShippingAddress(string $fullName)
+    {
+        $this->addressPage->specifyShippingAddressFullName($fullName);
+    }
+
+    /**
      * @When I complete the addressing step
      * @When I try to complete the addressing step
      */
