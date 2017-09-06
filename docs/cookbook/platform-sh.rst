@@ -12,7 +12,7 @@ In this guide you will find sufficient instructions to have your application up 
 1. Prepare a Platform.sh project
 --------------------------------
 
-If you do not have it yet, go to the `Platform.sh store <https://accounts.platform.sh/platform/buy-now>`_ choose development plan
+If you do not have it yet, go to the `Platform.sh store <https://accounts.platform.sh/platform/buy-now>`_, choose development plan
 and go through checkout. Then, when you will have a project ready, give it a name and proceed to ``Import an existing site``.
 
 .. tip::
@@ -24,16 +24,16 @@ and go through checkout. Then, when you will have a project ready, give it a nam
 
 * Add the ``.platform.app.yaml`` file at the root of your project repository
 
-This is how this file should look like for Sylius:
+This is how this file should look like for Sylius (tuned version of the default Platform.sh example):
 
 .. code-block:: yaml
 
     # .platform.app.yaml
     name: sylius
 
-    type: "php:7.0"
+    type: "php:7.1"
     build:
-        flavor: symfony
+        flavor: composer
 
     relationships:
         database: "mysql:mysql"
@@ -45,6 +45,11 @@ This is how this file should look like for Sylius:
             - igbinary
             - memcached
             - redis
+
+    dependencies:
+        nodejs:
+            yarn: "*"
+            gulp-cli: "*"
 
     web:
         document_root: "/web"
@@ -103,7 +108,7 @@ This is how this file should look like for Sylius:
           - \.html$
           - \.pdf$
 
-    disk: 2048
+    disk: 4096
 
     mounts:
         "/var/cache": "shared:files/cache"
@@ -117,18 +122,15 @@ This is how this file should look like for Sylius:
             rm web/app_test.php
             rm web/app_test_cached.php
             rm -rf var/cache/*
-            php bin/console --env=prod --no-debug --ansi cache:clear
+            php bin/console --env=prod --no-debug --ansi cache:clear --no-warmup
+            php bin/console --env=prod --no-debug --ansi cache:warmup
             php bin/console --env=prod --no-debug --ansi assets:install
-            npm install
-            npm run gulp
+            php bin/console --env=prod --no-debug --ansi theme:assets:install
+            yarn install
+            GULP_ENV=prod yarn run gulp
         deploy: |
-            rm -rf web/media/*
-            php bin/console --env=prod --no-debug sylius:fixtures:load
             rm -rf var/cache/*
-    crons:
-        reset:
-            spec: "0 */1 * * *"
-            cmd: "rm -rf web/media/* && php bin/console --env=prod --no-debug sylius:fixtures:load"
+            php bin/console --env=prod doctrine:migrations:migrate --no-interaction
 
 * Add ``.platform/routes.yaml`` file:
 
@@ -151,11 +153,11 @@ This file will load ``mysql`` and ``redis`` on your Platform.sh server.
 
     # .platform/services.yaml
     mysql:
-        type: mysql
-        disk: 2048
+        type: mysql:10.0
+        disk: 1024
 
     redis:
-        type: redis:2.8
+        type: redis:3.0
 
 * Configure the access to the database:
 
@@ -239,10 +241,12 @@ and ``CLUSTER`` can be ``eu`` or ``us`` - depending on where are you deploying y
 
     $ git push platform master
 
+The output of this command shows you on which URL your online store can be accessed.
+
 6. Connect to the project via SSH and install Sylius
 ----------------------------------------------------
 
-The SSH command can be found in your project data on Platform.sh.
+The SSH command can be found in your project data on Platform.sh. Alternatively use the `Platform CLI tool <https://docs.platform.sh/overview/cli.html>`_.
 
 When you get connected please run:
 
