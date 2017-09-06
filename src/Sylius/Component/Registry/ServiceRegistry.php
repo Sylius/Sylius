@@ -26,11 +26,11 @@ class ServiceRegistry implements ServiceRegistryInterface
     private $services = [];
 
     /**
-     * Interface which is required by all services.
+     * Interface or parent class which is required by all services.
      *
      * @var string
      */
-    private $interface;
+    private $className;
 
     /**
      * Human readable context for these services, e.g. "grid field"
@@ -40,12 +40,12 @@ class ServiceRegistry implements ServiceRegistryInterface
     private $context;
 
     /**
-     * @param string $interface
+     * @param string $className
      * @param string $context
      */
-    public function __construct(string $interface, string $context = 'service')
+    public function __construct(string $className, string $context = 'service')
     {
-        $this->interface = $interface;
+        $this->className = $className;
         $this->context = $context;
     }
 
@@ -70,9 +70,9 @@ class ServiceRegistry implements ServiceRegistryInterface
             throw new \InvalidArgumentException(sprintf('%s needs to be an object, %s given.', ucfirst($this->context), gettype($service)));
         }
 
-        if (!in_array($this->interface, class_implements($service), true)) {
+        if (!$service instanceof $this->className) {
             throw new \InvalidArgumentException(
-                sprintf('%s needs to implement "%s", "%s" given.', ucfirst($this->context), $this->interface, get_class($service))
+                sprintf('%s needs to be of type "%s", "%s" given.', ucfirst($this->context), $this->className, get_class($service))
             );
         }
 
