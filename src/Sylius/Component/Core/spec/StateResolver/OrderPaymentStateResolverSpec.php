@@ -109,6 +109,21 @@ final class OrderPaymentStateResolverSpec extends ObjectBehavior
         $this->resolve($order);
     }
 
+    function it_marks_an_order_as_paid_if_it_does_not_have_any_payment(
+        FactoryInterface $stateMachineFactory,
+        StateMachineInterface $stateMachine,
+        OrderInterface $order
+    ) {
+        $order->getPayments()->willReturn(new ArrayCollection([]));
+        $order->getTotal()->willReturn(0);
+
+        $stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH)->willReturn($stateMachine);
+        $stateMachine->can(OrderPaymentTransitions::TRANSITION_PAY)->willReturn(true);
+        $stateMachine->apply(OrderPaymentTransitions::TRANSITION_PAY)->shouldBeCalled();
+
+        $this->resolve($order);
+    }
+
     function it_marks_an_order_as_paid_if_fully_paid_even_if_previous_payment_was_failed(
         FactoryInterface $stateMachineFactory,
         StateMachineInterface $stateMachine,

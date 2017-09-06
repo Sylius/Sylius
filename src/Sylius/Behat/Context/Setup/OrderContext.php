@@ -275,7 +275,9 @@ final class OrderContext implements Context
 
         $this->applyTransitionOnOrderCheckout($order, OrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING);
         $this->applyTransitionOnOrderCheckout($order, OrderCheckoutTransitions::TRANSITION_COMPLETE);
-        $this->stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH)->apply(OrderPaymentTransitions::TRANSITION_PAY);
+        if (!$order->getPayments()->isEmpty()) {
+            $this->stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH)->apply(OrderPaymentTransitions::TRANSITION_PAY);
+        }
 
         $this->objectManager->flush();
     }
@@ -592,6 +594,18 @@ final class OrderContext implements Context
     }
 
     /**
+     * @When the customer used coupon :coupon
+     */
+    public function theCustomerUsedCoupon(PromotionCouponInterface $coupon)
+    {
+        /** @var OrderInterface $order */
+        $order = $this->sharedStorage->get('order');
+        $order->setPromotionCoupon($coupon);
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @param OrderInterface $order
      * @param string $transition
      */
@@ -902,7 +916,8 @@ final class OrderContext implements Context
         int $productCount,
         ProductInterface $product,
         bool $isFulfilled = false
-    ): void {
+    ): void
+    {
         for ($i = 0; $i < $orderCount; $i++) {
             $order = $this->createOrder($customer, uniqid('#'), $channel);
 
@@ -910,14 +925,12 @@ final class OrderContext implements Context
                 $order,
                 $channel,
                 $this->variantResolver->getVariant($product),
-                (int) $productCount
+                (int)$productCount
             );
 
             $order->setState($isFulfilled ? OrderInterface::STATE_FULFILLED : OrderInterface::STATE_NEW);
 
             $this->objectManager->persist($order);
         }
-
-        $this->objectManager->flush();
     }
 }
