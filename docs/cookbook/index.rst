@@ -109,6 +109,7 @@ Configuration
 
     configuration/disabling-shop-admin-api
     configuration/installation-commands
+    extending-bundles-other-em
 
 .. include:: /cookbook/configuration/map.rst.inc
 
