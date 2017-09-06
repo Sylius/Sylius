@@ -819,7 +819,7 @@ sylius:
         there_is_a_new_version_of_sylius_available: 'Er is een nieuwe versie van Sylius beschikbaar'
         there_is_no_main_taxon_for_this_product: 'Er is geen categorie voor dit product'
         this_customer_does_not_have_a_default_address: 'Deze klant heeft geen standaardadres'
-        this_customer_has_not_placed_any_orders_yet: 'Deze klant heeft nog geen orders geplaatst'
+        this_customer_has_not_completed_any_orders_yet: 'Deze klant heeft nog geen orders geplaatst'
         this_months_statistics: 'Statistieken van deze maand'
         this_product_has_no_attributes_defined: 'Dit product heeft geen kenmerken'
         title: 'Titel'
