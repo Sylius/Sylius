@@ -22,3 +22,4 @@
 * :doc:`/cookbook/cron-jobs`
 * :doc:`/cookbook/installation-commands`
 * :doc:`/cookbook/platform-sh`
+* :doc:`/cookbook/platform-sh-advanced`
