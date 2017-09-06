@@ -150,11 +150,11 @@ class Field
     }
 
     /**
-     * @param string|null $sortable
+     * @param string $sortable
      */
     public function setSortable(?string $sortable): void
     {
-        $this->sortable = $sortable ?: $this->name;
+        $this->sortable = $sortable;
     }
 
     /**

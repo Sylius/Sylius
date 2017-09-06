@@ -59,6 +59,30 @@ final class ArrayToDefinitionConverterSpec extends ObjectBehavior
 
         $grid->addField($codeField);
 
+        $enabledField = Field::fromNameAndType('enabled', 'boolean');
+        $enabledField->setLabel('Enabled');
+        $enabledField->setPath('method.enabled');
+        $enabledField->setSortable('enabled');
+
+        $grid->addField($enabledField);
+
+        $statusField = Field::fromNameAndType('status', 'string');
+        $statusField->setLabel('Status');
+        $statusField->setSortable('status');
+
+        $grid->addField($statusField);
+
+        $nameField = Field::fromNameAndType('name', 'string');
+        $nameField->setLabel('Name');
+        $nameField->setSortable('name');
+
+        $grid->addField($nameField);
+
+        $titleField = Field::fromNameAndType('title', 'string');
+        $titleField->setLabel('Title');
+
+        $grid->addField($titleField);
+
         $viewAction = Action::fromNameAndType('view', 'link');
         $viewAction->setLabel('Display Tax Category');
         $viewAction->setOptions(['foo' => 'bar']);
@@ -95,6 +119,27 @@ final class ArrayToDefinitionConverterSpec extends ObjectBehavior
                     'options' => [
                         'template' => 'bar.html.twig'
                     ],
+                ],
+                'enabled' => [
+                    'type' => 'boolean',
+                    'label' => 'Enabled',
+                    'path' => 'method.enabled',
+                    'sortable' => true,
+                ],
+                'status' => [
+                    'type' => 'string',
+                    'label' => 'Status',
+                    'sortable' => true,
+                ],
+                'name' => [
+                    'type' => 'string',
+                    'label' => 'Name',
+                    'sortable' => null,
+                ],
+                'title' => [
+                    'type' => 'string',
+                    'label' => 'Title',
+                    'sortable' => false,
                 ],
             ],
             'filters' => [

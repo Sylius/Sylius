@@ -73,7 +73,7 @@ final class FieldSpec extends ObjectBehavior
     {
         $this->getSortable()->shouldReturn(null);
 
-        $this->setSortable(null);
+        $this->setSortable('enabled');
         $this->getSortable()->shouldReturn('enabled');
     }
 

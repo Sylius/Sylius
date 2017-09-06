@@ -92,7 +92,12 @@ final class ArrayToDefinitionConverter implements ArrayToDefinitionConverterInte
             $field->setEnabled($configuration['enabled']);
         }
         if (array_key_exists('sortable', $configuration)) {
-            $field->setSortable($configuration['sortable']);
+            $sortable = $configuration['sortable'];
+            if ($sortable === true || $sortable === null) {
+                $sortable = $name;
+            }
+
+            $field->setSortable($sortable);
         }
         if (array_key_exists('position', $configuration)) {
             $field->setPosition($configuration['position']);
