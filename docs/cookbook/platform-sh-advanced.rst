@@ -187,8 +187,7 @@ Additional tips:
 ----------------
 
 * Platform.sh can serve gzipped versions of your static assets. Make sure to save your assets in the same folder, but with
- a .gz suffix. The ``gulp-gzip`` node package comes very helpful integrating saving of .gz versions of your assets.
-
+a .gz suffix. The ``gulp-gzip`` node package comes very helpful integrating saving of .gz versions of your assets.
 
 * Platform.sh comes with a `New Relic integration <https://docs.platform.sh/administration/integrations/new-relic.html>`_.
 
