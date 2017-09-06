@@ -155,7 +155,7 @@ The part that has to be removed from this file is shown below:
 How to disable Sylius API?
 --------------------------
 
-**1.** Remove SyliusAdminApiBundle from ``app/AppKernel``.
+**1.** Remove SyliusAdminApiBundle & FOSOAuthServerBundle from ``app/AppKernel``.
 
 .. code-block:: php
 
@@ -167,7 +167,7 @@ How to disable Sylius API?
             new \Sylius\Bundle\AdminBundle\SyliusAdminBundle(),
             new \Sylius\Bundle\ShopBundle\SyliusShopBundle(),
 
-            new \FOS\OAuthServerBundle\FOSOAuthServerBundle(),
+            // new \FOS\OAuthServerBundle\FOSOAuthServerBundle(),
             // new \Sylius\Bundle\AdminApiBundle\SyliusAdminApiBundle(), // - remove or leave this line commented
 
             new \AppBundle\AppBundle(),
