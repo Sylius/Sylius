@@ -820,7 +820,7 @@ sylius:
         there_is_a_new_version_of_sylius_available: 'There is a new version of Sylius available'
         there_is_no_main_taxon_for_this_product: 'There is no main taxon for this product'
         this_customer_does_not_have_a_default_address: 'This customer does not have a default address'
-        this_customer_has_not_placed_any_orders_yet: 'This customer has not placed any orders yet'
+        this_customer_has_not_placed_any_orders_yet: 'This customer has not placed or completed any orders yet'
         this_months_statistics: 'This month''s statistics'
         this_product_has_no_attributes_defined: 'This product has no attributes defined'
         title: 'Title'
