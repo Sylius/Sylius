@@ -3,9 +3,14 @@
 {% form_theme form '@SyliusUi/Form/theme.html.twig' %}
 
 {% block content %}
-    {% include '@SyliusShop/Checkout/_steps.html.twig' with {'active': 'complete', 'orderTotal': order.total} %}
 
-    {{ sonata_block_render_event('sylius.shop.checkout.complete.after_steps', {'order': order}) }}
+    {{ sonata_block_render_event('sylius.shop.checkout.before_steps', {'order': order}) }}
+
+    {% block steps %}
+        {% include '@SyliusShop/Checkout/_steps.html.twig' with {'active': 'complete', 'orderTotal': order.total} %}
+    {% endblock %}
+
+    {{ sonata_block_render_event('sylius.shop.checkout.after_steps', {'order': order}) }}
 
     <div class="ui padded segment">
         {% include '@SyliusShop/Checkout/Complete/_header.html.twig' %}
