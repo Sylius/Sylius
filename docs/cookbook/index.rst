@@ -28,5 +28,6 @@ The Cookbook
     cron-jobs
     installation-commands
     platform-sh
+    extending-bundles-other-em
 
 .. include:: /cookbook/map.rst.inc
