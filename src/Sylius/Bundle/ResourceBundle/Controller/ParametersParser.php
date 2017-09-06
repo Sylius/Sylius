@@ -16,6 +16,7 @@ namespace Sylius\Bundle\ResourceBundle\Controller;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\HttpFoundation\Request;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -75,6 +76,16 @@ final class ParametersParser implements ParametersParserInterface
 
         if (0 === strpos($parameter, 'expr:')) {
             return $this->parseRequestValueExpression(substr($parameter, 5), $request);
+        }
+
+        if (0 === strpos($parameter, '!!')) {
+            $parameter = explode(' ', $parameter);
+
+            $parser = trim($parameter[0], '!').'val';
+
+            Assert::oneOf($parser, ['intval', 'floatval', 'doubleval'], 'Variable can be parsed only to int, float or double.');
+
+            return $parser($request->get(substr($parameter[1], 1)));
         }
 
         return $parameter;
