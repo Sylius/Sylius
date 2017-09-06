@@ -70,7 +70,7 @@ class Theme implements ThemeInterface
      */
     public function __toString(): string
     {
-        return $this->title ?: $this->name;
+        return (string) ($this->title ?: $this->name);
     }
 
     /**
