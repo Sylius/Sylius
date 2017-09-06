@@ -188,6 +188,22 @@ You can define by which field you want the grid to be sorted and how.
                     name: asc
                     ...
 
+Then at the fields level, define that the field can be used for sorting:
+
+.. code-block:: yaml
+
+    # app/config/grids/admin/supplier.yml
+    sylius_grid:
+        grids:
+            app_admin_supplier:
+                ...
+                fields:
+                    name:
+                        type: string
+                        label: sylius.ui.name
+                        sortable: ~
+                    ...
+
 Pagination
 ----------
 
