@@ -27,7 +27,7 @@
 
 {{ form_start(form, {'action': path('sylius_admin_order_update', {'id': order.id}), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
     <div class="ui segment">
-        <input type="hidden" name="_method" value="PATCH" />
+        <input type="hidden" name="_method" value="PUT" />
 
         <div class="ui segment">
             <h4 class="ui dividing header">{{ 'sylius.ui.shipping_address'|trans }}</h4>

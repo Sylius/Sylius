@@ -35,7 +35,7 @@ sylius_admin_order_history:
 
 sylius_admin_order_update:
     path: /orders/{id}/edit
-    methods: [GET, PATCH]
+    methods: [GET, PUT]
     defaults:
         _controller: sylius.controller.order:updateAction
         _sylius:
