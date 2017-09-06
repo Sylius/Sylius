@@ -262,7 +262,7 @@ When you get connected please run:
 7. Dive deeper
 --------------
 
-Learn some more specific topics related to Sylius & Symfony on our :doc:`Advanced Platform.sh Cookbook </cookbook/platform-sh-advanced.rst`
+Learn some more specific topics related to Sylius & Symfony on our :doc:`Advanced Platform.sh Cookbook </cookbook/platform-sh-advanced.rst>`
 
 Learn more
 ----------
