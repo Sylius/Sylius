@@ -161,7 +161,7 @@ This file will load ``mysql`` and ``redis`` on your Platform.sh server.
 
 * Configure the access to the database:
 
-In the ``app/config/parameters_platform.php`` put such code:
+In the ``app/config/parameters_platform.php`` file, put the following code:
 
 .. code-block:: php
 
@@ -258,6 +258,11 @@ When you get connected please run:
 
     By default platform.sh creates only one instance of a database with the `main` name.
     Platform.sh works with the concept of an environment per branch if activated. The idea is to mimic production settings per each branch.
+
+7. Dive deeper
+--------------
+
+Learn some more specific topics related to Sylius & Symfony on our :doc:`Advanced Platform.sh Cookbook </cookbook/platform-sh-advanced.rst`
 
 Learn more
 ----------
