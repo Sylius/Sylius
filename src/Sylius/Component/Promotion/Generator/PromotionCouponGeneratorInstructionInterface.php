@@ -46,7 +46,7 @@ interface PromotionCouponGeneratorInstructionInterface
     /**
      * @param \DateTimeInterface $expiresAt
      */
-    public function setExpiresAt(\DateTimeInterface $expiresAt): void;
+    public function setExpiresAt(?\DateTimeInterface $expiresAt): void;
 
     /**
      * @return int|null

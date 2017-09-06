@@ -81,7 +81,7 @@ final class PromotionCouponGeneratorInstruction implements PromotionCouponGenera
     /**
      * {@inheritdoc}
      */
-    public function setExpiresAt(\DateTimeInterface $expiresAt): void
+    public function setExpiresAt(?\DateTimeInterface $expiresAt): void
     {
         $this->expiresAt = $expiresAt;
     }
