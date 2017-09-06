@@ -40,6 +40,7 @@ Don't worry, everything was automatically installed via Composer.
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
             new winzou\Bundle\StateMachineBundle\winzouStateMachineBundle(),
             new Sylius\Bundle\ProductBundle\SyliusProductBundle(),
+            new Sylius\Bundle\LocaleBundle\SyliusLocaleBundle(),
             new Sylius\Bundle\AttributeBundle\SyliusAttributeBundle(),
             new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
             new Sylius\Bundle\LocaleBundle\SyliusLocaleBundle(),
