@@ -822,7 +822,7 @@ sylius:
         there_is_a_new_version_of_sylius_available: 'З''явилася нова версія додатку Sylius'
         there_is_no_main_taxon_for_this_product: 'Для цього товару немає основного таксону'
         this_customer_does_not_have_a_default_address: 'Цей клієнт не має адреси за замовчуванням'
-        this_customer_has_not_placed_any_orders_yet: 'Цей замовник ще не розмістив замовлення'
+        this_customer_has_not_completed_any_orders_yet: 'Цей замовник ще не розмістив замовлення'
         this_months_statistics: 'Статистика цього місяця'
         this_product_has_no_attributes_defined: 'Цей продукт не має визначених атрибутів'
         title: 'Заголовок'
