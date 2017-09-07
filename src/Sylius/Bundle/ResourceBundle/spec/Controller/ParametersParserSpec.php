@@ -69,7 +69,7 @@ final class ParametersParserSpec extends ObjectBehavior
         ;
     }
 
-    function it_parser_string_parameter_and_change_its_type_to_int(): void
+    function it_parses_string_parameter_and_casts_it_into_int(): void
     {
         $request = new Request();
         $request->request->set('int', '5');
@@ -80,7 +80,7 @@ final class ParametersParserSpec extends ObjectBehavior
         ;
     }
 
-    function it_parser_string_parameter_and_change_its_type_to_float(): void
+    function it_parses_string_parameter_and_casts_it_into_float(): void
     {
         $request = new Request();
         $request->request->set('float', '5.4');
@@ -91,7 +91,7 @@ final class ParametersParserSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_exception_if_string_parameter_is_going_to_be_parsed_to_invalid_type()
+    function it_throws_exception_if_string_parameter_is_going_to_be_casted_into_invalid_type()
     {
         $request = new Request();
         $request->request->set('int', 5);
@@ -102,7 +102,7 @@ final class ParametersParserSpec extends ObjectBehavior
         ;
     }
 
-    function it_parser_string_parameter_and_change_its_type_to_boolean(): void
+    function it_parses_string_parameter_and_casts_it_into_bool(): void
     {
         $request = new Request();
         $request->request->set('bool0', '0');
