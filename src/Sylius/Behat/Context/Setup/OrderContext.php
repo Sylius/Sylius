@@ -422,11 +422,11 @@ final class OrderContext implements Context
      */
     public function thisCustomerPlacedOrdersOnChannelBuyingProducts(
         CustomerInterface $customer,
-        $orderCount,
+        int $orderCount,
         ChannelInterface $channel,
-        $productCount,
+        int $productCount,
         ProductInterface $product
-    ) {
+    ): void {
         $this->createOrdersForCustomer($customer, $orderCount, $channel, $productCount, $product);
     }
 
@@ -435,11 +435,11 @@ final class OrderContext implements Context
      */
     public function thisCustomerFulfilledOrdersPlacedOnChannelBuyingProducts(
         CustomerInterface $customer,
-        $orderCount,
+        int $orderCount,
         ChannelInterface $channel,
-        $productCount,
+        int $productCount,
         ProductInterface $product
-    ) {
+    ): void {
         $this->createOrdersForCustomer($customer, $orderCount, $channel, $productCount, $product, true);
     }
 
@@ -472,8 +472,11 @@ final class OrderContext implements Context
      * @Given :numberOfCustomers customers have placed :numberOfOrders orders for total of :total
      * @Given then :numberOfCustomers more customers have placed :numberOfOrders orders for total of :total
      */
-    public function customersHavePlacedOrdersForTotalOf($numberOfCustomers = 1, $numberOfOrders = 1, $total)
-    {
+    public function customersHavePlacedOrdersForTotalOf(
+        int $numberOfCustomers = 1,
+        int $numberOfOrders = 1,
+        string $total
+    ): void {
         $this->createOrders($numberOfCustomers, $numberOfOrders, $total);
     }
 
@@ -481,8 +484,11 @@ final class OrderContext implements Context
      * @Given :numberOfCustomers customers have fulfilled :numberOfOrders orders placed for total of :total
      * @Given then :numberOfCustomers more customers have fulfilled :numberOfOrders orders placed for total of :total
      */
-    public function customersHaveFulfilledOrdersPlacedForTotalOf($numberOfCustomers, $numberOfOrders, $total)
-    {
+    public function customersHaveFulfilledOrdersPlacedForTotalOf(
+        int $numberOfCustomers,
+        int $numberOfOrders,
+        string $total
+    ): void{
         $this->createOrders($numberOfCustomers, $numberOfOrders, $total, true);
     }
 
@@ -491,11 +497,11 @@ final class OrderContext implements Context
      * @Given then :numberOfCustomers more customers have placed :numberOfOrders orders for total of :total mostly :product product
      */
     public function customersHavePlacedOrdersForTotalOfMostlyProduct(
-        $numberOfCustomers,
-        $numberOfOrders,
-        $total,
+        int $numberOfCustomers,
+        int $numberOfOrders,
+        string $total,
         ProductInterface $product
-    ) {
+    ): void {
         $this->createOrdersWithProduct($numberOfCustomers, $numberOfOrders, $total, $product);
     }
 
@@ -504,11 +510,11 @@ final class OrderContext implements Context
      * @Given then :numberOfCustomers more customers have fulfilled :numberOfOrders orders placed for total of :total mostly :product product
      */
     public function customersHaveFulfilledOrdersPlacedForTotalOfMostlyProduct(
-        $numberOfCustomers,
-        $numberOfOrders,
-        $total,
+        int $numberOfCustomers,
+        int $numberOfOrders,
+        string $total,
         ProductInterface $product
-    ) {
+    ): void {
         $this->createOrdersWithProduct($numberOfCustomers, $numberOfOrders, $total, $product, true);
     }
 
@@ -620,7 +626,7 @@ final class OrderContext implements Context
      * @param OrderInterface $order
      * @param string $transition
      */
-    private function applyTransitionOnOrder(OrderInterface $order, string $transition)
+    private function applyTransitionOnOrder(OrderInterface $order, string $transition): void
     {
         $this->stateMachineFactory->get($order, OrderTransitions::GRAPH)->apply($transition);
     }
@@ -807,13 +813,17 @@ final class OrderContext implements Context
     }
 
     /**
-     * @param $numberOfCustomers
-     * @param $numberOfOrders
-     * @param $total
-     * @param $isFulfilled
+     * @param int $numberOfCustomers
+     * @param int $numberOfOrders
+     * @param string $total
+     * @param bool $isFulfilled
      */
-    private function createOrders($numberOfCustomers, $numberOfOrders, $total, $isFulfilled = false)
-    {
+    private function createOrders(
+        int $numberOfCustomers,
+        int $numberOfOrders,
+        string $total,
+        bool $isFulfilled = false
+    ): void {
         $customers = $this->generateCustomers($numberOfCustomers);
         $sampleProductVariant = $this->sharedStorage->get('variant');
         $total = $this->getPriceFromString($total);
@@ -840,18 +850,19 @@ final class OrderContext implements Context
     }
 
     /**
-     * @param $numberOfCustomers
-     * @param $numberOfOrders
-     * @param $total
-     * @param $isFulfilled
+     * @param int $numberOfCustomers
+     * @param int $numberOfOrders
+     * @param string $total
+     * @param ProductInterface $product
+     * @param bool $isFulfilled
      */
     private function createOrdersWithProduct(
-        $numberOfCustomers,
-        $numberOfOrders,
-        $total,
+        int $numberOfCustomers,
+        int $numberOfOrders,
+        string $total,
         ProductInterface $product,
-        $isFulfilled = false
-    ) {
+        bool $isFulfilled = false
+    ): void {
         $customers = $this->generateCustomers($numberOfCustomers);
         $sampleProductVariant = $product->getVariants()->first();
         $total = $this->getPriceFromString($total);
@@ -878,20 +889,20 @@ final class OrderContext implements Context
 
     /**
      * @param CustomerInterface $customer
-     * @param $orderCount
+     * @param int $orderCount
      * @param ChannelInterface $channel
-     * @param $productCount
+     * @param int $productCount
      * @param ProductInterface $product
-     * @param $isFulfilled
+     * @param bool $isFulfilled
      */
     private function createOrdersForCustomer(
         CustomerInterface $customer,
-        $orderCount,
+        int $orderCount,
         ChannelInterface $channel,
-        $productCount,
+        int $productCount,
         ProductInterface $product,
-        $isFulfilled = false
-    ) {
+        bool $isFulfilled = false
+    ): void {
         for ($i = 0; $i < $orderCount; $i++) {
             $order = $this->createOrder($customer, uniqid('#'), $channel);
 

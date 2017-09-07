@@ -86,9 +86,12 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
      */
     public function findForCustomerStatistics(CustomerInterface $customer): array
     {
-        return $this->createByCustomerIdQueryBuilder($customer->getId())
-            ->andWhere('o.state NOT IN (:states)')
-            ->setParameter('states', [OrderInterface::STATE_NEW, OrderInterface::STATE_CANCELLED])
+
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.customer = :customerId')
+            ->andWhere('o.state = :state')
+            ->setParameter('customerId', $customer->getId())
+            ->setParameter('state', OrderInterface::STATE_FULFILLED)
             ->getQuery()
             ->getResult()
         ;
