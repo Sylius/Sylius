@@ -31,6 +31,4 @@ sylius_admin_ajax_product_variants_by_codes:
             permission: true
             repository:
                 method: findByCodesAndProductCode
-                arguments:
-                    codes: $code
-                    productCode: $productCode
+                arguments: [$code, $productCode]

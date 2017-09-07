@@ -139,7 +139,7 @@
   * `ProductOptionValueInterface::setOption`
   * `ProductVariantInterface::setProduct`
   
-* `Sylius\Component\Product\Repository\ProductRepositoryInterface` definition changed.
+* `Sylius\Component\Product\Repository\ProductVariantRepositoryInterface` definition changed.
 
   * `findByCodeAndProductCode(string $code, string $productCode)` was changed to
     `findByCodesAndProductCode(array $codes, string $productCode)`.
