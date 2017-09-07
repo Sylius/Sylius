@@ -72,6 +72,11 @@ interface AddressPageInterface extends SymfonyPageInterface
     public function specifyEmail($email);
 
     /**
+     * @param string $fullName
+     */
+    public function specifyShippingAddressFullName(string $fullName);
+
+    /**
      * @param string $password
      */
     public function specifyPassword($password);

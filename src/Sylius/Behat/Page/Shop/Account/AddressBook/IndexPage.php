@@ -36,7 +36,13 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
      */
     public function getAddressesCount()
     {
-        return count($this->getElement('addresses')->findAll('css', 'address'));
+        $addressesCount = count($this->getElement('addresses')->findAll('css', 'address'));
+
+        if (!$this->hasNoDefaultAddress()) {
+            ++$addressesCount;
+        }
+
+        return $addressesCount;
     }
 
     /**

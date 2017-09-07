@@ -164,6 +164,17 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
     /**
      * {@inheritdoc}
      */
+    public function specifyShippingAddressFullName(string $fullName)
+    {
+        $names = explode(' ', $fullName);
+
+        $this->getElement('shipping_first_name')->setValue($names[0]);
+        $this->getElement('shipping_last_name')->setValue($names[1]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function canSignIn()
     {
         return $this->waitForElement(5, 'login_button');
