@@ -823,7 +823,7 @@ sylius:
         there_is_a_new_version_of_sylius_available: 'Une nouvelle version de Sylius est disponible'
         there_is_no_main_taxon_for_this_product: 'Il n''y a aucun taxon principal pour ce produit'
         this_customer_does_not_have_a_default_address: 'Ce client n''a pas d''adresse par défaut'
-        this_customer_has_not_completed_any_orders_yet: 'Ce client n''a pas encore terminé de commande'
+        this_customer_has_not_placed_any_orders_yet: 'Ce client n''a pas encore passé de commande'
         this_months_statistics: 'Les statistiques de ce mois'
         this_product_has_no_attributes_defined: 'Ce produit ne comporte pas d''attributs'
         title: 'Titre'
