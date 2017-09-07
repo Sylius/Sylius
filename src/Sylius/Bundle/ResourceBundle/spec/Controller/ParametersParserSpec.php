@@ -102,6 +102,23 @@ final class ParametersParserSpec extends ObjectBehavior
         ;
     }
 
+    function it_parser_string_parameter_and_change_its_type_to_boolean(): void
+    {
+        $request = new Request();
+        $request->request->set('bool0', '0');
+        $request->request->set('bool1', '1');
+
+        $this
+            ->parseRequestValues(['nested' => ['bool' => '!!bool $bool0']], $request)
+            ->shouldReturn(['nested' => ['bool' => false]])
+        ;
+
+        $this
+            ->parseRequestValues(['nested' => ['bool' => '!!bool $bool1']], $request)
+            ->shouldReturn(['nested' => ['bool' => true]])
+        ;
+    }
+
     function it_parses_expressions(): void
     {
         $request = new Request();
