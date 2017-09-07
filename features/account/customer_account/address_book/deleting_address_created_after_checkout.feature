@@ -8,7 +8,7 @@ Feature: Removing an address from my book
         Given the store operates on a single channel in "United States"
         And the store has a product "PHP T-Shirt" priced at "$19.99"
         And the store ships everywhere for free
-        And the store has a payment method "Offline" with a code "OFFLINE"
+        And the store allows paying offline
         And I am a logged in customer
         And I have an address "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States", "Arkansas" in my address book
         And my default address is of "Lucifer Morningstar"
@@ -19,8 +19,7 @@ Feature: Removing an address from my book
         And I am at the checkout addressing step
         When I specify the first and last name as "Mike Ross" for shipping address
         And I complete the addressing step
-        And I complete the shipping step
-        And I complete the payment step
+        And I proceed with "Free" shipping method and "Offline" payment
         And I confirm my order
         And I browse my address book
         And I delete the "Mike Ross" address
