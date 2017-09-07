@@ -74,7 +74,8 @@ final class ResourcesCollectionProviderSpec extends ObjectBehavior
 
         $requestConfiguration->getRequest()->willReturn($request);
         $request->query = $queryParameters;
-        $queryParameters->get('limit')->willReturn(5);
+        $queryParameters->has('limit')->willReturn(true);
+        $queryParameters->getInt('limit')->willReturn(5);
         $queryParameters->get('page', 1)->willReturn(6);
 
         $paginator->setMaxPerPage(5)->shouldBeCalled();
@@ -106,7 +107,8 @@ final class ResourcesCollectionProviderSpec extends ObjectBehavior
 
         $requestConfiguration->getRequest()->willReturn($request);
         $request->query = $queryParameters;
-        $queryParameters->get('limit')->willReturn(1000);
+        $queryParameters->has('limit')->willReturn(true);
+        $queryParameters->getInt('limit')->willReturn(1000);
         $queryParameters->get('page', 1)->willReturn(1);
 
         $paginator->setMaxPerPage(99)->shouldBeCalled();
@@ -134,7 +136,8 @@ final class ResourcesCollectionProviderSpec extends ObjectBehavior
 
         $requestConfiguration->getRequest()->willReturn($request);
         $request->query = $queryParameters;
-        $queryParameters->get('limit')->willReturn(8);
+        $queryParameters->has('limit')->willReturn(true);
+        $queryParameters->getInt('limit')->willReturn(8);
         $queryParameters->get('page', 1)->willReturn(6);
         $queryParameters->all()->willReturn(['foo' => 2, 'bar' => 15]);
 
@@ -172,7 +175,8 @@ final class ResourcesCollectionProviderSpec extends ObjectBehavior
 
         $requestConfiguration->getRequest()->willReturn($request);
         $request->query = $queryParameters;
-        $queryParameters->get('limit')->willReturn(5);
+        $queryParameters->has('limit')->willReturn(true);
+        $queryParameters->getInt('limit')->willReturn(5);
         $queryParameters->get('page', 1)->willReturn(6);
 
         $paginator->setMaxPerPage(5)->shouldBeCalled();
