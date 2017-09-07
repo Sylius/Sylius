@@ -97,7 +97,7 @@ final class ProductAttributeContext implements Context
     }
 
     /**
-     * @Given the store( also) has a :type product attribute :name
+     * @Given the store( also) has a/an :type product attribute :name
      */
     public function theStoreHasATextProductAttribute($type, $name)
     {
