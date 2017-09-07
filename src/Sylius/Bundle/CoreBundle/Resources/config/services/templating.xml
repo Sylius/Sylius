@@ -20,6 +20,7 @@
 
         <service id="sylius.templating.helper.price" class="Sylius\Bundle\CoreBundle\Templating\Helper\PriceHelper" lazy="true">
             <argument type="service" id="sylius.calculator.product_variant_price" />
+            <argument type="service" id="sylius.calculator.product_variant_original_price" />
             <tag name="templating.helper" alias="sylius_calculate_price" />
         </service>
 

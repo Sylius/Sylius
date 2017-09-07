@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\CoreBundle\Templating\Helper;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CoreBundle\Templating\Helper\PriceHelper;
 use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
@@ -24,9 +25,11 @@ use Symfony\Component\Templating\Helper\Helper;
  */
 final class PriceHelperSpec extends ObjectBehavior
 {
-    function let(ProductVariantPriceCalculatorInterface $productVariantPriceCalculator): void
-    {
-        $this->beConstructedWith($productVariantPriceCalculator);
+    function let(
+        ProductVariantPriceCalculatorInterface $productVariantPriceCalculator,
+        ProductVariantPriceCalculatorInterface $productVariantOriginalPriceCalculator
+    ): void {
+        $this->beConstructedWith($productVariantPriceCalculator, $productVariantOriginalPriceCalculator);
     }
 
     function it_is_helper(): void
@@ -44,6 +47,18 @@ final class PriceHelperSpec extends ObjectBehavior
         $productVariantPriceCalculator->calculate($productVariant, $context)->willReturn(1000);
 
         $this->getPrice($productVariant, $context)->shouldReturn(1000);
+    }
+
+    function it_returns_variant_original_price_for_channel_given_in_context(
+        ChannelInterface $channel,
+        ProductVariantInterface $productVariant,
+        ProductVariantPriceCalculatorInterface $productVariantOriginalPriceCalculator
+    ): void {
+        $context = ['channel' => $channel];
+
+        $productVariantOriginalPriceCalculator->calculate($productVariant, $context)->willReturn(1000);
+
+        $this->getOriginalPrice($productVariant, $context)->shouldReturn(1000);
     }
 
     function it_throws_invalid_argument_exception_when_channel_key_is_not_present_in_context(

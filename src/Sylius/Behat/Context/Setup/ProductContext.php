@@ -197,6 +197,16 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Given /^the store(?:| also) has a product "([^"]+)" originally priced at ("[^"]+")$/
+     */
+    public function storeHasAProductOriginallyPricedAt($productName, $originalPrice = 100, ChannelInterface $channel = null)
+    {
+        $product = $this->createProduct($productName, 0, $channel);
+        $product->getVariants()->first()->getChannelPricings()->first()->setOriginalPrice($originalPrice);
+        $this->saveProduct($product);
+    }
+
+    /**
      * @Given /^(this product) is also priced at ("[^"]+") in ("[^"]+" channel)$/
      */
     public function thisProductIsAlsoPricedAtInChannel(ProductInterface $product, $price, ChannelInterface $channel)

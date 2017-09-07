@@ -178,6 +178,14 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
+    public function getOriginalPrice()
+    {
+        return $this->getElement('product_original_price')->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function countReviews()
     {
         return count($this->getElement('reviews')->findAll('css', '.comment'));
@@ -318,6 +326,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'option_select' => '#sylius_add_to_cart_cartItem_variant_%option-name%',
             'out_of_stock' => '#sylius-product-out-of-stock',
             'product_price' => '#product-price',
+            'product_original_price' => '#product-original-price',
             'reviews' => '[data-tab="reviews"] .comments',
             'selecting_variants' => '#sylius-product-selecting-variant',
             'validation_errors' => '.sylius-validation-error',

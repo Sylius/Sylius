@@ -40,6 +40,7 @@ final class PriceExtension extends \Twig_Extension
     {
         return [
             new \Twig_Filter('sylius_calculate_price', [$this->helper, 'getPrice']),
+            new \Twig_Filter('sylius_calculate_original_price', [$this->helper, 'getOriginalPrice']),
         ];
     }
 }

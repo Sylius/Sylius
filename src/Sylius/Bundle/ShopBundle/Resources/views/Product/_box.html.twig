@@ -16,6 +16,7 @@
     <div class="content">
         <a href="{{ path('sylius_shop_product_show', {'slug': product.slug, '_locale': product.translation.locale}) }}" class="header sylius-product-name">{{ product.name }}</a>
         {% if not product.variants.empty() %}
+            <div class="sylius-product-original-price" style="text-decoration: line-through">{{ money.calculateOriginalPrice(product|sylius_resolve_variant) }}</div>
             <div class="sylius-product-price">{{ money.calculatePrice(product|sylius_resolve_variant) }}</div>
         {% endif %}
     </div>
