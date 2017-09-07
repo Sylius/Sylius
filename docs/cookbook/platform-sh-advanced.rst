@@ -1,5 +1,5 @@
-Advanced topics
----------------
+Advanced Platform.sh configurations
+===================================
 
 The basic set-up let's you easily set-up a Platform.sh project running your Sylius project. It should give you an
 environment suitable for testing Platform.sh in combination with Sylius.
