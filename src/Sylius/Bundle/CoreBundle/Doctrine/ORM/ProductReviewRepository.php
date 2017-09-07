@@ -26,15 +26,15 @@ class ProductReviewRepository extends EntityRepository implements ProductReviewR
     /**
      * {@inheritdoc}
      */
-    public function findLatestByProductId(string $productId, string $count): array
+    public function findLatestByProductId($productId, int $count): array
     {
         return $this->createQueryBuilder('o')
             ->andWhere('o.reviewSubject = :productId')
             ->andWhere('o.status = :status')
-            ->setParameter('productId', (int) $productId)
+            ->setParameter('productId', $productId)
             ->setParameter('status', ReviewInterface::STATUS_ACCEPTED)
             ->addOrderBy('o.createdAt', 'DESC')
-            ->setMaxResults((int) $count)
+            ->setMaxResults($count)
             ->getQuery()
             ->getResult()
         ;

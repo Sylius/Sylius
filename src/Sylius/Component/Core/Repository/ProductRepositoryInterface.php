@@ -45,11 +45,11 @@ interface ProductRepositoryInterface extends BaseProductRepositoryInterface
     /**
      * @param ChannelInterface $channel
      * @param string $locale
-     * @param string $count
+     * @param int $count
      *
      * @return array|ProductInterface[]
      */
-    public function findLatestByChannel(ChannelInterface $channel, string $locale, string $count): array;
+    public function findLatestByChannel(ChannelInterface $channel, string $locale, int $count): array;
 
     /**
      * @param ChannelInterface $channel

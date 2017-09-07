@@ -36,11 +36,11 @@ class CustomerRepository extends EntityRepository implements CustomerRepositoryI
     /**
      * {@inheritdoc}
      */
-    public function findLatest(string $count): array
+    public function findLatest(int $count): array
     {
         return $this->createQueryBuilder('o')
             ->addOrderBy('o.createdAt', 'DESC')
-            ->setMaxResults((int) $count)
+            ->setMaxResults($count)
             ->getQuery()
             ->getResult()
         ;

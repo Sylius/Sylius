@@ -30,8 +30,8 @@ final class ShippingMethodTypeExtension extends AbstractTypeExtension
     /**
      * @var ServiceRegistryInterface
      */
-
     private $checkerRegistry;
+
     /**
      * @var ServiceRegistryInterface
      */

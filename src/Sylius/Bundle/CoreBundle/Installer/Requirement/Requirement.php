@@ -38,14 +38,14 @@ final class Requirement
     /**
      * @param string $label
      * @param bool $fulfilled
-     * @param bool|null $required
+     * @param bool $required
      * @param string|null $help
      */
-    public function __construct(string $label, bool $fulfilled, ?bool $required, ?string $help = null)
+    public function __construct(string $label, bool $fulfilled, bool $required = true, ?string $help = null)
     {
         $this->label = $label;
         $this->fulfilled = $fulfilled;
-        $this->required = $required ?? true;
+        $this->required = $required;
         $this->help = $help;
     }
 

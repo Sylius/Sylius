@@ -65,7 +65,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         return $this->createQueryBuilder('o')
             ->andWhere('o.customer = :customerId')
             ->andWhere('o.state != :state')
-            ->setParameter('customerId', (int) $customerId)
+            ->setParameter('customerId', $customerId)
             ->setParameter('state', OrderInterface::STATE_CART)
         ;
     }
@@ -97,7 +97,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
     /**
      * {@inheritdoc}
      */
-    public function findOneForPayment(int $id): ?OrderInterface
+    public function findOneForPayment($id): ?OrderInterface
     {
         return $this->createQueryBuilder('o')
             ->addSelect('payments')
@@ -163,7 +163,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
     /**
      * {@inheritdoc}
      */
-    public function findCartByChannel(int $id, ChannelInterface $channel): ?OrderInterface
+    public function findCartByChannel($id, ChannelInterface $channel): ?OrderInterface
     {
         return $this->createQueryBuilder('o')
             ->andWhere('o.id = :id')
@@ -231,7 +231,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
     /**
      * {@inheritdoc}
      */
-    public function findLatestInChannel(string $count, ChannelInterface $channel): array
+    public function findLatestInChannel(int $count, ChannelInterface $channel): array
     {
         return $this->createQueryBuilder('o')
             ->andWhere('o.channel = :channel')
@@ -239,7 +239,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
             ->addOrderBy('o.checkoutCompletedAt', 'DESC')
             ->setParameter('channel', $channel)
             ->setParameter('state', OrderInterface::STATE_CART)
-            ->setMaxResults((int) $count)
+            ->setMaxResults($count)
             ->getQuery()
             ->getResult()
         ;

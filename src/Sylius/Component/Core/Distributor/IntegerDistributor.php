@@ -29,7 +29,7 @@ final class IntegerDistributor implements IntegerDistributorInterface
         $sign = $amount < 0 ? -1 : 1;
         $amount = abs($amount);
 
-        $low = (int)($amount / $numberOfTargets);
+        $low = (int) ($amount / $numberOfTargets);
         $high = $low + 1;
 
         $remainder = $amount % $numberOfTargets;

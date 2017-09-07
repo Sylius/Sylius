@@ -17,7 +17,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\Form\DataTransformerInterface;
 
 /**
@@ -62,7 +61,7 @@ final class ProductsToCodesTransformerSpec extends ObjectBehavior
     function it_throws_exception_if_value_to_transform_is_not_array(): void
     {
         $this
-            ->shouldThrow(UnexpectedTypeException::class)
+            ->shouldThrow(\InvalidArgumentException::class)
             ->during('transform', ['badObject'])
         ;
     }

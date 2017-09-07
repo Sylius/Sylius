@@ -42,13 +42,11 @@ final class TaxonsToCodesTransformer implements DataTransformerInterface
     /**
      * {@inheritdoc}
      *
-     * @throws UnexpectedTypeException
+     * @throws \InvalidArgumentException
      */
     public function transform($value): Collection
     {
-        if (!is_array($value) && !is_null($value)) {
-            throw new UnexpectedTypeException($value, 'array');
-        }
+        Assert::nullOrIsArray($value);
 
         if (empty($value)) {
             return new ArrayCollection();

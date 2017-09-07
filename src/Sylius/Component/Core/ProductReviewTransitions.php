@@ -22,4 +22,8 @@ final class ProductReviewTransitions
 
     public const TRANSITION_ACCEPT = 'accept';
     public const TRANSITION_REJECT = 'reject';
+
+    private function __construct()
+    {
+    }
 }

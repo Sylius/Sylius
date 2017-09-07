@@ -117,9 +117,9 @@ class ProductAttributeExampleFactory extends AbstractExampleFactory implements E
     }
 
     /**
-     * @return \Generator
+     * @return iterable
      */
-    private function getLocales(): \Generator
+    private function getLocales(): iterable
     {
         /** @var LocaleInterface[] $locales */
         $locales = $this->localeRepository->findAll();

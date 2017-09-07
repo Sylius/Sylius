@@ -64,11 +64,11 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
     public function findForCustomerStatistics(CustomerInterface $customer): array;
 
     /**
-     * @param int $id
+     * @param mixed $id
      *
      * @return OrderInterface|null
      */
-    public function findOneForPayment(int $id): ?OrderInterface;
+    public function findOneForPayment($id): ?OrderInterface;
 
     /**
      * @param string $number
@@ -79,12 +79,12 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
     public function findOneByNumberAndCustomer(string $number, CustomerInterface $customer): ?OrderInterface;
 
     /**
-     * @param int $id
+     * @param mixed $id
      * @param ChannelInterface $channel
      *
      * @return OrderInterface|null
      */
-    public function findCartByChannel(int $id, ChannelInterface $channel): ?OrderInterface;
+    public function findCartByChannel($id, ChannelInterface $channel): ?OrderInterface;
 
     /**
      * @param ChannelInterface $channel
@@ -109,12 +109,12 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
     public function countByChannel(ChannelInterface $channel): int;
 
     /**
-     * @param string $count
+     * @param int $count
      * @param ChannelInterface $channel
      *
      * @return array|OrderInterface[]
      */
-    public function findLatestInChannel(string $count, ChannelInterface $channel): array;
+    public function findLatestInChannel(int $count, ChannelInterface $channel): array;
 
     /**
      * @param \DateTimeInterface $terminalDate
