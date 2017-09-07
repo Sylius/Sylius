@@ -59,3 +59,7 @@ winzou_state_machine:
                     on: ["complete"]
                     do: ["@sylius.state_resolver.order_payment", "resolve"]
                     args: ["object"]
+                sylius_control_shipping_state:
+                    on: ["complete"]
+                    do: ["@sylius.state_resolver.order_shipping", "resolve"]
+                    args: ["object"]

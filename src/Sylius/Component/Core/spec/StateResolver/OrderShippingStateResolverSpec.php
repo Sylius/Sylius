@@ -62,6 +62,20 @@ final class OrderShippingStateResolverSpec extends ObjectBehavior
         $this->resolve($order);
     }
 
+    function it_marks_an_order_as_shipped_if_there_is_no_shipments_to_deliver(
+        FactoryInterface $stateMachineFactory,
+        OrderInterface $order,
+        StateMachineInterface $orderStateMachine
+    ): void {
+        $order->getShipments()->willReturn(new ArrayCollection());
+        $order->getShippingState()->willReturn(OrderShippingStates::STATE_READY);
+        $stateMachineFactory->get($order, OrderShippingTransitions::GRAPH)->willReturn($orderStateMachine);
+
+        $orderStateMachine->apply(OrderShippingTransitions::TRANSITION_SHIP)->shouldBeCalled();
+
+        $this->resolve($order);
+    }
+
     function it_marks_an_order_as_partially_shipped_if_some_shipments_are_delivered(
         FactoryInterface $stateMachineFactory,
         OrderInterface $order,

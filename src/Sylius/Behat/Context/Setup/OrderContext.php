@@ -283,6 +283,24 @@ final class OrderContext implements Context
     }
 
     /**
+     * @Given /^the customer chose ("[^"]+" payment)$/
+     */
+    public function theCustomerChosePayment(PaymentMethodInterface $paymentMethod)
+    {
+        /** @var OrderInterface $order */
+        $order = $this->sharedStorage->get('order');
+
+        foreach ($order->getPayments() as $payment) {
+            $payment->setMethod($paymentMethod);
+        }
+
+        $this->applyTransitionOnOrderCheckout($order, OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT);
+        $this->applyTransitionOnOrderCheckout($order, OrderCheckoutTransitions::TRANSITION_COMPLETE);
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @Given the customer bought a single :product
      * @Given I bought a single :product
      */

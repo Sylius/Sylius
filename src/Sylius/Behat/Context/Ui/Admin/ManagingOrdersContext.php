@@ -500,6 +500,14 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @Then it should have order's shipping state :orderShippingState
+     */
+    public function itShouldHaveOrderShippingState($orderShippingState)
+    {
+        Assert::same($this->showPage->getShippingState(), $orderShippingState);
+    }
+
+    /**
      * @Then it's payment state should be refunded
      */
     public function orderPaymentStateShouldBeRefunded()
@@ -651,6 +659,14 @@ final class ManagingOrdersContext implements Context
     public function theOrderShouldHavePaymentState(OrderInterface $order, $orderPaymentState)
     {
         Assert::true($this->indexPage->isSingleResourceOnPage(['paymentState' => $orderPaymentState]));
+    }
+
+    /**
+     * @Then the order :order should have order shipping state :orderPaymentState
+     */
+    public function theOrderShouldHaveShippingState(OrderInterface $order, $orderPaymentState)
+    {
+        Assert::true($this->indexPage->isSingleResourceOnPage(['shippingState' => $orderPaymentState]));
     }
 
     /**
@@ -824,6 +840,14 @@ final class ManagingOrdersContext implements Context
     public function iShouldNotSeeInformationAboutPayments()
     {
         Assert::same($this->showPage->getPaymentsCount(), 0);
+    }
+
+    /**
+     * @Then I should not see information about shipments
+     */
+    public function iShouldNotSeeInformationAboutShipments()
+    {
+        Assert::same($this->showPage->getShipmentsCount(), 0);
     }
 
     /**
