@@ -822,7 +822,7 @@ sylius:
         there_is_a_new_version_of_sylius_available: 'Доступна новая версия Sylius'
         there_is_no_main_taxon_for_this_product: 'Нет основных таксон для этого продукта'
         this_customer_does_not_have_a_default_address: 'У этого клиента не указан адрес по умолчанию'
-        this_customer_has_not_completed_any_orders_yet: 'Этот клиент еще ничего не заказал'
+        this_customer_has_not_placed_any_orders_yet: 'Этот клиент еще ничего не заказал'
         this_months_statistics: 'Статистика за этот месяц'
         this_product_has_no_attributes_defined: 'Этот продукт не имеет определенных атрибутов'
         title: 'Название'

@@ -33,6 +33,7 @@ sylius:
         promotion_filter:
             price_range: 价格区间过滤
         promotion_rule:
+            customer_group: 客户组
             taxonomy: 分类
             cart_quantity_configuration:
                 count: 计数

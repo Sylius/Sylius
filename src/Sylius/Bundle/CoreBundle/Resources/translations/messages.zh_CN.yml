@@ -28,11 +28,14 @@ sylius:
             contact_email: 联系邮件
             currencies: 货币
             currency_base: 基础货币
+            account_verification_required: 账号验证是否必须
             hostname: 主机名
             locale_default: 默认区域
             locales: 区域设置
             payment_methods: 支付方式
             shipping_methods: 发货方式
+            skipping_shipping_step_allowed: 如果仅有一种配送方式可用，跳过配送步骤吗？
+            skipping_payment_step_allowed: 如果仅有一种支付方式可用，跳过选择支付步骤吗？
             tax_calculation_strategy: 税收策略
             tax_zone_default: 默认税区
             taxonomies: 分类
@@ -125,6 +128,8 @@ sylius:
             products: 商品
             taxons: 分类
         promotion_rule:
+            customer_group:
+                group: 客户组
             has_taxon:
                 taxons: 分类
             product:
@@ -145,6 +150,7 @@ sylius:
             header: 扩展组件
             accelerator:
                 header: 加速器
+                help: 启用 Zend OpCache (强烈推荐)。
             apc: APC
             ctype: Ctype
             gd: GD
@@ -168,13 +174,16 @@ sylius:
             header: 文件系统
             cache:
                 header: 缓存
+                help: '设置权限运行： sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
             exists: 存在
             logs:
                 header: 日志
+                help: '设置权限运行： sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
             not_exists: 不存在
             not_writable: 不可写
             parameters:
                 header: parameters.yml
+                help: 设置权限运行： sudo chmod a+w %path%
             vendors: 供应商
             writable: 可写
         settings:
@@ -194,6 +203,10 @@ sylius:
                 header: 过时的时区
                 help: '时区%timezone%已被否决。修复您的 php.ini 文件 （不推荐使用的时区 http://php.net/manual/en/timezones.others.php 的列表）。'
             version: PHP 版本
+            version_recommended: 推荐的 PHP 版本
     payum_gateway:
         cash_on_delivery: 货到付款
         offline: 现金支付
+        paypal_express_checkout: Paypal快捷支付
+    shipping_method_resolver:
+        by_zones_and_channel: 按区域和渠道

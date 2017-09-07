@@ -10,6 +10,7 @@ sylius:
             options: 选项
             meta_keywords: Meta关键字：
             meta_description: META描述
+            slug: Slug
             taxons: 分类
         product_variant:
             name: 名称
