@@ -17,22 +17,22 @@ Feature: Statistics dashboard in a single channel
         Given 3 customers have placed 4 orders for total of "$8566.00"
         And then 2 more customers have placed 2 orders for total of "$459.00"
         When I open administration dashboard
-        Then I should see 6 new orders
+        Then I should see 0 new orders
         And I should see 5 new customers
-        And there should be total sales of "$9,025.00"
-        And the average order value should be "$1,504.17"
+        And there should be total sales of "$0.00"
+        And the average order value should be "$0.00"
 
     @ui
-    Scenario: Statistics include only placed orders that were not cancelled
+    Scenario: Statistics include only fulfilled orders that were not cancelled
         Given 4 customers have placed 4 orders for total of "$5241.00"
         And 2 customers have added products to the cart for total of "$3450.00"
         And 1 customers have placed 1 orders for total of "$1000.00"
         But the customer cancelled this order
         When I open administration dashboard
-        Then I should see 4 new orders
+        Then I should see 0 new orders
         And I should see 7 new customers
-        And there should be total sales of "$5,241.00"
-        And the average order value should be "$1,310.25"
+        And there should be total sales of "$0.00"
+        And the average order value should be "$0.00"
 
     @ui
     Scenario: Seeing recent orders and customers
