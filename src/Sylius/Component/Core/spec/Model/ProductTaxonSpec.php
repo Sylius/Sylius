@@ -13,10 +13,8 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Component\Core\Model;
 
-use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\Model\ProductTaxon;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductTaxonInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 
@@ -25,29 +23,24 @@ use Sylius\Component\Core\Model\TaxonInterface;
  */
 final class ProductTaxonSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ProductTaxon::class);
-    }
-
-    function it_implements_product_taxon_interface()
+    function it_implements_product_taxon_interface(): void
     {
         $this->shouldImplement(ProductTaxonInterface::class);
     }
 
-    function it_has_mutable_product_field(ProductInterface $product)
+    function it_has_mutable_product_field(ProductInterface $product): void
     {
         $this->setProduct($product);
         $this->getProduct()->shouldReturn($product);
     }
 
-    function it_has_mutable_taxon_field(TaxonInterface $taxon)
+    function it_has_mutable_taxon_field(TaxonInterface $taxon): void
     {
         $this->setTaxon($taxon);
         $this->getTaxon()->shouldReturn($taxon);
     }
 
-    function it_has_mutable_position_field()
+    function it_has_mutable_position_field(): void
     {
         $this->setPosition(1);
         $this->getPosition()->shouldReturn(1);

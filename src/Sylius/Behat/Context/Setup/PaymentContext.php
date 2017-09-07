@@ -173,7 +173,7 @@ final class PaymentContext implements Context
      */
     public function theStoreHasPaymentMethodNotAssignedToAnyChannel($paymentMethodName)
     {
-        $this->createPaymentMethod($paymentMethodName, 'PM_'.$paymentMethodName, 'Payment method', 'Offline', false);
+        $this->createPaymentMethod($paymentMethodName, 'PM_'.$paymentMethodName, 'Offline', 'Payment method', false);
     }
 
     /**

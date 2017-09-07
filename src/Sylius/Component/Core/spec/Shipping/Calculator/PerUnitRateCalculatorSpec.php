@@ -14,13 +14,11 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\Core\Shipping\Calculator;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Exception\MissingChannelConfigurationException;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
-use Sylius\Component\Core\Shipping\Calculator\PerUnitRateCalculator;
 use Sylius\Component\Shipping\Calculator\CalculatorInterface;
 
 /**
@@ -28,17 +26,12 @@ use Sylius\Component\Shipping\Calculator\CalculatorInterface;
  */
 final class PerUnitRateCalculatorSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(PerUnitRateCalculator::class);
-    }
-
-    function it_implements_shipping_calculator_interface()
+    function it_implements_shipping_calculator_interface(): void
     {
         $this->shouldImplement(CalculatorInterface::class);
     }
 
-    function it_returns_per_unit_rate_type(CalculatorInterface $calculator)
+    function it_returns_per_unit_rate_type(CalculatorInterface $calculator): void
     {
         $calculator->getType()->willReturn('per_unit_rate');
 
@@ -49,7 +42,7 @@ final class PerUnitRateCalculatorSpec extends ObjectBehavior
         ShipmentInterface $shipment,
         OrderInterface $order,
         ChannelInterface $channel
-    ) {
+    ): void {
         $shipment->getOrder()->willReturn($order);
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB');
@@ -63,7 +56,7 @@ final class PerUnitRateCalculatorSpec extends ObjectBehavior
         OrderInterface $order,
         ChannelInterface $channel,
         ShippingMethodInterface $shippingMethod
-    ) {
+    ): void {
         $shipment->getOrder()->willReturn($order);
         $shipment->getMethod()->willReturn($shippingMethod);
 

@@ -24,7 +24,7 @@ final class SelectPaymentType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('payments', ChangePaymentMethodType::class, [
             'entry_type' => PaymentType::class,
@@ -35,7 +35,7 @@ final class SelectPaymentType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_checkout_select_payment';
     }

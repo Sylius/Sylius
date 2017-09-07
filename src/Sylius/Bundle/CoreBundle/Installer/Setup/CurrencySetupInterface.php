@@ -30,5 +30,5 @@ interface CurrencySetupInterface
      *
      * @return CurrencyInterface
      */
-    public function setup(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper);
+    public function setup(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper): CurrencyInterface;
 }

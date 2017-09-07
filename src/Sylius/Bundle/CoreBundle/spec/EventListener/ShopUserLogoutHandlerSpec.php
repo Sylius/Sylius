@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\EventListener\ShopUserLogoutHandler;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,22 +28,17 @@ use Symfony\Component\Security\Http\Logout\LogoutSuccessHandlerInterface;
  */
 final class ShopUserLogoutHandlerSpec extends ObjectBehavior
 {
-    function let(HttpUtils $httpUtils, SessionInterface $session, ChannelContextInterface $channelContext)
+    function let(HttpUtils $httpUtils, SessionInterface $session, ChannelContextInterface $channelContext): void
     {
         $this->beConstructedWith($httpUtils, '/', $session, $channelContext);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ShopUserLogoutHandler::class);
-    }
-
-    function it_is_default_logout_success_handler()
+    function it_is_default_logout_success_handler(): void
     {
         $this->shouldHaveType(DefaultLogoutSuccessHandler::class);
     }
 
-    function it_implements_logout_success_handler_interface()
+    function it_implements_logout_success_handler_interface(): void
     {
         $this->shouldImplement(LogoutSuccessHandlerInterface::class);
     }
@@ -56,7 +50,7 @@ final class ShopUserLogoutHandlerSpec extends ObjectBehavior
         Request $request,
         Response $response,
         SessionInterface $session
-    ) {
+    ): void {
         $channelContext->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
 

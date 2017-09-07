@@ -25,5 +25,5 @@ interface OrderShippingMethodSelectionRequirementCheckerInterface
      *
      * @return bool
      */
-    public function isShippingMethodSelectionRequired(OrderInterface $order);
+    public function isShippingMethodSelectionRequired(OrderInterface $order): bool;
 }

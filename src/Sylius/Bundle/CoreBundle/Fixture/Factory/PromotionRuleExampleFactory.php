@@ -14,14 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
 use Sylius\Component\Core\Factory\PromotionRuleFactoryInterface;
-use Sylius\Component\Core\Promotion\Checker\Rule\ContainsProductRuleChecker;
-use Sylius\Component\Core\Promotion\Checker\Rule\CustomerGroupRuleChecker;
-use Sylius\Component\Core\Promotion\Checker\Rule\HasTaxonRuleChecker;
-use Sylius\Component\Core\Promotion\Checker\Rule\NthOrderRuleChecker;
-use Sylius\Component\Core\Promotion\Checker\Rule\ShippingCountryRuleChecker;
-use Sylius\Component\Core\Promotion\Checker\Rule\TotalOfItemsFromTaxonRuleChecker;
 use Sylius\Component\Promotion\Checker\Rule\CartQuantityRuleChecker;
-use Sylius\Component\Promotion\Checker\Rule\ItemTotalRuleChecker;
 use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -62,7 +55,7 @@ class PromotionRuleExampleFactory extends AbstractExampleFactory implements Exam
     /**
      * {@inheritdoc}
      */
-    public function create(array $options = [])
+    public function create(array $options = []): PromotionRuleInterface
     {
         $options = $this->optionsResolver->resolve($options);
 
@@ -77,7 +70,7 @@ class PromotionRuleExampleFactory extends AbstractExampleFactory implements Exam
     /**
      * {@inheritdoc}
      */
-    protected function configureOptions(OptionsResolver $resolver)
+    protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
             ->setDefault('type', CartQuantityRuleChecker::TYPE)
@@ -85,7 +78,7 @@ class PromotionRuleExampleFactory extends AbstractExampleFactory implements Exam
             ->setDefault('configuration', [
                 'count' => $this->faker->randomNumber(1),
             ])
-            ->setNormalizer('configuration', function (Options $options, $configuration) {
+            ->setNormalizer('configuration', function (Options $options, $configuration): array {
                 foreach ($configuration as $channelCode => $channelConfiguration) {
                     if (isset($channelConfiguration['amount'])) {
                         $configuration[$channelCode]['amount'] *= 100;

@@ -48,9 +48,9 @@ final class CountryTypeExtension extends AbstractTypeExtension
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event): void {
             $options = [
                 'label' => 'sylius.form.country.name',
                 'choice_loader' => null,
@@ -85,25 +85,25 @@ final class CountryTypeExtension extends AbstractTypeExtension
     /**
      * {@inheritdoc}
      */
-    public function getExtendedType()
+    public function getExtendedType(): string
     {
         return CountryType::class;
     }
 
     /**
-     * @param $code
+     * @param string $code
      *
-     * @return null|string
+     * @return string|null
      */
-    private function getCountryName($code)
+    private function getCountryName(string $code): ?string
     {
         return Intl::getRegionBundle()->getCountryName($code);
     }
 
     /**
-     * @return array
+     * @return array|CountryInterface[]
      */
-    private function getAvailableCountries()
+    private function getAvailableCountries(): array
     {
         $availableCountries = Intl::getRegionBundle()->getCountryNames();
 

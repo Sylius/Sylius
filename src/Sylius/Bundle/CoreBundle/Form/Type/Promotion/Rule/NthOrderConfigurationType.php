@@ -27,7 +27,7 @@ final class NthOrderConfigurationType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('nth', IntegerType::class, [
@@ -43,7 +43,7 @@ final class NthOrderConfigurationType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_promotion_rule_nth_order_configuration';
     }

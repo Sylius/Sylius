@@ -21,7 +21,6 @@ use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
-use Sylius\Component\Core\Promotion\Action\PercentageDiscountPromotionActionCommand;
 use Sylius\Component\Core\Promotion\Applicator\UnitsPromotionAdjustmentsApplicatorInterface;
 use Sylius\Component\Promotion\Action\PromotionActionCommandInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
@@ -37,16 +36,11 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
     function let(
         ProportionalIntegerDistributorInterface $distributor,
         UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
-    ) {
+    ): void {
         $this->beConstructedWith($distributor, $unitsPromotionAdjustmentsApplicator);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(PercentageDiscountPromotionActionCommand::class);
-    }
-
-    function it_implements_a_promotion_action_interface()
+    function it_implements_a_promotion_action_interface(): void
     {
         $this->shouldImplement(PromotionActionCommandInterface::class);
     }
@@ -58,7 +52,7 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
         PromotionInterface $promotion,
         ProportionalIntegerDistributorInterface $distributor,
         UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
-    ) {
+    ): void {
         $order->countItems()->willReturn(2);
         $order->getItems()->willReturn(new ArrayCollection([$firstItem->getWrappedObject(), $secondItem->getWrappedObject()]));
 
@@ -73,7 +67,7 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
         $this->execute($order, ['percentage' => 0.1], $promotion)->shouldReturn(true);
     }
 
-    function it_does_not_apply_discount_if_order_has_no_items(OrderInterface $order, PromotionInterface $promotion)
+    function it_does_not_apply_discount_if_order_has_no_items(OrderInterface $order, PromotionInterface $promotion): void
     {
         $order->countItems()->willReturn(0);
         $order->getPromotionSubjectTotal()->shouldNotBeCalled();
@@ -85,7 +79,7 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
         OrderInterface $order,
         PromotionInterface $promotion,
         ProportionalIntegerDistributorInterface $distributor
-    ) {
+    ): void {
         $order->countItems()->willReturn(0);
 
         $order->getPromotionSubjectTotal()->willReturn(0);
@@ -97,7 +91,7 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
     function it_does_not_apply_discount_if_configuration_is_invalid(
         OrderInterface $order,
         PromotionInterface $promotion
-    ) {
+    ): void {
         $order->countItems()->willReturn(1);
 
         $this->execute($order, [], $promotion)->shouldReturn(false);
@@ -107,7 +101,7 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
     function it_throws_exception_if_subject_is_not_an_order(
         PromotionInterface $promotion,
         PromotionSubjectInterface $subject
-    ) {
+    ): void {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
             ->during('execute', [$subject, [], $promotion])
@@ -121,7 +115,7 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
         OrderItemInterface $item,
         OrderItemUnitInterface $unit,
         PromotionInterface $promotion
-    ) {
+    ): void {
         $order->countItems()->willReturn(1);
         $order->getItems()->willReturn(new ArrayCollection([$item->getWrappedObject()]));
 
@@ -143,7 +137,7 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
         $this->revert($order, [], $promotion);
     }
 
-    function it_does_not_revert_if_order_has_no_items(OrderInterface $order, PromotionInterface $promotion)
+    function it_does_not_revert_if_order_has_no_items(OrderInterface $order, PromotionInterface $promotion): void
     {
         $order->countItems()->willReturn(0);
         $order->getItems()->shouldNotBeCalled();
@@ -154,7 +148,7 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
     function it_throws_an_exception_while_reverting_subject_which_is_not_order(
         PromotionInterface $promotion,
         PromotionSubjectInterface $subject
-    ) {
+    ): void {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
             ->during('revert', [$subject, [], $promotion])

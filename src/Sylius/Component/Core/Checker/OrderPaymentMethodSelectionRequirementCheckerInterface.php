@@ -25,5 +25,5 @@ interface OrderPaymentMethodSelectionRequirementCheckerInterface
      *
      * @return bool
      */
-    public function isPaymentMethodSelectionRequired(OrderInterface $order);
+    public function isPaymentMethodSelectionRequired(OrderInterface $order): bool;
 }

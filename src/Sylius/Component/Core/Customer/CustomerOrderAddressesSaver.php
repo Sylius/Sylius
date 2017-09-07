@@ -37,7 +37,7 @@ final class CustomerOrderAddressesSaver implements OrderAddressesSaverInterface
     /**
      * @param OrderInterface $order
      */
-    public function saveAddresses(OrderInterface $order)
+    public function saveAddresses(OrderInterface $order): void
     {
         /** @var CustomerInterface $customer */
         $customer = $order->getCustomer();

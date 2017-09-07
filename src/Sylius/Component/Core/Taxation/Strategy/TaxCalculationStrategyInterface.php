@@ -25,12 +25,12 @@ interface TaxCalculationStrategyInterface
      * @param OrderInterface $order
      * @param ZoneInterface $zone
      */
-    public function applyTaxes(OrderInterface $order, ZoneInterface $zone);
+    public function applyTaxes(OrderInterface $order, ZoneInterface $zone): void;
 
     /**
      * @return string
      */
-    public function getType();
+    public function getType(): string;
 
     /**
      * @param OrderInterface $order
@@ -38,5 +38,5 @@ interface TaxCalculationStrategyInterface
      *
      * @return bool
      */
-    public function supports(OrderInterface $order, ZoneInterface $zone);
+    public function supports(OrderInterface $order, ZoneInterface $zone): bool;
 }

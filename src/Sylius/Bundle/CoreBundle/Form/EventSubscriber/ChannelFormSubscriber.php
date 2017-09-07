@@ -25,7 +25,7 @@ final class ChannelFormSubscriber implements EventSubscriberInterface
     /**
      * {@inheritdoc}
      */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             FormEvents::PRE_SUBMIT => 'preSubmit',
@@ -35,7 +35,7 @@ final class ChannelFormSubscriber implements EventSubscriberInterface
     /**
      * @param FormEvent $event
      */
-    public function preSubmit(FormEvent $event)
+    public function preSubmit(FormEvent $event): void
     {
         $data = $event->getData();
 
@@ -57,12 +57,12 @@ final class ChannelFormSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * @param string[] $locales
+     * @param array|string[] $locales
      * @param string $defaultLocale
      *
-     * @return string[]
+     * @return array|string[]
      */
-    private function resolveLocales(array $locales, $defaultLocale)
+    private function resolveLocales(array $locales, string $defaultLocale): array
     {
         if (empty($locales)) {
             return [$defaultLocale];
@@ -76,12 +76,12 @@ final class ChannelFormSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * @param string[] $currencies
+     * @param array|string[] $currencies
      * @param string $baseCurrency
      *
-     * @return string[]
+     * @return array|string[]
      */
-    private function resolveCurrencies(array $currencies, $baseCurrency)
+    private function resolveCurrencies(array $currencies, string $baseCurrency): array
     {
         if (empty($currencies)) {
             return [$baseCurrency];

@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\CoreBundle\Provider;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Provider\ChannelBasedDefaultTaxZoneProvider;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -25,12 +24,7 @@ use Sylius\Component\Core\Provider\ZoneProviderInterface;
  */
 final class ChannelBasedDefaultTaxZoneProviderSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ChannelBasedDefaultTaxZoneProvider::class);
-    }
-
-    function it_implements_default_tax_zone_provider_interface()
+    function it_implements_default_tax_zone_provider_interface(): void
     {
         $this->shouldImplement(ZoneProviderInterface::class);
     }
@@ -39,7 +33,7 @@ final class ChannelBasedDefaultTaxZoneProviderSpec extends ObjectBehavior
         ChannelInterface $channel,
         OrderInterface $order,
         ZoneInterface $defaultTaxZone
-    ) {
+    ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getDefaultTaxZone()->willReturn($defaultTaxZone);
 

@@ -19,17 +19,11 @@ use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\UnitOfWork;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\CoreBundle\EventListener\DefaultUsernameORMListener;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 
 final class DefaultUsernameORMListenerSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(DefaultUsernameORMListener::class);
-    }
-
     function it_sets_usernames_on_customer_create(
         OnFlushEventArgs $onFlushEventArgs,
         EntityManager $entityManager,
@@ -37,7 +31,7 @@ final class DefaultUsernameORMListenerSpec extends ObjectBehavior
         CustomerInterface $customer,
         ShopUserInterface $user,
         ClassMetadata $userMetadata
-    ) {
+    ): void {
         $onFlushEventArgs->getEntityManager()->willReturn($entityManager);
         $entityManager->getUnitOfWork()->willReturn($unitOfWork);
 
@@ -66,7 +60,7 @@ final class DefaultUsernameORMListenerSpec extends ObjectBehavior
         CustomerInterface $customer,
         ShopUserInterface $user,
         ClassMetadata $userMetadata
-    ) {
+    ): void {
         $onFlushEventArgs->getEntityManager()->willReturn($entityManager);
         $entityManager->getUnitOfWork()->willReturn($unitOfWork);
 
@@ -95,7 +89,7 @@ final class DefaultUsernameORMListenerSpec extends ObjectBehavior
         CustomerInterface $customer,
         ShopUserInterface $user,
         ClassMetadata $userMetadata
-    ) {
+    ): void {
         $onFlushEventArgs->getEntityManager()->willReturn($entityManager);
         $entityManager->getUnitOfWork()->willReturn($unitOfWork);
 
@@ -124,7 +118,7 @@ final class DefaultUsernameORMListenerSpec extends ObjectBehavior
         CustomerInterface $customer,
         ShopUserInterface $user,
         ClassMetadata $userMetadata
-    ) {
+    ): void {
         $onFlushEventArgs->getEntityManager()->willReturn($entityManager);
         $entityManager->getUnitOfWork()->willReturn($unitOfWork);
 
@@ -150,7 +144,7 @@ final class DefaultUsernameORMListenerSpec extends ObjectBehavior
         EntityManager $entityManager,
         UnitOfWork $unitOfWork,
         CustomerInterface $customer
-    ) {
+    ): void {
         $onFlushEventArgs->getEntityManager()->willReturn($entityManager);
         $entityManager->getUnitOfWork()->willReturn($unitOfWork);
 
@@ -169,7 +163,7 @@ final class DefaultUsernameORMListenerSpec extends ObjectBehavior
         EntityManager $entityManager,
         UnitOfWork $unitOfWork,
         CustomerInterface $customer
-    ) {
+    ): void {
         $onFlushEventArgs->getEntityManager()->willReturn($entityManager);
         $entityManager->getUnitOfWork()->willReturn($unitOfWork);
 
@@ -188,7 +182,7 @@ final class DefaultUsernameORMListenerSpec extends ObjectBehavior
         OnFlushEventArgs $onFlushEventArgs,
         EntityManager $entityManager,
         UnitOfWork $unitOfWork
-    ) {
+    ): void {
         $onFlushEventArgs->getEntityManager()->willReturn($entityManager);
         $entityManager->getUnitOfWork()->willReturn($unitOfWork);
 
@@ -206,7 +200,7 @@ final class DefaultUsernameORMListenerSpec extends ObjectBehavior
         UnitOfWork $unitOfWork,
         \stdClass $stdObject,
         \stdClass $stdObject2
-    ) {
+    ): void {
         $onFlushEventArgs->getEntityManager()->willReturn($entityManager);
         $entityManager->getUnitOfWork()->willReturn($unitOfWork);
 

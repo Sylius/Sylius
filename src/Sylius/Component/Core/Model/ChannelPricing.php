@@ -47,7 +47,7 @@ class ChannelPricing implements ChannelPricingInterface
     /**
      * {@inheritdoc}
      */
-    public function __toString()
+    public function __toString(): string
     {
         return (string) $this->getPrice();
     }
@@ -63,7 +63,7 @@ class ChannelPricing implements ChannelPricingInterface
     /**
      * {@inheritdoc}
      */
-    public function getChannelCode()
+    public function getChannelCode(): ?string
     {
         return $this->channelCode;
     }
@@ -71,7 +71,7 @@ class ChannelPricing implements ChannelPricingInterface
     /**
      * {@inheritdoc}
      */
-    public function setChannelCode($channelCode)
+    public function setChannelCode(?string $channelCode): void
     {
         $this->channelCode = $channelCode;
     }
@@ -79,7 +79,7 @@ class ChannelPricing implements ChannelPricingInterface
     /**
      * {@inheritdoc}
      */
-    public function getProductVariant()
+    public function getProductVariant(): ?ProductVariantInterface
     {
         return $this->productVariant;
     }
@@ -87,7 +87,7 @@ class ChannelPricing implements ChannelPricingInterface
     /**
      * {@inheritdoc}
      */
-    public function setProductVariant(ProductVariantInterface $productVariant = null)
+    public function setProductVariant(?ProductVariantInterface $productVariant): void
     {
         $this->productVariant = $productVariant;
     }
@@ -95,7 +95,7 @@ class ChannelPricing implements ChannelPricingInterface
     /**
      * {@inheritdoc}
      */
-    public function getPrice()
+    public function getPrice(): ?int
     {
         return $this->price;
     }
@@ -103,7 +103,7 @@ class ChannelPricing implements ChannelPricingInterface
     /**
      * {@inheritdoc}
      */
-    public function setPrice($price)
+    public function setPrice(?int $price): void
     {
         $this->price = $price;
     }
@@ -111,7 +111,7 @@ class ChannelPricing implements ChannelPricingInterface
     /**
      * {@inheritdoc}
      */
-    public function getOriginalPrice()
+    public function getOriginalPrice(): ?int
     {
         return $this->originalPrice;
     }
@@ -119,7 +119,7 @@ class ChannelPricing implements ChannelPricingInterface
     /**
      * {@inheritdoc}
      */
-    public function setOriginalPrice($originalPrice)
+    public function setOriginalPrice(?int $originalPrice): void
     {
         $this->originalPrice = $originalPrice;
     }
@@ -127,7 +127,7 @@ class ChannelPricing implements ChannelPricingInterface
     /**
      * {@inheritdoc}
      */
-    public function isPriceReduced()
+    public function isPriceReduced(): bool
     {
         return $this->originalPrice > $this->price;
     }

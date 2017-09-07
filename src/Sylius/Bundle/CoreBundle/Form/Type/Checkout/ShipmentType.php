@@ -33,7 +33,7 @@ final class ShipmentType extends AbstractType
     /**
      * @param string $dataClass
      */
-    public function __construct($dataClass)
+    public function __construct(string $dataClass)
     {
         $this->dataClass = $dataClass;
     }
@@ -41,7 +41,7 @@ final class ShipmentType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
@@ -60,7 +60,7 @@ final class ShipmentType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
             ->setDefaults([
@@ -72,7 +72,7 @@ final class ShipmentType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_checkout_shipment';
     }

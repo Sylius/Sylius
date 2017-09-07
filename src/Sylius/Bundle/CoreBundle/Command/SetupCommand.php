@@ -42,7 +42,7 @@ final class SetupCommand extends AbstractInstallCommand
     /**
      * {@inheritdoc}
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('sylius:install:setup')
@@ -57,7 +57,7 @@ EOT
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): void
     {
         $currency = $this->get('sylius.setup.currency')->setup($input, $output, $this->getHelper('question'));
         $locale = $this->get('sylius.setup.locale')->setup($input, $output);
@@ -68,11 +68,9 @@ EOT
     /**
      * @param InputInterface $input
      * @param OutputInterface $output
-     * @param $localeCode
-     *
-     * @return int
+     * @param string $localeCode
      */
-    protected function setupAdministratorUser(InputInterface $input, OutputInterface $output, $localeCode)
+    protected function setupAdministratorUser(InputInterface $input, OutputInterface $output, string $localeCode): void
     {
         $outputStyle = new SymfonyStyle($input, $output);
         $outputStyle->writeln('Create your administrator account.');
@@ -83,7 +81,7 @@ EOT
         try {
             $user = $this->configureNewUser($userFactory->createNew(), $input, $output);
         } catch (\InvalidArgumentException $exception) {
-            return 0;
+            return;
         }
 
         $user->setEnabled(true);
@@ -103,7 +101,7 @@ EOT
      *
      * @return AdminUserInterface
      */
-    private function configureNewUser(AdminUserInterface $user, InputInterface $input, OutputInterface $output)
+    private function configureNewUser(AdminUserInterface $user, InputInterface $input, OutputInterface $output): AdminUserInterface
     {
         $userRepository = $this->get('sylius.repository.admin_user');
 
@@ -139,7 +137,7 @@ EOT
      *
      * @return Question
      */
-    private function createEmailQuestion(OutputInterface $output)
+    private function createEmailQuestion(OutputInterface $output): Question
     {
         return (new Question('E-mail:'))
             ->setValidator(function ($value) use ($output) {
@@ -186,8 +184,10 @@ EOT
      * @param OutputInterface $output
      *
      * @return \Closure
+     *
+     * @throws \DomainException
      */
-    private function getPasswordQuestionValidator(OutputInterface $output)
+    private function getPasswordQuestionValidator(OutputInterface $output): \Closure
     {
         return function ($value) use ($output) {
             /** @var ConstraintViolationListInterface $errors */
@@ -206,7 +206,7 @@ EOT
      *
      * @return Question
      */
-    private function createPasswordQuestion($message, \Closure $validator)
+    private function createPasswordQuestion(string $message, \Closure $validator): Question
     {
         return (new Question($message))
             ->setValidator($validator)

@@ -26,7 +26,7 @@ final class PromotionTypeExtension extends AbstractTypeExtension
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('channels', ChannelChoiceType::class, [
@@ -40,7 +40,7 @@ final class PromotionTypeExtension extends AbstractTypeExtension
     /**
      * {@inheritdoc}
      */
-    public function getExtendedType()
+    public function getExtendedType(): string
     {
         return PromotionType::class;
     }

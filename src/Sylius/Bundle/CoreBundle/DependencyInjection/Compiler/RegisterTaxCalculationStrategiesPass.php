@@ -24,8 +24,10 @@ final class RegisterTaxCalculationStrategiesPass implements CompilerPassInterfac
 {
     /**
      * {@inheritdoc}
+     *
+     * @throws \InvalidArgumentException
      */
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         if (!$container->hasDefinition('sylius.registry.tax_calculation_strategy')) {
             return;

@@ -40,7 +40,7 @@ class ProductOptionRepository extends BaseProductOptionRepository
     /**
      * {@inheritdoc}
      */
-    public function findAll()
+    public function findAll(): array
     {
         $productOptions = parent::findAll();
 

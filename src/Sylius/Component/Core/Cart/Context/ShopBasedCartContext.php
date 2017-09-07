@@ -95,7 +95,7 @@ final class ShopBasedCartContext implements CartContextInterface
      * @param OrderInterface $cart
      * @param CustomerInterface $customer
      */
-    private function setCustomerAndAddressOnCart(OrderInterface $cart, CustomerInterface $customer)
+    private function setCustomerAndAddressOnCart(OrderInterface $cart, CustomerInterface $customer): void
     {
         $cart->setCustomer($customer);
 

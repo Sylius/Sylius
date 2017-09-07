@@ -16,7 +16,6 @@ namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\CoreBundle\EventListener\CartBlamerListener;
 use Sylius\Bundle\UserBundle\Event\UserEvent;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -34,14 +33,9 @@ use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
  */
 final class CartBlamerListenerSpec extends ObjectBehavior
 {
-    function let(ObjectManager $cartManager, CartContextInterface $cartContext)
+    function let(ObjectManager $cartManager, CartContextInterface $cartContext): void
     {
         $this->beConstructedWith($cartManager, $cartContext);
-    }
-
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(CartBlamerListener::class);
     }
 
     function it_throws_exception_when_cart_does_not_implement_core_order_interface_on_implicit_login(
@@ -49,7 +43,7 @@ final class CartBlamerListenerSpec extends ObjectBehavior
         CartContextInterface $cartContext,
         ShopUserInterface $user,
         UserEvent $userEvent
-    ) {
+    ): void {
         $cartContext->getCart()->willReturn($order);
         $userEvent->getUser()->willReturn($user);
         $this->shouldThrow(UnexpectedTypeException::class)->during('onImplicitLogin', [$userEvent]);
@@ -61,7 +55,7 @@ final class CartBlamerListenerSpec extends ObjectBehavior
         InteractiveLoginEvent $interactiveLoginEvent,
         ShopUserInterface $user,
         TokenInterface $token
-    ) {
+    ): void {
         $cartContext->getCart()->willReturn($order);
         $interactiveLoginEvent->getAuthenticationToken()->willReturn($token);
         $token->getUser()->willReturn($user);
@@ -75,7 +69,7 @@ final class CartBlamerListenerSpec extends ObjectBehavior
         UserEvent $userEvent,
         ShopUserInterface $user,
         CustomerInterface $customer
-    ) {
+    ): void {
         $cartContext->getCart()->willReturn($cart);
         $userEvent->getUser()->willReturn($user);
         $user->getCustomer()->willReturn($customer);
@@ -93,7 +87,7 @@ final class CartBlamerListenerSpec extends ObjectBehavior
         TokenInterface $token,
         ShopUserInterface $user,
         CustomerInterface $customer
-    ) {
+    ): void {
         $cartContext->getCart()->willReturn($cart);
         $interactiveLoginEvent->getAuthenticationToken()->willReturn($token);
         $token->getUser()->willReturn($user);
@@ -109,7 +103,7 @@ final class CartBlamerListenerSpec extends ObjectBehavior
         OrderInterface $cart,
         InteractiveLoginEvent $interactiveLoginEvent,
         TokenInterface $token
-    ) {
+    ): void {
         $cartContext->getCart()->willReturn($cart);
         $interactiveLoginEvent->getAuthenticationToken()->willReturn($token);
         $token->getUser()->willReturn('anon.');
@@ -121,7 +115,7 @@ final class CartBlamerListenerSpec extends ObjectBehavior
         CartContextInterface $cartContext,
         UserEvent $userEvent,
         ShopUserInterface $user
-    ) {
+    ): void {
         $cartContext->getCart()->willThrow(CartNotFoundException::class);
         $userEvent->getUser()->willReturn($user);
         $this->onImplicitLogin($userEvent);
@@ -132,7 +126,7 @@ final class CartBlamerListenerSpec extends ObjectBehavior
         InteractiveLoginEvent $interactiveLoginEvent,
         TokenInterface $token,
         ShopUserInterface $user
-    ) {
+    ): void {
         $cartContext->getCart()->willThrow(CartNotFoundException::class);
         $interactiveLoginEvent->getAuthenticationToken()->willReturn($token);
         $token->getUser()->willReturn($user);

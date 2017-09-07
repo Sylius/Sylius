@@ -69,7 +69,7 @@ final class CheckoutResolver implements EventSubscriberInterface
     /**
      * @param GetResponseEvent $event
      */
-    public function onKernelRequest(GetResponseEvent $event)
+    public function onKernelRequest(GetResponseEvent $event): void
     {
         if (!$event->isMasterRequest()) {
             return;
@@ -99,7 +99,7 @@ final class CheckoutResolver implements EventSubscriberInterface
     /**
      * {@inheritdoc}
      */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             KernelEvents::REQUEST => 'onKernelRequest',
@@ -111,7 +111,7 @@ final class CheckoutResolver implements EventSubscriberInterface
      *
      * @return string
      */
-    private function getRequestedGraph(Request $request)
+    private function getRequestedGraph(Request $request): string
     {
         return $request->attributes->get('_sylius')['state_machine']['graph'];
     }
@@ -121,18 +121,8 @@ final class CheckoutResolver implements EventSubscriberInterface
      *
      * @return string
      */
-    private function getRequestedTransition(Request $request)
+    private function getRequestedTransition(Request $request): string
     {
         return $request->attributes->get('_sylius')['state_machine']['transition'];
-    }
-
-    /**
-     * @param Request $request
-     *
-     * @return null|string
-     */
-    private function getReferer(Request $request)
-    {
-        return $request->headers->get('referer');
     }
 }

@@ -44,7 +44,7 @@ final class PaymentMethodFactory implements PaymentMethodFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createNew()
+    public function createNew(): PaymentMethodInterface
     {
         return $this->decoratedFactory->createNew();
     }
@@ -52,7 +52,7 @@ final class PaymentMethodFactory implements PaymentMethodFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createWithGateway($gatewayFactory)
+    public function createWithGateway(string $gatewayFactory): PaymentMethodInterface
     {
         $gatewayConfig = $this->gatewayConfigFactory->createNew();
         $gatewayConfig->setFactoryName($gatewayFactory);

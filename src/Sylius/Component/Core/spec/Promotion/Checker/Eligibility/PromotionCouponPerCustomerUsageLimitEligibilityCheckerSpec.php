@@ -17,7 +17,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PromotionCouponInterface as CorePromotionCouponInterface;
-use Sylius\Component\Core\Promotion\Checker\Eligibility\PromotionCouponPerCustomerUsageLimitEligibilityChecker;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Promotion\Checker\Eligibility\PromotionCouponEligibilityCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionCouponInterface;
@@ -28,17 +27,12 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
  */
 final class PromotionCouponPerCustomerUsageLimitEligibilityCheckerSpec extends ObjectBehavior
 {
-    function let(OrderRepositoryInterface $orderRepository)
+    function let(OrderRepositoryInterface $orderRepository): void
     {
         $this->beConstructedWith($orderRepository);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(PromotionCouponPerCustomerUsageLimitEligibilityChecker::class);
-    }
-
-    function it_implements_a_promotion_coupon_eligibility_checker_interface()
+    function it_implements_a_promotion_coupon_eligibility_checker_interface(): void
     {
         $this->shouldImplement(PromotionCouponEligibilityCheckerInterface::class);
     }
@@ -48,7 +42,7 @@ final class PromotionCouponPerCustomerUsageLimitEligibilityCheckerSpec extends O
         OrderInterface $promotionSubject,
         CorePromotionCouponInterface $promotionCoupon,
         CustomerInterface $customer
-    ) {
+    ): void {
         $customer->getId()->willReturn(1);
         $promotionSubject->getCustomer()->willReturn($customer);
         $promotionCoupon->getPerCustomerUsageLimit()->willReturn(42);
@@ -63,7 +57,7 @@ final class PromotionCouponPerCustomerUsageLimitEligibilityCheckerSpec extends O
         OrderInterface $promotionSubject,
         CorePromotionCouponInterface $promotionCoupon,
         CustomerInterface $customer
-    ) {
+    ): void {
         $customer->getId()->willReturn(1);
         $promotionSubject->getCustomer()->willReturn($customer);
         $promotionCoupon->getPerCustomerUsageLimit()->willReturn(42);
@@ -77,7 +71,7 @@ final class PromotionCouponPerCustomerUsageLimitEligibilityCheckerSpec extends O
         OrderInterface $promotionSubject,
         CorePromotionCouponInterface $promotionCoupon,
         CustomerInterface $customer
-    ) {
+    ): void {
         $customer->getId()->willReturn(null);
         $promotionSubject->getCustomer()->willReturn($customer);
         $promotionCoupon->getPerCustomerUsageLimit()->willReturn(42);
@@ -88,7 +82,7 @@ final class PromotionCouponPerCustomerUsageLimitEligibilityCheckerSpec extends O
     function it_returns_true_if_promotion_subject_has_no_customer(
         OrderInterface $promotionSubject,
         CorePromotionCouponInterface $promotionCoupon
-    ) {
+    ): void {
         $promotionSubject->getCustomer()->willReturn(null);
         $promotionCoupon->getPerCustomerUsageLimit()->willReturn(42);
 
@@ -98,7 +92,7 @@ final class PromotionCouponPerCustomerUsageLimitEligibilityCheckerSpec extends O
     function it_returns_true_if_promotion_coupon_has_no_per_customer_usage_limit(
         OrderInterface $promotionSubject,
         CorePromotionCouponInterface $promotionCoupon
-    ) {
+    ): void {
         $promotionCoupon->getPerCustomerUsageLimit()->willReturn(null);
 
         $this->isEligible($promotionSubject, $promotionCoupon)->shouldReturn(true);
@@ -107,14 +101,14 @@ final class PromotionCouponPerCustomerUsageLimitEligibilityCheckerSpec extends O
     function it_returns_true_if_promotion_coupon_is_not_a_core_one(
         OrderInterface $promotionSubject,
         PromotionCouponInterface $promotionCoupon
-    ) {
+    ): void {
         $this->isEligible($promotionSubject, $promotionCoupon)->shouldReturn(true);
     }
 
     function it_returns_true_if_promotion_subject_is_not_a_core_order(
         PromotionSubjectInterface $promotionSubject,
         CorePromotionCouponInterface $promotionCoupon
-    ) {
+    ): void {
         $this->isEligible($promotionSubject, $promotionCoupon)->shouldReturn(true);
     }
 }

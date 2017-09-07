@@ -22,7 +22,7 @@ final class InstallAssetsCommand extends AbstractInstallCommand
     /**
      * {@inheritdoc}
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('sylius:install:assets')
@@ -37,7 +37,7 @@ EOT
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): ?int
     {
         $output->writeln(sprintf(
             'Installing Sylius assets for environment <info>%s</info>.',
@@ -59,5 +59,7 @@ EOT
         ];
 
         $this->runCommands($commands, $output);
+
+        return null;
     }
 }

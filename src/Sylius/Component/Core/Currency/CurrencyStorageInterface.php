@@ -25,14 +25,14 @@ interface CurrencyStorageInterface
      * @param ChannelInterface $channel
      * @param string $currencyCode
      */
-    public function set(ChannelInterface $channel, $currencyCode);
+    public function set(ChannelInterface $channel, string $currencyCode): void;
 
     /**
      * @param ChannelInterface $channel
      *
-     * @return string
+     * @return string|null
      *
      * @throws CurrencyNotFoundException
      */
-    public function get(ChannelInterface $channel);
+    public function get(ChannelInterface $channel): ?string;
 }

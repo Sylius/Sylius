@@ -28,9 +28,9 @@ final class ChangePaymentMethodType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event) {
+        $builder->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event): void {
             $payments = $event->getData();
             $form = $event->getForm();
 
@@ -45,12 +45,15 @@ final class ChangePaymentMethodType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getParent()
+    public function getParent(): string
     {
         return CollectionType::class;
     }
 
-    public function getBlockPrefix()
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix(): string
     {
         return 'sylius_change_payment_method';
     }

@@ -24,5 +24,5 @@ interface ShippingCategoryRepositoryInterface extends RepositoryInterface
     /**
      * @return QueryBuilder
      */
-    public function createListQueryBuilder();
+    public function createListQueryBuilder(): QueryBuilder;
 }

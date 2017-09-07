@@ -23,7 +23,6 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Core\Taxation\Applicator\OrderItemUnitsTaxesApplicator;
 use Sylius\Component\Core\Taxation\Applicator\OrderTaxesApplicatorInterface;
 use Sylius\Component\Order\Factory\AdjustmentFactoryInterface;
 use Sylius\Component\Taxation\Calculator\CalculatorInterface;
@@ -39,16 +38,11 @@ final class OrderItemUnitsTaxesApplicatorSpec extends ObjectBehavior
         CalculatorInterface $calculator,
         AdjustmentFactoryInterface $adjustmentsFactory,
         TaxRateResolverInterface $taxRateResolver
-    ) {
+    ): void {
         $this->beConstructedWith($calculator, $adjustmentsFactory, $taxRateResolver);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(OrderItemUnitsTaxesApplicator::class);
-    }
-
-    function it_implements_an_order_shipment_taxes_applicator_interface()
+    function it_implements_an_order_shipment_taxes_applicator_interface(): void
     {
         $this->shouldImplement(OrderTaxesApplicatorInterface::class);
     }
@@ -68,7 +62,7 @@ final class OrderItemUnitsTaxesApplicatorSpec extends ObjectBehavior
         ProductVariantInterface $productVariant,
         TaxRateInterface $taxRate,
         ZoneInterface $zone
-    ) {
+    ): void {
         $order->getItems()->willReturn($items);
 
         $items->count()->willReturn(1);
@@ -113,7 +107,7 @@ final class OrderItemUnitsTaxesApplicatorSpec extends ObjectBehavior
         ProductVariantInterface $productVariant,
         TaxRateInterface $taxRate,
         ZoneInterface $zone
-    ) {
+    ): void {
         $orderItems = new ArrayCollection([$orderItem->getWrappedObject()]);
         $order->getItems()->willReturn($orderItems);
 
@@ -135,7 +129,7 @@ final class OrderItemUnitsTaxesApplicatorSpec extends ObjectBehavior
         OrderItemInterface $orderItem,
         ProductVariantInterface $productVariant,
         ZoneInterface $zone
-    ) {
+    ): void {
         $order->getItems()->willReturn($items);
 
         $items->count()->willReturn(1);
@@ -165,7 +159,7 @@ final class OrderItemUnitsTaxesApplicatorSpec extends ObjectBehavior
         ProductVariantInterface $productVariant,
         TaxRateInterface $taxRate,
         ZoneInterface $zone
-    ) {
+    ): void {
         $order->getItems()->willReturn($items);
 
         $items->count()->willReturn(2);

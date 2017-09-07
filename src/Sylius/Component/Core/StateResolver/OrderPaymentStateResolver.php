@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\StateResolver;
 
+use Doctrine\Common\Collections\Collection;
 use SM\Factory\FactoryInterface;
 use SM\StateMachine\StateMachineInterface;
 use Sylius\Component\Order\Model\OrderInterface;
@@ -57,7 +58,7 @@ final class OrderPaymentStateResolver implements StateResolverInterface
      * @param StateMachineInterface $stateMachine
      * @param string $transition
      */
-    private function applyTransition(StateMachineInterface $stateMachine, $transition)
+    private function applyTransition(StateMachineInterface $stateMachine, string $transition): void
     {
         if ($stateMachine->can($transition)) {
             $stateMachine->apply($transition);
@@ -69,7 +70,7 @@ final class OrderPaymentStateResolver implements StateResolverInterface
      *
      * @return string|null
      */
-    private function getTargetTransition(OrderInterface $order)
+    private function getTargetTransition(OrderInterface $order): ?string
     {
         $refundedPaymentTotal = 0;
         $refundedPayments = $this->getPaymentsWithState($order, PaymentInterface::STATE_REFUNDED);
@@ -108,9 +109,9 @@ final class OrderPaymentStateResolver implements StateResolverInterface
      * @param OrderInterface $order
      * @param string $state
      *
-     * @return PaymentInterface[]
+     * @return Collection|PaymentInterface[]
      */
-    private function getPaymentsWithState(OrderInterface $order, $state)
+    private function getPaymentsWithState(OrderInterface $order, string $state): Collection
     {
         return $order->getPayments()->filter(function (PaymentInterface $payment) use ($state) {
             return $state === $payment->getState();

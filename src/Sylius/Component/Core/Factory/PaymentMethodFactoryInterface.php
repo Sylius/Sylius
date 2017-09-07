@@ -26,5 +26,5 @@ interface PaymentMethodFactoryInterface extends FactoryInterface
      *
      * @return PaymentMethodInterface
      */
-    public function createWithGateway($gatewayFactory);
+    public function createWithGateway(string $gatewayFactory): PaymentMethodInterface;
 }

@@ -15,7 +15,6 @@ namespace spec\Sylius\Component\Core\Customer\Statistics;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Customer\Statistics\CustomerStatistics;
-use Sylius\Component\Core\Customer\Statistics\CustomerStatisticsProvider;
 use Sylius\Component\Core\Customer\Statistics\CustomerStatisticsProviderInterface;
 use Sylius\Component\Core\Customer\Statistics\PerChannelCustomerStatistics;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -29,17 +28,12 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 final class CustomerStatisticsProviderSpec extends ObjectBehavior
 {
-    function let(OrderRepositoryInterface $orderRepository, RepositoryInterface $channelRepository)
+    function let(OrderRepositoryInterface $orderRepository, RepositoryInterface $channelRepository): void
     {
         $this->beConstructedWith($orderRepository, $channelRepository);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(CustomerStatisticsProvider::class);
-    }
-
-    function it_implements_customer_statistics_provider_interface()
+    function it_implements_customer_statistics_provider_interface(): void
     {
         $this->shouldImplement(CustomerStatisticsProviderInterface::class);
     }
@@ -49,7 +43,7 @@ final class CustomerStatisticsProviderSpec extends ObjectBehavior
         RepositoryInterface $channelRepository,
         ChannelInterface $channel,
         CustomerInterface $customer
-    ) {
+    ): void {
         $expectedStatistics = new CustomerStatistics([]);
 
         $channelRepository->findAll()->willReturn([$channel]);
@@ -66,7 +60,7 @@ final class CustomerStatisticsProviderSpec extends ObjectBehavior
         OrderInterface $firstOrder,
         OrderInterface $secondOrder,
         CustomerInterface $customer
-    ) {
+    ): void {
         $firstOrder->getChannel()->willReturn($channel);
         $secondOrder->getChannel()->willReturn($channel);
 
@@ -94,7 +88,7 @@ final class CustomerStatisticsProviderSpec extends ObjectBehavior
         OrderInterface $fourthOrder,
         OrderInterface $fifthOrder,
         CustomerInterface $customer
-    ) {
+    ): void {
         $allOrders = [$firstOrder, $secondOrder, $thirdOrder, $fourthOrder, $fifthOrder];
 
         $firstOrder->getChannel()->willReturn($firstChannel);

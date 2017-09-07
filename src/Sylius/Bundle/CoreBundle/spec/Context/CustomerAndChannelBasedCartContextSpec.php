@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\CoreBundle\Context;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Context\CustomerAndChannelBasedCartContext;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -34,16 +33,11 @@ final class CustomerAndChannelBasedCartContextSpec extends ObjectBehavior
         CustomerContextInterface $customerContext,
         ChannelContextInterface $channelContext,
         OrderRepositoryInterface $orderRepository
-    ) {
+    ): void {
         $this->beConstructedWith($customerContext, $channelContext, $orderRepository);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(CustomerAndChannelBasedCartContext::class);
-    }
-
-    function it_implements_cart_context_interface()
+    function it_implements_cart_context_interface(): void
     {
         $this->shouldImplement(CartContextInterface::class);
     }
@@ -55,7 +49,7 @@ final class CustomerAndChannelBasedCartContextSpec extends ObjectBehavior
         CustomerInterface $customer,
         OrderInterface $order,
         OrderRepositoryInterface $orderRepository
-    ) {
+    ): void {
         $channelContext->getChannel()->willReturn($channel);
         $customerContext->getCustomer()->willReturn($customer);
 
@@ -70,7 +64,7 @@ final class CustomerAndChannelBasedCartContextSpec extends ObjectBehavior
         CustomerContextInterface $customerContext,
         CustomerInterface $customer,
         OrderRepositoryInterface $orderRepository
-    ) {
+    ): void {
         $channelContext->getChannel()->willReturn($channel);
         $customerContext->getCustomer()->willReturn($customer);
 
@@ -86,7 +80,7 @@ final class CustomerAndChannelBasedCartContextSpec extends ObjectBehavior
         CustomerContextInterface $customerContext,
         ChannelContextInterface $channelContext,
         ChannelInterface $channel
-    ) {
+    ): void {
         $customerContext->getCustomer()->willReturn(null);
         $channelContext->getChannel()->willReturn($channel);
 
@@ -96,7 +90,7 @@ final class CustomerAndChannelBasedCartContextSpec extends ObjectBehavior
         ;
     }
 
-    function it_does_nothing_if_channel_could_not_be_found(ChannelContextInterface $channelContext)
+    function it_does_nothing_if_channel_could_not_be_found(ChannelContextInterface $channelContext): void
     {
         $channelContext->getChannel()->willThrow(new ChannelNotFoundException());
 

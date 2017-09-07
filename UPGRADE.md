@@ -60,6 +60,37 @@
 ### Core / CoreBundle
 
 * Method `OrderInterface::isShippingRequired` added, used in place of similar methods in `OrderShippingMethodSelectionRequirementChecker` and `OrderShipmentProcessor`
+* The following classes have been made final, use decoration instead of extending them:
+
+    * `CartItemTypeExtension`
+    * `CartTypeExtension`
+    * `HandleException`
+    * `IntegerDistributor`
+    * `MissingChannelConfigurationException`
+    * `OrderController`
+    * `PaymentMethodController`
+    * `ProductTaxonController`
+    * `ProductVariantController`
+    * `PromotionActionFactory`
+    * `PromotionRuleFactory`
+    * `ReviewerReviewsRemover`
+    * `TestPromotionFactory`
+    * `UnsupportedTaxCalculationStrategyException`
+    * `CheckoutStepsHelper`
+    * `PriceHelper`
+    * `ProductVariantsPricesHelper`
+    * `VariantResolverHelper`
+    
+* The following methods no longer have a default null argument and requires one to be explicitly passed:
+  
+    * `ChannelPricingInterface::setProductVariant`
+    * `CustomerInterface::setDefaultAddress`
+    * `OrderInterface::setPromotionCoupon`
+    * `ProductInterface::setMainTaxon`
+    * `ProductVariantInterface::setTaxCategory`
+    * `ShippingMethodInterface::setTaxCategory`
+    * `ShippingMethodInterface::setZone`
+    * `TaxRateInterface::setZone`
 
 ### Customer / CustomerBundle
 

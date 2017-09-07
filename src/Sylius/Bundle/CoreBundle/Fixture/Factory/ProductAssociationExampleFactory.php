@@ -69,7 +69,7 @@ class ProductAssociationExampleFactory extends AbstractExampleFactory implements
     /**
      * {@inheritdoc}
      */
-    public function create(array $options = [])
+    public function create(array $options = []): ProductAssociationInterface
     {
         $options = $this->optionsResolver->resolve($options);
 
@@ -88,7 +88,7 @@ class ProductAssociationExampleFactory extends AbstractExampleFactory implements
     /**
      * {@inheritdoc}
      */
-    protected function configureOptions(OptionsResolver $resolver)
+    protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
             ->setDefault('type', LazyOption::randomOne($this->productAssociationTypeRepository))

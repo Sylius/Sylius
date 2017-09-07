@@ -16,7 +16,6 @@ namespace spec\Sylius\Component\Core\Test\Services;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Channel\Factory\ChannelFactoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Test\Services\DefaultChannelFactory;
 use Sylius\Component\Core\Test\Services\DefaultChannelFactoryInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
@@ -35,7 +34,7 @@ final class DefaultChannelFactorySpec extends ObjectBehavior
         RepositoryInterface $channelRepository,
         RepositoryInterface $currencyRepository,
         RepositoryInterface $localeRepository
-    ) {
+    ): void {
         $this->beConstructedWith(
             $channelFactory,
             $currencyFactory,
@@ -47,12 +46,7 @@ final class DefaultChannelFactorySpec extends ObjectBehavior
         );
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(DefaultChannelFactory::class);
-    }
-
-    function it_implements_a_default_channel_factory_interface()
+    function it_implements_a_default_channel_factory_interface(): void
     {
         $this->shouldImplement(DefaultChannelFactoryInterface::class);
     }
@@ -67,7 +61,7 @@ final class DefaultChannelFactorySpec extends ObjectBehavior
         ChannelInterface $channel,
         CurrencyInterface $currency,
         LocaleInterface $locale
-    ) {
+    ): void {
         $localeFactory->createNew()->willReturn($locale);
         $locale->setCode('en_US')->shouldBeCalled();
 

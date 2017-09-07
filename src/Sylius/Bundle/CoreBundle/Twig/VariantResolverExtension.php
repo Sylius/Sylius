@@ -36,7 +36,7 @@ final class VariantResolverExtension extends \Twig_Extension
     /**
      * {@inheritdoc}
      */
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
             new \Twig_Filter('sylius_resolve_variant', [$this->helper, 'resolveVariant']),

@@ -44,7 +44,7 @@ final class TotalOfItemsFromTaxonConfigurationType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('taxon', TaxonAutocompleteChoiceType::class, [
@@ -56,13 +56,15 @@ final class TotalOfItemsFromTaxonConfigurationType extends AbstractType
             ])
         ;
 
-        $builder->get('taxon')->addModelTransformer(new ReversedTransformer(new ResourceToIdentifierTransformer($this->taxonRepository, 'code')));
+        $builder->get('taxon')->addModelTransformer(
+            new ReversedTransformer(new ResourceToIdentifierTransformer($this->taxonRepository, 'code'))
+        );
     }
 
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
             ->setRequired('currency')
@@ -73,7 +75,7 @@ final class TotalOfItemsFromTaxonConfigurationType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_promotion_rule_total_of_items_from_taxon_configuration';
     }

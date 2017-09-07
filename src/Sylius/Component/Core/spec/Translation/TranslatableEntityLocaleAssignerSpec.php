@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\Core\Translation;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Translation\TranslatableEntityLocaleAssigner;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Sylius\Component\Resource\Model\TranslatableInterface;
@@ -26,17 +25,12 @@ use Sylius\Component\Resource\Translation\TranslatableEntityLocaleAssignerInterf
  */
 final class TranslatableEntityLocaleAssignerSpec extends ObjectBehavior
 {
-    function let(LocaleContextInterface $localeContext, TranslationLocaleProviderInterface $translationLocaleProvider)
+    function let(LocaleContextInterface $localeContext, TranslationLocaleProviderInterface $translationLocaleProvider): void
     {
         $this->beConstructedWith($localeContext, $translationLocaleProvider);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(TranslatableEntityLocaleAssigner::class);
-    }
-
-    function it_implements_traslatable_entity_locale_assigner_interface()
+    function it_implements_traslatable_entity_locale_assigner_interface(): void
     {
         $this->shouldImplement(TranslatableEntityLocaleAssignerInterface::class);
     }
@@ -45,7 +39,7 @@ final class TranslatableEntityLocaleAssignerSpec extends ObjectBehavior
         LocaleContextInterface $localeContext,
         TranslationLocaleProviderInterface $translationLocaleProvider,
         TranslatableInterface $translatableEntity
-    )
+    ): void
     {
         $localeContext->getLocaleCode()->willReturn('de_DE');
         $translationLocaleProvider->getDefaultLocaleCode()->willReturn('en_US');
@@ -60,7 +54,7 @@ final class TranslatableEntityLocaleAssignerSpec extends ObjectBehavior
         LocaleContextInterface $localeContext,
         TranslationLocaleProviderInterface $translationLocaleProvider,
         TranslatableInterface $translatableEntity
-    )
+    ): void
     {
         $localeContext->getLocaleCode()->willThrow(new LocaleNotFoundException());
         $translationLocaleProvider->getDefaultLocaleCode()->willReturn('en_US');

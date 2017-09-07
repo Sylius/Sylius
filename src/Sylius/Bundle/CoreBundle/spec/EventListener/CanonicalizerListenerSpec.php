@@ -16,7 +16,6 @@ namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\CoreBundle\EventListener\CanonicalizerListener;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
@@ -26,17 +25,12 @@ use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
  */
 final class CanonicalizerListenerSpec extends ObjectBehavior
 {
-    function let(CanonicalizerInterface $canonicalizer)
+    function let(CanonicalizerInterface $canonicalizer): void
     {
         $this->beConstructedWith($canonicalizer);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(CanonicalizerListener::class);
-    }
-
-    function it_canonicalize_user_username_on_pre_persist_doctrine_event($canonicalizer, LifecycleEventArgs $event, ShopUserInterface $user)
+    function it_canonicalize_user_username_on_pre_persist_doctrine_event($canonicalizer, LifecycleEventArgs $event, ShopUserInterface $user): void
     {
         $event->getEntity()->willReturn($user);
         $user->getUsername()->willReturn('testUser');
@@ -50,7 +44,7 @@ final class CanonicalizerListenerSpec extends ObjectBehavior
         $this->prePersist($event);
     }
 
-    function it_canonicalize_customer_email_on_pre_persist_doctrine_event($canonicalizer, LifecycleEventArgs $event, CustomerInterface $customer)
+    function it_canonicalize_customer_email_on_pre_persist_doctrine_event($canonicalizer, LifecycleEventArgs $event, CustomerInterface $customer): void
     {
         $event->getEntity()->willReturn($customer);
         $customer->getEmail()->willReturn('testUser@Email.com');
@@ -61,7 +55,7 @@ final class CanonicalizerListenerSpec extends ObjectBehavior
         $this->prePersist($event);
     }
 
-    function it_canonicalize_user_username_on_pre_update_doctrine_event($canonicalizer, LifecycleEventArgs $event, ShopUserInterface $user)
+    function it_canonicalize_user_username_on_pre_update_doctrine_event($canonicalizer, LifecycleEventArgs $event, ShopUserInterface $user): void
     {
         $event->getEntity()->willReturn($user);
         $user->getUsername()->willReturn('testUser');
@@ -75,7 +69,7 @@ final class CanonicalizerListenerSpec extends ObjectBehavior
         $this->preUpdate($event);
     }
 
-    function it_canonicalize_customer_email_on_pre_update_doctrine_event($canonicalizer, LifecycleEventArgs $event, CustomerInterface $customer)
+    function it_canonicalize_customer_email_on_pre_update_doctrine_event($canonicalizer, LifecycleEventArgs $event, CustomerInterface $customer): void
     {
         $event->getEntity()->willReturn($customer);
         $customer->getEmail()->willReturn('testUser@Email.com');
@@ -86,7 +80,7 @@ final class CanonicalizerListenerSpec extends ObjectBehavior
         $this->preUpdate($event);
     }
 
-    function it_canonicalize_only_user_or_customer_interface_implementation_on_pre_presist($canonicalizer, LifecycleEventArgs $event)
+    function it_canonicalize_only_user_or_customer_interface_implementation_on_pre_presist($canonicalizer, LifecycleEventArgs $event): void
     {
         $item = new \stdClass();
         $event->getEntity()->willReturn($item);
@@ -96,7 +90,7 @@ final class CanonicalizerListenerSpec extends ObjectBehavior
         $this->prePersist($event);
     }
 
-    function it_canonicalize_only_user_or_customer_interface_implementation_on_pre_update($canonicalizer, LifecycleEventArgs $event)
+    function it_canonicalize_only_user_or_customer_interface_implementation_on_pre_update($canonicalizer, LifecycleEventArgs $event): void
     {
         $item = new \stdClass();
         $event->getEntity()->willReturn($item);

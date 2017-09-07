@@ -16,7 +16,6 @@ namespace spec\Sylius\Component\Core\Promotion\Checker\Rule;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Promotion\Checker\Rule\NthOrderRuleChecker;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
@@ -28,22 +27,17 @@ use Sylius\Component\Resource\Exception\UnexpectedTypeException;
  */
 final class NthOrderRuleCheckerSpec extends ObjectBehavior
 {
-    public function let(OrderRepositoryInterface $ordersRepository)
+    function let(OrderRepositoryInterface $ordersRepository): void
     {
         $this->beConstructedWith($ordersRepository);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(NthOrderRuleChecker::class);
-    }
-
-    function it_implements_a_rule_checker_interface()
+    function it_implements_a_rule_checker_interface(): void
     {
         $this->shouldImplement(RuleCheckerInterface::class);
     }
 
-    function it_recognizes_a_subject_without_customer_as_not_eligible(OrderInterface $subject)
+    function it_recognizes_a_subject_without_customer_as_not_eligible(OrderInterface $subject): void
     {
         $subject->getCustomer()->willReturn(null);
 
@@ -54,7 +48,7 @@ final class NthOrderRuleCheckerSpec extends ObjectBehavior
         CustomerInterface $customer,
         OrderInterface $subject,
         OrderRepositoryInterface $ordersRepository
-    ) {
+    ): void {
         $subject->getCustomer()->willReturn($customer);
         $customer->getId()->willReturn(1);
 
@@ -67,7 +61,7 @@ final class NthOrderRuleCheckerSpec extends ObjectBehavior
         CustomerInterface $customer,
         OrderInterface $subject,
         OrderRepositoryInterface $ordersRepository
-    ) {
+    ): void {
         $subject->getCustomer()->willReturn($customer);
         $customer->getId()->willReturn(1);
 
@@ -80,7 +74,7 @@ final class NthOrderRuleCheckerSpec extends ObjectBehavior
         CustomerInterface $customer,
         OrderInterface $subject,
         OrderRepositoryInterface $ordersRepository
-    ) {
+    ): void {
         $subject->getCustomer()->willReturn($customer);
         $customer->getId()->willReturn(1);
 
@@ -93,7 +87,7 @@ final class NthOrderRuleCheckerSpec extends ObjectBehavior
         CustomerInterface $customer,
         OrderInterface $subject,
         OrderRepositoryInterface $ordersRepository
-    ) {
+    ): void {
         $subject->getCustomer()->willReturn($customer);
         $customer->getId()->willReturn(1);
 
@@ -105,7 +99,7 @@ final class NthOrderRuleCheckerSpec extends ObjectBehavior
     function it_recognizes_a_subject_as_eligible_if_nth_order_is_one_and_customer_is_not_in_database(
         CustomerInterface $customer,
         OrderInterface $subject
-    ) {
+    ): void {
         $subject->getCustomer()->willReturn($customer);
         $customer->getId()->willReturn(null);
 
@@ -116,20 +110,20 @@ final class NthOrderRuleCheckerSpec extends ObjectBehavior
     function it_recognizes_a_subject_as_not_eligible_if_it_is_first_order_of_new_customer_and_promotion_is_for_more_than_one_order(
         CustomerInterface $customer,
         OrderInterface $subject
-    ) {
+    ): void {
         $subject->getCustomer()->willReturn($customer);
         $customer->getId()->willReturn(null);
 
         $this->isEligible($subject, ['nth' => 10])->shouldReturn(false);
     }
 
-    function it_recognizes_a_subject_as_not_eligible_if_configuration_is_invalid(OrderInterface $subject)
+    function it_recognizes_a_subject_as_not_eligible_if_configuration_is_invalid(OrderInterface $subject): void
     {
         $this->isEligible($subject, [])->shouldReturn(false);
         $this->isEligible($subject, ['nth' => 'string'])->shouldReturn(false);
     }
 
-    function it_throws_an_exception_if_subject_is_not_order(PromotionSubjectInterface $subject)
+    function it_throws_an_exception_if_subject_is_not_order(PromotionSubjectInterface $subject): void
     {
         $this
             ->shouldThrow(new UnexpectedTypeException($subject->getWrappedObject(), OrderInterface::class))

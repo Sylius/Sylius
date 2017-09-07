@@ -25,5 +25,5 @@ interface CustomerAddressAdderInterface
      * @param CustomerInterface $customer
      * @param AddressInterface $address
      */
-    public function add(CustomerInterface $customer, AddressInterface $address);
+    public function add(CustomerInterface $customer, AddressInterface $address): void;
 }

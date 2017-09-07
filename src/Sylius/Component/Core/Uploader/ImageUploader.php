@@ -34,7 +34,7 @@ class ImageUploader implements ImageUploaderInterface
     /**
      * {@inheritdoc}
      */
-    public function upload(ImageInterface $image)
+    public function upload(ImageInterface $image): void
     {
         if (!$image->hasFile()) {
             return;
@@ -60,7 +60,7 @@ class ImageUploader implements ImageUploaderInterface
     /**
      * {@inheritdoc}
      */
-    public function remove($path)
+    public function remove(string $path): bool
     {
         return $this->filesystem->delete($path);
     }
@@ -70,7 +70,7 @@ class ImageUploader implements ImageUploaderInterface
      *
      * @return string
      */
-    private function expandPath($path)
+    private function expandPath(string $path): string
     {
         return sprintf(
             '%s/%s/%s',
@@ -85,7 +85,7 @@ class ImageUploader implements ImageUploaderInterface
      *
      * @return bool
      */
-    private function has($path)
+    private function has(string $path): bool
     {
         return $this->filesystem->has($path);
     }

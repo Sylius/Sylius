@@ -24,7 +24,7 @@ interface EmailCheckerInterface
      *
      * @return bool
      */
-    public function hasRecipient($recipient);
+    public function hasRecipient(string $recipient): bool;
 
     /**
      * @param string $message
@@ -32,17 +32,17 @@ interface EmailCheckerInterface
      *
      * @return bool
      */
-    public function hasMessageTo($message, $recipient);
+    public function hasMessageTo(string $message, string $recipient): bool;
 
     /**
      * @param string $recipient
      *
      * @return int
      */
-    public function countMessagesTo($recipient);
+    public function countMessagesTo(string $recipient): int;
 
     /**
      * @return string
      */
-    public function getSpoolDirectory();
+    public function getSpoolDirectory(): string;
 }

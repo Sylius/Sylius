@@ -91,7 +91,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function getBaseCurrency()
+    public function getBaseCurrency(): ?CurrencyInterface
     {
         return $this->baseCurrency;
     }
@@ -99,7 +99,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function setBaseCurrency(CurrencyInterface $baseCurrency)
+    public function setBaseCurrency(?CurrencyInterface $baseCurrency): void
     {
         $this->baseCurrency = $baseCurrency;
     }
@@ -107,7 +107,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function getDefaultLocale()
+    public function getDefaultLocale(): ?LocaleInterface
     {
         return $this->defaultLocale;
     }
@@ -115,7 +115,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function setDefaultLocale(LocaleInterface $defaultLocale)
+    public function setDefaultLocale(?LocaleInterface $defaultLocale): void
     {
         $this->defaultLocale = $defaultLocale;
     }
@@ -123,7 +123,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function getDefaultTaxZone()
+    public function getDefaultTaxZone(): ?ZoneInterface
     {
         return $this->defaultTaxZone;
     }
@@ -131,7 +131,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function setDefaultTaxZone(ZoneInterface $defaultTaxZone = null)
+    public function setDefaultTaxZone(?ZoneInterface $defaultTaxZone): void
     {
         $this->defaultTaxZone = $defaultTaxZone;
     }
@@ -139,7 +139,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function getTaxCalculationStrategy()
+    public function getTaxCalculationStrategy(): ?string
     {
         return $this->taxCalculationStrategy;
     }
@@ -147,7 +147,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function setTaxCalculationStrategy($taxCalculationStrategy)
+    public function setTaxCalculationStrategy(?string $taxCalculationStrategy): void
     {
         $this->taxCalculationStrategy = $taxCalculationStrategy;
     }
@@ -227,7 +227,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function getThemeName()
+    public function getThemeName(): ?string
     {
         return $this->themeName;
     }
@@ -235,7 +235,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function setThemeName($themeName)
+    public function setThemeName(?string $themeName): void
     {
         $this->themeName = $themeName;
     }
@@ -243,7 +243,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function getContactEmail()
+    public function getContactEmail(): ?string
     {
         return $this->contactEmail;
     }
@@ -251,7 +251,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function setContactEmail($contactEmail)
+    public function setContactEmail(?string $contactEmail): void
     {
         $this->contactEmail = $contactEmail;
     }
@@ -259,7 +259,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function isSkippingShippingStepAllowed()
+    public function isSkippingShippingStepAllowed(): bool
     {
         return $this->skippingShippingStepAllowed;
     }
@@ -267,7 +267,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function setSkippingShippingStepAllowed($skippingShippingStepAllowed)
+    public function setSkippingShippingStepAllowed(bool $skippingShippingStepAllowed): void
     {
         $this->skippingShippingStepAllowed = $skippingShippingStepAllowed;
     }
@@ -275,7 +275,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function isSkippingPaymentStepAllowed()
+    public function isSkippingPaymentStepAllowed(): bool
     {
         return $this->skippingPaymentStepAllowed;
     }
@@ -283,7 +283,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function setSkippingPaymentStepAllowed($skippingPaymentStepAllowed)
+    public function setSkippingPaymentStepAllowed(bool $skippingPaymentStepAllowed): void
     {
         $this->skippingPaymentStepAllowed = $skippingPaymentStepAllowed;
     }
@@ -291,7 +291,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function isAccountVerificationRequired()
+    public function isAccountVerificationRequired(): bool
     {
         return $this->accountVerificationRequired;
     }
@@ -299,7 +299,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function setAccountVerificationRequired($accountVerificationRequired)
+    public function setAccountVerificationRequired(bool $accountVerificationRequired): void
     {
         $this->accountVerificationRequired = $accountVerificationRequired;
     }

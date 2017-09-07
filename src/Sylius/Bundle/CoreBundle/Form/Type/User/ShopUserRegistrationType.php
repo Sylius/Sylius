@@ -26,7 +26,7 @@ final class ShopUserRegistrationType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('plainPassword', RepeatedType::class, [
@@ -41,7 +41,7 @@ final class ShopUserRegistrationType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_shop_user_registration';
     }

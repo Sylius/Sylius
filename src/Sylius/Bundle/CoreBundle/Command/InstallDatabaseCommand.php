@@ -25,7 +25,7 @@ final class InstallDatabaseCommand extends AbstractInstallCommand
     /**
      * {@inheritdoc}
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('sylius:install:database')
@@ -40,7 +40,7 @@ EOT
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): void
     {
         $outputStyle = new SymfonyStyle($input, $output);
         $outputStyle->writeln(sprintf(

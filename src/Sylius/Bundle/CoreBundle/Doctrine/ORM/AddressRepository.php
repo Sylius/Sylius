@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Repository\AddressRepositoryInterface;
 
@@ -26,7 +27,7 @@ class AddressRepository extends EntityRepository implements AddressRepositoryInt
     /**
      * {@inheritdoc}
      */
-    public function findByCustomer(CustomerInterface $customer)
+    public function findByCustomer(CustomerInterface $customer): array
     {
         return $this->createQueryBuilder('o')
             ->innerJoin('o.customer', 'customer')
@@ -40,7 +41,7 @@ class AddressRepository extends EntityRepository implements AddressRepositoryInt
     /**
      * {@inheritdoc}
      */
-    public function findOneByCustomer($id, CustomerInterface $customer)
+    public function findOneByCustomer(string $id, CustomerInterface $customer): ?AddressInterface
     {
         return $this->createQueryBuilder('o')
             ->innerJoin('o.customer', 'customer')

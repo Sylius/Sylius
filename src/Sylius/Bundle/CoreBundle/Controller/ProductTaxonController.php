@@ -24,14 +24,16 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class ProductTaxonController extends ResourceController
+final class ProductTaxonController extends ResourceController
 {
     /**
      * @param Request $request
      *
      * @return Response
+     *
+     * @throws HttpException
      */
-    public function updatePositionsAction(Request $request)
+    public function updatePositionsAction(Request $request): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
         $this->isGrantedOr403($configuration, ResourceActions::UPDATE);
@@ -52,7 +54,7 @@ class ProductTaxonController extends ResourceController
                 }
 
                 $productTaxonFromBase = $this->repository->findOneBy(['id' => $productTaxon['id']]);
-                $productTaxonFromBase->setPosition($productTaxon['position']);
+                $productTaxonFromBase->setPosition((int) $productTaxon['position']);
 
                 $this->manager->flush();
             }

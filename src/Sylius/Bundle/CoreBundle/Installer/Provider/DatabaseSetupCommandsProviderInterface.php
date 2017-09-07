@@ -29,5 +29,5 @@ interface DatabaseSetupCommandsProviderInterface
      *
      * @return array
      */
-    public function getCommands(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper);
+    public function getCommands(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper): array;
 }

@@ -37,7 +37,7 @@ final class UniqueIdBasedOrderTokenAssigner implements OrderTokenAssignerInterfa
     /**
      * {@inheritdoc}
      */
-    public function assignTokenValue(OrderInterface $order)
+    public function assignTokenValue(OrderInterface $order): void
     {
         $order->setTokenValue($this->generator->generateUriSafeString(10));
     }

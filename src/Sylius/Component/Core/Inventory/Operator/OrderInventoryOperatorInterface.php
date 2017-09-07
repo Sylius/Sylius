@@ -25,17 +25,17 @@ interface OrderInventoryOperatorInterface
      *
      * @throws \InvalidArgumentException
      */
-    public function cancel(OrderInterface $order);
+    public function cancel(OrderInterface $order): void;
 
     /**
      * @param OrderInterface $order
      */
-    public function hold(OrderInterface $order);
+    public function hold(OrderInterface $order): void;
 
     /**
      * @param OrderInterface $order
      *
      * @throws \InvalidArgumentException
      */
-    public function sell(OrderInterface $order);
+    public function sell(OrderInterface $order): void;
 }

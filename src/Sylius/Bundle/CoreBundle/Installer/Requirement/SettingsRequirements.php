@@ -55,7 +55,7 @@ final class SettingsRequirements extends RequirementCollection
      *
      * @return bool
      */
-    private function isOn($key)
+    private function isOn(string $key): bool
     {
         $value = ini_get($key);
 

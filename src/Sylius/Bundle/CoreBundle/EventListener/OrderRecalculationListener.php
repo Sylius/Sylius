@@ -15,8 +15,8 @@ namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\GenericEvent;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -39,15 +39,13 @@ final class OrderRecalculationListener
     /**
      * @param GenericEvent $event
      *
-     * @throws UnexpectedTypeException
+     * @throws \InvalidArgumentException
      */
-    public function recalculateOrder(GenericEvent $event)
+    public function recalculateOrder(GenericEvent $event): void
     {
         $order = $event->getSubject();
 
-        if (!$order instanceof OrderInterface) {
-            throw new UnexpectedTypeException($order, OrderInterface::class);
-        }
+        Assert::isInstanceOf($order, OrderInterface::class);
 
         $this->orderProcessor->process($order);
     }

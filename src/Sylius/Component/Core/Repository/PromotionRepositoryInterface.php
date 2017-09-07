@@ -26,7 +26,7 @@ interface PromotionRepositoryInterface extends BasePromotionRepositoryInterface
     /**
      * @param ChannelInterface $channel
      *
-     * @return PromotionInterface[]
+     * @return array|PromotionInterface[]
      */
-    public function findActiveByChannel(ChannelInterface $channel);
+    public function findActiveByChannel(ChannelInterface $channel): array;
 }

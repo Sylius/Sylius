@@ -15,7 +15,6 @@ namespace spec\Sylius\Bundle\CoreBundle\Checkout;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\CoreBundle\Checkout\CheckoutStateUrlGenerator;
 use Sylius\Bundle\CoreBundle\Checkout\CheckoutStateUrlGeneratorInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
@@ -27,7 +26,7 @@ use Symfony\Component\Routing\RouterInterface;
  */
 final class CheckoutStateUrlGeneratorSpec extends ObjectBehavior
 {
-    function let(RouterInterface $router)
+    function let(RouterInterface $router): void
     {
         $routeCollection = [
             'addressed' => [
@@ -41,22 +40,17 @@ final class CheckoutStateUrlGeneratorSpec extends ObjectBehavior
         $this->beConstructedWith($router, $routeCollection);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(CheckoutStateUrlGenerator::class);
-    }
-
-    function it_is_a_url_generator()
+    function it_is_a_url_generator(): void
     {
         $this->shouldImplement(UrlGeneratorInterface::class);
     }
 
-    function it_is_a_checkout_state_url_generator()
+    function it_is_a_checkout_state_url_generator(): void
     {
         $this->shouldImplement(CheckoutStateUrlGeneratorInterface::class);
     }
 
-    function it_generates_state_url(RouterInterface $router, OrderInterface $order)
+    function it_generates_state_url(RouterInterface $router, OrderInterface $order): void
     {
         $order->getCheckoutState()->willReturn('addressed');
 
@@ -67,7 +61,7 @@ final class CheckoutStateUrlGeneratorSpec extends ObjectBehavior
         $this->generateForOrderCheckoutState($order)->shouldReturn('/checkout/address');
     }
 
-    function it_is_a_regular_url_generator(RouterInterface $router)
+    function it_is_a_regular_url_generator(RouterInterface $router): void
     {
         $router->generate('route_name', [], UrlGeneratorInterface::ABSOLUTE_PATH)->willReturn('/some-route');
 
@@ -77,14 +71,14 @@ final class CheckoutStateUrlGeneratorSpec extends ObjectBehavior
     function it_throws_route_not_found_exception_if_there_is_no_route_for_given_state(
         RouterInterface $router,
         OrderInterface $order
-    ) {
+    ): void {
         $order->getCheckoutState()->willReturn('shipping_selected');
         $router->generate(Argument::any())->shouldNotBeCalled();
 
         $this->shouldThrow(RouteNotFoundException::class)->during('generateForOrderCheckoutState', [$order]);
     }
 
-    function it_generates_cart_url(RouterInterface $router)
+    function it_generates_cart_url(RouterInterface $router): void
     {
         $router->generate('sylius_shop_cart_summary', [], UrlGeneratorInterface::ABSOLUTE_PATH)->willReturn('/cart');
 

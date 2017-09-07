@@ -38,7 +38,7 @@ final class OrderShippingMethodSelectionRequirementChecker implements OrderShipp
     /**
      * {@inheritdoc}
      */
-    public function isShippingMethodSelectionRequired(OrderInterface $order)
+    public function isShippingMethodSelectionRequired(OrderInterface $order): bool
     {
         if (!$order->isShippingRequired()) {
             return false;

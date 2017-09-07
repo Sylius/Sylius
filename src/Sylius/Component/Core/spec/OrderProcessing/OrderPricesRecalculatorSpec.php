@@ -21,7 +21,6 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Core\OrderProcessing\OrderPricesRecalculator;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
@@ -31,17 +30,12 @@ use Sylius\Component\Order\Processor\OrderProcessorInterface;
  */
 final class OrderPricesRecalculatorSpec extends ObjectBehavior
 {
-    function let(ProductVariantPriceCalculatorInterface $productVariantPriceCalculator)
+    function let(ProductVariantPriceCalculatorInterface $productVariantPriceCalculator): void
     {
         $this->beConstructedWith($productVariantPriceCalculator);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(OrderPricesRecalculator::class);
-    }
-
-    function it_is_an_order_processor()
+    function it_is_an_order_processor(): void
     {
         $this->shouldImplement(OrderProcessorInterface::class);
     }
@@ -54,7 +48,7 @@ final class OrderPricesRecalculatorSpec extends ObjectBehavior
         OrderItemInterface $item,
         ProductVariantInterface $variant,
         ProductVariantPriceCalculatorInterface $productVariantPriceCalculator
-    ) {
+    ): void {
         $order->getCustomer()->willReturn($customer);
         $order->getChannel()->willReturn(null);
         $order->getItems()->willReturn(new ArrayCollection([$item->getWrappedObject()]));
@@ -77,7 +71,7 @@ final class OrderPricesRecalculatorSpec extends ObjectBehavior
         $this->process($order);
     }
 
-    function it_throws_exception_if_passed_order_is_not_a_core_order(BaseOrderInterface $order)
+    function it_throws_exception_if_passed_order_is_not_a_core_order(BaseOrderInterface $order): void
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)

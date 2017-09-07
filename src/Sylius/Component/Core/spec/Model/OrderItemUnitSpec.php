@@ -17,7 +17,6 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
-use Sylius\Component\Core\Model\OrderItemUnit;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
@@ -30,71 +29,66 @@ use Sylius\Component\Shipping\Model\ShipmentUnitInterface;
  */
 final class OrderItemUnitSpec extends ObjectBehavior
 {
-    function let(OrderItemInterface $orderItem)
+    function let(OrderItemInterface $orderItem): void
     {
         $orderItem->getUnitPrice()->willReturn(1000);
         $orderItem->addUnit(Argument::type(OrderItemUnitInterface::class))->shouldBeCalled();
         $this->beConstructedWith($orderItem);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(OrderItemUnit::class);
-    }
-
-    function it_implements_an_order_item_unit_interface()
+    function it_implements_an_order_item_unit_interface(): void
     {
         $this->shouldImplement(OrderItemUnitInterface::class);
     }
 
-    function it_implements_an_inventory_unit_interface()
+    function it_implements_an_inventory_unit_interface(): void
     {
         $this->shouldImplement(InventoryUnitInterface::class);
     }
 
-    function it_implements_a_shipment_unit_interface()
+    function it_implements_a_shipment_unit_interface(): void
     {
         $this->shouldImplement(ShipmentUnitInterface::class);
     }
 
-    function it_is_an_order_item_unit()
+    function it_is_an_order_item_unit(): void
     {
         $this->shouldHaveType(BaseOrderItemUnit::class);
     }
 
-    function its_shipment_is_mutable(ShipmentInterface $shipment)
+    function its_shipment_is_mutable(ShipmentInterface $shipment): void
     {
         $this->setShipment($shipment);
         $this->getShipment()->shouldReturn($shipment);
     }
 
-    function its_created_at_is_mutable(\DateTime $createdAt)
+    function its_created_at_is_mutable(\DateTime $createdAt): void
     {
         $this->setCreatedAt($createdAt);
         $this->getCreatedAt()->shouldReturn($createdAt);
     }
 
-    function its_updated_at_is_mutable(\DateTime $updatedAt)
+    function its_updated_at_is_mutable(\DateTime $updatedAt): void
     {
         $this->setUpdatedAt($updatedAt);
         $this->getUpdatedAt()->shouldReturn($updatedAt);
     }
 
-    function its_stockable_is_an_order_item_variant(OrderItemInterface $orderItem, ProductVariantInterface $variant)
+    function its_stockable_is_an_order_item_variant(OrderItemInterface $orderItem, ProductVariantInterface $variant): void
     {
         $orderItem->getVariant()->willReturn($variant);
 
         $this->getStockable()->shouldReturn($variant);
     }
 
-    function its_shippable_is_an_order_item_variant(OrderItemInterface $orderItem, ProductVariantInterface $variant)
+    function its_shippable_is_an_order_item_variant(OrderItemInterface $orderItem, ProductVariantInterface $variant): void
     {
         $orderItem->getVariant()->willReturn($variant);
 
         $this->getShippable()->shouldReturn($variant);
     }
 
-    function it_returns_0_tax_total_when_there_are_no_tax_adjustments()
+    function it_returns_0_tax_total_when_there_are_no_tax_adjustments(): void
     {
         $this->getTaxTotal()->shouldReturn(0);
     }
@@ -103,7 +97,7 @@ final class OrderItemUnitSpec extends ObjectBehavior
         OrderItemInterface $orderItem,
         AdjustmentInterface $nonNeutralTaxAdjustment,
         AdjustmentInterface $neutralTaxAdjustment
-    ) {
+    ): void {
         $neutralTaxAdjustment->isNeutral()->willReturn(true);
         $neutralTaxAdjustment->getType()->willReturn(AdjustmentInterface::TAX_ADJUSTMENT);
         $neutralTaxAdjustment->getAmount()->willReturn(200);
@@ -125,7 +119,7 @@ final class OrderItemUnitSpec extends ObjectBehavior
         AdjustmentInterface $nonNeutralTaxAdjustment,
         AdjustmentInterface $neutralTaxAdjustment,
         AdjustmentInterface $notTaxAdjustment
-    ) {
+    ): void {
         $neutralTaxAdjustment->isNeutral()->willReturn(true);
         $neutralTaxAdjustment->getType()->willReturn(AdjustmentInterface::TAX_ADJUSTMENT);
         $neutralTaxAdjustment->getAmount()->willReturn(200);

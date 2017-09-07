@@ -39,7 +39,7 @@ final class ProductFilterConfigurationType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('products', ProductAutocompleteChoiceType::class, [
@@ -54,7 +54,7 @@ final class ProductFilterConfigurationType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_promotion_action_filter_product_configuration';
     }

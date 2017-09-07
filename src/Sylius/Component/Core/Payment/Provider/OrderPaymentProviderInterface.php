@@ -27,5 +27,5 @@ interface OrderPaymentProviderInterface
      *
      * @return PaymentInterface|null
      */
-    public function provideOrderPayment(OrderInterface $order, $targetState);
+    public function provideOrderPayment(OrderInterface $order, string $targetState): ?PaymentInterface;
 }

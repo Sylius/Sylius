@@ -44,7 +44,7 @@ final class CartItemAvailabilityValidator extends ConstraintValidator
      *
      * {@inheritdoc}
      */
-    public function validate($addCartItemCommand, Constraint $constraint)
+    public function validate($addCartItemCommand, Constraint $constraint): void
     {
         Assert::isInstanceOf($addCartItemCommand, AddToCartCommandInterface::class);
         Assert::isInstanceOf($constraint, CartItemAvailability::class);
@@ -71,7 +71,7 @@ final class CartItemAvailabilityValidator extends ConstraintValidator
      *
      * @return int
      */
-    private function getExistingCartItemQuantityFromCart(OrderInterface $cart, OrderItemInterface $cartItem)
+    private function getExistingCartItemQuantityFromCart(OrderInterface $cart, OrderItemInterface $cartItem): int
     {
         foreach ($cart->getItems() as $existingCartItem) {
             if ($existingCartItem->equals($cartItem)) {

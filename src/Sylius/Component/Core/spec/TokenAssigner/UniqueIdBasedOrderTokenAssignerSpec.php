@@ -16,7 +16,6 @@ namespace spec\Sylius\Component\Core\TokenAssigner;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\TokenAssigner\OrderTokenAssignerInterface;
-use Sylius\Component\Core\TokenAssigner\UniqueIdBasedOrderTokenAssigner;
 use Sylius\Component\Resource\Generator\RandomnessGeneratorInterface;
 
 /**
@@ -29,17 +28,12 @@ final class UniqueIdBasedOrderTokenAssignerSpec extends ObjectBehavior
         $this->beConstructedWith($generator);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(UniqueIdBasedOrderTokenAssigner::class);
-    }
-
-    function it_is_an_order_token_assigner()
+    function it_is_an_order_token_assigner(): void
     {
         $this->shouldImplement(OrderTokenAssignerInterface::class);
     }
 
-    function it_assigns_a_token_value_for_order(RandomnessGeneratorInterface $generator, OrderInterface $order)
+    function it_assigns_a_token_value_for_order(RandomnessGeneratorInterface $generator, OrderInterface $order): void
     {
         $generator->generateUriSafeString(10)->willReturn('yahboiiiii');
         $order->setTokenValue('yahboiiiii')->shouldBeCalled();

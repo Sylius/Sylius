@@ -61,7 +61,7 @@ final class CheckoutRedirectListener
     /**
      * @param ResourceControllerEvent $resourceControllerEvent
      */
-    public function handleCheckoutRedirect(ResourceControllerEvent $resourceControllerEvent)
+    public function handleCheckoutRedirect(ResourceControllerEvent $resourceControllerEvent): void
     {
         $request = $this->requestStack->getCurrentRequest();
         if (!$this->requestMatcher->matches($request) || isset($request->attributes->get('_sylius')['redirect'])) {

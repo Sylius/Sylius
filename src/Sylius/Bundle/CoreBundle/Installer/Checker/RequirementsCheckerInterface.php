@@ -27,5 +27,5 @@ interface RequirementsCheckerInterface
      *
      * @return bool
      */
-    public function check(InputInterface $input, OutputInterface $output);
+    public function check(InputInterface $input, OutputInterface $output): bool;
 }

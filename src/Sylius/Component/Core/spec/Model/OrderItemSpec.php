@@ -6,22 +6,16 @@ namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\AdjustmentInterface;
-use Sylius\Component\Core\Model\OrderItem;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
 
 final class OrderItemSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(OrderItem::class);
-    }
-
-    function it_returns_0_tax_total_when_there_are_no_units()
+    function it_returns_0_tax_total_when_there_are_no_units(): void
     {
         $this->getTaxTotal()->shouldReturn(0);
     }
 
-    function it_returns_tax_of_all_unit(OrderItemUnitInterface $orderItemUnit1, OrderItemUnitInterface $orderItemUnit2)
+    function it_returns_tax_of_all_unit(OrderItemUnitInterface $orderItemUnit1, OrderItemUnitInterface $orderItemUnit2): void
     {
         $orderItemUnit1->getTotal()->willReturn(1200);
         $orderItemUnit1->getTaxTotal()->willReturn(200);
@@ -41,7 +35,7 @@ final class OrderItemSpec extends ObjectBehavior
         OrderItemUnitInterface $orderItemUnit2,
         AdjustmentInterface $nonNeutralTaxAdjustment,
         AdjustmentInterface $neutralTaxAdjustment
-    ) {
+    ): void {
         $orderItemUnit1->getTotal()->willReturn(1200);
         $orderItemUnit1->getTaxTotal()->willReturn(200);
         $orderItemUnit1->getOrderItem()->willReturn($this);
@@ -69,7 +63,7 @@ final class OrderItemSpec extends ObjectBehavior
 
     function it_returns_discounted_unit_price_which_is_first_unit_price_lowered_by_unit_promotions(
         OrderItemUnitInterface $unit
-    ) {
+    ): void {
         $this->setUnitPrice(10000);
 
         $unit->getOrderItem()->willReturn($this);
@@ -81,7 +75,7 @@ final class OrderItemSpec extends ObjectBehavior
         $this->getDiscountedUnitPrice()->shouldReturn(9500);
     }
 
-    function it_returns_unit_price_as_discounted_unit_price_if_there_are_no_units()
+    function it_returns_unit_price_as_discounted_unit_price_if_there_are_no_units(): void
     {
         $this->setUnitPrice(10000);
 
@@ -91,7 +85,7 @@ final class OrderItemSpec extends ObjectBehavior
     function it_returns_subtotal_which_consist_of_discounted_unit_price_multiplied_by_quantity(
         OrderItemUnitInterface $firstUnit,
         OrderItemUnitInterface $secondUnit
-    ) {
+    ): void {
         $this->setUnitPrice(10000);
 
         $firstUnit->getOrderItem()->willReturn($this);

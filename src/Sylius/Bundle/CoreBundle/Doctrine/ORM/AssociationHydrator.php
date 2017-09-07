@@ -54,7 +54,7 @@ final class AssociationHydrator
      * @param mixed $subjects
      * @param array|string[] $associationsPaths
      */
-    public function hydrateAssociations($subjects, array $associationsPaths)
+    public function hydrateAssociations($subjects, array $associationsPaths): void
     {
         foreach ($associationsPaths as $associationPath) {
             $this->hydrateAssociation($subjects, $associationPath);
@@ -65,7 +65,7 @@ final class AssociationHydrator
      * @param mixed $subjects
      * @param string $associationPath
      */
-    public function hydrateAssociation($subjects, $associationPath)
+    public function hydrateAssociation($subjects, string $associationPath): void
     {
         if (null === $subjects || [] === $subjects) {
             return;
@@ -107,7 +107,7 @@ final class AssociationHydrator
      *
      * @return array
      */
-    private function normalizeSubject($subject)
+    private function normalizeSubject($subject): array
     {
         if ($subject instanceof Collection) {
             return $subject->toArray();

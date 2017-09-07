@@ -14,16 +14,10 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Model\PromotionCoupon;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
 
 final class PromotionCouponSpec extends ObjectBehavior
 {
-    public function it_is_initializable()
-    {
-        $this->shouldHaveType(PromotionCoupon::class);
-    }
-
     public function it_is_a_promotion_coupon()
     {
         $this->shouldImplement(PromotionCouponInterface::class);

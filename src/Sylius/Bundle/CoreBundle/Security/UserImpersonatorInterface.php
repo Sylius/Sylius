@@ -23,5 +23,5 @@ interface UserImpersonatorInterface
     /**
      * @param UserInterface $user
      */
-    public function impersonate(UserInterface $user);
+    public function impersonate(UserInterface $user): void;
 }

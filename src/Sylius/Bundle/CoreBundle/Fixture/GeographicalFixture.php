@@ -22,6 +22,7 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Intl\Intl;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Kamil Kokot <kamil@kokot.me>
@@ -168,7 +169,7 @@ class GeographicalFixture extends AbstractFixture
      * @param array $countriesCodes
      * @param array $countriesProvinces
      */
-    private function loadCountriesWithProvinces(array $countriesCodes, array $countriesProvinces)
+    private function loadCountriesWithProvinces(array $countriesCodes, array $countriesProvinces): void
     {
         $countries = [];
         foreach ($countriesCodes as $countryCode) {
@@ -183,12 +184,7 @@ class GeographicalFixture extends AbstractFixture
         }
 
         foreach ($countriesProvinces as $countryCode => $provinces) {
-            if (!isset($countries[$countryCode])) {
-                throw new \InvalidArgumentException(sprintf(
-                    'Cannot create provinces for unexisting country "%s"!',
-                    $countryCode
-                ));
-            }
+            Assert::keyExists($countries, $countryCode, sprintf('Cannot create provinces for unexisting country "%s"!',$countryCode));
 
             $this->loadProvincesForCountry($provinces, $countries[$countryCode]);
         }

@@ -36,7 +36,7 @@ final class UserImpersonator implements UserImpersonatorInterface
      * @param Session $session
      * @param string $firewallContextName
      */
-    public function __construct(Session $session, $firewallContextName)
+    public function __construct(Session $session, string $firewallContextName)
     {
         $this->session = $session;
         $this->sessionTokenParameter = sprintf('_security_%s', $firewallContextName);
@@ -45,7 +45,7 @@ final class UserImpersonator implements UserImpersonatorInterface
     /**
      * {@inheritdoc}
      */
-    public function impersonate(UserInterface $user)
+    public function impersonate(UserInterface $user): void
     {
         $token = new UsernamePasswordToken($user, $user->getPassword(), $this->sessionTokenParameter, $user->getRoles());
 

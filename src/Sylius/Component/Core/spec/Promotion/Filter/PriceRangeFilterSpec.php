@@ -19,24 +19,18 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Promotion\Filter\FilterInterface;
-use Sylius\Component\Core\Promotion\Filter\PriceRangeFilter;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class PriceRangeFilterSpec extends ObjectBehavior
 {
-    function let(ProductVariantPriceCalculatorInterface $productVariantPriceCalculator)
+    function let(ProductVariantPriceCalculatorInterface $productVariantPriceCalculator): void
     {
         $this->beConstructedWith($productVariantPriceCalculator);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(PriceRangeFilter::class);
-    }
-
-    function it_implements_a_filter_interface()
+    function it_implements_a_filter_interface(): void
     {
         $this->shouldImplement(FilterInterface::class);
     }
@@ -50,7 +44,7 @@ final class PriceRangeFilterSpec extends ObjectBehavior
         ProductVariantInterface $item2Variant,
         ProductVariantInterface $item3Variant,
         ProductVariantPriceCalculatorInterface $productVariantPriceCalculator
-    ) {
+    ): void {
         $item1->getVariant()->willReturn($item1Variant);
         $item2->getVariant()->willReturn($item2Variant);
         $item3->getVariant()->willReturn($item3Variant);
@@ -75,7 +69,7 @@ final class PriceRangeFilterSpec extends ObjectBehavior
         ProductVariantInterface $item1Variant,
         ProductVariantInterface $item2Variant,
         ProductVariantPriceCalculatorInterface $productVariantPriceCalculator
-    ) {
+    ): void {
         $item1->getVariant()->willReturn($item1Variant);
         $item2->getVariant()->willReturn($item2Variant);
 
@@ -98,7 +92,7 @@ final class PriceRangeFilterSpec extends ObjectBehavior
         ProductVariantInterface $item1Variant,
         ProductVariantInterface $item2Variant,
         ProductVariantPriceCalculatorInterface $productVariantPriceCalculator
-    ) {
+    ): void {
         $item1->getVariant()->willReturn($item1Variant);
         $item2->getVariant()->willReturn($item2Variant);
 
@@ -123,7 +117,7 @@ final class PriceRangeFilterSpec extends ObjectBehavior
         ProductVariantInterface $item2Variant,
         ProductVariantInterface $item3Variant,
         ProductVariantPriceCalculatorInterface $productVariantPriceCalculator
-    ) {
+    ): void {
         $item1->getVariant()->willReturn($item1Variant);
         $item2->getVariant()->willReturn($item2Variant);
         $item3->getVariant()->willReturn($item3Variant);
@@ -148,7 +142,7 @@ final class PriceRangeFilterSpec extends ObjectBehavior
         ProductVariantInterface $item1Variant,
         ProductVariantInterface $item2Variant,
         ProductVariantPriceCalculatorInterface $productVariantPriceCalculator
-    ) {
+    ): void {
         $item1->getVariant()->willReturn($item1Variant);
         $item2->getVariant()->willReturn($item2Variant);
 
@@ -168,7 +162,7 @@ final class PriceRangeFilterSpec extends ObjectBehavior
         ChannelInterface $channel,
         OrderItemInterface $item1,
         OrderItemInterface $item2
-    ) {
+    ): void {
         $this->filter([$item1, $item2], [])->shouldReturn([$item1, $item2]);
         $this->filter([$item1, $item2], [
             'filters' => ['price_range_filter' => ['max' => 10000]],
@@ -179,7 +173,7 @@ final class PriceRangeFilterSpec extends ObjectBehavior
     function it_throws_exception_if_channel_is_not_configured(
         OrderItemInterface $item1,
         OrderItemInterface $item2
-    ) {
+    ): void {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
             ->during('filter', [[$item1, $item2], ['filters' => ['price_range_filter' => ['min' => 1000]]]])

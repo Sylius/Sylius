@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\Core\Cart\Modifier;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Cart\Modifier\LimitingOrderItemQuantityModifier;
 use Sylius\Component\Order\Model\OrderItemInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 
@@ -23,17 +22,12 @@ use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
  */
 final class LimitingOrderItemQuantityModifierSpec extends ObjectBehavior
 {
-    function let(OrderItemQuantityModifierInterface $itemQuantityModifier)
+    function let(OrderItemQuantityModifierInterface $itemQuantityModifier): void
     {
         $this->beConstructedWith($itemQuantityModifier, 1000);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(LimitingOrderItemQuantityModifier::class);
-    }
-
-    function it_implements_order_item_modifier_interface()
+    function it_implements_order_item_modifier_interface(): void
     {
         $this->shouldImplement(OrderItemQuantityModifierInterface::class);
     }
@@ -41,7 +35,7 @@ final class LimitingOrderItemQuantityModifierSpec extends ObjectBehavior
     function it_restricts_max_item_quantity_to_the_stated_limit(
         OrderItemQuantityModifierInterface $itemQuantityModifier,
         OrderItemInterface $orderItem
-    ) {
+    ): void {
         $orderItem->getQuantity()->willReturn(0);
 
         $itemQuantityModifier->modify($orderItem, 1000)->shouldBeCalled();

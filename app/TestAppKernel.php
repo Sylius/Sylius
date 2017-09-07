@@ -25,7 +25,7 @@ class TestAppKernel extends AppKernel
     /**
      * {@inheritdoc}
      */
-    public function shutdown()
+    public function shutdown(): void
     {
         if (false === $this->booted) {
             return;
@@ -47,7 +47,7 @@ class TestAppKernel extends AppKernel
      *
      * @param ContainerInterface $container
      */
-    protected function cleanupContainer(ContainerInterface $container)
+    protected function cleanupContainer(ContainerInterface $container): void
     {
         $containerReflection = new \ReflectionObject($container);
         $containerServicesPropertyReflection = $containerReflection->getProperty('services');
@@ -81,7 +81,7 @@ class TestAppKernel extends AppKernel
         $containerServicesPropertyReflection->setValue($container, null);
     }
 
-    protected function getContainerBaseClass()
+    protected function getContainerBaseClass(): string
     {
         return MockerContainer::class;
     }

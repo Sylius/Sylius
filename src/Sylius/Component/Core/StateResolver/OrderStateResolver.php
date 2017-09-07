@@ -55,7 +55,7 @@ final class OrderStateResolver implements StateResolverInterface
      *
      * @return bool
      */
-    private function canOrderBeFulfilled(OrderInterface $order)
+    private function canOrderBeFulfilled(OrderInterface $order): bool
     {
         return
             OrderPaymentStates::STATE_PAID === $order->getPaymentState() &&

@@ -16,12 +16,12 @@ use Sylius\Component\Resource\Storage\StorageInterface;
  */
 final class CurrencyStorageSpec extends ObjectBehavior
 {
-    function let(StorageInterface $storage)
+    function let(StorageInterface $storage): void
     {
         $this->beConstructedWith($storage);
     }
 
-    function it_is_a_currency_storage()
+    function it_is_a_currency_storage(): void
     {
         $this->shouldImplement(CurrencyStorageInterface::class);
     }
@@ -29,7 +29,7 @@ final class CurrencyStorageSpec extends ObjectBehavior
     function it_gets_a_currency_for_a_given_channel(
         StorageInterface $storage,
         ChannelInterface $channel
-    ) {
+    ): void {
         $channel->getCode()->willReturn('web');
 
         $storage->get('_currency_web')->willReturn('BTC');
@@ -40,7 +40,7 @@ final class CurrencyStorageSpec extends ObjectBehavior
     function it_sets_a_currency_for_a_given_channel_if_it_is_one_of_the_available_ones_but_not_the_base_one(
         StorageInterface $storage,
         ChannelInterface $channel
-    ) {
+    ): void {
         $usd = new Currency();
         $usd->setCode('USD');
 
@@ -59,7 +59,7 @@ final class CurrencyStorageSpec extends ObjectBehavior
     function it_removes_a_currency_for_a_given_channel_if_it_is_the_base_one(
         StorageInterface $storage,
         ChannelInterface $channel
-    ) {
+    ): void {
         $usd = new Currency();
         $usd->setCode('USD');
 
@@ -79,7 +79,7 @@ final class CurrencyStorageSpec extends ObjectBehavior
     function it_removes_a_currency_for_a_given_channel_if_it_is_not_available(
         StorageInterface $storage,
         ChannelInterface $channel
-    ) {
+    ): void {
         $usd = new Currency();
         $usd->setCode('USD');
 

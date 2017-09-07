@@ -40,7 +40,7 @@ final class ProductVariantsPricesProvider implements ProductVariantsPricesProvid
     /**
      * {@inheritdoc}
      */
-    public function provideVariantsPrices(ProductInterface $product, ChannelInterface $channel)
+    public function provideVariantsPrices(ProductInterface $product, ChannelInterface $channel): array
     {
         $variantsPrices = [];
 
@@ -58,7 +58,7 @@ final class ProductVariantsPricesProvider implements ProductVariantsPricesProvid
      *
      * @return array
      */
-    private function constructOptionsMap(ProductVariantInterface $variant, ChannelInterface $channel)
+    private function constructOptionsMap(ProductVariantInterface $variant, ChannelInterface $channel): array
     {
         $optionMap = [];
 

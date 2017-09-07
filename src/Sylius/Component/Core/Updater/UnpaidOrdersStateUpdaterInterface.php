@@ -18,5 +18,5 @@ namespace Sylius\Component\Core\Updater;
  */
 interface UnpaidOrdersStateUpdaterInterface
 {
-    public function cancel();
+    public function cancel(): void;
 }

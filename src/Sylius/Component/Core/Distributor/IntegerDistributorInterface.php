@@ -26,5 +26,5 @@ interface IntegerDistributorInterface
      *
      * @throws \InvalidArgumentException
      */
-    public function distribute($amount, $numberOfTargets);
+    public function distribute(float $amount, int $numberOfTargets): array;
 }

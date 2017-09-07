@@ -39,7 +39,7 @@ trait SyliusPluginTrait
      *
      * @throws \LogicException
      */
-    public function getContainerExtension()
+    public function getContainerExtension(): ?ExtensionInterface
     {
         if (null === $this->containerExtension) {
             $extension = $this->createContainerExtension();
@@ -76,28 +76,28 @@ trait SyliusPluginTrait
      *
      * @return ExtensionInterface|null
      */
-    abstract protected function createContainerExtension();
+    abstract protected function createContainerExtension(): ?ExtensionInterface;
 
     /**
      * Returns the bundle name (the class short name).
      *
      * @return string The Bundle name
      */
-    abstract protected function getName();
+    abstract protected function getName(): string;
 
     /**
      * Gets the Bundle namespace.
      *
      * @return string The Bundle namespace
      */
-    abstract protected function getNamespace();
+    abstract protected function getNamespace(): string;
 
     /**
      * Returns the plugin's container extension class.
      *
      * @return string
      */
-    protected function getContainerExtensionClass()
+    protected function getContainerExtensionClass(): string
     {
         $basename = preg_replace('/Plugin$/', '', $this->getName());
 

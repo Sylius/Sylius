@@ -76,7 +76,7 @@ class OrderItemUnit extends BaseOrderItemUnit implements OrderItemUnitInterface
     /**
      * {@inheritdoc}
      */
-    public function getTaxTotal()
+    public function getTaxTotal(): int
     {
         $taxTotal = 0;
 

@@ -46,7 +46,7 @@ final class CheckoutStateUrlGenerator implements CheckoutStateUrlGeneratorInterf
     /**
      * {@inheritdoc}
      */
-    public function generate($name, $parameters = [], $referenceType = self::ABSOLUTE_PATH)
+    public function generate($name, $parameters = [], $referenceType = self::ABSOLUTE_PATH): string
     {
         return $this->router->generate($name, $parameters, $referenceType);
     }
@@ -54,8 +54,11 @@ final class CheckoutStateUrlGenerator implements CheckoutStateUrlGeneratorInterf
     /**
      * {@inheritdoc}
      */
-    public function generateForOrderCheckoutState(OrderInterface $order, $parameters = [], $referenceType = self::ABSOLUTE_PATH)
-    {
+    public function generateForOrderCheckoutState(
+        OrderInterface $order,
+        array $parameters = [],
+        int $referenceType = self::ABSOLUTE_PATH
+    ): string {
         if (!isset($this->routeCollection[$order->getCheckoutState()]['route'])) {
             throw new RouteNotFoundException();
         }
@@ -66,7 +69,7 @@ final class CheckoutStateUrlGenerator implements CheckoutStateUrlGeneratorInterf
     /**
      * {@inheritdoc}
      */
-    public function generateForCart($parameters = [], $referenceType = self::ABSOLUTE_PATH)
+    public function generateForCart(array $parameters = [], int $referenceType = self::ABSOLUTE_PATH): string
     {
         if (!isset($this->routeCollection['empty_order']['route'])) {
             throw new RouteNotFoundException();
@@ -77,7 +80,7 @@ final class CheckoutStateUrlGenerator implements CheckoutStateUrlGeneratorInterf
     /**
      * {@inheritdoc}
      */
-    public function setContext(RequestContext $context)
+    public function setContext(RequestContext $context): void
     {
         $this->router->setContext($context);
     }
@@ -85,7 +88,7 @@ final class CheckoutStateUrlGenerator implements CheckoutStateUrlGeneratorInterf
     /**
      * {@inheritdoc}
      */
-    public function getContext()
+    public function getContext(): RequestContext
     {
         return $this->router->getContext();
     }

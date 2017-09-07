@@ -28,5 +28,5 @@ interface LocaleSetupInterface
      *
      * @return LocaleInterface
      */
-    public function setup(InputInterface $input, OutputInterface $output);
+    public function setup(InputInterface $input, OutputInterface $output): LocaleInterface;
 }

@@ -17,19 +17,13 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Promotion\Filter\FilterInterface;
-use Sylius\Component\Core\Promotion\Filter\ProductFilter;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 final class ProductFilterSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ProductFilter::class);
-    }
-
-    function it_implements_a_filter_interface()
+    function it_implements_a_filter_interface(): void
     {
         $this->shouldImplement(FilterInterface::class);
     }
@@ -39,7 +33,7 @@ final class ProductFilterSpec extends ObjectBehavior
         OrderItemInterface $item2,
         ProductInterface $product1,
         ProductInterface $product2
-    ) {
+    ): void {
         $item1->getProduct()->willReturn($product1);
         $product1->getCode()->willReturn('product1');
 
@@ -49,12 +43,12 @@ final class ProductFilterSpec extends ObjectBehavior
         $this->filter([$item1, $item2], ['filters' => ['products_filter' => ['products' => ['product1']]]])->shouldReturn([$item1]);
     }
 
-    function it_returns_all_items_if_configuration_is_invalid(OrderItemInterface $item)
+    function it_returns_all_items_if_configuration_is_invalid(OrderItemInterface $item): void
     {
         $this->filter([$item], [])->shouldReturn([$item]);
     }
 
-    function it_returns_all_items_if_configuration_is_empty(OrderItemInterface $item)
+    function it_returns_all_items_if_configuration_is_empty(OrderItemInterface $item): void
     {
         $this->filter([$item], ['filters' => ['products_filter' => ['products' => []]]])->shouldReturn([$item]);
     }

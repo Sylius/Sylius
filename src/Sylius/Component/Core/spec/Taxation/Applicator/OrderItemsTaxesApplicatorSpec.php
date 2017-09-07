@@ -16,14 +16,13 @@ namespace spec\Sylius\Component\Core\Taxation\Applicator;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Distributor\IntegerDistributorInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Core\Distributor\IntegerDistributorInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Core\Taxation\Applicator\OrderItemsTaxesApplicator;
 use Sylius\Component\Core\Taxation\Applicator\OrderTaxesApplicatorInterface;
 use Sylius\Component\Order\Factory\AdjustmentFactoryInterface;
 use Sylius\Component\Taxation\Calculator\CalculatorInterface;
@@ -41,16 +40,11 @@ final class OrderItemsTaxesApplicatorSpec extends ObjectBehavior
         AdjustmentFactoryInterface $adjustmentsFactory,
         IntegerDistributorInterface $distributor,
         TaxRateResolverInterface $taxRateResolver
-    ) {
+    ): void {
         $this->beConstructedWith($calculator, $adjustmentsFactory, $distributor, $taxRateResolver);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(OrderItemsTaxesApplicator::class);
-    }
-
-    function it_implements_an_order_shipment_taxes_applicator_interface()
+    function it_implements_an_order_shipment_taxes_applicator_interface(): void
     {
         $this->shouldImplement(OrderTaxesApplicatorInterface::class);
     }
@@ -71,7 +65,7 @@ final class OrderItemsTaxesApplicatorSpec extends ObjectBehavior
         ProductVariantInterface $productVariant,
         TaxRateInterface $taxRate,
         ZoneInterface $zone
-    ) {
+    ): void {
         $order->getItems()->willReturn($items);
 
         $items->count()->willReturn(1);
@@ -108,7 +102,7 @@ final class OrderItemsTaxesApplicatorSpec extends ObjectBehavior
         OrderInterface $order,
         OrderItemInterface $orderItem,
         ZoneInterface $zone
-    ) {
+    ): void {
         $items = new ArrayCollection([$orderItem->getWrappedObject()]);
         $order->getItems()->willReturn($items);
 
@@ -125,7 +119,7 @@ final class OrderItemsTaxesApplicatorSpec extends ObjectBehavior
         OrderItemInterface $orderItem,
         ProductVariantInterface $productVariant,
         ZoneInterface $zone
-    ) {
+    ): void {
         $order->getItems()->willReturn($items);
 
         $items->count()->willReturn(1);
@@ -159,7 +153,7 @@ final class OrderItemsTaxesApplicatorSpec extends ObjectBehavior
         ProductVariantInterface $productVariant,
         TaxRateInterface $taxRate,
         ZoneInterface $zone
-    ) {
+    ): void {
         $order->getItems()->willReturn($items);
 
         $items->count()->willReturn(1);

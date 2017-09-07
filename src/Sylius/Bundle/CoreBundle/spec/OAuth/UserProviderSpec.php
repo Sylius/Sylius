@@ -19,7 +19,6 @@ use HWI\Bundle\OAuthBundle\OAuth\ResourceOwnerInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\OAuth\UserProvider;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUser;
 use Sylius\Component\Core\Model\ShopUserInterface;
@@ -39,21 +38,16 @@ final class UserProviderSpec extends ObjectBehavior
         RepositoryInterface $oauthRepository,
         ObjectManager $userManager,
         CanonicalizerInterface $canonicalizer
-    ) {
+    ): void {
         $this->beConstructedWith(ShopUser::class, $customerFactory, $userFactory, $userRepository, $oauthFactory, $oauthRepository, $userManager, $canonicalizer);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(UserProvider::class);
-    }
-
-    function it_implements_Hwi_oauth_aware_user_provider_interface()
+    function it_implements_Hwi_oauth_aware_user_provider_interface(): void
     {
         $this->shouldImplement(OAuthAwareUserProviderInterface::class);
     }
 
-    function it_implements_account_connector_interface()
+    function it_implements_account_connector_interface(): void
     {
         $this->shouldImplement(AccountConnectorInterface::class);
     }
@@ -65,7 +59,7 @@ final class UserProviderSpec extends ObjectBehavior
         UserResponseInterface $response,
         ResourceOwnerInterface $resourceOwner,
         UserOAuthInterface $oauth
-    ) {
+    ): void {
         $resourceOwner->getName()->willReturn('google');
 
         $response->getEmail()->willReturn(null);
@@ -95,7 +89,7 @@ final class UserProviderSpec extends ObjectBehavior
         UserOAuthInterface $oauth,
         UserResponseInterface $response,
         ResourceOwnerInterface $resourceOwner
-    ) {
+    ): void {
         $resourceOwner->getName()->willReturn('google');
 
         $response->getUsername()->willReturn('username');
@@ -116,7 +110,7 @@ final class UserProviderSpec extends ObjectBehavior
         UserResponseInterface $response,
         ResourceOwnerInterface $resourceOwner,
         UserOAuthInterface $oauth
-    ) {
+    ): void {
         $resourceOwner->getName()->willReturn('google');
 
         $response->getEmail()->willReturn('username@email');
@@ -154,7 +148,7 @@ final class UserProviderSpec extends ObjectBehavior
         UserResponseInterface $response,
         ResourceOwnerInterface $resourceOwner,
         UserOAuthInterface $oauth
-    ) {
+    ): void {
         $resourceOwner->getName()->willReturn('google');
 
         $response->getEmail()->willReturn(null);

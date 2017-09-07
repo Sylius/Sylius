@@ -25,7 +25,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class PromotionRuleFactory implements PromotionRuleFactoryInterface
+final class PromotionRuleFactory implements PromotionRuleFactoryInterface
 {
     /**
      * @var FactoryInterface
@@ -43,7 +43,7 @@ class PromotionRuleFactory implements PromotionRuleFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createNew()
+    public function createNew(): PromotionRuleInterface
     {
         return $this->decoratedFactory->createNew();
     }
@@ -51,77 +51,66 @@ class PromotionRuleFactory implements PromotionRuleFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createCartQuantity($count)
+    public function createCartQuantity(int $count): PromotionRuleInterface
     {
-        /** @var PromotionRuleInterface $rule */
-        $rule = $this->createNew();
-        $rule->setType(CartQuantityRuleChecker::TYPE);
-        $rule->setConfiguration(['count' => $count]);
-
-        return $rule;
+        return $this->createPromotionRule(CartQuantityRuleChecker::TYPE, ['count' => $count]);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function createItemTotal($channelCode, $amount)
+    public function createItemTotal(string $channelCode, int $amount): PromotionRuleInterface
     {
-        /** @var PromotionRuleInterface $rule */
-        $rule = $this->createNew();
-        $rule->setType(ItemTotalRuleChecker::TYPE);
-        $rule->setConfiguration([$channelCode => ['amount' => $amount]]);
-
-        return $rule;
+        return $this->createPromotionRule(ItemTotalRuleChecker::TYPE, [$channelCode => ['amount' => $amount]]);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function createHasTaxon(array $taxons)
+    public function createHasTaxon(array $taxons): PromotionRuleInterface
     {
-        /** @var PromotionRuleInterface $rule */
-        $rule = $this->createNew();
-        $rule->setType(HasTaxonRuleChecker::TYPE);
-        $rule->setConfiguration(['taxons' => $taxons]);
-
-        return $rule;
+        return $this->createPromotionRule(HasTaxonRuleChecker::TYPE, ['taxons' => $taxons]);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function createItemsFromTaxonTotal($channelCode, $taxonCode, $amount)
+    public function createItemsFromTaxonTotal(string $channelCode, string $taxonCode, int $amount): PromotionRuleInterface
     {
-        /** @var PromotionRuleInterface $rule */
-        $rule = $this->createNew();
-        $rule->setType(TotalOfItemsFromTaxonRuleChecker::TYPE);
-        $rule->setConfiguration([$channelCode => ['taxon' => $taxonCode, 'amount' => $amount]]);
-
-        return $rule;
+        return $this->createPromotionRule(
+            TotalOfItemsFromTaxonRuleChecker::TYPE,
+            [$channelCode => ['taxon' => $taxonCode, 'amount' => $amount]])
+        ;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function createNthOrder($nth)
+    public function createNthOrder(int $nth): PromotionRuleInterface
     {
-        /** @var PromotionRuleInterface $rule */
-        $rule = $this->createNew();
-        $rule->setType(NthOrderRuleChecker::TYPE);
-        $rule->setConfiguration(['nth' => $nth]);
-
-        return $rule;
+        return $this->createPromotionRule(NthOrderRuleChecker::TYPE, ['nth' => $nth]);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function createContainsProduct($productCode)
+    public function createContainsProduct(string $productCode): PromotionRuleInterface
+    {
+        return $this->createPromotionRule(ContainsProductRuleChecker::TYPE, ['product_code' => $productCode]);
+    }
+
+    /**
+     * @param string $type
+     * @param array $configuration
+     *
+     * @return PromotionRuleInterface
+     */
+    private function createPromotionRule(string $type, array $configuration): PromotionRuleInterface
     {
         /** @var PromotionRuleInterface $rule */
         $rule = $this->createNew();
-        $rule->setType(ContainsProductRuleChecker::TYPE);
-        $rule->setConfiguration(['product_code' => $productCode]);
+        $rule->setType($type);
+        $rule->setConfiguration($configuration);
 
         return $rule;
     }

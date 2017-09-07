@@ -23,5 +23,5 @@ interface OrderAddressesSaverInterface
     /**
      * @param OrderInterface $order
      */
-    public function saveAddresses(OrderInterface $order);
+    public function saveAddresses(OrderInterface $order): void;
 }

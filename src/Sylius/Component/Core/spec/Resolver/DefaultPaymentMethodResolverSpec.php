@@ -18,7 +18,6 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface as CorePaymentInterface;
 use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
-use Sylius\Component\Core\Resolver\DefaultPaymentMethodResolver;
 use Sylius\Component\Payment\Exception\UnresolvedDefaultPaymentMethodException;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
@@ -29,24 +28,19 @@ use Sylius\Component\Payment\Resolver\DefaultPaymentMethodResolverInterface;
  */
 final class DefaultPaymentMethodResolverSpec extends ObjectBehavior
 {
-    function let(PaymentMethodRepositoryInterface $paymentMethodRepository)
+    function let(PaymentMethodRepositoryInterface $paymentMethodRepository): void
     {
         $this->beConstructedWith($paymentMethodRepository);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(DefaultPaymentMethodResolver::class);
-    }
-
-    function it_implements_a_payment_method_resolver_interface()
+    function it_implements_a_payment_method_resolver_interface(): void
     {
         $this->shouldImplement(DefaultPaymentMethodResolverInterface::class);
     }
 
     function it_throws_an_invalid_argument_exception_if_subject_not_implements_core_payment_interface(
         PaymentInterface $payment
-    ) {
+    ): void {
         $this->shouldThrow(\InvalidArgumentException::class)->during('getDefaultPaymentMethod', [$payment]);
     }
 
@@ -55,7 +49,7 @@ final class DefaultPaymentMethodResolverSpec extends ObjectBehavior
         PaymentMethodRepositoryInterface $paymentMethodRepository,
         ChannelInterface $channel,
         OrderInterface $order
-    ) {
+    ): void {
         $payment->getOrder()->willReturn($order);
         $order->getChannel()->willReturn($channel);
         $paymentMethodRepository->findEnabledForChannel($channel)->willReturn([]);
@@ -73,7 +67,7 @@ final class DefaultPaymentMethodResolverSpec extends ObjectBehavior
         PaymentMethodInterface $secondPaymentMethod,
         ChannelInterface $channel,
         OrderInterface $order
-    ) {
+    ): void {
         $payment->getOrder()->willReturn($order);
         $order->getChannel()->willReturn($channel);
         $paymentMethodRepository

@@ -13,14 +13,13 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Component\Core\Resolver;
 
+use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
-use Sylius\Component\Core\Resolver\ChannelBasedPaymentMethodsResolver;
-use PhpSpec\ObjectBehavior;
-use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Model\PaymentInterface as BasePaymentInterface;
+use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Resolver\PaymentMethodsResolverInterface;
 
 /**
@@ -28,17 +27,12 @@ use Sylius\Component\Payment\Resolver\PaymentMethodsResolverInterface;
  */
 final class ChannelBasedPaymentMethodsResolverSpec extends ObjectBehavior
 {
-    function let(PaymentMethodRepositoryInterface $paymentMethodRepository)
+    function let(PaymentMethodRepositoryInterface $paymentMethodRepository): void
     {
         $this->beConstructedWith($paymentMethodRepository);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ChannelBasedPaymentMethodsResolver::class);
-    }
-
-    function it_implements_a_payment_methods_resolver_interface()
+    function it_implements_a_payment_methods_resolver_interface(): void
     {
         $this->shouldImplement(PaymentMethodsResolverInterface::class);
     }
@@ -50,7 +44,7 @@ final class ChannelBasedPaymentMethodsResolverSpec extends ObjectBehavior
         PaymentMethodRepositoryInterface $paymentMethodRepository,
         PaymentMethodInterface $firstPaymentMethod,
         PaymentMethodInterface $secondPaymentMethod
-    ) {
+    ): void {
         $payment->getOrder()->willReturn($order);
         $order->getChannel()->willReturn($channel);
 
@@ -68,7 +62,7 @@ final class ChannelBasedPaymentMethodsResolverSpec extends ObjectBehavior
         OrderInterface $order,
         ChannelInterface $channel,
         PaymentMethodRepositoryInterface $paymentMethodRepository
-    ) {
+    ): void {
         $payment->getOrder()->willReturn($order);
         $order->getChannel()->willReturn($channel);
 
@@ -85,7 +79,7 @@ final class ChannelBasedPaymentMethodsResolverSpec extends ObjectBehavior
         PaymentInterface $payment,
         OrderInterface $order,
         ChannelInterface $channel
-    ) {
+    ): void {
         $payment->getOrder()->willReturn($order);
         $order->getChannel()->willReturn($channel);
 
@@ -96,19 +90,19 @@ final class ChannelBasedPaymentMethodsResolverSpec extends ObjectBehavior
         PaymentInterface $payment,
         OrderInterface $order
 
-    ) {
+    ): void {
         $payment->getOrder()->willReturn($order);
         $order->getChannel()->willReturn(null);
 
         $this->supports($payment)->shouldReturn(false);
     }
 
-    function it_does_not_support_payment_if_payment_is_not_instance_of_core_payment_interface(BasePaymentInterface $payment)
+    function it_does_not_support_payment_if_payment_is_not_instance_of_core_payment_interface(BasePaymentInterface $payment): void
     {
         $this->supports($payment)->shouldReturn(false);
     }
 
-    function it_does_not_support_payments_which_has_no_order_defined(PaymentInterface $payment)
+    function it_does_not_support_payments_which_has_no_order_defined(PaymentInterface $payment): void
     {
         $payment->getOrder()->willReturn(null);
 

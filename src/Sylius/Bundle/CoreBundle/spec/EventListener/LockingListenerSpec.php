@@ -16,7 +16,6 @@ namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 use Doctrine\DBAL\LockMode;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\EventListener\LockingListener;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Sylius\Component\Resource\Model\VersionedInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -26,21 +25,16 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  */
 final class LockingListenerSpec extends ObjectBehavior
 {
-    function let(EntityManagerInterface $manager, ProductVariantResolverInterface $variantResolver)
+    function let(EntityManagerInterface $manager, ProductVariantResolverInterface $variantResolver): void
     {
         $this->beConstructedWith($manager, $variantResolver);
-    }
-
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(LockingListener::class);
     }
 
     function it_locks_versioned_entity(
         EntityManagerInterface $manager,
         GenericEvent $event,
         VersionedInterface $subject
-    ) {
+    ): void {
         $event->getSubject()->willReturn($subject);
         $subject->getVersion()->willReturn(7);
 
@@ -49,7 +43,7 @@ final class LockingListenerSpec extends ObjectBehavior
         $this->lock($event);
     }
 
-    function it_throws_an_invalid_argument_exception_if_event_subject_is_not_versioned(GenericEvent $event)
+    function it_throws_an_invalid_argument_exception_if_event_subject_is_not_versioned(GenericEvent $event): void
     {
         $event->getSubject()->willReturn('badObject');
 

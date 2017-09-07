@@ -54,7 +54,7 @@ class Customer extends BaseCustomer implements CustomerInterface
     /**
      * {@inheritdoc}
      */
-    public function getOrders()
+    public function getOrders(): Collection
     {
         return $this->orders;
     }
@@ -62,7 +62,7 @@ class Customer extends BaseCustomer implements CustomerInterface
     /**
      * {@inheritdoc}
      */
-    public function getDefaultAddress()
+    public function getDefaultAddress(): ?AddressInterface
     {
         return $this->defaultAddress;
     }
@@ -70,7 +70,7 @@ class Customer extends BaseCustomer implements CustomerInterface
     /**
      * {@inheritdoc}
      */
-    public function setDefaultAddress(AddressInterface $defaultAddress = null)
+    public function setDefaultAddress(?AddressInterface $defaultAddress): void
     {
         $this->defaultAddress = $defaultAddress;
 
@@ -82,7 +82,7 @@ class Customer extends BaseCustomer implements CustomerInterface
     /**
      * {@inheritdoc}
      */
-    public function addAddress(AddressInterface $address)
+    public function addAddress(AddressInterface $address): void
     {
         if (!$this->hasAddress($address)) {
             $this->addresses[] = $address;
@@ -93,7 +93,7 @@ class Customer extends BaseCustomer implements CustomerInterface
     /**
      * {@inheritdoc}
      */
-    public function removeAddress(AddressInterface $address)
+    public function removeAddress(AddressInterface $address): void
     {
         $this->addresses->removeElement($address);
         $address->setCustomer(null);
@@ -102,7 +102,7 @@ class Customer extends BaseCustomer implements CustomerInterface
     /**
      * {@inheritdoc}
      */
-    public function hasAddress(AddressInterface $address)
+    public function hasAddress(AddressInterface $address): bool
     {
         return $this->addresses->contains($address);
     }
@@ -110,7 +110,7 @@ class Customer extends BaseCustomer implements CustomerInterface
     /**
      * {@inheritdoc}
      */
-    public function getAddresses()
+    public function getAddresses(): Collection
     {
         return $this->addresses;
     }
@@ -137,7 +137,7 @@ class Customer extends BaseCustomer implements CustomerInterface
     /**
      * {@inheritdoc}
      */
-    public function hasUser()
+    public function hasUser(): bool
     {
         return null !== $this->user;
     }
@@ -145,7 +145,7 @@ class Customer extends BaseCustomer implements CustomerInterface
     /**
      * @param ShopUserInterface|null $user
      */
-    protected function assignCustomer(ShopUserInterface $user = null)
+    protected function assignCustomer(?ShopUserInterface $user): void
     {
         if (null !== $user) {
             $user->setCustomer($this);

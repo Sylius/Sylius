@@ -84,7 +84,7 @@ class ProductReviewExampleFactory extends AbstractExampleFactory implements Exam
     /**
      * {@inheritdoc}
      */
-    public function create(array $options = [])
+    public function create(array $options = []): ReviewInterface
     {
         $options = $this->optionsResolver->resolve($options);
 
@@ -106,16 +106,16 @@ class ProductReviewExampleFactory extends AbstractExampleFactory implements Exam
     /**
      * {@inheritdoc}
      */
-    protected function configureOptions(OptionsResolver $resolver)
+    protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
-            ->setDefault('title', function (Options $options) {
+            ->setDefault('title', function (Options $options): string {
                 return $this->faker->words(3, true);
             })
-            ->setDefault('rating', function (Options $options) {
+            ->setDefault('rating', function (Options $options): int {
                 return $this->faker->numberBetween(1, 5);
             })
-            ->setDefault('comment', function (Options $options) {
+            ->setDefault('comment', function (Options $options): string {
                 return $this->faker->sentences(3, true);
             })
             ->setDefault('author', LazyOption::randomOne($this->customerRepository))
@@ -129,7 +129,7 @@ class ProductReviewExampleFactory extends AbstractExampleFactory implements Exam
     /**
      * @return string
      */
-    private function getRandomStatus()
+    private function getRandomStatus(): string
     {
         $statuses = [ReviewInterface::STATUS_NEW, ReviewInterface::STATUS_ACCEPTED, ReviewInterface::STATUS_REJECTED];
 
@@ -140,7 +140,7 @@ class ProductReviewExampleFactory extends AbstractExampleFactory implements Exam
      * @param ReviewInterface $productReview
      * @param string $targetState
      */
-    private function applyReviewTransition(ReviewInterface $productReview, $targetState)
+    private function applyReviewTransition(ReviewInterface $productReview, string $targetState): void
     {
         /** @var StateMachineInterface $stateMachine */
         $stateMachine = $this->stateMachineFactory->get($productReview, 'sylius_product_review');

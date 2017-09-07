@@ -20,7 +20,6 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Payment\Exception\NotProvidedOrderPaymentException;
-use Sylius\Component\Core\Payment\Provider\OrderPaymentProvider;
 use Sylius\Component\Core\Payment\Provider\OrderPaymentProviderInterface;
 use Sylius\Component\Payment\Exception\UnresolvedDefaultPaymentMethodException;
 use Sylius\Component\Payment\Factory\PaymentFactoryInterface;
@@ -37,7 +36,7 @@ final class OrderPaymentProviderSpec extends ObjectBehavior
         DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver,
         PaymentFactoryInterface $paymentFactory,
         StateMachineFactoryInterface $stateMachineFactory
-    ) {
+    ): void {
         $this->beConstructedWith(
             $defaultPaymentMethodResolver,
             $paymentFactory,
@@ -45,12 +44,7 @@ final class OrderPaymentProviderSpec extends ObjectBehavior
         );
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(OrderPaymentProvider::class);
-    }
-
-    function it_implements_order_payment_provider_interface()
+    function it_implements_order_payment_provider_interface(): void
     {
         $this->shouldImplement(OrderPaymentProviderInterface::class);
     }
@@ -64,7 +58,7 @@ final class OrderPaymentProviderSpec extends ObjectBehavior
         PaymentMethodInterface $paymentMethod,
         StateMachineFactoryInterface $stateMachineFactory,
         StateMachineInterface $stateMachine
-    ) {
+    ): void {
         $order->getTotal()->willReturn(1000);
         $order->getCurrencyCode()->willReturn('USD');
         $order->getLastPayment(PaymentInterface::STATE_CANCELLED)->willReturn($lastCancelledPayment);
@@ -94,7 +88,7 @@ final class OrderPaymentProviderSpec extends ObjectBehavior
         PaymentMethodInterface $paymentMethod,
         StateMachineFactoryInterface $stateMachineFactory,
         StateMachineInterface $stateMachine
-    ) {
+    ): void {
         $order->getTotal()->willReturn(1000);
         $order->getCurrencyCode()->willReturn('USD');
         $order->getLastPayment(PaymentInterface::STATE_CANCELLED)->willReturn(null);
@@ -124,7 +118,7 @@ final class OrderPaymentProviderSpec extends ObjectBehavior
         PaymentMethodInterface $paymentMethod,
         StateMachineFactoryInterface $stateMachineFactory,
         StateMachineInterface $stateMachine
-    ) {
+    ): void {
         $order->getTotal()->willReturn(1000);
         $order->getCurrencyCode()->willReturn('USD');
         $order->getLastPayment(PaymentInterface::STATE_CANCELLED)->willReturn(null);
@@ -152,7 +146,7 @@ final class OrderPaymentProviderSpec extends ObjectBehavior
         PaymentInterface $newPayment,
         PaymentMethodInterface $paymentMethod,
         StateMachineFactoryInterface $stateMachineFactory
-    ) {
+    ): void {
         $this->beConstructedWith(
             $defaultPaymentMethodResolver,
             $paymentFactory,
@@ -184,7 +178,7 @@ final class OrderPaymentProviderSpec extends ObjectBehavior
         PaymentFactoryInterface $paymentFactory,
         PaymentInterface $lastFailedPayment,
         PaymentInterface $newPayment
-    ) {
+    ): void {
         $order->getTotal()->willReturn(1000);
         $order->getCurrencyCode()->willReturn('USD');
         $order->getLastPayment(PaymentInterface::STATE_CANCELLED)->willReturn(null);

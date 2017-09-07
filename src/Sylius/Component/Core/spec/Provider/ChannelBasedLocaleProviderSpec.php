@@ -18,7 +18,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Provider\ChannelBasedLocaleProvider;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 
@@ -27,17 +26,12 @@ use Sylius\Component\Locale\Provider\LocaleProviderInterface;
  */
 final class ChannelBasedLocaleProviderSpec extends ObjectBehavior
 {
-    function let(ChannelContextInterface $channelContext)
+    function let(ChannelContextInterface $channelContext): void
     {
         $this->beConstructedWith($channelContext, 'pl_PL');
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ChannelBasedLocaleProvider::class);
-    }
-
-    function it_is_a_locale_provider()
+    function it_is_a_locale_provider(): void
     {
         $this->shouldImplement(LocaleProviderInterface::class);
     }
@@ -46,7 +40,7 @@ final class ChannelBasedLocaleProviderSpec extends ObjectBehavior
         ChannelContextInterface $channelContext,
         ChannelInterface $channel,
         LocaleInterface $enabledLocale
-    ) {
+    ): void {
         $channelContext->getChannel()->willReturn($channel);
 
         $channel->getLocales()->willReturn(new ArrayCollection([
@@ -60,7 +54,7 @@ final class ChannelBasedLocaleProviderSpec extends ObjectBehavior
 
     function it_returns_the_default_locale_as_the_available_one_if_channel_cannot_be_determined(
         ChannelContextInterface $channelContext
-    ) {
+    ): void {
         $channelContext->getChannel()->willThrow(ChannelNotFoundException::class);
 
         $this->getAvailableLocalesCodes()->shouldReturn(['pl_PL']);
@@ -70,7 +64,7 @@ final class ChannelBasedLocaleProviderSpec extends ObjectBehavior
         ChannelContextInterface $channelContext,
         ChannelInterface $channel,
         LocaleInterface $locale
-    ) {
+    ): void {
         $channelContext->getChannel()->willReturn($channel);
 
         $channel->getDefaultLocale()->willReturn($locale);
@@ -82,7 +76,7 @@ final class ChannelBasedLocaleProviderSpec extends ObjectBehavior
 
     function it_returns_the_default_locale_if_channel_cannot_be_determined(
         ChannelContextInterface $channelContext
-    ) {
+    ): void {
         $channelContext->getChannel()->willThrow(ChannelNotFoundException::class);
 
         $this->getDefaultLocaleCode()->shouldReturn('pl_PL');

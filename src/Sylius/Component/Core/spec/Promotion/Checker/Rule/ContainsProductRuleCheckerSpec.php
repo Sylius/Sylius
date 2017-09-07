@@ -16,14 +16,9 @@ namespace spec\Sylius\Component\Core\Promotion\Checker\Rule;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\OrderItem;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\Model\ProductVariant;
-use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Core\Promotion\Checker\Rule\ContainsProductRuleChecker;
 use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
-use Sylius\Component\Promotion\Exception\UnsupportedTypeException;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
@@ -33,17 +28,12 @@ use Sylius\Component\Resource\Exception\UnexpectedTypeException;
  */
 final class ContainsProductRuleCheckerSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ContainsProductRuleChecker::class);
-    }
-
-    function it_implements_a_rule_checker_interface()
+    function it_implements_a_rule_checker_interface(): void
     {
         $this->shouldImplement(RuleCheckerInterface::class);
     }
 
-    function it_throws_an_exception_if_the_promotion_subject_is_not_an_order(PromotionSubjectInterface $subject)
+    function it_throws_an_exception_if_the_promotion_subject_is_not_an_order(PromotionSubjectInterface $subject): void
     {
         $this
             ->shouldThrow(new UnexpectedTypeException($subject->getWrappedObject(), OrderInterface::class))
@@ -57,7 +47,7 @@ final class ContainsProductRuleCheckerSpec extends ObjectBehavior
         OrderItemInterface $secondOrderItem,
         ProductInterface $shaft,
         ProductInterface $head
-    ) {
+    ): void {
         $subject->getItems()->willReturn(new ArrayCollection([$firstOrderItem->getWrappedObject(), $secondOrderItem->getWrappedObject()]));
         $firstOrderItem->getProduct()->willReturn($head);
         $secondOrderItem->getProduct()->willReturn($shaft);
@@ -73,7 +63,7 @@ final class ContainsProductRuleCheckerSpec extends ObjectBehavior
         OrderItemInterface $secondOrderItem,
         ProductInterface $shaft,
         ProductInterface $head
-    ) {
+    ): void {
         $subject->getItems()->willReturn(new ArrayCollection([$firstOrderItem->getWrappedObject(), $secondOrderItem->getWrappedObject()]));
         $firstOrderItem->getProduct()->willReturn($head);
         $secondOrderItem->getProduct()->willReturn($shaft);

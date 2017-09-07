@@ -82,15 +82,15 @@ class PaymentMethod extends BasePaymentMethod implements PaymentMethodInterface
     /**
      * {@inheritdoc}
      */
-    public function setGatewayConfig(GatewayConfigInterface $gatewayConfig)
+    public function setGatewayConfig(?GatewayConfigInterface $gatewayConfig): void
     {
         $this->gatewayConfig = $gatewayConfig;
     }
 
     /**
-     * @return GatewayConfigInterface
+     * {@inheritdoc}
      */
-    public function getGatewayConfig()
+    public function getGatewayConfig(): ?GatewayConfigInterface
     {
         return $this->gatewayConfig;
     }
@@ -98,7 +98,7 @@ class PaymentMethod extends BasePaymentMethod implements PaymentMethodInterface
     /**
      * {@inheritdoc}
      */
-    public static function getTranslationClass()
+    public static function getTranslationClass(): string
     {
         return PaymentMethodTranslation::class;
     }
