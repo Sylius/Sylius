@@ -81,11 +81,11 @@ final class ParametersParser implements ParametersParserInterface
         if (0 === strpos($parameter, '!!')) {
             [$typecast, $castedValue] = explode(' ', $parameter, 2);
 
-            $parser = trim($typecast, '!').'val';
+            $castFunctionName = substr($typecast, 2) . 'val';
 
-            Assert::oneOf($parser, ['intval', 'floatval', 'boolval'], 'Variable can be casted only to int, float or bool.');
+            Assert::oneOf($castFunctionName, ['intval', 'floatval', 'boolval'], 'Variable can be casted only to int, float or bool.');
 
-            return $parser($this->parseRequestValue($castedValue, $request));
+            return $castFunctionName($this->parseRequestValue($castedValue, $request));
         }
 
         return $parameter;

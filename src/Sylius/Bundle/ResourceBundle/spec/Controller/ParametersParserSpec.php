@@ -102,6 +102,22 @@ final class ParametersParserSpec extends ObjectBehavior
         ;
     }
 
+    function it_throws_exception_if_invalid_typecast_is_provided()
+    {
+        $request = new Request();
+        $request->request->set('int', 5);
+
+        $this
+            ->shouldThrow(\InvalidArgumentException::class)
+            ->during('parseRequestValues', [['nested' => ['int' => '!!!int $int']], $request])
+        ;
+
+        $this
+            ->shouldThrow(\InvalidArgumentException::class)
+            ->during('parseRequestValues', [['nested' => ['int' => '!!int!! $int']], $request])
+        ;
+    }
+
     function it_parses_string_parameter_and_casts_it_into_bool(): void
     {
         $request = new Request();
