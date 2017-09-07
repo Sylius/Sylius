@@ -47,7 +47,7 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
         if (!$this->isDatabasePresent()) {
             return [
                 'doctrine:database:create',
-                'doctrine:schema:create',
+                'doctrine:migrations:migrate' => ['--no-interaction' => true],
                 'cache:clear',
             ];
         }
@@ -99,7 +99,7 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
     private function getRequiredCommands(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper): array
     {
         if ($input->getOption('no-interaction')) {
-            $commands['doctrine:schema:update'] = ['--force' => true];
+            $commands['doctrine:migrations:migrate'] = ['--no-interaction' => true];
         }
 
         return $this->setupDatabase($input, $output, $questionHelper);
@@ -123,12 +123,12 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
             return [
                 'doctrine:database:drop' => ['--force' => true],
                 'doctrine:database:create',
-                'doctrine:schema:create',
+                'doctrine:migrations:migrate' => ['--no-interaction' => true],
             ];
         }
 
         if (!$this->isSchemaPresent()) {
-            return ['doctrine:schema:create'];
+            return ['doctrine:migrations:migrate' => ['--no-interaction' => true]];
         }
 
         $outputStyle->writeln('Seems like your database contains schema.');
@@ -137,7 +137,7 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
         if ($questionHelper->ask($input, $output, $question)) {
             return [
                 'doctrine:schema:drop' => ['--force' => true],
-                'doctrine:schema:create',
+                'doctrine:migrations:migrate' => ['--no-interaction' => true],
             ];
         }
 
