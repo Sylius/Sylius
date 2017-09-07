@@ -119,6 +119,16 @@ final class ParametersParserSpec extends ObjectBehavior
         ;
     }
 
+    function it_parses_an_expression_and_casts_it_into_a_given_type(): void
+    {
+        $request = new Request();
+
+        $this
+            ->parseRequestValues(['nested' => ['cast' => '!!int expr:"5"']], $request)
+            ->shouldReturn(['nested' => ['cast' => 5]])
+        ;
+    }
+
     function it_parses_expressions(): void
     {
         $request = new Request();

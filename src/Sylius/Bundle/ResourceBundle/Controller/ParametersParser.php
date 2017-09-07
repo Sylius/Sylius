@@ -85,7 +85,7 @@ final class ParametersParser implements ParametersParserInterface
 
             Assert::oneOf($parser, ['intval', 'floatval', 'boolval'], 'Variable can be casted only to int, float or bool.');
 
-            return $parser($request->get(substr($parameter[1], 1)));
+            return $parser($this->parseRequestValue($parameter[1], $request));
         }
 
         return $parameter;
