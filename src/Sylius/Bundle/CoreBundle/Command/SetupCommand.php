@@ -35,11 +35,6 @@ use Webmozart\Assert\Assert;
 final class SetupCommand extends AbstractInstallCommand
 {
     /**
-     * @var LocaleInterface
-     */
-    private $locale;
-
-    /**
      * {@inheritdoc}
      */
     protected function configure(): void

@@ -107,15 +107,6 @@ final class EmailContext implements Context
     }
 
     /**
-     * @param string $message
-     * @param string $recipient
-     */
-    private function assertEmailNotContainsMessageTo($message, $recipient)
-    {
-        Assert::false($this->emailChecker->hasMessageTo($message, $recipient));
-    }
-
-    /**
      * @param OrderInterface $order
      *
      * @return string

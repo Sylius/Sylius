@@ -48,11 +48,6 @@ final class PayumController
     private $orderRepository;
 
     /**
-     * @var FormTypeRegistryInterface
-     */
-    private $gatewayConfigurationTypeRegistry;
-
-    /**
      * @var MetadataInterface
      */
     private $orderMetadata;
@@ -84,7 +79,6 @@ final class PayumController
     public function __construct(
         Payum $payum,
         OrderRepositoryInterface $orderRepository,
-        FormTypeRegistryInterface $gatewayConfigurationTypeRegistry,
         MetadataInterface $orderMetadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         ViewHandlerInterface $viewHandler,
@@ -92,7 +86,6 @@ final class PayumController
     ) {
         $this->payum = $payum;
         $this->orderRepository = $orderRepository;
-        $this->gatewayConfigurationTypeRegistry = $gatewayConfigurationTypeRegistry;
         $this->orderMetadata = $orderMetadata;
         $this->requestConfigurationFactory = $requestConfigurationFactory;
         $this->viewHandler = $viewHandler;
