@@ -234,5 +234,5 @@ two transitions ``request_payment`` and ``pay``.
 Learn more
 ----------
 
-* :doc:`Order - Component Documentation </components/Order/index>`
-* :doc:`Order - Bundle Documentation </bundles/SyliusOrderBundle/index>`
+* :doc:`Order - Component Documentation </components_and_bundles/components/Order/index>`
+* :doc:`Order - Bundle Documentation </components_and_bundles/bundles/SyliusOrderBundle/index>`

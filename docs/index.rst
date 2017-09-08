@@ -115,30 +115,6 @@ In :doc:`the BDD Guide </bdd/index>` you will learn how to write clean and reusa
 
 .. include:: /bdd/map.rst.inc
 
-Bundles
--------
-
-:doc:`Documentation of all Sylius bundles </bundles/index>`.
-
-.. toctree::
-   :hidden:
-
-   bundles/index
-
-.. include:: /bundles/map.rst.inc
-
-Components
-----------
-
-:doc:`Documentation of the Sylius E-Commerce components for PHP </components/index>`.
-
-.. toctree::
-   :hidden:
-
-   components/index
-
-.. include:: /components/map.rst.inc
-
 Sylius Plugins
 --------------
 
@@ -174,6 +150,18 @@ Support
    support/index
 
 .. include:: /support/map.rst.inc
+
+Components & Bundles
+--------------------
+
+:doc:`Documentation of all Sylius components and bundles </components_and_bundles/index>` useful when using them standalone.
+
+.. toctree::
+   :hidden:
+
+   components_and_bundles/index
+
+.. include:: /components_and_bundles/map.rst.inc
 
 .. _Sylius: http://sylius.org
 .. _`Symfony Framework`: http://symfony.com

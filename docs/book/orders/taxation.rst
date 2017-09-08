@@ -153,5 +153,5 @@ and registering it as a ``sylius.tax_calculator.your_calculator_name`` service.
 Learn more
 ----------
 
-* :doc:`Taxation - Bundle Documentation </bundles/SyliusTaxationBundle/index>`
-* :doc:`taxation - Component Documentation </components/Taxation/index>`
+* :doc:`Taxation - Bundle Documentation </components_and_bundles/bundles/SyliusTaxationBundle/index>`
+* :doc:`taxation - Component Documentation </components_and_bundles/components/Taxation/index>`

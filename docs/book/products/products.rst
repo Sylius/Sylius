@@ -167,5 +167,5 @@ After you have an Option created and you keep it as ``$option`` variable let's a
 Learn more:
 -----------
 
-* :doc:`Product - Bundle Documentation </bundles/SyliusProductBundle/index>`
-* :doc:`Product - Component Documentation </components/Product/index>`
+* :doc:`Product - Bundle Documentation </components_and_bundles/bundles/SyliusProductBundle/index>`
+* :doc:`Product - Component Documentation </components_and_bundles/components/Product/index>`

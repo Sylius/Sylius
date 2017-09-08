@@ -48,7 +48,7 @@ If you request for more detailed data, you will receive an object with the follo
 
 .. note::
 
-    Read more about :doc:`User model in the component docs</components/User/models>`.
+    Read more about :doc:`User model in the component docs</components_and_bundles/components/User/models>`.
 
 Creating an Admin User
 ----------------------

@@ -58,4 +58,4 @@ You can get the current channel from the channel context.
 Learn more
 ----------
 
-* :doc:`Channel - Component Documentation </components/Channel/index>`.
+* :doc:`Channel - Component Documentation </components_and_bundles/components/Channel/index>`.

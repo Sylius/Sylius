@@ -28,7 +28,7 @@ If you request a payment via API, you will receive an object with the following 
 
 .. note::
 
-    Read more about :doc:`Payments in the component docs</components/Payment/models>`.
+    Read more about :doc:`Payments in the component docs</components_and_bundles/components/Payment/models>`.
 
 Getting a Single Payment
 ------------------------

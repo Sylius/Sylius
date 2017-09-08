@@ -33,7 +33,7 @@ If you request a tax rate via API, you will receive an object with the following
 
 .. note::
 
-    Read more about :doc:`Tax Rates in the component docs</components/Taxation/models>`.
+    Read more about :doc:`Tax Rates in the component docs</components_and_bundles/components/Taxation/models>`.
 
 Getting a Single Tax Rate
 --------------------------

@@ -107,7 +107,7 @@ And each Adjustment will be build as follows:
 
 .. note::
 
-    If it is confusing to you, learn more about :doc:`Carts (Orders) in the component docs </components/Order/models>`
+    If it is confusing to you, learn more about :doc:`Carts (Orders) in the component docs </components_and_bundles/components/Order/models>`
     and :doc:`Adjustments concept </book/orders/adjustments>`.
 
 Creating a Cart

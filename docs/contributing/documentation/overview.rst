@@ -94,9 +94,9 @@ You can prefix the title of your pull request in a few cases:
   pull request, but you would like it to be reviewed. The pull request won't
   be merged until you say it is ready.
 
-* ``[ComponentName]`` if you are contributing docs that regard on of :doc:`the Sylius Components </components/general/index>`.
+* ``[ComponentName]`` if you are contributing docs that regard on of :doc:`the Sylius Components </components_and_bundles/components/general/index>`.
 
-* ``[BundleName]`` when you add documentation of :doc:`the Sylius Bundles </bundles/index>`.
+* ``[BundleName]`` when you add documentation of :doc:`the Sylius Bundles </components_and_bundles/bundles/index>`.
 
 * ``[Behat]`` if you modify something in the :doc:`the BDD guide </bdd/index>`.
 

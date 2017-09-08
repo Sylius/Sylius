@@ -111,4 +111,4 @@ Your Product will now have two Attributes.
 Learn more
 ----------
 
-* :doc:`Attribute - Component Documentation </components/Attribute/index>`
+* :doc:`Attribute - Component Documentation </components_and_bundles/components/Attribute/index>`

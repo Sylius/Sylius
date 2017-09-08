@@ -166,5 +166,5 @@ There are two events that are triggered on the payment complete action:
 Learn more
 ----------
 
-* :doc:`Payment - Component Documentation </components/Payment/index>`
+* :doc:`Payment - Component Documentation </components_and_bundles/components/Payment/index>`
 * `Payum - Project Documentation <https://github.com/Payum/Payum/blob/master/src/Payum/Core/Resources/docs/index.md>`_
