@@ -9,7 +9,7 @@ Describing features
 -------------------
 
 Let's start with writing our feature file, which will contain answers to the most important questions:
-Why (benefit), who (actor using the feature) and what (the feature itself).
+Why (benefit, business value), who (actor using the feature) and what (the feature itself).
 It should also include scenarios, which serve as examples of how things supposed to work.
 Let's have a look at the ``features/addressing/managing_countries/adding_country.feature`` file.
 
@@ -26,14 +26,14 @@ Scenario::
 
         @ui
         Scenario: Adding country
-            Given I want to add a new country
-            When I choose "France"
+            When I want to add a new country
+            And I choose "United States"
             And I add it
             Then I should be notified that it has been successfully created
-            And the country "France" should appear in the store
+            And the country "United States" should appear in the store
 
 Pay attention to the form of these sentences. From the developer point of view they are hiding the details of the feature's implementation.
-Instead of describing "When I click on the select box And I choose France from the dropdown Then I should see the France country in the table"
+Instead of describing "When I click on the select box And I choose United States from the dropdown Then I should see the United States country in the table"
 - we are using sentences that are less connected with the implementation, but more focused on the effects of our actions.
 A side effect of such approach is that it results in steps being really generic, therefore if we want to add another way of testing this feature for instance in the domain or api context,
 it will be extremely easy to apply. We just need to add a different tag (in this case "@domain") and of course implement the proper steps in the domain context of our system.
@@ -285,9 +285,10 @@ As it was shown in the previous section we have registered a lot of contexts, so
 Scenario::
 
     Given I want to add a new country
+    And I choose "United States"
     And I add it
     Then I should be notified that it has been successfully created
-    And the country "France" should appear in the store
+    And the country "United States" should appear in the store
 
 Let's start with essential one ManagingCountriesContext
 

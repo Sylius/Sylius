@@ -8,8 +8,8 @@ which is used to describe the software in English-like sentences of domain speci
 The application's behaviour is described by scenarios, and those scenarios are turned into automated test suites with tools such as Behat.
 
 Sylius behaviours are fully covered with Behat scenarios. There are more than 1200 scenarios in the Sylius suite, and if you want
-to understand some aspects of Sylius better, or are wondering where to click to achieve something, we strongly recommend
-reading some of them. They can be found in the ``features/`` directory of the Sylius/Sylius repository.
+to understand some aspects of Sylius better, or are wondering how to configure something, we strongly recommend
+reading them. They can be found in the ``features/`` directory of the Sylius/Sylius repository.
 
 .. toctree::
     :hidden:
