@@ -11,6 +11,6 @@ sylius_shop_partial_product_review_latest:
             repository:
                 method: findLatestByProductId
                 arguments:
-                    - !!int $productId
+                    - $productId
                     - !!int $count
         count: 3
