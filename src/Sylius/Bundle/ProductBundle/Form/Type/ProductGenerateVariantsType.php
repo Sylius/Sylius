@@ -48,7 +48,7 @@ final class ProductGenerateVariantsType extends AbstractResourceType
         $builder
             ->add('variants', CollectionType::class, [
                 'entry_type' => ProductVariantGenerationType::class,
-                'allow_add' => true,
+                'allow_add' => false,
                 'allow_delete' => true,
                 'by_reference' => false,
             ])

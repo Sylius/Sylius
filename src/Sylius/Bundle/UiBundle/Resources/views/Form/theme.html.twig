@@ -213,3 +213,19 @@
         {{- form_errors(form) -}}
     </div>
 {% endblock %}
+
+{% block sylius_product_variant_generation_widget %}
+    <div class="ui segment">
+        <div class="ui two column stackable grid">
+            <div class="column">
+                {{ form_row(form.optionValues, {'label': false}) }}
+            </div>
+            <div class="column">
+                {{ form_row(form.code) }}
+                {{ form_row(form.name) }}
+            </div>
+        </div>
+        <h4 class="ui dividing header">{{ 'sylius.ui.pricing'|trans }}</h4>
+        {{ form_row(form.channelPricings, {'label': false}) }}
+    </div>
+{% endblock %}
