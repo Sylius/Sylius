@@ -21,6 +21,9 @@
   }
   ```
 
+* There are scalar and return typehints introduced in the codebase. Please introduce these in your codebase for classes 
+  that implement Sylius' interfaces or extend Sylius' classes.
+
 ## Packages:
 
 ### Addressing / AddressingBundle
