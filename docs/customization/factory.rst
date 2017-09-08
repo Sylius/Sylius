@@ -126,6 +126,8 @@ You can for example override ``sylius_admin_product_create_simple`` route like b
                     route:
                         name: sylius_admin_product_create_simple
 
+.. include:: /customization/plugins.rst.inc
+
 Learn more
 ----------
 

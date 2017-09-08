@@ -283,6 +283,8 @@ In the above example the ``delete`` action and the filters section have been rem
 .. image:: ../_images/overriding_grids.png
     :align: center
 
+.. include:: /customization/plugins.rst.inc
+
 Learn more
 ----------
 

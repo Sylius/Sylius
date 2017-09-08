@@ -187,3 +187,5 @@ Remember to import the ``app/config/services.yml`` into the ``app/config/config.
     Run ``$ php bin/console debug:container sylius.controller.shop.homepage`` to check if the class has changed to your implementation.
 
 From now on your ``customAction`` of the ``HomepageController`` will be available alongside the ``indexAction`` from the base class.
+
+.. include:: /customization/plugins.rst.inc

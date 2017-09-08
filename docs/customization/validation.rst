@@ -56,3 +56,5 @@ Remember to import the ``app/config/services.yml`` into the ``app/config/config.
 
 Done. Now in all forms where the Product ``name`` is being used, your new validation group will be applied,
 not letting users add products with name shorter than 10 characters.
+
+.. include:: /customization/plugins.rst.inc

@@ -38,11 +38,16 @@ more meaningful one. Keep in mind that these changes also need to be done in ``t
 4. Implement your awesome features.
 -----------------------------------
 
-Looking at existing Sylius plugins like `Lakion\SyliusCmsBundle <https://github.com/Lakion/SyliusCmsBundle>`_
-or `Lakion\SyliusElasticSearchBundle <https://github.com/Lakion/SyliusElasticSearchBundle>`_ is
-a great way to start developing your own plugins.
+Looking at existing Sylius plugins like
 
-Feel free to use `BDD <https://www.agilealliance.org/glossary/bdd/>`_ with `Behat`_, `phpspec`_ and `PhpUnit`_
+* `Sylius/ShopAPIPlugin <https://github.com/Sylius/SyliusShopApiPlugin>`_
+* `bitbag-commerce/PayUPlugin <https://github.com/Sylius/SyliusShopApiPlugin>`_
+* `stefandoorn/sitemap-plugin <https://github.com/stefandoorn/sitemap-plugin>`_
+* `bitbag-commerce/CmsPlugin <https://github.com/bitbag-commerce/CmsPlugin>`_
+
+is a great way to start developing your own plugins.
+
+You are strongly encouraged to use `BDD <https://www.agilealliance.org/glossary/bdd/>`_ with `Behat`_, `phpspec`_ and `PhpUnit`_
 to ensure your plugin's extraordinary quality.
 
 .. tip::

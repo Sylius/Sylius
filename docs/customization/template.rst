@@ -237,3 +237,5 @@ You can check for example what is the current channel by dumping the ``sylius.ch
     {{ dump(sylius.channel) }}
 
 That's it, this will dump the content of the current Channel object.
+
+.. include:: /customization/plugins.rst.inc
