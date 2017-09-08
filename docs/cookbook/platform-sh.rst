@@ -125,6 +125,7 @@ This is how this file should look like for Sylius (tuned version of the default 
             php bin/console --env=prod --no-debug --ansi cache:clear --no-warmup
             php bin/console --env=prod --no-debug --ansi cache:warmup
             php bin/console --env=prod --no-debug --ansi assets:install
+            # Next command is only needed if you are using themes
             php bin/console --env=prod --no-debug --ansi theme:assets:install
             yarn install
             GULP_ENV=prod yarn run gulp
@@ -153,7 +154,7 @@ This file will load ``mysql`` and ``redis`` on your Platform.sh server.
 
     # .platform/services.yaml
     mysql:
-        type: mysql:10.0
+        type: mysql
         disk: 1024
 
     redis:
