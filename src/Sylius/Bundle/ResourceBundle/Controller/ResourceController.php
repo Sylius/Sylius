@@ -214,6 +214,8 @@ class ResourceController extends Controller
         $this->isGrantedOr403($configuration, ResourceActions::INDEX);
         $resources = $this->resourcesCollectionProvider->get($configuration, $this->repository);
 
+        $this->eventDispatcher->dispatchMultiple(ResourceActions::INDEX, $configuration, $resources);
+
         $view = View::create($resources);
 
         if ($configuration->isHtmlRequest()) {
@@ -265,13 +267,17 @@ class ResourceController extends Controller
             }
 
             $this->repository->add($newResource);
-            $this->eventDispatcher->dispatchPostEvent(ResourceActions::CREATE, $configuration, $newResource);
+            $postEvent = $this->eventDispatcher->dispatchPostEvent(ResourceActions::CREATE, $configuration, $newResource);
 
             if (!$configuration->isHtmlRequest()) {
                 return $this->viewHandler->handle($configuration, View::create($newResource, Response::HTTP_CREATED));
             }
 
             $this->flashHelper->addSuccessFlash($configuration, ResourceActions::CREATE, $newResource);
+
+            if ($postEvent->hasResponse()) {
+                return $postEvent->getResponse();
+            }
 
             return $this->redirectHandler->redirectToResource($configuration, $newResource);
         }
@@ -413,13 +419,17 @@ class ResourceController extends Controller
         }
 
         $this->repository->remove($resource);
-        $this->eventDispatcher->dispatchPostEvent(ResourceActions::DELETE, $configuration, $resource);
+        $postEvent = $this->eventDispatcher->dispatchPostEvent(ResourceActions::DELETE, $configuration, $resource);
 
         if (!$configuration->isHtmlRequest()) {
             return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
         }
 
         $this->flashHelper->addSuccessFlash($configuration, ResourceActions::DELETE, $resource);
+
+        if ($postEvent->hasResponse()) {
+            return $postEvent->getResponse();
+        }
 
         return $this->redirectHandler->redirectToIndex($configuration, $resource);
     }
@@ -466,7 +476,7 @@ class ResourceController extends Controller
             return $this->redirectHandler->redirectToReferer($configuration);
         }
 
-        $this->eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource);
+        $postEvent = $this->eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource);
 
         if (!$configuration->isHtmlRequest()) {
             $view = $configuration->getParameters()->get('return_content', true) ? View::create($resource, Response::HTTP_OK) : View::create(null, Response::HTTP_NO_CONTENT);
@@ -475,6 +485,10 @@ class ResourceController extends Controller
         }
 
         $this->flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource);
+
+        if ($postEvent->hasResponse()) {
+            return $postEvent->getResponse();
+        }
 
         return $this->redirectHandler->redirectToResource($configuration, $resource);
     }
