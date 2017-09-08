@@ -342,6 +342,7 @@ sylius:
         from_z_to_a: 'From Z to A'
         fulfill: 'Fulfill'
         fulfilled: 'Fulfilled'
+        fulfilled_orders: 'Fulfilled orders'
         gateway: 'Gateway'
         gateway_configuration: 'Gateway configuration'
         general_info: 'General Info'

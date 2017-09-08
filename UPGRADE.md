@@ -126,6 +126,9 @@
   
 * `OrderInterface::getAdjustmentsRecursively` and `OrderItemInterface::getAdjustmentsRecursively` return type changed from `array` to `Collection`.
 
+* In statistics to display information about only fulfilled orders
+  `OrderRepositoryInterface::countByChannel()` signature was changed to `OrderRepositoryInterface::countFulfilledByChannel()`.
+
 ### Payment / PaymentBundle
 
 * In `PaymentInterface::setMethod` method the default value of `PaymentMethodInterface $method` parameter has been removed.

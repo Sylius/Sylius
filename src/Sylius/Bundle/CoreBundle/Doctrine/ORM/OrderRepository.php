@@ -86,9 +86,12 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
      */
     public function findForCustomerStatistics(CustomerInterface $customer): array
     {
-        return $this->createByCustomerIdQueryBuilder($customer->getId())
-            ->andWhere('o.state NOT IN (:states)')
-            ->setParameter('states', [OrderInterface::STATE_CART, OrderInterface::STATE_CANCELLED])
+
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.customer = :customerId')
+            ->andWhere('o.state = :state')
+            ->setParameter('customerId', $customer->getId())
+            ->setParameter('state', OrderInterface::STATE_FULFILLED)
             ->getQuery()
             ->getResult()
         ;
@@ -204,9 +207,9 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         return (int) $this->createQueryBuilder('o')
             ->select('SUM(o.total)')
             ->andWhere('o.channel = :channel')
-            ->andWhere('o.state NOT IN (:states)')
+            ->andWhere('o.state = :state')
             ->setParameter('channel', $channel)
-            ->setParameter('states', [OrderInterface::STATE_CART, OrderInterface::STATE_CANCELLED])
+            ->setParameter('state', OrderInterface::STATE_FULFILLED)
             ->getQuery()
             ->getSingleScalarResult()
         ;
@@ -215,14 +218,14 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
     /**
      * {@inheritdoc}
      */
-    public function countByChannel(ChannelInterface $channel): int
+    public function countFulfilledByChannel(ChannelInterface $channel): int
     {
         return (int) $this->createQueryBuilder('o')
             ->select('COUNT(o.id)')
             ->andWhere('o.channel = :channel')
-            ->andWhere('o.state NOT IN (:states)')
+            ->andWhere('o.state = :state')
             ->setParameter('channel', $channel)
-            ->setParameter('states', [OrderInterface::STATE_CART, OrderInterface::STATE_CANCELLED])
+            ->setParameter('state', OrderInterface::STATE_FULFILLED)
             ->getQuery()
             ->getSingleScalarResult()
         ;
