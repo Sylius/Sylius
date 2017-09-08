@@ -30,6 +30,8 @@ final class UserEvents
     public const PRE_PASSWORD_CHANGE = 'sylius.user.pre_password_change';
     public const POST_PASSWORD_CHANGE = 'sylius.user.post_password_change';
 
+    public const SECURITY_IMPERSONATE = 'sylius.user.security.impersonate';
+
     /**
      * Occurs when the user is logged in programmatically.
      */

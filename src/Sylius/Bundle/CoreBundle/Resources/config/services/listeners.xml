@@ -82,5 +82,13 @@
             <argument type="service" id="sylius.product_variant_resolver.default" />
             <tag name="kernel.event_listener" event="sylius.product.initialize_update" method="lock" />
         </service>
+
+        <service id="sylius.listener.user_impersonated" class="Sylius\Bundle\CoreBundle\EventListener\UserImpersonatedListener">
+            <argument type="service" id="session" />
+            <argument>_sylius.cart</argument>
+            <argument type="service" id="sylius.context.channel.cached" />
+            <argument type="service" id="sylius.repository.order" />
+            <tag name="kernel.event_listener" event="sylius.user.security.impersonate" method="userImpersonated" />
+        </service>
     </services>
 </container>
