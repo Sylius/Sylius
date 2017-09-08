@@ -42,7 +42,7 @@ If you request for more detailed data, you will receive an object with the follo
 
 .. note::
 
-    Read more about :doc:`the Tax Category model in the component docs</components/Taxation/models>`.
+    Read more about :doc:`the Tax Category model in the component docs</components_and_bundles/components/Taxation/models>`.
 
 Creating a Tax Category
 -----------------------

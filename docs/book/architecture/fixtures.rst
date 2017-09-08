@@ -9,7 +9,7 @@ Fixtures are used mainly for testing, but also for having your shop in a certain
 
 .. note::
 
-   They way Fixtures are designed in Sylius is well described in the :doc:`FixturesBundle documentation </bundles/SyliusFixturesBundle/index>`.
+   They way Fixtures are designed in Sylius is well described in the :doc:`FixturesBundle documentation </components_and_bundles/bundles/SyliusFixturesBundle/index>`.
 
 What are the available fixtures in Sylius?
 ------------------------------------------
@@ -40,4 +40,4 @@ And the specified data for fixtures is stored in the
 Learn more
 ----------
 
-* :doc:`FixturesBundle documentation </bundles/SyliusFixturesBundle/index>`
+* :doc:`FixturesBundle documentation </components_and_bundles/bundles/SyliusFixturesBundle/index>`

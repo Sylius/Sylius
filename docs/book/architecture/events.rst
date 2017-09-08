@@ -19,7 +19,7 @@ The examples of such events are: ``sylius.product.pre_update``, ``sylius.shop_us
 Events reference
 ~~~~~~~~~~~~~~~~
 
-All Sylius bundles are using :doc:`SyliusResourceBundle </bundles/SyliusResourceBundle/index>`, which has some built-in events.
+All Sylius bundles are using :doc:`SyliusResourceBundle </components_and_bundles/bundles/SyliusResourceBundle/index>`, which has some built-in events.
 
 +-------------------------------------+----------------------+
 | Event                               | Description          |

@@ -58,5 +58,5 @@ Learn more
 ----------
 
 * :doc:`Order concept documentation </book/orders/orders>`
-* :doc:`Inventory Bundle documentation </bundles/SyliusInventoryBundle/index>`
-* :doc:`Inventory Component documentation </components/Inventory/index>`
+* :doc:`Inventory Bundle documentation </components_and_bundles/bundles/SyliusInventoryBundle/index>`
+* :doc:`Inventory Component documentation </components_and_bundles/components/Inventory/index>`

@@ -133,5 +133,5 @@ Let's see how to do it on the example of a ProductTranslation.
 Learn more
 ----------
 
-* :doc:`Resource - translations documentation </components/Resource/translation>`
+* :doc:`Resource - translations documentation </components_and_bundles/components/Resource/translation>`
 * :doc:`Locales - concept documentation </book/configuration/locales>`

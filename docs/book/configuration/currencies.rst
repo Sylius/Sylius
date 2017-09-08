@@ -90,5 +90,5 @@ Sylius provides you with some handy :doc:`Global Twig variables </customization/
 Learn more
 ----------
 
-* :doc:`Currency - Component Documentation </components/Currency/index>`
+* :doc:`Currency - Component Documentation </components_and_bundles/components/Currency/index>`
 * :doc:`Pricing Concept Documentation </book/products/pricing>`

@@ -82,4 +82,4 @@ To get all languages configured in the store, regardless of your availability lo
 Learn more
 ----------
 
-* :doc:`Locale - Component Documentation </components/Locale/index>`.
+* :doc:`Locale - Component Documentation </components_and_bundles/components/Locale/index>`.

@@ -211,5 +211,5 @@ For example if you would like to apply actions only on products from a desired t
 Learn more
 ----------
 
-* :doc:`Promotion - Component Documentation </components/Promotion/index>`
-* :doc:`Promotion - Bundle Documentation </bundles/SyliusPromotionBundle/index>`
+* :doc:`Promotion - Component Documentation </components_and_bundles/components/Promotion/index>`
+* :doc:`Promotion - Bundle Documentation </components_and_bundles/bundles/SyliusPromotionBundle/index>`
