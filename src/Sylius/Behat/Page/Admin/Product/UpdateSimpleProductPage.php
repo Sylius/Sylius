@@ -435,7 +435,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
             'association_dropdown' => '.field > label:contains("%association%") ~ .product-select',
             'association_dropdown_item' => '.field > label:contains("%association%") ~ .product-select > div.menu > div.item:contains("%item%")',
             'association_dropdown_item_selected' => '.field > label:contains("%association%") ~ .product-select > a.label:contains("%item%")',
-            'attribute' => '.tab[data-tab="%localeCode%"] .attribute .label:contains("%attributeName%") ~ input',
+            'attribute' => '.tab[data-tab="%localeCode%"] .attribute:contains("%attributeName%") input',
             'attribute_element' => '.attribute',
             'attribute_delete_button' => '.tab[data-tab="%localeCode%"] .attribute .label:contains("%attributeName%") ~ button',
             'code' => '#sylius_product_code',
