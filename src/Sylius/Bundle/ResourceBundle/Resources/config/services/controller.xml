@@ -54,5 +54,6 @@
         <service id="sylius.resource_controller.resource_update_handler" class="Sylius\Bundle\ResourceBundle\Controller\ResourceUpdateHandler" public="false">
             <argument type="service" id="sylius.resource_controller.state_machine" />
         </service>
+        <service id="sylius.resource_controller.resource_delete_handler" class="Sylius\Bundle\ResourceBundle\Controller\ResourceDeleteHandler" public="false" />
     </services>
 </container>

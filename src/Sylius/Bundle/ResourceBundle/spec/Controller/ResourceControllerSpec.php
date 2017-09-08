@@ -25,6 +25,7 @@ use Sylius\Bundle\ResourceBundle\Controller\NewResourceFactoryInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RedirectHandlerInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface;
+use Sylius\Bundle\ResourceBundle\Controller\ResourceDeleteHandlerInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceFormFactoryInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ResourcesCollectionProviderInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceUpdateHandlerInterface;
@@ -75,6 +76,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         EventDispatcherInterface $eventDispatcher,
         StateMachineInterface $stateMachine,
         ResourceUpdateHandlerInterface $resourceUpdateHandler,
+        ResourceDeleteHandlerInterface $resourceDeleteHandler,
         ContainerInterface $container
     ): void {
         $this->beConstructedWith(
@@ -93,7 +95,8 @@ final class ResourceControllerSpec extends ObjectBehavior
             $authorizationChecker,
             $eventDispatcher,
             $stateMachine,
-            $resourceUpdateHandler
+            $resourceUpdateHandler,
+            $resourceDeleteHandler
         );
 
         $this->setContainer($container);
@@ -1320,6 +1323,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         ContainerInterface $container,
         ResourceControllerEvent $event,
         ResourceControllerEvent $postEvent,
+        ResourceDeleteHandlerInterface $resourceDeleteHandler,
         Request $request,
         Response $redirectResponse
     ): void {
@@ -1345,7 +1349,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $eventDispatcher->dispatchPreEvent(ResourceActions::DELETE, $configuration, $resource)->willReturn($event);
         $event->isStopped()->willReturn(false);
 
-        $repository->remove($resource)->shouldBeCalled();
+        $resourceDeleteHandler->handle($resource, $repository)->shouldBeCalled();
         $eventDispatcher->dispatchPostEvent(ResourceActions::DELETE, $configuration, $resource)->willReturn($postEvent);
 
         $postEvent->hasResponse()->willReturn(false);
@@ -1364,13 +1368,13 @@ final class ResourceControllerSpec extends ObjectBehavior
         RepositoryInterface $repository,
         SingleResourceProviderInterface $singleResourceProvider,
         ResourceInterface $resource,
-        RedirectHandlerInterface $redirectHandler,
         FlashHelperInterface $flashHelper,
         EventDispatcherInterface $eventDispatcher,
         CsrfTokenManagerInterface $csrfTokenManager,
         ContainerInterface $container,
         ResourceControllerEvent $event,
         ResourceControllerEvent $postEvent,
+        ResourceDeleteHandlerInterface $resourceDeleteHandler,
         Request $request,
         Response $redirectResponse
     ): void {
@@ -1396,7 +1400,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $eventDispatcher->dispatchPreEvent(ResourceActions::DELETE, $configuration, $resource)->willReturn($event);
         $event->isStopped()->willReturn(false);
 
-        $repository->remove($resource)->shouldBeCalled();
+        $resourceDeleteHandler->handle($resource, $repository)->shouldBeCalled();
         $eventDispatcher->dispatchPostEvent(ResourceActions::DELETE, $configuration, $resource)->willReturn($postEvent);
 
         $flashHelper->addSuccessFlash($configuration, ResourceActions::DELETE, $resource)->shouldBeCalled();
@@ -1421,6 +1425,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         CsrfTokenManagerInterface $csrfTokenManager,
         ContainerInterface $container,
         ResourceControllerEvent $event,
+        ResourceDeleteHandlerInterface $resourceDeleteHandler,
         Request $request,
         Response $redirectResponse
     ): void {
@@ -1447,7 +1452,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $event->isStopped()->willReturn(true);
         $event->hasResponse()->willReturn(false);
 
-        $repository->remove($resource)->shouldNotBeCalled();
+        $resourceDeleteHandler->handle($resource, $repository)->shouldNotBeCalled();
         $eventDispatcher->dispatchPostEvent(ResourceActions::DELETE, $configuration, $resource)->shouldNotBeCalled();
         $flashHelper->addSuccessFlash($configuration, ResourceActions::DELETE, $resource)->shouldNotBeCalled();
 
@@ -1471,6 +1476,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         CsrfTokenManagerInterface $csrfTokenManager,
         ContainerInterface $container,
         ResourceControllerEvent $event,
+        ResourceDeleteHandlerInterface $resourceDeleteHandler,
         Request $request,
         Response $redirectResponse
     ): void {
@@ -1501,7 +1507,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $event->hasResponse()->willReturn(true);
         $event->getResponse()->willReturn($redirectResponse);
 
-        $repository->remove($resource)->shouldNotBeCalled();
+        $resourceDeleteHandler->handle($resource, $repository)->shouldNotBeCalled();
         $eventDispatcher->dispatchPostEvent(ResourceActions::DELETE, $configuration, $resource)->shouldNotBeCalled();
         $flashHelper->addSuccessFlash($configuration, ResourceActions::DELETE, $resource)->shouldNotBeCalled();
 
@@ -1523,6 +1529,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         CsrfTokenManagerInterface $csrfTokenManager,
         ContainerInterface $container,
         ResourceControllerEvent $event,
+        ResourceDeleteHandlerInterface $resourceDeleteHandler,
         Request $request,
         Response $response
     ): void {
@@ -1548,8 +1555,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $eventDispatcher->dispatchPreEvent(ResourceActions::DELETE, $configuration, $resource)->willReturn($event);
         $event->isStopped()->willReturn(false);
 
-        $repository->remove($resource)->shouldBeCalled();
-        $repository->remove($resource)->willThrow(new DeleteHandlingException());
+        $resourceDeleteHandler->handle($resource, $repository)->willThrow(new DeleteHandlingException());
 
         $eventDispatcher->dispatchPostEvent(ResourceActions::DELETE, $configuration, $resource)->shouldNotBeCalled();
 
@@ -1573,6 +1579,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         CsrfTokenManagerInterface $csrfTokenManager,
         ContainerInterface $container,
         ResourceControllerEvent $event,
+        ResourceDeleteHandlerInterface $resourceDeleteHandler,
         Request $request,
         Response $response
     ): void {
@@ -1598,7 +1605,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $eventDispatcher->dispatchPreEvent(ResourceActions::DELETE, $configuration, $resource)->willReturn($event);
         $event->isStopped()->willReturn(false);
 
-        $repository->remove($resource)->shouldBeCalled();
+        $resourceDeleteHandler->handle($resource, $repository)->shouldBeCalled();
         $eventDispatcher->dispatchPostEvent(ResourceActions::DELETE, $configuration, $resource)->shouldBeCalled();
 
         $expectedView = View::create(null, 204);
@@ -1621,6 +1628,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         CsrfTokenManagerInterface $csrfTokenManager,
         ContainerInterface $container,
         ResourceControllerEvent $event,
+        ResourceDeleteHandlerInterface $resourceDeleteHandler,
         Request $request
     ): void {
         $metadata->getApplicationName()->willReturn('sylius');
@@ -1647,7 +1655,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $event->getMessage()->willReturn('Cannot delete this product.');
         $event->getErrorCode()->willReturn(500);
 
-        $repository->remove($resource)->shouldNotBeCalled();
+        $resourceDeleteHandler->handle($resource, $repository)->shouldNotBeCalled();
 
         $eventDispatcher->dispatchPostEvent(Argument::any())->shouldNotBeCalled();
         $flashHelper->addSuccessFlash(Argument::any())->shouldNotBeCalled();
@@ -1672,6 +1680,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         CsrfTokenManagerInterface $csrfTokenManager,
         ContainerInterface $container,
         ResourceControllerEvent $event,
+        ResourceDeleteHandlerInterface $resourceDeleteHandler,
         Request $request
     ): void {
         $metadata->getApplicationName()->willReturn('sylius');
@@ -1696,7 +1705,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $eventDispatcher->dispatchPreEvent(ResourceActions::DELETE, $configuration, $resource)->willReturn($event);
         $event->isStopped()->shouldNotBeCalled();
 
-        $repository->remove($resource)->shouldNotBeCalled();
+        $resourceDeleteHandler->handle($resource, $repository)->shouldNotBeCalled();
 
         $eventDispatcher->dispatchPostEvent(Argument::any())->shouldNotBeCalled();
         $flashHelper->addSuccessFlash(Argument::any())->shouldNotBeCalled();

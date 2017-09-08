@@ -118,6 +118,11 @@ class ResourceController extends Controller
     protected $resourceUpdateHandler;
 
     /**
+     * @var ResourceDeleteHandlerInterface
+     */
+    protected $resourceDeleteHandler;
+
+    /**
      * @param MetadataInterface $metadata
      * @param RequestConfigurationFactoryInterface $requestConfigurationFactory
      * @param ViewHandlerInterface $viewHandler
@@ -134,6 +139,7 @@ class ResourceController extends Controller
      * @param EventDispatcherInterface $eventDispatcher
      * @param StateMachineInterface $stateMachine
      * @param ResourceUpdateHandlerInterface $resourceUpdateHandler
+     * @param ResourceDeleteHandlerInterface $resourceDeleteHandler
      */
     public function __construct(
         MetadataInterface $metadata,
@@ -151,7 +157,8 @@ class ResourceController extends Controller
         AuthorizationCheckerInterface $authorizationChecker,
         EventDispatcherInterface $eventDispatcher,
         StateMachineInterface $stateMachine,
-        ResourceUpdateHandlerInterface $resourceUpdateHandler
+        ResourceUpdateHandlerInterface $resourceUpdateHandler,
+        ResourceDeleteHandlerInterface $resourceDeleteHandler
     ) {
         $this->metadata = $metadata;
         $this->requestConfigurationFactory = $requestConfigurationFactory;
@@ -169,6 +176,7 @@ class ResourceController extends Controller
         $this->eventDispatcher = $eventDispatcher;
         $this->stateMachine = $stateMachine;
         $this->resourceUpdateHandler = $resourceUpdateHandler;
+        $this->resourceDeleteHandler = $resourceDeleteHandler;
     }
 
     /**
@@ -420,10 +428,8 @@ class ResourceController extends Controller
         }
 
         try {
-            $this->repository->remove($resource);
-        } catch (\Exception $exception) {
-            $exception = new DeleteHandlingException('Ups, something went wrong, please try again.', 'something_went_wrong_error', 500, 0, $exception);
-
+            $this->resourceDeleteHandler->handle($resource, $this->repository);
+        } catch (DeleteHandlingException $exception) {
             if (!$configuration->isHtmlRequest()) {
                 return $this->viewHandler->handle(
                     $configuration,

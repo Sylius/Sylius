@@ -28,7 +28,7 @@ final class DeleteHandlingExceptionSpec extends ObjectBehavior
 
     function it_has_a_message(): void
     {
-        $this->getMessage()->shouldReturn('Ups, something went wrong, please try again.');
+        $this->getMessage()->shouldReturn('Ups, something went wrong during deleting a resource, please try again.');
     }
 
     function it_has_a_flash(): void

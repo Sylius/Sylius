@@ -27,7 +27,7 @@ final class UpdateHandlingExceptionSpec extends ObjectBehavior
 
     function it_has_a_message(): void
     {
-        $this->getMessage()->shouldReturn('Ups, something went wrong, please try again.');
+        $this->getMessage()->shouldReturn('Ups, something went wrong during updating a resource, please try again.');
     }
 
     function it_has_a_flash(): void

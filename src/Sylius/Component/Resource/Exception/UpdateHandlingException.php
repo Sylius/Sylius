@@ -36,7 +36,7 @@ class UpdateHandlingException extends \Exception
      * @param \Exception|null $previous
      */
     public function __construct(
-        string $message = 'Ups, something went wrong, please try again.',
+        string $message = 'Ups, something went wrong during updating a resource, please try again.',
         string $flash = 'something_went_wrong_error',
         int $apiResponseCode = 400,
         int $code = 0,
