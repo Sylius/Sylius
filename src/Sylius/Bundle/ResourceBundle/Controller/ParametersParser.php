@@ -79,13 +79,7 @@ final class ParametersParser implements ParametersParserInterface
         }
 
         if (0 === strpos($parameter, '!!')) {
-            $parameter = explode(' ', $parameter);
-
-            $parser = trim($parameter[0], '!').'val';
-
-            Assert::oneOf($parser, ['intval', 'floatval', 'doubleval'], 'Variable can be parsed only to int, float or double.');
-
-            return $parser($request->get(substr($parameter[1], 1)));
+            return $this->parseRequestValueTypecast($parameter, $request);
         }
 
         return $parameter;
@@ -95,7 +89,7 @@ final class ParametersParser implements ParametersParserInterface
      * @param string $expression
      * @param Request $request
      *
-     * @return string
+     * @return mixed
      */
     private function parseRequestValueExpression(string $expression, Request $request)
     {
@@ -114,5 +108,22 @@ final class ParametersParser implements ParametersParserInterface
         }, $expression);
 
         return $this->expression->evaluate($expression, ['container' => $this->container]);
+    }
+
+    /**
+     * @param mixed $parameter
+     * @param Request $request
+     *
+     * @return mixed
+     */
+    private function parseRequestValueTypecast($parameter, Request $request)
+    {
+        [$typecast, $castedValue] = explode(' ', $parameter, 2);
+
+        $castFunctionName = substr($typecast, 2) . 'val';
+
+        Assert::oneOf($castFunctionName, ['intval', 'floatval', 'boolval'], 'Variable can be casted only to int, float or bool.');
+
+        return $castFunctionName($this->parseRequestValue($castedValue, $request));
     }
 }
