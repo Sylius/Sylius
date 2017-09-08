@@ -13,30 +13,33 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Storage;
 
+use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+
 interface CartStorageInterface
 {
     /**
-     * @param string $channelCode
+     * @param ChannelInterface $channel
      *
      * @return bool
      */
-    public function hasCartId(string $channelCode): bool;
+    public function hasForChannel(ChannelInterface $channel): bool;
 
     /**
-     * @param string $channelCode
+     * @param ChannelInterface $channel
      *
-     * @return mixed
+     * @return OrderInterface|null
      */
-    public function getCartId(string $channelCode);
+    public function getForChannel(ChannelInterface $channel): ?OrderInterface;
 
     /**
-     * @param string $channelCode
-     * @param mixed $cartId
+     * @param ChannelInterface $channel
+     * @param OrderInterface $cart
      */
-    public function setCartId(string $channelCode, $cartId): void;
+    public function setForChannel(ChannelInterface $channel, OrderInterface $cart): void;
 
     /**
-     * @param string $channelCode
+     * @param ChannelInterface $channel
      */
-    public function removeCartId(string $channelCode): void;
+    public function removeForChannel(ChannelInterface $channel): void;
 }

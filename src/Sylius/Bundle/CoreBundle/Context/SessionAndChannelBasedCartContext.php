@@ -15,12 +15,10 @@ namespace Sylius\Bundle\CoreBundle\Context;
 
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
-use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Storage\CartStorageInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Context\CartNotFoundException;
 use Sylius\Component\Order\Model\OrderInterface;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
@@ -30,12 +28,7 @@ final class SessionAndChannelBasedCartContext implements CartContextInterface
     /**
      * @var CartStorageInterface
      */
-    private $cartSessionStorage;
-
-    /**
-     * @var OrderRepositoryInterface
-     */
-    private $orderRepository;
+    private $cartStorage;
 
     /**
      * @var ChannelContextInterface
@@ -43,18 +36,13 @@ final class SessionAndChannelBasedCartContext implements CartContextInterface
     private $channelContext;
 
     /**
-     * @param CartStorageInterface $cartSessionStorage
+     * @param CartStorageInterface $cartStorage
      * @param ChannelContextInterface $channelContext
-     * @param OrderRepositoryInterface $orderRepository
      */
-    public function __construct(
-        CartStorageInterface $cartSessionStorage,
-        ChannelContextInterface $channelContext,
-        OrderRepositoryInterface $orderRepository
-    ) {
-        $this->cartSessionStorage = $cartSessionStorage;
+    public function __construct(CartStorageInterface $cartStorage, ChannelContextInterface $channelContext)
+    {
+        $this->cartStorage = $cartStorage;
         $this->channelContext = $channelContext;
-        $this->orderRepository = $orderRepository;
     }
 
     /**
@@ -68,17 +56,13 @@ final class SessionAndChannelBasedCartContext implements CartContextInterface
             throw new CartNotFoundException(null, $exception);
         }
 
-        if (!$this->cartSessionStorage->hasCartId($channel->getCode())) {
+        if (!$this->cartStorage->hasForChannel($channel)) {
             throw new CartNotFoundException('Sylius was not able to find the cart in session');
         }
 
-        $cart = $this->orderRepository->findCartByChannel(
-            $this->cartSessionStorage->getCartId($channel->getCode()),
-            $channel
-        );
-
+        $cart = $this->cartStorage->getForChannel($channel);
         if (null === $cart) {
-            $this->cartSessionStorage->removeCartId($channel->getCode());
+            $this->cartStorage->removeForChannel($channel);
 
             throw new CartNotFoundException('Sylius was not able to find the cart in session');
         }

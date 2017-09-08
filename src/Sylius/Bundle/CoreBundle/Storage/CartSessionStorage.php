@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Storage;
 
+use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Storage\CartStorageInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
@@ -29,54 +32,70 @@ final class CartSessionStorage implements CartStorageInterface
     private $sessionKeyName;
 
     /**
+     * @var OrderRepositoryInterface
+     */
+    private $orderRepository;
+
+    /**
      * @param SessionInterface $session
      * @param string $sessionKeyName
+     * @param OrderRepositoryInterface $orderRepository
      */
-    public function __construct(SessionInterface $session, string $sessionKeyName)
-    {
+    public function __construct(
+        SessionInterface $session,
+        string $sessionKeyName,
+        OrderRepositoryInterface $orderRepository
+    ) {
         $this->session = $session;
         $this->sessionKeyName = $sessionKeyName;
+        $this->orderRepository = $orderRepository;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function hasCartId(string $channelCode): bool
+    public function hasForChannel(ChannelInterface $channel): bool
     {
-        return $this->session->has($this->getCartKeyName($channelCode));
+        return $this->session->has($this->getCartKeyName($channel));
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getCartId(string $channelCode): ?int
+    public function getForChannel(ChannelInterface $channel): ?OrderInterface
     {
-        return $this->session->get($this->getCartKeyName($channelCode));
+        if ($this->hasForChannel($channel)) {
+            $cartId = $this->session->get($this->getCartKeyName($channel));
+
+            return $this->orderRepository->findCartByChannel($cartId, $channel);
+        }
+
+        return null;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setCartId(string $channelCode, $cartId): void
+    public function setForChannel(ChannelInterface $channel, OrderInterface $cart): void
     {
-        $this->session->set($this->getCartKeyName($channelCode), $cartId);
+        $this->session->set($this->getCartKeyName($channel), $cart->getId());
     }
 
     /**
      * {@inheritdoc}
      */
-    public function removeCartId(string $channelCode): void
+    public function removeForChannel(ChannelInterface $channel): void
     {
-        $this->session->remove($this->getCartKeyName($channelCode));
+        $this->session->remove($this->getCartKeyName($channel));
     }
 
     /**
-     * @param string $channelCode
+     * @param ChannelInterface $channel
      *
      * @return string
      */
-    private function getCartKeyName(string $channelCode): string
+    private function getCartKeyName(ChannelInterface $channel): string
     {
-        return sprintf('%s.%s', $this->sessionKeyName, $channelCode);
+        return sprintf('%s.%s', $this->sessionKeyName, $channel->getCode());
     }
 }

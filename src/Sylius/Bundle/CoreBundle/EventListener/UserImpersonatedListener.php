@@ -18,19 +18,15 @@ use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
+use Sylius\Component\Core\Storage\CartStorageInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 final class UserImpersonatedListener
 {
     /**
-     * @var SessionInterface
+     * @var CartStorageInterface
      */
-    private $session;
-
-    /**
-     * @var string
-     */
-    private $sessionKeyName;
+    private $cartStorage;
 
     /**
      * @var ChannelContextInterface
@@ -43,19 +39,16 @@ final class UserImpersonatedListener
     private $orderRepository;
 
     /**
-     * @param SessionInterface $session
-     * @param string $sessionKeyName
+     * @param CartStorageInterface $cartStorage
      * @param ChannelContextInterface $channelContext
      * @param OrderRepositoryInterface $orderRepository
      */
     public function __construct(
-        SessionInterface $session,
-        string $sessionKeyName,
+        CartStorageInterface $cartStorage,
         ChannelContextInterface $channelContext,
         OrderRepositoryInterface $orderRepository
     ) {
-        $this->session = $session;
-        $this->sessionKeyName = $sessionKeyName;
+        $this->cartStorage = $cartStorage;
         $this->channelContext = $channelContext;
         $this->orderRepository = $orderRepository;
     }
@@ -63,7 +56,7 @@ final class UserImpersonatedListener
     /**
      * @param UserEvent $event
      */
-    public function userImpersonated(UserEvent $event): void
+    public function onUserImpersonated(UserEvent $event): void
     {
         $customer = $event->getUser()->getCustomer();
 
@@ -73,14 +66,12 @@ final class UserImpersonatedListener
         /** @var OrderInterface $cart */
         $cart = $this->orderRepository->findLatestCartByChannelAndCustomer($channel, $customer);
 
-        $sessionCartKey = sprintf('%s.%s', $this->sessionKeyName, $channel->getCode());
-
         if ($cart === null) {
-            $this->session->remove($sessionCartKey);
+            $this->cartStorage->removeForChannel($channel);
 
             return;
         }
 
-        $this->session->set($sessionCartKey, $cart->getId());
+        $this->cartStorage->setForChannel($channel, $cart);
     }
 }

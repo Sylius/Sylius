@@ -84,11 +84,10 @@
         </service>
 
         <service id="sylius.listener.user_impersonated" class="Sylius\Bundle\CoreBundle\EventListener\UserImpersonatedListener">
-            <argument type="service" id="session" />
-            <argument>_sylius.cart</argument>
+            <argument type="service" id="sylius.storage.cart_session" />
             <argument type="service" id="sylius.context.channel.cached" />
             <argument type="service" id="sylius.repository.order" />
-            <tag name="kernel.event_listener" event="sylius.user.security.impersonate" method="userImpersonated" />
+            <tag name="kernel.event_listener" event="sylius.user.security.impersonate" method="onUserImpersonated" />
         </service>
     </services>
 </container>

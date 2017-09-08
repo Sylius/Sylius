@@ -21,20 +21,20 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Sylius\Component\Core\Storage\CartStorageInterface;
 
 final class UserImpersonatedListenerSpec extends ObjectBehavior
 {
     function let(
-        SessionInterface $session,
+        CartStorageInterface $cartStorage,
         ChannelContextInterface $channelContext,
         OrderRepositoryInterface $orderRepository
     ): void {
-        $this->beConstructedWith($session, 'session_key_name', $channelContext, $orderRepository);
+        $this->beConstructedWith($cartStorage, $channelContext, $orderRepository);
     }
 
     function it_sets_cart_id_of_an_impersonated_customer_in_session(
-        SessionInterface $session,
+        CartStorageInterface $cartStorage,
         ChannelContextInterface $channelContext,
         OrderRepositoryInterface $orderRepository,
         UserEvent $event,
@@ -42,42 +42,37 @@ final class UserImpersonatedListenerSpec extends ObjectBehavior
         CustomerInterface $customer,
         ChannelInterface $channel,
         OrderInterface $cart
-
     ): void {
         $event->getUser()->willReturn($user);
         $user->getCustomer()->willReturn($customer);
 
         $channelContext->getChannel()->willReturn($channel);
-        $channel->getCode()->willReturn('channel_code');
 
         $orderRepository->findLatestCartByChannelAndCustomer($channel, $customer)->willReturn($cart);
-        $cart->getId()->willReturn(14);
 
-        $session->set('session_key_name.channel_code', 14)->shouldBeCalled();
+        $cartStorage->setForChannel($channel, $cart)->shouldBeCalled();
 
-        $this->userImpersonated($event);
+        $this->onUserImpersonated($event);
     }
 
     function it_removes_the_current_cart_id_if_an_impersonated_customer_has_no_cart(
-        SessionInterface $session,
+        CartStorageInterface $cartStorage,
         ChannelContextInterface $channelContext,
         OrderRepositoryInterface $orderRepository,
         UserEvent $event,
         ShopUserInterface $user,
         CustomerInterface $customer,
         ChannelInterface $channel
-
     ): void {
         $event->getUser()->willReturn($user);
         $user->getCustomer()->willReturn($customer);
 
         $channelContext->getChannel()->willReturn($channel);
-        $channel->getCode()->willReturn('channel_code');
 
         $orderRepository->findLatestCartByChannelAndCustomer($channel, $customer)->willReturn(null);
 
-        $session->remove('session_key_name.channel_code')->shouldBeCalled();
+        $cartStorage->removeForChannel($channel)->shouldBeCalled();
 
-        $this->userImpersonated($event);
+        $this->onUserImpersonated($event);
     }
 }
