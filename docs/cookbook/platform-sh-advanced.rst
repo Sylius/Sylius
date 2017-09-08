@@ -1,7 +1,7 @@
 Advanced Platform.sh configurations
 ===================================
 
-The basic set-up let's you easily set-up a Platform.sh project running your Sylius project. It should give you an
+The basic set-up let's you easily set-up a Platform.sh project running your Sylius application. It should give you an
 environment suitable for testing Platform.sh in combination with Sylius.
 
 In this guide additional tips will be given in order to benefit in a production environment.
@@ -56,18 +56,19 @@ Want to use the metacache, query cache or result cache Symfony and Doctrine have
 Platform.sh doesn't allow you to connect to all your services yet from inside the `build` hook. The following
 tutorial will guide you through this and make use of Redis. In the default example Redis is already activated.
 
-* On top of your ``app/config/parameters_platform.php`` add:
+* In your ``app/config/parameters.yml.dist`` add:
 
-.. code-block:: php
+.. code-block:: yaml
 
-    $container->setParameter('metacache_driver', 'array');
-    $container->setParameter('querycache_driver', 'array');
-    $container->setParameter('resultcache_driver', 'array');
-    $container->setParameter('redis_dsn', null);
-    $container->setParameter('redis_host', null);
-    $container->setParameter('redis_port', null);
+    parameters:
+        metacache_driver: []
+        querycache_driver: []
+        resultcache_driver: []
+        redis_dsn: ~
+        redis_host: ~
+        redis_port: ~
 
-* In the same file, under the part where the database credentials are set, add:
+* In the  ``app/config/parameters_platform.php`` file, under the part where the database credentials are set, add:
 
 .. code-block:: php
 
@@ -187,7 +188,7 @@ Additional tips:
 ----------------
 
 * Platform.sh can serve gzipped versions of your static assets. Make sure to save your assets in the same folder, but with
-a .gz suffix. The ``gulp-gzip`` node package comes very helpful integrating saving of .gz versions of your assets.
+    a .gz suffix. The ``gulp-gzip`` node package comes very helpful integrating saving of .gz versions of your assets.
 
 * Platform.sh comes with a `New Relic integration <https://docs.platform.sh/administration/integrations/new-relic.html>`_.
 
