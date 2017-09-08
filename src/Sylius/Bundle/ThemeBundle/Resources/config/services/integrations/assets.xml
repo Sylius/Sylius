@@ -35,5 +35,13 @@
             <argument type="service" id="sylius.theme.asset.path_resolver" />
             <argument type="service" id="assets.context" />
         </service>
+
+        <service id="assets.url_package" class="Sylius\Bundle\ThemeBundle\Asset\Package\UrlPackage" abstract="true">
+            <argument /> <!-- base URLs -->
+            <argument /> <!-- version strategy -->
+            <argument type="service" id="sylius.context.theme" />
+            <argument type="service" id="sylius.theme.asset.path_resolver" />
+            <argument type="service" id="assets.context" />
+        </service>
     </services>
 </container>
