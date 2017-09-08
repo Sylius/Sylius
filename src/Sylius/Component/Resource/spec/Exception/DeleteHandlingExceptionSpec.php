@@ -14,11 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\Resource\Exception;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Resource\Exception\DeleteHandlingException;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class DeleteHandlingExceptionSpec extends ObjectBehavior
 {
     function it_extends_an_exception(): void

@@ -15,7 +15,6 @@ namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceDeleteHandlerInterface;
-use Sylius\Component\Resource\Exception\DeleteHandlingException;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -26,19 +25,10 @@ final class ResourceDeleteHandlerSpec extends ObjectBehavior
         $this->shouldImplement(ResourceDeleteHandlerInterface::class);
     }
 
-    function it_removes_resource_via_repository(RepositoryInterface $repository, ResourceInterface $resource)
+    function it_removes_resource_via_repository(RepositoryInterface $repository, ResourceInterface $resource): void
     {
         $repository->remove($resource)->shouldBeCalled();
 
         $this->handle($resource, $repository);
-    }
-
-    function it_throws_delete_handling_exception_if_something_gone_wrong_while_deleting_resource(
-        RepositoryInterface $repository,
-        ResourceInterface $resource
-    ) {
-        $repository->remove($resource)->willThrow(\Exception::class);
-
-        $this->shouldThrow(DeleteHandlingException::class)->during('handle', [$resource, $repository]);
     }
 }

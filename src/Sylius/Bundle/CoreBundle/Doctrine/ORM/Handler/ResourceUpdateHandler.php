@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\Doctrine\ORM\Updater;
+namespace Sylius\Bundle\CoreBundle\Doctrine\ORM\Handler;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\OptimisticLockException;
