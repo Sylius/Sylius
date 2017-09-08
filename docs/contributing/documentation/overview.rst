@@ -98,7 +98,7 @@ You can prefix the title of your pull request in a few cases:
 
 * ``[BundleName]`` when you add documentation of :doc:`the Sylius Bundles </bundles/index>`.
 
-* ``[Behat]`` if you modify something in the :doc:`the Behat guide </behat/index>`.
+* ``[Behat]`` if you modify something in the :doc:`the BDD guide </bdd/index>`.
 
 * ``[API]`` when you are contributing docs to :doc:`the API guide </api/index>`.
 
