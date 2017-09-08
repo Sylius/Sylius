@@ -23,6 +23,7 @@
         "php": "^7.1",
 
         "doctrine/common": "^2.5",
+        "sensio/distribution-bundle": "^5.0",
         "symfony/symfony": "^3.2",
         "zendframework/zend-hydrator": "^2.2"
     },
