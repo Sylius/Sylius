@@ -35,3 +35,10 @@ the ``sylius.taxon.update`` key:
     sylius:
         taxon:
             update: This category has been successfully edited.
+
+Good to know
+------------
+
+.. warning::
+
+    All the customizations can be done either in your application directly or in :doc:`Plugins </plugins/index>`!

@@ -4,6 +4,7 @@ Customizing Models
 All models in Sylius are placed in the ``Sylius\Component\*ComponentName*\Model`` namespaces alongside with their interfaces.
 
 .. warning::
+
     Many models in Sylius are **extended in the Core component**.
     If the model you are willing to override exists in the ``Core`` you should be extending the ``Core`` one, not the base model from the component.
 
@@ -407,3 +408,10 @@ Which we strongly recommend over updating the schema.
 
 **6.** Additionally if you need  to add the ``deliveryConditions`` to any of your shipping methods in the admin panel,
 you'll need to update its form type. Check how to do it :doc:`here </customization/form>`.
+
+Good to know
+------------
+
+.. warning::
+
+    All the customizations can be done either in your application directly or in :doc:`Plugins </plugins/index>`!

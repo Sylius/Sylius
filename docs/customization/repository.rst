@@ -98,4 +98,11 @@ What happens while overriding Repositories?
 * The repository service ``sylius.repository.product`` is using your new class.
 * Under the ``sylius.repository.product`` service you have got all methods from the base repository available plus the one you have added.
 
+Good to know
+------------
+
+.. warning::
+
+    All the customizations can be done either in your application directly or in :doc:`Plugins </plugins/index>`!
+
 .. _`Query Builder`: http://doctrine-orm.readthedocs.io/projects/doctrine-orm/en/latest/reference/query-builder.html

@@ -210,3 +210,10 @@ Overriding forms completely
 
     If you need to create a new form type on top of an existing one -  create this new alternative form type and define `getParent()`
     to the old one. `See details in the Symfony docs <http://symfony.com/doc/current/form/create_custom_field_type.html>`_.
+
+Good to know
+------------
+
+.. warning::
+
+    All the customizations can be done either in your application directly or in :doc:`Plugins </plugins/index>`!

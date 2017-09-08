@@ -126,6 +126,13 @@ You can for example override ``sylius_admin_product_create_simple`` route like b
                     route:
                         name: sylius_admin_product_create_simple
 
+Good to know
+------------
+
+.. warning::
+
+    All the customizations can be done either in your application directly or in :doc:`Plugins </plugins/index>`!
+
 Learn more
 ----------
 
