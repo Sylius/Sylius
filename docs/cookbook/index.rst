@@ -28,5 +28,6 @@ The Cookbook
     cron-jobs
     installation-commands
     platform-sh
+    platform-sh-advanced
 
 .. include:: /cookbook/map.rst.inc
