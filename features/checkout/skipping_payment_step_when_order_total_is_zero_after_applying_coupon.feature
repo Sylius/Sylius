@@ -1,8 +1,8 @@
 @checkout
 Feature: Skipping payment selection when order total is zero after applying coupon
-    In order to not select payment method when it is unnecessary
+    In order not to select payment method when it is unnecessary
     As a Customer
-    I want to be redirect directly to order summary page after shipping selection
+    I want to be redirected directly to order summary page after shipping selection when my order total is zero
 
     Background:
         Given the store operates on a single channel in "United States"

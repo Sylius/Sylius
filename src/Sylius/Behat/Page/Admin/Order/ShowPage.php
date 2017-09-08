@@ -342,7 +342,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getShipmentsCount()
+    public function getShipmentsCount(): int
     {
         try {
             $shipments = $this->getElement('shipments')->findAll('css', '.item');

@@ -662,19 +662,12 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then the order :order should have order shipping state :orderPaymentState
-     */
-    public function theOrderShouldHaveShippingState(OrderInterface $order, $orderPaymentState)
-    {
-        Assert::true($this->indexPage->isSingleResourceOnPage(['shippingState' => $orderPaymentState]));
-    }
-
-    /**
+     * @Then the order :order should have order shipping state :orderShippingState
      * @Then /^(this order) should have order shipping state "([^"]+)"$/
      */
-    public function theOrderShouldHaveShipmentState(OrderInterface $order, $orderShipmentState)
+    public function theOrderShouldHaveShippingState(OrderInterface $order, $orderShippingState)
     {
-        Assert::true($this->indexPage->isSingleResourceOnPage(['shippingState' => $orderShipmentState]));
+        Assert::true($this->indexPage->isSingleResourceOnPage(['shippingState' => $orderShippingState]));
     }
 
     /**

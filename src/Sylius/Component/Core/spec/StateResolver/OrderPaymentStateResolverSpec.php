@@ -109,7 +109,7 @@ final class OrderPaymentStateResolverSpec extends ObjectBehavior
         $this->resolve($order);
     }
 
-    function it_marks_an_order_as_paid_if_it_does_not_have_any_payment(
+    function it_marks_an_order_as_paid_if_it_does_not_have_any_payments(
         FactoryInterface $stateMachineFactory,
         StateMachineInterface $stateMachine,
         OrderInterface $order

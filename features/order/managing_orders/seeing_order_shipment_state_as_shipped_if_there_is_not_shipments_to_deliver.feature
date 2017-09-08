@@ -1,8 +1,8 @@
 @managing_orders
-Feature: Seeing shipping states of an order as shipped if there is no shipments to deliver
-    In order to get to know the state of shipping for order without shipments
+Feature: Seeing shipping states of an order as shipped if there are no shipments to deliver
+    In order to have coherent shipping states of all orders
     As an Administrator
-    I want to be able to see shipping states
+    I want orders with no undelivered shipments to have shipping state shipped
 
     Background:
         Given the store operates on a single channel in "United States"

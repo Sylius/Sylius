@@ -62,7 +62,7 @@ final class OrderShippingStateResolverSpec extends ObjectBehavior
         $this->resolve($order);
     }
 
-    function it_marks_an_order_as_shipped_if_there_is_no_shipments_to_deliver(
+    function it_marks_an_order_as_shipped_if_there_are_no_shipments_to_deliver(
         FactoryInterface $stateMachineFactory,
         OrderInterface $order,
         StateMachineInterface $orderStateMachine

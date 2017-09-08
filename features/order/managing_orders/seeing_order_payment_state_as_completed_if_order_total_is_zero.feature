@@ -1,8 +1,8 @@
 @managing_orders
 Feature: Seeing payment state as paid after checkout steps if order total is zero
-    In order to know that the payment is always paid if order total is zero
+    In order to have coherent payment states of all orders
     As an Administrator
-    I want to be able to see payment state as paid
+    I want orders with no unpaid payments to have payment state paid
 
     Background:
         Given the store operates on a single channel in "United States"
