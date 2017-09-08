@@ -283,12 +283,7 @@ In the above example the ``delete`` action and the filters section have been rem
 .. image:: ../_images/overriding_grids.png
     :align: center
 
-Good to know
-------------
-
-.. warning::
-
-    All the customizations can be done either in your application directly or in :doc:`Plugins </plugins/index>`!
+.. include:: /customization/plugins.rst.inc
 
 Learn more
 ----------

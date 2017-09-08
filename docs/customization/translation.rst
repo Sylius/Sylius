@@ -50,9 +50,4 @@ override its translation key which is ``sylius.form.customer.email``.
     .. image:: ../_images/translations.png
         :align: center
 
-Good to know
-------------
-
-.. warning::
-
-    All the customizations can be done either in your application directly or in :doc:`Plugins </plugins/index>`!
+.. include:: /customization/plugins.rst.inc

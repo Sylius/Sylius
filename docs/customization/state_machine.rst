@@ -143,12 +143,7 @@ On the example of the state machine of ProductReview, we can turn off the ``upda
                     update_price:
                         disabled: true
 
-Good to know
-------------
-
-.. warning::
-
-    All the customizations can be done either in your application directly or in :doc:`Plugins </plugins/index>`!
+.. include:: /customization/plugins.rst.inc
 
 Learn more
 ----------

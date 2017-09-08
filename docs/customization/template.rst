@@ -238,9 +238,4 @@ You can check for example what is the current channel by dumping the ``sylius.ch
 
 That's it, this will dump the content of the current Channel object.
 
-Good to know
-------------
-
-.. warning::
-
-    All the customizations can be done either in your application directly or in :doc:`Plugins </plugins/index>`!
+.. include:: /customization/plugins.rst.inc

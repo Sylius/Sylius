@@ -188,9 +188,4 @@ Remember to import the ``app/config/services.yml`` into the ``app/config/config.
 
 From now on your ``customAction`` of the ``HomepageController`` will be available alongside the ``indexAction`` from the base class.
 
-Good to know
-------------
-
-.. warning::
-
-    All the customizations can be done either in your application directly or in :doc:`Plugins </plugins/index>`!
+.. include:: /customization/plugins.rst.inc
