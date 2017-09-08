@@ -79,17 +79,18 @@ The Customization Guide
 
 .. include:: /customization/map.rst.inc
 
-The REST API Reference
-----------------------
+Sylius Plugins
+--------------
 
-:doc:`The API guide </api/index>` covers the REST API of Sylius platform.
+The collection of Sylius Plugins together with the guide on Plugins development.
+Remember that you can use all the :doc:`customization techniques </customization/index>` in Plugins.
 
 .. toctree::
    :hidden:
 
-   api/index
+   plugins/index
 
-.. include:: /api/map.rst.inc
+.. include:: /plugins/map.rst.inc
 
 The Cookbook
 ------------
@@ -103,6 +104,18 @@ The Cookbook
 
 .. include:: /cookbook/map.rst.inc
 
+The REST API Reference
+----------------------
+
+:doc:`The API guide </api/index>` covers the REST API of Sylius platform.
+
+.. toctree::
+   :hidden:
+
+   api/index
+
+.. include:: /api/map.rst.inc
+
 The BDD Guide
 -------------
 
@@ -114,18 +127,6 @@ In :doc:`the BDD Guide </bdd/index>` you will learn how to write clean and reusa
    bdd/index
 
 .. include:: /bdd/map.rst.inc
-
-Sylius Plugins
---------------
-
-The collection of Sylius Plugins together with the guide on Plugins development.
-
-.. toctree::
-   :hidden:
-
-   plugins/index
-
-.. include:: /plugins/map.rst.inc
 
 The Contribution Guide
 ----------------------
