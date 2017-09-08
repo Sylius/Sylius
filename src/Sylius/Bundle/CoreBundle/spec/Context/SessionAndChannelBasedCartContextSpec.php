@@ -19,6 +19,7 @@ use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
+use Sylius\Component\Core\Storage\CartStorageInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Context\CartNotFoundException;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -28,9 +29,12 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
  */
 final class SessionAndChannelBasedCartContextSpec extends ObjectBehavior
 {
-    function let(SessionInterface $session, OrderRepositoryInterface $orderRepository, ChannelContextInterface $channelContext): void
-    {
-        $this->beConstructedWith($session, 'session_key_name', $channelContext, $orderRepository);
+    function let(
+        CartStorageInterface $cartSessionStorage, 
+        OrderRepositoryInterface $orderRepository, 
+        ChannelContextInterface $channelContext
+    ): void {
+        $this->beConstructedWith($cartSessionStorage, $channelContext, $orderRepository);
     }
 
     function it_implements_cart_context_interface(): void
@@ -39,7 +43,7 @@ final class SessionAndChannelBasedCartContextSpec extends ObjectBehavior
     }
 
     function it_returns_cart_based_on_id_stored_in_session_and_current_channel(
-        SessionInterface $session,
+        CartStorageInterface $cartSessionStorage,
         OrderRepositoryInterface $orderRepository,
         ChannelContextInterface $channelContext,
         ChannelInterface $channel,
@@ -48,8 +52,8 @@ final class SessionAndChannelBasedCartContextSpec extends ObjectBehavior
 
         $channelContext->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('Poland');
-        $session->has('session_key_name.Poland')->willReturn(true);
-        $session->get('session_key_name.Poland')->willReturn(12345);
+        $cartSessionStorage->hasCartId('Poland')->willReturn(true);
+        $cartSessionStorage->getCartId('Poland')->willReturn(12345);
 
         $orderRepository->findCartByChannel(12345, $channel)->willReturn($cart);
 
@@ -57,31 +61,31 @@ final class SessionAndChannelBasedCartContextSpec extends ObjectBehavior
     }
 
     function it_throws_cart_not_found_exception_if_session_key_does_not_exist(
-        SessionInterface $session,
+        CartStorageInterface $cartSessionStorage,
         ChannelContextInterface $channelContext,
         ChannelInterface $channel
     ): void {
         $channelContext->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('Poland');
-        $session->has('session_key_name.Poland')->willReturn(false);
+        $cartSessionStorage->hasCartId('Poland')->willReturn(false);
 
         $this->shouldThrow(CartNotFoundException::class)->during('getCart');
     }
 
     function it_throws_cart_not_found_exception_and_removes_id_from_session_when_cart_was_not_found(
-        SessionInterface $session,
+        CartStorageInterface $cartSessionStorage,
         OrderRepositoryInterface $orderRepository,
         ChannelContextInterface $channelContext,
         ChannelInterface $channel
     ): void {
         $channelContext->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('Poland');
-        $session->has('session_key_name.Poland')->willReturn(true);
-        $session->get('session_key_name.Poland')->willReturn(12345);
+        $cartSessionStorage->hasCartId('Poland')->willReturn(true);
+        $cartSessionStorage->getCartId('Poland')->willReturn(12345);
 
         $orderRepository->findCartByChannel(12345, $channel)->willReturn(null);
 
-        $session->remove('session_key_name.Poland')->shouldBeCalled();
+        $cartSessionStorage->removeCartId('Poland')->shouldBeCalled();
 
         $this->shouldThrow(CartNotFoundException::class)->during('getCart');
     }

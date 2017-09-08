@@ -35,8 +35,7 @@
             <argument type="service" id="sylius.context.shopper" />
         </service>
         <service id="sylius.context.cart.session_and_channel_based" class="Sylius\Bundle\CoreBundle\Context\SessionAndChannelBasedCartContext" decorates="sylius.context.cart.session_based" decoration-priority="256">
-            <argument type="service" id="session" />
-            <argument>_sylius.cart</argument>
+            <argument type="service" id="sylius.storage.cart_session" />
             <argument type="service" id="sylius.context.channel.cached" />
             <argument type="service" id="sylius.repository.order" />
         </service>

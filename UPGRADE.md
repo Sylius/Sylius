@@ -95,6 +95,8 @@
     * `ShippingMethodInterface::setZone`
     * `TaxRateInterface::setZone`
 
+* Constructor of `Sylius\Bundle\CoreBundle\Context\SessionAndChannelBasedCartContext` has been changed to use `Sylius\Component\Core\Storage\CartStorageInterface`
+
 ### Customer / CustomerBundle
 
 * The following methods does not longer have a default null argument and requires one to be explicitly passed:
