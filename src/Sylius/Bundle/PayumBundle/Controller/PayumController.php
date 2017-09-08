@@ -17,11 +17,10 @@ use FOS\RestBundle\View\View;
 use Payum\Core\Payum;
 use Payum\Core\Security\GenericTokenFactoryInterface;
 use Payum\Core\Security\HttpRequestVerifierInterface;
-use Sylius\Bundle\PayumBundle\Request\GetStatus;
-use Sylius\Bundle\PayumBundle\Request\ResolveNextRoute;
+use Sylius\Bundle\PayumBundle\Factory\GetStatusFactoryInterface;
+use Sylius\Bundle\PayumBundle\Factory\ResolveNextRouteFactoryInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ViewHandlerInterface;
-use Sylius\Bundle\ResourceBundle\Form\Registry\FormTypeRegistryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
@@ -48,11 +47,6 @@ final class PayumController
     private $orderRepository;
 
     /**
-     * @var FormTypeRegistryInterface
-     */
-    private $gatewayConfigurationTypeRegistry;
-
-    /**
      * @var MetadataInterface
      */
     private $orderMetadata;
@@ -72,31 +66,30 @@ final class PayumController
      */
     private $router;
 
-    /**
-     * @param Payum $payum
-     * @param OrderRepositoryInterface $orderRepository
-     * @param FormTypeRegistryInterface $gatewayConfigurationTypeRegistry
-     * @param MetadataInterface $orderMetadata
-     * @param RequestConfigurationFactoryInterface $requestConfigurationFactory
-     * @param ViewHandlerInterface $viewHandler
-     * @param RouterInterface $router
-     */
+    /** @var GetStatusFactoryInterface */
+    private $getStatusRequestFactory;
+
+    /** @var ResolveNextRouteFactoryInterface */
+    private $resolveNextRouteRequestFacotry;
+
     public function __construct(
         Payum $payum,
         OrderRepositoryInterface $orderRepository,
-        FormTypeRegistryInterface $gatewayConfigurationTypeRegistry,
         MetadataInterface $orderMetadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         ViewHandlerInterface $viewHandler,
-        RouterInterface $router
+        RouterInterface $router,
+        GetStatusFactoryInterface $getStatusFactory,
+        ResolveNextRouteFactoryInterface $resolveNextRouteFactory
     ) {
         $this->payum = $payum;
         $this->orderRepository = $orderRepository;
-        $this->gatewayConfigurationTypeRegistry = $gatewayConfigurationTypeRegistry;
         $this->orderMetadata = $orderMetadata;
         $this->requestConfigurationFactory = $requestConfigurationFactory;
         $this->viewHandler = $viewHandler;
         $this->router = $router;
+        $this->getStatusRequestFactory = $getStatusFactory;
+        $this->resolveNextRouteRequestFacotry = $resolveNextRouteFactory;
     }
 
     /**
@@ -123,17 +116,37 @@ final class PayumController
 
         if (null === $payment) {
             $url = $this->router->generate('sylius_shop_order_thank_you');
+
             return new RedirectResponse($url);
         }
 
-        $captureToken = $this->getTokenFactory()->createCaptureToken(
-            $payment->getMethod()->getGatewayConfig()->getGatewayName(),
-            $payment,
-            isset($options['route']) ? $options['route'] : null,
-            isset($options['parameters']) ? $options['parameters'] : []
-        );
+        $gatewayConfig = $payment->getMethod()->getGatewayConfig()->getConfig();
 
-        $view = View::createRedirect($captureToken->getTargetUrl());
+        if (isset($gatewayConfig['use_authorize']) && $gatewayConfig['use_authorize'] == true) {
+            $token = $this->getTokenFactory()->createAuthorizeToken(
+                $payment->getMethod()->getGatewayConfig()->getGatewayName(),
+                $payment,
+                isset($options['route'])
+                    ? $options['route']
+                    : null,
+                isset($options['parameters'])
+                    ? $options['parameters']
+                    : []
+            );
+        } else {
+            $token = $this->getTokenFactory()->createCaptureToken(
+                $payment->getMethod()->getGatewayConfig()->getGatewayName(),
+                $payment,
+                isset($options['route'])
+                    ? $options['route']
+                    : null,
+                isset($options['parameters'])
+                    ? $options['parameters']
+                    : []
+            );
+        }
+
+        $view = View::createRedirect($token->getTargetUrl());
 
         return $this->viewHandler->handle($configuration, $view);
     }
@@ -149,9 +162,9 @@ final class PayumController
 
         $token = $this->getHttpRequestVerifier()->verify($request);
 
-        $status = new GetStatus($token);
+        $status = $this->getStatusRequestFactory->createNewWithModel($token);
         $this->payum->getGateway($token->getGatewayName())->execute($status);
-        $resolveNextRoute = new ResolveNextRoute($status->getFirstModel());
+        $resolveNextRoute = $this->resolveNextRouteRequestFacotry->createNewWithModel($status->getFirstModel());
         $this->payum->getGateway($token->getGatewayName())->execute($resolveNextRoute);
 
         $this->getHttpRequestVerifier()->invalidate($token);

@@ -151,7 +151,7 @@ class GetStatus extends BaseGetStatus
      */
     public function isAuthorized()
     {
-        return $this->status === PaymentInterface::STATE_PROCESSING;
+        return $this->status === PaymentInterface::STATE_AUTHORIZED;
     }
 
     /**
@@ -159,7 +159,7 @@ class GetStatus extends BaseGetStatus
      */
     public function markAuthorized()
     {
-        $this->status = PaymentInterface::STATE_PROCESSING;
+        $this->status = PaymentInterface::STATE_AUTHORIZED;
     }
 
     /**
