@@ -21,6 +21,7 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  */
 interface PaymentInterface extends TimestampableInterface, ResourceInterface
 {
+    public const STATE_AUTHORIZED = 'authorized';
     public const STATE_CART = 'cart';
     public const STATE_NEW = 'new';
     public const STATE_PROCESSING = 'processing';
