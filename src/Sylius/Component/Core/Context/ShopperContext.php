@@ -16,9 +16,9 @@ namespace Sylius\Component\Core\Context;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
+use Sylius\Component\Customer\Context\CustomerContextInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
-use Sylius\Component\Customer\Context\CustomerContextInterface;
 
 /**
  * Should not be extended, final removed to make this class lazy.

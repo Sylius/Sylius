@@ -16,8 +16,8 @@ namespace Sylius\Component\Core\Model;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Channel\Model\ChannelsAwareInterface;
 use Sylius\Component\Product\Model\ProductInterface as BaseProductInterface;
-use Sylius\Component\Review\Model\ReviewInterface;
 use Sylius\Component\Review\Model\ReviewableInterface;
+use Sylius\Component\Review\Model\ReviewInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
