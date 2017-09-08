@@ -23,7 +23,6 @@ use Sylius\Bundle\UserBundle\Form\Type\UserChangePasswordType;
 use Sylius\Bundle\UserBundle\Form\Type\UserRequestPasswordResetType;
 use Sylius\Bundle\UserBundle\Form\Type\UserResetPasswordType;
 use Sylius\Bundle\UserBundle\UserEvents;
-use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Security\Generator\GeneratorInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;

@@ -16,7 +16,6 @@ namespace spec\Sylius\Bundle\ChannelBundle\Context\FakeChannel;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ChannelBundle\Context\FakeChannel\FakeChannelCodeProviderInterface;
-use Sylius\Bundle\ChannelBundle\Context\FakeChannel\FakeChannelPersister;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

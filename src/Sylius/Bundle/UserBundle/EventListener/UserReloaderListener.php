@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Bundle\UserBundle\EventListener;
 
 use Sylius\Bundle\UserBundle\Reloader\UserReloaderInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Webmozart\Assert\Assert;

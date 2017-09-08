@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\AddressingBundle\Twig;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\AddressingBundle\Twig\CountryNameExtension;
 use Sylius\Component\Addressing\Model\CountryInterface;
 
 /**

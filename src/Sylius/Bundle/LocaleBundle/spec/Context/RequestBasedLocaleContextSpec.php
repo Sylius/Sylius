@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\LocaleBundle\Context;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\LocaleBundle\Context\RequestBasedLocaleContext;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;

@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ThemeBundle\Factory;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ThemeBundle\Factory\ThemeScreenshotFactory;
 use Sylius\Bundle\ThemeBundle\Factory\ThemeScreenshotFactoryInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeScreenshot;
 

@@ -19,7 +19,6 @@ use PHPCR\NodeInterface;
 use PHPCR\SessionInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener\DefaultParentListener;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 
 /**

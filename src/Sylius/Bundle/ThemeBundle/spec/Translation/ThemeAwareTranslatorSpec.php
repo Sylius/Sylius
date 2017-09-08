@@ -16,7 +16,6 @@ namespace spec\Sylius\Bundle\ThemeBundle\Translation;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
-use Sylius\Bundle\ThemeBundle\Translation\ThemeAwareTranslator;
 use Symfony\Component\HttpKernel\CacheWarmer\WarmableInterface;
 use Symfony\Component\Translation\MessageCatalogueInterface;
 use Symfony\Component\Translation\TranslatorBagInterface;

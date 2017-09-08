@@ -15,7 +15,6 @@ namespace spec\Sylius\Bundle\MoneyBundle\Templating\Helper;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatterInterface;
-use Sylius\Bundle\MoneyBundle\Templating\Helper\FormatMoneyHelper;
 use Sylius\Bundle\MoneyBundle\Templating\Helper\FormatMoneyHelperInterface;
 use Symfony\Component\Templating\Helper\Helper;
 

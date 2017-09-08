@@ -15,7 +15,6 @@ namespace spec\Sylius\Component\Resource\Metadata;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
-use Sylius\Component\Resource\Metadata\Registry;
 use Sylius\Component\Resource\Metadata\RegistryInterface;
 
 /**

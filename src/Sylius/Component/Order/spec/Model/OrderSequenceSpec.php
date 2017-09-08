@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\Order\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Order\Model\OrderSequence;
 use Sylius\Component\Order\Model\OrderSequenceInterface;
 
 /**

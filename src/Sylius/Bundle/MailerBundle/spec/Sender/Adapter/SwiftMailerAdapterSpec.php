@@ -15,7 +15,6 @@ namespace spec\Sylius\Bundle\MailerBundle\Sender\Adapter;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\MailerBundle\Sender\Adapter\SwiftMailerAdapter;
 use Sylius\Component\Mailer\Event\EmailSendEvent;
 use Sylius\Component\Mailer\Model\EmailInterface;
 use Sylius\Component\Mailer\Renderer\RenderedEmail;

@@ -19,7 +19,6 @@ use PhpSpec\ObjectBehavior;
 use spec\Sylius\Component\Registry\Fixture\SampleServiceInterface;
 use Sylius\Component\Registry\ExistingServiceException;
 use Sylius\Component\Registry\NonExistingServiceException;
-use Sylius\Component\Registry\ServiceRegistry;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 
 /**

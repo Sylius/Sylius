@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\OrderBundle\Context;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\OrderBundle\Context\SessionBasedCartContext;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Context\CartNotFoundException;
 use Sylius\Component\Order\Model\OrderInterface;

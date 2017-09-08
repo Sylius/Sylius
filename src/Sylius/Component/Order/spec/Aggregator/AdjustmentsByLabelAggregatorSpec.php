@@ -15,7 +15,6 @@ namespace spec\Sylius\Component\Order\Aggregator;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Order\Aggregator\AdjustmentsAggregatorInterface;
-use Sylius\Component\Order\Aggregator\AdjustmentsByLabelAggregator;
 use Sylius\Component\Order\Model\AdjustmentInterface;
 
 /**

@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\OrderBundle\NumberGenerator;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\OrderBundle\NumberGenerator\SequentialOrderNumberGenerator;
 use Sylius\Bundle\OrderBundle\NumberGenerator\OrderNumberGeneratorInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Order\Model\OrderInterface;

@@ -16,7 +16,6 @@ namespace spec\Sylius\Component\Order\Context;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Context\CartNotFoundException;
-use Sylius\Component\Order\Context\CompositeCartContext;
 use Sylius\Component\Order\Model\OrderInterface;
 
 /**

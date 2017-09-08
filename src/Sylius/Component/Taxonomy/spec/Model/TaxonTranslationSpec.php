@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\Taxonomy\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Taxonomy\Model\TaxonTranslation;
 use Sylius\Component\Taxonomy\Model\TaxonTranslationInterface;
 
 /**

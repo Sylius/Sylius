@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\Core\Factory;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Factory\CartItemFactory;
 use Sylius\Component\Core\Factory\CartItemFactoryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;

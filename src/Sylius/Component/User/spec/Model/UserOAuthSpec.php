@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\User\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\User\Model\UserOAuth;
 use Sylius\Component\User\Model\UserOAuthInterface;
 
 /**

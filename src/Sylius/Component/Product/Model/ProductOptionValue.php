@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Component\Product\Model;
 
 use Sylius\Component\Resource\Model\TranslatableTrait;
-use Sylius\Component\Resource\Model\TranslationInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>

@@ -15,7 +15,6 @@ namespace Sylius\Bundle\UserBundle\EventListener;
 
 use Sylius\Bundle\UserBundle\Mailer\Emails;
 use Sylius\Component\Mailer\Sender\SenderInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 

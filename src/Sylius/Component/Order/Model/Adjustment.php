@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Component\Order\Model;
 
 use Sylius\Component\Resource\Model\TimestampableTrait;
-use Webmozart\Assert\Assert;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>

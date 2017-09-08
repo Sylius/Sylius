@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ThemeBundle\Templating;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ThemeBundle\Templating\TemplateNameParser;
 use Symfony\Bundle\FrameworkBundle\Templating\TemplateReference;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Templating\TemplateNameParserInterface;

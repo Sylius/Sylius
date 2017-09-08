@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ThemeBundle\Controller;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ThemeBundle\Controller\ThemeScreenshotController;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeScreenshot;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;

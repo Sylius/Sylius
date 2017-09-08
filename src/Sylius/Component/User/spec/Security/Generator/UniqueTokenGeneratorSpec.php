@@ -17,7 +17,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Resource\Generator\RandomnessGeneratorInterface;
 use Sylius\Component\User\Security\Checker\UniquenessCheckerInterface;
 use Sylius\Component\User\Security\Generator\GeneratorInterface;
-use Sylius\Component\User\Security\Generator\UniqueTokenGenerator;
 
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>

@@ -16,10 +16,8 @@ namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 use FOS\RestBundle\Context\Context;
 use FOS\RestBundle\View\View;
 use FOS\RestBundle\View\ViewHandler as RestViewHandler;
-use JMS\Serializer\SerializationContext;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
-use Sylius\Bundle\ResourceBundle\Controller\ViewHandler;
 use Sylius\Bundle\ResourceBundle\Controller\ViewHandlerInterface;
 use Symfony\Component\HttpFoundation\Response;
 

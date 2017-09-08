@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ReviewBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\ReviewBundle\Form\Type\ReviewType;
 use Sylius\Component\Resource\Factory\Factory;

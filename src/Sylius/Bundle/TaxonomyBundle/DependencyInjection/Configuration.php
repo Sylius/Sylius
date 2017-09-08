@@ -14,9 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Bundle\TaxonomyBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
-use Sylius\Bundle\ResourceBundle\Form\Type\ResourceFromIdentifierType;
-use Sylius\Bundle\ResourceBundle\Form\Type\ResourceToHiddenIdentifierType;
-use Sylius\Bundle\ResourceBundle\Form\Type\ResourceToIdentifierType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonTranslationType;
 use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonType;

@@ -14,11 +14,9 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\User\Security\Generator;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Resource\Generator\RandomnessGeneratorInterface;
 use Sylius\Component\User\Security\Checker\UniquenessCheckerInterface;
 use Sylius\Component\User\Security\Generator\GeneratorInterface;
-use Sylius\Component\User\Security\Generator\UniquePinGenerator;
 
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>

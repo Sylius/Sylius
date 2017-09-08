@@ -14,8 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\FixturesBundle\Listener;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use Sylius\Bundle\FixturesBundle\Listener\ListenerNotFoundException;
 
 /**
  * @author Kamil Kokot <kamil@kokot.me>

@@ -15,12 +15,10 @@ namespace spec\Sylius\Bundle\FixturesBundle\Suite;
 
 use PhpSpec\ObjectBehavior;
 use PhpSpec\Wrapper\Collaborator;
-use Prophecy\Argument;
 use Sylius\Bundle\FixturesBundle\Fixture\FixtureInterface;
 use Sylius\Bundle\FixturesBundle\Fixture\FixtureRegistryInterface;
 use Sylius\Bundle\FixturesBundle\Listener\ListenerInterface;
 use Sylius\Bundle\FixturesBundle\Listener\ListenerRegistryInterface;
-use Sylius\Bundle\FixturesBundle\Suite\SuiteFactory;
 use Sylius\Bundle\FixturesBundle\Suite\SuiteFactoryInterface;
 use Symfony\Component\Config\Definition\Processor;
 

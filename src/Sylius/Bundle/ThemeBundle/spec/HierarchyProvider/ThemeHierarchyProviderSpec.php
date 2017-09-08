@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ThemeBundle\HierarchyProvider;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ThemeBundle\HierarchyProvider\ThemeHierarchyProvider;
 use Sylius\Bundle\ThemeBundle\HierarchyProvider\ThemeHierarchyProviderInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 

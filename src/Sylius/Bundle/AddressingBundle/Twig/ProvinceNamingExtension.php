@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AddressingBundle\Twig;
 
-use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Provider\ProvinceNamingProviderInterface;
 
 /**

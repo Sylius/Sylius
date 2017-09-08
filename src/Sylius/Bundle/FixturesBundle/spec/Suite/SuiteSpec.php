@@ -15,9 +15,7 @@ namespace spec\Sylius\Bundle\FixturesBundle\Suite;
 
 use PhpSpec\ObjectBehavior;
 use PhpSpec\Wrapper\Collaborator;
-use Prophecy\Argument;
 use Sylius\Bundle\FixturesBundle\Fixture\FixtureInterface;
-use Sylius\Bundle\FixturesBundle\Suite\Suite;
 use Sylius\Bundle\FixturesBundle\Suite\SuiteInterface;
 
 /**

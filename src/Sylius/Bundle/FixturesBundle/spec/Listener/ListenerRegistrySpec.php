@@ -14,10 +14,8 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\FixturesBundle\Listener;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\FixturesBundle\Listener\ListenerInterface;
 use Sylius\Bundle\FixturesBundle\Listener\ListenerNotFoundException;
-use Sylius\Bundle\FixturesBundle\Listener\ListenerRegistry;
 use Sylius\Bundle\FixturesBundle\Listener\ListenerRegistryInterface;
 
 /**

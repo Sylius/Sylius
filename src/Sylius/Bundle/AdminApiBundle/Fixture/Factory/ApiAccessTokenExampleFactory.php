@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminApiBundle\Fixture\Factory;
 
-use FOS\OAuthServerBundle\Model\ClientManagerInterface;
 use Sylius\Bundle\AdminApiBundle\Model\AccessTokenInterface;
 use Sylius\Bundle\AdminApiBundle\Model\ClientInterface;
 use Sylius\Bundle\AdminApiBundle\Model\UserInterface;

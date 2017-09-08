@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\UserBundle\Event;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\UserBundle\Event\UserEvent;
 use Sylius\Component\User\Model\UserInterface;
 
 final class UserEventSpec extends ObjectBehavior

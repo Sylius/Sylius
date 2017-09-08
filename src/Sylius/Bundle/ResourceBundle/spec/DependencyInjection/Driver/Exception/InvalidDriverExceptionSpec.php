@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\Exception;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\Exception\InvalidDriverException;
 
 /**
  * @author Arnaud Langlade <aRn0D.dev@gmail.com>

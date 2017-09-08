@@ -16,7 +16,6 @@ namespace spec\Sylius\Component\Resource\Factory;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Factory\TranslatableFactory;
 use Sylius\Component\Resource\Factory\TranslatableFactoryInterface;
 use Sylius\Component\Resource\Model\TranslatableInterface;
 use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;

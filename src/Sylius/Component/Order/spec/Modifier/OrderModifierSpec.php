@@ -17,7 +17,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Prophecy\Argument;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Order\Model\OrderItemInterface;
-use Sylius\Component\Order\Modifier\OrderModifier;
 use Sylius\Component\Order\Modifier\OrderModifierInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;

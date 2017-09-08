@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\UiBundle\Twig;
 
-use Doctrine\Common\Collections\Collection;
 use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
