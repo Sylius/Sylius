@@ -56,11 +56,11 @@ final class CouponGenerationAmountValidator extends ConstraintValidator
         if (!$this->generationPolicy->isGenerationPossible($instruction)) {
             $this->context->addViolation(
                 $constraint->message,
-                array(
+                [
                     '%expectedAmount%' => $instruction->getAmount(),
                     '%codeLength%' => $instruction->getCodeLength(),
                     '%possibleAmount%' => $this->generationPolicy->getPossibleGenerationAmount($instruction)
-                )
+                ]
             );
         }
     }

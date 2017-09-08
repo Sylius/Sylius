@@ -52,7 +52,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      */
     public function selectRuleOption($option, $value, $multiple = false)
     {
-        $this->getLastCollectionItem('rules')->find('named', array('select', $option))->selectOption($value, $multiple);
+        $this->getLastCollectionItem('rules')->find('named', ['select', $option])->selectOption($value, $multiple);
     }
 
     /**
@@ -115,7 +115,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      */
     public function selectActionOption($option, $value, $multiple = false)
     {
-        $this->getLastCollectionItem('actions')->find('named', array('select', $option))->selectOption($value, $multiple);
+        $this->getLastCollectionItem('actions')->find('named', ['select', $option])->selectOption($value, $multiple);
     }
 
     /**

@@ -32,12 +32,12 @@ class PromoteUserCommand extends AbstractRoleCommand
         $this
             ->setName('sylius:user:promote')
             ->setDescription('Promotes a user by adding roles.')
-            ->setDefinition(array(
+            ->setDefinition([
                 new InputArgument('email', InputArgument::REQUIRED, 'Email'),
                 new InputArgument('roles', InputArgument::IS_ARRAY, 'Security roles'),
                 new InputOption('super-admin', null, InputOption::VALUE_NONE, 'Set the user as a super admin'),
                 new InputOption('user-type', null, InputOption::VALUE_REQUIRED, 'User type'),
-            ))
+            ])
             ->setHelp(<<<EOT
 The <info>sylius:user:promote</info> command promotes a user by adding security roles
 
