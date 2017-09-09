@@ -76,21 +76,21 @@ trait SyliusPluginTrait
      *
      * @return ExtensionInterface|null
      */
-    abstract protected function createContainerExtension(): ?ExtensionInterface;
+    abstract protected function createContainerExtension();
 
     /**
      * Returns the bundle name (the class short name).
      *
      * @return string The Bundle name
      */
-    abstract protected function getName(): string;
+    abstract protected function getName();
 
     /**
      * Gets the Bundle namespace.
      *
      * @return string The Bundle namespace
      */
-    abstract protected function getNamespace(): string;
+    abstract protected function getNamespace();
 
     /**
      * Returns the plugin's container extension class.
