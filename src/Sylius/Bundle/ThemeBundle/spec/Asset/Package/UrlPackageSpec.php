@@ -18,6 +18,7 @@ use Sylius\Bundle\ThemeBundle\Asset\PathResolverInterface;
 use Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Symfony\Component\Asset\PackageInterface;
+use Symfony\Component\Asset\UrlPackage;
 use Symfony\Component\Asset\VersionStrategy\VersionStrategyInterface;
 
 /**
@@ -39,12 +40,16 @@ final class UrlPackageSpec extends ObjectBehavior
         $this->shouldImplement(PackageInterface::class);
     }
 
+    function it_extends_symfony_url_package(): void
+    {
+        $this->shouldImplement(UrlPackage::class);
+    }
+
     function it_returns_vanilla_url_if_there_are_no_active_themes_and_with_base_url(
         VersionStrategyInterface $versionStrategy,
         ThemeContextInterface $themeContext,
         PathResolverInterface $urlResolver
-    ): void
-    {
+    ): void {
         $this->beConstructedWith('https://cdn-url.com/', $versionStrategy, $themeContext, $urlResolver);
 
         $url = 'bundles/sample/asset.js';

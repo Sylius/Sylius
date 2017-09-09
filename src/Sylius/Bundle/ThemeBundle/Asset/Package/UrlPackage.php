@@ -8,6 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 declare(strict_types=1);
 
 namespace Sylius\Bundle\ThemeBundle\Asset\Package;
@@ -63,7 +64,7 @@ class UrlPackage extends BaseUrlPackage
         parent::__construct($baseUrls, $versionStrategy, $context);
 
         if (!is_array($baseUrls)) {
-            $baseUrls = (array)$baseUrls;
+            $baseUrls = (array) $baseUrls;
         }
 
         foreach ($baseUrls as $baseUrl) {
@@ -112,10 +113,10 @@ class UrlPackage extends BaseUrlPackage
     }
 
     /**
-     * @param $urls
+     * @param array $urls
      * @return array
      */
-    private function getSslUrls($urls): array
+    private function getSslUrls(array $urls): array
     {
         $sslUrls = [];
 
