@@ -64,11 +64,11 @@ to ensure your plugin's extraordinary quality.
 
 Besides the way you are creating plugins (based on our skeleton or on your own), there are a few naming conventions that should be followed:
 
- * Bundle class must have a `Plugin` suffix instead of `Bundle` in its name (e.g. InvoicePlugin).
+ * Bundle class must have a ``Plugin`` suffix instead of ``Bundle`` in its name (e.g. InvoicePlugin).
  * Bundle class must use the ``Sylius\Bundle\CoreBundle\Application\SyliusPluginTrait``.
  * The name of the extension in DependencyInjection folder must follow the regular Symfony rules (e.g. InvoiceExtension).
- * The plugin shouldn't have Sylius prefix in its name. `Plugin` suffix in terms of bundles is unique for Sylius at the moment.
+ * The plugin shouldn't have Sylius prefix in its name. ``Plugin`` suffix in terms of bundles is unique for Sylius at the moment.
 
 The following rules are applied to all bundles which will provide an integration with the whole Sylius platform
-(`sylius/sylius` or `sylius/core-bundle` in vendors). Reusable components for the whole Symfony community, which will be based
+(``sylius/sylius`` or ``sylius/core-bundle`` in vendors). Reusable components for the whole Symfony community, which will be based
 just on some Sylius bundles should follow regular Symfony conventions.
