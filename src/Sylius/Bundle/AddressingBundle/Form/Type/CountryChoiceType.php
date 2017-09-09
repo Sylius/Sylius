@@ -70,6 +70,7 @@ final class CountryChoiceType extends AbstractType
                 'label' => 'sylius.form.address.country',
                 'placeholder' => 'sylius.form.country.select',
             ])
+            ->setAllowedTypes('choice_filter', ['null', 'callable'])
         ;
     }
 
