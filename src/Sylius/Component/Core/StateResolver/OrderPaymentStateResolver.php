@@ -16,10 +16,10 @@ namespace Sylius\Component\Core\StateResolver;
 use Doctrine\Common\Collections\Collection;
 use SM\Factory\FactoryInterface;
 use SM\StateMachine\StateMachineInterface;
-use Sylius\Component\Order\Model\OrderInterface;
-use Sylius\Component\Order\StateResolver\StateResolverInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\OrderPaymentTransitions;
+use Sylius\Component\Order\Model\OrderInterface;
+use Sylius\Component\Order\StateResolver\StateResolverInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>

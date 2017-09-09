@@ -5,10 +5,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\LocaleBundle\Listener;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use Sylius\Bundle\LocaleBundle\Listener\RequestLocaleSetter;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
-use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;

@@ -15,7 +15,6 @@ namespace spec\Sylius\Bundle\OrderBundle\NumberAssigner;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\OrderBundle\NumberAssigner\OrderNumberAssigner;
 use Sylius\Bundle\OrderBundle\NumberAssigner\OrderNumberAssignerInterface;
 use Sylius\Bundle\OrderBundle\NumberGenerator\OrderNumberGeneratorInterface;
 use Sylius\Component\Order\Model\OrderInterface;

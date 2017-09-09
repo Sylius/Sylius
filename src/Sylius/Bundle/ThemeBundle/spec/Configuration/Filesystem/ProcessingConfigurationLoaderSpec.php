@@ -16,7 +16,6 @@ namespace spec\Sylius\Bundle\ThemeBundle\Configuration\Filesystem;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ThemeBundle\Configuration\ConfigurationProcessorInterface;
 use Sylius\Bundle\ThemeBundle\Configuration\Filesystem\ConfigurationLoaderInterface;
-use Sylius\Bundle\ThemeBundle\Configuration\Filesystem\ProcessingConfigurationLoader;
 
 /**
  * @author Kamil Kokot <kamil@kokot.me>

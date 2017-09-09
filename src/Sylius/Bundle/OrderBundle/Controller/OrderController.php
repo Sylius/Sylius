@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\OrderBundle\Controller;
 
-use Doctrine\ORM\EntityManager;
 use FOS\RestBundle\View\View;
-use Payum\Core\Registry\RegistryInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
@@ -25,11 +23,9 @@ use Sylius\Component\Order\SyliusCartEvents;
 use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use Webmozart\Assert\Assert;
 
 class OrderController extends ResourceController
 {

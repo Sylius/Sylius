@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\CoreBundle\Installer\Requirement;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Installer\Requirement\Requirement;
 
 final class RequirementSpec extends ObjectBehavior
 {

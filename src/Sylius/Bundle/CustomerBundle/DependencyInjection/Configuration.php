@@ -14,14 +14,14 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CustomerBundle\DependencyInjection;
 
 use Sylius\Bundle\CustomerBundle\Form\Type\CustomerGroupType;
+use Sylius\Bundle\CustomerBundle\Form\Type\CustomerType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Bundle\CustomerBundle\Form\Type\CustomerType;
-use Sylius\Component\Customer\Model\CustomerGroup;
-use Sylius\Component\Resource\Factory\Factory;
 use Sylius\Component\Customer\Model\Customer;
-use Sylius\Component\Customer\Model\CustomerInterface;
+use Sylius\Component\Customer\Model\CustomerGroup;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
+use Sylius\Component\Customer\Model\CustomerInterface;
+use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;

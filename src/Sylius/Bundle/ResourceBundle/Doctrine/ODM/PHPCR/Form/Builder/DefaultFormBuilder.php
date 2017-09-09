@@ -14,8 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\Form\Builder;
 
 use Doctrine\ODM\PHPCR\DocumentManagerInterface;
-use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\Form\Subscriber\DefaultPathSubscriber;
-use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\Form\Subscriber\NameResolverSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Builder\DefaultFormBuilderInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Symfony\Component\Form\FormBuilderInterface;

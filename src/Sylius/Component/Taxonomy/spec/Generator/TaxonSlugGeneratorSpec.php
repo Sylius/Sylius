@@ -14,11 +14,9 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\Taxonomy\Generator;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Taxonomy\Generator\TaxonSlugGenerator;
 use Sylius\Component\Taxonomy\Generator\TaxonSlugGeneratorInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Model\TaxonTranslationInterface;
-use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 
 final class TaxonSlugGeneratorSpec extends ObjectBehavior
 {

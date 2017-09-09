@@ -14,9 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\LocaleBundle\Templating\Helper;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\LocaleBundle\Templating\Helper\LocaleHelper;
 use Sylius\Bundle\LocaleBundle\Templating\Helper\LocaleHelperInterface;
-use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Converter\LocaleConverterInterface;
 use Symfony\Component\Templating\Helper\Helper;
 

@@ -16,7 +16,6 @@ namespace spec\Sylius\Bundle\OrderBundle\Remover;
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\OrderBundle\Remover\ExpiredCartsRemover;
 use Sylius\Bundle\OrderBundle\SyliusExpiredCartsEvents;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Remover\ExpiredCartsRemoverInterface;

@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Bundle\FixturesBundle\Listener;
 
 use Psr\Log\LoggerInterface;
-use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 /**
  * @author Kamil Kokot <kamil@kokot.me>

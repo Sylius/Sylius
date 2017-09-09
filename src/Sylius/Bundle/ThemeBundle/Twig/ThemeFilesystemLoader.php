@@ -15,7 +15,6 @@ namespace Sylius\Bundle\ThemeBundle\Twig;
 
 use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\Templating\TemplateNameParserInterface;
-use Symfony\Component\Templating\TemplateReferenceInterface;
 
 /**
  * @author Kamil Kokot <kamil@kokot.me>

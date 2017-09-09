@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\OrderBundle\Controller;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\OrderBundle\Controller\AddToCartCommand;
 use Sylius\Bundle\OrderBundle\Controller\AddToCartCommandInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;

@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Component\Addressing\Comparator;
 
-use Sylius\Component\Addressing\Comparator\AddressComparator;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Addressing\Comparator\AddressComparator;
 use Sylius\Component\Addressing\Comparator\AddressComparatorInterface;
 use Sylius\Component\Addressing\Model\AddressInterface;
 

@@ -14,8 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\FixturesBundle\Suite;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use Sylius\Bundle\FixturesBundle\Suite\LazySuiteRegistry;
 use Sylius\Bundle\FixturesBundle\Suite\SuiteFactoryInterface;
 use Sylius\Bundle\FixturesBundle\Suite\SuiteInterface;
 use Sylius\Bundle\FixturesBundle\Suite\SuiteNotFoundException;

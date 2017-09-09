@@ -16,7 +16,6 @@ namespace spec\Sylius\Component\User\Security;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\User\Model\UserInterface;
-use Sylius\Component\User\Security\PasswordUpdater;
 use Sylius\Component\User\Security\PasswordUpdaterInterface;
 use Sylius\Component\User\Security\UserPasswordEncoderInterface;
 

@@ -16,7 +16,6 @@ namespace spec\Sylius\Bundle\ThemeBundle\Locator;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ThemeBundle\Factory\FinderFactoryInterface;
 use Sylius\Bundle\ThemeBundle\Locator\FileLocatorInterface;
-use Sylius\Bundle\ThemeBundle\Locator\RecursiveFileLocator;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 

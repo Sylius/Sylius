@@ -15,7 +15,6 @@ namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ResourceBundle\Controller\AuthorizationCheckerInterface;
-use Sylius\Bundle\ResourceBundle\Controller\DisabledAuthorizationChecker;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 
 /**

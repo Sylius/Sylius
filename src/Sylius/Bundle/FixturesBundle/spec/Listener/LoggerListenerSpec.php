@@ -12,7 +12,6 @@ use Sylius\Bundle\FixturesBundle\Listener\BeforeFixtureListenerInterface;
 use Sylius\Bundle\FixturesBundle\Listener\BeforeSuiteListenerInterface;
 use Sylius\Bundle\FixturesBundle\Listener\FixtureEvent;
 use Sylius\Bundle\FixturesBundle\Listener\ListenerInterface;
-use Sylius\Bundle\FixturesBundle\Listener\LoggerListener;
 use Sylius\Bundle\FixturesBundle\Listener\SuiteEvent;
 use Sylius\Bundle\FixturesBundle\Suite\SuiteInterface;
 

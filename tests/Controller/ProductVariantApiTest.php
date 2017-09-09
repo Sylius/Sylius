@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Tests\Controller;
 
 use Lakion\ApiTestCase\JsonApiTestCase;
-use Sylius\Bundle\AdminApiBundle\Form\Type\ProductVariantType;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Symfony\Component\HttpFoundation\Response;

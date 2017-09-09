@@ -16,7 +16,6 @@ namespace spec\Sylius\Bundle\UserBundle\Security;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\UserBundle\Event\UserEvent;
-use Sylius\Bundle\UserBundle\Security\UserLogin;
 use Sylius\Bundle\UserBundle\Security\UserLoginInterface;
 use Sylius\Bundle\UserBundle\UserEvents;
 use Sylius\Component\User\Model\UserInterface;

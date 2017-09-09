@@ -12,9 +12,9 @@
 namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Resource\Model\ResourceInterface;
-use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
+use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * @author Magdalena Banasiak <magdalena.banasiak@gmail.com>

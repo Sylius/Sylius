@@ -16,7 +16,6 @@ namespace spec\Sylius\Component\User\Security;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\User\Model\CredentialsHolderInterface;
 use Sylius\Component\User\Security\UserPasswordEncoderInterface;
-use Sylius\Component\User\Security\UserPbkdf2PasswordEncoder;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>

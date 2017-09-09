@@ -16,7 +16,6 @@ namespace spec\Sylius\Bundle\ResourceBundle\Validator;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Validator\Constraints\Enabled;
-use Sylius\Bundle\ResourceBundle\Validator\EnabledValidator;
 use Sylius\Component\Resource\Model\ToggleableInterface;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;

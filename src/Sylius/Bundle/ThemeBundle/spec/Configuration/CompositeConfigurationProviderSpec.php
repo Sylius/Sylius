@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ThemeBundle\Configuration;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ThemeBundle\Configuration\CompositeConfigurationProvider;
 use Sylius\Bundle\ThemeBundle\Configuration\ConfigurationProviderInterface;
 
 /**

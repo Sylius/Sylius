@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB;
 
 use Doctrine\MongoDB\Query\Builder as QueryBuilder;
-use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
 use Sylius\Component\Resource\Repository\TranslatableRepositoryInterface;
 
 /**

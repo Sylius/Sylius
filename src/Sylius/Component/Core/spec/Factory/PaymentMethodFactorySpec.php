@@ -15,7 +15,6 @@ namespace spec\Sylius\Component\Core\Factory;
 
 use Payum\Core\Model\GatewayConfigInterface;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Factory\PaymentMethodFactory;
 use Sylius\Component\Core\Factory\PaymentMethodFactoryInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;

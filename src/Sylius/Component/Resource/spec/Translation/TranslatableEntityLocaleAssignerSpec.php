@@ -16,7 +16,6 @@ namespace spec\Sylius\Component\Resource\Translation;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Resource\Model\TranslatableInterface;
 use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
-use Sylius\Component\Resource\Translation\TranslatableEntityLocaleAssigner;
 use Sylius\Component\Resource\Translation\TranslatableEntityLocaleAssignerInterface;
 
 /**

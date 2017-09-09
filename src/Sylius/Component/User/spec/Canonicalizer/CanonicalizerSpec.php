@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\User\Canonicalizer;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\User\Canonicalizer\Canonicalizer;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 
 /**

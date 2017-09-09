@@ -16,7 +16,6 @@ namespace spec\Sylius\Bundle\ChannelBundle\Context\FakeChannel;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ChannelBundle\Context\FakeChannel\FakeChannelCodeProviderInterface;
-use Sylius\Bundle\ChannelBundle\Context\FakeChannel\FakeChannelContext;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Channel\Model\ChannelInterface;

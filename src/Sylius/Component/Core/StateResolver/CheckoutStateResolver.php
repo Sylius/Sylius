@@ -16,12 +16,9 @@ namespace Sylius\Component\Core\StateResolver;
 use SM\Factory\FactoryInterface;
 use Sylius\Component\Core\Checker\OrderPaymentMethodSelectionRequirementCheckerInterface;
 use Sylius\Component\Core\Checker\OrderShippingMethodSelectionRequirementCheckerInterface;
-use Sylius\Component\Core\Model\OrderItemInterface;
-use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\StateResolver\StateResolverInterface;
-use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>

@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\Resource\Generator;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Resource\Generator\RandomnessGenerator;
 use Sylius\Component\Resource\Generator\RandomnessGeneratorInterface;
 
 /**

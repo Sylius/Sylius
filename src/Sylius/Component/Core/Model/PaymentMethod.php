@@ -19,7 +19,6 @@ use Payum\Core\Model\GatewayConfigInterface;
 use Sylius\Component\Channel\Model\ChannelInterface as BaseChannelInterface;
 use Sylius\Component\Payment\Model\PaymentMethod as BasePaymentMethod;
 use Sylius\Component\Payment\Model\PaymentMethodTranslation;
-use Sylius\Component\Resource\Exception\UnsupportedMethodException;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>

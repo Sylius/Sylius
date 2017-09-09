@@ -14,11 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Command;
 
 use RuntimeException;
-use Sylius\Bundle\CoreBundle\Installer\Renderer\TableRenderer;
-use Sylius\Bundle\CoreBundle\Installer\Requirement\Requirement;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Style\SymfonyStyle;
 
 final class CheckRequirementsCommand extends AbstractInstallCommand
 {

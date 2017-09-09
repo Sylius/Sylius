@@ -16,7 +16,6 @@ namespace Sylius\Bundle\FixturesBundle\DependencyInjection\Compiler;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
-use Webmozart\Assert\Assert;
 
 /**
  * @author Kamil Kokot <kamil@kokot.me>

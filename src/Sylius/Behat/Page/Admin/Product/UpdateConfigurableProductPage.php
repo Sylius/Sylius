@@ -42,7 +42,7 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
      */
     public function isProductOptionChosen($option)
     {
-        return $this->getElement('options')->find('named', array('option', $option))->hasAttribute('selected');
+        return $this->getElement('options')->find('named', ['option', $option])->hasAttribute('selected');
     }
 
     /**

@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Payment\Repository;
 
-use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 

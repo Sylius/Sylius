@@ -15,7 +15,6 @@ namespace Sylius\Bundle\AddressingBundle\Tests;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * @author Magdalena Banasiak <magdalena.banasiak@gmail.com>

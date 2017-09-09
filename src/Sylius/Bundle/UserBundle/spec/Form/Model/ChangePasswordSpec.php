@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\UserBundle\Form\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\UserBundle\Form\Model\ChangePassword;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>

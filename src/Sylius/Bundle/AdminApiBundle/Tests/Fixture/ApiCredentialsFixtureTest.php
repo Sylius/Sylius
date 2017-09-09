@@ -15,8 +15,8 @@ namespace Sylius\Bundle\AdminApiBundle\Tests\Fixture;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
-use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Bundle\AdminApiBundle\Fixture\ApiClientFixture;
+use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
