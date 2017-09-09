@@ -46,7 +46,7 @@
         "phpspec/phpspec": "^4.0",
         "phpunit/phpunit": "^5.6",
         "symfony/security-bundle": "^3.2",
-        "symfony/swiftmailer-bundle": "^2.4",
+        "symfony/swiftmailer-bundle": "^3.0",
         "incenteev/composer-parameter-handler": "~2.0"
     },
     "suggest": {
