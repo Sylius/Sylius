@@ -134,6 +134,17 @@ final class LoginContext implements Context
     }
 
     /**
+     * @When I sign in with email :email and password :password
+     */
+    public function iSignInWithEmailAndPassword(string $email, string $password): void
+    {
+        $this->iWantToLogIn();
+        $this->iSpecifyTheUsername($email);
+        $this->iSpecifyThePasswordAs($password);
+        $this->iLogIn();
+    }
+
+    /**
      * @When I register with email :email and password :password
      */
     public function iRegisterWithEmailAndPassword($email, $password)
