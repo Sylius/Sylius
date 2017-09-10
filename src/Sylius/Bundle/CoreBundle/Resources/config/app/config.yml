@@ -29,6 +29,9 @@ doctrine:
         entity_managers:
             default:
                 auto_mapping: true
+    dbal:
+        types:
+            datetime: Sylius\Bundle\ResourceBundle\Doctrine\DBAL\Type\UTCDateTimeType
 
 doctrine_cache:
     providers:
