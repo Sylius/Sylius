@@ -24,7 +24,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-final class ProductTaxonController extends ResourceController
+class ProductTaxonController extends ResourceController
 {
     /**
      * @param Request $request

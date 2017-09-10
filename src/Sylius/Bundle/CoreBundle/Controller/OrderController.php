@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
-final class OrderController extends BaseOrderController
+class OrderController extends BaseOrderController
 {
     /**
      * @param Request $request

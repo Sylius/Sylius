@@ -25,7 +25,7 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class ProductAttributeController extends ResourceController
+class ProductAttributeController extends ResourceController
 {
     /**
      * @param Request $request
