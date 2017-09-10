@@ -24,7 +24,7 @@ class CustomerRepository extends EntityRepository implements CustomerRepositoryI
     /**
      * {@inheritdoc}
      */
-    public function count(): int
+    public function countCustomers(): int
     {
         return (int) $this->createQueryBuilder('o')
             ->select('COUNT(o.id)')
