@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "8436f0e11bba1a3bc3f20581781f1773",
+    "content-hash": "48731b16645fef0eb65855b1af9df76c",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -5256,23 +5256,23 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v3.3.6",
+            "version": "v3.3.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "6f80cbd2dd89c5308b14e03d806356fac72c263e"
+                "reference": "645d24a119bc7b8326bb01e7b5b696bc3be337ec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/6f80cbd2dd89c5308b14e03d806356fac72c263e",
-                "reference": "6f80cbd2dd89c5308b14e03d806356fac72c263e",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/645d24a119bc7b8326bb01e7b5b696bc3be337ec",
+                "reference": "645d24a119bc7b8326bb01e7b5b696bc3be337ec",
                 "shasum": ""
             },
             "require": {
                 "doctrine/common": "~2.4",
                 "ext-xml": "*",
                 "fig/link-util": "^1.0",
-                "php": ">=5.5.9",
+                "php": "^5.5.9|>=7.0.8",
                 "psr/cache": "~1.0",
                 "psr/container": "^1.0",
                 "psr/link": "^1.0",
@@ -5286,7 +5286,7 @@
                 "twig/twig": "~1.34|~2.4"
             },
             "conflict": {
-                "phpdocumentor/reflection-docblock": "<3.0||>=3.2.0",
+                "phpdocumentor/reflection-docblock": "<3.0||>=3.2.0,<3.2.2",
                 "phpdocumentor/type-resolver": "<0.2.0",
                 "phpunit/phpunit": "<4.8.35|<5.4.3,>=5.0"
             },
@@ -5357,7 +5357,7 @@
                 "egulias/email-validator": "~1.2,>=1.2.8|~2.0",
                 "monolog/monolog": "~1.11",
                 "ocramius/proxy-manager": "~0.4|~1.0|~2.0",
-                "phpdocumentor/reflection-docblock": "^3.0",
+                "phpdocumentor/reflection-docblock": "^3.0|^4.0",
                 "predis/predis": "~1.0",
                 "sensio/framework-extra-bundle": "^3.0.2",
                 "symfony/phpunit-bridge": "~3.2",
@@ -5405,7 +5405,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2017-08-01T10:26:30+00:00"
+            "time": "2017-08-28T22:35:20+00:00"
         },
         {
             "name": "twig/extensions",
@@ -6158,16 +6158,16 @@
     "packages-dev": [
         {
             "name": "akeneo/phpspec-skip-example-extension",
-            "version": "v3.0.0",
+            "version": "v3.0.0-alpha1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/akeneo/PhpSpecSkipExampleExtension.git",
-                "reference": "9e24c577701558765699eb54aa32f86aa33eaba5"
+                "reference": "4aab9c7ac66caf4c488a9008981f0b62627edad6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/akeneo/PhpSpecSkipExampleExtension/zipball/9e24c577701558765699eb54aa32f86aa33eaba5",
-                "reference": "9e24c577701558765699eb54aa32f86aa33eaba5",
+                "url": "https://api.github.com/repos/akeneo/PhpSpecSkipExampleExtension/zipball/4aab9c7ac66caf4c488a9008981f0b62627edad6",
+                "reference": "4aab9c7ac66caf4c488a9008981f0b62627edad6",
                 "shasum": ""
             },
             "require": {
@@ -6207,7 +6207,7 @@
                 }
             ],
             "description": "Skip your PhpSpec examples through annotations",
-            "time": "2017-08-03T09:59:50+00:00"
+            "time": "2017-07-10T13:11:28+00:00"
         },
         {
             "name": "behat/behat",
@@ -9172,7 +9172,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "akeneo/phpspec-skip-example-extension": 15
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
