@@ -847,7 +847,6 @@ final class OrderContext implements Context
     }
 
     /**
-<<<<<<< HEAD
      * @param int $numberOfCustomers
      * @param int $numberOfOrders
      * @param string $total
@@ -937,8 +936,7 @@ final class OrderContext implements Context
         int $productCount,
         ProductInterface $product,
         bool $isFulfilled = false
-    ): void
-    {
+    ): void {
         for ($i = 0; $i < $orderCount; $i++) {
             $order = $this->createOrder($customer, uniqid('#'), $channel);
 
@@ -946,7 +944,7 @@ final class OrderContext implements Context
                 $order,
                 $channel,
                 $this->variantResolver->getVariant($product),
-                (int)$productCount
+                (int) $productCount
             );
 
             $order->setState($isFulfilled ? OrderInterface::STATE_FULFILLED : OrderInterface::STATE_NEW);

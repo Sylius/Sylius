@@ -59,11 +59,6 @@ final class CheckoutContext implements Context
     private $registerPage;
 
     /**
-     * @var LoginPageInterface
-     */
-    private $loginPage;
-
-    /**
      * @var CurrentPageResolverInterface
      */
     private $currentPageResolver;
@@ -89,7 +84,6 @@ final class CheckoutContext implements Context
      * @param SelectShippingPageInterface $selectShippingPage
      * @param CompletePageInterface $completePage
      * @param RegisterPageInterface $registerPage
-     * @param LoginPageInterface $loginPage
      * @param CurrentPageResolverInterface $currentPageResolver
      * @param CheckoutAddressingContext $addressingContext
      * @param CheckoutShippingContext $shippingContext
@@ -101,7 +95,6 @@ final class CheckoutContext implements Context
         SelectShippingPageInterface $selectShippingPage,
         CompletePageInterface $completePage,
         RegisterPageInterface $registerPage,
-        LoginPageInterface $loginPage,
         CurrentPageResolverInterface $currentPageResolver,
         CheckoutAddressingContext $addressingContext,
         CheckoutShippingContext $shippingContext,
@@ -112,7 +105,6 @@ final class CheckoutContext implements Context
         $this->selectShippingPage = $selectShippingPage;
         $this->completePage = $completePage;
         $this->registerPage = $registerPage;
-        $this->loginPage = $loginPage;
         $this->currentPageResolver = $currentPageResolver;
         $this->addressingContext = $addressingContext;
         $this->shippingContext = $shippingContext;
@@ -249,9 +241,9 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @When I register with email :email and password :password
+     * @When I register with previously used :email email and :password password
      */
-    public function iRegisterWithEmailAndPassword($email, $password)
+    public function iRegisterWithPreviouslyUsedEmailAndPassword(string $email, string $password): void
     {
         $this->registerPage->open();
         $this->registerPage->specifyEmail($email);
@@ -260,16 +252,5 @@ final class CheckoutContext implements Context
         $this->registerPage->specifyFirstName('Carrot');
         $this->registerPage->specifyLastName('Ironfoundersson');
         $this->registerPage->register();
-    }
-
-    /**
-     * @When I log in as :email with :password password
-     */
-    public function iLogInAsWithPassword($email, $password)
-    {
-        $this->loginPage->open();
-        $this->loginPage->specifyUsername($email);
-        $this->loginPage->specifyPassword($password);
-        $this->loginPage->logIn();
     }
 }

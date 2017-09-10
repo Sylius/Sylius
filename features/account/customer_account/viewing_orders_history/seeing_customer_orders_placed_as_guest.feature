@@ -24,6 +24,6 @@ Feature: Seeing customer's orders placed as guest
         And I select "Offline" payment method
         And I complete the payment step
         And I confirm my order
-        And I register with email "ned@stark.com" and password "lannistersAreDumb"
+        And I register with previously used "ned@stark.com" email and "lannistersAreDumb" password
         And I browse my orders
         Then I should see a single order in the list
