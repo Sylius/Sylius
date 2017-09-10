@@ -32,6 +32,7 @@
   * Change autoload path in `web/app.php`: replace 'vendor' with 'app'
   * Change autoload path in `web/app_dev.php`: replace 'vendor' with 'app'
   * Change autoload path in `phpunit.xml.dist`: replace 'vendor' with 'app'
+  * Remove `"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",` from composer.json scripts
 
 ## Packages:
 
