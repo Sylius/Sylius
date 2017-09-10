@@ -5,7 +5,8 @@ Feature: Taxons autocomplete
     I want to get taxons according to my specified phrase
 
     Background:
-        Given the store classifies its products as "T-Shirts", "Watches", "Belts" and "Wallets"
+        Given the store operates on a single channel in "United States"
+        And the store classifies its products as "T-Shirts", "Watches", "Belts" and "Wallets"
         And I am logged in as an administrator
 
     @api
