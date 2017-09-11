@@ -367,6 +367,7 @@
             <argument type="service" id="sylius.behat.page.shop.account.change_password" />
             <argument type="service" id="sylius.behat.page.shop.account.order.index" />
             <argument type="service" id="sylius.behat.page.shop.account.order.show" />
+            <argument type="service" id="sylius.behat.page.shop.account.login" />
             <argument type="service" id="sylius.behat.notification_checker" />
             <tag name="fob.context_service" />
         </service>

@@ -21,6 +21,7 @@ use Sylius\Behat\Page\Shop\Account\DashboardPageInterface;
 use Sylius\Behat\Page\Shop\Account\Order\IndexPageInterface;
 use Sylius\Behat\Page\Shop\Account\Order\ShowPageInterface;
 use Sylius\Behat\Page\Shop\Account\ProfileUpdatePageInterface;
+use Sylius\Behat\Page\Shop\Account\LoginPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -57,6 +58,11 @@ final class AccountContext implements Context
     private $orderShowPage;
 
     /**
+     * @var LoginPageInterface
+     */
+    private $loginPage;
+
+    /**
      * @var NotificationCheckerInterface
      */
     private $notificationChecker;
@@ -67,6 +73,7 @@ final class AccountContext implements Context
      * @param ChangePasswordPageInterface $changePasswordPage
      * @param IndexPageInterface $orderIndexPage
      * @param ShowPageInterface $orderShowPage
+     * @param LoginPageInterface $loginPage
      * @param NotificationCheckerInterface $notificationChecker
      */
     public function __construct(
@@ -75,6 +82,7 @@ final class AccountContext implements Context
         ChangePasswordPageInterface $changePasswordPage,
         IndexPageInterface $orderIndexPage,
         ShowPageInterface $orderShowPage,
+        LoginPageInterface $loginPage,
         NotificationCheckerInterface $notificationChecker
     ) {
         $this->dashboardPage = $dashboardPage;
@@ -82,6 +90,7 @@ final class AccountContext implements Context
         $this->changePasswordPage = $changePasswordPage;
         $this->orderIndexPage = $orderIndexPage;
         $this->orderShowPage = $orderShowPage;
+        $this->loginPage = $loginPage;
         $this->notificationChecker = $notificationChecker;
     }
 
@@ -429,6 +438,22 @@ final class AccountContext implements Context
     public function iShouldBeAbleToChangePaymentMethodForThisOrder(OrderInterface $order)
     {
         Assert::true($this->orderIndexPage->isItPossibleToChangePaymentMethodForOrder($order));
+    }
+
+    /**
+     * @Then I should be redirected to my account dashboard
+     */
+    public function iShouldBeRedirectedToMyAccountDashboard()
+    {
+        Assert::true($this->dashboardPage->isOpen(), 'User should be on the account panel dashboard page but they are not.');
+    }
+
+    /**
+     * @When I want to log in
+     */
+    public function iWantToLogIn()
+    {
+        $this->loginPage->tryToOpen();
     }
 
     /**

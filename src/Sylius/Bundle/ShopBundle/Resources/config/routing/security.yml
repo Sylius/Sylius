@@ -8,6 +8,7 @@ sylius_shop_login:
         _controller: sylius.controller.security:loginAction
         _sylius:
             template: "@SyliusShop/login.html.twig"
+            logged_in_route: sylius_shop_account_dashboard
 
 sylius_shop_login_check:
     path: /login-check
