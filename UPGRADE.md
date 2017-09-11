@@ -103,6 +103,10 @@
 
 * Constructor of `Sylius\Bundle\CoreBundle\Context\SessionAndChannelBasedCartContext` has been changed to use `Sylius\Component\Core\Storage\CartStorageInterface`
 
+* `SessionCartSubscriber` and `ShopUserLogoutHandler` has been moved to ShopBundle. If you used them, you need to add ShopBundle to your Kernel or define this services by your own.
+
+* The service definition of `session_and_channel_based` has been moved to ShopBundle. If you used it, you need to add ShopBundle to your Kernel or define this services by your own.
+
 ### Customer / CustomerBundle
 
 * The following methods does not longer have a default null argument and requires one to be explicitly passed:
@@ -137,6 +141,16 @@
 * In statistics to display information about only fulfilled orders
   `OrderRepositoryInterface::countByChannel()` signature was changed to `OrderRepositoryInterface::countFulfilledByChannel()`.
 
+* The service definition of `sylius.context.cart.session_based` has been removed. Declare it by your own if you want to use `SessionBasedCartContext`
+
+    ```xml
+        <service id="sylius.context.cart.session_based" class="Sylius\Bundle\OrderBundle\Context\SessionBasedCartContext">
+            <argument type="service" id="session" />
+            <argument>_sylius.cart</argument>
+            <argument type="service" id="sylius.repository.order" />
+            <tag name="sylius.context.cart" priority="-777" />
+        </service>
+    ```
 ### Payment / PaymentBundle
 
 * In `PaymentInterface::setMethod` method the default value of `PaymentMethodInterface $method` parameter has been removed.
