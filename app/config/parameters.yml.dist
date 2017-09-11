@@ -12,6 +12,7 @@ parameters:
     mailer_host: 127.0.0.1
     mailer_user: ~
     mailer_password: ~
+    mailer_port: ~
 
     secret: EDITME
     locale: en_US
