@@ -33,6 +33,7 @@ final class Configuration implements ConfigurationInterface
             ->children()
                 ->enumNode('locale_switcher')->values(['storage', 'url'])->defaultValue('url')->end()
                 ->scalarNode('firewall_context_name')->defaultValue('shop')->end()
+                ->scalarNode('cart_session_key')->defaultValue('_sylius.cart')->end()
                 ->arrayNode('checkout_resolver')
                     ->addDefaultsIfNotSet()
                     ->children()

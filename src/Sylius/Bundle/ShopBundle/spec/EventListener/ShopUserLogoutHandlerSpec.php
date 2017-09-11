@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\CoreBundle\EventListener;
+namespace spec\Sylius\Bundle\ShopBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
@@ -30,7 +30,7 @@ final class ShopUserLogoutHandlerSpec extends ObjectBehavior
 {
     function let(HttpUtils $httpUtils, SessionInterface $session, ChannelContextInterface $channelContext): void
     {
-        $this->beConstructedWith($httpUtils, '/', $session, $channelContext);
+        $this->beConstructedWith($httpUtils, '/', $session, $channelContext, '_sylius.cart');
     }
 
     function it_is_default_logout_success_handler(): void
