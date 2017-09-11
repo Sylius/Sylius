@@ -222,7 +222,13 @@
 * If `sylius_shop.locale_switcher` is set to `storage`, `LocaleStrippingRouter` is loaded which strips out `_locale` parameter
   from the URL if it's the same as the one already in the storage.
  
-* `ShopUserLogoutHandler` has one more constructor parameter. Add custom value or inject a `%sylius_shop.cart_session_key%` parameter if you want to use it.
+* `ShopUserLogoutHandler` has different parameters in constructor:
+    * `HttpUtils $httpUtils`
+    * `string $targetUrl`
+    * `ChannelContextInterface $channelContext`
+    * `CartStorageInterface $cartStorage`
+
+* Last constructor parameter of `SessionCartSubscriber` is now `CartStorageInterface $cartStorage` instead of `string $sessionKeyName`
 
 ### Shipping / ShippingBundle
 

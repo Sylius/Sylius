@@ -16,6 +16,7 @@ namespace spec\Sylius\Bundle\ShopBundle\EventListener;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Storage\CartStorageInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -28,9 +29,12 @@ use Symfony\Component\Security\Http\Logout\LogoutSuccessHandlerInterface;
  */
 final class ShopUserLogoutHandlerSpec extends ObjectBehavior
 {
-    function let(HttpUtils $httpUtils, SessionInterface $session, ChannelContextInterface $channelContext): void
-    {
-        $this->beConstructedWith($httpUtils, '/', $session, $channelContext, '_sylius.cart');
+    function let(
+        HttpUtils $httpUtils,
+        ChannelContextInterface $channelContext,
+        CartStorageInterface $cartStorage
+    ): void {
+        $this->beConstructedWith($httpUtils, '/', $channelContext, $cartStorage);
     }
 
     function it_is_default_logout_success_handler(): void
@@ -49,12 +53,11 @@ final class ShopUserLogoutHandlerSpec extends ObjectBehavior
         HttpUtils $httpUtils,
         Request $request,
         Response $response,
-        SessionInterface $session
+        CartStorageInterface $cartStorage
     ): void {
         $channelContext->getChannel()->willReturn($channel);
-        $channel->getCode()->willReturn('WEB_US');
 
-        $session->remove('_sylius.cart.WEB_US')->shouldBeCalled();
+        $cartStorage->removeForChannel($channel)->shouldBeCalled();
 
         $httpUtils->createRedirectResponse($request, '/')->willReturn($response);
 
