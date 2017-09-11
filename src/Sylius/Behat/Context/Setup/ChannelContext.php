@@ -18,6 +18,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Test\Services\DefaultChannelFactoryInterface;
 
@@ -114,7 +115,7 @@ final class ChannelContext implements Context
      */
     public function theStoreOperatesOnAChannelNamed($channelIdentifier, $currencyCode = null)
     {
-        $channelCode = $this->resolveChannelCode($channelIdentifier);
+        $channelCode = StringInflector::nameToLowercaseCode($channelIdentifier);
         $defaultData = $this->defaultChannelFactory->create($channelCode, $channelIdentifier, $currencyCode);
 
         $this->sharedStorage->setClipboard($defaultData);
@@ -205,15 +206,5 @@ final class ChannelContext implements Context
         $channel->setEnabled($state);
         $this->channelManager->flush();
         $this->sharedStorage->set('channel', $channel);
-    }
-
-    /**
-     * @param string $channelIdentifier
-     *
-     * @return string
-     */
-    private function resolveChannelCode($channelIdentifier)
-    {
-        return str_replace(' ', '_', strtolower($channelIdentifier));
     }
 }
