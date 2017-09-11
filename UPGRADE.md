@@ -193,6 +193,13 @@
 
 * `ContactController` has been made final, use decoration instead of extending it.
 
+* `_liip_imagine` routing import has been removed and move to the main routing of Sylius app. If you are not importing `app/config/routing.yml` you need to add this import by your own:
+
+    ```yml
+        _liip_imagine:
+            resource: "@LiipImagineBundle/Resources/config/routing.xml"
+     ```
+ 
 ### Shipping / ShippingBundle
 
 * `UnresolvedDefaultShippingMethodException` has been made final, use decoration instead of extending it.
