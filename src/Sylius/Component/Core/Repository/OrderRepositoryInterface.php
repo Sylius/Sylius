@@ -35,6 +35,14 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
     public function createByCustomerIdQueryBuilder($customerId): QueryBuilder;
 
     /**
+     * @param mixed $customerId
+     * @param mixed $channelId
+     *
+     * @return QueryBuilder
+     */
+    public function createByCustomerAndChannelIdQueryBuilder($customerId, $channelId): QueryBuilder;
+
+    /**
      * @param CustomerInterface $customer
      * @param PromotionCouponInterface $coupon
      *

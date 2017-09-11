@@ -435,6 +435,18 @@ final class OrderContext implements Context
         $order->setState(OrderInterface::STATE_NEW);
 
         $this->orderRepository->add($order);
+        $this->sharedStorage->set('order', $order);
+    }
+
+    /**
+     * @Given /^(this customer) has(?:| also) started checkout on a (channel "[^"]+")$/
+     */
+    public function thisCustomerHasStartedCheckoutOnAChannel(CustomerInterface $customer, $channel)
+    {
+        $order = $this->createOrder($customer, null, $channel);
+
+        $this->orderRepository->add($order);
+        $this->sharedStorage->set('order', $order);
     }
 
     /**
