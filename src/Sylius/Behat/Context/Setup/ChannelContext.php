@@ -114,7 +114,8 @@ final class ChannelContext implements Context
      */
     public function theStoreOperatesOnAChannelNamed($channelIdentifier, $currencyCode = null)
     {
-        $defaultData = $this->defaultChannelFactory->create($channelIdentifier, $channelIdentifier, $currencyCode);
+        $channelCode = $this->resolveChannelCode($channelIdentifier);
+        $defaultData = $this->defaultChannelFactory->create($channelCode, $channelIdentifier, $currencyCode);
 
         $this->sharedStorage->setClipboard($defaultData);
         $this->sharedStorage->set('channel', $defaultData['channel']);
@@ -204,5 +205,15 @@ final class ChannelContext implements Context
         $channel->setEnabled($state);
         $this->channelManager->flush();
         $this->sharedStorage->set('channel', $channel);
+    }
+
+    /**
+     * @param string $channelIdentifier
+     *
+     * @return string
+     */
+    private function resolveChannelCode($channelIdentifier)
+    {
+        return str_replace(' ', '_', strtolower($channelIdentifier));
     }
 }
