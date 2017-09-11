@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
+use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Controller\EventDispatcherInterface as ControllerEventDispatcherInterface;
@@ -68,6 +69,22 @@ final class EventDispatcherSpec extends ObjectBehavior
         $eventDispatcher->dispatch('sylius.product.register', Argument::type(ResourceControllerEvent::class))->shouldBeCalled();
 
         $this->dispatch(ResourceActions::CREATE, $requestConfiguration, $resource)->shouldHaveType(ResourceControllerEvent::class);
+    }
+
+    function it_dispatches_event_for_a_collection_of_resources(
+        RequestConfiguration $requestConfiguration,
+        MetadataInterface $metadata,
+        EventDispatcherInterface $eventDispatcher,
+        Collection $resources
+    ): void {
+        $requestConfiguration->getEvent()->willReturn('register');
+        $requestConfiguration->getMetadata()->willReturn($metadata);
+        $metadata->getApplicationName()->willReturn('sylius');
+        $metadata->getName()->willReturn('product');
+
+        $eventDispatcher->dispatch('sylius.product.register', Argument::type(ResourceControllerEvent::class))->shouldBeCalled();
+
+        $this->dispatchMultiple(ResourceActions::CREATE, $requestConfiguration, $resources)->shouldHaveType(ResourceControllerEvent::class);
     }
 
     function it_dispatches_appropriate_pre_event_for_a_resource(

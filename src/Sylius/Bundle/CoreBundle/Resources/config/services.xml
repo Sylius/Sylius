@@ -162,8 +162,11 @@
             <argument type="service" id="sylius.manager.order_sequence" />
         </service>
 
-        <service id="sylius.custom_resource_controller.resource_update_handler" class="Sylius\Bundle\CoreBundle\Doctrine\ORM\Updater\ResourceUpdateHandler" decorates="sylius.resource_controller.resource_update_handler" public="false">
+        <service id="sylius.custom_resource_controller.resource_update_handler" class="Sylius\Bundle\CoreBundle\Doctrine\ORM\Handler\ResourceUpdateHandler" decorates="sylius.resource_controller.resource_update_handler" public="false">
             <argument type="service" id="sylius.custom_resource_controller.resource_update_handler.inner" />
+        </service>
+        <service id="sylius.custom_resource_controller.resource_delete_handler" class="Sylius\Bundle\CoreBundle\Doctrine\ORM\Handler\ResourceDeleteHandler" decorates="sylius.resource_controller.resource_delete_handler" public="false">
+            <argument type="service" id="sylius.custom_resource_controller.resource_delete_handler.inner" />
         </service>
 
         <service id="sylius.storage.cart_session" class="Sylius\Bundle\CoreBundle\Storage\CartSessionStorage">

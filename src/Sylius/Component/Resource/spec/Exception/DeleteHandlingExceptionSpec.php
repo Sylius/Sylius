@@ -15,10 +15,7 @@ namespace spec\Sylius\Component\Resource\Exception;
 
 use PhpSpec\ObjectBehavior;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
-final class UpdateHandlingExceptionSpec extends ObjectBehavior
+final class DeleteHandlingExceptionSpec extends ObjectBehavior
 {
     function it_extends_an_exception(): void
     {
@@ -27,7 +24,7 @@ final class UpdateHandlingExceptionSpec extends ObjectBehavior
 
     function it_has_a_message(): void
     {
-        $this->getMessage()->shouldReturn('Ups, something went wrong during updating a resource, please try again.');
+        $this->getMessage()->shouldReturn('Ups, something went wrong during deleting a resource, please try again.');
     }
 
     function it_has_a_flash(): void
@@ -37,6 +34,6 @@ final class UpdateHandlingExceptionSpec extends ObjectBehavior
 
     function it_has_an_api_response_code(): void
     {
-        $this->getApiResponseCode()->shouldReturn(400);
+        $this->getApiResponseCode()->shouldReturn(500);
     }
 }

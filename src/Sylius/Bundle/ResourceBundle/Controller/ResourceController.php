@@ -16,6 +16,7 @@ namespace Sylius\Bundle\ResourceBundle\Controller;
 use Doctrine\Common\Persistence\ObjectManager;
 use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
+use Sylius\Component\Resource\Exception\DeleteHandlingException;
 use Sylius\Component\Resource\Exception\UpdateHandlingException;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
@@ -117,6 +118,11 @@ class ResourceController extends Controller
     protected $resourceUpdateHandler;
 
     /**
+     * @var ResourceDeleteHandlerInterface
+     */
+    protected $resourceDeleteHandler;
+
+    /**
      * @param MetadataInterface $metadata
      * @param RequestConfigurationFactoryInterface $requestConfigurationFactory
      * @param ViewHandlerInterface $viewHandler
@@ -133,6 +139,7 @@ class ResourceController extends Controller
      * @param EventDispatcherInterface $eventDispatcher
      * @param StateMachineInterface $stateMachine
      * @param ResourceUpdateHandlerInterface $resourceUpdateHandler
+     * @param ResourceDeleteHandlerInterface $resourceDeleteHandler
      */
     public function __construct(
         MetadataInterface $metadata,
@@ -150,7 +157,8 @@ class ResourceController extends Controller
         AuthorizationCheckerInterface $authorizationChecker,
         EventDispatcherInterface $eventDispatcher,
         StateMachineInterface $stateMachine,
-        ResourceUpdateHandlerInterface $resourceUpdateHandler
+        ResourceUpdateHandlerInterface $resourceUpdateHandler,
+        ResourceDeleteHandlerInterface $resourceDeleteHandler
     ) {
         $this->metadata = $metadata;
         $this->requestConfigurationFactory = $requestConfigurationFactory;
@@ -168,6 +176,7 @@ class ResourceController extends Controller
         $this->eventDispatcher = $eventDispatcher;
         $this->stateMachine = $stateMachine;
         $this->resourceUpdateHandler = $resourceUpdateHandler;
+        $this->resourceDeleteHandler = $resourceDeleteHandler;
     }
 
     /**
@@ -213,6 +222,8 @@ class ResourceController extends Controller
 
         $this->isGrantedOr403($configuration, ResourceActions::INDEX);
         $resources = $this->resourcesCollectionProvider->get($configuration, $this->repository);
+
+        $this->eventDispatcher->dispatchMultiple(ResourceActions::INDEX, $configuration, $resources);
 
         $view = View::create($resources);
 
@@ -265,13 +276,17 @@ class ResourceController extends Controller
             }
 
             $this->repository->add($newResource);
-            $this->eventDispatcher->dispatchPostEvent(ResourceActions::CREATE, $configuration, $newResource);
+            $postEvent = $this->eventDispatcher->dispatchPostEvent(ResourceActions::CREATE, $configuration, $newResource);
 
             if (!$configuration->isHtmlRequest()) {
                 return $this->viewHandler->handle($configuration, View::create($newResource, Response::HTTP_CREATED));
             }
 
             $this->flashHelper->addSuccessFlash($configuration, ResourceActions::CREATE, $newResource);
+
+            if ($postEvent->hasResponse()) {
+                return $postEvent->getResponse();
+            }
 
             return $this->redirectHandler->redirectToResource($configuration, $newResource);
         }
@@ -412,14 +427,32 @@ class ResourceController extends Controller
             return $this->redirectHandler->redirectToIndex($configuration, $resource);
         }
 
-        $this->repository->remove($resource);
-        $this->eventDispatcher->dispatchPostEvent(ResourceActions::DELETE, $configuration, $resource);
+        try {
+            $this->resourceDeleteHandler->handle($resource, $this->repository);
+        } catch (DeleteHandlingException $exception) {
+            if (!$configuration->isHtmlRequest()) {
+                return $this->viewHandler->handle(
+                    $configuration,
+                    View::create(null, $exception->getApiResponseCode())
+                );
+            }
+
+            $this->flashHelper->addErrorFlash($configuration, $exception->getFlash());
+
+            return $this->redirectHandler->redirectToReferer($configuration);
+        }
+
+        $postEvent = $this->eventDispatcher->dispatchPostEvent(ResourceActions::DELETE, $configuration, $resource);
 
         if (!$configuration->isHtmlRequest()) {
             return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
         }
 
         $this->flashHelper->addSuccessFlash($configuration, ResourceActions::DELETE, $resource);
+
+        if ($postEvent->hasResponse()) {
+            return $postEvent->getResponse();
+        }
 
         return $this->redirectHandler->redirectToIndex($configuration, $resource);
     }
@@ -466,7 +499,7 @@ class ResourceController extends Controller
             return $this->redirectHandler->redirectToReferer($configuration);
         }
 
-        $this->eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource);
+        $postEvent = $this->eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource);
 
         if (!$configuration->isHtmlRequest()) {
             $view = $configuration->getParameters()->get('return_content', true) ? View::create($resource, Response::HTTP_OK) : View::create(null, Response::HTTP_NO_CONTENT);
@@ -475,6 +508,10 @@ class ResourceController extends Controller
         }
 
         $this->flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource);
+
+        if ($postEvent->hasResponse()) {
+            return $postEvent->getResponse();
+        }
 
         return $this->redirectHandler->redirectToResource($configuration, $resource);
     }

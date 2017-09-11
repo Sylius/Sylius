@@ -37,6 +37,19 @@ interface EventDispatcherInterface
     /**
      * @param string $eventName
      * @param RequestConfiguration $requestConfiguration
+     * @param mixed $resources
+     *
+     * @return ResourceControllerEvent
+     */
+    public function dispatchMultiple(
+        string $eventName,
+        RequestConfiguration $requestConfiguration,
+        $resources
+    ): ResourceControllerEvent;
+
+    /**
+     * @param string $eventName
+     * @param RequestConfiguration $requestConfiguration
      * @param ResourceInterface $resource
      *
      * @return ResourceControllerEvent

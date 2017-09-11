@@ -171,6 +171,8 @@
   * `Archivable::setArchivedAt`
   * `SlugAwareInterface::setSlug`
   
+* `dispatchMultiple(string $eventName, RequestConfiguration $requestConfiguration, $resources)` added to `EventDispatcherInterface`
+  
 ### Review / ReviewBundle
 
 * The `ReviewInterface::setAuthor` method does not longer have a default null argument and requires one to be explicitly passed.

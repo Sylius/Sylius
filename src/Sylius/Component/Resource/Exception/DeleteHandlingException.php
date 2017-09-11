@@ -13,10 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Resource\Exception;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
-class UpdateHandlingException extends \Exception
+class DeleteHandlingException extends \Exception
 {
     /**
      * @var string
@@ -36,9 +33,9 @@ class UpdateHandlingException extends \Exception
      * @param \Exception|null $previous
      */
     public function __construct(
-        string $message = 'Ups, something went wrong during updating a resource, please try again.',
+        string $message = 'Ups, something went wrong during deleting a resource, please try again.',
         string $flash = 'something_went_wrong_error',
-        int $apiResponseCode = 400,
+        int $apiResponseCode = 500,
         int $code = 0,
         ?\Exception $previous = null
     ) {
