@@ -37,21 +37,29 @@ final class ShopUserLogoutHandler extends DefaultLogoutSuccessHandler
     private $channelContext;
 
     /**
+     * @var string
+     */
+    private $cartSessionKey;
+
+    /**
      * {@inheritdoc}
      *
      * @param SessionInterface $session
      * @param ChannelContextInterface $channelContext
+     * @param string $cartSessionKey
      */
     public function __construct(
         HttpUtils $httpUtils,
         string $targetUrl,
         SessionInterface $session,
-        ChannelContextInterface $channelContext
+        ChannelContextInterface $channelContext,
+        string $cartSessionKey
     ) {
         parent::__construct($httpUtils, $targetUrl);
 
         $this->session = $session;
         $this->channelContext = $channelContext;
+        $this->cartSessionKey = $cartSessionKey;
     }
 
     /**
@@ -60,7 +68,7 @@ final class ShopUserLogoutHandler extends DefaultLogoutSuccessHandler
     public function onLogoutSuccess(Request $request): Response
     {
         $channel = $this->channelContext->getChannel();
-        $this->session->remove('_sylius.cart.' . $channel->getCode());
+        $this->session->remove($this->cartSessionKey . $channel->getCode());
 
         return parent::onLogoutSuccess($request);
     }

@@ -24,11 +24,18 @@
             <argument>/</argument>
             <argument type="service" id="session" />
             <argument type="service" id="sylius.context.channel" />
+            <argument>%sylius_shop.cart_session_key%</argument>
         </service>
         <service id="sylius.context.cart.session_and_channel_based" class="Sylius\Bundle\CoreBundle\Context\SessionAndChannelBasedCartContext">
             <argument type="service" id="sylius.storage.cart_session" />
             <argument type="service" id="sylius.context.channel.cached" />
             <tag name="sylius.context.cart" priority="-777" />
+        </service>
+
+        <service id="sylius.storage.cart_session" class="Sylius\Bundle\CoreBundle\Storage\CartSessionStorage">
+            <argument type="service" id="session" />
+            <argument>%sylius_shop.cart_session_key%</argument>
+            <argument type="service" id="sylius.repository.order" />
         </service>
     </services>
 </container>

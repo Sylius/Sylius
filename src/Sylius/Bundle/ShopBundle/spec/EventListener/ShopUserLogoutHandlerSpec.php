@@ -30,7 +30,7 @@ final class ShopUserLogoutHandlerSpec extends ObjectBehavior
 {
     function let(HttpUtils $httpUtils, SessionInterface $session, ChannelContextInterface $channelContext): void
     {
-        $this->beConstructedWith($httpUtils, '/', $session, $channelContext);
+        $this->beConstructedWith($httpUtils, '/', $session, $channelContext, '_sylius.cart');
     }
 
     function it_is_default_logout_success_handler(): void

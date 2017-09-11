@@ -55,7 +55,7 @@
 
         <service id="sylius.listener.session_cart" class="Sylius\Bundle\ShopBundle\EventListener\SessionCartSubscriber">
             <argument type="service" id="sylius.context.cart" />
-            <argument>_sylius.cart</argument>
+            <argument>%sylius_shop.cart_session_key%</argument>
             <tag name="kernel.event_subscriber" />
         </service>
     </services>
