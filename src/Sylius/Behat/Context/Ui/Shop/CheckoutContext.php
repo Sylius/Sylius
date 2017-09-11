@@ -17,6 +17,8 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Context\Ui\Shop\Checkout\CheckoutAddressingContext;
 use Sylius\Behat\Context\Ui\Shop\Checkout\CheckoutPaymentContext;
 use Sylius\Behat\Context\Ui\Shop\Checkout\CheckoutShippingContext;
+use Sylius\Behat\Page\Shop\Account\LoginPageInterface;
+use Sylius\Behat\Page\Shop\Account\RegisterPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\AddressPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\CompletePageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SelectPaymentPageInterface;
@@ -52,6 +54,11 @@ final class CheckoutContext implements Context
     private $completePage;
 
     /**
+     * @var RegisterPageInterface
+     */
+    private $registerPage;
+
+    /**
      * @var CurrentPageResolverInterface
      */
     private $currentPageResolver;
@@ -76,6 +83,7 @@ final class CheckoutContext implements Context
      * @param SelectPaymentPageInterface $selectPaymentPage
      * @param SelectShippingPageInterface $selectShippingPage
      * @param CompletePageInterface $completePage
+     * @param RegisterPageInterface $registerPage
      * @param CurrentPageResolverInterface $currentPageResolver
      * @param CheckoutAddressingContext $addressingContext
      * @param CheckoutShippingContext $shippingContext
@@ -86,6 +94,7 @@ final class CheckoutContext implements Context
         SelectPaymentPageInterface $selectPaymentPage,
         SelectShippingPageInterface $selectShippingPage,
         CompletePageInterface $completePage,
+        RegisterPageInterface $registerPage,
         CurrentPageResolverInterface $currentPageResolver,
         CheckoutAddressingContext $addressingContext,
         CheckoutShippingContext $shippingContext,
@@ -95,6 +104,7 @@ final class CheckoutContext implements Context
         $this->selectPaymentPage = $selectPaymentPage;
         $this->selectShippingPage = $selectShippingPage;
         $this->completePage = $completePage;
+        $this->registerPage = $registerPage;
         $this->currentPageResolver = $currentPageResolver;
         $this->addressingContext = $addressingContext;
         $this->shippingContext = $shippingContext;
@@ -228,5 +238,19 @@ final class CheckoutContext implements Context
         ]);
 
         Assert::eq($currentPage->getItemSubtotal($item), $price);
+    }
+
+    /**
+     * @When I register with previously used :email email and :password password
+     */
+    public function iRegisterWithPreviouslyUsedEmailAndPassword(string $email, string $password): void
+    {
+        $this->registerPage->open();
+        $this->registerPage->specifyEmail($email);
+        $this->registerPage->specifyPassword($password);
+        $this->registerPage->verifyPassword($password);
+        $this->registerPage->specifyFirstName('Carrot');
+        $this->registerPage->specifyLastName('Ironfoundersson');
+        $this->registerPage->register();
     }
 }

@@ -148,6 +148,28 @@ final class OrderContext implements Context
     }
 
     /**
+     * @Given /^the guest customer placed order with ("[^"]+" product) for "([^"]+)" and ("[^"]+" based shipping address) with ("[^"]+" shipping method) and ("[^"]+" payment)$/
+     */
+    public function theGuestCustomerPlacedOrderWithForAndBasedShippingAddress(
+        ProductInterface $product,
+        string $email,
+        AddressInterface $address,
+        ShippingMethodInterface $shippingMethod,
+        PaymentMethodInterface $paymentMethod
+    ) {
+        /** @var CustomerInterface $customer */
+        $customer = $this->customerFactory->createNew();
+        $customer->setEmail($email);
+        $customer->setFirstname('John');
+        $customer->setLastname('Doe');
+
+        $this->customerRepository->add($customer);
+
+        $this->placeOrder($product, $shippingMethod, $address, $paymentMethod, $customer, 1);
+        $this->objectManager->flush();
+    }
+
+    /**
      * @Given a customer :customer added something to cart
      */
     public function customerStartedCheckout(CustomerInterface $customer)
@@ -388,27 +410,7 @@ final class OrderContext implements Context
     ) {
         $customer = $user->getCustomer();
         for ($i = 0; $i < $numberOfOrders; $i++) {
-            /** @var ProductVariantInterface $variant */
-            $variant = $this->variantResolver->getVariant($product);
-
-            /** @var ChannelPricingInterface $channelPricing */
-            $channelPricing = $variant->getChannelPricingForChannel($this->sharedStorage->get('channel'));
-
-            /** @var \Sylius\Component\Order\Model\OrderItemInterface $item */
-            $item = $this->orderItemFactory->createNew();
-            $item->setVariant($variant);
-            $item->setUnitPrice($channelPricing->getPrice());
-
-            $this->itemQuantityModifier->modify($item, 1);
-
-            $order = $this->createOrder($customer, '#00000'.$i);
-            $order->addItem($item);
-
-            $this->checkoutUsing($order, $shippingMethod, clone $address, $paymentMethod);
-            $this->applyPaymentTransitionOnOrder($order, PaymentTransitions::TRANSITION_COMPLETE);
-
-            $this->objectManager->persist($order);
-            $this->sharedStorage->set('order', $order);
+            $this->placeOrder($product, $shippingMethod, $address, $paymentMethod, $customer, $i);
         }
 
         $this->objectManager->flush();
@@ -951,5 +953,44 @@ final class OrderContext implements Context
         }
 
         $this->objectManager->flush();
+    }
+
+    /**
+     * @param ProductInterface $product
+     * @param ShippingMethodInterface $shippingMethod
+     * @param AddressInterface $address
+     * @param PaymentMethodInterface $paymentMethod
+     * @param CustomerInterface $customer
+     * @param int $number
+     */
+    private function placeOrder(
+        ProductInterface $product,
+        ShippingMethodInterface $shippingMethod,
+        AddressInterface $address,
+        PaymentMethodInterface $paymentMethod,
+        CustomerInterface $customer,
+        int $number
+    ): void {
+        /** @var ProductVariantInterface $variant */
+        $variant = $this->variantResolver->getVariant($product);
+
+        /** @var ChannelPricingInterface $channelPricing */
+        $channelPricing = $variant->getChannelPricingForChannel($this->sharedStorage->get('channel'));
+
+        /** @var \Sylius\Component\Order\Model\OrderItemInterface $item */
+        $item = $this->orderItemFactory->createNew();
+        $item->setVariant($variant);
+        $item->setUnitPrice($channelPricing->getPrice());
+
+        $this->itemQuantityModifier->modify($item, 1);
+
+        $order = $this->createOrder($customer, '#00000' . $number);
+        $order->addItem($item);
+
+        $this->checkoutUsing($order, $shippingMethod, clone $address, $paymentMethod);
+        $this->applyPaymentTransitionOnOrder($order, PaymentTransitions::TRANSITION_COMPLETE);
+
+        $this->objectManager->persist($order);
+        $this->sharedStorage->set('order', $order);
     }
 }
