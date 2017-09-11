@@ -24,15 +24,14 @@
 * There are scalar and return typehints introduced in the codebase. Please introduce these in your codebase for classes 
   that implement Sylius' interfaces or extend Sylius' classes.
 
-* **Only when on Symfony ^3.3.8:**
-  From this Symfony version, the custom autoloader is not needed anymore and therefore removed in favor of the Composer 
+* Starting with Symfony version 3.3.8, the custom autoloader is not needed anymore and therefore removed in favor of the Composer
   autoloader. Apply the following changes (reference: https://github.com/Sylius/Sylius/pull/8340):
 
   * Remove `app/autoload.php`
-  * Change autoload path in `bin/console`: replace 'vendor' with 'app'
-  * Change autoload path in `web/app.php`: replace 'vendor' with 'app'
-  * Change autoload path in `web/app_dev.php`: replace 'vendor' with 'app'
-  * Change autoload path in `phpunit.xml.dist`: replace 'vendor' with 'app'
+  * Change autoload path in `bin/console`: replace 'app' with 'vendor'
+  * Change autoload path in `web/app.php`: replace 'app' with 'vendor'
+  * Change autoload path in `web/app_dev.php`: replace 'app' with 'vendor'
+  * Change autoload path in `phpunit.xml.dist`: replace 'app' with 'vendor'
   * Remove `"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",` from composer.json scripts
 
 ## Packages:
