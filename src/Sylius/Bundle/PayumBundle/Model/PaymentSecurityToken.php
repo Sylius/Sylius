@@ -69,7 +69,7 @@ class PaymentSecurityToken implements ResourceInterface, TokenInterface
     /**
      * {@inheritdoc}
      *
-     * @return IdentityInterface|null
+     * @return IdentityInterface
      */
     public function getDetails()
     {
@@ -111,7 +111,7 @@ class PaymentSecurityToken implements ResourceInterface, TokenInterface
     /**
      * {@inheritdoc}
      */
-    public function getAfterUrl(): string
+    public function getAfterUrl(): ?string
     {
         return $this->afterUrl;
     }
