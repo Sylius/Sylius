@@ -11,9 +11,10 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\PromotionBundle\Form\Type\Action;
+namespace Sylius\Bundle\CoreBundle\Form\Type\Promotion\Action;
 
 use Sylius\Bundle\CoreBundle\Form\Type\ChannelCollectionType;
+use Sylius\Bundle\PromotionBundle\Form\Type\Action\FixedDiscountConfigurationType;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;

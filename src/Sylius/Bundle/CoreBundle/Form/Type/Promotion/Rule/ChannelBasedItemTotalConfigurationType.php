@@ -11,9 +11,10 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\PromotionBundle\Form\Type\Action;
+namespace Sylius\Bundle\CoreBundle\Form\Type\Promotion\Rule;
 
 use Sylius\Bundle\CoreBundle\Form\Type\ChannelCollectionType;
+use Sylius\Bundle\PromotionBundle\Form\Type\Rule\ItemTotalConfigurationType;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -21,7 +22,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Kamil Kokot <kamil@kokot.me>
  */
-final class ChannelBasedUnitPercentageDiscountConfigurationType extends AbstractType
+final class ChannelBasedItemTotalConfigurationType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -29,7 +30,7 @@ final class ChannelBasedUnitPercentageDiscountConfigurationType extends Abstract
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'entry_type' => UnitPercentageDiscountConfigurationType::class,
+            'entry_type' => ItemTotalConfigurationType::class,
             'entry_options' => function (ChannelInterface $channel) {
                 return [
                     'label' => $channel->getName(),

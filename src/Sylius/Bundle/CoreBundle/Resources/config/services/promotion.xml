@@ -48,12 +48,15 @@
         <service id="sylius.channel_aware_promotion_rule_checker.item_total" class="Sylius\Component\Core\Promotion\Checker\Rule\ItemTotalRuleChecker" decorates="sylius.promotion_rule_checker.item_total" decoration-priority="256" public="false">
             <argument type="service" id="sylius.channel_aware_promotion_rule_checker.item_total.inner" />
         </service>
+        <service id="sylius.promotion_rule_checker.item_total" class="Sylius\Component\Promotion\Checker\Rule\ItemTotalRuleChecker">
+            <tag name="sylius.promotion_rule_checker" type="item_total" label="sylius.form.promotion_rule.item_total" form-type="Sylius\Bundle\CoreBundle\Form\Type\Promotion\Rule\ChannelBasedItemTotalConfigurationType" />
+        </service>
 
         <service id="sylius.promotion_action.fixed_discount" class="Sylius\Component\Core\Promotion\Action\FixedDiscountPromotionActionCommand">
             <argument type="service" id="sylius.proportional_integer_distributor" />
             <argument type="service" id="sylius.promotion.units_promotion_adjustments_applicator" />
             <argument type="service" id="sylius.currency_converter" />
-            <tag name="sylius.promotion_action" type="order_fixed_discount" label="sylius.form.promotion_action.order_fixed_discount" form-type="Sylius\Bundle\PromotionBundle\Form\Type\Action\ChannelBasedFixedDiscountConfigurationType" />
+            <tag name="sylius.promotion_action" type="order_fixed_discount" label="sylius.form.promotion_action.order_fixed_discount" form-type="Sylius\Bundle\CoreBundle\Form\Type\Promotion\Action\ChannelBasedFixedDiscountConfigurationType" />
         </service>
         <service id="sylius.promotion_action.unit_fixed_discount" class="Sylius\Component\Core\Promotion\Action\UnitFixedDiscountPromotionActionCommand">
             <argument type="service" id="sylius.factory.adjustment" />
@@ -61,7 +64,7 @@
             <argument type="service" id="sylius.promotion_filter.taxon" />
             <argument type="service" id="sylius.promotion_filter.product" />
             <argument type="service" id="sylius.currency_converter" />
-            <tag name="sylius.promotion_action" type="unit_fixed_discount" label="sylius.form.promotion_action.item_fixed_discount" form-type="Sylius\Bundle\PromotionBundle\Form\Type\Action\ChannelBasedUnitFixedDiscountConfigurationType" />
+            <tag name="sylius.promotion_action" type="unit_fixed_discount" label="sylius.form.promotion_action.item_fixed_discount" form-type="Sylius\Bundle\CoreBundle\Form\Type\Promotion\Action\ChannelBasedUnitFixedDiscountConfigurationType" />
         </service>
         <service id="sylius.promotion_action.percentage_discount" class="Sylius\Component\Core\Promotion\Action\PercentageDiscountPromotionActionCommand">
             <argument type="service" id="sylius.proportional_integer_distributor" />
@@ -73,7 +76,7 @@
             <argument type="service" id="sylius.promotion_filter.price_range" />
             <argument type="service" id="sylius.promotion_filter.taxon" />
             <argument type="service" id="sylius.promotion_filter.product" />
-            <tag name="sylius.promotion_action" type="unit_percentage_discount" label="sylius.form.promotion_action.item_percentage_discount" form-type="Sylius\Bundle\PromotionBundle\Form\Type\Action\ChannelBasedUnitPercentageDiscountConfigurationType" />
+            <tag name="sylius.promotion_action" type="unit_percentage_discount" label="sylius.form.promotion_action.item_percentage_discount" form-type="Sylius\Bundle\CoreBundle\Form\Type\Promotion\Action\ChannelBasedUnitPercentageDiscountConfigurationType" />
         </service>
         <service id="sylius.promotion_action.shipping_percentage_discount" class="Sylius\Component\Core\Promotion\Action\ShippingPercentageDiscountPromotionActionCommand">
             <argument type="service" id="sylius.factory.adjustment" />
