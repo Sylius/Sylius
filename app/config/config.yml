@@ -46,6 +46,7 @@ swiftmailer:
     host: "%mailer_host%"
     username: "%mailer_user%"
     password: "%mailer_password%"
+    port: "%mailer_port%"
 
 # Temporary fix to disable aliasing @serializer service to JMS variant
 # TODO: Remove when upgrading to JMS Serializer Bundle 2.0
