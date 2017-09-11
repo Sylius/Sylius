@@ -275,7 +275,27 @@ final class OrderContext implements Context
 
         $this->applyTransitionOnOrderCheckout($order, OrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING);
         $this->applyTransitionOnOrderCheckout($order, OrderCheckoutTransitions::TRANSITION_COMPLETE);
-        $this->stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH)->apply(OrderPaymentTransitions::TRANSITION_PAY);
+        if (!$order->getPayments()->isEmpty()) {
+            $this->stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH)->apply(OrderPaymentTransitions::TRANSITION_PAY);
+        }
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^the customer chose ("[^"]+" payment)$/
+     */
+    public function theCustomerChosePayment(PaymentMethodInterface $paymentMethod)
+    {
+        /** @var OrderInterface $order */
+        $order = $this->sharedStorage->get('order');
+
+        foreach ($order->getPayments() as $payment) {
+            $payment->setMethod($paymentMethod);
+        }
+
+        $this->applyTransitionOnOrderCheckout($order, OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT);
+        $this->applyTransitionOnOrderCheckout($order, OrderCheckoutTransitions::TRANSITION_COMPLETE);
 
         $this->objectManager->flush();
     }
@@ -587,6 +607,18 @@ final class OrderContext implements Context
     public function thisOrderHasAlreadyBeenShipped(OrderInterface $order)
     {
         $this->applyShipmentTransitionOnOrder($order, ShipmentTransitions::TRANSITION_SHIP);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @When the customer used coupon :coupon
+     */
+    public function theCustomerUsedCoupon(PromotionCouponInterface $coupon)
+    {
+        /** @var OrderInterface $order */
+        $order = $this->sharedStorage->get('order');
+        $order->setPromotionCoupon($coupon);
 
         $this->objectManager->flush();
     }

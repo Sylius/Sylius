@@ -13,10 +13,12 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Component\Core\OrderProcessing;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Core\OrderPaymentStates;
 use Sylius\Component\Core\Payment\Exception\NotProvidedOrderPaymentException;
 use Sylius\Component\Core\Payment\Provider\OrderPaymentProviderInterface;
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
@@ -45,12 +47,15 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
         ;
     }
 
-    function it_does_not_create_or_update_order_payment_if_order_total_is_zero(OrderInterface $order): void
-    {
+    function it_removes_cart_payments_from_order_if_its_total_is_zero(
+        OrderInterface $order,
+        PaymentInterface $cartPayment
+    ): void {
         $order->getState()->willReturn(OrderInterface::STATE_CART);
         $order->getTotal()->willReturn(0);
 
-        $order->getLastPayment(Argument::any())->shouldNotBeCalled();
+        $order->getPayments(OrderPaymentStates::STATE_CART)->willReturn(new ArrayCollection([$cartPayment->getWrappedObject()]));
+        $order->removePayment($cartPayment)->shouldBeCalled();
 
         $this->process($order);
     }

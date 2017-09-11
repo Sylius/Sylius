@@ -13,8 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\OrderProcessing;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Core\OrderPaymentStates;
 use Sylius\Component\Core\Payment\Exception\NotProvidedOrderPaymentException;
 use Sylius\Component\Core\Payment\Provider\OrderPaymentProviderInterface;
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
@@ -63,6 +65,10 @@ final class OrderPaymentProcessor implements OrderProcessorInterface
         }
 
         if (0 === $order->getTotal()) {
+            foreach ($order->getPayments(OrderPaymentStates::STATE_CART) as $payment) {
+                $order->removePayment($payment);
+            }
+
             return;
         }
 

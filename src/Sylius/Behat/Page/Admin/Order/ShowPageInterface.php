@@ -229,6 +229,11 @@ interface ShowPageInterface extends SymfonyPageInterface
     public function getPaymentsCount();
 
     /**
+     * @return int
+     */
+    public function getShipmentsCount();
+
+    /**
      * @return bool
      */
     public function hasCancelButton();
@@ -242,6 +247,11 @@ interface ShowPageInterface extends SymfonyPageInterface
      * @return string
      */
     public function getPaymentState();
+
+    /**
+     * @return string
+     */
+    public function getShippingState();
 
     public function cancelOrder();
 

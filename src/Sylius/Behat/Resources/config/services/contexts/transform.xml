@@ -107,6 +107,7 @@
 
         <service id="sylius.behat.context.transform.promotion" class="Sylius\Behat\Context\Transform\PromotionContext">
             <argument type="service" id="__symfony__.sylius.repository.promotion" />
+            <argument type="service" id="__symfony__.sylius.repository.promotion_coupon" />
             <tag name="fob.context_service" />
         </service>
 
