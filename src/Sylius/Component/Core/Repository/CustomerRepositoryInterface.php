@@ -24,7 +24,7 @@ interface CustomerRepositoryInterface extends RepositoryInterface
     /**
      * @return int
      */
-    public function count(): int;
+    public function countCustomers(): int;
 
     /**
      * @param int $count
