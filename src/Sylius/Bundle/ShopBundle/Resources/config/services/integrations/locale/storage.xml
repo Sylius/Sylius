@@ -28,5 +28,11 @@
             <argument type="service" id="sylius.locale_provider" />
             <tag name="sylius.context.locale" priority="-64" />
         </service>
+
+        <service id="sylius.shop.locale_stripping_router" class="Sylius\Bundle\ShopBundle\Router\LocaleStrippingRouter"
+                 decorates="router" decoration-priority="1024">
+            <argument type="service" id="sylius.shop.locale_stripping_router.inner" />
+            <argument type="service" id="sylius.context.locale" />
+        </service>
     </services>
 </container>
