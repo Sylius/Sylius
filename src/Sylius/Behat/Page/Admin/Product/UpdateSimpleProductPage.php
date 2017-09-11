@@ -33,6 +33,9 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
 {
     use ChecksCodeImmutability;
 
+    /** @var array */
+    private $imageUrls = [];
+
     /**
      * {@inheritdoc}
      */
@@ -185,11 +188,11 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     {
         $imageElement = $this->getImageElementByType($type);
 
-        if (null === $imageElement) {
+        $imageUrl = $imageElement ? $imageElement->find('css', 'img')->getAttribute('src') : $this->provideImageUrlForType($type);
+        if (null === $imageElement && null === $imageUrl) {
             return false;
         }
 
-        $imageUrl = $imageElement->find('css', 'img')->getAttribute('src');
         $this->getDriver()->visit($imageUrl);
         $pageText = $this->getDocument()->getText();
         $this->getDriver()->back();
@@ -235,14 +238,27 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         $this->clickTabIfItsNotActive('media');
 
         $imageElement = $this->getImageElementByType($type);
+        $imageSourceElement = $imageElement->find('css', 'img');
+        if (null !== $imageSourceElement) {
+            $this->saveImageUrlForType($type, $imageSourceElement->getAttribute('src'));
+        }
+
         $imageElement->clickLink('Delete');
     }
 
     public function removeFirstImage()
     {
         $this->clickTabIfItsNotActive('media');
-
         $imageElement = $this->getFirstImageElement();
+        $imageTypeElement = $imageElement->find('css', 'input[type=text]');
+        $imageSourceElement = $imageElement->find('css', 'img');
+
+        if (null !== $imageTypeElement && null !== $imageSourceElement) {
+            $this->saveImageUrlForType(
+                $imageTypeElement->getValue(),
+                $imageSourceElement->getAttribute('src')
+            );
+        }
         $imageElement->clickLink('Delete');
     }
 
@@ -551,5 +567,15 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     {
         $typeField = $imageElement->findField('Type');
         $typeField->setValue($type);
+    }
+
+    private function provideImageUrlForType(string $type): ?string
+    {
+        return $this->imageUrls[$type] ?: null;
+    }
+
+    private function saveImageUrlForType(string $type, string $imageUrl): void
+    {
+        $this->imageUrls[$type] = $imageUrl;
     }
 }
