@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class PaymentMethodController extends ResourceController
+class PaymentMethodController extends ResourceController
 {
     /**
      * @param Request $request

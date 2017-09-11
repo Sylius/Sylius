@@ -70,10 +70,6 @@
     * `HandleException`
     * `IntegerDistributor`
     * `MissingChannelConfigurationException`
-    * `OrderController`
-    * `PaymentMethodController`
-    * `ProductTaxonController`
-    * `ProductVariantController`
     * `PromotionActionFactory`
     * `PromotionRuleFactory`
     * `ReviewerReviewsRemover`
@@ -137,7 +133,6 @@
 
 ### Product / ProductBundle
 
-* `ProductAttributeController` has been made final, use decoration instead of extending it.
 * `ProductVariantCombination` has been made final, use decoration instead of extending it.
 * `ProductVariantCombinationValidator` has been made final, use decoration instead of extending it.
 * The following methods does not longer have a default null argument and requires one to be explicitly passed:
