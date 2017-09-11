@@ -24,7 +24,7 @@
 
         "doctrine/doctrine-bundle": "^1.6",
         "friendsofsymfony/rest-bundle": "^2.1",
-        "jms/serializer-bundle": "^1.1",
+        "jms/serializer-bundle": "^2.0",
         "stof/doctrine-extensions-bundle": "^1.2",
         "sylius/registry": "^1.0",
         "sylius/resource": "^1.0",

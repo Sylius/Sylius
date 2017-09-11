@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "87de35465f7d75ef41b76b7bbb8081df",
+    "content-hash": "45cb7c9fd024d82ba968f042ae3a6918",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -2245,16 +2245,16 @@
         },
         {
             "name": "jms/serializer",
-            "version": "1.6.2",
+            "version": "1.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/serializer.git",
-                "reference": "b8683d206e7297f54034f67a877f966c14dc12ea"
+                "reference": "ce65798f722c836f16d5d7d2e3ca9d21e0fb4331"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/b8683d206e7297f54034f67a877f966c14dc12ea",
-                "reference": "b8683d206e7297f54034f67a877f966c14dc12ea",
+                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/ce65798f722c836f16d5d7d2e3ca9d21e0fb4331",
+                "reference": "ce65798f722c836f16d5d7d2e3ca9d21e0fb4331",
                 "shasum": ""
             },
             "require": {
@@ -2293,7 +2293,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.6-dev"
+                    "dev-master": "1.8-dev"
                 }
             },
             "autoload": {
@@ -2303,9 +2303,13 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "Apache2"
+                "Apache-2.0"
             ],
             "authors": [
+                {
+                    "name": "Asmir Mustafic",
+                    "email": "goetas@gmail.com"
+                },
                 {
                     "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com"
@@ -2320,37 +2324,36 @@
                 "serialization",
                 "xml"
             ],
-            "time": "2017-04-17T15:27:46+00:00"
+            "time": "2017-07-13T11:23:56+00:00"
         },
         {
             "name": "jms/serializer-bundle",
-            "version": "1.4.0",
-            "target-dir": "JMS/SerializerBundle",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/JMSSerializerBundle.git",
-                "reference": "fdd73dbc8642940084deda2a96fa5db62d0f2384"
+                "reference": "a612724ec70d9cbb744316365d88ec9440f81ac9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/JMSSerializerBundle/zipball/fdd73dbc8642940084deda2a96fa5db62d0f2384",
-                "reference": "fdd73dbc8642940084deda2a96fa5db62d0f2384",
+                "url": "https://api.github.com/repos/schmittjoh/JMSSerializerBundle/zipball/a612724ec70d9cbb744316365d88ec9440f81ac9",
+                "reference": "a612724ec70d9cbb744316365d88ec9440f81ac9",
                 "shasum": ""
             },
             "require": {
-                "jms/serializer": "^1.6",
-                "php": ">=5.4.0",
+                "jms/serializer": "^1.7",
+                "php": "^5.4|^7.0",
                 "phpoption/phpoption": "^1.1.0",
-                "symfony/framework-bundle": "~2.3|~3.0"
+                "symfony/framework-bundle": "~2.3|~3.0|~4.0"
             },
             "require-dev": {
                 "doctrine/doctrine-bundle": "*",
                 "doctrine/orm": "*",
-                "phpunit/phpunit": "^4.2|^5.0",
+                "phpunit/phpunit": "^4.8.35|^5.4.3|^6.0",
                 "symfony/browser-kit": "*",
                 "symfony/class-loader": "*",
                 "symfony/css-selector": "*",
-                "symfony/expression-language": "~2.6|~3.0",
+                "symfony/expression-language": "~2.6|~3.0|~4.0",
                 "symfony/finder": "*",
                 "symfony/form": "*",
                 "symfony/process": "*",
@@ -2365,19 +2368,26 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.4-dev"
+                    "dev-master": "2.x-dev"
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "JMS\\SerializerBundle": ""
-                }
+                "psr-4": {
+                    "JMS\\SerializerBundle\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "Apache2"
+                "Apache-2.0"
             ],
             "authors": [
+                {
+                    "name": "Asmir Mustafic",
+                    "email": "goetas@gmail.com"
+                },
                 {
                     "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com"
@@ -2392,7 +2402,7 @@
                 "serialization",
                 "xml"
             ],
-            "time": "2017-04-10T12:31:39+00:00"
+            "time": "2017-08-31T10:41:30+00:00"
         },
         {
             "name": "knplabs/gaufrette",
@@ -2592,7 +2602,7 @@
                     "email": "stof@notk.org"
                 },
                 {
-                    "name": "Knplabs",
+                    "name": "KnpLabs",
                     "homepage": "http://knplabs.com"
                 },
                 {
@@ -2873,7 +2883,7 @@
             ],
             "authors": [
                 {
-                    "name": "Pádraic Brady",
+                    "name": "Padraic Brady",
                     "email": "padraic.brady@gmail.com",
                     "homepage": "http://blog.astrumfutura.com"
                 },
@@ -5738,7 +5748,7 @@
             ],
             "authors": [
                 {
-                    "name": "William DURAND",
+                    "name": "William Durand",
                     "email": "william.durand1@gmail.com"
                 }
             ],
