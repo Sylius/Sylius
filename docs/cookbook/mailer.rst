@@ -24,14 +24,20 @@ Basically to start sending emails via a mailing service you will need to:
     mailer_password: ~
 
     # Here you provide a Mailing port suggested by your service. It can be 25, 465 or 587
+    # This parameter is not there by default, you need to add it.
     mailer_port: 25
 
-**3. **Remember to remove the** `disable_delivery: true` **parameter in the** `app/config/config_prod.yml`.
+**3. **Remember not to have the** `disable_delivery: true` **parameter in the** `app/config/config_prod.yml` for your production environment.
+
+Emails delivery is disable for `test`, `dev` and `stage` environments by default. The `prod` environment has delivery turned
+on by default, so there is nothing to worry about if you did not change anything about it.
 
 **That's pretty much all! All the other issues are dependent on the service you are using.**
 
-Remember that the parameters like username or password must not be commited publicly to your repository.
-Save them as environment variables on your server.
+.. warning::
+
+    Remember that the parameters like username or password must not be commited publicly to your repository.
+    Save them as environment variables on your server.
 
 Learn More
 ----------
