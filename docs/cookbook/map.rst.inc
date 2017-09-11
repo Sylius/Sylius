@@ -23,4 +23,5 @@
 * :doc:`/cookbook/installation-commands`
 * :doc:`/cookbook/platform-sh`
 * :doc:`/cookbook/platform-sh-advanced`
+* :doc:`/cookbook/mailer`
 * :doc:`/cookbook/admin-js-and-css`
