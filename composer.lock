@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "6cc386dcc4fcaca9ef6e1702e86b2a50",
+    "content-hash": "8436f0e11bba1a3bc3f20581781f1773",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -6158,16 +6158,16 @@
     "packages-dev": [
         {
             "name": "akeneo/phpspec-skip-example-extension",
-            "version": "v3.0.0-alpha1",
+            "version": "v3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/akeneo/PhpSpecSkipExampleExtension.git",
-                "reference": "4aab9c7ac66caf4c488a9008981f0b62627edad6"
+                "reference": "9e24c577701558765699eb54aa32f86aa33eaba5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/akeneo/PhpSpecSkipExampleExtension/zipball/4aab9c7ac66caf4c488a9008981f0b62627edad6",
-                "reference": "4aab9c7ac66caf4c488a9008981f0b62627edad6",
+                "url": "https://api.github.com/repos/akeneo/PhpSpecSkipExampleExtension/zipball/9e24c577701558765699eb54aa32f86aa33eaba5",
+                "reference": "9e24c577701558765699eb54aa32f86aa33eaba5",
                 "shasum": ""
             },
             "require": {
@@ -6207,7 +6207,7 @@
                 }
             ],
             "description": "Skip your PhpSpec examples through annotations",
-            "time": "2017-07-10T13:11:28+00:00"
+            "time": "2017-08-03T09:59:50+00:00"
         },
         {
             "name": "behat/behat",
@@ -9172,9 +9172,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "akeneo/phpspec-skip-example-extension": 15
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
