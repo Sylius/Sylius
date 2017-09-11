@@ -303,7 +303,7 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
 
     private function provideImageUrlForType(string $type): ?string
     {
-        return $this->imageUrls[$type] ?: null;
+        return $this->imageUrls[$type] ?? null;
     }
 
     private function saveImageUrlForType(string $type, string $imageUrl): void
