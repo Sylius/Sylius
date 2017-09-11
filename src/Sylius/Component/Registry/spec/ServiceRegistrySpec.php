@@ -16,6 +16,7 @@ namespace spec\Sylius\Component\Registry;
 require_once __DIR__.'/Fixture/SampleServiceInterface.php';
 
 use PhpSpec\ObjectBehavior;
+use spec\Sylius\Component\Registry\Fixture\AbstractSampleService;
 use spec\Sylius\Component\Registry\Fixture\SampleServiceInterface;
 use Sylius\Component\Registry\ExistingServiceException;
 use Sylius\Component\Registry\NonExistingServiceException;
@@ -41,7 +42,7 @@ final class ServiceRegistrySpec extends ObjectBehavior
         $this->all()->shouldReturn([]);
     }
 
-    function it_registers_service_with_given_type(SampleServiceInterface $service): void
+    function it_registers_service_with_given_interface(SampleServiceInterface $service): void
     {
         $this->has('test')->shouldReturn(false);
         $this->register('test', $service);
@@ -50,8 +51,29 @@ final class ServiceRegistrySpec extends ObjectBehavior
         $this->get('test')->shouldReturn($service);
     }
 
-    function it_throws_exception_when_trying_to_register_service_with_taken_type(SampleServiceInterface $service): void
+    function it_registers_service_with_given_parent_class(\stdClass $service): void
     {
+        $this->beConstructedWith(\stdClass::class);
+        $this->has('test')->shouldReturn(false);
+        $this->register('test', $service);
+
+        $this->has('test')->shouldReturn(true);
+        $this->get('test')->shouldReturn($service);
+    }
+
+    function it_throws_exception_when_trying_to_register_service_with_taken_interface(SampleServiceInterface $service): void
+    {
+        $this->register('test', $service);
+
+        $this
+            ->shouldThrow(ExistingServiceException::class)
+            ->duringRegister('test', $service)
+        ;
+    }
+
+    function it_throws_exception_when_trying_to_register_service_with_taken_parent_class(\stdClass $service): void
+    {
+        $this->beConstructedWith(\stdClass::class);
         $this->register('test', $service);
 
         $this
@@ -69,7 +91,7 @@ final class ServiceRegistrySpec extends ObjectBehavior
         ;
     }
 
-    function it_unregisters_service_with_given_type(SampleServiceInterface $service): void
+    function it_unregisters_service_with_given_interface(SampleServiceInterface $service): void
     {
         $this->register('foo', $service);
         $this->has('foo')->shouldReturn(true);
@@ -78,8 +100,25 @@ final class ServiceRegistrySpec extends ObjectBehavior
         $this->has('foo')->shouldReturn(false);
     }
 
-    function it_retrieves_registered_service_by_type(SampleServiceInterface $service): void
+    function it_unregisters_service_with_given_parent_class(\stdClass $service): void
     {
+        $this->beConstructedWith(\stdClass::class);
+        $this->register('foo', $service);
+        $this->has('foo')->shouldReturn(true);
+
+        $this->unregister('foo');
+        $this->has('foo')->shouldReturn(false);
+    }
+
+    function it_retrieves_registered_service_by_interface(SampleServiceInterface $service): void
+    {
+        $this->register('test', $service);
+        $this->get('test')->shouldReturn($service);
+    }
+
+    function it_retrieves_registered_service_by_parent_class(\stdClass $service): void
+    {
+        $this->beConstructedWith(\stdClass::class);
         $this->register('test', $service);
         $this->get('test')->shouldReturn($service);
     }
