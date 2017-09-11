@@ -30,6 +30,12 @@
             <tag name="kernel.event_listener" event="sylius.taxon.pre_create" method="uploadImages" />
             <tag name="kernel.event_listener" event="sylius.taxon.pre_update" method="uploadImages" />
         </service>
+        <service id="sylius.listener.images_remove" class="Sylius\Bundle\CoreBundle\EventListener\ImagesRemoveListener">
+            <argument type="service" id="sylius.image_uploader" />
+            <argument type="service" id="liip_imagine.cache.manager" />
+            <argument type="service" id="liip_imagine.filter.manager" />
+            <tag name="doctrine.event_listener" event="postRemove" />
+        </service>
         <service id="sylius.listener.order_recalculation" class="Sylius\Bundle\CoreBundle\EventListener\OrderRecalculationListener">
             <argument type="service" id="sylius.order_processing.order_processor" />
             <tag name="kernel.event_listener" event="sylius.cart_change" method="recalculateOrder" />
