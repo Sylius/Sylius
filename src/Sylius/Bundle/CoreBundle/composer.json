@@ -23,7 +23,7 @@
         "php": "^7.1",
 
         "fzaninotto/faker": "^1.0",
-        "jms/serializer-bundle": "^1.1",
+        "jms/serializer-bundle": "^2.0",
         "knplabs/knp-gaufrette-bundle": "^0.3",
         "sonata-project/intl-bundle": "^2.2",
         "swiftmailer/swiftmailer": "^6.0",
