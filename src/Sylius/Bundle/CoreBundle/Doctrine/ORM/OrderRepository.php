@@ -73,6 +73,21 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
     /**
      * {@inheritdoc}
      */
+    public function createByCustomerAndChannelIdQueryBuilder($customerId, $channelId): QueryBuilder
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.customer = :customerId')
+            ->andWhere('o.channel = :channelId')
+            ->andWhere('o.state != :state')
+            ->setParameter('customerId', $customerId)
+            ->setParameter('channelId', $channelId)
+            ->setParameter('state', OrderInterface::STATE_CART)
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function findByCustomer(CustomerInterface $customer): array
     {
         return $this->createByCustomerIdQueryBuilder($customer->getId())

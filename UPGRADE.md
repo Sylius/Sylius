@@ -73,6 +73,7 @@
 ### Core / CoreBundle
 
 * Method `OrderInterface::isShippingRequired` added, used in place of similar methods in `OrderShippingMethodSelectionRequirementChecker` and `OrderShipmentProcessor`
+* `createByCustomerAndChannelIdQueryBuilder($customerId, $channelId)` method added to `OrderRepositoryInterface`
 * The following classes have been made final, use decoration instead of extending them:
 
     * `CartItemTypeExtension`

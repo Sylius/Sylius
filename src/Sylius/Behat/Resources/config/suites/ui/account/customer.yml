@@ -9,6 +9,7 @@ default:
                 - sylius.behat.context.hook.email_spool
 
                 - sylius.behat.context.transform.address
+                - sylius.behat.context.transform.channel
                 - sylius.behat.context.transform.country
                 - sylius.behat.context.transform.customer
                 - sylius.behat.context.transform.lexical
@@ -32,6 +33,7 @@ default:
                 - sylius.behat.context.setup.user
                 - sylius.behat.context.setup.zone
 
+                - sylius.behat.context.ui.channel
                 - sylius.behat.context.ui.shop.account
                 - sylius.behat.context.ui.shop.cart
                 - sylius.behat.context.ui.shop.checkout
@@ -40,5 +42,6 @@ default:
                 - sylius.behat.context.ui.shop.checkout.payment
                 - sylius.behat.context.ui.shop.checkout.complete
                 - sylius.behat.context.ui.shop.currency
+                - sylius.behat.context.ui.shop.current_channel
             filters:
                 tags: "@customer_account && @ui"
