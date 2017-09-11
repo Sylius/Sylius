@@ -202,6 +202,9 @@
      
 * ImagineBundle has been upgraded from ^1.6 to ^1.9.1 to move past a BC break in console commands: https://github.com/liip/LiipImagineBundle/releases/tag/1.9.1.
 
+* If `sylius_shop.locale_switcher` is set to `storage`, `LocaleStrippingRouter` is loaded which strips out `_locale` parameter
+  from the URL if it's the same as the one already in the storage.
+ 
 ### Shipping / ShippingBundle
 
 * `UnresolvedDefaultShippingMethodException` has been made final, use decoration instead of extending it.
