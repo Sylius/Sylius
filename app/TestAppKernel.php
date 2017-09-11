@@ -55,7 +55,7 @@ class TestAppKernel extends AppKernel
 
         $services = $containerServicesPropertyReflection->getValue($container) ?: [];
         foreach ($services as $serviceId => $service) {
-            if ('kernel' === $serviceId || 'http_kernel' === $serviceId) {
+            if (in_array($serviceId, $this->getServicesToIgnoreDuringContainerCleanup())) {
                 continue;
             }
 
@@ -84,5 +84,15 @@ class TestAppKernel extends AppKernel
     protected function getContainerBaseClass(): string
     {
         return MockerContainer::class;
+    }
+
+    protected function getServicesToIgnoreDuringContainerCleanup(): array
+    {
+        return [
+            'kernel',
+            'http_kernel',
+            'liip_imagine.mime_type_guesser',
+            'liip_imagine.extension_guesser',
+        ];
     }
 }

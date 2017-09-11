@@ -50,7 +50,8 @@
         "sylius/user-bundle": "^1.0",
         "sylius-labs/association-hydrator": "^1.0",
         "symfony/framework-bundle": "^3.2",
-        "winzou/state-machine-bundle": "^0.3"
+        "winzou/state-machine-bundle": "^0.3",
+        "liip/imagine-bundle": "^1.9.1"
     },
     "require-dev": {
         "hwi/oauth-bundle": "^0.5",

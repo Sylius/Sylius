@@ -37,7 +37,7 @@ final class ImageUploaderSpec extends ObjectBehavior
         $this->shouldImplement(ImageUploaderInterface::class);
     }
 
-    function it_uploads_an_image($filesystem, $image): void
+    function it_uploads_an_image(Filesystem $filesystem, ImageInterface $image): void
     {
         $image->hasFile()->willReturn(true);
         $image->getPath()->willReturn('foo.jpg');
@@ -55,7 +55,7 @@ final class ImageUploaderSpec extends ObjectBehavior
         $this->upload($image);
     }
 
-    function it_replaces_an_image($filesystem, $image): void
+    function it_replaces_an_image(Filesystem $filesystem, ImageInterface $image): void
     {
         $image->hasFile()->willReturn(true);
         $image->getPath()->willReturn('foo.jpg');
@@ -71,5 +71,21 @@ final class ImageUploaderSpec extends ObjectBehavior
         })->shouldBeCalled();
 
         $this->upload($image);
+    }
+
+    function it_removes_an_image_if_exists(Filesystem $filesystem): void
+    {
+        $filesystem->has('path/to/img')->willReturn(true);
+        $filesystem->delete('path/to/img')->willReturn(true);
+
+        $this->remove('path/to/img');
+    }
+
+    function it_does_not_remove_an_image_if_does_not_exist(FileSystem $filesystem): void
+    {
+        $filesystem->has('path/to/img')->willReturn(false);
+        $filesystem->delete('path/to/img')->shouldNotBeCalled();
+
+        $this->remove('path/to/img');
     }
 }
