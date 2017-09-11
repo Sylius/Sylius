@@ -3,8 +3,6 @@
 
     $.fn.extend({
         previewUploadedImage: function (root) {
-            console.log(root);
-
             $(root + ' input[type="file"]').each(function() {
                 $(this).change(function() {
                     displayUploadedImage(this);

@@ -72,5 +72,6 @@
         $(document).taxonSlugGenerator();
 
         $(document).previewUploadedImage('#sylius_product_images');
+        $(document).previewUploadedImage('#sylius_taxon_images');
     });
 })(jQuery);
