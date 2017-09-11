@@ -111,11 +111,6 @@ In the administration panel go to channels and change the theme of your desired 
 
    $ php bin/console cache:clear
 
-.. note::
-
-   You can override any template of Sylius like that, as well as static files by adding a ``web/assets/`` directory
-   in the theme directory to override CSS or JS files.
-
 Learn more
 ----------
 
