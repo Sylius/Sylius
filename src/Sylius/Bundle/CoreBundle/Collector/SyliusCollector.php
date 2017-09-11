@@ -84,7 +84,7 @@ final class SyliusCollector extends DataCollector
     /**
      * @return string
      */
-    public function getCurrencyCode(): string
+    public function getCurrencyCode(): ?string
     {
         return $this->data['currency_code'];
     }
@@ -92,7 +92,7 @@ final class SyliusCollector extends DataCollector
     /**
      * @return string
      */
-    public function getLocaleCode(): string
+    public function getLocaleCode(): ?string
     {
         return $this->data['locale_code'];
     }
@@ -100,7 +100,7 @@ final class SyliusCollector extends DataCollector
     /**
      * @return string
      */
-    public function getDefaultCurrencyCode(): string
+    public function getDefaultCurrencyCode(): ?string
     {
         return $this->data['base_currency_code'];
     }
@@ -108,7 +108,7 @@ final class SyliusCollector extends DataCollector
     /**
      * @return string
      */
-    public function getDefaultLocaleCode(): string
+    public function getDefaultLocaleCode(): ?string
     {
         return $this->data['default_locale_code'];
     }
@@ -124,8 +124,7 @@ final class SyliusCollector extends DataCollector
 
             $this->data['base_currency_code'] = $channel->getBaseCurrency()->getCode();
             $this->data['currency_code'] = $this->shopperContext->getCurrencyCode();
-        } catch (ChannelNotFoundException $exception) {
-        } catch (CurrencyNotFoundException $exception) {
+        } catch (ChannelNotFoundException | CurrencyNotFoundException $exception) {
         }
 
         try {
