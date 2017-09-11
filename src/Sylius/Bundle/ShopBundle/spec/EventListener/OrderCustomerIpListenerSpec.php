@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 final class OrderCustomerIpListenerSpec extends ObjectBehavior
 {

@@ -22,7 +22,7 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 final class NthOrderRuleCheckerSpec extends ObjectBehavior

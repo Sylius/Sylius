@@ -16,7 +16,7 @@ namespace Sylius\Component\Core\Checker;
 use Sylius\Component\Core\Model\OrderInterface;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 interface OrderShippingMethodSelectionRequirementCheckerInterface
 {

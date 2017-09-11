@@ -18,7 +18,7 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 final class TextAttributeConfigurationType extends AbstractType
 {

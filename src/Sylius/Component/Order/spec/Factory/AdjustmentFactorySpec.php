@@ -19,7 +19,7 @@ use Sylius\Component\Order\Model\AdjustmentInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 final class AdjustmentFactorySpec extends ObjectBehavior
 {

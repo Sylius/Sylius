@@ -17,7 +17,7 @@ use Symfony\Component\DependencyInjection\ExpressionLanguage as BaseExpressionLa
 use Symfony\Component\ExpressionLanguage\ParserCache\ParserCacheInterface;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 final class ExpressionLanguage extends BaseExpressionLanguage
 {

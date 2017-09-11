@@ -21,7 +21,7 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 final class TotalOfItemsFromTaxonRuleChecker implements RuleCheckerInterface
 {

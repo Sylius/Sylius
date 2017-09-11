@@ -22,7 +22,7 @@ use Sylius\Component\Order\StateResolver\StateResolverInterface;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 final class CheckoutStateResolver implements StateResolverInterface
 {

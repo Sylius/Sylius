@@ -16,7 +16,7 @@ namespace Sylius\Component\Review\Model;
 use Doctrine\Common\Collections\Collection;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 interface ReviewableInterface
 {

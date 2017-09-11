@@ -43,5 +43,5 @@ License can be found [here](https://github.com/Sylius/Sylius/blob/master/LICENSE
 Authors
 -------
 
-The component was originally created by [Mateusz Zalewski](mateusz.zalewski@lakion.com) and [Grzegorz Sadowski](grzegorz.sadowski@lakion.com), based on [Daniel Richter](nexyz9@gmail.com) work.
+The component was originally created by [Mateusz Zalewski](mateusz.p.zalewski@gmail.com) and [Grzegorz Sadowski](grzegorz.sadowski@lakion.com), based on [Daniel Richter](nexyz9@gmail.com) work.
 See the list of [contributors](https://github.com/Sylius/Review/contributors).

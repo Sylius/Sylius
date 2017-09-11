@@ -25,7 +25,7 @@ use Symfony\Component\Form\FormEvents;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 abstract class AttributeType extends AbstractResourceType
 {

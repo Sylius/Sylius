@@ -16,7 +16,7 @@ namespace spec\Sylius\Component\Shipping\Exception;
 use PhpSpec\ObjectBehavior;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 final class UnresolvedDefaultShippingMethodExceptionSpec extends ObjectBehavior
 {

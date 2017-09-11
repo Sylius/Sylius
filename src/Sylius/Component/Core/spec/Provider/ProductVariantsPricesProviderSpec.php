@@ -23,7 +23,7 @@ use Sylius\Component\Core\Provider\ProductVariantsPricesProviderInterface;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 final class ProductVariantsPricesProviderSpec extends ObjectBehavior
 {

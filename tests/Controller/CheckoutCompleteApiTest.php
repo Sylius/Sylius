@@ -21,7 +21,7 @@ use Sylius\Component\Product\Repository\ProductVariantRepositoryInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 final class CheckoutCompleteApiTest extends CheckoutApiTestCase
 {

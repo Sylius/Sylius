@@ -16,7 +16,7 @@ namespace Sylius\Behat\Page\Admin\Promotion;
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 interface UpdatePageInterface extends BaseUpdatePageInterface

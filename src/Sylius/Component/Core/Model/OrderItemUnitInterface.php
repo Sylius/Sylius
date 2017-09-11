@@ -18,7 +18,7 @@ use Sylius\Component\Order\Model\OrderItemUnitInterface as BaseOrderItemUnitInte
 use Sylius\Component\Shipping\Model\ShipmentUnitInterface;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 interface OrderItemUnitInterface extends BaseOrderItemUnitInterface, InventoryUnitInterface, ShipmentUnitInterface
 {

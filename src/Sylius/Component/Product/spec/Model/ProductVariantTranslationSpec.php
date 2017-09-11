@@ -18,7 +18,7 @@ use Sylius\Component\Product\Model\ProductVariantTranslationInterface;
 use Sylius\Component\Resource\Model\AbstractTranslation;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 final class ProductVariantTranslationSpec extends ObjectBehavior
 {

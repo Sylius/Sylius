@@ -19,7 +19,7 @@ use Sylius\Component\Core\Repository\ProductReviewRepositoryInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 class ProductReviewRepository extends EntityRepository implements ProductReviewRepositoryInterface
 {

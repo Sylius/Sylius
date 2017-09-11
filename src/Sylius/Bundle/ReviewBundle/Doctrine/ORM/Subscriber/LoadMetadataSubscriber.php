@@ -18,7 +18,7 @@ use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 final class LoadMetadataSubscriber implements EventSubscriber

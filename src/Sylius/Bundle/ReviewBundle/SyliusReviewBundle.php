@@ -19,7 +19,7 @@ use Sylius\Bundle\ReviewBundle\DependencyInjection\Compiler\RegisterReviewFactor
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 final class SyliusReviewBundle extends AbstractResourceBundle

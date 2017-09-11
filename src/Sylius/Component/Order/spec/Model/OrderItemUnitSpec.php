@@ -20,7 +20,7 @@ use Sylius\Component\Order\Model\OrderItemInterface;
 use Sylius\Component\Order\Model\OrderItemUnitInterface;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
 final class OrderItemUnitSpec extends ObjectBehavior

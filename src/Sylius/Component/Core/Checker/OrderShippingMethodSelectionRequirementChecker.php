@@ -18,7 +18,7 @@ use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 final class OrderShippingMethodSelectionRequirementChecker implements OrderShippingMethodSelectionRequirementCheckerInterface
 {

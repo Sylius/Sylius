@@ -17,7 +17,7 @@ use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 interface CreatePageInterface extends BaseCreatePageInterface

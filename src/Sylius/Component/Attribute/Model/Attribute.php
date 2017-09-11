@@ -20,7 +20,7 @@ use Sylius\Component\Resource\Model\TranslatableTrait;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 class Attribute implements AttributeInterface
 {

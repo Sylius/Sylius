@@ -18,7 +18,7 @@ use Sylius\Component\Order\Model\OrderItemUnitInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 interface OrderItemUnitFactoryInterface extends FactoryInterface
 {

@@ -23,7 +23,7 @@ use Sylius\Component\Core\Test\Services\DefaultChannelFactoryInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 final class ChannelContext implements Context
 {

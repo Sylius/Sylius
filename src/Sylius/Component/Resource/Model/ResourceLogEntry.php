@@ -16,7 +16,7 @@ namespace Sylius\Component\Resource\Model;
 use Gedmo\Loggable\Entity\MappedSuperclass\AbstractLogEntry;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 abstract class ResourceLogEntry extends AbstractLogEntry implements ResourceInterface
 {

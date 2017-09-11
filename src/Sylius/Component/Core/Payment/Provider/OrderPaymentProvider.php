@@ -25,7 +25,7 @@ use Sylius\Component\Payment\Resolver\DefaultPaymentMethodResolverInterface;
 use Sylius\Component\Resource\StateMachine\StateMachineInterface;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 final class OrderPaymentProvider implements OrderPaymentProviderInterface
 {

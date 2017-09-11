@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Component\Product\Generator;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 interface SlugGeneratorInterface
 {

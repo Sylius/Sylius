@@ -21,7 +21,7 @@ use Sylius\Component\Payment\Model\PaymentMethod as BasePaymentMethod;
 use Sylius\Component\Payment\Model\PaymentMethodTranslation;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 class PaymentMethod extends BasePaymentMethod implements PaymentMethodInterface
 {

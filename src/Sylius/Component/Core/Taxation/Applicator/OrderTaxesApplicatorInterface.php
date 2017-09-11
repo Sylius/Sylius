@@ -17,7 +17,7 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  * @author Mark McKelvie <mark.mckelvie@reiss.com>
  */
 interface OrderTaxesApplicatorInterface

@@ -19,7 +19,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Templating\Helper\Helper;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 class CheckoutStepsHelper extends Helper
 {

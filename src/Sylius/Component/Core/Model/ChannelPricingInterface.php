@@ -16,7 +16,7 @@ namespace Sylius\Component\Core\Model;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  * @author Gorka Laucirica <gorka.lauzirika@gmail.com>
  */
 interface ChannelPricingInterface extends ResourceInterface

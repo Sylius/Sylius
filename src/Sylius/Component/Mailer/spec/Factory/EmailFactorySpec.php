@@ -18,7 +18,7 @@ use Sylius\Component\Mailer\Factory\EmailFactoryInterface;
 use Sylius\Component\Mailer\Model\Email;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 final class EmailFactorySpec extends ObjectBehavior
 {

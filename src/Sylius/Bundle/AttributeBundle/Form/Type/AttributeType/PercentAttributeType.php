@@ -18,7 +18,7 @@ use Symfony\Component\Form\Extension\Core\Type\PercentType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 final class PercentAttributeType extends AbstractType
 {

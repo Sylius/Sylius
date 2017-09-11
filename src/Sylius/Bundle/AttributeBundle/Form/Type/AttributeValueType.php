@@ -28,7 +28,7 @@ use Symfony\Component\Form\ReversedTransformer;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 abstract class AttributeValueType extends AbstractResourceType
 {

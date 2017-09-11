@@ -21,7 +21,7 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 /**
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 final class ContainsProductRuleChecker implements RuleCheckerInterface

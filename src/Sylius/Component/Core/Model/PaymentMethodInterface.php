@@ -18,7 +18,7 @@ use Sylius\Component\Channel\Model\ChannelsAwareInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface as BasePaymentMethodInterface;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 interface PaymentMethodInterface extends BasePaymentMethodInterface, ChannelsAwareInterface
 {

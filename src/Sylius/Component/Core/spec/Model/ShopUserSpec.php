@@ -18,7 +18,7 @@ use Sylius\Component\Core\Model\ShopUserInterface;
 
 /**
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
 final class ShopUserSpec extends ObjectBehavior
 {

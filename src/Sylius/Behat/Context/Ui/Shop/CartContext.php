@@ -25,7 +25,7 @@ use Sylius\Component\Product\Model\ProductOptionInterface;
 use Webmozart\Assert\Assert;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  * @author Anna Walasek <anna.walasek@lakion.com>
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
