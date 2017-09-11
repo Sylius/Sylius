@@ -113,10 +113,10 @@ final class ChannelContext implements Context
      * @Given /^the store(?:| also) operates on (?:a|another) channel named "([^"]+)" in "([^"]+)" currency$/
      * @Given the store operates on a channel identified by :code code
      */
-    public function theStoreOperatesOnAChannelNamed($channelIdentifier, $currencyCode = null)
+    public function theStoreOperatesOnAChannelNamed($channelName, $currencyCode = null)
     {
-        $channelCode = StringInflector::nameToLowercaseCode($channelIdentifier);
-        $defaultData = $this->defaultChannelFactory->create($channelCode, $channelIdentifier, $currencyCode);
+        $channelCode = StringInflector::nameToLowercaseCode($channelName);
+        $defaultData = $this->defaultChannelFactory->create($channelCode, $channelName, $currencyCode);
 
         $this->sharedStorage->setClipboard($defaultData);
         $this->sharedStorage->set('channel', $defaultData['channel']);
