@@ -29,5 +29,6 @@ The Cookbook
     installation-commands
     platform-sh
     platform-sh-advanced
+    admin-js-and-css
 
 .. include:: /cookbook/map.rst.inc
