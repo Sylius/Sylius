@@ -68,7 +68,7 @@
         "zendframework/zend-stdlib": "^3.1"
     },
     "require-dev": {
-        "akeneo/phpspec-skip-example-extension": "^3.0@alpha",
+        "akeneo/phpspec-skip-example-extension": "^3.0",
         "behat/behat": "^3.2",
         "behat/mink": "^1.7",
         "behat/mink-browserkit-driver": "^1.3",
