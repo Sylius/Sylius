@@ -5,7 +5,8 @@ Feature: Browsing taxons tree
     I want to browse taxons
 
     Background:
-        Given the store classifies its products as "T-Shirts", "Watches", "Belts" and "Wallets"
+        Given the store operates on a single channel in "United States"
+        And the store classifies its products as "T-Shirts", "Watches", "Belts" and "Wallets"
         And the "Watches" taxon has children taxon "Digital" and "Analog"
         And I am logged in as an administrator
 
