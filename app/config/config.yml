@@ -10,6 +10,9 @@ imports:
     - { resource: "parameters.yml" }
     - { resource: "security.yml" }
 
+parameters:
+    locale: en_US
+
 framework:
     translator: { fallbacks: ["%locale%", "en"] }
     secret: "%secret%"
@@ -46,11 +49,6 @@ swiftmailer:
     host: "%mailer_host%"
     username: "%mailer_user%"
     password: "%mailer_password%"
-
-# Temporary fix to disable aliasing @serializer service to JMS variant
-# TODO: Remove when upgrading to JMS Serializer Bundle 2.0
-jms_serializer:
-    enable_short_alias: false
 
 fos_rest:
     exception: ~

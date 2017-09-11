@@ -22,6 +22,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUser;
 use Sylius\Component\Core\Model\ShopUserInterface;
+use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
@@ -37,9 +38,20 @@ final class UserProviderSpec extends ObjectBehavior
         FactoryInterface $oauthFactory,
         RepositoryInterface $oauthRepository,
         ObjectManager $userManager,
-        CanonicalizerInterface $canonicalizer
+        CanonicalizerInterface $canonicalizer,
+        CustomerRepositoryInterface $customerRepository
     ): void {
-        $this->beConstructedWith(ShopUser::class, $customerFactory, $userFactory, $userRepository, $oauthFactory, $oauthRepository, $userManager, $canonicalizer);
+        $this->beConstructedWith(
+            ShopUser::class,
+            $customerFactory,
+            $userFactory,
+            $userRepository,
+            $oauthFactory,
+            $oauthRepository,
+            $userManager,
+            $canonicalizer,
+            $customerRepository
+        );
     }
 
     function it_implements_Hwi_oauth_aware_user_provider_interface(): void
@@ -158,6 +170,8 @@ final class UserProviderSpec extends ObjectBehavior
         $response->getResourceOwner()->willReturn($resourceOwner);
         $response->getAccessToken()->willReturn('access_token');
         $response->getRefreshToken()->willReturn('refresh_token');
+        $response->getFirstName()->willReturn(null);
+        $response->getLastName()->willReturn(null);
 
         $oauthRepository->findOneBy(['provider' => 'google', 'identifier' => 'username'])->willReturn(null);
         $oauthFactory->createNew()->willReturn($oauth);

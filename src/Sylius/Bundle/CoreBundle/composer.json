@@ -23,7 +23,7 @@
         "php": "^7.1",
 
         "fzaninotto/faker": "^1.0",
-        "jms/serializer-bundle": "^1.1",
+        "jms/serializer-bundle": "^2.0",
         "knplabs/knp-gaufrette-bundle": "^0.3",
         "sonata-project/intl-bundle": "^2.2",
         "swiftmailer/swiftmailer": "^6.0",
@@ -48,8 +48,10 @@
         "sylius/taxonomy-bundle": "^1.0",
         "sylius/theme-bundle": "^1.0",
         "sylius/user-bundle": "^1.0",
+        "sylius-labs/association-hydrator": "^1.0",
         "symfony/framework-bundle": "^3.2",
-        "winzou/state-machine-bundle": "^0.3"
+        "winzou/state-machine-bundle": "^0.3",
+        "liip/imagine-bundle": "^1.9.1"
     },
     "require-dev": {
         "hwi/oauth-bundle": "^0.5",

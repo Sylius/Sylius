@@ -16,6 +16,7 @@ namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use SyliusLabs\AssociationHydrator\AssociationHydrator;
 
 /**
  * @author Kamil Kokot <kamil@kokot.me>
@@ -30,11 +31,11 @@ class AttributeRepository extends EntityRepository
     /**
      * {@inheritdoc}
      */
-    public function __construct(EntityManager $em, Mapping\ClassMetadata $class)
+    public function __construct(EntityManager $entityManager, Mapping\ClassMetadata $class)
     {
-        parent::__construct($em, $class);
+        parent::__construct($entityManager, $class);
 
-        $this->associationHydrator = new AssociationHydrator($this->_em, $class);
+        $this->associationHydrator = new AssociationHydrator($entityManager, $class);
     }
 
     /**

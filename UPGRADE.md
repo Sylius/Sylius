@@ -2,6 +2,9 @@
 
 ## Application:
 
+* Parameters `locale` has been move from `parameters.yml.dist` and `parameters.yml` file and is now configured in `app/config/config.yml` by default. 
+  If you would like to use a different default locale you should modify it there and commit such change to your project repository.
+
 * `\DateTimeInterface` is used for typehints instead of `\DateTime` to allow for compatibility with `\DateTimeImmutable`.
   Do not rely on mutable behaviour and set changes directly on the model.
   
@@ -73,6 +76,7 @@
 ### Core / CoreBundle
 
 * Method `OrderInterface::isShippingRequired` added, used in place of similar methods in `OrderShippingMethodSelectionRequirementChecker` and `OrderShipmentProcessor`
+* `createByCustomerAndChannelIdQueryBuilder($customerId, $channelId)` method added to `OrderRepositoryInterface`
 * The following classes have been made final, use decoration instead of extending them:
 
     * `CartItemTypeExtension`
@@ -102,6 +106,12 @@
     * `TaxRateInterface::setZone`
 
 * Constructor of `Sylius\Bundle\CoreBundle\Context\SessionAndChannelBasedCartContext` has been changed to use `Sylius\Component\Core\Storage\CartStorageInterface`
+
+* `SessionCartSubscriber` and `ShopUserLogoutHandler` has been moved to ShopBundle. If you used them, you need to add ShopBundle to your Kernel or define this services by your own.
+
+* The service definition of `session_and_channel_based` has been moved to ShopBundle. If you used it, you need to add ShopBundle to your Kernel or define this services by your own.
+
+* `AssociationHydrator` was moved to `sylius-labs/association-hydrator` package.
 
 ### Customer / CustomerBundle
 
@@ -137,6 +147,16 @@
 * In statistics to display information about only fulfilled orders
   `OrderRepositoryInterface::countByChannel()` signature was changed to `OrderRepositoryInterface::countFulfilledByChannel()`.
 
+* The service definition of `sylius.context.cart.session_based` has been removed. Declare it by your own if you want to use `SessionBasedCartContext`
+
+    ```xml
+        <service id="sylius.context.cart.session_based" class="Sylius\Bundle\OrderBundle\Context\SessionBasedCartContext">
+            <argument type="service" id="session" />
+            <argument>_sylius.cart</argument>
+            <argument type="service" id="sylius.repository.order" />
+            <tag name="sylius.context.cart" priority="-777" />
+        </service>
+    ```
 ### Payment / PaymentBundle
 
 * In `PaymentInterface::setMethod` method the default value of `PaymentMethodInterface $method` parameter has been removed.
@@ -199,6 +219,11 @@
         _liip_imagine:
             resource: "@LiipImagineBundle/Resources/config/routing.xml"
      ```
+     
+* ImagineBundle has been upgraded from ^1.6 to ^1.9.1 to move past a BC break in console commands: https://github.com/liip/LiipImagineBundle/releases/tag/1.9.1.
+
+* If `sylius_shop.locale_switcher` is set to `storage`, `LocaleStrippingRouter` is loaded which strips out `_locale` parameter
+  from the URL if it's the same as the one already in the storage.
  
 ### Shipping / ShippingBundle
 

@@ -24,6 +24,7 @@ use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\OrderPaymentStates;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
+use SyliusLabs\AssociationHydrator\AssociationHydrator;
 
 class OrderRepository extends BaseOrderRepository implements OrderRepositoryInterface
 {
@@ -35,11 +36,11 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
     /**
      * {@inheritdoc}
      */
-    public function __construct(EntityManager $em, Mapping\ClassMetadata $class)
+    public function __construct(EntityManager $entityManager, Mapping\ClassMetadata $class)
     {
-        parent::__construct($em, $class);
+        parent::__construct($entityManager, $class);
 
-        $this->associationHydrator = new AssociationHydrator($this->_em, $class);
+        $this->associationHydrator = new AssociationHydrator($entityManager, $class);
     }
 
     /**
@@ -66,6 +67,21 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
             ->andWhere('o.customer = :customerId')
             ->andWhere('o.state != :state')
             ->setParameter('customerId', $customerId)
+            ->setParameter('state', OrderInterface::STATE_CART)
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createByCustomerAndChannelIdQueryBuilder($customerId, $channelId): QueryBuilder
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.customer = :customerId')
+            ->andWhere('o.channel = :channelId')
+            ->andWhere('o.state != :state')
+            ->setParameter('customerId', $customerId)
+            ->setParameter('channelId', $channelId)
             ->setParameter('state', OrderInterface::STATE_CART)
         ;
     }
