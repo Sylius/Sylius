@@ -37,7 +37,6 @@
         "fzaninotto/faker": "^1.6",
         "gedmo/doctrine-extensions": "^2.4.12",
         "incenteev/composer-parameter-handler": "^2.1",
-        "jms/serializer": "^1.0,<1.7",
         "jms/serializer-bundle": "^1.1",
         "knplabs/knp-gaufrette-bundle": "^0.3",
         "knplabs/knp-menu-bundle": "^2.1",
