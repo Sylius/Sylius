@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "45cb7c9fd024d82ba968f042ae3a6918",
+    "content-hash": "2fbb5406d81af949d270297577f420a5",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -4802,6 +4802,45 @@
                 "mailer"
             ],
             "time": "2017-05-20T06:20:27+00:00"
+        },
+        {
+            "name": "sylius-labs/association-hydrator",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SyliusLabs/AssociationHydrator.git",
+                "reference": "7301fd7aea6444f776af99a37902c8c78a0c64bc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SyliusLabs/AssociationHydrator/zipball/7301fd7aea6444f776af99a37902c8c78a0c64bc",
+                "reference": "7301fd7aea6444f776af99a37902c8c78a0c64bc",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/orm": "^2.4",
+                "php": "^7.1",
+                "symfony/property-access": "^3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "SyliusLabs\\AssociationHydrator\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kamil Kokot",
+                    "email": "kamil@kokot.me",
+                    "homepage": "http://kamil.kokot.me"
+                }
+            ],
+            "description": "Doctrine ORM hydration performance optimization made easier.",
+            "time": "2017-09-11T15:44:45+00:00"
         },
         {
             "name": "symfony/monolog-bundle",

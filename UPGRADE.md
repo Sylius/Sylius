@@ -108,6 +108,8 @@
 
 * The service definition of `session_and_channel_based` has been moved to ShopBundle. If you used it, you need to add ShopBundle to your Kernel or define this services by your own.
 
+* `AssociationHydrator` was moved to `sylius-labs/association-hydrator` package.
+
 ### Customer / CustomerBundle
 
 * The following methods does not longer have a default null argument and requires one to be explicitly passed:

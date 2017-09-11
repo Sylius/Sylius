@@ -21,6 +21,7 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
+use SyliusLabs\AssociationHydrator\AssociationHydrator;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -34,14 +35,13 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
     private $associationHydrator;
 
     /**
-     * @param EntityManager $em
-     * @param Mapping\ClassMetadata $class
+     * {@inheritdoc}
      */
-    public function __construct(EntityManager $em, Mapping\ClassMetadata $class)
+    public function __construct(EntityManager $entityManager, Mapping\ClassMetadata $class)
     {
-        parent::__construct($em, $class);
+        parent::__construct($entityManager, $class);
 
-        $this->associationHydrator = new AssociationHydrator($em, $class);
+        $this->associationHydrator = new AssociationHydrator($entityManager, $class);
     }
 
     /**

@@ -48,6 +48,7 @@
         "sylius/taxonomy-bundle": "^1.0",
         "sylius/theme-bundle": "^1.0",
         "sylius/user-bundle": "^1.0",
+        "sylius-labs/association-hydrator": "^1.0",
         "symfony/framework-bundle": "^3.2",
         "winzou/state-machine-bundle": "^0.3"
     },
