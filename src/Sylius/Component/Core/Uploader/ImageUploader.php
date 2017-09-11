@@ -62,7 +62,11 @@ class ImageUploader implements ImageUploaderInterface
      */
     public function remove(string $path): bool
     {
-        return $this->filesystem->delete($path);
+        if ($this->filesystem->has($path)) {
+            return $this->filesystem->delete($path);
+        }
+
+        return false;
     }
 
     /**
