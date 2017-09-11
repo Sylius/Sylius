@@ -97,17 +97,14 @@ class Kernel extends HttpKernel
             new \Sylius\Bundle\FixturesBundle\SyliusFixturesBundle(),
             new \Sylius\Bundle\PayumBundle\SyliusPayumBundle(), // must be added after PayumBundle.
             new \Sylius\Bundle\ThemeBundle\SyliusThemeBundle(), // must be added after FrameworkBundle
+
+            new \Symfony\Bundle\WebServerBundle\WebServerBundle(), // allows to run build in web server. Not recommended for prod environment
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test', 'test_cached'], true)) {
             $bundles[] = new \Symfony\Bundle\DebugBundle\DebugBundle();
             $bundles[] = new \Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new \Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
-            
-            // Symfony 3.3 moved server:* commands to another bundle
-            if (class_exists(\Symfony\Bundle\WebServerBundle\WebServerBundle::class)) {
-                $bundles[] = new \Symfony\Bundle\WebServerBundle\WebServerBundle();
-            }
         }
 
         return $bundles;
