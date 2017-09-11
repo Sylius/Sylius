@@ -70,5 +70,7 @@
         $(document).notification();
         $(document).productSlugGenerator();
         $(document).taxonSlugGenerator();
+
+        $(document).previewUploadedImage('#sylius_product_images');
     });
 })(jQuery);
