@@ -143,10 +143,12 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
         /** @var SyliusUserInterface $user */
         $user = $this->userFactory->createNew();
 
-        $customer = $this->customerRepository->findOneBy(['emailCanonical' => strtolower($response->getEmail())]);
+        $canonicalEmail = $this->canonicalizer->canonicalize($response->getEmail());
+
+        /** @var CustomerInterface $customer */
+        $customer = $this->customerRepository->findOneBy(['emailCanonical' => $canonicalEmail]);
 
         if (null === $customer) {
-            /** @var CustomerInterface $customer */
             $customer = $this->customerFactory->createNew();
         }
 
@@ -160,7 +162,7 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
         if (null !== $name = $response->getFirstName()) {
             $customer->setFirstName($name);
         } elseif (null !== $realName = $response->getRealName()) {
-                $customer->setFirstName($realName);
+            $customer->setFirstName($realName);
         }
 
         if (null !== $lastName = $response->getLastName()) {
