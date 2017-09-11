@@ -20,6 +20,7 @@
         <import resource="services/action.xml" />
         <import resource="services/controller.xml" />
         <import resource="services/extension.xml" />
+        <import resource="services/factory.xml" />
         <import resource="services/form.xml" />
         <import resource="services/provider.xml" />
     </imports>
