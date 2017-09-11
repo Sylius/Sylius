@@ -2,6 +2,9 @@
 
 ## Application:
 
+* Parameters `locale` has been move from `parameters.yml.dist` and `parameters.yml` file and is now configured in `app/config/config.yml` by default. 
+  If you would like to use a different default locale you should modify it there and commit such change to your project repository.
+
 * `\DateTimeInterface` is used for typehints instead of `\DateTime` to allow for compatibility with `\DateTimeImmutable`.
   Do not rely on mutable behaviour and set changes directly on the model.
   

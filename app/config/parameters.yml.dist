@@ -14,4 +14,3 @@ parameters:
     mailer_password: ~
 
     secret: EDITME
-    locale: en_US

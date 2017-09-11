@@ -10,6 +10,9 @@ imports:
     - { resource: "parameters.yml" }
     - { resource: "security.yml" }
 
+parameters:
+    locale: en_US
+
 framework:
     translator: { fallbacks: ["%locale%", "en"] }
     secret: "%secret%"
