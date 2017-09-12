@@ -46,7 +46,7 @@
         "payum/payum-bundle": "^2.2",
         "php-http/guzzle6-adapter": "^1.1",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0",
-        "sensio/distribution-bundle": "^5.0.19",
+        "sensio/distribution-bundle": "^5.0.21",
         "sonata-project/block-bundle": "^3.3",
         "sonata-project/intl-bundle": "^2.2",
         "stof/doctrine-extensions-bundle": "^1.2",
