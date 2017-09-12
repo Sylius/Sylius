@@ -13,12 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ShopBundle\EventListener;
 
-use Sylius\Bundle\ShopBundle\ShopSession;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Storage\CartStorageInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Http\HttpUtils;
 use Symfony\Component\Security\Http\Logout\DefaultLogoutSuccessHandler;
 

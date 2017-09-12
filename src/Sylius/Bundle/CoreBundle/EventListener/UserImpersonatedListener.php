@@ -19,7 +19,6 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Storage\CartStorageInterface;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 final class UserImpersonatedListener
 {

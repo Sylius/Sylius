@@ -16,7 +16,7 @@ namespace Sylius\Component\Core\Shipping\Calculator;
 use Sylius\Component\Core\Exception\MissingChannelConfigurationException;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Shipping\Calculator\CalculatorInterface;
-use Sylius\Component\Shipping\Model\ShipmentInterface  as BaseShipmentInterface;
+use Sylius\Component\Shipping\Model\ShipmentInterface as BaseShipmentInterface;
 use Webmozart\Assert\Assert;
 
 /**
