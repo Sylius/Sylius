@@ -17,6 +17,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Customer\Model\Customer as BaseCustomer;
 use Sylius\Component\User\Model\UserInterface as BaseUserInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
@@ -128,9 +129,22 @@ class Customer extends BaseCustomer implements CustomerInterface
      */
     public function setUser(?BaseUserInterface $user): void
     {
-        if ($this->user !== $user) {
-            $this->user = $user;
-            $this->assignCustomer($user);
+         if ($this->user === $user) {
+            return;
+        }
+
+        /** @var ShopUserInterface|null $user */
+        Assert::nullOrIsInstanceOf($user, ShopUserInterface::class);
+
+        $previousUser = $this->user;
+        $this->user = $user;
+
+        if ($previousUser instanceof ShopUserInterface) {
+            $previousUser->setCustomer(null);
+        }
+
+        if ($user instanceof ShopUserInterface) {
+            $user->setCustomer($this);
         }
     }
 
@@ -140,15 +154,5 @@ class Customer extends BaseCustomer implements CustomerInterface
     public function hasUser(): bool
     {
         return null !== $this->user;
-    }
-
-    /**
-     * @param ShopUserInterface|null $user
-     */
-    protected function assignCustomer(?ShopUserInterface $user): void
-    {
-        if (null !== $user) {
-            $user->setCustomer($this);
-        }
     }
 }
