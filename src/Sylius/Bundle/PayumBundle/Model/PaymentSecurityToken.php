@@ -26,7 +26,7 @@ class PaymentSecurityToken implements ResourceInterface, TokenInterface
     protected $hash;
 
     /**
-     * @var IdentityInterface
+     * @var mixed
      */
     protected $details;
 
@@ -68,8 +68,6 @@ class PaymentSecurityToken implements ResourceInterface, TokenInterface
 
     /**
      * {@inheritdoc}
-     *
-     * @return IdentityInterface
      */
     public function getDetails()
     {
