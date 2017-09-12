@@ -49,7 +49,7 @@ final class DashboardContext implements Context
      */
     public function iOpenAdministrationDashboardForChannel($name)
     {
-        $this->dashboardPage->open(['channel' => StringInflector::nameToCode($name)]);
+        $this->dashboardPage->open(['channel' => StringInflector::nameToLowercaseCode($name)]);
     }
 
     /**
