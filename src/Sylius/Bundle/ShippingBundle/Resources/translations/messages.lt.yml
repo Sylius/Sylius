@@ -37,6 +37,6 @@ sylius:
             description: Aprašymas
             enabled: Įjungta
             name: Pavadinimas
+            position: Pozicija
             tax_category: Mokesčių kategorija
             translations: Vertimai
-            position: Pozicija

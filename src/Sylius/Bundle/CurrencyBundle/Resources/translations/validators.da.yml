@@ -1,0 +1,23 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    currency:
+        code:
+            exact_length: Valutakoden skal være præcis 3 tegn.
+            not_blank: Vælg valutakode.
+            regex: Valutakode kan kun bestå af bogstaver, tal, bindestreger og understregninger.
+            unique: Valutakode skal være unik.
+        exchange_rate:
+            not_blank: Angiv venligst kurs.
+    exchange_rate:
+        ratio:
+            greater_than: Kursen skal større end 0.
+            invalid: Kursen skal være et tal.
+            not_blank: Angiv venligst kurs.
+        source_currency:
+            not_blank: Angiv venligst fra hvilken valuta vekslekursen skal afledes.
+        target_currency:
+            not_blank: Angiv venligst hvilken valuta vekslekursen skal sættes på.
+        unique_currency_pair: Valutakombinationen skal være unik.
+        different_source_target_currency: Fra og til valuta skal være forskellige.

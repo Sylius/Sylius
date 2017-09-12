@@ -8,6 +8,7 @@ sylius:
             unique: Product SKU moet uniek zijn.
         slug:
             not_blank: Voer alstublieft een product slug in.
+            unique: Productcode moet uniek zijn.
         code:
             not_blank: Voer een product code in.
             regex: Product code kan alleen bestaan uit letters, cijfers, streepjes en liggende streepjes.

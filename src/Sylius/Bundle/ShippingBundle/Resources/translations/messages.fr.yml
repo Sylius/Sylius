@@ -37,6 +37,6 @@ sylius:
             description: Description
             enabled: Activé
             name: Nom
+            position: Emplacement
             tax_category: Catégorie de taxe
             translations: Traductions
-            position: Emplacement

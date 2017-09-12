@@ -17,5 +17,7 @@ sylius:
             not_blank: 请输入汇率。
         source_currency:
             not_blank: 请输入来自哪一种货币的汇率。
+        target_currency:
+            not_blank: 请输入需要设置汇率的货币。
         unique_currency_pair: 货币组合必须是唯一的。
         different_source_target_currency: 源和目标货币必须不同。

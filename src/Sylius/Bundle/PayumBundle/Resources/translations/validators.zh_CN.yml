@@ -13,3 +13,5 @@ sylius:
         stripe:
             secret_key:
                 not_blank: 请输入条纹秘密密钥。
+            publishable_key:
+                not_blank: 请输入Stripe支付的公钥。

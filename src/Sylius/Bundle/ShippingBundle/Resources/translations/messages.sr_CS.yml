@@ -29,6 +29,6 @@ sylius:
             description: Opis
             enabled: Omogućeno
             name: Ime
+            position: Pozicija
             tax_category: Kategorija proizvoda
             translations: Prevodi
-            position: Pozicija

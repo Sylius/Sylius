@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    locale:
+        code:
+            not_blank: Vælg venligst en landekode.
+            regex: Landekode må kun bestå af bogstaver, tal, bindestreger og understregninger.
+            unique: Landekoden skal være unik.

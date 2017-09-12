@@ -15,6 +15,10 @@ sylius:
             not_blank: Indtast produktnavn.
             min_length: Produktnavnet skal være mindst ét tegn langt. |Produktnavnet skal være mindst {{ limit }} tegn langt.
             max_length: Produktnavnet må ikke være længere end 1 tegn. |Produktnavn må ikke være længere end {{ limit }} tegn.
+    product_variant:
+        code:
+            not_blank: Angiv venligst koden.
+            within_product_unique: Denne kode skal være unik i dette produkt.
     option:
         name:
             not_blank: Indtast egenskabens systemnavn.

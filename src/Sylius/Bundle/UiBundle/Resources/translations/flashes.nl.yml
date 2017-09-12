@@ -7,14 +7,14 @@ sylius:
     checkout:
         complete_error: 'Er was een onverwacht probleem met het voltooien van de order. Probeer uw bestelling opnieuw te plaatsen.'
     contact:
-        request_success: 'Uw contact verzoek is succesvol ingediend.'
-        request_error: 'Er is een probleem opgetreden tijdens het verzenden van de contact aanvraag. Probeert u het later nogmaals.'
+        request_success: 'Uw contactverzoek is succesvol ingediend.'
+        request_error: 'Er is een probleem opgetreden tijdens het verzenden van de contactverzoek. Probeert u het later nogmaals.'
     customer:
         add_address: 'Adres is succesvol toegevoegd.'
         impersonate: 'Succesvol geimpersoneerd als klant %name%.'
         set_address_as_default: 'Adres is ingesteld als standaard.'
     order:
-        apply_state_machine_transition_error: 'Er was een onverwacht probleem met het bijwerken van de order. Probeer alstublieft de order opnieuw bijwerken.'
+        apply_state_machine_transition_error: 'Er was een onverwacht probleem met het bijwerken van de bestelling. Probeer alstublieft de bestelling opnieuw te bewerken.'
         promotion_integrity: 'U komt helaas niet langer in aanmerking voor deze aanbieding %promotionName%.'
         total_integrity: 'Uw order totaal is gewijzigd, controleer uw bestelling en bevestig het opnieuw.'
         update_error: 'Er was een onverwacht probleem met het bijwerken van het product. Probeer het product opnieuw bijwerken.'

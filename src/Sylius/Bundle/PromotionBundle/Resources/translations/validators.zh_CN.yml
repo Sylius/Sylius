@@ -37,3 +37,7 @@ sylius:
         code_length:
             min: 优惠券代码必须至少 {{ limit }} 个字符长。
             max: 优惠券代码必须不能超过 {{ limit }} 个字符。
+            not_blank: 优惠券代码不能为空。
+        possible_generation_amount: 无效的优惠券代码长度或优惠券金额。无法生成代码长度等于 %codeLength% 数量为%expectedAmount% 的优惠券。建议的数量是 %possibleAmount%。
+        usage_limit:
+            min: 生成的优惠券必须至少使用 {{ limit }} 次。

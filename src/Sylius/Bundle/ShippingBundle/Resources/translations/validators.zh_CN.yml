@@ -9,6 +9,7 @@ sylius:
             not_blank: '请输入配送类别名称。'
         code:
             not_blank: '请输入配送类别编码'
+            regex: '货运分类代码仅可以由字母、 数字、 破折号和下划线组成。'
             unique: '给定代码配送编码已存在。'
     shipping_method:
         calculator:
@@ -21,6 +22,7 @@ sylius:
             not_blank: '请填写配送方式名称。'
         code:
             not_blank: '请填写配送方式名称。'
+            regex: '货运方式代码仅可以由字母、 数字、 破折号和下划线组成。'
             unique: '给定发货方式的代码已存在。'
         zone:
             not_blank: '请选择配送区域。'

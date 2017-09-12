@@ -4,7 +4,7 @@
 sylius:
     form:
         address:
-            city: Stad
+            city: Plaats
             company: Bedrijf
             country: Land
             first_name: Voornaam

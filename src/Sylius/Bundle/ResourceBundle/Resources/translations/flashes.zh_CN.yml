@@ -13,3 +13,5 @@ sylius:
         enable: '%resource% 已成功启用。'
         disable: '%resource% 已被成功地禁用。'
         delete_error: '不能删除，%resource% 正在使用中。'
+        race_condition_error: '%resource% 已经被修改，不能更新。'
+        something_went_wrong_error: '出现错误。请重试。'

@@ -37,6 +37,6 @@ sylius:
             description: Описание
             enabled: Активирано
             name: Име
+            position: Позиция
             tax_category: Данъчна категория
             translations: Преводи
-            position: Позиция

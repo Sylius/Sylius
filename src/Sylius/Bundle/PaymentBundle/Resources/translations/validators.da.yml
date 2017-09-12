@@ -15,10 +15,31 @@ sylius:
             luhn: Kreditkortets indtastede nummer er ugyldigt.
         security_code:
             not_blank: Angiv venligst sikkerhedskoden.
+            max_length: Kreditkortets CVV kode skal være mindst {{ limit }} cifre.
+            min_length: Kreditkortets CVV kode kan højest være på {{ limit }} cifre.
         expiry_year:
             not_blank: Angiv udløbsåret.
+    payment:
+        currency_code:
+            not_valid: Valutakoden du indtastede er ugyldig.
+        method:
+            not_blank: 'Vælg venligs en betalingsmetode.'
     payment_method:
+        gateway:
+            not_blank: Vælg venligst en gateway til betalingsmetoden.
         name:
             max_length: Betalings metodenavn skal være {{ limit }} tegn langt eller mindre.
             min_length: Navnet på betalingsmetoden må være mindst {{ limit }} tegn langt.
             not_blank: Angiv venligst navnet på betalingsmetoden.
+        fee_calculator_configuration:
+            amount:
+                greater_than_or_equal: Gebyret kan ikke være mindre end {{ compared_value }}.
+                not_blank: Angiv venligst gebyrbeløbet.
+            percent:
+                max_range: Procentgebyr kan ikke være større end {{ limit }}.
+                min_range: Procentgebyr kan ikke være lavere end {{ limit }}.
+                not_blank: Angiv venligst gebyrprocenten.
+        code:
+            not_blank: 'Angiv venligst koden for betalingsmetoden.'
+            regex: 'Betalingsmetode-koden må kun bestå af bogstaver, tal, bindestreger og understregninger.'
+            unique: 'Betalingsmetoden med den angivne kode eksisterer i forvejen.'

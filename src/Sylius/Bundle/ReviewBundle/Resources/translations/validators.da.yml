@@ -1,0 +1,15 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    review:
+        author:
+            already_exists: Denne email er allerede registreret, venligst login eller brug glemt adgangskode funktionen.
+        comment:
+            not_blank: Anmeldelseskommentar bør ikke være tom.
+        rating:
+            not_blank: Vælg venligst en vurdering.
+        title:
+            not_blank: Anmeldelsestitel bør ikke være tom.
+            min_length: Anmeldelsestitel skal være mindst 2 tegn.
+            max_length: Anmeldelsestitel må højest være på 255 tegn.
