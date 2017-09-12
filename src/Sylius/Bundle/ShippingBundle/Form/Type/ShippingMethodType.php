@@ -20,6 +20,7 @@ use Sylius\Bundle\ResourceBundle\Form\Type\ResourceTranslationsType;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Shipping\Calculator\CalculatorInterface;
 use Sylius\Component\Shipping\Model\ShippingMethod;
+use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -93,7 +94,11 @@ final class ShippingMethodType extends AbstractResourceType
                 'label' => 'sylius.form.shipping_method.category',
             ])
             ->add('categoryRequirement', ChoiceType::class, [
-                'choices' => array_flip(ShippingMethod::getCategoryRequirementLabels()),
+                'choices' => [
+                    'sylius.form.shipping_method.match_none_category_requirement' => ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_NONE,
+                    'sylius.form.shipping_method.match_any_category_requirement' => ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY,
+                    'sylius.form.shipping_method.match_all_category_requirement' => ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ALL,
+                ],
                 'multiple' => false,
                 'expanded' => true,
                 'label' => 'sylius.form.shipping_method.category_requirement',

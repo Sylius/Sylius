@@ -154,14 +154,6 @@ class ShippingMethod implements ShippingMethodInterface
     /**
      * {@inheritdoc}
      */
-    public function getCategoryRequirementLabel(): string
-    {
-        return self::getCategoryRequirementLabels()[$this->categoryRequirement];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): ?string
     {
         return $this->getTranslation()->getName();
@@ -221,18 +213,6 @@ class ShippingMethod implements ShippingMethodInterface
     public function setConfiguration(array $configuration): void
     {
         $this->configuration = $configuration;
-    }
-
-    /**
-     * @return array
-     */
-    public static function getCategoryRequirementLabels(): array
-    {
-        return [
-            ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_NONE => 'None of the units have to match the method category',
-            ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY => 'At least 1 unit has to match the method category',
-            ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ALL => 'All units has to match the method category',
-        ];
     }
 
     /**

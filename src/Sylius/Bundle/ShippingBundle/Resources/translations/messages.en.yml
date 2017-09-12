@@ -36,7 +36,10 @@ sylius:
             configuration: Configuration
             description: Description
             enabled: Enabled
+            match_all_category_requirement: All units has to match the method category
+            match_any_category_requirement: At least 1 unit has to match the method category
+            match_none_category_requirement: None of the units have to match the method category
             name: Name
+            position: Position
             tax_category: Tax category
             translations: Translations
-            position: Position
