@@ -75,6 +75,16 @@ final class ChannelContext implements Context
     }
 
     /**
+     * @Given :channel channel has account verification disabled
+     */
+    public function channelHasAccountVerificationDisabled(ChannelInterface $channel): void
+    {
+        $channel->setAccountVerificationRequired(false);
+
+        $this->channelManager->flush();
+    }
+
+    /**
      * @Given the store operates on a single channel in "United States"
      */
     public function storeOperatesOnASingleChannelInUnitedStates()
