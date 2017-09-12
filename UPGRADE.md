@@ -223,7 +223,7 @@
 * ImagineBundle has been upgraded from ^1.6 to ^1.9.1 to move past a BC break in console commands: https://github.com/liip/LiipImagineBundle/releases/tag/1.9.1.
 
 * If `sylius_shop.locale_switcher` is set to `storage`, `LocaleStrippingRouter` is loaded which strips out `_locale` parameter
-  from the URL if it's the same as the one already in the storage.
+  from the URL if it's the same as the one already in the storage. In order to disable localized urls, follow this cookbook entry: http://docs.sylius.org/en/latest/cookbook/disabling-localised-urls.html
  
 * `ShopUserLogoutHandler` has different parameters in constructor:
     * `HttpUtils $httpUtils`
