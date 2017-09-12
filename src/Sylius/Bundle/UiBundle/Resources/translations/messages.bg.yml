@@ -822,7 +822,6 @@ sylius:
         there_is_a_new_version_of_sylius_available: 'Налична е нова версия на Sylius'
         there_is_no_main_taxon_for_this_product: 'Няма главна класификация за този продукт'
         this_customer_does_not_have_a_default_address: 'Този клиент няма адрес по подразбиране'
-        this_customer_has_not_placed_any_orders_yet: 'Този клиент все още не е правил поръчки'
         this_months_statistics: 'Статистика за този месец'
         this_product_has_no_attributes_defined: 'Този продукт няма дефинирани атрибути'
         title: 'Заглавие'

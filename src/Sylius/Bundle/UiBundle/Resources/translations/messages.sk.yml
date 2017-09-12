@@ -818,7 +818,6 @@ sylius:
         there_is_a_new_version_of_sylius_available: 'Nová verzia Syliusu je k dispozícii'
         there_is_no_main_taxon_for_this_product: 'Pre tento produkt nie je zvolená hlavná kategória'
         this_customer_does_not_have_a_default_address: 'Tento zákazník nemá predvolenú adresu'
-        this_customer_has_not_placed_any_orders_yet: 'Tento užívateľ zatiaľ nič neobjednal'
         this_months_statistics: 'Mesačná štatistika'
         this_product_has_no_attributes_defined: 'Produkt nemá žiadne vlastnosti'
         title: 'Názov'

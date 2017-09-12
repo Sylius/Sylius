@@ -29,5 +29,6 @@ sylius:
         payment_method:
             description: 描述
             enabled: 已启用
+            instructions: 说明
             name: 名称
             position: 优先级

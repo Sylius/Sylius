@@ -8,3 +8,4 @@ sylius:
         failed: '付款已失败。'
         processing: '正在处理付款。'
         refunded: '成功地退还款项。'
+        unknown: '支付时出现了未知的错误。'

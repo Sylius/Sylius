@@ -819,7 +819,6 @@ sylius:
         there_is_a_new_version_of_sylius_available: 'Dostępna nowa wersja oprogramowania Sylius'
         there_is_no_main_taxon_for_this_product: 'Brak głównego taksonu dla tego produktu'
         this_customer_does_not_have_a_default_address: 'Klient nie ma skonfigurowanego domyślnego adresu'
-        this_customer_has_not_placed_any_orders_yet: 'Klient nie złożył jeszcze żadnego zamówienia'
         this_months_statistics: 'Statystyki bieżącego miesiąca'
         this_product_has_no_attributes_defined: 'Ten produkt nie posiada żadnych zdefiniowanych cech'
         title: 'Tytuł'

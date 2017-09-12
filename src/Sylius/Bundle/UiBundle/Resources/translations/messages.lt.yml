@@ -772,7 +772,6 @@ sylius:
         there_is_a_new_version_of_sylius_available: 'Yra nauja Sylius versija'
         there_is_no_main_taxon_for_this_product: 'Nėra priskirto pagrindinio taksono šiam produktui'
         this_customer_does_not_have_a_default_address: 'Šis pirkėjas neturi numatytojo adreso'
-        this_customer_has_not_placed_any_orders_yet: 'Šis klientas dar nieko neužsisakė'
         this_months_statistics: 'Šio mėnesio statistika'
         this_product_has_no_attributes_defined: 'Šis produktas neturi atributų'
         title: 'Pavadinimas'

@@ -19,6 +19,11 @@ sylius:
             min_length: 该信用卡验证值码必须是最多 {{ limit }} 数字长。
         expiry_year:
             not_blank: 请选择到期年份。
+    payment:
+        currency_code:
+            not_valid: 您输入的币种代码是无效的。
+        method:
+            not_blank: '请选择一种支付方式。'
     payment_method:
         gateway:
             not_blank: 请选择支付方法网关。
@@ -36,4 +41,5 @@ sylius:
                 not_blank: 请输入费用百分比。
         code:
             not_blank: '请输入付款方法代码。'
+            regex: '付款方法代码仅可以由字母、 数字、 破折号和下划线组成。'
             unique: '给定代码的付款方法已存在。'
