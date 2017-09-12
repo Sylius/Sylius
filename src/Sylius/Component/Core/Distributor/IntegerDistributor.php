@@ -12,6 +12,7 @@
 declare(strict_types=1);
 
 namespace Sylius\Component\Core\Distributor;
+
 use Webmozart\Assert\Assert;
 
 /**

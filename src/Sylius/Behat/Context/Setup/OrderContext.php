@@ -522,7 +522,7 @@ final class OrderContext implements Context
         int $numberOfCustomers,
         int $numberOfOrders,
         string $total
-    ): void{
+    ): void {
         $this->createOrders($numberOfCustomers, $numberOfOrders, $total, true);
     }
 

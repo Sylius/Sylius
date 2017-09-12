@@ -104,6 +104,5 @@ class UniqueReviewerEmailValidator extends ConstraintValidator
         }
 
         return $user->getEmail();
-
     }
 }

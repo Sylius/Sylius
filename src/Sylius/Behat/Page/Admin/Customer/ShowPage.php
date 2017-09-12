@@ -134,7 +134,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
         Assert::notNull($group, 'There should be element group on page.');
 
-        list($text, $groupName) = explode(':', $group->getText());
+        [$text, $groupName] = explode(':', $group->getText());
 
         return trim($groupName);
     }

@@ -113,6 +113,6 @@ final class ChannelApiTest extends JsonApiTestCase
      */
     private function getChannelUrl(ChannelInterface $channel)
     {
-         return '/api/v1/channels/' . $channel->getCode();
+        return '/api/v1/channels/' . $channel->getCode();
     }
 }

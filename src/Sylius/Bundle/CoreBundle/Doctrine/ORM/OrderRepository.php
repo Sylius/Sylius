@@ -102,7 +102,6 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
      */
     public function findForCustomerStatistics(CustomerInterface $customer): array
     {
-
         return $this->createQueryBuilder('o')
             ->andWhere('o.customer = :customerId')
             ->andWhere('o.state = :state')

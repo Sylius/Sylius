@@ -60,5 +60,4 @@ final class CheckoutStepsHelperSpec extends ObjectBehavior
     {
         $this->getName()->shouldReturn('sylius_checkout_steps');
     }
-
 }

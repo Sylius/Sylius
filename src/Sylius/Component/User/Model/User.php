@@ -540,7 +540,7 @@ class User implements UserInterface
         // older data which does not include all properties.
         $data = array_merge($data, array_fill(0, 2, null));
 
-        list(
+        [
             $this->password,
             $this->salt,
             $this->usernameCanonical,
@@ -548,7 +548,7 @@ class User implements UserInterface
             $this->locked,
             $this->enabled,
             $this->id
-        ) = $data;
+        ] = $data;
     }
 
     /**

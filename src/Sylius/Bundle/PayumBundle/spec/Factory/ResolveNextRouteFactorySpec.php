@@ -3,8 +3,8 @@
 namespace spec\Sylius\Bundle\PayumBundle\Factory;
 
 use Payum\Core\Security\TokenInterface;
-use Sylius\Bundle\PayumBundle\Factory\ResolveNextRouteFactory;
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\PayumBundle\Factory\ResolveNextRouteFactory;
 use Sylius\Bundle\PayumBundle\Factory\ResolveNextRouteFactoryInterface;
 use Sylius\Bundle\PayumBundle\Request\ResolveNextRoute;
 

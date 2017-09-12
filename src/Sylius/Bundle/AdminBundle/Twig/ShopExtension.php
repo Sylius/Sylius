@@ -25,7 +25,7 @@ final class ShopExtension extends \Twig_Extension
     public function getFunctions(): array
     {
         return [
-            new \Twig_Function('is_shop_enabled', function(): bool {
+            new \Twig_Function('is_shop_enabled', function (): bool {
                 return $this->isShopEnabled;
             })
         ];

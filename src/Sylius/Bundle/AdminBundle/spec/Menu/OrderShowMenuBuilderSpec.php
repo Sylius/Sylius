@@ -124,7 +124,6 @@ final class OrderShowMenuBuilderSpec extends ObjectBehavior
         FactoryInterface $factory,
         ItemInterface $menu
     ): void {
-
         $factory->createItem('root')->willReturn($menu);
 
         $this->createMenu([])->shouldReturn($menu);

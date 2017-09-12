@@ -65,5 +65,4 @@ final class PasswordUpdaterListenerSpec extends ObjectBehavior
 
         $this->customerUpdateEvent($event);
     }
-
 }

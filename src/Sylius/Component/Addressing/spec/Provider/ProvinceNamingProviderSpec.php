@@ -80,7 +80,6 @@ final class ProvinceNamingProviderSpec extends ObjectBehavior
 
         $this->getName($address)->shouldReturn('');
         $this->getAbbreviation($address)->shouldReturn('');
-
     }
 
     function it_gets_province_abbreviation_by_its_code_if_province_exists_in_database(

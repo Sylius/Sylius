@@ -366,7 +366,8 @@ final class ManagingZonesContext implements Context
         $member = null;
         try {
             $member = $this->createPage->chooseMember($name);
-        } catch (ElementNotFoundException $exception) {}
+        } catch (ElementNotFoundException $exception) {
+        }
         Assert::isEmpty($member);
     }
 }

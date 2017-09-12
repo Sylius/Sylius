@@ -383,7 +383,7 @@ final class AddressBookContext implements Context
      */
     private function getAddressOf($fullName)
     {
-        list($firstName, $lastName) = explode(' ', $fullName);
+        [$firstName, $lastName] = explode(' ', $fullName);
 
         /** @var AddressInterface $address */
         $address = $this->addressRepository->findOneBy(['firstName' => $firstName, 'lastName' => $lastName]);

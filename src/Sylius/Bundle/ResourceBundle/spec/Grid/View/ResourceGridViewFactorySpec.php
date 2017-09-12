@@ -71,4 +71,3 @@ final class ResourceGridViewFactorySpec extends ObjectBehavior
         $this->create($grid, $parameters, $resourceMetadata, $requestConfiguration)->shouldBeLike($expectedResourceGridView);
     }
 }
-

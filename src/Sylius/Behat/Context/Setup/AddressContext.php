@@ -60,7 +60,7 @@ final class AddressContext implements Context
      */
     public function myDefaultAddressIsOf(ShopUserInterface $user, $fullName)
     {
-        list($firstName, $lastName) = explode(' ', $fullName);
+        [$firstName, $lastName] = explode(' ', $fullName);
 
         /** @var AddressInterface $address */
         $address = $this->addressRepository->findOneBy(['firstName' => $firstName, 'lastName' => $lastName]);

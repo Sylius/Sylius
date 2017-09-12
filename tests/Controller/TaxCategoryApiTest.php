@@ -358,5 +358,4 @@ EOT;
     {
         return 'api/v1/tax-categories/' . $taxCategory->getCode();
     }
-
 }

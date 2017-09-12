@@ -75,7 +75,8 @@ final class CheckoutStateUrlGenerator implements CheckoutStateUrlGeneratorInterf
             throw new RouteNotFoundException();
         }
 
-        return $this->router->generate($this->routeCollection['empty_order']['route'], $parameters, $referenceType);    }
+        return $this->router->generate($this->routeCollection['empty_order']['route'], $parameters, $referenceType);
+    }
 
     /**
      * {@inheritdoc}
