@@ -13,7 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Form\EventSubscriber;
 
+use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Model\UserAwareInterface;
+use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormEvent;
@@ -35,7 +38,7 @@ final class AddUserFormSubscriber implements EventSubscriberInterface
     /**
      * @param string $entryType
      */
-    public function __construct($entryType)
+    public function __construct(string $entryType)
     {
         $this->entryType = $entryType;
     }
@@ -73,9 +76,10 @@ final class AddUserFormSubscriber implements EventSubscriberInterface
         $data = $event->getData();
         $form = $event->getForm();
 
-        if (null === $form->get('createUser')->getViewData()) {
-            Assert::isInstanceOf($data, UserAwareInterface::class);
+        /** @var UserAwareInterface $data */
+        Assert::isInstanceOf($data, UserAwareInterface::class);
 
+        if (null === $data->getUser()->getId() && null === $form->get('createUser')->getViewData()) {
             $data->setUser(null);
             $event->setData($data);
 

@@ -53,10 +53,15 @@ final class AddUserFormSubscriberSpec extends ObjectBehavior
         FormEvent $event,
         Form $form,
         Form $createUserCheckForm,
-        UserAwareInterface $customer
+        UserAwareInterface $customer,
+        UserInterface $user
     ): void {
         $event->getData()->willReturn($customer);
         $event->getForm()->willReturn($form);
+
+        $customer->getUser()->willReturn($user);
+        $user->getId()->willReturn(null);
+
         $form->get('createUser')->willReturn($createUserCheckForm);
         $createUserCheckForm->getViewData()->willReturn(null);
 
@@ -73,12 +78,42 @@ final class AddUserFormSubscriberSpec extends ObjectBehavior
         FormEvent $event,
         Form $form,
         Form $createUserCheckForm,
-        UserAwareInterface $customer
+        UserAwareInterface $customer,
+        UserInterface $user
     ): void {
         $event->getData()->willReturn($customer);
         $event->getForm()->willReturn($form);
+
+        $customer->getUser()->willReturn($user);
+        $user->getId()->willReturn(null);
+
         $form->get('createUser')->willReturn($createUserCheckForm);
         $createUserCheckForm->getViewData()->willReturn('1');
+
+        $customer->setUser(null)->shouldNotBeCalled();
+        $event->setData($customer)->shouldNotBeCalled();
+
+        $form->remove('user')->shouldNotBeCalled();
+        $form->add('user', '\Fully\Qualified\ClassName', Argument::type('array'))->shouldNotBeCalled();
+
+        $this->submit($event);
+    }
+
+    function it_does_not_replace_user_form_by_new_user_form_when_user_has_an_id(
+        FormEvent $event,
+        Form $form,
+        Form $createUserCheckForm,
+        UserAwareInterface $customer,
+        UserInterface $user
+    ): void {
+        $event->getData()->willReturn($customer);
+        $event->getForm()->willReturn($form);
+
+        $customer->getUser()->willReturn($user);
+        $user->getId()->willReturn(1);
+
+        $form->get('createUser')->willReturn($createUserCheckForm);
+        $createUserCheckForm->getViewData()->willReturn(null);
 
         $customer->setUser(null)->shouldNotBeCalled();
         $event->setData($customer)->shouldNotBeCalled();
