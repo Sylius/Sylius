@@ -37,6 +37,6 @@ sylius:
             description: Опис
             enabled: Увімкнено
             name: Назва
+            position: Позиція
             tax_category: Категорія податку
             translations: Переклади
-            position: Позиція

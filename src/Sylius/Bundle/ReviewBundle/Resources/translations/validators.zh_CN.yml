@@ -12,3 +12,4 @@ sylius:
         title:
             not_blank: 评论标题不应为空。
             min_length: 评论标题必须有至少 2 个字符
+            max_length: 评论标题最多 255 个字符

@@ -6,6 +6,8 @@ sylius:
         rule:
             unit_count_configuration:
                 count: Antal
+                equal: Lig med
+            type: Regeltype
         shipment:
             state: Status
             states:
@@ -14,7 +16,15 @@ sylius:
                 ready: Klar
                 shipped: Afsendt
                 returned: Returneret
+                cancelled: Annulleret
             tracking_code: Sporingskode
+        shipping_calculator:
+            flat_rate_configuration:
+                label: Fast beløb pr. levering
+                amount: Beløb
+            per_unit_rate_configuration:
+                label: Fast beløb pr. enhed
+                amount: Beløb
         shipping_category:
             description: Beskrivelse
             name: Navn
@@ -27,5 +37,6 @@ sylius:
             description: Beskrivelse
             enabled: Aktiveret
             name: Navn
+            position: Position
             tax_category: Momskategori
             translations: Oversættelser

@@ -125,7 +125,7 @@ sylius:
         choose_file: 'Kies bestand'
         choose_how_your_goods_will_be_delivered: 'Kies hoe uw bestellingen bezorgd moeten worden'
         choose_how_you_will_pay: 'Kies hoe u wilt betalen'
-        city: 'Stad'
+        city: 'Plaats'
         clear: 'Wissen'
         clear_cart: 'Winkelwagen leegmaken'
         clear_filters: 'Wis filters'

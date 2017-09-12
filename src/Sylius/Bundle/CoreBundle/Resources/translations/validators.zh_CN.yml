@@ -57,6 +57,7 @@ sylius:
         onHand:
             min: 库存量必须大于 {{limit}}。
             not_blank: 请输入库存量
+            reserved: 现有库存数量必须大于锁定库存数量
         original_price:
             min: 原价不能为负。
         weight:

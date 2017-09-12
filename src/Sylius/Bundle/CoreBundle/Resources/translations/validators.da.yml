@@ -3,6 +3,10 @@
 
 sylius:
     channel:
+        base_currency:
+            not_blank: Angiv venligst kanalens basisvaluta.
+        default_locale:
+            not_blank: Angiv venligst standard landekode for kanalen.
         contact_email:
             invalid: Denne email er ugyldig.
             max: Emailen må ikke være længere end {{ limit }} tegn.
@@ -26,7 +30,11 @@ sylius:
     customer:
         currency_code:
             not_valid: Valutakoden du indtastede er ugyldig.
+    cart_item:
+        not_available: '%itemName% har ikke tilstrækkeligt lager.'
     order:
+        currency_code:
+            not_valid: Valutakoden du indtastede er ugyldig.
         payment_method_eligibility: 'Denne betaling metode %paymentMethodName% er blevet deaktiveret. Venligst Vælg din betalingsmetode.'
         product_eligibility: 'Dette produkt %productName% er blevet deaktiveret.'
         shipping_method_eligibility: 'Produktet passer ikke krav til %shippingMethodName% forsendelsesmetode. Vælg venligst din forsendelsesmetode.'
@@ -38,7 +46,7 @@ sylius:
             cannot_disable_base: Grundvalutaen kan ikke deaktiveres.
     product:
         variants:
-            all_prices_defined: Du skal definere produktvarianter priser for nyligt tildelte kanaler først.
+            all_prices_defined: Du skal definere produktvariant-priser for nyligt tildelte kanaler først.
     product_attribute:
         invalid: Position skal være et heltal.
     product_image:
@@ -49,6 +57,7 @@ sylius:
         onHand:
             min: Lagerantal skal være større end {{ limit }}.
             not_blank: Angiv venligst lagerantal.
+            reserved: Antal enheder på lager skal være større end antal reserverede
         original_price:
             min: Den originale pris må ikke være negativ.
         weight:
@@ -63,6 +72,8 @@ sylius:
         depth:
             min: Dybden kan ikke være negativ.
             invalid: Dybden skal være et tal.
+        channel_pricing:
+            all_defined: 'Du skal definere pris for hver kanal.'
     product_translation:
         short_description:
             max: Den korte beskrivelse må ikke være længere end {{ limit }} tegn.
@@ -79,3 +90,5 @@ sylius:
         username:
             unique: Brugernavnet er allerede i brug.
             not_blank: Angiv venligst dit navn.
+        locale_code:
+            not_blank: Vælg venligst en landekode.

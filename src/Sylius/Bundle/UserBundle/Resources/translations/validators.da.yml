@@ -5,3 +5,12 @@ sylius:
     user:
         email:
             not_blank: Indtast venligst din email.
+            invalid: Denne email er ugyldig.
+            not_registered: Der findes ingen bruger med denne email. Opret dig venligst først.
+        plainPassword:
+            not_blank: Indtast venligst din adgangskode.
+            mismatch: De indtastede adgangskoder stemmer ikke overens
+            wrong_current: Den indtastede adgangskode er forskellig fra den eksisterende.
+        password:
+            min: Adgangskoden skal være mindst {{ limit }} tegn lang.
+            max: Adgangskoden kan ikke være længere end {{ limit }} tegn.

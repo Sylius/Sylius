@@ -37,6 +37,6 @@ sylius:
             description: Omschrijving
             enabled: Toegestaan
             name: Naam
+            position: Positie
             tax_category: Belasting categorie
             translations: Vertalingen
-            position: Positie

@@ -23,6 +23,7 @@ sylius:
             not_blank: 请输入代码。
             regex: 产品规格代码仅可以由字母、 数字、 破折号和下划线组成。
             unique: 产品规格代码必须是唯一的。
+            within_product_unique: 此代码必须在本商品内唯一。
     simple_product:
         code:
             unique: 简单产品的代码在所有的产品和产品规格中都必须是唯一的。

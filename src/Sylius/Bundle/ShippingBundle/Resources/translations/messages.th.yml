@@ -37,6 +37,6 @@ sylius:
             description: คำอธิบาย
             enabled: เปิดใช้งานแล้ว
             name: ชื่อ
+            position: ตำแหน่ง
             tax_category: ประเภทภาษี
             translations: การแปลภาษา
-            position: ตำแหน่ง

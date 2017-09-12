@@ -37,6 +37,6 @@ sylius:
             description: Описание
             enabled: Активен
             name: Название
+            position: Позиция
             tax_category: Категория налогов
             translations: '﻿Переводы'
-            position: Позиция

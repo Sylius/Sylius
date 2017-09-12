@@ -37,6 +37,6 @@ sylius:
             description: Opis
             enabled: Aktywne
             name: Nazwa
+            position: Pozycja
             tax_category: Kategoria podatkowa
             translations: Tłumaczenia
-            position: Pozycja

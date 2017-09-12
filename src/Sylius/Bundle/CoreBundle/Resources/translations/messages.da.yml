@@ -63,6 +63,7 @@ sylius:
             restricted_zone: Begrænset zone
             short_description: Kort beskrivelse
             variant_selection_method: Variant udvælgelsesmetode
+            main_taxon: Hovedtaksonomi
             channels: Kanaler
             enabled: Aktiveret
         product_filter:
@@ -125,6 +126,7 @@ sylius:
             name: Navn
         promotion_filter:
             products: Produktfilter
+            taxons: Taksonomifilter
         promotion_rule:
             customer_group:
                 group: Kundegruppe
@@ -133,6 +135,7 @@ sylius:
             product:
                 products: Produkter
             total_of_items_from_taxon:
+                taxon: Taksonomi
                 amount: Beløb
         payment_method:
             channels: Kanaler
@@ -198,6 +201,7 @@ sylius:
             timezone: tidszone
             timezone_deprecated:
                 header: Uddateret tidszone
+                help: 'Timezone %timezone% er forældet. Fix din php.ini fil (listen over forældede tidszoner http://php.net/manual/en/timezones.others.php).'
             version: PHP version
             version_recommended: Anbefalet PHP version
     payum_gateway:

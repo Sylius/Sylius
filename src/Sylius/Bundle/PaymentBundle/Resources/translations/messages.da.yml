@@ -17,12 +17,18 @@ sylius:
                 header: Betalingsstatus
                 checkout: Til kassen
                 completed: Gennemført
+                authorized: Autoriseret
                 failed: Mislykkedes
                 new: Ny
                 pending: Afventer
                 processing: Behandler
                 unknown: Ukendt
+                void: Ugyldig
+                cancelled: Annulleret
+                refunded: Refunderet
         payment_method:
             description: Beskrivelse
             enabled: Aktiveret?
+            instructions: Instruktioner
             name: Navn
+            position: Placering

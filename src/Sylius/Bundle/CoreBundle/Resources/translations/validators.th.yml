@@ -35,12 +35,18 @@ sylius:
     order:
         currency_code:
             not_valid: รหัสสกุลเงินที่คุณป้อนไม่ถูกต้อง
+        payment_method_eligibility: '%paymentMethodName% วิธีการชำระเงินนี้ถูกปิดใช้งาน กรุณาเลือกวิธีการชำระเงินใหม่'
+        product_eligibility: '%productName% สินค้านี้ถูกปิดใช้งาน'
+        shipping_method_eligibility: 'สินค้าไม่สามารถจัดส่งด้วยวิธีจัดส่ง %shippingMethodName% กรุณาเลือกวิธีการจัดส่งใหม่'
     locale:
         code:
             not_blank: กรุณาระบุรหัสภาษา
             unique: มีภาษานี้อยู่แล้ว
         enabled:
             cannot_disable_base: ไม่สามารถปิดใช้งานภาษาที่เป็นค่าเริ่มต้นได้
+    product:
+        variants:
+            all_prices_defined: คุณต้องกำหนดราคาสินค้าย่อยสำหรับช่องทางจัดจำหน่ายใหม่ก่อน
     product_attribute:
         invalid: ตำแหน่งต้องเป็นจำนวนเต็ม
     product_image:
@@ -66,6 +72,8 @@ sylius:
         depth:
             min: ความลึกไม่สามารถเป็นค่าลบ
             invalid: ความลึกต้องเป็นตัวเลข
+        channel_pricing:
+            all_defined: 'คุณต้องกำหนดราคาทุกช่องทางจัดจำหน่าย'
     product_translation:
         short_description:
             max: คำอธิบายสั้น ต้องมีความยาวไม่เกิน {{ limit }} ตัวอักษร
@@ -76,6 +84,8 @@ sylius:
     user:
         email:
             unique: อีเมลนี้ถูกใช้งานแล้ว
+            min: อีเมลต้องมีความยาวไม่น้อยกว่า {{ min }} ตัวอักษร.
+            max: อีเมลต้องมีความยาวไม่เกิน {{ max }} ตัวอักษร.
             invalid: อีเมลนี้ไม่ถูกต้อง
         username:
             unique: ชื่อผู้ใช้นี้ถูกใช้ไปแล้ว
