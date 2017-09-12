@@ -30,5 +30,6 @@ default:
                 - sylius.behat.context.ui.admin.dashboard
                 - sylius.behat.context.ui.admin.managing_customers
                 - sylius.behat.context.ui.admin.notification
+                - sylius.behat.context.ui.shop.login
             filters:
                 tags: "@managing_customers && @ui"

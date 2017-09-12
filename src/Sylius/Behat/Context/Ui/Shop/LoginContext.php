@@ -209,6 +209,7 @@ final class LoginContext implements Context
 
     /**
      * @Then I should be able to log in as :email with :password password
+     * @Then the customer should be able to log in as :email with :password password
      */
     public function iShouldBeAbleToLogInAsWithPassword($email, $password)
     {
