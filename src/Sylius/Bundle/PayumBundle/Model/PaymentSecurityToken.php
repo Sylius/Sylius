@@ -26,7 +26,7 @@ class PaymentSecurityToken implements ResourceInterface, TokenInterface
     protected $hash;
 
     /**
-     * @var IdentityInterface
+     * @var mixed
      */
     protected $details;
 
