@@ -10,6 +10,9 @@ sylius:
         name:
             max_length: 分类名称不能超过 255 个字符。
             not_blank: 请输入分类名称。
+        slug:
+            not_blank: 请输入分类标识。
+            unique: 分类标识必须是唯一的。
     taxonomy:
         name:
             max_length: 分类名称不能超过 255 个字符。
