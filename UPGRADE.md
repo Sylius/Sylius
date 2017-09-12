@@ -113,6 +113,8 @@
 
 * `AssociationHydrator` was moved to `sylius-labs/association-hydrator` package.
 
+* Protected methods `ShopUser::assignUser` and `Customer::assignCustomer` were deleted.
+
 ### Customer / CustomerBundle
 
 * The following methods does not longer have a default null argument and requires one to be explicitly passed:

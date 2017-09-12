@@ -15,6 +15,7 @@ namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Customer\Model\CustomerInterface as BaseCustomerInterface;
 use Sylius\Component\User\Model\User as BaseUser;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -40,9 +41,19 @@ class ShopUser extends BaseUser implements ShopUserInterface
      */
     public function setCustomer(?BaseCustomerInterface $customer): void
     {
-        if ($this->customer !== $customer) {
-            $this->customer = $customer;
-            $this->assignUser($customer);
+        if ($this->customer === $customer) {
+            return;
+        }
+
+        $previousCustomer = $this->customer;
+        $this->customer = $customer;
+
+        if ($previousCustomer instanceof CustomerInterface) {
+            $previousCustomer->setUser(null);
+        }
+
+        if ($customer instanceof CustomerInterface) {
+            $customer->setUser($this);
         }
     }
 
@@ -75,15 +86,5 @@ class ShopUser extends BaseUser implements ShopUserInterface
     public function setEmailCanonical(?string $emailCanonical): void
     {
         $this->customer->setEmailCanonical($emailCanonical);
-    }
-
-    /**
-     * @param CustomerInterface|null $customer
-     */
-    protected function assignUser(?CustomerInterface $customer): void
-    {
-        if (null !== $customer) {
-            $customer->setUser($this);
-        }
     }
 }
