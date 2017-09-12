@@ -75,11 +75,6 @@ interface ShippingMethodInterface extends
     /**
      * @return string
      */
-    public function getCategoryRequirementLabel(): string;
-
-    /**
-     * @return string
-     */
     public function getCalculator(): ?string;
 
     /**
