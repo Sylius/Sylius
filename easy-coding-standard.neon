@@ -1,0 +1,41 @@
+checkers:
+    PhpCsFixer\Fixer\Basic\BracesFixer:
+        allow_single_line_closure: true
+    PhpCsFixer\Fixer\Basic\EncodingFixer: {}
+    PhpCsFixer\Fixer\Casing\LowercaseConstantsFixer: {}
+    PhpCsFixer\Fixer\Casing\LowercaseKeywordsFixer: {}
+    PhpCsFixer\Fixer\ClassNotation\ClassDefinitionFixer: {}
+    PhpCsFixer\Fixer\ClassNotation\SingleClassElementPerStatementFixer:
+        elements:
+            - property
+    PhpCsFixer\Fixer\ClassNotation\VisibilityRequiredFixer: {}
+    PhpCsFixer\Fixer\Comment\NoTrailingWhitespaceInCommentFixer: {}
+    PhpCsFixer\Fixer\ControlStructure\ElseifFixer: {}
+    PhpCsFixer\Fixer\ControlStructure\NoBreakCommentFixer: {}
+    PhpCsFixer\Fixer\ControlStructure\SwitchCaseSemicolonToColonFixer: {}
+    PhpCsFixer\Fixer\ControlStructure\SwitchCaseSpaceFixer: {}
+    PhpCsFixer\Fixer\FunctionNotation\FunctionDeclarationFixer: {}
+    PhpCsFixer\Fixer\FunctionNotation\MethodArgumentSpaceFixer:
+        ensure_fully_multiline: true
+    PhpCsFixer\Fixer\FunctionNotation\NoSpacesAfterFunctionNameFixer: {}
+    PhpCsFixer\Fixer\Import\NoUnusedImportsFixer: {}
+    PhpCsFixer\Fixer\Import\OrderedImportsFixer: {}
+    PhpCsFixer\Fixer\Import\SingleImportPerStatementFixer: {}
+    PhpCsFixer\Fixer\Import\SingleLineAfterImportsFixer: {}
+    PhpCsFixer\Fixer\ListNotation\ListSyntaxFixer:
+        syntax: short
+    PhpCsFixer\Fixer\NamespaceNotation\BlankLineAfterNamespaceFixer: {}
+    PhpCsFixer\Fixer\PhpTag\FullOpeningTagFixer: {}
+    PhpCsFixer\Fixer\PhpTag\NoClosingTagFixer: {}
+    PhpCsFixer\Fixer\Whitespace\IndentationTypeFixer: {}
+    PhpCsFixer\Fixer\Whitespace\LineEndingFixer: {}
+    PhpCsFixer\Fixer\Whitespace\NoSpacesInsideParenthesisFixer: {}
+    PhpCsFixer\Fixer\Whitespace\NoTrailingWhitespaceFixer: {}
+    PhpCsFixer\Fixer\Whitespace\SingleBlankLineAtEofFixer: {}
+    PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer:
+        syntax: short
+
+parameters:
+    skip:
+        PhpCsFixer\Fixer\ClassNotation\VisibilityRequiredFixer:
+            - *Spec.php
