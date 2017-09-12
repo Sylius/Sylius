@@ -99,6 +99,8 @@ final class UserRegistrationListener
         $channel = $this->channelContext->getChannel();
         if (!$channel->isAccountVerificationRequired()) {
             $this->enableAndLogin($user);
+
+            return;
         }
 
         $this->sendVerificationEmail($user);
