@@ -24,16 +24,16 @@
         <field name="skippingPaymentStepAllowed" column="skipping_payment_step_allowed" type="boolean" />
         <field name="accountVerificationRequired" column="account_verification_required" type="boolean" />
 
-        <many-to-one field="defaultLocale" target-entity="Sylius\Component\Locale\Model\LocaleInterface">
+        <many-to-one field="defaultLocale" target-entity="Sylius\Component\Locale\Model\LocaleInterface" fetch="EAGER">
             <join-column name="default_locale_id" referenced-column-name="id" nullable="false" />
         </many-to-one>
-        <many-to-one field="baseCurrency" target-entity="Sylius\Component\Currency\Model\CurrencyInterface">
+        <many-to-one field="baseCurrency" target-entity="Sylius\Component\Currency\Model\CurrencyInterface" fetch="EAGER">
             <join-column name="base_currency_id" referenced-column-name="id" nullable="false" />
         </many-to-one>
         <many-to-one field="defaultTaxZone" target-entity="Sylius\Component\Addressing\Model\ZoneInterface">
             <join-column name="default_tax_zone_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
         </many-to-one>
-        <many-to-many field="currencies" target-entity="Sylius\Component\Currency\Model\CurrencyInterface">
+        <many-to-many field="currencies" target-entity="Sylius\Component\Currency\Model\CurrencyInterface" fetch="EAGER">
             <join-table name="sylius_channel_currencies">
                 <join-columns>
                     <join-column name="channel_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
@@ -43,7 +43,7 @@
                 </inverse-join-columns>
             </join-table>
         </many-to-many>
-        <many-to-many field="locales" target-entity="Sylius\Component\Locale\Model\LocaleInterface">
+        <many-to-many field="locales" target-entity="Sylius\Component\Locale\Model\LocaleInterface" fetch="EAGER">
             <join-table name="sylius_channel_locales">
                 <join-columns>
                     <join-column name="channel_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
