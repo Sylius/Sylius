@@ -8,9 +8,9 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use Liip\ImagineBundle\Imagine\Filter\FilterConfiguration;
 use Liip\ImagineBundle\Imagine\Filter\FilterManager;
+use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\EventListener\ImagesRemoveListener;
-use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 

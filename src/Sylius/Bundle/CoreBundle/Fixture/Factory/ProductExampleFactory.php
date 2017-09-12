@@ -434,6 +434,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
 
                     return [$this->faker->randomKey($productAttribute->getConfiguration()['choices'])];
                 }
+                // no break
             default:
                 throw new \BadMethodCallException();
         }

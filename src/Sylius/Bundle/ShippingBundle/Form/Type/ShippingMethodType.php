@@ -19,7 +19,6 @@ use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceTranslationsType;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Shipping\Calculator\CalculatorInterface;
-use Sylius\Component\Shipping\Model\ShippingMethod;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;

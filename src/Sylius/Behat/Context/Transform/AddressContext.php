@@ -81,7 +81,7 @@ final class AddressContext implements Context
      */
     public function createNewAddressWith($city, $street, $postcode, $countryName, $customerName)
     {
-        list($firstName, $lastName) = explode(' ', $customerName);
+        [$firstName, $lastName] = explode(' ', $customerName);
 
         return $this->exampleAddressFactory->create([
             'country_code' => $this->countryNameConverter->convertToCode($countryName),
@@ -114,7 +114,7 @@ final class AddressContext implements Context
      */
     public function createNewAddressWithNameAndProvince($name, $street, $postcode, $city, $countryName, $provinceName)
     {
-        list($firstName, $lastName) = explode(' ', $name);
+        [$firstName, $lastName] = explode(' ', $name);
 
         return $this->exampleAddressFactory->create([
             'country_code' => $this->countryNameConverter->convertToCode($countryName),
@@ -138,7 +138,7 @@ final class AddressContext implements Context
      */
     public function createNewAddressWithName($name, $street, $postcode, $city, $countryName)
     {
-        list($firstName, $lastName) = explode(' ', $name);
+        [$firstName, $lastName] = explode(' ', $name);
 
         return $this->exampleAddressFactory->create([
             'country_code' => $this->countryNameConverter->convertToCode($countryName),

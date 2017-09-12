@@ -3,8 +3,8 @@
 namespace spec\Sylius\Bundle\PayumBundle\Factory;
 
 use Payum\Core\Security\TokenInterface;
-use Sylius\Bundle\PayumBundle\Factory\GetStatusFactory;
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\PayumBundle\Factory\GetStatusFactory;
 use Sylius\Bundle\PayumBundle\Factory\GetStatusFactoryInterface;
 use Sylius\Bundle\PayumBundle\Request\GetStatus;
 

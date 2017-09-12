@@ -102,25 +102,25 @@ class SelectPaymentPage extends SymfonyPage implements SelectPaymentPageInterfac
     /**
      * {@inheritdoc}
      */
-     public function isNextStepButtonUnavailable()
-     {
-         return $this->getElement('next_step')->hasClass('disabled');
-     }
+    public function isNextStepButtonUnavailable()
+    {
+        return $this->getElement('next_step')->hasClass('disabled');
+    }
 
     /**
      * {@inheritdoc}
      */
-     public function getPaymentMethods()
-     {
-         $inputs = $this->getSession()->getPage()->findAll('css', '#sylius-payment-methods .item .content label');
+    public function getPaymentMethods()
+    {
+        $inputs = $this->getSession()->getPage()->findAll('css', '#sylius-payment-methods .item .content label');
 
-         $paymentMethods = [];
-         foreach ($inputs as $input) {
-             $paymentMethods[] = trim($input->getText());
-         }
+        $paymentMethods = [];
+        foreach ($inputs as $input) {
+            $paymentMethods[] = trim($input->getText());
+        }
 
-         return $paymentMethods;
-     }
+        return $paymentMethods;
+    }
 
     /**
      * {@inheritdoc}

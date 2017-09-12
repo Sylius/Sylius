@@ -110,4 +110,3 @@ final class ResourcesResolverSpec extends ObjectBehavior
         $this->getResources($requestConfiguration, $repository)->shouldReturn($paginator);
     }
 }
-

@@ -16,7 +16,6 @@ namespace spec\Sylius\Component\Registry;
 require_once __DIR__.'/Fixture/SampleServiceInterface.php';
 
 use PhpSpec\ObjectBehavior;
-use spec\Sylius\Component\Registry\Fixture\AbstractSampleService;
 use spec\Sylius\Component\Registry\Fixture\SampleServiceInterface;
 use Sylius\Component\Registry\ExistingServiceException;
 use Sylius\Component\Registry\NonExistingServiceException;

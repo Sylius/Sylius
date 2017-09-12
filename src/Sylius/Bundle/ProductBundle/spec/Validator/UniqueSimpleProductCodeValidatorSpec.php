@@ -25,7 +25,8 @@ use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 final class UniqueSimpleProductCodeValidatorSpec extends ObjectBehavior
 {
-    function let(ExecutionContextInterface $context, ProductVariantRepositoryInterface $productVariantRepository): void {
+    function let(ExecutionContextInterface $context, ProductVariantRepositoryInterface $productVariantRepository): void
+    {
         $this->beConstructedWith($productVariantRepository);
         $this->initialize($context);
     }

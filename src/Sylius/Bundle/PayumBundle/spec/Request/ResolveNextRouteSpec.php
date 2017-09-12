@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\PayumBundle\Request;
 
 use Payum\Core\Security\TokenInterface;
-use Sylius\Bundle\PayumBundle\Request\ResolveNextRoute;
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\PayumBundle\Request\ResolveNextRoute;
 use Sylius\Bundle\PayumBundle\Request\ResolveNextRouteInterface;
 
 final class ResolveNextRouteSpec extends ObjectBehavior

@@ -114,7 +114,7 @@ final class AssetTest extends WebTestCase
                 continue;
             }
 
-            list($expectedText, $assetFile) = explode(': ', $line);
+            [$expectedText, $assetFile] = explode(': ', $line);
 
             $contents = file_get_contents($webDirectory.$assetFile);
 

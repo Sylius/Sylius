@@ -64,7 +64,6 @@ final class DefaultShippingMethodResolverSpec extends ObjectBehavior
         ChannelInterface $channel,
         OrderInterface $order
     ): void {
-
         $shipment->getOrder()->willReturn($order);
         $order->getChannel()->willReturn($channel);
 

@@ -54,10 +54,10 @@ interface UserOAuthInterface extends UserAwareInterface, ResourceInterface
     /**
      * @return string|null
      */
-   public function getRefreshToken(): ?string;
+    public function getRefreshToken(): ?string;
 
-   /**
-    * @param string|null $refreshToken
-    */
-   public function setRefreshToken(?string $refreshToken): void;
+    /**
+     * @param string|null $refreshToken
+     */
+    public function setRefreshToken(?string $refreshToken): void;
 }

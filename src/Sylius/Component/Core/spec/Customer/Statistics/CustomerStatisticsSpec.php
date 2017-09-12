@@ -42,7 +42,8 @@ final class CustomerStatisticsSpec extends ObjectBehavior
         $this->getAllOrdersCount()->shouldReturn(0);
     }
 
-    function it_has_number_of_all_orders(ChannelInterface $channel): void {
+    function it_has_number_of_all_orders(ChannelInterface $channel): void
+    {
         $firstStatistics = new PerChannelCustomerStatistics(110, 120, $channel->getWrappedObject());
         $secondStatistics = new PerChannelCustomerStatistics(13, 120, $channel->getWrappedObject());
 
@@ -51,7 +52,8 @@ final class CustomerStatisticsSpec extends ObjectBehavior
         $this->getAllOrdersCount()->shouldReturn(123);
     }
 
-    function it_has_an_array_of_statistics_per_channel(ChannelInterface $channel): void {
+    function it_has_an_array_of_statistics_per_channel(ChannelInterface $channel): void
+    {
         $firstStatistics = new PerChannelCustomerStatistics(110, 120, $channel->getWrappedObject());
         $secondStatistics = new PerChannelCustomerStatistics(13, 120, $channel->getWrappedObject());
 

@@ -69,7 +69,7 @@ final class Metadata implements MetadataInterface
      */
     public static function fromAliasAndConfiguration(string $alias, array $parameters): self
     {
-        list($applicationName, $name) = self::parseAlias($alias);
+        [$applicationName, $name] = self::parseAlias($alias);
 
         return new self($name, $applicationName, $parameters);
     }

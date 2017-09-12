@@ -54,7 +54,6 @@ final class ChannelBasedPaymentMethodsResolverSpec extends ObjectBehavior
         ;
 
         $this->getSupportedMethods($payment)->shouldReturn([$firstPaymentMethod, $secondPaymentMethod]);
-
     }
 
     function it_returns_an_empty_collection_if_there_is_no_enabled_payment_methods_for_order_channel(
@@ -72,7 +71,6 @@ final class ChannelBasedPaymentMethodsResolverSpec extends ObjectBehavior
         ;
 
         $this->getSupportedMethods($payment)->shouldReturn([]);
-
     }
 
     function it_supports_shipments_with_order_and_its_shipping_address_defined(

@@ -39,8 +39,7 @@ final class TranslatableEntityLocaleAssignerSpec extends ObjectBehavior
         LocaleContextInterface $localeContext,
         TranslationLocaleProviderInterface $translationLocaleProvider,
         TranslatableInterface $translatableEntity
-    ): void
-    {
+    ): void {
         $localeContext->getLocaleCode()->willReturn('de_DE');
         $translationLocaleProvider->getDefaultLocaleCode()->willReturn('en_US');
 
@@ -54,8 +53,7 @@ final class TranslatableEntityLocaleAssignerSpec extends ObjectBehavior
         LocaleContextInterface $localeContext,
         TranslationLocaleProviderInterface $translationLocaleProvider,
         TranslatableInterface $translatableEntity
-    ): void
-    {
+    ): void {
         $localeContext->getLocaleCode()->willThrow(new LocaleNotFoundException());
         $translationLocaleProvider->getDefaultLocaleCode()->willReturn('en_US');
 

@@ -6,8 +6,8 @@ namespace spec\Sylius\Bundle\PayumBundle\Request;
 
 use Payum\Core\Request\GetStatusInterface;
 use Payum\Core\Security\TokenInterface;
-use Sylius\Bundle\PayumBundle\Request\GetStatus;
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\PayumBundle\Request\GetStatus;
 use Sylius\Component\Core\Model\PaymentInterface;
 
 final class GetStatusSpec extends ObjectBehavior

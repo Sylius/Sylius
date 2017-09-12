@@ -42,7 +42,7 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
     {
         if (null !== $this->getModelNamespace()) {
             foreach ($this->getSupportedDrivers() as $driver) {
-                list($compilerPassClassName, $compilerPassMethod) = $this->getMappingCompilerPassInfo($driver);
+                [$compilerPassClassName, $compilerPassMethod] = $this->getMappingCompilerPassInfo($driver);
 
                 if (class_exists($compilerPassClassName)) {
                     if (!method_exists($compilerPassClassName, $compilerPassMethod)) {

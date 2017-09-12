@@ -36,7 +36,7 @@ final class RegisterResourceRepositoryPass implements CompilerPassInterface
         $repositoryRegistry = $container->findDefinition('sylius.registry.resource_repository');
 
         foreach ($resources as $alias => $configuration) {
-            list($applicationName, $resourceName) = explode('.', $alias, 2);
+            [$applicationName, $resourceName] = explode('.', $alias, 2);
             $repositoryId = sprintf('%s.repository.%s', $applicationName, $resourceName);
 
             if ($container->has($repositoryId)) {

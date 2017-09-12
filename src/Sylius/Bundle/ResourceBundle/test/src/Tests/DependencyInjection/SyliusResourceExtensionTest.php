@@ -74,7 +74,7 @@ class SyliusResourceExtensionTest extends AbstractExtensionTestCase
     public function it_registers_default_translation_parameters()
     {
         // TODO: Move ResourceGrid integration to a dedicated compiler pass
-         $this->setParameter('kernel.bundles', []);
+        $this->setParameter('kernel.bundles', []);
 
         $this->load([
              'translation' => [

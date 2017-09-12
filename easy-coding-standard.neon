@@ -15,8 +15,6 @@ checkers:
     PhpCsFixer\Fixer\ControlStructure\SwitchCaseSemicolonToColonFixer: {}
     PhpCsFixer\Fixer\ControlStructure\SwitchCaseSpaceFixer: {}
     PhpCsFixer\Fixer\FunctionNotation\FunctionDeclarationFixer: {}
-    PhpCsFixer\Fixer\FunctionNotation\MethodArgumentSpaceFixer:
-        ensure_fully_multiline: true
     PhpCsFixer\Fixer\FunctionNotation\NoSpacesAfterFunctionNameFixer: {}
     PhpCsFixer\Fixer\Import\NoUnusedImportsFixer: {}
     PhpCsFixer\Fixer\Import\OrderedImportsFixer: {}

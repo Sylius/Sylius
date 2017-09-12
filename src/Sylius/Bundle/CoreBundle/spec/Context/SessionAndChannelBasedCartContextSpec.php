@@ -18,11 +18,9 @@ use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Storage\CartStorageInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Context\CartNotFoundException;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
@@ -45,7 +43,6 @@ final class SessionAndChannelBasedCartContextSpec extends ObjectBehavior
         ChannelInterface $channel,
         OrderInterface $cart
     ): void {
-
         $channelContext->getChannel()->willReturn($channel);
         $cartStorage->hasForChannel($channel)->willReturn(true);
         $cartStorage->getForChannel($channel)->willReturn($cart);

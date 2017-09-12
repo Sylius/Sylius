@@ -19,9 +19,9 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
