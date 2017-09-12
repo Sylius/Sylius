@@ -68,8 +68,6 @@ class PaymentSecurityToken implements ResourceInterface, TokenInterface
 
     /**
      * {@inheritdoc}
-     *
-     * @return IdentityInterface
      */
     public function getDetails()
     {
