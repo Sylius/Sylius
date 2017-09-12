@@ -236,7 +236,13 @@ final class RequestConfigurationSpec extends ObjectBehavior
         $parameters->get('paginate', Argument::any())->willReturn(10);
         $this->isPaginated()->shouldReturn(true);
 
+        $parameters->get('paginate', Argument::any())->willReturn(0);
+        $this->isPaginated()->shouldReturn(true);
+
         $parameters->get('paginate', Argument::any())->willReturn(null);
+        $this->isPaginated()->shouldReturn(false);
+
+        $parameters->get('paginate', Argument::any())->willReturn(false);
         $this->isPaginated()->shouldReturn(false);
     }
 

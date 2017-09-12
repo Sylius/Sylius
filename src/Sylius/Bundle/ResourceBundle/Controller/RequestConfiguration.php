@@ -307,7 +307,9 @@ class RequestConfiguration
      */
     public function isPaginated()
     {
-        return (bool) $this->parameters->get('paginate', true);
+        $pagintion = $this->parameters->get('paginate', true);
+
+        return $pagintion !== false && $pagintion !== null;
     }
 
     /**
