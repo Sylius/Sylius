@@ -24,7 +24,7 @@ Installation
 
 ```bash
 $ wget http://getcomposer.org/composer.phar
-$ php composer.phar create-project -s beta sylius/sylius-standard project
+$ php composer.phar create-project -s rc sylius/sylius-standard project
 $ cd project
 $ php bin/console sylius:install
 $ yarn install
