@@ -160,6 +160,20 @@ EOT;
     /**
      * @test
      */
+    public function it_returns_page_not_found_if_limit_is_set_to_0()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/customers.yml');
+
+        $this->client->request('GET', '/api/v1/customers/?limit=0', [], [], static::$authorizedHeaderWithAccept);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'customer/page_not_found_response', Response::HTTP_NOT_FOUND);
+    }
+
+    /**
+     * @test
+     */
     public function it_denies_access_to_customer_details_for_not_authenticated_users()
     {
         $this->client->request('GET', '/api/v1/customers/1');
