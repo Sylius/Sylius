@@ -17,5 +17,7 @@ sylius:
             not_blank: Zadejte směnný kurz.
         source_currency:
             not_blank: Zadejte prosím od jaké měny by měl být odvozen směnný kurz.
+        target_currency:
+            not_blank: Zadejte měnu, do které má být nastaven směnný kurz.
         unique_currency_pair: Měnový pár musí být unikátní.
         different_source_target_currency: Zdrojové a cílové měny se musí lišit.

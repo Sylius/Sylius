@@ -116,6 +116,15 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
+     * @When I change their email to :email
+     * @When I remove its email
+     */
+    public function iChangeTheirEmailTo(?string $email = null): void
+    {
+        $this->updatePage->changeEmail($email);
+    }
+
+    /**
      * @When I add them
      * @When I try to add them
      */
@@ -160,7 +169,7 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Given /^I want to edit (this customer)$/
+     * @When /^I want to edit (this customer)$/
      */
     public function iWantToEditThisCustomer(CustomerInterface $customer)
     {
@@ -278,14 +287,6 @@ final class ManagingCustomersContext implements Context
         $this->updatePage->open(['id' => $customer->getId()]);
 
         Assert::eq($this->updatePage->getLastName(), '');
-    }
-
-    /**
-     * @When I remove its email
-     */
-    public function iRemoveItsEmail()
-    {
-        $this->updatePage->changeEmail('');
     }
 
     /**

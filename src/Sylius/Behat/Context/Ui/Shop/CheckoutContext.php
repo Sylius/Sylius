@@ -17,7 +17,6 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Context\Ui\Shop\Checkout\CheckoutAddressingContext;
 use Sylius\Behat\Context\Ui\Shop\Checkout\CheckoutPaymentContext;
 use Sylius\Behat\Context\Ui\Shop\Checkout\CheckoutShippingContext;
-use Sylius\Behat\Page\Shop\Account\LoginPageInterface;
 use Sylius\Behat\Page\Shop\Account\RegisterPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\AddressPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\CompletePageInterface;

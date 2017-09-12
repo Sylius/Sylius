@@ -5,4 +5,5 @@ sylius:
     locale:
         code:
             not_blank: Zvolte kód národního prostředí (locale).
-            unique: Místní kód (locale) musí být unikátní.
+            regex: Kód národního prostředí (locale) můžou tvořit pouze písmena, číslice, pomlčky a podtržítka.
+            unique: Kód národního prostředí (locale) musí být unikátní.

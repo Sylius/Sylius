@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ShopBundle\EventListener;
 
+use Sylius\Component\Core\Storage\CartStorageInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Context\CartNotFoundException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
@@ -31,18 +31,18 @@ final class SessionCartSubscriber implements EventSubscriberInterface
     private $cartContext;
 
     /**
-     * @var string
+     * @var CartStorageInterface
      */
-    private $sessionKeyName;
+    private $cartStorage;
 
     /**
      * @param CartContextInterface $cartContext
-     * @param string $sessionKeyName
+     * @param CartStorageInterface $cartStorage
      */
-    public function __construct(CartContextInterface $cartContext, string $sessionKeyName)
+    public function __construct(CartContextInterface $cartContext, CartStorageInterface $cartStorage)
     {
         $this->cartContext = $cartContext;
-        $this->sessionKeyName = $sessionKeyName;
+        $this->cartStorage = $cartStorage;
     }
 
     /**
@@ -64,9 +64,6 @@ final class SessionCartSubscriber implements EventSubscriberInterface
             return;
         }
 
-        /** @var Request $request */
-        $request = $event->getRequest();
-
         try {
             $cart = $this->cartContext->getCart();
         } catch (CartNotFoundException $exception) {
@@ -74,12 +71,7 @@ final class SessionCartSubscriber implements EventSubscriberInterface
         }
 
         if (null !== $cart && null !== $cart->getId() && null !== $cart->getChannel()) {
-            $session = $request->getSession();
-
-            $session->set(
-                sprintf('%s.%s', $this->sessionKeyName, $cart->getChannel()->getCode()),
-                $cart->getId()
-            );
+            $this->cartStorage->setForChannel($cart->getChannel(), $cart);
         }
     }
 }

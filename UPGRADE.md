@@ -225,6 +225,14 @@
 * If `sylius_shop.locale_switcher` is set to `storage`, `LocaleStrippingRouter` is loaded which strips out `_locale` parameter
   from the URL if it's the same as the one already in the storage.
  
+* `ShopUserLogoutHandler` has different parameters in constructor:
+    * `HttpUtils $httpUtils`
+    * `string $targetUrl`
+    * `ChannelContextInterface $channelContext`
+    * `CartStorageInterface $cartStorage`
+
+* Last constructor parameter of `SessionCartSubscriber` is now `CartStorageInterface $cartStorage` instead of `string $sessionKeyName`
+
 ### Shipping / ShippingBundle
 
 * `UnresolvedDefaultShippingMethodException` has been made final, use decoration instead of extending it.

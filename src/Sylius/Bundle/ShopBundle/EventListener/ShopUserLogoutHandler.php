@@ -13,11 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ShopBundle\EventListener;
 
-use Sylius\Bundle\ShopBundle\ShopSession;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Sylius\Component\Core\Storage\CartStorageInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Http\HttpUtils;
 use Symfony\Component\Security\Http\Logout\DefaultLogoutSuccessHandler;
 
@@ -27,31 +26,31 @@ use Symfony\Component\Security\Http\Logout\DefaultLogoutSuccessHandler;
 final class ShopUserLogoutHandler extends DefaultLogoutSuccessHandler
 {
     /**
-     * @var SessionInterface
-     */
-    private $session;
-
-    /**
      * @var ChannelContextInterface
      */
     private $channelContext;
 
     /**
+     * @var CartStorageInterface
+     */
+    private $cartStorage;
+
+    /**
      * {@inheritdoc}
      *
-     * @param SessionInterface $session
      * @param ChannelContextInterface $channelContext
+     * @param CartStorageInterface $cartStorage
      */
     public function __construct(
         HttpUtils $httpUtils,
         string $targetUrl,
-        SessionInterface $session,
-        ChannelContextInterface $channelContext
+        ChannelContextInterface $channelContext,
+        CartStorageInterface $cartStorage
     ) {
         parent::__construct($httpUtils, $targetUrl);
 
-        $this->session = $session;
         $this->channelContext = $channelContext;
+        $this->cartStorage = $cartStorage;
     }
 
     /**
@@ -60,7 +59,7 @@ final class ShopUserLogoutHandler extends DefaultLogoutSuccessHandler
     public function onLogoutSuccess(Request $request): Response
     {
         $channel = $this->channelContext->getChannel();
-        $this->session->remove('_sylius.cart.' . $channel->getCode());
+        $this->cartStorage->removeForChannel($channel);
 
         return parent::onLogoutSuccess($request);
     }
