@@ -28,7 +28,7 @@ To create a new project using Sylius Standard Edition, run this command:
 
 .. code-block:: bash
 
-    $ composer create-project -s beta sylius/sylius-standard acme
+    $ composer create-project -s rc sylius/sylius-standard acme
 
 This will create a new Symfony project in ``acme`` directory. When all the
 dependencies are installed, you'll be asked to fill the ``parameters.yml``
