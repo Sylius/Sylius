@@ -72,6 +72,12 @@ class DefaultShippingMethodResolver implements DefaultShippingMethodResolverInte
         return $shippingMethods[0];
     }
 
+    /**
+     * @param ChannelInterface $channel
+     * @param AddressInterface|null $address
+     *
+     * @return array
+     */
     private function getShippingMethods(ChannelInterface $channel, ?AddressInterface $address): array
     {
         if (null === $address) {

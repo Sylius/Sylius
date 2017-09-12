@@ -20,8 +20,8 @@ Feature: Seeing shipping methods which category is same as category of all my un
     @ui
     Scenario: Seeing default shipping method selected based on country from shipping address
         Given I have product "Star Trek Ship" in the cart
-        When I am at the checkout addressing step
-        And I specify the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I am at the checkout addressing step
+        When I specify the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step
         Then I should be on the checkout shipping step
         And I should see selected "DHL" shipping method
@@ -30,8 +30,8 @@ Feature: Seeing shipping methods which category is same as category of all my un
     @ui
     Scenario: Seeing default shipping method selected based on country from shipping address after readdressing
         Given I have product "Star Trek Ship" in the cart
-        When I am at the checkout addressing step
-        And I specify the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I am at the checkout addressing step
+        When I specify the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step
         And I decide to change my address
         And I specify the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United Kingdom" for "Jon Snow"
