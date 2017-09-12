@@ -73,20 +73,6 @@ The above compiler pass needs to be added to your bundle in the ``AppBundle/AppB
 
 That's it, we have removed the definition of the listner that is responsible for sending the order confirmation email.
 
-Overriding service definition
------------------------------
-
-If you'd like to change the logic, and for instance send a confirmation email not after the order complete, but after the payment is complete
-then you just need to override the service definition, and change the event to which the listener is attached.
-
-.. code-block:: yaml
-
-    services:
-        sylius.listener.order_complete:
-            class: Sylius\Bundle\ShopBundle\EventListener\OrderCompleteListener
-            tags:
-                - { name: kernel.event_listener, event: sylius.order.payment.post_complete, method: sendConfirmationEmail }
-
 Learn more
 ----------
 
