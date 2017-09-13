@@ -15,6 +15,7 @@ namespace Sylius\Component\Shipping\Model;
 
 use Sylius\Component\Resource\Model\ArchivableInterface;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 use Sylius\Component\Resource\Model\ToggleableInterface;
 use Sylius\Component\Resource\Model\TranslatableInterface;
@@ -24,9 +25,9 @@ use Sylius\Component\Resource\Model\TranslatableInterface;
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 interface ShippingMethodInterface extends
+    ResourceInterface,
     ArchivableInterface,
     CodeAwareInterface,
-    ShippingMethodTranslationInterface,
     TimestampableInterface,
     ToggleableInterface,
     TranslatableInterface
@@ -34,6 +35,26 @@ interface ShippingMethodInterface extends
     public const CATEGORY_REQUIREMENT_MATCH_NONE = 0;
     public const CATEGORY_REQUIREMENT_MATCH_ANY = 1;
     public const CATEGORY_REQUIREMENT_MATCH_ALL = 2;
+
+    /**
+     * @return string|null
+     */
+    public function getName(): ?string;
+
+    /**
+     * @param string|null $name
+     */
+    public function setName(?string $name): void;
+
+    /**
+     * @return string|null
+     */
+    public function getDescription(): ?string;
+
+    /**
+     * @param string|null $description
+     */
+    public function setDescription(?string $description): void;
 
     /**
      * @return int|null

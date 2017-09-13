@@ -15,6 +15,7 @@ namespace Sylius\Component\Product\Model;
 
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 use Sylius\Component\Resource\Model\TranslatableInterface;
 
@@ -22,11 +23,21 @@ use Sylius\Component\Resource\Model\TranslatableInterface;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface ProductOptionInterface extends
+    ResourceInterface,
     CodeAwareInterface,
-    ProductOptionTranslationInterface,
     TimestampableInterface,
     TranslatableInterface
 {
+    /**
+     * @return string
+     */
+    public function getName(): ?string;
+
+    /**
+     * @param string $name
+     */
+    public function setName(?string $name): void;
+
     /**
      * @return int
      */

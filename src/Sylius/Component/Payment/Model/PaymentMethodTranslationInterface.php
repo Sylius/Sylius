@@ -14,8 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Component\Payment\Model;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Component\Resource\Model\TranslationInterface;
 
-interface PaymentMethodTranslationInterface extends ResourceInterface
+interface PaymentMethodTranslationInterface extends ResourceInterface, TranslationInterface
 {
     /**
      * @return string|null
