@@ -41,7 +41,7 @@ more meaningful one. Keep in mind that these changes also need to be done in ``t
 Looking at existing Sylius plugins like
 
 * `Sylius/ShopAPIPlugin <https://github.com/Sylius/SyliusShopApiPlugin>`_
-* `bitbag-commerce/PayUPlugin <https://github.com/Sylius/SyliusShopApiPlugin>`_
+* `bitbag-commerce/PayUPlugin <https://github.com/bitbag-commerce/PayUPlugin>`_
 * `stefandoorn/sitemap-plugin <https://github.com/stefandoorn/sitemap-plugin>`_
 * `bitbag-commerce/CmsPlugin <https://github.com/bitbag-commerce/CmsPlugin>`_
 
