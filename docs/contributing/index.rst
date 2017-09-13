@@ -14,7 +14,7 @@ To install Sylius main application from our main repository and contribute, run 
 
 .. code-block:: bash
 
-    $ composer create-project -s rc sylius/sylius
+    $ composer create-project sylius/sylius
 
 This will create a new sylius project in the ``sylius`` directory. When all the
 dependencies are installed, you'll be asked to fill the ``parameters.yml``
