@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Component\Payment\Model;
 
 use Sylius\Component\Resource\Model\CodeAwareInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 use Sylius\Component\Resource\Model\ToggleableInterface;
 use Sylius\Component\Resource\Model\TranslatableInterface;
@@ -23,6 +24,7 @@ use Sylius\Component\Resource\Model\TranslatableInterface;
  */
 interface PaymentMethodInterface extends
     CodeAwareInterface,
+    ResourceInterface,
     TimestampableInterface,
     ToggleableInterface,
     TranslatableInterface

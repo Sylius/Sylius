@@ -15,6 +15,7 @@ namespace Sylius\Component\Shipping\Model;
 
 use Sylius\Component\Resource\Model\ArchivableInterface;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 use Sylius\Component\Resource\Model\ToggleableInterface;
 use Sylius\Component\Resource\Model\TranslatableInterface;
@@ -24,6 +25,7 @@ use Sylius\Component\Resource\Model\TranslatableInterface;
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 interface ShippingMethodInterface extends
+    ResourceInterface,
     ArchivableInterface,
     CodeAwareInterface,
     TimestampableInterface,
