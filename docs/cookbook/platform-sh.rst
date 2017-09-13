@@ -247,7 +247,7 @@ The output of this command shows you on which URL your online store can be acces
 6. Connect to the project via SSH and install Sylius
 ----------------------------------------------------
 
-The SSH command can be found in your project data on Platform.sh. Alternatively use the `Platform CLI tool <https://docs.platform.sh/overview/cli.html>`_.
+The SSH command can be found in your project data on Platform.sh. Alternatively use the `Platform CLI tool <https://docs.platform.sh/gettingstarted/cli.html>`_.
 
 When you get connected please run:
 
