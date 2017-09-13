@@ -7,7 +7,7 @@
     {% autoescape %}
         Your order no. {{ order.number }} has been successfully placed.
         <br/>
-        To view order or change payment method - please visit {{ url|raw }}
+        To view order or change payment method - please visit <a href="{{ url|raw }}">{{ url|raw }}</a>
         <br/><br/>
         Thank you for shopping at our store!
     {% endautoescape %}

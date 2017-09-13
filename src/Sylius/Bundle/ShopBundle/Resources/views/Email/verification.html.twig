@@ -5,6 +5,6 @@
 {% block body %}
     {% set url = channel.hostname is not null ? 'http://' ~ channel.hostname ~ path('sylius_shop_user_verification', { 'token': user.emailVerificationToken}) : url('sylius_shop_user_verification', { 'token': user.emailVerificationToken}) %}
     {% autoescape %}
-        To verify your email address - please visit {{ url|raw }}
+        To verify your email address - please visit <a href="{{ url|raw }}">{{ url|raw }}</a>
     {% endautoescape %}
 {% endblock %}
