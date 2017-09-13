@@ -14,11 +14,12 @@ declare(strict_types=1);
 namespace Sylius\Component\Product\Model;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Component\Resource\Model\TranslationInterface;
 
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-interface ProductAssociationTypeTranslationInterface extends ResourceInterface
+interface ProductAssociationTypeTranslationInterface extends ResourceInterface, TranslationInterface
 {
     /**
      * @return string|null

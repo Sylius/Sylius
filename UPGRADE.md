@@ -78,6 +78,7 @@
 * `SelectAttributeType` has been made final, use decoration instead of extending it.
 * `AttributeFactory` has been made final, use decoration instead of extending it.
 * `ProductAttributeValueInterface::setProduct` method no longer has a default null argument and requires one to be explicitly passed.
+* The `AttributeTranslationInterface` now extends the `Sylius\Component\Resource\Model\TranslationInterface`.
 
 ### AdminBundle
 
@@ -184,6 +185,7 @@
 ### Payment / PaymentBundle
 
 * In `PaymentInterface::setMethod` the `PaymentMethodInterface $method` parameter no longer has a default value.
+* The `PaymentMethodTranslationInterface` now extends the `Sylius\Component\Resource\Model\TranslationInterface`.
 
 ### Product / ProductBundle
 
@@ -200,6 +202,11 @@
 
   * `findByCodeAndProductCode(string $code, string $productCode)` was changed to
     `findByCodesAndProductCode(array $codes, string $productCode)`.
+    
+* The `ProductAssociationTypeTranslationInterface` now extends the `Sylius\Component\Resource\Model\TranslationInterface`.
+* The `ProductOptionTranslationInterface` now extends the `Sylius\Component\Resource\Model\TranslationInterface`.
+* The `ProductOptionValueTranslationInterface` now extends the `Sylius\Component\Resource\Model\TranslationInterface`.
+* The `ProductVariantTranslationInterface` now extends the `Sylius\Component\Resource\Model\TranslationInterface`.
 
 ### Promotion / PromotionBundle
 
@@ -269,6 +276,8 @@
     
 * static `getCategoryRequirementLabels` method was removed from `ShippingMethod`
 * `getCategoryRequirementLabel` method was removed from `ShippingMethodInterface`
+    
+* The `ShippingMethodTranslationInterface` now extends the `Sylius\Component\Resource\Model\TranslationInterface`.
 
 ### Taxation / TaxationBundle
 
