@@ -2,7 +2,7 @@
 
 ## Application:
 
-* Parameters `locale` has been move from `parameters.yml.dist` and `parameters.yml` file and is now configured in `app/config/config.yml` by default. 
+* Parameter `locale` has been removed from `parameters.yml.dist` and `parameters.yml` file and is now configured as default in `app/config/config.yml`. 
   If you would like to use a different default locale you should modify it there and commit such change to your project repository.
 
 * `\DateTimeInterface` is used for typehints instead of `\DateTime` to allow for compatibility with `\DateTimeImmutable`.
@@ -24,10 +24,11 @@
   }
   ```
 
-* There are scalar and return typehints introduced in the codebase. Please introduce these in your codebase for classes 
-  that implement Sylius' interfaces or extend Sylius' classes.
+* Scalar and return typehints have been introduced in the codebase. Please introduce these in your codebase for classes 
+  that implement Sylius interfaces or extend Sylius classes. It is also highly recommended to add `declare(strict_types=1);` declaration to your PHP files.
+  Learn more about PHP 7.1 features here: http://php.net/manual/de/migration71.new-features.php
 
-* Starting with Symfony version 3.3.8, the custom autoloader is not needed anymore and therefore removed in favor of the Composer
+* Starting with Symfony version 3.3.8, the custom autoloader is not needed anymore and therefore it has been removed in favour of the Composer
   autoloader. Apply the following changes (reference: https://github.com/Sylius/Sylius/pull/8340):
 
   * Remove `app/autoload.php`
@@ -37,13 +38,34 @@
   * Change autoload path in `phpunit.xml.dist`: replace 'app' with 'vendor'
   * Remove `"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",` from composer.json scripts
 
+* Model classes now return ArrayCollections instead of arrays, so if you want to mock it in PHPSpec, 
+  you need to wrap the mocked object like this:
+
+    ```php
+    function it_does_something(
+         ReviewableInterface $reviewable,
+         ReviewInterface $review
+    ): void {
+         $reviewable->getReviews()->willReturn(new ArrayCollection([$review->getWrappedObject()]));
+    }
+    ```
+
+* Moreover remember that you will have to change typehints from array to ArrayCollection in you classes, not only in tests.
+
+* Due to new Twig version, macros in included templates need to be imported in the child template. 
+  Read more here: https://stackoverflow.com/questions/41590051/twig-2-0-error-message-accessing-twig-template-attributes-is-forbidden/41590052
+
+* Check the differences between `TestAppKernel` you have and the one from Sylius/Sylius repository, as it was changed.
+
+* The issue `Warning: Cannot bind closure to scope of internal class ReflectionProperty` should be fixed by clearing the cache.
+
 ## Packages:
 
 ### Addressing / AddressingBundle
 
 * `ZoneMatcher` has been made final, use decoration instead of extending it.
 
-* The following methods does not longer have a default null argument and requires one to be explicitly passed:
+* The following methods no longer have a default null argument and require one to be explicitly passed:
   
   * `AddressInterface::setCountryCode`
   * `AddressInterface::setProviceCode`
@@ -55,7 +77,7 @@
 
 * `SelectAttributeType` has been made final, use decoration instead of extending it.
 * `AttributeFactory` has been made final, use decoration instead of extending it.
-* `ProductAttributeValueInterface::setProduct` method does not longer have a default null argument and requires one to be explicitly passed.
+* `ProductAttributeValueInterface::setProduct` method no longer has a default null argument and requires one to be explicitly passed.
 
 ### AdminBundle
 
@@ -71,7 +93,7 @@
 
 * `ChannelFactory` has been made final, use decoration instead of extending it.
 
-* `ChannelAwareInterface::setChannel` does not longer have a default null argument and requires one to be explicitly passed.
+* `ChannelAwareInterface::setChannel` no longer has a default null argument and requires one to be explicitly passed.
 
 ### Core / CoreBundle
 
@@ -94,7 +116,7 @@
     * `ProductVariantsPricesHelper`
     * `VariantResolverHelper`
     
-* The following methods no longer have a default null argument and requires one to be explicitly passed:
+* The following methods no longer have a default null argument and require one to be explicitly passed:
   
     * `ChannelPricingInterface::setProductVariant`
     * `CustomerInterface::setDefaultAddress`
@@ -117,7 +139,7 @@
 
 ### Customer / CustomerBundle
 
-* The following methods does not longer have a default null argument and requires one to be explicitly passed:
+* The following methods no longer have a default null argument and require one to be explicitly passed:
   
   * `CustomerInterface::setBirthday`
   * `CustomerInterface::setGroup`
@@ -130,24 +152,24 @@
 ### Mailer / MailerBundle
 
 * `Email` has been made final, use decoration instead of extending it.
-* `SenderInterface::send` method has changed to add `replyTo` argument
+* `SenderInterface::send` method has been changed: `replyTo` argument was added.
 
 ### Order / OrderBundle
 
-* In order to be compatibile with Doctrine ORM 2.6+ and be more consistent 
+* In order to be compatibile with Doctrine ORM 2.6+ and be more consistent,
   `OrderRepositoryInterface::count()` signature was changed to `OrderRepositoryInterface::countPlacedOrders()`.
   
-* The following methods does not longer have a default null argument and requires one to be explicitly passed:
+* The following methods no longer have a default null argument and require one to be explicitly passed:
 
   * `AdjustableInterface::getAdjustments`
   * `AdjustmentInterface::setAdjustable`
   * `OrderAwareInterace::setOrder`
   * `OrderInterface::setCheckoutCompletedAt`
   
-* `OrderInterface::getAdjustmentsRecursively` and `OrderItemInterface::getAdjustmentsRecursively` return type changed from `array` to `Collection`.
+* `OrderInterface::getAdjustmentsRecursively` and `OrderItemInterface::getAdjustmentsRecursively` return types changed from `array` to `Collection`.
 
-* In statistics to display information about only fulfilled orders
-  `OrderRepositoryInterface::countByChannel()` signature was changed to `OrderRepositoryInterface::countFulfilledByChannel()`.
+* In order to display information only about fulfilled orders in the dashboard statistics
+  the `OrderRepositoryInterface::countByChannel()` method's signature was changed to `OrderRepositoryInterface::countFulfilledByChannel()`.
 
 * The service definition of `sylius.context.cart.session_based` has been removed. Declare it by your own if you want to use `SessionBasedCartContext`
 
@@ -161,13 +183,13 @@
     ```
 ### Payment / PaymentBundle
 
-* In `PaymentInterface::setMethod` method the default value of `PaymentMethodInterface $method` parameter has been removed.
+* In `PaymentInterface::setMethod` the `PaymentMethodInterface $method` parameter no longer has a default value.
 
 ### Product / ProductBundle
 
 * `ProductVariantCombination` has been made final, use decoration instead of extending it.
 * `ProductVariantCombinationValidator` has been made final, use decoration instead of extending it.
-* The following methods does not longer have a default null argument and requires one to be explicitly passed:
+* The following methods no longer have a default null argument and require one to be explicitly passed:
   
   * `ProductAssociationInterface::setOwner`
   * `ProductAttributeValueInterface::setProduct`
@@ -182,7 +204,7 @@
 ### Promotion / PromotionBundle
 
 * `ActivePromotionsProvider` has been made final, use decoration instead of extending it.
-* The following methods does not longer have a default null argument and requires one to be explicitly passed:  
+* The following methods no longer have a default null argument and require one to be explicitly passed:  
     * `PromotionCouponGeneratorInstructionInterface::setExpiresAt`
     * `PromotionCouponInterface::setPromotion`
     * `PromotionCouponInterface::setExpiresAt`
@@ -197,7 +219,7 @@
 
 ### Resource / ResourceBundle
 
-* The following methods does not longer have a default null argument and requires one to be explicitly passed:
+* The following methods no longer have a default null argument and require one to be explicitly passed:
 
   * `TranslationInterface::setTranslatable`
   * `Archivable::setArchivedAt`
@@ -207,15 +229,15 @@
   
 ### Review / ReviewBundle
 
-* The `ReviewInterface::setAuthor` method does not longer have a default null argument and requires one to be explicitly passed.
-* The `ReviewFactoryInterface::createForSubjectWithReviewer` method does not longer have a default null value for `$reviewer` argument and requires one to be explicitly passed.
+* The `ReviewInterface::setAuthor` method no longer has a default null argument and requires one to be explicitly passed.
+* The `ReviewFactoryInterface::createForSubjectWithReviewer` method no longer has a default null value for `$reviewer` argument and requires one to be explicitly passed.
 * Default null value of `ReviewFactoryInterface::createForSubjectWithReviewer` was removed. To create a review without reviewer use `createForSubject` method from the same interface instead. 
   
 ### ShopBundle
 
 * `ContactController` has been made final, use decoration instead of extending it.
 
-* `_liip_imagine` routing import has been removed and move to the main routing of Sylius app. If you are not importing `app/config/routing.yml` you need to add this import by your own:
+* `_liip_imagine` routing import has been moved to the main routing of Sylius app. If you are not importing `app/config/routing.yml` you need to add this import by your own:
 
     ```yml
         _liip_imagine:
@@ -224,7 +246,7 @@
      
 * ImagineBundle has been upgraded from ^1.6 to ^1.9.1 to move past a BC break in console commands: https://github.com/liip/LiipImagineBundle/releases/tag/1.9.1.
 
-* If `sylius_shop.locale_switcher` is set to `storage`, `LocaleStrippingRouter` is loaded which strips out `_locale` parameter
+* If `sylius_shop.locale_switcher` is set to `storage`, `LocaleStrippingRouter` is loaded, which strips out `_locale` parameter
   from the URL if it's the same as the one already in the storage. In order to disable localized urls, follow this cookbook entry: http://docs.sylius.org/en/latest/cookbook/disabling-localised-urls.html
  
 * `ShopUserLogoutHandler` has different parameters in constructor:
@@ -238,8 +260,8 @@
 ### Shipping / ShippingBundle
 
 * `UnresolvedDefaultShippingMethodException` has been made final, use decoration instead of extending it.
-* `setShippable(?ShippableInterface $shippable)` has been added to `ShipmentUnitInterface`.
-* The following methods does not longer have a default null argument and requires one to be explicitly passed:
+* `setShippable(?ShippableInterface $shippable)` method has been added to `ShipmentUnitInterface`.
+* The following methods no longer have a default null argument and require one to be explicitly passed:
 
     * `ShipmentInterface::setMethod`
     * `ShipmentUnitInterface::setShipment`
@@ -250,7 +272,7 @@
 
 ### Taxation / TaxationBundle
 
-* The following methods does not longer have a default null argument and requires one to be explicitly passed:
+* The following methods no longer have a default null argument and require one to be explicitly passed:
 
   * `TaxRateInterface::setTranslatable`
   * `TaxRateInterface::setCategory`
@@ -261,7 +283,7 @@
 
 ### ThemeBundle
 
-* `ThemeHierarchyProviderInterface::getThemeHierarchy` does not longer accepts null as the passed argument.
+* `ThemeHierarchyProviderInterface::getThemeHierarchy` no longer accepts null as the passed argument.
 
 ### User / UserBundle
 
@@ -271,7 +293,7 @@
   * `UserLastLoginSubscriber`
   * `UserReloaderListener`
 
-* The following methods does not longer have a default null argument and requires one to be explicitly passed:
+* The following methods no longer have a default null argument and require one to be explicitly passed:
 
   * `UserAwareInterface::setUser`
   * `UserInterface::setPasswordRequestedAt`
