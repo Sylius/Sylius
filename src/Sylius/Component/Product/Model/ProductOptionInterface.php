@@ -23,10 +23,19 @@ use Sylius\Component\Resource\Model\TranslatableInterface;
  */
 interface ProductOptionInterface extends
     CodeAwareInterface,
-    ProductOptionTranslationInterface,
     TimestampableInterface,
     TranslatableInterface
 {
+    /**
+     * @return string
+     */
+    public function getName(): ?string;
+
+    /**
+     * @param string $name
+     */
+    public function setName(?string $name): void;
+
     /**
      * @return int
      */

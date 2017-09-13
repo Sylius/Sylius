@@ -23,7 +23,6 @@ use Sylius\Component\Resource\Model\TranslatableInterface;
  */
 interface PaymentMethodInterface extends
     CodeAwareInterface,
-    PaymentMethodTranslationInterface,
     TimestampableInterface,
     ToggleableInterface,
     TranslatableInterface

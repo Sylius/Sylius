@@ -25,9 +25,18 @@ use Sylius\Component\Resource\Model\TranslatableInterface;
 interface AttributeInterface extends
     CodeAwareInterface,
     TimestampableInterface,
-    AttributeTranslationInterface,
     TranslatableInterface
 {
+    /**
+     * @return string|null
+     */
+    public function getName(): ?string;
+
+    /**
+     * @param string|null $name
+     */
+    public function setName(?string $name): void;
+
     /**
      * @return string|null
      */
