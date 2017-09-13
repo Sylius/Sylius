@@ -97,11 +97,17 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
     {
         $this->variant = $variant;
 
-        $this->setImmutableProductName($variant->getProduct()->getName());
-        $this->setImmutableVariantName($variant->getName());
+        if(isset($variant)) {
 
-        $this->setImmutableProductCode($variant->getProduct()->getCode());
-        $this->setImmutableVariantCode($variant->getCode());
+            $this->setImmutableProductName($variant->getProduct()->getName());
+            $this->setImmutableVariantName($variant->getName());
+
+            $this->setImmutableProductCode($variant->getProduct()->getCode());
+            $this->setImmutableVariantCode($variant->getCode());
+
+        }
+
+
     }
 
     /**
