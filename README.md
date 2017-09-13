@@ -1,10 +1,25 @@
-![Sylius](http://demo.sylius.org/assets/shop/img/logo.png)
-
-[![License](https://img.shields.io/packagist/l/Sylius/Sylius.svg)](https://packagist.org/packages/sylius/sylius)
-[![Version](https://img.shields.io/packagist/vpre/Sylius/Sylius.svg)](https://packagist.org/packages/sylius/sylius)
-[![Build status on Linux](https://img.shields.io/travis/Sylius/Sylius/master.svg)](http://travis-ci.org/Sylius/Sylius)
-[![Scrutinizer Quality Score](https://img.shields.io/scrutinizer/g/Sylius/Sylius.svg)](https://scrutinizer-ci.com/g/Sylius/Sylius/)
-[![Total Downloads](https://poser.pugx.org/sylius/sylius/downloads)](https://packagist.org/packages/sylius/sylius)
+<p align="center">
+    <a href="http://sylius.org" target="_blank">
+        <img src="http://demo.sylius.org/assets/shop/img/logo.png" />
+    </a>
+</p>
+<p align="center">
+    <a href="https://packagist.org/packages/sylius/sylius">
+        <img src="https://img.shields.io/packagist/l/Sylius/Sylius.svg" alt="License" />
+    </a>
+    <a href="https://packagist.org/packages/sylius/sylius">
+        <img src="https://img.shields.io/packagist/v/Sylius/Sylius.svg" alt="Version" />
+    </a>
+    <a href="http://travis-ci.org/Sylius/Sylius">
+        <img src="https://img.shields.io/travis/Sylius/Sylius/master.svg" alt="Build status" />
+    </a>
+    <a href="https://scrutinizer-ci.com/g/Sylius/Sylius/">
+        <img src="https://img.shields.io/scrutinizer/g/Sylius/Sylius.svg" alt="Scrutinizer" />
+    </a>
+    <a href="https://packagist.org/packages/sylius/sylius">
+        <img src="https://poser.pugx.org/sylius/sylius/downloads" alt="Total Downloads" />
+    </a>
+</p>
 
 Sylius is the first eCommerce framework for tailored solution based on [**Symfony**](http://symfony.com) and [**Doctrine**](http://doctrine-project.org). 
 The highest quality of code, strong testing culture, built-in Agile (BDD) workflow and exceptional flexibility make it the best solution for application tailored to your business requirements. 
