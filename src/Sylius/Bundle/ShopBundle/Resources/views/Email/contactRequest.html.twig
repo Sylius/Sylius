@@ -1,12 +1,12 @@
 {% block subject %}
-    Contact request
+    {{ 'sylius.emails.contact_request.subject'|trans }}
 {% endblock %}
 
 {% block body %}
     {% autoescape %}
-        Message from: {{ data.email }}
+        {{ 'sylius.emails.contact_request.body.message_from'|trans({'%email%': data.email})|raw }}
         <br/>
-        Content:
+        {{ 'sylius.emails.contact_request.body.message_label'|trans|raw }}
         <br/>
         "{{ data.message }}"
     {% endautoescape %}

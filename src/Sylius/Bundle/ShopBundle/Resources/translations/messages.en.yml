@@ -11,3 +11,35 @@ sylius:
                 header: 'Your account'
                 order_history: 'Order history'
                 personal_information: 'Personal information'
+    emails:
+        contact_request:
+            subject: 'Contact request'
+            body:
+                message_from: 'Message from: %email%'
+                message_label: 'Content:'
+        order:
+            confirmation:
+                subject: 'Order confirmation'
+                body:
+                    success_message: 'Your order no. %order_number% has been successfully placed.'
+                    order_view_link: 'To view order and change payment method - please visit<br\> <a href="%url%">%url%</a>'
+                    thanks_message: 'Thank you for shopping at our store!'
+        user:
+            registration:
+                subject: 'User registration'
+                body:
+                    welcome_message: 'Welcome to our store!'
+                    text: 'You have just been registered.'
+                    thanks_message: 'Thank you %username%.'
+            password_reset:
+                subject: 'Password reset'
+                body:
+                    hello_message: 'Hello %username%'
+                    reset_link: 'To reset your password - please visit<br\> <a href="%url%">%url%</a>'
+                    regards_message: 'Regards, the Support team.'
+            verification_token:
+                subject: 'Email address verification'
+                body:
+                    hello_message: 'Hello %username%'
+                    verify_link: 'To verify your email address - please visit<br\> <a href="%url%">%url%</a>'
+                    regards_message: 'Regards, the Support team.'

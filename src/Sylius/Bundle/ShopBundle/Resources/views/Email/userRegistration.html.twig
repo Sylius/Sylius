@@ -1,13 +1,13 @@
 {% block subject %}
-    User registration
+    {{ 'sylius.emails.user.registration.subject'|trans }}
 {% endblock %}
 
 {% block body %}
     {% autoescape %}
-        Welcome to our store!
+        {{ 'sylius.emails.user.registration.body.welcome_message'|trans({'%username%': user.username})|raw }}
         <br/><br/>
-        You have just been registered.
-        <br/>
-        Thank you {{ user.username }}.
+        {{ 'sylius.emails.user.registration.body.text'|trans({'%username%': user.username})|raw }}
+        <br/><br/>
+        {{ 'sylius.emails.user.registration.body.thanks_message'|trans({'%username%': user.username})|raw }}
     {% endautoescape %}
 {% endblock %}
