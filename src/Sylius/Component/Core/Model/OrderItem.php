@@ -24,19 +24,67 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
     protected $variant;
 
     /**
-     * {@inheritdoc}
+     * @return string
      */
-    public function getProduct(): ?ProductInterface
+    public function getImmutableVariantName(): ?string
     {
-        return $this->variant->getProduct();
+        return $this->immutableVariantName ?: $this->variant->getName();
     }
 
     /**
-     * {@inheritdoc}
+     * @param string $immutableVariantName
      */
-    public function getVariant(): ?ProductVariantInterface
+    public function setImmutableVariantName(?string $immutableVariantName)
     {
-        return $this->variant;
+        $this->immutableVariantName = $immutableVariantName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImmutableVariantCode(): ?string
+    {
+        return $this->immutableVariantCode ?: $this->variant->getCode();
+    }
+
+    /**
+     * @param string $immutableVariantCode
+     */
+    public function setImmutableVariantCode(?string $immutableVariantCode)
+    {
+        $this->immutableVariantCode = $immutableVariantCode;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImmutableProductName(): ?string
+    {
+        return $this->immutableProductName ?: $this->variant->getProduct()->getName();
+    }
+
+    /**
+     * @param string $immutableProductName
+     */
+    public function setImmutableProductName(?string $immutableProductName)
+    {
+        $this->immutableProductName = $immutableProductName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImmutableProductCode(): ?string
+    {
+        return $this->immutableProductCode ?: $this->variant->getProduct()->getCode();
+    }
+
+    /**
+     * @param string $immutableProductCode
+     */
+    public function setImmutableProductCode(?string $immutableProductCode)
+    {
+        $this->immutableProductCode = $immutableProductCode;
     }
 
     /**
@@ -44,8 +92,47 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
      */
     public function setVariant(?ProductVariantInterface $variant): void
     {
+        if(isset($variant)) {
+
+            $this->setImmutableProductName($variant->getProduct()->getName());
+            $this->setImmutableVariantName($variant->getName());
+
+            $this->setImmutableProductCode($variant->getProduct()->getCode());
+            $this->setImmutableVariantCode($variant->getCode());
+
+        }
+
         $this->variant = $variant;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getVariant(): ?ProductVariantInterface
+    {
+        $variant = $this->variant;
+
+        if(isset($variant)) {
+
+            $variant->setName($this->getImmutableVariantName());
+            $variant->setCode($this->getImmutableVariantCode());
+
+            $product = $variant->getProduct();
+            $product->setName($this->getImmutableProductName());
+            $product->setCode($this->getImmutableProductCode());
+        }
+
+        return $variant;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getProduct(): ?ProductInterface
+    {
+        return $this->variant->getProduct();
+    }
+
 
     /**
      * {@inheritdoc}

@@ -68,6 +68,26 @@ class OrderItem implements OrderItemInterface
      */
     protected $adjustmentsTotal = 0;
 
+    /*
+    * @var string
+    */
+    protected $immutableProductName;
+
+    /*
+     * @var string
+     */
+    protected $immutableProductCode;
+
+    /*
+     * @var string
+     */
+    protected $immutableVariantName;
+
+    /*
+     * @var string
+     */
+    protected $immutableVariantCode;
+
     public function __construct()
     {
         $this->adjustments = new ArrayCollection();
