@@ -6,7 +6,7 @@
 [![Scrutinizer Quality Score](https://img.shields.io/scrutinizer/g/Sylius/Sylius.svg)](https://scrutinizer-ci.com/g/Sylius/Sylius/)
 [![Total Downloads](https://poser.pugx.org/sylius/sylius/downloads)](https://packagist.org/packages/sylius/sylius)
 
-Sylius is the first decoupled eCommerce framework based on [**Symfony**](http://symfony.com) and [**Doctrine**](http://doctrine-project.org). 
+Sylius is the first eCommerce framework for tailored solution based on [**Symfony**](http://symfony.com) and [**Doctrine**](http://doctrine-project.org). 
 The highest quality of code, strong testing culture, built-in Agile (BDD) workflow and exceptional flexibility make it the best solution for application tailored to your business requirements. 
 Enjoy being an eCommerce Developer again!
 
@@ -24,7 +24,7 @@ Installation
 
 ```bash
 $ wget http://getcomposer.org/composer.phar
-$ php composer.phar create-project -s rc sylius/sylius-standard project
+$ php composer.phar create-project sylius/sylius-standard project
 $ cd project
 $ php bin/console sylius:install
 $ yarn install
