@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    tax_category:
+        name:
+            not_blank: Lūdzu, ievadiet nodokļu kategorijas nosaukumu.
+        code:
+            not_blank: Lūdzu, ievadiet nodokļu kategorijas kodu.

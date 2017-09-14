@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    cart:
+        add_item: 'Varen er blevet tilføjet til indkøbskurven'
+        cannot_modify: 'Der er allerede sendt en ordre på den kurv du forsøger at ændre.'
+        remove_item: 'Varen er blevet fjernet fra indkøbskurven'
+        save: 'Indkøbskurven er blevet opdateret'
