@@ -95,8 +95,6 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
      */
     public function setVariant(?ProductVariantInterface $variant): void
     {
-        $this->variant = $variant;
-
         if(isset($variant)) {
 
             $this->setImmutableProductName($variant->getProduct()->getName());
@@ -106,8 +104,6 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
             $this->setImmutableVariantCode($variant->getCode());
 
         }
-
-
     }
 
     /**
@@ -115,13 +111,17 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
      */
     public function getVariant(): ?ProductVariantInterface
     {
-        $variant = $this->variant;
-        $variant->setName($this->getImmutableVariantName());
-        $variant->setCode($this->getImmutableVariantCode());
+        if(isset($this->variant)) {
 
-        $product = $variant->getProduct();
-        $product->setName($this->getImmutableProductName());
-        $product->setCode($this->getImmutableProductCode());
+            $variant = $this->variant;
+
+            $variant->setName($this->getImmutableVariantName());
+            $variant->setCode($this->getImmutableVariantCode());
+
+            $product = $variant->getProduct();
+            $product->setName($this->getImmutableProductName());
+            $product->setCode($this->getImmutableProductCode());
+        }
 
         return $variant;
     }
