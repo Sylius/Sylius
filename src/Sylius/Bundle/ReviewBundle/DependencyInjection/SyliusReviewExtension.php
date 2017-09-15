@@ -79,9 +79,15 @@ final class SyliusReviewExtension extends AbstractResourceExtension
             ]);
 
             $reviewChangeListener->addTag('kernel.event_listener', [
+                'event' => sprintf('sylius.%s_review.post_create', $reviewSubject),
+                'method' => 'recalculateSubjectRating',
+            ]);
+
+            $reviewChangeListener->addTag('kernel.event_listener', [
                 'event' => sprintf('sylius.%s_review.post_update', $reviewSubject),
                 'method' => 'recalculateSubjectRating',
             ]);
+
             $reviewChangeListener->addTag('kernel.event_listener', [
                 'event' => sprintf('sylius.%s_review.post_delete', $reviewSubject),
                 'method' => 'recalculateSubjectRating',
