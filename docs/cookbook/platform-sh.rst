@@ -51,62 +51,44 @@ This is how this file should look like for Sylius (tuned version of the default 
             yarn: "*"
             gulp-cli: "*"
 
+
     web:
-        document_root: "/web"
-        passthru: "/app.php"
-
-        whitelist:
-          - \.css$
-          - \.js$
-
-          - \.gif$
-          - \.jpe?g$
-          - \.png$
-          - \.tiff?$
-          - \.wbmp$
-          - \.ico$
-          - \.jng$
-          - \.bmp$
-          - \.svgz?$
-
-          - \.midi?$
-          - \.mpe?ga$
-          - \.mp2$
-          - \.mp3$
-          - \.m4a$
-          - \.ra$
-          - \.weba$
-
-          - \.3gpp?$
-          - \.mp4$
-          - \.mpe?g$
-          - \.mpe$
-          - \.ogv$
-          - \.mov$
-          - \.webm$
-          - \.flv$
-          - \.mng$
-          - \.asx$
-          - \.asf$
-          - \.wmv$
-          - \.avi$
-
-          - \.ogx$
-
-          - \.swf$
-
-          - \.jar$
-
-          - \.ttf$
-          - \.eot$
-          - \.woff$
-          - \.woff2$
-          - \.otf$
-
-          - /robots\.txt$
-
-          - \.html$
-          - \.pdf$
+        locations:
+            '/':
+                root: "web"
+                passthru: "/app.php"
+                allow: true
+                expires: -1
+                scripts: true
+            '/assets/shop':
+                expires: 2w
+                passthru: true
+                allow: false
+                rules:
+                    # Only allow static files from the assets directories.
+                    '\.(css|js|jpe?g|png|gif|svgz?|ico|bmp|tiff?|wbmp|ico|jng|bmp|html|pdf|otf|woff2|woff|eot|ttf|jar|swf|ogx|avi|wmv|asf|asx|mng|flv|webm|mov|ogv|mpe|mpe?g|mp4|3gpp|weba|ra|m4a|mp3|mp2|mpe?ga|midi?)$':
+                        allow: true
+            '/media/image':
+                expires: 2w
+                passthru: true
+                allow: false
+                rules:
+                    # Only allow static files from the assets directories.
+                    '\.(jpe?g|png|gif|svgz?)$':
+                        allow: true
+            '/media/cache/resolve':
+                passthru: "/app.php"
+                expires: -1
+                allow: true
+                scripts: true
+            '/media/cache':
+                expires: 2w
+                passthru: true
+                allow: false
+                rules:
+                    # Only allow static files from the assets directories.
+                    '\.(jpe?g|png|gif|svgz?)$':
+                        allow: true
 
     disk: 4096
 
@@ -132,6 +114,8 @@ This is how this file should look like for Sylius (tuned version of the default 
         deploy: |
             rm -rf var/cache/*
             php bin/console --env=prod doctrine:migrations:migrate --no-interaction
+
+The above configuration includes tuned cache expiration headers for static files. The cache lifetimes can be adjusted for your site if desired.
 
 * Add ``.platform/routes.yaml`` file:
 

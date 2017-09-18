@@ -120,55 +120,6 @@ tutorial will guide you through this and make use of Redis. In the default examp
             php bin/console --env=prod doctrine:cache:clear-result
             php bin/console --env=prod doctrine:migrations:migrate --no-interaction
 
-Advanced web configuration including cache control headers:
------------------------------------------------------------
-
-Platform.sh allows granular control over cache control headers, but it's not introducted in the default configuration.
-
-The following configuration can be a starting point for your customisations. Replace the `web` property in
-``.platform.app.yml`` with the following example and you have a good starting point:
-
-.. code-block:: yaml
-
-    # The configuration of app when it is exposed to the web.
-    web:
-        locations:
-            '/':
-                root: "web"
-                passthru: "/app.php"
-                allow: true
-                expires: -1
-                scripts: true
-            '/assets/shop':
-                expires: 2w
-                passthru: true
-                allow: false
-                rules:
-                    # Only allow static files from the assets directories.
-                    '\.(css|js|jpe?g|png|gif|svgz?|ico|bmp|tiff?|wbmp|ico|jng|bmp|html|pdf|otf|woff2|woff|eot|ttf|jar|swf|ogx|avi|wmv|asf|asx|mng|flv|webm|mov|ogv|mpe|mpe?g|mp4|3gpp|weba|ra|m4a|mp3|mp2|mpe?ga|midi?)$':
-                        allow: true
-            '/media/image':
-                expires: 2w
-                passthru: true
-                allow: false
-                rules:
-                    # Only allow static files from the assets directories.
-                    '\.(jpe?g|png|gif|svgz?)$':
-                        allow: true
-            '/media/cache/resolve':
-                passthru: "/app.php"
-                expires: -1
-                allow: true
-                scripts: true
-            '/media/cache':
-                expires: 2w
-                passthru: true
-                allow: false
-                rules:
-                    # Only allow static files from the assets directories.
-                    '\.(jpe?g|png|gif|svgz?)$':
-                        allow: true
-
 Add default Sylius cronjobs:
 ----------------------------
 
