@@ -21,6 +21,7 @@
         <import resource="admin/currency.xml" />
         <import resource="admin/customer.xml" />
         <import resource="admin/customer_group.xml" />
+        <import resource="admin/customer_tax_category.xml" />
         <import resource="admin/exchange_rate.xml" />
         <import resource="admin/inventory.xml" />
         <import resource="admin/locale.xml" />

@@ -18,6 +18,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
+use Sylius\Component\Core\Model\CustomerTaxCategoryInterface;
 use Sylius\Component\Core\Model\TaxRateInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -46,6 +47,11 @@ final class TaxationContext implements Context
     private $taxCategoryFactory;
 
     /**
+     * @var FactoryInterface
+     */
+    private $customerTaxCategoryFactory;
+
+    /**
      * @var RepositoryInterface
      */
     private $taxRateRepository;
@@ -56,6 +62,11 @@ final class TaxationContext implements Context
     private $taxCategoryRepository;
 
     /**
+     * @var RepositoryInterface
+     */
+    private $customerTaxCategoryRepository;
+
+    /**
      * @var ObjectManager
      */
     private $objectManager;
@@ -64,23 +75,29 @@ final class TaxationContext implements Context
      * @param SharedStorageInterface $sharedStorage
      * @param FactoryInterface $taxRateFactory
      * @param FactoryInterface $taxCategoryFactory
+     * @param FactoryInterface $customerTaxCategoryFactory
      * @param RepositoryInterface $taxRateRepository
      * @param TaxCategoryRepositoryInterface $taxCategoryRepository
+     * @param RepositoryInterface $customerTaxCategoryRepository
      * @param ObjectManager $objectManager
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         FactoryInterface $taxRateFactory,
         FactoryInterface $taxCategoryFactory,
+        FactoryInterface $customerTaxCategoryFactory,
         RepositoryInterface $taxRateRepository,
         TaxCategoryRepositoryInterface $taxCategoryRepository,
+        RepositoryInterface $customerTaxCategoryRepository,
         ObjectManager $objectManager
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->taxRateFactory = $taxRateFactory;
         $this->taxCategoryFactory = $taxCategoryFactory;
+        $this->customerTaxCategoryFactory = $customerTaxCategoryFactory;
         $this->taxRateRepository = $taxRateRepository;
         $this->taxCategoryRepository = $taxCategoryRepository;
+        $this->customerTaxCategoryRepository = $customerTaxCategoryRepository;
         $this->objectManager = $objectManager;
     }
 
@@ -161,6 +178,29 @@ final class TaxationContext implements Context
     }
 
     /**
+     * @Given the store has a customer tax category :name with a code :code
+     * @Given the store has a customer tax category :name
+     */
+    public function theStoreHasACustomerTaxCategoryWithACode(string $name, ?string $code = null): void
+    {
+        $customerTaxCategory = $this->createCustomerTaxCategory($name, $code);
+
+        $this->sharedStorage->set('customer_tax_category', $customerTaxCategory);
+    }
+
+    /**
+     * @Given /^(this customer tax category) has a description specified as "([^"]+)"$/
+     */
+    public function thisCustomerTaxCategoryHasADescriptionSpecifiedAs(
+        CustomerTaxCategoryInterface $customerTaxCategory,
+        string $description
+    ): void {
+        $customerTaxCategory->setDescription($description);
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @param string $taxCategoryName
      *
      * @return TaxCategoryInterface
@@ -201,6 +241,29 @@ final class TaxationContext implements Context
         $this->taxCategoryRepository->add($taxCategory);
 
         return $taxCategory;
+    }
+
+    /**
+     * @param string $name
+     * @param string|null $code
+     *
+     * @return CustomerTaxCategoryInterface
+     */
+    private function createCustomerTaxCategory(string $name, ?string $code = null): CustomerTaxCategoryInterface
+    {
+        /** @var CustomerTaxCategoryInterface $customerTaxCategory */
+        $customerTaxCategory = $this->customerTaxCategoryFactory->createNew();
+
+        if (null === $code) {
+            $code = $this->getCodeFromName($name);
+        }
+
+        $customerTaxCategory->setName($name);
+        $customerTaxCategory->setCode($code);
+
+        $this->customerTaxCategoryRepository->add($customerTaxCategory);
+
+        return $customerTaxCategory;
     }
 
     /**
