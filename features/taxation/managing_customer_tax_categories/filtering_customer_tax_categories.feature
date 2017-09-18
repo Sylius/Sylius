@@ -9,14 +9,14 @@ Feature: Filtering customer tax categories
         And the store has a customer tax category "Wholesale" with a code "wholesale"
         And I am logged in as an administrator
 
-    @ui @todo
+    @ui
     Scenario: Filtering customer tax categories by the name
         Given I am browsing customer tax categories
         When I filter customer tax categories with value containing "Ret"
         Then I should see a single customer tax category in the list
         And I should see the customer tax category "Retail" in the list
 
-    @ui @todo
+    @ui
     Scenario: Filtering customer tax categories by the code
         Given I am browsing customer tax categories
         When I filter customer tax categories with value containing "whole"

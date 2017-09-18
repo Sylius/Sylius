@@ -7,7 +7,7 @@ Feature: Adding a new customer tax category
     Background:
         Given I am logged in as an administrator
 
-    @ui @todo
+    @ui
     Scenario: Adding a new customer tax category
         When I want to create a new customer tax category
         And I specify its code as "retail"
@@ -16,7 +16,7 @@ Feature: Adding a new customer tax category
         Then I should be notified that it has been successfully created
         And the customer tax category "Retail" should appear in the registry
 
-    @ui @todo
+    @ui
     Scenario: Adding a new customer tax category with a description
         When I want to create a new customer tax category
         And I specify its code as "retail"

@@ -246,6 +246,12 @@ final class MainMenuBuilder
         ;
 
         $configuration
+            ->addChild('customer_tax_categories', ['route' => 'sylius_admin_customer_tax_category_index'])
+            ->setLabel('sylius.menu.admin.main.configuration.customer_tax_categories')
+            ->setLabelAttribute('icon', 'id badge')
+        ;
+
+        $configuration
             ->addChild('tax_rates', ['route' => 'sylius_admin_tax_rate_index'])
             ->setLabel('sylius.menu.admin.main.configuration.tax_rates')
             ->setLabelAttribute('icon', 'money')

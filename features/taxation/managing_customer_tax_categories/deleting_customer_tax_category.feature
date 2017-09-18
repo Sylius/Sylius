@@ -8,7 +8,7 @@ Feature: Deleting a customer tax category
         Given the store has a customer tax category "Retail"
         And I am logged in as an administrator
 
-    @ui @todo
+    @ui
     Scenario: Deleting a customer tax category
         When I delete a customer tax category "Retail"
         Then I should be notified that it has been successfully deleted

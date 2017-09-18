@@ -9,7 +9,7 @@ Feature: Browsing customer tax categories
         And the store has a customer tax category "Wholesale"
         And I am logged in as an administrator
 
-    @ui @todo
+    @ui
     Scenario: Browsing customer tax categories
         When I browse customer tax categories
         Then I should see 2 customer tax categories in the list

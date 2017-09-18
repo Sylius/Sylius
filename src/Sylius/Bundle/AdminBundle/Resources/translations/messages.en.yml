@@ -15,6 +15,7 @@ sylius:
                     channels: Channels
                     countries: Countries
                     currencies: Currencies
+                    customer_tax_categories: Customer tax categories
                     exchange_rates: Exchange rates
                     header: Configuration
                     locales: Locales

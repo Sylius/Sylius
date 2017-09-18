@@ -7,7 +7,7 @@ Feature: Customer tax category validation
     Background:
         Given I am logged in as an administrator
 
-    @ui @todo
+    @ui
     Scenario: Trying to add a new customer tax category without specifying its code
         When I want to create a new customer tax category
         And I name it "Retail"
@@ -16,7 +16,7 @@ Feature: Customer tax category validation
         Then I should be notified that the code is required
         And the customer tax category with a name "Retail" should not be added
 
-    @ui @todo
+    @ui
     Scenario: Trying to add a new customer tax category without specifying its name
         When I want to create a new customer tax category
         And I specify its code as "retail"
@@ -25,7 +25,7 @@ Feature: Customer tax category validation
         Then I should be notified that the name is required
         And the customer tax category with a code "retail" should not be added
 
-    @ui @todo
+    @ui
     Scenario: Trying to remove a name from an existing customer tax category
         Given the store has a customer tax category "Retail"
         When I want to modify this customer tax category
