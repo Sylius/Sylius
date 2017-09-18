@@ -11,6 +11,9 @@ sylius:
                 different_billing_address: Use different address for billing?
             payment_method: Payment Method
             shipping_method: Shipping Method
+        customer_tax_category:
+            description: Description
+            name: Name
         promotion:
             channels: Channels
         promotion_action:

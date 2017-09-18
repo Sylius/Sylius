@@ -14,11 +14,14 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\DependencyInjection;
 
 use Sylius\Bundle\CoreBundle\Controller\ProductTaxonController;
+use Sylius\Bundle\CoreBundle\Form\Type\CustomerTaxCategoryType;
 use Sylius\Bundle\CoreBundle\Form\Type\Product\ChannelPricingType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Core\Model\ChannelPricing;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
+use Sylius\Component\Core\Model\CustomerTaxCategory;
+use Sylius\Component\Core\Model\CustomerTaxCategoryInterface;
 use Sylius\Component\Core\Model\ProductImage;
 use Sylius\Component\Core\Model\ProductImageInterface;
 use Sylius\Component\Core\Model\ProductTaxon;
@@ -125,6 +128,23 @@ final class Configuration implements ConfigurationInterface
                                 ->end()
                             ->end()
                         ->end()
+                        ->arrayNode('customer_tax_category')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->variableNode('options')->end()
+                                ->arrayNode('classes')
+                                    ->addDefaultsIfNotSet()
+                                        ->children()
+                                            ->scalarNode('model')->defaultValue(CustomerTaxCategory::class)->cannotBeEmpty()->end()
+                                            ->scalarNode('interface')->defaultValue(CustomerTaxCategoryInterface::class)->cannotBeEmpty()->end()
+                                            ->scalarNode('controller')->defaultValue(ResourceController::class)->end()
+                                            ->scalarNode('repository')->cannotBeEmpty()->end()
+                                            ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                            ->scalarNode('form')->defaultValue(CustomerTaxCategoryType::class)->cannotBeEmpty()->end()
+                                        ->end()
+                                    ->end()
+                                ->end()
+                            ->end()
                     ->end()
                 ->end()
             ->end()

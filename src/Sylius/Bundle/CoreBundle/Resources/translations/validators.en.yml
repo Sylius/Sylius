@@ -27,6 +27,13 @@ sylius:
     customer:
         currency_code:
             not_valid: The currency code you entered is invalid.
+    customer_tax_category:
+        name:
+            not_blank: Please enter a customer tax category name.
+        code:
+            not_blank: Please enter a customer tax category code.
+            regex: Customer tax category code can only be comprised of letters, numbers, dashes and underscores.
+            unique: The customer tax category with given code already exists.
     cart_item:
         not_available: '%itemName% does not have sufficient stock.'
     order:

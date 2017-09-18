@@ -47,6 +47,9 @@
         <parameter key="sylius.form.type.product_image.validation_groups" type="collection">
             <parameter>sylius</parameter>
         </parameter>
+        <parameter key="sylius.form.type.customer_tax_category.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+        </parameter>
     </parameters>
 
     <services>
@@ -241,6 +244,12 @@
         <service id="sylius.form.type.autocomplete_product_taxon_choice" class="Sylius\Bundle\CoreBundle\Form\Type\Taxon\ProductTaxonAutocompleteChoiceType">
             <argument type="service" id="sylius.factory.product_taxon" />
             <argument type="service" id="sylius.repository.product_taxon" />
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius.form.type.customer_tax_category" class="Sylius\Bundle\CoreBundle\Form\Type\CustomerTaxCategoryType">
+            <argument>%sylius.model.customer_tax_category.class%</argument>
+            <argument>%sylius.form.type.customer_tax_category.validation_groups%</argument>
             <tag name="form.type" />
         </service>
     </services>
