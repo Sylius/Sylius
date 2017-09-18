@@ -49,6 +49,10 @@ final class ORMPurgerListener extends AbstractListener implements BeforeSuiteLis
      */
     public function beforeSuite(SuiteEvent $suiteEvent, array $options): void
     {
+        if (true === $options['disable_purger']) {
+            return;
+        }
+
         foreach ($options['managers'] as $managerName) {
             /** @var EntityManagerInterface $manager */
             $manager = $this->managerRegistry->getManager($managerName);
@@ -76,20 +80,25 @@ final class ORMPurgerListener extends AbstractListener implements BeforeSuiteLis
 
         $optionsNodeBuilder
             ->enumNode('mode')
-                ->values(['delete', 'truncate'])
-                ->defaultValue('delete')
+            ->values(['delete', 'truncate'])
+            ->defaultValue('delete')
         ;
 
         $optionsNodeBuilder
             ->arrayNode('managers')
-                ->defaultValue([null])
-                ->prototype('scalar')
+            ->defaultValue([null])
+            ->prototype('scalar')
         ;
 
         $optionsNodeBuilder
             ->arrayNode('exclude')
-                ->defaultValue([])
-                ->prototype('scalar')
+            ->defaultValue([])
+            ->prototype('scalar')
+        ;
+
+        $optionsNodeBuilder
+            ->booleanNode('disable_purger')
+            ->defaultValue(false)
         ;
     }
 }
