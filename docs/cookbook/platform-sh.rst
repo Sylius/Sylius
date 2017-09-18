@@ -29,7 +29,7 @@ This is how this file should look like for Sylius (tuned version of the default 
 .. code-block:: yaml
 
     # .platform.app.yaml
-    name: sylius
+    name: app
 
     type: "php:7.1"
     build:
@@ -140,7 +140,7 @@ This is how this file should look like for Sylius (tuned version of the default 
     # .platform/routes.yaml
     "http://{default}/":
         type: upstream
-        upstream: "sylius:http"
+        upstream: "app:http"
 
     "http://www.{default}/":
         type: redirect
