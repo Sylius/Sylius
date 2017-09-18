@@ -66,6 +66,12 @@
             <tag name="sylius_fixtures.fixture" />
         </service>
 
+        <service id="sylius.fixture.customer_tax_category" class="Sylius\Bundle\CoreBundle\Fixture\CustomerTaxCategoryFixture">
+            <argument type="service" id="sylius.manager.customer_tax_category" />
+            <argument type="service" id="sylius.fixture.example_factory.customer_tax_category" />
+            <tag name="sylius_fixtures.fixture" />
+        </service>
+
         <service id="sylius.fixture.shop_user" class="Sylius\Bundle\CoreBundle\Fixture\ShopUserFixture">
             <argument type="service" id="sylius.manager.shop_user" />
             <argument type="service" id="sylius.fixture.example_factory.shop_user" />

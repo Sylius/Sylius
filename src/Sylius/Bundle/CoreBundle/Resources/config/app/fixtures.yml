@@ -115,6 +115,13 @@ sylius_fixtures:
                                 last_name: "Brushwood"
                                 api: true
 
+                customer_tax_category:
+                    options:
+                        custom:
+                            general:
+                                code: "general"
+                                name: "General"
+
                 tax_category:
                     options:
                         custom:

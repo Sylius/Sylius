@@ -42,6 +42,10 @@
             <argument type="service" id="sylius.factory.customer_group" />
         </service>
 
+        <service id="sylius.fixture.example_factory.customer_tax_category" class="Sylius\Bundle\CoreBundle\Fixture\Factory\CustomerTaxCategoryExampleFactory">
+            <argument type="service" id="sylius.factory.customer_tax_category" />
+        </service>
+
         <service id="sylius.fixture.example_factory.shop_user" class="Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory">
             <argument type="service" id="sylius.factory.shop_user" />
             <argument type="service" id="sylius.factory.customer" />
