@@ -11,8 +11,8 @@ Feature: Applying correct taxes for customers with different customer tax rates 
         And the store ships everywhere for free
         And default tax zone is "US"
         And the store has customer tax categories "Retail" and "Wholesale"
-        And the store has a customer group "General" with "Retail" customer tax category
-        And the store has also a customer group "Business" with "Wholesale" customer tax category
+        And the store has a customer group "General" with a "Retail" tax category
+        And the store has also a customer group "Business" with a "Wholesale" tax category
         And the store has a "VAT" tax rate of 24% for "Clothes" and "General" customer tax category for the rest of the world
         And the store has a "VAT" tax rate of 20% for "Clothes" and "Business" customer tax category for the rest of the world
         And the store has also a "Low VAT" tax rate of 10% for "Clothes" and "General" customer tax category within the "US" zone

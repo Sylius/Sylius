@@ -179,6 +179,7 @@ final class CustomerContext implements Context
 
     /**
      * @Given /^(the customer) belongs to (group "([^"]+)")$/
+     * @Given /^(this customer) belongs to (group "([^"]+)")$/
      */
     public function theCustomerBelongsToGroup(CustomerInterface $customer, CustomerGroupInterface $customerGroup)
     {

@@ -35,6 +35,7 @@ final class CustomerTaxCategoryContext implements Context
 
     /**
      * @Transform :customerTaxCategory
+     * @Transform /^"([^"]+)" customer tax category$/
      */
     public function getCustomerTaxCategoryByName(string $name): CustomerTaxCategoryInterface
     {

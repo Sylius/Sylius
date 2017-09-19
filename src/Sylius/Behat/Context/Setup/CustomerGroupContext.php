@@ -16,7 +16,8 @@ namespace Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
-use Sylius\Component\Customer\Model\CustomerGroupInterface;
+use Sylius\Component\Core\Model\CustomerGroupInterface;
+use Sylius\Component\Core\Model\CustomerTaxCategoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -65,16 +66,34 @@ final class CustomerGroupContext implements Context
     }
 
     /**
-     * @param string $name
-     * @param string $code
+     * @Given the store has (also) a customer group :name with a :customerTaxCategory tax category
      */
-    private function createCustomerGroup($name, $code)
-    {
+    public function theStoreHasACustomerGroupWithATaxCategory(
+        string $name,
+        ?CustomerTaxCategoryInterface $customerTaxCategory
+    ): void {
+        $this->createCustomerGroup($name, null, $customerTaxCategory);
+    }
+
+    /**
+     * @param string $name
+     * @param ?string $code
+     * @param ?CustomerTaxCategoryInterface $taxCategory
+     */
+    private function createCustomerGroup(
+        string $name,
+        ?string $code = null,
+        ?CustomerTaxCategoryInterface $taxCategory = null
+    ): void {
         /** @var CustomerGroupInterface $customerGroup */
         $customerGroup = $this->customerGroupFactory->createNew();
 
         $customerGroup->setCode($code ?: $this->generateCodeFromName($name));
         $customerGroup->setName(ucfirst($name));
+
+        if (null !== $taxCategory) {
+            $customerGroup->setTaxCategory($taxCategory);
+        }
 
         $this->sharedStorage->set('customer_group', $customerGroup);
         $this->customerGroupRepository->add($customerGroup);

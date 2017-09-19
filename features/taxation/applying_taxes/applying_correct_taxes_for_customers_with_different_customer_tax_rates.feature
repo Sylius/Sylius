@@ -8,10 +8,10 @@ Feature: Applying correct taxes for customers with different customer tax rates
         Given the store operates on a single channel in "United States"
         And default tax zone is "US"
         And the store has customer tax categories "Retail" and "Wholesale"
-        And the store has a customer group "General" with "Retail" customer tax category
-        And the store has also a customer group "Business" with "Wholesale" customer tax category
-        And the store has a "VAT" tax rate of 23% for "Clothes" and "General" customer tax category within the "US" zone
-        And the store has also a "Low VAT" tax rate of 8% for "Clothes" and "Business" customer tax category within the "US" zone
+        And the store has a customer group "General" with a "Retail" tax category
+        And the store has also a customer group "Business" with a "Wholesale" tax category
+        And the store has a "VAT" tax rate of 23% for "Clothes" and "Retail" customer tax category within the "US" zone
+        And the store has also a "Low VAT" tax rate of 8% for "Clothes" and "Wholesale" customer tax category within the "US" zone
         And the store has a product "PHP T-Shirt" priced at "$100.00"
         And it belongs to "Clothes" tax category
 

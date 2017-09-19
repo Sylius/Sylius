@@ -9,6 +9,8 @@ default:
 
                 - sylius.behat.context.transform.address
                 - sylius.behat.context.transform.country
+                - sylius.behat.context.transform.customer_group
+                - sylius.behat.context.transform.customer_tax_category
                 - sylius.behat.context.transform.lexical
                 - sylius.behat.context.transform.product
                 - sylius.behat.context.transform.product_variant
@@ -20,6 +22,7 @@ default:
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.currency
                 - sylius.behat.context.setup.customer
+                - sylius.behat.context.setup.customer_group
                 - sylius.behat.context.setup.geographical
                 - sylius.behat.context.setup.product
                 - sylius.behat.context.setup.promotion

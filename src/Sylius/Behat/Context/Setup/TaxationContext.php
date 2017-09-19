@@ -136,6 +136,35 @@ final class TaxationContext implements Context
     }
 
     /**
+     * @Given the store has (also) a :taxRateName tax rate of :taxRateAmount% for :taxCategoryName and :customerTaxCategory customer tax category within the :zone zone
+     * @Given /^the store has(?:| also) a "([^"]+)" tax rate of ([^"]+)% for "([^"]+)" and ("[^"]+" customer tax category) for the (rest of the world)$/
+     */
+    public function theStoreHasTaxRateOfForTaxCategoryAndCustomerTaxCategoryWithinTheZone(
+        string $taxRateName,
+        int $taxRateAmount,
+        string $taxCategoryName,
+        CustomerTaxCategoryInterface $customerTaxCategory,
+        ZoneInterface $zone
+    ) {
+        $taxCategory = $this->getOrCreateTaxCategory($taxCategoryName);
+        $taxRateCode = $this->getCodeFromNameAndZoneCode($taxRateName, $zone->getCode());
+
+        /** @var TaxRateInterface $taxRate */
+        $taxRate = $this->taxRateFactory->createNew();
+        $taxRate->setName($taxRateName);
+        $taxRate->setCode($taxRateCode);
+        $taxRate->setZone($zone);
+        $taxRate->setCustomerTaxCategory($customerTaxCategory);
+        $taxRate->setAmount((float) $this->getAmountFromString($taxRateAmount));
+        $taxRate->setCategory($taxCategory);
+        $taxRate->setCalculator('default');
+
+        $this->taxRateRepository->add($taxRate);
+
+        $this->sharedStorage->set('tax_rate', $taxRate);
+    }
+
+    /**
      * @Given the store has included in price :taxRateName tax rate of :taxRateAmount% for :taxCategoryName within the :zone zone
      */
     public function storeHasIncludedInPriceTaxRateWithinZone($taxRateName, $taxRateAmount, $taxCategoryName, ZoneInterface $zone)
@@ -186,6 +215,18 @@ final class TaxationContext implements Context
         $customerTaxCategory = $this->createCustomerTaxCategory($name, $code);
 
         $this->sharedStorage->set('customer_tax_category', $customerTaxCategory);
+    }
+
+    /**
+     * @Given the store has (also) customer tax categories :firstName and :secondName
+     */
+    public function theStoreHasCustomerTaxCategories(...$names): void
+    {
+        foreach ($names as $name) {
+            $this->theStoreHasACustomerTaxCategoryWithACode($name);
+        }
+
+        $this->objectManager->flush();
     }
 
     /**
