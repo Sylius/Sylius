@@ -243,7 +243,7 @@ to the ``app/Resources/SyliusShopBundle/config/routing/checkout.yml`` file.
         path: /complete
         methods: [GET, PUT]
         defaults:
-            _controller: sylius.controller.order:completeAction
+            _controller: sylius.controller.order:updateAction
             _sylius:
                 event: complete
                 flash: false
