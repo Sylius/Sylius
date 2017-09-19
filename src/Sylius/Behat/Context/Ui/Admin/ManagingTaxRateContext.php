@@ -317,6 +317,7 @@ final class ManagingTaxRateContext implements Context
 
     /**
      * @Then the tax rate :taxRate should be applicable for the :customerTaxCategoryName customer tax category
+     * @Then /^(this tax rate) should be applicable for the "([^"]+)" customer tax category$/
      */
     public function theCustomerGroupTaxCategoryShouldBe(
         TaxRateInterface $taxRate,

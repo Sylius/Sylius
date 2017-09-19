@@ -22,6 +22,9 @@ sylius_grid:
                 category:
                     type: string
                     label: sylius.ui.category
+                customerTaxCategory:
+                    type: string
+                    label: sylius.ui.customer_tax_category
                 amount:
                     type: twig
                     label: sylius.ui.amount

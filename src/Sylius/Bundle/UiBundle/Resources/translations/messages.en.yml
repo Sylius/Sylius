@@ -216,6 +216,7 @@ sylius:
         customer_orders: 'Customer orders'
         customer_since: 'Customer since'
         customer_tax_categories: 'Customer tax categories'
+        customer_tax_category: 'Customer tax category'
         customers: 'Customers'
         customers_list_of_all_customers_in_store: 'Customers <small>List of all customers in store</small>'
         customize_default_metadata: 'Customize default metadata'

@@ -37,7 +37,7 @@ Feature: Adding a new tax rate
         Then I should be notified that it has been successfully created
         And the tax rate "United States Sales Tax" should appear in the registry
 
-    @ui @todo
+    @ui
     Scenario: Adding a new tax rate with a customer tax category
         When I want to create a new tax rate
         And I specify its code as "US_SALES_TAX"
@@ -50,4 +50,4 @@ Feature: Adding a new tax rate
         And I add it
         Then I should be notified that it has been successfully created
         And the tax rate "United States Sales Tax" should appear in the registry
-        And the tax rate "United States Sales Tax" should be applicable for the "Retail" customer tax category
+        And the tax rate "United States Sales Tax" should be applicable for the "General" customer tax category

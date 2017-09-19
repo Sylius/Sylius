@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
 use Sylius\Bundle\AddressingBundle\Form\Type\ZoneChoiceType;
+use Sylius\Bundle\CoreBundle\Form\Type\CustomerTaxCategoryChoiceType;
 use Sylius\Bundle\TaxationBundle\Form\Type\TaxRateType;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -28,7 +29,14 @@ final class TaxRateTypeExtension extends AbstractTypeExtension
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->add('zone', ZoneChoiceType::class);
+        $builder
+            ->add('zone', ZoneChoiceType::class)
+            ->add('customerTaxCategory', CustomerTaxCategoryChoiceType::class, [
+                'required' => false,
+                'placeholder' => '---',
+                'label' => 'sylius.form.tax_rate.customer_tax_category',
+            ])
+        ;
     }
 
     /**

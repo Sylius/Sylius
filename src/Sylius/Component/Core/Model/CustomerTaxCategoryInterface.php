@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Model;
 
+use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
@@ -38,4 +39,26 @@ interface CustomerTaxCategoryInterface extends ResourceInterface, CodeAwareInter
      * @param string|null $description
      */
     public function setDescription(?string $description): void;
+
+    /**
+     * @return Collection|TaxRateInterface[]
+     */
+    public function getRates(): Collection;
+
+    /**
+     * @param TaxRateInterface $rate
+     */
+    public function addRate(TaxRateInterface $rate): void;
+
+    /**
+     * @param TaxRateInterface $rate
+     */
+    public function removeRate(TaxRateInterface $rate): void;
+
+    /**
+     * @param TaxRateInterface $rate
+     *
+     * @return bool
+     */
+    public function hasRate(TaxRateInterface $rate): bool;
 }

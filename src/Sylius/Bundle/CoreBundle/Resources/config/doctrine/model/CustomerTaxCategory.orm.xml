@@ -11,7 +11,8 @@
 
 -->
 
-<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
 
     <mapped-superclass name="Sylius\Component\Core\Model\CustomerTaxCategory" table="sylius_customer_tax_category">
         <id name="id" column="id" type="integer">
@@ -21,6 +22,19 @@
         <field name="code" column="code" type="string" unique="true" />
         <field name="name" column="name" type="string" />
         <field name="description" column="description" type="text" nullable="true" />
+
+        <one-to-many field="rates" target-entity="Sylius\Component\Taxation\Model\TaxRateInterface" mapped-by="customerTaxCategory" orphan-removal="true">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </one-to-many>
+
+        <field name="createdAt" column="created_at" type="datetime">
+            <gedmo:timestampable on="create"/>
+        </field>
+        <field name="updatedAt" column="updated_at" type="datetime" nullable="true">
+            <gedmo:timestampable on="update"/>
+        </field>
     </mapped-superclass>
 
 </doctrine-mapping>

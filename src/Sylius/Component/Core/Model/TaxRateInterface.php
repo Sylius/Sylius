@@ -30,4 +30,14 @@ interface TaxRateInterface extends BaseTaxRateInterface
      * @param ZoneInterface|null $zone
      */
     public function setZone(?ZoneInterface $zone): void;
+
+    /**
+     * @return CustomerTaxCategoryInterface|null
+     */
+    public function getCustomerTaxCategory(): ?CustomerTaxCategoryInterface;
+
+    /**
+     * @param CustomerTaxCategoryInterface|null $customerTaxCategory
+     */
+    public function setCustomerTaxCategory(?CustomerTaxCategoryInterface $customerTaxCategory): void;
 }

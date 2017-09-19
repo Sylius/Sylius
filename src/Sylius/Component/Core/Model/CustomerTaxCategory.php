@@ -41,8 +41,14 @@ class CustomerTaxCategory implements CustomerTaxCategoryInterface
      */
     protected $description;
 
+    /**
+     * @var Collection|TaxRateInterface[]
+     */
+    protected $rates;
+
     public function __construct()
     {
+        $this->rates = new ArrayCollection();
         $this->createdAt = new \DateTime();
     }
 
@@ -108,5 +114,43 @@ class CustomerTaxCategory implements CustomerTaxCategoryInterface
     public function setDescription(?string $description): void
     {
         $this->description = $description;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRates(): Collection
+    {
+        return $this->rates;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addRate(TaxRateInterface $rate): void
+    {
+        if (!$this->hasRate($rate)) {
+            $rate->setCustomerTaxCategory($this);
+            $this->rates->add($rate);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeRate(TaxRateInterface $rate): void
+    {
+        if ($this->hasRate($rate)) {
+            $rate->setCustomerTaxCategory(null);
+            $this->rates->removeElement($rate);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasRate(TaxRateInterface $rate): bool
+    {
+        return $this->rates->contains($rate);
     }
 }

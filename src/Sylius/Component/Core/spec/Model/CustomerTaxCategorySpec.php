@@ -13,8 +13,10 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Component\Core\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\CustomerTaxCategoryInterface;
+use Sylius\Component\Core\Model\TaxRateInterface;
 
 final class CustomerTaxCategorySpec extends ObjectBehavior
 {
@@ -54,5 +56,28 @@ final class CustomerTaxCategorySpec extends ObjectBehavior
     {
         $this->setDescription('Retail customers.');
         $this->getDescription()->shouldReturn('Retail customers.');
+    }
+
+    function it_adds_a_rate(TaxRateInterface $rate): void
+    {
+        $this->addRate($rate);
+        $this->hasRate($rate)->shouldReturn(true);
+    }
+
+    function it_removes_a_rate(TaxRateInterface $rate): void
+    {
+        $this->addRate($rate);
+        $this->removeRate($rate);
+        $this->hasRate($rate)->shouldReturn(false);
+    }
+
+    function it_returns_rates(TaxRateInterface $firstRate, TaxRateInterface $secondRate): void
+    {
+        $this->addRate($firstRate);
+        $this->addRate($secondRate);
+
+        $this->getRates()->shouldBeLike(
+            new ArrayCollection([$firstRate->getWrappedObject(), $secondRate->getWrappedObject()])
+        );
     }
 }

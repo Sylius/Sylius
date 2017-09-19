@@ -15,6 +15,7 @@ namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Core\Model\CustomerTaxCategoryInterface;
 use Sylius\Component\Core\Model\TaxRateInterface;
 use Sylius\Component\Taxation\Model\TaxRate as BaseTaxRate;
 
@@ -42,5 +43,25 @@ final class TaxRateSpec extends ObjectBehavior
     {
         $this->setZone($zone);
         $this->getZone()->shouldReturn($zone);
+    }
+
+    function it_does_not_have_a_customer_tax_category_by_default(): void
+    {
+        $this->getCustomerTaxCategory()->shouldReturn(null);
+    }
+
+    function it_allows_setting_the_customer_tax_category(CustomerTaxCategoryInterface $customerTaxCategory): void
+    {
+        $this->setCustomerTaxCategory($customerTaxCategory);
+        $this->getCustomerTaxCategory()->shouldReturn($customerTaxCategory);
+    }
+
+    function it_allows_resetting_the_customer_tax_category(CustomerTaxCategoryInterface $customerTaxCategory): void
+    {
+        $this->setCustomerTaxCategory($customerTaxCategory);
+        $this->getCustomerTaxCategory()->shouldReturn($customerTaxCategory);
+
+        $this->setCustomerTaxCategory(null);
+        $this->getCustomerTaxCategory()->shouldReturn(null);
     }
 }

@@ -27,6 +27,11 @@ class TaxRate extends BaseTaxRate implements TaxRateInterface
     protected $zone;
 
     /**
+     * @var CustomerTaxCategoryInterface
+     */
+    protected $customerTaxCategory;
+
+    /**
      * {@inheritdoc}
      */
     public function getZone(): ?ZoneInterface
@@ -40,5 +45,21 @@ class TaxRate extends BaseTaxRate implements TaxRateInterface
     public function setZone(?ZoneInterface $zone): void
     {
         $this->zone = $zone;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCustomerTaxCategory(): ?CustomerTaxCategoryInterface
+    {
+        return $this->customerTaxCategory;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCustomerTaxCategory(?CustomerTaxCategoryInterface $customerTaxCategory): void
+    {
+        $this->customerTaxCategory = $customerTaxCategory;
     }
 }

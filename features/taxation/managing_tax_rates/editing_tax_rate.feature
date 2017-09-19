@@ -57,13 +57,13 @@ Feature: Editing tax rate
         Then I should be notified that it has been successfully edited
         And this tax rate should be applicable in "The Rest of the World" zone
 
-    @ui @todo
+    @ui
     Scenario: Changing the related customer tax category
         Given the store has a customer tax category "General"
         And the store has also a customer tax category "Wholesale"
         And the tax rate "United States Sales Tax" is applicable for the "General" customer tax category
         When I want to modify a tax rate "United States Sales Tax"
-        And I change it to be applicable for the "Retail" customer tax category
+        And I change it to be applicable for the "Wholesale" customer tax category
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And this tax rate should be applicable for the "Retail" customer tax category
+        And this tax rate should be applicable for the "Wholesale" customer tax category

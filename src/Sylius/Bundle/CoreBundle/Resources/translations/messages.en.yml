@@ -144,6 +144,8 @@ sylius:
             channels: Channels
         product_attribute:
             position: Position
+        tax_rate:
+            customer_tax_category: Customer tax category
         zone:
             scopes:
                 shipping: Shipping
