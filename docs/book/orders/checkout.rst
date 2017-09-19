@@ -254,7 +254,7 @@ and apply a proper transition and flush the order via the manager.
 
     $stateMachineFactory = $this->container->get('sm.factory');
 
-    $stateMachine = $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)
+    $stateMachine = $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH);
     $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_COMPLETE);
 
     $this->container->get('sylius.manager.order')->flush();
