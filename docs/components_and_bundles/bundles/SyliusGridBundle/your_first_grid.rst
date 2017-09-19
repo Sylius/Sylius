@@ -79,7 +79,7 @@ That's it. SyliusResourceBundle allows to generate a default CRUD interface incl
 
     # app/config/routing/admin/supplier.yml
     app_admin_supplier:
-        resource: |
+        resource:
             alias: app.supplier
             section: admin
             templates: SyliusAdminBundle:Crud
