@@ -95,7 +95,7 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
      */
     public function setVariant(?ProductVariantInterface $variant): void
     {
-        if(isset($variant)) {
+        if(null !== $variant->getProduct()) {
 
             $this->setImmutableProductName($variant->getProduct()->getName());
             $this->setImmutableVariantName($variant->getName());
