@@ -4,15 +4,16 @@
 sylius:
     channel:
         base_currency:
-            not_blank: کانال ارز پایه را وارد کنید.
+            not_blank: لطفا ارز پایه کانال را وارد کنید.
         default_locale:
             not_blank: لطفا زبان پایه برای کانال را وارد کنید.
         contact_email:
-            invalid: ایمیل وارد شده نامعتبر است.
+            invalid: این ایمیل نامعتبر است.
             max: ایمیل نباید بیش از {{ limit }} حرف باشد.
             min: ایمیل باید حداقل {{ limit }} حرف داشته باشد.
     channel_pricing:
         price:
+            min: قیمت باید حداقل {{ limit }} باشد.
             not_blank: لطفا قیمت را وارد کنید.
     checkout:
         shipping_method:
@@ -21,33 +22,64 @@ sylius:
         email:
             invalid: ایمیل وارد شده نامعتبر است.
             not_blank: لطفا ایمیل خود را وارد کنید.
+        message:
+            not_blank: لطفا پیام خود را وارد کنید.
     currency:
         enabled:
             cannot_disable_base: واحد پول پایه را نمی توانید غیر فعال کنید.
     customer:
         currency_code:
             not_valid: کد واحد پول وارد شده نامعتبر است.
+    cart_item:
+        not_available: '%itemName% موجودی کافی ندارد.'
     order:
         currency_code:
             not_valid: کد واحد پول وارد شده نامعتبر است.
+        payment_method_eligibility: 'این روش پرداخت %paymentMethodName% غیرفعال شده است. لطفا نحوه پرداخت را مجددا انتخاب کنید.'
+        product_eligibility: 'این محصول %productName% غیرفعال شده است.'
     locale:
         code:
             not_blank: لطفاً کد زبان را وارد کنید.
             unique: این زبان قبلا در سیستم ثبت شده است.
         enabled:
             cannot_disable_base: زبان پایه را نمی توانید غیر فعال کنید.
+    product_attribute:
+        invalid: موقعیت باید یک عدد صحیح باشید.
+    product_image:
+        file:
+            max_size: تصویر بسیار بزرگ است -{{ size }}{{ suffix }}. حداکثر اندازه مجاز {{ limit }}{{ suffix }} می باشد.
     product_variant:
         onHand:
             min: میزان موجودی باید بیشتر از {{ limit }} باشد.
             not_blank: لطفا میزان موجودی را وارد کنید.
         original_price:
             min: قیمت ابتدایی نمی تواند منفی باشد.
+        weight:
+            min: وزن نمیتواند منفی باشد.
+            invalid: وزن باید یک عدد باشد.
+        width:
+            min: عرض نمی تواند منفی باشد.
+            invalid: عرض باید یک عدد باشد.
+        height:
+            min: ارتفاع نمی تواند منفی باشد.
+            invalid: ارتفاع باید یک عدد باشد.
+        depth:
+            min: عمق نمی تواند منفی باشد.
+            invalid: عمق باید یک عدد باشد.
+        channel_pricing:
+            all_defined: 'شما باید برای هر کانال قیمت تعیین کنید.'
     product_translation:
         short_description:
             max: معرفی کوتاه نباید بیش از {{ limit }} حرف باشد.
+    taxon_image:
+        file:
+            max_size: تصویر بسیار بزرگ است -{{ size }}{{ suffix }}. حداکثر اندازه مجاز {{ limit }}{{ suffix }} می باشد.
+            upload_ini_size: این تصویر بسیار بزرگ است. حداکثر اندازی مجاز {{ suffix }}{{ limit }} است.
     user:
         email:
             unique: این ایمیل قبلا استفاده گردیده.
+            min: ایمیل باید حداقل شامل {{ min }} کاراکتر باشد.
+            max: ایمیل می تواند حداکثر شامل {{ max }} کاراکتر باشد.
             invalid: ایمیل وارد شده نامعتبر است.
         username:
             unique: این نام کاربری قبلا استفاده شده است.

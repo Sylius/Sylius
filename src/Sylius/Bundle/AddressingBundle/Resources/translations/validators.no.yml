@@ -29,14 +29,32 @@ sylius:
             min_length: Gateadresse må inneholde minst to tegn|Gateadresse må inneholde minst to tegn.
             not_blank: Vennligst oppgi gateadresse.
         not_shippable: Denne adressen er ikke en gyldig fraktdestinasjon.
+    country:
+        code:
+            not_blank: Vennligst oppgi ISO-kode på landet.
+            regex: Landkode kan bare bestå av bokstaver, tall, bindestrek og understrek.
+            unique: Land ISO-koden må være unike.
     province:
+        code:
+            min_length: Fylkesnavnet må inneholde minst to tegn|Fylkesnavnet må inneholde minst to tegn.
+            not_blank: Vennligst oppgi navn på fylket.
+            regex: Fylkeskode bør ha følgende format XX-XX (f.eks U.S.-FL).
+            unique: Fyleskode må være unik.
         name:
             max_length: Fylkesnavnet kan ikke være lengre enn 255 characters|Fylkesnavnet kan ikke være lengre enn 255 tegn.
             min_length: Fylkesnavnet må inneholde minst to tegn|Fylkesnavnet må inneholde minst to tegn.
             not_blank: Vennligst oppgi navn på fylket.
+            unique: Fylkesnavn må være unik.
     zone:
+        scope:
+            not_blank: Vennligst angi omfanget.
+        code:
+            not_blank: Vennligst angi sonekode.
+            regex: Sonekode kan kun bestå av bokstaver, tall, bindestrek og understrek.
+            unique: Sonekode må være unik.
         members:
             min_count: Legg til minst {{ limit }} sone-medlemmer.
         name:
             max_length: Sonenavn kan ikke være lengre enn 255 tegn|Sonenavn kan ikke være lengre enn 255 tegn.
+            min_length: Sonekode må inneholde minst to tegn|Sonekode må inneholde minst to tegn.
             not_blank: Vennligst oppgi sonenavn.

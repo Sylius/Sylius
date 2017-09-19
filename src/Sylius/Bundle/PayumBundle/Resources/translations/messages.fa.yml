@@ -11,6 +11,7 @@ sylius:
                 signature: امضا
                 username: نام کاربری
             stripe:
+                publishable_key: کلید قابل انتشار
                 secret_key: کلید رمز
     payum_gateway_factory:
         offline: آفلاین

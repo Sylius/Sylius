@@ -11,7 +11,8 @@ sylius:
             last_name: Прозвішча
             phone_number: Нумар тэлефону
             postcode: Індэкс
-            province: Вобласць
+            street: Вуліца і нумар дома
+            province: Вобласць (рэгіён)
             zone: Зона
         country:
             add_province: Дадаць вобласць
@@ -21,7 +22,8 @@ sylius:
             enabled: Уключана
         province:
             name: Імя
-            select: Абраць
+            abbreviation: Абрэвіятура вобласці (рэгіёну)
+            select: Выберыце
         zone:
             add_member: Дадаць удзельніка
             members: Удзельнікі
@@ -29,9 +31,12 @@ sylius:
             type: Тып
             types:
                 country: Краіна
-                province: Вобласць
+                province: Вобласць (рэгіён)
                 zone: Зона
-            scope: Абсяг
+            scope: Сфера ўжывання
+            scopes:
+                all: Усе
             select: Выбярыце
+            select_scope: Выбярыце сферу ўжывання
         zone_member:
             select: Выбярыце
