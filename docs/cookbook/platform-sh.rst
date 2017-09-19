@@ -51,7 +51,6 @@ This is how this file should look like for Sylius (tuned version of the default 
             yarn: "*"
             gulp-cli: "*"
 
-
     web:
         locations:
             '/':
