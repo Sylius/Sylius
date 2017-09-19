@@ -80,6 +80,14 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function chooseDefaultCustomerTaxCategory(string $customerTaxCategoryName): void
+    {
+        $this->getDocument()->selectFieldOption('Default customer tax category', $customerTaxCategoryName);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function chooseDefaultLocale($locale)
     {
         if (null !== $locale) {

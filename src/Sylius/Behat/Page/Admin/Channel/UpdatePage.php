@@ -85,6 +85,17 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function chooseDefaultCustomerTaxCategory(?string $customerTaxCategoryName = null): void
+    {
+        $this->getDocument()->selectFieldOption(
+            'Default customer tax category',
+            (null === $customerTaxCategoryName) ? '' : $customerTaxCategoryName
+        );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function chooseTaxCalculationStrategy($taxZone)
     {
         $this->getDocument()->selectFieldOption('Tax calculation strategy', $taxZone);
@@ -101,9 +112,29 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function isDefaultCustomerTaxCategoryChosen(string $customerTaxCategoryName): bool
+    {
+        return $this
+            ->getElement('default_customer_tax_category')
+            ->find('named', ['option', $customerTaxCategoryName])
+            ->hasAttribute('selected')
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function isAnyDefaultTaxZoneChosen()
     {
         return null !== $this->getElement('default_tax_zone')->find('css', '[selected]');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isAnyDefaultCustomerTaxCategoryChosen(): bool
+    {
+        return null !== $this->getElement('default_customer_tax_category')->find('css', '[selected]');
     }
 
     /**
@@ -151,6 +182,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'base_currency' => '#sylius_channel_baseCurrency',
             'code' => '#sylius_channel_code',
             'currencies' => '#sylius_channel_currencies',
+            'default_customer_tax_category' => '#sylius_channel_defaultCustomerTaxCategory',
             'default_tax_zone' => '#sylius_channel_defaultTaxZone',
             'enabled' => '#sylius_channel_enabled',
             'locales' => '#sylius_channel_locales',

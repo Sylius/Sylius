@@ -41,6 +41,11 @@ class Channel extends BaseChannel implements ChannelInterface
     protected $defaultTaxZone;
 
     /**
+     * @var CustomerTaxCategoryInterface
+     */
+    protected $defaultCustomerTaxCategory;
+
+    /**
      * @var string
      */
     protected $taxCalculationStrategy;
@@ -134,6 +139,22 @@ class Channel extends BaseChannel implements ChannelInterface
     public function setDefaultTaxZone(?ZoneInterface $defaultTaxZone): void
     {
         $this->defaultTaxZone = $defaultTaxZone;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDefaultCustomerTaxCategory(): ?CustomerTaxCategoryInterface
+    {
+        return $this->defaultCustomerTaxCategory;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDefaultCustomerTaxCategory(?CustomerTaxCategoryInterface $defaultCustomerTaxCategory): void
+    {
+        $this->defaultCustomerTaxCategory = $defaultCustomerTaxCategory;
     }
 
     /**

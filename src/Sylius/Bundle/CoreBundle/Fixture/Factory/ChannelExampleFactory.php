@@ -18,6 +18,7 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Factory\ChannelFactoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\CustomerTaxCategoryInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -50,6 +51,11 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
     private $zoneRepository;
 
     /**
+     * @var RepositoryInterface
+     */
+    private $customerTaxCategoryRepository;
+
+    /**
      * @var \Faker\Generator
      */
     private $faker;
@@ -64,17 +70,20 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
      * @param RepositoryInterface $localeRepository
      * @param RepositoryInterface $currencyRepository
      * @param RepositoryInterface $zoneRepository
+     * @param RepositoryInterface $customerTaxCategoryRepository
      */
     public function __construct(
         ChannelFactoryInterface $channelFactory,
         RepositoryInterface $localeRepository,
         RepositoryInterface $currencyRepository,
-        RepositoryInterface $zoneRepository
+        RepositoryInterface $zoneRepository,
+        RepositoryInterface $customerTaxCategoryRepository
     ) {
         $this->channelFactory = $channelFactory;
         $this->localeRepository = $localeRepository;
         $this->currencyRepository = $currencyRepository;
         $this->zoneRepository = $zoneRepository;
+        $this->customerTaxCategoryRepository = $customerTaxCategoryRepository;
 
         $this->faker = \Faker\Factory::create();
         $this->optionsResolver = new OptionsResolver();
@@ -96,6 +105,7 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
         $channel->setEnabled($options['enabled']);
         $channel->setColor($options['color']);
         $channel->setDefaultTaxZone($options['default_tax_zone']);
+        $channel->setDefaultCustomerTaxCategory($options['default_customer_tax_category']);
         $channel->setTaxCalculationStrategy($options['tax_calculation_strategy']);
         $channel->setThemeName($options['theme_name']);
         $channel->setContactEmail($options['contact_email']);
@@ -144,6 +154,9 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
             ->setDefault('default_tax_zone', LazyOption::randomOne($this->zoneRepository))
             ->setAllowedTypes('default_tax_zone', ['null', 'string', ZoneInterface::class])
             ->setNormalizer('default_tax_zone', LazyOption::findOneBy($this->zoneRepository, 'code'))
+            ->setDefault('default_customer_tax_category', LazyOption::randomOne($this->customerTaxCategoryRepository))
+            ->setAllowedTypes('default_customer_tax_category', ['null', 'string', CustomerTaxCategoryInterface::class])
+            ->setNormalizer('default_customer_tax_category', LazyOption::findOneBy($this->customerTaxCategoryRepository, 'code'))
             ->setDefault('tax_calculation_strategy', 'order_items_based')
             ->setAllowedTypes('tax_calculation_strategy', 'string')
             ->setDefault('default_locale', function (Options $options): LocaleInterface {

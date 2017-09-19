@@ -76,7 +76,7 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
-     * @Given I want to create a new channel
+     * @When I want to create a new channel
      */
     public function iWantToCreateANewChannel()
     {
@@ -428,6 +428,18 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
+     * @When I select the :customerTaxCategoryName as default customer tax category
+     * @When I remove its default customer tax category
+     */
+    public function iSelectTheAsCustomerTaxCategory(?string $customerTaxCategoryName = null): void
+    {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+
+        $currentPage->chooseDefaultCustomerTaxCategory($customerTaxCategoryName);
+    }
+
+    /**
      * @When I select the :taxCalculationStrategy as tax calculation strategy
      */
     public function iSelectTaxCalculationStrategy($taxCalculationStrategy)
@@ -473,6 +485,28 @@ final class ManagingChannelsContext implements Context
     public function theBaseCurrencyFieldShouldBeDisabled()
     {
         Assert::true($this->updatePage->isBaseCurrencyDisabled());
+    }
+
+    /**
+     * @Then the default customer tax category for the :channel channel should be :customerTaxCategoryName
+     */
+    public function theDefaultCustomerTaxCategoryForTheChannelShouldBe(
+        ChannelInterface $channel,
+        string $customerTaxCategoryName
+    ): void {
+        $this->updatePage->open(['id' => $channel->getId()]);
+
+        Assert::true($this->updatePage->isDefaultCustomerTaxCategoryChosen($customerTaxCategoryName));
+    }
+
+    /**
+     * @Then channel :channel should not have default customer tax category
+     */
+    public function channelShouldNotHaveDefaultCustomerTaxCategory(ChannelInterface $channel): void
+    {
+        $this->updatePage->open(['id' => $channel->getId()]);
+
+        Assert::false($this->updatePage->isAnyDefaultCustomerTaxCategoryChosen());
     }
 
     /**

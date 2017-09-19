@@ -70,6 +70,11 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function chooseDefaultTaxZone($taxZone);
 
     /**
+     * @param string|null $customerTaxCategoryName
+     */
+    public function chooseDefaultCustomerTaxCategory(?string $customerTaxCategoryName = null): void;
+
+    /**
      * @param string $taxCalculationStrategy
      */
     public function chooseTaxCalculationStrategy($taxCalculationStrategy);
@@ -82,9 +87,21 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function isDefaultTaxZoneChosen($taxZone);
 
     /**
+     * @param string $customerTaxCategoryName
+     *
+     * @return bool
+     */
+    public function isDefaultCustomerTaxCategoryChosen(string $customerTaxCategoryName): bool;
+
+    /**
      * @return bool
      */
     public function isAnyDefaultTaxZoneChosen();
+
+    /**
+     * @return bool
+     */
+    public function isAnyDefaultCustomerTaxCategoryChosen(): bool;
 
     /**
      * @param string $taxCalculationStrategy

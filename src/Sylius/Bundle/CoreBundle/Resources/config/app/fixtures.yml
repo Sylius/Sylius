@@ -24,6 +24,13 @@ sylius_fixtures:
                                 countries:
                                     - "US"
 
+                customer_tax_category:
+                    options:
+                        custom:
+                            general:
+                                code: "general"
+                                name: "General"
+
                 channel:
                     options:
                         custom:
@@ -114,13 +121,6 @@ sylius_fixtures:
                                 first_name: "Luke"
                                 last_name: "Brushwood"
                                 api: true
-
-                customer_tax_category:
-                    options:
-                        custom:
-                            general:
-                                code: "general"
-                                name: "General"
 
                 tax_category:
                     options:

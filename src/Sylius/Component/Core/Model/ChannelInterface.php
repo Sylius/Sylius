@@ -59,6 +59,16 @@ interface ChannelInterface extends
     public function setDefaultTaxZone(?ZoneInterface $defaultTaxZone): void;
 
     /**
+     * @return CustomerTaxCategoryInterface|null
+     */
+    public function getDefaultCustomerTaxCategory(): ?CustomerTaxCategoryInterface;
+
+    /**
+     * @param CustomerTaxCategoryInterface|null $defaultCustomerTaxCategory
+     */
+    public function setDefaultCustomerTaxCategory(?CustomerTaxCategoryInterface $defaultCustomerTaxCategory): void;
+
+    /**
      * @return string|null
      */
     public function getTaxCalculationStrategy(): ?string;

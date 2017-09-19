@@ -17,6 +17,7 @@ use Sylius\Bundle\AddressingBundle\Form\Type\ZoneChoiceType;
 use Sylius\Bundle\ChannelBundle\Form\Type\ChannelType;
 use Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddBaseCurrencySubscriber;
 use Sylius\Bundle\CoreBundle\Form\EventSubscriber\ChannelFormSubscriber;
+use Sylius\Bundle\CoreBundle\Form\Type\CustomerTaxCategoryChoiceType;
 use Sylius\Bundle\CoreBundle\Form\Type\TaxCalculationStrategyChoiceType;
 use Sylius\Bundle\CurrencyBundle\Form\Type\CurrencyChoiceType;
 use Sylius\Bundle\LocaleBundle\Form\Type\LocaleChoiceType;
@@ -57,6 +58,10 @@ final class ChannelTypeExtension extends AbstractTypeExtension
             ->add('defaultTaxZone', ZoneChoiceType::class, [
                 'required' => false,
                 'label' => 'sylius.form.channel.tax_zone_default',
+            ])
+            ->add('defaultCustomerTaxCategory', CustomerTaxCategoryChoiceType::class, [
+                'required' => false,
+                'label' => 'sylius.form.channel.default_customer_tax_category',
             ])
             ->add('taxCalculationStrategy', TaxCalculationStrategyChoiceType::class, [
                 'label' => 'sylius.form.channel.tax_calculation_strategy',

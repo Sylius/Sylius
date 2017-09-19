@@ -18,6 +18,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Model\Channel as BaseChannel;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\CustomerTaxCategoryInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 
@@ -67,6 +68,17 @@ final class ChannelSpec extends ObjectBehavior
     {
         $this->setDefaultTaxZone($defaultTaxZone);
         $this->getDefaultTaxZone()->shouldReturn($defaultTaxZone);
+    }
+
+    function it_has_no_default_customer_tax_category_by_default(): void
+    {
+        $this->getDefaultCustomerTaxCategory()->shouldReturn(null);
+    }
+
+    function its_default_customer_tax_category_is_mutable(CustomerTaxCategoryInterface $defaultCustomerTaxCategory): void
+    {
+        $this->setDefaultCustomerTaxCategory($defaultCustomerTaxCategory);
+        $this->getDefaultCustomerTaxCategory()->shouldReturn($defaultCustomerTaxCategory);
     }
 
     function it_has_no_tax_calculation_strategy_by_default(): void

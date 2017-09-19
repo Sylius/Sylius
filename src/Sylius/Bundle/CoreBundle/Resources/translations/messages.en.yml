@@ -28,10 +28,11 @@ sylius:
             name: Name
             roles: Roles
         channel:
+            account_verification_required: Is account verification required?
             contact_email: Contact email
             currencies: Currencies
             currency_base: Base currency
-            account_verification_required: Is account verification required?
+            default_customer_tax_category: Default customer tax category
             hostname: Hostname
             locale_default: Default locale
             locales: Locales
