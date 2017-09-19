@@ -31,6 +31,22 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function changeCategory(string $name): void
+    {
+        $this->getDocument()->selectFieldOption('Category', $name);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function changeCustomerTaxCategory(string $name): void
+    {
+        $this->getDocument()->selectFieldOption('Customer tax category', $name);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getCodeElement()
     {
         return $this->getElement('code');

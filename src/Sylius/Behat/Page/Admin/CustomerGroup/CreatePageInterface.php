@@ -29,4 +29,9 @@ interface CreatePageInterface extends BaseCreatePageInterface
      * @param string $name
      */
     public function nameIt($name);
+
+    /**
+     * @param string $name
+     */
+    public function chooseTaxCategory(string $name): void;
 }

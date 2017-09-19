@@ -44,6 +44,14 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function chooseCustomerTaxCategory(string $name): void
+    {
+        $this->getDocument()->selectFieldOption('Customer tax category', $name);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function chooseCalculator($name)
     {
         $this->getDocument()->selectFieldOption(\Calculator::class, $name);

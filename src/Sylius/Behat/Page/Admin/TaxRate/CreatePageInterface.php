@@ -48,6 +48,11 @@ interface CreatePageInterface extends BaseCreatePageInterface
     /**
      * @param string $name
      */
+    public function chooseCustomerTaxCategory(string $name): void;
+
+    /**
+     * @param string $name
+     */
     public function chooseCalculator($name);
 
     public function chooseIncludedInPrice();

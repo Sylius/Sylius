@@ -179,7 +179,7 @@ final class TaxationContext implements Context
 
     /**
      * @Given the store has a customer tax category :name with a code :code
-     * @Given the store has a customer tax category :name
+     * @Given the store has (also) a customer tax category :name
      */
     public function theStoreHasACustomerTaxCategoryWithACode(string $name, ?string $code = null): void
     {
@@ -196,6 +196,18 @@ final class TaxationContext implements Context
         string $description
     ): void {
         $customerTaxCategory->setDescription($description);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given the tax rate :taxRate is applicable for the :customerTaxCategory customer tax category
+     */
+    public function theTaxRateIsApplicableForTheCustomerTaxCategory(
+        TaxRateInterface $taxRate,
+        CustomerTaxCategoryInterface $customerTaxCategory
+    ): void {
+        $taxRate->setCustomerTaxCategory($customerTaxCategory);
 
         $this->objectManager->flush();
     }

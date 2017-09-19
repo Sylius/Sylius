@@ -65,7 +65,7 @@ final class ManagingTaxRateContext implements Context
     }
 
     /**
-     * @Given I want to create a new tax rate
+     * @When I want to create a new tax rate
      */
     public function iWantToCreateNewTaxRate()
     {
@@ -102,11 +102,34 @@ final class ManagingTaxRateContext implements Context
 
     /**
      * @When I make it applicable for the :taxCategoryName tax category
-     * @When I change it to be applicable for the :taxCategoryName tax category
      */
-    public function iMakeItApplicableForTheTaxCategory($taxCategoryName)
+    public function iMakeItApplicableForTheTaxCategory(string $taxCategoryName): void
     {
         $this->createPage->chooseCategory($taxCategoryName);
+    }
+
+    /**
+     * @When I change it to be applicable for the :taxCategoryName tax category
+     */
+    public function iChangeItToBeApplicableForTheTaxCategory(string $taxCategoryName): void
+    {
+        $this->updatePage->changeCategory($taxCategoryName);
+    }
+
+    /**
+     * @When I make it applicable for the :customerTaxCategoryName customer tax category
+     */
+    public function iMakeItApplicableForTheCustomerTaxCategory(string $customerTaxCategoryName): void
+    {
+        $this->createPage->chooseCustomerTaxCategory($customerTaxCategoryName);
+    }
+
+    /**
+     * @When I change it to be applicable for the :customerTaxCategoryName customer tax category
+     */
+    public function iChangeItToBeApplicableForTheCustomerTaxCategory(string $customerTaxCategoryName): void
+    {
+        $this->updatePage->changeCustomerTaxCategory($customerTaxCategoryName);
     }
 
     /**
@@ -165,8 +188,8 @@ final class ManagingTaxRateContext implements Context
     }
 
     /**
-     * @Given I want to modify a tax rate :taxRate
-     * @Given /^I want to modify (this tax rate)$/
+     * @When I want to modify a tax rate :taxRate
+     * @When /^I want to modify (this tax rate)$/
      */
     public function iWantToModifyTaxRate(TaxRateInterface $taxRate)
     {
@@ -290,6 +313,21 @@ final class ManagingTaxRateContext implements Context
     public function iDoNotSpecifyRelatedTaxCategory()
     {
         // Intentionally left blank to fulfill context expectation
+    }
+
+    /**
+     * @Then the tax rate :taxRate should be applicable for the :customerTaxCategoryName customer tax category
+     */
+    public function theCustomerGroupTaxCategoryShouldBe(
+        TaxRateInterface $taxRate,
+        string $customerTaxCategoryName
+    ): void {
+        $this->indexPage->open();
+
+        Assert::true($this->indexPage->isSingleResourceOnPage([
+            'code' => $taxRate->getCode(),
+            'customerTaxCategory' => $customerTaxCategoryName
+        ]));
     }
 
     /**

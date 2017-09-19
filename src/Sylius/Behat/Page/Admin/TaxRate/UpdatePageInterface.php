@@ -26,4 +26,14 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function isCodeDisabled();
 
     public function removeZone();
+
+    /**
+     * @param string $name
+     */
+    public function changeCategory(string $name): void;
+
+    /**
+     * @param string $name
+     */
+    public function changeCustomerTaxCategory(string $name): void;
 }

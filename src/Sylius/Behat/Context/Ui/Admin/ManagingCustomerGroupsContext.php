@@ -56,7 +56,7 @@ final class ManagingCustomerGroupsContext implements Context
     }
 
     /**
-     * @Given I want to create a new customer group
+     * @When I want to create a new customer group
      */
     public function iWantToCreateANewCustomerGroup()
     {
@@ -115,6 +115,22 @@ final class ManagingCustomerGroupsContext implements Context
     public function iSaveMyChanges()
     {
         $this->updatePage->saveChanges();
+    }
+
+    /**
+     * @When I choose :taxCategoryName as its tax category
+     */
+    public function iChooseAsItsTaxCategory(string $taxCategoryName): void
+    {
+        $this->createPage->chooseTaxCategory($taxCategoryName);
+    }
+
+    /**
+     * @When I change its tax category to :taxCategoryName
+     */
+    public function iChangeItsTaxCategoryTo(string $taxCategoryName): void
+    {
+        $this->updatePage->changeTaxCategory($taxCategoryName);
     }
 
     /**
@@ -205,5 +221,20 @@ final class ManagingCustomerGroupsContext implements Context
                 $customerGroup->getName()
             )
         );
+    }
+
+    /**
+     * @Then the customer group :customerGroup tax category should be :taxCategoryName
+     */
+    public function theCustomerGroupTaxCategoryShouldBe(
+        CustomerGroupInterface $customerGroup,
+        string $taxCategoryName
+    ): void {
+        $this->iWantToBrowseCustomerGroups();
+
+        Assert::true($this->indexPage->isSingleResourceOnPage([
+            'code' => $customerGroup->getCode(),
+            'taxCategory' => $taxCategoryName
+        ]));
     }
 }
