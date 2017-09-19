@@ -7,3 +7,6 @@ sylius_customer:
             classes:
                 model: Sylius\Component\Core\Model\Customer
                 repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\CustomerRepository
+        customer_group:
+            classes:
+                model: Sylius\Component\Core\Model\CustomerGroup

@@ -16,6 +16,9 @@ sylius_grid:
                     type: string
                     label: sylius.ui.name
                     sortable: ~
+                taxCategory:
+                    type: string
+                    label: sylius.ui.tax_category
             filters:
                 search:
                     type: string

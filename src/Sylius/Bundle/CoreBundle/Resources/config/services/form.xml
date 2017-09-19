@@ -110,6 +110,9 @@
         <service id="sylius.form.extension.type.product_variant_generation" class="Sylius\Bundle\CoreBundle\Form\Extension\ProductVariantGenerationTypeExtension">
             <tag name="form.type_extension" extended-type="Sylius\Bundle\ProductBundle\Form\Type\ProductVariantGenerationType" />
         </service>
+        <service id="sylius.form.extension.type.customer_group" class="Sylius\Bundle\CoreBundle\Form\Extension\CustomerGroupTypeExtension">
+            <tag name="form.type_extension" extended-type="Sylius\Bundle\CustomerBundle\Form\Type\CustomerGroupType" />
+        </service>
 
         <service id="sylius.form.type.product_review" class="Sylius\Bundle\CoreBundle\Form\Type\Product\ProductReviewType">
             <argument>%sylius.model.product_review.class%</argument>
@@ -250,6 +253,11 @@
         <service id="sylius.form.type.customer_tax_category" class="Sylius\Bundle\CoreBundle\Form\Type\CustomerTaxCategoryType">
             <argument>%sylius.model.customer_tax_category.class%</argument>
             <argument>%sylius.form.type.customer_tax_category.validation_groups%</argument>
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius.form.type.customer_tax_category_choice" class="Sylius\Bundle\CoreBundle\Form\Type\CustomerTaxCategoryChoiceType">
+            <argument type="service" id="sylius.repository.customer_tax_category" />
             <tag name="form.type" />
         </service>
     </services>

@@ -16,7 +16,7 @@ Feature: Editing a customer group
         Then I should be notified that it has been successfully edited
         And this customer group with name "Wholesale" should appear in the store
 
-    @ui @todo
+    @ui
     Scenario: Changing tax category of an existing customer group
         Given the store has a customer tax category "General"
         When I want to edit this customer group

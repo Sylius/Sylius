@@ -16,7 +16,7 @@ Feature: Adding a new customer group
         Then I should be notified that it has been successfully created
         And the customer group "Retail" should appear in the store
 
-    @ui @todo
+    @ui
     Scenario: Adding a new customer group with a customer tax category
         Given the store has a customer tax category "General"
         When I want to create a new customer group
