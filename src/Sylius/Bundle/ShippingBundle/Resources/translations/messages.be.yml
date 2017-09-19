@@ -28,8 +28,10 @@ sylius:
             calculator: Калькулятар
             category: Катэгорыя
             category_requirement: Умовы катэгорыі
+            channels: Каналы
             configuration: Канфігурацыя
             description: Апісанне
             enabled: Уключана
             name: Назва
             tax_category: Катэгорыя падатку
+            translations: Пераклады

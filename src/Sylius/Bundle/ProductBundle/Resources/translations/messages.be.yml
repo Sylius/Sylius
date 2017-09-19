@@ -13,6 +13,7 @@ sylius:
             name: Імя
         association_type:
             name: Імя
+            translations: Пераклады
         variant:
             name: Імя
         option:

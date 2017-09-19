@@ -17,9 +17,11 @@ sylius:
                     channels: Csatornák
                     countries: Országok
                     currencies: Pénznemek
+                    exchange_rates: Árfolyamok
                     header: Konfiguráció
                     locales: Területi beállítások
                     payment_methods: Fizetési módok
+                    shipping_categories: Szállítási kategóriák
                     shipping_methods: Szállítási módok
                     tax_categories: Adó kategóriák
                     tax_rates: Adókulcsok

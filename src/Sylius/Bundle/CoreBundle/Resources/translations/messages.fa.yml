@@ -34,6 +34,8 @@ sylius:
             locales: زبان ها
             payment_methods: روش‌های پرداخت
             shipping_methods: شیوه های ارسال
+            skipping_shipping_step_allowed: اگر فقط یک روش ارسال موجود باشد,از مرحله ارسال پرش شود?
+            skipping_payment_step_allowed: اگر فقط یک روش پرداخت موجود باشد,از مرحله پرداخت پرش شود?
             tax_calculation_strategy: استراتژی محاسبه مالیات
             tax_zone_default: منطقه مالیاتی پیش فرض
             taxonomies: رده بندی
@@ -61,7 +63,7 @@ sylius:
             restricted_zone: مناطق ممنوع
             short_description: شرح کوتاه
             variant_selection_method: انتخاب نوع ترکیب بندی
-            main_taxon: رده اصلی
+            main_taxon: طبقه بندی اصلی
             channels: کانال های فروش
             enabled: فعال
         product_filter:
@@ -108,6 +110,7 @@ sylius:
             on_hand: موجودی
             price: قیمت
             sku: کد محصول
+            shipping_required: آیا ارسال مورد نیاز است?
             weight: وزن
             width: عرض
         attribute:
