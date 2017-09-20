@@ -25,7 +25,7 @@ final class ProductVariantPriceCalculator implements ProductVariantPriceCalculat
     /**
      * {@inheritdoc}
      */
-    public function calculate(ProductVariantInterface $productVariant, array $context): int
+    public function calculate(ProductVariantInterface $productVariant, array $context): ?int
     {
         Assert::keyExists($context, 'channel');
 

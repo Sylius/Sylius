@@ -63,14 +63,13 @@ class PriceHelper extends Helper
     /**
      * {@inheritdoc}
      */
-    public function getOriginalPrice(ProductVariantInterface $productVariant, array $context): int
+    public function getOriginalPrice(ProductVariantInterface $productVariant, array $context): ?int
     {
         Assert::keyExists($context, 'channel');
 
         return $this
             ->productVariantOriginalPriceCalculator
-            ->calculate($productVariant, $context)
-            ;
+            ->calculate($productVariant, $context);
     }
 
     /**
