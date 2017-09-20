@@ -41,7 +41,7 @@ final class CustomerOrderAddressesSaver implements OrderAddressesSaverInterface
     {
         /** @var CustomerInterface $customer */
         $customer = $order->getCustomer();
-        if (null === $customer->getUser()) {
+        if (null === $customer || null === $customer->getUser()) {
             return;
         }
 
