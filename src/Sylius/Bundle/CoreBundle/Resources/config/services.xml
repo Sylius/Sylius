@@ -35,6 +35,7 @@
 
     <services>
         <service id="sylius.provider.channel_based_default_zone_provider" class="Sylius\Bundle\CoreBundle\Provider\ChannelBasedDefaultTaxZoneProvider" />
+        <service id="sylius.provider.channel_based_default_customer_tax_category_provider" class="Sylius\Bundle\CoreBundle\Provider\ChannelBasedDefaultCustomerTaxCategoryProvider" />
         <service id="sylius.integer_distributor" class="Sylius\Component\Core\Distributor\IntegerDistributor" />
         <service id="sylius.proportional_integer_distributor" class="Sylius\Component\Core\Distributor\ProportionalIntegerDistributor" />
         <service id="sylius.invoice_number_generator" class="Sylius\Component\Core\Payment\IdBasedInvoiceNumberGenerator" />
