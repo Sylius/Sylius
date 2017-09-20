@@ -40,6 +40,8 @@ final class OrderEmailManager implements OrderEmailManagerInterface
      */
     public function sendConfirmationEmail(OrderInterface $order): void
     {
-        $this->emailSender->send(Emails::ORDER_CONFIRMATION, [$order->getCustomer()->getEmail()], ['order' => $order]);
+        if (null !== $order->getCustomer()) {
+            $this->emailSender->send(Emails::ORDER_CONFIRMATION, [$order->getCustomer()->getEmail()], ['order' => $order]);
+        }
     }
 }
