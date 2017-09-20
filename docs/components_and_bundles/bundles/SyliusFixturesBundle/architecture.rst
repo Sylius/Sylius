@@ -95,3 +95,44 @@ They implement at least one of four interfaces:
     placed under ``DependencyInjection`` directory in Symfony bundles.
 
 In order to be used in suite configuration, they need to be registered under the ``sylius_fixtures.listener``.
+
+Disabling listeners / fixtures in consecutive configurations
+------------------------------------------------------------
+
+Given the following configuration coming from a third party (like Sylius if you're developing an application based on it):
+
+.. code-block:: yaml
+
+    sylius_fixtures:
+        suites:
+            my_suite_name:
+                listeners:
+                    first_listener: ~
+                    second_listener: ~
+                fixtures:
+                    first_fixture: ~
+                    second_fixture: ~
+
+It is possible to disable a listener or a fixture in a consecutive configuration by providing ``false`` as its value:
+
+.. code-block:: yaml
+
+    sylius_fixtures:
+        suites:
+            my_suite_name:
+                listeners:
+                    second_listener: false
+                fixtures:
+                    second_fixture: false
+
+These two configurations combined will be treated as a single configuration like:
+
+.. code-block:: yaml
+
+    sylius_fixtures:
+        suites:
+            my_suite_name:
+                listeners:
+                    first_listener: ~
+                fixtures:
+                    first_fixture: ~
