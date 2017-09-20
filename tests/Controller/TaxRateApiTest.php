@@ -37,6 +37,7 @@ final class TaxRateApiTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFile('resources/tax_categories.yml');
         $this->loadFixturesFromFile('resources/zones.yml');
+        $this->loadFixturesFromFile('resources/customer_tax_categories.yml');
         $this->loadFixturesFromFile('resources/tax_rates.yml');
 
         $this->client->request('GET', '/api/v1/tax-rates/');
@@ -53,6 +54,7 @@ final class TaxRateApiTest extends JsonApiTestCase
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/tax_categories.yml');
         $this->loadFixturesFromFile('resources/zones.yml');
+        $this->loadFixturesFromFile('resources/customer_tax_categories.yml');
         $this->loadFixturesFromFile('resources/tax_rates.yml');
 
         $this->client->request('GET', '/api/v1/tax-rates/', [], [], static::$authorizedHeaderWithAccept);
@@ -82,6 +84,7 @@ final class TaxRateApiTest extends JsonApiTestCase
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/tax_categories.yml');
         $this->loadFixturesFromFile('resources/zones.yml');
+        $this->loadFixturesFromFile('resources/customer_tax_categories.yml');
         $taxRates = $this->loadFixturesFromFile('resources/tax_rates.yml');
         $taxRate = $taxRates['sales_tax'];
 

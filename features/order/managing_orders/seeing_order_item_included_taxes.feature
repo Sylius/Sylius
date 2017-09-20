@@ -6,7 +6,8 @@ Feature: Seeing included in price taxes of order items
 
     Background:
         Given the store operates on a single channel in "United States"
-        And the store has included in price "Guns tax" tax rate of 10% for "Guns" within the "US" zone
+        And default customer tax category is "General"
+        And the store has included in price "Guns tax" tax rate of 10% for "Guns" and "General" customer tax category within the "US" zone
         And default tax zone is "US"
         And the store has a product "Winchester M1866" priced at "$220.00"
         And it belongs to "Guns" tax category

@@ -6,7 +6,8 @@ Feature: Seeing taxes of order items
 
     Background:
         Given the store operates on a single channel in "United States"
-        And the store has "VAT" tax rate of 23% for "Clothes" within the "US" zone
+        And default customer tax category is "General"
+        And the store has a "VAT" tax rate of 23% for "Clothes" and "General" customer tax category within the "US" zone
         And the store has a product "PHP T-Shirt" priced at "$80.00"
         And the store has a product "Symfony2 T-Shirt" priced at "$140.00"
         And it belongs to "Clothes" tax category

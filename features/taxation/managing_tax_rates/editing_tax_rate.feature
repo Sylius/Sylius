@@ -7,7 +7,8 @@ Feature: Editing tax rate
     Background:
         Given the store operates on a single channel in "United States"
         And the store has a tax category "Sports gear"
-        And the store has "United States Sales Tax" tax rate of 20% for "Sports gear" within the "US" zone
+        And the store has a customer tax category "General"
+        And the store has a "United States Sales Tax" tax rate of 20% for "Sports gear" and "General" customer tax category within the "US" zone
         And I am logged in as an administrator
 
     @todo
@@ -41,7 +42,7 @@ Feature: Editing tax rate
 
     @ui
     Scenario: Changing related tax category
-        Given the store has a tax category "Food and Beverage" also
+        Given the store has also a tax category "Food and Beverage"
         When I want to modify a tax rate "United States Sales Tax"
         And I change it to be applicable for the "Food and Beverage" tax category
         And I save my changes
@@ -59,8 +60,7 @@ Feature: Editing tax rate
 
     @ui
     Scenario: Changing the related customer tax category
-        Given the store has a customer tax category "General"
-        And the store has also a customer tax category "Wholesale"
+        Given the store has also a customer tax category "Wholesale"
         And the tax rate "United States Sales Tax" is applicable for the "General" customer tax category
         When I want to modify a tax rate "United States Sales Tax"
         And I change it to be applicable for the "Wholesale" customer tax category

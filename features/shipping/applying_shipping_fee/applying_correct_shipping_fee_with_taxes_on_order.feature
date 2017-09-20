@@ -8,10 +8,11 @@ Feature: Apply correct shipping fee with taxes on order
         Given the store operates on a single channel in "United States"
         And there is a zone "The Rest of the World" containing all other countries
         And the store ships to "Germany"
-        And the store has "NA VAT" tax rate of 23% for "Clothes" within the "US" zone
-        And the store has "Low tax" tax rate of 10% for "Clothes" for the rest of the world
-        And the store has "Shipping NA VAT" tax rate of 23% for "Shipping Services" within the "US" zone
-        And the store has "Shipping Low tax" tax rate of 10% for "Shipping Services" for the rest of the world
+        And default customer tax category is "General"
+        And the store has a "NA VAT" tax rate of 23% for "Clothes" and "General" customer tax category within the "US" zone
+        And the store has a "Low tax" tax rate of 10% for "Clothes" and "General" customer tax category for the rest of the world
+        And the store has a "Shipping NA VAT" tax rate of 23% for "Shipping Services" and "General" customer tax category within the "US" zone
+        And the store has a "Shipping Low tax" tax rate of 10% for "Shipping Services" and "General" customer tax category for the rest of the world
         And the store has a product "PHP T-Shirt" priced at "$100.00"
         And the store has "DHL" shipping method with "$10.00" fee within the "US" zone
         And the store has "DHL-World" shipping method with "$20.00" fee for the rest of the world

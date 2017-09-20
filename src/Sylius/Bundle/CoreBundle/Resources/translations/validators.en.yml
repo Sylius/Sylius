@@ -81,6 +81,11 @@ sylius:
     product_translation:
         short_description:
             max: Short description must not be longer then {{ limit }} characters.
+    tax_rate:
+        customer_tax_category:
+            not_blank: Please select customer tax category.
+        zone:
+            not_blank: Please select tax zone.
     taxon_image:
         file:
             max_size: The image is too big - {{ size }}{{ suffix }}. Maximum allowed size is {{ limit }}{{ suffix }}.

@@ -1,3 +1,9 @@
+Sylius\Component\Core\Model\CustomerTaxCategory:
+    customer_tax_category:
+        code: "general"
+        name: "General"
+        description: "General customer tax category."
+
 Sylius\Component\Core\Model\Channel:
     channel:
         code: "CHANNEL"
@@ -10,6 +16,7 @@ Sylius\Component\Core\Model\Channel:
         enabled: true
         taxCalculationStrategy: "order_items_based"
         currencies: ["@currency"]
+        defaultCustomerTaxCategory: "@customer_tax_category"
 
 Sylius\Component\Core\Model\Product:
     mug:
@@ -176,3 +183,4 @@ Sylius\Component\Core\Model\TaxRate:
         zone: "@zone_eu"
         calculator: "default"
         category: "@taxable_goods"
+        customerTaxCategory: "@customer_tax_category"

@@ -57,6 +57,7 @@
 
         <service id="sylius.behat.context.transform.customer_tax_category" class="Sylius\Behat\Context\Transform\CustomerTaxCategoryContext">
             <argument type="service" id="__symfony__.sylius.repository.customer_tax_category" />
+            <argument type="service" id="__symfony__.sylius.factory.customer_tax_category" />
             <tag name="fob.context_service" />
         </service>
 

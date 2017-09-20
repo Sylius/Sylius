@@ -31,11 +31,7 @@ final class TaxRateTypeExtension extends AbstractTypeExtension
     {
         $builder
             ->add('zone', ZoneChoiceType::class)
-            ->add('customerTaxCategory', CustomerTaxCategoryChoiceType::class, [
-                'required' => false,
-                'placeholder' => '---',
-                'label' => 'sylius.form.tax_rate.customer_tax_category',
-            ])
+            ->add('customerTaxCategory', CustomerTaxCategoryChoiceType::class)
         ;
     }
 

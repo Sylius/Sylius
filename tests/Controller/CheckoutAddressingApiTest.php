@@ -32,7 +32,7 @@ final class CheckoutAddressingApiTest extends CheckoutApiTestCase
     }
 
     /**
-     * @test
+
      */
     public function it_does_not_allow_to_address_unexisting_order()
     {

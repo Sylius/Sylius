@@ -6,6 +6,7 @@ Feature: Apply correct shipping fee on order
 
     Background:
         Given the store operates on a single channel in "United States"
+        And default customer tax category is "General"
         And the store has a product "PHP T-Shirt" priced at "$100.00"
         And the store has "DHL" shipping method with "$10.00" fee
         And the store has "FedEx" shipping method with "$30.00" fee

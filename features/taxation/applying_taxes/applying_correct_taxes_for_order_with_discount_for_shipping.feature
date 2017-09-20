@@ -7,7 +7,8 @@ Feature: Apply correct taxes for an order with a discount for a shipping
     Background:
         Given the store operates on a single channel in "United States"
         And default tax zone is "US"
-        And the store has "Low VAT" tax rate of 10% for "Shipping" within the "US" zone
+        And default customer tax category is "General"
+        And the store has a "Low VAT" tax rate of 10% for "Shipping" and "General" customer tax category within the "US" zone
         And the store has a product "Symfony Mug" priced at "$10.00"
         And there is a promotion "Holiday promotion"
         And the promotion gives "10%" discount on shipping to every order
@@ -33,7 +34,7 @@ Feature: Apply correct taxes for an order with a discount for a shipping
 
     @ui
     Scenario: Properly calculated taxes when item belongs to different tax category
-        Given the store has "Standard VAT" tax rate of 23% for "Mugs" within the "US" zone
+        Given the store has a "Standard VAT" tax rate of 23% for "Mugs" and "General" customer tax category within the "US" zone
         And the store has a product "Sonata Mug" priced at "$10.00"
         And it belongs to "Mugs" tax category
         And the store has "DHL" shipping method with "$51.04" fee

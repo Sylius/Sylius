@@ -18,7 +18,8 @@ Feature: Placing an order with different scopes for shipping and taxes
         And it has the "United States" country member
         And the store has a tax zone "Texas Tax" with code "US-TX-TAX"
         And it has the "Texas" province member
-        And the store has "TX-VAT" tax rate of 8% for "Clothes" within the "US-TX-TAX" zone
+        And default customer tax category is "General"
+        And the store has a "TX-VAT" tax rate of 8% for "Clothes" and "General" customer tax category within the "US-TX-TAX" zone
         And the store ships everything for free within the "US-SHIPPING" zone
         And this product belongs to "Clothes" tax category
         And I have product "Jane's Vest" in the cart
@@ -34,7 +35,8 @@ Feature: Placing an order with different scopes for shipping and taxes
     Scenario: Placing an order with in the same tax and shipping zone
         Given the store has a zone "United States" with code "US"
         And it has the "United States" country member
-        And the store has "US-VAT" tax rate of 8% for "Clothes" within the "US" zone
+        And default customer tax category is "General"
+        And the store has a "US-VAT" tax rate of 8% for "Clothes" and "General" customer tax category within the "US" zone
         And the store ships everything for free within the "US" zone
         And this product belongs to "Clothes" tax category
         And I have product "Jane's Vest" in the cart

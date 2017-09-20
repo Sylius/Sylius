@@ -6,8 +6,9 @@ Feature: Seeing aggregated taxes of an order
 
     Background:
         Given the store operates on a single channel in "United States"
-        And the store has "VAT" tax rate of 23% for "Standard US services" within the "US" zone
-        And the store has "Low VAT" tax rate of 10% for "Lowered US services" within the "US" zone
+        And default customer tax category is "General"
+        And the store has a "VAT" tax rate of 23% for "Standard US services" and "General" customer tax category within the "US" zone
+        And the store has a "Low VAT" tax rate of 10% for "Lowered US services" and "General" customer tax category within the "US" zone
         And the store has a product "Composite bow" priced at "$100.00"
         And it belongs to "Standard US services" tax category
         And the store has a product "Claymore" priced at "$50.00"

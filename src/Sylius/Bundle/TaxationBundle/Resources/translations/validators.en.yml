@@ -15,8 +15,6 @@ sylius:
             not_blank: Please enter tax rate amount.
         calculator:
             not_blank: Please select tax calculator.
-        zone:
-            not_blank: Please select tax zone.
         code:
             not_blank: Please enter tax rate code.
             regex: Tax rate code can only be comprised of letters, numbers, dashes and underscores.

@@ -58,6 +58,7 @@ final class CustomerTaxCategoryChoiceType extends AbstractType
             'choice_value' => 'code',
             'choice_label' => 'name',
             'choice_translation_domain' => false,
+            'label' => 'sylius.form.customer_tax_category.label',
             'placeholder' => 'sylius.form.customer_tax_category.select',
         ]);
     }

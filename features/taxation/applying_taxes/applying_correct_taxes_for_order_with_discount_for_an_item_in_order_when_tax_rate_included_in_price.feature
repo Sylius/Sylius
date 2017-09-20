@@ -7,8 +7,9 @@ Feature: Apply correct taxes for an order with a discount for an item in it when
     Background:
         Given the store operates on a single channel in "United States"
         And default tax zone is "US"
-        And the store has included in price "US VAT" tax rate of 23% for "Clothes" within the "US" zone
-        And the store has included in price "Low VAT" tax rate of 10% for "Mugs" within the "US" zone
+        And default customer tax category is "General"
+        And the store has included in price "US VAT" tax rate of 23% for "Clothes" and "General" customer tax category within the "US" zone
+        And the store has included in price "Low VAT" tax rate of 10% for "Mugs" and "General" customer tax category within the "US" zone
         And the store has a product "PHP T-Shirt" priced at "$10.00"
         And it belongs to "Clothes" tax category
         And the store has a product "Symfony Mug" priced at "$56.95"

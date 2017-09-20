@@ -15,6 +15,7 @@ sylius:
             tax_category: Tax category
         customer_tax_category:
             description: Description
+            label: Customer tax category
             name: Name
             select: Select
         promotion:
@@ -145,8 +146,6 @@ sylius:
             channels: Channels
         product_attribute:
             position: Position
-        tax_rate:
-            customer_tax_category: Customer tax category
         zone:
             scopes:
                 shipping: Shipping

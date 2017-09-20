@@ -7,7 +7,8 @@ Feature: Apply correct taxes for items with tax rate included in price
     Background:
         Given the store operates on a single channel in "United States"
         And default tax zone is "US"
-        And the store has included in price "VAT" tax rate of 23% for "Clothes" within the "US" zone
+        And default customer tax category is "General"
+        And the store has included in price "VAT" tax rate of 23% for "Clothes" and "General" customer tax category within the "US" zone
         And the store has a product "PHP T-Shirt" priced at "$100.00"
         And it belongs to "Clothes" tax category
 

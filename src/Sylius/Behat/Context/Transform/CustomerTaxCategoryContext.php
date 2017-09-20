@@ -14,9 +14,10 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\CustomerTaxCategoryInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Webmozart\Assert\Assert;
 
 final class CustomerTaxCategoryContext implements Context
 {
@@ -26,27 +27,38 @@ final class CustomerTaxCategoryContext implements Context
     private $customerTaxCategoryRepository;
 
     /**
-     * @param RepositoryInterface $customerTaxCategoryRepository
+     * @var FactoryInterface
      */
-    public function __construct(RepositoryInterface $customerTaxCategoryRepository)
-    {
+    private $customerTaxCategoryFactory;
+
+    /**
+     * @param RepositoryInterface $customerTaxCategoryRepository
+     * @param FactoryInterface $customerTaxCategoryFactory
+     */
+    public function __construct(
+        RepositoryInterface $customerTaxCategoryRepository,
+        FactoryInterface $customerTaxCategoryFactory
+    ) {
         $this->customerTaxCategoryRepository = $customerTaxCategoryRepository;
+        $this->customerTaxCategoryFactory = $customerTaxCategoryFactory;
     }
 
     /**
      * @Transform :customerTaxCategory
      * @Transform /^"([^"]+)" customer tax category$/
      */
-    public function getCustomerTaxCategoryByName(string $name): CustomerTaxCategoryInterface
+    public function getOrCreateCustomerTaxCategoryByName(string $name): CustomerTaxCategoryInterface
     {
-        $customerTaxCategories = $this->customerTaxCategoryRepository->findByName($name);
+        $customerTaxCategory = $this->customerTaxCategoryRepository->findOneBy(['name' => $name]);
+        if (null === $customerTaxCategory) {
+            /** @var CustomerTaxCategoryInterface $customerTaxCategory */
+            $customerTaxCategory = $this->customerTaxCategoryFactory->createNew();
+            $customerTaxCategory->setName($name);
+            $customerTaxCategory->setCode(StringInflector::nameToCode($name));
 
-        Assert::eq(
-            count($customerTaxCategories),
-            1,
-            sprintf('%d customer tax categories has been found with name "%s".', count($customerTaxCategories), $name)
-        );
+            $this->customerTaxCategoryRepository->add($customerTaxCategory);
+        }
 
-        return $customerTaxCategories[0];
+        return $customerTaxCategory;
     }
 }

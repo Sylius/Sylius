@@ -36,4 +36,6 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
      * @param string $name
      */
     public function changeCustomerTaxCategory(string $name): void;
+
+    public function removeCustomerTaxCategory(): void;
 }

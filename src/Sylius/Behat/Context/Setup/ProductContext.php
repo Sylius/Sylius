@@ -510,31 +510,6 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Given /^(it) comes in the following variations:$/
-     */
-    public function itComesInTheFollowingVariations(ProductInterface $product, TableNode $table)
-    {
-        $channel = $this->sharedStorage->get('channel');
-
-        foreach ($table->getHash() as $variantHash) {
-            /** @var ProductVariantInterface $variant */
-            $variant = $this->productVariantFactory->createNew();
-
-            $variant->setName($variantHash['name']);
-            $variant->setCode(StringInflector::nameToUppercaseCode($variantHash['name']));
-            $variant->addChannelPricing($this->createChannelPricingForChannel(
-                $this->getPriceFromString(str_replace(['$', '€', '£'], '', $variantHash['price'])),
-                $channel
-            ));
-
-            $variant->setProduct($product);
-            $product->addVariant($variant);
-        }
-
-        $this->objectManager->flush();
-    }
-
-    /**
      * @Given /^("[^"]+" variant of product "[^"]+") belongs to ("[^"]+" tax category)$/
      */
     public function productVariantBelongsToTaxCategory(

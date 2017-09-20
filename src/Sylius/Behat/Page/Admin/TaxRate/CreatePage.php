@@ -80,6 +80,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             'calculator' => '#sylius_tax_rate_calculator',
             'category' => '#sylius_tax_rate_category',
             'code' => '#sylius_tax_rate_code',
+            'customer_tax_category' => '#sylius_tax_rate_customerTaxCategory',
             'name' => '#sylius_tax_rate_name',
             'zone' => '#sylius_tax_rate_zone',
         ]);

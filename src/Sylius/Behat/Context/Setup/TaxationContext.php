@@ -18,6 +18,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerTaxCategoryInterface;
 use Sylius\Component\Core\Model\TaxRateInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -102,16 +103,17 @@ final class TaxationContext implements Context
     }
 
     /**
-     * @Given the store has :taxRateName tax rate of :taxRateAmount% for :taxCategoryName within the :zone zone
-     * @Given the store has :taxRateName tax rate of :taxRateAmount% for :taxCategoryName within the :zone zone identified by the :taxRateCode code
-     * @Given /^the store has "([^"]+)" tax rate of ([^"]+)% for "([^"]+)" for the (rest of the world)$/
+     * @Given the store has (also) a :taxRateName tax rate of :taxRateAmount% for :taxCategoryName and :customerTaxCategory customer tax category within the :zone zone
+     * @Given the store has (also) a :taxRateName tax rate of :taxRateAmount% for :taxCategoryName and :customerTaxCategory customer tax category within the :zone zone identified by the :taxRateCode code
+     * @Given /^the store has(?:| also) a "([^"]+)" tax rate of ([^"]+)% for "([^"]+)" and ("[^"]+" customer tax category) for the (rest of the world)$/
      */
-    public function storeHasTaxRateWithinZone(
-        $taxRateName,
-        $taxRateAmount,
-        $taxCategoryName,
+    public function theStoreHasTaxRateOfForTaxCategoryAndCustomerTaxCategoryWithinTheZone(
+        string $taxRateName,
+        int $taxRateAmount,
+        string $taxCategoryName,
+        CustomerTaxCategoryInterface $customerTaxCategory,
         ZoneInterface $zone,
-        $taxRateCode = null,
+        string $taxRateCode = null,
         $includedInPrice = false
     ) {
         $taxCategory = $this->getOrCreateTaxCategory($taxCategoryName);
@@ -125,6 +127,7 @@ final class TaxationContext implements Context
         $taxRate->setName($taxRateName);
         $taxRate->setCode($taxRateCode);
         $taxRate->setZone($zone);
+        $taxRate->setCustomerTaxCategory($customerTaxCategory);
         $taxRate->setAmount((float) $this->getAmountFromString($taxRateAmount));
         $taxRate->setCategory($taxCategory);
         $taxRate->setCalculator('default');
@@ -136,48 +139,31 @@ final class TaxationContext implements Context
     }
 
     /**
-     * @Given the store has (also) a :taxRateName tax rate of :taxRateAmount% for :taxCategoryName and :customerTaxCategory customer tax category within the :zone zone
-     * @Given /^the store has(?:| also) a "([^"]+)" tax rate of ([^"]+)% for "([^"]+)" and ("[^"]+" customer tax category) for the (rest of the world)$/
+     * @Given the store has included in price :taxRateName tax rate of :taxRateAmount% for :taxCategoryName and :customerTaxCategory customer tax category within the :zone zone
      */
-    public function theStoreHasTaxRateOfForTaxCategoryAndCustomerTaxCategoryWithinTheZone(
+    public function storeHasIncludedInPriceTaxRateWithinZone(
         string $taxRateName,
         int $taxRateAmount,
         string $taxCategoryName,
         CustomerTaxCategoryInterface $customerTaxCategory,
         ZoneInterface $zone
-    ) {
-        $taxCategory = $this->getOrCreateTaxCategory($taxCategoryName);
-        $taxRateCode = $this->getCodeFromNameAndZoneCode($taxRateName, $zone->getCode());
-
-        /** @var TaxRateInterface $taxRate */
-        $taxRate = $this->taxRateFactory->createNew();
-        $taxRate->setName($taxRateName);
-        $taxRate->setCode($taxRateCode);
-        $taxRate->setZone($zone);
-        $taxRate->setCustomerTaxCategory($customerTaxCategory);
-        $taxRate->setAmount((float) $this->getAmountFromString($taxRateAmount));
-        $taxRate->setCategory($taxCategory);
-        $taxRate->setCalculator('default');
-
-        $this->taxRateRepository->add($taxRate);
-
-        $this->sharedStorage->set('tax_rate', $taxRate);
-    }
-
-    /**
-     * @Given the store has included in price :taxRateName tax rate of :taxRateAmount% for :taxCategoryName within the :zone zone
-     */
-    public function storeHasIncludedInPriceTaxRateWithinZone($taxRateName, $taxRateAmount, $taxCategoryName, ZoneInterface $zone)
-    {
-        $this->storeHasTaxRateWithinZone($taxRateName, $taxRateAmount, $taxCategoryName, $zone, null, true);
+    ): void {
+        $this->theStoreHasTaxRateOfForTaxCategoryAndCustomerTaxCategoryWithinTheZone(
+            $taxRateName,
+            $taxRateAmount,
+            $taxCategoryName,
+            $customerTaxCategory,
+            $zone,
+            null,
+            true
+        );
     }
 
     /**
      * @Given the store has a tax category :name with a code :code
-     * @Given the store has a tax category :name
-     * @Given the store has a tax category :name also
+     * @Given the store has (also) a tax category :name
      */
-    public function theStoreHasTaxCategoryWithCode($name, $code = null)
+    public function theStoreHasTaxCategoryWithCode(string $name, string $code = null): void
     {
         $taxCategory = $this->createTaxCategory($name, $code);
 
@@ -249,6 +235,18 @@ final class TaxationContext implements Context
         CustomerTaxCategoryInterface $customerTaxCategory
     ): void {
         $taxRate->setCustomerTaxCategory($customerTaxCategory);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given default customer tax category is :customerTaxCategory
+     */
+    public function defaultCustomerTaxCategoryIs(CustomerTaxCategoryInterface $customerTaxCategory): void
+    {
+        /** @var ChannelInterface $channel */
+        $channel = $this->sharedStorage->get('channel');
+        $channel->setDefaultCustomerTaxCategory($customerTaxCategory);
 
         $this->objectManager->flush();
     }

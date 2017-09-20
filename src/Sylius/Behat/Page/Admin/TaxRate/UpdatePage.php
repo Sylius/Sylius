@@ -44,6 +44,11 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         $this->getDocument()->selectFieldOption('Customer tax category', $name);
     }
 
+    public function removeCustomerTaxCategory(): void
+    {
+        $this->getDocument()->selectFieldOption('Customer tax category', 'Select');
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -62,6 +67,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'calculator' => '#sylius_tax_rate_calculator',
             'category' => '#sylius_tax_rate_category',
             'code' => '#sylius_tax_rate_code',
+            'customer_tax_category' => '#sylius_tax_rate_customerTaxCategory',
             'name' => '#sylius_tax_rate_name',
             'zone' => '#sylius_tax_rate_zone',
         ]);

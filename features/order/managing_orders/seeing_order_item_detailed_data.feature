@@ -6,7 +6,8 @@ Feature: Seeing order item detailed data
 
     Background:
         Given the store operates on a single channel in "United States"
-        And the store has "VAT" tax rate of 10% for "T-Shirts" within the "US" zone
+        And default customer tax category is "General"
+        And the store has a "VAT" tax rate of 10% for "T-Shirts" and "General" customer tax category within the "US" zone
         And the store classifies its products as "T-Shirts"
         And the store has a product "Marvel T-Shirt"
         And this product has "Iron Man T-Shirt" variant priced at "$49.00"

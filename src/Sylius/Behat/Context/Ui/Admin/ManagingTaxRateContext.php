@@ -133,6 +133,14 @@ final class ManagingTaxRateContext implements Context
     }
 
     /**
+     * @When I remove its customer tax category
+     */
+    public function iRemoveItsCustomerTaxCategory(): void
+    {
+        $this->updatePage->removeCustomerTaxCategory();
+    }
+
+    /**
      * @When I choose the default tax calculator
      */
     public function iWantToUseTheDefaultTaxCalculator()
@@ -266,11 +274,25 @@ final class ManagingTaxRateContext implements Context
     }
 
     /**
-     * @Then I should be notified that :element has to be selected
+     * @Then /^I should be notified that (category|zone) has to be selected$/
      */
-    public function iShouldBeNotifiedThatElementHasToBeSelected($element)
+    public function iShouldBeNotifiedThatElementHasToBeSelected(string $element): void
     {
-        $this->assertFieldValidationMessage($element, sprintf('Please select tax %s.', $element));
+        $this->assertFieldValidationMessage(
+            str_replace(' ', '_', $element),
+            sprintf('Please select tax %s.', $element)
+        );
+    }
+
+    /**
+     * @Then I should be notified that customer tax category has to be selected
+     */
+    public function iShouldBeNotifiedThatCustomerTaxCategoryHasToBeSelected(): void
+    {
+        $this->assertFieldValidationMessage(
+            'customer_tax_category',
+            'Please select customer tax category.'
+        );
     }
 
     /**
@@ -311,6 +333,14 @@ final class ManagingTaxRateContext implements Context
      * @When I do not specify related tax category
      */
     public function iDoNotSpecifyRelatedTaxCategory()
+    {
+        // Intentionally left blank to fulfill context expectation
+    }
+
+    /**
+     * @When I do not specify related customer tax category
+     */
+    public function iDoNotSpecifyRelatedCustomerTaxCategory()
     {
         // Intentionally left blank to fulfill context expectation
     }

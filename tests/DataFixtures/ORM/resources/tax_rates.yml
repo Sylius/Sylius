@@ -5,9 +5,11 @@ Sylius\Component\Core\Model\TaxRate:
         zone: "@zone_eu"
         calculator: "flat_rate"
         category: "@tax_category_1"
+        customerTaxCategory: "@customer_tax_category_1"
     regular_tax:
         code: regular_tax
         name: Regular Tax 20%
         zone: "@zone_eu"
         calculator: "flat_rate"
         category: "@tax_category_2"
+        customerTaxCategory: "@customer_tax_category_1"

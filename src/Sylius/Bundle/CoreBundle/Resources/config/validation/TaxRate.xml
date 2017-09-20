@@ -19,5 +19,11 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
+        <property name="customerTaxCategory">
+            <constraint name="NotBlank">
+                <option name="message">sylius.tax_rate.customer_tax_category.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
     </class>
 </constraint-mapping>

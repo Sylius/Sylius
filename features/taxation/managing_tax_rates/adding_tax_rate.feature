@@ -17,11 +17,13 @@ Feature: Adding a new tax rate
         And I name it "United States Sales Tax"
         And I define it for the "United States" zone
         And I make it applicable for the "Food and Beverage" tax category
+        And I make it applicable for the "General" customer tax category
         And I specify its amount as 20%
         And I choose the default tax calculator
         And I add it
         Then I should be notified that it has been successfully created
         And the tax rate "United States Sales Tax" should appear in the registry
+        And the tax rate "United States Sales Tax" should be applicable for the "General" customer tax category
 
     @ui @javascript
     Scenario: Adding a new tax rate which will be included in product price
@@ -30,23 +32,10 @@ Feature: Adding a new tax rate
         And I name it "United States Sales Tax"
         And I define it for the "United States" zone
         And I make it applicable for the "Food and Beverage" tax category
-        And I specify its amount as 20%
-        And I choose the default tax calculator
-        And I choose "Included in price" option
-        And I add it
-        Then I should be notified that it has been successfully created
-        And the tax rate "United States Sales Tax" should appear in the registry
-
-    @ui
-    Scenario: Adding a new tax rate with a customer tax category
-        When I want to create a new tax rate
-        And I specify its code as "US_SALES_TAX"
-        And I name it "United States Sales Tax"
-        And I define it for the "United States" zone
-        And I make it applicable for the "Food and Beverage" tax category
         And I make it applicable for the "General" customer tax category
         And I specify its amount as 20%
         And I choose the default tax calculator
+        And I choose "Included in price" option
         And I add it
         Then I should be notified that it has been successfully created
         And the tax rate "United States Sales Tax" should appear in the registry

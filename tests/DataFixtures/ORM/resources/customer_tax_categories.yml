@@ -1,0 +1,5 @@
+Sylius\Component\Core\Model\CustomerTaxCategory:
+    customer_tax_category_1:
+        code: "general"
+        name: "General"
+        description: "General customer tax category."

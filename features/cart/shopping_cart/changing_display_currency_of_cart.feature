@@ -9,8 +9,9 @@ Feature: Changing display currency of the cart
         And that channel allows to shop using the "GBP" currency
         And the exchange rate of "US Dollar" to "British Pound" is 2.0
         And default tax zone is "US"
+        And default customer tax category is "General"
         And the store has "Pigeon Mail" shipping method with "$5.00" fee
-        And the store has "Pugs" tax rate of 10% for "Mugs" within the "US" zone
+        And the store has a "Pugs" tax rate of 10% for "Mugs" and "General" customer tax category within the "US" zone
         And the store has a product "The Pug Mug" priced at "$10.00"
         And it belongs to "Mugs" tax category
 
