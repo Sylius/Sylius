@@ -1,25 +1,24 @@
-<p align="center">
+<h1 align="center">
     <a href="http://sylius.org" target="_blank">
         <img src="http://demo.sylius.org/assets/shop/img/logo.png" />
     </a>
-</p>
-<p align="center">
-    <a href="https://packagist.org/packages/sylius/sylius">
-        <img src="https://img.shields.io/packagist/l/Sylius/Sylius.svg" alt="License" />
+    <br />
+    <a href="https://packagist.org/packages/sylius/sylius" title="License" target="_blank">
+        <img src="https://img.shields.io/packagist/l/Sylius/Sylius.svg" />
     </a>
-    <a href="https://packagist.org/packages/sylius/sylius">
-        <img src="https://img.shields.io/packagist/v/Sylius/Sylius.svg" alt="Version" />
+    <a href="https://packagist.org/packages/sylius/sylius" title="Version" target="_blank">
+        <img src="https://img.shields.io/packagist/v/Sylius/Sylius.svg" />
     </a>
-    <a href="http://travis-ci.org/Sylius/Sylius">
-        <img src="https://img.shields.io/travis/Sylius/Sylius/master.svg" alt="Build status" />
+    <a href="http://travis-ci.org/Sylius/Sylius" title="Build status" target="_blank">
+        <img src="https://img.shields.io/travis/Sylius/Sylius/master.svg" />
     </a>
-    <a href="https://scrutinizer-ci.com/g/Sylius/Sylius/">
-        <img src="https://img.shields.io/scrutinizer/g/Sylius/Sylius.svg" alt="Scrutinizer" />
+    <a href="https://scrutinizer-ci.com/g/Sylius/Sylius/" title="Scrutinizer" target="_blank">
+        <img src="https://img.shields.io/scrutinizer/g/Sylius/Sylius.svg" />
     </a>
-    <a href="https://packagist.org/packages/sylius/sylius">
-        <img src="https://poser.pugx.org/sylius/sylius/downloads" alt="Total Downloads" />
+    <a href="https://packagist.org/packages/sylius/sylius" title="Total Downloads" target="_blank">
+        <img src="https://poser.pugx.org/sylius/sylius/downloads" />
     </a>
-</p>
+</h1>
 
 Sylius is the first eCommerce framework for tailored solution based on [**Symfony**](http://symfony.com) and [**Doctrine**](http://doctrine-project.org). 
 The highest quality of code, strong testing culture, built-in Agile (BDD) workflow and exceptional flexibility make it the best solution for application tailored to your business requirements. 
