@@ -197,13 +197,13 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Given /^the store(?:| also) has a product "([^"]+)" originally priced at ("[^"]+")$/
+     * @Given /^(this product) has been originally priced at ("[^"]+")$/
      */
-    public function storeHasAProductOriginallyPricedAt($productName, $originalPrice = 100, ChannelInterface $channel = null)
+    public function thisProductIsAlsoOriginallyPricedAtInChannel(ProductInterface $product, $originalPrice = 100, ChannelInterface $channel = null)
     {
-        $product = $this->createProduct($productName, 0, $channel);
-        $product->getVariants()->first()->getChannelPricings()->first()->setOriginalPrice($originalPrice);
-        $this->saveProduct($product);
+        $productVariant = $this->defaultVariantResolver->getVariant($product);
+        $productVariant->getChannelPricings()->first()->setOriginalPrice($originalPrice);
+        $this->objectManager->flush();
     }
 
     /**
