@@ -39,6 +39,7 @@ class TaxRateFixture extends AbstractResourceFixture
                 ->scalarNode('name')->cannotBeEmpty()->end()
                 ->scalarNode('zone')->cannotBeEmpty()->end()
                 ->scalarNode('category')->cannotBeEmpty()->end()
+                ->scalarNode('customer_tax_category')->cannotBeEmpty()->end()
                 ->floatNode('amount')->end()
                 ->booleanNode('included_in_price')->end()
                 ->scalarNode('calculator')->cannotBeEmpty()->end()

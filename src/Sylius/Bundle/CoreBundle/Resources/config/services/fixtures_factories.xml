@@ -111,6 +111,7 @@
             <argument type="service" id="sylius.factory.tax_rate" />
             <argument type="service" id="sylius.repository.zone" />
             <argument type="service" id="sylius.repository.tax_category" />
+            <argument type="service" id="sylius.repository.customer_tax_category" />
         </service>
 
         <service id="sylius.fixture.example_factory.taxon" class="Sylius\Bundle\CoreBundle\Fixture\Factory\TaxonExampleFactory">

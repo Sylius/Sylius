@@ -86,6 +86,14 @@ final class TaxRateFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function tax_rate_customer_tax_category_code_is_optional(): void
+    {
+        $this->assertConfigurationIsValid([['custom' => [['customer_tax_category' => 'GENERAL']]]], 'custom.*.customer_tax_category');
+    }
+
+    /**
+     * @test
+     */
     public function tax_rate_calculator_is_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['calculator' => 'custom']]]], 'custom.*.calculator');

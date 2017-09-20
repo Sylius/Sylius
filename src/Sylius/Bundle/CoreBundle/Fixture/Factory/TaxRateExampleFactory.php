@@ -16,6 +16,7 @@ namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
+use Sylius\Component\Core\Model\CustomerTaxCategoryInterface;
 use Sylius\Component\Core\Model\TaxRateInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -44,6 +45,11 @@ class TaxRateExampleFactory extends AbstractExampleFactory implements ExampleFac
     private $taxCategoryRepository;
 
     /**
+     * @var RepositoryInterface
+     */
+    private $customerTaxCategoryRepository;
+
+    /**
      * @var \Faker\Generator
      */
     private $faker;
@@ -57,15 +63,18 @@ class TaxRateExampleFactory extends AbstractExampleFactory implements ExampleFac
      * @param FactoryInterface $taxRateFactory
      * @param RepositoryInterface $zoneRepository
      * @param RepositoryInterface $taxCategoryRepository
+     * @param RepositoryInterface $customerTaxCategoryRepository
      */
     public function __construct(
         FactoryInterface $taxRateFactory,
         RepositoryInterface $zoneRepository,
-        RepositoryInterface $taxCategoryRepository
+        RepositoryInterface $taxCategoryRepository,
+        RepositoryInterface $customerTaxCategoryRepository
     ) {
         $this->taxRateFactory = $taxRateFactory;
         $this->zoneRepository = $zoneRepository;
         $this->taxCategoryRepository = $taxCategoryRepository;
+        $this->customerTaxCategoryRepository = $customerTaxCategoryRepository;
 
         $this->faker = \Faker\Factory::create();
         $this->optionsResolver = new OptionsResolver();
@@ -90,6 +99,7 @@ class TaxRateExampleFactory extends AbstractExampleFactory implements ExampleFac
         $taxRate->setCalculator($options['calculator']);
         $taxRate->setZone($options['zone']);
         $taxRate->setCategory($options['category']);
+        $taxRate->setCustomerTaxCategory($options['customer_tax_category']);
 
         return $taxRate;
     }
@@ -121,6 +131,9 @@ class TaxRateExampleFactory extends AbstractExampleFactory implements ExampleFac
             ->setDefault('category', LazyOption::randomOne($this->taxCategoryRepository))
             ->setAllowedTypes('category', ['null', 'string', TaxCategoryInterface::class])
             ->setNormalizer('category', LazyOption::findOneBy($this->taxCategoryRepository, 'code'))
+            ->setDefault('customer_tax_category', LazyOption::randomOne($this->customerTaxCategoryRepository))
+            ->setAllowedTypes('customer_tax_category', ['null', 'string', CustomerTaxCategoryInterface::class])
+            ->setNormalizer('customer_tax_category', LazyOption::findOneBy($this->customerTaxCategoryRepository, 'code'))
         ;
     }
 }
