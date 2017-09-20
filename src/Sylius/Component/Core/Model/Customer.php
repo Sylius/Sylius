@@ -129,7 +129,7 @@ class Customer extends BaseCustomer implements CustomerInterface
      */
     public function setUser(?BaseUserInterface $user): void
     {
-         if ($this->user === $user) {
+        if ($this->user === $user) {
             return;
         }
 
