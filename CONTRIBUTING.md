@@ -10,4 +10,4 @@ in two separate parts of our [Contributing Guide](http://docs.sylius.org/en/late
 Security Issues
 ---------------
 
-Sylius is not stable yet, but has been already used in production and we treat security very seriously. You can read about security procedures [here](http://docs.sylius.org/en/latest/contributing/code/security.html).
+We treat security very seriously, you can read about security procedures [here](http://docs.sylius.org/en/latest/contributing/code/security.html).
