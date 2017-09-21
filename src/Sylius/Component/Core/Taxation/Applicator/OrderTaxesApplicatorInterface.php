@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\Taxation\Applicator;
 
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Core\Model\CustomerTaxCategoryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
 /**
@@ -25,6 +26,11 @@ interface OrderTaxesApplicatorInterface
     /**
      * @param OrderInterface $order
      * @param ZoneInterface $zone
+     * @param CustomerTaxCategoryInterface $customerTaxCategory
      */
-    public function apply(OrderInterface $order, ZoneInterface $zone): void;
+    public function apply(
+        OrderInterface $order,
+        ZoneInterface $zone,
+        CustomerTaxCategoryInterface $customerTaxCategory
+    ): void;
 }

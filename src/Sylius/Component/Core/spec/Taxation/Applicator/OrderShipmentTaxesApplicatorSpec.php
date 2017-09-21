@@ -18,6 +18,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
+use Sylius\Component\Core\Model\CustomerTaxCategoryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
@@ -55,11 +56,15 @@ final class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
         ShipmentInterface $shipment,
         ShippingMethodInterface $shippingMethod,
         TaxRateInterface $taxRate,
-        ZoneInterface $zone
+        ZoneInterface $zone,
+        CustomerTaxCategoryInterface $customerTaxCategory
     ): void {
         $order->getShipments()->willReturn(new ArrayCollection([$shipment->getWrappedObject()]));
         $shipment->getMethod()->willReturn($shippingMethod);
-        $taxRateResolver->resolve($shippingMethod, ['zone' => $zone])->willReturn($taxRate);
+        $taxRateResolver
+            ->resolve($shippingMethod, ['zone' => $zone, 'customerTaxCategory' => $customerTaxCategory])
+            ->willReturn($taxRate)
+        ;
 
         $taxRate->getLabel()->willReturn('Simple tax (10%)');
         $taxRate->isIncludedInPrice()->willReturn(false);
@@ -74,7 +79,7 @@ final class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
         ;
         $order->addAdjustment($shippingTaxAdjustment)->shouldBeCalled();
 
-        $this->apply($order, $zone);
+        $this->apply($order, $zone, $customerTaxCategory);
     }
 
     function it_does_nothing_if_the_tax_amount_is_0(
@@ -85,11 +90,15 @@ final class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
         ShipmentInterface $shipment,
         ShippingMethodInterface $shippingMethod,
         TaxRateInterface $taxRate,
-        ZoneInterface $zone
+        ZoneInterface $zone,
+        CustomerTaxCategoryInterface $customerTaxCategory
     ): void {
         $order->getShipments()->willReturn(new ArrayCollection([$shipment->getWrappedObject()]));
         $shipment->getMethod()->willReturn($shippingMethod);
-        $taxRateResolver->resolve($shippingMethod, ['zone' => $zone])->willReturn($taxRate);
+        $taxRateResolver
+            ->resolve($shippingMethod, ['zone' => $zone, 'customerTaxCategory' => $customerTaxCategory])
+            ->willReturn($taxRate)
+        ;
 
         $order->getShippingTotal()->willReturn(1000);
 
@@ -98,17 +107,21 @@ final class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
         $adjustmentsFactory->createWithData(Argument::cetera())->shouldNotBeCalled();
         $order->addAdjustment(Argument::any())->shouldNotBeCalled();
 
-        $this->apply($order, $zone);
+        $this->apply($order, $zone, $customerTaxCategory);
     }
 
     function it_throws_exception_if_order_has_no_shipment_but_shipment_total_is_greater_than_0(
         OrderInterface $order,
-        ZoneInterface $zone
+        ZoneInterface $zone,
+        CustomerTaxCategoryInterface $customerTaxCategory
     ): void {
         $order->getShippingTotal()->willReturn(10);
         $order->getShipments()->willReturn(new ArrayCollection([]));
 
-        $this->shouldThrow(\LogicException::class)->during('apply', [$order, $zone]);
+        $this
+            ->shouldThrow(\LogicException::class)
+            ->during('apply', [$order, $zone, $customerTaxCategory])
+        ;
     }
 
     function it_does_nothing_if_tax_rate_cannot_be_resolved(
@@ -117,30 +130,35 @@ final class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
         OrderInterface $order,
         ShipmentInterface $shipment,
         ShippingMethodInterface $shippingMethod,
-        ZoneInterface $zone
+        ZoneInterface $zone,
+        CustomerTaxCategoryInterface $customerTaxCategory
     ): void {
         $order->getShippingTotal()->willReturn(100);
         $order->getShipments()->willReturn(new ArrayCollection([$shipment->getWrappedObject()]));
         $shipment->getMethod()->willReturn($shippingMethod);
 
-        $taxRateResolver->resolve($shippingMethod, ['zone' => $zone])->willReturn(null);
+        $taxRateResolver
+            ->resolve($shippingMethod, ['zone' => $zone, 'customerTaxCategory' => $customerTaxCategory])
+            ->willReturn(null)
+        ;
 
         $calculator->calculate(Argument::any())->shouldNotBeCalled();
         $order->addAdjustment(Argument::any())->shouldNotBeCalled();
 
-        $this->apply($order, $zone);
+        $this->apply($order, $zone, $customerTaxCategory);
     }
 
     function it_does_nothing_if_order_has_0_shipping_total(
         TaxRateResolverInterface $taxRateResolver,
         OrderInterface $order,
-        ZoneInterface $zone
+        ZoneInterface $zone,
+        CustomerTaxCategoryInterface $customerTaxCategory
     ): void {
         $order->getShippingTotal()->willReturn(0);
 
         $taxRateResolver->resolve(Argument::any())->shouldNotBeCalled();
         $order->addAdjustment(Argument::any())->shouldNotBeCalled();
 
-        $this->apply($order, $zone);
+        $this->apply($order, $zone, $customerTaxCategory);
     }
 }

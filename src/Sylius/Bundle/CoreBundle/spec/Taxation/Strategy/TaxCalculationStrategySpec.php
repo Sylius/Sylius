@@ -16,6 +16,7 @@ namespace spec\Sylius\Bundle\CoreBundle\Taxation\Strategy;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\CustomerTaxCategoryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Taxation\Applicator\OrderTaxesApplicatorInterface;
 use Sylius\Component\Core\Taxation\Strategy\TaxCalculationStrategyInterface;
@@ -32,7 +33,7 @@ final class TaxCalculationStrategySpec extends ObjectBehavior
         $this->beConstructedWith('order_items_based', [$applicatorOne, $applicatorTwo]);
     }
 
-    function it_implements_a_tax_calculation_strategy_interface(): void
+    function it_implements_tax_calculation_strategy_interface(): void
     {
         $this->shouldImplement(TaxCalculationStrategyInterface::class);
     }
@@ -55,34 +56,37 @@ final class TaxCalculationStrategySpec extends ObjectBehavior
     function it_can_be_supported_when_the_tax_calculation_strategy_from_order_channel_matches_the_strategy_type(
         ChannelInterface $channel,
         OrderInterface $order,
-        ZoneInterface $zone
+        ZoneInterface $zone,
+        CustomerTaxCategoryInterface $customerTaxCategory
     ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getTaxCalculationStrategy()->willReturn('order_items_based');
 
-        $this->supports($order, $zone)->shouldReturn(true);
+        $this->supports($order, $zone, $customerTaxCategory)->shouldReturn(true);
     }
 
     function it_cannot_be_supported_when_the_tax_calculation_strategy_from_order_channel_does_not_match_the_strategy_type(
         ChannelInterface $channel,
         OrderInterface $order,
-        ZoneInterface $zone
+        ZoneInterface $zone,
+        CustomerTaxCategoryInterface $customerTaxCategory
     ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getTaxCalculationStrategy()->willReturn('order_item_units_based');
 
-        $this->supports($order, $zone)->shouldReturn(false);
+        $this->supports($order, $zone, $customerTaxCategory)->shouldReturn(false);
     }
 
     function it_applies_all_of_the_applicators(
         OrderTaxesApplicatorInterface $applicatorOne,
         OrderTaxesApplicatorInterface $applicatorTwo,
         OrderInterface $order,
-        ZoneInterface $zone
+        ZoneInterface $zone,
+        CustomerTaxCategoryInterface $customerTaxCategory
     ): void {
-        $applicatorOne->apply($order, $zone)->shouldBeCalled();
-        $applicatorTwo->apply($order, $zone)->shouldBeCalled();
+        $applicatorOne->apply($order, $zone, $customerTaxCategory)->shouldBeCalled();
+        $applicatorTwo->apply($order, $zone, $customerTaxCategory)->shouldBeCalled();
 
-        $this->applyTaxes($order, $zone);
+        $this->applyTaxes($order, $zone, $customerTaxCategory);
     }
 }

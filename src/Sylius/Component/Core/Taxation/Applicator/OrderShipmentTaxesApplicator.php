@@ -15,6 +15,7 @@ namespace Sylius\Component\Core\Taxation\Applicator;
 
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
+use Sylius\Component\Core\Model\CustomerTaxCategoryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
@@ -61,14 +62,21 @@ class OrderShipmentTaxesApplicator implements OrderTaxesApplicatorInterface
     /**
      * {@inheritdoc}
      */
-    public function apply(OrderInterface $order, ZoneInterface $zone): void
-    {
+    public function apply(
+        OrderInterface $order,
+        ZoneInterface $zone,
+        CustomerTaxCategoryInterface $customerTaxCategory
+    ): void {
         $shippingTotal = $order->getShippingTotal();
         if (0 === $shippingTotal) {
             return;
         }
 
-        $taxRate = $this->taxRateResolver->resolve($this->getShippingMethod($order), ['zone' => $zone]);
+        $taxRate = $this->taxRateResolver->resolve(
+            $this->getShippingMethod($order),
+            ['zone' => $zone, 'customerTaxCategory' => $customerTaxCategory]
+        );
+
         if (null === $taxRate) {
             return;
         }

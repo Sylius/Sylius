@@ -16,6 +16,7 @@ namespace Sylius\Component\Core\Taxation\Applicator;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Distributor\IntegerDistributorInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
+use Sylius\Component\Core\Model\CustomerTaxCategoryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Order\Factory\AdjustmentFactoryInterface;
@@ -72,13 +73,19 @@ class OrderItemsTaxesApplicator implements OrderTaxesApplicatorInterface
      *
      * @throws \InvalidArgumentException
      */
-    public function apply(OrderInterface $order, ZoneInterface $zone): void
-    {
+    public function apply(
+        OrderInterface $order,
+        ZoneInterface $zone,
+        CustomerTaxCategoryInterface $customerTaxCategory
+    ): void {
         foreach ($order->getItems() as $item) {
             $quantity = $item->getQuantity();
             Assert::notSame($quantity, 0, 'Cannot apply tax to order item with 0 quantity.');
 
-            $taxRate = $this->taxRateResolver->resolve($item->getVariant(), ['zone' => $zone]);
+            $taxRate = $this->taxRateResolver->resolve(
+                $item->getVariant(),
+                ['zone' => $zone, 'customerTaxCategory' => $customerTaxCategory]
+            );
 
             if (null === $taxRate) {
                 continue;

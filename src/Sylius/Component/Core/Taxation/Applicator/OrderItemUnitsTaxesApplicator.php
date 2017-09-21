@@ -15,6 +15,7 @@ namespace Sylius\Component\Core\Taxation\Applicator;
 
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
+use Sylius\Component\Core\Model\CustomerTaxCategoryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Order\Factory\AdjustmentFactoryInterface;
@@ -59,10 +60,16 @@ class OrderItemUnitsTaxesApplicator implements OrderTaxesApplicatorInterface
     /**
      * {@inheritdoc}
      */
-    public function apply(OrderInterface $order, ZoneInterface $zone): void
-    {
+    public function apply(
+        OrderInterface $order,
+        ZoneInterface $zone,
+        CustomerTaxCategoryInterface $customerTaxCategory
+    ): void {
         foreach ($order->getItems() as $item) {
-            $taxRate = $this->taxRateResolver->resolve($item->getVariant(), ['zone' => $zone]);
+            $taxRate = $this->taxRateResolver->resolve(
+                $item->getVariant(),
+                ['zone' => $zone, 'customerTaxCategory' => $customerTaxCategory]
+            );
             if (null === $taxRate) {
                 continue;
             }

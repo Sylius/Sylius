@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\Taxation\Strategy;
 
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Core\Model\CustomerTaxCategoryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
 /**
@@ -24,8 +25,13 @@ interface TaxCalculationStrategyInterface
     /**
      * @param OrderInterface $order
      * @param ZoneInterface $zone
+     * @param CustomerTaxCategoryInterface $customerTaxCategory
      */
-    public function applyTaxes(OrderInterface $order, ZoneInterface $zone): void;
+    public function applyTaxes(
+        OrderInterface $order,
+        ZoneInterface $zone,
+        CustomerTaxCategoryInterface $customerTaxCategory
+    ): void;
 
     /**
      * @return string
@@ -35,8 +41,13 @@ interface TaxCalculationStrategyInterface
     /**
      * @param OrderInterface $order
      * @param ZoneInterface $zone
+     * @param CustomerTaxCategoryInterface $customerTaxCategory
      *
      * @return bool
      */
-    public function supports(OrderInterface $order, ZoneInterface $zone): bool;
+    public function supports(
+        OrderInterface $order,
+        ZoneInterface $zone,
+        CustomerTaxCategoryInterface $customerTaxCategory
+    ): bool;
 }

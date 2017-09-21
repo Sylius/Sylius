@@ -19,6 +19,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Distributor\IntegerDistributorInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
+use Sylius\Component\Core\Model\CustomerTaxCategoryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
@@ -64,7 +65,8 @@ final class OrderItemsTaxesApplicatorSpec extends ObjectBehavior
         OrderItemUnitInterface $unit2,
         ProductVariantInterface $productVariant,
         TaxRateInterface $taxRate,
-        ZoneInterface $zone
+        ZoneInterface $zone,
+        CustomerTaxCategoryInterface $customerTaxCategory
     ): void {
         $order->getItems()->willReturn($items);
 
@@ -74,7 +76,10 @@ final class OrderItemsTaxesApplicatorSpec extends ObjectBehavior
         $orderItem->getQuantity()->willReturn(2);
 
         $orderItem->getVariant()->willReturn($productVariant);
-        $taxRateResolver->resolve($productVariant, ['zone' => $zone])->willReturn($taxRate);
+        $taxRateResolver
+            ->resolve($productVariant, ['zone' => $zone, 'customerTaxCategory' => $customerTaxCategory])
+            ->willReturn($taxRate)
+        ;
 
         $orderItem->getTotal()->willReturn(1000);
         $calculator->calculate(1000, $taxRate)->willReturn(100);
@@ -95,20 +100,24 @@ final class OrderItemsTaxesApplicatorSpec extends ObjectBehavior
         $unit1->addAdjustment($taxAdjustment1)->shouldBeCalled();
         $unit2->addAdjustment($taxAdjustment2)->shouldBeCalled();
 
-        $this->apply($order, $zone);
+        $this->apply($order, $zone, $customerTaxCategory);
     }
 
     function it_throws_an_invalid_argument_exception_if_order_item_has_0_quantity(
         OrderInterface $order,
         OrderItemInterface $orderItem,
-        ZoneInterface $zone
+        ZoneInterface $zone,
+        CustomerTaxCategoryInterface $customerTaxCategory
     ): void {
         $items = new ArrayCollection([$orderItem->getWrappedObject()]);
         $order->getItems()->willReturn($items);
 
         $orderItem->getQuantity()->willReturn(0);
 
-        $this->shouldThrow(\InvalidArgumentException::class)->during('apply', [$order, $zone]);
+        $this
+            ->shouldThrow(\InvalidArgumentException::class)
+            ->during('apply', [$order, $zone, $customerTaxCategory])
+        ;
     }
 
     function it_does_nothing_if_tax_rate_cannot_be_resolved(
@@ -118,7 +127,8 @@ final class OrderItemsTaxesApplicatorSpec extends ObjectBehavior
         OrderInterface $order,
         OrderItemInterface $orderItem,
         ProductVariantInterface $productVariant,
-        ZoneInterface $zone
+        ZoneInterface $zone,
+        CustomerTaxCategoryInterface $customerTaxCategory
     ): void {
         $order->getItems()->willReturn($items);
 
@@ -132,11 +142,14 @@ final class OrderItemsTaxesApplicatorSpec extends ObjectBehavior
         $orderItem->getQuantity()->willReturn(5);
 
         $orderItem->getVariant()->willReturn($productVariant);
-        $taxRateResolver->resolve($productVariant, ['zone' => $zone])->willReturn(null);
+        $taxRateResolver
+            ->resolve($productVariant, ['zone' => $zone, 'customerTaxCategory' => $customerTaxCategory])
+            ->willReturn(null)
+        ;
 
         $orderItem->getUnits()->shouldNotBeCalled();
 
-        $this->apply($order, $zone);
+        $this->apply($order, $zone, $customerTaxCategory);
     }
 
     function it_does_not_apply_taxes_with_amount_0(
@@ -152,7 +165,8 @@ final class OrderItemsTaxesApplicatorSpec extends ObjectBehavior
         OrderItemUnitInterface $unit2,
         ProductVariantInterface $productVariant,
         TaxRateInterface $taxRate,
-        ZoneInterface $zone
+        ZoneInterface $zone,
+        CustomerTaxCategoryInterface $customerTaxCategory
     ): void {
         $order->getItems()->willReturn($items);
 
@@ -162,7 +176,10 @@ final class OrderItemsTaxesApplicatorSpec extends ObjectBehavior
         $orderItem->getQuantity()->willReturn(2);
         $orderItem->getVariant()->willReturn($productVariant);
 
-        $taxRateResolver->resolve($productVariant, ['zone' => $zone])->willReturn($taxRate);
+        $taxRateResolver
+            ->resolve($productVariant, ['zone' => $zone, 'customerTaxCategory' => $customerTaxCategory])
+            ->willReturn($taxRate)
+        ;
 
         $orderItem->getTotal()->willReturn(1000);
         $calculator->calculate(1000, $taxRate)->willReturn(0);
@@ -180,6 +197,6 @@ final class OrderItemsTaxesApplicatorSpec extends ObjectBehavior
             ->shouldNotBeCalled()
         ;
 
-        $this->apply($order, $zone);
+        $this->apply($order, $zone, $customerTaxCategory);
     }
 }

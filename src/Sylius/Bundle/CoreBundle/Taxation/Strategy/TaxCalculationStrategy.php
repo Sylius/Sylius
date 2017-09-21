@@ -15,6 +15,7 @@ namespace Sylius\Bundle\CoreBundle\Taxation\Strategy;
 
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\CustomerTaxCategoryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Taxation\Applicator\OrderTaxesApplicatorInterface;
 use Sylius\Component\Core\Taxation\Strategy\TaxCalculationStrategyInterface;
@@ -50,10 +51,13 @@ final class TaxCalculationStrategy implements TaxCalculationStrategyInterface
     /**
      * {@inheritdoc}
      */
-    public function applyTaxes(OrderInterface $order, ZoneInterface $zone): void
-    {
+    public function applyTaxes(
+        OrderInterface $order,
+        ZoneInterface $zone,
+        CustomerTaxCategoryInterface $customerTaxCategory
+    ): void {
         foreach ($this->applicators as $applicator) {
-            $applicator->apply($order, $zone);
+            $applicator->apply($order, $zone, $customerTaxCategory);
         }
     }
 
@@ -62,8 +66,11 @@ final class TaxCalculationStrategy implements TaxCalculationStrategyInterface
      *
      * @throws \InvalidArgumentException
      */
-    public function supports(OrderInterface $order, ZoneInterface $zone): bool
-    {
+    public function supports(
+        OrderInterface $order,
+        ZoneInterface $zone,
+        CustomerTaxCategoryInterface $customerTaxCategory
+    ): bool {
         $channel = $order->getChannel();
 
         /** @var ChannelInterface $channel */

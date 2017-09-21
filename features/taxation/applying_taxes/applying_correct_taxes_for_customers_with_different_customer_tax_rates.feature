@@ -15,7 +15,7 @@ Feature: Applying correct taxes for customers with different customer tax rates
         And the store has a product "PHP T-Shirt" priced at "$100.00"
         And it belongs to "Clothes" tax category
 
-    @ui @todo
+    @ui
     Scenario: Applying correct taxes for logged in customer
         Given there is a customer "Mike Ross" with an email "mike@ross.com" and a password "harvard"
         And this customer belongs to group "General"
@@ -24,7 +24,7 @@ Feature: Applying correct taxes for customers with different customer tax rates
         Then my cart total should be "$123.00"
         And my cart taxes should be "$23.00"
 
-    @ui @todo
+    @ui
     Scenario: Applying correct taxes for different logged in customer
         Given there is a customer "Harvey Specter" with an email "harvey@specter.com" and a password "donna"
         And this customer belongs to group "Business"
