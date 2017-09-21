@@ -4,6 +4,8 @@
 sylius:
     channel:
         delete_error: 'کانال نمی‌تواند حذف شود. حداقل یک کانال فعال لازم است.'
+    checkout:
+        complete_error: 'در تکمیل سفارش خطای غیرمنتظره ای وجود داشت. لطفا سفارش خود را مجددا قرار دهید.'
     contact:
         request_success: 'درخواست تماس شما با موفقیت ثبت شد.'
     customer:
@@ -11,4 +13,7 @@ sylius:
         set_address_as_default: 'آدرس به عنوان پیش‌فرض تنظیم شد.'
     order:
         apply_state_machine_transition_error: 'در به‌روز‌رسانی یک سفارش خطای غیرمنتظره‌ای روی داده است. لطفا بار دیگر تلاش کنید.'
+        promotion_integrity: 'شما دیگر واجد شرایط برای این تخفیف نمی باشید %promotionName%.'
         total_integrity: 'مجموع سفارش شما تغییر کرده است، بار دیگر اطلاعات سفارش خود را بررسی نموده و آن را تأیید کنید.'
+    product:
+        out_of_stock: 'تنها %quantity% تعداد از این محصول در انبار م باشد.'

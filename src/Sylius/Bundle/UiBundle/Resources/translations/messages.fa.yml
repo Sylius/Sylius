@@ -333,7 +333,7 @@ sylius:
         login_button: 'ورود'
         login_sylius_store: 'ورود <small> فروشگاه سایلیوس </small>'
         logout: 'خروج'
-        main_taxon: 'رده اصلی'
+        main_taxon: 'طبقه بندی اصلی'
         manage: 'مدیریت'
         manage_adjustments: 'مدیریت سایر هزینه ها'
         manage_attributes: 'مدیریت قابلیت ها'

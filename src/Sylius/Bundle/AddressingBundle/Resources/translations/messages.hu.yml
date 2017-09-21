@@ -11,6 +11,7 @@ sylius:
             last_name: Vezetéknév
             phone_number: Telefonszám
             postcode: Irányítószám
+            street: Utca, házszám
             province: Tartomány/állam
             zone: Zóna
         country:

@@ -1,0 +1,7 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    resource:
+        not_enabled: "Den valgte ressource er deaktiveret"
+        not_disabled: "Den valgte ressource er aktiveret"
