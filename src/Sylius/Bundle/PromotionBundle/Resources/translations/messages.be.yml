@@ -24,8 +24,11 @@ sylius:
             amount: Сума
             usage_limit: Ліміт карыстання
         promotion_rule:
+            customer_group: Група кліентаў
             cart_quantity_configuration:
                 count: Колькасць
+            contains_product_configuration:
+                variants: Прадукты
             item_total_configuration:
                 amount: Сума
             shipping_country_configuration:

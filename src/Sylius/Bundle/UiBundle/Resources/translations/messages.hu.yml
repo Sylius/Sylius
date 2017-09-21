@@ -600,6 +600,7 @@ sylius:
         shipping: 'Szállítás'
         shipping_address: 'Szállítási cím'
         shipping_and_payment_methods: 'Szállítási és fizetési módszerek'
+        shipping_categories: 'Szállítási kategóriák'
         shipping_category: 'Szállítási kategória'
         shipping_charges: 'Szállítási díjak'
         shipping_method: 'Szállítási mód'

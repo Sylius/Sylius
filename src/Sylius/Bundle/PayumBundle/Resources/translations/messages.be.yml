@@ -9,3 +9,5 @@ sylius:
             paypal:
                 password: Пароль
                 username: Юзернэйм
+    payum_gateway_factory:
+        offline: Афлайн

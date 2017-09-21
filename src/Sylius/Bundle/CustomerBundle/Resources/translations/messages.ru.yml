@@ -12,7 +12,7 @@ sylius:
             gender: Пол
             birthday: День рождения
             billing_address: Адрес для выставления счета
-            different_billing_address: Использовать другой адрес для составления счета?
+            different_billing_address: Использовать другой адрес для выставления счета?
             only_customer_registration: Создать учетную запись?
             subscribed_to_newsletter: Подписаться на рассылку новостей
         customer_group:

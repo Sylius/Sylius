@@ -36,6 +36,9 @@ sylius:
             configuration: Konfiguration
             description: Beskrivelse
             enabled: Aktiveret
+            match_all_category_requirement: Alle enheder skal matche med forsendelseskategorien
+            match_any_category_requirement: Mindst en enhed skal matche med forsendelseskategorien
+            match_none_category_requirement: Ingen af enhederne behøves at matche med forsendelseskategorien
             name: Navn
             position: Position
             tax_category: Momskategori
