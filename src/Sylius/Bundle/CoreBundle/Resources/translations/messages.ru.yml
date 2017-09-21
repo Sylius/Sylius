@@ -11,7 +11,7 @@ sylius:
             coupon: Купон
         checkout:
             addressing:
-                different_billing_address: Использовать другой адрес для составления счета?
+                different_billing_address: Использовать другой адрес для выставления счета?
             payment_method: Способ оплаты
             shipping_method: Способ доставки
         promotion:
@@ -25,7 +25,7 @@ sylius:
             name: Название
             roles: Роли
         channel:
-            contact_email: Контактный адрес электронной почты
+            contact_email: Контактный email
             currencies: Валюты
             currency_base: Базовая валюта
             account_verification_required: Требуется ли подтверждение аккаунта?
