@@ -75,62 +75,11 @@ For the contributing process questions, please refer to the `Contributing Guide 
 .. _Gulp: http://gulpjs.com/
 .. _Node.js: https://nodejs.org/en/download/
 
-
 How to contribute using Sylius Vagrant
 --------------------------------------
 
-.. warning::
+If you would like to contribute to the repo without worrying about environment, you can follow `this guide <https://github.com/Sylius/Vagrant/blob/master/README.md#configure-vagrant-to-contribute-on-sylius-core>`_ to setup you vagrant machine
 
-    This article assumes you're familiar with `Composer`_, a dependency manager
-    for PHP. It also assumes you have `Composer installed globally`_.
-    Basic knowledge about `Vagrant <https://www.vagrantup.com/about.html>`_ is also required,
-    and of course `installed Vagrant <https://www.vagrantup.com/docs/installation/>`_.
-
-What's Vagrant?
-~~~~~~~~~~~~~~~
-
-Vagrant is a tool for building complete development environments, that in case of Sylius
-will help you to quickly have full application running on your machine.
-
-.. tip::
-
-    Learn more about `Vagrant <https://www.vagrantup.com/about.html>`_.
-    Vagrant `installation <https://www.vagrantup.com/docs/installation/>`_ info.
-
-How to install the Sylius Vagrant?
-----------------------------------
-
-1. Clone the `Sylius/Vagrant <https://github.com/Sylius/Vagrant>`_ repository into the ``/sylius/`` directory:
-
-.. code-block:: bash
-
-    $ git clone git@github.com:Sylius/Vagrant.git sylius
-
-2. Edit "Vagrantfile" and replace this following line:
-
-.. code-block:: bash
-
-    sylius_config.vm.provision :shell, privileged: false, path: "shell_provisioner/sylius/create.sh"
-
-By this one:
-
-.. code-block:: bash
-
-    sylius_config.vm.provision :shell, privileged: false, path: "shell_provisioner/sylius/create_for_contribution.sh"
-
-3. Clone your own sylius repository
-
-.. code-block:: bash
-
-    $ git clone https://github.com/{user}/Sylius sites/sylius
-
-Replace {user} with your github account user name
-
-4. Build Vagrant:
-
-.. code-block:: bash
-
-    $ vagrant up
 
 Contributing Code
 -----------------
