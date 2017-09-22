@@ -47,7 +47,7 @@ class DefaultPaymentMethodResolver implements DefaultPaymentMethodResolverInterf
      */
     public function getDefaultPaymentMethod(PaymentInterface $subject): PaymentMethodInterface
     {
-        // @var CorePaymentInterface $subject
+        /** @var CorePaymentInterface $subject */
         Assert::isInstanceOf($subject, CorePaymentInterface::class);
 
         /** @var ChannelInterface $channel */

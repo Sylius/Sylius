@@ -55,7 +55,7 @@ final class ZoneMatcher implements ZoneMatcherInterface
     {
         $zones = [];
 
-        // @var ZoneInterface $zone
+        /** @var ZoneInterface $zone */
         foreach ($availableZones = $this->getZones($scope) as $zone) {
             if ($this->addressBelongsToZone($address, $zone)) {
                 $zones[$zone->getType()] = $zone;

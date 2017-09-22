@@ -64,7 +64,7 @@ class UniqueReviewerEmailValidator extends ConstraintValidator
      */
     public function validate($review, Constraint $constraint): void
     {
-        // @var ReviewerInterface|null $customer
+        /** @var ReviewerInterface|null $customer */
         $customer = $review->getAuthor();
 
         $token = $this->tokenStorage->getToken();

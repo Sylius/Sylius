@@ -54,7 +54,7 @@ final class ShippingChargesProcessor implements OrderProcessorInterface
      */
     public function process(BaseOrderInterface $order): void
     {
-        // @var OrderInterface $order
+        /** @var OrderInterface $order */
         Assert::isInstanceOf($order, OrderInterface::class);
 
         // Remove all shipping adjustments, we recalculate everything from scratch.

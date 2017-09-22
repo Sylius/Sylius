@@ -33,10 +33,10 @@ final class PromotionDateRangeValidator extends ConstraintValidator
             return;
         }
 
-        // @var PromotionInterface $value
+        /** @var PromotionInterface $value */
         Assert::isInstanceOf($value, PromotionInterface::class);
 
-        // @var PromotionDateRange $constraint
+        /** @var PromotionDateRange $constraint */
         Assert::isInstanceOf($constraint, PromotionDateRange::class);
 
         if (null === $value->getStartsAt() || null === $value->getEndsAt()) {

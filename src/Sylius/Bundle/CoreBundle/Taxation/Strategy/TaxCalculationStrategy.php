@@ -66,7 +66,7 @@ final class TaxCalculationStrategy implements TaxCalculationStrategyInterface
     {
         $channel = $order->getChannel();
 
-        // @var ChannelInterface $channel
+        /** @var ChannelInterface $channel */
         Assert::isInstanceOf($channel, ChannelInterface::class);
 
         return $channel->getTaxCalculationStrategy() === $this->type;

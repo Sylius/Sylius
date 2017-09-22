@@ -45,7 +45,7 @@ class DefaultShippingMethodResolver implements DefaultShippingMethodResolverInte
      */
     public function getDefaultShippingMethod(ShipmentInterface $shipment): ShippingMethodInterface
     {
-        // @var CoreShipmentInterface $shipment
+        /** @var CoreShipmentInterface $shipment */
         Assert::isInstanceOf($shipment, CoreShipmentInterface::class);
 
         /** @var ChannelInterface $channel */

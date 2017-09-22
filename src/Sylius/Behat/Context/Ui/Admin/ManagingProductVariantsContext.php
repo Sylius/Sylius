@@ -158,7 +158,7 @@ final class ManagingProductVariantsContext implements Context
      */
     public function iSetItsPriceTo($price = null, $channelName = null)
     {
-        $this->createPage->specifyPrice($price, (null === $channelName) ? $this->sharedStorage->get('channel') : $channelName);
+        $this->createPage->specifyPrice($price, $channelName ?? $this->sharedStorage->get('channel'));
     }
 
     /**

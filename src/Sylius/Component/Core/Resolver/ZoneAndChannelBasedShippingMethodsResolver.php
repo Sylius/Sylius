@@ -65,7 +65,7 @@ class ZoneAndChannelBasedShippingMethodsResolver implements ShippingMethodsResol
      */
     public function getSupportedMethods(ShippingSubjectInterface $subject): array
     {
-        // @var ShipmentInterface $subject
+        /** @var ShipmentInterface $subject */
         Assert::true($this->supports($subject));
         /** @var OrderInterface $order */
         $order = $subject->getOrder();

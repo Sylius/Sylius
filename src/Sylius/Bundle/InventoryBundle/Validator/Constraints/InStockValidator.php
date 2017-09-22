@@ -49,7 +49,7 @@ final class InStockValidator extends ConstraintValidator
      */
     public function validate($value, Constraint $constraint): void
     {
-        // @var InStock $constraint
+        /** @var InStock $constraint */
         Assert::isInstanceOf($constraint, InStock::class);
 
         $stockable = $this->accessor->getValue($value, $constraint->stockablePath);
