@@ -68,7 +68,7 @@ final class OrderTaxesProcessor implements OrderProcessorInterface
      */
     public function process(BaseOrderInterface $order): void
     {
-        /** @var OrderInterface $order */
+        // @var OrderInterface $order
         Assert::isInstanceOf($order, OrderInterface::class);
 
         $this->clearTaxes($order);
@@ -86,6 +86,7 @@ final class OrderTaxesProcessor implements OrderProcessorInterface
         foreach ($this->strategyRegistry->all() as $strategy) {
             if ($strategy->supports($order, $zone)) {
                 $strategy->applyTaxes($order, $zone);
+
                 return;
             }
         }

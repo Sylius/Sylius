@@ -73,7 +73,7 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
     ) {
         $this->channelFactory = $channelFactory;
         $this->localeRepository = $localeRepository;
-        $this->currencyRepository= $currencyRepository;
+        $this->currencyRepository = $currencyRepository;
         $this->zoneRepository = $zoneRepository;
 
         $this->faker = \Faker\Factory::create();

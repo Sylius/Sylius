@@ -26,6 +26,6 @@ final class RandomInvoiceNumberGenerator implements InvoiceNumberGeneratorInterf
      */
     public function generate(OrderInterface $order, PaymentInterface $payment): string
     {
-        return mt_rand(1, 100000).'-'.mt_rand(1, 100000);
+        return mt_rand(1, 100000) . '-' . mt_rand(1, 100000);
     }
 }

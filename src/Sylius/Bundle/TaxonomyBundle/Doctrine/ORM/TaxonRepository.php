@@ -94,7 +94,7 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
     {
         return $this->createTranslationBasedQueryBuilder($locale)
             ->andWhere('translation.name LIKE :name')
-            ->setParameter('name', '%'.$phrase.'%')
+            ->setParameter('name', '%' . $phrase . '%')
             ->getQuery()
             ->getResult()
         ;

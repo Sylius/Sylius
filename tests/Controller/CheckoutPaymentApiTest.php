@@ -56,7 +56,7 @@ final class CheckoutPaymentApiTest extends CheckoutApiTestCase
         $this->addItemToCart($cartId);
         $this->addressOrder($cartId);
 
-        $this->client->request('PATCH',  $this->getSelectPaymentUrl($cartId), [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('PATCH', $this->getSelectPaymentUrl($cartId), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'checkout/payment_invalid_order_state', Response::HTTP_INTERNAL_SERVER_ERROR);
@@ -86,7 +86,7 @@ final class CheckoutPaymentApiTest extends CheckoutApiTestCase
         }
 EOT;
 
-        $this->client->request('PUT',  $this->getSelectPaymentUrl($cartId), [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('PUT', $this->getSelectPaymentUrl($cartId), [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
 

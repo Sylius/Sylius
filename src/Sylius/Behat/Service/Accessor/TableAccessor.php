@@ -140,7 +140,7 @@ final class TableAccessor implements TableAccessorInterface
                 return false;
             }
 
-            $searchedValue = (string)$searchedValue;
+            $searchedValue = (string) $searchedValue;
             $searchedValue = trim($searchedValue);
 
             if (0 === strpos($searchedValue, '%') && (strlen($searchedValue) - 1) === strrpos($searchedValue, '%')) {

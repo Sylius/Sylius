@@ -37,8 +37,8 @@ class OrderController extends BaseOrderController
 
             return $this->redirectHandler->redirectToRoute(
                 $configuration,
-                isset($options['route']) ? $options['route'] : 'sylius_shop_homepage',
-                isset($options['parameters']) ? $options['parameters'] : []
+                $options['route'] ?? 'sylius_shop_homepage',
+                $options['parameters'] ?? []
             );
         }
 
@@ -48,7 +48,7 @@ class OrderController extends BaseOrderController
 
         $view = View::create()
             ->setData([
-                'order' => $order
+                'order' => $order,
             ])
             ->setTemplate($configuration->getParameters()->get('template'))
         ;

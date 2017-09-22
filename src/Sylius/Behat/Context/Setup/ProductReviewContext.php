@@ -88,7 +88,7 @@ final class ProductReviewContext implements Context
     ) {
         $review = $this->createProductReview($product, $title, $rating, $title, $customer);
         if (null !== $daysSinceCreation) {
-            $review->setCreatedAt(new \DateTime('-'.$daysSinceCreation.' days'));
+            $review->setCreatedAt(new \DateTime('-' . $daysSinceCreation . ' days'));
         }
 
         $this->productReviewRepository->add($review);
@@ -131,7 +131,7 @@ final class ProductReviewContext implements Context
     {
         $customer = $this->sharedStorage->get('customer');
         foreach ($rates as $key => $rate) {
-            $review = $this->createProductReview($product, 'Title '.$key, $rate, 'Comment '.$key, $customer);
+            $review = $this->createProductReview($product, 'Title ' . $key, $rate, 'Comment ' . $key, $customer);
             $this->productReviewRepository->add($review);
         }
     }

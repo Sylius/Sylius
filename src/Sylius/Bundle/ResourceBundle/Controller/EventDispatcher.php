@@ -42,7 +42,7 @@ final class EventDispatcher implements EventDispatcherInterface
         string $eventName,
         RequestConfiguration $requestConfiguration,
         ResourceInterface $resource
-    ):  ResourceControllerEvent {
+    ): ResourceControllerEvent {
         $eventName = $requestConfiguration->getEvent() ?: $eventName;
         $metadata = $requestConfiguration->getMetadata();
         $event = new ResourceControllerEvent($resource);
@@ -59,7 +59,7 @@ final class EventDispatcher implements EventDispatcherInterface
         string $eventName,
         RequestConfiguration $requestConfiguration,
         $resources
-    ):  ResourceControllerEvent {
+    ): ResourceControllerEvent {
         $eventName = $requestConfiguration->getEvent() ?: $eventName;
         $metadata = $requestConfiguration->getMetadata();
         $event = new ResourceControllerEvent($resources);

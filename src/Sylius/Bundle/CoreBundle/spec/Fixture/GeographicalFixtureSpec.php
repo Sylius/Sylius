@@ -253,7 +253,7 @@ final class GeographicalFixtureSpec extends ObjectBehavior
                 'countries' => ['PL'],
                 'provinces' => [],
                 'zones' => [],
-            ]
+            ],
         ]]]);
     }
 
@@ -265,7 +265,7 @@ final class GeographicalFixtureSpec extends ObjectBehavior
                 'countries' => [],
                 'provinces' => ['PL-SL'],
                 'zones' => [],
-            ]
+            ],
         ]]]);
     }
 
@@ -277,7 +277,7 @@ final class GeographicalFixtureSpec extends ObjectBehavior
                 'countries' => [],
                 'provinces' => [],
                 'zones' => ['DAWG'],
-            ]
+            ],
         ]]]);
     }
 }

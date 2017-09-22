@@ -55,7 +55,7 @@ final class UnpaidOrdersStateUpdater implements UnpaidOrdersStateUpdaterInterfac
 
     public function cancel(): void
     {
-        $expiredUnpaidOrders = $this->orderRepository->findOrdersUnpaidSince(new \DateTime('-'.$this->expirationPeriod));
+        $expiredUnpaidOrders = $this->orderRepository->findOrdersUnpaidSince(new \DateTime('-' . $this->expirationPeriod));
         foreach ($expiredUnpaidOrders as $expiredUnpaidOrder) {
             $this->cancelOrder($expiredUnpaidOrder);
         }

@@ -42,7 +42,7 @@ final class OrderPricesRecalculator implements OrderProcessorInterface
      */
     public function process(BaseOrderInterface $order): void
     {
-        /** @var OrderInterface $order */
+        // @var OrderInterface $order
         Assert::isInstanceOf($order, OrderInterface::class);
         $channel = $order->getChannel();
 

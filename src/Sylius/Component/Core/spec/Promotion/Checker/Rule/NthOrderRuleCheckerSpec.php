@@ -103,7 +103,6 @@ final class NthOrderRuleCheckerSpec extends ObjectBehavior
         $subject->getCustomer()->willReturn($customer);
         $customer->getId()->willReturn(null);
 
-
         $this->isEligible($subject, ['nth' => 1])->shouldReturn(true);
     }
 

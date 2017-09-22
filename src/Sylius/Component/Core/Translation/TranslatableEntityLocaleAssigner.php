@@ -52,6 +52,7 @@ final class TranslatableEntityLocaleAssigner implements TranslatableEntityLocale
     public function assignLocale(TranslatableInterface $translatableEntity): void
     {
         $fallbackLocale = $this->translationLocaleProvider->getDefaultLocaleCode();
+
         try {
             $currentLocale = $this->localeContext->getLocaleCode();
         } catch (LocaleNotFoundException $e) {

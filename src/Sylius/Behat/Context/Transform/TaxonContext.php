@@ -77,7 +77,7 @@ final class TaxonContext implements Context
     {
         return [
             $this->getTaxonByName($firstTaxon),
-            $this->getTaxonByName($secondTaxon)
+            $this->getTaxonByName($secondTaxon),
         ];
     }
 }

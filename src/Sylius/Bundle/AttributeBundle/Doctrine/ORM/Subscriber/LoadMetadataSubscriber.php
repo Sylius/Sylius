@@ -27,7 +27,7 @@ final class LoadMetadataSubscriber implements EventSubscriber
     /**
      * @var array
      */
-    protected $subjects;
+    private $subjects;
 
     /**
      * @param array $subjects
@@ -81,7 +81,7 @@ final class LoadMetadataSubscriber implements EventSubscriber
             'targetEntity' => $subjectClass,
             'inversedBy' => 'attributes',
             'joinColumns' => [[
-                'name' => $subject.'_id',
+                'name' => $subject . '_id',
                 'referencedColumnName' => $targetEntityMetadata->fieldMappings['id']['columnName'],
                 'nullable' => false,
                 'onDelete' => 'CASCADE',

@@ -78,8 +78,8 @@ class SyliusResourceExtensionTest extends AbstractExtensionTestCase
 
         $this->load([
              'translation' => [
-                 'locale_provider' => 'test.custom_locale_provider'
-             ]
+                 'locale_provider' => 'test.custom_locale_provider',
+             ],
          ]);
 
         $this->assertContainerBuilderHasAlias('sylius.translation_locale_provider', 'test.custom_locale_provider');

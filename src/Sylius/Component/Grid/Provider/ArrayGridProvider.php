@@ -34,7 +34,7 @@ final class ArrayGridProvider implements GridProviderInterface
     public function __construct(ArrayToDefinitionConverterInterface $converter, array $gridConfigurations)
     {
         foreach ($gridConfigurations as $code => $gridConfiguration) {
-            if (isset($gridConfiguration['extends']) && isset($gridConfigurations[$gridConfiguration['extends']])) {
+            if (isset($gridConfiguration['extends'], $gridConfigurations[$gridConfiguration['extends']])  ) {
                 $gridConfiguration = $this->extend($gridConfiguration, $gridConfigurations[$gridConfiguration['extends']]);
             }
 

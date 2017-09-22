@@ -49,7 +49,7 @@ final class ApiAccessTokenFixtureTest extends \PHPUnit_Framework_TestCase
     public function access_token_can_be_created_with_custom_secret(): void
     {
         $this->assertConfigurationIsValid([['custom' => [[
-            'user' => 'api@example.com'
+            'user' => 'api@example.com',
         ]]]], 'custom.*.user');
     }
 

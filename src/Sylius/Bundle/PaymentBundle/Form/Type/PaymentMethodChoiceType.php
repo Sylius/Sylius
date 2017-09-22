@@ -95,6 +95,7 @@ final class PaymentMethodChoiceType extends AbstractType
     {
         return ChoiceType::class;
     }
+
     /**
      * {@inheritdoc}
      */

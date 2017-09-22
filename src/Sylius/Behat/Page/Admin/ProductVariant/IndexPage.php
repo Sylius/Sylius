@@ -67,7 +67,6 @@ final class IndexPage extends BaseIndexPage implements IndexPageInterface
         });
     }
 
-
     /**
      * {@inheritdoc}
      */

@@ -245,7 +245,6 @@ EOT;
         $this->assertResponse($response, 'taxon/create_with_multiple_translations_response', Response::HTTP_CREATED);
     }
 
-
     /**
      * @test
      */
@@ -305,9 +304,9 @@ EOT;
 
         $this->client->request('POST', '/api/v1/taxons/', [], [
             'images' => [
-                ['file' => new UploadedFile(sprintf('%s/../Resources/fixtures/ford.jpg', __DIR__), "ford")],
-                ['file' => new UploadedFile(sprintf('%s/../Resources/fixtures/mugs.jpg', __DIR__), "mugs")],
-            ]
+                ['file' => new UploadedFile(sprintf('%s/../Resources/fixtures/ford.jpg', __DIR__), 'ford')],
+                ['file' => new UploadedFile(sprintf('%s/../Resources/fixtures/mugs.jpg', __DIR__), 'mugs')],
+            ],
         ], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
@@ -322,7 +321,7 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/locales.yml');
         $taxons = $this->loadFixturesFromFile('resources/taxons.yml');
-        $taxon = $taxons["women"];
+        $taxon = $taxons['women'];
 
         $data =
 <<<EOT
@@ -350,7 +349,7 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/locales.yml');
         $taxons = $this->loadFixturesFromFile('resources/taxons.yml');
-        $taxon = $taxons["category"];
+        $taxon = $taxons['category'];
 
         $data =
 <<<EOT
@@ -377,7 +376,7 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/locales.yml');
         $taxons = $this->loadFixturesFromFile('resources/taxons.yml');
-        $taxon = $taxons["women"];
+        $taxon = $taxons['women'];
 
         $data =
 <<<EOT
@@ -403,7 +402,7 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/locales.yml');
         $taxons = $this->loadFixturesFromFile('resources/taxons.yml');
-        $taxon = $taxons["category"];
+        $taxon = $taxons['category'];
 
         $data =
 <<<EOT
@@ -493,7 +492,7 @@ EOT;
         }
 EOT;
 
-        $this->client->request('PUT', $this->getTaxonProductsPositionsChangeUrl($taxon) , [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('PUT', $this->getTaxonProductsPositionsChangeUrl($taxon), [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'taxon/update_validation_fail_response', Response::HTTP_BAD_REQUEST);

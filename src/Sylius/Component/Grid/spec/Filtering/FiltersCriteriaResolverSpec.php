@@ -91,7 +91,7 @@ final class FiltersCriteriaResolverSpec extends ObjectBehavior
             'criteria' => [
                 'favourite' => 'Pug',
                 'date' => ['start' => $startDate, 'end' => $endDate],
-            ]
+            ],
         ]);
 
         $this->getCriteria($grid, $parameters)->shouldIterateAs([
@@ -116,7 +116,7 @@ final class FiltersCriteriaResolverSpec extends ObjectBehavior
             'criteria' => [
                 'favourite' => 'Pug',
                 'date' => ['now' => $parametersDate],
-            ]
+            ],
         ]);
 
         $this->getCriteria($grid, $parameters)->shouldIterateAs([

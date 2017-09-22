@@ -133,7 +133,7 @@ class Customer extends BaseCustomer implements CustomerInterface
             return;
         }
 
-        /** @var ShopUserInterface|null $user */
+        // @var ShopUserInterface|null $user
         Assert::nullOrIsInstanceOf($user, ShopUserInterface::class);
 
         $previousUser = $this->user;

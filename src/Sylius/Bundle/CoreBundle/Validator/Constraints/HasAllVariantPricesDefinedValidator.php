@@ -39,7 +39,7 @@ final class HasAllVariantPricesDefinedValidator extends ConstraintValidator
 
         $channels = $product->getChannels();
 
-        /** @var ProductVariantInterface $variant */
+        // @var ProductVariantInterface $variant
         foreach ($product->getVariants() as $productVariant) {
             /** @var ChannelInterface $channel */
             foreach ($channels as $channel) {

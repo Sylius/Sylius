@@ -63,6 +63,7 @@ class ShopUser extends BaseUser implements ShopUserInterface
     {
         return $this->customer->getEmail();
     }
+
     /**
      * {@inheritdoc}
      */

@@ -31,7 +31,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
      */
     public function specifyBillingAddress(AddressInterface $address)
     {
-        $this->specifyAddress($address, UpdatePage::TYPE_BILLING);
+        $this->specifyAddress($address, self::TYPE_BILLING);
     }
 
     /**
@@ -39,7 +39,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
      */
     public function specifyShippingAddress(AddressInterface $address)
     {
-        $this->specifyAddress($address, UpdatePage::TYPE_SHIPPING);
+        $this->specifyAddress($address, self::TYPE_SHIPPING);
     }
 
     /**
@@ -47,11 +47,11 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
      */
     private function specifyAddress(AddressInterface $address, $addressType)
     {
-        $this->specifyElementValue($addressType.'_first_name', $address->getFirstName());
-        $this->specifyElementValue($addressType.'_last_name', $address->getLastName());
-        $this->specifyElementValue($addressType.'_street', $address->getStreet());
-        $this->specifyElementValue($addressType.'_city', $address->getCity());
-        $this->specifyElementValue($addressType.'_postcode', $address->getPostcode());
+        $this->specifyElementValue($addressType . '_first_name', $address->getFirstName());
+        $this->specifyElementValue($addressType . '_last_name', $address->getLastName());
+        $this->specifyElementValue($addressType . '_street', $address->getStreet());
+        $this->specifyElementValue($addressType . '_city', $address->getCity());
+        $this->specifyElementValue($addressType . '_postcode', $address->getPostcode());
 
         $this->chooseCountry($address->getCountryCode(), $addressType);
     }
@@ -116,7 +116,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
      */
     private function chooseCountry($country, $addressType)
     {
-        $this->getElement($addressType.'_country')->selectOption((null !== $country) ? $country : 'Select');
+        $this->getElement($addressType . '_country')->selectOption((null !== $country) ? $country : 'Select');
     }
 
     /**

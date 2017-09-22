@@ -153,7 +153,7 @@ final class ShippingMethodType extends AbstractResourceType
         $view->vars['prototypes'] = [];
         foreach ($form->getConfig()->getAttribute('prototypes') as $group => $prototypes) {
             foreach ($prototypes as $type => $prototype) {
-                $view->vars['prototypes'][$group.'_'.$type] = $prototype->createView($view);
+                $view->vars['prototypes'][$group . '_' . $type] = $prototype->createView($view);
             }
         }
     }

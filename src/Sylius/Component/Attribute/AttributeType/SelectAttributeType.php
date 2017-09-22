@@ -85,7 +85,7 @@ final class SelectAttributeType implements AttributeTypeInterface
             new All([
                 new Type([
                     'type' => 'string',
-                ])
+                ]),
             ]),
         ];
 

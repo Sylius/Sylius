@@ -57,7 +57,6 @@ checkers:
     PhpCsFixer\Fixer\FunctionNotation\MethodArgumentSpaceFixer: {}
     PhpCsFixer\Fixer\FunctionNotation\NoSpacesAfterFunctionNameFixer: {}
     PhpCsFixer\Fixer\FunctionNotation\ReturnTypeDeclarationFixer: {}
-    PhpCsFixer\Fixer\FunctionNotation\VoidReturnFixer: {}
     PhpCsFixer\Fixer\Import\NoLeadingImportSlashFixer: {}
     PhpCsFixer\Fixer\Import\NoUnusedImportsFixer: {}
     PhpCsFixer\Fixer\Import\OrderedImportsFixer: {}
@@ -139,7 +138,6 @@ checkers:
     PhpCsFixer\Fixer\Whitespace\NoTrailingWhitespaceFixer: {}
     PhpCsFixer\Fixer\Whitespace\NoWhitespaceInBlankLineFixer: {}
     PhpCsFixer\Fixer\Whitespace\SingleBlankLineAtEofFixer: {}
-    Symplify\CodingStandard\Fixer\Property\ArrayPropertyDefaultValueFixer: {}
 
 parameters:
     skip:

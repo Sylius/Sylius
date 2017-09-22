@@ -31,7 +31,7 @@ final class TemplatingTest extends WebTestCase
     {
         $client = self::createClient();
 
-        $crawler = $client->request('GET', '/template/'.$templateName);
+        $crawler = $client->request('GET', '/template/' . $templateName);
         $this->assertEquals($contents, trim($crawler->text()));
     }
 
@@ -60,7 +60,7 @@ final class TemplatingTest extends WebTestCase
     {
         $client = self::createClient();
 
-        $crawler = $client->request('GET', '/template/'.$templateName);
+        $crawler = $client->request('GET', '/template/' . $templateName);
         $this->assertEquals($contents, trim($crawler->text()));
     }
 
@@ -89,7 +89,7 @@ final class TemplatingTest extends WebTestCase
     {
         $client = self::createClient();
 
-        $crawler = $client->request('GET', '/template/'.$templateName);
+        $crawler = $client->request('GET', '/template/' . $templateName);
         $this->assertEquals($contents, trim($crawler->text()));
     }
 
@@ -116,7 +116,7 @@ final class TemplatingTest extends WebTestCase
     {
         $client = self::createClient();
 
-        $crawler = $client->request('GET', '/template/'.$templateName);
+        $crawler = $client->request('GET', '/template/' . $templateName);
         $this->assertEquals($contents, trim($crawler->text()));
     }
 

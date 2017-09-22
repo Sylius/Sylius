@@ -26,6 +26,6 @@ final class IdBasedInvoiceNumberGenerator implements InvoiceNumberGeneratorInter
      */
     public function generate(OrderInterface $order, PaymentInterface $payment): string
     {
-        return $order->getId().'-'.$payment->getId();
+        return $order->getId() . '-' . $payment->getId();
     }
 }

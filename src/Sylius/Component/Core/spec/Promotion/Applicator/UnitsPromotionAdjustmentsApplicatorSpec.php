@@ -239,7 +239,7 @@ final class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
             ->willReturn(new ArrayCollection([
                 $firstColtUnit->getWrappedObject(),
                 $secondColtUnit->getWrappedObject(),
-                $thirdColtUnit->getWrappedObject()
+                $thirdColtUnit->getWrappedObject(),
             ]))
         ;
 

@@ -16,7 +16,6 @@ namespace Sylius\Bundle\ThemeBundle\Tests\Translation;
 use Sylius\Bundle\ThemeBundle\Translation\Provider\Loader\TranslatorLoaderProvider;
 use Sylius\Bundle\ThemeBundle\Translation\Provider\Resource\TranslatorResourceProvider;
 use Sylius\Bundle\ThemeBundle\Translation\Translator;
-use Symfony\Component\Translation\Exception\InvalidArgumentException;
 use Symfony\Component\Translation\Loader\ArrayLoader;
 use Symfony\Component\Translation\MessageCatalogue;
 use Symfony\Component\Translation\MessageSelector;
@@ -71,7 +70,7 @@ final class TranslatorTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @dataProvider getInvalidLocalesTests
-     * @expectedException InvalidArgumentException
+     * @expectedException \InvalidArgumentException
      */
     public function its_throws_exception_on_setting_invalid_fallback_locales($locale): void
     {

@@ -175,7 +175,6 @@ final class ManagingProductAssociationTypesContext implements Context
 
     /**
      * @Then I should see the product association type :name in the list
-     *
      */
     public function iShouldSeeTheProductAssociationTypeInTheList($name)
     {

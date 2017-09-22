@@ -62,7 +62,6 @@ EOT
             return 0;
         }
 
-
         try {
             $rootDir = $this->getContainer()->getParameter('kernel.root_dir') . '/../';
             $this->ensureDirectoryExistsAndIsWritable($rootDir . self::WEB_MEDIA_DIRECTORY, $output);

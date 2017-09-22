@@ -77,7 +77,7 @@ final class StringFilterType extends AbstractType
                 StringFilter::TYPE_STARTS_WITH,
                 StringFilter::TYPE_ENDS_WITH,
                 StringFilter::TYPE_IN,
-                StringFilter::TYPE_NOT_IN
+                StringFilter::TYPE_NOT_IN,
             ])
         ;
     }

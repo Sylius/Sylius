@@ -89,11 +89,11 @@ final class RedirectHandler implements RedirectHandlerInterface
     {
         if ($configuration->isHeaderRedirection()) {
             return new Response('', 200, [
-                'X-SYLIUS-LOCATION' => $url.$configuration->getRedirectHash(),
+                'X-SYLIUS-LOCATION' => $url . $configuration->getRedirectHash(),
             ]);
         }
 
-        return new RedirectResponse($url.$configuration->getRedirectHash(), $status);
+        return new RedirectResponse($url . $configuration->getRedirectHash(), $status);
     }
 
     /**

@@ -35,7 +35,7 @@ final class StripeGatewayConfigurationType extends AbstractType
                     new NotBlank([
                         'message' => 'sylius.gateway_config.stripe.publishable_key.not_blank',
                         'groups' => 'sylius',
-                    ])
+                    ]),
                 ],
             ])
             ->add('secret_key', TextType::class, [
@@ -44,7 +44,7 @@ final class StripeGatewayConfigurationType extends AbstractType
                     new NotBlank([
                         'message' => 'sylius.gateway_config.stripe.secret_key.not_blank',
                         'groups' => 'sylius',
-                    ])
+                    ]),
                 ],
             ])
         ;

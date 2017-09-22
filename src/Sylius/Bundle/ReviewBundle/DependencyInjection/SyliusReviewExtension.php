@@ -34,7 +34,7 @@ final class SyliusReviewExtension extends AbstractResourceExtension
     public function load(array $config, ContainerBuilder $container): void
     {
         $config = $this->processConfiguration($this->getConfiguration([], $container), $config);
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
         $this->registerResources('sylius', $config['driver'], $this->resolveResources($config['resources'], $container), $container);
 
@@ -59,7 +59,7 @@ final class SyliusReviewExtension extends AbstractResourceExtension
         foreach ($resources as $subjectName => $subjectConfig) {
             foreach ($subjectConfig as $resourceName => $resourceConfig) {
                 if (is_array($resourceConfig)) {
-                    $resolvedResources[$subjectName.'_'.$resourceName] = $resourceConfig;
+                    $resolvedResources[$subjectName . '_' . $resourceName] = $resourceConfig;
                 }
             }
         }

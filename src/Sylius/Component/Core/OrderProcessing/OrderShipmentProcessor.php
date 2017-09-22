@@ -54,7 +54,7 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
      */
     public function process(BaseOrderInterface $order): void
     {
-        /** @var OrderInterface $order */
+        // @var OrderInterface $order
         Assert::isInstanceOf($order, OrderInterface::class);
 
         if ($order->isEmpty() || !$order->isShippingRequired()) {

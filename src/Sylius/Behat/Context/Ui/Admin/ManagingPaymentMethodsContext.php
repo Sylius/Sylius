@@ -301,7 +301,7 @@ final class ManagingPaymentMethodsContext implements Context
     public function iShouldBeNotifiedThatIHaveToSpecifyPaypal($element)
     {
         Assert::same(
-            $this->createPage->getValidationMessage('paypal_'.$element),
+            $this->createPage->getValidationMessage('paypal_' . $element),
             sprintf('Please enter paypal %s.', $element)
         );
     }

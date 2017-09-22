@@ -48,7 +48,7 @@ final class ProvinceApiTest extends JsonApiTestCase
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $countryData = $this->loadFixturesFromFile('resources/countries.yml');
 
-        $this->client->request('GET', '/api/v1/countries/'.$countryData['country_BE']->getCode().'/provinces/'.$countryData['province_BE_limburg']->getCode(), [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('GET', '/api/v1/countries/' . $countryData['country_BE']->getCode() . '/provinces/' . $countryData['province_BE_limburg']->getCode(), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'province/show_response', Response::HTTP_OK);
@@ -62,12 +62,12 @@ final class ProvinceApiTest extends JsonApiTestCase
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $countryData = $this->loadFixturesFromFile('resources/countries.yml');
 
-        $this->client->request('DELETE', '/api/v1/countries/'.$countryData['country_BE']->getCode().'/provinces/'.$countryData['province_BE_limburg']->getCode(), [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('DELETE', '/api/v1/countries/' . $countryData['country_BE']->getCode() . '/provinces/' . $countryData['province_BE_limburg']->getCode(), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
 
-        $this->client->request('GET', '/api/v1/countries/'.$countryData['country_BE']->getCode().'/provinces/'.$countryData['province_BE_limburg']->getCode(), [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('GET', '/api/v1/countries/' . $countryData['country_BE']->getCode() . '/provinces/' . $countryData['province_BE_limburg']->getCode(), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);

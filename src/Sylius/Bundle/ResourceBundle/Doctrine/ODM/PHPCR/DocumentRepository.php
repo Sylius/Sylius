@@ -113,7 +113,7 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
     {
         foreach ($sorting as $property => $order) {
             if (!empty($order)) {
-                $queryBuilder->orderBy()->{$order}()->field('o.'.$property);
+                $queryBuilder->orderBy()->{$order}()->field('o.' . $property);
             }
         }
 
@@ -128,7 +128,7 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
     protected function getPropertyName($name)
     {
         if (false === strpos($name, '.')) {
-            return $this->getAlias().'.'.$name;
+            return $this->getAlias() . '.' . $name;
         }
 
         return $name;

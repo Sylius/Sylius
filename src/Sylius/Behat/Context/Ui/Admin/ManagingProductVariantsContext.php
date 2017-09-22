@@ -158,7 +158,7 @@ final class ManagingProductVariantsContext implements Context
      */
     public function iSetItsPriceTo($price = null, $channelName = null)
     {
-        $this->createPage->specifyPrice($price, (null === $channelName) ? $this->sharedStorage->get('channel') :$channelName);
+        $this->createPage->specifyPrice($price, (null === $channelName) ? $this->sharedStorage->get('channel') : $channelName);
     }
 
     /**
@@ -521,7 +521,7 @@ final class ManagingProductVariantsContext implements Context
      */
     public function theVariantWithCodeShouldNotHaveShippingRequired(ProductVariantInterface $productVariant)
     {
-        $this->updatePage->open(['productId' => $productVariant->getProduct()->getId(),'id' => $productVariant->getId()]);
+        $this->updatePage->open(['productId' => $productVariant->getProduct()->getId(), 'id' => $productVariant->getId()]);
 
         Assert::false($this->updatePage->isShippingRequired());
     }

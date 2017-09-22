@@ -153,7 +153,7 @@ final class HasEnabledEntityValidator extends ConstraintValidator
      */
     private function ensureEntityHasProvidedEnabledField(ObjectManager $objectManager, $entity, string $enabledPropertyPath): void
     {
-        /* @var ClassMetadata $class */
+        // @var ClassMetadata $class
         $class = $objectManager->getClassMetadata(get_class($entity));
 
         if (!$class->hasField($enabledPropertyPath) && !$class->hasAssociation($enabledPropertyPath)) {

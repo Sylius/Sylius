@@ -94,7 +94,7 @@ class OrderItemsTaxesApplicator implements OrderTaxesApplicatorInterface
                 }
 
                 $this->addAdjustment($unit, $splitTaxes[$i], $taxRate->getLabel(), $taxRate->isIncludedInPrice());
-                $i++;
+                ++$i;
             }
         }
     }

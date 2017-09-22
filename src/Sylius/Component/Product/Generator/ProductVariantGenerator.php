@@ -88,7 +88,7 @@ final class ProductVariantGenerator implements ProductVariantGeneratorInterface
      *
      * @return ProductVariantInterface
      */
-    protected function createVariant(ProductInterface $product, array $optionMap, $permutation): ProductVariantInterface
+    private function createVariant(ProductInterface $product, array $optionMap, $permutation): ProductVariantInterface
     {
         /** @var ProductVariantInterface $variant */
         $variant = $this->productVariantFactory->createForProduct($product);

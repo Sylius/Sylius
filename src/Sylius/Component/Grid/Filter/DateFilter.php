@@ -36,7 +36,7 @@ final class DateFilter implements FilterInterface
 
         $from = isset($data['from']) ? $this->getDateTime($data['from']) : null;
         if (null !== $from) {
-            $inclusive = (bool)$this->getOption($options, 'inclusive_from', self::DEFAULT_INCLUSIVE_FROM);
+            $inclusive = (bool) $this->getOption($options, 'inclusive_from', self::DEFAULT_INCLUSIVE_FROM);
             if (true === $inclusive) {
                 $expressionBuilder->greaterThanOrEqual($field, $from);
             } else {
@@ -46,7 +46,7 @@ final class DateFilter implements FilterInterface
 
         $to = isset($data['to']) ? $this->getDateTime($data['to']) : null;
         if (null !== $to) {
-            $inclusive = (bool)$this->getOption($options, 'inclusive_to', self::DEFAULT_INCLUSIVE_TO);
+            $inclusive = (bool) $this->getOption($options, 'inclusive_to', self::DEFAULT_INCLUSIVE_TO);
             if (true === $inclusive) {
                 $expressionBuilder->lessThanOrEqual($field, $to);
             } else {
@@ -54,7 +54,6 @@ final class DateFilter implements FilterInterface
             }
         }
     }
-
 
     /**
      * @param array $options
@@ -65,7 +64,7 @@ final class DateFilter implements FilterInterface
      */
     private function getOption(array $options, string $name, $default)
     {
-        return isset($options[$name]) ? $options[$name] : $default;
+        return $options[$name] ?? $default;
     }
 
     /**
@@ -83,6 +82,6 @@ final class DateFilter implements FilterInterface
             return $data['date'];
         }
 
-        return $data['date'].' '.$data['time'];
+        return $data['date'] . ' ' . $data['time'];
     }
 }

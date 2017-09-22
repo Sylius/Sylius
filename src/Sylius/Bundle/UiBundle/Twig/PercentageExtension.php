@@ -37,6 +37,6 @@ class PercentageExtension extends \Twig_Extension
     {
         $percentage = $number * 100;
 
-        return $percentage.' %';
+        return $percentage . ' %';
     }
 }

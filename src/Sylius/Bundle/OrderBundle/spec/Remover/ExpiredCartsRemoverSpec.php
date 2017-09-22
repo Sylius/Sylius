@@ -46,7 +46,7 @@ final class ExpiredCartsRemoverSpec extends ObjectBehavior
     ): void {
         $orderRepository->findCartsNotModifiedSince(Argument::type('\DateTimeInterface'))->willReturn([
             $firstCart,
-            $secondCart
+            $secondCart,
         ]);
 
         $eventDispatcher

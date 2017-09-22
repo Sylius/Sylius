@@ -37,7 +37,6 @@ interface IndexPageInterface extends BaseIndexPageInterface
 
     /**
      * @param string $name
-     *
      * @param int $position
      */
     public function setPosition($name, $position);

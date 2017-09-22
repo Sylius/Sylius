@@ -39,7 +39,7 @@ class OrderSequence implements OrderSequenceInterface
     /**
      * {@inheritdoc}
      */
-    public function getIndex():int
+    public function getIndex(): int
     {
         return $this->index;
     }

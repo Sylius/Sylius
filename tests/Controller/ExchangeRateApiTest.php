@@ -244,7 +244,6 @@ EOT;
         $this->assertResponse($response, 'exchange_rate/update_response', Response::HTTP_OK);
     }
 
-
     /**
      * @test
      */

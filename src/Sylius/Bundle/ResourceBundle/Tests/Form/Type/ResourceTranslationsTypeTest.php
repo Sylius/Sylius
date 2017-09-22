@@ -25,7 +25,6 @@ use Symfony\Component\Form\Test\TypeTestCase;
  */
 final class ResourceTranslationsTypeTest extends TypeTestCase
 {
-
     /**
      * {@inheritdoc}
      */

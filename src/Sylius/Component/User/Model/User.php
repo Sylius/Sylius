@@ -422,6 +422,7 @@ class User implements UserInterface
 
         $threshold = new \DateTime();
         $threshold->sub($ttl);
+
         return $threshold <= $this->passwordRequestedAt;
     }
 

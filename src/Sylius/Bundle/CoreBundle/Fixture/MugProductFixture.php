@@ -100,8 +100,8 @@ class MugProductFixture extends AbstractFixture
                 [
                     'code' => 'mugs',
                     'name' => 'Mugs',
-                ]
-            ]
+                ],
+            ],
         ]]]);
 
         $mugMaterials = ['invisible_porcelain' => 'Invisible porcelain', 'banana_skin' => 'Banana skin', 'porcelain' => 'Porcelain', 'centipede' => 'Centipede'];
@@ -113,7 +113,7 @@ class MugProductFixture extends AbstractFixture
                 'configuration' => [
                     'multiple' => false,
                     'choices' => $mugMaterials,
-                ]
+                ],
             ],
         ]]);
 

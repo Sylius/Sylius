@@ -47,10 +47,10 @@ final class CouponGenerationAmountValidator extends ConstraintValidator
             return;
         }
 
-        /** @var PromotionCouponGeneratorInstructionInterface $value */
+        // @var PromotionCouponGeneratorInstructionInterface $value
         Assert::isInstanceOf($instruction, PromotionCouponGeneratorInstructionInterface::class);
 
-        /** @var CouponPossibleGenerationAmount $constraint */
+        // @var CouponPossibleGenerationAmount $constraint
         Assert::isInstanceOf($constraint, CouponPossibleGenerationAmount::class);
 
         if (!$this->generationPolicy->isGenerationPossible($instruction)) {
@@ -59,7 +59,7 @@ final class CouponGenerationAmountValidator extends ConstraintValidator
                 [
                     '%expectedAmount%' => $instruction->getAmount(),
                     '%codeLength%' => $instruction->getCodeLength(),
-                    '%possibleAmount%' => $this->generationPolicy->getPossibleGenerationAmount($instruction)
+                    '%possibleAmount%' => $this->generationPolicy->getPossibleGenerationAmount($instruction),
                 ]
             );
         }

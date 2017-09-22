@@ -59,6 +59,7 @@ class OrderController extends ResourceController
 
         return $this->viewHandler->handle($configuration, $view);
     }
+
     /**
      * @param Request $request
      *

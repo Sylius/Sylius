@@ -447,7 +447,7 @@ EOT;
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $promotions = $this->loadFixturesFromFile('resources/promotions.yml');
-        $promotion = $promotions["promotion1"];
+        $promotion = $promotions['promotion1'];
 
         $data =
 <<<EOT
@@ -474,7 +474,7 @@ EOT;
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $promotions = $this->loadFixturesFromFile('resources/promotions.yml');
-        $promotion = $promotions["promotion1"];
+        $promotion = $promotions['promotion1'];
 
         $data =
 <<<EOT

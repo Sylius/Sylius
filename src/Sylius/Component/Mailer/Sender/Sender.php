@@ -28,22 +28,22 @@ final class Sender implements SenderInterface
     /**
      * @var RendererAdapterInterface
      */
-    protected $rendererAdapter;
+    private $rendererAdapter;
 
     /**
      * @var SenderAdapterInterface
      */
-    protected $senderAdapter;
+    private $senderAdapter;
 
     /**
      * @var EmailProviderInterface
      */
-    protected $provider;
+    private $provider;
 
     /**
      * @var DefaultSettingsProviderInterface
      */
-    protected $defaultSettingsProvider;
+    private $defaultSettingsProvider;
 
     /**
      * @param RendererAdapterInterface $rendererAdapter

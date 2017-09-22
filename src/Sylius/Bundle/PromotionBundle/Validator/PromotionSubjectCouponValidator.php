@@ -43,7 +43,7 @@ final class PromotionSubjectCouponValidator extends ConstraintValidator
      */
     public function validate($value, Constraint $constraint): void
     {
-        /** @var PromotionSubjectCoupon $constraint */
+        // @var PromotionSubjectCoupon $constraint
         Assert::isInstanceOf($constraint, PromotionSubjectCoupon::class);
 
         if (!$value instanceof PromotionCouponAwarePromotionSubjectInterface) {

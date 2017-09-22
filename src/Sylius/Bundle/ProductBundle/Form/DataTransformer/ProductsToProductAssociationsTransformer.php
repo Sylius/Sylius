@@ -31,17 +31,17 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
     /**
      * @var FactoryInterface
      */
-    protected $productAssociationFactory;
+    private $productAssociationFactory;
 
     /**
      * @var ProductRepositoryInterface
      */
-    protected $productRepository;
+    private $productRepository;
 
     /**
      * @var RepositoryInterface
      */
-    protected $productAssociationTypeRepository;
+    private $productAssociationTypeRepository;
 
     /**
      * @var Collection

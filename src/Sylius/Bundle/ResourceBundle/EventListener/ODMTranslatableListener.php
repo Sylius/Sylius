@@ -179,11 +179,11 @@ final class ODMTranslatableListener implements EventSubscriber
         $metadata = $this->mappings[$name];
 
         if (isset($metadata['fallback_locale'])) {
-            $setter = 'set'.ucfirst($metadata['fallback_locale']);
+            $setter = 'set' . ucfirst($metadata['fallback_locale']);
             $document->$setter($this->fallbackLocale);
         }
         if (isset($metadata['current_locale'])) {
-            $setter = 'set'.ucfirst($metadata['current_locale']);
+            $setter = 'set' . ucfirst($metadata['current_locale']);
             $document->$setter($this->currentLocale);
         }
     }

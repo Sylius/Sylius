@@ -39,7 +39,7 @@ final class CustomerRegistrationFormSubscriberSpec extends ObjectBehavior
 
     function it_listens_on_pre_submit_data_event(): void
     {
-        $this->getSubscribedEvents()->shouldReturn([FormEvents::PRE_SUBMIT => 'preSubmit',]);
+        $this->getSubscribedEvents()->shouldReturn([FormEvents::PRE_SUBMIT => 'preSubmit']);
     }
 
     function it_sets_user_for_existing_customer(

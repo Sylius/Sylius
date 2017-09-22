@@ -115,7 +115,7 @@ final class RequestConfigurationSpec extends ObjectBehavior
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
 
-        $parameters->get('form')->willReturn(['type'=> 'sylius_product', 'options' => ['validation_groups' => ['sylius']]]);
+        $parameters->get('form')->willReturn(['type' => 'sylius_product', 'options' => ['validation_groups' => ['sylius']]]);
         $this->getFormType()->shouldReturn('sylius_product');
         $this->getFormOptions()->shouldReturn(['validation_groups' => ['sylius']]);
     }

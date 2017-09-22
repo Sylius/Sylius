@@ -30,7 +30,7 @@ final class SyliusMailerExtension extends Extension
     public function load(array $config, ContainerBuilder $container): void
     {
         $config = $this->processConfiguration($this->getConfiguration([], $container), $config);
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
         $configFiles = [
             'services.xml',
@@ -46,7 +46,7 @@ final class SyliusMailerExtension extends Extension
         $container->setParameter('sylius.mailer.sender_name', $config['sender']['name']);
         $container->setParameter('sylius.mailer.sender_address', $config['sender']['address']);
 
-        $templates = isset($config['templates']) ? $config['templates'] : ['Default' => 'SyliusMailerBundle::default.html.twig'];
+        $templates = $config['templates'] ?? ['Default' => 'SyliusMailerBundle::default.html.twig'];
 
         $container->setParameter('sylius.mailer.emails', $config['emails']);
         $container->setParameter('sylius.mailer.templates', $templates);

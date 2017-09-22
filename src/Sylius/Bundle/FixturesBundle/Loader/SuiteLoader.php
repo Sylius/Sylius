@@ -40,7 +40,7 @@ final class SuiteLoader implements SuiteLoaderInterface
     public function load(SuiteInterface $suite): void
     {
         /**
-         * @var FixtureInterface $fixture
+         * @var FixtureInterface
          * @var array $fixtureOptions
          */
         foreach ($suite->getFixtures() as $fixture => $fixtureOptions) {

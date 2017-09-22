@@ -46,7 +46,7 @@ final class DateFilterSpec extends ObjectBehavior
                 'from' => [
                     'date' => '2016-12-05',
                     'time' => '08:00',
-                ]
+                ],
             ],
             []
         );
@@ -74,7 +74,7 @@ final class DateFilterSpec extends ObjectBehavior
                 'to' => [
                     'date' => '',
                     'time' => '',
-                ]
+                ],
             ],
             ['inclusive_from' => false]
         );
@@ -102,7 +102,7 @@ final class DateFilterSpec extends ObjectBehavior
                 'to' => [
                     'date' => '',
                     'time' => '',
-                ]
+                ],
             ],
             []
         );
@@ -126,7 +126,7 @@ final class DateFilterSpec extends ObjectBehavior
                 'to' => [
                     'date' => '2016-12-06',
                     'time' => '08:00',
-                ]
+                ],
             ],
             []
         );
@@ -154,7 +154,7 @@ final class DateFilterSpec extends ObjectBehavior
                 'to' => [
                     'date' => '2016-12-06',
                     'time' => '08:00',
-                ]
+                ],
             ],
             ['inclusive_to' => true]
         );
@@ -178,7 +178,7 @@ final class DateFilterSpec extends ObjectBehavior
                 'to' => [
                     'date' => '2016-12-06',
                     'time' => '',
-                ]
+                ],
             ],
             []
         );
@@ -211,7 +211,7 @@ final class DateFilterSpec extends ObjectBehavior
                 'to' => [
                     'date' => '2016-12-06',
                     'time' => '08:00',
-                ]
+                ],
             ],
             []
         );

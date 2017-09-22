@@ -32,7 +32,7 @@ final class MoneyFilter implements FilterInterface
             return;
         }
 
-        $field = isset($options['field']) ? $options['field'] : $name;
+        $field = $options['field'] ?? $name;
         $scale = isset($options['scale']) ? (int) $options['scale'] : self::DEFAULT_SCALE;
 
         $greaterThan = $this->getDataValue($data, 'greaterThan');
@@ -70,6 +70,6 @@ final class MoneyFilter implements FilterInterface
      */
     private function getDataValue(array $data, string $key): string
     {
-        return isset($data[$key]) ? $data[$key] : '';
+        return $data[$key] ?? '';
     }
 }

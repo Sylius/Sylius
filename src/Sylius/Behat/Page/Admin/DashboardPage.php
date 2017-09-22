@@ -137,7 +137,7 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
             'order_list' => '#orders',
             'total_sales' => '#total-sales',
             'sub_header' => '.ui.header .content .sub.header',
-            'channel_choosing_link' => 'a:contains("%channelName%")'
+            'channel_choosing_link' => 'a:contains("%channelName%")',
         ]);
     }
 }

@@ -31,7 +31,7 @@ interface RedirectHandlerInterface
 
     /**
      * @param RequestConfiguration $configuration
-     * @param null|ResourceInterface $resource
+     * @param ResourceInterface|null $resource
      *
      * @return Response
      */

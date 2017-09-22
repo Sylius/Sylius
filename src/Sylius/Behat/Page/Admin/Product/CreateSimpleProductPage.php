@@ -143,7 +143,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
             $imageForm->fillField('Type', $type);
         }
 
-        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath.$path);
+        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath . $path);
     }
 
     /**
@@ -156,7 +156,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         Assert::isInstanceOf($this->getDriver(), Selenium2Driver::class);
 
         $dropdown = $this->getElement('association_dropdown', [
-            '%association%' => $productAssociationType->getName()
+            '%association%' => $productAssociationType->getName(),
         ]);
         $dropdown->click();
 

@@ -138,7 +138,7 @@ final class TaxonomyContext implements Context
 
         /** @var ImageInterface $taxonImage */
         $taxonImage = $this->taxonImageFactory->createNew();
-        $taxonImage->setFile(new UploadedFile($filesPath.$imagePath, basename($imagePath)));
+        $taxonImage->setFile(new UploadedFile($filesPath . $imagePath, basename($imagePath)));
         $taxonImage->setType($imageType);
         $this->imageUploader->upload($taxonImage);
 

@@ -40,10 +40,10 @@ class SelectAttributeConfigurationType extends AbstractType
                 'label' => 'sylius.form.attribute_type_configuration.select.multiple',
             ])
             ->add('min', NumberType::class, [
-                'label' => 'sylius.form.attribute_type_configuration.select.min'
+                'label' => 'sylius.form.attribute_type_configuration.select.min',
             ])
             ->add('max', NumberType::class, [
-                'label' => 'sylius.form.attribute_type_configuration.select.max'
+                'label' => 'sylius.form.attribute_type_configuration.select.max',
             ])
         ;
     }

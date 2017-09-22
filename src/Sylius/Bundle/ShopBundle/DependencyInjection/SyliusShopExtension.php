@@ -35,7 +35,7 @@ final class SyliusShopExtension extends Extension
     public function load(array $config, ContainerBuilder $container): void
     {
         $config = $this->processConfiguration($this->getConfiguration([], $container), $config);
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
         $loader->load('services.xml');
         $loader->load(sprintf('services/integrations/locale/%s.xml', $config['locale_switcher']));
@@ -87,7 +87,7 @@ final class SyliusShopExtension extends Extension
         $checkoutRedirectListener = new Definition(CheckoutRedirectListener::class, [
             new Reference('request_stack'),
             new Reference('sylius.router.checkout_state'),
-            new Definition(RequestMatcher::class, [$config['pattern']])
+            new Definition(RequestMatcher::class, [$config['pattern']]),
         ]);
 
         $checkoutRedirectListener
