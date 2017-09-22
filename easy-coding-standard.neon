@@ -1,37 +1,145 @@
 checkers:
+    PhpCsFixer\Fixer\Alias\EregToPregFixer: {}
+    PhpCsFixer\Fixer\Alias\NoAliasFunctionsFixer: {}
+    PhpCsFixer\Fixer\Alias\PowToExponentiationFixer: {}
+    PhpCsFixer\Fixer\Alias\NoMixedEchoPrintFixer:
+        use: echo
+    PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer:
+        syntax: short
+    PhpCsFixer\Fixer\ArrayNotation\NoMultilineWhitespaceAroundDoubleArrowFixer: {}
+    PhpCsFixer\Fixer\ArrayNotation\NormalizeIndexBraceFixer: {}
+    PhpCsFixer\Fixer\ArrayNotation\NoTrailingCommaInSinglelineArrayFixer: {}
+    PhpCsFixer\Fixer\ArrayNotation\NoWhitespaceBeforeCommaInArrayFixer: {}
+    PhpCsFixer\Fixer\ArrayNotation\TrailingCommaInMultilineArrayFixer: {}
+    PhpCsFixer\Fixer\ArrayNotation\TrimArraySpacesFixer: {}
+    PhpCsFixer\Fixer\ArrayNotation\WhitespaceAfterCommaInArrayFixer: {}
     PhpCsFixer\Fixer\Basic\BracesFixer:
         allow_single_line_closure: true
     PhpCsFixer\Fixer\Basic\EncodingFixer: {}
+    PhpCsFixer\Fixer\Basic\NonPrintableCharacterFixer: {}
     PhpCsFixer\Fixer\Casing\LowercaseConstantsFixer: {}
     PhpCsFixer\Fixer\Casing\LowercaseKeywordsFixer: {}
-    PhpCsFixer\Fixer\ClassNotation\ClassDefinitionFixer: {}
-    PhpCsFixer\Fixer\ClassNotation\SingleClassElementPerStatementFixer:
-        elements:
-            - property
+    PhpCsFixer\Fixer\Casing\NativeFunctionCasingFixer: {}
+    PhpCsFixer\Fixer\Casing\MagicConstantCasingFixer: {}
+    PhpCsFixer\Fixer\CastNotation\CastSpacesFixer: {}
+    PhpCsFixer\Fixer\CastNotation\LowercaseCastFixer: {}
+    PhpCsFixer\Fixer\CastNotation\ModernizeTypesCastingFixer: {}
+    PhpCsFixer\Fixer\CastNotation\NoShortBoolCastFixer: {}
+    PhpCsFixer\Fixer\CastNotation\ShortScalarCastFixer: {}
+    PhpCsFixer\Fixer\ClassNotation\ClassDefinitionFixer:
+        singleItemSingleLine: true
+        multiLineExtendsEachSingleLine: true
+    PhpCsFixer\Fixer\ClassNotation\MethodSeparationFixer: {}
+    PhpCsFixer\Fixer\ClassNotation\NoBlankLinesAfterClassOpeningFixer: {}
+    PhpCsFixer\Fixer\ClassNotation\NoNullPropertyInitializationFixer: {}
+    PhpCsFixer\Fixer\ClassNotation\NoPhp4ConstructorFixer: {}
+    PhpCsFixer\Fixer\ClassNotation\NoUnneededFinalMethodFixer: {}
+    PhpCsFixer\Fixer\ClassNotation\ProtectedToPrivateFixer: {}
+    PhpCsFixer\Fixer\ClassNotation\SelfAccessorFixer: {}
+    PhpCsFixer\Fixer\ClassNotation\SingleClassElementPerStatementFixer: {}
     PhpCsFixer\Fixer\ClassNotation\VisibilityRequiredFixer: {}
+    PhpCsFixer\Fixer\Comment\HashToSlashCommentFixer: {}
+    PhpCsFixer\Fixer\Comment\NoEmptyCommentFixer: {}
     PhpCsFixer\Fixer\Comment\NoTrailingWhitespaceInCommentFixer: {}
+    PhpCsFixer\Fixer\Comment\SingleLineCommentStyleFixer: {}
     PhpCsFixer\Fixer\ControlStructure\ElseifFixer: {}
+    PhpCsFixer\Fixer\ControlStructure\IncludeFixer: {}
     PhpCsFixer\Fixer\ControlStructure\NoBreakCommentFixer: {}
+    PhpCsFixer\Fixer\ControlStructure\NoSuperfluousElseifFixer: {}
+    PhpCsFixer\Fixer\ControlStructure\NoTrailingCommaInListCallFixer: {}
+    PhpCsFixer\Fixer\ControlStructure\NoUnneededControlParenthesesFixer: {}
+    PhpCsFixer\Fixer\ControlStructure\NoUnneededCurlyBracesFixer: {}
+    PhpCsFixer\Fixer\ControlStructure\NoUselessElseFixer: {}
     PhpCsFixer\Fixer\ControlStructure\SwitchCaseSemicolonToColonFixer: {}
     PhpCsFixer\Fixer\ControlStructure\SwitchCaseSpaceFixer: {}
     PhpCsFixer\Fixer\FunctionNotation\FunctionDeclarationFixer: {}
+    PhpCsFixer\Fixer\FunctionNotation\FunctionTypehintSpaceFixer: {}
+    PhpCsFixer\Fixer\FunctionNotation\MethodArgumentSpaceFixer: {}
     PhpCsFixer\Fixer\FunctionNotation\NoSpacesAfterFunctionNameFixer: {}
+    PhpCsFixer\Fixer\FunctionNotation\ReturnTypeDeclarationFixer: {}
+    PhpCsFixer\Fixer\FunctionNotation\VoidReturnFixer: {}
+    PhpCsFixer\Fixer\Import\NoLeadingImportSlashFixer: {}
     PhpCsFixer\Fixer\Import\NoUnusedImportsFixer: {}
     PhpCsFixer\Fixer\Import\OrderedImportsFixer: {}
     PhpCsFixer\Fixer\Import\SingleImportPerStatementFixer: {}
     PhpCsFixer\Fixer\Import\SingleLineAfterImportsFixer: {}
+    PhpCsFixer\Fixer\LanguageConstruct\CombineConsecutiveIssetsFixer: {}
+    PhpCsFixer\Fixer\LanguageConstruct\CombineConsecutiveUnsetsFixer: {}
+    PhpCsFixer\Fixer\LanguageConstruct\DeclareEqualNormalizeFixer: {}
+    PhpCsFixer\Fixer\LanguageConstruct\DirConstantFixer: {}
+    PhpCsFixer\Fixer\LanguageConstruct\FunctionToConstantFixer: {}
+    PhpCsFixer\Fixer\LanguageConstruct\IsNullFixer: {}
+    PhpCsFixer\Fixer\LanguageConstruct\SilencedDeprecationErrorFixer: {}
     PhpCsFixer\Fixer\ListNotation\ListSyntaxFixer:
         syntax: short
     PhpCsFixer\Fixer\NamespaceNotation\BlankLineAfterNamespaceFixer: {}
+    PhpCsFixer\Fixer\NamespaceNotation\NoLeadingNamespaceWhitespaceFixer: {}
+    PhpCsFixer\Fixer\NamespaceNotation\SingleBlankLineBeforeNamespaceFixer: {}
+    PhpCsFixer\Fixer\Naming\NoHomoglyphNamesFixer: {}
+    PhpCsFixer\Fixer\Operator\BinaryOperatorSpacesFixer:
+        align_double_arrow: false
+        align_equals: false
+    PhpCsFixer\Fixer\Operator\ConcatSpaceFixer:
+        spacing: one
+    PhpCsFixer\Fixer\Operator\NewWithBracesFixer: {}
+    PhpCsFixer\Fixer\Operator\ObjectOperatorWithoutWhitespaceFixer: {}
+    PhpCsFixer\Fixer\Operator\PreIncrementFixer: {}
+    PhpCsFixer\Fixer\Operator\StandardizeNotEqualsFixer: {}
+    PhpCsFixer\Fixer\Operator\TernaryOperatorSpacesFixer: {}
+    PhpCsFixer\Fixer\Operator\TernaryToNullCoalescingFixer: {}
+    PhpCsFixer\Fixer\Operator\UnaryOperatorSpacesFixer: {}
+    PhpCsFixer\Fixer\Phpdoc\NoBlankLinesAfterPhpdocFixer: {}
+    PhpCsFixer\Fixer\Phpdoc\NoEmptyPhpdocFixer: {}
+    PhpCsFixer\Fixer\Phpdoc\PhpdocIndentFixer: {}
+    PhpCsFixer\Fixer\Phpdoc\PhpdocInlineTagFixer: {}
+    PhpCsFixer\Fixer\Phpdoc\PhpdocNoAccessFixer: {}
+    PhpCsFixer\Fixer\Phpdoc\PhpdocNoAliasTagFixer: {}
+    PhpCsFixer\Fixer\Phpdoc\PhpdocNoEmptyReturnFixer: {}
+    PhpCsFixer\Fixer\Phpdoc\PhpdocNoPackageFixer: {}
+    PhpCsFixer\Fixer\Phpdoc\PhpdocNoUselessInheritdocFixer: {}
+    PhpCsFixer\Fixer\Phpdoc\PhpdocReturnSelfReferenceFixer: {}
+    PhpCsFixer\Fixer\Phpdoc\PhpdocScalarFixer: {}
+    PhpCsFixer\Fixer\Phpdoc\PhpdocSeparationFixer: {}
+    PhpCsFixer\Fixer\Phpdoc\PhpdocSingleLineVarSpacingFixer: {}
+    PhpCsFixer\Fixer\Phpdoc\PhpdocToCommentFixer: {}
+    PhpCsFixer\Fixer\Phpdoc\PhpdocTrimFixer: {}
+    PhpCsFixer\Fixer\Phpdoc\PhpdocTypesFixer: {}
+    PhpCsFixer\Fixer\Phpdoc\PhpdocTypesOrderFixer:
+        null_adjustment: always_last
+        sort_algorithm: none
+    PhpCsFixer\Fixer\Phpdoc\PhpdocVarWithoutNameFixer: {}
+    PhpCsFixer\Fixer\PhpTag\BlankLineAfterOpeningTagFixer: {}
     PhpCsFixer\Fixer\PhpTag\FullOpeningTagFixer: {}
     PhpCsFixer\Fixer\PhpTag\NoClosingTagFixer: {}
+    PhpCsFixer\Fixer\PhpUnit\PhpUnitDedicateAssertFixer: {}
+    PhpCsFixer\Fixer\PhpUnit\PhpUnitFqcnAnnotationFixer: {}
+    PhpCsFixer\Fixer\Semicolon\NoEmptyStatementFixer: {}
+    PhpCsFixer\Fixer\Semicolon\NoSinglelineWhitespaceBeforeSemicolonsFixer: {}
+    PhpCsFixer\Fixer\Semicolon\SpaceAfterSemicolonFixer: {}
+    PhpCsFixer\Fixer\Strict\DeclareStrictTypesFixer: {}
+    PhpCsFixer\Fixer\StringNotation\SingleQuoteFixer: {}
+    PhpCsFixer\Fixer\Whitespace\BlankLineBeforeStatementFixer: {}
     PhpCsFixer\Fixer\Whitespace\IndentationTypeFixer: {}
     PhpCsFixer\Fixer\Whitespace\LineEndingFixer: {}
+    PhpCsFixer\Fixer\Whitespace\NoExtraConsecutiveBlankLinesFixer:
+        - break
+        - case
+        - continue
+        - curly_brace_block
+        - default
+        - extra
+        - parenthesis_brace_block
+        - return
+        - square_brace_block
+        - switch
+        - throw
+        - use
+    PhpCsFixer\Fixer\Whitespace\NoSpacesAroundOffsetFixer: {}
     PhpCsFixer\Fixer\Whitespace\NoSpacesInsideParenthesisFixer: {}
     PhpCsFixer\Fixer\Whitespace\NoTrailingWhitespaceFixer: {}
+    PhpCsFixer\Fixer\Whitespace\NoWhitespaceInBlankLineFixer: {}
     PhpCsFixer\Fixer\Whitespace\SingleBlankLineAtEofFixer: {}
-    PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer:
-        syntax: short
+    Symplify\CodingStandard\Fixer\Property\ArrayPropertyDefaultValueFixer: {}
 
 parameters:
     skip:
