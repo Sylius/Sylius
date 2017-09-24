@@ -54,7 +54,7 @@ Second thing to do is to classify the taxables, in our example we'll get two pro
         $food = $repository->findOneBy(array('name' => 'Food'));
 
         $tshirt->setTaxCategory($clothing);
-        $food->setTaxCategory($food);
+        $banana->setTaxCategory($food);
 
         // Save the product entities.
     }
@@ -81,12 +81,12 @@ Finally, you have to create appropriate tax rates for each of categories.
         $clothingTax = $factory
             ->createNew()
             ->setName('Clothing Tax')
-            ->setAmount(0,08)
+            ->setAmount(0.08)
         ;
         $foodTax = $factory
             ->createNew()
             ->setName('Food')
-            ->setAmount(0,12)
+            ->setAmount(0.12)
         ;
 
         $manager->persist($clothingTax);
