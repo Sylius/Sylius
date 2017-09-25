@@ -83,7 +83,7 @@ final class CustomerShowMenuBuilder
             $menu
                 ->addChild('update', [
                     'route' => 'sylius_admin_customer_update',
-                    'routeParameters' => ['id' => $customer->getId()]
+                    'routeParameters' => ['id' => $customer->getId()],
                 ])
                 ->setAttribute('type', 'edit')
                 ->setLabel('sylius.ui.edit')
@@ -92,7 +92,7 @@ final class CustomerShowMenuBuilder
             $menu
                 ->addChild('order_index', [
                     'route' => 'sylius_admin_customer_order_index',
-                    'routeParameters' => ['id' => $customer->getId()]
+                    'routeParameters' => ['id' => $customer->getId()],
                 ])
                 ->setAttribute('type', 'show')
                 ->setLabel('sylius.ui.show_orders')
@@ -101,7 +101,7 @@ final class CustomerShowMenuBuilder
             $menu
                 ->addChild('user_delete', [
                     'route' => 'sylius_admin_shop_user_delete',
-                    'routeParameters' => ['id' => $customer->getUser()->getId()]
+                    'routeParameters' => ['id' => $customer->getUser()->getId()],
                 ])
                 ->setAttribute('type', 'delete')
                 ->setAttribute('resource_id', $customer->getId())
@@ -116,7 +116,7 @@ final class CustomerShowMenuBuilder
         $menu
             ->addChild('order_index', [
                 'route' => 'sylius_admin_customer_order_index',
-                'routeParameters' => ['id' => $customer->getId()]
+                'routeParameters' => ['id' => $customer->getId()],
             ])
             ->setAttribute('type', 'show')
             ->setLabel('sylius.ui.show_orders')

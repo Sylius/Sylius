@@ -212,32 +212,32 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
             'grids' => [
                 'sylius_admin_tax_category' => [
                     'limits' => [10],
-                ]
-            ]
+                ],
+            ],
         ]]);
 
         $this->assertConfigurationIsValid([[
             'grids' => [
                 'sylius_admin_tax_category' => [
                     'limits' => [10, 25],
-                ]
-            ]
+                ],
+            ],
         ]]);
 
         $this->assertConfigurationIsInvalid([[
             'grids' => [
                 'sylius_admin_tax_category' => [
-                    'limits' => [10.0, 25.0]
-                ]
-            ]
+                    'limits' => [10.0, 25.0],
+                ],
+            ],
         ]]);
 
         $this->assertConfigurationIsInvalid([[
             'grids' => [
                 'sylius_admin_tax_category' => [
-                    'limits' => [10, 25, 'surprise!']
-                ]
-            ]
+                    'limits' => [10, 25, 'surprise!'],
+                ],
+            ],
         ]]);
     }
 

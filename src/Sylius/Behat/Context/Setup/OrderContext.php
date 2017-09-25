@@ -409,7 +409,7 @@ final class OrderContext implements Context
         PaymentMethodInterface $paymentMethod
     ) {
         $customer = $user->getCustomer();
-        for ($i = 0; $i < $numberOfOrders; $i++) {
+        for ($i = 0; $i < $numberOfOrders; ++$i) {
             $this->placeOrder($product, $shippingMethod, $address, $paymentMethod, $customer, $i);
         }
 
@@ -487,7 +487,7 @@ final class OrderContext implements Context
         $sampleProductVariant = $this->sharedStorage->get('variant');
         $total = $this->getPriceFromString($total);
 
-        for ($i = 0; $i < $numberOfCustomers; $i++) {
+        for ($i = 0; $i < $numberOfCustomers; ++$i) {
             $order = $this->createCart($customers[rand(0, $numberOfCustomers - 1)]);
 
             $price = $i === ($numberOfCustomers - 1) ? $total : rand(1, $total);
@@ -568,7 +568,7 @@ final class OrderContext implements Context
         $this->addVariantWithPriceToOrder($order, $product->getVariants()->first(), $price);
 
         $this->orderRepository->add($order);
-        $this->sharedStorage->set('order',  $order);
+        $this->sharedStorage->set('order', $order);
     }
 
     /**
@@ -780,11 +780,11 @@ final class OrderContext implements Context
     {
         $customers = [];
 
-        for ($i = 0; $i < $count; $i++) {
+        for ($i = 0; $i < $count; ++$i) {
             $customer = $this->customerFactory->createNew();
             $customer->setEmail(sprintf('john%s@doe.com', uniqid()));
             $customer->setFirstname('John');
-            $customer->setLastname('Doe'.$i);
+            $customer->setLastname('Doe' . $i);
 
             $customers[] = $customer;
 
@@ -875,8 +875,8 @@ final class OrderContext implements Context
         $sampleProductVariant = $this->sharedStorage->get('variant');
         $total = $this->getPriceFromString($total);
 
-        for ($i = 0; $i < $numberOfOrders; $i++) {
-            $order = $this->createOrder($customers[rand(0, $numberOfCustomers - 1)], '#'.uniqid());
+        for ($i = 0; $i < $numberOfOrders; ++$i) {
+            $order = $this->createOrder($customers[rand(0, $numberOfCustomers - 1)], '#' . uniqid());
             $order->setState(OrderInterface::STATE_NEW); // Temporary, we should use checkout to place these orders.
             $this->applyPaymentTransitionOnOrder($order, PaymentTransitions::TRANSITION_COMPLETE);
 
@@ -914,8 +914,8 @@ final class OrderContext implements Context
         $sampleProductVariant = $product->getVariants()->first();
         $total = $this->getPriceFromString($total);
 
-        for ($i = 0; $i < $numberOfOrders; $i++) {
-            $order = $this->createOrder($customers[rand(0, $numberOfCustomers - 1)], '#'.uniqid(), $product->getChannels()->first());
+        for ($i = 0; $i < $numberOfOrders; ++$i) {
+            $order = $this->createOrder($customers[rand(0, $numberOfCustomers - 1)], '#' . uniqid(), $product->getChannels()->first());
             $order->setState(OrderInterface::STATE_NEW);
             $this->applyPaymentTransitionOnOrder($order, PaymentTransitions::TRANSITION_COMPLETE);
 
@@ -950,7 +950,7 @@ final class OrderContext implements Context
         ProductInterface $product,
         bool $isFulfilled = false
     ): void {
-        for ($i = 0; $i < $orderCount; $i++) {
+        for ($i = 0; $i < $orderCount; ++$i) {
             $order = $this->createOrder($customer, uniqid('#'), $channel);
 
             $this->addProductVariantsToOrderWithChannelPrice(

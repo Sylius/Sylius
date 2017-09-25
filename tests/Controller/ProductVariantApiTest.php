@@ -229,7 +229,6 @@ EOT;
         /** @var ProductInterface $product */
         $product = $productVariantsData['product1'];
 
-
         $data =
 <<<EOT
         {
@@ -429,7 +428,6 @@ EOT;
 
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
     }
-
 
     /**
      * @test

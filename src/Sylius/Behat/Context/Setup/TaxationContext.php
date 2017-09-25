@@ -231,6 +231,6 @@ final class TaxationContext implements Context
      */
     private function getCodeFromNameAndZoneCode($taxRateName, $zoneCode)
     {
-        return $this->getCodeFromName($taxRateName).'_'.strtolower($zoneCode);
+        return $this->getCodeFromName($taxRateName) . '_' . strtolower($zoneCode);
     }
 }

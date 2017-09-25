@@ -46,7 +46,7 @@ final class Configuration implements ConfigurationInterface
     /**
      * @param ArrayNodeDefinition $node
      */
-    protected function addEmailsSection(ArrayNodeDefinition $node): void
+    private function addEmailsSection(ArrayNodeDefinition $node): void
     {
         $node
             ->children()

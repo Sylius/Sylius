@@ -401,7 +401,7 @@ final class AddressBookContext implements Context
             ->currentPageResolver
             ->getCurrentPageWithForm([
                 $this->addressBookCreatePage,
-                $this->addressBookUpdatePage
+                $this->addressBookUpdatePage,
         ]);
     }
 }

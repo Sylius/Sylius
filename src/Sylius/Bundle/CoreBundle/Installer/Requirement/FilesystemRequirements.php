@@ -30,7 +30,7 @@ final class FilesystemRequirements extends RequirementCollection
         $this
             ->add(new Requirement(
                 $translator->trans('sylius.installer.filesystem.vendors', []),
-                is_dir($root.'/../vendor')
+                is_dir($root . '/../vendor')
             ))
             ->add(new Requirement(
                 $translator->trans('sylius.installer.filesystem.cache.header', []),

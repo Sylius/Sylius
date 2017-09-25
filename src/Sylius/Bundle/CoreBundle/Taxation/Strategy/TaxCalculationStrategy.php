@@ -50,7 +50,7 @@ final class TaxCalculationStrategy implements TaxCalculationStrategyInterface
     /**
      * {@inheritdoc}
      */
-    public function applyTaxes(OrderInterface $order, ZoneInterface $zone):  void
+    public function applyTaxes(OrderInterface $order, ZoneInterface $zone): void
     {
         foreach ($this->applicators as $applicator) {
             $applicator->apply($order, $zone);

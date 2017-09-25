@@ -54,7 +54,7 @@ final class ZoneFactory implements ZoneFactoryInterface
      */
     public function createTyped(string $type): ZoneInterface
     {
-        /* @var ZoneInterface $zone */
+        /** @var ZoneInterface $zone */
         $zone = $this->createNew();
         $zone->setType($type);
 
@@ -66,7 +66,7 @@ final class ZoneFactory implements ZoneFactoryInterface
      */
     public function createWithMembers(array $membersCodes): ZoneInterface
     {
-        /* @var ZoneInterface $zone */
+        /** @var ZoneInterface $zone */
         $zone = $this->createNew();
         foreach ($membersCodes as $memberCode) {
             $zoneMember = $this->zoneMemberFactory->createNew();

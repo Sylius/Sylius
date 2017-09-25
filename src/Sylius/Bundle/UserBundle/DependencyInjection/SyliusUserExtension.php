@@ -43,7 +43,7 @@ final class SyliusUserExtension extends AbstractResourceExtension
     public function load(array $config, ContainerBuilder $container): void
     {
         $config = $this->processConfiguration($this->getConfiguration([], $container), $config);
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
         $loader->load(sprintf('services/integrations/%s.xml', $config['driver']));
 
@@ -68,7 +68,7 @@ final class SyliusUserExtension extends AbstractResourceExtension
         foreach ($resources as $variableName => $variableConfig) {
             foreach ($variableConfig as $resourceName => $resourceConfig) {
                 if (is_array($resourceConfig)) {
-                    $resolvedResources[$variableName.'_'.$resourceName] = $resourceConfig;
+                    $resolvedResources[$variableName . '_' . $resourceName] = $resourceConfig;
                 }
             }
         }
@@ -109,7 +109,7 @@ final class SyliusUserExtension extends AbstractResourceExtension
                 [
                     new Reference('sylius.random_generator'),
                     new Reference(sprintf('sylius.%s_user.token_uniqueness_checker.password_reset', $userType)),
-                    $config['resetting']['token']['length']
+                    $config['resetting']['token']['length'],
                 ]
             )
         );
@@ -121,7 +121,7 @@ final class SyliusUserExtension extends AbstractResourceExtension
                 [
                     new Reference('sylius.random_generator'),
                     new Reference(sprintf('sylius.%s_user.pin_uniqueness_checker.password_reset', $userType)),
-                    $config['resetting']['pin']['length']
+                    $config['resetting']['pin']['length'],
                 ]
             )
         );
@@ -133,7 +133,7 @@ final class SyliusUserExtension extends AbstractResourceExtension
                 [
                     new Reference('sylius.random_generator'),
                     new Reference(sprintf('sylius.%s_user.token_uniqueness_checker.email_verification', $userType)),
-                    $config['verification']['token']['length']
+                    $config['verification']['token']['length'],
                 ]
             )
         );

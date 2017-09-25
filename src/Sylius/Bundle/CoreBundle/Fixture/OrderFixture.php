@@ -168,7 +168,7 @@ class OrderFixture extends AbstractFixture
         $customers = $this->customerRepository->findAll();
         $countries = $this->countryRepository->findAll();
 
-        for ($i = 0; $i < $options['amount']; $i++) {
+        for ($i = 0; $i < $options['amount']; ++$i) {
             $channel = $this->faker->randomElement($channels);
             $customer = $this->faker->randomElement($customers);
             $countryCode = $this->faker->randomElement($countries)->getCode();
@@ -226,7 +226,7 @@ class OrderFixture extends AbstractFixture
         $numberOfItems = rand(1, 5);
         $products = $this->productRepository->findAll();
 
-        for ($i = 0; $i < $numberOfItems; $i++) {
+        for ($i = 0; $i < $numberOfItems; ++$i) {
             $item = $this->orderItemFactory->createNew();
 
             $product = $this->faker->randomElement($products);

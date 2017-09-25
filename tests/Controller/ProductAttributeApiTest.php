@@ -59,7 +59,6 @@ final class ProductAttributeApiTest extends JsonApiTestCase
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/product_attributes.yml');
 
-
         $this->client->request('GET', '/api/v1/product-attributes/', [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();

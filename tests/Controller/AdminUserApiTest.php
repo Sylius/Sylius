@@ -342,7 +342,7 @@ EOT;
         $this->client->request('DELETE', $this->getAdminUserUrl($user['admin']), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'admin_user/deletion_fail_response',  Response::HTTP_UNPROCESSABLE_ENTITY);
+        $this->assertResponse($response, 'admin_user/deletion_fail_response', Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
     /**

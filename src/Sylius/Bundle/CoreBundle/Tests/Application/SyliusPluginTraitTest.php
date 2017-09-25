@@ -15,7 +15,7 @@ final class SyliusPluginTraitTest extends TestCase
      */
     public function it_does_not_crash(): void
     {
-        new class extends Bundle {
+        new class() extends Bundle {
             use SyliusPluginTrait;
         };
     }

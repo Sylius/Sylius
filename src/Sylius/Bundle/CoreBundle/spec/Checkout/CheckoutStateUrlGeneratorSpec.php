@@ -33,7 +33,7 @@ final class CheckoutStateUrlGeneratorSpec extends ObjectBehavior
                 'route' => 'sylius_shop_checkout_select_shipping',
             ],
             'empty_order' => [
-                'route' => 'sylius_shop_cart_summary'
+                'route' => 'sylius_shop_cart_summary',
             ],
         ];
 

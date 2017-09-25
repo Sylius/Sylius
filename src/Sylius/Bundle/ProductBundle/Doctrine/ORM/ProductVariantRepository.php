@@ -149,7 +149,7 @@ class ProductVariantRepository extends EntityRepository implements ProductVarian
                 'translation.name LIKE :phrase',
                 'o.code LIKE :phrase'
             ))
-            ->setParameter('phrase', '%'.$phrase.'%')
+            ->setParameter('phrase', '%' . $phrase . '%')
             ->setParameter('locale', $locale)
             ->setParameter('productCode', $productCode)
             ->getQuery()

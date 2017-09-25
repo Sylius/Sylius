@@ -65,7 +65,7 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
     {
         $this->queryBuilder->setParameter($field, $value);
 
-        return $this->queryBuilder->expr()->eq($field, ':'.$field);
+        return $this->queryBuilder->expr()->eq($field, ':' . $field);
     }
 
     /**
@@ -75,7 +75,7 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
     {
         $this->queryBuilder->setParameter($field, $value);
 
-        return $this->queryBuilder->expr()->neq($field, ':'.$field);
+        return $this->queryBuilder->expr()->neq($field, ':' . $field);
     }
 
     /**
@@ -83,7 +83,7 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
      */
     public function lessThan(string $field, $value)
     {
-        $this->queryBuilder->andWhere($field.' < :'.$field)->setParameter($field, $value);
+        $this->queryBuilder->andWhere($field . ' < :' . $field)->setParameter($field, $value);
     }
 
     /**
@@ -91,7 +91,7 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
      */
     public function lessThanOrEqual(string $field, $value)
     {
-        $this->queryBuilder->andWhere($field.' =< :'.$field)->setParameter($field, $value);
+        $this->queryBuilder->andWhere($field . ' =< :' . $field)->setParameter($field, $value);
     }
 
     /**
@@ -99,7 +99,7 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
      */
     public function greaterThan(string $field, $value)
     {
-        $this->queryBuilder->andWhere($field.' > :'.$field)->setParameter($field, $value);
+        $this->queryBuilder->andWhere($field . ' > :' . $field)->setParameter($field, $value);
     }
 
     /**
@@ -107,7 +107,7 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
      */
     public function greaterThanOrEqual(string $field, $value)
     {
-        $this->queryBuilder->andWhere($field.' => :%s'.$field)->setParameter($field, $value);
+        $this->queryBuilder->andWhere($field . ' => :%s' . $field)->setParameter($field, $value);
     }
 
     /**

@@ -37,7 +37,7 @@ final class BuildAttributesFormSubscriberSpec extends ObjectBehavior
     {
         static::getSubscribedEvents()->shouldReturn([
             FormEvents::PRE_SET_DATA => 'preSetData',
-            FormEvents::POST_SUBMIT => 'postSubmit'
+            FormEvents::POST_SUBMIT => 'postSubmit',
         ]);
     }
 

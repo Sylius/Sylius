@@ -50,11 +50,12 @@ final class ProductOptionValueCollectionType extends AbstractType
             $builder->add((string) $option->getCode(), ProductOptionValueChoiceType::class, [
                 'label' => $option->getName() ?: $option->getCode(),
                 'option' => $option,
-                'property_path' => '['.$i.']',
+                'property_path' => '[' . $i . ']',
                 'block_name' => 'entry',
             ]);
         }
     }
+
     /**
      * {@inheritdoc}
      */
@@ -66,6 +67,7 @@ final class ProductOptionValueCollectionType extends AbstractType
             ])
         ;
     }
+
     /**
      * {@inheritdoc}
      */

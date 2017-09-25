@@ -117,7 +117,7 @@ final class ArrayToDefinitionConverterSpec extends ObjectBehavior
                     'path' => 'method.code',
                     'sortable' => 'code',
                     'options' => [
-                        'template' => 'bar.html.twig'
+                        'template' => 'bar.html.twig',
                     ],
                 ],
                 'enabled' => [
@@ -146,10 +146,10 @@ final class ArrayToDefinitionConverterSpec extends ObjectBehavior
                 'enabled' => [
                     'type' => 'boolean',
                     'options' => [
-                        'fields' => ['firstName', 'lastName']
+                        'fields' => ['firstName', 'lastName'],
                     ],
                     'default_value' => 'true',
-                ]
+                ],
             ],
             'actions' => [
                 'default' => [
@@ -159,9 +159,9 @@ final class ArrayToDefinitionConverterSpec extends ObjectBehavior
                         'options' => [
                             'foo' => 'bar',
                         ],
-                    ]
-                ]
-            ]
+                    ],
+                ],
+            ],
         ];
 
         $this->convert('sylius_admin_tax_category', $definitionArray)->shouldBeLike($grid);

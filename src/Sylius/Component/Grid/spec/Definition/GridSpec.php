@@ -29,7 +29,7 @@ final class GridSpec extends ObjectBehavior
         $this->beConstructedThrough('fromCodeAndDriverConfiguration', ['sylius_admin_tax_category', 'doctrine/orm', [
             'resource' => 'sylius.tax_category',
             'method' => 'createByCodeQueryBuilder',
-            'arguments' => ['$code']
+            'arguments' => ['$code'],
         ]]);
     }
 
@@ -48,7 +48,7 @@ final class GridSpec extends ObjectBehavior
         $this->getDriverConfiguration()->shouldReturn([
             'resource' => 'sylius.tax_category',
             'method' => 'createByCodeQueryBuilder',
-            'arguments' => ['$code']
+            'arguments' => ['$code'],
         ]);
     }
 

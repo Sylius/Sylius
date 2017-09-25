@@ -129,7 +129,6 @@ final class SingleResourceProviderSpec extends ObjectBehavior
         $this->get($requestConfiguration, $repository)->shouldReturn($resource);
     }
 
-
     function it_can_find_specific_resource_with_merged_custom_criteria_overwriting_the_attributes(
         RequestConfiguration $requestConfiguration,
         Request $request,

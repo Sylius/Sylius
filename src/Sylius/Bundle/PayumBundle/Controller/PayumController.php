@@ -163,23 +163,19 @@ final class PayumController
             $token = $this->getTokenFactory()->createAuthorizeToken(
                 $gatewayConfig->getGatewayName(),
                 $payment,
-                isset($redirectOptions['route'])
-                    ? $redirectOptions['route']
-                    : null,
-                isset($redirectOptions['parameters'])
-                    ? $redirectOptions['parameters']
-                    : []
+                $redirectOptions['route']
+                    ?? null,
+                $redirectOptions['parameters']
+                    ?? []
             );
         } else {
             $token = $this->getTokenFactory()->createCaptureToken(
                 $gatewayConfig->getGatewayName(),
                 $payment,
-                isset($redirectOptions['route'])
-                    ? $redirectOptions['route']
-                    : null,
-                isset($redirectOptions['parameters'])
-                    ? $redirectOptions['parameters']
-                    : []
+                $redirectOptions['route']
+                    ?? null,
+                $redirectOptions['parameters']
+                    ?? []
             );
         }
 

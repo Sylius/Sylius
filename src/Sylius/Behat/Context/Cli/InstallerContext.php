@@ -150,7 +150,7 @@ final class InstallerContext implements Context
      *
      * @return resource
      */
-    protected function getInputStream($input)
+    private function getInputStream($input)
     {
         $stream = fopen('php://memory', 'rb+', false);
         fwrite($stream, $input);
@@ -166,7 +166,7 @@ final class InstallerContext implements Context
     {
         $this->questionHelper = $this->command->getHelper('question');
         $inputString = implode(PHP_EOL, $this->inputChoices);
-        $this->questionHelper->setInputStream($this->getInputStream($inputString.PHP_EOL));
+        $this->questionHelper->setInputStream($this->getInputStream($inputString . PHP_EOL));
 
         try {
             $this->tester->execute(['command' => $name]);
@@ -180,7 +180,7 @@ final class InstallerContext implements Context
     private function iExecuteCommandAndConfirm($name)
     {
         $this->questionHelper = $this->command->getHelper('question');
-        $inputString = 'y'.PHP_EOL;
+        $inputString = 'y' . PHP_EOL;
         $this->questionHelper->setInputStream($this->getInputStream($inputString));
 
         try {

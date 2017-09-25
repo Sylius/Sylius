@@ -52,7 +52,7 @@ final class DatetimeFieldTypeSpec extends ObjectBehavior
         $dataExtractor->get($field, ['foo' => 'bar'])->willReturn(null);
 
         $this->render($field, ['foo' => 'bar'], [
-            'format' => ''
+            'format' => '',
         ])->shouldReturn(null);
     }
 

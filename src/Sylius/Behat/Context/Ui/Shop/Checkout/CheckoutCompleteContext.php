@@ -108,7 +108,7 @@ final class CheckoutCompleteContext implements Context
      */
     public function iShouldSeeThisShippingAddressAsShippingAddress($fullName)
     {
-        $address = $this->sharedStorage->get('shipping_address_'.StringInflector::nameToLowercaseCode($fullName));
+        $address = $this->sharedStorage->get('shipping_address_' . StringInflector::nameToLowercaseCode($fullName));
 
         Assert::true($this->completePage->hasShippingAddress($address));
     }
@@ -118,7 +118,7 @@ final class CheckoutCompleteContext implements Context
      */
     public function iShouldSeeThisBillingAddressAsBillingAddress($fullName)
     {
-        $address = $this->sharedStorage->get('billing_address_'.StringInflector::nameToLowercaseCode($fullName));
+        $address = $this->sharedStorage->get('billing_address_' . StringInflector::nameToLowercaseCode($fullName));
 
         Assert::true($this->completePage->hasBillingAddress($address));
     }

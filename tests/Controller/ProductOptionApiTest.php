@@ -59,7 +59,6 @@ final class ProductOptionApiTest extends JsonApiTestCase
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/product_options.yml');
 
-
         $this->client->request('GET', '/api/v1/product-options/', [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();

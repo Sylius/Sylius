@@ -21,7 +21,7 @@ use Doctrine\Common\Collections\Collection;
 interface AdjustableInterface
 {
     /**
-     * @param null|string $type
+     * @param string|null $type
      *
      * @return Collection|AdjustmentInterface[]
      */
@@ -38,7 +38,7 @@ interface AdjustableInterface
     public function removeAdjustment(AdjustmentInterface $adjustment): void;
 
     /**
-     * @param null|string $type
+     * @param string|null $type
      *
      * @return int
      */

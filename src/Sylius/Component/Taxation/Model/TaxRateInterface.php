@@ -70,7 +70,7 @@ interface TaxRateInterface extends CodeAwareInterface, TimestampableInterface, R
     /**
      * @return string|null
      */
-    public function getCalculator(): ?string ;
+    public function getCalculator(): ?string;
 
     /**
      * @param string|null $calculator

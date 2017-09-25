@@ -65,7 +65,7 @@ final class ProductAssociationFixtureTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertConfigurationIsValid(
             [[
-                'custom' => [['associated_products' => ['product-1', 'product-2']]]
+                'custom' => [['associated_products' => ['product-1', 'product-2']]],
             ]],
             'custom.*.associated_products')
         ;

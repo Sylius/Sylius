@@ -26,12 +26,12 @@ final class EmailProvider implements EmailProviderInterface
     /**
      * @var EmailFactoryInterface
      */
-    protected $emailFactory;
+    private $emailFactory;
 
     /**
      * @var array
      */
-    protected $configuration;
+    private $configuration;
 
     /**
      * @param EmailFactoryInterface $emailFactory

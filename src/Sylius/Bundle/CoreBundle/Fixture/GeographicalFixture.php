@@ -184,7 +184,7 @@ class GeographicalFixture extends AbstractFixture
         }
 
         foreach ($countriesProvinces as $countryCode => $provinces) {
-            Assert::keyExists($countries, $countryCode, sprintf('Cannot create provinces for unexisting country "%s"!',$countryCode));
+            Assert::keyExists($countries, $countryCode, sprintf('Cannot create provinces for unexisting country "%s"!', $countryCode));
 
             $this->loadProvincesForCountry($provinces, $countries[$countryCode]);
         }
@@ -330,7 +330,7 @@ class GeographicalFixture extends AbstractFixture
                     $zoneCode,
                     implode(', ', array_keys($options['zones']))
                 ));
-            }
+            },
         ];
 
         return function (array $zoneOptions) use ($memberValidators) {

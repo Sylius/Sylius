@@ -232,7 +232,7 @@ final class FlashHelperSpec extends ObjectBehavior
         $flashBag->add(ResourceControllerEvent::TYPE_WARNING,
             [
                 'message' => 'sylius.channel.cannot_be_deleted',
-                'parameters' => ['%name%' => 'Germany Sylius Webshop']
+                'parameters' => ['%name%' => 'Germany Sylius Webshop'],
             ]
         )->shouldBeCalled();
 

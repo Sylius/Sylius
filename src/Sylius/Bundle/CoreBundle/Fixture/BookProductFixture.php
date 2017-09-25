@@ -94,8 +94,8 @@ class BookProductFixture extends AbstractFixture
                 [
                     'code' => 'books',
                     'name' => 'Books',
-                ]
-            ]
+                ],
+            ],
         ]]]);
 
         $bookGenres = ['science_fiction' => 'Science Fiction', 'romance' => 'Romance', 'thriller' => 'Thriller', 'sports' => 'Sports'];
@@ -110,7 +110,7 @@ class BookProductFixture extends AbstractFixture
                 'configuration' => [
                     'multiple' => true,
                     'choices' => $bookGenres,
-                ]
+                ],
             ],
         ]]);
 

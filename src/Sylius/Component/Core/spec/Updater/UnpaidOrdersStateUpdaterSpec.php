@@ -47,7 +47,7 @@ final class UnpaidOrdersStateUpdaterSpec extends ObjectBehavior
     ): void {
         $orderRepository->findOrdersUnpaidSince(Argument::type(\DateTimeInterface::class))->willReturn([
            $firstOrder,
-           $secondOrder
+           $secondOrder,
         ]);
 
         $stateMachineFactory->get($firstOrder, 'sylius_order')->willReturn($firstOrderStateMachine);

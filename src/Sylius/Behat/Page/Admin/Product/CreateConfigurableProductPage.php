@@ -65,7 +65,7 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
             $imageForm->fillField('Type', $type);
         }
 
-        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath.$path);
+        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath . $path);
     }
 
     /**

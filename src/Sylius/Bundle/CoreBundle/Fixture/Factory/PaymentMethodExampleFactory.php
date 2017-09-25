@@ -74,6 +74,7 @@ class PaymentMethodExampleFactory extends AbstractExampleFactory implements Exam
 
         $this->configureOptions($this->optionsResolver);
     }
+
     /**
      * {@inheritdoc}
      */

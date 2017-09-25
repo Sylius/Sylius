@@ -114,6 +114,7 @@ class UrlPackage extends BaseUrlPackage
 
     /**
      * @param array $urls
+     *
      * @return array
      */
     private function getSslUrls(array $urls): array

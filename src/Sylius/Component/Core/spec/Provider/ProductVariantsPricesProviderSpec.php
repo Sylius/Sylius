@@ -54,7 +54,7 @@ final class ProductVariantsPricesProviderSpec extends ObjectBehavior
             $blackSmallTShirt->getWrappedObject(),
             $whiteSmallTShirt->getWrappedObject(),
             $blackLargeTShirt->getWrappedObject(),
-            $whiteLargeTShirt->getWrappedObject()
+            $whiteLargeTShirt->getWrappedObject(),
         ]));
 
         $blackSmallTShirt->getOptionValues()->willReturn(
@@ -105,7 +105,7 @@ final class ProductVariantsPricesProviderSpec extends ObjectBehavior
                 't_shirt_color' => 'white',
                 't_shirt_size' => 'large',
                 'value' => 2500,
-            ]
+            ],
         ]);
     }
 }

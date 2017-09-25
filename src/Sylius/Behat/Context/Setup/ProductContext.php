@@ -748,7 +748,7 @@ final class ProductContext implements Context
 
         /** @var ImageInterface $productImage */
         $productImage = $this->productImageFactory->createNew();
-        $productImage->setFile(new UploadedFile($filesPath.$imagePath, basename($imagePath)));
+        $productImage->setFile(new UploadedFile($filesPath . $imagePath, basename($imagePath)));
         $productImage->setType($imageType);
         $this->imageUploader->upload($productImage);
 

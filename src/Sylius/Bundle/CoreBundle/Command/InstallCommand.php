@@ -78,7 +78,7 @@ EOT
                     count($this->commands),
                     $command['message']
                 ));
-                $this->commandExecutor->runCommand('sylius:install:'.$command['command'], [], $output);
+                $this->commandExecutor->runCommand('sylius:install:' . $command['command'], [], $output);
             } catch (RuntimeException $exception) {
                 $errored = true;
             }

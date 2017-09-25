@@ -64,7 +64,7 @@ final class TranslatorResourceProviderPassTest extends AbstractCompilerPassTestC
         $this->setDefinition('translator.default', $symfonyTranslatorDefinition);
 
         $this->setDefinition('sylius.theme.translation.resource_provider.default', new Definition(null, [
-            ['/resources/alerts.en.yml']
+            ['/resources/alerts.en.yml'],
         ]));
 
         $this->compile();

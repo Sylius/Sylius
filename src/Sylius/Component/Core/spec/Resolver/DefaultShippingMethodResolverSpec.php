@@ -54,7 +54,6 @@ final class DefaultShippingMethodResolverSpec extends ObjectBehavior
             ->willReturn([$firstShippingMethod, $secondShippingMethod])
         ;
 
-
         $this->getDefaultShippingMethod($shipment)->shouldReturn($firstShippingMethod);
     }
 

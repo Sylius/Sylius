@@ -106,7 +106,7 @@ final class ShowAvailablePaymentMethodsController
         $cart = $this->orderRepository->findCartById($cartId);
 
         if (null === $cart) {
-            throw new NotFoundHttpException(sprintf("The cart with %s id could not be found!", $cartId));
+            throw new NotFoundHttpException(sprintf('The cart with %s id could not be found!', $cartId));
         }
 
         return $cart;
@@ -131,7 +131,7 @@ final class ShowAvailablePaymentMethodsController
      */
     private function getPaymentMethods(PaymentInterface $payment, string $locale): array
     {
-        $paymentMethods =  $this->paymentMethodResolver->getSupportedMethods($payment);
+        $paymentMethods = $this->paymentMethodResolver->getSupportedMethods($payment);
 
         $rawPaymentMethods = [];
 

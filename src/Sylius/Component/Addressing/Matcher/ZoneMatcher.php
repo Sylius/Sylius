@@ -55,7 +55,7 @@ final class ZoneMatcher implements ZoneMatcherInterface
     {
         $zones = [];
 
-        /* @var ZoneInterface $zone */
+        /** @var ZoneInterface $zone */
         foreach ($availableZones = $this->getZones($scope) as $zone) {
             if ($this->addressBelongsToZone($address, $zone)) {
                 $zones[$zone->getType()] = $zone;
@@ -117,15 +117,12 @@ final class ZoneMatcher implements ZoneMatcherInterface
         switch ($type = $member->getBelongsTo()->getType()) {
             case ZoneInterface::TYPE_PROVINCE:
                 return null !== $address->getProvinceCode() && $address->getProvinceCode() === $member->getCode();
-
             case ZoneInterface::TYPE_COUNTRY:
                 return null !== $address->getCountryCode() && $address->getCountryCode() === $member->getCode();
-
             case ZoneInterface::TYPE_ZONE:
                 $zone = $this->getZoneByCode($member->getCode());
 
                 return null !== $zone && $this->addressBelongsToZone($address, $zone);
-
             default:
                 throw new \InvalidArgumentException(sprintf('Unexpected zone type "%s".', $type));
         }

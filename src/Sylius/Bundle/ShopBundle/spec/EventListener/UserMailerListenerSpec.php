@@ -95,7 +95,7 @@ final class UserMailerListenerSpec extends ObjectBehavior
 
         $emailSender->send(Emails::USER_REGISTRATION, ['fulanito@sylius.com'], [
             'user' => $user,
-            'channel' => $channel
+            'channel' => $channel,
         ])->shouldBeCalled();
 
         $this->sendUserRegistrationEmail($event);

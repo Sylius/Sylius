@@ -103,7 +103,7 @@ final class FixedCollectionTypeTest extends TypeTestCase
                 ];
 
                 return ['empty_data' => $defaults[$entry]];
-            }
+            },
         ]);
 
         $form->submit([]);

@@ -45,7 +45,7 @@ final class DefaultShippingMethodResolver implements DefaultShippingMethodResolv
         if (empty($shippingMethods)) {
             throw new UnresolvedDefaultShippingMethodException();
         }
-        
+
         return $shippingMethods[0];
     }
 }

@@ -37,7 +37,7 @@ final class CompositePromotionEligibilityCheckerPass implements CompilerPassInte
                     return new Reference($id);
                 },
                 array_keys($container->findTaggedServiceIds('sylius.promotion_eligibility_checker'))
-            )
+            ),
         ]);
     }
 }

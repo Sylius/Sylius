@@ -70,6 +70,6 @@ final class CachedTemplateLocator implements TemplateLocatorInterface
      */
     private function getCacheKey(TemplateReferenceInterface $template, ThemeInterface $theme): string
     {
-        return $template->getLogicalName().'|'.$theme->getName();
+        return $template->getLogicalName() . '|' . $theme->getName();
     }
 }

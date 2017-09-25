@@ -83,11 +83,12 @@ class NameResolverListener
 
             if (null === $existing) {
                 $metadata->setFieldValue($document, $nameField, $candidateName);
+
                 return;
             }
 
             $candidateName = sprintf('%s-%d', $baseCandidateName, $index);
-            $index++;
+            ++$index;
         }
     }
 }

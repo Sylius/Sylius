@@ -31,27 +31,27 @@ final class ImpersonateUserController
     /**
      * @var UserImpersonatorInterface
      */
-    protected $impersonator;
+    private $impersonator;
 
     /**
      * @var AuthorizationCheckerInterface
      */
-    protected $authorizationChecker;
+    private $authorizationChecker;
 
     /**
      * @var UserProviderInterface
      */
-    protected $userProvider;
+    private $userProvider;
 
     /**
      * @var RouterInterface
      */
-    protected $router;
+    private $router;
 
     /**
      * @var string
      */
-    protected $authorizationRole;
+    private $authorizationRole;
 
     /**
      * @param UserImpersonatorInterface $impersonator
@@ -108,7 +108,7 @@ final class ImpersonateUserController
         $session = $request->getSession();
         $session->getFlashBag()->add('success', [
             'message' => 'sylius.customer.impersonate',
-            'parameters' => ['%name%' => $username]
+            'parameters' => ['%name%' => $username],
         ]);
     }
 }

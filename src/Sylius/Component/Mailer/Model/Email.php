@@ -21,42 +21,42 @@ final class Email implements EmailInterface
     /**
      * @var mixed
      */
-    protected $id;
+    private $id;
 
     /**
      * @var string
      */
-    protected $code;
+    private $code;
 
     /**
      * @var bool
      */
-    protected $enabled = true;
+    private $enabled = true;
 
     /**
      * @var string
      */
-    protected $subject;
+    private $subject;
 
     /**
      * @var string
      */
-    protected $content;
+    private $content;
 
     /**
      * @var string
      */
-    protected $template;
+    private $template;
 
     /**
      * @var string
      */
-    protected $senderName;
+    private $senderName;
 
     /**
      * @var string
      */
-    protected $senderAddress;
+    private $senderAddress;
 
     /**
      * {@inheritdoc}
