@@ -78,8 +78,7 @@ For the contributing process questions, please refer to the `Contributing Guide 
 How to contribute using Sylius Vagrant
 --------------------------------------
 
-If you would like to contribute to the repo without worrying about environment, you can follow `this guide <https://github.com/Sylius/Vagrant/blob/master/README.md#configure-vagrant-to-contribute-on-sylius-core>`_ to setup you vagrant machine
-
+If you would like to contribute to the repo without worrying about environment, you can follow `this guide <https://github.com/Sylius/Vagrant/blob/master/README.md#configure-vagrant-to-contribute-on-sylius-core>`_ to setup your vagrant machine.
 
 Contributing Code
 -----------------
