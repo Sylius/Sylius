@@ -84,7 +84,7 @@ final class TextAttributeType implements AttributeTypeInterface
             $constraints = [new NotBlank([])];
         }
 
-        if (isset($validationConfiguration['min'], $validationConfiguration['max'])  ) {
+        if (isset($validationConfiguration['min'], $validationConfiguration['max'])) {
             $constraints[] = new Length(
                 [
                     'min' => $validationConfiguration['min'],

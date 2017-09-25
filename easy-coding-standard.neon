@@ -41,7 +41,8 @@ checkers:
     PhpCsFixer\Fixer\Comment\HashToSlashCommentFixer: {}
     PhpCsFixer\Fixer\Comment\NoEmptyCommentFixer: {}
     PhpCsFixer\Fixer\Comment\NoTrailingWhitespaceInCommentFixer: {}
-    PhpCsFixer\Fixer\Comment\SingleLineCommentStyleFixer: {}
+    PhpCsFixer\Fixer\Comment\SingleLineCommentStyleFixer:
+        comment_types: ['hash']
     PhpCsFixer\Fixer\ControlStructure\ElseifFixer: {}
     PhpCsFixer\Fixer\ControlStructure\IncludeFixer: {}
     PhpCsFixer\Fixer\ControlStructure\NoBreakCommentFixer: {}
@@ -100,7 +101,6 @@ checkers:
     PhpCsFixer\Fixer\Phpdoc\PhpdocScalarFixer: {}
     PhpCsFixer\Fixer\Phpdoc\PhpdocSeparationFixer: {}
     PhpCsFixer\Fixer\Phpdoc\PhpdocSingleLineVarSpacingFixer: {}
-    PhpCsFixer\Fixer\Phpdoc\PhpdocToCommentFixer: {}
     PhpCsFixer\Fixer\Phpdoc\PhpdocTrimFixer: {}
     PhpCsFixer\Fixer\Phpdoc\PhpdocTypesFixer: {}
     PhpCsFixer\Fixer\Phpdoc\PhpdocTypesOrderFixer:
