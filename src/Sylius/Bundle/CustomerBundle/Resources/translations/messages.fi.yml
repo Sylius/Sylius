@@ -5,6 +5,7 @@ sylius:
     form:
         customer:
             first_name: Etunimi
+            group: Ryhmä
             last_name: Sukunimi
             email: Sähköpostiosoite
             phone_number: Puhelinnumero
@@ -14,6 +15,9 @@ sylius:
             different_billing_address: Käytä eri osoitetta laskutukseen?
             only_customer_registration: Luo tili?
             subscribed_to_newsletter: Tilaa uutiskirje
+        customer_group:
+            name: Nimi
+            roles: Roolit
     gender:
         unknown: Tuntematon
         male: Mies

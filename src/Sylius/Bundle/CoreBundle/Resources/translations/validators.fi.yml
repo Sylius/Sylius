@@ -2,6 +2,21 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    channel:
+        contact_email:
+            invalid: Sähköpostiosoite ei kelpaa.
+            max: Sähköpostiosoitteessa saa olla enintään {{ limit }} merkkiä.
     contact:
         email:
+            invalid: Sähköpostiosoite ei kelpaa.
             not_blank: Kirjoita sähköpostiosoitteesi.
+    customer:
+        currency_code:
+            not_valid: Ilmoittamasi valuuttakoodi ei kelpaa.
+    order:
+        currency_code:
+            not_valid: Ilmoittamasi valuuttakoodi ei kelpaa.
+    user:
+        email:
+            unique: Sähköpostiosoite on jo käytössä.
+            invalid: Sähköpostiosoite ei kelpaa.

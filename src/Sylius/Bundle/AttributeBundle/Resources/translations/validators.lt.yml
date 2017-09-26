@@ -9,6 +9,7 @@ sylius:
             max_length: Atributo pavadinimas neturi būti ilgesnis kaip 1 simbolis.|Atributo pavadinimas neturi būti ilgesnis nei {{ limit }} simbolių.
         code:
             not_blank: Įveskite atributo pavadinimą.
+            regex: Atributo kodą gali sudaryti tik raidės, skaičiai, brūkšniai ir pabraukimai.
             unique: Šis kodas jau naudojamas.
         presentation:
             not_blank: Įveskite atributo prezentaciją.

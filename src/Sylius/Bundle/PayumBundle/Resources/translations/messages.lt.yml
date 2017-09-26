@@ -18,3 +18,6 @@ sylius:
         offline: Neprisijungęs
         paypal_express_checkout: PayPal greitas atsiskaitymas
         stripe_checkout: Stripe atsiskaitymas
+    payum_action:
+        payment:
+            description: Apmokėjime yra %items% prekė iš %total% | Apmokėjime yra %items% prekių iš %total%

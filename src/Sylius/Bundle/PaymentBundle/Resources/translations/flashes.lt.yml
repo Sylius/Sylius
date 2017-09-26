@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    payment:
+        cancelled: 'Mokėjimas atšauktas.'
+        completed: 'Mokėjimas baigtas.'
+        failed: 'Apmokėjimas nepavyko.'
+        processing: 'Mokėjimas yra apdorojamas.'
+        refunded: 'Mokėjimas sėkmingai grąžintas.'
+        unknown: 'Įvyko nežinoma problema su mokėjimu.'

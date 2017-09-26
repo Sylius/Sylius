@@ -36,6 +36,9 @@ sylius:
             configuration: Configuratie
             description: Omschrijving
             enabled: Toegestaan
+            match_all_category_requirement: Alle eenheden moeten dezelfde categorie hebben
+            match_any_category_requirement: Minstens 1 eenheid moet dezelfde categorie hebben
+            match_none_category_requirement: Geen van de eenheden moeten dezelfde categorie hebben
             name: Naam
             position: Positie
             tax_category: Belasting categorie
