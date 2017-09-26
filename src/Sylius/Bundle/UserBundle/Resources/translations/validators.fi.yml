@@ -5,3 +5,12 @@ sylius:
     user:
         email:
             not_blank: Kirjoita sähköpostiosoitteesi.
+            invalid: Sähköpostiosoite ei kelpaa.
+            not_registered: Sähköpostiosoitteella ei löydy käyttäjää. Aloita rekisteröitymällä.
+        plainPassword:
+            not_blank: Anna salasanasi.
+            mismatch: Salasanat eivät vastaa toisiaan
+            wrong_current: Antamasi salasana ei ole sama kuin nykyinen salasana.
+        password:
+            min: Salasanassa on oltava vähintään {{ limit }} merkkiä.
+            max: Salasanassa saa olla enintään {{ limit }} merkkiä.

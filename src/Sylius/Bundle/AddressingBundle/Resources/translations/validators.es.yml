@@ -20,7 +20,7 @@ sylius:
             not_blank: Por favor, introduzca los apellidos.
         postcode:
             max_length: El código postal no debe tener más de 255 caracteres|El código postal no debe tener más de 255 caracteres.
-            min_length: El código postal debe tener al menos 2 caracteres|El código postal debe tener al menos 2 caracteres.
+            min_length: El código postal debe tener al menos 2 caracteres.
             not_blank: Por favor, introduzca el código postal.
         province:
             valid: Por favor seleccione la provincia adecuada.

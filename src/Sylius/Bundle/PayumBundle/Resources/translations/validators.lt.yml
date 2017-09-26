@@ -1,0 +1,12 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    gateway_config:
+        paypal:
+            password:
+                not_blank: Įveskite savo PayPal slaptažodį.
+            signature:
+                not_blank: Įveskite savo PayPal parašą.
+            username:
+                not_blank: Įveskite savo PayPal vartotojo vardą.

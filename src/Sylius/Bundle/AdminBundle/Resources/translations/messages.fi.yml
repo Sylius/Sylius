@@ -6,6 +6,7 @@ sylius:
         admin:
             main:
                 catalog:
+                    association_types: Yhteystyypit
                     attributes: Ominaisuudet
                     header: Luettelo
                     options: Asetukset

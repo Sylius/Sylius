@@ -41,4 +41,5 @@ sylius:
                 not_blank: Prašome įvesti mokesčio procentą.
         code:
             not_blank: 'Prašome įvesti mokėjimo būdo kodą.'
+            regex: 'Apmokėjimo metodo kodas gali būti sudarytas tik iš raidžių, skaičių, brūkšnelių ir pabraukimų.'
             unique: 'Mokėjimo būdas su tokiu kodu jau yra.'

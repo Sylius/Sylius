@@ -28,9 +28,11 @@ sylius:
             max_length: Postiosoite saa olla korkeintaan 255 merkin pituinen|Postiosoite saa olla korkeintaan 255 merkin pituinen.
             min_length: Postiosoitteen tulee olla vähintään kahden merkin pituinen|Postiosoitteen tulee olla vähintään kahden merkin pituinen.
             not_blank: Lisää postiosoite.
+        not_shippable: Osoite ei kelpaa toimitusosoitteeksi.
     country:
         code:
             not_blank: Syötä maan ISO-koodi.
+            regex: Maakoodissa voi olla vain kirjaimia, numeroita, ajatusviivoja ja alaviivoja.
             unique: Maan ISO-koodin on oltava yksilöllinen.
     province:
         code:
@@ -44,12 +46,20 @@ sylius:
             not_blank: Lisää maakunta.
             unique: Maankunnan nimi on oltava yksilöllinen.
     zone:
+        scope:
+            not_blank: Anna alue.
         code:
             not_blank: Lisää aluekoodi.
+            regex: Vyöhykekoodissa voi olla vain kirjaimia, numeroita, ajatusviivoja ja alaviivoja.
             unique: Aluekoodin tulee olla yksilöllinen.
+        members:
+            min_count: Lisää vähintään {{ limit }} vyöhykkeen jäsentä.
         name:
+            max_length: Vyöhykkeen nimessä saa olla enintään 255 merkkiä|Vyöhykkeen nimessä saa olla enintään 255 merkkiä.
+            min_length: Vyöhykkeen nimessä on oltava vähintään 2 merkkiä|Vyöhykkeen nimessä on oltava vähintään 2 merkkiä.
             not_blank: Lisää alueen nimi.
     zone_member:
         code:
             not_blank: Valitise alueen osa.
+            regex: Vyöhykkeen jäsenkoodissa voi olla vain kirjaimia, numeroita, ajatusviivoja ja alaviivoja.
         unique: Valittu alueen osa kuuluu jo alueeseen.

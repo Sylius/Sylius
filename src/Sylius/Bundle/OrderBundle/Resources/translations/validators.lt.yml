@@ -1,0 +1,7 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    order_item:
+        quantity:
+            min: Užsakymo kiekis negali būti mažesnis nei 1 prekė.
