@@ -14,7 +14,7 @@ Feature: Applying correct taxes for customers with different customer tax rates 
         And the store has a customer group "Retail" with a "General" tax category
         And the store has also a customer group "Wholesale" with a "Business" tax category
         And the store has a "High VAT" tax rate of 24% for "Clothes" and "General" customer tax category for the rest of the world
-        And the store has a "VAT" tax rate of 20% for "Clothes" and "Business" customer tax category for the rest of the world
+        And the store has also a "VAT" tax rate of 20% for "Clothes" and "Business" customer tax category for the rest of the world
         And the store has also a "Low VAT" tax rate of 10% for "Clothes" and "General" customer tax category within the "US" zone
         And the store has also a "No VAT" tax rate of 0% for "Clothes" and "Business" customer tax category within the "US" zone
         And the store has a product "PHP T-Shirt" priced at "$100.00"
