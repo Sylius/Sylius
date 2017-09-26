@@ -10,8 +10,11 @@
 (function($) {
   $(document).ready(function() {
     $('#sidebar').addClass('visible');
-    $('#sidebar').first().sidebar('attach events', '#sidebar-toggle', 'toggle');
-    $('#sidebar').first().sidebar('setting', { dimPage: false });
+    $('#sidebar').sidebar('attach events', '#sidebar-toggle', 'toggle');
+    $('#sidebar').sidebar('setting', {
+      dimPage: false,
+      closable: false
+    });
 
     $('.ui.checkbox').checkbox();
     $('.ui.accordion').accordion();
