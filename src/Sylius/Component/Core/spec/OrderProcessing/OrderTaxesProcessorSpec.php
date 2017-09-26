@@ -58,14 +58,13 @@ final class OrderTaxesProcessorSpec extends ObjectBehavior
     }
 
     function it_processes_taxes_using_a_supported_tax_calculation_strategy(
+        CustomerTaxCategoryProviderInterface $defaultCustomerTaxCategoryProvider,
         ZoneMatcherInterface $zoneMatcher,
         PrioritizedServiceRegistryInterface $strategyRegistry,
         OrderInterface $order,
         OrderItemInterface $orderItem,
         AddressInterface $address,
         ZoneInterface $zone,
-        CustomerInterface $customer,
-        CustomerGroupInterface $customerGroup,
         CustomerTaxCategoryInterface $customerTaxCategory,
         TaxCalculationStrategyInterface $strategyOne,
         TaxCalculationStrategyInterface $strategyTwo
@@ -73,7 +72,6 @@ final class OrderTaxesProcessorSpec extends ObjectBehavior
         $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
         $order->isEmpty()->willReturn(false);
         $order->getShippingAddress()->willReturn($address);
-        $order->getCustomer()->willReturn($customer);
 
         $order->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
         $orderItem->removeAdjustmentsRecursively(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
@@ -81,8 +79,7 @@ final class OrderTaxesProcessorSpec extends ObjectBehavior
         $strategyRegistry->all()->willReturn([$strategyOne, $strategyTwo]);
         $zoneMatcher->match($address, Scope::TAX)->willReturn($zone);
 
-        $customer->getGroup()->willReturn($customerGroup);
-        $customerGroup->getTaxCategory()->willReturn($customerTaxCategory);
+        $defaultCustomerTaxCategoryProvider->getCustomerTaxCategory($order)->willReturn($customerTaxCategory);
 
         $strategyOne->supports($order, $zone, $customerTaxCategory)->willReturn(false);
         $strategyOne->applyTaxes($order, $zone, $customerTaxCategory)->shouldNotBeCalled();
@@ -94,29 +91,26 @@ final class OrderTaxesProcessorSpec extends ObjectBehavior
     }
 
     function it_throws_an_exception_if_there_are_no_supported_tax_calculation_strategies(
+        CustomerTaxCategoryProviderInterface $defaultCustomerTaxCategoryProvider,
         ZoneMatcherInterface $zoneMatcher,
         PrioritizedServiceRegistryInterface $strategyRegistry,
         OrderInterface $order,
         OrderItemInterface $orderItem,
         AddressInterface $address,
         ZoneInterface $zone,
-        CustomerInterface $customer,
-        CustomerGroupInterface $customerGroup,
         CustomerTaxCategoryInterface $customerTaxCategory,
         TaxCalculationStrategyInterface $strategy
     ): void {
         $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
         $order->isEmpty()->willReturn(false);
         $order->getShippingAddress()->willReturn($address);
-        $order->getCustomer()->willReturn($customer);
 
         $order->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
         $orderItem->removeAdjustmentsRecursively(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
 
         $zoneMatcher->match($address, Scope::TAX)->willReturn($zone);
 
-        $customer->getGroup()->willReturn($customerGroup);
-        $customerGroup->getTaxCategory()->willReturn($customerTaxCategory);
+        $defaultCustomerTaxCategoryProvider->getCustomerTaxCategory($order)->willReturn($customerTaxCategory);
 
         $strategyRegistry->all()->willReturn([$strategy]);
 

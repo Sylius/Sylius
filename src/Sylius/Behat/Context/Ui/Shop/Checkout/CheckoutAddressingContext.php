@@ -248,6 +248,23 @@ final class CheckoutAddressingContext implements Context
     }
 
     /**
+     * @When I proceed selecting :country as billing country
+     */
+    public function iProceedSelectingBillingCountry(?CountryInterface $country = null, $localeCode = 'en_US'): void
+    {
+        $this->addressPage->open(['_locale' => $localeCode]);
+        $address = $this->createDefaultAddress();
+        if (null !== $country) {
+            $address->setCountryCode($country->getCode());
+        }
+
+        $this->addressPage->specifyShippingAddress($address);
+        $this->addressPage->chooseDifferentBillingAddress();
+        $this->addressPage->specifyBillingAddress($address);
+        $this->addressPage->nextStep();
+    }
+
+    /**
      * @When /^I proceed as guest "([^"]*)" with ("[^"]+" as shipping country)$/
      */
     public function iProceedLoggingAsGuestWithAsShippingCountry($email, CountryInterface $shippingCountry = null)

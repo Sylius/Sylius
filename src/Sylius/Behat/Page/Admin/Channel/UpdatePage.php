@@ -89,7 +89,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     {
         $this->getDocument()->selectFieldOption(
             'Default customer tax category',
-            (null === $customerTaxCategoryName) ? '' : $customerTaxCategoryName
+            (string) $customerTaxCategoryName
         );
     }
 

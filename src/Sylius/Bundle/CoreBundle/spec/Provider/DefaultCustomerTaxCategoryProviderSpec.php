@@ -15,15 +15,30 @@ namespace spec\Sylius\Bundle\CoreBundle\Provider;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\CustomerGroupInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\CustomerTaxCategoryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Provider\CustomerTaxCategoryProviderInterface;
 
-final class ChannelBasedDefaultCustomerTaxCategoryProviderSpec extends ObjectBehavior
+final class DefaultCustomerTaxCategoryProviderSpec extends ObjectBehavior
 {
     function it_implements_customer_tax_category_provider_interface(): void
     {
         $this->shouldImplement(CustomerTaxCategoryProviderInterface::class);
+    }
+
+    function it_provides_a_customer_tax_category_from_a_customer_of_an_order(
+        OrderInterface $order,
+        CustomerInterface $customer,
+        CustomerGroupInterface $customerGroup,
+        CustomerTaxCategoryInterface $customerTaxCategory
+    ): void {
+        $order->getCustomer()->willReturn($customer);
+        $customer->getGroup()->willReturn($customerGroup);
+        $customerGroup->getTaxCategory()->willReturn($customerTaxCategory);
+
+        $this->getCustomerTaxCategory($order)->shouldReturn($customerTaxCategory);
     }
 
     function it_provides_a_default_customer_tax_category_from_a_channel_of_an_order(
@@ -31,6 +46,8 @@ final class ChannelBasedDefaultCustomerTaxCategoryProviderSpec extends ObjectBeh
         OrderInterface $order,
         CustomerTaxCategoryInterface $defaultCustomerTaxCategory
     ): void {
+        $order->getCustomer()->willReturn(null);
+
         $order->getChannel()->willReturn($channel);
         $channel->getDefaultCustomerTaxCategory()->willReturn($defaultCustomerTaxCategory);
 

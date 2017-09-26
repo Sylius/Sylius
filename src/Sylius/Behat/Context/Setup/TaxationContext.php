@@ -113,8 +113,8 @@ final class TaxationContext implements Context
         string $taxCategoryName,
         CustomerTaxCategoryInterface $customerTaxCategory,
         ZoneInterface $zone,
-        string $taxRateCode = null,
-        $includedInPrice = false
+        ?string $taxRateCode = null,
+        bool $includedInPrice = false
     ) {
         $taxCategory = $this->getOrCreateTaxCategory($taxCategoryName);
 
@@ -164,7 +164,7 @@ final class TaxationContext implements Context
      * @Given the store has a tax category :name with a code :code
      * @Given the store has (also) a tax category :name
      */
-    public function theStoreHasTaxCategoryWithCode(string $name, string $code = null): void
+    public function theStoreHasTaxCategoryWithCode(string $name, ?string $code = null): void
     {
         $taxCategory = $this->createTaxCategory($name, $code);
 

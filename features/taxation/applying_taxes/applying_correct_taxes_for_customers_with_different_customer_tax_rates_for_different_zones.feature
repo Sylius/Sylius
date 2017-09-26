@@ -7,7 +7,7 @@ Feature: Applying correct taxes for customers with different customer tax rates 
     Background:
         Given the store operates on a single channel in "United States"
         And there is a zone "The Rest of the World" containing all other countries
-        And the store ships to "Germany"
+        And the store operates in "Germany"
         And the store ships everywhere for free
         And default tax zone is "US"
         And the store has customer tax categories "General" and "Business"
@@ -25,31 +25,31 @@ Feature: Applying correct taxes for customers with different customer tax rates 
         And this customer belongs to group "Wholesale"
 
     @ui
-    Scenario: Applying correct taxes before specifying shipping address for logged in customer
+    Scenario: Applying correct taxes before specifying billing address for logged in customer
         Given I am logged in as "mike@ross.com"
         When I add product "PHP T-Shirt" to the cart
         Then my cart total should be "$110.00"
         And my cart taxes should be "$10.00"
 
     @ui
-    Scenario: Applying correct taxes before specifying shipping address for different logged in customer
+    Scenario: Applying correct taxes before specifying billing address for different logged in customer
         Given I am logged in as "harvey@specter.com"
         When I add product "PHP T-Shirt" to the cart
         Then my cart total should be "$100.00"
         And my cart taxes should be "$0.00"
 
     @ui
-    Scenario: Applying correct taxes after specifying shipping address for logged in customer
+    Scenario: Applying correct taxes after specifying billing address for logged in customer
         Given I am logged in as "mike@ross.com"
         And I have product "PHP T-Shirt" in the cart
-        When I proceed selecting "Germany" as shipping country
+        When I proceed selecting "Germany" as billing country
         Then my cart total should be "$124.00"
         And my cart taxes should be "$24.00"
 
     @ui
-    Scenario: Applying correct taxes after specifying shipping address for different logged in customer
+    Scenario: Applying correct taxes after specifying billing address for different logged in customer
         Given I am logged in as "harvey@specter.com"
         And I have product "PHP T-Shirt" in the cart
-        When I proceed selecting "Germany" as shipping country
+        When I proceed selecting "Germany" as billing country
         Then my cart total should be "$120.00"
         And my cart taxes should be "$20.00"

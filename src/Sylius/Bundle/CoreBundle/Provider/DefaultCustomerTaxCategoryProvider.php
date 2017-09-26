@@ -13,17 +13,28 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Provider;
 
+use Sylius\Component\Core\Model\CustomerGroupInterface;
 use Sylius\Component\Core\Model\CustomerTaxCategoryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Provider\CustomerTaxCategoryProviderInterface;
 
-final class ChannelBasedDefaultCustomerTaxCategoryProvider implements CustomerTaxCategoryProviderInterface
+final class DefaultCustomerTaxCategoryProvider implements CustomerTaxCategoryProviderInterface
 {
     /**
      * {@inheritdoc}
      */
     public function getCustomerTaxCategory(OrderInterface $order): ?CustomerTaxCategoryInterface
     {
-        return $order->getChannel()->getDefaultCustomerTaxCategory();
+        $customerTaxCategory = null;
+        $customer = $order->getCustomer();
+        if (null !== $customer) {
+            /** @var CustomerGroupInterface $customerGroup */
+            $customerGroup = $customer->getGroup();
+            if (null !== $customerGroup) {
+                $customerTaxCategory = $customerGroup->getTaxCategory();
+            }
+        }
+
+        return $customerTaxCategory ?: $order->getChannel()->getDefaultCustomerTaxCategory();
     }
 }

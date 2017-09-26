@@ -41,7 +41,7 @@
 
         <service id="sylius.order_processing.order_taxes_processor" class="Sylius\Component\Core\OrderProcessing\OrderTaxesProcessor">
             <argument type="service" id="sylius.provider.channel_based_default_zone_provider" />
-            <argument type="service" id="sylius.provider.channel_based_default_customer_tax_category_provider" />
+            <argument type="service" id="sylius.provider.default_customer_tax_category_provider" />
             <argument type="service" id="sylius.zone_matcher" />
             <argument type="service" id="sylius.registry.tax_calculation_strategy" />
             <tag name="sylius.order_processor" priority="10"/>

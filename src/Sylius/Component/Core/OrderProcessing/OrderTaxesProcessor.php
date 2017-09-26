@@ -92,7 +92,7 @@ final class OrderTaxesProcessor implements OrderProcessorInterface
             return;
         }
 
-        $customerTaxCategory = $this->getCustomerTaxCategory($order);
+        $customerTaxCategory = $this->defaultCustomerTaxCategoryProvider->getCustomerTaxCategory($order);
         if (null === $customerTaxCategory) {
             return;
         }
@@ -124,26 +124,6 @@ final class OrderTaxesProcessor implements OrderProcessorInterface
         }
 
         return $zone ?: $this->defaultTaxZoneProvider->getZone($order);
-    }
-
-    /**
-     * @param OrderInterface $order
-     *
-     * @return CustomerTaxCategoryInterface|null
-     */
-    private function getCustomerTaxCategory(OrderInterface $order): ?CustomerTaxCategoryInterface
-    {
-        $customerTaxCategory = null;
-        $customer = $order->getCustomer();
-        if (null !== $customer) {
-            /** @var CustomerGroupInterface $customerGroup */
-            $customerGroup = $customer->getGroup();
-            if (null !== $customerGroup) {
-                $customerTaxCategory = $customerGroup->getTaxCategory();
-            }
-        }
-
-        return $customerTaxCategory ?: $this->defaultCustomerTaxCategoryProvider->getCustomerTaxCategory($order);
     }
 
     /**
