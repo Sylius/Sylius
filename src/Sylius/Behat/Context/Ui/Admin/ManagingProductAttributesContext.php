@@ -18,6 +18,8 @@ use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\ProductAttribute\CreatePageInterface;
 use Sylius\Behat\Page\Admin\ProductAttribute\UpdatePageInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
+use Sylius\Behat\Service\SharedSecurityServiceInterface;
+use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Webmozart\Assert\Assert;
 
@@ -47,25 +49,33 @@ final class ManagingProductAttributesContext implements Context
     private $currentPageResolver;
 
     /**
+     * @var SharedSecurityServiceInterface
+     */
+    private $sharedSecurityService;
+
+    /**
      * @param CreatePageInterface $createPage
      * @param IndexPageInterface $indexPage
      * @param UpdatePageInterface $updatePage
      * @param CurrentPageResolverInterface $currentPageResolver
+     * @param SharedSecurityServiceInterface $sharedSecurityService
      */
     public function __construct(
         CreatePageInterface $createPage,
         IndexPageInterface $indexPage,
         UpdatePageInterface $updatePage,
-        CurrentPageResolverInterface $currentPageResolver
+        CurrentPageResolverInterface $currentPageResolver,
+        SharedSecurityServiceInterface $sharedSecurityService
     ) {
         $this->createPage = $createPage;
         $this->indexPage = $indexPage;
         $this->updatePage = $updatePage;
         $this->currentPageResolver = $currentPageResolver;
+        $this->sharedSecurityService = $sharedSecurityService;
     }
 
     /**
-     * @Given I want to create a new :type product attribute
+     * @When I want to create a new :type product attribute
      */
     public function iWantToCreateANewTextProductAttribute($type)
     {
@@ -99,11 +109,22 @@ final class ManagingProductAttributesContext implements Context
     }
 
     /**
-     * @When /^I(?:| also) add material "([^"]+)"/
+     * @When I( also) add value :value
      */
-    public function iAddMaterial($materialName)
+    public function iAddValue(string $value): void
     {
-        $this->createPage->addAttributeValue($materialName);
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+
+        $currentPage->addAttributeValue($value);
+    }
+
+    /**
+     * @When I change its value :oldValue to :newValue
+     */
+    public function iChangeItsValueTo(string $oldValue, string $newValue): void
+    {
+        $this->updatePage->changeAttributeValue($oldValue, $newValue);
     }
 
     /**
@@ -138,7 +159,7 @@ final class ManagingProductAttributesContext implements Context
     }
 
     /**
-     * @When I change it name to :name in :language
+     * @When I change its name to :name in :language
      */
     public function iChangeItNameToIn($name, $language)
     {
@@ -181,7 +202,7 @@ final class ManagingProductAttributesContext implements Context
     }
 
     /**
-     * @Given there should still be only one product attribute with code :code
+     * @Then there should still be only one product attribute with code :code
      */
     public function thereShouldStillBeOnlyOneProductAttributeWithCode($code)
     {
@@ -233,6 +254,25 @@ final class ManagingProductAttributesContext implements Context
     }
 
     /**
+     * @When /^(the administrator) changes the value "([^"]*)" to "([^"]*)" of (this product attribute)$/
+     */
+    public function theAdministratorChangesTheValueTo(
+        AdminUserInterface $user,
+        string $oldValue,
+        string $newValue,
+        ProductAttributeInterface $productAttribute
+    ): void {
+        $this->sharedSecurityService->performActionAsAdminUser(
+            $user,
+            function () use ($productAttribute, $oldValue, $newValue) {
+                $this->iWantToEditThisAttribute($productAttribute);
+                $this->iChangeItsValueTo($oldValue, $newValue);
+                $this->iSaveMyChanges();
+            }
+        );
+    }
+
+    /**
      * @Then /^I should see (\d+) product attributes in the list$/
      */
     public function iShouldSeeCustomersInTheList($amountOfProductAttributes)
@@ -275,6 +315,16 @@ final class ManagingProductAttributesContext implements Context
         $names = $this->indexPage->getColumnFields('name');
 
         Assert::same(end($names), $name);
+    }
+
+    /**
+     * @Then /^(this product attribute) should have value "([^"]*)"/
+     */
+    public function theSelectAttributeShouldHaveValue(ProductAttributeInterface $productAttribute, string $value): void
+    {
+        $this->iWantToEditThisAttribute($productAttribute);
+
+        Assert::true($this->updatePage->hasAttributeValue($value));
     }
 
     /**

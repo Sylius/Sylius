@@ -19,14 +19,14 @@ Feature: Sorting listed product attributes by position
 
     @ui
     Scenario: Product attribute added at no position gets put at the bottom of the list
-        Given the store also has a text product attribute "Drive type"
+        Given the store has also a text product attribute "Drive type"
         When I want to see all product attributes in store
         Then I should see 4 product attributes in the list
         And the last product attribute on the list should have name "Drive type"
 
     @ui
     Scenario: Product attribute added at position 0 is added as the first one
-        Given the store also has a text product attribute "Drive type" at position 0
+        Given the store has also a text product attribute "Drive type" at position 0
         When I want to see all product attributes in store
         Then I should see 4 product attributes in the list
         Then the first product attribute on the list should have name "Drive type"
