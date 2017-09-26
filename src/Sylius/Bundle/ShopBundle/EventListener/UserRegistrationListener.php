@@ -127,6 +127,9 @@ final class UserRegistrationListener
     {
         $user->setEnabled(true);
 
+        $this->userManager->persist($user);
+        $this->userManager->flush();
+
         $this->userLogin->login($user, $this->firewallContextName);
     }
 }

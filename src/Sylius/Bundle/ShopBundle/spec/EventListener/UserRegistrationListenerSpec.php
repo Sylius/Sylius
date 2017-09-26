@@ -96,13 +96,14 @@ final class UserRegistrationListenerSpec extends ObjectBehavior
         $channel->isAccountVerificationRequired()->willReturn(false);
 
         $user->setEnabled(true)->shouldBeCalled();
+
+        $userManager->persist($user)->shouldBeCalled();
+        $userManager->flush()->shouldBeCalled();
+
         $userLogin->login($user, 'shop')->shouldBeCalled();
 
         $tokenGenerator->generate()->shouldNotBeCalled();
         $user->setEmailVerificationToken(Argument::any())->shouldNotBeCalled();
-
-        $userManager->persist($user)->shouldNotBeCalled();
-        $userManager->flush()->shouldNotBeCalled();
 
         $eventDispatcher
             ->dispatch(UserEvents::REQUEST_VERIFICATION_TOKEN, Argument::type(GenericEvent::class))
@@ -130,13 +131,14 @@ final class UserRegistrationListenerSpec extends ObjectBehavior
         $channel->isAccountVerificationRequired()->willReturn(false);
 
         $user->setEnabled(true)->shouldBeCalled();
+
+        $userManager->persist($user)->shouldBeCalled();
+        $userManager->flush()->shouldBeCalled();
+
         $userLogin->login($user, 'shop')->shouldBeCalled();
 
         $tokenGenerator->generate()->shouldNotBeCalled();
         $user->setEmailVerificationToken(Argument::any())->shouldNotBeCalled();
-
-        $userManager->persist($user)->shouldNotBeCalled();
-        $userManager->flush()->shouldNotBeCalled();
 
         $eventDispatcher
             ->dispatch(UserEvents::REQUEST_VERIFICATION_TOKEN, Argument::type(GenericEvent::class))
