@@ -39,6 +39,7 @@ final class UniqueWithinCollectionConstraintValidator extends ConstraintValidato
 
             if (!array_key_exists($checkingAttribute, $collectionOfEntitiesCodes)) {
                 $collectionOfEntitiesCodes[$checkingAttribute] = $key;
+
                 continue;
             }
 

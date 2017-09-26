@@ -30,7 +30,7 @@ final class OrderAdjustmentsClearer implements OrderProcessorInterface
         AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT,
         AdjustmentInterface::ORDER_SHIPPING_PROMOTION_ADJUSTMENT,
         AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT,
-        AdjustmentInterface::TAX_ADJUSTMENT
+        AdjustmentInterface::TAX_ADJUSTMENT,
     ];
 
     /**

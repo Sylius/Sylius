@@ -21,7 +21,7 @@ use Sylius\Component\Grid\Filtering\FilterInterface;
  */
 final class BooleanFilter implements FilterInterface
 {
-    public const TRUE  = 'true';
+    public const TRUE = 'true';
     public const FALSE = 'false';
 
     /**
@@ -33,7 +33,7 @@ final class BooleanFilter implements FilterInterface
             return;
         }
 
-        $field = isset($options['field']) ? $options['field'] : $name;
+        $field = $options['field'] ?? $name;
 
         $data = self::TRUE === $data;
 

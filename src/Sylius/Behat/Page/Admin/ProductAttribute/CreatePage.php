@@ -51,7 +51,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     {
         $this->getDocument()->clickLink('Add');
         $this->getElement('attribute_choice_list_element', ['%index%' => $this->choiceListIndex])->setValue($value);
-        $this->choiceListIndex++;
+        ++$this->choiceListIndex;
     }
 
     /**

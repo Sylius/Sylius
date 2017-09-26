@@ -57,10 +57,11 @@ final class ZoneCodeChoiceType extends AbstractType
             ->setDefaults([
                 'choice_filter' => null,
                 'choices' => function (Options $options): iterable {
-                    $zones =  $this->zoneRepository->findAll();
+                    $zones = $this->zoneRepository->findAll();
                     if ($options['choice_filter']) {
                         $zones = array_filter($zones, $options['choice_filter']);
                     }
+
                     return $zones;
                 },
                 'choice_value' => 'code',

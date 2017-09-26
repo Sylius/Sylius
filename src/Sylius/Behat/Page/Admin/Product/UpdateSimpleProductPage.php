@@ -216,7 +216,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
             $imageForm->fillField('Type', $type);
         }
 
-        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath.$path);
+        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath . $path);
     }
 
     /**
@@ -227,7 +227,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         $filesPath = $this->getParameter('files_path');
 
         $imageForm = $this->getImageElementByType($type);
-        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath.$path);
+        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath . $path);
     }
 
     /**
@@ -304,7 +304,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         Assert::isInstanceOf($this->getDriver(), Selenium2Driver::class);
 
         $dropdown = $this->getElement('association_dropdown', [
-            '%association%' => $productAssociationType->getName()
+            '%association%' => $productAssociationType->getName(),
         ]);
         $dropdown->click();
 
@@ -516,7 +516,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     private function getImageElementByType($type)
     {
         $images = $this->getElement('images');
-        $typeInput = $images->find('css', 'input[value="'.$type.'"]');
+        $typeInput = $images->find('css', 'input[value="' . $type . '"]');
 
         if (null === $typeInput) {
             return null;

@@ -90,7 +90,7 @@ EOT;
 
         $showDefaults = [
             '_controller' => 'sylius.controller.product:showAction',
-            '_sylius'     => [
+            '_sylius' => [
                 'permission' => false,
             ],
         ];
@@ -99,7 +99,7 @@ EOT;
 
         $indexDefaults = [
             '_controller' => 'sylius.controller.product:indexAction',
-            '_sylius'     => [
+            '_sylius' => [
                 'permission' => false,
             ],
         ];
@@ -108,7 +108,7 @@ EOT;
 
         $createDefaults = [
             '_controller' => 'sylius.controller.product:createAction',
-            '_sylius'     => [
+            '_sylius' => [
                 'permission' => false,
             ],
         ];
@@ -117,7 +117,7 @@ EOT;
 
         $updateDefaults = [
             '_controller' => 'sylius.controller.product:updateAction',
-            '_sylius'     => [
+            '_sylius' => [
                 'permission' => false,
             ],
         ];
@@ -126,7 +126,7 @@ EOT;
 
         $deleteDefaults = [
             '_controller' => 'sylius.controller.product:deleteAction',
-            '_sylius'     => [
+            '_sylius' => [
                 'permission' => false,
             ],
         ];
@@ -162,7 +162,7 @@ EOT;
 
         $showDefaults = [
             '_controller' => 'sylius.controller.product_option:showAction',
-            '_sylius'     => [
+            '_sylius' => [
                 'permission' => false,
             ],
         ];
@@ -171,7 +171,7 @@ EOT;
 
         $indexDefaults = [
             '_controller' => 'sylius.controller.product_option:indexAction',
-            '_sylius'     => [
+            '_sylius' => [
                 'permission' => false,
             ],
         ];
@@ -180,7 +180,7 @@ EOT;
 
         $createDefaults = [
             '_controller' => 'sylius.controller.product_option:createAction',
-            '_sylius'     => [
+            '_sylius' => [
                 'permission' => false,
             ],
         ];
@@ -189,7 +189,7 @@ EOT;
 
         $updateDefaults = [
             '_controller' => 'sylius.controller.product_option:updateAction',
-            '_sylius'     => [
+            '_sylius' => [
                 'permission' => false,
             ],
         ];
@@ -198,7 +198,7 @@ EOT;
 
         $deleteDefaults = [
             '_controller' => 'sylius.controller.product_option:deleteAction',
-            '_sylius'     => [
+            '_sylius' => [
                 'permission' => false,
             ],
         ];
@@ -238,7 +238,7 @@ EOT;
 
         $showDefaults = [
             '_controller' => 'sylius.controller.product_option:showAction',
-            '_sylius'     => [
+            '_sylius' => [
                 'permission' => false,
                 'criteria' => [
                     'code' => '$code',
@@ -251,7 +251,7 @@ EOT;
 
         $indexDefaults = [
             '_controller' => 'sylius.controller.product_option:indexAction',
-            '_sylius'     => [
+            '_sylius' => [
                 'permission' => false,
                 'criteria' => [
                     'code' => '$code',
@@ -264,7 +264,7 @@ EOT;
 
         $createDefaults = [
             '_controller' => 'sylius.controller.product_option:createAction',
-            '_sylius'     => [
+            '_sylius' => [
                 'permission' => false,
                 'criteria' => [
                     'code' => '$code',
@@ -277,7 +277,7 @@ EOT;
 
         $updateDefaults = [
             '_controller' => 'sylius.controller.product_option:updateAction',
-            '_sylius'     => [
+            '_sylius' => [
                 'permission' => false,
                 'criteria' => [
                     'code' => '$code',
@@ -290,7 +290,7 @@ EOT;
 
         $deleteDefaults = [
             '_controller' => 'sylius.controller.product_option:deleteAction',
-            '_sylius'     => [
+            '_sylius' => [
                 'permission' => false,
                 'criteria' => [
                     'code' => '$code',
@@ -331,7 +331,7 @@ EOT;
 
         $showDefaults = [
             '_controller' => 'sylius.controller.product:showAction',
-            '_sylius'     => [
+            '_sylius' => [
                 'permission' => false,
             ],
         ];
@@ -340,7 +340,7 @@ EOT;
 
         $indexDefaults = [
             '_controller' => 'sylius.controller.product:indexAction',
-            '_sylius'     => [
+            '_sylius' => [
                 'permission' => false,
             ],
         ];
@@ -349,7 +349,7 @@ EOT;
 
         $createDefaults = [
             '_controller' => 'sylius.controller.product:createAction',
-            '_sylius'     => [
+            '_sylius' => [
                 'permission' => false,
             ],
         ];
@@ -358,7 +358,7 @@ EOT;
 
         $updateDefaults = [
             '_controller' => 'sylius.controller.product:updateAction',
-            '_sylius'     => [
+            '_sylius' => [
                 'permission' => false,
             ],
         ];
@@ -367,7 +367,7 @@ EOT;
 
         $deleteDefaults = [
             '_controller' => 'sylius.controller.product:deleteAction',
-            '_sylius'     => [
+            '_sylius' => [
                 'permission' => false,
             ],
         ];
@@ -404,7 +404,7 @@ EOT;
 
         $showDefaults = [
             '_controller' => 'sylius.controller.product:showAction',
-            '_sylius'     => [
+            '_sylius' => [
                 'permission' => false,
             ],
         ];
@@ -413,7 +413,7 @@ EOT;
 
         $indexDefaults = [
             '_controller' => 'sylius.controller.product:indexAction',
-            '_sylius'     => [
+            '_sylius' => [
                 'permission' => false,
             ],
         ];
@@ -423,7 +423,7 @@ EOT;
         $createDefaults = [
             '_controller' => 'sylius.controller.product:createAction',
             '_sylius' => [
-                'form'       => 'sylius_product_custom',
+                'form' => 'sylius_product_custom',
                 'permission' => false,
             ],
         ];
@@ -433,7 +433,7 @@ EOT;
         $updateDefaults = [
             '_controller' => 'sylius.controller.product:updateAction',
             '_sylius' => [
-                'form'       => 'sylius_product_custom',
+                'form' => 'sylius_product_custom',
                 'permission' => false,
             ],
         ];
@@ -480,7 +480,7 @@ EOT;
         $showDefaults = [
             '_controller' => 'sylius.controller.product:showAction',
             '_sylius' => [
-                'section'    => 'admin',
+                'section' => 'admin',
                 'permission' => false,
             ],
         ];
@@ -490,7 +490,7 @@ EOT;
         $indexDefaults = [
             '_controller' => 'sylius.controller.product:indexAction',
             '_sylius' => [
-                'section'    => 'admin',
+                'section' => 'admin',
                 'permission' => false,
             ],
         ];
@@ -500,7 +500,7 @@ EOT;
         $createDefaults = [
             '_controller' => 'sylius.controller.product:createAction',
             '_sylius' => [
-                'section'    => 'admin',
+                'section' => 'admin',
                 'permission' => false,
             ],
         ];
@@ -510,7 +510,7 @@ EOT;
         $updateDefaults = [
             '_controller' => 'sylius.controller.product:updateAction',
             '_sylius' => [
-                'section'    => 'admin',
+                'section' => 'admin',
                 'permission' => false,
             ],
         ];
@@ -520,7 +520,7 @@ EOT;
         $deleteDefaults = [
             '_controller' => 'sylius.controller.product:deleteAction',
             '_sylius' => [
-                'section'    => 'admin',
+                'section' => 'admin',
                 'permission' => false,
             ],
         ];
@@ -558,7 +558,7 @@ EOT;
         $showDefaults = [
             '_controller' => 'sylius.controller.product:showAction',
             '_sylius' => [
-                'template'   => 'SyliusAdminBundle:Product:show.html.twig',
+                'template' => 'SyliusAdminBundle:Product:show.html.twig',
                 'permission' => false,
             ],
         ];
@@ -568,7 +568,7 @@ EOT;
         $indexDefaults = [
             '_controller' => 'sylius.controller.product:indexAction',
             '_sylius' => [
-                'template'   => 'SyliusAdminBundle:Product:index.html.twig',
+                'template' => 'SyliusAdminBundle:Product:index.html.twig',
                 'permission' => false,
             ],
         ];
@@ -578,7 +578,7 @@ EOT;
         $createDefaults = [
             '_controller' => 'sylius.controller.product:createAction',
             '_sylius' => [
-                'template'   => 'SyliusAdminBundle:Product:create.html.twig',
+                'template' => 'SyliusAdminBundle:Product:create.html.twig',
                 'permission' => false,
             ],
         ];
@@ -588,7 +588,7 @@ EOT;
         $updateDefaults = [
             '_controller' => 'sylius.controller.product:updateAction',
             '_sylius' => [
-                'template'   => 'SyliusAdminBundle:Product:update.html.twig',
+                'template' => 'SyliusAdminBundle:Product:update.html.twig',
                 'permission' => false,
             ],
         ];
@@ -597,7 +597,7 @@ EOT;
 
         $deleteDefaults = [
             '_controller' => 'sylius.controller.product:deleteAction',
-            '_sylius'     => [
+            '_sylius' => [
                 'permission' => false,
             ],
         ];
@@ -632,7 +632,7 @@ EOT;
 
         $indexDefaults = [
             '_controller' => 'sylius.controller.product:indexAction',
-            '_sylius'     => [
+            '_sylius' => [
                 'permission' => false,
             ],
         ];
@@ -641,7 +641,7 @@ EOT;
 
         $createDefaults = [
             '_controller' => 'sylius.controller.product:createAction',
-            '_sylius'     => [
+            '_sylius' => [
                 'permission' => false,
             ],
         ];
@@ -650,7 +650,7 @@ EOT;
 
         $updateDefaults = [
             '_controller' => 'sylius.controller.product:updateAction',
-            '_sylius'     => [
+            '_sylius' => [
                 'permission' => false,
             ],
         ];
@@ -684,7 +684,7 @@ EOT;
 
         $indexDefaults = [
             '_controller' => 'sylius.controller.product:indexAction',
-            '_sylius'     => [
+            '_sylius' => [
                 'permission' => false,
             ],
         ];
@@ -693,7 +693,7 @@ EOT;
 
         $createDefaults = [
             '_controller' => 'sylius.controller.product:createAction',
-            '_sylius'     => [
+            '_sylius' => [
                 'permission' => false,
             ],
         ];
@@ -744,7 +744,7 @@ EOT;
 
         $showDefaults = [
             '_controller' => 'sylius.controller.product:showAction',
-            '_sylius'     => [
+            '_sylius' => [
                 'permission' => false,
             ],
         ];
@@ -753,7 +753,7 @@ EOT;
 
         $indexDefaults = [
             '_controller' => 'sylius.controller.product:indexAction',
-            '_sylius'     => [
+            '_sylius' => [
                 'permission' => false,
             ],
         ];
@@ -763,7 +763,7 @@ EOT;
         $createDefaults = [
             '_controller' => 'sylius.controller.product:createAction',
             '_sylius' => [
-                'redirect'   => 'sylius_product_update',
+                'redirect' => 'sylius_product_update',
                 'permission' => false,
             ],
         ];
@@ -773,7 +773,7 @@ EOT;
         $updateDefaults = [
             '_controller' => 'sylius.controller.product:updateAction',
             '_sylius' => [
-                'redirect'   => 'sylius_product_update',
+                'redirect' => 'sylius_product_update',
                 'permission' => false,
             ],
         ];
@@ -782,7 +782,7 @@ EOT;
 
         $deleteDefaults = [
             '_controller' => 'sylius.controller.product:deleteAction',
-            '_sylius'     => [
+            '_sylius' => [
                 'permission' => false,
             ],
         ];
@@ -820,7 +820,7 @@ EOT;
             '_controller' => 'sylius.controller.product:showAction',
             '_sylius' => [
                 'serialization_groups' => ['Default', 'Detailed'],
-                'permission'           => false,
+                'permission' => false,
             ],
         ];
         $routeFactory->createRoute('/products/{id}', $showDefaults, [], [], '', [], ['GET'])->willReturn($showRoute);
@@ -830,7 +830,7 @@ EOT;
             '_controller' => 'sylius.controller.product:indexAction',
             '_sylius' => [
                 'serialization_groups' => ['Default'],
-                'permission'           => false,
+                'permission' => false,
             ],
         ];
         $routeFactory->createRoute('/products/', $indexDefaults, [], [], '', [], ['GET'])->willReturn($indexRoute);
@@ -840,7 +840,7 @@ EOT;
             '_controller' => 'sylius.controller.product:createAction',
             '_sylius' => [
                 'serialization_groups' => ['Default', 'Detailed'],
-                'permission'           => false,
+                'permission' => false,
             ],
         ];
         $routeFactory->createRoute('/products/', $createDefaults, [], [], '', [], ['POST'])->willReturn($createRoute);
@@ -850,7 +850,7 @@ EOT;
             '_controller' => 'sylius.controller.product:updateAction',
             '_sylius' => [
                 'serialization_groups' => ['Default', 'Detailed'],
-                'permission'           => false,
+                'permission' => false,
             ],
         ];
         $routeFactory->createRoute('/products/{id}', $updateDefaults, [], [], '', [], ['PUT', 'PATCH'])->willReturn($updateRoute);
@@ -858,9 +858,9 @@ EOT;
 
         $deleteDefaults = [
             '_controller' => 'sylius.controller.product:deleteAction',
-            '_sylius'     => [
+            '_sylius' => [
                 'permission' => false,
-                'csrf_protection' => false
+                'csrf_protection' => false,
             ],
         ];
         $routeFactory->createRoute('/products/{id}', $deleteDefaults, [], [], '', [], ['DELETE'])->willReturn($deleteRoute);
@@ -895,16 +895,16 @@ EOT;
         $indexDefaults = [
             '_controller' => 'sylius.controller.product:indexAction',
             '_sylius' => [
-                'grid'       => 'sylius_admin_product',
+                'grid' => 'sylius_admin_product',
                 'permission' => false,
-            ]
+            ],
         ];
         $routeFactory->createRoute('/products/', $indexDefaults, [], [], '', [], ['GET'])->willReturn($indexRoute);
         $routeCollection->add('sylius_product_index', $indexRoute)->shouldBeCalled();
 
         $createDefaults = [
             '_controller' => 'sylius.controller.product:createAction',
-            '_sylius'     => [
+            '_sylius' => [
                 'permission' => false,
             ],
         ];
@@ -949,9 +949,9 @@ EOT;
             '_controller' => 'sylius.controller.product:showAction',
             '_sylius' => [
                 'permission' => false,
-                'vars'       => [
+                'vars' => [
                     'foo' => 'bar',
-                ]
+                ],
             ],
         ];
         $routeFactory->createRoute('/products/{id}', $showDefaults, [], [], '', [], ['GET'])->willReturn($showRoute);
@@ -961,9 +961,9 @@ EOT;
             '_controller' => 'sylius.controller.product:indexAction',
             '_sylius' => [
                 'permission' => false,
-                'vars'       => [
+                'vars' => [
                     'foo' => 'bar',
-                ]
+                ],
             ],
         ];
         $routeFactory->createRoute('/products/', $indexDefaults, [], [], '', [], ['GET'])->willReturn($indexRoute);
@@ -973,10 +973,10 @@ EOT;
             '_controller' => 'sylius.controller.product:createAction',
             '_sylius' => [
                 'permission' => false,
-                'vars'       => [
+                'vars' => [
                     'foo' => 'bar',
                     'bar' => 'foo',
-                ]
+                ],
             ],
         ];
         $routeFactory->createRoute('/products/new', $createDefaults, [], [], '', [], ['GET', 'POST'])->willReturn($createRoute);
@@ -986,10 +986,10 @@ EOT;
             '_controller' => 'sylius.controller.product:updateAction',
             '_sylius' => [
                 'permission' => false,
-                'vars'       => [
+                'vars' => [
                     'foo' => 'bar',
                     'abc' => 'xyz',
-                ]
+                ],
             ],
         ];
         $routeFactory->createRoute('/products/{id}/edit', $updateDefaults, [], [], '', [], ['GET', 'PUT', 'PATCH'])->willReturn($updateRoute);
@@ -999,9 +999,9 @@ EOT;
             '_controller' => 'sylius.controller.product:deleteAction',
             '_sylius' => [
                 'permission' => false,
-                'vars'       => [
+                'vars' => [
                     'foo' => 'bar',
-                ]
+                ],
             ],
         ];
         $routeFactory->createRoute('/products/{id}', $deleteDefaults, [], [], '', [], ['DELETE'])->willReturn($deleteRoute);
@@ -1037,7 +1037,7 @@ EOT;
 
         $showDefaults = [
             '_controller' => 'sylius.controller.product:showAction',
-            '_sylius'     => [
+            '_sylius' => [
                 'permission' => true,
             ],
         ];
@@ -1046,7 +1046,7 @@ EOT;
 
         $indexDefaults = [
             '_controller' => 'sylius.controller.product:indexAction',
-            '_sylius'     => [
+            '_sylius' => [
                 'permission' => true,
             ],
         ];
@@ -1055,7 +1055,7 @@ EOT;
 
         $createDefaults = [
             '_controller' => 'sylius.controller.product:createAction',
-            '_sylius'     => [
+            '_sylius' => [
                 'permission' => true,
             ],
         ];
@@ -1065,7 +1065,7 @@ EOT;
 
         $updateDefaults = [
             '_controller' => 'sylius.controller.product:updateAction',
-            '_sylius'     => [
+            '_sylius' => [
                 'permission' => true,
             ],
         ];
@@ -1075,7 +1075,7 @@ EOT;
 
         $deleteDefaults = [
             '_controller' => 'sylius.controller.product:deleteAction',
-            '_sylius'     => [
+            '_sylius' => [
                 'permission' => true,
             ],
         ];

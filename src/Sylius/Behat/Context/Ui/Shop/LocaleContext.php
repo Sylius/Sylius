@@ -87,6 +87,7 @@ final class LocaleContext implements Context
     {
         try {
             $this->homePage->tryToOpen();
+
             throw new \Exception('The page should not be able to open.');
         } catch (LocaleNotFoundException $e) {
         }

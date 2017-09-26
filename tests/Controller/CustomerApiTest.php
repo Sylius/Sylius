@@ -203,7 +203,7 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $customers = $this->loadFixturesFromFile('resources/customers.yml');
 
-        $this->client->request('GET', '/api/v1/customers/'.$customers['customer_Barry']->getId(), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', '/api/v1/customers/' . $customers['customer_Barry']->getId(), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'customer/show_response', Response::HTTP_OK);
@@ -217,7 +217,7 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $customers = $this->loadFixturesFromFile('resources/customers.yml');
 
-        $this->client->request('GET', '/api/v1/customers/'.$customers['customer_Roy']->getId(), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', '/api/v1/customers/' . $customers['customer_Roy']->getId(), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'customer/show_with_user_response', Response::HTTP_OK);
@@ -255,7 +255,7 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $customers = $this->loadFixturesFromFile('resources/customers.yml');
 
-        $this->client->request('PUT', '/api/v1/customers/'.$customers['customer_Oliver']->getId(), [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('PUT', '/api/v1/customers/' . $customers['customer_Oliver']->getId(), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'customer/update_validation_fail_response', Response::HTTP_BAD_REQUEST);
@@ -279,12 +279,12 @@ EOT;
         }
 EOT;
 
-        $this->client->request('PUT', '/api/v1/customers/'.$customers['customer_Oliver']->getId(), [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('PUT', '/api/v1/customers/' . $customers['customer_Oliver']->getId(), [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
 
-        $this->client->request('GET', '/api/v1/customers/'.$customers['customer_Oliver']->getId(), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', '/api/v1/customers/' . $customers['customer_Oliver']->getId(), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'customer/update_response', Response::HTTP_OK);
@@ -319,12 +319,12 @@ EOT;
         }
 EOT;
 
-        $this->client->request('PATCH', '/api/v1/customers/'.$customers['customer_Oliver']->getId(), [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('PATCH', '/api/v1/customers/' . $customers['customer_Oliver']->getId(), [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
 
-        $this->client->request('GET', '/api/v1/customers/'.$customers['customer_Oliver']->getId(), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', '/api/v1/customers/' . $customers['customer_Oliver']->getId(), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'customer/partial_update_response', Response::HTTP_OK);
@@ -362,12 +362,12 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $customers = $this->loadFixturesFromFile('resources/customers.yml');
 
-        $this->client->request('DELETE', '/api/v1/customers/'.$customers['customer_Oliver']->getId(), [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('DELETE', '/api/v1/customers/' . $customers['customer_Oliver']->getId(), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
 
-        $this->client->request('GET', '/api/v1/customers/'.$customers['customer_Oliver']->getId(), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', '/api/v1/customers/' . $customers['customer_Oliver']->getId(), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);

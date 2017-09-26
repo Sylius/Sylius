@@ -3,6 +3,8 @@
 
 sylius:
     form:
+        promotion:
+            description: Kuvaus
         promotion_action:
             type: Tyyppi
         promotion_rule:

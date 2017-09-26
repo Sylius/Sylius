@@ -48,7 +48,7 @@ class AddressFactory implements AddressFactoryInterface
      */
     public function createForCustomer(CustomerInterface $customer): AddressInterface
     {
-        /** @var AddressInterface $address*/
+        /** @var AddressInterface $address */
         $address = $this->decoratedFactory->createNew();
         $address->setCustomer($customer);
 

@@ -56,7 +56,7 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
     public function load(array $config, ContainerBuilder $container): void
     {
         $config = $this->processConfiguration($this->getConfiguration([], $container), $config);
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
@@ -84,7 +84,7 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
 
         $container->prependExtensionConfig('sylius_theme', ['context' => 'sylius.theme.context.channel_based']);
 
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $this->prependHwiOauth($container, $loader);
     }
 

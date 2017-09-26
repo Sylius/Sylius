@@ -67,6 +67,7 @@ final class AddUserFormSubscriber implements EventSubscriberInterface
         $normData = $event->getForm()->getNormData();
         if (!isset($data['user'])) {
             $this->removeUserField($event);
+
             return;
         }
 
@@ -90,6 +91,7 @@ final class AddUserFormSubscriber implements EventSubscriberInterface
                 return false;
             }
         }
+
         return true;
     }
 

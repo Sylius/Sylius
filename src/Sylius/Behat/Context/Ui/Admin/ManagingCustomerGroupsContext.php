@@ -120,7 +120,6 @@ final class ManagingCustomerGroupsContext implements Context
     /**
      * @Then this customer group with name :name should appear in the store
      * @Then I should see the customer group :name in the list
-     *
      */
     public function thisCustomerGroupWithNameShouldAppearInTheStore($name)
     {

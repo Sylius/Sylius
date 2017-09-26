@@ -21,6 +21,7 @@ use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
 interface CreatePageInterface extends BaseCreatePageInterface
 {
     public function enable();
+
     public function disable();
 
     /**

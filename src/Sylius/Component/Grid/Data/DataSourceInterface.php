@@ -21,7 +21,7 @@ use Sylius\Component\Grid\Parameters;
 interface DataSourceInterface
 {
     public const CONDITION_AND = 'and';
-    public const CONDITION_OR  = 'or';
+    public const CONDITION_OR = 'or';
 
     /**
      * @param mixed $expression

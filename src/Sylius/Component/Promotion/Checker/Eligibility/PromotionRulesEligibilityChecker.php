@@ -61,7 +61,7 @@ final class PromotionRulesEligibilityChecker implements PromotionEligibilityChec
      *
      * @return bool
      */
-    protected function isEligibleToRule(PromotionSubjectInterface $subject, PromotionRuleInterface $rule): bool
+    private function isEligibleToRule(PromotionSubjectInterface $subject, PromotionRuleInterface $rule): bool
     {
         /** @var RuleCheckerInterface $checker */
         $checker = $this->ruleRegistry->get($rule->getType());

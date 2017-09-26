@@ -364,6 +364,7 @@ final class ManagingZonesContext implements Context
     public function iCanNotAddAZoneMember($name)
     {
         $member = null;
+
         try {
             $member = $this->createPage->chooseMember($name);
         } catch (ElementNotFoundException $exception) {

@@ -69,7 +69,7 @@ final class DataSourceSpec extends ObjectBehavior
     ): void {
         $this->shouldThrow(
             new \RuntimeException('Unknown restrict condition "foo"')
-        )->during('restrict', [ $comparison, 'foo' ]);
+        )->during('restrict', [$comparison, 'foo']);
     }
 
     function it_should_return_the_expression_builder(
@@ -103,7 +103,7 @@ final class DataSourceSpec extends ObjectBehavior
     ): void {
         $expressionBuilder->getOrderBys()->willReturn([
             'foo' => 'asc',
-            'bar' => 'desc'
+            'bar' => 'desc',
         ]);
         $queryBuilder->orderBy()->willReturn($orderBy);
         $orderBy->asc()->willReturn($ordering);

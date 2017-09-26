@@ -39,7 +39,7 @@ abstract class AbstractResourceExtension extends Extension
         $container->setParameter(sprintf('%s.driver', $this->getAlias()), $driver);
 
         foreach ($resources as $resourceName => $resourceConfig) {
-            $alias = $applicationName.'.'.$resourceName;
+            $alias = $applicationName . '.' . $resourceName;
             $resourceConfig = array_merge(['driver' => $driver], $resourceConfig);
 
             $resources = $container->hasParameter('sylius.resources') ? $container->getParameter('sylius.resources') : [];

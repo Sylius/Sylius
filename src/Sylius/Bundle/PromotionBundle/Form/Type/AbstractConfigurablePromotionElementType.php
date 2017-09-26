@@ -95,7 +95,7 @@ abstract class AbstractConfigurablePromotionElementType extends AbstractResource
      * @param FormInterface $form
      * @param string $configurationType
      */
-    protected function addConfigurationFields(FormInterface $form, string $configurationType):  void
+    protected function addConfigurationFields(FormInterface $form, string $configurationType): void
     {
         $form->add('configuration', $configurationType, [
             'label' => false,

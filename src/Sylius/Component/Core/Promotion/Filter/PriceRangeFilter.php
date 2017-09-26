@@ -67,7 +67,7 @@ final class PriceRangeFilter implements FilterInterface
         $price = $this->productVariantPriceCalculator->calculate($variant, ['channel' => $configuration['channel']]);
 
         $priceRange = $configuration['filters']['price_range_filter'];
-        if (isset($priceRange['min']) && isset($priceRange['max'])) {
+        if (isset($priceRange['min'], $priceRange['max'])) {
             return $priceRange['min'] <= $price && $priceRange['max'] >= $price;
         }
 

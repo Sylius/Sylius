@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    cart:
+        add_item: 'Prekė įdėta į krepšelį'
+        cannot_modify: 'Užsakymas jau pateiktas už krepšelį, kurį bandėte keisti.'
+        remove_item: 'Prekė pašalinta iš krepšelio'
+        save: 'Krepšelis buvo sėkmingai atnaujintas'

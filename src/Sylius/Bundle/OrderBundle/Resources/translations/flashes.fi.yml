@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    cart:
+        add_item: 'Nimike on lisätty ostoskoriin'
+        cannot_modify: 'Tilaus on jo lähetetty ostoskorille, jota yritit muokata.'
+        remove_item: 'Nimike on poistettu ostoskorista'
+        save: 'Ostoskorin päivitys onnistui'

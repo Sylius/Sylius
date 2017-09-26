@@ -4,8 +4,27 @@
 sylius:
     customer:
         first_name:
+            max: Etunimessä saa olla enintään {{ limit }} merkkiä.
+            min: Etunimessä on oltava vähintään {{ limit }} merkkiä.
             not_blank: Kirjoita etunimesi.
         last_name:
+            max: Sukunimessä saa olla enintään {{ limit }} merkkiä.
+            min: Sukunimessä on oltava vähintään {{ limit }} merkkiä.
             not_blank: Kirjoita sukunimesi.
+        gender:
+            not_blank: Valitse sukupuoli.
         email:
+            already_used: Tämä sähköpostiosoite on jo käytössä. Kirjaudu sisään tai käytä unohtunut salasana -toimintoa.
+            max: Sähköpostiosoitteessa saa olla enintään {{ limit }} merkkiä.
             not_blank: Kirjoita sähköpostiosoitteesi.
+            invalid: Sähköpostiosoite ei kelpaa.
+            unique: Sähköpostiosoite on jo käytössä.
+            registered: Tämä sähköpostiosoite on jo rekisteröity. Kirjaudu sisään tai käytä unohtunut salasana -toimintoa.
+    customer_group:
+        code:
+            regex: Asiakasryhmäkoodissa voi olla vain kirjaimia, numeroita, ajatusviivoja ja alaviivoja.
+            unique: Asiakasryhmäkoodin on oltava yksilöivä.
+        name:
+            max: Asiakasryhmän nimessä saa olla enintään {{ limit }} merkkiä.
+            min: Asiakasryhmän nimessä on oltava vähintään {{ limit }} merkkiä.
+            not_blank: Kirjoita asiakasryhmän nimi.

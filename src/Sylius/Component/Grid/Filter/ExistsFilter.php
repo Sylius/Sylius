@@ -33,7 +33,7 @@ final class ExistsFilter implements FilterInterface
             return;
         }
 
-        $field = isset($options['field']) ? $options['field'] : $name;
+        $field = $options['field'] ?? $name;
 
         if (self::TRUE === (bool) $data) {
             $dataSource->restrict($dataSource->getExpressionBuilder()->isNotNull($field));

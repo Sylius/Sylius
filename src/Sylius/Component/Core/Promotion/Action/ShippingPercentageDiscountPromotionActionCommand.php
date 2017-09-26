@@ -33,7 +33,7 @@ final class ShippingPercentageDiscountPromotionActionCommand implements Promotio
     /**
      * @var FactoryInterface
      */
-    protected $adjustmentFactory;
+    private $adjustmentFactory;
 
     /**
      * @param FactoryInterface $adjustmentFactory
@@ -96,7 +96,7 @@ final class ShippingPercentageDiscountPromotionActionCommand implements Promotio
      *
      * @return OrderAdjustmentInterface
      */
-    protected function createAdjustment(
+    private function createAdjustment(
         PromotionInterface $promotion,
         string $type = AdjustmentInterface::ORDER_SHIPPING_PROMOTION_ADJUSTMENT
     ): OrderAdjustmentInterface {

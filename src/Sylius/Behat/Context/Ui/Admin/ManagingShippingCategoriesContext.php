@@ -40,7 +40,6 @@ class ManagingShippingCategoriesContext implements Context
      */
     private $updatePage;
 
-
     /**
      * @param IndexPageInterface $indexPage
      * @param CreatePageInterface $createPage

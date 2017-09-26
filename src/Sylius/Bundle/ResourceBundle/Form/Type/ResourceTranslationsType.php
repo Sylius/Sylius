@@ -84,7 +84,7 @@ final class ResourceTranslationsType extends AbstractType
                 return [
                     'required' => $localeCode === $this->defaultLocaleCode,
                 ];
-            }
+            },
         ]);
     }
 

@@ -186,6 +186,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
     public function signIn()
     {
         $this->waitForElement(5, 'login_button');
+
         try {
             $this->getElement('login_button')->press();
         } catch (ElementNotFoundException $elementNotFoundException) {
@@ -380,6 +381,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         $address->setCity($this->getElement(sprintf('%s_city', $type))->getValue());
         $address->setPostcode($this->getElement(sprintf('%s_postcode', $type))->getValue());
         $this->waitForElement(5, sprintf('%s_province', $type));
+
         try {
             $address->setProvinceName($this->getElement(sprintf('%s_province', $type))->getValue());
         } catch (ElementNotFoundException $exception) {

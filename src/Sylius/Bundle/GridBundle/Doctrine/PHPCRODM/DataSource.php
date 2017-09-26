@@ -50,9 +50,11 @@ final class DataSource implements DataSourceInterface
         switch ($condition) {
             case DataSourceInterface::CONDITION_AND:
                 $parentNode = $this->queryBuilder->andWhere();
+
                 break;
             case DataSourceInterface::CONDITION_OR:
                 $parentNode = $this->queryBuilder->orWhere();
+
                 break;
             default:
                 throw new \RuntimeException(sprintf(

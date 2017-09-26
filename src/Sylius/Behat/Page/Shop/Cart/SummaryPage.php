@@ -200,7 +200,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     }
 
     /**
-     * {@inheritdoc]
+     * {@inheritdoc}
      */
     public function hasProductOutOfStockValidationMessage(ProductInterface $product)
     {

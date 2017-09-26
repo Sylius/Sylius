@@ -52,7 +52,7 @@ final class OrderShowMenuBuilderSpec extends ObjectBehavior
         $menu
             ->addChild('order_history', [
                 'route' => 'sylius_admin_order_history',
-                'routeParameters' => ['id' => 7]
+                'routeParameters' => ['id' => 7],
             ])
             ->shouldBeCalled()
             ->willReturn($menu)
@@ -67,7 +67,7 @@ final class OrderShowMenuBuilderSpec extends ObjectBehavior
         $menu
             ->addChild('cancel', [
                 'route' => 'sylius_admin_order_cancel',
-                'routeParameters' => ['id' => 7]
+                'routeParameters' => ['id' => 7],
             ])
             ->shouldBeCalled()
             ->willReturn($menu)
@@ -100,7 +100,7 @@ final class OrderShowMenuBuilderSpec extends ObjectBehavior
         $menu
             ->addChild('order_history', [
                 'route' => 'sylius_admin_order_history',
-                'routeParameters' => ['id' => 7]
+                'routeParameters' => ['id' => 7],
             ])
             ->shouldBeCalled()
             ->willReturn($menu)

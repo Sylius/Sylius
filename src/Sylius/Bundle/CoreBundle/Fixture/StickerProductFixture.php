@@ -101,8 +101,8 @@ class StickerProductFixture extends AbstractFixture
                 [
                     'code' => 'stickers',
                     'name' => 'Stickers',
-                ]
-            ]
+                ],
+            ],
         ]]]);
 
         $this->productAttributeFixture->load(['custom' => [

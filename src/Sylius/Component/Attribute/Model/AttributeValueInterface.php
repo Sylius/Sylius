@@ -39,7 +39,6 @@ interface AttributeValueInterface extends ResourceInterface
     public function setSubject(?AttributeSubjectInterface $subject): void;
 
     /**
-     *
      * @return AttributeInterface|null
      */
     public function getAttribute(): ?AttributeInterface;

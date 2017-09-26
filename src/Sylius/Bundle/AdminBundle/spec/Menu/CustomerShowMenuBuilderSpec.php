@@ -52,7 +52,7 @@ final class CustomerShowMenuBuilderSpec extends ObjectBehavior
         $menu
             ->addChild('update', [
                 'route' => 'sylius_admin_customer_update',
-                'routeParameters' => ['id' => 7]
+                'routeParameters' => ['id' => 7],
             ])
             ->shouldBeCalled()
             ->willReturn($menu)
@@ -63,7 +63,7 @@ final class CustomerShowMenuBuilderSpec extends ObjectBehavior
         $menu
             ->addChild('order_index', [
                 'route' => 'sylius_admin_customer_order_index',
-                'routeParameters' => ['id' => 7]
+                'routeParameters' => ['id' => 7],
             ])
             ->shouldBeCalled()
             ->willReturn($menu)
@@ -74,7 +74,7 @@ final class CustomerShowMenuBuilderSpec extends ObjectBehavior
         $menu
             ->addChild('user_delete', [
                 'route' => 'sylius_admin_shop_user_delete',
-                'routeParameters' => ['id' => 4]
+                'routeParameters' => ['id' => 4],
             ])
             ->shouldBeCalled()
             ->willReturn($menu)
@@ -107,7 +107,7 @@ final class CustomerShowMenuBuilderSpec extends ObjectBehavior
         $menu
             ->addChild('order_index', [
                 'route' => 'sylius_admin_customer_order_index',
-                'routeParameters' => ['id' => 7]
+                'routeParameters' => ['id' => 7],
             ])
             ->shouldBeCalled()
             ->willReturn($menu)

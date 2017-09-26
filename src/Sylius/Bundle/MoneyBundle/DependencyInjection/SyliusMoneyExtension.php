@@ -30,7 +30,7 @@ final class SyliusMoneyExtension extends Extension implements PrependExtensionIn
     public function load(array $config, ContainerBuilder $container): void
     {
         $config = $this->processConfiguration($this->getConfiguration([], $container), $config);
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
         $container->setParameter('sylius_money.locale', $config['locale']);
 
@@ -46,7 +46,7 @@ final class SyliusMoneyExtension extends Extension implements PrependExtensionIn
             return;
         }
 
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services/integrations/currency.xml');
     }
 }

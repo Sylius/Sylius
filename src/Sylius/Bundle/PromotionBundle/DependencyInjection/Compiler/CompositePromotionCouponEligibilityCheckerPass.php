@@ -37,7 +37,7 @@ final class CompositePromotionCouponEligibilityCheckerPass implements CompilerPa
                     return new Reference($id);
                 },
                 array_keys($container->findTaggedServiceIds('sylius.promotion_coupon_eligibility_checker'))
-            )
+            ),
         ]);
     }
 }

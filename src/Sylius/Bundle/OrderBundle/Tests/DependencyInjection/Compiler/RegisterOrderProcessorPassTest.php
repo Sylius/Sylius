@@ -46,7 +46,7 @@ final class RegisterOrderProcessorPassTest extends AbstractCompilerPassTestCase
             'sylius.order_processing.order_processor',
             'addProcessor', [
                 new Reference('sylius.order_processing.order_adjustments_clearer'),
-                0
+                0,
             ]
         );
     }
@@ -70,7 +70,7 @@ final class RegisterOrderProcessorPassTest extends AbstractCompilerPassTestCase
             'sylius.order_processing.order_processor',
             'addProcessor', [
                 new Reference('sylius.order_processing.order_adjustments_clearer'),
-                10
+                10,
             ]
         );
     }

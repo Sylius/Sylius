@@ -40,7 +40,7 @@ final class ProductVariantsPricesHelperSpec extends ObjectBehavior
         ProductVariantsPricesProviderInterface $productVariantsPricesProvider
     ): void {
         $productVariantsPricesProvider->provideVariantsPrices($product, $channel)->willReturn([
-            ['color' => 'black', 'value' => 1000]
+            ['color' => 'black', 'value' => 1000],
         ]);
 
         $this->getPrices($product, $channel)->shouldReturn([['color' => 'black', 'value' => 1000]]);

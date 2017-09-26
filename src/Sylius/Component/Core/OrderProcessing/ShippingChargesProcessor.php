@@ -30,12 +30,12 @@ final class ShippingChargesProcessor implements OrderProcessorInterface
     /**
      * @var FactoryInterface
      */
-    protected $adjustmentFactory;
+    private $adjustmentFactory;
 
     /**
      * @var DelegatingCalculatorInterface
      */
-    protected $shippingChargesCalculator;
+    private $shippingChargesCalculator;
 
     /**
      * @param FactoryInterface $adjustmentFactory

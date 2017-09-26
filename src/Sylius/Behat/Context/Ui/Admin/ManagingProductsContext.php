@@ -397,6 +397,7 @@ final class ManagingProductsContext implements Context
 
         if ($product->isSimple()) {
             $this->updateSimpleProductPage->open(['id' => $product->getId()]);
+
             return;
         }
 
@@ -923,7 +924,6 @@ final class ManagingProductsContext implements Context
 
     /**
      * @Then I should be notified that I have to define the :attribute attribute in :language
-     *
      */
     public function iShouldBeNotifiedThatIHaveToDefineTheAttributeIn($attribute, $language)
     {

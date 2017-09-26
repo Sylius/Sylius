@@ -51,7 +51,7 @@ final class CartContext implements Context
      */
     public function theyAbandonedTheirCart(OrderInterface $cart, $amount, $time)
     {
-        $cart->setUpdatedAt(new \DateTime('-'.$amount.' '.$time));
+        $cart->setUpdatedAt(new \DateTime('-' . $amount . ' ' . $time));
         $this->orderManager->flush();
     }
 

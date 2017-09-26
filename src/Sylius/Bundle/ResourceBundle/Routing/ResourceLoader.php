@@ -152,7 +152,7 @@ final class ResourceLoader implements LoaderInterface
         bool $isApi = false
     ): Route {
         $defaults = [
-            '_controller' => $metadata->getServiceId('controller').sprintf(':%sAction', $actionName),
+            '_controller' => $metadata->getServiceId('controller') . sprintf(':%sAction', $actionName),
         ];
 
         if ($isApi && 'index' === $actionName) {
@@ -211,7 +211,7 @@ final class ResourceLoader implements LoaderInterface
      */
     private function getRouteName(MetadataInterface $metadata, array $configuration, string $actionName): string
     {
-        $sectionPrefix = isset($configuration['section']) ? $configuration['section'].'_' : '';
+        $sectionPrefix = isset($configuration['section']) ? $configuration['section'] . '_' : '';
 
         return sprintf('%s_%s%s_%s', $metadata->getApplicationName(), $sectionPrefix, $metadata->getName(), $actionName);
     }

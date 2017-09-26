@@ -24,7 +24,7 @@ final class PaymentMethodsResolver implements PaymentMethodsResolverInterface
     /**
      * @var RepositoryInterface
      */
-    protected $paymentMethodRepository;
+    private $paymentMethodRepository;
 
     /**
      * @param RepositoryInterface $paymentMethodRepository

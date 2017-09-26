@@ -53,7 +53,7 @@ final class SecurityControllerSpec extends ObjectBehavior
         Response $response
     ): void {
         $authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY')->willReturn(false);
-        
+
         $authenticationUtils->getLastAuthenticationError()->willReturn('Bad credentials.');
         $authenticationUtils->getLastUsername()->willReturn('john.doe');
 

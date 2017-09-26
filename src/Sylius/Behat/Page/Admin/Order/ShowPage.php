@@ -519,7 +519,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             (stripos($elementText, $customerName) !== false) &&
             (stripos($elementText, $street) !== false) &&
             (stripos($elementText, $city) !== false) &&
-            (stripos($elementText, $countryName.' '.$postcode) !== false)
+            (stripos($elementText, $countryName . ' ' . $postcode) !== false)
         ;
     }
 
@@ -536,7 +536,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             ['item' => $itemName]
         );
 
-        return $rows[0]->find('css', '.'.$property)->getText();
+        return $rows[0]->find('css', '.' . $property)->getText();
     }
 
     /**

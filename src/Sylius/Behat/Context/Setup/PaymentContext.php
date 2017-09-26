@@ -90,7 +90,7 @@ final class PaymentContext implements Context
      */
     public function storeAllowsPaying($paymentMethodName, $position = null)
     {
-        $this->createPaymentMethod($paymentMethodName, 'PM_'.$paymentMethodName, 'Offline', 'Payment method', true, $position);
+        $this->createPaymentMethod($paymentMethodName, 'PM_' . $paymentMethodName, 'Offline', 'Payment method', true, $position);
     }
 
     /**
@@ -173,7 +173,7 @@ final class PaymentContext implements Context
      */
     public function theStoreHasPaymentMethodNotAssignedToAnyChannel($paymentMethodName)
     {
-        $this->createPaymentMethod($paymentMethodName, 'PM_'.$paymentMethodName, 'Offline', 'Payment method', false);
+        $this->createPaymentMethod($paymentMethodName, 'PM_' . $paymentMethodName, 'Offline', 'Payment method', false);
     }
 
     /**

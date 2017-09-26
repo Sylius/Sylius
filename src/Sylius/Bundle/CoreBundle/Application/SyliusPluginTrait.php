@@ -18,6 +18,7 @@ use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 
 /**
  * @mixin \Symfony\Component\HttpKernel\Bundle\Bundle
+ *
  * @see \Symfony\Component\HttpKernel\Bundle\Bundle
  *
  * Provides a common logic for Sylius Plugins.
@@ -101,6 +102,6 @@ trait SyliusPluginTrait
     {
         $basename = preg_replace('/Plugin$/', '', $this->getName());
 
-        return $this->getNamespace().'\\DependencyInjection\\'.$basename.'Extension';
+        return $this->getNamespace() . '\\DependencyInjection\\' . $basename . 'Extension';
     }
 }

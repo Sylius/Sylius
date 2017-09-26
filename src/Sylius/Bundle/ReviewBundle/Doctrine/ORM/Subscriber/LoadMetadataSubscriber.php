@@ -90,7 +90,7 @@ final class LoadMetadataSubscriber implements EventSubscriber
             'targetEntity' => $reviewableEntity,
             'inversedBy' => 'reviews',
             'joinColumns' => [[
-                'name' => $subject.'_id',
+                'name' => $subject . '_id',
                 'referencedColumnName' => $reviewableEntityMetadata->fieldMappings['id']['columnName'],
                 'nullable' => false,
                 'onDelete' => 'CASCADE',

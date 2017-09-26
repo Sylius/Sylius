@@ -68,7 +68,7 @@ final class CustomerStatisticsProviderSpec extends ObjectBehavior
         $secondOrder->getTotal()->willReturn(23000);
 
         $expectedStatistics = new CustomerStatistics([
-            new PerChannelCustomerStatistics(2, 33000, $channel->getWrappedObject())
+            new PerChannelCustomerStatistics(2, 33000, $channel->getWrappedObject()),
         ]);
 
         $channelRepository->findAll()->willReturn([$channel, $channelWithoutOrders]);
@@ -107,7 +107,7 @@ final class CustomerStatisticsProviderSpec extends ObjectBehavior
 
         $expectedStatistics = new CustomerStatistics([
             new PerChannelCustomerStatistics(2, 33000, $firstChannel->getWrappedObject()),
-            new PerChannelCustomerStatistics(3, 11000, $secondChannel->getWrappedObject())
+            new PerChannelCustomerStatistics(3, 11000, $secondChannel->getWrappedObject()),
         ]);
 
         $channelRepository->findAll()->willReturn([$firstChannel, $secondChannel]);

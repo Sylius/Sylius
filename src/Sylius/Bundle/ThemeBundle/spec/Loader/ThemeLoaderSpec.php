@@ -105,7 +105,7 @@ final class ThemeLoaderSpec extends ObjectBehavior
                 'parents' => [],
                 'authors' => [['name' => 'Richard Rynkowsky']],
                 'screenshots' => [],
-            ]
+            ],
         ]);
 
         $themeFactory->create('first/theme', '/theme/path')->willReturn($theme);

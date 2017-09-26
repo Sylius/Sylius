@@ -23,7 +23,7 @@ final class HasEnabledEntity extends Constraint
     /**
      * @var string|null
      */
-    public $objectManager = null;
+    public $objectManager;
 
     /**
      * @var string
@@ -38,7 +38,7 @@ final class HasEnabledEntity extends Constraint
     /**
      * @var string|null
      */
-    public $errorPath = null;
+    public $errorPath;
 
     /**
      * @var string

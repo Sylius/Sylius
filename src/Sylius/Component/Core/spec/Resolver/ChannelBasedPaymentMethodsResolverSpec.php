@@ -87,7 +87,6 @@ final class ChannelBasedPaymentMethodsResolverSpec extends ObjectBehavior
     function it_does_not_support_payments_for_order_with_not_assigned_channel(
         PaymentInterface $payment,
         OrderInterface $order
-
     ): void {
         $payment->getOrder()->willReturn($order);
         $order->getChannel()->willReturn(null);

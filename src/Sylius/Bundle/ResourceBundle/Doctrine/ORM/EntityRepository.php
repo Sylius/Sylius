@@ -100,7 +100,7 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
             } elseif ('' !== $value) {
                 $parameter = str_replace('.', '_', $property);
                 $queryBuilder
-                    ->andWhere($queryBuilder->expr()->eq($name, ':'.$parameter))
+                    ->andWhere($queryBuilder->expr()->eq($name, ':' . $parameter))
                     ->setParameter($parameter, $value)
                 ;
             }
@@ -132,7 +132,7 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
     protected function getPropertyName(string $name): string
     {
         if (false === strpos($name, '.')) {
-            return 'o'.'.'.$name;
+            return 'o' . '.' . $name;
         }
 
         return $name;

@@ -106,7 +106,7 @@ final class OrderApiTest extends CheckoutApiTestCase
 
         $this->addItemToCart($cartId);
 
-        $this->client->request('PATCH',  '/api/v1/carts/' . $cartId, [], [], static::$authorizedHeaderWithAccept, '{"promotionCoupon": "BANANAS"}');
+        $this->client->request('PATCH', '/api/v1/carts/' . $cartId, [], [], static::$authorizedHeaderWithAccept, '{"promotionCoupon": "BANANAS"}');
 
         $this->addressOrder($cartId);
         $this->selectOrderShippingMethod($cartId);
@@ -244,7 +244,6 @@ final class OrderApiTest extends CheckoutApiTestCase
 
         $response = $this->client->getResponse();
         $rawResponse = json_decode($response->getContent(), true);
-
 
         $data =
 <<<EOT

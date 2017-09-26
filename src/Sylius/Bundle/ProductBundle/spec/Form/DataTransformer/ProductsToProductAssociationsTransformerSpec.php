@@ -60,7 +60,7 @@ final class ProductsToProductAssociationsTransformerSpec extends ObjectBehavior
         $productAssociation->getAssociatedProducts()->willReturn(
             new ArrayCollection([
                 $firstAssociatedProduct->getWrappedObject(),
-                $secondAssociatedProduct->getWrappedObject()
+                $secondAssociatedProduct->getWrappedObject(),
             ])
         );
 

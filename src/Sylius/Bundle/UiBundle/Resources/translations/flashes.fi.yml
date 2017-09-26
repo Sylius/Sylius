@@ -1,0 +1,26 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    channel:
+        delete_error: 'Kanavaa ei voi poistaa. Vähintään yhden kanavan on oltava käytössä.'
+    checkout:
+        complete_error: 'Tilauksen käsittelyssä tapahtui odottamaton virhe. Yritä tehdä tilaus uudelleen.'
+    contact:
+        request_success: 'Yhteydenottopyynnön lähetys onnistui.'
+        request_error: 'Yhteydenottopyynnön lähetyksessä tapahtui virhe. Yritä myöhemmin uudelleen.'
+    customer:
+        add_address: 'Osoitteen lisääminen onnistui.'
+        impersonate: 'Asiakkaana %name% esiintyminen onnistui.'
+        set_address_as_default: 'Osoite on määritetty oletusarvoksi.'
+    order:
+        apply_state_machine_transition_error: 'Tilauksen päivityksessä tapahtui odottamaton virhe. Yritä päivittää tilaus uudelleen.'
+        promotion_integrity: 'Sinulla ei ole enää oikeutta saada promootiota %promotionName%.'
+        total_integrity: 'Tilauksen kokonaissumma on muuttunut. Tarkista tilauksen tiedot ja vahvista uudelleen.'
+        update_error: 'Tuotteen päivityksessä tapahtui odottamaton virhe. Yritä päivittää tuote uudelleen.'
+    payment:
+        apply_state_machine_transition_error: 'Maksun päivityksessä tapahtui odottamaton virhe. Yritä päivittää maksu uudelleen.'
+    product:
+        out_of_stock: 'Tuotetta on varastossa vain %quantity% kappaletta.'
+    product_variant:
+        update_error: 'Tuotevariantin päivityksessä tapahtui odottamaton virhe. Yritä päivittää tuotevariantti uudelleen.'

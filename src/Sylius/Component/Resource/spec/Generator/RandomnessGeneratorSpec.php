@@ -63,7 +63,7 @@ final class RandomnessGeneratorSpec extends ObjectBehavior
             },
             'beInRange' => function ($subject, $min, $max) {
                 return $subject >= $min && $subject <= $max;
-            }
+            },
         ];
     }
 }

@@ -53,6 +53,7 @@ final class Configuration implements ConfigurationInterface
 
         return $treeBuilder;
     }
+
     /**
      * @param ArrayNodeDefinition $node
      */

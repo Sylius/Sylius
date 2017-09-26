@@ -98,7 +98,7 @@ class AdminUserExampleFactory extends AbstractExampleFactory implements ExampleF
                 return $this->faker->email;
             })
             ->setDefault('username', function (Options $options): string {
-                return $this->faker->firstName.' '.$this->faker->lastName;
+                return $this->faker->firstName . ' ' . $this->faker->lastName;
             })
             ->setDefault('enabled', true)
             ->setAllowedTypes('enabled', 'bool')

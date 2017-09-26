@@ -59,7 +59,6 @@ final class ChannelApiTest extends JsonApiTestCase
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/channels.yml');
 
-
         $this->client->request('GET', '/api/v1/channels/', [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
@@ -107,7 +106,7 @@ final class ChannelApiTest extends JsonApiTestCase
     }
 
     /**
-    * @param ChannelInterface $channel
+     * @param ChannelInterface $channel
      *
      * @return string
      */

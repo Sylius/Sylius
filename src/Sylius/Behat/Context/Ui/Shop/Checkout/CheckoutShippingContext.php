@@ -198,6 +198,6 @@ final class CheckoutShippingContext implements Context
      */
     public function iShouldBeCheckingOutAs($email)
     {
-        Assert::same($this->selectShippingPage->getPurchaserEmail(), 'Checking out as '.$email.'.');
+        Assert::same($this->selectShippingPage->getPurchaserEmail(), 'Checking out as ' . $email . '.');
     }
 }
