@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Admin\ProductAttribute;
 
 use Behat\Mink\Element\NodeElement;
+use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 use Webmozart\Assert\Assert;
@@ -62,7 +63,13 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
      */
     public function hasAttributeValue(string $value): bool
     {
-        return null !== $this->getElement('attribute_choice_list_element', ['%value%' => $value]);
+        try {
+            $attributeValue = $this->getElement('attribute_choice_list_element', ['%value%' => $value]);
+        } catch (ElementNotFoundException $exception) {
+            return false;
+        }
+
+        return null !== $attributeValue;
     }
 
     /**
@@ -72,6 +79,15 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     {
         $this->getDocument()->clickLink('Add');
         $this->getLastAttributeChoiceElement()->find('css', 'input')->setValue($value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function deleteAttributeValue(string $value): void
+    {
+        $attributeChoiceElement = $this->getElement('attribute_choice_list_element', ['%value%' => $value])->getParent();
+        $attributeChoiceElement->clickLink('Delete');
     }
 
     /**

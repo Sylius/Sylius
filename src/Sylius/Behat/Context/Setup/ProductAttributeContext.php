@@ -16,6 +16,7 @@ namespace Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
 use Sylius\Component\Attribute\Factory\AttributeFactoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -115,13 +116,19 @@ final class ProductAttributeContext implements Context
 
     /**
      * @Given the store has a select product attribute :name with value :value
+     * @Given the store has a select product attribute :name with values :firstValue and :secondValue
      */
-    public function theStoreHasASelectProductAttributeWithValue(string $name, string $value): void
+    public function theStoreHasASelectProductAttributeWithValue(string $name, ...$values): void
     {
-        $productAttribute = $this->createProductAttribute('select', $name);
+        $choices = [];
+        foreach ($values as $value) {
+            $choices[$this->faker->uuid] = $value;
+        }
+
+        $productAttribute = $this->createProductAttribute(SelectAttributeType::TYPE, $name);
         $productAttribute->setConfiguration([
             'multiple' => true,
-            'choices' => [$this->faker->uuid => $value],
+            'choices' => $choices,
             'min' => null,
             'max' => null,
         ]);
@@ -140,37 +147,67 @@ final class ProductAttributeContext implements Context
     }
 
     /**
-     * @Given /^(this product) has (.+?) attribute "([^"]+)" with values "([^"]+)", "([^"]+)"$/
+     * @Given /^(this product) has select attribute "([^"]+)" with value "([^"]+)"$/
+     */
+    public function thisProductHasSelectAttributeWithValue(
+        ProductInterface $product,
+        string $productAttributeName,
+        string $attributeValue
+    ) {
+        $values = [$this->faker->uuid => $attributeValue];
+
+        $this->createSelectProductAttributeValue($product, $productAttributeName, $values);
+    }
+
+    /**
+     * @Given /^(this product) has select attribute "([^"]+)" with values "([^"]+)" and "([^"]+)"$/
      */
     public function thisProductHasSelectAttributeWithValues(
         ProductInterface $product,
-        $productAttributeType,
-        $productAttributeName,
-        $firstAttributeValue,
-        $secondAttributeValue,
-        $language = 'en_US'
-    ) {
+        string $productAttributeName,
+        string $firstAttributeValue,
+        string $secondAttributeValue
+    ): void {
         $values = [$this->faker->uuid => $firstAttributeValue, $this->faker->uuid => $secondAttributeValue];
 
-        $attribute = $this->provideProductAttribute($productAttributeType, $productAttributeName);
-        $attribute->setConfiguration(['multiple' => true, 'choices' => $values, 'min' => null, 'max' => null]);
-        $attributeValue = $this->createProductAttributeValue(array_keys($values), $attribute, $language);
+        $this->createSelectProductAttributeValue($product, $productAttributeName, $values);
+    }
+
+    /**
+     * @param ProductInterface $product
+     * @param string $productAttributeName
+     * @param array $values
+     */
+    private function createSelectProductAttributeValue(
+        ProductInterface $product,
+        string $productAttributeName,
+        array $values
+    ): void {
+        $attribute = $this->provideProductAttribute(SelectAttributeType::TYPE, $productAttributeName);
+
+        $choices = $attribute->getConfiguration()['choices'];
+        $choiceKeys = [];
+        foreach ($values as $value) {
+            $choiceKeys[] = array_search($value, $choices);
+        }
+
+        $attributeValue = $this->createProductAttributeValue($choiceKeys, $attribute);
         $product->addAttribute($attributeValue);
 
         $this->objectManager->flush();
     }
 
     /**
-     * @Given /^(this product) has (.+?) attribute "([^"]+)" with value "([^"]+)"$/
-     * @Given /^(this product) has (.+?) attribute "([^"]+)" with value "([^"]+)" in ("[^"]+" locale)$/
+     * @Given /^(this product) has (text|textarea) attribute "([^"]+)" with value "([^"]+)"$/
+     * @Given /^(this product) has (text|textarea) attribute "([^"]+)" with value "([^"]+)" in ("[^"]+" locale)$/
      */
     public function thisProductHasAttributeWithValue(
         ProductInterface $product,
-        $productAttributeType,
-        $productAttributeName,
-        $value,
-        $language = 'en_US'
-    ) {
+        string $productAttributeType,
+        string $productAttributeName,
+        string $value,
+        string $language = 'en_US'
+    ): void {
         $attribute = $this->provideProductAttribute($productAttributeType, $productAttributeName);
         $attributeValue = $this->createProductAttributeValue($value, $attribute, $language);
         $product->addAttribute($attributeValue);
@@ -284,14 +321,17 @@ final class ProductAttributeContext implements Context
     }
 
     /**
-     * @param string $value
+     * @param mixed $value
      * @param ProductAttributeInterface $attribute
      * @param string $localeCode
      *
      * @return ProductAttributeValueInterface
      */
-    private function createProductAttributeValue($value, ProductAttributeInterface $attribute, $localeCode = 'en_US')
-    {
+    private function createProductAttributeValue(
+        $value,
+        ProductAttributeInterface $attribute,
+        string $localeCode = 'en_US'
+    ): ProductAttributeValueInterface {
         /** @var ProductAttributeValueInterface $attributeValue */
         $attributeValue = $this->productAttributeValueFactory->createNew();
         $attributeValue->setAttribute($attribute);

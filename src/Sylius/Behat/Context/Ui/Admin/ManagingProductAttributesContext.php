@@ -120,6 +120,14 @@ final class ManagingProductAttributesContext implements Context
     }
 
     /**
+     * @When I delete value :value
+     */
+    public function iDeleteValue(string $value): void
+    {
+        $this->updatePage->deleteAttributeValue($value);
+    }
+
+    /**
      * @When I change its value :oldValue to :newValue
      */
     public function iChangeItsValueTo(string $oldValue, string $newValue): void
@@ -256,7 +264,7 @@ final class ManagingProductAttributesContext implements Context
     /**
      * @When /^(the administrator) changes (this product attribute)'s value "([^"]*)" to "([^"]*)"$/
      */
-    public function theAdministratorChangesTheValueTo(
+    public function theAdministratorChangesThisProductAttributesValueTo(
         AdminUserInterface $user,
         ProductAttributeInterface $productAttribute,
         string $oldValue,
@@ -304,6 +312,24 @@ final class ManagingProductAttributesContext implements Context
     public function iDoNotCheckMultipleOption(): void
     {
         // Intentionally left blank to fulfill context expectation
+    }
+
+    /**
+     * @When /^(the administrator) deletes the value "([^"]*)" from (this product attribute)$/
+     */
+    public function theAdministratorDeletesTheValueFromThisProductAttribute(
+        AdminUserInterface $user,
+        string $value,
+        ProductAttributeInterface $productAttribute
+    ): void {
+        $this->sharedSecurityService->performActionAsAdminUser(
+            $user,
+            function () use ($productAttribute, $value) {
+                $this->iWantToEditThisAttribute($productAttribute);
+                $this->iDeleteValue($value);
+                $this->iSaveMyChanges();
+            }
+        );
     }
 
     /**
@@ -399,6 +425,16 @@ final class ManagingProductAttributesContext implements Context
         $this->assertValidationMessage(
             'Configuration multiple must be true if min or max entries values are specified.'
         );
+    }
+
+    /**
+     * @Then /^(this product attribute) should not have value "([^"]*)"/
+     */
+    public function theSelectAttributeShouldNotHaveValue(ProductAttributeInterface $productAttribute, string $value): void
+    {
+        $this->iWantToEditThisAttribute($productAttribute);
+
+        Assert::false($this->updatePage->hasAttributeValue($value));
     }
 
     /**
