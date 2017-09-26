@@ -39,6 +39,17 @@ checkers:
     PhpCsFixer\Fixer\ClassNotation\SingleClassElementPerStatementFixer: {}
     PhpCsFixer\Fixer\ClassNotation\VisibilityRequiredFixer: {}
     PhpCsFixer\Fixer\Comment\HashToSlashCommentFixer: {}
+    PhpCsFixer\Fixer\Comment\HeaderCommentFixer:
+        header:
+            """
+            This file is part of the Sylius package.
+
+            (c) Paweł Jędrzejewski
+
+            For the full copyright and license information, please view the LICENSE
+            file that was distributed with this source code.
+            """
+        location: after_open
     PhpCsFixer\Fixer\Comment\NoEmptyCommentFixer: {}
     PhpCsFixer\Fixer\Comment\NoTrailingWhitespaceInCommentFixer: {}
     PhpCsFixer\Fixer\Comment\SingleLineCommentStyleFixer:
