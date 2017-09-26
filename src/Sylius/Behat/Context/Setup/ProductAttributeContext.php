@@ -147,10 +147,9 @@ final class ProductAttributeContext implements Context
     }
 
     /**
-     * @Given /^(this product) has select attribute "([^"]+)" with value "([^"]+)"$/
      * @Given /^(this product) has select attribute "([^"]+)" with values "([^"]+)" and "([^"]+)"$/
      */
-    public function thisProductHasSelectAttributeWithValues(
+    public function thisProductHasSelectAttributeWithValue(
         ProductInterface $product,
         string $productAttributeName,
         string ...$productAttributeValues
