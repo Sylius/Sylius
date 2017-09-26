@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Configuration;
 
+use Ramsey\Uuid\Uuid;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -36,7 +37,13 @@ class SelectAttributeChoicesCollectionType extends AbstractType
             if (null !== $data) {
                 $fixedArray = [];
                 foreach ($data as $key => $value) {
-                    $newKey = $this->getValidFormKey($value);
+                    if (!is_int($key)) {
+                        $fixedArray[$key] = $value;
+
+                        continue;
+                    }
+
+                    $newKey = $this->getValidFormKey();
                     $fixedArray[$newKey] = $value;
 
                     if ($form->offsetExists($key)) {
@@ -67,16 +74,10 @@ class SelectAttributeChoicesCollectionType extends AbstractType
     }
 
     /**
-     * @param string $value
-     *
      * @return string
      */
-    private function getValidFormKey(string $value): string
+    private function getValidFormKey(): string
     {
-        $newKey = strtolower(str_replace(' ', '_', $value));
-        $newKey = preg_replace('/[^a-zA-Z0-9\-_:]/', '', $newKey);
-        $newKey = preg_replace('/^[^a-zA-Z0-9_]++/', '', $newKey);
-
-        return $newKey;
+        return Uuid::uuid1()->toString();
     }
 }

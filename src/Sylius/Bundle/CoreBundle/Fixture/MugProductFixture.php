@@ -104,7 +104,12 @@ class MugProductFixture extends AbstractFixture
             ],
         ]]]);
 
-        $mugMaterials = ['invisible_porcelain' => 'Invisible porcelain', 'banana_skin' => 'Banana skin', 'porcelain' => 'Porcelain', 'centipede' => 'Centipede'];
+        $mugMaterials = [
+            $this->faker->uuid => 'Invisible porcelain',
+            $this->faker->uuid => 'Banana skin',
+            $this->faker->uuid => 'Porcelain',
+            $this->faker->uuid => 'Centipede',
+        ];
         $this->productAttributeFixture->load(['custom' => [
             [
                 'name' => 'Mug material',
