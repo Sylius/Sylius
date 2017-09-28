@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "4402d316f0cb750ec71c9fd1fdce3b8c",
+    "content-hash": "1400d7db89bfab9c0c4b100ba3880a3b",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -5136,16 +5136,16 @@
         },
         {
             "name": "symfony/polyfill-php70",
-            "version": "v1.4.0",
+            "version": "v1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php70.git",
-                "reference": "032fd647d5c11a9ceab8ee8747e13b5448e93874"
+                "reference": "b6482e68974486984f59449ecea1fbbb22ff840f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php70/zipball/032fd647d5c11a9ceab8ee8747e13b5448e93874",
-                "reference": "032fd647d5c11a9ceab8ee8747e13b5448e93874",
+                "url": "https://api.github.com/repos/symfony/polyfill-php70/zipball/b6482e68974486984f59449ecea1fbbb22ff840f",
+                "reference": "b6482e68974486984f59449ecea1fbbb22ff840f",
                 "shasum": ""
             },
             "require": {
@@ -5155,7 +5155,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.4-dev"
+                    "dev-master": "1.5-dev"
                 }
             },
             "autoload": {
@@ -5191,7 +5191,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2017-06-09T14:24:12+00:00"
+            "time": "2017-06-14T15:44:48+00:00"
         },
         {
             "name": "symfony/polyfill-util",
@@ -9938,16 +9938,16 @@
         },
         {
             "name": "slevomat/coding-standard",
-            "version": "3.3.0",
+            "version": "4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/slevomat/coding-standard.git",
-                "reference": "84c2f64f0ef800d93711c7e0d1993d7a715ab0b7"
+                "reference": "bab653d0f7f2e3ed13796f7803067d252f00a25a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/slevomat/coding-standard/zipball/84c2f64f0ef800d93711c7e0d1993d7a715ab0b7",
-                "reference": "84c2f64f0ef800d93711c7e0d1993d7a715ab0b7",
+                "url": "https://api.github.com/repos/slevomat/coding-standard/zipball/bab653d0f7f2e3ed13796f7803067d252f00a25a",
+                "reference": "bab653d0f7f2e3ed13796f7803067d252f00a25a",
                 "shasum": ""
             },
             "require": {
@@ -9960,7 +9960,7 @@
                 "phpstan/phpstan": "0.8.4",
                 "phpunit/phpunit": "6.3.0"
             },
-            "type": "library",
+            "type": "phpcodesniffer-standard",
             "autoload": {
                 "psr-4": {
                     "SlevomatCodingStandard\\": "SlevomatCodingStandard"
@@ -9970,21 +9970,21 @@
             "license": [
                 "MIT"
             ],
-            "description": "Slevomat Coding Standard for PHP_CodeSniffer extends Consistence Coding Standard by providing sniffs with additional checks.",
-            "time": "2017-08-25T15:10:17+00:00"
+            "description": "Slevomat Coding Standard for PHP_CodeSniffer complements Consistence Coding Standard by providing sniffs with additional checks.",
+            "time": "2017-09-15T17:47:36+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",
-            "version": "3.0.2",
+            "version": "3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "c7594a88ae75401e8f8d0bd4deb8431b39045c51"
+                "reference": "3c2d0a0fe39684ba0c1eb842a6a775d0b938d699"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/c7594a88ae75401e8f8d0bd4deb8431b39045c51",
-                "reference": "c7594a88ae75401e8f8d0bd4deb8431b39045c51",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/3c2d0a0fe39684ba0c1eb842a6a775d0b938d699",
+                "reference": "3c2d0a0fe39684ba0c1eb842a6a775d0b938d699",
                 "shasum": ""
             },
             "require": {
@@ -9994,7 +9994,7 @@
                 "php": ">=5.4.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.0"
+                "phpunit/phpunit": "^4.0 || ^5.0 || ^6.0"
             },
             "bin": [
                 "bin/phpcs",
@@ -10022,7 +10022,7 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2017-07-18T01:12:32+00:00"
+            "time": "2017-09-19T22:47:14+00:00"
         },
         {
             "name": "stripe/stripe-php",
@@ -10078,6 +10078,39 @@
                 "stripe"
             ],
             "time": "2017-06-20T01:39:06+00:00"
+        },
+        {
+            "name": "sylius-labs/coding-standard",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SyliusLabs/CodingStandard.git",
+                "reference": "e50212b2be8f1e5984c69b9bdf205b32daa06688"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SyliusLabs/CodingStandard/zipball/e50212b2be8f1e5984c69b9bdf205b32daa06688",
+                "reference": "e50212b2be8f1e5984c69b9bdf205b32daa06688",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1",
+                "symplify/easy-coding-standard": "^2.4"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kamil Kokot",
+                    "email": "kamil@kokot.me",
+                    "homepage": "http://kamil.kokot.me"
+                }
+            ],
+            "description": "Battle-tested coding standard configuration used in Sylius.",
+            "time": "2017-09-27T14:33:43+00:00"
         },
         {
             "name": "symfony/polyfill-php72",
@@ -10136,26 +10169,26 @@
         },
         {
             "name": "symplify/coding-standard",
-            "version": "v2.3.3",
+            "version": "v2.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Symplify/CodingStandard.git",
-                "reference": "36b88e5560b104be754205a0f4d5fc4b6c436b51"
+                "reference": "6608353eb4bb382e7ca6da04c67996c4f379536e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Symplify/CodingStandard/zipball/36b88e5560b104be754205a0f4d5fc4b6c436b51",
-                "reference": "36b88e5560b104be754205a0f4d5fc4b6c436b51",
+                "url": "https://api.github.com/repos/Symplify/CodingStandard/zipball/6608353eb4bb382e7ca6da04c67996c4f379536e",
+                "reference": "6608353eb4bb382e7ca6da04c67996c4f379536e",
                 "shasum": ""
             },
             "require": {
-                "friendsofphp/php-cs-fixer": "^2.5",
+                "friendsofphp/php-cs-fixer": "^2.6",
                 "nette/finder": "^2.4|^3.0",
                 "nette/utils": "^2.4|^3.0",
                 "nikic/php-parser": "^3.1",
                 "php": "^7.1",
-                "slevomat/coding-standard": "^3.3",
-                "squizlabs/php_codesniffer": "^3.0.2"
+                "slevomat/coding-standard": "^4.0",
+                "squizlabs/php_codesniffer": "^3.1"
             },
             "require-dev": {
                 "gecko-packages/gecko-php-unit": "3.0 as 2.2",
@@ -10168,7 +10201,7 @@
             "autoload": {
                 "psr-4": {
                     "Symplify\\CodingStandard\\": "src",
-                    "Symplify\\CodingStandard\\TokenWrapper\\": "packages/TokenWrapper/src",
+                    "Symplify\\CodingStandard\\SniffTokenWrapper\\": "packages/SniffTokenWrapper/src",
                     "Symplify\\CodingStandard\\FixerTokenWrapper\\": "packages/FixerTokenWrapper/src"
                 }
             },
@@ -10177,32 +10210,32 @@
                 "MIT"
             ],
             "description": "Set of Symplify rules for PHP_CodeSniffer.",
-            "time": "2017-09-09T15:11:00+00:00"
+            "time": "2017-09-22T22:21:36+00:00"
         },
         {
             "name": "symplify/easy-coding-standard",
-            "version": "v2.3.3",
+            "version": "v2.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Symplify/EasyCodingStandard.git",
-                "reference": "96b728041544edb6f3dd07dee3b58e26a64187db"
+                "reference": "becc9bdfd07493ac53122088eaf859d56d41dae1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Symplify/EasyCodingStandard/zipball/96b728041544edb6f3dd07dee3b58e26a64187db",
-                "reference": "96b728041544edb6f3dd07dee3b58e26a64187db",
+                "url": "https://api.github.com/repos/Symplify/EasyCodingStandard/zipball/becc9bdfd07493ac53122088eaf859d56d41dae1",
+                "reference": "becc9bdfd07493ac53122088eaf859d56d41dae1",
                 "shasum": ""
             },
             "require": {
-                "friendsofphp/php-cs-fixer": "^2.5",
+                "friendsofphp/php-cs-fixer": "^2.6",
                 "nette/caching": "^2.4|^3.0",
                 "nette/neon": "^2.4|^3.0",
                 "nette/robot-loader": "^2.4|^3.0.1",
                 "nette/utils": "^2.4|^3.0",
                 "php": "^7.1",
                 "sebastian/diff": "^1.4|^2.0",
-                "slevomat/coding-standard": "^3.3",
-                "squizlabs/php_codesniffer": "^3.0.2",
+                "slevomat/coding-standard": "^4.0",
+                "squizlabs/php_codesniffer": "^3.1",
                 "symfony/config": "^3.3",
                 "symfony/console": "^3.3",
                 "symfony/dependency-injection": "^3.3",
@@ -10238,20 +10271,20 @@
                 "MIT"
             ],
             "description": "Use Coding Standard with 0-knowledge of PHP-CS-Fixer and PHP_CodeSniffer.",
-            "time": "2017-09-08T22:40:59+00:00"
+            "time": "2017-09-21T15:34:11+00:00"
         },
         {
             "name": "symplify/package-builder",
-            "version": "v2.3.3",
+            "version": "v2.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Symplify/PackageBuilder.git",
-                "reference": "f66602b4bdba3031b7670d418f63638259e19f13"
+                "reference": "5a9755f7a4aac6880a3f34e09237e48b6bac8c7d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Symplify/PackageBuilder/zipball/f66602b4bdba3031b7670d418f63638259e19f13",
-                "reference": "f66602b4bdba3031b7670d418f63638259e19f13",
+                "url": "https://api.github.com/repos/Symplify/PackageBuilder/zipball/5a9755f7a4aac6880a3f34e09237e48b6bac8c7d",
+                "reference": "5a9755f7a4aac6880a3f34e09237e48b6bac8c7d",
                 "shasum": ""
             },
             "require": {
@@ -10280,7 +10313,7 @@
             "license": [
                 "MIT"
             ],
-            "time": "2017-08-28T11:44:47+00:00"
+            "time": "2017-09-19T17:58:21+00:00"
         },
         {
             "name": "tracy/tracy",
