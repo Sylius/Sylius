@@ -50,5 +50,15 @@
         <service id="sylius.product_variant_resolver.default" class="Sylius\Component\Product\Resolver\DefaultProductVariantResolver">
             <tag name="sylius.product_variant_resolver.default" type="default" />
         </service>
+
+        <service id="sylius.select_product_attribute_values_remover" class="Sylius\Bundle\ProductBundle\Remover\SelectProductAttributeValuesRemover">
+            <argument type="service" id="sylius.repository.product_attribute_value" />
+            <argument type="service" id="sylius.manager.product_attribute_value" />
+        </service>
+
+        <service id="sylius.listener.select_product_attribute_choice_remove" class="Sylius\Bundle\ProductBundle\EventListener\SelectProductAttributeChoiceRemoveListener">
+            <argument type="service" id="sylius.select_product_attribute_values_remover" />
+            <tag name="doctrine.event_listener" event="postUpdate" />
+        </service>
     </services>
 </container>

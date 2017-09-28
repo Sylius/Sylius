@@ -31,6 +31,10 @@ final class SyliusAttributeExtension extends AbstractResourceExtension
         $loader->load('services.xml');
 
         $this->registerResources('sylius', $config['driver'], $this->resolveResources($config['resources'], $container), $container);
+
+        foreach ($config['resources'] as $subjectName => $subjectConfig) {
+            $container->getDefinition('sylius.repository.' . $subjectName . '_attribute_value')->setLazy(true);
+        }
     }
 
     private function resolveResources(array $resources, ContainerBuilder $container): array

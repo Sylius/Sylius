@@ -23,14 +23,14 @@ Feature: Viewing product's select attributes
         And I check this product's details
         Then I should see the product attribute "T-shirt material" with value "Banana skin, Orange skin"
 
-    @ui @javascript @todo
+    @ui @javascript
     Scenario: Viewing a detailed page with product's select attribute after removing an only value
         Given this product has select attribute "T-shirt material" with value "Cotton"
         When the administrator deletes the value "Cotton" from this product attribute
         And I check this product's details
         Then I should not see the product attribute "T-shirt material"
 
-    @ui @javascript @todo
+    @ui @javascript
     Scenario: Viewing a detailed page with product's select attribute after removing one of the value
         Given this product has select attribute "T-shirt material" with values "Banana skin" and "Cotton"
         When the administrator deletes the value "Cotton" from this product attribute
