@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ReviewBundle\EventListener;
 
+use Doctrine\ORM\Event\LifecycleEventArgs;
 use Sylius\Bundle\ReviewBundle\Updater\ReviewableRatingUpdaterInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Review\Model\ReviewInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -37,13 +37,30 @@ final class ReviewChangeListener
     }
 
     /**
-     * @param GenericEvent $event
+     * @param LifecycleEventArgs $args
      */
-    public function recalculateSubjectRating(GenericEvent $event): void
+    public function postPersist(LifecycleEventArgs $args)
     {
-        $subject = $event->getSubject();
+        $this->recalculateSubjectRating($args);
+    }
+
+    /**
+     * @param LifecycleEventArgs $args
+     */
+    public function postUpdate(LifecycleEventArgs $args)
+    {
+        $this->recalculateSubjectRating($args);
+    }
+
+    /**
+     * @param LifecycleEventArgs $args
+     */
+    public function recalculateSubjectRating(LifecycleEventArgs $args): void
+    {
+        $subject = $args->getObject();
+
         if (!$subject instanceof ReviewInterface) {
-            throw new UnexpectedTypeException($subject, ReviewInterface::class);
+            return;
         }
 
         if (ReviewInterface::STATUS_ACCEPTED === $subject->getStatus()) {

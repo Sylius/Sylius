@@ -78,20 +78,17 @@ final class SyliusReviewExtension extends AbstractResourceExtension
                 new Reference(sprintf('sylius.%s_review.average_rating_updater', $reviewSubject)),
             ]);
 
-            $reviewChangeListener->addTag('kernel.event_listener', [
-                'event' => sprintf('sylius.%s_review.post_create', $reviewSubject),
-                'method' => 'recalculateSubjectRating',
-            ]);
-
-            $reviewChangeListener->addTag('kernel.event_listener', [
-                'event' => sprintf('sylius.%s_review.post_update', $reviewSubject),
-                'method' => 'recalculateSubjectRating',
-            ]);
-
-            $reviewChangeListener->addTag('kernel.event_listener', [
-                'event' => sprintf('sylius.%s_review.post_delete', $reviewSubject),
-                'method' => 'recalculateSubjectRating',
-            ]);
+            $reviewChangeListener
+                ->addTag('doctrine.event_listener', [
+                    'event' => 'postPersist',
+                ])
+                ->addTag('doctrine.event_listener', [
+                    'event' => 'postUpdate',
+                ])
+                ->addTag('doctrine.event_listener', [
+                    'event' => 'postDelete',
+                ])
+            ;
 
             $container->addDefinitions([
                 sprintf('sylius.%s_review.average_rating_updater', $reviewSubject) => new Definition(AverageRatingUpdater::class, [
