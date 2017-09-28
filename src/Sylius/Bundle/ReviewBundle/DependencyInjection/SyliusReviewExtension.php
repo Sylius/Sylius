@@ -86,7 +86,7 @@ final class SyliusReviewExtension extends AbstractResourceExtension
                     'event' => 'postUpdate',
                 ])
                 ->addTag('doctrine.event_listener', [
-                    'event' => 'postDelete',
+                    'event' => 'postRemove',
                 ])
             ;
 

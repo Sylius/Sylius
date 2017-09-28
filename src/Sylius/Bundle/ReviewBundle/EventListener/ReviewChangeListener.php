@@ -55,6 +55,14 @@ final class ReviewChangeListener
     /**
      * @param LifecycleEventArgs $args
      */
+    public function postRemove(LifecycleEventArgs $args)
+    {
+        $this->recalculateSubjectRating($args);
+    }
+
+    /**
+     * @param LifecycleEventArgs $args
+     */
     public function recalculateSubjectRating(LifecycleEventArgs $args): void
     {
         $subject = $args->getObject();
