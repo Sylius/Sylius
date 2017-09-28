@@ -43,7 +43,7 @@ class SelectAttributeChoicesCollectionType extends AbstractType
                         continue;
                     }
 
-                    $newKey = $this->getValidFormKey();
+                    $newKey = $this->getUniqueKey();
                     $fixedArray[$newKey] = $value;
 
                     if ($form->offsetExists($key)) {
@@ -76,7 +76,7 @@ class SelectAttributeChoicesCollectionType extends AbstractType
     /**
      * @return string
      */
-    private function getValidFormKey(): string
+    private function getUniqueKey(): string
     {
         return Uuid::uuid1()->toString();
     }

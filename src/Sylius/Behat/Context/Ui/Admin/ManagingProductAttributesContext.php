@@ -254,13 +254,13 @@ final class ManagingProductAttributesContext implements Context
     }
 
     /**
-     * @When /^(the administrator) changes the value "([^"]*)" to "([^"]*)" of (this product attribute)$/
+     * @When /^(the administrator) changes (this product attribute)'s value "([^"]*)" to "([^"]*)"$/
      */
     public function theAdministratorChangesTheValueTo(
         AdminUserInterface $user,
+        ProductAttributeInterface $productAttribute,
         string $oldValue,
-        string $newValue,
-        ProductAttributeInterface $productAttribute
+        string $newValue
     ): void {
         $this->sharedSecurityService->performActionAsAdminUser(
             $user,

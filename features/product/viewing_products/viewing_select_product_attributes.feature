@@ -18,6 +18,6 @@ Feature: Viewing product's select attributes
     @ui
     Scenario: Viewing a detailed page with product's select attribute after changing a value
         Given this product has select attribute "T-shirt material" with values "Banana skin", "Cotton"
-        When the administrator changes the value "Cotton" to "Orange skin" of this product attribute
+        When the administrator changes this product attribute's value "Cotton" to "Orange skin"
         And I check this product's details
         Then I should see the product attribute "T-shirt material" with value "Banana skin, Orange skin"
