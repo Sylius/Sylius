@@ -10,21 +10,21 @@ Feature: Adding a new select product attribute
 
     @ui @javascript
     Scenario: Adding a new select product attribute
-        Given I want to create a new select product attribute
-        When I specify its code as "mug_material"
+        When I want to create a new select product attribute
+        And I specify its code as "mug_material"
         And I name it "Mug material" in "English (United States)"
-        And I add material "-100% Banana Skin"
+        And I add value "-100% Banana Skin"
         And I add it
         Then I should be notified that it has been successfully created
         And the select attribute "Mug material" should appear in the store
 
     @ui @javascript
     Scenario: Adding multiple select product attribute
-        Given I want to create a new select product attribute
-        When I specify its code as "mug_material"
+        When I want to create a new select product attribute
+        And I specify its code as "mug_material"
         And I name it "Mug material" in "English (United States)"
-        And I add material "Banana Skin"
-        And I also add material "Plastic"
+        And I add value "Banana Skin"
+        And I also add value "Plastic"
         And I add it
         Then I should be notified that it has been successfully created
         And the select attribute "Mug material" should appear in the store

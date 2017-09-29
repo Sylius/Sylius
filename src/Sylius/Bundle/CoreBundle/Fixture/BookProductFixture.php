@@ -98,7 +98,12 @@ class BookProductFixture extends AbstractFixture
             ],
         ]]]);
 
-        $bookGenres = ['science_fiction' => 'Science Fiction', 'romance' => 'Romance', 'thriller' => 'Thriller', 'sports' => 'Sports'];
+        $bookGenres = [
+            $this->faker->uuid => 'Science Fiction',
+            $this->faker->uuid => 'Romance',
+            $this->faker->uuid => 'Thriller',
+            $this->faker->uuid => 'Sports',
+        ];
         $this->productAttributeFixture->load(['custom' => [
             ['name' => 'Book author', 'code' => 'book_author', 'type' => TextAttributeType::TYPE],
             ['name' => 'Book ISBN', 'code' => 'book_isbn', 'type' => TextAttributeType::TYPE],

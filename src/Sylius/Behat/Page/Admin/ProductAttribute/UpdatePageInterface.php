@@ -35,4 +35,22 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
      * @return bool
      */
     public function isTypeDisabled();
+
+    /**
+     * @param string $oldValue
+     * @param string $newValue
+     */
+    public function changeAttributeValue(string $oldValue, string $newValue): void;
+
+    /**
+     * @param string $value
+     *
+     * @return bool
+     */
+    public function hasAttributeValue(string $value): bool;
+
+    /**
+     * @param string $value
+     */
+    public function addAttributeValue(string $value): void;
 }

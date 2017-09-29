@@ -29,13 +29,6 @@ Feature: Viewing product's attributes
         Then I should see the product attribute "T-shirt with cotton" with value "Yes"
 
     @ui
-    Scenario: Viewing a detailed page with product's select attribute
-        Given the store has a product "T-shirt banana"
-        And this product has select attribute "T-shirt material" with values "Banana skin", "cotton"
-        When I check this product's details
-        Then I should see the product attribute "T-shirt material" with value "Banana skin cotton"
-
-    @ui
     Scenario: Viewing a detailed page with product's date attribute
         Given the store has a product "T-shirt banana"
         And this product has date attribute "T-shirt date of production" with date "12 December 2015"
