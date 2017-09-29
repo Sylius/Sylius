@@ -71,8 +71,6 @@ final class ReviewChangeListener
             return;
         }
 
-        if (ReviewInterface::STATUS_ACCEPTED === $subject->getStatus()) {
-            $this->averageRatingUpdater->update($subject->getReviewSubject());
-        }
+        $this->averageRatingUpdater->update($subject->getReviewSubject());
     }
 }
