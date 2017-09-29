@@ -47,26 +47,6 @@ final class ReviewChangeListenerSpec extends ObjectBehavior
         $this->recalculateSubjectRating($event);
     }
 
-    function it_does_nothing_if_review_was_new($averageRatingUpdater, LifecycleEventArgs $event, ReviewInterface $review): void
-    {
-        $event->getObject()->willReturn($review);
-        $review->getStatus()->willReturn(ReviewInterface::STATUS_NEW);
-
-        $averageRatingUpdater->update(Argument::type(ReviewableInterface::class))->shouldNotBeCalled();
-
-        $this->recalculateSubjectRating($event);
-    }
-
-    function it_does_nothing_if_review_was_rejected($averageRatingUpdater, LifecycleEventArgs $event, ReviewInterface $review): void
-    {
-        $event->getObject()->willReturn($review);
-        $review->getStatus()->willReturn(ReviewInterface::STATUS_REJECTED);
-
-        $averageRatingUpdater->update(Argument::type(ReviewableInterface::class))->shouldNotBeCalled();
-
-        $this->recalculateSubjectRating($event);
-    }
-
     function it_does_nothing_if_event_subject_is_not_review_object($averageRatingUpdater, LifecycleEventArgs $event): void
     {
         $event->getObject()->willReturn('badObject');
