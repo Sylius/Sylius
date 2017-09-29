@@ -149,6 +149,7 @@
             <argument type="service" id="sylius.behat.page.admin.product_attribute.index" />
             <argument type="service" id="sylius.behat.page.admin.product_attribute.update" />
             <argument type="service" id="sylius.behat.current_page_resolver" />
+            <argument type="service" id="sylius.behat.shared_security" />
             <tag name="fob.context_service" />
         </service>
 

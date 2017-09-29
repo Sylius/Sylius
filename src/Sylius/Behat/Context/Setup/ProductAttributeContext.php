@@ -55,6 +55,11 @@ final class ProductAttributeContext implements Context
     private $objectManager;
 
     /**
+     * @var \Faker\Generator
+     */
+    private $faker;
+
+    /**
      * @param SharedStorageInterface $sharedStorage
      * @param RepositoryInterface $productAttributeRepository
      * @param AttributeFactoryInterface $productAttributeFactory
@@ -73,6 +78,8 @@ final class ProductAttributeContext implements Context
         $this->productAttributeFactory = $productAttributeFactory;
         $this->productAttributeValueFactory = $productAttributeValueFactory;
         $this->objectManager = $objectManager;
+
+        $this->faker = \Faker\Factory::create();
     }
 
     /**
@@ -86,7 +93,7 @@ final class ProductAttributeContext implements Context
     }
 
     /**
-     * @Given the store( also) has a :type product attribute :name at position :position
+     * @Given the store has( also) a :type product attribute :name at position :position
      */
     public function theStoreHasAProductAttributeWithPosition($type, $name, $position)
     {
@@ -97,11 +104,27 @@ final class ProductAttributeContext implements Context
     }
 
     /**
-     * @Given the store( also) has a/an :type product attribute :name
+     * @Given the store has( also) a/an :type product attribute :name
      */
-    public function theStoreHasATextProductAttribute($type, $name)
+    public function theStoreHasAProductAttribute(string $type, string $name): void
     {
         $productAttribute = $this->createProductAttribute($type, $name);
+
+        $this->saveProductAttribute($productAttribute);
+    }
+
+    /**
+     * @Given the store has a select product attribute :name with value :value
+     */
+    public function theStoreHasASelectProductAttributeWithValue(string $name, string $value): void
+    {
+        $productAttribute = $this->createProductAttribute('select', $name);
+        $productAttribute->setConfiguration([
+            'multiple' => true,
+            'choices' => [$this->faker->uuid => $value],
+            'min' => null,
+            'max' => null,
+        ]);
 
         $this->saveProductAttribute($productAttribute);
     }
@@ -127,7 +150,7 @@ final class ProductAttributeContext implements Context
         $secondAttributeValue,
         $language = 'en_US'
     ) {
-        $values = [$firstAttributeValue, $secondAttributeValue];
+        $values = [$this->faker->uuid => $firstAttributeValue, $this->faker->uuid => $secondAttributeValue];
 
         $attribute = $this->provideProductAttribute($productAttributeType, $productAttributeName);
         $attribute->setConfiguration(['multiple' => true, 'choices' => $values, 'min' => null, 'max' => null]);

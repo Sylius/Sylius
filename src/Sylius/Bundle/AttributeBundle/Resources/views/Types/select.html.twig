@@ -1,7 +1,9 @@
 {% if attribute.value is not null %}
     {% set values = attribute.attribute.configuration.choices %}
     {% if attribute.value is iterable %}
-        {% for value in attribute.value %}{{ values[value] }} {% endfor %}
+        {% for value in attribute.value %}
+            {{ values[value] }}{% if loop.last == false %}, {% endif %}
+        {% endfor %}
     {% else %}
         {{ values[attribute.value] }}
     {% endif %}

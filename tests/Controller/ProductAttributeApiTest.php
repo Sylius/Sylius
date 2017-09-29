@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Tests\Controller;
 
 use Lakion\ApiTestCase\JsonApiTestCase;
+use PHPUnit\Framework\Assert;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -317,6 +318,7 @@ EOT;
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'product_attribute/create_select_response', Response::HTTP_CREATED);
+        $this->assertSelectChoicesInResponse($response, ['yellow', 'green', 'black']);
     }
 
     /**
@@ -327,5 +329,29 @@ EOT;
     private function getProductAttributeUrl(ProductAttributeInterface $productAttribute)
     {
         return '/api/v1/product-attributes/' . $productAttribute->getCode();
+    }
+
+    /**
+     * @param Response $response
+     * @param array|string[] $expectedChoiceValues
+     */
+    private function assertSelectChoicesInResponse(Response $response, array $expectedChoiceValues): void
+    {
+        $responseContent = json_decode($response->getContent(), true);
+        Assert::assertArrayHasKey('configuration', $responseContent);
+
+        $configuration = $responseContent['configuration'];
+        Assert::assertArrayHasKey('choices', $configuration);
+
+        $choices = $configuration['choices'];
+        Assert::assertCount(count($expectedChoiceValues), $choices);
+
+        foreach ($expectedChoiceValues as $expectedChoiceValue) {
+            Assert::assertContains($expectedChoiceValue, $choices);
+        }
+
+        foreach ($choices as $choiceKey => $choiceValue) {
+            Assert::assertRegExp('/^[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}$/i', $choiceKey);
+        }
     }
 }
