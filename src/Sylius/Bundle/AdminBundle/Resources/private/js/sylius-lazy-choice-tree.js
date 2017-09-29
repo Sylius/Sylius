@@ -110,25 +110,17 @@
             var bindExpandLeafAction = function (parentCode, expandButton, content, icon, level) {
                 var leafContainerElement = createLeafContainerElement();
                 if (defaultLevel > level) {
-                    loadLeafAction(parentCode, expandButton, content, leafContainerElement);
-                    icon.addClass('open');
+                    loadLeafAction(parentCode, expandButton, content, icon, leafContainerElement);
                 }
 
                 expandButton.click(function () {
-                    loadLeafAction(parentCode, expandButton, content, leafContainerElement);
-                    leafContainerElement.toggle(200, function () {
-                        if (icon.hasClass('open')) {
-                            icon.removeClass('open');
-
-                            return;
-                        }
-
-                        icon.addClass('open');
-                    });
+                    loadLeafAction(parentCode, expandButton, content, icon, leafContainerElement);
                 });
             };
 
-            var loadLeafAction = function (parentCode, expandButton, content, leafContainerElement) {
+            var loadLeafAction = function (parentCode, expandButton, content, icon, leafContainerElement) {
+                icon.toggleClass('open');
+
                 if (!isLeafLoaded(parentCode)) {
                     expandButton.api({
                         on: 'now',
@@ -152,7 +144,11 @@
                             loadedLeafs.push(parentCode);
                         }
                     });
+
+                    return;
                 }
+
+                leafContainerElement.toggle();
             };
 
             var bindCheckboxAction = function (checkboxElement) {

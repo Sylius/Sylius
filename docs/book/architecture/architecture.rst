@@ -67,7 +67,7 @@ Components
 ~~~~~~~~~~
 
 Every single component of Sylius can be used standalone. Taking the ``Taxation`` component as an example,
-it's only responsibility is to calculate taxes, it does not matter whether these will be taxes for products or anything else, it is fully decoupled.
+its only responsibility is to calculate taxes, it does not matter whether these will be taxes for products or anything else, it is fully decoupled.
 In order to let the Taxation component operate on your objects you need to have them implementing the ``TaxableInterface``.
 Since then they can have taxes calculated.
 Such approach is true for every component of Sylius.
