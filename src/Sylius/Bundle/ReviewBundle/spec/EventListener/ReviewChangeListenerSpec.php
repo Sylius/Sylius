@@ -39,7 +39,6 @@ final class ReviewChangeListenerSpec extends ObjectBehavior
         ReviewableInterface $reviewSubject
     ): void {
         $event->getObject()->willReturn($review);
-        $review->getStatus()->willReturn(ReviewInterface::STATUS_ACCEPTED);
         $review->getReviewSubject()->willReturn($reviewSubject);
 
         $averageRatingUpdater->update($reviewSubject)->shouldBeCalled();
