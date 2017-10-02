@@ -273,6 +273,40 @@ final class ManagingProductAttributesContext implements Context
     }
 
     /**
+     * @When I specify its min length as :min
+     * @When I specify its min entries value as :min
+     */
+    public function iSpecifyItsMinValueAs(int $min)
+    {
+        $this->createPage->specifyMinValue($min);
+    }
+
+    /**
+     * @When I specify its max length as :max
+     * @When I specify its max entries value as :max
+     */
+    public function iSpecifyItsMaxLengthAs(int $max)
+    {
+        $this->createPage->specifyMaxValue($max);
+    }
+
+    /**
+     * @When I check multiple option
+     */
+    public function iCheckMultipleOption()
+    {
+        $this->createPage->checkMultiple();
+    }
+
+    /**
+     * @When I do not check multiple option
+     */
+    public function iDoNotCheckMultipleOption()
+    {
+        // Intentionally left blank to fulfill context expectation
+    }
+
+    /**
      * @Then /^I should see (\d+) product attributes in the list$/
      */
     public function iShouldSeeCustomersInTheList($amountOfProductAttributes)
@@ -328,14 +362,69 @@ final class ManagingProductAttributesContext implements Context
     }
 
     /**
+     * @Then I should be notified that max length must be greater or equal to the min length
+     */
+    public function iShouldBeNotifiedThatMaxLengthMustBeGreaterOrEqualToTheMinLength(): void
+    {
+        $this->assertValidationMessage(
+            'Configuration max length must be greater or equal to the min length.'
+        );
+    }
+
+    /**
+     * @Then I should be notified that max entries value must be greater or equal to the min entries value
+     */
+    public function iShouldBeNotifiedThatMaxEntriesValueMustBeGreaterOrEqualToTheMinEntriesValue(): void
+    {
+        $this->assertValidationMessage(
+            'Configuration max entries value must be greater or equal to the min entries value.'
+        );
+    }
+
+    /**
+     * @Then I should be notified that min entries value must be lower or equal to the number of added choices
+     */
+    public function iShouldBeNotifiedThatMinEntriesValueMustBeLowerOrEqualToTheNumberOfAddedChoices(): void
+    {
+        $this->assertValidationMessage(
+            'Configuration min entries value must be lower or equal to the number of added choices.'
+        );
+    }
+
+    /**
+     * @Then I should be notified that multiple must be true if min or max entries values are specified
+     */
+    public function iShouldBeNotifiedThatMultipleMustBeTrueIfMinOrMaxEntriesValuesAreSpecified(): void
+    {
+        $this->assertValidationMessage(
+            'Configuration multiple must be true if min or max entries values are specified.'
+        );
+    }
+
+    /**
      * @param string $element
      * @param string $expectedMessage
+     *
+     * @throws \InvalidArgumentException
      */
-    private function assertFieldValidationMessage($element, $expectedMessage)
+    private function assertFieldValidationMessage(string $element, string $expectedMessage): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
         Assert::same($currentPage->getValidationMessage($element), $expectedMessage);
+    }
+
+    /**
+     * @param string $expectedMessage
+     *
+     * @throws \InvalidArgumentException
+     */
+    private function assertValidationMessage(string $expectedMessage): void
+    {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+
+        Assert::same($currentPage->getValidationErrors(), $expectedMessage);
     }
 }
