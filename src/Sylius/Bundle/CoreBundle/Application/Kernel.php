@@ -156,7 +156,7 @@ class Kernel extends HttpKernel
     /**
      * {@inheritdoc}
      */
-    public function getCacheDir(): string
+    public function getCacheDir()
     {
         if ($this->isVagrantEnvironment()) {
             return '/dev/shm/sylius/cache/' . $this->getEnvironment();
@@ -168,7 +168,7 @@ class Kernel extends HttpKernel
     /**
      * {@inheritdoc}
      */
-    public function getLogDir(): string
+    public function getLogDir()
     {
         if ($this->isVagrantEnvironment()) {
             return '/dev/shm/sylius/logs';
