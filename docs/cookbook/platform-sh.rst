@@ -182,7 +182,7 @@ In the ``app/config/parameters_platform.php`` file, put the following code:
     ini_set('session.save_path', '/tmp/sessions');
 
     if (getenv('PLATFORM_PROJECT_ENTROPY')) {
-        $container->setParameter('secret', getenv('PLATFORM_PROJECT_ENTROPY');
+        $container->setParameter('secret', getenv('PLATFORM_PROJECT_ENTROPY'));
     }
 
 Remember to have it imported in the config:
