@@ -13,26 +13,16 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ProductBundle\EventListener;
 
+use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\Event\LifecycleEventArgs;
-use Sylius\Bundle\ProductBundle\Remover\SelectProductAttributeValuesRemoverInterface;
 use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
+use Sylius\Component\Product\Model\ProductAttributeValue;
+use Sylius\Component\Product\Model\ProductAttributeValueInterface;
+use Sylius\Component\Product\Repository\ProductAttributeValueRepositoryInterface;
 
 final class SelectProductAttributeChoiceRemoveListener
 {
-    /**
-     * @var SelectProductAttributeValuesRemoverInterface
-     */
-    private $selectProductAttributeValuesRemover;
-
-    /**
-     * @param SelectProductAttributeValuesRemoverInterface $selectProductAttributeValuesRemover
-     */
-    public function __construct(SelectProductAttributeValuesRemoverInterface $selectProductAttributeValuesRemover)
-    {
-        $this->selectProductAttributeValuesRemover = $selectProductAttributeValuesRemover;
-    }
-
     /**
      * @param LifecycleEventArgs $event
      */
@@ -45,7 +35,9 @@ final class SelectProductAttributeChoiceRemoveListener
             $productAttribute instanceof ProductAttributeInterface &&
             $productAttribute->getType() === SelectAttributeType::TYPE
         ) {
-            $unitOfWork = $event->getEntityManager()->getUnitOfWork();
+            $entityManager = $event->getEntityManager();
+
+            $unitOfWork = $entityManager->getUnitOfWork();
             $changeSet = $unitOfWork->getEntityChangeSet($productAttribute);
 
             if (
@@ -60,8 +52,35 @@ final class SelectProductAttributeChoiceRemoveListener
 
             $removedChoices = array_diff_key($oldChoices, $newChoices);
             if (!empty($removedChoices)) {
-                $this->selectProductAttributeValuesRemover->removeValues(array_keys($removedChoices));
+                $this->removeValues($entityManager, array_keys($removedChoices));
             }
+        }
+    }
+
+    /**
+     * @param ObjectManager $entityManager
+     * @param array|string[] $choiceKeys
+     */
+    public function removeValues(ObjectManager $entityManager, array $choiceKeys): void
+    {
+        /** @var ProductAttributeValueRepositoryInterface $productAttributeValueRepository */
+        $productAttributeValueRepository = $entityManager->getRepository(ProductAttributeValue::class);
+        foreach ($choiceKeys as $choiceKey) {
+            $productAttributeValues = $productAttributeValueRepository->findByJsonChoiceKey($choiceKey);
+
+            /** @var ProductAttributeValueInterface $productAttributeValue */
+            foreach ($productAttributeValues as $productAttributeValue) {
+                $newValue = array_diff($productAttributeValue->getValue(), [$choiceKey]);
+                if (!empty($newValue)) {
+                    $productAttributeValue->setValue($newValue);
+
+                    continue;
+                }
+
+                $entityManager->remove($productAttributeValue);
+            }
+
+            $entityManager->flush();
         }
     }
 }

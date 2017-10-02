@@ -17,24 +17,21 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\UnitOfWork;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use Sylius\Bundle\ProductBundle\Remover\SelectProductAttributeValuesRemoverInterface;
 use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
+use Sylius\Component\Product\Model\ProductAttributeValue;
+use Sylius\Component\Product\Model\ProductAttributeValueInterface;
+use Sylius\Component\Product\Repository\ProductAttributeValueRepositoryInterface;
 
 final class SelectProductAttributeChoiceRemoveListenerSpec extends ObjectBehavior
 {
-    function let(SelectProductAttributeValuesRemoverInterface $selectProductAttributeValuesRemover): void
-    {
-        $this->beConstructedWith($selectProductAttributeValuesRemover);
-    }
-
     function it_removes_select_product_attribute_choices(
-        SelectProductAttributeValuesRemoverInterface $selectProductAttributeValuesRemover,
         LifecycleEventArgs $event,
-        ProductAttributeInterface $productAttribute,
         EntityManagerInterface $entityManager,
-        UnitOfWork $unitOfWork
+        UnitOfWork $unitOfWork,
+        ProductAttributeValueRepositoryInterface $productAttributeValueRepository,
+        ProductAttributeInterface $productAttribute,
+        ProductAttributeValueInterface $productAttributeValue
     ): void {
         $event->getEntity()->willReturn($productAttribute);
         $event->getEntityManager()->willReturn($entityManager);
@@ -54,17 +51,28 @@ final class SelectProductAttributeChoiceRemoveListenerSpec extends ObjectBehavio
             ]
         ]);
 
-        $selectProductAttributeValuesRemover->removeValues(['1739bc61-9e42-4c80-8b9a-f97f0579cccb'])->shouldBeCalled();
+        $entityManager->getRepository(ProductAttributeValue::class)->willReturn($productAttributeValueRepository);
+        $productAttributeValueRepository
+            ->findByJsonChoiceKey('1739bc61-9e42-4c80-8b9a-f97f0579cccb')
+            ->willReturn([$productAttributeValue])
+        ;
+
+        $productAttributeValue->getValue()->willReturn([
+            '8ec40814-adef-4194-af91-5559b5f19236',
+            '1739bc61-9e42-4c80-8b9a-f97f0579cccb',
+        ]);
+
+        $productAttributeValue->setValue(['8ec40814-adef-4194-af91-5559b5f19236'])->shouldBeCalled();
+        $entityManager->flush()->shouldBeCalled();
 
         $this->postUpdate($event);
     }
 
     function it_does_not_remove_select_product_attribute_choices_if_there_is_only_added_new_choice(
-        SelectProductAttributeValuesRemoverInterface $selectProductAttributeValuesRemover,
         LifecycleEventArgs $event,
-        ProductAttributeInterface $productAttribute,
         EntityManagerInterface $entityManager,
-        UnitOfWork $unitOfWork
+        UnitOfWork $unitOfWork,
+        ProductAttributeInterface $productAttribute
     ): void {
         $event->getEntity()->willReturn($productAttribute);
         $event->getEntityManager()->willReturn($entityManager);
@@ -84,17 +92,17 @@ final class SelectProductAttributeChoiceRemoveListenerSpec extends ObjectBehavio
             ]
         ]);
 
-        $selectProductAttributeValuesRemover->removeValues(Argument::any())->shouldNotBeCalled();
+        $entityManager->getRepository(ProductAttributeValue::class)->shouldNotBeCalled();
+        $entityManager->flush()->shouldNotBeCalled();
 
         $this->postUpdate($event);
     }
 
     function it_does_not_remove_select_product_attribute_choices_if_there_is_only_changed_value(
-        SelectProductAttributeValuesRemoverInterface $selectProductAttributeValuesRemover,
         LifecycleEventArgs $event,
-        ProductAttributeInterface $productAttribute,
         EntityManagerInterface $entityManager,
-        UnitOfWork $unitOfWork
+        UnitOfWork $unitOfWork,
+        ProductAttributeInterface $productAttribute
     ): void {
         $event->getEntity()->willReturn($productAttribute);
         $event->getEntityManager()->willReturn($entityManager);
@@ -115,28 +123,31 @@ final class SelectProductAttributeChoiceRemoveListenerSpec extends ObjectBehavio
             ]
         ]);
 
-        $selectProductAttributeValuesRemover->removeValues(Argument::any())->shouldNotBeCalled();
+        $entityManager->getRepository(ProductAttributeValue::class)->shouldNotBeCalled();
+        $entityManager->flush()->shouldNotBeCalled();
 
         $this->postUpdate($event);
     }
 
     function it_does_nothing_if_an_entity_is_not_a_product_attribute(
-        SelectProductAttributeValuesRemoverInterface $selectProductAttributeValuesRemover,
+        EntityManagerInterface $entityManager,
         LifecycleEventArgs $event
     ): void {
         $event->getEntity()->willReturn('wrongObject');
 
-        $selectProductAttributeValuesRemover->removeValues(Argument::any())->shouldNotBeCalled();
+        $entityManager->getRepository(ProductAttributeValue::class)->shouldNotBeCalled();
+        $entityManager->flush()->shouldNotBeCalled();
     }
 
     function it_does_nothing_if_a_product_attribute_has_not_a_select_type(
-        SelectProductAttributeValuesRemoverInterface $selectProductAttributeValuesRemover,
         LifecycleEventArgs $event,
+        EntityManagerInterface $entityManager,
         ProductAttributeInterface $productAttribute
     ): void {
         $event->getEntity()->willReturn($productAttribute);
         $productAttribute->getType()->willReturn('wrongType');
 
-        $selectProductAttributeValuesRemover->removeValues(Argument::any())->shouldNotBeCalled();
+        $entityManager->getRepository(ProductAttributeValue::class)->shouldNotBeCalled();
+        $entityManager->flush()->shouldNotBeCalled();
     }
 }
