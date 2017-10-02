@@ -30,6 +30,7 @@ final class DatetimeAttributeConfigurationType extends AbstractType
         $builder
             ->add('format', TextType::class, [
                 'label' => 'sylius.form.attribute_type_configuration.datetime.format',
+                'required' => false,
             ])
         ;
     }

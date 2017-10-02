@@ -36,7 +36,7 @@ Feature: Text product attribute validation
         Then I should be notified that name is required
         And the attribute with code "t_shirt_with_cotton" should not appear in the store
 
-    @ui @todo
+    @ui
     Scenario: Trying to add a new text product attribute with wrong configuration
         When I want to create a new text product attribute
         And I name it "T-shirt brand" in "English (United States)"
