@@ -13,4 +13,4 @@ sylius:
             wrong_current: Das angegebene Passwort unterscheidet sich vom aktuellen Passwort.
         password:
             min: Das Passwort muss mindestens {{ limit }} Zeichen lang sein.
-            max: Passwort darf nicht länger als {{ limit }} sein.
+            max: Passwort darf nicht länger als {{ limit }} Zeichen sein.

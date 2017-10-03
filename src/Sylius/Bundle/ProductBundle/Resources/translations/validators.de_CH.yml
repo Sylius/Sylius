@@ -5,3 +5,52 @@ sylius:
     product:
         sku:
             not_blank: Bitte geben Sie die Bestandseinheit an.
+            unique: Die Bestandseinheit muss eindeutig sein.
+        slug:
+            not_blank: Bitte eine Produkt SEO-URL angeben.
+            unique: Der Produktcode muss eindeutig sein.
+        code:
+            not_blank: Bitte geben Sie einen Produktcode ein.
+            regex: Produktkürzel darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
+            unique: Der Produktcode muss eindeutig sein.
+        name:
+            not_blank: Bitte gib Sie einen Produktnamen an.
+            min_length: Der Produktname muss mindestens 1 Zeichen lang sein.|Der Produktname muss mindestens {{ limit }} Zeichen lang sein.
+            max_length: Der Produktname darf nicht länger als 1 Zeichen sein.|Der Produktname darf nicht länger als {{ limit }} Zeichen sein.
+    product_variant:
+        combination: Die Variante mit den gewählten Einstellungen existiert schon.
+        code:
+            not_blank: Bitte den Code eingeben.
+            regex: Variantenkürzel des Produktes darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
+            unique: Variantencode des Produktes muss eindeutig sein.
+            within_product_unique: Dieser Code muss innerhalb dieses Produktes eindeutig sein.
+    simple_product:
+        code:
+            unique: Der Code eines einfachen Produktes muss unter alle Produkten und Produktvarianten eindeutig sein.
+    option:
+        code:
+            not_blank: Bitte geben Sie ein Kürzel für die Option an.
+            regex: Kürzel der Option darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
+            unique: Eine Option mit diesem Kürzel existiert bereits.
+        name:
+            not_blank: Bitte Optionsnamen eingeben.
+            min_length: Der Optionsname muss mindestens 1 Zeichen lang sein.|Der Optionsname muss mindestens {{ limit }} Zeichen lang sein.
+            max_length: Der Optionsname darf nicht länger als 1 Zeichen sein.|Der Optionsname darf nicht länger als {{ limit }} Zeichen sein.
+        values:
+            min_count: Bitte geben Sie mindestens {{ limit }} Wert für diese Option ein.|Bitte geben Sie mindestens {{ limit }} Werte für diese Option ein.
+    option_value:
+        code:
+            not_blank: Bitte geben Sie ein Kürzel für den Wert der Option ein.
+            regex: Kürzel des Optionswertes darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
+            unique: Das Kürzel für den Wert der Option existiert bereits.
+        value:
+            not_blank: Bitte geben Sie einen Wert für diese Option ein.
+    association_type:
+        name:
+            not_blank: Bitte den Namen des Beziehungstypen angeben.
+            min_length: Der Name der Zuordnung muss mindestens 1 Zeichen lang sein.|Der Name der Zuordnung muss mindestens {{ limit }} Zeichen lang sein.
+            max_length: Der Name der Zuordnung darf nicht länger als 1 Zeichen sein.|Der Name der Zuordnung darf nicht länger als {{ limit }} Zeichen sein.
+        code:
+            not_blank: Bitte den Code des Beziehungstypen angeben.
+            regex: Kürzel des Beziehungstyps darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
+            unique: Der Beziehungstyp mit dem angegebenen Code existiert bereits.

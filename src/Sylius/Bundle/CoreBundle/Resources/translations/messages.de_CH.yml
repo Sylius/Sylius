@@ -14,11 +14,32 @@ sylius:
                 different_billing_address: Eine andere Rechnungsadresse benutzen?
             payment_method: Zahlungsart
             shipping_method: Versandarten
+        promotion:
+            channels: Ausgabekanäle
+        promotion_action:
+            add_product_configuration:
+                product: Verkäuflich
+        promotion_coupon:
+            per_customer_usage_limit: Nutzungsbeschränkung pro Kunde
         group:
             name: Name
             roles: Rollen
         channel:
+            contact_email: Kontakt E-Mail
+            currencies: Währungen
+            currency_base: Basis-Währung
+            account_verification_required: Ist eine Konto Bestätigung erforderlich?
+            hostname: Server-Name
+            locale_default: Standard Lokalisierung
+            locales: Gebietsschemata
+            payment_methods: Zahlungsmethoden
+            shipping_methods: Versandmethoden
+            skipping_shipping_step_allowed: Versandart überspringen, wenn nur eine Versandart verfügbar ist?
+            skipping_payment_step_allowed: Überspringen des Zahlungsschritt, wenn nur eine Zahlungsmethode verfügbar ist?
+            tax_calculation_strategy: Steuerberechnungsgrundlage
             tax_zone_default: Standard Steuerzone
+            taxonomies: Klassifizierungen
+            theme: Theme
         image:
             type: Typ
             file: Bild
@@ -32,14 +53,18 @@ sylius:
             total_from: Von
             total_to: zu
             payment_state: Zahlungsstatus
+            channel: Alle Kanäle
         page:
             body: Body
             id: ID
             title: Titel
         product:
+            images: Fotos
             restricted_zone: Beschränktes Versandgebiet
             short_description: Kurzbeschreibung
             variant_selection_method: Varianten
+            main_taxon: Haupt-Produktgruppe
+            channels: Ausgabekanäle
             enabled: Aktiviert
         product_filter:
             name: Name
@@ -52,15 +77,19 @@ sylius:
             created_at_to: zu
             number: Auftragsnummer
             shipping_address: Liefern an
+            channel: Alle Kanäle
         payment_filter:
             created_at_from: Von
             created_at_to: zu
             number: Auftragsnummer
+            billing_address: Rechnungsadresse
+            channel: Alle Kanäle
         shipping_method:
             zone: Zone
         taxon:
             code: Code
             file: Foto auswählen
+            images: Fotos
         taxonomy:
             file: Foto auswählen
         user:
@@ -68,17 +97,116 @@ sylius:
             different_billing_address: Eine andere Rechnungsadresse benutzen?
             enabled: Aktiviert
             first_name: Vorname
+            groups: Gruppen
             roles: Rollen
+            last_name: Nachname
+            password: Passwort
+            shipping_address: Lieferadresse
+        user_filter:
+            query: Suche
         variant:
+            depth: Tiefe
+            height: Höhe
+            on_hand: Auf Lager
+            price: Preis
             sku: Bestandseinheit
+            shipping_required: Ist ein Versand erforderlich?
+            weight: Gewicht
+            width: Breite
+        attribute:
+            product_attribute_value:
+                attribute: Attribut
+                value: Wert
         guest:
             email: E-Mail
+        product_association:
+            product: Zugehöriges Produkt
+            type: Assoziationstyp
         product_association_type:
             name: Name
+        promotion_filter:
+            products: Artikel-Filter
+            taxons: Artikelgruppen Filter
+        promotion_rule:
+            customer_group:
+                group: Kundengruppe
+            has_taxon:
+                taxons: Produktgruppen
+            product:
+                products: Produkte
+            total_of_items_from_taxon:
+                taxon: Produktgruppe
+                amount: Anzahl
+        payment_method:
+            channels: Ausgabekanäle
+        product_attribute:
+            position: Position
+        zone:
+            scopes:
+                shipping: Versandart
+                tax: Steuer
     installer:
         extensions:
+            header: Erweiterungen
+            accelerator:
+                header: Beschleuniger
+                help: Zend OpCache aktivieren (dringend empfohlen).
+            apc: APC
+            ctype: Ctype
+            gd: GD
+            help: Installiere und aktiviere die %extension% Erweiterung.
+            iconv: Iconv
+            exif: Exif
+            fileinfo: Dateiinfo
+            icu: ICU
+            intl: Intl
+            json_encode: JSON
+            mbstring: Multibyte String
             "off": false
             "on": true
+            pcre: PCRE
+            pdo: PDO
+            php_xml: PHP-XML
+            session_start: Session
+            simplexml_import_dom: SimpleXML
+            token_get_all: Tokenizer
+        filesystem:
+            header: Dateisystem
+            cache:
+                header: Cache
+                help: 'Ausführen um Zugriffsrechte zu setzen: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+            exists: Existiert
+            logs:
+                header: Protokoll/Logs
+                help: 'Ausführen um Zugriffsrechte zu setzen: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+            not_exists: Existiert nicht
+            not_writable: Schreibgeschützt
+            parameters:
+                header: parameters.yml
+                help: 'Ausführen um Zugriffsrechte zu setzen: sudo chmod a+w %path%'
+            vendors: Verkäufer
+            writable: Beschreibbar
         settings:
+            header: PHP-Version und -Einstellungen
+            any: Jeder
+            detect_unicode: detect_unicode
+            magic_quotes_gpc: magic_quotes_gpc
+            non_deprecated: Nicht veraltet
             "off": false
             "on": true
+            register_globals: register_globals
+            session:
+                auto_start: session.auto_start
+            short_open_tag: short_open_tag
+            timezone: Zeitzone
+            timezone_deprecated:
+                header: Veraltete Zeitzone
+                help: 'Zeitzone %timezone% ist veraltet. Korriegiere die php.ini Datei (Liste der veralteten Zeitzonen: http://php.net/manual/en/timezones.others.php).'
+            version: PHP Version
+            version_recommended: Empfohlene PHP Version
+    payum_gateway:
+        cash_on_delivery: Nachnahme
+        offline: Offline
+        paypal_express_checkout: PayPal Express
+    shipping_method_resolver:
+        by_zones_and_channel: Nach Zonen und Kanälen
