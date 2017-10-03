@@ -18,7 +18,6 @@ The new Rule needs a RuleChecker class:
 
     use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
     use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
-    use AppBundle\Promotion\Checker\Rule\PremiumCustomerRuleChecker;
 
     class PremiumCustomerRuleChecker implements RuleCheckerInterface
     {
@@ -37,7 +36,7 @@ The new Rule needs a RuleChecker class:
          */
         public function getConfigurationFormType()
         {
-            return PremiumCustomerRuleChecker::class;
+            return self::class;
         }
     }
 
