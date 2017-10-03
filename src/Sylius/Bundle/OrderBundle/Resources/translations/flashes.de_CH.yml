@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    cart:
+        add_item: 'Artikel wurde dem Warenkorb hinzugefügt'
+        cannot_modify: 'Für den Warenkorb, welchen sie bearbeiten möchten, wurde bereits eine Bestellung übermittelt.'
+        remove_item: 'Artikel wurde aus dem Warenkorb entfernt'
+        save: 'Der Warenkorb wurde erfolgreich aktualisiert'

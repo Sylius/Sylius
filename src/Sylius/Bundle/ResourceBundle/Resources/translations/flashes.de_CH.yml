@@ -1,0 +1,17 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    resource:
+        create: '%resource% wurde erfolgreich erstellt.'
+        update: '%resource% wurde erfolgreich aktualisiert.'
+        delete: '%resource% wurde erfolgreich gelöscht.'
+        move: '%resource% wurde erfolgreich verschoben.'
+        generate: 'Mehrere Elemente (%resource%) wurden erfolgreich generiert.'
+        revert: '%resource% wurden erfolgreich zurückgesetzt.'
+        restore_deleted: '%resource% wurde erfolgreich wiederhergestellt.'
+        enable: '%resource% wurde erfolgreich aktiviert.'
+        disable: '%resource% wurde erfolgreich deaktiviert.'
+        delete_error: 'Löschen fehlgeschlagen, %resource% wird benutzt.'
+        race_condition_error: 'Kann nicht aktualisiert werden, die %resource% wurde zuvor geändert.'
+        something_went_wrong_error: 'Etwas ist schief gelaufen, bitte versuchen Sie es erneut.'

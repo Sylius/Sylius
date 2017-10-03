@@ -2,6 +2,93 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    channel:
+        base_currency:
+            not_blank: Bitte geben Sie die Basiswährung für den Kanal an.
+        default_locale:
+            not_blank: Bitte Standard-Gebietsschema für diesen Kanal angeben.
+        contact_email:
+            invalid: Diese E-Mail Adresse ist ungültig.
+            max: E-Mail darf nicht länger als {{ limit }} Zeichen sein.
+            min: E-Mail muss mindestens {{ limit }} Zeichen lang sein.
+    channel_pricing:
+        price:
+            min: Preis muss mindestens {{ limit }} sein.
+            not_blank: Bitte Preis eingeben.
+    checkout:
+        shipping_method:
+            not_blank: Bitte wählen Sie eine Versandart aus.
     contact:
         email:
+            invalid: Diese E-Mail Adresse ist ungültig.
             not_blank: Bitte geben Sie Ihre E-Mail-Adresse ein.
+        message:
+            not_blank: Bitte geben Sie Ihre Nachricht ein.
+    currency:
+        enabled:
+            cannot_disable_base: Die Basiswährung kann nicht deaktiviert werden.
+    customer:
+        currency_code:
+            not_valid: Der eingegebene Währungscode ist ungültig.
+    cart_item:
+        not_available: '%itemName% hat keinen ausreichenden Vorrat.'
+    order:
+        currency_code:
+            not_valid: Der eingegebene Währungscode ist ungültig.
+        payment_method_eligibility: 'Diese Zahlung Methode %paymentMethodName% wurde deaktiviert. Bitte wählen Sie eine andere Zahlungsart aus.'
+        product_eligibility: 'Dieses Produkt %productName% wurde deaktiviert.'
+        shipping_method_eligibility: 'Das Produkt erfüllt nicht die Voraussetzungen für die Versandart %shippingMethodName%. Bitte wählen Sie eine andere Versandart.'
+    locale:
+        code:
+            not_blank: Bitte lokalen Code eingeben.
+            unique: Locale existiert bereits.
+        enabled:
+            cannot_disable_base: Das Basis-Gebietsschema kann nicht deaktiviert werden.
+    product:
+        variants:
+            all_prices_defined: Für neu zugewiesene Kanäle müssen zuerst die Preise der Produktvarianten definiert werden.
+    product_attribute:
+        invalid: Position muss eine Ganzzahl sein.
+    product_image:
+        file:
+            max_size: Das Bild ist zu groß - {{ size }}{{ suffix }}. Maximal zulässige Größe {{ limit }}{{ suffix }}.
+            upload_ini_size: Das Bild ist zu groß. Maximal zulässige Größe {{ limit }}{{ suffix }}.
+    product_variant:
+        onHand:
+            min: Menge muss größer sein als {{ limit }}.
+            not_blank: Bitte verfügbare Menge eingeben.
+            reserved: Verfügbarkeit muß größer sein als die Reservierungen
+        original_price:
+            min: Ursprünglicher Preis darf nicht negativ sein.
+        weight:
+            min: Gewicht darf nicht negativ sein.
+            invalid: Gewicht muss eine Zahl sein.
+        width:
+            min: Breite darf nicht negativ sein.
+            invalid: Breite muss eine Zahl sein.
+        height:
+            min: Höhe darf nicht negativ sein.
+            invalid: Gewicht muss eine Zahl sein.
+        depth:
+            min: Tiefe kann nicht negativ sein.
+            invalid: Tiefe muss eine Zahl sein.
+        channel_pricing:
+            all_defined: 'Für jeden Kanal muss ein Preis definiert sein.'
+    product_translation:
+        short_description:
+            max: Kurzbeschreibung darf nicht länger als {{ limit }} Zeichen sein.
+    taxon_image:
+        file:
+            max_size: Das Bild ist zu groß - {{ size }}{{ suffix }}. Maximal zulässige Größe {{ limit }}{{ suffix }}.
+            upload_ini_size: Das Bild ist zu groß. Maximal zulässige Größe {{ limit }}{{ suffix }}.
+    user:
+        email:
+            unique: Diese E-Mail-Adresse wird bereits verwendet.
+            min: E-Mail muss mindestens {{ min }} Zeichen haben.
+            max: Email darf maximal {{ max }} Zeichen lang sein.
+            invalid: Diese E-Mail Adresse ist ungültig.
+        username:
+            unique: Der Benutzername wird bereits verwendet.
+            not_blank: Bitte geben Sie Ihren Namen ein.
+        locale_code:
+            not_blank: Bitte ein Gebietsschema auswählen.

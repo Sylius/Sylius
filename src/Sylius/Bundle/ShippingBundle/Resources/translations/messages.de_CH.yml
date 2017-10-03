@@ -3,9 +3,43 @@
 
 sylius:
     form:
+        rule:
+            unit_count_configuration:
+                count: Anzahl
+                equal: Ist gleich
+            type: Regeltyp
+        shipment:
+            state: Versandstatus
+            states:
+                checkout: Zur Kasse
+                pending: Ausstehend
+                ready: Bereit
+                shipped: Versandt
+                returned: Zurückgesandt
+                cancelled: Abgebrochen
+            tracking_code: Tracking-Code
+        shipping_calculator:
+            flat_rate_configuration:
+                label: Pauschale pro Sendung
+                amount: Anzahl
+            per_unit_rate_configuration:
+                label: Pauschale pro Artikel
+                amount: Anzahl
         shipping_category:
+            description: Beschreibung
             name: Name
         shipping_method:
+            calculator: Rechner
+            category: Kategorie
+            category_requirement: Kategorievoraussetzungen
+            channels: Ausgabekanäle
+            configuration: Einstellung
+            description: Beschreibung
             enabled: Aktiviert
+            match_all_category_requirement: Alle Einheiten müssen mit der Versandkategorie übereinstimmen
+            match_any_category_requirement: Mindestens eine Einheit muss mit der Versandkategorie übereinstimmen
+            match_none_category_requirement: Keine der Einheiten müssen mit der Versandkategorie übereinstimmen
             name: Name
+            position: Position
             tax_category: Steuerkategorie
+            translations: Übersetzungen

@@ -5,3 +5,12 @@ sylius:
     user:
         email:
             not_blank: Bitte geben Sie Ihre E-Mail-Adresse ein.
+            invalid: Diese E-Mail Adresse ist ungültig.
+            not_registered: Es existiert kein Benutzer mit dieser Email. Bitte registrieren Sie sich zuerst.
+        plainPassword:
+            not_blank: Bitte geben Sie Ihr Passwort ein.
+            mismatch: Die eingegebenen Passwörter stimmen nicht überein
+            wrong_current: Das angegebene Passwort unterscheidet sich vom aktuellen Passwort.
+        password:
+            min: Das Passwort muss mindestens {{ limit }} Zeichen lang sein.
+            max: Passwort darf nicht länger als {{ limit }} Zeichen sein.
