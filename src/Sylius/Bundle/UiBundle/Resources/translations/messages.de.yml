@@ -6,7 +6,7 @@ sylius:
         login:
             username: 'Benutzername'
             password: 'Passwort'
-            remember_me: 'Eingeloggt bleiben'
+            remember_me: 'Angemeldet bleiben'
         option:
             name: 'Name'
         notes: 'Weitere Hinweise'
@@ -669,7 +669,7 @@ sylius:
         reject: 'Zurückweisen'
         rejected: 'Zurückgewiesen'
         release_inventory: 'Warenbestand freigeben'
-        remember_me: 'Eingeloggt bleiben'
+        remember_me: 'Angemeldet bleiben'
         remove_attribute: 'Attribute entfernen'
         repeat_new_password: 'Neues Passwort wiederholen'
         report_details: 'Berichtdetails'

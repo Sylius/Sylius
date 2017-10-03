@@ -9,6 +9,7 @@ sylius:
             not_blank: Bitte geben Sie eine Stadt an.
         country:
             not_blank: Bitte wählen Sie ein Land aus.
+            disabled: Das gewählte Land ist deaktiviert. Bitte wählen Sie ein anderes.
         first_name:
             max_length: Der Vorname darf nicht länger als 255 Zeichen sein|Der Vorname darf nicht länger als 255 Zeichen sein.
             min_length: Der Vorname muss mindestens 2 Zeichen lang sein|Der Vorname muss mindestens 2 Zeichen lang sein.
@@ -28,14 +29,37 @@ sylius:
             min_length: Die Strasse muss mindestens 2 Zeichen lang sein|Die Strasse muss mindestens 2 Zeichen lang sein.
             not_blank: Bitte geben Sie eine Strasse an.
         not_shippable: Diese Adresse ist keine gültige Versandadresse.
+    country:
+        code:
+            not_blank: Bitte geben Sie den ISO Code des Landes an.
+            regex: Ländercode darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
+            unique: ISO-Ländercode muss eindeutig sein.
     province:
+        code:
+            min_length: Der Name des Bundeslandes muss mindestens 5 Zeichen lang sein|Der Name des Bundeslandes muss mindestens 5 Zeichen lang sein.
+            not_blank: Bitte geben Sie den Code des Bundeslandes ein.
+            regex: Der Code des Bundeslands sollte das Format XX-XX haben (z.B. DE-BY).
+            unique: Bundesland-Code muss eindeutig sein.
         name:
             max_length: Der Name des Kantons darf nicht länger als 255 Zeichen sein|Der Name des Kantons darf nicht länger als 255 Zeichen sein.
             min_length: Der Name des Kantons muss mindestens 2 Zeichen lang sein|Der Name des Kantons muss mindestens 2 Zeichen lang sein.
             not_blank: Bitte geben Sie einen Kanton an.
+            unique: Bundesland-Name muss eindeutig sein.
     zone:
+        scope:
+            not_blank: Bitte den Bereich angeben.
+        code:
+            not_blank: Bitte geben Sie Ihre Vorwahl ein.
+            regex: Kürzel des Gebietes darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
+            unique: Die Vorwahl muss eindeutig sein.
         members:
             min_count: Bitte geben Sie mindestens {{ limit }} Versandgebiete an.
         name:
             max_length: Der Name eines Versandgebietes darf nicht länger als 255 Zeichen sein|Der Name eines Versandgebietes darf nicht länger als 255 Zeichen sein.
+            min_length: Der Name eines Versandgebietes muss mindestens zwei Zeichen lang sein|Der Name eines Versandgebietes muss mindestens zwei Zeichen lang sein.
             not_blank: Bitte geben Sie den Namen des Versandgebietes an.
+    zone_member:
+        code:
+            not_blank: Bitte wählen Sie ein Versandgebiet aus.
+            regex: Kürzel des Versandgebietes darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
+        unique: Der gewählte Bereich ist bereits in diesem Versandgebiet.
