@@ -29,7 +29,6 @@ default:
                 - sylius.behat.context.ui.channel
                 - sylius.behat.context.ui.shop.cart
                 - sylius.behat.context.ui.shop.currency
-                - sylius.behat.context.ui.shop.current_channel
                 - sylius.behat.context.ui.shop.product
                 - sylius.behat.context.ui.shop.registration
                 - sylius.behat.context.ui.user

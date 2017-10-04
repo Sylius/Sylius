@@ -403,12 +403,6 @@
             <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.ui.shop.current_channel" class="Sylius\Behat\Context\Ui\Shop\CurrentChannelContext">
-            <argument type="service" id="sylius.behat.channel_context_setter" />
-            <argument type="service" id="sylius.behat.page.shop.home" />
-            <tag name="fob.context_service" />
-        </service>
-
         <service id="sylius.behat.context.ui.shop.homepage" class="Sylius\Behat\Context\Ui\Shop\HomepageContext">
             <argument type="service" id="sylius.behat.page.shop.home" />
             <tag name="fob.context_service" />
