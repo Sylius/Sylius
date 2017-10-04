@@ -67,6 +67,10 @@ sylius_api_product_variant:
     resource: "@SyliusAdminApiBundle/Resources/config/routing/product_variant.yml"
     prefix: /products/{productCode}
 
+sylius_api_product_review:
+    resource: "@SyliusAdminApiBundle/Resources/config/routing/product_review.yml"
+    prefix: /products/{productCode}
+
 sylius_api_promotion:
     resource: "@SyliusAdminApiBundle/Resources/config/routing/promotion.yml"
 
