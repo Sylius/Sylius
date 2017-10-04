@@ -19,12 +19,16 @@ use Doctrine\ORM\UnitOfWork;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
-use Sylius\Component\Product\Model\ProductAttributeValue;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
 use Sylius\Component\Product\Repository\ProductAttributeValueRepositoryInterface;
 
 final class SelectProductAttributeChoiceRemoveListenerSpec extends ObjectBehavior
 {
+    function let(): void
+    {
+        $this->beConstructedWith('Sylius\Component\Product\Model\ProductAttributeValue');
+    }
+
     function it_removes_select_product_attribute_choices(
         LifecycleEventArgs $event,
         EntityManagerInterface $entityManager,
@@ -51,7 +55,10 @@ final class SelectProductAttributeChoiceRemoveListenerSpec extends ObjectBehavio
             ]
         ]);
 
-        $entityManager->getRepository(ProductAttributeValue::class)->willReturn($productAttributeValueRepository);
+        $entityManager
+            ->getRepository('Sylius\Component\Product\Model\ProductAttributeValue')
+            ->willReturn($productAttributeValueRepository)
+        ;
         $productAttributeValueRepository
             ->findByJsonChoiceKey('1739bc61-9e42-4c80-8b9a-f97f0579cccb')
             ->willReturn([$productAttributeValue])
@@ -92,7 +99,10 @@ final class SelectProductAttributeChoiceRemoveListenerSpec extends ObjectBehavio
             ]
         ]);
 
-        $entityManager->getRepository(ProductAttributeValue::class)->shouldNotBeCalled();
+        $entityManager
+            ->getRepository('Sylius\Component\Product\Model\ProductAttributeValue')
+            ->shouldNotBeCalled()
+        ;
         $entityManager->flush()->shouldNotBeCalled();
 
         $this->postUpdate($event);
@@ -123,7 +133,10 @@ final class SelectProductAttributeChoiceRemoveListenerSpec extends ObjectBehavio
             ]
         ]);
 
-        $entityManager->getRepository(ProductAttributeValue::class)->shouldNotBeCalled();
+        $entityManager
+            ->getRepository('Sylius\Component\Product\Model\ProductAttributeValue')
+            ->shouldNotBeCalled()
+        ;
         $entityManager->flush()->shouldNotBeCalled();
 
         $this->postUpdate($event);
@@ -135,7 +148,10 @@ final class SelectProductAttributeChoiceRemoveListenerSpec extends ObjectBehavio
     ): void {
         $event->getEntity()->willReturn('wrongObject');
 
-        $entityManager->getRepository(ProductAttributeValue::class)->shouldNotBeCalled();
+        $entityManager
+            ->getRepository('Sylius\Component\Product\Model\ProductAttributeValue')
+            ->shouldNotBeCalled()
+        ;
         $entityManager->flush()->shouldNotBeCalled();
     }
 
@@ -147,7 +163,10 @@ final class SelectProductAttributeChoiceRemoveListenerSpec extends ObjectBehavio
         $event->getEntity()->willReturn($productAttribute);
         $productAttribute->getType()->willReturn('wrongType');
 
-        $entityManager->getRepository(ProductAttributeValue::class)->shouldNotBeCalled();
+        $entityManager
+            ->getRepository('Sylius\Component\Product\Model\ProductAttributeValue')
+            ->shouldNotBeCalled()
+        ;
         $entityManager->flush()->shouldNotBeCalled();
     }
 }

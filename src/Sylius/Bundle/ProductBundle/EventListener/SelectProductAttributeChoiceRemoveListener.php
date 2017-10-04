@@ -24,6 +24,19 @@ use Sylius\Component\Product\Repository\ProductAttributeValueRepositoryInterface
 final class SelectProductAttributeChoiceRemoveListener
 {
     /**
+     * @var string
+     */
+    private $productAttributeValueClass;
+
+    /**
+     * @param string $productAttributeValueClass
+     */
+    public function __construct(string $productAttributeValueClass)
+    {
+        $this->productAttributeValueClass = $productAttributeValueClass;
+    }
+
+    /**
      * @param LifecycleEventArgs $event
      */
     public function postUpdate(LifecycleEventArgs $event): void
@@ -64,7 +77,7 @@ final class SelectProductAttributeChoiceRemoveListener
     public function removeValues(ObjectManager $entityManager, array $choiceKeys): void
     {
         /** @var ProductAttributeValueRepositoryInterface $productAttributeValueRepository */
-        $productAttributeValueRepository = $entityManager->getRepository(ProductAttributeValue::class);
+        $productAttributeValueRepository = $entityManager->getRepository($this->productAttributeValueClass);
         foreach ($choiceKeys as $choiceKey) {
             $productAttributeValues = $productAttributeValueRepository->findByJsonChoiceKey($choiceKey);
 
