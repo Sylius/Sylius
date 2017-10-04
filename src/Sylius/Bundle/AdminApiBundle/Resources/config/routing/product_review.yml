@@ -1,0 +1,90 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_admin_api_product_review:
+    resource: |
+        path: 'reviews'
+        grid: sylius_admin_api_product_review
+        alias: sylius.product_review
+        section: admin_api
+        only: ['index']
+        serialization_version: $version
+        vars:
+            route:
+                parameters:
+                    productCode: $productCode
+    type: sylius.resource_api
+
+sylius_admin_api_product_review_create:
+    path: /reviews/
+    methods: [POST]
+    defaults:
+        _controller: sylius.controller.product_review:createAction
+        _sylius:
+            serialization_groups: [Default, Detailed]
+            serialization_version: $version
+            section: admin_api
+            form: Sylius\Bundle\CoreBundle\Form\Type\Product\ProductReviewType
+            factory:
+                method: createForSubject
+                arguments:
+                  - expr:notFoundOnNull(service('sylius.repository.product').findOneByCode($productCode))
+
+sylius_admin_api_product_review_update:
+    path: /reviews/{id}
+    methods: [PUT, PATCH]
+    defaults:
+        _controller: sylius.controller.product_review:updateAction
+        _sylius:
+            serialization_version: $version
+            section: admin_api
+            form: Sylius\Bundle\CoreBundle\Form\Type\Product\ProductReviewType
+            repository:
+                method: findOneByIdAndProductCode
+                arguments: [$id, $productCode]
+
+sylius_admin_api_product_review_delete:
+    path: /reviews/{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.product_review:deleteAction
+        _sylius:
+            serialization_version: $version
+            section: admin_api
+            repository:
+                method: findOneByIdAndProductCode
+                arguments: [$id, $productCode]
+            csrf_protection: false
+
+sylius_admin_api_product_review_show:
+    path: /reviews/{code}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product_review:showAction
+        _sylius:
+            serialization_version: $version
+            section: admin_api
+            serialization_groups: [Default, Detailed]
+            repository:
+                method: findOneByIdAndProductCode
+                arguments: [$code, $productCode]
+
+sylius_admin_api_product_review_accept:
+    path: /reviews/{id}/accept
+    methods: [POST, PUT, PATCH]
+    defaults:
+        _controller: sylius.controller.product_review:applyStateMachineTransitionAction
+        _sylius:
+            state_machine:
+                graph: sylius_product_review
+                transition: accept
+
+sylius_admin_api_product_review_reject:
+    path: /reviews/{id}/reject
+    methods: [POST, PUT, PATCH]
+    defaults:
+        _controller: sylius.controller.product_review:applyStateMachineTransitionAction
+        _sylius:
+            state_machine:
+                graph: sylius_product_review
+                transition: reject
