@@ -37,15 +37,18 @@
         "fzaninotto/faker": "^1.6",
         "gedmo/doctrine-extensions": "^2.4.12",
         "incenteev/composer-parameter-handler": "^2.1",
+        "jeremykendall/php-domain-parser": "^4.0.3@alpha",
         "jms/serializer-bundle": "^2.0",
         "knplabs/knp-gaufrette-bundle": "^0.3",
         "knplabs/knp-menu-bundle": "^2.1",
+        "league/uri": "^4.2.3",
         "liip/imagine-bundle": "^1.9.1",
         "ocramius/proxy-manager": "^2.1",
         "payum/payum": "^1.4",
         "payum/payum-bundle": "^2.2",
         "php-http/guzzle6-adapter": "^1.1",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0",
+        "ramsey/uuid": "^3.7",
         "sensio/distribution-bundle": "^5.0.21",
         "sonata-project/block-bundle": "^3.3",
         "sonata-project/intl-bundle": "^2.2",
@@ -65,8 +68,7 @@
         "willdurand/hateoas-bundle": "^1.2",
         "winzou/state-machine-bundle": "^0.3",
         "zendframework/zend-hydrator": "^2.2",
-        "zendframework/zend-stdlib": "^3.1",
-        "ramsey/uuid": "^3.7"
+        "zendframework/zend-stdlib": "^3.1"
     },
     "require-dev": {
         "akeneo/phpspec-skip-example-extension": "^3.0",
