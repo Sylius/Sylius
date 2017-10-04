@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ReviewBundle\EventListener;
 
+use Doctrine\ORM\Event\LifecycleEventArgs;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ReviewBundle\Updater\ReviewableRatingUpdaterInterface;
@@ -33,12 +34,11 @@ final class ReviewChangeListenerSpec extends ObjectBehavior
 
     function it_recalculates_subject_rating_on_accepted_review_deletion(
         $averageRatingUpdater,
-        GenericEvent $event,
+        LifecycleEventArgs $event,
         ReviewInterface $review,
         ReviewableInterface $reviewSubject
     ): void {
-        $event->getSubject()->willReturn($review);
-        $review->getStatus()->willReturn(ReviewInterface::STATUS_ACCEPTED);
+        $event->getObject()->willReturn($review);
         $review->getReviewSubject()->willReturn($reviewSubject);
 
         $averageRatingUpdater->update($reviewSubject)->shouldBeCalled();
@@ -46,33 +46,12 @@ final class ReviewChangeListenerSpec extends ObjectBehavior
         $this->recalculateSubjectRating($event);
     }
 
-    function it_does_nothing_if_review_was_new($averageRatingUpdater, GenericEvent $event, ReviewInterface $review): void
+    function it_does_nothing_if_event_subject_is_not_review_object($averageRatingUpdater, LifecycleEventArgs $event): void
     {
-        $event->getSubject()->willReturn($review);
-        $review->getStatus()->willReturn(ReviewInterface::STATUS_NEW);
+        $event->getObject()->willReturn('badObject');
 
         $averageRatingUpdater->update(Argument::type(ReviewableInterface::class))->shouldNotBeCalled();
 
         $this->recalculateSubjectRating($event);
-    }
-
-    function it_does_nothing_if_review_was_rejected($averageRatingUpdater, GenericEvent $event, ReviewInterface $review): void
-    {
-        $event->getSubject()->willReturn($review);
-        $review->getStatus()->willReturn(ReviewInterface::STATUS_REJECTED);
-
-        $averageRatingUpdater->update(Argument::type(ReviewableInterface::class))->shouldNotBeCalled();
-
-        $this->recalculateSubjectRating($event);
-    }
-
-    function it_throws_exception_if_event_subject_is_not_review_object(GenericEvent $event): void
-    {
-        $event->getSubject()->willReturn('badObject');
-
-        $this
-            ->shouldThrow(new UnexpectedTypeException('badObject', ReviewInterface::class))
-            ->during('recalculateSubjectRating', [$event])
-        ;
     }
 }
