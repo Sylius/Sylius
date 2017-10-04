@@ -80,16 +80,27 @@ final class SelectAttributeType extends AbstractType
     {
         $resolver
             ->setRequired('configuration')
-            ->setDefault('placeholder', 'sylius.form.attribute_type_configuration.select.choose')
+            ->setDefaults([
+                'locale_code' => $this->defaultLocale,
+                'placeholder' => 'sylius.form.attribute_type_configuration.select.choose',
+            ])
             ->setNormalizer('choices', function (Options $options) {
                 if (is_array($options['configuration'])
                     && isset($options['configuration']['choices'])
                     && is_array($options['configuration']['choices'])) {
                     $choices = [];
+                    $localeCode = $options['locale_code'];
 
                     foreach ($options['configuration']['choices'] as $key => $choice) {
+                        if (!empty($choice[$localeCode])) {
+                            $choices[$key] = $choice[$localeCode];
+
+                            continue;
+                        }
+
                         $choices[$key] = $choice[$this->defaultLocale];
                     }
+
                     $choices = array_flip($choices);
                     ksort($choices);
 

@@ -49,23 +49,20 @@ class SelectAttributeChoicesCollectionType extends AbstractType
             $form = $event->getForm();
 
             if (null !== $data) {
-                $fixedArray = [];
-                foreach ($data as $key => &$values) {
+                $fixedData = [];
+                foreach ($data as $key => $values) {
                     if (!is_int($key)) {
-                        $fixedArray[$key] = $values;
+                        $fixedData[$key] = $this->resolveValues($values);
 
                         continue;
                     }
 
-                    $newKey = null;
-                    foreach ($values as $locale => &$value) {
-                        if ($locale === $this->defaultLocaleCode) {
-                            $newKey = $this->getUniqueKey();
-                            $fixedArray[$newKey] = $values;
-
-                            break;
-                        }
+                    if (!array_key_exists($this->defaultLocaleCode, $values)) {
+                        continue;
                     }
+
+                    $newKey = $this->getUniqueKey();
+                    $fixedData[$newKey] = $this->resolveValues($values);
 
                     if (!is_null($newKey) && $form->offsetExists($key)) {
                         $form->offsetUnset($key);
@@ -73,7 +70,7 @@ class SelectAttributeChoicesCollectionType extends AbstractType
                     }
                 }
 
-                $event->setData($fixedArray);
+                $event->setData($fixedData);
             }
         });
     }
@@ -100,5 +97,22 @@ class SelectAttributeChoicesCollectionType extends AbstractType
     private function getUniqueKey(): string
     {
         return Uuid::uuid1()->toString();
+    }
+
+    /**
+     * @param array $values
+     *
+     * @return array
+     */
+    private function resolveValues(array $values): array
+    {
+        $fixedValues = [];
+        foreach ($values as $locale => $value) {
+            if (!empty($value)) {
+                $fixedValues[$locale] = $value;
+            }
+        }
+
+        return $fixedValues;
     }
 }
