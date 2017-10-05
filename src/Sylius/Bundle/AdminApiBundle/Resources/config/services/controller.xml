@@ -30,9 +30,5 @@
             <argument type="service" id="fos_rest.view_handler" />
             <argument type="service" id="sylius.registry.shipping_calculator" />
         </service>
-        <service id="sylius.controller.update_product_review_status" class="Sylius\Bundle\AdminApiBundle\Controller\UpdateProductReviewStatusController">
-            <argument type="service" id="sylius.repository.product_review" />
-            <argument type="service" id="doctrine.orm.entity_manager" />
-        </service>
     </services>
 </container>

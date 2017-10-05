@@ -75,10 +75,18 @@ sylius_admin_api_product_review_accept:
     path: /reviews/{id}/accept
     methods: [POST, PUT, PATCH]
     defaults:
-        _controller: sylius.controller.update_product_review_status:acceptProductReviewAction
+        _controller: sylius.controller.product_review:applyStateMachineTransitionAction
+        _sylius:
+            state_machine:
+                graph: sylius_product_review
+                transition: accept
 
 sylius_admin_api_product_review_reject:
     path: /reviews/{id}/reject
     methods: [POST, PUT, PATCH]
     defaults:
-        _controller: sylius.controller.update_product_review_status:rejectProductReviewAction
+        _controller: sylius.controller.product_review:applyStateMachineTransitionAction
+        _sylius:
+            state_machine:
+                graph: sylius_product_review
+                transition: reject
