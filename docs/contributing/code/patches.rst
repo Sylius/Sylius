@@ -196,6 +196,11 @@ Push your branch remotely:
 Make a Pull Request
 ~~~~~~~~~~~~~~~~~~~
 
+.. warning::
+
+    Please remember that bug fixes must be submitted against the `1.0` branch,
+    but features and deprecations against the `master` branch.
+
 You can now make a pull request on the ``Sylius/Sylius`` GitHub repository.
 
 To ease the core team work, always include the modified components in your
@@ -213,48 +218,40 @@ possible:
 
 .. code-block:: text
 
-    | Q             | A
-    | ------------- | ---
-    | Bug fix?      | [yes|no]
-    | New feature?  | [yes|no]
-    | BC breaks?    | [yes|no]
-    | Deprecations? | [yes|no]
-    | Fixed tickets | [comma separated list of tickets fixed by the PR]
-    | License       | MIT
-    | Doc PR        | [The reference to the documentation PR if any]
+    | Q               | A
+    | --------------- | -----
+    | Branch?         | 1.0 or master
+    | Bug fix?        | no/yes
+    | New feature?    | no/yes
+    | BC breaks?      | no/yes
+    | Deprecations?   | no/yes
+    | Related tickets | fixes #X, partially #Y, mentioned in #Z
+    | License         | MIT
 
 An example submission could now look as follows:
 
 .. code-block:: text
 
-    | Q             | A
-    | ------------- | ---
-    | Bug fix?      | no
-    | New feature?  | no
-    | BC breaks?    | no
-    | Deprecations? | no
-    | Fixed tickets | #12, #43
-    | License       | MIT
-    | Doc PR        | Sylius/Sylius-Docs#123
+    | Q               | A
+    | --------------- | -----
+    | Branch?         | 1.0
+    | Bug fix?        | yes
+    | New feature?    | no
+    | BC breaks?      | no
+    | Deprecations?   | no
+    | Related tickets | fixes #12
+    | License         | MIT
 
 The whole table must be included (do **not** remove lines that you think are
-not relevant). For simple typos, minor changes in the PHPDocs, or changes in
-translation files, use the shorter version of the check-list:
-
-.. code-block:: text
-
-    | Q             | A
-    | ------------- | ---
-    | Fixed tickets | [comma separated list of tickets fixed by the PR]
-    | License       | MIT
+not relevant).
 
 Some answers to the questions trigger some more requirements:
 
  * If you answer yes to "Bug fix?", check if the bug is already listed in the
-   Sylius issues and reference it/them in "Fixed tickets";
+   Sylius issues and reference it/them in "Related tickets";
 
- * If you answer yes to "New feature?", you must submit a pull request to the
-   documentation and reference it under the "Doc PR" section;
+ * If you answer yes to "New feature?", you should submit a pull request to the
+   documentation;
 
  * If you answer yes to "BC breaks?", the patch must contain updates to the
    relevant ``CHANGELOG`` and ``UPGRADE`` files;
