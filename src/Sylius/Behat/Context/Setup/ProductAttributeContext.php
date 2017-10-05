@@ -105,7 +105,7 @@ final class ProductAttributeContext implements Context
     }
 
     /**
-     * @Given /^the store has(?:| also)(?:| a| an) (text|textarea) product attribute "([^"]+)"$/
+     * @Given /^the store has(?:| also)(?:| a| an) (text|textarea|integer|percent) product attribute "([^"]+)"$/
      */
     public function theStoreHasAProductAttribute(string $type, string $name): void
     {

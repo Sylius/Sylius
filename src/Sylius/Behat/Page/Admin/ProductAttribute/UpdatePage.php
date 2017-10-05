@@ -69,10 +69,14 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function addAttributeValue(string $value): void
+    public function addAttributeValue(string $value, string $localeCode): void
     {
         $this->getDocument()->clickLink('Add');
-        $this->getLastAttributeChoiceElement()->find('css', 'input')->setValue($value);
+        $this
+            ->getLastAttributeChoiceElement()
+            ->find('css', 'div[data-locale="' . $localeCode . '"] input')
+            ->setValue($value)
+        ;
     }
 
     /**

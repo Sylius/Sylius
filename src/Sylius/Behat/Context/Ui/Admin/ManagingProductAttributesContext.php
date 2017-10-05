@@ -109,14 +109,14 @@ final class ManagingProductAttributesContext implements Context
     }
 
     /**
-     * @When I( also) add value :value
+     * @When I( also) add value :value in :localeCode
      */
-    public function iAddValue(string $value): void
+    public function iAddValue(string $value, string $localeCode): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
-        $currentPage->addAttributeValue($value);
+        $currentPage->addAttributeValue($value, $localeCode);
     }
 
     /**
