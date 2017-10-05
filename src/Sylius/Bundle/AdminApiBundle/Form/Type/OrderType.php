@@ -14,13 +14,13 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AdminApiBundle\Form\Type;
 
 use Sylius\Bundle\ChannelBundle\Form\Type\ChannelChoiceType;
-use Sylius\Bundle\CustomerBundle\Form\Type\CustomerChoiceType;
 use Sylius\Bundle\LocaleBundle\Form\Type\LocaleChoiceType;
 use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ResourceToIdentifierTransformer;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -38,15 +38,21 @@ final class OrderType extends AbstractResourceType
     private $localeRepository;
 
     /**
+     * @var RepositoryInterface
+     */
+    private $customerRepository;
+
+    /**
      * {@inheritdoc}
      *
      * @param RepositoryInterface $localeRepository
      */
-    public function __construct(string $dataClass, array $validationGroups = [], RepositoryInterface $localeRepository)
+    public function __construct(string $dataClass, array $validationGroups = [], RepositoryInterface $localeRepository, RepositoryInterface $customerRepository)
     {
         parent::__construct($dataClass, $validationGroups);
 
         $this->localeRepository = $localeRepository;
+        $this->customerRepository = $customerRepository;
     }
 
     /**
@@ -55,7 +61,7 @@ final class OrderType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('customer', CustomerChoiceType::class, [
+            ->add('customer', TextType::class, [
                 'constraints' => [
                     new NotBlank(['groups' => ['sylius']]),
                 ],
@@ -80,6 +86,10 @@ final class OrderType extends AbstractResourceType
                 }
             })
         ;
+
+        $builder->get('customer')->addModelTransformer(
+            new ResourceToIdentifierTransformer($this->customerRepository, 'email')
+        );
 
         $builder->get('localeCode')->addModelTransformer(
             new ReversedTransformer(new ResourceToIdentifierTransformer($this->localeRepository, 'code'))
