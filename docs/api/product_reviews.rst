@@ -28,7 +28,7 @@ When you get a collection of resources, you will receive objects with the follow
 
 .. note::
 
-    Read more about :doc:`ProductReviews docs</book/products/Product/product_reviews>`.
+    Read more about :doc:`ProductReviews docs</book/products/product_reviews>`.
 
 Creating a Product Review
 --------------------------
