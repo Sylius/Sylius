@@ -193,17 +193,25 @@ class Product implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function getAttributesByLocale(string $localeCode, string $fallbackLocaleCode): Collection
-    {
+    public function getAttributesByLocale(
+        string $localeCode,
+        string $fallbackLocaleCode,
+        ?string $baseLocaleCode = null
+    ): Collection {
+        if (null === $baseLocaleCode || $baseLocaleCode === $fallbackLocaleCode) {
+            $baseLocaleCode = $fallbackLocaleCode;
+            $fallbackLocaleCode = null;
+        }
+
         $attributes = $this->attributes->filter(
-            function (ProductAttributeValueInterface $attribute) use ($fallbackLocaleCode) {
-                return $attribute->getLocaleCode() === $fallbackLocaleCode;
+            function (ProductAttributeValueInterface $attribute) use ($baseLocaleCode) {
+                return $attribute->getLocaleCode() === $baseLocaleCode;
             }
         );
 
         $attributesWithFallback = [];
         foreach ($attributes as $attribute) {
-            $attributesWithFallback[] = $this->getAttributeInDifferentLocale($attribute, $localeCode);
+            $attributesWithFallback[] = $this->getAttributeInDifferentLocale($attribute, $localeCode, $fallbackLocaleCode);
         }
 
         return new ArrayCollection($attributesWithFallback);
@@ -440,22 +448,49 @@ class Product implements ProductInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param ProductAttributeValueInterface $attributeValue
+     * @param string $localeCode
+     * @param string|null $fallbackLocaleCode
+     *
+     * @return AttributeValueInterface
      */
     private function getAttributeInDifferentLocale(
         ProductAttributeValueInterface $attributeValue,
-        ?string $localeCode
+        string $localeCode,
+        ?string $fallbackLocaleCode = null
     ): AttributeValueInterface {
-        if (!$this->hasAttributeByCodeAndLocale($attributeValue->getCode(), $localeCode)) {
+        if (!$this->hasNotEmptyAttributeByCodeAndLocale($attributeValue->getCode(), $localeCode)) {
+            if (
+                null !== $fallbackLocaleCode &&
+                $this->hasNotEmptyAttributeByCodeAndLocale($attributeValue->getCode(), $fallbackLocaleCode))
+            {
+                return $this->getAttributeByCodeAndLocale($attributeValue->getCode(), $fallbackLocaleCode);
+            }
+
             return $attributeValue;
         }
 
-        $attributeValueInDifferentLocale = $this->getAttributeByCodeAndLocale($attributeValue->getCode(), $localeCode);
-        if ('' === $attributeValueInDifferentLocale->getValue()
-            || null === $attributeValueInDifferentLocale->getValue()) {
-            return $attributeValue;
+        return $this->getAttributeByCodeAndLocale($attributeValue->getCode(), $localeCode);
+    }
+
+    /**
+     * @param string $attributeCode
+     * @param string $localeCode
+     *
+     * @return bool
+     */
+    private function hasNotEmptyAttributeByCodeAndLocale(string $attributeCode, string $localeCode): bool
+    {
+        $attributeValue = $this->getAttributeByCodeAndLocale($attributeCode, $localeCode);
+
+        if (null === $attributeValue) {
+            return false;
         }
 
-        return $attributeValueInDifferentLocale;
+        if (empty($attributeValue->getValue())) {
+            return false;
+        }
+
+        return true;
     }
 }
