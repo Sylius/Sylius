@@ -197,7 +197,7 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Given /^(this product) is also priced at ("[^"]+") in ("[^"]+" channel)$/
+     * @Given /^(this product) is(?:| also) priced at ("[^"]+") in ("[^"]+" channel)$/
      */
     public function thisProductIsAlsoPricedAtInChannel(ProductInterface $product, $price, ChannelInterface $channel)
     {
@@ -208,6 +208,14 @@ final class ProductContext implements Context
         $productVariant->addChannelPricing($this->createChannelPricingForChannel($price, $channel));
 
         $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^(this product) is(?:| also) available in ("[^"]+" channel)$/
+     */
+    public function thisProductIsAlsoAvailableInChannel(ProductInterface $product, ChannelInterface $channel): void
+    {
+        $this->thisProductIsAlsoPricedAtInChannel($product, 0, $channel);
     }
 
     /**
