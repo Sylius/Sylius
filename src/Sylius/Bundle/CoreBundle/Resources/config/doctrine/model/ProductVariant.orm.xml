@@ -49,7 +49,7 @@
             mapped-by="productVariants"
         >
             <cascade>
-                <cascade-all/>
+                <cascade-persist/>
             </cascade>
         </many-to-many>
     </mapped-superclass>
