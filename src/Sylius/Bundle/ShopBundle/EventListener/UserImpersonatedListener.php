@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\EventListener;
+namespace Sylius\Bundle\ShopBundle\EventListener;
 
 use Sylius\Bundle\UserBundle\Event\UserEvent;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
