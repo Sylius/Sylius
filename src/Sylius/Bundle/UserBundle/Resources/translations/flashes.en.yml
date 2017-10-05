@@ -10,4 +10,5 @@ sylius:
         verify_email: 'Your email has been successfully verified.'
         verify_email_by_invalid_token: 'The verification token is invalid.'
         verify_email_request: 'An email with the verification link has been sent to your email address.'
+        verify_no_user: 'There is no logged user.'
         verify_verified_email: 'Your email is already verified.'
