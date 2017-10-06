@@ -197,8 +197,17 @@ class UserController extends ResourceController
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
         $redirectRoute = $this->getSyliusAttribute($request, 'redirect', 'referer');
 
-        /** @var UserInterface $user */
-        $user = $this->container->get('sylius.context.customer')->getCustomer()->getUser();
+        $user = $this->getUser();
+        if (null === $user) {
+            if (!$configuration->isHtmlRequest()) {
+                return $this->viewHandler->handle($configuration, View::create($configuration, Response::HTTP_UNAUTHORIZED));
+            }
+
+            $this->addFlash('notice', 'sylius.user.verify_no_user');
+
+            return $this->redirectHandler->redirectToRoute($configuration, $redirectRoute);
+        }
+
         if (null !== $user->getVerifiedAt()) {
             if (!$configuration->isHtmlRequest()) {
                 return $this->viewHandler->handle($configuration, View::create($configuration, Response::HTTP_BAD_REQUEST));
@@ -426,6 +435,24 @@ class UserController extends ResourceController
         Assert::notNull($redirectRouteName, 'Redirect is not configured.');
 
         return new RedirectResponse($this->container->get('router')->generate($redirectRouteName));
+    }
+
+    /**
+     * @return UserInterface|null
+     */
+    protected function getUser(): ?UserInterface
+    {
+        $user = parent::getUser();
+        $authorizationChecker = $this->container->get('security.authorization_checker');
+
+        if (
+            $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') &&
+            $user instanceof UserInterface
+        ) {
+            return $user;
+        }
+
+        return null;
     }
 
     /**
