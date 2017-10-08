@@ -36,6 +36,7 @@
             <argument>%sylius.model.order.class%</argument>
             <argument>%sylius.form.type.api_order.validation_groups%</argument>
             <argument type="service" id="sylius.repository.locale" />
+            <argument type="service" id="sylius.repository.customer" />
             <tag name="form.type" />
         </service>
 
