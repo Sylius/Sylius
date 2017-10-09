@@ -22,8 +22,9 @@ interface LocaleHelperInterface extends HelperInterface
 {
     /**
      * @param string $localeCode
+     * @param string $locale
      *
      * @return string|null
      */
-    public function convertCodeToName(string $localeCode): ?string;
+    public function convertCodeToName(string $localeCode, ?string $locale): ?string;
 }

@@ -51,6 +51,7 @@
 
         <service id="sylius.templating.helper.locale" class="Sylius\Bundle\LocaleBundle\Templating\Helper\LocaleHelper">
             <argument type="service" id="sylius.locale_converter" />
+            <argument>%sylius_locale.locale%</argument>
             <tag name="templating.helper" alias="sylius_locale" />
         </service>
 

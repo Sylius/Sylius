@@ -27,19 +27,30 @@ final class LocaleHelper extends Helper implements LocaleHelperInterface
     private $localeConverter;
 
     /**
-     * @param LocaleConverterInterface $localeConverter
+     * @var string
      */
-    public function __construct(LocaleConverterInterface $localeConverter)
+    private $defaultLocale;
+
+    /**
+     * @param LocaleConverterInterface $localeConverter
+     * @param string $defaultLocale
+     */
+    public function __construct(LocaleConverterInterface $localeConverter, string $defaultLocale)
     {
         $this->localeConverter = $localeConverter;
+        $this->defaultLocale = $defaultLocale;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function convertCodeToName(string $localeCode): ?string
+    public function convertCodeToName(string $localeCode, ?string $locale = null): ?string
     {
-        return $this->localeConverter->convertCodeToName($localeCode);
+        if (null === $locale) {
+            $locale = $this->defaultLocale;
+        }
+
+        return $this->localeConverter->convertCodeToName($localeCode, $locale);
     }
 
     /**
