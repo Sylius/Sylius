@@ -22,6 +22,6 @@ default:
                 - sylius.behat.context.ui.admin.login
                 - sylius.behat.context.ui.admin.managing_administrators
                 - sylius.behat.context.ui.shop.locale
-                - sylius.behat.context.ui.shop.current_channel
+                - sylius.behat.context.ui.channel
             filters:
                 tags: "@admin_locale && @ui"

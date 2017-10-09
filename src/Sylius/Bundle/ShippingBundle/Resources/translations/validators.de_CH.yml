@@ -1,0 +1,31 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    shipping_category:
+        name:
+            max_length: 'Die Kategorie darf nicht länger als {{ limit }} Zeichen sein.'
+            min_length: 'Die Kategorie muss mindestens {{ limit }} Zeichen lang sein.'
+            not_blank: 'Bitte geben Sie den Namen der Versandkostenkategorie an.'
+        code:
+            not_blank: 'Bitte geben Sie ein Kürzel für die Kategorie an.'
+            regex: 'Kürzel der Versandkategorie darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.'
+            unique: 'Eine Kategorie mit diesem Kürzel existiert bereits.'
+    shipping_method:
+        calculator:
+            max_length: Eingabe darf nicht länger als {{ limit }} Zeichen sein.
+            min_length: Die Eingabe muss mindestens {{ limit }} Zeichen lang sein.
+            not_blank: Die Eingabe darf nicht leer sein.
+        name:
+            max_length: 'Der Name der Versandmethode darf nicht länger als {{ limit }} Zeichen sein.'
+            min_length: 'Der Name der Versandmethode muss mindestens {{ limit }} Zeichen lang sein.'
+            not_blank: 'Bitte geben Sie den Namen der Versandmethode an.'
+        code:
+            not_blank: 'Bitte geben Sie ein Kürzel für die Versandart an.'
+            regex: 'Kürzel der Versandart darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.'
+            unique: 'Eine Versandart mit diesem Kürzel existiert bereits.'
+        zone:
+            not_blank: 'Bitte wählen Sie eine Zone für die Versandart.'
+    shipment:
+        shipping_method:
+            not_blank: 'Bitte wählen Sie eine Versandart aus.'

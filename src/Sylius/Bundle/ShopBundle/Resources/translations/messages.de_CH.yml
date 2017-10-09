@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    menu:
+        shop:
+            account:
+                address_book: 'Adressbuch'
+                change_password: 'Passwort ändern'
+                dashboard: 'Dashboard'
+                header: 'Ihr Konto'
+                order_history: 'Bestellungsverlauf'
+                personal_information: 'Persönliche Informationen'
