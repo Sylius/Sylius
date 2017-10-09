@@ -288,7 +288,7 @@ EOT;
         $product = $productReviewsData['product1'];
 
          /** @var ReviewInterface $productReview */
-        $productReview = $productReviewsData['productReview2'];
+        $productReview = $productReviewsData['productReview3'];
 
         $this->client->request('POST', $this->getReviewUrl($product, $productReview) . '/accept', [], [], static::$authorizedHeaderWithAccept);
         $response = $this->client->getResponse();

@@ -49,7 +49,7 @@
                         }
                     }
                 },
-                "status": "rejected",
+                "status": "new",
                 "createdAt": @string@,
                 "updatedAt": @string@
             },
@@ -71,12 +71,12 @@
                         }
                     }
                 },
-                "status": "accepted",
+                "status": "rejected",
                 "createdAt": @string@,
                 "updatedAt": @string@
               }
         },
-        "averageRating": 2.5,
+        "averageRating": 4,
         "images": [],
         "_links": {
             "self": {
