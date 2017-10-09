@@ -20,7 +20,7 @@ When you get a collection of resources, you will receive objects with the follow
 | author           | Customer author for product review (This is customer that added the                            |
 |                  | product review; this will contain customer resource information)                               |      
 +------------------+------------------------------------------------------------------------------------------------+
-| status           | Status of product review (New, Accepted, Rejected)                                              |
+| status           | Status of product review (New, Accepted, Rejected)                                             |
 +------------------+------------------------------------------------------------------------------------------------+
 | reviewSubject    | This is the review subject for the product review. For this case of the product review, this   |
 |                  | will contains a product resource                                                               |
@@ -53,7 +53,7 @@ Definition
 +---------------+----------------+----------------------------------------------------------+
 | comment       | request        | Product review comment                                   |
 +---------------+----------------+----------------------------------------------------------+
-| rating        | request        | Product review rating (1..5)                              |
+| rating        | request        | Product review rating (1..5)                             |
 +---------------+----------------+----------------------------------------------------------+
 | author        | request        | Product review author                                    |
 +---------------+----------------+----------------------------------------------------------+
@@ -436,7 +436,7 @@ Definition
 +---------------+----------------+----------------------------------------------------------+
 | comment       | request        | Product review comment                                   |
 +---------------+----------------+----------------------------------------------------------+
-| rating        | request        | Product review rating (1..5)                              |
+| rating        | request        | Product review rating (1..5)                             |
 +---------------+----------------+----------------------------------------------------------+
 
 Example
