@@ -30,6 +30,10 @@ To create a new project using Sylius Standard Edition, run this command:
 
     $ composer create-project sylius/sylius-standard acme
 
+.. note::
+
+    Make sure to use PHP ^7.1. Using an older PHP version will result in installing an older version of Sylius.
+
 This will create a new Symfony project in ``acme`` directory. When all the
 dependencies are installed, you'll be asked to fill the ``parameters.yml``
 file via interactive script. Please follow the steps. After everything is in
