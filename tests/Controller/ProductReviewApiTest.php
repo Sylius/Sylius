@@ -15,7 +15,7 @@ namespace Sylius\Tests\Controller;
 
 use Lakion\ApiTestCase\JsonApiTestCase;
 use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\Model\ProductReview;
+use Sylius\Component\Review\Model\ReviewInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -83,7 +83,7 @@ final class ProductReviewApiTest extends JsonApiTestCase
         /** @var ProductInterface $product */
         $product = $productReviewsData['product1'];
 
-        /** @var ProductReview $productReview */
+        /** @var ReviewInterface $productReview */
         $productReview = $productReviewsData['productReview1'];
 
         $this->client->request('GET', $this->getReviewUrl($product, $productReview), [], [], static::$authorizedHeaderWithAccept);
@@ -183,7 +183,7 @@ EOT;
         /** @var ProductInterface $product */
         $product = $productReviewsData['product1'];
 
-        /** @var ProductReview $productReview */
+        /** @var ReviewInterface $productReview */
         $productReview = $productReviewsData['productReview1'];
 
         $this->client->request('DELETE', $this->getReviewUrl($product, $productReview), [], [], static::$authorizedHeaderWithContentType, []);
@@ -211,7 +211,7 @@ EOT;
         /** @var ProductInterface $product */
         $product = $productReviewsData['product1'];
 
-        /** @var ProductReview $productReview */
+        /** @var ReviewInterface $productReview */
         $productReview = $productReviewsData['productReview1'];
 
         $data =
@@ -240,7 +240,7 @@ EOT;
         /** @var ProductInterface $product */
         $product = $productReviewsData['product1'];
 
-        /** @var ProductReview $productReview */
+        /** @var ReviewInterface $productReview */
         $productReview = $productReviewsData['productReview1'];
 
         $data =
@@ -267,7 +267,7 @@ EOT;
         /** @var ProductInterface $product */
         $product = $productReviewsData['product1'];
 
-         /** @var ProductReview $productReview */
+         /** @var ReviewInterface $productReview */
         $productReview = $productReviewsData['productReview1'];
 
         $this->client->request('PATCH', $this->getReviewUrl($product, $productReview) . '/accept', [], [], static::$authorizedHeaderWithAccept);
@@ -287,7 +287,7 @@ EOT;
         /** @var ProductInterface $product */
         $product = $productReviewsData['product1'];
 
-         /** @var ProductReview $productReview */
+         /** @var ReviewInterface $productReview */
         $productReview = $productReviewsData['productReview2'];
 
         $this->client->request('POST', $this->getReviewUrl($product, $productReview) . '/accept', [], [], static::$authorizedHeaderWithAccept);
@@ -307,7 +307,7 @@ EOT;
         /** @var ProductInterface $product */
         $product = $productReviewsData['product1'];
 
-         /** @var ProductReview $productReview */
+         /** @var ReviewInterface $productReview */
         $productReview = $productReviewsData['productReview1'];
 
         $this->client->request('PATCH', $this->getReviewUrl($product, $productReview) . '/reject', [], [], static::$authorizedHeaderWithAccept);
@@ -327,7 +327,7 @@ EOT;
         /** @var ProductInterface $product */
         $product = $productReviewsData['product1'];
 
-         /** @var ProductReview $productReview */
+         /** @var ReviewInterface $productReview */
         $productReview = $productReviewsData['productReview3'];
 
         $this->client->request('POST', $this->getReviewUrl($product, $productReview) . '/accept', [], [], static::$authorizedHeaderWithAccept);
@@ -341,18 +341,18 @@ EOT;
      *
      * @return string
      */
-    private function getReviewListUrl(ProductInterface $product)
+    private function getReviewListUrl(ProductInterface $product): string
     {
         return sprintf('/api/v1/products/%s/reviews/', $product->getCode());
     }
 
     /**
      * @param ProductInterface $product
-     * @param ProductReview $productReview
+     * @param ReviewInterface $productReview
      *
      * @return string
      */
-    private function getReviewUrl(ProductInterface $product, ProductReview $productReview)
+    private function getReviewUrl(ProductInterface $product, ReviewInterface $productReview): string
     {
         return sprintf('%s%s', $this->getReviewListUrl($product), $productReview->getId());
     }

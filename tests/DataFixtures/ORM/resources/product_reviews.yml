@@ -9,6 +9,7 @@ Sylius\Component\Core\Model\Customer:
         lastName: King
         email: example.king@example.com
         emailCanonical: example.king@example.com
+
 Sylius\Component\Core\Model\Product:
     product1:
         fallbackLocale: en_US

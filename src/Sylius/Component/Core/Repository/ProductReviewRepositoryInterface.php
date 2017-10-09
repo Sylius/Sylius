@@ -50,10 +50,10 @@ interface ProductReviewRepositoryInterface extends RepositoryInterface
     public function createQueryBuilderByProductCode(string $locale, string $productCode): QueryBuilder;
 
     /**
-     * @param integer $id
+     * @param mixed $id
      * @param string  $productCode
      *
      * @return ReviewInterface|null
      */
-    public function findOneByIdAndProductCode(string $id, string $productCode): ?ReviewInterface;
+    public function findOneByIdAndProductCode($id, string $productCode): ?ReviewInterface;
 }
