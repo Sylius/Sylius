@@ -10,49 +10,58 @@ All shipping cost calculators implement ``CalculatorInterface``. In our example 
 
 .. code-block:: php
 
+    # src/AppBundle/Shipping/Calculator/DHLCalculator.php
     <?php
 
-    // src/Acme/ShopBundle\Shipping/DHLCalculator.php
+    declare(strict_types=1);
 
-    namespace Acme\ShopBundle\Shipping;
+    namespace AppBundle\Shipping\Calculator;
 
-    use Acme\ShopBundle\Shipping\DHLService;
-    use Sylius\Bundle\ShippingBundle\Calculator\Calculator;
-    use Sylius\Bundle\ShippingBundle\Model\ShippingSubjectInterface;
+    use Sylius\Component\Shipping\Calculator\CalculatorInterface;
+    use Sylius\Component\Shipping\Model\ShipmentInterface;
 
-    class DHLCalculator extends Calculator
+    final class DHLCalculator implements CalculatorInterface
     {
+        /**
+         * @var DHLService
+         */
         private $dhlService;
 
+        /**
+         * @param DHLService $dhlService
+         */
         public function __construct(DHLService $dhlService)
         {
             $this->dhlService = $dhlService;
         }
 
-        public function calculate(ShippingSubjectInterface $subject, array $configuration)
+        /**
+         * {@inheritdoc}
+         */
+        public function calculate(ShipmentInterface $subject, array $configuration): int
         {
             return $this->dhlService->getShippingCostForWeight($subject->getShippingWeight());
+        }
+
+        /**
+         * {@inheritdoc}
+         */
+        public function getType(): string
+        {
+            return 'dhl';
         }
     }
 
 Now, you need to register your new service in container and tag it with ``sylius.shipping_calculator``.
 
-.. code-block:: xml
+.. code-block:: yaml
 
-    <?xml version="1.0" encoding="UTF-8"?>
-
-    <container xmlns="http://symfony.com/schema/dic/services"
-               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-               xsi:schemaLocation="http://symfony.com/schema/dic/services
-                                   http://symfony.com/schema/dic/services/services-1.0.xsd">
-
-        <services>
-            <service id="acme.shipping_calculator.dhl" class="Acme\ShopBundle\Shipping\DHLCalculator">
-                <argument type="service" id="acme.dhl_service" />
-                <tag name="sylius.shipping_calculator" calculator="dhl" label="DHL" />
-            </service>
-        </services>
-    </container>
+    services:
+        app.shipping_calculator.dhl:
+            class: AppBundle\Shipping\Calculator\DHLCalculator
+            arguments: ['@app.dhl_service']
+            tags:
+                - { name: sylius.shipping_calculator, calculator: dhl, label: "DHL" }
 
 That would be all. This new option ("DHL") will appear on the **ShippingMethod** creation form, in the "calculator" field.
 
@@ -62,206 +71,116 @@ Configurable calculators
 You can also create configurable calculators, meaning that you can have several **ShippingMethod**'s using same type of calculator, with different settings.
 
 Let's modify the **DHLCalculator**, so that it charges 0 if shipping more than X items.
-First step is to define the configuration options, using the Symfony **OptionsResolver** component.
+First step is to create a form type which will be displayed if our calculator is selected.
 
 .. code-block:: php
 
+    # src/AppBundle/Form/Type/Shipping/Calculator/DHLConfigurationType.php
     <?php
 
-    // src/Acme/ShopBundle\Shipping/DHLCalculator.php
+    declare(strict_types=1);
 
-    namespace Acme\ShopBundle\Shipping;
-
-    use Acme\ShopBundle\Shipping\DHLService;
-    use Sylius\Bundle\ShippingBundle\Calculator\Calculator;
-    use Sylius\Bundle\ShippingBundle\Model\ShippingSubjectInterface;
-    use Symfony\Component\OptionsResolver\OptionsResolver;
-
-    class DHLCalculator extends Calculator
-    {
-        private $dhlService;
-
-        public function __construct(DHLService $dhlService)
-        {
-            $this->dhlService = $dhlService;
-        }
-
-        public function calculate(ShippingSubjectInterface $subject, array $configuration)
-        {
-            return $this->dhlService->getShippingCostForWeight($subject->getShippingWeight());
-        }
-
-        /**
-        * {@inheritdoc}
-        */
-        public function isConfigurable()
-        {
-            return true;
-        }
-
-        public function setConfiguration(OptionsResolver $resolver)
-        {
-            $resolver
-                ->setDefaults(array(
-                    'limit' => 10
-                ))
-                ->setAllowedTypes(array(
-                    'limit' => array('integer'),
-                ))
-            ;
-        }
-    }
-
-Done, we've set the default item limit to 10. Now we have to create a form type which will be displayed if our calculator is selected.
-
-.. code-block:: php
-
-    <?php
-
-    // src/Acme/ShopBundle/Form/Type/Shipping/DHLConfigurationType.php
-
-    namespace Acme\ShopBundle\Form\Type\Shipping;
+    namespace AppBundle\Form\Type\Shipping\Calculator;
 
     use Symfony\Component\Form\AbstractType;
+    use Symfony\Component\Form\Extension\Core\Type\IntegerType;
     use Symfony\Component\Form\FormBuilderInterface;
     use Symfony\Component\OptionsResolver\OptionsResolver;
     use Symfony\Component\Validator\Constraints\NotBlank;
     use Symfony\Component\Validator\Constraints\Type;
 
-    class DHLConfigurationType extends AbstractType
+    final class DHLConfigurationType extends AbstractType
     {
-        public function buildForm(FormBuilderInterface $builder, array $options)
+        /**
+         * {@inheritdoc}
+         */
+        public function buildForm(FormBuilderInterface $builder, array $options): void
         {
             $builder
-                ->add('limit', 'integer', array(
+                ->add('limit', IntegerType::class, [
                     'label' => 'Free shipping above total items',
-                    'constraints' => array(
+                    'constraints' => [
                         new NotBlank(),
-                        new Type(array('type' => 'integer')),
-                    )
-                ))
+                        new Type(['type' => 'integer']),
+                    ]
+                ])
             ;
-        }
-
-        public function configureOptions(OptionsResolver $resolver)
-        {
-            $resolver
-                ->setDefaults(array(
-                    'data_class' => null
-                ))
-            ;
-        }
-
-        public function getName()
-        {
-            return 'acme_shipping_calculator_dhl';
-        }
-    }
-
-We also need to register the form type and the calculator in the container.
-
-.. code-block:: xml
-
-    <?xml version="1.0" encoding="UTF-8"?>
-
-    <container xmlns="http://symfony.com/schema/dic/services"
-               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-               xsi:schemaLocation="http://symfony.com/schema/dic/services
-                                   http://symfony.com/schema/dic/services/services-1.0.xsd">
-
-        <services>
-            <service id="acme.shipping_calculator.dhl" class="Acme\ShopBundle\Shipping\DHLCalculator">
-                <argument type="service" id="acme.dhl_service" />
-                <tag name="sylius.shipping_calculator" calculator="dhl" label="DHL" />
-            </service>
-            <service id="acme.form.type.shipping_calculator.dhl" class="Acme\ShopBundle\Form\Type\Shipping\DHLConfigurationType">
-                <tag name="form.type" alias="acme_shipping_calculator_dhl" />
-            </service>
-        </services>
-    </container>
-
-Finally, configure the calculator to use the form, by implementing simple ``getConfigurationFormType`` method.
-
-.. code-block:: php
-
-    <?php
-
-    // src/Acme/ShopBundle\Shipping/DHLCalculator.php
-
-    namespace Acme\ShopBundle\Shipping;
-
-    use Acme\ShopBundle\Shipping\DHLService;
-    use Sylius\Bundle\ShippingBundle\Calculator\Calculator;
-    use Sylius\Bundle\ShippingBundle\Model\ShippingSubjectInterface;
-    use Symfony\Component\OptionsResolver\OptionsResolver;
-
-    class DHLCalculator extends Calculator
-    {
-        private $dhlService;
-
-        public function __construct(DHLService $dhlService)
-        {
-            $this->dhlService = $dhlService;
-        }
-
-        public function calculate(ShippingSubjectInterface $subject, array $configuration)
-        {
-            return $this->dhlService->getShippingCostForWeight($subject->getShippingWeight());
         }
 
         /**
-        * {@inheritdoc}
-        */
-        public function isConfigurable()
-        {
-            return true;
-        }
-
-        public function setConfiguration(OptionsResolver $resolver)
+         * {@inheritdoc}
+         */
+        public function configureOptions(OptionsResolver $resolver): void
         {
             $resolver
-                ->setDefaults(array(
-                    'limit' => 10
-                ))
-                ->setAllowedTypes(array(
-                    'limit' => array('integer'),
-                ))
+                ->setDefaults([
+                    'data_class' => null,
+                    'limit' => 10,
+                ])
+                ->setAllowedTypes('limit', 'integer')
             ;
         }
 
-        public function getConfigurationFormType()
+        /**
+         * {@inheritdoc}
+         */
+        public function getBlockPrefix(): string
         {
-            return 'acme_shipping_calculator_dhl';
+            return 'app_shipping_calculator_dhl';
         }
     }
+
+We also need to register the form type in the container and set this form type in the definition of the calculator.
+
+.. code-block:: yaml
+
+    services:
+        app.shipping_calculator.dhl:
+            class: AppBundle\Shipping\Calculator\DHLCalculator
+            arguments: ['@app.dhl_service']
+            tags:
+                - { name: sylius.shipping_calculator, calculator: dhl, form_type: AppBundle\Form\Type\Shipping\Calculator\DHLConfigurationType, label: "DHL" }
+
+        app.form.type.shipping_calculator.dhl:
+            class: AppBundle\Form\Type\Shipping\Calculator\DHLConfigurationType
+            tags:
+                - { name: form.type }
 
 Perfect, now we're able to use the configuration inside the ``calculate`` method.
 
 .. code-block:: php
 
+    # src/AppBundle/Shipping/Calculator/DHLCalculator.php
     <?php
 
-    // src/Acme/ShopBundle\Shipping/DHLCalculator.php
+    declare(strict_types=1);
 
-    namespace Acme\ShopBundle\Shipping;
+    namespace AppBundle\Shipping\Calculator;
 
-    use Acme\ShopBundle\Shipping\DHLService;
-    use Sylius\Bundle\ShippingBundle\Calculator\Calculator;
-    use Sylius\Bundle\ShippingBundle\Model\ShippingSubjectInterface;
-    use Symfony\Component\OptionsResolver\OptionsResolver;
+    use Sylius\Component\Shipping\Calculator\CalculatorInterface;
+    use Sylius\Component\Shipping\Model\ShipmentInterface;
 
-    class DHLCalculator extends Calculator
+    final class DHLCalculator implements CalculatorInterface
     {
+        /**
+         * @var DHLService
+         */
         private $dhlService;
 
+        /**
+         * @param DHLService $dhlService
+         */
         public function __construct(DHLService $dhlService)
         {
             $this->dhlService = $dhlService;
         }
 
-        public function calculate(ShippingSubjectInterface $subject, array $configuration)
+        /**
+         * {@inheritdoc}
+         */
+        public function calculate(ShipmentInterface $subject, array $configuration): int
         {
-            if ($subject->getShippingItemCount() > $configuration['limit']) {
+            if ($subject->getShippingUnitCount() > $configuration['limit']) {
                 return 0;
             }
 
@@ -269,28 +188,11 @@ Perfect, now we're able to use the configuration inside the ``calculate`` method
         }
 
         /**
-        * {@inheritdoc}
-        */
-        public function isConfigurable()
+         * {@inheritdoc}
+         */
+        public function getType(): string
         {
-            return true;
-        }
-
-        public function setConfiguration(OptionsResolver $resolver)
-        {
-            $resolver
-                ->setDefaults(array(
-                    'limit' => 10
-                ))
-                ->setAllowedTypes(array(
-                    'limit' => array('integer'),
-                ))
-            ;
-        }
-
-        public function getConfigurationFormType()
-        {
-            return 'acme_shipping_calculator_dhl';
+            return 'dhl';
         }
     }
 

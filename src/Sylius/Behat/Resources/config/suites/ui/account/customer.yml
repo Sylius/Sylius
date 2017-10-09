@@ -42,6 +42,5 @@ default:
                 - sylius.behat.context.ui.shop.checkout.payment
                 - sylius.behat.context.ui.shop.checkout.complete
                 - sylius.behat.context.ui.shop.currency
-                - sylius.behat.context.ui.shop.current_channel
             filters:
                 tags: "@customer_account && @ui"
