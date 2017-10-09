@@ -54,7 +54,7 @@ All shipping cost calculators implement ``CalculatorInterface``. In our example 
 
 Now, you need to register your new service in container and tag it with ``sylius.shipping_calculator``.
 
-.. code-block:: yml
+.. code-block:: yaml
 
     services:
         app.shipping_calculator.dhl:
@@ -132,7 +132,7 @@ First step is to create a form type which will be displayed if our calculator is
 
 We also need to register the form type in the container and set this form type in the definition of the calculator.
 
-.. code-block:: yml
+.. code-block:: yaml
 
     services:
         app.shipping_calculator.dhl:
