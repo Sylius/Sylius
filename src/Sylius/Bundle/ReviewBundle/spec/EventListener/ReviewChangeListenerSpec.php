@@ -17,10 +17,8 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ReviewBundle\Updater\ReviewableRatingUpdaterInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
