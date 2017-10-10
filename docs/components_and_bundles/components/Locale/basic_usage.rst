@@ -4,18 +4,25 @@ Basic Usage
 LocaleContext
 -------------
 
-CompositeLocaleContext methods:
-	1. getLocaleCode() method, a composite of different contexts which are prioritized in it (the one with highest priority is used if it exists). Returns a string (exception: LocaleNotFoundException)
-	2. _construct()
-	3. addContext(LocaleContextInterface $localeContext, int $priority)
-ImmutableLocaleContext methods:
-	1. _construct(string $localeCode)
-	2. string getLocaleCode(), see above for details
-LocaleContextInterface methods:
-	1. string getLocaleCode(), see above for details
-ProviderBasedLocaleContext methods:
-	1. _construct(LocalProviderInterface $localeProvider)
-	2. string getLocaleCode(), see above for details
+CompositeLocaleContext
+~~~~~~~~~~~~~~~~~~~~~~
+	. getLocaleCode() method, a composite of different contexts which are prioritized in it (the one with highest priority is used if it exists). Returns a string (exception: LocaleNotFoundException)
+	. _construct()
+	. addContext(LocaleContextInterface $localeContext, int $priority)
+
+ImmutableLocaleContext
+~~~~~~~~~~~~~~~~~~~~~~
+	. _construct(string $localeCode)
+	. string getLocaleCode(), see above for details
+
+LocaleContextInterface
+~~~~~~~~~~~~~~~~~~~~~~
+	. string getLocaleCode(), see above for details
+
+ProviderBasedLocaleContext
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+	. _construct(LocalProviderInterface $localeProvider)
+	. string getLocaleCode(), see above for details
 
 LocaleProvider
 --------------
