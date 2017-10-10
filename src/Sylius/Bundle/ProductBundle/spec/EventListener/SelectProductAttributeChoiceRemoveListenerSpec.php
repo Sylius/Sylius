@@ -19,6 +19,7 @@ use Doctrine\ORM\UnitOfWork;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
+use Sylius\Component\Product\Model\ProductAttributeValue;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
 use Sylius\Component\Product\Repository\ProductAttributeValueRepositoryInterface;
 
@@ -26,7 +27,7 @@ final class SelectProductAttributeChoiceRemoveListenerSpec extends ObjectBehavio
 {
     function let(): void
     {
-        $this->beConstructedWith('Sylius\Component\Product\Model\ProductAttributeValue');
+        $this->beConstructedWith(ProductAttributeValue::class);
     }
 
     function it_removes_select_product_attribute_choices(

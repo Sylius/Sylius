@@ -44,29 +44,25 @@ final class SelectProductAttributeChoiceRemoveListener
         /** @var ProductAttributeInterface $productAttribute */
         $productAttribute = $event->getEntity();
 
-        if (
-            $productAttribute instanceof ProductAttributeInterface &&
-            $productAttribute->getType() === SelectAttributeType::TYPE
-        ) {
-            $entityManager = $event->getEntityManager();
+        if (!($productAttribute instanceof ProductAttributeInterface)) {
+            return;
+        }
 
-            $unitOfWork = $entityManager->getUnitOfWork();
-            $changeSet = $unitOfWork->getEntityChangeSet($productAttribute);
+        if ($productAttribute->getType() !== SelectAttributeType::TYPE) {
+            return;
+        }
 
-            if (
-                empty($changeSet['configuration'][0]['choices']) ||
-                empty($changeSet['configuration'][1]['choices'])
-            ) {
-                return;
-            }
+        $entityManager = $event->getEntityManager();
 
-            $oldChoices = $changeSet['configuration'][0]['choices'];
-            $newChoices = $changeSet['configuration'][1]['choices'];
+        $unitOfWork = $entityManager->getUnitOfWork();
+        $changeSet = $unitOfWork->getEntityChangeSet($productAttribute);
 
-            $removedChoices = array_diff_key($oldChoices, $newChoices);
-            if (!empty($removedChoices)) {
-                $this->removeValues($entityManager, array_keys($removedChoices));
-            }
+        $oldChoices = $changeSet['configuration'][0]['choices'] ?? [];
+        $newChoices = $changeSet['configuration'][1]['choices'] ?? [];
+
+        $removedChoices = array_diff_key($oldChoices, $newChoices);
+        if (!empty($removedChoices)) {
+            $this->removeValues($entityManager, array_keys($removedChoices));
         }
     }
 
@@ -92,8 +88,8 @@ final class SelectProductAttributeChoiceRemoveListener
 
                 $entityManager->remove($productAttributeValue);
             }
-
-            $entityManager->flush();
         }
+
+        $entityManager->flush();
     }
 }

@@ -315,7 +315,7 @@ final class ManagingProductAttributesContext implements Context
     }
 
     /**
-     * @When /^(the administrator) deletes the value "([^"]*)" from (this product attribute)$/
+     * @When /^(the administrator) deletes the value "([^"]+)" from (this product attribute)$/
      */
     public function theAdministratorDeletesTheValueFromThisProductAttribute(
         AdminUserInterface $user,

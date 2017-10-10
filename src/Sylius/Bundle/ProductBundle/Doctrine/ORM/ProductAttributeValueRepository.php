@@ -25,7 +25,7 @@ class ProductAttributeValueRepository extends EntityRepository implements Produc
     {
         return $this->createQueryBuilder('o')
             ->andWhere('o.json LIKE :key')
-            ->setParameter('key', '%' . $choiceKey . '%')
+            ->setParameter('key', '%"' . $choiceKey . '"%')
             ->getQuery()
             ->getResult()
         ;

@@ -118,7 +118,7 @@ final class ProductAttributeContext implements Context
      * @Given the store has a select product attribute :name with value :value
      * @Given the store has a select product attribute :name with values :firstValue and :secondValue
      */
-    public function theStoreHasASelectProductAttributeWithValue(string $name, ...$values): void
+    public function theStoreHasASelectProductAttributeWithValue(string $name, string ...$values): void
     {
         $choices = [];
         foreach ($values as $value) {
@@ -148,27 +148,18 @@ final class ProductAttributeContext implements Context
 
     /**
      * @Given /^(this product) has select attribute "([^"]+)" with value "([^"]+)"$/
-     */
-    public function thisProductHasSelectAttributeWithValue(
-        ProductInterface $product,
-        string $productAttributeName,
-        string $attributeValue
-    ) {
-        $values = [$this->faker->uuid => $attributeValue];
-
-        $this->createSelectProductAttributeValue($product, $productAttributeName, $values);
-    }
-
-    /**
      * @Given /^(this product) has select attribute "([^"]+)" with values "([^"]+)" and "([^"]+)"$/
      */
     public function thisProductHasSelectAttributeWithValues(
         ProductInterface $product,
         string $productAttributeName,
-        string $firstAttributeValue,
-        string $secondAttributeValue
+        string ...$productAttributeValues
     ): void {
-        $values = [$this->faker->uuid => $firstAttributeValue, $this->faker->uuid => $secondAttributeValue];
+
+        $values = [];
+        foreach ($productAttributeValues as $value) {
+            $values[$this->faker->uuid] = $value;
+        }
 
         $this->createSelectProductAttributeValue($product, $productAttributeName, $values);
     }

@@ -63,13 +63,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
      */
     public function hasAttributeValue(string $value): bool
     {
-        try {
-            $attributeValue = $this->getElement('attribute_choice_list_element', ['%value%' => $value]);
-        } catch (ElementNotFoundException $exception) {
-            return false;
-        }
-
-        return null !== $attributeValue;
+        return $this->hasElement('attribute_choice_list_element', ['%value%' => $value]);
     }
 
     /**
