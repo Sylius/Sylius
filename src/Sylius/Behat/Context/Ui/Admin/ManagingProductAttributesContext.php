@@ -276,7 +276,7 @@ final class ManagingProductAttributesContext implements Context
      * @When I specify its min length as :min
      * @When I specify its min entries value as :min
      */
-    public function iSpecifyItsMinValueAs(int $min)
+    public function iSpecifyItsMinValueAs(int $min): void
     {
         $this->createPage->specifyMinValue($min);
     }
@@ -285,7 +285,7 @@ final class ManagingProductAttributesContext implements Context
      * @When I specify its max length as :max
      * @When I specify its max entries value as :max
      */
-    public function iSpecifyItsMaxLengthAs(int $max)
+    public function iSpecifyItsMaxLengthAs(int $max): void
     {
         $this->createPage->specifyMaxValue($max);
     }
@@ -293,7 +293,7 @@ final class ManagingProductAttributesContext implements Context
     /**
      * @When I check multiple option
      */
-    public function iCheckMultipleOption()
+    public function iCheckMultipleOption(): void
     {
         $this->createPage->checkMultiple();
     }
@@ -301,7 +301,7 @@ final class ManagingProductAttributesContext implements Context
     /**
      * @When I do not check multiple option
      */
-    public function iDoNotCheckMultipleOption()
+    public function iDoNotCheckMultipleOption(): void
     {
         // Intentionally left blank to fulfill context expectation
     }

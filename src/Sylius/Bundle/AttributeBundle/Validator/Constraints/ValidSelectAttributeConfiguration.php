@@ -15,7 +15,7 @@ namespace Sylius\Bundle\AttributeBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
-class ValidSelectAttributeConfiguration extends Constraint
+final class ValidSelectAttributeConfiguration extends Constraint
 {
     /**
      * @var string

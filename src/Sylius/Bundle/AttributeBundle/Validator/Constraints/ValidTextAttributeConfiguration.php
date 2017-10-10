@@ -15,7 +15,7 @@ namespace Sylius\Bundle\AttributeBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
-class ValidTextAttributeConfiguration extends Constraint
+final class ValidTextAttributeConfiguration extends Constraint
 {
     /**
      * @var string
