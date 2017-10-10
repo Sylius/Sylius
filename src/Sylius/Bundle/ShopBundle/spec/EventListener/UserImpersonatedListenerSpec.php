@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\CoreBundle\EventListener;
+namespace spec\Sylius\Bundle\ShopBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\UserBundle\Event\UserEvent;
