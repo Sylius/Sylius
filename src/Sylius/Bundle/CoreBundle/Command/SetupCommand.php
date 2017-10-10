@@ -130,7 +130,7 @@ EOT
     private function createEmailQuestion(OutputInterface $output): Question
     {
         return (new Question('E-mail:'))
-            ->setValidator(function ($value) use ($output) {
+            ->setValidator(function ($value) {
                 /** @var ConstraintViolationListInterface $errors */
                 $errors = $this->get('validator')->validate((string) $value, [new Email(), new NotBlank()]);
                 foreach ($errors as $error) {
@@ -153,7 +153,7 @@ EOT
     {
         /** @var QuestionHelper $questionHelper */
         $questionHelper = $this->getHelper('question');
-        $validator = $this->getPasswordQuestionValidator($output);
+        $validator = $this->getPasswordQuestionValidator();
 
         do {
             $passwordQuestion = $this->createPasswordQuestion('Choose password:', $validator);
@@ -171,15 +171,11 @@ EOT
     }
 
     /**
-     * @param OutputInterface $output
-     *
      * @return \Closure
-     *
-     * @throws \DomainException
      */
-    private function getPasswordQuestionValidator(OutputInterface $output): \Closure
+    private function getPasswordQuestionValidator(): \Closure
     {
-        return function ($value) use ($output) {
+        return function ($value) {
             /** @var ConstraintViolationListInterface $errors */
             $errors = $this->get('validator')->validate($value, [new NotBlank()]);
             foreach ($errors as $error) {

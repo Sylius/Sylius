@@ -19,7 +19,7 @@ namespace Sylius\Component\Core\Model;
 abstract class Image implements ImageInterface
 {
     /**
-     * @var int
+     * @var mixed
      */
     protected $id;
 
@@ -42,11 +42,6 @@ abstract class Image implements ImageInterface
      * @var object
      */
     protected $owner;
-
-    public function __construct()
-    {
-        $this->createdAt = new \DateTime();
-    }
 
     /**
      * @return int
