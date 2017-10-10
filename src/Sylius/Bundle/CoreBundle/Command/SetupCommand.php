@@ -99,6 +99,7 @@ EOT
             Assert::null($userRepository->findOneByEmail('sylius@example.com'));
 
             $user->setEmail('sylius@example.com');
+            $user->setUsername('sylius');
             $user->setPlainPassword('sylius');
 
             return $user;
@@ -117,6 +118,7 @@ EOT
         } while ($exists);
 
         $user->setEmail($email);
+        $user->setUsername($email);
         $user->setPlainPassword($this->getAdministratorPassword($input, $output));
 
         return $user;
