@@ -42,5 +42,13 @@
             <argument type="service" id="sylius.registry.attribute_type" />
             <tag name="validator.constraint_validator" alias="sylius_valid_attribute_value_validator" />
         </service>
+
+        <service id="sylius.validator.valid_text_attribute" class="Sylius\Bundle\AttributeBundle\Validator\Constraints\ValidTextAttributeConfigurationValidator">
+            <tag name="validator.constraint_validator" alias="sylius_valid_text_attribute_validator" />
+        </service>
+
+        <service id="sylius.validator.valid_select_attribute" class="Sylius\Bundle\AttributeBundle\Validator\Constraints\ValidSelectAttributeConfigurationValidator">
+            <tag name="validator.constraint_validator" alias="sylius_valid_select_attribute_validator" />
+        </service>
     </services>
 </container>

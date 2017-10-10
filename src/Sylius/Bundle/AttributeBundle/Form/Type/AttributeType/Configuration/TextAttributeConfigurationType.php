@@ -30,9 +30,11 @@ final class TextAttributeConfigurationType extends AbstractType
         $builder
             ->add('min', NumberType::class, [
                 'label' => 'sylius.form.attribute_type_configuration.text.min',
+                'required' => false,
             ])
             ->add('max', NumberType::class, [
                 'label' => 'sylius.form.attribute_type_configuration.text.max',
+                'required' => false,
             ])
         ;
     }
