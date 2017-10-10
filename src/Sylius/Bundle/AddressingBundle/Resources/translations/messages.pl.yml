@@ -11,6 +11,7 @@ sylius:
             last_name: Nazwisko
             phone_number: Numer telefonu
             postcode: Kod pocztowy
+            street: Ulica
             province: Województwo
             zone: Strefa
         country:

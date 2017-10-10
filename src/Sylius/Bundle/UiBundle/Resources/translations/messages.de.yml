@@ -574,7 +574,7 @@ sylius:
         base_currency_order_total: 'Bestellsumme in Basiswährung'
         order_value: 'Bestellwert'
         ordered: 'Bestellt'
-        orders: 'Aufträge'
+        orders: 'Bestellungen'
         orders_statistics: 'Statistik der Bestellungen'
         original_price: 'Ursprünglicher Preis'
         out_of_stock: 'Ausverkauft'

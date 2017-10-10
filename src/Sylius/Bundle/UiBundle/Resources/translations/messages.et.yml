@@ -2,16 +2,37 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    form:
+        option:
+            name: 'Nimi'
     ui:
         add_member: 'Lisa liige'
         add_province: 'Lisa provints'
+        body: 'Sisu'
         city: 'Linn'
+        code: 'Kood'
         company: 'Ettevõtte'
         country: 'Riik'
+        coupon: 'Kupong'
+        currencies: 'Valuutad'
+        default_locale: 'Vaikimisi keel'
+        enabled: 'Lubatud'
+        from: 'Alates'
+        id: 'ID'
+        image: 'Pilt'
+        locales: 'Keeled'
         members: 'Liikmed'
+        name: 'Nimi'
+        number: 'Number'
         phone_number: 'Telefoni number'
         postcode: 'Pistiindeks'
         province: 'Provints'
         provinces: 'Provintsid'
+        roles: 'Rollid'
+        scope: 'Ulatus'
         street: 'Tänav'
+        tax_category: 'Maksu kategooria'
+        theme: 'Välimused'
+        title: 'Pealkiri'
+        to: 'Kellele'
         type: 'Tüüp'

@@ -33,6 +33,7 @@ sylius:
         promotion_filter:
             price_range: Zakres ceny
         promotion_rule:
+            contains_product: Zawiera produkt
             customer_group: Grupa klientów
             taxonomy: Taksonomia
             cart_quantity_configuration:
