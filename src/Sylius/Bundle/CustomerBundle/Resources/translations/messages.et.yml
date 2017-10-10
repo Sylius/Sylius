@@ -5,3 +5,7 @@ sylius:
     form:
         customer:
             phone_number: Telefoni number
+            different_billing_address: Kasutada arvel erinevat aadressi?
+        customer_group:
+            name: Nimi
+            roles: Rollid

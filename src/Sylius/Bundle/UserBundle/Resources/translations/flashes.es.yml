@@ -10,4 +10,5 @@ sylius:
         verify_email: 'Tu correo electrónico ha sido verificado correctamente.'
         verify_email_by_invalid_token: 'El token de verificación no es válido.'
         verify_email_request: 'Se ha enviado un correo electrónico con el enlace de verificación a tu dirección de correo electrónico.'
+        verify_no_user: 'No hay un usuario conectado.'
         verify_verified_email: 'Tu correo electrónico ya estaba verificado.'

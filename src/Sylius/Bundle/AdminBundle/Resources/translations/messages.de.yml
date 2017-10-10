@@ -37,4 +37,4 @@ sylius:
                     header: Kunde
                 sales:
                     header: Verkäufe
-                    orders: Aufträge
+                    orders: Bestellungen
