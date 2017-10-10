@@ -34,6 +34,11 @@ Documentation
 
 Documentation is available at [docs.sylius.org](http://docs.sylius.org).
 
+Requirements
+------------
+
+Read about the Sylius system requirements in detail [here](http://docs.sylius.org/en/latest/book/installation/requirements.html).
+
 Installation
 ------------
 
@@ -45,6 +50,8 @@ $ php bin/console sylius:install
 $ yarn install && yarn run gulp
 $ php bin/console server:start
 ```
+
+> Note: make sure to use PHP ^7.1. Using an older PHP version will result in installing an older version of Sylius.
 
 Then open `http://localhost:8000/` in your web browser to enjoy your Sylius shop in a development environment.
 
