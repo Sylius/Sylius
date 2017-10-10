@@ -25,6 +25,7 @@ Feature: Adding a new select product attribute
         And I name it "Mug material" in "English (United States)"
         And I add value "Banana Skin"
         And I also add value "Plastic"
+        And I check multiple option
         And I add it
         Then I should be notified that it has been successfully created
         And the select attribute "Mug material" should appear in the store

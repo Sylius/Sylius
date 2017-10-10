@@ -35,15 +35,18 @@ class SelectAttributeConfigurationType extends AbstractType
                 'label' => 'sylius.form.attribute_type_configuration.select.values',
                 'allow_add' => true,
                 'allow_delete' => true,
+                'required' => false,
             ])
             ->add('multiple', CheckboxType::class, [
                 'label' => 'sylius.form.attribute_type_configuration.select.multiple',
             ])
             ->add('min', NumberType::class, [
                 'label' => 'sylius.form.attribute_type_configuration.select.min',
+                'required' => false,
             ])
             ->add('max', NumberType::class, [
                 'label' => 'sylius.form.attribute_type_configuration.select.max',
+                'required' => false,
             ])
         ;
     }
