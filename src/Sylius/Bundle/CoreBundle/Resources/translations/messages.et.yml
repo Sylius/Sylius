@@ -3,8 +3,77 @@
 
 sylius:
     form:
+        block:
+            body: Sisu
+            id: ID
+            title: Pealkiri
+        cart:
+            coupon: Kupong
+        checkout:
+            addressing:
+                different_billing_address: Kasutada arvel erinevat aadressi?
+            payment_method: Maksemeetod
+            shipping_method: Tarneviis
+        promotion:
+            channels: Kanalid
+        promotion_action:
+            add_product_configuration:
+                product: Toode
+        promotion_coupon:
+            per_customer_usage_limit: Kliendipõhine kasutuslimiit
+        group:
+            name: Nimi
+            roles: Rollid
+        channel:
+            currencies: Valuutad
+            currency_base: Baasvaluuta
+            locale_default: Vaikimisi keel
+            locales: Keeled
+            payment_methods: Maksemeetod
+            shipping_methods: Tarneviis
+            taxonomies: Taksonoomiad
+            theme: Välimused
         image:
             type: Tüüp
+            file: Pilt
+        locale:
+            code: Kood
+            enabled: Lubatud
+        order_filter:
+            number: Number
+            total_from: Alates
+            total_to: Kellele
+            channel: Kõik kanalid
+        page:
+            body: Sisu
+            id: ID
+            title: Pealkiri
+        product:
+            images: Pildid
+            short_description: Lühikirjeldus
+            channels: Kanalid
+            enabled: Lubatud
+        product_filter:
+            name: Nimi
+            code: Kood
+        product_variant:
+            tax_category: Maksu kategooria
+        shipment_filter:
+            created_at_from: Alates
+            created_at_to: Kellele
+            channel: Kõik kanalid
+        payment_filter:
+            created_at_from: Alates
+            created_at_to: Kellele
+            channel: Kõik kanalid
+        taxon:
+            code: Kood
+        user:
+            different_billing_address: Kasutada arvel erinevat aadressi?
+            enabled: Lubatud
+            roles: Rollid
+        product_association_type:
+            name: Nimi
     installer:
         extensions:
             "off": false

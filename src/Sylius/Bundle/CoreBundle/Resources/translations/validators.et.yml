@@ -1,0 +1,14 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    channel:
+        contact_email:
+            invalid: E-posti aadress on vigane.
+    contact:
+        email:
+            invalid: E-posti aadress on vigane.
+            not_blank: Palun sisesta oma e-post.
+    user:
+        email:
+            invalid: E-posti aadress on vigane.
