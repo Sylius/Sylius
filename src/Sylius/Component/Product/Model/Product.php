@@ -482,12 +482,12 @@ class Product implements ProductInterface
     private function hasNotEmptyAttributeByCodeAndLocale(string $attributeCode, string $localeCode): bool
     {
         $attributeValue = $this->getAttributeByCodeAndLocale($attributeCode, $localeCode);
-
         if (null === $attributeValue) {
             return false;
         }
 
-        if (empty($attributeValue->getValue())) {
+        $value = $attributeValue->getValue();
+        if ('' === $value || null === $value || [] === $value) {
             return false;
         }
 
