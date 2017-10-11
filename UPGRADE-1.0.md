@@ -622,7 +622,6 @@
 ### Locale / LocaleBundle
 
 * `Locale` model's `$enabled` field has been removed along with all logic depending on it.
-* The `Locale` documentation now includes avaiable `LocaleContext` methods.
 
 ### Mailer / MailerBundle
 

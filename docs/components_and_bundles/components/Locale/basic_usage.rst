@@ -4,25 +4,15 @@ Basic Usage
 LocaleContext
 -------------
 
+In the Locale component there are three LocaleContexts defined:
+* `CompositeLocaleContext`
+* `ImmutableLocaleContext`
+* `ProviderBasedLocaleContext`
+
 CompositeLocaleContext
 ~~~~~~~~~~~~~~~~~~~~~~
-	. getLocaleCode() method, a composite of different contexts which are prioritized in it (the one with highest priority is used if it exists). Returns a string (exception: LocaleNotFoundException)
-	. _construct()
-	. addContext(LocaleContextInterface $localeContext, int $priority)
-
-ImmutableLocaleContext
-~~~~~~~~~~~~~~~~~~~~~~
-	. _construct(string $localeCode)
-	. string getLocaleCode(), see above for details
-
-LocaleContextInterface
-~~~~~~~~~~~~~~~~~~~~~~
-	. string getLocaleCode(), see above for details
-
-ProviderBasedLocaleContext
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-	. _construct(LocalProviderInterface $localeProvider)
-	. string getLocaleCode(), see above for details
+	It is a composite of different contexts available in your application, which are prioritized while being injected here (the one with highest priority is used).
+	It has the `getLocaleCode`, `_construct()`, and `addContext(LocaleContextInterface $localeContext, int $priority)` methods available.
 
 LocaleProvider
 --------------
