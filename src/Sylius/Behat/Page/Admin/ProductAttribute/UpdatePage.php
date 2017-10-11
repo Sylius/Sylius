@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Admin\ProductAttribute;
 
 use Behat\Mink\Element\NodeElement;
-use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 use Webmozart\Assert\Assert;
