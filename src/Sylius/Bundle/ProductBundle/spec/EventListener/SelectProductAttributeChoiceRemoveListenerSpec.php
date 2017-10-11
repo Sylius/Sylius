@@ -53,7 +53,7 @@ final class SelectProductAttributeChoiceRemoveListenerSpec extends ObjectBehavio
                 ['choices' => [
                     '8ec40814-adef-4194-af91-5559b5f19236' => 'Banana',
                 ]],
-            ]
+            ],
         ]);
 
         $entityManager
@@ -97,7 +97,7 @@ final class SelectProductAttributeChoiceRemoveListenerSpec extends ObjectBehavio
                     '8ec40814-adef-4194-af91-5559b5f19236' => 'Banana',
                     '1739bc61-9e42-4c80-8b9a-f97f0579cccb' => 'Pineapple',
                 ]],
-            ]
+            ],
         ]);
 
         $entityManager
@@ -131,7 +131,7 @@ final class SelectProductAttributeChoiceRemoveListenerSpec extends ObjectBehavio
                     '8ec40814-adef-4194-af91-5559b5f19236' => 'Banana',
                     '1739bc61-9e42-4c80-8b9a-f97f0579cccb' => 'Watermelon',
                 ]],
-            ]
+            ],
         ]);
 
         $entityManager
