@@ -1,5 +1,5 @@
-Locales
-=======
+Locale
+======
 
 Managing different locales for PHP apps.
 
