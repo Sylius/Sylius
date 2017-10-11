@@ -55,7 +55,7 @@ final class TextareaAttributeType implements AttributeTypeInterface
 
         $value = $attributeValue->getValue();
 
-        foreach ($this->getValidationErrors($context, $value, $configuration) as $error) {
+        foreach ($this->getValidationErrors($context, $value) as $error) {
             $context
                 ->buildViolation($error->getMessage())
                 ->atPath('value')

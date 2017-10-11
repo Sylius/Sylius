@@ -48,8 +48,7 @@ final class CurrencyFixtureTest extends \PHPUnit_Framework_TestCase
     {
         return new CurrencyFixture(
             $this->getMockBuilder(FactoryInterface::class)->getMock(),
-            $this->getMockBuilder(ObjectManager::class)->getMock(),
-            'DEFAULT_CURRENCY_CODE'
+            $this->getMockBuilder(ObjectManager::class)->getMock()
         );
     }
 }

@@ -28,8 +28,6 @@ class ProductImage extends Image implements ProductImageInterface
 
     public function __construct()
     {
-        parent::__construct();
-
         $this->productVariants = new ArrayCollection();
     }
 
