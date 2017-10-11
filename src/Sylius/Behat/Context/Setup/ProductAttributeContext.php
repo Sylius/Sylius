@@ -155,7 +155,6 @@ final class ProductAttributeContext implements Context
         string $productAttributeName,
         string ...$productAttributeValues
     ): void {
-
         $values = [];
         foreach ($productAttributeValues as $value) {
             $values[$this->faker->uuid] = $value;

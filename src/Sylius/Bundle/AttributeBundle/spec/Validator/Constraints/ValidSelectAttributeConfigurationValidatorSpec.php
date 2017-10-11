@@ -39,7 +39,7 @@ final class ValidSelectAttributeConfigurationValidatorSpec extends ObjectBehavio
         ExecutionContextInterface $context,
         AttributeInterface $attribute
     ): void {
-        $constraint = new ValidSelectAttributeConfiguration;
+        $constraint = new ValidSelectAttributeConfiguration();
 
         $attribute->getType()->willReturn(SelectAttributeType::TYPE);
         $attribute->getConfiguration()->willReturn(['multiple' => true, 'min' => 6, 'max' => 4]);
@@ -53,7 +53,7 @@ final class ValidSelectAttributeConfigurationValidatorSpec extends ObjectBehavio
         ExecutionContextInterface $context,
         AttributeInterface $attribute
     ): void {
-        $constraint = new ValidSelectAttributeConfiguration;
+        $constraint = new ValidSelectAttributeConfiguration();
 
         $attribute->getType()->willReturn(SelectAttributeType::TYPE);
         $attribute->getConfiguration()->willReturn([
@@ -75,7 +75,7 @@ final class ValidSelectAttributeConfigurationValidatorSpec extends ObjectBehavio
         ExecutionContextInterface $context,
         AttributeInterface $attribute
     ): void {
-        $constraint = new ValidSelectAttributeConfiguration;
+        $constraint = new ValidSelectAttributeConfiguration();
 
         $attribute->getType()->willReturn(SelectAttributeType::TYPE);
         $attribute->getConfiguration()->willReturn(['multiple' => false, 'min' => 4, 'max' => 6]);
@@ -89,7 +89,7 @@ final class ValidSelectAttributeConfigurationValidatorSpec extends ObjectBehavio
         ExecutionContextInterface $context,
         AttributeInterface $attribute
     ): void {
-        $constraint = new ValidSelectAttributeConfiguration;
+        $constraint = new ValidSelectAttributeConfiguration();
 
         $attribute->getType()->willReturn(TextAttributeType::TYPE);
 
@@ -100,7 +100,7 @@ final class ValidSelectAttributeConfigurationValidatorSpec extends ObjectBehavio
 
     function it_throws_an_exception_if_validated_value_is_not_an_attribute(): void
     {
-        $constraint = new ValidSelectAttributeConfiguration;
+        $constraint = new ValidSelectAttributeConfiguration();
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
@@ -111,7 +111,7 @@ final class ValidSelectAttributeConfigurationValidatorSpec extends ObjectBehavio
     function it_throws_an_exception_if_constraint_is_not_a_valid_select_attribute_configuration_constraint(
         AttributeInterface $attribute
     ): void {
-        $constraint = new ValidTextAttributeConfiguration;
+        $constraint = new ValidTextAttributeConfiguration();
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)

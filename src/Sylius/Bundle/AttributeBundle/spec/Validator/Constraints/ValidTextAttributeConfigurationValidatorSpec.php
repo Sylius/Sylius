@@ -75,7 +75,7 @@ final class ValidTextAttributeConfigurationValidatorSpec extends ObjectBehavior
     function it_throws_an_exception_if_constraint_is_not_a_valid_text_attribute_configuration_constraint(
         AttributeInterface $attribute
     ): void {
-        $constraint = new ValidSelectAttributeConfiguration;
+        $constraint = new ValidSelectAttributeConfiguration();
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
