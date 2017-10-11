@@ -53,4 +53,9 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
      * @param string $value
      */
     public function addAttributeValue(string $value): void;
+
+    /**
+     * @param string $value
+     */
+    public function deleteAttributeValue(string $value): void;
 }
