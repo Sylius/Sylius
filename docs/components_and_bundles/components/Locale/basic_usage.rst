@@ -4,7 +4,15 @@ Basic Usage
 LocaleContext
 -------------
 
-...
+In the Locale component there are three LocaleContexts defined:
+* `CompositeLocaleContext`
+* `ImmutableLocaleContext`
+* `ProviderBasedLocaleContext`
+
+CompositeLocaleContext
+~~~~~~~~~~~~~~~~~~~~~~
+	It is a composite of different contexts available in your application, which are prioritized while being injected here (the one with highest priority is used).
+	It has the `getLocaleCode`, `_construct()`, and `addContext(LocaleContextInterface $localeContext, int $priority)` methods available.
 
 LocaleProvider
 --------------

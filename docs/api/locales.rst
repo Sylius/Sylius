@@ -1,4 +1,4 @@
-Locales API
+Locale API
 ===========
 
 These endpoints will allow you to easily manage locales. Base URI is `/api/v1/locales`.
