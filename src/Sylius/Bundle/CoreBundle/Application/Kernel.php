@@ -33,12 +33,12 @@ use Symfony\Component\HttpKernel\Kernel as HttpKernel;
  */
 class Kernel extends HttpKernel
 {
-    public const VERSION = '1.0.0';
-    public const VERSION_ID = '10000';
+    public const VERSION = '1.1.0-DEV';
+    public const VERSION_ID = '10100';
     public const MAJOR_VERSION = '1';
-    public const MINOR_VERSION = '0';
+    public const MINOR_VERSION = '1';
     public const RELEASE_VERSION = '0';
-    public const EXTRA_VERSION = '';
+    public const EXTRA_VERSION = 'DEV';
 
     /**
      * {@inheritdoc}
