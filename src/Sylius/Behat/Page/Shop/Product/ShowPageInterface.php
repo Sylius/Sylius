@@ -67,11 +67,11 @@ interface ShowPageInterface extends PageInterface
     public function visit($url);
 
     /**
-     * @param string $attributeName
+     * @param string $name
      *
-     * @return string
+     * @return string|null
      */
-    public function getAttributeByName($attributeName);
+    public function getAttributeByName(string $name): ?string;
 
     /**
      * @return array

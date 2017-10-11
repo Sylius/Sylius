@@ -148,6 +148,14 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Then I should not see the product attribute :attributeName
+     */
+    public function iShouldNotSeeTheProductAttribute(string $attributeName): void
+    {
+        $this->showPage->getAttributeByName($attributeName);
+    }
+
+    /**
      * @Then I should (also) see the product attribute :attributeName with date :expectedAttribute
      */
     public function iShouldSeeTheProductAttributeWithDate($attributeName, $expectedAttribute)

@@ -84,6 +84,7 @@ class ProductAttributeController extends ResourceController
 
         $localeCodes = $this->get('sylius.translation_locale_provider')->getDefinedLocalesCodes();
 
+        $forms = [];
         foreach ($attributes as $attribute) {
             $forms[$attribute->getCode()] = $this->getAttributeFormsInAllLocales($attribute, $localeCodes);
         }

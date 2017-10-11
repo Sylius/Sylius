@@ -36,7 +36,6 @@ class Taxon extends BaseTaxon implements TaxonInterface
         parent::__construct();
 
         $this->createdAt = new \DateTime();
-        $this->products = new ArrayCollection();
         $this->images = new ArrayCollection();
     }
 

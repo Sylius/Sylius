@@ -74,7 +74,7 @@ final class LocaleContext implements Context
         if (in_array($locale, $this->homePage->getAvailableLocales(), true)) {
             throw new \InvalidArgumentException(sprintf(
                 'Expected "%s" not to be in "%s"',
-                $localeName,
+                $locale,
                 implode('", "', $this->homePage->getAvailableLocales())
             ));
         }

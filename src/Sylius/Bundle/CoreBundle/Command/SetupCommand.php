@@ -119,14 +119,12 @@ EOT
     }
 
     /**
-     * @param OutputInterface $output
-     *
      * @return Question
      */
-    private function createEmailQuestion(OutputInterface $output): Question
+    private function createEmailQuestion(): Question
     {
         return (new Question('E-mail: '))
-            ->setValidator(function ($value) use ($output) {
+            ->setValidator(function ($value) {
                 /** @var ConstraintViolationListInterface $errors */
                 $errors = $this->get('validator')->validate((string) $value, [new Email(), new NotBlank()]);
                 foreach ($errors as $error) {
@@ -153,7 +151,7 @@ EOT
         $userRepository = $this->getAdminUserRepository();
 
         do {
-            $question = $this->createEmailQuestion($output);
+            $question = $this->createEmailQuestion();
             $email = $questionHelper->ask($input, $output, $question);
             $exists = null !== $userRepository->findOneByEmail($email);
 
@@ -202,7 +200,7 @@ EOT
     {
         /** @var QuestionHelper $questionHelper */
         $questionHelper = $this->getHelper('question');
-        $validator = $this->getPasswordQuestionValidator($output);
+        $validator = $this->getPasswordQuestionValidator();
 
         do {
             $passwordQuestion = $this->createPasswordQuestion('Choose password:', $validator);
@@ -220,15 +218,11 @@ EOT
     }
 
     /**
-     * @param OutputInterface $output
-     *
      * @return \Closure
-     *
-     * @throws \DomainException
      */
-    private function getPasswordQuestionValidator(OutputInterface $output): \Closure
+    private function getPasswordQuestionValidator(): \Closure
     {
-        return function ($value) use ($output) {
+        return function ($value) {
             /** @var ConstraintViolationListInterface $errors */
             $errors = $this->get('validator')->validate($value, [new NotBlank()]);
             foreach ($errors as $error) {
