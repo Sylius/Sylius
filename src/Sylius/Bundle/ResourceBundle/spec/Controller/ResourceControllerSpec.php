@@ -503,6 +503,8 @@ final class ResourceControllerSpec extends ObjectBehavior
 
         $flashHelper->addFlashFromEvent($configuration, $event)->shouldBeCalled();
 
+        $event->hasResponse()->willReturn(false);
+
         $repository->add($newResource)->shouldNotBeCalled();
         $eventDispatcher->dispatchPostEvent(ResourceActions::CREATE, $configuration, $newResource)->shouldNotBeCalled();
         $flashHelper->addSuccessFlash(Argument::any())->shouldNotBeCalled();
@@ -510,6 +512,58 @@ final class ResourceControllerSpec extends ObjectBehavior
         $redirectHandler->redirectToIndex($configuration, $newResource)->willReturn($redirectResponse);
 
         $this->createAction($request)->shouldReturn($redirectResponse);
+    }
+
+    function it_does_not_create_the_resource_and_return_response_for_html_requests_stopped_via_events(
+        MetadataInterface $metadata,
+        RequestConfigurationFactoryInterface $requestConfigurationFactory,
+        RequestConfiguration $configuration,
+        AuthorizationCheckerInterface $authorizationChecker,
+        FactoryInterface $factory,
+        NewResourceFactoryInterface $newResourceFactory,
+        RepositoryInterface $repository,
+        ResourceInterface $newResource,
+        ResourceFormFactoryInterface $resourceFormFactory,
+        Form $form,
+        FlashHelperInterface $flashHelper,
+        EventDispatcherInterface $eventDispatcher,
+        ResourceControllerEvent $event,
+        Request $request,
+        Response $response
+    ): void {
+        $metadata->getApplicationName()->willReturn('sylius');
+        $metadata->getName()->willReturn('product');
+
+        $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->hasPermission()->willReturn(true);
+        $configuration->getPermission(ResourceActions::CREATE)->willReturn('sylius.product.create');
+
+        $authorizationChecker->isGranted($configuration, 'sylius.product.create')->willReturn(true);
+
+        $configuration->isHtmlRequest()->willReturn(true);
+        $configuration->getTemplate(ResourceActions::CREATE . '.html')->willReturn('SyliusShopBundle:Product:create.html.twig');
+
+        $newResourceFactory->create($configuration, $factory)->willReturn($newResource);
+        $resourceFormFactory->create($configuration, $newResource)->willReturn($form);
+
+        $request->isMethod('POST')->willReturn(true);
+        $form->handleRequest($request)->willReturn($form);
+        $form->isValid()->willReturn(true);
+        $form->getData()->willReturn($newResource);
+
+        $eventDispatcher->dispatchPreEvent(ResourceActions::CREATE, $configuration, $newResource)->willReturn($event);
+        $event->isStopped()->willReturn(true);
+
+        $flashHelper->addFlashFromEvent($configuration, $event)->shouldBeCalled();
+
+        $event->hasResponse()->willReturn(true);
+        $event->getResponse()->willReturn($response);
+
+        $repository->add($newResource)->shouldNotBeCalled();
+        $eventDispatcher->dispatchPostEvent(ResourceActions::CREATE, $configuration, $newResource)->shouldNotBeCalled();
+        $flashHelper->addSuccessFlash(Argument::any())->shouldNotBeCalled();
+
+        $this->createAction($request)->shouldReturn($response);
     }
 
     function it_redirects_to_newly_created_resource(
@@ -1937,10 +1991,57 @@ final class ResourceControllerSpec extends ObjectBehavior
         $eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource)->shouldNotBeCalled();
         $flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource)->shouldNotBeCalled();
 
+        $event->hasResponse()->willReturn(false);
+
         $flashHelper->addFlashFromEvent($configuration, $event)->shouldBeCalled();
         $redirectHandler->redirectToResource($configuration, $resource)->willReturn($redirectResponse);
 
         $this->applyStateMachineTransitionAction($request)->shouldReturn($redirectResponse);
+    }
+
+    function it_does_not_apply_state_machine_transition_on_resource_and_return_event_response_for_html_requests_stopped_via_event(
+        MetadataInterface $metadata,
+        RequestConfigurationFactoryInterface $requestConfigurationFactory,
+        RequestConfiguration $configuration,
+        AuthorizationCheckerInterface $authorizationChecker,
+        StateMachineInterface $stateMachine,
+        ObjectManager $manager,
+        RepositoryInterface $repository,
+        SingleResourceProviderInterface $singleResourceProvider,
+        ResourceInterface $resource,
+        FlashHelperInterface $flashHelper,
+        EventDispatcherInterface $eventDispatcher,
+        ResourceControllerEvent $event,
+        Request $request,
+        Response $response
+    ): void {
+        $metadata->getApplicationName()->willReturn('sylius');
+        $metadata->getName()->willReturn('product');
+
+        $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->hasPermission()->willReturn(true);
+        $configuration->getPermission(ResourceActions::UPDATE)->willReturn('sylius.product.update');
+
+        $authorizationChecker->isGranted($configuration, 'sylius.product.update')->willReturn(true);
+        $singleResourceProvider->get($configuration, $repository)->willReturn($resource);
+
+        $configuration->isHtmlRequest()->willReturn(true);
+
+        $eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($event);
+        $event->isStopped()->willReturn(true);
+
+        $manager->flush()->shouldNotBeCalled();
+        $stateMachine->apply($resource)->shouldNotBeCalled();
+
+        $eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource)->shouldNotBeCalled();
+        $flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource)->shouldNotBeCalled();
+
+        $flashHelper->addFlashFromEvent($configuration, $event)->shouldBeCalled();
+
+        $event->hasResponse()->willReturn(true);
+        $event->getResponse()->willReturn($response);
+
+        $this->applyStateMachineTransitionAction($request)->shouldReturn($response);
     }
 
     function it_applies_state_machine_transition_on_resource_and_returns_200_for_non_html_requests(
