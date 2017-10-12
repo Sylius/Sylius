@@ -201,32 +201,26 @@ final class ProductAttributeContext implements Context
 
     /**
      * @Given /^(this product) has(?:| also)(?:| a) select attribute "([^"]+)" with value "([^"]+)"$/
-     * @Given /^(this product) has(?:| also)(?:| a) select attribute "([^"]+)" with value in ("[^"]+" locale) "([^"]+)"$/
-     */
-    public function thisProductHasSelectAttributeWithValue(
-        ProductInterface $product,
-        string $productAttributeName,
-        string $attributeValue,
-        string $localeCode = 'en_US'
-    ) {
-        $values = [$attributeValue];
-
-        $this->createSelectProductAttributeValue($product, $productAttributeName, $values, $localeCode);
-    }
-
-    /**
-     * @Given /^(this product) has(?:| also)(?:| a) select attribute "([^"]+)" with value "([^"]+)"$/
      * @Given /^(this product) has(?:| also)(?:| a) select attribute "([^"]+)" with values "([^"]+)" and "([^"]+)"$/
-     * @Given /^(this product) has(?:| also)(?:| a) select attribute "([^"]+)" with value in ("[^"]+" locale) "([^"]+)"$/
-     * @Given /^(this product) has(?:| also)(?:| a) select attribute "([^"]+)" with values in ("[^"]+" locale) "([^"]+)" and "([^"]+)"$/
      */
     public function thisProductHasSelectAttributeWithValues(
         ProductInterface $product,
         string $productAttributeName,
-        string $localeCode = 'en_US',
         string ...$productAttributeValues
     ): void {
-        $this->createSelectProductAttributeValue($product, $productAttributeName, $productAttributeValues, $localeCode);
+        $this->createSelectProductAttributeValue($product, $productAttributeName, $productAttributeValues);
+    }
+
+    /**
+     * @Given /^(this product) has(?:| also)(?:| a) select attribute "([^"]+)" with value "([^"]+)" in ("[^"]+" locale)$/
+     */
+    public function thisProductHasSelectAttributeWithValueInLocale(
+        ProductInterface $product,
+        string $productAttributeName,
+        string $productAttributeValue,
+        string $localeCode
+    ): void {
+        $this->createSelectProductAttributeValue($product, $productAttributeName, [$productAttributeValue], $localeCode);
     }
 
     /**

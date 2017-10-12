@@ -84,7 +84,10 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
      */
     public function deleteAttributeValue(string $value): void
     {
-        $attributeChoiceElement = $this->getElement('attribute_choice_list_element', ['%value%' => $value])->getParent();
+        $attributeChoiceElement = $this
+            ->getElement('attribute_choice_list_element', ['%value%' => $value])
+            ->getParent()->getParent()->getParent()->getParent()
+        ;
         $attributeChoiceElement->clickLink('Delete');
     }
 
