@@ -57,7 +57,8 @@ final class ProductTaxonContext implements Context
         $productTaxon = $this->createProductTaxon($taxon, $product, (int) $position - 1);
         $product->addProductTaxon($productTaxon);
 
-        $this->objectManager->flush($product);
+        $this->objectManager->persist($product);
+        $this->objectManager->flush();
     }
 
     /**

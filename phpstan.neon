@@ -15,9 +15,12 @@ parameters:
         # Specs autoloading - needs a project-wide change to Sylius\Foo\Bar\spec\...
         - '/Class spec\\Sylius\\[^ ]++ was not found while trying to analyse it - autoloading is not probably configured properly./'
 
-        # Webmozart assertions (methods defined by docblocks on class are not recognised)
+        # Magic calls
         - '/Call to an undefined static method Webmozart\\Assert\\Assert::all/'
         - '/Call to an undefined static method Webmozart\\Assert\\Assert::nullOr/'
+        - '/Call to an undefined method Faker\\Generator::/'
+        - '/Access to an undefined property Faker\\Generator::/'
+        - '/Method Mockery\\MockInterface::shouldReceive\(\) invoked with 1 parameter, 0 required/'
 
         # These packages aren't in require-dev of the global package
         - '/Class Doctrine\\Bundle\\MongoDBBundle/'

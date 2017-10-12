@@ -210,6 +210,7 @@ final class ManagingChannelsContext implements Context
      */
     public function iDisableIt()
     {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
         $currentPage->disable();
@@ -374,6 +375,7 @@ final class ManagingChannelsContext implements Context
      */
     public function iMakeItAvailableIn($locale)
     {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
         $currentPage->chooseLocale($locale);
@@ -394,6 +396,7 @@ final class ManagingChannelsContext implements Context
      */
     public function iAllowToPayingForThisChannel($currencyCode)
     {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
         $currentPage->chooseCurrency($currencyCode);
@@ -414,6 +417,7 @@ final class ManagingChannelsContext implements Context
      */
     public function iSelectDefaultTaxZone($taxZone)
     {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
         $currentPage->chooseDefaultTaxZone($taxZone);
@@ -432,6 +436,7 @@ final class ManagingChannelsContext implements Context
      */
     public function iSelectTaxCalculationStrategy($taxCalculationStrategy)
     {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
         $currentPage->chooseTaxCalculationStrategy($taxCalculationStrategy);
